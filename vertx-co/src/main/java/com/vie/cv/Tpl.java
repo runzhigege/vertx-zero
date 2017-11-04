@@ -1,4 +1,4 @@
-package io.vertx.zero.cv;
+package com.vie.cv;
 
 public interface Tpl {
     /**

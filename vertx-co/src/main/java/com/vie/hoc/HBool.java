@@ -19,7 +19,7 @@ public class HBool {
             try {
                 ret = supplier.get();
             } catch (final Exception ex) {
-                ex.printStackTrace();
+                
             }
         }
         return ret;

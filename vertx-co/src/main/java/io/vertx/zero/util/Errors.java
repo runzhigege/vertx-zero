@@ -1,11 +1,11 @@
 package io.vertx.zero.util;
 
+import com.vie.cv.Tpl;
 import com.vie.hoc.HBool;
 import com.vie.hoc.HFail;
 import com.vie.hors.ke.ErrorMissingException;
 import com.vie.util.Instance;
 import io.vertx.core.json.JsonObject;
-import io.vertx.zero.cv.Tpl;
 import io.vertx.zero.ke.ZeroNode;
 import io.vertx.zero.ke.config.ZeroError;
 
@@ -44,6 +44,24 @@ public final class Errors {
                     },
                     new ErrorMissingException(code, clazz.getName()));
         }, clazz);
+    }
 
+    public static String method(final Class<?> clazzPos,
+                                final String methodPos) {
+        final StackTraceElement[] methods = Thread.currentThread().getStackTrace();
+        String methodName = null;
+        int position = 0;
+        for (int idx = 0; idx < methods.length; idx++) {
+            final String clazz = methods[idx].getClassName();
+            final String method = methods[idx].getMethodName();
+            if (clazz.equals(clazzPos.getName())
+                    && method.equals(methodPos)) {
+                position = idx + 1;
+            }
+        }
+        if (position < methods.length - 1) {
+            methodName = methods[position].getMethodName();
+        }
+        return methodName;
     }
 }

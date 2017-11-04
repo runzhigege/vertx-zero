@@ -3,10 +3,13 @@ package com.vie.hoc;
 import com.vie.fun.error.JeSupplier;
 import com.vie.hors.ZeroException;
 import com.vie.hors.ZeroRunException;
+import com.vie.log.Annal;
 
 import java.util.Arrays;
 
 public class HFail {
+
+    private static final Annal LOGGER = Annal.get(HFail.class);
 
     public static <T> T exec(final JeSupplier<T> supplier,
                              final Object... input) {
@@ -26,12 +29,12 @@ public class HFail {
                 }
             }
         } catch (final ZeroException ex) {
-            ex.printStackTrace();
+            LOGGER.zero(ex);
         } catch (final ZeroRunException ex) {
             // Throw out customed exception only.
             throw ex;
         } catch (final Exception ex) {
-            ex.printStackTrace();
+            LOGGER.jvm(ex);
         }
         return ret;
     }

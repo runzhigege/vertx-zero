@@ -1,4 +1,6 @@
 zero:
   lime: error, inject
-  vertx:
+  server:
+    http:
+      port: 8083
 

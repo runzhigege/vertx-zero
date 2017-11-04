@@ -1,1 +1,3 @@
-E20001: Lime node configured file = "{0}" is missing, please check the missed file.
+E10001: The method "{0}" of class "{1}" accept {2} arguments only, the length is conflict
+E20001: Lime node configured file = "{0}" is missing, please check the missed file
+
