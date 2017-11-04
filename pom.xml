@@ -7,7 +7,7 @@
     <groupId>io.vertx.up</groupId>
     <artifactId>vertx-zero</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Vertx Up Zero Configuration</name>
+    <name>vertx-zero: Vertx Up Zero Configuration</name>
     <modules>
         <module>vertx-dot</module>
         <module>vertx-pole</module>
@@ -15,6 +15,40 @@
     </modules>
     <packaging>pom</packaging>
     <properties>
+        <v.vertx>3.5.0</v.vertx>
+        <!-- Default Values -->
+        <java.version>1.8</java.version>
+        <encoding>UTF-8</encoding>
 
+        <!-- Plugin -->
+        <!-- (Feb 06, 2016) Apache Maven Compiler Plugin -->
+        <!-- http://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+        <maven.plugin.compiler>3.7.0</maven.plugin.compiler>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+            <version>${v.vertx}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-config</artifactId>
+            <version>${v.vertx}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.plugin.compiler}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${encoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
