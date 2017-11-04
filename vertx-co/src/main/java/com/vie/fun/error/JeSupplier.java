@@ -1,4 +1,7 @@
 package com.vie.fun.error;
 
-public interface JeSupplier {
+@FunctionalInterface
+public interface JeSupplier<T> {
+
+    T get() throws Exception;
 }

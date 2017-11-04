@@ -1,13 +1,13 @@
 package com.vie.log;
 
-import io.vertx.core.VertxException;
+import com.vie.hors.ZeroException;
 
 /**
  * Unite Logging system connect to vert.x, tool kit of Vertx-Zero
  */
 public interface Annal {
 
-    void vertx(VertxException ex);
+    void vertx(ZeroException ex);
 
     void jvm(Throwable ex);
 
