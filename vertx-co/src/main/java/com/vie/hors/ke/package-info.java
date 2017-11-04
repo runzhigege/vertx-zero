@@ -7,7 +7,7 @@ package com.vie.hors.ke;
 
 interface Message {
     /** **/
-    String NIL_MSG = "[Zero] Empty stream exception found when {0}, caused = {1}";
+    String NIL_MSG = "[ZERO] Empty stream exception found when {0}, caused = {1}.";
     /** **/
-    String JVM_MSG = "[Zero] Met jvm checked exception, caused = {0}";
+    String JSON_MSG = "[ZERO] The system met decoding/encoding file {0} exception, caused = {1}.";
 }

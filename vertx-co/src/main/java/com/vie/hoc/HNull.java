@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unchecked")
-public class FnNil {
+public class HNull {
     /**
      * 如果input为null则不执行，否则执行fnExec
      * fnExec: (t) -> { }
@@ -33,7 +33,7 @@ public class FnNil {
     public static void exec(final JcConsumer fnExec, final Object... input) {
         if (0 < input.length) {
             final boolean match =
-                    Arrays.stream(input).allMatch(FnNil::not);
+                    Arrays.stream(input).allMatch(HNull::not);
             if (match) {
                 fnExec.exec();
             }
@@ -52,7 +52,7 @@ public class FnNil {
     public static <T> T get(final Supplier<T> fnGet, final Object... input) {
         T reference = null;
         if (0 < input.length) {
-            final boolean match = Arrays.stream(input).allMatch(FnNil::not);
+            final boolean match = Arrays.stream(input).allMatch(HNull::not);
             if (match) {
                 reference = fnGet.get();
             }

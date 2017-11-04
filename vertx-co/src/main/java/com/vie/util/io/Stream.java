@@ -1,8 +1,9 @@
-package com.vie.util;
+package com.vie.util.io;
 
-import com.vie.hoc.FnBool;
-import com.vie.hoc.FnFail;
+import com.vie.hoc.HBool;
+import com.vie.hoc.HFail;
 import com.vie.hors.ke.EmptyStreamException;
+import com.vie.util.Log;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 
@@ -13,9 +14,9 @@ import java.io.InputStream;
 /**
  * Stream read class.
  */
-public class Stream {
+public final class Stream {
     /**
-     * Direct read by vert.x logger.
+     * Direct read by vert.x logger to avoid dead lock.
      */
     private static final Logger LOGGER
             = LoggerFactory.getLogger(Stream.class);
@@ -41,13 +42,15 @@ public class Stream {
     public static InputStream read(final String filename,
                                    final Class<?> clazz) {
         final File file = new File(filename);
-        final InputStream in = FnBool.exec(file.exists(),
+        Log.debug(LOGGER, Message.INF_CUR, file.exists());
+        final InputStream in = HBool.exec(file.exists(),
                 () -> in(file),
-                () -> FnBool.exec(null == clazz,
+                () -> HBool.exec(null == clazz,
                         () -> in(filename),
                         () -> in(filename, clazz)));
-        Log.info(LOGGER, Message.INF_PATH, filename, in);
-        return FnBool.exec(null != in,
+
+        Log.debug(LOGGER, Message.INF_PATH, filename, in);
+        return HBool.exec(null != in,
                 () -> in,
                 new EmptyStreamException(filename));
     }
@@ -60,8 +63,8 @@ public class Stream {
      * @return
      */
     public static InputStream in(final File file) {
-        return FnFail.exec(
-                () -> FnBool.execTrue(file.exists() && file.isFile(),
+        return HFail.exec(
+                () -> HBool.execTrue(file.exists() && file.isFile(),
                         () -> new FileInputStream(file)), file);
     }
 
@@ -75,7 +78,7 @@ public class Stream {
      */
     public static InputStream in(final String filename,
                                  final Class<?> clazz) {
-        return FnFail.exec(
+        return HFail.exec(
                 () -> clazz.getResourceAsStream(filename), clazz, filename);
     }
 
@@ -88,7 +91,10 @@ public class Stream {
      */
     public static InputStream in(final String filename) {
         final ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        return FnFail.exec(
+        return HFail.exec(
                 () -> loader.getResourceAsStream(filename), filename);
+    }
+
+    private Stream() {
     }
 }

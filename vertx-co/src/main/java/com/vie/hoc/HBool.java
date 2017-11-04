@@ -5,7 +5,7 @@ import com.vie.hors.ZeroRunException;
 
 import java.util.function.Supplier;
 
-public class FnBool {
+public class HBool {
     /**
      * @param condition
      * @param supplier

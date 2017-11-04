@@ -1,7 +1,7 @@
 package com.vie.util;
 
 import com.vie.fun.lang.JcPredicate;
-import com.vie.hoc.FnNil;
+import com.vie.hoc.HNull;
 import io.vertx.core.VertxException;
 import io.vertx.core.logging.Logger;
 
@@ -11,11 +11,11 @@ import java.util.function.Consumer;
 public final class Log {
 
     public static void jvm(final Logger logger, final Throwable ex) {
-        FnNil.exec(logger::warn, ex);
+        HNull.exec(logger::warn, ex);
     }
 
     public static void vertx(final Logger logger, final VertxException ex) {
-        FnNil.exec(logger::warn, ex);
+        HNull.exec(logger::warn, ex);
     }
 
     public static void info(final Logger logger, final String pattern, final Object... rest) {
