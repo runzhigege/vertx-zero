@@ -9,7 +9,23 @@ public class StoreTc extends StoreBase {
     @Test
     public void testJson(final TestContext context) {
         execJObject("test.json", config -> {
-            context.assertNotNull(config);
+            Log.info(getLogger(), config.result().encode());
+            context.assertTrue(config.succeeded());
+        });
+    }
+
+    @Test
+    public void testYaml(final TestContext context) {
+        execYaml("test.yaml", config -> {
+            context.assertTrue(config.succeeded());
+        });
+    }
+
+    @Test
+    public void testProp(final TestContext context) {
+        execProp("test.properties", config -> {
+            Log.info(getLogger(), config.result().encode());
+            context.assertTrue(config.succeeded());
         });
     }
 }

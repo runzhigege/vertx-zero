@@ -1,13 +1,18 @@
 package com.vie.util.io;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
 import com.vie.cv.Values;
 import com.vie.hoc.HBool;
 import com.vie.hoc.HFail;
 import com.vie.hoc.HTry;
 import com.vie.hors.ke.EmptyStreamException;
 import com.vie.hors.ke.JsonFormatException;
+import com.vie.util.Log;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,6 +25,16 @@ import java.util.Properties;
  * The library for IO resource reading.
  */
 public final class IO {
+    /**
+     * Yaml
+     **/
+    private static final ObjectMapper YAML = new YAMLMapper();
+    /**
+     * Direct read by vert.x logger to avoid dead lock
+     */
+    private static final Logger LOGGER
+            = LoggerFactory.getLogger(IO.class);
+
     /**
      * Read to JsonArray
      *
@@ -73,6 +88,18 @@ public final class IO {
     }
 
     /**
+     * Read yaml to JsonObject
+     *
+     * @param filename
+     * @return
+     */
+    public static JsonObject getYaml(final String filename) {
+        return HFail.exec(() -> new JsonObject(
+                YAML.readTree(Stream.read(filename)).toString()
+        ), filename);
+    }
+
+    /**
      * Read to property object
      *
      * @param filename
@@ -98,8 +125,9 @@ public final class IO {
         return HFail.exec(() -> {
             final URL url = Thread.currentThread().getContextClassLoader()
                     .getResource(filename);
-            return HBool.execTrue(null == url,
-                    () -> IO.class.getResource(filename));
+            return HBool.exec(null == url,
+                    () -> IO.class.getResource(filename),
+                    () -> url);
         }, filename);
     }
 
@@ -120,6 +148,22 @@ public final class IO {
                                 () -> new File(url.getFile()),
                                 new EmptyStreamException(filename));
                     });
+        }, filename);
+    }
+
+    /**
+     * Read to Path
+     *
+     * @param filename
+     * @return
+     */
+    public static String getPath(final String filename) {
+        return HFail.exec(() -> {
+            final File file = getFile(filename);
+            return HFail.exec(() -> {
+                Log.info(LOGGER, Message.INF_APATH, file.getAbsolutePath());
+                return file.getAbsolutePath();
+            }, file);
         }, filename);
     }
 

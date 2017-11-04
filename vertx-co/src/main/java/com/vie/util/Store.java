@@ -6,19 +6,11 @@ import com.vie.util.io.IO;
 import io.vertx.config.ConfigStoreOptions;
 import io.vertx.core.json.JsonObject;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-
 /**
  * Connect to vertx config to get options
  * From filename to ConfigStoreOptions
  */
 public final class Store {
-    /**
-     * Memory pool for each file of ConfigStoreOptions
-     */
-    private static final ConcurrentMap<String, ConfigStoreOptions> STORAGE
-            = new ConcurrentHashMap<>();
 
     /**
      * Return json
@@ -30,10 +22,45 @@ public final class Store {
         return HFail.exec(() -> {
             final JsonObject data = IO.getJObject(filename);
             return HFail.exec(() ->
-                            HPool.exec(STORAGE, filename,
-                                    () -> new ConfigStoreOptions().setType("json").setConfig(data))
+                            HPool.exec(Storage.STORE, filename,
+                                    () -> new ConfigStoreOptions()
+                                            .setType(StoreType.JSON.key())
+                                            .setConfig(data))
                     , data);
         }, filename);
+    }
+
+    /**
+     * Return yaml
+     *
+     * @param filename
+     * @return
+     */
+    public static ConfigStoreOptions getYaml(final String filename) {
+        return getFile(filename, StoreFormat.YAML);
+    }
+
+    /**
+     * Return properties
+     *
+     * @param filename
+     * @return
+     */
+    public static ConfigStoreOptions getProp(final String filename) {
+        return getFile(filename, StoreFormat.PROP);
+    }
+
+    private static ConfigStoreOptions getFile(final String filename,
+                                              final StoreFormat format) {
+        return HFail.exec(() -> {
+            final JsonObject config = new JsonObject()
+                    .put(StoreConfig.PATH.key(), IO.getPath(filename));
+            return HPool.exec(Storage.STORE, filename,
+                    () -> new ConfigStoreOptions()
+                            .setType(StoreType.FILE.key())
+                            .setFormat(format.key())
+                            .setConfig(config));
+        }, filename, format);
     }
 
     /**

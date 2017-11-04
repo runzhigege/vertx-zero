@@ -1,6 +1,0 @@
-vertx:
-  zero:
-    errors: /errors.properties
-
-  inject:
-    logger: com.vie.log.internal.Log4jAnnal

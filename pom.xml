@@ -20,9 +20,13 @@
         <!-- Default Values -->
         <java.version>1.8</java.version>
         <encoding>UTF-8</encoding>
+        <!-- Jackson -->
+        <jackson.version>2.9.2</jackson.version>
         <!-- JUint -->
         <!-- http://mvnrepository.com/artifact/junit/junit -->
         <junit.version>4.12</junit.version>
+        <!-- Asm -->
+        <reflect.asm.version>1.09</reflect.asm.version>
         <!-- Plugin -->
         <!-- http://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
         <maven.plugin.compiler>3.7.0</maven.plugin.compiler>
@@ -33,27 +37,64 @@
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-core</artifactId>
-            <version>${vertx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-config</artifactId>
-            <version>${vertx.version}</version>
         </dependency>
         <!-- Unit -->
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-unit</artifactId>
-            <version>${vertx.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-core</artifactId>
+                <version>${vertx.version}</version>
+            </dependency>
+            <!-- vertx config -->
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-config</artifactId>
+                <version>${vertx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-config-yaml</artifactId>
+                <version>${vertx.version}</version>
+            </dependency>
+            <!-- jackson -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <!-- Unit -->
+            <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-unit</artifactId>
+                <version>${vertx.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- Tp -->
+            <dependency>
+                <groupId>com.esotericsoftware.reflectasm</groupId>
+                <artifactId>reflectasm</artifactId>
+                <version>${reflect.asm.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <plugins>
             <plugin>
