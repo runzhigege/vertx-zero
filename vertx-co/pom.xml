@@ -14,12 +14,17 @@
     <dependencies>
         <dependency>
             <groupId>io.vertx</groupId>
+            <artifactId>vertx-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
             <artifactId>vertx-config</artifactId>
         </dependency>
         <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-config-yaml</artifactId>
         </dependency>
+        <!-- Third Part -->
         <dependency>
             <groupId>com.esotericsoftware.reflectasm</groupId>
             <artifactId>reflectasm</artifactId>

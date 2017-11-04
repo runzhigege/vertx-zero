@@ -1,1 +1,1 @@
-logger:
+logger: com.vie.log.internal.Log4JAnnal

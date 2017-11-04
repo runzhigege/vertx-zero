@@ -9,30 +9,14 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.vertx.core.logging.Logger;
-import io.vertx.core.logging.LoggerFactory;
-import io.vertx.ext.unit.junit.RunTestOnContext;
-import io.vertx.ext.unit.junit.VertxUnitRunner;
-import org.junit.Rule;
-import org.junit.runner.RunWith;
 
-@RunWith(VertxUnitRunner.class)
-public abstract class StoreBase {
-
-    @Rule
-    public final RunTestOnContext rule = new RunTestOnContext();
+public abstract class StoreBase extends UnitBase {
 
     protected String getFile(final String filename) {
         final Class<?> clazz = getClass();
-        final Logger LOGGER
-                = LoggerFactory.getLogger(clazz);
         final String file = "test/" + clazz.getPackage().getName() + "/" + filename;
-        Log.info(LOGGER, "[TEST] Test input file: {0}", file);
+        Log.info(getLogger(), "[TEST] Test input file: {0}", file);
         return file;
-    }
-
-    protected Logger getLogger() {
-        return LoggerFactory.getLogger(getClass());
     }
 
     protected void execJObject(final String filename,
