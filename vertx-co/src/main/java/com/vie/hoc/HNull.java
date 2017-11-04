@@ -1,6 +1,7 @@
 package com.vie.hoc;
 
 import com.vie.fun.lang.JcConsumer;
+import com.vie.hors.ZeroException;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
@@ -9,7 +10,7 @@ import java.util.function.Supplier;
 @SuppressWarnings("unchecked")
 public class HNull {
     /**
-     * 如果input为null则不执行，否则执行fnExec
+     * If input is not null, execute fnExec.
      * fnExec: (t) -> { }
      *
      * @param input
@@ -24,7 +25,7 @@ public class HNull {
     }
 
     /**
-     * 如果input中每个元素都不为null则执行fnExec
+     * If every element is not null, execute fnExec.
      * fnExec: () -> {}
      *
      * @param fnExec
@@ -41,7 +42,7 @@ public class HNull {
     }
 
     /**
-     * 如果input中每个元素都不为null则执行fnGet
+     * If every element is not null, execute fnGet.
      * fnGet: () -> T
      *
      * @param fnGet
@@ -56,6 +57,22 @@ public class HNull {
             if (match) {
                 reference = fnGet.get();
             }
+        }
+        return reference;
+    }
+
+    /**
+     * If reference is null, throw ZeroException.
+     *
+     * @param <T>
+     * @return
+     * @throws ZeroException
+     */
+    public static <T> T get(final T reference,
+                            final ZeroException error)
+            throws ZeroException {
+        if (null == reference) {
+            throw error;
         }
         return reference;
     }

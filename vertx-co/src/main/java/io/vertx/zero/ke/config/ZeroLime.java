@@ -32,17 +32,15 @@ public class ZeroLime implements ZeroNode<ConcurrentMap<String, String>> {
         final Set<String> sets = StringUtil.split(literal, Strings.COMMA);
         for (final String set : sets) {
             HPool.exec(Storage.DATA_LIME, set,
-                    () -> calcFile(set));
+                    () -> calculatePath(set));
         }
         return Storage.DATA_LIME;
     }
 
-    private String calcFile(final String key) {
-        final StringBuilder result = new StringBuilder();
-        result.append(Path.KE_FOLDER).append(Strings.SLASH);
-        result.append(Limes.PREFIX).append(Strings.DASH);
-        result.append(key);
-        result.append(Strings.DOT).append(FileTypes.YML);
-        return result.toString();
+    public static String calculatePath(final String key) {
+        return Path.KE_FOLDER + Strings.SLASH +
+                Limes.PREFIX + Strings.DASH +
+                key +
+                Strings.DOT + FileTypes.YML;
     }
 }

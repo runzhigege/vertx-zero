@@ -2,6 +2,7 @@ package io.vertx.zero.ke.config;
 
 import com.vie.cv.FileTypes;
 import com.vie.cv.Strings;
+import io.vertx.core.json.JsonObject;
 import io.vertx.zero.ke.ZeroNode;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,7 +12,7 @@ interface Storage {
     /**
      * Nodes
      */
-    ConcurrentMap<String, ZeroNode> NODES = new ConcurrentHashMap<>();
+    ConcurrentMap<String, ZeroNode<JsonObject>> NODES = new ConcurrentHashMap<>();
     /**
      * Lime Data
      */
