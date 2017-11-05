@@ -25,7 +25,7 @@ public interface Opts<T> {
      * @return
      * @throws DemonException
      */
-    T ingest(String file) throws ZeroException;
+    T ingest(String node) throws ZeroException;
 
     /**
      * Read reference of Opts

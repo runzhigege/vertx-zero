@@ -54,8 +54,8 @@ public final class IO {
      */
     public static JsonObject getJObject(final String filename) {
         final String content = getString(filename);
-        System.out.println(content);
-        return HTry.exec(() -> new JsonObject(getString(filename)),
+        // TODO: For debug
+        return HTry.exec(() -> new JsonObject(content),
                 (ex) -> new JsonFormatException(filename, ex));
     }
 

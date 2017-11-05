@@ -12,4 +12,10 @@ public interface Values {
     String ENCODING = "UTF-8";
     /** **/
     Charset CHARSET = Charset.forName(ENCODING);
+    /** **/
+    int ZERO = 0;
+    /** **/
+    int IDX = 0;
+    /** **/
+    int ONE = 1;
 }

@@ -1,6 +1,6 @@
 package com.vie.hors;
 
-import io.vertx.zero.util.Errors;
+import com.vie.util.Errors;
 
 /**
  * Top Exception for error code mapping.

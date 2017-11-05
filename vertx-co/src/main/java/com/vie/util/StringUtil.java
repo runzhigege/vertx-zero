@@ -21,4 +21,8 @@ public class StringUtil {
             return result;
         }, input, separator);
     }
+
+    public static boolean isNil(final String input) {
+        return null == input || 0 == input.trim().length() || 0 == input.trim().length();
+    }
 }
