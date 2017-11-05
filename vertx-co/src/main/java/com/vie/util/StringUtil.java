@@ -1,5 +1,6 @@
 package com.vie.util;
 
+import com.vie.cv.Strings;
 import com.vie.hoc.HFail;
 import com.vie.hoc.HNull;
 
@@ -20,6 +21,27 @@ public class StringUtil {
             }
             return result;
         }, input, separator);
+    }
+
+    public static String join(final Set<String> input) {
+        return join(input, null);
+    }
+
+    public static String join(final Set<String> input, final String separator) {
+        final String connector = (null == separator) ? Strings.COMMA : separator;
+        return HFail.exec(() -> {
+            final StringBuilder builder = new StringBuilder();
+            final int size = input.size();
+            int start = 0;
+            for (final String item : input) {
+                builder.append(item);
+                start++;
+                if (start < size) {
+                    builder.append(connector);
+                }
+            }
+            return builder.toString();
+        }, input);
     }
 
     public static boolean isNil(final String input) {

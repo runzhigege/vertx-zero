@@ -9,7 +9,7 @@ import io.vertx.zero.ke.Visitor;
 import io.vertx.zero.ke.ZeroNode;
 import io.vertx.zero.ke.config.ZeroVertx;
 
-public class JsonOpts implements Visitor<JsonObject> {
+public class JObjectOpts implements Visitor<JsonObject> {
 
     private static final ZeroNode<JsonObject> NODE
             = Instance.singleton(ZeroVertx.class);

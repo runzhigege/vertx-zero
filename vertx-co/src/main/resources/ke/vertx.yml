@@ -1,9 +1,4 @@
 zero:
-  lime: error, inject
-  server:
-    http:
-      port: 8083
-      host: 0.0.0.0
-      config:
+  lime: error, inject, server
 
 

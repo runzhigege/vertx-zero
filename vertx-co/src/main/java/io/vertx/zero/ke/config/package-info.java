@@ -20,6 +20,7 @@ interface Storage {
         {
             put("error", Path.ERROR);
             put("inject", Path.INJECT);
+            put("server", Path.SERVER);
         }
     };
 }
@@ -40,6 +41,9 @@ interface Path {
 
     String INJECT = KE_FOLDER + Strings.SLASH + Limes.INJECT
             + Strings.DOT + FileTypes.YML;
+
+    String SERVER = KE_FOLDER + Strings.SLASH + Limes.SERVER
+            + Strings.DOT + FileTypes.YML;
 }
 
 interface Keys {
@@ -51,7 +55,6 @@ interface Keys {
      * External Zero configuration
      */
     String LIME = "lime";
-
 }
 
 interface Limes {
@@ -61,4 +64,6 @@ interface Limes {
     String ERROR = PREFIX + Strings.DASH + "error";
 
     String INJECT = PREFIX + Strings.DASH + "inject";
+
+    String SERVER = PREFIX + Strings.DASH + "server";
 }

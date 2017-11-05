@@ -5,7 +5,7 @@ import com.vie.hoc.HBool;
 import com.vie.hoc.HFail;
 import com.vie.hors.ke.ErrorMissingException;
 import io.vertx.core.json.JsonObject;
-import io.vertx.zero.ke.ZeroNode;
+import io.vertx.zero.ke.config.JObjectBase;
 import io.vertx.zero.ke.config.ZeroError;
 
 import java.text.MessageFormat;
@@ -18,7 +18,7 @@ public final class Errors {
     private static final JsonObject MAP;
 
     static {
-        final ZeroNode<JsonObject> NODE
+        final JObjectBase NODE
                 = Instance.singleton(ZeroError.class);
         MAP = NODE.read();
     }

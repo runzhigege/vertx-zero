@@ -2,26 +2,32 @@ package com.vie.util;
 
 import com.vie.cv.Values;
 import com.vie.hoc.HBool;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 
+/**
+ * Lookup the json tree data
+ */
 @SuppressWarnings("unchecked")
 public final class Jackson {
-    /**
-     * Lookup the json tree data
-     *
-     * @param item
-     * @param keys
-     * @return
-     */
+
     public static JsonObject visitJObject(
             final JsonObject item,
             final String... keys
     ) {
         Ensurer.gtLength(Jackson.class, 0, keys);
         return searchData(item, JsonObject.class, keys);
+    }
+
+    public static JsonArray visitJArray(
+            final JsonObject item,
+            final String... keys
+    ) {
+        Ensurer.gtLength(Jackson.class, 0, keys);
+        return searchData(item, JsonArray.class, keys);
     }
 
     public static Integer visitInt(
