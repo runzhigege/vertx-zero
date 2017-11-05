@@ -1,5 +1,22 @@
 package io.vertx.zero.em;
 
 public enum ServerType {
-    HTTP
+    HTTP("http");
+
+    private transient final String literal;
+
+    ServerType(final String literal) {
+        this.literal = literal;
+    }
+
+    public String key() {
+        return this.literal;
+    }
+
+    public boolean match(final String literal) {
+        if (null == literal) {
+            return false;
+        }
+        return this.literal.equals(literal);
+    }
 }

@@ -1,11 +1,16 @@
 package com.vie.hoc;
 
+import com.vie.fun.error.JdSupplier;
 import com.vie.fun.error.JeSupplier;
+import com.vie.hors.ZeroException;
 import com.vie.hors.ZeroRunException;
+import com.vie.log.Annal;
 
 import java.util.function.Supplier;
 
 public class HBool {
+    private static final Annal LOGGER = Annal.get(HBool.class);
+
     /**
      * @param condition
      * @param supplier
@@ -52,6 +57,22 @@ public class HBool {
     public static <T> T exec(final boolean condition,
                              final Supplier<T> tSupplier,
                              final Supplier<T> fSupplier) {
+        return HTry.execZero(() -> execZero(condition,
+                tSupplier::get, fSupplier::get), LOGGER);
+    }
+
+    /**
+     * @param condition
+     * @param tSupplier
+     * @param fSupplier
+     * @param <T>
+     * @return
+     * @throws ZeroException
+     */
+    public static <T> T execZero(final boolean condition,
+                                 final JdSupplier<T> tSupplier,
+                                 final JdSupplier<T> fSupplier)
+            throws ZeroException {
         T ret = null;
         if (condition) {
             if (null != tSupplier) {

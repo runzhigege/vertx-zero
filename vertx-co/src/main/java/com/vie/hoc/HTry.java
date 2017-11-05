@@ -1,6 +1,7 @@
 package com.vie.hoc;
 
 import com.vie.fun.error.JdConsumer;
+import com.vie.fun.error.JdSupplier;
 import com.vie.hors.ZeroException;
 import com.vie.hors.ZeroRunException;
 import com.vie.log.Annal;
@@ -43,5 +44,27 @@ public class HTry {
         } catch (final Throwable ex) {
             logger.jvm(ex);
         }
+    }
+
+    /**
+     * Zero for exception transform
+     *
+     * @param supplier
+     * @param logger
+     * @param <T>
+     * @return
+     */
+    public static <T> T execZero(final JdSupplier<T> supplier, final Annal logger) {
+        T ret = null;
+        try {
+            ret = supplier.get();
+        } catch (final ZeroException ex) {
+            logger.zero(ex);
+        } catch (final VertxException ex) {
+            logger.vertx(ex);
+        } catch (final Throwable ex) {
+            logger.jvm(ex);
+        }
+        return ret;
     }
 }

@@ -7,6 +7,8 @@ import io.vertx.core.http.HttpServerOptions;
 import org.junit.Test;
 import top.UnitBase;
 
+import java.util.concurrent.ConcurrentMap;
+
 public class HttpServerVisitorTc extends UnitBase {
 
     @Test(expected = ArgumentException.class)
@@ -20,6 +22,7 @@ public class HttpServerVisitorTc extends UnitBase {
     public void testVisitOk() throws ZeroException {
         final ServerVisitor<HttpServerOptions> visitor
                 = Instance.singleton(HttpServerVisitor.class);
-        visitor.visit();
+        final ConcurrentMap<Integer, HttpServerOptions> options = visitor.visit();
+        System.out.println(options);
     }
 }

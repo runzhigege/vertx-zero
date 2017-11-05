@@ -4,3 +4,8 @@ server:
   port: 8083
   host: 0.0.0.0
   config:
+- name: tlk-rpc
+  type: rpc
+  port: 8084
+  host: 0.0.0.0
+  config:
