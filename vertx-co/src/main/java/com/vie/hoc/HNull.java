@@ -1,5 +1,6 @@
 package com.vie.hoc;
 
+import com.vie.fun.error.JdConsumer;
 import com.vie.fun.lang.JcConsumer;
 import com.vie.hors.ZeroException;
 
@@ -9,6 +10,25 @@ import java.util.function.Supplier;
 
 @SuppressWarnings("unchecked")
 public class HNull {
+    /**
+     * If every element is not null, execute fnExec.
+     *
+     * @param fnExec
+     * @param input
+     */
+    public static void execZero(final JdConsumer fnExec, final Object... input)
+            throws ZeroException {
+        if (0 == input.length) {
+            fnExec.exec();
+        } else {
+            final boolean match =
+                    Arrays.stream(input).allMatch(HNull::not);
+            if (match) {
+                fnExec.exec();
+            }
+        }
+    }
+
     /**
      * If input is not null, execute fnExec.
      * fnExec: (t) -> { }
@@ -38,6 +58,9 @@ public class HNull {
             if (match) {
                 fnExec.exec();
             }
+        } else {
+            // Not need to check
+            fnExec.exec();
         }
     }
 

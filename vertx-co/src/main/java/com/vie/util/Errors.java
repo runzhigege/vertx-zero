@@ -18,9 +18,9 @@ public final class Errors {
     private static final JsonObject MAP;
 
     static {
-        final JObjectBase NODE
+        final JObjectBase node
                 = Instance.singleton(ZeroError.class);
-        MAP = NODE.read();
+        MAP = node.read();
     }
 
     public static String normalize(final Class<?> clazz,
@@ -28,6 +28,8 @@ public final class Errors {
                                    final Object... args) {
         return HFail.exec(() -> {
             final String key = ("E" + Math.abs(code)).intern();
+            System.out.println(key);
+            System.out.println(MAP);
             return HBool.exec(MAP.containsKey(key),
                     () -> {
                         // 1. Read pattern

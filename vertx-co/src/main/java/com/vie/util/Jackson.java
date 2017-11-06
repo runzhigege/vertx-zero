@@ -2,6 +2,7 @@ package com.vie.util;
 
 import com.vie.cv.Values;
 import com.vie.hoc.HBool;
+import com.vie.hoc.HNull;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
@@ -85,6 +86,24 @@ public final class Jackson {
                             () -> null);
                 });
 
+    }
+
+    public static JsonArray toJArray(final Object value) {
+        final JsonArray result = new JsonArray();
+        HNull.exec(() -> {
+            if (isJArray(value)) {
+                result.addAll((JsonArray) value);
+            } else {
+                result.add(value.toString());
+            }
+        }, value);
+        return result;
+    }
+
+    public static boolean isJArray(final Object value) {
+        return HBool.exec(null == value,
+                () -> false,
+                () -> value instanceof JsonArray);
     }
 
     public static boolean isJObject(final Object value) {
