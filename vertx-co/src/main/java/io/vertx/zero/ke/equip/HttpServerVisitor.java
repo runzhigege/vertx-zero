@@ -62,7 +62,7 @@ public class HttpServerVisitor implements ServerVisitor<HttpServerOptions> {
                 // 1. Extract port
                 final int port = item.getInteger("port");
                 // 2. Convert JsonObject to HttpServerOptions
-                final HttpServerOptions options = this.TRANS.transfer(item);
+                final HttpServerOptions options = this.TRANS.transform(item);
                 HNull.exec(() -> {
                     // 3. Add to map;
                     map.put(port, options);

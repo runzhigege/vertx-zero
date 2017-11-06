@@ -4,5 +4,5 @@ import io.vertx.core.json.JsonObject;
 
 public interface Transformer<T> {
 
-    T transfer(JsonObject input);
+    T transform(JsonObject input);
 }

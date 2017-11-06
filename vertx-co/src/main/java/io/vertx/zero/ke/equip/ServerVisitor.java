@@ -8,5 +8,6 @@ import java.util.concurrent.ConcurrentMap;
  * @param <T>
  * @author Lang
  */
-public interface ServerVisitor<T> extends Visitor<ConcurrentMap<Integer, T>> {
+public interface ServerVisitor<T>
+        extends Visitor<ConcurrentMap<Integer, T>> {
 }

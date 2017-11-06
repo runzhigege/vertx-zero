@@ -40,8 +40,11 @@ public class ZeroVertx implements ZeroNode<JsonObject> {
         if (null != data) {
             final String limeStr = data.getString(Keys.LIME);
             final Set<String> sets = StringUtil.split(limeStr, Strings.COMMA);
+            // Error table list
             appendKey(sets, "error");
+            // Server List
             appendKey(sets, "server");
+            // Injection points
             appendKey(sets, "inject");
             data.put(Keys.LIME, StringUtil.join(sets));
         }

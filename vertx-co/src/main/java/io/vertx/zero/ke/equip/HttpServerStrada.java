@@ -7,7 +7,7 @@ import io.vertx.zero.ke.Transformer;
 public class HttpServerStrada implements Transformer<HttpServerOptions> {
 
     @Override
-    public HttpServerOptions transfer(final JsonObject input) {
+    public HttpServerOptions transform(final JsonObject input) {
         final HttpServerOptions options = new HttpServerOptions();
         // 1. Set basic data for options
         options.setHost(input.getString("host"));
