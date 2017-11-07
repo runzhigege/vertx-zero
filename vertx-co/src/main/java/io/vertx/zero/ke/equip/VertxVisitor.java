@@ -34,7 +34,7 @@ public class VertxVisitor implements UprightVisitor {
             throws ZeroException {
         final ConcurrentMap<String, VertxOptions> map =
                 new ConcurrentHashMap<>();
-
+        
         return map;
     }
 }
