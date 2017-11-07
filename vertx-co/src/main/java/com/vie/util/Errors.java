@@ -28,8 +28,6 @@ public final class Errors {
                                    final Object... args) {
         return HFail.exec(() -> {
             final String key = ("E" + Math.abs(code)).intern();
-            System.out.println(key);
-            System.out.println(MAP);
             return HBool.exec(MAP.containsKey(key),
                     () -> {
                         // 1. Read pattern

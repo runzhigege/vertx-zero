@@ -12,8 +12,8 @@ import java.util.function.BiConsumer;
 @SuppressWarnings("unchecked")
 public class HJson {
 
-    public static void execIt(final JsonObject data,
-                              final BiConsumer<Object, String> fnIt) {
+    public static <T> void execIt(final JsonObject data,
+                                  final BiConsumer<T, String> fnIt) {
         HNull.exec(() -> {
             for (final String name : data.fieldNames()) {
                 final Object item = data.getValue(name);
@@ -21,7 +21,7 @@ public class HJson {
                     /**
                      * Swap the value and key.
                      */
-                    fnIt.accept(item, name);
+                    fnIt.accept((T) item, name);
                 }
             }
         }, data, fnIt);
@@ -42,6 +42,19 @@ public class HJson {
                 }
             }
         }, dataArray, fnIt);
+    }
+
+    public static <T> void execZero(final JsonObject data,
+                                    final JdBiConsumer<T, String> fnIt)
+            throws ZeroException {
+        HNull.execZero(() -> {
+            for (final String name : data.fieldNames()) {
+                final Object item = data.getValue(name);
+                if (null != item) {
+                    fnIt.accept((T) item, name);
+                }
+            }
+        }, data, fnIt);
     }
 
     public static <T> void execZero(final JsonArray dataArray,

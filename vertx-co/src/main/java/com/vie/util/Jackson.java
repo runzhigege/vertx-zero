@@ -7,7 +7,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 
 /**
  * Lookup the json tree data
@@ -69,7 +68,7 @@ public final class Jackson {
                                     }
                                 } else {
                                     /** 3.2. In the middle search **/
-                                    if (isJObject(curVal)) {
+                                    if (Types.isJObject(curVal)) {
                                         final JsonObject continueNode = current.getJsonObject(path);
                                         /** 4.Extract new key **/
                                         final String[] continueKeys =
@@ -91,26 +90,13 @@ public final class Jackson {
     public static JsonArray toJArray(final Object value) {
         final JsonArray result = new JsonArray();
         HNull.exec(() -> {
-            if (isJArray(value)) {
+            if (Types.isJArray(value)) {
                 result.addAll((JsonArray) value);
             } else {
                 result.add(value.toString());
             }
         }, value);
         return result;
-    }
-
-    public static boolean isJArray(final Object value) {
-        return HBool.exec(null == value,
-                () -> false,
-                () -> value instanceof JsonArray);
-    }
-
-    public static boolean isJObject(final Object value) {
-        return HBool.exec(null == value,
-                () -> false,
-                () -> value instanceof JsonObject ||
-                        value instanceof LinkedHashMap);
     }
 
     private Jackson() {

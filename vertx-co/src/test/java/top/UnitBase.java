@@ -3,6 +3,7 @@ package top;
 import com.vie.hors.ZeroException;
 import com.vie.util.Instance;
 import com.vie.util.Log;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
@@ -26,9 +27,19 @@ public abstract class UnitBase {
             throws ZeroException {
         final Insurer insurer
                 = Instance.singleton(insurerCls);
-        Log.info(getLogger(), "[TEST] Input data: {0}", data);
+        Log.info(getLogger(), "[TEST] Input data ( Object ): {0}", data);
         Log.info(getLogger(), "[TEST] Rule data: {0}", rule);
         insurer.flumen(data, rule);
+    }
+
+    public void ensure(final Class<?> insurerCls,
+                       final JsonArray array, final JsonObject rule)
+            throws ZeroException {
+        final Insurer insurer
+                = Instance.singleton(insurerCls);
+        Log.info(getLogger(), "[TEST] Input data ( Array ): {0}", array);
+        Log.info(getLogger(), "[TEST] Rule data: {0}", rule);
+        insurer.flumen(array, rule);
     }
 
     protected String getFile(final String filename) {
