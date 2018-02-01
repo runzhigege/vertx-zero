@@ -28,7 +28,6 @@ public class QiyClientTc extends WebTestBase {
         });
     }
 
-    @Test
     public void testRequestUpload() {
         final QiyClient client = QiyClient.createShared(this.vertx);
         client.authorize(handler -> {
