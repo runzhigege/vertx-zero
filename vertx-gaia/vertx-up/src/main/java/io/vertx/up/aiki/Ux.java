@@ -175,7 +175,7 @@ public final class Ux {
 
 
     // ---------------------- Function Generator --------------------------------------
-    public static Function<JsonArray, Future<JsonObject>> fnRpc(final JsonArray array) {
+    public static Future<JsonObject> fnRpc(final JsonArray array) {
         return UxRpc.fnRpc(array);
     }
 
