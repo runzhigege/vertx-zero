@@ -129,7 +129,7 @@ public class JavaDirectWorker {
 
 ### 3.2. Pojo Request
 
-**URL **: [http://localhost:6083/api/request/java-pojo?age=22](http://localhost:6083/api/request/java-pojo?age=22)
+**URL**: [http://localhost:6083/api/request/java-pojo?age=22](http://localhost:6083/api/request/java-pojo?age=22)
 
 **Method** : POST
 
