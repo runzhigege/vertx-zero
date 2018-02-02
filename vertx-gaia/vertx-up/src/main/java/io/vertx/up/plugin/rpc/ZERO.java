@@ -8,7 +8,7 @@ interface Info {
 
     String CLIENT_BUILD = "[ ZERO ] Build channel for host = {0}, port = {1}";
 
-    String CLIENT_RPC = "[ ZERO ] ( Rpc Client ) Build channel ( host = {0}, port = {1} )";
+    String CLIENT_RPC = "[ ZERO ] ( Rpc Client ) Build channel ( host = {0}, port = {1}, hashCode = {2} )";
 
     String CLIENT_RESPONSE = "[ ZERO ] ( Rpc Client ) Response Json data is {0}";
 
