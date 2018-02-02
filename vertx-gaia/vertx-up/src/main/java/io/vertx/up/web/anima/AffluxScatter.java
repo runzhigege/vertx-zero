@@ -37,13 +37,21 @@ public class AffluxScatter implements Scatter<Vertx> {
         // Extract all events.
         final Set<Event> events = ZeroAnno.getEvents();
         Fn.itSet(events, (item, index) ->
-                Runner.run(() -> inject(item.getProxy())
+                Runner.run(() -> this.inject(item.getProxy())
                         , "event-afflux-" + index));
         // Extract all receipts.
         final Set<Receipt> receipts = ZeroAnno.getReceipts();
         Fn.itSet(receipts, (item, index) ->
-                Runner.run(() -> inject(item.getProxy())
+                Runner.run(() -> this.inject(item.getProxy())
                         , "receipt-afflux-" + index));
+        // Extract non - event/receipts Objects
+        final Set<Class<?>> injects = ZeroAnno.getInjects();
+        Fn.itSet(injects, (item, index) -> Runner.run(() -> {
+            // Initialize object
+            final Object instance = Instance.singleton(item);
+            // Initialize reference
+            this.inject(instance);
+        }, "injects-afflux-" + index));
     }
 
     private void inject(final Object proxy) {
@@ -61,7 +69,7 @@ public class AffluxScatter implements Scatter<Vertx> {
                         final Object instance;
                         if (Anno.isMark(field, Plugins.INFIX_MAP.keySet())) {
                             // Speicific Annotation
-                            instance = inject(field);
+                            instance = this.inject(field);
                         } else {
                             // Inject Only
                             instance = Instance.singleton(type);
@@ -70,7 +78,7 @@ public class AffluxScatter implements Scatter<Vertx> {
                         if (null != instance) {
                             Instance.set(proxy, key, instance);
                             // Scan continue for field
-                            inject(instance);
+                            this.inject(instance);
                         }
                     } catch (final NoSuchFieldException ex) {
                         LOGGER.jvm(ex);
@@ -97,7 +105,7 @@ public class AffluxScatter implements Scatter<Vertx> {
     }
 
     private Object inject(final Field field) {
-        final Class<? extends Annotation> key = search(field);
+        final Class<? extends Annotation> key = this.search(field);
         final String pluginKey = Plugins.INFIX_MAP.get(key);
         final Class<?> infixCls = ZeroAmbient.getPlugin(pluginKey);
         Object ret = null;
@@ -109,10 +117,10 @@ public class AffluxScatter implements Scatter<Vertx> {
 
                 Fn.flingUp(!options.containsKey(pluginKey), LOGGER,
                         InjectionLimeKeyException.class,
-                        getClass(), infixCls, pluginKey);
+                        this.getClass(), infixCls, pluginKey);
 
                 final Infix reference = Instance.singleton(infixCls);
-                
+
                 ret = Instance.invoke(reference, "get");
             } else {
                 LOGGER.warn(Info.INFIX_IMPL, infixCls.getName(), Infix.class.getName());

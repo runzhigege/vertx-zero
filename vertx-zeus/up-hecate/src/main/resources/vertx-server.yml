@@ -1,0 +1,11 @@
+server:
+- name: up-hecate
+  type: http
+  config:
+    port: 6010
+    host: 0.0.0.0
+- name: ipc-hecate
+  type: ipc
+  config:
+    port: 6011
+    host: 0.0.0.0
