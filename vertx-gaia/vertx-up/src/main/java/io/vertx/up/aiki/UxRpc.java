@@ -26,9 +26,9 @@ class UxRpc {
         return result;
     }
 
-    public static Function<JsonArray, Future<JsonObject>> fnRpc(
+    public static Future<JsonObject> fnRpc(
             final JsonArray data) {
-        return item -> Future.succeededFuture(
+        return Future.succeededFuture(
                 new JsonObject()
                         .put("data", data)
                         .put("count", data.size())
