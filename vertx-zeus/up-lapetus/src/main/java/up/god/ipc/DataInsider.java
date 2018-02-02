@@ -15,6 +15,6 @@ public class DataInsider {
     @Ipc("IPC://EVENT/DATA")
     public Future<Envelop> read(final Envelop envelop) {
         final JsonObject params = envelop.data();
-        return Future.succeededFuture(Envelop.success(params.put("result", "Hecate")));
+        return Future.succeededFuture(Envelop.success(params.put("result", "Lapetus")));
     }
 }
