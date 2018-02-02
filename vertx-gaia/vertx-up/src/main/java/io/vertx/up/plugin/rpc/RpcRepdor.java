@@ -37,6 +37,8 @@ public class RpcRepdor {
                 final Envelop envelop =
                         Envelop.failure(new _500UnexpectedRpcException(this.clazz, ex));
                 handler.complete(new JsonObject(envelop.response()));
+                // TODO: Debug Now, Remove In Future
+                ex.printStackTrace();
             }
         }
     }
@@ -53,6 +55,8 @@ public class RpcRepdor {
                 final Envelop envelop =
                         Envelop.failure(new _500UnexpectedRpcException(this.clazz, ex));
                 handler.complete(envelop);
+                // TODO: Debug Now, Remove In Future
+                ex.printStackTrace();
             }
         }
     }
