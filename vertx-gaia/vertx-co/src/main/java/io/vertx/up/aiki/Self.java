@@ -232,4 +232,28 @@ class Self {
                 .subscribe(item -> convert(item, mapping, false));
         return result;
     }
+
+    static JsonArray distinct(
+            final JsonArray array,
+            final boolean immutable
+    ) {
+        final JsonArray result = immutable ? array.copy() : array;
+        final JsonArray dis = new JsonArray();
+        Observable.fromIterable(result)
+                .distinct()
+                .subscribe(dis::add);
+        return result.clear().addAll(dis);
+    }
+
+    static JsonArray sort(
+            final JsonArray array,
+            final boolean immutable
+    ) {
+        final JsonArray result = immutable ? array.copy() : array;
+        final JsonArray dis = new JsonArray();
+        Observable.fromIterable(result)
+                .sorted()
+                .subscribe(dis::add);
+        return result.clear().addAll(dis);
+    }
 }

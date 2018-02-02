@@ -19,17 +19,12 @@ import io.vertx.up.tool.mirror.Types;
 
 import java.text.MessageFormat;
 import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 public class RpcClientImpl implements RpcClient {
 
     private static final Annal LOGGER = Annal.get(RpcClientImpl.class);
 
     private static final String DS_LOCAL_MAP_NAME = "__vertx.IpcClient.{0}";
-
-    private static final ConcurrentMap<String, JsonObject> CONFIGS
-            = new ConcurrentHashMap<>();
 
     private final Vertx vertx;
     private final JsonObject config;
@@ -57,10 +52,10 @@ public class RpcClientImpl implements RpcClient {
         final String address = config.getString(Key.ADDR);
 
         final JsonObject normalized = RpcHelper.normalize(name, config, record);
-        this.holder = lookupHolder(this.vertx, name, normalized);
+        this.holder = this.lookupHolder(this.vertx, name, normalized);
         // Get Channel
         final IpcType type = Types.fromStr(IpcType.class, config.getString(Key.TYPE));
-        final RpcStub stub = getStub(type);
+        final RpcStub stub = this.getStub(type);
         // Future result return to client.
         final IpcData request = new IpcData();
         request.setType(type);
@@ -87,7 +82,7 @@ public class RpcClientImpl implements RpcClient {
         switch (type) {
             case UNITY:
             default: {
-                stub = Instance.singleton(UnityStub.class, this.holder.getChannel());
+                stub = Instance.instance(UnityStub.class, this.holder.getChannel());
             }
             break;
         }
@@ -103,7 +98,7 @@ public class RpcClientImpl implements RpcClient {
             final LocalMap<String, RpcHolder> map = this.vertx.sharedData().getLocalMap(name);
             RpcHolder holder = map.get(ipcName);
             if (null == holder) {
-                holder = new RpcHolder(vertx, config, () -> removeFromMap(map, name));
+                holder = new RpcHolder(vertx, config, () -> this.removeFromMap(map, name));
                 map.put(name, holder);
             } else {
                 holder.incRefCount();
