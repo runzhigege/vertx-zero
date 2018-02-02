@@ -173,6 +173,12 @@ public final class Ux {
         return In.requestSession(message, field);
     }
 
+
+    // ---------------------- Function Generator --------------------------------------
+    public static Function<JsonArray, Future<JsonObject>> fnRpc(final JsonArray array) {
+        return UxRpc.fnRpc(array);
+    }
+
     // ---------------------- Web Flow --------------------------------------
     public static <T> Handler<AsyncResult<T>> toHandler(final Message<Envelop> message) {
         return Web.toHandler(message);
