@@ -1,0 +1,11 @@
+server:
+- name: up-hyperion
+  type: http
+  config:
+    port: 6020
+    host: 0.0.0.0
+- name: ipc-hyperion
+  type: ipc
+  config:
+    port: 6021
+    host: 0.0.0.0

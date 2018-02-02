@@ -41,6 +41,8 @@ public class ZeroAnno {
             WALLS = new TreeSet<>();
     private final static ConcurrentMap<String, Method>
             IPCS = new ConcurrentHashMap<>();
+    private final static Set<Class<?>>
+            POINTER = new HashSet<>();
 
     /**
      * Get all plugins
@@ -60,6 +62,16 @@ public class ZeroAnno {
     public static ConcurrentMap<ServerType, List<Class<?>>>
     getAgents() {
         return AGENTS;
+    }
+
+    /**
+     * Injects
+     *
+     * @return
+     */
+    public static Set<Class<?>>
+    getInjects() {
+        return POINTER;
     }
 
     /**
@@ -165,6 +177,11 @@ public class ZeroAnno {
         final Inquirer<ConcurrentMap<ServerType, List<Class<?>>>> agent =
                 Instance.singleton(AgentInquirer.class);
         AGENTS.putAll(agent.scan(clazzes));
+
+        /** JSR330 Fix **/
+        final Inquirer<Set<Class<?>>> pointer =
+                Instance.singleton(PointerInquirer.class);
+        POINTER.addAll(pointer.scan(clazzes));
 
         /** Worker **/
         final Inquirer<Set<Class<?>>> worker =

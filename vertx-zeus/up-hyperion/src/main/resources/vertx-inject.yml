@@ -1,0 +1,2 @@
+# mysql: io.vertx.up.plugin.jdbc.MySqlInfix
+rpc: io.vertx.up.plugin.rpc.RpcInfix
