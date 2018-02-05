@@ -103,6 +103,7 @@ For all tutorial testing cases, you can import following resource with Postman T
    28. [D10028 - Zero JSR330, @Inject Multi Implementation](doc/vertx-zero-tutorial/d10028-zero-jsr330-inject-multi-implementation.md)
    29. [D10029 - JSR303, @NotNull](doc/vertx-zero-tutorial/d10029-jsr303-notnull.md)
    30. [D10030 - JSR303, @NotNull message](doc/vertx-zero-tutorial/d10030-jsr303-notnull-message.md)
+   31. [D10031 - JSR303, @NotNull message template](/doc/vertx-zero-tutorial/d10031-jsr303-notnull-message-template.md)
 2. Micro Mode
 3. Error Code List
 
