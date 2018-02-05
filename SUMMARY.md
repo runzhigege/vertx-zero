@@ -69,6 +69,7 @@
   * [D10026 - JSR330, @Inject Simple Java Object](doc/vertx-zero-tutorial/d10026-jsr330-inject-simple-java-object.md)
   * [D10027 - JSR330, @Inject One Implementation](doc/vertx-zero-tutorial/d10027-jsr330-inject-one-implementation.md)
   * [D10028 - Zero JSR330, @Inject Multi Implementation](doc/vertx-zero-tutorial/d10028-zero-jsr330-inject-multi-implementation.md)
+  * [D10029 - JSR303, @NotNull](doc/vertx-zero-tutorial/d10029-jsr303-notnull.md)
 
 ## Useful Related Documents
 
