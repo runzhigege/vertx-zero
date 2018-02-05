@@ -70,6 +70,7 @@
   * [D10027 - JSR330, @Inject One Implementation](doc/vertx-zero-tutorial/d10027-jsr330-inject-one-implementation.md)
   * [D10028 - Zero JSR330, @Inject Multi Implementation](doc/vertx-zero-tutorial/d10028-zero-jsr330-inject-multi-implementation.md)
   * [D10029 - JSR303, @NotNull](doc/vertx-zero-tutorial/d10029-jsr303-notnull.md)
+  * [D10030 - JSR303, @NotNull message](doc/vertx-zero-tutorial/d10030-jsr303-notnull-message.md)
 
 ## Useful Related Documents
 
