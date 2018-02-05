@@ -25,6 +25,7 @@ package up.god.micro.validation;
 
 import io.vertx.up.annotations.EndPoint;
 
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -35,11 +36,37 @@ public class NotNullActor {
 
     @GET
     @Path("/notnull/query")
-    public String testValid(@PathParam("name") final String name) {
+    public String testValid(
+            @NotNull
+            @PathParam("name") final String name) {
         return "Hello, " + name;
     }
 }
 ```
+
+## 2. Testing
+
+**URL** : [http://localhost:6083/api/jsr303/notnull/query](http://localhost:6083/api/jsr303/notnull/query)
+
+**Method** : GET
+
+**Response** : \( Status = 400 \)
+
+```json
+{
+    "code": -60000,
+    "message": "[ERR-60000] (Validator) Web Exception occus: (400) - Request validation failure, class = class up.god.micro.validation.NotNullActor, method = public java.lang.String up.god.micro.validation.NotNullActor.testValid(java.lang.String), message = must not be null.",
+    "info": "must not be null"
+}
+```
+
+## 3. Summary
+
+From above response information, you should see the validation failure in zero system, please read following comments for each json node meanings:
+
+* **code**: The error code that defined by zero system, you could lookup Error Codes of zero system to know what kind of issues that you met.
+* **message**: The system error message that you'll meet, it describes that the error details, but it could not be provided to client because it's unreadable.
+* **info** : The information for client to describe the error messages. In forward tutorials we'll introduce how to define this info and provide the information to client.
 
 
 
