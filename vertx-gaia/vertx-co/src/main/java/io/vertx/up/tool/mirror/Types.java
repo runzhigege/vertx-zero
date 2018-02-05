@@ -150,6 +150,16 @@ public class Types {
         }, value);
     }
 
+    /**
+     * Check Primary
+     *
+     * @param source
+     * @return
+     */
+    public static boolean isPrimary(final Class<?> source) {
+        return UNBOXES.values().contains(source);
+    }
+
     public static Class<?> toPrimary(final Class<?> source) {
         return UNBOXES.getOrDefault(source, source);
     }
@@ -157,14 +167,14 @@ public class Types {
     public static ConcurrentMap<Class<?>, Class<?>> UNBOXES =
             new ConcurrentHashMap<Class<?>, Class<?>>() {
                 {
-                    put(Integer.class, int.class);
-                    put(Long.class, long.class);
-                    put(Short.class, short.class);
-                    put(Boolean.class, boolean.class);
-                    put(Character.class, char.class);
-                    put(Double.class, double.class);
-                    put(Float.class, float.class);
-                    put(Byte.class, byte.class);
+                    this.put(Integer.class, int.class);
+                    this.put(Long.class, long.class);
+                    this.put(Short.class, short.class);
+                    this.put(Boolean.class, boolean.class);
+                    this.put(Character.class, char.class);
+                    this.put(Double.class, double.class);
+                    this.put(Float.class, float.class);
+                    this.put(Byte.class, byte.class);
                 }
             };
 }
