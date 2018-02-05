@@ -73,6 +73,8 @@
   * [D10030 - JSR303, @NotNull message](doc/vertx-zero-tutorial/d10030-jsr303-notnull-message.md)
   * [D10031 - JSR303, @NotNull message template](doc/vertx-zero-tutorial/d10031-jsr303-notnull-message-template.md)
   * [D10032 - JSR303, @DefaultValue for parameters](doc/vertx-zero-tutorial/d10032-jsr303-defaultvalue-for-parameters.md)
+  * [D10033 - JSR303, @Null for value](doc/vertx-zero-tutorial/d10033-jsr303-null-for-value.md)
+  * [D10034 - JSR303, @AssertTrue/@AssertFalse for boolean](doc/vertx-zero-tutorial/d10034-asserttrueassertfalse-for-boolean.md)
 
 ## Useful Related Documents
 
