@@ -79,6 +79,8 @@
   * [D10036 - JSR303, @DecimalMin/@DecimalMax for decimal](doc/vertx-zero-tutorial/d10036-jsr303-decimalmindecimalmax-for-decimal.md)
   * [D10037 - JSR303, @Size usage](doc/vertx-zero-tutorial/d10037-jsr303-size-usage.md)
   * [D10038 - JSR303, @Digits for decimal](doc/vertx-zero-tutorial/d10038-jsr303-digits-for-decimal.md)
+  * [D10039 - JSR303, @Future, @Past for date](doc/vertx-zero-tutorial/d10039-jsr303-future-past-for-date.md)
+  * [D10040 - JSR303, @Pattern for regular expression](doc/vertx-zero-tutorial/d10040-jsr303-pattern-for-regular-expression.md)
 
 ## Useful Related Documents
 
