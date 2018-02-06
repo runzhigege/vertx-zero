@@ -12,8 +12,15 @@ class In {
             final Class<T> clazz
     ) {
         final Envelop body = message.body();
-        return Fn.getSemi(null == body, null, Fn::nil,
-                () -> body.data(clazz));
+        return request(body, clazz);
+    }
+
+    static <T> T request(
+            final Envelop envelop,
+            final Class<T> clazz
+    ) {
+        return Fn.getSemi(null == envelop, null, Fn::nil,
+                () -> envelop.data(clazz));
     }
 
     static <T> T request(
@@ -21,8 +28,16 @@ class In {
             final Integer index,
             final Class<T> clazz) {
         final Envelop body = message.body();
-        return Fn.getSemi(null == body, null, Fn::nil,
-                () -> body.data(index, clazz));
+        return request(body, index, clazz);
+    }
+
+    static <T> T request(
+            final Envelop envelop,
+            final Integer index,
+            final Class<T> clazz
+    ) {
+        return Fn.getSemi(null == envelop, null, Fn::nil,
+                () -> envelop.data(index, clazz));
     }
 
     static String requestUser(

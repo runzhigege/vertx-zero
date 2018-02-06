@@ -116,7 +116,8 @@ For all tutorial testing cases, you can import following resource with Postman T
    41. [D10041 - JSR303, 2.x version](doc/vertx-zero-tutorial/d10041-jsr303-in-future-usage.md)
    42. [D10042 - JSR303, Pojo First](doc/vertx-zero-tutorial/d10043-jsr303-pojo-first.md)
    43. [D10043 - Zero JSR303, Body Validation](doc/vertx-zero-tutorial/d10043-zero-jsr303-body-validation.md)
-   44. [D10044 - Interface Style](doc/vertx-zero-tutorial/d10044-recommend-interface-mode-only.md)
+   44. [D10044 - Programming Styles](doc/vertx-zero-tutorial/d10044-programming-styles.md)
+   45. [D10045 - Interface Style](doc/vertx-zero-tutorial/d10044-recommend-interface-mode-only.md)
 2. Micro Mode
 3. Error Code List
 
