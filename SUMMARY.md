@@ -69,6 +69,18 @@
   * [D10026 - JSR330, @Inject Simple Java Object](doc/vertx-zero-tutorial/d10026-jsr330-inject-simple-java-object.md)
   * [D10027 - JSR330, @Inject One Implementation](doc/vertx-zero-tutorial/d10027-jsr330-inject-one-implementation.md)
   * [D10028 - Zero JSR330, @Inject Multi Implementation](doc/vertx-zero-tutorial/d10028-zero-jsr330-inject-multi-implementation.md)
+  * [D10029 - JSR303, @NotNull](doc/vertx-zero-tutorial/d10029-jsr303-notnull.md)
+  * [D10030 - JSR303, @NotNull message](doc/vertx-zero-tutorial/d10030-jsr303-notnull-message.md)
+  * [D10031 - JSR303, @NotNull message template](doc/vertx-zero-tutorial/d10031-jsr303-notnull-message-template.md)
+  * [D10032 - JSR303, @DefaultValue for parameters](doc/vertx-zero-tutorial/d10032-jsr303-defaultvalue-for-parameters.md)
+  * [D10033 - JSR303, @Null for value](doc/vertx-zero-tutorial/d10033-jsr303-null-for-value.md)
+  * [D10034 - JSR303, @AssertTrue/@AssertFalse for boolean](doc/vertx-zero-tutorial/d10034-asserttrueassertfalse-for-boolean.md)
+  * [D10035 - JSR303, @Min/@Max for numeric](doc/vertx-zero-tutorial/d10035-jsr303-minmax-for-numeric.md)
+  * [D10036 - JSR303, @DecimalMin/@DecimalMax for decimal](doc/vertx-zero-tutorial/d10036-jsr303-decimalmindecimalmax-for-decimal.md)
+  * [D10037 - JSR303, @Size usage](doc/vertx-zero-tutorial/d10037-jsr303-size-usage.md)
+  * [D10038 - JSR303, @Digits for decimal](doc/vertx-zero-tutorial/d10038-jsr303-digits-for-decimal.md)
+  * [D10039 - JSR303, @Future, @Past for date](doc/vertx-zero-tutorial/d10039-jsr303-future-past-for-date.md)
+  * [D10040 - JSR303, @Pattern for regular expression](doc/vertx-zero-tutorial/d10040-jsr303-pattern-for-regular-expression.md)
 
 ## Useful Related Documents
 

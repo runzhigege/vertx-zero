@@ -128,5 +128,66 @@ public class MultiServiceB implements MultiStub {
 }
 ```
 
+## 2. Console
+
+```shell
+......
+[ ZERO ] ( 1 Event ) The endpoint up.god.micro.inject.MultiActor scanned 1 events of Event, \
+    will be mounted to routing system.
+......
+[ ZERO ] ( 9 Queue ) The Zero system has found 9 components of @Queue.
+[ ZERO ] Vert.x zero has found 11 incoming address from the system. Incoming address list as below: 
+......
+[ ZERO ]        Addr : ZERO://INJECT/MULTI
+......
+[ ZERO ] ( 1 Receipt ) The queue up.god.micro.inject.MultiWorker scanned 1 records of Receipt, \
+    will be mounted to event bus.
+......
+[ ZERO ] ( 1 Inject ) The Zero system has found "up.god.micro.inject.MultiWorker" object \
+    contains 1 components of @Inject or ( javax.inject.infix.* ).
+......
+[ ZERO ] ( Uri Register ) "/api/inject/multi" has been deployed by ZeroHttpAgent, Options = Route...
+......
+```
+
+## 3. Testing
+
+**URL**: http://localhost:6083/api/inject/multi
+
+**Method**: PUT
+
+**Request**: 
+
+```json
+{
+	"username":"lang.yu",
+	"email":"lang.yu@hpe.com"
+}
+```
+
+**Response**:
+
+```json
+{
+    "data": {
+        "age": 33,
+        "username": "lang.yu",
+        "email": "lang.yu@hpe.com",
+        "className": "up.god.micro.inject.MultiServiceB"
+    }
+}
+```
+
+From the testing result we could see the inject object is "ServiceB".
+
+## 4. Summary
+
+This chapter described the usage of another two JSR330 \( Include extended \) annotations:
+
+* `javax.inject.Named`
+* `io.vertx.up.annotation.Qualifier`
+
+Above two annotations could resolve the situation that one interface contains more than one implementation class injection based on JSR330. But one thing you should know that it's not for switching between different implementations but for some special design in the system.
+
 
 
