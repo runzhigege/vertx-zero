@@ -87,7 +87,7 @@ public class PojoActor {
 {
     "code": -60000,
     "message": "[ERR-60000] (Validator) Web Exception occus: (400) - Request validation failure, class = class up.god.micro.validation.PojoActor, method = public io.vertx.core.json.JsonObject up.god.micro.validation.PojoActor.sayPojo(up.god.micro.async.JavaJson), message = Not Null name.",
-    "info": "Not Null name"
+    "info": "must not be null"
 }
 ```
 
@@ -135,8 +135,4 @@ public class PojoActor {
 ## 3. Summary
 
 This tutorial described the usage of `@Valid` annotation for pojo validation, except this example pojo also support `message` attribute set and message template usage for properties files.
-
-
-
-
 
