@@ -103,8 +103,20 @@ For all tutorial testing cases, you can import following resource with Postman T
    28. [D10028 - Zero JSR330, @Inject Multi Implementation](doc/vertx-zero-tutorial/d10028-zero-jsr330-inject-multi-implementation.md)
    29. [D10029 - JSR303, @NotNull](doc/vertx-zero-tutorial/d10029-jsr303-notnull.md)
    30. [D10030 - JSR303, @NotNull message](doc/vertx-zero-tutorial/d10030-jsr303-notnull-message.md)
-   31. [D10031 - JSR303, @NotNull message template](/doc/vertx-zero-tutorial/d10031-jsr303-notnull-message-template.md)
-   32. [D10032 - JSR303, @DefaultValue for parameters](/doc/vertx-zero-tutorial/d10032-jsr303-defaultvalue-for-parameters.md)
+   31. [D10031 - JSR303, @NotNull message template](doc/vertx-zero-tutorial/d10031-jsr303-notnull-message-template.md)
+   32. [D10032 - JSR303, @DefaultValue for parameters](doc/vertx-zero-tutorial/d10032-jsr303-defaultvalue-for-parameters.md)
+   33. [D10033 - JSR303, @Null for value](doc/vertx-zero-tutorial/d10033-jsr303-null-for-value.md)
+   34. [D10034 - JSR303, @AssertTrue/@AssertFalse for boolean](doc/vertx-zero-tutorial/d10034-asserttrueassertfalse-for-boolean.md)
+   35. [D10035 - JSR303, @Min/@Max for numeric](doc/vertx-zero-tutorial/d10035-jsr303-minmax-for-numeric.md)
+   36. [D10036 - JSR303, @DecimalMin/@DecimalMax for decimal](doc/vertx-zero-tutorial/d10036-jsr303-decimalmindecimalmax-for-decimal.md)
+   37. [D10037 - JSR303, @Size usage](doc/vertx-zero-tutorial/d10037-jsr303-size-usage.md)
+   38. [D10038 - JSR303, @Digits for decimal](doc/vertx-zero-tutorial/d10038-jsr303-digits-for-decimal.md)
+   39. [D10039 - JSR303, @Future, @Past for date](doc/vertx-zero-tutorial/d10039-jsr303-future-past-for-date.md)
+   40. [D10040 - JSR303, @Pattern for regular expression](doc/vertx-zero-tutorial/d10040-jsr303-pattern-for-regular-expression.md)
+   41. [D10041 - JSR303, 2.x version](doc/vertx-zero-tutorial/d10041-jsr303-in-future-usage.md)
+   42. [D10042 - JSR303, Pojo First](doc/vertx-zero-tutorial/d10043-jsr303-pojo-first.md)
+   43. [D10043 - Zero JSR303, Body Validation](doc/vertx-zero-tutorial/d10043-zero-jsr303-body-validation.md)
+   44. [D10044 - Interface Style](doc/vertx-zero-tutorial/d10044-recommend-interface-mode-only.md)
 2. Micro Mode
 3. Error Code List
 
