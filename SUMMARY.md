@@ -86,6 +86,7 @@
   * [D10043 - Zero JSR303, Body Validation](doc/vertx-zero-tutorial/d10043-zero-jsr303-body-validation.md)
   * [D10044 - Programming Styles](doc/vertx-zero-tutorial/d10044-programming-styles.md)
   * [D10045 - Interface Style](doc/vertx-zero-tutorial/d10044-recommend-interface-mode-only.md)
+  * [D10046 - Utility X Turn-On](doc/vertx-zero-tutorial/d10046-utilityx-turn-on.md)
 
 ## Useful Related Documents
 
