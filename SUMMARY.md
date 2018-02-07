@@ -88,6 +88,8 @@
   * [D10045 - Interface Style](doc/vertx-zero-tutorial/d10044-recommend-interface-mode-only.md)
   * [D10046 - Utility X Turn-On](doc/vertx-zero-tutorial/d10046-utilityx-turn-on.md)
   * [D10047 - Utility X, JsonObject Processinng](doc/vertx-zero-tutorial/d10047-utility-x-json-processinng.md)
+  * [D10048 - Utility X, Pager Processing](doc/vertx-zero-tutorial/d10048-utility-x-pager-processing.md)
+  * [D10049 - Utility X, Sorter Processing](doc/vertx-zero-tutorial/d10049-utility-x-sorter-processing.md)
 
 ## Useful Related Documents
 
