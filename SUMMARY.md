@@ -92,6 +92,9 @@
   * [D10049 - Utility X, Sorter Processing](doc/vertx-zero-tutorial/d10049-utility-x-sorter-processing.md)
   * [D10050 - Utility X, Errors](doc/vertx-zero-tutorial/d10050-utility-x-errors.md)
   * [D10051 - Utility X, JsonArray/Unique Extract](doc/vertx-zero-tutorial/d10051-utility-x-jsonarrayunique-extract.md)
+  * [D10052 - Utility X, User Data](doc/vertx-zero-tutorial/d10052-utility-x-user-data.md)
+  * [D10053 - Utility X, Normalized Response](doc/vertx-zero-tutorial/d10053-utility-x-normalized-response.md)
+  * [D10054 - Utility X Input, Agent Mode](doc/vertx-zero-tutorial/d10054-utility-x-input-agent-mode.md)
 
 ## Useful Related Documents
 
