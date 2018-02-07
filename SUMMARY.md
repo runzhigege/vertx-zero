@@ -87,6 +87,7 @@
   * [D10044 - Programming Styles](doc/vertx-zero-tutorial/d10044-programming-styles.md)
   * [D10045 - Interface Style](doc/vertx-zero-tutorial/d10044-recommend-interface-mode-only.md)
   * [D10046 - Utility X Turn-On](doc/vertx-zero-tutorial/d10046-utilityx-turn-on.md)
+  * [D10047 - Utility X, JsonObject Processinng](doc/vertx-zero-tutorial/d10047-utility-x-json-processinng.md)
 
 ## Useful Related Documents
 
