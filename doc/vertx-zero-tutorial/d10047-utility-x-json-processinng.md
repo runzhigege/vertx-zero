@@ -2,9 +2,9 @@
 
 The first batch methods in Utility X is for Json Processing, these methods start with `to` .
 
-* `static <T> JsonObject toJson(final T entity)`
-* `static <T> JsonObject toJson(final T entity, final String pojo)`
-* `static <T> JsonObject toJsonFun(final T entity, final Function<JsonObject,JsonObject> convert)`
+* `static <T> JsonObject toJson(T entity)`
+* `static <T> JsonObject toJson(T entity, String pojo)`
+* `static <T> JsonObject toJsonFun(T entity, Function<JsonObject,JsonObject> convert)`
 
 Above three methods could process the data type conversion of `io.vertx.core.json.JsonObject`. this chapter focus on these three methods usage. Before you do this testing, we'll create new Data Object for the type `T`.
 
@@ -152,7 +152,6 @@ This chapter focus on the last method `toJsonFun(T,Function)`, it's for conversi
         Assert.assertEquals(result.getString("username"),
                 result.getString("email"));
     }
-    
 ```
 
 Here you could provide a function `Function<JsonObject,JsonObject>`, this function could help you to convert the original JsonObject to new one, you can define your own rules.
@@ -166,6 +165,4 @@ These three Apis are provided for following scenarios:
 * You can write some connector codes to do data mapping by these Apis.
 
 These three Apis came from real project of Video App that has been hosted by zero system, because we found it's widely used and just like re-using functions, then we extract these three apis from the projects and put into standard zero system.
-
-
 

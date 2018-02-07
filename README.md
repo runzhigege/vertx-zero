@@ -118,6 +118,12 @@ For all tutorial testing cases, you can import following resource with Postman T
    43. [D10043 - Zero JSR303, Body Validation](doc/vertx-zero-tutorial/d10043-zero-jsr303-body-validation.md)
    44. [D10044 - Programming Styles](doc/vertx-zero-tutorial/d10044-programming-styles.md)
    45. [D10045 - Interface Style](doc/vertx-zero-tutorial/d10044-recommend-interface-mode-only.md)
+   46. [D10046 - Utility X Turn-On](doc/vertx-zero-tutorial/d10046-utilityx-turn-on.md)
+   47. [D10047 - Utility X, JsonObject Processing](doc/vertx-zero-tutorial/d10047-utility-x-json-processinng.md)
+   48. [D10048 - Utility X, Pager Processing](doc/vertx-zero-tutorial/d10048-utility-x-pager-processing.md)
+   49. [D10049 - Utility X, Sorter Processing](doc/vertx-zero-tutorial/d10049-utility-x-sorter-processing.md)
+   50. [D10050 - Utility X, Errors](doc/vertx-zero-tutorial/d10050-utility-x-errors.md)
+   51. [D10051 - Utility X, JsonArray/Unique Extract](doc/vertx-zero-tutorial/d10051-utility-x-jsonarrayunique-extract.md)
 2. Micro Mode
 3. Error Code List
 
