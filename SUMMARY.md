@@ -95,6 +95,7 @@
   * [D10052 - Utility X, User Data](doc/vertx-zero-tutorial/d10052-utility-x-user-data.md)
   * [D10053 - Utility X, Normalized Response](doc/vertx-zero-tutorial/d10053-utility-x-normalized-response.md)
   * [D10054 - Utility X Input, Agent Mode](doc/vertx-zero-tutorial/d10054-utility-x-input-agent-mode.md)
+  * [D10055 - Utility X Input, Interface Style](doc/vertx-zero-tutorial/d10055-utility-x-interface-style.md)
 
 ## Useful Related Documents
 
