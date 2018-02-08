@@ -23,10 +23,16 @@ public class Sorter implements Serializable {
         return new Sorter(field, asc);
     }
 
+    public static Sorter create() {
+        return new Sorter(null, false);
+    }
+
     private Sorter(final String field,
                    final Boolean asc) {
-        this.field.add(field);
-        this.asc.add(asc);
+        Fn.safeNull(() -> {
+            this.field.add(field);
+            this.asc.add(asc);
+        }, field);
     }
 
     public <T> JsonObject toJson(final Function<Boolean, T> function) {
