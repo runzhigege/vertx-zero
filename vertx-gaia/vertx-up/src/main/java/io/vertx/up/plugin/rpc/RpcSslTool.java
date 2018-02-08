@@ -29,7 +29,6 @@ public class RpcSslTool {
                                             final JsonObject config) {
         final String rpcHost = config.getString(Key.HOST);
         final Integer rpcPort = config.getInteger(Key.PORT);
-        LOGGER.info(Info.CLIENT_RPC, rpcHost, String.valueOf(rpcPort));
         final VertxChannelBuilder builder =
                 VertxChannelBuilder
                         .forAddress(vertx, rpcHost, rpcPort);
@@ -47,7 +46,9 @@ public class RpcSslTool {
                         builder.usePlaintext(true);
                     }
                 });
-        return builder.build();
+        final ManagedChannel channel = builder.build();
+        LOGGER.info(Info.CLIENT_RPC, rpcHost, String.valueOf(rpcPort), String.valueOf(channel.hashCode()));
+        return channel;
     }
 
     public static ManagedChannel getChannel(final Vertx vertx,

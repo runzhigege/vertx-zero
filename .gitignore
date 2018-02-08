@@ -22,7 +22,7 @@
 hs_err_pid*
 .vertx
 .idea
-file_uploads
+file-uploads
 target
 *.versionsBackup
 *.iml

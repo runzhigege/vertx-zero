@@ -187,7 +187,7 @@ public final class Ux {
 
 
     // ---------------------- Function Generator --------------------------------------
-    public static Function<JsonArray, Future<JsonObject>> fnRpc(final JsonArray array) {
+    public static Future<JsonObject> fnRpc(final JsonArray array) {
         return UxRpc.fnRpc(array);
     }
 
@@ -541,6 +541,10 @@ public final class Ux {
 
     public static Future<JsonArray> thenParallelArray(final Future<JsonArray> source, final Function<JsonObject, Future<JsonObject>> generateFun, final BinaryOperator<JsonObject> operatorFun) {
         return Fluctuate.thenParallelArray(source, generateFun, operatorFun);
+    }
+
+    public static Future<JsonObject> thenParallelArray(final Future<JsonArray>... sources){
+        return Fluctuate.thenParallelArray(sources);
     }
 
     public static Future<JsonObject> thenParallelJson(final Future<JsonObject> source, final Function<JsonObject, List<Future>> generateFun, final BiConsumer<JsonObject, JsonObject>... operatorFun) {

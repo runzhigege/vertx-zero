@@ -63,6 +63,16 @@ public class Uarr {
         return this;
     }
 
+    public Uarr distinct() {
+        Self.distinct(this.arrayReference, false);
+        return this;
+    }
+
+    public Uarr sort() {
+        Self.distinct(this.arrayReference, false);
+        return this;
+    }
+
     public Uarr vertical(final String field) {
         Self.vertical(this.arrayReference, field, false);
         return this;

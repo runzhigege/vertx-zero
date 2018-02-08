@@ -98,6 +98,7 @@
   * [D10055 - Utility X Input, Interface Style](doc/vertx-zero-tutorial/d10055-utility-x-interface-style.md)
   * [D10056 - Utility X Basic Future](doc/vertx-zero-tutorial/d10056-utility-x-rest.md)
   * [D10057 - Utility X, thenParallel](doc/vertx-zero-tutorial/d10057-utility-x-advanced-futures.md)
+  * [D10058 - Utility X, thenParallelArray/Json](doc/vertx-zero-tutorial/d10058-utility-x-thenparallelarrayjson.md)
 
 ## Useful Related Documents
 

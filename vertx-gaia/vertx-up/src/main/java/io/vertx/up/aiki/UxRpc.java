@@ -7,8 +7,6 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.rpc.RpcClient;
 import io.vertx.up.plugin.rpc.RpcInfix;
 
-import java.util.function.Function;
-
 class UxRpc {
 
     private static final RpcClient CLIENT = RpcInfix.getClient();
@@ -20,15 +18,19 @@ class UxRpc {
                                              final JsonObject params) {
         final Future<JsonObject> result = Future.future();
         CLIENT.connect(name, address, params, handler -> {
-            LOGGER.info(Info.RPC_RESULT, name, address, params, handler.result());
-            result.complete(handler.result());
+            if (handler.succeeded()) {
+                result.complete(handler.result());
+                LOGGER.info(Info.RPC_RESULT, name, address, params, handler.result(), String.valueOf(CLIENT.hashCode()));
+            } else {
+                LOGGER.jvm(handler.cause());
+            }
         });
         return result;
     }
 
-    public static Function<JsonArray, Future<JsonObject>> fnRpc(
+    public static Future<JsonObject> fnRpc(
             final JsonArray data) {
-        return item -> Future.succeededFuture(
+        return Future.succeededFuture(
                 new JsonObject()
                         .put("data", data)
                         .put("count", data.size())
