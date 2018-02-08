@@ -44,14 +44,32 @@ class In {
             final Message<Envelop> message,
             final String field
     ) {
-        return message.body().identifier(field);
+        return requestUser(message.body(), field);
+    }
+
+    static String requestUser(
+            final Envelop envelop,
+            final String field
+    ) {
+        return Fn.getSemi(null == envelop, null, Fn::nil,
+                () -> envelop.identifier(field));
     }
 
     static Object requestSession(
             final Message<Envelop> message,
             final String field
     ) {
-        final Session session = message.body().getSession();
-        return null == session ? null : session.get(field);
+        return requestSession(message.body(), field);
+    }
+
+    static Object requestSession(
+            final Envelop envelop,
+            final String field
+    ) {
+        return Fn.getSemi(null == envelop, null, Fn::nil,
+                () -> {
+                    final Session session = envelop.getSession();
+                    return null == session ? null : session.get(field);
+                });
     }
 }

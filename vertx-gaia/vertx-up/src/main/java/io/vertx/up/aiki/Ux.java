@@ -163,14 +163,26 @@ public final class Ux {
         return In.requestUser(message, field);
     }
 
+    public static String getUserID(final Envelop envelop, final String field) {
+        return In.requestUser(envelop, field);
+    }
+
     // -> Message<Envelop> -> UUID ( Security )
     public static UUID getUserUUID(final Message<Envelop> message, final String field) {
         return UUID.fromString(getUserID(message, field));
     }
 
+    public static UUID getUserUUID(final Envelop envelop, final String field) {
+        return UUID.fromString(getUserID(envelop, field));
+    }
+
     // -> Message<Envelop> -> Session ( Key )
     public static Object getSession(final Message<Envelop> message, final String field) {
         return In.requestSession(message, field);
+    }
+
+    public static Object getSession(final Envelop envelop, final String field) {
+        return In.requestSession(envelop, field);
     }
 
 

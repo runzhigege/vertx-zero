@@ -86,6 +86,21 @@
   * [D10043 - Zero JSR303, Body Validation](doc/vertx-zero-tutorial/d10043-zero-jsr303-body-validation.md)
   * [D10044 - Programming Styles](doc/vertx-zero-tutorial/d10044-programming-styles.md)
   * [D10045 - Interface Style](doc/vertx-zero-tutorial/d10044-recommend-interface-mode-only.md)
+  * [D10046 - Utility X Turn-On](doc/vertx-zero-tutorial/d10046-utilityx-turn-on.md)
+  * [D10047 - Utility X, JsonObject Processing](doc/vertx-zero-tutorial/d10047-utility-x-json-processinng.md)
+  * [D10048 - Utility X, Pager Processing](doc/vertx-zero-tutorial/d10048-utility-x-pager-processing.md)
+  * [D10049 - Utility X, Sorter Processing](doc/vertx-zero-tutorial/d10049-utility-x-sorter-processing.md)
+  * [D10050 - Utility X, Errors](doc/vertx-zero-tutorial/d10050-utility-x-errors.md)
+  * [D10051 - Utility X, JsonArray/Unique Extract](doc/vertx-zero-tutorial/d10051-utility-x-jsonarrayunique-extract.md)
+  * [D10052 - Utility X, User Data](doc/vertx-zero-tutorial/d10052-utility-x-user-data.md)
+  * [D10053 - Utility X, Normalized Response](doc/vertx-zero-tutorial/d10053-utility-x-normalized-response.md)
+  * [D10054 - Utility X Input, Agent Mode](doc/vertx-zero-tutorial/d10054-utility-x-input-agent-mode.md)
+  * [D10055 - Utility X Input, Interface Style](doc/vertx-zero-tutorial/d10055-utility-x-interface-style.md)
+  * [D10056 - Utility X Basic Future](doc/vertx-zero-tutorial/d10056-utility-x-rest.md)
+  * [D10057 - Utility X, thenParallel](doc/vertx-zero-tutorial/d10057-utility-x-advanced-futures.md)
+  * [D10058 - Utility X, thenParallelArray/Json](doc/vertx-zero-tutorial/d10058-utility-x-thenparallelarrayjson.md)
+  * [D10059 - Utility X, thenScatterJson](doc/vertx-zero-tutorial/d10059-utility-x-thenscatterjson.md)
+  * [D10060 - Utility X, thenError](doc/vertx-zero-tutorial/d10060-utility-x-thenerror.md)
 
 ## Useful Related Documents
 

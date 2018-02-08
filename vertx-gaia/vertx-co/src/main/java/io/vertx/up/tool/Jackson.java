@@ -210,6 +210,11 @@ public final class Jackson {
                 () -> Jackson.deserialize(value.encode(), type), value);
     }
 
+    public static <T> List<T> deserialize(final JsonArray value, final TypeReference<List<T>> type) {
+        return Fn.get(new ArrayList<>(),
+                () -> Jackson.deserialize(value.encode(), type), value);
+    }
+
     public static <T> T deserialize(final String value, final Class<T> type) {
         return Fn.get(null,
                 () -> Fn.getJvm(() -> Jackson.MAPPER.readValue(value, type)), value);
