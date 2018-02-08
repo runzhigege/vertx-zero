@@ -2,11 +2,11 @@ package io.vertx.up.exception;
 
 import io.vertx.core.http.HttpStatusCode;
 
-public class QiyAuthorizedException extends WebException {
+public class _401QiyAuthorizedException extends WebException {
 
-    public QiyAuthorizedException(final Class<?> clazz,
-                                  final String code,
-                                  final String message) {
+    public _401QiyAuthorizedException(final Class<?> clazz,
+                                      final String code,
+                                      final String message) {
         super(clazz, code, message);
     }
 
