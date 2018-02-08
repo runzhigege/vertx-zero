@@ -29,7 +29,7 @@ public class Mojo implements Serializable {
     private Class<?> type;
 
     @JsonProperty(MAPPING)
-    private final ConcurrentMap<String, String> config = new ConcurrentHashMap<>();
+    private ConcurrentMap<String, String> config = new ConcurrentHashMap<>();
 
     public Class<?> getType() {
         return this.type;
@@ -40,6 +40,8 @@ public class Mojo implements Serializable {
     }
 
     public ConcurrentMap<String, String> getMapper() {
+        // Fix no mapping issue for empty mapping conversion.
+        Fn.safeSemi(null == this.config, LOGGER, () -> this.config = new ConcurrentHashMap<>());
         return this.config;
     }
 
