@@ -102,6 +102,7 @@
   * [D10059 - Utility X, thenScatterJson](doc/vertx-zero-tutorial/d10059-utility-x-thenscatterjson.md)
   * [D10060 - Utility X, thenError](doc/vertx-zero-tutorial/d10060-utility-x-thenerror.md)
   * [D10061 - Jooq/mysql, Configuration](doc/vertx-zero-tutorial/d10061-jooqmysql-configuration.md)
+  * [D10062 - Jooq/Create Operation](doc/vertx-zero-tutorial/d10062-jooq-create.md)
 
 ## Useful Related Documents
 
