@@ -44,7 +44,7 @@ public class UxJooq {
      * @return
      */
     public <T> Future<List<T>> searchAsync(final Inquiry inquiry) {
-
+        
         return null;
     }
 
