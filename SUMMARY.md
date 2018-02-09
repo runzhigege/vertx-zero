@@ -101,8 +101,8 @@
   * [D10058 - Utility X, thenParallelArray/Json](doc/vertx-zero-tutorial/d10058-utility-x-thenparallelarrayjson.md)
   * [D10059 - Utility X, thenScatterJson](doc/vertx-zero-tutorial/d10059-utility-x-thenscatterjson.md)
   * [D10060 - Utility X, thenError](doc/vertx-zero-tutorial/d10060-utility-x-thenerror.md)
-  * [D10061 - Jooq/Mysql, Configuration](doc/vertx-zero-tutorial/d10061-jooqmysql-configuration.md)
-  * [D10062 - Jooq/Get, Operation](doc/vertx-zero-tutorial/d10062-jooq-get.md)
+  * [D10061 - Jooq/mysql, Configuration](doc/vertx-zero-tutorial/d10061-jooqmysql-configuration.md)
+  * [D10062 - Jooq/Create Operation](doc/vertx-zero-tutorial/d10062-jooq-create.md)
 
 ## Useful Related Documents
 
