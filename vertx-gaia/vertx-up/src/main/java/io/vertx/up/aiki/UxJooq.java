@@ -5,6 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.jooq.JooqInfix;
+import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.log.Annal;
 import io.vertx.up.tool.StringUtil;
 import io.vertx.up.tool.mirror.Types;
@@ -33,6 +34,18 @@ public class UxJooq {
     <T> UxJooq(final Class<T> clazz) {
         this.clazz = clazz;
         this.vertxDAO = (VertxDAO) JooqInfix.getDao(clazz);
+    }
+
+    /**
+     * Search operation
+     *
+     * @param inquiry
+     * @param <T>
+     * @return
+     */
+    public <T> Future<List<T>> searchAsync(final Inquiry inquiry) {
+        
+        return null;
     }
 
     public <T> Future<List<T>> fetchAsync(final String column, final Object value) {
@@ -148,21 +161,21 @@ public class UxJooq {
     private static final ConcurrentMap<String, BiFunction<String, Object, Condition>> OPS =
             new ConcurrentHashMap<String, BiFunction<String, Object, Condition>>() {
                 {
-                    this.put("<", (field, value) -> DSL.field(field).lt(value));
-                    this.put(">", (field, value) -> DSL.field(field).gt(value));
-                    this.put("<=", (field, value) -> DSL.field(field).le(value));
-                    this.put(">=", (field, value) -> DSL.field(field).ge(value));
-                    this.put("=", (field, value) -> DSL.field(field).eq(value));
-                    this.put("<>", (field, value) -> DSL.field(field).ne(value));
-                    this.put("!n", (field, value) -> DSL.field(field).isNotNull());
-                    this.put("n", (field, value) -> DSL.field(field).isNull());
-                    this.put("t", (field, value) -> DSL.field(field).isTrue());
-                    this.put("f", (field, value) -> DSL.field(field).isFalse());
-                    this.put("i", UxJooq::opIn);
-                    this.put("!i", UxJooq::opNotIn);
-                    this.put("s", (field, value) -> DSL.field(field).startsWith(value));
-                    this.put("e", (field, value) -> DSL.field(field).endsWith(value));
-                    this.put("c", (field, value) -> DSL.field(field).contains(value));
+                    this.put(Inquiry.Op.LT, (field, value) -> DSL.field(field).lt(value));
+                    this.put(Inquiry.Op.GT, (field, value) -> DSL.field(field).gt(value));
+                    this.put(Inquiry.Op.LE, (field, value) -> DSL.field(field).le(value));
+                    this.put(Inquiry.Op.GE, (field, value) -> DSL.field(field).ge(value));
+                    this.put(Inquiry.Op.EQ, (field, value) -> DSL.field(field).eq(value));
+                    this.put(Inquiry.Op.NEQ, (field, value) -> DSL.field(field).ne(value));
+                    this.put(Inquiry.Op.NOT_NULL, (field, value) -> DSL.field(field).isNotNull());
+                    this.put(Inquiry.Op.NULL, (field, value) -> DSL.field(field).isNull());
+                    this.put(Inquiry.Op.TRUE, (field, value) -> DSL.field(field).isTrue());
+                    this.put(Inquiry.Op.FALSE, (field, value) -> DSL.field(field).isFalse());
+                    this.put(Inquiry.Op.IN, UxJooq::opIn);
+                    this.put(Inquiry.Op.NOT_IN, UxJooq::opNotIn);
+                    this.put(Inquiry.Op.START, (field, value) -> DSL.field(field).startsWith(value));
+                    this.put(Inquiry.Op.END, (field, value) -> DSL.field(field).endsWith(value));
+                    this.put(Inquiry.Op.CONTAIN, (field, value) -> DSL.field(field).contains(value));
                 }
             };
 }
