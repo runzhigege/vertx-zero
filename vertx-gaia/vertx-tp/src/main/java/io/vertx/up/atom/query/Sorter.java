@@ -47,6 +47,15 @@ public class Sorter implements Serializable {
         return sort;
     }
 
+    public JsonObject toJson() {
+        final JsonObject sort = new JsonObject();
+        Fn.itList(this.field, (item, index) -> {
+            final boolean mode = this.asc.get(index);
+            sort.put(item, mode);
+        });
+        return sort;
+    }
+
     public Sorter add(final String field,
                       final Boolean asc) {
         this.field.add(field);

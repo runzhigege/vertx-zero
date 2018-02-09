@@ -27,3 +27,4 @@ target
 *.versionsBackup
 *.iml
 archive
+!vertx-zeus/up-thea/tool/jooq/*.jar

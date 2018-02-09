@@ -83,4 +83,22 @@ class IrInquiry implements Inquiry {
     public Criteria getCriteria() {
         return this.criteria;
     }
+
+    @Override
+    public JsonObject toJson() {
+        final JsonObject result = new JsonObject();
+        if (null != this.pager) {
+            result.put(KEY_PAGER, this.pager.toJson());
+        }
+        if (null != this.sorter) {
+            result.put(KEY_SORTER, this.sorter.toJson());
+        }
+        if (null != this.projection) {
+            result.put(KEY_PROJECTION, Types.toJArray(this.projection));
+        }
+        if (null != this.criteria) {
+            result.put(KEY_CRITERIA, this.criteria.toJson());
+        }
+        return result;
+    }
 }

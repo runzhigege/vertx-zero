@@ -86,6 +86,13 @@ public interface Inquiry {
     Criteria getCriteria();
 
     /**
+     * To JsonObject
+     *
+     * @return
+     */
+    JsonObject toJson();
+
+    /**
      * Create Inquiry
      *
      * @param data

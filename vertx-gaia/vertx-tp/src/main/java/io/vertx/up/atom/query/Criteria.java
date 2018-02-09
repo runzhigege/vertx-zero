@@ -61,4 +61,16 @@ public class Criteria implements Serializable {
         this.conditions.add(item);
         return this;
     }
+
+    public JsonObject toJson() {
+        final JsonObject json = new JsonObject();
+        for (final KeyPair<String, KeyPair<String, Object>> item : this.conditions) {
+            final String op = item.getKey();
+            final KeyPair<String, Object> value = item.getValue();
+            final String field = value.getKey();
+            final Object hitted = value.getValue();
+            json.put(field + Strings.COMMA + op, hitted);
+        }
+        return json;
+    }
 }
