@@ -7,7 +7,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.qiy.remote.QiyAuthorizeApi;
 import io.vertx.tp.plugin.qiy.remote.QiyUploadApi;
-import io.vertx.up.exception.QiyTokenException;
+import io.vertx.up.exception._401QiyTokenException;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 
@@ -62,7 +62,7 @@ public class QiyClientImpl implements QiyClient {
                                  final Handler<AsyncResult<JsonObject>> handler) {
         // Check whether the token is valid
         Fn.flingWeb(null == this.token || !this.token.isValid(), LOGGER,
-                QiyTokenException.class, this.getClass(), this.token.getClientId());
+                _401QiyTokenException.class, this.getClass(), this.token.getClientId());
         // Request upload
         final QiyUploadApi uploadApi = this.token.getUpApi(QiyUploadApi.class);
         QiyRepdor.complete(uploadApi.requestUpload(fileType, fileSize, this.token.getAccessToken()))

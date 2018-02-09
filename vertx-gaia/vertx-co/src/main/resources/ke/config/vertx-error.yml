@@ -80,4 +80,10 @@ E60018: "(501) - The micro service could not find method by address = {0}, error
 E60019: "(500) - Unexpected error found when communitting, details {0}"
 E60020: "(424) - This call dependency Rpc remote service ( name = {0}, address = {1} ) could not be found now"
 E60021: "(400) - File uploading to {0} met errors, please check"
+# Query, Search, Connect
+E60022: "(400) - (Ir) You''ll try to parse Ir key = \"{0}\", the expected type is {1} but now it''s {2}"
+E60023: "(400) - (Ir) You''ll try to build \"pager\", the key \"{0}\" of pager missing."
+E60024: "(500) - (Ir) Your query meta is null, expected input meta object is not null reference."
+E60025: "(400) - (Ir) The \"pager\" started page number should start from 1, now input \"page\" is {0}"
+E60026: "(400) - (Ir) The op is not supported, please provide valid op of \"<, >, <=, >=, =, <>, !n, n, t, f, i, !i, s, e, c\", current is {0}"
 # (Web) Exception for standard third part

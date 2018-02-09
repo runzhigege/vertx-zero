@@ -2,6 +2,7 @@ package io.vertx.up.tool.mirror;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import io.reactivex.Observable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
@@ -14,6 +15,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -128,6 +130,13 @@ public class Types {
             }
             return literal;
         }, reference);
+    }
+
+    public static <T> JsonArray toJArray(final Set<T> set) {
+        final JsonArray array = new JsonArray();
+        Observable.fromIterable(set)
+                .subscribe(array::add);
+        return array;
     }
 
     public static Collection toCollection(final Object value) {

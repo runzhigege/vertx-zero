@@ -23,10 +23,16 @@ public class Sorter implements Serializable {
         return new Sorter(field, asc);
     }
 
+    public static Sorter create() {
+        return new Sorter(null, false);
+    }
+
     private Sorter(final String field,
                    final Boolean asc) {
-        this.field.add(field);
-        this.asc.add(asc);
+        Fn.safeNull(() -> {
+            this.field.add(field);
+            this.asc.add(asc);
+        }, field);
     }
 
     public <T> JsonObject toJson(final Function<Boolean, T> function) {
@@ -37,6 +43,15 @@ public class Sorter implements Serializable {
             // Extract result
             final T result = function.apply(mode);
             sort.put(item, result);
+        });
+        return sort;
+    }
+
+    public JsonObject toJson() {
+        final JsonObject sort = new JsonObject();
+        Fn.itList(this.field, (item, index) -> {
+            final boolean mode = this.asc.get(index);
+            sort.put(item, mode);
         });
         return sort;
     }
