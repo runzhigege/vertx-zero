@@ -8,6 +8,10 @@ In previous tutorial, you could see that there are two apis in `Ux.Jooq` as foll
 
 Above three apis used `andFilters` and `orFilters`, actually these filters support different condition that mapped to SQL database.
 
+Demo projects:
+
+* **Standalone - 6093** : `up-thea`
+
 ## 1. Basic Syntax
 
 When you write filter with following java code:
@@ -236,6 +240,4 @@ S_TYPE LIKE '%type%'
 ## 3. Summary
 
 For above filters, now it's used into `andFilters` and `orFilters` only, in future plan we'll put into advanced usage. It's common usage and you may meet different situations in your real project, but if you use the filter syntax, you can consider the code logical only and do not think how to write the SQL statement. It's also why we recommend to use Jooq instead of other client here.
-
-
 

@@ -1,5 +1,6 @@
 package io.vertx.up.aiki;
 
+import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
@@ -73,6 +74,11 @@ public class Uarr {
         return this;
     }
 
+    public Uarr remove(final String... keys) {
+        Self.remove(this.arrayReference, false, keys);
+        return this;
+    }
+
     public Uarr vertical(final String field) {
         Self.vertical(this.arrayReference, field, false);
         return this;
@@ -91,6 +97,10 @@ public class Uarr {
     public JsonArray to() {
         LOGGER.info(Info.STREAM_END, String.valueOf(this.hashCode()), this.arrayReference);
         return this.arrayReference;
+    }
+
+    public Future<JsonArray> toFuture() {
+        return Future.succeededFuture(this.to());
     }
 
     @Override

@@ -9,3 +9,13 @@ mapping:
   stype: type
   iorder: order
   sname: name
+columns:
+  name: S_NAME
+  code: S_CODE
+  type: S_TYPE
+  order: I_ORDER
+  language: Z_LANGUAGE
+  createTime: Z_CREATE_TIME
+  updateTime: Z_UPDATE_TIME
+  active: IS_ACTIVE
+  sigma: Z_SIGMA

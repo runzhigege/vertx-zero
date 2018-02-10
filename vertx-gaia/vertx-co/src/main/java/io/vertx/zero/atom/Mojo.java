@@ -22,6 +22,7 @@ public class Mojo implements Serializable {
     private static final Annal LOGGER = Annal.get(Mojo.class);
     private static final String TYPE = "type";
     private static final String MAPPING = "mapping";
+    private static final String COLUMNS = "columns";
 
     @JsonProperty(TYPE)
     @JsonSerialize(using = ClassSerializer.class)
@@ -30,6 +31,9 @@ public class Mojo implements Serializable {
 
     @JsonProperty(MAPPING)
     private ConcurrentMap<String, String> config = new ConcurrentHashMap<>();
+
+    @JsonProperty(COLUMNS)
+    private ConcurrentMap<String, String> columns = new ConcurrentHashMap<>();
 
     public Class<?> getType() {
         return this.type;
@@ -53,6 +57,11 @@ public class Mojo implements Serializable {
                 new ConcurrentHashMap<>();
         this.config.forEach((key, value) -> mapper.put(value, key));
         return mapper;
+    }
+
+    public ConcurrentMap<String, String> getColumns() {
+        Fn.safeSemi(null == this.columns, LOGGER, () -> this.columns = new ConcurrentHashMap<>());
+        return this.columns;
     }
 
     @Override
