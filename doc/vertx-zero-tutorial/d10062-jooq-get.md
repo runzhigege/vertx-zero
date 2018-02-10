@@ -1,4 +1,4 @@
-# D10062 - Jooq/Get Operation
+# D10062 - Jooq/GRUD, Read Operation
 
 The first example of jooq should be `CRUD` - Read Operation, we could process read data by primary key \( id \) first, the demo of current tutorial we'll use interface style to prepare.
 
@@ -135,8 +135,60 @@ Here we could see that the data object has been returned, but for some real busi
 Firstly, create new file named `tabular.yml` under pojo folder `src/main/resources/pojo`, the file content could be as following:
 
 ```yaml
-
+type: "up.god.domain.tables.pojos.SysTabular"
+mapping:
+  pkId: key
+  isActive: active
+  zsigma: sigma
+  zlanguage: language
+  zcreateTime: createTime
+  scode: code
+  stype: type
+  iorder: order
+  sname: name
 ```
 
+If you configured the mapping of pojo as above, you can modify the service code as following:
 
+```java
+package up.god.micro.tabular;
+
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
+import io.vertx.up.aiki.Ux;
+import up.god.domain.tables.daos.SysTabularDao;
+import up.god.domain.tables.pojos.SysTabular;
+
+public class TabularService implements TabularStub {
+
+    @Override
+    public Future<JsonObject> fetchOne(final Long id) {
+        return Ux.Jooq.on(SysTabularDao.class)
+                .<SysTabular>findByIdAsync(id)
+                .compose(item -> Ux.thenJsonOne(item, "tabular"));
+    }
+}
+```
+
+Here `tabular` is the configuration file name that you created, then if you re-send the request you should get following response:
+
+```json
+{
+    "data": {
+        "key": 2,
+        "active": true,
+        "name": "散客执行价",
+        "code": "Single",
+        "type": "code.pricecat",
+        "order": 2,
+        "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+        "language": "cn",
+        "createTime": "2018-02-07T12:09:32"
+    }
+}
+```
+
+## 4. Summary
+
+Because our system came from old hotel system migration, that's why we need the mapping file to normalize response. If you focus on new system you can do this normalize in the pojo definition. But you still may met the situation that need you to set the mapping rule, at that time it's helpful for you to continue the works.
 

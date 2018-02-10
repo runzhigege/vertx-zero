@@ -14,4 +14,19 @@ public class TabularService implements TabularStub {
                 .<SysTabular>findByIdAsync(id)
                 .compose(item -> Ux.thenJsonOne(item, "tabular"));
     }
+
+    @Override
+    public Future<JsonObject> create(final JsonObject data) {
+        return null;
+    }
+
+    @Override
+    public Future<JsonObject> update(final Long id, final JsonObject data) {
+        return null;
+    }
+
+    @Override
+    public Future<JsonObject> delete(final Long id) {
+        return null;
+    }
 }

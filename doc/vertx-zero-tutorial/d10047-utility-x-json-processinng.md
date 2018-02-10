@@ -5,6 +5,8 @@ The first batch methods in Utility X is for Json Processing, these methods start
 * `static <T> JsonObject toJson(T entity)`
 * `static <T> JsonObject toJson(T entity, String pojo)`
 * `static <T> JsonObject toJsonFun(T entity, Function<JsonObject,JsonObject> convert)`
+* `static <T> T fromJson(JsonObject data, Class<T> clazz)`
+* `static <T> T fromJson(JsonObject data, Class<T> clazz, String pojo)`
 
 Above three methods could process the data type conversion of `io.vertx.core.json.JsonObject`. this chapter focus on these three methods usage. Before you do this testing, we'll create new Data Object for the type `T`.
 
@@ -156,7 +158,9 @@ This chapter focus on the last method `toJsonFun(T,Function)`, it's for conversi
 
 Here you could provide a function `Function<JsonObject,JsonObject>`, this function could help you to convert the original JsonObject to new one, you can define your own rules.
 
-## 4. Summary
+## 4. Direct From
+
+## 5. Summary
 
 These three Apis are provided for following scenarios:
 

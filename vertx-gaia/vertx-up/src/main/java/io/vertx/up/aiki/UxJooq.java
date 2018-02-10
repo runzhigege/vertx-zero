@@ -36,31 +36,112 @@ public class UxJooq {
         this.vertxDAO = (VertxDAO) JooqInfix.getDao(clazz);
     }
 
-    /**
-     * Search operation
-     *
-     * @param inquiry
-     * @param <T>
-     * @return
-     */
-    public <T> Future<List<T>> searchAsync(final Inquiry inquiry) {
-
-        return null;
-    }
-
+    // CRUD - Read -----------------------------------------------------
+    // Get by id
     public <T> Future<T> findByIdAsync(final Object id) {
         final CompletableFuture<T> future =
                 this.vertxDAO.findByIdAsync(id);
         return Async.toFuture(future);
     }
 
+    // Get all
+    public <T> Future<List<T>> findAllAsync() {
+        final CompletableFuture<List<T>> future =
+                this.vertxDAO.findAllAsync();
+        return Async.toFuture(future);
+    }
+
+    // CRUD - Create ---------------------------------------------------
+    // Create entity
+    public <T> Future<T> insertAsync(final T entity) {
+        final CompletableFuture<Void> future =
+                this.vertxDAO.insertAsync(entity);
+        return Future.succeededFuture(entity);
+    }
+
+    // Create entity
+    public <T> Future<T> insertReturningPrimaryAsync(final T entity) {
+        final CompletableFuture<T> future =
+                this.vertxDAO.insertReturningPrimaryAsync(entity);
+        return Async.toFuture(future);
+    }
+
+    // Create entities
+    public <T> Future<List<T>> insertAsync(final List<T> entities) {
+        final CompletableFuture<Void> future =
+                this.vertxDAO.insertAsync(entities);
+        return Future.succeededFuture(entities);
+    }
+
+    // CRUD - Update ----------------------------------------------------
+    // Update entity
+    public <T> Future<T> updateAsync(final T entity) {
+        final CompletableFuture<T> future =
+                this.vertxDAO.updateAsync(entity);
+        return Async.toFuture(future);
+    }
+
+    public <T> Future<List<T>> updateAsync(final List<T> entities) {
+        final CompletableFuture<Void> future =
+                this.vertxDAO.updateAsync(entities);
+        return Future.succeededFuture(entities);
+    }
+
+    // CRUD - Delete ----------------------------------------------------
+    public <T> Future<T> deleteAsync(final T entity) {
+        final CompletableFuture<Void> future =
+                this.vertxDAO.deleteAsync(Arrays.asList(entity));
+        return Future.succeededFuture(entity);
+    }
+
+    public <T> Future<Boolean> deleteByIdAsync(final Object id) {
+        final CompletableFuture<Void> future =
+                this.vertxDAO.deleteByIdAsync(id);
+        return Future.succeededFuture(Boolean.TRUE);
+    }
+
+    public <T> Future<Boolean> deleteByIdAsync(final Collection<Object> ids) {
+        final CompletableFuture<Void> future =
+                this.vertxDAO.deleteByIdAsync(ids);
+        return Future.succeededFuture(Boolean.TRUE);
+    }
+
+    public <T> Future<Boolean> deleteByIdAsync(final Object... ids) {
+        final CompletableFuture<Void> future =
+                this.vertxDAO.deleteByIdAsync(Arrays.asList(ids));
+        return Future.succeededFuture(Boolean.TRUE);
+    }
+
+    // Fetch Operation --------------------------------------------------
+    // Fetch One
     public <T> Future<T> fetchOneAsync(final String column, final Object value) {
         final CompletableFuture<T> future =
                 this.vertxDAO.fetchOneAsync(DSL.field(column), value);
         return Async.toFuture(future);
     }
 
+    public <T> Future<T> fetchOneAndAsync(final JsonObject andFilters) {
+        final Condition condition = transform(andFilters, Operator.AND);
+        final CompletableFuture<T> future =
+                this.vertxDAO.fetchOneAsync(condition);
+        return Async.toFuture(future);
+    }
+
+    public <T> Future<T> fetchOneOrAsync(final JsonObject orFilters) {
+        final Condition condition = transform(orFilters, Operator.OR);
+        final CompletableFuture<T> future =
+                this.vertxDAO.fetchOneAsync(condition);
+        return Async.toFuture(future);
+    }
+
+    // Fetch List
     public <T> Future<List<T>> fetchAsync(final String column, final Object value) {
+        final CompletableFuture<List<T>> future =
+                this.vertxDAO.fetchAsync(DSL.field(column), Arrays.asList(value));
+        return Async.toFuture(future);
+    }
+
+    public <T> Future<List<T>> fetchInAsync(final String column, final Object... value) {
         final CompletableFuture<List<T>> future =
                 this.vertxDAO.fetchAsync(DSL.field(column), Arrays.asList(value));
         return Async.toFuture(future);
@@ -80,18 +161,14 @@ public class UxJooq {
         return Async.toFuture(future);
     }
 
-    public <T> Future<List<T>> fetchInAsync(final String column, final Object... value) {
-        final CompletableFuture<List<T>> future =
-                this.vertxDAO.fetchAsync(DSL.field(column), Arrays.asList(value));
-        return Async.toFuture(future);
+    // Search Operation --------------------------------------------------
+    // Search ( Pager, Sort, Projection )
+    public <T> Future<List<T>> searchAsync(final Inquiry inquiry) {
+
+        return null;
     }
 
-    public <T> Future<T> updateOneAsync(T updated) {
-        final CompletableFuture<T> future =
-                this.vertxDAO.updateAsync(updated);
-        return Async.toFuture(future.completedFuture(updated));
-    }
-
+    // Condition ---------------------------------------------------------
     public static Condition transform(final JsonObject filters, final Operator operator) {
         Condition condition = null;
         for (final String field : filters.fieldNames()) {
