@@ -18,7 +18,6 @@ public class CommonEndurer implements Handler<RoutingContext> {
     @Override
     public void handle(final RoutingContext event) {
         if (event.failed()) {
-            System.out.println(event.data());
             event.failure().printStackTrace();
         }
     }
