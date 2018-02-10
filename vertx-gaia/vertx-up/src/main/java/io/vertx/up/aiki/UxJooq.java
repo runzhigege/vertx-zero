@@ -196,7 +196,7 @@ public class UxJooq {
             if (Types.isJArray(value)) {
                 value = ((JsonArray) value).getList().toArray();
             }
-            final Condition item = fun.apply(targetField, value);
+            final Condition item = fun.apply(targetField.trim(), value);
             condition = opCond(condition, item, Operator.AND);
             // Function condition inject
         }
@@ -206,10 +206,10 @@ public class UxJooq {
 
     private static String getKey(final String field) {
         if (!field.contains(",")) {
-            return "=";
+            return Inquiry.Op.EQ;
         } else {
             final String opStr = field.split(",")[Values.ONE];
-            return StringUtil.isNil(opStr) ? "=" : opStr.trim().toLowerCase();
+            return StringUtil.isNil(opStr) ? Inquiry.Op.EQ : opStr.trim().toLowerCase();
         }
     }
 
