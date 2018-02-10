@@ -149,13 +149,6 @@ public class UxJooq {
         return Async.toFuture(future);
     }
 
-    public <T> Future<T> fetchOneOrAsync(final JsonObject orFilters) {
-        final Condition condition = transform(orFilters, Operator.OR);
-        final CompletableFuture<T> future =
-                this.vertxDAO.fetchOneAsync(condition);
-        return Async.toFuture(future);
-    }
-
     // Fetch List
     public <T> Future<List<T>> fetchAsync(final String column, final Object value) {
         final CompletableFuture<List<T>> future =
