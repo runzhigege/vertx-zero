@@ -39,4 +39,20 @@ public class D10047Tc extends TestBase {
         Assert.assertEquals(result.getString("username"),
                 result.getString("email"));
     }
+
+    @Test
+    public void testFromJson() {
+        final JsonObject data = this.getJson("d10047.json");
+        final D10047Obj obj = Ux.fromJson(data, D10047Obj.class);
+        System.out.println(obj);
+        Assert.assertNotNull(obj);
+    }
+
+    @Test
+    public void testFromJsonMapping() {
+        final JsonObject data = this.getJson("d10047-mapping.json");
+        final D10047Obj obj = Ux.fromJson(data, D10047Obj.class, "d10047");
+        System.out.println(obj);
+        Assert.assertNotNull(obj);
+    }
 }

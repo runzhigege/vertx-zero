@@ -40,4 +40,14 @@ public class D10047Obj implements Serializable {
     public void setMale(final boolean male) {
         this.male = male;
     }
+
+    @Override
+    public String toString() {
+        return "D10047Obj{" +
+                "name='" + this.name + '\'' +
+                ", email='" + this.email + '\'' +
+                ", age=" + this.age +
+                ", male=" + this.male +
+                '}';
+    }
 }

@@ -101,7 +101,7 @@ Here we could see that `Ux.toJson` method could convert a data object to JsonObj
 This chapter focus on `toJson(T,String)` method for conversion between Data Object and Json Object based on configuration files. Firstly you should create new configuration file:
 
 ```yaml
-type: "io.vertx.up.aiki.D10047Tc"
+type: "io.vertx.up.aiki.D10047Obj"
 mapping:
   name: username
 ```
@@ -160,7 +160,54 @@ Here you could provide a function `Function<JsonObject,JsonObject>`, this functi
 
 ## 4. Direct From
 
-## 5. Summary
+This chapter focus on `fromJson(JsonObject,Class<T>)`  method for conversion between Data Object and Json Object. The testing code should be as following:
+
+```java
+
+    @Test
+    public void testFromJson() {
+        final JsonObject data = this.getJson("d10047.json");
+        final D10047Obj obj = Ux.fromJson(data, D10047Obj.class);
+        System.out.println(obj);
+        Assert.assertNotNull(obj);
+    }
+```
+
+This method is related to `toJson(T)`, the conversion direction is different only, here you should see following output in console
+
+```shell
+D10047Obj{name='Lang', email='lang.yu@hpe.com', age=32, male=true}
+```
+
+## 5. Mapping From
+
+This method will involve the same mapping file:
+
+```yaml
+type: "io.vertx.up.aiki.D10047Obj"
+mapping:
+  name: username
+```
+
+It's related to `toJson(T,String)`, also will use pojo file to do this conversion
+
+```java
+    @Test
+    public void testFromJsonMapping() {
+        final JsonObject data = this.getJson("d10047-mapping.json");
+        final D10047Obj obj = Ux.fromJson(data, D10047Obj.class, "d10047");
+        System.out.println(obj);
+        Assert.assertNotNull(obj);
+    }
+```
+
+The same output will be seen in console as following:
+
+```shell
+D10047Obj{name='Lang', email='lang.yu@hpe.com', age=32, male=true}
+```
+
+## 6. Summary
 
 These three Apis are provided for following scenarios:
 
