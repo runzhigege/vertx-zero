@@ -44,8 +44,20 @@ public class UxJooq {
      * @return
      */
     public <T> Future<List<T>> searchAsync(final Inquiry inquiry) {
-        
+
         return null;
+    }
+
+    public <T> Future<T> findByIdAsync(final Object id) {
+        final CompletableFuture<T> future =
+                this.vertxDAO.findByIdAsync(id);
+        return Async.toFuture(future);
+    }
+
+    public <T> Future<T> fetchOneAsync(final String column, final Object value) {
+        final CompletableFuture<T> future =
+                this.vertxDAO.fetchOneAsync(DSL.field(column), value);
+        return Async.toFuture(future);
     }
 
     public <T> Future<List<T>> fetchAsync(final String column, final Object value) {
@@ -71,12 +83,6 @@ public class UxJooq {
     public <T> Future<List<T>> fetchInAsync(final String column, final Object... value) {
         final CompletableFuture<List<T>> future =
                 this.vertxDAO.fetchAsync(DSL.field(column), Arrays.asList(value));
-        return Async.toFuture(future);
-    }
-
-    public <T> Future<T> fetchOneAsync(final String column, final Object value) {
-        final CompletableFuture<T> future =
-                this.vertxDAO.fetchOneAsync(DSL.field(column), value);
         return Async.toFuture(future);
     }
 
