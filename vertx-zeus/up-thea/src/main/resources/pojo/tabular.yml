@@ -1,11 +1,11 @@
-      type: "up.god.domain.tables.pojos.SysTabular"
-      mapping:
-        pkId: key
-        isActive: active
-        zsigma: sigma
-        zlanguage: language
-        zcreateTime: createTime
-        scode: code
-        stype: type
-        iorder: order
-        sname: name
+type: "up.god.domain.tables.pojos.SysTabular"
+mapping:
+  pkId: key
+  isActive: active
+  zsigma: sigma
+  zlanguage: language
+  zcreateTime: createTime
+  scode: code
+  stype: type
+  iorder: order
+  sname: name

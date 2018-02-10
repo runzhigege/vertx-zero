@@ -71,6 +71,14 @@ public final class Ux {
         return To.toJson(entity, pojo);
     }
 
+    public static <T> T fromJson(final JsonObject data, final Class<T> clazz) {
+        return From.fromJson(data, clazz, "");
+    }
+
+    public static <T> T fromJson(final JsonObject data, final Class<T> clazz, final String pojo) {
+        return From.fromJson(data, clazz, pojo);
+    }
+
     // T -> JsonObject ( with convert )
     public static <T> JsonObject toJsonFun(final T entity, final Function<JsonObject, JsonObject> convert) {
         return To.toJson(entity, convert);
@@ -543,7 +551,7 @@ public final class Ux {
         return Fluctuate.thenParallelArray(source, generateFun, operatorFun);
     }
 
-    public static Future<JsonObject> thenParallelArray(final Future<JsonArray>... sources){
+    public static Future<JsonObject> thenParallelArray(final Future<JsonArray>... sources) {
         return Fluctuate.thenParallelArray(sources);
     }
 
