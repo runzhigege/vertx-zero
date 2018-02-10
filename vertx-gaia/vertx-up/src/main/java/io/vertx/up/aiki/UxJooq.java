@@ -10,6 +10,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.tool.StringUtil;
 import io.vertx.up.tool.mirror.Types;
 import io.vertx.zero.eon.Values;
+import net.sf.cglib.beans.BeanCopier;
 import org.jooq.Condition;
 import org.jooq.Operator;
 import org.jooq.impl.DSL;
@@ -21,6 +22,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 @SuppressWarnings("all")
@@ -60,10 +62,15 @@ public class UxJooq {
     }
 
     // Create entity
-    public <T> Future<T> insertReturningPrimaryAsync(final T entity) {
-        final CompletableFuture<T> future =
+    public <T> Future<T> insertReturningPrimaryAsync(final T entity, final Consumer<Long> consumer) {
+        final CompletableFuture<Long> future =
                 this.vertxDAO.insertReturningPrimaryAsync(entity);
-        return Async.toFuture(future);
+        return Async.toFuture(future).compose(id -> {
+            if (null != consumer) {
+                consumer.accept(id);
+            }
+            return Future.succeededFuture(entity);
+        });
     }
 
     // Create entities
@@ -76,15 +83,30 @@ public class UxJooq {
     // CRUD - Update ----------------------------------------------------
     // Update entity
     public <T> Future<T> updateAsync(final T entity) {
-        final CompletableFuture<T> future =
+        final CompletableFuture<Void> future =
                 this.vertxDAO.updateAsync(entity);
-        return Async.toFuture(future);
+        return Future.succeededFuture(entity);
     }
 
     public <T> Future<List<T>> updateAsync(final List<T> entities) {
         final CompletableFuture<Void> future =
                 this.vertxDAO.updateAsync(entities);
         return Future.succeededFuture(entities);
+    }
+
+    // CRUD - Upsert ----------------------------------------------------
+    public <T> Future<T> saveAsync(final Object id, final T updated) {
+        final Function<T, T> copyFun = (old) -> {
+            final BeanCopier copier = BeanCopier.create(old.getClass(), updated.getClass(), false);
+            copier.copy(updated, old, null);
+            return old;
+        };
+        return saveAsync(id, copyFun);
+    }
+
+    public <T> Future<T> saveAsync(final Object id, final Function<T, T> copyFun) {
+        return this.<T>findByIdAsync(id).compose(old ->
+                this.<T>updateAsync(copyFun.apply(old)));
     }
 
     // CRUD - Delete ----------------------------------------------------
