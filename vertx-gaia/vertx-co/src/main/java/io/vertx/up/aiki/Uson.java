@@ -1,5 +1,6 @@
 package io.vertx.up.aiki;
 
+import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
@@ -99,6 +100,10 @@ public class Uson {
     public JsonObject to() {
         LOGGER.info(Info.STREAM_END, String.valueOf(this.hashCode()), this.objectReference);
         return this.objectReference;
+    }
+
+    public Future<JsonObject> toFuture() {
+        return Future.succeededFuture(this.to());
     }
 
     public Object get(final String field) {

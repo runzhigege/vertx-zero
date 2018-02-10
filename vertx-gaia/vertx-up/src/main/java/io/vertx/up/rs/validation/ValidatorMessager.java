@@ -201,7 +201,6 @@ public abstract class ValidatorMessager implements MessageInterpolator {
         try {
             if (bundle != null) {
                 parameterValue = new String(bundle.getString(this.removeCurlyBraces(parameterName)).getBytes(Values.ENCODING_ISO_8859_1), Values.ENCODING);
-                System.out.println(parameterValue);
                 if (recursive) {
                     parameterValue = this.interpolateBundleMessage(parameterValue, bundle, locale, recursive);
                 }

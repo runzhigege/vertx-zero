@@ -5,16 +5,18 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.jooq.JooqInfix;
+import io.vertx.up.atom.query.Criteria;
 import io.vertx.up.atom.query.Inquiry;
+import io.vertx.up.atom.query.Pager;
 import io.vertx.up.log.Annal;
 import io.vertx.up.tool.StringUtil;
 import io.vertx.up.tool.mirror.Types;
 import io.vertx.zero.eon.Values;
 import net.sf.cglib.beans.BeanCopier;
-import org.jooq.Condition;
-import org.jooq.Operator;
+import org.jooq.*;
 import org.jooq.impl.DSL;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -178,9 +180,132 @@ public class UxJooq {
 
     // Search Operation --------------------------------------------------
     // Search ( Pager, Sort, Projection )
-    public <T> Future<List<T>> searchAsync(final Inquiry inquiry) {
+    // Because you want to do projection remove, it means that you could not pass List<T> in current method.
 
-        return null;
+    public Future<JsonObject> searchOrAsync(final Inquiry inquiry) {
+        return this.searchOrAsync(inquiry, "");
+    }
+
+    public Future<JsonObject> searchOrAsync(final Inquiry inquiry, final String pojo) {
+        // Pager, Sort, Criteria, Projection
+        final JsonObject result = new JsonObject();
+        return searchDirect(inquiry, Operator.OR)
+                .compose(array -> Ux.thenJsonMore(array.getList(), pojo))
+                .compose(array -> {
+                    result.put("list", array);
+                    return countSearchAsync(inquiry, Operator.OR);
+                })
+                .compose(count -> {
+                    result.put("count", count);
+                    return Future.succeededFuture(result);
+                });
+    }
+
+    public Future<JsonObject> searchAndAsync(final Inquiry inquiry) {
+        return this.searchAndAsync(inquiry, "");
+    }
+
+    public Future<JsonObject> searchAndAsync(final Inquiry inquiry, final String pojo) {
+        // Pager, Sort, Criteria, Projection
+        final JsonObject result = new JsonObject();
+        return searchDirect(inquiry, Operator.AND)
+                .compose(array -> Ux.thenJsonMore(array.getList(), pojo))
+                .compose(array -> {
+                    result.put("list", array);
+                    return countSearchAsync(inquiry, Operator.AND);
+                })
+                .compose(count -> {
+                    result.put("count", count);
+                    return Future.succeededFuture(result);
+                });
+    }
+
+
+    public <T> Future<List<T>> searchAndListAsync(final Inquiry inquiry) {
+        // Fast mode is search AND operator
+        return searchAsync(inquiry, Operator.AND);
+    }
+
+    public <T> Future<List<T>> searchOrListAsync(final Inquiry inquiry) {
+        // Fast mode is search AND operator
+        return searchAsync(inquiry, Operator.OR);
+    }
+
+    private Future<JsonArray> searchDirect(final Inquiry inquiry, final Operator operator) {
+        // Pager, Sort, Criteria, Projection
+        return searchAsync(inquiry, operator)
+                .compose(list -> {
+                    if (null == inquiry.getProjection()) {
+                        return Ux.thenJsonMore(list);
+                    } else {
+                        return Ux.thenJsonMore(list)
+                                .compose(array -> Uarr.create(array)
+                                        .remove(inquiry.getProjection().toArray(new String[]{}))
+                                        .toFuture());
+                    }
+                });
+    }
+
+    private <T> Future<Integer> countSearchAsync(final Inquiry inquiry, final Operator operator) {
+        final Criteria criteria = inquiry.getCriteria();
+        final Function<DSLContext, Integer> function
+                = dslContext -> null == criteria ? dslContext.fetchCount(this.vertxDAO.getTable()) :
+                dslContext.fetchCount(this.vertxDAO.getTable(), transform(criteria.toJson(), operator));
+        return Async.toFuture(this.vertxDAO.executeAsync(function));
+    }
+
+    public <T> Future<List<T>> searchAsync(final Inquiry inquiry, final Operator operator) {
+        // Pager, Sort, Criteria Only, this mode do not support projection
+        final Function<DSLContext, List<T>> function
+                = (dslContext) -> {
+            // Started steps
+            final SelectWhereStep started = dslContext.selectFrom(this.vertxDAO.getTable());
+            // Condition set
+            SelectConditionStep conditionStep = null;
+            if (null != inquiry.getCriteria()) {
+                final Condition condition = transform(inquiry.getCriteria().toJson(), operator);
+                conditionStep = started.where(condition);
+            }
+            // Sorted Enabled
+            SelectSeekStepN selectStep = null;
+            if (null != inquiry.getSorter()) {
+                final JsonObject sorter = inquiry.getSorter().toJson();
+                final List<OrderField> orders = new ArrayList<>();
+                for (final String field : sorter.fieldNames()) {
+                    final boolean asc = sorter.getBoolean(field);
+                    orders.add(asc ? DSL.field(field).asc() : DSL.field(field).desc());
+                }
+                if (null == conditionStep) {
+                    selectStep = started.orderBy(orders);
+                } else {
+                    selectStep = conditionStep.orderBy(orders);
+                }
+            }
+            // Pager Enabled
+            SelectWithTiesAfterOffsetStep pagerStep = null;
+            if (null != inquiry.getPager()) {
+                final Pager pager = inquiry.getPager();
+                if (null == selectStep && null == conditionStep) {
+                    pagerStep = started.offset(pager.getStart()).limit(pager.getEnd());
+                } else if (null == selectStep) {
+                    pagerStep = conditionStep.offset(pager.getStart()).limit(pager.getEnd());
+                } else {
+                    pagerStep = selectStep.offset(pager.getStart()).limit(pager.getEnd());
+                }
+            }
+            // Returned one by one
+            if (null != pagerStep) {
+                return pagerStep.fetch(this.vertxDAO.mapper());
+            }
+            if (null != selectStep) {
+                return selectStep.fetch(this.vertxDAO.mapper());
+            }
+            if (null != conditionStep) {
+                return conditionStep.fetch(this.vertxDAO.mapper());
+            }
+            return started.fetch(this.vertxDAO.mapper());
+        };
+        return Async.toFuture(this.vertxDAO.executeAsync(function));
     }
 
     // Condition ---------------------------------------------------------

@@ -107,6 +107,7 @@
   * [D10064 - Jooq/CRUD, Fetch One Operation](doc/vertx-zero-tutorial/d10064-jooqcrud-fetch-one-operation.md)
   * [D10065 - Jooq/CRUD, Fetch List Operation](doc/vertx-zero-tutorial/d10065-jooqcrud-fetch-list-operation.md)
   * [D10066 - Jooq/CRUD, Filter Syntax](doc/vertx-zero-tutorial/d10066-jooqcrud-filter-syntax.md)
+  * [D10067 - Jooq/CRUD, Paging/Sorting](doc/vertx-zero-tutorial/d10067-jooqcrud-advanced-search-operation.md)
 
 ## Useful Related Documents
 

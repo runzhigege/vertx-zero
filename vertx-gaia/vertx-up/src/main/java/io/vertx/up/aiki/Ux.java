@@ -8,6 +8,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.FindOptions;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
 import io.vertx.up.atom.query.Sorter;
 import io.vertx.up.exception.WebException;
@@ -317,6 +318,14 @@ public final class Ux {
         return In.request(envelop, 0, JsonObject.class);
     }
 
+    public static Inquiry getInquiry(final JsonObject envelop) {
+        return Query.getInquiry(envelop, "");
+    }
+
+    public static Inquiry getInquiry(final JsonObject envelop, final String pojo) {
+        return Query.getInquiry(envelop, pojo);
+    }
+
     // -> Message<Envelop> -> JsonObject ( Interface mode )
     public static JsonObject getJson1(final Message<Envelop> message) {
         return In.request(message, 1, JsonObject.class);
@@ -501,6 +510,10 @@ public final class Ux {
     }
 
     // ---------------------- New future ----------------------
+    public static <T> Future<JsonArray> thenJsonMore(final List<T> list) {
+        return Future.succeededFuture(To.toArray(list, ""));
+    }
+
     public static <T> Future<JsonArray> thenJsonMore(final List<T> list, final String pojo) {
         return Future.succeededFuture(To.toArray(list, pojo));
     }

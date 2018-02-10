@@ -51,6 +51,10 @@ public class Mirror {
         return this;
     }
 
+    public Mojo mojo() {
+        return this.mojo;
+    }
+
     private void convert(final ConcurrentMap<String, String> mapper) {
         Observable.fromIterable(this.data.fieldNames())
                 .groupBy(mapper::containsKey)

@@ -9,6 +9,10 @@ This chapter we'll move to list fetching operations, here are four apis listed i
 
 Above four apis could be used to fetch the list by different conditions and all the conditions are frequently used in your real projects. This chapter we'll ignore the `filter` explain, focus on basic usage and then we'll go forward to.
 
+Demo projects:
+
+* **Standalone - 6093** : `up-thea`
+
 ## 1. Source Code
 
 ### 1.1. Api
@@ -245,5 +249,5 @@ Above example showed how to fetch list by different filters with condition, you 
 
 ## 3. Summary
 
-This chapter described that how to fetch list from database by different conditions, based on the examples you could know how to fetch list from database. Next chapter we'll introduce the filter details, actually `andFilters `and  `orFilters` are both JsonObject, but there are some specific syntax that zero defined for developers to build complex filters. 
+This chapter described that how to fetch list from database by different conditions, based on the examples you could know how to fetch list from database. Next chapter we'll introduce the filter details, actually `andFilters`and  `orFilters` are both JsonObject, but there are some specific syntax that zero defined for developers to build complex filters.
 
