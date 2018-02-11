@@ -138,7 +138,7 @@ For all tutorial testing cases, you can import following resource with Postman T
    13. [D10058 - Utility X, thenParallelArray/Json](doc/vertx-zero-tutorial/d10058-utility-x-thenparallelarrayjson.md)
    14. [D10059 - Utility X, thenScatterJson](doc/vertx-zero-tutorial/d10059-utility-x-thenscatterjson.md)
    15. [D10060 - Utility X, thenError](doc/vertx-zero-tutorial/d10060-utility-x-thenerror.md)
-7. Jooq for MySql
+7. Jooq for MySqlpl,okmijn123
    1. [D10061 - Jooq/mysql, Configuration](doc/vertx-zero-tutorial/d10061-jooqmysql-configuration.md)
    2. [D10062 - Jooq/CRUD, Read Operation](doc/vertx-zero-tutorial/d10062-jooq-get.md)
    3. [D10063 - Jooq/CRUD, Write Operation](doc/vertx-zero-tutorial/d10063-jooqcreate-operations.md)
@@ -155,9 +155,11 @@ For all tutorial testing cases, you can import following resource with Postman T
    6. [D10073 - Configuration, vertx-mongo.yml](doc/vertx-zero-tutorial/d10073-configuration-vertx-mongoyml.md)
    7. [D10074 - Configuration, vertx-etcd3.yml](doc/vertx-zero-tutorial/d10074-configuration-vertx-etcd3yml.md)
    8. [D10075 - Configuration, vertx-rpc.yml](doc/vertx-zero-tutorial/d10075-configuration-vertx-rpcyml.md)
-9. Vert.x Native Support
-
-10. Error Code List
+9. Native Support
+   1. [D10076 - Vert.x Native, MySqlClient](doc/vertx-zero-tutorial/d10076-vertx-native-mysqlclient.md)
+   2. [D10078 - Vert.x Native, MongoClient](doc/vertx-zero-tutorial/d10077-vertx-native-mongoclient.md)
+10. Third Part Reference
+    1. [D10077 - Reference, Mongo Setup](doc/vertx-zero-tutorial/d10077-third-part-mongo-setup.md)
 
 ## 4. Logging in Zero
 
