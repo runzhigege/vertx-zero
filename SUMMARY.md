@@ -108,6 +108,14 @@
   * [D10065 - Jooq/CRUD, Fetch List Operation](doc/vertx-zero-tutorial/d10065-jooqcrud-fetch-list-operation.md)
   * [D10066 - Jooq/CRUD, Filter Syntax](doc/vertx-zero-tutorial/d10066-jooqcrud-filter-syntax.md)
   * [D10067 - Jooq/CRUD, Paging/Sorting](doc/vertx-zero-tutorial/d10067-jooqcrud-advanced-search-operation.md)
+  * [D10068 - Configuration, vertx.yml](doc/vertx-zero-tutorial/d10068-fragment-yaml-configuration.md)
+  * [D10069 - Configuration, vertx-server.yml](doc/vertx-zero-tutorial/d10069-configuration-vertx-serveryml.md)
+  * [D10070 - Configuration, vertx-inject.yml](doc/vertx-zero-tutorial/d10070-configuration-vertx-injectyml.md)
+  * [D10071 - Configuration, vertx-error.yml](doc/vertx-zero-tutorial/d10071-configuration-vertx-erroryml.md)
+  * [D10072 - Configuration, vertx-mysql.yml](doc/vertx-zero-tutorial/d10072-configuration-vertx-mysqlyml.md)
+  * [D10073 - Configuration, vertx-mongo.yml](doc/vertx-zero-tutorial/d10073-configuration-vertx-mongoyml.md)
+  * [D10074 - Configuration, vertx-etcd3.yml](doc/vertx-zero-tutorial/d10074-configuration-vertx-etcd3yml.md)
+  * [D10075 - Configuration, vertx-rpc.yml](doc/vertx-zero-tutorial/d10075-configuration-vertx-rpcyml.md)
 
 ## Useful Related Documents
 
