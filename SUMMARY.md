@@ -117,7 +117,8 @@
   * [D10074 - Configuration, vertx-etcd3.yml](doc/vertx-zero-tutorial/d10074-configuration-vertx-etcd3yml.md)
   * [D10075 - Configuration, vertx-rpc.yml](doc/vertx-zero-tutorial/d10075-configuration-vertx-rpcyml.md)
   * [D10076 - Vert.x Native, MySqlClient](doc/vertx-zero-tutorial/d10076-vertx-native-mysqlclient.md)
-  * [D10077 - Vert.x Native, MongoClient](doc/vertx-zero-tutorial/d10077-vertx-native-mongoclient.md)
+  * [D10077 - Reference, Mongo Setup](doc/vertx-zero-tutorial/d10077-third-part-mongo-setup.md)
+  * [D10078 - Vert.x Native, MongoClient](doc/vertx-zero-tutorial/d10077-vertx-native-mongoclient.md)
 
 ## Useful Related Documents
 
