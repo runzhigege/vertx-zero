@@ -45,6 +45,8 @@ The default extensions `lime` of zero system are as following:
 * `server`: The server configuration of zero system, default enabled `http` server.
 * `inject`: The default injection components in zero system, you can develop user-defined `Infix` and configured in zero system. Zero system support plug-in components, we'll introduce the plug-in development in forward tutorials.
 
+All above `lime` nodes are default imported by zero system, though you haven't configured in `vertx.yml`, these extension were enabled by zero system. If you provide the extension files, the default configuration will be overwritten.
+
 ## 3. Vert.x Cluster: clustered
 
 Under the node `zero -> vertx`,  we could set vert.x cluster configuration part, the segment is as following:
