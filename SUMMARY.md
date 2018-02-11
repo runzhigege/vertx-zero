@@ -108,6 +108,8 @@
   * [D10065 - Jooq/CRUD, Fetch List Operation](doc/vertx-zero-tutorial/d10065-jooqcrud-fetch-list-operation.md)
   * [D10066 - Jooq/CRUD, Filter Syntax](doc/vertx-zero-tutorial/d10066-jooqcrud-filter-syntax.md)
   * [D10067 - Jooq/CRUD, Paging/Sorting](doc/vertx-zero-tutorial/d10067-jooqcrud-advanced-search-operation.md)
+  * [D10068 - Configuration, vertx.yml](doc/vertx-zero-tutorial/d10068-fragment-yaml-configuration.md)
+  * [D10069 - Configuration, vertx-server.yml](doc/vertx-zero-tutorial/d10069-configuration-vertx-serveryml.md)
 
 ## Useful Related Documents
 
