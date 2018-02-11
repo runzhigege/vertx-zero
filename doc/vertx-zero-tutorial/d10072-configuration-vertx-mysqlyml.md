@@ -32,7 +32,7 @@ mysql:
   port: 3306
   username: root
   password: root
-  database: DB_HTL
+  database: DB_ZERO
 ```
 
 Above all keys are vert.x native configuration and it could be passed into vert.x mysql client directly, you can refer the link to check all the valid configuration information: [http://vertx.io/docs/vertx-mysql-postgresql-client/java/\#\_configuration](http://vertx.io/docs/vertx-mysql-postgresql-client/java/#_configuration)
