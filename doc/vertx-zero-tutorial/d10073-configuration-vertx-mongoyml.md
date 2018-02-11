@@ -10,7 +10,7 @@ Be sure the extension file name existing in `lime` node in the major configurati
 
 ```yaml
 zero:
-  lime: mongo, etcd3, rpc
+  lime: mongo
   vertx:
     instance:
     - name: vx-zero
@@ -40,6 +40,4 @@ Just like `vertx-mysql.yml` configuration, here all the `mongo` node keys are na
 ## 2. Summary
 
 Here are the mongo db standalone configuration part and in forward tutorials we'll introduce the client usage in zero system.
-
-
 
