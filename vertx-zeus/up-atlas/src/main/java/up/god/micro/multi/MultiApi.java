@@ -1,4 +1,4 @@
-package up.god.micro.rpc;
+package up.god.micro.multi;
 
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.EndPoint;
@@ -9,10 +9,9 @@ import javax.ws.rs.PathParam;
 
 @EndPoint
 @Path("/api")
-public interface SingleApi {
-
-    @Path("rpc/{name}")
+public interface MultiApi {
+    @Path("ipc/multi/{name}")
     @GET
-    @Address("ZERO://RPC/FIRST")
+    @Address("ZERO://RPC/MULTI")
     String sayHello(@PathParam("name") String name);
 }

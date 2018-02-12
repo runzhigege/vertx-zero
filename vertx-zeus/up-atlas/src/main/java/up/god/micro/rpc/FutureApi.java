@@ -9,10 +9,9 @@ import javax.ws.rs.PathParam;
 
 @EndPoint
 @Path("/api")
-public interface SingleApi {
-
-    @Path("rpc/{name}")
+public interface FutureApi {
+    @Path("ipc/future/{name}")
     @GET
-    @Address("ZERO://RPC/FIRST")
+    @Address("ZERO://RPC/SECOND")
     String sayHello(@PathParam("name") String name);
 }

@@ -19,8 +19,9 @@ public class FinalTransit implements Transit {
         // 1. Extract type
         final Object proxy = Instance.singleton(this.method.getDeclaringClass());
         // 2. Async type
-        return ReturnTransit.build(
-                Fn.getJvm(() -> this.method.invoke(proxy, data), this.method)
+        return Fn.getJvm(
+                () -> ReturnTransit.build(this.method.invoke(proxy, data), this.method),
+                this.method
         );
     }
 

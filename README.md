@@ -162,6 +162,9 @@ For all tutorial testing cases, you can import following resource with Postman T
     1. [D10082 - Micro, Environment Preparing](doc/vertx-zero-tutorial/d10082-micro-environment-preparing.md)
     2. [D10083 - Micro, Rpc Mode](doc/vertx-zero-tutorial/d10083-micro-rpc-mode.md)
     3. [D10084 - Micro, Configuration](doc/vertx-zero-tutorial/d10084-micro-yaml-configuration.md)
+    4. [D10085 - Micro, Simple Rpc](doc/vertx-zero-tutorial/d10085-micro-simple-rpc.md)
+    5. [D10086 - Micro, Future with Utility X](doc/vertx-zero-tutorial/d10085-micro-future-with-utility-x.md)
+    6. [D10087 - Micro, Multi Rpc Calls](doc/vertx-zero-tutorial/d10087-micro-multi-rpc-calls.md)
 11. Third Part Reference
     1. [D10077 - Reference, Mongo Setup](doc/vertx-zero-tutorial/d10077-third-part-mongo-setup.md)
     2. [D10079 - Reference, Mini k8s](doc/vertx-zero-tutorial/d10079-reference-mini-k8s.md)
