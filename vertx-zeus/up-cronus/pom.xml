@@ -13,12 +13,12 @@
     <build>
         <plugins>
             <!-- Fat Jar building -->
+            <!--
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
                     <execution>
                         <id>make-assembly</id>
-                        <!-- bind to the packaging phase -->
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
@@ -34,10 +34,10 @@
                             <mainClass>up.god.Anchor</mainClass>
                         </manifest>
                     </archive>
-                    <!-- Do not upload when deploy to maven -->
                     <attach>false</attach>
                 </configuration>
             </plugin>
+            -->
             <!-- Build Docker -->
             <!--
             <plugin>

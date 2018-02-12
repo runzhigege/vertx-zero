@@ -2,10 +2,10 @@ server:
 - name: up-coeus
   type: http
   config:
-    port: 6084
+    port: 6401
     host: 0.0.0.0
 - name: ipc-coeus
   type: ipc
   config:
-    port: 6884
+    port: 6411
     host: 0.0.0.0

@@ -7,5 +7,5 @@ import java.lang.annotation.*;
 @Documented
 @Inherited
 public @interface Up {
-    
+    boolean gateway() default false;
 }
