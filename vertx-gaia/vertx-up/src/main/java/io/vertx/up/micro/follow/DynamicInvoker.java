@@ -1,5 +1,6 @@
 package io.vertx.up.micro.follow;
 
+import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.tool.Jackson;
@@ -15,7 +16,7 @@ public class DynamicInvoker implements Invoker {
         // Verify
         final boolean valid =
                 (void.class != returnType && Void.class != returnType);
-        InvokerUtil.verify(!valid, returnType, paramCls, getClass());
+        InvokerUtil.verify(!valid, returnType, paramCls, this.getClass());
     }
 
     @Override
@@ -38,5 +39,13 @@ public class DynamicInvoker implements Invoker {
         }
         // Return type must not be Envelop because top layer has been finished checking.
         message.reply(Envelop.success(returnValue));
+    }
+
+    @Override
+    public void next(final Object proxy,
+                     final Method method,
+                     final Message<Envelop> message,
+                     final Vertx vertx) {
+
     }
 }

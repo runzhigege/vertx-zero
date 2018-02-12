@@ -1,6 +1,7 @@
 package io.vertx.up.micro.follow;
 
 import io.vertx.core.Future;
+import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
@@ -19,7 +20,7 @@ public class FutureInvoker implements Invoker {
         // Verify
         final boolean valid =
                 Future.class.isAssignableFrom(returnType) && paramCls == Envelop.class;
-        InvokerUtil.verify(!valid, returnType, paramCls, getClass());
+        InvokerUtil.verify(!valid, returnType, paramCls, this.getClass());
     }
 
     @Override
@@ -40,5 +41,13 @@ public class FutureInvoker implements Invoker {
             final Future tResult = Instance.invoke(proxy, method.getName(), envelop);
             tResult.setHandler(Ux.toHandler(message));
         }
+    }
+
+    @Override
+    public void next(final Object proxy,
+                     final Method method,
+                     final Message<Envelop> message,
+                     final Vertx vertx) {
+
     }
 }

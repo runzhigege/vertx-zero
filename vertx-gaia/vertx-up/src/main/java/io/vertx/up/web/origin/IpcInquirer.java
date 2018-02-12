@@ -1,6 +1,7 @@
 package io.vertx.up.web.origin;
 
 import io.reactivex.Observable;
+import io.vertx.up.annotations.EndPoint;
 import io.vertx.up.annotations.Ipc;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.func.Fn;
@@ -8,10 +9,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.tool.StringUtil;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.tool.mirror.Types;
-import io.vertx.zero.exception.IpcMethodArgException;
-import io.vertx.zero.exception.IpcMethodReturnException;
-import io.vertx.zero.exception.IpcMethodTargetException;
-import io.vertx.zero.exception.UnknownDirectionException;
+import io.vertx.zero.exception.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -37,7 +35,6 @@ public class IpcInquirer implements Inquirer<ConcurrentMap<String, Method>> {
          * Here are some specification for IPC community
          * 1. As IPC server, must extract @Ipc ( from ) part and registred to Etcd
          * 2. This address is published and other nodes could visit current Micro service.
-         * 3. Scan all classes annotated with @Queue only, @Ipc must be used inner @Queue
          */
         final ConcurrentMap<String, Method> addresses = new ConcurrentHashMap<>();
         Observable.fromIterable(classes)
@@ -46,6 +43,7 @@ public class IpcInquirer implements Inquirer<ConcurrentMap<String, Method>> {
                 .filter(method -> method.isAnnotationPresent(Ipc.class))
                 .map(this::ensureTarget)
                 .map(this::ensureSpec)
+                .map(method -> this.ensureAgent(method, classes))
                 .subscribe(method -> {
                     final Annotation annotation = method.getAnnotation(Ipc.class);
                     final String address = Instance.invoke(annotation, "value");
@@ -62,7 +60,7 @@ public class IpcInquirer implements Inquirer<ConcurrentMap<String, Method>> {
      */
     private Method ensureSpec(final Method method) {
         Fn.flingUp(Types.isVoid(method.getReturnType()), LOGGER,
-                IpcMethodReturnException.class, getClass(),
+                IpcMethodReturnException.class, this.getClass(),
                 method);
         final Annotation annotation = method.getAnnotation(Ipc.class);
         final String value = Instance.invoke(annotation, "value");
@@ -71,7 +69,29 @@ public class IpcInquirer implements Inquirer<ConcurrentMap<String, Method>> {
             // This specification is only for continue node
             final Class<?>[] argTypes = method.getParameterTypes();
             Fn.flingUp(1 != argTypes.length || Envelop.class != argTypes[0], LOGGER,
-                    IpcMethodArgException.class, getClass(), method);
+                    IpcMethodArgException.class, this.getClass(), method);
+        }
+        return method;
+    }
+
+    /**
+     * If declaring class is interface, it must contains implementation classes.
+     *
+     * @param classes
+     * @return
+     */
+    private Method ensureAgent(final Method method, final Set<Class<?>> classes) {
+        // Get declare clazz
+        final Class<?> clazz = method.getDeclaringClass();
+        if (clazz.isAnnotationPresent(EndPoint.class)
+                && clazz.isInterface()) {
+            final Long counter = Observable.fromIterable(classes)
+                    .filter(item -> clazz != item)
+                    .filter(clazz::isAssignableFrom)
+                    .count().blockingGet();
+            // If counter == 0, zero system disable this definition
+            Fn.flingUp(0 == counter, LOGGER,
+                    RpcAgentAbsenceException.class, this.getClass(), clazz);
         }
         return method;
     }
@@ -90,14 +110,14 @@ public class IpcInquirer implements Inquirer<ConcurrentMap<String, Method>> {
             // If ( to is null and name is null, value must be required, or the system do not know the direction
             final String from = Instance.invoke(annotation, "value");
             Fn.flingUp(StringUtil.isNil(from), LOGGER,
-                    UnknownDirectionException.class, getClass(),
+                    UnknownDirectionException.class, this.getClass(),
                     method);
             // Passed validation.
             return method;
         }
         // to and name must not be null
         Fn.flingUp(StringUtil.isNil(to) || StringUtil.isNil(name), LOGGER,
-                IpcMethodTargetException.class, getClass(),
+                IpcMethodTargetException.class, this.getClass(),
                 method, to, name);
         return method;
     }
