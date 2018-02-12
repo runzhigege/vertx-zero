@@ -122,6 +122,9 @@
   * [D10079 - Reference, Mini k8s](doc/vertx-zero-tutorial/d10079-reference-mini-k8s.md)
   * [D10080 - Reference, Istio](doc/vertx-zero-tutorial/d10080-reference-istio.md)
   * [D10081 - Reference, Istio Addon](doc/vertx-zero-tutorial/d10081-reference-istio-addon.md)
+  * [D10082 - Micro, Environment Preparing](doc/vertx-zero-tutorial/d10082-micro-environment-preparing.md)
+  * [D10083 - Micro, Rpc Mode](doc/vertx-zero-tutorial/d10083-micro-rpc-mode.md)
+  * [D10084 - Micro, Yaml Configuration](doc/vertx-zero-tutorial/d10084-micro-yaml-configuration.md)
 
 ## Useful Related Documents
 

@@ -158,7 +158,8 @@ For all tutorial testing cases, you can import following resource with Postman T
 9. Native Support
    1. [D10076 - Vert.x Native, MySqlClient](doc/vertx-zero-tutorial/d10076-vertx-native-mysqlclient.md)
    2. [D10078 - Vert.x Native, MongoClient](doc/vertx-zero-tutorial/d10077-vertx-native-mongoclient.md)
-10. Third Part Reference
+10. Service Communication \( gRpc \)
+11. Third Part Reference
     1. [D10077 - Reference, Mongo Setup](doc/vertx-zero-tutorial/d10077-third-part-mongo-setup.md)
     2. [D10079 - Reference, Mini k8s](doc/vertx-zero-tutorial/d10079-reference-mini-k8s.md)
     3. [D10080 - Reference, Istio](doc/vertx-zero-tutorial/d10080-reference-istio.md)
