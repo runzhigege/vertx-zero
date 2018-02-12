@@ -10,7 +10,6 @@ import io.vertx.up.func.Fn;
 import io.vertx.up.tool.Statute;
 import io.vertx.up.tool.mirror.Instance;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -90,7 +89,19 @@ class Fluctuate {
 
     static Future<JsonObject> thenParallelArray(
             final Future<JsonArray>... futures
-    ){
+    ) {
+        final Future<JsonObject> result = Future.future();
+        CompositeFuture.all(Arrays.asList(futures)).setHandler(res -> {
+            final JsonObject resultMap = new JsonObject();
+            Fn.itList(res.result().list(), (item, index) -> resultMap.put(index.toString(), item));
+            result.complete(resultMap);
+        });
+        return result;
+    }
+
+    static Future<JsonObject> thenParallelJson(
+            final Future<JsonObject>... futures
+    ) {
         final Future<JsonObject> result = Future.future();
         CompositeFuture.all(Arrays.asList(futures)).setHandler(res -> {
             final JsonObject resultMap = new JsonObject();

@@ -127,6 +127,7 @@
   * [D10084 - Micro, Configuration](doc/vertx-zero-tutorial/d10084-micro-yaml-configuration.md)
   * [D10085 - Micro, Simple Rpc](doc/vertx-zero-tutorial/d10085-micro-simple-rpc.md)
   * [D10086 - Micro, Future with Utility X](doc/vertx-zero-tutorial/d10085-micro-future-with-utility-x.md)
+  * [D10087 - Micro, Multi Rpc Calls](doc/vertx-zero-tutorial/d10087-micro-multi-rpc-calls.md)
 
 ## Useful Related Documents
 
