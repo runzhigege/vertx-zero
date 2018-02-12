@@ -20,7 +20,7 @@ public class SingleWorker {
     public void sayHello(final Message<Envelop> message) {
         final String name = Ux.getString(message);
         final JsonObject params = new JsonObject().put("name", name);
-        this.client.connect("ipc-coeus", "RPC://HELLO", params, res -> {
+        this.client.connect("ipc-coeus", "RPC://SAY/HELLO", params, res -> {
             if (res.succeeded()) {
                 message.reply(Envelop.success(res.result()));
             } else {
