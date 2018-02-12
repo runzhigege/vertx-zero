@@ -1,20 +1,25 @@
 package io.vertx.up;
 
 import io.vertx.core.Vertx;
-import io.vertx.up.annotations.ApiGateway;
+import io.vertx.core.http.HttpServerOptions;
 import io.vertx.up.annotations.Up;
 import io.vertx.up.boot.DansApplication;
 import io.vertx.up.concurrent.Runner;
+import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.tool.mirror.Anno;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroLauncher;
 import io.vertx.up.web.anima.*;
+import io.vertx.zero.config.ServerVisitor;
 import io.vertx.zero.exception.UpClassArgsException;
 import io.vertx.zero.exception.UpClassInvalidException;
+import io.vertx.zero.micro.config.DynamicVisitor;
 
 import java.lang.annotation.Annotation;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -34,27 +39,38 @@ public class VertxApplication {
         Fn.flingUp(
                 null == clazz,
                 LOGGER,
-                UpClassArgsException.class, getClass());
+                UpClassArgsException.class, this.getClass());
         this.clazz = clazz;
         this.annotationMap = Anno.get(clazz);
         // Must be invalid
         Fn.flingUp(
                 !this.annotationMap.containsKey(Up.class.getName()),
                 LOGGER,
-                UpClassInvalidException.class, getClass(), clazz.getName());
+                UpClassInvalidException.class, this.getClass(), clazz.getName());
     }
 
     public static void run(final Class<?> clazz, final Object... args) {
         Fn.shuntRun(() -> {
             // Run vertx application.
-            if (clazz.isAnnotationPresent(ApiGateway.class)) {
-                // Api Gateway Instance
+            if (isGateway()) {
+                // Api Gateway
                 DansApplication.run(clazz);
             } else {
-                // Common Up Instance
+                // Service Node
                 new VertxApplication(clazz).run(args);
             }
         }, LOGGER);
+    }
+
+    private static boolean isGateway() {
+        // Secondary Scanned for Api Gateway
+        final Set<Integer> apiScanned = new HashSet<>();
+        Fn.flingUp(() -> {
+            final ServerVisitor<HttpServerOptions> visitor =
+                    Instance.singleton(DynamicVisitor.class);
+            apiScanned.addAll(visitor.visit(ServerType.API.toString()).keySet());
+        }, LOGGER);
+        return !apiScanned.isEmpty();
     }
 
     private void run(final Object... args) {

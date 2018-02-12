@@ -6,6 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.Session;
 import io.vertx.up.exception.WebException;
+import io.vertx.up.exception._500InternalServerException;
 import io.vertx.up.func.Fn;
 import io.vertx.up.kidd.Readible;
 import io.vertx.up.log.Annal;
@@ -201,6 +202,10 @@ public class Envelop implements Serializable {
 
     public static <T> Envelop success(final T entity) {
         return new Envelop(entity, HttpStatusCode.OK);
+    }
+
+    public static <T> Envelop failure(final String message) {
+        return new Envelop(new _500InternalServerException(Envelop.class, message));
     }
 
     public static <T> Envelop success(final T entity, final HttpStatusCode status) {

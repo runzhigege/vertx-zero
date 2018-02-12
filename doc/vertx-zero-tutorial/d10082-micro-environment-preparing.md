@@ -81,7 +81,7 @@ Here you can see `etcd1, etcd2, etcd3` three threads, and then you can setup etc
 
 ## 3. Architecture
 
-In zero system, we could configure different zero app \( contains many micro service nodes \) in one etcd, the top configuration path is the name of zero node. You can refer [D10074 - Configuration, vertx-etcd3.yml](/doc/vertx-zero-tutorial/d10074-configuration-vertx-etcd3yml.md) to check etcd3 configuration in zero. Here you could see following configuration information of `vertx-etcd3.yml` :
+In zero system, we could configure different zero app \( contains many micro service nodes \) in one etcd, the top configuration path is the name of zero node. You can refer [D10074 - Configuration, vertx-etcd3.yml](doc/vertx-zero-tutorial/d10074-configuration-vertx-etcd3yml.md) to check etcd3 configuration in zero. Here you could see following configuration information of `vertx-etcd3.yml` :
 
 ```yaml
 etcd:
