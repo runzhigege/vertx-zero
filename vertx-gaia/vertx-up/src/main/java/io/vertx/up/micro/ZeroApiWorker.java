@@ -22,6 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 
 /**
  * Backend for service discovery
@@ -136,22 +137,27 @@ public class ZeroApiWorker extends AbstractVerticle {
         // Add service into current zero system.
         Observable.fromIterable(ids)
                 .map(services::get)
-                .subscribe(item -> {
-                    // Avoid duplicated add
-                    if (!REGISTRY.contains(item.getRegistration())) {
-                        discovery.publish(item, result -> {
-                            if (result.succeeded()) {
-                                final Record record = result.result();
-                                // Add successfully
-                                this.successFinished(record);
-                                // Add to Sets
-                                REGISTRY.add(item.getRegistration());
-                            } else {
-                                LOGGER.info(Info.REG_FAILURE, result.cause().getMessage(), "Add");
-                            }
-                        });
+                .subscribe(item -> this.publishSerivce(discovery, "Add").accept(item));
+    }
+
+    private Consumer<Record> publishSerivce(final ServiceDiscovery discovery, final String flag) {
+        return (item) -> {
+            // Avoid duplicated add
+            if (null == item.getRegistration()
+                    || !REGISTRY.contains(item.getRegistration())) {
+                discovery.publish(item, result -> {
+                    if (result.succeeded()) {
+                        final Record record = result.result();
+                        // Add successfully
+                        this.successFinished(record);
+                        // Add to Sets
+                        REGISTRY.add(item.getRegistration());
+                    } else {
+                        LOGGER.info(Info.REG_FAILURE, result.cause().getMessage(), flag);
                     }
                 });
+            }
+        };
     }
 
 
@@ -159,23 +165,7 @@ public class ZeroApiWorker extends AbstractVerticle {
         // Read the services
         final Set<Record> services = new HashSet<>(ORIGIN.getRegistryData().values());
         Observable.fromIterable(services)
-                .subscribe(item -> {
-                    // Avoid duplicated add
-                    if (null == item.getRegistration() ||
-                            !REGISTRY.contains(item.getRegistration())) {
-                        discovery.publish(item, result -> {
-                            if (result.succeeded()) {
-                                final Record record = result.result();
-                                // Initialized successfully
-                                this.successFinished(record);
-                                // Add to Sets
-                                REGISTRY.add(item.getRegistration());
-                            } else {
-                                LOGGER.info(Info.REG_FAILURE, result.cause().getMessage(), "Init");
-                            }
-                        });
-                    }
-                });
+                .subscribe(item -> this.publishSerivce(discovery, "Init").accept(item));
     }
 
     private ConcurrentMap<Flag, Set<String>> calculateServices(

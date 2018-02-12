@@ -32,7 +32,11 @@ public class Types {
     public static boolean isJArray(final Object value) {
         return Fn.getSemi(null == value, LOGGER,
                 () -> false,
-                () -> JsonArray.class == value.getClass());
+                () -> isJArray(value.getClass()));
+    }
+
+    public static boolean isJArray(final Class<?> clazz) {
+        return JsonArray.class == clazz;
     }
 
     public static boolean isVoid(final Class<?> clazz) {

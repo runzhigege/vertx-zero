@@ -125,6 +125,8 @@
   * [D10082 - Micro, Environment Preparing](doc/vertx-zero-tutorial/d10082-micro-environment-preparing.md)
   * [D10083 - Micro, Rpc Mode](doc/vertx-zero-tutorial/d10083-micro-rpc-mode.md)
   * [D10084 - Micro, Configuration](doc/vertx-zero-tutorial/d10084-micro-yaml-configuration.md)
+  * [D10085 - Micro, Simple Rpc](doc/vertx-zero-tutorial/d10085-micro-simple-rpc.md)
+  * [D10086 - Micro, Future with Utility X](doc/vertx-zero-tutorial/d10085-micro-future-with-utility-x.md)
 
 ## Useful Related Documents
 
