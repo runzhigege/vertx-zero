@@ -1,6 +1,6 @@
 server:
-- name: gateway-athena
+- name: up-athena
   type: api
   config:
-    port: 6000
+    port: 6100
     host: 0.0.0.0

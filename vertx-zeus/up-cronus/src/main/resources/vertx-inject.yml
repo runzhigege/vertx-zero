@@ -1,2 +1,0 @@
-mongo: io.vertx.up.plugin.mongo.MongoInfix
-rpc: io.vertx.up.plugin.rpc.RpcInfix

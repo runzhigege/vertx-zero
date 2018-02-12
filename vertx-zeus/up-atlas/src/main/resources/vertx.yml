@@ -1,8 +1,8 @@
 zero:
-  lime: jooq
+  lime: etcd3, rpc
   vertx:
     instance:
-    - name: vx-zero
+    - name: zero-micro
       options:
         # Fix block 2000 limit issue.
         maxEventLoopExecuteTime: 30000000000
