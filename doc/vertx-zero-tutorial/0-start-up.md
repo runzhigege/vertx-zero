@@ -101,17 +101,15 @@ In zero framework, the etcd3 used e3w, please refer the link to check how to pre
 
 ### 2.2. Api Gateway
 
-Api Gateway source code is similar with standalone service as following:
+Api Gateway source code is the same as standalone service as following:
 
 ```java
 package up.god;
 
 import io.vertx.up.VertxApplication;
-import io.vertx.up.annotations.ApiGateway;
 import io.vertx.up.annotations.Up;
 
 @Up
-@ApiGateway
 public class Anchor {
 
     public static void main(final String[] args) {

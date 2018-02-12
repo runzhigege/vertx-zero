@@ -42,15 +42,15 @@ public class ZeroRpcAgent extends AbstractVerticle {
             final VertxServerBuilder builder = VertxServerBuilder
                     .forAddress(this.vertx, config.getHost(), config.getPort());
             /**
-             * 5.Service added.
+             * 3.Service added.
              */
             {
-                // UnityService add
+                // UnityService add ( Envelop )
                 final Tunnel tunnel = Instance.singleton(UnityTunnel.class);
                 builder.addService(tunnel.init(this.vertx));
             }
             /**
-             * 6.Server added.
+             * 4.Server added.
              */
             final VertxServer server = builder.build();
             server.start(handler -> this.registryServer(handler, config));
