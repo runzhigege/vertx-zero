@@ -568,6 +568,10 @@ public final class Ux {
         return Fluctuate.thenParallelArray(sources);
     }
 
+    public static Future<JsonObject> thenParallelJson(final Future<JsonObject>... sources) {
+        return Fluctuate.thenParallelJson(sources);
+    }
+
     public static Future<JsonObject> thenParallelJson(final Future<JsonObject> source, final Function<JsonObject, List<Future>> generateFun, final BiConsumer<JsonObject, JsonObject>... operatorFun) {
         return Fluctuate.thenParallelJson(source, generateFun, operatorFun);
     }
