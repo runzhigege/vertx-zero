@@ -17,6 +17,31 @@ In zero system, it support three rpc nodes, all these nodes contain different ro
 
 All these nodes should be configured as `rpc server` instead of others.
 
+### 1.1. Configuration
+
+Above three roles could be defined by different attributes, zero system will detect them on your method, another thing is that these roles focus on **method** instead of service, it means that your method function has the role attribute, but one service could contain `Originator, Coordinator, Terminator` etc. In the service you can do this configuration as following:
+
+```java
+    // Originator 
+    @Ipc(to = "IPC://EVENT/ADDR", name = "ipc-coeus")
+    public JsonObject ipc(@BodyParam final JsonObject data) ...
+
+    // Coordinator
+    @Ipc(value = "IPC://EVENT/ADDR",
+            name = "ipc-crius", to = "IPC://EVENT/FINAL")
+    public String send(final Envelop envelop) ...
+
+    // Terminator
+    @Ipc(value = "IPC://EVENT/FINAL")
+    public String send(final Envelop envelop) ...
+
+    // Terminator -> JVM Specification, single value could be ignored.
+    @Ipc("IPC://EVENT/FINAL")
+    public String send(final Envelop envelop) ...
+```
+
+From above java code you should know the role definition focus on method, when your service contains many classes with different methods, these methods could be different roles.
+
 ## 2. Stream Mode
 
 In stream mode, all the data flow should be single direction, it could not be reverted, the data flow is as following:
@@ -51,6 +76,4 @@ Actually stream mode and direct mode are not conflicts, but for different usage 
 * Stream Mode describes the internal `Rpc Node Tier` structure for stream data flow use.
 
 You can consider the real business scenario and select the usage.
-
-
 

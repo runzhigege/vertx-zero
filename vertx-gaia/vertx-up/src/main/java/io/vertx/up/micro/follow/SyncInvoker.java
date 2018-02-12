@@ -1,5 +1,6 @@
 package io.vertx.up.micro.follow;
 
+import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.tool.mirror.Instance;
@@ -16,7 +17,7 @@ public class SyncInvoker implements Invoker {
         // Verify
         final boolean valid =
                 Envelop.class == returnType && paramCls == Envelop.class;
-        InvokerUtil.verify(!valid, returnType, paramCls, getClass());
+        InvokerUtil.verify(!valid, returnType, paramCls, this.getClass());
     }
 
     @Override
@@ -26,5 +27,12 @@ public class SyncInvoker implements Invoker {
         // Invoke directly
         final Envelop envelop = message.body();
         message.reply(Instance.invoke(proxy, method.getName(), envelop));
+    }
+
+    @Override
+    public void next(final Object proxy,
+                     final Method method,
+                     final Message<Envelop> message,
+                     final Vertx vertx) {
     }
 }
