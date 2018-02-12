@@ -1,5 +1,6 @@
 package io.vertx.up.micro;
 
+import io.netty.util.internal.ConcurrentSet;
 import io.reactivex.Observable;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.json.JsonObject;
@@ -25,7 +26,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Backend for service discovery
  */
-@Worker(value = MessageModel.DISCOVERY_PUBLISH, instances = 1)
+@Worker(value = MessageModel.DISCOVERY_PUBLISH, instances = 2)
 public class ZeroApiWorker extends AbstractVerticle {
 
     private static final Annal LOGGER = Annal.get(ZeroApiWorker.class);
@@ -36,6 +37,7 @@ public class ZeroApiWorker extends AbstractVerticle {
             = new ConcurrentHashMap<>();
     private static final ConcurrentMap<String, String> ID_MAP
             = new ConcurrentHashMap<>();
+    private static final ConcurrentSet<String> REGISTRY = new ConcurrentSet<>();
 
     private static final AtomicBoolean initialized =
             new AtomicBoolean(false);
@@ -46,7 +48,7 @@ public class ZeroApiWorker extends AbstractVerticle {
         // AtomicBoolean checking
         if (!initialized.getAndSet(true)) {
             // initialized once.
-            initializeServices(discovery);
+            this.initializeServices(discovery);
         }
         // Scan the services every 3s
         this.vertx.setPeriodic(3000, id -> {
@@ -54,7 +56,7 @@ public class ZeroApiWorker extends AbstractVerticle {
             final ConcurrentMap<String, Record> services = ORIGIN.getRegistryData();
 
             // Read the down services
-            final ConcurrentMap<Flag, Set<String>> resultMap = calculateServices(services);
+            final ConcurrentMap<Flag, Set<String>> resultMap = this.calculateServices(services);
 
             // Do the modification with thread.
             Fn.safeJvm(() -> {
@@ -64,19 +66,19 @@ public class ZeroApiWorker extends AbstractVerticle {
                 final Set<String> added = resultMap.get(Flag.NEW);
                 Runner.run(
                         () -> {
-                            deleteService(discovery, deleted);
+                            this.deleteService(discovery, deleted);
                             counter.countDown();
                         },
                         "discovery-deleted");
                 Runner.run(
                         () -> {
-                            updateService(discovery, updated);
+                            this.updateService(discovery, updated);
                             counter.countDown();
                         },
                         "discovery-updated");
                 Runner.run(
                         () -> {
-                            addService(discovery, added, services);
+                            this.addService(discovery, added, services);
                             counter.countDown();
                         },
                         "discovery-added");
@@ -99,10 +101,12 @@ public class ZeroApiWorker extends AbstractVerticle {
                         if (result.succeeded()) {
                             // Delete successfully
                             final Record record = REGISTRITIONS.get(id);
-                            successLog(record);
+                            this.successLog(record);
                             // Sync deleted
                             REGISTRITIONS.remove(id);
                             ID_MAP.remove(id);
+                            // Remove from Set
+                            REGISTRY.remove(id);
                         } else {
                             LOGGER.info(Info.REG_FAILURE, result.cause().getMessage(), "Delete");
                         }
@@ -119,7 +123,7 @@ public class ZeroApiWorker extends AbstractVerticle {
                     if (result.succeeded()) {
                         final Record record = result.result();
                         // Update successfully
-                        successFinished(record);
+                        this.successFinished(record);
                     } else {
                         LOGGER.info(Info.REG_FAILURE, result.cause().getMessage(), "Update");
                     }
@@ -132,15 +136,22 @@ public class ZeroApiWorker extends AbstractVerticle {
         // Add service into current zero system.
         Observable.fromIterable(ids)
                 .map(services::get)
-                .subscribe(item -> discovery.publish(item, result -> {
-                    if (result.succeeded()) {
-                        final Record record = result.result();
-                        // Add successfully
-                        successFinished(record);
-                    } else {
-                        LOGGER.info(Info.REG_FAILURE, result.cause().getMessage(), "Add");
+                .subscribe(item -> {
+                    // Avoid duplicated add
+                    if (!REGISTRY.contains(item.getRegistration())) {
+                        discovery.publish(item, result -> {
+                            if (result.succeeded()) {
+                                final Record record = result.result();
+                                // Add successfully
+                                this.successFinished(record);
+                                // Add to Sets
+                                REGISTRY.add(item.getRegistration());
+                            } else {
+                                LOGGER.info(Info.REG_FAILURE, result.cause().getMessage(), "Add");
+                            }
+                        });
                     }
-                }));
+                });
     }
 
 
@@ -148,15 +159,23 @@ public class ZeroApiWorker extends AbstractVerticle {
         // Read the services
         final Set<Record> services = new HashSet<>(ORIGIN.getRegistryData().values());
         Observable.fromIterable(services)
-                .subscribe(item -> discovery.publish(item, result -> {
-                    if (result.succeeded()) {
-                        final Record record = result.result();
-                        // Initialized successfully
-                        successFinished(record);
-                    } else {
-                        LOGGER.info(Info.REG_FAILURE, result.cause().getMessage(), "Init");
+                .subscribe(item -> {
+                    // Avoid duplicated add
+                    if (null == item.getRegistration() ||
+                            !REGISTRY.contains(item.getRegistration())) {
+                        discovery.publish(item, result -> {
+                            if (result.succeeded()) {
+                                final Record record = result.result();
+                                // Initialized successfully
+                                this.successFinished(record);
+                                // Add to Sets
+                                REGISTRY.add(item.getRegistration());
+                            } else {
+                                LOGGER.info(Info.REG_FAILURE, result.cause().getMessage(), "Init");
+                            }
+                        });
                     }
-                }));
+                });
     }
 
     private ConcurrentMap<Flag, Set<String>> calculateServices(
@@ -188,16 +207,16 @@ public class ZeroApiWorker extends AbstractVerticle {
 
     private void successFinished(final Record record) {
         // Build key
-        final String key = getID(record);
+        final String key = this.getID(record);
         final String id = record.getRegistration();
-        successLog(record);
+        this.successLog(record);
         // Fill container
         REGISTRITIONS.put(key, record);
         ID_MAP.put(key, id);
     }
 
     private void successLog(final Record record) {
-        final String key = getID(record);
+        final String key = this.getID(record);
         final String id = record.getRegistration();
         final String endpoint = MessageFormat.format("http://{0}:{1}{2}",
                 record.getLocation().getString(Origin.HOST),

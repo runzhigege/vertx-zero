@@ -1,11 +1,11 @@
 server:
-- name: up-hyperion
+- name: up-epimetheus
   type: http
   config:
-    port: 6502
+    port: 6301
     host: 0.0.0.0
-- name: ipc-hyperion
+- name: ipc-epimetheus
   type: ipc
   config:
-    port: 6512
+    port: 6311
     host: 0.0.0.0
