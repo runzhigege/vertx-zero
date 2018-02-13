@@ -196,5 +196,11 @@ Then when you start three services, you can do the testing:
 
 ## 4. Summary
 
-Here we provide three demos to show how to write the method in `Rpc Server`, except the input data type `Envelop`, you can choose different return type of the methods as you want.
+Here we provide three demos to show how to write the method in `Rpc Server`, except the input data type `Envelop`, you can choose different return type of the methods as you want. The method signature is as following:
+
+```java
+public Future<JsonObject> worker1(final Envelop envelop)
+```
+
+
 

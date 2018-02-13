@@ -68,7 +68,7 @@ public class FutureInvoker implements Invoker {
                     .connect(vertx)
                     .connect(method)
                     .send(item))
-                    .setHandler(message::reply);
+                    .setHandler(Ux.toHandler(message));
         } else {
             final Future future = Instance.invoke(proxy, method.getName(), envelop);
             future.compose(item -> TunnelClient.create(this.getClass())
