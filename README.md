@@ -38,7 +38,7 @@ _From 0.4.5.1 \( Inherit \)_
     <parent>
         <artifactId>vertx-import</artifactId>
         <groupId>cn.vertxup</groupId>
-        <version>0.4.6</version>
+        <version>0.4.6.2</version>
     </parent>
 ```
 
@@ -123,6 +123,7 @@ For all tutorial testing cases, you can import following resource with Postman T
    1. [D10044 - Programming Styles](doc/vertx-zero-tutorial/d10044-programming-styles.md)
    2. [D10045 - Interface Style](doc/vertx-zero-tutorial/d10044-recommend-interface-mode-only.md)
    3. [D10094 - Exception, Defined your Errors](doc/vertx-zero-tutorial/d10094-exception-defined-your-errors.md)
+   4. [D10096 - Exception, Readable message to help UI](doc/vertx-zero-tutorial/d10096-exception-readable-message-to-help-ui.md)
 6. Utility X Tool Box
    1. [D10046 - Utility X Turn-On](doc/vertx-zero-tutorial/d10046-utilityx-turn-on.md)
    2. [D10047 - Utility X, JsonObject Processing](doc/vertx-zero-tutorial/d10047-utility-x-json-processinng.md)
