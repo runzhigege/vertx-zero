@@ -1,4 +1,4 @@
-# D10088 - Micro, Sender \( Agent \) to Terminator
+# D10088 - Micro Stream, Sender \( Agent \) to Terminator
 
 From this chapter we'll focus on rpc stream mode, this mode we'll meet different role \( method \) such as `Originator, Coordinator, Terminator` etc.
 
