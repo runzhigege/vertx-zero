@@ -5,7 +5,6 @@ import io.vertx.core.Vertx;
 import io.vertx.servicediscovery.Record;
 import io.vertx.up.annotations.Ipc;
 import io.vertx.up.atom.Envelop;
-import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.flux.IpcData;
 import io.vertx.up.eon.em.IpcType;
 import io.vertx.up.exception._501RpcAddressWrongException;
@@ -19,8 +18,10 @@ import io.vertx.up.tool.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
 
 /**
  * Rpc client, scanned etcd to get configuration.
@@ -28,7 +29,7 @@ import java.util.concurrent.ConcurrentMap;
 public class TunnelClient {
 
     private transient Vertx vertx;
-    private transient Event event;
+    private transient Method event;
     private final transient Annal logger;
 
     private static final Origin ORIGIN = Instance.singleton(IpcOrigin.class);
@@ -36,7 +37,7 @@ public class TunnelClient {
     private static final ConcurrentMap<IpcType, Spear> STUBS =
             new ConcurrentHashMap<IpcType, Spear>() {
                 {
-                    put(IpcType.UNITY, Instance.singleton(UnitySpear.class));
+                    this.put(IpcType.UNITY, Instance.singleton(UnitySpear.class));
                     // put(IpcType.CONSUME, Instance.singleton(ConsumeStub.class));
                     // put(IpcType.DUPLIEX, Instance.singleton(DupliexStub.class));
                     // put(IpcType.PRODUCE, Instance.singleton(ProduceStub.class));
@@ -56,17 +57,17 @@ public class TunnelClient {
         return this;
     }
 
-    public TunnelClient connect(final Event event) {
+    public TunnelClient connect(final Method event) {
         this.event = event;
         return this;
     }
 
     public Future<Envelop> send(final Envelop envelop) {
         // 1. Extract address
-        final String address = getValue("to");
-        final IpcType type = getValue("type");
+        final String address = this.getValue("to");
+        final IpcType type = this.getValue("type");
         // 2. Record extract
-        final Record record = findTarget();
+        final Record record = this.findTarget();
         // 3. Convert IpcData
         final IpcData data = new IpcData();
         data.setType(type);
@@ -80,8 +81,7 @@ public class TunnelClient {
     }
 
     private <T> T getValue(final String attr) {
-        final Method method = this.event.getAction();
-        final Annotation annotation = method.getAnnotation(Ipc.class);
+        final Annotation annotation = this.event.getAnnotation(Ipc.class);
         return Instance.invoke(annotation, attr);
     }
 
@@ -93,22 +93,32 @@ public class TunnelClient {
      */
     private Record findTarget() {
         final ConcurrentMap<String, Record> address = ORIGIN.getRegistryData();
-        final String target = getValue("to");
-        final String name = getValue("name");
+        final String target = this.getValue("to");
+        final String name = this.getValue("name");
         // 1. Find service names
-        final Record record = address.values().stream()
-                .filter(item -> name.equals(item.getName()))
-                .findFirst().orElse(null);
+        final List<Record> records = this.findRecords();
+        final Record record = records.stream().filter(item ->
+                target.equals(item.getMetadata().getString("path")))
+                .findAny().orElse(null);
         // Service Name
         Fn.flingWeb(null == record, this.logger,
-                _501RpcImplementException.class, getClass(),
-                name, target, this.event.getAction());
+                _501RpcImplementException.class, this.getClass(),
+                name, target, this.event);
         // Address Wrong
         Fn.flingWeb(null == record.getMetadata() ||
                         !target.equals(record.getMetadata().getString("path")), this.logger,
-                _501RpcAddressWrongException.class, getClass(),
+                _501RpcAddressWrongException.class, this.getClass(),
                 target, name);
         this.logger.info(Info.RECORD_FOUND, record.toJson());
         return record;
+    }
+
+    private List<Record> findRecords() {
+        final ConcurrentMap<String, Record> address = ORIGIN.getRegistryData();
+        final String name = this.getValue("name");
+        // Find service records
+        return address.values().stream()
+                .filter(item -> name.equals(item.getName()))
+                .collect(Collectors.toList());
     }
 }

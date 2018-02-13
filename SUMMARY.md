@@ -128,6 +128,15 @@
   * [D10085 - Micro, Simple Rpc](doc/vertx-zero-tutorial/d10085-micro-simple-rpc.md)
   * [D10086 - Micro, Future with Utility X](doc/vertx-zero-tutorial/d10085-micro-future-with-utility-x.md)
   * [D10087 - Micro, Multi Rpc Calls](doc/vertx-zero-tutorial/d10087-micro-multi-rpc-calls.md)
+  * [D10088 - Micro Stream,  Sender \( Agent \) to Terminator](doc/vertx-zero-tutorial/d10088-micro-stream-sender-agent-to-terminator.md)
+  * [D10089 - Micro Stream, Consumer \( Worker \) to Terminator](doc/vertx-zero-tutorial/d10089-micro-consumer-worker-to-terminator.md)
+  * [D10090 - Micro Stream, Consumer Sync Mode to Terminator](doc/vertx-zero-tutorial/d10090-micro-stream-consumer-sync.md)
+  * [D10091 - Micro Stream, Consumer Async Mode to Terminator](doc/vertx-zero-tutorial/d10091-micro-stream-consumer-async-to-terminator.md)
+  * [D10092 - Micro Stream, Consumer T Mode to Terminator](doc/vertx-zero-tutorial/d10092-micro-stream-consumer-t-mode-to-terminator.md)
+  * [D10093 - Micro Stream, Originator/Coordinator/Terminator](doc/vertx-zero-tutorial/d10093-micro-stream-originatorcoordinatorterminator.md)
+  * [D10094 - Exception, Defined your Errors](doc/vertx-zero-tutorial/d10094-exception-defined-your-errors.md)
+  * [D10095 - Security, Basic Authorization](doc/vertx-zero-tutorial/d10095-security-basic-authorization.md)
+  * [D10096 - Exception, Readable message to help UI](doc/vertx-zero-tutorial/d10096-exception-readable-message-to-help-ui.md)
 
 ## Useful Related Documents
 

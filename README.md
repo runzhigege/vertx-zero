@@ -38,7 +38,7 @@ _From 0.4.5.1 \( Inherit \)_
     <parent>
         <artifactId>vertx-import</artifactId>
         <groupId>cn.vertxup</groupId>
-        <version>0.4.5.1</version>
+        <version>0.4.6</version>
     </parent>
 ```
 
@@ -119,9 +119,11 @@ For all tutorial testing cases, you can import following resource with Postman T
    13. [D10041 - JSR303, 2.x version](doc/vertx-zero-tutorial/d10041-jsr303-in-future-usage.md)
    14. [D10042 - JSR303, Pojo First](doc/vertx-zero-tutorial/d10043-jsr303-pojo-first.md)
    15. [D10043 - Zero JSR303, Body Validation](doc/vertx-zero-tutorial/d10043-zero-jsr303-body-validation.md)
-5. Programming Style
+5. Programming Style & User-defined
    1. [D10044 - Programming Styles](doc/vertx-zero-tutorial/d10044-programming-styles.md)
    2. [D10045 - Interface Style](doc/vertx-zero-tutorial/d10044-recommend-interface-mode-only.md)
+   3. [D10094 - Exception, Defined your Errors](doc/vertx-zero-tutorial/d10094-exception-defined-your-errors.md)
+   4. [D10096 - Exception, Readable message to help UI](doc/vertx-zero-tutorial/d10096-exception-readable-message-to-help-ui.md)
 6. Utility X Tool Box
    1. [D10046 - Utility X Turn-On](doc/vertx-zero-tutorial/d10046-utilityx-turn-on.md)
    2. [D10047 - Utility X, JsonObject Processing](doc/vertx-zero-tutorial/d10047-utility-x-json-processinng.md)
@@ -165,7 +167,15 @@ For all tutorial testing cases, you can import following resource with Postman T
     4. [D10085 - Micro, Simple Rpc](doc/vertx-zero-tutorial/d10085-micro-simple-rpc.md)
     5. [D10086 - Micro, Future with Utility X](doc/vertx-zero-tutorial/d10085-micro-future-with-utility-x.md)
     6. [D10087 - Micro, Multi Rpc Calls](doc/vertx-zero-tutorial/d10087-micro-multi-rpc-calls.md)
-11. Third Part Reference
+    7. [D10088 - Micro Stream,  Sender \( Agent \) to Terminator](doc/vertx-zero-tutorial/d10088-micro-stream-sender-agent-to-terminator.md)
+    8. [D10089 - Micro Stream, Consumer \( Worker \) to Terminator](doc/vertx-zero-tutorial/d10089-micro-consumer-worker-to-terminator.md)
+    9. [D10090 - Micro Stream, Consumer Sync Mode to Terminator](doc/vertx-zero-tutorial/d10090-micro-stream-consumer-sync.md)
+    10. [D10091 - Micro Stream, Consumer Async Mode to Terminator](doc/vertx-zero-tutorial/d10091-micro-stream-consumer-async-to-terminator.md)
+    11. [D10092 - Micro Stream, Consumer T Mode to Terminator](doc/vertx-zero-tutorial/d10092-micro-stream-consumer-t-mode-to-terminator.md)
+    12. [D10093 - Micro Stream, Originator/Coordinator/Terminator](doc/vertx-zero-tutorial/d10093-micro-stream-originatorcoordinatorterminator.md)
+11. Security Module
+    1. [D10095 - Security, Basic Authorization](doc/vertx-zero-tutorial/d10095-security-basic-authorization.md)
+12. Third Part Reference
     1. [D10077 - Reference, Mongo Setup](doc/vertx-zero-tutorial/d10077-third-part-mongo-setup.md)
     2. [D10079 - Reference, Mini k8s](doc/vertx-zero-tutorial/d10079-reference-mini-k8s.md)
     3. [D10080 - Reference, Istio](doc/vertx-zero-tutorial/d10080-reference-istio.md)

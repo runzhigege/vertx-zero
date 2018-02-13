@@ -57,6 +57,7 @@ E40044: "The method {0} annotated with @Ipc must contain return value, return ty
 E40045: "The method {0} annotated with @Ipc must set direction ( value or (name|to) ), now the system do not know the direction"
 E40046: "The method {0} annotated with @Ipc must contain only one argument of Envelop type"
 E40047: "Zero system could not select correct invoker by returnType = {0}, paramType = {1}"
+E40048: "(Rpc) Zero system detect agent interface \"{0}\" only without implementation class, it''s forbidden in rpc stream workflow."
 # (Web) Exception for web
 E60000: (400) - Request validation failure, class = {0}, method = {1}, message = {2}
 E60001: (400) - The input content could not be converted into valid resource user {0}
@@ -86,4 +87,6 @@ E60023: "(400) - (Ir) You''ll try to build \"pager\", the key \"{0}\" of pager m
 E60024: "(500) - (Ir) Your query meta is null, expected input meta object is not null reference."
 E60025: "(400) - (Ir) The \"pager\" started page number should start from 1, now input \"page\" is {0}"
 E60026: "(400) - (Ir) The op is not supported, please provide valid op of \"<, >, <=, >=, =, <>, !n, n, t, f, i, !i, s, e, c\", current is {0}"
+E60027: "(501) - (Rpc) This web flow does not support IPC continue flow. Class = {0}"
+E60028: "(500) - (Rpc) Zero system detect unexpected exception on class = {0}, returnValue is {1}."
 # (Web) Exception for standard third part

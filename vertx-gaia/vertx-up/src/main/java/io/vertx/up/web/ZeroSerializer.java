@@ -86,9 +86,9 @@ public class ZeroSerializer {
     /**
      * String -> T
      *
-     * @param paramType
-     * @param literal
-     * @return
+     * @param paramType argument types
+     * @param literal   literal values
+     * @return deserialized object.
      */
     public static Object getValue(final Class<?> paramType,
                                   final String literal) {
@@ -110,12 +110,27 @@ public class ZeroSerializer {
         return reference;
     }
 
+    public static <T> boolean isDirect(final T input) {
+        boolean result = false;
+        if (null != input) {
+            final Class<?> cls = input.getClass();
+            if (JsonObject.class == cls) {
+                result = false;
+            } else if (JsonArray.class == cls) {
+                result = false;
+            } else {
+                result = SABERS.keySet().contains(cls);
+            }
+        }
+        return result;
+    }
+
     /**
      * T -> JsonObject
      *
-     * @param input
-     * @param <T>
-     * @return
+     * @param input Checked object
+     * @param <T>   Generic Types
+     * @return returned values.
      */
     public static <T> Object toSupport(final T input) {
         Object reference = null;
