@@ -39,7 +39,7 @@ The default http server port is **6083**.
 
 Except about standalone mode, zero also support another mode \( Micro \) to deploy all nodes in micro service environment, please be careful about micro environment, there need some additional configuration for zero to support micro services environment, please refer following tutorial to do the preparing works first. The demo projects are following in `vertx-zeus`,
 
-* **Api Gateway - 6000** : `vertx-athena`
+* **Api Gateway - 6100** : `vertx-athena`
 * **Service - 6002**: `vertx-uranus`
 
 ### 2.1. Api Gateway Configuration
