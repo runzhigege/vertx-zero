@@ -263,6 +263,10 @@ public final class Ux {
         return UxRpc.fnRpc(array);
     }
 
+    public static Future<JsonArray> fnRpc(final JsonObject data) {
+        return UxRpc.fnRpc(data);
+    }
+
     // ---------------------- Web Flow --------------------------------------
     public static <T> Handler<AsyncResult<T>> toHandler(final Message<Envelop> message) {
         return Web.toHandler(message);
