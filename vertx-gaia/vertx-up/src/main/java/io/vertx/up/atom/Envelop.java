@@ -1,5 +1,6 @@
 package io.vertx.up.atom;
 
+import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.http.HttpStatusCode;
 import io.vertx.core.json.JsonObject;
@@ -129,6 +130,10 @@ public class Envelop implements Serializable {
             response = this.fail(this.error);
         }
         return response.encode();
+    }
+    
+    public Future<Envelop> toFuture() {
+        return Future.succeededFuture(this);
     }
 
     public HttpStatusCode status() {

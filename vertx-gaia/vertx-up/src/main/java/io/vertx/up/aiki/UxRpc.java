@@ -36,4 +36,14 @@ class UxRpc {
                         .put("count", data.size())
         );
     }
+
+    public static Future<JsonArray> fnRpc(
+            final JsonObject item
+    ) {
+        return Future.succeededFuture(
+                null == item ?
+                        new JsonArray() :
+                        item.getJsonArray("data")
+        );
+    }
 }

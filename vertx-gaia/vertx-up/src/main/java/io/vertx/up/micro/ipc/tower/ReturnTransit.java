@@ -25,7 +25,6 @@ class ReturnTransit {
         if (Future.class.isAssignableFrom(clazz)) {
             // Fix Async Server Issue
             final Class<?> tCls = clazz.getComponentType();
-            System.out.println(clazz.getComponentType());
             if (Envelop.class == tCls) {
                 // Future<Envelop>
                 LOGGER.info(Info.MSG_FLOW, "Future<Envelop>", clazz);
