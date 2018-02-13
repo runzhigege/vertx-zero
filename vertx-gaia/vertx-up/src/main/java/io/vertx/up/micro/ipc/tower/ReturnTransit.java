@@ -1,6 +1,7 @@
 package io.vertx.up.micro.ipc.tower;
 
 import io.vertx.core.Future;
+import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.log.Annal;
 
@@ -23,8 +24,8 @@ class ReturnTransit {
         final Future<Envelop> result;
         if (Future.class.isAssignableFrom(clazz)) {
             // Fix Async Server Issue
-
             final Class<?> tCls = clazz.getComponentType();
+            System.out.println(clazz.getComponentType());
             if (Envelop.class == tCls) {
                 // Future<Envelop>
                 LOGGER.info(Info.MSG_FLOW, "Future<Envelop>", clazz);
@@ -33,7 +34,7 @@ class ReturnTransit {
                 // Future<JsonObject> or Future<JsonArray>
                 LOGGER.info(Info.MSG_FLOW, "Future<T>", clazz);
                 final Future future = (Future) returnValue;
-                return future.compose(item -> Future.succeededFuture(Envelop.success(item)));
+                return future.compose(item -> Future.succeededFuture(Ux.to(item)));
             }
         } else {
             if (Envelop.class == clazz) {
