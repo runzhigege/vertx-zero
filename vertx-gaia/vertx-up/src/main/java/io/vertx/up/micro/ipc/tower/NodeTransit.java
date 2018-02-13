@@ -22,6 +22,7 @@ public class NodeTransit implements Transit {
     private transient Vertx vertx;
 
     @Override
+    @SuppressWarnings("all")
     public Future<Envelop> async(final Envelop envelop) {
         // 1. Extract type
         final Object proxy = Instance.singleton(this.method.getDeclaringClass());
