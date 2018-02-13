@@ -6,6 +6,14 @@ As we known before, zero system provide different modes for consumer programming
 
 ![](/doc/image/d10090-1.png)
 
+Demo Projects and environment
+
+| Http Port | Ipc Port | Ipc Service Name | Project | Role |
+| :--- | :--- | :--- | :--- | :--- |
+| 6100 | -- | -- | up-athena | Api Gateway |
+| 6301 | 6311 | ipc-epimetheus | up-epimetheus | Originator |
+| 6501 | 6511 | ipc-hecate | up-hecate | Terminator |
+
 ## 2. Source Code
 
 ### 2.1. EnvelopApi \( service: up-epimetheus \)

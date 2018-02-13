@@ -50,7 +50,7 @@ public class UnityTunnel implements Tunnel {
                     future.complete(DataEncap.out(responseData));
                 } else {
                     // Execute Transit
-                    final Transit transit = UnityTunnel.this.getTransit(method);
+                    final Transit transit = UnityTunnel.this.getTransit(method, vertx);
                     // Execute Transit
                     final Future<Envelop> result = transit.async(envelop);
                     result.setHandler(res -> {
@@ -64,8 +64,10 @@ public class UnityTunnel implements Tunnel {
 
     private IpcData build(final Envelop community, final Envelop envelop) {
         // Headers and user could not be modified
-        community.setHeaders(envelop.headers());
-        community.setUser(envelop.user());
+        if (null != envelop) {
+            community.setHeaders(envelop.headers());
+            community.setUser(envelop.user());
+        }
         // IpcResponse -> Output Envelop
         final IpcData responseData = new IpcData();
         responseData.setType(IpcType.UNITY);
@@ -73,7 +75,7 @@ public class UnityTunnel implements Tunnel {
         return responseData;
     }
 
-    private Transit getTransit(final Method method) {
+    private Transit getTransit(final Method method, final Vertx vertx) {
         final Annotation annotation = method.getAnnotation(Ipc.class);
         // 1. Check only one is enough because of Error-40043
         // 2. to and from must not be null at the same time because of Error-40045
@@ -88,8 +90,6 @@ public class UnityTunnel implements Tunnel {
             transit = Instance.singleton(NodeTransit.class);
             LOGGER.info(Info.NODE_MIDDLE, method, method.getDeclaringClass());
         }
-        // Connect for transit
-        transit.connect(method);
-        return transit;
+        return transit.connect(vertx).connect(method);
     }
 }

@@ -133,6 +133,9 @@
   * [D10090 - Micro Stream, Consumer Sync Mode to Terminator](doc/vertx-zero-tutorial/d10090-micro-stream-consumer-sync.md)
   * [D10091 - Micro Stream, Consumer Async Mode to Terminator](doc/vertx-zero-tutorial/d10091-micro-stream-consumer-async-to-terminator.md)
   * [D10092 - Micro Stream, Consumer T Mode to Terminator](doc/vertx-zero-tutorial/d10092-micro-stream-consumer-t-mode-to-terminator.md)
+  * [D10093 - Micro Stream, Originator/Coordinator/Terminator](doc/vertx-zero-tutorial/d10093-micro-stream-originatorcoordinatorterminator.md)
+  * [D10094 - Exception, Defined your Errors](doc/vertx-zero-tutorial/d10094-exception-defined-your-errors.md)
+  * [D10095 - Security, Basic Authorization](doc/vertx-zero-tutorial/d10095-security-basic-authorization.md)
 
 ## Useful Related Documents
 

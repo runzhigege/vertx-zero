@@ -2,7 +2,7 @@
 
 From this chapter we'll focus on RPC usage in zero system, because they are micro environment, we need to prepare more service nodes here.
 
-Demo Project and environment
+Demo Projects and environment
 
 | Http Port | Ipc Port | Ipc Service Name | Project | Role |
 | :--- | :--- | :--- | :--- | :--- |
@@ -253,33 +253,31 @@ Setting up Etcd4j Netty client
 [ ZERO ] ---> ZERO://MICRO/REGISTRY/START ( Http Server ) ZeroHttpAgent ( name = up-crius ) is sending data to internal address.
 [ ZERO ] ( Etcd Center ) The status up-crius of service RUNNING has been registried to /zero/zero-istio/endpoint/services/up-crius:10.0.0.7:6402
 [ ZERO ] ( Etcd Catalog ) The following routes has been push to:
-	[ Up Micro ] <Application Name> = "zero-istio",
-	[ Up Micro ] Configuration Path = /zero/zero-istio/endpoint/routes/up-crius:10.0.0.7:6402, 
-	[ Up Micro ] Service Name = up-crius,
-	[ Up Micro ] EndPoint = http://10.0.0.7:6402
-	[ Up Micro ] Route Uris = 
-	[ Up Micro ] 	
-	[ Up Micro ] √ Successfully to registered Routes, wait for discovery......SUCCESS √
+    [ Up Micro ] <Application Name> = "zero-istio",
+    [ Up Micro ] Configuration Path = /zero/zero-istio/endpoint/routes/up-crius:10.0.0.7:6402, 
+    [ Up Micro ] Service Name = up-crius,
+    [ Up Micro ] EndPoint = http://10.0.0.7:6402
+    [ Up Micro ] Route Uris = 
+    [ Up Micro ]     
+    [ Up Micro ] √ Successfully to registered Routes, wait for discovery......SUCCESS √
 [ ZERO ] ZERO://MICRO/REGISTRY/START <--- ( Micro Worker ) ZeroHttpRegistry ( name = up-crius ) get data from internal address.
 
 # Rpc Service part
 [ ZERO ] ---> ZERO://MICRO/IPC/START ( Rpc Server ) ZeroRpcAgent ( name = ipc-crius ) is sending data to internal address.
 [ ZERO ] ( Etcd Center ) The status ipc-crius of service RUNNING has been registried to /zero/zero-istio/ipc/services/ipc-crius:10.0.0.7:6412
 [ ZERO ] ( Etcd Catalog ) The following routes has been push to:
-	[ Up Rpc   ] <Application Name> = "zero-istio",
-	[ Up Rpc   ] Configuration Rpc Point = /zero/zero-istio/ipc/routes/ipc-crius:10.0.0.7:6412, 
-	[ Up Rpc   ] Service Name = ipc-crius,
-	[ Up Rpc   ] Ipc Channel = grpc://10.0.0.7:6412
-	[ Up Rpc   ] Ipc Address = 
-	[ Up Rpc   ] √ Successfully to registered IPCs, wait for community......SUCCESS √
+    [ Up Rpc   ] <Application Name> = "zero-istio",
+    [ Up Rpc   ] Configuration Rpc Point = /zero/zero-istio/ipc/routes/ipc-crius:10.0.0.7:6412, 
+    [ Up Rpc   ] Service Name = ipc-crius,
+    [ Up Rpc   ] Ipc Channel = grpc://10.0.0.7:6412
+    [ Up Rpc   ] Ipc Address = 
+    [ Up Rpc   ] √ Successfully to registered IPCs, wait for community......SUCCESS √
 [ ZERO ] ZERO://MICRO/IPC/START <--- ( Micro Worker ) ZeroRpcRegistry ( name = ipc-crius ) get data from internal address.
 ```
 
-> You should repeat the configuration steps of 4 on `up-coeus, up-crius, up-cronus, up-epimetheus, up-hecate `
+> You should repeat the configuration steps of 4 on `up-coeus, up-crius, up-cronus, up-epimetheus, up-hecate`
 
 ## 5. Summary
 
 When you have finished all the configuration, your zero system micro environment has been finished, in this kind of situation you can continue the further tutorial for all the micro service demos \( Especially for Rpc demos \).
-
-
 
