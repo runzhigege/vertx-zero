@@ -38,7 +38,7 @@ _From 0.4.5.1 \( Inherit \)_
     <parent>
         <artifactId>vertx-import</artifactId>
         <groupId>cn.vertxup</groupId>
-        <version>0.4.6.2</version>
+        <version>0.4.6.3</version>
     </parent>
 ```
 
@@ -140,7 +140,7 @@ For all tutorial testing cases, you can import following resource with Postman T
    13. [D10058 - Utility X, thenParallelArray/Json](doc/vertx-zero-tutorial/d10058-utility-x-thenparallelarrayjson.md)
    14. [D10059 - Utility X, thenScatterJson](doc/vertx-zero-tutorial/d10059-utility-x-thenscatterjson.md)
    15. [D10060 - Utility X, thenError](doc/vertx-zero-tutorial/d10060-utility-x-thenerror.md)
-7. Jooq for MySqlpl,okmijn123
+7. Jooq for MySql
    1. [D10061 - Jooq/mysql, Configuration](doc/vertx-zero-tutorial/d10061-jooqmysql-configuration.md)
    2. [D10062 - Jooq/CRUD, Read Operation](doc/vertx-zero-tutorial/d10062-jooq-get.md)
    3. [D10063 - Jooq/CRUD, Write Operation](doc/vertx-zero-tutorial/d10063-jooqcreate-operations.md)
@@ -148,6 +148,7 @@ For all tutorial testing cases, you can import following resource with Postman T
    5. [D10065 - Jooq/CRUD, Fetch List Operation](doc/vertx-zero-tutorial/d10065-jooqcrud-fetch-list-operation.md)
    6. [D10066 - Jooq/CRUD, Filter Syntax](doc/vertx-zero-tutorial/d10066-jooqcrud-filter-syntax.md)
    7. [D10067 - Jooq/CRUD, Paging/Sorting](doc/vertx-zero-tutorial/d10067-jooqcrud-advanced-search-operation.md)
+   8. [D10097 - Jooq/CRUD, Save/Existing Operation](doc/vertx-zero-tutorial/d10097-jooqcrud-save-operation.md)
 8. Yaml Connfiguration
    1. [D10068 - Configuration, vertx.yml](doc/vertx-zero-tutorial/d10068-fragment-yaml-configuration.md)
    2. [D10069 - Configuration, vertx-server.yml](doc/vertx-zero-tutorial/d10069-configuration-vertx-serveryml.md)
