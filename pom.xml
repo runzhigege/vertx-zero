@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.vertxup</groupId>
     <artifactId>vertx-zero</artifactId>
-    <version>0.4.7-SNAPSHOT</version>
+    <version>0.4.6.2</version>
     <name>vertx-zero: Vertx Up Zero Framework</name>
     <description>Vertx Zero Framework is a tool for Service Mesh Micro Service.</description>
     <url>http://www.vertxup.cn</url>
@@ -69,7 +69,7 @@
         <glassfish.el.version>3.0.1-b09</glassfish.el.version>
 
         <!-- Database Needed -->
-        <hikari.cp.version>2.7.7</hikari.cp.version>
+        <hikari.cp.version>2.7.6</hikari.cp.version>
         <jooq.version>3.10.4</jooq.version>
         <vertx.jooq.version>2.4.1</vertx.jooq.version>
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
@@ -876,7 +876,7 @@
                 </configuration>
             </plugin>
             <!-- Deploy Only -->
-            <!--
+
             <plugin>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <version>${maven.plugin.pgp}</version>
@@ -895,7 +895,7 @@
                     </execution>
                 </executions>
             </plugin>
-            -->
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
