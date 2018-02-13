@@ -136,6 +136,7 @@
   * [D10093 - Micro Stream, Originator/Coordinator/Terminator](doc/vertx-zero-tutorial/d10093-micro-stream-originatorcoordinatorterminator.md)
   * [D10094 - Exception, Defined your Errors](doc/vertx-zero-tutorial/d10094-exception-defined-your-errors.md)
   * [D10095 - Security, Basic Authorization](doc/vertx-zero-tutorial/d10095-security-basic-authorization.md)
+  * [D10096 - Exception, Readable message to help UI](doc/vertx-zero-tutorial/d10096-exception-readable-message-to-help-ui.md)
 
 ## Useful Related Documents
 
