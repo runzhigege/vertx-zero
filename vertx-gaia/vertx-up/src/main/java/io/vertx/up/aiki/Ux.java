@@ -7,11 +7,14 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.FindOptions;
+import io.vertx.up.aiki.fun.Case;
+import io.vertx.up.aiki.fun.Log;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
 import io.vertx.up.atom.query.Sorter;
 import io.vertx.up.exception.WebException;
+import io.vertx.up.func.Actuator;
 import io.vertx.up.func.Fn;
 
 import java.util.List;
@@ -24,6 +27,52 @@ import java.util.function.*;
  */
 @SuppressWarnings("unchecked")
 public final class Ux {
+
+    // ---------------------- If Condition ----------------------------
+
+    public static <T> Future<T> match(final Case.DefaultCase<T> defaultCase, final Case<T>... matchers) {
+        return Wait.match(defaultCase, matchers).second.get();
+    }
+
+    public static <T> Future<T> future(final Supplier<Future<T>> caseLine) {
+        return Wait.branch(caseLine).second.get();
+    }
+
+    public static <T> Future<T> future(final Actuator executor, final Supplier<Future<T>> caseLine) {
+        return Wait.branch(executor, caseLine).second.get();
+    }
+
+    public static <T> Case.DefaultCase<T> fork(final Supplier<Future<T>> caseLine) {
+        return Case.DefaultCase.item(caseLine);
+    }
+
+    public static <T> Case.DefaultCase<T> fork(final Actuator actuator, final Supplier<Future<T>> caseLine) {
+        if (null != actuator) actuator.execute();
+        return Case.DefaultCase.item(caseLine);
+    }
+
+    public static <T> Case<T> branch(final Supplier<Future<T>> caseLine) {
+        return Wait.branch(caseLine);
+    }
+
+    public static <T> Case<T> branch(final Actuator executor, final Supplier<Future<T>> caseLine) {
+        return Wait.branch(executor, caseLine);
+    }
+
+    public static <T> Case<T> branch(final boolean condition, final Supplier<Future<T>> caseLine) {
+        return Wait.branch(condition, caseLine);
+    }
+
+    public static <T> Case<T> branch(final boolean condition, final Actuator executor, final Supplier<Future<T>> caseLine) {
+        return Wait.branch(condition, executor, caseLine);
+    }
+
+    // ---------------------- Fast Logging ----------------------------
+    public static Log on(final Class<?> clazz) {
+        return Log.create(null == clazz ? Ux.class : clazz);
+    }
+    // ---------------------- Function Above --------------------------
+
     /**
      * Debug only
      *
@@ -90,6 +139,11 @@ public final class Ux {
         return Calculator.groupBy(array, field);
     }
 
+    // JsonArray -> Future<JsonObject>
+    public static Future<JsonObject> toJsonFutureByGroup(final JsonArray array, final String field) {
+        return Future.succeededFuture(Calculator.groupBy(array, field));
+    }
+
     // Special Merge
     public static void appendJson(final JsonObject target, final JsonObject source) {
         Calculator.appendJson(target, source);
@@ -123,6 +177,15 @@ public final class Ux {
     // -> List<T> -> JsonArray ( convert )
     public static <T> JsonArray toArrayFun(final List<T> list, final Function<JsonObject, JsonObject> convert) {
         return To.toArray(list, convert);
+    }
+
+    // ---------------------- Envelop Returned --------------------------
+    public static <T> Future<T> toFuture(final T entity) {
+        return To.toFuture(entity);
+    }
+
+    public static <T, R> Future<R> toFuture(final T entity, final Supplier<R> defaultFun, final Function<T, R> actualFun) {
+        return null == entity ? Future.succeededFuture(defaultFun.get()) : Future.succeededFuture(actualFun.apply(entity));
     }
 
     // ---------------------- Envelop Returned --------------------------
@@ -198,6 +261,10 @@ public final class Ux {
     // ---------------------- Function Generator --------------------------------------
     public static Future<JsonObject> fnRpc(final JsonArray array) {
         return UxRpc.fnRpc(array);
+    }
+
+    public static Future<JsonArray> fnRpc(final JsonObject data) {
+        return UxRpc.fnRpc(data);
     }
 
     // ---------------------- Web Flow --------------------------------------
@@ -510,6 +577,10 @@ public final class Ux {
     }
 
     // ---------------------- New future ----------------------
+    public static <T> Future<Envelop> then(final T entity) {
+        return Future.succeededFuture(to(entity));
+    }
+
     public static <T> Future<JsonArray> thenJsonMore(final List<T> list) {
         return Future.succeededFuture(To.toArray(list, ""));
     }
