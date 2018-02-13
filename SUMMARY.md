@@ -129,6 +129,7 @@
   * [D10086 - Micro, Future with Utility X](doc/vertx-zero-tutorial/d10085-micro-future-with-utility-x.md)
   * [D10087 - Micro, Multi Rpc Calls](doc/vertx-zero-tutorial/d10087-micro-multi-rpc-calls.md)
   * [D10088 - Micro Stream,  Sender \( Agent \) to Terminator](doc/vertx-zero-tutorial/d10088-micro-stream-sender-agent-to-terminator.md)
+  * [D10089 - Micro Stream, Consumer \( Worker \) to Terminator](doc/vertx-zero-tutorial/d10089-micro-consumer-worker-to-terminator.md)
 
 ## Useful Related Documents
 

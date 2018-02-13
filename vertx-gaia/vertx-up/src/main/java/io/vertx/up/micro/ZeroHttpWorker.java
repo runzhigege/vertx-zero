@@ -2,6 +2,7 @@ package io.vertx.up.micro;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
+import io.vertx.up.annotations.Ipc;
 import io.vertx.up.annotations.Worker;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Receipt;
@@ -47,7 +48,7 @@ public class ZeroHttpWorker extends AbstractVerticle {
             // 4. Get target reference and method
             final Object reference = receipt.getProxy();
             final Method method = receipt.getMethod();
-            this.verifyArgs(method, getClass());
+            this.verifyArgs(method, this.getClass());
 
             // length = 1
             final Class<?>[] params = method.getParameterTypes();
@@ -62,7 +63,15 @@ public class ZeroHttpWorker extends AbstractVerticle {
 
             Fn.safeJvm(() -> Fn.safeNull(
                     () -> bus.<Envelop>consumer(address,
-                            message -> invoker.invoke(reference, method, message)),
+                            message -> {
+                                if (method.isAnnotationPresent(Ipc.class)) {
+                                    // Rpc continue replying
+                                    invoker.next(reference, method, message, this.vertx);
+                                } else {
+                                    // Direct replying
+                                    invoker.invoke(reference, method, message);
+                                }
+                            }),
                     address, reference, method), LOGGER);
         }
         // Record all the information;

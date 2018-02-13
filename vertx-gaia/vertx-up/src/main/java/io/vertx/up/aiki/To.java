@@ -73,7 +73,13 @@ class To {
         return Fn.get(Envelop.ok(),
                 () -> Fn.getSemi(entity instanceof WebException, null,
                         () -> Envelop.failure((WebException) entity),
-                        () -> Envelop.success(entity)),
+                        () -> {
+                            if (Envelop.class == entity.getClass()) {
+                                return (Envelop) entity;
+                            } else {
+                                return Envelop.success(entity);
+                            }
+                        }),
                 entity);
     }
 

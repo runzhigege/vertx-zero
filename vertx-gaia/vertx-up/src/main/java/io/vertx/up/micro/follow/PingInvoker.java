@@ -36,6 +36,7 @@ public class PingInvoker implements Invoker {
                      final Method method,
                      final Message<Envelop> message,
                      final Vertx vertx) {
+        // Return void is reject by Rpc continue
         throw new _501RpcRejectException(this.getClass());
     }
 }
