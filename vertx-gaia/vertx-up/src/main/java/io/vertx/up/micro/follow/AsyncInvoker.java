@@ -5,6 +5,8 @@ import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.log.Annal;
+import io.vertx.up.micro.ipc.client.TunnelClient;
 import io.vertx.up.tool.Jackson;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.tool.mirror.Types;
@@ -16,6 +18,9 @@ import java.lang.reflect.Method;
  * Future<T> method(I)
  */
 public class AsyncInvoker implements Invoker {
+
+    private static final Annal LOGGER = Annal.get(AsyncInvoker.class);
+
     @Override
     public void ensure(final Class<?> returnType, final Class<?> paramCls) {
         // Verify
@@ -34,6 +39,7 @@ public class AsyncInvoker implements Invoker {
         final Class<?> argType = method.getParameterTypes()[Values.IDX];
         // Deserialization from message bus.
         final Class<?> returnType = method.getReturnType();
+        LOGGER.info(Info.MSG_FUTURE, this.getClass(), returnType, false);
         // Get T
         final Class<?> tCls = returnType.getComponentType();
         if (Envelop.class == tCls) {
@@ -49,10 +55,37 @@ public class AsyncInvoker implements Invoker {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void next(final Object proxy,
                      final Method method,
                      final Message<Envelop> message,
                      final Vertx vertx) {
-        
+        final Envelop envelop = message.body();
+        // Get type of parameter first element
+        final Class<?> argType = method.getParameterTypes()[Values.IDX];
+        // Deserialization from message bus.
+        final Class<?> returnType = method.getReturnType();
+        LOGGER.info(Info.MSG_FUTURE, this.getClass(), returnType, true);
+        // Get T
+        final Class<?> tCls = returnType.getComponentType();
+        if (Envelop.class == tCls) {
+            // Input type is Envelop, input directly
+            final Future<Envelop> result = Instance.invoke(proxy, method.getName(), envelop);
+            result.compose(item -> TunnelClient.create(this.getClass())
+                    .connect(vertx)
+                    .connect(method)
+                    .send(item))
+                    .setHandler(Ux.toHandler(message));
+        } else {
+            final Object reference = envelop.data();
+            final Object arguments = Jackson.deserialize(Types.toString(reference), argType);
+            final Future future = Instance.invoke(proxy, method.getName(), arguments);
+            future.compose(item -> TunnelClient.create(this.getClass())
+                    .connect(vertx)
+                    .connect(method)
+                    .send(Ux.to(item)))
+                    .compose(item -> Future.succeededFuture(Ux.to(item)))
+                    .setHandler(Ux.toHandler(message));
+        }
     }
 }

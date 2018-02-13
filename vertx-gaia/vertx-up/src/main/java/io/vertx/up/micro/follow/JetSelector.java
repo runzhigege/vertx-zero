@@ -30,20 +30,24 @@ public class JetSelector {
         } else if (Envelop.class == returnType) {
             if (Envelop.class == paramCls) {
                 // Envelop method(Envelop)
+                // Rpc supported.
                 invoker = Instance.singleton(SyncInvoker.class);
             }
         } else if (Future.class.isAssignableFrom(returnType)) {
             if (Envelop.class == paramCls) {
                 // Future<T> method(Envelop)
+                // Rpc supported.
                 invoker = Instance.singleton(FutureInvoker.class);
             } else {
                 // Future<T> method(I)
+                // Rpc supported.
                 invoker = Instance.singleton(AsyncInvoker.class);
             }
         } else {
             if (!Message.class.isAssignableFrom(paramCls)) {
                 // Java direct type, except Message<T> / Envelop
                 // T method(I)
+                // Rpc supported.
                 invoker = Instance.singleton(DynamicInvoker.class);
             }
         }

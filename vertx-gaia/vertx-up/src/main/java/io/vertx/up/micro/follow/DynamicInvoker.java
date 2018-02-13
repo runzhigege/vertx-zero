@@ -1,16 +1,23 @@
 package io.vertx.up.micro.follow;
 
+import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
+import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
-import io.vertx.up.tool.Jackson;
+import io.vertx.up.log.Annal;
+import io.vertx.up.micro.ipc.client.TunnelClient;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.tool.mirror.Types;
+import io.vertx.up.web.ZeroSerializer;
 import io.vertx.zero.eon.Values;
 
 import java.lang.reflect.Method;
 
 public class DynamicInvoker implements Invoker {
+
+    private static final Annal LOGGER = Annal.get(DynamicInvoker.class);
+
     @Override
     public void ensure(final Class<?> returnType, final Class<?> paramCls) {
         // Verify
@@ -24,7 +31,14 @@ public class DynamicInvoker implements Invoker {
                        final Method method,
                        final Message<Envelop> message) {
         final Envelop envelop = message.body();
+        LOGGER.info(Info.MSG_FUTURE, this.getClass(), method.getReturnType(), false);
+        final Envelop returnValue = this.executeMethod(proxy, method, envelop);
+        message.reply(returnValue);
+    }
 
+    private Envelop executeMethod(final Object proxy,
+                                  final Method method,
+                                  final Envelop envelop) {
         // Get type of parameter first element.
         final Class<?> argType = method.getParameterTypes()[Values.IDX];
         // Deserialization from message bus.
@@ -34,11 +48,12 @@ public class DynamicInvoker implements Invoker {
             returnValue = Instance.invoke(proxy, method.getName(), envelop);
         } else {
             final Object reference = envelop.data();
-            final Object arguments = Jackson.deserialize(Types.toString(reference), argType);
+            // Non Direct
+            final Object arguments = ZeroSerializer.getValue(argType, Types.toString(reference));
             returnValue = Instance.invoke(proxy, method.getName(), arguments);
         }
         // Return type must not be Envelop because top layer has been finished checking.
-        message.reply(Envelop.success(returnValue));
+        return Envelop.success(returnValue);
     }
 
     @Override
@@ -46,6 +61,14 @@ public class DynamicInvoker implements Invoker {
                      final Method method,
                      final Message<Envelop> message,
                      final Vertx vertx) {
-
+        final Envelop envelop = message.body();
+        LOGGER.info(Info.MSG_FUTURE, this.getClass(), method.getReturnType(), true);
+        final Envelop returnValue = this.executeMethod(proxy, method, envelop);
+        TunnelClient.create(this.getClass())
+                .connect(vertx)
+                .connect(method)
+                .send(returnValue)
+                .compose(item -> Future.succeededFuture(Ux.to(item)))
+                .setHandler(Ux.toHandler(message));
     }
 }
