@@ -6,6 +6,14 @@ From this chapter we'll focus on rpc stream mode, this mode we'll meet different
 
 ![](/doc/image/d10088-1.png)
 
+Demo Projects and environment
+
+| Http Port | Ipc Port | Ipc Service Name | Project | Role |
+| :--- | :--- | :--- | :--- | :--- |
+| 6100 | -- | -- | up-athena | Api Gateway |
+| 6301 | 6311 | ipc-epimetheus | up-epimetheus | Originator |
+| 6501 | 6511 | ipc-hecate | up-hecate | Terminator |
+
 ## 2. Source Code
 
 > We have introduced interface style to ignore Actor, it's disabled in rpc communication, it means that if you send rpc request from Sender \( Agent \), you could not send the message to internal Consumer \( Worker \), the interface style is used in communication between Sender and Consumer.

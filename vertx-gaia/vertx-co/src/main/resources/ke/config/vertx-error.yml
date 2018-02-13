@@ -88,4 +88,5 @@ E60024: "(500) - (Ir) Your query meta is null, expected input meta object is not
 E60025: "(400) - (Ir) The \"pager\" started page number should start from 1, now input \"page\" is {0}"
 E60026: "(400) - (Ir) The op is not supported, please provide valid op of \"<, >, <=, >=, =, <>, !n, n, t, f, i, !i, s, e, c\", current is {0}"
 E60027: "(501) - (Rpc) This web flow does not support IPC continue flow. Class = {0}"
+E60028: "(500) - (Rpc) Zero system detect unexpected exception on class = {0}, returnValue is {1}."
 # (Web) Exception for standard third part

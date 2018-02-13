@@ -2,6 +2,7 @@ package io.vertx.up.micro.ipc.tower;
 
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.Future;
+import io.vertx.core.Vertx;
 import io.vertx.up.atom.Envelop;
 
 import java.lang.reflect.Method;
@@ -23,4 +24,7 @@ public interface Transit {
      */
     @Fluent
     Transit connect(Method method);
+
+    @Fluent
+    Transit connect(Vertx vertx);
 }

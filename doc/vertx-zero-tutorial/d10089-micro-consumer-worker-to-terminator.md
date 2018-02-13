@@ -1,6 +1,6 @@
 # D10089 - Micro Stream, Consumer \( Worker \) to Terminator
 
-From this chapter we'll focus on rpc stream mode, this mode we'll meet different role \( method \) such as `Originator, Coordinator, Terminator` etc. This chapter tutorial is different from [D10088 - Micro Stream,  Sender \( Agent \) to Terminator](/doc/vertx-zero-tutorial/d10088-micro-stream-sender-agent-to-terminator.md),
+From this chapter we'll focus on rpc stream mode, this mode we'll meet different role \( method \) such as `Originator, Coordinator, Terminator` etc. This chapter tutorial is different from [D10088 - Micro Stream,  Sender \( Agent \) to Terminator](doc/vertx-zero-tutorial/d10088-micro-stream-sender-agent-to-terminator.md),
 
 * In D10088, The `Originator` is Sender \( Agent \), it means that the request came from `eventloop` of vert.x;
 * In current tutorial, The `Originator` is Consumer \( Worker \), it means that the request came from `workerpool` of vert.x;
@@ -8,6 +8,14 @@ From this chapter we'll focus on rpc stream mode, this mode we'll meet different
 ## 1. Services
 
 ![](/doc/image/d10089-1.png)
+
+Demo Projects and environment
+
+| Http Port | Ipc Port | Ipc Service Name | Project | Role |
+| :--- | :--- | :--- | :--- | :--- |
+| 6100 | -- | -- | up-athena | Api Gateway |
+| 6301 | 6311 | ipc-epimetheus | up-epimetheus | Originator |
+| 6501 | 6511 | ipc-hecate | up-hecate | Terminator |
 
 ## 2. Source Code
 

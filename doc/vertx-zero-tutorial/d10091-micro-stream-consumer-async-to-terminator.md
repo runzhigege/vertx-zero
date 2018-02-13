@@ -6,6 +6,14 @@ This chapter we'll introduce consumer of async mode to send request to rpc `Term
 
 ![](/doc/image/d10091-1.png)
 
+Demo Projects and environment
+
+| Http Port | Ipc Port | Ipc Service Name | Project | Role |
+| :--- | :--- | :--- | :--- | :--- |
+| 6100 | -- | -- | up-athena | Api Gateway |
+| 6301 | 6311 | ipc-epimetheus | up-epimetheus | Originator |
+| 6501 | 6511 | ipc-hecate | up-hecate | Terminator |
+
 ## 2. Source Code
 
 ### 2.1. AsyncApi \( service: up-epimetheus \)
@@ -80,11 +88,11 @@ public class AsyncInsider {
 
 Then after you started above three services, you can test this demo:
 
-**URL** : http://localhost:6100/api/ipc/stream/async1/huan1
+**URL** : [http://localhost:6100/api/ipc/stream/async1/huan1](http://localhost:6100/api/ipc/stream/async1/huan1)
 
 **Method** : GET
 
-**Response** : 
+**Response** :
 
 ```json
 {

@@ -6,6 +6,14 @@ This chapter we'll focus on `Dynamic` types with java data.
 
 ![](/doc/image/d10092-1.png)
 
+Demo Projects and environment
+
+| Http Port | Ipc Port | Ipc Service Name | Project | Role |
+| :--- | :--- | :--- | :--- | :--- |
+| 6100 | -- | -- | up-athena | Api Gateway |
+| 6301 | 6311 | ipc-epimetheus | up-epimetheus | Originator |
+| 6501 | 6511 | ipc-hecate | up-hecate | Terminator |
+
 ## 2. Source Code
 
 ### 2.1. DynamicApi \( service: up-epimetheus \)
@@ -92,7 +100,7 @@ public class DynamicInsider {
 
 After you have started above three services, you can test this demo:
 
-**URL** : http://localhost:6100/api/ipc/stream/dynamic1/huan1
+**URL** : [http://localhost:6100/api/ipc/stream/dynamic1/huan1](http://localhost:6100/api/ipc/stream/dynamic1/huan1)
 
 **Method** : GET
 
@@ -117,5 +125,5 @@ This chapter consumer method signature is more freedom as following:
 public JsonObject sayDynamic(final String name)
 ```
 
-You can use primary type in worker and write any codes here. 
+You can use primary type in worker and write any codes here.
 
