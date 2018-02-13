@@ -38,7 +38,7 @@ _From 0.4.5.1 \( Inherit \)_
     <parent>
         <artifactId>vertx-import</artifactId>
         <groupId>cn.vertxup</groupId>
-        <version>0.4.6.1</version>
+        <version>0.4.6.2</version>
     </parent>
 ```
 
