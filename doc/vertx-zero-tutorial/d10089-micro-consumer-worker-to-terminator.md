@@ -1,6 +1,6 @@
 # D10089 - Micro Stream, Consumer \( Worker \) to Terminator
 
-From this chapter we'll focus on rpc stream mode, this mode we'll meet different role \( method \) such as `Originator, Coordinator, Terminator` etc. This chapter tutorial is different from [D10088 - Micro Stream,  Sender \( Agent \) to Terminator](doc/vertx-zero-tutorial/d10088-micro-stream-sender-agent-to-terminator.md),
+From this chapter we'll focus on rpc stream mode, this mode we'll meet different role \( method \) such as `Originator, Coordinator, Terminator` etc. This chapter tutorial is different from [D10088 - Micro Stream,  Sender \( Agent \) to Terminator](d10088-micro-stream-sender-agent-to-terminator.md),
 
 * In D10088, The `Originator` is Sender \( Agent \), it means that the request came from `eventloop` of vert.x;
 * In current tutorial, The `Originator` is Consumer \( Worker \), it means that the request came from `workerpool` of vert.x;

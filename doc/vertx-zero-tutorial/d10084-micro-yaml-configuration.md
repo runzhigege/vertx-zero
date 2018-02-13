@@ -18,7 +18,7 @@ Why we need so many projects ? Because in micro service tutorials we'll focus on
 
 ## 1. Etcd Configuration
 
-You can refer [D10074 - Configuration, vertx-etcd3.yml](doc/vertx-zero-tutorial/d10074-configuration-vertx-etcd3yml.md) tutorials for etcd configuration for zero node. Because of our examples here we listed following different configurations
+You can refer [D10074 - Configuration, vertx-etcd3.yml](d10074-configuration-vertx-etcd3yml.md) tutorials for etcd configuration for zero node. Because of our examples here we listed following different configurations
 
 * Api Gateway Configuration
 * Common Service \( None Rpc Server \)
