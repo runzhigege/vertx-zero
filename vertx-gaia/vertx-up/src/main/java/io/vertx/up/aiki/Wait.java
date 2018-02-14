@@ -40,7 +40,9 @@ class Wait {
             final boolean condition,
             final Actuator executor,
             final Supplier<Future<T>> caseLine) {
-        if (null != executor) executor.execute();
+        if (condition) {
+            if (null != executor) executor.execute();
+        }
         return branch(condition, caseLine);
     }
 
