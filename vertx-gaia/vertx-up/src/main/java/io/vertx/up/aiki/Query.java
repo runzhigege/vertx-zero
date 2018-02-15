@@ -71,9 +71,9 @@ class Query {
                 } else {
                     targetField = mapping.get(key);
                 }
+                // Ignore non-existing field in mapping here to avoid SQL errors.
+                criterias.put(targetField, criteria.getValue(field));
             }
-            // Ignore non-existing field in mapping here to avoid SQL errors.
-            criterias.put(targetField, criteria.getValue(field));
         }
         return criterias;
     }
