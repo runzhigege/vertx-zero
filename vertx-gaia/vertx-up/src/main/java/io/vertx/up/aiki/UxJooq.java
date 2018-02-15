@@ -97,18 +97,39 @@ public class UxJooq {
     }
 
     // CRUD - Upsert ----------------------------------------------------
+    private <T> T copyEntity(final T target, final T updated) {
+        final BeanCopier copier = BeanCopier.create(target.getClass(), updated.getClass(), false);
+        copier.copy(updated, target, null);
+        return target;
+    }
+
     public <T> Future<T> saveAsync(final Object id, final T updated) {
-        final Function<T, T> copyFun = (old) -> {
-            final BeanCopier copier = BeanCopier.create(old.getClass(), updated.getClass(), false);
-            copier.copy(updated, old, null);
-            return old;
-        };
-        return saveAsync(id, copyFun);
+        return saveAsync(id, (target) -> copyEntity(target, updated));
     }
 
     public <T> Future<T> saveAsync(final Object id, final Function<T, T> copyFun) {
         return this.<T>findByIdAsync(id).compose(old ->
                 this.<T>updateAsync(copyFun.apply(old)));
+    }
+
+    public <T> Future<T> upsertReturningPrimaryAsync(final JsonObject andFilters, final T updated, final Consumer<Long> consumer) {
+        return this.<T>fetchOneAndAsync(andFilters)
+                .compose(item -> Ux.match(
+                        // null != item, updated to existing item.
+                        Ux.fork(() -> this.<T>updateAsync(copyEntity(item, updated))),
+                        // null == item, insert data
+                        Ux.branch(null == item, () -> this.insertReturningPrimaryAsync(updated, consumer))
+                ));
+    }
+
+    public <T> Future<T> upsertAsync(final JsonObject andFilters, final T updated) {
+        return this.<T>fetchOneAndAsync(andFilters)
+                .compose(item -> Ux.match(
+                        // null != item, updated to existing item.
+                        Ux.fork(() -> this.<T>updateAsync(copyEntity(item, updated))),
+                        // null == item, insert data
+                        Ux.branch(null == item, () -> this.insertAsync(updated))
+                ));
     }
 
     // CRUD - Delete ----------------------------------------------------
