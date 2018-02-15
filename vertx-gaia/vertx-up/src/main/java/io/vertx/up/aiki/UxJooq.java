@@ -9,10 +9,10 @@ import io.vertx.up.atom.query.Criteria;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
 import io.vertx.up.log.Annal;
+import io.vertx.up.tool.Jackson;
 import io.vertx.up.tool.StringUtil;
 import io.vertx.up.tool.mirror.Types;
 import io.vertx.zero.eon.Values;
-import net.sf.cglib.beans.BeanCopier;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 
@@ -98,9 +98,10 @@ public class UxJooq {
 
     // CRUD - Upsert ----------------------------------------------------
     private <T> T copyEntity(final T target, final T updated) {
-        final BeanCopier copier = BeanCopier.create(target.getClass(), updated.getClass(), false);
-        copier.copy(updated, target, null);
-        return target;
+        final JsonObject targetJson = Jackson.serializeJson(target);
+        final JsonObject sourceJson = Jackson.serializeJson(updated);
+        targetJson.mergeIn(sourceJson, true);
+        return (T) Jackson.deserialize(targetJson, target.getClass());
     }
 
     public <T> Future<T> saveAsync(final Object id, final T updated) {
