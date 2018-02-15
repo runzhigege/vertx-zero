@@ -58,7 +58,7 @@ class Query {
         return sorters;
     }
 
-    private static JsonObject criteria(final JsonObject criteria, final Mojo mojo) {
+    static JsonObject criteria(final JsonObject criteria, final Mojo mojo) {
         final JsonObject criterias = new JsonObject();
         final ConcurrentMap<String, String> mapping = mojo.getColumns();
         for (final String field : criteria.fieldNames()) {

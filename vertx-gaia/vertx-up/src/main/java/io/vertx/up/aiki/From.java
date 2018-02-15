@@ -5,6 +5,7 @@ import io.vertx.up.func.Fn;
 import io.vertx.up.tool.Jackson;
 import io.vertx.up.tool.StringUtil;
 import io.vertx.zero.atom.Mirror;
+import io.vertx.zero.atom.Mojo;
 
 class From {
 
@@ -16,6 +17,11 @@ class From {
                         .connect(data)
                         .from()
                         .get()), pojo);
+    }
+
+    static JsonObject fromJson(final JsonObject criteria, final String pojo) {
+        final Mojo mojo = Mirror.create(From.class).mount(pojo).mojo();
+        return Query.criteria(criteria, mojo);
     }
 }
 
