@@ -3,10 +3,25 @@ package io.vertx.up.aiki;
 import io.vertx.core.json.JsonObject;
 import io.vertx.quiz.TestBase;
 import io.vertx.up.tool.Jackson;
+import net.sf.cglib.beans.BeanCopier;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class D10047Tc extends TestBase {
+    private <T> T copyEntity(final T target, final T updated) {
+        final BeanCopier copier = BeanCopier.create(updated.getClass(), target.getClass(), false);
+        copier.copy(updated, target, null);
+        return target;
+    }
+
+    @Test
+    public void testCopy() {
+        final JsonObject data = this.getJson("d10047.json");
+        final D10047Obj obj = Jackson.deserialize(data, D10047Obj.class);
+        final D10047Obj target = new D10047Obj();
+        final D10047Obj result = this.copyEntity(target, obj);
+        System.out.println(Jackson.serialize(target));
+    }
 
     @Test
     public void testToJson() {
