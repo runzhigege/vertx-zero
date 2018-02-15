@@ -129,6 +129,10 @@ public final class Ux {
         return From.fromJson(data, clazz, pojo);
     }
 
+    public static JsonObject fromJson(final JsonObject data, final String pojo) {
+        return From.fromJson(data, pojo);
+    }
+
     // T -> JsonObject ( with convert )
     public static <T> JsonObject toJsonFun(final T entity, final Function<JsonObject, JsonObject> convert) {
         return To.toJson(entity, convert);
