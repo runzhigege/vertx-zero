@@ -157,6 +157,19 @@ public class UxJooq {
         return Future.succeededFuture(Boolean.TRUE);
     }
 
+    // CRUD - Existing/Missing ------------------------------------------
+
+    public <T> Future<Boolean> existsByIdAsync(final Object id) {
+        final CompletableFuture<Boolean> future =
+                this.vertxDAO.existsByIdAsync(id);
+        return Async.toFuture(future);
+    }
+
+    public <T> Future<Boolean> existsOneAsync(final JsonObject andFilters) {
+        return this.<T>fetchOneAndAsync(andFilters)
+                .compose(item -> Future.succeededFuture(null != item));
+    }
+
     // Fetch Operation --------------------------------------------------
     // Fetch One
     public <T> Future<T> fetchOneAsync(final String column, final Object value) {
