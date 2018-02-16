@@ -59,6 +59,7 @@ E40046: "The method {0} annotated with @Ipc must contain only one argument of En
 E40047: "Zero system could not select correct invoker by returnType = {0}, paramType = {1}"
 E40048: "(Rpc) Zero system detect agent interface \"{0}\" only without implementation class, it''s forbidden in rpc stream workflow."
 E40049: "Zero worker method signature conflicts, method = {0}, class = {1}"
+E40050: "You''ll run zero in \"Micro Mode\", but etcd configuration is not prepared, system detected error: {0}"
 # (Web) Exception for web
 E60000: (400) - Request validation failure, class = {0}, method = {1}, message = {2}
 E60001: (400) - The input content could not be converted into valid resource user {0}
