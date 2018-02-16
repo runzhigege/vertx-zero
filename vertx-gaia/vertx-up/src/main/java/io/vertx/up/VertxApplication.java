@@ -2,6 +2,7 @@ package io.vertx.up;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServerOptions;
+import io.vertx.tp.etcd.center.EtcdData;
 import io.vertx.up.annotations.Up;
 import io.vertx.up.boot.DansApplication;
 import io.vertx.up.concurrent.Runner;
@@ -13,6 +14,8 @@ import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroLauncher;
 import io.vertx.up.web.anima.*;
 import io.vertx.zero.config.ServerVisitor;
+import io.vertx.zero.exception.EtcdNetworkException;
+import io.vertx.zero.exception.MicroModeUpException;
 import io.vertx.zero.exception.UpClassArgsException;
 import io.vertx.zero.exception.UpClassInvalidException;
 import io.vertx.zero.micro.config.DynamicVisitor;
@@ -51,6 +54,8 @@ public class VertxApplication {
 
     public static void run(final Class<?> clazz, final Object... args) {
         Fn.shuntRun(() -> {
+            // Precheck mode
+            ensureEtcd(clazz);
             // Run vertx application.
             if (isGateway()) {
                 // Api Gateway
@@ -71,6 +76,17 @@ public class VertxApplication {
             apiScanned.addAll(visitor.visit(ServerType.API.toString()).keySet());
         }, LOGGER);
         return !apiScanned.isEmpty();
+    }
+
+    private static void ensureEtcd(final Class<?> clazz) {
+        if (EtcdData.enabled()) {
+            try {
+                EtcdData.create(clazz);
+            } catch (final EtcdNetworkException ex) {
+                Fn.flingUp(true, LOGGER,
+                        MicroModeUpException.class, clazz, ex.getMessage());
+            }
+        }
     }
 
     private void run(final Object... args) {
