@@ -4,6 +4,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.ZeroRunException;
 
+import java.net.ConnectException;
 import java.util.Arrays;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -74,7 +75,10 @@ class Zero {
         } catch (final ZeroRunException ex) {
             throw ex;
         } catch (final Throwable ex) {
-            LOGGER.jvm(ex);
+            // ConnectException will be reach out
+            if (!(ex instanceof ConnectException)) {
+                LOGGER.jvm(ex);
+            }
         }
         return ret;
     }

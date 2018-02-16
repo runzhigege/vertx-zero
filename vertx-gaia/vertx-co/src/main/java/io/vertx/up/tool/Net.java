@@ -1,7 +1,6 @@
 package io.vertx.up.tool;
 
 import io.vertx.up.func.Fn;
-import io.vertx.up.log.Annal;
 import io.vertx.up.tool.net.IPHost;
 
 import java.net.InetAddress;
@@ -9,8 +8,6 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 public class Net {
-
-    private final static Annal LOGGER = Annal.get(Net.class);
 
     /**
      * Check whether host:port is ok to connect
