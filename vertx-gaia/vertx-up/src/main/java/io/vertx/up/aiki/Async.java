@@ -51,6 +51,7 @@ class Async {
         completableFuture.thenAcceptAsync(future::complete)
                 .exceptionally((ex) -> {
                     future.fail(ex);
+                    ex.printStackTrace();
                     return null;
                 });
         return future;
@@ -69,6 +70,7 @@ class Async {
                         () -> future.complete(To.toJson(item, pojo))
                 )).exceptionally((ex) -> {
                     future.fail(ex);
+                    ex.printStackTrace();
                     return null;
                 }));
         return future;
@@ -87,6 +89,7 @@ class Async {
                         () -> future.complete(To.toArray(item, pojo))
                 )).exceptionally((ex) -> {
                     future.fail(ex);
+                    ex.printStackTrace();
                     return null;
                 }));
         return future;
