@@ -194,7 +194,8 @@ public class UxJooq {
     }
 
     public <T> Future<List<T>> fetchInAsync(final String column, final Object... value) {
-        return fetchInAsync(column, Arrays.asList(value));
+        final JsonArray values = Types.toJArray(Arrays.asList(value));
+        return fetchInAsync(column, values);
     }
 
     public <T> Future<List<T>> fetchInAsync(final String column, final JsonArray values) {
