@@ -5,11 +5,14 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.func.Fn;
+import io.vertx.up.log.Annal;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 class Async {
+
+    private static final Annal LOGGER = Annal.get(Async.class);
 
     static <T> Future<Envelop> toSingle(
             final String pojo,
@@ -51,7 +54,7 @@ class Async {
         completableFuture.thenAcceptAsync(future::complete)
                 .exceptionally((ex) -> {
                     future.fail(ex);
-                    ex.printStackTrace();
+                    LOGGER.jvm(ex);
                     return null;
                 });
         return future;
@@ -70,7 +73,7 @@ class Async {
                         () -> future.complete(To.toJson(item, pojo))
                 )).exceptionally((ex) -> {
                     future.fail(ex);
-                    ex.printStackTrace();
+                    LOGGER.jvm(ex);
                     return null;
                 }));
         return future;
@@ -89,7 +92,7 @@ class Async {
                         () -> future.complete(To.toArray(item, pojo))
                 )).exceptionally((ex) -> {
                     future.fail(ex);
-                    ex.printStackTrace();
+                    LOGGER.jvm(ex);
                     return null;
                 }));
         return future;
