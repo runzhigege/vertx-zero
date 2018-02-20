@@ -12,10 +12,7 @@ import io.vertx.up.tool.Period;
 import io.vertx.zero.eon.Values;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -139,6 +136,13 @@ public class Types {
     public static <T> JsonArray toJArray(final Set<T> set) {
         final JsonArray array = new JsonArray();
         Observable.fromIterable(set)
+                .subscribe(array::add);
+        return array;
+    }
+
+    public static <T> JsonArray toJArray(final List<T> list) {
+        final JsonArray array = new JsonArray();
+        Observable.fromIterable(list)
                 .subscribe(array::add);
         return array;
     }
