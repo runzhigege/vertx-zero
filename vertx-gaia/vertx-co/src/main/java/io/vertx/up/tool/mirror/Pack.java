@@ -1,6 +1,7 @@
 package io.vertx.up.tool.mirror;
 
 import io.reactivex.Observable;
+import io.vertx.core.impl.ConcurrentHashSet;
 import io.vertx.up.log.Annal;
 
 import java.util.HashSet;
@@ -16,42 +17,42 @@ public final class Pack {
 
     private static final Set<Class<?>> CLASSES = new HashSet<>();
 
-    private static final Set<String> FORBIDDEN = new HashSet<String>() {
+    private static final ConcurrentHashSet<String> FORBIDDEN = new ConcurrentHashSet<String>() {
         {
-            add("java");
-            add("javax");
-            add("jdk");
+            this.add("java");
+            this.add("javax");
+            this.add("jdk");
             // Sax & Yaml
-            add("org.xml");
-            add("org.yaml");
+            this.add("org.xml");
+            this.add("org.yaml");
             // Idea
-            add("com.intellij");
+            this.add("com.intellij");
             // Sun
-            add("sun");
-            add("com.sun");
+            this.add("sun");
+            this.add("com.sun");
             // Netty
-            add("io.netty");
+            this.add("io.netty");
             // Jackson
-            add("com.fasterxml");
+            this.add("com.fasterxml");
             // Logback
-            add("ch.qos");
-            add("org.slf4j");
+            this.add("ch.qos");
+            this.add("org.slf4j");
             // Vert.x
-            add("io.vertx.core");
-            add("io.vertx.spi");
+            this.add("io.vertx.core");
+            this.add("io.vertx.spi");
             // Asm
-            add("org.ow2");
-            add("org.objectweb");
-            add("com.esotericsoftware");
+            this.add("org.ow2");
+            this.add("org.objectweb");
+            this.add("com.esotericsoftware");
             // Hazelcast
-            add("com.hazelcast");
+            this.add("com.hazelcast");
             // Glassfish
-            add("org.glassfish");
+            this.add("org.glassfish");
             // Junit
-            add("org.junit");
-            add("junit");
+            this.add("org.junit");
+            this.add("junit");
             // Hamcrest
-            add("org.hamcrest");
+            this.add("org.hamcrest");
         }
     };
 
