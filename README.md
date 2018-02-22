@@ -22,18 +22,6 @@ This framework contains four sub-projects, all these projects are put in `vertx-
 
 If you want to use Zero framework, you can add following dependency into you `pom.xml` to use Zero:
 
-_Before 0.4.5.1 \( Direct \)_
-
-```xml
-    <dependency>
-        <groupId>cn.vertxup</groupId>
-        <artifactId>vertx-up</artifactId>
-        <version>0.4.5</version>
-    </dependency>
-```
-
-_From 0.4.5.1 \( Inherit \)_
-
 ```xml
     <parent>
         <artifactId>vertx-import</artifactId>
