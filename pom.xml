@@ -69,7 +69,7 @@
         <glassfish.el.version>3.0.1-b09</glassfish.el.version>
 
         <!-- Database Needed -->
-        <hikari.cp.version>2.7.6</hikari.cp.version>
+        <hikari.cp.version>2.7.8</hikari.cp.version>
         <jooq.version>3.10.5</jooq.version>
         <vertx.jooq.version>2.4.1</vertx.jooq.version>
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
@@ -98,7 +98,7 @@
         <netty.tcnative.version>2.0.7.Final</netty.tcnative.version>
         <netty.version>4.1.21.Final</netty.version>
         <hazelcast.version>3.9.3</hazelcast.version>
-        <swagger.version>1.5.0</swagger.version>
+        <swagger.version>1.6.0</swagger.version>
         <error.prone.version>2.2.0</error.prone.version>
         <reactive.streams>1.0.2</reactive.streams>
         <!-- JSR -->
