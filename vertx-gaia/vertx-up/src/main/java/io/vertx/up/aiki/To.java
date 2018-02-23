@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 class To {
 
@@ -27,6 +28,19 @@ class To {
                         () -> Future.failedFuture((Throwable) entity),
                         () -> Future.succeededFuture(entity)),
                 entity);
+    }
+
+    static JsonObject toFilters(final String[] columns, final Supplier<Object>... suppliers) {
+        final JsonObject filters = new JsonObject();
+        final int size = Math.min(columns.length, suppliers.length);
+        for (int idx = 0; idx < size; idx++) {
+            final String column = columns[idx];
+            final Supplier<Object> supplier = suppliers[idx];
+            if (StringUtil.isNil(column) && Objects.nonNull(supplier)) {
+                filters.put(column, supplier.get());
+            }
+        }
+        return filters;
     }
 
     static <T> JsonObject toJson(
