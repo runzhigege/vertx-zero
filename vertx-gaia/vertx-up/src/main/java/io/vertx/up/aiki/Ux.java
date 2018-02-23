@@ -396,9 +396,18 @@ public final class Ux {
         return In.request(envelop, index, JsonObject.class);
     }
 
+
     // -> Message<Envelop> -> JsonObject ( Interface mode )
     public static JsonObject getJson(final Message<Envelop> message) {
         return In.request(message, 0, JsonObject.class);
+    }
+
+    public static <T> T fromEnvelop(final Envelop envelop, final Class<T> clazz, final String pojo) {
+        return From.fromJson(getJson(envelop), clazz, pojo);
+    }
+
+    public static JsonObject fromEnvelop(final Envelop envelop, final String pojo) {
+        return From.fromJson(Ux.getJson(envelop), pojo);
     }
 
     public static JsonObject getJson(final Envelop envelop) {
@@ -418,6 +427,14 @@ public final class Ux {
         return In.request(message, 1, JsonObject.class);
     }
 
+    public static <T> T fromEnvelop1(final Envelop envelop, final Class<T> clazz, final String pojo) {
+        return From.fromJson(getJson1(envelop), clazz, pojo);
+    }
+
+    public static JsonObject fromEnvelop1(final Envelop envelop, final String pojo) {
+        return From.fromJson(Ux.getJson1(envelop), pojo);
+    }
+
     public static JsonObject getJson1(final Envelop envelop) {
         return In.request(envelop, 1, JsonObject.class);
     }
@@ -431,6 +448,14 @@ public final class Ux {
         return In.request(envelop, 2, JsonObject.class);
     }
 
+    public static JsonObject fromEnvelop2(final Envelop envelop, final String pojo) {
+        return From.fromJson(Ux.getJson2(envelop), pojo);
+    }
+
+    public static <T> T fromEnvelop2(final Envelop envelop, final Class<T> clazz, final String pojo) {
+        return From.fromJson(getJson2(envelop), clazz, pojo);
+    }
+
     // -> Message<Envelop> -> JsonObject ( Interface mode )
     public static JsonObject getJson3(final Message<Envelop> message) {
         return In.request(message, 3, JsonObject.class);
@@ -438,6 +463,14 @@ public final class Ux {
 
     public static JsonObject getJson3(final Envelop envelop) {
         return In.request(envelop, 3, JsonObject.class);
+    }
+
+    public static JsonObject fromEnvelop3(final Envelop envelop, final String pojo) {
+        return From.fromJson(Ux.getJson3(envelop), pojo);
+    }
+
+    public static <T> T fromEnvelop3(final Envelop envelop, final Class<T> clazz, final String pojo) {
+        return From.fromJson(getJson3(envelop), clazz, pojo);
     }
 
     // -> Message<Envelop> -> Integer ( Interface mode )
