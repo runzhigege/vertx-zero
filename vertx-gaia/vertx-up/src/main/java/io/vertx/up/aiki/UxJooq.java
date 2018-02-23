@@ -226,6 +226,11 @@ public class UxJooq {
         return this.searchOrAsync(inquiry, "");
     }
 
+    public Future<JsonObject> searchOrAsync(final JsonObject params, final String pojo) {
+        final Inquiry inquiry = Query.getInquiry(params, pojo);
+        return searchOrAsync(inquiry, pojo);
+    }
+
     public Future<JsonObject> searchOrAsync(final Inquiry inquiry, final String pojo) {
         // Pager, Sort, Criteria, Projection
         final JsonObject result = new JsonObject();
@@ -243,6 +248,11 @@ public class UxJooq {
 
     public Future<JsonObject> searchAndAsync(final Inquiry inquiry) {
         return this.searchAndAsync(inquiry, "");
+    }
+
+    public Future<JsonObject> searchAndAsync(final JsonObject params, final String pojo) {
+        final Inquiry inquiry = Query.getInquiry(params, pojo);
+        return searchAndAsync(inquiry, pojo);
     }
 
     public Future<JsonObject> searchAndAsync(final Inquiry inquiry, final String pojo) {

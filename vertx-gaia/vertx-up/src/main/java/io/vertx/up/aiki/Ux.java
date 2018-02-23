@@ -84,6 +84,18 @@ public final class Ux {
         }
     }
 
+    /**
+     * Debug only
+     *
+     * @param item
+     * @param <T>
+     * @return
+     */
+    public static <T> Future<T> debug(final T item) {
+        Fn.safeNull(() -> Debug.monitor(item), item);
+        return Future.succeededFuture(item);
+    }
+
     // Business method
     // page, size -> JsonObject
     public static JsonObject toPagerJson(final int page, final int size) {
@@ -119,6 +131,10 @@ public final class Ux {
     // T -> JsonObject ( with Pojo )
     public static <T> JsonObject toJson(final T entity, final String pojo) {
         return To.toJson(entity, pojo);
+    }
+
+    public static JsonObject toFilters(final String[] columns, final Supplier<Object>... supplier) {
+        return To.toFilters(columns, supplier);
     }
 
     public static <T> T fromJson(final JsonObject data, final Class<T> clazz) {
