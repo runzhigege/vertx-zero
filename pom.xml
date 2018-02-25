@@ -237,6 +237,12 @@
                 <groupId>io.github.jklingsporn</groupId>
                 <artifactId>vertx-jooq-generate</artifactId>
                 <version>${vertx.jooq.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>io.github.jklingsporn</groupId>
+                        <artifactId>vertx-jooq-shared</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>mysql</groupId>
@@ -550,6 +556,17 @@
                 <groupId>com.google.protobuf</groupId>
                 <artifactId>protobuf-java</artifactId>
                 <version>${protobuf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java-util</artifactId>
+                <version>${protobuf.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.google.protobuf</groupId>
+                        <artifactId>protobuf-java</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <!-- https://mvnrepository.com/artifact/cglib/cglib -->
             <dependency>

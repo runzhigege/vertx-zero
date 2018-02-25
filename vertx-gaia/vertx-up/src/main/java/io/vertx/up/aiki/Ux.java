@@ -31,6 +31,10 @@ public final class Ux {
     // ---------------------- If Condition ----------------------------
 
     public static <T> Future<T> match(final Case.DefaultCase<T> defaultCase, final Case<T>... matchers) {
+        return Wait.match(() -> defaultCase, matchers).second.get();
+    }
+
+    public static <T> Future<T> match(final Supplier<Case.DefaultCase<T>> defaultCase, final Case<T>... matchers) {
         return Wait.match(defaultCase, matchers).second.get();
     }
 
