@@ -147,6 +147,25 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- Health Checking -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-health-check</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.vertx</groupId>
+                    <artifactId>vertx-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.vertx</groupId>
+                    <artifactId>vertx-web</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.vertx</groupId>
+                    <artifactId>vertx-auth-common</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <!-- Mongo Db Client & Provider -->
         <dependency>
             <groupId>io.vertx</groupId>

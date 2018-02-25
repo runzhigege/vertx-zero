@@ -31,6 +31,10 @@ public final class Ux {
     // ---------------------- If Condition ----------------------------
 
     public static <T> Future<T> match(final Case.DefaultCase<T> defaultCase, final Case<T>... matchers) {
+        return Wait.match(() -> defaultCase, matchers).second.get();
+    }
+
+    public static <T> Future<T> match(final Supplier<Case.DefaultCase<T>> defaultCase, final Case<T>... matchers) {
         return Wait.match(defaultCase, matchers).second.get();
     }
 
@@ -613,9 +617,19 @@ public final class Ux {
         return In.request(message, JsonObject.class);
     }
 
+    // -> Envelop -> JsonObject ( Agent mode )
+    public static JsonObject getBody(final Envelop envelop) {
+        return In.request(envelop, JsonObject.class);
+    }
+
     // -> Message<Envelop> -> T ( Agent mode )
     public static <T> T getBodyT(final Message<Envelop> message, final Class<T> clazz) {
         return In.request(message, clazz);
+    }
+
+    // -> Envelop -> T ( Agent mode )
+    public static <T> T getBodyT(final Envelop envelop, final Class<T> clazz) {
+        return In.request(envelop, clazz);
     }
     // ---------------------- Request Data Ending --------------------------
 
