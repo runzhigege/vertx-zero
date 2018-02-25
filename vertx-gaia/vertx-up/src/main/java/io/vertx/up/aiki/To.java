@@ -36,7 +36,7 @@ class To {
         for (int idx = 0; idx < size; idx++) {
             final String column = columns[idx];
             final Supplier<Object> supplier = suppliers[idx];
-            if (StringUtil.isNil(column) && Objects.nonNull(supplier)) {
+            if (!StringUtil.isNil(column) && Objects.nonNull(supplier)) {
                 filters.put(column, supplier.get());
             }
         }
