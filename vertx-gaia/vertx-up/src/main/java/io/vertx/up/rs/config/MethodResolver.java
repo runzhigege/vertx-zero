@@ -21,13 +21,13 @@ class MethodResolver {
     private static final ConcurrentMap<Class<?>, HttpMethod> METHODS =
             new ConcurrentHashMap<Class<?>, HttpMethod>() {
                 {
-                    put(GET.class, HttpMethod.GET);
-                    put(POST.class, HttpMethod.POST);
-                    put(PUT.class, HttpMethod.PUT);
-                    put(DELETE.class, HttpMethod.DELETE);
-                    put(OPTIONS.class, HttpMethod.OPTIONS);
-                    put(HEAD.class, HttpMethod.HEAD);
-                    put(PATCH.class, HttpMethod.PATCH);
+                    this.put(GET.class, HttpMethod.GET);
+                    this.put(POST.class, HttpMethod.POST);
+                    this.put(PUT.class, HttpMethod.PUT);
+                    this.put(DELETE.class, HttpMethod.DELETE);
+                    this.put(OPTIONS.class, HttpMethod.OPTIONS);
+                    this.put(HEAD.class, HttpMethod.HEAD);
+                    this.put(PATCH.class, HttpMethod.PATCH);
                 }
             };
 

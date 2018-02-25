@@ -47,12 +47,12 @@ class Wait {
     }
 
     static <T> Case<T> match(
-            final Case.DefaultCase<T> defaultCase,
+            final Supplier<Case.DefaultCase<T>> defaultSupplier,
             final Case<T>... matchers
     ) {
         for (final Case<T> each : matchers) {
             if (each.first.get()) return each;
         }
-        return defaultCase;
+        return defaultSupplier.get();
     }
 }
