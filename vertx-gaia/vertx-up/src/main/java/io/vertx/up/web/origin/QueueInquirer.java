@@ -2,6 +2,7 @@ package io.vertx.up.web.origin;
 
 import io.reactivex.Observable;
 import io.vertx.core.eventbus.Message;
+import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.eon.Info;
 import io.vertx.up.func.Fn;
@@ -34,6 +35,7 @@ public class QueueInquirer implements Inquirer<Set<Class<?>>> {
         Observable.fromIterable(clazzes)
                 .map(Class::getDeclaredMethods)
                 .flatMap(Observable::fromArray)
+                .filter(method -> method.isAnnotationPresent(Address.class))
                 .subscribe(method -> {
                     final Class<?> returnType = method.getReturnType();
                     final Class<?> parameterTypes = method.getParameterTypes()[0];
