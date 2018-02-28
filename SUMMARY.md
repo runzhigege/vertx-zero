@@ -138,6 +138,7 @@
   * [D10095 - Security, Basic Authorization](doc/vertx-zero-tutorial/d10095-security-basic-authorization.md)
   * [D10096 - Exception, Readable message to help UI](doc/vertx-zero-tutorial/d10096-exception-readable-message-to-help-ui.md)
   * [D10097 - Jooq/CRUD, Save/Existing Operation](doc/vertx-zero-tutorial/d10097-jooqcrud-save-operation.md)
+  * [D10098 - JSR340 Filter in Agent](doc/vertx-zero-tutorial/d10098-jsr340-filter-in-agent.md)
 
 ## Useful Related Documents
 

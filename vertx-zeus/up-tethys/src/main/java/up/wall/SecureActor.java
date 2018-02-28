@@ -9,7 +9,7 @@ import io.vertx.up.annotations.Authenticate;
 import io.vertx.up.annotations.Wall;
 import io.vertx.up.secure.handler.JwtOstium;
 
-@Wall(value = "jwt", path = "/api/*")
+@Wall(value = "jwt", path = "/secure/*")
 public class SecureActor {
     @Authenticate
     public AuthHandler authenticate(final Vertx vertx,
