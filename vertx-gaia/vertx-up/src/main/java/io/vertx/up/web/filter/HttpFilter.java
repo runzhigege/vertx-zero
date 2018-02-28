@@ -11,7 +11,7 @@ import io.vertx.zero.exception.FilterContextException;
 
 import java.util.Set;
 
-public abstract class RestFilter implements Filter {
+public abstract class HttpFilter implements Filter {
 
     private transient RoutingContext context;
     private transient final Annal logger = Annal.get(this.getClass());
@@ -32,8 +32,8 @@ public abstract class RestFilter implements Filter {
         return null == reference ? null : (T) reference;
     }
 
-    void doNext(final HttpServerRequest request,
-                final HttpServerResponse response) {
+    protected void doNext(final HttpServerRequest request,
+                          final HttpServerResponse response) {
         // If response end it means that it's not needed to move next.
         if (!response.ended()) {
             this.context.next();

@@ -13,8 +13,14 @@ public class UriHub implements Hub<Route> {
     @Override
     public void mount(final Route route,
                       final Event event) {
-        route.path(event.getPath())
-                .method(event.getMethod())
-                .order(event.getOrder());
+        if (null == event.getMethod()) {
+            // Support filter JSR340
+            route.path(event.getPath())
+                    .order(event.getOrder());
+        } else {
+            route.path(event.getPath())
+                    .method(event.getMethod())
+                    .order(event.getOrder());
+        }
     }
 }

@@ -30,24 +30,25 @@ public interface Filler {
             new ConcurrentHashMap<Class<? extends Annotation>, Filler>() {
                 {
                     // JSR311 Provided
-                    put(QueryParam.class, Instance.singleton(QueryFiller.class));
-                    put(FormParam.class, Instance.singleton(FormFiller.class));
-                    put(MatrixParam.class, Instance.singleton(QueryFiller.class));
-                    put(PathParam.class, Instance.singleton(PathFiller.class));
-                    put(HeaderParam.class, Instance.singleton(HeaderFiller.class));
-                    put(CookieParam.class, Instance.singleton(CookieFiller.class));
+                    this.put(QueryParam.class, Instance.singleton(QueryFiller.class));
+                    this.put(FormParam.class, Instance.singleton(FormFiller.class));
+                    this.put(MatrixParam.class, Instance.singleton(QueryFiller.class));
+                    this.put(PathParam.class, Instance.singleton(PathFiller.class));
+                    this.put(HeaderParam.class, Instance.singleton(HeaderFiller.class));
+                    this.put(CookieParam.class, Instance.singleton(CookieFiller.class));
                     // Extension
-                    put(BodyParam.class, Instance.singleton(EmptyFiller.class));
-                    put(StreamParam.class, Instance.singleton(EmptyFiller.class));
-                    put(SessionParam.class, Instance.singleton(SessionFiller.class));
+                    this.put(BodyParam.class, Instance.singleton(EmptyFiller.class));
+                    this.put(StreamParam.class, Instance.singleton(EmptyFiller.class));
+                    this.put(SessionParam.class, Instance.singleton(SessionFiller.class));
+                    this.put(ContextParam.class, Instance.singleton(ContextFiller.class));
                 }
             };
 
     Set<Class<? extends Annotation>> NO_VALUE =
             new HashSet<Class<? extends Annotation>>() {
                 {
-                    add(BodyParam.class);
-                    add(StreamParam.class);
+                    this.add(BodyParam.class);
+                    this.add(StreamParam.class);
                 }
             };
 }

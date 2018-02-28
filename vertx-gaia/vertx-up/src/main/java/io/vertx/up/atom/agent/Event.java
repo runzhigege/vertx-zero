@@ -137,6 +137,7 @@ public class Event implements Serializable {
                 ", produces=" + this.produces +
                 ", method=" + this.method +
                 ", action=" + this.action +
+                ", proxy=" + this.proxy +
                 '}';
     }
 }
