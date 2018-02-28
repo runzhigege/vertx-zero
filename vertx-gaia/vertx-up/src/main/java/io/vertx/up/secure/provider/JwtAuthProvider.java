@@ -101,10 +101,12 @@ public class JwtAuthProvider implements JwtAuth {
             }
 
         } catch (IOException | FileSystemException | CertificateException | NoSuchAlgorithmException | KeyStoreException var23) {
+            var23.printStackTrace();
             throw new RuntimeException(var23);
         }
     }
 
+    @Override
     public void authenticate(final JsonObject authInfo, final Handler<AsyncResult<User>> resultHandler) {
         try {
             final JsonObject payload = this.jwt.decode(authInfo.getString("jwt"));
@@ -134,17 +136,18 @@ public class JwtAuthProvider implements JwtAuth {
 
             resultHandler.handle(Future.succeededFuture(new JWTUser(payload, this.permissionsClaimKey)));
         } catch (final RuntimeException var5) {
+            var5.printStackTrace();
             resultHandler.handle(Future.failedFuture(var5));
         }
 
     }
 
+    @Override
     public String generateToken(final JsonObject claims, final JWTOptions options) {
         final JsonObject _claims = claims.copy();
         if (options.getPermissions() != null && !_claims.containsKey(this.permissionsClaimKey)) {
             _claims.put(this.permissionsClaimKey, new JsonArray(options.getPermissions()));
         }
-
         return this.jwt.sign(_claims, options);
     }
 }
