@@ -2,12 +2,12 @@ package up.wall;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.auth.jwt.JWTAuth;
 import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.web.handler.AuthHandler;
 import io.vertx.up.annotations.Authenticate;
 import io.vertx.up.annotations.Wall;
 import io.vertx.up.secure.handler.JwtOstium;
+import io.vertx.up.secure.provider.JwtAuth;
 
 @Wall(value = "jwt", path = "/secure/*")
 public class SecureActor {
@@ -15,7 +15,7 @@ public class SecureActor {
     public AuthHandler authenticate(final Vertx vertx,
                                     final JsonObject config) {
         return JwtOstium.create(
-                JWTAuth.create(vertx, new JWTAuthOptions(config))
+                JwtAuth.create(vertx, new JWTAuthOptions(config))
         );
     }
 }

@@ -1,10 +1,7 @@
 package io.vertx.up.eon;
 
 import javax.inject.Inject;
-import javax.inject.infix.Jooq;
-import javax.inject.infix.Mongo;
-import javax.inject.infix.MySql;
-import javax.inject.infix.Rpc;
+import javax.inject.infix.*;
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Set;
@@ -40,8 +37,10 @@ public interface Plugins {
 
         String RPC = "rpc";
 
+        String REDIS = "redis";
+
         String[] DATA = new String[]{
-                MONGO, MYSQL, JOOQ, RPC
+                MONGO, MYSQL, JOOQ, RPC, REDIS
         };
     }
 
@@ -52,6 +51,7 @@ public interface Plugins {
                     this.put(MySql.class, Infix.MYSQL);
                     this.put(Jooq.class, Infix.JOOQ);
                     this.put(Rpc.class, Infix.RPC);
+                    this.put(Redis.class, Infix.REDIS);
                 }
             };
 
