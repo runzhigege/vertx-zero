@@ -2,7 +2,6 @@ package io.vertx.up.rs.router;
 
 import io.reactivex.Observable;
 import io.vertx.core.Vertx;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.AuthHandler;
 import io.vertx.ext.web.handler.ChainAuthHandler;
@@ -10,13 +9,12 @@ import io.vertx.ext.web.handler.SessionHandler;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.eon.Orders;
-import io.vertx.up.func.Fn;
 import io.vertx.up.rs.Axis;
+import io.vertx.up.rs.secure.Bolt;
 import io.vertx.up.web.ZeroAnno;
 import io.vertx.up.web.failure.AuthenticateEndurer;
 import io.vertx.zero.eon.Values;
 
-import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -26,7 +24,7 @@ import java.util.TreeSet;
 public class WallAxis implements Axis<Router> {
 
     private transient final Vertx vertx;
-
+    private transient final Bolt bolt;
     /**
      * Extract all walls that will be generated route.
      */
@@ -46,6 +44,7 @@ public class WallAxis implements Axis<Router> {
 
     public WallAxis(final Vertx vertx) {
         this.vertx = vertx;
+        this.bolt = Bolt.get();
     }
 
     @Override
@@ -56,12 +55,13 @@ public class WallAxis implements Axis<Router> {
         );
         Pool.WALL_MAP.forEach((path, cliffes) -> {
             // 1. Build Handler
-            final AuthHandler handler = create(cliffes);
+            final AuthHandler handler = this.create(this.vertx, cliffes);
             // 2. Path/Order to set Router
             if (null != handler) {
                 router.route(path).order(Orders.SECURE).handler(handler)
                         .failureHandler(AuthenticateEndurer.create());
             }
+            // 3. Wall Advanced, For user data filling.
         });
     }
 
@@ -71,33 +71,22 @@ public class WallAxis implements Axis<Router> {
      * @param cliffes
      * @return
      */
-    private AuthHandler create(final Set<Cliff> cliffes) {
+    private AuthHandler create(final Vertx vertx, final Set<Cliff> cliffes) {
         AuthHandler resultHandler = null;
         if (Values.ONE < cliffes.size()) {
             // 1 < handler
             final ChainAuthHandler chain = ChainAuthHandler.create();
             Observable.fromIterable(cliffes)
-                    .filter(Objects::nonNull)
-                    .map(this::get)
-                    .filter(Objects::nonNull)
+                    .map(item -> this.bolt.mount(vertx, item))
                     .subscribe(chain::append);
             resultHandler = chain;
         } else {
             // 1 = handler
             if (!cliffes.isEmpty()) {
                 final Cliff cliff = cliffes.iterator().next();
-                resultHandler = get(cliff);
+                resultHandler = this.bolt.mount(vertx, cliff);
             }
         }
         return resultHandler;
-    }
-
-    private AuthHandler get(final Cliff cliff) {
-        return Fn.getJvm(() -> {
-            JsonObject config = cliff.getConfig();
-            config = null == config ? new JsonObject() : config;
-            final Object reference = cliff.getAuthorizer().getAuthenticate().invoke(cliff.getProxy(), config);
-            return null == reference ? null : (AuthHandler) reference;
-        }, cliff, cliff.getProxy(), cliff.getAuthorizer(), cliff.getAuthorizer().getAuthenticate());
     }
 }

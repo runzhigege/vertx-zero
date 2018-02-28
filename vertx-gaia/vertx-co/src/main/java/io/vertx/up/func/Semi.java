@@ -3,13 +3,19 @@ package io.vertx.up.func;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.ZeroException;
 
+import java.util.function.Supplier;
+
 /**
  * Semi is for if statement, once the condition
  * is checked, the code continue to execute
  */
 class Semi {
 
-    private static final Annal LOGGER = Annal.get(Semi.class);
+    static <T> T execReturn(final Supplier<T> supplier,
+                            final T defaultValue) {
+        final T ret = supplier.get();
+        return null == ret ? defaultValue : ret;
+    }
 
     static void exec(final boolean condition,
                      final Annal logger,
