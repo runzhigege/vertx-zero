@@ -31,6 +31,11 @@
         <module>up-epimetheus</module>
         <module>up-atlas</module>
         <module>up-metis</module>
+        <module>up-hera</module>
+        <module>up-poseidon</module>
+        <module>up-demeter</module>
+        <module>up-hestia</module>
+        <module>up-ares</module>
     </modules>
     <properties>
         <maven.deploy.skip>true</maven.deploy.skip>

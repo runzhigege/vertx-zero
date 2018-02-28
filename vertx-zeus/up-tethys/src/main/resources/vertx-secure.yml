@@ -2,3 +2,5 @@ secure:
   # Standard Type
   jwt:
     type: jwt
+    config:
+      component:
