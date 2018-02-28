@@ -40,15 +40,15 @@ public interface Orders {
      */
     int USER_SESSION = 1700000;
     /**
-     * User Session
+     * Filter for request
      * 1,800,000
      */
-    int SECURE = 1800000;
+    int FILTER = 1800000;
     /**
-     * Filter for request
+     * User Security
      * 1,900,000
      */
-    int FILTER = 1900000;
+    int SECURE = 1900000;
     /**
      * Sinker for request ( Normalize Request )
      * 2,000,000

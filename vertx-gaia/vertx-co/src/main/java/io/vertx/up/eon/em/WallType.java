@@ -9,14 +9,16 @@ import java.util.concurrent.ConcurrentMap;
 public enum WallType {
     // Mongo Type
     MONGO("mongo"),
+    JWT("jwt"),
     // Defined
     CUSTOM("custom");
 
     private static final ConcurrentMap<String, WallType> TYPE_MAP
             = new ConcurrentHashMap<String, WallType>() {
         {
-            put("mongo", MONGO);
-            put("custom", CUSTOM);
+            this.put("mongo", MONGO);
+            this.put("jwt", JWT);
+            this.put("custom", CUSTOM);
         }
     };
 
