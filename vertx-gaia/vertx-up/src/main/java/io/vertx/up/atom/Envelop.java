@@ -16,6 +16,8 @@ import io.vertx.zero.eon.Strings;
 import io.vertx.zero.exception.IndexExceedException;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Envelop implements Serializable {
 
@@ -28,6 +30,8 @@ public class Envelop implements Serializable {
     private final WebException error;
 
     private final JsonObject data;
+
+    private final Map<String, Object> context = new HashMap<>();
 
     private User user;
 
@@ -72,6 +76,21 @@ public class Envelop implements Serializable {
         T reference = null;
         if (this.data.containsKey(Key.DATA)) {
             reference = this.extract(this.data.getValue(Key.DATA), clazz);
+        }
+        return reference;
+    }
+
+    /**
+     * Extract data from context
+     *
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    public <T> T context(final String key, final Class<T> clazz) {
+        T reference = null;
+        if (this.context.containsKey(key)) {
+            reference = this.extract(this.context.get(key), clazz);
         }
         return reference;
     }
@@ -131,7 +150,7 @@ public class Envelop implements Serializable {
         }
         return response.encode();
     }
-    
+
     public Future<Envelop> toFuture() {
         return Future.succeededFuture(this);
     }
@@ -162,6 +181,14 @@ public class Envelop implements Serializable {
 
     public void setSession(final Session session) {
         this.session = session;
+    }
+
+    public Map<String, Object> context() {
+        return this.context;
+    }
+
+    public void setContext(final Map<String, Object> data) {
+        this.context.putAll(data);
     }
 
     /**

@@ -33,6 +33,8 @@ public class ZeroAnno {
             RECEIPTS = new HashSet<>();
     private final static Set<Event>
             EVENTS = new HashSet<>();
+    private final static ConcurrentMap<String, Set<Event>>
+            FILTERS = new ConcurrentHashMap<>();
     private final static ConcurrentMap<ServerType, List<Class<?>>>
             AGENTS = new ConcurrentHashMap<>();
     private final static Set<Class<?>>
@@ -120,6 +122,16 @@ public class ZeroAnno {
     }
 
     /**
+     * Get all filters
+     *
+     * @return
+     */
+    public static ConcurrentMap<String, Set<Event>>
+    getFilters() {
+        return FILTERS;
+    }
+
+    /**
      * Get all guards
      *
      * @return
@@ -150,6 +162,11 @@ public class ZeroAnno {
         final Inquirer<Set<Cliff>> walls =
                 Instance.singleton(WallInquirer.class);
         WALLS.addAll(walls.scan(clazzes));
+
+        /** Filter -> WebFilter **/
+        final Inquirer<ConcurrentMap<String, Set<Event>>> filters =
+                Instance.singleton(FilterInquirer.class);
+        FILTERS.putAll(filters.scan(clazzes));
 
         /** Queue **/
         inquirer = Instance.singleton(QueueInquirer.class);

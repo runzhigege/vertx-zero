@@ -307,6 +307,19 @@ public class Fn {
     /**
      * @param defaultValue
      * @param supplier
+     * @param <T>
+     * @return
+     */
+    public static <T> T get(
+            final T defaultValue,
+            final Supplier<T> supplier
+    ) {
+        return Semi.execReturn(supplier, defaultValue);
+    }
+
+    /**
+     * @param defaultValue
+     * @param supplier
      * @param input
      * @param <T>
      * @return

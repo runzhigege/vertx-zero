@@ -22,7 +22,7 @@ public class Event implements Serializable {
      * order for current Event
      * ( Could not be modified in current version )
      */
-    private final int order = Orders.EVENT;
+    private int order = Orders.EVENT;
     /**
      * consume mime
      */
@@ -63,6 +63,10 @@ public class Event implements Serializable {
 
     public int getOrder() {
         return this.order;
+    }
+
+    public void setOrder(final int order) {
+        this.order = order;
     }
 
     public Set<MediaType> getConsumes() {
@@ -133,6 +137,7 @@ public class Event implements Serializable {
                 ", produces=" + this.produces +
                 ", method=" + this.method +
                 ", action=" + this.action +
+                ", proxy=" + this.proxy +
                 '}';
     }
 }

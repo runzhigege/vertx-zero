@@ -59,6 +59,7 @@ public class AsyncAim extends BaseAim implements Aim<RoutingContext> {
         invoked.setHeaders(context.request().headers());
         invoked.setUser(context.user());
         invoked.setSession(context.session());
+        invoked.setContext(context.data());
         return invoked;
     }
 }
