@@ -1,5 +1,5 @@
 zero:
-  lime: mongo,readible,secure
+  lime: mongo,readible,secure,redis
   vertx:
     instance:
     - name: vx-zero

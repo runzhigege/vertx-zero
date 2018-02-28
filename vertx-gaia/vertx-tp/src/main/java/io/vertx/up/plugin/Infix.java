@@ -24,7 +24,7 @@ public interface Infix {
         Fn.flingUp(null == options || !options.containsKey(key)
                 , logger, ConfigKeyMissingException.class,
                 clazz, key);
-        final JsonObject config = options.getJsonObject(key);
+        final JsonObject config = null == options.getJsonObject(key) ? new JsonObject() : options.getJsonObject(key);
         Fn.flingUp(() -> Ruler.verify(key, config), logger);
         return executor.apply(config);
     }
