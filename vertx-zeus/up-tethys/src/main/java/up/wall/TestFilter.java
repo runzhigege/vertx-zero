@@ -7,9 +7,9 @@ import io.vertx.up.web.filter.HttpFilter;
 
 import javax.servlet.annotation.WebFilter;
 
-@WebFilter("/*")
+@WebFilter("/api/*")
 @Ordered(1)
-public class TokenFilter extends HttpFilter {
+public class TestFilter extends HttpFilter {
 
     @Override
     public void doFilter(final HttpServerRequest request,
