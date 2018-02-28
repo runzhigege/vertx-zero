@@ -107,6 +107,7 @@
         <jsr303.version>2.0.1.Final</jsr303.version>
         <jcache.version>1.1.0</jcache.version>
         <jsr305.version>3.0.2</jsr305.version>
+        <jsr340.version>4.0.0</jsr340.version>
         <!-- Testing -->
         <junit.version>4.12</junit.version>
         <!-- AspectJ -->
@@ -177,6 +178,12 @@
                 <groupId>cn.vertxup</groupId>
                 <artifactId>vertx-up</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${jsr340.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/io.netty/netty-tcnative -->
             <dependency>
@@ -703,6 +710,7 @@
                 <artifactId>netty-transport-native-kqueue</artifactId>
                 <version>${netty.version}</version>
             </dependency>
+
         </dependencies>
     </dependencyManagement>
     <build>
