@@ -91,6 +91,8 @@ public class FilterInquirer implements Inquirer<ConcurrentMap<String, Set<Event>
         // Action
         final Method action = this.findMethod(clazz);
         event.setAction(action);
+        event.setConsumes(new HashSet<>());
+        event.setProduces(new HashSet<>());
         return event;
     }
 

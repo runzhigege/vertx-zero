@@ -7,6 +7,7 @@ import io.vertx.up.annotations.EndPoint;
 import io.vertx.up.annotations.SessionData;
 
 import javax.ws.rs.BodyParam;
+import javax.ws.rs.ContextParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
@@ -18,9 +19,10 @@ public class LoginActor {
     @Path("/login")
     @SessionData(value = "user", field = "_id")
     public JsonObject login(@BodyParam final JsonObject data,
+                            @ContextParam("key") final String hello,
                             final Session session) {
         System.out.println(session.data());
-        System.out.println(data);
+        System.out.println(hello);
         return new JsonObject().put("_id", "Lang");
     }
 
