@@ -14,6 +14,7 @@ public class TokenFilter extends HttpFilter {
     @Override
     public void doFilter(final HttpServerRequest request,
                          final HttpServerResponse response) {
+        System.out.println("Lang");
         this.put("key", "Hello Lang");
     }
 }
