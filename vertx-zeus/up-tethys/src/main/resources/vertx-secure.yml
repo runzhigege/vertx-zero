@@ -1,7 +1,4 @@
 secure:
   # Standard Type
-  mongo:
-    type: mongo
-    config:
-      collectionName: DB_USER
-      saltStyle: NO_SALT
+  jwt:
+    type: jwt
