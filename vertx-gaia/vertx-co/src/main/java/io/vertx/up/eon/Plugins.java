@@ -48,17 +48,17 @@ public interface Plugins {
     ConcurrentMap<Class<? extends Annotation>, String> INFIX_MAP =
             new ConcurrentHashMap<Class<? extends Annotation>, String>() {
                 {
-                    put(Mongo.class, Infix.MONGO);
-                    put(MySql.class, Infix.MYSQL);
-                    put(Jooq.class, Infix.JOOQ);
-                    put(Rpc.class, Infix.RPC);
+                    this.put(Mongo.class, Infix.MONGO);
+                    this.put(MySql.class, Infix.MYSQL);
+                    this.put(Jooq.class, Infix.JOOQ);
+                    this.put(Rpc.class, Infix.RPC);
                 }
             };
 
     Set<Class<? extends Annotation>> INJECT_ANNOTATIONS = new HashSet<Class<? extends Annotation>>() {
         {
-            addAll(INFIX_MAP.keySet());
-            add(Inject.class);
+            this.addAll(INFIX_MAP.keySet());
+            this.add(Inject.class);
         }
     };
 }
