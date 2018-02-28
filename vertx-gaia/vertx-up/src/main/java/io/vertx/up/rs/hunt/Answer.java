@@ -35,7 +35,7 @@ public final class Answer {
         response.setStatusCode(code.code());
         response.setStatusMessage(code.message());
         response.putHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON);
-        // 3. Response process
+        // 4. Response process
         if (!response.ended()) {
             response.end(envelop.response());
         }
@@ -82,7 +82,7 @@ public final class Answer {
                 final JsonObject target = (JsonObject) data;
                 reference = target.getValue(field);
             }
-            // Session Put
+            // Session Put / Include Session ID
             session.put(key, reference);
         }
     }

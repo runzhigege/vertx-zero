@@ -6,3 +6,7 @@ interface Info {
             "the return type could not be void. \n" +
             "\t[ Up Micro ] The method \"{0}\" will be ignored by zero system";
 }
+
+interface Pool {
+
+}

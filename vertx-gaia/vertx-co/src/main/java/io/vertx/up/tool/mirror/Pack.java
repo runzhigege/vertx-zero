@@ -3,6 +3,7 @@ package io.vertx.up.tool.mirror;
 import io.reactivex.Observable;
 import io.vertx.core.impl.ConcurrentHashSet;
 import io.vertx.up.log.Annal;
+import io.vertx.zero.eon.Strings;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -32,6 +33,8 @@ public final class Pack {
             this.add("com.sun");
             // Netty
             this.add("io.netty");
+            // Rxjava
+            this.add("io.reactivex");
             // Jackson
             this.add("com.fasterxml");
             // Logback
@@ -71,6 +74,8 @@ public final class Pack {
                         packageDirs.add(pending);
                     }
                 }
+                // Fix big issue of current classpath scan, Must put . of classpath into current scan path.
+                packageDirs.add(Strings.DOT);
                 LOGGER.info(Info.PACKAGES, String.valueOf(packageDirs.size()),
                         String.valueOf(packages.length));
                 CLASSES.addAll(multiClasses(packageDirs.toArray(new String[]{}), filter));

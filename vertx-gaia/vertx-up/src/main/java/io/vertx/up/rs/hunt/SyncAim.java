@@ -21,7 +21,6 @@ public class SyncAim extends BaseAim implements Aim<RoutingContext> {
 
             // 3. Resource model building
             final Envelop data = Flower.continuous(context, result);
-
             // 4. Process modal
             Answer.reply(context, data, event);
 
