@@ -94,5 +94,11 @@ E60024: "(500) - (Ir) Your query meta is null, expected input meta object is not
 E60025: "(400) - (Ir) The \"pager\" started page number should start from 1, now input \"page\" is {0}"
 E60026: "(400) - (Ir) The op is not supported, please provide valid op of \"<, >, <=, >=, =, <>, !n, n, t, f, i, !i, s, e, c\", current is {0}"
 E60027: "(501) - (Rpc) This web flow does not support IPC continue flow. Class = {0}"
-E60028: "(500) - (Rpc) Zero system detect unexpected exception on class = {0}, returnValue is {1}."
+E60028: "(500) - (Rpc) Zero system detect unexpected exception on class = {0}, returnValue is {1}"
+# Jwt Exception
+E60029: "(401) - (Jwt) Jwt token expired, please refresh your token. payload = {0}"
+E60030: "(401) - (Jwt) Jwt audient \"{0}\" is invalid, please provide correct audient"
+E60031: "(401) - (Jwt) Jwt issuer \"{0}\" is invalid, please provide correct issuer"
+E60032: "(500) - (Jwt) Jwt runtime met errors, please check details = {0}"
+E60033: "(401) - (Jwt) Jwt executor result is false, authorization info = {0}"
 # (Web) Exception for standard third part
