@@ -3,4 +3,9 @@ secure:
   jwt:
     type: jwt
     config:
-      component:
+      jwtOptions:
+        algorithm: HS256
+      keyStore:
+        type: jceks
+        path: keys/keystore.jceks
+        password: secret

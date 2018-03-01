@@ -12,14 +12,14 @@ import io.vertx.up.secure.handler.JwtOstium;
 import io.vertx.up.secure.provider.JwtAuth;
 
 @Wall(value = "jwt", path = "/api/secure/*")
-public class SecureActor implements Security {
+public class JwtWall implements Security {
     private static JwtAuth AUTH = null;
 
     @Authenticate
     public AuthHandler authenticate(final Vertx vertx,
                                     final JsonObject config) {
         if (null == AUTH) {
-            AUTH = JwtAuth.create(vertx, new JWTAuthOptions(config));
+            AUTH = JwtAuth.create(vertx, new JWTAuthOptions(config), this::verify);
         }
         return JwtOstium.create(AUTH);
     }
@@ -33,11 +33,12 @@ public class SecureActor implements Security {
     public JsonObject store(final JsonObject data) {
         final String token = this.get().generateToken(data);
         System.out.println(token);
-        return null;
+        return data.put("token", token);
     }
 
     @Override
     public Future<Boolean> verify(final JsonObject data) {
-        return null;
+        System.out.println(data);
+        return Future.succeededFuture(Boolean.FALSE);
     }
 }
