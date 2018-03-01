@@ -2,6 +2,7 @@ package io.vertx.up.secure;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.auth.AuthProvider;
 
 /**
  * Interface defined for component
@@ -18,6 +19,8 @@ public interface Security {
      */
     JsonObject store(JsonObject data);
 
+    Future<JsonObject> asyncStore(final JsonObject data);
+
     /**
      * 2. 401 Access, verify the token that you provided.
      * 1) Correct ?
@@ -28,4 +31,12 @@ public interface Security {
      * @return
      */
     Future<Boolean> verify(JsonObject data);
+
+    /**
+     * Get Auth Provider
+     *
+     * @param <T>
+     * @return
+     */
+    <T extends AuthProvider> T get();
 }

@@ -19,6 +19,7 @@ import io.vertx.ext.auth.jwt.impl.JWTUser;
 import io.vertx.ext.jwt.JWK;
 import io.vertx.ext.jwt.JWT;
 import io.vertx.ext.jwt.JWTOptions;
+import io.vertx.up.exception.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -30,14 +31,17 @@ import java.security.cert.CertificateException;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
 
 public class JwtAuthProvider implements JwtAuth {
     private static final JsonArray EMPTY_ARRAY = new JsonArray();
     private final JWT jwt;
     private final String permissionsClaimKey;
     private final JWTOptions jwtOptions;
+    private final Function<JsonObject, Future<Boolean>> executor;
 
-    public JwtAuthProvider(final Vertx vertx, final JWTAuthOptions config) {
+    public JwtAuthProvider(final Vertx vertx, final JWTAuthOptions config, final Function<JsonObject, Future<Boolean>> executor) {
+        this.executor = executor;
         this.permissionsClaimKey = config.getPermissionsClaimKey();
         this.jwtOptions = config.getJWTOptions();
         final KeyStoreOptions keyStore = config.getKeyStore();
@@ -101,18 +105,33 @@ public class JwtAuthProvider implements JwtAuth {
             }
 
         } catch (IOException | FileSystemException | CertificateException | NoSuchAlgorithmException | KeyStoreException var23) {
-            throw new RuntimeException(var23);
+            throw new _500JwtRuntimeException(this.getClass(), var23);
         }
     }
 
+    @Override
     public void authenticate(final JsonObject authInfo, final Handler<AsyncResult<User>> resultHandler) {
+        final Future future;
+        if (null == this.executor) {
+            future = this.authorize(authInfo);
+        } else {
+            future = this.executor.apply(authInfo).compose(result -> {
+                if (result) {
+                    return this.authorize(authInfo);
+                } else {
+                    return Future.failedFuture(new _401JwtExecutorException(this.getClass(), authInfo));
+                }
+            });
+        }
+        resultHandler.handle(future);
+    }
+
+    private Future<User> authorize(final JsonObject authInfo) {
         try {
             final JsonObject payload = this.jwt.decode(authInfo.getString("jwt"));
             if (this.jwt.isExpired(payload, this.jwtOptions)) {
-                resultHandler.handle(Future.failedFuture("Expired JWT token."));
-                return;
+                return Future.failedFuture(new _401JwtExpiredException(this.getClass(), payload));
             }
-
             if (this.jwtOptions.getAudience() != null) {
                 final JsonArray target;
                 if (payload.getValue("aud") instanceof String) {
@@ -122,29 +141,26 @@ public class JwtAuthProvider implements JwtAuth {
                 }
 
                 if (Collections.disjoint(this.jwtOptions.getAudience(), target.getList())) {
-                    resultHandler.handle(Future.failedFuture("Invalid JWT audient. expected: " + Json.encode(this.jwtOptions.getAudience())));
-                    return;
+                    return Future.failedFuture(new _401JwtAudientException(this.getClass(), Json.encode(this.jwtOptions.getAudience())));
                 }
             }
 
             if (this.jwtOptions.getIssuer() != null && !this.jwtOptions.getIssuer().equals(payload.getString("iss"))) {
-                resultHandler.handle(Future.failedFuture("Invalid JWT issuer"));
-                return;
+                return Future.failedFuture(new _401JwtIssuerException(this.getClass(), payload.getString("iss")));
             }
 
-            resultHandler.handle(Future.succeededFuture(new JWTUser(payload, this.permissionsClaimKey)));
+            return Future.succeededFuture(new JWTUser(payload, this.permissionsClaimKey));
         } catch (final RuntimeException var5) {
-            resultHandler.handle(Future.failedFuture(var5));
+            return Future.failedFuture(new _500JwtRuntimeException(this.getClass(), var5));
         }
-
     }
 
+    @Override
     public String generateToken(final JsonObject claims, final JWTOptions options) {
         final JsonObject _claims = claims.copy();
         if (options.getPermissions() != null && !_claims.containsKey(this.permissionsClaimKey)) {
             _claims.put(this.permissionsClaimKey, new JsonArray(options.getPermissions()));
         }
-
         return this.jwt.sign(_claims, options);
     }
 }
