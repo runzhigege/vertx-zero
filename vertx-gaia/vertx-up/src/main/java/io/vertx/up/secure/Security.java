@@ -19,13 +19,7 @@ public interface Security {
      */
     JsonObject store(JsonObject data);
 
-    /**
-     * Async mode of store method.
-     *
-     * @param data
-     * @return
-     */
-    Future<JsonObject> asyncStore(JsonObject data);
+    Future<JsonObject> asyncStore(final JsonObject data);
 
     /**
      * 2. 401 Access, verify the token that you provided.
@@ -39,7 +33,7 @@ public interface Security {
     Future<Boolean> verify(JsonObject data);
 
     /**
-     * 3. Get auth provider for other usage
+     * Get Auth Provider
      *
      * @param <T>
      * @return
