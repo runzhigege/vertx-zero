@@ -20,6 +20,14 @@ public interface Security {
     JsonObject store(JsonObject data);
 
     /**
+     * Async mode of store method.
+     *
+     * @param data
+     * @return
+     */
+    Future<JsonObject> asyncStore(JsonObject data);
+
+    /**
      * 2. 401 Access, verify the token that you provided.
      * 1) Correct ?
      * 2) Expired ?

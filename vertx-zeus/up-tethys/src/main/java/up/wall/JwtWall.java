@@ -31,9 +31,15 @@ public class JwtWall implements Security {
 
     @Override
     public JsonObject store(final JsonObject data) {
+        System.out.println(data);
         final String token = this.get().generateToken(data);
         System.out.println(token);
         return data.put("token", token);
+    }
+
+    @Override
+    public Future<JsonObject> asyncStore(final JsonObject data) {
+        return Future.succeededFuture(this.store(data));
     }
 
     @Override

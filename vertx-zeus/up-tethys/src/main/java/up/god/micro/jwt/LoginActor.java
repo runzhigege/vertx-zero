@@ -23,7 +23,7 @@ public class LoginActor {
                             @ContextParam("key") final String hello) {
         data.put("sub", "paulo");
         this.security.store(data);
-        return new JsonObject().put("_id", "Lang");
+        return data;
     }
 
     @POST

@@ -19,6 +19,7 @@ import io.vertx.ext.auth.jwt.impl.JWTUser;
 import io.vertx.ext.jwt.JWK;
 import io.vertx.ext.jwt.JWT;
 import io.vertx.ext.jwt.JWTOptions;
+import io.vertx.up.exception.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -104,15 +105,13 @@ public class JwtAuthProvider implements JwtAuth {
             }
 
         } catch (IOException | FileSystemException | CertificateException | NoSuchAlgorithmException | KeyStoreException var23) {
-            var23.printStackTrace();
-            throw new RuntimeException(var23);
+            throw new _500JwtRuntimeException(this.getClass(), var23);
         }
     }
 
     @Override
     public void authenticate(final JsonObject authInfo, final Handler<AsyncResult<User>> resultHandler) {
         final Future future;
-        System.out.println(this.executor);
         if (null == this.executor) {
             future = this.authorize(authInfo);
         } else {
@@ -120,20 +119,19 @@ public class JwtAuthProvider implements JwtAuth {
                 if (result) {
                     return this.authorize(authInfo);
                 } else {
-                    return Future.failedFuture("Executor issue");
+                    return Future.failedFuture(new _401JwtExecutorException(this.getClass(), authInfo));
                 }
             });
         }
         resultHandler.handle(future);
     }
 
-    private Future authorize(final JsonObject authInfo) {
+    private Future<User> authorize(final JsonObject authInfo) {
         try {
             final JsonObject payload = this.jwt.decode(authInfo.getString("jwt"));
             if (this.jwt.isExpired(payload, this.jwtOptions)) {
-                return Future.failedFuture("Expired JWT token.");
+                return Future.failedFuture(new _401JwtExpiredException(this.getClass(), payload));
             }
-
             if (this.jwtOptions.getAudience() != null) {
                 final JsonArray target;
                 if (payload.getValue("aud") instanceof String) {
@@ -143,18 +141,17 @@ public class JwtAuthProvider implements JwtAuth {
                 }
 
                 if (Collections.disjoint(this.jwtOptions.getAudience(), target.getList())) {
-                    return Future.failedFuture("Invalid JWT audient. expected: " + Json.encode(this.jwtOptions.getAudience()));
+                    return Future.failedFuture(new _401JwtAudientException(this.getClass(), Json.encode(this.jwtOptions.getAudience())));
                 }
             }
 
             if (this.jwtOptions.getIssuer() != null && !this.jwtOptions.getIssuer().equals(payload.getString("iss"))) {
-                return Future.failedFuture("Invalid JWT issuer");
+                return Future.failedFuture(new _401JwtIssuerException(this.getClass(), payload.getString("iss")));
             }
 
             return Future.succeededFuture(new JWTUser(payload, this.permissionsClaimKey));
         } catch (final RuntimeException var5) {
-            var5.printStackTrace();
-            return Future.failedFuture(var5);
+            return Future.failedFuture(new _500JwtRuntimeException(this.getClass(), var5));
         }
     }
 
