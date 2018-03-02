@@ -19,6 +19,8 @@ public interface JwtAuth extends AuthProvider {
 
     String generateToken(JsonObject data, JWTOptions options);
 
+    JsonObject extractToken(JsonObject auth);
+
     default String generateToken(final JsonObject claims) {
         return this.generateToken(claims, new JWTOptions());
     }

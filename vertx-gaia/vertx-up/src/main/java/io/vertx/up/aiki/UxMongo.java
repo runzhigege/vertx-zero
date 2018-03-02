@@ -83,10 +83,18 @@ class UxMongo {
     }
 
     static Future<JsonObject> findOneAndReplace(final String collection, final JsonObject filter,
-                                                final JsonObject data) {
-        return Ux.thenGeneric(future -> CLIENT.findOneAndReplace(collection, filter, data, result -> {
-            LOGGER.debug(Info.MSG_UPDATE, collection, filter, data);
-            future.complete(result.result());
+                                                final JsonObject updated) {
+        // Find first for field update
+        return Ux.thenGeneric(future -> CLIENT.findOne(collection, filter, null, handler -> {
+            if (handler.succeeded()) {
+                final JsonObject data = handler.result().mergeIn(updated);
+                CLIENT.findOneAndReplace(collection, filter, data, result -> {
+                    LOGGER.debug(Info.MSG_UPDATE, collection, filter, data);
+                    future.complete(data);
+                });
+            } else {
+                future.complete(updated);
+            }
         }));
     }
 

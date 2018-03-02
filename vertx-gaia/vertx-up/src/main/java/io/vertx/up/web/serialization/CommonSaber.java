@@ -9,7 +9,7 @@ public class CommonSaber extends BaseSaber {
     public Object from(final Class<?> paramType,
                        final String literal) {
         return Fn.get(() ->
-                        Fn.getSemi(!SaberTypes.isSupport(paramType), getLogger(),
+                        Fn.getSemi(!SaberTypes.isSupport(paramType), this.getLogger(),
                                 () -> Jackson.deserialize(literal, paramType),
                                 Fn::nil),
                 paramType, literal);
