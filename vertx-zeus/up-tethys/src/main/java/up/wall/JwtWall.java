@@ -42,7 +42,7 @@ public class JwtWall implements Security {
 
     @Override
     public Future<Boolean> verify(final JsonObject data) {
-        final JsonObject extracted = this.get().extractToken(data);
+        final JsonObject extracted = Ux.Jwt.extract(data);
         final String token = data.getString("jwt");
         final JsonObject filters = new JsonObject()
                 .put("_id", extracted.getString("id"))
