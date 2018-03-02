@@ -17,9 +17,7 @@ public interface Security {
      *
      * @param data
      */
-    JsonObject store(JsonObject data);
-
-    Future<JsonObject> asyncStore(final JsonObject data);
+    Future<JsonObject> store(JsonObject data);
 
     /**
      * 2. 401 Access, verify the token that you provided.
