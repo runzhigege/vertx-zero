@@ -146,7 +146,7 @@ public class Envelop implements Serializable {
         if (null == this.error) {
             response = this.data;
         } else {
-            response = this.fail(this.error);
+            response = this.error.toJson();
         }
         return response.encode();
     }
@@ -260,11 +260,7 @@ public class Envelop implements Serializable {
     private Envelop(final WebException error) {
         this.status = error.getStatus();
         this.error = error;
-        this.data = this.fail(error);
-    }
-
-    private JsonObject fail(final WebException error) {
-        return error.toJson();
+        this.data = error.toJson();
     }
 
     @Override

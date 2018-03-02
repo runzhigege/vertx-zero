@@ -110,8 +110,13 @@ public class JwtAuthProvider implements JwtAuth {
     }
 
     @Override
+    public JsonObject extractToken(final JsonObject authInfo) {
+        return this.jwt.decode(authInfo.getString("jwt"));
+    }
+
+    @Override
     public void authenticate(final JsonObject authInfo, final Handler<AsyncResult<User>> resultHandler) {
-        final Future future;
+        final Future<User> future;
         if (null == this.executor) {
             future = this.authorize(authInfo);
         } else {
@@ -123,7 +128,7 @@ public class JwtAuthProvider implements JwtAuth {
                 }
             });
         }
-        resultHandler.handle(future);
+        future.setHandler(resultHandler);
     }
 
     private Future<User> authorize(final JsonObject authInfo) {
@@ -148,7 +153,6 @@ public class JwtAuthProvider implements JwtAuth {
             if (this.jwtOptions.getIssuer() != null && !this.jwtOptions.getIssuer().equals(payload.getString("iss"))) {
                 return Future.failedFuture(new _401JwtIssuerException(this.getClass(), payload.getString("iss")));
             }
-
             return Future.succeededFuture(new JWTUser(payload, this.permissionsClaimKey));
         } catch (final RuntimeException var5) {
             return Future.failedFuture(new _500JwtRuntimeException(this.getClass(), var5));

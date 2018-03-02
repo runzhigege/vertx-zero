@@ -5,6 +5,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.web.handler.AuthHandler;
+import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Authenticate;
 import io.vertx.up.annotations.Wall;
 import io.vertx.up.secure.Security;
@@ -12,6 +13,7 @@ import io.vertx.up.secure.handler.JwtOstium;
 import io.vertx.up.secure.provider.JwtAuth;
 
 @Wall(value = "jwt", path = "/api/secure/*")
+@SuppressWarnings("all")
 public class JwtWall implements Security {
     private static JwtAuth AUTH = null;
 
@@ -30,21 +32,21 @@ public class JwtWall implements Security {
     }
 
     @Override
-    public JsonObject store(final JsonObject data) {
-        System.out.println(data);
-        final String token = this.get().generateToken(data);
-        System.out.println(token);
-        return data.put("token", token);
-    }
-
-    @Override
-    public Future<JsonObject> asyncStore(final JsonObject data) {
-        return Future.succeededFuture(this.store(data));
+    public Future<JsonObject> store(final JsonObject filter) {
+        final JsonObject seed = new JsonObject()
+                .put("username", filter.getString("username"))
+                .put("id", filter.getString("_id"));
+        final String token = this.get().generateToken(seed);
+        return Ux.Mongo.findOneAndReplace("DB_USER", filter, "token", token);
     }
 
     @Override
     public Future<Boolean> verify(final JsonObject data) {
-        System.out.println(data);
-        return Future.succeededFuture(Boolean.FALSE);
+        final JsonObject extracted = this.get().extractToken(data);
+        final String token = data.getString("jwt");
+        final JsonObject filters = new JsonObject()
+                .put("_id", extracted.getString("id"))
+                .put("token", token);
+        return Ux.Mongo.existing("DB_USER", filters);
     }
 }
