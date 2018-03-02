@@ -1,0 +1,121 @@
+package io.vertx.up.aiki;
+
+import io.vertx.core.buffer.Buffer;
+import io.vertx.core.file.FileSystemException;
+import io.vertx.core.json.JsonObject;
+import io.vertx.ext.auth.KeyStoreOptions;
+import io.vertx.ext.auth.PubSecKeyOptions;
+import io.vertx.ext.auth.SecretOptions;
+import io.vertx.ext.auth.jwt.JWTAuthOptions;
+import io.vertx.ext.jwt.JWK;
+import io.vertx.ext.jwt.JWT;
+import io.vertx.up.eon.Plugins;
+import io.vertx.up.exception._500JwtRuntimeException;
+import io.vertx.up.func.Fn;
+import io.vertx.up.secure.provider.JwtAuthProvider;
+import io.vertx.up.tool.io.IO;
+import io.vertx.up.tool.mirror.Instance;
+import io.vertx.zero.marshal.node.Node;
+import io.vertx.zero.marshal.node.ZeroUniform;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.function.Function;
+
+/**
+ * Jwt token extract
+ */
+class UxJwt {
+
+    static JsonObject extract(final String jwt) {
+        final Node<JsonObject> node = Instance.instance(ZeroUniform.class);
+        final JsonObject options = node.read();
+        // Extract data from "secure"
+        final JsonObject secure = Fn.get(() -> options.getJsonObject(Plugins.Infix.SECURE), options);
+        // Extract "jwt" from secure configuration.
+        final JsonObject jwtConfig = Fn.get(() -> secure.getJsonObject("jwt"), secure);
+        // Extract "config" from jwt configuration.
+        final JsonObject config = Fn.get(() -> jwtConfig.getJsonObject("config"), jwtConfig);
+        // Extract token from input jwt.
+        return Fn.get(() -> extract(jwt, config), config);
+    }
+
+    static JsonObject extract(final String jwt, final JsonObject options) {
+        final JWT reference = create(new JWTAuthOptions(options), IO::getBuffer);
+        return reference.decode(jwt);
+    }
+
+    static JWT create(final JWTAuthOptions config, final Function<String, Buffer> funcBuffer) {
+        final JWT reference;
+        final KeyStoreOptions keyStore = config.getKeyStore();
+
+        try {
+            if (keyStore != null) {
+                final KeyStore ks = KeyStore.getInstance(keyStore.getType());
+                final Class var5 = JwtAuthProvider.class;
+                synchronized (JwtAuthProvider.class) {
+                    final Buffer keystore = funcBuffer.apply(keyStore.getPath());
+                    final InputStream in = new ByteArrayInputStream(keystore.getBytes());
+                    Throwable var8 = null;
+
+                    try {
+                        ks.load(in, keyStore.getPassword().toCharArray());
+                    } catch (final Throwable var20) {
+                        var8 = var20;
+                        throw var20;
+                    } finally {
+                        if (in != null) {
+                            if (var8 != null) {
+                                try {
+                                    in.close();
+                                } catch (final Throwable var19) {
+                                    var8.addSuppressed(var19);
+                                }
+                            } else {
+                                in.close();
+                            }
+                        }
+
+                    }
+                }
+                reference = new JWT(ks, keyStore.getPassword().toCharArray());
+            } else {
+                reference = new JWT();
+                final List<PubSecKeyOptions> keys = config.getPubSecKeys();
+                if (keys != null) {
+                    final Iterator var25 = config.getPubSecKeys().iterator();
+
+                    while (var25.hasNext()) {
+                        final PubSecKeyOptions pubSecKey = (PubSecKeyOptions) var25.next();
+                        if (pubSecKey.isSymmetric()) {
+                            reference.addJWK(new JWK(pubSecKey.getAlgorithm(), pubSecKey.getPublicKey()));
+                        } else {
+                            reference.addJWK(new JWK(pubSecKey.getAlgorithm(), pubSecKey.isCertificate(), pubSecKey.getPublicKey(), pubSecKey.getSecretKey()));
+                        }
+                    }
+                }
+
+                final List<SecretOptions> secrets = config.getSecrets();
+                if (secrets != null) {
+                    final Iterator var28 = secrets.iterator();
+
+                    while (var28.hasNext()) {
+                        final SecretOptions secret = (SecretOptions) var28.next();
+                        reference.addSecret(secret.getType(), secret.getSecret());
+                    }
+                }
+            }
+
+        } catch (IOException | FileSystemException | CertificateException | NoSuchAlgorithmException | KeyStoreException var23) {
+            throw new _500JwtRuntimeException(UxJwt.class, var23);
+        }
+        return reference;
+    }
+}

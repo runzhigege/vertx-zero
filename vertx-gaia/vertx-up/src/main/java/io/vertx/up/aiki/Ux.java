@@ -3,9 +3,12 @@ package io.vertx.up.aiki;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.auth.jwt.JWTAuthOptions;
+import io.vertx.ext.jwt.JWT;
 import io.vertx.ext.mongo.FindOptions;
 import io.vertx.up.aiki.fun.Case;
 import io.vertx.up.aiki.fun.Log;
@@ -16,6 +19,7 @@ import io.vertx.up.atom.query.Sorter;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.func.Actuator;
 import io.vertx.up.func.Fn;
+import io.vertx.up.tool.io.IO;
 
 import java.util.List;
 import java.util.UUID;
@@ -790,6 +794,38 @@ public final class Ux {
 
         public static UxJooq on(final Class<?> clazz) {
             return Fn.pool(Pool.JOOQ, clazz, () -> new UxJooq(clazz));
+        }
+    }
+
+    // -> Jwt
+    public static class Jwt {
+
+        public static JsonObject extract(final JsonObject vertxToken) {
+            return UxJwt.extract(vertxToken.getString("jwt"));
+        }
+
+        public static JsonObject extract(final String token) {
+            return UxJwt.extract(token);
+        }
+
+        public static JsonObject extract(final String token, final JsonObject config) {
+            return UxJwt.extract(token, config);
+        }
+
+        public static JWT create(final JWTAuthOptions config) {
+            return UxJwt.create(new JWTAuthOptions(config), IO::getBuffer);
+        }
+
+        public static JWT create(final JsonObject config) {
+            return UxJwt.create(new JWTAuthOptions(config), IO::getBuffer);
+        }
+
+        public static JWT create(final JWTAuthOptions config, final Function<String, Buffer> funcBuffer) {
+            return UxJwt.create(config, funcBuffer);
+        }
+
+        public static JWT create(final JsonObject config, final Function<String, Buffer> funcBuffer) {
+            return UxJwt.create(new JWTAuthOptions(config), funcBuffer);
         }
     }
 

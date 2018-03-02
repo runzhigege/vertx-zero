@@ -3,6 +3,7 @@ package io.vertx.up.tool.io;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
@@ -168,6 +169,22 @@ public final class IO {
                     () -> IO.class.getResource(filename),
                     () -> url);
         }, filename);
+    }
+
+    /**
+     * Read to Buffer
+     *
+     * @param filename
+     * @return
+     */
+    public static Buffer getBuffer(final String filename) {
+        final InputStream in = Stream.read(filename);
+        return Fn.getJvm(() -> {
+            final byte[] bytes = new byte[in.available()];
+            in.read(bytes);
+            in.close();
+            return Buffer.buffer(bytes);
+        }, in);
     }
 
     /**
