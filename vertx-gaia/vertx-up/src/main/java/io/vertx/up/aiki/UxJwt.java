@@ -2,6 +2,7 @@ package io.vertx.up.aiki;
 
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.file.FileSystemException;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.KeyStoreOptions;
 import io.vertx.ext.auth.PubSecKeyOptions;
@@ -9,6 +10,7 @@ import io.vertx.ext.auth.SecretOptions;
 import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.jwt.JWK;
 import io.vertx.ext.jwt.JWT;
+import io.vertx.ext.jwt.JWTOptions;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.exception._500JwtRuntimeException;
 import io.vertx.up.func.Fn;
@@ -35,6 +37,31 @@ import java.util.function.Function;
 class UxJwt {
 
     static JsonObject extract(final String jwt) {
+        // Extract "config" from jwt configuration.
+        final JsonObject config = readOptions();
+        // Extract token from input jwt.
+        return Fn.get(() -> extract(jwt, config), config);
+    }
+
+    static String generate(final JsonObject claims, final JWTOptions options) {
+        return generate(claims, options, IO::getBuffer);
+    }
+
+    static String generate(final JsonObject claims, final JWTOptions options,
+                           final Function<String, Buffer> funcBuffer) {
+        final JsonObject opts = readOptions();
+        final JWTAuthOptions meta = Fn.get(new JWTAuthOptions(), () -> new JWTAuthOptions(opts), opts);
+        return Fn.get(() -> {
+            final JsonObject _claims = claims.copy();
+            if (options.getPermissions() != null && !_claims.containsKey(meta.getPermissionsClaimKey())) {
+                _claims.put(meta.getPermissionsClaimKey(), new JsonArray(options.getPermissions()));
+            }
+            final JWT reference = create(meta, funcBuffer);
+            return reference.sign(_claims, options);
+        }, meta, claims);
+    }
+
+    private static JsonObject readOptions() {
         final Node<JsonObject> node = Instance.instance(ZeroUniform.class);
         final JsonObject options = node.read();
         // Extract data from "secure"
@@ -42,9 +69,7 @@ class UxJwt {
         // Extract "jwt" from secure configuration.
         final JsonObject jwtConfig = Fn.get(() -> secure.getJsonObject("jwt"), secure);
         // Extract "config" from jwt configuration.
-        final JsonObject config = Fn.get(() -> jwtConfig.getJsonObject("config"), jwtConfig);
-        // Extract token from input jwt.
-        return Fn.get(() -> extract(jwt, config), config);
+        return Fn.get(() -> jwtConfig.getJsonObject("config"), jwtConfig);
     }
 
     static JsonObject extract(final String jwt, final JsonObject options) {
