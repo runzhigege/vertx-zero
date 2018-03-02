@@ -9,6 +9,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.jwt.JWT;
+import io.vertx.ext.jwt.JWTOptions;
 import io.vertx.ext.mongo.FindOptions;
 import io.vertx.up.aiki.fun.Case;
 import io.vertx.up.aiki.fun.Log;
@@ -799,6 +800,14 @@ public final class Ux {
 
     // -> Jwt
     public static class Jwt {
+
+        public static String token(final JsonObject claims) {
+            return UxJwt.generate(claims, new JWTOptions());
+        }
+
+        public static String token(final JsonObject claims, final Function<String, Buffer> funcBuffer) {
+            return UxJwt.generate(claims, new JWTOptions(), funcBuffer);
+        }
 
         public static JsonObject extract(final JsonObject vertxToken) {
             return UxJwt.extract(vertxToken.getString("jwt"));

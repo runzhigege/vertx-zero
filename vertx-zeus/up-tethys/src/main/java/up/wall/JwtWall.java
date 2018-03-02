@@ -15,20 +15,11 @@ import io.vertx.up.secure.provider.JwtAuth;
 @Wall(value = "jwt", path = "/api/secure/*")
 @SuppressWarnings("all")
 public class JwtWall implements Security {
-    private static JwtAuth AUTH = null;
 
     @Authenticate
     public AuthHandler authenticate(final Vertx vertx,
                                     final JsonObject config) {
-        if (null == AUTH) {
-            AUTH = JwtAuth.create(vertx, new JWTAuthOptions(config), this::verify);
-        }
-        return JwtOstium.create(AUTH);
-    }
-
-    @Override
-    public JwtAuth get() {
-        return AUTH;
+        return JwtOstium.create(JwtAuth.create(vertx, new JWTAuthOptions(config), this::verify));
     }
 
     @Override
@@ -36,7 +27,7 @@ public class JwtWall implements Security {
         final JsonObject seed = new JsonObject()
                 .put("username", filter.getString("username"))
                 .put("id", filter.getString("_id"));
-        final String token = this.get().generateToken(seed);
+        final String token = Ux.Jwt.token(seed);
         return Ux.Mongo.findOneAndReplace("DB_USER", filter, "token", token);
     }
 
