@@ -39,6 +39,8 @@ public interface Plugins {
 
         String REDIS = "redis";
 
+        String SECURE = "secure";
+
         String[] DATA = new String[]{
                 MONGO, MYSQL, JOOQ, RPC, REDIS
         };
