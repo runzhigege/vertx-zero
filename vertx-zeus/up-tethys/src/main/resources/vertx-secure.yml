@@ -8,4 +8,4 @@ secure:
       keyStore:
         type: jceks
         path: keys/keystore.jceks
-        password: secret
+        password: zeroup

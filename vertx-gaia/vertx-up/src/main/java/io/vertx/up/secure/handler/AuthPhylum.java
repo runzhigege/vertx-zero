@@ -95,7 +95,6 @@ public abstract class AuthPhylum implements AuthHandler {
 
     @Override
     public void handle(final RoutingContext ctx) {
-
         if (this.handlePreflight(ctx)) {
             return;
         }
@@ -126,7 +125,6 @@ public abstract class AuthPhylum implements AuthHandler {
                 this.authorizeUser(ctx, updatedUser);
                 return;
             }
-
             // proceed to authN
             this.getAuthProvider(ctx).authenticate(res.result(), authN -> {
                 if (authN.succeeded()) {
@@ -147,7 +145,7 @@ public abstract class AuthPhylum implements AuthHandler {
                         ctx.response()
                                 .putHeader("WWW-Authenticate", header);
                     }
-                    ctx.fail(this.UNAUTHORIZED);
+                    ctx.fail(null == authN.cause() ? this.UNAUTHORIZED : authN.cause());
                 }
             });
         });
@@ -229,8 +227,8 @@ public abstract class AuthPhylum implements AuthHandler {
             }
         } catch (final RuntimeException e) {
             // bad type, ignore and return default
+            e.printStackTrace();
         }
-
         return this.authProvider;
     }
 }
