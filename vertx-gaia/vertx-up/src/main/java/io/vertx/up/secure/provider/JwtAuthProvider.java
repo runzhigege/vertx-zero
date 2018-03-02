@@ -4,33 +4,18 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
-import io.vertx.core.buffer.Buffer;
-import io.vertx.core.file.FileSystemException;
 import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.auth.KeyStoreOptions;
-import io.vertx.ext.auth.PubSecKeyOptions;
-import io.vertx.ext.auth.SecretOptions;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.jwt.JWTAuthOptions;
-import io.vertx.ext.auth.jwt.impl.JWTAuthProviderImpl;
 import io.vertx.ext.auth.jwt.impl.JWTUser;
-import io.vertx.ext.jwt.JWK;
 import io.vertx.ext.jwt.JWT;
 import io.vertx.ext.jwt.JWTOptions;
+import io.vertx.up.aiki.Ux;
 import io.vertx.up.exception.*;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
 import java.util.function.Function;
 
 public class JwtAuthProvider implements JwtAuth {
@@ -44,74 +29,8 @@ public class JwtAuthProvider implements JwtAuth {
         this.executor = executor;
         this.permissionsClaimKey = config.getPermissionsClaimKey();
         this.jwtOptions = config.getJWTOptions();
-        final KeyStoreOptions keyStore = config.getKeyStore();
-
-        try {
-            if (keyStore != null) {
-                final KeyStore ks = KeyStore.getInstance(keyStore.getType());
-                final Class var5 = JWTAuthProviderImpl.class;
-                synchronized (JWTAuthProviderImpl.class) {
-                    final Buffer keystore = vertx.fileSystem().readFileBlocking(keyStore.getPath());
-                    final InputStream in = new ByteArrayInputStream(keystore.getBytes());
-                    Throwable var8 = null;
-
-                    try {
-                        ks.load(in, keyStore.getPassword().toCharArray());
-                    } catch (final Throwable var20) {
-                        var8 = var20;
-                        throw var20;
-                    } finally {
-                        if (in != null) {
-                            if (var8 != null) {
-                                try {
-                                    in.close();
-                                } catch (final Throwable var19) {
-                                    var8.addSuppressed(var19);
-                                }
-                            } else {
-                                in.close();
-                            }
-                        }
-
-                    }
-                }
-
-                this.jwt = new JWT(ks, keyStore.getPassword().toCharArray());
-            } else {
-                this.jwt = new JWT();
-                final List<PubSecKeyOptions> keys = config.getPubSecKeys();
-                if (keys != null) {
-                    final Iterator var25 = config.getPubSecKeys().iterator();
-
-                    while (var25.hasNext()) {
-                        final PubSecKeyOptions pubSecKey = (PubSecKeyOptions) var25.next();
-                        if (pubSecKey.isSymmetric()) {
-                            this.jwt.addJWK(new JWK(pubSecKey.getAlgorithm(), pubSecKey.getPublicKey()));
-                        } else {
-                            this.jwt.addJWK(new JWK(pubSecKey.getAlgorithm(), pubSecKey.isCertificate(), pubSecKey.getPublicKey(), pubSecKey.getSecretKey()));
-                        }
-                    }
-                }
-
-                final List<SecretOptions> secrets = config.getSecrets();
-                if (secrets != null) {
-                    final Iterator var28 = secrets.iterator();
-
-                    while (var28.hasNext()) {
-                        final SecretOptions secret = (SecretOptions) var28.next();
-                        this.jwt.addSecret(secret.getType(), secret.getSecret());
-                    }
-                }
-            }
-
-        } catch (IOException | FileSystemException | CertificateException | NoSuchAlgorithmException | KeyStoreException var23) {
-            throw new _500JwtRuntimeException(this.getClass(), var23);
-        }
-    }
-
-    @Override
-    public JsonObject extractToken(final JsonObject authInfo) {
-        return this.jwt.decode(authInfo.getString("jwt"));
+        // File reading here.
+        this.jwt = Ux.Jwt.create(config, vertx.fileSystem()::readFileBlocking);
     }
 
     @Override
