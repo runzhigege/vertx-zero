@@ -2,5 +2,3 @@
 
 This tutorial will continue to introduce how to use JSR340 @WebFilter in zero system. 
 
-
-
