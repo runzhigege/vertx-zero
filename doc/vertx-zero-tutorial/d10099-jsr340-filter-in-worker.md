@@ -60,5 +60,62 @@ public class FilterWorker {
 }
 ```
 
+### 1.3. Filter
+
+> Here the code is the same as agent as following
+
+```java
+package up.god.micro.filter;
+
+import io.vertx.core.VertxException;
+import io.vertx.core.http.HttpServerRequest;
+import io.vertx.core.http.HttpServerResponse;
+import io.vertx.up.web.filter.HttpFilter;
+
+import javax.servlet.annotation.WebFilter;
+import java.io.IOException;
+
+@WebFilter("/api/jsr340/*")
+public class FirstFilter extends HttpFilter {
+
+    @Override
+    public void doFilter(final HttpServerRequest request,
+                         final HttpServerResponse response)
+            throws IOException, VertxException {
+        System.out.println("First Filter");
+        this.put("key", "First Filter");
+    }
+}
+
+```
+
+## 2. Testing
+
+Then you can test this feature as following:
+
+**URL** : http://localhost:6084/api/jsr340/worker
+
+**Method** : POST
+
+**Response** :
+
+```json
+{
+    "data": {
+        "key": "First Filter"
+    }
+}
+```
+
+Here please be careful about the api of `Envelop.context`, you can extract the data from this api include any data type, the signature of this method is as following:
+
+```java
+public <T> T context(final String key, final Class<T> clazz)
+```
+
+## 3. Summary
+
+Based on current tutorial you can know how to use filters in Consumer \( Worker \) of zero system, and now you can set any code logical before your API.
+
 
 
