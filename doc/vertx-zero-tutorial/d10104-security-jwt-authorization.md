@@ -6,3 +6,7 @@ This tutorial we'll introduce the usage of `Jwt` Authorization in zero system, t
 
 ![](/doc/image/D10104-1.png)
 
+**Verify Token:**
+
+![](/doc/image/D10104-2.png)
+
