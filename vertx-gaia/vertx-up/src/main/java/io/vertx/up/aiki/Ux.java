@@ -88,9 +88,21 @@ public final class Ux {
      * @param objects
      */
     public static void debug(final Object... objects) {
-        for (final Object reference : objects) {
-            Debug.monitor(reference);
-        }
+        Debug.monitor(objects);
+    }
+
+    /**
+     * Timer
+     *
+     * @param clazz
+     * @param actuator
+     */
+    public static void timer(final Class<?> clazz, final Actuator actuator) {
+        Debug.timer(clazz, actuator);
+    }
+
+    public static <T> T timer(final Class<?> clazz, final Supplier<T> supplier) {
+        return Debug.timer(clazz, supplier);
     }
 
     /**
