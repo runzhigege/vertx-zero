@@ -59,7 +59,5 @@ Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiJjMWZiN2JiZC1kOTkxLTQwODIt
 
 ## 2. Summary
 
-
-
-
+Here are the jwt standalone configuration part and in forward tutorials we'll introduce how to use JWT in zero system.
 
