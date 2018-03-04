@@ -109,6 +109,8 @@ For all tutorial testing cases, you can import following resource with Postman T
    15. [D10043 - Zero JSR303, Body Validation](doc/vertx-zero-tutorial/d10043-zero-jsr303-body-validation.md)
 5. JSR340 Filter/Listener
    1. [D10098 - JSR340 Filter in Agent](doc/vertx-zero-tutorial/d10098-jsr340-filter-in-agent.md)
+   2. [D10099 - JSR340 Filter in Worker](/doc/vertx-zero-tutorial/d10099-jsr340-filter-in-worker.md)
+   3. [D10100 - JSR340 Multi Filters](/doc/vertx-zero-tutorial/d10100-jsr340-multi-filters.md)
 6. Programming Style & User-defined
    1. [D10044 - Programming Styles](doc/vertx-zero-tutorial/d10044-programming-styles.md)
    2. [D10045 - Interface Style](doc/vertx-zero-tutorial/d10044-recommend-interface-mode-only.md)
@@ -148,9 +150,12 @@ For all tutorial testing cases, you can import following resource with Postman T
    6. [D10073 - Configuration, vertx-mongo.yml](doc/vertx-zero-tutorial/d10073-configuration-vertx-mongoyml.md)
    7. [D10074 - Configuration, vertx-etcd3.yml](doc/vertx-zero-tutorial/d10074-configuration-vertx-etcd3yml.md)
    8. [D10075 - Configuration, vertx-rpc.yml](doc/vertx-zero-tutorial/d10075-configuration-vertx-rpcyml.md)
+   9. [D10102 - Configuration, vertx-redis.yml](/doc/vertx-zero-tutorial/d10102-configuration-vertx-redisyml.md)
+   10. [D10103 - Configuration, vertx-secure.yml](/doc/vertx-zero-tutorial/d10103-configuration-vertx-secureyml.md)
 10. Native Support
     1. [D10076 - Vert.x Native, MySqlClient](doc/vertx-zero-tutorial/d10076-vertx-native-mysqlclient.md)
     2. [D10078 - Vert.x Native, MongoClient](doc/vertx-zero-tutorial/d10077-vertx-native-mongoclient.md)
+    3. [D10101 - Vert.x Native, RedisClient](/doc/vertx-zero-tutorial/d10101-vertx-native-redisclient.md)
 11. Micro Service Development
     1. [D10082 - Micro, Environment Preparing](doc/vertx-zero-tutorial/d10082-micro-environment-preparing.md)
     2. [D10083 - Micro, Rpc Mode](doc/vertx-zero-tutorial/d10083-micro-rpc-mode.md)
@@ -166,6 +171,7 @@ For all tutorial testing cases, you can import following resource with Postman T
     12. [D10093 - Micro Stream, Originator/Coordinator/Terminator](doc/vertx-zero-tutorial/d10093-micro-stream-originatorcoordinatorterminator.md)
 12. Security Module
     1. [D10095 - Security, Basic Authorization](doc/vertx-zero-tutorial/d10095-security-basic-authorization.md)
+    2. [D10104 - Security, Jwt Authorization](/doc/vertx-zero-tutorial/d10104-security-jwt-authorization.md)
 13. Third Part Reference
     1. [D10077 - Reference, Mongo Setup](doc/vertx-zero-tutorial/d10077-third-part-mongo-setup.md)
     2. [D10079 - Reference, Mini k8s](doc/vertx-zero-tutorial/d10079-reference-mini-k8s.md)
