@@ -122,6 +122,7 @@ public class JwtWall implements Security {
         final JsonObject seed = new JsonObject()
                 .put("username", filter.getString("username"))
                 .put("id", filter.getString("_id"));
+        // Build the data that you want to store into token.
         final String token = Ux.Jwt.token(seed);
         return Ux.Mongo.findOneAndReplace("DB_USER", filter, "token", token);
     }
@@ -129,6 +130,7 @@ public class JwtWall implements Security {
     @Override
     public Future<Boolean> verify(final JsonObject data) {
         final JsonObject extracted = Ux.Jwt.extract(data);
+        // Extract data from token: Authorization Header.
         final String token = data.getString("jwt");
         final JsonObject filters = new JsonObject()
                 .put("_id", extracted.getString("id"))
@@ -136,7 +138,6 @@ public class JwtWall implements Security {
         return Ux.Mongo.existing("DB_USER", filters);
     }
 }
-
 ```
 
 
