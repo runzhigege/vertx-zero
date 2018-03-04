@@ -33,7 +33,7 @@ public class Uson {
 
     private Uson(final JsonObject json) {
         this.objectReference = Fn.get(new JsonObject(), () -> json, json);
-        LOGGER.info(Info.STREAM_START, String.valueOf(this.hashCode()), json);
+        LOGGER.debug(Info.STREAM_START, String.valueOf(this.hashCode()), json);
     }
 
     public Uson append(final JsonObject object) {
@@ -98,7 +98,7 @@ public class Uson {
     }
 
     public JsonObject to() {
-        LOGGER.info(Info.STREAM_END, String.valueOf(this.hashCode()), this.objectReference);
+        LOGGER.debug(Info.STREAM_END, String.valueOf(this.hashCode()), this.objectReference);
         return this.objectReference;
     }
 
