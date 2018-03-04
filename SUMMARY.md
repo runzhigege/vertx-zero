@@ -143,6 +143,7 @@
   * [D10100 - JSR340 Multi Filters](doc/vertx-zero-tutorial/d10100-jsr340-multi-filters.md)
   * [D10101 - Vert.x Native, RedisClient](doc/vertx-zero-tutorial/d10101-vertx-native-redisclient.md)
   * [D10102 - Configuration, vertx-redis.yml](doc/vertx-zero-tutorial/d10102-configuration-vertx-redisyml.md)
+  * [D10103 - Configuration, vertx-secure.yml](doc/vertx-zero-tutorial/d10103-configuration-vertx-secureyml.md)
 
 ## Useful Related Documents
 
