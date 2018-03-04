@@ -21,7 +21,7 @@ public class Uarr {
 
     private Uarr(final JsonArray jsonArray) {
         this.arrayReference = Fn.get(new JsonArray(), () -> jsonArray, jsonArray);
-        LOGGER.info(Info.STREAM_START, String.valueOf(this.hashCode()), jsonArray);
+        LOGGER.debug(Info.STREAM_START, String.valueOf(this.hashCode()), jsonArray);
     }
 
     public Uarr append(final JsonObject object) {
@@ -95,7 +95,7 @@ public class Uarr {
     }
 
     public JsonArray to() {
-        LOGGER.info(Info.STREAM_END, String.valueOf(this.hashCode()), this.arrayReference);
+        LOGGER.debug(Info.STREAM_END, String.valueOf(this.hashCode()), this.arrayReference);
         return this.arrayReference;
     }
 
