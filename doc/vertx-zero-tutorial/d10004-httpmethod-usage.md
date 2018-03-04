@@ -119,7 +119,7 @@ Once zero is up, you can test the same uri with different Http Method.
 
 **URL**: [http://localhost:6083/api/method](http://localhost:6083/api/method)
 
-**Method**:** **POST
+**Method**: POST
 
 **Response**:
 
