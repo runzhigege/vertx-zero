@@ -8,7 +8,7 @@ Demo projects:
 
 ## 1. Source Code
 
-### 1.1.API
+### 1.1. API
 
 ```java
 package up.god.micro.filter;
@@ -32,7 +32,7 @@ public interface FilterApi {
 }
 ```
 
-### 1.2.Consumer
+### 1.2. Consumer
 
 ```java
 package up.god.micro.filter;
@@ -55,7 +55,99 @@ public class FilterWorker {
 }
 ```
 
-### 1.3 Filters
+### 1.3. Filters
+
+Here are two filters in this example, we'll manage all the filters by `io.vertx.up.annotations.Ordered`, The default order value is 0, it means that all the filters will be triggered in sequence by order.
+
+**FirstFilter**
+
+```java
+package up.god.micro.filter;
+
+import io.vertx.core.VertxException;
+import io.vertx.core.http.HttpServerRequest;
+import io.vertx.core.http.HttpServerResponse;
+import io.vertx.up.web.filter.HttpFilter;
+
+import javax.servlet.annotation.WebFilter;
+import java.io.IOException;
+
+@WebFilter("/api/jsr340/*")
+public class FirstFilter extends HttpFilter {
+
+    @Override
+    public void doFilter(final HttpServerRequest request,
+                         final HttpServerResponse response)
+            throws IOException, VertxException {
+        System.out.println("First Filter");
+        this.put("key", "First Filter");
+    }
+}
+```
+
+**SecondFilter**
+
+```java
+package up.god.micro.filter;
+
+import io.vertx.core.VertxException;
+import io.vertx.core.http.HttpServerRequest;
+import io.vertx.core.http.HttpServerResponse;
+import io.vertx.up.annotations.Ordered;
+import io.vertx.up.web.filter.HttpFilter;
+
+import javax.servlet.annotation.WebFilter;
+import java.io.IOException;
+
+@WebFilter("/api/jsr340/*")
+@Ordered(2)
+public class SecondFilter extends HttpFilter {
+
+    @Override
+    public void doFilter(final HttpServerRequest request,
+                         final HttpServerResponse response)
+            throws IOException, VertxException {
+        System.out.println("Second Filter");
+        this.put("key1", "Second Filter");
+    }
+}
+```
+
+## 2. Testing
+
+Then you can test this demo:
+
+**URL** : http://localhost:6084/api/jsr340/worker
+
+**Method**: POST
+
+**Request** :
+
+```json
+{
+	"username":"Filter"
+}
+```
+
+**Response** :
+
+```json
+{
+    "data": {
+        "key": "First Filter",
+        "key1": "Second Filter"
+    }
+}
+```
+
+### 3. Summary
+
+In this demo we defined 2 filters in sequence to implement the whole [Chain of Responsibility](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern) pattern. In zero system, please be careful about the whole filter chain:
+
+* All the filters could be managed by `io.vertx.up.annotations.Ordered`.
+* The data could be passed by `RoutingContext` instead of other form, you can put the data into `RoutingContext` by `put`.
+* In Sender, you should extract data by `@ContextParam` or get `RoutingContext` reference to process it by yourself.
+* In Consumer, you can call `Envelop.context` api to get the data from `RoutingContext`.
 
 
 
