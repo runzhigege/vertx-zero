@@ -144,6 +144,7 @@
   * [D10101 - Vert.x Native, RedisClient](doc/vertx-zero-tutorial/d10101-vertx-native-redisclient.md)
   * [D10102 - Configuration, vertx-redis.yml](doc/vertx-zero-tutorial/d10102-configuration-vertx-redisyml.md)
   * [D10103 - Configuration, vertx-secure.yml](doc/vertx-zero-tutorial/d10103-configuration-vertx-secureyml.md)
+  * [D10104 - Security, Jwt Authorization](doc/vertx-zero-tutorial/d10104-security-jwt-authorization.md)
 
 ## Useful Related Documents
 
