@@ -17,6 +17,10 @@ Here are two workflow in zero system that developers could define:
 
 > In vert.x native JWT support, you must set your own code logical to process token, but in zero system, you could focus on two functions to process token only, zero has split the workflow and let developers process JWT more smartly.
 
+Demo projects:
+
+* **Standalone - 6084**: `up-tethys`
+
 ## 1. Source Code
 
 ### 1.1. Sender
