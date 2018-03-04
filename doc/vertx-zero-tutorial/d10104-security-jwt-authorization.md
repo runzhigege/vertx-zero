@@ -79,6 +79,7 @@ public class LoginWorker {
     public Future<JsonObject> login(final Envelop envelop) {
         final JsonObject data = Ux.getJson(envelop);
         return Ux.Mongo.findOne("DB_USER", data)
+                // 1.Once login successfully, you can call security api store to store token.
                 .compose(item -> this.security.store(item));
     }
 
@@ -125,22 +126,82 @@ public class JwtWall implements Security {
                 .put("username", filter.getString("username"))
                 .put("id", filter.getString("_id"));
         // Build the data that you want to store into token.
+        // 1. Generate Token
         final String token = Ux.Jwt.token(seed);
+        // 2. Store token into mongo db
         return Ux.Mongo.findOneAndReplace("DB_USER", filter, "token", token);
     }
 
     @Override
     public Future<Boolean> verify(final JsonObject data) {
         final JsonObject extracted = Ux.Jwt.extract(data);
-        // Extract data from token: Authorization Header.
+        // 1. Extract data from token: Authorization Header.
         final String token = data.getString("jwt");
+        // 2. Set filters to check whether user id and token are matching in storage ( Mongo DB )
         final JsonObject filters = new JsonObject()
                 .put("_id", extracted.getString("id"))
                 .put("token", token);
+        // 3. If matching, you can return Future<Boolean>, if it's true, JWT will continue.
+        // If false, the workflow will be terminal and 401 replied.
         return Ux.Mongo.existing("DB_USER", filters);
     }
 }
 ```
 
+## 2. Summary
 
+Once you have write above codes, you have set Jwt Authorization for `/api/secure/*` urls, in this way JWT has been enabled. But there are some points:
+
+* In `store` method, you could process your own code logical.
+* In `verify` method, you must return Future&lt;Boolean&gt; to identify token checking result.
+
+In real projects, the login method may be complex as following:
+
+> Code came from Mobile App login.
+
+```java
+package com.tlk.micro.login;
+
+import com.tlk.atom.User;
+import com.tlk.infra.cv.ID;
+import com.tlk.infra.exception.PasswordWrongException;
+import com.tlk.infra.exception.UserNotFoundException;
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
+import io.vertx.up.aiki.Uson;
+import io.vertx.up.aiki.Ux;
+import io.vertx.up.func.Fn;
+import io.vertx.up.secure.Security;
+
+import javax.inject.Inject;
+
+public class LoginService implements LoginStub {
+    @Inject
+    private transient Security security;
+
+    @Override
+    @SuppressWarnings("all")
+    public Future<JsonObject> login(final JsonObject params) {
+        final String password = params.getString("password");
+        final String username = params.getString("username");
+        params.remove("password");
+        return Ux.Mongo.findOne(User.TABLE, params)
+                .compose(result -> Fn.get(() -> Ux.match(
+                        () -> Ux.fork(
+                                () -> Ux.on(getClass()).on("[App] username = {0} met password wrong error.").info(username),
+                                () -> Ux.thenError(PasswordWrongException.class, getClass(), username)),
+                        Ux.branch(null == result,
+                                () -> Ux.on(getClass()).on("[App] username = {0} does not exist.").info(username),
+                                () -> Ux.thenError(UserNotFoundException.class, getClass(), username)),
+                        Ux.branch(null != result && password.equals(result.getValue("password")),
+                                () -> Ux.on(getClass()).on("[App] username = {0} login successfully."),
+                                () -> Uson.create(result).convert(ID.DB_KEY, ID.UI_KEY).toFuture()))
+                ))
+                .compose(user -> security.store(user));
+    }
+}
+
+```
+
+Then you can write any kind of JWT code logical that you want in your projects.
 
