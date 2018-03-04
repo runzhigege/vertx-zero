@@ -139,6 +139,12 @@
   * [D10096 - Exception, Readable message to help UI](doc/vertx-zero-tutorial/d10096-exception-readable-message-to-help-ui.md)
   * [D10097 - Jooq/CRUD, Save/Existing Operation](doc/vertx-zero-tutorial/d10097-jooqcrud-save-operation.md)
   * [D10098 - JSR340 Filter in Agent](doc/vertx-zero-tutorial/d10098-jsr340-filter-in-agent.md)
+  * [D10099 - JSR340 Filter in Worker](doc/vertx-zero-tutorial/d10099-jsr340-filter-in-worker.md)
+  * [D10100 - JSR340 Multi Filters](doc/vertx-zero-tutorial/d10100-jsr340-multi-filters.md)
+  * [D10101 - Vert.x Native, RedisClient](doc/vertx-zero-tutorial/d10101-vertx-native-redisclient.md)
+  * [D10102 - Configuration, vertx-redis.yml](doc/vertx-zero-tutorial/d10102-configuration-vertx-redisyml.md)
+  * [D10103 - Configuration, vertx-secure.yml](doc/vertx-zero-tutorial/d10103-configuration-vertx-secureyml.md)
+  * [D10104 - Security, Jwt Authorization](doc/vertx-zero-tutorial/d10104-security-jwt-authorization.md)
 
 ## Useful Related Documents
 

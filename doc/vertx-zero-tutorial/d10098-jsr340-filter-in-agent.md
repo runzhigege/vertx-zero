@@ -30,7 +30,7 @@ import javax.ws.rs.Path;
 public class FilterAgent {
 
     @POST
-    @Path("/jsr340/")
+    @Path("/jsr340/agent")
     public JsonObject filter(@BodyParam final JsonObject data,
                              @ContextParam("key") final String filtered) {
         return new JsonObject().put("filter", filtered)
@@ -44,22 +44,25 @@ public class FilterAgent {
 Then you can write the filter as following:
 
 ```java
-package up.wall;
+package up.god.micro.filter;
 
+import io.vertx.core.VertxException;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.up.web.filter.HttpFilter;
 
 import javax.servlet.annotation.WebFilter;
+import java.io.IOException;
 
-@WebFilter("/api/*")
-public class TestFilter extends HttpFilter {
+@WebFilter("/api/jsr340/*")
+public class FirstFilter extends HttpFilter {
 
     @Override
     public void doFilter(final HttpServerRequest request,
-                         final HttpServerResponse response) {
-        System.out.println("Lang");
-        this.put("key", "Hello Lang");
+                         final HttpServerResponse response)
+            throws IOException, VertxException {
+        System.out.println("First Filter");
+        this.put("key", "First Filter");
     }
 }
 ```
@@ -73,7 +76,7 @@ Here are some points that you should be careful:
 
 ## 2. Testing
 
-**URL** : [http://localhost:6084/api/jsr340](http://localhost:6084/api/jsr340)
+**URL** : [http://localhost:6084/api/jsr340/agent](http://localhost:6084/api/jsr340/agent)
 
 **Method**: POST
 
@@ -81,7 +84,7 @@ Here are some points that you should be careful:
 
 ```json
 {
-    "username":"Lang"
+	"username":"Lang"
 }
 ```
 
@@ -90,7 +93,7 @@ Here are some points that you should be careful:
 ```json
 {
     "data": {
-        "filter": "Hello Lang",
+        "filter": "First Filter",
         "username": "Lang"
     }
 }

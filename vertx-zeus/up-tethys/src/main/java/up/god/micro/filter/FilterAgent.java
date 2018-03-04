@@ -13,7 +13,7 @@ import javax.ws.rs.Path;
 public class FilterAgent {
 
     @POST
-    @Path("/jsr340/")
+    @Path("/jsr340/agent")
     public JsonObject filter(@BodyParam final JsonObject data,
                              @ContextParam("key") final String filtered) {
         return new JsonObject().put("filter", filtered)
