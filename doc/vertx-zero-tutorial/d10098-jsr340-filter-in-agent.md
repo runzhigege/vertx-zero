@@ -76,7 +76,7 @@ Here are some points that you should be careful:
 
 ## 2. Testing
 
-**URL** : [http://localhost:6084/api/jsr34](http://localhost:6084/api/jsr340)0/agent
+**URL** : http://localhost:6084/api/jsr340/agent
 
 **Method**: POST
 
