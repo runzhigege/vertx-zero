@@ -21,7 +21,7 @@ Demo projects:
 
 * **Standalone - 6084**: `up-tethys`
 
-For security configuration part you can refer: [D10103 - Configuration, vertx-secure.yml](/doc/vertx-zero-tutorial/d10103-configuration-vertx-secureyml.md) for more details.
+For security configuration part you can refer: [D10103 - Configuration, vertx-secure.yml](d10103-configuration-vertx-secureyml.md) for more details.
 
 ## 1. Source Code
 

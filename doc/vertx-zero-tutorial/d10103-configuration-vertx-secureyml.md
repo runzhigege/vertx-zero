@@ -13,7 +13,7 @@ zero:
   lime: secure
 ```
 
-Because we'll use mongo as default authorization, you must finish mongo configuration based on: [D10073 - Configuration, vertx-mongo.yml.](/doc/vertx-zero-tutorial/d10073-configuration-vertx-mongoyml.md)
+Because we'll use mongo as default authorization, you must finish mongo configuration based on: [D10073 - Configuration, vertx-mongo.yml.](d10073-configuration-vertx-mongoyml.md)
 
 ### 1.2. vertx-secure.yml
 
