@@ -14,7 +14,51 @@ This tutorial will describe the usage of Filters in Consumer \( Worker \).
 
 ## 1. Source Code
 
+### 1.1. Api
 
+```java
+package up.god.micro.filter;
+
+import io.vertx.core.json.JsonObject;
+import io.vertx.up.annotations.Address;
+import io.vertx.up.annotations.EndPoint;
+
+import javax.ws.rs.BodyParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+
+@EndPoint
+@Path("/api")
+public interface FilterApi {
+
+    @POST
+    @Path("/jsr340/worker")
+    @Address("ZERO://JSR340/WORKER")
+    JsonObject filter(@BodyParam final JsonObject data);
+}
+```
+
+### 1.2. Consumer
+
+```java
+package up.god.micro.filter;
+
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
+import io.vertx.up.annotations.Address;
+import io.vertx.up.annotations.Queue;
+import io.vertx.up.atom.Envelop;
+
+@Queue
+public class FilterWorker {
+
+    @Address("ZERO://JSR340/WORKER")
+    public Future<JsonObject> work(final Envelop envelop) {
+        final String key = envelop.context("key", String.class);
+        return Future.succeededFuture(new JsonObject().put("key", key));
+    }
+}
+```
 
 
 
