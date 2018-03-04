@@ -36,9 +36,11 @@ import java.util.function.Function;
  */
 class UxJwt {
 
+    private static JWT JWT_INSTANCE;
+
     static JsonObject extract(final String jwt) {
         // Extract "config" from jwt configuration.
-        final JsonObject config = readOptions();
+        final JsonObject config = UxJwt.readOptions();
         // Extract token from input jwt.
         return Fn.get(() -> extract(jwt, config), config);
     }
@@ -77,7 +79,25 @@ class UxJwt {
         return reference.decode(jwt);
     }
 
+    /**
+     * Singleton for JWT instance to avoid performance issue.
+     *
+     * @param config     JWT configuration
+     * @param funcBuffer IO function
+     * @return Valid JWT reference
+     */
     static JWT create(final JWTAuthOptions config, final Function<String, Buffer> funcBuffer) {
+        if (null == JWT_INSTANCE) {
+            synchronized (UxJwt.class) {
+                if (null == JWT_INSTANCE) {
+                    JWT_INSTANCE = createDirect(config, funcBuffer);
+                }
+            }
+        }
+        return JWT_INSTANCE;
+    }
+
+    private static JWT createDirect(final JWTAuthOptions config, final Function<String, Buffer> funcBuffer) {
         final JWT reference;
         final KeyStoreOptions keyStore = config.getKeyStore();
 

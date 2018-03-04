@@ -43,7 +43,7 @@ public class JwtAuthProvider implements JwtAuth {
                 if (result) {
                     return this.authorize(authInfo);
                 } else {
-                    return Future.failedFuture(new _401JwtExecutorException(this.getClass(), authInfo));
+                    return Future.failedFuture(new _401JwtExecutorException(this.getClass(), authInfo.getString("jwt")));
                 }
             });
         }
