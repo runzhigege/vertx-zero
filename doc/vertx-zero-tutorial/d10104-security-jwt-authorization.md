@@ -52,5 +52,92 @@ public interface LoginActor {
 }
 ```
 
+### 1.2. Consumer
+
+```java
+package up.god.micro.jwt;
+
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
+import io.vertx.up.aiki.Ux;
+import io.vertx.up.annotations.Address;
+import io.vertx.up.annotations.Queue;
+import io.vertx.up.atom.Envelop;
+import io.vertx.up.secure.Security;
+
+import javax.inject.Inject;
+
+@Queue
+public class LoginWorker {
+
+    @Inject
+    private transient Security security;
+
+    @Address("ZERO://QUEUE/LOGIN")
+    public Future<JsonObject> login(final Envelop envelop) {
+        final JsonObject data = Ux.getJson(envelop);
+        return Ux.Mongo.findOne("DB_USER", data)
+                .compose(item -> this.security.store(item));
+    }
+
+
+    @Address("ZERO://QUEUE/JWT")
+    public Future<JsonObject> secure(final Envelop envelop) {
+        return Future.succeededFuture(new JsonObject());
+    }
+}
+```
+
+Be careful about above code that you should `inject` the Security interface.
+
+### 1.3. Wall
+
+```java
+package up.wall;
+
+import io.vertx.core.Future;
+import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
+import io.vertx.ext.auth.jwt.JWTAuthOptions;
+import io.vertx.ext.web.handler.AuthHandler;
+import io.vertx.up.aiki.Ux;
+import io.vertx.up.annotations.Authenticate;
+import io.vertx.up.annotations.Wall;
+import io.vertx.up.secure.Security;
+import io.vertx.up.secure.handler.JwtOstium;
+import io.vertx.up.secure.provider.JwtAuth;
+
+@Wall(value = "jwt", path = "/api/secure/*")
+@SuppressWarnings("all")
+public class JwtWall implements Security {
+
+    @Authenticate
+    public AuthHandler authenticate(final Vertx vertx,
+                                    final JsonObject config) {
+        return JwtOstium.create(JwtAuth.create(vertx, new JWTAuthOptions(config), this::verify));
+    }
+
+    @Override
+    public Future<JsonObject> store(final JsonObject filter) {
+        final JsonObject seed = new JsonObject()
+                .put("username", filter.getString("username"))
+                .put("id", filter.getString("_id"));
+        final String token = Ux.Jwt.token(seed);
+        return Ux.Mongo.findOneAndReplace("DB_USER", filter, "token", token);
+    }
+
+    @Override
+    public Future<Boolean> verify(final JsonObject data) {
+        final JsonObject extracted = Ux.Jwt.extract(data);
+        final String token = data.getString("jwt");
+        final JsonObject filters = new JsonObject()
+                .put("_id", extracted.getString("id"))
+                .put("token", token);
+        return Ux.Mongo.existing("DB_USER", filters);
+    }
+}
+
+```
+
 
 
