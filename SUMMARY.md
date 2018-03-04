@@ -141,6 +141,7 @@
   * [D10098 - JSR340 Filter in Agent](doc/vertx-zero-tutorial/d10098-jsr340-filter-in-agent.md)
   * [D10099 - JSR340 Filter in Worker](doc/vertx-zero-tutorial/d10099-jsr340-filter-in-worker.md)
   * [D10100 - JSR340 Multi Filters](doc/vertx-zero-tutorial/d10100-jsr340-multi-filters.md)
+  * [D10101 - Vert.x Native, RedisClient](doc/vertx-zero-tutorial/d10101-vertx-native-redisclient.md)
 
 ## Useful Related Documents
 
