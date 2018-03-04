@@ -26,7 +26,7 @@ If you want to use Zero framework, you can add following dependency into you `po
     <parent>
         <artifactId>vertx-import</artifactId>
         <groupId>cn.vertxup</groupId>
-        <version>0.4.7</version>
+        <version>0.4.7.1</version>
     </parent>
 ```
 
