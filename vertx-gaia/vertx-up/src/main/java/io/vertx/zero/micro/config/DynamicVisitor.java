@@ -7,7 +7,7 @@ import io.vertx.up.eon.Plugins;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ensurer;
+import io.vertx.up.tool.Ut;
 import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.eon.Info;
 import io.vertx.zero.eon.Values;
@@ -34,26 +34,26 @@ public class DynamicVisitor extends HttpServerVisitor {
     public ConcurrentMap<Integer, HttpServerOptions> visit(final String... key)
             throws ZeroException {
         // 1. Must be the first line, fixed position.
-        Ensurer.eqLength(getClass(), 1, (Object[]) key);
+        Ut.ensureEqualLength(this.getClass(), 1, (Object[]) key);
         // 2. Visit the node for server
         final JsonObject data = this.NODE.read();
 
         Fn.flingZero(null == data || !data.containsKey(KEY), LOGGER,
                 ServerConfigException.class,
-                getClass(), null == data ? null : data.encode());
+                this.getClass(), null == data ? null : data.encode());
         // 3. Convert input parameters.
         this.type = ServerType.valueOf(key[Values.IDX]);
-        return visit(data.getJsonArray(KEY));
+        return this.visit(data.getJsonArray(KEY));
     }
 
     private ConcurrentMap<Integer, HttpServerOptions> visit(final JsonArray serverData)
             throws ZeroException {
-        getLogger().info(Info.INF_B_VERIFY, KEY, this.type, serverData.encode());
+        this.getLogger().info(Info.INF_B_VERIFY, KEY, this.type, serverData.encode());
         Ruler.verify(KEY, serverData);
         final ConcurrentMap<Integer, HttpServerOptions> map =
                 new ConcurrentHashMap<>();
         this.extract(serverData, map);
-        getLogger().info(Info.INF_A_VERIFY, KEY, this.type, map.keySet());
+        this.getLogger().info(Info.INF_A_VERIFY, KEY, this.type, map.keySet());
         return map;
     }
 

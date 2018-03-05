@@ -2,8 +2,7 @@ package io.vertx.zero.marshal.options;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.tool.Ensurer;
-import io.vertx.up.tool.Jackson;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.marshal.Visitor;
 import io.vertx.zero.marshal.node.Node;
@@ -16,8 +15,8 @@ public class JArrayOpts implements Visitor<JsonArray> {
 
     @Override
     public JsonArray visit(final String... nodes) {
-        Ensurer.gtLength(getClass(), 0, (Object[]) nodes);
+        Ut.ensureMinLength(this.getClass(), 0, (Object[]) nodes);
         final JsonObject tree = NODE.read();
-        return Jackson.visitJArray(tree, nodes);
+        return Ut.visitJArray(tree, nodes);
     }
 }

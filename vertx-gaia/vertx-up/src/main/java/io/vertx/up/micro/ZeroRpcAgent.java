@@ -15,7 +15,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.micro.center.ZeroRegistry;
 import io.vertx.up.micro.ipc.server.Tunnel;
 import io.vertx.up.micro.ipc.server.UnityTunnel;
-import io.vertx.up.tool.Net;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.eon.Values;
 
@@ -77,7 +77,7 @@ public class ZeroRpcAgent extends AbstractVerticle {
         final AtomicInteger out = ZeroAtomic.RPC_START_LOGS.get(port);
         if (Values.ONE == out.getAndIncrement()) {
             if (handler.succeeded()) {
-                LOGGER.info(Info.RPC_LISTEN, Net.getIPv4(), String.valueOf(options.getPort()));
+                LOGGER.info(Info.RPC_LISTEN, Ut.netIPv4(), String.valueOf(options.getPort()));
                 // Started to write data in etcd center.
                 LOGGER.info(Info.ETCD_SUCCESS, this.registry.getConfig());
                 // Status registry

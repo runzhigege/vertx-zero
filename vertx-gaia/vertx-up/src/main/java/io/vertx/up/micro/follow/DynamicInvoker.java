@@ -7,8 +7,8 @@ import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ipc.client.TunnelClient;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
-import io.vertx.up.tool.mirror.Types;
 import io.vertx.up.web.ZeroSerializer;
 import io.vertx.zero.eon.Values;
 
@@ -49,7 +49,7 @@ public class DynamicInvoker implements Invoker {
         } else {
             final Object reference = envelop.data();
             // Non Direct
-            final Object arguments = ZeroSerializer.getValue(argType, Types.toString(reference));
+            final Object arguments = ZeroSerializer.getValue(argType, Ut.toString(reference));
             returnValue = Instance.invoke(proxy, method.getName(), arguments);
         }
         // Return type must not be Envelop because top layer has been finished checking.

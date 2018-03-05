@@ -5,7 +5,7 @@ import io.vertx.up.exception.WebException;
 import io.vertx.up.func.Fn;
 import io.vertx.up.kidd.Readible;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.io.IO;
 import io.vertx.up.tool.io.Stream;
 
@@ -28,7 +28,7 @@ public class CodeReadible implements Readible {
         // Pick up message from MESSAGE cache.
         final String message = MESSAGE.getString(String.valueOf(Math.abs(error.getCode())));
         // Check whether the readible set.
-        Fn.safeSemi(StringUtil.isNil(error.getReadible()), LOGGER,
+        Fn.safeSemi(Ut.isNil(error.getReadible()), LOGGER,
                 () -> Fn.safeNull(() -> error.setReadible(message), error));
     }
 }

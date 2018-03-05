@@ -3,7 +3,7 @@ package io.vertx.up.aiki;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.quiz.StoreBase;
-import io.vertx.up.tool.Jackson;
+import io.vertx.up.tool.Ut;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -27,7 +27,7 @@ public class UxToTc extends StoreBase {
     @Test
     public void testUserSerial() {
         final DateTimeJson json = new DateTimeJson();
-        System.out.println(Jackson.serialize(json));
+        System.out.println(Ut.serialize(json));
     }
 
     private UserJson getEntity() {

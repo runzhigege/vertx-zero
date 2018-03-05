@@ -9,8 +9,8 @@ import io.vertx.up.eon.em.CertType;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ssl.TrustPipe;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
-import io.vertx.up.tool.mirror.Types;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
 
@@ -38,7 +38,7 @@ public class RpcSslTool {
                     if (null != sslConfig && !sslConfig.isEmpty()) {
                         final Object type = sslConfig.getValue("type");
                         final CertType certType = null == type ?
-                                CertType.PEM : Types.fromStr(CertType.class, type.toString());
+                                CertType.PEM : Ut.toEnum(CertType.class, type.toString());
                         final TrustPipe<JsonObject> pipe = TrustPipe.get(certType);
                         // Enable SSL
                         builder.useSsl(pipe.parse(sslConfig));
@@ -74,7 +74,7 @@ public class RpcSslTool {
                     } else {
                         final Object type = ssl.getValue("type");
                         final CertType certType = null == type ?
-                                CertType.PEM : Types.fromStr(CertType.class, type.toString());
+                                CertType.PEM : Ut.toEnum(CertType.class, type.toString());
                         final TrustPipe<JsonObject> pipe = TrustPipe.get(certType);
                         // Enabled SSL
                         builder.useSsl(pipe.parse(ssl));

@@ -2,7 +2,7 @@ package io.vertx.up.aiki;
 
 import io.vertx.up.func.Actuator;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Jackson;
+import io.vertx.up.tool.Ut;
 
 import java.util.function.Supplier;
 
@@ -37,7 +37,7 @@ class Debug {
         builder.append("\t\t[ ZERO Debug ] object = ").append(object).append("\n");
         if (null != object) {
             builder.append("\t\t[ ZERO Debug ] type = ").append(object.getClass()).append("\n");
-            builder.append("\t\t[ ZERO Debug ] json = ").append(Jackson.serialize(object)).append("\n");
+            builder.append("\t\t[ ZERO Debug ] json = ").append(Ut.serialize(object)).append("\n");
             builder.append("\t\t[ ZERO Debug ] toString = ").append(object.toString()).append("\n");
             builder.append("\t\t[ ZERO Debug ] hashCode = ").append(object.hashCode()).append("\n");
         }

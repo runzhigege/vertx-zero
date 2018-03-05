@@ -10,7 +10,7 @@ import io.vertx.up.atom.hold.Virtual;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroHelper;
 import io.vertx.zero.exception.AccessProxyException;
@@ -120,7 +120,7 @@ public class EventExtractor implements Extractor<Set<Event>> {
             final Path path = ZeroHelper.getPath(method);
             if (null == path) {
                 // 3.2. Check root double check
-                if (!StringUtil.isNil(root)) {
+                if (!Ut.isNil(root)) {
                     // Use root directly.
                     event.setPath(root);
                 }

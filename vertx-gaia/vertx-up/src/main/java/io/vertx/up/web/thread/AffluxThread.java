@@ -3,16 +3,16 @@ package io.vertx.up.web.thread;
 import io.reactivex.Observable;
 import io.vertx.up.annotations.Qualifier;
 import io.vertx.up.eon.Plugins;
+import io.vertx.up.func.Fn;
+import io.vertx.up.log.Annal;
+import io.vertx.up.tool.Ut;
+import io.vertx.up.tool.mirror.Anno;
+import io.vertx.up.tool.mirror.Instance;
+import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.MultiAnnotatedException;
 import io.vertx.zero.exception.NamedImplementionException;
 import io.vertx.zero.exception.NamedNotFoundException;
 import io.vertx.zero.exception.QualifierMissedException;
-import io.vertx.up.func.Fn;
-import io.vertx.up.log.Annal;
-import io.vertx.up.tool.StringUtil;
-import io.vertx.up.tool.mirror.Anno;
-import io.vertx.up.tool.mirror.Instance;
-import io.vertx.zero.eon.Values;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -77,7 +77,7 @@ public class AffluxThread extends Thread {
                 this.fieldMap.put(field.getName(), targetCls);
             } else {
                 // By Named and Qualifier
-                scanQualifier(field, target);
+                this.scanQualifier(field, target);
             }
         } else {
             this.fieldMap.put(field.getName(), type);
@@ -94,7 +94,7 @@ public class AffluxThread extends Thread {
 
         Fn.flingUp(null == annotation,
                 LOGGER, QualifierMissedException.class,
-                getClass(), field.getName(), field.getDeclaringClass().getName());
+                this.getClass(), field.getName(), field.getDeclaringClass().getName());
 
         // All implementation class must be annotated with @Named
         final boolean match = instanceCls.stream()
@@ -105,7 +105,7 @@ public class AffluxThread extends Thread {
 
         Fn.flingUp(!match,
                 LOGGER, NamedImplementionException.class,
-                getClass(), names, field.getType().getName());
+                this.getClass(), names, field.getType().getName());
 
         // Named value must be reflect with @Qualifier
         final String value = Instance.invoke(annotation, "value");
@@ -115,12 +115,12 @@ public class AffluxThread extends Thread {
                     final Annotation target = item.getAnnotation(Named.class);
                     final String targetValue = Instance.invoke(target, "value");
                     return value.equals(targetValue)
-                            && !StringUtil.isNil(targetValue);
+                            && !Ut.isNil(targetValue);
                 }).findAny();
 
         Fn.flingUp(!verified.isPresent(),
                 LOGGER, NamedNotFoundException.class,
-                getClass(), names, value);
+                this.getClass(), names, value);
 
         // Passed all specification
         this.fieldMap.put(field.getName(), verified.get());
@@ -141,7 +141,7 @@ public class AffluxThread extends Thread {
                 }).blockingFirst();
         // Duplicated annotated
         Fn.flingUp(Values.ONE < set.size(), LOGGER,
-                MultiAnnotatedException.class, getClass(),
+                MultiAnnotatedException.class, this.getClass(),
                 field.getName(), field.getDeclaringClass().getName(), set);
         // Fill typed directly.
         LOGGER.info(Info.SCANED_FIELD, this.reference,

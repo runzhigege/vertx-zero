@@ -3,7 +3,7 @@ package io.vertx.up.aiki;
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.tool.Statute;
+import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Values;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -41,7 +41,7 @@ class Dual {
     ) {
         final ConcurrentMap<Integer, Object> targetMap = mapIndex(target, fromKey);
         final ConcurrentMap<Object, JsonObject> sourceMap = mapZip(sources, toKey);
-        final ConcurrentMap<Integer, JsonObject> merged = Statute.reduce(targetMap, sourceMap);
+        final ConcurrentMap<Integer, JsonObject> merged = Ut.reduce(targetMap, sourceMap);
         final JsonArray results = new JsonArray();
         for (int idx = 0; idx < target.size(); idx++) {
             final JsonObject targetItem = merged.get(idx);

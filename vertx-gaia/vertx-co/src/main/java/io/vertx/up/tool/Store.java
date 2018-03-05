@@ -9,7 +9,7 @@ import io.vertx.up.tool.io.IO;
  * Connect to vertx config to get options
  * From filename to ConfigStoreOptions
  */
-public final class Store {
+final class Store {
 
     /**
      * Return json
@@ -17,7 +17,7 @@ public final class Store {
      * @param filename
      * @return
      */
-    public static ConfigStoreOptions getJson(final String filename) {
+    static ConfigStoreOptions getJson(final String filename) {
         return Fn.getJvm(() -> {
             final JsonObject data = IO.getJObject(filename);
             return Fn.getJvm(() ->
@@ -35,7 +35,7 @@ public final class Store {
      * @param filename
      * @return
      */
-    public static ConfigStoreOptions getYaml(final String filename) {
+    static ConfigStoreOptions getYaml(final String filename) {
         return getFile(filename, StoreFormat.YAML);
     }
 
@@ -45,7 +45,7 @@ public final class Store {
      * @param filename
      * @return
      */
-    public static ConfigStoreOptions getProp(final String filename) {
+    static ConfigStoreOptions getProp(final String filename) {
         return getFile(filename, StoreFormat.PROP);
     }
 

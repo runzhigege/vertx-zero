@@ -4,7 +4,7 @@ import io.reactivex.Observable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -39,7 +39,7 @@ class Self {
     ) {
         final JsonObject result = immutable ? entity.copy() : entity;
         Observable.fromArray(keys)
-                .filter(StringUtil::notNil)
+                .filter(Ut::notNil)
                 .map(result::remove)
                 .subscribe();
         return result;
@@ -66,7 +66,7 @@ class Self {
             final boolean immutable
     ) {
         final JsonObject result = immutable ? entity.copy() : entity;
-        if (StringUtil.notNil(to) && entity.containsKey(from)) {
+        if (Ut.notNil(to) && entity.containsKey(from)) {
             result.put(to, entity.getValue(from));
         }
         return result;

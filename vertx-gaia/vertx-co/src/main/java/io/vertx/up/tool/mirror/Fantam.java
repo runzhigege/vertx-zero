@@ -2,6 +2,7 @@ package io.vertx.up.tool.mirror;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
 import io.vertx.up.func.Fn;
+import io.vertx.up.tool.Ut;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ class Fantam {
                 final int index;
                 final List<Class<?>> types = new ArrayList<>();
                 for (final Object arg : args) {
-                    types.add(Types.toPrimary(arg.getClass()));
+                    types.add(Ut.toPrimary(arg.getClass()));
                 }
                 index = access.getIndex(name, types.toArray(new Class<?>[]{}));
                 result = access.invoke(instance, index, args);
@@ -53,7 +54,7 @@ class Fantam {
     ) {
         return Fn.get(() -> {
             // TODO: Generate interface proxy
-            
+
             return null;
         }, interfaceCls);
     }

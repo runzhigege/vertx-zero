@@ -2,7 +2,7 @@ package io.vertx.zero.marshal.reliable;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
-import io.vertx.up.tool.mirror.Types;
+import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.em.DataType;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.demon.DataTypeWrongException;
@@ -19,14 +19,14 @@ public class TypedInsurer extends AbstractInsurer {
     private static final ConcurrentMap<DataType, Function<Object, Boolean>>
             FUNS = new ConcurrentHashMap<DataType, Function<Object, Boolean>>() {
         {
-            put(DataType.BOOLEAN, Types::isBoolean);
-            put(DataType.STRING, (input) -> Boolean.TRUE);
-            put(DataType.INTEGER, Types::isInteger);
-            put(DataType.DECIMAL, Types::isDecimal);
-            put(DataType.DATE, Types::isDate);
-            put(DataType.JOBJECT, Types::isJObject);
-            put(DataType.JARRAY, Types::isJArray);
-            put(DataType.CLASS, Types::isClass);
+            this.put(DataType.BOOLEAN, Ut::isBoolean);
+            this.put(DataType.STRING, (input) -> Boolean.TRUE);
+            this.put(DataType.INTEGER, Ut::isInteger);
+            this.put(DataType.DECIMAL, Ut::isDecimal);
+            this.put(DataType.DATE, Ut::isDate);
+            this.put(DataType.JOBJECT, Ut::isJObject);
+            this.put(DataType.JARRAY, Ut::isJArray);
+            this.put(DataType.CLASS, Ut::isClass);
         }
     };
 
@@ -50,7 +50,7 @@ public class TypedInsurer extends AbstractInsurer {
                 final JsonObject fields = rule.getJsonObject(Rules.TYPED);
                 Fn.etJObject(fields, (item, name) -> {
                     // 3. extract key for field definition
-                    final DataType key = Types.fromStr(DataType.class,
+                    final DataType key = Ut.toEnum(DataType.class,
                             item.toString());
                     final Function<Object, Boolean> fnTest
                             = FUNS.getOrDefault(key, (input) -> Boolean.TRUE);
@@ -58,9 +58,9 @@ public class TypedInsurer extends AbstractInsurer {
                     if (data.containsKey(name)) {
                         final Object value = data.getValue(name);
 
-                        Fn.flingZero(!fnTest.apply(data.getValue(name)), getLogger(),
+                        Fn.flingZero(!fnTest.apply(data.getValue(name)), this.getLogger(),
                                 DataTypeWrongException.class,
-                                getClass(), name, value, key);
+                                this.getClass(), name, value, key);
                     }
                 });
             }

@@ -15,7 +15,7 @@ import io.vertx.up.atom.hold.VirtualUser;
 import io.vertx.up.eon.em.IpcType;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 
 /**
  * Data serialization to set data
@@ -146,7 +146,7 @@ public class DataEncap {
 
     public static JsonObject outJson(final IpcResponse data) {
         final String json = data.getEnvelop().getBody();
-        return Fn.getSemi(StringUtil.notNil(json), LOGGER,
+        return Fn.getSemi(Ut.notNil(json), LOGGER,
                 () -> new JsonObject(json));
     }
 }

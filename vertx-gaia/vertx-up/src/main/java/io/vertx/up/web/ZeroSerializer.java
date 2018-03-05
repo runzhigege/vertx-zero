@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Jackson;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.serialization.*;
 import io.vertx.zero.atom.Mirror;
@@ -163,7 +163,7 @@ public class ZeroSerializer {
 
     @Deprecated
     public static <T> JsonArray toArray(final List<T> list, final Function<JsonObject, JsonObject> converted) {
-        final JsonArray array = Jackson.serializeJson(list);
+        final JsonArray array = Ut.serializeJson(list);
         final JsonArray result = new JsonArray();
         Observable.fromIterable(array)
                 .filter(Objects::nonNull)
@@ -191,7 +191,7 @@ public class ZeroSerializer {
     @Deprecated
     public static <T> JsonObject toObject(final T entity, final String pojo) {
         return Fn.get(new JsonObject(), () -> {
-            final JsonObject from = Jackson.serializeJson(entity);
+            final JsonObject from = Ut.serializeJson(entity);
             return Mirror.create(ZeroSerializer.class)
                     .mount(pojo).connect(from).to().result();
         }, entity, pojo);

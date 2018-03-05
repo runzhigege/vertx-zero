@@ -10,8 +10,7 @@ import io.vertx.up.eon.em.Etat;
 import io.vertx.up.eon.em.EtcdPath;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Net;
-import io.vertx.up.tool.mirror.Types;
+import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Values;
 
 import java.text.MessageFormat;
@@ -92,7 +91,7 @@ public class ZeroRegistry {
         Observable.fromIterable(nodes.entrySet())
                 .filter(Objects::nonNull)
                 .filter(item -> Objects.nonNull(item.getKey()) && Objects.nonNull(item.getValue()))
-                .filter(item -> Etat.RUNNING == Types.fromStr(Etat.class, item.getValue()))
+                .filter(item -> Etat.RUNNING == Ut.toEnum(Etat.class, item.getValue()))
                 .map(Map.Entry::getKey)
                 .subscribe(sets::add);
         return sets;
@@ -102,7 +101,7 @@ public class ZeroRegistry {
                              final HttpServerOptions options, final Etat etat) {
         final String path = MessageFormat.format(PATH_STATUS, this.etcd.getApplication(),
                 EtcdPath.ENDPOINT.toString().toLowerCase(), service,
-                Net.getIPv4(), String.valueOf(options.getPort()));
+                Ut.netIPv4(), String.valueOf(options.getPort()));
         this.logger.info(Info.ETCD_STATUS, service, etat, path);
         this.etcd.write(path, etat, Values.ZERO);
     }
@@ -110,7 +109,7 @@ public class ZeroRegistry {
     public void registryRpc(final ServidorOptions options, final Etat etat) {
         final String path = MessageFormat.format(PATH_STATUS, this.etcd.getApplication(),
                 EtcdPath.IPC.toString().toLowerCase(), options.getName(),
-                Net.getIPv4(), String.valueOf(options.getPort()));
+                Ut.netIPv4(), String.valueOf(options.getPort()));
         this.logger.info(Info.ETCD_STATUS, options.getName(), etat, path);
         this.etcd.write(path, etat, Values.ZERO);
     }
@@ -119,8 +118,8 @@ public class ZeroRegistry {
         final String path = MessageFormat.format(ROUTE_TREE, this.etcd.getApplication(),
                 EtcdPath.IPC.toString().toLowerCase(),
                 MessageFormat.format("{0}:{1}:{2}", options.getName(),
-                        Net.getIPv4(), String.valueOf(options.getPort())));
-        final String host = Net.getIPv4();
+                        Ut.netIPv4(), String.valueOf(options.getPort())));
+        final String host = Ut.netIPv4();
         final String endpoint = MessageFormat.format("grpc://{0}:{1}",
                 host,
                 String.valueOf(options.getPort()));
@@ -143,8 +142,8 @@ public class ZeroRegistry {
         final String path = MessageFormat.format(ROUTE_TREE, this.etcd.getApplication(),
                 EtcdPath.ENDPOINT.toString().toLowerCase(),
                 MessageFormat.format("{0}:{1}:{2}", name,
-                        Net.getIPv4(), String.valueOf(options.getPort())));
-        final String host = Net.getIPv4();
+                        Ut.netIPv4(), String.valueOf(options.getPort())));
+        final String host = Ut.netIPv4();
         final String endpoint = MessageFormat.format("http://{0}:{1}",
                 host,
                 String.valueOf(options.getPort()));
