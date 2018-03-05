@@ -1,8 +1,7 @@
 package io.vertx.up.web.serialization;
 
 import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Period;
-import io.vertx.up.tool.mirror.Types;
+import io.vertx.up.tool.Ut;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -17,10 +16,10 @@ public class DateSaber extends BaseSaber {
                        final String literal) {
         return Fn.get(() ->
                         Fn.getSemi(Date.class == paramType ||
-                                        Calendar.class == paramType, getLogger(),
+                                        Calendar.class == paramType, this.getLogger(),
                                 () -> {
-                                    verifyInput(!Types.isDate(literal), paramType, literal);
-                                    final Date reference = Period.parse(literal);
+                                    this.verifyInput(!Ut.isDate(literal), paramType, literal);
+                                    final Date reference = Ut.parse(literal);
                                     if (Calendar.class == paramType) {
                                         // Specific date format
                                         final Calendar calendar = Calendar.getInstance();

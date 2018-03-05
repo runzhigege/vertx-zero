@@ -2,7 +2,7 @@ package io.vertx.up.aiki.fun;
 
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Strings;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,7 +35,7 @@ public class Log {
 
     public Log info(final Object... args) {
         // Ready to output.
-        if (StringUtil.isNil(this.key)) {
+        if (Ut.isNil(this.key)) {
             final StringBuilder pattern = new StringBuilder();
             for (int idx = 0; idx < args.length; idx++) {
                 pattern.append(Strings.LEFT_BRACES)

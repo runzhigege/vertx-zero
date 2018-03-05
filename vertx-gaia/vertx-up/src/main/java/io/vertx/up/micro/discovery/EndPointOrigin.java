@@ -7,7 +7,7 @@ import io.vertx.servicediscovery.Record;
 import io.vertx.servicediscovery.types.HttpEndpoint;
 import io.vertx.up.eon.em.EtcdPath;
 import io.vertx.up.micro.center.ZeroRegistry;
-import io.vertx.up.tool.Codec;
+import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.eon.Values;
 
@@ -20,11 +20,11 @@ import java.util.concurrent.ConcurrentMap;
 public class EndPointOrigin implements Origin {
 
     private final transient ZeroRegistry registry
-            = ZeroRegistry.create(getClass());
+            = ZeroRegistry.create(this.getClass());
 
     @Override
     public ConcurrentMap<String, Record> getRegistryData() {
-        return readData(EtcdPath.ENDPOINT);
+        return this.readData(EtcdPath.ENDPOINT);
     }
 
     protected ConcurrentMap<String, Record> readData(final EtcdPath path) {
@@ -42,7 +42,7 @@ public class EndPointOrigin implements Origin {
                 .subscribe(item -> {
                     final String key = item.getJsonObject(META)
                             .getString(ID);
-                    final Record record = createRecord(item);
+                    final Record record = this.createRecord(item);
                     map.put(key, record);
                 });
         return map;
@@ -70,7 +70,7 @@ public class EndPointOrigin implements Origin {
                         final String name = meta[Values.ZERO];
                         final String host = meta[Values.ONE];
                         final String port = meta[Values.TWO];
-                        final String id = Codec.sha256(key + item);
+                        final String id = Ut.encryptSHA256(key + item);
                         return new JsonObject()
                                 .put(NAME, name)
                                 .put(HOST, host)

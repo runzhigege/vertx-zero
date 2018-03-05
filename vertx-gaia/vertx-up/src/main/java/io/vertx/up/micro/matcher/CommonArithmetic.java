@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.servicediscovery.Record;
 import io.vertx.up.micro.discovery.Origin;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Strings;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class CommonArithmetic implements Arithmetic {
         final String uri = request.uri();
         final Optional<Record> hitted =
                 records.stream()
-                        .filter(record -> isMatch(uri, record))
+                        .filter(record -> this.isMatch(uri, record))
                         .findAny();
         // Find valid;
         return hitted.orElse(null);
@@ -42,7 +42,7 @@ public class CommonArithmetic implements Arithmetic {
         boolean match = false;
         if (data.containsKey(Origin.PATH)) {
             final String path = data.getString(Origin.PATH);
-            if (!StringUtil.isNil(path) && path.contains(Strings.COLON)) {
+            if (!Ut.isNil(path) && path.contains(Strings.COLON)) {
                 final Pattern pattern = RegexPath.createRegex(path);
                 match = pattern.matcher(uri).matches();
             } else {

@@ -9,8 +9,7 @@ import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.discovery.IpcOrigin;
 import io.vertx.up.micro.discovery.Origin;
-import io.vertx.up.tool.Jackson;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.container.RxHod;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.atom.Ruler;
@@ -43,7 +42,7 @@ class RpcHelper {
         // Lookup Record instance
         Observable.fromIterable(registryData.values())
                 .filter(Objects::nonNull)
-                .filter(item -> StringUtil.notNil(item.getName()))
+                .filter(item -> Ut.notNil(item.getName()))
                 .filter(item -> name.equals(item.getName()) &&
                         address.equals(item.getMetadata().getString(Key.PATH)))
                 .subscribe(container::add);
@@ -90,7 +89,7 @@ class RpcHelper {
                 if (rpcConfig.containsKey("extension")) {
                     // Non Uniform, Search by name
                     final JsonObject visited =
-                            Jackson.visitJObject(rpcConfig, "extension", name);
+                            Ut.visitJObject(rpcConfig, "extension", name);
                     if (null != visited) {
                         sslConfig.mergeIn(visited);
                     }
@@ -98,7 +97,7 @@ class RpcHelper {
                 if (sslConfig.isEmpty()) {
                     // Uniform mode default.
                     sslConfig.mergeIn(
-                            Jackson.visitJObject(rpcConfig, "uniform"));
+                            Ut.visitJObject(rpcConfig, "uniform"));
                 }
             }
             return sslConfig;

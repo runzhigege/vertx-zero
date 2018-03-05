@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Types;
+import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.demon.JObjectElementException;
@@ -24,9 +24,9 @@ public abstract class AbstractInsurer implements Insurer {
             for (int idx = Values.IDX; idx < size; idx++) {
                 final Object value = array.getValue(idx);
                 // 2. Call check method to confirm JsonObject
-                Fn.flingZero(!Types.isJObject(value), getLogger(),
+                Fn.flingZero(!Ut.isJObject(value), this.getLogger(),
                         JObjectElementException.class,
-                        getClass(), idx, value);
+                        this.getClass(), idx, value);
 
                 final JsonObject item = (JsonObject) value;
                 // 3. Apply the rule to each object.
@@ -36,6 +36,6 @@ public abstract class AbstractInsurer implements Insurer {
     }
 
     protected Annal getLogger() {
-        return Annal.get(getClass());
+        return Annal.get(this.getClass());
     }
 }

@@ -10,7 +10,7 @@ import io.vertx.up.eon.Info;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Statute;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroAnno;
 import io.vertx.up.web.ZeroGrid;
@@ -92,14 +92,14 @@ public final class Motor {
             Fn.safeSemi(defines.containsKey(type) && defines.get(type), LOGGER,
                     () -> {
                         // Use user-defined Agent instead.
-                        final Class<?> found = Statute.findUnique(list,
+                        final Class<?> found = Ut.elementFind(list,
                                 (item) -> internals.get(type) != item);
                         if (null != found) {
                             ret.put(type, found);
                         }
                     }, () -> {
                         // Use internal defined ( system defaults )
-                        final Class<?> found = Statute.findUnique(list,
+                        final Class<?> found = Ut.elementFind(list,
                                 (item) -> internals.get(type) == item);
                         if (null != found) {
                             LOGGER.info(Info.AGENT_DEFINED, found, type);

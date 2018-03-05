@@ -4,9 +4,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.io.IO;
 import io.vertx.up.tool.mirror.Instance;
-import io.vertx.up.tool.mirror.Types;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.marshal.reliable.ForbiddenInsurer;
@@ -49,12 +49,12 @@ public class Ruler {
             for (final String field : data.fieldNames()) {
                 final Object value = data.getValue(field);
                 Fn.shuntZero(() -> {
-                    if (Types.isJObject(value) || Types.isJArray(value)) {
+                    if (Ut.isJObject(value) || Ut.isJArray(value)) {
                         final String filename = file + Strings.DOT + field;
-                        if (Types.isJObject(value)) {
+                        if (Ut.isJObject(value)) {
                             // 3.1.2 Json array child
                             verify(filename, (JsonObject) value);
-                        } else if (Types.isJArray(value)) {
+                        } else if (Ut.isJArray(value)) {
                             // 3.1.3 Json array child
                             verify(filename, (JsonArray) value);
                         }
@@ -83,10 +83,10 @@ public class Ruler {
             Fn.etJArray(data, (value, field) -> {
                 // 3. Value = JsonObject, identify if extension.
                 final String filename = file + Strings.DOT + field;
-                if (Types.isJObject(value)) {
+                if (Ut.isJObject(value)) {
                     // JsonObject
                     verify(filename, (JsonObject) value);
-                } else if (Types.isJArray(value)) {
+                } else if (Ut.isJArray(value)) {
                     // JsonArray
                     verify(filename, (JsonArray) value);
                 }
@@ -104,7 +104,7 @@ public class Ruler {
     private static <T> void verifyItem(final T input, final JsonObject rule)
             throws ZeroException {
         Fn.shuntZero(() -> {
-            if (Types.isJArray(input)) {
+            if (Ut.isJArray(input)) {
                 final JsonArray data = (JsonArray) input;
                 // Required
                 Insurer reference = Instance.singleton(RequiredInsurer.class);

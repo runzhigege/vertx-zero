@@ -9,9 +9,7 @@ import io.vertx.up.atom.query.Criteria;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Jackson;
-import io.vertx.up.tool.StringUtil;
-import io.vertx.up.tool.mirror.Types;
+import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Values;
 import org.jooq.*;
 import org.jooq.impl.DSL;
@@ -98,10 +96,10 @@ public class UxJooq {
 
     // CRUD - Upsert ----------------------------------------------------
     private <T> T copyEntity(final T target, final T updated) {
-        final JsonObject targetJson = Jackson.serializeJson(target);
-        final JsonObject sourceJson = Jackson.serializeJson(updated);
+        final JsonObject targetJson = Ut.serializeJson(target);
+        final JsonObject sourceJson = Ut.serializeJson(updated);
         targetJson.mergeIn(sourceJson, true);
-        return (T) Jackson.deserialize(targetJson, target.getClass());
+        return (T) Ut.deserialize(targetJson, target.getClass());
     }
 
     public <T> Future<T> saveAsync(final Object id, final T updated) {
@@ -194,7 +192,7 @@ public class UxJooq {
     }
 
     public <T> Future<List<T>> fetchInAsync(final String column, final Object... value) {
-        final JsonArray values = Types.toJArray(Arrays.asList(value));
+        final JsonArray values = Ut.toJArray(Arrays.asList(value));
         return fetchInAsync(column, values);
     }
 
@@ -368,7 +366,7 @@ public class UxJooq {
             // Function
             final BiFunction<String, Object, Condition> fun = OPS.get(key);
             // JsonArray to List, fix vert.x and jooq connect issue.
-            if (Types.isJArray(value)) {
+            if (Ut.isJArray(value)) {
                 value = ((JsonArray) value).getList().toArray();
             }
             final Condition item = fun.apply(targetField.trim(), value);
@@ -384,7 +382,7 @@ public class UxJooq {
             return Inquiry.Op.EQ;
         } else {
             final String opStr = field.split(",")[Values.ONE];
-            return StringUtil.isNil(opStr) ? Inquiry.Op.EQ : opStr.trim().toLowerCase();
+            return Ut.isNil(opStr) ? Inquiry.Op.EQ : opStr.trim().toLowerCase();
         }
     }
 
@@ -403,7 +401,7 @@ public class UxJooq {
         // Using or instead of in
         Condition condition = null;
         // Params
-        final Collection values = Types.toCollection(value);
+        final Collection values = Ut.toCollection(value);
         if (null != values) {
             for (final Object item : values) {
                 final Condition itemCond = condFun.apply(item);

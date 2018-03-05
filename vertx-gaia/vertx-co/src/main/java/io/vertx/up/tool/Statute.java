@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 /**
  * Do some specification statute operations
  */
-public final class Statute {
+final class Statute {
 
     private static final Annal LOGGER = Annal.get(Statute.class);
 
@@ -26,7 +26,7 @@ public final class Statute {
      * @param <T>      The generic type of list element.
      * @return Found type for target generic type.
      */
-    public static <T> T findUnique(final List<T> list, final Predicate<T> fnFilter) {
+    static <T> T find(final List<T> list, final Predicate<T> fnFilter) {
         return Fn.get(() -> {
             final List<T> filtered = list.stream()
                     .filter(fnFilter).collect(Collectors.toList());
@@ -46,7 +46,7 @@ public final class Statute {
      * @param <V>
      * @return
      */
-    public static <K, T, V> ConcurrentMap<K, V> reduce(
+    static <K, T, V> ConcurrentMap<K, V> reduce(
             final ConcurrentMap<K, T> from,
             final ConcurrentMap<T, V> to) {
         final ConcurrentMap<K, V> result = new ConcurrentHashMap<>();
@@ -66,7 +66,7 @@ public final class Statute {
      * @param <V>
      * @return
      */
-    public static <K, V> ConcurrentMap<K, V> reduce(
+    static <K, V> ConcurrentMap<K, V> reduce(
             final Set<K> from,
             final ConcurrentMap<K, V> to
     ) {
@@ -85,7 +85,7 @@ public final class Statute {
      * @param <T>
      * @return
      */
-    public static <F, T> ConcurrentMap<F, T> zipper(
+    static <F, T> ConcurrentMap<F, T> zipper(
             final List<F> keys,
             final List<T> values
     ) {
@@ -109,7 +109,7 @@ public final class Statute {
      * @param <T>
      * @return
      */
-    public static <F, S, T> List<T> zipper(
+    static <F, S, T> List<T> zipper(
             final List<F> first,
             final List<S> second,
             final BiFunction<F, S, T> function

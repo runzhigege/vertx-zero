@@ -3,7 +3,7 @@ package io.vertx.zero.marshal.node;
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.eon.Strings;
 
@@ -23,10 +23,10 @@ public class ZeroLime implements Node<ConcurrentMap<String, String>> {
     private static final ConcurrentMap<String, String> INTERNALS
             = new ConcurrentHashMap<String, String>() {
         {
-            put("error", ZeroTool.produce("error"));
-            put("inject", ZeroTool.produce("inject"));
-            put("server", ZeroTool.produce("server"));
-            put("resolver", ZeroTool.produce("resolver"));
+            this.put("error", ZeroTool.produce("error"));
+            this.put("inject", ZeroTool.produce("inject"));
+            this.put("server", ZeroTool.produce("server"));
+            this.put("resolver", ZeroTool.produce("resolver"));
         }
     };
 
@@ -35,11 +35,11 @@ public class ZeroLime implements Node<ConcurrentMap<String, String>> {
         // 1. Read all zero configuration: zero
         final JsonObject data = this.node.read();
         // 2. Read the string node "lime" for extensions
-        return build(data.getString(Key.LIME));
+        return this.build(data.getString(Key.LIME));
     }
 
     private ConcurrentMap<String, String> build(final String literal) {
-        final Set<String> sets = StringUtil.split(literal, Strings.COMMA);
+        final Set<String> sets = Ut.splitToSet(literal, Strings.COMMA);
         if (null != literal) {
             // RxJava2
             Observable.fromIterable(sets)

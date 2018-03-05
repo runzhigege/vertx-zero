@@ -12,7 +12,7 @@ import java.util.*;
 /**
  * Period for datetime processing based on Java8
  */
-public class Period {
+class Period {
 
     private static final List<DateTimeFormatter> DATETIMES = new ArrayList<DateTimeFormatter>() {
         {
@@ -44,7 +44,7 @@ public class Period {
      * @param literal
      * @return
      */
-    public static LocalDateTime toFull(final String literal) {
+    static LocalDateTime toDateTime(final String literal) {
         final Optional<DateTimeFormatter> hit =
                 Fn.get(Optional.empty(),
                         () -> DATETIMES.stream()
@@ -63,7 +63,7 @@ public class Period {
      * @param literal
      * @return
      */
-    public static LocalDate toDate(final String literal) {
+    static LocalDate toDate(final String literal) {
         final Optional<DateTimeFormatter> hit =
                 Fn.get(Optional.empty(),
                         () -> DATES.stream()
@@ -82,7 +82,7 @@ public class Period {
      * @param literal
      * @return
      */
-    public static LocalTime toTime(final String literal) {
+    static LocalTime toTime(final String literal) {
         final Optional<DateTimeFormatter> hit =
                 Fn.get(Optional.empty(),
                         () -> TIMES.stream()
@@ -101,12 +101,12 @@ public class Period {
      * @param literal
      * @return
      */
-    public static boolean isValid(final String literal) {
+    static boolean isValid(final String literal) {
         final Date parsed = parse(literal);
         return null != parsed;
     }
 
-    public static Date parse(final String literal) {
+    static Date parse(final String literal) {
         return Fn.get(null, () -> {
             final int length = literal.length();
             final String pattern = Storage.PATTERNS_MAP.get(length);
@@ -137,10 +137,10 @@ public class Period {
      * @param literal
      * @return
      */
-    public static Date parseFull(final String literal) {
+    static Date parseFull(final String literal) {
         return Fn.get(null, () -> {
             // Datetime parsing
-            final LocalDateTime datetime = toFull(literal);
+            final LocalDateTime datetime = toDateTime(literal);
             return Fn.nullFlow(datetime,
                     (ref) -> Date.from(ref.atZone(ZoneId.systemDefault()).toInstant()),
                     () -> {
@@ -157,7 +157,7 @@ public class Period {
         }, literal);
     }
 
-    public static boolean equalDate(final Date left, final Date right) {
+    static boolean equalDate(final Date left, final Date right) {
         // Compare year
         int leftVal = toItem(left, Calendar.YEAR);
         int rightVal = toItem(right, Calendar.YEAR);
@@ -178,20 +178,20 @@ public class Period {
         }
     }
 
-    public static int toMonth(final String literal) {
+    static int toMonth(final String literal) {
         final Date date = parse(literal);
         return toItem(date, Calendar.MONTH);
     }
 
-    public static int toMonth(final Date date) {
+    static int toMonth(final Date date) {
         return toItem(date, Calendar.MONTH);
     }
 
-    public static int toYear(final Date date) {
+    static int toYear(final Date date) {
         return toItem(date, Calendar.YEAR);
     }
 
-    public static int toYear(final String literal) {
+    static int toYear(final String literal) {
         final Date date = parse(literal);
         return toItem(date, Calendar.YEAR);
     }
@@ -202,17 +202,17 @@ public class Period {
         return issue.get(flag);
     }
 
-    public static Date parse(final LocalTime time) {
+    static Date parse(final LocalTime time) {
         final LocalDate date = LocalDate.now();
         final LocalDateTime datetime = LocalDateTime.of(date, time);
         return Date.from(datetime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
-    public static Date parse(final LocalDateTime datetime) {
+    static Date parse(final LocalDateTime datetime) {
         return Date.from(datetime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
-    public static Date parse(final LocalDate datetime) {
+    static Date parse(final LocalDate datetime) {
         return Date.from(datetime.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 

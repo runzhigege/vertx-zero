@@ -2,7 +2,7 @@ package io.vertx.up.web.serialization;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Jackson;
+import io.vertx.up.tool.Ut;
 
 public class CommonSaber extends BaseSaber {
     @Override
@@ -10,7 +10,7 @@ public class CommonSaber extends BaseSaber {
                        final String literal) {
         return Fn.get(() ->
                         Fn.getSemi(!SaberTypes.isSupport(paramType), this.getLogger(),
-                                () -> Jackson.deserialize(literal, paramType),
+                                () -> Ut.deserialize(literal, paramType),
                                 Fn::nil),
                 paramType, literal);
     }
@@ -20,7 +20,7 @@ public class CommonSaber extends BaseSaber {
         return Fn.get(() -> {
             Object reference = null;
             if (!SaberTypes.isSupport(input.getClass())) {
-                final String literal = Jackson.serialize(input);
+                final String literal = Ut.serialize(input);
                 reference = new JsonObject(literal);
             }
             return reference;

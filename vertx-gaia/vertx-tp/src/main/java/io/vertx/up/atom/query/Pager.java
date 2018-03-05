@@ -5,7 +5,7 @@ import io.vertx.up.exception._400PagerInvalidException;
 import io.vertx.up.exception._500QueryMetaNullException;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Types;
+import io.vertx.up.tool.Ut;
 
 import java.io.Serializable;
 
@@ -63,9 +63,9 @@ public class Pager implements Serializable {
                 _400PagerInvalidException.class, this.getClass(), SIZE);
         // Types
         Inquiry.ensureType(pageJson, PAGE, Integer.class,
-                Types::isInteger, this.getClass());
+                Ut::isInteger, this.getClass());
         Inquiry.ensureType(pageJson, SIZE, Integer.class,
-                Types::isInteger, this.getClass());
+                Ut::isInteger, this.getClass());
     }
 
     private void init(final Integer page, final Integer size) {

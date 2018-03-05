@@ -16,7 +16,7 @@ import io.vertx.up.micro.ipc.DataEncap;
 import io.vertx.up.micro.ipc.tower.FinalTransit;
 import io.vertx.up.micro.ipc.tower.NodeTransit;
 import io.vertx.up.micro.ipc.tower.Transit;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 
 import java.lang.annotation.Annotation;
@@ -81,7 +81,7 @@ public class UnityTunnel implements Tunnel {
         // 2. to and from must not be null at the same time because of Error-40045
         final String to = Instance.invoke(annotation, "to");
         final Transit transit;
-        if (StringUtil.isNil(to)) {
+        if (Ut.isNil(to)) {
             // Node transit
             transit = Instance.singleton(FinalTransit.class);
             LOGGER.info(Info.NODE_FINAL, method, method.getDeclaringClass());

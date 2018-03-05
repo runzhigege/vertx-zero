@@ -3,9 +3,9 @@ package io.vertx.up.tool;
 import io.vertx.zero.exception.heart.ArgumentException;
 import io.vertx.zero.log.Errors;
 
-public final class Ensurer {
+final class Ensurer {
 
-    public static void eqLength(
+    static void eqLength(
             final Class<?> clazz,
             final int expected,
             final Object... args
@@ -16,7 +16,7 @@ public final class Ensurer {
         }
     }
 
-    public static void gtLength(
+    static void gtLength(
             final Class<?> clazz,
             final int min,
             final Object... args

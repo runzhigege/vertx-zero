@@ -3,7 +3,7 @@ package io.vertx.up.atom.query;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
-import io.vertx.up.tool.mirror.Types;
+import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Strings;
 
 import java.util.HashSet;
@@ -37,16 +37,16 @@ class IrInquiry implements Inquiry {
     private void ensure(final JsonObject input) {
         // Sorter checking
         Inquiry.ensureType(input, KEY_SORTER, JsonArray.class,
-                Types::isJArray, this.getClass());
+                Ut::isJArray, this.getClass());
         // Projection checking
         Inquiry.ensureType(input, KEY_PROJECTION, JsonArray.class,
-                Types::isJArray, this.getClass());
+                Ut::isJArray, this.getClass());
         // Pager checking
         Inquiry.ensureType(input, KEY_PAGER, JsonObject.class,
-                Types::isJObject, this.getClass());
+                Ut::isJObject, this.getClass());
         // Criteria
         Inquiry.ensureType(input, KEY_CRITERIA, JsonObject.class,
-                Types::isJObject, this.getClass());
+                Ut::isJObject, this.getClass());
     }
 
     private Sorter getSorter(final JsonArray sorter) {
@@ -94,7 +94,7 @@ class IrInquiry implements Inquiry {
             result.put(KEY_SORTER, this.sorter.toJson());
         }
         if (null != this.projection) {
-            result.put(KEY_PROJECTION, Types.toJArray(this.projection));
+            result.put(KEY_PROJECTION, Ut.toJArray(this.projection));
         }
         if (null != this.criteria) {
             result.put(KEY_CRITERIA, this.criteria.toJson());

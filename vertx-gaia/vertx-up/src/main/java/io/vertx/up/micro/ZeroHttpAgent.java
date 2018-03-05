@@ -19,8 +19,7 @@ import io.vertx.up.rs.router.EventAxis;
 import io.vertx.up.rs.router.FilterAxis;
 import io.vertx.up.rs.router.RouterAxis;
 import io.vertx.up.rs.router.WallAxis;
-import io.vertx.up.tool.Net;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroGrid;
 import io.vertx.zero.eon.Values;
@@ -130,7 +129,7 @@ public class ZeroHttpAgent extends AbstractVerticle {
             // 3. Endpoint Publish
             final String address =
                     MessageFormat.format("http://{0}:{1}/",
-                            Net.getIPv4(), portLiteral);
+                            Ut.netIPv4(), portLiteral);
             LOGGER.info(Info.HTTP_LISTEN, this.getClass().getSimpleName(), address);
             // 4. Send configuration to Event bus
             final String name = SERVICES.get(port);
@@ -160,7 +159,7 @@ public class ZeroHttpAgent extends AbstractVerticle {
         data.put(Registry.OPTIONS, options.toJson());
         // No Uri
         if (null != tree) {
-            data.put(Registry.URIS, StringUtil.join(tree));
+            data.put(Registry.URIS, Ut.fromJoin(tree));
         }
         return data;
     }

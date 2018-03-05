@@ -1,6 +1,7 @@
 package io.vertx.up.tool;
 
 import io.vertx.config.ConfigStoreOptions;
+import io.vertx.core.buffer.Buffer;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -76,17 +77,30 @@ interface Storage {
      */
     ConcurrentMap<Integer, String> PATTERNS_MAP = new ConcurrentHashMap<Integer, String>() {
         {
-            put(19, "yyyy-MM-dd HH:mm:ss");
-            put(24, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-            put(23, "yyyy-MM-dd'T'HH:mm:ss.SSS");
-            put(28, "EEE MMM dd HH:mm:ss 'CST' yyyy");
-            put(12, "HH:mm:ss.SSS");
-            put(10, "yyyy-MM-dd");
-            put(8, "HH:mm:ss");
+            this.put(19, "yyyy-MM-dd HH:mm:ss");
+            this.put(24, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            this.put(23, "yyyy-MM-dd'T'HH:mm:ss.SSS");
+            this.put(28, "EEE MMM dd HH:mm:ss 'CST' yyyy");
+            this.put(12, "HH:mm:ss.SSS");
+            this.put(10, "yyyy-MM-dd");
+            this.put(8, "HH:mm:ss");
         }
     };
 }
 
+interface Info {
+    /** **/
+    String INF_PATH = "[ZERO] The system class Stream try to data from {0}, got stream: {1}.";
+    /** **/
+    String INF_CUR = "[ZERO] Current path is scanned by the system, file existing ? {0}.";
+    /** **/
+    String INF_APATH = "[ZERO] Absolute path is hitted: {0}.";
+}
+
+interface Pool {
+
+    ConcurrentMap<String, Buffer> BUFFER_CACHE = new ConcurrentHashMap<>();
+}
 
 /**
  * /**

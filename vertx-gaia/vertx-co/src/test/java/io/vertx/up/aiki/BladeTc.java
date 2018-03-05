@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.quiz.ZeroBase;
-import io.vertx.up.tool.Jackson;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.io.IO;
 import org.junit.Test;
 
@@ -17,14 +17,14 @@ public class BladeTc extends ZeroBase {
     @Test
     public void testBlade() {
         final JsonObject data = new JsonObject().put("email", "lang.yu@hpe.com");
-        final Uson blade = Jackson.deserialize(data, Uson.class);
+        final Uson blade = Ut.deserialize(data, Uson.class);
         System.out.println(blade);
     }
 
     @Test
     public void testClass() {
         final JsonObject data = new JsonObject().put("name", "io.vertx.up.aiki.TestObject");
-        final TestObject result = Jackson.deserialize(data, TestObject.class);
+        final TestObject result = Ut.deserialize(data, TestObject.class);
         System.out.println(result.getClazz());
     }
 

@@ -2,7 +2,7 @@ package io.vertx.up.atom.secure;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.em.WallType;
-import io.vertx.up.tool.Compare;
+import io.vertx.up.tool.Ut;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -120,12 +120,12 @@ public class Cliff implements Serializable, Comparable<Cliff> {
 
     @Override
     public int compareTo(final Cliff target) {
-        return Compare.compareTo(this, target, (left, right) -> {
+        return Ut.compareTo(this, target, (left, right) -> {
             // 1. Compare Path
-            int result = Compare.compareTo(left.getPath(), right.getPath());
+            int result = Ut.compareTo(left.getPath(), right.getPath());
             if (0 == result) {
                 // 2. Compare Order
-                result = Compare.compareTo(left.getOrder(), right.getOrder());
+                result = Ut.compareTo(left.getOrder(), right.getOrder());
             }
             return result;
         });
