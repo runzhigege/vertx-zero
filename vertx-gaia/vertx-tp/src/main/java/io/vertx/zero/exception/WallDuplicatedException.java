@@ -1,6 +1,6 @@
 package io.vertx.zero.exception;
 
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 
 import java.util.Set;
 
@@ -8,7 +8,7 @@ public class WallDuplicatedException extends UpException {
 
     public WallDuplicatedException(final Class<?> classes,
                                    final Set<String> classNames) {
-        super(classes, StringUtil.join(classNames));
+        super(classes, Ut.fromJoin(classNames));
     }
 
     @Override

@@ -6,9 +6,8 @@ import io.vertx.up.annotations.Ipc;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
-import io.vertx.up.tool.mirror.Types;
 import io.vertx.zero.exception.*;
 
 import java.lang.annotation.Annotation;
@@ -59,12 +58,12 @@ public class IpcInquirer implements Inquirer<ConcurrentMap<String, Method>> {
      * @return
      */
     private Method ensureSpec(final Method method) {
-        Fn.flingUp(Types.isVoid(method.getReturnType()), LOGGER,
+        Fn.flingUp(Ut.isVoid(method.getReturnType()), LOGGER,
                 IpcMethodReturnException.class, this.getClass(),
                 method);
         final Annotation annotation = method.getAnnotation(Ipc.class);
         final String value = Instance.invoke(annotation, "value");
-        if (!StringUtil.isNil(value)) {
+        if (!Ut.isNil(value)) {
             // Arguments specification: Non Start Node
             // This specification is only for continue node
             final Class<?>[] argTypes = method.getParameterTypes();
@@ -106,17 +105,17 @@ public class IpcInquirer implements Inquirer<ConcurrentMap<String, Method>> {
         final Annotation annotation = method.getAnnotation(Ipc.class);
         final String to = Instance.invoke(annotation, "to");
         final String name = Instance.invoke(annotation, "name");
-        if (StringUtil.isNil(to) && StringUtil.isNil(name)) {
+        if (Ut.isNil(to) && Ut.isNil(name)) {
             // If ( to is null and name is null, value must be required, or the system do not know the direction
             final String from = Instance.invoke(annotation, "value");
-            Fn.flingUp(StringUtil.isNil(from), LOGGER,
+            Fn.flingUp(Ut.isNil(from), LOGGER,
                     UnknownDirectionException.class, this.getClass(),
                     method);
             // Passed validation.
             return method;
         }
         // to and name must not be null
-        Fn.flingUp(StringUtil.isNil(to) || StringUtil.isNil(name), LOGGER,
+        Fn.flingUp(Ut.isNil(to) || Ut.isNil(name), LOGGER,
                 IpcMethodTargetException.class, this.getClass(),
                 method, to, name);
         return method;

@@ -2,7 +2,7 @@ package io.vertx.up.exception;
 
 import io.vertx.core.http.HttpStatusCode;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.exception.ZeroRunException;
 import io.vertx.zero.log.Errors;
@@ -62,7 +62,7 @@ public abstract class WebException extends ZeroRunException {
         final JsonObject data = new JsonObject();
         data.put(CODE, this.getCode());
         data.put(MESSAGE, this.getMessage());
-        if (StringUtil.notNil(this.readible)) {
+        if (Ut.notNil(this.readible)) {
             data.put(INFO, this.readible);
         }
         return data;

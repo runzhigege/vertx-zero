@@ -7,7 +7,7 @@ import io.vertx.up.eon.Plugins;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ensurer;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.config.ServerVisitor;
@@ -38,33 +38,33 @@ public class HttpServerVisitor implements ServerVisitor<HttpServerOptions> {
     public ConcurrentMap<Integer, HttpServerOptions> visit(final String... key)
             throws ZeroException {
         // 1. Must be the first line, fixed position.
-        Ensurer.eqLength(getClass(), 0, (Object[]) key);
+        Ut.ensureEqualLength(this.getClass(), 0, (Object[]) key);
         // 2. Visit the node for server, http
         final JsonObject data = this.NODE.read();
 
-        Fn.flingZero(null == data || !data.containsKey(KEY), getLogger(),
+        Fn.flingZero(null == data || !data.containsKey(KEY), this.getLogger(),
                 ServerConfigException.class,
-                getClass(), null == data ? null : data.encode());
+                this.getClass(), null == data ? null : data.encode());
 
-        return visit(data.getJsonArray(KEY));
+        return this.visit(data.getJsonArray(KEY));
     }
 
     private ConcurrentMap<Integer, HttpServerOptions> visit(final JsonArray serverData)
             throws ZeroException {
-        getLogger().info(Info.INF_B_VERIFY, KEY, getType(), serverData.encode());
+        this.getLogger().info(Info.INF_B_VERIFY, KEY, this.getType(), serverData.encode());
         Ruler.verify(KEY, serverData);
         final ConcurrentMap<Integer, HttpServerOptions> map =
                 new ConcurrentHashMap<>();
         this.extract(serverData, map);
-        getLogger().info(Info.INF_A_VERIFY, KEY, getType(), map.keySet());
+        this.getLogger().info(Info.INF_A_VERIFY, KEY, this.getType(), map.keySet());
         return map;
     }
 
     protected void extract(final JsonArray serverData, final ConcurrentMap<Integer, HttpServerOptions> map) {
         Fn.itJArray(serverData, JsonObject.class, (item, index) -> {
-            if (isServer(item)) {
+            if (this.isServer(item)) {
                 // 1. Extract port
-                final int port = extractPort(item.getJsonObject(YKEY_CONFIG));
+                final int port = this.extractPort(item.getJsonObject(YKEY_CONFIG));
                 // 2. Convert JsonObject to HttpServerOptions
                 final HttpServerOptions options = this.transformer.transform(item);
                 Fn.safeNull(() -> {
@@ -76,7 +76,7 @@ public class HttpServerVisitor implements ServerVisitor<HttpServerOptions> {
     }
 
     protected boolean isServer(final JsonObject item) {
-        return getType().match(item.getString(YKEY_TYPE));
+        return this.getType().match(item.getString(YKEY_TYPE));
     }
 
     protected int extractPort(final JsonObject config) {
@@ -91,6 +91,6 @@ public class HttpServerVisitor implements ServerVisitor<HttpServerOptions> {
     }
 
     protected Annal getLogger() {
-        return Annal.get(getClass());
+        return Annal.get(this.getClass());
     }
 }

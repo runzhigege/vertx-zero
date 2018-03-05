@@ -5,8 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Jackson;
-import io.vertx.up.tool.Net;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.eon.Strings;
@@ -124,8 +123,8 @@ public class EtcdData {
                 .subscribe(uris::add);
         // Network checking
         networks.forEach((port, host) ->
-                Fn.flingUp(!Net.isReach(host, port), LOGGER,
-                        EtcdNetworkException.class, getClass(), host, port));
+                Fn.flingUp(!Ut.netOk(host, port), LOGGER,
+                        EtcdNetworkException.class, this.getClass(), host, port));
         LOGGER.info(Info.ETCD_NETWORK);
         this.client = new EtcdClient(uris.toArray(new URI[]{}));
     }
@@ -146,7 +145,7 @@ public class EtcdData {
             final String path,
             final boolean shiftted) {
         return Fn.getJvm(new ConcurrentHashMap<>(), () -> {
-            final EtcdKeysResponse.EtcdNode node = readNode(path, this.client::getDir);
+            final EtcdKeysResponse.EtcdNode node = this.readNode(path, this.client::getDir);
             return Fn.getJvm(new ConcurrentHashMap<>(), () -> {
                 final ConcurrentMap<String, String> result = new ConcurrentHashMap<>();
                 /** Nodes **/
@@ -167,7 +166,7 @@ public class EtcdData {
             final String path
     ) {
         return Fn.getJvm(Strings.EMPTY,
-                () -> readNode(path, this.client::get).getValue(), path);
+                () -> this.readNode(path, this.client::get).getValue(), path);
     }
 
     private EtcdKeysResponse.EtcdNode readNode(
@@ -186,7 +185,7 @@ public class EtcdData {
     }
 
     public String read(final String path) {
-        final EtcdKeysResponse.EtcdNode node = readNode(path, this.client::get);
+        final EtcdKeysResponse.EtcdNode node = this.readNode(path, this.client::get);
         return null == node ? null : node.getValue();
     }
 
@@ -215,7 +214,7 @@ public class EtcdData {
             }
             final EtcdResponsePromise<EtcdKeysResponse> promise = request.send();
             final EtcdKeysResponse response = promise.get();
-            return Jackson.serializeJson(response.getNode());
+            return Ut.serializeJson(response.getNode());
         }, path, data);
     }
 }

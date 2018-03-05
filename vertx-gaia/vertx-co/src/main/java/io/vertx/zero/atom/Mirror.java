@@ -4,7 +4,7 @@ import io.reactivex.Observable;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Jackson;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.io.IO;
 
 import java.text.MessageFormat;
@@ -35,7 +35,7 @@ public class Mirror {
         // Build meta
         this.mojo = Fn.pool(Pool.MOJOS, filename, () -> {
             final JsonObject data = IO.getYaml(MessageFormat.format(POJO, filename));
-            return Fn.get(() -> Jackson.deserialize(data, Mojo.class), data);
+            return Fn.get(() -> Ut.deserialize(data, Mojo.class), data);
         });
         return this;
     }
@@ -84,7 +84,7 @@ public class Mirror {
     }
 
     public JsonObject json(final Object entity, final boolean overwrite) {
-        final JsonObject data = Jackson.serializeJson(entity);
+        final JsonObject data = Ut.serializeJson(entity);
         final JsonObject merged = this.converted.copy();
         for (final String field : data.fieldNames()) {
             if (overwrite) {
@@ -101,7 +101,7 @@ public class Mirror {
 
     @SuppressWarnings("unchecked")
     public <T> T get() {
-        final Object reference = Jackson.deserialize(this.converted, this.mojo.getType());
+        final Object reference = Ut.deserialize(this.converted, this.mojo.getType());
         return Fn.get(null, () -> (T) reference, reference);
     }
 

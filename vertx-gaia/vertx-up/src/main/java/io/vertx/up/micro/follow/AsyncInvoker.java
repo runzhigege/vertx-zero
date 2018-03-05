@@ -7,9 +7,8 @@ import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ipc.client.TunnelClient;
-import io.vertx.up.tool.Jackson;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
-import io.vertx.up.tool.mirror.Types;
 import io.vertx.zero.eon.Values;
 
 import java.lang.reflect.Method;
@@ -48,7 +47,7 @@ public class AsyncInvoker implements Invoker {
             result.setHandler(item -> message.reply(item.result()));
         } else {
             final Object reference = envelop.data();
-            final Object arguments = Jackson.deserialize(Types.toString(reference), argType);
+            final Object arguments = Ut.deserialize(Ut.toString(reference), argType);
             final Future tResult = Instance.invoke(proxy, method.getName(), arguments);
             tResult.setHandler(Ux.toHandler(message));
         }
@@ -78,7 +77,7 @@ public class AsyncInvoker implements Invoker {
                     .setHandler(Ux.toHandler(message));
         } else {
             final Object reference = envelop.data();
-            final Object arguments = Jackson.deserialize(Types.toString(reference), argType);
+            final Object arguments = Ut.deserialize(Ut.toString(reference), argType);
             final Future future = Instance.invoke(proxy, method.getName(), arguments);
             future.compose(item -> TunnelClient.create(this.getClass())
                     .connect(vertx)

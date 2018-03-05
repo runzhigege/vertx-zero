@@ -8,8 +8,7 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
 import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Jackson;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.atom.Mirror;
 
@@ -36,7 +35,7 @@ class To {
         for (int idx = 0; idx < size; idx++) {
             final String column = columns[idx];
             final Supplier<Object> supplier = suppliers[idx];
-            if (!StringUtil.isNil(column) && Objects.nonNull(supplier)) {
+            if (!Ut.isNil(column) && Objects.nonNull(supplier)) {
                 filters.put(column, supplier.get());
             }
         }
@@ -47,11 +46,11 @@ class To {
             final T entity,
             final String pojo) {
         return Fn.get(new JsonObject(),
-                () -> Fn.getSemi(StringUtil.isNil(pojo), null,
-                        () -> Jackson.serializeJson(entity),
+                () -> Fn.getSemi(Ut.isNil(pojo), null,
+                        () -> Ut.serializeJson(entity),
                         () -> Mirror.create(To.class)
                                 .mount(pojo)
-                                .connect(Jackson.serializeJson(entity))
+                                .connect(Ut.serializeJson(entity))
                                 .to().result()),
                 entity);
     }

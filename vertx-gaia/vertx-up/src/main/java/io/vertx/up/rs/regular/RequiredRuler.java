@@ -2,7 +2,7 @@ package io.vertx.up.rs.regular;
 
 import io.vertx.up.atom.Rule;
 import io.vertx.up.exception.WebException;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 
 /**
  * {
@@ -18,9 +18,9 @@ class RequiredRuler extends BaseRuler {
                                final Object value,
                                final Rule rule) {
         WebException error = null;
-        if (null == value || StringUtil.isNil(value.toString())) {
+        if (null == value || Ut.isNil(value.toString())) {
             // Single Field
-            error = failure(field, value, rule);
+            error = this.failure(field, value, rule);
         }
         return error;
     }

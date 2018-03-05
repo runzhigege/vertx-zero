@@ -12,7 +12,6 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.aiki.Uson;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Types;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.eon.Values;
 
@@ -25,10 +24,10 @@ import java.util.function.Supplier;
  * Lookup the json tree data
  */
 @SuppressWarnings({"unchecked"})
-public final class Jackson {
+final class Jackson {
 
     private static final Annal LOGGER = Annal.get(Jackson.class);
-    public static ObjectMapper MAPPER = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     static {
         // TimeZone Issue
@@ -61,7 +60,7 @@ public final class Jackson {
         Jackson.MAPPER.findAndRegisterModules();
     }
 
-    public static JsonObject visitJObject(
+    static JsonObject visitJObject(
             final JsonObject item,
             final String... keys
     ) {
@@ -70,7 +69,7 @@ public final class Jackson {
         return Jackson.searchData(item, JsonObject.class, keys);
     }
 
-    public static JsonArray visitJArray(
+    static JsonArray visitJArray(
             final JsonObject item,
             final String... keys
     ) {
@@ -78,7 +77,7 @@ public final class Jackson {
         return Jackson.searchData(item, JsonArray.class, keys);
     }
 
-    public static Integer visitInt(
+    static Integer visitInt(
             final JsonObject item,
             final String... keys
     ) {
@@ -86,7 +85,7 @@ public final class Jackson {
         return Jackson.searchData(item, Integer.class, keys);
     }
 
-    public static String visitString(
+    static String visitString(
             final JsonObject item,
             final String... keys
     ) {
@@ -133,8 +132,8 @@ public final class Jackson {
                 Fn::nil);
     }
 
-    public static JsonArray mergeZip(final JsonArray source, final JsonArray target,
-                                     final String sourceKey, final String targetKey) {
+    static JsonArray mergeZip(final JsonArray source, final JsonArray target,
+                              final String sourceKey, final String targetKey) {
         final JsonArray result = new JsonArray();
         Fn.safeJvm(() -> Observable.fromIterable(source)
                 .filter(Objects::nonNull)
@@ -155,7 +154,7 @@ public final class Jackson {
                 .first(new JsonObject()).blockingGet(), source, key);
     }
 
-    public static JsonObject validJObject(final Supplier<JsonObject> supplier) {
+    static JsonObject validJObject(final Supplier<JsonObject> supplier) {
         JsonObject result;
         try {
             result = supplier.get();
@@ -165,7 +164,7 @@ public final class Jackson {
         return result;
     }
 
-    public static JsonArray validJArray(final Supplier<JsonArray> supplier) {
+    static JsonArray validJArray(final Supplier<JsonArray> supplier) {
         JsonArray result;
         try {
             result = supplier.get();
@@ -175,7 +174,7 @@ public final class Jackson {
         return result;
     }
 
-    public static JsonArray toJArray(final Object value) {
+    static JsonArray toJArray(final Object value) {
         final JsonArray result = new JsonArray();
         Fn.safeNull(() -> {
             if (Types.isJArray(value)) {
@@ -187,7 +186,7 @@ public final class Jackson {
         return result;
     }
 
-    public static <T, R extends Iterable> R serializeJson(final T t) {
+    static <T, R extends Iterable> R serializeJson(final T t) {
         final String content = Jackson.serialize(t);
         return Fn.getJvm(null,
                 () -> Fn.getSemi(content.trim().startsWith(Strings.LEFT_BRACES), Jackson.LOGGER,
@@ -195,37 +194,37 @@ public final class Jackson {
                         () -> (R) new JsonArray(content)), content);
     }
 
-    public static <T> String serialize(final T t) {
+    static <T> String serialize(final T t) {
         return Fn.get(null, () -> Fn.getJvm(() -> Jackson.MAPPER.writeValueAsString(t), t), t);
     }
 
 
-    public static <T> T deserialize(final JsonObject value, final Class<T> type) {
+    static <T> T deserialize(final JsonObject value, final Class<T> type) {
         return Fn.get(null,
                 () -> Jackson.deserialize(value.encode(), type), value);
     }
 
-    public static <T> T deserialize(final JsonArray value, final Class<T> type) {
+    static <T> T deserialize(final JsonArray value, final Class<T> type) {
         return Fn.get(null,
                 () -> Jackson.deserialize(value.encode(), type), value);
     }
 
-    public static <T> List<T> deserialize(final JsonArray value, final TypeReference<List<T>> type) {
+    static <T> List<T> deserialize(final JsonArray value, final TypeReference<List<T>> type) {
         return Fn.get(new ArrayList<>(),
                 () -> Jackson.deserialize(value.encode(), type), value);
     }
 
-    public static <T> T deserialize(final String value, final Class<T> type) {
+    static <T> T deserialize(final String value, final Class<T> type) {
         return Fn.get(null,
                 () -> Fn.getJvm(() -> Jackson.MAPPER.readValue(value, type)), value);
     }
 
-    public static <T> T deserialize(final String value, final TypeReference<T> type) {
+    static <T> T deserialize(final String value, final TypeReference<T> type) {
         return Fn.get(null,
                 () -> Fn.getJvm(() -> Jackson.MAPPER.readValue(value, type)), value);
     }
 
-    public static <T> List<T> convert(final List<JsonObject> result, final Class<T> clazz) {
+    static <T> List<T> convert(final List<JsonObject> result, final Class<T> clazz) {
         final List<T> entities = new ArrayList<>();
         result.forEach(item -> entities.add(Jackson.deserialize(item.encode(), clazz)));
         return entities;

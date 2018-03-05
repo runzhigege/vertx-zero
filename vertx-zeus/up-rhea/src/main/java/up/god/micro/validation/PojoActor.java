@@ -2,7 +2,7 @@ package up.god.micro.validation;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.EndPoint;
-import io.vertx.up.tool.Jackson;
+import io.vertx.up.tool.Ut;
 import up.god.micro.async.JavaJson;
 
 import javax.validation.Valid;
@@ -19,6 +19,6 @@ public class PojoActor {
     public JsonObject sayPojo(
             @BodyParam @Valid final JavaJson json
     ) {
-        return Jackson.serializeJson(json);
+        return Ut.serializeJson(json);
     }
 }

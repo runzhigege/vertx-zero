@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Statute;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ class Fluctuate {
             CompositeFuture.all(secondFutures).setHandler(res -> {
                 final List<S> secondary = res.result().list();
                 // Zipper Operation, the base list is first.
-                final List<T> completed = Statute.zipper(first, secondary, mergeFun);
+                final List<T> completed = Ut.zipperList(first, secondary, mergeFun);
                 result.complete(completed);
             });
             return result;
@@ -58,7 +58,7 @@ class Fluctuate {
             CompositeFuture.all(secondFutures).setHandler(res -> {
                 final List<JsonArray> secondary = res.result().list();
                 // Zipper Operation, the base list is first
-                final List<JsonObject> completed = Statute.zipper(first.getList(), secondary, mergeFun);
+                final List<JsonObject> completed = Ut.zipperList(first.getList(), secondary, mergeFun);
                 result.complete(new JsonArray(completed));
             });
             return result;
@@ -80,7 +80,7 @@ class Fluctuate {
             CompositeFuture.all(secondFutures).setHandler(res -> {
                 final List<JsonObject> secondary = res.result().list();
                 // Zipper Operation, the base list is first
-                final List<JsonObject> completed = Statute.zipper(first.getList(), secondary, operatorFun);
+                final List<JsonObject> completed = Ut.zipperList(first.getList(), secondary, operatorFun);
                 result.complete(new JsonArray(completed));
             });
             return result;

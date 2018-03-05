@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 import io.vertx.zero.atom.Mirror;
 import io.vertx.zero.atom.Mojo;
 import io.vertx.zero.eon.Strings;
@@ -19,7 +19,7 @@ class Query {
     static Inquiry getInquiry(final JsonObject envelop, final String pojo) {
         return Fn.get(Inquiry.create(new JsonObject()), () -> {
             final JsonObject data = envelop.copy();
-            if (StringUtil.isNil(pojo)) {
+            if (Ut.isNil(pojo)) {
                 return Inquiry.create(data);
             } else {
                 // Projection Process

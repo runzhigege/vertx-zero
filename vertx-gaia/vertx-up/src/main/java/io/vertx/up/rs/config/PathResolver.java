@@ -2,7 +2,7 @@ package io.vertx.up.rs.config;
 
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.PathAnnoEmptyException;
@@ -43,7 +43,7 @@ class PathResolver {
     public static String resolve(final Path path, final String root) {
         Fn.flingUp(null == path, LOGGER,
                 PathAnnoEmptyException.class, PathResolver.class);
-        return Fn.getSemi(StringUtil.isNil(root), LOGGER, () -> calculate(path(path.value())),
+        return Fn.getSemi(Ut.isNil(root), LOGGER, () -> calculate(path(path.value())),
                 () -> {
                     final String api = calculate(root);
                     final String contextPath = calculate(path.value());

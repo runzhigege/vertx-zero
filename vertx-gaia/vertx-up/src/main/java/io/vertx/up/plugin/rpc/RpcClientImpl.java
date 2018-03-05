@@ -14,8 +14,8 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ipc.DataEncap;
 import io.vertx.up.plugin.rpc.client.RpcStub;
 import io.vertx.up.plugin.rpc.client.UnityStub;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
-import io.vertx.up.tool.mirror.Types;
 
 import java.text.MessageFormat;
 import java.util.Objects;
@@ -54,7 +54,7 @@ public class RpcClientImpl implements RpcClient {
         final JsonObject normalized = RpcHelper.normalize(name, config, record);
         this.holder = this.lookupHolder(this.vertx, name, normalized);
         // Get Channel
-        final IpcType type = Types.fromStr(IpcType.class, config.getString(Key.TYPE));
+        final IpcType type = Ut.toEnum(IpcType.class, config.getString(Key.TYPE));
         final RpcStub stub = this.getStub(type);
         // Future result return to client.
         final IpcData request = new IpcData();

@@ -6,7 +6,7 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.func.Fn;
 import io.vertx.up.rs.Aim;
-import io.vertx.up.tool.mirror.Types;
+import io.vertx.up.tool.Ut;
 
 /**
  * BlockAim: Non-Event Bus: One-Way
@@ -17,13 +17,13 @@ public class PingAim extends BaseAim implements Aim<RoutingContext> {
     public Handler<RoutingContext> attack(final Event event) {
         return Fn.get(() -> (context) -> Responser.exec(() -> {
             // 1. Build Arguments
-            final Object[] arguments = buildArgs(context, event);
+            final Object[] arguments = this.buildArgs(context, event);
 
             // 2. Method call
-            final Object invoked = invoke(event, arguments);
+            final Object invoked = this.invoke(event, arguments);
             // 3. Resource model building
             final Envelop data;
-            if (Types.isBoolean(invoked)) {
+            if (Ut.isBoolean(invoked)) {
                 data = Envelop.success((Boolean) invoked);
             } else {
                 data = Envelop.success(Boolean.TRUE);

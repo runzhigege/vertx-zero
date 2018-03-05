@@ -4,7 +4,7 @@ import io.vertx.circuitbreaker.CircuitBreakerOptions;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ensurer;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.eon.Info;
@@ -25,7 +25,7 @@ public class CircuitVisitor implements Visitor<CircuitBreakerOptions> {
     public CircuitBreakerOptions visit(final String... key)
             throws ZeroException {
         // 1. Must be the first line, fixed position.
-        Ensurer.eqLength(getClass(), 0, (Object[]) key);
+        Ut.ensureEqualLength(this.getClass(), 0, (Object[]) key);
         // 2. Read data
         final JsonObject data = this.node.read();
         // 3. CircuitBreakerOptions building.
@@ -35,7 +35,7 @@ public class CircuitVisitor implements Visitor<CircuitBreakerOptions> {
                         () -> data.getJsonObject(CIRCUIT),
                         JsonObject::new);
         // 4. Verify the configuration data
-        return visit(config);
+        return this.visit(config);
     }
 
     private CircuitBreakerOptions visit(final JsonObject data)

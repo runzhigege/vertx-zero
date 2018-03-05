@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.quiz.TestBase;
-import io.vertx.up.tool.Jackson;
+import io.vertx.up.tool.Ut;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ public class D10051Tc extends TestBase {
     @Test
     public void testToJarray() {
         final JsonArray data = this.getArray("d10051.json");
-        final List<D10051Obj> obj = Jackson.deserialize(data, new TypeReference<List<D10051Obj>>() {
+        final List<D10051Obj> obj = Ut.deserialize(data, new TypeReference<List<D10051Obj>>() {
         });
         // Convert
         final JsonArray ret = Ux.toArray(obj, "d10051");
@@ -27,7 +27,7 @@ public class D10051Tc extends TestBase {
     @Test
     public void testToUnique() {
         final JsonArray data = this.getArray("d10051.json");
-        final List<D10051Obj> obj = Jackson.deserialize(data, new TypeReference<List<D10051Obj>>() {
+        final List<D10051Obj> obj = Ut.deserialize(data, new TypeReference<List<D10051Obj>>() {
         });
         // Convert
         final JsonObject ret = Ux.toUnique(obj, "d10051");
