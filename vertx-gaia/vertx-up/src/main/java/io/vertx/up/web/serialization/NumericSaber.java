@@ -1,7 +1,7 @@
 package io.vertx.up.web.serialization;
 
 import io.vertx.up.func.Fn;
-import io.vertx.up.tool.mirror.Types;
+import io.vertx.up.tool.Ut;
 
 import java.util.function.Function;
 
@@ -14,10 +14,10 @@ public abstract class NumericSaber extends BaseSaber {
     public Object from(final Class<?> paramType,
                        final String literal) {
         return Fn.get(() ->
-                        Fn.getSemi(isValid(paramType), getLogger(),
+                        Fn.getSemi(this.isValid(paramType), this.getLogger(),
                                 () -> {
-                                    verifyInput(!Types.isInteger(literal), paramType, literal);
-                                    return getFun().apply(literal);
+                                    this.verifyInput(!Ut.isInteger(literal), paramType, literal);
+                                    return this.getFun().apply(literal);
                                 }, Fn::nil),
                 paramType, literal);
     }

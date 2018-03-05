@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Types;
+import io.vertx.up.tool.Ut;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
@@ -70,7 +70,7 @@ public class Uson {
 
     public Uson plus(final String from, final Integer seed) {
         final Object value = this.objectReference.getValue(from);
-        if (null != value && Types.isInteger(value)) {
+        if (null != value && Ut.isInteger(value)) {
             final Integer old = this.objectReference.getInteger(from);
             this.objectReference.put(from, old + seed);
         }

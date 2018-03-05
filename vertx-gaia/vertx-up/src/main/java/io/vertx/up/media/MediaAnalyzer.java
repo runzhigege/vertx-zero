@@ -9,7 +9,7 @@ import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.media.parse.EpsilonIncome;
 import io.vertx.up.media.parse.Income;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 
 import javax.ws.rs.core.HttpHeaders;
@@ -29,7 +29,7 @@ public class MediaAnalyzer implements Analyzer {
                        final Event event)
             throws WebException {
         /** Consume mime type matching **/
-        final MediaType requestMedia = getMedia(context);
+        final MediaType requestMedia = this.getMedia(context);
         MediaAtom.accept(event, requestMedia);
 
         /** Extract definition from method **/
@@ -50,7 +50,7 @@ public class MediaAnalyzer implements Analyzer {
 
     private MediaType getMedia(final RoutingContext context) {
         final String header = context.request().getHeader(HttpHeaders.CONTENT_TYPE);
-        return Fn.getSemi(StringUtil.isNil(header), LOGGER,
+        return Fn.getSemi(Ut.isNil(header), LOGGER,
                 () -> MediaType.WILDCARD_TYPE,
                 () -> MediaType.valueOf(header));
     }

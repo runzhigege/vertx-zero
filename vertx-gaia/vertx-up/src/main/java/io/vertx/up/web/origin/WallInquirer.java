@@ -9,7 +9,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.secure.Rampart;
 import io.vertx.up.secure.inquire.OstiumAuth;
 import io.vertx.up.secure.inquire.PhylumAuth;
-import io.vertx.up.tool.Codec;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.exception.DynamicKeyMissingException;
 import io.vertx.zero.exception.WallDuplicatedException;
@@ -61,7 +61,7 @@ public class WallInquirer implements Inquirer<Set<Cliff>> {
                 final Class<?> cls = keys.get(field);
                 final Cliff cliff = this.transformer.transform(config.getJsonObject(field));
                 // Set Information from class
-                mountData(cliff, cls);
+                this.mountData(cliff, cls);
                 wallSet.add(cliff);
             }
         }
@@ -71,7 +71,7 @@ public class WallInquirer implements Inquirer<Set<Cliff>> {
 
     private void mountData(final Cliff cliff, final Class<?> clazz) {
         /** Extract basic data **/
-        mountAnno(cliff, clazz);
+        this.mountAnno(cliff, clazz);
         /** Proxy **/
         if (cliff.isDefined()) {
             // Custom Workflow
@@ -108,23 +108,23 @@ public class WallInquirer implements Inquirer<Set<Cliff>> {
                     keysRef.put(Instance.invoke(annotation, "value"), item);
                     return this.hashPath(annotation);
                 }).subscribe(hashs::add);
-        
+
         // Duplicated adding.
         Fn.flingUp(hashs.size() != wallClses.size(), LOGGER,
-                WallDuplicatedException.class, getClass(),
+                WallDuplicatedException.class, this.getClass(),
                 wallClses.stream().map(Class::getName).collect(Collectors.toSet()));
 
         /** Shared key does not existing **/
         final JsonObject config = NODE.read();
         Fn.flingUp(!config.containsKey(KEY), LOGGER,
-                DynamicKeyMissingException.class, getClass(),
+                DynamicKeyMissingException.class, this.getClass(),
                 KEY, config);
 
         /** Wall key missing **/
         final JsonObject hitted = config.getJsonObject(KEY);
         for (final String key : keysRef.keySet()) {
             Fn.flingUp(null == hitted || !hitted.containsKey(key), LOGGER,
-                    WallKeyMissingException.class, getClass(),
+                    WallKeyMissingException.class, this.getClass(),
                     key, keysRef.get(key));
         }
         return hitted;
@@ -139,6 +139,6 @@ public class WallInquirer implements Inquirer<Set<Cliff>> {
     private String hashPath(final Annotation annotation) {
         final Integer order = Instance.invoke(annotation, "order");
         final String path = Instance.invoke(annotation, "path");
-        return Codec.sha256(order + path);
+        return Ut.encryptSHA256(order + path);
     }
 }

@@ -5,7 +5,7 @@ import io.vertx.up.annotations.Plugin;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Statute;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroAmbient;
 import io.vertx.zero.eon.Values;
@@ -35,16 +35,16 @@ public class InfixScatter implements Scatter<Vertx> {
     public void connect(final Vertx vertx) {
         /** Enabled **/
         final ConcurrentMap<String, Class<?>> enabled =
-                Statute.reduce(node.read().keySet(), ZeroAmbient.getInjections());
+                Ut.reduce(node.read().keySet(), ZeroAmbient.getInjections());
         /** Scan all Infix **/
         final ConcurrentMap<Class<? extends Annotation>, Class<?>> injections =
-                Statute.reduce(Plugins.INFIX_MAP, enabled);
+                Ut.reduce(Plugins.INFIX_MAP, enabled);
         injections.values().stream().forEach(item -> {
             if (null != item && item.isAnnotationPresent(Plugin.class)) {
-                final Method method = findInit(item);
+                final Method method = this.findInit(item);
                 Fn.flingUp(null == method, LOGGER,
                         PluginSpecificationException.class,
-                        getClass(), item.getName());
+                        this.getClass(), item.getName());
                 Fn.safeJvm(() -> method.invoke(null, vertx), LOGGER);
             }
         });
@@ -61,7 +61,7 @@ public class InfixScatter implements Scatter<Vertx> {
         return Fn.get(() -> {
             final Method[] methods = clazz.getDeclaredMethods();
             final List<Method> found = Arrays.stream(methods)
-                    .filter(item -> "init".equals(item.getName()) && validMethod(item))
+                    .filter(item -> "init".equals(item.getName()) && this.validMethod(item))
                     .collect(Collectors.toList());
             return Values.ONE == found.size() ? found.get(Values.IDX) : null;
         }, clazz);

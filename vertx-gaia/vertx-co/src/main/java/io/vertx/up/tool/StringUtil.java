@@ -10,17 +10,17 @@ import java.util.Set;
 /**
  * @author lang
  */
-public class StringUtil {
+class StringUtil {
 
-    public static String from(final Object value) {
+    static String from(final Object value) {
         return null == value ? Strings.EMPTY : value.toString();
     }
 
-    public static String from(final JsonObject value) {
+    static String from(final JsonObject value) {
         return null == value ? Strings.EMPTY : value.toString();
     }
 
-    public static Set<String> split(final String input, final String separator) {
+    static Set<String> split(final String input, final String separator) {
         return Fn.get(new HashSet<>(), () -> {
             final String[] array = input.split(separator);
             final Set<String> result = new HashSet<>();
@@ -31,11 +31,11 @@ public class StringUtil {
         }, input, separator);
     }
 
-    public static String join(final Set<String> input) {
+    private static String join(final Set<String> input) {
         return join(input, null);
     }
 
-    public static String join(final Set<String> input, final String separator) {
+    static String join(final Set<String> input, final String separator) {
         final String connector = (null == separator) ? Strings.COMMA : separator;
         return Fn.getJvm(() -> {
             final StringBuilder builder = new StringBuilder();
@@ -52,7 +52,7 @@ public class StringUtil {
         }, input);
     }
 
-    public static String join(final Object[] input) {
+    static String join(final Object[] input) {
         final Set<String> data = new HashSet<>();
         for (final Object item : input) {
             if (null != item) {
@@ -62,11 +62,11 @@ public class StringUtil {
         return join(data);
     }
 
-    public static boolean isNil(final String input) {
+    static boolean isNil(final String input) {
         return null == input || 0 == input.trim().length();
     }
 
-    public static boolean notNil(final String input) {
+    static boolean notNil(final String input) {
         return !isNil(input);
     }
 }

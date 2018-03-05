@@ -5,7 +5,7 @@ import io.vertx.zero.eon.Values;
 
 import java.security.MessageDigest;
 
-public class Codec {
+class Codec {
 
     /**
      * MD5 encript for input string.
@@ -13,7 +13,7 @@ public class Codec {
      * @param input
      * @return
      */
-    public static String md5(final String input) {
+    static String md5(final String input) {
         return Fn.getJvm(() -> {
             final MessageDigest digest = MessageDigest.getInstance("MD5");
             final byte[] source = input.getBytes(Values.CHARSET);
@@ -36,7 +36,7 @@ public class Codec {
      * @param input
      * @return
      */
-    public static String sha256(final String input) {
+    static String sha256(final String input) {
         return sha(input, "SHA-256");
     }
 
@@ -46,7 +46,7 @@ public class Codec {
      * @param input
      * @return
      */
-    public static String sha512(final String input) {
+    static String sha512(final String input) {
         return sha(input, "SHA-512");
     }
 

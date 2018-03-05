@@ -2,7 +2,7 @@ package io.vertx.up.tool;
 
 import java.lang.reflect.Array;
 
-public class ArrayUtil {
+class ArrayUtil {
 
     private static Object copyArrayGrow1(final Object array,
                                          final Class<?> newArrayComponentType) {
@@ -15,7 +15,7 @@ public class ArrayUtil {
         return Array.newInstance(newArrayComponentType, 1);
     }
 
-    public static <T> T[] add(final T[] array, final T element) {
+    static <T> T[] add(final T[] array, final T element) {
         final Class<?> type;
         if (array != null) {
             type = array.getClass().getComponentType();

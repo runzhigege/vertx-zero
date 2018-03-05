@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ensurer;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.config.NodeVisitor;
@@ -38,17 +38,17 @@ public class VertxVisitor implements NodeVisitor {
     public ConcurrentMap<String, VertxOptions> visit(final String... keys)
             throws ZeroException {
         // 1. Must be the first line, fixed position.
-        Ensurer.eqLength(getClass(), 0, (Object[]) keys);
+        Ut.ensureEqualLength(this.getClass(), 0, (Object[]) keys);
         // 2. Visit the node for vertx
         final JsonObject data = this.NODE.read();
         // 3. Vertx node validation.
         final JsonObject vertxData = data.getJsonObject(KEY);
-        LOGGER.info(Info.INF_B_VERIFY, KEY, getClass().getSimpleName(), vertxData);
+        LOGGER.info(Info.INF_B_VERIFY, KEY, this.getClass().getSimpleName(), vertxData);
         Fn.shuntZero(() -> Ruler.verify(KEY, vertxData), vertxData);
         // 4. Set cluster options
         this.clusterOptions = this.clusterTransformer.transform(data.getJsonObject(YKEY_CLUSTERED));
         // 5. Transfer Data
-        return visit(vertxData.getJsonArray(YKEY_INSTANCE));
+        return this.visit(vertxData.getJsonArray(YKEY_INSTANCE));
     }
 
     @Override
@@ -70,7 +70,7 @@ public class VertxVisitor implements NodeVisitor {
             // 3. Check the configuration for cluster sync
             Fn.flingZero(clustered != options.isClustered(), LOGGER,
                     ClusterConflictException.class,
-                    getClass(), name, options.toString());
+                    this.getClass(), name, options.toString());
             // 4. Put the options into map
             map.put(name, options);
         });

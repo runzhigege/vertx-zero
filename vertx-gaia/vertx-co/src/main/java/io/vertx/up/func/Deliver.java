@@ -1,6 +1,6 @@
 package io.vertx.up.func;
 
-import io.vertx.up.tool.ArrayUtil;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.exception.ZeroRunException;
 
@@ -23,7 +23,7 @@ class Deliver {
         try {
             ret = supplier.get();
         } catch (final Throwable ex) {
-            final Object[] argument = ArrayUtil.add(args, ex);
+            final Object[] argument = Ut.elementAdd(args, ex);
             final ZeroRunException error = Instance.instance(
                     runCls, argument);
             if (null != error) {

@@ -9,9 +9,8 @@ import io.vertx.ext.web.Session;
 import io.vertx.up.annotations.SessionData;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.agent.Event;
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
-import io.vertx.up.tool.mirror.Types;
 
 import javax.ws.rs.core.MediaType;
 import java.lang.annotation.Annotation;
@@ -78,7 +77,7 @@ public final class Answer {
             final String field = Instance.invoke(annotation, "field");
             // Data Storage
             Object reference = data;
-            if (Types.isJObject(data) && StringUtil.notNil(field)) {
+            if (Ut.isJObject(data) && Ut.notNil(field)) {
                 final JsonObject target = (JsonObject) data;
                 reference = target.getValue(field);
             }
