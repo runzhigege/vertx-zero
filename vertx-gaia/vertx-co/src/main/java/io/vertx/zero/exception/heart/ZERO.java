@@ -25,4 +25,7 @@ interface Info {
 
     String OP_MSG = "[ ZERO ] This operation is not supported! " +
             "( method = {0}, class = {1} )";
+
+    String JEXL_MSG =
+            "[ ZERO ] The expression \"{0}\" could not be parsed, details = {1}";
 }
