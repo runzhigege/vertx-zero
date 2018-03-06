@@ -383,6 +383,10 @@ public class Ut {
         return StringUtil.aequilatus(seed, width, '0');
     }
 
+    public static String fromExpression(final String expr, final JsonObject data) {
+        return StringUtil.expression(expr, data);
+    }
+
     public static String fromJoin(final Object[] input) {
         return StringUtil.from(input);
     }
