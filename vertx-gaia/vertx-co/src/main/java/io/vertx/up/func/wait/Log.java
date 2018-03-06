@@ -1,4 +1,4 @@
-package io.vertx.up.aiki.fun;
+package io.vertx.up.func.wait;
 
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;

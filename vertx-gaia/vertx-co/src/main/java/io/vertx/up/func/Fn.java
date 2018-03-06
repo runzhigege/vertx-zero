@@ -1,8 +1,10 @@
 package io.vertx.up.func;
 
+import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.exception.WebException;
+import io.vertx.up.func.wait.Case;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.ZeroRunException;
@@ -17,7 +19,54 @@ import java.util.function.Supplier;
 /**
  * Unique interface to call function
  */
+@SuppressWarnings("all")
 public class Fn {
+
+    public static <T> Future<T> match(final Case.DefaultCase<T> defaultCase, final Case<T>... matchers) {
+        return Wait.match(() -> defaultCase, matchers).second.get();
+    }
+
+    public static <T> Future<T> match(final Supplier<Case.DefaultCase<T>> defaultCase, final Case<T>... matchers) {
+        return Wait.match(defaultCase, matchers).second.get();
+    }
+
+    public static <T> Case.DefaultCase<T> fork(final Supplier<Future<T>> caseLine) {
+        return Case.DefaultCase.item(caseLine);
+    }
+
+    public static <T> Case.DefaultCase<T> fork(final Actuator actuator, final Supplier<Future<T>> caseLine) {
+        if (null != actuator) actuator.execute();
+        return Case.DefaultCase.item(caseLine);
+    }
+
+    public static <T> Case<T> branch(final Supplier<Future<T>> caseLine) {
+        return Wait.branch(caseLine);
+    }
+
+    public static <T> Case<T> branch(final Actuator executor, final Supplier<Future<T>> caseLine) {
+        return Wait.branch(executor, caseLine);
+    }
+
+    public static <T> Case<T> branch(final boolean condition, final Supplier<Future<T>> caseLine) {
+        return Wait.branch(condition, caseLine);
+    }
+
+    public static <T> Case<T> branch(final boolean condition, final Actuator executor, final Supplier<Future<T>> caseLine) {
+        return Wait.branch(condition, executor, caseLine);
+    }
+
+    public static <T> Future<T> future(final Supplier<Future<T>> caseLine) {
+        return Wait.branch(caseLine).second.get();
+    }
+
+    public static <T> Future<T> future(final Actuator executor, final Supplier<Future<T>> caseLine) {
+        return Wait.branch(executor, caseLine).second.get();
+    }
+
+    public static <T> Future<T> thenGeneric(final Consumer<Future<T>> consumer) {
+        return Wait.then(consumer);
+    }
+
     /**
      * ZeroException out.
      *
