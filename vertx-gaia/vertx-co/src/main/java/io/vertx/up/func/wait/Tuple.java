@@ -1,4 +1,4 @@
-package io.vertx.up.aiki.fun;
+package io.vertx.up.func.wait;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -7,12 +7,12 @@ public class Tuple<T, U> {
     public final T first;
     public final U second;
 
-    public Tuple(final T t, final U u) {
+    Tuple(final T t, final U u) {
         this.first = Objects.requireNonNull(t);
         this.second = Objects.requireNonNull(u);
     }
 
-    public Tuple<U, T> swap() {
+    Tuple<U, T> swap() {
         return new Tuple<>(this.second, this.first);
     }
 
