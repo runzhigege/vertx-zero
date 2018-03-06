@@ -8,6 +8,7 @@ import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.atom.query.Criteria;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
+import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Values;
@@ -113,21 +114,21 @@ public class UxJooq {
 
     public <T> Future<T> upsertReturningPrimaryAsync(final JsonObject andFilters, final T updated, final Consumer<Long> consumer) {
         return this.<T>fetchOneAndAsync(andFilters)
-                .compose(item -> Ux.match(
+                .compose(item -> Fn.match(
                         // null != item, updated to existing item.
-                        Ux.fork(() -> this.<T>updateAsync(copyEntity(item, updated))),
+                        Fn.fork(() -> this.<T>updateAsync(copyEntity(item, updated))),
                         // null == item, insert data
-                        Ux.branch(null == item, () -> this.insertReturningPrimaryAsync(updated, consumer))
+                        Fn.branch(null == item, () -> this.insertReturningPrimaryAsync(updated, consumer))
                 ));
     }
 
     public <T> Future<T> upsertAsync(final JsonObject andFilters, final T updated) {
         return this.<T>fetchOneAndAsync(andFilters)
-                .compose(item -> Ux.match(
+                .compose(item -> Fn.match(
                         // null != item, updated to existing item.
-                        Ux.fork(() -> this.<T>updateAsync(copyEntity(item, updated))),
+                        Fn.fork(() -> this.<T>updateAsync(copyEntity(item, updated))),
                         // null == item, insert data
-                        Ux.branch(null == item, () -> this.insertAsync(updated))
+                        Fn.branch(null == item, () -> this.insertAsync(updated))
                 ));
     }
 

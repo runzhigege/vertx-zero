@@ -1,9 +1,8 @@
-package io.vertx.up.aiki;
+package io.vertx.up.func;
 
 
 import io.vertx.core.Future;
-import io.vertx.up.aiki.fun.Case;
-import io.vertx.up.func.Actuator;
+import io.vertx.up.func.wait.Case;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
