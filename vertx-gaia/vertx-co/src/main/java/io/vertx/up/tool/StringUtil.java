@@ -3,6 +3,8 @@ package io.vertx.up.tool;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
 import io.vertx.zero.eon.Strings;
+import io.vertx.zero.exception.heart.JexlExpressionException;
+import org.apache.commons.jexl3.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +13,9 @@ import java.util.Set;
  * @author lang
  */
 class StringUtil {
+
+    private static final JexlEngine EXPR = new JexlBuilder()
+            .cache(512).silent(false).create();
 
     static String from(final Object value) {
         return null == value ? Strings.EMPTY : value.toString();
@@ -66,7 +71,7 @@ class StringUtil {
         final StringBuilder builder = new StringBuilder();
         final int seedLen = seed.toString().length();
         int fillLen = width - seedLen;
-        if (0 < fillLen) fillLen = 0;
+        if (0 > fillLen) fillLen = 0;
         builder.append(repeat(fillLen, fill));
         builder.append(seed);
         return builder.toString();
@@ -78,6 +83,19 @@ class StringUtil {
             builder.append(fill);
         }
         return builder.toString();
+    }
+
+    static String expression(final String expr, final JsonObject params) {
+        try {
+            final JexlExpression expression = EXPR.createExpression(expr);
+            // Parameter
+            final JexlContext context = new MapContext();
+            Fn.itJObject(params, (value, key) -> context.set(key, value));
+
+            return expression.evaluate(context).toString();
+        } catch (final JexlException ex) {
+            throw new JexlExpressionException(StringUtil.class, expr, ex);
+        }
     }
 
     static boolean isNil(final String input) {
