@@ -375,6 +375,14 @@ public class Ut {
         return StringUtil.join(input, separator);
     }
 
+    public static String fromAequilatus(final Integer seed, final Integer width, final char fill) {
+        return StringUtil.aequilatus(seed, width, fill);
+    }
+
+    public static String fromAequilatus(final Integer seed, final Integer width) {
+        return StringUtil.aequilatus(seed, width, '0');
+    }
+
     public static String fromJoin(final Object[] input) {
         return StringUtil.from(input);
     }
