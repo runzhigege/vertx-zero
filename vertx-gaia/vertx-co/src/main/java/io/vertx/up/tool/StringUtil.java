@@ -62,6 +62,24 @@ class StringUtil {
         return join(data);
     }
 
+    static String aequilatus(final Integer seed, final Integer width, final char fill) {
+        final StringBuilder builder = new StringBuilder();
+        final int seedLen = seed.toString().length();
+        int fillLen = width - seedLen;
+        if (0 < fillLen) fillLen = 0;
+        builder.append(repeat(fillLen, fill));
+        builder.append(seed);
+        return builder.toString();
+    }
+
+    static String repeat(final Integer times, final char fill) {
+        final StringBuilder builder = new StringBuilder();
+        for (int idx = 0; idx < times; idx++) {
+            builder.append(fill);
+        }
+        return builder.toString();
+    }
+
     static boolean isNil(final String input) {
         return null == input || 0 == input.trim().length();
     }
