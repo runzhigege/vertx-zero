@@ -180,6 +180,22 @@
                 <artifactId>vertx-up</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.vertxup</groupId>
+                <artifactId>vertx-ifx</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- Third Part -->
+            <dependency>
+                <groupId>cn.vertxup</groupId>
+                <artifactId>zero-iqiy</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.vertxup</groupId>
+                <artifactId>zero-ali-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
             <dependency>
                 <groupId>com.auth0</groupId>
