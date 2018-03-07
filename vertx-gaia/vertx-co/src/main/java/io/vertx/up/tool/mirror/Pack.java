@@ -40,6 +40,7 @@ public final class Pack {
             // Logback
             this.add("ch.qos");
             this.add("org.slf4j");
+            this.add("org.apache");
             // Vert.x
             this.add("io.vertx.core");
             this.add("io.vertx.spi");
