@@ -9,5 +9,5 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>vertx-iqiy</artifactId>
-    <name>( Vertx Infix ) 爱奇艺SDK</name>
+    <name>( Vertx Infix ) Iqi Video SDK</name>
 </project>
