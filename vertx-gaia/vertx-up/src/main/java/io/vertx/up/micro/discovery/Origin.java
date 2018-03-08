@@ -17,6 +17,14 @@ public interface Origin {
      */
     ConcurrentMap<String, Record> getRegistryData();
 
+    /**
+     * Erase record
+     *
+     * @param record
+     * @return
+     */
+    boolean erasing(Record record);
+
     String HOST = "host";
     String NAME = "name";
     String PORT = "port";
