@@ -97,6 +97,17 @@ public class ZeroRegistry {
         return sets;
     }
 
+    public void erasingStatus(final String name,
+                              final String host,
+                              final Integer port,
+                              final EtcdPath path) {
+        final String target = MessageFormat.format(PATH_STATUS, this.etcd.getApplication(),
+                path.toString().toLowerCase(), name,
+                host, String.valueOf(port));
+        this.logger.info(Info.ETCD_CLEAN, name, path);
+        this.etcd.write(target, Etat.STOPPED, Values.ZERO);
+    }
+
     public void registryHttp(final String service,
                              final HttpServerOptions options, final Etat etat) {
         final String path = MessageFormat.format(PATH_STATUS, this.etcd.getApplication(),

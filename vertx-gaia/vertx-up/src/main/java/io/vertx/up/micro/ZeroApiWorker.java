@@ -11,7 +11,8 @@ import io.vertx.up.concurrent.Runner;
 import io.vertx.up.eon.em.MessageModel;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.micro.discovery.EndPointOrigin;
+import io.vertx.up.micro.discovery.ApiOrigin;
+import io.vertx.up.micro.discovery.EtcdEraser;
 import io.vertx.up.micro.discovery.Origin;
 import io.vertx.up.tool.mirror.Instance;
 
@@ -32,7 +33,7 @@ public class ZeroApiWorker extends AbstractVerticle {
 
     private static final Annal LOGGER = Annal.get(ZeroApiWorker.class);
 
-    private static final Origin ORIGIN = Instance.singleton(EndPointOrigin.class);
+    private static final Origin ORIGIN = Instance.singleton(ApiOrigin.class);
 
     private static final ConcurrentMap<String, Record> REGISTRITIONS
             = new ConcurrentHashMap<>();
@@ -51,6 +52,10 @@ public class ZeroApiWorker extends AbstractVerticle {
             // initialized once.
             this.initializeServices(discovery);
         }
+        this.vertx.setPeriodic(5000, id -> {
+            // Clean ko services ( Ipc & Api )
+            Fn.safeJvm(() -> EtcdEraser.create().start(), LOGGER);
+        });
         // Scan the services every 3s
         this.vertx.setPeriodic(3000, id -> {
             // Read the latest services
@@ -65,31 +70,36 @@ public class ZeroApiWorker extends AbstractVerticle {
                 final Set<String> deleted = resultMap.get(Flag.DELETE);
                 final Set<String> updated = resultMap.get(Flag.UPDATE);
                 final Set<String> added = resultMap.get(Flag.NEW);
-                Runner.run(
-                        () -> {
-                            this.deleteService(discovery, deleted);
-                            counter.countDown();
-                        },
-                        "discovery-deleted");
-                Runner.run(
-                        () -> {
-                            this.updateService(discovery, updated);
-                            counter.countDown();
-                        },
-                        "discovery-updated");
-                Runner.run(
-                        () -> {
-                            this.addService(discovery, added, services);
-                            counter.countDown();
-                        },
-                        "discovery-added");
+                Runner.run(() -> this.discoveryDeleted(counter, discovery, deleted), "discovery-deleted");
+                Runner.run(() -> this.discoveryUpdate(counter, discovery, updated), "discovery-updated");
+                Runner.run(() -> this.discoveryAdded(counter, discovery, added, services), "discovery-added");
                 // Wait for result
                 counter.await();
-                LOGGER.info(Info.REG_REFRESHED,
-                        added.size(), updated.size(), deleted.size());
+                LOGGER.info(Info.REG_REFRESHED, added.size(), updated.size(), deleted.size());
             }, LOGGER);
-
         });
+    }
+
+    private void discoveryUpdate(final CountDownLatch counter,
+                                 final ServiceDiscovery discovery,
+                                 final Set<String> updated) {
+        this.updateService(discovery, updated);
+        counter.countDown();
+    }
+
+    private void discoveryDeleted(final CountDownLatch counter,
+                                  final ServiceDiscovery discovery,
+                                  final Set<String> keys) {
+        this.deleteService(discovery, keys);
+        counter.countDown();
+    }
+
+    private void discoveryAdded(final CountDownLatch counter,
+                                final ServiceDiscovery discovery,
+                                final Set<String> added,
+                                final ConcurrentMap<String, Record> services) {
+        this.addService(discovery, added, services);
+        counter.countDown();
     }
 
     private void deleteService(final ServiceDiscovery discovery,

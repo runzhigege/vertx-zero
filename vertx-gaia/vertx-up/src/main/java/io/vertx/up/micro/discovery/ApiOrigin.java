@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-public class EndPointOrigin implements Origin {
+public class ApiOrigin implements Origin {
 
     private final transient ZeroRegistry registry
             = ZeroRegistry.create(this.getClass());
@@ -25,6 +25,19 @@ public class EndPointOrigin implements Origin {
     @Override
     public ConcurrentMap<String, Record> getRegistryData() {
         return this.readData(EtcdPath.ENDPOINT);
+    }
+
+    @Override
+    public boolean erasing(final Record record) {
+        final String host = record.getLocation().getString(HOST);
+        final Integer port = record.getLocation().getInteger(PORT);
+        final String name = record.getName();
+        this.registry.erasingStatus(name, host, port, this.getPath());
+        return true;
+    }
+
+    protected EtcdPath getPath() {
+        return EtcdPath.ENDPOINT;
     }
 
     protected ConcurrentMap<String, Record> readData(final EtcdPath path) {

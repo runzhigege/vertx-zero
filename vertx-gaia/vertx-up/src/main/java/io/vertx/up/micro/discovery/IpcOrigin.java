@@ -6,11 +6,11 @@ import io.vertx.up.eon.em.EtcdPath;
 
 import java.util.concurrent.ConcurrentMap;
 
-public class IpcOrigin extends EndPointOrigin {
+public class IpcOrigin extends ApiOrigin {
 
     @Override
     public ConcurrentMap<String, Record> getRegistryData() {
-        final ConcurrentMap<String, Record> map = readData(EtcdPath.IPC);
+        final ConcurrentMap<String, Record> map = this.readData(EtcdPath.IPC);
         for (final Record record : map.values()) {
             record.setStatus(Status.UP);
             record.setType("IPC");
@@ -18,5 +18,10 @@ public class IpcOrigin extends EndPointOrigin {
             record.getLocation().put("ssl", Boolean.TRUE);
         }
         return map;
+    }
+
+    @Override
+    public EtcdPath getPath() {
+        return EtcdPath.IPC;
     }
 }
