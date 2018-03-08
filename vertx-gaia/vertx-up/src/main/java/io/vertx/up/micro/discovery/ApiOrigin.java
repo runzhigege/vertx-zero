@@ -32,7 +32,9 @@ public class ApiOrigin implements Origin {
         final String host = record.getLocation().getString(HOST);
         final Integer port = record.getLocation().getInteger(PORT);
         final String name = record.getName();
-        this.registry.erasingStatus(name, host, port, this.getPath());
+        if (!Ut.netOk(host, port)) {
+            this.registry.erasingStatus(name, host, port, this.getPath());
+        }
         return true;
     }
 
