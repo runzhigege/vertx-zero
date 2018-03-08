@@ -81,7 +81,7 @@
         <asm.version>6.0</asm.version>
         <lombok.version>1.16.20</lombok.version>
         <guice.version>4.1.0</guice.version>
-        <hibernate.validator.version>6.0.7.Final</hibernate.validator.version>
+        <hibernate.validator.version>6.0.8.Final</hibernate.validator.version>
         <scala.version>2.12.4</scala.version>
         <feign.version>8.18.0</feign.version>
         <guava.version>24.0-jre</guava.version>
