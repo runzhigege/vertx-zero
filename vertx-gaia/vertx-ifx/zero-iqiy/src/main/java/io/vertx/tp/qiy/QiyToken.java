@@ -1,4 +1,4 @@
-package io.vertx.tp.plugin.qiy;
+package io.vertx.tp.qiy;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.feign.FeignDepot;

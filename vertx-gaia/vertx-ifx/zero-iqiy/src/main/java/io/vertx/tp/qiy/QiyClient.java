@@ -1,4 +1,4 @@
-package io.vertx.tp.plugin.qiy;
+package io.vertx.tp.qiy;
 
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.AsyncResult;
