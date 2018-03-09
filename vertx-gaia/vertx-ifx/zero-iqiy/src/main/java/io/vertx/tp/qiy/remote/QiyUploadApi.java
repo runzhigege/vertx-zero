@@ -1,4 +1,4 @@
-package io.vertx.tp.plugin.qiy.remote;
+package io.vertx.tp.qiy.remote;
 
 import feign.Param;
 import feign.RequestLine;
