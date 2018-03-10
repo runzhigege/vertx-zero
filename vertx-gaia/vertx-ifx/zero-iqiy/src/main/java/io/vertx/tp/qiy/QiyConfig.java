@@ -11,9 +11,9 @@ import java.util.Objects;
 /**
  * For qiy client widely used.
  */
-public class QiyToken implements Serializable {
+public class QiyConfig implements Serializable {
 
-    private static final Annal LOGGER = Annal.get(QiyToken.class);
+    private static final Annal LOGGER = Annal.get(QiyConfig.class);
 
     private static final String KEY = "qiy";
     private static final String KEY_ID = "client_id";
@@ -27,16 +27,16 @@ public class QiyToken implements Serializable {
 
     private static final FeignDepot DEPOT = FeignDepot.create(KEY, KEY);
 
-    public static QiyToken create(final String clientId,
-                                  final String clientSecret) {
-        return new QiyToken(clientId, clientSecret);
+    static QiyConfig create(final String clientId,
+                            final String clientSecret) {
+        return new QiyConfig(clientId, clientSecret);
     }
 
-    public static QiyToken create(final JsonObject config) {
-        return new QiyToken(config.getString(KEY_ID), config.getString(KEY_SECRET));
+    static QiyConfig create(final JsonObject config) {
+        return new QiyConfig(config.getString(KEY_ID), config.getString(KEY_SECRET));
     }
 
-    public static QiyToken create() {
+    static QiyConfig create() {
         return create(DEPOT.getConfig());
     }
 
@@ -50,8 +50,8 @@ public class QiyToken implements Serializable {
 
     private Long expires_in;
 
-    private QiyToken(final String clientId,
-                     final String clientSecret) {
+    private QiyConfig(final String clientId,
+                      final String clientSecret) {
         this.clientId = clientId;
         this.clientSecret = clientSecret;
     }
@@ -132,10 +132,10 @@ public class QiyToken implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof QiyToken)) {
+        if (!(o instanceof QiyConfig)) {
             return false;
         }
-        final QiyToken qiyRecord = (QiyToken) o;
+        final QiyConfig qiyRecord = (QiyConfig) o;
         return Objects.equals(this.getClientId(), qiyRecord.getClientId()) &&
                 Objects.equals(this.getClientSecret(), qiyRecord.getClientSecret());
     }
