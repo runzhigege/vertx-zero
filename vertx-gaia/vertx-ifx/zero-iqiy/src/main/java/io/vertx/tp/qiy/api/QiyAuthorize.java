@@ -1,10 +1,10 @@
-package io.vertx.tp.qiy.remote;
+package io.vertx.tp.qiy.api;
 
 import feign.Param;
 import feign.RequestLine;
 import io.vertx.core.json.JsonObject;
 
-public interface QiyAuthorizeApi {
+public interface QiyAuthorize {
 
     @RequestLine("GET /iqiyi/authorize?client_id={client_id}&client_secret={client_secret}")
     JsonObject authorize(@Param("client_id") String clientId,

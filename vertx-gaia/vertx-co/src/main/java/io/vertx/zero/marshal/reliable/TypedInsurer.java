@@ -31,14 +31,10 @@ public class TypedInsurer extends AbstractInsurer {
     };
 
     /**
-     * @param data
-     * @param rule
-     * @throws ZeroException
-     * @descrption {
-     * "typed":{
-     * "field1":"STRING | INTEGER | DECIMAL | BOOLEAN | JOBJECT | JARRAY | DATE"
-     * }
-     * }
+     * @param data input data that should be verified.
+     * @param rule rule config data
+     * @throws ZeroException Insure exception
+     * @see "STRING | INTEGER | DECIMAL | BOOLEAN | JOBJECT | JARRAY | DATE"
      */
     @Override
     public void flumen(final JsonObject data, final JsonObject rule)

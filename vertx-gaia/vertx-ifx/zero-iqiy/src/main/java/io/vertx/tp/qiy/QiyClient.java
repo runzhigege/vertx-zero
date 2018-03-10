@@ -21,29 +21,42 @@ public interface QiyClient {
 
     /**
      * /iqiyi/authorize
+     *
+     * @param handler
+     * @return
      */
     @Fluent
     QiyClient authorize(Handler<AsyncResult<JsonObject>> handler);
 
     /**
      * /oauth2/token
+     *
+     * @param refreshToken
+     * @param handler
+     * @return
      */
     @Fluent
-    QiyClient refreshToken(String refreshToken,
-                           Handler<AsyncResult<JsonObject>> handler);
+    QiyClient refreshToken(String refreshToken, Handler<AsyncResult<JsonObject>> handler);
 
     /**
      * /openupload
+     *
+     * @param fileType
+     * @param size
+     * @param handler
+     * @return
      */
     @Fluent
-    QiyClient requestFile(String fileType,
-                          String size,
-                          Handler<AsyncResult<JsonObject>> handler);
+    QiyClient requestFile(String fileType, String size, Handler<AsyncResult<JsonObject>> handler);
 
+    /**
+     * @param address
+     * @param size
+     * @param range
+     * @param fileId
+     * @param content
+     * @return
+     */
     @Fluent
-    QiyClient upload(String address,
-                     String size,
-                     String range,
-                     String fileId,
-                     char[] content);
+    QiyClient upload(String address, String size, String range, String fileId, char[] content);
 }

@@ -13,7 +13,7 @@ public @interface Ordered {
     /**
      * The order will be the sequence of filters
      *
-     * @return
+     * @return The sequence of filters.
      */
     int value() default 0;
 }

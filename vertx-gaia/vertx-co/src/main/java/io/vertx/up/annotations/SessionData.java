@@ -12,7 +12,7 @@ public @interface SessionData {
     /**
      * If the return type is JsonObject, you can extract one field to store into session
      *
-     * @return
+     * @return stored key in session
      */
     String field() default "";
 }

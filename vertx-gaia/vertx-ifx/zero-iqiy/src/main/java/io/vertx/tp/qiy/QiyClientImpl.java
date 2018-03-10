@@ -5,8 +5,8 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.qiy.remote.QiyAuthorizeApi;
-import io.vertx.tp.qiy.remote.QiyUploadApi;
+import io.vertx.tp.qiy.api.QiyAuthorize;
+import io.vertx.tp.qiy.api.QiyUpload;
 import io.vertx.up.exception._401QiyTokenException;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
@@ -18,13 +18,13 @@ public class QiyClientImpl implements QiyClient {
     private transient final Vertx vertx;
     private transient QiyToken token;
 
-    private transient final QiyAuthorizeApi authorizeApi;
+    private transient final QiyAuthorize authorizeApi;
 
     QiyClientImpl(final Vertx vertx, final QiyToken token) {
         this.vertx = vertx;
         this.token = token;
         // Authorized Api Reference
-        this.authorizeApi = token.getInitApi(QiyAuthorizeApi.class);
+        this.authorizeApi = token.getInitApi(QiyAuthorize.class);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class QiyClientImpl implements QiyClient {
         Fn.flingWeb(null == this.token || !this.token.isValid(), LOGGER,
                 _401QiyTokenException.class, this.getClass(), this.token.getClientId());
         // Request upload
-        final QiyUploadApi uploadApi = this.token.getUpApi(QiyUploadApi.class);
+        final QiyUpload uploadApi = this.token.getUpApi(QiyUpload.class);
         QiyRepdor.complete(uploadApi.requestUpload(fileType, fileSize, this.token.getAccessToken()))
                 .setHandler(res -> handler.handle(Future.succeededFuture(res.result())));
         return this;
