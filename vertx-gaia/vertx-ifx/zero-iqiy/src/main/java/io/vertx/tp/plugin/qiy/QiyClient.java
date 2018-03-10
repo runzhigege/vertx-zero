@@ -1,4 +1,4 @@
-package io.vertx.tp.qiy;
+package io.vertx.tp.plugin.qiy;
 
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.AsyncResult;
@@ -15,6 +15,10 @@ public interface QiyClient extends TpClient<QiyClient> {
 
     static QiyClient createShared(final Vertx vertx) {
         return new QiyClientImpl(vertx, QiyConfig.create());
+    }
+
+    static QiyClient createShared(final Vertx vertx, final JsonObject config) {
+        return new QiyClientImpl(vertx, QiyConfig.create(config));
     }
 
     @Fluent

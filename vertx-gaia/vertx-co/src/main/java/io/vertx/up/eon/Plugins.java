@@ -41,8 +41,17 @@ public interface Plugins {
 
         String SECURE = "secure";
 
-        String[] DATA = new String[]{
-                MONGO, MYSQL, JOOQ, RPC, REDIS
+        String LOGGER = "logger";
+
+        Set<String> STANDAND = new HashSet<String>() {
+            {
+                this.add(MONGO);
+                this.add(MYSQL);
+                this.add(JOOQ);
+                this.add(REDIS);
+                this.add(RPC);
+                this.add(LOGGER);
+            }
         };
     }
 
