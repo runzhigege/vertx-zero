@@ -1,0 +1,2 @@
+qiy: io.vertx.tp.plugin.qiy.QiyInfix
+ali-sms: io.vertx.tp.plugin.ali.SmsInfix

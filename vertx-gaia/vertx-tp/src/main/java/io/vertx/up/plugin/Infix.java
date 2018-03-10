@@ -15,16 +15,42 @@ public interface Infix {
 
     <T> T get();
 
+    static <R> R initTp(final String key,
+                        final Function<JsonObject, R> executor,
+                        final Class<?> clazz) {
+        final Annal logger = Annal.get(clazz);
+        final JsonObject options = init(logger, key, clazz);
+        final JsonObject config = null == options.getJsonObject(key) ? new JsonObject() : options.getJsonObject(key);
+        final JsonObject ready = config.containsKey("config") ? config.getJsonObject("config") : new JsonObject();
+        return init(logger, key, ready, executor);
+    }
+
     static <R> R init(final String key,
                       final Function<JsonObject, R> executor,
                       final Class<?> clazz) {
+        final Annal logger = Annal.get(clazz);
+        final JsonObject options = init(logger, key, clazz);
+        final JsonObject config = null == options.getJsonObject(key) ? new JsonObject() : options.getJsonObject(key);
+        return init(logger, key, config, executor);
+    }
+
+    static JsonObject init(
+            final Annal logger,
+            final String key,
+            final Class<?> clazz) {
         final Node<JsonObject> node = Instance.instance(ZeroUniform.class);
         final JsonObject options = node.read();
-        final Annal logger = Annal.get(clazz);
         Fn.flingUp(null == options || !options.containsKey(key)
                 , logger, ConfigKeyMissingException.class,
                 clazz, key);
-        final JsonObject config = null == options.getJsonObject(key) ? new JsonObject() : options.getJsonObject(key);
+        return options;
+    }
+
+    static <R> R init(
+            final Annal logger,
+            final String key,
+            final JsonObject config,
+            final Function<JsonObject, R> executor) {
         Fn.flingUp(() -> Ruler.verify(key, config), logger);
         return executor.apply(config);
     }

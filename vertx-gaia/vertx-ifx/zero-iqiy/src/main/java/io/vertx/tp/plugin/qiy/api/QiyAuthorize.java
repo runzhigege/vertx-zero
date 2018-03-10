@@ -1,4 +1,4 @@
-package io.vertx.tp.qiy.api;
+package io.vertx.tp.plugin.qiy.api;
 
 import feign.Param;
 import feign.RequestLine;
