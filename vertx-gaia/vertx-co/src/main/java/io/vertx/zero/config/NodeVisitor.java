@@ -23,7 +23,7 @@ public interface NodeVisitor
     /**
      * Get cluster configuration from vertx initialization.
      *
-     * @return
+     * @return io.vertx.core.ClusterOptions that defined by zero.
      */
     ClusterOptions getCluster();
 }

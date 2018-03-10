@@ -1,0 +1,6 @@
+required:
+- access_id
+- access_secret
+typed:
+  access_id: STRING
+  access_secret: STRING

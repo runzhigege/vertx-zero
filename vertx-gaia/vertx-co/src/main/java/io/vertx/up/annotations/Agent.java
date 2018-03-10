@@ -24,7 +24,7 @@ public @interface Agent {
      * Standard Instance Number
      * Default: 32
      *
-     * @return
+     * @return deployment instance number
      */
     int instances() default ZeroValue.DEFAULT_INSTANCES;
 
@@ -32,19 +32,19 @@ public @interface Agent {
      * Isolation Group
      * Default: __VERTX_ZERO__
      *
-     * @return
+     * @return deployment group
      */
     String group() default ZeroValue.DEFAULT_GROUP;
 
     /**
-     * @return
+     * @return Whether enable HA
      */
     boolean ha() default ZeroValue.DEFAULT_HA;
 
     /**
      * Default server type: http
      *
-     * @return
+     * @return The agent type for different servers.
      */
     ServerType type() default ServerType.HTTP;
 }

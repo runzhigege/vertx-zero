@@ -9,12 +9,9 @@ import io.vertx.zero.exception.demon.ForbiddenFieldException;
 
 public class ForbiddenInsurer extends AbstractInsurer {
     /**
-     * @param data
-     * @param rule
-     * @throws ZeroException
-     * @see {
-     * "forbidden":["field1","field2"]
-     * }
+     * @param data input data that should be verified.
+     * @param rule rule config data
+     * @throws ZeroException Insure exception
      */
     @Override
     public void flumen(final JsonObject data, final JsonObject rule) throws ZeroException {
