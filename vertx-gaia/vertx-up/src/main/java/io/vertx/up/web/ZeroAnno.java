@@ -45,6 +45,8 @@ public class ZeroAnno {
             IPCS = new ConcurrentHashMap<>();
     private final static Set<Class<?>>
             POINTER = new HashSet<>();
+    private final static Set<Class<?>>
+            TPS = new HashSet<>();
 
     /**
      * Get all plugins
@@ -74,6 +76,16 @@ public class ZeroAnno {
     public static Set<Class<?>>
     getInjects() {
         return POINTER;
+    }
+
+    /**
+     * Tp Clients
+     *
+     * @return
+     */
+    public static Set<Class<?>>
+    getTps() {
+        return TPS;
     }
 
     /**
@@ -199,6 +211,11 @@ public class ZeroAnno {
         final Inquirer<Set<Class<?>>> pointer =
                 Instance.singleton(PointerInquirer.class);
         POINTER.addAll(pointer.scan(clazzes));
+
+        /** Tp Clients **/
+        final Inquirer<Set<Class<?>>> tps =
+                Instance.singleton(PluginInquirer.class);
+        TPS.addAll(tps.scan(clazzes));
 
         /** Worker **/
         final Inquirer<Set<Class<?>>> worker =

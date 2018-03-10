@@ -1,23 +1,16 @@
 package io.vertx.up.web.anima;
 
 import io.vertx.core.Vertx;
-import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.worker.Receipt;
 import io.vertx.up.concurrent.Runner;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.plugin.Infix;
 import io.vertx.up.tool.mirror.Anno;
 import io.vertx.up.tool.mirror.Instance;
-import io.vertx.up.web.ZeroAmbient;
 import io.vertx.up.web.ZeroAnno;
-import io.vertx.zero.exception.InjectionLimeKeyException;
-import io.vertx.zero.marshal.node.Node;
-import io.vertx.zero.marshal.node.ZeroUniform;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
@@ -32,6 +25,10 @@ public class AffluxScatter implements Scatter<Vertx> {
     private static final ConcurrentMap<Class<?>, ConcurrentMap<String, Class<?>>>
             PENDINGS = ZeroAnno.getPlugins();
 
+    private static final AffluxInfix INJECTOR = AffluxInfix.create(AffluxScatter.class);
+
+    private static final AffluxPlugin PLUGIN = AffluxPlugin.create(AffluxScatter.class);
+
     @Override
     public void connect(final Vertx vertx) {
         // Extract all events.
@@ -39,11 +36,13 @@ public class AffluxScatter implements Scatter<Vertx> {
         Fn.itSet(events, (item, index) ->
                 Runner.run(() -> this.inject(item.getProxy())
                         , "event-afflux-" + index));
+
         // Extract all receipts.
         final Set<Receipt> receipts = ZeroAnno.getReceipts();
         Fn.itSet(receipts, (item, index) ->
                 Runner.run(() -> this.inject(item.getProxy())
                         , "receipt-afflux-" + index));
+
         // Extract non - event/receipts Objects
         final Set<Class<?>> injects = ZeroAnno.getInjects();
         Fn.itSet(injects, (item, index) -> Runner.run(() -> {
@@ -52,6 +51,39 @@ public class AffluxScatter implements Scatter<Vertx> {
             // Initialize reference
             this.inject(instance);
         }, "injects-afflux-" + index));
+
+        // Extract all Plugins
+        final Set<Class<?>> plugins = ZeroAnno.getTps();
+        Fn.itSet(plugins, (item, index) -> Runner.run(() -> {
+            // Initialize object
+            final Object instance = Instance.singleton(item);
+            // Initialize reference
+            PLUGIN.inject(instance);
+        }, "plugins-afflux-" + index));
+    }
+
+    private void inject(final Object proxy, final String key, final Class<?> type) {
+        // Field set
+        try {
+            final Class<?> clazz = proxy.getClass();
+            final Field field = clazz.getDeclaredField(key);
+            final Object instance;
+            if (Anno.isMark(field, Plugins.INFIX_MAP.keySet())) {
+                // Speicific Annotation
+                instance = INJECTOR.inject(field);
+            } else {
+                // Inject Only
+                instance = Instance.singleton(type);
+            }
+            // Set for field
+            if (null != instance) {
+                Instance.set(proxy, key, instance);
+                // Scan continue for field
+                this.inject(instance);
+            }
+        } catch (final NoSuchFieldException ex) {
+            LOGGER.jvm(ex);
+        }
     }
 
     private void inject(final Object proxy) {
@@ -62,72 +94,8 @@ public class AffluxScatter implements Scatter<Vertx> {
                 final ConcurrentMap<String, Class<?>> injections
                         = PENDINGS.get(clazz);
                 // Inject field
-                injections.forEach((key, type) -> {
-                    // Field set
-                    try {
-                        final Field field = clazz.getDeclaredField(key);
-                        final Object instance;
-                        if (Anno.isMark(field, Plugins.INFIX_MAP.keySet())) {
-                            // Speicific Annotation
-                            instance = this.inject(field);
-                        } else {
-                            // Inject Only
-                            instance = Instance.singleton(type);
-                        }
-                        // Set for field
-                        if (null != instance) {
-                            Instance.set(proxy, key, instance);
-                            // Scan continue for field
-                            this.inject(instance);
-                        }
-                    } catch (final NoSuchFieldException ex) {
-                        LOGGER.jvm(ex);
-                    }
-                });
+                injections.forEach((key, type) -> this.inject(proxy, key, type));
             }
         }, proxy);
-    }
-
-    private Class<? extends Annotation> search(
-            final Field field
-    ) {
-        final Annotation[] annotations = field.getDeclaredAnnotations();
-        final Set<Class<? extends Annotation>>
-                annotationCls = Plugins.INFIX_MAP.keySet();
-        Class<? extends Annotation> hitted = null;
-        for (final Annotation annotation : annotations) {
-            if (annotationCls.contains(annotation.annotationType())) {
-                hitted = annotation.annotationType();
-                break;
-            }
-        }
-        return hitted;
-    }
-
-    private Object inject(final Field field) {
-        final Class<? extends Annotation> key = this.search(field);
-        final String pluginKey = Plugins.INFIX_MAP.get(key);
-        final Class<?> infixCls = ZeroAmbient.getPlugin(pluginKey);
-        Object ret = null;
-        if (null != infixCls) {
-            if (Instance.isMatch(infixCls, Infix.class)) {
-                // Config checking
-                final Node<JsonObject> node = Instance.instance(ZeroUniform.class);
-                final JsonObject options = node.read();
-
-                Fn.flingUp(!options.containsKey(pluginKey), LOGGER,
-                        InjectionLimeKeyException.class,
-                        this.getClass(), infixCls, pluginKey);
-
-                final Infix reference = Instance.singleton(infixCls);
-
-                ret = Instance.invoke(reference, "get");
-            } else {
-                LOGGER.warn(Info.INFIX_IMPL, infixCls.getName(), Infix.class.getName());
-            }
-        } else {
-            LOGGER.warn(Info.INFIX_NULL, pluginKey, field.getName(), field.getDeclaringClass().getName());
-        }
-        return ret;
     }
 }

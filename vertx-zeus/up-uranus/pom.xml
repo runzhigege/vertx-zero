@@ -10,4 +10,17 @@
     <modelVersion>4.0.0</modelVersion>
     <name>( Zero Mesh ) Uranus</name>
     <artifactId>up-uranus</artifactId>
+    <dependencies>
+        <!-- Third Part -->
+        <dependency>
+            <groupId>cn.vertxup</groupId>
+            <artifactId>zero-iqiy</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.vertxup</groupId>
+            <artifactId>zero-ali-sms</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>
