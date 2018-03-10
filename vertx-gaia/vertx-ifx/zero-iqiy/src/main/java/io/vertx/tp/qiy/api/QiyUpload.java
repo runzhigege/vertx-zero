@@ -1,10 +1,10 @@
-package io.vertx.tp.plugin.qiy.remote;
+package io.vertx.tp.qiy.api;
 
 import feign.Param;
 import feign.RequestLine;
 import io.vertx.core.json.JsonObject;
 
-public interface QiyUploadApi {
+public interface QiyUpload {
 
     @RequestLine("GET /openupload?filetype={file_type}&filesize={file_size}&access_token={token}")
     JsonObject requestUpload(

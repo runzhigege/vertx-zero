@@ -8,7 +8,7 @@
         <version>0.4.8-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <name>( Vertx Core ) Zero Integration Plugins</name>
+    <name>( Vertx Core ) vertx-tp: Zero Integration</name>
     <artifactId>vertx-tp</artifactId>
     <dependencies>
         <dependency>

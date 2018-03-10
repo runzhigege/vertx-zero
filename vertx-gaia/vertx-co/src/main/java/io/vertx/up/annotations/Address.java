@@ -18,7 +18,7 @@ public @interface Address {
     /**
      * Target address
      *
-     * @return
+     * @return String address value on EventBus
      */
     String value();
 }
