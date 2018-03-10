@@ -1,5 +1,8 @@
 package io.vertx.up.web.anima;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
 interface Info {
 
     String INFIX_NULL = "[ ZERO ] The system scanned null infix for key = {0} " +
@@ -11,4 +14,10 @@ interface Info {
     String SCANED_RULE = "[ ZERO ] ( {0} Rules ) Zero system scanned the folder /codex/ " +
             "to pickup {0} rule definition files.";
 
+}
+
+interface Pool {
+    ConcurrentMap<Class<?>, AffluxInfix> INFIXES = new ConcurrentHashMap<>();
+
+    ConcurrentMap<Class<?>, AffluxPlugin> PLUGINS = new ConcurrentHashMap<>();
 }

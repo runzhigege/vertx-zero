@@ -1,4 +1,4 @@
-package io.vertx.tp.ali.sms;
+package io.vertx.tp.plugin.ali.sms;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;

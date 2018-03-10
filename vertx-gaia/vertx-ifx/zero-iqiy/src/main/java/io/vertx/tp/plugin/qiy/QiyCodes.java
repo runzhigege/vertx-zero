@@ -1,4 +1,4 @@
-package io.vertx.tp.qiy;
+package io.vertx.tp.plugin.qiy;
 
 public interface QiyCodes {
     // Success for response

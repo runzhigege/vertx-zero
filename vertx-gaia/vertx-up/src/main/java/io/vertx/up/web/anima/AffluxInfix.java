@@ -1,0 +1,74 @@
+package io.vertx.up.web.anima;
+
+import io.vertx.core.json.JsonObject;
+import io.vertx.up.eon.Plugins;
+import io.vertx.up.func.Fn;
+import io.vertx.up.log.Annal;
+import io.vertx.up.plugin.Infix;
+import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.web.ZeroAmbient;
+import io.vertx.zero.exception.InjectionLimeKeyException;
+import io.vertx.zero.marshal.node.Node;
+import io.vertx.zero.marshal.node.ZeroUniform;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.util.Set;
+
+class AffluxInfix {
+
+    private transient final Class<?> clazz;
+    private transient final Annal logger;
+
+    static AffluxInfix create(final Class<?> clazz) {
+        return Fn.pool(Pool.INFIXES, clazz, () -> new AffluxInfix(clazz));
+    }
+
+    private AffluxInfix(final Class<?> clazz) {
+        this.clazz = clazz;
+        this.logger = Annal.get(clazz);
+    }
+
+    private Class<? extends Annotation> search(
+            final Field field
+    ) {
+        final Annotation[] annotations = field.getDeclaredAnnotations();
+        final Set<Class<? extends Annotation>>
+                annotationCls = Plugins.INFIX_MAP.keySet();
+        Class<? extends Annotation> hitted = null;
+        for (final Annotation annotation : annotations) {
+            if (annotationCls.contains(annotation.annotationType())) {
+                hitted = annotation.annotationType();
+                break;
+            }
+        }
+        return hitted;
+    }
+
+    Object inject(final Field field) {
+        final Class<? extends Annotation> key = this.search(field);
+        final String pluginKey = Plugins.INFIX_MAP.get(key);
+        final Class<?> infixCls = ZeroAmbient.getPlugin(pluginKey);
+        Object ret = null;
+        if (null != infixCls) {
+            if (Instance.isMatch(infixCls, Infix.class)) {
+                // Config checking
+                final Node<JsonObject> node = Instance.instance(ZeroUniform.class);
+                final JsonObject options = node.read();
+
+                Fn.flingUp(!options.containsKey(pluginKey), this.logger,
+                        InjectionLimeKeyException.class,
+                        this.clazz, infixCls, pluginKey);
+
+                final Infix reference = Instance.singleton(infixCls);
+
+                ret = Instance.invoke(reference, "get");
+            } else {
+                this.logger.warn(Info.INFIX_IMPL, infixCls.getName(), Infix.class.getName());
+            }
+        } else {
+            this.logger.warn(Info.INFIX_NULL, pluginKey, field.getName(), field.getDeclaringClass().getName());
+        }
+        return ret;
+    }
+}

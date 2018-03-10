@@ -1,5 +1,6 @@
 package io.vertx.up.web.anima;
 
+import io.reactivex.Observable;
 import io.vertx.core.Vertx;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.eon.Plugins;
@@ -33,9 +34,10 @@ public class InfixScatter implements Scatter<Vertx> {
 
     @Override
     public void connect(final Vertx vertx) {
+        final ConcurrentMap<String, Class<?>> wholeInjections = ZeroAmbient.getInjections();
         /** Enabled **/
         final ConcurrentMap<String, Class<?>> enabled =
-                Ut.reduce(node.read().keySet(), ZeroAmbient.getInjections());
+                Ut.reduce(node.read().keySet(), wholeInjections);
         /** Scan all Infix **/
         final ConcurrentMap<Class<? extends Annotation>, Class<?>> injections =
                 Ut.reduce(Plugins.INFIX_MAP, enabled);
@@ -48,6 +50,18 @@ public class InfixScatter implements Scatter<Vertx> {
                 Fn.safeJvm(() -> method.invoke(null, vertx), LOGGER);
             }
         });
+        /** Scan all extension Infix **/
+        Observable.fromIterable(wholeInjections.keySet())
+                .filter(key -> !Plugins.Infix.STANDAND.contains(key))
+                .map(wholeInjections::get)
+                .filter(item -> null != item && item.isAnnotationPresent(Plugin.class))
+                .subscribe(item -> {
+                    final Method method = this.findInit(item);
+                    Fn.flingUp(null == method, LOGGER,
+                            PluginSpecificationException.class,
+                            this.getClass(), item.getName());
+                    Fn.safeJvm(() -> method.invoke(null, vertx), LOGGER);
+                });
     }
 
 

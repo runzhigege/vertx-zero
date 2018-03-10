@@ -1,12 +1,12 @@
-package io.vertx.tp.qiy;
+package io.vertx.tp.plugin.qiy;
 
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.qiy.api.QiyAuthorize;
-import io.vertx.tp.qiy.api.QiyUpload;
+import io.vertx.tp.plugin.qiy.api.QiyAuthorize;
+import io.vertx.tp.plugin.qiy.api.QiyUpload;
 import io.vertx.up.exception._401QiyTokenException;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
