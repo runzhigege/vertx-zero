@@ -11,10 +11,11 @@
 
     <artifactId>vertx-ifx</artifactId>
     <packaging>pom</packaging>
-    <name>( Vertx Infix ) Zero Plugins</name>
+    <name>( Vertx Infix ) vertx-ifx: Zero Plugins</name>
     <modules>
         <module>zero-iqiy</module>
         <module>zero-ali-sms</module>
+        <module>zero-qiniu</module>
     </modules>
     <dependencies>
         <dependency>

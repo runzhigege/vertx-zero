@@ -15,15 +15,15 @@ public interface Node<T> {
 
     T read();
 
+    ConcurrentMap<String, Node<JsonObject>> REFERENCES
+            = new ConcurrentHashMap<>();
+
     /**
      * Infix usage for dynamic configuraiton laoding.
      *
-     * @param key
-     * @return
+     * @param key the file extension start with "vertx-xx"
+     * @return Node reference that contains JsonObject data.
      */
-    ConcurrentMap<String, Node<JsonObject>> REFERENCES
-            = new ConcurrentHashMap<>();
-    
     static Node<JsonObject> infix(final String key) {
         return Fn.pool(ZeroInfix.REFERENCES, key, () -> new ZeroInfix(key));
     }

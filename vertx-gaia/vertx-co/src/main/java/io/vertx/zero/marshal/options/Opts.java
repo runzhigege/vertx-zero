@@ -2,7 +2,6 @@ package io.vertx.zero.marshal.options;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
-import io.vertx.zero.exception.DemonException;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.heart.EmptyStreamException;
 import io.vertx.zero.exception.heart.LimeFileException;
@@ -22,15 +21,15 @@ public interface Opts<T> {
     /**
      * Read data from files
      *
-     * @return
-     * @throws DemonException
+     * @return The config data
+     * @throws ZeroException zero exception that prevent start up
      */
     T ingest(String node) throws ZeroException;
 
     /**
      * Read reference of Opts
      *
-     * @return
+     * @return Opts contains json object.
      */
     static Opts<JsonObject> get() {
         return YamlOpts.create();
@@ -46,7 +45,7 @@ class YamlOpts implements Opts<JsonObject> {
      * Default package scope, manually implement singleton
      * instead of Instance.singleton.
      *
-     * @return
+     * @return Opts reference contains JsonObject
      */
     public static Opts<JsonObject> create() {
         if (null == INSTANCE) {
@@ -64,11 +63,8 @@ class YamlOpts implements Opts<JsonObject> {
     private YamlOpts() {
     }
 
-    ;
-
     @Override
-    public JsonObject ingest(final String key)
-            throws ZeroException {
+    public JsonObject ingest(final String key) {
         final Node<JsonObject> node =
                 Fn.pool(EXTENSIONS, key,
                         () -> Node.infix(key));

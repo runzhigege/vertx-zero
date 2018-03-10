@@ -1,6 +1,6 @@
 # D10052 - Utility X, User Data
 
-This chapter we'll discuss the user data in zero system, it used `vertx-auth-common` framework and the user data are stored into `User` object, our Utility X help you to extract data from `User` object instead you typed some duplicated code to get the data especially extract user id/token etc.
+This chapter we'll discuss the user data in zero system, it used `vertx-auth-common` framework and the user data are stored into `User` object, our Utility X help you to extract data from `User` object instead you typed some duplicated code to get the data especially extract user id/config etc.
 
 Utility X provide following methods for you to get data from `User` object:
 

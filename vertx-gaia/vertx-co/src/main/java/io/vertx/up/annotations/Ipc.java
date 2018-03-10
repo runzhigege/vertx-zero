@@ -15,7 +15,7 @@ public @interface Ipc {
     /**
      * Communication type ( 4 categories )
      *
-     * @return
+     * @return different categories of Ipc
      */
     IpcType type() default IpcType.UNITY;
 
@@ -24,7 +24,7 @@ public @interface Ipc {
      * 1. name != "" -> Sender
      * 2. name == "" -> Consumer ( Worker )
      *
-     * @return
+     * @return identify rpc roles: 3 categories
      */
     String name() default "";
 
@@ -33,7 +33,7 @@ public @interface Ipc {
      * current Ipc should be send message to
      * 1. Service ( name = xxx, from = xxx )
      *
-     * @return
+     * @return Used in originasor and coordinator
      */
     String to() default "";
 
@@ -43,7 +43,7 @@ public @interface Ipc {
      * 1. Service ( name = current )
      * 2. value is used instead of from direction.
      *
-     * @return
+     * @return Default value help to identify roles.
      */
     String value() default "";
 }

@@ -8,6 +8,8 @@
         <version>0.4.8-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>zero-iqiy</artifactId>
-    <name>( Vertx Infix ) zero-iqiy: Iqi Video SDK</name>
+
+    <artifactId>zero-qiniu</artifactId>
+    <name>( Vertx Infix ) zero-qiniu: QiNiu Service</name>
+
 </project>
