@@ -1,4 +1,4 @@
 package io.vertx.tp.ali.sms;
 
-public interface AliSmsCodes {
+public interface SmsCodes {
 }

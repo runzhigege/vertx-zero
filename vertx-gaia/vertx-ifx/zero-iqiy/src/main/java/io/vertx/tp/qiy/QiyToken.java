@@ -4,7 +4,6 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.feign.FeignDepot;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.atom.Ruler;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -26,12 +25,7 @@ public class QiyToken implements Serializable {
     private static final String DFT_UPLOAD = "http://upload.iqiyi.com";
     private static final String DFT_QI_CHUAN = "http://qichuan.iqiyi.com";
 
-    private static final FeignDepot DEPOT = FeignDepot.create(KEY);
-
-    static {
-        Fn.safeSemi(null == DEPOT.getEndpoint(), LOGGER,
-                () -> DEPOT.setEndpoint(DFT_ENDPOINT));
-    }
+    private static final FeignDepot DEPOT = FeignDepot.create(KEY, KEY);
 
     public static QiyToken create(final String clientId,
                                   final String clientSecret) {
@@ -39,8 +33,6 @@ public class QiyToken implements Serializable {
     }
 
     public static QiyToken create(final JsonObject config) {
-        Fn.flingUp(() -> Fn.shuntZero(() -> Ruler.verify(KEY, config), config),
-                LOGGER);
         return new QiyToken(config.getString(KEY_ID), config.getString(KEY_SECRET));
     }
 
@@ -75,7 +67,8 @@ public class QiyToken implements Serializable {
     }
 
     public <T> T getInitApi(final Class<T> clazz) {
-        return DEPOT.build(clazz);
+        final String endpoint = DEPOT.getEndpoint();
+        return DEPOT.build(clazz, null == endpoint ? DFT_ENDPOINT : endpoint);
     }
 
     public void clear(final String clientId, final String clientSecret) {
