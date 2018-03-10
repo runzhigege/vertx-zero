@@ -7,8 +7,8 @@ import io.vertx.core.json.JsonObject;
  * AliSmsClient for platform of https://dysms.console.aliyun.com/dysms.htm
  * Message open sdk
  */
-public interface AliSmsClient {
-    
+public interface SmsClient {
+
     @Fluent
-    AliSmsClient init(JsonObject params);
+    SmsClient init(JsonObject params);
 }

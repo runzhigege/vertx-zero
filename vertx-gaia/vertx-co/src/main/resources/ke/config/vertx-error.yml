@@ -7,6 +7,7 @@ E10003: (V) - The field {0} value is "{1}", but expected type is "{2}"
 E10004: (V) - The cluster options is enabled, but the "{0}" vertx instance = "{1}"
 E10005: (V) - The dynamic key "{0}" missing in uniform extension configuration data {1}
 E10006: (V) - The data object {0} contains unsupported/forbidden field "{1}"
+E10007: (V) - The dynamic key "{0}" data type must be JsonObject instead of others, but now "{1}"
 # Thirt part error for different integration
 E20001: (401) - Qiy interface of "/iqiyi/authorize" met errors, code = {0}, message = {1}
 E20002: (401) - Qiy token record does not contain "access_token", client_id = {0}.
