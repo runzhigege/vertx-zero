@@ -2,6 +2,7 @@ package io.vertx.up.tool;
 
 import io.vertx.up.func.Fn;
 
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,6 +38,23 @@ class Numeric {
 
     static boolean isReal(final String original) {
         return isInteger(original) || isDecimal(original);
+    }
+
+    static Integer randomNumber(final int length) {
+        // 1. Generate seed
+        final StringBuilder min = new StringBuilder();
+        final StringBuilder max = new StringBuilder();
+        // 2. Calculate
+        min.append(1);
+        for (int idx = 0; idx < length; idx++) {
+            min.append(0);
+            max.append(9);
+        }
+        // 3. min/max
+        final Integer minValue = Integer.parseInt(min.toString()) / 10;
+        final Integer maxValue = Integer.parseInt(max.toString());
+        final Random random = new Random();
+        return minValue + random.nextInt(maxValue - minValue);
     }
 
     static class Decimal {
