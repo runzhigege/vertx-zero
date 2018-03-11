@@ -305,6 +305,10 @@ public final class Ux {
         return Fn.thenGeneric(consumer);
     }
 
+    public static <T> Future<T> thenGeneric(final Object result, final Future<T> future, final Throwable ex) {
+        return Fn.thenGeneric(result, future, ex);
+    }
+
     // ---------------------- Future --------------------------
 
     /**
@@ -417,7 +421,18 @@ public final class Ux {
     public static class Jooq {
 
         public static UxJooq on(final Class<?> clazz) {
-            return Fn.pool(Pool.JOOQ, clazz, () -> new UxJooq(clazz));
+            return Fn.pool(Cache.JOOQ, clazz, () -> new UxJooq(clazz));
+        }
+    }
+
+    public static class Pool {
+
+        public static UxPool on(final String name) {
+            return Fn.pool(Cache.POOL, name, () -> new UxPool(name));
+        }
+
+        public static UxPool on() {
+            return new UxPool();
         }
     }
 
