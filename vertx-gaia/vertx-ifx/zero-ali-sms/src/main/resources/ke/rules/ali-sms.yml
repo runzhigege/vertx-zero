@@ -8,3 +8,4 @@ typed:
   timeout_connect: INTEGER
   timeout_read: INTEGER
   sign_name: STRING
+  tpl: JOBJECT
