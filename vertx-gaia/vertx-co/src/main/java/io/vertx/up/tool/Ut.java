@@ -327,6 +327,10 @@ public class Ut {
         return Statute.zipper(keys, values);
     }
 
+    // --- Random
+    public static Integer randomNumber(final int length) {
+        return Numeric.randomNumber(length);
+    }
 
     // --- Return
     public static JsonObject returnJObject(final Supplier<JsonObject> supplier) {
