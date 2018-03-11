@@ -23,7 +23,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -75,7 +74,7 @@ public class EventExtractor implements Extractor<Set<Event>> {
     }
 
     private Set<Event> extract(final Class<?> clazz, final String root) {
-        final Set<Event> events = new HashSet<>();
+        final Set<Event> events = new ConcurrentHashSet<>();
         // 0.Preparing
         final Method[] methods = clazz.getDeclaredMethods();
         // 1.Validate Codex annotation appears
@@ -91,6 +90,7 @@ public class EventExtractor implements Extractor<Set<Event>> {
                 this.getClass(), clazz);
         // 2.Build Set
         Observable.fromArray(methods)
+                .filter(MethodResolver::isValid)
                 .map(item -> this.extract(item, root))
                 .filter(Objects::nonNull)
                 .subscribe(events::add);
