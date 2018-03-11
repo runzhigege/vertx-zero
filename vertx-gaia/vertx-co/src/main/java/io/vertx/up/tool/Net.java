@@ -20,12 +20,7 @@ class Net {
             final TelnetClient telnet = new TelnetClient("vt200");
             telnet.setDefaultTimeout(3000);
             telnet.connect(host, port);
-            if (telnet.isAvailable() && telnet.isConnected()) {
-                telnet.disconnect();
-                return Boolean.TRUE;
-            } else {
-                return Boolean.FALSE;
-            }
+            return telnet.isConnected();
         }, host, port);
         return null == reach ? Boolean.FALSE : Boolean.TRUE;
     }
