@@ -20,7 +20,12 @@ class Net {
         final Boolean reach = Fn.getJvm(() -> {
             final Socket socket = new Socket();
             socket.connect(new InetSocketAddress(host, port));
-            return Boolean.TRUE;
+            if (socket.isConnected()) {
+                socket.close();
+                return Boolean.TRUE;
+            } else {
+                return Boolean.FALSE;
+            }
         }, host, port);
         return null == reach ? Boolean.FALSE : Boolean.TRUE;
     }
