@@ -13,6 +13,10 @@
     <name>( Vertx Core ) vertx-co: Zero Infrastructure</name>
     <dependencies>
         <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.vertx</groupId>
             <artifactId>vertx-web</artifactId>
             <exclusions>

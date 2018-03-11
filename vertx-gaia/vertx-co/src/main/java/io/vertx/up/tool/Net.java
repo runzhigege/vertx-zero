@@ -2,10 +2,9 @@ package io.vertx.up.tool;
 
 import io.vertx.up.func.Fn;
 import io.vertx.up.tool.net.IPHost;
+import org.apache.commons.net.telnet.TelnetClient;
 
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.Socket;
 
 class Net {
 
@@ -18,14 +17,10 @@ class Net {
      */
     static boolean isReach(final String host, final int port) {
         final Boolean reach = Fn.getJvm(() -> {
-            final Socket socket = new Socket();
-            socket.connect(new InetSocketAddress(host, port));
-            if (socket.isConnected()) {
-                socket.close();
-                return Boolean.TRUE;
-            } else {
-                return Boolean.FALSE;
-            }
+            final TelnetClient telnet = new TelnetClient("vt200");
+            telnet.setDefaultTimeout(3000);
+            telnet.connect(host, port);
+            return telnet.isConnected();
         }, host, port);
         return null == reach ? Boolean.FALSE : Boolean.TRUE;
     }
