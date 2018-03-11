@@ -1,5 +1,5 @@
 etcd:
-  micro: zero-hotel
+  micro: zero-istio
   nodes:
   - host: localhost
     port: 6181

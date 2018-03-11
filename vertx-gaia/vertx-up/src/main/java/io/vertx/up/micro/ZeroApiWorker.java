@@ -60,7 +60,6 @@ public class ZeroApiWorker extends AbstractVerticle {
         this.vertx.setPeriodic(3000, id -> {
             // Read the latest services
             final ConcurrentMap<String, Record> services = ORIGIN.getRegistryData();
-
             // Read the down services
             final ConcurrentMap<Flag, Set<String>> resultMap = this.calculateServices(services);
 

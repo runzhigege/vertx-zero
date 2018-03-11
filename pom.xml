@@ -94,6 +94,7 @@
         <common.jexl.version>3.1</common.jexl.version>
         <common.lang3.version>3.7</common.lang3.version>
         <common.logging.version>1.2</common.logging.version>
+        <common.net.version>3.6</common.net.version>
         <!-- Rpc -->
         <protobuf.version>3.5.1</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
@@ -198,6 +199,12 @@
                 <groupId>cn.vertxup</groupId>
                 <artifactId>zero-ali-sms</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/commons-net/commons-net -->
+            <dependency>
+                <groupId>commons-net</groupId>
+                <artifactId>commons-net</artifactId>
+                <version>${common.net.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-jexl -->
             <dependency>
