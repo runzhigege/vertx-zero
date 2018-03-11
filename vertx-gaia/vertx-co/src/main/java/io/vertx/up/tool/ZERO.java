@@ -89,12 +89,8 @@ interface Storage {
 }
 
 interface Info {
-    /** **/
-    String INF_PATH = "[ZERO] The system class Stream try to data from {0}, got stream: {1}.";
-    /** **/
-    String INF_CUR = "[ZERO] Current path is scanned by the system, file existing ? {0}.";
-    /** **/
-    String INF_APATH = "[ZERO] Absolute path is hitted: {0}.";
+
+    String INF_NET = "[ ZERO ] Network checking with telnet client = {0}, key = {1}, host = {2}, port = {3}";
 }
 
 interface Pool {
