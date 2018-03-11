@@ -67,7 +67,12 @@ public class SmsClientImpl implements SmsClient {
     @Override
     public SmsClient send(final String mobile, final String tplCode, final JsonObject params,
                           final Handler<AsyncResult<JsonObject>> handler) {
-        final SendSmsRequest request = this.getRequest(mobile, tplCode, params);
+        final SendSmsRequest request = this.getRequest(mobile, this.config.getTpl(tplCode), params);
+        handler.handle(this.getResponse(request));
+        return this;
+    }
+
+    private Future<JsonObject> getResponse(final SendSmsRequest request) {
         try {
             final SendSmsResponse response = this.client.getAcsResponse(request);
             final JsonObject data = new JsonObject();
@@ -75,13 +80,13 @@ public class SmsClientImpl implements SmsClient {
             data.put(SmsConfig.RESPONSE_BUSINESS_ID, response.getBizId());
             data.put(SmsConfig.RESPONSE_CODE, response.getCode());
             data.put(SmsConfig.RESPONSE_MESSAGE, response.getMessage());
-            handler.handle(Future.succeededFuture(data));
+            return Future.succeededFuture(data);
         } catch (final ClientException ex) {
             Fn.flingWeb(true, LOGGER,
                     _424MessageSendException.class,
                     this.getClass(), ex);
+            return Future.failedFuture(ex);
         }
-        return this;
     }
 
     private SendSmsRequest getRequest(final String mobile, final String tplCode, final JsonObject params) {
