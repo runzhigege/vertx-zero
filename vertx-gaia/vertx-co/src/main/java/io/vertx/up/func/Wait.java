@@ -1,6 +1,7 @@
 package io.vertx.up.func;
 
 
+import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.up.func.wait.Case;
 
@@ -8,6 +9,19 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 class Wait {
+
+    @SuppressWarnings("all")
+    static <T> Future<T> then(final Object asyncResult,
+                              final Future<T> future,
+                              final Throwable error) {
+        final AsyncResult<T> result = (AsyncResult<T>) asyncResult;
+        if (result.succeeded()) {
+            future.complete(result.result());
+        } else {
+            future.fail(error);
+        }
+        return future;
+    }
 
     static <T> Future<T> then(final Consumer<Future<T>> consumer) {
         final Future<T> future = Future.future();

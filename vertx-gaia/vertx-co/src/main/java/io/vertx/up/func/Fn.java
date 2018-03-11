@@ -67,6 +67,10 @@ public class Fn {
         return Wait.then(consumer);
     }
 
+    public static <T> Future<T> thenGeneric(final Object result, final Future<T> future, final Throwable ex) {
+        return Wait.then(result, future, ex);
+    }
+
     /**
      * ZeroException out.
      *
