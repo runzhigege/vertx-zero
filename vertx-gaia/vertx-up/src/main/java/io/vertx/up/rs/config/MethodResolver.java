@@ -8,6 +8,7 @@ import io.vertx.zero.exception.MethodNullException;
 import javax.ws.rs.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -50,5 +51,15 @@ class MethodResolver {
             LOGGER.info(Info.METHOD_IGNORE, method.getName());
         }
         return result;
+    }
+
+    public static boolean isValid(final Method method) {
+        final int modifiers = method.getModifiers();
+        final boolean valid = Modifier.isPublic(modifiers) && !Modifier.isStatic(modifiers) &&
+                !Modifier.isAbstract(modifiers) && !Modifier.isNative(modifiers);
+        if (!valid) {
+            LOGGER.info(Info.METHOD_MODIFIER, method.getName());
+        }
+        return valid;
     }
 }
