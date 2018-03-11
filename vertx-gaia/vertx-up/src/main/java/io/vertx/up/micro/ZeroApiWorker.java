@@ -12,7 +12,6 @@ import io.vertx.up.eon.em.MessageModel;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.discovery.ApiOrigin;
-import io.vertx.up.micro.discovery.EtcdEraser;
 import io.vertx.up.micro.discovery.Origin;
 import io.vertx.up.tool.mirror.Instance;
 
@@ -52,10 +51,13 @@ public class ZeroApiWorker extends AbstractVerticle {
             // initialized once.
             this.initializeServices(discovery);
         }
-        this.vertx.setPeriodic(5000, id -> {
-            // Clean ko services ( Ipc & Api )
-            Fn.safeJvm(() -> EtcdEraser.create().start(), LOGGER);
-        });
+        // TODO: Discovery
+        /**
+         this.vertx.setPeriodic(5000, id -> {
+         // Clean ko services ( Ipc & Api )
+         Fn.safeJvm(() -> EtcdEraser.create().start(), LOGGER);
+         });
+         **/
         // Scan the services every 3s
         this.vertx.setPeriodic(3000, id -> {
             // Read the latest services
