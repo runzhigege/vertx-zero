@@ -37,4 +37,8 @@ public class MapInfix implements Infix {
     public static SharedClient<String, Object> getClient() {
         return CLIENTS.get(NAME);
     }
+
+    public static String getDefaultName() {
+        return NAME;
+    }
 }
