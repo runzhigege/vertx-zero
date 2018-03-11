@@ -59,6 +59,7 @@ public class ReceiptExtractor implements Extractor<Set<Receipt>> {
             final Set<Receipt> receipts = new HashSet<>();
             final Method[] methods = clazz.getDeclaredMethods();
             Observable.fromArray(methods)
+                    .filter(MethodResolver::isValid)
                     .filter(method -> method.isAnnotationPresent(Address.class))
                     .map(this::extract)
                     .filter(Objects::nonNull)

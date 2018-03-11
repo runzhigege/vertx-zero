@@ -18,6 +18,9 @@ interface Info {
 
     String METHOD_IGNORE = "[ ZERO ] Method name = {0} has not annotated with " +
             "javax.ws.rs.[@GET,@POST,@PUT,@DELETE,@OPTIONS,@PATCH,@HEAD], ignored resolving.";
+
+    String METHOD_MODIFIER = "[ ZERO ] ( Ignored ) Method name = {0} access scope is invalid, " +
+            "the scope must be public non-static.";
 }
 
 interface Key {
