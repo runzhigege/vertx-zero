@@ -55,8 +55,7 @@ class MethodResolver {
 
     public static boolean isValid(final Method method) {
         final int modifiers = method.getModifiers();
-        final boolean valid = Modifier.isPublic(modifiers) && !Modifier.isStatic(modifiers) &&
-                !Modifier.isAbstract(modifiers) && !Modifier.isNative(modifiers);
+        final boolean valid = Modifier.isPublic(modifiers) && !Modifier.isStatic(modifiers) && !Modifier.isNative(modifiers);
         if (!valid) {
             LOGGER.info(Info.METHOD_MODIFIER, method.getName());
         }
