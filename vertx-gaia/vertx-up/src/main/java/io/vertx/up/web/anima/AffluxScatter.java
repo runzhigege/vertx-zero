@@ -27,8 +27,6 @@ public class AffluxScatter implements Scatter<Vertx> {
 
     private static final AffluxInfix INJECTOR = AffluxInfix.create(AffluxScatter.class);
 
-    private static final AffluxPlugin PLUGIN = AffluxPlugin.create(AffluxScatter.class);
-
     @Override
     public void connect(final Vertx vertx) {
         // Extract all events.
@@ -51,15 +49,6 @@ public class AffluxScatter implements Scatter<Vertx> {
             // Initialize reference
             this.inject(instance);
         }, "injects-afflux-" + index));
-
-        // Extract all Plugins
-        final Set<Class<?>> plugins = ZeroAnno.getTps();
-        Fn.itSet(plugins, (item, index) -> Runner.run(() -> {
-            // Initialize object
-            final Object instance = Instance.singleton(item);
-            // Initialize reference
-            PLUGIN.inject(instance);
-        }, "plugins-afflux-" + index));
     }
 
     private void inject(final Object proxy, final String key, final Class<?> type) {
