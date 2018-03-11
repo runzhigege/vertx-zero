@@ -51,4 +51,12 @@ public class KeyPair<K, V> {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "KeyPair{" +
+                "key=" + this.key +
+                ", value=" + this.value +
+                '}';
+    }
 }
