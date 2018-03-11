@@ -2,6 +2,8 @@ package io.vertx.tp.plugin.ali.sms;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.init.TpConfig;
+import io.vertx.up.func.Fn;
+import io.vertx.up.log.Annal;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -11,7 +13,8 @@ public class SmsConfig implements Serializable {
     private static final String KEY = "ali-sms";
     private static final String KEY_ID = "access_id";
     private static final String KEY_SECRET = "access_secret";
-    private static final String SIGN_NAME = "sign_name";
+    private static final String KEY_SIGN_NAME = "sign_name";
+    private static final String KEY_TPL = "tpl";
 
     static final String TIMEOUT_CONN = "timeout_connect";
     static final String TIMEOUT_READ = "timeout_read";
@@ -30,26 +33,35 @@ public class SmsConfig implements Serializable {
     private final String accessId;
     private final String accessSecret;
     private final String signName;
+    private final JsonObject tpl;
     private String endpoint;
 
     static SmsConfig create(final String accessId,
                             final String accessSecret,
                             final String signName) {
-        return new SmsConfig(accessId, accessSecret, signName);
+        return new SmsConfig(accessId, accessSecret, signName, null);
+    }
+
+    static SmsConfig create(final String accessId,
+                            final String accessSecret,
+                            final String signName,
+                            final JsonObject tpl) {
+        return new SmsConfig(accessId, accessSecret, signName, tpl);
     }
 
     static SmsConfig create(final JsonObject config) {
-        return new SmsConfig(config.getString(KEY_ID), config.getString(KEY_SECRET), config.getString(SIGN_NAME));
+        return new SmsConfig(config.getString(KEY_ID), config.getString(KEY_SECRET), config.getString(KEY_SIGN_NAME), config.getJsonObject(KEY_TPL));
     }
 
     static SmsConfig create() {
         return create(CONFIG.getConfig());
     }
 
-    private SmsConfig(final String accessId, final String accessSecret, final String signName) {
+    private SmsConfig(final String accessId, final String accessSecret, final String signName, final JsonObject tpl) {
         this.accessId = accessId;
         this.accessSecret = accessSecret;
         this.signName = signName;
+        this.tpl = tpl;
         this.endpoint = CONFIG.getEndPoint();
         if (null == this.endpoint) this.endpoint = DFT_DOMAIN;
     }
@@ -74,6 +86,11 @@ public class SmsConfig implements Serializable {
         return this.endpoint;
     }
 
+    public String getTpl(final String key) {
+        return Fn.getSemi(null != this.tpl && this.tpl.containsKey(key), Annal.get(this.getClass()),
+                () -> this.tpl.getString(key));
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -85,7 +102,6 @@ public class SmsConfig implements Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(this.accessId, this.accessSecret);
     }
 }
