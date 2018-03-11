@@ -1,21 +1,19 @@
 package up.micro;
 
+import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.ali.sms.SmsClient;
 import io.vertx.tp.plugin.qiy.QiyClient;
 import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.Codex;
-import io.vertx.up.annotations.EndPoint;
 import io.vertx.up.annotations.Plugin;
+import io.vertx.up.annotations.Queue;
+import io.vertx.up.atom.Envelop;
 import io.vertx.up.plugin.shared.SharedClient;
 
-import javax.ws.rs.BodyParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.inject.Inject;
 
-@EndPoint
-public class InfixApi {
+@Queue
+public class InfixWorker {
 
     @Plugin
     private SharedClient<String, Object> sharedClient;
@@ -23,16 +21,15 @@ public class InfixApi {
     private SmsClient smsClient;
     @Plugin
     private QiyClient qiyClient;
+    @Inject
+    private transient InfixStub stub;
 
-    @Path("/api/say/{type}")
-    @POST
     @Address("ZERO://SHARED")
-    public JsonObject say(@PathParam("type") final String type,
-                          @Codex @BodyParam final JsonObject data) {
+    public Future<JsonObject> shared(final Envelop envelop) {
 
         System.out.println(this.sharedClient);
         System.out.println(this.smsClient);
         System.out.println(this.qiyClient);
-        return new JsonObject();
+        return this.stub.login("Test");
     }
 }
