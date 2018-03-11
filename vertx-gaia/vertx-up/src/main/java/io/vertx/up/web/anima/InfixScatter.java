@@ -3,12 +3,14 @@ package io.vertx.up.web.anima;
 import io.reactivex.Observable;
 import io.vertx.core.Vertx;
 import io.vertx.up.annotations.Plugin;
+import io.vertx.up.concurrent.Runner;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroAmbient;
+import io.vertx.up.web.ZeroAnno;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.PluginSpecificationException;
 import io.vertx.zero.marshal.node.Node;
@@ -19,6 +21,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
@@ -31,6 +34,10 @@ public class InfixScatter implements Scatter<Vertx> {
 
     private static final Node<ConcurrentMap<String, String>> node =
             Instance.singleton(ZeroLime.class);
+
+    private static final Set<Class<?>> PLUGINS = ZeroAnno.getTps();
+
+    private static final InfixPlugin PLUGIN = InfixPlugin.create(InfixScatter.class);
 
     @Override
     public void connect(final Vertx vertx) {
@@ -62,6 +69,13 @@ public class InfixScatter implements Scatter<Vertx> {
                             this.getClass(), item.getName());
                     Fn.safeJvm(() -> method.invoke(null, vertx), LOGGER);
                 });
+        /** After infix inject plugins **/
+        Fn.itSet(PLUGINS, (clazz, index) -> Runner.run(() -> {
+            /** Instance reference **/
+            final Object reference = Instance.singleton(clazz);
+            /** Injects scanner **/
+            PLUGIN.inject(reference);
+        }, "injects-plugin-scannner"));
     }
 
 

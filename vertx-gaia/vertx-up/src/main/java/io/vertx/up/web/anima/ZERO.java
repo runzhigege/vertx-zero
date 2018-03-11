@@ -19,5 +19,5 @@ interface Info {
 interface Pool {
     ConcurrentMap<Class<?>, AffluxInfix> INFIXES = new ConcurrentHashMap<>();
 
-    ConcurrentMap<Class<?>, AffluxPlugin> PLUGINS = new ConcurrentHashMap<>();
+    ConcurrentMap<Class<?>, InfixPlugin> PLUGINS = new ConcurrentHashMap<>();
 }

@@ -14,16 +14,16 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-class AffluxPlugin {
+class InfixPlugin {
 
     private transient final Class<?> clazz;
     private transient final Annal logger;
 
-    static AffluxPlugin create(final Class<?> clazz) {
-        return Fn.pool(Pool.PLUGINS, clazz, () -> new AffluxPlugin(clazz));
+    static InfixPlugin create(final Class<?> clazz) {
+        return Fn.pool(Pool.PLUGINS, clazz, () -> new InfixPlugin(clazz));
     }
 
-    private AffluxPlugin(final Class<?> clazz) {
+    private InfixPlugin(final Class<?> clazz) {
         this.clazz = clazz;
         this.logger = Annal.get(clazz);
     }
