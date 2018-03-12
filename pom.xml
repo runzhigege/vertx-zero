@@ -78,7 +78,7 @@
 
         <jwt.version>3.3.0</jwt.version>
         <reflect.asm.version>1.11.3</reflect.asm.version>
-        <asm.version>6.0</asm.version>
+        <asm.version>6.1</asm.version>
         <lombok.version>1.16.20</lombok.version>
         <guice.version>4.1.0</guice.version>
         <hibernate.validator.version>6.0.8.Final</hibernate.validator.version>
@@ -272,7 +272,7 @@
             <dependency>
                 <groupId>io.github.jklingsporn</groupId>
                 <artifactId>vertx-jooq-shared</artifactId>
-                <version>${vertx.jooq.version}</version>
+                <version>${vertx.jooq.code.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.jklingsporn</groupId>
@@ -282,7 +282,7 @@
             <dependency>
                 <groupId>io.github.jklingsporn</groupId>
                 <artifactId>vertx-jooq-generate</artifactId>
-                <version>${vertx.jooq.version}</version>
+                <version>${vertx.jooq.code.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>io.github.jklingsporn</groupId>
