@@ -66,14 +66,14 @@
         <jws.version>2.1</jws.version>
         <jersey.version>2.26</jersey.version>
         <javax.el.version>3.0.1-b04</javax.el.version>
-        <glassfish.el.version>3.0.1-b09</glassfish.el.version>
+        <glassfish.el.version>3.0.1-b10</glassfish.el.version>
 
         <!-- Database Needed -->
         <hikari.cp.version>2.7.8</hikari.cp.version>
         <jooq.version>3.10.5</jooq.version>
         <vertx.jooq.version>2.4.1</vertx.jooq.version>
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
-        <vertx.jooq.code.version>3.0.1</vertx.jooq.code.version>
+        <vertx.jooq.code.version>3.0.2</vertx.jooq.code.version>
         <mysql.version>8.0.8-dmr</mysql.version>
 
         <jwt.version>3.3.0</jwt.version>
@@ -84,10 +84,10 @@
         <hibernate.validator.version>6.0.8.Final</hibernate.validator.version>
         <scala.version>2.12.4</scala.version>
         <feign.version>8.18.0</feign.version>
-        <guava.version>24.0-jre</guava.version>
+        <guava.version>24.1-jre</guava.version>
         <codehaus.janino.version>3.0.8</codehaus.janino.version>
         <cglib.version>3.2.6</cglib.version>
-        <ignite.version>2.3.0</ignite.version>
+        <ignite.version>2.4.0</ignite.version>
         <etcd.version>2.15.0</etcd.version>
         <mongodb.async.version>3.6.3</mongodb.async.version>
         <!-- Apache Common -->
@@ -119,7 +119,7 @@
         <!-- AspectJ -->
         <aspectj.version>1.8.13</aspectj.version>
         <!-- Logging -->
-        <log4j2.version>2.10.0</log4j2.version>
+        <log4j2.version>2.11.0</log4j2.version>
         <log4j.version>1.2.17</log4j.version>
         <logback.version>1.2.3</logback.version>
         <logback.cal10n.version>0.8.1</logback.cal10n.version>
