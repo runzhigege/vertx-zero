@@ -29,10 +29,7 @@ public class InfixApi {
     @Address("ZERO://SHARED")
     public JsonObject say(@PathParam("type") final String type,
                           @Codex @BodyParam final JsonObject data) {
-
-        System.out.println(this.sharedClient);
-        System.out.println(this.smsClient);
-        System.out.println(this.qiyClient);
+        System.out.println(Thread.currentThread().getName() + Thread.currentThread().getId());
         return new JsonObject();
     }
 }
