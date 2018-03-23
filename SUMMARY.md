@@ -145,6 +145,8 @@
   * [D10102 - Configuration, vertx-redis.yml](doc/vertx-zero-tutorial/d10102-configuration-vertx-redisyml.md)
   * [D10103 - Configuration, vertx-secure.yml](doc/vertx-zero-tutorial/d10103-configuration-vertx-secureyml.md)
   * [D10104 - Security, Jwt Authorization](doc/vertx-zero-tutorial/d10104-security-jwt-authorization.md)
+  * [D10105 - Vert.x Native, SharedData](doc/vertx-zero-tutorial/d10005-vertx-native-shareddata.md)
+  * [D10106 - Configuration, vertx-tp.yml](doc/vertx-zero-tutorial/d10106-configuration-vertx-tpyml.md)
 
 ## Useful Related Documents
 
