@@ -153,12 +153,12 @@ For all tutorial testing cases, you can import following resource with Postman T
    8. [D10075 - Configuration, vertx-rpc.yml](doc/vertx-zero-tutorial/d10075-configuration-vertx-rpcyml.md)
    9. [D10102 - Configuration, vertx-redis.yml](doc/vertx-zero-tutorial/d10102-configuration-vertx-redisyml.md)
    10. [D10103 - Configuration, vertx-secure.yml](doc/vertx-zero-tutorial/d10103-configuration-vertx-secureyml.md)
-   11. [D10106 - Configuration, vertx-tp.yml](/doc/vertx-zero-tutorial/d10106-configuration-vertx-tpyml.md)
+   11. [D10106 - Configuration, vertx-tp.yml](doc/vertx-zero-tutorial/d10106-configuration-vertx-tpyml.md)
 10. Native Support
     1. [D10076 - Vert.x Native, MySqlClient](doc/vertx-zero-tutorial/d10076-vertx-native-mysqlclient.md)
     2. [D10078 - Vert.x Native, MongoClient](doc/vertx-zero-tutorial/d10077-vertx-native-mongoclient.md)
     3. [D10101 - Vert.x Native, RedisClient](doc/vertx-zero-tutorial/d10101-vertx-native-redisclient.md)
-    4. [D10105 - Vert.x Native, SharedData](/doc/vertx-zero-tutorial/d10005-vertx-native-shareddata.md)
+    4. [D10105 - Vert.x Native, SharedData](doc/vertx-zero-tutorial/d10005-vertx-native-shareddata.md)
 11. Micro Service Development
     1. [D10082 - Micro, Environment Preparing](doc/vertx-zero-tutorial/d10082-micro-environment-preparing.md)
     2. [D10083 - Micro, Rpc Mode](doc/vertx-zero-tutorial/d10083-micro-rpc-mode.md)
