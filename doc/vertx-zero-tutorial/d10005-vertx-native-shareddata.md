@@ -52,7 +52,7 @@ public class LoginService implements LoginStub{
     @Plugin
     private transient SharedClient<String, String> sharedClient;
 
-    
+
 }
 ```
 
