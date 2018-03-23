@@ -11,6 +11,7 @@ This framework contains four sub-projects, all these projects are put in `vertx-
 
 * `vertx-gaia/vertx-co`: Core Library of Zero Up Framework
 * `vertx-gaia/vertx-tp`: Third part integration components in Zero Up Framework
+* `vertx-gaia/vertx-ifx`：Chinese Service Plugins for different chinese local cloud services（中国本土插件包）
 * `vertx-gaia/vertx-up`: Zero Up Engine with nested vert.x web container
 * `vertx-gaia/vertx-rx`: Zero Up Engine with nested rxjava web container instead of web container
 * `vertx-import`: Zero Usage dependency project to perform development, provide uniform dependency for your projects.
@@ -58,7 +59,7 @@ Once the Zero is up, you can see following logs in your console \( The default p
 
 For all tutorial testing cases, you can import following resource with Postman Tool
 
-[https://www.getpostman.com/collections/d64b2efe4d47599efe6e](https://www.getpostman.com/collections/d64b2efe4d47599efe6e)
+（Postman link is rebuilding ）
 
 1. Restful Web Service
    1. [D10001 - Getting Start](doc/vertx-zero-tutorial/0-start-up.md)
@@ -152,10 +153,12 @@ For all tutorial testing cases, you can import following resource with Postman T
    8. [D10075 - Configuration, vertx-rpc.yml](doc/vertx-zero-tutorial/d10075-configuration-vertx-rpcyml.md)
    9. [D10102 - Configuration, vertx-redis.yml](doc/vertx-zero-tutorial/d10102-configuration-vertx-redisyml.md)
    10. [D10103 - Configuration, vertx-secure.yml](doc/vertx-zero-tutorial/d10103-configuration-vertx-secureyml.md)
+   11. [D10106 - Configuration, vertx-tp.yml](/doc/vertx-zero-tutorial/d10106-configuration-vertx-tpyml.md)
 10. Native Support
     1. [D10076 - Vert.x Native, MySqlClient](doc/vertx-zero-tutorial/d10076-vertx-native-mysqlclient.md)
     2. [D10078 - Vert.x Native, MongoClient](doc/vertx-zero-tutorial/d10077-vertx-native-mongoclient.md)
     3. [D10101 - Vert.x Native, RedisClient](doc/vertx-zero-tutorial/d10101-vertx-native-redisclient.md)
+    4. [D10105 - Vert.x Native, SharedData](/doc/vertx-zero-tutorial/d10005-vertx-native-shareddata.md)
 11. Micro Service Development
     1. [D10082 - Micro, Environment Preparing](doc/vertx-zero-tutorial/d10082-micro-environment-preparing.md)
     2. [D10083 - Micro, Rpc Mode](doc/vertx-zero-tutorial/d10083-micro-rpc-mode.md)
@@ -172,13 +175,16 @@ For all tutorial testing cases, you can import following resource with Postman T
 12. Security Module
     1. [D10095 - Security, Basic Authorization](doc/vertx-zero-tutorial/d10095-security-basic-authorization.md)
     2. [D10104 - Security, Jwt Authorization](doc/vertx-zero-tutorial/d10104-security-jwt-authorization.md)
-13. Third Part Reference
+13. Chinese Plugins
+14. Third Part Reference
     1. [D10077 - Reference, Mongo Setup](doc/vertx-zero-tutorial/d10077-third-part-mongo-setup.md)
     2. [D10079 - Reference, Mini k8s](doc/vertx-zero-tutorial/d10079-reference-mini-k8s.md)
     3. [D10080 - Reference, Istio](doc/vertx-zero-tutorial/d10080-reference-istio.md)
     4. [D10081 - Reference, Istio Addon](doc/vertx-zero-tutorial/d10081-reference-istio-addon.md)
 
-## 4. Logging in Zero
+## 4. Case in Action
+
+## 5. Logging in Zero
 
 You also could use following function in your coding to get Logger component.
 
