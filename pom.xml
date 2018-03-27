@@ -62,7 +62,7 @@
         <vertx.version>3.5.1</vertx.version>
         <stack.version>3.5.1</stack.version>
 
-        <jackson.version>2.9.4</jackson.version>
+        <jackson.version>2.9.5</jackson.version>
         <jws.version>2.1</jws.version>
         <jersey.version>2.26</jersey.version>
         <javax.el.version>3.0.1-b04</javax.el.version>
@@ -73,7 +73,7 @@
         <jooq.version>3.10.6</jooq.version>
         <vertx.jooq.version>2.4.1</vertx.jooq.version>
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
-        <vertx.jooq.code.version>3.0.2</vertx.jooq.code.version>
+        <vertx.jooq.code.version>3.1.0</vertx.jooq.code.version>
         <mysql.version>8.0.8-dmr</mysql.version>
 
         <jwt.version>3.3.0</jwt.version>
@@ -81,7 +81,7 @@
         <asm.version>6.1.1</asm.version>
         <lombok.version>1.16.20</lombok.version>
         <guice.version>4.1.0</guice.version>
-        <hibernate.validator.version>6.0.8.Final</hibernate.validator.version>
+        <hibernate.validator.version>6.0.9.Final</hibernate.validator.version>
         <scala.version>2.12.4</scala.version>
         <feign.version>8.18.0</feign.version>
         <guava.version>24.1-jre</guava.version>
@@ -101,7 +101,7 @@
         <grpc.version>1.10.1</grpc.version>
         <!-- Vert.x Addition -->
         <rxjava2.version>2.1.12</rxjava2.version>
-        <netty.tcnative.version>2.0.7.Final</netty.tcnative.version>
+        <netty.tcnative.version>2.0.8.Final</netty.tcnative.version>
         <netty.version>4.1.22.Final</netty.version>
         <hazelcast.version>3.9.3</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
