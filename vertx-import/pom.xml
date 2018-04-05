@@ -20,7 +20,7 @@
         <jooq.version>3.10.6</jooq.version>
         <hazelcast.version>3.9.3</hazelcast.version>
         <maven.javadoc.skip>true</maven.javadoc.skip>
-        <aspectj.version>1.8.13</aspectj.version>
+        <aspectj.version>1.9.0</aspectj.version>
     </properties>
     <dependencies>
         <dependency>
