@@ -17,6 +17,8 @@ This framework contains four sub-projects, all these projects are put in `vertx-
 * `vertx-import`: Zero Usage dependency project to perform development, provide uniform dependency for your projects.
 * `vertx-zeus/*`: Zero Examples, it contains all the tutorials of this framework
 
+> If your wan't to study vert.x development skill, you can refer chinese tutorial:[《Vert.x逐陆记》](https://silentbalanceyh.gitbooks.io/vert-x/content/).
+
 ![](doc/image/zero-up.png)
 
 ## 1. Envrionment
