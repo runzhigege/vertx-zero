@@ -650,6 +650,12 @@
                 <artifactId>mongodb-driver-async</artifactId>
                 <version>${mongodb.async.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongo-java-driver</artifactId>
+                <version>${mongodb.async.version}</version>
+            </dependency>
             <!-- https://mvnrepository.com/artifact/org.reactivestreams/reactive-streams -->
             <dependency>
                 <groupId>org.reactivestreams</groupId>
