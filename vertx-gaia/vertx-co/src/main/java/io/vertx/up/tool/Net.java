@@ -1,21 +1,14 @@
 package io.vertx.up.tool;
 
 import io.vertx.up.func.Fn;
-import io.vertx.up.log.Annal;
 import io.vertx.up.tool.net.IPHost;
-import org.apache.commons.net.telnet.TelnetClient;
 
 import java.net.InetAddress;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 
 class Net {
-
-    private static final Annal LOGGER = Annal.get(Net.class);
-
-    private static final ConcurrentMap<String, TelnetClient> TELNETS =
-            new ConcurrentHashMap<>();
-
+    
     /**
      * Check whether host:port is ok to connect
      *
@@ -24,18 +17,23 @@ class Net {
      * @return
      */
     static boolean isReach(final String host, final int port) {
-        final Boolean reach = Fn.getJvm(() -> {
-            final String key = Codec.sha256(host + port);
-            final TelnetClient telnet = Fn.pool(TELNETS, key, () -> {
-                final TelnetClient instance = new TelnetClient("vt200");
-                instance.setDefaultTimeout(3000);
-                return instance;
-            });
-            LOGGER.debug(Info.INF_NET, String.valueOf(telnet.hashCode()), key, host, String.valueOf(port));
-            telnet.connect(host, port);
-            return telnet.isConnected();
+        return isReach(host, port, 3000);
+    }
+
+    static boolean isReach(final String host, final int port, final Integer timeOut) {
+        return Fn.getJvm(() -> {
+            // 1.Check whether host is reachalbe
+            final Boolean hostOk =
+                    Fn.getJvm(() -> InetAddress.getByName(host).isReachable(timeOut), host, timeOut);
+            // 2.Check whether host/port could be connected.
+            return hostOk ? (Fn.getJvm(Boolean.FALSE, () -> {
+                final Socket socket = new Socket();
+                socket.connect(new InetSocketAddress(host, port));
+                final boolean reached = socket.isConnected();
+                socket.close();
+                return reached;
+            })) : hostOk;
         }, host, port);
-        return null == reach ? Boolean.FALSE : Boolean.TRUE;
     }
 
     /**
