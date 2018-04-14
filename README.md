@@ -144,24 +144,26 @@ For all tutorial testing cases, you can import following resource with Postman T
    6. [D10066 - Jooq/CRUD, Filter Syntax](doc/vertx-zero-tutorial/d10066-jooqcrud-filter-syntax.md)
    7. [D10067 - Jooq/CRUD, Paging/Sorting](doc/vertx-zero-tutorial/d10067-jooqcrud-advanced-search-operation.md)
    8. [D10097 - Jooq/CRUD, Save/Existing Operation](doc/vertx-zero-tutorial/d10097-jooqcrud-save-operation.md)
-9. Yaml Connfiguration
-   1. [D10068 - Configuration, vertx.yml](doc/vertx-zero-tutorial/d10068-fragment-yaml-configuration.md)
-   2. [D10069 - Configuration, vertx-server.yml](doc/vertx-zero-tutorial/d10069-configuration-vertx-serveryml.md)
-   3. [D10070 - Configuration, vertx-inject.yml](doc/vertx-zero-tutorial/d10070-configuration-vertx-injectyml.md)
-   4. [D10071 - Configuration, vertx-error.yml](doc/vertx-zero-tutorial/d10071-configuration-vertx-erroryml.md)
-   5. [D10072 - Configuration, vertx-mysql.yml](doc/vertx-zero-tutorial/d10072-configuration-vertx-mysqlyml.md)
-   6. [D10073 - Configuration, vertx-mongo.yml](doc/vertx-zero-tutorial/d10073-configuration-vertx-mongoyml.md)
-   7. [D10074 - Configuration, vertx-etcd3.yml](doc/vertx-zero-tutorial/d10074-configuration-vertx-etcd3yml.md)
-   8. [D10075 - Configuration, vertx-rpc.yml](doc/vertx-zero-tutorial/d10075-configuration-vertx-rpcyml.md)
-   9. [D10102 - Configuration, vertx-redis.yml](doc/vertx-zero-tutorial/d10102-configuration-vertx-redisyml.md)
-   10. [D10103 - Configuration, vertx-secure.yml](doc/vertx-zero-tutorial/d10103-configuration-vertx-secureyml.md)
-   11. [D10106 - Configuration, vertx-tp.yml](doc/vertx-zero-tutorial/d10106-configuration-vertx-tpyml.md)
-10. Native Support
+9. Mongo
+   1. [D10107 - Mongo, Configuration](/doc/vertx-zero-tutorial/d10107-mongo-configuration.md)
+10. Yaml Connfiguration
+    1. [D10068 - Configuration, vertx.yml](doc/vertx-zero-tutorial/d10068-fragment-yaml-configuration.md)
+    2. [D10069 - Configuration, vertx-server.yml](doc/vertx-zero-tutorial/d10069-configuration-vertx-serveryml.md)
+    3. [D10070 - Configuration, vertx-inject.yml](doc/vertx-zero-tutorial/d10070-configuration-vertx-injectyml.md)
+    4. [D10071 - Configuration, vertx-error.yml](doc/vertx-zero-tutorial/d10071-configuration-vertx-erroryml.md)
+    5. [D10072 - Configuration, vertx-mysql.yml](doc/vertx-zero-tutorial/d10072-configuration-vertx-mysqlyml.md)
+    6. [D10073 - Configuration, vertx-mongo.yml](doc/vertx-zero-tutorial/d10073-configuration-vertx-mongoyml.md)
+    7. [D10074 - Configuration, vertx-etcd3.yml](doc/vertx-zero-tutorial/d10074-configuration-vertx-etcd3yml.md)
+    8. [D10075 - Configuration, vertx-rpc.yml](doc/vertx-zero-tutorial/d10075-configuration-vertx-rpcyml.md)
+    9. [D10102 - Configuration, vertx-redis.yml](doc/vertx-zero-tutorial/d10102-configuration-vertx-redisyml.md)
+    10. [D10103 - Configuration, vertx-secure.yml](doc/vertx-zero-tutorial/d10103-configuration-vertx-secureyml.md)
+    11. [D10106 - Configuration, vertx-tp.yml](doc/vertx-zero-tutorial/d10106-configuration-vertx-tpyml.md)
+11. Native Support
     1. [D10076 - Vert.x Native, MySqlClient](doc/vertx-zero-tutorial/d10076-vertx-native-mysqlclient.md)
     2. [D10078 - Vert.x Native, MongoClient](doc/vertx-zero-tutorial/d10077-vertx-native-mongoclient.md)
     3. [D10101 - Vert.x Native, RedisClient](doc/vertx-zero-tutorial/d10101-vertx-native-redisclient.md)
     4. [D10105 - Vert.x Native, SharedData](doc/vertx-zero-tutorial/d10005-vertx-native-shareddata.md)
-11. Micro Service Development
+12. Micro Service Development
     1. [D10082 - Micro, Environment Preparing](doc/vertx-zero-tutorial/d10082-micro-environment-preparing.md)
     2. [D10083 - Micro, Rpc Mode](doc/vertx-zero-tutorial/d10083-micro-rpc-mode.md)
     3. [D10084 - Micro, Configuration](doc/vertx-zero-tutorial/d10084-micro-yaml-configuration.md)
@@ -174,11 +176,11 @@ For all tutorial testing cases, you can import following resource with Postman T
     10. [D10091 - Micro Stream, Consumer Async Mode to Terminator](doc/vertx-zero-tutorial/d10091-micro-stream-consumer-async-to-terminator.md)
     11. [D10092 - Micro Stream, Consumer T Mode to Terminator](doc/vertx-zero-tutorial/d10092-micro-stream-consumer-t-mode-to-terminator.md)
     12. [D10093 - Micro Stream, Originator/Coordinator/Terminator](doc/vertx-zero-tutorial/d10093-micro-stream-originatorcoordinatorterminator.md)
-12. Security Module
+13. Security Module
     1. [D10095 - Security, Basic Authorization](doc/vertx-zero-tutorial/d10095-security-basic-authorization.md)
     2. [D10104 - Security, Jwt Authorization](doc/vertx-zero-tutorial/d10104-security-jwt-authorization.md)
-13. Chinese Plugins
-14. Third Part Reference
+14. Chinese Plugins
+15. Third Part Reference
     1. [D10077 - Reference, Mongo Setup](doc/vertx-zero-tutorial/d10077-third-part-mongo-setup.md)
     2. [D10079 - Reference, Mini k8s](doc/vertx-zero-tutorial/d10079-reference-mini-k8s.md)
     3. [D10080 - Reference, Istio](doc/vertx-zero-tutorial/d10080-reference-istio.md)
