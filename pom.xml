@@ -69,12 +69,12 @@
         <glassfish.el.version>3.0.1-b10</glassfish.el.version>
 
         <!-- Database Needed -->
-        <hikari.cp.version>3.0.0</hikari.cp.version>
+        <hikari.cp.version>3.1.0</hikari.cp.version>
         <jooq.version>3.10.6</jooq.version>
         <vertx.jooq.version>2.4.1</vertx.jooq.version>
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
         <vertx.jooq.code.version>3.1.0</vertx.jooq.code.version>
-        <mysql.version>8.0.8-dmr</mysql.version>
+        <mysql.version>8.0.11</mysql.version>
 
         <jwt.version>3.3.0</jwt.version>
         <reflect.asm.version>1.11.3</reflect.asm.version>
@@ -88,7 +88,7 @@
         <codehaus.janino.version>3.0.8</codehaus.janino.version>
         <cglib.version>3.2.6</cglib.version>
         <ignite.version>2.4.0</ignite.version>
-        <etcd.version>2.15.0</etcd.version>
+        <etcd.version>2.16.0</etcd.version>
         <mongodb.async.version>3.6.3</mongodb.async.version>
         <!-- Apache Common -->
         <common.jexl.version>3.1</common.jexl.version>
@@ -103,9 +103,9 @@
         <rxjava2.version>2.1.12</rxjava2.version>
         <netty.tcnative.version>2.0.8.Final</netty.tcnative.version>
         <netty.version>4.1.22.Final</netty.version>
-        <hazelcast.version>3.9.3</hazelcast.version>
+        <hazelcast.version>3.10</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
-        <error.prone.version>2.2.0</error.prone.version>
+        <error.prone.version>2.3.1</error.prone.version>
         <reactive.streams>1.0.2</reactive.streams>
         <!-- JSR -->
         <jsr311.version>1.1.1</jsr311.version>
@@ -113,11 +113,11 @@
         <jsr303.version>2.0.1.Final</jsr303.version>
         <jcache.version>1.1.0</jcache.version>
         <jsr305.version>3.0.2</jsr305.version>
-        <jsr340.version>4.0.0</jsr340.version>
+        <jsr340.version>4.0.1</jsr340.version>
         <!-- Testing -->
         <junit.version>4.12</junit.version>
         <!-- AspectJ -->
-        <aspectj.version>1.9.0</aspectj.version>
+        <aspectj.version>1.9.1</aspectj.version>
         <!-- Logging -->
         <log4j2.version>2.11.0</log4j2.version>
         <log4j.version>1.2.17</log4j.version>

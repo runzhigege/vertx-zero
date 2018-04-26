@@ -147,6 +147,7 @@
   * [D10104 - Security, Jwt Authorization](doc/vertx-zero-tutorial/d10104-security-jwt-authorization.md)
   * [D10105 - Vert.x Native, SharedData](doc/vertx-zero-tutorial/d10005-vertx-native-shareddata.md)
   * [D10106 - Configuration, vertx-tp.yml](doc/vertx-zero-tutorial/d10106-configuration-vertx-tpyml.md)
+  * [D10107 - Mongo, Configuration](doc/vertx-zero-tutorial/d10107-mongo-configuration.md)
 
 ## Useful Related Documents
 
