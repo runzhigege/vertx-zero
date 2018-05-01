@@ -157,7 +157,7 @@ class Period {
         }, literal);
     }
 
-    static List<String> getDaysBetween(String from, String to) {
+    static List<String> valueDurationDays(String from, String to) {
         List<String> result = new ArrayList<String>();
         LocalDate begin = LocalDate.parse(from);
         result.add(begin.format(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US)));
