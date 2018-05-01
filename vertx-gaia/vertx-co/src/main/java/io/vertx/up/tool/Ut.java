@@ -297,6 +297,10 @@ public class Ut {
         return Period.toTime(literal);
     }
 
+    public static List<String> getDaysBetween(String from, String to) {
+        return Period.getDaysBetween(from, to);
+    }
+
     // --- Json Visit
     public static JsonObject visitJObject(final JsonObject item, final String... keys) {
         return Jackson.visitJObject(item, keys);

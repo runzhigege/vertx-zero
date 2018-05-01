@@ -157,6 +157,18 @@ class Period {
         }, literal);
     }
 
+    static List<String> getDaysBetween(String from, String to) {
+        List<String> result = new ArrayList<String>();
+        LocalDate begin = LocalDate.parse(from);
+        result.add(begin.format(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US)));
+        LocalDate end = LocalDate.parse(to);
+        while (end.isAfter(begin)) {
+            begin = begin.plusDays(1);
+            result.add(begin.format(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US)));
+        }
+        return result;
+    }
+
     static boolean equalDate(final Date left, final Date right) {
         // Compare year
         int leftVal = toItem(left, Calendar.YEAR);
