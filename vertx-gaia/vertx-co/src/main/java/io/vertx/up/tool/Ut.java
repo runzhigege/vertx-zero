@@ -297,8 +297,8 @@ public class Ut {
         return Period.toTime(literal);
     }
 
-    public static List<String> getDaysBetween(String from, String to) {
-        return Period.getDaysBetween(from, to);
+    public static List<String> valueDurationDays(String from, String to) {
+        return Period.valueDurationDays(from, to);
     }
 
     // --- Json Visit
