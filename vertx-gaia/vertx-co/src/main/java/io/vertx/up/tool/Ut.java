@@ -297,6 +297,10 @@ public class Ut {
         return Period.toTime(literal);
     }
 
+    public static List<String> valueDurationDays(String from, String to) {
+        return Period.valueDurationDays(from, to);
+    }
+
     // --- Json Visit
     public static JsonObject visitJObject(final JsonObject item, final String... keys) {
         return Jackson.visitJObject(item, keys);
