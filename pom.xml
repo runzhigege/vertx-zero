@@ -59,8 +59,8 @@
         <encoding>UTF-8</encoding>
         <jcabi.version>0.22.6</jcabi.version>
         <!-- Vertx 3.5.1 SNAPSHOT, For testing -->
-        <vertx.version>3.5.1</vertx.version>
-        <stack.version>3.5.1</stack.version>
+        <vertx.version>3.5.2.CR1</vertx.version>
+        <stack.version>3.5.2.CR1</stack.version>
 
         <jackson.version>2.9.5</jackson.version>
         <jws.version>2.1</jws.version>
@@ -81,10 +81,10 @@
         <asm.version>6.1.1</asm.version>
         <lombok.version>1.16.20</lombok.version>
         <guice.version>4.1.0</guice.version>
-        <hibernate.validator.version>6.0.9.Final</hibernate.validator.version>
+        <hibernate.validator.version>6.0.10.Final</hibernate.validator.version>
         <scala.version>2.12.4</scala.version>
         <feign.version>8.18.0</feign.version>
-        <guava.version>24.1-jre</guava.version>
+        <guava.version>25.0-jre</guava.version>
         <codehaus.janino.version>3.0.8</codehaus.janino.version>
         <cglib.version>3.2.6</cglib.version>
         <ignite.version>2.4.0</ignite.version>
