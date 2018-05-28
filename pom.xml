@@ -165,6 +165,11 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>io.vertx</groupId>
+                <artifactId>vertx-docgen</artifactId>
+                <version>${vertx.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>cn.vertxup</groupId>
                 <artifactId>vertx-co</artifactId>
                 <version>${project.version}</version>
