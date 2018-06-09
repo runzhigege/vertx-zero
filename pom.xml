@@ -59,8 +59,8 @@
         <encoding>UTF-8</encoding>
         <jcabi.version>0.22.6</jcabi.version>
         <!-- Vertx 3.5.1 SNAPSHOT, For testing -->
-        <vertx.version>3.5.2.CR3</vertx.version>
-        <stack.version>3.5.2.CR3</stack.version>
+        <vertx.version>3.5.2</vertx.version>
+        <stack.version>3.5.2</stack.version>
 
         <jackson.version>2.9.5</jackson.version>
         <jws.version>2.1</jws.version>
@@ -69,8 +69,8 @@
         <glassfish.el.version>3.0.1-b10</glassfish.el.version>
 
         <!-- Database Needed -->
-        <hikari.cp.version>3.1.0</hikari.cp.version>
-        <jooq.version>3.10.7</jooq.version>
+        <hikari.cp.version>3.2.0</hikari.cp.version>
+        <jooq.version>3.11.0</jooq.version>
         <vertx.jooq.version>2.4.1</vertx.jooq.version>
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
         <vertx.jooq.code.version>3.1.0</vertx.jooq.code.version>
@@ -79,7 +79,7 @@
         <jwt.version>3.3.0</jwt.version>
         <reflect.asm.version>1.11.3</reflect.asm.version>
         <asm.version>6.2</asm.version>
-        <lombok.version>1.16.22</lombok.version>
+        <lombok.version>1.18.0</lombok.version>
         <guice.version>4.1.0</guice.version>
         <hibernate.validator.version>6.0.10.Final</hibernate.validator.version>
         <scala.version>2.12.4</scala.version>
@@ -103,7 +103,7 @@
         <rxjava2.version>2.1.14</rxjava2.version>
         <netty.tcnative.version>2.0.8.Final</netty.tcnative.version>
         <netty.version>4.1.24.Final</netty.version>
-        <hazelcast.version>3.10.1</hazelcast.version>
+        <hazelcast.version>3.10.2</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
         <error.prone.version>2.3.1</error.prone.version>
         <reactive.streams>1.0.2</reactive.streams>
