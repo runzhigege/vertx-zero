@@ -62,7 +62,7 @@
         <vertx.version>3.5.2</vertx.version>
         <stack.version>3.5.2</stack.version>
 
-        <jackson.version>2.9.5</jackson.version>
+        <jackson.version>2.9.6</jackson.version>
         <jws.version>2.1</jws.version>
         <jersey.version>2.27</jersey.version>
         <javax.el.version>3.0.1-b04</javax.el.version>
@@ -70,14 +70,14 @@
 
         <!-- Database Needed -->
         <hikari.cp.version>3.2.0</hikari.cp.version>
-        <jooq.version>3.11.0</jooq.version>
+        <jooq.version>3.10.7</jooq.version>
         <vertx.jooq.version>2.4.1</vertx.jooq.version>
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
         <vertx.jooq.code.version>3.1.0</vertx.jooq.code.version>
         <mysql.version>8.0.11</mysql.version>
 
-        <jwt.version>3.3.0</jwt.version>
-        <reflect.asm.version>1.11.3</reflect.asm.version>
+        <jwt.version>3.4.0</jwt.version>
+        <reflect.asm.version>1.11.7</reflect.asm.version>
         <asm.version>6.2</asm.version>
         <lombok.version>1.18.0</lombok.version>
         <guice.version>4.1.0</guice.version>
@@ -96,11 +96,11 @@
         <common.logging.version>1.2</common.logging.version>
         <common.net.version>3.6</common.net.version>
         <!-- Rpc -->
-        <protobuf.version>3.5.1</protobuf.version>
+        <protobuf.version>3.6.0</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
-        <grpc.version>1.12.0</grpc.version>
+        <grpc.version>1.13.1</grpc.version>
         <!-- Vert.x Addition -->
-        <rxjava2.version>2.1.14</rxjava2.version>
+        <rxjava2.version>2.1.15</rxjava2.version>
         <netty.tcnative.version>2.0.8.Final</netty.tcnative.version>
         <netty.version>4.1.24.Final</netty.version>
         <hazelcast.version>3.10.2</hazelcast.version>
