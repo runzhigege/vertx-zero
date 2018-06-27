@@ -89,7 +89,7 @@
         <cglib.version>3.2.6</cglib.version>
         <ignite.version>2.5.0</ignite.version>
         <etcd.version>2.16.0</etcd.version>
-        <mongodb.async.version>3.6.3</mongodb.async.version>
+        <mongodb.async.version>3.8.0</mongodb.async.version>
         <!-- Apache Common -->
         <common.jexl.version>3.1</common.jexl.version>
         <common.lang3.version>3.7</common.lang3.version>
@@ -100,7 +100,7 @@
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
         <grpc.version>1.13.1</grpc.version>
         <!-- Vert.x Addition -->
-        <rxjava2.version>2.1.15</rxjava2.version>
+        <rxjava2.version>2.1.16</rxjava2.version>
         <netty.tcnative.version>2.0.8.Final</netty.tcnative.version>
         <netty.version>4.1.24.Final</netty.version>
         <hazelcast.version>3.10.2</hazelcast.version>
@@ -128,7 +128,7 @@
         <maven.plugin.assembly>3.1.0</maven.plugin.assembly>
         <maven.plugin.compiler>3.7.0</maven.plugin.compiler>
         <maven.plugin.surefire>2.21.0</maven.plugin.surefire>
-        <maven.plugin.clean>3.0.0</maven.plugin.clean>
+        <maven.plugin.clean>3.1.0</maven.plugin.clean>
         <maven.plugin.version>2.5</maven.plugin.version>
         <maven.plugin.install>2.5.2</maven.plugin.install>
         <maven.plugin.deploy>2.8.2</maven.plugin.deploy>
@@ -136,7 +136,7 @@
         <maven.plugin.resource>3.0.2</maven.plugin.resource>
         <maven.plugin.site>3.7</maven.plugin.site>
         <maven.plugin.enforcer>3.0.0-M1</maven.plugin.enforcer>
-        <maven.plugin.lombok>1.16.22.0</maven.plugin.lombok>
+        <maven.plugin.lombok>1.18.0.0</maven.plugin.lombok>
         <maven.plugin.processor>3.3.3</maven.plugin.processor>
         <maven.plugin.source>3.0.1</maven.plugin.source>
         <maven.plugin.javadoc>2.10.4</maven.plugin.javadoc>
