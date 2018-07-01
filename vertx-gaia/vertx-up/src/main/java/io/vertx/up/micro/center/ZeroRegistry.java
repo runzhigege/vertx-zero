@@ -44,13 +44,13 @@ public class ZeroRegistry {
     private final transient Annal logger;
     private final transient EtcdData etcd;
 
-    public static ZeroRegistry create(final Class<?> useCls) {
-        return Fn.poolThread(REGISTRY_MAP, () -> new ZeroRegistry(useCls));
-    }
-
     private ZeroRegistry(final Class<?> useCls) {
         this.etcd = EtcdData.create(useCls);
         this.logger = Annal.get(useCls);
+    }
+
+    public static ZeroRegistry create(final Class<?> useCls) {
+        return Fn.poolThread(REGISTRY_MAP, () -> new ZeroRegistry(useCls));
     }
 
     /**
