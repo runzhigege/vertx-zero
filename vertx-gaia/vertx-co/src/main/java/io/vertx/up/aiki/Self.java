@@ -45,6 +45,22 @@ class Self {
         return result;
     }
 
+    static JsonObject pickup(
+            final JsonObject entity,
+            final String... keys
+    ) {
+        final JsonObject result = new JsonObject();
+        Observable.fromArray(keys)
+                .filter(Ut::notNil)
+                .subscribe(key -> {
+                    final Object value = entity.getValue(key);
+                    result.put(key, value);
+                });
+        entity.clear();
+        entity.mergeIn(result, true);
+        return entity;
+    }
+
     static JsonArray remove(
             final JsonArray array,
             final boolean immutable,

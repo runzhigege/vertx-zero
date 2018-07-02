@@ -65,7 +65,7 @@
         <jackson.version>2.9.6</jackson.version>
         <jws.version>2.1</jws.version>
         <jersey.version>2.27</jersey.version>
-        <javax.el.version>3.0.1-b04</javax.el.version>
+        <javax.el.version>3.0.1-b06</javax.el.version>
         <glassfish.el.version>3.0.1-b10</glassfish.el.version>
 
         <!-- Database Needed -->
