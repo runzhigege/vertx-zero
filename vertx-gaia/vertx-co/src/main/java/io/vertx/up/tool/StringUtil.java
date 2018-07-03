@@ -92,7 +92,7 @@ class StringUtil {
     }
 
     private static char randomChar() {
-        final Random random = new Random(System.currentTimeMillis());
+        final Random random = new Random();
         return SEED.charAt(random.nextInt(SEED.length()));
     }
 
