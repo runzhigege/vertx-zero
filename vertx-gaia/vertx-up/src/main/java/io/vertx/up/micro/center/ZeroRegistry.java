@@ -73,7 +73,7 @@ public class ZeroRegistry {
         this.logger.debug(Info.ETCD_READ, path);
         final String node = this.etcd.readData(path);
         final Set<JsonObject> sets = new HashSet<>();
-        if (null != node) {
+        if (!Ut.isNil(node)) {
             final JsonArray value = new JsonArray(node);
             sets.addAll(convert.apply(key, value));
         }
