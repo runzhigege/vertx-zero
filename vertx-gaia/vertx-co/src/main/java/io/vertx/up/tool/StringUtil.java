@@ -7,6 +7,7 @@ import io.vertx.zero.exception.heart.JexlExpressionException;
 import org.apache.commons.jexl3.*;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -16,6 +17,9 @@ class StringUtil {
 
     private static final JexlEngine EXPR = new JexlBuilder()
             .cache(512).silent(false).create();
+
+    private static final String SEED =
+            "01234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
 
     static String from(final Object value) {
         return null == value ? Strings.EMPTY : value.toString();
@@ -67,20 +71,36 @@ class StringUtil {
         return join(data);
     }
 
+    private static String repeat(final Integer times, final char fill) {
+        final StringBuilder builder = new StringBuilder();
+        for (int idx = 0; idx < times; idx++) {
+            builder.append(fill);
+        }
+        return builder.toString();
+    }
+
     static String aequilatus(final Integer seed, final Integer width, final char fill) {
         final StringBuilder builder = new StringBuilder();
         final int seedLen = seed.toString().length();
         int fillLen = width - seedLen;
-        if (0 > fillLen) fillLen = 0;
+        if (0 > fillLen) {
+            fillLen = 0;
+        }
         builder.append(repeat(fillLen, fill));
         builder.append(seed);
         return builder.toString();
     }
 
-    static String repeat(final Integer times, final char fill) {
+    private static char randomChar() {
+        final Random random = new Random(System.currentTimeMillis());
+        return SEED.charAt(random.nextInt(SEED.length()));
+    }
+
+    static String random(int length) {
         final StringBuilder builder = new StringBuilder();
-        for (int idx = 0; idx < times; idx++) {
-            builder.append(fill);
+        while (0 < length) {
+            builder.append(randomChar());
+            length--;
         }
         return builder.toString();
     }
