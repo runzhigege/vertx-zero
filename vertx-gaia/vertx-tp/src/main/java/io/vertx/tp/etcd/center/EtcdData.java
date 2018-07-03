@@ -194,7 +194,6 @@ public class EtcdData {
     private EtcdKeysResponse.EtcdNode readNode(
             final String path,
             final Function<String, EtcdKeyGetRequest> executor) {
-        this.ensurePath(path);
 
         return Fn.getJvm(null, () -> {
             final EtcdKeyGetRequest request = executor.apply(path);
