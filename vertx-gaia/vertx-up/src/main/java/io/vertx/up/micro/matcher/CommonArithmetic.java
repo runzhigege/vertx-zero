@@ -21,7 +21,7 @@ public class CommonArithmetic implements Arithmetic {
                          final RoutingContext context) {
         final HttpServerRequest request = context.request();
         // Input source
-        final String uri = request.uri();
+        final String uri = request.path();
         final Optional<Record> hitted =
                 records.stream()
                         .filter(record -> this.isMatch(uri, record))
