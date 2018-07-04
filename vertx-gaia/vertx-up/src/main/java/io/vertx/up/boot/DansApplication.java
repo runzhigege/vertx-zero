@@ -11,6 +11,7 @@ import io.vertx.up.tool.mirror.Anno;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroLauncher;
 import io.vertx.up.web.anima.DetectScatter;
+import io.vertx.up.web.anima.InfixScatter;
 import io.vertx.up.web.anima.PointScatter;
 import io.vertx.up.web.anima.Scatter;
 import io.vertx.zero.exception.RpcPreparingException;
@@ -38,14 +39,14 @@ public class DansApplication {
         Fn.flingUp(
                 null == clazz,
                 LOGGER,
-                UpClassArgsException.class, getClass());
+                UpClassArgsException.class, this.getClass());
         this.clazz = clazz;
         this.annotationMap = Anno.get(clazz);
         // Must be invalid
         Fn.flingUp(
                 !this.annotationMap.containsKey(Up.class.getName()),
                 LOGGER,
-                UpClassInvalidException.class, getClass(), clazz.getName());
+                UpClassInvalidException.class, this.getClass(), clazz.getName());
     }
 
     public static void run(final Class<?> clazz, final Object... args) {
@@ -58,7 +59,7 @@ public class DansApplication {
     private void run(final Object... args) {
         // Check etcd server status, IPC Only
         Fn.flingUp(!EtcdData.enabled(),
-                LOGGER, RpcPreparingException.class, getClass());
+                LOGGER, RpcPreparingException.class, this.getClass());
 
         final Launcher<Vertx> launcher = Instance.singleton(ZeroLauncher.class);
 
@@ -73,7 +74,12 @@ public class DansApplication {
                 final Scatter<Vertx> scatter = Instance.singleton(DetectScatter.class);
                 scatter.connect(vertx);
             }, "detect-runner");
-
+            /** 3.Initialize Infix **/
+            Runner.run(() -> {
+                // Infix For Api Gateway
+                final Scatter<Vertx> scatter = Instance.singleton(InfixScatter.class);
+                scatter.connect(vertx);
+            }, "infix-afflux-runner");
         });
     }
 }
