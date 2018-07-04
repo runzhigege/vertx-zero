@@ -60,10 +60,9 @@ class In {
     }
 
     static String requestTokenData(
-            final Envelop envelop,
+            final String tokenString,
             final String field
     ) {
-        final String tokenString = envelop.context("token", String.class);
         String result = null;
         if (Ut.notNil(tokenString)) {
             final JsonObject token = UxJwt.extract(tokenString);
