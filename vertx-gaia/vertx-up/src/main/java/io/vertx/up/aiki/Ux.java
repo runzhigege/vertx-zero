@@ -234,8 +234,8 @@ public final class Ux {
         return UUID.fromString(getUserID(envelop, field));
     }
 
-    public static String getToken(final Envelop envelop, final String field) {
-        return In.requestTokenData(envelop, field);
+    public static String getToken(final String token, final String field) {
+        return In.requestTokenData(token, field);
     }
 
     // -> Message<Envelop> -> Session ( Key )
