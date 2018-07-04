@@ -19,8 +19,11 @@ import mousio.etcd4j.promises.EtcdResponsePromise;
 import mousio.etcd4j.requests.EtcdKeyDeleteRequest;
 import mousio.etcd4j.requests.EtcdKeyGetRequest;
 import mousio.etcd4j.requests.EtcdKeyPutRequest;
+import mousio.etcd4j.responses.EtcdAuthenticationException;
+import mousio.etcd4j.responses.EtcdException;
 import mousio.etcd4j.responses.EtcdKeysResponse;
 
+import java.io.IOException;
 import java.net.URI;
 import java.util.HashSet;
 import java.util.List;
@@ -29,6 +32,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.function.Function;
 
 public class EtcdData {
@@ -60,25 +64,6 @@ public class EtcdData {
     private final transient Annal logger;
     private transient long timeout = -1;
     private transient String application = Strings.EMPTY;
-
-    public static EtcdData create(final Class<?> clazz) {
-        if (enabled()) {
-            LOGGER.info(Info.ETCD_ENABLE);
-        }
-        return Fn.pool(POOL, clazz, () ->
-                Fn.get(null, () -> new EtcdData(clazz), clazz));
-    }
-
-
-    /**
-     * Whether Etcd Enabled.
-     *
-     * @return
-     */
-    public static boolean enabled() {
-        final JsonObject config = NODE.read();
-        return null != config && config.containsKey(KEY);
-    }
 
     private EtcdData(final Class<?> clazz) {
         this.clazz = clazz;
@@ -129,6 +114,24 @@ public class EtcdData {
         this.client = new EtcdClient(uris.toArray(new URI[]{}));
     }
 
+    public static EtcdData create(final Class<?> clazz) {
+        if (enabled()) {
+            LOGGER.info(Info.ETCD_ENABLE);
+        }
+        return Fn.pool(POOL, clazz, () ->
+                Fn.get(null, () -> new EtcdData(clazz), clazz));
+    }
+
+    /**
+     * Whether Etcd Enabled.
+     *
+     * @return
+     */
+    public static boolean enabled() {
+        final JsonObject config = NODE.read();
+        return null != config && config.containsKey(KEY);
+    }
+
     public EtcdClient getClient() {
         return this.client;
     }
@@ -144,6 +147,7 @@ public class EtcdData {
     public ConcurrentMap<String, String> readDir(
             final String path,
             final boolean shiftted) {
+        // Ensure Path created when read exception
         return Fn.getJvm(new ConcurrentHashMap<>(), () -> {
             final EtcdKeysResponse.EtcdNode node = this.readNode(path, this.client::getDir);
             return Fn.getJvm(new ConcurrentHashMap<>(), () -> {
@@ -162,6 +166,24 @@ public class EtcdData {
         }, path);
     }
 
+    private void ensurePath(final String path) {
+        if (0 <= path.lastIndexOf('/')) {
+            final String parent = path.substring(0, path.lastIndexOf('/'));
+            try {
+                // Trigger Key not found
+                final EtcdKeysResponse response =
+                        this.client.getDir(parent).send().get();
+                if (null != response) {
+                    this.client.putDir(path).send();
+                    this.ensurePath(parent);
+                }
+            } catch (final EtcdException | EtcdAuthenticationException
+                    | IOException | TimeoutException ex) {
+                this.ensurePath(parent);
+            }
+        }
+    }
+
     public String readData(
             final String path
     ) {
@@ -172,6 +194,7 @@ public class EtcdData {
     private EtcdKeysResponse.EtcdNode readNode(
             final String path,
             final Function<String, EtcdKeyGetRequest> executor) {
+
         return Fn.getJvm(null, () -> {
             final EtcdKeyGetRequest request = executor.apply(path);
             /** Timeout **/

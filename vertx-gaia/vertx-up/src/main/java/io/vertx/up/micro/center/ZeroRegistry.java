@@ -44,13 +44,13 @@ public class ZeroRegistry {
     private final transient Annal logger;
     private final transient EtcdData etcd;
 
-    public static ZeroRegistry create(final Class<?> useCls) {
-        return Fn.poolThread(REGISTRY_MAP, () -> new ZeroRegistry(useCls));
-    }
-
     private ZeroRegistry(final Class<?> useCls) {
         this.etcd = EtcdData.create(useCls);
         this.logger = Annal.get(useCls);
+    }
+
+    public static ZeroRegistry create(final Class<?> useCls) {
+        return Fn.poolThread(REGISTRY_MAP, () -> new ZeroRegistry(useCls));
     }
 
     /**
@@ -73,7 +73,7 @@ public class ZeroRegistry {
         this.logger.debug(Info.ETCD_READ, path);
         final String node = this.etcd.readData(path);
         final Set<JsonObject> sets = new HashSet<>();
-        if (null != node) {
+        if (!Ut.isNil(node)) {
             final JsonArray value = new JsonArray(node);
             sets.addAll(convert.apply(key, value));
         }
