@@ -297,7 +297,7 @@ public class Ut {
         return Period.toTime(literal);
     }
 
-    public static List<String> valueDurationDays(String from, String to) {
+    public static List<String> valueDurationDays(final String from, final String to) {
         return Period.valueDurationDays(from, to);
     }
 
@@ -334,6 +334,10 @@ public class Ut {
     // --- Random
     public static Integer randomNumber(final int length) {
         return Numeric.randomNumber(length);
+    }
+
+    public static String randomString(final int length) {
+        return StringUtil.random(length);
     }
 
     // --- Return

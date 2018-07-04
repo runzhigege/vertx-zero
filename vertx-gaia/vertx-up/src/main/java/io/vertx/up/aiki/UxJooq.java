@@ -30,13 +30,105 @@ import java.util.function.Function;
 public class UxJooq {
 
     private static final Annal LOGGER = Annal.get(UxJooq.class);
-
+    private static final ConcurrentMap<String, BiFunction<String, Object, Condition>> OPS =
+            new ConcurrentHashMap<String, BiFunction<String, Object, Condition>>() {
+                {
+                    this.put(Inquiry.Op.LT, (field, value) -> DSL.field(field).lt(value));
+                    this.put(Inquiry.Op.GT, (field, value) -> DSL.field(field).gt(value));
+                    this.put(Inquiry.Op.LE, (field, value) -> DSL.field(field).le(value));
+                    this.put(Inquiry.Op.GE, (field, value) -> DSL.field(field).ge(value));
+                    this.put(Inquiry.Op.EQ, (field, value) -> DSL.field(field).eq(value));
+                    this.put(Inquiry.Op.NEQ, (field, value) -> DSL.field(field).ne(value));
+                    this.put(Inquiry.Op.NOT_NULL, (field, value) -> DSL.field(field).isNotNull());
+                    this.put(Inquiry.Op.NULL, (field, value) -> DSL.field(field).isNull());
+                    this.put(Inquiry.Op.TRUE, (field, value) -> DSL.field(field).isTrue());
+                    this.put(Inquiry.Op.FALSE, (field, value) -> DSL.field(field).isFalse());
+                    this.put(Inquiry.Op.IN, UxJooq::opIn);
+                    this.put(Inquiry.Op.NOT_IN, UxJooq::opNotIn);
+                    this.put(Inquiry.Op.START, (field, value) -> DSL.field(field).startsWith(value));
+                    this.put(Inquiry.Op.END, (field, value) -> DSL.field(field).endsWith(value));
+                    this.put(Inquiry.Op.CONTAIN, (field, value) -> DSL.field(field).contains(value));
+                }
+            };
     private transient final Class<?> clazz;
     private transient final VertxDAO vertxDAO;
 
     <T> UxJooq(final Class<T> clazz) {
         this.clazz = clazz;
         this.vertxDAO = (VertxDAO) JooqInfix.getDao(clazz);
+    }
+
+    // Condition ---------------------------------------------------------
+    public static Condition transform(final JsonObject filters, final Operator operator) {
+        Condition condition = null;
+        for (final String field : filters.fieldNames()) {
+            final String key = getKey(field);
+            final String targetField = field.split(",")[Values.IDX];
+            Object value = filters.getValue(field);
+            // Function
+            final BiFunction<String, Object, Condition> fun = OPS.get(key);
+            // JsonArray to List, fix vert.x and jooq connect issue.
+            if (Ut.isJArray(value)) {
+                value = ((JsonArray) value).getList().toArray();
+            }
+            final Condition item = fun.apply(targetField.trim(), value);
+            condition = opCond(condition, item, Operator.AND);
+            // Function condition inject
+        }
+        LOGGER.info(Info.JOOQ_PARSE, condition);
+        return condition;
+    }
+
+    private static String getKey(final String field) {
+        if (!field.contains(",")) {
+            return Inquiry.Op.EQ;
+        } else {
+            final String opStr = field.split(",")[Values.ONE];
+            return Ut.isNil(opStr) ? Inquiry.Op.EQ : opStr.trim().toLowerCase();
+        }
+    }
+
+    private static Condition opIn(final String field, final Object value) {
+        return opCond(value, Operator.OR, DSL.field(field)::eq);
+    }
+
+    private static Condition opNotIn(final String field,
+                                     final Object value) {
+        return opCond(value, Operator.OR, DSL.field(field)::ne);
+    }
+
+    private static Condition opCond(final Object value,
+                                    final Operator operator,
+                                    final Function<Object, Condition> condFun) {
+        // Using or instead of in
+        Condition condition = null;
+        // Params
+        final Collection values = Ut.toCollection(value);
+        if (null != values) {
+            for (final Object item : values) {
+                final Condition itemCond = condFun.apply(item);
+                condition = opCond(condition, itemCond, operator);
+            }
+        }
+        return condition;
+    }
+
+    private static Condition opCond(final Condition left,
+                                    final Condition right,
+                                    final Operator operator) {
+        if (null == left || null == right) {
+            if (null == left && null != right) {
+                return right;
+            } else {
+                return null;
+            }
+        } else {
+            if (Operator.AND == operator) {
+                return left.and(right);
+            } else {
+                return left.or(right);
+            }
+        }
     }
 
     // CRUD - Read -----------------------------------------------------
@@ -59,7 +151,8 @@ public class UxJooq {
     public <T> Future<T> insertAsync(final T entity) {
         final CompletableFuture<Void> future =
                 this.vertxDAO.insertAsync(entity);
-        return Future.succeededFuture(entity);
+        return Async.toFuture(future)
+                .compose(result -> Future.succeededFuture(entity));
     }
 
     // Create entity
@@ -78,7 +171,8 @@ public class UxJooq {
     public <T> Future<List<T>> insertAsync(final List<T> entities) {
         final CompletableFuture<Void> future =
                 this.vertxDAO.insertAsync(entities);
-        return Future.succeededFuture(entities);
+        return Async.toFuture(future)
+                .compose(result -> Future.succeededFuture(entities));
     }
 
     // CRUD - Update ----------------------------------------------------
@@ -86,13 +180,15 @@ public class UxJooq {
     public <T> Future<T> updateAsync(final T entity) {
         final CompletableFuture<Void> future =
                 this.vertxDAO.updateAsync(entity);
-        return Future.succeededFuture(entity);
+        return Async.toFuture(future)
+                .compose(result -> Future.succeededFuture(entity));
     }
 
     public <T> Future<List<T>> updateAsync(final List<T> entities) {
         final CompletableFuture<Void> future =
                 this.vertxDAO.updateAsync(entities);
-        return Future.succeededFuture(entities);
+        return Async.toFuture(future)
+                .compose(result -> Future.succeededFuture(entities));
     }
 
     // CRUD - Upsert ----------------------------------------------------
@@ -106,6 +202,8 @@ public class UxJooq {
     public <T> Future<T> saveAsync(final Object id, final T updated) {
         return saveAsync(id, (target) -> copyEntity(target, updated));
     }
+
+    // CRUD - Existing/Missing ------------------------------------------
 
     public <T> Future<T> saveAsync(final Object id, final Function<T, T> copyFun) {
         return this.<T>findByIdAsync(id).compose(old ->
@@ -136,28 +234,30 @@ public class UxJooq {
     public <T> Future<T> deleteAsync(final T entity) {
         final CompletableFuture<Void> future =
                 this.vertxDAO.deleteAsync(Arrays.asList(entity));
-        return Future.succeededFuture(entity);
+        return Async.toFuture(future)
+                .compose(result -> Future.succeededFuture(entity));
     }
 
     public <T> Future<Boolean> deleteByIdAsync(final Object id) {
         final CompletableFuture<Void> future =
                 this.vertxDAO.deleteByIdAsync(id);
-        return Future.succeededFuture(Boolean.TRUE);
+        return Async.toFuture(future)
+                .compose(result -> Future.succeededFuture(Boolean.TRUE));
     }
 
     public <T> Future<Boolean> deleteByIdAsync(final Collection<Object> ids) {
         final CompletableFuture<Void> future =
                 this.vertxDAO.deleteByIdAsync(ids);
-        return Future.succeededFuture(Boolean.TRUE);
+        return Async.toFuture(future)
+                .compose(result -> Future.succeededFuture(Boolean.TRUE));
     }
 
     public <T> Future<Boolean> deleteByIdAsync(final Object... ids) {
         final CompletableFuture<Void> future =
                 this.vertxDAO.deleteByIdAsync(Arrays.asList(ids));
-        return Future.succeededFuture(Boolean.TRUE);
+        return Async.toFuture(future)
+                .compose(result -> Future.succeededFuture(Boolean.TRUE));
     }
-
-    // CRUD - Existing/Missing ------------------------------------------
 
     public <T> Future<Boolean> existsByIdAsync(final Object id) {
         final CompletableFuture<Boolean> future =
@@ -169,6 +269,10 @@ public class UxJooq {
         return this.<T>fetchOneAndAsync(andFilters)
                 .compose(item -> Future.succeededFuture(null != item));
     }
+
+    // Search Operation --------------------------------------------------
+    // Search ( Pager, Sort, Projection )
+    // Because you want to do projection remove, it means that you could not pass List<T> in current method.
 
     // Fetch Operation --------------------------------------------------
     // Fetch One
@@ -217,10 +321,6 @@ public class UxJooq {
         return Async.toFuture(future);
     }
 
-    // Search Operation --------------------------------------------------
-    // Search ( Pager, Sort, Projection )
-    // Because you want to do projection remove, it means that you could not pass List<T> in current method.
-
     public Future<JsonObject> searchOrAsync(final Inquiry inquiry) {
         return this.searchOrAsync(inquiry, "");
     }
@@ -268,7 +368,6 @@ public class UxJooq {
                     return Future.succeededFuture(result);
                 });
     }
-
 
     public <T> Future<List<T>> searchAndListAsync(final Inquiry inquiry) {
         // Fast mode is search AND operator
@@ -356,98 +455,4 @@ public class UxJooq {
         };
         return Async.toFuture(this.vertxDAO.executeAsync(function));
     }
-
-    // Condition ---------------------------------------------------------
-    public static Condition transform(final JsonObject filters, final Operator operator) {
-        Condition condition = null;
-        for (final String field : filters.fieldNames()) {
-            final String key = getKey(field);
-            final String targetField = field.split(",")[Values.IDX];
-            Object value = filters.getValue(field);
-            // Function
-            final BiFunction<String, Object, Condition> fun = OPS.get(key);
-            // JsonArray to List, fix vert.x and jooq connect issue.
-            if (Ut.isJArray(value)) {
-                value = ((JsonArray) value).getList().toArray();
-            }
-            final Condition item = fun.apply(targetField.trim(), value);
-            condition = opCond(condition, item, Operator.AND);
-            // Function condition inject
-        }
-        LOGGER.info(Info.JOOQ_PARSE, condition);
-        return condition;
-    }
-
-    private static String getKey(final String field) {
-        if (!field.contains(",")) {
-            return Inquiry.Op.EQ;
-        } else {
-            final String opStr = field.split(",")[Values.ONE];
-            return Ut.isNil(opStr) ? Inquiry.Op.EQ : opStr.trim().toLowerCase();
-        }
-    }
-
-    private static Condition opIn(final String field, final Object value) {
-        return opCond(value, Operator.OR, DSL.field(field)::eq);
-    }
-
-    private static Condition opNotIn(final String field,
-                                     final Object value) {
-        return opCond(value, Operator.OR, DSL.field(field)::ne);
-    }
-
-    private static Condition opCond(final Object value,
-                                    final Operator operator,
-                                    final Function<Object, Condition> condFun) {
-        // Using or instead of in
-        Condition condition = null;
-        // Params
-        final Collection values = Ut.toCollection(value);
-        if (null != values) {
-            for (final Object item : values) {
-                final Condition itemCond = condFun.apply(item);
-                condition = opCond(condition, itemCond, operator);
-            }
-        }
-        return condition;
-    }
-
-    private static Condition opCond(final Condition left,
-                                    final Condition right,
-                                    final Operator operator) {
-        if (null == left || null == right) {
-            if (null == left && null != right) {
-                return right;
-            } else {
-                return null;
-            }
-        } else {
-            if (Operator.AND == operator) {
-                return left.and(right);
-            } else {
-                return left.or(right);
-            }
-        }
-    }
-
-    private static final ConcurrentMap<String, BiFunction<String, Object, Condition>> OPS =
-            new ConcurrentHashMap<String, BiFunction<String, Object, Condition>>() {
-                {
-                    this.put(Inquiry.Op.LT, (field, value) -> DSL.field(field).lt(value));
-                    this.put(Inquiry.Op.GT, (field, value) -> DSL.field(field).gt(value));
-                    this.put(Inquiry.Op.LE, (field, value) -> DSL.field(field).le(value));
-                    this.put(Inquiry.Op.GE, (field, value) -> DSL.field(field).ge(value));
-                    this.put(Inquiry.Op.EQ, (field, value) -> DSL.field(field).eq(value));
-                    this.put(Inquiry.Op.NEQ, (field, value) -> DSL.field(field).ne(value));
-                    this.put(Inquiry.Op.NOT_NULL, (field, value) -> DSL.field(field).isNotNull());
-                    this.put(Inquiry.Op.NULL, (field, value) -> DSL.field(field).isNull());
-                    this.put(Inquiry.Op.TRUE, (field, value) -> DSL.field(field).isTrue());
-                    this.put(Inquiry.Op.FALSE, (field, value) -> DSL.field(field).isFalse());
-                    this.put(Inquiry.Op.IN, UxJooq::opIn);
-                    this.put(Inquiry.Op.NOT_IN, UxJooq::opNotIn);
-                    this.put(Inquiry.Op.START, (field, value) -> DSL.field(field).startsWith(value));
-                    this.put(Inquiry.Op.END, (field, value) -> DSL.field(field).endsWith(value));
-                    this.put(Inquiry.Op.CONTAIN, (field, value) -> DSL.field(field).contains(value));
-                }
-            };
 }

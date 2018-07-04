@@ -19,6 +19,11 @@ public class Uson {
 
     private final transient JsonObject objectReference;
 
+    private Uson(final JsonObject json) {
+        this.objectReference = Fn.get(new JsonObject(), () -> json, json);
+        LOGGER.debug(Info.STREAM_START, String.valueOf(this.hashCode()), json);
+    }
+
     public static Uson create(final String field, final Object value) {
         return new Uson(new JsonObject().put(field, value));
     }
@@ -29,11 +34,6 @@ public class Uson {
 
     public static Uson create(final JsonObject item) {
         return new Uson(item);
-    }
-
-    private Uson(final JsonObject json) {
-        this.objectReference = Fn.get(new JsonObject(), () -> json, json);
-        LOGGER.debug(Info.STREAM_START, String.valueOf(this.hashCode()), json);
     }
 
     public Uson append(final JsonObject object) {
@@ -89,6 +89,11 @@ public class Uson {
 
     public Uson remove(final String... keys) {
         Self.remove(this.objectReference, false, keys);
+        return this;
+    }
+
+    public Uson pickup(final String... keys) {
+        Self.pickup(this.objectReference, keys);
         return this;
     }
 
