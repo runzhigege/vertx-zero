@@ -11,6 +11,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Axis;
 import io.vertx.up.rs.router.PointAxis;
 import io.vertx.up.rs.router.RouterAxis;
+import io.vertx.up.rs.router.WallAxis;
 import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.config.ServerVisitor;
 import io.vertx.zero.eon.Values;
@@ -52,7 +53,9 @@ public class ZeroApiAgent extends AbstractVerticle {
         /** 1.Call router hub to mount commont **/
         final Axis<Router> routerAxiser = Fn.poolThread(Pool.ROUTERS,
                 () -> Instance.instance(RouterAxis.class));
-
+        /** 2.Call route hub to mount walls **/
+        final Axis<Router> wallAxiser = Fn.poolThread(Pool.WALLS,
+                () -> Instance.instance(WallAxis.class, this.vertx));
         Fn.flingUp(() -> {
 
             // Set breaker for each server
@@ -65,13 +68,15 @@ public class ZeroApiAgent extends AbstractVerticle {
                 /** Router **/
                 final Router router = Router.router(this.vertx);
                 routerAxiser.mount(router);
+                // Wall
+                wallAxiser.mount(router);
                 /** Api Logical **/
                 axiser.mount(router);
 
                 /** Listening **/
                 server.requestHandler(router::accept).listen();
                 {
-                    registryServer(option);
+                    this.registryServer(option);
                 }
             });
         }, LOGGER);
@@ -82,12 +87,12 @@ public class ZeroApiAgent extends AbstractVerticle {
         final AtomicInteger out = API_START_LOGS.get(port);
         if (Values.ZERO == out.getAndIncrement()) {
             final String portLiteral = String.valueOf(port);
-            LOGGER.info(Info.API_GATEWAY, getClass().getSimpleName(), deploymentID(),
+            LOGGER.info(Info.API_GATEWAY, this.getClass().getSimpleName(), this.deploymentID(),
                     portLiteral);
             final String address =
                     MessageFormat.format("http://{0}:{1}/",
                             options.getHost(), portLiteral);
-            LOGGER.info(Info.API_LISTEN, getClass().getSimpleName(), address);
+            LOGGER.info(Info.API_LISTEN, this.getClass().getSimpleName(), address);
         }
     }
 }
