@@ -1,9 +1,13 @@
 package io.vertx.up.aiki;
 
 import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.func.Fn;
+import io.vertx.up.tool.Ut;
+
+import java.util.Objects;
 
 class In {
 
@@ -53,6 +57,21 @@ class In {
     ) {
         return Fn.getSemi(null == envelop, null, Fn::nil,
                 () -> envelop.identifier(field));
+    }
+
+    static String requestTokenData(
+            final Envelop envelop,
+            final String field
+    ) {
+        final String tokenString = envelop.context("token", String.class);
+        String result = null;
+        if (Ut.notNil(tokenString)) {
+            final JsonObject token = UxJwt.extract(tokenString);
+            if (Objects.nonNull(token)) {
+                result = token.getString(field);
+            }
+        }
+        return result;
     }
 
     static Object requestSession(
