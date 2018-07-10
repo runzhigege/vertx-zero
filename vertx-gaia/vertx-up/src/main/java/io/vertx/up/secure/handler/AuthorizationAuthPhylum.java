@@ -9,30 +9,6 @@ import io.vertx.ext.auth.AuthProvider;
 import io.vertx.ext.web.RoutingContext;
 
 abstract class AuthorizationAuthPhylum extends AuthPhylum {
-    // this should match the IANA registry: https://www.iana.org/assignments/http-authschemes/http-authschemes.xhtml
-    enum Type {
-        BASIC("Basic"),
-        DIGEST("Digest"),
-        BEARER("Bearer"),
-        // these have no known implementation
-        HOBA("HOBA"),
-        MUTUAL("Mutual"),
-        NEGOTIATE("Negotiate"),
-        OAUTH("OAuth"),
-        SCRAM_SHA_1("SCRAM-SHA-1"),
-        SCRAM_SHA_256("SCRAM-SHA-256");
-
-        private final String label;
-
-        Type(final String label) {
-            this.label = label;
-        }
-
-        public boolean is(final String other) {
-            return this.label.equalsIgnoreCase(other);
-        }
-    }
-
     protected final AuthorizationAuthPhylum.Type type;
 
     AuthorizationAuthPhylum(final AuthProvider authProvider, final AuthorizationAuthPhylum.Type type) {
@@ -71,7 +47,33 @@ abstract class AuthorizationAuthPhylum extends AuthPhylum {
 
             handler.handle(Future.succeededFuture(authorization.substring(idx + 1)));
         } catch (final RuntimeException e) {
+            // TODO: For Debug
+            e.printStackTrace();
             handler.handle(Future.failedFuture(e));
+        }
+    }
+
+    // this should match the IANA registry: https://www.iana.org/assignments/http-authschemes/http-authschemes.xhtml
+    enum Type {
+        BASIC("Basic"),
+        DIGEST("Digest"),
+        BEARER("Bearer"),
+        // these have no known implementation
+        HOBA("HOBA"),
+        MUTUAL("Mutual"),
+        NEGOTIATE("Negotiate"),
+        OAUTH("OAuth"),
+        SCRAM_SHA_1("SCRAM-SHA-1"),
+        SCRAM_SHA_256("SCRAM-SHA-256");
+
+        private final String label;
+
+        Type(final String label) {
+            this.label = label;
+        }
+
+        public boolean is(final String other) {
+            return this.label.equalsIgnoreCase(other);
         }
     }
 }
