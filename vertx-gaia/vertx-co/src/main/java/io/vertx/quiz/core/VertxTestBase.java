@@ -5,7 +5,6 @@ import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import io.vertx.core.net.*;
 import io.vertx.core.spi.cluster.ClusterManager;
-import io.vertx.quiz.fakecluster.FakeClusterManager;
 import org.junit.Rule;
 
 import java.util.ArrayList;
@@ -19,145 +18,6 @@ public class VertxTestBase extends AsyncTestBase {
 
     public static final boolean USE_NATIVE_TRANSPORT = Boolean.getBoolean("vertx.useNativeTransport");
     public static final boolean USE_DOMAIN_SOCKETS = Boolean.getBoolean("vertx.useDomainSockets");
-    private static final Logger log = LoggerFactory.getLogger(VertxTestBase.class);
-
-    @Rule
-    public RepeatRule repeatRule = new RepeatRule();
-
-    protected Vertx vertx;
-
-    protected Vertx[] vertices;
-
-    private List<Vertx> created;
-
-    protected void vinit() {
-        this.vertx = null;
-        this.vertices = null;
-        this.created = null;
-    }
-
-    @Override
-    public void setUp() throws Exception {
-        super.setUp();
-        vinit();
-        final VertxOptions options = getOptions();
-        final boolean nativeTransport = options.getPreferNativeTransport();
-        this.vertx = Vertx.vertx(options);
-        if (nativeTransport) {
-            assertTrue(this.vertx.isNativeTransportEnabled());
-        }
-    }
-
-    protected VertxOptions getOptions() {
-        final VertxOptions options = new VertxOptions();
-        options.setPreferNativeTransport(USE_NATIVE_TRANSPORT);
-        return options;
-    }
-
-    @Override
-    protected void tearDown() throws Exception {
-        if (this.vertx != null) {
-            close(this.vertx);
-        }
-        if (this.created != null) {
-            final CountDownLatch latch = new CountDownLatch(this.created.size());
-            for (final Vertx v : this.created) {
-                v.close(ar -> {
-                    if (ar.failed()) {
-                        log.error("Failed to shutdown vert.x", ar.cause());
-                    }
-                    latch.countDown();
-                });
-            }
-            assertTrue(latch.await(180, TimeUnit.SECONDS));
-        }
-        FakeClusterManager.reset(); // Bit ugly
-        super.tearDown();
-    }
-
-    /**
-     * @return create a blank new Vert.x instance with no options closed when tear down executes.
-     */
-    protected Vertx vertx() {
-        if (this.created == null) {
-            this.created = new ArrayList<>();
-        }
-        final Vertx vertx = Vertx.vertx();
-        this.created.add(vertx);
-        return vertx;
-    }
-
-    /**
-     * @return create a blank new Vert.x instance with @{@code options} closed when tear down executes.
-     */
-    protected Vertx vertx(final VertxOptions options) {
-        if (this.created == null) {
-            this.created = new ArrayList<>();
-        }
-        final Vertx vertx = Vertx.vertx(options);
-        this.created.add(vertx);
-        return vertx;
-    }
-
-    /**
-     * Create a blank new clustered Vert.x instance with @{@code options} closed when tear down executes.
-     */
-    protected void clusteredVertx(final VertxOptions options, final Handler<AsyncResult<Vertx>> ar) {
-        if (this.created == null) {
-            this.created = Collections.synchronizedList(new ArrayList<>());
-        }
-        Vertx.clusteredVertx(options, event -> {
-            if (event.succeeded()) {
-                this.created.add(event.result());
-            }
-            ar.handle(event);
-        });
-    }
-
-    protected ClusterManager getClusterManager() {
-        return null;
-    }
-
-    protected void startNodes(final int numNodes) {
-        startNodes(numNodes, getOptions());
-    }
-
-    protected void startNodes(final int numNodes, final VertxOptions options) {
-        final CountDownLatch latch = new CountDownLatch(numNodes);
-        this.vertices = new Vertx[numNodes];
-        for (int i = 0; i < numNodes; i++) {
-            final int index = i;
-            clusteredVertx(options.setClusterHost("localhost").setClusterPort(0).setClustered(true)
-                    .setClusterManager(getClusterManager()), ar -> {
-                try {
-                    if (ar.failed()) {
-                        ar.cause().printStackTrace();
-                    }
-                    assertTrue("Failed to start node", ar.succeeded());
-                    this.vertices[index] = ar.result();
-                } finally {
-                    latch.countDown();
-                }
-            });
-        }
-        try {
-            assertTrue(latch.await(2, TimeUnit.MINUTES));
-        } catch (final InterruptedException e) {
-            fail(e.getMessage());
-        }
-    }
-
-
-    protected static void setOptions(final TCPSSLOptions sslOptions, final KeyCertOptions options) {
-        if (options instanceof JksOptions) {
-            sslOptions.setKeyStoreOptions((JksOptions) options);
-        } else if (options instanceof PfxOptions) {
-            sslOptions.setPfxKeyCertOptions((PfxOptions) options);
-        } else {
-            sslOptions.setPemKeyCertOptions((PemKeyCertOptions) options);
-        }
-    }
-
     protected static final String[] ENABLED_CIPHER_SUITES =
             new String[]{
                     "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256",
@@ -232,6 +92,139 @@ public class VertxTestBase extends AsyncTestBase {
                     "TLS_KRB5_EXPORT_WITH_DES_CBC_40_SHA",
                     "TLS_KRB5_EXPORT_WITH_DES_CBC_40_MD5"
             };
+    private static final Logger log = LoggerFactory.getLogger(VertxTestBase.class);
+    @Rule
+    public RepeatRule repeatRule = new RepeatRule();
+    protected Vertx vertx;
+    protected Vertx[] vertices;
+    private List<Vertx> created;
+
+    protected static void setOptions(final TCPSSLOptions sslOptions, final KeyCertOptions options) {
+        if (options instanceof JksOptions) {
+            sslOptions.setKeyStoreOptions((JksOptions) options);
+        } else if (options instanceof PfxOptions) {
+            sslOptions.setPfxKeyCertOptions((PfxOptions) options);
+        } else {
+            sslOptions.setPemKeyCertOptions((PemKeyCertOptions) options);
+        }
+    }
+
+    protected void vinit() {
+        this.vertx = null;
+        this.vertices = null;
+        this.created = null;
+    }
+
+    @Override
+    public void setUp() throws Exception {
+        super.setUp();
+        this.vinit();
+        final VertxOptions options = this.getOptions();
+        final boolean nativeTransport = options.getPreferNativeTransport();
+        this.vertx = Vertx.vertx(options);
+        if (nativeTransport) {
+            this.assertTrue(this.vertx.isNativeTransportEnabled());
+        }
+    }
+
+    protected VertxOptions getOptions() {
+        final VertxOptions options = new VertxOptions();
+        options.setPreferNativeTransport(USE_NATIVE_TRANSPORT);
+        return options;
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        if (this.vertx != null) {
+            this.close(this.vertx);
+        }
+        if (this.created != null) {
+            final CountDownLatch latch = new CountDownLatch(this.created.size());
+            for (final Vertx v : this.created) {
+                v.close(ar -> {
+                    if (ar.failed()) {
+                        log.error("Failed to shutdown vert.x", ar.cause());
+                    }
+                    latch.countDown();
+                });
+            }
+            this.assertTrue(latch.await(180, TimeUnit.SECONDS));
+        }
+        // FakeClusterManager.reset(); // Bit ugly
+        super.tearDown();
+    }
+
+    /**
+     * @return create a blank new Vert.x instance with no options closed when tear down executes.
+     */
+    protected Vertx vertx() {
+        if (this.created == null) {
+            this.created = new ArrayList<>();
+        }
+        final Vertx vertx = Vertx.vertx();
+        this.created.add(vertx);
+        return vertx;
+    }
+
+    /**
+     * @return create a blank new Vert.x instance with @{@code options} closed when tear down executes.
+     */
+    protected Vertx vertx(final VertxOptions options) {
+        if (this.created == null) {
+            this.created = new ArrayList<>();
+        }
+        final Vertx vertx = Vertx.vertx(options);
+        this.created.add(vertx);
+        return vertx;
+    }
+
+    /**
+     * Create a blank new clustered Vert.x instance with @{@code options} closed when tear down executes.
+     */
+    protected void clusteredVertx(final VertxOptions options, final Handler<AsyncResult<Vertx>> ar) {
+        if (this.created == null) {
+            this.created = Collections.synchronizedList(new ArrayList<>());
+        }
+        Vertx.clusteredVertx(options, event -> {
+            if (event.succeeded()) {
+                this.created.add(event.result());
+            }
+            ar.handle(event);
+        });
+    }
+
+    protected ClusterManager getClusterManager() {
+        return null;
+    }
+
+    protected void startNodes(final int numNodes) {
+        this.startNodes(numNodes, this.getOptions());
+    }
+
+    protected void startNodes(final int numNodes, final VertxOptions options) {
+        final CountDownLatch latch = new CountDownLatch(numNodes);
+        this.vertices = new Vertx[numNodes];
+        for (int i = 0; i < numNodes; i++) {
+            final int index = i;
+            this.clusteredVertx(options.setClusterHost("localhost").setClusterPort(0).setClustered(true)
+                    .setClusterManager(this.getClusterManager()), ar -> {
+                try {
+                    if (ar.failed()) {
+                        ar.cause().printStackTrace();
+                    }
+                    this.assertTrue("Failed to start node", ar.succeeded());
+                    this.vertices[index] = ar.result();
+                } finally {
+                    latch.countDown();
+                }
+            });
+        }
+        try {
+            this.assertTrue(latch.await(2, TimeUnit.MINUTES));
+        } catch (final InterruptedException e) {
+            this.fail(e.getMessage());
+        }
+    }
 
     /**
      * Create a worker verticle for the current Vert.x and return its context.
@@ -264,7 +257,7 @@ public class VertxTestBase extends AsyncTestBase {
     protected List<Context> createWorkers(final int num) throws Exception {
         final List<Context> contexts = new ArrayList<>();
         for (int i = 0; i < num; i++) {
-            contexts.add(createWorker());
+            contexts.add(this.createWorker());
         }
         return contexts;
     }
