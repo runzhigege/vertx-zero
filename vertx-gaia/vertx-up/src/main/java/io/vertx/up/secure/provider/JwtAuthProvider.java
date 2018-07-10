@@ -7,6 +7,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.core.shareddata.AsyncMap;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.auth.jwt.impl.JWTUser;
@@ -14,16 +15,21 @@ import io.vertx.ext.jwt.JWT;
 import io.vertx.ext.jwt.JWTOptions;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.exception.*;
+import io.vertx.up.func.Fn;
+import io.vertx.up.log.Annal;
 
 import java.util.Collections;
 import java.util.function.Function;
 
 public class JwtAuthProvider implements JwtAuth {
     private static final JsonArray EMPTY_ARRAY = new JsonArray();
+    private static final String AUTH_POOL = "JWT_AUTH_TOKEN_POOL";
+    private static final Annal LOGGER = Annal.get(JwtAuthProvider.class);
     private final JWT jwt;
     private final String permissionsClaimKey;
     private final JWTOptions jwtOptions;
     private final Function<JsonObject, Future<Boolean>> executor;
+    private transient AsyncMap<String, Boolean> authorizeMap;
 
     public JwtAuthProvider(final Vertx vertx, final JWTAuthOptions config, final Function<JsonObject, Future<Boolean>> executor) {
         this.executor = executor;
@@ -31,23 +37,58 @@ public class JwtAuthProvider implements JwtAuth {
         this.jwtOptions = config.getJWTOptions();
         // File reading here.
         this.jwt = Ux.Jwt.create(config, vertx.fileSystem()::readFileBlocking);
+        vertx.sharedData().<String, Boolean>getAsyncMap(AUTH_POOL, res -> {
+            if (res.succeeded()) {
+                LOGGER.debug(Info.MAP_INITED, AUTH_POOL);
+                this.authorizeMap = res.result();
+            }
+        });
     }
 
     @Override
     public void authenticate(final JsonObject authInfo, final Handler<AsyncResult<User>> resultHandler) {
-        final Future<User> future;
-        if (null == this.executor) {
-            future = this.authorize(authInfo);
+        final String token = authInfo.getString("jwt");
+        // Set token as key for async map extraction;
+        if (null == this.authorizeMap) {
+            // Async map initialized failure, execute common validation flow.
+            this.authenticate(authInfo).setHandler(this.authenticate(token, resultHandler));
         } else {
-            future = this.executor.apply(authInfo).compose(result -> {
-                if (result) {
-                    return this.authorize(authInfo);
+            // Get data from authorizeMap
+            this.authorizeMap.get(token, res -> {
+                if (null != res && null != res.result() && res.result()) {
+                    // Get data from cache.
+                    LOGGER.info(Info.MAP_HIT, token, res.result());
+                    this.authorize(authInfo).setHandler(this.authenticate(token, resultHandler));
                 } else {
-                    return Future.failedFuture(new _401JwtExecutorException(this.getClass(), authInfo.getString("jwt")));
+                    // Couldn't get data from cache
+                    LOGGER.debug(Info.MAP_MISSING, token);
+                    this.authenticate(authInfo).setHandler(this.authenticate(token, resultHandler));
                 }
             });
         }
-        future.setHandler(resultHandler);
+    }
+
+    private Handler<AsyncResult<User>> authenticate(final String token, final Handler<AsyncResult<User>> handler) {
+        return (user -> this.authorizeMap.get(token, res -> {
+            if (!(null != res && null != res.result() && res.result())) {
+                this.authorizeMap.put(token, Boolean.TRUE, result -> {
+                    LOGGER.debug(Info.MAP_PUT, token, Boolean.TRUE);
+                    handler.handle(Future.succeededFuture(user.result()));
+                });
+            }
+        }));
+    }
+
+    private Future<User> authenticate(final JsonObject authInfo) {
+        return Fn.getSemi(null == this.executor, null,
+                () -> this.authorize(authInfo),
+                () -> this.executor.apply(authInfo).compose(result -> {
+                    if (result) {
+                        return this.authorize(authInfo);
+                    } else {
+                        return Future.failedFuture(new _401JwtExecutorException(this.getClass(), authInfo.getString("jwt")));
+                    }
+                }));
     }
 
     private Future<User> authorize(final JsonObject authInfo) {

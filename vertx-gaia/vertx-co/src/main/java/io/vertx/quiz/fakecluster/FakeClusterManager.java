@@ -9,7 +9,6 @@ import io.vertx.core.shareddata.AsyncMap;
 import io.vertx.core.shareddata.Counter;
 import io.vertx.core.shareddata.Lock;
 import io.vertx.core.shareddata.impl.AsynchronousCounter;
-import io.vertx.core.shareddata.impl.AsynchronousLock;
 import io.vertx.core.spi.cluster.AsyncMultiMap;
 import io.vertx.core.spi.cluster.ChoosableIterable;
 import io.vertx.core.spi.cluster.ClusterManager;
@@ -36,11 +35,6 @@ public class FakeClusterManager implements ClusterManager {
     private NodeListener nodeListener;
     private VertxInternal vertx;
 
-    @Override
-    public void setVertx(final Vertx vertx) {
-        this.vertx = (VertxInternal) vertx;
-    }
-
     private static void doJoin(final String nodeID, final FakeClusterManager node) {
         if (nodes.containsKey(nodeID)) {
             throw new IllegalStateException("Node has already joined!");
@@ -55,6 +49,31 @@ public class FakeClusterManager implements ClusterManager {
         }
     }
 
+    private static void doLeave(final String nodeID) {
+        nodes.remove(nodeID);
+        synchronized (nodes) {
+            for (final Entry<String, FakeClusterManager> entry : nodes.entrySet()) {
+                if (!entry.getKey().equals(nodeID)) {
+                    new Thread(() -> entry.getValue().memberRemoved(nodeID)).start();
+                }
+            }
+        }
+    }
+
+    public static void reset() {
+        nodes.clear();
+        asyncMaps.clear();
+        asyncMultiMaps.clear();
+        locks.clear();
+        counters.clear();
+        syncMaps.clear();
+    }
+
+    @Override
+    public void setVertx(final Vertx vertx) {
+        this.vertx = (VertxInternal) vertx;
+    }
+
     private synchronized void memberAdded(final String nodeID) {
         if (isActive()) {
             try {
@@ -63,17 +82,6 @@ public class FakeClusterManager implements ClusterManager {
                 }
             } catch (final Throwable t) {
                 t.printStackTrace();
-            }
-        }
-    }
-
-    private static void doLeave(final String nodeID) {
-        nodes.remove(nodeID);
-        synchronized (nodes) {
-            for (final Entry<String, FakeClusterManager> entry : nodes.entrySet()) {
-                if (!entry.getKey().equals(nodeID)) {
-                    new Thread(() -> entry.getValue().memberRemoved(nodeID)).start();
-                }
             }
         }
     }
@@ -204,15 +212,6 @@ public class FakeClusterManager implements ClusterManager {
     @Override
     public boolean isActive() {
         return this.nodeID != null;
-    }
-
-    public static void reset() {
-        nodes.clear();
-        asyncMaps.clear();
-        asyncMultiMaps.clear();
-        locks.clear();
-        counters.clear();
-        syncMaps.clear();
     }
 
     private class FakeLock implements Lock {
