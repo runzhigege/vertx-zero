@@ -75,6 +75,8 @@ public class JwtAuthProvider implements JwtAuth {
                     LOGGER.debug(Info.MAP_PUT, token, Boolean.TRUE);
                     handler.handle(Future.succeededFuture(user.result()));
                 });
+            } else {
+                handler.handle(Future.succeededFuture(user.result()));
             }
         }));
     }
