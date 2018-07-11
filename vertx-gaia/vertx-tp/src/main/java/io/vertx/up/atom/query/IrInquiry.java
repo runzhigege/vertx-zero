@@ -85,6 +85,14 @@ class IrInquiry implements Inquiry {
     }
 
     @Override
+    public void setInquiry(final String field, final Object value) {
+        if (null == this.criteria) {
+            this.criteria = Criteria.create(new JsonObject());
+        }
+        this.criteria.add(field, value);
+    }
+
+    @Override
     public JsonObject toJson() {
         final JsonObject result = new JsonObject();
         if (null != this.pager) {
