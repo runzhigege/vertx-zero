@@ -12,9 +12,12 @@ import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Values;
+import io.vertx.zero.exception.JooqArgumentException;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -50,6 +53,16 @@ public class UxJooq {
                     this.put(Inquiry.Op.CONTAIN, (field, value) -> DSL.field(field).contains(value));
                 }
             };
+    private static final ConcurrentMap<String, BiFunction<String, Instant, Condition>> DOPS =
+            new ConcurrentHashMap<String, BiFunction<String, Instant, Condition>>() {
+                {
+                    this.put(Inquiry.Instant.DAY, (field, value) -> {
+                        // 时间区间
+                        final LocalDate date = Ut.toDate(value);
+                        return DSL.field(field).between(date.atStartOfDay(), date.plusDays(1).atStartOfDay());
+                    });
+                }
+            };
     private transient final Class<?> clazz;
     private transient final VertxDAO vertxDAO;
 
@@ -63,17 +76,33 @@ public class UxJooq {
         Condition condition = null;
         for (final String field : filters.fieldNames()) {
             final String key = getKey(field);
+            final String[] fields = field.split(",");
             final String targetField = field.split(",")[Values.IDX];
+            // Date, DateTime, Time
             Object value = filters.getValue(field);
-            // Function
-            final BiFunction<String, Object, Condition> fun = OPS.get(key);
-            // JsonArray to List, fix vert.x and jooq connect issue.
-            if (Ut.isJArray(value)) {
-                value = ((JsonArray) value).getList().toArray();
+
+            if (3 > fields.length) {
+                // Function
+                final BiFunction<String, Object, Condition> fun = OPS.get(key);
+                // JsonArray to List, fix vert.x and jooq connect issue.
+                if (Ut.isJArray(value)) {
+                    value = ((JsonArray) value).getList().toArray();
+                }
+                final Condition item = fun.apply(targetField.trim(), value);
+                condition = opCond(condition, item, operator);
+                // Function condition inject
+
+            } else if (3 == fields.length) {
+                Fn.flingUp(null == value, LOGGER,
+                        JooqArgumentException.class, UxJooq.class, value);
+                final Instant instant = Ut.parseFull(value.toString()).toInstant();
+                Fn.flingUp(Instant.class != instant.getClass(), LOGGER,
+                        JooqArgumentException.class, UxJooq.class, instant.getClass());
+                final String mode = fields[Values.TWO];
+                final BiFunction<String, Instant, Condition> fun = DOPS.get(mode);
+                final Condition item = fun.apply(targetField.trim(), instant);
+                condition = opCond(condition, item, operator);
             }
-            final Condition item = fun.apply(targetField.trim(), value);
-            condition = opCond(condition, item, Operator.AND);
-            // Function condition inject
         }
         LOGGER.info(Info.JOOQ_PARSE, condition);
         return condition;
