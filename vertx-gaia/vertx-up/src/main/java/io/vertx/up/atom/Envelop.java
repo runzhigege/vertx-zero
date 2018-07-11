@@ -13,6 +13,7 @@ import io.vertx.up.kidd.Readible;
 import io.vertx.up.log.Annal;
 import io.vertx.up.web.ZeroSerializer;
 import io.vertx.zero.eon.Strings;
+import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.IndexExceedException;
 
 import java.io.Serializable;
@@ -24,18 +25,59 @@ public class Envelop implements Serializable {
     private static final Annal LOGGER = Annal.get(Envelop.class);
 
     private final HttpStatusCode status;
-
-    private MultiMap headers;
-
     private final WebException error;
-
     private final JsonObject data;
-
     private final Map<String, Object> context = new HashMap<>();
-
+    private MultiMap headers;
     private User user;
 
     private Session session;
+
+    private <T> Envelop(final T data, final HttpStatusCode status) {
+        this.data = this.build(ZeroSerializer.toSupport(data));
+        this.error = null;
+        this.status = status;
+    }
+
+    private Envelop(final WebException error) {
+        this.status = error.getStatus();
+        this.error = error;
+        this.data = error.toJson();
+    }
+
+    /**
+     * Empty content success
+     *
+     * @return
+     */
+    public static Envelop ok() {
+        return success(null);
+    }
+
+    public static <T> Envelop success(final T entity) {
+        return new Envelop(entity, HttpStatusCode.OK);
+    }
+
+    public static <T> Envelop failure(final String message) {
+        return new Envelop(new _500InternalServerException(Envelop.class, message));
+    }
+
+    public static <T> Envelop success(final T entity, final HttpStatusCode status) {
+        return new Envelop(entity, status);
+    }
+
+    /**
+     * Failure response with exception
+     *
+     * @param error
+     * @return
+     */
+    public static Envelop failure(final WebException error) {
+        // Inner building error
+        final Readible readible = Readible.get();
+        readible.interpret(error);
+        return new Envelop(error);
+    }
 
     /**
      * Whether this envelop is valid.
@@ -118,6 +160,33 @@ public class Envelop implements Serializable {
         return reference;
     }
 
+    private JsonObject getData(final Integer argIndex) {
+        JsonObject data = new JsonObject();
+        final Object reference = Fn.get(null, () -> this.data.getValue(Key.DATA), this.data);
+        if (reference instanceof JsonObject) {
+            data = (JsonObject) reference;
+        }
+        if (null == argIndex) {
+            if (data.containsKey(String.valueOf(Values.ZERO))) {
+                data = data.getJsonObject(String.valueOf(Values.ZERO));
+            }
+        } else {
+            data = data.getJsonObject(String.valueOf(argIndex));
+        }
+        return data;
+    }
+
+    public void setValue(final String field, final Object value) {
+        this.setValue(null, field, value);
+    }
+
+    public void setValue(final Integer argIndex, final String field, final Object value) {
+        final JsonObject reference = this.getData(argIndex);
+        if (null != reference) {
+            reference.put(field, value);
+        }
+    }
+
     /**
      * Result
      *
@@ -175,6 +244,8 @@ public class Envelop implements Serializable {
         this.headers = headers;
     }
 
+    // ------------------ Failure resource model ------------------
+
     public Session getSession() {
         return this.session;
     }
@@ -205,62 +276,12 @@ public class Envelop implements Serializable {
         }, this.user);
     }
 
-
-    private <T> Envelop(final T data, final HttpStatusCode status) {
-        this.data = this.build(ZeroSerializer.toSupport(data));
-        this.error = null;
-        this.status = status;
-    }
-
-
     private <T> JsonObject build(final T input) {
         final JsonObject data = new JsonObject();
         final HttpStatusCode status = (null == this.error)
                 ? HttpStatusCode.OK : this.error.getStatus();
         data.put(Key.DATA, input);
         return data;
-    }
-
-    // ------------------ Failure resource model ------------------
-
-    /**
-     * Empty content success
-     *
-     * @return
-     */
-    public static Envelop ok() {
-        return success(null);
-    }
-
-    public static <T> Envelop success(final T entity) {
-        return new Envelop(entity, HttpStatusCode.OK);
-    }
-
-    public static <T> Envelop failure(final String message) {
-        return new Envelop(new _500InternalServerException(Envelop.class, message));
-    }
-
-    public static <T> Envelop success(final T entity, final HttpStatusCode status) {
-        return new Envelop(entity, status);
-    }
-
-    /**
-     * Failure response with exception
-     *
-     * @param error
-     * @return
-     */
-    public static Envelop failure(final WebException error) {
-        // Inner building error
-        final Readible readible = Readible.get();
-        readible.interpret(error);
-        return new Envelop(error);
-    }
-
-    private Envelop(final WebException error) {
-        this.status = error.getStatus();
-        this.error = error;
-        this.data = error.toJson();
     }
 
     @Override

@@ -6,22 +6,27 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Uarr {
     private static final Annal LOGGER = Annal.get(Uarr.class);
 
     private final transient JsonArray arrayReference;
 
-    public static Uarr create(final JsonArray item) {
-        return new Uarr(item);
+    private Uarr(final JsonArray jsonArray) {
+        this.arrayReference = Fn.get(new JsonArray(), () ->
+                new JsonArray(jsonArray.stream().filter(Objects::nonNull)
+                        .map(item -> (JsonObject) item)
+                        .collect(Collectors.toList())), jsonArray);
+        LOGGER.debug(Info.STREAM_START, String.valueOf(this.hashCode()), jsonArray);
     }
 
-    private Uarr(final JsonArray jsonArray) {
-        this.arrayReference = Fn.get(new JsonArray(), () -> jsonArray, jsonArray);
-        LOGGER.debug(Info.STREAM_START, String.valueOf(this.hashCode()), jsonArray);
+    public static Uarr create(final JsonArray item) {
+        return new Uarr(item);
     }
 
     public Uarr append(final JsonObject object) {
