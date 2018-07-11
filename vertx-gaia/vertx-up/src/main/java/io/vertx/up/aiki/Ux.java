@@ -156,6 +156,10 @@ public final class Ux {
         return To.toArray(list, convert);
     }
 
+    public static BiConsumer<JsonArray, Object> fnCollectJArray() {
+        return Functions.fnCollectJArray();
+    }
+
     // ---------------------- Envelop Returned --------------------------
     public static <T> Future<T> toFuture(final T entity) {
         return To.toFuture(entity);
