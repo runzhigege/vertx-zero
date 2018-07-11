@@ -5,6 +5,7 @@ import io.vertx.config.ConfigStoreOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -368,6 +369,30 @@ public class Ut {
 
     public static Date parseFull(final String literal) {
         return Period.parseFull(literal);
+    }
+
+    public static LocalDate toDate(final Date date) {
+        return Period.toDate(date);
+    }
+
+    public static LocalTime toTime(final Date date) {
+        return Period.toTime(date);
+    }
+
+    public static LocalDateTime toDateTime(final Date date) {
+        return Period.toDateTime(date);
+    }
+
+    public static LocalDate toDate(final Instant date) {
+        return Period.toDate(date);
+    }
+
+    public static LocalTime toTime(final Instant date) {
+        return Period.toTime(date);
+    }
+
+    public static LocalDateTime toDateTime(final Instant date) {
+        return Period.toDateTime(date);
     }
 
     // --- String

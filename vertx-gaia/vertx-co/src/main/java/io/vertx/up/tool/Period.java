@@ -2,10 +2,7 @@ package io.vertx.up.tool;
 
 import io.vertx.up.func.Fn;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -38,6 +35,9 @@ class Period {
         }
     };
 
+    private Period() {
+    }
+
     /**
      * Convert to datetime
      *
@@ -60,6 +60,22 @@ class Period {
     /**
      * Convert to date
      *
+     * @param date
+     * @return
+     */
+    static LocalDateTime toDateTime(final Date date) {
+        return toDateTime(date.toInstant());
+    }
+
+
+    static LocalDateTime toDateTime(final Instant instant) {
+        final ZoneId zone = ZoneId.systemDefault();
+        return LocalDateTime.ofInstant(instant, zone);
+    }
+
+    /**
+     * Convert to date
+     *
      * @param literal
      * @return
      */
@@ -74,6 +90,22 @@ class Period {
                                                 literal))
                                 .findFirst(), literal);
         return hit.isPresent() ? LocalDate.parse(literal, hit.get()) : null;
+    }
+
+    /**
+     * Convert to date
+     *
+     * @param date
+     * @return
+     */
+    static LocalDate toDate(final Date date) {
+        final LocalDateTime datetime = toDateTime(date);
+        return datetime.toLocalDate();
+    }
+
+    static LocalDate toDate(final Instant instant) {
+        final LocalDateTime datetime = toDateTime(instant);
+        return datetime.toLocalDate();
     }
 
     /**
@@ -93,6 +125,22 @@ class Period {
                                                 literal))
                                 .findFirst(), literal);
         return hit.isPresent() ? LocalTime.parse(literal, hit.get()) : null;
+    }
+
+    /**
+     * Convert to date
+     *
+     * @param date
+     * @return
+     */
+    static LocalTime toTime(final Date date) {
+        final LocalDateTime datetime = toDateTime(date);
+        return datetime.toLocalTime();
+    }
+
+    static LocalTime toTime(final Instant instant) {
+        final LocalDateTime datetime = toDateTime(instant);
+        return datetime.toLocalTime();
     }
 
     /**
@@ -157,11 +205,11 @@ class Period {
         }, literal);
     }
 
-    static List<String> valueDurationDays(String from, String to) {
-        List<String> result = new ArrayList<String>();
+    static List<String> valueDurationDays(final String from, final String to) {
+        final List<String> result = new ArrayList<String>();
         LocalDate begin = LocalDate.parse(from);
         result.add(begin.format(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US)));
-        LocalDate end = LocalDate.parse(to);
+        final LocalDate end = LocalDate.parse(to);
         while (end.isAfter(begin)) {
             begin = begin.plusDays(1);
             result.add(begin.format(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US)));
@@ -226,8 +274,5 @@ class Period {
 
     static Date parse(final LocalDate datetime) {
         return Date.from(datetime.atStartOfDay(ZoneId.systemDefault()).toInstant());
-    }
-
-    private Period() {
     }
 }
