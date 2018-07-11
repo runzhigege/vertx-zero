@@ -17,6 +17,11 @@ public interface JwtAuth extends AuthProvider {
         return new JwtAuthProvider(vertx, config, fnVerify);
     }
 
+    static JwtAuth create(final Vertx vertx,
+                          final JWTAuthOptions config) {
+        return new JwtAuthProvider(vertx, config, null);
+    }
+
     String generateToken(JsonObject data, JWTOptions options);
 
     default String generateToken(final JsonObject claims) {
