@@ -55,6 +55,12 @@ public interface Inquiry {
     }
 
     /**
+     * @param field
+     * @param value
+     */
+    void setInquiry(String field, Object value);
+
+    /**
      * Get projection
      *
      * @return Projection to do filter
