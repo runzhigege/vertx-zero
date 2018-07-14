@@ -16,6 +16,9 @@ class Web {
                 message.reply(To.toEnvelop(handler.result()));
             } else {
                 // Readible codec for configured information, error flow needed.
+                if (null != handler.cause()) {
+                    handler.cause().printStackTrace();
+                }
                 message.reply(Envelop.failure(To.toError(Web.class, handler.cause())));
             }
         };
