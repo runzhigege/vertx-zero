@@ -431,4 +431,9 @@ public class Ut {
     public static Set<String> splitToSet(final String input, final String separator) {
         return StringUtil.split(input, separator);
     }
+
+    // --- Math method for multiply
+    public static Integer mathMultiply(final Integer left, final Integer right) {
+        return Numeric.mathMultiply(left, right);
+    }
 }

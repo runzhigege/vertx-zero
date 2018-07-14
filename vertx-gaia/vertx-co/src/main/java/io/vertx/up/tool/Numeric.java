@@ -11,6 +11,12 @@ import java.util.regex.Pattern;
  */
 class Numeric {
 
+    static Integer mathMultiply(final Integer left, final Integer right) {
+        final Integer leftValue = Fn.get(0, () -> left, left);
+        final Integer rightValue = Fn.get(0, () -> right, right);
+        return Math.multiplyExact(leftValue, rightValue);
+    }
+
     private static boolean isMatch(final String regex, final String original) {
         return Fn.get(() -> {
             final Pattern pattern = Pattern.compile(regex);
@@ -18,7 +24,6 @@ class Numeric {
             return matcher.matches();
         }, regex, original);
     }
-
 
     static boolean isPositive(final String original) {
         return isMatch("^\\+{0,1}[0-9]\\d*", original);
