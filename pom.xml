@@ -59,8 +59,8 @@
         <encoding>UTF-8</encoding>
         <jcabi.version>0.22.6</jcabi.version>
         <!-- Vertx 3.5.3.CR1 SNAPSHOT, For testing -->
-        <vertx.version>3.5.3.CR1</vertx.version>
-        <stack.version>3.5.3.CR1</stack.version>
+        <vertx.version>3.5.3</vertx.version>
+        <stack.version>3.5.3</stack.version>
 
         <jackson.version>2.9.6</jackson.version>
         <jws.version>2.1</jws.version>
@@ -98,11 +98,11 @@
         <!-- Rpc -->
         <protobuf.version>3.6.0</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
-        <grpc.version>1.13.1</grpc.version>
+        <grpc.version>1.13.2</grpc.version>
         <!-- Vert.x Addition -->
         <rxjava2.version>2.1.16</rxjava2.version>
         <netty.tcnative.version>2.0.12.Final</netty.tcnative.version>
-        <netty.version>4.1.24.Final</netty.version>
+        <netty.version>4.1.27.Final</netty.version>
         <hazelcast.version>3.10.2</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
         <error.prone.version>2.3.1</error.prone.version>
