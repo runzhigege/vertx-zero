@@ -3,6 +3,7 @@ package io.vertx.up.aiki;
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.func.Fn;
 import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Values;
 
@@ -31,6 +32,21 @@ class Dual {
                 .map(item -> (JsonObject) item)
                 .subscribe(item -> append(target, item, false));
         return target;
+    }
+
+    static JsonArray zip(
+            final JsonArray targetArray,
+            final JsonArray sources
+    ) {
+        final JsonArray results = new JsonArray();
+        Fn.itJArray(targetArray, JsonObject.class, (source, index) -> {
+            final JsonObject target = sources.getJsonObject(index);
+            final JsonObject result = null == target ? source :
+                    append(source, target, true);
+            results.add(result);
+        });
+        targetArray.clear();
+        return targetArray.addAll(results);
     }
 
     static JsonArray zip(
