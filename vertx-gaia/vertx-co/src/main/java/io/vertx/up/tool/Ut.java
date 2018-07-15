@@ -5,6 +5,7 @@ import io.vertx.config.ConfigStoreOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -435,5 +436,9 @@ public class Ut {
     // --- Math method for multiply
     public static Integer mathMultiply(final Integer left, final Integer right) {
         return Numeric.mathMultiply(left, right);
+    }
+
+    public static BigDecimal mathSumDecimal(final JsonArray source, final String field) {
+        return Numeric.mathJSum(source, field, BigDecimal.class);
     }
 }
