@@ -403,6 +403,10 @@ public final class Ux {
         return Fluctuate.thenComposite(source, mergeFun, suppliers);
     }
 
+    public static Future<JsonArray> thenComposite(final List<Future<JsonObject>> futures) {
+        return Fluctuate.thenComposite(futures);
+    }
+
     // -> Merge multi Future<> to single one, one for all module.
     public static <F, S, T> Future<T> thenComposite(final Future<F> source, final BiFunction<F, List<S>, T> mergeFun, final Function<F, Future<S>>... functions) {
         return Fluctuate.thenComposite(source, mergeFun, functions);
