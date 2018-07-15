@@ -251,6 +251,14 @@ public final class Ux {
         return In.requestSession(envelop, field);
     }
 
+    // -> JsonArray ( JsonObject ) + JsonArray ( String ) -> add 'serial'
+    public static JsonArray assignSerial(final JsonArray items, final JsonArray serials) {
+        return In.assignValue(items, serials, "serial");
+    }
+
+    public static void assignAuditor(final Object reference, final boolean isUpdate) {
+        In.assignAuditor(reference, isUpdate);
+    }
 
     // ---------------------- Function Generator --------------------------------------
     public static Future<JsonObject> fnRpc(final JsonArray array) {
