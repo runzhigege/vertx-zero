@@ -27,11 +27,11 @@ enum StoreType {
     DIRECTORY("directory"),
     EVENT_BUS("event-but");
 
+    private final transient String literal;
+
     StoreType(final String literal) {
         this.literal = literal;
     }
-
-    private final transient String literal;
 
     public String key() {
         return this.literal;
@@ -42,11 +42,11 @@ enum StoreFormat {
     YAML("yaml"),
     PROP("properties");
 
+    private final transient String literal;
+
     StoreFormat(final String literal) {
         this.literal = literal;
     }
-
-    private final transient String literal;
 
     public String key() {
         return this.literal;
@@ -56,11 +56,11 @@ enum StoreFormat {
 enum StoreConfig {
     PATH("path");
 
+    private final transient String literal;
+
     StoreConfig(final String literal) {
         this.literal = literal;
     }
-
-    private final transient String literal;
 
     public String key() {
         return this.literal;
@@ -91,6 +91,8 @@ interface Storage {
 interface Info {
 
     String INF_NET = "[ ZERO ] Network checking with telnet client = {0}, key = {1}, host = {2}, port = {3}";
+
+    String MATH_NOT_MATCH = "[ ZERO ] ( Numeric ) The system could not match current type {0} to do sum";
 }
 
 interface Pool {
