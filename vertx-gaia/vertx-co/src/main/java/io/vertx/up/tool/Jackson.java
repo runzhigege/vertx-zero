@@ -60,6 +60,9 @@ final class Jackson {
         Jackson.MAPPER.findAndRegisterModules();
     }
 
+    private Jackson() {
+    }
+
     static JsonObject visitJObject(
             final JsonObject item,
             final String... keys
@@ -198,7 +201,6 @@ final class Jackson {
         return Fn.get(null, () -> Fn.getJvm(() -> Jackson.MAPPER.writeValueAsString(t), t), t);
     }
 
-
     static <T> T deserialize(final JsonObject value, final Class<T> type) {
         return Fn.get(null,
                 () -> Jackson.deserialize(value.encode(), type), value);
@@ -228,8 +230,5 @@ final class Jackson {
         final List<T> entities = new ArrayList<>();
         result.forEach(item -> entities.add(Jackson.deserialize(item.encode(), clazz)));
         return entities;
-    }
-
-    private Jackson() {
     }
 }

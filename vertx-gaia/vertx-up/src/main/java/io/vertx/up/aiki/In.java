@@ -1,13 +1,16 @@
 package io.vertx.up.aiki;
 
 import io.vertx.core.eventbus.Message;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.func.Fn;
 import io.vertx.up.tool.Ut;
 
+import java.time.Instant;
 import java.util.Objects;
+import java.util.UUID;
 
 class In {
 
@@ -89,5 +92,29 @@ class In {
                     final Session session = envelop.getSession();
                     return null == session ? null : session.get(field);
                 });
+    }
+
+    static JsonArray assignValue(
+            final JsonArray source,
+            final JsonArray target,
+            final String field
+    ) {
+        Fn.itJArray(source, JsonObject.class, (item, index) -> item.put(field, target.getValue(index)));
+        return source;
+    }
+
+    static void assignAuditor(final Object reference, final boolean isUpdate) {
+        if (Objects.nonNull(reference) && reference instanceof Envelop) {
+            final Envelop envelop = (Envelop) reference;
+            final String user = requestUser(envelop, "user");
+            if (isUpdate) {
+                envelop.setValue("updateBy", user);
+                envelop.setValue("udpateTime", Instant.now());
+            } else {
+                envelop.setValue("key", UUID.randomUUID().toString());
+                envelop.setValue("createBy", user);
+                envelop.setValue("createTime", Instant.now());
+            }
+        }
     }
 }
