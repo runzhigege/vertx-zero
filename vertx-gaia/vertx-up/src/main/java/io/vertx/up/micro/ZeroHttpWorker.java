@@ -10,11 +10,13 @@ import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.follow.Invoker;
 import io.vertx.up.micro.follow.JetSelector;
+import io.vertx.up.tool.Ut;
 import io.vertx.up.web.ZeroAnno;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.WorkerArgumentException;
 
 import java.lang.reflect.Method;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -76,8 +78,15 @@ public class ZeroHttpWorker extends AbstractVerticle {
         }
         // Record all the information;
         if (!LOGGED.getAndSet(Boolean.TRUE)) {
-            INVOKER_MAP.forEach((key, value) ->
-                    LOGGER.info(Info.MSG_INVOKER, value.getClass(), String.valueOf(key), String.valueOf(value.hashCode())));
+            final ConcurrentMap<Class<?>, Set<Integer>> outputMap = new ConcurrentHashMap<>();
+            INVOKER_MAP.forEach((key, value) -> {
+                if (outputMap.containsKey(value.getClass())) {
+                    outputMap.get(value.getClass()).add(key);
+                } else {
+                    outputMap.put(value.getClass(), new HashSet<>());
+                }
+            });
+            outputMap.forEach((key, value) -> LOGGER.info(Info.MSG_INVOKER, key, Ut.toString(value), String.valueOf(value.size())));
         }
     }
 

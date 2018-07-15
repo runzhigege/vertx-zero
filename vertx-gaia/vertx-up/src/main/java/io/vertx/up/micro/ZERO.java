@@ -43,7 +43,7 @@ interface Info {
             "Endpoint: {1}.";
 
     String MSG_INVOKER = "[ ZERO ] ( Invoker ) Zero system selected {0} as invoker," +
-            "the metadata receipt hash code = {1}, invoker hash code ={2}.";
+            "the metadata receipt hash code = {1}, invoker size = {2}.";
 }
 
 interface Pool {
