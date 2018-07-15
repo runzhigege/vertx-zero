@@ -153,6 +153,19 @@ class Fluctuate {
         });
     }
 
+    static Future<JsonArray> thenComposite(
+            final List<Future<JsonObject>> futures
+    ) {
+        final Future<JsonArray> result = Future.future();
+        final List<Future> converted = new ArrayList<>(futures);
+        CompositeFuture.all(converted).setHandler(res -> {
+            final List<Object> all = res.result().list();
+            final JsonArray allData = new JsonArray(all);
+            result.complete(allData);
+        });
+        return result;
+    }
+
     static <F, S, T> Future<T> thenComposite(
             final Future<F> source,
             final BiFunction<F, List<S>, T> mergeFun,

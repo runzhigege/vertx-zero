@@ -2,6 +2,7 @@ package io.vertx.up.tool;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.vertx.config.ConfigStoreOptions;
+import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
@@ -23,6 +24,16 @@ import java.util.function.Supplier;
  * Uniform Tool
  */
 public class Ut {
+    // --- Reduce
+    public static JsonArray reduceJArray(final JsonArray collection, final Object element) {
+        return collection.add(element);
+    }
+
+    public static List<Future<JsonObject>> reduceListFuture(final List<Future<JsonObject>> list, final Future<JsonObject> element) {
+        list.add(element);
+        return list;
+    }
+
     // --- Encrypt
     public static String encryptMD5(final String input) {
         return Codec.md5(input);
@@ -244,6 +255,10 @@ public class Ut {
     // --- To
     public static JsonArray toJArray(final Object value) {
         return Jackson.toJArray(value);
+    }
+
+    public static <T> JsonArray toJArray(final T value, final int repeat) {
+        return Types.toJArray(value, repeat);
     }
 
     public static <T> JsonArray toJArray(final Set<T> set) {

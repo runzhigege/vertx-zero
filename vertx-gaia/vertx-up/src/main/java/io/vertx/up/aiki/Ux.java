@@ -256,6 +256,10 @@ public final class Ux {
         return In.assignValue(items, serials, "serial");
     }
 
+    public static JsonArray assignField(final JsonArray items, final JsonArray targets, final String field) {
+        return In.assignValue(items, targets, field);
+    }
+
     public static void assignAuditor(final Object reference, final boolean isUpdate) {
         In.assignAuditor(reference, isUpdate);
     }
@@ -401,6 +405,10 @@ public final class Ux {
      */
     public static <F, S, T> Future<T> thenComposite(final Future<F> source, final BiFunction<F, List<S>, T> mergeFun, final Supplier<Future<S>>... suppliers) {
         return Fluctuate.thenComposite(source, mergeFun, suppliers);
+    }
+
+    public static Future<JsonArray> thenComposite(final List<Future<JsonObject>> futures) {
+        return Fluctuate.thenComposite(futures);
     }
 
     // -> Merge multi Future<> to single one, one for all module.

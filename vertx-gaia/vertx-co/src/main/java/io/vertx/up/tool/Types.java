@@ -16,6 +16,19 @@ import java.util.concurrent.ConcurrentMap;
 class Types {
 
     private static final Annal LOGGER = Annal.get(Types.class);
+    private static final ConcurrentMap<Class<?>, Class<?>> UNBOXES =
+            new ConcurrentHashMap<Class<?>, Class<?>>() {
+                {
+                    this.put(Integer.class, int.class);
+                    this.put(Long.class, long.class);
+                    this.put(Short.class, short.class);
+                    this.put(Boolean.class, boolean.class);
+                    this.put(Character.class, char.class);
+                    this.put(Double.class, double.class);
+                    this.put(Float.class, float.class);
+                    this.put(Byte.class, byte.class);
+                }
+            };
 
     static <T extends Enum<T>> T toEnum(
             final Class<T> clazz,
@@ -142,6 +155,14 @@ class Types {
         return array;
     }
 
+    static <T> JsonArray toJArray(final T entity, final int repeat) {
+        final JsonArray array = new JsonArray();
+        for (int idx = Values.IDX; idx < repeat; idx++) {
+            array.add(entity);
+        }
+        return array;
+    }
+
     static Collection toCollection(final Object value) {
         return Fn.get(() -> {
             // Collection
@@ -175,18 +196,4 @@ class Types {
     static Class<?> toPrimary(final Class<?> source) {
         return UNBOXES.getOrDefault(source, source);
     }
-
-    private static final ConcurrentMap<Class<?>, Class<?>> UNBOXES =
-            new ConcurrentHashMap<Class<?>, Class<?>>() {
-                {
-                    this.put(Integer.class, int.class);
-                    this.put(Long.class, long.class);
-                    this.put(Short.class, short.class);
-                    this.put(Boolean.class, boolean.class);
-                    this.put(Character.class, char.class);
-                    this.put(Double.class, double.class);
-                    this.put(Float.class, float.class);
-                    this.put(Byte.class, byte.class);
-                }
-            };
 }
