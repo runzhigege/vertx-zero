@@ -99,6 +99,11 @@ public class Uarr {
         return this;
     }
 
+    public Uarr zip(final JsonArray target) {
+        Dual.zip(this.arrayReference, target);
+        return this;
+    }
+
     public JsonArray to() {
         LOGGER.debug(Info.STREAM_END, String.valueOf(this.hashCode()), this.arrayReference);
         return this.arrayReference;

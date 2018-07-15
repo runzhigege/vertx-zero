@@ -256,6 +256,10 @@ public final class Ux {
         return In.assignValue(items, serials, "serial");
     }
 
+    public static JsonArray assignField(final JsonArray items, final JsonArray targets, final String field) {
+        return In.assignValue(items, targets, field);
+    }
+
     public static void assignAuditor(final Object reference, final boolean isUpdate) {
         In.assignAuditor(reference, isUpdate);
     }

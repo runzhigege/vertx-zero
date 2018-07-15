@@ -257,6 +257,10 @@ public class Ut {
         return Jackson.toJArray(value);
     }
 
+    public static <T> JsonArray toJArray(final T value, final int repeat) {
+        return Types.toJArray(value, repeat);
+    }
+
     public static <T> JsonArray toJArray(final Set<T> set) {
         return Types.toJArray(set);
     }
