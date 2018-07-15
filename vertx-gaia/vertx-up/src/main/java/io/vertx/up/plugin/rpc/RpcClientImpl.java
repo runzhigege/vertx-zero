@@ -77,6 +77,12 @@ public class RpcClientImpl implements RpcClient {
         return this.connect(RpcHelper.on(name, address), data, handler);
     }
 
+    @Override
+    public RpcClient close() {
+        this.holder.close();
+        return this;
+    }
+    
     private RpcStub getStub(final IpcType type) {
         final RpcStub stub;
         switch (type) {
