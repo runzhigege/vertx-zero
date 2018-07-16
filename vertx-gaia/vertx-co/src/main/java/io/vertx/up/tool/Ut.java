@@ -383,6 +383,10 @@ public class Ut {
         return Period.parse(date);
     }
 
+    public static Date now() {
+        return Period.parse(LocalDateTime.now());
+    }
+
     public static Date parseFull(final String literal) {
         return Period.parseFull(literal);
     }
