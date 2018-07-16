@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.pool.HikariPool;
 import io.vertx.core.json.JsonObject;
+import io.vertx.zero.exception.DataSourceException;
 
 /**
  * JsonObject -> HikariConfig
@@ -12,10 +13,6 @@ public class HikariCpConfig {
 
     private transient final HikariPool pool;
 
-
-    public static HikariCpConfig create(final JsonObject config) {
-        return new HikariCpConfig(config);
-    }
 
     private HikariCpConfig(final JsonObject config) {
 
@@ -28,8 +25,16 @@ public class HikariCpConfig {
         hikariConfig.setPassword(config.getString("password"));
         hikariConfig.setCatalog(config.getString("catalog"));
         // Init data source
-        final HikariDataSource dataSource = new HikariDataSource(hikariConfig);
-        this.pool = new HikariPool(dataSource);
+        try {
+            final HikariDataSource dataSource = new HikariDataSource(hikariConfig);
+            this.pool = new HikariPool(dataSource);
+        } catch (final HikariPool.PoolInitializationException ex) {
+            throw new DataSourceException(this.getClass(), ex, hikariConfig.getJdbcUrl());
+        }
+    }
+
+    public static HikariCpConfig create(final JsonObject config) {
+        return new HikariCpConfig(config);
     }
 
     public HikariPool getPool() {
