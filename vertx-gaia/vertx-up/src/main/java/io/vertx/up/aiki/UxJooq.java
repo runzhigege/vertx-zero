@@ -57,7 +57,7 @@ public class UxJooq {
             new ConcurrentHashMap<String, BiFunction<String, Instant, Condition>>() {
                 {
                     this.put(Inquiry.Instant.DAY, (field, value) -> {
-                        // 时间区间
+                        // Time for locale
                         final LocalDate date = Ut.toDate(value);
                         return DSL.field(field).between(date.atStartOfDay(), date.plusDays(1).atStartOfDay());
                     });
@@ -95,7 +95,7 @@ public class UxJooq {
             } else if (3 == fields.length) {
                 Fn.flingUp(null == value, LOGGER,
                         JooqArgumentException.class, UxJooq.class, value);
-                final Instant instant = Ut.parseFull(value.toString()).toInstant();
+                final Instant instant = filters.getInstant(field);
                 Fn.flingUp(Instant.class != instant.getClass(), LOGGER,
                         JooqArgumentException.class, UxJooq.class, instant.getClass());
                 final String mode = fields[Values.TWO];
