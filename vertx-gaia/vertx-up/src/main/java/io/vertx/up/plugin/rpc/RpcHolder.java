@@ -6,8 +6,6 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.Shareable;
 import io.vertx.up.log.Annal;
 
-import java.util.concurrent.TimeUnit;
-
 class RpcHolder implements Shareable {
     private static final Annal LOGGER = Annal.get(RpcHolder.class);
     private final JsonObject config;
@@ -26,7 +24,9 @@ class RpcHolder implements Shareable {
     }
 
     synchronized ManagedChannel getChannel() {
-        this.channel = RpcSslTool.getChannel(this.vertx, this.config);
+        if (null == this.channel) {
+            this.channel = RpcSslTool.getChannel(this.vertx, this.config);
+        }
         return this.channel;
     }
 
@@ -37,11 +37,7 @@ class RpcHolder implements Shareable {
     synchronized void close() {
         if (--this.refCount == 0) {
             if (this.channel != null) {
-                try {
-                    this.channel.awaitTermination(3000L, TimeUnit.SECONDS);
-                } catch (final InterruptedException ex) {
-                    LOGGER.jvm(ex);
-                }
+                this.channel.shutdownNow();
             }
             if (this.closeRunner != null) {
                 this.closeRunner.run();

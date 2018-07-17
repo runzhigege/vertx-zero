@@ -160,7 +160,7 @@ class Period {
             final String pattern = Storage.PATTERNS_MAP.get(length);
             if (null != pattern) {
                 // Time + Date, fast parsing first.
-                final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern, Locale.US);
+                final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern, Locale.getDefault());
                 Date converted = null;
                 if (10 == pattern.length()) {
                     final LocalDate date = LocalDate.parse(literal, formatter);
