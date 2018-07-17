@@ -74,4 +74,7 @@ public interface RpcClient {
             String address,
             JsonObject data,
             Handler<AsyncResult<JsonObject>> handler);
+
+    @Fluent
+    RpcClient close();
 }
