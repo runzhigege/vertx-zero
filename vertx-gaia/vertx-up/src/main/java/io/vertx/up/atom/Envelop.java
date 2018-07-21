@@ -34,7 +34,10 @@ public class Envelop implements Serializable {
     private Session session;
 
     private <T> Envelop(final T data, final HttpStatusCode status) {
-        this.data = this.build(ZeroSerializer.toSupport(data));
+        final Object serialized = ZeroSerializer.toSupport(data);
+        final JsonObject bodyData = new JsonObject();
+        bodyData.put(Key.DATA, serialized);
+        this.data = bodyData;
         this.error = null;
         this.status = status;
     }
@@ -58,7 +61,7 @@ public class Envelop implements Serializable {
         return new Envelop(entity, HttpStatusCode.OK);
     }
 
-    public static <T> Envelop failure(final String message) {
+    public static Envelop failure(final String message) {
         return new Envelop(new _500InternalServerException(Envelop.class, message));
     }
 
@@ -274,14 +277,6 @@ public class Envelop implements Serializable {
                     () -> credential.getString(field),
                     () -> Strings.EMPTY);
         }, this.user);
-    }
-
-    private <T> JsonObject build(final T input) {
-        final JsonObject data = new JsonObject();
-        final HttpStatusCode status = (null == this.error)
-                ? HttpStatusCode.OK : this.error.getStatus();
-        data.put(Key.DATA, input);
-        return data;
     }
 
     @Override
