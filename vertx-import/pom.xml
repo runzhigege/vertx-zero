@@ -18,7 +18,7 @@
         <zero.version>0.4.8.1-SNAPSHOT</zero.version>
         <mysql.version>8.0.11</mysql.version>
         <jooq.version>3.10.7</jooq.version>
-        <hazelcast.version>3.10.2</hazelcast.version>
+        <hazelcast.version>3.10.3</hazelcast.version>
         <maven.javadoc.skip>true</maven.javadoc.skip>
         <aspectj.version>1.9.1</aspectj.version>
     </properties>
@@ -87,6 +87,12 @@
             <dependency>
                 <groupId>cn.vertxup</groupId>
                 <artifactId>vertx-zeus</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <!-- Inflx -->
+            <dependency>
+                <groupId>cn.vertxup</groupId>
+                <artifactId>vertx-ifx</artifactId>
                 <version>${zero.version}</version>
             </dependency>
         </dependencies>
