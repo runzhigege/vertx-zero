@@ -69,6 +69,8 @@ E40053: "The order of @WebFilter must be greater than or equal 0 ( >= 0 ), but n
 E40054: "The @WebFilter \"{0}\"could not be initialized, please check your class."
 E40055: "Jooq with 3 length only support value of Date,DateTime,Time only, current = {0}"
 E40056: "(Database) Data pool initialized met issue, jdbcUrl = {0}, exception = {1}"
+# RxJava
+E45001: (V) - The field "{1}" of json array "{0}" must be mapped to unique element, but current reduced is "{2}"
 # (Web) Exception for web
 E60000: (400) - Request validation failure, class = {0}, method = {1}, message = {2}
 E60001: (400) - The input content could not be converted into valid resource user {0}
