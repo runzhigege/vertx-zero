@@ -13,6 +13,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.JooqArgumentException;
+import io.vertx.zero.exception.JooqMergeException;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 
@@ -222,10 +223,12 @@ public class UxJooq {
 
     // CRUD - Upsert ----------------------------------------------------
     private <T> T copyEntity(final T target, final T updated) {
-        final JsonObject targetJson = Ut.serializeJson(target);
+        Fn.flingUp(null != updated, LOGGER, JooqMergeException.class,
+                UxJooq.class, null == target ? null : target.getClass(), Ut.serialize(target));
+        final JsonObject targetJson = null == target ? new JsonObject() : Ut.serializeJson(target);
         final JsonObject sourceJson = Ut.serializeJson(updated);
         targetJson.mergeIn(sourceJson, true);
-        return (T) Ut.deserialize(targetJson, target.getClass());
+        return (T) Ut.deserialize(targetJson, updated.getClass());
     }
 
     public <T> Future<T> saveAsync(final Object id, final T updated) {
