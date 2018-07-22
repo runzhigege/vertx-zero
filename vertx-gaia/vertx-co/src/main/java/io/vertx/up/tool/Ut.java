@@ -12,7 +12,10 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
@@ -460,7 +463,15 @@ public class Ut {
     }
 
     // --- RxJava
-    public static <T> Single<HashSet<T>> rxSingleSet(final JsonArray array, final String field) {
-        return RxJava.singleSet(array, field);
+    public static <T> T rxOneElement(final JsonArray array, final String field) {
+        return RxJava.rxOneElement(array, field);
+    }
+
+    public static <T> Single<T> rxOne(final JsonArray array, final String field) {
+        return Single.just(RxJava.rxOneElement(array, field));
+    }
+
+    public static <T> Single<Set<T>> rxSet(final JsonArray array, final String field) {
+        return RxJava.rxSet(array, field);
     }
 }
