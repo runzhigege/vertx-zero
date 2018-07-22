@@ -252,12 +252,21 @@ public final class Ux {
     }
 
     // -> JsonArray ( JsonObject ) + JsonArray ( String ) -> add 'serial'
+
+    public static JsonArray fillSerial(final JsonArray items, final JsonArray serials) {
+        return In.assignValue(items, serials, "serial", false);
+    }
+
     public static JsonArray assignSerial(final JsonArray items, final JsonArray serials) {
-        return In.assignValue(items, serials, "serial");
+        return In.assignValue(items, serials, "serial", true);
+    }
+
+    public static JsonArray fillField(final JsonArray items, final JsonArray targets, final String field) {
+        return In.assignValue(items, targets, field, false);
     }
 
     public static JsonArray assignField(final JsonArray items, final JsonArray targets, final String field) {
-        return In.assignValue(items, targets, field);
+        return In.assignValue(items, targets, field, true);
     }
 
     public static void assignAuditor(final Object reference, final boolean isUpdate) {
