@@ -321,6 +321,28 @@ public final class Ux {
         return Future.succeededFuture(To.toJson(entity, pojo));
     }
 
+    public static <T> Future<JsonObject> thenUpsert(final T entity,
+                                                    final Supplier<Future<JsonObject>> supplier) {
+        return Async.toUpsertFuture(entity, "", supplier, null);
+    }
+
+    public static <T> Future<JsonObject> thenUpsert(final T entity,
+                                                    final Supplier<Future<JsonObject>> supplier,
+                                                    final Function<JsonObject, JsonObject> updateFun) {
+        return Async.toUpsertFuture(entity, "", supplier, updateFun);
+    }
+
+    public static <T> Future<JsonObject> thenUpsert(final T entity, final String pojo,
+                                                    final Supplier<Future<JsonObject>> supplier) {
+        return Async.toUpsertFuture(entity, pojo, supplier, null);
+    }
+
+    public static <T> Future<JsonObject> thenUpsert(final T entity, final String pojo,
+                                                    final Supplier<Future<JsonObject>> supplier,
+                                                    final Function<JsonObject, JsonObject> updateFun) {
+        return Async.toUpsertFuture(entity, pojo, supplier, updateFun);
+    }
+
     public static <T> Future<Envelop> thenMore(final List<T> list, final String pojo) {
         return Future.succeededFuture(Envelop.success(To.toArray(list, pojo)));
     }
