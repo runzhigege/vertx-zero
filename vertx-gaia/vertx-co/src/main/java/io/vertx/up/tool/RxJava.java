@@ -20,7 +20,8 @@ class RxJava {
     static <T> T rxOneElement(final JsonArray data, final String field) {
         final Single<Set<T>> source = rxSet(data, field);
         final Set<T> result = source.blockingGet();
-        Fn.flingUp(Values.ONE == result.size(), LOGGER,
+        // Only one unique element allowed
+        Fn.flingUp(Values.ONE != result.size(), LOGGER,
                 ReduceVerticalException.class, RxJava.class, data, field, result);
         return result.iterator().next();
     }
