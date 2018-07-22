@@ -97,9 +97,18 @@ class In {
     static JsonArray assignValue(
             final JsonArray source,
             final JsonArray target,
-            final String field
+            final String field,
+            final boolean override
     ) {
-        Fn.itJArray(source, JsonObject.class, (item, index) -> item.put(field, target.getValue(index)));
+        Fn.itJArray(source, JsonObject.class, (item, index) -> {
+            if (override) {
+                item.put(field, target.getValue(index));
+            } else {
+                if (!item.containsKey(field)) {
+                    item.put(field, target.getValue(index));
+                }
+            }
+        });
         return source;
     }
 
