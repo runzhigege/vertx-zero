@@ -1,11 +1,14 @@
 package io.vertx.up.aiki;
 
 import io.reactivex.Observable;
+import io.vertx.core.AsyncResult;
 import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
+import io.vertx.core.Handler;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.exception.WebException;
+import io.vertx.up.exception._500InternalServerException;
 import io.vertx.up.func.Fn;
 import io.vertx.up.tool.Ut;
 import io.vertx.up.tool.mirror.Instance;
@@ -103,11 +106,14 @@ class Fluctuate {
             final Future<JsonObject>... futures
     ) {
         final Future<JsonObject> result = Future.future();
-        CompositeFuture.all(Arrays.asList(futures)).setHandler(res -> {
+        // thenResponse
+        CompositeFuture.all(Arrays.asList(futures)).setHandler(thenResponse(result, (finished) -> {
             final JsonObject resultMap = new JsonObject();
-            Fn.itList(res.result().list(), (item, index) -> resultMap.put(index.toString(), item));
-            result.complete(resultMap);
-        });
+            if (null != finished) {
+                Fn.itList(finished.list(), (item, index) -> resultMap.put(index.toString(), item));
+            }
+            return resultMap;
+        }));
         return result;
     }
 
@@ -119,12 +125,15 @@ class Fluctuate {
         return source.compose(first -> {
             final List<Future> secondFutures = generateFun.apply(first);
             final Future<JsonObject> result = Future.future();
-            CompositeFuture.all(secondFutures).setHandler(res -> {
-                final List<JsonObject> secondary = res.result().list();
-                // Zipper Operation, the base list is first
-                Fn.itList(secondary, (item, index) -> operatorFun[index].accept(first, item));
-                result.complete(first);
-            });
+            // thenResponse
+            CompositeFuture.all(secondFutures).setHandler(thenResponse(result, (finished) -> {
+                if (null != finished) {
+                    final List<JsonObject> secondary = finished.list();
+                    // Zipper Operation, the base list is first
+                    Fn.itList(secondary, (item, index) -> operatorFun[index].accept(first, item));
+                }
+                return first;
+            }));
             return result;
         });
     }
@@ -143,13 +152,8 @@ class Fluctuate {
             Observable.fromArray(suppliers)
                     .map(Supplier::get)
                     .subscribe(secondFutures::add);
-            final Future<T> result = Future.future();
-            CompositeFuture.all(secondFutures).setHandler(res -> {
-                final List<S> secondary = res.result().list();
-                final T completed = mergeFun.apply(first, secondary);
-                result.complete(completed);
-            });
-            return result;
+            // thenResponse
+            return thenResponse(secondFutures, first, mergeFun);
         });
     }
 
@@ -158,11 +162,10 @@ class Fluctuate {
     ) {
         final Future<JsonArray> result = Future.future();
         final List<Future> converted = new ArrayList<>(futures);
-        CompositeFuture.all(converted).setHandler(res -> {
-            final List<Object> all = res.result().list();
-            final JsonArray allData = new JsonArray(all);
-            result.complete(allData);
-        });
+        // thenResponse
+        CompositeFuture.all(converted).setHandler(thenResponse(result, (finished) ->
+                null == finished ? new JsonArray() : new JsonArray(finished.list())
+        ));
         return result;
     }
 
@@ -175,13 +178,8 @@ class Fluctuate {
             Observable.fromArray(functions)
                     .map(item -> item.apply(first))
                     .subscribe(secondFutures::add);
-            final Future<T> result = Future.future();
-            CompositeFuture.all(secondFutures).setHandler(res -> {
-                final List<S> secondary = res.result().list();
-                final T completed = mergeFun.apply(first, secondary);
-                result.complete(completed);
-            });
-            return result;
+            // thenResponse
+            return thenResponse(secondFutures, first, mergeFun);
         });
     }
 
@@ -236,5 +234,34 @@ class Fluctuate {
     ) {
         final WebException error = To.toError(clazz, args);
         return Future.failedFuture(error);
+    }
+
+    private static <F, S, T> Future<T> thenResponse(
+            final List<Future> secondFutures,
+            final F first,
+            final BiFunction<F, List<S>, T> mergeFun) {
+        final Future<T> result = Future.future();
+        CompositeFuture.all(secondFutures).setHandler(
+                thenResponse(result, (finished) -> null == finished ? null : mergeFun.apply(first, finished.list())));
+        return result;
+    }
+
+
+    private static <T> Handler<AsyncResult<CompositeFuture>> thenResponse(
+            final Future<T> future,
+            final Function<CompositeFuture, T> fun) {
+        return res -> {
+            if (res.succeeded()) {
+                final T callback = fun.apply(res.result());
+                future.complete(callback);
+            } else {
+                if (null != res.cause()) {
+                    res.cause().printStackTrace();
+                    future.fail(res.cause());
+                } else {
+                    future.fail(new _500InternalServerException(Fluctuate.class, null));
+                }
+            }
+        };
     }
 }
