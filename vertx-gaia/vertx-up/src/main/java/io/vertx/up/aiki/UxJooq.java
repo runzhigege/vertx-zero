@@ -223,7 +223,7 @@ public class UxJooq {
 
     // CRUD - Upsert ----------------------------------------------------
     private <T> T copyEntity(final T target, final T updated) {
-        Fn.flingUp(null != updated, LOGGER, JooqMergeException.class,
+        Fn.flingUp(null == updated, LOGGER, JooqMergeException.class,
                 UxJooq.class, null == target ? null : target.getClass(), Ut.serialize(target));
         final JsonObject targetJson = null == target ? new JsonObject() : Ut.serializeJson(target);
         final JsonObject sourceJson = Ut.serializeJson(updated);
