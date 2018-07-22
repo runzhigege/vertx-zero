@@ -1,6 +1,7 @@
 package io.vertx.up.tool;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.reactivex.Single;
 import io.vertx.config.ConfigStoreOptions;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
@@ -11,10 +12,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
@@ -459,5 +457,10 @@ public class Ut {
 
     public static BigDecimal mathSumDecimal(final JsonArray source, final String field) {
         return Numeric.mathJSum(source, field, BigDecimal.class);
+    }
+
+    // --- RxJava
+    public static <T> Single<HashSet<T>> rxSingleSet(final JsonArray array, final String field) {
+        return RxJava.singleSet(array, field);
     }
 }
