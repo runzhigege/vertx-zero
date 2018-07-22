@@ -9,6 +9,8 @@ import io.vertx.up.log.Annal;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 class Async {
 
@@ -98,5 +100,16 @@ class Async {
         return future;
     }
 
-
+    static <T> Future<JsonObject> toUpsertFuture(final T entity, final String pojo,
+                                                 final Supplier<Future<JsonObject>> supplier,
+                                                 final Function<JsonObject, JsonObject> updateFun) {
+        return Fn.match(
+                Fn.fork(() -> Future.succeededFuture(To.toJson(entity, pojo))
+                        .compose(item -> null == updateFun ?
+                                Future.succeededFuture(item) :
+                                Future.succeededFuture(updateFun.apply(item))
+                        )
+                ),
+                Fn.branch(null == entity, supplier));
+    }
 }
