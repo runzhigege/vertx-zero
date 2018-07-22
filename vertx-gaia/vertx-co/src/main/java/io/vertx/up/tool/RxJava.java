@@ -23,7 +23,7 @@ class RxJava {
         // Only one unique element allowed
         Fn.flingUp(Values.ONE != result.size(), LOGGER,
                 ReduceVerticalException.class, RxJava.class, data, field, result);
-        return result.iterator().next();
+        return result.isEmpty() ? null : result.iterator().next();
     }
 
     @SuppressWarnings("unchecked")
