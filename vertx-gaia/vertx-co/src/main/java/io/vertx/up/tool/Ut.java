@@ -462,6 +462,15 @@ public class Ut {
         return Numeric.mathJSum(source, field, BigDecimal.class);
     }
 
+    public static Integer mathSumInteger(final JsonArray source, final String field) {
+        return Numeric.mathJSum(source, field, Integer.class);
+    }
+
+    public static Long mathSumLong(final JsonArray source, final String field) {
+        return Numeric.mathJSum(source, field, Long.class);
+    }
+
+
     // --- RxJava
     public static <T> T rxOneElement(final JsonArray array, final String field) {
         return RxJava.rxOneElement(array, field);
