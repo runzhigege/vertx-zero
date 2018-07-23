@@ -23,6 +23,7 @@ class ReturnTransit {
         try {
             returnValue = invokedSupplier.get();
         } catch (final Throwable ex) {
+            ex.printStackTrace();
             throw new _500RpcTransitInvokeException(target, method, ex);
         }
         return returnValue;
