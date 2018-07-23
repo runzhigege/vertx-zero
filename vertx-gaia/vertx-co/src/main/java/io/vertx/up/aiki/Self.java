@@ -3,8 +3,7 @@ package io.vertx.up.aiki;
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -68,7 +67,7 @@ class Self {
     ) {
         final JsonArray result = immutable ? array.copy() : array;
         final JsonArray finals = new JsonArray();
-        Fn.itJArray(result, JsonObject.class, (item, index) -> {
+        Ut.itJArray(result, JsonObject.class, (item, index) -> {
             final JsonObject removed = remove(item, false, keys);
             finals.add(removed);
         });

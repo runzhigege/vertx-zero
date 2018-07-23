@@ -6,10 +6,10 @@ import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.agent.Event;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Axis;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroAnno;
 
 import java.lang.reflect.Method;

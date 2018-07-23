@@ -1,9 +1,10 @@
 package io.vertx.up.web;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.log.internal.Log4JAnnal;
 import io.vertx.zero.marshal.options.Opts;
 
@@ -30,14 +31,17 @@ public final class ZeroAmbient {
     static {
         INJECTIONS = new ConcurrentHashMap<>();
         // 2. The injections must be configured in lime node.
-        Fn.flingUp(() -> {
+        Fn.outUp(() -> {
             final JsonObject opt = OPTS.ingest(KEY);
-            Fn.itJObject(opt, (item, field) -> {
+            Ut.itJObject(opt, (item, field) -> {
                 final String plugin = item.toString();
                 LOGGER.info(Info.PLUGIN_LOAD, KEY, field, plugin);
                 INJECTIONS.put(field, Instance.clazz(plugin));
             });
         }, LOGGER);
+    }
+
+    private ZeroAmbient() {
     }
 
     public static Class<?> getPlugin(final String key) {
@@ -52,8 +56,5 @@ public final class ZeroAmbient {
      * Inited by ZeroGrid static
      */
     static void init() {
-    }
-
-    private ZeroAmbient() {
     }
 }

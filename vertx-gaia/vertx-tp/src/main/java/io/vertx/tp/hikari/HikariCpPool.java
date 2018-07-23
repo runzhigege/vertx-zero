@@ -2,9 +2,9 @@ package io.vertx.tp.hikari;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.hikari.config.HikariCpConfig;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
@@ -18,10 +18,9 @@ public class HikariCpPool {
 
     private static final Annal LOGGER = Annal.get(HikariCpPool.class);
     private static final Node<JsonObject> NODE = Instance.singleton(ZeroUniform.class);
-    private static HikariCpConfig CONFIG;
-
     private static final String KEY = "pool";
     private static final String HIKARI_KEY = "hikari";
+    private static HikariCpConfig CONFIG;
 
     static {
         final JsonObject config = NODE.read();
@@ -29,7 +28,7 @@ public class HikariCpPool {
             final JsonObject hitted = config.getJsonObject(KEY);
             Fn.safeSemi(null != hitted && hitted.containsKey(HIKARI_KEY), LOGGER, () -> {
                 final JsonObject meta = hitted.getJsonObject(HIKARI_KEY);
-                Fn.flingUp(() -> Fn.shuntZero(() ->
+                Fn.outUp(() -> Fn.shuntZero(() ->
                                 Ruler.verify(HIKARI_KEY, meta), meta),
                         LOGGER);
                 CONFIG = HikariCpConfig.create(meta);

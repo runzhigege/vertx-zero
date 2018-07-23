@@ -1,9 +1,9 @@
 package io.vertx.up.plugin;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.exception.ConfigKeyMissingException;
 import io.vertx.zero.marshal.node.Node;
@@ -12,8 +12,6 @@ import io.vertx.zero.marshal.node.ZeroUniform;
 import java.util.function.Function;
 
 public interface Infix {
-
-    <T> T get();
 
     static <R> R initTp(final String key,
                         final Function<JsonObject, R> executor,
@@ -40,7 +38,7 @@ public interface Infix {
             final Class<?> clazz) {
         final Node<JsonObject> node = Instance.instance(ZeroUniform.class);
         final JsonObject options = node.read();
-        Fn.flingUp(null == options || !options.containsKey(key)
+        Fn.outUp(null == options || !options.containsKey(key)
                 , logger, ConfigKeyMissingException.class,
                 clazz, key);
         return options;
@@ -51,7 +49,9 @@ public interface Infix {
             final String key,
             final JsonObject config,
             final Function<JsonObject, R> executor) {
-        Fn.flingUp(() -> Ruler.verify(key, config), logger);
+        Fn.outUp(() -> Ruler.verify(key, config), logger);
         return executor.apply(config);
     }
+
+    <T> T get();
 }

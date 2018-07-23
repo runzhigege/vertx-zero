@@ -4,11 +4,11 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception._500RpcMethodInvokeException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ipc.client.TunnelClient;
-import io.vertx.up.tool.mirror.Instance;
 
 import java.lang.reflect.Method;
 
@@ -31,7 +31,7 @@ public class NodeTransit implements Transit {
                 () -> ReturnTransit.build(this.method.invoke(proxy, envelop), this.method),
                 this.method
         );
-        Fn.flingWeb(null == returnValue, LOGGER,
+        Fn.outWeb(null == returnValue, LOGGER,
                 _500RpcMethodInvokeException.class, this.getClass(), returnValue);
         // 3. Here process the next
         return returnValue

@@ -8,8 +8,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.quiz.ZeroBase;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.io.IO;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.io.IO;
 import org.junit.Test;
 
 public class BladeTc extends ZeroBase {

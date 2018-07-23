@@ -8,11 +8,12 @@ import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.atom.query.Criteria;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.JooqArgumentException;
+import io.vertx.zero.exception.JooqMergeException;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 
@@ -65,6 +66,7 @@ public class UxJooq {
             };
     private transient final Class<?> clazz;
     private transient final VertxDAO vertxDAO;
+    private transient String pojo;
 
     <T> UxJooq(final Class<T> clazz) {
         this.clazz = clazz;
@@ -93,10 +95,10 @@ public class UxJooq {
                 // Function condition inject
 
             } else if (3 == fields.length) {
-                Fn.flingUp(null == value, LOGGER,
+                Fn.outUp(null == value, LOGGER,
                         JooqArgumentException.class, UxJooq.class, value);
                 final Instant instant = filters.getInstant(field);
-                Fn.flingUp(Instant.class != instant.getClass(), LOGGER,
+                Fn.outUp(Instant.class != instant.getClass(), LOGGER,
                         JooqArgumentException.class, UxJooq.class, instant.getClass());
                 final String mode = fields[Values.TWO];
                 final BiFunction<String, Instant, Condition> fun = DOPS.get(mode);
@@ -158,6 +160,13 @@ public class UxJooq {
                 return left.or(right);
             }
         }
+    }
+
+    // Bind current jooq to pojo configuration file.
+    public UxJooq on(final String pojo) {
+        LOGGER.info(Info.JOOQ_BIND, pojo, this.clazz);
+        this.pojo = pojo;
+        return this;
     }
 
     // CRUD - Read -----------------------------------------------------
@@ -222,10 +231,12 @@ public class UxJooq {
 
     // CRUD - Upsert ----------------------------------------------------
     private <T> T copyEntity(final T target, final T updated) {
-        final JsonObject targetJson = Ut.serializeJson(target);
+        Fn.outUp(null == updated, LOGGER, JooqMergeException.class,
+                UxJooq.class, null == target ? null : target.getClass(), Ut.serialize(target));
+        final JsonObject targetJson = null == target ? new JsonObject() : Ut.serializeJson(target);
         final JsonObject sourceJson = Ut.serializeJson(updated);
         targetJson.mergeIn(sourceJson, true);
-        return (T) Ut.deserialize(targetJson, target.getClass());
+        return (T) Ut.deserialize(targetJson, updated.getClass());
     }
 
     public <T> Future<T> saveAsync(final Object id, final T updated) {
@@ -305,12 +316,14 @@ public class UxJooq {
 
     // Fetch Operation --------------------------------------------------
     // Fetch One
+    // Filter column called
     public <T> Future<T> fetchOneAsync(final String column, final Object value) {
         final CompletableFuture<T> future =
                 this.vertxDAO.fetchOneAsync(DSL.field(column), value);
         return Async.toFuture(future);
     }
 
+    // Filter transform called
     public <T> Future<T> fetchOneAndAsync(final JsonObject andFilters) {
         final Condition condition = transform(andFilters, Operator.AND);
         final CompletableFuture<T> future =
@@ -318,6 +331,7 @@ public class UxJooq {
         return Async.toFuture(future);
     }
 
+    // Filter column called
     // Fetch List
     public <T> Future<List<T>> fetchAsync(final String column, final Object value) {
         final CompletableFuture<List<T>> future =
@@ -325,17 +339,20 @@ public class UxJooq {
         return Async.toFuture(future);
     }
 
+    // Filter column called
     public <T> Future<List<T>> fetchInAsync(final String column, final Object... value) {
         final JsonArray values = Ut.toJArray(Arrays.asList(value));
         return fetchInAsync(column, values);
     }
 
+    // Filter column called
     public <T> Future<List<T>> fetchInAsync(final String column, final JsonArray values) {
         final CompletableFuture<List<T>> future =
                 this.vertxDAO.fetchAsync(DSL.field(column), values.getList());
         return Async.toFuture(future);
     }
 
+    // Filter transform called
     public <T> Future<List<T>> fetchAndAsync(final JsonObject andFilters) {
         final Condition condition = transform(andFilters, Operator.AND);
         final CompletableFuture<List<T>> future =
@@ -343,6 +360,7 @@ public class UxJooq {
         return Async.toFuture(future);
     }
 
+    // Filter transform called
     public <T> Future<List<T>> fetchOrAsync(final JsonObject orFilters) {
         final Condition condition = transform(orFilters, Operator.OR);
         final CompletableFuture<List<T>> future =
@@ -423,6 +441,7 @@ public class UxJooq {
                 });
     }
 
+    // Filter transform called
     private <T> Future<Integer> countSearchAsync(final Inquiry inquiry, final Operator operator) {
         final Criteria criteria = inquiry.getCriteria();
         final Function<DSLContext, Integer> function
@@ -431,6 +450,7 @@ public class UxJooq {
         return Async.toFuture(this.vertxDAO.executeAsync(function));
     }
 
+    // Filter transform called
     public <T> Future<List<T>> searchAsync(final Inquiry inquiry, final Operator operator) {
         // Pager, Sort, Criteria Only, this mode do not support projection
         final Function<DSLContext, List<T>> function

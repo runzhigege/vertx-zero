@@ -4,14 +4,14 @@ import io.reactivex.Observable;
 import io.vertx.core.json.JsonObject;
 import io.vertx.servicediscovery.Record;
 import io.vertx.up.eon.em.IpcType;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.container.RxHod;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception._424RpcServiceException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.discovery.IpcOrigin;
 import io.vertx.up.micro.discovery.Origin;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.container.RxHod;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.atom.Ruler;
 
 import java.util.Objects;
@@ -25,7 +25,7 @@ class RpcHelper {
 
     static Record getRecord(final JsonObject config) {
         /** Config Verify **/
-        Fn.flingUp(() -> Fn.shuntZero(() -> Ruler.verify(Key.RULE_KEY, config), config),
+        Fn.outUp(() -> Fn.shuntZero(() -> Ruler.verify(Key.RULE_KEY, config), config),
                 LOGGER);
         // Connect remote etcd to check service
         final ConcurrentMap<String, Record> registryData = ORIGIN.getRegistryData();
@@ -33,7 +33,7 @@ class RpcHelper {
         final String address = config.getString(Key.ADDR);
         LOGGER.debug(Info.RPC_SERVICE, name, address);
         // Empty Found
-        Fn.flingWeb(registryData.values().isEmpty(), LOGGER,
+        Fn.outWeb(registryData.values().isEmpty(), LOGGER,
                 _424RpcServiceException.class, RpcHelper.class,
                 name, address);
 
@@ -47,11 +47,11 @@ class RpcHelper {
                         address.equals(item.getMetadata().getString(Key.PATH)))
                 .subscribe(container::add);
         // Service Not Found
-        Fn.flingWeb(!container.successed(), LOGGER,
+        Fn.outWeb(!container.successed(), LOGGER,
                 _424RpcServiceException.class, RpcHelper.class,
                 name, address);
         // Address Not Found
-        Fn.flingWeb(!container.successed(), LOGGER,
+        Fn.outWeb(!container.successed(), LOGGER,
                 _424RpcServiceException.class, RpcHelper.class,
                 name, address);
         final Record record = container.get();
@@ -82,7 +82,7 @@ class RpcHelper {
 
     static JsonObject getSslConfig(final String name,
                                    final JsonObject rpcConfig) {
-        return Fn.get(new JsonObject(), () -> {
+        return Fn.getNull(new JsonObject(), () -> {
             final JsonObject sslConfig = new JsonObject();
             if (rpcConfig.containsKey(Key.SSL) &&
                     Boolean.valueOf(rpcConfig.getValue(Key.SSL).toString())) {

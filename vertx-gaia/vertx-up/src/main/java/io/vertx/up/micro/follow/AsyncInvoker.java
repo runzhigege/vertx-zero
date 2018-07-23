@@ -5,10 +5,10 @@ import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ipc.client.TunnelClient;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.eon.Values;
 
 import java.lang.reflect.Method;

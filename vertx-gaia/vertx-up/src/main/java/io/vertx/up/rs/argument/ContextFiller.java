@@ -1,7 +1,7 @@
 package io.vertx.up.rs.argument;
 
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.rs.Filler;
 import io.vertx.up.web.ZeroSerializer;
 
@@ -14,7 +14,7 @@ public class ContextFiller implements Filler {
                         final RoutingContext context) {
         final Map<String, Object> data = context.data();
         final Object value = data.get(name);
-        return Fn.get(() -> {
+        return Fn.getNull(() -> {
             if (paramType == value.getClass()) {
                 return value;
             } else {

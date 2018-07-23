@@ -3,7 +3,7 @@ package io.vertx.up.plugin.rpc;
 import io.vertx.core.Vertx;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.plugin.Infix;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -34,12 +34,12 @@ public class RpcInfix implements Infix {
         initInternal(vertx, NAME);
     }
 
+    public static RpcClient getClient() {
+        return CLIENTS.get(NAME);
+    }
+
     @Override
     public RpcClient get() {
         return getClient();
-    }
-
-    public static RpcClient getClient() {
-        return CLIENTS.get(NAME);
     }
 }

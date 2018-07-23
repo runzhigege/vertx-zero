@@ -2,7 +2,7 @@ package io.vertx.up.aiki;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import org.junit.Test;
 
 public class BranchTc {
@@ -33,6 +33,7 @@ public class BranchTc {
 
 class TestFilter {
     private String name;
+    private String email;
 
     public String getName() {
         return this.name;
@@ -49,6 +50,4 @@ class TestFilter {
     public void setEmail(final String email) {
         this.email = email;
     }
-
-    private String email;
 }

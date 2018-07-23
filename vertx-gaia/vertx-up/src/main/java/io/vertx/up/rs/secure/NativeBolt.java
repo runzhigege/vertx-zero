@@ -4,7 +4,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.handler.AuthHandler;
 import io.vertx.up.atom.secure.Cliff;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 
 /**
  * Native AuthHandler extract from bolt,
@@ -25,7 +25,7 @@ class NativeBolt implements Bolt {
     public AuthHandler mount(final Vertx vertx,
                              final Cliff cliff) {
         return Fn.getJvm(() -> {
-                    final JsonObject config = Fn.get(new JsonObject(), cliff::getConfig);
+                    final JsonObject config = Fn.getNull(new JsonObject(), cliff::getConfig);
                     final Object reference = cliff.getAuthorizer().getAuthenticate()
                             .invoke(cliff.getProxy(), vertx, config);
                     return null == reference ? null : (AuthHandler) reference;

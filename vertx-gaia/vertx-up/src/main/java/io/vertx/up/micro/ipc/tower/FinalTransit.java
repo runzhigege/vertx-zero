@@ -3,10 +3,10 @@ package io.vertx.up.micro.ipc.tower;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception._500RpcMethodInvokeException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Instance;
 
 import java.lang.reflect.Method;
 
@@ -28,7 +28,7 @@ public class FinalTransit implements Transit {
                 () -> ReturnTransit.build(this.method.invoke(proxy, data), this.method),
                 this.method
         );
-        Fn.flingWeb(null == returnValue, LOGGER,
+        Fn.outWeb(null == returnValue, LOGGER,
                 _500RpcMethodInvokeException.class, this.getClass(), returnValue);
         return returnValue;
     }

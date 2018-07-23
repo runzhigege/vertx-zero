@@ -1,6 +1,6 @@
 package io.vertx.up.web.serialization;
 
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 
 import java.math.BigDecimal;
 import java.util.function.Function;
@@ -22,7 +22,7 @@ public class BigDecimalSaber extends DecimalSaber {
 
     @Override
     public <T> Object from(final T input) {
-        return Fn.get(() -> {
+        return Fn.getNull(() -> {
             final BigDecimal decimal = (BigDecimal) input;
             return decimal.doubleValue();
         }, input);

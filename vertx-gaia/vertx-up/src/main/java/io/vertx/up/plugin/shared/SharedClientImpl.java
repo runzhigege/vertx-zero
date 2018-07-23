@@ -8,10 +8,10 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.AsyncMap;
 import io.vertx.core.shareddata.LocalMap;
 import io.vertx.core.shareddata.SharedData;
+import io.vertx.up.epic.container.KeyPair;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.exception._501SharedDataModeException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.container.KeyPair;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -202,7 +202,7 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
     }
 
     private void ensure(final boolean expected) {
-        Fn.flingWeb(this.isAsync != expected, LOGGER,
+        Fn.outWeb(this.isAsync != expected, LOGGER,
                 _501SharedDataModeException.class, this.getClass(), this.isAsync);
     }
 }

@@ -3,7 +3,7 @@ package io.vertx.up.secure;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.eon.em.WallType;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.zero.marshal.Transformer;
 
 public class Rampart implements Transformer<Cliff> {

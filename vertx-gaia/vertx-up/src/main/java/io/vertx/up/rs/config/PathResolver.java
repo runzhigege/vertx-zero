@@ -1,8 +1,8 @@
 package io.vertx.up.rs.config;
 
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.PathAnnoEmptyException;
@@ -27,7 +27,7 @@ class PathResolver {
      * @return
      */
     public static String resolve(final Path path) {
-        Fn.flingUp(null == path, LOGGER,
+        Fn.outUp(null == path, LOGGER,
                 PathAnnoEmptyException.class, PathResolver.class);
         // Calculate single path
         return resolve(path, null);
@@ -41,7 +41,7 @@ class PathResolver {
      * @return
      */
     public static String resolve(final Path path, final String root) {
-        Fn.flingUp(null == path, LOGGER,
+        Fn.outUp(null == path, LOGGER,
                 PathAnnoEmptyException.class, PathResolver.class);
         return Fn.getSemi(Ut.isNil(root), LOGGER, () -> calculate(path(path.value())),
                 () -> {
@@ -94,7 +94,7 @@ class PathResolver {
         }
         // Uri must start with SLASH
         final String processed = uri;
-        return Fn.get(() ->
+        return Fn.getNull(() ->
                         processed.startsWith(Strings.SLASH) ?
                                 processed : Strings.SLASH + processed,
                 uri);

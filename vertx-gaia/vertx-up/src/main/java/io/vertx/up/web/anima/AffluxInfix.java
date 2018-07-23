@@ -2,10 +2,10 @@ package io.vertx.up.web.anima;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.Infix;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroAmbient;
 import io.vertx.zero.exception.InjectionLimeKeyException;
 import io.vertx.zero.marshal.node.Node;
@@ -20,13 +20,13 @@ class AffluxInfix {
     private transient final Class<?> clazz;
     private transient final Annal logger;
 
-    static AffluxInfix create(final Class<?> clazz) {
-        return Fn.pool(Pool.INFIXES, clazz, () -> new AffluxInfix(clazz));
-    }
-
     private AffluxInfix(final Class<?> clazz) {
         this.clazz = clazz;
         this.logger = Annal.get(clazz);
+    }
+
+    static AffluxInfix create(final Class<?> clazz) {
+        return Fn.pool(Pool.INFIXES, clazz, () -> new AffluxInfix(clazz));
     }
 
     private Class<? extends Annotation> search(
@@ -56,7 +56,7 @@ class AffluxInfix {
                 final Node<JsonObject> node = Instance.instance(ZeroUniform.class);
                 final JsonObject options = node.read();
 
-                Fn.flingUp(!options.containsKey(pluginKey), this.logger,
+                Fn.outUp(!options.containsKey(pluginKey), this.logger,
                         InjectionLimeKeyException.class,
                         this.clazz, infixCls, pluginKey);
 

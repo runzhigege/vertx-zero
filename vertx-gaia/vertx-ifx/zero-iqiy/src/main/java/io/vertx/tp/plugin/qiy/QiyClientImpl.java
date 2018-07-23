@@ -7,8 +7,8 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.qiy.api.QiyAuthorize;
 import io.vertx.tp.plugin.qiy.api.QiyUpload;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.exception._401QiyTokenException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 
 public class QiyClientImpl implements QiyClient {
@@ -16,9 +16,8 @@ public class QiyClientImpl implements QiyClient {
     private static final Annal LOGGER = Annal.get(QiyClientImpl.class);
 
     private transient final Vertx vertx;
-    private transient QiyConfig config;
-
     private transient final QiyAuthorize authorizeApi;
+    private transient QiyConfig config;
 
     QiyClientImpl(final Vertx vertx, final QiyConfig config) {
         this.vertx = vertx;
@@ -61,7 +60,7 @@ public class QiyClientImpl implements QiyClient {
                                  final String fileSize,
                                  final Handler<AsyncResult<JsonObject>> handler) {
         // Check whether the config is valid
-        Fn.flingWeb(null == this.config || !this.config.isValid(), LOGGER,
+        Fn.outWeb(null == this.config || !this.config.isValid(), LOGGER,
                 _401QiyTokenException.class, this.getClass(), this.config.getClientId());
         // Request upload
         final QiyUpload uploadApi = this.config.getUpApi(QiyUpload.class);

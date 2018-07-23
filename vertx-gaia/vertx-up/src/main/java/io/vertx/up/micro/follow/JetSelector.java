@@ -3,9 +3,9 @@ package io.vertx.up.micro.follow;
 import io.vertx.core.Future;
 import io.vertx.core.eventbus.Message;
 import io.vertx.up.atom.Envelop;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.exception.InvokerNullException;
 
 /**
@@ -51,7 +51,7 @@ public class JetSelector {
                 invoker = Instance.singleton(DynamicInvoker.class);
             }
         }
-        Fn.flingUp(null == invoker, LOGGER,
+        Fn.outUp(null == invoker, LOGGER,
                 InvokerNullException.class, JetSelector.class,
                 returnType, paramCls);
         return invoker;

@@ -4,9 +4,9 @@ import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.agent.Event;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.rs.Aim;
-import io.vertx.up.tool.Ut;
 
 /**
  * BlockAim: Non-Event Bus: One-Way
@@ -15,7 +15,7 @@ public class PingAim extends BaseAim implements Aim<RoutingContext> {
 
     @Override
     public Handler<RoutingContext> attack(final Event event) {
-        return Fn.get(() -> (context) -> Responser.exec(() -> {
+        return Fn.getNull(() -> (context) -> Responser.exec(() -> {
             // 1. Build Arguments
             final Object[] arguments = this.buildArgs(context, event);
 

@@ -9,8 +9,8 @@ import io.vertx.ext.web.Session;
 import io.vertx.up.annotations.SessionData;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.agent.Event;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.mirror.Instance;
 
 import javax.ws.rs.core.MediaType;
 import java.lang.annotation.Annotation;

@@ -3,8 +3,8 @@ package io.vertx.zero.marshal.node;
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Ut;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.zero.eon.Strings;
 
 import java.util.Set;
@@ -29,7 +29,7 @@ public class ZeroVertx implements Node<JsonObject> {
     }
 
     private JsonObject process(final JsonObject data) {
-        return Fn.get(() -> {
+        return Fn.getNull(() -> {
             /** 1. Append lime **/
             if (data.containsKey(Key.LIME)) {
                 this.prodcessLime(data);

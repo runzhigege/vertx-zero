@@ -1,16 +1,16 @@
 package io.vertx.up.aiki;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.zero.atom.Mirror;
 import io.vertx.zero.atom.Mojo;
 
 class From {
 
     static <T> T fromJson(final JsonObject data, final Class<T> clazz, final String pojo) {
-        return Fn.get(Instance.instance(clazz), () -> Fn.getSemi(Ut.isNil(pojo), null,
+        return Fn.getNull(Instance.instance(clazz), () -> Fn.getSemi(Ut.isNil(pojo), null,
                 () -> Ut.deserialize(data, clazz),
                 () -> Mirror.create(From.class)
                         .mount(pojo)

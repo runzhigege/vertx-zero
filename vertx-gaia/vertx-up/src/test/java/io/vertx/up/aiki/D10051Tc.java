@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.quiz.TestBase;
-import io.vertx.up.tool.Ut;
+import io.vertx.up.epic.Ut;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -7,7 +7,8 @@ import io.vertx.rx.micro.ZeroRxEndurer;
 import io.vertx.rx.rs.dispatch.StandardVerifier;
 import io.vertx.up.atom.agent.Depot;
 import io.vertx.up.atom.agent.Event;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Aim;
 import io.vertx.up.rs.Axis;
@@ -15,7 +16,6 @@ import io.vertx.up.rs.Sentry;
 import io.vertx.up.rs.dispatch.ModeSplitter;
 import io.vertx.up.rs.router.Hub;
 import io.vertx.up.rs.router.Verifier;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroAnno;
 
 import java.util.Set;
@@ -46,7 +46,7 @@ public class EventAxis implements Axis<Router> {
         EVENTS.forEach(event -> {
             // Build Route and connect to each Action
             Fn.safeSemi(null == event, LOGGER,
-                    () -> LOGGER.warn(Info.NULL_EVENT, getClass().getName()),
+                    () -> LOGGER.warn(Info.NULL_EVENT, this.getClass().getName()),
                     () -> {
                         // 1. Verify
                         Verifier.verify(event);

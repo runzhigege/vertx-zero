@@ -5,7 +5,7 @@ import io.vertx.redis.RedisClient;
 import io.vertx.redis.RedisOptions;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.plugin.Infix;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -32,12 +32,12 @@ public class RedisInfix implements Infix {
         initInternal(vertx, NAME);
     }
 
+    public static RedisClient getClient() {
+        return CLIENTS.get(NAME);
+    }
+
     @Override
     public RedisClient get() {
         return getClient();
-    }
-
-    public static RedisClient getClient() {
-        return CLIENTS.get(NAME);
     }
 }

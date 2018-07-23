@@ -3,10 +3,10 @@ package io.vertx.tp.etcd.center;
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.eon.Values;
@@ -73,7 +73,7 @@ public class EtcdData {
         if (config.containsKey(KEY)) {
             final JsonObject root = config.getJsonObject(KEY);
             // Verify the data
-            Fn.flingUp(() -> Fn.shuntZero(() -> Ruler.verify(KEY, root), root),
+            Fn.outUp(() -> Fn.shuntZero(() -> Ruler.verify(KEY, root), root),
                     LOGGER);
             if (root.containsKey(TIMEOUT)) {
                 this.timeout = root.getLong(TIMEOUT);
@@ -88,7 +88,7 @@ public class EtcdData {
             LOGGER.info(Info.ETCD_TIMEOUT,
                     this.application, this.timeout, this.config.size());
         }
-        Fn.flingUp(this.config.isEmpty(), this.logger,
+        Fn.outUp(this.config.isEmpty(), this.logger,
                 EtcdConfigEmptyException.class, this.clazz);
 
         final Set<URI> uris = new HashSet<>();
@@ -108,7 +108,7 @@ public class EtcdData {
                 .subscribe(uris::add);
         // Network checking
         networks.forEach((port, host) ->
-                Fn.flingUp(!Ut.netOk(host, port), LOGGER,
+                Fn.outUp(!Ut.netOk(host, port), LOGGER,
                         EtcdNetworkException.class, this.getClass(), host, port));
         LOGGER.info(Info.ETCD_NETWORK);
         this.client = new EtcdClient(uris.toArray(new URI[]{}));
@@ -119,7 +119,7 @@ public class EtcdData {
             LOGGER.info(Info.ETCD_ENABLE);
         }
         return Fn.pool(POOL, clazz, () ->
-                Fn.get(null, () -> new EtcdData(clazz), clazz));
+                Fn.getNull(null, () -> new EtcdData(clazz), clazz));
     }
 
     /**

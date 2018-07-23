@@ -2,11 +2,11 @@ package io.vertx.up.web;
 
 import io.vertx.up.annotations.Agent;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.zero.exception.AgentDuplicatedException;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.eon.Values;
+import io.vertx.zero.exception.AgentDuplicatedException;
 
 import javax.ws.rs.Path;
 import java.lang.annotation.Annotation;
@@ -49,7 +49,7 @@ public class ZeroHelper {
                             .collect(Collectors.toList());
             // > 1 means duplicated defined
             final int size = filtered.size();
-            Fn.flingUp(1 < size,
+            Fn.outUp(1 < size,
                     LOGGER, AgentDuplicatedException.class,
                     ZeroHelper.class, server, size,
                     filtered.stream()

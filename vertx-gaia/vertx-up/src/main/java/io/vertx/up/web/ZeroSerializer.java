@@ -5,10 +5,10 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.Envelop;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.serialization.*;
 import io.vertx.zero.atom.Mirror;
 import io.vertx.zero.eon.Values;
@@ -180,7 +180,7 @@ public class ZeroSerializer {
 
     @Deprecated
     public static <T> JsonArray toArray(final List<T> list, final String pojo) {
-        return Fn.get(new JsonArray(), () -> {
+        return Fn.getNull(new JsonArray(), () -> {
             final Function<JsonObject, JsonObject> converted =
                     (from) -> Mirror.create(ZeroSerializer.class)
                             .mount(pojo).connect(from).to().result();
@@ -190,7 +190,7 @@ public class ZeroSerializer {
 
     @Deprecated
     public static <T> JsonObject toObject(final T entity, final String pojo) {
-        return Fn.get(new JsonObject(), () -> {
+        return Fn.getNull(new JsonObject(), () -> {
             final JsonObject from = Ut.serializeJson(entity);
             return Mirror.create(ZeroSerializer.class)
                     .mount(pojo).connect(from).to().result();

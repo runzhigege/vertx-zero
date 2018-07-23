@@ -2,9 +2,9 @@ package io.vertx.zero.marshal.reliable;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.demon.JObjectElementException;
@@ -24,7 +24,7 @@ public abstract class AbstractInsurer implements Insurer {
             for (int idx = Values.IDX; idx < size; idx++) {
                 final Object value = array.getValue(idx);
                 // 2. Call check method to confirm JsonObject
-                Fn.flingZero(!Ut.isJObject(value), this.getLogger(),
+                Fn.outZero(!Ut.isJObject(value), this.getLogger(),
                         JObjectElementException.class,
                         this.getClass(), idx, value);
 

@@ -6,7 +6,7 @@ import io.vertx.core.net.ClientOptionsBase;
 import io.vertx.core.net.OpenSSLEngineOptions;
 import io.vertx.core.net.PemTrustOptions;
 import io.vertx.quiz.core.tls.Trust;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ssl.TrustPipe;
 
@@ -19,7 +19,7 @@ public class PemTrust implements TrustPipe<JsonObject> {
     @Override
     public Handler<ClientOptionsBase> parse(
             final JsonObject options) {
-        return Fn.get(() -> {
+        return Fn.getNull(() -> {
             final PemTrustOptions pem = Fn.getSemi(
                     !options.containsKey(PATH_CERT), LOGGER,
                     Trust.CLIENT_PEM,

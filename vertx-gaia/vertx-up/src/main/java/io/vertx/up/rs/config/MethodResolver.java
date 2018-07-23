@@ -1,7 +1,7 @@
 package io.vertx.up.rs.config;
 
 import io.vertx.core.http.HttpMethod;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.MethodNullException;
 
@@ -34,7 +34,7 @@ class MethodResolver {
 
     public static HttpMethod resolve(final Method method) {
         // 1. Method checking.
-        Fn.flingUp(null == method, LOGGER,
+        Fn.outUp(null == method, LOGGER,
                 MethodNullException.class, MethodResolver.class);
         final Annotation[] annotations = method.getDeclaredAnnotations();
         // 2. Method ignore

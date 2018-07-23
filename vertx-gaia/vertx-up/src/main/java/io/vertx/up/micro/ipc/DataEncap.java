@@ -13,9 +13,9 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.flux.IpcData;
 import io.vertx.up.atom.hold.VirtualUser;
 import io.vertx.up.eon.em.IpcType;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
 
 /**
  * Data serialization to set data

@@ -6,13 +6,13 @@ import io.vertx.core.http.HttpServerOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.up.annotations.Agent;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Axis;
 import io.vertx.up.rs.router.PointAxis;
 import io.vertx.up.rs.router.RouterAxis;
 import io.vertx.up.rs.router.WallAxis;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.config.ServerVisitor;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.micro.config.DynamicVisitor;
@@ -38,7 +38,7 @@ public class ZeroApiAgent extends AbstractVerticle {
             API_START_LOGS = new ConcurrentHashMap<>();
 
     static {
-        Fn.flingUp(() -> {
+        Fn.outUp(() -> {
             if (ZeroAtomic.API_OPTS.isEmpty()) {
                 ZeroAtomic.API_OPTS.putAll(VISITOR.visit(ServerType.API.toString()));
                 ZeroAtomic.API_OPTS.forEach((port, option) -> {
@@ -56,7 +56,7 @@ public class ZeroApiAgent extends AbstractVerticle {
         /** 2.Call route hub to mount walls **/
         final Axis<Router> wallAxiser = Fn.poolThread(Pool.WALLS,
                 () -> Instance.instance(WallAxis.class, this.vertx));
-        Fn.flingUp(() -> {
+        Fn.outUp(() -> {
 
             // Set breaker for each server
             ZeroAtomic.API_OPTS.forEach((port, option) -> {

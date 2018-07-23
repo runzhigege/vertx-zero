@@ -4,11 +4,11 @@ import io.vertx.core.DeploymentOptions;
 import io.vertx.reactivex.core.Vertx;
 import io.vertx.rx.web.limit.RxFactor;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
 import io.vertx.up.rs.config.AgentExtractor;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.anima.Scatter;
 import io.vertx.up.web.limit.Factor;
 
@@ -28,7 +28,7 @@ public class AgentScatter implements Scatter<Vertx> {
         final Extractor<DeploymentOptions> extractor =
                 Instance.instance(AgentExtractor.class);
 
-        Fn.itMap(agents, (type, clazz) -> {
+        Ut.itMap(agents, (type, clazz) -> {
             // 2.1. Agent deployment options
             final DeploymentOptions option = extractor.extract(clazz);
             // 2.2. Agent deployment

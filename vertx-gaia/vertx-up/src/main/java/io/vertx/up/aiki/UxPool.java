@@ -1,11 +1,11 @@
 package io.vertx.up.aiki;
 
 import io.vertx.core.Future;
+import io.vertx.up.epic.container.KeyPair;
 import io.vertx.up.exception._500PoolInternalException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.shared.MapInfix;
 import io.vertx.up.plugin.shared.SharedClient;
-import io.vertx.up.tool.container.KeyPair;
 
 /**
  * Shared Data for pool usage in utility X

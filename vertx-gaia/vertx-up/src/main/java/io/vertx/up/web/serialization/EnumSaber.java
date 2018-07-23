@@ -1,7 +1,7 @@
 package io.vertx.up.web.serialization;
 
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 
 /**
  * Enum
@@ -9,7 +9,7 @@ import io.vertx.up.tool.mirror.Instance;
 public class EnumSaber extends BaseSaber {
     @Override
     public <T> Object from(final T input) {
-        return Fn.get(() -> {
+        return Fn.getNull(() -> {
             Object reference = null;
             if (input instanceof Enum) {
                 reference = Instance.invoke(input, "name");

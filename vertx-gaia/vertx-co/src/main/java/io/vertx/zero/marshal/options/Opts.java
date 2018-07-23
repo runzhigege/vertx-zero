@@ -1,7 +1,7 @@
 package io.vertx.zero.marshal.options;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.heart.EmptyStreamException;
 import io.vertx.zero.exception.heart.LimeFileException;
@@ -19,14 +19,6 @@ import java.util.concurrent.ConcurrentMap;
 public interface Opts<T> {
 
     /**
-     * Read data from files
-     *
-     * @return The config data
-     * @throws ZeroException zero exception that prevent start up
-     */
-    T ingest(String node) throws ZeroException;
-
-    /**
      * Read reference of Opts
      *
      * @return Opts contains json object.
@@ -34,12 +26,24 @@ public interface Opts<T> {
     static Opts<JsonObject> get() {
         return YamlOpts.create();
     }
+
+    /**
+     * Read data from files
+     *
+     * @return The config data
+     * @throws ZeroException zero exception that prevent start up
+     */
+    T ingest(String node) throws ZeroException;
 }
 
 class YamlOpts implements Opts<JsonObject> {
 
     private static final ConcurrentMap<String, Node<JsonObject>>
             EXTENSIONS = new ConcurrentHashMap<>();
+    private static Opts<JsonObject> INSTANCE;
+
+    private YamlOpts() {
+    }
 
     /**
      * Default package scope, manually implement singleton
@@ -56,11 +60,6 @@ class YamlOpts implements Opts<JsonObject> {
             }
         }
         return INSTANCE;
-    }
-
-    private static Opts<JsonObject> INSTANCE;
-
-    private YamlOpts() {
     }
 
     @Override

@@ -7,134 +7,140 @@ package io.vertx.tp.ipc.eon.em;
  * <pre>
  * Format
  * </pre>
- *
+ * <p>
  * Protobuf enum {@code io.vertx.tp.ipc.eon.em.Format}
  */
 public enum Format
-    implements com.google.protobuf.ProtocolMessageEnum {
-  /**
-   * <pre>
-   * Binary
-   * </pre>
-   *
-   * <code>BINARY = 0;</code>
-   */
-  BINARY(0),
-  /**
-   * <pre>
-   * Json
-   * </pre>
-   *
-   * <code>JSON = 1;</code>
-   */
-  JSON(1),
-  /**
-   * <pre>
-   * Xml
-   * </pre>
-   *
-   * <code>XML = 2;</code>
-   */
-  XML(2),
-  UNRECOGNIZED(-1),
-  ;
+        implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <pre>
+     * Binary
+     * </pre>
+     *
+     * <code>BINARY = 0;</code>
+     */
+    BINARY(0),
+    /**
+     * <pre>
+     * Json
+     * </pre>
+     *
+     * <code>JSON = 1;</code>
+     */
+    JSON(1),
+    /**
+     * <pre>
+     * Xml
+     * </pre>
+     *
+     * <code>XML = 2;</code>
+     */
+    XML(2),
+    UNRECOGNIZED(-1),;
 
-  /**
-   * <pre>
-   * Binary
-   * </pre>
-   *
-   * <code>BINARY = 0;</code>
-   */
-  public static final int BINARY_VALUE = 0;
-  /**
-   * <pre>
-   * Json
-   * </pre>
-   *
-   * <code>JSON = 1;</code>
-   */
-  public static final int JSON_VALUE = 1;
-  /**
-   * <pre>
-   * Xml
-   * </pre>
-   *
-   * <code>XML = 2;</code>
-   */
-  public static final int XML_VALUE = 2;
+    /**
+     * <pre>
+     * Binary
+     * </pre>
+     *
+     * <code>BINARY = 0;</code>
+     */
+    public static final int BINARY_VALUE = 0;
+    /**
+     * <pre>
+     * Json
+     * </pre>
+     *
+     * <code>JSON = 1;</code>
+     */
+    public static final int JSON_VALUE = 1;
+    /**
+     * <pre>
+     * Xml
+     * </pre>
+     *
+     * <code>XML = 2;</code>
+     */
+    public static final int XML_VALUE = 2;
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+            Format> internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Format>() {
+                @Override
+                public Format findValueByNumber(final int number) {
+                    return Format.forNumber(number);
+                }
+            };
+    private static final Format[] VALUES = values();
+    private final int value;
 
-
-  public final int getNumber() {
-    if (this == UNRECOGNIZED) {
-      throw new java.lang.IllegalArgumentException(
-          "Can't get the number of an unknown enum value.");
+    private Format(final int value) {
+        this.value = value;
     }
-    return value;
-  }
 
-  /**
-   * @deprecated Use {@link #forNumber(int)} instead.
-   */
-  @java.lang.Deprecated
-  public static Format valueOf(int value) {
-    return forNumber(value);
-  }
-
-  public static Format forNumber(int value) {
-    switch (value) {
-      case 0: return BINARY;
-      case 1: return JSON;
-      case 2: return XML;
-      default: return null;
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static Format valueOf(final int value) {
+        return forNumber(value);
     }
-  }
 
-  public static com.google.protobuf.Internal.EnumLiteMap<Format>
-      internalGetValueMap() {
-    return internalValueMap;
-  }
-  private static final com.google.protobuf.Internal.EnumLiteMap<
-      Format> internalValueMap =
-        new com.google.protobuf.Internal.EnumLiteMap<Format>() {
-          public Format findValueByNumber(int number) {
-            return Format.forNumber(number);
-          }
-        };
-
-  public final com.google.protobuf.Descriptors.EnumValueDescriptor
-      getValueDescriptor() {
-    return getDescriptor().getValues().get(ordinal());
-  }
-  public final com.google.protobuf.Descriptors.EnumDescriptor
-      getDescriptorForType() {
-    return getDescriptor();
-  }
-  public static final com.google.protobuf.Descriptors.EnumDescriptor
-      getDescriptor() {
-    return io.vertx.tp.ipc.eon.em.UpEnum.getDescriptor().getEnumTypes().get(1);
-  }
-
-  private static final Format[] VALUES = values();
-
-  public static Format valueOf(
-      com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-    if (desc.getType() != getDescriptor()) {
-      throw new java.lang.IllegalArgumentException(
-        "EnumValueDescriptor is not for this type.");
+    public static Format forNumber(final int value) {
+        switch (value) {
+            case 0:
+                return BINARY;
+            case 1:
+                return JSON;
+            case 2:
+                return XML;
+            default:
+                return null;
+        }
     }
-    if (desc.getIndex() == -1) {
-      return UNRECOGNIZED;
+
+    public static com.google.protobuf.Internal.EnumLiteMap<Format>
+    internalGetValueMap() {
+        return internalValueMap;
     }
-    return VALUES[desc.getIndex()];
-  }
 
-  private final int value;
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+    getDescriptor() {
+        return io.vertx.tp.ipc.eon.em.UpEnum.getDescriptor().getEnumTypes().get(1);
+    }
 
-  private Format(int value) {
-    this.value = value;
-  }
+    public static Format valueOf(
+            final com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+            throw new java.lang.IllegalArgumentException(
+                    "EnumValueDescriptor is not for this type.");
+        }
+        if (desc.getIndex() == -1) {
+            return UNRECOGNIZED;
+        }
+        return VALUES[desc.getIndex()];
+    }
 
-  // @@protoc_insertion_point(enum_scope:io.vertx.tp.ipc.eon.em.Format)
+    @Override
+    public final int getNumber() {
+        if (this == UNRECOGNIZED) {
+            throw new java.lang.IllegalArgumentException(
+                    "Can't getNull the number of an unknown enum value.");
+        }
+        return this.value;
+    }
+
+    @Override
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+    getValueDescriptor() {
+        return getDescriptor().getValues().get(this.ordinal());
+    }
+
+    @Override
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+    getDescriptorForType() {
+        return getDescriptor();
+    }
+
+    // @@protoc_insertion_point(enum_scope:io.vertx.tp.ipc.eon.em.Format)
 }
 

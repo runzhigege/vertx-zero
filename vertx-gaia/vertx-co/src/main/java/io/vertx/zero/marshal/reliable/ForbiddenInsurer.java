@@ -2,8 +2,8 @@ package io.vertx.zero.marshal.reliable;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Ut;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.demon.ForbiddenFieldException;
 
@@ -20,9 +20,9 @@ public class ForbiddenInsurer extends AbstractInsurer {
             // 2. Extract rule from config.
             if (rule.containsKey(Rules.FORBIDDEN)) {
                 final JsonArray fields = Ut.toJArray(rule.getValue(Rules.FORBIDDEN));
-                Fn.etJArray(fields, String.class, (field, index) -> {
+                Ut.etJArray(fields, String.class, (field, index) -> {
                     // 3. Check if data contains field.
-                    Fn.flingZero(data.containsKey(field), this.getLogger(),
+                    Fn.outZero(data.containsKey(field), this.getLogger(),
                             ForbiddenFieldException.class,
                             this.getClass(), data, field);
                 });

@@ -5,9 +5,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
 import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.eon.Info;
 import io.vertx.zero.eon.Values;
@@ -38,7 +38,7 @@ public class DynamicVisitor extends HttpServerVisitor {
         // 2. Visit the node for server
         final JsonObject data = this.NODE.read();
 
-        Fn.flingZero(null == data || !data.containsKey(KEY), LOGGER,
+        Fn.outZero(null == data || !data.containsKey(KEY), LOGGER,
                 ServerConfigException.class,
                 this.getClass(), null == data ? null : data.encode());
         // 3. Convert input parameters.

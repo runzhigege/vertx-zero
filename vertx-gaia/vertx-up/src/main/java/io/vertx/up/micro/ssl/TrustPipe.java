@@ -7,11 +7,9 @@ import io.vertx.up.eon.em.CertType;
 import io.vertx.up.micro.ssl.client.JksTrust;
 import io.vertx.up.micro.ssl.client.PemTrust;
 import io.vertx.up.micro.ssl.client.PfxTrust;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.epic.mirror.Instance;
 
 public interface TrustPipe<I> {
-
-    Handler<ClientOptionsBase> parse(I options);
 
     static TrustPipe<JsonObject> get(final CertType type) {
         // 1. OpenSSL
@@ -29,4 +27,6 @@ public interface TrustPipe<I> {
         }
         return pipe;
     }
+
+    Handler<ClientOptionsBase> parse(I options);
 }

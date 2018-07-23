@@ -5,7 +5,7 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.eon.Info;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.WorkerConflictException;
 
@@ -40,10 +40,10 @@ public class QueueInquirer implements Inquirer<Set<Class<?>>> {
                     final Class<?> returnType = method.getReturnType();
                     final Class<?> parameterTypes = method.getParameterTypes()[0];
                     if (Message.class.isAssignableFrom(parameterTypes)) {
-                        Fn.flingUp(void.class != returnType && Void.class != returnType, LOGGER,
+                        Fn.outUp(void.class != returnType && Void.class != returnType, LOGGER,
                                 WorkerConflictException.class, this.getClass(), method);
                     } else {
-                        Fn.flingUp(void.class == returnType || Void.class == returnType, LOGGER,
+                        Fn.outUp(void.class == returnType || Void.class == returnType, LOGGER,
                                 WorkerConflictException.class, this.getClass(), method);
                     }
                 });

@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.junit.RunTestOnContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.log.Log;
 import io.vertx.zero.marshal.reliable.Insurer;

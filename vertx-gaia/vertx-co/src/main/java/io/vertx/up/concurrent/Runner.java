@@ -1,6 +1,6 @@
 package io.vertx.up.concurrent;
 
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 
 import java.util.ArrayList;

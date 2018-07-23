@@ -1,7 +1,7 @@
 package com.fasterxml.jackson.databind;
 
 import com.fasterxml.jackson.core.JsonParser;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.epic.mirror.Instance;
 
 import java.io.IOException;
 

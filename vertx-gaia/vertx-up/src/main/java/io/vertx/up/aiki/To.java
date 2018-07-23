@@ -5,11 +5,11 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.atom.Mirror;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ class To {
 
     @SuppressWarnings("unchecked")
     static <T> Future<T> toFuture(final T entity) {
-        return Fn.get(Future.future(),
+        return Fn.getNull(Future.future(),
                 () -> Fn.getSemi(entity instanceof Throwable, null,
                         () -> Future.failedFuture((Throwable) entity),
                         () -> Future.succeededFuture(entity)),
@@ -45,7 +45,7 @@ class To {
     static <T> JsonObject toJson(
             final T entity,
             final String pojo) {
-        return Fn.get(new JsonObject(),
+        return Fn.getNull(new JsonObject(),
                 () -> Fn.getSemi(Ut.isNil(pojo), null,
                         () -> Ut.serializeJson(entity),
                         () -> Mirror.create(To.class)
@@ -92,7 +92,7 @@ class To {
     static <T> Envelop toEnvelop(
             final T entity
     ) {
-        return Fn.get(Envelop.ok(),
+        return Fn.getNull(Envelop.ok(),
                 () -> Fn.getSemi(entity instanceof WebException, null,
                         () -> Envelop.failure((WebException) entity),
                         () -> {
@@ -119,7 +119,7 @@ class To {
             final T entity,
             final WebException error
     ) {
-        return Fn.get(Envelop.failure(error),
+        return Fn.getNull(Envelop.failure(error),
                 () -> Envelop.success(entity), entity);
     }
 

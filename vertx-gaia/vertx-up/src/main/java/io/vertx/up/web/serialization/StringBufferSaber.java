@@ -1,6 +1,6 @@
 package io.vertx.up.web.serialization;
 
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.zero.eon.Strings;
 
 /**
@@ -10,9 +10,9 @@ public class StringBufferSaber extends BaseSaber {
     @Override
     public Object from(final Class<?> paramType,
                        final String literal) {
-        return Fn.get(() ->
+        return Fn.getNull(() ->
                         Fn.getSemi(StringBuilder.class == paramType
-                                        || StringBuffer.class == paramType, getLogger(),
+                                        || StringBuffer.class == paramType, this.getLogger(),
                                 () -> {
                                     if (StringBuffer.class == paramType) {
                                         return new StringBuffer(literal);
@@ -25,7 +25,7 @@ public class StringBufferSaber extends BaseSaber {
 
     @Override
     public <T> Object from(final T input) {
-        return Fn.get(() -> {
+        return Fn.getNull(() -> {
             Object reference = null;
             if (input instanceof StringBuilder
                     || input instanceof StringBuffer) {

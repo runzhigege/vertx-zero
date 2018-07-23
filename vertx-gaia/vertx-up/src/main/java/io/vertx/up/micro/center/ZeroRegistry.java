@@ -8,9 +8,9 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.etcd.center.EtcdData;
 import io.vertx.up.eon.em.Etat;
 import io.vertx.up.eon.em.EtcdPath;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
 import io.vertx.zero.eon.Values;
 
 import java.text.MessageFormat;
