@@ -1,11 +1,11 @@
 package io.vertx.up.atom.query;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.exception._400PagerInvalidException;
 import io.vertx.up.exception._500QueryMetaNullException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
 
 import java.io.Serializable;
 
@@ -31,6 +31,15 @@ public class Pager implements Serializable {
      */
     private transient int end;
 
+    private Pager(final Integer page, final Integer size) {
+        this.init(page, size);
+    }
+
+    private Pager(final JsonObject pageJson) {
+        this.ensure(pageJson);
+        this.init(pageJson.getInteger(PAGE), pageJson.getInteger(SIZE));
+    }
+
     /**
      * Create pager by page, size
      *
@@ -54,12 +63,12 @@ public class Pager implements Serializable {
 
     private void ensure(final JsonObject pageJson) {
         // Pager building checking
-        Fn.flingWeb(null == pageJson, LOGGER,
+        Fn.outWeb(null == pageJson, LOGGER,
                 _500QueryMetaNullException.class, this.getClass());
         // Required
-        Fn.flingWeb(!pageJson.containsKey(PAGE), LOGGER,
+        Fn.outWeb(!pageJson.containsKey(PAGE), LOGGER,
                 _400PagerInvalidException.class, this.getClass(), PAGE);
-        Fn.flingWeb(!pageJson.containsKey(SIZE), LOGGER,
+        Fn.outWeb(!pageJson.containsKey(SIZE), LOGGER,
                 _400PagerInvalidException.class, this.getClass(), SIZE);
         // Types
         Inquiry.ensureType(pageJson, PAGE, Integer.class,
@@ -70,7 +79,7 @@ public class Pager implements Serializable {
 
     private void init(final Integer page, final Integer size) {
         // Page/Size
-        Fn.flingWeb(1 > page, LOGGER,
+        Fn.outWeb(1 > page, LOGGER,
                 _400PagerInvalidException.class, this.getClass(), page);
         this.page = page;
         // Default Size is 10
@@ -80,15 +89,6 @@ public class Pager implements Serializable {
             this.start = (this.page - 1) * this.size;
             this.end = this.page * this.size;
         }, this.page, this.size);
-    }
-
-    private Pager(final Integer page, final Integer size) {
-        this.init(page, size);
-    }
-
-    private Pager(final JsonObject pageJson) {
-        this.ensure(pageJson);
-        this.init(pageJson.getInteger(PAGE), pageJson.getInteger(SIZE));
     }
 
     public JsonObject toJson() {

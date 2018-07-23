@@ -4,13 +4,13 @@ import io.reactivex.Observable;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Wall;
 import io.vertx.up.atom.secure.Cliff;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.secure.Rampart;
 import io.vertx.up.secure.inquire.OstiumAuth;
 import io.vertx.up.secure.inquire.PhylumAuth;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.exception.DynamicKeyMissingException;
 import io.vertx.zero.exception.WallDuplicatedException;
 import io.vertx.zero.exception.WallKeyMissingException;
@@ -110,20 +110,20 @@ public class WallInquirer implements Inquirer<Set<Cliff>> {
                 }).subscribe(hashs::add);
 
         // Duplicated adding.
-        Fn.flingUp(hashs.size() != wallClses.size(), LOGGER,
+        Fn.outUp(hashs.size() != wallClses.size(), LOGGER,
                 WallDuplicatedException.class, this.getClass(),
                 wallClses.stream().map(Class::getName).collect(Collectors.toSet()));
 
         /** Shared key does not existing **/
         final JsonObject config = NODE.read();
-        Fn.flingUp(!config.containsKey(KEY), LOGGER,
+        Fn.outUp(!config.containsKey(KEY), LOGGER,
                 DynamicKeyMissingException.class, this.getClass(),
                 KEY, config);
 
         /** Wall key missing **/
         final JsonObject hitted = config.getJsonObject(KEY);
         for (final String key : keysRef.keySet()) {
-            Fn.flingUp(null == hitted || !hitted.containsKey(key), LOGGER,
+            Fn.outUp(null == hitted || !hitted.containsKey(key), LOGGER,
                     WallKeyMissingException.class, this.getClass(),
                     key, keysRef.get(key));
         }

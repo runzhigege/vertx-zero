@@ -7,11 +7,11 @@ import io.vertx.up.annotations.Codex;
 import io.vertx.up.annotations.EndPoint;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.hold.Virtual;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroHelper;
 import io.vertx.zero.exception.AccessProxyException;
 import io.vertx.zero.exception.EventCodexMultiException;
@@ -36,7 +36,7 @@ public class EventExtractor implements Extractor<Set<Event>> {
 
     @Override
     public Set<Event> extract(final Class<?> clazz) {
-        return Fn.get(new ConcurrentHashSet<>(), () -> {
+        return Fn.getNull(new ConcurrentHashSet<>(), () -> {
             // 1. Class verify
             this.verify(clazz);
             // 2. Check whether clazz annotated with @PATH
@@ -60,15 +60,15 @@ public class EventExtractor implements Extractor<Set<Event>> {
         // Check basic specification: No Arg Constructor
         if (!clazz.isInterface()) {
             // Class direct.
-            Fn.flingUp(!Instance.noarg(clazz), LOGGER,
+            Fn.outUp(!Instance.noarg(clazz), LOGGER,
                     NoArgConstructorException.class,
                     this.getClass(), clazz);
         }
-        Fn.flingUp(!Modifier.isPublic(clazz.getModifiers()), LOGGER,
+        Fn.outUp(!Modifier.isPublic(clazz.getModifiers()), LOGGER,
                 AccessProxyException.class,
                 this.getClass(), clazz);
         // Event Source Checking
-        Fn.flingUp(!clazz.isAnnotationPresent(EndPoint.class),
+        Fn.outUp(!clazz.isAnnotationPresent(EndPoint.class),
                 LOGGER, EventSourceException.class,
                 this.getClass(), clazz.getName());
     }
@@ -85,7 +85,7 @@ public class EventExtractor implements Extractor<Set<Event>> {
                 .map(item -> item.stream().map(Annotation::annotationType).collect(Collectors.toList()))
                 .filter(item -> item.contains(Codex.class))
                 .count().blockingGet();
-        Fn.flingUp(methods.length < counter, LOGGER,
+        Fn.outUp(methods.length < counter, LOGGER,
                 EventCodexMultiException.class,
                 this.getClass(), clazz);
         // 2.Build Set

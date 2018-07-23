@@ -3,7 +3,7 @@ package io.vertx.tp.plugin.ali;
 import io.vertx.core.Vertx;
 import io.vertx.tp.plugin.ali.sms.SmsClient;
 import io.vertx.up.annotations.Plugin;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.plugin.Infix;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -30,12 +30,12 @@ public class SmsInfix implements Infix {
         initInternal(vertx, NAME);
     }
 
+    public static SmsClient getClient() {
+        return CLIENTS.get(NAME);
+    }
+
     @Override
     public SmsClient get() {
         return getClient();
-    }
-
-    public static SmsClient getClient() {
-        return CLIENTS.get(NAME);
     }
 }

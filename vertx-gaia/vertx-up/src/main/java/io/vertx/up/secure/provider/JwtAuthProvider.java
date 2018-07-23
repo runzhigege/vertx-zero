@@ -14,8 +14,8 @@ import io.vertx.ext.auth.jwt.impl.JWTUser;
 import io.vertx.ext.jwt.JWT;
 import io.vertx.ext.jwt.JWTOptions;
 import io.vertx.up.aiki.Ux;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.exception.*;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 
 import java.util.Collections;
@@ -60,7 +60,7 @@ public class JwtAuthProvider implements JwtAuth {
                     LOGGER.info(Info.MAP_HIT, token, res.result());
                     this.authorize(authInfo).setHandler(this.authenticate(token, resultHandler));
                 } else {
-                    // Couldn't get data from cache
+                    // Couldn't getNull data from cache
                     LOGGER.debug(Info.MAP_MISSING, token);
                     this.authenticate(authInfo).setHandler(this.authenticate(token, resultHandler));
                 }

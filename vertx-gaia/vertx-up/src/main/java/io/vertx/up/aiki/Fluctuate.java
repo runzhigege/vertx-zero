@@ -7,11 +7,10 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -96,7 +95,7 @@ class Fluctuate {
         final Future<JsonObject> result = Future.future();
         CompositeFuture.all(Arrays.asList(futures)).setHandler(res -> {
             final JsonObject resultMap = new JsonObject();
-            Fn.itList(res.result().list(), (item, index) -> resultMap.put(index.toString(), item));
+            Ut.itList(res.result().list(), (item, index) -> resultMap.put(index.toString(), item));
             result.complete(resultMap);
         });
         return result;
@@ -110,7 +109,7 @@ class Fluctuate {
         CompositeFuture.all(Arrays.asList(futures)).setHandler(thenResponse(result, (finished) -> {
             final JsonObject resultMap = new JsonObject();
             if (null != finished) {
-                Fn.itList(finished.list(), (item, index) -> resultMap.put(index.toString(), item));
+                Ut.itList(finished.list(), (item, index) -> resultMap.put(index.toString(), item));
             }
             return resultMap;
         }));
@@ -130,7 +129,7 @@ class Fluctuate {
                 if (null != finished) {
                     final List<JsonObject> secondary = finished.list();
                     // Zipper Operation, the base list is first
-                    Fn.itList(secondary, (item, index) -> operatorFun[index].accept(first, item));
+                    Ut.itList(secondary, (item, index) -> operatorFun[index].accept(first, item));
                 }
                 return first;
             }));

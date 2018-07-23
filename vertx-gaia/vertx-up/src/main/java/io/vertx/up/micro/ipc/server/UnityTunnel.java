@@ -16,8 +16,8 @@ import io.vertx.up.micro.ipc.DataEncap;
 import io.vertx.up.micro.ipc.tower.FinalTransit;
 import io.vertx.up.micro.ipc.tower.NodeTransit;
 import io.vertx.up.micro.ipc.tower.Transit;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

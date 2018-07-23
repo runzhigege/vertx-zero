@@ -1,6 +1,6 @@
 package io.vertx.up.micro.follow;
 
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.AsyncSignatureException;
@@ -36,7 +36,7 @@ class InvokerUtil {
         final Class<?>[] params = method.getParameterTypes();
         final Annal logger = Annal.get(target);
         // 2. The parameters
-        Fn.flingUp(Values.ONE != params.length,
+        Fn.outUp(Values.ONE != params.length,
                 logger, WorkerArgumentException.class,
                 target, method);
     }
@@ -47,7 +47,7 @@ class InvokerUtil {
             final Class<?> paramType,
             final Class<?> target) {
         final Annal logger = Annal.get(target);
-        Fn.flingUp(condition, logger,
+        Fn.outUp(condition, logger,
                 AsyncSignatureException.class, target,
                 returnType.getName(), paramType.getName());
     }

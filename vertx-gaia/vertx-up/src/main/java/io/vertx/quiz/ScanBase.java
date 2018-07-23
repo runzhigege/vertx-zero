@@ -1,6 +1,6 @@
 package io.vertx.quiz;
 
-import io.vertx.up.tool.mirror.Pack;
+import io.vertx.up.epic.mirror.Pack;
 
 import java.util.HashSet;
 import java.util.Set;

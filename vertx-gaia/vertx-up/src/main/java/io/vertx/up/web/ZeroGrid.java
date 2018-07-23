@@ -6,9 +6,9 @@ import io.vertx.core.VertxOptions;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.tp.ipc.marshal.RpcServerVisitor;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.config.NodeVisitor;
 import io.vertx.zero.config.ServerVisitor;
 import io.vertx.zero.micro.config.*;
@@ -37,7 +37,7 @@ public class ZeroGrid {
     private static ClusterOptions CLUSTER;
 
     static {
-        Fn.flingUp(() -> {
+        Fn.outUp(() -> {
             // Init for VertxOptions, ClusterOptions
             // Visit Vertx
             if (VX_OPTS.isEmpty() || null == CLUSTER) {

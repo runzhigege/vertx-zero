@@ -2,34 +2,33 @@ package io.vertx.up.kidd.outcome;
 
 import io.vertx.core.AsyncResult;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._404RecordNotFoundException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Instance;
 
 /**
  * Response building to JsonObject
  */
 public class Obstain<T> {
 
-    private final Annal LOGGER = Annal.get(Obstain.class);
-
     protected final transient Class<?> clazz;
     protected final transient Annal logger;
+    private final Annal LOGGER = Annal.get(Obstain.class);
     protected transient AsyncResult<T> handler;
     protected transient Envelop envelop;
     protected transient Spy spy;
-
-    public static <T> Obstain<T> start(final Class<?> clazz) {
-        return new Obstain<>(clazz);
-    }
 
     protected Obstain(final Class<?> clazz) {
         Fn.safeSemi(null == clazz, this.LOGGER,
                 () -> this.LOGGER.error(Info.ERROR_NULL, clazz));
         this.clazz = clazz;
         this.logger = Annal.get(clazz);
+    }
+
+    public static <T> Obstain<T> start(final Class<?> clazz) {
+        return new Obstain<>(clazz);
     }
 
     /**
@@ -53,7 +52,7 @@ public class Obstain<T> {
     public Obstain<T> unique() {
         final WebException error404 = Instance.instance(
                 _404RecordNotFoundException.class, this.clazz);
-        return unique(error404);
+        return this.unique(error404);
     }
 
     /**

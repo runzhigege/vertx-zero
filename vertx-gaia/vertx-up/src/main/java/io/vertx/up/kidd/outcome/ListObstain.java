@@ -3,11 +3,11 @@ package io.vertx.up.kidd.outcome;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.json.JsonArray;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._400DuplicatedRecordException;
 import io.vertx.up.exception._404RecordNotFoundException;
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.eon.Values;
 
 import java.util.ArrayList;
@@ -16,12 +16,12 @@ import java.util.function.Function;
 
 public class ListObstain<T> extends Obstain<List<T>> {
 
-    public static <T> ListObstain<T> startList(final Class<?> clazz) {
-        return new ListObstain<>(clazz);
-    }
-
     public ListObstain(final Class<?> clazz) {
         super(clazz);
+    }
+
+    public static <T> ListObstain<T> startList(final Class<?> clazz) {
+        return new ListObstain<>(clazz);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class ListObstain<T> extends Obstain<List<T>> {
                 _404RecordNotFoundException.class, this.clazz);
         final WebException error400 = Instance.instance(
                 _400DuplicatedRecordException.class, this.clazz);
-        return unique(error404, error400);
+        return this.unique(error404, error400);
     }
 
     public <E> ListObstain<T> result() {

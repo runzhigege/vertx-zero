@@ -7,12 +7,12 @@ import io.vertx.up.atom.Rule;
 import io.vertx.up.atom.agent.Depot;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.hold.Virtual;
+import io.vertx.up.epic.container.KeyPair;
+import io.vertx.up.epic.mirror.Anno;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.announce.Rigor;
 import io.vertx.up.rs.validation.Validator;
-import io.vertx.up.tool.container.KeyPair;
-import io.vertx.up.tool.mirror.Anno;
 
 import java.lang.reflect.Method;
 import java.util.List;

@@ -8,7 +8,7 @@ import feign.codec.JsonObjectDecoder;
 import feign.codec.JsonObjectEncoder;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.init.TpConfig;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;
@@ -47,6 +47,12 @@ public class FeignDepot implements Serializable {
      * retry default configuration
      */
     private transient Retryer.Default defaults;
+
+    private FeignDepot(final String key, final String rule) {
+        this.reference = TpConfig.create(key, rule);
+        // Initializing
+        this.initOpts(this.reference.getConfig());
+    }
 
     public static FeignDepot create(final String key, final String rule) {
         return Fn.pool(CACHE, key, () -> new FeignDepot(key, rule));
@@ -87,12 +93,6 @@ public class FeignDepot implements Serializable {
 
     public JsonObject getConfig() {
         return this.reference.getConfig();
-    }
-
-    private FeignDepot(final String key, final String rule) {
-        this.reference = TpConfig.create(key, rule);
-        // Initializing
-        this.initOpts(this.reference.getConfig());
     }
 
     private void initOpts(final JsonObject raw) {

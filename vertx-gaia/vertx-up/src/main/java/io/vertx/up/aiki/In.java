@@ -5,8 +5,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.vertx.up.atom.Envelop;
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Ut;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -100,7 +100,7 @@ class In {
             final String field,
             final boolean override
     ) {
-        Fn.itJArray(source, JsonObject.class, (item, index) -> {
+        Ut.itJArray(source, JsonObject.class, (item, index) -> {
             if (override) {
                 item.put(field, target.getValue(index));
             } else {

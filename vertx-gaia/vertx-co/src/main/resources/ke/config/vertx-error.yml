@@ -63,7 +63,7 @@ E40047: "Zero system could not select correct invoker by returnType = {0}, param
 E40048: "(Rpc) Zero system detect agent interface \"{0}\" only without implementation class, it''s forbidden in rpc stream workflow."
 E40049: "Zero worker method signature conflicts, method = {0}, class = {1}"
 E40050: "You''ll run zero in \"Micro Mode\", but etcd configuration is not prepared, system detected error: {0}"
-E40051: "Your RoutingContext object reference is null, could not be get by getContext()."
+E40051: "Your RoutingContext object reference is null, could not be getNull by getContext()."
 E40052: "You defined @WebFilter \"{0}\", but it does not implement interface \"io.vertx.up.web.filter\"."
 E40053: "The order of @WebFilter must be greater than or equal 0 ( >= 0 ), but now \"{0}\" @Ordered value is negative number."
 E40054: "The @WebFilter \"{0}\"could not be initialized, please check your class."

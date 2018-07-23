@@ -2,9 +2,8 @@ package io.vertx.up.atom.query;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Ut;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,7 +26,7 @@ class IrInquiry implements Inquiry {
         Fn.safeSemi(input.containsKey(KEY_PAGER), null,
                 () -> this.pager = Pager.create(input.getJsonObject(KEY_PAGER)));
         Fn.safeSemi(input.containsKey(KEY_SORTER), null,
-                () -> this.sorter = this.getSorter(input.getJsonArray(KEY_SORTER)));
+                () -> this.sorter = Sorter.create(input.getJsonArray(KEY_SORTER)));
         Fn.safeSemi(input.containsKey(KEY_PROJECTION), null,
                 () -> this.projection = new HashSet<String>(input.getJsonArray(KEY_PROJECTION).getList()));
         Fn.safeSemi(input.containsKey(KEY_CRITERIA), null,
@@ -47,21 +46,6 @@ class IrInquiry implements Inquiry {
         // Criteria
         Inquiry.ensureType(input, KEY_CRITERIA, JsonObject.class,
                 Ut::isJObject, this.getClass());
-    }
-
-    private Sorter getSorter(final JsonArray sorter) {
-        // Sorter Parsing
-        final Sorter target = Sorter.create();
-        Fn.itJArray(sorter, String.class, (field, index) -> {
-            if (field.contains(Strings.COMMA)) {
-                final String sortField = field.split(Strings.COMMA)[0];
-                final boolean asc = field.split(Strings.COMMA)[1].equalsIgnoreCase("asc");
-                target.add(sortField, asc);
-            } else {
-                target.add(field, true);
-            }
-        });
-        return target;
     }
 
     @Override

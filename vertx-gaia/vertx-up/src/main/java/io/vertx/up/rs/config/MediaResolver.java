@@ -1,9 +1,9 @@
 package io.vertx.up.rs.config;
 
 import io.reactivex.Observable;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Instance;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
@@ -25,7 +25,7 @@ class MediaResolver {
 
     private static final Set<MediaType> DEFAULTS = new HashSet<MediaType>() {
         {
-            add(MediaType.WILDCARD_TYPE);
+            this.add(MediaType.WILDCARD_TYPE);
         }
     };
 
@@ -52,7 +52,7 @@ class MediaResolver {
     private static Set<MediaType> resolve(final Method method,
                                           final Class<? extends Annotation>
                                                   mediaCls) {
-        return Fn.get(() -> {
+        return Fn.getNull(() -> {
             final Annotation anno = method.getAnnotation(mediaCls);
             return Fn.getSemi(null == anno, LOGGER,
                     () -> DEFAULTS,

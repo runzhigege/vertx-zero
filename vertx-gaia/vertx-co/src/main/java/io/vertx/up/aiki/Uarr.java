@@ -3,7 +3,7 @@ package io.vertx.up.aiki;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 
 import java.util.Objects;
@@ -18,7 +18,7 @@ public class Uarr {
     private final transient JsonArray arrayReference;
 
     private Uarr(final JsonArray jsonArray) {
-        this.arrayReference = Fn.get(new JsonArray(), () ->
+        this.arrayReference = Fn.getNull(new JsonArray(), () ->
                 new JsonArray(jsonArray.stream().filter(Objects::nonNull)
                         .map(item -> (JsonObject) item)
                         .collect(Collectors.toList())), jsonArray);

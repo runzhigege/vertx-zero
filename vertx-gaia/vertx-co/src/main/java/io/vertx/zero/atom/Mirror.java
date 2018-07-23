@@ -2,10 +2,10 @@ package io.vertx.zero.atom;
 
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.io.IO;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.io.IO;
 
 import java.text.MessageFormat;
 import java.util.concurrent.ConcurrentMap;
@@ -17,32 +17,31 @@ import java.util.function.Function;
 public class Mirror {
 
     private static final String POJO = "pojo/{0}.yml";
-
-    public static Mirror create(final Class<?> clazz) {
-        return new Mirror(clazz);
-    }
-
     private final transient Annal logger;
+    private final transient JsonObject converted = new JsonObject();
     private transient Mojo mojo;
     private transient JsonObject data = new JsonObject();
-    private final transient JsonObject converted = new JsonObject();
 
     private Mirror(final Class<?> clazz) {
         this.logger = Annal.get(clazz);
+    }
+
+    public static Mirror create(final Class<?> clazz) {
+        return new Mirror(clazz);
     }
 
     public Mirror mount(final String filename) {
         // Build meta
         this.mojo = Fn.pool(Pool.MOJOS, filename, () -> {
             final JsonObject data = IO.getYaml(MessageFormat.format(POJO, filename));
-            return Fn.get(() -> Ut.deserialize(data, Mojo.class), data);
+            return Fn.getNull(() -> Ut.deserialize(data, Mojo.class), data);
         });
         return this;
     }
 
     public Mirror connect(final JsonObject data) {
         // Copy new data
-        this.data = Fn.get(new JsonObject(), data::copy, data);
+        this.data = Fn.getNull(new JsonObject(), data::copy, data);
         return this;
     }
 
@@ -102,7 +101,7 @@ public class Mirror {
     @SuppressWarnings("unchecked")
     public <T> T get() {
         final Object reference = Ut.deserialize(this.converted, this.mojo.getType());
-        return Fn.get(null, () -> (T) reference, reference);
+        return Fn.getNull(null, () -> (T) reference, reference);
     }
 
     public JsonObject result() {

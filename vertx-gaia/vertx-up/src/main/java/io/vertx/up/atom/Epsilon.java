@@ -7,19 +7,15 @@ import java.io.Serializable;
 import java.lang.annotation.Annotation;
 
 /**
- * Parameter container to get parameters
+ * Parameter container to getNull parameters
  */
 @SuppressWarnings("unchecked")
 public class Epsilon<T> implements Serializable {
 
-    private String name;
-
-    private MimeFlow mime;
-
-    private Class<?> argType;
-
     public Object defaultValue;
-
+    private String name;
+    private MimeFlow mime;
+    private Class<?> argType;
     private Annotation annotation;
 
     private T value;
@@ -66,7 +62,7 @@ public class Epsilon<T> implements Serializable {
             return this.value;
         }
     }
-    
+
     public Epsilon<T> setValue(final T value) {
         this.value = value;
         return this;

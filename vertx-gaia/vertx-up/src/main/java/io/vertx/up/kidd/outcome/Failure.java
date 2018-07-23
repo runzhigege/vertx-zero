@@ -1,10 +1,10 @@
 package io.vertx.up.kidd.outcome;
 
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.mirror.Instance;
 
 import java.util.function.Supplier;
 
@@ -21,7 +21,7 @@ class Failure {
             final Throwable cause) {
         final WebException error = Instance.instance(
                 _500InternalServerException.class, clazz,
-                Fn.get(null, () -> cause.getMessage(), cause));
+                Fn.getNull(null, () -> cause.getMessage(), cause));
         return build(error);
     }
 

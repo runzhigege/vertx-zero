@@ -12,11 +12,11 @@ import io.vertx.ext.jwt.JWK;
 import io.vertx.ext.jwt.JWT;
 import io.vertx.ext.jwt.JWTOptions;
 import io.vertx.up.eon.Plugins;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.io.IO;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception._500JwtRuntimeException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.secure.provider.JwtAuthProvider;
-import io.vertx.up.tool.io.IO;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
 
@@ -42,7 +42,7 @@ class UxJwt {
         // Extract "config" from jwt configuration.
         final JsonObject config = UxJwt.readOptions();
         // Extract token from input jwt.
-        return Fn.get(() -> extract(jwt, config), config);
+        return Fn.getNull(() -> extract(jwt, config), config);
     }
 
     static String generate(final JsonObject claims, final JWTOptions options) {
@@ -52,8 +52,8 @@ class UxJwt {
     static String generate(final JsonObject claims, final JWTOptions options,
                            final Function<String, Buffer> funcBuffer) {
         final JsonObject opts = readOptions();
-        final JWTAuthOptions meta = Fn.get(new JWTAuthOptions(), () -> new JWTAuthOptions(opts), opts);
-        return Fn.get(() -> {
+        final JWTAuthOptions meta = Fn.getNull(new JWTAuthOptions(), () -> new JWTAuthOptions(opts), opts);
+        return Fn.getNull(() -> {
             final JsonObject _claims = claims.copy();
             if (options.getPermissions() != null && !_claims.containsKey(meta.getPermissionsClaimKey())) {
                 _claims.put(meta.getPermissionsClaimKey(), new JsonArray(options.getPermissions()));
@@ -67,11 +67,11 @@ class UxJwt {
         final Node<JsonObject> node = Instance.instance(ZeroUniform.class);
         final JsonObject options = node.read();
         // Extract data from "secure"
-        final JsonObject secure = Fn.get(() -> options.getJsonObject(Plugins.Infix.SECURE), options);
+        final JsonObject secure = Fn.getNull(() -> options.getJsonObject(Plugins.Infix.SECURE), options);
         // Extract "jwt" from secure configuration.
-        final JsonObject jwtConfig = Fn.get(() -> secure.getJsonObject("jwt"), secure);
+        final JsonObject jwtConfig = Fn.getNull(() -> secure.getJsonObject("jwt"), secure);
         // Extract "config" from jwt configuration.
-        return Fn.get(() -> jwtConfig.getJsonObject("config"), jwtConfig);
+        return Fn.getNull(() -> jwtConfig.getJsonObject("config"), jwtConfig);
     }
 
     static JsonObject extract(final String jwt, final JsonObject options) {
@@ -158,7 +158,7 @@ class UxJwt {
                 }
             }
 
-        } catch (IOException | FileSystemException | CertificateException | NoSuchAlgorithmException | KeyStoreException var23) {
+        } catch (final IOException | FileSystemException | CertificateException | NoSuchAlgorithmException | KeyStoreException var23) {
             throw new _500JwtRuntimeException(UxJwt.class, var23);
         }
         return reference;

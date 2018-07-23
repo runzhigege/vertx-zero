@@ -21,7 +21,7 @@ interface Info {
             "is sending data to internal address.";
 
     String MICRO_REGISTRY_CONSUME = "[ ZERO ] {2} <--- ( Micro Worker ) {0} ( name = {1} ) " +
-            "get data from internal address.";
+            "getNull data from internal address.";
 
     String RPC_LISTEN = "[ ZERO ] ( Rpc Server ) Rpc Server has been started successfully. Channel: ---> grpc://{0}:{1}. ";
 

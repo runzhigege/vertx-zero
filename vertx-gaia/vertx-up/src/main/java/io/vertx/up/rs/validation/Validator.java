@@ -9,7 +9,7 @@ import io.vertx.up.atom.agent.Event;
 import io.vertx.up.eon.ID;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._400ValidationException;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
 import io.vertx.up.web.ZeroCodex;
 import io.vertx.zero.eon.Strings;
 
@@ -114,7 +114,7 @@ public class Validator {
             final Map<String, List<Rule>> ruler
                     = new LinkedHashMap<>();
             if (null != rule) {
-                Fn.itJObject(rule, (value, field) -> {
+                Ut.itJObject(rule, (value, field) -> {
                     // Checked valid rule config
                     final List<Rule> rulers = this.buildRulers(value);
                     if (!rulers.isEmpty()) {
@@ -133,7 +133,7 @@ public class Validator {
         final List<Rule> rulers = new ArrayList<>();
         if (null != config && config instanceof JsonArray) {
             final JsonArray configData = (JsonArray) config;
-            Fn.itJArray(configData, JsonObject.class, (item, index) -> {
+            Ut.itJArray(configData, JsonObject.class, (item, index) -> {
                 final Rule ruler = Rule.create(item);
                 if (null != ruler) {
                     rulers.add(ruler);

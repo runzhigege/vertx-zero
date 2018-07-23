@@ -2,11 +2,11 @@ package io.vertx.up.rs.dispatch;
 
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.agent.Event;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.rs.Aim;
 import io.vertx.up.rs.hunt.PingAim;
 import io.vertx.up.rs.hunt.SyncAim;
-import io.vertx.up.tool.mirror.Instance;
 
 import java.lang.reflect.Method;
 
@@ -19,6 +19,9 @@ class CommonDiffer implements Differ<RoutingContext> {
 
     private static Differ<RoutingContext> INSTANCE = null;
 
+    private CommonDiffer() {
+    }
+
     public static Differ<RoutingContext> create() {
         if (null == INSTANCE) {
             synchronized (EventDiffer.class) {
@@ -28,9 +31,6 @@ class CommonDiffer implements Differ<RoutingContext> {
             }
         }
         return INSTANCE;
-    }
-
-    private CommonDiffer() {
     }
 
     @Override

@@ -1,7 +1,7 @@
 package io.vertx.up.web.serialization;
 
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Ut;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -14,7 +14,7 @@ public class DateSaber extends BaseSaber {
     @Override
     public Object from(final Class<?> paramType,
                        final String literal) {
-        return Fn.get(() ->
+        return Fn.getNull(() ->
                         Fn.getSemi(Date.class == paramType ||
                                         Calendar.class == paramType, this.getLogger(),
                                 () -> {
@@ -33,7 +33,7 @@ public class DateSaber extends BaseSaber {
 
     @Override
     public <T> Object from(final T input) {
-        return Fn.get(() -> {
+        return Fn.getNull(() -> {
             Object reference = null;
             if (input instanceof Date) {
                 final Date date = (Date) input;

@@ -2,7 +2,7 @@ package io.vertx.up.rs;
 
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.rs.argument.*;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.epic.mirror.Instance;
 
 import javax.ws.rs.*;
 import java.lang.annotation.Annotation;
@@ -16,16 +16,6 @@ import java.util.concurrent.ConcurrentMap;
  * as arguments
  */
 public interface Filler {
-    /**
-     * @param name
-     * @param paramType
-     * @param datum
-     * @return
-     */
-    Object apply(String name,
-                 Class<?> paramType,
-                 RoutingContext datum);
-
     ConcurrentMap<Class<? extends Annotation>, Filler> PARAMS =
             new ConcurrentHashMap<Class<? extends Annotation>, Filler>() {
                 {
@@ -43,7 +33,6 @@ public interface Filler {
                     this.put(ContextParam.class, Instance.singleton(ContextFiller.class));
                 }
             };
-
     Set<Class<? extends Annotation>> NO_VALUE =
             new HashSet<Class<? extends Annotation>>() {
                 {
@@ -51,4 +40,14 @@ public interface Filler {
                     this.add(StreamParam.class);
                 }
             };
+
+    /**
+     * @param name
+     * @param paramType
+     * @param datum
+     * @return
+     */
+    Object apply(String name,
+                 Class<?> paramType,
+                 RoutingContext datum);
 }

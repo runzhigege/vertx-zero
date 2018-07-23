@@ -3,11 +3,11 @@ package io.vertx.up.web.thread;
 import io.reactivex.Observable;
 import io.vertx.up.annotations.Qualifier;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Anno;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Anno;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.MultiAnnotatedException;
 import io.vertx.zero.exception.NamedImplementionException;
@@ -92,7 +92,7 @@ public class AffluxThread extends Thread {
         // Field must annotated with @Qualifier
         final Annotation annotation = field.getAnnotation(Qualifier.class);
 
-        Fn.flingUp(null == annotation,
+        Fn.outUp(null == annotation,
                 LOGGER, QualifierMissedException.class,
                 this.getClass(), field.getName(), field.getDeclaringClass().getName());
 
@@ -103,7 +103,7 @@ public class AffluxThread extends Thread {
         final Set<String> names = instanceCls.stream()
                 .map(Class::getName).collect(Collectors.toSet());
 
-        Fn.flingUp(!match,
+        Fn.outUp(!match,
                 LOGGER, NamedImplementionException.class,
                 this.getClass(), names, field.getType().getName());
 
@@ -118,7 +118,7 @@ public class AffluxThread extends Thread {
                             && !Ut.isNil(targetValue);
                 }).findAny();
 
-        Fn.flingUp(!verified.isPresent(),
+        Fn.outUp(!verified.isPresent(),
                 LOGGER, NamedNotFoundException.class,
                 this.getClass(), names, value);
 
@@ -140,7 +140,7 @@ public class AffluxThread extends Thread {
                     return annotation;
                 }).blockingFirst();
         // Duplicated annotated
-        Fn.flingUp(Values.ONE < set.size(), LOGGER,
+        Fn.outUp(Values.ONE < set.size(), LOGGER,
                 MultiAnnotatedException.class, this.getClass(),
                 field.getName(), field.getDeclaringClass().getName(), set);
         // Fill typed directly.

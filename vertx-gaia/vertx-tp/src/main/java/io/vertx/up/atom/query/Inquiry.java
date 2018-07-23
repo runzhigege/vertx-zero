@@ -1,8 +1,8 @@
 package io.vertx.up.atom.query;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.exception._400QueryKeyTypeException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 
 import java.util.HashSet;
@@ -47,7 +47,7 @@ public interface Inquiry {
             Fn.safeNull(() -> Fn.safeSemi(checkJson.containsKey(key), logger, () -> {
                 // Throw type exception
                 final Object check = checkJson.getValue(key);
-                Fn.flingWeb(!predicate.test(check), logger,
+                Fn.outWeb(!predicate.test(check), logger,
                         _400QueryKeyTypeException.class, target,
                         key, type, check.getClass());
             }), checkJson);

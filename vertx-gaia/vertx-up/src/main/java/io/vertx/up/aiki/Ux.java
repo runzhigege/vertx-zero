@@ -15,11 +15,11 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
 import io.vertx.up.atom.query.Sorter;
+import io.vertx.up.epic.fn.Actuator;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.fn.wait.Log;
+import io.vertx.up.epic.io.IO;
 import io.vertx.up.exception.WebException;
-import io.vertx.up.func.Actuator;
-import io.vertx.up.func.Fn;
-import io.vertx.up.func.wait.Log;
-import io.vertx.up.tool.io.IO;
 
 import java.util.List;
 import java.util.UUID;

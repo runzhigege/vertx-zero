@@ -1,10 +1,9 @@
 package io.vertx.up.atom.agent;
 
 import io.vertx.up.eon.ID;
-import io.vertx.up.func.Fn;
 import io.vertx.up.rs.Filler;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.mirror.Instance;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
@@ -19,19 +18,11 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class Depot implements Serializable {
 
-    private List<Class<?>> paramTypes = new ArrayList<>();
-
-    private List<Object> paramValues = new ArrayList<>();
-
     private final List<String> paramNames = new ArrayList<>();
-
     private final Event event;
-
     private final List<Class<? extends Annotation>> paramAnnos = new ArrayList<>();
-
-    public static Depot create(final Event event) {
-        return new Depot(event);
-    }
+    private List<Class<?>> paramTypes = new ArrayList<>();
+    private List<Object> paramValues = new ArrayList<>();
 
     private Depot(final Event event) {
         // 1. Extract types for parameters
@@ -42,6 +33,10 @@ public class Depot implements Serializable {
         this.event = event;
     }
 
+    public static Depot create(final Event event) {
+        return new Depot(event);
+    }
+
     private void initTypes(final Method method) {
         final Class<?>[] paramTypes = method.getParameterTypes();
         this.paramTypes = Arrays.asList(paramTypes);
@@ -49,7 +44,7 @@ public class Depot implements Serializable {
 
     private void initAnnotationsWithName(final Method method) {
         final Annotation[][] annotations = method.getParameterAnnotations();
-        Fn.itArray(annotations, (annotationArr, index) -> {
+        Ut.itArray(annotations, (annotationArr, index) -> {
             // Find annotation class
             final Annotation annotation = this.findAnnotation(annotationArr);
             final Class<? extends Annotation> annoCls = (null == annotation)

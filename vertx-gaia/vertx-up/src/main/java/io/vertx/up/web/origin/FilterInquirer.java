@@ -6,9 +6,9 @@ import io.vertx.core.http.HttpServerResponse;
 import io.vertx.up.annotations.Ordered;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.eon.Orders;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.filter.Filter;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.FilterInitialException;
@@ -45,7 +45,7 @@ public class FilterInquirer implements Inquirer<ConcurrentMap<String, Set<Event>
     }
 
     private Class<?> ensure(final Class<?> clazz) {
-        Fn.flingUp(!Filter.class.isAssignableFrom(clazz), LOGGER,
+        Fn.outUp(!Filter.class.isAssignableFrom(clazz), LOGGER,
                 FilterSpecificationException.class, this.getClass(), clazz);
         return clazz;
     }
@@ -78,14 +78,14 @@ public class FilterInquirer implements Inquirer<ConcurrentMap<String, Set<Event>
         if (null != annotation) {
             final Integer setted = Instance.invoke(annotation, "value");
             // Order specification
-            Fn.flingUp(setted < 0, LOGGER,
+            Fn.outUp(setted < 0, LOGGER,
                     FilterOrderException.class, this.getClass(), clazz);
             order = order + setted;
         }
         event.setOrder(order);
         // Proxy
         final Object proxy = Instance.singleton(clazz);
-        Fn.flingUp(null == proxy, LOGGER,
+        Fn.outUp(null == proxy, LOGGER,
                 FilterInitialException.class, this.getClass(), clazz);
         event.setProxy(proxy);
         // Action

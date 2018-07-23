@@ -1,6 +1,6 @@
 package io.vertx.up.web.parallel;
 
-import io.vertx.up.func.Actuator;
+import io.vertx.up.epic.fn.Actuator;
 import io.vertx.up.log.Annal;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class ThreadQueue {
     }
 
     public void startSync() {
-        startAsync();
+        this.startAsync();
         try {
             this.counter.await();
         } catch (final InterruptedException ex) {

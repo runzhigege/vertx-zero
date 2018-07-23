@@ -4,11 +4,11 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.Epsilon;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.eon.ID;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception.WebException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Filler;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroSerializer;
 import io.vertx.zero.eon.Values;
 
@@ -52,7 +52,7 @@ public class EpsilonIncome implements Income<List<Epsilon<Object>>> {
             /** Epsilon income -> outcome **/
             final Epsilon<Object> outcome =
                     this.atomic.ingest(context, epsilon);
-            args.add(Fn.get(() -> outcome, outcome));
+            args.add(Fn.getNull(() -> outcome, outcome));
         }
         return args;
     }

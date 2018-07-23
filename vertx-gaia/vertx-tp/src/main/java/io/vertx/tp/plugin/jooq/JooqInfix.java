@@ -4,9 +4,9 @@ import io.vertx.core.Vertx;
 import io.vertx.tp.hikari.HikariCpPool;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.plugin.Infix;
-import io.vertx.up.tool.mirror.Instance;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
 import org.jooq.DSLContext;
@@ -51,11 +51,6 @@ public class JooqInfix implements Infix {
         initInternal(vertx, NAME);
     }
 
-    @Override
-    public Configuration get() {
-        return CONFIGS.get(NAME);
-    }
-
     public static <T> T getDao(final Class<T> clazz) {
         final T dao = Instance.instance(clazz, CONFIGS.get(NAME));
         Instance.invoke(dao, "setVertx", vertxRef);
@@ -65,5 +60,10 @@ public class JooqInfix implements Infix {
     public static DSLContext getDSL() {
         final Configuration configuration = CONFIGS.get(NAME);
         return configuration.dsl();
+    }
+
+    @Override
+    public Configuration get() {
+        return CONFIGS.get(NAME);
     }
 }
