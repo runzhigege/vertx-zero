@@ -72,6 +72,8 @@ class Zero {
             }
         } catch (final ZeroException ex) {
             LOGGER.zero(ex);
+            // TODO: Debug Trace for JVM
+            ex.printStackTrace();
         } catch (final ZeroRunException ex) {
             throw ex;
         } catch (final Throwable ex) {
@@ -79,6 +81,8 @@ class Zero {
             if (!(ex instanceof ConnectException)) {
                 LOGGER.jvm(ex);
             }
+            // TODO: Debug Trace for JVM
+            ex.printStackTrace();
         }
         return ret;
     }

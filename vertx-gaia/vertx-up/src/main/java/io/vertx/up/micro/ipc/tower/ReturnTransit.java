@@ -3,6 +3,8 @@ package io.vertx.up.micro.ipc.tower;
 import io.vertx.core.Future;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.epic.fn.JvmSupplier;
+import io.vertx.up.exception._500RpcTransitInvokeException;
 import io.vertx.up.log.Annal;
 
 import java.lang.reflect.Method;
@@ -14,8 +16,23 @@ class ReturnTransit {
 
     private static final Annal LOGGER = Annal.get(ReturnTransit.class);
 
+    private static Object invoke(final JvmSupplier<Object> invokedSupplier,
+                                 final Class<?> target,
+                                 final Method method) {
+        final Object returnValue;
+        try {
+            returnValue = invokedSupplier.get();
+        } catch (final Throwable ex) {
+            throw new _500RpcTransitInvokeException(target, method, ex);
+        }
+        return returnValue;
+    }
+
     @SuppressWarnings("unchecked")
-    static Future<Envelop> build(final Object returnValue, final Method method) {
+    static Future<Envelop> build(final JvmSupplier<Object> supplier,
+                                 final Class<?> target,
+                                 final Method method) {
+        final Object returnValue = invoke(supplier, target, method);
         if (null == returnValue) {
             // Empty Future
             return Future.succeededFuture(Envelop.ok());

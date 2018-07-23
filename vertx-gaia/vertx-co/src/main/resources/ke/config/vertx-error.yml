@@ -103,6 +103,7 @@ E60025: "(400) - (Ir) The \"pager\" started page number should start from 1, now
 E60026: "(400) - (Ir) The op is not supported, please provide valid op of \"<, >, <=, >=, =, <>, !n, n, t, f, i, !i, s, e, c\", current is {0}"
 E60027: "(501) - (Rpc) This web flow does not support IPC continue flow. Class = {0}"
 E60028: "(500) - (Rpc) Zero system detect unexpected exception on class = {0}, returnValue is {1}"
+E60036: "(500) - (Rpc) Transit invoke met error, transit class = {0}, method = {1}, details = {2}"
 # Jwt Exception
 E60029: "(401) - (Jwt) Jwt token expired, please refresh your token. payload = {0}"
 E60030: "(401) - (Jwt) Jwt audient \"{0}\" is invalid, please provide correct audient"
