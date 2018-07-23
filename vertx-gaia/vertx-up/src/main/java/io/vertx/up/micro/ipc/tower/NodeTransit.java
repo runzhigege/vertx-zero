@@ -28,17 +28,17 @@ public class NodeTransit implements Transit {
         final Object proxy = Instance.singleton(this.method.getDeclaringClass());
         // 2. Return data
         final Future<Envelop> returnValue = Fn.getJvm(
-                () -> ReturnTransit.build(this.method.invoke(proxy, envelop), this.method),
+                () -> ReturnTransit.build(() -> this.method.invoke(proxy, envelop),
+                        this.getClass(), this.method),
                 this.method
         );
         Fn.outWeb(null == returnValue, LOGGER,
                 _500RpcMethodInvokeException.class, this.getClass(), returnValue);
         // 3. Here process the next
-        return returnValue
-                .compose(item -> TunnelClient.create(this.getClass())
-                        .connect(this.vertx)
-                        .connect(this.method)
-                        .send(Ux.to(item)));
+        return returnValue.compose(item -> TunnelClient.create(this.getClass())
+                .connect(this.vertx)
+                .connect(this.method)
+                .send(Ux.to(item)));
     }
 
     @Override
