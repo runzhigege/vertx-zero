@@ -86,7 +86,7 @@ public class AsynchronousLock implements Lock {
                 if (!this.acquired) {
                     this.timedOut = true;
                     this.context.runOnContext((v) -> {
-                        this.resultHandler.handle(Future.failedFuture(new VertxException("Timed out waiting to get lock")));
+                        this.resultHandler.handle(Future.failedFuture(new VertxException("Timed out waiting to getNull lock")));
                     });
                 }
 

@@ -5,9 +5,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
 import io.vertx.zero.config.ServerVisitor;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.ZeroException;
@@ -33,7 +33,7 @@ public class NamesVisitor implements ServerVisitor<String> {
         // 2. Visit the node for server, http
         final JsonObject data = this.NODE.read();
 
-        Fn.flingZero(null == data || !data.containsKey(KEY), this.getLogger(),
+        Fn.outZero(null == data || !data.containsKey(KEY), this.getLogger(),
                 ServerConfigException.class,
                 this.getClass(), null == data ? null : data.encode());
         // 3. Extract names.
@@ -44,7 +44,7 @@ public class NamesVisitor implements ServerVisitor<String> {
 
     private ConcurrentMap<Integer, String> extract(final JsonArray serverData) {
         final ConcurrentMap<Integer, String> map = new ConcurrentHashMap<>();
-        Fn.itJArray(serverData, JsonObject.class, (item, index) -> {
+        Ut.itJArray(serverData, JsonObject.class, (item, index) -> {
             if (this.isServer(item)) {
                 // 1. Extract port
                 final int port = this.extractPort(item.getJsonObject(YKEY_CONFIG));

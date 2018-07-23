@@ -1,8 +1,8 @@
 package io.vertx.zero.marshal.options;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.marshal.Visitor;
 import io.vertx.zero.marshal.node.Node;

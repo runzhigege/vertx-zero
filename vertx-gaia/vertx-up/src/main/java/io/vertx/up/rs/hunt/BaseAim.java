@@ -9,16 +9,16 @@ import io.vertx.up.atom.Rule;
 import io.vertx.up.atom.agent.Depot;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.eon.ID;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500DeliveryErrorException;
 import io.vertx.up.exception._500EntityCastException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.media.Analyzer;
 import io.vertx.up.media.MediaAnalyzer;
 import io.vertx.up.rs.validation.Validator;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -50,7 +50,7 @@ public abstract class BaseAim {
             cached = this.analyzer.in(context, event);
             context.put(ID.PARAMS_CONTENT, cached);
         }
-        // Validation handler has been get the parameters.
+        // Validation handler has been getNull the parameters.
         return cached;
     }
 
@@ -84,7 +84,7 @@ public abstract class BaseAim {
         final WebException error
                 = new _500DeliveryErrorException(this.getClass(),
                 address,
-                Fn.get(null,
+                Fn.getNull(null,
                         () -> handler.cause().getMessage(), handler.cause()));
         return Envelop.failure(error);
     }

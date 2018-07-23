@@ -6,11 +6,11 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.grpc.VertxChannelBuilder;
 import io.vertx.up.atom.flux.IpcData;
 import io.vertx.up.eon.em.CertType;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ssl.TrustPipe;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
 

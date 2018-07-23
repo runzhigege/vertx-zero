@@ -5,7 +5,7 @@ import io.vertx.ext.asyncsql.MySQLClient;
 import io.vertx.ext.sql.SQLClient;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.plugin.Infix;
 import io.vertx.up.plugin.mongo.MongoInfix;
 
@@ -33,12 +33,12 @@ public class MySqlInfix implements Infix {
         initInternal(vertx, NAME);
     }
 
+    public static SQLClient getClient() {
+        return CLIENTS.get(NAME);
+    }
+
     @Override
     public SQLClient get() {
         return getClient();
-    }
-
-    public static SQLClient getClient() {
-        return CLIENTS.get(NAME);
     }
 }

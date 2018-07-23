@@ -1,7 +1,7 @@
 package io.vertx.up.web.serialization;
 
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Ut;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 
 /**
  * Boolean

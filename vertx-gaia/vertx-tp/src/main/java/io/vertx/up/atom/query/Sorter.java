@@ -1,7 +1,10 @@
 package io.vertx.up.atom.query;
 
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.zero.eon.Strings;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,6 +21,14 @@ public class Sorter implements Serializable {
      */
     private transient final List<Boolean> asc = new ArrayList<>();
 
+    private Sorter(final String field,
+                   final Boolean asc) {
+        Fn.safeNull(() -> {
+            this.field.add(field);
+            this.asc.add(asc);
+        }, field);
+    }
+
     public static Sorter create(final String field,
                                 final Boolean asc) {
         return new Sorter(field, asc);
@@ -27,17 +38,24 @@ public class Sorter implements Serializable {
         return new Sorter(null, false);
     }
 
-    private Sorter(final String field,
-                   final Boolean asc) {
-        Fn.safeNull(() -> {
-            this.field.add(field);
-            this.asc.add(asc);
-        }, field);
+    public static Sorter create(final JsonArray sorter) {
+        // Sorter Parsing
+        final Sorter target = Sorter.create();
+        Ut.itJArray(sorter, String.class, (field, index) -> {
+            if (field.contains(Strings.COMMA)) {
+                final String sortField = field.split(Strings.COMMA)[0];
+                final boolean asc = field.split(Strings.COMMA)[1].equalsIgnoreCase("asc");
+                target.add(sortField, asc);
+            } else {
+                target.add(field, true);
+            }
+        });
+        return target;
     }
 
     public <T> JsonObject toJson(final Function<Boolean, T> function) {
         final JsonObject sort = new JsonObject();
-        Fn.itList(this.field, (item, index) -> {
+        Ut.itList(this.field, (item, index) -> {
             // Extract value from asc
             final boolean mode = this.asc.get(index);
             // Extract result
@@ -49,7 +67,7 @@ public class Sorter implements Serializable {
 
     public JsonObject toJson() {
         final JsonObject sort = new JsonObject();
-        Fn.itList(this.field, (item, index) -> {
+        Ut.itList(this.field, (item, index) -> {
             final boolean mode = this.asc.get(index);
             sort.put(item, mode);
         });

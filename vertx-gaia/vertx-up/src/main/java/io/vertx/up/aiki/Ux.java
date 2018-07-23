@@ -15,11 +15,11 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
 import io.vertx.up.atom.query.Sorter;
+import io.vertx.up.epic.fn.Actuator;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.fn.wait.Log;
+import io.vertx.up.epic.io.IO;
 import io.vertx.up.exception.WebException;
-import io.vertx.up.func.Actuator;
-import io.vertx.up.func.Fn;
-import io.vertx.up.func.wait.Log;
-import io.vertx.up.tool.io.IO;
 
 import java.util.List;
 import java.util.UUID;
@@ -252,12 +252,21 @@ public final class Ux {
     }
 
     // -> JsonArray ( JsonObject ) + JsonArray ( String ) -> add 'serial'
+
+    public static JsonArray fillSerial(final JsonArray items, final JsonArray serials) {
+        return In.assignValue(items, serials, "serial", false);
+    }
+
     public static JsonArray assignSerial(final JsonArray items, final JsonArray serials) {
-        return In.assignValue(items, serials, "serial");
+        return In.assignValue(items, serials, "serial", true);
+    }
+
+    public static JsonArray fillField(final JsonArray items, final JsonArray targets, final String field) {
+        return In.assignValue(items, targets, field, false);
     }
 
     public static JsonArray assignField(final JsonArray items, final JsonArray targets, final String field) {
-        return In.assignValue(items, targets, field);
+        return In.assignValue(items, targets, field, true);
     }
 
     public static void assignAuditor(final Object reference, final boolean isUpdate) {
@@ -310,6 +319,28 @@ public final class Ux {
 
     public static <T> Future<JsonObject> thenJsonOne(final T entity, final String pojo) {
         return Future.succeededFuture(To.toJson(entity, pojo));
+    }
+
+    public static <T> Future<JsonObject> thenUpsert(final T entity,
+                                                    final Supplier<Future<JsonObject>> supplier) {
+        return Async.toUpsertFuture(entity, "", supplier, null);
+    }
+
+    public static <T> Future<JsonObject> thenUpsert(final T entity,
+                                                    final Supplier<Future<JsonObject>> supplier,
+                                                    final Function<JsonObject, JsonObject> updateFun) {
+        return Async.toUpsertFuture(entity, "", supplier, updateFun);
+    }
+
+    public static <T> Future<JsonObject> thenUpsert(final T entity, final String pojo,
+                                                    final Supplier<Future<JsonObject>> supplier) {
+        return Async.toUpsertFuture(entity, pojo, supplier, null);
+    }
+
+    public static <T> Future<JsonObject> thenUpsert(final T entity, final String pojo,
+                                                    final Supplier<Future<JsonObject>> supplier,
+                                                    final Function<JsonObject, JsonObject> updateFun) {
+        return Async.toUpsertFuture(entity, pojo, supplier, updateFun);
     }
 
     public static <T> Future<Envelop> thenMore(final List<T> list, final String pojo) {

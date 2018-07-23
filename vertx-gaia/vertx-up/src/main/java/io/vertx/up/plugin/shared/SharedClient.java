@@ -7,7 +7,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.AsyncMap;
 import io.vertx.core.shareddata.LocalMap;
-import io.vertx.up.tool.container.KeyPair;
+import io.vertx.up.epic.container.KeyPair;
 
 /**
  * Shared client for shared data in vert.x

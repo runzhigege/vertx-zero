@@ -5,7 +5,7 @@ import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.Cookie;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.FilterContextException;
 
@@ -13,8 +13,8 @@ import java.util.Set;
 
 public abstract class HttpFilter implements Filter {
 
-    private transient RoutingContext context;
     private transient final Annal logger = Annal.get(this.getClass());
+    private transient RoutingContext context;
 
     @Override
     public void init(final RoutingContext context) {
@@ -49,6 +49,6 @@ public abstract class HttpFilter implements Filter {
     }
 
     public void init() {
-        Fn.flingUp(null == this.context, this.logger, FilterContextException.class, this.getClass());
+        Fn.outUp(null == this.context, this.logger, FilterContextException.class, this.getClass());
     }
 }

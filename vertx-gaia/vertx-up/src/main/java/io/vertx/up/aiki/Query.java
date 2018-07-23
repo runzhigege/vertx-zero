@@ -3,9 +3,9 @@ package io.vertx.up.aiki;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.query.Inquiry;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
 import io.vertx.zero.atom.Mirror;
 import io.vertx.zero.atom.Mojo;
 import io.vertx.zero.eon.Strings;
@@ -17,7 +17,7 @@ class Query {
     private static final Annal LOGGER = Annal.get(Query.class);
 
     static Inquiry getInquiry(final JsonObject envelop, final String pojo) {
-        return Fn.get(Inquiry.create(new JsonObject()), () -> {
+        return Fn.getNull(Inquiry.create(new JsonObject()), () -> {
             final JsonObject data = envelop.copy();
             if (Ut.isNil(pojo)) {
                 return Inquiry.create(data);
@@ -42,7 +42,7 @@ class Query {
     private static JsonArray sorter(final JsonArray sorter, final Mojo mojo) {
         final JsonArray sorters = new JsonArray();
         final ConcurrentMap<String, String> mapping = mojo.getColumns();
-        Fn.itJArray(sorter, String.class, (item, index) -> {
+        Ut.itJArray(sorter, String.class, (item, index) -> {
             final String key = item.contains(Strings.COMMA) ? item.split(Strings.COMMA)[0] : item;
             if (mapping.containsKey(key)) {
                 final String targetField = mapping.get(key);
@@ -81,7 +81,7 @@ class Query {
     private static JsonArray projection(final JsonArray projections, final Mojo mojo) {
         final JsonArray result = new JsonArray();
         final ConcurrentMap<String, String> mapping = mojo.getRevert();
-        Fn.itJArray(projections, String.class, (item, index) ->
+        Ut.itJArray(projections, String.class, (item, index) ->
                 result.add(null == mapping.get(item) ? item : mapping.get(item)));
         return result;
     }

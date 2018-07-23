@@ -2,7 +2,7 @@ package io.vertx.zero.log;
 
 import io.vertx.core.VertxException;
 import io.vertx.core.logging.Logger;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.zero.exception.ZeroException;
 
 import java.text.MessageFormat;

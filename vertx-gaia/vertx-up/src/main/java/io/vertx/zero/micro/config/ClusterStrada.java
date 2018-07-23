@@ -2,7 +2,7 @@ package io.vertx.zero.micro.config;
 
 import io.vertx.core.ClusterOptions;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.marshal.Transformer;
 

@@ -4,7 +4,7 @@ import io.vertx.core.Vertx;
 import io.vertx.ext.mongo.MongoClient;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.plugin.Infix;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -36,12 +36,12 @@ public class MongoInfix implements Infix {
         initInternal(vertx, NAME);
     }
 
+    public static MongoClient getClient() {
+        return CLIENTS.get(NAME);
+    }
+
     @Override
     public MongoClient get() {
         return getClient();
-    }
-
-    public static MongoClient getClient() {
-        return CLIENTS.get(NAME);
     }
 }

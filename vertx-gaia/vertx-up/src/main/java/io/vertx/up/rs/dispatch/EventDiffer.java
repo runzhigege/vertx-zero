@@ -5,12 +5,12 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.worker.Receipt;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Aim;
 import io.vertx.up.rs.hunt.AsyncAim;
 import io.vertx.up.rs.hunt.OneWayAim;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroAnno;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.ReturnTypeException;
@@ -34,6 +34,9 @@ class EventDiffer implements Differ<RoutingContext> {
 
     private static Differ<RoutingContext> INSTANCE = null;
 
+    private EventDiffer() {
+    }
+
     public static Differ<RoutingContext> create() {
         if (null == INSTANCE) {
             synchronized (EventDiffer.class) {
@@ -45,25 +48,22 @@ class EventDiffer implements Differ<RoutingContext> {
         return INSTANCE;
     }
 
-    private EventDiffer() {
-    }
-
     @Override
     public Aim<RoutingContext> build(final Event event) {
         Aim<RoutingContext> aim = null;
-        final Method replier = findReplier(event);
+        final Method replier = this.findReplier(event);
         final Method method = event.getAction();
         final Class<?> returnType = method.getReturnType();
         if (Void.class == returnType || void.class == returnType) {
             // Exception because this method must has return type to
             // send message to event bus. It means that it require
             // return types.
-            Fn.flingUp(true, LOGGER, ReturnTypeException.class,
-                    getClass(), method);
+            Fn.outUp(true, LOGGER, ReturnTypeException.class,
+                    this.getClass(), method);
         } else {
             final Class<?> replierType = replier.getReturnType();
             if (Void.class == replierType || void.class == replierType) {
-                if (isAsync(replier)) {
+                if (this.isAsync(replier)) {
                     // Mode 5: Event Bus: ( Async ) Request-Response
                     aim = Fn.pool(Pool.AIMS, Thread.currentThread().getName() + "-mode-vert.x",
                             () -> Instance.instance(AsyncAim.class));
@@ -102,13 +102,13 @@ class EventDiffer implements Differ<RoutingContext> {
                 .findFirst().orElse(null);
         final Method method;
         // Get null found throw exception.
-        Fn.flingUp(null == found, LOGGER, WorkerMissingException.class,
-                getClass(), address);
+        Fn.outUp(null == found, LOGGER, WorkerMissingException.class,
+                this.getClass(), address);
 
         method = found.getMethod();
 
-        Fn.flingUp(null == method, LOGGER, WorkerMissingException.class,
-                getClass(), address);
+        Fn.outUp(null == method, LOGGER, WorkerMissingException.class,
+                this.getClass(), address);
         return method;
     }
 }

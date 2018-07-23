@@ -3,8 +3,7 @@ package io.vertx.up.aiki;
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Ut;
+import io.vertx.up.epic.Ut;
 import io.vertx.zero.eon.Values;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -39,7 +38,7 @@ class Dual {
             final JsonArray sources
     ) {
         final JsonArray results = new JsonArray();
-        Fn.itJArray(targetArray, JsonObject.class, (source, index) -> {
+        Ut.itJArray(targetArray, JsonObject.class, (source, index) -> {
             final JsonObject target = sources.getJsonObject(index);
             final JsonObject result = null == target ? source :
                     append(source, target, true);

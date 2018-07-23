@@ -2,7 +2,7 @@ package io.vertx.up.atom.secure;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.em.WallType;
-import io.vertx.up.tool.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,6 +12,16 @@ import java.util.Objects;
  * Scanned ( Metadata ) for each @Wall.
  */
 public class Cliff implements Serializable, Comparable<Cliff> {
+    /**
+     * defined = false
+     * Standard Authorization
+     */
+    private final Phylum authorizer = new Phylum();
+    /**
+     * defined = true
+     * Custom Authorization
+     */
+    private final Ostium authorizor = new Ostium();
     /**
      * The wall path to be security limitation
      */
@@ -32,16 +42,6 @@ public class Cliff implements Serializable, Comparable<Cliff> {
      * Proxy instance
      */
     private Object proxy;
-    /**
-     * defined = false
-     * Standard Authorization
-     */
-    private final Phylum authorizer = new Phylum();
-    /**
-     * defined = true
-     * Custom Authorization
-     */
-    private final Ostium authorizor = new Ostium();
     /**
      * User-Defined authorization
      */

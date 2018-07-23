@@ -2,7 +2,7 @@ package io.vertx.tp.plugin.qiy;
 
 import io.vertx.core.Vertx;
 import io.vertx.up.annotations.Plugin;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.plugin.Infix;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -28,12 +28,12 @@ public class QiyInfix implements Infix {
         initInternal(vertx, NAME);
     }
 
+    public static QiyClient getClient() {
+        return CLIENTS.get(NAME);
+    }
+
     @Override
     public QiyClient get() {
         return getClient();
-    }
-
-    public static QiyClient getClient() {
-        return CLIENTS.get(NAME);
     }
 }

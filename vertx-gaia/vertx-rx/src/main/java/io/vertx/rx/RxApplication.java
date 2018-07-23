@@ -6,13 +6,13 @@ import io.vertx.rx.web.anima.AgentScatter;
 import io.vertx.up.Launcher;
 import io.vertx.up.annotations.Up;
 import io.vertx.up.concurrent.Runner;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Anno;
+import io.vertx.up.epic.mirror.Instance;
+import io.vertx.up.log.Annal;
+import io.vertx.up.web.anima.Scatter;
 import io.vertx.zero.exception.UpClassArgsException;
 import io.vertx.zero.exception.UpClassInvalidException;
-import io.vertx.up.func.Fn;
-import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Anno;
-import io.vertx.up.tool.mirror.Instance;
-import io.vertx.up.web.anima.Scatter;
 
 import java.lang.annotation.Annotation;
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,17 +31,17 @@ public class RxApplication {
 
     private RxApplication(final Class<?> clazz) {
         // Must not null
-        Fn.flingUp(
+        Fn.outUp(
                 null == clazz,
                 LOGGER,
-                UpClassArgsException.class, getClass());
+                UpClassArgsException.class, this.getClass());
         this.clazz = clazz;
         this.annotationMap = Anno.get(clazz);
         // Must be invalid
-        Fn.flingUp(
+        Fn.outUp(
                 !this.annotationMap.containsKey(Up.class.getName()),
                 LOGGER,
-                UpClassInvalidException.class, getClass(), clazz.getName());
+                UpClassInvalidException.class, this.getClass(), clazz.getName());
     }
 
     public static void run(final Class<?> clazz, final Object... args) {

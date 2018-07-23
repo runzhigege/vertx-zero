@@ -8,7 +8,7 @@ import io.vertx.up.rs.Extractor;
 import io.vertx.up.rs.config.EventExtractor;
 import io.vertx.up.rs.router.EventAxis;
 import io.vertx.up.rs.router.RouterAxis;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.web.ZeroGrid;
 
 import java.util.List;
@@ -20,15 +20,6 @@ import java.util.stream.Collectors;
 
 public class WebBase extends WebTestBase {
 
-    protected Event extract(final Class<?> clazz, final String name) {
-        final Extractor<Set<Event>> extractor = Instance.singleton(EventExtractor.class);
-        final Set<Event> events = extractor.extract(clazz);
-        final List<Event> list = events.stream()
-                .filter(item -> item.getAction().getName().equals(name))
-                .collect(Collectors.toList());
-        return list.get(0);
-    }
-
     private static final ConcurrentMap<Integer, HttpServerOptions>
             SERVERS = ZeroGrid.getServerOptions();
     private static final ConcurrentMap<Integer, AtomicInteger>
@@ -39,6 +30,15 @@ public class WebBase extends WebTestBase {
             });
         }
     };
+
+    protected Event extract(final Class<?> clazz, final String name) {
+        final Extractor<Set<Event>> extractor = Instance.singleton(EventExtractor.class);
+        final Set<Event> events = extractor.extract(clazz);
+        final List<Event> list = events.stream()
+                .filter(item -> item.getAction().getName().equals(name))
+                .collect(Collectors.toList());
+        return list.get(0);
+    }
 
     @SuppressWarnings("unchecked")
     protected void start() {

@@ -2,9 +2,9 @@ package io.vertx.zero.marshal.node;
 
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.zero.eon.Strings;
 
 import java.util.Objects;
@@ -17,9 +17,6 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class ZeroLime implements Node<ConcurrentMap<String, String>> {
 
-    private transient final Node<JsonObject> node
-            = Instance.singleton(ZeroVertx.class);
-
     private static final ConcurrentMap<String, String> INTERNALS
             = new ConcurrentHashMap<String, String>() {
         {
@@ -29,6 +26,8 @@ public class ZeroLime implements Node<ConcurrentMap<String, String>> {
             this.put("resolver", ZeroTool.produce("resolver"));
         }
     };
+    private transient final Node<JsonObject> node
+            = Instance.singleton(ZeroVertx.class);
 
     @Override
     public ConcurrentMap<String, String> read() {

@@ -3,7 +3,7 @@ package io.vertx.up.web.anima;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.up.eon.Info;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 
 import java.util.concurrent.ConcurrentHashMap;

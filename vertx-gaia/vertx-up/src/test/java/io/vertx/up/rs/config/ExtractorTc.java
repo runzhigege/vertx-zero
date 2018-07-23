@@ -5,10 +5,10 @@ import io.vertx.ext.unit.TestContext;
 import io.vertx.quiz.UpBase;
 import io.vertx.quiz.example.User;
 import io.vertx.up.eon.ZeroValue;
-import io.vertx.zero.exception.EventSourceException;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.micro.ZeroHttpAgent;
 import io.vertx.up.rs.Extractor;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.zero.exception.EventSourceException;
 import org.junit.Test;
 
 public class ExtractorTc extends UpBase {
@@ -26,11 +26,11 @@ public class ExtractorTc extends UpBase {
 
     @Test(expected = EventSourceException.class)
     public void testExtractEndpoint() {
-        extractor().extract(getClass());
+        this.extractor().extract(this.getClass());
     }
 
     @Test
     public void testEvent1() {
-        extractor().extract(User.class);
+        this.extractor().extract(User.class);
     }
 }

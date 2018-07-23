@@ -6,7 +6,7 @@ import io.vertx.core.net.OpenSSLEngineOptions;
 import io.vertx.core.net.PemKeyCertOptions;
 import io.vertx.core.net.TCPSSLOptions;
 import io.vertx.quiz.core.tls.Cert;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ssl.CertPipe;
 
@@ -23,7 +23,7 @@ public class PemCert implements CertPipe<JsonObject> {
 
     @Override
     public Handler<TCPSSLOptions> parse(final JsonObject options) {
-        return Fn.get(() -> {
+        return Fn.getNull(() -> {
             final PemKeyCertOptions pem = Fn.getSemi(
                     null == options ||
                             !options.containsKey(PATH_KEY) ||

@@ -3,9 +3,9 @@ package io.vertx.zero.marshal.node;
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.io.IO;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.io.IO;
+import io.vertx.up.epic.mirror.Instance;
 
 import java.util.Arrays;
 import java.util.Objects;

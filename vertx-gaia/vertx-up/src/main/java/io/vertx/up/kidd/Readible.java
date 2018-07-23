@@ -1,21 +1,13 @@
 package io.vertx.up.kidd;
 
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.kidd.outcome.CodeReadible;
-import io.vertx.up.tool.mirror.Instance;
 
 /**
  * Fill the field "readible" for input exception
  */
 public interface Readible {
-    /**
-     * Fill the field "readible" for web exception
-     *
-     * @param error
-     * @return
-     */
-    void interpret(WebException error);
-
     /**
      * Get code readible
      *
@@ -24,4 +16,12 @@ public interface Readible {
     static Readible get() {
         return Instance.singleton(CodeReadible.class);
     }
+
+    /**
+     * Fill the field "readible" for web exception
+     *
+     * @param error
+     * @return
+     */
+    void interpret(WebException error);
 }

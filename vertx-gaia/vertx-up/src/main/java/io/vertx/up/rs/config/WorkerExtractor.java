@@ -2,10 +2,10 @@ package io.vertx.up.rs.config;
 
 import io.vertx.core.DeploymentOptions;
 import io.vertx.up.annotations.Worker;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
-import io.vertx.up.tool.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,7 +24,7 @@ public class WorkerExtractor implements Extractor<DeploymentOptions> {
     @Override
     public DeploymentOptions extract(final Class<?> clazz) {
         Fn.safeNull(() -> LOGGER.info(Info.WORKER_HIT, clazz.getName()), clazz);
-        return Fn.pool(OPTIONS, clazz, () -> transform(clazz));
+        return Fn.pool(OPTIONS, clazz, () -> this.transform(clazz));
     }
 
     private DeploymentOptions transform(final Class<?> clazz) {

@@ -12,16 +12,16 @@ Zero system extend function interface system based on java8.
 
 Extension by zero for specifical usage.
 
-* `io.vertx.up.func.Actuator`：`void execute()`；
-* `io.vertx.up.func.JvmSupplier<T>`：`T get() throws Exception`；
-* `io.vertx.up.func.JvmActuator`：`void execute() throws Exception`；
-* `io.vertx.up.func.ZeroActuator`：`void execute() throws ZeroException`；
-* `io.vertx.up.func.ZeroSupplier<T>`：`T get() throws ZeroException`；
-* `io.vertx.up.func.ZeroBiConsumer<T,R>`: `void accept(T input, R second) throws ZeroException`
+* `io.vertx.up.epic.fn.Actuator`：`void execute()`；
+* `io.vertx.up.epic.fn.JvmSupplier<T>`：`T get() throws Exception`；
+* `io.vertx.up.epic.fn.JvmActuator`：`void execute() throws Exception`；
+* `io.vertx.up.epic.fn.ZeroActuator`：`void execute() throws ZeroException`；
+* `io.vertx.up.epic.fn.ZeroSupplier<T>`：`T get() throws ZeroException`；
+* `io.vertx.up.epic.fn.ZeroBiConsumer<T,R>`: `void accept(T input, R second) throws ZeroException`
 
 ## 2. Fn
 
-In Zero system, there defined a supper static class for function abstract to simply the coding, this class is `io.vertx.up.func.Fn`, You also could use following function in your coding.
+In Zero system, there defined a supper static class for function abstract to simply the coding, this class is `io.vertx.up.epic.fn.Fn`, You also could use following function in your coding.
 
 ```java
 // Zero Logger initialized, connect to vert.x logging system directly but uniform managed by zero.

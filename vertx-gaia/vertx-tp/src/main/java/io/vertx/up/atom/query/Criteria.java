@@ -1,11 +1,11 @@
 package io.vertx.up.atom.query;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.epic.container.KeyPair;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.exception._400OpUnsupportException;
 import io.vertx.up.exception._500QueryMetaNullException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.container.KeyPair;
 import io.vertx.zero.eon.Strings;
 
 import java.io.Serializable;
@@ -21,17 +21,17 @@ public class Criteria implements Serializable {
     private static final Annal LOGGER = Annal.get(Criteria.class);
     private final List<KeyPair<String, KeyPair<String, Object>>> conditions = new ArrayList<>();
 
-    public static Criteria create(final JsonObject data) {
-        return new Criteria(data);
-    }
-
     private Criteria(final JsonObject data) {
-        Fn.flingWeb(null == data, LOGGER,
+        Fn.outWeb(null == data, LOGGER,
                 _500QueryMetaNullException.class, this.getClass());
         for (final String field : data.fieldNames()) {
             // Add
             this.add(field, data.getValue(field));
         }
+    }
+
+    public static Criteria create(final JsonObject data) {
+        return new Criteria(data);
     }
 
     public List<KeyPair<String, KeyPair<String, Object>>> getConditions() {
@@ -53,7 +53,7 @@ public class Criteria implements Serializable {
             filterField = field;
             op = Inquiry.Op.EQ;
         }
-        Fn.flingWeb(!Inquiry.Op.VALUES.contains(op), LOGGER,
+        Fn.outWeb(!Inquiry.Op.VALUES.contains(op), LOGGER,
                 _400OpUnsupportException.class, this.getClass(), op);
         final KeyPair<String, Object> condition = KeyPair.create(op, value);
         final KeyPair<String, KeyPair<String, Object>> item = KeyPair.create(filterField, condition);

@@ -10,11 +10,11 @@ import io.vertx.rx.rs.router.EventAxis;
 import io.vertx.rx.rs.router.RouterAxis;
 import io.vertx.up.annotations.Agent;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ZeroAtomic;
 import io.vertx.up.rs.Axis;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.eon.Values;
 
 import java.text.MessageFormat;
@@ -30,6 +30,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ZeroRxAgent extends AbstractVerticle {
 
     private static final Annal LOGGER = Annal.get(ZeroRxAgent.class);
+    private transient final String NAME = this.getClass().getSimpleName();
 
     @Override
     public void start() {
@@ -56,13 +57,11 @@ public class ZeroRxAgent extends AbstractVerticle {
             /** 3.4. Log output **/
             {
                 result.subscribe((rxServer) -> {
-                    recordServer(option, router);
+                    this.recordServer(option, router);
                 });
             }
         });
     }
-
-    private transient final String NAME = getClass().getSimpleName();
 
     private void recordServer(final HttpServerOptions options,
                               final Router router) {
@@ -71,7 +70,7 @@ public class ZeroRxAgent extends AbstractVerticle {
         if (Values.ZERO == out.getAndIncrement()) {
             // 1. Build logs for current server;
             final String portLiteral = String.valueOf(port);
-            LOGGER.info(Info.RX_SERVERS, this.NAME, deploymentID(),
+            LOGGER.info(Info.RX_SERVERS, this.NAME, this.deploymentID(),
                     portLiteral);
             final List<Route> routes = router.getRoutes();
             final Map<String, Route> routeMap = new TreeMap<>();

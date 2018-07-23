@@ -2,10 +2,10 @@ package io.vertx.up.web.anima;
 
 import io.reactivex.Observable;
 import io.vertx.up.annotations.Plugin;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.Infix;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroAmbient;
 
 import java.lang.reflect.Method;
@@ -19,13 +19,13 @@ class InfixPlugin {
     private transient final Class<?> clazz;
     private transient final Annal logger;
 
-    static InfixPlugin create(final Class<?> clazz) {
-        return Fn.pool(Pool.PLUGINS, clazz, () -> new InfixPlugin(clazz));
-    }
-
     private InfixPlugin(final Class<?> clazz) {
         this.clazz = clazz;
         this.logger = Annal.get(clazz);
+    }
+
+    static InfixPlugin create(final Class<?> clazz) {
+        return Fn.pool(Pool.PLUGINS, clazz, () -> new InfixPlugin(clazz));
     }
 
     void inject(final Object proxy) {

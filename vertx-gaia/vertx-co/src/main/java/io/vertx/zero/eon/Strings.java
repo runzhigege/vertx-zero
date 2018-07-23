@@ -24,4 +24,6 @@ public interface Strings {
     String COLON = ":";
 
     String QUESTION = "?";
+
+    String T_CHAR = "T";
 }
