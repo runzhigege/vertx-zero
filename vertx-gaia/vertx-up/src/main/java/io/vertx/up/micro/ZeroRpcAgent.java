@@ -10,13 +10,12 @@ import io.vertx.up.annotations.Agent;
 import io.vertx.up.eon.ID;
 import io.vertx.up.eon.em.Etat;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.center.ZeroRegistry;
 import io.vertx.up.micro.ipc.server.Tunnel;
 import io.vertx.up.micro.ipc.server.UnityTunnel;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.eon.Values;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -37,7 +36,7 @@ public class ZeroRpcAgent extends AbstractVerticle {
     @Override
     public void start() {
         /** 1. Iterate all the configuration **/
-        Fn.itMap(ZeroAtomic.RPC_OPTS, (port, config) -> {
+        Ut.itMap(ZeroAtomic.RPC_OPTS, (port, config) -> {
             /** 2.Rcp server builder initialized **/
             final VertxServerBuilder builder = VertxServerBuilder
                     .forAddress(this.vertx, config.getHost(), config.getPort());
@@ -59,7 +58,7 @@ public class ZeroRpcAgent extends AbstractVerticle {
 
     @Override
     public void stop() {
-        Fn.itMap(ZeroAtomic.RPC_OPTS, (port, config) -> {
+        Ut.itMap(ZeroAtomic.RPC_OPTS, (port, config) -> {
             // Status registry
             this.registry.registryRpc(config, Etat.STOPPED);
         });

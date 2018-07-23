@@ -1,9 +1,9 @@
 package io.vertx.up.media;
 
 import io.vertx.up.atom.agent.Event;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._415MediaNotSupportException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 
 import javax.ws.rs.core.MediaType;
@@ -23,7 +23,7 @@ final class MediaAtom {
                             MediaType.MEDIA_TYPE_WILDCARD.equals(media.getType()) ||
                                     media.getType().equalsIgnoreCase(type.getType()));
             /** 2. Type checking **/
-            Fn.flingUp(!match, LOGGER,
+            Fn.outUp(!match, LOGGER,
                     _415MediaNotSupportException.class,
                     MediaAtom.class, type, medias);
             /** 3. Start to parsing expected sub type **/
@@ -33,7 +33,7 @@ final class MediaAtom {
                                     media.getSubtype().equalsIgnoreCase(type.getSubtype())
                     );
             /** 4. Subtype checking **/
-            Fn.flingUp(!match, LOGGER,
+            Fn.outUp(!match, LOGGER,
                     _415MediaNotSupportException.class,
                     MediaAtom.class, type, medias);
         }

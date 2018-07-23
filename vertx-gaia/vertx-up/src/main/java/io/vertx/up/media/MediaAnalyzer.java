@@ -4,13 +4,13 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.Epsilon;
 import io.vertx.up.atom.agent.Event;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception.WebException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.media.parse.EpsilonIncome;
 import io.vertx.up.media.parse.Income;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
 
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;

@@ -2,7 +2,7 @@ package io.vertx.up.plugin.shared;
 
 import io.vertx.core.Vertx;
 import io.vertx.up.annotations.Plugin;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.plugin.Infix;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -29,16 +29,16 @@ public class MapInfix implements Infix {
         initInternal(vertx, NAME);
     }
 
-    @Override
-    public SharedClient<String, Object> get() {
-        return getClient();
-    }
-
     public static SharedClient<String, Object> getClient() {
         return CLIENTS.get(NAME);
     }
 
     public static String getDefaultName() {
         return NAME;
+    }
+
+    @Override
+    public SharedClient<String, Object> get() {
+        return getClient();
     }
 }

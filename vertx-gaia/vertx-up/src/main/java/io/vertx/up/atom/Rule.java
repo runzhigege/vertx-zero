@@ -1,7 +1,7 @@
 package io.vertx.up.atom;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 
 import java.io.Serializable;
 
@@ -13,16 +13,16 @@ public class Rule implements Serializable {
 
     private final JsonObject config = new JsonObject();
 
-    public static Rule create(final JsonObject data) {
-        return Fn.get(null, () -> new Rule(data), data);
-    }
-
     private Rule(final JsonObject data) {
         this.type = data.getString("type");
         this.message = data.getString("message");
         this.config.mergeIn(data.copy());
         this.config.remove("type");
         this.config.remove("message");
+    }
+
+    public static Rule create(final JsonObject data) {
+        return Fn.getNull(null, () -> new Rule(data), data);
     }
 
     public String getMessage() {

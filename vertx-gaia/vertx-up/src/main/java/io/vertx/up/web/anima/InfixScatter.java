@@ -5,10 +5,10 @@ import io.vertx.core.Vertx;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.concurrent.Runner;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroAmbient;
 import io.vertx.up.web.ZeroAnno;
 import io.vertx.zero.eon.Values;
@@ -51,7 +51,7 @@ public class InfixScatter implements Scatter<Vertx> {
         injections.values().stream().forEach(item -> {
             if (null != item && item.isAnnotationPresent(Plugin.class)) {
                 final Method method = this.findInit(item);
-                Fn.flingUp(null == method, LOGGER,
+                Fn.outUp(null == method, LOGGER,
                         PluginSpecificationException.class,
                         this.getClass(), item.getName());
                 Fn.safeJvm(() -> method.invoke(null, vertx), LOGGER);
@@ -64,13 +64,13 @@ public class InfixScatter implements Scatter<Vertx> {
                 .filter(item -> null != item && item.isAnnotationPresent(Plugin.class))
                 .subscribe(item -> {
                     final Method method = this.findInit(item);
-                    Fn.flingUp(null == method, LOGGER,
+                    Fn.outUp(null == method, LOGGER,
                             PluginSpecificationException.class,
                             this.getClass(), item.getName());
                     Fn.safeJvm(() -> method.invoke(null, vertx), LOGGER);
                 });
         /** After infix inject plugins **/
-        Fn.itSet(PLUGINS, (clazz, index) -> Runner.run(() -> {
+        Ut.itSet(PLUGINS, (clazz, index) -> Runner.run(() -> {
             /** Instance reference **/
             final Object reference = Instance.singleton(clazz);
             /** Injects scanner **/
@@ -86,7 +86,7 @@ public class InfixScatter implements Scatter<Vertx> {
      * @return
      */
     private Method findInit(final Class<?> clazz) {
-        return Fn.get(() -> {
+        return Fn.getNull(() -> {
             final Method[] methods = clazz.getDeclaredMethods();
             final List<Method> found = Arrays.stream(methods)
                     .filter(item -> "init".equals(item.getName()) && this.validMethod(item))

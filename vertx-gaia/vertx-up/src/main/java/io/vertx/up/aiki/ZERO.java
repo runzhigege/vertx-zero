@@ -13,6 +13,7 @@ interface Info {
 
     String RPC_RESULT = "[ ZERO ] ( Rpc -> thenRpc ) Client = {4}, Ipc ( {0},{1} ) with params {2}, response data is {3}.";
     String JOOQ_PARSE = "[ ZERO ] ( Jooq -> fetchAndAsync ) Parsed result is condition = \n{0}.";
+    String JOOQ_BIND = "[ ZERO ] ( Pojo ) Pojo file = {0} has been bind to dao {1}, Field mode enabled.";
 
     String INQUIRY_MESSAGE = "[ ZERO ] ( Inquiry ) Processed metadata = {0}.";
 

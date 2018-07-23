@@ -8,10 +8,10 @@ import io.vertx.core.spi.cluster.ClusterManager;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.eon.Info;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroAnno;
 import io.vertx.up.web.ZeroGrid;
 import io.vertx.up.web.ZeroHelper;
@@ -87,7 +87,7 @@ public final class Motor {
                 new ConcurrentHashMap<>();
         // Fix Boot
         // 1. If defined, use default
-        Fn.itMap(agents, (type, list) -> {
+        Ut.itMap(agents, (type, list) -> {
             // 2. Defined -> You have defined
             Fn.safeSemi(defines.containsKey(type) && defines.get(type), LOGGER,
                     () -> {

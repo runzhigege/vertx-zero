@@ -3,11 +3,11 @@ package io.vertx.up.web.anima;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
 import io.vertx.up.rs.config.AgentExtractor;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.limit.Factor;
 import io.vertx.up.web.limit.HttpFactor;
 
@@ -32,7 +32,7 @@ public class AgentScatter implements Scatter<Vertx> {
         /** 2.Record options**/
         final ConcurrentMap<Class<?>, DeploymentOptions> options =
                 new ConcurrentHashMap<>();
-        Fn.itMap(agents, (type, clazz) -> {
+        Ut.itMap(agents, (type, clazz) -> {
             // 3.1 Agent deployment options
             final DeploymentOptions option = extractor.extract(clazz);
             options.put(clazz, option);
@@ -41,7 +41,7 @@ public class AgentScatter implements Scatter<Vertx> {
         });
         // Runtime hooker
         Runtime.getRuntime().addShutdownHook(new Thread(() ->
-                Fn.itMap(agents, (type, clazz) -> {
+                Ut.itMap(agents, (type, clazz) -> {
                     // 4. Undeploy Agent.
                     final DeploymentOptions opt = options.get(clazz);
                     Verticles.undeploy(vertx, clazz, opt, LOGGER);

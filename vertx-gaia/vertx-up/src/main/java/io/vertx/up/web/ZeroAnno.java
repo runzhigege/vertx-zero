@@ -4,10 +4,10 @@ import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.atom.worker.Receipt;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
+import io.vertx.up.epic.mirror.Pack;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Instance;
-import io.vertx.up.tool.mirror.Pack;
 import io.vertx.up.web.origin.*;
 
 import java.lang.reflect.Method;
@@ -47,6 +47,83 @@ public class ZeroAnno {
             POINTER = new HashSet<>();
     private final static Set<Class<?>>
             TPS = new HashSet<>();
+
+    static {
+        /** 1.Scan the packages **/
+        final Set<Class<?>> clazzes = Pack.getClasses(null);
+        /** EndPoint **/
+        Inquirer<Set<Class<?>>> inquirer =
+                Instance.singleton(EndPointInquirer.class);
+        ENDPOINTS.addAll(inquirer.scan(clazzes));
+
+        /** EndPoint -> Event **/
+        Fn.safeSemi(!ENDPOINTS.isEmpty(),
+                LOGGER,
+                () -> {
+                    final Inquirer<Set<Event>> event =
+                            Instance.singleton(EventInquirer.class);
+                    EVENTS.addAll(event.scan(ENDPOINTS));
+                });
+
+        /** Wall -> Authenticate, Authorize **/
+        final Inquirer<Set<Cliff>> walls =
+                Instance.singleton(WallInquirer.class);
+        WALLS.addAll(walls.scan(clazzes));
+
+        /** Filter -> WebFilter **/
+        final Inquirer<ConcurrentMap<String, Set<Event>>> filters =
+                Instance.singleton(FilterInquirer.class);
+        FILTERS.putAll(filters.scan(clazzes));
+
+        /** Queue **/
+        inquirer = Instance.singleton(QueueInquirer.class);
+        final Set<Class<?>> queues = inquirer.scan(clazzes);
+
+        /** Queue -> Receipt **/
+        Fn.safeSemi(!queues.isEmpty(),
+                LOGGER,
+                () -> {
+                    final Inquirer<Set<Receipt>> receipt =
+                            Instance.singleton(ReceiptInquirer.class);
+                    RECEIPTS.addAll(receipt.scan(queues));
+                });
+
+        /** Ipc Only **/
+        Fn.safeSemi(IPCS.isEmpty(),
+                LOGGER,
+                () -> {
+                    final Inquirer<ConcurrentMap<String, Method>> ipc =
+                            Instance.singleton(IpcInquirer.class);
+                    IPCS.putAll(ipc.scan(clazzes));
+                });
+
+        /** Agent **/
+        final Inquirer<ConcurrentMap<ServerType, List<Class<?>>>> agent =
+                Instance.singleton(AgentInquirer.class);
+        AGENTS.putAll(agent.scan(clazzes));
+
+        /** JSR330 Fix **/
+        final Inquirer<Set<Class<?>>> pointer =
+                Instance.singleton(PointerInquirer.class);
+        POINTER.addAll(pointer.scan(clazzes));
+
+        /** Tp Clients **/
+        final Inquirer<Set<Class<?>>> tps =
+                Instance.singleton(PluginInquirer.class);
+        TPS.addAll(tps.scan(clazzes));
+
+        /** Worker **/
+        final Inquirer<Set<Class<?>>> worker =
+                Instance.singleton(WorkerInquirer.class);
+        WORKERS.addAll(worker.scan(clazzes));
+
+        /** Walls **/
+
+        /** Injections **/
+        final Inquirer<ConcurrentMap<Class<?>, ConcurrentMap<String, Class<?>>>> afflux =
+                Instance.singleton(AffluxInquirer.class);
+        PLUGINS.putAll(afflux.scan(clazzes));
+    }
 
     /**
      * Get all plugins
@@ -151,82 +228,5 @@ public class ZeroAnno {
     public static Set<Cliff>
     getWalls() {
         return WALLS;
-    }
-
-    static {
-        /** 1.Scan the packages **/
-        final Set<Class<?>> clazzes = Pack.getClasses(null);
-        /** EndPoint **/
-        Inquirer<Set<Class<?>>> inquirer =
-                Instance.singleton(EndPointInquirer.class);
-        ENDPOINTS.addAll(inquirer.scan(clazzes));
-
-        /** EndPoint -> Event **/
-        Fn.safeSemi(!ENDPOINTS.isEmpty(),
-                LOGGER,
-                () -> {
-                    final Inquirer<Set<Event>> event =
-                            Instance.singleton(EventInquirer.class);
-                    EVENTS.addAll(event.scan(ENDPOINTS));
-                });
-
-        /** Wall -> Authenticate, Authorize **/
-        final Inquirer<Set<Cliff>> walls =
-                Instance.singleton(WallInquirer.class);
-        WALLS.addAll(walls.scan(clazzes));
-
-        /** Filter -> WebFilter **/
-        final Inquirer<ConcurrentMap<String, Set<Event>>> filters =
-                Instance.singleton(FilterInquirer.class);
-        FILTERS.putAll(filters.scan(clazzes));
-
-        /** Queue **/
-        inquirer = Instance.singleton(QueueInquirer.class);
-        final Set<Class<?>> queues = inquirer.scan(clazzes);
-
-        /** Queue -> Receipt **/
-        Fn.safeSemi(!queues.isEmpty(),
-                LOGGER,
-                () -> {
-                    final Inquirer<Set<Receipt>> receipt =
-                            Instance.singleton(ReceiptInquirer.class);
-                    RECEIPTS.addAll(receipt.scan(queues));
-                });
-
-        /** Ipc Only **/
-        Fn.safeSemi(IPCS.isEmpty(),
-                LOGGER,
-                () -> {
-                    final Inquirer<ConcurrentMap<String, Method>> ipc =
-                            Instance.singleton(IpcInquirer.class);
-                    IPCS.putAll(ipc.scan(clazzes));
-                });
-
-        /** Agent **/
-        final Inquirer<ConcurrentMap<ServerType, List<Class<?>>>> agent =
-                Instance.singleton(AgentInquirer.class);
-        AGENTS.putAll(agent.scan(clazzes));
-
-        /** JSR330 Fix **/
-        final Inquirer<Set<Class<?>>> pointer =
-                Instance.singleton(PointerInquirer.class);
-        POINTER.addAll(pointer.scan(clazzes));
-
-        /** Tp Clients **/
-        final Inquirer<Set<Class<?>>> tps =
-                Instance.singleton(PluginInquirer.class);
-        TPS.addAll(tps.scan(clazzes));
-
-        /** Worker **/
-        final Inquirer<Set<Class<?>>> worker =
-                Instance.singleton(WorkerInquirer.class);
-        WORKERS.addAll(worker.scan(clazzes));
-
-        /** Walls **/
-
-        /** Injections **/
-        final Inquirer<ConcurrentMap<Class<?>, ConcurrentMap<String, Class<?>>>> afflux =
-                Instance.singleton(AffluxInquirer.class);
-        PLUGINS.putAll(afflux.scan(clazzes));
     }
 }

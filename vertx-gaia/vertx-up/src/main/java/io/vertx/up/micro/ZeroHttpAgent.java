@@ -11,7 +11,9 @@ import io.vertx.tp.etcd.center.EtcdData;
 import io.vertx.up.annotations.Agent;
 import io.vertx.up.eon.ID;
 import io.vertx.up.eon.em.Etat;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.center.ZeroRegistry;
 import io.vertx.up.rs.Axis;
@@ -19,8 +21,6 @@ import io.vertx.up.rs.router.EventAxis;
 import io.vertx.up.rs.router.FilterAxis;
 import io.vertx.up.rs.router.RouterAxis;
 import io.vertx.up.rs.router.WallAxis;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroGrid;
 import io.vertx.zero.eon.Values;
 
@@ -85,7 +85,7 @@ public class ZeroHttpAgent extends AbstractVerticle {
 
     @Override
     public void stop() {
-        Fn.itMap(ZeroAtomic.HTTP_OPTS, (port, config) -> {
+        Ut.itMap(ZeroAtomic.HTTP_OPTS, (port, config) -> {
             // Enabled micro mode.
             if (EtcdData.enabled()) {
                 // Template call registry to modify the status of current service.

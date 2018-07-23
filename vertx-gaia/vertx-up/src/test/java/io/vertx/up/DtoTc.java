@@ -1,7 +1,7 @@
 package io.vertx.up;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.tool.io.IO;
+import io.vertx.up.epic.io.IO;
 import org.junit.Test;
 
 public class DtoTc {

@@ -2,7 +2,7 @@ package io.vertx.tp.plugin.qiy;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.feign.FeignDepot;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 
 import java.io.Serializable;
@@ -26,6 +26,17 @@ public class QiyConfig implements Serializable {
     private static final String DFT_QI_CHUAN = "http://qichuan.iqiyi.com";
 
     private static final FeignDepot DEPOT = FeignDepot.create(KEY, KEY);
+    private String clientId;
+    private String clientSecret;
+    private String refreshToken;
+    private String accessToken;
+    private Long expires_in;
+
+    private QiyConfig(final String clientId,
+                      final String clientSecret) {
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
+    }
 
     static QiyConfig create(final String clientId,
                             final String clientSecret) {
@@ -38,22 +49,6 @@ public class QiyConfig implements Serializable {
 
     static QiyConfig create() {
         return create(DEPOT.getConfig());
-    }
-
-    private String clientId;
-
-    private String clientSecret;
-
-    private String refreshToken;
-
-    private String accessToken;
-
-    private Long expires_in;
-
-    private QiyConfig(final String clientId,
-                      final String clientSecret) {
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;
     }
 
     public <T> T getUpApi(final Class<T> clazz) {

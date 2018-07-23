@@ -12,9 +12,9 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.exception._424MessageSendException;
 import io.vertx.up.exception._424ProfileEndPointException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 
 public class SmsClientImpl implements SmsClient {
@@ -49,7 +49,7 @@ public class SmsClientImpl implements SmsClient {
                 DefaultProfile.addEndpoint(SmsConfig.DFT_REGION, SmsConfig.DFT_REGION,
                         SmsConfig.DFT_PRODUCT, this.config.getDomain());
             } catch (final ClientException ex) {
-                Fn.flingWeb(true, LOGGER,
+                Fn.outWeb(true, LOGGER,
                         _424ProfileEndPointException.class,
                         this.getClass(), ex);
             }
@@ -82,7 +82,7 @@ public class SmsClientImpl implements SmsClient {
             data.put(SmsConfig.RESPONSE_MESSAGE, response.getMessage());
             return Future.succeededFuture(data);
         } catch (final ClientException ex) {
-            Fn.flingWeb(true, LOGGER,
+            Fn.outWeb(true, LOGGER,
                     _424MessageSendException.class,
                     this.getClass(), ex);
             return Future.failedFuture(ex);

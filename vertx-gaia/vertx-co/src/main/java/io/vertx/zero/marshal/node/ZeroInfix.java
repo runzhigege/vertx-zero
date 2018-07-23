@@ -1,7 +1,7 @@
 package io.vertx.zero.marshal.node;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 
 public class ZeroInfix implements Node<JsonObject> {
 

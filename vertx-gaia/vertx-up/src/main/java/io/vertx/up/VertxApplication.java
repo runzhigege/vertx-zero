@@ -7,10 +7,10 @@ import io.vertx.up.annotations.Up;
 import io.vertx.up.boot.DansApplication;
 import io.vertx.up.concurrent.Runner;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Anno;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Anno;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroLauncher;
 import io.vertx.up.web.anima.*;
 import io.vertx.zero.config.ServerVisitor;
@@ -39,14 +39,14 @@ public class VertxApplication {
 
     private VertxApplication(final Class<?> clazz) {
         // Must not null
-        Fn.flingUp(
+        Fn.outUp(
                 null == clazz,
                 LOGGER,
                 UpClassArgsException.class, this.getClass());
         this.clazz = clazz;
         this.annotationMap = Anno.get(clazz);
         // Must be invalid
-        Fn.flingUp(
+        Fn.outUp(
                 !this.annotationMap.containsKey(Up.class.getName()),
                 LOGGER,
                 UpClassInvalidException.class, this.getClass(), clazz.getName());
@@ -70,7 +70,7 @@ public class VertxApplication {
     private static boolean isGateway() {
         // Secondary Scanned for Api Gateway
         final Set<Integer> apiScanned = new HashSet<>();
-        Fn.flingUp(() -> {
+        Fn.outUp(() -> {
             final ServerVisitor<HttpServerOptions> visitor =
                     Instance.singleton(DynamicVisitor.class);
             apiScanned.addAll(visitor.visit(ServerType.API.toString()).keySet());
@@ -83,7 +83,7 @@ public class VertxApplication {
             try {
                 EtcdData.create(clazz);
             } catch (final EtcdNetworkException ex) {
-                Fn.flingUp(true, LOGGER,
+                Fn.outUp(true, LOGGER,
                         MicroModeUpException.class, clazz, ex.getMessage());
             }
         }

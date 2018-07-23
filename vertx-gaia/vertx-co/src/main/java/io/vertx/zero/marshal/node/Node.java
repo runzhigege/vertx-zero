@@ -1,7 +1,7 @@
 package io.vertx.zero.marshal.node;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -12,8 +12,6 @@ import java.util.concurrent.ConcurrentMap;
  * @param <T>
  */
 public interface Node<T> {
-
-    T read();
 
     ConcurrentMap<String, Node<JsonObject>> REFERENCES
             = new ConcurrentHashMap<>();
@@ -27,4 +25,6 @@ public interface Node<T> {
     static Node<JsonObject> infix(final String key) {
         return Fn.pool(ZeroInfix.REFERENCES, key, () -> new ZeroInfix(key));
     }
+
+    T read();
 }

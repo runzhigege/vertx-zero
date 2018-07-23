@@ -2,11 +2,11 @@ package io.vertx.zero.atom;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.io.IO;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.io.IO;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.marshal.reliable.ForbiddenInsurer;
@@ -80,7 +80,7 @@ public class Ruler {
             final JsonObject rule = getRule(file);
             verifyItem(data, rule);
             // 2. For json item
-            Fn.etJArray(data, (value, field) -> {
+            Ut.etJArray(data, (value, field) -> {
                 // 3. Value = JsonObject, identify if extension.
                 final String filename = file + Strings.DOT + field;
                 if (Ut.isJObject(value)) {

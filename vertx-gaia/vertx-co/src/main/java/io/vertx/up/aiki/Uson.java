@@ -3,9 +3,9 @@ package io.vertx.up.aiki;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
@@ -20,7 +20,7 @@ public class Uson {
     private final transient JsonObject objectReference;
 
     private Uson(final JsonObject json) {
-        this.objectReference = Fn.get(new JsonObject(), () -> json, json);
+        this.objectReference = Fn.getNull(new JsonObject(), () -> json, json);
         LOGGER.debug(Info.STREAM_START, String.valueOf(this.hashCode()), json);
     }
 

@@ -1,7 +1,7 @@
 package io.vertx.up.web.serialization;
 
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Ut;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,7 +12,7 @@ import java.util.Date;
 public class Java8DataTimeSaber extends BaseSaber {
     @Override
     public <T> Object from(final T input) {
-        return Fn.get(() -> {
+        return Fn.getNull(() -> {
             Object reference = null;
             if (input instanceof LocalDate) {
                 final LocalDate date = (LocalDate) input;
@@ -30,7 +30,7 @@ public class Java8DataTimeSaber extends BaseSaber {
 
     @Override
     public Object from(final Class<?> paramType, final String literal) {
-        return Fn.get(() ->
+        return Fn.getNull(() ->
                         Fn.getSemi(Date.class == paramType ||
                                         Calendar.class == paramType, this.getLogger(),
                                 () -> {

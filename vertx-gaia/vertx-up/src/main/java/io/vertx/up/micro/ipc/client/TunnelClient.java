@@ -7,14 +7,14 @@ import io.vertx.up.annotations.Ipc;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.flux.IpcData;
 import io.vertx.up.eon.em.IpcType;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception._501RpcAddressWrongException;
 import io.vertx.up.exception._501RpcImplementException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.discovery.IpcOrigin;
 import io.vertx.up.micro.discovery.Origin;
 import io.vertx.up.micro.ipc.DataEncap;
-import io.vertx.up.tool.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -24,16 +24,11 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 /**
- * Rpc client, scanned etcd to get configuration.
+ * Rpc client, scanned etcd to getNull configuration.
  */
 public class TunnelClient {
 
-    private transient Vertx vertx;
-    private transient Method event;
-    private final transient Annal logger;
-
     private static final Origin ORIGIN = Instance.singleton(IpcOrigin.class);
-
     private static final ConcurrentMap<IpcType, Spear> STUBS =
             new ConcurrentHashMap<IpcType, Spear>() {
                 {
@@ -43,13 +38,16 @@ public class TunnelClient {
                     // put(IpcType.PRODUCE, Instance.singleton(ProduceStub.class));
                 }
             };
-
-    public static TunnelClient create(final Class<?> clazz) {
-        return new TunnelClient(clazz);
-    }
+    private final transient Annal logger;
+    private transient Vertx vertx;
+    private transient Method event;
 
     private TunnelClient(final Class<?> clazz) {
         this.logger = Annal.get(clazz);
+    }
+
+    public static TunnelClient create(final Class<?> clazz) {
+        return new TunnelClient(clazz);
     }
 
     public TunnelClient connect(final Vertx vertx) {
@@ -101,11 +99,11 @@ public class TunnelClient {
                 target.equals(item.getMetadata().getString("path")))
                 .findAny().orElse(null);
         // Service Name
-        Fn.flingWeb(null == record, this.logger,
+        Fn.outWeb(null == record, this.logger,
                 _501RpcImplementException.class, this.getClass(),
                 name, target, this.event);
         // Address Wrong
-        Fn.flingWeb(null == record.getMetadata() ||
+        Fn.outWeb(null == record.getMetadata() ||
                         !target.equals(record.getMetadata().getString("path")), this.logger,
                 _501RpcAddressWrongException.class, this.getClass(),
                 target, name);

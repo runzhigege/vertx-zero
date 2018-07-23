@@ -2,7 +2,7 @@ package io.vertx.core.eventbus;
 
 import io.vertx.core.buffer.Buffer;
 import io.vertx.up.atom.Envelop;
-import io.vertx.up.tool.io.Stream;
+import io.vertx.up.epic.io.Stream;
 import io.vertx.zero.eon.Values;
 
 /**
@@ -35,7 +35,7 @@ public final class EnvelopCodec implements MessageCodec<Envelop, Envelop> {
 
     @Override
     public String name() {
-        return getClass().getName();
+        return this.getClass().getName();
     }
 
     @Override

@@ -2,7 +2,7 @@ package io.vertx.up.aiki;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.quiz.TestBase;
-import io.vertx.up.tool.Ut;
+import io.vertx.up.epic.Ut;
 import net.sf.cglib.beans.BeanCopier;
 import org.junit.Assert;
 import org.junit.Test;

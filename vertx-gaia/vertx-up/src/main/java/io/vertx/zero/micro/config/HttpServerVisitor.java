@@ -5,10 +5,10 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.config.ServerVisitor;
 import io.vertx.zero.eon.Info;
@@ -26,9 +26,9 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class HttpServerVisitor implements ServerVisitor<HttpServerOptions> {
 
-    private transient final Node<JsonObject> NODE = Node.infix(Plugins.SERVER);
     protected transient final Transformer<HttpServerOptions>
             transformer = Instance.singleton(HttpServerStrada.class);
+    private transient final Node<JsonObject> NODE = Node.infix(Plugins.SERVER);
 
     /**
      * @return Server config to generate HttpServerOptions by port
@@ -42,7 +42,7 @@ public class HttpServerVisitor implements ServerVisitor<HttpServerOptions> {
         // 2. Visit the node for server, http
         final JsonObject data = this.NODE.read();
 
-        Fn.flingZero(null == data || !data.containsKey(KEY), this.getLogger(),
+        Fn.outZero(null == data || !data.containsKey(KEY), this.getLogger(),
                 ServerConfigException.class,
                 this.getClass(), null == data ? null : data.encode());
 
@@ -61,7 +61,7 @@ public class HttpServerVisitor implements ServerVisitor<HttpServerOptions> {
     }
 
     protected void extract(final JsonArray serverData, final ConcurrentMap<Integer, HttpServerOptions> map) {
-        Fn.itJArray(serverData, JsonObject.class, (item, index) -> {
+        Ut.itJArray(serverData, JsonObject.class, (item, index) -> {
             if (this.isServer(item)) {
                 // 1. Extract port
                 final int port = this.extractPort(item.getJsonObject(YKEY_CONFIG));

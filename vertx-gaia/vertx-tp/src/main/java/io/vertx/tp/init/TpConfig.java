@@ -1,7 +1,7 @@
 package io.vertx.tp.init;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.exception.DynamicConfigTypeException;
@@ -31,35 +31,35 @@ public class TpConfig implements Serializable {
     private final transient JsonObject config;
     private final transient String endpoint;
 
+    public TpConfig(final String key, final String rule) {
+        final JsonObject config = TP.read();
+        // Check up exception for key
+        Fn.outUp(null == config || !config.containsKey(key),
+                LOGGER, DynamicKeyMissingException.class,
+                this.getClass(), key, config);
+
+        // Check up exception for JsonObject
+        final Class<?> type = config.getValue(key).getClass();
+        Fn.outUp(JsonObject.class != type,
+                LOGGER, DynamicConfigTypeException.class,
+                this.getClass(), key, type);
+
+        // Extract config information.
+        final JsonObject raw = config.getJsonObject(key);
+        this.endpoint = Fn.getNull(null, () -> raw.getString(KEY_ENDPOINT), raw.getValue(KEY_ENDPOINT));
+        this.config = Fn.getNull(new JsonObject(), () -> raw.getJsonObject(KEY_CONFIG), raw.getValue(KEY_CONFIG));
+        // Verify the config data.
+        if (null != rule) {
+            Fn.outUp(() -> Fn.shuntZero(() -> Ruler.verify(rule, this.config), this.config), LOGGER);
+        }
+    }
+
     public static TpConfig create(final String key) {
         return Fn.pool(CACHE, key, () -> new TpConfig(key, null));
     }
 
     public static TpConfig create(final String key, final String rule) {
         return Fn.pool(CACHE, key, () -> new TpConfig(key, rule));
-    }
-
-    public TpConfig(final String key, final String rule) {
-        final JsonObject config = TP.read();
-        // Check up exception for key
-        Fn.flingUp(null == config || !config.containsKey(key),
-                LOGGER, DynamicKeyMissingException.class,
-                this.getClass(), key, config);
-
-        // Check up exception for JsonObject
-        final Class<?> type = config.getValue(key).getClass();
-        Fn.flingUp(JsonObject.class != type,
-                LOGGER, DynamicConfigTypeException.class,
-                this.getClass(), key, type);
-
-        // Extract config information.
-        final JsonObject raw = config.getJsonObject(key);
-        this.endpoint = Fn.get(null, () -> raw.getString(KEY_ENDPOINT), raw.getValue(KEY_ENDPOINT));
-        this.config = Fn.get(new JsonObject(), () -> raw.getJsonObject(KEY_CONFIG), raw.getValue(KEY_CONFIG));
-        // Verify the config data.
-        if (null != rule) {
-            Fn.flingUp(() -> Fn.shuntZero(() -> Ruler.verify(rule, this.config), this.config), LOGGER);
-        }
     }
 
     public JsonObject getConfig() {

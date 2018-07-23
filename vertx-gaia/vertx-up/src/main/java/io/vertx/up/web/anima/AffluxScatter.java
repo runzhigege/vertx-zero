@@ -5,10 +5,11 @@ import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.worker.Receipt;
 import io.vertx.up.concurrent.Runner;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Anno;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.mirror.Anno;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroAnno;
 
 import java.lang.reflect.Field;
@@ -31,19 +32,19 @@ public class AffluxScatter implements Scatter<Vertx> {
     public void connect(final Vertx vertx) {
         // Extract all events.
         final Set<Event> events = ZeroAnno.getEvents();
-        Fn.itSet(events, (item, index) ->
+        Ut.itSet(events, (item, index) ->
                 Runner.run(() -> this.inject(item.getProxy())
                         , "event-afflux-" + index));
 
         // Extract all receipts.
         final Set<Receipt> receipts = ZeroAnno.getReceipts();
-        Fn.itSet(receipts, (item, index) ->
+        Ut.itSet(receipts, (item, index) ->
                 Runner.run(() -> this.inject(item.getProxy())
                         , "receipt-afflux-" + index));
 
         // Extract non - event/receipts Objects
         final Set<Class<?>> injects = ZeroAnno.getInjects();
-        Fn.itSet(injects, (item, index) -> Runner.run(() -> {
+        Ut.itSet(injects, (item, index) -> Runner.run(() -> {
             // Initialize object
             final Object instance = Instance.singleton(item);
             // Initialize reference

@@ -2,9 +2,9 @@ package io.vertx.tp.plugin.qiy;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.exception._401QiyAuthorizedException;
 import io.vertx.up.exception._401QiyExecuteException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
 
 class QiyRepdor {
@@ -15,7 +15,7 @@ class QiyRepdor {
 
     static Future<JsonObject> handle(final JsonObject response) {
         LOGGER.info(Info.FEIGN_RESPONSE, response);
-        Fn.flingWeb(!QiyCodes.SUCCESS.equals(response.getString(CODE)), LOGGER,
+        Fn.outWeb(!QiyCodes.SUCCESS.equals(response.getString(CODE)), LOGGER,
                 _401QiyAuthorizedException.class, QiyRepdor.class,
                 response.getString(CODE),
                 response.getString(MSG));
@@ -24,7 +24,7 @@ class QiyRepdor {
 
     static Future<JsonObject> complete(final JsonObject response) {
         LOGGER.info(Info.FEIGN_RESPONSE, response);
-        Fn.flingWeb(!QiyCodes.SUCCESS.equals(response.getString(CODE)), LOGGER,
+        Fn.outWeb(!QiyCodes.SUCCESS.equals(response.getString(CODE)), LOGGER,
                 _401QiyExecuteException.class, QiyRepdor.class,
                 response.getString(CODE),
                 response.getString(MSG));

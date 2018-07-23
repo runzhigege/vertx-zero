@@ -1,7 +1,7 @@
 package io.vertx.up.web.serialization;
 
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.Ut;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 
 import java.util.function.Function;
 
@@ -13,7 +13,7 @@ public abstract class DecimalSaber extends BaseSaber {
     @Override
     public Object from(final Class<?> paramType,
                        final String literal) {
-        return Fn.get(() ->
+        return Fn.getNull(() ->
                         Fn.getSemi(this.isValid(paramType), this.getLogger(),
                                 () -> {
                                     this.verifyInput(!Ut.isDecimal(literal), paramType, literal);

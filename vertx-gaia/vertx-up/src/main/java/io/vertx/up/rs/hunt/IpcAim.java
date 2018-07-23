@@ -5,7 +5,7 @@ import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.agent.Event;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.micro.ipc.client.TunnelClient;
 import io.vertx.up.rs.Aim;
 
@@ -13,7 +13,7 @@ public class IpcAim extends BaseAim implements Aim<RoutingContext> {
 
     @Override
     public Handler<RoutingContext> attack(final Event event) {
-        return Fn.get(() -> (context) -> Responser.exec(() -> {
+        return Fn.getNull(() -> (context) -> Responser.exec(() -> {
             // 1. Build Arguments
             final Object[] arguments = this.buildArgs(context, event);
 

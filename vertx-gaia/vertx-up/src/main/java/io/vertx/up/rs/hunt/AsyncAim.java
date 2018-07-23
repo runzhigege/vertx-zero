@@ -8,14 +8,14 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.hold.Virtual;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.rs.Aim;
 
 public class AsyncAim extends BaseAim implements Aim<RoutingContext> {
 
     @Override
     public Handler<RoutingContext> attack(final Event event) {
-        return Fn.get(() -> (context) -> Responser.exec(() -> {
+        return Fn.getNull(() -> (context) -> Responser.exec(() -> {
             // 1. Build Envelop
             final Envelop request = this.invoke(context, event);
             // 2. Build event bus

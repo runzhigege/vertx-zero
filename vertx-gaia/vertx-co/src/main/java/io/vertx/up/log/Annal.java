@@ -3,16 +3,20 @@ package io.vertx.up.log;
 import io.vertx.core.VertxException;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.web.ZeroAmbient;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.log.Log;
 import io.vertx.zero.log.internal.Log4JAnnal;
 
 /**
- * Unite Logging system connect to vert.x, tool kit of Vertx-Zero
+ * Unite Logging system connect to vert.x, epic kit of Vertx-Zero
  */
 public interface Annal {
+
+    static Annal get(final Class<?> clazz) {
+        return new CommonAnnal(clazz);
+    }
 
     void vertx(VertxException ex);
 
@@ -27,10 +31,6 @@ public interface Annal {
     void info(String key, Object... args);
 
     void debug(String key, Object... args);
-
-    static Annal get(final Class<?> clazz) {
-        return new CommonAnnal(clazz);
-    }
 }
 
 class CommonAnnal implements Annal {

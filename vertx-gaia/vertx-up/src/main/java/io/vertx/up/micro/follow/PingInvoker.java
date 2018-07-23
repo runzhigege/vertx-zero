@@ -3,8 +3,8 @@ package io.vertx.up.micro.follow;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception._501RpcRejectException;
-import io.vertx.up.tool.mirror.Instance;
 
 import java.lang.reflect.Method;
 

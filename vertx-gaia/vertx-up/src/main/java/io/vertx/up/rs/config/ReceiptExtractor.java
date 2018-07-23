@@ -3,11 +3,11 @@ package io.vertx.up.rs.config;
 import io.reactivex.Observable;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.atom.worker.Receipt;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Anno;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
-import io.vertx.up.tool.mirror.Anno;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.up.web.ZeroAnno;
 import io.vertx.zero.exception.AccessProxyException;
 import io.vertx.zero.exception.AddressWrongException;
@@ -52,7 +52,7 @@ public class ReceiptExtractor implements Extractor<Set<Receipt>> {
 
     @Override
     public Set<Receipt> extract(final Class<?> clazz) {
-        return Fn.get(new HashSet<>(), () -> {
+        return Fn.getNull(new HashSet<>(), () -> {
             // 1. Class verify
             this.verify(clazz);
             // 2. Scan method to find @Address
@@ -75,7 +75,7 @@ public class ReceiptExtractor implements Extractor<Set<Receipt>> {
         final String address = Instance.invoke(annotation, "value");
 
         // 2. Ensure address incoming.
-        Fn.flingUp(!ADDRESS.contains(address), LOGGER,
+        Fn.outUp(!ADDRESS.contains(address), LOGGER,
                 AddressWrongException.class,
                 this.getClass(), address, clazz, method);
 
@@ -91,10 +91,10 @@ public class ReceiptExtractor implements Extractor<Set<Receipt>> {
 
     private void verify(final Class<?> clazz) {
         // Check basic specification: No Arg Constructor
-        Fn.flingUp(!Instance.noarg(clazz), LOGGER,
+        Fn.outUp(!Instance.noarg(clazz), LOGGER,
                 NoArgConstructorException.class,
                 this.getClass(), clazz);
-        Fn.flingUp(!Modifier.isPublic(clazz.getModifiers()), LOGGER,
+        Fn.outUp(!Modifier.isPublic(clazz.getModifiers()), LOGGER,
                 AccessProxyException.class,
                 this.getClass(), clazz);
     }

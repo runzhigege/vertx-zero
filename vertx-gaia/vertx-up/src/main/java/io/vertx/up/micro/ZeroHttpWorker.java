@@ -6,11 +6,11 @@ import io.vertx.up.annotations.Ipc;
 import io.vertx.up.annotations.Worker;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Receipt;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.follow.Invoker;
 import io.vertx.up.micro.follow.JetSelector;
-import io.vertx.up.tool.Ut;
 import io.vertx.up.web.ZeroAnno;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.WorkerArgumentException;
@@ -97,7 +97,7 @@ public class ZeroHttpWorker extends AbstractVerticle {
         final Class<?>[] params = method.getParameterTypes();
         final Annal logger = Annal.get(target);
         // 2. The parameters
-        Fn.flingUp(Values.ONE != params.length,
+        Fn.outUp(Values.ONE != params.length,
                 logger, WorkerArgumentException.class,
                 target, method);
     }

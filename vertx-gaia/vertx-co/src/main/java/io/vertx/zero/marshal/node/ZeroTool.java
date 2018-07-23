@@ -1,8 +1,8 @@
 package io.vertx.zero.marshal.node;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.func.Fn;
-import io.vertx.up.tool.io.IO;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.io.IO;
 import io.vertx.zero.eon.FileSuffix;
 import io.vertx.zero.eon.Strings;
 

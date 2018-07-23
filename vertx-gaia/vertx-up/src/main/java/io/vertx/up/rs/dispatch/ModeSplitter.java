@@ -4,7 +4,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Ipc;
 import io.vertx.up.atom.agent.Event;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Aim;
 import io.vertx.zero.exception.ChannelMultiException;
@@ -12,7 +12,7 @@ import io.vertx.zero.exception.ChannelMultiException;
 import java.lang.reflect.Method;
 
 /**
- * Splitter to get executor reference.
+ * Splitter to getNull executor reference.
  * It will happen in startup of route building to avoid
  * request resource spending.
  * 1. Level 1: Distinguish whether enable EventBus
@@ -34,14 +34,14 @@ public class ModeSplitter {
     private static final Annal LOGGER = Annal.get(ModeSplitter.class);
 
     public Aim<RoutingContext> distribute(final Event event) {
-        return Fn.get(() -> {
+        return Fn.getNull(() -> {
             // 1. Scan method to check @Address
             final Method method = event.getAction();
             final boolean annotated = method.isAnnotationPresent(Address.class);
             final boolean rpc = method.isAnnotationPresent(Ipc.class);
             // 2. Only one channel enabled
-            Fn.flingUp(rpc && annotated, LOGGER, ChannelMultiException.class,
-                    getClass(), method);
+            Fn.outUp(rpc && annotated, LOGGER, ChannelMultiException.class,
+                    this.getClass(), method);
 
             final Differ<RoutingContext> differ;
             if (annotated) {

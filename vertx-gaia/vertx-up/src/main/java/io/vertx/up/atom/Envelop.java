@@ -6,9 +6,9 @@ import io.vertx.core.http.HttpStatusCode;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.Session;
+import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
-import io.vertx.up.func.Fn;
 import io.vertx.up.kidd.Readible;
 import io.vertx.up.log.Annal;
 import io.vertx.up.web.ZeroSerializer;
@@ -149,7 +149,7 @@ public class Envelop implements Serializable {
      */
     public <T> T data(final Integer argIndex, final Class<T> clazz) {
         T reference = null;
-        Fn.flingUp(0 > argIndex, LOGGER,
+        Fn.outUp(0 > argIndex, LOGGER,
                 IndexExceedException.class, this.getClass(), argIndex);
         if (this.data.containsKey(Key.DATA)) {
             final JsonObject raw = this.data.getJsonObject(Key.DATA);
@@ -165,7 +165,7 @@ public class Envelop implements Serializable {
 
     private JsonObject getData(final Integer argIndex) {
         JsonObject data = new JsonObject();
-        final Object reference = Fn.get(null, () -> this.data.getValue(Key.DATA), this.data);
+        final Object reference = Fn.getNull(null, () -> this.data.getValue(Key.DATA), this.data);
         if (reference instanceof JsonObject) {
             data = (JsonObject) reference;
         }
@@ -203,7 +203,7 @@ public class Envelop implements Serializable {
         T reference = null;
         if (null != value) {
             final Object result = ZeroSerializer.getValue(clazz, value.toString());
-            reference = Fn.get(() -> (T) result, result);
+            reference = Fn.getNull(() -> (T) result, result);
         }
         return reference;
     }

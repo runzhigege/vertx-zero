@@ -77,7 +77,7 @@ package io.vertx.up.aiki;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.quiz.TestBase;
-import io.vertx.up.tool.Jackson;
+import io.vertx.up.epic.Jackson;
 import org.junit.Assert;
 import org.junit.Test;
 

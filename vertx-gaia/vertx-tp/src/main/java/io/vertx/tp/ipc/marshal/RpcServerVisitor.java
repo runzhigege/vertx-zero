@@ -5,10 +5,10 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.func.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.fn.Fn;
+import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
-import io.vertx.up.tool.Ut;
-import io.vertx.up.tool.mirror.Instance;
 import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.config.ServerVisitor;
 import io.vertx.zero.eon.Info;
@@ -39,7 +39,7 @@ public class RpcServerVisitor implements ServerVisitor<ServidorOptions> {
         // 2. Visit the node for server, http
         final JsonObject data = this.node.read();
 
-        Fn.flingZero(null == data || !data.containsKey(KEY), LOGGER,
+        Fn.outZero(null == data || !data.containsKey(KEY), LOGGER,
                 ServerConfigException.class,
                 this.getClass(), null == data ? null : data.encode());
 
@@ -52,7 +52,7 @@ public class RpcServerVisitor implements ServerVisitor<ServidorOptions> {
         Ruler.verify(KEY, serverData);
         final ConcurrentMap<Integer, ServidorOptions> map =
                 new ConcurrentHashMap<>();
-        Fn.itJArray(serverData, JsonObject.class, (item, index) -> {
+        Ut.itJArray(serverData, JsonObject.class, (item, index) -> {
             if (this.isServer(item)) {
                 // 1. Extract port
                 final int port = this.extractPort(item.getJsonObject(YKEY_CONFIG));
