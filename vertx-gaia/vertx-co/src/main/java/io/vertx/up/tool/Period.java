@@ -1,6 +1,7 @@
 package io.vertx.up.tool;
 
 import io.vertx.up.func.Fn;
+import io.vertx.zero.eon.Strings;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -159,9 +160,18 @@ class Period {
             final int length = literal.length();
             final String pattern = Storage.PATTERNS_MAP.get(length);
             if (null != pattern) {
-                // Time + Date, fast parsing first.
-                final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern, Locale.getDefault());
-                Date converted = null;
+                final DateTimeFormatter formatter;
+                if (19 == pattern.length()) {
+                    // 2018-07-29T16:26:49格式的特殊处理
+                    if (0 < literal.indexOf(Strings.T_CHAR)) {
+                        formatter = DateTimeFormatter.ofPattern(Storage.T_FORMAT, Locale.getDefault());
+                    } else {
+                        formatter = DateTimeFormatter.ofPattern(pattern, Locale.getDefault());
+                    }
+                } else {
+                    formatter = DateTimeFormatter.ofPattern(pattern, Locale.getDefault());
+                }
+                final Date converted;
                 if (10 == pattern.length()) {
                     final LocalDate date = LocalDate.parse(literal, formatter);
                     converted = parse(date);

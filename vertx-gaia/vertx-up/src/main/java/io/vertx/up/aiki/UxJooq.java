@@ -66,6 +66,7 @@ public class UxJooq {
             };
     private transient final Class<?> clazz;
     private transient final VertxDAO vertxDAO;
+    private transient String pojo;
 
     <T> UxJooq(final Class<T> clazz) {
         this.clazz = clazz;
@@ -159,6 +160,11 @@ public class UxJooq {
                 return left.or(right);
             }
         }
+    }
+
+    public UxJooq on(final String pojo) {
+        this.pojo = pojo;
+        return this;
     }
 
     // CRUD - Read -----------------------------------------------------

@@ -86,6 +86,8 @@ interface Storage {
             this.put(8, "HH:mm:ss");
         }
     };
+
+    String T_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
 }
 
 interface Info {
