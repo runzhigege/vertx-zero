@@ -24,6 +24,7 @@ class Defend {
             if (null != logger) {
                 logger.jvm(ex);
             }
+            ex.printStackTrace();
         }
     }
 
@@ -68,6 +69,7 @@ class Defend {
             if (null != logger) {
                 logger.jvm(ex);
             }
+            ex.printStackTrace();
         }
     }
 
@@ -99,6 +101,7 @@ class Defend {
             if (null != logger) {
                 logger.jvm(ex);
             }
+            ex.printStackTrace();
         }
         return ret;
     }
