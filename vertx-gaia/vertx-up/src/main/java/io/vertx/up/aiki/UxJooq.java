@@ -61,7 +61,7 @@ public class UxJooq {
                     this.put(Inquiry.Instant.DAY, (field, value) -> {
                         // Time for locale
                         final LocalDate date = Ut.toDate(value);
-                        return DSL.field(field).between(date.atStartOfDay(), date.plusDays(1).atStartOfDay());
+                        return DSL.field(field).between(value, date.plusDays(1).atStartOfDay());
                     });
                     this.put(Inquiry.Instant.DATE, (field, value) -> {
                         final LocalDate date = Ut.toDate(value);

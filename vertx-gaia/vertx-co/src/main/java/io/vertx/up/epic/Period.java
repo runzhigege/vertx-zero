@@ -71,7 +71,8 @@ class Period {
 
     static LocalDateTime toDateTime(final Instant instant) {
         final ZoneId zone = ZoneId.systemDefault();
-        return LocalDateTime.ofInstant(instant, zone);
+        final ZoneOffset offset = zone.getRules().getOffset(Instant.now());
+        return LocalDateTime.ofInstant(instant, offset);
     }
 
     /**
@@ -253,9 +254,7 @@ class Period {
     static void itDay(final String from, final String to,
                       final Consumer<Date> consumer) {
         LocalDateTime begin = toDateTime(parseFull(from));
-        LocalDateTime end = toDateTime(parseFull(to));
-        // Adjust end because this method require the end as last item.
-        end = end.plusDays(1);
+        final LocalDateTime end = toDateTime(parseFull(to));
         do {
             consumer.accept(parse(begin));
             begin = begin.plusDays(1);

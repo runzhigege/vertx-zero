@@ -3,6 +3,7 @@ package io.vertx.up.epic;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.*;
 import java.util.Date;
 
 public class PeriodTc {
@@ -31,5 +32,24 @@ public class PeriodTc {
     @Test
     public void testParse3() {
         this.assertParse("2018-07-25", "2018-07-25");
+    }
+
+    @Test
+    public void testToDate() {
+        final Instant now = new Date().toInstant();
+        final LocalDate date = Ut.toDate(now);
+        final LocalDate date1 = LocalDate.now();
+        Assert.assertEquals(date, date1);
+    }
+
+    @Test
+    public void testOffset() {
+        final ZoneOffset offset = ZoneId.systemDefault().getRules().getOffset(Instant.now());
+        final LocalDate date = Ut.toDate(Ut.parse("2018-07-25 00:00:00").toInstant());
+        final LocalDateTime dateTime = Ut.toDateTime(Ut.parse(date));
+        final ZonedDateTime ldtZoned = dateTime.atZone(ZoneId.systemDefault());
+        System.out.println(dateTime);
+        System.out.println(date);
+        System.out.println(ldtZoned.withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime());
     }
 }
