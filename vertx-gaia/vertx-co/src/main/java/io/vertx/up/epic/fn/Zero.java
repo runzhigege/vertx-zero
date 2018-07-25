@@ -5,6 +5,7 @@ import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.ZeroRunException;
 
 import java.net.ConnectException;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -81,8 +82,10 @@ class Zero {
             if (!(ex instanceof ConnectException)) {
                 LOGGER.jvm(ex);
             }
-            // TODO: Debug Trace for JVM
-            ex.printStackTrace();
+            if (!(ex instanceof DateTimeParseException)) {
+                // TODO: Debug Trace for JVM
+                ex.printStackTrace();
+            }
         }
         return ret;
     }

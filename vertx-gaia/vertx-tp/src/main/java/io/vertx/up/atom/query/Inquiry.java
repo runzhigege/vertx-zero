@@ -97,6 +97,7 @@ public interface Inquiry {
 
     interface Instant {
         String DAY = "day";
+        String DATE = "date";
         String TIME = "time";
         String DATETIME = "datetime";
     }

@@ -78,8 +78,9 @@ interface Storage {
     ConcurrentMap<Integer, String> PATTERNS_MAP = new ConcurrentHashMap<Integer, String>() {
         {
             this.put(19, "yyyy-MM-dd HH:mm:ss");
-            this.put(24, "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-            this.put(23, "yyyy-MM-dd'T'HH:mm:ss.SSS");
+            this.put(24, "yyyy-MM-dd HH:mm:ss.SSS'Z'");
+            this.put(25, "yyyy-MM-dd HH:mm:ss.SSS+'z'");
+            this.put(23, "yyyy-MM-dd HH:mm:ss.SSS");
             this.put(28, "EEE MMM dd HH:mm:ss 'CST' yyyy");
             this.put(12, "HH:mm:ss.SSS");
             this.put(10, "yyyy-MM-dd");
@@ -87,7 +88,7 @@ interface Storage {
         }
     };
 
-    String T_FORMAT = "yyyy-MM-dd'T'HH:mm:ss";
+    String ADJUST_TIME = "yyyy-MM-dd HH:mm:ss.SSS'z'";
 }
 
 interface Info {
