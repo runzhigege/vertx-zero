@@ -19,6 +19,7 @@ import org.jooq.impl.DSL;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -60,7 +61,12 @@ public class UxJooq {
                     this.put(Inquiry.Instant.DAY, (field, value) -> {
                         // Time for locale
                         final LocalDate date = Ut.toDate(value);
-                        return DSL.field(field).between(date.atStartOfDay(), date.plusDays(1).atStartOfDay());
+                        return DSL.field(field).between(value, date.plusDays(1).atStartOfDay());
+                    });
+                    this.put(Inquiry.Instant.DATE, (field, value) -> {
+                        final LocalDate date = Ut.toDate(value);
+                        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        return DSL.field(field).eq(date.format(formatter));
                     });
                 }
             };

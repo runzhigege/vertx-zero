@@ -15,6 +15,7 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
 import io.vertx.up.atom.query.Sorter;
+import io.vertx.up.epic.container.RxHod;
 import io.vertx.up.epic.fn.Actuator;
 import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.epic.fn.wait.Log;
@@ -803,6 +804,27 @@ public final class Ux {
         return In.request(envelop, clazz);
     }
 
+    // ---------------------- Request Data Ending --------------------------
+    public static <E, T> Future<E> rxContainer(final RxHod container, final E entity) {
+        return Functions.fnSupplier(container, entity, null);
+    }
+
+    public static <E, T> Future<E> rxContainer(final RxHod container, final E entity, final Supplier<T> supplier) {
+        return Functions.fnSupplier(container, entity, supplier);
+    }
+
+    public static <E, T> Future<E> rxContainer(final RxHod container, final E entity, final Consumer<T> consumer) {
+        return Functions.fnConsumer(container, entity, consumer);
+    }
+
+    public static <E, T> Future<E> rxContainer(final RxHod container, final E entity, final Function<T, E> function) {
+        return Functions.fnConsumer(container, entity, item -> function.apply((T) item));
+    }
+
+    public static <E, T> Future<E> rxContainer(final RxHod container, final E entity, final T target) {
+        return Functions.fnSupplier(container, entity, () -> target);
+    }
+
     // -> Jooq
     public static class Jooq {
 
@@ -926,5 +948,4 @@ public final class Ux {
             return UxMongo.findWithOptions(collection, filter, new FindOptions());
         }
     }
-    // ---------------------- Request Data Ending --------------------------
 }

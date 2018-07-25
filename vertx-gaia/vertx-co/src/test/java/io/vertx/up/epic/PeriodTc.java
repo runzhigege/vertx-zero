@@ -1,22 +1,55 @@
 package io.vertx.up.epic;
 
+import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.*;
 import java.util.Date;
-import java.util.List;
 
 public class PeriodTc {
 
-    @Test
-    public void valueDurationDays() {
-        final List<String> result = Period.valueDurationDays(Ut.toDateTime("2018-04-02T06:49:41.661Z").toLocalDate().toString(), Ut.toDateTime("2018-05-01T06:49:39.096Z").toLocalDate().toString());
-        System.out.println(result);
-        System.out.println(Ut.toDate(result.get(0)));
+    private void assertParse(final String left, final String right) {
+        final Date time = Ut.parse(left);
+        final Date time1 = Ut.parse(right);
+        Assert.assertEquals(time, time1);
     }
 
     @Test
-    public void valueTest() {
-        final Date date = Ut.parse("2018-07-29T16:26:49");
+    public void testParse() {
+        this.assertParse("2018-07-25 16:40:56", "2018-07-25T08:40:56Z");
+    }
+
+    @Test
+    public void testParse1() {
+        this.assertParse("2018-07-25 16:40:56.776", "2018-07-25T16:40:56.776");
+    }
+
+    @Test
+    public void testParse2() {
+        this.assertParse("2018-07-25 16:40:56.776", "2018-07-25T08:40:56.776Z");
+    }
+
+    @Test
+    public void testParse3() {
+        this.assertParse("2018-07-25", "2018-07-25");
+    }
+
+    @Test
+    public void testToDate() {
+        final Instant now = new Date().toInstant();
+        final LocalDate date = Ut.toDate(now);
+        final LocalDate date1 = LocalDate.now();
+        Assert.assertEquals(date, date1);
+    }
+
+    @Test
+    public void testOffset() {
+        final ZoneOffset offset = ZoneId.systemDefault().getRules().getOffset(Instant.now());
+        final LocalDate date = Ut.toDate(Ut.parse("2018-07-25 00:00:00").toInstant());
+        final LocalDateTime dateTime = Ut.toDateTime(Ut.parse(date));
+        final ZonedDateTime ldtZoned = dateTime.atZone(ZoneId.systemDefault());
+        System.out.println(dateTime);
         System.out.println(date);
+        System.out.println(ldtZoned.withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime());
     }
 }
