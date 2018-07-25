@@ -4,27 +4,32 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Date;
-import java.util.List;
 
 public class PeriodTc {
 
-    @Test
-    public void valueDurationDays() {
-        final List<String> result = Period.valueDurationDays(Ut.toDateTime("2018-04-02T06:49:41.661Z").toLocalDate().toString(), Ut.toDateTime("2018-05-01T06:49:39.096Z").toLocalDate().toString());
-        Assert.assertNotNull(result);
-        Assert.assertNotNull(Ut.toDate(result.get(0)));
+    private void assertParse(final String left, final String right) {
+        final Date time = Ut.parse(left);
+        final Date time1 = Ut.parse(right);
+        Assert.assertEquals(time, time1);
     }
 
     @Test
-    public void valueTest() {
-        final Date date = Ut.parse("2018-07-29T16:26:49");
-        Assert.assertNotNull(date);
+    public void testParse() {
+        this.assertParse("2018-07-25 16:40:56", "2018-07-25T08:40:56Z");
     }
 
     @Test
-    public void testItDay() {
-        Ut.itDay("2018-07-25T16:26:49", "2018-07-30T16:26:49", (item) -> {
-            System.out.println(item);
-        });
+    public void testParse1() {
+        this.assertParse("2018-07-25 16:40:56.776", "2018-07-25T16:40:56.776");
+    }
+
+    @Test
+    public void testParse2() {
+        this.assertParse("2018-07-25 16:40:56.776", "2018-07-25T08:40:56.776Z");
+    }
+
+    @Test
+    public void testParse3() {
+        this.assertParse("2018-07-25", "2018-07-25");
     }
 }

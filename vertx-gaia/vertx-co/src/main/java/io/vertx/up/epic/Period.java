@@ -1,7 +1,6 @@
 package io.vertx.up.epic;
 
 import io.vertx.up.epic.fn.Fn;
-import io.vertx.zero.eon.Strings;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -156,38 +155,59 @@ class Period {
         return null != parsed;
     }
 
+    private static DateTimeFormatter analyzeFormatter(final String pattern, final String literal) {
+        final DateTimeFormatter formatter;
+        if (19 == pattern.length()) {
+            // 2018-07-29T16:26:49格式的特殊处理
+            formatter = DateTimeFormatter.ofPattern(pattern, Locale.US);
+        } else if (23 == pattern.length()) {
+            formatter = DateTimeFormatter.ofPattern(pattern, Locale.US);
+        } else if (literal.contains("\\+") || literal.contains("\\-")) {
+            formatter = DateTimeFormatter.ofPattern(Storage.ADJUST_TIME, Locale.US);
+        } else {
+            formatter = DateTimeFormatter.ofPattern(pattern, Locale.US);
+        }
+        return formatter;
+    }
+
     static Date parse(final String literal) {
+
         return Fn.getNull(null, () -> {
-            final int length = literal.length();
+            String target = literal;
+            if (target.contains("T")) {
+                target = target.replace('T', ' ');
+            }
+            final int length = target.length();
             final String pattern = Storage.PATTERNS_MAP.get(length);
             if (null != pattern) {
-                final DateTimeFormatter formatter;
-                if (19 == pattern.length()) {
-                    // 2018-07-29T16:26:49格式的特殊处理
-                    if (0 < literal.indexOf(Strings.T_CHAR)) {
-                        formatter = DateTimeFormatter.ofPattern(Storage.T_FORMAT, Locale.getDefault());
-                    } else {
-                        formatter = DateTimeFormatter.ofPattern(pattern, Locale.getDefault());
-                    }
-                } else {
-                    formatter = DateTimeFormatter.ofPattern(pattern, Locale.getDefault());
-                }
+                final DateTimeFormatter formatter = analyzeFormatter(pattern, literal);
                 final Date converted;
                 if (10 == pattern.length()) {
-                    final LocalDate date = LocalDate.parse(literal, formatter);
-                    converted = parse(date);
+                    final LocalDate date = LocalDate.parse(target, formatter);
+                    final ZoneId zoneId = getAdjust(literal);
+                    converted = parse(date, zoneId);
                 } else if (15 > pattern.length()) {
-                    final LocalTime time = LocalTime.parse(literal, formatter);
-                    converted = parse(time);
+                    final LocalTime time = LocalTime.parse(target, formatter);
+                    final ZoneId zoneId = getAdjust(literal);
+                    converted = parse(time, zoneId);
                 } else {
-                    final LocalDateTime datetime = LocalDateTime.parse(literal, formatter);
-                    converted = parse(datetime);
+                    final LocalDateTime datetime = LocalDateTime.parse(target, formatter);
+                    final ZoneId zoneId = getAdjust(literal);
+                    converted = parse(datetime, zoneId);
                 }
                 return converted;
             } else {
                 return parseFull(literal);
             }
         }, literal);
+    }
+
+    private static ZoneId getAdjust(final String literal) {
+        if (literal.endsWith("Z")) {
+            return ZoneId.from(ZoneOffset.UTC);
+        } else {
+            return ZoneId.systemDefault();
+        }
     }
 
     /**
@@ -200,13 +220,14 @@ class Period {
         return Fn.getNull(null, () -> {
             // Datetime parsing
             final LocalDateTime datetime = toDateTime(literal);
+            final ZoneId zoneId = getAdjust(literal);
             return Fn.nullFlow(datetime,
-                    (ref) -> Date.from(ref.atZone(ZoneId.systemDefault()).toInstant()),
+                    (ref) -> Date.from(ref.atZone(zoneId).toInstant()),
                     () -> {
                         // Date parsing
                         final LocalDate date = toDate(literal);
                         return Fn.nullFlow(date,
-                                (ref) -> Date.from(ref.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()),
+                                (ref) -> Date.from(ref.atStartOfDay().atZone(zoneId).toInstant()),
                                 () -> {
                                     // Time parsing
                                     final LocalTime time = toTime(literal);
@@ -231,10 +252,10 @@ class Period {
 
     static void itDay(final String from, final String to,
                       final Consumer<Date> consumer) {
-        LocalDate begin = toDate(parseFull(from));
-        LocalDate end = toDate(parseFull(to));
+        LocalDateTime begin = toDateTime(parseFull(from));
+        LocalDateTime end = toDateTime(parseFull(to));
         // Adjust end because this method require the end as last item.
-        end = end.atStartOfDay().plusDays(1).toLocalDate();
+        end = end.plusDays(1);
         do {
             consumer.accept(parse(begin));
             begin = begin.plusDays(1);
@@ -297,16 +318,28 @@ class Period {
     }
 
     static Date parse(final LocalTime time) {
+        return parse(time, ZoneId.systemDefault());
+    }
+
+    static Date parse(final LocalTime time, final ZoneId zoneId) {
         final LocalDate date = LocalDate.now();
         final LocalDateTime datetime = LocalDateTime.of(date, time);
-        return Date.from(datetime.atZone(ZoneId.systemDefault()).toInstant());
+        return Date.from(datetime.atZone(zoneId).toInstant());
     }
 
     static Date parse(final LocalDateTime datetime) {
-        return Date.from(datetime.atZone(ZoneId.systemDefault()).toInstant());
+        return parse(datetime, ZoneId.systemDefault());
+    }
+
+    static Date parse(final LocalDateTime datetime, final ZoneId zoneId) {
+        return Date.from(datetime.atZone(zoneId).toInstant());
     }
 
     static Date parse(final LocalDate datetime) {
-        return Date.from(datetime.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        return parse(datetime, ZoneId.systemDefault());
+    }
+
+    static Date parse(final LocalDate datetime, final ZoneId zoneId) {
+        return Date.from(datetime.atStartOfDay(zoneId).toInstant());
     }
 }
