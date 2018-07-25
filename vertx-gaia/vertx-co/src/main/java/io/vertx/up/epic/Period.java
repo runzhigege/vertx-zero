@@ -232,7 +232,9 @@ class Period {
     static void itDay(final String from, final String to,
                       final Consumer<Date> consumer) {
         LocalDate begin = toDate(parseFull(from));
-        final LocalDate end = toDate(parseFull(to));
+        LocalDate end = toDate(parseFull(to));
+        // Adjust end because this method require the end as last item.
+        end = end.atStartOfDay().plusDays(1).toLocalDate();
         do {
             consumer.accept(parse(begin));
             begin = begin.plusDays(1);
