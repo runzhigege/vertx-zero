@@ -1,4 +1,4 @@
-package io.vertx.quiz;
+package io.zero.quiz;
 
 import io.zero.epic.mirror.Pack;
 

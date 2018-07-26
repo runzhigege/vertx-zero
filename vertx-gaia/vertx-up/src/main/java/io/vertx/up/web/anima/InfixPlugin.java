@@ -5,8 +5,8 @@ import io.vertx.up.annotations.Plugin;
 import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.Infix;
 import io.vertx.up.web.ZeroAmbient;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;
@@ -37,11 +37,11 @@ class InfixPlugin {
                     final Class<?> fieldType = field.getType();
                     final Class<?> infixCls = binds.get(fieldType);
                     if (null != infixCls) {
-                        if (Instance.isMatch(infixCls, Infix.class)) {
-                            final Infix reference = Instance.singleton(infixCls);
-                            final Object tpRef = Instance.invoke(reference, "get");
+                        if (Ut.isImplement(infixCls, Infix.class)) {
+                            final Infix reference = Ut.singleton(infixCls);
+                            final Object tpRef = Ut.invoke(reference, "get");
                             final String fieldName = field.getName();
-                            Instance.set(proxy, fieldName, tpRef);
+                            Ut.set(proxy, fieldName, tpRef);
                         } else {
                             this.logger.warn(Info.INFIX_IMPL, infixCls.getName(), Infix.class.getName());
                         }

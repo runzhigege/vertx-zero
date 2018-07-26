@@ -16,9 +16,9 @@ import io.vertx.zero.exception.MicroModeUpException;
 import io.vertx.zero.exception.UpClassArgsException;
 import io.vertx.zero.exception.UpClassInvalidException;
 import io.vertx.zero.micro.config.DynamicVisitor;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 import io.zero.epic.mirror.Anno;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
@@ -72,7 +72,7 @@ public class VertxApplication {
         final Set<Integer> apiScanned = new HashSet<>();
         Fn.outUp(() -> {
             final ServerVisitor<HttpServerOptions> visitor =
-                    Instance.singleton(DynamicVisitor.class);
+                    Ut.singleton(DynamicVisitor.class);
             apiScanned.addAll(visitor.visit(ServerType.API.toString()).keySet());
         }, LOGGER);
         return !apiScanned.isEmpty();
@@ -91,33 +91,33 @@ public class VertxApplication {
 
     private void run(final Object... args) {
 
-        final Launcher<Vertx> launcher = Instance.singleton(ZeroLauncher.class);
+        final Launcher<Vertx> launcher = Ut.singleton(ZeroLauncher.class);
         launcher.start(vertx -> {
             /** 1.Find Agent for deploy **/
             Runner.run(() -> {
-                final Scatter<Vertx> scatter = Instance.singleton(AgentScatter.class);
+                final Scatter<Vertx> scatter = Ut.singleton(AgentScatter.class);
                 scatter.connect(vertx);
             }, "agent-runner");
 
             /** 2.Find Worker for deploy **/
             Runner.run(() -> {
-                final Scatter<Vertx> scatter = Instance.singleton(WorkerScatter.class);
+                final Scatter<Vertx> scatter = Ut.singleton(WorkerScatter.class);
                 scatter.connect(vertx);
             }, "worker-runner");
 
             /** 3.Initialize Infix **/
             Runner.run(() -> {
                 // Infix
-                Scatter<Vertx> scatter = Instance.singleton(InfixScatter.class);
+                Scatter<Vertx> scatter = Ut.singleton(InfixScatter.class);
                 scatter.connect(vertx);
                 // Injection
-                scatter = Instance.singleton(AffluxScatter.class);
+                scatter = Ut.singleton(AffluxScatter.class);
                 scatter.connect(vertx);
             }, "infix-afflux-runner");
 
             /** 4.Rule started **/
             Runner.run(() -> {
-                final Scatter<Vertx> scatter = Instance.singleton(CodexScatter.class);
+                final Scatter<Vertx> scatter = Ut.singleton(CodexScatter.class);
                 scatter.connect(vertx);
             }, "codex-engine-runner");
         });

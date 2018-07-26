@@ -9,8 +9,8 @@ import io.vertx.up.atom.agent.Event;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Axis;
 import io.vertx.up.web.ZeroAnno;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.reflect.Method;
 import java.util.Set;
@@ -32,11 +32,11 @@ public class FilterAxis implements Axis<Router> {
                     final Route route = router.route();
 
                     Hub<Route> hub = Fn.poolThread(Pool.URIHUBS,
-                            () -> Instance.instance(UriHub.class));
+                            () -> Ut.instance(UriHub.class));
                     hub.mount(route, event);
                     // Consumes/Produces
                     hub = Fn.poolThread(Pool.MEDIAHUBS,
-                            () -> Instance.instance(MediaHub.class));
+                            () -> Ut.instance(MediaHub.class));
                     hub.mount(route, event);
                     // Filter Handler execution
                     route.handler(context -> {
@@ -53,7 +53,7 @@ public class FilterAxis implements Axis<Router> {
     private void execute(final RoutingContext context, final Object proxy, final Method method) {
         Fn.safeNull(() -> Fn.safeJvm(() -> {
             // Init context;
-            Instance.invoke(proxy, "init", context);
+            Ut.invoke(proxy, "init", context);
             // Extract Request/Response
             final HttpServerRequest request = context.request();
             final HttpServerResponse response = context.response();

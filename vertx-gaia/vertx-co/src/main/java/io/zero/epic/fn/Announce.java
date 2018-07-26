@@ -4,7 +4,7 @@ import io.vertx.up.exception.WebException;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.ZeroRunException;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 
 /**
  * Announce means tell every one of Zero system that there occurs error, the error contains
@@ -26,7 +26,7 @@ class Announce {
                         final Class<? extends ZeroException> zeroClass,
                         final Object... args)
             throws ZeroException {
-        final ZeroException error = Instance.instance(zeroClass, args);
+        final ZeroException error = Ut.instance(zeroClass, args);
         if (null != error) {
             if (null != logger) {
                 logger.zero(error);
@@ -45,7 +45,7 @@ class Announce {
     static void outUp(final Annal logger,
                       final Class<? extends ZeroRunException> upClass,
                       final Object... args) {
-        final ZeroRunException error = Instance.instance(upClass, args);
+        final ZeroRunException error = Ut.instance(upClass, args);
         if (null != error) {
             if (null != logger) {
                 logger.vertx(error);
@@ -57,7 +57,7 @@ class Announce {
     static void outWeb(final Annal logger,
                        final Class<? extends WebException> webClass,
                        final Object... args) {
-        final WebException error = Instance.instance(webClass, args);
+        final WebException error = Ut.instance(webClass, args);
         if (null != error) {
             if (null != logger) {
                 logger.warn(error.getMessage());

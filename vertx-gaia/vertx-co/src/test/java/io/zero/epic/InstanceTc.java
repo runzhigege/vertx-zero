@@ -1,4 +1,4 @@
-package io.zero.epic.mirror;
+package io.zero.epic;
 
 import io.vertx.up.log.Annal;
 import io.zero.quiz.ZeroBase;
@@ -9,25 +9,25 @@ public class InstanceTc extends ZeroBase {
     @Test
     public void testString() {
         final User user = new User();
-        Instance.invoke(user, "invoke", "String");
+        Ut.invoke(user, "invoke", "String");
     }
 
     @Test
     public void testNoArg() {
         final User user = new User();
-        Instance.invoke(user, "invoke");
+        Ut.invoke(user, "invoke");
     }
 
     @Test
     public void testWrapperInteger() {
         final Email email = new Email();
-        Instance.invoke(email, "invoke", new Integer(22));
+        Ut.invoke(email, "invoke", new Integer(22));
     }
 
     @Test
     public void testUnboxInteger() {
         final Email email = new Email();
-        Instance.invoke(email, "invoke", 22);
+        Ut.invoke(email, "invoke", 22);
     }
 }
 

@@ -15,7 +15,6 @@ import io.vertx.zero.marshal.Transformer;
 import io.vertx.zero.marshal.node.Node;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -29,7 +28,7 @@ public class RpcServerVisitor implements ServerVisitor<ServidorOptions> {
 
     private transient final Node<JsonObject> node = Node.infix(Plugins.SERVER);
     private transient final Transformer<ServidorOptions>
-            transformer = Instance.singleton(RpcServerStrada.class);
+            transformer = Ut.singleton(RpcServerStrada.class);
 
     @Override
     public ConcurrentMap<Integer, ServidorOptions> visit(final String... key)

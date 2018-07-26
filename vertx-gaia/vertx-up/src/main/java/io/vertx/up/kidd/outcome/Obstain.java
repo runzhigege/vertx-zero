@@ -5,8 +5,8 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._404RecordNotFoundException;
 import io.vertx.up.log.Annal;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 /**
  * Response building to JsonObject
@@ -50,7 +50,7 @@ public class Obstain<T> {
     }
 
     public Obstain<T> unique() {
-        final WebException error404 = Instance.instance(
+        final WebException error404 = Ut.instance(
                 _404RecordNotFoundException.class, this.clazz);
         return this.unique(error404);
     }

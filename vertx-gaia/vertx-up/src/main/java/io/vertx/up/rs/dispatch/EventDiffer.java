@@ -13,8 +13,8 @@ import io.vertx.up.web.ZeroAnno;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.ReturnTypeException;
 import io.vertx.zero.exception.WorkerMissingException;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -66,16 +66,16 @@ class EventDiffer implements Differ<RoutingContext> {
                 if (this.isAsync(replier)) {
                     // Mode 5: Event Bus: ( Async ) Request-Response
                     aim = Fn.pool(Pool.AIMS, Thread.currentThread().getName() + "-mode-vert.x",
-                            () -> Instance.instance(AsyncAim.class));
+                            () -> Ut.instance(AsyncAim.class));
                 } else {
                     // Mode 3: Event Bus: One-Way
                     aim = Fn.pool(Pool.AIMS, Thread.currentThread().getName() + "-mode-oneway",
-                            () -> Instance.instance(OneWayAim.class));
+                            () -> Ut.instance(OneWayAim.class));
                 }
             } else {
                 // Mode 1: Event Bus: Request-Response
                 aim = Fn.pool(Pool.AIMS, Thread.currentThread().getName() + "-mode-java",
-                        () -> Instance.instance(AsyncAim.class));
+                        () -> Ut.instance(AsyncAim.class));
             }
         }
         return aim;
@@ -95,7 +95,7 @@ class EventDiffer implements Differ<RoutingContext> {
 
     private Method findReplier(final Event event) {
         final Annotation annotation = event.getAction().getDeclaredAnnotation(Address.class);
-        final String address = Instance.invoke(annotation, "value");
+        final String address = Ut.invoke(annotation, "value");
         // Here address mustn't be null or empty
         final Receipt found = RECEIPTS.stream()
                 .filter(item -> address.equals(item.getAddress()))

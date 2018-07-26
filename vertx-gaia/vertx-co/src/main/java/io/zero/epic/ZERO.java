@@ -69,6 +69,14 @@ enum StoreConfig {
 
 interface Storage {
     /**
+     * Singletons
+     */
+    ConcurrentMap<String, Object> SINGLETON = new ConcurrentHashMap<>();
+    /**
+     * Class cached.
+     */
+    ConcurrentMap<String, Class<?>> CLASSES = new ConcurrentHashMap<>();
+    /**
      * Memory pool for each file of ConfigStoreOptions
      */
     ConcurrentMap<String, ConfigStoreOptions> STORE = new ConcurrentHashMap<>();
@@ -98,8 +106,6 @@ interface Info {
     String INF_CUR = "[ZERO] Current path is scanned by the system, file existing ? {0}.";
     /** **/
     String INF_APATH = "[ZERO] Absolute path is hitted: {0}.";
-
-    String INF_NET = "[ ZERO ] Network checking with telnet client = {0}, key = {1}, host = {2}, port = {3}";
 
     String MATH_NOT_MATCH = "[ ZERO ] ( Numeric ) The system could not match current type {0} to do sum";
 }

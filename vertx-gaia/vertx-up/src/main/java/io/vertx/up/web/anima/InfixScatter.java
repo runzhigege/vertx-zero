@@ -14,7 +14,6 @@ import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroLime;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -33,7 +32,7 @@ public class InfixScatter implements Scatter<Vertx> {
     private static final Annal LOGGER = Annal.get(InfixScatter.class);
 
     private static final Node<ConcurrentMap<String, String>> node =
-            Instance.singleton(ZeroLime.class);
+            Ut.singleton(ZeroLime.class);
 
     private static final Set<Class<?>> PLUGINS = ZeroAnno.getTps();
 
@@ -72,7 +71,7 @@ public class InfixScatter implements Scatter<Vertx> {
         /** After infix inject plugins **/
         Ut.itSet(PLUGINS, (clazz, index) -> Runner.run(() -> {
             /** Instance reference **/
-            final Object reference = Instance.singleton(clazz);
+            final Object reference = Ut.singleton(clazz);
             /** Injects scanner **/
             PLUGIN.inject(reference);
         }, "injects-plugin-scannner"));

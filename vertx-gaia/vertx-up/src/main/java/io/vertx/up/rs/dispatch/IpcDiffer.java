@@ -6,8 +6,8 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Aim;
 import io.vertx.up.rs.hunt.IpcAim;
 import io.vertx.zero.exception.ReturnTypeException;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.reflect.Method;
 
@@ -46,7 +46,7 @@ class IpcDiffer implements Differ<RoutingContext> {
         } else {
             // Mode 6: Ipc channel enabled
             aim = Fn.pool(Pool.AIMS, Thread.currentThread().getName() + "-mode-ipc",
-                    () -> Instance.instance(IpcAim.class));
+                    () -> Ut.instance(IpcAim.class));
         }
         return aim;
     }

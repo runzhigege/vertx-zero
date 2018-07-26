@@ -10,7 +10,6 @@ import io.vertx.up.exception._500InternalServerException;
 import io.vertx.zero.atom.Mirror;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,7 +130,7 @@ class To {
             // Fix Cast WebException error.
             return new _500InternalServerException(To.class, "clazz arg is null");
         } else {
-            return Instance.instance(clazz, args);
+            return Ut.instance(clazz, args);
         }
     }
 

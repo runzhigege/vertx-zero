@@ -6,8 +6,8 @@ import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.exception.ConfigKeyMissingException;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.util.function.Function;
 
@@ -36,7 +36,7 @@ public interface Infix {
             final Annal logger,
             final String key,
             final Class<?> clazz) {
-        final Node<JsonObject> node = Instance.instance(ZeroUniform.class);
+        final Node<JsonObject> node = Ut.instance(ZeroUniform.class);
         final JsonObject options = node.read();
         Fn.outUp(null == options || !options.containsKey(key)
                 , logger, ConfigKeyMissingException.class,

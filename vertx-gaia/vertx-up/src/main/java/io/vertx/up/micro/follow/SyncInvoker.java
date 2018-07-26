@@ -7,7 +7,7 @@ import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ipc.client.TunnelClient;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 
 import java.lang.reflect.Method;
 
@@ -34,7 +34,7 @@ public class SyncInvoker implements Invoker {
         // Invoke directly
         final Envelop envelop = message.body();
         LOGGER.info(Info.MSG_FUTURE, this.getClass(), method.getReturnType(), false);
-        message.reply(Instance.invoke(proxy, method.getName(), envelop));
+        message.reply(Ut.invoke(proxy, method.getName(), envelop));
     }
 
     @Override
@@ -44,7 +44,7 @@ public class SyncInvoker implements Invoker {
                      final Vertx vertx) {
         final Envelop envelop = message.body();
         LOGGER.info(Info.MSG_FUTURE, this.getClass(), method.getReturnType(), true);
-        final Envelop result = Instance.invoke(proxy, method.getName(), envelop);
+        final Envelop result = Ut.invoke(proxy, method.getName(), envelop);
         TunnelClient.create(this.getClass())
                 .connect(vertx)
                 .connect(method)

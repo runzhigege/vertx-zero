@@ -77,7 +77,7 @@
             // Init for VertxOptions, ClusterOptions Visit Vertx
             if (VX_OPTS.isEmpty() || null == CLUSTER) {
                 final NodeVisitor visitor =
-                        Instance.singleton(VertxVisitor.class);
+                        Ut.singleton(VertxVisitor.class);
                 VX_OPTS.putAll(visitor.visit());
                 
                 // Must after visit
@@ -86,7 +86,7 @@
             // Init for HttpServerOptions
             if (SERVER_OPTS.isEmpty()) {
                 final ServerVisitor<HttpServerOptions> visitor =
-                        Instance.singleton(HttpServerVisitor.class);
+                        Ut.singleton(HttpServerVisitor.class);
                 SERVER_OPTS.putAll(visitor.visit());
             }
             // Init for all plugin options.

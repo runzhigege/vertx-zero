@@ -126,6 +126,6 @@ public final class Anno {
                                                            final Class<E> annoCls,
                                                            final String attr) {
         final E annotation = clazz.getAnnotation(annoCls);
-        return Instance.invoke(annotation, attr);
+        return Ut.invoke(annotation, attr);
     }
 }

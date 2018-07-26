@@ -12,7 +12,6 @@ import io.vertx.zero.atom.Ruler;
 import io.zero.epic.Ut;
 import io.zero.epic.container.RxHod;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
@@ -20,7 +19,7 @@ import java.util.concurrent.ConcurrentMap;
 class RpcHelper {
 
     private static final Annal LOGGER = Annal.get(RpcHelper.class);
-    private static final Origin ORIGIN = Instance.singleton(IpcOrigin.class);
+    private static final Origin ORIGIN = Ut.singleton(IpcOrigin.class);
 
 
     static Record getRecord(final JsonObject config) {

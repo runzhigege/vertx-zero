@@ -1,7 +1,7 @@
 package io.vertx.up.web.serialization;
 
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 /**
  * Enum
@@ -12,7 +12,7 @@ public class EnumSaber extends BaseSaber {
         return Fn.getNull(() -> {
             Object reference = null;
             if (input instanceof Enum) {
-                reference = Instance.invoke(input, "name");
+                reference = Ut.invoke(input, "name");
             }
             return reference;
         }, input);

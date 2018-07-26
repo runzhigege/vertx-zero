@@ -11,7 +11,6 @@ import io.vertx.up.rs.Extractor;
 import io.vertx.up.rs.config.WorkerExtractor;
 import io.vertx.up.web.ZeroAnno;
 import io.zero.epic.Ut;
-import io.zero.epic.mirror.Instance;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -35,7 +34,7 @@ public class WorkerScatter implements Scatter<Vertx> {
         // MessageModel equal REQUEST_RESPONSE
         final Set<Class<?>> workers = this.getTargets(sources);
         final Extractor<DeploymentOptions> extractor =
-                Instance.instance(WorkerExtractor.class);
+                Ut.instance(WorkerExtractor.class);
         final ConcurrentMap<Class<?>, DeploymentOptions> options =
                 new ConcurrentHashMap<>();
         for (final Class<?> worker : workers) {
@@ -62,7 +61,7 @@ public class WorkerScatter implements Scatter<Vertx> {
         final Set<Class<?>> workers = new HashSet<>();
         for (final Class<?> source : sources) {
             final MessageModel model =
-                    Instance.invoke(source.getAnnotation(Worker.class), "value");
+                    Ut.invoke(source.getAnnotation(Worker.class), "value");
             if (this.getModel().contains(model)) {
                 workers.add(source);
             }

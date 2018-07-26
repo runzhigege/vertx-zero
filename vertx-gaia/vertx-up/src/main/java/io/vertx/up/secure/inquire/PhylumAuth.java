@@ -5,8 +5,8 @@ import io.vertx.up.annotations.Authorize;
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.WallMethodMultiException;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -42,7 +42,7 @@ public class PhylumAuth {
 
     public void mount(final Cliff reference) {
         /** Proxy **/
-        reference.setProxy(Instance.instance(this.clazz));
+        reference.setProxy(Ut.instance(this.clazz));
         // Find the first: Authenticate
         final Optional<Method> authenticateMethod
                 = Arrays.stream(this.methods).filter(

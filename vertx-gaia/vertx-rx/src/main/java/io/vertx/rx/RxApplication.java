@@ -10,9 +10,9 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.web.anima.Scatter;
 import io.vertx.zero.exception.UpClassArgsException;
 import io.vertx.zero.exception.UpClassInvalidException;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 import io.zero.epic.mirror.Anno;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.util.concurrent.ConcurrentHashMap;
@@ -52,11 +52,11 @@ public class RxApplication {
     }
 
     private void run(final Object... args) {
-        final Launcher<Vertx> launcher = Instance.singleton(ZeroLauncher.class);
+        final Launcher<Vertx> launcher = Ut.singleton(ZeroLauncher.class);
         launcher.start(vertx -> {
             /** 1.Find Agent for deploy **/
             Runner.run(() -> {
-                final Scatter<Vertx> scatter = Instance.singleton(AgentScatter.class);
+                final Scatter<Vertx> scatter = Ut.singleton(AgentScatter.class);
                 scatter.connect(vertx);
             }, "rx-agent-runner");
         });

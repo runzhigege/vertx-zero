@@ -16,7 +16,6 @@ import io.vertx.up.micro.ipc.server.Tunnel;
 import io.vertx.up.micro.ipc.server.UnityTunnel;
 import io.vertx.zero.eon.Values;
 import io.zero.epic.Ut;
-import io.zero.epic.mirror.Instance;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -45,7 +44,7 @@ public class ZeroRpcAgent extends AbstractVerticle {
              */
             {
                 // UnityService add ( Envelop )
-                final Tunnel tunnel = Instance.singleton(UnityTunnel.class);
+                final Tunnel tunnel = Ut.singleton(UnityTunnel.class);
                 builder.addService(tunnel.init(this.vertx));
             }
             /**

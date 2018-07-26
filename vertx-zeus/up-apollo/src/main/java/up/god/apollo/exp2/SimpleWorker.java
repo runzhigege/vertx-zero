@@ -1,11 +1,11 @@
 package up.god.apollo.exp2;
 
 import io.vertx.core.eventbus.Message;
-import io.vertx.quiz.Params;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.atom.Envelop;
+import io.zero.quiz.Params;
 
 @Queue
 public class SimpleWorker {
