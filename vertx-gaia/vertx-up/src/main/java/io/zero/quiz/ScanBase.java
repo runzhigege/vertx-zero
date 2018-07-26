@@ -1,6 +1,6 @@
 package io.zero.quiz;
 
-import io.zero.epic.mirror.Pack;
+import io.vertx.zero.mirror.Pack;
 
 import java.util.HashSet;
 import java.util.Set;

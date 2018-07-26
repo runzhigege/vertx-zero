@@ -1,4 +1,4 @@
-package io.zero.epic.mirror;
+package io.vertx.zero.mirror;
 
 interface Info {
 

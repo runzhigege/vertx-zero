@@ -1,6 +1,7 @@
 package io.zero.epic;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.reactivex.Single;
 import io.vertx.config.ConfigStoreOptions;
 import io.vertx.core.Future;
@@ -63,11 +64,11 @@ public class Ut {
         return Instance.getProxy(method);
     }
 
-    public static <T> void set(final Object instance, final String name, final T value) {
+    public static <T> void field(final Object instance, final String name, final T value) {
         Instance.set(instance, name, value);
     }
 
-    public static <T> T get(final Object instance, final String name) {
+    public static <T> T field(final Object instance, final String name) {
         return Instance.get(instance, name);
     }
 
@@ -205,6 +206,10 @@ public class Ut {
 
     public static String netIP() {
         return Net.getIP();
+    }
+
+    public static String netUri(final String url) {
+        return Net.netUri(url);
     }
 
     // --- Array
@@ -515,6 +520,28 @@ public class Ut {
         return Period.toTime(date);
     }
 
+    public static Object readJson(final JsonObject data, final String key) {
+        return Jackson.readJson(null, data, key);
+    }
+
+    public static Object readJson(final Object value, final JsonObject data, final String key) {
+        return Jackson.readJson(value, data, key);
+    }
+
+    public static JsonObject readJson(final JsonObject value, final JsonObject data, final String key) {
+        final Object result = Jackson.readJson(value, data, key);
+        return null == result ? new JsonObject() : (JsonObject) result;
+    }
+
+    public static String readJson(final String value, final JsonObject data, final String key) {
+        final Object result = Jackson.readJson(value, data, key);
+        return null == result ? value : result.toString();
+    }
+
+    public static Integer readInt(final Integer value, final JsonObject data, final String key) {
+        return Jackson.readInt(value, data, key);
+    }
+
     public static LocalDateTime toDateTime(final Instant date) {
         return Period.toDateTime(date);
     }
@@ -620,12 +647,25 @@ public class Ut {
         Congregation.exec(array, clazz, fnEach);
     }
 
+    public static void itJArray(final JsonArray array, final BiConsumer<JsonObject, Integer> fnEach) {
+        Congregation.exec(array, JsonObject.class, fnEach);
+    }
+
     public static <T> void etJArray(final JsonArray dataArray, final Class<T> clazz, final ZeroBiConsumer<T, Integer> fnIt) throws ZeroException {
         Congregation.execZero(dataArray, clazz, fnIt);
     }
 
     public static <T> void etJArray(final JsonArray dataArray, final ZeroBiConsumer<T, String> fnIt) throws ZeroException {
         Congregation.execZero(dataArray, fnIt);
+    }
+
+    public static boolean inRange(final Integer value, final Integer min, final Integer max) {
+        return Numeric.inRange(value, min, max);
+    }
+    // --- Jackson Mapper
+
+    public static ObjectMapper jacksonMapper() {
+        return Jackson.getMapper();
     }
 
     // --- RxJava
