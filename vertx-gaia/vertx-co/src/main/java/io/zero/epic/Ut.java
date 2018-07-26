@@ -1,6 +1,7 @@
 package io.zero.epic;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.reactivex.Single;
 import io.vertx.config.ConfigStoreOptions;
 import io.vertx.core.Future;
@@ -63,11 +64,11 @@ public class Ut {
         return Instance.getProxy(method);
     }
 
-    public static <T> void set(final Object instance, final String name, final T value) {
+    public static <T> void field(final Object instance, final String name, final T value) {
         Instance.set(instance, name, value);
     }
 
-    public static <T> T get(final Object instance, final String name) {
+    public static <T> T field(final Object instance, final String name) {
         return Instance.get(instance, name);
     }
 
@@ -652,6 +653,15 @@ public class Ut {
 
     public static <T> void etJArray(final JsonArray dataArray, final ZeroBiConsumer<T, String> fnIt) throws ZeroException {
         Congregation.execZero(dataArray, fnIt);
+    }
+
+    public static boolean inRange(final Integer value, final Integer min, final Integer max) {
+        return Numeric.inRange(value, min, max);
+    }
+    // --- Jackson Mapper
+
+    public static ObjectMapper jacksonMapper() {
+        return Jackson.getMapper();
     }
 
     // --- RxJava
