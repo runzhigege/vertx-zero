@@ -4,10 +4,10 @@ import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.net.TCPSSLOptions;
 import io.vertx.up.eon.em.CertType;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.micro.ssl.server.JksCert;
 import io.vertx.up.micro.ssl.server.PemCert;
 import io.vertx.up.micro.ssl.server.PfxCert;
+import io.zero.epic.mirror.Instance;
 
 /**
  * Different ssl pipe

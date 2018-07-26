@@ -8,12 +8,12 @@ import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.atom.query.Criteria;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
-import io.vertx.up.epic.Ut;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.JooqArgumentException;
 import io.vertx.zero.exception.JooqMergeException;
+import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 

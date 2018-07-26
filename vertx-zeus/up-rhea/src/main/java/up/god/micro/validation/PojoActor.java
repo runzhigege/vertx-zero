@@ -2,7 +2,7 @@ package up.god.micro.validation;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.EndPoint;
-import io.vertx.up.epic.Ut;
+import io.zero.epic.Ut;
 import up.god.micro.async.JavaJson;
 
 import javax.validation.Valid;

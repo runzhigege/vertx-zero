@@ -15,10 +15,10 @@ public class EndPointTc extends UpBase {
     @Test
     public void testEndPoint(final TestContext context) {
         final Set<Event> all = new ConcurrentHashSet<>();
-        all.addAll(extractor().extract(ED1.class));
-        all.addAll(extractor().extract(ED.class));
+        all.addAll(this.extractor().extract(ED1.class));
+        all.addAll(this.extractor().extract(ED.class));
         for (final Event event : all) {
-            getLogger().info("[TEST] Extract event: {0}.", event);
+            this.getLogger().info("[TEST] Extract event: {0}.", event);
         }
     }
 }

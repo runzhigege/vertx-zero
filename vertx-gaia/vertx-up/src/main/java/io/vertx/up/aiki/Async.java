@@ -4,8 +4,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.Envelop;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
+import io.zero.epic.fn.Fn;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;

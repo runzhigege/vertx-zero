@@ -1,15 +1,15 @@
 package io.vertx.quiz;
 
 import io.vertx.core.http.HttpServerOptions;
-import io.vertx.quiz.ext.web.WebTestBase;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.rs.Axis;
 import io.vertx.up.rs.Extractor;
 import io.vertx.up.rs.config.EventExtractor;
 import io.vertx.up.rs.router.EventAxis;
 import io.vertx.up.rs.router.RouterAxis;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.web.ZeroGrid;
+import io.zero.epic.mirror.Instance;
+import io.zero.quiz.web.WebTestBase;
 
 import java.util.List;
 import java.util.Set;
@@ -26,7 +26,7 @@ public class WebBase extends WebTestBase {
             LOGS = new ConcurrentHashMap<Integer, AtomicInteger>() {
         {
             SERVERS.forEach((port, option) -> {
-                put(port, new AtomicInteger(0));
+                this.put(port, new AtomicInteger(0));
             });
         }
     };

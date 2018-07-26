@@ -2,11 +2,11 @@ package io.vertx.zero.marshal.options;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.Ut;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.zero.marshal.Visitor;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroVertx;
+import io.zero.epic.Ut;
+import io.zero.epic.mirror.Instance;
 
 public class JArrayOpts implements Visitor<JsonArray> {
 

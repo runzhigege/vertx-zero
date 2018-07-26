@@ -1,9 +1,9 @@
 package io.vertx.up.rs.argument;
 
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.rs.Filler;
 import io.vertx.up.web.ZeroSerializer;
+import io.zero.epic.fn.Fn;
 
 import java.util.Map;
 

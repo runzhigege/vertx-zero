@@ -1,10 +1,10 @@
 package io.vertx.up.web;
 
 import io.vertx.ext.unit.TestContext;
-import io.vertx.quiz.ZeroBase;
 import io.vertx.up.Launcher;
 import io.vertx.zero.exception.VertxCallbackException;
-import io.vertx.up.epic.mirror.Instance;
+import io.zero.epic.mirror.Instance;
+import io.zero.quiz.ZeroBase;
 import org.junit.Test;
 
 public class ZeroLauncherTc extends ZeroBase {

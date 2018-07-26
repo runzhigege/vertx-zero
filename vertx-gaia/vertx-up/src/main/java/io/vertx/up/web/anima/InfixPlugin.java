@@ -2,11 +2,11 @@ package io.vertx.up.web.anima;
 
 import io.reactivex.Observable;
 import io.vertx.up.annotations.Plugin;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.Infix;
 import io.vertx.up.web.ZeroAmbient;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Instance;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;

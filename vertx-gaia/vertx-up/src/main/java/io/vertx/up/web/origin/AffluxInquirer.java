@@ -2,9 +2,9 @@ package io.vertx.up.web.origin;
 
 import io.vertx.up.eon.Info;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.epic.mirror.Anno;
 import io.vertx.up.log.Annal;
 import io.vertx.up.web.thread.AffluxThread;
+import io.zero.epic.mirror.Anno;
 
 import java.util.ArrayList;
 import java.util.List;

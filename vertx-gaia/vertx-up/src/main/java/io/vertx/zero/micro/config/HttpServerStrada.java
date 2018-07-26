@@ -2,10 +2,10 @@ package io.vertx.zero.micro.config;
 
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.config.ServerVisitor;
 import io.vertx.zero.marshal.Transformer;
+import io.zero.epic.fn.Fn;
 
 public class HttpServerStrada implements Transformer<HttpServerOptions> {
 

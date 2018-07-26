@@ -2,7 +2,7 @@ package io.vertx.up.aiki;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.fn.Fn;
+import io.zero.epic.fn.Fn;
 import org.junit.Test;
 
 public class BranchTc {

@@ -2,9 +2,9 @@ package io.vertx.tp.ipc.marshal;
 
 import io.vertx.core.ServidorOptions;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.marshal.Transformer;
+import io.zero.epic.fn.Fn;
 
 public class RpcServerStrada implements Transformer<ServidorOptions> {
 

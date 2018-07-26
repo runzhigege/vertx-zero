@@ -4,8 +4,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.etcd.Enrol;
 import io.vertx.tp.etcd.center.EtcdData;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
+import io.zero.epic.fn.Fn;
 
 public class JArrayEnrol implements Enrol<JsonArray> {
 

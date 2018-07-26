@@ -2,10 +2,10 @@ package io.vertx.up.rs.config;
 
 import io.vertx.core.DeploymentOptions;
 import io.vertx.up.annotations.Worker;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.util.concurrent.ConcurrentHashMap;

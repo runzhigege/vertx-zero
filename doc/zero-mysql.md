@@ -39,7 +39,7 @@ mongo: io.vertx.up.plugin.jdbc.MySqlInfix
 import io.vertx.ext.sql.SQLClient;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.EndPoint;
-import io.vertx.up.epic.Jackson;
+import io.zero.epic.Jackson;
 import org.tlk.api.User;
 
 import javax.inject.infix.MySql;

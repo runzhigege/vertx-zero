@@ -1,10 +1,10 @@
 package io.vertx.up.web.thread;
 
 import io.vertx.up.atom.agent.Event;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
 import io.vertx.up.rs.config.EventExtractor;
+import io.zero.epic.mirror.Instance;
 
 import java.util.HashSet;
 import java.util.Set;

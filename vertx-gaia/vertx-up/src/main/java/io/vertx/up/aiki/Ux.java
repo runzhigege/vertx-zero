@@ -15,12 +15,12 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
 import io.vertx.up.atom.query.Sorter;
-import io.vertx.up.epic.container.RxHod;
-import io.vertx.up.epic.fn.Actuator;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.fn.wait.Log;
-import io.vertx.up.epic.io.IO;
 import io.vertx.up.exception.WebException;
+import io.zero.epic.Ut;
+import io.zero.epic.container.RxHod;
+import io.zero.epic.fn.Actuator;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.fn.wait.Log;
 
 import java.util.List;
 import java.util.UUID;
@@ -868,11 +868,11 @@ public final class Ux {
         }
 
         public static JWT create(final JWTAuthOptions config) {
-            return UxJwt.create(new JWTAuthOptions(config), IO::getBuffer);
+            return UxJwt.create(new JWTAuthOptions(config), Ut::ioBuffer);
         }
 
         public static JWT create(final JsonObject config) {
-            return UxJwt.create(new JWTAuthOptions(config), IO::getBuffer);
+            return UxJwt.create(new JWTAuthOptions(config), Ut::ioBuffer);
         }
 
         public static JWT create(final JWTAuthOptions config, final Function<String, Buffer> funcBuffer) {

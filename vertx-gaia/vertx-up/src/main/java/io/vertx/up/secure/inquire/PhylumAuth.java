@@ -3,10 +3,10 @@ package io.vertx.up.secure.inquire;
 import io.vertx.up.annotations.Authenticate;
 import io.vertx.up.annotations.Authorize;
 import io.vertx.up.atom.secure.Cliff;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.WallMethodMultiException;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

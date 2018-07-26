@@ -1,10 +1,10 @@
 package io.vertx.up.micro.follow;
 
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.AsyncSignatureException;
 import io.vertx.zero.exception.WorkerArgumentException;
+import io.zero.epic.fn.Fn;
 
 import java.lang.reflect.Method;
 
