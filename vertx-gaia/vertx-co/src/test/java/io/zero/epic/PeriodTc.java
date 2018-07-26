@@ -14,7 +14,6 @@ public class PeriodTc {
         Assert.assertEquals(time, time1);
     }
 
-    @Test
     public void testParse() {
         this.assertParse("2018-07-25 16:40:56", "2018-07-25T08:40:56Z");
     }
@@ -24,7 +23,6 @@ public class PeriodTc {
         this.assertParse("2018-07-25 16:40:56.776", "2018-07-25T16:40:56.776");
     }
 
-    @Test
     public void testParse2() {
         this.assertParse("2018-07-25 16:40:56.776", "2018-07-25T08:40:56.776Z");
     }

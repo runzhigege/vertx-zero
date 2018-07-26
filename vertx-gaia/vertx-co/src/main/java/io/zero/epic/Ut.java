@@ -515,6 +515,28 @@ public class Ut {
         return Period.toTime(date);
     }
 
+    public static Object readJson(final JsonObject data, final String key) {
+        return Jackson.readJson(null, data, key);
+    }
+
+    public static Object readJson(final Object value, final JsonObject data, final String key) {
+        return Jackson.readJson(value, data, key);
+    }
+
+    public static JsonObject readJson(final JsonObject value, final JsonObject data, final String key) {
+        final Object result = Jackson.readJson(value, data, key);
+        return null == result ? new JsonObject() : (JsonObject) result;
+    }
+
+    public static String readJson(final String value, final JsonObject data, final String key) {
+        final Object result = Jackson.readJson(value, data, key);
+        return null == result ? value : result.toString();
+    }
+
+    public static Integer readInt(final Integer value, final JsonObject data, final String key) {
+        return Jackson.readInt(value, data, key);
+    }
+
     public static LocalDateTime toDateTime(final Instant date) {
         return Period.toDateTime(date);
     }
@@ -618,6 +640,10 @@ public class Ut {
 
     public static <T> void itJArray(final JsonArray array, final Class<T> clazz, final BiConsumer<T, Integer> fnEach) {
         Congregation.exec(array, clazz, fnEach);
+    }
+
+    public static void itJArray(final JsonArray array, final BiConsumer<JsonObject, Integer> fnEach) {
+        Congregation.exec(array, JsonObject.class, fnEach);
     }
 
     public static <T> void etJArray(final JsonArray dataArray, final Class<T> clazz, final ZeroBiConsumer<T, Integer> fnIt) throws ZeroException {
