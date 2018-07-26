@@ -1,4 +1,4 @@
-package io.zero.epic.mirror;
+package io.vertx.zero.mirror;
 
 import io.vertx.zero.eon.FileSuffix;
 import io.vertx.zero.eon.Protocols;

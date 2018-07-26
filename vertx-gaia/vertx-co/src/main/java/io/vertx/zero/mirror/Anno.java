@@ -1,4 +1,4 @@
-package io.zero.epic.mirror;
+package io.vertx.zero.mirror;
 
 import io.zero.epic.Ut;
 import io.zero.epic.container.KeyPair;

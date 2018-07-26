@@ -208,6 +208,10 @@ public class Ut {
         return Net.getIP();
     }
 
+    public static String netUri(final String url) {
+        return Net.netUri(url);
+    }
+
     // --- Array
     public static <T> T[] elementAdd(final T[] array, final T element) {
         return ArrayUtil.add(array, element);

@@ -1,4 +1,4 @@
-package io.zero.epic.mirror;
+package io.vertx.zero.mirror;
 
 import io.reactivex.Observable;
 import io.vertx.core.impl.ConcurrentHashSet;
