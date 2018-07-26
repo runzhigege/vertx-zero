@@ -3,7 +3,7 @@ package io.vertx.up.aiki;
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.Ut;
+import io.zero.epic.Ut;
 
 import java.util.HashSet;
 import java.util.Objects;

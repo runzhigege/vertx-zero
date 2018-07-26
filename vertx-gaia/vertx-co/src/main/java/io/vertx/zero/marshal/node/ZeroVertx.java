@@ -3,9 +3,9 @@ package io.vertx.zero.marshal.node;
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.epic.Ut;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.zero.eon.Strings;
+import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
 
 import java.util.Set;
 

@@ -12,13 +12,13 @@ import io.vertx.ext.jwt.JWK;
 import io.vertx.ext.jwt.JWT;
 import io.vertx.ext.jwt.JWTOptions;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.io.IO;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception._500JwtRuntimeException;
 import io.vertx.up.secure.provider.JwtAuthProvider;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
+import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Instance;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -46,7 +46,7 @@ class UxJwt {
     }
 
     static String generate(final JsonObject claims, final JWTOptions options) {
-        return generate(claims, options, IO::getBuffer);
+        return generate(claims, options, Ut::ioBuffer);
     }
 
     static String generate(final JsonObject claims, final JWTOptions options,
@@ -75,7 +75,7 @@ class UxJwt {
     }
 
     static JsonObject extract(final String jwt, final JsonObject options) {
-        final JWT reference = create(new JWTAuthOptions(options), IO::getBuffer);
+        final JWT reference = create(new JWTAuthOptions(options), Ut::ioBuffer);
         return reference.decode(jwt);
     }
 

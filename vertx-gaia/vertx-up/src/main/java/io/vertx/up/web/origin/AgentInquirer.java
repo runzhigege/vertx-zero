@@ -2,8 +2,8 @@ package io.vertx.up.web.origin;
 
 import io.vertx.up.annotations.Agent;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.web.ZeroHelper;
+import io.zero.epic.fn.Fn;
 
 import java.util.List;
 import java.util.Set;

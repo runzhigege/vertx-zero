@@ -3,15 +3,15 @@ package io.vertx.up.rs.config;
 import io.reactivex.Observable;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.atom.worker.Receipt;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.mirror.Anno;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
 import io.vertx.up.web.ZeroAnno;
 import io.vertx.zero.exception.AccessProxyException;
 import io.vertx.zero.exception.AddressWrongException;
 import io.vertx.zero.exception.NoArgConstructorException;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Anno;
+import io.zero.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

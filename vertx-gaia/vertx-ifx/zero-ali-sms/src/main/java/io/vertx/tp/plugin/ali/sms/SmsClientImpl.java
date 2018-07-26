@@ -12,10 +12,10 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.exception._424MessageSendException;
 import io.vertx.up.exception._424ProfileEndPointException;
 import io.vertx.up.log.Annal;
+import io.zero.epic.fn.Fn;
 
 public class SmsClientImpl implements SmsClient {
 

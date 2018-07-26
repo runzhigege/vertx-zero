@@ -1,10 +1,10 @@
 package io.vertx.zero.marshal.node;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.io.IO;
 import io.vertx.zero.eon.FileSuffix;
 import io.vertx.zero.eon.Strings;
+import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
 
 public class ZeroTool {
 
@@ -41,7 +41,7 @@ public class ZeroTool {
         } else {
             final JsonObject data = Fn.getJvm(
                     null,
-                    () -> IO.getYaml(filename), filename);
+                    () -> Ut.ioYaml(filename), filename);
             if (null != data && !data.isEmpty()) {
                 Storage.CONFIG.put(filename, data);
             }

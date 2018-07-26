@@ -2,7 +2,7 @@ package io.vertx.up.atom.secure;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.em.WallType;
-import io.vertx.up.epic.Ut;
+import io.zero.epic.Ut;
 
 import java.io.Serializable;
 import java.util.Objects;

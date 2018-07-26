@@ -3,8 +3,8 @@ package io.vertx.up.rs.hunt;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.agent.Event;
-import io.vertx.up.epic.fn.Actuator;
 import io.vertx.up.exception.WebException;
+import io.zero.epic.fn.Actuator;
 
 class Responser {
 

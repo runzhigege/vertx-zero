@@ -1,6 +1,6 @@
 package io.vertx.up.web.serialization;
 
-import io.vertx.up.epic.fn.Fn;
+import io.zero.epic.fn.Fn;
 
 import java.math.BigDecimal;
 import java.util.function.Function;

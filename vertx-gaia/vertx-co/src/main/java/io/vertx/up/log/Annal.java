@@ -3,14 +3,14 @@ package io.vertx.up.log;
 import io.vertx.core.VertxException;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.web.ZeroAmbient;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.log.Log;
 import io.vertx.zero.log.internal.Log4JAnnal;
+import io.zero.epic.mirror.Instance;
 
 /**
- * Unite Logging system connect to vert.x, epic kit of Vertx-Zero
+ * Unite Logging system connect to vert.x, io.zero.epic kit of Vertx-Zero
  */
 public interface Annal {
 

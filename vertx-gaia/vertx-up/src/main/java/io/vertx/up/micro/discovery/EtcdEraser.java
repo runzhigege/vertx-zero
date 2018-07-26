@@ -2,7 +2,7 @@ package io.vertx.up.micro.discovery;
 
 import io.vertx.servicediscovery.Record;
 import io.vertx.up.concurrent.Runner;
-import io.vertx.up.epic.mirror.Instance;
+import io.zero.epic.mirror.Instance;
 
 import java.util.concurrent.ConcurrentMap;
 

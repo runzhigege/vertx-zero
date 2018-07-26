@@ -1,13 +1,11 @@
 package io.vertx.up.kidd.outcome;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.Ut;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.io.IO;
-import io.vertx.up.epic.io.Stream;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.kidd.Readible;
 import io.vertx.up.log.Annal;
+import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
 
 import java.io.InputStream;
 
@@ -19,10 +17,10 @@ public class CodeReadible implements Readible {
     @Override
     public void interpret(final WebException error) {
         if (MESSAGE.isEmpty()) {
-            final InputStream in = Stream.in(FILENAME);
+            final InputStream in = Ut.ioStream(FILENAME);
             // Do not throw out EmptyStreamException when file does not existing.
             if (null != in) {
-                MESSAGE.mergeIn(IO.getYaml(FILENAME));
+                MESSAGE.mergeIn(Ut.ioYaml(FILENAME));
             }
         }
         // Pick up message from MESSAGE cache.

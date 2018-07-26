@@ -3,8 +3,8 @@ package io.vertx.up.web.origin;
 import io.vertx.quiz.ScanBase;
 import io.vertx.quiz.example.WallKeeper2;
 import io.vertx.up.atom.secure.Cliff;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.zero.exception.WallDuplicatedException;
+import io.zero.epic.mirror.Instance;
 import org.junit.Test;
 
 import java.util.Set;

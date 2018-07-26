@@ -4,8 +4,8 @@ import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.eon.em.WallType;
 import io.vertx.up.plugin.jwt.JwtWall;
 import io.vertx.up.plugin.mongo.MongoWall;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.zero.marshal.Transformer;
+import io.zero.epic.mirror.Instance;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

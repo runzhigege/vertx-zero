@@ -2,10 +2,10 @@ package io.vertx.zero.marshal.node;
 
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.Ut;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.zero.eon.Strings;
+import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Instance;
 
 import java.util.Objects;
 import java.util.Set;

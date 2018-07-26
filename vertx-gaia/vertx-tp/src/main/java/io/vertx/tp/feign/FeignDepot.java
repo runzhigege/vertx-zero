@@ -8,7 +8,7 @@ import feign.codec.JsonObjectDecoder;
 import feign.codec.JsonObjectEncoder;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.init.TpConfig;
-import io.vertx.up.epic.fn.Fn;
+import io.zero.epic.fn.Fn;
 
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;

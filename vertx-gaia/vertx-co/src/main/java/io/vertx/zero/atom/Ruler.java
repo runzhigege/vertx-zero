@@ -2,10 +2,6 @@ package io.vertx.zero.atom;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.Ut;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.io.IO;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.exception.ZeroException;
@@ -13,6 +9,9 @@ import io.vertx.zero.marshal.reliable.ForbiddenInsurer;
 import io.vertx.zero.marshal.reliable.Insurer;
 import io.vertx.zero.marshal.reliable.RequiredInsurer;
 import io.vertx.zero.marshal.reliable.TypedInsurer;
+import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Instance;
 
 import java.text.MessageFormat;
 import java.util.concurrent.ConcurrentHashMap;
@@ -138,6 +137,6 @@ public class Ruler {
         } else {
             LOGGER.debug(Info.RULE_FILE, filename);
         }
-        return Fn.pool(RULE_MAP, filename, () -> IO.getYaml(filename));
+        return Fn.pool(RULE_MAP, filename, () -> Ut.ioYaml(filename));
     }
 }

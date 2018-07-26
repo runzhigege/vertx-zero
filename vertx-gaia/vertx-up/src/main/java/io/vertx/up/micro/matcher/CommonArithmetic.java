@@ -4,9 +4,9 @@ import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.servicediscovery.Record;
-import io.vertx.up.epic.Ut;
 import io.vertx.up.micro.discovery.Origin;
 import io.vertx.zero.eon.Strings;
+import io.zero.epic.Ut;
 
 import java.util.List;
 import java.util.Optional;
