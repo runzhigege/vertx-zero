@@ -63,6 +63,10 @@ final class Jackson {
     private Jackson() {
     }
 
+    static ObjectMapper getMapper() {
+        return MAPPER;
+    }
+
     static JsonObject visitJObject(
             final JsonObject item,
             final String... keys
@@ -230,5 +234,20 @@ final class Jackson {
         final List<T> entities = new ArrayList<>();
         result.forEach(item -> entities.add(Jackson.deserialize(item.encode(), clazz)));
         return entities;
+    }
+
+
+    static Object readJson(final Object value, final JsonObject data, final String key) {
+        return Fn.getNull(value, () -> {
+            final Object result = data.getValue(key);
+            return Fn.getNull(value, () -> result, result);
+        }, data, key);
+    }
+
+    static Integer readInt(final Integer value, final JsonObject data, final String key) {
+        return Fn.getNull(value, () -> {
+            final Object result = data.getValue(key);
+            return Types.isInteger(result) ? To.toInteger(result) : value;
+        }, data, key);
     }
 }

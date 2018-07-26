@@ -153,6 +153,12 @@ public class Fn {
         Defend.jvmVoid(actuator, logger);
     }
 
+    public static void safeJvm(
+            final JvmActuator actuator
+    ) {
+        Defend.jvmVoid(actuator, null);
+    }
+
     /**
      * @param supplier
      * @param logger
@@ -164,6 +170,12 @@ public class Fn {
             final Annal logger
     ) {
         return Defend.jvmReturn(supplier, logger);
+    }
+
+    public static <T> T safeJvm(
+            final JvmSupplier<T> supplier
+    ) {
+        return Defend.jvmReturn(supplier, null);
     }
 
     /**
@@ -233,6 +245,18 @@ public class Fn {
             final Actuator tSupplier
     ) {
         Semi.exec(condition, logger, tSupplier, null);
+    }
+
+    /**
+     * @param condition
+     * @param logger
+     * @param tSupplier
+     */
+    public static void safeSemi(
+            final boolean condition,
+            final Actuator tSupplier
+    ) {
+        Semi.exec(condition, null, tSupplier, null);
     }
 
     /**

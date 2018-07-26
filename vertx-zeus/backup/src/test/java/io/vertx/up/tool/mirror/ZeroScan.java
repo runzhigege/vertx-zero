@@ -1,4 +1,4 @@
-package io.zero.epic.mirror;
+package io.vertx.zero.mirror;
 
 import io.vertx.ext.unit.TestContext;
 import io.vertx.quiz.ZeroBase;

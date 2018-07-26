@@ -9,9 +9,9 @@ import io.vertx.zero.exception.MultiAnnotatedException;
 import io.vertx.zero.exception.NamedImplementionException;
 import io.vertx.zero.exception.NamedNotFoundException;
 import io.vertx.zero.exception.QualifierMissedException;
+import io.vertx.zero.mirror.Anno;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Anno;
 
 import javax.inject.Inject;
 import javax.inject.Named;

@@ -60,4 +60,15 @@ class Net {
     static String getIP() {
         return IPHost.getInstance().getExtranetIPAddress();
     }
+
+    static String netUri(final String url) {
+        if (null == url) {
+            return null;
+        }
+        if (url.contains("?")) {
+            return url.split("\\?")[0];
+        } else {
+            return url;
+        }
+    }
 }

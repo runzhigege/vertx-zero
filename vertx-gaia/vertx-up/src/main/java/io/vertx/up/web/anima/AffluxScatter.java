@@ -7,9 +7,9 @@ import io.vertx.up.concurrent.Runner;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.log.Annal;
 import io.vertx.up.web.ZeroAnno;
+import io.vertx.zero.mirror.Anno;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Anno;
 
 import java.lang.reflect.Field;
 import java.util.Set;
@@ -66,7 +66,7 @@ public class AffluxScatter implements Scatter<Vertx> {
             }
             // Set for field
             if (null != instance) {
-                Ut.set(proxy, key, instance);
+                Ut.field(proxy, key, instance);
                 // Scan continue for field
                 this.inject(instance);
             }
