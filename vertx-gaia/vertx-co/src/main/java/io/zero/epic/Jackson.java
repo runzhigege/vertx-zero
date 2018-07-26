@@ -63,6 +63,10 @@ final class Jackson {
     private Jackson() {
     }
 
+    static ObjectMapper getMapper() {
+        return MAPPER;
+    }
+
     static JsonObject visitJObject(
             final JsonObject item,
             final String... keys

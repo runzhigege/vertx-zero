@@ -66,7 +66,7 @@ public class AffluxScatter implements Scatter<Vertx> {
             }
             // Set for field
             if (null != instance) {
-                Ut.set(proxy, key, instance);
+                Ut.field(proxy, key, instance);
                 // Scan continue for field
                 this.inject(instance);
             }

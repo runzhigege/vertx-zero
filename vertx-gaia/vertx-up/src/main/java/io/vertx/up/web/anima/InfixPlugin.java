@@ -41,7 +41,7 @@ class InfixPlugin {
                             final Infix reference = Ut.singleton(infixCls);
                             final Object tpRef = Ut.invoke(reference, "get");
                             final String fieldName = field.getName();
-                            Ut.set(proxy, fieldName, tpRef);
+                            Ut.field(proxy, fieldName, tpRef);
                         } else {
                             this.logger.warn(Info.INFIX_IMPL, infixCls.getName(), Infix.class.getName());
                         }
