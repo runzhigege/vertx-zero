@@ -19,6 +19,6 @@ public class Params {
     }
 
     public void end() {
-        System.out.println("[Mok] Ended By: " + ((null == this.executor)? null: this.executor.getName()));
+        System.out.println("[Mok] Ended By: " + ((null == this.executor) ? null : this.executor.getName()));
     }
 }
