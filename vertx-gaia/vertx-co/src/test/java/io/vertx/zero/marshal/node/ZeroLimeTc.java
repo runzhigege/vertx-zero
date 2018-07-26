@@ -1,7 +1,7 @@
 package io.vertx.zero.marshal.node;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.mirror.Instance;
+import io.zero.epic.mirror.Instance;
 import org.junit.Test;
 
 import java.util.concurrent.ConcurrentMap;

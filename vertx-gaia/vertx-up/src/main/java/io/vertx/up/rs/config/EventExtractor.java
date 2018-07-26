@@ -7,9 +7,6 @@ import io.vertx.up.annotations.Codex;
 import io.vertx.up.annotations.EndPoint;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.hold.Virtual;
-import io.vertx.up.epic.Ut;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
 import io.vertx.up.web.ZeroHelper;
@@ -17,6 +14,9 @@ import io.vertx.zero.exception.AccessProxyException;
 import io.vertx.zero.exception.EventCodexMultiException;
 import io.vertx.zero.exception.EventSourceException;
 import io.vertx.zero.exception.NoArgConstructorException;
+import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Instance;
 
 import javax.ws.rs.Path;
 import java.lang.annotation.Annotation;
@@ -89,11 +89,10 @@ public class EventExtractor implements Extractor<Set<Event>> {
                 EventCodexMultiException.class,
                 this.getClass(), clazz);
         // 2.Build Set
-        Observable.fromArray(methods)
-                .filter(MethodResolver::isValid)
+        events.addAll(Arrays.stream(methods).filter(MethodResolver::isValid)
                 .map(item -> this.extract(item, root))
                 .filter(Objects::nonNull)
-                .subscribe(events::add);
+                .collect(Collectors.toSet()));
         return events;
     }
 
@@ -155,6 +154,7 @@ public class EventExtractor implements Extractor<Set<Event>> {
             proxy = Instance.singleton(method.getDeclaringClass());
         }
         event.setProxy(proxy);
+        System.out.println(proxy);
         return event;
     }
 }

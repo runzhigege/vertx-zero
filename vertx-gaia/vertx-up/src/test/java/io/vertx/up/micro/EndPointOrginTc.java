@@ -4,7 +4,7 @@ import io.vertx.servicediscovery.Record;
 import io.vertx.tp.etcd.center.EtcdData;
 import io.vertx.up.micro.discovery.ApiOrigin;
 import io.vertx.up.micro.discovery.Origin;
-import io.vertx.up.epic.mirror.Instance;
+import io.zero.epic.mirror.Instance;
 
 import java.util.concurrent.ConcurrentMap;
 
@@ -20,6 +20,6 @@ public class EndPointOrginTc {
     }
 
     public void testNodes() {
-        final EtcdData data = EtcdData.create(getClass());
+        final EtcdData data = EtcdData.create(this.getClass());
     }
 }

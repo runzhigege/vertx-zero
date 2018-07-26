@@ -1,7 +1,7 @@
 package io.vertx.tp.feign;
 
 import io.vertx.ext.unit.TestContext;
-import io.vertx.quiz.ZeroBase;
+import io.zero.quiz.ZeroBase;
 import io.vertx.tp.init.TpConfig;
 import io.vertx.zero.exception.DynamicKeyMissingException;
 import org.junit.Test;

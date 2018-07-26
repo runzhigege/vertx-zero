@@ -13,8 +13,6 @@ import io.vertx.servicediscovery.ServiceDiscovery;
 import io.vertx.servicediscovery.ServiceReference;
 import io.vertx.servicediscovery.types.HttpEndpoint;
 import io.vertx.up.atom.Envelop;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._404ServiceNotFoundException;
 import io.vertx.up.exception._405MethodForbiddenException;
@@ -25,6 +23,8 @@ import io.vertx.up.rs.hunt.Answer;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.marshal.Visitor;
 import io.vertx.zero.micro.config.CircuitVisitor;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Instance;
 
 import java.util.List;
 

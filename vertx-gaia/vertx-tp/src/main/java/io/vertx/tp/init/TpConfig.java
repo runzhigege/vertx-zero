@@ -1,12 +1,12 @@
 package io.vertx.tp.init;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.exception.DynamicConfigTypeException;
 import io.vertx.zero.exception.DynamicKeyMissingException;
 import io.vertx.zero.marshal.node.Node;
+import io.zero.epic.fn.Fn;
 
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;

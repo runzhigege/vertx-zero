@@ -3,7 +3,7 @@ package feign.codec;
 import feign.FeignException;
 import feign.Response;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.io.IO;
+import io.zero.epic.Ut;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -13,7 +13,7 @@ public class JsonObjectDecoder implements Decoder {
     public Object decode(final Response response, final Type type)
             throws IOException, FeignException {
         if (JsonObject.class == type) {
-            final String content = IO.getString(response.body().asInputStream());
+            final String content = Ut.ioString(response.body().asInputStream());
             return new JsonObject(content);
         }
         return null;

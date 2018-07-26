@@ -6,7 +6,6 @@ import io.vertx.core.http.HttpStatusCode;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.Session;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
 import io.vertx.up.kidd.Readible;
@@ -15,6 +14,7 @@ import io.vertx.up.web.ZeroSerializer;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.IndexExceedException;
+import io.zero.epic.fn.Fn;
 
 import java.io.Serializable;
 import java.util.HashMap;

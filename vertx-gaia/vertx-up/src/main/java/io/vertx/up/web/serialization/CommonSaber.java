@@ -1,8 +1,8 @@
 package io.vertx.up.web.serialization;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.Ut;
-import io.vertx.up.epic.fn.Fn;
+import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
 
 public class CommonSaber extends BaseSaber {
     @Override

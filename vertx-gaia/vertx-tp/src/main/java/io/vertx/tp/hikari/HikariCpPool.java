@@ -2,12 +2,12 @@ package io.vertx.tp.hikari;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.hikari.config.HikariCpConfig;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Instance;
 
 import java.sql.Connection;
 

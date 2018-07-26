@@ -1,8 +1,8 @@
 package io.vertx.up.kidd;
 
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.kidd.outcome.CodeReadible;
+import io.zero.epic.mirror.Instance;
 
 /**
  * Fill the field "readible" for input exception

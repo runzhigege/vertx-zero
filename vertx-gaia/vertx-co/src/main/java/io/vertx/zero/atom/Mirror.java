@@ -2,10 +2,9 @@ package io.vertx.zero.atom;
 
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.Ut;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.io.IO;
 import io.vertx.up.log.Annal;
+import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
 
 import java.text.MessageFormat;
 import java.util.concurrent.ConcurrentMap;
@@ -33,7 +32,7 @@ public class Mirror {
     public Mirror mount(final String filename) {
         // Build meta
         this.mojo = Fn.pool(Pool.MOJOS, filename, () -> {
-            final JsonObject data = IO.getYaml(MessageFormat.format(POJO, filename));
+            final JsonObject data = Ut.ioYaml(MessageFormat.format(POJO, filename));
             return Fn.getNull(() -> Ut.deserialize(data, Mojo.class), data);
         });
         return this;

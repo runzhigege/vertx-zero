@@ -1,7 +1,7 @@
 package io.vertx.up.web.serialization;
 
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.mirror.Instance;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Instance;
 
 /**
  * Enum

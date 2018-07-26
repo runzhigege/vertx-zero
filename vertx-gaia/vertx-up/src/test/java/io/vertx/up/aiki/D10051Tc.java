@@ -3,8 +3,8 @@ package io.vertx.up.aiki;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.quiz.TestBase;
-import io.vertx.up.epic.Ut;
+import io.zero.epic.Ut;
+import io.zero.quiz.TestBase;
 import org.junit.Assert;
 import org.junit.Test;
 

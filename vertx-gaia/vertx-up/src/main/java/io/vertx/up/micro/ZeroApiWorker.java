@@ -9,11 +9,11 @@ import io.vertx.servicediscovery.ServiceDiscovery;
 import io.vertx.up.annotations.Worker;
 import io.vertx.up.concurrent.Runner;
 import io.vertx.up.eon.em.MessageModel;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.discovery.ApiOrigin;
 import io.vertx.up.micro.discovery.Origin;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Instance;
 
 import java.text.MessageFormat;
 import java.util.HashSet;

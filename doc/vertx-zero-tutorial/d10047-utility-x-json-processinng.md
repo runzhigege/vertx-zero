@@ -76,8 +76,8 @@ This chapter focus on `toJson(T)` method for conversion between Data Object and 
 package io.vertx.up.aiki;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.quiz.TestBase;
-import io.vertx.up.epic.Jackson;
+import io.zero.quiz.TestBase;
+import io.zero.epic.Jackson;
 import org.junit.Assert;
 import org.junit.Test;
 

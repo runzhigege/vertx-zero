@@ -14,9 +14,9 @@ import io.vertx.ext.auth.jwt.impl.JWTUser;
 import io.vertx.ext.jwt.JWT;
 import io.vertx.ext.jwt.JWTOptions;
 import io.vertx.up.aiki.Ux;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.exception.*;
 import io.vertx.up.log.Annal;
+import io.zero.epic.fn.Fn;
 
 import java.util.Collections;
 import java.util.function.Function;

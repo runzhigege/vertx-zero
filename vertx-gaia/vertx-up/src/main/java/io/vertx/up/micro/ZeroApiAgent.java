@@ -6,8 +6,6 @@ import io.vertx.core.http.HttpServerOptions;
 import io.vertx.ext.web.Router;
 import io.vertx.up.annotations.Agent;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Axis;
 import io.vertx.up.rs.router.PointAxis;
@@ -16,6 +14,8 @@ import io.vertx.up.rs.router.WallAxis;
 import io.vertx.zero.config.ServerVisitor;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.micro.config.DynamicVisitor;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Instance;
 
 import java.text.MessageFormat;
 import java.util.concurrent.ConcurrentHashMap;

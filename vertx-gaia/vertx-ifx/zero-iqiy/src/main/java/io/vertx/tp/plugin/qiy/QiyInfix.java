@@ -2,8 +2,8 @@ package io.vertx.tp.plugin.qiy;
 
 import io.vertx.core.Vertx;
 import io.vertx.up.annotations.Plugin;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.plugin.Infix;
+import io.zero.epic.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

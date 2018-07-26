@@ -2,7 +2,7 @@ package io.vertx.zero.marshal.node;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.TestContext;
-import io.vertx.quiz.ZeroBase;
+import io.zero.quiz.ZeroBase;
 import io.vertx.up.eon.Plugins;
 import org.junit.Test;
 

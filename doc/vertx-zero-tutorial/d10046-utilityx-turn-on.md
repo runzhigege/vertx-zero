@@ -31,7 +31,7 @@ Then create test case `D10046FirstTc`in your junit folders, in zero system all t
 package io.vertx.up.aiki;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.quiz.TestBase;
+import io.zero.quiz.TestBase;
 import org.junit.Assert;
 import org.junit.Test;
 

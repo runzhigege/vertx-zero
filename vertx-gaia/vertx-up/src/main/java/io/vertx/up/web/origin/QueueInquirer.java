@@ -5,9 +5,9 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.eon.Info;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.WorkerConflictException;
+import io.zero.epic.fn.Fn;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;

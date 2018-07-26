@@ -2,11 +2,11 @@ package io.vertx.up.web;
 
 import io.vertx.up.annotations.Agent;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.AgentDuplicatedException;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Instance;
 
 import javax.ws.rs.Path;
 import java.lang.annotation.Annotation;

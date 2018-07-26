@@ -3,12 +3,12 @@ package io.vertx.up.web.limit;
 import io.vertx.tp.etcd.center.EtcdData;
 import io.vertx.up.boot.Motor;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ZeroHttpAgent;
 import io.vertx.up.micro.ZeroRpcAgent;
 import io.vertx.up.micro.ZeroSockAgent;
 import io.vertx.zero.exception.RpcPreparingException;
+import io.zero.epic.fn.Fn;
 
 import java.util.HashSet;
 import java.util.Set;

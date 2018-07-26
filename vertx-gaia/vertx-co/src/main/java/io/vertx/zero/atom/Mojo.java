@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.ClassDeserializer;
 import com.fasterxml.jackson.databind.ClassSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
+import io.zero.epic.fn.Fn;
 
 import java.io.Serializable;
 import java.util.Objects;
