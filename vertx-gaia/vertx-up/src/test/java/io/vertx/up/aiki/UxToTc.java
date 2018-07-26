@@ -2,8 +2,8 @@ package io.vertx.up.aiki;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.TestContext;
-import io.vertx.quiz.StoreBase;
-import io.vertx.up.epic.Ut;
+import io.zero.epic.Ut;
+import io.zero.quiz.StoreBase;
 import org.junit.Test;
 
 import java.time.LocalDateTime;

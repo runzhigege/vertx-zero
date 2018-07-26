@@ -1,7 +1,7 @@
 package io.vertx.up.web;
 
 import io.vertx.ext.unit.TestContext;
-import io.vertx.quiz.ZeroBase;
+import io.zero.quiz.ZeroBase;
 import org.junit.Test;
 
 public class ZeroRxTc extends ZeroBase {

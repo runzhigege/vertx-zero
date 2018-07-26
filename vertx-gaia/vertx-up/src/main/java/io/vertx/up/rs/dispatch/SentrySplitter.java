@@ -3,7 +3,7 @@ package io.vertx.up.rs.dispatch;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.agent.Depot;
 import io.vertx.up.rs.Sentry;
-import io.vertx.up.epic.mirror.Instance;
+import io.zero.epic.mirror.Instance;
 
 /**
  * Validation for request based on JSR303 Bean Validation

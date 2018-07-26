@@ -2,10 +2,10 @@ package io.vertx.zero.marshal.reliable;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.Ut;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.demon.ForbiddenFieldException;
+import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
 
 public class ForbiddenInsurer extends AbstractInsurer {
     /**

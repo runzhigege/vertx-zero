@@ -68,7 +68,7 @@ package com.tlk.micro.comment;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.aiki.Ux;
-import io.vertx.up.epic.fn.Fn;
+import io.zero.epic.fn.Fn;
 
 public class IrCommentActor implements IrCommentApi {
 

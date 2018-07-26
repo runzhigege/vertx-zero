@@ -3,9 +3,9 @@ package io.vertx.zero.marshal.node;
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.io.IO;
-import io.vertx.up.epic.mirror.Instance;
+import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Instance;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -29,7 +29,7 @@ public class ZeroUniform implements Node<JsonObject> {
                 .filter(item -> !skipped.contains(item))
                 .map(key -> Fn.pool(Storage.CONFIG, keys.get(key),
                         () -> Fn.getJvm(new JsonObject(),
-                                () -> IO.getYaml(keys.get(key)),
+                                () -> Ut.ioYaml(keys.get(key)),
                                 keys.get(key))))
                 .filter(Objects::nonNull)
                 .subscribe(item -> data.mergeIn(item, true));

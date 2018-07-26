@@ -1,6 +1,6 @@
 package io.vertx.tp.etcd.center;
 
-import io.vertx.quiz.TestBase;
+import io.zero.quiz.TestBase;
 
 public class EtcdDataTc extends TestBase {
 

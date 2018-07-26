@@ -1,10 +1,10 @@
 package io.vertx.up.kidd.outcome;
 
 import io.vertx.up.atom.Envelop;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Instance;
 
 import java.util.function.Supplier;
 

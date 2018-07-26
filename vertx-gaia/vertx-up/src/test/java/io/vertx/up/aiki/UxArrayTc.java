@@ -2,7 +2,7 @@ package io.vertx.up.aiki;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.quiz.StoreBase;
+import io.zero.quiz.StoreBase;
 import org.junit.Assert;
 import org.junit.Test;
 

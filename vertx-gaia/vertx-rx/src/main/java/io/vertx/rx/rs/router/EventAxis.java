@@ -7,8 +7,6 @@ import io.vertx.rx.micro.ZeroRxEndurer;
 import io.vertx.rx.rs.dispatch.StandardVerifier;
 import io.vertx.up.atom.agent.Depot;
 import io.vertx.up.atom.agent.Event;
-import io.vertx.up.epic.fn.Fn;
-import io.vertx.up.epic.mirror.Instance;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Aim;
 import io.vertx.up.rs.Axis;
@@ -17,6 +15,8 @@ import io.vertx.up.rs.dispatch.ModeSplitter;
 import io.vertx.up.rs.router.Hub;
 import io.vertx.up.rs.router.Verifier;
 import io.vertx.up.web.ZeroAnno;
+import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Instance;
 
 import java.util.Set;
 

@@ -1,8 +1,8 @@
 package io.vertx.up.web.serialization;
 
 import io.vertx.core.buffer.Buffer;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.zero.eon.Values;
+import io.zero.epic.fn.Fn;
 
 /**
  * Buffer

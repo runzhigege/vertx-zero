@@ -2,10 +2,10 @@ package io.vertx.up.exception;
 
 import io.vertx.core.http.HttpStatusCode;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.Ut;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.exception.ZeroRunException;
 import io.vertx.zero.log.Errors;
+import io.zero.epic.Ut;
 
 /**
  *

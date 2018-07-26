@@ -3,11 +3,11 @@ package io.vertx.up.plugin.jwt;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.eon.em.WallType;
-import io.vertx.up.epic.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.mongo.MongoWall;
 import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.marshal.Transformer;
+import io.zero.epic.fn.Fn;
 
 public class JwtWall implements Transformer<Cliff> {
 
