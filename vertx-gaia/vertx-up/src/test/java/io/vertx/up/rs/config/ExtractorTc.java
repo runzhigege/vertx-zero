@@ -2,13 +2,13 @@ package io.vertx.up.rs.config;
 
 import io.vertx.core.DeploymentOptions;
 import io.vertx.ext.unit.TestContext;
-import io.zero.quiz.UpBase;
 import io.vertx.quiz.example.User;
 import io.vertx.up.eon.ZeroValue;
 import io.vertx.up.micro.ZeroHttpAgent;
 import io.vertx.up.rs.Extractor;
 import io.vertx.zero.exception.EventSourceException;
 import io.zero.epic.Ut;
+import io.zero.quiz.UpBase;
 import org.junit.Test;
 
 public class ExtractorTc extends UpBase {

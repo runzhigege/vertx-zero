@@ -1,10 +1,10 @@
 package io.vertx.up.web.origin;
 
-import io.zero.quiz.ScanBase;
 import io.vertx.quiz.example.WallKeeper2;
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.zero.exception.WallDuplicatedException;
 import io.zero.epic.Ut;
+import io.zero.quiz.ScanBase;
 import org.junit.Test;
 
 import java.util.Set;

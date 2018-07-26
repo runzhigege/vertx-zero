@@ -1,9 +1,9 @@
 package up.god.apollo.exp1;
 
 import io.vertx.ext.web.Session;
-import io.zero.quiz.Params;
 import io.vertx.up.annotations.EndPoint;
 import io.vertx.up.annotations.SessionData;
+import io.zero.quiz.Params;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.GET;
