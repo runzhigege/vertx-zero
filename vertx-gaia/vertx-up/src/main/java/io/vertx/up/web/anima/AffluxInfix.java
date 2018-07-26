@@ -8,8 +8,8 @@ import io.vertx.up.web.ZeroAmbient;
 import io.vertx.zero.exception.InjectionLimeKeyException;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -51,18 +51,18 @@ class AffluxInfix {
         final Class<?> infixCls = ZeroAmbient.getPlugin(pluginKey);
         Object ret = null;
         if (null != infixCls) {
-            if (Instance.isMatch(infixCls, Infix.class)) {
+            if (Ut.isImplement(infixCls, Infix.class)) {
                 // Config checking
-                final Node<JsonObject> node = Instance.instance(ZeroUniform.class);
+                final Node<JsonObject> node = Ut.instance(ZeroUniform.class);
                 final JsonObject options = node.read();
 
                 Fn.outUp(!options.containsKey(pluginKey), this.logger,
                         InjectionLimeKeyException.class,
                         this.clazz, infixCls, pluginKey);
 
-                final Infix reference = Instance.singleton(infixCls);
+                final Infix reference = Ut.singleton(infixCls);
 
-                ret = Instance.invoke(reference, "get");
+                ret = Ut.invoke(reference, "get");
             } else {
                 this.logger.warn(Info.INFIX_IMPL, infixCls.getName(), Infix.class.getName());
             }

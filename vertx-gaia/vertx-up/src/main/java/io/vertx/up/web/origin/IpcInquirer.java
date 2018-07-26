@@ -8,7 +8,6 @@ import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.*;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -45,7 +44,7 @@ public class IpcInquirer implements Inquirer<ConcurrentMap<String, Method>> {
                 .map(method -> this.ensureAgent(method, classes))
                 .subscribe(method -> {
                     final Annotation annotation = method.getAnnotation(Ipc.class);
-                    final String address = Instance.invoke(annotation, "value");
+                    final String address = Ut.invoke(annotation, "value");
                     addresses.put(address, method);
                 });
         return addresses;
@@ -62,7 +61,7 @@ public class IpcInquirer implements Inquirer<ConcurrentMap<String, Method>> {
                 IpcMethodReturnException.class, this.getClass(),
                 method);
         final Annotation annotation = method.getAnnotation(Ipc.class);
-        final String value = Instance.invoke(annotation, "value");
+        final String value = Ut.invoke(annotation, "value");
         if (!Ut.isNil(value)) {
             // Arguments specification: Non Start Node
             // This specification is only for continue node
@@ -103,11 +102,11 @@ public class IpcInquirer implements Inquirer<ConcurrentMap<String, Method>> {
      */
     private Method ensureTarget(final Method method) {
         final Annotation annotation = method.getAnnotation(Ipc.class);
-        final String to = Instance.invoke(annotation, "to");
-        final String name = Instance.invoke(annotation, "name");
+        final String to = Ut.invoke(annotation, "to");
+        final String name = Ut.invoke(annotation, "name");
         if (Ut.isNil(to) && Ut.isNil(name)) {
             // If ( to is null and name is null, value must be required, or the system do not know the direction
-            final String from = Instance.invoke(annotation, "value");
+            final String from = Ut.invoke(annotation, "value");
             Fn.outUp(Ut.isNil(from), LOGGER,
                     UnknownDirectionException.class, this.getClass(),
                     method);

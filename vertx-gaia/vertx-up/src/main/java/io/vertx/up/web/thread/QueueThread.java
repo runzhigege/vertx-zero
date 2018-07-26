@@ -4,7 +4,7 @@ import io.vertx.up.atom.worker.Receipt;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
 import io.vertx.up.rs.config.ReceiptExtractor;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +16,7 @@ public class QueueThread extends Thread {
     private final Set<Receipt> receipts = new HashSet<>();
 
     private final transient Extractor<Set<Receipt>> extractor =
-            Instance.instance(ReceiptExtractor.class);
+            Ut.instance(ReceiptExtractor.class);
 
     private final transient Class<?> reference;
 

@@ -7,8 +7,8 @@ import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._400DuplicatedRecordException;
 import io.vertx.up.exception._404RecordNotFoundException;
 import io.vertx.zero.eon.Values;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +26,9 @@ public class ListObstain<T> extends Obstain<List<T>> {
 
     @Override
     public ListObstain<T> unique() {
-        final WebException error404 = Instance.instance(
+        final WebException error404 = Ut.instance(
                 _404RecordNotFoundException.class, this.clazz);
-        final WebException error400 = Instance.instance(
+        final WebException error400 = Ut.instance(
                 _400DuplicatedRecordException.class, this.clazz);
         return this.unique(error404, error400);
     }

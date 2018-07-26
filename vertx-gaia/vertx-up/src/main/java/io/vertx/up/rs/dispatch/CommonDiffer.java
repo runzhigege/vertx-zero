@@ -5,8 +5,8 @@ import io.vertx.up.atom.agent.Event;
 import io.vertx.up.rs.Aim;
 import io.vertx.up.rs.hunt.PingAim;
 import io.vertx.up.rs.hunt.SyncAim;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.reflect.Method;
 
@@ -41,11 +41,11 @@ class CommonDiffer implements Differ<RoutingContext> {
         if (Void.class == returnType || void.class == returnType) {
             // Mode 4: Non-Event Bus: One-Way
             aim = Fn.pool(Pool.AIMS, Thread.currentThread().getName() + "-mode-ping",
-                    () -> Instance.instance(PingAim.class));
+                    () -> Ut.instance(PingAim.class));
         } else {
             // Mode 2: Non-Event Bus: Request-Response\
             aim = Fn.pool(Pool.AIMS, Thread.currentThread().getName() + "-mode-sync",
-                    () -> Instance.instance(SyncAim.class));
+                    () -> Ut.instance(SyncAim.class));
         }
         return aim;
     }

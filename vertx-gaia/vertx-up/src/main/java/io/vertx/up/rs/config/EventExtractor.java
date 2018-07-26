@@ -16,7 +16,6 @@ import io.vertx.zero.exception.EventSourceException;
 import io.vertx.zero.exception.NoArgConstructorException;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import javax.ws.rs.Path;
 import java.lang.annotation.Annotation;
@@ -60,7 +59,7 @@ public class EventExtractor implements Extractor<Set<Event>> {
         // Check basic specification: No Arg Constructor
         if (!clazz.isInterface()) {
             // Class direct.
-            Fn.outUp(!Instance.noarg(clazz), LOGGER,
+            Fn.outUp(!Ut.withNoArgConstructor(clazz), LOGGER,
                     NoArgConstructorException.class,
                     this.getClass(), clazz);
         }
@@ -138,9 +137,9 @@ public class EventExtractor implements Extractor<Set<Event>> {
         final Class<?> clazz = method.getDeclaringClass();
         final Object proxy;
         if (clazz.isInterface()) {
-            final Class<?> implClass = Instance.uniqueChild(clazz);
+            final Class<?> implClass = Ut.childUnique(clazz);
             if (null != implClass) {
-                proxy = Instance.singleton(implClass);
+                proxy = Ut.singleton(implClass);
             } else {
                 /**
                  * SPEC5: Interface only, direct api, in this situation,
@@ -151,7 +150,7 @@ public class EventExtractor implements Extractor<Set<Event>> {
                 proxy = Virtual.create();
             }
         } else {
-            proxy = Instance.singleton(method.getDeclaringClass());
+            proxy = Ut.singleton(method.getDeclaringClass());
         }
         event.setProxy(proxy);
         System.out.println(proxy);

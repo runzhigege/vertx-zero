@@ -15,7 +15,6 @@ import io.vertx.zero.marshal.Transformer;
 import io.vertx.zero.marshal.node.Node;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -27,7 +26,7 @@ import java.util.concurrent.ConcurrentMap;
 public class HttpServerVisitor implements ServerVisitor<HttpServerOptions> {
 
     protected transient final Transformer<HttpServerOptions>
-            transformer = Instance.singleton(HttpServerStrada.class);
+            transformer = Ut.singleton(HttpServerStrada.class);
     private transient final Node<JsonObject> NODE = Node.infix(Plugins.SERVER);
 
     /**

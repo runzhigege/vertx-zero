@@ -10,7 +10,6 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
 import io.zero.epic.Ut;
-import io.zero.epic.mirror.Instance;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -219,7 +218,7 @@ class Fluctuate {
                     future.complete();
                 } else {
                     // Error existing
-                    final WebException error = Instance.instance(clazz, args);
+                    final WebException error = Ut.instance(clazz, args);
                     future.fail(error);
                 }
             }

@@ -4,8 +4,8 @@ import io.vertx.core.DeploymentOptions;
 import io.vertx.up.annotations.Worker;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.util.concurrent.ConcurrentHashMap;
@@ -30,9 +30,9 @@ public class WorkerExtractor implements Extractor<DeploymentOptions> {
     private DeploymentOptions transform(final Class<?> clazz) {
         final Annotation annotation = clazz.getDeclaredAnnotation(Worker.class);
         // 1. Instance
-        final int instances = Instance.invoke(annotation, Key.INSTANCES);
-        final boolean ha = Instance.invoke(annotation, Key.HA);
-        final String group = Instance.invoke(annotation, Key.GROUP);
+        final int instances = Ut.invoke(annotation, Key.INSTANCES);
+        final boolean ha = Ut.invoke(annotation, Key.HA);
+        final String group = Ut.invoke(annotation, Key.GROUP);
         // 2. Record Log information
         final DeploymentOptions options = new DeploymentOptions();
         options.setHa(ha);

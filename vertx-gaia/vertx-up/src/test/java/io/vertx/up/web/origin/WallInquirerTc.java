@@ -1,10 +1,10 @@
 package io.vertx.up.web.origin;
 
-import io.vertx.quiz.ScanBase;
 import io.vertx.quiz.example.WallKeeper2;
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.zero.exception.WallDuplicatedException;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
+import io.zero.quiz.ScanBase;
 import org.junit.Test;
 
 import java.util.Set;
@@ -12,7 +12,7 @@ import java.util.Set;
 public class WallInquirerTc extends ScanBase {
 
     private final Inquirer<Set<Cliff>> walls =
-            Instance.singleton(WallInquirer.class);
+            Ut.singleton(WallInquirer.class);
 
     @Test(expected = WallDuplicatedException.class)
     public void testScan() {

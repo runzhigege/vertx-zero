@@ -5,12 +5,11 @@ import io.vertx.zero.atom.Mirror;
 import io.vertx.zero.atom.Mojo;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 class From {
 
     static <T> T fromJson(final JsonObject data, final Class<T> clazz, final String pojo) {
-        return Fn.getNull(Instance.instance(clazz), () -> Fn.getSemi(Ut.isNil(pojo), null,
+        return Fn.getNull(Ut.instance(clazz), () -> Fn.getSemi(Ut.isNil(pojo), null,
                 () -> Ut.deserialize(data, clazz),
                 () -> Mirror.create(From.class)
                         .mount(pojo)

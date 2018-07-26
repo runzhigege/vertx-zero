@@ -12,6 +12,7 @@ import io.zero.epic.fn.ZeroBiConsumer;
 
 import java.io.File;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -25,6 +26,59 @@ import java.util.function.*;
  * Uniform Tool
  */
 public class Ut {
+    // --- Reflection
+    public static <T> T instance(final String name, final Object... params) {
+        return Instance.instance(clazz(name), params);
+    }
+
+    public static <T> T instance(final Class<?> clazz, final Object... params) {
+        return Instance.instance(clazz, params);
+    }
+
+    public static <T> T singleton(final String name, final Object... params) {
+        return Instance.singleton(clazz(name), params);
+    }
+
+    public static <T> T singleton(final Class<?> clazz, final Object... params) {
+        return Instance.singleton(clazz, params);
+    }
+
+    public static <T> T invoke(final Object instance, final String name, final Object... args) {
+        return Instance.invoke(instance, name, args);
+    }
+
+    public static <T> T invoke(final Class<?> interfaceCls, final String name, final Object... args) {
+        return Instance.invoke(interfaceCls, name, args);
+    }
+
+    public static Class<?> clazz(final String name) {
+        return Instance.clazz(name);
+    }
+
+    public static boolean isImplement(final Class<?> clazz, final Class<?> interfaceCls) {
+        return Instance.isMatch(clazz, interfaceCls);
+    }
+
+    public static <T> T proxy(final Method method) {
+        return Instance.getProxy(method);
+    }
+
+    public static <T> void set(final Object instance, final String name, final T value) {
+        Instance.set(instance, name, value);
+    }
+
+    public static <T> T get(final Object instance, final String name) {
+        return Instance.get(instance, name);
+    }
+
+    public static boolean withNoArgConstructor(final Class<?> clazz) {
+        return Instance.noarg(clazz);
+    }
+
+    public static Class<?> childUnique(final Class<?> clazz) {
+        return Instance.uniqueChild(clazz);
+    }
+
     // --- IO
     public static <T> T ioYaml(final String filename) {
         return IO.getYaml(filename);

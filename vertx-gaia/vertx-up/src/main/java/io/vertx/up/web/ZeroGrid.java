@@ -10,8 +10,8 @@ import io.vertx.up.log.Annal;
 import io.vertx.zero.config.NodeVisitor;
 import io.vertx.zero.config.ServerVisitor;
 import io.vertx.zero.micro.config.*;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -42,7 +42,7 @@ public class ZeroGrid {
             // Visit Vertx
             if (VX_OPTS.isEmpty() || null == CLUSTER) {
                 final NodeVisitor visitor =
-                        Instance.singleton(VertxVisitor.class);
+                        Ut.singleton(VertxVisitor.class);
                 VX_OPTS.putAll(visitor.visit());
                 // Must after visit
                 CLUSTER = visitor.getCluster();
@@ -50,31 +50,31 @@ public class ZeroGrid {
             // Init for HttpServerOptions
             if (SERVER_OPTS.isEmpty()) {
                 final ServerVisitor<HttpServerOptions> visitor =
-                        Instance.singleton(HttpServerVisitor.class);
+                        Ut.singleton(HttpServerVisitor.class);
                 SERVER_OPTS.putAll(visitor.visit());
                 // Secondary
                 if (SERVER_NAMES.isEmpty()) {
                     final ServerVisitor<String> VISITOR =
-                            Instance.singleton(NamesVisitor.class);
+                            Ut.singleton(NamesVisitor.class);
                     SERVER_NAMES.putAll(VISITOR.visit(ServerType.HTTP.toString()));
                 }
             }
             // Init for RxServerOptions
             if (RX_OPTS.isEmpty()) {
                 final ServerVisitor<HttpServerOptions> visitor =
-                        Instance.singleton(RxServerVisitor.class);
+                        Ut.singleton(RxServerVisitor.class);
                 RX_OPTS.putAll(visitor.visit());
             }
             // Init for RpxServerOptions
             if (RPC_OPTS.isEmpty()) {
                 final ServerVisitor<ServidorOptions> visitor =
-                        Instance.singleton(RpcServerVisitor.class);
+                        Ut.singleton(RpcServerVisitor.class);
                 RPC_OPTS.putAll(visitor.visit());
             }
             // Init for SockServerOptions
             if (SOCK_OPTS.isEmpty()) {
                 final ServerVisitor<HttpServerOptions> visitor =
-                        Instance.singleton(SockServerVisitor.class);
+                        Ut.singleton(SockServerVisitor.class);
                 SOCK_OPTS.putAll(visitor.visit());
             }
             // Init for all plugin options.

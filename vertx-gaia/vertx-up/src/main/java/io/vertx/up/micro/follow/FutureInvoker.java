@@ -7,7 +7,7 @@ import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ipc.client.TunnelClient;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 
 import java.lang.reflect.Method;
 
@@ -40,10 +40,10 @@ public class FutureInvoker implements Invoker {
         final Class<?> tCls = returnType.getComponentType();
         LOGGER.info(Info.MSG_FUTURE, this.getClass(), returnType, false);
         if (Envelop.class == tCls) {
-            final Future<Envelop> result = Instance.invoke(proxy, method.getName(), envelop);
+            final Future<Envelop> result = Ut.invoke(proxy, method.getName(), envelop);
             result.setHandler(item -> message.reply(item.result()));
         } else {
-            final Future tResult = Instance.invoke(proxy, method.getName(), envelop);
+            final Future tResult = Ut.invoke(proxy, method.getName(), envelop);
             tResult.setHandler(Ux.toHandler(message));
         }
     }
@@ -63,14 +63,14 @@ public class FutureInvoker implements Invoker {
         LOGGER.info(Info.MSG_FUTURE, this.getClass(), returnType, true);
         if (Envelop.class == tCls) {
             // Execute Future<Envelop>
-            final Future<Envelop> future = Instance.invoke(proxy, method.getName(), envelop);
+            final Future<Envelop> future = Ut.invoke(proxy, method.getName(), envelop);
             future.compose(item -> TunnelClient.create(this.getClass())
                     .connect(vertx)
                     .connect(method)
                     .send(item))
                     .setHandler(Ux.toHandler(message));
         } else {
-            final Future future = Instance.invoke(proxy, method.getName(), envelop);
+            final Future future = Ut.invoke(proxy, method.getName(), envelop);
             future.compose(item -> TunnelClient.create(this.getClass())
                     .connect(vertx)
                     .connect(method)

@@ -7,7 +7,7 @@ import io.vertx.ext.unit.junit.VertxUnitRunner;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.log.Log;
 import io.vertx.zero.marshal.reliable.Insurer;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
 
@@ -20,7 +20,7 @@ public abstract class ZeroBase extends TestBase {
                        final JsonObject data, final JsonObject rule)
             throws ZeroException {
         final Insurer insurer
-                = Instance.singleton(insurerCls);
+                = Ut.singleton(insurerCls);
         Log.info(this.getLogger(), "[TEST] Input data ( Object ): {0}", data);
         Log.info(this.getLogger(), "[TEST] Rule data: {0}", rule);
         insurer.flumen(data, rule);
@@ -30,7 +30,7 @@ public abstract class ZeroBase extends TestBase {
                        final JsonArray array, final JsonObject rule)
             throws ZeroException {
         final Insurer insurer
-                = Instance.singleton(insurerCls);
+                = Ut.singleton(insurerCls);
         Log.info(this.getLogger(), "[TEST] Input data ( Array ): {0}", array);
         Log.info(this.getLogger(), "[TEST] Rule data: {0}", rule);
         insurer.flumen(array, rule);

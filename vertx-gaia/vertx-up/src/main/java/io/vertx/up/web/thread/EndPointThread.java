@@ -4,7 +4,7 @@ import io.vertx.up.atom.agent.Event;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
 import io.vertx.up.rs.config.EventExtractor;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +16,7 @@ public class EndPointThread extends Thread {
     private final Set<Event> events = new HashSet<>();
 
     private final transient Extractor<Set<Event>> extractor =
-            Instance.instance(EventExtractor.class);
+            Ut.instance(EventExtractor.class);
 
     private final transient Class<?> reference;
 

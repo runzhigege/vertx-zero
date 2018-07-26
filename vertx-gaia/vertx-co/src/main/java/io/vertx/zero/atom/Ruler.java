@@ -11,7 +11,6 @@ import io.vertx.zero.marshal.reliable.RequiredInsurer;
 import io.vertx.zero.marshal.reliable.TypedInsurer;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.text.MessageFormat;
 import java.util.concurrent.ConcurrentHashMap;
@@ -106,24 +105,24 @@ public class Ruler {
             if (Ut.isJArray(input)) {
                 final JsonArray data = (JsonArray) input;
                 // Required
-                Insurer reference = Instance.singleton(RequiredInsurer.class);
+                Insurer reference = Ut.singleton(RequiredInsurer.class);
                 reference.flumen(data, rule);
                 // Typed
-                reference = Instance.singleton(TypedInsurer.class);
+                reference = Ut.singleton(TypedInsurer.class);
                 reference.flumen(data, rule);
                 // Forbidden
-                reference = Instance.singleton(ForbiddenInsurer.class);
+                reference = Ut.singleton(ForbiddenInsurer.class);
                 reference.flumen(data, rule);
             } else {
                 final JsonObject data = (JsonObject) input;
                 // Required
-                Insurer reference = Instance.singleton(RequiredInsurer.class);
+                Insurer reference = Ut.singleton(RequiredInsurer.class);
                 reference.flumen(data, rule);
                 // Typed
-                reference = Instance.singleton(TypedInsurer.class);
+                reference = Ut.singleton(TypedInsurer.class);
                 reference.flumen(data, rule);
                 // Forbidden
-                reference = Instance.singleton(ForbiddenInsurer.class);
+                reference = Ut.singleton(ForbiddenInsurer.class);
                 reference.flumen(data, rule);
             }
         }, input, rule);

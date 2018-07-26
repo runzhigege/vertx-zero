@@ -12,8 +12,8 @@ import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.FilterInitialException;
 import io.vertx.zero.exception.FilterOrderException;
 import io.vertx.zero.exception.FilterSpecificationException;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import javax.servlet.annotation.WebFilter;
 import java.lang.annotation.Annotation;
@@ -53,7 +53,7 @@ public class FilterInquirer implements Inquirer<ConcurrentMap<String, Set<Event>
     private void extract(final ConcurrentMap<String, Set<Event>> map,
                          final Class<?> clazz) {
         final Annotation annotation = clazz.getAnnotation(WebFilter.class);
-        final String[] pathes = Instance.invoke(annotation, "value");
+        final String[] pathes = Ut.invoke(annotation, "value");
         // Multi pathes supported
         for (final String path : pathes) {
             final Event event = this.extract(path, clazz);
@@ -76,7 +76,7 @@ public class FilterInquirer implements Inquirer<ConcurrentMap<String, Set<Event>
         final Annotation annotation = clazz.getAnnotation(Ordered.class);
         int order = Orders.FILTER;
         if (null != annotation) {
-            final Integer setted = Instance.invoke(annotation, "value");
+            final Integer setted = Ut.invoke(annotation, "value");
             // Order specification
             Fn.outUp(setted < 0, LOGGER,
                     FilterOrderException.class, this.getClass(), clazz);
@@ -84,7 +84,7 @@ public class FilterInquirer implements Inquirer<ConcurrentMap<String, Set<Event>
         }
         event.setOrder(order);
         // Proxy
-        final Object proxy = Instance.singleton(clazz);
+        final Object proxy = Ut.singleton(clazz);
         Fn.outUp(null == proxy, LOGGER,
                 FilterInitialException.class, this.getClass(), clazz);
         event.setProxy(proxy);

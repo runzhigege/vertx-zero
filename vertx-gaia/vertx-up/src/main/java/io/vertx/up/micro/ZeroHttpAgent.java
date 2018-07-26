@@ -22,7 +22,6 @@ import io.vertx.up.web.ZeroGrid;
 import io.vertx.zero.eon.Values;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.text.MessageFormat;
 import java.util.*;
@@ -46,16 +45,16 @@ public class ZeroHttpAgent extends AbstractVerticle {
     public void start() {
         /** 1.Call router hub to mount commont **/
         final Axis<Router> routerAxiser = Fn.poolThread(Pool.ROUTERS,
-                () -> Instance.instance(RouterAxis.class));
+                () -> Ut.instance(RouterAxis.class));
         /** 2.Call route hub to mount defined **/
         final Axis<Router> axiser = Fn.poolThread(Pool.EVENTS,
-                () -> Instance.instance(EventAxis.class));
+                () -> Ut.instance(EventAxis.class));
         /** 3.Call route hub to mount walls **/
         final Axis<Router> wallAxiser = Fn.poolThread(Pool.WALLS,
-                () -> Instance.instance(WallAxis.class, this.vertx));
+                () -> Ut.instance(WallAxis.class, this.vertx));
         /** 4.Call route hub to mount filters **/
         final Axis<Router> filterAxiser = Fn.poolThread(Pool.FILTERS,
-                () -> Instance.instance(FilterAxis.class));
+                () -> Ut.instance(FilterAxis.class));
         /** 5.Get the default HttpServer Options **/
         ZeroAtomic.HTTP_OPTS.forEach((port, option) -> {
             /** 5.1.Single server processing **/

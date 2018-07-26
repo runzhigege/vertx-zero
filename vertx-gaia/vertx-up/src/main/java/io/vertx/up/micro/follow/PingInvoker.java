@@ -4,7 +4,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.exception._501RpcRejectException;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 
 import java.lang.reflect.Method;
 
@@ -27,7 +27,7 @@ public class PingInvoker implements Invoker {
                        final Message<Envelop> message) {
         // Invoke directly
         final Envelop envelop = message.body();
-        Instance.invoke(proxy, method.getName(), envelop);
+        Ut.invoke(proxy, method.getName(), envelop);
         message.reply(Envelop.success(Boolean.TRUE));
     }
 

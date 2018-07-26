@@ -18,7 +18,6 @@ import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -64,7 +63,7 @@ class UxJwt {
     }
 
     private static JsonObject readOptions() {
-        final Node<JsonObject> node = Instance.instance(ZeroUniform.class);
+        final Node<JsonObject> node = Ut.instance(ZeroUniform.class);
         final JsonObject options = node.read();
         // Extract data from "secure"
         final JsonObject secure = Fn.getNull(() -> options.getJsonObject(Plugins.Infix.SECURE), options);
