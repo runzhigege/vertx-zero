@@ -16,9 +16,9 @@ import io.vertx.zero.exception.MicroModeUpException;
 import io.vertx.zero.exception.UpClassArgsException;
 import io.vertx.zero.exception.UpClassInvalidException;
 import io.vertx.zero.micro.config.DynamicVisitor;
+import io.vertx.zero.mirror.Anno;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Anno;
 
 import java.lang.annotation.Annotation;
 import java.util.HashSet;

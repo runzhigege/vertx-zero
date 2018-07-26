@@ -6,8 +6,8 @@ import io.vertx.up.rs.Filler;
 import io.vertx.zero.exception.AnnotationRepeatException;
 import io.vertx.zero.exception.EventActionNoneException;
 import io.vertx.zero.exception.ParamAnnotationException;
+import io.vertx.zero.mirror.Anno;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Anno;
 
 import javax.ws.rs.BodyParam;
 import javax.ws.rs.StreamParam;

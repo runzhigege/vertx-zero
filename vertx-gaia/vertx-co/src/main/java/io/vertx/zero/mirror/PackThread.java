@@ -1,4 +1,4 @@
-package io.zero.epic.mirror;
+package io.vertx.zero.mirror;
 
 import java.util.HashSet;
 import java.util.Set;

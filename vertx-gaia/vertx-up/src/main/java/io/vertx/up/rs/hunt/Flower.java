@@ -11,8 +11,8 @@ import io.vertx.up.exception.WebException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.announce.Rigor;
 import io.vertx.up.rs.validation.Validator;
+import io.vertx.zero.mirror.Anno;
 import io.zero.epic.container.KeyPair;
-import io.zero.epic.mirror.Anno;
 
 import java.lang.reflect.Method;
 import java.util.List;
