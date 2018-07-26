@@ -1,4 +1,4 @@
-package io.zero.epic.mirror;
+package io.zero.epic;
 
 import io.vertx.ext.unit.TestContext;
 import io.zero.quiz.ZeroBase;
@@ -12,6 +12,6 @@ public class ProxyTc extends ZeroBase {
     @Test
     public void testInvoke(final TestContext context) {
         final Object proxy = Fantam.getProxy(Hello.class);
-        Instance.invoke(proxy, "sayHello");
+        Ut.invoke(proxy, "sayHello");
     }
 }

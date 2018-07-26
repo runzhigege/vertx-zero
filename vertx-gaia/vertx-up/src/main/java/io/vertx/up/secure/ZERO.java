@@ -5,7 +5,7 @@ import io.vertx.up.eon.em.WallType;
 import io.vertx.up.plugin.jwt.JwtWall;
 import io.vertx.up.plugin.mongo.MongoWall;
 import io.vertx.zero.marshal.Transformer;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -19,8 +19,8 @@ interface Pool {
     ConcurrentMap<WallType, Transformer<Cliff>>
             WALL_TRANSFORMER = new ConcurrentHashMap<WallType, Transformer<Cliff>>() {
         {
-            this.put(WallType.MONGO, Instance.singleton(MongoWall.class));
-            this.put(WallType.JWT, Instance.singleton(JwtWall.class));
+            this.put(WallType.MONGO, Ut.singleton(MongoWall.class));
+            this.put(WallType.JWT, Ut.singleton(JwtWall.class));
         }
     };
 }

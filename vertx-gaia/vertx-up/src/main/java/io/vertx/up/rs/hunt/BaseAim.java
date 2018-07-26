@@ -18,7 +18,6 @@ import io.vertx.up.media.MediaAnalyzer;
 import io.vertx.up.rs.validation.Validator;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -34,7 +33,7 @@ public abstract class BaseAim {
             Validator.create();
 
     private transient final Analyzer analyzer =
-            Instance.singleton(MediaAnalyzer.class);
+            Ut.singleton(MediaAnalyzer.class);
 
     /**
      * Template method
@@ -64,7 +63,7 @@ public abstract class BaseAim {
     protected String address(final Event event) {
         final Method method = event.getAction();
         final Annotation annotation = method.getDeclaredAnnotation(Address.class);
-        return Instance.invoke(annotation, "value");
+        return Ut.invoke(annotation, "value");
     }
 
     /**
@@ -76,7 +75,7 @@ public abstract class BaseAim {
         final Method method = event.getAction();
         this.getLogger().info("[ ZERO-DEBUG ] Method = {0}, Args = {1}",
                 method.getName(), Ut.fromJoin(args));
-        return Instance.invoke(event.getProxy(), method.getName(), args);
+        return Ut.invoke(event.getProxy(), method.getName(), args);
     }
 
     protected Envelop failure(final String address,

@@ -14,8 +14,8 @@ import io.vertx.up.rs.router.WallAxis;
 import io.vertx.zero.config.ServerVisitor;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.micro.config.DynamicVisitor;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.text.MessageFormat;
 import java.util.concurrent.ConcurrentHashMap;
@@ -33,7 +33,7 @@ public class ZeroApiAgent extends AbstractVerticle {
     private static final Annal LOGGER = Annal.get(ZeroApiAgent.class);
 
     private static final ServerVisitor<HttpServerOptions> VISITOR =
-            Instance.singleton(DynamicVisitor.class);
+            Ut.singleton(DynamicVisitor.class);
     private static final ConcurrentMap<Integer, AtomicInteger>
             API_START_LOGS = new ConcurrentHashMap<>();
 
@@ -52,17 +52,17 @@ public class ZeroApiAgent extends AbstractVerticle {
     public void start() {
         /** 1.Call router hub to mount commont **/
         final Axis<Router> routerAxiser = Fn.poolThread(Pool.ROUTERS,
-                () -> Instance.instance(RouterAxis.class));
+                () -> Ut.instance(RouterAxis.class));
         /** 2.Call route hub to mount walls **/
         final Axis<Router> wallAxiser = Fn.poolThread(Pool.WALLS,
-                () -> Instance.instance(WallAxis.class, this.vertx));
+                () -> Ut.instance(WallAxis.class, this.vertx));
         Fn.outUp(() -> {
 
             // Set breaker for each server
             ZeroAtomic.API_OPTS.forEach((port, option) -> {
                 /** Mount to api hub **/
                 final Axis<Router> axiser = Fn.poolThread(Pool.APIS,
-                        () -> Instance.instance(PointAxis.class, option, this.vertx));
+                        () -> Ut.instance(PointAxis.class, option, this.vertx));
                 /** Single server processing **/
                 final HttpServer server = this.vertx.createHttpServer(option);
                 /** Router **/

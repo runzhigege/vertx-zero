@@ -2,8 +2,8 @@ package io.vertx.up.rs.config;
 
 import io.reactivex.Observable;
 import io.vertx.up.log.Annal;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
@@ -57,7 +57,7 @@ class MediaResolver {
             return Fn.getSemi(null == anno, LOGGER,
                     () -> DEFAULTS,
                     () -> {
-                        final String[] value = Instance.invoke(anno, "value");
+                        final String[] value = Ut.invoke(anno, "value");
                         final Set<MediaType> result = new HashSet<>();
                         // RxJava 2
                         Observable.fromArray(value)

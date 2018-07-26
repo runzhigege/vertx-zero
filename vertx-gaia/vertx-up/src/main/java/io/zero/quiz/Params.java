@@ -1,16 +1,16 @@
-package io.vertx.quiz;
+package io.zero.quiz;
 
 public class Params {
 
     private transient final Class<?> executor;
 
-    public static Params start(final Class<?> executor) {
-        return new Params(executor);
-    }
-
     private Params(final Class<?> executor) {
         this.executor = executor;
         System.out.println("[Mok] Started ");
+    }
+
+    public static Params start(final Class<?> executor) {
+        return new Params(executor);
     }
 
     public Params monitor(final Object data) {

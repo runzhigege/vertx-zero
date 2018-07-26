@@ -15,7 +15,6 @@ import io.vertx.up.web.ZeroHelper;
 import io.vertx.zero.exception.VertxCallbackException;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +63,7 @@ public final class Motor {
 
     public static void codec(final EventBus eventBus) {
         eventBus.registerDefaultCodec(Envelop.class,
-                Instance.singleton(EnvelopCodec.class));
+                Ut.singleton(EnvelopCodec.class));
     }
 
     /**

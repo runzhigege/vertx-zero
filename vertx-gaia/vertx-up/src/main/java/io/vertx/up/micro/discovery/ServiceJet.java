@@ -23,15 +23,15 @@ import io.vertx.up.rs.hunt.Answer;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.marshal.Visitor;
 import io.vertx.zero.micro.config.CircuitVisitor;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.util.List;
 
 public class ServiceJet {
     private static final Annal LOGGER = Annal.get(ServiceJet.class);
     private static final Visitor<CircuitBreakerOptions> VISITOR =
-            Instance.singleton(CircuitVisitor.class);
+            Ut.singleton(CircuitVisitor.class);
     private static CircuitBreakerOptions OPTIONS;
 
     static {
@@ -42,7 +42,7 @@ public class ServiceJet {
         }, LOGGER);
     }
 
-    private final transient Arithmetic arithmetic = Instance.singleton(CommonArithmetic.class);
+    private final transient Arithmetic arithmetic = Ut.singleton(CommonArithmetic.class);
     private final transient HttpServerOptions options;
     private transient ServiceDiscovery discovery;
     private transient CircuitBreaker breaker;

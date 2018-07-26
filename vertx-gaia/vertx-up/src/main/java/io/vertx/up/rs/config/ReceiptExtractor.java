@@ -9,9 +9,9 @@ import io.vertx.up.web.ZeroAnno;
 import io.vertx.zero.exception.AccessProxyException;
 import io.vertx.zero.exception.AddressWrongException;
 import io.vertx.zero.exception.NoArgConstructorException;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 import io.zero.epic.mirror.Anno;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -40,7 +40,7 @@ public class ReceiptExtractor implements Extractor<Set<Receipt>> {
                     .map(queue -> Anno.query(queue, Address.class))
                     // 3. Scan annotations
                     .subscribe(annotations -> Observable.fromArray(annotations)
-                            .map(addressAnno -> Instance.invoke(addressAnno, "value"))
+                            .map(addressAnno -> Ut.invoke(addressAnno, "value"))
                             .filter(Objects::nonNull)
                             // 4. Hit address
                             .subscribe(address -> ADDRESS.add(address.toString())));
@@ -72,7 +72,7 @@ public class ReceiptExtractor implements Extractor<Set<Receipt>> {
         // 1. Scan whole Endpoints
         final Class<?> clazz = method.getDeclaringClass();
         final Annotation annotation = method.getDeclaredAnnotation(Address.class);
-        final String address = Instance.invoke(annotation, "value");
+        final String address = Ut.invoke(annotation, "value");
 
         // 2. Ensure address incoming.
         Fn.outUp(!ADDRESS.contains(address), LOGGER,
@@ -84,14 +84,14 @@ public class ReceiptExtractor implements Extractor<Set<Receipt>> {
         receipt.setAddress(address);
 
         // Fix: Instance class for proxy
-        final Object proxy = Instance.singleton(clazz);
+        final Object proxy = Ut.singleton(clazz);
         receipt.setProxy(proxy);
         return receipt;
     }
 
     private void verify(final Class<?> clazz) {
         // Check basic specification: No Arg Constructor
-        Fn.outUp(!Instance.noarg(clazz), LOGGER,
+        Fn.outUp(!Ut.withNoArgConstructor(clazz), LOGGER,
                 NoArgConstructorException.class,
                 this.getClass(), clazz);
         Fn.outUp(!Modifier.isPublic(clazz.getModifiers()), LOGGER,

@@ -3,7 +3,6 @@ package io.vertx.up.atom.agent;
 import io.vertx.up.eon.ID;
 import io.vertx.up.rs.Filler;
 import io.zero.epic.Ut;
-import io.zero.epic.mirror.Instance;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
@@ -55,7 +54,7 @@ public class Depot implements Serializable {
                 if (Filler.NO_VALUE.contains(annoCls)) {
                     this.paramNames.add(ID.DIRECT);
                 } else {
-                    final String name = Instance.invoke(annotation, "value");
+                    final String name = Ut.invoke(annotation, "value");
                     this.paramNames.add(name);
                 }
             } else {

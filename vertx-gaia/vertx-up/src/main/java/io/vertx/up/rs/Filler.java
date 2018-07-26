@@ -2,7 +2,7 @@ package io.vertx.up.rs;
 
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.rs.argument.*;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 
 import javax.ws.rs.*;
 import java.lang.annotation.Annotation;
@@ -20,17 +20,17 @@ public interface Filler {
             new ConcurrentHashMap<Class<? extends Annotation>, Filler>() {
                 {
                     // JSR311 Provided
-                    this.put(QueryParam.class, Instance.singleton(QueryFiller.class));
-                    this.put(FormParam.class, Instance.singleton(FormFiller.class));
-                    this.put(MatrixParam.class, Instance.singleton(QueryFiller.class));
-                    this.put(PathParam.class, Instance.singleton(PathFiller.class));
-                    this.put(HeaderParam.class, Instance.singleton(HeaderFiller.class));
-                    this.put(CookieParam.class, Instance.singleton(CookieFiller.class));
+                    this.put(QueryParam.class, Ut.singleton(QueryFiller.class));
+                    this.put(FormParam.class, Ut.singleton(FormFiller.class));
+                    this.put(MatrixParam.class, Ut.singleton(QueryFiller.class));
+                    this.put(PathParam.class, Ut.singleton(PathFiller.class));
+                    this.put(HeaderParam.class, Ut.singleton(HeaderFiller.class));
+                    this.put(CookieParam.class, Ut.singleton(CookieFiller.class));
                     // Extension
-                    this.put(BodyParam.class, Instance.singleton(EmptyFiller.class));
-                    this.put(StreamParam.class, Instance.singleton(EmptyFiller.class));
-                    this.put(SessionParam.class, Instance.singleton(SessionFiller.class));
-                    this.put(ContextParam.class, Instance.singleton(ContextFiller.class));
+                    this.put(BodyParam.class, Ut.singleton(EmptyFiller.class));
+                    this.put(StreamParam.class, Ut.singleton(EmptyFiller.class));
+                    this.put(SessionParam.class, Ut.singleton(SessionFiller.class));
+                    this.put(ContextParam.class, Ut.singleton(ContextFiller.class));
                 }
             };
     Set<Class<? extends Annotation>> NO_VALUE =

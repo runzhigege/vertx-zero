@@ -6,12 +6,11 @@ import io.vertx.zero.marshal.Visitor;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroVertx;
 import io.zero.epic.Ut;
-import io.zero.epic.mirror.Instance;
 
 public class JObjectOpts implements Visitor<JsonObject> {
 
     private static final Node<JsonObject> NODE
-            = Instance.singleton(ZeroVertx.class);
+            = Ut.singleton(ZeroVertx.class);
 
     @Override
     public JsonObject visit(final String... nodes)

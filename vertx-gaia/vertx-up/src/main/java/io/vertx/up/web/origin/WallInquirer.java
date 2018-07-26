@@ -16,7 +16,6 @@ import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
@@ -35,12 +34,12 @@ public class WallInquirer implements Inquirer<Set<Cliff>> {
     private static final Annal LOGGER = Annal.get(WallInquirer.class);
 
     private static final Node<JsonObject> NODE =
-            Instance.singleton(ZeroUniform.class);
+            Ut.singleton(ZeroUniform.class);
 
     private static final String KEY = "secure";
 
     private transient final Transformer<Cliff> transformer =
-            Instance.singleton(Rampart.class);
+            Ut.singleton(Rampart.class);
 
     @Override
     public Set<Cliff> scan(final Set<Class<?>> walls) {
@@ -86,9 +85,9 @@ public class WallInquirer implements Inquirer<Set<Cliff>> {
 
     private void mountAnno(final Cliff cliff, final Class<?> clazz) {
         final Annotation annotation = clazz.getAnnotation(Wall.class);
-        cliff.setOrder(Instance.invoke(annotation, "order"));
-        cliff.setPath(Instance.invoke(annotation, "path"));
-        cliff.setDefined(Instance.invoke(annotation, "define"));
+        cliff.setOrder(Ut.invoke(annotation, "order"));
+        cliff.setPath(Ut.invoke(annotation, "path"));
+        cliff.setDefined(Ut.invoke(annotation, "define"));
     }
 
     /**
@@ -105,7 +104,7 @@ public class WallInquirer implements Inquirer<Set<Cliff>> {
                 .map(item -> {
                     final Annotation annotation = item.getAnnotation(Wall.class);
                     // Add configuration key into keys;
-                    keysRef.put(Instance.invoke(annotation, "value"), item);
+                    keysRef.put(Ut.invoke(annotation, "value"), item);
                     return this.hashPath(annotation);
                 }).subscribe(hashs::add);
 
@@ -137,8 +136,8 @@ public class WallInquirer implements Inquirer<Set<Cliff>> {
      * @return
      */
     private String hashPath(final Annotation annotation) {
-        final Integer order = Instance.invoke(annotation, "order");
-        final String path = Instance.invoke(annotation, "path");
+        final Integer order = Ut.invoke(annotation, "order");
+        final String path = Ut.invoke(annotation, "path");
         return Ut.encryptSHA256(order + path);
     }
 }

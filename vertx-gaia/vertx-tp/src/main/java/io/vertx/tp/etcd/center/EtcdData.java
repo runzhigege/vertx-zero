@@ -13,7 +13,6 @@ import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 import mousio.etcd4j.EtcdClient;
 import mousio.etcd4j.promises.EtcdResponsePromise;
 import mousio.etcd4j.requests.EtcdKeyDeleteRequest;
@@ -37,7 +36,7 @@ import java.util.function.Function;
 
 public class EtcdData {
     private static final Annal LOGGER = Annal.get(EtcdData.class);
-    private static final Node<JsonObject> NODE = Instance.singleton(ZeroUniform.class);
+    private static final Node<JsonObject> NODE = Ut.singleton(ZeroUniform.class);
     private static final ConcurrentMap<Class<?>, EtcdData> POOL
             = new ConcurrentHashMap<>();
     /**
@@ -226,7 +225,7 @@ public class EtcdData {
             final EtcdKeyPutRequest request = this.client.put(path,
                     Fn.getSemi(data instanceof JsonObject || data instanceof JsonArray,
                             LOGGER,
-                            () -> Instance.invoke(data, "encode"),
+                            () -> Ut.invoke(data, "encode"),
                             data::toString));
             if (Values.ZERO != ttl) {
                 request.ttl(ttl);

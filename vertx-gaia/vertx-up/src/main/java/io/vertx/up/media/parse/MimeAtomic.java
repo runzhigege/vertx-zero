@@ -9,7 +9,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.media.Resolver;
 import io.vertx.up.media.resolver.UnsetResolver;
 import io.vertx.zero.marshal.node.Node;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -27,11 +27,11 @@ public class MimeAtomic<T> implements Atomic<T> {
         final Epsilon<T> epsilon;
         if (MimeFlow.TYPED == income.getMime()) {
             /** Resolver **/
-            final Atomic<T> atomic = Instance.singleton(TypedAtomic.class);
+            final Atomic<T> atomic = Ut.singleton(TypedAtomic.class);
             epsilon = atomic.ingest(context, income);
         } else if (MimeFlow.STANDARD == income.getMime()) {
             /** System standard filler **/
-            final Atomic<T> atomic = Instance.singleton(StandardAtomic.class);
+            final Atomic<T> atomic = Ut.singleton(StandardAtomic.class);
             epsilon = atomic.ingest(context, income);
         } else {
             /** Resolver **/
@@ -45,7 +45,7 @@ public class MimeAtomic<T> implements Atomic<T> {
                                     final Epsilon<T> income) {
         /** 1.Read the resolver first **/
         final Annotation annotation = income.getAnnotation();
-        final Class<?> resolverCls = Instance.invoke(annotation, "resolver");
+        final Class<?> resolverCls = Ut.invoke(annotation, "resolver");
         final String header = context.request().getHeader(HttpHeaders.CONTENT_TYPE);
         /** 2.Check configured in default **/
         if (UnsetResolver.class == resolverCls) {
@@ -60,10 +60,10 @@ public class MimeAtomic<T> implements Atomic<T> {
                 resolver = resolverMap.getString(type.getSubtype());
             }
             LOGGER.info(Info.RESOLVER, resolver, header, context.request().absoluteURI());
-            return Instance.singleton(resolver);
+            return Ut.singleton(resolver);
         } else {
             LOGGER.info(Info.RESOLVER_CONFIG, resolverCls, header);
-            return Instance.singleton(resolverCls);
+            return Ut.singleton(resolverCls);
         }
     }
 }

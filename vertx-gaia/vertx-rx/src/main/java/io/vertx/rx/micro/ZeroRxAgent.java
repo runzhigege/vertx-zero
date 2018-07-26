@@ -14,8 +14,8 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ZeroAtomic;
 import io.vertx.up.rs.Axis;
 import io.vertx.zero.eon.Values;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -36,10 +36,10 @@ public class ZeroRxAgent extends AbstractVerticle {
     public void start() {
         /** 1.Call router hub to mount commont **/
         final Axis<Router> routerAxiser = Fn.poolThread(Pool.ROUTERS,
-                () -> Instance.instance(RouterAxis.class));
+                () -> Ut.instance(RouterAxis.class));
         /** 2.Call route hub to mount defined **/
         final Axis<Router> axiser = Fn.poolThread(Pool.EVENTS,
-                () -> Instance.instance(EventAxis.class));
+                () -> Ut.instance(EventAxis.class));
 
         /** 3.Get the default HttpServer Options **/
         ZeroAtomic.RX_OPTS.forEach((port, option) -> {

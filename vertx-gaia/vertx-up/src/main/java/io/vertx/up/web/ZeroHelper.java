@@ -5,8 +5,8 @@ import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.AgentDuplicatedException;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import javax.ws.rs.Path;
 import java.lang.annotation.Annotation;
@@ -29,7 +29,7 @@ public class ZeroHelper {
     /** **/
     public static ServerType getAgentKey(final Class<?> clazz) {
         return Fn.getSemi(clazz.isAnnotationPresent(Agent.class), LOGGER,
-                () -> Instance.invoke(clazz.getDeclaredAnnotation(Agent.class), "type"),
+                () -> Ut.invoke(clazz.getDeclaredAnnotation(Agent.class), "type"),
                 Fn::nil);
     }
 

@@ -3,7 +3,7 @@ package io.vertx.up.rs.dispatch;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.agent.Depot;
 import io.vertx.up.rs.Sentry;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 
 /**
  * Validation for request based on JSR303 Bean Validation
@@ -17,6 +17,6 @@ public class SentrySplitter {
         // Annotation to different verifier workflow
         // In current situation, there is only one implementation to build StandardVerifier
         // In future we could extend this implementation
-        return Instance.singleton(StandardVerifier.class);
+        return Ut.singleton(StandardVerifier.class);
     }
 }

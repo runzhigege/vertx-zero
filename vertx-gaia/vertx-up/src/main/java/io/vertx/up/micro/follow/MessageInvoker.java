@@ -4,7 +4,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.exception._501RpcRejectException;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 
 import java.lang.reflect.Method;
 
@@ -27,7 +27,7 @@ public class MessageInvoker implements Invoker {
                        final Method method,
                        final Message<Envelop> message) {
         // Invoker and do not reply
-        Instance.invoke(proxy, method.getName(), message);
+        Ut.invoke(proxy, method.getName(), message);
     }
 
     @Override

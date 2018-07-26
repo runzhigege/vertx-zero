@@ -1,4 +1,4 @@
-package io.vertx.quiz;
+package io.zero.quiz;
 
 import io.vertx.ext.unit.junit.RunTestOnContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
@@ -6,7 +6,7 @@ import io.vertx.up.atom.agent.Event;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
 import io.vertx.up.rs.config.EventExtractor;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
 
@@ -19,7 +19,7 @@ public abstract class UpBase {
     public final RunTestOnContext rule = new RunTestOnContext();
 
     protected Extractor<Set<Event>> extractor() {
-        return Instance.singleton(EventExtractor.class);
+        return Ut.singleton(EventExtractor.class);
     }
 
     protected Annal getLogger() {

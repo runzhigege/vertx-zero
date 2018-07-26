@@ -9,7 +9,6 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ipc.client.TunnelClient;
 import io.vertx.zero.eon.Values;
 import io.zero.epic.Ut;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.reflect.Method;
 
@@ -43,12 +42,12 @@ public class AsyncInvoker implements Invoker {
         final Class<?> tCls = returnType.getComponentType();
         if (Envelop.class == tCls) {
             // Input type is Envelop, input directly
-            final Future<Envelop> result = Instance.invoke(proxy, method.getName(), envelop);
+            final Future<Envelop> result = Ut.invoke(proxy, method.getName(), envelop);
             result.setHandler(item -> message.reply(item.result()));
         } else {
             final Object reference = envelop.data();
             final Object arguments = Ut.deserialize(Ut.toString(reference), argType);
-            final Future tResult = Instance.invoke(proxy, method.getName(), arguments);
+            final Future tResult = Ut.invoke(proxy, method.getName(), arguments);
             tResult.setHandler(Ux.toHandler(message));
         }
     }
@@ -69,7 +68,7 @@ public class AsyncInvoker implements Invoker {
         final Class<?> tCls = returnType.getComponentType();
         if (Envelop.class == tCls) {
             // Input type is Envelop, input directly
-            final Future<Envelop> result = Instance.invoke(proxy, method.getName(), envelop);
+            final Future<Envelop> result = Ut.invoke(proxy, method.getName(), envelop);
             result.compose(item -> TunnelClient.create(this.getClass())
                     .connect(vertx)
                     .connect(method)
@@ -78,7 +77,7 @@ public class AsyncInvoker implements Invoker {
         } else {
             final Object reference = envelop.data();
             final Object arguments = Ut.deserialize(Ut.toString(reference), argType);
-            final Future future = Instance.invoke(proxy, method.getName(), arguments);
+            final Future future = Ut.invoke(proxy, method.getName(), arguments);
             future.compose(item -> TunnelClient.create(this.getClass())
                     .connect(vertx)
                     .connect(method)

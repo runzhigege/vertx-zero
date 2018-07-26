@@ -11,14 +11,13 @@ import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 public class CircuitVisitor implements Visitor<CircuitBreakerOptions> {
 
     private static final Annal LOGGER = Annal.get(CircuitVisitor.class);
     private static final String CIRCUIT = "circuit";
     private final transient Node<JsonObject> node =
-            Instance.singleton(ZeroUniform.class);
+            Ut.singleton(ZeroUniform.class);
 
     @Override
     public CircuitBreakerOptions visit(final String... key)

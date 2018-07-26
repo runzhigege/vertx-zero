@@ -9,7 +9,6 @@ import io.vertx.up.rs.config.AgentExtractor;
 import io.vertx.up.web.limit.ApiFactor;
 import io.vertx.up.web.limit.Factor;
 import io.zero.epic.Ut;
-import io.zero.epic.mirror.Instance;
 
 import java.util.concurrent.ConcurrentMap;
 
@@ -17,14 +16,14 @@ public class PointScatter implements Scatter<Vertx> {
 
     private static final Annal LOGGER = Annal.get(PointScatter.class);
 
-    private transient final Factor factor = Instance.singleton(ApiFactor.class);
+    private transient final Factor factor = Ut.singleton(ApiFactor.class);
 
     @Override
     public void connect(final Vertx vertx) {
         /** 1.Find Agent for deploy **/
         final ConcurrentMap<ServerType, Class<?>> agents = this.factor.agents();
         final Extractor<DeploymentOptions> extractor =
-                Instance.instance(AgentExtractor.class);
+                Ut.instance(AgentExtractor.class);
         Ut.itMap(agents, (type, clazz) -> {
             // 3.1 Agent deployment options
             final DeploymentOptions option = extractor.extract(clazz);

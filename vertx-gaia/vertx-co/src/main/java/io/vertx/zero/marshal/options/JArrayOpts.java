@@ -6,12 +6,11 @@ import io.vertx.zero.marshal.Visitor;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroVertx;
 import io.zero.epic.Ut;
-import io.zero.epic.mirror.Instance;
 
 public class JArrayOpts implements Visitor<JsonArray> {
 
     private static final Node<JsonObject> NODE
-            = Instance.singleton(ZeroVertx.class);
+            = Ut.singleton(ZeroVertx.class);
 
     @Override
     public JsonArray visit(final String... nodes) {

@@ -14,9 +14,9 @@ import io.vertx.up.web.anima.Scatter;
 import io.vertx.zero.exception.RpcPreparingException;
 import io.vertx.zero.exception.UpClassArgsException;
 import io.vertx.zero.exception.UpClassInvalidException;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 import io.zero.epic.mirror.Anno;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.util.concurrent.ConcurrentHashMap;
@@ -61,23 +61,23 @@ public class DansApplication {
         Fn.outUp(!EtcdData.enabled(),
                 LOGGER, RpcPreparingException.class, this.getClass());
 
-        final Launcher<Vertx> launcher = Instance.singleton(ZeroLauncher.class);
+        final Launcher<Vertx> launcher = Ut.singleton(ZeroLauncher.class);
 
         launcher.start(vertx -> {
             /** 1.Find Agent for deploy **/
             Runner.run(() -> {
-                final Scatter<Vertx> scatter = Instance.singleton(PointScatter.class);
+                final Scatter<Vertx> scatter = Ut.singleton(PointScatter.class);
                 scatter.connect(vertx);
             }, "gateway-runner");
             /** 2.Find Worker for deploy **/
             Runner.run(() -> {
-                final Scatter<Vertx> scatter = Instance.singleton(DetectScatter.class);
+                final Scatter<Vertx> scatter = Ut.singleton(DetectScatter.class);
                 scatter.connect(vertx);
             }, "detect-runner");
             /** 3.Initialize Infix **/
             Runner.run(() -> {
                 // Infix For Api Gateway
-                final Scatter<Vertx> scatter = Instance.singleton(InfixScatter.class);
+                final Scatter<Vertx> scatter = Ut.singleton(InfixScatter.class);
                 scatter.connect(vertx);
             }, "infix-afflux-runner");
         });

@@ -6,8 +6,8 @@ import io.vertx.up.atom.worker.Receipt;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
 import io.vertx.up.web.origin.*;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 import io.zero.epic.mirror.Pack;
 
 import java.lang.reflect.Method;
@@ -53,7 +53,7 @@ public class ZeroAnno {
         final Set<Class<?>> clazzes = Pack.getClasses(null);
         /** EndPoint **/
         Inquirer<Set<Class<?>>> inquirer =
-                Instance.singleton(EndPointInquirer.class);
+                Ut.singleton(EndPointInquirer.class);
         ENDPOINTS.addAll(inquirer.scan(clazzes));
 
         /** EndPoint -> Event **/
@@ -61,22 +61,22 @@ public class ZeroAnno {
                 LOGGER,
                 () -> {
                     final Inquirer<Set<Event>> event =
-                            Instance.singleton(EventInquirer.class);
+                            Ut.singleton(EventInquirer.class);
                     EVENTS.addAll(event.scan(ENDPOINTS));
                 });
 
         /** Wall -> Authenticate, Authorize **/
         final Inquirer<Set<Cliff>> walls =
-                Instance.singleton(WallInquirer.class);
+                Ut.singleton(WallInquirer.class);
         WALLS.addAll(walls.scan(clazzes));
 
         /** Filter -> WebFilter **/
         final Inquirer<ConcurrentMap<String, Set<Event>>> filters =
-                Instance.singleton(FilterInquirer.class);
+                Ut.singleton(FilterInquirer.class);
         FILTERS.putAll(filters.scan(clazzes));
 
         /** Queue **/
-        inquirer = Instance.singleton(QueueInquirer.class);
+        inquirer = Ut.singleton(QueueInquirer.class);
         final Set<Class<?>> queues = inquirer.scan(clazzes);
 
         /** Queue -> Receipt **/
@@ -84,7 +84,7 @@ public class ZeroAnno {
                 LOGGER,
                 () -> {
                     final Inquirer<Set<Receipt>> receipt =
-                            Instance.singleton(ReceiptInquirer.class);
+                            Ut.singleton(ReceiptInquirer.class);
                     RECEIPTS.addAll(receipt.scan(queues));
                 });
 
@@ -93,35 +93,35 @@ public class ZeroAnno {
                 LOGGER,
                 () -> {
                     final Inquirer<ConcurrentMap<String, Method>> ipc =
-                            Instance.singleton(IpcInquirer.class);
+                            Ut.singleton(IpcInquirer.class);
                     IPCS.putAll(ipc.scan(clazzes));
                 });
 
         /** Agent **/
         final Inquirer<ConcurrentMap<ServerType, List<Class<?>>>> agent =
-                Instance.singleton(AgentInquirer.class);
+                Ut.singleton(AgentInquirer.class);
         AGENTS.putAll(agent.scan(clazzes));
 
         /** JSR330 Fix **/
         final Inquirer<Set<Class<?>>> pointer =
-                Instance.singleton(PointerInquirer.class);
+                Ut.singleton(PointerInquirer.class);
         POINTER.addAll(pointer.scan(clazzes));
 
         /** Tp Clients **/
         final Inquirer<Set<Class<?>>> tps =
-                Instance.singleton(PluginInquirer.class);
+                Ut.singleton(PluginInquirer.class);
         TPS.addAll(tps.scan(clazzes));
 
         /** Worker **/
         final Inquirer<Set<Class<?>>> worker =
-                Instance.singleton(WorkerInquirer.class);
+                Ut.singleton(WorkerInquirer.class);
         WORKERS.addAll(worker.scan(clazzes));
 
         /** Walls **/
 
         /** Injections **/
         final Inquirer<ConcurrentMap<Class<?>, ConcurrentMap<String, Class<?>>>> afflux =
-                Instance.singleton(AffluxInquirer.class);
+                Ut.singleton(AffluxInquirer.class);
         PLUGINS.putAll(afflux.scan(clazzes));
     }
 

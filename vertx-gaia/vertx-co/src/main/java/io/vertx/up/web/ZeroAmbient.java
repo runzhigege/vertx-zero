@@ -6,7 +6,6 @@ import io.vertx.zero.log.internal.Log4JAnnal;
 import io.vertx.zero.marshal.options.Opts;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -36,7 +35,7 @@ public final class ZeroAmbient {
             Ut.itJObject(opt, (item, field) -> {
                 final String plugin = item.toString();
                 LOGGER.info(Info.PLUGIN_LOAD, KEY, field, plugin);
-                INJECTIONS.put(field, Instance.clazz(plugin));
+                INJECTIONS.put(field, Ut.clazz(plugin));
             });
         }, LOGGER);
     }

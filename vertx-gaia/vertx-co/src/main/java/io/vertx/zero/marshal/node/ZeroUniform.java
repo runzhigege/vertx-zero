@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Plugins;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -16,7 +15,7 @@ import java.util.stream.Collectors;
 public class ZeroUniform implements Node<JsonObject> {
 
     private static final Node<ConcurrentMap<String, String>> node
-            = Instance.singleton(ZeroLime.class);
+            = Ut.singleton(ZeroLime.class);
 
     @Override
     public JsonObject read() {

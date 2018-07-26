@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.zero.eon.Strings;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.util.Objects;
 import java.util.Set;
@@ -27,7 +26,7 @@ public class ZeroLime implements Node<ConcurrentMap<String, String>> {
         }
     };
     private transient final Node<JsonObject> node
-            = Instance.singleton(ZeroVertx.class);
+            = Ut.singleton(ZeroVertx.class);
 
     @Override
     public ConcurrentMap<String, String> read() {

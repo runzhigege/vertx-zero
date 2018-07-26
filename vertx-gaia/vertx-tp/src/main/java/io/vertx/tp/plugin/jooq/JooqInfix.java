@@ -5,8 +5,8 @@ import io.vertx.tp.hikari.HikariCpPool;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.plugin.Infix;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
 import org.jooq.DSLContext;
@@ -52,8 +52,8 @@ public class JooqInfix implements Infix {
     }
 
     public static <T> T getDao(final Class<T> clazz) {
-        final T dao = Instance.instance(clazz, CONFIGS.get(NAME));
-        Instance.invoke(dao, "setVertx", vertxRef);
+        final T dao = Ut.instance(clazz, CONFIGS.get(NAME));
+        Ut.invoke(dao, "setVertx", vertxRef);
         return dao;
     }
 

@@ -5,8 +5,8 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.InvokerNullException;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 /**
  *
@@ -22,33 +22,33 @@ public class JetSelector {
         if (void.class == returnType || Void.class == returnType) {
             if (Envelop.class == paramCls) {
                 // void method(Envelop)
-                invoker = Instance.singleton(PingInvoker.class);
+                invoker = Ut.singleton(PingInvoker.class);
             } else if (Message.class.isAssignableFrom(paramCls)) {
                 // void method(Message<Envelop>)
-                invoker = Instance.singleton(MessageInvoker.class);
+                invoker = Ut.singleton(MessageInvoker.class);
             }
         } else if (Envelop.class == returnType) {
             if (Envelop.class == paramCls) {
                 // Envelop method(Envelop)
                 // Rpc supported.
-                invoker = Instance.singleton(SyncInvoker.class);
+                invoker = Ut.singleton(SyncInvoker.class);
             }
         } else if (Future.class.isAssignableFrom(returnType)) {
             if (Envelop.class == paramCls) {
                 // Future<T> method(Envelop)
                 // Rpc supported.
-                invoker = Instance.singleton(FutureInvoker.class);
+                invoker = Ut.singleton(FutureInvoker.class);
             } else {
                 // Future<T> method(I)
                 // Rpc supported.
-                invoker = Instance.singleton(AsyncInvoker.class);
+                invoker = Ut.singleton(AsyncInvoker.class);
             }
         } else {
             if (!Message.class.isAssignableFrom(paramCls)) {
                 // Java direct type, except Message<T> / Envelop
                 // T method(I)
                 // Rpc supported.
-                invoker = Instance.singleton(DynamicInvoker.class);
+                invoker = Ut.singleton(DynamicInvoker.class);
             }
         }
         Fn.outUp(null == invoker, LOGGER,

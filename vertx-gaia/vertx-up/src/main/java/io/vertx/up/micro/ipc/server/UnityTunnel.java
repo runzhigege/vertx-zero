@@ -17,7 +17,6 @@ import io.vertx.up.micro.ipc.tower.FinalTransit;
 import io.vertx.up.micro.ipc.tower.NodeTransit;
 import io.vertx.up.micro.ipc.tower.Transit;
 import io.zero.epic.Ut;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -83,15 +82,15 @@ public class UnityTunnel implements Tunnel {
         final Annotation annotation = method.getAnnotation(Ipc.class);
         // 1. Check only one is enough because of Error-40043
         // 2. to and from must not be null at the same time because of Error-40045
-        final String to = Instance.invoke(annotation, "to");
+        final String to = Ut.invoke(annotation, "to");
         final Transit transit;
         if (Ut.isNil(to)) {
             // Node transit
-            transit = Instance.singleton(FinalTransit.class);
+            transit = Ut.singleton(FinalTransit.class);
             LOGGER.info(Info.NODE_FINAL, method, method.getDeclaringClass());
         } else {
             // Final transit
-            transit = Instance.singleton(NodeTransit.class);
+            transit = Ut.singleton(NodeTransit.class);
             LOGGER.info(Info.NODE_MIDDLE, method, method.getDeclaringClass());
         }
         return transit.connect(vertx).connect(method);

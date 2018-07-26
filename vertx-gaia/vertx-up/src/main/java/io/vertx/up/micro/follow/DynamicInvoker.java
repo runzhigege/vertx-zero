@@ -10,7 +10,6 @@ import io.vertx.up.micro.ipc.client.TunnelClient;
 import io.vertx.up.web.ZeroSerializer;
 import io.vertx.zero.eon.Values;
 import io.zero.epic.Ut;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.reflect.Method;
 
@@ -45,12 +44,12 @@ public class DynamicInvoker implements Invoker {
         final Object returnValue;
         if (Envelop.class == argType) {
             // Input type is Envelop, input directly
-            returnValue = Instance.invoke(proxy, method.getName(), envelop);
+            returnValue = Ut.invoke(proxy, method.getName(), envelop);
         } else {
             final Object reference = envelop.data();
             // Non Direct
             final Object arguments = ZeroSerializer.getValue(argType, Ut.toString(reference));
-            returnValue = Instance.invoke(proxy, method.getName(), arguments);
+            returnValue = Ut.invoke(proxy, method.getName(), arguments);
         }
         // Return type must not be Envelop because top layer has been finished checking.
         return Envelop.success(returnValue);

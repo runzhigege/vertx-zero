@@ -1,10 +1,11 @@
-package io.zero.epic.mirror;
+package io.zero.epic;
 
 import com.esotericsoftware.reflectasm.ConstructorAccess;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.DuplicatedImplException;
 import io.zero.epic.fn.Fn;
+import io.zero.epic.mirror.Pack;
 
 import java.lang.reflect.*;
 import java.util.Arrays;
@@ -13,7 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @SuppressWarnings({"unchecked"})
-public final class Instance {
+final class Instance {
 
     private static final Annal LOGGER = Annal.get(Instance.class);
 
@@ -23,18 +24,14 @@ public final class Instance {
     /**
      * Create new instance with reflection
      *
-     * @param name
+     * @param clazz
      * @param params
      * @param <T>
      * @return
      */
-    public static <T> T instance(final String name,
-                                 final Object... params) {
-        return instance(clazz(name), params);
-    }
 
-    public static <T> T instance(final Class<?> clazz,
-                                 final Object... params) {
+    static <T> T instance(final Class<?> clazz,
+                          final Object... params) {
         final Object created = Fn.getJvm(
                 () -> construct(clazz, params), clazz);
         return Fn.getJvm(() -> (T) created, created);
@@ -46,7 +43,7 @@ public final class Instance {
      * @param target
      * @return
      */
-    public static <T> Class<?> genericT(final Class<?> target) {
+    static <T> Class<?> genericT(final Class<?> target) {
         return Fn.getJvm(() -> {
             final Type type = target.getGenericSuperclass();
             final Class<T> clazz = (Class) (((ParameterizedType) type).getActualTypeArguments()[0]);
@@ -57,18 +54,13 @@ public final class Instance {
     /**
      * Singleton instances
      *
-     * @param name
+     * @param clazz
      * @param params
      * @param <T>
      * @return
      */
-    public static <T> T singleton(final String name,
-                                  final Object... params) {
-        return singleton(clazz(name), params);
-    }
-
-    public static <T> T singleton(final Class<?> clazz,
-                                  final Object... params) {
+    static <T> T singleton(final Class<?> clazz,
+                           final Object... params) {
         final Object created = Fn.pool(Storage.SINGLETON, clazz.getName(),
                 () -> instance(clazz, params));
         // Must reference to created first.
@@ -81,7 +73,7 @@ public final class Instance {
      * @param name
      * @return
      */
-    public static Class<?> clazz(final String name) {
+    static Class<?> clazz(final String name) {
         return Fn.pool(Storage.CLASSES, name,
                 () -> Fn.getJvm(() -> Thread
                         .currentThread()
@@ -96,33 +88,33 @@ public final class Instance {
      * @param interfaceCls
      * @return
      */
-    public static boolean isMatch(final Class<?> clazz, final Class<?> interfaceCls) {
+    static boolean isMatch(final Class<?> clazz, final Class<?> interfaceCls) {
         final Class<?>[] interfaces = clazz.getInterfaces();
         return Arrays.stream(interfaces)
                 .anyMatch(item -> item.equals(interfaceCls));
     }
 
-    public static <T> T invoke(final Object instance,
-                               final String name,
-                               final Object... args) {
+    static <T> T invoke(final Object instance,
+                        final String name,
+                        final Object... args) {
         return Fantam.invokeObject(instance, name, args);
     }
 
-    public static <T> T invoke(final Class<?> interfaceCls,
-                               final String name,
-                               final Object... args) {
+    static <T> T invoke(final Class<?> interfaceCls,
+                        final String name,
+                        final Object... args) {
         return Fantam.invokeInterface(interfaceCls, name, args);
     }
 
-    public static <T> T getProxy(
+    static <T> T getProxy(
             final Method method) {
         final Class<?> interfaceCls = method.getDeclaringClass();
         return Fantam.getProxy(interfaceCls);
     }
 
-    public static <T> void set(final Object instance,
-                               final String name,
-                               final T value) {
+    static <T> void set(final Object instance,
+                        final String name,
+                        final T value) {
         Fn.safeNull(() -> Fn.safeJvm(() -> {
             final Field field = instance.getClass().getDeclaredField(name);
             if (!field.isAccessible()) {
@@ -132,8 +124,8 @@ public final class Instance {
         }, LOGGER), instance, name, value);
     }
 
-    public static <T> T get(final Object instance,
-                            final String name) {
+    static <T> T get(final Object instance,
+                     final String name) {
         return Fn.getNull(() -> Fn.safeJvm(() -> {
                     final Field field = instance.getClass().getDeclaredField(name);
                     if (!field.isAccessible()) {
@@ -155,7 +147,7 @@ public final class Instance {
      * @param clazz
      * @return
      */
-    public static boolean noarg(final Class<?> clazz) {
+    static boolean noarg(final Class<?> clazz) {
         return Fn.getNull(Boolean.FALSE, () -> {
             final Constructor<?>[] constructors = clazz.getDeclaredConstructors();
             boolean noarg = false;
@@ -174,7 +166,7 @@ public final class Instance {
      * @param interfaceCls
      * @return
      */
-    public static Class<?> uniqueChild(final Class<?> interfaceCls) {
+    static Class<?> uniqueChild(final Class<?> interfaceCls) {
         return Fn.getNull(null, () -> {
             final Set<Class<?>> classes = Pack.getClasses(null);
             final List<Class<?>> filtered = classes.stream()

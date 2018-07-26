@@ -1,7 +1,7 @@
 package up.god.apollo.exp1;
 
 import io.vertx.ext.web.Session;
-import io.vertx.quiz.Params;
+import io.zero.quiz.Params;
 import io.vertx.up.annotations.EndPoint;
 import io.vertx.up.annotations.SessionData;
 
