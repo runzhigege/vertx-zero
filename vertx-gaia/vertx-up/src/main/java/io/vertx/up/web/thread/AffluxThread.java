@@ -12,7 +12,6 @@ import io.vertx.zero.exception.QualifierMissedException;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 import io.zero.epic.mirror.Anno;
-import io.zero.epic.mirror.Instance;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -67,7 +66,7 @@ public class AffluxThread extends Thread {
         if (type.isInterface()) {
             // Interface
             final List<Class<?>> target = this.classes.stream().filter(
-                    item -> Instance.isMatch(item, type)
+                    item -> Ut.isImplement(item, type)
             ).collect(Collectors.toList());
             // Unique
             if (Values.ONE == target.size()) {
@@ -108,12 +107,12 @@ public class AffluxThread extends Thread {
                 this.getClass(), names, field.getType().getName());
 
         // Named value must be reflect with @Qualifier
-        final String value = Instance.invoke(annotation, "value");
+        final String value = Ut.invoke(annotation, "value");
 
         final Optional<Class<?>> verified = instanceCls.stream()
                 .filter(item -> {
                     final Annotation target = item.getAnnotation(Named.class);
-                    final String targetValue = Instance.invoke(target, "value");
+                    final String targetValue = Ut.invoke(target, "value");
                     return value.equals(targetValue)
                             && !Ut.isNil(targetValue);
                 }).findAny();

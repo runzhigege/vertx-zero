@@ -10,7 +10,6 @@ import io.vertx.up.media.parse.EpsilonIncome;
 import io.vertx.up.media.parse.Income;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -22,7 +21,7 @@ public class MediaAnalyzer implements Analyzer {
     private static final Annal LOGGER = Annal.get(MediaAnalyzer.class);
 
     private final transient Income<List<Epsilon<Object>>> income =
-            Instance.singleton(EpsilonIncome.class);
+            Ut.singleton(EpsilonIncome.class);
 
     @Override
     public Object[] in(final RoutingContext context,

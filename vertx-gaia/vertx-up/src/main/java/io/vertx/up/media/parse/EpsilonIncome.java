@@ -9,8 +9,8 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Filler;
 import io.vertx.up.web.ZeroSerializer;
 import io.vertx.zero.eon.Values;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import javax.ws.rs.DefaultValue;
 import java.lang.annotation.Annotation;
@@ -28,7 +28,7 @@ public class EpsilonIncome implements Income<List<Epsilon<Object>>> {
     private static final Annal LOGGER = Annal.get(EpsilonIncome.class);
 
     private transient final Atomic<Object> atomic
-            = Instance.singleton(MimeAtomic.class);
+            = Ut.singleton(MimeAtomic.class);
 
     @Override
     public List<Epsilon<Object>> in(final RoutingContext context,
@@ -62,7 +62,7 @@ public class EpsilonIncome implements Income<List<Epsilon<Object>>> {
                 () -> ID.IGNORE,
                 () -> Fn.getSemi(!Filler.NO_VALUE.contains(annotation.annotationType()),
                         LOGGER,
-                        () -> Instance.invoke(annotation, "value"),
+                        () -> Ut.invoke(annotation, "value"),
                         () -> ID.DIRECT));
     }
 
@@ -83,7 +83,7 @@ public class EpsilonIncome implements Income<List<Epsilon<Object>>> {
                 () -> {
                     final Annotation annotation = annotationList.get(Values.IDX);
                     return ZeroSerializer.getValue(paramType,
-                            Instance.invoke(annotation, "value"));
+                            Ut.invoke(annotation, "value"));
                 });
     }
 }

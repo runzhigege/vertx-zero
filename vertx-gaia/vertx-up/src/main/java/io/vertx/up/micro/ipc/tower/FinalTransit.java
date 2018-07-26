@@ -5,8 +5,8 @@ import io.vertx.core.Vertx;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.exception._500RpcMethodInvokeException;
 import io.vertx.up.log.Annal;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.reflect.Method;
 
@@ -22,7 +22,7 @@ public class FinalTransit implements Transit {
     @Override
     public Future<Envelop> async(final Envelop data) {
         // 1. Extract type
-        final Object proxy = Instance.singleton(this.method.getDeclaringClass());
+        final Object proxy = Ut.singleton(this.method.getDeclaringClass());
         // 2. Async type
         final Future<Envelop> returnValue = Fn.getJvm(
                 () -> ReturnTransit.build(() -> this.method.invoke(proxy, data),

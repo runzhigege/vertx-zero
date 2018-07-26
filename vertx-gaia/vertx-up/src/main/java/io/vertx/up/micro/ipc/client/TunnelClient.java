@@ -13,8 +13,8 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.micro.discovery.IpcOrigin;
 import io.vertx.up.micro.discovery.Origin;
 import io.vertx.up.micro.ipc.DataEncap;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -28,14 +28,14 @@ import java.util.stream.Collectors;
  */
 public class TunnelClient {
 
-    private static final Origin ORIGIN = Instance.singleton(IpcOrigin.class);
+    private static final Origin ORIGIN = Ut.singleton(IpcOrigin.class);
     private static final ConcurrentMap<IpcType, Spear> STUBS =
             new ConcurrentHashMap<IpcType, Spear>() {
                 {
-                    this.put(IpcType.UNITY, Instance.singleton(UnitySpear.class));
-                    // put(IpcType.CONSUME, Instance.singleton(ConsumeStub.class));
-                    // put(IpcType.DUPLIEX, Instance.singleton(DupliexStub.class));
-                    // put(IpcType.PRODUCE, Instance.singleton(ProduceStub.class));
+                    this.put(IpcType.UNITY, Ut.singleton(UnitySpear.class));
+                    // put(IpcType.CONSUME, Ut.singleton(ConsumeStub.class));
+                    // put(IpcType.DUPLIEX, Ut.singleton(DupliexStub.class));
+                    // put(IpcType.PRODUCE, Ut.singleton(ProduceStub.class));
                 }
             };
     private final transient Annal logger;
@@ -74,13 +74,13 @@ public class TunnelClient {
         DataEncap.in(data, record);
         DataEncap.in(data, envelop);
         // 5. Stub
-        final Spear stub = STUBS.getOrDefault(type, Instance.singleton(UnitySpear.class));
+        final Spear stub = STUBS.getOrDefault(type, Ut.singleton(UnitySpear.class));
         return stub.send(this.vertx, data);
     }
 
     private <T> T getValue(final String attr) {
         final Annotation annotation = this.event.getAnnotation(Ipc.class);
-        return Instance.invoke(annotation, attr);
+        return Ut.invoke(annotation, attr);
     }
 
     /**

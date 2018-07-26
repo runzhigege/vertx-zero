@@ -15,7 +15,6 @@ import io.vertx.up.micro.ipc.DataEncap;
 import io.vertx.up.plugin.rpc.client.RpcStub;
 import io.vertx.up.plugin.rpc.client.UnityStub;
 import io.zero.epic.Ut;
-import io.zero.epic.mirror.Instance;
 
 import java.text.MessageFormat;
 import java.util.Objects;
@@ -88,7 +87,7 @@ public class RpcClientImpl implements RpcClient {
         switch (type) {
             case UNITY:
             default: {
-                stub = Instance.instance(UnityStub.class, this.holder.getChannel());
+                stub = Ut.instance(UnityStub.class, this.holder.getChannel());
             }
             break;
         }

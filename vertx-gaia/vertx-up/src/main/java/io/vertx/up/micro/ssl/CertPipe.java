@@ -7,7 +7,7 @@ import io.vertx.up.eon.em.CertType;
 import io.vertx.up.micro.ssl.server.JksCert;
 import io.vertx.up.micro.ssl.server.PemCert;
 import io.vertx.up.micro.ssl.server.PfxCert;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 
 /**
  * Different ssl pipe
@@ -20,13 +20,13 @@ public interface CertPipe<I> {
         CertPipe<JsonObject> pipe = null;
         switch (type) {
             case PKCS12:
-                pipe = Instance.singleton(PfxCert.class);
+                pipe = Ut.singleton(PfxCert.class);
                 break;
             case JKS:
-                pipe = Instance.singleton(JksCert.class);
+                pipe = Ut.singleton(JksCert.class);
                 break;
             case PEM:
-                pipe = Instance.singleton(PemCert.class);
+                pipe = Ut.singleton(PemCert.class);
                 break;
         }
         return pipe;

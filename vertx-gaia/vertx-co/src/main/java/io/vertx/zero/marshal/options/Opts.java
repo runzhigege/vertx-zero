@@ -47,7 +47,7 @@ class YamlOpts implements Opts<JsonObject> {
 
     /**
      * Default package scope, manually implement singleton
-     * instead of Instance.singleton.
+     * instead of Ut.singleton.
      *
      * @return Opts reference contains JsonObject
      */

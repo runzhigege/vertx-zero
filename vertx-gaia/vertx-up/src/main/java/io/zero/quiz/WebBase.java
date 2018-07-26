@@ -1,4 +1,4 @@
-package io.vertx.quiz;
+package io.zero.quiz;
 
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.up.atom.agent.Event;
@@ -8,7 +8,7 @@ import io.vertx.up.rs.config.EventExtractor;
 import io.vertx.up.rs.router.EventAxis;
 import io.vertx.up.rs.router.RouterAxis;
 import io.vertx.up.web.ZeroGrid;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 import io.zero.quiz.web.WebTestBase;
 
 import java.util.List;
@@ -32,7 +32,7 @@ public class WebBase extends WebTestBase {
     };
 
     protected Event extract(final Class<?> clazz, final String name) {
-        final Extractor<Set<Event>> extractor = Instance.singleton(EventExtractor.class);
+        final Extractor<Set<Event>> extractor = Ut.singleton(EventExtractor.class);
         final Set<Event> events = extractor.extract(clazz);
         final List<Event> list = events.stream()
                 .filter(item -> item.getAction().getName().equals(name))
@@ -45,10 +45,10 @@ public class WebBase extends WebTestBase {
         /** 1.Get the default HttpServer Options **/
         SERVERS.forEach((port, option) -> {
             /** 4.Call router hub to mount commont **/
-            Axis huber = Instance.singleton(RouterAxis.class);
+            Axis huber = Ut.singleton(RouterAxis.class);
             huber.mount(this.router);
             /** 5.Call route hub to mount defined **/
-            huber = Instance.singleton(EventAxis.class);
+            huber = Ut.singleton(EventAxis.class);
             huber.mount(this.router);
         });
     }

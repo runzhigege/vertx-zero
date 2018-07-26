@@ -7,7 +7,7 @@ import io.vertx.up.eon.em.CertType;
 import io.vertx.up.micro.ssl.client.JksTrust;
 import io.vertx.up.micro.ssl.client.PemTrust;
 import io.vertx.up.micro.ssl.client.PfxTrust;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 
 public interface TrustPipe<I> {
 
@@ -16,13 +16,13 @@ public interface TrustPipe<I> {
         TrustPipe<JsonObject> pipe = null;
         switch (type) {
             case PKCS12:
-                pipe = Instance.singleton(PfxTrust.class);
+                pipe = Ut.singleton(PfxTrust.class);
                 break;
             case JKS:
-                pipe = Instance.singleton(JksTrust.class);
+                pipe = Ut.singleton(JksTrust.class);
                 break;
             case PEM:
-                pipe = Instance.singleton(PemTrust.class);
+                pipe = Ut.singleton(PemTrust.class);
                 break;
         }
         return pipe;

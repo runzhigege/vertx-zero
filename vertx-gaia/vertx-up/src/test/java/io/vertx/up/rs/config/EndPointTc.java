@@ -2,7 +2,7 @@ package io.vertx.up.rs.config;
 
 import io.vertx.core.impl.ConcurrentHashSet;
 import io.vertx.ext.unit.TestContext;
-import io.vertx.quiz.UpBase;
+import io.zero.quiz.UpBase;
 import io.vertx.quiz.example.ED;
 import io.vertx.quiz.example.ED1;
 import io.vertx.up.atom.agent.Event;

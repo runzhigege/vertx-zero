@@ -15,7 +15,6 @@ import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroVertx;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -26,11 +25,11 @@ public class VertxVisitor implements NodeVisitor {
     private static final String KEY = "vertx";
 
     private transient final Node<JsonObject> NODE
-            = Instance.singleton(ZeroVertx.class);
+            = Ut.singleton(ZeroVertx.class);
     private transient final Transformer<VertxOptions>
-            transformer = Instance.singleton(VertxStrada.class);
+            transformer = Ut.singleton(VertxStrada.class);
     private transient final Transformer<ClusterOptions>
-            clusterTransformer = Instance.singleton(ClusterStrada.class);
+            clusterTransformer = Ut.singleton(ClusterStrada.class);
 
     private transient ClusterOptions clusterOptions;
 

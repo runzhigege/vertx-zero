@@ -2,7 +2,6 @@ package io.zero.epic.fn;
 
 import io.vertx.zero.exception.ZeroRunException;
 import io.zero.epic.Ut;
-import io.zero.epic.mirror.Instance;
 
 import java.util.function.Supplier;
 
@@ -24,8 +23,7 @@ class Deliver {
             ret = supplier.get();
         } catch (final Throwable ex) {
             final Object[] argument = Ut.elementAdd(args, ex);
-            final ZeroRunException error = Instance.instance(
-                    runCls, argument);
+            final ZeroRunException error = Ut.instance(runCls, argument);
             if (null != error) {
                 throw error;
             }

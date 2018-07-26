@@ -12,13 +12,12 @@ import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 public class RpcSslTool {
 
     private static final Annal LOGGER = Annal.get(RpcSslTool.class);
 
-    private static final Node<JsonObject> node = Instance.singleton(ZeroUniform.class);
+    private static final Node<JsonObject> node = Ut.singleton(ZeroUniform.class);
 
     /**
      * @param vertx  Vert.x instance

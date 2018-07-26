@@ -10,7 +10,6 @@ import io.vertx.up.web.ZeroAnno;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 import io.zero.epic.mirror.Anno;
-import io.zero.epic.mirror.Instance;
 
 import java.lang.reflect.Field;
 import java.util.Set;
@@ -46,7 +45,7 @@ public class AffluxScatter implements Scatter<Vertx> {
         final Set<Class<?>> injects = ZeroAnno.getInjects();
         Ut.itSet(injects, (item, index) -> Runner.run(() -> {
             // Initialize object
-            final Object instance = Instance.singleton(item);
+            final Object instance = Ut.singleton(item);
             // Initialize reference
             this.inject(instance);
         }, "injects-afflux-" + index));
@@ -63,11 +62,11 @@ public class AffluxScatter implements Scatter<Vertx> {
                 instance = INJECTOR.inject(field);
             } else {
                 // Inject Only
-                instance = Instance.singleton(type);
+                instance = Ut.singleton(type);
             }
             // Set for field
             if (null != instance) {
-                Instance.set(proxy, key, instance);
+                Ut.set(proxy, key, instance);
                 // Scan continue for field
                 this.inject(instance);
             }

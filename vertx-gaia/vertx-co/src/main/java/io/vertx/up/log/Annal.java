@@ -7,7 +7,7 @@ import io.vertx.up.web.ZeroAmbient;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.log.Log;
 import io.vertx.zero.log.internal.Log4JAnnal;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 
 /**
  * Unite Logging system connect to vert.x, io.zero.epic kit of Vertx-Zero
@@ -47,7 +47,7 @@ class CommonAnnal implements Annal {
             inject = Log4JAnnal.class;
         }
         Log.debug(RECORD, Info.INF_ANNAL, inject, clazz);
-        this.logger = Instance.instance(inject, clazz);
+        this.logger = Ut.instance(inject, clazz);
     }
 
     @Override

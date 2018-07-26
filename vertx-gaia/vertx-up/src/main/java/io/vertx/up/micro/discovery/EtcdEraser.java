@@ -2,7 +2,7 @@ package io.vertx.up.micro.discovery;
 
 import io.vertx.servicediscovery.Record;
 import io.vertx.up.concurrent.Runner;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 
 import java.util.concurrent.ConcurrentMap;
 
@@ -28,13 +28,13 @@ public class EtcdEraser {
     }
 
     private void eraseApi() {
-        final Origin origin = Instance.singleton(ApiOrigin.class);
+        final Origin origin = Ut.singleton(ApiOrigin.class);
         final ConcurrentMap<String, Record> records = origin.getRegistryData();
         records.forEach((key, value) -> origin.erasing(value));
     }
 
     private void eraseIpc() {
-        final Origin origin = Instance.singleton(IpcOrigin.class);
+        final Origin origin = Ut.singleton(IpcOrigin.class);
         final ConcurrentMap<String, Record> records = origin.getRegistryData();
         records.forEach((key, value) -> origin.erasing(value));
     }

@@ -10,7 +10,6 @@ import io.vertx.up.annotations.SessionData;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.agent.Event;
 import io.zero.epic.Ut;
-import io.zero.epic.mirror.Instance;
 
 import javax.ws.rs.core.MediaType;
 import java.lang.annotation.Annotation;
@@ -73,8 +72,8 @@ public final class Answer {
         final Session session = context.session();
         if (null != session && null != data && method.isAnnotationPresent(SessionData.class)) {
             final Annotation annotation = method.getAnnotation(SessionData.class);
-            final String key = Instance.invoke(annotation, "value");
-            final String field = Instance.invoke(annotation, "field");
+            final String key = Ut.invoke(annotation, "value");
+            final String field = Ut.invoke(annotation, "field");
             // Data Storage
             Object reference = data;
             if (Ut.isJObject(data) && Ut.notNil(field)) {

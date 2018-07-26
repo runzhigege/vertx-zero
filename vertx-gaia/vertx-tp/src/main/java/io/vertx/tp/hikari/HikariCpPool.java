@@ -6,8 +6,8 @@ import io.vertx.up.log.Annal;
 import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.sql.Connection;
 
@@ -17,7 +17,7 @@ import java.sql.Connection;
 public class HikariCpPool {
 
     private static final Annal LOGGER = Annal.get(HikariCpPool.class);
-    private static final Node<JsonObject> NODE = Instance.singleton(ZeroUniform.class);
+    private static final Node<JsonObject> NODE = Ut.singleton(ZeroUniform.class);
     private static final String KEY = "pool";
     private static final String HIKARI_KEY = "hikari";
     private static HikariCpConfig CONFIG;

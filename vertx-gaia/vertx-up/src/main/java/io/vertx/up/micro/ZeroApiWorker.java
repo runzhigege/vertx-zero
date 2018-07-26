@@ -12,8 +12,8 @@ import io.vertx.up.eon.em.MessageModel;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.discovery.ApiOrigin;
 import io.vertx.up.micro.discovery.Origin;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
-import io.zero.epic.mirror.Instance;
 
 import java.text.MessageFormat;
 import java.util.HashSet;
@@ -32,7 +32,7 @@ public class ZeroApiWorker extends AbstractVerticle {
 
     private static final Annal LOGGER = Annal.get(ZeroApiWorker.class);
 
-    private static final Origin ORIGIN = Instance.singleton(ApiOrigin.class);
+    private static final Origin ORIGIN = Ut.singleton(ApiOrigin.class);
 
     private static final ConcurrentMap<String, Record> REGISTRITIONS
             = new ConcurrentHashMap<>();

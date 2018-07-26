@@ -2,7 +2,7 @@ package io.vertx.up.kidd;
 
 import io.vertx.up.exception.WebException;
 import io.vertx.up.kidd.outcome.CodeReadible;
-import io.zero.epic.mirror.Instance;
+import io.zero.epic.Ut;
 
 /**
  * Fill the field "readible" for input exception
@@ -14,7 +14,7 @@ public interface Readible {
      * @return
      */
     static Readible get() {
-        return Instance.singleton(CodeReadible.class);
+        return Ut.singleton(CodeReadible.class);
     }
 
     /**
