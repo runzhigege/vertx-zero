@@ -1,6 +1,7 @@
 package io.zero.epic;
 
 import io.reactivex.Observable;
+import io.vertx.core.json.DecodeException;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
@@ -35,6 +36,17 @@ class Types {
         return Fn.getNull(null, () -> Enum.valueOf(clazz, input), clazz, input);
     }
 
+    static boolean isJArray(final String literal) {
+        return Fn.getNull(Boolean.FALSE, () -> {
+            try {
+                new JsonArray(literal);
+                return true;
+            } catch (final DecodeException ex) {
+                return false;
+            }
+        }, literal);
+    }
+
     static boolean isJArray(final Object value) {
         return Fn.getSemi(null == value, LOGGER,
                 () -> false,
@@ -53,6 +65,17 @@ class Types {
         return Fn.getSemi(null == value, LOGGER,
                 () -> false,
                 () -> null != Instance.clazz(value.toString()));
+    }
+
+    static boolean isJObject(final String literal) {
+        return Fn.getNull(Boolean.FALSE, () -> {
+            try {
+                new JsonObject(literal);
+                return true;
+            } catch (final DecodeException ex) {
+                return false;
+            }
+        }, literal);
     }
 
     static boolean isJObject(final Object value) {
