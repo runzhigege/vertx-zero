@@ -287,6 +287,10 @@ public class Ut {
         return Types.isDate(value);
     }
 
+    public static boolean isJArray(final String literal) {
+        return Types.isJArray(literal);
+    }
+
     public static boolean isJArray(final Object value) {
         return Types.isJArray(value);
     }
@@ -298,7 +302,10 @@ public class Ut {
     public static boolean isArray(final Object value) {
         return Types.isArray(value);
     }
-
+    
+    public static boolean isJObject(final String literal) {
+        return Types.isJObject(literal);
+    }
 
     public static boolean isJObject(final Object value) {
         return Types.isJObject(value);
