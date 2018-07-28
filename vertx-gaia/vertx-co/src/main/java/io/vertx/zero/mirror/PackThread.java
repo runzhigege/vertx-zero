@@ -7,14 +7,14 @@ import java.util.function.Predicate;
 /**
  * Package scan thread
  */
-public class PackThread extends Thread {
+class PackThread extends Thread {
 
     private final transient String pkg;
     private final transient Predicate<Class<?>> filter;
     private final Set<Class<?>> classes = new HashSet<>();
 
-    public PackThread(final String pkg,
-                      final Predicate<Class<?>> filter) {
+    PackThread(final String pkg,
+               final Predicate<Class<?>> filter) {
         this.setName("package-scanner-" + super.getId());
         this.pkg = pkg;
         this.filter = filter;

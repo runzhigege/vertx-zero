@@ -1,7 +1,7 @@
 package io.vertx.up.micro.discovery;
 
 import io.vertx.servicediscovery.Record;
-import io.vertx.up.concurrent.Runner;
+import io.vertx.up.web.Runner;
 import io.zero.epic.Ut;
 
 import java.util.concurrent.ConcurrentMap;

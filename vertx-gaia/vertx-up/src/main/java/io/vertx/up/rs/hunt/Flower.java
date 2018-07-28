@@ -11,10 +11,10 @@ import io.vertx.up.exception.WebException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.announce.Rigor;
 import io.vertx.up.rs.validation.Validator;
-import io.vertx.zero.mirror.Anno;
 import io.zero.epic.container.KeyPair;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.List;
 import java.util.Map;
 
@@ -42,7 +42,7 @@ class Flower {
         if (null == error) {
 
             // Check if annotated with @Codex
-            final KeyPair<Integer, Class<?>> found = Anno.findParameter(depot.getEvent().getAction(), Codex.class);
+            final KeyPair<Integer, Class<?>> found = findParameter(depot.getEvent().getAction());
             if (null == found.getValue()) {
                 context.next();
             } else {
@@ -55,6 +55,20 @@ class Flower {
             // Hibernate validate failure
             replyError(context, error, depot.getEvent());
         }
+    }
+
+    private static KeyPair<Integer, Class<?>> findParameter(
+            final Method method) {
+        int index = 0;
+        final KeyPair<Integer, Class<?>> result = KeyPair.create();
+        for (final Parameter parameter : method.getParameters()) {
+            if (parameter.isAnnotationPresent(Codex.class)) {
+                result.set(index, parameter.getType());
+                break;
+            }
+            index++;
+        }
+        return result;
     }
 
     private static void verifyCodex(final RoutingContext context,

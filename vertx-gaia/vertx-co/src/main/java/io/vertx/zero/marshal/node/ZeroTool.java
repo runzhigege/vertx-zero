@@ -18,11 +18,11 @@ public class ZeroTool {
     }
 
     static JsonObject read(final String key, final boolean extension) {
-        /** Read the original configuration **/
+        // Read the original configuration
         final JsonObject original = readDirect(produce(key));
         final JsonObject merged = new JsonObject();
         if (extension) {
-            /** Read the internal configuration instead **/
+            // Read the internal configuration instead
             final JsonObject internal = readDirect("ke/config/" + produce(key));
             if (null != internal) {
                 merged.mergeIn(internal, true);

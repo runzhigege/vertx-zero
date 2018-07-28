@@ -30,7 +30,7 @@ public class ZeroVertx implements Node<JsonObject> {
 
     private JsonObject process(final JsonObject data) {
         return Fn.getNull(() -> {
-            /** 1. Append lime **/
+            // 1. Append lime
             if (data.containsKey(Key.LIME)) {
                 this.prodcessLime(data);
             }
@@ -42,13 +42,13 @@ public class ZeroVertx implements Node<JsonObject> {
         Fn.safeNull(() -> {
             final String limeStr = data.getString(Key.LIME);
             final Set<String> sets = Ut.splitToSet(limeStr, Strings.COMMA);
-            /**
+            /*
              * server, inject, error, resolver
              * RxJava2
              */
             Observable.fromArray(Plugins.DATA)
                     .map(item -> item)
-                    .subscribe(sets::add);
+                    .subscribe(sets::add).dispose();
             data.put(Key.LIME, Ut.fromJoin(sets));
         }, data);
     }

@@ -9,7 +9,6 @@ import io.vertx.zero.exception.MultiAnnotatedException;
 import io.vertx.zero.exception.NamedImplementionException;
 import io.vertx.zero.exception.NamedNotFoundException;
 import io.vertx.zero.exception.QualifierMissedException;
-import io.vertx.zero.mirror.Anno;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
@@ -46,7 +45,7 @@ public class AffluxThread extends Thread {
         if (null != this.reference) {
             // 1. Read all inject point
             final List<Field> fields = Arrays.stream(this.reference.getDeclaredFields())
-                    .filter(field -> Anno.isMark(field, Plugins.INJECT_ANNOTATIONS))
+                    .filter(field -> Plugins.INJECT_ANNOTATIONS.stream().anyMatch(field::isAnnotationPresent))
                     .collect(Collectors.toList());
             // 2. Convert to fields
             for (final Field field : fields) {
