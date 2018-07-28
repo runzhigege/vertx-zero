@@ -6,7 +6,7 @@ import io.vertx.up.rs.Filler;
 import io.vertx.zero.exception.AnnotationRepeatException;
 import io.vertx.zero.exception.EventActionNoneException;
 import io.vertx.zero.exception.ParamAnnotationException;
-import io.vertx.zero.mirror.Anno;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
 import javax.ws.rs.BodyParam;
@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public class Verifier {
@@ -37,7 +38,13 @@ public class Verifier {
 
     public static void verify(final Method method, final Class<? extends Annotation> annoCls) {
         final Annotation[][] annotations = method.getParameterAnnotations();
-        final int occurs = Anno.occurs(annotations, annoCls);
+        final AtomicInteger integer = new AtomicInteger(0);
+        Ut.itMatrix(annotations, (annotation) -> {
+            if (annotation.annotationType() == annoCls) {
+                integer.incrementAndGet();
+            }
+        });
+        final int occurs = integer.get();
 
         Fn.outUp(1 < occurs, LOGGER, AnnotationRepeatException.class,
                 Verifier.class, method.getName(), annoCls, occurs);

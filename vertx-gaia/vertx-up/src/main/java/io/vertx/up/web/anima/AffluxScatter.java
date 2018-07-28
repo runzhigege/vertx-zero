@@ -3,11 +3,10 @@ package io.vertx.up.web.anima;
 import io.vertx.core.Vertx;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.worker.Receipt;
-import io.vertx.up.concurrent.Runner;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.log.Annal;
+import io.vertx.up.web.Runner;
 import io.vertx.up.web.ZeroAnno;
-import io.vertx.zero.mirror.Anno;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
@@ -57,7 +56,7 @@ public class AffluxScatter implements Scatter<Vertx> {
             final Class<?> clazz = proxy.getClass();
             final Field field = clazz.getDeclaredField(key);
             final Object instance;
-            if (Anno.isMark(field, Plugins.INFIX_MAP.keySet())) {
+            if (Plugins.INFIX_MAP.keySet().stream().anyMatch(field::isAnnotationPresent)) {
                 // Speicific Annotation
                 instance = INJECTOR.inject(field);
             } else {

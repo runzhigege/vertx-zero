@@ -135,6 +135,21 @@ public class Ut {
         return list;
     }
 
+    public static <T> HashSet<T> combineSet(final HashSet<T> sets, final T entity) {
+        sets.add(entity);
+        return sets;
+    }
+
+    public static <T> HashSet<T> combineSet(final HashSet<T> sets, final Set<T> entities) {
+        sets.addAll(entities);
+        return sets;
+    }
+
+    public static <T> T addThen(final Set<T> sets, final T entity) {
+        sets.add(entity);
+        return entity;
+    }
+
     // --- Encrypt
     public static String encryptMD5(final String input) {
         return Codec.md5(input);
@@ -302,7 +317,7 @@ public class Ut {
     public static boolean isArray(final Object value) {
         return Types.isArray(value);
     }
-    
+
     public static boolean isJObject(final String literal) {
         return Types.isJObject(literal);
     }

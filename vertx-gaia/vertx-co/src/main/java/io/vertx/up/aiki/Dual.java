@@ -19,7 +19,7 @@ class Dual {
         final JsonObject result = immutable ? target.copy() : target;
         Observable.fromIterable(source.fieldNames())
                 .filter(key -> !target.containsKey(key))
-                .subscribe(key -> result.put(key, source.getValue(key)));
+                .subscribe(key -> result.put(key, source.getValue(key))).dispose();
         return result;
     }
 
@@ -29,7 +29,7 @@ class Dual {
     ) {
         Observable.fromIterable(sources)
                 .map(item -> (JsonObject) item)
-                .subscribe(item -> append(target, item, false));
+                .subscribe(item -> append(target, item, false)).dispose();
         return target;
     }
 
@@ -77,6 +77,7 @@ class Dual {
                 new ConcurrentHashMap<>();
         Observable.fromIterable(sources)
                 .map(item -> (JsonObject) item)
+                .filter(item -> item.containsKey(field))
                 .subscribe(item -> {
                     if (item.containsKey(field)) {
                         final Object value = item.getValue(field);
@@ -84,7 +85,7 @@ class Dual {
                             resultMap.put(value, item);
                         }
                     }
-                });
+                }).dispose();
         return resultMap;
     }
 

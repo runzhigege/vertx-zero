@@ -43,7 +43,7 @@ public class Mojo implements Serializable {
         this.type = type;
     }
 
-    public ConcurrentMap<String, String> getMapper() {
+    ConcurrentMap<String, String> getMapper() {
         // Fix no mapping issue for empty mapping conversion.
         Fn.safeSemi(null == this.config, LOGGER, () -> this.config = new ConcurrentHashMap<>());
         return this.config;

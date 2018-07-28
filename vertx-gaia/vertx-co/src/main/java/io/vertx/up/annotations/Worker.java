@@ -19,7 +19,7 @@ public @interface Worker {
     /**
      * Event but interaction mode definition
      *
-     * @return
+     * @return One of three supported message model that belong to vertx.
      */
     MessageModel value() default MessageModel.REQUEST_RESPONSE;
 
@@ -27,7 +27,7 @@ public @interface Worker {
      * Worker Instance Number
      * Default: 32
      *
-     * @return
+     * @return default instance number
      */
     int instances() default ZeroValue.DEFAULT_INSTANCES;
 
@@ -35,12 +35,12 @@ public @interface Worker {
      * Isolation Group
      * Default: __VERTX_ZERO__
      *
-     * @return
+     * @return default vert.x group
      */
     String group() default ZeroValue.DEFAULT_GROUP;
 
     /**
-     * @return
+     * @return whether support HA feature for current worker.
      */
     boolean ha() default ZeroValue.DEFAULT_HA;
 }

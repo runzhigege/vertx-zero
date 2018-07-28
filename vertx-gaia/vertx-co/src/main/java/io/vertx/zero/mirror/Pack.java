@@ -1,9 +1,11 @@
 package io.vertx.zero.mirror;
 
 import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 import io.vertx.core.impl.ConcurrentHashSet;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Strings;
+import io.zero.epic.Ut;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -92,11 +94,10 @@ public final class Pack {
     private static Set<Class<?>> singleClasses(
             final String[] packageDir,
             final Predicate<Class<?>> filter) {
-        final Set<Class<?>> result = new HashSet<>();
-        Observable.fromArray(packageDir)
+        return Observable.fromArray(packageDir)
                 .map(pkgName -> PackScanner.getClasses(filter, pkgName))
-                .subscribe(result::addAll);
-        return result;
+                .reduce(new HashSet<Class<?>>(), Ut::combineSet)
+                .blockingGet();
     }
 
     private static Set<Class<?>> multiClasses(
@@ -104,11 +105,11 @@ public final class Pack {
             final Predicate<Class<?>> filter) {
         // Counter
         final Set<PackThread> references = new HashSet<>();
-        for (final String pkgName : packageDir) {
-            final PackThread thread = new PackThread(pkgName, filter);
-            references.add(thread);
-            thread.start();
-        }
+        final Disposable disposable = Observable.fromArray(packageDir)
+                .map(item -> new PackThread(item, filter))
+                .map(item -> Ut.addThen(references, item))
+                .subscribe(Thread::start);
+
         // Wait
         final Set<Class<?>> result = new HashSet<>();
         try {
@@ -118,6 +119,9 @@ public final class Pack {
             // Collect all the classes
             for (final PackThread thread : references) {
                 result.addAll(thread.getClasses());
+            }
+            if (!disposable.isDisposed()) {
+                disposable.dispose();
             }
         } catch (final InterruptedException ex) {
             LOGGER.jvm(ex);
