@@ -1,8 +1,6 @@
 package io.vertx.zero.mirror;
 
 import io.vertx.ext.unit.TestContext;
-import io.vertx.up.annotations.Agent;
-import io.vertx.up.example.AnnoAgent;
 import io.vertx.up.example.AnnoOne;
 import io.zero.quiz.ZeroBase;
 import org.junit.Test;
@@ -19,11 +17,5 @@ public class AnnoTc extends ZeroBase {
             System.out.println("key=" + item + ",value=" + clazzes.get(item));
         }
         context.assertEquals(2, clazzes.size());
-    }
-
-    @Test
-    public void testAttrs(final TestContext context) {
-        final String item = Anno.getAttribute(AnnoAgent.class, Agent.class, "group");
-        context.assertEquals("_ZERO_", item);
     }
 }

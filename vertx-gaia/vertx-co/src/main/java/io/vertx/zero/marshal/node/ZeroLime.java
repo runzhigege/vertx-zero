@@ -38,13 +38,10 @@ public class ZeroLime implements Node<ConcurrentMap<String, String>> {
 
     private ConcurrentMap<String, String> build(final String literal) {
         final Set<String> sets = Ut.splitToSet(literal, Strings.COMMA);
-        if (null != literal) {
-            // RxJava2
-            Observable.fromIterable(sets)
-                    .filter(Objects::nonNull)
-                    .subscribe(item -> Fn.pool(INTERNALS, item,
-                            () -> ZeroTool.produce(item)));
-        }
+        Fn.safeNull(() -> Observable.fromIterable(sets)
+                .filter(Objects::nonNull)
+                .subscribe(item -> Fn.pool(INTERNALS, item,
+                        () -> ZeroTool.produce(item))).dispose(), literal);
         return INTERNALS;
     }
 }

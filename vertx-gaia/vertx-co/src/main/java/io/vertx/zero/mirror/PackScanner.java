@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 /**
  * PackScanner
  */
-public class PackScanner {
+class PackScanner {
 
     static Set<Class<?>> getClasses(final Predicate<Class<?>> filter,
                                     final String zeroScan) {
@@ -61,6 +61,7 @@ public class PackScanner {
         }, zeroScan);
     }
 
+    @SuppressWarnings("all")
     private static Set<Class<?>> getClasses(final String packageDir,
                                             final String packName,
                                             final URL url,
@@ -130,7 +131,7 @@ public class PackScanner {
                 packName;
         // Whether there exist another folder
         final String processedName = packageName.replace("/", Strings.DOT);
-        Fn.safeNull(() -> {
+        if (null != dirfiles) {
             for (final File classFile : dirfiles) {
                 // If directory, continue
                 if (classFile.isDirectory()) {
@@ -150,6 +151,6 @@ public class PackScanner {
                     }
                 }
             }
-        }, dirfiles);
+        }
     }
 }

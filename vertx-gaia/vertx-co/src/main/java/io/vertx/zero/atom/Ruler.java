@@ -31,9 +31,9 @@ public class Ruler {
     /**
      * Verify data for each file
      *
-     * @param file
-     * @param data
-     * @throws ZeroException
+     * @param file The rule file that input into this method.
+     * @param data The data that will be verified.
+     * @throws ZeroException Error when verified failure.
      */
     public static void verify(
             final String file,

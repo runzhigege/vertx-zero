@@ -31,7 +31,8 @@ public class ZeroUniform implements Node<JsonObject> {
                                 () -> Ut.ioYaml(keys.get(key)),
                                 keys.get(key))))
                 .filter(Objects::nonNull)
-                .subscribe(item -> data.mergeIn(item, true));
+                .subscribe(item -> data.mergeIn(item, true))
+                .dispose();
         return data;
     }
 }

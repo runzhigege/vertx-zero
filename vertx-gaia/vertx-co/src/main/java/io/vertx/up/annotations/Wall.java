@@ -18,7 +18,7 @@ public @interface Wall {
     /**
      * Default value for all request limitation.
      *
-     * @return
+     * @return the path that will be in security filter.
      */
     String path() default "/*";
 
@@ -33,7 +33,7 @@ public @interface Wall {
      * 4. user: ( Required )
      * 5. config: JsonObject for provider
      *
-     * @return
+     * @return The required value for current building.
      */
     String value();
 
@@ -44,7 +44,7 @@ public @interface Wall {
      * 3. The wall handler sequence should be triggered by 0,1,2,3...
      * Multi handler mode needed for this value.
      *
-     * @return
+     * @return handler order value that will be built into security chain.
      */
     int order() default Values.ZERO;
 
@@ -57,7 +57,7 @@ public @interface Wall {
      * Phase(AUTHORIZE): void authorize(JsonObject, AsyncHandler<User>)
      * Phase(ACCESS): User isAuthorized(String, Handler<AsyncResult<Boolean>> resultHandler)
      *
-     * @return
+     * @return The phase that occurs in security limitation.
      */
     boolean define() default false;
 }

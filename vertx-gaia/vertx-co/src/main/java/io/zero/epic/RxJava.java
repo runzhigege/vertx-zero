@@ -2,6 +2,7 @@ package io.zero.epic;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.disposables.Disposable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
@@ -35,5 +36,11 @@ class RxJava {
                     sets.add((T) ele);
                     return sets;
                 });
+    }
+
+    static void rxEnd(final Disposable disposable) {
+        if (!disposable.isDisposed()) {
+            disposable.dispose();
+        }
     }
 }
