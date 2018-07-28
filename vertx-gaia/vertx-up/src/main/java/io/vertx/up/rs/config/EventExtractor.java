@@ -153,7 +153,6 @@ public class EventExtractor implements Extractor<Set<Event>> {
             proxy = Ut.singleton(method.getDeclaringClass());
         }
         event.setProxy(proxy);
-        System.out.println(proxy);
         return event;
     }
 }
