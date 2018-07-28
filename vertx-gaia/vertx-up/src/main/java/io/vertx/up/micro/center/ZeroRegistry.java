@@ -57,7 +57,7 @@ public class ZeroRegistry {
      * Get current etcd configuration information that initialized
      * in zero system.
      *
-     * @return
+     * @return Return zero configuration in etcd
      */
     public JsonArray getConfig() {
         return this.etcd.getConfig();
@@ -93,7 +93,7 @@ public class ZeroRegistry {
                 .filter(item -> Objects.nonNull(item.getKey()) && Objects.nonNull(item.getValue()))
                 .filter(item -> Etat.RUNNING == Ut.toEnum(Etat.class, item.getValue()))
                 .map(Map.Entry::getKey)
-                .subscribe(sets::add);
+                .subscribe(sets::add).dispose();
         return sets;
     }
 
@@ -144,7 +144,7 @@ public class ZeroRegistry {
         // Build Data
         final JsonArray routeData = new JsonArray();
         Observable.fromIterable(ipcs)
-                .subscribe(routeData::add);
+                .subscribe(routeData::add).dispose();
         this.etcd.write(path, routeData, Values.ZERO);
     }
 
@@ -168,7 +168,7 @@ public class ZeroRegistry {
         // Build Data
         final JsonArray routeData = new JsonArray();
         Observable.fromIterable(routes)
-                .subscribe(routeData::add);
+                .subscribe(routeData::add).dispose();
         this.etcd.write(path, routeData, Values.ZERO);
     }
 }

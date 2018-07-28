@@ -89,6 +89,7 @@ public class TunnelClient {
      *
      * @return Found record for IPC
      */
+    @SuppressWarnings("all")
     private Record findTarget() {
         final ConcurrentMap<String, Record> address = ORIGIN.getRegistryData();
         final String target = this.getValue("to");

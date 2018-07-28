@@ -16,6 +16,7 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.*;
 
+@SuppressWarnings("all")
 public class ValidatorBundleLocator implements ResourceBundleLocator {
     private static final Annal LOGGER = Annal.get(ValidatorBundleLocator.class);
     private static final boolean RESOURCE_BUNDLE_CONTROL_INSTANTIABLE = determineAvailabilityOfResourceBundleControl();
@@ -23,19 +24,45 @@ public class ValidatorBundleLocator implements ResourceBundleLocator {
     private final ClassLoader classLoader;
     private final boolean aggregate;
 
-    public ValidatorBundleLocator(final String bundleName) {
+    ValidatorBundleLocator(final String bundleName) {
         this(bundleName, (ClassLoader) null);
     }
 
-    public ValidatorBundleLocator(final String bundleName, final ClassLoader classLoader) {
+    private ValidatorBundleLocator(final String bundleName, final ClassLoader classLoader) {
         this(bundleName, classLoader, false);
     }
 
-    public ValidatorBundleLocator(final String bundleName, final ClassLoader classLoader, final boolean aggregate) {
+    ValidatorBundleLocator(final String bundleName, final ClassLoader classLoader, final boolean aggregate) {
         Contracts.assertNotNull(bundleName, "bundleName");
         this.bundleName = bundleName;
         this.classLoader = classLoader;
         this.aggregate = aggregate && RESOURCE_BUNDLE_CONTROL_INSTANTIABLE;
+    }
+
+    private static <T> T run(final PrivilegedAction<T> action) {
+        return System.getSecurityManager() != null ? AccessController.doPrivileged(action) : action.run();
+    }
+
+    private static boolean determineAvailabilityOfResourceBundleControl() {
+        try {
+            final ResourceBundle.Control dummyControl = ValidatorBundleLocator.AggregateResourceBundle.CONTROL;
+            if (dummyControl == null) {
+                return false;
+            } else {
+                final Method getModule = (Method) run(GetMethod.action(Class.class, "getModule"));
+                if (getModule == null) {
+                    return true;
+                } else {
+                    final Object module = getModule.invoke(ValidatorBundleLocator.class);
+                    final Method isNamedMethod = (Method) run(GetMethod.action(module.getClass(), "isNamed"));
+                    final boolean isNamed = (Boolean) isNamedMethod.invoke(module);
+                    return !isNamed;
+                }
+            }
+        } catch (final Throwable var5) {
+            LOGGER.info(Messages.MESSAGES.unableToUseResourceBundleAggregation());
+            return false;
+        }
     }
 
     @Override
@@ -81,32 +108,6 @@ public class ValidatorBundleLocator implements ResourceBundleLocator {
         }
 
         return rb;
-    }
-
-    private static <T> T run(final PrivilegedAction<T> action) {
-        return System.getSecurityManager() != null ? AccessController.doPrivileged(action) : action.run();
-    }
-
-    private static boolean determineAvailabilityOfResourceBundleControl() {
-        try {
-            final ResourceBundle.Control dummyControl = ValidatorBundleLocator.AggregateResourceBundle.CONTROL;
-            if (dummyControl == null) {
-                return false;
-            } else {
-                final Method getModule = (Method) run(GetMethod.action(Class.class, "getModule"));
-                if (getModule == null) {
-                    return true;
-                } else {
-                    final Object module = getModule.invoke(ValidatorBundleLocator.class);
-                    final Method isNamedMethod = (Method) run(GetMethod.action(module.getClass(), "isNamed"));
-                    final boolean isNamed = (Boolean) isNamedMethod.invoke(module);
-                    return !isNamed;
-                }
-            }
-        } catch (final Throwable var5) {
-            LOGGER.info(Messages.MESSAGES.unableToUseResourceBundleAggregation());
-            return false;
-        }
     }
 
     private static class AggregateResourceBundleControl extends ResourceBundle.Control {

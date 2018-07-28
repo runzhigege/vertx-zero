@@ -11,9 +11,9 @@ public abstract class BaseSaber implements Saber {
         return Annal.get(this.getClass());
     }
 
-    protected void verifyInput(final boolean condition,
-                               final Class<?> paramType,
-                               final String literal) {
+    void verifyInput(final boolean condition,
+                     final Class<?> paramType,
+                     final String literal) {
         Fn.outUp(condition,
                 this.getLogger(), _400ParameterFromStringException.class,
                 ZeroSerializer.class, paramType, literal);

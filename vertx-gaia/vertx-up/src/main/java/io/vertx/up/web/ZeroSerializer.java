@@ -1,16 +1,10 @@
 package io.vertx.up.web;
 
-import io.reactivex.Observable;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.atom.Envelop;
-import io.vertx.up.log.Annal;
 import io.vertx.up.web.serialization.*;
-import io.vertx.zero.atom.Mirror;
-import io.vertx.zero.eon.Values;
 import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -20,7 +14,6 @@ import java.time.LocalTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.function.Function;
 
 /**
  * ZeroSerializer the request by different type.
@@ -31,8 +24,6 @@ import java.util.function.Function;
  */
 @SuppressWarnings("unchecked")
 public class ZeroSerializer {
-
-    private static final Annal LOGGER = Annal.get(ZeroSerializer.class);
 
     private static final ConcurrentMap<Class<?>, Saber> SABERS =
             new ConcurrentHashMap<Class<?>, Saber>() {
@@ -158,65 +149,5 @@ public class ZeroSerializer {
             reference = saber.from(input);
         }
         return reference;
-    }
-
-    @Deprecated
-    public static <T> JsonArray toArray(final List<T> list, final Function<JsonObject, JsonObject> converted) {
-        final JsonArray array = Ut.serializeJson(list);
-        final JsonArray result = new JsonArray();
-        Observable.fromIterable(array)
-                .filter(Objects::nonNull)
-                .map(item -> (JsonObject) item)
-                .map(converted::apply)
-                .subscribe(result::add);
-        return result;
-    }
-
-    @Deprecated
-    public static <T> JsonArray toArray(final List<T> list) {
-        return toArray(list, item -> item);
-    }
-
-    @Deprecated
-    public static <T> JsonArray toArray(final List<T> list, final String pojo) {
-        return Fn.getNull(new JsonArray(), () -> {
-            final Function<JsonObject, JsonObject> converted =
-                    (from) -> Mirror.create(ZeroSerializer.class)
-                            .mount(pojo).connect(from).to().result();
-            return toArray(list, converted);
-        }, pojo, list);
-    }
-
-    @Deprecated
-    public static <T> JsonObject toObject(final T entity, final String pojo) {
-        return Fn.getNull(new JsonObject(), () -> {
-            final JsonObject from = Ut.serializeJson(entity);
-            return Mirror.create(ZeroSerializer.class)
-                    .mount(pojo).connect(from).to().result();
-        }, entity, pojo);
-    }
-
-    @Deprecated
-    public static <T> Envelop collect(final List<T> list) {
-        return Envelop.success(toArray(list, item -> item));
-    }
-
-    @Deprecated
-    public static <T> Envelop unique(final List<T> list) {
-        return Fn.getSemi(null == list || 0 == list.size(), LOGGER,
-                () -> Envelop.success(new JsonObject()),
-                () -> unique(list.get(Values.IDX)));
-    }
-
-    @Deprecated
-    public static <T> Envelop unique(final JsonArray data) {
-        return Fn.getSemi(null == data || 0 == data.size(), LOGGER,
-                () -> Envelop.success(new JsonObject()),
-                () -> unique(data.getJsonObject(Values.IDX)));
-    }
-
-    @Deprecated
-    public static <T> Envelop unique(final T entity) {
-        return Fn.getJvm(Envelop.success(new JsonObject()), () -> Envelop.success(entity), entity);
     }
 }

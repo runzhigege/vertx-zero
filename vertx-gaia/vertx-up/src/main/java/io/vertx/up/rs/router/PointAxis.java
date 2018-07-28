@@ -23,7 +23,7 @@ public class PointAxis implements Axis<Router> {
 
     @Override
     public void mount(final Router router) {
-        /** Breaker and Dispatch **/
+        /* Breaker and Dispatch **/
         router.route("/*")
                 .order(Orders.EVENT)
                 .handler(ServiceJet

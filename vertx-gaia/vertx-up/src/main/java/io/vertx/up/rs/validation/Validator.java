@@ -102,7 +102,7 @@ public class Validator {
                 // 2. Build rulers
                 .map(item -> this.buildKey(depot.getEvent()))
                 .map(this::buildRulers)
-                .subscribe(rulers::putAll);
+                .subscribe(rulers::putAll).dispose();
         return rulers;
     }
 
@@ -131,7 +131,7 @@ public class Validator {
 
     private List<Rule> buildRulers(final Object config) {
         final List<Rule> rulers = new ArrayList<>();
-        if (null != config && config instanceof JsonArray) {
+        if (config instanceof JsonArray) {
             final JsonArray configData = (JsonArray) config;
             Ut.itJArray(configData, JsonObject.class, (item, index) -> {
                 final Rule ruler = Rule.create(item);

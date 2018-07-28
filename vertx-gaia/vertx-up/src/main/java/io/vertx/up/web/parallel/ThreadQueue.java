@@ -33,7 +33,7 @@ public class ThreadQueue {
         }
     }
 
-    public void startAsync() {
+    private void startAsync() {
         for (final Thread thread : this.threads) {
             thread.start();
         }

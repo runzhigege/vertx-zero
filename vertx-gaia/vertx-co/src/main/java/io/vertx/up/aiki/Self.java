@@ -27,7 +27,7 @@ class Self {
                 .filter(field -> Objects.isNull(entity.getValue(field)))
                 .collect(Collectors.toSet());
         Observable.fromIterable(keys)
-                .subscribe(result::remove);
+                .subscribe(result::remove).dispose();
         return result;
     }
 
@@ -40,7 +40,7 @@ class Self {
         Observable.fromArray(keys)
                 .filter(Ut::notNil)
                 .map(result::remove)
-                .subscribe();
+                .subscribe().dispose();
         return result;
     }
 
@@ -54,7 +54,7 @@ class Self {
                 .subscribe(key -> {
                     final Object value = entity.getValue(key);
                     result.put(key, value);
-                });
+                }).dispose();
         entity.clear();
         entity.mergeIn(result, true);
         return entity;
@@ -96,7 +96,7 @@ class Self {
         final JsonArray result = immutable ? array.copy() : array;
         Observable.fromIterable(result)
                 .map(item -> (JsonObject) item)
-                .subscribe(item -> copy(item, from, to, false));
+                .subscribe(item -> copy(item, from, to, false)).dispose();
         return result;
     }
 
@@ -110,7 +110,7 @@ class Self {
         Observable.fromIterable(result)
                 .map(item -> (JsonObject) item)
                 .filter(testFun::test)
-                .subscribe(filtered::add);
+                .subscribe(filtered::add).dispose();
         result.clear().addAll(filtered);
         return result;
     }
@@ -135,7 +135,7 @@ class Self {
         final JsonArray result = immutable ? jsonArray.copy() : jsonArray;
         Observable.fromIterable(result)
                 .map(item -> (JsonObject) item)
-                .subscribe(item -> defaultValue(item, filled, false));
+                .subscribe(item -> defaultValue(item, filled, false)).dispose();
         return result;
     }
 
@@ -148,7 +148,7 @@ class Self {
         final JsonArray result = immutable ? jsonArray.copy() : jsonArray;
         Observable.fromIterable(result)
                 .map(item -> (JsonObject) item)
-                .subscribe(item -> defaultValue(item, field, value, false));
+                .subscribe(item -> defaultValue(item, field, value, false)).dispose();
         return result;
     }
 
@@ -174,7 +174,7 @@ class Self {
         Observable.fromIterable(result)
                 .map((item) -> (JsonObject) item)
                 .map(item -> item.getValue(field))
-                .subscribe(processed::add);
+                .subscribe(processed::add).dispose();
         result.clear().addAll(processed);
         return result;
     }
@@ -204,7 +204,8 @@ class Self {
         final JsonArray result = immutable ? array.copy() : array;
         Observable.fromIterable(result)
                 .map(item -> (JsonObject) item)
-                .subscribe(item -> convert(item, field, function, false));
+                .subscribe(item -> convert(item, field, function, false))
+                .dispose();
         return result;
     }
 
@@ -259,7 +260,8 @@ class Self {
         final JsonArray result = immutable ? array.copy() : array;
         Observable.fromIterable(result)
                 .map(item -> (JsonObject) item)
-                .subscribe(item -> convert(item, mapping, false));
+                .subscribe(item -> convert(item, mapping, false))
+                .dispose();
         return result;
     }
 
@@ -271,7 +273,7 @@ class Self {
         final JsonArray dis = new JsonArray();
         Observable.fromIterable(result)
                 .distinct()
-                .subscribe(dis::add);
+                .subscribe(dis::add).dispose();
         return result.clear().addAll(dis);
     }
 
@@ -283,7 +285,7 @@ class Self {
         final JsonArray dis = new JsonArray();
         Observable.fromIterable(result)
                 .sorted()
-                .subscribe(dis::add);
+                .subscribe(dis::add).dispose();
         return result.clear().addAll(dis);
     }
 }
