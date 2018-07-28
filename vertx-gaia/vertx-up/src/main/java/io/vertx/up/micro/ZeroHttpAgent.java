@@ -43,27 +43,27 @@ public class ZeroHttpAgent extends AbstractVerticle {
 
     @Override
     public void start() {
-        /** 1.Call router hub to mount commont **/
+        /* 1.Call router hub to mount commont **/
         final Axis<Router> routerAxiser = Fn.poolThread(Pool.ROUTERS,
                 () -> Ut.instance(RouterAxis.class));
-        /** 2.Call route hub to mount defined **/
+        /* 2.Call route hub to mount defined **/
         final Axis<Router> axiser = Fn.poolThread(Pool.EVENTS,
                 () -> Ut.instance(EventAxis.class));
-        /** 3.Call route hub to mount walls **/
+        /* 3.Call route hub to mount walls **/
         final Axis<Router> wallAxiser = Fn.poolThread(Pool.WALLS,
                 () -> Ut.instance(WallAxis.class, this.vertx));
-        /** 4.Call route hub to mount filters **/
+        /* 4.Call route hub to mount filters **/
         final Axis<Router> filterAxiser = Fn.poolThread(Pool.FILTERS,
                 () -> Ut.instance(FilterAxis.class));
-        /** 5.Get the default HttpServer Options **/
+        /* 5.Get the default HttpServer Options **/
         ZeroAtomic.HTTP_OPTS.forEach((port, option) -> {
-            /** 5.1.Single server processing **/
+            /* 5.1.Single server processing **/
             final HttpServer server = this.vertx.createHttpServer(option);
 
-            /** 5.2. Build router with current option **/
+            /* 5.2. Build router with current option **/
             final Router router = Router.router(this.vertx);
 
-            /** 5.3. Mount data to router **/
+            /* 5.3. Mount data to router **/
             // Router
             routerAxiser.mount(router);
             // Wall
@@ -73,7 +73,7 @@ public class ZeroHttpAgent extends AbstractVerticle {
             // Filter
             filterAxiser.mount(router);
 
-            /** 5.4.Listen for router on the server **/
+            /* 5.4.Listen for router on the server **/
             server.requestHandler(router::accept).listen();
             {
                 // 5.5. Log output

@@ -13,6 +13,7 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.Locale;
 
+@SuppressWarnings("all")
 public class ValidatorInterpolator extends ValidatorMessager {
     private static final Annal LOGGER = Annal.get(ValidatorInterpolator.class);
     private final ExpressionFactory expressionFactory;
@@ -44,12 +45,6 @@ public class ValidatorInterpolator extends ValidatorMessager {
     public ValidatorInterpolator(final ResourceBundleLocator userResourceBundleLocator, final boolean cachingEnabled, final ExpressionFactory expressionFactory) {
         super(userResourceBundleLocator, (ResourceBundleLocator) null, cachingEnabled);
         this.expressionFactory = expressionFactory;
-    }
-
-    @Override
-    public String interpolate(final Context context, final Locale locale, final String term) {
-        final InterpolationTerm expression = new InterpolationTerm(term, locale, this.expressionFactory);
-        return expression.interpolate(context);
     }
 
     private static ExpressionFactory buildExpressionFactory() {
@@ -101,5 +96,11 @@ public class ValidatorInterpolator extends ValidatorMessager {
 
     private static <T> T run(final PrivilegedAction<T> action) {
         return System.getSecurityManager() != null ? AccessController.doPrivileged(action) : action.run();
+    }
+
+    @Override
+    public String interpolate(final Context context, final Locale locale, final String term) {
+        final InterpolationTerm expression = new InterpolationTerm(term, locale, this.expressionFactory);
+        return expression.interpolate(context);
     }
 }

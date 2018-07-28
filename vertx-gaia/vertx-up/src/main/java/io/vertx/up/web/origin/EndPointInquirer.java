@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * @EndPoint
+ *
  */
 public class EndPointInquirer implements Inquirer<Set<Class<?>>> {
 

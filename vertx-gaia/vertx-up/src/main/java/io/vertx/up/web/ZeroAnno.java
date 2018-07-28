@@ -49,14 +49,14 @@ public class ZeroAnno {
             TPS = new HashSet<>();
 
     static {
-        /** 1.Scan the packages **/
+        /* 1.Scan the packages **/
         final Set<Class<?>> clazzes = Pack.getClasses(null);
-        /** EndPoint **/
+        /* EndPoint **/
         Inquirer<Set<Class<?>>> inquirer =
                 Ut.singleton(EndPointInquirer.class);
         ENDPOINTS.addAll(inquirer.scan(clazzes));
 
-        /** EndPoint -> Event **/
+        /* EndPoint -> Event **/
         Fn.safeSemi(!ENDPOINTS.isEmpty(),
                 LOGGER,
                 () -> {
@@ -65,21 +65,21 @@ public class ZeroAnno {
                     EVENTS.addAll(event.scan(ENDPOINTS));
                 });
 
-        /** Wall -> Authenticate, Authorize **/
+        /* Wall -> Authenticate, Authorize **/
         final Inquirer<Set<Cliff>> walls =
                 Ut.singleton(WallInquirer.class);
         WALLS.addAll(walls.scan(clazzes));
 
-        /** Filter -> WebFilter **/
+        /* Filter -> WebFilter **/
         final Inquirer<ConcurrentMap<String, Set<Event>>> filters =
                 Ut.singleton(FilterInquirer.class);
         FILTERS.putAll(filters.scan(clazzes));
 
-        /** Queue **/
+        /* Queue **/
         inquirer = Ut.singleton(QueueInquirer.class);
         final Set<Class<?>> queues = inquirer.scan(clazzes);
 
-        /** Queue -> Receipt **/
+        /* Queue -> Receipt **/
         Fn.safeSemi(!queues.isEmpty(),
                 LOGGER,
                 () -> {
@@ -88,7 +88,7 @@ public class ZeroAnno {
                     RECEIPTS.addAll(receipt.scan(queues));
                 });
 
-        /** Ipc Only **/
+        /* Ipc Only **/
         Fn.safeSemi(IPCS.isEmpty(),
                 LOGGER,
                 () -> {
@@ -97,29 +97,29 @@ public class ZeroAnno {
                     IPCS.putAll(ipc.scan(clazzes));
                 });
 
-        /** Agent **/
+        /* Agent **/
         final Inquirer<ConcurrentMap<ServerType, List<Class<?>>>> agent =
                 Ut.singleton(AgentInquirer.class);
         AGENTS.putAll(agent.scan(clazzes));
 
-        /** JSR330 Fix **/
+        /* JSR330 Fix **/
         final Inquirer<Set<Class<?>>> pointer =
                 Ut.singleton(PointerInquirer.class);
         POINTER.addAll(pointer.scan(clazzes));
 
-        /** Tp Clients **/
+        /* Tp Clients **/
         final Inquirer<Set<Class<?>>> tps =
                 Ut.singleton(PluginInquirer.class);
         TPS.addAll(tps.scan(clazzes));
 
-        /** Worker **/
+        /* Worker **/
         final Inquirer<Set<Class<?>>> worker =
                 Ut.singleton(WorkerInquirer.class);
         WORKERS.addAll(worker.scan(clazzes));
 
-        /** Walls **/
+        /* Walls **/
 
-        /** Injections **/
+        /* Injections **/
         final Inquirer<ConcurrentMap<Class<?>, ConcurrentMap<String, Class<?>>>> afflux =
                 Ut.singleton(AffluxInquirer.class);
         PLUGINS.putAll(afflux.scan(clazzes));
@@ -128,7 +128,7 @@ public class ZeroAnno {
     /**
      * Get all plugins
      *
-     * @return
+     * @return plugin map
      */
     public static ConcurrentMap<Class<?>, ConcurrentMap<String, Class<?>>>
     getPlugins() {
@@ -138,7 +138,7 @@ public class ZeroAnno {
     /**
      * Get all agents.
      *
-     * @return
+     * @return agent map
      */
     public static ConcurrentMap<ServerType, List<Class<?>>>
     getAgents() {
@@ -148,7 +148,7 @@ public class ZeroAnno {
     /**
      * Injects
      *
-     * @return
+     * @return pointer set
      */
     public static Set<Class<?>>
     getInjects() {
@@ -158,7 +158,7 @@ public class ZeroAnno {
     /**
      * Tp Clients
      *
-     * @return
+     * @return client set
      */
     public static Set<Class<?>>
     getTps() {
@@ -168,7 +168,7 @@ public class ZeroAnno {
     /**
      * Get all workers
      *
-     * @return
+     * @return worker set
      */
     public static Set<Class<?>>
     getWorkers() {
@@ -178,7 +178,7 @@ public class ZeroAnno {
     /**
      * Get all receipts
      *
-     * @return
+     * @return receipts set
      */
     public static Set<Receipt>
     getReceipts() {
@@ -188,7 +188,7 @@ public class ZeroAnno {
     /**
      * Get all endpoints
      *
-     * @return
+     * @return endpoint set
      */
     public static Set<Class<?>>
     getEndpoints() {
@@ -203,7 +203,7 @@ public class ZeroAnno {
     /**
      * Get all envents
      *
-     * @return
+     * @return event set
      */
     public static Set<Event>
     getEvents() {
@@ -213,7 +213,7 @@ public class ZeroAnno {
     /**
      * Get all filters
      *
-     * @return
+     * @return filter map JSR340
      */
     public static ConcurrentMap<String, Set<Event>>
     getFilters() {
@@ -223,7 +223,7 @@ public class ZeroAnno {
     /**
      * Get all guards
      *
-     * @return
+     * @return guard set
      */
     public static Set<Cliff>
     getWalls() {

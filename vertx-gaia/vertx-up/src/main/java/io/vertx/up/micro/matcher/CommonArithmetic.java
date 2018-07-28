@@ -33,9 +33,9 @@ public class CommonArithmetic implements Arithmetic {
     /**
      * Match calculation.
      *
-     * @param uri
-     * @param record
-     * @return
+     * @param uri    real input from client include path variable
+     * @param record discovery record in backend ( From etcd3 )
+     * @return whether the uri match and could be found in etcd3
      */
     private boolean isMatch(final String uri, final Record record) {
         final JsonObject data = record.getMetadata();

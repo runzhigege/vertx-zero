@@ -105,26 +105,27 @@ final class Jackson {
                                     final String... pathes) {
         if (null == data || Values.ZERO == pathes.length) {
             return null;
-        }/** 1. Get current node  **/
-        final JsonObject current = data;
-        /** 2. Extract current input key **/
+        }
+        /* 1. Get current node  **/
+        final JsonObject current = data.copy();
+        /* 2. Extract current input key **/
         final String path = pathes[Values.IDX];
-        /** 3. Continue searching if key existing, otherwise terminal. **/
+        /* 3. Continue searching if key existing, otherwise terminal. **/
         return Fn.getSemi(current.containsKey(path) && null != current.getValue(path),
                 Jackson.LOGGER,
                 () -> {
                     final Object curVal = current.getValue(path);
                     T result = null;
                     if (Values.ONE == pathes.length) {
-                        /** 3.1. Get the end node. **/
+                        /* 3.1. Get the end node. **/
                         if (clazz == curVal.getClass()) {
                             result = (T) curVal;
                         }
                     } else {
-                        /** 3.2. Address the middle search **/
+                        /* 3.2. Address the middle search **/
                         if (Types.isJObject(curVal)) {
                             final JsonObject continueNode = current.getJsonObject(path);
-                            /** 4.Extract new key **/
+                            /* 4.Extract new key **/
                             final String[] continueKeys =
                                     Arrays.copyOfRange(pathes,
                                             Values.ONE,
@@ -146,7 +147,7 @@ final class Jackson {
                 .filter(Objects::nonNull)
                 .map(item -> (JsonObject) item)
                 .map(item -> item.mergeIn(Jackson.findByKey(target, targetKey, item.getValue(sourceKey))))
-                .subscribe(result::add), Jackson.LOGGER);
+                .subscribe(result::add).dispose(), Jackson.LOGGER);
         return result;
     }
 

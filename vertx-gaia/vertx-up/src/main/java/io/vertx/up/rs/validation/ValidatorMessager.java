@@ -18,14 +18,19 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("all")
 public abstract class ValidatorMessager implements MessageInterpolator {
+    public static final String USER_VALIDATION_MESSAGES = "vertx-validation";
+    public static final String CONTRIBUTOR_VALIDATION_MESSAGES = "ContributorValidationMessages";
     private static final Annal LOGGER = Annal.get(ValidatorMessager.class);
     private static final int DEFAULT_INITIAL_CAPACITY = 100;
     private static final float DEFAULT_LOAD_FACTOR = 0.75F;
     private static final int DEFAULT_CONCURRENCY_LEVEL = 16;
     private static final String DEFAULT_VALIDATION_MESSAGES = "org.hibernate.validator.ValidationMessages";
-    public static final String USER_VALIDATION_MESSAGES = "vertx-validation";
-    public static final String CONTRIBUTOR_VALIDATION_MESSAGES = "ContributorValidationMessages";
+    private static final Pattern LEFT_BRACE = Pattern.compile("\\{", 16);
+    private static final Pattern RIGHT_BRACE = Pattern.compile("\\}", 16);
+    private static final Pattern SLASH = Pattern.compile("\\\\", 16);
+    private static final Pattern DOLLAR = Pattern.compile("\\$", 16);
     private final Locale defaultLocale;
     private final ResourceBundleLocator userResourceBundleLocator;
     private final ResourceBundleLocator defaultResourceBundleLocator;
@@ -34,10 +39,6 @@ public abstract class ValidatorMessager implements MessageInterpolator {
     private final ConcurrentReferenceHashMap<String, List<Token>> tokenizedParameterMessages;
     private final ConcurrentReferenceHashMap<String, List<Token>> tokenizedELMessages;
     private final boolean cachingEnabled;
-    private static final Pattern LEFT_BRACE = Pattern.compile("\\{", 16);
-    private static final Pattern RIGHT_BRACE = Pattern.compile("\\}", 16);
-    private static final Pattern SLASH = Pattern.compile("\\\\", 16);
-    private static final Pattern DOLLAR = Pattern.compile("\\$", 16);
 
     public ValidatorMessager() {
         this((ResourceBundleLocator) null);

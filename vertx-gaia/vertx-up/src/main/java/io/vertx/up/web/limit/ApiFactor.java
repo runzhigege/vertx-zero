@@ -23,16 +23,16 @@ public class ApiFactor implements Factor {
     private static final ConcurrentMap<ServerType, Class<?>> INTERNALS
             = new ConcurrentHashMap<ServerType, Class<?>>() {
         {
-            put(ServerType.API, ZeroApiAgent.class);
+            this.put(ServerType.API, ZeroApiAgent.class);
         }
     };
 
     @Override
     public ConcurrentMap<ServerType, Class<?>> agents() {
-        /** 1.Find Agent for deploy **/
+        /* 1.Find Agent for deploy **/
         final ConcurrentMap<ServerType, Class<?>> agents
                 = Motor.agents(ServerType.HTTP, DEFAULT_AGENTS, INTERNALS);
-        /** 2. Filter invalid agents. **/
+        /* 2. Filter invalid agents. **/
         final Set<ServerType> scanned = new HashSet<>(agents.keySet());
         final Set<ServerType> keeped = INTERNALS.keySet();
         scanned.removeAll(keeped);

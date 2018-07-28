@@ -23,8 +23,6 @@ import java.util.TreeSet;
  */
 public class WallAxis implements Axis<Router> {
 
-    private transient final Vertx vertx;
-    private transient final Bolt bolt;
     /**
      * Extract all walls that will be generated route.
      */
@@ -41,6 +39,9 @@ public class WallAxis implements Axis<Router> {
             Pool.WALL_MAP.get(wall.getPath()).add(wall);
         });
     }
+
+    private transient final Vertx vertx;
+    private transient final Bolt bolt;
 
     public WallAxis(final Vertx vertx) {
         this.vertx = vertx;
@@ -68,8 +69,8 @@ public class WallAxis implements Axis<Router> {
     /**
      * Two mode for handler supported.
      *
-     * @param cliffes
-     * @return
+     * @param cliffes Cliff in zero system.
+     * @return Auth Handler that will be mount to vertx router.
      */
     private AuthHandler create(final Vertx vertx, final Set<Cliff> cliffes) {
         AuthHandler resultHandler = null;
@@ -78,7 +79,7 @@ public class WallAxis implements Axis<Router> {
             final ChainAuthHandler chain = ChainAuthHandler.create();
             Observable.fromIterable(cliffes)
                     .map(item -> this.bolt.mount(vertx, item))
-                    .subscribe(chain::append);
+                    .subscribe(chain::append).dispose();
             resultHandler = chain;
         } else {
             // 1 = handler

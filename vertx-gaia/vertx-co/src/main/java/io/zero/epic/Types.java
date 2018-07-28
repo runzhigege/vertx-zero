@@ -166,14 +166,14 @@ class Types {
     static <T> JsonArray toJArray(final Set<T> set) {
         final JsonArray array = new JsonArray();
         Observable.fromIterable(set)
-                .subscribe(array::add);
+                .subscribe(array::add).dispose();
         return array;
     }
 
     static <T> JsonArray toJArray(final List<T> list) {
         final JsonArray array = new JsonArray();
         Observable.fromIterable(list)
-                .subscribe(array::add);
+                .subscribe(array::add).dispose();
         return array;
     }
 

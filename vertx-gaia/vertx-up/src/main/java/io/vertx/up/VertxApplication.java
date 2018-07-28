@@ -39,16 +39,12 @@ public class VertxApplication {
 
     private VertxApplication(final Class<?> clazz) {
         // Must not null
-        Fn.outUp(
-                null == clazz,
-                LOGGER,
+        Fn.outUp(null == clazz, LOGGER,
                 UpClassArgsException.class, this.getClass());
         this.clazz = clazz;
         this.annotationMap = Anno.get(clazz);
         // Must be invalid
-        Fn.outUp(
-                !this.annotationMap.containsKey(Up.class.getName()),
-                LOGGER,
+        Fn.outUp(!this.annotationMap.containsKey(Up.class.getName()), LOGGER,
                 UpClassInvalidException.class, this.getClass(), clazz.getName());
     }
 
@@ -93,19 +89,19 @@ public class VertxApplication {
 
         final Launcher<Vertx> launcher = Ut.singleton(ZeroLauncher.class);
         launcher.start(vertx -> {
-            /** 1.Find Agent for deploy **/
+            /* 1.Find Agent for deploy **/
             Runner.run(() -> {
                 final Scatter<Vertx> scatter = Ut.singleton(AgentScatter.class);
                 scatter.connect(vertx);
             }, "agent-runner");
 
-            /** 2.Find Worker for deploy **/
+            /* 2.Find Worker for deploy **/
             Runner.run(() -> {
                 final Scatter<Vertx> scatter = Ut.singleton(WorkerScatter.class);
                 scatter.connect(vertx);
             }, "worker-runner");
 
-            /** 3.Initialize Infix **/
+            /* 3.Initialize Infix **/
             Runner.run(() -> {
                 // Infix
                 Scatter<Vertx> scatter = Ut.singleton(InfixScatter.class);
@@ -115,7 +111,7 @@ public class VertxApplication {
                 scatter.connect(vertx);
             }, "infix-afflux-runner");
 
-            /** 4.Rule started **/
+            /* 4.Rule started **/
             Runner.run(() -> {
                 final Scatter<Vertx> scatter = Ut.singleton(CodexScatter.class);
                 scatter.connect(vertx);
