@@ -7,11 +7,11 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.servicediscovery.Record;
 import io.vertx.servicediscovery.ServiceDiscovery;
 import io.vertx.up.annotations.Worker;
-import io.vertx.up.concurrent.Runner;
 import io.vertx.up.eon.em.MessageModel;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.discovery.ApiOrigin;
 import io.vertx.up.micro.discovery.Origin;
+import io.vertx.up.web.Runner;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 

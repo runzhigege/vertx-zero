@@ -1,4 +1,4 @@
-package io.vertx.up.concurrent;
+package io.vertx.up.web;
 
 import io.vertx.up.log.Annal;
 import io.zero.epic.fn.Fn;
