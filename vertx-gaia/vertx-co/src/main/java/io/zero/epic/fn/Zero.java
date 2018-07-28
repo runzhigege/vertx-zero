@@ -67,9 +67,6 @@ class Zero {
             final boolean match = Arrays.stream(input).allMatch(Zero::not);
             if (match) {
                 ret = supplier.get();
-                if (null == ret) {
-                    ret = defaultValue;
-                }
             }
         } catch (final ZeroException ex) {
             LOGGER.zero(ex);
@@ -85,6 +82,10 @@ class Zero {
             if (!(ex instanceof DateTimeParseException)) {
                 // TODO: Debug Trace for JVM
                 ex.printStackTrace();
+            }
+        } finally {
+            if (null == ret) {
+                ret = defaultValue;
             }
         }
         return ret;
