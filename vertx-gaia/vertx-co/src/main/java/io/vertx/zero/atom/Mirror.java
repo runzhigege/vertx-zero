@@ -65,7 +65,7 @@ public class Mirror {
                         contain.subscribe(item ->
                                 // Not found in mapper
                                 this.converted.put(item, this.data.getValue(item)))
-                ).subscribe();
+                ).subscribe().dispose();
     }
 
     public Mirror from() {

@@ -9,8 +9,8 @@ public class ThreadAtom extends Thread {
     private final transient CountDownLatch counter;
     private final transient Actuator consumer;
 
-    public ThreadAtom(final CountDownLatch counter,
-                      final Actuator consumer) {
+    ThreadAtom(final CountDownLatch counter,
+               final Actuator consumer) {
         this.counter = counter;
         this.consumer = consumer;
     }

@@ -34,12 +34,12 @@ public class ZeroRpcAgent extends AbstractVerticle {
 
     @Override
     public void start() {
-        /** 1. Iterate all the configuration **/
+        /* 1. Iterate all the configuration **/
         Ut.itMap(ZeroAtomic.RPC_OPTS, (port, config) -> {
-            /** 2.Rcp server builder initialized **/
+            /* 2.Rcp server builder initialized **/
             final VertxServerBuilder builder = VertxServerBuilder
                     .forAddress(this.vertx, config.getHost(), config.getPort());
-            /**
+            /*
              * 3.Service added.
              */
             {
@@ -47,7 +47,7 @@ public class ZeroRpcAgent extends AbstractVerticle {
                 final Tunnel tunnel = Ut.singleton(UnityTunnel.class);
                 builder.addService(tunnel.init(this.vertx));
             }
-            /**
+            /*
              * 4.Server added.
              */
             final VertxServer server = builder.build();
@@ -66,8 +66,8 @@ public class ZeroRpcAgent extends AbstractVerticle {
     /**
      * Registry the data into etcd
      *
-     * @param handler
-     * @param options
+     * @param handler async handler
+     * @param options rpc options
      */
     private void registryServer(final AsyncResult<Void> handler,
                                 final ServidorOptions options) {

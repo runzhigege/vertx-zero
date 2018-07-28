@@ -23,14 +23,15 @@ public class Verifier {
 
     private static final Annal LOGGER = Annal.get(Verifier.class);
 
+    @SuppressWarnings("all")
     public static void verify(final Event event) {
         final Method method = event.getAction();
         Fn.outUp(null == method, LOGGER, EventActionNoneException.class,
                 Verifier.class, event);
-        /** Specification **/
+        /* Specification **/
         verify(method, BodyParam.class);
         verify(method, StreamParam.class);
-        /** Field Specification **/
+        /* Field Specification **/
         for (final Parameter parameter : method.getParameters()) {
             verify(parameter);
         }

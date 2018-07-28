@@ -18,7 +18,7 @@ public class ZeroLauncher implements Launcher<Vertx> {
 
     @Override
     public void start(final Consumer<Vertx> callback) {
-        Motor.start(getClass(),
+        Motor.start(this.getClass(),
                 callback,
                 this::startStandalone,
                 this::startCluster,
@@ -43,19 +43,17 @@ public class ZeroLauncher implements Launcher<Vertx> {
 
     private void startCluster(final ClusterManager manager,
                               final Consumer<Vertx> consumer) {
-        Motor.each((name, option) -> {
-            Vertx.clusteredVertx(option, clustered -> {
-                // 1. Async clustered vertx initialized
-                final Vertx vertx = clustered.result();
-                // 2. Codecs
-                Motor.codec(vertx.eventBus());
-                // 3. Cluster connect
-                manager.setVertx(vertx);
-                // Finalized
-                VERTX.putIfAbsent(name, vertx);
+        Motor.each((name, option) -> Vertx.clusteredVertx(option, clustered -> {
+            // 1. Async clustered vertx initialized
+            final Vertx vertx = clustered.result();
+            // 2. Codecs
+            Motor.codec(vertx.eventBus());
+            // 3. Cluster connect
+            manager.setVertx(vertx);
+            // Finalized
+            VERTX.putIfAbsent(name, vertx);
 
-                consumer.accept(vertx);
-            });
-        });
+            consumer.accept(vertx);
+        }));
     }
 }

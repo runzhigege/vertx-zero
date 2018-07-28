@@ -39,7 +39,7 @@ public class HttpFactor implements Factor {
 
     @Override
     public ConcurrentMap<ServerType, Class<?>> agents() {
-        /** 1.Find Agent for deploy **/
+        /* 1.Find Agent for deploy **/
         final ConcurrentMap<ServerType, Class<?>> agents
                 = Motor.agents(ServerType.HTTP, DEFAULT_AGENTS, INTERNALS);
         if (agents.containsKey(ServerType.IPC)) {

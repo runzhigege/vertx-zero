@@ -42,14 +42,14 @@ public class ApiOrigin implements Origin {
         return EtcdPath.ENDPOINT;
     }
 
-    protected ConcurrentMap<String, Record> readData(final EtcdPath path) {
+    ConcurrentMap<String, Record> readData(final EtcdPath path) {
         // Get End Points.
         final Set<String> results = this.registry.getServices(path);
         // Get records by results.
         final Set<JsonObject> routes = new HashSet<>();
         Observable.fromIterable(results)
                 .map(key -> this.registry.getData(path, key, this::getItem))
-                .subscribe(routes::addAll);
+                .subscribe(routes::addAll).dispose();
         // Build discovery record with metadata to identifier the key.
         final ConcurrentMap<String, Record> map = new ConcurrentHashMap<>();
         // Convert to map
@@ -59,7 +59,7 @@ public class ApiOrigin implements Origin {
                             .getString(ID);
                     final Record record = this.createRecord(item);
                     map.put(key, record);
-                });
+                }).dispose();
         return map;
     }
 
@@ -94,7 +94,7 @@ public class ApiOrigin implements Origin {
                                         .put(ID, id)
                                         .put(PATH, item));
                     })
-                    .subscribe(sets::add);
+                    .subscribe(sets::add).dispose();
         }
         return sets;
     }
