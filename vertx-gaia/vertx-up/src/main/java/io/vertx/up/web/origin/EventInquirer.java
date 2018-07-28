@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @Event
+ *
  */
 public class EventInquirer implements Inquirer<Set<Event>> {
 
@@ -20,20 +20,20 @@ public class EventInquirer implements Inquirer<Set<Event>> {
     @Override
     public Set<Event> scan(final Set<Class<?>> endpoints) {
         final List<EndPointThread> threadReference = new ArrayList<>();
-        /** 2.1.Build Api metadata **/
+        /* 2.1.Build Api metadata **/
         for (final Class<?> endpoint : endpoints) {
             final EndPointThread thread =
                     new EndPointThread(endpoint);
             threadReference.add(thread);
             thread.start();
         }
-        /** 3.2. Join **/
+        /* 3.2. Join **/
         Fn.safeJvm(() -> {
             for (final EndPointThread item : threadReference) {
                 item.join();
             }
         }, LOGGER);
-        /** 3.3. Finally **/
+        /* 3.3. Finally **/
         final Set<Event> events = new HashSet<>();
         Fn.safeJvm(() -> {
             for (final EndPointThread item : threadReference) {

@@ -11,12 +11,13 @@ import java.lang.reflect.Method;
 /**
  * Tool for invoker do shared works.
  */
+@SuppressWarnings("unused")
 class InvokerUtil {
     /**
      * Whether this method is void
      *
-     * @param method
-     * @return
+     * @param method checked method
+     * @return checked result
      */
     static boolean isVoid(final Method method) {
         final Class<?> returnType = method.getReturnType();
@@ -26,8 +27,8 @@ class InvokerUtil {
     /**
      * Arguments verification
      *
-     * @param method
-     * @param target
+     * @param method checked method.
+     * @param target checked class
      */
     static void verifyArgs(final Method method,
                            final Class<?> target) {

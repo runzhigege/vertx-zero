@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
+@SuppressWarnings("all")
 public class FilterAxis implements Axis<Router> {
     private static final Annal LOGGER = Annal.get(FilterAxis.class);
 

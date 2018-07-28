@@ -13,6 +13,7 @@ import java.lang.reflect.Method;
 /**
  * The last point for method
  */
+@SuppressWarnings("all")
 public class FinalTransit implements Transit {
 
     private static final Annal LOGGER = Annal.get(FinalTransit.class);

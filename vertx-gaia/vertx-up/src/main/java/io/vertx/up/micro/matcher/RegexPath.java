@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegexPath {
+class RegexPath {
 
     private static final Pattern RE_OPERATORS_NO_STAR =
             Pattern.compile("([\\(\\)\\$\\+\\.])");
 
-    public static Pattern createRegex(String path) {
+    static Pattern createRegex(String path) {
         // escape path from any regex special chars
         path = RE_OPERATORS_NO_STAR.matcher(path).replaceAll("\\\\$1");
         // allow usage of * at the end as per documentation

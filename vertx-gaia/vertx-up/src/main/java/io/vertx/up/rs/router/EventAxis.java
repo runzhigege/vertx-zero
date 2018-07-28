@@ -18,6 +18,7 @@ import io.zero.epic.fn.Fn;
 
 import java.util.Set;
 
+@SuppressWarnings("all")
 public class EventAxis implements Axis<Router> {
     private static final Annal LOGGER = Annal.get(EventAxis.class);
     /**
@@ -70,7 +71,7 @@ public class EventAxis implements Axis<Router> {
                         // 5. Request workflow executor: handler
                         final Aim<RoutingContext> aim = this.splitter.distribute(event);
 
-                        /**
+                        /*
                          * 6. Handler chain
                          * 1) Mime Analyzer ( Build arguments )
                          * 2) Validation

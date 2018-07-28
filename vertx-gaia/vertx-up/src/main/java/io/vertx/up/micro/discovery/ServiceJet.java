@@ -140,7 +140,7 @@ public class ServiceJet {
     /**
      * Service Not Found ( 404 )
      *
-     * @param context
+     * @param context input router context
      */
     private void reply404Error(final RoutingContext context) {
         final HttpServerRequest request = context.request();
@@ -152,7 +152,7 @@ public class ServiceJet {
     /**
      * Method not Allowed ( 405 )
      *
-     * @param context
+     * @param context input router context
      */
     private void reply405Error(final RoutingContext context) {
         final HttpServerRequest request = context.request();

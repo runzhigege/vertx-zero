@@ -20,12 +20,12 @@ public class ZeroSockAgent extends AbstractVerticle {
     public void start() {
         // Server Listen
         ZeroAtomic.SOCK_OPTS.forEach((port, option) -> {
-            /** Create Server **/
+            /* Create Server **/
             final HttpServer server = this.vertx.createHttpServer(option);
 
             final Router router = Router.router(this.vertx);
-            
-            /** Handler **/
+
+            /* Handler **/
             server.requestHandler(router::accept).listen();
         });
     }
