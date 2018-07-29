@@ -24,7 +24,7 @@ class Net {
         return Fn.getJvm(() -> {
             // 1.Check whether host is reachalbe
             final Boolean hostOk =
-                    Fn.getJvm(() -> InetAddress.getByName(host).isReachable(timeOut), host, timeOut);
+                    Fn.getJvm(Boolean.FALSE, () -> InetAddress.getByName(host).isReachable(timeOut), host, timeOut);
             // 2.Check whether host/port could be connected.
             return hostOk ? (Fn.getJvm(Boolean.FALSE, () -> {
                 final Socket socket = new Socket();
