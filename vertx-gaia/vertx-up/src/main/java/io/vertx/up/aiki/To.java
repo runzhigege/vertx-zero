@@ -109,7 +109,7 @@ class To {
         return (entity) -> {
             Observable.fromArray(functions)
                     .map(function -> function.apply(entity))
-                    .subscribe(futures::add);
+                    .subscribe(futures::add).dispose();
             return futures;
         };
     }
