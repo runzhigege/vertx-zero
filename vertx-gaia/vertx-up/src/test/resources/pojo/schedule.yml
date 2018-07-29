@@ -1,6 +1,6 @@
-type: "com.htl.domain.tables.pojos.HtlSchedule"
+type: "io.zero.epic.PojoEntity"
 mapping:
-  pkId : key
+  pkId: key
   zsigma: sigma
   zlanguage: language
   zcreateBy: createBy
