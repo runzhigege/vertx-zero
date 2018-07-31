@@ -9,6 +9,7 @@ import io.vertx.up.atom.query.Criteria;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
 import io.vertx.up.log.Annal;
+import io.vertx.zero.eon.Strings;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.JooqArgumentException;
 import io.vertx.zero.exception.JooqMergeException;
@@ -20,10 +21,7 @@ import org.jooq.impl.DSL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -82,13 +80,82 @@ public class UxJooq {
     // Condition ---------------------------------------------------------
     public static Condition transform(final JsonObject filters, final Operator operator) {
         Condition condition = null;
+        final Criteria criteria = Criteria.create(filters);
+        if (Inquiry.Mode.LINEAR == criteria.getMode()) {
+            condition = transformLinear(filters, operator);
+        } else {
+            condition = transformTree(filters);
+        }
+        LOGGER.info(Info.JOOQ_PARSE, condition);
+        return condition;
+    }
+
+    private static Condition transformTree(final JsonObject filters) {
+        Condition condition = null;
+        // Calc operator in this level
+        final Operator operator = calcOperator(filters);
+        // Calc liner
+        final Condition linear = transformLinear(transformLinear(filters), operator);
+        // Calc All Tree
+        final List<Condition> tree = transformTreeSet(filters);
+        // Merge the same level
+        tree.add(linear);
+        if (1 == tree.size()) {
+            condition = tree.get(Values.IDX);
+        } else {
+            condition = tree.get(Values.IDX);
+            for (int idx = Values.ONE; idx < tree.size(); idx++) {
+                final Condition right = tree.get(idx);
+                condition = opCond(condition, right, operator);
+            }
+        }
+        return condition;
+    }
+
+    private static List<Condition> transformTreeSet(final JsonObject filters) {
+        final List<Condition> conditions = new ArrayList<>();
+        final JsonObject tree = filters.copy();
+        if (!tree.isEmpty()) {
+            for (final String field : filters.fieldNames()) {
+                if (Ut.isJObject(tree.getValue(field))) {
+                    conditions.add(transformTree(tree.getJsonObject(field)));
+                }
+            }
+        }
+        return conditions;
+    }
+
+    private static JsonObject transformLinear(final JsonObject filters) {
+        final JsonObject linear = filters.copy();
+        linear.remove(Strings.EMPTY);
+        final Set<String> treeKeys = new HashSet<>();
+        for (final String field : filters.fieldNames()) {
+            if (Ut.isJObject(linear.getValue(field))) {
+                linear.remove(field);
+            }
+        }
+        return linear;
+    }
+
+    private static Operator calcOperator(final JsonObject data) {
+        Operator operator;
+        if (!data.containsKey(Strings.EMPTY)) {
+            operator = Operator.OR;
+        } else {
+            final Boolean isAnd = Boolean.valueOf(data.getValue(Strings.EMPTY).toString());
+            operator = isAnd ? Operator.AND : Operator.OR;
+        }
+        return operator;
+    }
+
+    private static Condition transformLinear(final JsonObject filters, final Operator operator) {
+        Condition condition = null;
         for (final String field : filters.fieldNames()) {
             final String key = getKey(field);
             final String[] fields = field.split(",");
             final String targetField = field.split(",")[Values.IDX];
             // Date, DateTime, Time
             Object value = filters.getValue(field);
-
             if (3 > fields.length) {
                 // Function
                 final BiFunction<String, Object, Condition> fun = OPS.get(key);
@@ -112,7 +179,6 @@ public class UxJooq {
                 condition = opCond(condition, item, operator);
             }
         }
-        LOGGER.info(Info.JOOQ_PARSE, condition);
         return condition;
     }
 
