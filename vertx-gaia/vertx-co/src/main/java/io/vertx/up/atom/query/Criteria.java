@@ -1,16 +1,12 @@
 package io.vertx.up.atom.query;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.exception._400OpUnsupportException;
 import io.vertx.up.exception._500QueryMetaNullException;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Strings;
-import io.zero.epic.container.KeyPair;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Criteria for condition set, the connector is and
@@ -19,14 +15,18 @@ import java.util.List;
 public class Criteria implements Serializable {
 
     private static final Annal LOGGER = Annal.get(Criteria.class);
-    private final List<KeyPair<String, KeyPair<String, Object>>> conditions = new ArrayList<>();
+    private final Inquiry.Mode mode;
+    private transient QLinear linear;
+    private transient QTree tree;
 
     private Criteria(final JsonObject data) {
         Fn.outWeb(null == data, LOGGER,
                 _500QueryMetaNullException.class, this.getClass());
-        for (final String field : data.fieldNames()) {
-            // Add
-            this.add(field, data.getValue(field));
+        this.mode = this.parseMode(data);
+        if (Inquiry.Mode.LINEAR == this.mode) {
+            this.linear = QLinear.create(data);
+        } else {
+            this.tree = QTree.create(data);
         }
     }
 
@@ -34,43 +34,41 @@ public class Criteria implements Serializable {
         return new Criteria(data);
     }
 
-    public List<KeyPair<String, KeyPair<String, Object>>> getConditions() {
-        return this.conditions;
+    private Inquiry.Mode parseMode(final JsonObject data) {
+        Inquiry.Mode mode = Inquiry.Mode.LINEAR;
+        for (final String field : data.fieldNames()) {
+            if (Ut.isJObject(data.getValue(field))) {
+                mode = Inquiry.Mode.TREE;
+                break;
+            }
+        }
+        return mode;
     }
 
     public boolean isValid() {
-        return !this.conditions.isEmpty();
+        if (Inquiry.Mode.LINEAR == this.mode) {
+            return this.linear.isValid();
+        } else {
+            return this.tree.isValid();
+        }
+    }
+
+    public Inquiry.Mode getMode() {
+        return this.mode;
     }
 
     public Criteria add(final String field, final Object value) {
-        // Field add
-        final String filterField;
-        final String op;
-        if (field.contains(Strings.COMMA)) {
-            filterField = field.split(Strings.COMMA)[0];
-            op = field.split(Strings.COMMA)[1];
-        } else {
-            filterField = field;
-            op = Inquiry.Op.EQ;
+        if (Inquiry.Mode.LINEAR == this.mode) {
+            this.linear.add(field, value);
         }
-        Fn.outWeb(!Inquiry.Op.VALUES.contains(op), LOGGER,
-                _400OpUnsupportException.class, this.getClass(), op);
-        final KeyPair<String, Object> condition = KeyPair.create(op, value);
-        final KeyPair<String, KeyPair<String, Object>> item = KeyPair.create(filterField, condition);
-        // At the same time.
-        this.conditions.add(item);
         return this;
     }
 
     public JsonObject toJson() {
-        final JsonObject json = new JsonObject();
-        for (final KeyPair<String, KeyPair<String, Object>> item : this.conditions) {
-            final String field = item.getKey();
-            final KeyPair<String, Object> value = item.getValue();
-            final String op = value.getKey();
-            final Object hitted = value.getValue();
-            json.put(field + Strings.COMMA + op, hitted);
+        if (Inquiry.Mode.LINEAR == this.mode) {
+            return this.linear.toJson();
+        } else {
+            return this.tree.toJson();
         }
-        return json;
     }
 }

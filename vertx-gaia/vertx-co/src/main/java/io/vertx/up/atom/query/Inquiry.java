@@ -22,8 +22,8 @@ public interface Inquiry {
     /**
      * Create Inquiry
      *
-     * @param data
-     * @return
+     * @param data json literal
+     * @return Inquiry reference. ( simple criteria or qtree automatically )
      */
     static Inquiry create(final JsonObject data) {
         return new IrInquiry(data);
@@ -32,31 +32,30 @@ public interface Inquiry {
     /**
      * Query key checking for search operation
      *
-     * @param checkJson
-     * @param key
-     * @param type
-     * @param predicate
-     * @param target
+     * @param checkJson input checked
+     * @param key       key
+     * @param type      expected type.
+     * @param predicate function to check current json
+     * @param target    class who call this method.
      */
     static void ensureType(final JsonObject checkJson,
                            final String key, final Class<?> type,
                            final Predicate<Object> predicate,
                            final Class<?> target) {
-        Fn.safeNull(() -> {
-            final Annal logger = Annal.get(target);
-            Fn.safeNull(() -> Fn.safeSemi(checkJson.containsKey(key), logger, () -> {
-                // Throw type exception
-                final Object check = checkJson.getValue(key);
-                Fn.outWeb(!predicate.test(check), logger,
-                        _400QueryKeyTypeException.class, target,
-                        key, type, check.getClass());
-            }), checkJson);
-        }, target);
+        Fn.safeNull(() -> Fn.safeNull(() -> Fn.safeSemi(checkJson.containsKey(key), Annal.get(target), () -> {
+            // Throw type exception
+            final Object check = checkJson.getValue(key);
+            Fn.outWeb(!predicate.test(check), Annal.get(target),
+                    _400QueryKeyTypeException.class, target,
+                    key, type, check.getClass());
+        }), checkJson), target);
     }
 
     /**
-     * @param field
-     * @param value
+     * Add field=value (key/pair) in current context.
+     *
+     * @param field field that will be added.
+     * @param value value that will be added.
      */
     void setInquiry(String field, Object value);
 
@@ -84,16 +83,25 @@ public interface Inquiry {
     /**
      * Get criteria
      *
-     * @return
+     * @return criteria with and/or
      */
     Criteria getCriteria();
 
     /**
      * To JsonObject
      *
-     * @return
+     * @return the raw data that will be input into Jooq Condition
      */
     JsonObject toJson();
+
+    enum Connector {
+        AND, OR
+    }
+
+    enum Mode {
+        LINEAR, // Conditions merged in linear mode.
+        TREE    // Conditions with query tree mode.
+    }
 
     interface Instant {
         String DAY = "day";
