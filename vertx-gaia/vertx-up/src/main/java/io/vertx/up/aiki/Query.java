@@ -74,6 +74,15 @@ class Query {
                 // Ignore non-existing field in mapping here to avoid SQL errors.
                 criterias.put(targetField, criteria.getValue(field));
             }
+            // Query Engine Needed, Support Tree
+            if (Ut.isJObject(criteria.getValue(field)) || field.equals(Strings.EMPTY)) {
+                if (Ut.isJObject(criteria.getValue(field))) {
+                    final JsonObject valueJson = criteria.getJsonObject(field);
+                    criterias.put(field, criteria(valueJson, mojo));
+                } else {
+                    criterias.put(field, criteria.getValue(field));
+                }
+            }
         }
         return criterias;
     }
