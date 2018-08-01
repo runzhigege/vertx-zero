@@ -12,7 +12,7 @@ public class UxJooqTc extends TestBase {
     @Test
     public void testTransform() {
         final JsonObject input = this.getJson("condition.json");
-        final Inquiry inquiry = Inquiry.create(input);
+        final Inquiry inquiry = Query.getInquiry(input, "user");
         final Condition condition = UxJooq.transform(inquiry.getCriteria().toJson(), Operator.AND);
     }
 }
