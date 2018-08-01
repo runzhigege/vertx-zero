@@ -81,6 +81,7 @@ public class UxJooq {
     public static Condition transform(final JsonObject filters, final Operator operator) {
         Condition condition = null;
         final Criteria criteria = Criteria.create(filters);
+        LOGGER.info("[ ZERO ] Mode selected {0}", criteria.getMode());
         if (Inquiry.Mode.LINEAR == criteria.getMode()) {
             condition = transformLinear(filters, operator);
         } else {
@@ -99,7 +100,7 @@ public class UxJooq {
         // Calc All Tree
         final List<Condition> tree = transformTreeSet(filters);
         // Merge the same level
-        tree.add(linear);
+        if (null != linear) tree.add(linear);
         if (1 == tree.size()) {
             condition = tree.get(Values.IDX);
         } else {
@@ -454,6 +455,25 @@ public class UxJooq {
         final JsonObject result = new JsonObject();
         return searchDirect(inquiry, Operator.OR)
                 .compose(array -> Ux.thenJsonMore(array.getList(), pojo))
+                .compose(array -> {
+                    result.put("list", array);
+                    return countSearchAsync(inquiry, Operator.OR);
+                })
+                .compose(count -> {
+                    result.put("count", count);
+                    return Future.succeededFuture(result);
+                });
+    }
+
+    public <T> Future<JsonObject> searchAsync(final JsonObject params, final String pojo) {
+        final Inquiry inquiry = Query.getInquiry(params, pojo);
+        return searchAsync(inquiry, pojo);
+    }
+
+    public <T> Future<JsonObject> searchAsync(final Inquiry inquiry, final String pojo) {
+        final JsonObject result = new JsonObject();
+        return searchAsync(inquiry, Operator.AND)
+                .compose(list -> Ux.thenJsonMore(list, pojo))
                 .compose(array -> {
                     result.put("list", array);
                     return countSearchAsync(inquiry, Operator.OR);
