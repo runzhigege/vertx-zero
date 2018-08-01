@@ -2,3 +2,6 @@ type: "io.vertx.up.aiki.UserJson"
 mapping:
   name: zName
   email: zEmail
+columns:
+  name: S_NAME
+  code: S_CODE

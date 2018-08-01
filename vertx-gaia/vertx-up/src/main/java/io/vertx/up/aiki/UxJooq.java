@@ -81,7 +81,8 @@ public class UxJooq {
     public static Condition transform(final JsonObject filters, final Operator operator) {
         Condition condition = null;
         final Criteria criteria = Criteria.create(filters);
-        LOGGER.info("[ ZERO ] Mode selected {0}", criteria.getMode());
+        LOGGER.info("[ ZERO ] Mode selected {0}, filters raw = {1}",
+                criteria.getMode(), filters);
         if (Inquiry.Mode.LINEAR == criteria.getMode()) {
             condition = transformLinear(filters, operator);
         } else {
