@@ -49,7 +49,7 @@ final class Jackson {
     }
 
     static ObjectMapper getMapper() {
-        return MAPPER;
+        return MAPPER.copy();
     }
 
     static JsonObject visitJObject(
