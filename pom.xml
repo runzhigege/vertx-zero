@@ -85,7 +85,7 @@
         <hibernate.validator.version>6.0.11.Final</hibernate.validator.version>
         <scala.version>2.12.4</scala.version>
         <feign.version>8.18.0</feign.version>
-        <guava.version>25.1-jre</guava.version>
+        <guava.version>26.0-jre</guava.version>
         <codehaus.janino.version>3.0.8</codehaus.janino.version>
         <cglib.version>3.2.7</cglib.version>
         <ignite.version>2.6.0</ignite.version>
