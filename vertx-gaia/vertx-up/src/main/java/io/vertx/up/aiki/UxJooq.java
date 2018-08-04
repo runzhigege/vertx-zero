@@ -38,6 +38,8 @@ public class UxJooq {
     private transient final VertxDAO vertxDAO;
     private transient final ConcurrentMap<String, String> mapping =
             new ConcurrentHashMap<>();
+    private transient final ConcurrentMap<String, String> revert =
+            new ConcurrentHashMap<>();
     private transient Mojo pojo;
     private transient String pojoFile;
 
@@ -86,6 +88,7 @@ public class UxJooq {
             final Field column = columns[idx];
             final java.lang.reflect.Field field = fields[idx];
             this.mapping.put(field.getName(), column.getName());
+            this.revert.put(column.getName(), field.getName());
         }
     }
 
@@ -130,6 +133,16 @@ public class UxJooq {
         LOGGER.debug(Info.JOOQ_FIELD, targetField);
 
         return DSL.field(targetField);
+    }
+
+    private <T> T skipPk(final T entity) {
+        final Table<?> tableField = Ut.field(this.vertxDAO, "table");
+        final UniqueKey key = tableField.getPrimaryKey();
+        key.getFields().stream().map(item -> ((TableField) item).getName())
+                .filter(this.revert::containsKey)
+                .map(this.revert::get)
+                .forEach(item -> Ut.field(entity, item.toString(), null));
+        return entity;
     }
 
     // CRUD - Read -----------------------------------------------------
@@ -197,9 +210,9 @@ public class UxJooq {
         Fn.outUp(null == updated, LOGGER, JooqMergeException.class,
                 UxJooq.class, null == target ? null : target.getClass(), Ut.serialize(target));
         final JsonObject targetJson = null == target ? new JsonObject() : Ut.serializeJson(target);
-        final JsonObject sourceJson = Ut.serializeJson(updated);
+        final JsonObject sourceJson = Ut.serializeJson(skipPk(updated));
         targetJson.mergeIn(sourceJson, true);
-        return (T) Ut.deserialize(targetJson, updated.getClass());
+        return (T) Ut.deserialize(targetJson, target.getClass());
     }
 
     // CRUD - Existing/Missing ------------------------------------------
