@@ -4,14 +4,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.zero.epic.Ut;
-import io.zero.quiz.TestBase;
+import io.zero.quiz.EpicBase;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class D10051Tc extends TestBase {
+public class D10051Tc extends EpicBase {
 
     @Test
     public void testToJarray() {

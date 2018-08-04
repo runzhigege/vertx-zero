@@ -1,0 +1,31 @@
+mapping:
+  pkId: key
+  isActive: active
+  scode: code
+  sName: name
+  stype: type
+  jconfig: config
+  zsigma: sigma
+  zlanguage: language
+  zcreateBy: createBy
+  zcreateTime: createTime
+  zupdateBy: updateBy
+  zupdateTime: updateTime
+  sauth: auth
+  tcomments: comments
+  veserverId: emailServerId
+  sbackUp: backUp
+  scontact: contact
+  sicp: icp
+  scurrency: currency
+  sdateFormat: dateFormat
+  sencoding: encoding
+  slogo: logo
+  sowner: owner
+  spath: path
+  srenewal: renewal
+  stitle: title
+  sversion: version
+  iattachSize: attachSize
+columns:
+  key: PK_ID

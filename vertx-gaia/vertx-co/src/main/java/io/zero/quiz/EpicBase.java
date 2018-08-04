@@ -7,7 +7,7 @@ import io.vertx.core.logging.LoggerFactory;
 import io.vertx.zero.log.Log;
 import io.zero.epic.Ut;
 
-public class TestBase {
+public class EpicBase {
 
     protected String getFile(final String filename) {
         final Class<?> clazz = this.getClass();

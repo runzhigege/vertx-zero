@@ -12,7 +12,8 @@ import org.junit.Rule;
 import org.junit.runner.RunWith;
 
 @RunWith(VertxUnitRunner.class)
-public abstract class ZeroBase extends TestBase {
+public abstract class ZeroBase extends EpicBase {
+
     @Rule
     public final RunTestOnContext rule = new RunTestOnContext();
 

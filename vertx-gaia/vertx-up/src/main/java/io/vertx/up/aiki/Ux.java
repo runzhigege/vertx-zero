@@ -1,5 +1,6 @@
 package io.vertx.up.aiki;
 
+import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -830,6 +831,10 @@ public final class Ux {
 
         public static UxJooq on(final Class<?> clazz) {
             return Fn.pool(Cache.JOOQ, clazz, () -> new UxJooq(clazz));
+        }
+
+        public static UxJooq on(final Class<?> clazz, final VertxDAO vertxDAO) {
+            return Fn.pool(Cache.JOOQ, clazz, () -> new UxJooq(clazz, vertxDAO));
         }
     }
 
