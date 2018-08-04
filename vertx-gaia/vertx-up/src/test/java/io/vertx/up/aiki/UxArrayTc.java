@@ -17,7 +17,6 @@ public class UxArrayTc extends StoreBase {
         final JsonArray target = this.getArray("target.json");
         final JsonArray result =
                 Uarr.create(source).zip(target, "key", "roomId").to();
-        System.err.println(result.encodePrettily());
         for (int idx = 0; idx < result.size(); idx++) {
             final JsonObject item = result.getJsonObject(idx);
             Assert.assertNotNull(item);
