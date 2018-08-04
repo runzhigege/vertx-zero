@@ -2,12 +2,12 @@ package io.vertx.up.aiki;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.zero.quiz.TestBase;
 import io.vertx.up.atom.Envelop;
+import io.zero.quiz.EpicBase;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class D10046FirstTc extends TestBase {
+public class D10046FirstTc extends EpicBase {
     @Test
     public void testInput() {
         final JsonObject input = this.getJson("d10046.json");

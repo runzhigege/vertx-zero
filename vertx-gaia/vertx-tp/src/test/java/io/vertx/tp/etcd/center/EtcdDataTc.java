@@ -1,10 +1,10 @@
 package io.vertx.tp.etcd.center;
 
-import io.zero.quiz.TestBase;
+import io.zero.quiz.EpicBase;
 
-public class EtcdDataTc extends TestBase {
+public class EtcdDataTc extends EpicBase {
 
     public void testData() {
-        EtcdData.create(getClass());
+        EtcdData.create(this.getClass());
     }
 }

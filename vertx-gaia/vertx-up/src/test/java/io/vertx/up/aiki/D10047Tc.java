@@ -2,12 +2,12 @@ package io.vertx.up.aiki;
 
 import io.vertx.core.json.JsonObject;
 import io.zero.epic.Ut;
-import io.zero.quiz.TestBase;
+import io.zero.quiz.EpicBase;
 import net.sf.cglib.beans.BeanCopier;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class D10047Tc extends TestBase {
+public class D10047Tc extends EpicBase {
     private <T> T copyEntity(final T target, final T updated) {
         final BeanCopier copier = BeanCopier.create(updated.getClass(), target.getClass(), false);
         copier.copy(updated, target, null);
