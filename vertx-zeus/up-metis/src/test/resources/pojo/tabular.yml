@@ -1,0 +1,14 @@
+mapping:
+  pkId: key
+  isActive: active
+  sCode: code
+  sName: name
+  sType: type
+  iOrder: order
+  jConfig: config
+  zSigma: sigma
+  zLanguage: language
+  zCreateBy: createBy
+  zCreateTime: createTime
+  zUpdateBy: updateBy
+  zUpdateTime: updateTime

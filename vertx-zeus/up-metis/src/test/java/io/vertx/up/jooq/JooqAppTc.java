@@ -2,7 +2,9 @@ package io.vertx.up.jooq;
 
 import com.htl.cv.Pojo;
 import com.htl.domain.tables.daos.SysAppDao;
+import com.htl.domain.tables.daos.SysTabularDao;
 import com.htl.domain.tables.pojos.SysApp;
+import com.htl.domain.tables.pojos.SysTabular;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.TestContext;
@@ -15,6 +17,7 @@ import io.zero.quiz.JooqBase;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class JooqAppTc extends JooqBase {
@@ -84,11 +87,21 @@ public class JooqAppTc extends JooqBase {
         System.out.println(app);
     }
 
-    public void testApp(final TestContext context) {
+    public void testUpsert(final TestContext context) {
+        final SysTabular entity = Ux.fromJson(this.getJson("tabular.json"), SysTabular.class, Pojo.TABULAR)
+                .setZCreateTime(LocalDateTime.now())
+                .setZUpdateTime(LocalDateTime.now())
+                .setPkId(UUID.randomUUID().toString());
         this.asyncFlow(context,
-                Ux.Jooq.on(SysAppDao.class)
-                        .on(Pojo.APP)
-                        .fetchOneAsync("name", "vie.app.htl"),
-                context::assertNull);
+                Ux.Jooq.on(SysTabularDao.class)
+                        .on(Pojo.TABULAR)
+                        .upsertAsync(Ux.toFilters(new String[]{"sigma", "code"},
+                                entity::getZSigma,
+                                entity::getSCode), entity)
+                        .compose(Ux.fnJObject(Pojo.TABULAR)),
+                item -> {
+                    context.assertNotNull(item);
+                    System.out.println(item.encodePrettily());
+                });
     }
 }
