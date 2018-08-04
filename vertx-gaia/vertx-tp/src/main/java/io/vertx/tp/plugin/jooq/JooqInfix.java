@@ -4,7 +4,9 @@ import io.vertx.core.Vertx;
 import io.vertx.tp.hikari.HikariCpPool;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.eon.Plugins;
+import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.Infix;
+import io.vertx.zero.exception.JooqVertxNullException;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 import org.jooq.Configuration;
@@ -20,6 +22,8 @@ import java.util.concurrent.ConcurrentMap;
 @Plugin
 @SuppressWarnings("unchecked")
 public class JooqInfix implements Infix {
+
+    private static final Annal LOGGER = Annal.get(JooqInfix.class);
 
     private static final String NAME = "ZERO_JOOQ_POOL";
 
@@ -52,6 +56,8 @@ public class JooqInfix implements Infix {
     }
 
     public static <T> T getDao(final Class<T> clazz) {
+        Fn.outUp(null == vertxRef, LOGGER,
+                JooqVertxNullException.class, clazz);
         final T dao = Ut.instance(clazz, CONFIGS.get(NAME));
         Ut.invoke(dao, "setVertx", vertxRef);
         return dao;
