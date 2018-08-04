@@ -22,8 +22,8 @@ public abstract class ZeroBase extends EpicBase {
             throws ZeroException {
         final Insurer insurer
                 = Ut.singleton(insurerCls);
-        Log.info(this.getLogger(), "[TEST] Input data ( Object ): {0}", data);
-        Log.info(this.getLogger(), "[TEST] Rule data: {0}", rule);
+        Log.info(this.getLogger(), "[ ZERO Test ] Input data ( Object ): {0}", data);
+        Log.info(this.getLogger(), "[ ZERO Test ] Rule data: {0}", rule);
         insurer.flumen(data, rule);
     }
 
@@ -32,8 +32,8 @@ public abstract class ZeroBase extends EpicBase {
             throws ZeroException {
         final Insurer insurer
                 = Ut.singleton(insurerCls);
-        Log.info(this.getLogger(), "[TEST] Input data ( Array ): {0}", array);
-        Log.info(this.getLogger(), "[TEST] Rule data: {0}", rule);
+        Log.info(this.getLogger(), "[ ZERO Test ] Input data ( Array ): {0}", array);
+        Log.info(this.getLogger(), "[ ZERO Test ] Rule data: {0}", rule);
         insurer.flumen(array, rule);
     }
 }
