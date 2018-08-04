@@ -64,6 +64,13 @@ public class Mojo implements Serializable {
         return this.columns;
     }
 
+    public Mojo put(final ConcurrentMap<String, String> columns) {
+        if (null != columns && !columns.isEmpty()) {
+            this.columns.putAll(columns);
+        }
+        return this;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
