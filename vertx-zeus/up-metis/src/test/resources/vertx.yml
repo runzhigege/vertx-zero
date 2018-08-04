@@ -1,0 +1,8 @@
+zero:
+  lime: jooq
+  vertx:
+    instance:
+    - name: zero-hotel
+      options:
+        # Fix block 2000 limit issue.
+        maxEventLoopExecuteTime: 30000000000

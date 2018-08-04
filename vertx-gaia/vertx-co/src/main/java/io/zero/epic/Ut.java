@@ -13,6 +13,7 @@ import io.zero.epic.fn.ZeroBiConsumer;
 
 import java.io.File;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -71,6 +72,11 @@ public class Ut {
     public static <T> T field(final Object instance, final String name) {
         return Instance.get(instance, name);
     }
+
+    public static Field[] fields(final Class<?> clazz) {
+        return Instance.get(clazz);
+    }
+
 
     public static boolean withNoArgConstructor(final Class<?> clazz) {
         return Instance.noarg(clazz);

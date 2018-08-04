@@ -3,8 +3,8 @@ package io.zero.quiz.web;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.*;
 import io.vertx.ext.web.Router;
-import io.zero.quiz.core.VertxTestBase;
 import io.vertx.up.log.Annal;
+import io.zero.quiz.core.VertxTestBase;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -21,6 +21,18 @@ public class WebTestBase extends VertxTestBase {
     protected HttpClient client;
     protected Router router;
 
+    protected static Buffer normalizeLineEndingsFor(final Buffer buff) {
+        final int buffLen = buff.length();
+        final Buffer normalized = Buffer.buffer(buffLen);
+        for (int i = 0; i < buffLen; i++) {
+            final short unsignedByte = buff.getUnsignedByte(i);
+            if (unsignedByte != '\r' || i + 1 == buffLen || buff.getUnsignedByte(i + 1) != '\n') {
+                normalized.appendUnsignedByte(unsignedByte);
+            }
+        }
+        return normalized;
+    }
+
     @Override
     public void setUp() throws Exception {
         super.setUp();
@@ -33,11 +45,11 @@ public class WebTestBase extends VertxTestBase {
     }
 
     protected HttpServerOptions getHttpServerOptions() {
-        return new HttpServerOptions().setPort(8080).setHost("localhost");
+        return new HttpServerOptions().setPort(8517).setHost("localhost");
     }
 
     protected HttpClientOptions getHttpClientOptions() {
-        return new HttpClientOptions().setDefaultPort(8080);
+        return new HttpClientOptions().setDefaultPort(8517);
     }
 
     @Override
@@ -142,18 +154,6 @@ public class WebTestBase extends VertxTestBase {
         }
         req.end();
         this.awaitLatch(latch);
-    }
-
-    protected static Buffer normalizeLineEndingsFor(final Buffer buff) {
-        final int buffLen = buff.length();
-        final Buffer normalized = Buffer.buffer(buffLen);
-        for (int i = 0; i < buffLen; i++) {
-            final short unsignedByte = buff.getUnsignedByte(i);
-            if (unsignedByte != '\r' || i + 1 == buffLen || buff.getUnsignedByte(i + 1) != '\n') {
-                normalized.appendUnsignedByte(unsignedByte);
-            }
-        }
-        return normalized;
     }
 
     protected Annal getLogger() {

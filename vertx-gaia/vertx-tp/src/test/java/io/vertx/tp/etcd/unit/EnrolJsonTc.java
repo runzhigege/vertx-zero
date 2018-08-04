@@ -4,9 +4,9 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.etcd.Enrol;
 import io.vertx.tp.etcd.center.EtcdData;
 import io.zero.epic.Ut;
-import io.zero.quiz.TestBase;
+import io.zero.quiz.EpicBase;
 
-public class EnrolJsonTc extends TestBase {
+public class EnrolJsonTc extends EpicBase {
 
     public void testWrite() {
         final Enrol<JsonObject> enrol = Ut.singleton(JObjectEnrol.class);
