@@ -65,12 +65,12 @@ public class UxJooq {
             this.pojoFile = null;
             this.pojo = null;
         } else {
-            LOGGER.info(Info.JOOQ_BIND, pojo, this.clazz);
+            LOGGER.debug(Info.JOOQ_BIND, pojo, this.clazz);
             this.pojoFile = pojo;
             this.pojo = Mirror.create(UxJooq.class).mount(pojo)
                     .mojo().put(this.mapping);
             // When bind pojo, the system will analyze columns
-            LOGGER.info(Info.JOOQ_MOJO, this.pojo.getRevert(), this.pojo.getColumns());
+            LOGGER.debug(Info.JOOQ_MOJO, this.pojo.getRevert(), this.pojo.getColumns());
         }
         return this;
     }
@@ -127,7 +127,7 @@ public class UxJooq {
         }
         Fn.outUp(null == targetField, LOGGER,
                 JooqFieldMissingException.class, UxJooq.class, field, Ut.field(this.vertxDAO, "type"));
-        LOGGER.info(Info.JOOQ_FIELD, targetField);
+        LOGGER.debug(Info.JOOQ_FIELD, targetField);
 
         return DSL.field(targetField);
     }
