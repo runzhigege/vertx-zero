@@ -18,7 +18,7 @@ public class EndPointTc extends UpBase {
         all.addAll(this.extractor().extract(ED1.class));
         all.addAll(this.extractor().extract(ED.class));
         for (final Event event : all) {
-            this.getLogger().info("[TEST] Extract event: {0}.", event);
+            this.getLogger().info("[ ZERO Test ] Extract event: {0}.", event);
         }
     }
 }
