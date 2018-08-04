@@ -60,6 +60,8 @@
     <logger name="LiquibaseSchemaResolver" level="INFO"/>
     <logger name="sun.net.www" level="INFO"/>
     <logger name="sun.rmi.transport" level="WARN"/>
+    <!-- Disable Jooq -->
+    <logger name="org.jooq.Constants" level="OFF"/>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>

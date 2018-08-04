@@ -117,12 +117,12 @@ public final class Ux {
     }
 
     // JsonArray -> JsonObject ( with field grouped )
-    public static <T> JsonObject toJsonByGroup(final JsonArray array, final String field) {
+    public static <T> JsonObject toGroup(final JsonArray array, final String field) {
         return Calculator.groupBy(array, field);
     }
 
     // JsonArray -> Future<JsonObject>
-    public static Future<JsonObject> toJsonFutureByGroup(final JsonArray array, final String field) {
+    public static Future<JsonObject> thenGroup(final JsonArray array, final String field) {
         return Future.succeededFuture(Calculator.groupBy(array, field));
     }
 
@@ -282,6 +282,22 @@ public final class Ux {
 
     public static Future<JsonArray> fnRpc(final JsonObject data) {
         return UxRpc.fnRpc(data);
+    }
+
+    public static <T> Future<JsonObject> fnJObject(final T item) {
+        return thenJsonOne(item, "");
+    }
+
+    public static <T> Future<JsonArray> fnJArray(final List<T> item) {
+        return thenJsonMore(item, "");
+    }
+
+    public static <T> Function<T, Future<JsonObject>> fnJObject(final String pojo) {
+        return item -> thenJsonOne(item, pojo);
+    }
+
+    public static <T> Function<List<T>, Future<JsonArray>> fnJArray(final String pojo) {
+        return list -> Ux.thenJsonMore(list, pojo);
     }
 
     // ---------------------- Web Flow --------------------------------------
