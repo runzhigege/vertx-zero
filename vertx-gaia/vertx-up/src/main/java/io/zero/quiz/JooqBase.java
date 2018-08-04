@@ -64,7 +64,7 @@ public abstract class JooqBase extends ZeroBase {
 
     public <T> void notNull(final T entity, final TestContext context) {
         context.assertNotNull(entity);
-        Annal.get(this.getClass()).info("[ T ] {0}", entity.getClass());
+        Annal.get(this.getClass()).debug("[ ZERO ] {0}", entity.getClass());
     }
 
     protected void fetchOneAsync(
