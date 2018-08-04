@@ -65,12 +65,12 @@ public class UxJooq {
             this.pojoFile = null;
             this.pojo = null;
         } else {
-            LOGGER.info(Info.JOOQ_BIND, pojo, this.clazz);
+            LOGGER.debug(Info.JOOQ_BIND, pojo, this.clazz);
             this.pojoFile = pojo;
             this.pojo = Mirror.create(UxJooq.class).mount(pojo)
                     .mojo().put(this.mapping);
             // When bind pojo, the system will analyze columns
-            LOGGER.info(Info.JOOQ_MOJO, this.pojo.getRevert(), this.pojo.getColumns());
+            LOGGER.debug(Info.JOOQ_MOJO, this.pojo.getRevert(), this.pojo.getColumns());
         }
         return this;
     }
@@ -127,7 +127,7 @@ public class UxJooq {
         }
         Fn.outUp(null == targetField, LOGGER,
                 JooqFieldMissingException.class, UxJooq.class, field, Ut.field(this.vertxDAO, "type"));
-        LOGGER.info(Info.JOOQ_FIELD, targetField);
+        LOGGER.debug(Info.JOOQ_FIELD, targetField);
 
         return DSL.field(targetField);
     }
@@ -273,21 +273,11 @@ public class UxJooq {
                 .compose(item -> Future.succeededFuture(null != item));
     }
 
-    // Fetch Operation --------------------------------------------------
-    // Fetch One
-    private <T> Future<T> swithFuture(Future future) {
-        if (null == this.pojo) {
-            return (Future<T>) future;
-        } else {
-            return (Future<T>) future.compose(item -> Ux.thenJsonOne(item, this.pojoFile));
-        }
-    }
-
     // Filter column called
     public <T> Future<T> fetchOneAsync(final String field, final Object value) {
         final CompletableFuture<T> future =
                 this.vertxDAO.fetchOneAsync(column(field), value);
-        return swithFuture(Async.toFuture(future));
+        return Async.toFuture(future);
     }
 
     // Filter transform called
