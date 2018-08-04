@@ -117,12 +117,12 @@ public final class Ux {
     }
 
     // JsonArray -> JsonObject ( with field grouped )
-    public static <T> JsonObject toJsonByGroup(final JsonArray array, final String field) {
+    public static <T> JsonObject toGroup(final JsonArray array, final String field) {
         return Calculator.groupBy(array, field);
     }
 
     // JsonArray -> Future<JsonObject>
-    public static Future<JsonObject> toJsonFutureByGroup(final JsonArray array, final String field) {
+    public static Future<JsonObject> thenGroup(final JsonArray array, final String field) {
         return Future.succeededFuture(Calculator.groupBy(array, field));
     }
 
