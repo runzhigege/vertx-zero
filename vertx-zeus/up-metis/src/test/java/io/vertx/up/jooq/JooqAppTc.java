@@ -5,17 +5,20 @@ import com.htl.domain.tables.daos.SysAppDao;
 import com.htl.domain.tables.pojos.SysApp;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.unit.TestContext;
 import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
 import io.zero.epic.Ut;
 import io.zero.quiz.JooqBase;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.UUID;
 
 public class JooqAppTc extends JooqBase {
 
+    @BeforeClass
     public static void setUp() {
         final Vertx vertx = Vertx.vertx();
         JooqInfix.init(vertx);
@@ -26,33 +29,34 @@ public class JooqAppTc extends JooqBase {
         return Ux.Jooq.on(SysAppDao.class, JooqInfix.getDao(SysAppDao.class));
     }
 
-    public void testNonField() {
-        this.async(this.getDao()
+    public void testNonField(final TestContext context) {
+        this.asyncFlow(context,
+                this.getDao()
                         .on("")
                         .fetchOneAsync("name", "vie.app.htl"),
                 // Callback Consumer
-                (item, context) -> context.assertNotNull(item));
+                context::assertNotNull);
     }
 
-    public void testFetchOneAsync() {
+    public void testFetchOneAsync(final TestContext context) {
         // No mojo
-        this.fetchOneAsync(SysAppDao.class, null,
+        this.fetchOneAsync(context, SysAppDao.class, null,
                 "S_NAME", "vie.app.htl",
                 "sName", "vie.app.htl");
         // Mojo
-        this.fetchOneAsync(SysAppDao.class, Pojo.APP,
+        this.fetchOneAsync(context, SysAppDao.class, Pojo.APP,
                 "S_NAME", "vie.app.htl",
                 "sName", "vie.app.htl",
                 "name", "vie.app.htl");
     }
 
-    public void testFetchOneAndAsync() {
+    public void testFetchOneAndAsync(final TestContext context) {
         // No mojo
-        this.fetchOneAndAsync(SysAppDao.class, null,
+        this.fetchOneAndAsync(context, SysAppDao.class, null,
                 "fetchOneAsync1.json",
                 "fetchOneAsync2.json");
         // Mojo\
-        this.fetchOneAndAsync(SysAppDao.class, Pojo.APP,
+        this.fetchOneAndAsync(context, SysAppDao.class, Pojo.APP,
                 "fetchOneAsync1.json",
                 "fetchOneAsync2.json",
                 "fetchOneAsync3.json");
@@ -70,5 +74,13 @@ public class JooqAppTc extends JooqBase {
         System.out.println(json.encodePrettily());
         final SysApp target = Ut.deserialize(json, SysApp.class);
         System.out.println(target);
+    }
+    
+    public void testApp(final TestContext context) {
+        this.asyncFlow(context,
+                Ux.Jooq.on(SysAppDao.class)
+                        .on(Pojo.APP)
+                        .fetchOneAsync("name", "vie.app.htl"),
+                context::assertNull);
     }
 }
