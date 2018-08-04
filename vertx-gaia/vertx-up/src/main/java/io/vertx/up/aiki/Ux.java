@@ -284,6 +284,22 @@ public final class Ux {
         return UxRpc.fnRpc(data);
     }
 
+    public static <T> Future<JsonObject> fnJObject(final T item) {
+        return thenJsonOne(item, "");
+    }
+
+    public static <T> Future<JsonArray> fnJArray(final List<T> item) {
+        return thenJsonMore(item, "");
+    }
+
+    public static <T> Function<T, Future<JsonObject>> fnJObject(final String pojo) {
+        return item -> thenJsonOne(item, pojo);
+    }
+
+    public static <T> Function<List<T>, Future<JsonArray>> fnJArray(final String pojo) {
+        return list -> Ux.thenJsonMore(list, pojo);
+    }
+
     // ---------------------- Web Flow --------------------------------------
     public static <T> Handler<AsyncResult<T>> toHandler(final Message<Envelop> message) {
         return Web.toHandler(message);

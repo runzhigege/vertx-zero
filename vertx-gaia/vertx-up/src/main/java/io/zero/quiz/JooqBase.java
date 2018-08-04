@@ -4,7 +4,6 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
-import io.vertx.ext.unit.TestSuite;
 import io.vertx.ext.unit.junit.RunTestOnContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
 import io.vertx.up.aiki.Ux;
@@ -20,8 +19,7 @@ import org.junit.runner.RunWith;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
-import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 @RunWith(VertxUnitRunner.class)
 public abstract class JooqBase extends ZeroBase {
@@ -33,24 +31,19 @@ public abstract class JooqBase extends ZeroBase {
         return null;
     }
 
-    public <T> void async(final Future<T> future,
-                          final BiConsumer<T, TestContext> consumer) {
-        final TestSuite suite = TestSuite.create(UUID.randomUUID().toString());
-        suite.test(UUID.randomUUID().toString(), context -> {
-            final Async async = context.async();
-            future.setHandler(handler -> {
-                if (handler.succeeded()) {
-                    consumer.accept(handler.result(), context);
-                    async.complete();
-                } else {
-                    handler.cause().printStackTrace();
-                    async.complete();
-                }
-            });
-            // Wait for result.
-            async.awaitSuccess();
+    public <T> void asyncFlow(final TestContext context,
+                              final Future<T> future,
+                              final Consumer<T> function) {
+        final Async async = context.async();
+        future.setHandler(handler -> {
+            if (handler.succeeded()) {
+                function.accept(handler.result());
+            } else {
+                handler.cause().printStackTrace();
+                context.fail(handler.cause());
+            }
+            async.complete();
         });
-        suite.run();
     }
 
     public Condition eq(final String name, final Object value) {
@@ -68,6 +61,7 @@ public abstract class JooqBase extends ZeroBase {
     }
 
     protected void fetchOneAsync(
+            final TestContext context,
             final Class<?> clazzDao,
             final String pojo,
             final Object... args) {
@@ -84,11 +78,14 @@ public abstract class JooqBase extends ZeroBase {
             if (null != pojo) {
                 jooq = jooq.on(pojo);
             }
-            this.async(jooq.fetchOneAsync(kv.getKey(), kv.getValue()), this::notNull);
+            this.asyncFlow(context,
+                    jooq.fetchOneAsync(kv.getKey(), kv.getValue()),
+                    context::assertNotNull);
         });
     }
 
     protected void fetchOneAndAsync(
+            final TestContext context,
             final Class<?> clazz,
             final String pojo,
             final String... files) {
@@ -99,7 +96,9 @@ public abstract class JooqBase extends ZeroBase {
             if (null != pojo) {
                 jooq = jooq.on(pojo);
             }
-            this.async(jooq.fetchOneAndAsync(filter), this::notNull);
+            this.asyncFlow(context,
+                    jooq.fetchOneAndAsync(filter),
+                    context::assertNotNull);
         });
     }
 }

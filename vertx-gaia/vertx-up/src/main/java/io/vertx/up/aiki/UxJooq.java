@@ -137,14 +137,14 @@ public class UxJooq {
     public <T> Future<T> findByIdAsync(final Object id) {
         final CompletableFuture<T> future =
                 this.vertxDAO.findByIdAsync(id);
-        return switchFuture(Async.toFuture(future));
+        return Async.toFuture(future);
     }
 
     // Get all
     public <T> Future<List<T>> findAllAsync() {
         final CompletableFuture<List<T>> future =
                 this.vertxDAO.findAllAsync();
-        return switchFuture(Async.toFuture(future));
+        return Async.toFuture(future);
     }
 
     // CRUD - Create ---------------------------------------------------
@@ -265,7 +265,7 @@ public class UxJooq {
     public <T> Future<Boolean> existsByIdAsync(final Object id) {
         final CompletableFuture<Boolean> future =
                 this.vertxDAO.existsByIdAsync(id);
-        return switchFuture(Async.toFuture(future));
+        return Async.toFuture(future);
     }
 
     public <T> Future<Boolean> existsOneAsync(final JsonObject andFilters) {
@@ -273,21 +273,11 @@ public class UxJooq {
                 .compose(item -> Future.succeededFuture(null != item));
     }
 
-    // Fetch Operation --------------------------------------------------
-    // Fetch One
-    private <T> Future<T> switchFuture(Future future) {
-        if (null == this.pojo) {
-            return (Future<T>) future;
-        } else {
-            return (Future<T>) future.compose(item -> Ux.thenJsonOne(item, this.pojoFile));
-        }
-    }
-
     // Filter column called
     public <T> Future<T> fetchOneAsync(final String field, final Object value) {
         final CompletableFuture<T> future =
                 this.vertxDAO.fetchOneAsync(column(field), value);
-        return switchFuture(Async.toFuture(future));
+        return Async.toFuture(future);
     }
 
     // Filter transform called
@@ -295,7 +285,7 @@ public class UxJooq {
         final Condition condition = JooqCond.transform(andFilters, Operator.AND, this::column);
         final CompletableFuture<T> future =
                 this.vertxDAO.fetchOneAsync(condition);
-        return switchFuture(Async.toFuture(future));
+        return Async.toFuture(future);
     }
 
     // Filter column called
@@ -303,7 +293,7 @@ public class UxJooq {
     public <T> Future<List<T>> fetchAsync(final String field, final Object value) {
         final CompletableFuture<List<T>> future =
                 this.vertxDAO.fetchAsync(column(field), Arrays.asList(value));
-        return switchFuture(Async.toFuture(future));
+        return Async.toFuture(future);
     }
 
     // Filter column called
@@ -316,7 +306,7 @@ public class UxJooq {
     public <T> Future<List<T>> fetchInAsync(final String field, final JsonArray values) {
         final CompletableFuture<List<T>> future =
                 this.vertxDAO.fetchAsync(column(field), values.getList());
-        return switchFuture(Async.toFuture(future));
+        return Async.toFuture(future);
     }
 
     // Filter transform called
@@ -324,7 +314,7 @@ public class UxJooq {
         final Condition condition = JooqCond.transform(andFilters, Operator.AND, this::column);
         final CompletableFuture<List<T>> future =
                 this.vertxDAO.fetchAsync(condition);
-        return switchFuture(Async.toFuture(future));
+        return Async.toFuture(future);
     }
 
     // Filter transform called
@@ -332,7 +322,7 @@ public class UxJooq {
         final Condition condition = JooqCond.transform(orFilters, Operator.OR, this::column);
         final CompletableFuture<List<T>> future =
                 this.vertxDAO.fetchAsync(condition);
-        return switchFuture(Async.toFuture(future));
+        return Async.toFuture(future);
     }
 
     public Future<JsonObject> searchOrAsync(final Inquiry inquiry) {
