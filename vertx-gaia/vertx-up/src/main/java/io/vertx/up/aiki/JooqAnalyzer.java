@@ -135,7 +135,7 @@ class JooqAnalyzer {
     }
 
     <T> Future<Integer> countAsync(final Inquiry inquiry, final Operator operator) {
-        return countAsync(inquiry.getCriteria().toJson(), operator);
+        return countAsync(null == inquiry.getCriteria() ? new JsonObject() : inquiry.getCriteria().toJson(), operator);
     }
 
     <T> Future<Integer> countAsync(final JsonObject filters, final Operator operator) {
