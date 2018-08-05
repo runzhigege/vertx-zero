@@ -209,10 +209,13 @@ public class UxJooq {
     private <T> T copyEntity(final T target, final T updated) {
         Fn.outUp(null == updated, LOGGER, JooqMergeException.class,
                 UxJooq.class, null == target ? null : target.getClass(), Ut.serialize(target));
-        final JsonObject targetJson = null == target ? new JsonObject() : Ut.serializeJson(target);
-        final JsonObject sourceJson = Ut.serializeJson(skipPk(updated));
-        targetJson.mergeIn(sourceJson, true);
-        return (T) Ut.deserialize(targetJson, target.getClass());
+        return Fn.getSemi(null == target && null == updated, LOGGER, () -> null, () -> {
+            final JsonObject targetJson = null == target ? new JsonObject() : Ut.serializeJson(target);
+            final JsonObject sourceJson = Ut.serializeJson(skipPk(updated));
+            targetJson.mergeIn(sourceJson, true);
+            final Class<?> type = null == target ? updated.getClass() : target.getClass();
+            return (T) Ut.deserialize(targetJson, type);
+        });
     }
 
     // CRUD - Existing/Missing ------------------------------------------
@@ -227,23 +230,21 @@ public class UxJooq {
     }
 
     public <T> Future<T> upsertReturningPrimaryAsync(final JsonObject andFilters, final T updated, final Consumer<Long> consumer) {
-        return this.<T>fetchOneAndAsync(andFilters)
-                .compose(item -> Fn.match(
-                        // null != item, updated to existing item.
-                        Fn.fork(() -> this.<T>updateAsync(copyEntity(item, updated))),
-                        // null == item, insert data
-                        Fn.branch(null == item, () -> this.insertReturningPrimaryAsync(updated, consumer))
-                ));
+        return this.<T>fetchOneAndAsync(andFilters).compose(item -> Fn.match(
+                // null != item, updated to existing item.
+                Fn.fork(() -> this.<T>updateAsync(copyEntity(item, updated))),
+                // null == item, insert data
+                Fn.branch(null == item, () -> this.insertReturningPrimaryAsync(updated, consumer))
+        ));
     }
 
     public <T> Future<T> upsertAsync(final JsonObject andFilters, final T updated) {
-        return this.<T>fetchOneAndAsync(andFilters)
-                .compose(item -> Fn.match(
-                        // null != item, updated to existing item.
-                        Fn.fork(() -> this.<T>updateAsync(copyEntity(item, updated))),
-                        // null == item, insert data
-                        Fn.branch(null == item, () -> this.insertAsync(updated))
-                ));
+        return this.<T>fetchOneAndAsync(andFilters).compose(item -> Fn.match(
+                // null != item, updated to existing item.
+                Fn.fork(() -> this.<T>updateAsync(copyEntity(item, updated))),
+                // null == item, insert data
+                Fn.branch(null == item, () -> this.insertAsync(updated))
+        ));
     }
 
     // CRUD - Delete ----------------------------------------------------
@@ -417,17 +418,15 @@ public class UxJooq {
 
     private Future<JsonArray> searchDirect(final Inquiry inquiry, final Operator operator) {
         // Pager, Sort, Criteria, Projection
-        return searchAsync(inquiry, operator)
-                .compose(list -> {
-                    if (null == inquiry.getProjection()) {
-                        return Ux.thenJsonMore(list);
-                    } else {
-                        return Ux.thenJsonMore(list)
-                                .compose(array -> Uarr.create(array)
-                                        .remove(inquiry.getProjection().toArray(new String[]{}))
-                                        .toFuture());
-                    }
-                });
+        return searchAsync(inquiry, operator).compose(list -> {
+            if (null == inquiry.getProjection()) {
+                return Ux.thenJsonMore(list);
+            } else {
+                return Ux.thenJsonMore(list).compose(array -> Uarr.create(array)
+                        .remove(inquiry.getProjection().toArray(new String[]{}))
+                        .toFuture());
+            }
+        });
     }
 
     // Filter transform called
