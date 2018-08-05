@@ -12,7 +12,7 @@ public class EpicBase {
     protected String getFile(final String filename) {
         final Class<?> clazz = this.getClass();
         final String file = "test/" + clazz.getPackage().getName() + "/" + filename;
-        Log.info(this.getLogger(), "[ ZERO Test ] Test input file: {0}", file);
+        Log.debug(this.getLogger(), "[ ZERO Test ] Test input file: {0}", file);
         return file;
     }
 

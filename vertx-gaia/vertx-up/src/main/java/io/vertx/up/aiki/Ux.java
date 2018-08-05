@@ -17,6 +17,7 @@ import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
 import io.vertx.up.atom.query.Sorter;
 import io.vertx.up.exception.WebException;
+import io.vertx.zero.eon.Strings;
 import io.zero.epic.Ut;
 import io.zero.epic.container.RxHod;
 import io.zero.epic.fn.Actuator;
@@ -321,6 +322,10 @@ public final class Ux {
     // ---------------------- New future ----------------------
     public static <T> Future<Envelop> then(final T entity) {
         return Future.succeededFuture(to(entity));
+    }
+
+    public static Future<JsonObject> thenBool(final Boolean result) {
+        return Future.succeededFuture(new JsonObject().put(Strings.J_RESULT, result));
     }
 
     public static <T> Future<JsonArray> thenJsonMore(final List<T> list) {

@@ -14,6 +14,7 @@ class From {
                 () -> Mirror.create(From.class)
                         .mount(pojo)
                         .connect(data)
+                        .type(clazz)
                         .from()
                         .get()), pojo);
     }

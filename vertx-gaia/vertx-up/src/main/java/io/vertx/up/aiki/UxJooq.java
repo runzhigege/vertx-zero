@@ -28,6 +28,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("all")
 public class UxJooq {
@@ -37,6 +38,8 @@ public class UxJooq {
     private transient final Class<?> clazz;
     private transient final VertxDAO vertxDAO;
     private transient final ConcurrentMap<String, String> mapping =
+            new ConcurrentHashMap<>();
+    private transient final ConcurrentMap<String, String> revert =
             new ConcurrentHashMap<>();
     private transient Mojo pojo;
     private transient String pojoFile;
@@ -86,6 +89,7 @@ public class UxJooq {
             final Field column = columns[idx];
             final java.lang.reflect.Field field = fields[idx];
             this.mapping.put(field.getName(), column.getName());
+            this.revert.put(column.getName(), field.getName());
         }
     }
 
@@ -132,6 +136,16 @@ public class UxJooq {
         return DSL.field(targetField);
     }
 
+    private <T> T skipPk(final T entity) {
+        final Table<?> tableField = Ut.field(this.vertxDAO, "table");
+        final UniqueKey key = tableField.getPrimaryKey();
+        key.getFields().stream().map(item -> ((TableField) item).getName())
+                .filter(this.revert::containsKey)
+                .map(this.revert::get)
+                .forEach(item -> Ut.field(entity, item.toString(), null));
+        return entity;
+    }
+
     // CRUD - Read -----------------------------------------------------
     // Get by id
     public <T> Future<T> findByIdAsync(final Object id) {
@@ -145,6 +159,24 @@ public class UxJooq {
         final CompletableFuture<List<T>> future =
                 this.vertxDAO.findAllAsync();
         return Async.toFuture(future);
+    }
+
+    // Find by filters
+    public <T> Future<List<T>> findAsync(final JsonObject filters) {
+        final Inquiry inquiry = Inquiry.create(new JsonObject().put(Inquiry.KEY_CRITERIA, filters));
+        return searchAsync(inquiry);
+    }
+
+    // Find by existing
+    public <T> Future<Boolean> findExists(final JsonObject filters) {
+        return this.<T>findAsync(filters)
+                .compose(item -> Future.succeededFuture(0 < item.size()));
+    }
+
+    // Find by missing
+    public <T> Future<Boolean> findMissing(final JsonObject filters) {
+        return this.<T>findAsync(filters)
+                .compose(item -> Future.succeededFuture(0 == item.size()));
     }
 
     // CRUD - Create ---------------------------------------------------
@@ -196,10 +228,13 @@ public class UxJooq {
     private <T> T copyEntity(final T target, final T updated) {
         Fn.outUp(null == updated, LOGGER, JooqMergeException.class,
                 UxJooq.class, null == target ? null : target.getClass(), Ut.serialize(target));
-        final JsonObject targetJson = null == target ? new JsonObject() : Ut.serializeJson(target);
-        final JsonObject sourceJson = Ut.serializeJson(updated);
-        targetJson.mergeIn(sourceJson, true);
-        return (T) Ut.deserialize(targetJson, updated.getClass());
+        return Fn.getSemi(null == target && null == updated, LOGGER, () -> null, () -> {
+            final JsonObject targetJson = null == target ? new JsonObject() : Ut.serializeJson(target);
+            final JsonObject sourceJson = Ut.serializeJson(skipPk(updated));
+            targetJson.mergeIn(sourceJson, true);
+            final Class<?> type = null == target ? updated.getClass() : target.getClass();
+            return (T) Ut.deserialize(targetJson, type);
+        });
     }
 
     // CRUD - Existing/Missing ------------------------------------------
@@ -214,23 +249,21 @@ public class UxJooq {
     }
 
     public <T> Future<T> upsertReturningPrimaryAsync(final JsonObject andFilters, final T updated, final Consumer<Long> consumer) {
-        return this.<T>fetchOneAndAsync(andFilters)
-                .compose(item -> Fn.match(
-                        // null != item, updated to existing item.
-                        Fn.fork(() -> this.<T>updateAsync(copyEntity(item, updated))),
-                        // null == item, insert data
-                        Fn.branch(null == item, () -> this.insertReturningPrimaryAsync(updated, consumer))
-                ));
+        return this.<T>fetchOneAndAsync(andFilters).compose(item -> Fn.match(
+                // null != item, updated to existing item.
+                Fn.fork(() -> this.<T>updateAsync(copyEntity(item, updated))),
+                // null == item, insert data
+                Fn.branch(null == item, () -> this.insertReturningPrimaryAsync(updated, consumer))
+        ));
     }
 
     public <T> Future<T> upsertAsync(final JsonObject andFilters, final T updated) {
-        return this.<T>fetchOneAndAsync(andFilters)
-                .compose(item -> Fn.match(
-                        // null != item, updated to existing item.
-                        Fn.fork(() -> this.<T>updateAsync(copyEntity(item, updated))),
-                        // null == item, insert data
-                        Fn.branch(null == item, () -> this.insertAsync(updated))
-                ));
+        return this.<T>fetchOneAndAsync(andFilters).compose(item -> Fn.match(
+                // null != item, updated to existing item.
+                Fn.fork(() -> this.<T>updateAsync(copyEntity(item, updated))),
+                // null == item, insert data
+                Fn.branch(null == item, () -> this.insertAsync(updated))
+        ));
     }
 
     // CRUD - Delete ----------------------------------------------------
@@ -239,6 +272,21 @@ public class UxJooq {
                 this.vertxDAO.deleteAsync(Arrays.asList(entity));
         return Async.toFuture(future)
                 .compose(result -> Future.succeededFuture(entity));
+    }
+
+    public <T> Future<Boolean> deleteAsync(final JsonObject filters) {
+        return deleteAsync(filters, "");
+    }
+
+    public <T> Future<Boolean> deleteAsync(final JsonObject filters, final String pojo) {
+        return findAsync(filters)
+                .compose(Ux.fnJArray(this.pojoFile))
+                .compose(array -> Future.succeededFuture(array.stream()
+                        .map(item -> (JsonObject) item)
+                        .map(item -> item.getValue("key"))
+                        .collect(Collectors.toList())))
+                .compose(item -> Future.succeededFuture(item.toArray()))
+                .compose(ids -> this.deleteByIdAsync(ids));
     }
 
     public <T> Future<Boolean> deleteByIdAsync(final Object id) {
@@ -295,6 +343,7 @@ public class UxJooq {
                 this.vertxDAO.fetchAsync(column(field), Arrays.asList(value));
         return Async.toFuture(future);
     }
+
 
     // Filter column called
     public <T> Future<List<T>> fetchInAsync(final String column, final Object... value) {
@@ -404,17 +453,15 @@ public class UxJooq {
 
     private Future<JsonArray> searchDirect(final Inquiry inquiry, final Operator operator) {
         // Pager, Sort, Criteria, Projection
-        return searchAsync(inquiry, operator)
-                .compose(list -> {
-                    if (null == inquiry.getProjection()) {
-                        return Ux.thenJsonMore(list);
-                    } else {
-                        return Ux.thenJsonMore(list)
-                                .compose(array -> Uarr.create(array)
-                                        .remove(inquiry.getProjection().toArray(new String[]{}))
-                                        .toFuture());
-                    }
-                });
+        return searchAsync(inquiry, operator).compose(list -> {
+            if (null == inquiry.getProjection()) {
+                return Ux.thenJsonMore(list);
+            } else {
+                return Ux.thenJsonMore(list).compose(array -> Uarr.create(array)
+                        .remove(inquiry.getProjection().toArray(new String[]{}))
+                        .toFuture());
+            }
+        });
     }
 
     // Filter transform called
@@ -423,6 +470,22 @@ public class UxJooq {
         final Function<DSLContext, Integer> function
                 = dslContext -> null == criteria ? dslContext.fetchCount(this.vertxDAO.getTable()) :
                 dslContext.fetchCount(this.vertxDAO.getTable(), JooqCond.transform(criteria.toJson(), operator, this::column));
+        return Async.toFuture(this.vertxDAO.executeAsync(function));
+    }
+
+    private <T> Future<List<T>> searchAsync(final Inquiry inquiry) {
+        final Function<DSLContext, List<T>> function
+                = (dslContext) -> {
+            // Started steps
+            final SelectWhereStep started = dslContext.selectFrom(this.vertxDAO.getTable());
+            // Condition set
+            SelectConditionStep conditionStep = null;
+            if (null != inquiry.getCriteria()) {
+                final Condition condition = JooqCond.transform(inquiry.getCriteria().toJson(), null, this::column);
+                conditionStep = started.where(condition);
+            }
+            return started.fetch(this.vertxDAO.mapper());
+        };
         return Async.toFuture(this.vertxDAO.executeAsync(function));
     }
 

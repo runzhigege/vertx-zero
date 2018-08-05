@@ -122,7 +122,7 @@ final class Instance {
                 field.setAccessible(true);
             }
             field.set(instance, value);
-        }, LOGGER), instance, name, value);
+        }, LOGGER), instance, name);
     }
 
     private static Field get(final Class<?> clazz,

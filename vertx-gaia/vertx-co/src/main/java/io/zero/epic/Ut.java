@@ -352,6 +352,10 @@ public class Ut {
         return StringUtil.isNil(input);
     }
 
+    public static boolean isNil(final JsonObject json) {
+        return Types.isEmpty(json);
+    }
+
     public static boolean notNil(final String input) {
         return StringUtil.notNil(input);
     }

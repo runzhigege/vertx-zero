@@ -38,6 +38,11 @@ public class Mirror {
         return this;
     }
 
+    public Mirror type(final Class<?> entityCls) {
+        this.mojo.setType(entityCls);
+        return this;
+    }
+
     public Mirror connect(final JsonObject data) {
         // Copy new data
         this.data = Fn.getNull(new JsonObject(), data::copy, data);
