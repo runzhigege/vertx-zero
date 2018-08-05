@@ -77,8 +77,10 @@ class JooqCond {
          * When filters contains the key = value ( value = JsonObject ), TREE
          * Otherwise it's LINEAR.
          */
-        LOGGER.info("[ ZERO ] Mode selected {0}, filters raw = {1}",
-                criteria.getMode(), filters);
+        if (!Ut.isNil(filters)) {
+            LOGGER.info("[ ZERO ] ( Query ) Mode selected {0}, filters raw = {1}",
+                    criteria.getMode(), filters);
+        }
         if (Inquiry.Mode.LINEAR == criteria.getMode()) {
             JsonObject inputFilters = filters;
             if (null == operator) {
@@ -107,7 +109,9 @@ class JooqCond {
                     JooqCond.class, Inquiry.Mode.LINEAR, filters);
             condition = transformTree(filters, fnAnalyze);
         }
-        LOGGER.info(Info.JOOQ_PARSE, condition);
+        if (null != condition) {
+            LOGGER.info(Info.JOOQ_PARSE, condition);
+        }
         return condition;
     }
 
