@@ -8,7 +8,6 @@ import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.JooqArgumentException;
-import io.vertx.zero.exception.JooqModeConflictException;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 import org.jooq.Condition;
@@ -103,10 +102,11 @@ class JooqCond {
             /**
              * When the mode is Tree, you mustn't set operator, because the operator will
              * be parsed by query tree engine, this operation is unsupported and it will
-             * throw out exception JooqModeConflictException
+             * throw out exception JooqModeConflictException,
+             * Ignore operator information here, because the next analyzing will ignore automatically.
              */
-            Fn.outUp(null != operator, LOGGER, JooqModeConflictException.class,
-                    JooqCond.class, Inquiry.Mode.LINEAR, filters);
+            /*Fn.outUp(null != operator, LOGGER, JooqModeConflictException.class,
+                    JooqCond.class, Inquiry.Mode.LINEAR, filters);*/
             condition = transformTree(filters, fnAnalyze);
         }
         if (null != condition) {
