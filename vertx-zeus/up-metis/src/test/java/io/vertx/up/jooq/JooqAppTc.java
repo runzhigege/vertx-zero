@@ -10,6 +10,7 @@ import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.atom.query.Inquiry;
 import io.zero.epic.Ut;
 import io.zero.quiz.JooqBase;
 import org.junit.BeforeClass;
@@ -82,5 +83,11 @@ public class JooqAppTc extends JooqBase {
         final Envelop envelop = Envelop.success(this.getJson("app.json"));
         final SysApp app = Ux.fromEnvelop(envelop, SysApp.class, Pojo.APP);
         System.out.println(app);
+    }
+
+    @Test
+    public void testCriteria() {
+        final JsonObject data = this.getJson("criteria.json").getJsonObject("0");
+        final Inquiry criteria = Inquiry.create(data);
     }
 }
