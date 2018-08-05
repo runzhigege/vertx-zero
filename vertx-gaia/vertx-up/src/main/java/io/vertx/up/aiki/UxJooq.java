@@ -509,7 +509,8 @@ public class UxJooq {
                 final List<OrderField> orders = new ArrayList<>();
                 for (final String field : sorter.fieldNames()) {
                     final boolean asc = sorter.getBoolean(field);
-                    orders.add(asc ? DSL.field(field).asc() : DSL.field(field).desc());
+                    final Field column = column(field);
+                    orders.add(asc ? column.asc() : column.desc());
                 }
                 if (null == conditionStep) {
                     selectStep = started.orderBy(orders);
