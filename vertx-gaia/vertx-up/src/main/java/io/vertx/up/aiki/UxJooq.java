@@ -6,6 +6,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.atom.query.Inquiry;
+import io.vertx.up.eon.em.Format;
 import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
@@ -28,6 +29,7 @@ public class UxJooq {
     private transient final Class<?> clazz;
     private transient final VertxDAO vertxDAO;
     private transient final JooqAnalyzer analyzer;
+    private transient Format format = Format.JSON;
 
     <T> UxJooq(final Class<T> clazz, final VertxDAO vertxDAO) {
         this.clazz = clazz;
@@ -45,6 +47,29 @@ public class UxJooq {
     // Because you want to do projection remove, it means that you could not pass List<T> in current method.
     public static Condition transform(final JsonObject filters, final Operator operator) {
         return JooqCond.transform(filters, operator, null);
+    }
+
+    public UxJooq on(final String pojo) {
+        this.analyzer.bind(pojo, this.clazz);
+        return this;
+    }
+
+    public UxJooq on(final Format format) {
+        this.format = format;
+        return this;
+    }
+
+    // Boolean
+    // Find by existing
+    public <T> Future<Boolean> findExists(final JsonObject filters) {
+        return this.<T>findAsync(filters)
+                .compose(item -> Future.succeededFuture(0 < item.size()));
+    }
+
+    // Find by missing
+    public <T> Future<Boolean> findMissing(final JsonObject filters) {
+        return this.<T>findAsync(filters)
+                .compose(item -> Future.succeededFuture(0 == item.size()));
     }
 
     // CRUD - Read -----------------------------------------------------
@@ -65,18 +90,6 @@ public class UxJooq {
     // Find by filters
     public <T> Future<List<T>> findAsync(final JsonObject filters) {
         return this.analyzer.searchAsync(filters);
-    }
-
-    // Find by existing
-    public <T> Future<Boolean> findExists(final JsonObject filters) {
-        return this.<T>findAsync(filters)
-                .compose(item -> Future.succeededFuture(0 < item.size()));
-    }
-
-    // Find by missing
-    public <T> Future<Boolean> findMissing(final JsonObject filters) {
-        return this.<T>findAsync(filters)
-                .compose(item -> Future.succeededFuture(0 == item.size()));
     }
 
     // CRUD - Create ---------------------------------------------------
