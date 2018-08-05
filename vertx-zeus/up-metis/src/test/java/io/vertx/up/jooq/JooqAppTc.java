@@ -9,6 +9,7 @@ import io.vertx.ext.unit.TestContext;
 import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
+import io.vertx.up.atom.Envelop;
 import io.zero.epic.Ut;
 import io.zero.quiz.JooqBase;
 import org.junit.BeforeClass;
@@ -75,12 +76,11 @@ public class JooqAppTc extends JooqBase {
         final SysApp target = Ut.deserialize(json, SysApp.class);
         System.out.println(target);
     }
-    
-    public void testApp(final TestContext context) {
-        this.asyncFlow(context,
-                Ux.Jooq.on(SysAppDao.class)
-                        .on(Pojo.APP)
-                        .fetchOneAsync("name", "vie.app.htl"),
-                context::assertNull);
+
+    @Test
+    public void testApp() {
+        final Envelop envelop = Envelop.success(this.getJson("app.json"));
+        final SysApp app = Ux.fromEnvelop(envelop, SysApp.class, Pojo.APP);
+        System.out.println(app);
     }
 }
