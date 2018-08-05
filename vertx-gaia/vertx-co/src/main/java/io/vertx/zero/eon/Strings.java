@@ -26,4 +26,6 @@ public interface Strings {
     String QUESTION = "?";
 
     String T_CHAR = "T";
+
+    String J_RESULT = "RESULT";
 }
