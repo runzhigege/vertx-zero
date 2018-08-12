@@ -78,7 +78,7 @@
 
         <jwt.version>3.4.0</jwt.version>
         <reflect.asm.version>1.11.7</reflect.asm.version>
-        <asm.version>6.2</asm.version>
+        <asm.version>6.2.1</asm.version>
         <lombok.version>1.18.2</lombok.version>
         <jetbrains.version>16.0.2</jetbrains.version>
         <guice.version>4.1.0</guice.version>
