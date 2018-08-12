@@ -40,7 +40,7 @@ public class JooqInfix implements Infix {
                         (config) -> {
                             // Initialized client
                             final Configuration configuration = new DefaultConfiguration();
-                            configuration.set(SQLDialect.MYSQL_8_0);
+                            configuration.set(SQLDialect.MYSQL_5_7);
                             final ConnectionProvider provider =
                                     new DefaultConnectionProvider(HikariCpPool.getConnection(
                                             config.getJsonObject("provider")
