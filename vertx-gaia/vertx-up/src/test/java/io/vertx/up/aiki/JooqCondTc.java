@@ -1,5 +1,6 @@
 package io.vertx.up.aiki;
 
+import io.vertx.core.json.JsonObject;
 import io.zero.quiz.JooqBase;
 import org.jooq.Condition;
 import org.junit.Assert;
@@ -33,5 +34,12 @@ public class JooqCondTc extends JooqBase {
         final Condition expected = this.eq("name", "Lang")
                 .and(this.eq("code", "Test"));
         Assert.assertEquals(condition, expected);
+    }
+
+    @Test
+    public void testParse() {
+        final JsonObject filters = this.getJson("double.json");
+        UxJooq.transform(filters, null);
+        UxJooq.transform(filters, null);
     }
 }
