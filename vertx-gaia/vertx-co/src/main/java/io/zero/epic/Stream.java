@@ -78,10 +78,18 @@ final class Stream {
                             final Class<?> clazz) {
         final File file = new File(filename);
         Log.debug(LOGGER, Info.INF_CUR, file.exists());
-        final InputStream in = Fn.getSemi(file.exists(), null,
+        InputStream in = Fn.getSemi(file.exists(), null,
                 () -> in(file),
                 () -> (null == clazz) ? in(filename) : in(filename, clazz));
         Log.debug(LOGGER, Info.INF_PATH, filename, in);
+        // Stream.class get
+        if (null == in) {
+            in = Stream.class.getResourceAsStream(filename);
+        }
+        // System.Class Loader
+        if (null == in) {
+            in = ClassLoader.getSystemResourceAsStream(filename);
+        }
         if (null == in) {
             throw new EmptyStreamException(filename);
         }
