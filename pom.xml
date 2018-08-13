@@ -82,7 +82,7 @@
         <lombok.version>1.18.2</lombok.version>
         <jetbrains.version>16.0.2</jetbrains.version>
         <guice.version>4.1.0</guice.version>
-        <hibernate.validator.version>6.0.11.Final</hibernate.validator.version>
+        <hibernate.validator.version>6.0.12.Final</hibernate.validator.version>
         <scala.version>2.12.4</scala.version>
         <feign.version>8.18.0</feign.version>
         <guava.version>26.0-jre</guava.version>
