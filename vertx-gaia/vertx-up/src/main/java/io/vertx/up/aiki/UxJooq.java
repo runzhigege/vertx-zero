@@ -305,11 +305,11 @@ public class UxJooq {
 
     public <T> Future<JsonObject> searchAsync(final Inquiry inquiry, final String pojo) {
         final JsonObject result = new JsonObject();
-        return this.analyzer.searchAsync(inquiry, Operator.AND)
+        return this.analyzer.searchAsync(inquiry, null)
                 .compose(list -> Ux.thenJsonMore(list, pojo))
                 .compose(array -> {
                     result.put("list", array);
-                    return this.analyzer.countAsync(inquiry, Operator.OR);
+                    return this.analyzer.countAsync(inquiry, null);
                 })
                 .compose(count -> {
                     result.put("count", count);
