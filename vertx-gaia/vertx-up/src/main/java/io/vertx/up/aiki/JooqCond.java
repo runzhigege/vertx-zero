@@ -67,7 +67,7 @@ class JooqCond {
 
     // Condition ---------------------------------------------------------
     static Condition transform(final JsonObject filters,
-                               final Operator operator,
+                               Operator operator,
                                final Function<String, Field> fnAnalyze) {
         final Condition condition;
         final Criteria criteria = Criteria.create(filters);
@@ -89,6 +89,18 @@ class JooqCond {
                  * LINEAR mode.
                  */
                 inputFilters = transformLinear(filters);
+                /**
+                 * Re-calculate the operator AND / OR
+                 * For complex normalize linear query tree.
+                 */
+                if (inputFilters.containsKey(Strings.EMPTY)) {
+                    if (inputFilters.getBoolean(Strings.EMPTY)) {
+                        operator = Operator.AND;
+                    } else {
+                        operator = Operator.OR;
+                    }
+                    inputFilters.remove(Strings.EMPTY);
+                }
             } else {
                 /**
                  * When LINEAR mode, operator is hight priority, the query engine will
@@ -157,7 +169,6 @@ class JooqCond {
 
     private static JsonObject transformLinear(final JsonObject filters) {
         final JsonObject linear = filters.copy();
-        linear.remove(Strings.EMPTY);
         for (final String field : filters.fieldNames()) {
             if (Ut.isJObject(linear.getValue(field))) {
                 linear.remove(field);
