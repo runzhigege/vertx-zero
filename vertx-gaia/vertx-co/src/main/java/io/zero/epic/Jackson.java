@@ -9,7 +9,6 @@ import io.reactivex.Observable;
 import io.vertx.core.json.DecodeException;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.eon.Values;
 import io.zero.epic.fn.Fn;
@@ -26,7 +25,6 @@ import java.util.function.Supplier;
 @SuppressWarnings({"unchecked"})
 final class Jackson {
 
-    private static final Annal LOGGER = Annal.get(Jackson.class);
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     static {
@@ -99,7 +97,7 @@ final class Jackson {
         final String path = pathes[Values.IDX];
         /* 3. Continue searching if key existing, otherwise terminal. **/
         return Fn.getSemi(current.containsKey(path) && null != current.getValue(path),
-                Jackson.LOGGER,
+                null,
                 () -> {
                     final Object curVal = current.getValue(path);
                     T result = null;
@@ -134,7 +132,7 @@ final class Jackson {
                 .filter(Objects::nonNull)
                 .map(item -> (JsonObject) item)
                 .map(item -> item.mergeIn(Jackson.findByKey(target, targetKey, item.getValue(sourceKey))))
-                .subscribe(result::add).dispose(), Jackson.LOGGER);
+                .subscribe(result::add).dispose(), null);
         return result;
     }
 
@@ -184,7 +182,7 @@ final class Jackson {
     static <T, R extends Iterable> R serializeJson(final T t) {
         final String content = Jackson.serialize(t);
         return Fn.getJvm(null,
-                () -> Fn.getSemi(content.trim().startsWith(Strings.LEFT_BRACES), Jackson.LOGGER,
+                () -> Fn.getSemi(content.trim().startsWith(Strings.LEFT_BRACES), null,
                         () -> (R) new JsonObject(content),
                         () -> (R) new JsonArray(content)), content);
     }
