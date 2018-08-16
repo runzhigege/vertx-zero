@@ -133,7 +133,10 @@ class JooqCond {
         // Calc operator in this level
         final Operator operator = calcOperator(filters);
         // Calc liner
-        final Condition linear = transformLinear(transformLinear(filters), operator, fnAnalyze);
+        final JsonObject cloned = filters.copy();
+        cloned.remove(Strings.EMPTY);
+        // Operator has been calculated, remove "" to set linear of current tree.
+        final Condition linear = transformLinear(transformLinear(cloned), operator, fnAnalyze);
         // Calc All Tree
         final List<Condition> tree = transformTreeSet(filters, fnAnalyze);
         // Merge the same level
