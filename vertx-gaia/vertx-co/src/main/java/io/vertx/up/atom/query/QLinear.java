@@ -53,6 +53,7 @@ public class QLinear {
         final KeyPair<String, KeyPair<String, Object>> item = KeyPair.create(filterField, condition);
         // At the same time.
         this.conditions.add(item);
+        this.raw.put(field, value);
         return this;
     }
 
