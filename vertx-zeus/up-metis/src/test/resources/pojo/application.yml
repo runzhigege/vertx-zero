@@ -1,31 +1,29 @@
 mapping:
   pkId: key
   isActive: active
-  scode: code
+  sCode: code
   sName: name
-  stype: type
-  jconfig: config
-  zsigma: sigma
-  zlanguage: language
-  zcreateBy: createBy
-  zcreateTime: createTime
-  zupdateBy: updateBy
-  zupdateTime: updateTime
-  sauth: auth
-  tcomments: comments
-  veserverId: emailServerId
-  sbackUp: backUp
-  scontact: contact
-  sicp: icp
-  scurrency: currency
-  sdateFormat: dateFormat
-  sencoding: encoding
-  slogo: logo
-  sowner: owner
-  spath: path
-  srenewal: renewal
-  stitle: title
-  sversion: version
-  iattachSize: attachSize
-columns:
-  key: PK_ID
+  sType: type
+  jConfig: config
+  zSigma: sigma
+  zLanguage: language
+  zCreateBy: createBy
+  zCreateTime: createTime
+  zUpdateBy: updateBy
+  zUpdateTime: updateTime
+  sAuth: auth
+  tComments: comments
+  vEserverId: emailServerId
+  sBackUp: backUp
+  sContact: contact
+  sIcp: icp
+  sCurrency: currency
+  sDateFormat: dateFormat
+  sEncoding: encoding
+  sLogo: logo
+  sOwner: owner
+  sPath: path
+  sRenewal: renewal
+  sTitle: title
+  sVersion: version
+  iAttachSize: attachSize
