@@ -303,6 +303,11 @@ public class UxJooq {
         return searchAsync(inquiry, pojo);
     }
 
+    public Future<Integer> countAsync(final JsonObject params, final String pojo) {
+        final Inquiry inquiry = Query.getInquiry(params, pojo);
+        return this.analyzer.countAsync(inquiry, null);
+    }
+
     public <T> Future<JsonObject> searchAsync(final Inquiry inquiry, final String pojo) {
         final JsonObject result = new JsonObject();
         return this.analyzer.searchAsync(inquiry, null)
