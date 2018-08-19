@@ -705,6 +705,11 @@ public class Ut {
         return RxJava.rxOneElement(array, field);
     }
 
+    public static <T> Set<T> rxSetElement(final JsonArray array, final String field) {
+        return RxJava.<T>rxSet(array, field).blockingGet();
+    }
+
+    @SuppressWarnings("all")
     public static <T> Single<T> rxOne(final JsonArray array, final String field) {
         return Single.just(RxJava.rxOneElement(array, field));
     }
