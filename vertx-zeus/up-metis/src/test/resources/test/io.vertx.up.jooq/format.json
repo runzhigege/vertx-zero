@@ -1,0 +1,10 @@
+{
+    "title": "会计科目",
+    "dataIndex": "accountId",
+    "$render": "DATUM",
+    "$datum": {
+        "source": "account.item",
+        "value": "category",
+        "display": "name"
+    }
+}
