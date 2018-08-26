@@ -86,14 +86,14 @@
         <scala.version>2.12.4</scala.version>
         <feign.version>8.18.0</feign.version>
         <guava.version>26.0-jre</guava.version>
-        <codehaus.janino.version>3.0.8</codehaus.janino.version>
+        <codehaus.janino.version>3.0.9</codehaus.janino.version>
         <cglib.version>3.2.7</cglib.version>
         <ignite.version>2.6.0</ignite.version>
         <etcd.version>2.16.0</etcd.version>
-        <mongodb.async.version>3.8.0</mongodb.async.version>
+        <mongodb.async.version>3.8.1</mongodb.async.version>
         <!-- Apache Common -->
         <common.jexl.version>3.1</common.jexl.version>
-        <common.lang3.version>3.7</common.lang3.version>
+        <common.lang3.version>3.8</common.lang3.version>
         <common.logging.version>1.2</common.logging.version>
         <common.net.version>3.6</common.net.version>
         <!-- Rpc -->
@@ -101,9 +101,9 @@
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
         <grpc.version>1.14.0</grpc.version>
         <!-- Vert.x Addition -->
-        <rxjava2.version>2.2.0</rxjava2.version>
-        <netty.tcnative.version>2.0.12.Final</netty.tcnative.version>
-        <netty.version>4.1.28.Final</netty.version>
+        <rxjava2.version>2.2.1</rxjava2.version>
+        <netty.tcnative.version>2.0.14.Final</netty.tcnative.version>
+        <netty.version>4.1.29.Final</netty.version>
         <hazelcast.version>3.10.4</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
         <error.prone.version>2.3.1</error.prone.version>
