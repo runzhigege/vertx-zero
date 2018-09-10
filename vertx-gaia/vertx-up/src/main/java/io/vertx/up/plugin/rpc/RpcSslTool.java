@@ -40,20 +40,19 @@ public class RpcSslTool {
             final VertxChannelBuilder builder =
                     VertxChannelBuilder
                             .forAddress(vertx, rpcHost, rpcPort);
-            Fn.safeSemi(null != config.getValue(Key.SSL), LOGGER,
-                    () -> {
-                        final JsonObject sslConfig = config.getJsonObject(Key.SSL);
-                        if (null != sslConfig && !sslConfig.isEmpty()) {
-                            final Object type = sslConfig.getValue("type");
-                            final CertType certType = null == type ?
-                                    CertType.PEM : Ut.toEnum(CertType.class, type.toString());
-                            final TrustPipe<JsonObject> pipe = TrustPipe.get(certType);
-                            // Enable SSL
-                            builder.useSsl(pipe.parse(sslConfig));
-                        } else {
-                            builder.usePlaintext(true);
-                        }
-                    });
+            Fn.safeSemi(null != config.getValue(Key.SSL), LOGGER, () -> {
+                final JsonObject sslConfig = config.getJsonObject(Key.SSL);
+                if (null != sslConfig && !sslConfig.isEmpty()) {
+                    final Object type = sslConfig.getValue("type");
+                    final CertType certType = null == type ?
+                            CertType.PEM : Ut.toEnum(CertType.class, type.toString());
+                    final TrustPipe<JsonObject> pipe = TrustPipe.get(certType);
+                    // Enable SSL
+                    builder.useSsl(pipe.parse(sslConfig));
+                } else {
+                    builder.usePlaintext(true);
+                }
+            });
             final ManagedChannel channel = builder.build();
             LOGGER.info(Info.CLIENT_RPC, rpcHost, String.valueOf(rpcPort), String.valueOf(channel.hashCode()));
             return channel;
@@ -79,24 +78,23 @@ public class RpcSslTool {
             // Ssl Required
             final JsonObject config = node.read();
 
-            Fn.safeSemi(null != config && null != config.getValue("rpc"), LOGGER,
-                    () -> {
-                        // Extension or Uniform
-                        final JsonObject rpcConfig = config.getJsonObject("rpc");
-                        final String name = data.getName();
-                        final JsonObject ssl = RpcHelper.getSslConfig(name, rpcConfig);
-                        if (ssl.isEmpty()) {
-                            // Disabled SSL
-                            builder.usePlaintext(true);
-                        } else {
-                            final Object type = ssl.getValue("type");
-                            final CertType certType = null == type ?
-                                    CertType.PEM : Ut.toEnum(CertType.class, type.toString());
-                            final TrustPipe<JsonObject> pipe = TrustPipe.get(certType);
-                            // Enabled SSL
-                            builder.useSsl(pipe.parse(ssl));
-                        }
-                    });
+            Fn.safeSemi(null != config && null != config.getValue("rpc"), LOGGER, () -> {
+                // Extension or Uniform
+                final JsonObject rpcConfig = config.getJsonObject("rpc");
+                final String name = data.getName();
+                final JsonObject ssl = RpcHelper.getSslConfig(name, rpcConfig);
+                if (ssl.isEmpty()) {
+                    // Disabled SSL
+                    builder.usePlaintext(true);
+                } else {
+                    final Object type = ssl.getValue("type");
+                    final CertType certType = null == type ?
+                            CertType.PEM : Ut.toEnum(CertType.class, type.toString());
+                    final TrustPipe<JsonObject> pipe = TrustPipe.get(certType);
+                    // Enabled SSL
+                    builder.useSsl(pipe.parse(ssl));
+                }
+            });
             return builder.build();
         });
     }
