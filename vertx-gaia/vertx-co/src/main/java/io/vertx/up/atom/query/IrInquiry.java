@@ -83,7 +83,10 @@ class IrInquiry implements Inquiry {
             result.put(KEY_PAGER, this.pager.toJson());
         }
         if (null != this.sorter) {
-            result.put(KEY_SORTER, this.sorter.toJson());
+            final JsonObject sorters = this.sorter.toJson();
+            final JsonArray array = new JsonArray();
+            Ut.<Boolean>itJObject(sorters, (value, key) -> array.add(key + "," + (value ? "ASC" : "DESC")));
+            result.put(KEY_SORTER, array);
         }
         if (null != this.projection) {
             result.put(KEY_PROJECTION, Ut.toJArray(this.projection));
