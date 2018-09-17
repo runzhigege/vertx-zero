@@ -14,7 +14,8 @@ public final class Runner {
     public static void run(final Runnable hooker,
                            final String name) {
         final Thread thread = new Thread(hooker);
-        thread.setName(name);
+        // Append Thread id
+        thread.setName(name + "-" + thread.getId());
         thread.start();
     }
 
