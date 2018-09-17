@@ -17,9 +17,9 @@ import io.vertx.up.VertxApplication;
 import io.vertx.up.annotations.Up;
 
 @Up
-public class Anchor {
+public class io.god.Anchor {
     public static void main(final String[] args) {
-        VertxApplication.run(Anchor.class);
+        VertxApplication.run(io.god.Anchor.class);
     }
 }
 ```
@@ -110,10 +110,10 @@ import io.vertx.up.VertxApplication;
 import io.vertx.up.annotations.Up;
 
 @Up
-public class Anchor {
+public class io.god.Anchor {
 
     public static void main(final String[] args) {
-        VertxApplication.run(Anchor.class);
+        VertxApplication.run(io.god.Anchor.class);
     }
 }
 ```
@@ -169,10 +169,10 @@ import io.vertx.up.VertxApplication;
 import io.vertx.up.annotations.Up;
 
 @Up
-public class Anchor {
+public class io.god.Anchor {
 
     public static void main(final String[] args) {
-        VertxApplication.run(Anchor.class);
+        VertxApplication.run(io.god.Anchor.class);
     }
 }
 ```

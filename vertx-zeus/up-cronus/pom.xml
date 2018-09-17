@@ -31,7 +31,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>up.god.Anchor</mainClass>
+                            <mainClass>up.god.io.god.Anchor</mainClass>
                         </manifest>
                     </archive>
                     <attach>false</attach>
