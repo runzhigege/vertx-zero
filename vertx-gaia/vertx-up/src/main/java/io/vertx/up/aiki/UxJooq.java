@@ -303,9 +303,19 @@ public class UxJooq {
         return searchAsync(inquiry, pojo);
     }
 
+    public <T> Future<JsonObject> searchAsync(final JsonObject params) {
+        final String pojo = this.analyzer.getPojoFile();
+        return searchAsync(params, pojo);
+    }
+
     public Future<Integer> countAsync(final JsonObject params, final String pojo) {
         final Inquiry inquiry = Query.getInquiry(params, pojo);
         return this.analyzer.countAsync(inquiry, null);
+    }
+
+    public Future<Integer> countAsync(final JsonObject params) {
+        final String pojo = this.analyzer.getPojoFile();
+        return countAsync(params, pojo);
     }
 
     public <T> Future<JsonObject> searchAsync(final Inquiry inquiry, final String pojo) {
