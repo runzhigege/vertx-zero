@@ -974,4 +974,9 @@ public final class Ux {
             return UxMongo.findWithOptions(collection, filter, new FindOptions());
         }
     }
+
+    // -- Raft
+    public static class Raft {
+        
+    }
 }

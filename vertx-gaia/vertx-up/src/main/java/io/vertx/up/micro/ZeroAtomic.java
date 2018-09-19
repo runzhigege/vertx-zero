@@ -17,9 +17,7 @@ public interface ZeroAtomic {
     ConcurrentMap<Integer, AtomicInteger>
             RPC_START_LOGS = new ConcurrentHashMap<Integer, AtomicInteger>() {
         {
-            RPC_OPTS.forEach((port, option) -> {
-                put(port, new AtomicInteger(0));
-            });
+            RPC_OPTS.forEach((port, option) -> this.put(port, new AtomicInteger(0)));
         }
     };
     /**
@@ -30,9 +28,7 @@ public interface ZeroAtomic {
     ConcurrentMap<Integer, AtomicInteger>
             HTTP_START_LOGS = new ConcurrentHashMap<Integer, AtomicInteger>() {
         {
-            HTTP_OPTS.forEach((port, option) -> {
-                put(port, new AtomicInteger(0));
-            });
+            HTTP_OPTS.forEach((port, option) -> this.put(port, new AtomicInteger(0)));
         }
     };
     /**
@@ -43,9 +39,7 @@ public interface ZeroAtomic {
     ConcurrentMap<Integer, AtomicInteger>
             RX_START_LOGS = new ConcurrentHashMap<Integer, AtomicInteger>() {
         {
-            RX_OPTS.forEach((port, option) -> {
-                put(port, new AtomicInteger(0));
-            });
+            RX_OPTS.forEach((port, option) -> this.put(port, new AtomicInteger(0)));
         }
     };
     /**
