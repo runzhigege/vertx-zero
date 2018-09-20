@@ -34,7 +34,10 @@ public final class ZeroAmbient {
             final JsonObject opt = OPTS.ingest(KEY);
             Ut.itJObject(opt, (item, field) -> {
                 final String plugin = item.toString();
-                LOGGER.info(Info.PLUGIN_LOAD, KEY, field, plugin);
+                if (!plugin.equals(Log4JAnnal.class.getName())) {
+                    // Skip class "io.vertx.zero.log.internal.Log4JAnnal"
+                    LOGGER.info(Info.PLUGIN_LOAD, KEY, field, plugin);
+                }
                 INJECTIONS.put(field, Ut.clazz(plugin));
             });
         }, LOGGER);
