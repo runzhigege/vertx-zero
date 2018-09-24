@@ -1,6 +1,5 @@
 package io.vertx.up.aiki;
 
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.query.Criteria;
 import io.vertx.up.atom.query.Inquiry;
@@ -42,8 +41,14 @@ class JooqCond {
                     this.put(Inquiry.Op.NULL, (field, value) -> DSL.field(field).isNull());
                     this.put(Inquiry.Op.TRUE, (field, value) -> DSL.field(field).isTrue());
                     this.put(Inquiry.Op.FALSE, (field, value) -> DSL.field(field).isFalse());
-                    this.put(Inquiry.Op.IN, JooqCond::opIn);
-                    this.put(Inquiry.Op.NOT_IN, JooqCond::opNotIn);
+                    this.put(Inquiry.Op.IN, (field, value) -> {
+                        final Collection<?> values = Ut.toCollection(value);
+                        return DSL.field(field).in(values);
+                    });
+                    this.put(Inquiry.Op.NOT_IN, (field, value) -> {
+                        final Collection<?> values = Ut.toCollection(value);
+                        return DSL.field(field).notIn(values);
+                    });
                     this.put(Inquiry.Op.START, (field, value) -> DSL.field(field).startsWith(value));
                     this.put(Inquiry.Op.END, (field, value) -> DSL.field(field).endsWith(value));
                     this.put(Inquiry.Op.CONTAIN, (field, value) -> DSL.field(field).contains(value));
@@ -205,14 +210,14 @@ class JooqCond {
                 targetField = fnAnalyze.apply(targetField).getName();
             }
             // Date, DateTime, Time
-            Object value = filters.getValue(field);
+            final Object value = filters.getValue(field);
             if (3 > fields.length) {
                 // Function
                 final BiFunction<String, Object, Condition> fun = OPS.get(key);
                 // JsonArray to List, fix vert.x and jooq connect issue.
-                if (Ut.isJArray(value)) {
-                    value = ((JsonArray) value).getList().toArray();
-                }
+                /**if (Ut.isJArray(value)) {
+                 value = ((JsonArray) value).getList().toArray();
+                 }**/
                 final Condition item = fun.apply(targetField.trim(), value);
                 condition = opCond(condition, item, operator);
                 // Function condition inject
@@ -239,31 +244,6 @@ class JooqCond {
             final String opStr = field.split(",")[Values.ONE];
             return Ut.isNil(opStr) ? Inquiry.Op.EQ : opStr.trim().toLowerCase();
         }
-    }
-
-    private static Condition opIn(final String field, final Object value) {
-        return opCond(value, Operator.OR, DSL.field(field)::eq);
-    }
-
-    private static Condition opNotIn(final String field,
-                                     final Object value) {
-        return opCond(value, Operator.OR, DSL.field(field)::ne);
-    }
-
-    private static Condition opCond(final Object value,
-                                    final Operator operator,
-                                    final Function<Object, Condition> condFun) {
-        // Using or instead of in
-        Condition condition = null;
-        // Params
-        final Collection values = Ut.toCollection(value);
-        if (null != values) {
-            for (final Object item : values) {
-                final Condition itemCond = condFun.apply(item);
-                condition = opCond(condition, itemCond, operator);
-            }
-        }
-        return condition;
     }
 
     private static Condition opCond(final Condition left,

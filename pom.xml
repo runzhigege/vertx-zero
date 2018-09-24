@@ -62,7 +62,7 @@
         <vertx.version>3.5.3</vertx.version>
         <stack.version>3.5.3</stack.version>
 
-        <jackson.version>2.9.6</jackson.version>
+        <jackson.version>2.9.7</jackson.version>
         <jws.version>2.1.1</jws.version>
         <jersey.version>2.27</jersey.version>
         <javax.el.version>3.0.1-b06</javax.el.version>
@@ -90,10 +90,10 @@
         <cglib.version>3.2.8</cglib.version>
         <ignite.version>2.6.0</ignite.version>
         <etcd.version>2.16.0</etcd.version>
-        <mongodb.async.version>3.8.1</mongodb.async.version>
+        <mongodb.async.version>3.8.2</mongodb.async.version>
         <!-- Apache Common -->
         <common.jexl.version>3.1</common.jexl.version>
-        <common.lang3.version>3.8</common.lang3.version>
+        <common.lang3.version>3.8.1</common.lang3.version>
         <common.logging.version>1.2</common.logging.version>
         <common.net.version>3.6</common.net.version>
         <!-- Rpc -->
@@ -102,7 +102,7 @@
         <grpc.version>1.15.0</grpc.version>
         <!-- Vert.x Addition -->
         <rxjava2.version>2.2.2</rxjava2.version>
-        <netty.tcnative.version>2.0.15.Final</netty.tcnative.version>
+        <netty.tcnative.version>2.0.17.Final</netty.tcnative.version>
         <netty.version>4.1.29.Final</netty.version>
         <hazelcast.version>3.10.4</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
