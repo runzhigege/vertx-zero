@@ -194,11 +194,11 @@ class JooqAnalyzer {
             if (null != inquiry.getPager()) {
                 final Pager pager = inquiry.getPager();
                 if (null == selectStep && null == conditionStep) {
-                    pagerStep = started.offset(pager.getStart()).limit(pager.getEnd());
+                    pagerStep = started.offset(pager.getStart()).limit(pager.getSize());
                 } else if (null == selectStep) {
-                    pagerStep = conditionStep.offset(pager.getStart()).limit(pager.getEnd());
+                    pagerStep = conditionStep.offset(pager.getStart()).limit(pager.getSize());
                 } else {
-                    pagerStep = selectStep.offset(pager.getStart()).limit(pager.getEnd());
+                    pagerStep = selectStep.offset(pager.getStart()).limit(pager.getSize());
                 }
             }
             // Returned one by one
