@@ -6,8 +6,6 @@ import io.vertx.up.aiki.Ux;
 import up.god.domain.tables.daos.SysTabularDao;
 import up.god.domain.tables.pojos.SysTabular;
 
-import java.time.LocalDateTime;
-
 public class TabularService implements TabularStub {
 
     @Override
@@ -19,12 +17,7 @@ public class TabularService implements TabularStub {
 
     @Override
     public Future<JsonObject> create(final JsonObject data) {
-        final SysTabular tabular = Ux.fromJson(data, SysTabular.class, "tabular");
-        tabular.setZCreateTime(LocalDateTime.now());
-        tabular.setZUpdateTime(LocalDateTime.now());
-        return Ux.Jooq.on(SysTabularDao.class)
-                .insertReturningPrimaryAsync(tabular, tabular::setPkId)
-                .compose(item -> Ux.thenJsonOne(item, "tabular"));
+        return Future.succeededFuture(new JsonObject());
     }
 
     @Override
