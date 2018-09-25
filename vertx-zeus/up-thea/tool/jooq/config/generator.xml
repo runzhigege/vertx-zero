@@ -56,8 +56,7 @@
             <directory>../../src/main/java</directory>
         </target>
         <strategy>
-            <name>io.github.jklingsporn.vertx.jooq.generate.future.FutureGeneratorStrategy
-            </name>
+            <name>io.github.jklingsporn.vertx.jooq.generate.future.FutureGeneratorStrategy</name>
         </strategy>
     </generator>
 </configuration>
