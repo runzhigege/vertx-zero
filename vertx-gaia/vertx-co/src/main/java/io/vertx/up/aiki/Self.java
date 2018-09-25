@@ -39,6 +39,7 @@ class Self {
         final JsonObject result = immutable ? entity.copy() : entity;
         Observable.fromArray(keys)
                 .filter(Ut::notNil)
+                .filter(result::containsKey)
                 .map(result::remove)
                 .subscribe().dispose();
         return result;
