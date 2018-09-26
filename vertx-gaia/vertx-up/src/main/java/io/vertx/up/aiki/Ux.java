@@ -975,8 +975,15 @@ public final class Ux {
         }
     }
 
-    // -- Raft
-    public static class Raft {
-        
+    // -- Atom
+    public static class Atom {
+
+        public static Function<JsonObject, Future<JsonObject>> joinTo(final JsonObject target, final String field) {
+            return Atomic.joinTo(target, field);
+        }
+
+        public static Function<JsonObject, Future<JsonObject>> joinFrom(final JsonObject source, final String field) {
+            return Atomic.joinFrom(source, field);
+        }
     }
 }
