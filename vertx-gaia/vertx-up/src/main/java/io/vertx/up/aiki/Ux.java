@@ -847,6 +847,15 @@ public final class Ux {
         return Functions.fnSupplier(container, entity, () -> target);
     }
 
+    // -- Atom
+    public static Function<JsonObject, Future<JsonObject>> atomJoin(final String field, final JsonObject to) {
+        return Atomic.joinTo(to, field);
+    }
+
+    public static Function<JsonObject, Future<JsonObject>> atomJoin(final JsonObject from, final String field) {
+        return Atomic.joinFrom(from, field);
+    }
+
     // -> Jooq
     public static class Jooq {
 
@@ -973,10 +982,5 @@ public final class Ux {
         public static Future<JsonArray> find(final String collection, final JsonObject filter) {
             return UxMongo.findWithOptions(collection, filter, new FindOptions());
         }
-    }
-
-    // -- Raft
-    public static class Raft {
-        
     }
 }
