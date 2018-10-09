@@ -137,7 +137,7 @@
         <maven.plugin.resource>3.0.2</maven.plugin.resource>
         <maven.plugin.site>3.7</maven.plugin.site>
         <maven.plugin.enforcer>3.0.0-M1</maven.plugin.enforcer>
-        <maven.plugin.lombok>1.18.0.0</maven.plugin.lombok>
+        <maven.plugin.lombok>1.18.2.0</maven.plugin.lombok>
         <maven.plugin.processor>3.3.3</maven.plugin.processor>
         <maven.plugin.source>3.0.1</maven.plugin.source>
         <maven.plugin.javadoc>2.10.4</maven.plugin.javadoc>
