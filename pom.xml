@@ -102,11 +102,11 @@
         <grpc.version>1.15.1</grpc.version>
         <!-- Vert.x Addition -->
         <rxjava2.version>2.2.2</rxjava2.version>
-        <netty.tcnative.version>2.0.17.Final</netty.tcnative.version>
+        <netty.tcnative.version>2.0.18.Final</netty.tcnative.version>
         <netty.version>4.1.30.Final</netty.version>
         <hazelcast.version>3.10.5</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
-        <error.prone.version>2.3.1</error.prone.version>
+        <error.prone.version>2.3.2</error.prone.version>
         <reactive.streams>1.0.2</reactive.streams>
         <!-- JSR -->
         <jsr311.version>1.1.1</jsr311.version>
@@ -137,7 +137,7 @@
         <maven.plugin.resource>3.0.2</maven.plugin.resource>
         <maven.plugin.site>3.7</maven.plugin.site>
         <maven.plugin.enforcer>3.0.0-M1</maven.plugin.enforcer>
-        <maven.plugin.lombok>1.18.0.0</maven.plugin.lombok>
+        <maven.plugin.lombok>1.18.2.0</maven.plugin.lombok>
         <maven.plugin.processor>3.3.3</maven.plugin.processor>
         <maven.plugin.source>3.0.1</maven.plugin.source>
         <maven.plugin.javadoc>2.10.4</maven.plugin.javadoc>
