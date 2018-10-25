@@ -73,10 +73,10 @@
         <jooq.version>3.10.8</jooq.version>
         <vertx.jooq.version>2.4.1</vertx.jooq.version>
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
-        <vertx.jooq.code.version>3.1.0</vertx.jooq.code.version>
-        <mysql.version>8.0.12</mysql.version>
+        <vertx.jooq.code.version>4.0.0</vertx.jooq.code.version>
+        <mysql.version>8.0.13</mysql.version>
 
-        <jwt.version>3.4.0</jwt.version>
+        <jwt.version>3.4.1</jwt.version>
         <reflect.asm.version>1.11.7</reflect.asm.version>
         <asm.version>6.2.1</asm.version>
         <lombok.version>1.18.2</lombok.version>
@@ -85,7 +85,7 @@
         <hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
         <scala.version>2.12.4</scala.version>
         <feign.version>8.18.0</feign.version>
-        <guava.version>26.0-jre</guava.version>
+        <guava.version>27.0-jre</guava.version>
         <codehaus.janino.version>3.0.10</codehaus.janino.version>
         <cglib.version>3.2.8</cglib.version>
         <ignite.version>2.6.0</ignite.version>
@@ -99,12 +99,12 @@
         <!-- Rpc -->
         <protobuf.version>3.6.1</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
-        <grpc.version>1.15.1</grpc.version>
+        <grpc.version>1.16.0</grpc.version>
         <!-- Vert.x Addition -->
-        <rxjava2.version>2.2.2</rxjava2.version>
-        <netty.tcnative.version>2.0.18.Final</netty.tcnative.version>
+        <rxjava2.version>2.2.3</rxjava2.version>
+        <netty.tcnative.version>2.0.19.Final</netty.tcnative.version>
         <netty.version>4.1.30.Final</netty.version>
-        <hazelcast.version>3.10.5</hazelcast.version>
+        <hazelcast.version>3.11</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
         <error.prone.version>2.3.2</error.prone.version>
         <reactive.streams>1.0.2</reactive.streams>
@@ -118,7 +118,7 @@
         <!-- Testing -->
         <junit.version>4.12</junit.version>
         <!-- AspectJ -->
-        <aspectj.version>1.9.1</aspectj.version>
+        <aspectj.version>1.9.2</aspectj.version>
         <!-- Logging -->
         <log4j2.version>2.11.1</log4j2.version>
         <log4j.version>1.2.17</log4j.version>
