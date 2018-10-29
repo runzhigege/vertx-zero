@@ -78,7 +78,7 @@
 
         <jwt.version>3.4.1</jwt.version>
         <reflect.asm.version>1.11.7</reflect.asm.version>
-        <asm.version>6.2.1</asm.version>
+        <asm.version>7.0</asm.version>
         <lombok.version>1.18.2</lombok.version>
         <jetbrains.version>16.0.2</jetbrains.version>
         <guice.version>4.1.0</guice.version>
@@ -87,7 +87,7 @@
         <feign.version>8.18.0</feign.version>
         <guava.version>27.0-jre</guava.version>
         <codehaus.janino.version>3.0.10</codehaus.janino.version>
-        <cglib.version>3.2.8</cglib.version>
+        <cglib.version>3.2.9</cglib.version>
         <ignite.version>2.6.0</ignite.version>
         <etcd.version>2.16.0</etcd.version>
         <mongodb.async.version>3.8.2</mongodb.async.version>
@@ -99,7 +99,7 @@
         <!-- Rpc -->
         <protobuf.version>3.6.1</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
-        <grpc.version>1.16.0</grpc.version>
+        <grpc.version>1.16.1</grpc.version>
         <!-- Vert.x Addition -->
         <rxjava2.version>2.2.3</rxjava2.version>
         <netty.tcnative.version>2.0.19.Final</netty.tcnative.version>
