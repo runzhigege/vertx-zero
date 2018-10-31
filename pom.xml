@@ -79,8 +79,8 @@
         <jwt.version>3.4.1</jwt.version>
         <reflect.asm.version>1.11.7</reflect.asm.version>
         <asm.version>7.0</asm.version>
-        <lombok.version>1.18.2</lombok.version>
-        <jetbrains.version>16.0.2</jetbrains.version>
+        <lombok.version>1.18.4</lombok.version>
+        <jetbrains.version>16.0.3</jetbrains.version>
         <guice.version>4.1.0</guice.version>
         <hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
         <scala.version>2.12.4</scala.version>
@@ -103,7 +103,7 @@
         <!-- Vert.x Addition -->
         <rxjava2.version>2.2.3</rxjava2.version>
         <netty.tcnative.version>2.0.19.Final</netty.tcnative.version>
-        <netty.version>4.1.30.Final</netty.version>
+        <netty.version>4.1.31.Final</netty.version>
         <hazelcast.version>3.11</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
         <error.prone.version>2.3.2</error.prone.version>
