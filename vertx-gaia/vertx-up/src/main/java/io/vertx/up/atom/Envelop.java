@@ -12,8 +12,8 @@ import io.vertx.up.kidd.Readible;
 import io.vertx.up.log.Annal;
 import io.vertx.up.web.ZeroSerializer;
 import io.vertx.zero.eon.Strings;
-import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.IndexExceedException;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
 import java.io.Serializable;
@@ -165,15 +165,31 @@ public class Envelop implements Serializable {
 
     private JsonObject getData(final Integer argIndex) {
         JsonObject data = new JsonObject();
+        // if the data ( JsonObject this.data ) does not contains "data"
         final Object reference = Fn.getNull(null, () -> this.data.getValue(Key.DATA), this.data);
         if (reference instanceof JsonObject) {
+            // -> JsonObject -> key = "data"
             data = (JsonObject) reference;
         }
+        // set data by index.
         if (null == argIndex) {
-            if (data.containsKey(String.valueOf(Values.ZERO))) {
-                data = data.getJsonObject(String.valueOf(Values.ZERO));
+            // Find the first value of type JsonObject
+            final JsonObject extracted = new JsonObject();
+            for (int idx = 0; idx < 10; idx++) {
+                // Normalized key of index
+                final String key = String.valueOf(idx);
+                final Object value = data.getValue(key);
+                // Switch or break
+                if (value instanceof JsonObject) {
+                    extracted.mergeIn((JsonObject) value);
+                    break;
+                }
+            }
+            if (!Ut.isNil(extracted)) {
+                data = extracted;
             }
         } else {
+            // Extract data by "argIndex" that passed by developers.
             data = data.getJsonObject(String.valueOf(argIndex));
         }
         return data;
