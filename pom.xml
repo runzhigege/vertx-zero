@@ -101,7 +101,7 @@
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
         <grpc.version>1.16.1</grpc.version>
         <!-- Vert.x Addition -->
-        <rxjava2.version>2.2.3</rxjava2.version>
+        <rxjava2.version>2.2.4</rxjava2.version>
         <netty.tcnative.version>2.0.20.Final</netty.tcnative.version>
         <netty.version>4.1.31.Final</netty.version>
         <hazelcast.version>3.11</hazelcast.version>
