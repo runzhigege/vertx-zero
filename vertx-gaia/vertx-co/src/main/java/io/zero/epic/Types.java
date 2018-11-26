@@ -181,6 +181,18 @@ class Types {
         return array;
     }
 
+    static JsonObject toJObject(final String literal) {
+        if (Ut.isNil(literal)) {
+            return new JsonObject();
+        } else {
+            try {
+                return new JsonObject(literal);
+            } catch (final DecodeException ex) {
+                return new JsonObject();
+            }
+        }
+    }
+
     static <T> JsonArray toJArray(final T entity, final int repeat) {
         final JsonArray array = new JsonArray();
         for (int idx = Values.IDX; idx < repeat; idx++) {

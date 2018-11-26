@@ -59,8 +59,8 @@
         <encoding>UTF-8</encoding>
         <jcabi.version>0.22.6</jcabi.version>
         <!-- Vertx 3.5.4 SNAPSHOT, For testing -->
-        <vertx.version>3.6.0.CR1</vertx.version>
-        <stack.version>3.6.0.CR1</stack.version>
+        <vertx.version>3.6.0.CR2</vertx.version>
+        <stack.version>3.6.0.CR2</stack.version>
 
         <jackson.version>2.9.7</jackson.version>
         <jws.version>2.1.1</jws.version>
@@ -85,7 +85,7 @@
         <hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
         <scala.version>2.12.4</scala.version>
         <feign.version>8.18.0</feign.version>
-        <guava.version>27.0-jre</guava.version>
+        <guava.version>27.0.1-jre</guava.version>
         <codehaus.janino.version>3.0.11</codehaus.janino.version>
         <cglib.version>3.2.9</cglib.version>
         <ignite.version>2.6.0</ignite.version>
@@ -101,7 +101,7 @@
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
         <grpc.version>1.16.1</grpc.version>
         <!-- Vert.x Addition -->
-        <rxjava2.version>2.2.3</rxjava2.version>
+        <rxjava2.version>2.2.4</rxjava2.version>
         <netty.tcnative.version>2.0.20.Final</netty.tcnative.version>
         <netty.version>4.1.31.Final</netty.version>
         <hazelcast.version>3.11</hazelcast.version>
