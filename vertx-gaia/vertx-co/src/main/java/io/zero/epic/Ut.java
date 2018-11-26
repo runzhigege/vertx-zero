@@ -406,6 +406,10 @@ public class Ut {
         return Types.toJArray(list);
     }
 
+    public static JsonObject toJObject(final String literal) {
+        return Types.toJObject(literal);
+    }
+
     public static int toMonth(final String literal) {
         return Period.toMonth(literal);
     }
