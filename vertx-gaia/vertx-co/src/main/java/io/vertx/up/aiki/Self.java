@@ -172,6 +172,7 @@ class Self {
     ) {
         final JsonArray result = immutable ? array.copy() : array;
         final JsonArray processed = new JsonArray();
+        // TODO: handle [null] value at line: 178
         Observable.fromIterable(result)
                 .map((item) -> (JsonObject) item)
                 .map(item -> item.getValue(field))
