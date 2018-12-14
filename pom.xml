@@ -87,8 +87,8 @@
         <feign.version>8.18.0</feign.version>
         <guava.version>27.0.1-jre</guava.version>
         <codehaus.janino.version>3.0.11</codehaus.janino.version>
-        <cglib.version>3.2.9</cglib.version>
-        <ignite.version>2.6.0</ignite.version>
+        <cglib.version>3.2.10</cglib.version>
+        <ignite.version>2.7.0</ignite.version>
         <etcd.version>2.16.0</etcd.version>
         <mongodb.async.version>3.9.1</mongodb.async.version>
         <!-- Apache Common -->
@@ -99,7 +99,7 @@
         <!-- Rpc -->
         <protobuf.version>3.6.1</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
-        <grpc.version>1.16.1</grpc.version>
+        <grpc.version>1.17.1</grpc.version>
         <!-- Vert.x Addition -->
         <rxjava2.version>2.2.4</rxjava2.version>
         <netty.tcnative.version>2.0.20.Final</netty.tcnative.version>
