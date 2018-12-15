@@ -37,6 +37,7 @@ class ArrayUtil {
 
     /**
      * Replaced duplicated by key
+     * This method will modify input array.
      *
      * @param array      source
      * @param jsonObject element that will be added.
@@ -46,7 +47,6 @@ class ArrayUtil {
                          final JsonObject jsonObject,
                          final String field) {
         // counter
-        final JsonArray result = array.copy();
         int targetIndex = Values.UNSET;
         for (int idx = 0; idx < array.size(); idx++) {
             final JsonObject element = array.getJsonObject(idx);
@@ -61,10 +61,10 @@ class ArrayUtil {
             }
         }
         if (Values.ZERO < targetIndex) {
-            result.getJsonObject(targetIndex).clear().mergeIn(jsonObject);
+            array.getJsonObject(targetIndex).clear().mergeIn(jsonObject);
         } else {
-            result.add(jsonObject);
+            array.add(jsonObject);
         }
-        return result;
+        return array;
     }
 }
