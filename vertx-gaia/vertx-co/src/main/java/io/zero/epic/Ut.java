@@ -238,6 +238,10 @@ public class Ut {
         return ArrayUtil.add(array, element);
     }
 
+    public static JsonArray elementAdd(final JsonArray array, final JsonObject jsonObject, final String field) {
+        return ArrayUtil.add(array, jsonObject, field);
+    }
+
     public static <T> T elementFind(final List<T> list, final Predicate<T> fnFilter) {
         return Statute.find(list, fnFilter);
     }
