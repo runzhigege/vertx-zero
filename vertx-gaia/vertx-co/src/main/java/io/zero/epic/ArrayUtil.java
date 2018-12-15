@@ -1,6 +1,11 @@
 package io.zero.epic;
 
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+import io.vertx.zero.eon.Values;
+
 import java.lang.reflect.Array;
+import java.util.Objects;
 
 class ArrayUtil {
 
@@ -28,5 +33,38 @@ class ArrayUtil {
         final T[] newArray = (T[]) copyArrayGrow1(array, type);
         newArray[newArray.length - 1] = element;
         return newArray;
+    }
+
+    /**
+     * Replaced duplicated by key
+     *
+     * @param array      source
+     * @param jsonObject element that will be added.
+     * @return the new json array
+     */
+    static JsonArray add(final JsonArray array,
+                         final JsonObject jsonObject,
+                         final String field) {
+        // counter
+        final JsonArray result = array.copy();
+        int targetIndex = Values.UNSET;
+        for (int idx = 0; idx < array.size(); idx++) {
+            final JsonObject element = array.getJsonObject(idx);
+            if (null != element) {
+                final Object elementValue = element.getValue(field);
+                final Object value = jsonObject.getValue(field);
+                if (Objects.nonNull(elementValue) && Objects.nonNull(value)
+                        && elementValue.equals(value)) {
+                    targetIndex = idx;
+                    break;
+                }
+            }
+        }
+        if (Values.ZERO < targetIndex) {
+            result.getJsonObject(targetIndex).clear().mergeIn(jsonObject);
+        } else {
+            result.add(jsonObject);
+        }
+        return result;
     }
 }
