@@ -17,9 +17,7 @@ import org.jooq.impl.DSL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
@@ -69,6 +67,15 @@ class JooqCond {
                     });
                 }
             };
+
+    private static String applyField(final String field) {
+        final Set<String> keywords = new HashSet<String>() {
+            {
+                this.add("KEY"); // MYSQL, KEY is keyword
+            }
+        };
+        return keywords.contains(field) ? "`" + field + "`" : field;
+    }
 
     // Condition ---------------------------------------------------------
     static Condition transform(final JsonObject filters,
@@ -218,7 +225,7 @@ class JooqCond {
                 /**if (Ut.isJArray(value)) {
                  value = ((JsonArray) value).getList().toArray();
                  }**/
-                final Condition item = fun.apply(targetField.trim(), value);
+                final Condition item = fun.apply(applyField(targetField.trim()), value);
                 condition = opCond(condition, item, operator);
                 // Function condition inject
 
@@ -230,7 +237,7 @@ class JooqCond {
                         JooqArgumentException.class, UxJooq.class, instant.getClass());
                 final String mode = fields[Values.TWO];
                 final BiFunction<String, Instant, Condition> fun = DOPS.get(mode);
-                final Condition item = fun.apply(targetField.trim(), instant);
+                final Condition item = fun.apply(applyField(targetField.trim()), instant);
                 condition = opCond(condition, item, operator);
             }
         }
