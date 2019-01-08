@@ -18,10 +18,13 @@ public final class Answer {
         // 1. Get response reference
         final HttpServerResponse response =
                 Normalizer.initialize(context, envelop);
-        // 2. Media processing
-        Normalizer.media(response, null);
-        // 3. Response process
-        Normalizer.out(response, envelop, null);
+        // FIX: java.lang.IllegalStateException: Response is closed
+        if (!response.closed()) {
+            // 2. Media processing
+            Normalizer.media(response, null);
+            // 3. Response process
+            Normalizer.out(response, envelop, null);
+        }
     }
 
     public static void reply(
@@ -32,12 +35,15 @@ public final class Answer {
         // 1. Get response reference
         final HttpServerResponse response =
                 Normalizer.initialize(context, envelop);
-        // 2. Media processing
-        Normalizer.media(response, event);
-        // 3. Store Session
-        Normalizer.storeSession(context, envelop.data(), event.getAction());
-        // 4. Response process
-        // 3. Response process
-        Normalizer.out(response, envelop, event);
+        // FIX: java.lang.IllegalStateException: Response is closed
+        if (!response.closed()) {
+            // 2. Media processing
+            Normalizer.media(response, event);
+            // 3. Store Session
+            Normalizer.storeSession(context, envelop.data(), event.getAction());
+            // 4. Response process
+            // 3. Response process
+            Normalizer.out(response, envelop, event);
+        }
     }
 }
