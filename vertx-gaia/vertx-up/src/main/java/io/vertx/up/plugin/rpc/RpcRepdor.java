@@ -15,12 +15,12 @@ public class RpcRepdor {
 
     private transient final Class<?> clazz;
 
-    public static RpcRepdor create(final Class<?> clazz) {
-        return new RpcRepdor(clazz);
-    }
-
     private RpcRepdor(final Class<?> clazz) {
         this.clazz = clazz;
+    }
+
+    public static RpcRepdor create(final Class<?> clazz) {
+        return new RpcRepdor(clazz);
     }
 
     public void replyJson(
@@ -36,7 +36,7 @@ public class RpcRepdor {
             if (null != ex) {
                 final Envelop envelop =
                         Envelop.failure(new _500UnexpectedRpcException(this.clazz, ex));
-                handler.complete(new JsonObject(envelop.response()));
+                handler.complete(envelop.responseJson());
                 // TODO: Debug Now, Remove In Future
                 ex.printStackTrace();
             }

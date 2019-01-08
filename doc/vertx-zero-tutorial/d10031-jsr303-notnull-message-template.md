@@ -14,7 +14,7 @@ Demo projects:
 
 # 1. Configuration
 
-In your resource root folder, create a new file named `vertx-validation.properties`, in Maven project, this folder is often `src/main/resources`. In this file, you can put the property key, value pair for validation message, the content is as following:
+In your resource root folder, create a new up.god.file named `vertx-validation.properties`, in Maven project, this folder is often `src/main/resources`. In this up.god.file, you can put the property key, value pair for validation message, the content is as following:
 
 ```properties
 notnull.username=Sorry, this api require you input "username".

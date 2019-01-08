@@ -15,7 +15,7 @@ From this chapter we'll study Ux first because almost all the business codes wil
 
 > Hello world and hello utility x, this is code segments for some usage and you can ignore it first, we'll introduce all the utility x tool apis to be sure every developer could do less works in zero system.
 
-First create the input source file `d10046.json` in your testing resource folder `src/test/resources/test/io.vertx.up.aiki`.
+First create the input source up.god.file `d10046.json` in your testing resource folder `src/test/resources/test/io.vertx.up.aiki`.
 
 ```json
 {
@@ -65,7 +65,7 @@ If you run this test case you should see following output, the field `password` 
 
 ## 2. Uarr
 
-Create new input file named `d10046-arr.json`, put into the same folder in chapter 1.
+Create new input up.god.file named `d10046-arr.json`, put into the same folder in chapter 1.
 
 ```json
 [
@@ -113,7 +113,7 @@ Then you should see another message in your console as following:
 
 ## 3. Ux
 
-The last examples should be Ux usage, it's not needed to create new files, we'll re-use `d10046.json` file:
+The last examples should be Ux usage, it's not needed to create new files, we'll re-use `d10046.json` up.god.file:
 
 ```java
     @Test

@@ -54,7 +54,7 @@ src/main/resources/vertx-server.yml
 
 #### vertx.yml
 
-`vertx.yml`file must contains extend lime node as following:
+`vertx.yml`up.god.file must contains extend lime node as following:
 
 ```yaml
 zero:
@@ -69,7 +69,7 @@ zero:
 
 #### vertx-server.yml
 
-`vertx-server.yml` file must define another server type for Api Gateway
+`vertx-server.yml` up.god.file must define another server type for Api Gateway
 
 ```yaml
 server:
@@ -82,7 +82,7 @@ server:
 
 #### vertx-etcd3.yml
 
-`vertx-etcd3.yml` file contains etcd3 registry center configuration information:
+`vertx-etcd3.yml` up.god.file contains etcd3 registry center configuration information:
 
 ```yaml
 etcd:
@@ -130,7 +130,7 @@ src/main/resources/vertx-server.yml
 
 #### vertx.yml
 
-`vertx.yml` file is the same as api gateway, be sure instance name are the same as api gateway.
+`vertx.yml` up.god.file is the same as api gateway, be sure instance name are the same as api gateway.
 
 ```yaml
 zero:
@@ -145,7 +145,7 @@ zero:
 
 #### vertx-server.yml
 
-`vertx-server.yml` file should be default configuration, you can set port for this micro service node.
+`vertx-server.yml` up.god.file should be default configuration, you can set port for this micro service node.
 
 ```yaml
 server:
@@ -156,7 +156,7 @@ server:
     host: 0.0.0.0
 ```
 
-Here ignore `vertx-etcd3.yml` file content because they are the same. If you put all service node in one environment, all the service nodes configuration of etcd3 must be the same.
+Here ignore `vertx-etcd3.yml` up.god.file content because they are the same. If you put all service node in one environment, all the service nodes configuration of etcd3 must be the same.
 
 ### 2.4. Service
 

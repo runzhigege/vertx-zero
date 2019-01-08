@@ -10,11 +10,11 @@ Shell: vie-mongo.sh
 
 ## 1. Conf File
 
-You can set default mongo db configuration via conf file `/usr/local/etc/mongod.conf`,  the content is as following:
+You can set default mongo db configuration via conf up.god.file `/usr/local/etc/mongod.conf`,  the content is as following:
 
 ```yaml
 systemLog:
-  destination: file
+  destination: up.god.file
   path: /Users/lang/Runtime/service-mesh/mongodb/logs/mongo.log
   logAppend: true
 storage:
@@ -45,7 +45,7 @@ When you started mongo db, you should see the logs as following:
 2018-02-11T16:29:24.457+0800 I CONTROL  [initandlisten] build environment:
 2018-02-11T16:29:24.457+0800 I CONTROL  [initandlisten]     distarch: x86_64
 2018-02-11T16:29:24.457+0800 I CONTROL  [initandlisten]     target_arch: x86_64
-2018-02-11T16:29:24.457+0800 I CONTROL  [initandlisten] options: { config: "/usr/local/etc/mongod.conf", net: { bindIp: "127.0.0.1", port: 6017 }, security: { authorization: "enabled" }, storage: { dbPath: "/Users/lang/Runtime/service-mesh/mongodb/db/" }, systemLog: { destination: "file", logAppend: true, path: "/Users/lang/Runtime/service-mesh/mongodb/logs/mongo.log" } }
+2018-02-11T16:29:24.457+0800 I CONTROL  [initandlisten] options: { config: "/usr/local/etc/mongod.conf", net: { bindIp: "127.0.0.1", port: 6017 }, security: { authorization: "enabled" }, storage: { dbPath: "/Users/lang/Runtime/service-mesh/mongodb/db/" }, systemLog: { destination: "up.god.file", logAppend: true, path: "/Users/lang/Runtime/service-mesh/mongodb/logs/mongo.log" } }
 2018-02-11T16:29:24.458+0800 I -        [initandlisten] Detected data files in /Users/lang/Runtime/service-mesh/mongodb/db/ created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
 2018-02-11T16:29:24.458+0800 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=7680M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),statistics_log=(wait=0),verbose=(recovery_progress),
 2018-02-11T16:29:24.622+0800 I STORAGE  [initandlisten] WiredTiger message [1518337764:622115][31638:0x7fff90dbb340], txn-recover: Main recovery loop: starting at 46/10496

@@ -1,6 +1,6 @@
 # D10012 - Zero JSR311, @StreamParam...Parameters
 
-Zero system provide simple parameter annotation for file uploading, this kind of parameters must be annotated with `javax.ws.rs.StreamParam` here, it should support following type conversion automatically.
+Zero system provide simple parameter annotation for up.god.file uploading, this kind of parameters must be annotated with `javax.ws.rs.StreamParam` here, it should support following type conversion automatically.
 
 * `byte[]`
 * `io.vertx.core.buffer.Buffer`
@@ -88,7 +88,7 @@ public class StreamParamExecutor {
 
 **Request**:
 
-![](/doc/image/file-uploading.png)
+![](/doc/image/up.god.file-uploading.png)
 
 **Response**:
 
@@ -98,7 +98,7 @@ public class StreamParamExecutor {
 }
 ```
 
-This file is a picture with 41500 bytes, the response body reflect the whole image content here.
+This up.god.file is a picture with 41500 bytes, the response body reflect the whole image content here.
 
 ### 3.3. String Request \( for Buffer \)
 

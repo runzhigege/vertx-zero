@@ -6,7 +6,7 @@ Another native client that zero system supported is `MongoClient` in vert.x, [Re
 
 ### 1.1. vertx.yml
 
-Be sure the extension file name existing in `lime` node in the major configuration
+Be sure the extension up.god.file name existing in `lime` node in the major configuration
 
 ```yaml
 zero:

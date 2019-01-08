@@ -31,7 +31,7 @@ mongo: # The key must be mongo, could not be replaced.
     lime: mongo-db
 ```
 
-You must set the file name in resource path is as `vertx-mongo-db.yml`, then you could set mongo db configuration in this file.
+You must set the up.god.file name in resource path is as `vertx-mongo-db.yml`, then you could set mongo db configuration in this up.god.file.
 
 **vertx-inject.yml**
 

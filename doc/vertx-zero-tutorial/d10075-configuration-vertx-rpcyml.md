@@ -37,7 +37,7 @@ Please be careful about the attributes`uniform`and`extension`it's the same excep
   `up-ceous`, you must set {name} to`up-ceous`, then when current service communicate with **up-ceous** service, the client configuration will use it under **extension **instead of **uniform **.
 * If there is no configuration under extension, the uniform configuration will be used. uniform just like default client configuration.
 
-> This configuration file is only used in **SSL **mode.
+> This configuration up.god.file is only used in **SSL **mode.
 
 ## 2. Full Examples
 
