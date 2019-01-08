@@ -1,6 +1,6 @@
 # D10071 - Configuration, vertx-error.yml
 
-In zero system, it provide standard error system and extended error configuration, the file `vertx-error.yml` could let you to set the errors that you want to defined.
+In zero system, it provide standard error system and extended error configuration, the up.god.file `vertx-error.yml` could let you to set the errors that you want to defined.
 
 ## 1. Content Segment
 

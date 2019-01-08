@@ -100,7 +100,7 @@ Here the digit in the method name is the index of your definition parameters, in
 ```java
 package com.htl.micro.user;
 
-import com.htl.cv.Addr;
+import com.htl.up.god.cv.Addr;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Codex;
@@ -127,7 +127,7 @@ public interface SelfApi {
 ```java
 package com.htl.micro.user;
 
-import com.htl.cv.Addr;
+import com.htl.up.god.cv.Addr;
 import com.htl.micro.login.LoginStub;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;

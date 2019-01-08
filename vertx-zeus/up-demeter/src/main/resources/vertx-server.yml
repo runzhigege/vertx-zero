@@ -1,0 +1,6 @@
+server:
+  - name: up-demeter
+    type: http
+    config:
+      port: 6100
+      host: 0.0.0.0

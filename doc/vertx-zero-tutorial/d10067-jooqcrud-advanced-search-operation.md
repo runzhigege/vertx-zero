@@ -15,7 +15,7 @@ Here are the all the apis that `Ux.Jooq` class provided for paging, sorting
 * `Future<JsonObject> searchOrAsync(Inquiry inquiry, String pojo)`
 * `<T> Future<List<T>> searchOrOrListAsync(Inquiry inquiry)`
 
-In current version, zero system provided above three apis only, if you want to use dto, you must provide the mapping file that has been introduced in previous tutorial:
+In current version, zero system provided above three apis only, if you want to use dto, you must provide the mapping up.god.file that has been introduced in previous tutorial:
 
 **src/main/resources/pojo/tabular.yml**
 
@@ -92,7 +92,7 @@ public class SearchWorker {
     @Address("ZERO://QUEUE/SEARCH")
     public Future<JsonObject> search(final Envelop envelop) {
         final JsonObject data = Ux.getJson(envelop);
-        // The second parameter is the yml file name "tabular.yml"
+        // The second parameter is the yml up.god.file name "tabular.yml"
         return this.searchStub.search(Ux.getInquiry(data, "tabular"));
     }
 }
@@ -136,7 +136,7 @@ public class SearchService implements SearchStub {
 ## 2. Points for searching
 
 * Here we used `Ux.getInquiry` api to build valid `Inquiry` object, the type of this object is `io.vertx.up.atom.query.Inquiry`. 
-* If you do not provide pojo mapping file \( The 2nd argument \), you should put SQL COLUMN instead instead of field name in `sorter` and `criteria` request json node.
+* If you do not provide pojo mapping up.god.file \( The 2nd argument \), you should put SQL COLUMN instead instead of field name in `sorter` and `criteria` request json node.
 
 ## 3.  Testing
 
@@ -397,7 +397,7 @@ From this chapter you should know how to do common searching with zero system Jo
 
 * `sorter, pager, projection, criteria` are specific parameters if you use body directly;
 * `sorter` and `criteria` support SQL column usage directly if you do not use `pojo` argument;
-* `projection` could remove some returned fields, if you use `pojo` file, projection field names should be configured in `mapping` node.
+* `projection` could remove some returned fields, if you use `pojo` up.god.file, projection field names should be configured in `mapping` node.
 * `criteria` support zero filter syntax in previous tutorial introduced and all the connector is `AND` in SQL;
 * The returned data format is fixed as you see in examples.
 

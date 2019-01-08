@@ -10,7 +10,7 @@ Demo example will be install istio to `~/Tool/Zero/`
 
 ```shell
 curl -L https://git.io/getLatestIstio | sh -
-...... # Wait for ISO file downloading finished.
+...... # Wait for ISO up.god.file downloading finished.
 ```
 
 2 - Set Up environment.

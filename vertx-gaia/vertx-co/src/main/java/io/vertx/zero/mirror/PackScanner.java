@@ -71,7 +71,7 @@ class PackScanner {
             String packageName = (packName.startsWith(Strings.DOT)) ?
                     packName.substring(1, packName.length()) :
                     packName;
-            // Get jar file
+            // Get jar up.god.file
             final JarFile jar = ((JarURLConnection) url.openConnection()).getJarFile();
             // List all entries of this jar
             final Enumeration<JarEntry> entries = jar.entries();

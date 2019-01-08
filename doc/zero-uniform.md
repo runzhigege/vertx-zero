@@ -5,7 +5,7 @@ This chapter will introduce the usage for completed example in our project, it c
 * `Version > 0.4.4`
 * `Mongo Client`
 
-The method to use event bus is the sample version, please refer [Event Bus sample version](doc/zero-ebs.md) to check more details about how to use event bus in another way instead of complex file structure.
+The method to use event bus is the sample version, please refer [Event Bus sample version](doc/zero-ebs.md) to check more details about how to use event bus in another way instead of complex up.god.file structure.
 
 ## 0. File List
 
@@ -14,7 +14,7 @@ The method to use event bus is the sample version, please refer [Event Bus sampl
 * `com.tlk.topic.api.TopicStub`：( Interface ) The service layer interface definition.
 * `com.tlk.topic.api.TopicService`：The service interface implementation classes.
 
-Finally this service file structure should be as following, here ignored `Topic` domain class definition, it's sample **POJO**:
+Finally this service up.god.file structure should be as following, here ignored `Topic` domain class definition, it's sample **POJO**:
 
 ![ZeroTlk](image/zero-tlk.png)
 
@@ -26,7 +26,7 @@ The request flow will be in following:
 
 ## 1. Address Management
 
-In this project, the address must be managed by constant file to avoid wrong user operations. It's defined in `com.tlk.cv.Addr` interface as constant values:
+In this project, the address must be managed by constant up.god.file to avoid wrong user operations. It's defined in `com.tlk.up.god.cv.Addr` interface as constant values:
 
 ```java
 public interface Addr {
@@ -47,7 +47,7 @@ It's interface annotated with `@EndPoint`, the source code is as following:
 ```java
 package com.tlk.topic.api;
 
-import com.tlk.cv.Addr;
+import com.tlk.up.god.cv.Addr;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.EndPoint;
 
@@ -89,7 +89,7 @@ Be careful about following points:
 ```java
 package com.tlk.topic.api;
 
-import com.tlk.cv.Addr;
+import com.tlk.up.god.cv.Addr;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.FindOptions;

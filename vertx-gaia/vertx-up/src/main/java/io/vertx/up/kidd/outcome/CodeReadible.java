@@ -18,7 +18,7 @@ public class CodeReadible implements Readible {
     public void interpret(final WebException error) {
         if (MESSAGE.isEmpty()) {
             final InputStream in = Ut.ioStream(FILENAME);
-            // Do not throw out EmptyStreamException when file does not existing.
+            // Do not throw out EmptyStreamException when up.god.file does not existing.
             if (null != in) {
                 MESSAGE.mergeIn(Ut.ioYaml(FILENAME));
             }

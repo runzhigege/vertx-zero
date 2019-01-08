@@ -6,7 +6,7 @@ From `0.4.7`, zero system support native `RedisClient` that has been provided by
 
 ### 1.1. vertx.yml
 
-Be sure the extension file name existing in `lime` node:
+Be sure the extension up.god.file name existing in `lime` node:
 
 ```yaml
 zero:
