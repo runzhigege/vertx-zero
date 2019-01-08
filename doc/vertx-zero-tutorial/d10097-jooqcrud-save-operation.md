@@ -20,7 +20,7 @@ Based on the method signature you should know the usage here.
 ```java
 package com.htl.micro.shop;
 
-import com.htl.cv.Addr;
+import com.htl.up.god.cv.Addr;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.EndPoint;
@@ -60,7 +60,7 @@ You can focus on the last method named `post` here to check the details:
 ```java
 package com.htl.micro.shop;
 
-import com.htl.cv.Addr;
+import com.htl.up.god.cv.Addr;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.aiki.Ux;

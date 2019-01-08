@@ -8,7 +8,7 @@ This chapter is duplicated with [D10102 - Configuration, vertx-redis.yml](d10102
 
 ### 1.1. vertx.yml
 
-Be sure the extension file name existing in `lime` node:
+Be sure the extension up.god.file name existing in `lime` node:
 
 ```yaml
 zero:

@@ -132,7 +132,7 @@ Here we could see that the data object has been returned, but for some real busi
 
 ## 3. Normalized
 
-Firstly, create new file named `tabular.yml` under pojo folder `src/main/resources/pojo`, the file content could be as following:
+Firstly, create new up.god.file named `tabular.yml` under pojo folder `src/main/resources/pojo`, the up.god.file content could be as following:
 
 ```yaml
 type: "up.god.domain.tables.pojos.SysTabular"
@@ -170,7 +170,7 @@ public class TabularService implements TabularStub {
 }
 ```
 
-Here `tabular` is the configuration file name that you created, then if you re-send the request you should get following response:
+Here `tabular` is the configuration up.god.file name that you created, then if you re-send the request you should get following response:
 
 ```json
 {
@@ -190,5 +190,5 @@ Here `tabular` is the configuration file name that you created, then if you re-s
 
 ## 4. Summary
 
-Because our system came from old hotel system migration, that's why we need the mapping file to normalize response. If you focus on new system you can do this normalize in the pojo definition. But you still may met the situation that need you to set the mapping rule, at that time it's helpful for you to continue the works.
+Because our system came from old hotel system migration, that's why we need the mapping up.god.file to normalize response. If you focus on new system you can do this normalize in the pojo definition. But you still may met the situation that need you to set the mapping rule, at that time it's helpful for you to continue the works.
 

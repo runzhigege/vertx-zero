@@ -15,7 +15,7 @@ When you enabled mongodb in Zero framework on MacOS, you may met following issue
 
 ## 2. Resolution 
 
-1. Please be sure you'll edit `/private/etc/hosts` instead of `/etc/hosts` file here.
+1. Please be sure you'll edit `/private/etc/hosts` instead of `/etc/hosts` up.god.file here.
 2. Type command to capture the data of `/private/etc/hosts`
 
 	```
@@ -31,7 +31,7 @@ When you enabled mongodb in Zero framework on MacOS, you may met following issue
 	>> hostname
 	LangdeMacBook-Pro.local
 	```
-4. Edit the file of `/private/etc/hosts` and append the hostname to following ( Sudo Mode )
+4. Edit the up.god.file of `/private/etc/hosts` and append the hostname to following ( Sudo Mode )
 
 	```
 	>> sudo vim /private/etc/hosts

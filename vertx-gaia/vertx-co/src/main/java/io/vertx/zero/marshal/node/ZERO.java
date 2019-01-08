@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentMap;
 
 interface Storage {
     /**
-     * Data for each file
+     * Data for each up.god.file
      */
     ConcurrentMap<String, JsonObject> CONFIG
             = new ConcurrentHashMap<>();

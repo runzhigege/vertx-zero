@@ -70,7 +70,7 @@ This specification is provided to developers to do standard develop works in zer
 
 If your project name is `kys`, we could define the root package named `com.kys`, then you should provide following sub-packages for different usage:
 
-* **cv**: Constant Value packages.
+* **up.god.cv**: Constant Value packages.
 * **exception**: User-defined exception packages.
 * **micro**: Your system modules for each micro business, all the subfolder should contains one style code files.
 * **domain** : Domain model classes that defined in current business.
@@ -78,7 +78,7 @@ If your project name is `kys`, we could define the root package named `com.kys`,
 The final package structure \( include codes \) should be as following examples:
 
 ```shell
-com.kys.cv
+com.kys.up.god.cv
     - Addr.java
 com.kys.exception
 com.micro.a

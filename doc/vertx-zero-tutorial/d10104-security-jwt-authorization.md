@@ -163,7 +163,7 @@ In real projects, the login method may be complex as following:
 package com.tlk.micro.login;
 
 import com.tlk.atom.User;
-import com.tlk.infra.cv.ID;
+import com.tlk.infra.up.god.cv.ID;
 import com.tlk.infra.exception.PasswordWrongException;
 import com.tlk.infra.exception.UserNotFoundException;
 import io.vertx.core.Future;

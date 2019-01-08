@@ -13,7 +13,7 @@ interface Info {
 
     String RPC_RESULT = "[ ZERO ] ( Rpc -> thenRpc ) Client = {4}, Ipc ( {0},{1} ) with params {2}, response data is {3}.";
     String JOOQ_PARSE = "[ ZERO ] ( Jooq -> Condition ) Parsed result is condition = \n{0}.";
-    String JOOQ_BIND = "[ ZERO ] ( Pojo Bind ) Pojo file = {0} has been bind to dao {1}, Field mode enabled.";
+    String JOOQ_BIND = "[ ZERO ] ( Pojo Bind ) Pojo up.god.file = {0} has been bind to dao {1}, Field mode enabled.";
     String JOOQ_FIELD = "[ ZERO ] ( Pojo ) The field has been hitted ( converted ) to \"{0}\"";
     String JOOQ_MOJO = "[ ZERO ] ( Pojo ) The analyzed result should be : Revert {0}, Columns = {1}";
 

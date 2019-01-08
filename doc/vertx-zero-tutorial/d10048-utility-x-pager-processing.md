@@ -18,8 +18,8 @@ The code segment came from real projects instead of demos
 ```java
 package com.tlk.micro.comment;
 
-import com.tlk.infra.cv.Addr;
-import com.tlk.infra.cv.InValid;
+import com.tlk.infra.up.god.cv.Addr;
+import com.tlk.infra.up.god.cv.InValid;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.EndPoint;
@@ -92,7 +92,7 @@ In your worker you can do as following:
 package com.tlk.micro.comment;
 
 import com.tlk.eon.TargetType;
-import com.tlk.infra.cv.Addr;
+import com.tlk.infra.up.god.cv.Addr;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.aiki.Ux;

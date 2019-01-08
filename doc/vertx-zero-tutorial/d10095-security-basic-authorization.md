@@ -11,7 +11,7 @@ zero:
   lime: secure
 ```
 
-Then it means that you must create new file named `vertx-secure.yml` instead with following content:
+Then it means that you must create new up.god.file named `vertx-secure.yml` instead with following content:
 
 ```yaml
 secure:
