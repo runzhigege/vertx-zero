@@ -2,6 +2,7 @@ package io.vertx.up.atom;
 
 import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpStatusCode;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
@@ -229,14 +230,32 @@ public class Envelop implements Serializable {
      *
      * @return
      */
-    public String response() {
+    public String responseString() {
+        // Exclude special situation
+        return this.responseJson().encode();
+    }
+
+    public JsonObject responseJson() {
         final JsonObject response;
         if (null == this.error) {
             response = this.data;
         } else {
             response = this.error.toJson();
         }
-        return response.encode();
+        return response;
+    }
+
+    @SuppressWarnings("all")
+    public Buffer responseBuffer() {
+        Buffer buffer = Buffer.buffer();
+        if (null == this.error) {
+            final JsonObject response = this.data.getJsonObject(Key.DATA);
+            buffer = Buffer.buffer(response.getBinary("bytes"));
+        } else {
+            final JsonObject error = this.error.toJson();
+            buffer = Buffer.buffer(error.encode());
+        }
+        return buffer;
     }
 
     public Future<Envelop> toFuture() {

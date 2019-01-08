@@ -49,8 +49,8 @@ public interface QiyClient extends TpClient<QiyClient> {
     /**
      * /openupload
      *
-     * @param fileType request file type
-     * @param size     request file size
+     * @param fileType request up.god.file type
+     * @param size     request up.god.file size
      * @param handler  async handler
      * @return self reference
      */
@@ -60,7 +60,7 @@ public interface QiyClient extends TpClient<QiyClient> {
 
     /**
      * @param address upload address
-     * @param size    file size
+     * @param size    up.god.file size
      * @param range   size range
      * @param fileId  return id by requestFile
      * @param content File content part

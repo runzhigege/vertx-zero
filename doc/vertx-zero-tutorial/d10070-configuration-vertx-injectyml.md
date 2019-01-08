@@ -1,6 +1,6 @@
 # D10070 - Configuration, vertx-inject.yml
 
-This configuration file provide extension system especially for vert.x native components. The default content is as following:
+This configuration up.god.file provide extension system especially for vert.x native components. The default content is as following:
 
 ```yaml
 logger: io.vertx.zero.log.internal.Log4JAnnal

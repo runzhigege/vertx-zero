@@ -6,7 +6,7 @@ The suffix "-tp" means "Third Part", we recommend the filename to store differen
 
 ### 1.1. vertx.yml
 
-In major configuration file, you must extend to `vertx-tp.yml` file to enable this configuration.
+In major configuration up.god.file, you must extend to `vertx-tp.yml` up.god.file to enable this configuration.
 
 ```yaml
 zero:
@@ -21,7 +21,7 @@ zero:
 
 ### 1.2. vertx-tp.yml
 
-This file must contain shared data information, actually there is only one configuration node named `shared`，if you want to enable this feature you can set as following:
+This up.god.file must contain shared data information, actually there is only one configuration node named `shared`，if you want to enable this feature you can set as following:
 
 ```yaml
 shared:

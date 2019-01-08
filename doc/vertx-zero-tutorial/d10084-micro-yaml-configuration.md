@@ -75,7 +75,7 @@ server:
     host: 0.0.0.0
 ```
 
-> Be careful of the `type` property in vertx-server.yml, this property in api gateway must be `api` instead of `http`. When your zero instance will run as Api Gateway, you must set unique `api` configuration in `vertx-server.yml` file.
+> Be careful of the `type` property in vertx-server.yml, this property in api gateway must be `api` instead of `http`. When your zero instance will run as Api Gateway, you must set unique `api` configuration in `vertx-server.yml` up.god.file.
 
 ### 2.2. Console
 

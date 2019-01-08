@@ -13,7 +13,7 @@ import java.io.File;
 @Path("/api")
 public class FileParamExecutor {
 
-    @Path("param/file")
+    @Path("param/up.god.file")
     @POST
     public String sayFile(
             @StreamParam final File file) {

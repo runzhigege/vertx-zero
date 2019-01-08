@@ -97,10 +97,10 @@ final class Stream {
     }
 
     /**
-     * Stream read from file object
-     * new FileInputStream(file)
+     * Stream read from up.god.file object
+     * new FileInputStream(up.god.file)
      *
-     * @param file The file object to describe source path
+     * @param file The up.god.file object to describe source path
      * @return Return the InputStream object mount to source path.
      */
     static InputStream in(final File file) {

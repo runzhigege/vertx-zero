@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * Support values
  * event-bus,
- * file,
+ * up.god.file,
  * json,
  * http,
  * env,
@@ -77,7 +77,7 @@ interface Storage {
      */
     ConcurrentMap<String, Class<?>> CLASSES = new ConcurrentHashMap<>();
     /**
-     * Memory pool for each file of ConfigStoreOptions
+     * Memory pool for each up.god.file of ConfigStoreOptions
      */
     ConcurrentMap<String, ConfigStoreOptions> STORE = new ConcurrentHashMap<>();
     /**
@@ -100,11 +100,17 @@ interface Storage {
 }
 
 interface Info {
-    /** **/
+    /**
+     *
+     **/
     String INF_PATH = "[ZERO] The system class Stream try to data from {0}, got stream: {1}.";
-    /** **/
-    String INF_CUR = "[ZERO] Current path is scanned by the system, file existing ? {0}.";
-    /** **/
+    /**
+     *
+     **/
+    String INF_CUR = "[ZERO] Current path is scanned by the system, up.god.file existing ? {0}.";
+    /**
+     *
+     **/
     String INF_APATH = "[ZERO] Absolute path is hitted: {0}.";
 
     String MATH_NOT_MATCH = "[ ZERO ] ( Numeric ) The system could not match current type {0} to do sum";

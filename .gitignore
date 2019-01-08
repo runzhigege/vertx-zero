@@ -1,7 +1,7 @@
-# Compiled class file
+# Compiled class up.god.file
 *.class
 
-# Log file
+# Log up.god.file
 *.log
 
 # BlueJ files
@@ -22,9 +22,10 @@
 hs_err_pid*
 .vertx
 .idea
-file-uploads
+up.god.file-uploads
 target
 *.versionsBackup
 *.iml
 archive
 !vertx-zeus/up-thea/tool/jooq/*.jar
+file-uploads

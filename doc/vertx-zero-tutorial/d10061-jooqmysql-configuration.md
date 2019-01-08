@@ -145,7 +145,7 @@ Once you have prepared the sql database environment, you can move to jooq config
 </configuration>
 ```
 
-All above content is jooq configuration, here you should focus on some points of this file:
+All above content is jooq configuration, here you should focus on some points of this up.god.file:
 
 1 - The driver of mysql that will be used in your application, because we used the mysql driver version more than 8.x, it means that you should use `com.mysql.cj.jdbc.Drvier`:
 
@@ -161,7 +161,7 @@ All above content is jooq configuration, here you should focus on some points of
 </url>
 ```
 
-3 - Then you can set your `username`  and `password` in your configuration file:
+3 - Then you can set your `username`  and `password` in your configuration up.god.file:
 
 ```xml
         <username>htl</username>
@@ -185,7 +185,7 @@ All above content is jooq configuration, here you should focus on some points of
 <directory>../../src/main/java</directory>
 ```
 
-The configuration for java class package name `up.god.domain` and the java file output folder `../../src/main/java`, in zero system you can keep other xml configuration part because it's normalized by our real projects. Once you have configured the jooq xml configuration, you can run shell as following:
+The configuration for java class package name `up.god.domain` and the java up.god.file output folder `../../src/main/java`, in zero system you can keep other xml configuration part because it's normalized by our real projects. Once you have configured the jooq xml configuration, you can run shell as following:
 
 ```
 #!/usr/bin/env bash
@@ -195,7 +195,7 @@ java -classpath jooq-3.10.3.jar:jooq-meta-3.10.3.jar:jooq-codegen-3.10.3.jar:\
     org.jooq.util.GenerationTool ./config/generator.xml
 ```
 
-After the shell executed, you can see the generated java source file under `src/main/java/` .
+After the shell executed, you can see the generated java source up.god.file under `src/main/java/` .
 
 ## 3. Jooq Application Configuration
 
@@ -208,11 +208,11 @@ src/main/resources/vertx-jooq.yml
 src/main/resources/vertx-server.yml
 ```
 
-1 - In the major configuration file `vertx.yml` you should configure following part, focus on **lime** node:
+1 - In the major configuration up.god.file `vertx.yml` you should configure following part, focus on **lime** node:
 
 ```yaml
 zero:
-  lime: jooq  # The core configuration of jooq, it connect vertx-jooq.yml file
+  lime: jooq  # The core configuration of jooq, it connect vertx-jooq.yml up.god.file
   vertx:
     instance:
     - name: vertx-zeus
@@ -221,7 +221,7 @@ zero:
         maxEventLoopExecuteTime: 30000000000
 ```
 
-2 - In the inject configuration file `vertx-inject.yml`, you should apply the plugin of jooq `Infix` as following:
+2 - In the inject configuration up.god.file `vertx-inject.yml`, you should apply the plugin of jooq `Infix` as following:
 
 ```yaml
 jooq: io.vertx.tp.plugin.jooq.JooqInfix
@@ -239,7 +239,7 @@ jooq:
     jdbcUrl: "jdbc:mysql://127.0.0.1:3306/DB_ZERO?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false"
 ```
 
-> Be sure the configuration of your jooq is the same as jooq xml configuration file.
+> Be sure the configuration of your jooq is the same as jooq xml configuration up.god.file.
 
 ## 4. Summary
 

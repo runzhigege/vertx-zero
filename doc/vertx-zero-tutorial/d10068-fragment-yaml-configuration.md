@@ -10,11 +10,11 @@ src/test/resources
 src/main/lombok        # If lombok enabled or used
 ```
 
-All the yaml configuration files will be put into `src/main/resources` folder and different config file controls different feature.
+All the yaml configuration files will be put into `src/main/resources` folder and different config up.god.file controls different feature.
 
 ## 1. Content
 
-The core configuration file is `vertx.yml`, this file is the kernel file of zero system, the demo of this file is as following:
+The core configuration up.god.file is `vertx.yml`, this up.god.file is the kernel up.god.file of zero system, the demo of this up.god.file is as following:
 
 ```yaml
 zero:
@@ -33,7 +33,7 @@ zero:
 
 ## 2. Extension: lime
 
-`lime` is the extension configuration, you can add any external yaml configuration file with `lime` here, for above demo, the extension file should be `vertx-error.yml`, `vertx-inject.yml`, `vertx-server.yml` . Another thing is that in our system the `lime` node impact filename only, it does not impact the config content. It means: _ _
+`lime` is the extension configuration, you can add any external yaml configuration up.god.file with `lime` here, for above demo, the extension up.god.file should be `vertx-error.yml`, `vertx-inject.yml`, `vertx-server.yml` . Another thing is that in our system the `lime` node impact filename only, it does not impact the config content. It means: _ _
 
 > _You can put mongo configuration information into _`vertx-mysql.yml`_ , because zero system focus on content parsing instead of filename, but we do not want you to do like this._
 
@@ -84,7 +84,7 @@ The `options` will be mapped to native vert.x configuration, it's JsonObject and
 
 ## 5. Summary
 
-This chapter focus on the core zero system configuration file `vertx.yml` , this file contains following configuration part:
+This chapter focus on the core zero system configuration up.god.file `vertx.yml` , this up.god.file contains following configuration part:
 
 * lime: The configuration extension.
 * vertx -&gt; clustered: Vert.x cluster configuration.

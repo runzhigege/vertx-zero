@@ -57,7 +57,7 @@ public class D10047Obj implements Serializable {
 }
 ```
 
-Then create the resource file `d10047.json`, the file content should be as following:
+Then create the resource up.god.file `d10047.json`, the up.god.file content should be as following:
 
 ```json
 {
@@ -99,7 +99,7 @@ Here we could see that `Ux.toJson` method could convert a data object to JsonObj
 
 ## 2. Mapping To
 
-This chapter focus on `toJson(T,String)` method for conversion between Data Object and Json Object based on configuration files. Firstly you should create new configuration file:
+This chapter focus on `toJson(T,String)` method for conversion between Data Object and Json Object based on configuration files. Firstly you should create new configuration up.god.file:
 
 ```yaml
 type: "io.vertx.up.aiki.D10047Obj"
@@ -107,7 +107,7 @@ mapping:
   name: username
 ```
 
-Above file should be  `src/test/resources/pojo/d10047.yml`, the filename is freedom. The configuration file contains two important attributes:
+Above up.god.file should be  `src/test/resources/pojo/d10047.yml`, the filename is freedom. The configuration up.god.file contains two important attributes:
 
 * **type**: This attribute should be full java class name, zero system will verify whether this class could be loaded.
 * **mapping**: This attribute should be `key = value` for each line, it describes `from -> to` conversion.
@@ -181,7 +181,7 @@ D10047Obj{name='Lang', email='lang.yu@hpe.com', age=32, male=true}
 
 ## 5. Mapping From
 
-This method will involve the same mapping file:
+This method will involve the same mapping up.god.file:
 
 ```yaml
 type: "io.vertx.up.aiki.D10047Obj"
@@ -189,7 +189,7 @@ mapping:
   name: username
 ```
 
-It's related to `toJson(T,String)`, also will use pojo file to do this conversion
+It's related to `toJson(T,String)`, also will use pojo up.god.file to do this conversion
 
 ```java
     @Test

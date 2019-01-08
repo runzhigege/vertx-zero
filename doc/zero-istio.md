@@ -59,7 +59,7 @@ brew install kubectl
 	Setting up kubeconfig...
 	Starting cluster components...
 	Kubectl is now configured to use the cluster.
-	Loading cached images from config file.
+	Loading cached images from config up.god.file.
 	```
 2. Version checking
 
@@ -106,7 +106,7 @@ Demo example will be install istio to `~/Tool/Zero/`
 
 	```
 	curl -L https://git.io/getLatestIstio | sh -
-	...... # Wait for ISO file downloading finished.
+	...... # Wait for ISO up.god.file downloading finished.
 	```
 	
 2. Set Up environment.

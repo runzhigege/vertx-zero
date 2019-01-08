@@ -5,8 +5,8 @@
               value="%date{yyyy-MM-dd HH:mm:ss.SSS} | %highlight(%-5level) | %boldYellow(%-30thread) | %boldGreen(%-60logger) -| %msg%n"/>
     <!--Description: http://logback.qos.ch/manual/appenders.html#RollingFileAppender -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!-- The file name -->
-        <file>vertx-zero.log</file>
+        <!-- The up.god.file name -->
+        <up.god.file>vertx-zero.log</up.god.file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- archive/ldap-pwd.2014-08-10.zip -->
             <fileNamePattern>archive/vertx-zero.%d{yyyy-MM-dd}.zip</fileNamePattern>

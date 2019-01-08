@@ -6,7 +6,7 @@ From `0.4.7`, zero system support security limitation for **Authorization** and 
 
 ### 1.1. vertx.yml
 
-Be sure the extension file name existing in `lime` node in the major configuration.
+Be sure the extension up.god.file name existing in `lime` node in the major configuration.
 
 ```yaml
 zero:

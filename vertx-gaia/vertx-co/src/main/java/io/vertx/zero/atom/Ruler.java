@@ -29,9 +29,9 @@ public class Ruler {
             new ConcurrentHashMap<>();
 
     /**
-     * Verify data for each file
+     * Verify data for each up.god.file
      *
-     * @param file The rule file that input into this method.
+     * @param file The rule up.god.file that input into this method.
      * @param data The data that will be verified.
      * @throws ZeroException Error when verified failure.
      */
@@ -63,7 +63,7 @@ public class Ruler {
     }
 
     /**
-     * Verify data for each file
+     * Verify data for each up.god.file
      *
      * @param file
      * @param data

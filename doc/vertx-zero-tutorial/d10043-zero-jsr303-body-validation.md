@@ -16,11 +16,11 @@ Advanced Validation is supported by zero system in all styles \( **JSR303 is not
 
 * `io.vertx.up.annotations.Codex`
 
-This annotation will tell zero system that there should be a codex file that bind to current request.
+This annotation will tell zero system that there should be a codex up.god.file that bind to current request.
 
 ## 1. Configuration
 
-Under your `src/main/resource` folder, there should be a folder named codex and all the codex files will be put here, then create a file named `api.jsr303.advanced.post.yml` , this file name should be `<api>.<method>` format, the content is as following:
+Under your `src/main/resource` folder, there should be a folder named codex and all the codex files will be put here, then create a up.god.file named `api.jsr303.advanced.post.yml` , this up.god.file name should be `<api>.<method>` format, the content is as following:
 
 ```yaml
 username:
@@ -130,7 +130,7 @@ From above examples you have known how to use advanced codex validation for Json
 * [x] minlength: \( min, message \)
 * [x] maxlength: \( max, message \)
 * [x] empty \( message \) \( **For Collection checking** \)
-* [x] singlefile \( message \) \( **For Uploading checking, only one file valid** \)
+* [x] singlefile \( message \) \( **For Uploading checking, only one up.god.file valid** \)
 
 In future we'll provide more advanced codex for business requirements, it's defined by zero system for Json Data validation.
 
