@@ -76,7 +76,7 @@
         <vertx.jooq.code.version>4.0.0</vertx.jooq.code.version>
         <mysql.version>8.0.13</mysql.version>
 
-        <jwt.version>3.4.1</jwt.version>
+        <jwt.version>3.5.0</jwt.version>
         <reflect.asm.version>1.11.8</reflect.asm.version>
         <asm.version>7.0</asm.version>
         <lombok.version>1.18.4</lombok.version>
