@@ -1,6 +1,8 @@
 package io.vertx.up.micro.discovery;
 
+import io.vertx.core.MultiMap;
 import io.vertx.core.buffer.Buffer;
+import io.vertx.core.http.HttpClientResponse;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
@@ -59,9 +61,35 @@ final class Output {
             final HttpResponse<Buffer> clientResponse) {
         final Buffer data = clientResponse.bodyAsBuffer();
         // Copy header
-        response.headers().setAll(clientResponse.headers());
-        response.setStatusCode(clientResponse.statusCode());
-        response.setStatusMessage(clientResponse.statusMessage());
+        syncSuccess(response,
+                clientResponse.headers(),
+                clientResponse.statusCode(),
+                clientResponse.statusMessage(),
+                data);
+    }
+
+    static void syncSuccess(
+            final HttpServerResponse response,
+            final HttpClientResponse clientResponse,
+            final Buffer buffer) {
+        // Copy header
+        syncSuccess(response,
+                clientResponse.headers(),
+                clientResponse.statusCode(),
+                clientResponse.statusMessage(),
+                buffer);
+    }
+
+    private static void syncSuccess(
+            final HttpServerResponse response,
+            final MultiMap headers,
+            final int statusCode,
+            final String statusMessage,
+            final Buffer data
+    ) {
+        response.headers().setAll(headers);
+        response.setStatusCode(statusCode);
+        response.setStatusMessage(statusMessage);
         response.write(data);
         response.end();
     }

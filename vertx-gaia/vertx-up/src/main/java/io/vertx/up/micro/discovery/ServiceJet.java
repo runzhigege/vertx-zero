@@ -4,17 +4,13 @@ import io.vertx.circuitbreaker.CircuitBreaker;
 import io.vertx.circuitbreaker.CircuitBreakerOptions;
 import io.vertx.core.*;
 import io.vertx.core.buffer.Buffer;
-import io.vertx.core.http.HttpMethod;
-import io.vertx.core.http.HttpServerOptions;
-import io.vertx.core.http.HttpServerRequest;
-import io.vertx.core.http.RequestOptions;
+import io.vertx.core.http.*;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.client.HttpRequest;
 import io.vertx.ext.web.client.HttpResponse;
 import io.vertx.ext.web.client.WebClient;
-import io.vertx.ext.web.multipart.MultipartForm;
 import io.vertx.servicediscovery.Record;
 import io.vertx.servicediscovery.ServiceDiscovery;
 import io.vertx.servicediscovery.ServiceReference;
@@ -127,54 +123,49 @@ public class ServiceJet {
                            final Consumer<Void> consumer) {
         {
             final HttpServerRequest rctRequest = context.request();
-            final HttpMethod method = rctRequest.method();
-            final String uri = Output.normalizeUri(context);
-
-            final WebClient client = reference.getAs(WebClient.class);
-            final RequestOptions options = this.getOptions(record, uri);
-            LOGGER.info("[ ZERO ] Found remote host: {0}, port: {1}, uri: {2}",
-                    options.getHost(), String.valueOf(options.getPort()), options.getURI());
-            /*
-             * Here client got from service reference, it means that it's not needed to use requestAbs
-             * request instead.
-             * requestAbs: it means used absolute URI instead of uri address
-             */
-            final HttpRequest<Buffer> request = client.request(method, options);
-            /*
-             * Headers processing ( copy all the headers from request, perfect redirect );
-             */
-            final MultiMap headers = rctRequest.headers();
-            headers.forEach((item) -> request.putHeader(item.getKey(), item.getValue()));
-            /*
-             * Default timeout parameters set to 5s
-             */
-            request.timeout(5000);
-            /*
-             * dispatching request
-             * 1. Pure Request
-             * 2. MultiPart
-             */
             if (rctRequest.isExpectMultipart()) {
                 /*
                  * Multi Part
                  */
                 final Set<FileUpload> fileUploads = context.fileUploads();
                 if (!fileUploads.isEmpty()) {
-                    final FileUpload fileUpload = fileUploads.iterator().next();
-                    final MultipartForm body = MultipartForm.create()
-                            .binaryFileUpload(
-                                    fileUpload.name(),
-                                    fileUpload.fileName(),
-                                    fileUpload.uploadedFileName(),
-                                    fileUpload.contentType());
-                    request.headers().forEach((item) -> LOGGER.info("[ ZERO ] Headers: {0} = {1}",
-                            item.getKey(), item.getValue()));
-                    request.sendMultipartForm(body, this.replyContent(context, consumer));
+                    /*
+                     * File Upload request sending.
+                     */
+                    this.sendUploadRequest(context, reference,
+                            this.replyStreamContent(context, consumer));
                 } else {
                     Output.sync500Error(this.getClass(), context, null);
                     consumer.accept(null);
                 }
             } else {
+                final HttpMethod method = rctRequest.method();
+                final String uri = Output.normalizeUri(context);
+
+                final WebClient client = reference.getAs(WebClient.class);
+                final RequestOptions options = this.getOptions(record, uri);
+                LOGGER.info("[ ZERO ] Found remote host: {0}, port: {1}, uri: {2}",
+                        options.getHost(), String.valueOf(options.getPort()), options.getURI());
+                /*
+                 * Here client got from service reference, it means that it's not needed to use requestAbs
+                 * request instead.
+                 * requestAbs: it means used absolute URI instead of uri address
+                 */
+                final HttpRequest<Buffer> request = client.request(method, options);
+                /*
+                 * Headers processing ( copy all the headers from request, perfect redirect );
+                 */
+                final MultiMap headers = rctRequest.headers();
+                headers.forEach((item) -> request.putHeader(item.getKey(), item.getValue()));
+                /*
+                 * Default timeout parameters set to 5s
+                 */
+                request.timeout(5000);
+                /*
+                 * dispatching request
+                 * 1. Pure Request
+                 * 2. MultiPart
+                 */
                 /*
                  * Pure request with buffer directly
                  */
@@ -185,6 +176,84 @@ public class ServiceJet {
                 request.sendBuffer(body, this.replyContent(context, consumer));
             }
         }
+    }
+
+    private void sendUploadRequest(final RoutingContext context,
+                                   final ServiceReference reference,
+                                   final Handler<HttpClientResponse> handler) {
+        /*
+         * Extract file information here.
+         */
+        final FileUpload fileUpload = context.fileUploads().iterator().next();
+        final HttpServerRequest serverRequest = context.request();
+        final String uri = Output.normalizeUri(context);
+        final String contentType = serverRequest.getHeader("Content-Type");
+        final Buffer buffer = Buffer.buffer();
+        /*
+         * header string
+         */
+        final StringBuilder header = new StringBuilder();
+        {
+            /*
+             * boundary extracting
+             */
+            final String[] splitted = contentType.split(";");
+            String boundary = null;
+            if (2 == splitted.length && null != splitted[1]) {
+                final String[] boundaries = splitted[1].split("=");
+                if (2 == boundaries.length && null != boundaries[1]) {
+                    boundary = boundaries[1];
+                    header.append(boundary).append("\r\n");
+                }
+            }
+            /*
+             * Content-Disposition: name =, filename =
+             * Content-Type
+             * Content-Transfer-Encoding
+             */
+            header.append("Content-Disposition:form-data; ")
+                    .append("name=\"").append(fileUpload.name()).append("\"; ")
+                    .append("filename=\"").append(fileUpload.fileName()).append("\"\r\n");
+            header.append("Content-Type: application/octet-stream\r\n");
+            header.append("Content-Transfer-Encoding: binary\r\n\r\n");
+            buffer.appendString(header.toString());
+
+            /*
+             * file data reading from file system
+             */
+            final Buffer fileData = Ut.ioBuffer(fileUpload.uploadedFileName());
+            buffer.appendBuffer(fileData);
+            buffer.appendString("\r\n" + boundary + "\r\n");
+        }
+        /*
+         * HttpClient
+         */
+        final HttpClient client = reference.getAs(HttpClient.class);
+        final HttpClientRequest request = client.request(serverRequest.method(), uri);
+        request.handler(handler);
+        request.setChunked(true);
+        request.write(buffer);
+        request.end();
+    }
+
+    private Handler<HttpClientResponse> replyStreamContent(
+            final RoutingContext context,
+            final Consumer<Void> consumer
+    ) {
+        return response -> response.bodyHandler(body -> {
+            if (404 == response.statusCode()) {
+                /*
+                 * 404 -> 405 Error
+                 */
+                Output.sync405Error(this.getClass(), context);
+            } else {
+                /*
+                 * 200 -> Success
+                 */
+                Output.syncSuccess(context.response(), response, body);
+            }
+            consumer.accept(null);
+        });
     }
 
     private Handler<AsyncResult<HttpResponse<Buffer>>> replyContent(
