@@ -23,6 +23,7 @@ import io.vertx.zero.micro.config.CircuitVisitor;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
+import java.io.File;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -114,6 +115,8 @@ public class ServiceJet {
         final JsonObject location = record.getLocation();
         options.setHost(location.getString("host"));
         options.setPort(location.getInteger("port"));
+        LOGGER.info("[ ZERO ] Found remote host: {0}, port: {1}, uri: {2}",
+                options.getHost(), String.valueOf(options.getPort()), options.getURI());
         return options;
     }
 
@@ -132,7 +135,7 @@ public class ServiceJet {
                     /*
                      * File Upload request sending.
                      */
-                    this.sendUploadRequest(context, reference,
+                    this.sendUploadRequest(context, reference, record,
                             this.replyStreamContent(context, consumer));
                 } else {
                     Output.sync500Error(this.getClass(), context, null);
@@ -144,8 +147,6 @@ public class ServiceJet {
 
                 final WebClient client = reference.getAs(WebClient.class);
                 final RequestOptions options = this.getOptions(record, uri);
-                LOGGER.info("[ ZERO ] Found remote host: {0}, port: {1}, uri: {2}",
-                        options.getHost(), String.valueOf(options.getPort()), options.getURI());
                 /*
                  * Here client got from service reference, it means that it's not needed to use requestAbs
                  * request instead.
@@ -180,19 +181,23 @@ public class ServiceJet {
 
     private void sendUploadRequest(final RoutingContext context,
                                    final ServiceReference reference,
+                                   final Record record,
                                    final Handler<HttpClientResponse> handler) {
         /*
          * Extract file information here.
          */
         final FileUpload fileUpload = context.fileUploads().iterator().next();
         final HttpServerRequest serverRequest = context.request();
-        final String uri = Output.normalizeUri(context);
         final String contentType = serverRequest.getHeader("Content-Type");
         final Buffer buffer = Buffer.buffer();
         /*
-         * header string
+         * HttpClient
          */
-        final StringBuilder header = new StringBuilder();
+        final HttpClient client = reference.getAs(HttpClient.class);
+        final String uri = Output.normalizeUri(context);
+        final HttpClientRequest request =
+                client.request(serverRequest.method(), this.getOptions(record, uri));
+        request.headers().setAll(serverRequest.headers());
         {
             /*
              * boundary extracting
@@ -203,37 +208,43 @@ public class ServiceJet {
                 final String[] boundaries = splitted[1].split("=");
                 if (2 == boundaries.length && null != boundaries[1]) {
                     boundary = boundaries[1];
-                    header.append(boundary).append("\r\n");
                 }
             }
             /*
-             * Content-Disposition: name =, filename =
-             * Content-Type
-             * Content-Transfer-Encoding
+             * Absolute file name
              */
-            header.append("Content-Disposition:form-data; ")
-                    .append("name=\"").append(fileUpload.name()).append("\"; ")
-                    .append("filename=\"").append(fileUpload.fileName()).append("\"\r\n");
-            header.append("Content-Type: application/octet-stream\r\n");
-            header.append("Content-Transfer-Encoding: binary\r\n\r\n");
-            buffer.appendString(header.toString());
-
-            /*
-             * file data reading from file system
-             */
-            final Buffer fileData = Ut.ioBuffer(fileUpload.uploadedFileName());
-            buffer.appendBuffer(fileData);
-            buffer.appendString("\r\n" + boundary + "\r\n");
+            final File file = new File(fileUpload.uploadedFileName());
+            if (file.exists()) {
+                /*
+                 * Content-Disposition: name =, filename =
+                 * Content-Type
+                 * Content-Transfer-Encoding
+                 */
+                final String disposition = "form-data; name=\"" + fileUpload.name() +
+                        "\"; filename=\"" + file.getAbsolutePath() + "\"";
+                request.putHeader("Content-Disposition", disposition);
+                /*
+                 * file data reading from file system
+                 */
+                final Buffer fileData = Ut.ioBuffer(fileUpload.uploadedFileName());
+                buffer.appendString("\r\n\r\n" + boundary + "\r\n");
+                buffer.appendBuffer(fileData);
+                buffer.appendString("\r\n" + boundary + "\r\n");
+                // length setting
+                LOGGER.info("[ ZERO-DEBUG ] Length: " + buffer.length());
+                request.putHeader("content-length", String.valueOf(buffer.length()));
+            }
         }
         /*
-         * HttpClient
+         * User-Agent virtual
          */
-        final HttpClient client = reference.getAs(HttpClient.class);
-        final HttpClientRequest request = client.request(serverRequest.method(), uri);
+        request.setTimeout(5000);
+        /*
+         * required for next request continue
+         */
         request.handler(handler);
         request.setChunked(true);
-        request.write(buffer);
-        request.end();
+        request.end(buffer);
     }
 
     private Handler<HttpClientResponse> replyStreamContent(
