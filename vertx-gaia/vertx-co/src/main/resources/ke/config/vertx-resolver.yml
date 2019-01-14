@@ -1,5 +1,6 @@
 default: io.vertx.up.media.resolver.BufferResolver
 application:
   json: io.vertx.up.media.resolver.JsonResolver
+  x-www-form-urlencoded: io.vertx.up.media.resolver.FileResolver
 multipart:
   form-data: io.vertx.up.media.resolver.FileResolver
