@@ -51,6 +51,7 @@ public class MimeAtomic<T> implements Atomic<T> {
         if (UnsetResolver.class == resolverCls) {
             /** 3. Old path **/
             final JsonObject content = NODE.read();
+            LOGGER.info("[ RESOLVER ] Resolvers = {0}", content.encodePrettily());
             final String resolver;
             if (null == header) {
                 resolver = content.getString("default");
