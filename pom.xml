@@ -96,11 +96,13 @@
         <common.lang3.version>3.8.1</common.lang3.version>
         <common.logging.version>1.2</common.logging.version>
         <common.net.version>3.6</common.net.version>
-        <http.client.version>4.1.4</http.client.version>
+        <http.async.client.version>4.1.4</http.async.client.version>
+        <http.client.version>4.5.6</http.client.version>
+        <http.core.version>4.4.10</http.core.version>
         <!-- Rpc -->
         <protobuf.version>3.6.1</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
-        <grpc.version>1.17.1</grpc.version>
+        <grpc.version>1.18.0</grpc.version>
         <!-- Vert.x Addition -->
         <rxjava2.version>2.2.5</rxjava2.version>
         <netty.tcnative.version>2.0.20.Final</netty.tcnative.version>
@@ -846,7 +848,25 @@
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpasyncclient</artifactId>
+                <version>${http.async.client.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
                 <version>${http.client.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpmime -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>${http.client.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+                <version>${http.core.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

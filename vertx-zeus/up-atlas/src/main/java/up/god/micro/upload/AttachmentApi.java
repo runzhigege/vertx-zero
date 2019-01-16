@@ -23,6 +23,9 @@ public class AttachmentApi {
             @PathParam("category") final String category,
             @StreamParam final FileUpload fileUpload
     ) {
+        if (null != fileUpload) {
+            System.out.println(fileUpload.fileName());
+        }
         return this.toJson(fileUpload, category);
     }
 
