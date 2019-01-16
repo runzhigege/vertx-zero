@@ -16,8 +16,8 @@ import io.vertx.servicediscovery.ServiceDiscovery;
 import io.vertx.servicediscovery.ServiceReference;
 import io.vertx.servicediscovery.types.HttpEndpoint;
 import io.vertx.up.log.Annal;
-import io.vertx.up.micro.discovery.multipart.HttpPipe;
 import io.vertx.up.micro.discovery.multipart.Pipe;
+import io.vertx.up.micro.discovery.multipart.UploadPipe;
 import io.vertx.up.micro.matcher.Arithmetic;
 import io.vertx.up.micro.matcher.CommonArithmetic;
 import io.vertx.zero.marshal.Visitor;
@@ -144,8 +144,8 @@ public class ServiceJet {
                 /*
                  * The send method of multipart/form-data instead of others
                  */
-                final Pipe<HttpClientResponse> pump = HttpPipe.create(
-                        context, reference, record, options);
+                final Pipe<HttpClientResponse> pump = UploadPipe.create(
+                        context, reference, options);
                 /*
                  * Http Request instead of Web Request here
                  */
