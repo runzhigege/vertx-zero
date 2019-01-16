@@ -96,6 +96,7 @@
         <common.lang3.version>3.8.1</common.lang3.version>
         <common.logging.version>1.2</common.logging.version>
         <common.net.version>3.6</common.net.version>
+        <http.client.version>4.1.4</http.client.version>
         <!-- Rpc -->
         <protobuf.version>3.6.1</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
@@ -840,6 +841,12 @@
                 <groupId>io.netty</groupId>
                 <artifactId>netty-transport-native-kqueue</artifactId>
                 <version>${netty.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpasyncclient</artifactId>
+                <version>${http.client.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
