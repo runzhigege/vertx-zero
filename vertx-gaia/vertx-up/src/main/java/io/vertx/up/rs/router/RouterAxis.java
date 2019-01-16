@@ -26,24 +26,24 @@ public class RouterAxis implements Axis<Router> {
         router.route()
                 .order(Orders.CONTENT)
                 .handler(ResponseContentTypeHandler.create());
-        // 2. Cors Template Solution
+        // TODO: 2. Cors Template Solution
         router.route()
                 .order(Orders.CORS)
                 .handler(CorsHandler.create("*")
                         .allowCredentials(false)
                         .allowedHeaders(new HashSet<String>() {
                             {
-                                add(HttpHeaders.AUTHORIZATION);
-                                add(HttpHeaders.CONTENT_LENGTH);
-                                add(HttpHeaders.CONTENT_TYPE);
+                                this.add(HttpHeaders.AUTHORIZATION);
+                                this.add(HttpHeaders.CONTENT_LENGTH);
+                                this.add(HttpHeaders.CONTENT_TYPE);
                             }
                         })
                         .allowedMethods(new HashSet<HttpMethod>() {
                             {
-                                add(HttpMethod.DELETE);
-                                add(HttpMethod.GET);
-                                add(HttpMethod.POST);
-                                add(HttpMethod.PUT);
+                                this.add(HttpMethod.DELETE);
+                                this.add(HttpMethod.GET);
+                                this.add(HttpMethod.POST);
+                                this.add(HttpMethod.PUT);
                             }
                         }));
 

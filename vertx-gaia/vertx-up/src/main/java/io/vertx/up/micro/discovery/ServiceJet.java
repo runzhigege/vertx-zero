@@ -4,29 +4,29 @@ import io.vertx.circuitbreaker.CircuitBreaker;
 import io.vertx.circuitbreaker.CircuitBreakerOptions;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
+import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.*;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.client.HttpRequest;
+import io.vertx.ext.web.client.WebClient;
 import io.vertx.servicediscovery.Record;
 import io.vertx.servicediscovery.ServiceDiscovery;
 import io.vertx.servicediscovery.ServiceReference;
 import io.vertx.servicediscovery.types.HttpEndpoint;
-import io.vertx.up.atom.Envelop;
-import io.vertx.up.exception.WebException;
-import io.vertx.up.exception._404ServiceNotFoundException;
-import io.vertx.up.exception._405MethodForbiddenException;
 import io.vertx.up.log.Annal;
+import io.vertx.up.micro.discovery.multipart.HttpPipe;
+import io.vertx.up.micro.discovery.multipart.Pipe;
 import io.vertx.up.micro.matcher.Arithmetic;
 import io.vertx.up.micro.matcher.CommonArithmetic;
-import io.vertx.up.rs.hunt.Answer;
-import io.vertx.zero.eon.Strings;
 import io.vertx.zero.marshal.Visitor;
 import io.vertx.zero.micro.config.CircuitVisitor;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class ServiceJet {
     private static final Annal LOGGER = Annal.get(ServiceJet.class);
@@ -62,109 +62,105 @@ public class ServiceJet {
         return this;
     }
 
-    public Handler<RoutingContext> handle() {
-        return context -> {
-            // Run with circuit breaker
-            this.breaker.execute(future -> this.getEndPoints().setHandler(res -> {
-                if (res.succeeded()) {
-                    final List<Record> records = res.result();
-                    // Find the record hitted. ( Include Path variable such as /xx/yy/:zz/:xy )
-                    final Record hitted = this.arithmetic.search(records, context);
-                    // Complete actions.
-                    if (null == hitted) {
-                        // Service Not Found ( 404 )
-                        this.reply404Error(context);
-                    } else {
-                        // Find record, dispatch request
-                        final ServiceReference reference = this.discovery.getReference(hitted);
-                        this.doRequest(context, reference);
-                    }
-                    future.complete();
-                } else {
-                    // Future failed
-                    future.fail(res.cause());
-                }
-            }));
-        };
-    }
-
-    private void doRequest(final RoutingContext context, final ServiceReference reference) {
-        Fn.safeJvm(() -> {
-            // HttpMethod:
-            final HttpMethod method = context.request().method();
-            final String targetUri = this.redirectUri(context);
-            final HttpClient client = reference.getAs(HttpClient.class);
-            // Final Response
-            final HttpClientRequest request = client.request(method, targetUri,
-                    response -> response.bodyHandler(handler -> {
-                        // Client = 404 -> Transfer to 405
-                        if (404 == response.statusCode()) {
-                            this.reply405Error(context);
-                        } else {
-                            // Perfect Dispatching
-                            this.replySuccess(context.response(), response, handler);
-                        }
-                    }));
-            // Forward request -> Headers
-            request.headers().setAll(context.request().headers());
-            // Forward body
-            if (null == context.getBody()) {
-                request.end();
-            } else {
-                request.end(context.getBody());
-            }
-        }, LOGGER);
-    }
-
-    private void replySuccess(final HttpServerResponse response,
-                              final HttpClientResponse clientResponse,
-                              final Buffer buffer) {
-        final String data = buffer.toString();
-        // Copy header
-        response.headers().setAll(clientResponse.headers());
-        response.setStatusCode(clientResponse.statusCode());
-        response.setStatusMessage(clientResponse.statusMessage());
-        response.write(data);
-        response.end();
-    }
-
-    private String redirectUri(final RoutingContext event) {
-        final StringBuilder uri = new StringBuilder();
-        uri.append(event.request().path());
-        if (null != event.request().query()) {
-            uri.append(String.valueOf(Strings.QUESTION)).append(event.request().query());
-        }
-        return uri.toString();
-    }
-
-    /**
-     * Service Not Found ( 404 )
-     *
-     * @param context input router context
-     */
-    private void reply404Error(final RoutingContext context) {
-        final HttpServerRequest request = context.request();
-        final WebException exception = new _404ServiceNotFoundException(this.getClass(), request.uri(),
-                request.method());
-        Answer.reply(context, Envelop.failure(exception));
-    }
-
-    /**
-     * Method not Allowed ( 405 )
-     *
-     * @param context input router context
-     */
-    private void reply405Error(final RoutingContext context) {
-        final HttpServerRequest request = context.request();
-        final WebException exception = new _405MethodForbiddenException(this.getClass(), request.method(),
-                request.uri());
-        Answer.reply(context, Envelop.failure(exception));
-    }
-
     private Future<List<Record>> getEndPoints() {
         final Future<List<Record>> future = Future.future();
         this.discovery.getRecords(record -> record.getType().equals(HttpEndpoint.TYPE),
                 future.completer());
         return future;
+    }
+
+    public Handler<RoutingContext> handle() {
+        // Run with circuit breaker
+        return context -> this.breaker.execute(future -> this.getEndPoints().setHandler(res -> {
+            if (res.succeeded()) {
+                final List<Record> records = res.result();
+                // Find the record hitted. ( Include Path variable such as /xx/yy/:zz/:xy )
+                final Record hitted = this.arithmetic.search(records, context);
+                // Complete actions.
+                if (null == hitted) {
+                    /**
+                     * Service Not Found ( 404 )
+                     * Situation 1:
+                     * Zero engine could not find the uri that client provided.
+                     * After sync operations, you can call future.complete directly.
+                     **/
+                    InOut.sync404Error(this.getClass(), context);
+                    future.complete();
+                } else {
+                    // Get service reference
+                    final ServiceReference reference = this.discovery.getReference(hitted);
+                    // Set callback completer
+                    final Consumer<Void> consumer = (nil) -> {
+                        reference.release();    // release service reference
+                        future.complete();      // execute future complete operation
+                    };
+                    /**
+                     * Service Found
+                     * Situation 1:
+                     * Here matching successfully when gateway get request.
+                     **/
+                    this.doRequest(context, reference, hitted, consumer);
+                }
+            } else {
+                // Future failed
+                future.fail(res.cause());
+            }
+        }));
+    }
+
+    private void doRequest(final RoutingContext context,
+                           final ServiceReference reference,
+                           final Record record,
+                           final Consumer<Void> consumer) {
+        {
+            final HttpServerRequest rctRequest = context.request();
+
+            final HttpMethod method = rctRequest.method();
+            final String uri = InOut.normalizeUri(context);
+
+            final WebClient client = reference.getAs(WebClient.class);
+            final RequestOptions options = InOut.getOptions(record, uri);
+            /*
+             * Here client got from service reference, it means that it's not needed to use requestAbs
+             * request instead.
+             * requestAbs: it means used absolute URI instead of uri address
+             */
+            final HttpRequest<Buffer> request = client.request(method, options);
+            /*
+             * Headers processing ( copy all the headers from request, perfect redirect );
+             */
+            final MultiMap headers = rctRequest.headers();
+            headers.forEach((item) -> request.putHeader(item.getKey(), item.getValue()));
+            /*
+             * Default timeout parameters set to 5s
+             */
+            request.timeout(30000);
+            /*
+             * dispatching request
+             * 1. Pure Request
+             * 2. MultiPart
+             */
+            if (rctRequest.isExpectMultipart()) {
+                /*
+                 * The send method of multipart/form-data instead of others
+                 */
+                final Pipe<HttpClientResponse> pump = HttpPipe.create(
+                        context, reference, record, options);
+                /*
+                 * Http Request instead of Web Request here
+                 */
+                pump.doRequest(InOut.replyHttp(this.getClass(), context, consumer));
+            } else {
+                /*
+                 * Pure request with buffer directly
+                 */
+                Buffer body = context.getBody();
+                if (null == body) {
+                    body = Buffer.buffer();
+                }
+                request.sendBuffer(body, InOut.replyWeb(this.getClass(), context, consumer));
+            }
+
+        }
     }
 }

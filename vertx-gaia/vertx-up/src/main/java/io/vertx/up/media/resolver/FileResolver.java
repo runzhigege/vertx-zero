@@ -5,6 +5,7 @@ import io.vertx.core.file.FileSystem;
 import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.Epsilon;
+import io.vertx.up.log.Annal;
 import io.vertx.up.media.Resolver;
 import io.vertx.up.web.ZeroSerializer;
 import io.vertx.zero.eon.Values;
@@ -15,10 +16,18 @@ import java.util.Set;
 @SuppressWarnings("unchecked")
 public class FileResolver<T> implements Resolver<T> {
 
+    private static final Annal LOGGER = Annal.get(FileResolver.class);
+
     @Override
     public Epsilon<T> resolve(final RoutingContext context,
                               final Epsilon<T> income) {
+        context.request().headers().forEach((item) -> LOGGER.info("[ ZERO ] Headers: {0} = {1}",
+                item.getKey(), item.getValue()));
         final Set<FileUpload> fileUploads = context.fileUploads();
+        final Buffer body = context.getBody();
+        System.out.println(body);
+        System.out.println(context.request().isExpectMultipart());
+        LOGGER.info("[ ZERO ] Upload files: size = {0}", fileUploads.size());
         if (Values.ONE == fileUploads.size()) {
             final FileUpload fileUpload = fileUploads.iterator().next();
             // Returned directly reference for FileUpload
