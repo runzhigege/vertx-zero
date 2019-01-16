@@ -45,17 +45,17 @@ public final class InOut {
     /**
      * Method not allowed ( 405 )
      */
-    private static void sync405Error(final Class<?> clazz,
-                                     final RoutingContext context) {
+    public static void sync405Error(final Class<?> clazz,
+                                    final RoutingContext context) {
         final HttpServerRequest request = context.request();
         final WebException exception = new _405MethodForbiddenException(clazz, request.method(),
                 request.uri());
         Answer.reply(context, Envelop.failure(exception));
     }
 
-    private static void sync500Error(final Class<?> clazz,
-                                     final RoutingContext context,
-                                     final Throwable ex) {
+    public static void sync500Error(final Class<?> clazz,
+                                    final RoutingContext context,
+                                    final Throwable ex) {
         final WebException exception = new _500InternalServerException(clazz,
                 null == ex ? "Server Error" : ex.getMessage());
         Answer.reply(context, Envelop.failure(exception));
@@ -105,33 +105,25 @@ public final class InOut {
         };
     }
 
-    static Handler<AsyncResult<HttpClientResponse>> replyHttp(
+    static Handler<HttpClientResponse> replyHttp(
             final Class<?> clazz,
             final RoutingContext context,
             final Consumer<Void> consumer
     ) {
         return response -> {
-            if (response.succeeded()) {
-                final HttpClientResponse remoteResp = response.result();
-                remoteResp.bodyHandler(buffer -> {
-                    if (404 == remoteResp.statusCode()) {
-                        /*
-                         * 404 -> 405 Error
-                         */
-                        InOut.sync405Error(clazz, context);
-                    } else {
-                        /*
-                         * 200 -> Success
-                         */
-                        InOut.syncSuccess(context.response(), remoteResp, buffer);
-                    }
-                });
-            } else {
-                /*
-                 * 500
-                 */
-                InOut.sync500Error(clazz, context, response.cause());
-            }
+            response.bodyHandler(buffer -> {
+                if (404 == response.statusCode()) {
+                    /*
+                     * 404 -> 405 Error
+                     */
+                    InOut.sync405Error(clazz, context);
+                } else {
+                    /*
+                     * 200 -> Success
+                     */
+                    InOut.syncSuccess(context.response(), response, buffer);
+                }
+            });
             consumer.accept(null);
         };
     }
