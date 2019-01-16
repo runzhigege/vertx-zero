@@ -24,7 +24,10 @@ public class FileResolver<T> implements Resolver<T> {
         context.request().headers().forEach((item) -> LOGGER.info("[ ZERO ] Headers: {0} = {1}",
                 item.getKey(), item.getValue()));
         final Set<FileUpload> fileUploads = context.fileUploads();
-        LOGGER.info("[ Rer ] Upload files: size = {0}", fileUploads.size());
+        final Buffer body = context.getBody();
+        System.out.println(body);
+        System.out.println(context.request().isExpectMultipart());
+        LOGGER.info("[ ZERO ] Upload files: size = {0}", fileUploads.size());
         if (Values.ONE == fileUploads.size()) {
             final FileUpload fileUpload = fileUploads.iterator().next();
             // Returned directly reference for FileUpload
