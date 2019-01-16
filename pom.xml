@@ -76,7 +76,7 @@
         <vertx.jooq.code.version>4.0.0</vertx.jooq.code.version>
         <mysql.version>8.0.13</mysql.version>
 
-        <jwt.version>3.4.1</jwt.version>
+        <jwt.version>3.5.0</jwt.version>
         <reflect.asm.version>1.11.8</reflect.asm.version>
         <asm.version>7.0</asm.version>
         <lombok.version>1.18.4</lombok.version>
@@ -89,13 +89,14 @@
         <codehaus.janino.version>3.0.11</codehaus.janino.version>
         <cglib.version>3.2.10</cglib.version>
         <ignite.version>2.7.0</ignite.version>
-        <etcd.version>2.16.0</etcd.version>
+        <etcd.version>2.17.0</etcd.version>
         <mongodb.async.version>3.9.1</mongodb.async.version>
         <!-- Apache Common -->
         <common.jexl.version>3.1</common.jexl.version>
         <common.lang3.version>3.8.1</common.lang3.version>
         <common.logging.version>1.2</common.logging.version>
         <common.net.version>3.6</common.net.version>
+        <http.client.version>4.1.4</http.client.version>
         <!-- Rpc -->
         <protobuf.version>3.6.1</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
@@ -840,6 +841,12 @@
                 <groupId>io.netty</groupId>
                 <artifactId>netty-transport-native-kqueue</artifactId>
                 <version>${netty.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpasyncclient</artifactId>
+                <version>${http.client.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
