@@ -1,7 +1,6 @@
 package io.vertx.up.micro.discovery.multipart;
 
 import io.vertx.core.Handler;
-import io.vertx.core.MultiMap;
 import io.vertx.core.http.*;
 import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.RoutingContext;
@@ -13,6 +12,8 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.FormBodyPart;
+import org.apache.http.entity.mime.FormBodyPartBuilder;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
@@ -89,7 +90,6 @@ public class UploadPipe implements Pipe<HttpClientResponse> {
              */
             final File file = new File(filename);
             if (file.exists()) {
-                System.out.println(file.length());
                 /*
                  * Because of issue:
                  * https://github.com/vert-x3/vertx-web/issues/1137
@@ -102,7 +102,7 @@ public class UploadPipe implements Pipe<HttpClientResponse> {
                 /*
                  * Http Headers
                  */
-                // this.processHeaders(post, fileUpload);
+                this.processHeaders(post);
                 /*
                  * Files uploaded here
                  */
@@ -140,30 +140,43 @@ public class UploadPipe implements Pipe<HttpClientResponse> {
 
         final MultipartEntityBuilder builder = MultipartEntityBuilder.create();
         builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
-        builder.addPart("file", fileBody);
+        /*
+         * Custom content disposition
+         * Because Api Gateway will send the request to micro service
+         * It means that the content-disposition must be calculated by api gateway internally
+         * here.
+         * Now it's working to redirect request to micro service.
+         * Related submitted issue:
+         * https://github.com/vert-x3/vertx-web/issues/1137
+         */
+        final String disposition = "form-data; name=\"file\"; "
+                + "filename=\"" + fileUpload.fileName() + "";
+        final FormBodyPart bodyPart = FormBodyPartBuilder.create()
+                .setName("file")
+                .addField("Content-Type", fileUpload.contentType())
+                .addField("Content-Transfer-Encoding", fileUpload.contentTransferEncoding())
+                .addField("Content-Disposition", disposition)
+                .setBody(fileBody)
+                .build();
+        builder.addPart(bodyPart);
         final HttpEntity entity = builder.build();
         request.setEntity(entity);
     }
 
-    private void processHeaders(final HttpPost request, final FileUpload fileUpload) {
+    private void processHeaders(final HttpPost request) {
         /*
          * Extract Server Request headers
          */
-        final MultiMap headers = MultiMap.caseInsensitiveMultiMap();
-        this.request.headers().forEach(entry -> headers.set(entry.getKey(), entry.getValue()));
+        this.request.headers().forEach(entry ->
+                LOGGER.info("[ ZERO ] Client header: {0} = {1}", entry.getKey(), entry.getValue()));
         /*
          * User Agent Switch, Fix value
          */
-        headers.set(HttpHeaders.USER_AGENT, "Zero Internal Client Agent");
-        headers.forEach(entry -> {
-            final String key = entry.getKey();
-            final String value = entry.getValue();
-            // Fix issue: org.apache.http.ProtocolException: Content-Length header already present
-            // Because this header is not needed.
-            if (!HttpHeaders.CONTENT_LENGTH.toString().equals(key)) {
-                request.setHeader(key, value);
-            }
-        });
+        if (this.request.headers().contains(HttpHeaders.AUTHORIZATION)) {
+            // Security header
+            request.setHeader(HttpHeaders.AUTHORIZATION.toString(),
+                    this.request.headers().get(HttpHeaders.AUTHORIZATION));
+        }
     }
 
     private FileUpload getFile() {
