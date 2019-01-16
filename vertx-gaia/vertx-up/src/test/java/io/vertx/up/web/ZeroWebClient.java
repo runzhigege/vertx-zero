@@ -9,13 +9,11 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.junit.Test;
 
 import java.io.File;
 
 public class ZeroWebClient {
 
-    @Test
     public void testClient() throws Exception {
         final CloseableHttpClient client = HttpClients.createDefault();
 
