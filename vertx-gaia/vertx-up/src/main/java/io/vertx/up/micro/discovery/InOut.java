@@ -20,7 +20,12 @@ import io.vertx.up.exception._500InternalServerException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.hunt.Answer;
 import io.vertx.zero.eon.Strings;
+import io.vertx.zero.eon.Values;
+import io.zero.epic.fn.Fn;
+import org.apache.http.Header;
+import org.apache.http.StatusLine;
 
+import java.io.InputStream;
 import java.util.function.Consumer;
 
 /**
@@ -105,14 +110,23 @@ public final class InOut {
         };
     }
 
-    static Handler<HttpClientResponse> replyHttp(
+    static Handler<org.apache.http.HttpResponse> replyHttp(
             final Class<?> clazz,
             final RoutingContext context,
             final Consumer<Void> consumer
     ) {
         return response -> {
-            response.bodyHandler(buffer -> {
-                if (404 == response.statusCode()) {
+            /*
+             * Get status
+             */
+            final StatusLine line = response.getStatusLine();
+            if (null == line) {
+                /*
+                 * 500 Error
+                 */
+                InOut.sync500Error(clazz, context, new RuntimeException("Remote 500 Error."));
+            } else {
+                if (404 == line.getStatusCode()) {
                     /*
                      * 404 -> 405 Error
                      */
@@ -121,9 +135,9 @@ public final class InOut {
                     /*
                      * 200 -> Success
                      */
-                    InOut.syncSuccess(context.response(), response, buffer);
+                    InOut.syncSuccess(context.response(), response);
                 }
-            });
+            }
             consumer.accept(null);
         };
     }
@@ -138,6 +152,39 @@ public final class InOut {
                 clientResponse.statusCode(),
                 clientResponse.statusMessage(),
                 buffer);
+    }
+
+    private static void syncSuccess(
+            final HttpServerResponse response,
+            final org.apache.http.HttpResponse clientResponse
+    ) {
+        final StatusLine line = clientResponse.getStatusLine();
+        /*
+         * Body processing
+         */
+        Fn.safeJvm(() -> {
+            final InputStream in = clientResponse.getEntity().getContent();
+            // No performance considering
+            final byte[] bytes = new byte[in.available()];
+            final int result = in.read(bytes);
+            if (Values.RANGE != result) {
+
+                // Body data
+                final Buffer buffer = Buffer.buffer(bytes);
+
+                // Headers
+                final MultiMap headers = MultiMap.caseInsensitiveMultiMap();
+                for (final Header header : clientResponse.getAllHeaders()) {
+                    headers.set(header.getName(), header.getValue());
+                }
+
+                // Bridge to Vert.x response
+                syncSuccess(response, headers,
+                        line.getStatusCode(),
+                        line.getReasonPhrase(),
+                        buffer);
+            }
+        });
     }
 
     private static void syncSuccess(
@@ -164,7 +211,7 @@ public final class InOut {
         return uri.toString();
     }
 
-    public static RequestOptions getOptions(final Record record, final String normalizedUri) {
+    static RequestOptions getOptions(final Record record, final String normalizedUri) {
         final RequestOptions options = new RequestOptions();
         options.setURI(normalizedUri);
         // Extract host / port
