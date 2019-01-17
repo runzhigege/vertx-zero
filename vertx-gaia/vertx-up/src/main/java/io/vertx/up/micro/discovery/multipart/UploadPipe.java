@@ -112,7 +112,7 @@ public class UploadPipe implements Pipe<HttpResponse> {
                  * Execute request here
                  */
                 for (final Header header : post.getAllHeaders()) {
-                    LOGGER.info("Normalized headers: key = {0}, value = {1}.", header.getName(), header.getValue());
+                    LOGGER.info("[ ZERO ] Normalized header: key = {0}, value = {1}.", header.getName(), header.getValue());
                 }
                 final HttpResponse data = client.execute(post);
                 /*
@@ -177,10 +177,18 @@ public class UploadPipe implements Pipe<HttpResponse> {
         /*
          * User Agent Switch, Fix value
          */
-        if (this.request.headers().contains(HttpHeaders.AUTHORIZATION)) {
+        this.processHeader(request, HttpHeaders.AUTHORIZATION);  // Security
+        this.processHeader(request, HttpHeaders.CACHE_CONTROL);  // Cache
+        this.processHeader(request, HttpHeaders.ACCEPT);         // Accept
+        this.processHeader(request, HttpHeaders.CONNECTION);     // Connection
+        this.processHeader(request, HttpHeaders.ACCEPT_ENCODING);// Accept-Encoding
+    }
+
+    private void processHeader(final HttpPost request, final CharSequence key) {
+        if (this.request.headers().contains(key)) {
             // Security header
-            request.setHeader(HttpHeaders.AUTHORIZATION.toString(),
-                    this.request.headers().get(HttpHeaders.AUTHORIZATION));
+            request.setHeader(key.toString(),
+                    this.request.headers().get(key));
         }
     }
 
