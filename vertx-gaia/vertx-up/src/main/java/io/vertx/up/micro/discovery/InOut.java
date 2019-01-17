@@ -4,7 +4,7 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.MultiMap;
 import io.vertx.core.buffer.Buffer;
-import io.vertx.core.http.HttpClientResponse;
+import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.http.RequestOptions;
@@ -21,6 +21,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.rs.hunt.Answer;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.eon.Values;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 import org.apache.http.Header;
 import org.apache.http.StatusLine;
@@ -135,7 +136,7 @@ public final class InOut {
                     /*
                      * 200 -> Success
                      */
-                    InOut.syncSuccess(context.response(), response);
+                    InOut.syncSuccess(context, response);
                 }
             }
             consumer.accept(null);
@@ -143,22 +144,11 @@ public final class InOut {
     }
 
     private static void syncSuccess(
-            final HttpServerResponse response,
-            final HttpClientResponse clientResponse,
-            final Buffer buffer) {
-        // Copy header
-        syncSuccess(response,
-                clientResponse.headers(),
-                clientResponse.statusCode(),
-                clientResponse.statusMessage(),
-                buffer);
-    }
-
-    private static void syncSuccess(
-            final HttpServerResponse response,
+            final RoutingContext context,
             final org.apache.http.HttpResponse clientResponse
     ) {
         final StatusLine line = clientResponse.getStatusLine();
+        final HttpServerResponse response = context.response();
         /*
          * Body processing
          */
@@ -179,8 +169,15 @@ public final class InOut {
                             header.getName(), header.getValue());
                     headers.set(header.getName(), header.getValue());
                 }
-                // Print headers
-
+                // Cors copy switch here
+                {
+                    final HttpServerRequest request = context.request();
+                    final String origin = request.getHeader(HttpHeaders.ORIGIN);
+                    if (Ut.notNil(origin)) {
+                        // No 'Access-Control-Allow-Origin' header is present on the requested resource.
+                        headers.set(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, origin);
+                    }
+                }
                 // Bridge to Vert.x response
                 syncSuccess(response, headers,
                         line.getStatusCode(),
