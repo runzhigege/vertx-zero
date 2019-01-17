@@ -7,7 +7,10 @@ import io.vertx.core.Handler;
 import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
-import io.vertx.core.http.*;
+import io.vertx.core.http.HttpMethod;
+import io.vertx.core.http.HttpServerOptions;
+import io.vertx.core.http.HttpServerRequest;
+import io.vertx.core.http.RequestOptions;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.client.HttpRequest;
 import io.vertx.ext.web.client.WebClient;
@@ -143,8 +146,10 @@ public class ServiceJet {
             if (rctRequest.isExpectMultipart()) {
                 /*
                  * The send method of multipart/form-data instead of others
+                 * Use apache http client insead of vert.x web client
+                 * because of issue of WebClient/HttpClient
                  */
-                final Pipe<HttpClientResponse> pump = UploadPipe.create(
+                final Pipe<org.apache.http.HttpResponse> pump = UploadPipe.create(
                         context, reference, options);
                 /*
                  * Http Request instead of Web Request here
