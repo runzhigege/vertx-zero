@@ -23,7 +23,7 @@ import org.apache.http.impl.client.HttpClients;
 import java.io.File;
 import java.util.Set;
 
-public class UploadPipe implements Pipe<HttpClientResponse> {
+public class UploadPipe implements Pipe<HttpResponse> {
 
     private static final Annal LOGGER = Annal.get(UploadPipe.class);
 
@@ -55,7 +55,7 @@ public class UploadPipe implements Pipe<HttpClientResponse> {
 
 
     @Override
-    public void doRequest(final Handler<HttpClientResponse> handler) {
+    public void doRequest(final Handler<HttpResponse> handler) {
         /*
          * Only support post method in uploading HttpPipe
          */
@@ -75,14 +75,15 @@ public class UploadPipe implements Pipe<HttpClientResponse> {
                 /*
                  * Execute uploading processing
                  */
-                this.executeUpload(fileUpload);
+                this.executeUpload(fileUpload, handler);
             }
         } else {
             InOut.sync405Error(this.getClass(), this.context);
         }
     }
 
-    private void executeUpload(final FileUpload fileUpload) {
+    private void executeUpload(final FileUpload fileUpload,
+                               final Handler<HttpResponse> handler) {
         try {
             final String filename = fileUpload.uploadedFileName();
             /*
@@ -114,6 +115,10 @@ public class UploadPipe implements Pipe<HttpClientResponse> {
                     LOGGER.info("Normalized headers: key = {0}, value = {1}.", header.getName(), header.getValue());
                 }
                 final HttpResponse data = client.execute(post);
+                /*
+                 * Http Response to HttpClientResponse
+                 */
+                handler.handle(data);
             }
         } catch (final Exception ex) {
             // TODO: Exception for debug
