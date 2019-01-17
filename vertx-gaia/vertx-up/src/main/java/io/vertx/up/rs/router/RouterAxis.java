@@ -34,8 +34,11 @@ public class RouterAxis implements Axis<Router> {
                         .allowedHeaders(new HashSet<String>() {
                             {
                                 this.add(HttpHeaders.AUTHORIZATION);
+                                this.add(HttpHeaders.ACCEPT);
                                 this.add(HttpHeaders.CONTENT_LENGTH);
                                 this.add(HttpHeaders.CONTENT_TYPE);
+                                this.add(HttpHeaders.CONTENT_DISPOSITION);
+                                this.add(HttpHeaders.CONTENT_ENCODING);
                             }
                         })
                         .allowedMethods(new HashSet<HttpMethod>() {
@@ -44,6 +47,7 @@ public class RouterAxis implements Axis<Router> {
                                 this.add(HttpMethod.GET);
                                 this.add(HttpMethod.POST);
                                 this.add(HttpMethod.PUT);
+                                this.add(HttpMethod.OPTIONS);
                             }
                         }));
 
