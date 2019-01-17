@@ -175,8 +175,11 @@ public final class InOut {
                 // Headers
                 final MultiMap headers = MultiMap.caseInsensitiveMultiMap();
                 for (final Header header : clientResponse.getAllHeaders()) {
+                    LOGGER.info("[ Zero ] Response header: {0} = {1}",
+                            header.getName(), header.getValue());
                     headers.set(header.getName(), header.getValue());
                 }
+                // Print headers
 
                 // Bridge to Vert.x response
                 syncSuccess(response, headers,
