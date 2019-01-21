@@ -86,7 +86,7 @@
         <scala.version>2.12.4</scala.version>
         <feign.version>8.18.0</feign.version>
         <guava.version>27.0.1-jre</guava.version>
-        <codehaus.janino.version>3.0.11</codehaus.janino.version>
+        <codehaus.janino.version>3.0.12</codehaus.janino.version>
         <cglib.version>3.2.10</cglib.version>
         <ignite.version>2.7.0</ignite.version>
         <etcd.version>2.17.0</etcd.version>
@@ -98,7 +98,7 @@
         <common.net.version>3.6</common.net.version>
         <http.async.client.version>4.1.4</http.async.client.version>
         <http.client.version>4.5.6</http.client.version>
-        <http.core.version>4.4.10</http.core.version>
+        <http.core.version>4.4.11</http.core.version>
         <!-- Rpc -->
         <protobuf.version>3.6.1</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
