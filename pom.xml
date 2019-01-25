@@ -76,7 +76,7 @@
         <vertx.jooq.code.version>4.0.0</vertx.jooq.code.version>
         <mysql.version>8.0.14</mysql.version>
 
-        <jwt.version>3.5.0</jwt.version>
+        <jwt.version>3.6.0</jwt.version>
         <reflect.asm.version>1.11.8</reflect.asm.version>
         <asm.version>7.0</asm.version>
         <lombok.version>1.18.4</lombok.version>
@@ -104,7 +104,7 @@
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
         <grpc.version>1.18.0</grpc.version>
         <!-- Vert.x Addition -->
-        <rxjava2.version>2.2.5</rxjava2.version>
+        <rxjava2.version>2.2.6</rxjava2.version>
         <netty.tcnative.version>2.0.20.Final</netty.tcnative.version>
         <netty.version>4.1.33.Final</netty.version>
         <hazelcast.version>3.11.1</hazelcast.version>
