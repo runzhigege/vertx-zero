@@ -64,7 +64,7 @@
 
         <jackson.version>2.9.8</jackson.version>
         <jws.version>2.1.1</jws.version>
-        <jersey.version>2.27</jersey.version>
+        <jersey.version>2.28</jersey.version>
         <javax.el.version>3.0.1-b06</javax.el.version>
         <glassfish.el.version>3.0.1-b11</glassfish.el.version>
 
@@ -76,7 +76,7 @@
         <vertx.jooq.code.version>4.0.0</vertx.jooq.code.version>
         <mysql.version>8.0.14</mysql.version>
 
-        <jwt.version>3.6.0</jwt.version>
+        <jwt.version>3.7.0</jwt.version>
         <reflect.asm.version>1.11.8</reflect.asm.version>
         <asm.version>7.0</asm.version>
         <lombok.version>1.18.4</lombok.version>
@@ -97,7 +97,7 @@
         <common.logging.version>1.2</common.logging.version>
         <common.net.version>3.6</common.net.version>
         <http.async.client.version>4.1.4</http.async.client.version>
-        <http.client.version>4.5.6</http.client.version>
+        <http.client.version>4.5.7</http.client.version>
         <http.core.version>4.4.11</http.core.version>
         <!-- Rpc -->
         <protobuf.version>3.6.1</protobuf.version>
