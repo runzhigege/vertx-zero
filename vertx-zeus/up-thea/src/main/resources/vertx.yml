@@ -2,7 +2,13 @@ zero:
   lime: jooq
   vertx:
     instance:
-    - name: vertx-zeus
-      options:
-        # Fix block 2000 limit issue.
-        maxEventLoopExecuteTime: 30000000000
+      - name: vertx-zeus
+        options:
+          # Fix block 2000 limit issue.
+          maxEventLoopExecuteTime: 30000000000
+  # Data loading
+  init:
+    # The config node of jooq.provider
+    config: jooq.provider
+    # The data folder
+    data: initialize
