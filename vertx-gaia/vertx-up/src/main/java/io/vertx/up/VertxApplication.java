@@ -116,6 +116,14 @@ public class VertxApplication {
                 final Scatter<Vertx> scatter = Ut.singleton(CodexScatter.class);
                 scatter.connect(vertx);
             }, "codex-engine-runner");
+
+            /* 5.Data Loader started, Not needed in Api Gateway */
+            /* In future version
+            Runner.run(() -> {
+                final Scatter<Vertx> scatter = Ut.singleton(InitScatter.class);
+                scatter.connect(vertx);
+            }, "data-loading-runner");
+            */
         });
     }
 }
