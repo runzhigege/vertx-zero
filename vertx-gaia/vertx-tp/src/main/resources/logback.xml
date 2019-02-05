@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration scan="true" scanPeriod="30 seconds">
+<configuration scan="true" scanPeriod="30 seconds" debug="false">
     <!-- colorful -->
     <property name="CONSOLE_LOG_PATTERN"
               value="%date{yyyy-MM-dd HH:mm:ss.SSS} | %highlight(%-5level) | %boldYellow(%-30thread) | %boldGreen(%-60logger) -| %msg%n"/>
@@ -21,18 +21,16 @@
     </appender>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder charset="UTF-8"> <!-- encoder 可以指定字符集，对于中文输出有意义 -->
+        <encoder charset="UTF-8">
+            <!-- encoder 可以指定字符集，对于中文输出有意义 -->
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
         </encoder>
     </appender>
-
-    <logger name="cn.justfly.training.logging" level="INFO"/>
 
     <logger name="javax.activation" level="WARN"/>
     <logger name="javax.mail" level="WARN"/>
     <logger name="javax.management.remote" level="WARN"/>
     <logger name="javax.xml.bind" level="WARN"/>
-    <logger name="ch.qos.logback" level="WARN"/>
     <logger name="com.codahale.metrics" level="WARN"/>
     <logger name="com.hazelcast" level="INFO"/>
     <logger name="com.netflix" level="WARN"/>
@@ -62,14 +60,16 @@
     <logger name="sun.rmi.transport" level="WARN"/>
     <!-- Disable Jooq -->
     <logger name="org.jooq.Constants" level="OFF"/>
-
+    <!-- Logback -->
+    <logger name="ch.qos.logback" level="WARN"/>
+    <logger name="cn.justfly.training.logging" level="WARN"/>
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
     </root>
 
     <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
-
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
     </contextListener>
