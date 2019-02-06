@@ -90,7 +90,7 @@
         <cglib.version>3.2.10</cglib.version>
         <ignite.version>2.7.0</ignite.version>
         <etcd.version>2.17.0</etcd.version>
-        <mongodb.async.version>3.9.1</mongodb.async.version>
+        <mongodb.async.version>3.10.0</mongodb.async.version>
         <!-- Apache Common -->
         <common.jexl.version>3.1</common.jexl.version>
         <common.lang3.version>3.8.1</common.lang3.version>
