@@ -69,7 +69,7 @@
         <glassfish.el.version>3.0.1-b11</glassfish.el.version>
 
         <!-- Database Needed -->
-        <hikari.cp.version>3.3.0</hikari.cp.version>
+        <hikari.cp.version>3.3.1</hikari.cp.version>
         <jooq.version>3.10.8</jooq.version>
         <vertx.jooq.version>2.4.1</vertx.jooq.version>
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
@@ -90,7 +90,7 @@
         <cglib.version>3.2.10</cglib.version>
         <ignite.version>2.7.0</ignite.version>
         <etcd.version>2.17.0</etcd.version>
-        <mongodb.async.version>3.9.1</mongodb.async.version>
+        <mongodb.async.version>3.10.0</mongodb.async.version>
         <!-- Apache Common -->
         <common.jexl.version>3.1</common.jexl.version>
         <common.lang3.version>3.8.1</common.lang3.version>
