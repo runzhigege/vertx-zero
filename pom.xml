@@ -73,7 +73,7 @@
         <jooq.version>3.10.8</jooq.version>
         <vertx.jooq.version>2.4.1</vertx.jooq.version>
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
-        <vertx.jooq.code.version>4.0.0</vertx.jooq.code.version>
+        <vertx.jooq.code.version>4.1.0</vertx.jooq.code.version>
         <mysql.version>8.0.15</mysql.version>
 
         <jwt.version>3.7.0</jwt.version>
@@ -123,7 +123,7 @@
         <!-- AspectJ -->
         <aspectj.version>1.9.2</aspectj.version>
         <!-- Logging -->
-        <log4j2.version>2.11.1</log4j2.version>
+        <log4j2.version>2.11.2</log4j2.version>
         <log4j.version>1.2.17</log4j.version>
         <logback.version>1.2.3</logback.version>
         <logback.cal10n.version>0.8.1</logback.cal10n.version>
