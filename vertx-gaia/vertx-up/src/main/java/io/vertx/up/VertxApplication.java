@@ -118,7 +118,7 @@ public class VertxApplication {
             }, "codex-engine-runner");
 
             /* 5.Data Loader started, Not needed in Api Gateway */
-            /* In future version
+            /* Liquibase instead
             Runner.run(() -> {
                 final Scatter<Vertx> scatter = Ut.singleton(InitScatter.class);
                 scatter.connect(vertx);
