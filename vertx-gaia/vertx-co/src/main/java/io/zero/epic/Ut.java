@@ -604,7 +604,7 @@ public class Ut {
     }
 
     public static String fromJoin(final List<String> input, final String separator) {
-        return StringUtil.join(new HashSet<>(input), separator);
+        return StringUtil.join(input, separator);
     }
 
     public static String fromJoin(final Set<String> input, final String separator) {
