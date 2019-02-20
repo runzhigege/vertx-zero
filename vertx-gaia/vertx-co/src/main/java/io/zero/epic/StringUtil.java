@@ -6,6 +6,7 @@ import io.vertx.zero.exception.heart.JexlExpressionException;
 import io.zero.epic.fn.Fn;
 import org.apache.commons.jexl3.*;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -44,7 +45,7 @@ class StringUtil {
         return join(input, null);
     }
 
-    static String join(final Set<String> input, final String separator) {
+    static String join(final Collection<String> input, final String separator) {
         final String connector = (null == separator) ? Strings.COMMA : separator;
         return Fn.getJvm(() -> {
             final StringBuilder builder = new StringBuilder();
