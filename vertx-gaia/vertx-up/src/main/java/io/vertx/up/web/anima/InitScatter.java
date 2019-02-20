@@ -7,7 +7,7 @@ import io.vertx.zero.marshal.node.ZeroUniform;
 import io.zero.epic.Ut;
 
 /**
- * Data initialize
+ * Data initialize: default with liquibase
  */
 public class InitScatter implements Scatter<Vertx> {
 
@@ -17,6 +17,7 @@ public class InitScatter implements Scatter<Vertx> {
     public void connect(final Vertx vertx) {
         // inject configuration
         final JsonObject config = visitor.read();
+        // initial node checking
         System.out.println(config.encodePrettily());
     }
 }
