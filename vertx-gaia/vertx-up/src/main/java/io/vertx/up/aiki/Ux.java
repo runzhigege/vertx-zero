@@ -25,6 +25,7 @@ import io.zero.epic.fn.Fn;
 import io.zero.epic.fn.wait.Log;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.function.*;
 
@@ -463,6 +464,10 @@ public final class Ux {
 
     public static Future<JsonArray> thenComposite(final List<Future<JsonObject>> futures) {
         return Fluctuate.thenComposite(futures);
+    }
+
+    public static <T, I> Future<Set<T>> thenSet(final List<I> data, final Function<I, Future<T>> fun) {
+        return Fluctuate.thenSet(data, fun);
     }
 
     // -> Merge multi Future<> to single one, one for all module.
