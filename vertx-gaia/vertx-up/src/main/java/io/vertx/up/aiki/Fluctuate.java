@@ -11,10 +11,7 @@ import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
 import io.zero.epic.Ut;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.*;
 
 @SuppressWarnings("unchecked")
@@ -242,6 +239,25 @@ class Fluctuate {
         CompositeFuture.all(secondFutures).setHandler(
                 thenResponse(result, (finished) -> null == finished ? null : mergeFun.apply(first, finished.list())));
         return result;
+    }
+
+
+    static <T, I> Future<Set<T>> thenSet(
+            final List<I> data,
+            final Function<I, Future<T>> fun
+    ) {
+        final Future<Set<T>> results = Future.future();
+        final List<Future> futures = new ArrayList<>();
+        data.stream().map(fun).forEach(futures::add);
+        CompositeFuture.all(futures).setHandler(thenResponse(results, finished -> {
+            if (null == finished) {
+                return new HashSet<>();
+            } else {
+                final List<T> extracted = finished.list();
+                return new HashSet<>(extracted);
+            }
+        }));
+        return results;
     }
 
 
