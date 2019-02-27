@@ -1,0 +1,10 @@
+{
+    "key": "$GUID$",
+    "name": "「测试」Tabular",
+    "code": "$GUID$",
+    "type": "jooq.test",
+    "order": 2,
+    "active": true,
+    "sigma": "test-jooq",
+    "language": "cn"
+}
