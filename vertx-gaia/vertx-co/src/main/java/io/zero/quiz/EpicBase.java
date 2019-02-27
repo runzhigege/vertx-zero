@@ -2,9 +2,7 @@ package io.zero.quiz;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.core.logging.Logger;
-import io.vertx.core.logging.LoggerFactory;
-import io.vertx.zero.log.Log;
+import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
 
 public class EpicBase {
@@ -12,7 +10,7 @@ public class EpicBase {
     protected String getFile(final String filename) {
         final Class<?> clazz = this.getClass();
         final String file = "test/" + clazz.getPackage().getName() + "/" + filename;
-        Log.debug(this.getLogger(), "[ ZERO Test ] Test input up.god.file: {0}", file);
+        this.getLogger().info("[ ZERO Test ] Test input up.god.file: {0}", file);
         return file;
     }
 
@@ -24,7 +22,7 @@ public class EpicBase {
         return Ut.ioJArray(this.getFile(filename));
     }
 
-    protected Logger getLogger() {
-        return LoggerFactory.getLogger(this.getClass());
+    protected Annal getLogger() {
+        return Annal.get(this.getClass());
     }
 }

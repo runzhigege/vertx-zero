@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 @SuppressWarnings("all")
 class JooqWriter {
 
-    private static JooqWriter INSTANCE;
     private transient final VertxDAO vertxDAO;
     private transient JooqReader reader;
     private transient JooqAnalyzer analyzer;
@@ -32,12 +31,7 @@ class JooqWriter {
     }
 
     static JooqWriter create(final VertxDAO vertxDAO) {
-        synchronized (JooqWriter.class) {
-            if (null == INSTANCE) {
-                INSTANCE = new JooqWriter(vertxDAO);
-            }
-            return INSTANCE;
-        }
+        return new JooqWriter(vertxDAO);
     }
 
     JooqWriter on(JooqAnalyzer analyzer) {

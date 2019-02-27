@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 @RunWith(VertxUnitRunner.class)
 public abstract class JooqBase extends ZeroBase {
@@ -29,6 +30,16 @@ public abstract class JooqBase extends ZeroBase {
 
     public UxJooq getDao() {
         return null;
+    }
+
+    public <T> void async(final TestContext context,
+                          final Supplier<Future<T>> supplier,
+                          final Consumer<T> function) {
+        final UxJooq jooq = this.getDao();
+        if (null != jooq) {
+            final Future<T> future = supplier.get();
+            this.asyncFlow(context, future, function);
+        }
     }
 
     public <T> void asyncFlow(final TestContext context,
