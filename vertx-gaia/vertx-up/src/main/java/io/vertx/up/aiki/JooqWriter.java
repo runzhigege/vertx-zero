@@ -2,6 +2,8 @@ package io.vertx.up.aiki;
 
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -9,6 +11,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Jooq Splitted Writter
@@ -22,6 +25,7 @@ class JooqWriter {
     private static JooqWriter INSTANCE;
     private transient final VertxDAO vertxDAO;
     private transient JooqReader reader;
+    private transient JooqAnalyzer analyzer;
 
     private JooqWriter(final VertxDAO vertxDAO) {
         this.vertxDAO = vertxDAO;
@@ -34,6 +38,11 @@ class JooqWriter {
             }
             return INSTANCE;
         }
+    }
+
+    JooqWriter on(JooqAnalyzer analyzer) {
+        this.analyzer = analyzer;
+        return this;
     }
 
     JooqWriter on(JooqReader reader) {
@@ -117,6 +126,14 @@ class JooqWriter {
         return Async.toFuture(future).compose(nil -> Future.succeededFuture(Boolean.TRUE));
     }
 
+    <T> Future<Boolean> deleteAsync(final JsonObject filters, final String pojo) {
+        return this.analyzer.searchAsync(filters)
+                .compose(Ux.fnJArray(this.analyzer.getPojoFile()))
+                .compose(array -> Future.succeededFuture(extractIds(array)))
+                .compose(item -> Future.succeededFuture(item.toArray()))
+                .compose(ids -> this.deleteByIdAsync(ids));
+    }
+
     /* Sync delete operation: DELETE */
     <T> T delete(final T entity) {
         this.vertxDAO.delete(entity);
@@ -133,6 +150,13 @@ class JooqWriter {
         return Boolean.TRUE;
     }
 
+    <T> Boolean delete(final JsonObject filters, final String pojo) {
+        final List<T> results = this.analyzer.search(filters);
+        final JsonArray array = Ux.toArray(results, pojo);
+        final List<Object> ids = extractIds(array);
+        return this.deleteById(ids);
+    }
+
     // ============ UPDATE Operation (Save) =============
     <T> Future<T> saveAsync(final Object id, final Function<T, T> copyFun) {
         return this.reader.<T>findByIdAsync(id).compose(old -> this.<T>updateAsync(copyFun.apply(old)));
@@ -141,5 +165,13 @@ class JooqWriter {
     <T> T save(final Object id, final Function<T, T> copyFun) {
         final T old = this.reader.<T>findById(id);
         return copyFun.apply(old);
+    }
+
+    // TODO: Analyzing Primary Key in future
+    private List<Object> extractIds(final JsonArray array) {
+        return array.stream()
+                .map(item -> (JsonObject) item)
+                .map(item -> item.getValue("key"))
+                .collect(Collectors.toList());
     }
 }

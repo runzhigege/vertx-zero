@@ -3,7 +3,9 @@ package io.vertx.up.aiki;
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.plugin.jooq.JooqInfix;
 import org.jooq.Condition;
+import org.jooq.DSLContext;
 import org.jooq.Operator;
 
 import java.util.Arrays;
@@ -49,6 +51,12 @@ public class JooqReader {
     <T> Future<T> fetchOneAndAsync(final JsonObject filters) {
         final Condition condition = JooqCond.transform(filters, Operator.AND, this.analyzer::getColumn);
         return Async.toFuture(this.vertxDAO.fetchOneAsync(condition));
+    }
+
+    <T> T fetchOneAnd(final JsonObject filters) {
+        final Condition condition = JooqCond.transform(filters, Operator.AND, this.analyzer::getColumn);
+        final DSLContext context = JooqInfix.getDSL();
+        return this.toResult(context.selectFrom(this.vertxDAO.getTable()).where(condition).fetchOne(this.vertxDAO.mapper()));
     }
 
     <T> Future<T> findByIdAsync(final Object id) {
@@ -100,6 +108,11 @@ public class JooqReader {
 
     <T> List<T> fetchIn(final String field, final List<Object> values) {
         return this.vertxDAO.fetch(this.analyzer.getColumn(field), values.toArray());
+    }
+
+    <T> List<T> fetch(final Condition condition) {
+        final DSLContext context = JooqInfix.getDSL();
+        return context.selectFrom(this.vertxDAO.getTable()).where(condition).fetch(this.vertxDAO.mapper());
     }
 
     // ============ Result Wrapper ==============
