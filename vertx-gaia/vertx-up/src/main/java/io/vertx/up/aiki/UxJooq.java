@@ -8,7 +8,6 @@ import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.eon.em.Format;
 import io.vertx.up.log.Annal;
-import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 import org.jooq.Condition;
 import org.jooq.Operator;
@@ -16,7 +15,6 @@ import org.jooq.Operator;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -27,28 +25,35 @@ public class UxJooq {
     private static final Annal LOGGER = Annal.get(UxJooq.class);
 
     private transient final Class<?> clazz;
-    private transient final VertxDAO vertxDAO;
+    /* Analyzer */
     private transient final JooqAnalyzer analyzer;
+    /* Writer */
+    private transient final JooqWriter writer;
+    /* Reader */
+    private transient final JooqReader reader;
+
     private transient Format format = Format.JSON;
 
     <T> UxJooq(final Class<T> clazz, final VertxDAO vertxDAO) {
         this.clazz = clazz;
-        this.vertxDAO = vertxDAO;
-        // Analyzing Column
+        /* Analyzing column for Jooq */
         this.analyzer = JooqAnalyzer.create(vertxDAO);
+        /* Reader connect Analayzer */
+        this.reader = JooqReader.create(vertxDAO).on(this.analyzer);
+        /* Writer connect Reader */
+        this.writer = JooqWriter.create(vertxDAO).on(this.reader);
     }
 
     <T> UxJooq(final Class<T> clazz) {
         this(clazz, (VertxDAO) JooqInfix.getDao(clazz));
     }
 
-    // Search Operation --------------------------------------------------
-    // Search ( Pager, Sort, Projection )
-    // Because you want to do projection remove, it means that you could not pass List<T> in current method.
+    // -------------------- Condition Transform --------------------
     public static Condition transform(final JsonObject filters, final Operator operator) {
         return JooqCond.transform(filters, operator, null);
     }
 
+    // -------------------- Bind Config --------------------
     public UxJooq on(final String pojo) {
         this.analyzer.bind(pojo, this.clazz);
         return this;
@@ -59,94 +64,197 @@ public class UxJooq {
         return this;
     }
 
+    // -------------------- INSERT --------------------
+
+    /* Async Only */
+    public <T> Future<T> insertReturningPrimaryAsync(final T entity, final Consumer<Long> consumer) {
+        return this.writer.insertReturningPrimaryAsync(entity, consumer);
+    }
+
+    public <T> Future<T> insertAsync(final T entity) {
+        return this.writer.insertAsync(entity);
+    }
+
+    public <T> Future<List<T>> insertAsync(final List<T> entities) {
+        return this.writer.insertAsync(entities);
+    }
+
+    public <T> T insert(final T entity) {
+        return this.writer.insert(entity);
+    }
+
+    public <T> List<T> insert(final List<T> entities) {
+        return this.writer.insert(entities);
+    }
+
+    // -------------------- UPDATE --------------------
+    public <T> Future<T> updateAsync(final T entity) {
+        return this.writer.updateAsync(entity);
+    }
+
+    public <T> Future<List<T>> updateAsync(final List<T> entities) {
+        return this.writer.updateAsync(entities);
+    }
+
+    public <T> T update(final T entity) {
+        return this.writer.update(entity);
+    }
+
+    public <T> List<T> update(final List<T> entities) {
+        return this.writer.update(entities);
+    }
+
+    // -------------------- DELETE --------------------
+    public <T> Future<T> deleteAsync(final T entity) {
+        return this.writer.deleteAsync(entity);
+    }
+
+    public Future<Boolean> deleteByIdAsync(final Object id) {
+        return this.writer.deleteByIdAsync(id);
+    }
+
+    public Future<Boolean> deleteByIdAsync(final Collection<Object> ids) {
+        return this.writer.deleteByIdAsync(ids);
+    }
+
+    public Future<Boolean> deleteByIdAsync(final Object... ids) {
+        return this.writer.deleteByIdAsync(Arrays.asList(ids));
+    }
+
+    public <T> T delete(final T entity) {
+        return this.writer.delete(entity);
+    }
+
+    public Boolean deleteById(final Object id) {
+        return this.writer.deleteById(id);
+    }
+
+    public Boolean deleteById(final Collection<Object> ids) {
+        return this.writer.deleteById(ids);
+    }
+
+    public Boolean deleteById(final Object... ids) {
+        return this.writer.deleteById(Arrays.asList(ids));
+    }
+
+    // -------------------- Fetch One --------------------
+    // Fetch
+    public <T> Future<T> fetchOneAsync(final String field, final Object value) {
+        return this.reader.fetchOneAsync(field, value);
+    }
+
+    /* Async Only */
+    public <T> Future<T> fetchOneAndAsync(final JsonObject andFilters) {
+        return this.reader.fetchOneAndAsync(andFilters);
+    }
+
+    public <T> T fetchOne(final String field, final Object value) {
+        return this.reader.fetchOne(field, value);
+    }
+
+    // Find
+    public <T> Future<T> findByIdAsync(final Object id) {
+        return this.reader.findByIdAsync(id);
+    }
+
+    public <T> T findById(final Object id) {
+        return this.reader.findById(id);
+    }
+
+    public <T> Future<List<T>> findAllAsync() {
+        return this.reader.findAllAsync();
+    }
+
+    public <T> List<T> findAll() {
+        return this.reader.findAll();
+    }
+
+    // -------------------- Save Operation --------------------
+    public <T> Future<T> saveAsync(final Object id, final T updated) {
+        return this.writer.saveAsync(id, (target) -> this.analyzer.copyEntity(target, updated));
+    }
+
+    public <T> Future<T> saveAsync(final Object id, final Function<T, T> copyFun) {
+        return this.writer.saveAsync(id, copyFun);
+    }
+
+    public <T> T save(final Object id, final T updated) {
+        return this.writer.save(id, (target) -> this.analyzer.copyEntity(target, updated));
+    }
+
+    public <T> T save(final Object id, final Function<T, T> copyFun) {
+        return this.writer.save(id, copyFun);
+    }
+
+    // -------------------- Exist Operation --------------------
+    public Future<Boolean> existsByIdAsync(final Object id) {
+        return this.reader.existsByIdAsync(id);
+    }
+
+    /* Async Only **/
+    public <T> Future<Boolean> existsOneAsync(final JsonObject andFilters) {
+        return this.<T>fetchOneAndAsync(andFilters)
+                .compose(item -> Future.succeededFuture(null != item));
+    }
+
+    public Boolean existsById(final Object id) {
+        return this.reader.existsById(id);
+    }
+
+    // -------------------- Fetch List Operation ---------------
+
+    public <T> Future<List<T>> fetchAsync(final String field, final Object value) {
+        return this.reader.fetchAsync(field, value);
+    }
+
+    public <T> Future<List<T>> fetchInAsync(final String field, final Object... value) {
+        return this.reader.fetchInAsync(field, Arrays.asList(value));
+    }
+
+    public <T> Future<List<T>> fetchInAsync(final String field, final JsonArray values) {
+        return this.reader.fetchInAsync(field, values.getList());
+    }
+
+    public <T> List<T> fetch(final String field, final Object value) {
+        return this.reader.fetch(field, value);
+    }
+
+    public <T> List<T> fetchIn(final String field, final Object... values) {
+        return this.reader.fetchIn(field, Arrays.asList(values));
+    }
+
+    public <T> List<T> fetchIn(final String field, final JsonArray values) {
+        return this.reader.fetchIn(field, values.getList());
+    }
+
+    public <T> Future<List<T>> fetchAndAsync(final JsonObject andFilters) {
+        return this.reader.fetchAsync(JooqCond.transform(andFilters, Operator.AND, this.analyzer::getColumn));
+    }
+
+    public <T> Future<List<T>> fetchOrAsync(final JsonObject orFilters) {
+        return this.reader.fetchAsync(JooqCond.transform(orFilters, Operator.OR, this.analyzer::getColumn));
+    }
+
+    // -------------------- Old Code Below ---------------
     // Boolean
     // Find by existing
-    public <T> Future<Boolean> findExists(final JsonObject filters) {
+    public <T> Future<Boolean> findExistingAsync(final JsonObject filters) {
         return this.<T>findAsync(filters)
                 .compose(item -> Future.succeededFuture(0 < item.size()));
     }
 
     // Find by missing
-    public <T> Future<Boolean> findMissing(final JsonObject filters) {
+    public <T> Future<Boolean> findMissingAsync(final JsonObject filters) {
         return this.<T>findAsync(filters)
                 .compose(item -> Future.succeededFuture(0 == item.size()));
     }
 
-    // CRUD - Read -----------------------------------------------------
-    // Get by id
-    public <T> Future<T> findByIdAsync(final Object id) {
-        final CompletableFuture<T> future =
-                this.vertxDAO.findByIdAsync(id);
-        return Async.toFuture(future);
-    }
-
-    // Get all
-    public <T> Future<List<T>> findAllAsync() {
-        final CompletableFuture<List<T>> future =
-                this.vertxDAO.findAllAsync();
-        return Async.toFuture(future);
-    }
 
     // Find by filters
     public <T> Future<List<T>> findAsync(final JsonObject filters) {
         return this.analyzer.searchAsync(filters);
     }
 
-    // CRUD - Create ---------------------------------------------------
-    // Create entity
-    public <T> Future<T> insertAsync(final T entity) {
-        final CompletableFuture<Void> future =
-                this.vertxDAO.insertAsync(entity);
-        return Async.toFuture(future)
-                .compose(result -> Future.succeededFuture(entity));
-    }
-
-    // Create entity
-    public <T> Future<T> insertReturningPrimaryAsync(final T entity, final Consumer<Long> consumer) {
-        final CompletableFuture<Long> future =
-                this.vertxDAO.insertReturningPrimaryAsync(entity);
-        return Async.toFuture(future).compose(id -> {
-            if (null != consumer) {
-                consumer.accept(id);
-            }
-            return Future.succeededFuture(entity);
-        });
-    }
-
-    // Create entities
-    public <T> Future<List<T>> insertAsync(final List<T> entities) {
-        final CompletableFuture<Void> future =
-                this.vertxDAO.insertAsync(entities);
-        return Async.toFuture(future)
-                .compose(result -> Future.succeededFuture(entities));
-    }
-
-    // CRUD - Update ----------------------------------------------------
-    // Update entity
-    public <T> Future<T> updateAsync(final T entity) {
-        final CompletableFuture<Void> future =
-                this.vertxDAO.updateAsync(entity);
-        return Async.toFuture(future)
-                .compose(result -> Future.succeededFuture(entity));
-    }
-
-    public <T> Future<List<T>> updateAsync(final List<T> entities) {
-        final CompletableFuture<Void> future =
-                this.vertxDAO.updateAsync(entities);
-        return Async.toFuture(future)
-                .compose(result -> Future.succeededFuture(entities));
-    }
-
-    // CRUD - Existing/Missing ------------------------------------------
-
-    public <T> Future<T> saveAsync(final Object id, final T updated) {
-        return saveAsync(id, (target) -> this.analyzer.copyEntity(target, updated));
-    }
-
-    public <T> Future<T> saveAsync(final Object id, final Function<T, T> copyFun) {
-        return this.<T>findByIdAsync(id).compose(old ->
-                this.<T>updateAsync(copyFun.apply(old)));
-    }
 
     public <T> Future<T> upsertReturningPrimaryAsync(final JsonObject andFilters, final T updated, final Consumer<Long> consumer) {
         return this.<T>fetchOneAndAsync(andFilters).compose(item -> Fn.match(
@@ -167,12 +275,6 @@ public class UxJooq {
     }
 
     // CRUD - Delete ----------------------------------------------------
-    public <T> Future<T> deleteAsync(final T entity) {
-        final CompletableFuture<Void> future =
-                this.vertxDAO.deleteAsync(Arrays.asList(entity));
-        return Async.toFuture(future)
-                .compose(result -> Future.succeededFuture(entity));
-    }
 
     public <T> Future<Boolean> deleteAsync(final JsonObject filters) {
         return deleteAsync(filters, "");
@@ -189,90 +291,8 @@ public class UxJooq {
                 .compose(ids -> this.deleteByIdAsync(ids));
     }
 
-    public <T> Future<Boolean> deleteByIdAsync(final Object id) {
-        final CompletableFuture<Void> future =
-                this.vertxDAO.deleteByIdAsync(id);
-        return Async.toFuture(future)
-                .compose(result -> Future.succeededFuture(Boolean.TRUE));
-    }
-
-    public <T> Future<Boolean> deleteByIdAsync(final Collection<Object> ids) {
-        final CompletableFuture<Void> future =
-                this.vertxDAO.deleteByIdAsync(ids);
-        return Async.toFuture(future)
-                .compose(result -> Future.succeededFuture(Boolean.TRUE));
-    }
-
-    public <T> Future<Boolean> deleteByIdAsync(final Object... ids) {
-        final CompletableFuture<Void> future =
-                this.vertxDAO.deleteByIdAsync(Arrays.asList(ids));
-        return Async.toFuture(future)
-                .compose(result -> Future.succeededFuture(Boolean.TRUE));
-    }
-
-    public <T> Future<Boolean> existsByIdAsync(final Object id) {
-        final CompletableFuture<Boolean> future =
-                this.vertxDAO.existsByIdAsync(id);
-        return Async.toFuture(future);
-    }
-
-    public <T> Future<Boolean> existsOneAsync(final JsonObject andFilters) {
-        return this.<T>fetchOneAndAsync(andFilters)
-                .compose(item -> Future.succeededFuture(null != item));
-    }
-
     // Filter column called
-    public <T> Future<T> fetchOneAsync(final String field, final Object value) {
-        final CompletableFuture<T> future =
-                this.vertxDAO.fetchOneAsync(this.analyzer.getColumn(field), value);
-        return Async.toFuture(future);
-    }
 
-    // Filter transform called
-    public <T> Future<T> fetchOneAndAsync(final JsonObject andFilters) {
-        final Condition condition = JooqCond.transform(andFilters, Operator.AND, this.analyzer::getColumn);
-        final CompletableFuture<T> future =
-                this.vertxDAO.fetchOneAsync(condition);
-        return Async.toFuture(future);
-    }
-
-    // Filter column called
-    // Fetch List
-    public <T> Future<List<T>> fetchAsync(final String field, final Object value) {
-        final CompletableFuture<List<T>> future =
-                this.vertxDAO.fetchAsync(this.analyzer.getColumn(field), Arrays.asList(value));
-        return Async.toFuture(future);
-    }
-
-
-    // Filter column called
-    public <T> Future<List<T>> fetchInAsync(final String column, final Object... value) {
-        final JsonArray values = Ut.toJArray(Arrays.asList(value));
-        return fetchInAsync(column, values);
-    }
-
-    // Filter column called
-    public <T> Future<List<T>> fetchInAsync(final String field, final JsonArray values) {
-        final CompletableFuture<List<T>> future =
-                this.vertxDAO.fetchAsync(this.analyzer.getColumn(field), values.getList());
-        return Async.toFuture(future);
-    }
-
-    // Filter transform called
-    public <T> Future<List<T>> fetchAndAsync(final JsonObject andFilters) {
-        final Condition condition = JooqCond.transform(andFilters, Operator.AND, this.analyzer::getColumn);
-        final CompletableFuture<List<T>> future =
-                this.vertxDAO.fetchAsync(condition);
-        return Async.toFuture(future);
-    }
-
-    // Filter transform called
-    public <T> Future<List<T>> fetchOrAsync(final JsonObject orFilters) {
-        final Condition condition = JooqCond.transform(orFilters, Operator.OR, this.analyzer::getColumn);
-        final CompletableFuture<List<T>> future =
-                this.vertxDAO.fetchAsync(condition);
-        return Async.toFuture(future);
-    }
 
     public Future<JsonObject> searchOrAsync(final Inquiry inquiry) {
         return this.searchOrAsync(inquiry, "");
