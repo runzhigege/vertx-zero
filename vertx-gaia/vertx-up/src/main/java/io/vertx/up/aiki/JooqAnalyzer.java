@@ -2,6 +2,7 @@ package io.vertx.up.aiki;
 
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.atom.query.Inquiry;
@@ -146,8 +147,19 @@ class JooqAnalyzer {
         return Async.toFuture(this.vertxDAO.executeAsync(function));
     }
 
+    <T> Integer count(final Inquiry inquiry, final Operator operator) {
+        return count(null == inquiry.getCriteria() ? new JsonObject() : inquiry.getCriteria().toJson(), operator);
+    }
+
+    <T> Integer count(final JsonObject filters, final Operator operator) {
+        final DSLContext context = JooqInfix.getDSL();
+        return null == filters ? context.fetchCount(this.vertxDAO.getTable()) :
+                context.fetchCount(this.vertxDAO.getTable(), JooqCond.transform(filters, operator, this::getColumn));
+    }
+
     <T> Future<List<T>> searchAsync(final JsonObject criteria) {
-        return Async.toFuture(this.vertxDAO.executeAsync(context -> this.searchInternal(context, criteria)));
+        final Function<DSLContext, List<T>> function = context -> this.searchInternal(context, criteria);
+        return Async.toFuture(this.vertxDAO.executeAsync(function));
     }
 
     <T> List<T> search(final JsonObject criteria) {
@@ -156,63 +168,123 @@ class JooqAnalyzer {
     }
 
     <T> Future<List<T>> searchAsync(final Inquiry inquiry, final Operator operator) {
-        // Pager, Sort, Criteria Only, this mode do not support projection
-        final Function<DSLContext, List<T>> function
-                = (dslContext) -> {
-            // Started steps
-            final SelectWhereStep started = dslContext.selectFrom(this.vertxDAO.getTable());
-            // Condition set
-            SelectConditionStep conditionStep = null;
-            if (null != inquiry.getCriteria()) {
-                final Condition condition = JooqCond.transform(inquiry.getCriteria().toJson(), operator, this::getColumn);
-                conditionStep = started.where(condition);
-            }
-            // Sorted Enabled
-            SelectSeekStepN selectStep = null;
-            if (null != inquiry.getSorter()) {
-                final JsonObject sorter = inquiry.getSorter().toJson();
-                final List<OrderField> orders = new ArrayList<>();
-                for (final String field : sorter.fieldNames()) {
-                    final boolean asc = sorter.getBoolean(field);
-                    final Field column = this.getColumn(field);
-                    orders.add(asc ? column.asc() : column.desc());
-                }
-                if (null == conditionStep) {
-                    selectStep = started.orderBy(orders);
-                } else {
-                    selectStep = conditionStep.orderBy(orders);
-                }
-            }
-            // Pager Enabled
-            SelectWithTiesAfterOffsetStep pagerStep = null;
-            if (null != inquiry.getPager()) {
-                final Pager pager = inquiry.getPager();
-                if (null == selectStep && null == conditionStep) {
-                    pagerStep = started.offset(pager.getStart()).limit(pager.getSize());
-                } else if (null == selectStep) {
-                    pagerStep = conditionStep.offset(pager.getStart()).limit(pager.getSize());
-                } else {
-                    pagerStep = selectStep.offset(pager.getStart()).limit(pager.getSize());
-                }
-            }
-            // Returned one by one
-            if (null != pagerStep) {
-                return pagerStep.fetch(this.vertxDAO.mapper());
-            }
-            if (null != selectStep) {
-                return selectStep.fetch(this.vertxDAO.mapper());
-            }
-            if (null != conditionStep) {
-                return conditionStep.fetch(this.vertxDAO.mapper());
-            }
-            return started.fetch(this.vertxDAO.mapper());
-        };
+        final Function<DSLContext, List<T>> function = context -> this.searchInternal(context, inquiry, operator);
         return Async.toFuture(this.vertxDAO.executeAsync(function));
     }
 
-    private <T> List<T> searchInternal(final DSLContext context, final JsonObject criteria) {
+    <T> List<T> search(final Inquiry inquiry, final Operator operator) {
+        final DSLContext context = JooqInfix.getDSL();
+        return this.searchInternal(context, inquiry, operator);
+    }
+
+    Future<JsonArray> searchJArrayAsync(final Inquiry inquiry, final Operator operator) {
+        return this.searchAsync(inquiry, operator).compose(list -> {
+            if (null == inquiry.getProjection()) {
+                return Ux.thenJsonMore(list);
+            } else {
+                return Ux.thenJsonMore(list).compose(array -> Uarr.create(array)
+                        .remove(inquiry.getProjection().toArray(new String[]{}))
+                        .toFuture());
+            }
+        });
+    }
+
+    Future<JsonObject> searchJObjectAsync(final Inquiry inquiry, final String pojo, final Operator operator) {
+        final JsonObject response = new JsonObject();
+        return this.searchAsync(inquiry, operator)
+                .compose(list -> Ux.thenJsonMore(list, pojo))
+                .compose(array -> {
+                    response.put("list", array);
+                    return this.countAsync(inquiry, operator);
+                })
+                .compose(counter -> {
+                    response.put("count", counter);
+                    return Future.succeededFuture(response);
+                });
+    }
+
+    Future<JsonObject> searchJObjectAsync(final Inquiry inquiry, final String pojo) {
+        // No Root Operator
+        return this.searchJObjectAsync(inquiry, pojo, null);
+    }
+
+    <T> JsonObject searchJObject(final Inquiry inquiry, final String pojo, final Operator operator) {
+        final JsonObject response = new JsonObject();
+        final List<T> list = this.search(inquiry, operator);
+        response.put("list", Ux.thenJsonMore(list, pojo));
+        final Integer counter = this.count(inquiry, operator);
+        response.put("count", counter);
+        return response;
+    }
+
+    <T> JsonObject searchJObject(final Inquiry inquiry, final String pojo) {
+        return searchJObject(inquiry, pojo, null);
+    }
+
+    <T> JsonArray searchJArray(final Inquiry inquiry, final Operator operator) {
+        final List<T> list = this.search(inquiry, operator);
+        JsonArray result = Ux.toArray(list);
+        if (null != inquiry.getProjection()) {
+            result = Uarr.create(result)
+                    .remove(inquiry.getProjection().toArray(new String[]{}))
+                    .to();
+        }
+        return result;
+    }
+
+    private <T> List<T> searchInternal(final DSLContext dslContext, final Inquiry inquiry, final Operator operator) {
         // Started steps
-        final SelectWhereStep started = context.selectFrom(this.vertxDAO.getTable());
+        final SelectWhereStep started = dslContext.selectFrom(this.vertxDAO.getTable());
+        // Condition set
+        SelectConditionStep conditionStep = null;
+        if (null != inquiry.getCriteria()) {
+            final Condition condition = JooqCond.transform(inquiry.getCriteria().toJson(), operator, this::getColumn);
+            conditionStep = started.where(condition);
+        }
+        // Sorted Enabled
+        SelectSeekStepN selectStep = null;
+        if (null != inquiry.getSorter()) {
+            final JsonObject sorter = inquiry.getSorter().toJson();
+            final List<OrderField> orders = new ArrayList<>();
+            for (final String field : sorter.fieldNames()) {
+                final boolean asc = sorter.getBoolean(field);
+                final Field column = this.getColumn(field);
+                orders.add(asc ? column.asc() : column.desc());
+            }
+            if (null == conditionStep) {
+                selectStep = started.orderBy(orders);
+            } else {
+                selectStep = conditionStep.orderBy(orders);
+            }
+        }
+        // Pager Enabled
+        SelectWithTiesAfterOffsetStep pagerStep = null;
+        if (null != inquiry.getPager()) {
+            final Pager pager = inquiry.getPager();
+            if (null == selectStep && null == conditionStep) {
+                pagerStep = started.offset(pager.getStart()).limit(pager.getSize());
+            } else if (null == selectStep) {
+                pagerStep = conditionStep.offset(pager.getStart()).limit(pager.getSize());
+            } else {
+                pagerStep = selectStep.offset(pager.getStart()).limit(pager.getSize());
+            }
+        }
+        // Returned one by one
+        if (null != pagerStep) {
+            return pagerStep.fetch(this.vertxDAO.mapper());
+        }
+        if (null != selectStep) {
+            return selectStep.fetch(this.vertxDAO.mapper());
+        }
+        if (null != conditionStep) {
+            return conditionStep.fetch(this.vertxDAO.mapper());
+        }
+        return started.fetch(this.vertxDAO.mapper());
+    }
+
+    private <T> List<T> searchInternal(final DSLContext dslContext, final JsonObject criteria) {
+        // Started steps
+        final SelectWhereStep started = dslContext.selectFrom(this.vertxDAO.getTable());
         // Condition injection
         SelectConditionStep conditionStep = null;
         if (null != criteria) {
