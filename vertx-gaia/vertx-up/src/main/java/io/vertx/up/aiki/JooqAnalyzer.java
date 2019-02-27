@@ -3,6 +3,7 @@ package io.vertx.up.aiki;
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
 import io.vertx.up.log.Annal;
@@ -146,19 +147,12 @@ class JooqAnalyzer {
     }
 
     <T> Future<List<T>> searchAsync(final JsonObject criteria) {
-        final Function<DSLContext, List<T>> function
-                = (dslContext) -> {
-            // Started steps
-            final SelectWhereStep started = dslContext.selectFrom(this.vertxDAO.getTable());
-            // Condition set
-            SelectConditionStep conditionStep = null;
-            if (null != criteria) {
-                final Condition condition = JooqCond.transform(criteria, null, this::getColumn);
-                conditionStep = started.where(condition);
-            }
-            return started.fetch(this.vertxDAO.mapper());
-        };
-        return Async.toFuture(this.vertxDAO.executeAsync(function));
+        return Async.toFuture(this.vertxDAO.executeAsync(context -> this.searchInternal(context, criteria)));
+    }
+
+    <T> List<T> search(final JsonObject criteria) {
+        final DSLContext context = JooqInfix.getDSL();
+        return this.searchInternal(context, criteria);
     }
 
     <T> Future<List<T>> searchAsync(final Inquiry inquiry, final Operator operator) {
@@ -214,5 +208,17 @@ class JooqAnalyzer {
             return started.fetch(this.vertxDAO.mapper());
         };
         return Async.toFuture(this.vertxDAO.executeAsync(function));
+    }
+
+    private <T> List<T> searchInternal(final DSLContext context, final JsonObject criteria) {
+        // Started steps
+        final SelectWhereStep started = context.selectFrom(this.vertxDAO.getTable());
+        // Condition injection
+        SelectConditionStep conditionStep = null;
+        if (null != criteria) {
+            final Condition condition = JooqCond.transform(criteria, null, this::getColumn);
+            conditionStep = started.where(condition);
+        }
+        return started.fetch(this.vertxDAO.mapper());
     }
 }
