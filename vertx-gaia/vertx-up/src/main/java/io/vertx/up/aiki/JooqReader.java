@@ -20,7 +20,6 @@ import java.util.List;
 @SuppressWarnings("all")
 public class JooqReader {
 
-    private static JooqReader INSTANCE;
     private transient final VertxDAO vertxDAO;
     private transient JooqAnalyzer analyzer;
 
@@ -29,12 +28,7 @@ public class JooqReader {
     }
 
     static JooqReader create(final VertxDAO vertxDAO) {
-        synchronized (JooqWriter.class) {
-            if (null == INSTANCE) {
-                INSTANCE = new JooqReader(vertxDAO);
-            }
-            return INSTANCE;
-        }
+        return new JooqReader(vertxDAO);
     }
 
     JooqReader on(final JooqAnalyzer analyzer) {

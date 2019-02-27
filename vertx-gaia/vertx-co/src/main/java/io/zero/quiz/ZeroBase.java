@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.junit.RunTestOnContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
 import io.vertx.zero.exception.ZeroException;
-import io.vertx.zero.log.Log;
 import io.vertx.zero.marshal.reliable.Insurer;
 import io.zero.epic.Ut;
 import org.junit.Rule;
@@ -22,8 +21,8 @@ public abstract class ZeroBase extends EpicBase {
             throws ZeroException {
         final Insurer insurer
                 = Ut.singleton(insurerCls);
-        Log.info(this.getLogger(), "[ ZERO Test ] Input data ( Object ): {0}", data);
-        Log.info(this.getLogger(), "[ ZERO Test ] Rule data: {0}", rule);
+        this.getLogger().info("[ ZERO Test ] Input data ( Object ): {0}", data);
+        this.getLogger().info("[ ZERO Test ] Rule data: {0}", rule);
         insurer.flumen(data, rule);
     }
 
@@ -32,8 +31,8 @@ public abstract class ZeroBase extends EpicBase {
             throws ZeroException {
         final Insurer insurer
                 = Ut.singleton(insurerCls);
-        Log.info(this.getLogger(), "[ ZERO Test ] Input data ( Array ): {0}", array);
-        Log.info(this.getLogger(), "[ ZERO Test ] Rule data: {0}", rule);
+        this.getLogger().info("[ ZERO Test ] Input data ( Array ): {0}", array);
+        this.getLogger().info("[ ZERO Test ] Rule data: {0}", rule);
         insurer.flumen(array, rule);
     }
 }
