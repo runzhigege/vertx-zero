@@ -7,10 +7,12 @@ import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.ZeroException;
 import io.zero.epic.fn.ZeroBiConsumer;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * For collection
@@ -65,6 +67,12 @@ class Congregation {
                 }
             }
         }
+    }
+
+    static <F, S> void exec(final Collection<F> firsts,
+                            final Function<F, Collection<S>> seconds,
+                            final BiConsumer<F, S> consumer) {
+        firsts.forEach(first -> seconds.apply(first).forEach(second -> consumer.accept(first, second)));
     }
 
     /**
