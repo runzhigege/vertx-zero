@@ -679,6 +679,14 @@ public class Ut {
         Congregation.exec(array, fnEach);
     }
 
+    public static <F, S> void itCollection(final Collection<F> firsts, final Function<F, Collection<S>> seconds, final BiConsumer<F, S> consumer) {
+        Congregation.exec(firsts, seconds, consumer);
+    }
+
+    public static <F, S> void itCollection(final Collection<F> firsts, final Function<F, Collection<S>> seconds, final BiConsumer<F, S> consumer, final BiPredicate<F, S> predicate) {
+        Congregation.exec(firsts, seconds, consumer, predicate);
+    }
+
     public static <T> void itJObject(final JsonObject data, final BiConsumer<T, String> fnEach) {
         Congregation.exec(data, fnEach);
     }
