@@ -9,6 +9,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.zero.exception.ZeroException;
+import io.zero.epic.fn.Actuator;
 import io.zero.epic.fn.ZeroBiConsumer;
 
 import java.io.File;
@@ -685,6 +686,10 @@ public class Ut {
 
     public static <F, S> void itCollection(final Collection<F> firsts, final Function<F, Collection<S>> seconds, final BiConsumer<F, S> consumer, final BiPredicate<F, S> predicate) {
         Congregation.exec(firsts, seconds, consumer, predicate);
+    }
+
+    public static void itRepeat(final Integer times, final Actuator actuator) {
+        Congregation.exec(times, actuator);
     }
 
     public static <T> void itJObject(final JsonObject data, final BiConsumer<T, String> fnEach) {
