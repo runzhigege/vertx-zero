@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.ZeroException;
+import io.zero.epic.fn.Actuator;
 import io.zero.epic.fn.ZeroBiConsumer;
 
 import java.util.Collection;
@@ -84,6 +85,15 @@ class Congregation {
         firsts.forEach(first -> seconds.apply(first)
                 .stream().filter(second -> predicate.test(first, second))
                 .forEach(second -> consumer.accept(first, second)));
+    }
+
+    static <T> void exec(final Integer times,
+                         final Actuator actuator) {
+        int start = 0;
+        while (start < times) {
+            actuator.execute();
+            start++;
+        }
     }
 
     /**
