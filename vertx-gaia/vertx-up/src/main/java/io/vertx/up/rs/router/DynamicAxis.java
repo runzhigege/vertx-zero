@@ -44,7 +44,7 @@ public class DynamicAxis implements Axis<Router> {
             plugRouter.mount(router, routerConfig);
         } else {
             if (Values.ONE == LOG_FLAG_END.getAndIncrement()) {
-                LOGGER.info(Info.DY_SKIP, this.NAME, Fn.getNull(null, clazz::getName, clazz));
+                LOGGER.info(Info.DY_SKIP, NAME, Fn.getNull(null, clazz::getName, clazz));
             }
         }
     }
