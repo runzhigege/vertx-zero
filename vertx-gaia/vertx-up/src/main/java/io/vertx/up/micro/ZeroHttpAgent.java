@@ -14,10 +14,7 @@ import io.vertx.up.eon.em.Etat;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.center.ZeroRegistry;
 import io.vertx.up.rs.Axis;
-import io.vertx.up.rs.router.EventAxis;
-import io.vertx.up.rs.router.FilterAxis;
-import io.vertx.up.rs.router.RouterAxis;
-import io.vertx.up.rs.router.WallAxis;
+import io.vertx.up.rs.router.*;
 import io.vertx.up.web.ZeroGrid;
 import io.vertx.zero.eon.Values;
 import io.zero.epic.Ut;
@@ -46,15 +43,21 @@ public class ZeroHttpAgent extends AbstractVerticle {
         /* 1.Call router hub to mount commont **/
         final Axis<Router> routerAxiser = Fn.poolThread(Pool.ROUTERS,
                 () -> Ut.instance(RouterAxis.class));
+
         /* 2.Call route hub to mount defined **/
         final Axis<Router> axiser = Fn.poolThread(Pool.EVENTS,
                 () -> Ut.instance(EventAxis.class));
+        final Axis<Router> dynamic = Fn.poolThread(Pool.DYNAMICS,
+                () -> Ut.instance(DynamicAxis.class));
+
         /* 3.Call route hub to mount walls **/
         final Axis<Router> wallAxiser = Fn.poolThread(Pool.WALLS,
                 () -> Ut.instance(WallAxis.class, this.vertx));
+
         /* 4.Call route hub to mount filters **/
         final Axis<Router> filterAxiser = Fn.poolThread(Pool.FILTERS,
                 () -> Ut.instance(FilterAxis.class));
+
         /* 5.Get the default HttpServer Options **/
         ZeroAtomic.HTTP_OPTS.forEach((port, option) -> {
             /* 5.1.Single server processing **/
@@ -70,6 +73,13 @@ public class ZeroHttpAgent extends AbstractVerticle {
             wallAxiser.mount(router);
             // Event
             axiser.mount(router);
+            {
+                /*
+                 * Dynamic Extension for some user-defined router to resolve some spec
+                 * requirement such as Data Driven System and Origin X etc.
+                 */
+                dynamic.mount(router);
+            }
             // Filter
             filterAxiser.mount(router);
 

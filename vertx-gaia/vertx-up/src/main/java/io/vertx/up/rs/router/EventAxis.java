@@ -48,40 +48,37 @@ public class EventAxis implements Axis<Router> {
     @Override
     public void mount(final Router router) {
         // Extract Event foreach
-        EVENTS.forEach(event -> {
-            // Build Route and connect to each Action
-            Fn.safeSemi(null == event, LOGGER,
-                    () -> LOGGER.warn(Info.NULL_EVENT, this.getClass().getName()),
-                    () -> {
-                        // 1. Verify
-                        Verifier.verify(event);
+        EVENTS.forEach(event -> Fn.safeSemi(null == event, LOGGER,
+                () -> LOGGER.warn(Info.NULL_EVENT, this.getClass().getName()),
+                () -> {
+                    // 1. Verify
+                    Verifier.verify(event);
 
-                        final Route route = router.route();
-                        // 2. Path, Method, Order
-                        Hub<Route> hub = Fn.poolThread(Pool.URIHUBS,
-                                () -> Ut.instance(UriHub.class));
-                        hub.mount(route, event);
-                        // 3. Consumes/Produces
-                        hub = Fn.poolThread(Pool.MEDIAHUBS,
-                                () -> Ut.instance(MediaHub.class));
-                        hub.mount(route, event);
+                    final Route route = router.route();
+                    // 2. Path, Method, Order
+                    Hub<Route> hub = Fn.poolThread(Pool.URIHUBS,
+                            () -> Ut.instance(UriHub.class));
+                    hub.mount(route, event);
+                    // 3. Consumes/Produces
+                    hub = Fn.poolThread(Pool.MEDIAHUBS,
+                            () -> Ut.instance(MediaHub.class));
+                    hub.mount(route, event);
 
-                        // 4. Request validation
-                        final Depot depot = Depot.create(event);
-                        // 5. Request workflow executor: handler
-                        final Aim<RoutingContext> aim = this.splitter.distribute(event);
+                    // 4. Request validation
+                    final Depot depot = Depot.create(event);
+                    // 5. Request workflow executor: handler
+                    final Aim<RoutingContext> aim = this.splitter.distribute(event);
 
-                        /*
-                         * 6. Handler chain
-                         * 1) Mime Analyzer ( Build arguments )
-                         * 2) Validation
-                         * 3) Execute handler ( Code Logical )
-                         * 4) Uniform failure handler
-                         */
-                        route.handler(this.verifier.signal(depot))
-                                .handler(aim.attack(event))
-                                .failureHandler(CommonEndurer.create());
-                    });
-        });
+                    /*
+                     * 6. Handler chain
+                     * 1) Mime Analyzer ( Build arguments )
+                     * 2) Validation
+                     * 3) Execute handler ( Code Logical )
+                     * 4) Uniform failure handler
+                     */
+                    route.handler(this.verifier.signal(depot))
+                            .handler(aim.attack(event))
+                            .failureHandler(CommonEndurer.create());
+                }));
     }
 }
