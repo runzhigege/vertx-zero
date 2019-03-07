@@ -7,6 +7,8 @@ import io.vertx.zero.exception.ZeroRunException;
 import io.vertx.zero.log.Errors;
 import io.zero.epic.Ut;
 
+import java.text.MessageFormat;
+
 /**
  *
  */
@@ -17,9 +19,8 @@ public abstract class WebException extends ZeroRunException {
     protected static final String CODE = "code";
 
     private final String message;
-
     protected HttpStatusCode status;
-
+    private transient Object[] params;
     private String readible;
 
     public WebException(final String message) {
@@ -31,6 +32,7 @@ public abstract class WebException extends ZeroRunException {
     public WebException(final Class<?> clazz, final Object... args) {
         super(Strings.EMPTY);
         this.message = Errors.normalizeWeb(clazz, this.getCode(), args);
+        this.params = args;
         this.status = HttpStatusCode.BAD_REQUEST;
     }
 
@@ -55,7 +57,11 @@ public abstract class WebException extends ZeroRunException {
     }
 
     public void setReadible(final String readible) {
-        this.readible = readible;
+        if (null == this.params) {
+            this.readible = readible;
+        } else {
+            this.readible = MessageFormat.format(readible, this.params);
+        }
     }
 
     public JsonObject toJson() {
