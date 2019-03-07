@@ -1,5 +1,6 @@
 package io.vertx.up.rs.router;
 
+import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.up.log.Annal;
@@ -25,6 +26,7 @@ public class DynamicAxis implements Axis<Router> {
     private static final AtomicInteger LOG_FLAG_END = new AtomicInteger(0);
     private static final transient String NAME = DynamicAxis.class.getSimpleName();
     private transient final Node<JsonObject> uniform = Ut.singleton(ZeroUniform.class);
+    private transient Vertx vertxRef;
 
     @Override
     public void mount(final Router router) {
@@ -41,11 +43,17 @@ public class DynamicAxis implements Axis<Router> {
             // Mount dynamic router
             final PlugRouter plugRouter = Fn.poolThread(Pool.PLUGS,
                     () -> Ut.instance(clazz));
+            plugRouter.bind(this.vertxRef);
             plugRouter.mount(router, routerConfig);
         } else {
             if (Values.ONE == LOG_FLAG_END.getAndIncrement()) {
                 LOGGER.info(Info.DY_SKIP, NAME, Fn.getNull(null, clazz::getName, clazz));
             }
         }
+    }
+
+    public Axis<Router> bind(final Vertx vertx) {
+        this.vertxRef = vertx;
+        return this;
     }
 }

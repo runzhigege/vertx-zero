@@ -77,8 +77,10 @@ public class ZeroHttpAgent extends AbstractVerticle {
                 /*
                  * Dynamic Extension for some user-defined router to resolve some spec
                  * requirement such as Data Driven System and Origin X etc.
+                 * Call second method to inject vertx reference.
                  */
-                dynamic.mount(router);
+                // This step is required for bind vertx instance
+                ((DynamicAxis) dynamic).bind(this.vertx).mount(router);
             }
             // Filter
             filterAxiser.mount(router);
