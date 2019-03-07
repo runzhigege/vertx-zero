@@ -52,7 +52,7 @@ private static final long serialVersionUID = 0L;
             break;
           }
           case 18: {
-            if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+            if (!((mutable_bitField0_ & 0x00000002) != 0)) {
               responseParams_ = new java.util.ArrayList<io.vertx.tp.ipc.eon.ResponseParams>();
               mutable_bitField0_ |= 0x00000002;
             }
@@ -93,7 +93,7 @@ private static final long serialVersionUID = 0L;
             break;
           }
           default: {
-            if (!parseUnknownFieldProto3(
+            if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
               done = true;
             }
@@ -107,7 +107,7 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
-      if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+      if (((mutable_bitField0_ & 0x00000002) != 0)) {
         responseParams_ = java.util.Collections.unmodifiableList(responseParams_);
       }
       this.unknownFields = unknownFields.build();
@@ -312,23 +312,22 @@ private static final long serialVersionUID = 0L;
     }
     io.vertx.tp.ipc.eon.StreamServerRequest other = (io.vertx.tp.ipc.eon.StreamServerRequest) obj;
 
-    boolean result = true;
-    result = result && responseType_ == other.responseType_;
-    result = result && getResponseParamsList()
-        .equals(other.getResponseParamsList());
-    result = result && (hasEnvelop() == other.hasEnvelop());
+    if (responseType_ != other.responseType_) return false;
+    if (!getResponseParamsList()
+        .equals(other.getResponseParamsList())) return false;
+    if (hasEnvelop() != other.hasEnvelop()) return false;
     if (hasEnvelop()) {
-      result = result && getEnvelop()
-          .equals(other.getEnvelop());
+      if (!getEnvelop()
+          .equals(other.getEnvelop())) return false;
     }
-    result = result && algorithm_ == other.algorithm_;
-    result = result && (hasResponseStatus() == other.hasResponseStatus());
+    if (algorithm_ != other.algorithm_) return false;
+    if (hasResponseStatus() != other.hasResponseStatus()) return false;
     if (hasResponseStatus()) {
-      result = result && getResponseStatus()
-          .equals(other.getResponseStatus());
+      if (!getResponseStatus()
+          .equals(other.getResponseStatus())) return false;
     }
-    result = result && unknownFields.equals(other.unknownFields);
-    return result;
+    if (!unknownFields.equals(other.unknownFields)) return false;
+    return true;
   }
 
   @java.lang.Override
@@ -540,7 +539,7 @@ private static final long serialVersionUID = 0L;
       int to_bitField0_ = 0;
       result.responseType_ = responseType_;
       if (responseParamsBuilder_ == null) {
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((bitField0_ & 0x00000002) != 0)) {
           responseParams_ = java.util.Collections.unmodifiableList(responseParams_);
           bitField0_ = (bitField0_ & ~0x00000002);
         }
@@ -566,35 +565,35 @@ private static final long serialVersionUID = 0L;
 
     @java.lang.Override
     public Builder clone() {
-      return (Builder) super.clone();
+      return super.clone();
     }
     @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
-      return (Builder) super.setField(field, value);
+      return super.setField(field, value);
     }
     @java.lang.Override
     public Builder clearField(
         com.google.protobuf.Descriptors.FieldDescriptor field) {
-      return (Builder) super.clearField(field);
+      return super.clearField(field);
     }
     @java.lang.Override
     public Builder clearOneof(
         com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-      return (Builder) super.clearOneof(oneof);
+      return super.clearOneof(oneof);
     }
     @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         int index, java.lang.Object value) {
-      return (Builder) super.setRepeatedField(field, index, value);
+      return super.setRepeatedField(field, index, value);
     }
     @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
-      return (Builder) super.addRepeatedField(field, value);
+      return super.addRepeatedField(field, value);
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
@@ -724,7 +723,7 @@ private static final long serialVersionUID = 0L;
     private java.util.List<io.vertx.tp.ipc.eon.ResponseParams> responseParams_ =
       java.util.Collections.emptyList();
     private void ensureResponseParamsIsMutable() {
-      if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+      if (!((bitField0_ & 0x00000002) != 0)) {
         responseParams_ = new java.util.ArrayList<io.vertx.tp.ipc.eon.ResponseParams>(responseParams_);
         bitField0_ |= 0x00000002;
        }
@@ -953,7 +952,7 @@ private static final long serialVersionUID = 0L;
         responseParamsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             io.vertx.tp.ipc.eon.ResponseParams, io.vertx.tp.ipc.eon.ResponseParams.Builder, io.vertx.tp.ipc.eon.ResponseParamsOrBuilder>(
                 responseParams_,
-                ((bitField0_ & 0x00000002) == 0x00000002),
+                ((bitField0_ & 0x00000002) != 0),
                 getParentForChildren(),
                 isClean());
         responseParams_ = null;
@@ -961,7 +960,7 @@ private static final long serialVersionUID = 0L;
       return responseParamsBuilder_;
     }
 
-    private io.vertx.tp.ipc.eon.IpcEnvelop envelop_ = null;
+    private io.vertx.tp.ipc.eon.IpcEnvelop envelop_;
     private com.google.protobuf.SingleFieldBuilderV3<
         io.vertx.tp.ipc.eon.IpcEnvelop, io.vertx.tp.ipc.eon.IpcEnvelop.Builder, io.vertx.tp.ipc.eon.IpcEnvelopOrBuilder> envelopBuilder_;
     /**
@@ -1123,7 +1122,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private io.vertx.tp.ipc.eon.IpcStatus responseStatus_ = null;
+    private io.vertx.tp.ipc.eon.IpcStatus responseStatus_;
     private com.google.protobuf.SingleFieldBuilderV3<
         io.vertx.tp.ipc.eon.IpcStatus, io.vertx.tp.ipc.eon.IpcStatus.Builder, io.vertx.tp.ipc.eon.IpcStatusOrBuilder> responseStatusBuilder_;
     /**
@@ -1242,7 +1241,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
-      return super.setUnknownFieldsProto3(unknownFields);
+      return super.setUnknownFields(unknownFields);
     }
 
     @java.lang.Override
