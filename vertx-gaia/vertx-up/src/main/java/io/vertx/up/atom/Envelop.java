@@ -31,6 +31,8 @@ public class Envelop implements Serializable {
     private final Map<String, Object> context = new HashMap<>();
     private MultiMap headers;
     private User user;
+    // Message Id communication in Event Bus
+    private String key;
 
     private Session session;
 
@@ -298,6 +300,16 @@ public class Envelop implements Serializable {
 
     public void setContext(final Map<String, Object> data) {
         this.context.putAll(data);
+    }
+
+    // ------------------ Key for communication in Event bus ------
+    public Envelop key(final String key) {
+        this.key = key;
+        return this;
+    }
+
+    public String key() {
+        return this.key;
     }
 
     /**
