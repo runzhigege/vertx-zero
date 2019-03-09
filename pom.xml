@@ -85,7 +85,7 @@
         <hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
         <scala.version>2.12.4</scala.version>
         <feign.version>8.18.0</feign.version>
-        <guava.version>27.0.1-jre</guava.version>
+        <guava.version>27.1-jre</guava.version>
         <codehaus.janino.version>3.0.12</codehaus.janino.version>
         <cglib.version>3.2.10</cglib.version>
         <ignite.version>2.7.0</ignite.version>
@@ -106,7 +106,7 @@
         <!-- Vert.x Addition -->
         <rxjava2.version>2.2.7</rxjava2.version>
         <netty.tcnative.version>2.0.22.Final</netty.tcnative.version>
-        <netty.version>4.1.33.Final</netty.version>
+        <netty.version>4.1.34.Final</netty.version>
         <hazelcast.version>3.11.2</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
         <error.prone.version>2.3.3</error.prone.version>
