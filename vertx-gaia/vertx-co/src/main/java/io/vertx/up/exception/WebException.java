@@ -6,6 +6,7 @@ import io.vertx.zero.eon.Strings;
 import io.vertx.zero.exception.ZeroRunException;
 import io.vertx.zero.log.Errors;
 import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
 
 import java.text.MessageFormat;
 
@@ -57,11 +58,13 @@ public abstract class WebException extends ZeroRunException {
     }
 
     public void setReadible(final String readible) {
-        if (null == this.params) {
-            this.readible = readible;
-        } else {
-            this.readible = MessageFormat.format(readible, this.params);
-        }
+        Fn.safeNull(() -> {
+            if (null == this.params) {
+                this.readible = readible;
+            } else {
+                this.readible = MessageFormat.format(readible, this.params);
+            }
+        }, readible);
     }
 
     public JsonObject toJson() {
