@@ -8,6 +8,7 @@ import io.vertx.zero.log.Log;
 import io.zero.epic.fn.Fn;
 
 import java.io.*;
+import java.util.function.Supplier;
 
 /**
  * Stream read class.
@@ -77,21 +78,31 @@ final class Stream {
     static InputStream read(final String filename,
                             final Class<?> clazz) {
         final File file = new File(filename);
-        Log.debug(LOGGER, Info.INF_CUR, file.exists());
-        InputStream in = Fn.getSemi(file.exists(), null,
+        if (file.exists()) {
+            Log.debug(LOGGER, Info.INF_CUR, file.exists());
+        }
+        InputStream in = readSupplier(() -> Fn.getSemi(file.exists(), null,
                 () -> in(file),
-                () -> (null == clazz) ? in(filename) : in(filename, clazz));
-        Log.debug(LOGGER, Info.INF_PATH, filename, in);
+                () -> (null == clazz) ? in(filename) : in(filename, clazz)), filename);
         // Stream.class get
         if (null == in) {
-            in = Stream.class.getResourceAsStream(filename);
+            in = readSupplier(() -> Stream.class.getResourceAsStream(filename), filename);
         }
         // System.Class Loader
         if (null == in) {
-            in = ClassLoader.getSystemResourceAsStream(filename);
+            in = readSupplier(() -> ClassLoader.getSystemResourceAsStream(filename), filename);
         }
         if (null == in) {
             throw new EmptyStreamException(filename);
+        }
+        return in;
+    }
+
+    private static InputStream readSupplier(final Supplier<InputStream> supplier,
+                                            final String filename) {
+        final InputStream in = supplier.get();
+        if (null != in) {
+            Log.debug(LOGGER, Info.INF_PATH, filename, in);
         }
         return in;
     }

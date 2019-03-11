@@ -1,6 +1,7 @@
 package io.vertx.up.log;
 
 import io.vertx.core.VertxException;
+import io.vertx.core.impl.ConcurrentHashSet;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import io.vertx.up.web.ZeroAmbient;
@@ -8,6 +9,8 @@ import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.log.Log;
 import io.vertx.zero.log.internal.Log4JAnnal;
 import io.zero.epic.Ut;
+
+import java.util.Set;
 
 /**
  * Unite Logging system connect to vert.x, io.zero.epic kit of Vertx-Zero
@@ -37,16 +40,20 @@ class CommonAnnal implements Annal {
 
     private static final Logger RECORD =
             LoggerFactory.getLogger(CommonAnnal.class);
+    private static final Set<Class<?>> OUTED = new ConcurrentHashSet<>();
 
     private transient final Annal logger;
 
-    public CommonAnnal(final Class<?> clazz) {
+    CommonAnnal(final Class<?> clazz) {
         Class<?> inject = ZeroAmbient.getPlugin("logger");
         if (null == inject) {
             Log.debug(RECORD, Info.INF_INJECT, clazz);
             inject = Log4JAnnal.class;
         }
-        Log.debug(RECORD, Info.INF_ANNAL, inject, clazz);
+        if (!OUTED.contains(inject)) {
+            Log.debug(RECORD, Info.INF_ANNAL, inject, clazz);
+            OUTED.add(inject);
+        }
         this.logger = Ut.instance(inject, clazz);
     }
 

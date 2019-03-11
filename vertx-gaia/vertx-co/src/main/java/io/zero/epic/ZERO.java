@@ -1,8 +1,8 @@
 package io.zero.epic;
 
 import io.vertx.config.ConfigStoreOptions;
-import io.vertx.core.buffer.Buffer;
 
+import java.io.InputStream;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
@@ -117,7 +117,8 @@ interface Info {
 }
 
 interface Pool {
-    ConcurrentMap<String, Buffer> BUFFER_CACHE = new ConcurrentHashMap<>();
+
+    ConcurrentMap<String, InputStream> STREAM_CACHE = new ConcurrentHashMap<>();
 }
 
 /**
