@@ -42,6 +42,18 @@ public abstract class JooqBase extends ZeroBase {
         }
     }
 
+    public <T> Future<T> async(final TestContext context,
+                               final Supplier<Future<T>> supplier) {
+        final UxJooq jooq = this.getDao();
+        if (null != jooq) {
+            final Future<T> future = supplier.get();
+            this.asyncFlow(context, future, future::complete);
+            return future;
+        } else {
+            return Future.succeededFuture();  //
+        }
+    }
+
     public <T> void asyncFlow(final TestContext context,
                               final Future<T> future,
                               final Consumer<T> function) {
