@@ -105,7 +105,7 @@ class JooqAnalyzer {
         }
         Fn.outUp(null == targetField, LOGGER,
                 JooqFieldMissingException.class, UxJooq.class, field, Ut.field(this.vertxDAO, "type"));
-        LOGGER.debug(Info.JOOQ_FIELD, targetField);
+        LOGGER.debug(Info.JOOQ_FIELD, field, targetField);
 
         return DSL.field(targetField);
     }

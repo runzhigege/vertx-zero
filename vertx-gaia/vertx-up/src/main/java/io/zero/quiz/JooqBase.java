@@ -2,7 +2,6 @@ package io.zero.quiz;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.RunTestOnContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
@@ -35,38 +34,13 @@ public abstract class JooqBase extends ZeroBase {
     public <T> void async(final TestContext context,
                           final Supplier<Future<T>> supplier,
                           final Consumer<T> function) {
-        final UxJooq jooq = this.getDao();
-        if (null != jooq) {
-            final Future<T> future = supplier.get();
-            this.asyncFlow(context, future, function);
-        }
-    }
-
-    public <T> Future<T> async(final TestContext context,
-                               final Supplier<Future<T>> supplier) {
-        final UxJooq jooq = this.getDao();
-        if (null != jooq) {
-            final Future<T> future = supplier.get();
-            this.asyncFlow(context, future, future::complete);
-            return future;
-        } else {
-            return Future.succeededFuture();  //
-        }
+        Async.async(context, supplier, function, this::getDao);
     }
 
     public <T> void asyncFlow(final TestContext context,
                               final Future<T> future,
-                              final Consumer<T> function) {
-        final Async async = context.async();
-        future.setHandler(handler -> {
-            if (handler.succeeded()) {
-                function.accept(handler.result());
-            } else {
-                handler.cause().printStackTrace();
-                context.fail(handler.cause());
-            }
-            async.complete();
-        });
+                              final Consumer<T> consumer) {
+        Async.async(context, future, consumer);
     }
 
     public Condition eq(final String name, final Object value) {
