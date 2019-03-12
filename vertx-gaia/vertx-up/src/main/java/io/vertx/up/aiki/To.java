@@ -21,7 +21,7 @@ class To {
 
     @SuppressWarnings("unchecked")
     static <T> Future<T> toFuture(final T entity) {
-        return Fn.getNull(Future.future(),
+        return Fn.getNull(Future.succeededFuture(),
                 () -> Fn.getSemi(entity instanceof Throwable, null,
                         () -> Future.failedFuture((Throwable) entity),
                         () -> Future.succeededFuture(entity)),
