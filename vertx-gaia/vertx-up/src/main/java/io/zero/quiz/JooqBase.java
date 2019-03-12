@@ -37,11 +37,6 @@ public abstract class JooqBase extends ZeroBase {
         Async.async(context, supplier, function, this::getDao);
     }
 
-    public <T> Future<T> async(final TestContext context,
-                               final Supplier<Future<T>> supplier) {
-        return Async.async(context, supplier, this::getDao);
-    }
-
     public <T> void asyncFlow(final TestContext context,
                               final Future<T> future,
                               final Consumer<T> consumer) {
