@@ -22,7 +22,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 /**
- * Unity tunnel
+ * Unity nextTunnel
  */
 public class UnityTunnel implements Tunnel {
 

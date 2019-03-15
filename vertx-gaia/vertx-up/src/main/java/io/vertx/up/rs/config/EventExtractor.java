@@ -10,17 +10,14 @@ import io.vertx.up.atom.hold.Virtual;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
 import io.vertx.up.web.ZeroHelper;
-import io.vertx.zero.exception.AccessProxyException;
 import io.vertx.zero.exception.EventCodexMultiException;
 import io.vertx.zero.exception.EventSourceException;
-import io.vertx.zero.exception.NoArgConstructorException;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
 import javax.ws.rs.Path;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
@@ -59,13 +56,9 @@ public class EventExtractor implements Extractor<Set<Event>> {
         // Check basic specification: No Arg Constructor
         if (!clazz.isInterface()) {
             // Class direct.
-            Fn.outUp(!Ut.withNoArgConstructor(clazz), LOGGER,
-                    NoArgConstructorException.class,
-                    this.getClass(), clazz);
+            Verifier.noArg(clazz, this.getClass());
         }
-        Fn.outUp(!Modifier.isPublic(clazz.getModifiers()), LOGGER,
-                AccessProxyException.class,
-                this.getClass(), clazz);
+        Verifier.modifier(clazz, this.getClass());
         // Event Source Checking
         Fn.outUp(!clazz.isAnnotationPresent(EndPoint.class),
                 LOGGER, EventSourceException.class,
@@ -98,9 +91,9 @@ public class EventExtractor implements Extractor<Set<Event>> {
     /**
      * Scan for single
      *
-     * @param method
-     * @param root
-     * @return
+     * @param method single method that will be scanned.
+     * @param root   root path calculation
+     * @return Standard Event object
      */
     private Event extract(final Method method, final String root) {
         // 1.Method path
@@ -141,7 +134,7 @@ public class EventExtractor implements Extractor<Set<Event>> {
             if (null != implClass) {
                 proxy = Ut.singleton(implClass);
             } else {
-                /**
+                /*
                  * SPEC5: Interface only, direct api, in this situation,
                  * The proxy is null and the agent do nothing. The request will
                  * send to event bus direct. It's not needed to set

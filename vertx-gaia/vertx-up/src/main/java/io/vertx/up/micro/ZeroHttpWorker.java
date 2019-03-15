@@ -8,10 +8,10 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Receipt;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.follow.Invoker;
+import io.vertx.up.micro.follow.InvokerUtil;
 import io.vertx.up.micro.follow.JetSelector;
 import io.vertx.up.web.ZeroAnno;
 import io.vertx.zero.eon.Values;
-import io.vertx.zero.exception.WorkerArgumentException;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
@@ -50,7 +50,13 @@ public class ZeroHttpWorker extends AbstractVerticle {
             // 4. Get target reference and method
             final Object reference = receipt.getProxy();
             final Method method = receipt.getMethod();
-            this.verifyArgs(method, this.getClass());
+            /*
+             * In new version, there is not needed to verify
+             * signature of length in arguments, because the new version
+             * will support multi arguments in Worker component
+             * Parameter length must be > 0.
+             */
+            InvokerUtil.verifyArgs(method, this.getClass());
 
             // length = 1
             final Class<?>[] params = method.getParameterTypes();
@@ -88,17 +94,5 @@ public class ZeroHttpWorker extends AbstractVerticle {
             });
             outputMap.forEach((key, value) -> LOGGER.info(Info.MSG_INVOKER, key, Ut.toString(value), String.valueOf(value.size())));
         }
-    }
-
-    private void verifyArgs(final Method method,
-                            final Class<?> target) {
-
-        // 1. Ensure method length
-        final Class<?>[] params = method.getParameterTypes();
-        final Annal logger = Annal.get(target);
-        // 2. The parameters
-        Fn.outUp(Values.ONE != params.length,
-                logger, WorkerArgumentException.class,
-                target, method);
     }
 }
