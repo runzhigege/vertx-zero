@@ -11,9 +11,10 @@ import java.lang.reflect.Method;
  */
 public interface Invoker {
     /**
-     * @param returnType
-     * @param paramCls
-     * @return
+     * Ensure correct invoking
+     *
+     * @param returnType Method return type
+     * @param paramCls   Method parameters
      */
     void ensure(final Class<?> returnType,
                 final Class<?> paramCls);

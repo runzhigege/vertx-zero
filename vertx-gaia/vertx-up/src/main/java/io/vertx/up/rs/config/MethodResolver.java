@@ -32,6 +32,7 @@ class MethodResolver {
                 }
             };
 
+    @SuppressWarnings("all")
     public static HttpMethod resolve(final Method method) {
         // 1. Method checking.
         Fn.outUp(null == method, LOGGER,
