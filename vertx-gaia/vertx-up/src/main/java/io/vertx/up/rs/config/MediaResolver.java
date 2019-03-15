@@ -64,7 +64,8 @@ class MediaResolver {
                                 .filter(Objects::nonNull)
                                 .map(MediaType::valueOf)
                                 .filter(Objects::nonNull)
-                                .subscribe(result::add);
+                                .subscribe(result::add)
+                                .dispose();
                         return result.isEmpty() ? DEFAULTS : result;
                     });
         }, method, mediaCls);

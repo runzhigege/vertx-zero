@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 /**
  * void method(Envelop)
  */
-public class PingInvoker implements Invoker {
+public class PingInvoker extends AbstractInvoker {
 
     @Override
     public void ensure(final Class<?> returnType,

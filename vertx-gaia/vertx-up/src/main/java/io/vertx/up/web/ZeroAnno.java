@@ -89,14 +89,9 @@ public class ZeroAnno {
                 });
 
         /* Ipc Only **/
-        Fn.safeSemi(IPCS.isEmpty(),
-                LOGGER,
-                () -> {
-                    final Inquirer<ConcurrentMap<String, Method>> ipc =
-                            Ut.singleton(IpcInquirer.class);
-                    IPCS.putAll(ipc.scan(clazzes));
-                });
-
+        final Inquirer<ConcurrentMap<String, Method>> ipc =
+                Ut.singleton(IpcInquirer.class);
+        IPCS.putAll(ipc.scan(clazzes));
         /* Agent **/
         final Inquirer<ConcurrentMap<ServerType, List<Class<?>>>> agent =
                 Ut.singleton(AgentInquirer.class);

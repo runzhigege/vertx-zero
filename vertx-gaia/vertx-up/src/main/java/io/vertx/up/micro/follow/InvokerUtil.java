@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
  * Tool for invoker do shared works.
  */
 @SuppressWarnings("unused")
-class InvokerUtil {
+public class InvokerUtil {
     /**
      * Whether this method is void
      *
@@ -26,20 +26,22 @@ class InvokerUtil {
 
     /**
      * Arguments verification
+     * Public for replacing duplicated code
      *
      * @param method checked method.
      * @param target checked class
      */
-    static void verifyArgs(final Method method,
-                           final Class<?> target) {
+    public static void verifyArgs(final Method method,
+                                  final Class<?> target) {
 
         // 1. Ensure method length
         final Class<?>[] params = method.getParameterTypes();
         final Annal logger = Annal.get(target);
         // 2. The parameters
-        Fn.outUp(Values.ONE != params.length,
+        Fn.outUp(Values.ZERO == params.length,
                 logger, WorkerArgumentException.class,
                 target, method);
+
     }
 
     static void verify(

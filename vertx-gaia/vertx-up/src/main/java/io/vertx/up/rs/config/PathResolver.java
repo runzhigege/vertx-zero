@@ -81,8 +81,8 @@ class PathResolver {
      * 2. Append the '/' to first;
      * 3. Replaced all duplicated '//';
      *
-     * @param path
-     * @return
+     * @param path input path no normalized.
+     * @return calculated uri
      */
     private static String calculate(final String path) {
         String uri = path;
