@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 /**
  * void method(Messsage<Envelop>)
  */
-public class MessageInvoker implements Invoker {
+public class MessageInvoker extends AbstractInvoker {
     @Override
     public void ensure(final Class<?> returnType,
                        final Class<?> paramCls) {
