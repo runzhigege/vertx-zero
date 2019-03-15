@@ -1,5 +1,6 @@
 package up.god.test;
 
+import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
@@ -8,14 +9,14 @@ import io.vertx.up.annotations.Queue;
 public class ParamWorker {
 
     @Address("TEST://EVENT")
-    public JsonObject direct(final String first, final String second) {
-        return new JsonObject().put("first", first)
-                .put("second", second);
+    public Future<JsonObject> direct(final String first, final String second) {
+        return Future.succeededFuture(new JsonObject().put("first", first)
+                .put("second", second));
     }
 
     @Address("TEST://EVENT1")
-    public JsonObject onlyOne(final String first) {
-        return new JsonObject().put("first", first);
+    public Future<JsonObject> onlyOne(final String first) {
+        return Future.succeededFuture(new JsonObject().put("first", first));
     }
 
     @Address("TEST://EVENT2")

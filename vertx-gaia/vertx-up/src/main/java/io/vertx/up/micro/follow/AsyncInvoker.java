@@ -5,7 +5,6 @@ import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
-import io.vertx.zero.eon.Values;
 import io.zero.epic.Ut;
 
 import java.lang.reflect.Method;
@@ -29,8 +28,6 @@ public class AsyncInvoker extends AbstractInvoker {
                        final Method method,
                        final Message<Envelop> message) {
         final Envelop envelop = message.body();
-        // Get type of parameter first element
-        final Class<?> argType = method.getParameterTypes()[Values.IDX];
         // Deserialization from message bus.
         final Class<?> returnType = method.getReturnType();
         this.getLogger().info(Info.MSG_FUTURE, this.getClass(), returnType, false);
@@ -41,8 +38,14 @@ public class AsyncInvoker extends AbstractInvoker {
             final Future<Envelop> result = Ut.invoke(proxy, method.getName(), envelop);
             result.setHandler(item -> message.reply(item.result()));
         } else {
-            final Future future = this.invokeJson(proxy, method, envelop);
-            future.setHandler(Ux.toHandler(message));
+            final Object returnValue = this.invokeInternal(proxy, method, envelop);
+            if (null == returnValue) {
+                final Future future = Future.future();
+                future.setHandler(Ux.toHandler(message));
+            } else {
+                final Future future = (Future) returnValue;
+                future.setHandler(Ux.toHandler(message));
+            }
             /*
             final Object reference = envelop.data();
             final Object arguments = Ut.deserialize(Ut.toString(reference), argType);
