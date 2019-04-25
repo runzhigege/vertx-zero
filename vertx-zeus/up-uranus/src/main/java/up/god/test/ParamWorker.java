@@ -14,6 +14,12 @@ public class ParamWorker {
                 .put("second", second));
     }
 
+    @Address("TEST://EVENT3")
+    public Future<JsonObject> direct1(final String first, final String second) {
+        return Future.succeededFuture(new JsonObject().put("first", first)
+                .put("second", second));
+    }
+
     @Address("TEST://EVENT1")
     public Future<JsonObject> onlyOne(final String first) {
         return Future.succeededFuture(new JsonObject().put("first", first));

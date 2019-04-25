@@ -74,7 +74,7 @@
         <vertx.jooq.version>2.4.1</vertx.jooq.version>
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
         <vertx.jooq.code.version>4.1.0</vertx.jooq.code.version>
-        <mysql.version>8.0.15</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
 
         <jwt.version>3.8.0</jwt.version>
         <reflect.asm.version>1.11.9</reflect.asm.version>
@@ -93,7 +93,7 @@
         <mongodb.async.version>3.10.1</mongodb.async.version>
         <!-- Apache Common -->
         <common.jexl.version>3.1</common.jexl.version>
-        <common.lang3.version>3.8.1</common.lang3.version>
+        <common.lang3.version>3.9</common.lang3.version>
         <common.logging.version>1.2</common.logging.version>
         <common.net.version>3.6</common.net.version>
         <http.async.client.version>4.1.4</http.async.client.version>
@@ -106,7 +106,7 @@
         <!-- Vert.x Addition -->
         <rxjava2.version>2.2.8</rxjava2.version>
         <netty.tcnative.version>2.0.25.Final</netty.tcnative.version>
-        <netty.version>4.1.34.Final</netty.version>
+        <netty.version>4.1.35.Final</netty.version>
         <hazelcast.version>3.12</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
         <error.prone.version>2.3.3</error.prone.version>
