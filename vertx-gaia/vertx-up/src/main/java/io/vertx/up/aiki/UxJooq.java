@@ -13,7 +13,6 @@ import org.jooq.Condition;
 import org.jooq.Operator;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -50,8 +49,16 @@ public class UxJooq {
     }
 
     // -------------------- Condition Transform --------------------
+
     public static Condition transform(final JsonObject filters, final Operator operator) {
         return JooqCond.transform(filters, operator, null);
+    }
+
+    /**
+     * Direct analyzing the result to condition
+     */
+    public static Condition transform(final JsonObject filters) {
+        return JooqCond.transform(filters, null, null);
     }
 
     // -------------------- Bind Config --------------------
@@ -123,56 +130,49 @@ public class UxJooq {
 
     // -------------------- DELETE --------------------
     /* (Async / Sync) Delete By ( ID / IDs ) */
-    public Future<Boolean> deleteByIdAsync(final Object id) {
-        return this.writer.deleteByIdAsync(id);
+    public <ID> Future<Boolean> deleteByIdAsync(final ID id) {
+        return this.writer.<ID>deleteByIdAsync(id);
     }
 
-    public Future<Boolean> deleteByIdAsync(final Collection<Object> ids) {
-        return this.writer.deleteByIdAsync(ids);
+    public <ID> Future<Boolean> deleteByIdAsync(final ID... ids) {
+        return this.writer.<ID>deleteByIdAsync(Arrays.asList(ids));
     }
 
-    public Future<Boolean> deleteByIdAsync(final Object... ids) {
-        return this.writer.deleteByIdAsync(Arrays.asList(ids));
+    public <ID> Boolean deleteById(final ID id) {
+        return this.writer.<ID>deleteById(id);
     }
 
-    public Boolean deleteById(final Object id) {
-        return this.writer.deleteById(id);
-    }
-
-    public Boolean deleteById(final Collection<Object> ids) {
-        return this.writer.deleteById(ids);
-    }
-
-    public Boolean deleteById(final Object... ids) {
-        return this.writer.deleteById(Arrays.asList(ids));
+    public <ID> Boolean deleteById(final ID... ids) {
+        return this.writer.<ID>deleteById(Arrays.asList(ids));
     }
 
 
     /* (Async / Sync) Delete Entity */
     public <T> Future<T> deleteAsync(final T entity) {
-        return this.writer.deleteAsync(entity);
+        return this.writer.<T>deleteAsync(entity);
     }
 
     public <T> T delete(final T entity) {
-        return this.writer.delete(entity);
+        return this.writer.<T>delete(entity);
     }
 
 
     /* (Async / Sync) Delete by Filters */
-    public <T> Future<Boolean> deleteAsync(final JsonObject filters) {
-        return this.writer.deleteAsync(filters, "");
+    public <T, ID> Future<Boolean> deleteAsync(final JsonObject filters) {
+        return this.writer.<T, ID>deleteAsync(filters, "");
     }
 
-    public <T> Boolean delete(final JsonObject filters, final String pojo) {
-        return this.writer.delete(filters, pojo);
+    public <T, ID> Boolean delete(final JsonObject filters, final String pojo) {
+        return this.writer.<T, ID>delete(filters, pojo);
     }
 
-    public <T> Future<Boolean> deleteAsync(final JsonObject filters, final String pojo) {
-        return this.writer.deleteAsync(filters, pojo);
+    public <T, ID> Future<Boolean> deleteAsync(final JsonObject filters, final String pojo) {
+        return this.writer.<T, ID>deleteAsync(filters, pojo);
     }
 
-    public <T> Boolean delete(final JsonObject filters) {
-        return this.writer.delete(filters, "");
+    public <T, ID> Boolean delete(final JsonObject filters) {
+
+        return this.writer.<T, ID>delete(filters, "");
     }
 
     // -------------------- Fetch One/All --------------------
