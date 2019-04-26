@@ -2,8 +2,8 @@ package io.vertx.up.aiki;
 
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import org.jooq.Condition;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 /**
  * Jooq Splitted Writter
@@ -110,22 +109,20 @@ class JooqWriter {
         return Async.toFuture(future).compose(nil -> Future.succeededFuture(entity));
     }
 
-    Future<Boolean> deleteByIdAsync(final Object id) {
+    <ID> Future<Boolean> deleteByIdAsync(final ID id) {
         final CompletableFuture<Void> future = this.vertxDAO.deleteByIdAsync(id);
         return Async.toFuture(future).compose(nil -> Future.succeededFuture(Boolean.TRUE));
     }
 
-    Future<Boolean> deleteByIdAsync(final Collection<Object> ids) {
+    <ID> Future<Boolean> deleteByIdAsync(final Collection<ID> ids) {
         final CompletableFuture<Void> future = this.vertxDAO.deleteByIdAsync(ids);
         return Async.toFuture(future).compose(nil -> Future.succeededFuture(Boolean.TRUE));
     }
 
-    <T> Future<Boolean> deleteAsync(final JsonObject filters, final String pojo) {
-        return this.analyzer.searchAsync(filters)
-                .compose(Ux.fnJArray(this.analyzer.getPojoFile()))
-                .compose(array -> Future.succeededFuture(extractIds(array)))
-                .compose(item -> Future.succeededFuture(item.toArray()))
-                .compose(ids -> this.deleteByIdAsync(ids));
+    <T, ID> Future<Boolean> deleteAsync(final JsonObject filters, final String pojo) {
+        final Condition condition = JooqCond.transform(filters, null, this.analyzer::getColumn);
+        final CompletableFuture<Integer> deleted = this.vertxDAO.deleteExecAsync(condition);
+        return Async.toFuture(deleted).compose(nil -> Future.succeededFuture(Boolean.TRUE));
     }
 
     /* Sync delete operation: DELETE */
@@ -134,21 +131,21 @@ class JooqWriter {
         return entity;
     }
 
-    Boolean deleteById(final Object id) {
+    <ID> Boolean deleteById(final ID id) {
         this.vertxDAO.deleteById(id);
         return Boolean.TRUE;
     }
 
-    Boolean deleteById(final Collection<Object> ids) {
+    <ID> Boolean deleteById(final Collection<ID> ids) {
         this.vertxDAO.deleteById(ids);
         return Boolean.TRUE;
     }
 
-    <T> Boolean delete(final JsonObject filters, final String pojo) {
-        final List<T> results = this.analyzer.search(filters);
-        final JsonArray array = Ux.toArray(results, pojo);
-        final List<Object> ids = extractIds(array);
-        return this.deleteById(ids);
+    <T, ID> Boolean delete(final JsonObject filters, final String pojo) {
+        final Condition condition = JooqCond.transform(filters, null, this.analyzer::getColumn);
+        final List<T> result = this.reader.fetch(condition);
+        result.stream().map(item -> this.delete(item));
+        return Boolean.TRUE;
     }
 
     // ============ UPDATE Operation (Save) =============
@@ -160,12 +157,14 @@ class JooqWriter {
         final T old = this.reader.<T>findById(id);
         return copyFun.apply(old);
     }
-
-    // TODO: Analyzing Primary Key in future
-    private List<Object> extractIds(final JsonArray array) {
+    /*
+     * Old Code
+    private <ID> List<ID> extractIds(final JsonArray array) {
         return array.stream()
                 .map(item -> (JsonObject) item)
                 .map(item -> item.getValue("key"))
+                .filter(Objects::nonNull)
+                .map(item -> (ID) item)
                 .collect(Collectors.toList());
-    }
+    } */
 }
