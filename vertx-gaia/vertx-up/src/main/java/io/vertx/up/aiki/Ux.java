@@ -13,6 +13,7 @@ import io.vertx.ext.jwt.JWT;
 import io.vertx.ext.jwt.JWTOptions;
 import io.vertx.ext.mongo.FindOptions;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.atom.query.Criteria;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
 import io.vertx.up.atom.query.Sorter;
@@ -23,6 +24,7 @@ import io.zero.epic.container.RxHod;
 import io.zero.epic.fn.Actuator;
 import io.zero.epic.fn.Fn;
 import io.zero.epic.fn.wait.Log;
+import org.jooq.Condition;
 
 import java.util.List;
 import java.util.Set;
@@ -859,6 +861,15 @@ public final class Ux {
 
     public static Function<JsonObject, Future<JsonObject>> atomJoin(final JsonObject from, final String field) {
         return Atomic.joinFrom(from, field);
+    }
+
+    // -> Jooq Condition
+    public static Condition condition(final JsonObject filters) {
+        return UxJooq.transform(filters);
+    }
+
+    public static Condition condition(final Criteria criteria) {
+        return UxJooq.transform(criteria.toJson());
     }
 
     // -> Jooq
