@@ -7,7 +7,7 @@ public class _500RpcTransitInvokeException extends WebException {
     public _500RpcTransitInvokeException(final Class<?> clazz,
                                          final Method method,
                                          final Throwable ex) {
-        super(clazz, ex.getMessage(), method);
+        super(clazz, clazz.getName(), method, ex.getMessage());
     }
 
     @Override
