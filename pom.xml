@@ -87,7 +87,7 @@
         <feign.version>8.18.0</feign.version>
         <guava.version>27.1-jre</guava.version>
         <codehaus.janino.version>3.0.12</codehaus.janino.version>
-        <cglib.version>3.2.11</cglib.version>
+        <cglib.version>3.2.12</cglib.version>
         <ignite.version>2.7.0</ignite.version>
         <etcd.version>2.17.0</etcd.version>
         <mongodb.async.version>3.10.1</mongodb.async.version>
