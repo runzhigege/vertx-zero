@@ -20,6 +20,7 @@ public abstract class WebException extends ZeroRunException {
     protected static final String CODE = "code";
 
     private final String message;
+    private final Class<?> target;
     protected HttpStatusCode status;
     private transient Object[] params;
     private String readible;
@@ -28,6 +29,7 @@ public abstract class WebException extends ZeroRunException {
         super(message);
         this.message = message;
         this.status = HttpStatusCode.BAD_REQUEST;
+        this.target = null;      // Target;
     }
 
     public WebException(final Class<?> clazz, final Object... args) {
@@ -35,6 +37,7 @@ public abstract class WebException extends ZeroRunException {
         this.message = Errors.normalizeWeb(clazz, this.getCode(), args);
         this.params = args;
         this.status = HttpStatusCode.BAD_REQUEST;
+        this.target = clazz;     // Target;
     }
 
     public abstract int getCode();
@@ -42,6 +45,10 @@ public abstract class WebException extends ZeroRunException {
     @Override
     public String getMessage() {
         return this.message;
+    }
+
+    public Class<?> getTarget() {
+        return this.target;
     }
 
     public HttpStatusCode getStatus() {

@@ -79,7 +79,7 @@
         <jwt.version>3.8.0</jwt.version>
         <reflect.asm.version>1.11.9</reflect.asm.version>
         <asm.version>7.1</asm.version>
-        <lombok.version>1.18.6</lombok.version>
+        <lombok.version>1.18.8</lombok.version>
         <jetbrains.version>17.0.0</jetbrains.version>
         <guice.version>4.1.0</guice.version>
         <hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
@@ -87,7 +87,7 @@
         <feign.version>8.18.0</feign.version>
         <guava.version>27.1-jre</guava.version>
         <codehaus.janino.version>3.0.12</codehaus.janino.version>
-        <cglib.version>3.2.11</cglib.version>
+        <cglib.version>3.2.12</cglib.version>
         <ignite.version>2.7.0</ignite.version>
         <etcd.version>2.17.0</etcd.version>
         <mongodb.async.version>3.10.1</mongodb.async.version>
