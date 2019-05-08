@@ -66,6 +66,19 @@ class Announce {
         }
     }
 
+    static void outWeb(final Class<? extends WebException> webClass,
+                       final Object... args) {
+        final WebException error = Ut.instance(webClass, args);
+        if (null != error) {
+            final Class<?> target = error.getTarget();
+            if (null != target) {
+                final Annal logger = Annal.get(target);
+                logger.warn(error.getMessage());
+            }
+            throw error;
+        }
+    }
+
     static void toRun(final Annal logger,
                       final ZeroActuator actuator) {
         try {
