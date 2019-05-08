@@ -140,6 +140,19 @@ public class Fn {
         }
     }
 
+    /*
+     * WebException out
+     */
+    public static void outWeb(
+            final boolean condition,
+            final Class<? extends WebException> webClass,
+            final Object... args
+    ) {
+        if (condition) {
+            Announce.outWeb(webClass, args);
+        }
+    }
+
     /**
      * Defined jvm function to simply Exception function
      *
