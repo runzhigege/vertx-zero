@@ -132,6 +132,19 @@ public class Ut {
         return Stream.in(filename);
     }
 
+    // --- Out
+    public static boolean outString(final String file, final String data) {
+        return Out.write(file, data);
+    }
+
+    public static boolean outJson(final String file, final JsonObject data) {
+        return Out.write(file, data);
+    }
+
+    public static boolean outJson(final String file, final JsonArray data) {
+        return Out.write(file, data);
+    }
+
     // --- Reduce
     public static JsonArray reduceJArray(final JsonArray collection, final Object element) {
         return collection.add(element);
