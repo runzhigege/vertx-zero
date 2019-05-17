@@ -62,7 +62,7 @@
         <vertx.version>3.7.0</vertx.version>
         <stack.version>3.7.0</stack.version>
 
-        <jackson.version>2.9.8</jackson.version>
+        <jackson.version>2.9.9</jackson.version>
         <jws.version>2.1.1</jws.version>
         <jersey.version>2.28</jersey.version>
         <javax.el.version>3.0.1-b06</javax.el.version>
