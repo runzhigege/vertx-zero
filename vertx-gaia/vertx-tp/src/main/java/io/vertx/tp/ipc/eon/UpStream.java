@@ -60,21 +60,13 @@ public final class UpStream {
       "\001(\0132\037.io.vertx.tp.ipc.eon.IpcEnvelopB!\n\023" +
       "io.vertx.tp.ipc.eonB\010UpStreamP\001b\006proto3"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           io.vertx.tp.ipc.eon.em.UpEnum.getDescriptor(),
           io.vertx.tp.ipc.eon.UpStatus.getDescriptor(),
           io.vertx.tp.ipc.eon.UpEnvelop.getDescriptor(),
-        }, assigner);
+        });
     internal_static_io_vertx_tp_ipc_eon_StreamClientRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_io_vertx_tp_ipc_eon_StreamClientRequest_fieldAccessorTable = new

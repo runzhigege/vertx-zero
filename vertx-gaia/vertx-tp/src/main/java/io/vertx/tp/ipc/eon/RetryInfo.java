@@ -20,6 +20,13 @@ private static final long serialVersionUID = 0L;
   }
 
   @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(
+      UnusedPrivateParameter unused) {
+    return new RetryInfo();
+  }
+
+  @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet
   getUnknownFields() {
     return this.unknownFields;
@@ -49,9 +56,9 @@ private static final long serialVersionUID = 0L;
             break;
           }
           case 16: {
-            if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+            if (!((mutable_bitField0_ & 0x00000001) != 0)) {
               backoffMs_ = newIntList();
-              mutable_bitField0_ |= 0x00000002;
+              mutable_bitField0_ |= 0x00000001;
             }
             backoffMs_.addInt(input.readInt32());
             break;
@@ -59,9 +66,9 @@ private static final long serialVersionUID = 0L;
           case 18: {
             int length = input.readRawVarint32();
             int limit = input.pushLimit(length);
-            if (!((mutable_bitField0_ & 0x00000002) != 0) && input.getBytesUntilLimit() > 0) {
+            if (!((mutable_bitField0_ & 0x00000001) != 0) && input.getBytesUntilLimit() > 0) {
               backoffMs_ = newIntList();
-              mutable_bitField0_ |= 0x00000002;
+              mutable_bitField0_ |= 0x00000001;
             }
             while (input.getBytesUntilLimit() > 0) {
               backoffMs_.addInt(input.readInt32());
@@ -84,7 +91,7 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
-      if (((mutable_bitField0_ & 0x00000002) != 0)) {
+      if (((mutable_bitField0_ & 0x00000001) != 0)) {
         backoffMs_.makeImmutable(); // C
       }
       this.unknownFields = unknownFields.build();
@@ -104,7 +111,6 @@ private static final long serialVersionUID = 0L;
             io.vertx.tp.ipc.eon.RetryInfo.class, io.vertx.tp.ipc.eon.RetryInfo.Builder.class);
   }
 
-  private int bitField0_;
   public static final int PASSED_FIELD_NUMBER = 1;
   private boolean passed_;
   /**
@@ -378,7 +384,7 @@ private static final long serialVersionUID = 0L;
       passed_ = false;
 
       backoffMs_ = emptyIntList();
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000001);
       return this;
     }
 
@@ -406,14 +412,12 @@ private static final long serialVersionUID = 0L;
     public io.vertx.tp.ipc.eon.RetryInfo buildPartial() {
       io.vertx.tp.ipc.eon.RetryInfo result = new io.vertx.tp.ipc.eon.RetryInfo(this);
       int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
       result.passed_ = passed_;
-      if (((bitField0_ & 0x00000002) != 0)) {
+      if (((bitField0_ & 0x00000001) != 0)) {
         backoffMs_.makeImmutable();
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
       }
       result.backoffMs_ = backoffMs_;
-      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
@@ -468,7 +472,7 @@ private static final long serialVersionUID = 0L;
       if (!other.backoffMs_.isEmpty()) {
         if (backoffMs_.isEmpty()) {
           backoffMs_ = other.backoffMs_;
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           ensureBackoffMsIsMutable();
           backoffMs_.addAll(other.backoffMs_);
@@ -545,9 +549,9 @@ private static final long serialVersionUID = 0L;
 
     private com.google.protobuf.Internal.IntList backoffMs_ = emptyIntList();
     private void ensureBackoffMsIsMutable() {
-      if (!((bitField0_ & 0x00000002) != 0)) {
+      if (!((bitField0_ & 0x00000001) != 0)) {
         backoffMs_ = mutableCopy(backoffMs_);
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000001;
        }
     }
     /**
@@ -559,7 +563,7 @@ private static final long serialVersionUID = 0L;
      */
     public java.util.List<java.lang.Integer>
         getBackoffMsList() {
-      return ((bitField0_ & 0x00000002) != 0) ?
+      return ((bitField0_ & 0x00000001) != 0) ?
                java.util.Collections.unmodifiableList(backoffMs_) : backoffMs_;
     }
     /**
@@ -633,7 +637,7 @@ private static final long serialVersionUID = 0L;
      */
     public Builder clearBackoffMs() {
       backoffMs_ = emptyIntList();
-      bitField0_ = (bitField0_ & ~0x00000002);
+      bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
