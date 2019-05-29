@@ -39,20 +39,12 @@ public final class UpIpcService {
       "on.StreamServerResponse(\0010\001B)\n\027io.vertx." +
       "tp.ipc.serviceB\014UpIpcServiceP\001b\006proto3"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           io.vertx.tp.ipc.eon.UpEnvelop.getDescriptor(),
           io.vertx.tp.ipc.eon.UpStream.getDescriptor(),
-        }, assigner);
+        });
     io.vertx.tp.ipc.eon.UpEnvelop.getDescriptor();
     io.vertx.tp.ipc.eon.UpStream.getDescriptor();
   }
