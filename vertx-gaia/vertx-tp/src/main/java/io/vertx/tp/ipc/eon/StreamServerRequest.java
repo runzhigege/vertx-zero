@@ -22,6 +22,13 @@ private static final long serialVersionUID = 0L;
   }
 
   @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(
+      UnusedPrivateParameter unused) {
+    return new StreamServerRequest();
+  }
+
+  @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet
   getUnknownFields() {
     return this.unknownFields;
@@ -52,9 +59,9 @@ private static final long serialVersionUID = 0L;
             break;
           }
           case 18: {
-            if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+            if (!((mutable_bitField0_ & 0x00000001) != 0)) {
               responseParams_ = new java.util.ArrayList<io.vertx.tp.ipc.eon.ResponseParams>();
-              mutable_bitField0_ |= 0x00000002;
+              mutable_bitField0_ |= 0x00000001;
             }
             responseParams_.add(
                 input.readMessage(io.vertx.tp.ipc.eon.ResponseParams.parser(), extensionRegistry));
@@ -107,7 +114,7 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
-      if (((mutable_bitField0_ & 0x00000002) != 0)) {
+      if (((mutable_bitField0_ & 0x00000001) != 0)) {
         responseParams_ = java.util.Collections.unmodifiableList(responseParams_);
       }
       this.unknownFields = unknownFields.build();
@@ -127,7 +134,6 @@ private static final long serialVersionUID = 0L;
             io.vertx.tp.ipc.eon.StreamServerRequest.class, io.vertx.tp.ipc.eon.StreamServerRequest.Builder.class);
   }
 
-  private int bitField0_;
   public static final int RESPONSE_TYPE_FIELD_NUMBER = 1;
   private int responseType_;
   /**
@@ -491,7 +497,7 @@ private static final long serialVersionUID = 0L;
 
       if (responseParamsBuilder_ == null) {
         responseParams_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
       } else {
         responseParamsBuilder_.clear();
       }
@@ -536,12 +542,11 @@ private static final long serialVersionUID = 0L;
     public io.vertx.tp.ipc.eon.StreamServerRequest buildPartial() {
       io.vertx.tp.ipc.eon.StreamServerRequest result = new io.vertx.tp.ipc.eon.StreamServerRequest(this);
       int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
       result.responseType_ = responseType_;
       if (responseParamsBuilder_ == null) {
-        if (((bitField0_ & 0x00000002) != 0)) {
+        if (((bitField0_ & 0x00000001) != 0)) {
           responseParams_ = java.util.Collections.unmodifiableList(responseParams_);
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.responseParams_ = responseParams_;
       } else {
@@ -558,7 +563,6 @@ private static final long serialVersionUID = 0L;
       } else {
         result.responseStatus_ = responseStatusBuilder_.build();
       }
-      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
@@ -614,7 +618,7 @@ private static final long serialVersionUID = 0L;
         if (!other.responseParams_.isEmpty()) {
           if (responseParams_.isEmpty()) {
             responseParams_ = other.responseParams_;
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000001);
           } else {
             ensureResponseParamsIsMutable();
             responseParams_.addAll(other.responseParams_);
@@ -627,7 +631,7 @@ private static final long serialVersionUID = 0L;
             responseParamsBuilder_.dispose();
             responseParamsBuilder_ = null;
             responseParams_ = other.responseParams_;
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000001);
             responseParamsBuilder_ = 
               com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                  getResponseParamsFieldBuilder() : null;
@@ -723,9 +727,9 @@ private static final long serialVersionUID = 0L;
     private java.util.List<io.vertx.tp.ipc.eon.ResponseParams> responseParams_ =
       java.util.Collections.emptyList();
     private void ensureResponseParamsIsMutable() {
-      if (!((bitField0_ & 0x00000002) != 0)) {
+      if (!((bitField0_ & 0x00000001) != 0)) {
         responseParams_ = new java.util.ArrayList<io.vertx.tp.ipc.eon.ResponseParams>(responseParams_);
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000001;
        }
     }
 
@@ -875,7 +879,7 @@ private static final long serialVersionUID = 0L;
     public Builder clearResponseParams() {
       if (responseParamsBuilder_ == null) {
         responseParams_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
       } else {
         responseParamsBuilder_.clear();
@@ -952,7 +956,7 @@ private static final long serialVersionUID = 0L;
         responseParamsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
             io.vertx.tp.ipc.eon.ResponseParams, io.vertx.tp.ipc.eon.ResponseParams.Builder, io.vertx.tp.ipc.eon.ResponseParamsOrBuilder>(
                 responseParams_,
-                ((bitField0_ & 0x00000002) != 0),
+                ((bitField0_ & 0x00000001) != 0),
                 getParentForChildren(),
                 isClean());
         responseParams_ = null;
