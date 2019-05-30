@@ -29,7 +29,7 @@ public class QueueThread extends Thread {
     public void run() {
         if (null != this.reference) {
             this.receipts.addAll(this.extractor.extract(this.reference));
-            LOGGER.info(Info.SCANED_RECEIPTS, this.reference.getName(),
+            LOGGER.info(Info.SCANNED_RECEIPTS, this.reference.getName(),
                     this.receipts.size());
         }
     }

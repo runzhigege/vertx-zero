@@ -29,7 +29,7 @@ public class EndPointThread extends Thread {
     public void run() {
         if (null != this.reference) {
             this.events.addAll(this.extractor.extract(this.reference));
-            LOGGER.info(Info.SCANED_EVENTS, this.reference.getName(),
+            LOGGER.info(Info.SCANNED_EVENTS, this.reference.getName(),
                     this.events.size());
         }
     }
