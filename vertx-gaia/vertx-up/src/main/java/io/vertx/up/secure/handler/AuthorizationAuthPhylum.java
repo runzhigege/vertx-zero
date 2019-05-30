@@ -24,31 +24,64 @@ abstract class AuthorizationAuthPhylum extends AuthPhylum {
     protected final void parseAuthorization(final RoutingContext ctx, final boolean optional, final Handler<AsyncResult<String>> handler) {
 
         final HttpServerRequest request = ctx.request();
+        // Get http header: Authorization value
         final String authorization = request.headers().get(HttpHeaders.AUTHORIZATION);
 
         if (authorization == null) {
-            // The modification for default implementation in vert.x
+            /*
+             * The modification for default implementation in vert.x,
+             * Here means that the system could not get Authorization http header,
+             * default to 401 Error.
+             */
             handler.handle(Future.failedFuture(this.UNAUTHORIZED));
             return;
         }
 
         try {
+            /*
+             * The header Authorization value must be `TYPE VALUE` format
+             * it means that you must set this value correct
+             */
             final int idx = authorization.indexOf(' ');
 
             if (idx <= 0) {
+                /*
+                 * Wrong format of Authorization, it means that format is wrong
+                 * The system will predicate to check the format first.
+                 */
                 handler.handle(Future.failedFuture(this.BAD_REQUEST));
                 return;
             }
 
             if (!this.type.is(authorization.substring(0, idx))) {
+                /*
+                 * The type must be one of following:
+                 * 1. Implementation widely
+                 * Basic
+                 * Digest
+                 * Bearer
+                 * 2. No known implementation ( may be defined by developer )
+                 * HOBA
+                 * Mutual
+                 * Negotiate
+                 * OAuth
+                 * SCRAM-SHA-1
+                 * SCRAM-SHA-256
+                 */
                 handler.handle(Future.failedFuture(this.UNAUTHORIZED));
                 return;
             }
-
-            handler.handle(Future.succeededFuture(authorization.substring(idx + 1)));
+            /*
+             * Trim will remove the whitespace between TYPE and VALUE
+             * It's not strict to let developer must set `TYPE VALUE` format, the system should do following tasks:
+             * 1. Verify whether the type is correct.
+             * 2. Extract the value from Authorization.
+             */
+            handler.handle(Future.succeededFuture(authorization.substring(idx + 1).trim()));
         } catch (final RuntimeException e) {
             // TODO: For Debug
             e.printStackTrace();
+            // Runtime error for exception cache
             handler.handle(Future.failedFuture(e));
         }
     }

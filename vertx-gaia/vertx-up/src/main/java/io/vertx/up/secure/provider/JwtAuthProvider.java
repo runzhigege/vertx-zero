@@ -16,10 +16,9 @@ import io.vertx.ext.jwt.JWTOptions;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.exception.*;
 import io.vertx.up.log.Annal;
-import io.zero.epic.fn.Fn;
+import io.vertx.up.secure.Security;
 
 import java.util.Collections;
-import java.util.function.Function;
 
 public class JwtAuthProvider implements JwtAuth {
     private static final JsonArray EMPTY_ARRAY = new JsonArray();
@@ -28,11 +27,10 @@ public class JwtAuthProvider implements JwtAuth {
     private final JWT jwt;
     private final String permissionsClaimKey;
     private final JWTOptions jwtOptions;
-    private final Function<JsonObject, Future<Boolean>> executor;
+    private transient JwtSecurer securer;
     private transient AsyncMap<String, Boolean> authorizeMap;
 
-    public JwtAuthProvider(final Vertx vertx, final JWTAuthOptions config, final Function<JsonObject, Future<Boolean>> executor) {
-        this.executor = executor;
+    public JwtAuthProvider(final Vertx vertx, final JWTAuthOptions config) {
         this.permissionsClaimKey = config.getPermissionsClaimKey();
         this.jwtOptions = config.getJWTOptions();
         // File reading here.
@@ -43,6 +41,12 @@ public class JwtAuthProvider implements JwtAuth {
                 this.authorizeMap = res.result();
             }
         });
+    }
+
+    @Override
+    public JwtAuth bind(final Security security) {
+        this.securer = JwtSecurer.create(security);
+        return this;
     }
 
     @Override
@@ -81,16 +85,60 @@ public class JwtAuthProvider implements JwtAuth {
         }));
     }
 
-    private Future<User> authenticate(final JsonObject authInfo) {
-        return Fn.getSemi(null == this.executor, null,
-                () -> this.authorize(authInfo),
-                () -> this.executor.apply(authInfo).compose(result -> {
-                    if (result) {
-                        return this.authorize(authInfo);
+    private Future<User> verify401(final JsonObject authInfo) {
+        return this.securer.authenticate(authInfo)
+                .compose(verified -> {
+                    if (verified) {
+                        /*
+                         * 401 Passed
+                         */
+                        return this.verify403(authInfo);
                     } else {
+                        /*
+                         * Default system failure for 401 Jwt Exception
+                         */
                         return Future.failedFuture(new _401JwtExecutorException(this.getClass(), authInfo.getString("jwt")));
                     }
-                }));
+                });
+    }
+
+    private Future<User> verify403(final JsonObject authInfo) {
+        return this.securer.authorize(authInfo)
+                .compose(verfied -> {
+                    if (verfied) {
+                        /*
+                         * 403 Passed
+                         */
+                        return this.authorize(authInfo);
+                    } else {
+                        return Future.failedFuture(new _403ForbiddenException(this.getClass()));
+                    }
+                });
+    }
+
+    private Future<User> authenticate(final JsonObject authInfo) {
+        /*
+         * Sync code for different exception catch to enhancement 401/403 workflow
+         */
+        if (null == this.securer) {
+            /*
+             * It means that current provider did not bind any security interface,
+             * There is not user defined logical here.
+             */
+            return this.authorize(authInfo);
+        } else {
+            /*
+             * 401 Authenticate issue
+             */
+            try {
+                return this.verify401(authInfo);
+            } catch (final WebException ex) {
+                /*
+                 * 401 Method throw web exception
+                 */
+                return Future.failedFuture(ex);
+            }
+        }
     }
 
     private Future<User> authorize(final JsonObject authInfo) {
