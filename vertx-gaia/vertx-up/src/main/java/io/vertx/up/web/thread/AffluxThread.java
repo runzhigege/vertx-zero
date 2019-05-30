@@ -70,7 +70,7 @@ public class AffluxThread extends Thread {
             // Unique
             if (Values.ONE == target.size()) {
                 final Class<?> targetCls = target.get(Values.IDX);
-                LOGGER.info(Info.SCANED_FIELD, this.reference,
+                LOGGER.info(Info.SCANNED_FIELD, this.reference,
                         field.getName(), targetCls.getName(), Inject.class);
                 this.fieldMap.put(field.getName(), targetCls);
             } else {
@@ -79,7 +79,7 @@ public class AffluxThread extends Thread {
             }
         } else {
             this.fieldMap.put(field.getName(), type);
-            LOGGER.info(Info.SCANED_FIELD, this.reference,
+            LOGGER.info(Info.SCANNED_FIELD, this.reference,
                     field.getName(), type.getName(), Inject.class);
         }
 
@@ -87,6 +87,9 @@ public class AffluxThread extends Thread {
 
     private void scanQualifier(final Field field,
                                final List<Class<?>> instanceCls) {
+        // Log for instanceCls
+        final List<String> instanceNames = instanceCls.stream().map(Class::getName).collect(Collectors.toList());
+        LOGGER.info(Info.SCANNED_INSTANCES, Ut.fromJoin(instanceNames));
         // Field must annotated with @Qualifier
         final Annotation annotation = field.getAnnotation(Qualifier.class);
 
@@ -142,7 +145,7 @@ public class AffluxThread extends Thread {
                 MultiAnnotatedException.class, this.getClass(),
                 field.getName(), field.getDeclaringClass().getName(), set);
         // Fill typed directly.
-        LOGGER.info(Info.SCANED_FIELD, this.reference,
+        LOGGER.info(Info.SCANNED_FIELD, this.reference,
                 field.getName(),
                 field.getDeclaringClass().getName(),
                 hitted.annotationType().getName());
