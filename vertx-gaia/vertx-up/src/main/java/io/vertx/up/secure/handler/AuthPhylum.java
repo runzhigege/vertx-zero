@@ -4,12 +4,15 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.http.*;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.AuthProvider;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.vertx.ext.web.handler.AuthHandler;
 import io.vertx.up.exception.*;
+import io.vertx.up.log.Annal;
+import io.vertx.up.web.ZeroAnno;
 import io.vertx.zero.eon.Strings;
 
 import java.util.HashSet;
@@ -21,11 +24,12 @@ public abstract class AuthPhylum implements AuthHandler {
 
     static final String AUTH_PROVIDER_CONTEXT_KEY = "io.vertx.ext.web.handler.AuthHandler.provider";
     protected final String realm;
-    protected final AuthProvider authProvider;
     protected final Set<String> authorities = new HashSet<>();
     final WebException FORBIDDEN = new _403ForbiddenException(this.getClass());
     final WebException UNAUTHORIZED = new _401UnauthorizedException(this.getClass());
     final WebException BAD_REQUEST = new _400BadRequestException(this.getClass());
+    // Provider binding
+    protected transient AuthProvider authProvider;
 
     public AuthPhylum(final AuthProvider authProvider) {
         this(authProvider, "");
@@ -130,7 +134,7 @@ public abstract class AuthPhylum implements AuthHandler {
                 return;
             }
             // proceed to authN
-            this.getAuthProvider(ctx).authenticate(res.result(), authN -> {
+            this.getAuthProvider(ctx).authenticate(this.build(res.result(), ctx), authN -> {
                 if (authN.succeeded()) {
                     final User authenticated = authN.result();
                     ctx.setUser(authenticated);
@@ -227,6 +231,7 @@ public abstract class AuthPhylum implements AuthHandler {
             final AuthProvider provider = ctx.get(AUTH_PROVIDER_CONTEXT_KEY);
             if (provider != null) {
                 // we're overruling the configured one for this request
+                this.authProvider = provider;
                 return provider;
             }
         } catch (final RuntimeException e) {
@@ -234,5 +239,43 @@ public abstract class AuthPhylum implements AuthHandler {
             e.printStackTrace();
         }
         return this.authProvider;
+    }
+
+    protected Annal getLogger() {
+        return Annal.get(this.getClass());
+    }
+
+    /*
+     * This method is for dynamic using of 403 authorization.
+     * Sometimes when the URI has been stored as resource in zero system,
+     * You can extract the metadata in @Wall classes by
+     *      data.getJsonObject("metadata");
+     * It means that you can find unique resource identifier by
+     * 1) Http Method: GET, DELETE, POST, PUT
+     * 2) Uri Original
+     * Here are some calculation results that has been provided by zero container such as following situation:
+     * When the registry uri is as : /api/test/:name
+     * In this situation the real path should be : /api/test/lang
+     * In this method the metadata -> uri will be provided by : /api/test/:name
+     *                    metadata -> requestUri will be provided by : /api/test/lang
+     * It's specific situation when you used path variable.
+     *
+     * 「Objective」
+     * The metadata stored for real project when you want to do some limitation in RBAC mode.
+     * Because the application system will scanned our storage to do resource authorization, the application
+     * often need the metadata information to do locating and checking here.
+     */
+    private JsonObject build(final JsonObject data, final RoutingContext context) {
+        final HttpServerRequest request = context.request();
+        /*
+         * Build metadata
+         */
+        final JsonObject metadata = new JsonObject();
+        metadata.put("uri", ZeroAnno.recoveryUri(request.uri()));
+        metadata.put("requestUri", request.uri());
+        metadata.put("method", request.method().name());
+        data.put("metadata", metadata);
+        this.getLogger().info("[ ZERO ] Auth Information: {0}", data.encode());
+        return data;
     }
 }

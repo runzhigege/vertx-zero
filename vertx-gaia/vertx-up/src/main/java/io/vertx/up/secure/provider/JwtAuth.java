@@ -7,15 +7,16 @@ import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.jwt.JWTOptions;
 import io.vertx.up.secure.Security;
 
-public interface JwtAuth extends AuthProvider {
+import java.util.function.Supplier;
 
+public interface JwtAuth extends AuthProvider {
 
     static JwtAuth create(final Vertx vertx,
                           final JWTAuthOptions config) {
         return new JwtAuthProvider(vertx, config);
     }
 
-    JwtAuth bind(Security security);
+    JwtAuth bind(Supplier<Security> security);
 
     String generateToken(JsonObject data, JWTOptions options);
 
