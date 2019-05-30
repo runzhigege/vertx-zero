@@ -19,7 +19,7 @@ public class JwtWall implements Security {
     @Authenticate
     public AuthHandler authenticate(final Vertx vertx,
                                     final JsonObject config) {
-        return JwtOstium.create(JwtAuth.create(vertx, new JWTAuthOptions(config)).bind(this));
+        return JwtOstium.create(JwtAuth.create(vertx, new JWTAuthOptions(config)).bind(() -> this));
     }
 
     @Override
@@ -33,17 +33,20 @@ public class JwtWall implements Security {
 
     @Override
     public Future<Boolean> verify(final JsonObject data) {
+        /*
         final JsonObject extracted = Ux.Jwt.extract(data);
         final String token = data.getString("jwt");
         final JsonObject filters = new JsonObject()
                 .put("_id", extracted.getString("id"))
                 .put("token", token);
-        return Ux.Mongo.existing("DB_USER", filters);
+        return Ux.Mongo.existing("DB_USER", filters); */
+        System.err.println(data.encodePrettily());
+        return Future.succeededFuture(Boolean.TRUE);
     }
 
     @Override
     public Future<Boolean> access(final JsonObject data) {
-
+        System.err.println(data.encodePrettily());
         return Future.succeededFuture(Boolean.TRUE);
     }
 }

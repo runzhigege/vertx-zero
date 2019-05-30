@@ -18,7 +18,7 @@ public interface LoginActor {
     JsonObject login(@BodyParam final JsonObject data);
 
     @POST
-    @Path("/secure/jwt")
+    @Path("/secure/jwt/:id")
     @Address("ZERO://QUEUE/JWT")
     JsonObject secure(@BodyParam final JsonObject data);
 }

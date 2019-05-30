@@ -5,18 +5,17 @@ import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.atom.worker.Receipt;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
+import io.vertx.up.micro.matcher.RegexPath;
 import io.vertx.up.web.origin.*;
 import io.vertx.zero.mirror.Pack;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
 import java.lang.reflect.Method;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.regex.Pattern;
 
 /**
  * Transfer Class<?> set to difference mapping.
@@ -47,6 +46,8 @@ public class ZeroAnno {
             POINTER = new HashSet<>();
     private final static Set<Class<?>>
             TPS = new HashSet<>();
+    private final static Set<String>
+            URI_PATHS = new HashSet<>();
 
     static {
         /* 1.Scan the packages **/
@@ -64,6 +65,11 @@ public class ZeroAnno {
                             Ut.singleton(EventInquirer.class);
                     EVENTS.addAll(event.scan(ENDPOINTS));
                 });
+        /* 1.1. Put Path Uri into Set */
+        EVENTS.stream().map(Event::getPath)
+                .filter(Objects::nonNull)
+                .filter(item -> 0 < item.indexOf(":"))
+                .forEach(URI_PATHS::add);
 
         /* Wall -> Authenticate, Authorize **/
         final Inquirer<Set<Cliff>> walls =
@@ -125,8 +131,7 @@ public class ZeroAnno {
      *
      * @return plugin map
      */
-    public static ConcurrentMap<Class<?>, ConcurrentMap<String, Class<?>>>
-    getPlugins() {
+    public static ConcurrentMap<Class<?>, ConcurrentMap<String, Class<?>>> getPlugins() {
         return PLUGINS;
     }
 
@@ -135,8 +140,7 @@ public class ZeroAnno {
      *
      * @return agent map
      */
-    public static ConcurrentMap<ServerType, List<Class<?>>>
-    getAgents() {
+    public static ConcurrentMap<ServerType, List<Class<?>>> getAgents() {
         return AGENTS;
     }
 
@@ -145,8 +149,7 @@ public class ZeroAnno {
      *
      * @return pointer set
      */
-    public static Set<Class<?>>
-    getInjects() {
+    public static Set<Class<?>> getInjects() {
         return POINTER;
     }
 
@@ -155,8 +158,7 @@ public class ZeroAnno {
      *
      * @return client set
      */
-    public static Set<Class<?>>
-    getTps() {
+    public static Set<Class<?>> getTps() {
         return TPS;
     }
 
@@ -165,8 +167,7 @@ public class ZeroAnno {
      *
      * @return worker set
      */
-    public static Set<Class<?>>
-    getWorkers() {
+    public static Set<Class<?>> getWorkers() {
         return WORKERS;
     }
 
@@ -175,8 +176,7 @@ public class ZeroAnno {
      *
      * @return receipts set
      */
-    public static Set<Receipt>
-    getReceipts() {
+    public static Set<Receipt> getReceipts() {
         return RECEIPTS;
     }
 
@@ -185,13 +185,11 @@ public class ZeroAnno {
      *
      * @return endpoint set
      */
-    public static Set<Class<?>>
-    getEndpoints() {
+    public static Set<Class<?>> getEndpoints() {
         return ENDPOINTS;
     }
 
-    public static ConcurrentMap<String, Method>
-    getIpcs() {
+    public static ConcurrentMap<String, Method> getIpcs() {
         return IPCS;
     }
 
@@ -200,8 +198,7 @@ public class ZeroAnno {
      *
      * @return event set
      */
-    public static Set<Event>
-    getEvents() {
+    public static Set<Event> getEvents() {
         return EVENTS;
     }
 
@@ -210,8 +207,7 @@ public class ZeroAnno {
      *
      * @return filter map JSR340
      */
-    public static ConcurrentMap<String, Set<Event>>
-    getFilters() {
+    public static ConcurrentMap<String, Set<Event>> getFilters() {
         return FILTERS;
     }
 
@@ -220,8 +216,18 @@ public class ZeroAnno {
      *
      * @return guard set
      */
-    public static Set<Cliff>
-    getWalls() {
+    public static Set<Cliff> getWalls() {
         return WALLS;
+    }
+
+    public static String recoveryUri(final String uri) {
+        return URI_PATHS.stream()
+                .filter(path -> isMatch(uri, path))
+                .findFirst().orElse(uri);
+    }
+
+    private static boolean isMatch(final String uri, final String path) {
+        final Pattern pattern = RegexPath.createRegex(path);
+        return pattern.matcher(uri).matches();
     }
 }

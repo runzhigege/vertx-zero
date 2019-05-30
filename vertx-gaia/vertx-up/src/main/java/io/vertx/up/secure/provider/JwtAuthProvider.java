@@ -19,6 +19,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.secure.Security;
 
 import java.util.Collections;
+import java.util.function.Supplier;
 
 public class JwtAuthProvider implements JwtAuth {
     private static final JsonArray EMPTY_ARRAY = new JsonArray();
@@ -28,6 +29,7 @@ public class JwtAuthProvider implements JwtAuth {
     private final String permissionsClaimKey;
     private final JWTOptions jwtOptions;
     private transient JwtSecurer securer;
+
     private transient AsyncMap<String, Boolean> authorizeMap;
 
     public JwtAuthProvider(final Vertx vertx, final JWTAuthOptions config) {
@@ -44,7 +46,8 @@ public class JwtAuthProvider implements JwtAuth {
     }
 
     @Override
-    public JwtAuth bind(final Security security) {
+    public JwtAuth bind(final Supplier<Security> supplier) {
+        final Security security = supplier.get();
         this.securer = JwtSecurer.create(security);
         return this;
     }

@@ -621,6 +621,10 @@ public class Ut {
         return StringUtil.join(input, separator);
     }
 
+    public static String fromJoin(final List<String> input) {
+        return StringUtil.join(input, null);
+    }
+
     public static String fromJoin(final Set<String> input, final String separator) {
         return StringUtil.join(input, separator);
     }
