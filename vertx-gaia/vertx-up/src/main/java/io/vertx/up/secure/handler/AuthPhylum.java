@@ -20,14 +20,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class AuthPhylum implements AuthHandler {
 
     static final String AUTH_PROVIDER_CONTEXT_KEY = "io.vertx.ext.web.handler.AuthHandler.provider";
-
-    final WebException FORBIDDEN = new _403ForbiddenException(this.getClass());
-    final WebException UNAUTHORIZED = new _401UnauthorizedException(this.getClass());
-    final WebException BAD_REQUEST = new _400BadRequestException(this.getClass());
-
     protected final String realm;
     protected final AuthProvider authProvider;
     protected final Set<String> authorities = new HashSet<>();
+    final WebException FORBIDDEN = new _403ForbiddenException(this.getClass());
+    final WebException UNAUTHORIZED = new _401UnauthorizedException(this.getClass());
+    final WebException BAD_REQUEST = new _400BadRequestException(this.getClass());
 
     public AuthPhylum(final AuthProvider authProvider) {
         this(authProvider, "");
@@ -95,6 +93,12 @@ public abstract class AuthPhylum implements AuthHandler {
 
     @Override
     public void handle(final RoutingContext ctx) {
+        /*
+         * Because AuthPhylum component is Handler of vert.x, here it the first step
+         * Call handlePreflight to verify http specification
+         * Please refer: https://www.w3.org/TR/cors/#cross-origin-request-with-preflight-0
+         * Cross domain
+         */
         if (this.handlePreflight(ctx)) {
             return;
         }
@@ -140,10 +144,10 @@ public abstract class AuthPhylum implements AuthHandler {
                     // proceed to AuthZ
                     this.authorizeUser(ctx, authenticated);
                 } else {
+                    // The first time to get
                     final String header = this.authenticateHeader(ctx);
                     if (header != null) {
-                        ctx.response()
-                                .putHeader("WWW-Authenticate", header);
+                        ctx.response().putHeader("WWW-Authenticate", header);
                     }
                     ctx.fail(null == authN.cause() ? this.UNAUTHORIZED : authN.cause());
                 }

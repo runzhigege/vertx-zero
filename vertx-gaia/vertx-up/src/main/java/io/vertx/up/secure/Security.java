@@ -28,4 +28,12 @@ public interface Security {
      * @return
      */
     Future<Boolean> verify(JsonObject data);
+
+    /**
+     * 3. 403 Access, verify the resource access
+     * Optional workflow: default return true means no access
+     */
+    default Future<Boolean> access(final JsonObject user) {
+        return Future.succeededFuture(Boolean.TRUE);
+    }
 }

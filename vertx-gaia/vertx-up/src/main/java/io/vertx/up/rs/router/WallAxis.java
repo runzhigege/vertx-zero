@@ -20,6 +20,7 @@ import java.util.TreeSet;
 
 /**
  * Secure mount
+ * 401 for authorization only
  */
 public class WallAxis implements Axis<Router> {
 
@@ -60,9 +61,17 @@ public class WallAxis implements Axis<Router> {
             // 2. Path/Order to set Router
             if (null != handler) {
                 router.route(path).order(Orders.SECURE).handler(handler)
+                        // Shared Failure Handler
                         .failureHandler(AuthenticateEndurer.create());
             }
             // 3. Wall Advanced, For user data filling.
+            /*
+             * New design for 403 access issue here to implement RBAC mode
+             * This design is optional plugin into zero system, you can enable this feature.
+             * 403 access handler must be as following
+             * 1. The uri is the same as 401, it means that the request must be passed to 401 handler first
+             * 2. The order must be after 401 Orders.SECURE
+             */
         });
     }
 
