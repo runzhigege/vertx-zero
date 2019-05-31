@@ -96,11 +96,6 @@
                 <artifactId>vertx-rx</artifactId>
                 <version>${zero.version}</version>
             </dependency>
-            <dependency>
-                <groupId>cn.vertxup</groupId>
-                <artifactId>vertx-zeus</artifactId>
-                <version>${zero.version}</version>
-            </dependency>
             <!-- Inflx -->
             <dependency>
                 <groupId>cn.vertxup</groupId>
