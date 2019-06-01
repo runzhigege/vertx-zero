@@ -2,6 +2,8 @@ package io.vertx.up.web.origin;
 
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.error.WallDuplicatedException;
+import io.vertx.tp.error.WallKeyMissingException;
 import io.vertx.up.annotations.Wall;
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.log.Annal;
@@ -9,8 +11,6 @@ import io.vertx.up.secure.Rampart;
 import io.vertx.up.secure.inquire.OstiumAuth;
 import io.vertx.up.secure.inquire.PhylumAuth;
 import io.vertx.zero.exception.DynamicKeyMissingException;
-import io.vertx.zero.exception.WallDuplicatedException;
-import io.vertx.zero.exception.WallKeyMissingException;
 import io.vertx.zero.marshal.Transformer;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;

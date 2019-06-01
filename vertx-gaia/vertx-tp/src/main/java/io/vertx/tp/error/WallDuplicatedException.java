@@ -1,5 +1,6 @@
-package io.vertx.zero.exception;
+package io.vertx.tp.error;
 
+import io.vertx.zero.exception.UpException;
 import io.zero.epic.Ut;
 
 import java.util.Set;
