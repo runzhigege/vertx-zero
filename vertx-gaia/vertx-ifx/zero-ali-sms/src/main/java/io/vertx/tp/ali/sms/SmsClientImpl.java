@@ -1,4 +1,4 @@
-package io.vertx.tp.plugin.ali.sms;
+package io.vertx.tp.ali.sms;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
@@ -12,8 +12,8 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.exception._424MessageSendException;
-import io.vertx.up.exception._424ProfileEndPointException;
+import io.vertx.tp.error._424MessageSendException;
+import io.vertx.tp.error._424ProfileEndPointException;
 import io.vertx.up.log.Annal;
 import io.zero.epic.fn.Fn;
 

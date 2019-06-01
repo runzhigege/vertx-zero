@@ -4,7 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import com.zaxxer.hikari.pool.HikariPool;
 import io.vertx.core.json.JsonObject;
-import io.vertx.zero.exception.DataSourceException;
+import io.vertx.tp.error.DataSourceException;
 
 /**
  * JsonObject -> HikariConfig
