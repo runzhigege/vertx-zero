@@ -1,6 +1,7 @@
-package io.vertx.up.exception;
+package io.vertx.tp.error;
 
 import io.vertx.core.http.HttpStatusCode;
+import io.vertx.up.exception.WebException;
 
 public class _401QiyExecuteException extends WebException {
 

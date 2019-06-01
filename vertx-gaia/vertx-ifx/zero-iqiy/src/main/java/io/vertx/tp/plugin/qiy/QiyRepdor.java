@@ -2,8 +2,8 @@ package io.vertx.tp.plugin.qiy;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.exception._401QiyAuthorizedException;
-import io.vertx.up.exception._401QiyExecuteException;
+import io.vertx.tp.error._401QiyAuthorizedException;
+import io.vertx.tp.error._401QiyExecuteException;
 import io.vertx.up.log.Annal;
 import io.zero.epic.fn.Fn;
 

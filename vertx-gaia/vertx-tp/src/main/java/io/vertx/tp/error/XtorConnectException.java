@@ -1,4 +1,6 @@
-package io.vertx.zero.exception;
+package io.vertx.tp.error;
+
+import io.vertx.zero.exception.UpException;
 
 public class XtorConnectException extends UpException {
 

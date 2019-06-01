@@ -2,6 +2,7 @@ package io.vertx.up.web.anima;
 
 import io.reactivex.Observable;
 import io.vertx.core.Vertx;
+import io.vertx.tp.error.PluginSpecificationException;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.log.Annal;
@@ -9,7 +10,6 @@ import io.vertx.up.web.Runner;
 import io.vertx.up.web.ZeroAmbient;
 import io.vertx.up.web.ZeroAnno;
 import io.vertx.zero.eon.Values;
-import io.vertx.zero.exception.PluginSpecificationException;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroLime;
 import io.zero.epic.Ut;

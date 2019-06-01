@@ -1,10 +1,10 @@
 package io.vertx.up.secure.inquire;
 
+import io.vertx.tp.error.WallMethodMultiException;
 import io.vertx.up.annotations.Authenticate;
 import io.vertx.up.annotations.Authorize;
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.exception.WallMethodMultiException;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
