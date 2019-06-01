@@ -1,4 +1,4 @@
-package io.vertx.tp.crud.api;
+package cn.vertxup.api;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.cv.Addr;
