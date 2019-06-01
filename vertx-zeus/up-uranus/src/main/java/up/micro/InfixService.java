@@ -2,7 +2,7 @@ package up.micro;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.plugin.ali.sms.SmsClient;
+import io.vertx.tp.ali.sms.SmsClient;
 import io.vertx.tp.plugin.qiy.QiyClient;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.plugin.shared.SharedClient;

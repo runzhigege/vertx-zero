@@ -1,6 +1,7 @@
 package io.vertx.up.boot;
 
 import io.vertx.core.Vertx;
+import io.vertx.tp.error.RpcPreparingException;
 import io.vertx.tp.etcd.center.EtcdData;
 import io.vertx.up.Launcher;
 import io.vertx.up.annotations.Up;
@@ -11,7 +12,6 @@ import io.vertx.up.web.anima.DetectScatter;
 import io.vertx.up.web.anima.InfixScatter;
 import io.vertx.up.web.anima.PointScatter;
 import io.vertx.up.web.anima.Scatter;
-import io.vertx.zero.exception.RpcPreparingException;
 import io.vertx.zero.exception.UpClassArgsException;
 import io.vertx.zero.exception.UpClassInvalidException;
 import io.vertx.zero.mirror.Anno;
