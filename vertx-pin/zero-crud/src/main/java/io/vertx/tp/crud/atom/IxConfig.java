@@ -2,8 +2,11 @@ package io.vertx.tp.crud.atom;
 
 import com.fasterxml.jackson.databind.ClassDeserializer;
 import com.fasterxml.jackson.databind.ClassSerializer;
+import com.fasterxml.jackson.databind.JsonObjectDeserializer;
+import com.fasterxml.jackson.databind.JsonObjectSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 
@@ -20,6 +23,10 @@ public class IxConfig implements Serializable {
     @JsonSerialize(using = ClassSerializer.class)
     @JsonDeserialize(using = ClassDeserializer.class)
     private Class<?> daoCls;
+
+    @JsonSerialize(using = JsonObjectSerializer.class)
+    @JsonDeserialize(using = JsonObjectDeserializer.class)
+    private JsonObject header;
 
     public IxField getField() {
         return this.field;
@@ -61,6 +68,14 @@ public class IxConfig implements Serializable {
         this.daoCls = daoCls;
     }
 
+    public JsonObject getHeader() {
+        return this.header;
+    }
+
+    public void setHeader(final JsonObject header) {
+        this.header = header;
+    }
+
     @Override
     public String toString() {
         return "IxConfig{" +
@@ -69,6 +84,7 @@ public class IxConfig implements Serializable {
                 ", field=" + this.field +
                 ", pojoCls=" + this.pojoCls +
                 ", daoCls=" + this.daoCls +
+                ", header=" + this.header +
                 '}';
     }
 }

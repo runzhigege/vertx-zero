@@ -16,10 +16,20 @@ public class CreateActor {
 
     @Address(Addr.Post.ADD)
     public <T> Future<JsonObject> create(final Envelop request) {
-        /* Module的提取 */
+        /* Module Extract  */
         final String actor = Ux.getString(request);
         LOGGER.info("[ Εκδήλωση ] Uri Addr : POST /api/{0}", actor);
-        final T inserted = Ix.inAdd(actor, request);
-        return Ix.toSingle(actor, (dao) -> dao.insertAsync(inserted));
+        return Ix.toSingle(actor, (dao) -> {
+            /*
+             * Here must split into single line, could not use
+             * Following code will throw exception for cast.
+             *     dao.insertAsync(Ix.inAdd(actor,request))
+             * */
+            final T inserted = Ix.inAdd(actor, request);
+            /*
+             * To avoid do insertAsync(List), must split
+             */
+            return dao.insertAsync(inserted);
+        });
     }
 }

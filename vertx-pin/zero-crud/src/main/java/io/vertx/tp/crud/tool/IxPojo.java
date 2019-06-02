@@ -27,11 +27,17 @@ class IxPojo {
             /* Add, Append Key */
             normalize.mergeIn(IxDefault.inAdd(envelop, config));
         }
-        LOGGER.info("[ Εκδήλωση ] Json Data: \n{0}", normalize.encodePrettily());
+        normalize.mergeIn(IxDefault.inAuditor(envelop, config, isUpdate));
+
+        normalize.mergeIn(IxDefault.inHeader(envelop, config));
+        /* Validation For Body */
+        IxValidator.verifyBody(envelop, normalize);
+
+        LOGGER.info("[ Εκδήλωση ] (Json) Normalized: \n{0}", normalize.encodePrettily());
         final T reference = Ut.isNil(pojo) ?
                 Ux.fromJson(normalize, (Class<T>) config.getPojoCls()) :
                 Ux.fromJson(normalize, (Class<T>) config.getPojoCls(), config.getPojo());
-        LOGGER.info("[ Εκδήλωση ] Deserialized: {0}", reference);
+        LOGGER.info("[ Εκδήλωση ] (Json) Deserialized: {0}", reference);
         return reference;
     }
 

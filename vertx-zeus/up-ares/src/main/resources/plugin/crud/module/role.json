@@ -16,5 +16,8 @@
             "by": "updatedBy",
             "at": "updatedAt"
         }
+    },
+    "header": {
+        "sigma": "Ox-Sigma"
     }
 }

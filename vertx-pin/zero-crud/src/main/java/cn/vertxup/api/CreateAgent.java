@@ -3,7 +3,6 @@ package cn.vertxup.api;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.up.annotations.Address;
-import io.vertx.up.annotations.Codex;
 import io.vertx.up.annotations.EndPoint;
 
 import javax.ws.rs.BodyParam;
@@ -24,5 +23,5 @@ public interface CreateAgent {
     @Path("/{actor}")
     @Address(Addr.Post.ADD)
     JsonObject create(@PathParam("actor") String actor,
-                      @BodyParam @Codex JsonObject data);
+                      @BodyParam JsonObject data);
 }

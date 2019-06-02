@@ -24,3 +24,10 @@ public interface CvHeader {
         }
     };
 }
+
+interface Folder {
+
+    String MODULE = "plugin/crud/module/";
+
+    String VALIDATOR = "plugin/crud/validator/";
+}
