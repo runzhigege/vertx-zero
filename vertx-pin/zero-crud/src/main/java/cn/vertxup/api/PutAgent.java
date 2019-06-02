@@ -25,7 +25,7 @@ public interface PutAgent {
                       @BodyParam JsonObject data);
 
     @PUT
-    @Path("/batch/{actor}")
+    @Path("/batch/{actor}/update")
     @Address(Addr.Put.BATCH)
     JsonArray updateBatch(@PathParam("actor") String actor,
                           @BodyParam JsonArray dataArray);

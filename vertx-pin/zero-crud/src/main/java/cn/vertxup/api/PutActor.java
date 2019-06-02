@@ -4,8 +4,10 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.actor.IxActor;
+import io.vertx.tp.crud.atom.IxField;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.refine.Ix;
+import io.vertx.up.aiki.Uarr;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
@@ -29,6 +31,8 @@ public class PutActor {
                     Http.success204(null) :
                     /* Save */
                     IxActor.key().bind(request).procAsync(body, config)
+                            /* Verify */
+                            .compose(input -> IxActor.verify().bind(request).procAsync(input, config))
                             /* T */
                             .compose(input -> Ix.entityAsync(input, config))
                             /* Save */
@@ -40,10 +44,29 @@ public class PutActor {
     }
 
     @Address(Addr.Put.BATCH)
-    public <T> Future<JsonArray> updateBatch(final Envelop request) {
+    @SuppressWarnings("all")
+    public <T> Future<Envelop> updateBatch(final Envelop request) {
         /* Batch Extract */
-        final String actor = Ux.getString(request);
-        LOGGER.info("[ Εκδήλωση ] ---> Uri Addr : PUT /api/batch/{0}", actor);
-        return null;
+        return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
+            /* Data Get */
+            final JsonArray array = Ux.getArray1(request);
+            final IxField field = config.getField();
+            final String keyField = field.getKey();
+            return Ix.inKeys(array, config)
+                    /* Search List */
+                    .compose(filters -> Ix.search(filters, config).apply(dao))
+                    /* Extract List */
+                    .compose(Ix::list)
+                    /* JsonArray */
+                    .compose(queried -> Uarr.create(queried)
+                            .zip(array, keyField, keyField)
+                            .toFuture())
+                    /* JsonArray */
+                    .compose(dataArr -> Ix.entityAsync(dataArr, config))
+                    /* List<T> */
+                    .compose(dao::updateAsync)
+                    /* JsonArray */
+                    .compose(Http::success200);
+        });
     }
 }
