@@ -7,4 +7,6 @@ public interface FileSuffix {
     String YML = "yml";
 
     String CLASS = "class";
+
+    String JSON = "json";
 }
