@@ -23,6 +23,7 @@ public class AsyncAim extends BaseAim implements Aim<RoutingContext> {
             final EventBus bus = vertx.eventBus();
             // 3. Send message
             final String address = this.address(event);
+
             bus.<Envelop>send(address, request, handler -> {
                 final Envelop response;
                 if (handler.succeeded()) {
@@ -60,6 +61,7 @@ public class AsyncAim extends BaseAim implements Aim<RoutingContext> {
         invoked.setUser(context.user());
         invoked.setSession(context.session());
         invoked.setContext(context.data());
+
         return invoked;
     }
 }

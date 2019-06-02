@@ -1,0 +1,25 @@
+{
+    "name": "role",
+    "daoCls": "up.zero.domain.tables.daos.SRoleDao",
+    "pojoCls": "up.zero.domain.tables.pojos.SRole",
+    "field": {
+        "key": "key",
+        "unique": [
+            [
+                "code",
+                "sigma"
+            ]
+        ],
+        "created": {
+            "by": "createdBy",
+            "at": "createdAt"
+        },
+        "updated": {
+            "by": "updatedBy",
+            "at": "updatedAt"
+        }
+    },
+    "header": {
+        "sigma": "Ox-Sigma"
+    }
+}

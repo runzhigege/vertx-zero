@@ -3,6 +3,7 @@ package io.vertx.up.atom;
 import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.buffer.Buffer;
+import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpStatusCode;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
@@ -31,6 +32,9 @@ public class Envelop implements Serializable {
     private final Map<String, Object> context = new HashMap<>();
     private MultiMap headers;
     private User user;
+    // Http Method
+    private String uri;
+    private HttpMethod method;
     // Message Id communication in Event Bus
     private String key;
 
@@ -284,14 +288,31 @@ public class Envelop implements Serializable {
         this.headers = headers;
     }
 
-    // ------------------ Failure resource model ------------------
-
     public Session getSession() {
         return this.session;
     }
 
+    // ------------------ Failure resource model ------------------
+
     public void setSession(final Session session) {
         this.session = session;
+    }
+
+    // ----------------- Http -----------------
+    public String getUri() {
+        return this.uri;
+    }
+
+    public void setUri(final String uri) {
+        this.uri = uri;
+    }
+
+    public HttpMethod getMethod() {
+        return this.method;
+    }
+
+    public void setMethod(final HttpMethod method) {
+        this.method = method;
     }
 
     public Map<String, Object> context() {
@@ -314,9 +335,8 @@ public class Envelop implements Serializable {
 
     /**
      * Read user's identifier
-     *
-     * @return
      */
+    @SuppressWarnings("all")
     public String identifier(final String field) {
         return Fn.getJvm(Strings.EMPTY, () -> {
             final JsonObject credential = this.user.principal();
@@ -330,10 +350,11 @@ public class Envelop implements Serializable {
     public String toString() {
         return "Envelop{" +
                 "status=" + this.status +
-                ", headers=" + this.headers +
-                ", error=" + this.error +
-                ", data=" + this.data +
-                ", user=" + this.user +
+                ", \nheaders=\n[" + this.headers +
+                "], \nerror=" + this.error +
+                ", \ndata=" + this.data +
+                ", \nuser=" + this.user +
+                ", \nuri=" + this.uri +
                 '}';
     }
 }

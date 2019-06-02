@@ -117,13 +117,11 @@ public class VertxApplication {
                 scatter.connect(vertx);
             }, "codex-engine-runner");
 
-            /* 5.Data Loader started, Not needed in Api Gateway */
-            /* Liquibase instead
+            /* 5.Plugin init */
             Runner.run(() -> {
                 final Scatter<Vertx> scatter = Ut.singleton(InitScatter.class);
                 scatter.connect(vertx);
-            }, "data-loading-runner");
-            */
+            }, "initializer-runner");
         });
     }
 }

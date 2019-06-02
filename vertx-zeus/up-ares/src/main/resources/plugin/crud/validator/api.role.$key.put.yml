@@ -1,0 +1,3 @@
+key:
+  - type: required
+    message: "对不起，更新角色必须提供主键！"

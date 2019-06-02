@@ -1,0 +1,33 @@
+{
+    "name": "user",
+    "daoCls": "up.zero.domain.tables.daos.SUserDao",
+    "pojoCls": "up.zero.domain.tables.pojos.SUser",
+    "field": {
+        "key": "key",
+        "unique": [
+            [
+                "username",
+                "sigma"
+            ],
+            [
+                "mobile",
+                "sigma"
+            ],
+            [
+                "email",
+                "sigma"
+            ]
+        ],
+        "created": {
+            "by": "createdBy",
+            "at": "createdAt"
+        },
+        "updated": {
+            "by": "updatedBy",
+            "at": "updatedAt"
+        }
+    },
+    "header": {
+        "sigma": "Ox-Sigma"
+    }
+}
