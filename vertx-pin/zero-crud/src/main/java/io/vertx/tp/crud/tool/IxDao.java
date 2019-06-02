@@ -34,12 +34,12 @@ class IxDao {
          * 1）Each file could define only one module, the filename is module name.
          * 2）Each file must be json format with .json extension, others will be ignored.
          * */
-        final List<String> files = Ut.ioFiles("ke/module/", FileSuffix.JSON);
+        final List<String> files = Ut.ioFiles(Folder.MODULE, FileSuffix.JSON);
 
         files.forEach(file -> {
             /* 1.File absolute path under classpath */
-            final String path = "ke/module/" + file;
-            LOGGER.info("[ Εκδήλωση ] Path = {0}", path);
+            final String path = Folder.MODULE + file;
+            LOGGER.info("[ Εκδήλωση ] (Init) Module File = {0}", path);
             final JsonObject configDao = Ut.ioJObject(path);
 
             Fn.safeNull(() -> {
@@ -47,6 +47,7 @@ class IxDao {
                 final IxConfig config = Ut.deserialize(configDao, IxConfig.class);
                 /* 3. Processed key */
                 final String key = file.replace(Strings.DOT + FileSuffix.JSON, Strings.EMPTY);
+                LOGGER.info("[ Εκδήλωση ] (Init) Module Key = {0}", key);
                 CONFIG_MAP.put(key, config);
             }, configDao);
         });
@@ -57,6 +58,7 @@ class IxDao {
     }
 
     static UxJooq getDao(final String module) {
+        LOGGER.info("[ Εκδήλωση ] ---> Module = {0}", module);
         final IxConfig config = CONFIG_MAP.get(module);
         return Fn.getNull(null, () -> {
             final Class<?> daoCls = config.getDaoCls();

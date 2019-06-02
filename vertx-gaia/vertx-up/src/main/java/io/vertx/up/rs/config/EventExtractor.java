@@ -65,6 +65,7 @@ public class EventExtractor implements Extractor<Set<Event>> {
                 this.getClass(), clazz.getName());
     }
 
+    @SuppressWarnings("all")
     private Set<Event> extract(final Class<?> clazz, final String root) {
         final Set<Event> events = new ConcurrentHashSet<>();
         // 0.Preparing

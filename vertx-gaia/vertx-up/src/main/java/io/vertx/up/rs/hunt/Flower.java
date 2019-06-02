@@ -29,6 +29,10 @@ class Flower {
                                   final T entity) {
         final Envelop envelop = Envelop.success(entity);
         envelop.setHeaders(context.request().headers());
+        /* Add Uri into Envelop for worker usage. */
+        envelop.setUri(context.request().uri());
+        envelop.setMethod(context.request().method());
+        /* User, Session, Context */
         envelop.setUser(context.user());
         envelop.setSession(context.session());
         envelop.setContext(context.data());
