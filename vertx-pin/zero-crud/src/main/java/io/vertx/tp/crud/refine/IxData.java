@@ -22,6 +22,14 @@ class IxData {
         return Ux.toFuture(resultObj);
     }
 
+    static Future<JsonArray> list(final JsonObject result) {
+        JsonArray list = result.getJsonArray("list");
+        if (Objects.isNull(list)) {
+            list = new JsonArray();
+        }
+        return Ux.toFuture(list);
+    }
+
     static boolean isExist(final JsonObject result) {
         final Long counter = result.getLong("count", 0L);
         return 0 < counter;
