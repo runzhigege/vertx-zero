@@ -15,7 +15,7 @@ public class GetActor {
     @Address(Addr.Get.BY_ID)
     public Future<JsonObject> getById(final String actor,
                                       final String key) {
-        LOGGER.info("[ Εκδήλωση ] Uri Addr : GET /api/{0}/{1}", actor, key);
+        LOGGER.info("[ Εκδήλωση ] ---> Uri Addr : GET /api/{0}/{1}", actor, key);
         return Ix.toSingle(actor, (dao) -> dao.findByIdAsync(key));
     }
 }

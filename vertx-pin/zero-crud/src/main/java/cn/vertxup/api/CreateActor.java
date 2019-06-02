@@ -18,7 +18,7 @@ public class CreateActor {
     public <T> Future<JsonObject> create(final Envelop request) {
         /* Module Extract  */
         final String actor = Ux.getString(request);
-        LOGGER.info("[ Εκδήλωση ] Uri Addr : POST /api/{0}", actor);
+        LOGGER.info("[ Εκδήλωση ] ---> Uri Addr : POST /api/{0}", actor);
         return Ix.toSingle(actor, (dao) -> {
             /*
              * Here must split into single line, could not use
