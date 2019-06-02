@@ -1,7 +1,6 @@
 package cn.vertxup.api;
 
 import io.vertx.core.Future;
-import io.vertx.core.http.HttpStatusCode;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.actor.IxActor;
 import io.vertx.tp.crud.cv.Addr;
@@ -47,8 +46,8 @@ public class CreateActor {
                             Ix.unique(result)
                                     /* Deserialize */
                                     .compose(json -> Ix.entityAsync(json, config))
-                                    /* Envelop */
-                                    .compose(entity -> Ux.toFuture(Envelop.success(entity, HttpStatusCode.CREATED))) :
+                                    /* 201, Envelop */
+                                    .compose(Http::success201) :
                             /* Primary Key Add */
                             IxActor.uuid().procAsync(body, config)
                                     /* Create */
@@ -59,8 +58,8 @@ public class CreateActor {
                                     .compose(input -> Ix.entityAsync(input, config))
                                     /* T */
                                     .compose(dao::insertAsync)
-                                    /* Envelop */
-                                    .compose(entity -> Ux.toFuture(Envelop.success(entity)))
+                                    /* 200, Envelop */
+                                    .compose(Http::success200)
                     );
         });
     }
