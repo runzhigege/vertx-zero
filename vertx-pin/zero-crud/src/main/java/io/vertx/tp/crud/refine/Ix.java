@@ -9,11 +9,16 @@ import io.vertx.up.aiki.UxJooq;
 import java.util.function.Function;
 
 public class Ix {
-
+    /*
+     * IxIn reference
+     */
     public static IxIn create(final Class<?> clazz) {
         return IxIn.create(clazz);
     }
 
+    /*
+     * search operation
+     */
     public static Function<UxJooq, Future<JsonObject>> search(final JsonObject filters, final IxConfig config) {
         return IxFn.search(filters, config);
     }
@@ -30,12 +35,8 @@ public class Ix {
         IxData.audit(auditor, config, userId);
     }
 
-    public static <T> T entity(final JsonObject data, final IxConfig config) {
-        return IxData.entity(data, config);
-    }
-
     public static <T> Future<T> entityAsync(final JsonObject data, final IxConfig config) {
-        final T reference = entity(data, config);
+        final T reference = IxData.entity(data, config);
         return Ux.toFuture(reference);
     }
 }
