@@ -4,6 +4,7 @@
 package up.zero.domain.tables;
 
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,7 +39,7 @@ import up.zero.domain.tables.records.SRoleRecord;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SRole extends TableImpl<SRoleRecord> {
 
-    private static final long serialVersionUID = -2112667964;
+    private static final long serialVersionUID = 116231113;
 
     /**
      * The reference instance of <code>UP_ARES.S_ROLE</code>
@@ -97,6 +98,26 @@ public class SRole extends TableImpl<SRoleRecord> {
      * The column <code>UP_ARES.S_ROLE.METADATA</code>. 「metadata」- 附加配置数据
      */
     public final TableField<SRoleRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置数据");
+
+    /**
+     * The column <code>UP_ARES.S_ROLE.CREATED_AT</code>. 「createdAt」- 创建时间
+     */
+    public final TableField<SRoleRecord, LocalDateTime> CREATED_AT = createField("CREATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「createdAt」- 创建时间");
+
+    /**
+     * The column <code>UP_ARES.S_ROLE.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public final TableField<SRoleRecord, String> CREATED_BY = createField("CREATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「createdBy」- 创建人");
+
+    /**
+     * The column <code>UP_ARES.S_ROLE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public final TableField<SRoleRecord, LocalDateTime> UPDATED_AT = createField("UPDATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「updatedAt」- 更新时间");
+
+    /**
+     * The column <code>UP_ARES.S_ROLE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public final TableField<SRoleRecord, String> UPDATED_BY = createField("UPDATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「updatedBy」- 更新人");
 
     /**
      * Create a <code>UP_ARES.S_ROLE</code> table reference

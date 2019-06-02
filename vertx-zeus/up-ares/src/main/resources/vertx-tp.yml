@@ -1,2 +1,3 @@
-auditor:
-  component: up.zero.plugin.AuditorPin
+shared:
+  config:
+    async: true

@@ -39,7 +39,7 @@ class IxDao {
         files.forEach(file -> {
             /* 1.File absolute path under classpath */
             final String path = "ke/module/" + file;
-            LOGGER.info("[Ex] Path = {0}", path);
+            LOGGER.info("[ Εκδήλωση ] Path = {0}", path);
             final JsonObject configDao = Ut.ioJObject(path);
 
             Fn.safeNull(() -> {
