@@ -1,12 +1,20 @@
 {
-    "name": "role",
-    "daoCls": "up.zero.domain.tables.daos.SRoleDao",
-    "pojoCls": "up.zero.domain.tables.pojos.SRole",
+    "name": "user",
+    "daoCls": "up.zero.domain.tables.daos.SUserDao",
+    "pojoCls": "up.zero.domain.tables.pojos.SUser",
     "field": {
         "key": "key",
         "unique": [
             [
-                "code",
+                "username",
+                "sigma"
+            ],
+            [
+                "mobile",
+                "sigma"
+            ],
+            [
+                "email",
                 "sigma"
             ]
         ],

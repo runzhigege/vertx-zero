@@ -1,5 +1,6 @@
 package cn.vertxup.api;
 
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.up.annotations.Address;
@@ -22,4 +23,10 @@ public interface PutAgent {
     JsonObject update(@PathParam("actor") String actor,
                       @PathParam("key") String key,
                       @BodyParam JsonObject data);
+
+    @PUT
+    @Path("/batch/{actor}")
+    @Address(Addr.Put.BATCH)
+    JsonArray updateBatch(@PathParam("actor") String actor,
+                          @BodyParam JsonArray dataArray);
 }

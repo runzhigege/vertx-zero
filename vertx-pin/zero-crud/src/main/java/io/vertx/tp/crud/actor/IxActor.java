@@ -1,0 +1,66 @@
+package io.vertx.tp.crud.actor;
+
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
+import io.vertx.tp.crud.atom.IxConfig;
+import io.vertx.up.aiki.Ux;
+import io.vertx.up.atom.Envelop;
+import io.vertx.up.exception.WebException;
+import io.zero.epic.fn.Fn;
+
+/*
+ * Actor workflow for each Envelop
+ */
+public interface IxActor {
+    static IxActor unique() {
+        return Fn.pool(Pool.ACTOR_MAP, UniqueActor.class.getName(),
+                UniqueActor::new);
+    }
+
+    static IxActor header() {
+        return Fn.pool(Pool.ACTOR_MAP, HeaderActor.class.getName(),
+                HeaderActor::new);
+    }
+
+    static IxActor verify() {
+        return Fn.pool(Pool.ACTOR_MAP, VerifyActor.class.getName(),
+                VerifyActor::new);
+    }
+
+    static IxActor uuid() {
+        return Fn.pool(Pool.ACTOR_MAP, UuidActor.class.getName(),
+                UuidActor::new);
+    }
+
+    static IxActor create() {
+        return Fn.pool(Pool.ACTOR_MAP, CreateActor.class.getName(),
+                CreateActor::new);
+    }
+
+    static IxActor update() {
+        return Fn.pool(Pool.ACTOR_MAP, UpdateActor.class.getName(),
+                UpdateActor::new);
+    }
+
+    /*
+     * Input data here ( Async )
+     */
+    default Future<JsonObject> procAsync(final JsonObject data,
+                                         final IxConfig config) {
+        try {
+            return Ux.toFuture(this.proc(data, config));
+        } catch (final WebException error) {
+            return Future.failedFuture(error);
+        }
+    }
+
+    /*
+     * Input data here
+     */
+    JsonObject proc(JsonObject data, IxConfig config);
+
+    /*
+     * Bind
+     */
+    IxActor bind(Envelop envelop);
+}

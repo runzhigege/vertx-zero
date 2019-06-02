@@ -15,6 +15,7 @@ import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
 
 import up.zero.domain.tables.SRole;
+import up.zero.domain.tables.SUser;
 
 
 /**
@@ -30,7 +31,7 @@ import up.zero.domain.tables.SRole;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UpAres extends SchemaImpl {
 
-    private static final long serialVersionUID = 2022274347;
+    private static final long serialVersionUID = 2006236723;
 
     /**
      * The reference instance of <code>UP_ARES</code>
@@ -41,6 +42,11 @@ public class UpAres extends SchemaImpl {
      * The table <code>UP_ARES.S_ROLE</code>.
      */
     public final SRole S_ROLE = up.zero.domain.tables.SRole.S_ROLE;
+
+    /**
+     * The table <code>UP_ARES.S_USER</code>.
+     */
+    public final SUser S_USER = up.zero.domain.tables.SUser.S_USER;
 
     /**
      * No further instances allowed
@@ -67,6 +73,7 @@ public class UpAres extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
-            SRole.S_ROLE);
+            SRole.S_ROLE,
+            SUser.S_USER);
     }
 }

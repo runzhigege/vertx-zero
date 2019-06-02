@@ -1,12 +1,13 @@
-package io.vertx.tp.crud.tool;
+package io.vertx.zero.eon;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /*
  * Zero specification http header
+ * This constants values contains business fields
  */
-public interface CvHeader {
+public interface Headers {
     /* appId */
     String X_APP_ID = "Ox-App-Id";
 
@@ -23,11 +24,4 @@ public interface CvHeader {
             this.put(X_SIGMA, "sigma");
         }
     };
-}
-
-interface Folder {
-
-    String MODULE = "plugin/crud/module/";
-
-    String VALIDATOR = "plugin/crud/validator/";
 }
