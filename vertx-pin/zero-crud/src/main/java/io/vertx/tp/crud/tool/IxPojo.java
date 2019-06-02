@@ -6,6 +6,7 @@ import io.vertx.tp.crud.atom.IxConfig;
 import io.vertx.tp.error._409UniqueAmbiguityException;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
@@ -14,12 +15,22 @@ import java.util.Set;
 
 class IxPojo {
 
+    private static final Annal LOGGER = Annal.get(IxPojo.class);
+
     @SuppressWarnings("all")
-    static <T> T inJson(final String module, final JsonObject data) {
+    static <T> T inJson(final String module, final Envelop envelop, final boolean isUpdate) {
         final IxConfig config = IxDao.get(module);
         final String pojo = config.getPojo();
-        final T reference = Ux.fromJson(data, (Class<T>) config.getPojoCls(), pojo);
-        // TODO:
+        /* Add/Update splitting workflow */
+        final JsonObject normalize = new JsonObject();
+        if (!isUpdate) {
+            /* Add, Append Key */
+            normalize.mergeIn(IxAdd.inAdd(envelop, config));
+        }
+        LOGGER.info("[ Εκδήλωση ] Json Data: \n{0}", normalize.encodePrettily());
+        final T reference = Ut.isNil(pojo) ?
+                Ux.fromJson(normalize, (Class<T>) config.getPojoCls()) :
+                Ux.fromJson(normalize, (Class<T>) config.getPojoCls(), config.getPojo());
         return reference;
     }
 

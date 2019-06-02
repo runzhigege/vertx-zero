@@ -10,12 +10,4 @@
     <modelVersion>4.0.0</modelVersion>
     <name>( Zero Mesh ) Phoebe</name>
     <artifactId>up-phoebe</artifactId>
-
-    <dependencies>
-        <dependency>
-            <groupId>cn.vertxup</groupId>
-            <artifactId>zero-crud</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
 </project>
