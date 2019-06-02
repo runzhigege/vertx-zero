@@ -1,0 +1,3 @@
+# mysql: io.vertx.up.plugin.jdbc.MySqlInfix
+jooq: io.vertx.tp.plugin.jooq.JooqInfix
+shared: io.vertx.up.plugin.shared.MapInfix

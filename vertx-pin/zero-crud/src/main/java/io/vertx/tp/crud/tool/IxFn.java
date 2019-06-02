@@ -31,6 +31,9 @@ class IxFn {
             }
         } catch (final WebException ex) {
             return Future.failedFuture(ex);
+        } catch (final Throwable ex) {
+            ex.printStackTrace();
+            return Future.failedFuture(ex);
         }
     }
 
@@ -44,6 +47,9 @@ class IxFn {
                 return actuator.apply(dao).compose(Ux::toFuture);
             }
         } catch (final WebException ex) {
+            return Future.failedFuture(ex);
+        } catch (final Throwable ex) {
+            ex.printStackTrace();
             return Future.failedFuture(ex);
         }
     }

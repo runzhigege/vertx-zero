@@ -4,6 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxConfig;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
+import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.FileSuffix;
 import io.vertx.zero.eon.Strings;
 import io.zero.epic.Ut;
@@ -18,6 +19,8 @@ import java.util.concurrent.ConcurrentMap;
  * ke/module/（Dao definition files）
  */
 class IxDao {
+
+    private static final Annal LOGGER = Annal.get(IxDao.class);
     /*
      * module -> clazz
      */
@@ -36,12 +39,15 @@ class IxDao {
         files.forEach(file -> {
             /* 1.File absolute path under classpath */
             final String path = "ke/module/" + file;
+            LOGGER.info("[Ex] Path = {0}", path);
             final JsonObject configDao = Ut.ioJObject(path);
 
             Fn.safeNull(() -> {
                 /* 2. Deserialize to IxConfig object */
                 final IxConfig config = Ut.deserialize(configDao, IxConfig.class);
-                CONFIG_MAP.put(file.replace(FileSuffix.JSON, Strings.EMPTY), config);
+                /* 3. Processed key */
+                final String key = file.replace(Strings.DOT + FileSuffix.JSON, Strings.EMPTY);
+                CONFIG_MAP.put(key, config);
             }, configDao);
         });
     }

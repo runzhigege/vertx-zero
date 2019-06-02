@@ -9,8 +9,8 @@ import java.util.function.Function;
 
 public class Ix {
 
-    public static <T> T inJson(final String module, final JsonObject data) {
-        return IxPojo.inJson(module, data);
+    public static <T> T inAdd(final String module, final Envelop envelop) {
+        return IxPojo.inJson(module, envelop, false);
     }
 
     public static JsonObject inFilters(final String module, final Envelop envelop) {

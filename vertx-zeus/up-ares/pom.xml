@@ -11,5 +11,11 @@
 
     <artifactId>up-ares</artifactId>
     <name>( Zero Mesh ) Ares</name>
-
+    <dependencies>
+        <dependency>
+            <groupId>cn.vertxup</groupId>
+            <artifactId>zero-crud</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

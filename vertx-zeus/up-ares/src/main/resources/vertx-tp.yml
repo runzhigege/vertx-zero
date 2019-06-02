@@ -1,0 +1,2 @@
+auditor:
+  component: up.zero.plugin.AuditorPin

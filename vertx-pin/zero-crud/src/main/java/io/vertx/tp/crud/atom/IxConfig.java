@@ -1,12 +1,10 @@
 package io.vertx.tp.crud.atom;
 
-import com.fasterxml.jackson.databind.ClassDeserializer;
-import com.fasterxml.jackson.databind.ClassSerializer;
-import com.fasterxml.jackson.databind.JsonArrayDeserializer;
-import com.fasterxml.jackson.databind.JsonArraySerializer;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 
@@ -14,6 +12,7 @@ public class IxConfig implements Serializable {
 
     private String name;
     private String pojo;
+    private String keyField;
 
     @JsonSerialize(using = ClassSerializer.class)
     @JsonDeserialize(using = ClassDeserializer.class)
@@ -25,14 +24,34 @@ public class IxConfig implements Serializable {
 
     @JsonSerialize(using = JsonArraySerializer.class)
     @JsonDeserialize(using = JsonArrayDeserializer.class)
-    private JsonArray unique;
+    private JsonArray uniqueField;
 
-    public JsonArray getUnique() {
-        return this.unique;
+    @JsonSerialize(using = JsonObjectSerializer.class)
+    @JsonDeserialize(using = JsonObjectDeserializer.class)
+    private JsonObject auditorField;
+
+    public String getKeyField() {
+        return this.keyField;
     }
 
-    public void setUnique(final JsonArray unique) {
-        this.unique = unique;
+    public void setKeyField(final String keyField) {
+        this.keyField = keyField;
+    }
+
+    public JsonObject getAuditorField() {
+        return this.auditorField;
+    }
+
+    public void setAuditorField(final JsonObject auditorField) {
+        this.auditorField = auditorField;
+    }
+
+    public JsonArray getUniqueField() {
+        return this.uniqueField;
+    }
+
+    public void setUniqueField(final JsonArray uniqueField) {
+        this.uniqueField = uniqueField;
     }
 
     public String getName() {

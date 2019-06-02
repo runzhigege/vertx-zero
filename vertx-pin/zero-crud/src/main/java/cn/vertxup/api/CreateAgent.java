@@ -17,6 +17,9 @@ import javax.ws.rs.PathParam;
 @EndPoint
 @Path("/api")
 public interface CreateAgent {
+    /*
+     * Pure Creating for different entity
+     */
     @POST
     @Path("/{actor}")
     @Address(Addr.Post.ADD)

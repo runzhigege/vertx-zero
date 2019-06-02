@@ -1,0 +1,8 @@
+zero:
+  lime: jooq, secure, tp
+  vertx:
+    instance:
+      - name: originx-engine
+        options:
+          # Fix block 2000 limit issue.
+          maxEventLoopExecuteTime: 30000000000
