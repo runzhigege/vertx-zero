@@ -32,6 +32,11 @@ public interface IxActor {
                 UuidActor::new);
     }
 
+    static IxActor key() {
+        return Fn.pool(Pool.ACTOR_MAP, KeyActor.class.getName(),
+                KeyActor::new);
+    }
+
     static IxActor create() {
         return Fn.pool(Pool.ACTOR_MAP, CreateActor.class.getName(),
                 CreateActor::new);
