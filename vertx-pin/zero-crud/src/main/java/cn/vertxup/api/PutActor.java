@@ -44,7 +44,6 @@ public class PutActor {
     }
 
     @Address(Addr.Put.BATCH)
-    @SuppressWarnings("all")
     public <T> Future<Envelop> updateBatch(final Envelop request) {
         /* Batch Extract */
         return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
