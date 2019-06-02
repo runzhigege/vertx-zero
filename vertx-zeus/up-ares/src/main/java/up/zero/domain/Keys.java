@@ -10,7 +10,9 @@ import org.jooq.UniqueKey;
 import org.jooq.impl.Internal;
 
 import up.zero.domain.tables.SRole;
+import up.zero.domain.tables.SUser;
 import up.zero.domain.tables.records.SRoleRecord;
+import up.zero.domain.tables.records.SUserRecord;
 
 
 /**
@@ -38,6 +40,10 @@ public class Keys {
 
     public static final UniqueKey<SRoleRecord> KEY_S_ROLE_PRIMARY = UniqueKeys0.KEY_S_ROLE_PRIMARY;
     public static final UniqueKey<SRoleRecord> KEY_S_ROLE_CODE = UniqueKeys0.KEY_S_ROLE_CODE;
+    public static final UniqueKey<SUserRecord> KEY_S_USER_PRIMARY = UniqueKeys0.KEY_S_USER_PRIMARY;
+    public static final UniqueKey<SUserRecord> KEY_S_USER_USERNAME = UniqueKeys0.KEY_S_USER_USERNAME;
+    public static final UniqueKey<SUserRecord> KEY_S_USER_MOBILE = UniqueKeys0.KEY_S_USER_MOBILE;
+    public static final UniqueKey<SUserRecord> KEY_S_USER_EMAIL = UniqueKeys0.KEY_S_USER_EMAIL;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -51,5 +57,9 @@ public class Keys {
     private static class UniqueKeys0 {
         public static final UniqueKey<SRoleRecord> KEY_S_ROLE_PRIMARY = Internal.createUniqueKey(SRole.S_ROLE, "KEY_S_ROLE_PRIMARY", SRole.S_ROLE.KEY);
         public static final UniqueKey<SRoleRecord> KEY_S_ROLE_CODE = Internal.createUniqueKey(SRole.S_ROLE, "KEY_S_ROLE_CODE", SRole.S_ROLE.CODE, SRole.S_ROLE.SIGMA);
+        public static final UniqueKey<SUserRecord> KEY_S_USER_PRIMARY = Internal.createUniqueKey(SUser.S_USER, "KEY_S_USER_PRIMARY", SUser.S_USER.KEY);
+        public static final UniqueKey<SUserRecord> KEY_S_USER_USERNAME = Internal.createUniqueKey(SUser.S_USER, "KEY_S_USER_USERNAME", SUser.S_USER.USERNAME, SUser.S_USER.SIGMA);
+        public static final UniqueKey<SUserRecord> KEY_S_USER_MOBILE = Internal.createUniqueKey(SUser.S_USER, "KEY_S_USER_MOBILE", SUser.S_USER.MOBILE, SUser.S_USER.SIGMA);
+        public static final UniqueKey<SUserRecord> KEY_S_USER_EMAIL = Internal.createUniqueKey(SUser.S_USER, "KEY_S_USER_EMAIL", SUser.S_USER.EMAIL, SUser.S_USER.SIGMA);
     }
 }

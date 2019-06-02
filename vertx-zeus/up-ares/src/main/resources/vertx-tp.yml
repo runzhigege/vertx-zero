@@ -1,3 +1,5 @@
 shared:
   config:
     async: true
+init:
+  - component: io.vertx.tp.crud.init.IxPin

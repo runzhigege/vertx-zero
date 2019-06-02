@@ -1,7 +1,8 @@
-package io.vertx.tp.crud.tool;
+package io.vertx.tp.crud.init;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxConfig;
+import io.vertx.tp.crud.cv.Folder;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.log.Annal;
@@ -15,19 +16,19 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /*
- * Dao Class
- * ke/module/（Dao definition files）
+ * Dao class initialization
+ * plugin/crud/module/ folder initialize
  */
 class IxDao {
-
-    private static final Annal LOGGER = Annal.get(IxDao.class);
     /*
-     * module -> clazz
+     * Logger for IxDao
      */
+    private static final Annal LOGGER = Annal.get(IxDao.class);
+
     private static final ConcurrentMap<String, IxConfig> CONFIG_MAP =
             new ConcurrentHashMap<>();
 
-    static {
+    static void init() {
         /*
          * Read all definition files, wall files must be following:
          * <name>.json
@@ -39,7 +40,6 @@ class IxDao {
         files.forEach(file -> {
             /* 1.File absolute path under classpath */
             final String path = Folder.MODULE + file;
-            LOGGER.debug("[ Εκδήλωση ] (Init) Module File = {0}", path);
             final JsonObject configDao = Ut.ioJObject(path);
 
             Fn.safeNull(() -> {
@@ -47,32 +47,32 @@ class IxDao {
                 final IxConfig config = Ut.deserialize(configDao, IxConfig.class);
                 /* 3. Processed key */
                 final String key = file.replace(Strings.DOT + FileSuffix.JSON, Strings.EMPTY);
-                LOGGER.debug("[ Εκδήλωση ] (Init) Module Key = {0}", key);
+                LOGGER.info("[ Εκδήλωση ] ( Init ) --- file = {0}, key = {1}", path, key);
                 CONFIG_MAP.put(key, config);
             }, configDao);
         });
+        LOGGER.info("[ Εκδήλωση ] ( Inited ) IxDao Finished ! Size = {0}", CONFIG_MAP.size());
     }
 
-    static IxConfig get(final String module) {
-        return CONFIG_MAP.get(module);
+    static IxConfig get(final String actor) {
+        LOGGER.info("[ Εκδήλωση ] Actor = {0}", actor);
+        final IxConfig config = CONFIG_MAP.get(actor);
+        return Fn.getNull(null, () -> config, config);
     }
 
-    static UxJooq getDao(final String module) {
-        LOGGER.info("[ Εκδήλωση ] ---> Module = {0}", module);
-        final IxConfig config = CONFIG_MAP.get(module);
+    static UxJooq get(final IxConfig config) {
         return Fn.getNull(null, () -> {
             final Class<?> daoCls = config.getDaoCls();
-            return Fn.getNull(null, () -> {
-                /* 1. Build UxJooq Object */
-                final UxJooq dao = Ux.Jooq.on(daoCls);
-                final String pojo = config.getPojo();
+            assert null != daoCls : " Should not be null, check configuration";
+            /* 1. Build UxJooq Object */
+            final UxJooq dao = Ux.Jooq.on(daoCls);
+            final String pojo = config.getPojo();
 
-                /* 2. Where existing pojo.yml ( Zero support yml file to define mapping ) */
-                if (Ut.notNil(pojo)) {
-                    dao.on(pojo);
-                }
-                return dao;
-            }, daoCls);
+            /* 2. Where existing pojo.yml ( Zero support yml file to define mapping ) */
+            if (Ut.notNil(pojo)) {
+                dao.on(pojo);
+            }
+            return dao;
         }, config);
     }
 }

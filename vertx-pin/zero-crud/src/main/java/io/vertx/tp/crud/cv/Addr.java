@@ -30,5 +30,7 @@ public interface Addr {
     interface Put {
 
         String BY_ID = Prefix._EVENT + "X-PUT/ID";
+
+        String BATCH = Prefix._EVENT + "X-PUT/BATCH";
     }
 }
