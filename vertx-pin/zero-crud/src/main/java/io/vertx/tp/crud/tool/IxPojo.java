@@ -18,20 +18,24 @@ class IxPojo {
     private static final Annal LOGGER = Annal.get(IxPojo.class);
 
     @SuppressWarnings("all")
-    static <T> T inJson(final String module, final Envelop envelop, final boolean isUpdate) {
+    static <T> T inEntity(final String module, final Envelop envelop, final boolean isUpdate) {
         final IxConfig config = IxDao.get(module);
         final String pojo = config.getPojo();
         /* Add/Update splitting workflow */
         final JsonObject normalize = new JsonObject();
-        if (!isUpdate) {
+        if (isUpdate) {
+            /* Edit, Replace Key */
+            normalize.mergeIn(IxDefault.inEdit(envelop, config));
+        } else {
             /* Add, Append Key */
             normalize.mergeIn(IxDefault.inAdd(envelop, config));
         }
+
         normalize.mergeIn(IxDefault.inAuditor(envelop, config, isUpdate));
 
         normalize.mergeIn(IxDefault.inHeader(envelop, config));
         /* Validation For Body */
-        IxValidator.verifyBody(envelop, normalize);
+        IxValidator.verifyBody(envelop, config, normalize);
 
         LOGGER.info("[ Εκδήλωση ] (Json) Normalized: \n{0}", normalize.encodePrettily());
         final T reference = Ut.isNil(pojo) ?

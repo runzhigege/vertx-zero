@@ -39,7 +39,7 @@ class IxDao {
         files.forEach(file -> {
             /* 1.File absolute path under classpath */
             final String path = Folder.MODULE + file;
-            LOGGER.info("[ Εκδήλωση ] (Init) Module File = {0}", path);
+            LOGGER.debug("[ Εκδήλωση ] (Init) Module File = {0}", path);
             final JsonObject configDao = Ut.ioJObject(path);
 
             Fn.safeNull(() -> {
@@ -47,7 +47,7 @@ class IxDao {
                 final IxConfig config = Ut.deserialize(configDao, IxConfig.class);
                 /* 3. Processed key */
                 final String key = file.replace(Strings.DOT + FileSuffix.JSON, Strings.EMPTY);
-                LOGGER.info("[ Εκδήλωση ] (Init) Module Key = {0}", key);
+                LOGGER.debug("[ Εκδήλωση ] (Init) Module Key = {0}", key);
                 CONFIG_MAP.put(key, config);
             }, configDao);
         });

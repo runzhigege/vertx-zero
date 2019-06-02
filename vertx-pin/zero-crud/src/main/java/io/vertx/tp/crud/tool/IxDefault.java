@@ -34,6 +34,22 @@ class IxDefault {
     }
 
     /*
+     * Get Edit Normalized Json
+     */
+    static JsonObject inEdit(final Envelop envelop, final IxConfig config) {
+        final IxField field = config.getField();
+        final JsonObject body = Ux.getJson2(envelop);
+        /* Primary Key Add */
+        if (Ut.notNil(field.getKey())) {
+            final String keyValue = Ux.getString1(envelop);
+            if (Ut.notNil(keyValue)) {
+                body.put(field.getKey(), keyValue);
+            }
+        }
+        return body;
+    }
+
+    /*
      * Get User information to set auditor
      */
     static JsonObject inAuditor(final Envelop envelop,

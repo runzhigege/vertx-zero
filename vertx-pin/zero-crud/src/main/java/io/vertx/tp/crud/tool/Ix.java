@@ -10,7 +10,15 @@ import java.util.function.Function;
 public class Ix {
 
     public static <T> T inAdd(final String module, final Envelop envelop) {
-        return IxPojo.inJson(module, envelop, false);
+        return IxPojo.inEntity(module, envelop, false);
+    }
+
+    public static <T> T inEdit(final String module, final Envelop envelop) {
+        return IxPojo.inEntity(module, envelop, true);
+    }
+
+    public static JsonObject inKey(final String module, final Envelop envelop) {
+        return IxQuery.inKey(module, envelop);
     }
 
     public static JsonObject inFilters(final String module, final Envelop envelop) {

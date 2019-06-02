@@ -2,6 +2,7 @@ package io.vertx.tp.crud.tool;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.crud.atom.IxConfig;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.Rule;
 import io.vertx.up.exception.WebException;
@@ -36,7 +37,7 @@ class IxValidator {
         files.forEach(file -> {
             /* 1. Validator file under classpath */
             final String path = Folder.VALIDATOR + file;
-            LOGGER.info("[ Εκδήλωση ] (Init) Validator File = {0}", path);
+            LOGGER.debug("[ Εκδήλωση ] (Init) Validator File = {0}", path);
             /* 2. JsonArray process */
             final JsonObject rules = Ut.ioYaml(path);
             final ConcurrentMap<String, List<Rule>> ruleMap = new ConcurrentHashMap<>();
@@ -47,7 +48,7 @@ class IxValidator {
             });
             /* 4. Append rules */
             final String key = file.replace(Strings.DOT + FileSuffix.YML, Strings.EMPTY);
-            LOGGER.info("[ Εκδήλωση ] (Init) Validator Key = {0}", key);
+            LOGGER.debug("[ Εκδήλωση ] (Init) Validator Key = {0}", key);
             RULE_MAP.put(key, ruleMap);
         });
     }
@@ -69,18 +70,25 @@ class IxValidator {
         return rules;
     }
 
-    private static String getKey(final Envelop envelop) {
+    private static String getKey(final Envelop envelop, final IxConfig config, final JsonObject normalized) {
         /* 1.method, uri */
-        final String uri = envelop.getUri();
+        String uri = envelop.getUri();
         final String method = envelop.getMethod().name();
+        /* 2.uri 中处理 key 相关的情况 */
+        final String keyField = config.getField().getKey();
+        final String keyValue = normalized.getString(keyField);
+        if (Ut.notNil(keyValue)) {
+            uri = uri.replace(keyValue, "$" + keyField);
+        }
+        /* 3.Final Rule */
         return uri.toLowerCase(Locale.getDefault()).replace('/', '.')
                 .substring(1) + Strings.DOT
                 + method.toLowerCase(Locale.getDefault());
     }
 
-    static void verifyBody(final Envelop envelop, final JsonObject normalized) {
+    static void verifyBody(final Envelop envelop, final IxConfig config, final JsonObject normalized) {
         /* 1.method, uri */
-        final String key = getKey(envelop);
+        final String key = getKey(envelop, config, normalized);
         LOGGER.info("[ Εκδήλωση ] ---> Rule: {0}", key);
         final ConcurrentMap<String, List<Rule>> rules = getRules(key);
         if (!rules.isEmpty()) {

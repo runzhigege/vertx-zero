@@ -14,7 +14,7 @@ public class DeleteActor {
     @Address(Addr.Delete.BY_ID)
     public Future<Boolean> delete(final String actor,
                                   final String key) {
-        LOGGER.info("[ Εκδήλωση ] Uri Addr : DELETE /api/{0}/{1}", actor, key);
+        LOGGER.info("[ Εκδήλωση ] ---> Uri Addr : DELETE /api/{0}/{1}", actor, key);
         return Ix.toBoolean(actor, (dao) -> dao.deleteByIdAsync(key));
     }
 }
