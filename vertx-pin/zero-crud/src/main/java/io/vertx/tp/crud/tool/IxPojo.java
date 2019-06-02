@@ -25,12 +25,13 @@ class IxPojo {
         final JsonObject normalize = new JsonObject();
         if (!isUpdate) {
             /* Add, Append Key */
-            normalize.mergeIn(IxAdd.inAdd(envelop, config));
+            normalize.mergeIn(IxDefault.inAdd(envelop, config));
         }
         LOGGER.info("[ Εκδήλωση ] Json Data: \n{0}", normalize.encodePrettily());
         final T reference = Ut.isNil(pojo) ?
                 Ux.fromJson(normalize, (Class<T>) config.getPojoCls()) :
                 Ux.fromJson(normalize, (Class<T>) config.getPojoCls(), config.getPojo());
+        LOGGER.info("[ Εκδήλωση ] Deserialized: {0}", reference);
         return reference;
     }
 

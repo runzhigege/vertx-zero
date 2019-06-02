@@ -24,7 +24,7 @@ public class PingAim extends BaseAim implements Aim<RoutingContext> {
             // 3. Resource model building
             final Envelop data;
             if (Ut.isBoolean(invoked)) {
-                data = Envelop.success((Boolean) invoked);
+                data = Envelop.success(invoked);
             } else {
                 data = Envelop.success(Boolean.TRUE);
             }

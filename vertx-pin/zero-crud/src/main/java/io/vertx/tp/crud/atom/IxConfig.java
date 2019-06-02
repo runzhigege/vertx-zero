@@ -1,10 +1,9 @@
 package io.vertx.tp.crud.atom;
 
-import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.ClassDeserializer;
+import com.fasterxml.jackson.databind.ClassSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.vertx.core.json.JsonArray;
-import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 
@@ -12,7 +11,7 @@ public class IxConfig implements Serializable {
 
     private String name;
     private String pojo;
-    private String keyField;
+    private IxField field;
 
     @JsonSerialize(using = ClassSerializer.class)
     @JsonDeserialize(using = ClassDeserializer.class)
@@ -22,36 +21,12 @@ public class IxConfig implements Serializable {
     @JsonDeserialize(using = ClassDeserializer.class)
     private Class<?> daoCls;
 
-    @JsonSerialize(using = JsonArraySerializer.class)
-    @JsonDeserialize(using = JsonArrayDeserializer.class)
-    private JsonArray uniqueField;
-
-    @JsonSerialize(using = JsonObjectSerializer.class)
-    @JsonDeserialize(using = JsonObjectDeserializer.class)
-    private JsonObject auditorField;
-
-    public String getKeyField() {
-        return this.keyField;
+    public IxField getField() {
+        return this.field;
     }
 
-    public void setKeyField(final String keyField) {
-        this.keyField = keyField;
-    }
-
-    public JsonObject getAuditorField() {
-        return this.auditorField;
-    }
-
-    public void setAuditorField(final JsonObject auditorField) {
-        this.auditorField = auditorField;
-    }
-
-    public JsonArray getUniqueField() {
-        return this.uniqueField;
-    }
-
-    public void setUniqueField(final JsonArray uniqueField) {
-        this.uniqueField = uniqueField;
+    public void setField(final IxField field) {
+        this.field = field;
     }
 
     public String getName() {
@@ -84,5 +59,16 @@ public class IxConfig implements Serializable {
 
     public void setDaoCls(final Class<?> daoCls) {
         this.daoCls = daoCls;
+    }
+
+    @Override
+    public String toString() {
+        return "IxConfig{" +
+                "name='" + this.name + '\'' +
+                ", pojo='" + this.pojo + '\'' +
+                ", field=" + this.field +
+                ", pojoCls=" + this.pojoCls +
+                ", daoCls=" + this.daoCls +
+                '}';
     }
 }

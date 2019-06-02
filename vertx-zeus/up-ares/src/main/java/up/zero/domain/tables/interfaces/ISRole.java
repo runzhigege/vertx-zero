@@ -5,6 +5,7 @@ package up.zero.domain.tables.interfaces;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.annotation.Generated;
 
@@ -112,6 +113,46 @@ public interface ISRole extends Serializable {
      */
     public String getMetadata();
 
+    /**
+     * Setter for <code>UP_ARES.S_ROLE.CREATED_AT</code>. 「createdAt」- 创建时间
+     */
+    public ISRole setCreatedAt(LocalDateTime value);
+
+    /**
+     * Getter for <code>UP_ARES.S_ROLE.CREATED_AT</code>. 「createdAt」- 创建时间
+     */
+    public LocalDateTime getCreatedAt();
+
+    /**
+     * Setter for <code>UP_ARES.S_ROLE.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public ISRole setCreatedBy(String value);
+
+    /**
+     * Getter for <code>UP_ARES.S_ROLE.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public String getCreatedBy();
+
+    /**
+     * Setter for <code>UP_ARES.S_ROLE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public ISRole setUpdatedAt(LocalDateTime value);
+
+    /**
+     * Getter for <code>UP_ARES.S_ROLE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public LocalDateTime getUpdatedAt();
+
+    /**
+     * Setter for <code>UP_ARES.S_ROLE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public ISRole setUpdatedBy(String value);
+
+    /**
+     * Getter for <code>UP_ARES.S_ROLE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public String getUpdatedBy();
+
     // -------------------------------------------------------------------------
     // FROM and INTO
     // -------------------------------------------------------------------------
@@ -136,6 +177,10 @@ public interface ISRole extends Serializable {
         setLanguage(json.getString("LANGUAGE"));
         setActive(json.getBoolean("ACTIVE"));
         setMetadata(json.getString("METADATA"));
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        setCreatedBy(json.getString("CREATED_BY"));
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        setUpdatedBy(json.getString("UPDATED_BY"));
         return this;
     }
 
@@ -151,6 +196,10 @@ public interface ISRole extends Serializable {
         json.put("LANGUAGE",getLanguage());
         json.put("ACTIVE",getActive());
         json.put("METADATA",getMetadata());
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        json.put("CREATED_BY",getCreatedBy());
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        json.put("UPDATED_BY",getUpdatedBy());
         return json;
     }
 

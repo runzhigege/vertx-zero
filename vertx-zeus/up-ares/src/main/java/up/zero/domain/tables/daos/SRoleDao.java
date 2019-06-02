@@ -6,6 +6,7 @@ package up.zero.domain.tables.daos;
 
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -125,6 +126,34 @@ public class SRoleDao extends DAOImpl<SRoleRecord, up.zero.domain.tables.pojos.S
     }
 
     /**
+     * Fetch records that have <code>CREATED_AT IN (values)</code>
+     */
+    public List<up.zero.domain.tables.pojos.SRole> fetchByCreatedAt(LocalDateTime... values) {
+        return fetch(SRole.S_ROLE.CREATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code>
+     */
+    public List<up.zero.domain.tables.pojos.SRole> fetchByCreatedBy(String... values) {
+        return fetch(SRole.S_ROLE.CREATED_BY, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code>
+     */
+    public List<up.zero.domain.tables.pojos.SRole> fetchByUpdatedAt(LocalDateTime... values) {
+        return fetch(SRole.S_ROLE.UPDATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code>
+     */
+    public List<up.zero.domain.tables.pojos.SRole> fetchByUpdatedBy(String... values) {
+        return fetch(SRole.S_ROLE.UPDATED_BY, values);
+    }
+
+    /**
      * Fetch records that have <code>KEY IN (values)</code> asynchronously
      */
     public CompletableFuture<List<up.zero.domain.tables.pojos.SRole>> fetchByKeyAsync(List<String> values) {
@@ -192,6 +221,34 @@ public class SRoleDao extends DAOImpl<SRoleRecord, up.zero.domain.tables.pojos.S
      */
     public CompletableFuture<List<up.zero.domain.tables.pojos.SRole>> fetchByMetadataAsync(List<String> values) {
         return fetchAsync(SRole.S_ROLE.METADATA,values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_AT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<up.zero.domain.tables.pojos.SRole>> fetchByCreatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(SRole.S_ROLE.CREATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<up.zero.domain.tables.pojos.SRole>> fetchByCreatedByAsync(List<String> values) {
+        return fetchAsync(SRole.S_ROLE.CREATED_BY,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<up.zero.domain.tables.pojos.SRole>> fetchByUpdatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(SRole.S_ROLE.UPDATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<up.zero.domain.tables.pojos.SRole>> fetchByUpdatedByAsync(List<String> values) {
+        return fetchAsync(SRole.S_ROLE.UPDATED_BY,values);
     }
 
     private io.vertx.core.Vertx vertx;

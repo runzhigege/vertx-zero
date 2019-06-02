@@ -4,6 +4,8 @@
 package up.zero.domain.tables.pojos;
 
 
+import java.time.LocalDateTime;
+
 import javax.annotation.Generated;
 
 import up.zero.domain.tables.interfaces.ISRole;
@@ -22,17 +24,21 @@ import up.zero.domain.tables.interfaces.ISRole;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SRole implements ISRole {
 
-    private static final long serialVersionUID = 1238193795;
+    private static final long serialVersionUID = 1003181258;
 
-    private String  key;
-    private String  name;
-    private String  code;
-    private Boolean super_;
-    private String  comment;
-    private String  sigma;
-    private String  language;
-    private Boolean active;
-    private String  metadata;
+    private String        key;
+    private String        name;
+    private String        code;
+    private Boolean       super_;
+    private String        comment;
+    private String        sigma;
+    private String        language;
+    private Boolean       active;
+    private String        metadata;
+    private LocalDateTime createdAt;
+    private String        createdBy;
+    private LocalDateTime updatedAt;
+    private String        updatedBy;
 
     public SRole() {}
 
@@ -46,18 +52,26 @@ public class SRole implements ISRole {
         this.language = value.language;
         this.active = value.active;
         this.metadata = value.metadata;
+        this.createdAt = value.createdAt;
+        this.createdBy = value.createdBy;
+        this.updatedAt = value.updatedAt;
+        this.updatedBy = value.updatedBy;
     }
 
     public SRole(
-        String  key,
-        String  name,
-        String  code,
-        Boolean super_,
-        String  comment,
-        String  sigma,
-        String  language,
-        Boolean active,
-        String  metadata
+        String        key,
+        String        name,
+        String        code,
+        Boolean       super_,
+        String        comment,
+        String        sigma,
+        String        language,
+        Boolean       active,
+        String        metadata,
+        LocalDateTime createdAt,
+        String        createdBy,
+        LocalDateTime updatedAt,
+        String        updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -68,6 +82,10 @@ public class SRole implements ISRole {
         this.language = language;
         this.active = active;
         this.metadata = metadata;
+        this.createdAt = createdAt;
+        this.createdBy = createdBy;
+        this.updatedAt = updatedAt;
+        this.updatedBy = updatedBy;
     }
 
     @Override
@@ -170,6 +188,50 @@ public class SRole implements ISRole {
     }
 
     @Override
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    @Override
+    public SRole setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    @Override
+    public String getCreatedBy() {
+        return this.createdBy;
+    }
+
+    @Override
+    public SRole setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    @Override
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    @Override
+    public SRole setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+        return this;
+    }
+
+    @Override
+    public String getUpdatedBy() {
+        return this.updatedBy;
+    }
+
+    @Override
+    public SRole setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+        return this;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("SRole (");
 
@@ -182,6 +244,10 @@ public class SRole implements ISRole {
         sb.append(", ").append(language);
         sb.append(", ").append(active);
         sb.append(", ").append(metadata);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(createdBy);
+        sb.append(", ").append(updatedAt);
+        sb.append(", ").append(updatedBy);
 
         sb.append(")");
         return sb.toString();
@@ -205,6 +271,10 @@ public class SRole implements ISRole {
         setLanguage(from.getLanguage());
         setActive(from.getActive());
         setMetadata(from.getMetadata());
+        setCreatedAt(from.getCreatedAt());
+        setCreatedBy(from.getCreatedBy());
+        setUpdatedAt(from.getUpdatedAt());
+        setUpdatedBy(from.getUpdatedBy());
     }
 
     /**
