@@ -15,16 +15,24 @@ public interface Addr {
     interface Get {
 
         String BY_ID = Prefix._EVENT + "X-GET/ID";
+
+        String COLUMN_FULL = Prefix._EVENT + "X-COLUMN/FULL";
+
+        String COLUMN_MY = Prefix._EVENT + "X-COLUMN/MY";
     }
 
     interface Delete {
 
         String BY_ID = Prefix._EVENT + "X-DELETE/ID";
+
+        String BATCH = Prefix._EVENT + "X-DELETE/BATCH";
     }
 
     interface Post {
 
         String ADD = Prefix._EVENT + "X-ADD";
+
+        String SEARCH = Prefix._EVENT + "X-SEARCH";
     }
 
     interface Put {

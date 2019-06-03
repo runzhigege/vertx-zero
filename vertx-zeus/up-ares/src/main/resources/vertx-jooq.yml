@@ -3,5 +3,5 @@ jooq:
     driverClassName: "com.mysql.cj.jdbc.Driver"
     username: root
     password: "pl,okmijn123"
-    catalog: DB_ZERO_CRUD
-    jdbcUrl: "jdbc:mysql://ox.engine.cn:3306/DB_ZERO_CRUD?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false"
+    catalog: UP_RBAC
+    jdbcUrl: "jdbc:mysql://ox.engine.cn:3306/UP_RBAC?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false"

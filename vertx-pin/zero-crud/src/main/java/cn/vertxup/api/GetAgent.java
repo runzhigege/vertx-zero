@@ -1,5 +1,6 @@
 package cn.vertxup.api;
 
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.up.annotations.Address;
@@ -21,4 +22,14 @@ public interface GetAgent {
     @Address(Addr.Get.BY_ID)
     JsonObject getById(@PathParam("actor") String actor,
                        @PathParam("key") String key);
+
+    @GET
+    @Path("/columns/full/{actor}")
+    @Address(Addr.Get.COLUMN_FULL)
+    JsonArray getFull(@PathParam("actor") String actor);
+
+    @GET
+    @Path("/columns/my/{actor}")
+    @Address(Addr.Get.COLUMN_MY)
+    JsonArray getMy(@PathParam("actor") String actor);
 }
