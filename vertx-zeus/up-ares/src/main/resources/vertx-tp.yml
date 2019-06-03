@@ -3,8 +3,8 @@ shared:
     async: true
 init:
   - component: io.vertx.tp.crud.init.IxPin
+  - component: io.vertx.tp.rbac.init.ScPin
 column:
-  component: io.vertx.tp.crud.column.ColService
+  component: io.vertx.tp.crud.service.ColService
 auth:
-  token:
-    expired: 30 # RBAC component token expired
+  token.expired: 30 # RBAC component token expired

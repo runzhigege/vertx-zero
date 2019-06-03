@@ -18,10 +18,6 @@ class IxLog {
         info(logger, "Init", pattern, args);
     }
 
-    static void infoInited(final Annal logger, final String pattern, final Object... args) {
-        info(logger, "Inited", pattern, args);
-    }
-
     static void infoRest(final Annal logger, final String pattern, final Object... args) {
         info(logger, "Rest", pattern, args);
     }

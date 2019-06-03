@@ -1,4 +1,4 @@
-package io.vertx.tp.crud.column;
+package io.vertx.tp.kern;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.zero.marshal.node.Node;
@@ -8,10 +8,7 @@ import io.zero.epic.fn.Fn;
 
 import java.util.Objects;
 
-/*
- * Column
- */
-public class IxStub {
+public class ColPin {
 
     private static final String COLUMN = "column";
     private static final Node<JsonObject> visitor = Ut.singleton(ZeroUniform.class);
@@ -22,11 +19,12 @@ public class IxStub {
         /* Column Class */
         final String columnClsName = columnConfig.getString("component");
         return Fn.getJvm(() -> {
-            Class<?> columnCls = Ut.clazz(columnClsName);
+            final Class<?> columnCls = Ut.clazz(columnClsName);
             if (Objects.nonNull(columnCls)) {
-                columnCls = ColService.class;
+                return Ut.instance(columnCls);
+            } else {
+                return null;
             }
-            return Ut.instance(columnCls);
         }, columnClsName);
     }
 }

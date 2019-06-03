@@ -1,26 +1,18 @@
-package io.vertx.tp.crud.column;
+package io.vertx.tp.kern;
 
-import io.vertx.tp.crud.atom.IxConfig;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.log.Annal;
 
 /*
  * Abstract Column
  */
-public abstract class AbstractColumn implements ColStub {
+public abstract class AbstractColService implements ColStub {
 
     private transient UxJooq jooq;
-    private transient IxConfig config;
 
     @Override
     public ColStub on(final UxJooq jooq) {
         this.jooq = jooq;
-        return this;
-    }
-
-    @Override
-    public ColStub on(final IxConfig config) {
-        this.config = config;
         return this;
     }
 

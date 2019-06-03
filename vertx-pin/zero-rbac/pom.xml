@@ -11,6 +11,13 @@
 
     <artifactId>zero-rbac</artifactId>
     <name>（ Zero Pin ) -- Rbac Management</name>
+    <dependencies>
+        <!-- Kern -->
+        <dependency>
+            <groupId>cn.vertxup</groupId>
+            <artifactId>zero-ke</artifactId>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>

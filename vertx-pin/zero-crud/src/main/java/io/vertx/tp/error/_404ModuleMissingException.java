@@ -12,7 +12,7 @@ public class _404ModuleMissingException extends WebException {
 
     @Override
     public int getCode() {
-        return -60037;
+        return -80100;
     }
 
     @Override
