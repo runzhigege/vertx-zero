@@ -20,6 +20,8 @@ public interface Addr {
     interface Delete {
 
         String BY_ID = Prefix._EVENT + "X-DELETE/ID";
+
+        String BATCH = Prefix._EVENT + "X-DELETE/BATCH";
     }
 
     interface Post {

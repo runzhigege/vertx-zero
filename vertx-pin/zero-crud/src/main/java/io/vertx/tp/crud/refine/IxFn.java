@@ -7,6 +7,8 @@ import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
 
+import java.time.Instant;
+import java.util.Objects;
 import java.util.function.Function;
 
 class IxFn {
@@ -28,5 +30,19 @@ class IxFn {
                 return dao.searchAsync(criteria);
             }
         };
+    }
+
+    static void audit(final JsonObject auditor, final JsonObject config, final String userId) {
+        if (Objects.nonNull(config) && Ut.notNil(userId)) {
+            /* User By */
+            final String by = config.getString("by");
+            if (Ut.notNil(by)) {
+                auditor.put(by, userId);
+            }
+            final String at = config.getString("at");
+            if (Ut.notNil(at)) {
+                auditor.put(at, Instant.now());
+            }
+        }
     }
 }
