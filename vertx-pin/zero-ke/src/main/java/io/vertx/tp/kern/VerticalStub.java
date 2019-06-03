@@ -11,22 +11,22 @@ import io.vertx.up.aiki.UxJooq;
  * 2. Save my columns
  * 3. Read my columns
  */
-public interface ColStub {
+public interface VerticalStub {
 
-    ColStub on(UxJooq jooq);
+    VerticalStub on(UxJooq jooq);
 
     /*
      * Read my columns
      */
-    Future<JsonArray> fetchMyColumns(JsonObject filters);
+    Future<JsonArray> fetchMy(JsonObject filters);
 
     /*
      * Save my columns
      */
-    Future<JsonArray> saveMyColumns(JsonObject filters);
+    Future<JsonArray> saveMy(JsonObject filters);
 
     /*
      * Read full columns
      */
-    Future<JsonArray> fetchFullColumns(JsonObject filters);
+    Future<JsonArray> fetchFull(JsonObject filters);
 }
