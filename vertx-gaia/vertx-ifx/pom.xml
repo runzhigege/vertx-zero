@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.vertxup</groupId>
-            <artifactId>vertx-tp</artifactId>
+            <artifactId>vertx-up</artifactId>
         </dependency>
     </dependencies>
 </project>
