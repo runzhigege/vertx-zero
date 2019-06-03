@@ -12,7 +12,7 @@ import io.vertx.up.secure.handler.JwtOstium;
 import io.vertx.up.secure.provider.JwtAuth;
 
 @Wall(value = "jwt", path = "/api/*")
-public class JwtWall implements Security {
+public class AuthWall implements Security {
     @Authenticate
     public AuthHandler authenticate(final Vertx vertx,
                                     final JsonObject config) {

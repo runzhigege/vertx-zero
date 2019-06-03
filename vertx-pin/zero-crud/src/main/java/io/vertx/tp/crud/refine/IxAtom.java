@@ -11,7 +11,6 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.log.Annal;
 
-import java.util.Locale;
 import java.util.function.BiFunction;
 
 public class IxAtom {
@@ -44,8 +43,8 @@ public class IxAtom {
         final HttpMethod method = envelop.getMethod();
         final String uri = envelop.getUri();
         final Annal logger = Annal.get(this.target);
-        logger.info("[ Εκδήλωση ] ---> Uri Addr : {0} {1}",
-                method.name().toUpperCase(Locale.getDefault()), uri);
+
+        IxLog.infoRest(logger, "---> Uri Addr: {0} {1}", method, uri);
     }
 
     public IxAtom input(final Envelop envelop) {

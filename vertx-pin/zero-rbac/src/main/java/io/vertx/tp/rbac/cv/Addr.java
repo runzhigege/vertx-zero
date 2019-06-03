@@ -10,7 +10,7 @@ interface Prefix {
 
 public interface Addr {
 
-    interface Login {
+    interface Auth {
 
         String LOGIN = Prefix._EVENT + "O-LOGIN";
 

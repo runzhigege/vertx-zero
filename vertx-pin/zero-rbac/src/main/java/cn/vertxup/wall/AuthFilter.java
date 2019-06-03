@@ -10,7 +10,7 @@ import io.zero.epic.Ut;
 import javax.servlet.annotation.WebFilter;
 
 @WebFilter("/*")
-public class JwtFilter extends HttpFilter {
+public class AuthFilter extends HttpFilter {
 
     @Override
     public void doFilter(final HttpServerRequest request,

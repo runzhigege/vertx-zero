@@ -2,7 +2,8 @@ package io.vertx.tp.crud.init;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxConfig;
-import io.vertx.tp.crud.cv.Folder;
+import io.vertx.tp.crud.cv.IxFolder;
+import io.vertx.tp.crud.refine.Ix;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.log.Annal;
@@ -35,11 +36,11 @@ class IxDao {
          * 1）Each file could define only one module, the filename is module name.
          * 2）Each file must be json format with .json extension, others will be ignored.
          * */
-        final List<String> files = Ut.ioFiles(Folder.MODULE, FileSuffix.JSON);
+        final List<String> files = Ut.ioFiles(IxFolder.MODULE, FileSuffix.JSON);
 
         files.forEach(file -> {
             /* 1.File absolute path under classpath */
-            final String path = Folder.MODULE + file;
+            final String path = IxFolder.MODULE + file;
             final JsonObject configDao = Ut.ioJObject(path);
 
             Fn.safeNull(() -> {
@@ -47,15 +48,18 @@ class IxDao {
                 final IxConfig config = Ut.deserialize(configDao, IxConfig.class);
                 /* 3. Processed key */
                 final String key = file.replace(Strings.DOT + FileSuffix.JSON, Strings.EMPTY);
-                LOGGER.info("[ Εκδήλωση ] ( Init ) --- file = {0}, key = {1}", path, key);
+
+                /* 4. Logger */
+                Ix.infoInit(LOGGER, "--- file = {0}, key = {1}", path, key);
+
                 CONFIG_MAP.put(key, config);
             }, configDao);
         });
-        LOGGER.info("[ Εκδήλωση ] ( Inited ) IxDao Finished ! Size = {0}", CONFIG_MAP.size());
+        Ix.infoInited(LOGGER, "IxDao Finished ! Size = {0}", CONFIG_MAP.size());
     }
 
     static IxConfig get(final String actor) {
-        LOGGER.info("[ Εκδήλωση ] Actor = {0}", actor);
+        Ix.infoRest(LOGGER, "Actor = {0}", actor);
         final IxConfig config = CONFIG_MAP.get(actor);
         return Fn.getNull(null, () -> config, config);
     }
