@@ -1,4 +1,4 @@
-package up.zero.wall;
+package cn.vertxup.wall;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;

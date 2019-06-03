@@ -15,7 +15,7 @@ import javax.ws.rs.PathParam;
  */
 @EndPoint
 @Path("/api")
-public interface CreateAgent {
+public interface PostAgent {
     /*
      * Pure Creating for different entity
      */

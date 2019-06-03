@@ -14,6 +14,7 @@
     <name>（ Zero Plugin ) Container Tier</name>
     <modules>
         <module>zero-crud</module>
+        <module>zero-rbac</module>
     </modules>
     <dependencies>
         <dependency>

@@ -6,6 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxConfig;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
+import io.vertx.up.atom.Envelop;
 
 import java.util.List;
 import java.util.function.Function;
@@ -71,7 +72,12 @@ public class Ix {
         return Ux.toFuture(IxSerialize.zipper(from, to, config));
     }
 
+    // Query
     public static Future<JsonObject> inKeys(final JsonArray array, final IxConfig config) {
         return Ux.toFuture(IxQuery.inKeys(array, config));
+    }
+
+    public static Future<JsonObject> inColumns(final Envelop envelop, final IxConfig config) {
+        return Ux.toFuture(IxQuery.inColumns(envelop, config));
     }
 }
