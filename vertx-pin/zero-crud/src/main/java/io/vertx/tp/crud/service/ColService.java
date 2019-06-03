@@ -10,17 +10,17 @@ import io.vertx.tp.kern.AbstractVertical;
  */
 public class ColService extends AbstractVertical {
     @Override
-    public Future<JsonArray> fetchMyColumns(final JsonObject filters) {
+    public Future<JsonArray> fetchMy(final JsonObject filters) {
         return null;
     }
 
     @Override
-    public Future<JsonArray> saveMyColumns(final JsonObject filters) {
+    public Future<JsonArray> saveMy(final JsonObject filters) {
         return null;
     }
 
     @Override
-    public Future<JsonArray> fetchFullColumns(final JsonObject filters) {
+    public Future<JsonArray> fetchFull(final JsonObject filters) {
         return null;
     }
 }

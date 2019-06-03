@@ -9,4 +9,8 @@ public interface FileSuffix {
     String CLASS = "class";
 
     String JSON = "json";
+
+    String EXCEL_2003 = "xls";
+
+    String EXCEL_2007 = "xlsx";
 }
