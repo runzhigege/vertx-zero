@@ -6,12 +6,12 @@ import io.vertx.up.log.Annal;
 /*
  * Abstract Column
  */
-public abstract class AbstractColService implements ColStub {
+public abstract class AbstractVertical implements VerticalStub {
 
     private transient UxJooq jooq;
 
     @Override
-    public ColStub on(final UxJooq jooq) {
+    public VerticalStub on(final UxJooq jooq) {
         this.jooq = jooq;
         return this;
     }

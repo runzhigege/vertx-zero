@@ -14,4 +14,9 @@ public interface AuthStub {
      * Exchange token with authorization code
      */
     Future<JsonObject> token(JsonObject filters, String state);
+
+    /**
+     * Login with "username/password"
+     */
+    Future<JsonObject> login(String username, String password);
 }
