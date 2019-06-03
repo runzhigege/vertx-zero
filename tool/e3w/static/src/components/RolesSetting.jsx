@@ -1,7 +1,7 @@
 import React from 'react'
-import { Box } from 'react-polymer-layout'
-import { RolesGet, RolesAddPerm, RolesDeletePerm } from './request'
-import { Radio, Input, Button, Tooltip, Icon } from 'antd'
+import {Box} from 'react-polymer-layout'
+import {RolesAddPerm, RolesDeletePerm, RolesGet} from './request'
+import {Button, Icon, Input, Radio, Tooltip} from 'antd'
 
 const RadioButton = Radio.Button
 const RadioGroup = Radio.Group
@@ -30,11 +30,16 @@ const PermItem = React.createClass({
                     borderStyle: "solid", borderWidth: 2, borderColor: "#ddd", borderRadius: 8,
                     fontWeight: 700, fontSize: 16
                 }}>
-                    <Box center centerJustified style={{ backgroundColor: typeColor, height: "100%", width: 120, borderRadius: "6px 0px 0px 6px" }}>
+                    <Box center centerJustified style={{
+                        backgroundColor: typeColor,
+                        height: "100%",
+                        width: 120,
+                        borderRadius: "6px 0px 0px 6px"
+                    }}>
                         {perm.perm_type}
                     </Box>
                     <Tooltip title="KEY">
-                        <Box center centerJustified flex style={{ borderRight: "1px solid #ddd" }}>
+                        <Box center centerJustified flex style={{borderRight: "1px solid #ddd"}}>
                             {perm.key}
                         </Box>
                     </Tooltip>
@@ -46,7 +51,7 @@ const PermItem = React.createClass({
                 </Box>
                 <Box center centerJustified style={{
                     color: "red", width: 40, fontSize: 20, cursor: "pointer"
-                }} onClick={this.props.delete}><Icon type="lock" /></Box>
+                }} onClick={this.props.delete}><Icon type="lock"/></Box>
             </Box>
         )
     }
@@ -54,7 +59,7 @@ const PermItem = React.createClass({
 
 const RolesSetting = React.createClass({
     _getRoleDone(result) {
-        this.setState({ perms: result || [] })
+        this.setState({perms: result || []})
     },
 
     _getRole(props) {
@@ -64,11 +69,11 @@ const RolesSetting = React.createClass({
     },
 
     _selectPermType(e) {
-        this.setState({ permType: e.target.value })
+        this.setState({permType: e.target.cell})
     },
 
     _selectKeyType(e) {
-        this.setState({ keyType: e.target.value })
+        this.setState({keyType: e.target.cell})
     },
 
     _addPermDone(result) {
@@ -99,44 +104,52 @@ const RolesSetting = React.createClass({
     },
 
     getInitialState() {
-        return { name: "", perms: [], permType: PermTypes[0], keyType: KeyTypes[0], key: "", rangeEnd: "" }
+        return {name: "", perms: [], permType: PermTypes[0], keyType: KeyTypes[0], key: "", rangeEnd: ""}
     },
 
     render() {
-        let radioStyle = { padding: "5px 0px 5px 0px" }
-        let typeStyle = { width: 120, paddingLeft: 3 }
+        let radioStyle = {padding: "5px 0px 5px 0px"}
+        let typeStyle = {width: 120, paddingLeft: 3}
         let cantClick = this.state.key === ""
         return (
-            <Box vertical >
-                <Box vertical style={{ padding: 10, width: "100%" }}>
+            <Box vertical>
+                <Box vertical style={{padding: 10, width: "100%"}}>
                     {this.state.perms.map(p => {
-                        return <div style={radioStyle} key={Math.random() }> <PermItem perm={p} delete={() => { this._deletePerm(p) } }/></div>
-                    }) }
+                        return <div style={radioStyle} key={Math.random()}><PermItem perm={p} delete={() => {
+                            this._deletePerm(p)
+                        }}/></div>
+                    })}
                 </Box>
-                <Box style={{ borderTop: "1px solid #ddd", fontWeight: 700, fontSize: 16 }}>
-                    <Box vertical style={{ margin: 12, width: "100%" }}>
+                <Box style={{borderTop: "1px solid #ddd", fontWeight: 700, fontSize: 16}}>
+                    <Box vertical style={{margin: 12, width: "100%"}}>
                         <Box style={radioStyle}>
                             <Box center style={typeStyle}>Perm Type</Box>
                             <RadioGroup onChange={this._selectPermType} defaultValue={PermTypes[0]}>
-                                {PermTypes.map(t => { return (<RadioButton key={t} size="large" value={t}>{t}</RadioButton>) }) }
+                                {PermTypes.map(t => {
+                                    return (<RadioButton key={t} size="large" value={t}>{t}</RadioButton>)
+                                })}
                             </RadioGroup>
                         </Box>
                         <Box style={radioStyle}>
                             <div style={typeStyle}>Key Type</div>
                             <RadioGroup onChange={this._selectKeyType} defaultValue={KeyTypes[0]}>
-                                {KeyTypes.map(t => { return (<RadioButton key={t} size="large" value={t}>{t}</RadioButton>) }) }
+                                {KeyTypes.map(t => {
+                                    return (<RadioButton key={t} size="large" value={t}>{t}</RadioButton>)
+                                })}
                             </RadioGroup>
                         </Box>
-                        <Box style={radioStyle} >
+                        <Box style={radioStyle}>
                             <Box center style={typeStyle}>Key</Box>
-                            <Input size="large" key="key" value={this.state.key} onChange={e => this.setState({ key: e.target.value }) } />
+                            <Input size="large" key="key" value={this.state.key}
+                                   onChange={e => this.setState({key: e.target.cell})}/>
                         </Box>
                         <Box style={radioStyle}>
                             <Box center style={typeStyle}>RangeEnd</Box>
-                            <Input size="large" key="rangeEnd" value={this.state.rangeEnd} onChange={e => this.setState({ rangeEnd: e.target.value }) } />
+                            <Input size="large" key="rangeEnd" value={this.state.rangeEnd}
+                                   onChange={e => this.setState({rangeEnd: e.target.cell})}/>
                         </Box>
-                        <Box endJustified style={radioStyle} >
-                            <Button type="primary" size="large" onClick={this._addPerm} disabled={cantClick} >
+                        <Box endJustified style={radioStyle}>
+                            <Button type="primary" size="large" onClick={this._addPerm} disabled={cantClick}>
                                 ADD PERM
                             </Button>
                         </Box>
