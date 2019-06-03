@@ -5,3 +5,6 @@ init:
   - component: io.vertx.tp.crud.init.IxPin
 column:
   component: io.vertx.tp.crud.column.ColService
+auth:
+  token:
+    expired: 30 # RBAC component token expired

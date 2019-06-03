@@ -4,6 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxConfig;
 import io.vertx.tp.crud.atom.IxField;
+import io.vertx.tp.crud.refine.Ix;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.eon.Values;
 import io.zero.epic.Ut;
@@ -25,7 +26,7 @@ class UniqueActor extends AbstractActor {
             Ut.itJArray(unique, JsonArray.class,
                     (each, index) -> filters.put("$" + index, this.getFilters(each, data)));
         }
-        this.getLogger().info("[ Εκδήλωση ] Filters: \n{0}", filters.encodePrettily());
+        Ix.infoFilters(this.getLogger(), "\n{0}", filters.encodePrettily());
         return filters;
     }
 

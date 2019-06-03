@@ -3,6 +3,7 @@ package io.vertx.tp.crud.actor;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxConfig;
 import io.vertx.tp.crud.init.IxPin;
+import io.vertx.tp.crud.refine.Ix;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.Rule;
 import io.vertx.up.exception.WebException;
@@ -20,7 +21,9 @@ class VerifyActor extends AbstractActor {
     public JsonObject proc(final JsonObject data, final IxConfig config) {
         /* 1.method, uri */
         final String key = this.getKey(data, config);
-        this.getLogger().info("[ Εκδήλωση ] ---> Rule: {0}", key);
+
+        Ix.infoVerify(this.getLogger(), "---> Rule: {0}", key);
+
         final ConcurrentMap<String, List<Rule>> rules = IxPin.getRules(key);
         if (!rules.isEmpty()) {
             /*
@@ -29,7 +32,7 @@ class VerifyActor extends AbstractActor {
             final Rigor rigor = Rigor.get(JsonObject.class);
             final WebException error = rigor.verify(rules, data);
             if (null != error) {
-                this.getLogger().info("[ Εκδήλωση ] ---> Error Code: {0}", error.getCode());
+                Ix.infoVerify(this.getLogger(), "---> Error Code: {0}", String.valueOf(error.getCode()));
                 throw error;
             }
         }
