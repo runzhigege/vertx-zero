@@ -1,4 +1,4 @@
-package up.zero.wall;
+package cn.vertxup.wall;
 
 import io.vertx.core.VertxException;
 import io.vertx.core.http.HttpHeaders;

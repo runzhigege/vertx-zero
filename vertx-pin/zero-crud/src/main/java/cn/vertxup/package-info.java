@@ -12,6 +12,20 @@
  * 2) You couldn't design Restful API that has been used in current module such as /api/{module}
  * Here are API position that has been taken:
  *
+ * < actor = moduleName >
+ *
+ * POST     /api/{actor}                    Single Insert
+ * GET      /api/{actor}/{key}              Single Get ( By Id )
+ * DELETE   /api/{actor}/{key}              Single Delete ( By Id )
+ * PUT      /api/{actor}/{key}              Single Put ( By Id )
+ * DELETE   /api/batch/{actor}/delete       Batch Delete
+ * PUT      /api/batch/{actor}/update       Batch Update
+ * POST     /api/{actor}/export             Export Operation
+ * POST     /api/{actor}/import             Import Operation
+ * POST     /api/{actor}/search             Search ( Search Engine )
+ * GET      /api/columns/full/{actor}       Column Full
+ * GET      /api/columns/my/{actor}         Column of My
+ * POST     /api/columns/my/{actor}         Column Saving of My
  *
  */
 package cn.vertxup;

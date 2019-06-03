@@ -1,4 +1,4 @@
-package up.zero.plugin;
+package cn.vertxup.plugin;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;

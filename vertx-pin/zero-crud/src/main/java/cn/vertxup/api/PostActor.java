@@ -18,7 +18,7 @@ import io.vertx.up.atom.Envelop;
  *      `plugin/crud/validator/`
  */
 @Queue
-public class CreateActor {
+public class PostActor {
 
     /*
      * POST: /api/{actor}
