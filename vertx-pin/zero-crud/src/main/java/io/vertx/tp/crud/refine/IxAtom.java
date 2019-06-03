@@ -14,18 +14,18 @@ import io.vertx.up.log.Annal;
 import java.util.Locale;
 import java.util.function.BiFunction;
 
-public class IxIn {
+public class IxAtom {
     private final transient Class<?> target;
     private transient IxConfig config;
     private transient UxJooq jooq;
     private transient WebException ex;
 
-    private IxIn(final Class<?> clazz) {
+    private IxAtom(final Class<?> clazz) {
         this.target = clazz;
     }
 
-    static IxIn create(final Class<?> clazz) {
-        return new IxIn(clazz);
+    static IxAtom create(final Class<?> clazz) {
+        return new IxAtom(clazz);
     }
 
     private void initDao(final String actor) {
@@ -48,7 +48,7 @@ public class IxIn {
                 method.name().toUpperCase(Locale.getDefault()), uri);
     }
 
-    public IxIn input(final Envelop envelop) {
+    public IxAtom input(final Envelop envelop) {
         final String actor = Ux.getString(envelop);
         /* */
         this.initDao(actor);
