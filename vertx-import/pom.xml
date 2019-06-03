@@ -19,8 +19,6 @@
         <hazelcast.version>3.12</hazelcast.version>
         <maven.javadoc.skip>true</maven.javadoc.skip>
         <aspectj.version>1.9.4</aspectj.version>
-        <!-- Liquibase -->
-        <liquibase.version>3.6.3</liquibase.version>
     </properties>
     <dependencies>
         <dependency>
@@ -125,15 +123,6 @@
         </dependencies>
     </dependencyManagement>
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.liquibase</groupId>
-                    <artifactId>liquibase-maven-plugin</artifactId>
-                    <version>${liquibase.version}</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

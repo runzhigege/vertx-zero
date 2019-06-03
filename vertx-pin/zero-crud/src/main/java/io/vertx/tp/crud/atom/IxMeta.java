@@ -1,9 +1,9 @@
-package io.vertx.tp.crud.refine;
+package io.vertx.tp.crud.atom;
 
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
-import io.vertx.tp.crud.atom.IxConfig;
 import io.vertx.tp.crud.init.IxPin;
+import io.vertx.tp.crud.refine.Ix;
 import io.vertx.tp.error._404ModuleMissingException;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
@@ -13,18 +13,18 @@ import io.vertx.up.log.Annal;
 
 import java.util.function.BiFunction;
 
-public class IxAtom {
+public class IxMeta {
     private final transient Class<?> target;
     private transient IxConfig config;
     private transient UxJooq jooq;
     private transient WebException ex;
 
-    private IxAtom(final Class<?> clazz) {
+    private IxMeta(final Class<?> clazz) {
         this.target = clazz;
     }
 
-    static IxAtom create(final Class<?> clazz) {
-        return new IxAtom(clazz);
+    public static IxMeta create(final Class<?> clazz) {
+        return new IxMeta(clazz);
     }
 
     private void initDao(final String actor) {
@@ -44,10 +44,10 @@ public class IxAtom {
         final String uri = envelop.getUri();
         final Annal logger = Annal.get(this.target);
 
-        IxLog.infoRest(logger, "---> Uri Addr: {0} {1}", method, uri);
+        Ix.infoRest(logger, "---> Uri Addr: {0} {1}", method, uri);
     }
 
-    public IxAtom input(final Envelop envelop) {
+    public IxMeta input(final Envelop envelop) {
         final String actor = Ux.getString(envelop);
         /* */
         this.initDao(actor);

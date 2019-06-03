@@ -51,7 +51,7 @@ class IxValidator {
             Ix.infoInit(LOGGER, "--- file = {0}, key = {1}", path, key);
             RULE_MAP.put(key, ruleMap);
         });
-        Ix.infoInited(LOGGER, "IxValidator Finished ! Size = {0}", RULE_MAP.size());
+        Ix.infoInit(LOGGER, "IxValidator Finished ! Size = {0}", RULE_MAP.size());
     }
 
     private static List<Rule> getRules(final JsonArray ruleArray) {

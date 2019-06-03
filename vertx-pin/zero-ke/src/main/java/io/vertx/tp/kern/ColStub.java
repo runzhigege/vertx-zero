@@ -1,9 +1,8 @@
-package io.vertx.tp.crud.column;
+package io.vertx.tp.kern;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.crud.atom.IxConfig;
 import io.vertx.up.aiki.UxJooq;
 
 /*
@@ -15,8 +14,6 @@ import io.vertx.up.aiki.UxJooq;
 public interface ColStub {
 
     ColStub on(UxJooq jooq);
-
-    ColStub on(IxConfig config);
 
     /*
      * Read my columns

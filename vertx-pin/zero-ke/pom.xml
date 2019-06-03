@@ -9,13 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>zero-crud</artifactId>
-    <name>（ Zero Pin ) -- Crud Management</name>
-    <dependencies>
-        <!-- Kern -->
-        <dependency>
-            <groupId>cn.vertxup</groupId>
-            <artifactId>zero-ke</artifactId>
-        </dependency>
-    </dependencies>
+    <artifactId>zero-ke</artifactId>
+    <name>（ Zero Pin ) -- Zero Kernel</name>
 </project>

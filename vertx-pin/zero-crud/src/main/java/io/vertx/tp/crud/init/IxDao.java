@@ -55,7 +55,7 @@ class IxDao {
                 CONFIG_MAP.put(key, config);
             }, configDao);
         });
-        Ix.infoInited(LOGGER, "IxDao Finished ! Size = {0}", CONFIG_MAP.size());
+        Ix.infoInit(LOGGER, "IxDao Finished ! Size = {0}", CONFIG_MAP.size());
     }
 
     static IxConfig get(final String actor) {
