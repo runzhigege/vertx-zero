@@ -1,13 +1,12 @@
 import React from 'react'
-import { Input, Button } from 'antd'
-import { Box } from 'react-polymer-layout'
-import { message } from 'antd'
-import { KVGet, KVPut, KVDelete } from './request'
-import { DeleteButton } from './utils'
+import {Button, Input, message} from 'antd'
+import {Box} from 'react-polymer-layout'
+import {KVDelete, KVGet, KVPut} from './request'
+import {DeleteButton} from './utils'
 
 const KeyValueSetting = React.createClass({
     _getDone(result) {
-        this.setState({ value: result.value })
+        this.setState({value: result.cell})
     },
 
     _get(key) {
@@ -19,7 +18,7 @@ const KeyValueSetting = React.createClass({
     },
 
     _update() {
-        KVPut(this.props.currentKey, this.state.value, this._updateDone)
+        KVPut(this.props.currentKey, this.state.cell, this._updateDone)
     },
 
     _deleteDone(result) {
@@ -31,11 +30,11 @@ const KeyValueSetting = React.createClass({
     },
 
     getInitialState() {
-        return { value: "" }
+        return {value: ""}
     },
 
     _fetch(key) {
-        this.setState({ value: "" })
+        this.setState({value: ""})
         this._get(key)
     },
 
@@ -51,17 +50,19 @@ const KeyValueSetting = React.createClass({
 
     render() {
         return (
-            <Box vertical style={{ padding: "10px 7px 0px 7px" }}>
-                <div style={{ width: "100%", paddingTop: 10 }}>
-                    <Input type="textarea" rows={4} value={this.state.value} onChange={e => this.setState({ value: e.target.value }) } />
+            <Box vertical style={{padding: "10px 7px 0px 7px"}}>
+                <div style={{width: "100%", paddingTop: 10}}>
+                    <Input type="textarea" rows={4} value={this.state.cell}
+                           onChange={e => this.setState({value: e.target.cell})}/>
                 </div>
                 <Box justified>
-                    <div className="kv-create-button" ><Button size="large" type="primary" onClick={this._update} >UPDATE</Button></div>
-                    <div className="kv-create-button" style={{ paddingRight: 0 }}>
-                        <DeleteButton name="DELETE KEY" delete={this._delete} />
+                    <div className="kv-create-button"><Button size="large" type="primary"
+                                                              onClick={this._update}>UPDATE</Button></div>
+                    <div className="kv-create-button" style={{paddingRight: 0}}>
+                        <DeleteButton name="DELETE KEY" delete={this._delete}/>
                     </div>
                 </Box>
-            </Box >
+            </Box>
         )
     }
 })

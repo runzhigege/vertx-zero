@@ -25,6 +25,8 @@ public interface Strings {
 
     String QUESTION = "?";
 
+    String EQUAL = "=";
+
     String T_CHAR = "T";
 
     String J_RESULT = "RESULT";

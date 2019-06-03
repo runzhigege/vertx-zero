@@ -16,6 +16,7 @@
         <module>zero-iqiy</module>
         <module>zero-ali-sms</module>
         <module>zero-qiniu</module>
+        <module>zero-excel</module>
     </modules>
     <dependencies>
         <dependency>
