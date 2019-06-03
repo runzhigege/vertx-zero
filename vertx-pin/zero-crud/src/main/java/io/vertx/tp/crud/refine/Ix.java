@@ -6,18 +6,26 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxConfig;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
+import io.vertx.up.atom.Envelop;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Function;
 
 public class Ix {
+    // Is --- Checking the result, return boolean
     /*
-     * IxIn reference
+     * is existing for result
      */
-    public static IxIn create(final Class<?> clazz) {
-        return IxIn.create(clazz);
+    public static boolean isExist(final JsonObject result) {
+        return IxIs.isExist(result);
+    }
+
+    // Business Logical
+    /*
+     * auditor setting
+     */
+    public static void audit(final JsonObject auditor, final JsonObject config, final String userId) {
+        IxFn.audit(auditor, config, userId);
     }
 
     /*
@@ -27,51 +35,49 @@ public class Ix {
         return IxFn.search(filters, config);
     }
 
+    // Atom creation
+    /*
+     * IxIn reference
+     */
+    public static IxAtom create(final Class<?> clazz) {
+        return IxAtom.create(clazz);
+    }
+
+    // Serialization for entity/list
     /*
      * extract unique record
      */
     public static Future<JsonObject> unique(final JsonObject result) {
-        return IxData.unique(result);
+        return Ux.toFuture(IxSerialize.unique(result));
     }
 
     public static Future<JsonArray> list(final JsonObject result) {
-        return IxData.list(result);
-    }
-
-    /*
-     * is existing for result
-     */
-    public static boolean isExist(final JsonObject result) {
-        return IxData.isExist(result);
-    }
-
-    /*
-     * auditor setting
-     */
-    public static void audit(final JsonObject auditor, final JsonObject config, final String userId) {
-        IxData.audit(auditor, config, userId);
+        return Ux.toFuture(IxSerialize.list(result));
     }
 
     /*
      * Deserialize to T
      */
     public static <T> Future<T> entityAsync(final JsonObject data, final IxConfig config) {
-        final T reference = IxData.entity(data, config);
+        final T reference = IxSerialize.entity(data, config);
         return Ux.toFuture(reference);
     }
 
     @SuppressWarnings("all")
     public static <T> Future<List<T>> entityAsync(final JsonArray data, final IxConfig config) {
-        final List<T> list = new ArrayList<>();
-        data.stream()
-                .filter(Objects::nonNull)
-                .map(item -> (JsonObject) item)
-                .map(entity -> (T) IxData.entity(entity, config))
-                .forEach(reference -> list.add(reference));
-        return Ux.toFuture(list);
+        return Ux.toFuture(IxSerialize.entity(data, config));
     }
 
+    public static Future<JsonArray> zipperAsync(final JsonArray from, final JsonArray to, final IxConfig config) {
+        return Ux.toFuture(IxSerialize.zipper(from, to, config));
+    }
+
+    // Query
     public static Future<JsonObject> inKeys(final JsonArray array, final IxConfig config) {
-        return IxQuery.inKeys(array, config);
+        return Ux.toFuture(IxQuery.inKeys(array, config));
+    }
+
+    public static Future<JsonObject> inColumns(final Envelop envelop, final IxConfig config) {
+        return Ux.toFuture(IxQuery.inColumns(envelop, config));
     }
 }

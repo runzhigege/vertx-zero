@@ -1,0 +1,54 @@
+{
+    "data": [
+        {
+            "title": "角色编码",
+            "dataIndex": "code",
+            "sorter": true,
+            "$filter.type": "SEARCH",
+            "$filter.config": {
+                "placeholder": "角色编码",
+                "button": {
+                    "search": "搜索",
+                    "reset": "重置"
+                }
+            }
+        },
+        {
+            "title": "角色名称",
+            "dataIndex": "name",
+            "sorter": true
+        },
+        {
+            "title": "是否启用",
+            "dataIndex": "active",
+            "sorter": true,
+            "$render": "LOGICAL",
+            "$mapping": {
+                "true": "启用",
+                "false": "禁用"
+            },
+            "$filter.config.items": [
+                "true,启用",
+                "false,禁用"
+            ],
+            "$filter.config.button": {
+                "yes": "确认",
+                "reset": "重置"
+            },
+            "$filter.config.width": {
+                "radio": 110,
+                "button": 55
+            }
+        },
+        {
+            "title": "创建人",
+            "dataIndex": "createdBy"
+        },
+        {
+            "title": "创建时间",
+            "dataIndex": "createdAt",
+            "$render": "DATE",
+            "$format": "YYYY-MM-DD"
+        }
+    ]
+}

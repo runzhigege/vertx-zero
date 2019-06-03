@@ -15,6 +15,7 @@ public class IxConfig implements Serializable {
     private String name;
     private String pojo;
     private IxField field;
+    private IxColumn column;
 
     @JsonSerialize(using = ClassSerializer.class)
     @JsonDeserialize(using = ClassDeserializer.class)
@@ -34,6 +35,14 @@ public class IxConfig implements Serializable {
 
     public void setField(final IxField field) {
         this.field = field;
+    }
+
+    public IxColumn getColumn() {
+        return this.column;
+    }
+
+    public void setColumn(final IxColumn column) {
+        this.column = column;
     }
 
     public String getName() {
@@ -85,6 +94,7 @@ public class IxConfig implements Serializable {
                 ", pojoCls=" + this.pojoCls +
                 ", daoCls=" + this.daoCls +
                 ", header=" + this.header +
+                ", column=" + this.column +
                 '}';
     }
 }
