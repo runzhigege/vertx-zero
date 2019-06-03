@@ -92,6 +92,11 @@ public class Ut {
         return IO.getYaml(filename);
     }
 
+    // --- properties
+    public static Properties ioProperties(final String filename) {
+        return IO.getProp(filename);
+    }
+
     public static JsonArray ioJArray(final String filename) {
         return IO.getJArray(filename);
     }
