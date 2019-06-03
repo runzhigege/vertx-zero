@@ -106,6 +106,8 @@
         <protobuf.version>3.8.0</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
         <grpc.version>1.21.0</grpc.version>
+        <!-- Excel/Office -->
+        <poi.version>4.1.0</poi.version>
         <!-- Vert.x Addition -->
         <rxjava2.version>2.2.9</rxjava2.version>
         <netty.tcnative.version>2.0.25.Final</netty.tcnative.version>
@@ -205,6 +207,22 @@
                 <groupId>cn.vertxup</groupId>
                 <artifactId>zero-ali-sms</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml-schemas</artifactId>
+                <version>${poi.version}</version>
             </dependency>
             <!-- vertx -->
             <dependency>
