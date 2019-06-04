@@ -1,0 +1,26 @@
+{
+    "condition": {
+        "user": [
+            "sigma"
+        ],
+        "role": [
+            "sigma"
+        ],
+        "group": [
+            "sigma"
+        ],
+        "permission": [
+            "sigma"
+        ],
+        "resource": [
+            "sigma"
+        ],
+        "action": [
+            "sigma"
+        ]
+    },
+    "codeExpired": 30,
+    "codeLength": 8,
+    "codePool": "OAUTH_CODES_POOL",
+    "tokenExpired": 30
+}

@@ -1,5 +1,5 @@
 zero:
-  lime: jooq, secure, tp
+  lime: jooq, secure, tp, excel
   vertx:
     instance:
       - name: originx-engine

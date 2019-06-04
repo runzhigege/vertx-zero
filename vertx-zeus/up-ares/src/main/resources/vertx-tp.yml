@@ -3,5 +3,6 @@ shared:
     async: true
 init:
   - component: io.vertx.tp.crud.init.IxPin
-column:
-  component: io.vertx.tp.crud.column.ColService
+  - component: io.vertx.tp.rbac.init.ScPin
+kern-class:
+  column: io.vertx.tp.crud.service.ColService

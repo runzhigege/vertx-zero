@@ -22,5 +22,10 @@
             <artifactId>zero-rbac</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>cn.vertxup</groupId>
+            <artifactId>zero-excel</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

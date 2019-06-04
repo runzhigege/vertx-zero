@@ -19,8 +19,8 @@ class IxFn {
             final JsonObject filters, final IxConfig config) {
         final String pojo = config.getPojo();
         return dao -> {
-            LOGGER.info("[ Εκδήλωση ] Dao -> {0}, pojo = {1}",
-                    dao.getClass(), pojo);
+            IxLog.infoDao(LOGGER, "Dao -> {0}, pojo = {1}", dao.getClass(), pojo);
+
             final JsonObject criteria = new JsonObject();
             criteria.put("criteria", filters);
             // Here must put condition here.
