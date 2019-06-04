@@ -1,6 +1,7 @@
 package io.vertx.tp.crud.init;
 
 import io.vertx.tp.crud.atom.IxConfig;
+import io.vertx.tp.crud.refine.Ix;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.atom.Rule;
 import io.vertx.up.log.Annal;
@@ -16,10 +17,10 @@ public class IxPin {
     private static final Annal LOGGER = Annal.get(IxPin.class);
 
     public static void init() {
-        LOGGER.info("[ Εκδήλωση ] ( Init ) IxDao...");
+        Ix.infoInit(LOGGER, "IxDao...");
         /* Dao Init */
         IxDao.init();
-        LOGGER.info("[ Εκδήλωση ] ( Init ) IxValidator...");
+        Ix.infoInit(LOGGER, "IxValidator...");
         /* Validator Init */
         IxValidator.init();
     }

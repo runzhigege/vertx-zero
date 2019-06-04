@@ -1,7 +1,7 @@
 import React from 'react'
-import { Box } from 'react-polymer-layout'
-import { UsersGet, User, UsersGrantRole, UsersRovokeRole, UsersChangePassword, RolesAll } from './request'
-import { Tag, Select, Button, Input } from 'antd'
+import {Box} from 'react-polymer-layout'
+import {RolesAll, UsersChangePassword, UsersGet, UsersGrantRole, UsersRovokeRole} from './request'
+import {Button, Input, Select, Tag} from 'antd'
 
 const Option = Select.Option
 const roleColors = ["blue", "green", "yellow", "red"]
@@ -21,7 +21,7 @@ const RoleItem = React.createClass({
 
 const UsersSetting = React.createClass({
     _getUserDone(result) {
-        this.setState({ roles: result || [] })
+        this.setState({roles: result || []})
     },
 
     _getUser(props) {
@@ -31,7 +31,7 @@ const UsersSetting = React.createClass({
     },
 
     _getAllRolesDone(result) {
-        this.setState({ allRoles: result || [] })
+        this.setState({allRoles: result || []})
     },
 
     _getAllRoles() {
@@ -41,7 +41,7 @@ const UsersSetting = React.createClass({
     _enter(props) {
         this._getUser(props)
         this._getAllRoles()
-        this.setState({ selectedRole: "", password: "" })
+        this.setState({selectedRole: "", password: ""})
     },
 
     _refresh() {
@@ -69,11 +69,12 @@ const UsersSetting = React.createClass({
     },
 
     _selectRole(value) {
-        this.setState({ selectedRole: value })
+        this.setState({selectedRole: value})
     },
 
     _changePassword() {
-        UsersChangePassword(this.props.name, this.state.password, () => { })
+        UsersChangePassword(this.props.name, this.state.password, () => {
+        })
     },
 
     componentDidMount() {
@@ -87,20 +88,20 @@ const UsersSetting = React.createClass({
     },
 
     getInitialState() {
-        return { roles: [], allRoles: [], selectedRole: "", password: "" }
+        return {roles: [], allRoles: [], selectedRole: "", password: ""}
     },
 
     render() {
-        let boxStyle = { padding: 10, fontSize: 16, fontWeight: 700 }
-        let moduleStyle = Object.assign({}, boxStyle, { borderTop: "1px solid #ddd" })
+        let boxStyle = {padding: 10, fontSize: 16, fontWeight: 700}
+        let moduleStyle = Object.assign({}, boxStyle, {borderTop: "1px solid #ddd"})
         return (
-            <Box vertical >
+            <Box vertical>
                 <Box vertical style={boxStyle}>
                     ROLES
                     <Box wrap style={boxStyle}>
                         {
                             this.state.roles.map((r, index) => {
-                                return <RoleItem key={r} name={r} delete={() => this._revokeRole(r) } index={index}/>
+                                return <RoleItem key={r} name={r} delete={() => this._revokeRole(r)} index={index}/>
                             })
                         }
                     </Box>
@@ -108,7 +109,8 @@ const UsersSetting = React.createClass({
                 <Box vertical style={moduleStyle}>
                     GRANT
                     <Box justified style={boxStyle}>
-                        <Select style={{ width: 120 }} size="large" onChange={this._selectRole} value={this.state.selectedRole}>
+                        <Select style={{width: 120}} size="large" onChange={this._selectRole}
+                                value={this.state.selectedRole}>
                             {
                                 this.state.allRoles.map(r => {
                                     return <Option key={r} value={r}>{r}</Option>
@@ -123,9 +125,12 @@ const UsersSetting = React.createClass({
                 <Box vertical style={moduleStyle}>
                     CHANGE PASSWORD
                     <Box justified style={boxStyle}>
-                        <Input type="password" size="large" placeholder="New Password" value={this.state.password} onChange={
-                            e => { this.setState({ password: e.target.value }) }
-                        } />
+                        <Input type="password" size="large" placeholder="New Password" value={this.state.password}
+                               onChange={
+                                   e => {
+                                       this.setState({password: e.target.cell})
+                                   }
+                               }/>
                         <Button size="large" type="primary" onClick={this._changePassword}>
                             CONFIRM
                         </Button>

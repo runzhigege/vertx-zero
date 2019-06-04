@@ -1,0 +1,37 @@
+package cn.vertxup.api;
+
+import io.vertx.core.json.JsonObject;
+import io.vertx.tp.rbac.cv.Addr;
+import io.vertx.up.annotations.Address;
+import io.vertx.up.annotations.Codex;
+import io.vertx.up.annotations.EndPoint;
+
+import javax.ws.rs.BodyParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+
+/*
+ * Login Api
+ * 1. Provide username/password to access /oauth/login get client_secret field ( Issue when create )
+ * 2. Access /oauth/authorize to get authorization code
+ * 3. Access /oauth/token to get token
+ */
+@EndPoint
+@Path("/oauth")
+public interface AuthAgent {
+
+    @POST
+    @Path("login")
+    @Address(Addr.Auth.LOGIN)
+    JsonObject login(@BodyParam @Codex JsonObject data);
+
+    @POST
+    @Path("authorize")
+    @Address(Addr.Auth.AUTHORIZE)
+    JsonObject authorize(@BodyParam @Codex JsonObject data);
+
+    @POST
+    @Path("token")
+    @Address(Addr.Auth.TOKEN)
+    JsonObject token(@BodyParam @Codex JsonObject data);
+}

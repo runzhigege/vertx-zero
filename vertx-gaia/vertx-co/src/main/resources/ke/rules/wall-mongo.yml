@@ -1,8 +1,8 @@
 required:
-- type
+  - type
 forbidden:
-- provider
-- handler
-- user
+  - provider
+  - handler
+  - user
 typed:
   config: JOBJECT

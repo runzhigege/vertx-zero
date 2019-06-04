@@ -2,8 +2,6 @@ package cn.vertxup.api;
 
 import io.vertx.core.Future;
 import io.vertx.tp.crud.actor.IxActor;
-import io.vertx.tp.crud.column.ColStub;
-import io.vertx.tp.crud.column.IxStub;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.up.aiki.Uson;
@@ -40,14 +38,14 @@ public class GetActor {
     public Future<Envelop> getFull(final Envelop request) {
         return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Get Stub */
-            final ColStub stub = IxStub.getStub().on(dao).on(config);
+            // final ColSub stub = IxStub.getStub().on(dao).on(config);
             return Ix.inColumns(request, config)
                     /* Header */
                     .compose(input -> IxActor.header().bind(request).procAsync(input, config))
                     /* Remove User Filters */
                     .compose(filters -> Uson.create(filters).remove("user").toFuture())
                     /* Fetch Full Columns */
-                    .compose(stub::fetchFullColumns)
+                    // .compose(stub::fetchFullColumns)
                     /* Return Result */
                     .compose(Http::success200);
         });

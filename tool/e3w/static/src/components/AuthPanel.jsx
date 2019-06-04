@@ -1,7 +1,7 @@
 import React from 'react'
-import { Box } from 'react-polymer-layout'
-import { Input, Button } from 'antd'
-import { CommonPanel } from './utils'
+import {Box} from 'react-polymer-layout'
+import {Button, Input} from 'antd'
+import {CommonPanel} from './utils'
 
 const AuthItem = React.createClass({
     render() {
@@ -17,7 +17,7 @@ const AuthItem = React.createClass({
                     height: "100%",
                     width: 30
                 }}></div>
-                <Box style={{ paddingLeft: 5 }}>{item.name || ""}</Box>
+                <Box style={{paddingLeft: 5}}>{item.name || ""}</Box>
             </Box>
         )
     }
@@ -25,7 +25,7 @@ const AuthItem = React.createClass({
 
 const AuthCreate = React.createClass({
     _clean() {
-        this.setState({ name: "" })
+        this.setState({name: ""})
     },
 
     componentDidMount() {
@@ -37,18 +37,19 @@ const AuthCreate = React.createClass({
     },
 
     getInitialState() {
-        return { name: "" }
+        return {name: ""}
     },
 
     render() {
         return (
-            <Box vertical style={{ padding: "10px 7px 0px 7px" }}>
-                <div style={{ width: "100%", paddingTop: 10 }}>
-                    <Input size="large" value={this.state.name} onChange={e => this.setState({ name: e.target.value })} />
+            <Box vertical style={{padding: "10px 7px 0px 7px"}}>
+                <div style={{width: "100%", paddingTop: 10}}>
+                    <Input size="large" value={this.state.name} onChange={e => this.setState({name: e.target.cell})}/>
                 </div>
                 <Box endJustified>
-                    <div style={{ "padding": "15px 0px 15px" }}>
-                        <Button type="primary" size="large" onClick={() => this.props.create(this.state.name)} disabled={this.state.name === ""} > CREATE </Button>
+                    <div style={{"padding": "15px 0px 15px"}}>
+                        <Button type="primary" size="large" onClick={() => this.props.create(this.state.name)}
+                                disabled={this.state.name === ""}> CREATE </Button>
                     </div>
                 </Box>
             </Box>
@@ -60,8 +61,10 @@ const AuthPanel = React.createClass({
     _prepareItems(props) {
         let rawItems = props.items || []
         let items = []
-        rawItems.forEach(i => { items.push({ name: i, selected: false }) })
-        this.setState({ items: items })
+        rawItems.forEach(i => {
+            items.push({name: i, selected: false})
+        })
+        this.setState({items: items})
     },
 
     _selectItem(name) {
@@ -73,12 +76,11 @@ const AuthPanel = React.createClass({
                     unset = true
                 }
                 i.selected = !i.selected
-            }
-            else {
+            } else {
                 i.selected = false
             }
         })
-        this.setState({ items: items, selectedItem: unset ? "" : name })
+        this.setState({items: items, selectedItem: unset ? "" : name})
     },
 
     _createItem(name) {
@@ -87,7 +89,7 @@ const AuthPanel = React.createClass({
 
     _deleteItem() {
         this.props.delete(this.state.selectedItem)
-        this.setState({ selectedItem: "" })
+        this.setState({selectedItem: ""})
     },
 
     componentDidMount() {
@@ -99,7 +101,7 @@ const AuthPanel = React.createClass({
     },
 
     getInitialState() {
-        return { items: [], selectedItem: "" }
+        return {items: [], selectedItem: ""}
     },
 
     render() {
@@ -114,7 +116,7 @@ const AuthPanel = React.createClass({
                 withDelete = true
             }
         } else {
-            sidePanel = <AuthCreate create={this._createItem} />
+            sidePanel = <AuthCreate create={this._createItem}/>
         }
         return (
             <Box vertical>
@@ -132,7 +134,7 @@ const AuthPanel = React.createClass({
                     }}>
                         {
                             this.state.items.map(
-                                i => (<AuthItem key={i.name} click={() => this._selectItem(i.name)} item={i} />)
+                                i => (<AuthItem key={i.name} click={() => this._selectItem(i.name)} item={i}/>)
                             )
                         }
                     </Box>
@@ -140,7 +142,7 @@ const AuthPanel = React.createClass({
                         {sidePanel}
                     </CommonPanel>
                 </Box>
-            </Box >
+            </Box>
         )
     }
 })

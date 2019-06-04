@@ -100,6 +100,8 @@
         <http.async.client.version>4.1.4</http.async.client.version>
         <http.client.version>4.5.8</http.client.version>
         <http.core.version>4.4.11</http.core.version>
+        <!-- Liquibase -->
+        <liquibase.version>3.6.3</liquibase.version>
         <!-- Rpc -->
         <protobuf.version>3.8.0</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
@@ -189,6 +191,11 @@
                 <version>${project.version}</version>
             </dependency>
             <!-- Third Part -->
+            <dependency>
+                <groupId>cn.vertxup</groupId>
+                <artifactId>zero-ke</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>cn.vertxup</groupId>
                 <artifactId>zero-iqiy</artifactId>
@@ -874,6 +881,12 @@
     <build>
         <pluginManagement>
             <plugins>
+                <!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-maven-plugin -->
+                <plugin>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-maven-plugin</artifactId>
+                    <version>${liquibase.version}</version>
+                </plugin>
                 <!-- https://mvnrepository.com/artifact/com.jcabi/jcabi-maven-plugin -->
                 <plugin>
                     <groupId>com.jcabi</groupId>

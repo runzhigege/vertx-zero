@@ -4,9 +4,11 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxConfig;
+import io.vertx.tp.crud.atom.IxMeta;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.log.Annal;
 
 import java.util.List;
 import java.util.function.Function;
@@ -39,8 +41,8 @@ public class Ix {
     /*
      * IxIn reference
      */
-    public static IxAtom create(final Class<?> clazz) {
-        return IxAtom.create(clazz);
+    public static IxMeta create(final Class<?> clazz) {
+        return IxMeta.create(clazz);
     }
 
     // Serialization for entity/list
@@ -79,5 +81,28 @@ public class Ix {
 
     public static Future<JsonObject> inColumns(final Envelop envelop, final IxConfig config) {
         return Ux.toFuture(IxQuery.inColumns(envelop, config));
+    }
+
+    /*
+     * Log
+     */
+    public static void infoInit(final Annal logger, final String pattern, final Object... args) {
+        IxLog.infoInit(logger, pattern, args);
+    }
+
+    public static void infoRest(final Annal logger, final String pattern, final Object... args) {
+        IxLog.infoRest(logger, pattern, args);
+    }
+
+    public static void infoFilters(final Annal logger, final String pattern, final Object... args) {
+        IxLog.infoFilters(logger, pattern, args);
+    }
+
+    public static void infoVerify(final Annal logger, final String pattern, final Object... args) {
+        IxLog.infoVerify(logger, pattern, args);
+    }
+
+    public static void infoDao(final Annal logger, final String pattern, final Object... args) {
+        IxLog.infoDao(logger, pattern, args);
     }
 }

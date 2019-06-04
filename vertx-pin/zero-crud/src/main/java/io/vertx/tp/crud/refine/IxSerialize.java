@@ -41,12 +41,12 @@ class IxSerialize {
 
     @SuppressWarnings("all")
     static <T> T entity(final JsonObject data, final IxConfig config) {
-        LOGGER.info("[ Εκδήλωση ] ( Json ) Normalized: \n{0}", data.encodePrettily());
+        IxLog.infoDao(LOGGER, "Normalized: \n{0}", data.encodePrettily());
         final String pojo = config.getPojo();
         final T reference = Ut.isNil(pojo) ?
                 Ux.fromJson(data, (Class<T>) config.getPojoCls()) :
                 Ux.fromJson(data, (Class<T>) config.getPojoCls(), config.getPojo());
-        LOGGER.info("[ Εκδήλωση ] Deserialized: {0}", reference);
+        IxLog.infoDao(LOGGER, "Deserialized: {0}", reference);
         return reference;
     }
 

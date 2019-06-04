@@ -1,6 +1,6 @@
 required:
-- jdbcUrl
-- driverClassName
-- username
-- password
-- catalog
+  - jdbcUrl
+  - driverClassName
+  - username
+  - password
+  - catalog
