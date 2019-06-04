@@ -23,52 +23,52 @@ import javax.annotation.Generated;
 public interface IRResourceMatrix extends Serializable {
 
     /**
-     * Setter for <code>UP_RBAC.R_RESOURCE_MATRIX.KEY</code>. 「key」- 限定记录ID
+     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.KEY</code>. 「key」- 限定记录ID
      */
     public IRResourceMatrix setKey(String value);
 
     /**
-     * Getter for <code>UP_RBAC.R_RESOURCE_MATRIX.KEY</code>. 「key」- 限定记录ID
+     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.KEY</code>. 「key」- 限定记录ID
      */
     public String getKey();
 
     /**
-     * Setter for <code>UP_RBAC.R_RESOURCE_MATRIX.ROLE_ID</code>. 「roleId」- 限定角色ID
+     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.ROLE_ID</code>. 「roleId」- 限定角色ID
      */
     public IRResourceMatrix setRoleId(String value);
 
     /**
-     * Getter for <code>UP_RBAC.R_RESOURCE_MATRIX.ROLE_ID</code>. 「roleId」- 限定角色ID
+     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.ROLE_ID</code>. 「roleId」- 限定角色ID
      */
     public String getRoleId();
 
     /**
-     * Setter for <code>UP_RBAC.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
+     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
      */
     public IRResourceMatrix setUserId(String value);
 
     /**
-     * Getter for <code>UP_RBAC.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
+     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
      */
     public String getUserId();
 
     /**
-     * Setter for <code>UP_RBAC.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
+     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
      */
     public IRResourceMatrix setResourceId(String value);
 
     /**
-     * Getter for <code>UP_RBAC.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
+     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
      */
     public String getResourceId();
 
     /**
-     * Setter for <code>UP_RBAC.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 所属APP的APPKEY
+     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 所属APP的APPKEY
      */
     public IRResourceMatrix setSigma(String value);
 
     /**
-     * Getter for <code>UP_RBAC.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 所属APP的APPKEY
+     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 所属APP的APPKEY
      */
     public String getSigma();
 

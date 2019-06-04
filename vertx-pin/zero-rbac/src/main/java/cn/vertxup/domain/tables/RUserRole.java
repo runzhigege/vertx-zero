@@ -4,9 +4,9 @@
 package cn.vertxup.domain.tables;
 
 
+import cn.vertxup.domain.DbRbac;
 import cn.vertxup.domain.Indexes;
 import cn.vertxup.domain.Keys;
-import cn.vertxup.domain.UpRbac;
 import cn.vertxup.domain.tables.records.RUserRoleRecord;
 
 import java.util.Arrays;
@@ -38,10 +38,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RUserRole extends TableImpl<RUserRoleRecord> {
 
-    private static final long serialVersionUID = -1317180445;
+    private static final long serialVersionUID = -723246852;
 
     /**
-     * The reference instance of <code>UP_RBAC.R_USER_ROLE</code>
+     * The reference instance of <code>DB_RBAC.R_USER_ROLE</code>
      */
     public static final RUserRole R_USER_ROLE = new RUserRole();
 
@@ -54,31 +54,31 @@ public class RUserRole extends TableImpl<RUserRoleRecord> {
     }
 
     /**
-     * The column <code>UP_RBAC.R_USER_ROLE.USER_ID</code>. 「userId」- 关联用户ID
+     * The column <code>DB_RBAC.R_USER_ROLE.USER_ID</code>. 「userId」- 关联用户ID
      */
     public final TableField<RUserRoleRecord, String> USER_ID = createField("USER_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「userId」- 关联用户ID");
 
     /**
-     * The column <code>UP_RBAC.R_USER_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * The column <code>DB_RBAC.R_USER_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     public final TableField<RUserRoleRecord, String> ROLE_ID = createField("ROLE_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「roleId」- 关联角色ID");
 
     /**
-     * Create a <code>UP_RBAC.R_USER_ROLE</code> table reference
+     * Create a <code>DB_RBAC.R_USER_ROLE</code> table reference
      */
     public RUserRole() {
         this(DSL.name("R_USER_ROLE"), null);
     }
 
     /**
-     * Create an aliased <code>UP_RBAC.R_USER_ROLE</code> table reference
+     * Create an aliased <code>DB_RBAC.R_USER_ROLE</code> table reference
      */
     public RUserRole(String alias) {
         this(DSL.name(alias), R_USER_ROLE);
     }
 
     /**
-     * Create an aliased <code>UP_RBAC.R_USER_ROLE</code> table reference
+     * Create an aliased <code>DB_RBAC.R_USER_ROLE</code> table reference
      */
     public RUserRole(Name alias) {
         this(alias, R_USER_ROLE);
@@ -97,7 +97,7 @@ public class RUserRole extends TableImpl<RUserRoleRecord> {
      */
     @Override
     public Schema getSchema() {
-        return UpRbac.UP_RBAC;
+        return DbRbac.DB_RBAC;
     }
 
     /**

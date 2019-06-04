@@ -28,10 +28,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> implements Record2<String, String>, IRUserGroup {
 
-    private static final long serialVersionUID = 557794730;
+    private static final long serialVersionUID = -1373593302;
 
     /**
-     * Setter for <code>UP_RBAC.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
+     * Setter for <code>DB_RBAC.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     @Override
     public RUserGroupRecord setGroupId(String value) {
@@ -40,7 +40,7 @@ public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> impl
     }
 
     /**
-     * Getter for <code>UP_RBAC.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
+     * Getter for <code>DB_RBAC.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     @Override
     public String getGroupId() {
@@ -48,7 +48,7 @@ public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> impl
     }
 
     /**
-     * Setter for <code>UP_RBAC.R_USER_GROUP.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Setter for <code>DB_RBAC.R_USER_GROUP.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     @Override
     public RUserGroupRecord setRoleId(String value) {
@@ -57,7 +57,7 @@ public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> impl
     }
 
     /**
-     * Getter for <code>UP_RBAC.R_USER_GROUP.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Getter for <code>DB_RBAC.R_USER_GROUP.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     @Override
     public String getRoleId() {

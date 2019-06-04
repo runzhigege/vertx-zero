@@ -50,6 +50,15 @@ public interface AuthAgent {
     @Address(Addr.Auth.AUTHORIZE)
     JsonObject authorize(@BodyParam @Codex JsonObject data);
 
+    /*
+     * /oauth/token
+     *
+     * Request:
+     * {
+     *      client_id: "xxx",
+     *      code: "temp"
+     * }
+     */
     @POST
     @Path("token")
     @Address(Addr.Auth.TOKEN)

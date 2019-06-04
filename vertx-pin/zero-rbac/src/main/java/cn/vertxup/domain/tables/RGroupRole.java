@@ -4,9 +4,9 @@
 package cn.vertxup.domain.tables;
 
 
+import cn.vertxup.domain.DbRbac;
 import cn.vertxup.domain.Indexes;
 import cn.vertxup.domain.Keys;
-import cn.vertxup.domain.UpRbac;
 import cn.vertxup.domain.tables.records.RGroupRoleRecord;
 
 import java.util.Arrays;
@@ -38,10 +38,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RGroupRole extends TableImpl<RGroupRoleRecord> {
 
-    private static final long serialVersionUID = 138346335;
+    private static final long serialVersionUID = 392248204;
 
     /**
-     * The reference instance of <code>UP_RBAC.R_GROUP_ROLE</code>
+     * The reference instance of <code>DB_RBAC.R_GROUP_ROLE</code>
      */
     public static final RGroupRole R_GROUP_ROLE = new RGroupRole();
 
@@ -54,31 +54,31 @@ public class RGroupRole extends TableImpl<RGroupRoleRecord> {
     }
 
     /**
-     * The column <code>UP_RBAC.R_GROUP_ROLE.GROUP_ID</code>. 「groupId」- 关联组ID
+     * The column <code>DB_RBAC.R_GROUP_ROLE.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     public final TableField<RGroupRoleRecord, String> GROUP_ID = createField("GROUP_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「groupId」- 关联组ID");
 
     /**
-     * The column <code>UP_RBAC.R_GROUP_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * The column <code>DB_RBAC.R_GROUP_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     public final TableField<RGroupRoleRecord, String> ROLE_ID = createField("ROLE_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「roleId」- 关联角色ID");
 
     /**
-     * Create a <code>UP_RBAC.R_GROUP_ROLE</code> table reference
+     * Create a <code>DB_RBAC.R_GROUP_ROLE</code> table reference
      */
     public RGroupRole() {
         this(DSL.name("R_GROUP_ROLE"), null);
     }
 
     /**
-     * Create an aliased <code>UP_RBAC.R_GROUP_ROLE</code> table reference
+     * Create an aliased <code>DB_RBAC.R_GROUP_ROLE</code> table reference
      */
     public RGroupRole(String alias) {
         this(DSL.name(alias), R_GROUP_ROLE);
     }
 
     /**
-     * Create an aliased <code>UP_RBAC.R_GROUP_ROLE</code> table reference
+     * Create an aliased <code>DB_RBAC.R_GROUP_ROLE</code> table reference
      */
     public RGroupRole(Name alias) {
         this(alias, R_GROUP_ROLE);
@@ -97,7 +97,7 @@ public class RGroupRole extends TableImpl<RGroupRoleRecord> {
      */
     @Override
     public Schema getSchema() {
-        return UpRbac.UP_RBAC;
+        return DbRbac.DB_RBAC;
     }
 
     /**

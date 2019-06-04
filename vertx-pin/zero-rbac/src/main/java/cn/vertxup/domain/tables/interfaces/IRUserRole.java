@@ -23,22 +23,22 @@ import javax.annotation.Generated;
 public interface IRUserRole extends Serializable {
 
     /**
-     * Setter for <code>UP_RBAC.R_USER_ROLE.USER_ID</code>. 「userId」- 关联用户ID
+     * Setter for <code>DB_RBAC.R_USER_ROLE.USER_ID</code>. 「userId」- 关联用户ID
      */
     public IRUserRole setUserId(String value);
 
     /**
-     * Getter for <code>UP_RBAC.R_USER_ROLE.USER_ID</code>. 「userId」- 关联用户ID
+     * Getter for <code>DB_RBAC.R_USER_ROLE.USER_ID</code>. 「userId」- 关联用户ID
      */
     public String getUserId();
 
     /**
-     * Setter for <code>UP_RBAC.R_USER_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Setter for <code>DB_RBAC.R_USER_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     public IRUserRole setRoleId(String value);
 
     /**
-     * Getter for <code>UP_RBAC.R_USER_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Getter for <code>DB_RBAC.R_USER_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     public String getRoleId();
 

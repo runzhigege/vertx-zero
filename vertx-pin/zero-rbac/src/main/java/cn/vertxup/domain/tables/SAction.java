@@ -4,9 +4,9 @@
 package cn.vertxup.domain.tables;
 
 
+import cn.vertxup.domain.DbRbac;
 import cn.vertxup.domain.Indexes;
 import cn.vertxup.domain.Keys;
-import cn.vertxup.domain.UpRbac;
 import cn.vertxup.domain.tables.records.SActionRecord;
 
 import java.time.LocalDateTime;
@@ -39,10 +39,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SAction extends TableImpl<SActionRecord> {
 
-    private static final long serialVersionUID = -1601997839;
+    private static final long serialVersionUID = -1110840011;
 
     /**
-     * The reference instance of <code>UP_RBAC.S_ACTION</code>
+     * The reference instance of <code>DB_RBAC.S_ACTION</code>
      */
     public static final SAction S_ACTION = new SAction();
 
@@ -55,96 +55,96 @@ public class SAction extends TableImpl<SActionRecord> {
     }
 
     /**
-     * The column <code>UP_RBAC.S_ACTION.KEY</code>. 「key」- 操作ID
+     * The column <code>DB_RBAC.S_ACTION.KEY</code>. 「key」- 操作ID
      */
     public final TableField<SActionRecord, String> KEY = createField("KEY", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「key」- 操作ID");
 
     /**
-     * The column <code>UP_RBAC.S_ACTION.NAME</code>. 「name」- 操作名称
+     * The column <code>DB_RBAC.S_ACTION.NAME</code>. 「name」- 操作名称
      */
     public final TableField<SActionRecord, String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「name」- 操作名称");
 
     /**
-     * The column <code>UP_RBAC.S_ACTION.CODE</code>. 「code」- 操作码
+     * The column <code>DB_RBAC.S_ACTION.CODE</code>. 「code」- 操作码
      */
     public final TableField<SActionRecord, String> CODE = createField("CODE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「code」- 操作码");
 
     /**
-     * The column <code>UP_RBAC.S_ACTION.LEVEL</code>. 「level」- 操作级别
+     * The column <code>DB_RBAC.S_ACTION.LEVEL</code>. 「level」- 操作级别
      */
     public final TableField<SActionRecord, Integer> LEVEL = createField("LEVEL", org.jooq.impl.SQLDataType.INTEGER, this, "「level」- 操作级别");
 
     /**
-     * The column <code>UP_RBAC.S_ACTION.PRIORITY</code>. 「priority」- 操作优先级：用户优先、角色优先、统一（定义资源的访问表）
+     * The column <code>DB_RBAC.S_ACTION.PRIORITY</code>. 「priority」- 操作优先级：用户优先、角色优先、统一（定义资源的访问表）
      */
     public final TableField<SActionRecord, String> PRIORITY = createField("PRIORITY", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「priority」- 操作优先级：用户优先、角色优先、统一（定义资源的访问表）");
 
     /**
-     * The column <code>UP_RBAC.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
+     * The column <code>DB_RBAC.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
      */
     public final TableField<SActionRecord, String> RESOURCE_ID = createField("RESOURCE_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「resourceId」- 操作关联资源ID");
 
     /**
-     * The column <code>UP_RBAC.S_ACTION.CATEGORY</code>. 「category」- 组类型
+     * The column <code>DB_RBAC.S_ACTION.CATEGORY</code>. 「category」- 组类型
      */
     public final TableField<SActionRecord, String> CATEGORY = createField("CATEGORY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「category」- 组类型");
 
     /**
-     * The column <code>UP_RBAC.S_ACTION.SIGMA</code>. 「sigma」- 绑定的统一标识
+     * The column <code>DB_RBAC.S_ACTION.SIGMA</code>. 「sigma」- 绑定的统一标识
      */
     public final TableField<SActionRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(128), this, "「sigma」- 绑定的统一标识");
 
     /**
-     * The column <code>UP_RBAC.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
+     * The column <code>DB_RBAC.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
      */
     public final TableField<SActionRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
 
     /**
-     * The column <code>UP_RBAC.S_ACTION.ACTIVE</code>. 「active」- 是否启用
+     * The column <code>DB_RBAC.S_ACTION.ACTIVE</code>. 「active」- 是否启用
      */
     public final TableField<SActionRecord, Boolean> ACTIVE = createField("ACTIVE", org.jooq.impl.SQLDataType.BIT, this, "「active」- 是否启用");
 
     /**
-     * The column <code>UP_RBAC.S_ACTION.METADATA</code>. 「metadata」- 附加配置数据
+     * The column <code>DB_RBAC.S_ACTION.METADATA</code>. 「metadata」- 附加配置数据
      */
     public final TableField<SActionRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置数据");
 
     /**
-     * The column <code>UP_RBAC.S_ACTION.CREATED_AT</code>. 「createdAt」- 创建时间
+     * The column <code>DB_RBAC.S_ACTION.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public final TableField<SActionRecord, LocalDateTime> CREATED_AT = createField("CREATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「createdAt」- 创建时间");
 
     /**
-     * The column <code>UP_RBAC.S_ACTION.CREATED_BY</code>. 「createdBy」- 创建人
+     * The column <code>DB_RBAC.S_ACTION.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public final TableField<SActionRecord, String> CREATED_BY = createField("CREATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「createdBy」- 创建人");
 
     /**
-     * The column <code>UP_RBAC.S_ACTION.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * The column <code>DB_RBAC.S_ACTION.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     public final TableField<SActionRecord, LocalDateTime> UPDATED_AT = createField("UPDATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「updatedAt」- 更新时间");
 
     /**
-     * The column <code>UP_RBAC.S_ACTION.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * The column <code>DB_RBAC.S_ACTION.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public final TableField<SActionRecord, String> UPDATED_BY = createField("UPDATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「updatedBy」- 更新人");
 
     /**
-     * Create a <code>UP_RBAC.S_ACTION</code> table reference
+     * Create a <code>DB_RBAC.S_ACTION</code> table reference
      */
     public SAction() {
         this(DSL.name("S_ACTION"), null);
     }
 
     /**
-     * Create an aliased <code>UP_RBAC.S_ACTION</code> table reference
+     * Create an aliased <code>DB_RBAC.S_ACTION</code> table reference
      */
     public SAction(String alias) {
         this(DSL.name(alias), S_ACTION);
     }
 
     /**
-     * Create an aliased <code>UP_RBAC.S_ACTION</code> table reference
+     * Create an aliased <code>DB_RBAC.S_ACTION</code> table reference
      */
     public SAction(Name alias) {
         this(alias, S_ACTION);
@@ -163,7 +163,7 @@ public class SAction extends TableImpl<SActionRecord> {
      */
     @Override
     public Schema getSchema() {
-        return UpRbac.UP_RBAC;
+        return DbRbac.DB_RBAC;
     }
 
     /**

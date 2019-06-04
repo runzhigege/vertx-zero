@@ -31,10 +31,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Record16<String, String, String, Boolean, String, String, String, String, String, String, Boolean, String, LocalDateTime, String, LocalDateTime, String>, ISRole {
 
-    private static final long serialVersionUID = 1041610234;
+    private static final long serialVersionUID = 1745260666;
 
     /**
-     * Setter for <code>UP_RBAC.S_ROLE.KEY</code>. 「key」- 角色ID
+     * Setter for <code>DB_RBAC.S_ROLE.KEY</code>. 「key」- 角色ID
      */
     @Override
     public SRoleRecord setKey(String value) {
@@ -43,7 +43,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_ROLE.KEY</code>. 「key」- 角色ID
+     * Getter for <code>DB_RBAC.S_ROLE.KEY</code>. 「key」- 角色ID
      */
     @Override
     public String getKey() {
@@ -51,7 +51,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_ROLE.NAME</code>. 「name」- 角色名称
+     * Setter for <code>DB_RBAC.S_ROLE.NAME</code>. 「name」- 角色名称
      */
     @Override
     public SRoleRecord setName(String value) {
@@ -60,7 +60,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_ROLE.NAME</code>. 「name」- 角色名称
+     * Getter for <code>DB_RBAC.S_ROLE.NAME</code>. 「name」- 角色名称
      */
     @Override
     public String getName() {
@@ -68,7 +68,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_ROLE.CODE</code>. 「code」- 角色系统名
+     * Setter for <code>DB_RBAC.S_ROLE.CODE</code>. 「code」- 角色系统名
      */
     @Override
     public SRoleRecord setCode(String value) {
@@ -77,7 +77,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_ROLE.CODE</code>. 「code」- 角色系统名
+     * Getter for <code>DB_RBAC.S_ROLE.CODE</code>. 「code」- 角色系统名
      */
     @Override
     public String getCode() {
@@ -85,7 +85,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_ROLE.SUPER</code>. 「super」- 是否具有定制权限？
+     * Setter for <code>DB_RBAC.S_ROLE.SUPER</code>. 「super」- 是否具有定制权限？
      */
     @Override
     public SRoleRecord setSuper(Boolean value) {
@@ -94,7 +94,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_ROLE.SUPER</code>. 「super」- 是否具有定制权限？
+     * Getter for <code>DB_RBAC.S_ROLE.SUPER</code>. 「super」- 是否具有定制权限？
      */
     @Override
     public Boolean getSuper() {
@@ -102,7 +102,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_ROLE.COMMENT</code>. 「comment」- 角色备注信息
+     * Setter for <code>DB_RBAC.S_ROLE.COMMENT</code>. 「comment」- 角色备注信息
      */
     @Override
     public SRoleRecord setComment(String value) {
@@ -111,7 +111,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_ROLE.COMMENT</code>. 「comment」- 角色备注信息
+     * Getter for <code>DB_RBAC.S_ROLE.COMMENT</code>. 「comment」- 角色备注信息
      */
     @Override
     public String getComment() {
@@ -119,7 +119,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_ROLE.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
+     * Setter for <code>DB_RBAC.S_ROLE.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
      */
     @Override
     public SRoleRecord setModelId(String value) {
@@ -128,7 +128,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_ROLE.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
+     * Getter for <code>DB_RBAC.S_ROLE.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
      */
     @Override
     public String getModelId() {
@@ -136,7 +136,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_ROLE.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
+     * Setter for <code>DB_RBAC.S_ROLE.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
      */
     @Override
     public SRoleRecord setModelKey(String value) {
@@ -145,7 +145,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_ROLE.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
+     * Getter for <code>DB_RBAC.S_ROLE.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
      */
     @Override
     public String getModelKey() {
@@ -153,7 +153,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_ROLE.CATEGORY</code>. 「category」- 组类型
+     * Setter for <code>DB_RBAC.S_ROLE.CATEGORY</code>. 「category」- 组类型
      */
     @Override
     public SRoleRecord setCategory(String value) {
@@ -162,7 +162,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_ROLE.CATEGORY</code>. 「category」- 组类型
+     * Getter for <code>DB_RBAC.S_ROLE.CATEGORY</code>. 「category」- 组类型
      */
     @Override
     public String getCategory() {
@@ -170,7 +170,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_ROLE.SIGMA</code>. 「sigma」- 角色绑定的统一标识
+     * Setter for <code>DB_RBAC.S_ROLE.SIGMA</code>. 「sigma」- 角色绑定的统一标识
      */
     @Override
     public SRoleRecord setSigma(String value) {
@@ -179,7 +179,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_ROLE.SIGMA</code>. 「sigma」- 角色绑定的统一标识
+     * Getter for <code>DB_RBAC.S_ROLE.SIGMA</code>. 「sigma」- 角色绑定的统一标识
      */
     @Override
     public String getSigma() {
@@ -187,7 +187,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_ROLE.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_RBAC.S_ROLE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public SRoleRecord setLanguage(String value) {
@@ -196,7 +196,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_ROLE.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_RBAC.S_ROLE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public String getLanguage() {
@@ -204,7 +204,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_ROLE.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_RBAC.S_ROLE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public SRoleRecord setActive(Boolean value) {
@@ -213,7 +213,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_ROLE.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_RBAC.S_ROLE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public Boolean getActive() {
@@ -221,7 +221,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_ROLE.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_RBAC.S_ROLE.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public SRoleRecord setMetadata(String value) {
@@ -230,7 +230,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_ROLE.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_RBAC.S_ROLE.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public String getMetadata() {
@@ -238,7 +238,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_ROLE.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Setter for <code>DB_RBAC.S_ROLE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
     public SRoleRecord setCreatedAt(LocalDateTime value) {
@@ -247,7 +247,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_ROLE.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Getter for <code>DB_RBAC.S_ROLE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
     public LocalDateTime getCreatedAt() {
@@ -255,7 +255,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_ROLE.CREATED_BY</code>. 「createdBy」- 创建人
+     * Setter for <code>DB_RBAC.S_ROLE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
     public SRoleRecord setCreatedBy(String value) {
@@ -264,7 +264,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_ROLE.CREATED_BY</code>. 「createdBy」- 创建人
+     * Getter for <code>DB_RBAC.S_ROLE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
     public String getCreatedBy() {
@@ -272,7 +272,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_ROLE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Setter for <code>DB_RBAC.S_ROLE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
     public SRoleRecord setUpdatedAt(LocalDateTime value) {
@@ -281,7 +281,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_ROLE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Getter for <code>DB_RBAC.S_ROLE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
     public LocalDateTime getUpdatedAt() {
@@ -289,7 +289,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_ROLE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Setter for <code>DB_RBAC.S_ROLE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
     public SRoleRecord setUpdatedBy(String value) {
@@ -298,7 +298,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_ROLE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Getter for <code>DB_RBAC.S_ROLE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
     public String getUpdatedBy() {

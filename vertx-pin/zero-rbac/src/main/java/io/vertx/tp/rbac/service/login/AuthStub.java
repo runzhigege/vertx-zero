@@ -1,9 +1,10 @@
-package io.vertx.tp.rbac.service;
+package io.vertx.tp.rbac.service.login;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 
 public interface AuthStub {
+
     /**
      * Exchange authorization code
      * by filters ( JsonObject )
@@ -18,5 +19,5 @@ public interface AuthStub {
     /**
      * Login with "username/password"
      */
-    Future<JsonObject> login(String username, String password);
+    Future<JsonObject> login(JsonObject params);
 }

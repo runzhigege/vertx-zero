@@ -27,7 +27,7 @@ import org.jooq.impl.Internal;
 
 
 /**
- * A class modelling indexes of tables of the <code>UP_RBAC</code> schema.
+ * A class modelling indexes of tables of the <code>DB_RBAC</code> schema.
  */
 @Generated(
     value = {

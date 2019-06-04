@@ -28,10 +28,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RPermActionRecord extends UpdatableRecordImpl<RPermActionRecord> implements Record2<String, String>, IRPermAction {
 
-    private static final long serialVersionUID = 507195334;
+    private static final long serialVersionUID = -554321338;
 
     /**
-     * Setter for <code>UP_RBAC.R_PERM_ACTION.PERM_ID</code>. 「permId」- 关联权限ID
+     * Setter for <code>DB_RBAC.R_PERM_ACTION.PERM_ID</code>. 「permId」- 关联权限ID
      */
     @Override
     public RPermActionRecord setPermId(String value) {
@@ -40,7 +40,7 @@ public class RPermActionRecord extends UpdatableRecordImpl<RPermActionRecord> im
     }
 
     /**
-     * Getter for <code>UP_RBAC.R_PERM_ACTION.PERM_ID</code>. 「permId」- 关联权限ID
+     * Getter for <code>DB_RBAC.R_PERM_ACTION.PERM_ID</code>. 「permId」- 关联权限ID
      */
     @Override
     public String getPermId() {
@@ -48,7 +48,7 @@ public class RPermActionRecord extends UpdatableRecordImpl<RPermActionRecord> im
     }
 
     /**
-     * Setter for <code>UP_RBAC.R_PERM_ACTION.ACTION_ID</code>. 「actionId」- 操作ID
+     * Setter for <code>DB_RBAC.R_PERM_ACTION.ACTION_ID</code>. 「actionId」- 操作ID
      */
     @Override
     public RPermActionRecord setActionId(String value) {
@@ -57,7 +57,7 @@ public class RPermActionRecord extends UpdatableRecordImpl<RPermActionRecord> im
     }
 
     /**
-     * Getter for <code>UP_RBAC.R_PERM_ACTION.ACTION_ID</code>. 「actionId」- 操作ID
+     * Getter for <code>DB_RBAC.R_PERM_ACTION.ACTION_ID</code>. 「actionId」- 操作ID
      */
     @Override
     public String getActionId() {

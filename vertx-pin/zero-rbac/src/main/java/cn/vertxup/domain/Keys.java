@@ -41,7 +41,7 @@ import org.jooq.impl.Internal;
 
 /**
  * A class modelling foreign key relationships and constraints of tables of 
- * the <code>UP_RBAC</code> schema.
+ * the <code>DB_RBAC</code> schema.
  */
 @Generated(
     value = {
