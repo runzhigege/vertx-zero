@@ -8,6 +8,12 @@ excel:
         unique:
           - username
           - sigma
+      # OAuth User
+      - table: O_USER
+        pojo: cn.vertxup.domain.tables.pojos.OUser
+        dao: cn.vertxup.domain.tables.daos.OUserDao
+        unique:
+          - clientId
       # Role Configuration
       - table: S_ROLE
         pojo: cn.vertxup.domain.tables.pojos.SRole
