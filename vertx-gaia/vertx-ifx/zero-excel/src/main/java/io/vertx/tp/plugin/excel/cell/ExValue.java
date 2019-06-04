@@ -1,6 +1,13 @@
 package io.vertx.tp.plugin.excel.cell;
 
+import io.vertx.tp.plugin.excel.atom.ExKey;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.CellValue;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
+
 import java.util.Objects;
+import java.util.function.Function;
 
 /*
  * Cell Processing for value
@@ -20,6 +27,21 @@ public interface ExValue {
             return PureValue.create();
         } else {
             return reference;
+        }
+    }
+
+    static Object getValue(final Cell cell, final FormulaEvaluator evaluator) {
+        final Function<Cell, Object> fun = Pool.FUNS.get(cell.getCellType());
+        if (null == fun) {
+            if (CellType.FORMULA == cell.getCellType()) {
+                final CellValue value = evaluator.evaluate(cell);
+                final String literal = value.getStringValue();
+                return ExKey.VALUE_NULL.endsWith(literal.trim()) ? null : literal;
+            } else {
+                return null;
+            }
+        } else {
+            return fun.apply(cell);
         }
     }
 
