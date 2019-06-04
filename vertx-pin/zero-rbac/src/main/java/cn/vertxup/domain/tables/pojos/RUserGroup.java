@@ -22,24 +22,24 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RUserGroup implements IRUserGroup {
 
-    private static final long serialVersionUID = 302416198;
+    private static final long serialVersionUID = 2145545191;
 
     private String groupId;
-    private String roleId;
+    private String userId;
 
     public RUserGroup() {}
 
     public RUserGroup(RUserGroup value) {
         this.groupId = value.groupId;
-        this.roleId = value.roleId;
+        this.userId = value.userId;
     }
 
     public RUserGroup(
         String groupId,
-        String roleId
+        String userId
     ) {
         this.groupId = groupId;
-        this.roleId = roleId;
+        this.userId = userId;
     }
 
     @Override
@@ -54,13 +54,13 @@ public class RUserGroup implements IRUserGroup {
     }
 
     @Override
-    public String getRoleId() {
-        return this.roleId;
+    public String getUserId() {
+        return this.userId;
     }
 
     @Override
-    public RUserGroup setRoleId(String roleId) {
-        this.roleId = roleId;
+    public RUserGroup setUserId(String userId) {
+        this.userId = userId;
         return this;
     }
 
@@ -69,7 +69,7 @@ public class RUserGroup implements IRUserGroup {
         StringBuilder sb = new StringBuilder("RUserGroup (");
 
         sb.append(groupId);
-        sb.append(", ").append(roleId);
+        sb.append(", ").append(userId);
 
         sb.append(")");
         return sb.toString();
@@ -85,7 +85,7 @@ public class RUserGroup implements IRUserGroup {
     @Override
     public void from(IRUserGroup from) {
         setGroupId(from.getGroupId());
-        setRoleId(from.getRoleId());
+        setUserId(from.getUserId());
     }
 
     /**

@@ -52,7 +52,7 @@ public class RUserGroupDao extends DAOImpl<RUserGroupRecord, cn.vertxup.domain.t
      */
     @Override
     protected Record2<String, String> getId(cn.vertxup.domain.tables.pojos.RUserGroup object) {
-        return compositeKeyRecord(object.getGroupId(), object.getRoleId());
+        return compositeKeyRecord(object.getGroupId(), object.getUserId());
     }
 
     /**
@@ -63,10 +63,10 @@ public class RUserGroupDao extends DAOImpl<RUserGroupRecord, cn.vertxup.domain.t
     }
 
     /**
-     * Fetch records that have <code>ROLE_ID IN (values)</code>
+     * Fetch records that have <code>USER_ID IN (values)</code>
      */
-    public List<cn.vertxup.domain.tables.pojos.RUserGroup> fetchByRoleId(String... values) {
-        return fetch(RUserGroup.R_USER_GROUP.ROLE_ID, values);
+    public List<cn.vertxup.domain.tables.pojos.RUserGroup> fetchByUserId(String... values) {
+        return fetch(RUserGroup.R_USER_GROUP.USER_ID, values);
     }
 
     /**
@@ -77,10 +77,10 @@ public class RUserGroupDao extends DAOImpl<RUserGroupRecord, cn.vertxup.domain.t
     }
 
     /**
-     * Fetch records that have <code>ROLE_ID IN (values)</code> asynchronously
+     * Fetch records that have <code>USER_ID IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RUserGroup>> fetchByRoleIdAsync(List<String> values) {
-        return fetchAsync(RUserGroup.R_USER_GROUP.ROLE_ID,values);
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RUserGroup>> fetchByUserIdAsync(List<String> values) {
+        return fetchAsync(RUserGroup.R_USER_GROUP.USER_ID,values);
     }
 
     private io.vertx.core.Vertx vertx;

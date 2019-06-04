@@ -38,7 +38,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RUserGroup extends TableImpl<RUserGroupRecord> {
 
-    private static final long serialVersionUID = -1289229458;
+    private static final long serialVersionUID = 1012872357;
 
     /**
      * The reference instance of <code>DB_RBAC.R_USER_GROUP</code>
@@ -59,9 +59,9 @@ public class RUserGroup extends TableImpl<RUserGroupRecord> {
     public final TableField<RUserGroupRecord, String> GROUP_ID = createField("GROUP_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「groupId」- 关联组ID");
 
     /**
-     * The column <code>DB_RBAC.R_USER_GROUP.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * The column <code>DB_RBAC.R_USER_GROUP.USER_ID</code>. 「userId」- 关联用户ID
      */
-    public final TableField<RUserGroupRecord, String> ROLE_ID = createField("ROLE_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「roleId」- 关联角色ID");
+    public final TableField<RUserGroupRecord, String> USER_ID = createField("USER_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「userId」- 关联用户ID");
 
     /**
      * Create a <code>DB_RBAC.R_USER_GROUP</code> table reference
