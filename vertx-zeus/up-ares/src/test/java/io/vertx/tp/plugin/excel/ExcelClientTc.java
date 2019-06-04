@@ -22,7 +22,7 @@ public class ExcelClientTc extends ZeroBase {
     @Test
     public void test(final TestContext context) {
         final ExcelClient client = ExcelInfix.getClient();
-        client.loading("plugin/excel/data/DATA-USER.xlsx", handler -> {
+        client.loading("plugin/excel/data/data.demo.xlsx", handler -> {
 
         });
     }
