@@ -2,8 +2,10 @@ package io.vertx.tp.plugin.excel.atom;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.error._404ConnectMissingException;
 import io.vertx.zero.eon.Strings;
 import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,25 +42,21 @@ public class ExTable implements Serializable {
         this.description = description;
     }
 
-    public void setConnect(final ExConnect connect) {
-        this.connect = connect;
-    }
-
     /*
      * Class<?>
      * Dao / Pojo
      */
     @SuppressWarnings("all")
     public <T> Class<T> getPojo() {
-        return (Class<T>) this.connect.getPojo();
+        return (Class<T>) this.getConnect().getPojo();
     }
 
     public Class<?> getDao() {
-        return this.connect.getDao();
+        return this.getConnect().getDao();
     }
 
     public JsonObject getFilters(final JsonObject data) {
-        final JsonArray unique = this.connect.getUnique();
+        final JsonArray unique = this.getConnect().getUnique();
         final JsonObject filters = new JsonObject();
         Ut.itJArray(unique, String.class, (field, index) -> {
             final Object value = data.getValue(field);
@@ -100,6 +98,15 @@ public class ExTable implements Serializable {
 
     public int size() {
         return this.fields.size();
+    }
+
+    private ExConnect getConnect() {
+        Fn.outWeb(null == this.connect, _404ConnectMissingException.class, this.getClass(), this.name);
+        return this.connect;
+    }
+
+    public void setConnect(final ExConnect connect) {
+        this.connect = connect;
     }
 
     @Override
