@@ -38,8 +38,8 @@ class ScCode {
     /*
      * Verify authorization code
      * {
-     * -- | "code":"xxx",
-     * -- | "client_id":"xxx"
+     *      "code":"xxx",
+     *      "client_id":"xxx"
      * }
      */
     @SuppressWarnings("all")

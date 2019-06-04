@@ -35,6 +35,7 @@ final class Jackson {
         Jackson.MAPPER.configure(JsonParser.Feature.ALLOW_COMMENTS, true);
         Jackson.MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         Jackson.MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        // Big Decimal
         Jackson.MAPPER.configure(DeserializationFeature.USE_BIG_DECIMAL_FOR_FLOATS, true);
         // Case Sensitive
         Jackson.MAPPER.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
