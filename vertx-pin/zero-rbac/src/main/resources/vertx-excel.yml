@@ -1,0 +1,30 @@
+excel:
+  config:
+    mapping:
+      # User Configuration
+      - table: S_USER
+        pojo: cn.vertxup.domain.tables.pojos.SUser
+        dao: cn.vertxup.domain.tables.daos.SUserDao
+        unique:
+          - username
+          - sigma
+      # OAuth User
+      - table: O_USER
+        pojo: cn.vertxup.domain.tables.pojos.OUser
+        dao: cn.vertxup.domain.tables.daos.OUserDao
+        unique:
+          - clientId
+      # Role Configuration
+      - table: S_ROLE
+        pojo: cn.vertxup.domain.tables.pojos.SRole
+        dao: cn.vertxup.domain.tables.daos.SRoleDao
+        unique:
+          - code
+          - sigma
+      # Role - User Relation
+      - table: R_USER_ROLE
+        pojo: cn.vertxup.domain.tables.pojos.RUserRole
+        dao: cn.vertxup.domain.tables.daos.RUserRoleDao
+        unique:
+          - userId
+          - roleId

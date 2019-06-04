@@ -10,13 +10,14 @@ import io.vertx.tp.plugin.excel.ranger.ExBound;
 import io.vertx.tp.plugin.excel.ranger.RowBound;
 import io.vertx.tp.plugin.excel.tool.ExFn;
 import io.vertx.up.log.Annal;
+import io.vertx.zero.eon.Values;
 import io.zero.epic.container.RxHod;
 import org.apache.poi.ss.usermodel.*;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /*
  * Wrapper Sheet object to store data, this object could help to
@@ -43,9 +44,11 @@ public class SheetAnalyzer implements Serializable {
         LOGGER.info("[ Excel ] Scan Range: {0}", bound);
         /* Sheet scanning */
         final Set<ExTable> tables = new HashSet<>();
+
+        /* Row scanning for {TABLE} */
+        final List<Cell> tableCell = new ArrayList<>();
         ExFn.itSheet(this.sheet, bound, (row, index) -> {
-            /* Row scanning */
-            final Set<Cell> tableCell = new HashSet<>();
+
             final ExBound colBound = new ColBound(row);
             ExFn.itRow(row, colBound,
                     /* {Table} Cell */
@@ -53,21 +56,50 @@ public class SheetAnalyzer implements Serializable {
                     /* Predicate Here */
                     cell -> CellType.STRING == cell.getCellType()
                             && ExKey.EXPR_TABLE.endsWith(cell.getStringCellValue()));
-            if (!tableCell.isEmpty()) {
-                LOGGER.info("[ Excel ] Scanned sheet: {0}, tables = {1}",
-                        this.sheet.getSheetName(), String.valueOf(tableCell.size()));
-                /* Table Found */
-                tableCell.stream().map(cell -> this.analyzed(row, cell))
-                        .forEach(tables::add);
-            }
         });
+        /* analyzedBounds */
+        if (!tableCell.isEmpty()) {
+            LOGGER.info("[ Excel ] Scanned sheet: {0}, tables = {1}",
+                    this.sheet.getSheetName(), String.valueOf(tableCell.size()));
+            /* Range scaned */
+            final ConcurrentMap<Integer, Integer> range = this.getRange(tableCell);
+            tableCell.stream().map(cell -> {
+                final Row row = this.sheet.getRow(cell.getRowIndex());
+                if (null == row) {
+                    return null;
+                } else {
+                    final Integer limit = range.get(cell.hashCode());
+                    return this.analyzed(row, cell, limit);
+                }
+            }).filter(Objects::nonNull).forEach(tables::add);
+        }
         return tables;
+    }
+
+    private ConcurrentMap<Integer, Integer> getRange(final List<Cell> tableCell) {
+        /* Range scaned */
+        final List<Integer> hashCodes = new ArrayList<>();
+        final List<Integer> indexes = new ArrayList<>();
+        tableCell.forEach(cell -> {
+            /* Adjust calculation index and decrease */
+            indexes.add(cell.getRowIndex() - 1);
+            hashCodes.add(cell.hashCode());
+        });
+        indexes.add(this.sheet.getLastRowNum());
+        indexes.remove(Values.IDX);
+        final ConcurrentMap<Integer, Integer> indexMap = new ConcurrentHashMap<>();
+        for (int idx = 0; idx < hashCodes.size(); idx++) {
+            final Integer key = hashCodes.get(idx);
+            final Integer index = indexes.get(idx);
+            indexMap.put(key, index);
+        }
+        return indexMap;
     }
 
     /*
      * Scan sheet from row to cell to build each table.
      */
-    private ExTable analyzed(final Row row, final Cell cell) {
+    private ExTable analyzed(final Row row, final Cell cell, final Integer limitation) {
         /* Build ExTable */
         final ExTable table = this.create(row, cell);
 
@@ -79,7 +111,7 @@ public class SheetAnalyzer implements Serializable {
             ExFn.itRow(foundRow, bound, (foundCell, colIndex) ->
                     table.add(foundCell.getStringCellValue()));
             /* Build Value Row Range */
-            hod.add(new RowBound(foundRow.getRowNum() + 1, this.sheet.getLastRowNum()));
+            hod.add(new RowBound(foundRow.getRowNum() + 1, limitation));
         });
 
         /* Data Range */
