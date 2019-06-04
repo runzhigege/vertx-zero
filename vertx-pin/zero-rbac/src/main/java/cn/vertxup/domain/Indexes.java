@@ -87,7 +87,7 @@ public class Indexes {
         public static Index R_RESOURCE_MATRIX_SIGMA = Internal.createIndex("SIGMA", RResourceMatrix.R_RESOURCE_MATRIX, new OrderField[] { RResourceMatrix.R_RESOURCE_MATRIX.SIGMA, RResourceMatrix.R_RESOURCE_MATRIX.RESOURCE_ID, RResourceMatrix.R_RESOURCE_MATRIX.USER_ID }, true);
         public static Index R_RESOURCE_MATRIX_SIGMA_2 = Internal.createIndex("SIGMA_2", RResourceMatrix.R_RESOURCE_MATRIX, new OrderField[] { RResourceMatrix.R_RESOURCE_MATRIX.SIGMA, RResourceMatrix.R_RESOURCE_MATRIX.RESOURCE_ID, RResourceMatrix.R_RESOURCE_MATRIX.ROLE_ID }, true);
         public static Index R_ROLE_PERM_PRIMARY = Internal.createIndex("PRIMARY", RRolePerm.R_ROLE_PERM, new OrderField[] { RRolePerm.R_ROLE_PERM.PERM_ID, RRolePerm.R_ROLE_PERM.ROLE_ID }, true);
-        public static Index R_USER_GROUP_PRIMARY = Internal.createIndex("PRIMARY", RUserGroup.R_USER_GROUP, new OrderField[] { RUserGroup.R_USER_GROUP.GROUP_ID, RUserGroup.R_USER_GROUP.ROLE_ID }, true);
+        public static Index R_USER_GROUP_PRIMARY = Internal.createIndex("PRIMARY", RUserGroup.R_USER_GROUP, new OrderField[] { RUserGroup.R_USER_GROUP.GROUP_ID, RUserGroup.R_USER_GROUP.USER_ID }, true);
         public static Index R_USER_ROLE_PRIMARY = Internal.createIndex("PRIMARY", RUserRole.R_USER_ROLE, new OrderField[] { RUserRole.R_USER_ROLE.USER_ID, RUserRole.R_USER_ROLE.ROLE_ID }, true);
         public static Index S_ACTION_CODE = Internal.createIndex("CODE", SAction.S_ACTION, new OrderField[] { SAction.S_ACTION.CODE, SAction.S_ACTION.SIGMA }, true);
         public static Index S_ACTION_PRIMARY = Internal.createIndex("PRIMARY", SAction.S_ACTION, new OrderField[] { SAction.S_ACTION.KEY }, true);

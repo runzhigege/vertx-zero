@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> implements Record2<String, String>, IRUserGroup {
 
-    private static final long serialVersionUID = -1373593302;
+    private static final long serialVersionUID = -422547660;
 
     /**
      * Setter for <code>DB_RBAC.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
@@ -48,19 +48,19 @@ public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> impl
     }
 
     /**
-     * Setter for <code>DB_RBAC.R_USER_GROUP.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Setter for <code>DB_RBAC.R_USER_GROUP.USER_ID</code>. 「userId」- 关联用户ID
      */
     @Override
-    public RUserGroupRecord setRoleId(String value) {
+    public RUserGroupRecord setUserId(String value) {
         set(1, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_RBAC.R_USER_GROUP.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Getter for <code>DB_RBAC.R_USER_GROUP.USER_ID</code>. 「userId」- 关联用户ID
      */
     @Override
-    public String getRoleId() {
+    public String getUserId() {
         return (String) get(1);
     }
 
@@ -109,7 +109,7 @@ public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> impl
      */
     @Override
     public Field<String> field2() {
-        return RUserGroup.R_USER_GROUP.ROLE_ID;
+        return RUserGroup.R_USER_GROUP.USER_ID;
     }
 
     /**
@@ -125,7 +125,7 @@ public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> impl
      */
     @Override
     public String component2() {
-        return getRoleId();
+        return getUserId();
     }
 
     /**
@@ -141,7 +141,7 @@ public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> impl
      */
     @Override
     public String value2() {
-        return getRoleId();
+        return getUserId();
     }
 
     /**
@@ -158,7 +158,7 @@ public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> impl
      */
     @Override
     public RUserGroupRecord value2(String value) {
-        setRoleId(value);
+        setUserId(value);
         return this;
     }
 
@@ -182,7 +182,7 @@ public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> impl
     @Override
     public void from(IRUserGroup from) {
         setGroupId(from.getGroupId());
-        setRoleId(from.getRoleId());
+        setUserId(from.getUserId());
     }
 
     /**
@@ -208,10 +208,10 @@ public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> impl
     /**
      * Create a detached, initialised RUserGroupRecord
      */
-    public RUserGroupRecord(String groupId, String roleId) {
+    public RUserGroupRecord(String groupId, String userId) {
         super(RUserGroup.R_USER_GROUP);
 
         set(0, groupId);
-        set(1, roleId);
+        set(1, userId);
     }
 }

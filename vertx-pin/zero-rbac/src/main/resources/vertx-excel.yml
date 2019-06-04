@@ -21,10 +21,31 @@ excel:
         unique:
           - code
           - sigma
-      # Role - User Relation
+      # Relation:  Role - User
       - table: R_USER_ROLE
         pojo: cn.vertxup.domain.tables.pojos.RUserRole
         dao: cn.vertxup.domain.tables.daos.RUserRoleDao
         unique:
           - userId
           - roleId
+      # Group Configuration
+      - table: S_GROUP
+        pojo: cn.vertxup.domain.tables.pojos.SGroup
+        dao: cn.vertxup.domain.tables.daos.SGroupDao
+        unique:
+          - code
+          - sigma
+      # Relation:  Role - Group
+      - table: R_GROUP_ROLE
+        pojo: cn.vertxup.domain.tables.pojos.RGroupRole
+        dao: cn.vertxup.domain.tables.daos.RGroupRoleDao
+        unique:
+          - groupId
+          - roleId
+      # Relation:  User - Group
+      - table: R_USER_GROUP
+        pojo: cn.vertxup.domain.tables.pojos.RUserGroup
+        dao: cn.vertxup.domain.tables.daos.RUserGroupDao
+        unique:
+          - groupId
+          - userId

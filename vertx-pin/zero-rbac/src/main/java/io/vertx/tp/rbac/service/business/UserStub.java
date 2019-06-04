@@ -5,7 +5,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 /*
- * User Interface for Login
+ * Basic user interface
+ * 1) Get relations between user / role by user key
+ * 2) Get OAuth user account information by user key ( client_id )
  */
 public interface UserStub {
     /**

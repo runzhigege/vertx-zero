@@ -3,6 +3,9 @@ package io.vertx.tp.rbac.service.login;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 
+/*
+ * Major interface that has been used in Worker component
+ */
 public interface AuthStub {
 
     /**
