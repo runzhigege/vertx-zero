@@ -1,7 +1,9 @@
 package io.vertx.tp.plugin.excel.atom;
 
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+import io.vertx.zero.eon.Strings;
 import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,10 +19,14 @@ public class ExTable implements Serializable {
     private transient final String sheet;
     private transient String name;
     private transient String description;
-    private transient Class<?> daoCls;
+    private transient ExConnect connect;
 
     public ExTable(final String sheet) {
         this.sheet = sheet;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     /*
@@ -34,8 +40,33 @@ public class ExTable implements Serializable {
         this.description = description;
     }
 
-    public void setDaoCls(final String daoCls) {
-        this.daoCls = Fn.getJvm(null, () -> Ut.clazz(daoCls), daoCls);
+    public void setConnect(final ExConnect connect) {
+        this.connect = connect;
+    }
+
+    /*
+     * Class<?>
+     * Dao / Pojo
+     */
+    @SuppressWarnings("all")
+    public <T> Class<T> getPojo() {
+        return (Class<T>) this.connect.getPojo();
+    }
+
+    public Class<?> getDao() {
+        return this.connect.getDao();
+    }
+
+    public JsonObject getFilters(final JsonObject data) {
+        final JsonArray unique = this.connect.getUnique();
+        final JsonObject filters = new JsonObject();
+        Ut.itJArray(unique, String.class, (field, index) -> {
+            final Object value = data.getValue(field);
+            if (Objects.nonNull(value)) {
+                filters.put(field, value);
+            }
+        });
+        return filters.put(Strings.EMPTY, Boolean.TRUE);
     }
 
     /*
@@ -94,8 +125,8 @@ public class ExTable implements Serializable {
         final StringBuilder content = new StringBuilder();
         content.append("sheet = ").append(this.sheet).append(",");
         content.append("name = ").append(this.name).append(",");
-        content.append("daoCls = ").append(this.daoCls).append(',');
         content.append("description = ").append(this.description).append("\n");
+        content.append("daoCls = ").append(this.connect).append(",\n");
         this.fields.forEach(field -> content.append(field).append(","));
         content.append("\n");
         this.values.forEach(row -> content.append(row.toString()).append("\n"));

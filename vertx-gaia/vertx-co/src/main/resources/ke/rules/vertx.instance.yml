@@ -1,4 +1,4 @@
 required:
-- name
+  - name
 typed:
   options: JOBJECT

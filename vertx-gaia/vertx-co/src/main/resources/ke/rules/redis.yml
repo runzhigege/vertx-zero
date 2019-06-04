@@ -1,6 +1,6 @@
 required:
-- host
-- port
+  - host
+  - port
 typed:
   address: STRING
   auth: STRING

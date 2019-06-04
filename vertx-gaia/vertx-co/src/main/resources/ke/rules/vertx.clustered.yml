@@ -1,5 +1,5 @@
 required:
-- enabled
-- manager
+  - enabled
+  - manager
 typed:
   options: JOBJECT

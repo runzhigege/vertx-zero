@@ -1,5 +1,5 @@
 required:
-- instance
+  - instance
 typed:
   clustered: JOBJECT
   instance: JARRAY
