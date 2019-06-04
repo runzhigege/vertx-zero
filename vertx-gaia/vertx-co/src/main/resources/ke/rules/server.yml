@@ -1,6 +1,6 @@
 required:
-- name
-- type
-- config
+  - name
+  - type
+  - config
 typed:
   config: JOBJECT

@@ -1,6 +1,9 @@
 package io.vertx.tp.plugin.excel;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import io.vertx.core.json.JsonArray;
 import io.vertx.tp.error._404ExcelFileNullException;
+import io.vertx.tp.plugin.excel.atom.ExConnect;
 import io.vertx.tp.plugin.excel.atom.ExTable;
 import io.vertx.tp.plugin.excel.ranger.ExBound;
 import io.vertx.tp.plugin.excel.ranger.RowBound;
@@ -14,9 +17,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.InputStream;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 /*
  * Excel Helper to help ExcelClient to do some object building
@@ -76,5 +77,16 @@ class ExcelHelper {
             }
             return sheets;
         }, workbook);
+    }
+
+    void initConnect(final JsonArray connects) {
+        /* JsonArray serialization */
+        if (Pool.CONNECTS.isEmpty()) {
+            final List<ExConnect> connectList = Ut.deserialize(connects, new TypeReference<List<ExConnect>>() {
+            });
+            connectList.stream().filter(Objects::nonNull)
+                    .filter(connect -> Objects.nonNull(connect.getTable()))
+                    .forEach(connect -> Pool.CONNECTS.put(connect.getTable(), connect));
+        }
     }
 }

@@ -1,5 +1,6 @@
 package io.vertx.tp.plugin.excel;
 
+import io.vertx.tp.plugin.excel.atom.ExConnect;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -10,5 +11,8 @@ interface Pool {
             = new ConcurrentHashMap<>();
 
     ConcurrentMap<String, ExcelHelper> HELPERS
+            = new ConcurrentHashMap<>();
+
+    ConcurrentMap<String, ExConnect> CONNECTS
             = new ConcurrentHashMap<>();
 }

@@ -16,6 +16,8 @@ import java.util.Set;
  */
 public interface ExcelClient extends TpClient<ExcelClient> {
 
+    String MAPPING = "mapping";
+
     static ExcelClient createShared(final Vertx vertx, final JsonObject config) {
         return new ExcelClientImpl(vertx, config);
     }
@@ -32,5 +34,11 @@ public interface ExcelClient extends TpClient<ExcelClient> {
      * @return self reference
      */
     @Fluent
-    ExcelClient loading(String filename, Handler<AsyncResult<Set<ExTable>>> handler);
+    <T> ExcelClient loading(String filename, Handler<AsyncResult<Set<T>>> handler);
+
+    @Fluent
+    ExcelClient ingestList(String filename, Handler<AsyncResult<Set<ExTable>>> handler);
+
+    @Fluent
+    ExcelClient ingest(String filename, Handler<AsyncResult<ExTable>> handler);
 }

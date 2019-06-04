@@ -1,5 +1,6 @@
 package io.vertx.tp.plugin.excel;
 
+import io.vertx.tp.plugin.excel.atom.ExConnect;
 import io.vertx.tp.plugin.excel.atom.ExKey;
 import io.vertx.tp.plugin.excel.atom.ExRecord;
 import io.vertx.tp.plugin.excel.atom.ExTable;
@@ -14,6 +15,7 @@ import org.apache.poi.ss.usermodel.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /*
@@ -109,13 +111,16 @@ public class SheetAnalyzer implements Serializable {
     private ExTable create(final Row row, final Cell cell) {
         /* Sheet Name */
         final ExTable table = new ExTable(this.sheet.getSheetName());
-        /* Name, Dao, Description - Cell */
+        /* Name, Connect, Description - Cell */
         ExFn.onCell(row, cell.getColumnIndex() + 1,
                 found -> table.setName(found.getStringCellValue()));
         ExFn.onCell(row, cell.getColumnIndex() + 2,
-                found -> table.setDaoCls(found.getStringCellValue()));
-        ExFn.onCell(row, cell.getColumnIndex() + 3,
                 found -> table.setDescription(found.getStringCellValue()));
+        /* Calculation */
+        final ExConnect connect = Pool.CONNECTS.get(table.getName());
+        if (Objects.nonNull(connect)) {
+            table.setConnect(connect);
+        }
         return table;
     }
 }

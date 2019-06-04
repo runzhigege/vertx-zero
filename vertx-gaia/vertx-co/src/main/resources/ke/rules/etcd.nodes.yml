@@ -1,5 +1,5 @@
 required:
-- host
-- port
+  - host
+  - port
 typed:
   port: INTEGER
