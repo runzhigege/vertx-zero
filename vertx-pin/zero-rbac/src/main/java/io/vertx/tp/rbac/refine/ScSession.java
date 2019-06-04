@@ -24,9 +24,11 @@ class ScSession {
      * Pool configured default parameters
      * - codePool
      */
+    @SuppressWarnings("all")
     static <V> Future<V> code(final String key) {
         final String codePool = CONFIG.getCodePool();
-        return Ux.Pool.on(codePool).get(key);
+        return Ux.Pool.on(codePool).remove(key)
+                .compose(value -> Ux.toFuture((V) value.getValue()));
     }
 
     /*
