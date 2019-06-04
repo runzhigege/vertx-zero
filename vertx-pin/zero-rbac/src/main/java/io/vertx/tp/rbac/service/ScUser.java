@@ -7,6 +7,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error._401PasswordWrongException;
 import io.vertx.tp.error._449UserNotFoundException;
+import io.vertx.up.aiki.Uson;
 import io.vertx.up.aiki.Ux;
 import io.zero.epic.fn.Fn;
 
@@ -56,22 +57,21 @@ class ScUser {
                         // Secondar query
                         (user) -> Arrays.asList(
                                 // Fetch Oauth user
-                                this.fetchOUser(user),
-                                // Fetch Join record
-                                this.fetchJoin(user)
+                                this.fetchOUser(user)
                         ),
                         Ux::appendJson, // SUser / OUser - Avoid duplicated merging
                         Ux::appendJson  // SUser / Related
-                ));
-    }
-
-    private Future<JsonObject> fetchJoin(final JsonObject user) {
-        // TODO: Fetch
-        return Future.succeededFuture();
+                ))
+                .compose(item -> Uson.create(item).pickup(
+                        "key",          /* client_id parameter */
+                        "scope",        /* scope parameter */
+                        "state",        /* state parameter */
+                        "clientSecret", /* client_secret parameter */
+                        "grantType"     /* grant_type parameter */
+                ).denull().toFuture());
     }
 
     private Future<JsonObject> fetchOUser(final JsonObject user) {
-        final String key = user.getString("key");
         return Ux.Jooq.on(OUserDao.class)
                 .fetchOneAsync("clientId", user.getString("key"))
                 .compose(Ux::fnJObject);
