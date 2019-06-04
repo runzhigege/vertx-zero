@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 
 
 /**
- * Convenience access to all tables in UP_RBAC
+ * Convenience access to all tables in DB_RBAC
  */
 @Generated(
     value = {
@@ -36,72 +36,72 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
-     * The table <code>UP_RBAC.O_ACCESS_TOKEN</code>.
+     * The table <code>DB_RBAC.O_ACCESS_TOKEN</code>.
      */
     public static final OAccessToken O_ACCESS_TOKEN = cn.vertxup.domain.tables.OAccessToken.O_ACCESS_TOKEN;
 
     /**
-     * The table <code>UP_RBAC.O_USER</code>.
+     * The table <code>DB_RBAC.O_USER</code>.
      */
     public static final OUser O_USER = cn.vertxup.domain.tables.OUser.O_USER;
 
     /**
-     * The table <code>UP_RBAC.R_GROUP_ROLE</code>.
+     * The table <code>DB_RBAC.R_GROUP_ROLE</code>.
      */
     public static final RGroupRole R_GROUP_ROLE = cn.vertxup.domain.tables.RGroupRole.R_GROUP_ROLE;
 
     /**
-     * The table <code>UP_RBAC.R_PERM_ACTION</code>.
+     * The table <code>DB_RBAC.R_PERM_ACTION</code>.
      */
     public static final RPermAction R_PERM_ACTION = cn.vertxup.domain.tables.RPermAction.R_PERM_ACTION;
 
     /**
-     * The table <code>UP_RBAC.R_RESOURCE_MATRIX</code>.
+     * The table <code>DB_RBAC.R_RESOURCE_MATRIX</code>.
      */
     public static final RResourceMatrix R_RESOURCE_MATRIX = cn.vertxup.domain.tables.RResourceMatrix.R_RESOURCE_MATRIX;
 
     /**
-     * The table <code>UP_RBAC.R_ROLE_PERM</code>.
+     * The table <code>DB_RBAC.R_ROLE_PERM</code>.
      */
     public static final RRolePerm R_ROLE_PERM = cn.vertxup.domain.tables.RRolePerm.R_ROLE_PERM;
 
     /**
-     * The table <code>UP_RBAC.R_USER_GROUP</code>.
+     * The table <code>DB_RBAC.R_USER_GROUP</code>.
      */
     public static final RUserGroup R_USER_GROUP = cn.vertxup.domain.tables.RUserGroup.R_USER_GROUP;
 
     /**
-     * The table <code>UP_RBAC.R_USER_ROLE</code>.
+     * The table <code>DB_RBAC.R_USER_ROLE</code>.
      */
     public static final RUserRole R_USER_ROLE = cn.vertxup.domain.tables.RUserRole.R_USER_ROLE;
 
     /**
-     * The table <code>UP_RBAC.S_ACTION</code>.
+     * The table <code>DB_RBAC.S_ACTION</code>.
      */
     public static final SAction S_ACTION = cn.vertxup.domain.tables.SAction.S_ACTION;
 
     /**
-     * The table <code>UP_RBAC.S_GROUP</code>.
+     * The table <code>DB_RBAC.S_GROUP</code>.
      */
     public static final SGroup S_GROUP = cn.vertxup.domain.tables.SGroup.S_GROUP;
 
     /**
-     * The table <code>UP_RBAC.S_PERMISSION</code>.
+     * The table <code>DB_RBAC.S_PERMISSION</code>.
      */
     public static final SPermission S_PERMISSION = cn.vertxup.domain.tables.SPermission.S_PERMISSION;
 
     /**
-     * The table <code>UP_RBAC.S_RESOURCE</code>.
+     * The table <code>DB_RBAC.S_RESOURCE</code>.
      */
     public static final SResource S_RESOURCE = cn.vertxup.domain.tables.SResource.S_RESOURCE;
 
     /**
-     * The table <code>UP_RBAC.S_ROLE</code>.
+     * The table <code>DB_RBAC.S_ROLE</code>.
      */
     public static final SRole S_ROLE = cn.vertxup.domain.tables.SRole.S_ROLE;
 
     /**
-     * The table <code>UP_RBAC.S_USER</code>.
+     * The table <code>DB_RBAC.S_USER</code>.
      */
     public static final SUser S_USER = cn.vertxup.domain.tables.SUser.S_USER;
 }

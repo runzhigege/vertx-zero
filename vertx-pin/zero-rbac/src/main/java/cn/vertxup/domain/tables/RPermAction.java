@@ -4,9 +4,9 @@
 package cn.vertxup.domain.tables;
 
 
+import cn.vertxup.domain.DbRbac;
 import cn.vertxup.domain.Indexes;
 import cn.vertxup.domain.Keys;
-import cn.vertxup.domain.UpRbac;
 import cn.vertxup.domain.tables.records.RPermActionRecord;
 
 import java.util.Arrays;
@@ -38,10 +38,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RPermAction extends TableImpl<RPermActionRecord> {
 
-    private static final long serialVersionUID = -388148088;
+    private static final long serialVersionUID = -78121247;
 
     /**
-     * The reference instance of <code>UP_RBAC.R_PERM_ACTION</code>
+     * The reference instance of <code>DB_RBAC.R_PERM_ACTION</code>
      */
     public static final RPermAction R_PERM_ACTION = new RPermAction();
 
@@ -54,31 +54,31 @@ public class RPermAction extends TableImpl<RPermActionRecord> {
     }
 
     /**
-     * The column <code>UP_RBAC.R_PERM_ACTION.PERM_ID</code>. 「permId」- 关联权限ID
+     * The column <code>DB_RBAC.R_PERM_ACTION.PERM_ID</code>. 「permId」- 关联权限ID
      */
     public final TableField<RPermActionRecord, String> PERM_ID = createField("PERM_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「permId」- 关联权限ID");
 
     /**
-     * The column <code>UP_RBAC.R_PERM_ACTION.ACTION_ID</code>. 「actionId」- 操作ID
+     * The column <code>DB_RBAC.R_PERM_ACTION.ACTION_ID</code>. 「actionId」- 操作ID
      */
     public final TableField<RPermActionRecord, String> ACTION_ID = createField("ACTION_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「actionId」- 操作ID");
 
     /**
-     * Create a <code>UP_RBAC.R_PERM_ACTION</code> table reference
+     * Create a <code>DB_RBAC.R_PERM_ACTION</code> table reference
      */
     public RPermAction() {
         this(DSL.name("R_PERM_ACTION"), null);
     }
 
     /**
-     * Create an aliased <code>UP_RBAC.R_PERM_ACTION</code> table reference
+     * Create an aliased <code>DB_RBAC.R_PERM_ACTION</code> table reference
      */
     public RPermAction(String alias) {
         this(DSL.name(alias), R_PERM_ACTION);
     }
 
     /**
-     * Create an aliased <code>UP_RBAC.R_PERM_ACTION</code> table reference
+     * Create an aliased <code>DB_RBAC.R_PERM_ACTION</code> table reference
      */
     public RPermAction(Name alias) {
         this(alias, R_PERM_ACTION);
@@ -97,7 +97,7 @@ public class RPermAction extends TableImpl<RPermActionRecord> {
      */
     @Override
     public Schema getSchema() {
-        return UpRbac.UP_RBAC;
+        return DbRbac.DB_RBAC;
     }
 
     /**

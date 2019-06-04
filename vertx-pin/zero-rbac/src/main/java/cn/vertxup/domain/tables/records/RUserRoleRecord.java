@@ -28,10 +28,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RUserRoleRecord extends UpdatableRecordImpl<RUserRoleRecord> implements Record2<String, String>, IRUserRole {
 
-    private static final long serialVersionUID = 1255174204;
+    private static final long serialVersionUID = 507214908;
 
     /**
-     * Setter for <code>UP_RBAC.R_USER_ROLE.USER_ID</code>. 「userId」- 关联用户ID
+     * Setter for <code>DB_RBAC.R_USER_ROLE.USER_ID</code>. 「userId」- 关联用户ID
      */
     @Override
     public RUserRoleRecord setUserId(String value) {
@@ -40,7 +40,7 @@ public class RUserRoleRecord extends UpdatableRecordImpl<RUserRoleRecord> implem
     }
 
     /**
-     * Getter for <code>UP_RBAC.R_USER_ROLE.USER_ID</code>. 「userId」- 关联用户ID
+     * Getter for <code>DB_RBAC.R_USER_ROLE.USER_ID</code>. 「userId」- 关联用户ID
      */
     @Override
     public String getUserId() {
@@ -48,7 +48,7 @@ public class RUserRoleRecord extends UpdatableRecordImpl<RUserRoleRecord> implem
     }
 
     /**
-     * Setter for <code>UP_RBAC.R_USER_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Setter for <code>DB_RBAC.R_USER_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     @Override
     public RUserRoleRecord setRoleId(String value) {
@@ -57,7 +57,7 @@ public class RUserRoleRecord extends UpdatableRecordImpl<RUserRoleRecord> implem
     }
 
     /**
-     * Getter for <code>UP_RBAC.R_USER_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Getter for <code>DB_RBAC.R_USER_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     @Override
     public String getRoleId() {

@@ -29,10 +29,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Record11<String, String, String, String, String, String, String, String, String, Boolean, String>, IOUser {
 
-    private static final long serialVersionUID = 1307168262;
+    private static final long serialVersionUID = -1763171700;
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.KEY</code>. 「key」- OAuth用户ID
+     * Setter for <code>DB_RBAC.O_USER.KEY</code>. 「key」- OAuth用户ID
      */
     @Override
     public OUserRecord setKey(String value) {
@@ -41,7 +41,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.KEY</code>. 「key」- OAuth用户ID
+     * Getter for <code>DB_RBAC.O_USER.KEY</code>. 「key」- OAuth用户ID
      */
     @Override
     public String getKey() {
@@ -49,7 +49,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.REDIRECT_URI</code>. 「redirectUri」- 回调重定向地址
+     * Setter for <code>DB_RBAC.O_USER.REDIRECT_URI</code>. 「redirectUri」- 回调重定向地址
      */
     @Override
     public OUserRecord setRedirectUri(String value) {
@@ -58,7 +58,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.REDIRECT_URI</code>. 「redirectUri」- 回调重定向地址
+     * Getter for <code>DB_RBAC.O_USER.REDIRECT_URI</code>. 「redirectUri」- 回调重定向地址
      */
     @Override
     public String getRedirectUri() {
@@ -66,7 +66,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.CODE</code>. 「code」- 系统编号
+     * Setter for <code>DB_RBAC.O_USER.CODE</code>. 「code」- 系统编号
      */
     @Override
     public OUserRecord setCode(String value) {
@@ -75,7 +75,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.CODE</code>. 「code」- 系统编号
+     * Getter for <code>DB_RBAC.O_USER.CODE</code>. 「code」- 系统编号
      */
     @Override
     public String getCode() {
@@ -83,7 +83,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.CLIENT_SECRET</code>. 「clientSecret」- 客户端密钥
+     * Setter for <code>DB_RBAC.O_USER.CLIENT_SECRET</code>. 「clientSecret」- 客户端密钥
      */
     @Override
     public OUserRecord setClientSecret(String value) {
@@ -92,7 +92,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.CLIENT_SECRET</code>. 「clientSecret」- 客户端密钥
+     * Getter for <code>DB_RBAC.O_USER.CLIENT_SECRET</code>. 「clientSecret」- 客户端密钥
      */
     @Override
     public String getClientSecret() {
@@ -100,7 +100,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.CLIENT_ID</code>. 「clientId」- 客户端ID
+     * Setter for <code>DB_RBAC.O_USER.CLIENT_ID</code>. 「clientId」- 客户端ID
      */
     @Override
     public OUserRecord setClientId(String value) {
@@ -109,7 +109,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.CLIENT_ID</code>. 「clientId」- 客户端ID
+     * Getter for <code>DB_RBAC.O_USER.CLIENT_ID</code>. 「clientId」- 客户端ID
      */
     @Override
     public String getClientId() {
@@ -117,7 +117,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.GRANT_TYPE</code>. 「grantType」- 认证方式
+     * Setter for <code>DB_RBAC.O_USER.GRANT_TYPE</code>. 「grantType」- 认证方式
      */
     @Override
     public OUserRecord setGrantType(String value) {
@@ -126,7 +126,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.GRANT_TYPE</code>. 「grantType」- 认证方式
+     * Getter for <code>DB_RBAC.O_USER.GRANT_TYPE</code>. 「grantType」- 认证方式
      */
     @Override
     public String getGrantType() {
@@ -134,7 +134,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.SCOPE</code>. 「scope」- 对应名空间，以应用为中心
+     * Setter for <code>DB_RBAC.O_USER.SCOPE</code>. 「scope」- 对应名空间，以应用为中心
      */
     @Override
     public OUserRecord setScope(String value) {
@@ -143,7 +143,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.SCOPE</code>. 「scope」- 对应名空间，以应用为中心
+     * Getter for <code>DB_RBAC.O_USER.SCOPE</code>. 「scope」- 对应名空间，以应用为中心
      */
     @Override
     public String getScope() {
@@ -151,7 +151,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.STATE</code>. 「state」- 客户端状态
+     * Setter for <code>DB_RBAC.O_USER.STATE</code>. 「state」- 客户端状态
      */
     @Override
     public OUserRecord setState(String value) {
@@ -160,7 +160,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.STATE</code>. 「state」- 客户端状态
+     * Getter for <code>DB_RBAC.O_USER.STATE</code>. 「state」- 客户端状态
      */
     @Override
     public String getState() {
@@ -168,7 +168,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_RBAC.O_USER.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public OUserRecord setLanguage(String value) {
@@ -177,7 +177,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_RBAC.O_USER.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public String getLanguage() {
@@ -185,7 +185,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_RBAC.O_USER.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public OUserRecord setActive(Boolean value) {
@@ -194,7 +194,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_RBAC.O_USER.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public Boolean getActive() {
@@ -202,7 +202,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_RBAC.O_USER.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public OUserRecord setMetadata(String value) {
@@ -211,7 +211,7 @@ public class OUserRecord extends UpdatableRecordImpl<OUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_RBAC.O_USER.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public String getMetadata() {

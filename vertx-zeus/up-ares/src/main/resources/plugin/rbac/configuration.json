@@ -21,6 +21,6 @@
     },
     "codeExpired": 30,
     "codeLength": 8,
-    "codePool": "OAUTH_CODES_POOL",
+    "codePool": "POOL_OAUTH_CODES",
     "tokenExpired": 30
 }
