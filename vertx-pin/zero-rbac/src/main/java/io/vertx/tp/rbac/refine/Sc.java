@@ -33,4 +33,8 @@ public class Sc {
     public static String generateCode() {
         return ScTool.generateCode();
     }
+
+    public static String getDatabase() {
+        return ScTool.getDatabase();
+    }
 }
