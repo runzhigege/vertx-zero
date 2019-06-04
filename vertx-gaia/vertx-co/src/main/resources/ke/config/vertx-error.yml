@@ -116,6 +116,8 @@ E60033: "(401) - (Jwt) Jwt executor result is false, authorization token = {0}"
 # (Web) Exception for standard third part
 E60034: "(501) - (Shared) You configured (async = {0}) mode, but now your client is called with (async = {1})"
 E60035: "(500) - (Shared) Your map {0} processing met issue when execute method {1}"
+# Excel exception
+E60037: "(404) - (Excel) The file that you provided ( filename = `{0}` ) is missing or null."
 # CRUD Module
 E80100: "(404) - (Crud) You missed `module` = `{0}` definition in file \"plugin/crud/module/\" folder."
 # RBAC Module

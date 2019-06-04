@@ -1,5 +1,8 @@
 package io.vertx.tp.plugin.excel.atom;
 
+import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +24,33 @@ public class ExTable implements Serializable {
     }
 
     /*
+     * ( Bean )
+     */
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+
+    public void setDaoCls(final String daoCls) {
+        this.daoCls = Fn.getJvm(null, () -> Ut.clazz(daoCls), daoCls);
+    }
+
+    /*
      * ( No Bean ) Iterator row of Add operation
      */
     public void add(final String field) {
-        this.fields.add(field);
+        if (Ut.notNil(field)) {
+            this.fields.add(field);
+        }
     }
 
     public void add(final ExRecord record) {
-        this.values.add(record);
+        if (!record.isEmpty()) {
+            this.values.add(record);
+        }
     }
 
     /*
