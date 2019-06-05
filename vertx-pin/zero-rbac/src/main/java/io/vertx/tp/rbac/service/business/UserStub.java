@@ -17,6 +17,12 @@ public interface UserStub {
     Future<JsonArray> fetchRoles(String userKey);
 
     /**
+     * Fetch groups by user key
+     * R_USER_GROUP table record as relation
+     */
+    Future<JsonArray> fetchGroups(String userKey);
+
+    /**
      * Fetch ouser by client_id
      */
     Future<JsonObject> fetchOUser(String userKey);
