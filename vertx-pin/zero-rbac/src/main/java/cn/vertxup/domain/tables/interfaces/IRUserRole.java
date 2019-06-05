@@ -42,6 +42,16 @@ public interface IRUserRole extends Serializable {
      */
     public String getRoleId();
 
+    /**
+     * Setter for <code>DB_RBAC.R_USER_ROLE.PRIORITY</code>. 「priority」- 角色优先级
+     */
+    public IRUserRole setPriority(Integer value);
+
+    /**
+     * Getter for <code>DB_RBAC.R_USER_ROLE.PRIORITY</code>. 「priority」- 角色优先级
+     */
+    public Integer getPriority();
+
     // -------------------------------------------------------------------------
     // FROM and INTO
     // -------------------------------------------------------------------------
@@ -59,6 +69,7 @@ public interface IRUserRole extends Serializable {
     default IRUserRole fromJson(io.vertx.core.json.JsonObject json) {
         setUserId(json.getString("USER_ID"));
         setRoleId(json.getString("ROLE_ID"));
+        setPriority(json.getInteger("PRIORITY"));
         return this;
     }
 
@@ -67,6 +78,7 @@ public interface IRUserRole extends Serializable {
         io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
         json.put("USER_ID",getUserId());
         json.put("ROLE_ID",getRoleId());
+        json.put("PRIORITY",getPriority());
         return json;
     }
 

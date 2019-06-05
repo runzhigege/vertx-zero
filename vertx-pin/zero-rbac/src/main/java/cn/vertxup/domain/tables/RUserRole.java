@@ -38,7 +38,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RUserRole extends TableImpl<RUserRoleRecord> {
 
-    private static final long serialVersionUID = -723246852;
+    private static final long serialVersionUID = -176845547;
 
     /**
      * The reference instance of <code>DB_RBAC.R_USER_ROLE</code>
@@ -62,6 +62,11 @@ public class RUserRole extends TableImpl<RUserRoleRecord> {
      * The column <code>DB_RBAC.R_USER_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     public final TableField<RUserRoleRecord, String> ROLE_ID = createField("ROLE_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「roleId」- 关联角色ID");
+
+    /**
+     * The column <code>DB_RBAC.R_USER_ROLE.PRIORITY</code>. 「priority」- 角色优先级
+     */
+    public final TableField<RUserRoleRecord, Integer> PRIORITY = createField("PRIORITY", org.jooq.impl.SQLDataType.INTEGER, this, "「priority」- 角色优先级");
 
     /**
      * Create a <code>DB_RBAC.R_USER_ROLE</code> table reference

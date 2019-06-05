@@ -22,24 +22,28 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RUserGroup implements IRUserGroup {
 
-    private static final long serialVersionUID = 2145545191;
+    private static final long serialVersionUID = -1619459891;
 
-    private String groupId;
-    private String userId;
+    private String  groupId;
+    private String  userId;
+    private Integer priority;
 
     public RUserGroup() {}
 
     public RUserGroup(RUserGroup value) {
         this.groupId = value.groupId;
         this.userId = value.userId;
+        this.priority = value.priority;
     }
 
     public RUserGroup(
-        String groupId,
-        String userId
+        String  groupId,
+        String  userId,
+        Integer priority
     ) {
         this.groupId = groupId;
         this.userId = userId;
+        this.priority = priority;
     }
 
     @Override
@@ -65,11 +69,23 @@ public class RUserGroup implements IRUserGroup {
     }
 
     @Override
+    public Integer getPriority() {
+        return this.priority;
+    }
+
+    @Override
+    public RUserGroup setPriority(Integer priority) {
+        this.priority = priority;
+        return this;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("RUserGroup (");
 
         sb.append(groupId);
         sb.append(", ").append(userId);
+        sb.append(", ").append(priority);
 
         sb.append(")");
         return sb.toString();
@@ -86,6 +102,7 @@ public class RUserGroup implements IRUserGroup {
     public void from(IRUserGroup from) {
         setGroupId(from.getGroupId());
         setUserId(from.getUserId());
+        setPriority(from.getPriority());
     }
 
     /**

@@ -22,24 +22,28 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RGroupRole implements IRGroupRole {
 
-    private static final long serialVersionUID = 1064601925;
+    private static final long serialVersionUID = 1462924590;
 
-    private String groupId;
-    private String roleId;
+    private String  groupId;
+    private String  roleId;
+    private Integer priority;
 
     public RGroupRole() {}
 
     public RGroupRole(RGroupRole value) {
         this.groupId = value.groupId;
         this.roleId = value.roleId;
+        this.priority = value.priority;
     }
 
     public RGroupRole(
-        String groupId,
-        String roleId
+        String  groupId,
+        String  roleId,
+        Integer priority
     ) {
         this.groupId = groupId;
         this.roleId = roleId;
+        this.priority = priority;
     }
 
     @Override
@@ -65,11 +69,23 @@ public class RGroupRole implements IRGroupRole {
     }
 
     @Override
+    public Integer getPriority() {
+        return this.priority;
+    }
+
+    @Override
+    public RGroupRole setPriority(Integer priority) {
+        this.priority = priority;
+        return this;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("RGroupRole (");
 
         sb.append(groupId);
         sb.append(", ").append(roleId);
+        sb.append(", ").append(priority);
 
         sb.append(")");
         return sb.toString();
@@ -86,6 +102,7 @@ public class RGroupRole implements IRGroupRole {
     public void from(IRGroupRole from) {
         setGroupId(from.getGroupId());
         setRoleId(from.getRoleId());
+        setPriority(from.getPriority());
     }
 
     /**
