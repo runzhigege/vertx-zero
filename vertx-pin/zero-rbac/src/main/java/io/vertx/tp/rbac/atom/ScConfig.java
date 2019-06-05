@@ -26,59 +26,19 @@ public class ScConfig implements Serializable {
      */
     private Integer codeLength;
     /*
-     * Authorization Code temp pool
+     * Authorization Code session pool
      */
     private String codePool;
     /*
-     * Token expired time: ( min )
+     * Token expired time: ( ms )
      */
-    private Integer tokenLength;
+    private Long tokenExpired;
+
+    private Boolean supportGroup = Boolean.FALSE;
     /*
-     * User Group Feature enabled
-     * Token From:
-     * {
-     *      "user": "xxx",
-     *      "role": ["x","y"]
-     * }
-     * To:
-     * {
-     *      "user": "xxx",
-     *      "role": ["x","y"]
-     *      "group": ["x","y"]
-     * }
+     * Token session pool
      */
-    private Boolean groupSupport = Boolean.FALSE;
-    /*
-     * User Group Permission enabled
-     * if this field = true, zero system will capture roles by group when logging instead of user only.
-     * 1) groupPermission = false, Group / Role is forbidden
-     *      - Token information will include:
-     *      1.1. Logged user id ( `user` )
-     *      1.2. Related group ids ( `group` ) JsonArray
-     *      1.3. Related role ids ( `role` ) JsonArray
-     * 2) groupPermission = true, Group / Role is enabled
-     *      - Token information will include:
-     *      1.1. Logged user id ( `user` )
-     *      1.2. Related group ids ( `group` ) JsonArray
-     *      1.3. Related role ids ( `role` ) JsonArray ( Each user, group and merged )
-     */
-    private Boolean groupPermission = Boolean.FALSE;
-
-    public Boolean getGroupPermission() {
-        return this.groupPermission;
-    }
-
-    public void setGroupPermission(final Boolean groupPermission) {
-        this.groupPermission = groupPermission;
-    }
-
-    public Boolean getGroupSupport() {
-        return this.groupSupport;
-    }
-
-    public void setGroupSupport(final Boolean groupSupport) {
-        this.groupSupport = groupSupport;
-    }
+    private String tokenPool;
 
     public ScCondition getCondition() {
         return this.condition;
@@ -112,12 +72,32 @@ public class ScConfig implements Serializable {
         this.codePool = codePool;
     }
 
-    public Integer getTokenLength() {
-        return this.tokenLength;
+    public Long getTokenExpired() {
+        if (null == this.tokenExpired) {
+            this.tokenExpired = 0L;
+        }
+        /* To ms */
+        return this.tokenExpired * 1000 * 1000;
     }
 
-    public void setTokenLength(final Integer tokenLength) {
-        this.tokenLength = tokenLength;
+    public void setTokenExpired(final Long tokenExpired) {
+        this.tokenExpired = tokenExpired;
+    }
+
+    public String getTokenPool() {
+        return this.tokenPool;
+    }
+
+    public void setTokenPool(final String tokenPool) {
+        this.tokenPool = tokenPool;
+    }
+
+    public Boolean getSupportGroup() {
+        return this.supportGroup;
+    }
+
+    public void setSupportGroup(final Boolean supportGroup) {
+        this.supportGroup = supportGroup;
     }
 
     @Override
@@ -127,9 +107,9 @@ public class ScConfig implements Serializable {
                 ", codeExpired=" + this.codeExpired +
                 ", codeLength=" + this.codeLength +
                 ", codePool='" + this.codePool + '\'' +
-                ", tokenLength=" + this.tokenLength +
-                ", groupSupport=" + this.groupSupport +
-                ", groupPermission=" + this.groupPermission +
+                ", tokenExpired=" + this.tokenExpired +
+                ", supportGroup=" + this.supportGroup +
+                ", tokenPool='" + this.tokenPool + '\'' +
                 '}';
     }
 }

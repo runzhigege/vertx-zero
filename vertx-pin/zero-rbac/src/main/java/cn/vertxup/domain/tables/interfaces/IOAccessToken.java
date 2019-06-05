@@ -46,12 +46,12 @@ public interface IOAccessToken extends Serializable {
     /**
      * Setter for <code>DB_RBAC.O_ACCESS_TOKEN.EXPIRED_TIME</code>. 「expiredTime」- 用户的Token过期时间
      */
-    public IOAccessToken setExpiredTime(LocalDateTime value);
+    public IOAccessToken setExpiredTime(Long value);
 
     /**
      * Getter for <code>DB_RBAC.O_ACCESS_TOKEN.EXPIRED_TIME</code>. 「expiredTime」- 用户的Token过期时间
      */
-    public LocalDateTime getExpiredTime();
+    public Long getExpiredTime();
 
     /**
      * Setter for <code>DB_RBAC.O_ACCESS_TOKEN.REFRESH_TOKEN</code>. 「refreshToken」- 用户的刷新令牌
@@ -93,6 +93,26 @@ public interface IOAccessToken extends Serializable {
      */
     public String getMetadata();
 
+    /**
+     * Setter for <code>DB_RBAC.O_ACCESS_TOKEN.CREATED_AT</code>. 「createdAt」- 创建时间
+     */
+    public IOAccessToken setCreatedAt(LocalDateTime value);
+
+    /**
+     * Getter for <code>DB_RBAC.O_ACCESS_TOKEN.CREATED_AT</code>. 「createdAt」- 创建时间
+     */
+    public LocalDateTime getCreatedAt();
+
+    /**
+     * Setter for <code>DB_RBAC.O_ACCESS_TOKEN.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public IOAccessToken setCreatedBy(String value);
+
+    /**
+     * Getter for <code>DB_RBAC.O_ACCESS_TOKEN.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public String getCreatedBy();
+
     // -------------------------------------------------------------------------
     // FROM and INTO
     // -------------------------------------------------------------------------
@@ -110,11 +130,13 @@ public interface IOAccessToken extends Serializable {
     default IOAccessToken fromJson(io.vertx.core.json.JsonObject json) {
         setKey(json.getString("KEY"));
         setToken(json.getBinary("TOKEN"));
-        // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED_TIME!
+        setExpiredTime(json.getLong("EXPIRED_TIME"));
         setRefreshToken(json.getBinary("REFRESH_TOKEN"));
         setLanguage(json.getString("LANGUAGE"));
         setActive(json.getBoolean("ACTIVE"));
         setMetadata(json.getString("METADATA"));
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        setCreatedBy(json.getString("CREATED_BY"));
         return this;
     }
 
@@ -123,11 +145,13 @@ public interface IOAccessToken extends Serializable {
         io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
         json.put("KEY",getKey());
         json.put("TOKEN",getToken());
-        // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED_TIME!
+        json.put("EXPIRED_TIME",getExpiredTime());
         json.put("REFRESH_TOKEN",getRefreshToken());
         json.put("LANGUAGE",getLanguage());
         json.put("ACTIVE",getActive());
         json.put("METADATA",getMetadata());
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        json.put("CREATED_BY",getCreatedBy());
         return json;
     }
 

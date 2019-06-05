@@ -1,6 +1,8 @@
 package io.vertx.tp.rbac.refine;
 
+import cn.vertxup.domain.tables.pojos.OAccessToken;
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
 
 import java.util.List;
@@ -41,6 +43,17 @@ public class Sc {
         return ScTool.getDatabase();
     }
 
+    public static JsonObject jwtToken(final JsonObject data) {
+        return ScToken.jwtToken(data);
+    }
+
+    public static OAccessToken jwtToken(final JsonObject jwt, final String userKey) {
+        return ScToken.jwtToken(jwt, userKey);
+    }
+
+    /*
+     * Function processing
+     */
     public static <T, R> List<R> reduce(final List<T> list, final Function<T, R> function) {
         return ScFn.reduce(list, function);
     }

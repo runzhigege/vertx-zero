@@ -14,4 +14,5 @@ public interface AuthMsg {
     String LOGIN_INPUT = "Login processing execute ( username = {0} )";
 
     String TOKEN_STORE = "The system will initialize user''s principle information. user key: {0}.";
+    String TOKEN_JWT = "Jwt token data stored: {0}.";
 }

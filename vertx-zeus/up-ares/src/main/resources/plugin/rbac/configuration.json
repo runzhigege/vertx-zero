@@ -21,9 +21,8 @@
     },
     "codeExpired": 30,
     "codeLength": 8,
-    "codePool": "POOL_OAUTH_CODES",
+    "codePool": "POOL_CODE",
     "tokenExpired": 30,
-    "tokenRefresh": true,
-    "groupSupport": true,
-    "groupPermission": true
+    "tokenPool": "POOL_TOKEN",
+    "supportGroup": true
 }
