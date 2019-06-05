@@ -2,6 +2,7 @@ package io.vertx.tp.rbac.refine;
 
 import cn.vertxup.domain.tables.pojos.OAccessToken;
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
 
@@ -25,11 +26,11 @@ public class Sc {
      * 1. Code: Authorization Code Cache Pool
      */
     public static <V> Future<V> cacheCode(final String key) {
-        return ScSession.code(key);
+        return ScCache.code(key);
     }
 
     public static <V> Future<V> cacheCode(final String key, final V value) {
-        return ScSession.code(key, value);
+        return ScCache.code(key, value);
     }
 
     /*
@@ -56,5 +57,9 @@ public class Sc {
      */
     public static <T, R> List<R> reduce(final List<T> list, final Function<T, R> function) {
         return ScFn.reduce(list, function);
+    }
+
+    public static <T> Future<JsonArray> relation(final String field, final String userKey, final Class<?> daoCls) {
+        return ScFn.<T>relation(field, userKey, daoCls);
     }
 }

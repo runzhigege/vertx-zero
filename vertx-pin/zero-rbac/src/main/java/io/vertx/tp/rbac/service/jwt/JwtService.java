@@ -22,7 +22,8 @@ public class JwtService implements JwtStub {
         /*
          * Jwt OAccessToken
          */
-        final OAccessToken accessToken = Sc.jwtToken(data, userKey);
+        final OAccessToken accessToken = Sc.jwtToken(response, userKey);
+        System.out.println(data.encodePrettily());
         return Ux.Jooq.on(OAccessTokenDao.class)
                 .insertAsync(accessToken)
                 .compose(item -> Ux.toFuture(response));

@@ -8,15 +8,15 @@ import io.vertx.up.aiki.Ux;
 /*
  * Data Pool ( Pond ) for Cache
  * There are some pools
- * 1) name = POOL_OAUTH_CODES ( Default Value )
+ * 1) name = POOL_CODE ( Default Value )
  *      Desc: Authorization cache pool for oauth logging workflow.
  *      1.1. The data existing inner 30s ( configured by `codeExpired` )
- *      1.2. The name `POOL_OAUTH_CODES` could be configured by `codePool`
+ *      1.2. The name `POOL_CODE` could be configured by `codePool`
  *      1.3. The authorization code length could be configured by `codeLength`
  *      1.4. Method: `getCode/putCode`
  * 2)
  */
-class ScSession {
+class ScCache {
 
     private static final ScConfig CONFIG = ScPin.getConfig();
 

@@ -1,0 +1,13 @@
+{
+    "userId": {
+        "UNION": [],
+        "PRIORITY": [],
+        "INTERSECT": [],
+        "HORIZON_UNION": [],
+        "HORIZON_PRIORITY": [],
+        "HORIZON_UNION_INHERIT": [],
+        "HORIZON_UNION_CHILD": [],
+        "HORIZON_PRIORITY_INHERIT": [],
+        "HORIZON_PRIORITY_CHILD": []
+    }
+}
