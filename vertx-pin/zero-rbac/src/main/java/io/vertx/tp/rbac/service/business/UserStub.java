@@ -1,6 +1,7 @@
 package io.vertx.tp.rbac.service.business;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 /*
@@ -14,4 +15,18 @@ public interface UserStub {
      * Fetch ouser by client_id
      */
     Future<JsonObject> fetchOUser(String userKey);
+
+    /**
+     * R_USER_ROLE
+     * <p>
+     * userKey -> Relation to Role
+     */
+    Future<JsonArray> fetchRoleIds(String userKey);
+
+    /**
+     * R_USER_GROUP
+     * <p>
+     * userKey -> Relation to Group
+     */
+    Future<JsonArray> fetchGroupIds(String userKey);
 }

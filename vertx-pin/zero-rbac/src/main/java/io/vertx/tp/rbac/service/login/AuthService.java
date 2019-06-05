@@ -47,7 +47,7 @@ public class AuthService implements AuthStub {
     public Future<JsonObject> token(final JsonObject params, final String state) {
         final String code = params.getString(AuthKey.AUTH_CODE);
         final String clientId = params.getString(AuthKey.CLIENT_ID);
-        Sc.infoAuth(LOGGER, AuthMsg.CODE_VERIFY, code, clientId);
+        Sc.infoAuth(LOGGER, AuthMsg.CODE_VERIFY, clientId, code);
         return this.tokenStub.execute(clientId, code, state)
                 // Store token information
                 .compose(this.security::store);
