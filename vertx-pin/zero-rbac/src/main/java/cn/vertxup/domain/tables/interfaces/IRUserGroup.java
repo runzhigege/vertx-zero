@@ -42,6 +42,16 @@ public interface IRUserGroup extends Serializable {
      */
     public String getUserId();
 
+    /**
+     * Setter for <code>DB_RBAC.R_USER_GROUP.PRIORITY</code>. 「priority」- 组优先级
+     */
+    public IRUserGroup setPriority(Integer value);
+
+    /**
+     * Getter for <code>DB_RBAC.R_USER_GROUP.PRIORITY</code>. 「priority」- 组优先级
+     */
+    public Integer getPriority();
+
     // -------------------------------------------------------------------------
     // FROM and INTO
     // -------------------------------------------------------------------------
@@ -59,6 +69,7 @@ public interface IRUserGroup extends Serializable {
     default IRUserGroup fromJson(io.vertx.core.json.JsonObject json) {
         setGroupId(json.getString("GROUP_ID"));
         setUserId(json.getString("USER_ID"));
+        setPriority(json.getInteger("PRIORITY"));
         return this;
     }
 
@@ -67,6 +78,7 @@ public interface IRUserGroup extends Serializable {
         io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
         json.put("GROUP_ID",getGroupId());
         json.put("USER_ID",getUserId());
+        json.put("PRIORITY",getPriority());
         return json;
     }
 

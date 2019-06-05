@@ -70,6 +70,13 @@ public class RUserRoleDao extends DAOImpl<RUserRoleRecord, cn.vertxup.domain.tab
     }
 
     /**
+     * Fetch records that have <code>PRIORITY IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.RUserRole> fetchByPriority(Integer... values) {
+        return fetch(RUserRole.R_USER_ROLE.PRIORITY, values);
+    }
+
+    /**
      * Fetch records that have <code>USER_ID IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RUserRole>> fetchByUserIdAsync(List<String> values) {
@@ -81,6 +88,13 @@ public class RUserRoleDao extends DAOImpl<RUserRoleRecord, cn.vertxup.domain.tab
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RUserRole>> fetchByRoleIdAsync(List<String> values) {
         return fetchAsync(RUserRole.R_USER_ROLE.ROLE_ID,values);
+    }
+
+    /**
+     * Fetch records that have <code>PRIORITY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RUserRole>> fetchByPriorityAsync(List<Integer> values) {
+        return fetchAsync(RUserRole.R_USER_ROLE.PRIORITY,values);
     }
 
     private io.vertx.core.Vertx vertx;

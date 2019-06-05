@@ -70,6 +70,13 @@ public class RUserGroupDao extends DAOImpl<RUserGroupRecord, cn.vertxup.domain.t
     }
 
     /**
+     * Fetch records that have <code>PRIORITY IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.RUserGroup> fetchByPriority(Integer... values) {
+        return fetch(RUserGroup.R_USER_GROUP.PRIORITY, values);
+    }
+
+    /**
      * Fetch records that have <code>GROUP_ID IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RUserGroup>> fetchByGroupIdAsync(List<String> values) {
@@ -81,6 +88,13 @@ public class RUserGroupDao extends DAOImpl<RUserGroupRecord, cn.vertxup.domain.t
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RUserGroup>> fetchByUserIdAsync(List<String> values) {
         return fetchAsync(RUserGroup.R_USER_GROUP.USER_ID,values);
+    }
+
+    /**
+     * Fetch records that have <code>PRIORITY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RUserGroup>> fetchByPriorityAsync(List<Integer> values) {
+        return fetchAsync(RUserGroup.R_USER_GROUP.PRIORITY,values);
     }
 
     private io.vertx.core.Vertx vertx;
