@@ -7,5 +7,6 @@ CREATE TABLE IF NOT EXISTS R_USER_GROUP
 (
     `GROUP_ID` VARCHAR(36) COMMENT "「groupId」- 关联组ID",
     `USER_ID`  VARCHAR(36) COMMENT "「userId」- 关联用户ID",
+    `PRIORITY` INTEGER COMMENT "「priority」- 组优先级",
     PRIMARY KEY (`GROUP_ID`, `USER_ID`)
 );

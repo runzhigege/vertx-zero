@@ -23,5 +23,7 @@
     "codeLength": 8,
     "codePool": "POOL_OAUTH_CODES",
     "tokenExpired": 30,
-    "groupSupport": true
+    "tokenRefresh": true,
+    "groupSupport": true,
+    "groupPermission": true
 }

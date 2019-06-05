@@ -1,6 +1,7 @@
 package io.vertx.tp.rbac.service.business;
 
 import cn.vertxup.domain.tables.daos.OUserDao;
+import cn.vertxup.domain.tables.daos.RUserGroupDao;
 import cn.vertxup.domain.tables.daos.RUserRoleDao;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
@@ -23,8 +24,16 @@ public class UserService implements UserStub {
     }
 
     @Override
+    public Future<JsonArray> fetchGroups(final String userKey) {
+        Sc.infoAuth(LOGGER, AuthMsg.RELATION_GROUP, userKey);
+        return Ux.Jooq.on(RUserGroupDao.class)
+                .fetchAsync(AuthKey.F_USER_ID, userKey)
+                .compose(Ux::fnJArray);
+    }
+
+    @Override
     public Future<JsonArray> fetchRoles(final String userKey) {
-        Sc.infoAuth(LOGGER, AuthMsg.ROLE_FETCH, userKey);
+        Sc.infoAuth(LOGGER, AuthMsg.RELATION_ROLE, userKey);
         return Ux.Jooq.on(RUserRoleDao.class)
                 .fetchAsync(AuthKey.F_USER_ID, userKey)
                 .compose(Ux::fnJArray);

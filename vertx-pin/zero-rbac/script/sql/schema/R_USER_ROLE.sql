@@ -5,7 +5,8 @@
 DROP TABLE IF EXISTS R_USER_ROLE;
 CREATE TABLE IF NOT EXISTS R_USER_ROLE
 (
-    `USER_ID` VARCHAR(36) COMMENT "「userId」- 关联用户ID",
-    `ROLE_ID` VARCHAR(36) COMMENT "「roleId」- 关联角色ID",
+    `USER_ID`  VARCHAR(36) COMMENT "「userId」- 关联用户ID",
+    `ROLE_ID`  VARCHAR(36) COMMENT "「roleId」- 关联角色ID",
+    `PRIORITY` INTEGER COMMENT "「priority」- 角色优先级",
     PRIMARY KEY (`USER_ID`, `ROLE_ID`)
 );
