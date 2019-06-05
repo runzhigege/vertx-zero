@@ -24,15 +24,17 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class OAccessToken implements IOAccessToken {
 
-    private static final long serialVersionUID = 618837304;
+    private static final long serialVersionUID = -2135150630;
 
     private String        key;
     private byte[]        token;
-    private LocalDateTime expiredTime;
+    private Long          expiredTime;
     private byte[]        refreshToken;
     private String        language;
     private Boolean       active;
     private String        metadata;
+    private LocalDateTime createdAt;
+    private String        createdBy;
 
     public OAccessToken() {}
 
@@ -44,16 +46,20 @@ public class OAccessToken implements IOAccessToken {
         this.language = value.language;
         this.active = value.active;
         this.metadata = value.metadata;
+        this.createdAt = value.createdAt;
+        this.createdBy = value.createdBy;
     }
 
     public OAccessToken(
         String        key,
         byte[]        token,
-        LocalDateTime expiredTime,
+        Long          expiredTime,
         byte[]        refreshToken,
         String        language,
         Boolean       active,
-        String        metadata
+        String        metadata,
+        LocalDateTime createdAt,
+        String        createdBy
     ) {
         this.key = key;
         this.token = token;
@@ -62,6 +68,8 @@ public class OAccessToken implements IOAccessToken {
         this.language = language;
         this.active = active;
         this.metadata = metadata;
+        this.createdAt = createdAt;
+        this.createdBy = createdBy;
     }
 
     @Override
@@ -87,12 +95,12 @@ public class OAccessToken implements IOAccessToken {
     }
 
     @Override
-    public LocalDateTime getExpiredTime() {
+    public Long getExpiredTime() {
         return this.expiredTime;
     }
 
     @Override
-    public OAccessToken setExpiredTime(LocalDateTime expiredTime) {
+    public OAccessToken setExpiredTime(Long expiredTime) {
         this.expiredTime = expiredTime;
         return this;
     }
@@ -142,6 +150,28 @@ public class OAccessToken implements IOAccessToken {
     }
 
     @Override
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    @Override
+    public OAccessToken setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    @Override
+    public String getCreatedBy() {
+        return this.createdBy;
+    }
+
+    @Override
+    public OAccessToken setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("OAccessToken (");
 
@@ -152,6 +182,8 @@ public class OAccessToken implements IOAccessToken {
         sb.append(", ").append(language);
         sb.append(", ").append(active);
         sb.append(", ").append(metadata);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(createdBy);
 
         sb.append(")");
         return sb.toString();
@@ -173,6 +205,8 @@ public class OAccessToken implements IOAccessToken {
         setLanguage(from.getLanguage());
         setActive(from.getActive());
         setMetadata(from.getMetadata());
+        setCreatedAt(from.getCreatedAt());
+        setCreatedBy(from.getCreatedBy());
     }
 
     /**

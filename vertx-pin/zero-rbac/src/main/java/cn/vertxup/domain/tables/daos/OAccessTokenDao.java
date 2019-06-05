@@ -79,7 +79,7 @@ public class OAccessTokenDao extends DAOImpl<OAccessTokenRecord, cn.vertxup.doma
     /**
      * Fetch records that have <code>EXPIRED_TIME IN (values)</code>
      */
-    public List<cn.vertxup.domain.tables.pojos.OAccessToken> fetchByExpiredTime(LocalDateTime... values) {
+    public List<cn.vertxup.domain.tables.pojos.OAccessToken> fetchByExpiredTime(Long... values) {
         return fetch(OAccessToken.O_ACCESS_TOKEN.EXPIRED_TIME, values);
     }
 
@@ -112,6 +112,20 @@ public class OAccessTokenDao extends DAOImpl<OAccessTokenRecord, cn.vertxup.doma
     }
 
     /**
+     * Fetch records that have <code>CREATED_AT IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.OAccessToken> fetchByCreatedAt(LocalDateTime... values) {
+        return fetch(OAccessToken.O_ACCESS_TOKEN.CREATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.OAccessToken> fetchByCreatedBy(String... values) {
+        return fetch(OAccessToken.O_ACCESS_TOKEN.CREATED_BY, values);
+    }
+
+    /**
      * Fetch records that have <code>KEY IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.OAccessToken>> fetchByKeyAsync(List<String> values) {
@@ -135,7 +149,7 @@ public class OAccessTokenDao extends DAOImpl<OAccessTokenRecord, cn.vertxup.doma
     /**
      * Fetch records that have <code>EXPIRED_TIME IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.OAccessToken>> fetchByExpiredTimeAsync(List<LocalDateTime> values) {
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.OAccessToken>> fetchByExpiredTimeAsync(List<Long> values) {
         return fetchAsync(OAccessToken.O_ACCESS_TOKEN.EXPIRED_TIME,values);
     }
 
@@ -165,6 +179,20 @@ public class OAccessTokenDao extends DAOImpl<OAccessTokenRecord, cn.vertxup.doma
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.OAccessToken>> fetchByMetadataAsync(List<String> values) {
         return fetchAsync(OAccessToken.O_ACCESS_TOKEN.METADATA,values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_AT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.OAccessToken>> fetchByCreatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(OAccessToken.O_ACCESS_TOKEN.CREATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.OAccessToken>> fetchByCreatedByAsync(List<String> values) {
+        return fetchAsync(OAccessToken.O_ACCESS_TOKEN.CREATED_BY,values);
     }
 
     private io.vertx.core.Vertx vertx;

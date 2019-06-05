@@ -39,7 +39,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class OAccessToken extends TableImpl<OAccessTokenRecord> {
 
-    private static final long serialVersionUID = 932802551;
+    private static final long serialVersionUID = -56453020;
 
     /**
      * The reference instance of <code>DB_RBAC.O_ACCESS_TOKEN</code>
@@ -67,7 +67,7 @@ public class OAccessToken extends TableImpl<OAccessTokenRecord> {
     /**
      * The column <code>DB_RBAC.O_ACCESS_TOKEN.EXPIRED_TIME</code>. 「expiredTime」- 用户的Token过期时间
      */
-    public final TableField<OAccessTokenRecord, LocalDateTime> EXPIRED_TIME = createField("EXPIRED_TIME", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「expiredTime」- 用户的Token过期时间");
+    public final TableField<OAccessTokenRecord, Long> EXPIRED_TIME = createField("EXPIRED_TIME", org.jooq.impl.SQLDataType.BIGINT, this, "「expiredTime」- 用户的Token过期时间");
 
     /**
      * The column <code>DB_RBAC.O_ACCESS_TOKEN.REFRESH_TOKEN</code>. 「refreshToken」- 用户的刷新令牌
@@ -88,6 +88,16 @@ public class OAccessToken extends TableImpl<OAccessTokenRecord> {
      * The column <code>DB_RBAC.O_ACCESS_TOKEN.METADATA</code>. 「metadata」- 附加配置数据
      */
     public final TableField<OAccessTokenRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置数据");
+
+    /**
+     * The column <code>DB_RBAC.O_ACCESS_TOKEN.CREATED_AT</code>. 「createdAt」- 创建时间
+     */
+    public final TableField<OAccessTokenRecord, LocalDateTime> CREATED_AT = createField("CREATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「createdAt」- 创建时间");
+
+    /**
+     * The column <code>DB_RBAC.O_ACCESS_TOKEN.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public final TableField<OAccessTokenRecord, String> CREATED_BY = createField("CREATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「createdBy」- 创建人");
 
     /**
      * Create a <code>DB_RBAC.O_ACCESS_TOKEN</code> table reference
