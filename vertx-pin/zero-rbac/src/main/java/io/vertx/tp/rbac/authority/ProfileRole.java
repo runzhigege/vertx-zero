@@ -11,7 +11,6 @@ import io.vertx.tp.rbac.init.ScPin;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.log.Annal;
-import io.zero.epic.Ut;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -25,23 +24,25 @@ import java.util.stream.Collectors;
  * 1) priority
  * 2) permissions
  */
-public class ScProfile implements Serializable {
+public class ProfileRole implements Serializable {
 
-    private static final Annal LOGGER = Annal.get(ScProfile.class);
+    private static final Annal LOGGER = Annal.get(ProfileRole.class);
 
     private static final ScConfig CONFIG = ScPin.getConfig();
     private transient final String roleId;
     private transient final Integer priority;
     private transient final Set<String> authorities = new HashSet<>();
+    /* GroupId Process */
+    private transient ProfileGroup reference;
 
-    public ScProfile(final JsonObject data) {
+    public ProfileRole(final JsonObject data) {
         /* Role Id */
         this.roleId = data.getString(AuthKey.F_ROLE_ID);
         /* Priority */
         this.priority = data.getInteger(AuthKey.PRIORITY);
     }
 
-    public Future<ScProfile> init() {
+    public Future<ProfileRole> init() {
         /* Fetch permission */
         final boolean isSecondary = CONFIG.getSupportSecondary();
         Sc.infoAuth(LOGGER, "Secondary Enabled: {0}, Role Id: {1}", Boolean.TRUE, this.roleId);
@@ -62,6 +63,17 @@ public class ScProfile implements Serializable {
 
     public Set<String> getAuthorities() {
         return this.authorities;
+    }
+
+    /*
+     * For uniform processing
+     */
+    public ProfileGroup getGroup() {
+        return this.reference;
+    }
+
+    public void setGroup(final ProfileGroup reference) {
+        this.reference = reference;
     }
 
     /*
@@ -115,10 +127,11 @@ public class ScProfile implements Serializable {
 
     @Override
     public String toString() {
-        return "ScProfile{" +
+        return "ProfileRole{" +
                 "roleId='" + this.roleId + '\'' +
                 ", priority=" + this.priority +
-                ", authorities=[" + Ut.fromJoin(this.authorities) +
-                "]}";
+                ", authorities=" + this.authorities +
+                ", reference=" + this.reference +
+                '}';
     }
 }

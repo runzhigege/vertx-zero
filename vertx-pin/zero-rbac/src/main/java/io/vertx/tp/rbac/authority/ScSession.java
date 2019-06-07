@@ -6,11 +6,13 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.refine.Sc;
+import io.vertx.up.aiki.Ux;
 import io.vertx.up.log.Annal;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /*
  * Profile information to normalize all permission data
@@ -60,12 +62,15 @@ public class ScSession {
          * Initialization user's authorization pool
          */
         final String userKey = data.getString("user");
+        /* Authorities Json Data */
+        final JsonObject authority = new JsonObject();
         return Sc.<JsonObject>cacheAuthority(userKey).compose(item -> {
             if (null == item) {
-                /*
-                 * Initialize role information
-                 */
-                return initRoles(data.getJsonArray("role"))
+                /* Initialize roles information */
+                return initRoles(authority, data.getJsonArray("role"))
+                        /* Initialize group information */
+                        .compose(processed -> initGroups(processed, data.getJsonArray("group")))
+                        /* */
                         .compose(roles -> Future.succeededFuture(Boolean.TRUE));
             } else {
                 /*
@@ -84,20 +89,38 @@ public class ScSession {
      * 4) INTERSECT
      */
     @SuppressWarnings("all")
-    private static Future<JsonObject> initRoles(final JsonArray roles) {
+    private static Future<JsonObject> initRoles(final JsonObject authority, final JsonArray roles) {
         Sc.infoAuth(LOGGER, "Roles : {0}", roles.encode());
         final List futures = new ArrayList<>();
         roles.stream().filter(Objects::nonNull)
                 .map(item -> (JsonObject) item)
-                .map(ScProfile::new)
-                .map(ScProfile::init)
+                .map(ProfileRole::new)
+                .map(ProfileRole::init)
                 .forEach(futures::add);
-        /* Authorities Json Data */
-        final JsonObject authority = new JsonObject();
         return CompositeFuture.all(futures)
                 /* Composite Result */
-                .compose(Sc::<ScProfile>composite)
+                .compose(Sc::<ProfileRole>composite)
                 /* User Process */
                 .compose(ScDetent.user(authority)::procAsync);
+    }
+
+    @SuppressWarnings("all")
+    private static Future<JsonObject> initGroups(final JsonObject authority, final JsonArray groups) {
+        Sc.infoAuth(LOGGER, "Groups: {0}", groups.encode());
+        final List futures = new ArrayList();
+        groups.stream().filter(Objects::nonNull)
+                .map(item -> (JsonObject) item)
+                .map(ProfileGroup::new)
+                .map(ProfileGroup::init)
+                .forEach(futures::add);
+        return CompositeFuture.all(futures)
+                /* Composite Result */
+                .compose(Sc::<ProfileGroup>composite)
+                /* Convert group to roles */
+                .compose(profiles -> Ux.toFuture(profiles.stream()
+                        .flatMap(group -> group.getRoles().stream())
+                        .collect(Collectors.toList())))
+                /* Group Result */
+                .compose(ScDetent.group(authority)::procAsync);
     }
 }

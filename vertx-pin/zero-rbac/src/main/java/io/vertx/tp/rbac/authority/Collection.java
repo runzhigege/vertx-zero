@@ -8,34 +8,34 @@ import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 
-class ScCollect {
+class Collection {
 
-    static Consumer<JsonObject> union(final ProfileType type, final List<ScProfile> profiles) {
+    static Consumer<JsonObject> union(final ProfileType type, final List<ProfileRole> profiles) {
         return bind(type, profiles, Ut::union);
     }
 
-    static Consumer<JsonObject> intersect(final ProfileType type, final List<ScProfile> profiles) {
+    static Consumer<JsonObject> intersect(final ProfileType type, final List<ProfileRole> profiles) {
         return bind(type, profiles, Ut::intersect);
     }
 
-    static Consumer<JsonObject> eager(final ProfileType type, final List<ScProfile> profiles) {
+    static Consumer<JsonObject> eager(final ProfileType type, final List<ProfileRole> profiles) {
         return bind(type, profiles, true);
     }
 
-    static Consumer<JsonObject> lazy(final ProfileType type, final List<ScProfile> profiles) {
+    static Consumer<JsonObject> lazy(final ProfileType type, final List<ProfileRole> profiles) {
         return bind(type, profiles, false);
     }
 
     private static Consumer<JsonObject> bind(final ProfileType type,
-                                             final List<ScProfile> profiles,
+                                             final List<ProfileRole> profiles,
                                              final BinaryOperator<Set<String>> fnReduce) {
         return input -> {
             if (Objects.nonNull(input) && !profiles.isEmpty()) {
-                final ScProfile first = profiles.iterator().next();
+                final ProfileRole first = profiles.iterator().next();
                 /* Input process */
                 final Set<String> permissionIds = profiles.stream()
                         .filter(Objects::nonNull)
-                        .map(ScProfile::getAuthorities)
+                        .map(ProfileRole::getAuthorities)
                         .reduce(first.getAuthorities(), fnReduce);
                 /* JsonArray */
                 final JsonArray data = Ut.toJArray(permissionIds);
@@ -45,7 +45,7 @@ class ScCollect {
     }
 
     private static Consumer<JsonObject> bind(final ProfileType type,
-                                             final List<ScProfile> profiles,
+                                             final List<ProfileRole> profiles,
                                              final boolean highPriority) {
         return input -> {
             if (Objects.nonNull(input) && !profiles.isEmpty()) {
@@ -53,13 +53,13 @@ class ScCollect {
                 final Set<String> found;
                 if (highPriority) {
                     found = profiles.stream()
-                            .min(Comparator.comparing(ScProfile::getPriority))
-                            .map(ScProfile::getAuthorities)
+                            .min(Comparator.comparing(ProfileRole::getPriority))
+                            .map(ProfileRole::getAuthorities)
                             .orElse(new HashSet<>());
                 } else {
                     found = profiles.stream()
-                            .max(Comparator.comparing(ScProfile::getPriority))
-                            .map(ScProfile::getAuthorities)
+                            .max(Comparator.comparing(ProfileRole::getPriority))
+                            .map(ProfileRole::getAuthorities)
                             .orElse(new HashSet<>());
                 }
                 final JsonArray data = Ut.toJArray(found);
