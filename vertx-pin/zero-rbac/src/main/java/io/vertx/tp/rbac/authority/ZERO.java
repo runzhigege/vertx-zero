@@ -7,3 +7,4 @@ interface Pool {
     ConcurrentMap<String, ScDetent> DETENT_POOL =
             new ConcurrentHashMap<>();
 }
+

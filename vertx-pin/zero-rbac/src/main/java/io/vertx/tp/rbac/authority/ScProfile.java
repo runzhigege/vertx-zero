@@ -1,7 +1,7 @@
 package io.vertx.tp.rbac.authority;
 
 import cn.vertxup.domain.tables.daos.RRolePermDao;
-import cn.vertxup.domain.tables.pojos.SPermission;
+import cn.vertxup.domain.tables.pojos.RRolePerm;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -10,6 +10,8 @@ import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.init.ScPin;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.aiki.Ux;
+import io.vertx.up.log.Annal;
+import io.zero.epic.Ut;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -24,6 +26,8 @@ import java.util.stream.Collectors;
  * 2) permissions
  */
 public class ScProfile implements Serializable {
+
+    private static final Annal LOGGER = Annal.get(ScProfile.class);
 
     private static final ScConfig CONFIG = ScPin.getConfig();
     private transient final String roleId;
@@ -40,68 +44,81 @@ public class ScProfile implements Serializable {
     public Future<ScProfile> init() {
         /* Fetch permission */
         final boolean isSecondary = CONFIG.getSupportSecondary();
-        if (isSecondary) {
-            /* Enabled secondary permission */
-            return this.fetchFull();
-        } else {
-            /* No secondary */
-            return this.fetchData();
-        }
+        Sc.infoAuth(LOGGER, "Secondary Enabled: {0}, Role Id: {1}", Boolean.TRUE, this.roleId);
+        return isSecondary ?
+                /* Enabled secondary permission */
+                this.fetchAuthoritiesWithCache().compose(ids -> Future.succeededFuture(this)) :
+                /* No secondary */
+                this.fetchAuthorities().compose(ids -> Future.succeededFuture(this));
     }
 
     public Integer getPriority() {
         return this.priority;
     }
 
+    public String getKey() {
+        return this.roleId;
+    }
+
     public Set<String> getAuthorities() {
         return this.authorities;
     }
 
-    private Future<ScProfile> fetchFull() {
+    /*
+     * Secondary cache enabled here, fetch authorities
+     * 1) Fetch data from cache with roleId = this.roleId
+     * 2.1) If null: Fetch authorities from database
+     * 2.2) If not null: Return authorities directly ( pick up from cache )
+     */
+    private Future<JsonArray> fetchAuthoritiesWithCache() {
         return Sc.<JsonArray>cachePermission(this.roleId).compose(array -> {
-            if (Objects.nonNull(array)) {
-                /* Identify the data from Pool */
-                return this.process(array.getList());
+            if (Objects.isNull(array)) {
+                return this.fetchAuthorities()
+                        .compose(data -> Sc.cachePermission(this.roleId, data));
             } else {
-                /* Not found in pool */
-                return this.fetchData()
-                        /* Fetch result */
-                        .compose(item -> this.process(item.authorities))
-                        /* Stored data into pool  */
-                        .compose(authorities -> Sc.cachePermission(this.roleId, authorities))
-                        /* Fill current authorities */
-                        .compose(authorities -> this.process(authorities.getList()));
+                /* Authorities fill from cache ( Sync the authorities ) */
+                array.stream().map(item -> (String) item)
+                        .forEach(this.authorities::add);
+                return Future.succeededFuture(array);
             }
         });
     }
 
-    private Future<ScProfile> fetchData() {
+    /*
+     * Single authorities fetching
+     * 1) Fetch data from database with roleId = this.roleId
+     * 2) Extract data to JsonArray ( permission Ids )
+     */
+    private Future<JsonArray> fetchAuthorities() {
         return Ux.Jooq.on(RRolePermDao.class)
-                .<SPermission>fetchAsync(AuthKey.F_ROLE_ID, this.roleId)
-                .compose(permission -> Ux.toFuture(permission.stream()
-                        .filter(Objects::nonNull)
-                        .map(SPermission::getKey)
-                        .collect(Collectors.toList())
-                ))
-                .compose(Ux::fnJArray)
-                .compose(authorities -> Sc.cachePermission(this.roleId, authorities))
-                /* Fill current authorities */
-                .compose(authorities -> this.process(authorities.getList()));
+                /* Fetch permission ids based on roleId */
+                .<RRolePerm>fetchAsync(AuthKey.F_ROLE_ID, this.roleId)
+                /* Refresh authorities in current profile */
+                .compose(this::refreshAuthorities);
     }
 
-    private Future<JsonArray> process(final Set<String> authoritySet) {
-        final JsonArray authorities = new JsonArray();
-        authoritySet.forEach(authorities::add);
-        return Future.succeededFuture(authorities);
+    /*
+     * Extract the latest relations: role - permissions
+     * 1) Clear current profile authorities
+     * 2) Refresh current profile authorities by input permissions
+     * 3) Returned ( JsonArray )
+     */
+    private Future<JsonArray> refreshAuthorities(final List<RRolePerm> permissions) {
+        final List<String> permissionIds = permissions.stream()
+                .filter(Objects::nonNull)
+                .map(RRolePerm::getPermId)
+                .collect(Collectors.toList());
+        this.authorities.clear();
+        this.authorities.addAll(permissionIds);
+        return Future.succeededFuture(new JsonArray(permissionIds));
     }
 
-    private Future<ScProfile> process(final List list) {
-        for (final Object key : list) {
-            if (Objects.nonNull(key)) {
-                final String permissionKey = (String) key;
-                this.authorities.add(permissionKey);
-            }
-        }
-        return Future.succeededFuture(this);
+    @Override
+    public String toString() {
+        return "ScProfile{" +
+                "roleId='" + this.roleId + '\'' +
+                ", priority=" + this.priority +
+                ", authorities=[" + Ut.fromJoin(this.authorities) +
+                "]}";
     }
 }

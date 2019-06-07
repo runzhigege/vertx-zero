@@ -6,8 +6,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.refine.Sc;
-import io.vertx.up.aiki.Ux;
-import io.vertx.up.exception._500InternalServerException;
+import io.vertx.up.log.Annal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +50,8 @@ import java.util.Objects;
  * Calculate different profile type
  */
 public class ScSession {
+    private static final Annal LOGGER = Annal.get(ScSession.class);
+
     /*
      * Entry of authorization session.
      */
@@ -83,21 +84,20 @@ public class ScSession {
      * 4) INTERSECT
      */
     @SuppressWarnings("all")
-    private static Future<JsonArray> initRoles(final JsonArray roles) {
+    private static Future<JsonObject> initRoles(final JsonArray roles) {
+        Sc.infoAuth(LOGGER, "Roles : {0}", roles.encode());
         final List futures = new ArrayList<>();
-        roles.stream().filter(Objects::nonNull).map(item -> (JsonObject) item)
+        roles.stream().filter(Objects::nonNull)
+                .map(item -> (JsonObject) item)
                 .map(ScProfile::new)
                 .map(ScProfile::init)
                 .forEach(futures::add);
-        final Future<List<ScProfile>> result = Future.future();
-        CompositeFuture.all(futures).setHandler(item -> {
-            if (item.succeeded()) {
-                final List<ScProfile> profile = item.result().list();
-                result.complete(profile);
-            } else {
-                result.fail(new _500InternalServerException(ScSession.class, null));
-            }
-        });
-        return result.compose(profiles -> Ux.toFuture(ScDetent.user().proc(profiles)));
+        /* Authorities Json Data */
+        final JsonObject authority = new JsonObject();
+        return CompositeFuture.all(futures)
+                /* Composite Result */
+                .compose(Sc::<ScProfile>composite)
+                /* User Process */
+                .compose(ScDetent.user(authority)::procAsync);
     }
 }
