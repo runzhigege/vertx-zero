@@ -13,13 +13,18 @@ import java.util.List;
 public interface ScDetent {
 
     static ScDetent user(final JsonObject input) {
-        return Fn.pool(Pool.DETENT_POOL, UserDetent.class.getName(),
-                () -> new UserDetent(input));
+        return Fn.pool(Pool.DETENT_POOL, ScDetentRole.class.getName(),
+                () -> new ScDetentRole(input));
     }
 
-    JsonObject proc(List<ScProfile> profiles);
+    static ScDetent group(final JsonObject input) {
+        return Fn.pool(Pool.DETENT_POOL, ScDetentGroup.class.getName(),
+                () -> new ScDetentGroup(input));
+    }
 
-    default Future<JsonObject> procAsync(final List<ScProfile> profiles) {
+    JsonObject proc(List<ProfileRole> profiles);
+
+    default Future<JsonObject> procAsync(final List<ProfileRole> profiles) {
         return Ux.toFuture(this.proc(profiles));
     }
 }
