@@ -31,16 +31,13 @@ public class ProfileType implements Serializable {
         this.group = group;
     }
 
-    static ProfileType create(final SeekRole role) {
-        return new ProfileType(role, null);
-    }
-
-    public SeekRole getRole() {
-        return this.role;
-    }
-
-    public SeekGroup getGroup() {
-        return this.group;
+    public String getKey() {
+        /* Role / Group */
+        if (null == this.group) {
+            return this.role.name();
+        } else {
+            return this.role.name() + "-" + this.group.name();
+        }
     }
 
     @Override

@@ -1,10 +1,13 @@
 package io.vertx.tp.rbac.refine;
 
 import cn.vertxup.domain.tables.pojos.OAccessToken;
+import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
+
+import java.util.List;
 
 public class Sc {
     /*
@@ -94,5 +97,9 @@ public class Sc {
      */
     public static <T> Future<JsonArray> relation(final String field, final String key, final Class<?> daoCls) {
         return ScFn.<T>relation(field, key, daoCls);
+    }
+
+    public static <T> Future<List<T>> composite(final CompositeFuture res) {
+        return ScFn.composite(res);
     }
 }

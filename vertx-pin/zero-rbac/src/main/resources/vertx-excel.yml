@@ -49,3 +49,17 @@ excel:
         unique:
           - groupId
           - userId
+      # Permission Configuration
+      - table: S_PERMISSION
+        pojo: cn.vertxup.domain.tables.pojos.SPermission
+        dao: cn.vertxup.domain.tables.daos.SPermissionDao
+        unique:
+          - code
+          - sigma
+      # Relation:  Role - Permission
+      - table: R_ROLE_PERM
+        pojo: cn.vertxup.domain.tables.pojos.RRolePerm
+        dao: cn.vertxup.domain.tables.daos.RRolePermDao
+        unique:
+          - roleId
+          - permId

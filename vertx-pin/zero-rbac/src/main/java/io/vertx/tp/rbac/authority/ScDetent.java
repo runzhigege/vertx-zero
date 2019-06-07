@@ -1,6 +1,8 @@
 package io.vertx.tp.rbac.authority;
 
-import io.vertx.core.json.JsonArray;
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
+import io.vertx.up.aiki.Ux;
 import io.zero.epic.fn.Fn;
 
 import java.util.List;
@@ -10,10 +12,14 @@ import java.util.List;
  */
 public interface ScDetent {
 
-    static ScDetent user() {
+    static ScDetent user(final JsonObject input) {
         return Fn.pool(Pool.DETENT_POOL, UserDetent.class.getName(),
-                UserDetent::new);
+                () -> new UserDetent(input));
     }
 
-    JsonArray proc(List<ScProfile> profile);
+    JsonObject proc(List<ScProfile> profiles);
+
+    default Future<JsonObject> procAsync(final List<ScProfile> profiles) {
+        return Ux.toFuture(this.proc(profiles));
+    }
 }

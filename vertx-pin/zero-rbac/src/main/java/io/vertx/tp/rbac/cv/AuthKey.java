@@ -31,4 +31,10 @@ public interface AuthKey {
     String F_CLIENT_ID = "clientId";
     String F_CLIENT_SECRET = "clientSecret";
     String F_GRANT_TYPE = "grantType";
+
+    /**
+     * Permission
+     */
+    String USER_AUTHORITIES = "userAuthorities";
+    String GROUP_AUTHORITIES = "groupAuthorities";
 }
