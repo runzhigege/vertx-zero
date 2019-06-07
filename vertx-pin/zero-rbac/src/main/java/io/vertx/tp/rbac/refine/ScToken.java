@@ -19,6 +19,14 @@ class ScToken {
     private static final Annal LOGGER = Annal.get(ScToken.class);
     private static final ScConfig CONFIG = ScPin.getConfig();
 
+    /*
+     * Normalize Jwt Token data
+     */
+    private static JsonObject normalize(final JsonObject data) {
+
+        return null;
+    }
+
     static JsonObject jwtToken(final JsonObject data) {
         /* Token Data Extract */
         final JsonObject tokenData = Uson.create(data.copy())
@@ -49,13 +57,16 @@ class ScToken {
         final Long iat = jwt.getLong(AuthKey.IAT);
         return new OAccessToken()
                 .setKey(UUID.randomUUID().toString())
+
                 /* Created Auditor */
                 .setCreatedBy(userKey)
                 .setCreatedAt(LocalDateTime.now())
+
                 /* Token Info */
                 .setToken(token)
                 .setRefreshToken(refreshToken)
                 .setExpiredTime(iat)
+
                 /* Active */
                 .setActive(Boolean.TRUE);
     }

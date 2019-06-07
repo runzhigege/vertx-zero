@@ -4,6 +4,7 @@ import cn.vertxup.domain.tables.daos.OAccessTokenDao;
 import cn.vertxup.domain.tables.pojos.OAccessToken;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.rbac.authority.ScSession;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.aiki.Ux;
 
@@ -23,9 +24,10 @@ public class JwtService implements JwtStub {
          * Jwt OAccessToken
          */
         final OAccessToken accessToken = Sc.jwtToken(response, userKey);
-        System.out.println(data.encodePrettily());
+
         return Ux.Jooq.on(OAccessTokenDao.class)
                 .insertAsync(accessToken)
-                .compose(item -> Ux.toFuture(response));
+                .compose(item -> ScSession.initAuthorization(data))
+                .compose(inited -> Ux.toFuture(response));
     }
 }
