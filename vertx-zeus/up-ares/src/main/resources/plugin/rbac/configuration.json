@@ -24,5 +24,7 @@
     "codePool": "POOL_CODE",
     "tokenExpired": 30,
     "tokenPool": "POOL_TOKEN",
-    "supportGroup": true
+    "permissionPool": "POOL_PERMISSIONS",
+    "supportGroup": true,
+    "supportSecondary": true
 }

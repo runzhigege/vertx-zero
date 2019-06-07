@@ -33,12 +33,22 @@ public class ScConfig implements Serializable {
      * Token expired time: ( ms )
      */
     private Long tokenExpired;
-
-    private Boolean supportGroup = Boolean.FALSE;
     /*
      * Token session pool
      */
     private String tokenPool;
+    /*
+     * Enable user group feature
+     */
+    private Boolean supportGroup = Boolean.FALSE;
+    /*
+     * Enable secondary cache for permissions ( role = xxx )
+     */
+    private Boolean supportSecondary = Boolean.FALSE;
+    /*
+     * Role Pool when secondary cache enabled.
+     */
+    private String permissionPool;
 
     public ScCondition getCondition() {
         return this.condition;
@@ -70,6 +80,22 @@ public class ScConfig implements Serializable {
 
     public void setCodePool(final String codePool) {
         this.codePool = codePool;
+    }
+
+    public Boolean getSupportSecondary() {
+        return this.supportSecondary;
+    }
+
+    public void setSupportSecondary(final Boolean supportSecondary) {
+        this.supportSecondary = supportSecondary;
+    }
+
+    public String getPermissionPool() {
+        return this.permissionPool;
+    }
+
+    public void setPermissionPool(final String permissionPool) {
+        this.permissionPool = permissionPool;
     }
 
     public Long getTokenExpired() {
@@ -108,8 +134,10 @@ public class ScConfig implements Serializable {
                 ", codeLength=" + this.codeLength +
                 ", codePool='" + this.codePool + '\'' +
                 ", tokenExpired=" + this.tokenExpired +
-                ", supportGroup=" + this.supportGroup +
                 ", tokenPool='" + this.tokenPool + '\'' +
+                ", supportGroup=" + this.supportGroup +
+                ", supportSecondary=" + this.supportSecondary +
+                ", permissionPool='" + this.permissionPool + '\'' +
                 '}';
     }
 }

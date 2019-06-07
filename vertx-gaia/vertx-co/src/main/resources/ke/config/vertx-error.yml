@@ -127,3 +127,4 @@ E80201: "(401) - (Auth) The authorization code `{1}` for your client {0} has bee
 E80202: "(401) - (Auth) The authorization code generation met issue with clientId = {0} and clientSecret = {1}."
 E80203: "(449) - (Auth) The user `{0}` could not be found in database."
 E80204: "(401) - (Auth) The user''s ( username = {0} ) password that you provided is wrong."
+E80205: "(403) - (Auth) The profile required `{0}`, but current profile is `{1}`."

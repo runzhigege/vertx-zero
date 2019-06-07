@@ -42,4 +42,42 @@ class ScCache {
         return Ux.Pool.on(codePool).put(key, value, codeExpired)
                 .compose(item -> Ux.toFuture(item.getValue()));
     }
+
+    /*
+     * Pool configured default parameters
+     * - tokenPool
+     */
+    static <V> Future<V> authority(final String key) {
+        final String tokenPool = CONFIG.getTokenPool();
+        return Ux.Pool.on(tokenPool).get(key);
+    }
+
+    /*
+     * Pool configured default parameters
+     * - tokenPool
+     */
+    static <V> Future<V> authority(final String key, final V value) {
+        final String tokenPool = CONFIG.getTokenPool();
+        return Ux.Pool.on(tokenPool).put(key, value)
+                .compose(item -> Ux.toFuture(item.getValue()));
+    }
+
+    /*
+     * Pool configured default parameters
+     * - permissionPool
+     */
+    static <V> Future<V> permission(final String key) {
+        final String permissionPool = CONFIG.getPermissionPool();
+        return Ux.Pool.on(permissionPool).get(key);
+    }
+
+    /*
+     * Pool configured default parameters
+     * - permissionPool
+     */
+    static <V> Future<V> permission(final String key, final V value) {
+        final String permissionPool = CONFIG.getPermissionPool();
+        return Ux.Pool.on(permissionPool).put(key, value)
+                .compose(item -> Ux.toFuture(item.getValue()));
+    }
 }
