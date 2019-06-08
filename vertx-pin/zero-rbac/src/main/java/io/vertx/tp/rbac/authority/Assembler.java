@@ -8,7 +8,10 @@ import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 
-class Collection {
+/*
+ * Role Calculation
+ */
+class Assembler {
 
     static Consumer<JsonObject> union(final ProfileType type, final List<ProfileRole> profiles) {
         return bind(type, profiles, Ut::union);

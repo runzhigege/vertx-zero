@@ -35,7 +35,7 @@ public class ProfileRole implements Serializable {
     /* GroupId Process */
     private transient ProfileGroup reference;
 
-    public ProfileRole(final JsonObject data) {
+    ProfileRole(final JsonObject data) {
         /* Role Id */
         this.roleId = data.getString(AuthKey.F_ROLE_ID);
         /* Priority */
@@ -45,7 +45,6 @@ public class ProfileRole implements Serializable {
     public Future<ProfileRole> init() {
         /* Fetch permission */
         final boolean isSecondary = CONFIG.getSupportSecondary();
-        Sc.infoAuth(LOGGER, "Secondary Enabled: {0}, Role Id: {1}", Boolean.TRUE, this.roleId);
         return isSecondary ?
                 /* Enabled secondary permission */
                 this.fetchAuthoritiesWithCache().compose(ids -> Future.succeededFuture(this)) :
@@ -61,7 +60,7 @@ public class ProfileRole implements Serializable {
         return this.roleId;
     }
 
-    public Set<String> getAuthorities() {
+    Set<String> getAuthorities() {
         return this.authorities;
     }
 

@@ -70,7 +70,9 @@ public class ScSession {
                 return initRoles(authority, data.getJsonArray("role"))
                         /* Initialize group information */
                         .compose(processed -> initGroups(processed, data.getJsonArray("group")))
-                        /* */
+                        /* Report information */
+                        .compose(ScSession::onReport)
+                        /* Result */
                         .compose(roles -> Future.succeededFuture(Boolean.TRUE));
             } else {
                 /*
@@ -122,5 +124,10 @@ public class ScSession {
                         .collect(Collectors.toList())))
                 /* Group Result */
                 .compose(ScDetent.group(authority)::procAsync);
+    }
+
+    private static Future<JsonObject> onReport(final JsonObject result) {
+        Sc.infoAuth(LOGGER, "Permissions: \n{0}", result.encodePrettily());
+        return Future.succeededFuture(result);
     }
 }

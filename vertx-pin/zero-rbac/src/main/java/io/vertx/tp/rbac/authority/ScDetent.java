@@ -27,4 +27,15 @@ public interface ScDetent {
     default Future<JsonObject> procAsync(final List<ProfileRole> profiles) {
         return Ux.toFuture(this.proc(profiles));
     }
+
+    /*
+     * Internal default group
+     */
+    interface Group {
+
+        static ScDetent horizon(final JsonObject input) {
+            return Fn.pool(Pool.DETENT_POOL, ScAimHorizon.class.getName(),
+                    () -> new ScAimHorizon(input));
+        }
+    }
 }
