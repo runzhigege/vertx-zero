@@ -84,7 +84,7 @@
         <jetbrains.version>17.0.0</jetbrains.version>
         <guice.version>4.1.0</guice.version>
         <hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
-        <scala.version>2.12.4</scala.version>
+        <scala.version>2.13.0</scala.version>
         <feign.version>8.18.0</feign.version>
         <guava.version>27.1-jre</guava.version>
         <codehaus.janino.version>3.0.12</codehaus.janino.version>

@@ -16,15 +16,15 @@ class ScDetentRole implements ScDetent {
     @Override
     public JsonObject proc(final List<ProfileRole> profile) {
         final JsonObject data = new JsonObject();
-        /* UNION */
-        Collection.union(ProfileType.UNION, profile).accept(data);
-        /* INTERSECT */
-        Collection.intersect(ProfileType.INTERSECT, profile).accept(data);
-        /* EAGER */
-        Collection.eager(ProfileType.EAGER, profile).accept(data);
-        /* LAZY */
-        Collection.lazy(ProfileType.LAZY, profile).accept(data);
-        this.input.put(AuthKey.USER_AUTHORITIES, data);
-        return this.input;
+        /* role = UNION */
+        Assembler.union(ProfileType.UNION, profile).accept(data);
+        /* role = INTERSECT */
+        Assembler.intersect(ProfileType.INTERSECT, profile).accept(data);
+        /* role = EAGER */
+        Assembler.eager(ProfileType.EAGER, profile).accept(data);
+        /* role = LAZY */
+        Assembler.lazy(ProfileType.LAZY, profile).accept(data);
+
+        return this.input.put(AuthKey.USER_AUTHORITIES, data);
     }
 }

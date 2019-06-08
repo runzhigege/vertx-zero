@@ -13,16 +13,16 @@ import java.util.Objects;
  */
 public class ProfileType implements Serializable {
     /* User Profile */
-    public static ProfileType UNION = new ProfileType(SeekRole.UNION);          // U
-    public static ProfileType EAGER = new ProfileType(SeekRole.EAGER);          // E
-    public static ProfileType LAZY = new ProfileType(SeekRole.LAZY);            // L
-    public static ProfileType INTERSECT = new ProfileType(SeekRole.INTERSECT);  // I
+    static ProfileType UNION = new ProfileType(SeekRole.UNION);          // U
+    static ProfileType EAGER = new ProfileType(SeekRole.EAGER);          // E
+    static ProfileType LAZY = new ProfileType(SeekRole.LAZY);            // L
+    static ProfileType INTERSECT = new ProfileType(SeekRole.INTERSECT);  // I
 
     /* Group : HORIZON ->  User ( U, E, L, I ) */
-    public static ProfileType HORIZON_U = new ProfileType(SeekRole.UNION, SeekGroup.HORIZON);
-    public static ProfileType HORIZON_E = new ProfileType(SeekRole.EAGER, SeekGroup.HORIZON);
-    public static ProfileType HORIZON_L = new ProfileType(SeekRole.LAZY, SeekGroup.HORIZON);
-    public static ProfileType HORIZON_I = new ProfileType(SeekRole.INTERSECT, SeekGroup.HORIZON);
+    static ProfileType HORIZON_U = new ProfileType(SeekRole.UNION, SeekGroup.HORIZON);
+    static ProfileType HORIZON_E = new ProfileType(SeekRole.EAGER, SeekGroup.HORIZON);
+    static ProfileType HORIZON_L = new ProfileType(SeekRole.LAZY, SeekGroup.HORIZON);
+    static ProfileType HORIZON_I = new ProfileType(SeekRole.INTERSECT, SeekGroup.HORIZON);
 
     /* Private Variable */
     private final SeekRole role;

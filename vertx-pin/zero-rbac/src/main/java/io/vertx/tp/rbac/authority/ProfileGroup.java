@@ -26,7 +26,7 @@ public class ProfileGroup implements Serializable {
 
     private transient final List<ProfileRole> roles = new ArrayList<>();
 
-    public ProfileGroup(final JsonObject data) {
+    ProfileGroup(final JsonObject data) {
         /* Group Id */
         this.groupId = data.getString(AuthKey.F_GROUP_ID);
         /* Priority */
