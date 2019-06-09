@@ -24,152 +24,152 @@ import javax.annotation.Generated;
 public interface ISAction extends Serializable {
 
     /**
-     * Setter for <code>UP_RBAC.S_ACTION.KEY</code>. 「key」- 操作ID
+     * Setter for <code>DB_RBAC.S_ACTION.KEY</code>. 「key」- 操作ID
      */
     public ISAction setKey(String value);
 
     /**
-     * Getter for <code>UP_RBAC.S_ACTION.KEY</code>. 「key」- 操作ID
+     * Getter for <code>DB_RBAC.S_ACTION.KEY</code>. 「key」- 操作ID
      */
     public String getKey();
 
     /**
-     * Setter for <code>UP_RBAC.S_ACTION.NAME</code>. 「name」- 操作名称
+     * Setter for <code>DB_RBAC.S_ACTION.NAME</code>. 「name」- 操作名称
      */
     public ISAction setName(String value);
 
     /**
-     * Getter for <code>UP_RBAC.S_ACTION.NAME</code>. 「name」- 操作名称
+     * Getter for <code>DB_RBAC.S_ACTION.NAME</code>. 「name」- 操作名称
      */
     public String getName();
 
     /**
-     * Setter for <code>UP_RBAC.S_ACTION.CODE</code>. 「code」- 操作码
+     * Setter for <code>DB_RBAC.S_ACTION.CODE</code>. 「code」- 操作码
      */
     public ISAction setCode(String value);
 
     /**
-     * Getter for <code>UP_RBAC.S_ACTION.CODE</code>. 「code」- 操作码
+     * Getter for <code>DB_RBAC.S_ACTION.CODE</code>. 「code」- 操作码
      */
     public String getCode();
 
     /**
-     * Setter for <code>UP_RBAC.S_ACTION.LEVEL</code>. 「level」- 操作级别
+     * Setter for <code>DB_RBAC.S_ACTION.LEVEL</code>. 「level」- 操作级别
      */
     public ISAction setLevel(Integer value);
 
     /**
-     * Getter for <code>UP_RBAC.S_ACTION.LEVEL</code>. 「level」- 操作级别
+     * Getter for <code>DB_RBAC.S_ACTION.LEVEL</code>. 「level」- 操作级别
      */
     public Integer getLevel();
 
     /**
-     * Setter for <code>UP_RBAC.S_ACTION.PRIORITY</code>. 「priority」- 操作优先级：用户优先、角色优先、统一（定义资源的访问表）
+     * Setter for <code>DB_RBAC.S_ACTION.PRIORITY</code>. 「priority」- 操作优先级：用户优先、角色优先、统一（定义资源的访问表）
      */
     public ISAction setPriority(String value);
 
     /**
-     * Getter for <code>UP_RBAC.S_ACTION.PRIORITY</code>. 「priority」- 操作优先级：用户优先、角色优先、统一（定义资源的访问表）
+     * Getter for <code>DB_RBAC.S_ACTION.PRIORITY</code>. 「priority」- 操作优先级：用户优先、角色优先、统一（定义资源的访问表）
      */
     public String getPriority();
 
     /**
-     * Setter for <code>UP_RBAC.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
+     * Setter for <code>DB_RBAC.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
      */
     public ISAction setResourceId(String value);
 
     /**
-     * Getter for <code>UP_RBAC.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
+     * Getter for <code>DB_RBAC.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
      */
     public String getResourceId();
 
     /**
-     * Setter for <code>UP_RBAC.S_ACTION.CATEGORY</code>. 「category」- 组类型
+     * Setter for <code>DB_RBAC.S_ACTION.CATEGORY</code>. 「category」- 组类型
      */
     public ISAction setCategory(String value);
 
     /**
-     * Getter for <code>UP_RBAC.S_ACTION.CATEGORY</code>. 「category」- 组类型
+     * Getter for <code>DB_RBAC.S_ACTION.CATEGORY</code>. 「category」- 组类型
      */
     public String getCategory();
 
     /**
-     * Setter for <code>UP_RBAC.S_ACTION.SIGMA</code>. 「sigma」- 绑定的统一标识
+     * Setter for <code>DB_RBAC.S_ACTION.SIGMA</code>. 「sigma」- 绑定的统一标识
      */
     public ISAction setSigma(String value);
 
     /**
-     * Getter for <code>UP_RBAC.S_ACTION.SIGMA</code>. 「sigma」- 绑定的统一标识
+     * Getter for <code>DB_RBAC.S_ACTION.SIGMA</code>. 「sigma」- 绑定的统一标识
      */
     public String getSigma();
 
     /**
-     * Setter for <code>UP_RBAC.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_RBAC.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
      */
     public ISAction setLanguage(String value);
 
     /**
-     * Getter for <code>UP_RBAC.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_RBAC.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
      */
     public String getLanguage();
 
     /**
-     * Setter for <code>UP_RBAC.S_ACTION.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_RBAC.S_ACTION.ACTIVE</code>. 「active」- 是否启用
      */
     public ISAction setActive(Boolean value);
 
     /**
-     * Getter for <code>UP_RBAC.S_ACTION.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_RBAC.S_ACTION.ACTIVE</code>. 「active」- 是否启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>UP_RBAC.S_ACTION.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_RBAC.S_ACTION.METADATA</code>. 「metadata」- 附加配置数据
      */
     public ISAction setMetadata(String value);
 
     /**
-     * Getter for <code>UP_RBAC.S_ACTION.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_RBAC.S_ACTION.METADATA</code>. 「metadata」- 附加配置数据
      */
     public String getMetadata();
 
     /**
-     * Setter for <code>UP_RBAC.S_ACTION.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Setter for <code>DB_RBAC.S_ACTION.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public ISAction setCreatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>UP_RBAC.S_ACTION.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Getter for <code>DB_RBAC.S_ACTION.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public LocalDateTime getCreatedAt();
 
     /**
-     * Setter for <code>UP_RBAC.S_ACTION.CREATED_BY</code>. 「createdBy」- 创建人
+     * Setter for <code>DB_RBAC.S_ACTION.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public ISAction setCreatedBy(String value);
 
     /**
-     * Getter for <code>UP_RBAC.S_ACTION.CREATED_BY</code>. 「createdBy」- 创建人
+     * Getter for <code>DB_RBAC.S_ACTION.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public String getCreatedBy();
 
     /**
-     * Setter for <code>UP_RBAC.S_ACTION.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Setter for <code>DB_RBAC.S_ACTION.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     public ISAction setUpdatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>UP_RBAC.S_ACTION.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Getter for <code>DB_RBAC.S_ACTION.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     public LocalDateTime getUpdatedAt();
 
     /**
-     * Setter for <code>UP_RBAC.S_ACTION.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Setter for <code>DB_RBAC.S_ACTION.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public ISAction setUpdatedBy(String value);
 
     /**
-     * Getter for <code>UP_RBAC.S_ACTION.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Getter for <code>DB_RBAC.S_ACTION.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public String getUpdatedBy();
 

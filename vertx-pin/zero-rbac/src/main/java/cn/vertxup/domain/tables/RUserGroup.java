@@ -4,9 +4,9 @@
 package cn.vertxup.domain.tables;
 
 
+import cn.vertxup.domain.DbRbac;
 import cn.vertxup.domain.Indexes;
 import cn.vertxup.domain.Keys;
-import cn.vertxup.domain.UpRbac;
 import cn.vertxup.domain.tables.records.RUserGroupRecord;
 
 import java.util.Arrays;
@@ -38,10 +38,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RUserGroup extends TableImpl<RUserGroupRecord> {
 
-    private static final long serialVersionUID = -1543131327;
+    private static final long serialVersionUID = -1330443530;
 
     /**
-     * The reference instance of <code>UP_RBAC.R_USER_GROUP</code>
+     * The reference instance of <code>DB_RBAC.R_USER_GROUP</code>
      */
     public static final RUserGroup R_USER_GROUP = new RUserGroup();
 
@@ -54,31 +54,36 @@ public class RUserGroup extends TableImpl<RUserGroupRecord> {
     }
 
     /**
-     * The column <code>UP_RBAC.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
+     * The column <code>DB_RBAC.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     public final TableField<RUserGroupRecord, String> GROUP_ID = createField("GROUP_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「groupId」- 关联组ID");
 
     /**
-     * The column <code>UP_RBAC.R_USER_GROUP.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * The column <code>DB_RBAC.R_USER_GROUP.USER_ID</code>. 「userId」- 关联用户ID
      */
-    public final TableField<RUserGroupRecord, String> ROLE_ID = createField("ROLE_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「roleId」- 关联角色ID");
+    public final TableField<RUserGroupRecord, String> USER_ID = createField("USER_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「userId」- 关联用户ID");
 
     /**
-     * Create a <code>UP_RBAC.R_USER_GROUP</code> table reference
+     * The column <code>DB_RBAC.R_USER_GROUP.PRIORITY</code>. 「priority」- 组优先级
+     */
+    public final TableField<RUserGroupRecord, Integer> PRIORITY = createField("PRIORITY", org.jooq.impl.SQLDataType.INTEGER, this, "「priority」- 组优先级");
+
+    /**
+     * Create a <code>DB_RBAC.R_USER_GROUP</code> table reference
      */
     public RUserGroup() {
         this(DSL.name("R_USER_GROUP"), null);
     }
 
     /**
-     * Create an aliased <code>UP_RBAC.R_USER_GROUP</code> table reference
+     * Create an aliased <code>DB_RBAC.R_USER_GROUP</code> table reference
      */
     public RUserGroup(String alias) {
         this(DSL.name(alias), R_USER_GROUP);
     }
 
     /**
-     * Create an aliased <code>UP_RBAC.R_USER_GROUP</code> table reference
+     * Create an aliased <code>DB_RBAC.R_USER_GROUP</code> table reference
      */
     public RUserGroup(Name alias) {
         this(alias, R_USER_GROUP);
@@ -97,7 +102,7 @@ public class RUserGroup extends TableImpl<RUserGroupRecord> {
      */
     @Override
     public Schema getSchema() {
-        return UpRbac.UP_RBAC;
+        return DbRbac.DB_RBAC;
     }
 
     /**

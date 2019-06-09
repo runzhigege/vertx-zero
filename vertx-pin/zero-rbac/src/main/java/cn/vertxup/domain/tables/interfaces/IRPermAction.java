@@ -23,22 +23,22 @@ import javax.annotation.Generated;
 public interface IRPermAction extends Serializable {
 
     /**
-     * Setter for <code>UP_RBAC.R_PERM_ACTION.PERM_ID</code>. 「permId」- 关联权限ID
+     * Setter for <code>DB_RBAC.R_PERM_ACTION.PERM_ID</code>. 「permId」- 关联权限ID
      */
     public IRPermAction setPermId(String value);
 
     /**
-     * Getter for <code>UP_RBAC.R_PERM_ACTION.PERM_ID</code>. 「permId」- 关联权限ID
+     * Getter for <code>DB_RBAC.R_PERM_ACTION.PERM_ID</code>. 「permId」- 关联权限ID
      */
     public String getPermId();
 
     /**
-     * Setter for <code>UP_RBAC.R_PERM_ACTION.ACTION_ID</code>. 「actionId」- 操作ID
+     * Setter for <code>DB_RBAC.R_PERM_ACTION.ACTION_ID</code>. 「actionId」- 操作ID
      */
     public IRPermAction setActionId(String value);
 
     /**
-     * Getter for <code>UP_RBAC.R_PERM_ACTION.ACTION_ID</code>. 「actionId」- 操作ID
+     * Getter for <code>DB_RBAC.R_PERM_ACTION.ACTION_ID</code>. 「actionId」- 操作ID
      */
     public String getActionId();
 

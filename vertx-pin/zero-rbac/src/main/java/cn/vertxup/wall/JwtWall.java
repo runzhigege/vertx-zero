@@ -5,14 +5,24 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.web.handler.AuthHandler;
+import io.vertx.tp.rbac.cv.AuthMsg;
+import io.vertx.tp.rbac.refine.Sc;
+import io.vertx.tp.rbac.service.jwt.JwtStub;
 import io.vertx.up.annotations.Authenticate;
 import io.vertx.up.annotations.Wall;
+import io.vertx.up.log.Annal;
 import io.vertx.up.secure.Security;
 import io.vertx.up.secure.handler.JwtOstium;
 import io.vertx.up.secure.provider.JwtAuth;
 
+import javax.inject.Inject;
+
 @Wall(value = "jwt", path = "/api/*")
-public class AuthWall implements Security {
+public class JwtWall implements Security {
+    private static final Annal LOGGER = Annal.get(JwtWall.class);
+    @Inject
+    private transient JwtStub stub;
+
     @Authenticate
     public AuthHandler authenticate(final Vertx vertx,
                                     final JsonObject config) {
@@ -22,8 +32,9 @@ public class AuthWall implements Security {
 
     @Override
     public Future<JsonObject> store(final JsonObject data) {
-        System.out.println(data);
-        return Future.succeededFuture();
+        final String userKey = data.getString("user");
+        Sc.infoAuth(LOGGER, AuthMsg.TOKEN_STORE, userKey);
+        return this.stub.store(userKey, data);
     }
 
     @Override

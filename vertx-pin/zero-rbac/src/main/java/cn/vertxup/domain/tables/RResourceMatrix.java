@@ -4,9 +4,9 @@
 package cn.vertxup.domain.tables;
 
 
+import cn.vertxup.domain.DbRbac;
 import cn.vertxup.domain.Indexes;
 import cn.vertxup.domain.Keys;
-import cn.vertxup.domain.UpRbac;
 import cn.vertxup.domain.tables.records.RResourceMatrixRecord;
 
 import java.util.Arrays;
@@ -38,10 +38,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RResourceMatrix extends TableImpl<RResourceMatrixRecord> {
 
-    private static final long serialVersionUID = -1554813286;
+    private static final long serialVersionUID = -1135721872;
 
     /**
-     * The reference instance of <code>UP_RBAC.R_RESOURCE_MATRIX</code>
+     * The reference instance of <code>DB_RBAC.R_RESOURCE_MATRIX</code>
      */
     public static final RResourceMatrix R_RESOURCE_MATRIX = new RResourceMatrix();
 
@@ -54,46 +54,46 @@ public class RResourceMatrix extends TableImpl<RResourceMatrixRecord> {
     }
 
     /**
-     * The column <code>UP_RBAC.R_RESOURCE_MATRIX.KEY</code>. 「key」- 限定记录ID
+     * The column <code>DB_RBAC.R_RESOURCE_MATRIX.KEY</code>. 「key」- 限定记录ID
      */
     public final TableField<RResourceMatrixRecord, String> KEY = createField("KEY", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「key」- 限定记录ID");
 
     /**
-     * The column <code>UP_RBAC.R_RESOURCE_MATRIX.ROLE_ID</code>. 「roleId」- 限定角色ID
+     * The column <code>DB_RBAC.R_RESOURCE_MATRIX.ROLE_ID</code>. 「roleId」- 限定角色ID
      */
     public final TableField<RResourceMatrixRecord, String> ROLE_ID = createField("ROLE_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「roleId」- 限定角色ID");
 
     /**
-     * The column <code>UP_RBAC.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
+     * The column <code>DB_RBAC.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
      */
     public final TableField<RResourceMatrixRecord, String> USER_ID = createField("USER_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「userId」- 限定用户ID");
 
     /**
-     * The column <code>UP_RBAC.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
+     * The column <code>DB_RBAC.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
      */
     public final TableField<RResourceMatrixRecord, String> RESOURCE_ID = createField("RESOURCE_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「resourceId」- 关联资源ID");
 
     /**
-     * The column <code>UP_RBAC.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 所属APP的APPKEY
+     * The column <code>DB_RBAC.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 所属APP的APPKEY
      */
     public final TableField<RResourceMatrixRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(128), this, "「sigma」- 所属APP的APPKEY");
 
     /**
-     * Create a <code>UP_RBAC.R_RESOURCE_MATRIX</code> table reference
+     * Create a <code>DB_RBAC.R_RESOURCE_MATRIX</code> table reference
      */
     public RResourceMatrix() {
         this(DSL.name("R_RESOURCE_MATRIX"), null);
     }
 
     /**
-     * Create an aliased <code>UP_RBAC.R_RESOURCE_MATRIX</code> table reference
+     * Create an aliased <code>DB_RBAC.R_RESOURCE_MATRIX</code> table reference
      */
     public RResourceMatrix(String alias) {
         this(DSL.name(alias), R_RESOURCE_MATRIX);
     }
 
     /**
-     * Create an aliased <code>UP_RBAC.R_RESOURCE_MATRIX</code> table reference
+     * Create an aliased <code>DB_RBAC.R_RESOURCE_MATRIX</code> table reference
      */
     public RResourceMatrix(Name alias) {
         this(alias, R_RESOURCE_MATRIX);
@@ -112,7 +112,7 @@ public class RResourceMatrix extends TableImpl<RResourceMatrixRecord> {
      */
     @Override
     public Schema getSchema() {
-        return UpRbac.UP_RBAC;
+        return DbRbac.DB_RBAC;
     }
 
     /**
