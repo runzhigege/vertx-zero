@@ -33,9 +33,12 @@ public interface ScDetent {
      */
     interface Group {
 
-        static ScDetent horizon(final JsonObject input) {
-            return Fn.pool(Pool.DETENT_POOL, ScAimHorizon.class.getName(),
-                    () -> new ScAimHorizon(input));
+        static ScDetent horizon() {
+            return Fn.pool(Pool.DETENT_POOL, SgHorizon.class.getName(), SgHorizon::new);
+        }
+
+        static ScDetent critical() {
+            return Fn.pool(Pool.DETENT_POOL, SgCritical.class.getName(), SgCritical::new);
         }
     }
 }

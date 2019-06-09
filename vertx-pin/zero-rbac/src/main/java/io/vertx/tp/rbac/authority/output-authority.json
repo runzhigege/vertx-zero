@@ -1,19 +1,56 @@
 {
-    "<user.id>": {
-        "userAuthorities": {
-        },
-        "groupAuthorities": {
-            "UNION-HORIZON": [
-                "f6d06a71-5acb-4a2e-8799-67b6a17d482e",
-                "59c45dc0-eed5-42dc-baf5-f10fa0e02827",
-                "d17d873f-65f1-49e3-99a3-30733bf84d1b",
-                "6ca8c035-8bba-4d4d-aadd-7d06bf4b0a5a",
-                "1ec73d5f-26e4-481b-aed8-7236ef0fb101",
-                "e08b418c-0557-453c-8cdf-5c0278ac7c26",
-                "bf4f20d0-cc24-47c6-8d1e-c81bfc3772a3",
-                "45831b92-a796-482d-a419-28dd7e1d0a2e",
-                "e71c22da-bedc-46b2-9fc2-0123b8ba8fdc"
-            ]
-        }
+    "userAuthorities": {
+        "UNION": [
+            "f6d06a71-5acb-4a2e-8799-67b6a17d482e",
+            "59c45dc0-eed5-42dc-baf5-f10fa0e02827",
+            "6ca8c035-8bba-4d4d-aadd-7d06bf4b0a5a",
+            "1ec73d5f-26e4-481b-aed8-7236ef0fb101",
+            "bf4f20d0-cc24-47c6-8d1e-c81bfc3772a3",
+            "45831b92-a796-482d-a419-28dd7e1d0a2e",
+            "e71c22da-bedc-46b2-9fc2-0123b8ba8fdc"
+        ],
+        "INTERSECT": [
+            "bf4f20d0-cc24-47c6-8d1e-c81bfc3772a3"
+        ],
+        "EAGER": [
+            "f6d06a71-5acb-4a2e-8799-67b6a17d482e",
+            "1ec73d5f-26e4-481b-aed8-7236ef0fb101",
+            "bf4f20d0-cc24-47c6-8d1e-c81bfc3772a3",
+            "45831b92-a796-482d-a419-28dd7e1d0a2e",
+            "e71c22da-bedc-46b2-9fc2-0123b8ba8fdc"
+        ],
+        "LAZY": [
+            "59c45dc0-eed5-42dc-baf5-f10fa0e02827",
+            "6ca8c035-8bba-4d4d-aadd-7d06bf4b0a5a",
+            "bf4f20d0-cc24-47c6-8d1e-c81bfc3772a3"
+        ]
+    },
+    "groupAuthorities": {
+        "UNION-HORIZON": [
+            "f6d06a71-5acb-4a2e-8799-67b6a17d482e",
+            "59c45dc0-eed5-42dc-baf5-f10fa0e02827",
+            "d17d873f-65f1-49e3-99a3-30733bf84d1b",
+            "6ca8c035-8bba-4d4d-aadd-7d06bf4b0a5a",
+            "1ec73d5f-26e4-481b-aed8-7236ef0fb101",
+            "e08b418c-0557-453c-8cdf-5c0278ac7c26",
+            "bf4f20d0-cc24-47c6-8d1e-c81bfc3772a3",
+            "45831b92-a796-482d-a419-28dd7e1d0a2e",
+            "e71c22da-bedc-46b2-9fc2-0123b8ba8fdc"
+        ],
+        "EAGER-HORIZON": [
+            "d17d873f-65f1-49e3-99a3-30733bf84d1b",
+            "e08b418c-0557-453c-8cdf-5c0278ac7c26",
+            "bf4f20d0-cc24-47c6-8d1e-c81bfc3772a3"
+        ],
+        "LAZY-HORIZON": [
+            "f6d06a71-5acb-4a2e-8799-67b6a17d482e",
+            "1ec73d5f-26e4-481b-aed8-7236ef0fb101",
+            "bf4f20d0-cc24-47c6-8d1e-c81bfc3772a3",
+            "45831b92-a796-482d-a419-28dd7e1d0a2e",
+            "e71c22da-bedc-46b2-9fc2-0123b8ba8fdc"
+        ],
+        "INTERSECT-HORIZON": [
+            "bf4f20d0-cc24-47c6-8d1e-c81bfc3772a3"
+        ]
     }
 }
