@@ -18,6 +18,7 @@ public class ProfileType implements Serializable {
     static ProfileType LAZY = new ProfileType(SeekRole.LAZY);            // L
     static ProfileType INTERSECT = new ProfileType(SeekRole.INTERSECT);  // I
 
+    // ---------- DIRECT Mode -----------
     /* Group : HORIZON ->  Role ( U, E, L, I ) */
     static ProfileType HORIZON_UNION = new ProfileType(SeekRole.UNION, SeekGroup.HORIZON);
     static ProfileType HORIZON_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.HORIZON);
@@ -33,6 +34,13 @@ public class ProfileType implements Serializable {
     static ProfileType OVERLOOK_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.OVERLOOK);
     static ProfileType OVERLOOK_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.OVERLOOK);
     static ProfileType OVERLOOK_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.OVERLOOK);
+
+    // ----------- PARENT Mode -----------
+    /* Group : Parent -> Role ( U, E, L, I ) */
+    static ProfileType PARENT_HORIZON_UNION = new ProfileType(SeekRole.UNION, SeekGroup.PARENT_HORIZON);
+    static ProfileType PARENT_HORIZON_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.PARENT_HORIZON);
+    static ProfileType PARENT_HORIZON_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.PARENT_HORIZON);
+    static ProfileType PARENT_HORIZON_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.PARENT_HORIZON);
 
     /* Private Variable */
     private final SeekRole role;

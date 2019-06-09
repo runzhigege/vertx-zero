@@ -12,7 +12,6 @@ import io.vertx.up.log.Annal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /*
  * Profile information to normalize all permission data
@@ -118,12 +117,18 @@ public class ScSession {
         return CompositeFuture.all(futures)
                 /* Composite Result */
                 .compose(Sc::<ProfileGroup>composite)
-                /* Convert group to roles */
-                .compose(profiles -> Ux.toFuture(profiles.stream()
-                        .flatMap(group -> group.getRoles().stream())
-                        .collect(Collectors.toList())))
-                /* Group Result */
-                .compose(ScDetent.group(authority)::procAsync);
+                /* Group */
+                .compose(profiles -> Ux.toFuture(profiles)
+                        /* Group Direct Mode */
+                        .compose(Align::flat)
+                        .compose(ScDetent.group(authority)::procAsync)
+                        .compose(nil -> Ux.toFuture(profiles))
+                        /* Group Parent Mode */
+                        .compose(Align::parent)
+                        .compose(ScDetent.parent(authority)::procAsync)
+                        .compose(nil -> Ux.toFuture(profiles))
+                )/* Group Result */
+                .compose(nil -> Ux.toFuture(authority));
     }
 
     private static Future<JsonObject> onReport(final JsonObject result) {

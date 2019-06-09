@@ -22,6 +22,11 @@ public interface ScDetent {
                 () -> new ScDetentGroup(input));
     }
 
+    static ScDetent parent(final JsonObject input) {
+        return Fn.pool(Pool.DETENT_POOL, ScDetentParent.class.getName(),
+                () -> new ScDetentParent(input));
+    }
+
     JsonObject proc(List<ProfileRole> profiles);
 
     default Future<JsonObject> procAsync(final List<ProfileRole> profiles) {
@@ -34,15 +39,25 @@ public interface ScDetent {
     interface Group {
 
         static ScDetent horizon() {
-            return Fn.pool(Pool.DETENT_POOL, GpHorizon.class.getName(), GpHorizon::new);
+            return Fn.pool(Pool.DETENT_POOL, GdHorizon.class.getName(), GdHorizon::new);
         }
 
         static ScDetent critical() {
-            return Fn.pool(Pool.DETENT_POOL, GpCritical.class.getName(), GpCritical::new);
+            return Fn.pool(Pool.DETENT_POOL, GdCritical.class.getName(), GdCritical::new);
         }
 
         static ScDetent overlook() {
-            return Fn.pool(Pool.DETENT_POOL, GpOverlook.class.getName(), GpOverlook::new);
+            return Fn.pool(Pool.DETENT_POOL, GdOverlook.class.getName(), GdOverlook::new);
+        }
+
+        /*
+         * Group : Parent ( Exclude Current )
+         */
+        interface Parent {
+
+            static ScDetent horizon() {
+                return Fn.pool(Pool.DETENT_POOL, GpHorizon.class.getName(), GpHorizon::new);
+            }
         }
     }
 }

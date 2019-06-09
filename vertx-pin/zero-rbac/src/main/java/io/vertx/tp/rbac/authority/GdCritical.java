@@ -8,7 +8,7 @@ import java.util.List;
  * Group calculation
  * Only one group of high priority
  */
-public class GpCritical implements ScDetent {
+public class GdCritical implements ScDetent {
 
     @Override
     public JsonObject proc(final List<ProfileRole> profiles) {
