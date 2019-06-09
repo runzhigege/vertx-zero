@@ -24,8 +24,15 @@ public class ProfileType implements Serializable {
     static ProfileType HORIZON_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.HORIZON);
     static ProfileType HORIZON_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.HORIZON);
     /* Group : CRITICAL -> Role ( U, E, L, I ) */
-    static ProfileType CRITICAL_U = new ProfileType(SeekRole.UNION, SeekGroup.CRITICAL);
-
+    static ProfileType CRITICAL_UNION = new ProfileType(SeekRole.UNION, SeekGroup.CRITICAL);
+    static ProfileType CRITICAL_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.CRITICAL);
+    static ProfileType CRITICAL_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.CRITICAL);
+    static ProfileType CRITICAL_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.CRITICAL);
+    /* Group : OVERLOOK -> Role ( U, E, L, I ) */
+    static ProfileType OVERLOOK_UNION = new ProfileType(SeekRole.UNION, SeekGroup.OVERLOOK);
+    static ProfileType OVERLOOK_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.OVERLOOK);
+    static ProfileType OVERLOOK_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.OVERLOOK);
+    static ProfileType OVERLOOK_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.OVERLOOK);
 
     /* Private Variable */
     private final SeekRole role;
@@ -41,11 +48,11 @@ public class ProfileType implements Serializable {
     }
 
     public String getKey() {
-        /* Role / Group */
+        /* Group,User - Role */
         if (null == this.group) {
-            return this.role.name();
+            return "USER-" + this.role.name();
         } else {
-            return this.role.name() + "-" + this.group.name();
+            return this.group.name() + "-" + this.role.name();
         }
     }
 

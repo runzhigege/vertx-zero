@@ -34,11 +34,15 @@ public interface ScDetent {
     interface Group {
 
         static ScDetent horizon() {
-            return Fn.pool(Pool.DETENT_POOL, SgHorizon.class.getName(), SgHorizon::new);
+            return Fn.pool(Pool.DETENT_POOL, GpHorizon.class.getName(), GpHorizon::new);
         }
 
         static ScDetent critical() {
-            return Fn.pool(Pool.DETENT_POOL, SgCritical.class.getName(), SgCritical::new);
+            return Fn.pool(Pool.DETENT_POOL, GpCritical.class.getName(), GpCritical::new);
+        }
+
+        static ScDetent overlook() {
+            return Fn.pool(Pool.DETENT_POOL, GpOverlook.class.getName(), GpOverlook::new);
         }
     }
 }
