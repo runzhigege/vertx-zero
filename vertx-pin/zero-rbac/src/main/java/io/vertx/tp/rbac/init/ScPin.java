@@ -10,20 +10,14 @@ import io.vertx.up.log.Annal;
 public class ScPin {
 
     private static final Annal LOGGER = Annal.get(ScPin.class);
-    private static ScConfig INSTANCE = null;
 
     public static void init() {
         Sc.infoInit(LOGGER, "ScConfiguration...");
         ScConfiguration.init();
     }
 
-    /**
-     * Get configuration
-     */
+
     public static ScConfig getConfig() {
-        if (null == INSTANCE) {
-            INSTANCE = ScConfiguration.getConfig();
-        }
-        return INSTANCE;
+        return ScConfiguration.getConfig();
     }
 }

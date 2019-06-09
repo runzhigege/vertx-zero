@@ -22,24 +22,28 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RUserGroup implements IRUserGroup {
 
-    private static final long serialVersionUID = 302416198;
+    private static final long serialVersionUID = -1619459891;
 
-    private String groupId;
-    private String roleId;
+    private String  groupId;
+    private String  userId;
+    private Integer priority;
 
     public RUserGroup() {}
 
     public RUserGroup(RUserGroup value) {
         this.groupId = value.groupId;
-        this.roleId = value.roleId;
+        this.userId = value.userId;
+        this.priority = value.priority;
     }
 
     public RUserGroup(
-        String groupId,
-        String roleId
+        String  groupId,
+        String  userId,
+        Integer priority
     ) {
         this.groupId = groupId;
-        this.roleId = roleId;
+        this.userId = userId;
+        this.priority = priority;
     }
 
     @Override
@@ -54,13 +58,24 @@ public class RUserGroup implements IRUserGroup {
     }
 
     @Override
-    public String getRoleId() {
-        return this.roleId;
+    public String getUserId() {
+        return this.userId;
     }
 
     @Override
-    public RUserGroup setRoleId(String roleId) {
-        this.roleId = roleId;
+    public RUserGroup setUserId(String userId) {
+        this.userId = userId;
+        return this;
+    }
+
+    @Override
+    public Integer getPriority() {
+        return this.priority;
+    }
+
+    @Override
+    public RUserGroup setPriority(Integer priority) {
+        this.priority = priority;
         return this;
     }
 
@@ -69,7 +84,8 @@ public class RUserGroup implements IRUserGroup {
         StringBuilder sb = new StringBuilder("RUserGroup (");
 
         sb.append(groupId);
-        sb.append(", ").append(roleId);
+        sb.append(", ").append(userId);
+        sb.append(", ").append(priority);
 
         sb.append(")");
         return sb.toString();
@@ -85,7 +101,8 @@ public class RUserGroup implements IRUserGroup {
     @Override
     public void from(IRUserGroup from) {
         setGroupId(from.getGroupId());
-        setRoleId(from.getRoleId());
+        setUserId(from.getUserId());
+        setPriority(from.getPriority());
     }
 
     /**

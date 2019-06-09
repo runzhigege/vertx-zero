@@ -41,7 +41,7 @@ import org.jooq.impl.Internal;
 
 /**
  * A class modelling foreign key relationships and constraints of tables of 
- * the <code>UP_RBAC</code> schema.
+ * the <code>DB_RBAC</code> schema.
  */
 @Generated(
     value = {
@@ -111,7 +111,7 @@ public class Keys {
         public static final UniqueKey<RResourceMatrixRecord> KEY_R_RESOURCE_MATRIX_SIGMA_2 = Internal.createUniqueKey(RResourceMatrix.R_RESOURCE_MATRIX, "KEY_R_RESOURCE_MATRIX_SIGMA_2", RResourceMatrix.R_RESOURCE_MATRIX.SIGMA, RResourceMatrix.R_RESOURCE_MATRIX.RESOURCE_ID, RResourceMatrix.R_RESOURCE_MATRIX.ROLE_ID);
         public static final UniqueKey<RResourceMatrixRecord> KEY_R_RESOURCE_MATRIX_SIGMA = Internal.createUniqueKey(RResourceMatrix.R_RESOURCE_MATRIX, "KEY_R_RESOURCE_MATRIX_SIGMA", RResourceMatrix.R_RESOURCE_MATRIX.SIGMA, RResourceMatrix.R_RESOURCE_MATRIX.RESOURCE_ID, RResourceMatrix.R_RESOURCE_MATRIX.USER_ID);
         public static final UniqueKey<RRolePermRecord> KEY_R_ROLE_PERM_PRIMARY = Internal.createUniqueKey(RRolePerm.R_ROLE_PERM, "KEY_R_ROLE_PERM_PRIMARY", RRolePerm.R_ROLE_PERM.PERM_ID, RRolePerm.R_ROLE_PERM.ROLE_ID);
-        public static final UniqueKey<RUserGroupRecord> KEY_R_USER_GROUP_PRIMARY = Internal.createUniqueKey(RUserGroup.R_USER_GROUP, "KEY_R_USER_GROUP_PRIMARY", RUserGroup.R_USER_GROUP.GROUP_ID, RUserGroup.R_USER_GROUP.ROLE_ID);
+        public static final UniqueKey<RUserGroupRecord> KEY_R_USER_GROUP_PRIMARY = Internal.createUniqueKey(RUserGroup.R_USER_GROUP, "KEY_R_USER_GROUP_PRIMARY", RUserGroup.R_USER_GROUP.GROUP_ID, RUserGroup.R_USER_GROUP.USER_ID);
         public static final UniqueKey<RUserRoleRecord> KEY_R_USER_ROLE_PRIMARY = Internal.createUniqueKey(RUserRole.R_USER_ROLE, "KEY_R_USER_ROLE_PRIMARY", RUserRole.R_USER_ROLE.USER_ID, RUserRole.R_USER_ROLE.ROLE_ID);
         public static final UniqueKey<SActionRecord> KEY_S_ACTION_PRIMARY = Internal.createUniqueKey(SAction.S_ACTION, "KEY_S_ACTION_PRIMARY", SAction.S_ACTION.KEY);
         public static final UniqueKey<SActionRecord> KEY_S_ACTION_CODE = Internal.createUniqueKey(SAction.S_ACTION, "KEY_S_ACTION_CODE", SAction.S_ACTION.CODE, SAction.S_ACTION.SIGMA);

@@ -23,112 +23,112 @@ import javax.annotation.Generated;
 public interface IOUser extends Serializable {
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.KEY</code>. 「key」- OAuth用户ID
+     * Setter for <code>DB_RBAC.O_USER.KEY</code>. 「key」- OAuth用户ID
      */
     public IOUser setKey(String value);
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.KEY</code>. 「key」- OAuth用户ID
+     * Getter for <code>DB_RBAC.O_USER.KEY</code>. 「key」- OAuth用户ID
      */
     public String getKey();
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.REDIRECT_URI</code>. 「redirectUri」- 回调重定向地址
+     * Setter for <code>DB_RBAC.O_USER.REDIRECT_URI</code>. 「redirectUri」- 回调重定向地址
      */
     public IOUser setRedirectUri(String value);
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.REDIRECT_URI</code>. 「redirectUri」- 回调重定向地址
+     * Getter for <code>DB_RBAC.O_USER.REDIRECT_URI</code>. 「redirectUri」- 回调重定向地址
      */
     public String getRedirectUri();
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.CODE</code>. 「code」- 系统编号
+     * Setter for <code>DB_RBAC.O_USER.CODE</code>. 「code」- 系统编号
      */
     public IOUser setCode(String value);
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.CODE</code>. 「code」- 系统编号
+     * Getter for <code>DB_RBAC.O_USER.CODE</code>. 「code」- 系统编号
      */
     public String getCode();
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.CLIENT_SECRET</code>. 「clientSecret」- 客户端密钥
+     * Setter for <code>DB_RBAC.O_USER.CLIENT_SECRET</code>. 「clientSecret」- 客户端密钥
      */
     public IOUser setClientSecret(String value);
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.CLIENT_SECRET</code>. 「clientSecret」- 客户端密钥
+     * Getter for <code>DB_RBAC.O_USER.CLIENT_SECRET</code>. 「clientSecret」- 客户端密钥
      */
     public String getClientSecret();
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.CLIENT_ID</code>. 「clientId」- 客户端ID
+     * Setter for <code>DB_RBAC.O_USER.CLIENT_ID</code>. 「clientId」- 客户端ID
      */
     public IOUser setClientId(String value);
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.CLIENT_ID</code>. 「clientId」- 客户端ID
+     * Getter for <code>DB_RBAC.O_USER.CLIENT_ID</code>. 「clientId」- 客户端ID
      */
     public String getClientId();
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.GRANT_TYPE</code>. 「grantType」- 认证方式
+     * Setter for <code>DB_RBAC.O_USER.GRANT_TYPE</code>. 「grantType」- 认证方式
      */
     public IOUser setGrantType(String value);
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.GRANT_TYPE</code>. 「grantType」- 认证方式
+     * Getter for <code>DB_RBAC.O_USER.GRANT_TYPE</code>. 「grantType」- 认证方式
      */
     public String getGrantType();
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.SCOPE</code>. 「scope」- 对应名空间，以应用为中心
+     * Setter for <code>DB_RBAC.O_USER.SCOPE</code>. 「scope」- 对应名空间，以应用为中心
      */
     public IOUser setScope(String value);
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.SCOPE</code>. 「scope」- 对应名空间，以应用为中心
+     * Getter for <code>DB_RBAC.O_USER.SCOPE</code>. 「scope」- 对应名空间，以应用为中心
      */
     public String getScope();
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.STATE</code>. 「state」- 客户端状态
+     * Setter for <code>DB_RBAC.O_USER.STATE</code>. 「state」- 客户端状态
      */
     public IOUser setState(String value);
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.STATE</code>. 「state」- 客户端状态
+     * Getter for <code>DB_RBAC.O_USER.STATE</code>. 「state」- 客户端状态
      */
     public String getState();
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_RBAC.O_USER.LANGUAGE</code>. 「language」- 使用的语言
      */
     public IOUser setLanguage(String value);
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_RBAC.O_USER.LANGUAGE</code>. 「language」- 使用的语言
      */
     public String getLanguage();
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_RBAC.O_USER.ACTIVE</code>. 「active」- 是否启用
      */
     public IOUser setActive(Boolean value);
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_RBAC.O_USER.ACTIVE</code>. 「active」- 是否启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>UP_RBAC.O_USER.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_RBAC.O_USER.METADATA</code>. 「metadata」- 附加配置数据
      */
     public IOUser setMetadata(String value);
 
     /**
-     * Getter for <code>UP_RBAC.O_USER.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_RBAC.O_USER.METADATA</code>. 「metadata」- 附加配置数据
      */
     public String getMetadata();
 

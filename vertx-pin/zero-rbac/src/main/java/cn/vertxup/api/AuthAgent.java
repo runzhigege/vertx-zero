@@ -20,16 +20,45 @@ import javax.ws.rs.Path;
 @Path("/oauth")
 public interface AuthAgent {
 
+    /*
+     * /oauth/login
+     *
+     * Request:
+     * {
+     *      username: "lang.yu",
+     *      password: "XXX(MD5)"
+     * }
+     */
     @POST
     @Path("login")
     @Address(Addr.Auth.LOGIN)
     JsonObject login(@BodyParam @Codex JsonObject data);
 
+    /*
+     * /oauth/authorize
+     *
+     * Request:
+     * {
+     *      client_id: "xxx",
+     *      client_secret: "xxx",
+     *      response_type: "code",
+     *      scope: "xxx"
+     * }
+     */
     @POST
     @Path("authorize")
     @Address(Addr.Auth.AUTHORIZE)
     JsonObject authorize(@BodyParam @Codex JsonObject data);
 
+    /*
+     * /oauth/token
+     *
+     * Request:
+     * {
+     *      client_id: "xxx",
+     *      code: "temp"
+     * }
+     */
     @POST
     @Path("token")
     @Address(Addr.Auth.TOKEN)

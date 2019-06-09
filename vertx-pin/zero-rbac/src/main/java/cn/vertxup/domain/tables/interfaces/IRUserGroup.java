@@ -23,24 +23,34 @@ import javax.annotation.Generated;
 public interface IRUserGroup extends Serializable {
 
     /**
-     * Setter for <code>UP_RBAC.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
+     * Setter for <code>DB_RBAC.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     public IRUserGroup setGroupId(String value);
 
     /**
-     * Getter for <code>UP_RBAC.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
+     * Getter for <code>DB_RBAC.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     public String getGroupId();
 
     /**
-     * Setter for <code>UP_RBAC.R_USER_GROUP.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Setter for <code>DB_RBAC.R_USER_GROUP.USER_ID</code>. 「userId」- 关联用户ID
      */
-    public IRUserGroup setRoleId(String value);
+    public IRUserGroup setUserId(String value);
 
     /**
-     * Getter for <code>UP_RBAC.R_USER_GROUP.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Getter for <code>DB_RBAC.R_USER_GROUP.USER_ID</code>. 「userId」- 关联用户ID
      */
-    public String getRoleId();
+    public String getUserId();
+
+    /**
+     * Setter for <code>DB_RBAC.R_USER_GROUP.PRIORITY</code>. 「priority」- 组优先级
+     */
+    public IRUserGroup setPriority(Integer value);
+
+    /**
+     * Getter for <code>DB_RBAC.R_USER_GROUP.PRIORITY</code>. 「priority」- 组优先级
+     */
+    public Integer getPriority();
 
     // -------------------------------------------------------------------------
     // FROM and INTO
@@ -58,7 +68,8 @@ public interface IRUserGroup extends Serializable {
 
     default IRUserGroup fromJson(io.vertx.core.json.JsonObject json) {
         setGroupId(json.getString("GROUP_ID"));
-        setRoleId(json.getString("ROLE_ID"));
+        setUserId(json.getString("USER_ID"));
+        setPriority(json.getInteger("PRIORITY"));
         return this;
     }
 
@@ -66,7 +77,8 @@ public interface IRUserGroup extends Serializable {
     default io.vertx.core.json.JsonObject toJson() {
         io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
         json.put("GROUP_ID",getGroupId());
-        json.put("ROLE_ID",getRoleId());
+        json.put("USER_ID",getUserId());
+        json.put("PRIORITY",getPriority());
         return json;
     }
 

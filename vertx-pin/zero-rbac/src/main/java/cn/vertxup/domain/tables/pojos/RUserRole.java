@@ -22,24 +22,28 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RUserRole implements IRUserRole {
 
-    private static final long serialVersionUID = -1906694411;
+    private static final long serialVersionUID = 680358670;
 
-    private String userId;
-    private String roleId;
+    private String  userId;
+    private String  roleId;
+    private Integer priority;
 
     public RUserRole() {}
 
     public RUserRole(RUserRole value) {
         this.userId = value.userId;
         this.roleId = value.roleId;
+        this.priority = value.priority;
     }
 
     public RUserRole(
-        String userId,
-        String roleId
+        String  userId,
+        String  roleId,
+        Integer priority
     ) {
         this.userId = userId;
         this.roleId = roleId;
+        this.priority = priority;
     }
 
     @Override
@@ -65,11 +69,23 @@ public class RUserRole implements IRUserRole {
     }
 
     @Override
+    public Integer getPriority() {
+        return this.priority;
+    }
+
+    @Override
+    public RUserRole setPriority(Integer priority) {
+        this.priority = priority;
+        return this;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("RUserRole (");
 
         sb.append(userId);
         sb.append(", ").append(roleId);
+        sb.append(", ").append(priority);
 
         sb.append(")");
         return sb.toString();
@@ -86,6 +102,7 @@ public class RUserRole implements IRUserRole {
     public void from(IRUserRole from) {
         setUserId(from.getUserId());
         setRoleId(from.getRoleId());
+        setPriority(from.getPriority());
     }
 
     /**

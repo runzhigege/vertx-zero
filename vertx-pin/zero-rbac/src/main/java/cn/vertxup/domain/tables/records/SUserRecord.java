@@ -31,10 +31,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Record18<String, String, String, String, String, String, String, String, String, String, String, String, Boolean, String, LocalDateTime, String, LocalDateTime, String>, ISUser {
 
-    private static final long serialVersionUID = 969331022;
+    private static final long serialVersionUID = -1188922560;
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.KEY</code>. 「key」- 用户ID
+     * Setter for <code>DB_RBAC.S_USER.KEY</code>. 「key」- 用户ID
      */
     @Override
     public SUserRecord setKey(String value) {
@@ -43,7 +43,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.KEY</code>. 「key」- 用户ID
+     * Getter for <code>DB_RBAC.S_USER.KEY</code>. 「key」- 用户ID
      */
     @Override
     public String getKey() {
@@ -51,7 +51,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.USERNAME</code>. 「username」- 用户登录账号
+     * Setter for <code>DB_RBAC.S_USER.USERNAME</code>. 「username」- 用户登录账号
      */
     @Override
     public SUserRecord setUsername(String value) {
@@ -60,7 +60,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.USERNAME</code>. 「username」- 用户登录账号
+     * Getter for <code>DB_RBAC.S_USER.USERNAME</code>. 「username」- 用户登录账号
      */
     @Override
     public String getUsername() {
@@ -68,7 +68,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.REALNAME</code>. 「realname」- 用户真实姓名
+     * Setter for <code>DB_RBAC.S_USER.REALNAME</code>. 「realname」- 用户真实姓名
      */
     @Override
     public SUserRecord setRealname(String value) {
@@ -77,7 +77,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.REALNAME</code>. 「realname」- 用户真实姓名
+     * Getter for <code>DB_RBAC.S_USER.REALNAME</code>. 「realname」- 用户真实姓名
      */
     @Override
     public String getRealname() {
@@ -85,7 +85,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.ALIAS</code>. 「alias」- 用户昵称
+     * Setter for <code>DB_RBAC.S_USER.ALIAS</code>. 「alias」- 用户昵称
      */
     @Override
     public SUserRecord setAlias(String value) {
@@ -94,7 +94,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.ALIAS</code>. 「alias」- 用户昵称
+     * Getter for <code>DB_RBAC.S_USER.ALIAS</code>. 「alias」- 用户昵称
      */
     @Override
     public String getAlias() {
@@ -102,7 +102,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.MOBILE</code>. 「mobile」- 用户登录手机
+     * Setter for <code>DB_RBAC.S_USER.MOBILE</code>. 「mobile」- 用户登录手机
      */
     @Override
     public SUserRecord setMobile(String value) {
@@ -111,7 +111,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.MOBILE</code>. 「mobile」- 用户登录手机
+     * Getter for <code>DB_RBAC.S_USER.MOBILE</code>. 「mobile」- 用户登录手机
      */
     @Override
     public String getMobile() {
@@ -119,7 +119,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.EMAIL</code>. 「email」- 用户登录EMAIL地址
+     * Setter for <code>DB_RBAC.S_USER.EMAIL</code>. 「email」- 用户登录EMAIL地址
      */
     @Override
     public SUserRecord setEmail(String value) {
@@ -128,7 +128,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.EMAIL</code>. 「email」- 用户登录EMAIL地址
+     * Getter for <code>DB_RBAC.S_USER.EMAIL</code>. 「email」- 用户登录EMAIL地址
      */
     @Override
     public String getEmail() {
@@ -136,7 +136,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.PASSWORD</code>. 「password」- 用户登录密码
+     * Setter for <code>DB_RBAC.S_USER.PASSWORD</code>. 「password」- 用户登录密码
      */
     @Override
     public SUserRecord setPassword(String value) {
@@ -145,7 +145,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.PASSWORD</code>. 「password」- 用户登录密码
+     * Getter for <code>DB_RBAC.S_USER.PASSWORD</code>. 「password」- 用户登录密码
      */
     @Override
     public String getPassword() {
@@ -153,7 +153,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
+     * Setter for <code>DB_RBAC.S_USER.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
      */
     @Override
     public SUserRecord setModelId(String value) {
@@ -162,7 +162,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
+     * Getter for <code>DB_RBAC.S_USER.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
      */
     @Override
     public String getModelId() {
@@ -170,7 +170,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
+     * Setter for <code>DB_RBAC.S_USER.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
      */
     @Override
     public SUserRecord setModelKey(String value) {
@@ -179,7 +179,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
+     * Getter for <code>DB_RBAC.S_USER.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
      */
     @Override
     public String getModelKey() {
@@ -187,7 +187,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.CATEGORY</code>. 「category」- 用户分类
+     * Setter for <code>DB_RBAC.S_USER.CATEGORY</code>. 「category」- 用户分类
      */
     @Override
     public SUserRecord setCategory(String value) {
@@ -196,7 +196,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.CATEGORY</code>. 「category」- 用户分类
+     * Getter for <code>DB_RBAC.S_USER.CATEGORY</code>. 「category」- 用户分类
      */
     @Override
     public String getCategory() {
@@ -204,7 +204,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.SIGMA</code>. 「sigma」- 用户绑定的统一标识
+     * Setter for <code>DB_RBAC.S_USER.SIGMA</code>. 「sigma」- 用户绑定的统一标识
      */
     @Override
     public SUserRecord setSigma(String value) {
@@ -213,7 +213,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.SIGMA</code>. 「sigma」- 用户绑定的统一标识
+     * Getter for <code>DB_RBAC.S_USER.SIGMA</code>. 「sigma」- 用户绑定的统一标识
      */
     @Override
     public String getSigma() {
@@ -221,7 +221,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_RBAC.S_USER.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public SUserRecord setLanguage(String value) {
@@ -230,7 +230,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_RBAC.S_USER.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public String getLanguage() {
@@ -238,7 +238,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_RBAC.S_USER.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public SUserRecord setActive(Boolean value) {
@@ -247,7 +247,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_RBAC.S_USER.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public Boolean getActive() {
@@ -255,7 +255,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_RBAC.S_USER.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public SUserRecord setMetadata(String value) {
@@ -264,7 +264,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_RBAC.S_USER.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public String getMetadata() {
@@ -272,7 +272,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Setter for <code>DB_RBAC.S_USER.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
     public SUserRecord setCreatedAt(LocalDateTime value) {
@@ -281,7 +281,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Getter for <code>DB_RBAC.S_USER.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
     public LocalDateTime getCreatedAt() {
@@ -289,7 +289,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.CREATED_BY</code>. 「createdBy」- 创建人
+     * Setter for <code>DB_RBAC.S_USER.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
     public SUserRecord setCreatedBy(String value) {
@@ -298,7 +298,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.CREATED_BY</code>. 「createdBy」- 创建人
+     * Getter for <code>DB_RBAC.S_USER.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
     public String getCreatedBy() {
@@ -306,7 +306,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Setter for <code>DB_RBAC.S_USER.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
     public SUserRecord setUpdatedAt(LocalDateTime value) {
@@ -315,7 +315,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Getter for <code>DB_RBAC.S_USER.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
     public LocalDateTime getUpdatedAt() {
@@ -323,7 +323,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Setter for <code>UP_RBAC.S_USER.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Setter for <code>DB_RBAC.S_USER.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
     public SUserRecord setUpdatedBy(String value) {
@@ -332,7 +332,7 @@ public class SUserRecord extends UpdatableRecordImpl<SUserRecord> implements Rec
     }
 
     /**
-     * Getter for <code>UP_RBAC.S_USER.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Getter for <code>DB_RBAC.S_USER.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
     public String getUpdatedBy() {

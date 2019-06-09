@@ -4,9 +4,9 @@
 package cn.vertxup.domain.tables;
 
 
+import cn.vertxup.domain.DbRbac;
 import cn.vertxup.domain.Indexes;
 import cn.vertxup.domain.Keys;
-import cn.vertxup.domain.UpRbac;
 import cn.vertxup.domain.tables.records.OAccessTokenRecord;
 
 import java.time.LocalDateTime;
@@ -39,10 +39,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class OAccessToken extends TableImpl<OAccessTokenRecord> {
 
-    private static final long serialVersionUID = -771266265;
+    private static final long serialVersionUID = 932802551;
 
     /**
-     * The reference instance of <code>UP_RBAC.O_ACCESS_TOKEN</code>
+     * The reference instance of <code>DB_RBAC.O_ACCESS_TOKEN</code>
      */
     public static final OAccessToken O_ACCESS_TOKEN = new OAccessToken();
 
@@ -55,56 +55,56 @@ public class OAccessToken extends TableImpl<OAccessTokenRecord> {
     }
 
     /**
-     * The column <code>UP_RBAC.O_ACCESS_TOKEN.KEY</code>. 「key」- 令牌主键
+     * The column <code>DB_RBAC.O_ACCESS_TOKEN.KEY</code>. 「key」- 令牌主键
      */
     public final TableField<OAccessTokenRecord, String> KEY = createField("KEY", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「key」- 令牌主键");
 
     /**
-     * The column <code>UP_RBAC.O_ACCESS_TOKEN.TOKEN</code>. 「token」- 用户的Token信息
+     * The column <code>DB_RBAC.O_ACCESS_TOKEN.TOKEN</code>. 「token」- 用户的Token信息
      */
     public final TableField<OAccessTokenRecord, byte[]> TOKEN = createField("TOKEN", org.jooq.impl.SQLDataType.BLOB, this, "「token」- 用户的Token信息");
 
     /**
-     * The column <code>UP_RBAC.O_ACCESS_TOKEN.EXPIRED_TIME</code>. 「expiredTime」- 用户的Token过期时间
+     * The column <code>DB_RBAC.O_ACCESS_TOKEN.EXPIRED_TIME</code>. 「expiredTime」- 用户的Token过期时间
      */
     public final TableField<OAccessTokenRecord, LocalDateTime> EXPIRED_TIME = createField("EXPIRED_TIME", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「expiredTime」- 用户的Token过期时间");
 
     /**
-     * The column <code>UP_RBAC.O_ACCESS_TOKEN.REFRESH_TOKEN</code>. 「refreshToken」- 用户的刷新令牌
+     * The column <code>DB_RBAC.O_ACCESS_TOKEN.REFRESH_TOKEN</code>. 「refreshToken」- 用户的刷新令牌
      */
     public final TableField<OAccessTokenRecord, byte[]> REFRESH_TOKEN = createField("REFRESH_TOKEN", org.jooq.impl.SQLDataType.BLOB, this, "「refreshToken」- 用户的刷新令牌");
 
     /**
-     * The column <code>UP_RBAC.O_ACCESS_TOKEN.LANGUAGE</code>. 「language」- 使用的语言
+     * The column <code>DB_RBAC.O_ACCESS_TOKEN.LANGUAGE</code>. 「language」- 使用的语言
      */
     public final TableField<OAccessTokenRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
 
     /**
-     * The column <code>UP_RBAC.O_ACCESS_TOKEN.ACTIVE</code>. 「active」- 是否启用
+     * The column <code>DB_RBAC.O_ACCESS_TOKEN.ACTIVE</code>. 「active」- 是否启用
      */
     public final TableField<OAccessTokenRecord, Boolean> ACTIVE = createField("ACTIVE", org.jooq.impl.SQLDataType.BIT, this, "「active」- 是否启用");
 
     /**
-     * The column <code>UP_RBAC.O_ACCESS_TOKEN.METADATA</code>. 「metadata」- 附加配置数据
+     * The column <code>DB_RBAC.O_ACCESS_TOKEN.METADATA</code>. 「metadata」- 附加配置数据
      */
     public final TableField<OAccessTokenRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置数据");
 
     /**
-     * Create a <code>UP_RBAC.O_ACCESS_TOKEN</code> table reference
+     * Create a <code>DB_RBAC.O_ACCESS_TOKEN</code> table reference
      */
     public OAccessToken() {
         this(DSL.name("O_ACCESS_TOKEN"), null);
     }
 
     /**
-     * Create an aliased <code>UP_RBAC.O_ACCESS_TOKEN</code> table reference
+     * Create an aliased <code>DB_RBAC.O_ACCESS_TOKEN</code> table reference
      */
     public OAccessToken(String alias) {
         this(DSL.name(alias), O_ACCESS_TOKEN);
     }
 
     /**
-     * Create an aliased <code>UP_RBAC.O_ACCESS_TOKEN</code> table reference
+     * Create an aliased <code>DB_RBAC.O_ACCESS_TOKEN</code> table reference
      */
     public OAccessToken(Name alias) {
         this(alias, O_ACCESS_TOKEN);
@@ -123,7 +123,7 @@ public class OAccessToken extends TableImpl<OAccessTokenRecord> {
      */
     @Override
     public Schema getSchema() {
-        return UpRbac.UP_RBAC;
+        return DbRbac.DB_RBAC;
     }
 
     /**

@@ -3,7 +3,7 @@
     <jdbc>
         <driver>com.mysql.cj.jdbc.Driver</driver>
         <url>
-            <![CDATA[ jdbc:mysql://ox.engine.cn:3306/UP_ARES?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false ]]>
+            <![CDATA[ jdbc:mysql://ox.engine.cn:3306/DB_RBAC?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false ]]>
         </url>
         <username>root</username>
         <password>pl,okmijn123</password>
@@ -16,7 +16,7 @@
             <!--name for fake primary key-->
             <overridePrimaryKeys>override_primmary_key</overridePrimaryKeys>
             <name>org.jooq.util.mysql.MySQLDatabase</name>
-            <inputSchema>UP_ARES</inputSchema>
+            <inputSchema>DB_RBAC</inputSchema>
             <unsignedTypes>false</unsignedTypes>
             <forcedTypes>
                 <!-- Convert tinyint to boolean -->

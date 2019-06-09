@@ -29,10 +29,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RResourceMatrixRecord extends UpdatableRecordImpl<RResourceMatrixRecord> implements Record5<String, String, String, String, String>, IRResourceMatrix {
 
-    private static final long serialVersionUID = 1206985713;
+    private static final long serialVersionUID = 453393361;
 
     /**
-     * Setter for <code>UP_RBAC.R_RESOURCE_MATRIX.KEY</code>. 「key」- 限定记录ID
+     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.KEY</code>. 「key」- 限定记录ID
      */
     @Override
     public RResourceMatrixRecord setKey(String value) {
@@ -41,7 +41,7 @@ public class RResourceMatrixRecord extends UpdatableRecordImpl<RResourceMatrixRe
     }
 
     /**
-     * Getter for <code>UP_RBAC.R_RESOURCE_MATRIX.KEY</code>. 「key」- 限定记录ID
+     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.KEY</code>. 「key」- 限定记录ID
      */
     @Override
     public String getKey() {
@@ -49,7 +49,7 @@ public class RResourceMatrixRecord extends UpdatableRecordImpl<RResourceMatrixRe
     }
 
     /**
-     * Setter for <code>UP_RBAC.R_RESOURCE_MATRIX.ROLE_ID</code>. 「roleId」- 限定角色ID
+     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.ROLE_ID</code>. 「roleId」- 限定角色ID
      */
     @Override
     public RResourceMatrixRecord setRoleId(String value) {
@@ -58,7 +58,7 @@ public class RResourceMatrixRecord extends UpdatableRecordImpl<RResourceMatrixRe
     }
 
     /**
-     * Getter for <code>UP_RBAC.R_RESOURCE_MATRIX.ROLE_ID</code>. 「roleId」- 限定角色ID
+     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.ROLE_ID</code>. 「roleId」- 限定角色ID
      */
     @Override
     public String getRoleId() {
@@ -66,7 +66,7 @@ public class RResourceMatrixRecord extends UpdatableRecordImpl<RResourceMatrixRe
     }
 
     /**
-     * Setter for <code>UP_RBAC.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
+     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
      */
     @Override
     public RResourceMatrixRecord setUserId(String value) {
@@ -75,7 +75,7 @@ public class RResourceMatrixRecord extends UpdatableRecordImpl<RResourceMatrixRe
     }
 
     /**
-     * Getter for <code>UP_RBAC.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
+     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
      */
     @Override
     public String getUserId() {
@@ -83,7 +83,7 @@ public class RResourceMatrixRecord extends UpdatableRecordImpl<RResourceMatrixRe
     }
 
     /**
-     * Setter for <code>UP_RBAC.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
+     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
      */
     @Override
     public RResourceMatrixRecord setResourceId(String value) {
@@ -92,7 +92,7 @@ public class RResourceMatrixRecord extends UpdatableRecordImpl<RResourceMatrixRe
     }
 
     /**
-     * Getter for <code>UP_RBAC.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
+     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
      */
     @Override
     public String getResourceId() {
@@ -100,7 +100,7 @@ public class RResourceMatrixRecord extends UpdatableRecordImpl<RResourceMatrixRe
     }
 
     /**
-     * Setter for <code>UP_RBAC.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 所属APP的APPKEY
+     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 所属APP的APPKEY
      */
     @Override
     public RResourceMatrixRecord setSigma(String value) {
@@ -109,7 +109,7 @@ public class RResourceMatrixRecord extends UpdatableRecordImpl<RResourceMatrixRe
     }
 
     /**
-     * Getter for <code>UP_RBAC.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 所属APP的APPKEY
+     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 所属APP的APPKEY
      */
     @Override
     public String getSigma() {

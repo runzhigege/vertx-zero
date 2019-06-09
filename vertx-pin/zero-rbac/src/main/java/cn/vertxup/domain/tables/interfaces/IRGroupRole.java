@@ -23,24 +23,34 @@ import javax.annotation.Generated;
 public interface IRGroupRole extends Serializable {
 
     /**
-     * Setter for <code>UP_RBAC.R_GROUP_ROLE.GROUP_ID</code>. 「groupId」- 关联组ID
+     * Setter for <code>DB_RBAC.R_GROUP_ROLE.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     public IRGroupRole setGroupId(String value);
 
     /**
-     * Getter for <code>UP_RBAC.R_GROUP_ROLE.GROUP_ID</code>. 「groupId」- 关联组ID
+     * Getter for <code>DB_RBAC.R_GROUP_ROLE.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     public String getGroupId();
 
     /**
-     * Setter for <code>UP_RBAC.R_GROUP_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Setter for <code>DB_RBAC.R_GROUP_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     public IRGroupRole setRoleId(String value);
 
     /**
-     * Getter for <code>UP_RBAC.R_GROUP_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Getter for <code>DB_RBAC.R_GROUP_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     public String getRoleId();
+
+    /**
+     * Setter for <code>DB_RBAC.R_GROUP_ROLE.PRIORITY</code>. 「priority」- 角色优先级
+     */
+    public IRGroupRole setPriority(Integer value);
+
+    /**
+     * Getter for <code>DB_RBAC.R_GROUP_ROLE.PRIORITY</code>. 「priority」- 角色优先级
+     */
+    public Integer getPriority();
 
     // -------------------------------------------------------------------------
     // FROM and INTO
@@ -59,6 +69,7 @@ public interface IRGroupRole extends Serializable {
     default IRGroupRole fromJson(io.vertx.core.json.JsonObject json) {
         setGroupId(json.getString("GROUP_ID"));
         setRoleId(json.getString("ROLE_ID"));
+        setPriority(json.getInteger("PRIORITY"));
         return this;
     }
 
@@ -67,6 +78,7 @@ public interface IRGroupRole extends Serializable {
         io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
         json.put("GROUP_ID",getGroupId());
         json.put("ROLE_ID",getRoleId());
+        json.put("PRIORITY",getPriority());
         return json;
     }
 

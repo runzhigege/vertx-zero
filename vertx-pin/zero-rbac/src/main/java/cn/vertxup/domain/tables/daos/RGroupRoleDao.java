@@ -70,6 +70,13 @@ public class RGroupRoleDao extends DAOImpl<RGroupRoleRecord, cn.vertxup.domain.t
     }
 
     /**
+     * Fetch records that have <code>PRIORITY IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.RGroupRole> fetchByPriority(Integer... values) {
+        return fetch(RGroupRole.R_GROUP_ROLE.PRIORITY, values);
+    }
+
+    /**
      * Fetch records that have <code>GROUP_ID IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RGroupRole>> fetchByGroupIdAsync(List<String> values) {
@@ -81,6 +88,13 @@ public class RGroupRoleDao extends DAOImpl<RGroupRoleRecord, cn.vertxup.domain.t
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RGroupRole>> fetchByRoleIdAsync(List<String> values) {
         return fetchAsync(RGroupRole.R_GROUP_ROLE.ROLE_ID,values);
+    }
+
+    /**
+     * Fetch records that have <code>PRIORITY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RGroupRole>> fetchByPriorityAsync(List<Integer> values) {
+        return fetchAsync(RGroupRole.R_GROUP_ROLE.PRIORITY,values);
     }
 
     private io.vertx.core.Vertx vertx;

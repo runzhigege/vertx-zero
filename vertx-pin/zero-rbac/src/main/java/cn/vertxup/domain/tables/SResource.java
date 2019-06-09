@@ -4,9 +4,9 @@
 package cn.vertxup.domain.tables;
 
 
+import cn.vertxup.domain.DbRbac;
 import cn.vertxup.domain.Indexes;
 import cn.vertxup.domain.Keys;
-import cn.vertxup.domain.UpRbac;
 import cn.vertxup.domain.tables.records.SResourceRecord;
 
 import java.time.LocalDateTime;
@@ -39,10 +39,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SResource extends TableImpl<SResourceRecord> {
 
-    private static final long serialVersionUID = 1614446839;
+    private static final long serialVersionUID = 1509023664;
 
     /**
-     * The reference instance of <code>UP_RBAC.S_RESOURCE</code>
+     * The reference instance of <code>DB_RBAC.S_RESOURCE</code>
      */
     public static final SResource S_RESOURCE = new SResource();
 
@@ -55,131 +55,131 @@ public class SResource extends TableImpl<SResourceRecord> {
     }
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.KEY</code>. 「key」- 资源对应的ID
+     * The column <code>DB_RBAC.S_RESOURCE.KEY</code>. 「key」- 资源对应的ID
      */
     public final TableField<SResourceRecord, String> KEY = createField("KEY", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「key」- 资源对应的ID");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.CODE</code>. 「code」- 资源编号
+     * The column <code>DB_RBAC.S_RESOURCE.CODE</code>. 「code」- 资源编号
      */
     public final TableField<SResourceRecord, String> CODE = createField("CODE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「code」- 资源编号");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.NAME</code>. 「name」- 资源名称
+     * The column <code>DB_RBAC.S_RESOURCE.NAME</code>. 「name」- 资源名称
      */
     public final TableField<SResourceRecord, String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「name」- 资源名称");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.COMMENT</code>. 「comment」- 备注信息
+     * The column <code>DB_RBAC.S_RESOURCE.COMMENT</code>. 「comment」- 备注信息
      */
     public final TableField<SResourceRecord, String> COMMENT = createField("COMMENT", org.jooq.impl.SQLDataType.CLOB, this, "「comment」- 备注信息");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.PROJECTION</code>. 「projection」- 该资源的列定义
+     * The column <code>DB_RBAC.S_RESOURCE.PROJECTION</code>. 「projection」- 该资源的列定义
      */
     public final TableField<SResourceRecord, String> PROJECTION = createField("PROJECTION", org.jooq.impl.SQLDataType.CLOB, this, "「projection」- 该资源的列定义");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.QUERY</code>. 「query」- 该资源的行查询
+     * The column <code>DB_RBAC.S_RESOURCE.QUERY</code>. 「query」- 该资源的行查询
      */
     public final TableField<SResourceRecord, String> QUERY = createField("QUERY", org.jooq.impl.SQLDataType.CLOB, this, "「query」- 该资源的行查询");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.LEVEL</code>. 「level」- 资源需求级别
+     * The column <code>DB_RBAC.S_RESOURCE.LEVEL</code>. 「level」- 资源需求级别
      */
     public final TableField<SResourceRecord, Integer> LEVEL = createField("LEVEL", org.jooq.impl.SQLDataType.INTEGER, this, "「level」- 资源需求级别");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.EXPIRED</code>. 「expired」- 资源过期时间（动态授权）
+     * The column <code>DB_RBAC.S_RESOURCE.EXPIRED</code>. 「expired」- 资源过期时间（动态授权）
      */
     public final TableField<SResourceRecord, LocalDateTime> EXPIRED = createField("EXPIRED", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「expired」- 资源过期时间（动态授权）");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.TYPE</code>. 「type」- 该资源类型：USER / ROLE / UNIFORM
+     * The column <code>DB_RBAC.S_RESOURCE.TYPE</code>. 「type」- 该资源类型：USER / ROLE / UNIFORM
      */
     public final TableField<SResourceRecord, String> TYPE = createField("TYPE", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「type」- 该资源类型：USER / ROLE / UNIFORM");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.URI</code>. 「uri」- 资源地址
+     * The column <code>DB_RBAC.S_RESOURCE.URI</code>. 「uri」- 资源地址
      */
     public final TableField<SResourceRecord, String> URI = createField("URI", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「uri」- 资源地址");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.METHOD</code>. 「method」- 资源方法
+     * The column <code>DB_RBAC.S_RESOURCE.METHOD</code>. 「method」- 资源方法
      */
     public final TableField<SResourceRecord, String> METHOD = createField("METHOD", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「method」- 资源方法");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.MODEL_ID</code>. 「modelId」- 资源对应的模型identifier
+     * The column <code>DB_RBAC.S_RESOURCE.MODEL_ID</code>. 「modelId」- 资源对应的模型identifier
      */
     public final TableField<SResourceRecord, String> MODEL_ID = createField("MODEL_ID", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「modelId」- 资源对应的模型identifier");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.MODEL_KEY</code>. 「modelKey」- 资源对应的单条记录ID
+     * The column <code>DB_RBAC.S_RESOURCE.MODEL_KEY</code>. 「modelKey」- 资源对应的单条记录ID
      */
     public final TableField<SResourceRecord, String> MODEL_KEY = createField("MODEL_KEY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「modelKey」- 资源对应的单条记录ID");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.CATEGORY</code>. 「category」- 资源分类
+     * The column <code>DB_RBAC.S_RESOURCE.CATEGORY</code>. 「category」- 资源分类
      */
     public final TableField<SResourceRecord, String> CATEGORY = createField("CATEGORY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「category」- 资源分类");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.SIGMA</code>. 「sigma」- 角色绑定的统一标识
+     * The column <code>DB_RBAC.S_RESOURCE.SIGMA</code>. 「sigma」- 角色绑定的统一标识
      */
     public final TableField<SResourceRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「sigma」- 角色绑定的统一标识");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.LANGUAGE</code>. 「language」- 使用的语言
+     * The column <code>DB_RBAC.S_RESOURCE.LANGUAGE</code>. 「language」- 使用的语言
      */
     public final TableField<SResourceRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.ACTIVE</code>. 「active」- 是否启用
+     * The column <code>DB_RBAC.S_RESOURCE.ACTIVE</code>. 「active」- 是否启用
      */
     public final TableField<SResourceRecord, Boolean> ACTIVE = createField("ACTIVE", org.jooq.impl.SQLDataType.BIT, this, "「active」- 是否启用");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.METADATA</code>. 「metadata」- 附加配置数据
+     * The column <code>DB_RBAC.S_RESOURCE.METADATA</code>. 「metadata」- 附加配置数据
      */
     public final TableField<SResourceRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置数据");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.CREATED_AT</code>. 「createdAt」- 创建时间
+     * The column <code>DB_RBAC.S_RESOURCE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public final TableField<SResourceRecord, LocalDateTime> CREATED_AT = createField("CREATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「createdAt」- 创建时间");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.CREATED_BY</code>. 「createdBy」- 创建人
+     * The column <code>DB_RBAC.S_RESOURCE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public final TableField<SResourceRecord, String> CREATED_BY = createField("CREATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「createdBy」- 创建人");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * The column <code>DB_RBAC.S_RESOURCE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     public final TableField<SResourceRecord, LocalDateTime> UPDATED_AT = createField("UPDATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「updatedAt」- 更新时间");
 
     /**
-     * The column <code>UP_RBAC.S_RESOURCE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * The column <code>DB_RBAC.S_RESOURCE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public final TableField<SResourceRecord, String> UPDATED_BY = createField("UPDATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「updatedBy」- 更新人");
 
     /**
-     * Create a <code>UP_RBAC.S_RESOURCE</code> table reference
+     * Create a <code>DB_RBAC.S_RESOURCE</code> table reference
      */
     public SResource() {
         this(DSL.name("S_RESOURCE"), null);
     }
 
     /**
-     * Create an aliased <code>UP_RBAC.S_RESOURCE</code> table reference
+     * Create an aliased <code>DB_RBAC.S_RESOURCE</code> table reference
      */
     public SResource(String alias) {
         this(DSL.name(alias), S_RESOURCE);
     }
 
     /**
-     * Create an aliased <code>UP_RBAC.S_RESOURCE</code> table reference
+     * Create an aliased <code>DB_RBAC.S_RESOURCE</code> table reference
      */
     public SResource(Name alias) {
         this(alias, S_RESOURCE);
@@ -198,7 +198,7 @@ public class SResource extends TableImpl<SResourceRecord> {
      */
     @Override
     public Schema getSchema() {
-        return UpRbac.UP_RBAC;
+        return DbRbac.DB_RBAC;
     }
 
     /**
