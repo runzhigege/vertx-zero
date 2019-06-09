@@ -10,9 +10,10 @@ import java.util.function.Consumer;
 
 /*
  * Role Calculation
+ * -- No filter for ProfileRole calculation, all the calculation will apply to
+ * all input profiles.
  */
 class Assembler {
-
     static Consumer<JsonObject> union(final ProfileType type, final List<ProfileRole> profiles) {
         return bind(type, profiles, Ut::union);
     }

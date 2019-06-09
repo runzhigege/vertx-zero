@@ -20,8 +20,9 @@ public class ScDetentGroup implements ScDetent {
     public JsonObject proc(final List<ProfileRole> profiles) {
         final JsonObject group = new JsonObject();
         /* SeekGroup -> Horizon */
-        group.mergeIn(ScDetent.Group.horizon(group).proc(profiles));
-        
+        group.mergeIn(ScDetent.Group.horizon().proc(profiles));
+        /* SeekGroup -> Critical */
+
         return this.input.put(AuthKey.GROUP_AUTHORITIES, group);
     }
 }

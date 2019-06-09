@@ -12,17 +12,20 @@ import java.util.Objects;
  * 2) SeekGroup: group seeking
  */
 public class ProfileType implements Serializable {
-    /* User Profile */
+    /* Role Profile */
     static ProfileType UNION = new ProfileType(SeekRole.UNION);          // U
     static ProfileType EAGER = new ProfileType(SeekRole.EAGER);          // E
     static ProfileType LAZY = new ProfileType(SeekRole.LAZY);            // L
     static ProfileType INTERSECT = new ProfileType(SeekRole.INTERSECT);  // I
 
-    /* Group : HORIZON ->  User ( U, E, L, I ) */
-    static ProfileType HORIZON_U = new ProfileType(SeekRole.UNION, SeekGroup.HORIZON);
-    static ProfileType HORIZON_E = new ProfileType(SeekRole.EAGER, SeekGroup.HORIZON);
-    static ProfileType HORIZON_L = new ProfileType(SeekRole.LAZY, SeekGroup.HORIZON);
-    static ProfileType HORIZON_I = new ProfileType(SeekRole.INTERSECT, SeekGroup.HORIZON);
+    /* Group : HORIZON ->  Role ( U, E, L, I ) */
+    static ProfileType HORIZON_UNION = new ProfileType(SeekRole.UNION, SeekGroup.HORIZON);
+    static ProfileType HORIZON_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.HORIZON);
+    static ProfileType HORIZON_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.HORIZON);
+    static ProfileType HORIZON_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.HORIZON);
+    /* Group : CRITICAL -> Role ( U, E, L, I ) */
+    static ProfileType CRITICAL_U = new ProfileType(SeekRole.UNION, SeekGroup.CRITICAL);
+
 
     /* Private Variable */
     private final SeekRole role;
