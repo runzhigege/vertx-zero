@@ -6,7 +6,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.refine.Sc;
-import io.vertx.up.log.Annal;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,8 +16,6 @@ import java.util.Objects;
  * Single middle profile for group
  */
 public class ProfileGroup implements Serializable {
-
-    private static final Annal LOGGER = Annal.get(ProfileGroup.class);
 
     private transient final String groupId;
     private transient final Integer priority;

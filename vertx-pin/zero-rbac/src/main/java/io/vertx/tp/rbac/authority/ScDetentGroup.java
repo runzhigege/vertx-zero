@@ -1,7 +1,6 @@
 package io.vertx.tp.rbac.authority;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.rbac.cv.AuthKey;
 
 import java.util.List;
 
@@ -26,6 +25,6 @@ public class ScDetentGroup implements ScDetent {
         /* SeekGroup -> Overlook */
         group.mergeIn(ScDetent.Group.overlook().proc(profiles));
 
-        return this.input.put(AuthKey.GROUP_AUTHORITIES, group);
+        return this.input.mergeIn(group);
     }
 }

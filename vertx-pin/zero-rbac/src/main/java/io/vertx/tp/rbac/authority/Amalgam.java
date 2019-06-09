@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 /*
  * Role Calculation
  * -- The calculation will based on group parameter.
- *
  */
 class Amalgam {
+
     /*
      * Search eager of each group, each group should has only one,
      * Searched ProfileRole size = group size

@@ -8,7 +8,7 @@ import java.util.List;
  * Group calculation
  * Only one group of low priority
  */
-public class GpOverlook implements ScDetent {
+public class GdOverlook implements ScDetent {
 
     @Override
     public JsonObject proc(final List<ProfileRole> profiles) {

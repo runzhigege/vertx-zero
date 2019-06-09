@@ -45,4 +45,23 @@ public enum SeekGroup {
      * LAZY,   NO TREE
      */
     OVERLOOK,
+    // ---------------- Parent Group Only
+    /*
+     * Parent Mode ( Pickup Parent Group )
+     *
+     * ->     G10, G20, G21
+     */
+    PARENT_HORIZON,
+    /*
+     * Parent Mode ( Priority Selection High )
+     *
+     * ->     G10
+     */
+    PARENT_CRITICAL,
+    /*
+     * Parent Mode ( Priority Selection Low )
+     *
+     * ->     G21
+     */
+    PARENT_OVERLOOK,
 }

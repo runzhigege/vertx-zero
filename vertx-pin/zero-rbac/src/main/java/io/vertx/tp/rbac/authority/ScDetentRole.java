@@ -1,7 +1,6 @@
 package io.vertx.tp.rbac.authority;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.rbac.cv.AuthKey;
 
 import java.util.List;
 
@@ -41,6 +40,6 @@ class ScDetentRole implements ScDetent {
          * */
         Assembler.lazy(ProfileType.LAZY, profile).accept(data);
 
-        return this.input.put(AuthKey.USER_AUTHORITIES, data);
+        return this.input.mergeIn(data);
     }
 }
