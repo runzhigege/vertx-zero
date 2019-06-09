@@ -79,6 +79,7 @@ public class ProfileGroup implements Serializable {
                 });
     }
 
+
     @Override
     public String toString() {
         return "ProfileGroup{" +

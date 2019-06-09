@@ -22,6 +22,9 @@ public class ScDetentGroup implements ScDetent {
         /* SeekGroup -> Horizon */
         group.mergeIn(ScDetent.Group.horizon().proc(profiles));
         /* SeekGroup -> Critical */
+        group.mergeIn(ScDetent.Group.critical().proc(profiles));
+        /* SeekGroup -> Overlook */
+        group.mergeIn(ScDetent.Group.overlook().proc(profiles));
 
         return this.input.put(AuthKey.GROUP_AUTHORITIES, group);
     }
