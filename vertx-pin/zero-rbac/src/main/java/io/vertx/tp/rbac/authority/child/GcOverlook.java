@@ -7,11 +7,26 @@ import java.util.List;
 
 public class GcOverlook implements ScDetent {
 
+    private transient final List<ProfileGroup> original;
+
+    public GcOverlook(final List<ProfileGroup> original) {
+        this.original = original;
+    }
+
+    private List<ProfileRole> before(final List<ProfileRole> profiles) {
+        /* Find eager group in Critical */
+        final ProfileGroup lazy = Align.lazy(this.original);
+        /* Filter by group key */
+        final List<ProfileRole> source = Amalgam.children(profiles, lazy);
+        /* Then filter by priority */
+        return Amalgam.lazy(source);
+    }
+
     @Override
     public JsonObject proc(final List<ProfileRole> profiles) {
         /* Group Search */
         final JsonObject group = new JsonObject();
-        final List<ProfileRole> source = Amalgam.lazy(profiles);
+        final List<ProfileRole> source = this.before(profiles);
         /*
          * group = CHILD_OVERLOOK, role = UNION
          * No priority of ( group, role )
