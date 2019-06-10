@@ -17,6 +17,7 @@ public class GdCritical implements ScDetent {
         /* Group Search */
         final JsonObject group = new JsonObject();
         final List<ProfileRole> source = Amalgam.eager(profiles);
+        Amalgam.logGroup(this.getClass(), source);
         /*
          * group = CRITICAL, role = UNION
          * High Priority of Group, then role union

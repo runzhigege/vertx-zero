@@ -10,7 +10,6 @@ import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.init.ScPin;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.aiki.Ux;
-import io.vertx.up.log.Annal;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -25,8 +24,6 @@ import java.util.stream.Collectors;
  * 2) permissions
  */
 public class ProfileRole implements Serializable {
-
-    private static final Annal LOGGER = Annal.get(ProfileRole.class);
 
     private static final ScConfig CONFIG = ScPin.getConfig();
     private transient final String roleId;
@@ -55,7 +52,7 @@ public class ProfileRole implements Serializable {
     public ProfileRole init() {
         /* Fetch permission ( Without Cache in Sync mode ) */
         final JsonArray permissions = this.fetchAuthorities();
-        Sc.infoAuth(LOGGER, "Extract Permissions: {0}", permissions.encode());
+        // Sc.infoAuth(LOGGER, "Extract Permissions: {0}", permissions.encode());
         return this;
     }
 

@@ -16,6 +16,7 @@ public class GdOverlook implements ScDetent {
         /* Group Search */
         final JsonObject group = new JsonObject();
         final List<ProfileRole> source = Amalgam.lazy(profiles);
+        Amalgam.logGroup(this.getClass(), source);
         /*
          * group = OVERLOOK, role = UNION
          * Low Priority of Group, then role union

@@ -2,6 +2,8 @@ package io.vertx.tp.rbac.authority.parent;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.authority.*;
+import io.vertx.tp.rbac.refine.Sc;
+import io.vertx.up.log.Annal;
 
 import java.util.List;
 
@@ -11,6 +13,7 @@ import java.util.List;
  */
 public class GpCritical implements ScDetent {
 
+    private static final Annal LOGGER = Annal.get(GpCritical.class);
     private transient final List<ProfileGroup> original;
 
     public GpCritical(final List<ProfileGroup> original) {
@@ -20,6 +23,8 @@ public class GpCritical implements ScDetent {
     private List<ProfileRole> before(final List<ProfileRole> profiles) {
         /* Find eager group in Critical */
         final ProfileGroup eager = Align.eager(this.original);
+        Sc.infoAuth(LOGGER, "( Parent Mode ) Critical pickup: {0}, reference: {1}",
+                eager.getKey(), eager.getReference());
         /* Filter by group key */
         final List<ProfileRole> source = Amalgam.parent(profiles, eager);
         /* Then filter by priority */
@@ -31,6 +36,7 @@ public class GpCritical implements ScDetent {
         /* Group Search */
         final JsonObject group = new JsonObject();
         final List<ProfileRole> source = this.before(profiles);
+        Amalgam.logGroup(this.getClass(), source);
         /*
          * group = PARENT_CRITICAL, role = UNION
          * No priority of ( group, role )

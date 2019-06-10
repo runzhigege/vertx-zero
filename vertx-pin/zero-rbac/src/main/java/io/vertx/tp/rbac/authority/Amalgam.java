@@ -1,5 +1,9 @@
 package io.vertx.tp.rbac.authority;
 
+import io.vertx.tp.rbac.refine.Sc;
+import io.vertx.up.log.Annal;
+import io.zero.epic.Ut;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -8,6 +12,13 @@ import java.util.stream.Collectors;
  * -- The calculation will based on group parameter.
  */
 public class Amalgam {
+
+    public static void logGroup(final Class<?> clazz,
+                                final List<ProfileRole> roles) {
+        final Annal LOGGER = Annal.get(clazz);
+        Sc.infoAuth(LOGGER, "Group Selected: {0}, Size: {1}",
+                Ut.fromJoin(getGroups(roles)), String.valueOf(roles.size()));
+    }
 
     public static List<ProfileRole> parent(final List<ProfileRole> roles,
                                            final ProfileGroup group) {

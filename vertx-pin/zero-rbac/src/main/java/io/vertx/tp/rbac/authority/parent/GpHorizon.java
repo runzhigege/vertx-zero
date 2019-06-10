@@ -15,6 +15,7 @@ public class GpHorizon implements ScDetent {
     public JsonObject proc(final List<ProfileRole> profiles) {
         /* Group Search */
         final JsonObject group = new JsonObject();
+        Amalgam.logGroup(this.getClass(), profiles);
         /*
          * group = PARENT_HORIZON, role = UNION
          * No priority of ( group, role )

@@ -2,10 +2,13 @@ package io.vertx.tp.rbac.authority.child;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.authority.*;
+import io.vertx.tp.rbac.refine.Sc;
+import io.vertx.up.log.Annal;
 
 import java.util.List;
 
 public class GcOverlook implements ScDetent {
+    private static final Annal LOGGER = Annal.get(GcOverlook.class);
 
     private transient final List<ProfileGroup> original;
 
@@ -16,6 +19,8 @@ public class GcOverlook implements ScDetent {
     private List<ProfileRole> before(final List<ProfileRole> profiles) {
         /* Find eager group in Critical */
         final ProfileGroup lazy = Align.lazy(this.original);
+        Sc.infoAuth(LOGGER, "( Child Mode ) Overlook pickup: {0}, reference: {1}",
+                lazy.getKey(), lazy.getReference());
         /* Filter by group key */
         final List<ProfileRole> source = Amalgam.children(profiles, lazy);
         /* Then filter by priority */
@@ -27,6 +32,7 @@ public class GcOverlook implements ScDetent {
         /* Group Search */
         final JsonObject group = new JsonObject();
         final List<ProfileRole> source = this.before(profiles);
+        Amalgam.logGroup(this.getClass(), source);
         /*
          * group = CHILD_OVERLOOK, role = UNION
          * No priority of ( group, role )
