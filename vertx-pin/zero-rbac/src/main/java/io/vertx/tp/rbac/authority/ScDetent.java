@@ -2,6 +2,15 @@ package io.vertx.tp.rbac.authority;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.rbac.authority.detent.ScDetentGroup;
+import io.vertx.tp.rbac.authority.detent.ScDetentParent;
+import io.vertx.tp.rbac.authority.detent.ScDetentRole;
+import io.vertx.tp.rbac.authority.direct.GdCritical;
+import io.vertx.tp.rbac.authority.direct.GdHorizon;
+import io.vertx.tp.rbac.authority.direct.GdOverlook;
+import io.vertx.tp.rbac.authority.parent.GpCritical;
+import io.vertx.tp.rbac.authority.parent.GpHorizon;
+import io.vertx.tp.rbac.authority.parent.GpOverlook;
 import io.vertx.up.aiki.Ux;
 import io.zero.epic.fn.Fn;
 
@@ -57,6 +66,14 @@ public interface ScDetent {
 
             static ScDetent horizon() {
                 return Fn.pool(Pool.DETENT_POOL, GpHorizon.class.getName(), GpHorizon::new);
+            }
+
+            static ScDetent critical() {
+                return Fn.pool(Pool.DETENT_POOL, GpCritical.class.getName(), GpCritical::new);
+            }
+
+            static ScDetent overlook() {
+                return Fn.pool(Pool.DETENT_POOL, GpOverlook.class.getName(), GpOverlook::new);
             }
         }
     }

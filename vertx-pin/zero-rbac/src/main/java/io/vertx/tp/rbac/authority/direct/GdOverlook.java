@@ -1,6 +1,7 @@
-package io.vertx.tp.rbac.authority;
+package io.vertx.tp.rbac.authority.direct;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.rbac.authority.*;
 
 import java.util.List;
 

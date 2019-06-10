@@ -10,13 +10,13 @@ import java.util.stream.Collectors;
  * Role Calculation
  * -- The calculation will based on group parameter.
  */
-class Amalgam {
+public class Amalgam {
 
     /*
      * Search eager of each group, each group should has only one,
      * Searched ProfileRole size = group size
      */
-    static List<ProfileRole> eagerEach(final List<ProfileRole> roles) {
+    public static List<ProfileRole> eagerEach(final List<ProfileRole> roles) {
         /* Find groups */
         return getGroups(roles).stream().map(group -> roles.stream()
                 .filter(role -> group.equals(role.getGroup().getKey()))
@@ -27,7 +27,7 @@ class Amalgam {
                 .collect(Collectors.toList());
     }
 
-    static List<ProfileRole> lazyEach(final List<ProfileRole> roles) {
+    public static List<ProfileRole> lazyEach(final List<ProfileRole> roles) {
         return getGroups(roles).stream().map(group -> roles.stream()
                 .filter(role -> group.equals(role.getGroup().getKey()))
                 /* Pickup low priority of group */
@@ -37,14 +37,14 @@ class Amalgam {
                 .collect(Collectors.toList());
     }
 
-    static List<ProfileRole> eager(final List<ProfileRole> roles) {
+    public static List<ProfileRole> eager(final List<ProfileRole> roles) {
         final Integer groupPriority = findGroupPriority(roles, true);
         return roles.stream()
                 .filter(role -> groupPriority.equals(role.getGroup().getPriority()))
                 .collect(Collectors.toList());
     }
 
-    static List<ProfileRole> lazy(final List<ProfileRole> roles) {
+    public static List<ProfileRole> lazy(final List<ProfileRole> roles) {
         final Integer groupPriority = findGroupPriority(roles, false);
         return roles.stream()
                 .filter(role -> groupPriority.equals(role.getGroup().getPriority()))

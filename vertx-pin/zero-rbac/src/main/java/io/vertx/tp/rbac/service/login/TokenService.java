@@ -65,7 +65,7 @@ public class TokenService implements TokenStub {
         final List<Future<JsonObject>> futures = new ArrayList<>();
         groups.stream().filter(Objects::nonNull)
                 .map(item -> (JsonObject) item)
-                .forEach(item -> futures.add(this.groupStub.fetchRoleIds(item.getString(AuthKey.F_GROUP_ID))
+                .forEach(item -> futures.add(this.groupStub.fetchRoleIdsAsync(item.getString(AuthKey.F_GROUP_ID))
                         .compose(roles -> Uson.create(item).append("role", roles).toFuture())
                 ));
         return Ux.thenComposite(futures);

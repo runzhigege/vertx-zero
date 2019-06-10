@@ -13,20 +13,20 @@ import java.util.function.Consumer;
  * -- No filter for ProfileRole calculation, all the calculation will apply to
  * all input profiles.
  */
-class Assembler {
-    static Consumer<JsonObject> union(final ProfileType type, final List<ProfileRole> profiles) {
+public class Assembler {
+    public static Consumer<JsonObject> union(final ProfileType type, final List<ProfileRole> profiles) {
         return bind(type, profiles, Ut::union);
     }
 
-    static Consumer<JsonObject> intersect(final ProfileType type, final List<ProfileRole> profiles) {
+    public static Consumer<JsonObject> intersect(final ProfileType type, final List<ProfileRole> profiles) {
         return bind(type, profiles, Ut::intersect);
     }
 
-    static Consumer<JsonObject> eager(final ProfileType type, final List<ProfileRole> profiles) {
+    public static Consumer<JsonObject> eager(final ProfileType type, final List<ProfileRole> profiles) {
         return bind(type, profiles, true);
     }
 
-    static Consumer<JsonObject> lazy(final ProfileType type, final List<ProfileRole> profiles) {
+    public static Consumer<JsonObject> lazy(final ProfileType type, final List<ProfileRole> profiles) {
         return bind(type, profiles, false);
     }
 

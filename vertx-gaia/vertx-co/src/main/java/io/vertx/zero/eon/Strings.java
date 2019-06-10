@@ -9,6 +9,8 @@ public interface Strings {
 
     String DASH = "-";
 
+    String UNDERLINE = "_";
+
     String DOT = ".";
 
     String SLASH = "/";

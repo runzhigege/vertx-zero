@@ -96,7 +96,7 @@ public class ScSession {
         roles.stream().filter(Objects::nonNull)
                 .map(item -> (JsonObject) item)
                 .map(ProfileRole::new)
-                .map(ProfileRole::init)
+                .map(ProfileRole::initAsync)
                 .forEach(futures::add);
         return CompositeFuture.all(futures)
                 /* Composite Result */
@@ -112,7 +112,7 @@ public class ScSession {
         groups.stream().filter(Objects::nonNull)
                 .map(item -> (JsonObject) item)
                 .map(ProfileGroup::new)
-                .map(ProfileGroup::init)
+                .map(ProfileGroup::initAsync)
                 .forEach(futures::add);
         return CompositeFuture.all(futures)
                 /* Composite Result */

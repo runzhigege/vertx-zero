@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /*
  * Single middle profile for group
@@ -33,14 +34,18 @@ public class ProfileGroup implements Serializable {
                 ? new JsonArray() : data.getJsonArray("role");
     }
 
-    public Future<ProfileGroup> init() {
+    public Future<ProfileGroup> initAsync() {
         /* No determine */
-        return this.fetchProfiles().compose(profiles -> {
+        return this.fetchProfilesAsync().compose(profiles -> {
             /* Clear and add */
-            this.roles.clear();
-            this.roles.addAll(profiles);
+            this.setRoles(profiles);
             return Future.succeededFuture(this);
         });
+    }
+
+    public ProfileGroup init() {
+        this.setRoles(this.fetchProfiles());
+        return this;
     }
 
     public Integer getPriority() {
@@ -55,16 +60,21 @@ public class ProfileGroup implements Serializable {
         return this.roles;
     }
 
+    private void setRoles(final List<ProfileRole> profiles) {
+        this.roles.clear();
+        this.roles.addAll(profiles);
+    }
+
     /*
-     * Extract the latest relations: init role for each group profile
+     * Extract the latest relations: initAsync role for each group profile
      */
     @SuppressWarnings("all")
-    private Future<List<ProfileRole>> fetchProfiles() {
+    private Future<List<ProfileRole>> fetchProfilesAsync() {
         final List futures = new ArrayList();
         this.role.stream().filter(Objects::nonNull)
                 .map(item -> (JsonObject) item)
                 .map(ProfileRole::new)
-                .map(ProfileRole::init)
+                .map(ProfileRole::initAsync)
                 .forEach(futures::add);
         return CompositeFuture.all(futures)
                 /* Composite Result */
@@ -74,6 +84,15 @@ public class ProfileGroup implements Serializable {
                     profiles.forEach(profile -> profile.setGroup(this));
                     return Future.succeededFuture(profiles);
                 });
+    }
+
+    private List<ProfileRole> fetchProfiles() {
+        return this.role.stream().filter(Objects::nonNull)
+                .map(item -> (JsonObject) item)
+                .map(ProfileRole::new)
+                .map(ProfileRole::init)
+                .map(role -> role.setGroup(this))
+                .collect(Collectors.toList());
     }
 
 
