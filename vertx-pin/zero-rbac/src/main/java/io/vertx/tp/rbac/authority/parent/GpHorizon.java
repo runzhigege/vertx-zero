@@ -1,50 +1,51 @@
-package io.vertx.tp.rbac.authority;
+package io.vertx.tp.rbac.authority.parent;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.rbac.authority.*;
 
 import java.util.List;
 
 /*
  * Group calculation
- * Ignore priority of group
+ * Parent
  */
-public class GdHorizon implements ScDetent {
+public class GpHorizon implements ScDetent {
 
     @Override
     public JsonObject proc(final List<ProfileRole> profiles) {
         /* Group Search */
         final JsonObject group = new JsonObject();
         /*
-         * group = HORIZON, role = UNION
+         * group = PARENT_HORIZON, role = UNION
          * No priority of ( group, role )
          *
          * !!!Finished
-         * */
-        Assembler.union(ProfileType.HORIZON_UNION, profiles).accept(group);
+         */
+        Assembler.union(ProfileType.PARENT_HORIZON_UNION, profiles).accept(group);
         /*
-         * group = HORIZON, role = EAGER
+         * group = PARENT_HORIZON, role = EAGER
          * No priority of ( group ),  pickup the highest of each group out
          * ( Pick Up the role that group has only one )
          *
          * !!!Finished
          */
-        Assembler.union(ProfileType.HORIZON_EAGER, Amalgam.eagerEach(profiles)).accept(group);
+        Assembler.union(ProfileType.PARENT_HORIZON_EAGER, Amalgam.eagerEach(profiles)).accept(group);
         /*
-         * group = HORIZON, role = LAZY
+         * group = PARENT_HORIZON, role = LAZY
          * No priority of ( group ), pickup the lowest of each group out
          * ( Exclude the role that group has only one )
          *
          * !!!Finished
          */
-        Assembler.union(ProfileType.HORIZON_LAZY, Amalgam.lazyEach(profiles)).accept(group);
+        Assembler.union(ProfileType.PARENT_HORIZON_LAZY, Amalgam.lazyEach(profiles)).accept(group);
         /*
-         * group = HORIZON, role = INTERSECT
+         * group = PARENT_HORIZON, role = INTERSECT
          * No priority of ( group ), pickup all the role's intersect
          * All group must contain the role or it's no access.
          *
          * !!!Finished
          */
-        Assembler.intersect(ProfileType.HORIZON_INTERSECT, profiles).accept(group);
+        Assembler.intersect(ProfileType.PARENT_HORIZON_INTERSECT, profiles).accept(group);
         return group;
     }
 }

@@ -42,14 +42,21 @@ public class ProfileRole implements Serializable {
         this.priority = data.getInteger(AuthKey.PRIORITY);
     }
 
-    public Future<ProfileRole> init() {
+    public Future<ProfileRole> initAsync() {
         /* Fetch permission */
         final boolean isSecondary = CONFIG.getSupportSecondary();
         return isSecondary ?
                 /* Enabled secondary permission */
-                this.fetchAuthoritiesWithCache().compose(ids -> Future.succeededFuture(this)) :
+                this.fetchAuthoritiesAsyncWithCache().compose(ids -> Future.succeededFuture(this)) :
                 /* No secondary */
-                this.fetchAuthorities().compose(ids -> Future.succeededFuture(this));
+                this.fetchAuthoritiesAsync().compose(ids -> Future.succeededFuture(this));
+    }
+
+    public ProfileRole init() {
+        /* Fetch permission ( Without Cache in Sync mode ) */
+        final JsonArray permissions = this.fetchAuthorities();
+        Sc.infoAuth(LOGGER, "Extract Permissions: {0}", permissions.encode());
+        return this;
     }
 
     public Integer getPriority() {
@@ -71,8 +78,9 @@ public class ProfileRole implements Serializable {
         return this.reference;
     }
 
-    public void setGroup(final ProfileGroup reference) {
+    public ProfileRole setGroup(final ProfileGroup reference) {
         this.reference = reference;
+        return this;
     }
 
     /*
@@ -81,10 +89,10 @@ public class ProfileRole implements Serializable {
      * 2.1) If null: Fetch authorities from database
      * 2.2) If not null: Return authorities directly ( pick up from cache )
      */
-    private Future<JsonArray> fetchAuthoritiesWithCache() {
+    private Future<JsonArray> fetchAuthoritiesAsyncWithCache() {
         return Sc.<JsonArray>cachePermission(this.roleId).compose(array -> {
             if (Objects.isNull(array)) {
-                return this.fetchAuthorities()
+                return this.fetchAuthoritiesAsync()
                         .compose(data -> Sc.cachePermission(this.roleId, data));
             } else {
                 /* Authorities fill from cache ( Sync the authorities ) */
@@ -100,12 +108,17 @@ public class ProfileRole implements Serializable {
      * 1) Fetch data from database with roleId = this.roleId
      * 2) Extract data to JsonArray ( permission Ids )
      */
-    private Future<JsonArray> fetchAuthorities() {
+    private Future<JsonArray> fetchAuthoritiesAsync() {
         return Ux.Jooq.on(RRolePermDao.class)
                 /* Fetch permission ids based on roleId */
                 .<RRolePerm>fetchAsync(AuthKey.F_ROLE_ID, this.roleId)
                 /* Refresh authorities in current profile */
-                .compose(this::refreshAuthorities);
+                .compose(this::refreshAuthoritiesAsync);
+    }
+
+    private JsonArray fetchAuthorities() {
+        return this.refreshAuthorities(Ux.Jooq.on(RRolePermDao.class)
+                .fetch(AuthKey.F_ROLE_ID, this.roleId));
     }
 
     /*
@@ -114,14 +127,18 @@ public class ProfileRole implements Serializable {
      * 2) Refresh current profile authorities by input permissions
      * 3) Returned ( JsonArray )
      */
-    private Future<JsonArray> refreshAuthorities(final List<RRolePerm> permissions) {
+    private Future<JsonArray> refreshAuthoritiesAsync(final List<RRolePerm> permissions) {
+        return Future.succeededFuture(this.refreshAuthorities(permissions));
+    }
+
+    private JsonArray refreshAuthorities(final List<RRolePerm> permissions) {
         final List<String> permissionIds = permissions.stream()
                 .filter(Objects::nonNull)
                 .map(RRolePerm::getPermId)
                 .collect(Collectors.toList());
         this.authorities.clear();
         this.authorities.addAll(permissionIds);
-        return Future.succeededFuture(new JsonArray(permissionIds));
+        return new JsonArray(permissionIds);
     }
 
     @Override

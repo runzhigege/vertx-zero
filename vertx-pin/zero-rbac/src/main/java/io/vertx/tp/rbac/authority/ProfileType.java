@@ -2,6 +2,7 @@ package io.vertx.tp.rbac.authority;
 
 import io.vertx.tp.rbac.cv.em.SeekGroup;
 import io.vertx.tp.rbac.cv.em.SeekRole;
+import io.vertx.zero.eon.Strings;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,34 +14,45 @@ import java.util.Objects;
  */
 public class ProfileType implements Serializable {
     /* Role Profile */
-    static ProfileType UNION = new ProfileType(SeekRole.UNION);          // U
-    static ProfileType EAGER = new ProfileType(SeekRole.EAGER);          // E
-    static ProfileType LAZY = new ProfileType(SeekRole.LAZY);            // L
-    static ProfileType INTERSECT = new ProfileType(SeekRole.INTERSECT);  // I
+    public static ProfileType UNION = new ProfileType(SeekRole.UNION);          // U
+    public static ProfileType EAGER = new ProfileType(SeekRole.EAGER);          // E
+    public static ProfileType LAZY = new ProfileType(SeekRole.LAZY);            // L
+    public static ProfileType INTERSECT = new ProfileType(SeekRole.INTERSECT);  // I
 
     // ---------- DIRECT Mode -----------
     /* Group : HORIZON ->  Role ( U, E, L, I ) */
-    static ProfileType HORIZON_UNION = new ProfileType(SeekRole.UNION, SeekGroup.HORIZON);
-    static ProfileType HORIZON_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.HORIZON);
-    static ProfileType HORIZON_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.HORIZON);
-    static ProfileType HORIZON_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.HORIZON);
+    public static ProfileType HORIZON_UNION = new ProfileType(SeekRole.UNION, SeekGroup.HORIZON);
+    public static ProfileType HORIZON_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.HORIZON);
+    public static ProfileType HORIZON_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.HORIZON);
+    public static ProfileType HORIZON_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.HORIZON);
     /* Group : CRITICAL -> Role ( U, E, L, I ) */
-    static ProfileType CRITICAL_UNION = new ProfileType(SeekRole.UNION, SeekGroup.CRITICAL);
-    static ProfileType CRITICAL_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.CRITICAL);
-    static ProfileType CRITICAL_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.CRITICAL);
-    static ProfileType CRITICAL_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.CRITICAL);
+    public static ProfileType CRITICAL_UNION = new ProfileType(SeekRole.UNION, SeekGroup.CRITICAL);
+    public static ProfileType CRITICAL_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.CRITICAL);
+    public static ProfileType CRITICAL_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.CRITICAL);
+    public static ProfileType CRITICAL_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.CRITICAL);
     /* Group : OVERLOOK -> Role ( U, E, L, I ) */
-    static ProfileType OVERLOOK_UNION = new ProfileType(SeekRole.UNION, SeekGroup.OVERLOOK);
-    static ProfileType OVERLOOK_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.OVERLOOK);
-    static ProfileType OVERLOOK_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.OVERLOOK);
-    static ProfileType OVERLOOK_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.OVERLOOK);
+    public static ProfileType OVERLOOK_UNION = new ProfileType(SeekRole.UNION, SeekGroup.OVERLOOK);
+    public static ProfileType OVERLOOK_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.OVERLOOK);
+    public static ProfileType OVERLOOK_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.OVERLOOK);
+    public static ProfileType OVERLOOK_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.OVERLOOK);
 
     // ----------- PARENT Mode -----------
-    /* Group : Parent -> Role ( U, E, L, I ) */
-    static ProfileType PARENT_HORIZON_UNION = new ProfileType(SeekRole.UNION, SeekGroup.PARENT_HORIZON);
-    static ProfileType PARENT_HORIZON_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.PARENT_HORIZON);
-    static ProfileType PARENT_HORIZON_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.PARENT_HORIZON);
-    static ProfileType PARENT_HORIZON_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.PARENT_HORIZON);
+    /* Group : PARENT_HORIZON -> Role ( U, E, L, I ) */
+    public static ProfileType PARENT_HORIZON_UNION = new ProfileType(SeekRole.UNION, SeekGroup.PARENT_HORIZON);
+    public static ProfileType PARENT_HORIZON_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.PARENT_HORIZON);
+    public static ProfileType PARENT_HORIZON_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.PARENT_HORIZON);
+    public static ProfileType PARENT_HORIZON_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.PARENT_HORIZON);
+    /* Group : PARENT_CRITICAL -> Role ( U, E, L, I ) */
+    public static ProfileType PARENT_CRITICAL_UNION = new ProfileType(SeekRole.UNION, SeekGroup.PARENT_CRITICAL);
+    public static ProfileType PARENT_CRITICAL_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.PARENT_CRITICAL);
+    public static ProfileType PARENT_CRITICAL_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.PARENT_CRITICAL);
+    public static ProfileType PARENT_CRITICAL_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.PARENT_CRITICAL);
+    /* Group : PARENT_OVERLOOK -> Role ( U, E, L, I ) */
+    public static ProfileType PARENT_OVERLOOK_UNION = new ProfileType(SeekRole.UNION, SeekGroup.PARENT_OVERLOOK);
+    public static ProfileType PARENT_OVERLOOK_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.PARENT_OVERLOOK);
+    public static ProfileType PARENT_OVERLOOK_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.PARENT_OVERLOOK);
+    public static ProfileType PARENT_OVERLOOK_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.PARENT_OVERLOOK);
+
 
     /* Private Variable */
     private final SeekRole role;
@@ -58,9 +70,9 @@ public class ProfileType implements Serializable {
     public String getKey() {
         /* Group,User - Role */
         if (null == this.group) {
-            return "USER-" + this.role.name();
+            return "USER" + Strings.UNDERLINE + this.role.name();
         } else {
-            return this.group.name() + "-" + this.role.name();
+            return this.group.name() + Strings.UNDERLINE + this.role.name();
         }
     }
 

@@ -5,7 +5,7 @@ import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.log.Annal;
 
 /*
- * Init Plugin for `init` static life
+ * Init Plugin for `initAsync` static life
  */
 public class ScPin {
 
