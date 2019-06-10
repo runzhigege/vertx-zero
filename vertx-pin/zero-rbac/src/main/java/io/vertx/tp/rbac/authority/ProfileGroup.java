@@ -95,6 +95,22 @@ public class ProfileGroup implements Serializable {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof ProfileGroup)) {
+            return false;
+        }
+        final ProfileGroup that = (ProfileGroup) o;
+        return this.groupId.equals(that.groupId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.groupId);
+    }
 
     @Override
     public String toString() {

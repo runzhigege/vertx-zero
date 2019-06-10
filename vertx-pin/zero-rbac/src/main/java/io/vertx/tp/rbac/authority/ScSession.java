@@ -127,6 +127,10 @@ public class ScSession {
                         .compose(Align::parent)
                         .compose(ScDetent.parent(authority)::procAsync)
                         .compose(nil -> Ux.toFuture(profiles))
+                        /* Group Child Mode */
+                        .compose(Align::children)
+                        .compose(ScDetent.children(authority)::procAsync)
+                        .compose(nil -> Ux.toFuture(profiles))
                 )/* Group Result */
                 .compose(nil -> Ux.toFuture(authority));
     }
