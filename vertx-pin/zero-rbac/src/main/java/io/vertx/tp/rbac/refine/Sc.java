@@ -83,6 +83,10 @@ public class Sc {
         return ScToken.jwtToken(data);
     }
 
+    public static Future<Boolean> jwtToken(final List<OAccessToken> item, final String userId) {
+        return ScToken.jwtToken(item, userId);
+    }
+
     public static OAccessToken jwtToken(final JsonObject jwt, final String userKey) {
         return ScToken.jwtToken(jwt, userKey);
     }

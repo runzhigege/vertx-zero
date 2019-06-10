@@ -24,10 +24,11 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class OAccessToken implements IOAccessToken {
 
-    private static final long serialVersionUID = -2135150630;
+    private static final long serialVersionUID = 376621215;
 
     private String        key;
     private byte[]        token;
+    private byte[]        auth;
     private Long          expiredTime;
     private byte[]        refreshToken;
     private String        language;
@@ -41,6 +42,7 @@ public class OAccessToken implements IOAccessToken {
     public OAccessToken(OAccessToken value) {
         this.key = value.key;
         this.token = value.token;
+        this.auth = value.auth;
         this.expiredTime = value.expiredTime;
         this.refreshToken = value.refreshToken;
         this.language = value.language;
@@ -53,6 +55,7 @@ public class OAccessToken implements IOAccessToken {
     public OAccessToken(
         String        key,
         byte[]        token,
+        byte[]        auth,
         Long          expiredTime,
         byte[]        refreshToken,
         String        language,
@@ -63,6 +66,7 @@ public class OAccessToken implements IOAccessToken {
     ) {
         this.key = key;
         this.token = token;
+        this.auth = auth;
         this.expiredTime = expiredTime;
         this.refreshToken = refreshToken;
         this.language = language;
@@ -91,6 +95,17 @@ public class OAccessToken implements IOAccessToken {
     @Override
     public OAccessToken setToken(byte... token) {
         this.token = token;
+        return this;
+    }
+
+    @Override
+    public byte[] getAuth() {
+        return this.auth;
+    }
+
+    @Override
+    public OAccessToken setAuth(byte... auth) {
+        this.auth = auth;
         return this;
     }
 
@@ -177,6 +192,7 @@ public class OAccessToken implements IOAccessToken {
 
         sb.append(key);
         sb.append(", ").append("[binary...]");
+        sb.append(", ").append("[binary...]");
         sb.append(", ").append(expiredTime);
         sb.append(", ").append("[binary...]");
         sb.append(", ").append(language);
@@ -200,6 +216,7 @@ public class OAccessToken implements IOAccessToken {
     public void from(IOAccessToken from) {
         setKey(from.getKey());
         setToken(from.getToken());
+        setAuth(from.getAuth());
         setExpiredTime(from.getExpiredTime());
         setRefreshToken(from.getRefreshToken());
         setLanguage(from.getLanguage());

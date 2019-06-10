@@ -6,6 +6,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.refine.Sc;
+import io.vertx.up.aiki.Uson;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.log.Annal;
 
@@ -69,15 +70,21 @@ public class ScSession {
                 return initRoles(authority, data.getJsonArray("role"))
                         /* Initialize group information */
                         .compose(processed -> initGroups(processed, data.getJsonArray("group")))
+                        /* Refresh Cache */
+                        .compose(result -> Uson.create(data)
+                                .append("profile", authority)
+                                .toFuture())
+                        .compose(session -> Sc.cacheAuthority(userKey, session))
                         /* Report information */
                         .compose(ScSession::onReport)
                         /* Result */
-                        .compose(roles -> Future.succeededFuture(Boolean.TRUE));
+                        .compose(nil -> Ux.toFuture(Boolean.TRUE));
             } else {
                 /*
-                 * Existing this profile
+                 * Existing this profile, fill data iinto authority
                  */
-                return Future.succeededFuture(Boolean.TRUE);
+                authority.mergeIn(item);
+                return Ux.toFuture(Boolean.TRUE);
             }
         });
     }

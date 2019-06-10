@@ -44,6 +44,16 @@ public interface IOAccessToken extends Serializable {
     public byte[] getToken();
 
     /**
+     * Setter for <code>DB_RBAC.O_ACCESS_TOKEN.AUTH</code>. 「auth」- 用户的ID的 byte[] 信息
+     */
+    public IOAccessToken setAuth(byte... value);
+
+    /**
+     * Getter for <code>DB_RBAC.O_ACCESS_TOKEN.AUTH</code>. 「auth」- 用户的ID的 byte[] 信息
+     */
+    public byte[] getAuth();
+
+    /**
      * Setter for <code>DB_RBAC.O_ACCESS_TOKEN.EXPIRED_TIME</code>. 「expiredTime」- 用户的Token过期时间
      */
     public IOAccessToken setExpiredTime(Long value);
@@ -130,6 +140,7 @@ public interface IOAccessToken extends Serializable {
     default IOAccessToken fromJson(io.vertx.core.json.JsonObject json) {
         setKey(json.getString("KEY"));
         setToken(json.getBinary("TOKEN"));
+        setAuth(json.getBinary("AUTH"));
         setExpiredTime(json.getLong("EXPIRED_TIME"));
         setRefreshToken(json.getBinary("REFRESH_TOKEN"));
         setLanguage(json.getString("LANGUAGE"));
@@ -145,6 +156,7 @@ public interface IOAccessToken extends Serializable {
         io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
         json.put("KEY",getKey());
         json.put("TOKEN",getToken());
+        json.put("AUTH",getAuth());
         json.put("EXPIRED_TIME",getExpiredTime());
         json.put("REFRESH_TOKEN",getRefreshToken());
         json.put("LANGUAGE",getLanguage());

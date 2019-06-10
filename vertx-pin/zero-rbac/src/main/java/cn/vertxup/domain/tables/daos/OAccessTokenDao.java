@@ -77,6 +77,13 @@ public class OAccessTokenDao extends DAOImpl<OAccessTokenRecord, cn.vertxup.doma
     }
 
     /**
+     * Fetch records that have <code>AUTH IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.OAccessToken> fetchByAuth(byte[]... values) {
+        return fetch(OAccessToken.O_ACCESS_TOKEN.AUTH, values);
+    }
+
+    /**
      * Fetch records that have <code>EXPIRED_TIME IN (values)</code>
      */
     public List<cn.vertxup.domain.tables.pojos.OAccessToken> fetchByExpiredTime(Long... values) {
@@ -144,6 +151,13 @@ public class OAccessTokenDao extends DAOImpl<OAccessTokenRecord, cn.vertxup.doma
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.OAccessToken>> fetchByTokenAsync(List<byte[]> values) {
         return fetchAsync(OAccessToken.O_ACCESS_TOKEN.TOKEN,values);
+    }
+
+    /**
+     * Fetch records that have <code>AUTH IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.OAccessToken>> fetchByAuthAsync(List<byte[]> values) {
+        return fetchAsync(OAccessToken.O_ACCESS_TOKEN.AUTH,values);
     }
 
     /**
