@@ -21,8 +21,8 @@ public class ProfileGroup implements Serializable {
     private transient final String groupId;
     private transient final Integer priority;
     private transient final JsonArray role;
-
     private transient final List<ProfileRole> roles = new ArrayList<>();
+    private transient String reference;
 
     ProfileGroup(final JsonObject data) {
         /* Group Id */
@@ -63,6 +63,18 @@ public class ProfileGroup implements Serializable {
     private void setRoles(final List<ProfileRole> profiles) {
         this.roles.clear();
         this.roles.addAll(profiles);
+    }
+
+    /*
+     * Parent Reference for current profile group
+     * */
+    public String getReference() {
+        return this.reference;
+    }
+
+    public ProfileGroup setReference(final String reference) {
+        this.reference = reference;
+        return this;
     }
 
     /*
@@ -117,6 +129,8 @@ public class ProfileGroup implements Serializable {
         return "ProfileGroup{" +
                 "groupId='" + this.groupId + '\'' +
                 ", priority=" + this.priority +
+                ", role=" + this.role +
+                ", reference='" + this.reference + '\'' +
                 '}';
     }
 }

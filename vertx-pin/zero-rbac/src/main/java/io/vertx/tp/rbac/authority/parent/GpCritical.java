@@ -11,11 +11,26 @@ import java.util.List;
  */
 public class GpCritical implements ScDetent {
 
+    private transient final List<ProfileGroup> original;
+
+    public GpCritical(final List<ProfileGroup> original) {
+        this.original = original;
+    }
+
+    private List<ProfileRole> before(final List<ProfileRole> profiles) {
+        /* Find eager group in Critical */
+        final ProfileGroup eager = Align.eager(this.original);
+        /* Filter by group key */
+        final List<ProfileRole> source = Amalgam.parent(profiles, eager);
+        /* Then filter by priority */
+        return Amalgam.eager(source);
+    }
+
     @Override
     public JsonObject proc(final List<ProfileRole> profiles) {
         /* Group Search */
         final JsonObject group = new JsonObject();
-        final List<ProfileRole> source = Amalgam.eager(profiles);
+        final List<ProfileRole> source = this.before(profiles);
         /*
          * group = PARENT_CRITICAL, role = UNION
          * No priority of ( group, role )

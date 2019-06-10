@@ -1,9 +1,6 @@
 package io.vertx.tp.rbac.authority;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /*
@@ -11,6 +8,22 @@ import java.util.stream.Collectors;
  * -- The calculation will based on group parameter.
  */
 public class Amalgam {
+
+    public static List<ProfileRole> parent(final List<ProfileRole> roles,
+                                           final ProfileGroup group) {
+        /* Do not modify input roles */
+        return new ArrayList<>(roles).stream().filter(role -> Objects.nonNull(role.getGroup()))
+                .filter(role -> group.getReference().equals(role.getGroup().getKey()))
+                .collect(Collectors.toList());
+    }
+
+    public static List<ProfileRole> children(final List<ProfileRole> roles,
+                                             final ProfileGroup group) {
+        /* Do not modify input roles */
+        return new ArrayList<>(roles).stream().filter(role -> Objects.nonNull(role.getGroup()))
+                .filter(role -> group.getKey().equals(role.getGroup().getReference()))
+                .collect(Collectors.toList());
+    }
 
     /*
      * Search eager of each group, each group should has only one,

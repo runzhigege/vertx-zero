@@ -22,27 +22,36 @@ import java.util.List;
 
 /*
  * Detent for ( ProfileType = Detent )
+ *
+ * Be careful:
+ * If there existing constructor data parameter such as JsonObject or List<ProfileGroup>, it means
+ * each time this object will stored single data here, in this kind of situation, we could not use
+ * Pool.DETENT_POOL, if you used Pool.DETENT_POOL, the system will ignore
+ * input parameter and used cached instead, it means that different user authorization may
+ * shared the first time input parameters. It's wrong.
+ *
+ * There are some points:
+ * 1. For tool object ( No constructor parameters ), we could cached ScDetent.
+ * 2. For non tool object ( Input constructor parameters ), we mustn't cached ScDetent.
  */
 public interface ScDetent {
 
     static ScDetent user(final JsonObject input) {
-        return Fn.pool(Pool.DETENT_POOL, ScDetentRole.class.getName(),
-                () -> new ScDetentRole(input));
+        return new ScDetentRole(input);
     }
 
     static ScDetent group(final JsonObject input) {
-        return Fn.pool(Pool.DETENT_POOL, ScDetentGroup.class.getName(),
-                () -> new ScDetentGroup(input));
+        return new ScDetentGroup(input);
     }
 
-    static ScDetent parent(final JsonObject input) {
-        return Fn.pool(Pool.DETENT_POOL, ScDetentParent.class.getName(),
-                () -> new ScDetentParent(input));
+    static ScDetent parent(final JsonObject input,
+                           final List<ProfileGroup> profiles) {
+        return new ScDetentParent(input, profiles);
     }
 
-    static ScDetent children(final JsonObject input) {
-        return Fn.pool(Pool.DETENT_POOL, ScDetentChild.class.getName(),
-                () -> new ScDetentChild(input));
+    static ScDetent children(final JsonObject input,
+                             final List<ProfileGroup> profiles) {
+        return new ScDetentChild(input, profiles);
     }
 
     JsonObject proc(List<ProfileRole> profiles);
@@ -77,12 +86,12 @@ public interface ScDetent {
                 return Fn.pool(Pool.DETENT_POOL, GpHorizon.class.getName(), GpHorizon::new);
             }
 
-            static ScDetent critical() {
-                return Fn.pool(Pool.DETENT_POOL, GpCritical.class.getName(), GpCritical::new);
+            static ScDetent critical(final List<ProfileGroup> original) {
+                return new GpCritical(original);
             }
 
-            static ScDetent overlook() {
-                return Fn.pool(Pool.DETENT_POOL, GpOverlook.class.getName(), GpOverlook::new);
+            static ScDetent overlook(final List<ProfileGroup> original) {
+                return new GpOverlook(original);
             }
         }
 
@@ -94,12 +103,12 @@ public interface ScDetent {
                 return Fn.pool(Pool.DETENT_POOL, GcHorizon.class.getName(), GcHorizon::new);
             }
 
-            static ScDetent critical() {
-                return Fn.pool(Pool.DETENT_POOL, GcCritical.class.getName(), GcCritical::new);
+            static ScDetent critical(final List<ProfileGroup> original) {
+                return new GcCritical(original);
             }
 
-            static ScDetent overlook() {
-                return Fn.pool(Pool.DETENT_POOL, GcOverlook.class.getName(), GcOverlook::new);
+            static ScDetent overlook(final List<ProfileGroup> original) {
+                return new GcOverlook(original);
             }
         }
     }
