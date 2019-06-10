@@ -37,11 +37,31 @@ public class Align {
                 .collect(Collectors.toList()));
     }
 
+    public static Future<List<ProfileRole>> children(final List<ProfileGroup> profiles) {
+        return flat(profiles.stream().map(Align::findChildren)
+                .flatMap(List<ProfileGroup>::stream)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList()));
+    }
+
+    private static List<ProfileGroup> findChildren(final ProfileGroup current) {
+        /* Group Id */
+        final String groupId = current.getKey();
+        final List<SGroup> groups = STUB.fetchChildren(groupId);
+        return groups.stream().filter(Objects::nonNull)
+                .map(group -> toProfile(group, current))
+                .collect(Collectors.toList());
+    }
+
     private static ProfileGroup findParent(final ProfileGroup current) {
         /* Group Id */
         final String groupId = current.getKey();
         /* Group Object */
         final SGroup group = STUB.fetchParent(groupId);
+        return toProfile(group, current);
+    }
+
+    private static ProfileGroup toProfile(final SGroup group, final ProfileGroup current) {
         if (null == group) {
             return null;
         } else {

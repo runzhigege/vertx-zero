@@ -150,4 +150,21 @@ public class ProfileRole implements Serializable {
                 ", reference=" + this.reference +
                 '}';
     }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof ProfileRole)) {
+            return false;
+        }
+        final ProfileRole that = (ProfileRole) o;
+        return this.roleId.equals(that.roleId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.roleId);
+    }
 }

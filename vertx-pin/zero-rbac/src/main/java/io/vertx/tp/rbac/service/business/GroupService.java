@@ -14,6 +14,7 @@ import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.log.Annal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GroupService implements GroupStub {
@@ -44,5 +45,14 @@ public class GroupService implements GroupStub {
         final SGroup current = dao.findById(groupKey);
         return null == current ? null :
                 dao.findById(current.getParentId());
+    }
+
+    @Override
+    public List<SGroup> fetchChildren(final String groupKey) {
+        final UxJooq dao = Ux.Jooq.on(SGroupDao.class);
+        if (null == dao) {
+            return new ArrayList<>();
+        }
+        return dao.fetch(AuthKey.F_PARENT_ID, groupKey);
     }
 }

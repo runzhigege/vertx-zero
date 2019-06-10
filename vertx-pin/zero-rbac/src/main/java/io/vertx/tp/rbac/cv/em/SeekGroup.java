@@ -64,4 +64,23 @@ public enum SeekGroup {
      * ->     G21
      */
     PARENT_OVERLOOK,
+    // ---------------- Child Group Only
+    /*
+     * Child Mode ( Pickup Child Groups )
+     *
+     * ->     G30, G31
+     */
+    CHILD_HORIZON,
+    /*
+     * Child Mode ( Priority Selection High )
+     *
+     * ->     G30, G31
+     */
+    CHILD_CRITICAL,
+    /*
+     * Child Mode ( Priority Selection Low )
+     *
+     * ->     None
+     */
+    CHILD_OVERLOOK,
 }

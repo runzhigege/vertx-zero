@@ -4,6 +4,8 @@ import cn.vertxup.domain.tables.pojos.SGroup;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 
+import java.util.List;
+
 /*
  * Basic Group interface
  *
@@ -19,4 +21,6 @@ public interface GroupStub {
     JsonArray fetchRoleIds(String groupKey);
 
     SGroup fetchParent(String groupKey);
+
+    List<SGroup> fetchChildren(String groupKey);
 }

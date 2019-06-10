@@ -52,6 +52,23 @@ public class ProfileType implements Serializable {
     public static ProfileType PARENT_OVERLOOK_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.PARENT_OVERLOOK);
     public static ProfileType PARENT_OVERLOOK_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.PARENT_OVERLOOK);
     public static ProfileType PARENT_OVERLOOK_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.PARENT_OVERLOOK);
+    // ----------- INHERIT Mode -----------
+
+    /* Group : CHILD_HORIZON -> Role ( U, E, L, I ) */
+    public static ProfileType CHILD_HORIZON_UNION = new ProfileType(SeekRole.UNION, SeekGroup.CHILD_HORIZON);
+    public static ProfileType CHILD_HORIZON_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.CHILD_HORIZON);
+    public static ProfileType CHILD_HORIZON_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.CHILD_HORIZON);
+    public static ProfileType CHILD_HORIZON_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.CHILD_HORIZON);
+    /* Group : CHILD_CRITICAL -> Role ( U, E, L, I ) */
+    public static ProfileType CHILD_CRITICAL_UNION = new ProfileType(SeekRole.UNION, SeekGroup.CHILD_CRITICAL);
+    public static ProfileType CHILD_CRITICAL_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.CHILD_CRITICAL);
+    public static ProfileType CHILD_CRITICAL_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.CHILD_CRITICAL);
+    public static ProfileType CHILD_CRITICAL_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.CHILD_CRITICAL);
+    /* Group : CHILD_OVERLOOK -> Role ( U, E, L, I ) */
+    public static ProfileType CHILD_OVERLOOK_UNION = new ProfileType(SeekRole.UNION, SeekGroup.CHILD_OVERLOOK);
+    public static ProfileType CHILD_OVERLOOK_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.CHILD_OVERLOOK);
+    public static ProfileType CHILD_OVERLOOK_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.CHILD_OVERLOOK);
+    public static ProfileType CHILD_OVERLOOK_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.CHILD_OVERLOOK);
 
 
     /* Private Variable */

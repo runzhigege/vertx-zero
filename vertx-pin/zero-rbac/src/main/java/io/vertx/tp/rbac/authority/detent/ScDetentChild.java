@@ -1,0 +1,29 @@
+package io.vertx.tp.rbac.authority.detent;
+
+import io.vertx.core.json.JsonObject;
+import io.vertx.tp.rbac.authority.ProfileRole;
+import io.vertx.tp.rbac.authority.ScDetent;
+
+import java.util.List;
+
+public class ScDetentChild implements ScDetent {
+
+    private transient final JsonObject input;
+
+    public ScDetentChild(final JsonObject input) {
+        this.input = input;
+    }
+
+    @Override
+    public JsonObject proc(final List<ProfileRole> profiles) {
+        final JsonObject children = new JsonObject();
+        /* SeekGroup -> Parent Horizon */
+        profiles.forEach(System.err::println);
+        children.mergeIn(ScDetent.Group.Child.horizon().proc(profiles));
+        /* SeekGroup -> Parent Critical */
+        children.mergeIn(ScDetent.Group.Child.critical().proc(profiles));
+        /* SeekGroup -> Parent Priority */
+        children.mergeIn(ScDetent.Group.Child.overlook().proc(profiles));
+        return this.input.mergeIn(children);
+    }
+}

@@ -2,6 +2,10 @@ package io.vertx.tp.rbac.authority;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.rbac.authority.child.GcCritical;
+import io.vertx.tp.rbac.authority.child.GcHorizon;
+import io.vertx.tp.rbac.authority.child.GcOverlook;
+import io.vertx.tp.rbac.authority.detent.ScDetentChild;
 import io.vertx.tp.rbac.authority.detent.ScDetentGroup;
 import io.vertx.tp.rbac.authority.detent.ScDetentParent;
 import io.vertx.tp.rbac.authority.detent.ScDetentRole;
@@ -34,6 +38,11 @@ public interface ScDetent {
     static ScDetent parent(final JsonObject input) {
         return Fn.pool(Pool.DETENT_POOL, ScDetentParent.class.getName(),
                 () -> new ScDetentParent(input));
+    }
+
+    static ScDetent children(final JsonObject input) {
+        return Fn.pool(Pool.DETENT_POOL, ScDetentChild.class.getName(),
+                () -> new ScDetentChild(input));
     }
 
     JsonObject proc(List<ProfileRole> profiles);
@@ -74,6 +83,23 @@ public interface ScDetent {
 
             static ScDetent overlook() {
                 return Fn.pool(Pool.DETENT_POOL, GpOverlook.class.getName(), GpOverlook::new);
+            }
+        }
+
+        /*
+         * Group : Child ( Exclude Current )
+         */
+        interface Child {
+            static ScDetent horizon() {
+                return Fn.pool(Pool.DETENT_POOL, GcHorizon.class.getName(), GcHorizon::new);
+            }
+
+            static ScDetent critical() {
+                return Fn.pool(Pool.DETENT_POOL, GcCritical.class.getName(), GcCritical::new);
+            }
+
+            static ScDetent overlook() {
+                return Fn.pool(Pool.DETENT_POOL, GcOverlook.class.getName(), GcOverlook::new);
             }
         }
     }
