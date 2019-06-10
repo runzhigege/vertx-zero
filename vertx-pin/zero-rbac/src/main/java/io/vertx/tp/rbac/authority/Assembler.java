@@ -44,6 +44,8 @@ public class Assembler {
                 /* JsonArray */
                 final JsonArray data = Ut.toJArray(permissionIds);
                 input.put(type.getKey(), data);
+            } else {
+                input.put(type.getKey(), new JsonArray());
             }
         };
     }
@@ -68,6 +70,8 @@ public class Assembler {
                 }
                 final JsonArray data = Ut.toJArray(found);
                 input.put(type.getKey(), data);
+            } else {
+                input.put(type.getKey(), new JsonArray());
             }
         };
     }
