@@ -83,4 +83,43 @@ public enum SeekGroup {
      * ->     None
      */
     CHILD_OVERLOOK,
+    // ---------------- Inherit ( Parent + Current ) Only
+    /*
+     * Inherit Mode ( Pickup Parent Groups )
+     *
+     * ->     G20, G31, G32, G10, G21
+     */
+    INHERIT_HORIZON,
+    /*
+     * Inherit Mode ( Priority Selection High )
+     *
+     * ->     G20, G10
+     */
+    INHERIT_CRITICAL,
+    /*
+     * Inherit Mode ( Priority Selection Low )
+     *
+     * ->     G21, G32
+     */
+    INHERIT_OVERLOOK,
+    // ----------------- Extend ( Child + Current ) Only
+    /*
+     * Extend Mode ( Pickup Child Groups )
+     *
+     * ->     G20, G30, G31, G32
+     */
+    EXTEND_HORIZON,
+
+    /*
+     * Extend Mode ( Priority Selection High )
+     *
+     * ->     G20, G30, G31
+     */
+    EXTEND_CRITICAL,
+    /*
+     * Extend Mode ( Priority Selection Low )
+     *
+     * ->     G32
+     */
+    EXTEND_OVERLOOK
 }

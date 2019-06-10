@@ -7,6 +7,7 @@ import io.zero.epic.Ut;
 import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /*
  * Role Calculation
@@ -14,6 +15,21 @@ import java.util.function.Consumer;
  * all input profiles.
  */
 public class Assembler {
+
+    public static List<ProfileRole> connect(final List<ProfileRole> profiles, final List<ProfileGroup> original) {
+        final Set<ProfileRole> originalSet = original
+                .stream().flatMap(group -> group.getRoles().stream())
+                .collect(Collectors.toSet());
+        originalSet.addAll(profiles);
+        return new ArrayList<>(originalSet);
+    }
+
+    public static List<ProfileRole> connect(final List<ProfileRole> profiles, final ProfileGroup original) {
+        final Set<ProfileRole> originalSet = new HashSet<>(original.getRoles());
+        originalSet.addAll(profiles);
+        return new ArrayList<>(originalSet);
+    }
+
     public static Consumer<JsonObject> union(final ProfileType type, final List<ProfileRole> profiles) {
         return bind(type, profiles, Ut::union);
     }
