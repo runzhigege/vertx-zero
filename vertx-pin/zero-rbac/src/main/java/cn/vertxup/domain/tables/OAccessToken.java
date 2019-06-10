@@ -39,7 +39,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class OAccessToken extends TableImpl<OAccessTokenRecord> {
 
-    private static final long serialVersionUID = -56453020;
+    private static final long serialVersionUID = -88496274;
 
     /**
      * The reference instance of <code>DB_RBAC.O_ACCESS_TOKEN</code>
@@ -63,6 +63,11 @@ public class OAccessToken extends TableImpl<OAccessTokenRecord> {
      * The column <code>DB_RBAC.O_ACCESS_TOKEN.TOKEN</code>. 「token」- 用户的Token信息
      */
     public final TableField<OAccessTokenRecord, byte[]> TOKEN = createField("TOKEN", org.jooq.impl.SQLDataType.BLOB, this, "「token」- 用户的Token信息");
+
+    /**
+     * The column <code>DB_RBAC.O_ACCESS_TOKEN.AUTH</code>. 「auth」- 用户的ID的 byte[] 信息
+     */
+    public final TableField<OAccessTokenRecord, byte[]> AUTH = createField("AUTH", org.jooq.impl.SQLDataType.BLOB, this, "「auth」- 用户的ID的 byte[] 信息");
 
     /**
      * The column <code>DB_RBAC.O_ACCESS_TOKEN.EXPIRED_TIME</code>. 「expiredTime」- 用户的Token过期时间

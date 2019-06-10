@@ -14,4 +14,6 @@ import io.vertx.core.json.JsonObject;
 public interface JwtStub {
 
     Future<JsonObject> store(String userKey, JsonObject data);
+
+    Future<Boolean> verify(String userKey, String token);
 }

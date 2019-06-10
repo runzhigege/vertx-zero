@@ -7,6 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.authority.ScSession;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.aiki.Ux;
+import io.vertx.zero.eon.Values;
 
 /*
  * Jwt Token Service for:
@@ -24,10 +25,16 @@ public class JwtService implements JwtStub {
          * Jwt OAccessToken
          */
         final OAccessToken accessToken = Sc.jwtToken(response, userKey);
-        System.out.println(data.encodePrettily());
         return Ux.Jooq.on(OAccessTokenDao.class)
                 .insertAsync(accessToken)
                 .compose(item -> ScSession.initAuthorization(data))
-                .compose(inited -> Ux.toFuture(response));
+                .compose(initialized -> Ux.toFuture(response));
+    }
+
+    @Override
+    public Future<Boolean> verify(final String userKey, final String token) {
+        return Ux.Jooq.on(OAccessTokenDao.class)
+                .<OAccessToken>fetchAsync("token", token.getBytes(Values.CHARSET))
+                .compose(tokens -> Sc.jwtToken(tokens, userKey));
     }
 }
