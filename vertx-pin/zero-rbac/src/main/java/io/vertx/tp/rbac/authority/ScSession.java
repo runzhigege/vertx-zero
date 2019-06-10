@@ -114,25 +114,28 @@ public class ScSession {
                 .map(ProfileGroup::new)
                 .map(ProfileGroup::initAsync)
                 .forEach(futures::add);
-        return CompositeFuture.all(futures)
-                /* Composite Result */
-                .compose(Sc::<ProfileGroup>composite)
-                /* Group */
-                .compose(profiles -> Ux.toFuture(profiles)
-                        /* Group Direct Mode */
-                        .compose(Align::flat)
-                        .compose(ScDetent.group(authority)::procAsync)
-                        .compose(nil -> Ux.toFuture(profiles))
-                        /* Group Parent Mode */
-                        .compose(Align::parent)
-                        .compose(ScDetent.parent(authority, profiles)::procAsync)
-                        .compose(nil -> Ux.toFuture(profiles))
-                        /* Group Child Mode */
-                        .compose(Align::children)
-                        .compose(ScDetent.children(authority, profiles)::procAsync)
-                        .compose(nil -> Ux.toFuture(profiles))
-                )/* Group Result */
-                .compose(nil -> Ux.toFuture(authority));
+        return CompositeFuture.all(futures).compose(Sc::<ProfileGroup>composite).compose(profiles -> Ux.toFuture(profiles)
+                /* Group Direct Mode */
+                .compose(Align::flat)
+                .compose(ScDetent.group(authority)::procAsync)
+                .compose(nil -> Ux.toFuture(profiles))
+
+                /* Group Parent Mode */
+                .compose(Align::parent)
+                /** Parent Only */
+                .compose(parents -> ScDetent.parent(authority, profiles).procAsync(parents)
+                        /** Parent and Current */
+                        .compose(nil -> ScDetent.inherit(authority, profiles).procAsync(parents)))
+                .compose(nil -> Ux.toFuture(profiles))
+
+                /* Group Child Mode */
+                .compose(Align::children)
+                /** Child Only */
+                .compose(children -> ScDetent.children(authority, profiles).procAsync(children)
+                        /** Child and Current */
+                        .compose(nil -> ScDetent.extend(authority, profiles).procAsync(children)))
+                .compose(nil -> Ux.toFuture(profiles))
+        ).compose(nil -> Ux.toFuture(authority));
     }
 
     private static Future<JsonObject> onReport(final JsonObject result) {

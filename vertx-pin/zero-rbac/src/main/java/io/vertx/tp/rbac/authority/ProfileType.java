@@ -52,7 +52,7 @@ public class ProfileType implements Serializable {
     public static ProfileType PARENT_OVERLOOK_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.PARENT_OVERLOOK);
     public static ProfileType PARENT_OVERLOOK_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.PARENT_OVERLOOK);
     public static ProfileType PARENT_OVERLOOK_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.PARENT_OVERLOOK);
-    // ----------- INHERIT Mode -----------
+    // ----------- CHILD Mode -----------
 
     /* Group : CHILD_HORIZON -> Role ( U, E, L, I ) */
     public static ProfileType CHILD_HORIZON_UNION = new ProfileType(SeekRole.UNION, SeekGroup.CHILD_HORIZON);
@@ -70,6 +70,40 @@ public class ProfileType implements Serializable {
     public static ProfileType CHILD_OVERLOOK_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.CHILD_OVERLOOK);
     public static ProfileType CHILD_OVERLOOK_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.CHILD_OVERLOOK);
 
+    // ------------ INHERIT Mode ---------
+
+    /* Group : INHERIT_HORIZON -> Role ( U, E, L, I ) */
+    public static ProfileType INHERIT_HORIZON_UNION = new ProfileType(SeekRole.UNION, SeekGroup.INHERIT_HORIZON);
+    public static ProfileType INHERIT_HORIZON_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.INHERIT_HORIZON);
+    public static ProfileType INHERIT_HORIZON_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.INHERIT_HORIZON);
+    public static ProfileType INHERIT_HORIZON_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.INHERIT_HORIZON);
+    /* Group : INHERIT_CRITICAL -> Role ( U, E, L, I ) */
+    public static ProfileType INHERIT_CRITICAL_UNION = new ProfileType(SeekRole.UNION, SeekGroup.INHERIT_CRITICAL);
+    public static ProfileType INHERIT_CRITICAL_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.INHERIT_CRITICAL);
+    public static ProfileType INHERIT_CRITICAL_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.INHERIT_CRITICAL);
+    public static ProfileType INHERIT_CRITICAL_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.INHERIT_CRITICAL);
+    /* Group : INHERIT_OVERLOOK -> Role ( U, E, L, I ) */
+    public static ProfileType INHERIT_OVERLOOK_UNION = new ProfileType(SeekRole.UNION, SeekGroup.INHERIT_OVERLOOK);
+    public static ProfileType INHERIT_OVERLOOK_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.INHERIT_OVERLOOK);
+    public static ProfileType INHERIT_OVERLOOK_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.INHERIT_OVERLOOK);
+    public static ProfileType INHERIT_OVERLOOK_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.INHERIT_OVERLOOK);
+    // ------------ EXTEND Mode ----------
+
+    /* Group : EXTEND_HORIZON -> Role ( U, E, L, I ) */
+    public static ProfileType EXTEND_HORIZON_UNION = new ProfileType(SeekRole.UNION, SeekGroup.EXTEND_HORIZON);
+    public static ProfileType EXTEND_HORIZON_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.EXTEND_HORIZON);
+    public static ProfileType EXTEND_HORIZON_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.EXTEND_HORIZON);
+    public static ProfileType EXTEND_HORIZON_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.EXTEND_HORIZON);
+    /* Group : EXTEND_CRITICAL -> Role ( U, E, L, I ) */
+    public static ProfileType EXTEND_CRITICAL_UNION = new ProfileType(SeekRole.UNION, SeekGroup.EXTEND_CRITICAL);
+    public static ProfileType EXTEND_CRITICAL_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.EXTEND_CRITICAL);
+    public static ProfileType EXTEND_CRITICAL_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.EXTEND_CRITICAL);
+    public static ProfileType EXTEND_CRITICAL_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.EXTEND_CRITICAL);
+    /* Group : EXTEND_OVERLOOK -> Role ( U, E, L, I ) */
+    public static ProfileType EXTEND_OVERLOOK_UNION = new ProfileType(SeekRole.UNION, SeekGroup.EXTEND_OVERLOOK);
+    public static ProfileType EXTEND_OVERLOOK_EAGER = new ProfileType(SeekRole.EAGER, SeekGroup.EXTEND_OVERLOOK);
+    public static ProfileType EXTEND_OVERLOOK_LAZY = new ProfileType(SeekRole.LAZY, SeekGroup.EXTEND_OVERLOOK);
+    public static ProfileType EXTEND_OVERLOOK_INTERSECT = new ProfileType(SeekRole.INTERSECT, SeekGroup.EXTEND_OVERLOOK);
 
     /* Private Variable */
     private final SeekRole role;

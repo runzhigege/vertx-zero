@@ -1,29 +1,26 @@
-package io.vertx.tp.rbac.authority.parent;
+package io.vertx.tp.rbac.authority.extend;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.authority.*;
 
 import java.util.List;
 
-/*
- * Group calculation
- * Parent
- */
-public class GpCritical implements ScDetent {
+public class GeOverlook implements ScDetent {
 
     private transient final List<ProfileGroup> original;
 
-    public GpCritical(final List<ProfileGroup> original) {
+    public GeOverlook(final List<ProfileGroup> original) {
         this.original = original;
     }
 
     private List<ProfileRole> before(final List<ProfileRole> profiles) {
         /* Find eager group in Critical */
-        final ProfileGroup eager = Align.eager(this.original);
+        final ProfileGroup lazy = Align.lazy(this.original);
         /* Filter by group key */
-        final List<ProfileRole> source = Amalgam.parent(profiles, eager);
+        final List<ProfileRole> source = Amalgam.children(profiles, lazy);
         /* Then filter by priority */
-        return Amalgam.eager(source);
+        final List<ProfileRole> processed = Amalgam.lazy(source);
+        return Assembler.connect(processed, lazy);
     }
 
     @Override
@@ -33,36 +30,36 @@ public class GpCritical implements ScDetent {
         final List<ProfileRole> source = this.before(profiles);
         Amalgam.logGroup(this.getClass(), source);
         /*
-         * group = PARENT_CRITICAL, role = UNION
+         * group = EXTEND_OVERLOOK, role = UNION
          * No priority of ( group, role )
          *
          * !!!Finished
          */
-        Assembler.union(ProfileType.PARENT_CRITICAL_UNION, source).accept(group);
+        Assembler.union(ProfileType.EXTEND_OVERLOOK_UNION, source).accept(group);
         /*
-         * group = PARENT_CRITICAL, role = EAGER
+         * group = EXTEND_OVERLOOK, role = EAGER
          * No priority of ( group ),  pickup the highest of each group out
          * ( Pick Up the role that group has only one )
          *
          * !!!Finished
          */
-        Assembler.eager(ProfileType.PARENT_CRITICAL_EAGER, source).accept(group);
+        Assembler.eager(ProfileType.EXTEND_OVERLOOK_EAGER, source).accept(group);
         /*
-         * group = PARENT_CRITICAL, role = LAZY
+         * group = EXTEND_OVERLOOK, role = LAZY
          * No priority of ( group ), pickup the lowest of each group out
          * ( Exclude the role that group has only one )
          *
          * !!!Finished
          */
-        Assembler.lazy(ProfileType.PARENT_CRITICAL_LAZY, source).accept(group);
+        Assembler.lazy(ProfileType.EXTEND_OVERLOOK_LAZY, source).accept(group);
         /*
-         * group = PARENT_CRITICAL, role = INTERSECT
+         * group = EXTEND_OVERLOOK, role = INTERSECT
          * No priority of ( group ), pickup all the role's intersect
          * All group must contain the role or it's no access.
          *
          * !!!Finished
          */
-        Assembler.intersect(ProfileType.PARENT_CRITICAL_INTERSECT, source).accept(group);
+        Assembler.intersect(ProfileType.EXTEND_OVERLOOK_INTERSECT, source).accept(group);
         return group;
     }
 }

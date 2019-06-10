@@ -1,4 +1,4 @@
-package io.vertx.tp.rbac.authority.parent;
+package io.vertx.tp.rbac.authority.inherit;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.authority.*;
@@ -9,11 +9,11 @@ import java.util.List;
  * Group calculation
  * Parent
  */
-public class GpCritical implements ScDetent {
+public class GiCritical implements ScDetent {
 
     private transient final List<ProfileGroup> original;
 
-    public GpCritical(final List<ProfileGroup> original) {
+    public GiCritical(final List<ProfileGroup> original) {
         this.original = original;
     }
 
@@ -23,7 +23,9 @@ public class GpCritical implements ScDetent {
         /* Filter by group key */
         final List<ProfileRole> source = Amalgam.parent(profiles, eager);
         /* Then filter by priority */
-        return Amalgam.eager(source);
+        final List<ProfileRole> processed = Amalgam.eager(source);
+        /* Final Append */
+        return Assembler.connect(processed, eager);
     }
 
     @Override
@@ -33,36 +35,36 @@ public class GpCritical implements ScDetent {
         final List<ProfileRole> source = this.before(profiles);
         Amalgam.logGroup(this.getClass(), source);
         /*
-         * group = PARENT_CRITICAL, role = UNION
+         * group = INHERIT_CRITICAL, role = UNION
          * No priority of ( group, role )
          *
          * !!!Finished
          */
-        Assembler.union(ProfileType.PARENT_CRITICAL_UNION, source).accept(group);
+        Assembler.union(ProfileType.INHERIT_CRITICAL_UNION, source).accept(group);
         /*
-         * group = PARENT_CRITICAL, role = EAGER
+         * group = INHERIT_CRITICAL, role = EAGER
          * No priority of ( group ),  pickup the highest of each group out
          * ( Pick Up the role that group has only one )
          *
          * !!!Finished
          */
-        Assembler.eager(ProfileType.PARENT_CRITICAL_EAGER, source).accept(group);
+        Assembler.eager(ProfileType.INHERIT_CRITICAL_EAGER, source).accept(group);
         /*
-         * group = PARENT_CRITICAL, role = LAZY
+         * group = INHERIT_CRITICAL, role = LAZY
          * No priority of ( group ), pickup the lowest of each group out
          * ( Exclude the role that group has only one )
          *
          * !!!Finished
          */
-        Assembler.lazy(ProfileType.PARENT_CRITICAL_LAZY, source).accept(group);
+        Assembler.lazy(ProfileType.INHERIT_CRITICAL_LAZY, source).accept(group);
         /*
-         * group = PARENT_CRITICAL, role = INTERSECT
+         * group = INHERIT_CRITICAL, role = INTERSECT
          * No priority of ( group ), pickup all the role's intersect
          * All group must contain the role or it's no access.
          *
          * !!!Finished
          */
-        Assembler.intersect(ProfileType.PARENT_CRITICAL_INTERSECT, source).accept(group);
+        Assembler.intersect(ProfileType.INHERIT_CRITICAL_INTERSECT, source).accept(group);
         return group;
     }
 }

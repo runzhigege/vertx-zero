@@ -5,13 +5,16 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.authority.child.GcCritical;
 import io.vertx.tp.rbac.authority.child.GcHorizon;
 import io.vertx.tp.rbac.authority.child.GcOverlook;
-import io.vertx.tp.rbac.authority.detent.ScDetentChild;
-import io.vertx.tp.rbac.authority.detent.ScDetentGroup;
-import io.vertx.tp.rbac.authority.detent.ScDetentParent;
-import io.vertx.tp.rbac.authority.detent.ScDetentRole;
+import io.vertx.tp.rbac.authority.detent.*;
 import io.vertx.tp.rbac.authority.direct.GdCritical;
 import io.vertx.tp.rbac.authority.direct.GdHorizon;
 import io.vertx.tp.rbac.authority.direct.GdOverlook;
+import io.vertx.tp.rbac.authority.extend.GeCritical;
+import io.vertx.tp.rbac.authority.extend.GeHorizon;
+import io.vertx.tp.rbac.authority.extend.GeOverlook;
+import io.vertx.tp.rbac.authority.inherit.GiCritical;
+import io.vertx.tp.rbac.authority.inherit.GiHorizon;
+import io.vertx.tp.rbac.authority.inherit.GiOverlook;
 import io.vertx.tp.rbac.authority.parent.GpCritical;
 import io.vertx.tp.rbac.authority.parent.GpHorizon;
 import io.vertx.tp.rbac.authority.parent.GpOverlook;
@@ -47,6 +50,16 @@ public interface ScDetent {
     static ScDetent parent(final JsonObject input,
                            final List<ProfileGroup> profiles) {
         return new ScDetentParent(input, profiles);
+    }
+
+    static ScDetent inherit(final JsonObject input,
+                            final List<ProfileGroup> profiles) {
+        return new ScDetentInherit(input, profiles);
+    }
+
+    static ScDetent extend(final JsonObject input,
+                           final List<ProfileGroup> profiles) {
+        return new ScDetentExtend(input, profiles);
     }
 
     static ScDetent children(final JsonObject input,
@@ -109,6 +122,34 @@ public interface ScDetent {
 
             static ScDetent overlook(final List<ProfileGroup> original) {
                 return new GcOverlook(original);
+            }
+        }
+
+        interface Inherit {
+            static ScDetent horizon(final List<ProfileGroup> original) {
+                return new GiHorizon(original);
+            }
+
+            static ScDetent critical(final List<ProfileGroup> original) {
+                return new GiCritical(original);
+            }
+
+            static ScDetent overlook(final List<ProfileGroup> original) {
+                return new GiOverlook(original);
+            }
+        }
+
+        interface Extend {
+            static ScDetent horizon(final List<ProfileGroup> original) {
+                return new GeHorizon(original);
+            }
+
+            static ScDetent critical(final List<ProfileGroup> original) {
+                return new GeCritical(original);
+            }
+
+            static ScDetent overlook(final List<ProfileGroup> original) {
+                return new GeOverlook(original);
             }
         }
     }

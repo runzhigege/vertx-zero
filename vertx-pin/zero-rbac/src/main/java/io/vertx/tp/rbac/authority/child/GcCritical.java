@@ -2,8 +2,6 @@ package io.vertx.tp.rbac.authority.child;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.authority.*;
-import io.vertx.tp.rbac.refine.Sc;
-import io.vertx.up.log.Annal;
 
 import java.util.List;
 
@@ -13,7 +11,6 @@ import java.util.List;
  */
 public class GcCritical implements ScDetent {
 
-    private static final Annal LOGGER = Annal.get(GcCritical.class);
     private transient final List<ProfileGroup> original;
 
     public GcCritical(final List<ProfileGroup> original) {
@@ -23,8 +20,6 @@ public class GcCritical implements ScDetent {
     private List<ProfileRole> before(final List<ProfileRole> profiles) {
         /* Find eager group in Critical */
         final ProfileGroup eager = Align.eager(this.original);
-        Sc.infoAuth(LOGGER, "( Child Mode ) Critical pickup: {0}, reference: {1}",
-                eager.getKey(), eager.getReference());
         /* Filter by group key */
         final List<ProfileRole> source = Amalgam.children(profiles, eager);
         /* Then filter by priority */
