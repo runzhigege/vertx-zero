@@ -6,12 +6,11 @@ package up.zero.domain;
 
 import javax.annotation.Generated;
 
-import up.zero.domain.tables.SRole;
-import up.zero.domain.tables.SUser;
+import up.zero.domain.tables.CiDept;
 
 
 /**
- * Convenience access to all tables in UP_ARES
+ * Convenience access to all tables in DB_RBAC
  */
 @Generated(
     value = {
@@ -24,12 +23,7 @@ import up.zero.domain.tables.SUser;
 public class Tables {
 
     /**
-     * The table <code>UP_ARES.S_ROLE</code>.
+     * The table <code>DB_RBAC.CI_DEPT</code>.
      */
-    public static final SRole S_ROLE = up.zero.domain.tables.SRole.S_ROLE;
-
-    /**
-     * The table <code>UP_ARES.S_USER</code>.
-     */
-    public static final SUser S_USER = up.zero.domain.tables.SUser.S_USER;
+    public static final CiDept CI_DEPT = up.zero.domain.tables.CiDept.CI_DEPT;
 }

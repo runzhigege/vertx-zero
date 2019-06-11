@@ -9,15 +9,13 @@ import javax.annotation.Generated;
 import org.jooq.UniqueKey;
 import org.jooq.impl.Internal;
 
-import up.zero.domain.tables.SRole;
-import up.zero.domain.tables.SUser;
-import up.zero.domain.tables.records.SRoleRecord;
-import up.zero.domain.tables.records.SUserRecord;
+import up.zero.domain.tables.CiDept;
+import up.zero.domain.tables.records.CiDeptRecord;
 
 
 /**
  * A class modelling foreign key relationships and constraints of tables of 
- * the <code>UP_ARES</code> schema.
+ * the <code>DB_RBAC</code> schema.
  */
 @Generated(
     value = {
@@ -38,12 +36,9 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<SRoleRecord> KEY_S_ROLE_PRIMARY = UniqueKeys0.KEY_S_ROLE_PRIMARY;
-    public static final UniqueKey<SRoleRecord> KEY_S_ROLE_CODE = UniqueKeys0.KEY_S_ROLE_CODE;
-    public static final UniqueKey<SUserRecord> KEY_S_USER_PRIMARY = UniqueKeys0.KEY_S_USER_PRIMARY;
-    public static final UniqueKey<SUserRecord> KEY_S_USER_USERNAME = UniqueKeys0.KEY_S_USER_USERNAME;
-    public static final UniqueKey<SUserRecord> KEY_S_USER_MOBILE = UniqueKeys0.KEY_S_USER_MOBILE;
-    public static final UniqueKey<SUserRecord> KEY_S_USER_EMAIL = UniqueKeys0.KEY_S_USER_EMAIL;
+    public static final UniqueKey<CiDeptRecord> KEY_CI_DEPT_PRIMARY = UniqueKeys0.KEY_CI_DEPT_PRIMARY;
+    public static final UniqueKey<CiDeptRecord> KEY_CI_DEPT_NAME = UniqueKeys0.KEY_CI_DEPT_NAME;
+    public static final UniqueKey<CiDeptRecord> KEY_CI_DEPT_CODE = UniqueKeys0.KEY_CI_DEPT_CODE;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -55,11 +50,8 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class UniqueKeys0 {
-        public static final UniqueKey<SRoleRecord> KEY_S_ROLE_PRIMARY = Internal.createUniqueKey(SRole.S_ROLE, "KEY_S_ROLE_PRIMARY", SRole.S_ROLE.KEY);
-        public static final UniqueKey<SRoleRecord> KEY_S_ROLE_CODE = Internal.createUniqueKey(SRole.S_ROLE, "KEY_S_ROLE_CODE", SRole.S_ROLE.CODE, SRole.S_ROLE.SIGMA);
-        public static final UniqueKey<SUserRecord> KEY_S_USER_PRIMARY = Internal.createUniqueKey(SUser.S_USER, "KEY_S_USER_PRIMARY", SUser.S_USER.KEY);
-        public static final UniqueKey<SUserRecord> KEY_S_USER_USERNAME = Internal.createUniqueKey(SUser.S_USER, "KEY_S_USER_USERNAME", SUser.S_USER.USERNAME, SUser.S_USER.SIGMA);
-        public static final UniqueKey<SUserRecord> KEY_S_USER_MOBILE = Internal.createUniqueKey(SUser.S_USER, "KEY_S_USER_MOBILE", SUser.S_USER.MOBILE, SUser.S_USER.SIGMA);
-        public static final UniqueKey<SUserRecord> KEY_S_USER_EMAIL = Internal.createUniqueKey(SUser.S_USER, "KEY_S_USER_EMAIL", SUser.S_USER.EMAIL, SUser.S_USER.SIGMA);
+        public static final UniqueKey<CiDeptRecord> KEY_CI_DEPT_PRIMARY = Internal.createUniqueKey(CiDept.CI_DEPT, "KEY_CI_DEPT_PRIMARY", CiDept.CI_DEPT.KEY);
+        public static final UniqueKey<CiDeptRecord> KEY_CI_DEPT_NAME = Internal.createUniqueKey(CiDept.CI_DEPT, "KEY_CI_DEPT_NAME", CiDept.CI_DEPT.NAME, CiDept.CI_DEPT.APP_ID);
+        public static final UniqueKey<CiDeptRecord> KEY_CI_DEPT_CODE = Internal.createUniqueKey(CiDept.CI_DEPT, "KEY_CI_DEPT_CODE", CiDept.CI_DEPT.CODE, CiDept.CI_DEPT.APP_ID);
     }
 }

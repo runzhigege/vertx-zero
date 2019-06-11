@@ -18,6 +18,7 @@
             <name>org.jooq.util.mysql.MySQLDatabase</name>
             <inputSchema>DB_RBAC</inputSchema>
             <unsignedTypes>false</unsignedTypes>
+            <includes>(^(CI_).*)</includes>
             <forcedTypes>
                 <!-- Convert tinyint to boolean -->
                 <forcedType>

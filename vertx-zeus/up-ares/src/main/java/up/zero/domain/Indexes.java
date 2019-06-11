@@ -10,12 +10,11 @@ import org.jooq.Index;
 import org.jooq.OrderField;
 import org.jooq.impl.Internal;
 
-import up.zero.domain.tables.SRole;
-import up.zero.domain.tables.SUser;
+import up.zero.domain.tables.CiDept;
 
 
 /**
- * A class modelling indexes of tables of the <code>UP_ARES</code> schema.
+ * A class modelling indexes of tables of the <code>DB_RBAC</code> schema.
  */
 @Generated(
     value = {
@@ -31,23 +30,17 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
-    public static final Index S_ROLE_CODE = Indexes0.S_ROLE_CODE;
-    public static final Index S_ROLE_PRIMARY = Indexes0.S_ROLE_PRIMARY;
-    public static final Index S_USER_EMAIL = Indexes0.S_USER_EMAIL;
-    public static final Index S_USER_MOBILE = Indexes0.S_USER_MOBILE;
-    public static final Index S_USER_PRIMARY = Indexes0.S_USER_PRIMARY;
-    public static final Index S_USER_USERNAME = Indexes0.S_USER_USERNAME;
+    public static final Index CI_DEPT_CODE = Indexes0.CI_DEPT_CODE;
+    public static final Index CI_DEPT_NAME = Indexes0.CI_DEPT_NAME;
+    public static final Index CI_DEPT_PRIMARY = Indexes0.CI_DEPT_PRIMARY;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
     // -------------------------------------------------------------------------
 
     private static class Indexes0 {
-        public static Index S_ROLE_CODE = Internal.createIndex("CODE", SRole.S_ROLE, new OrderField[] { SRole.S_ROLE.CODE, SRole.S_ROLE.SIGMA }, true);
-        public static Index S_ROLE_PRIMARY = Internal.createIndex("PRIMARY", SRole.S_ROLE, new OrderField[] { SRole.S_ROLE.KEY }, true);
-        public static Index S_USER_EMAIL = Internal.createIndex("EMAIL", SUser.S_USER, new OrderField[] { SUser.S_USER.EMAIL, SUser.S_USER.SIGMA }, true);
-        public static Index S_USER_MOBILE = Internal.createIndex("MOBILE", SUser.S_USER, new OrderField[] { SUser.S_USER.MOBILE, SUser.S_USER.SIGMA }, true);
-        public static Index S_USER_PRIMARY = Internal.createIndex("PRIMARY", SUser.S_USER, new OrderField[] { SUser.S_USER.KEY }, true);
-        public static Index S_USER_USERNAME = Internal.createIndex("USERNAME", SUser.S_USER, new OrderField[] { SUser.S_USER.USERNAME, SUser.S_USER.SIGMA }, true);
+        public static Index CI_DEPT_CODE = Internal.createIndex("CODE", CiDept.CI_DEPT, new OrderField[] { CiDept.CI_DEPT.CODE, CiDept.CI_DEPT.APP_ID }, true);
+        public static Index CI_DEPT_NAME = Internal.createIndex("NAME", CiDept.CI_DEPT, new OrderField[] { CiDept.CI_DEPT.NAME, CiDept.CI_DEPT.APP_ID }, true);
+        public static Index CI_DEPT_PRIMARY = Internal.createIndex("PRIMARY", CiDept.CI_DEPT, new OrderField[] { CiDept.CI_DEPT.KEY }, true);
     }
 }
