@@ -24,4 +24,28 @@ public interface PostAgent {
     @Address(Addr.Post.ADD)
     JsonObject create(@PathParam("actor") String actor,
                       @BodyParam JsonObject data);
+
+    /*
+     * Search Interface for Query Engine
+     */
+    @POST
+    @Path("/{actor}/search")
+    @Address(Addr.Post.SEARCH)
+    JsonObject search(@PathParam("actor") String actor,
+                      @BodyParam JsonObject data);
+
+    /*
+     * Existing/Missing Interface for Async Validation
+     */
+    @POST
+    @Path("/{actor}/existing")
+    @Address(Addr.Post.EXISTING)
+    Boolean existing(@PathParam("actor") String actor,
+                     @BodyParam JsonObject criteria);
+
+    @POST
+    @Path("/{actor}/missing")
+    @Address(Addr.Post.MISSING)
+    Boolean missing(@PathParam("actor") String actor,
+                    @BodyParam JsonObject criteria);
 }

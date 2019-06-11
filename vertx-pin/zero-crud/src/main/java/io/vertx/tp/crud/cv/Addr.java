@@ -33,6 +33,10 @@ public interface Addr {
         String ADD = Prefix._EVENT + "X-ADD";
 
         String SEARCH = Prefix._EVENT + "X-SEARCH";
+
+        String EXISTING = Prefix._EVENT + "X-EXISTING";
+
+        String MISSING = Prefix._EVENT + "X-MISSING";
     }
 
     interface Put {

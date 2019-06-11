@@ -37,6 +37,14 @@ public class Ix {
         return IxFn.search(filters, config);
     }
 
+    public static Function<UxJooq, Future<JsonObject>> query(final JsonObject filters, final IxConfig config) {
+        return IxFn.query(filters, config);
+    }
+
+    public static Function<UxJooq, Future<Boolean>> existing(final JsonObject filters, final IxConfig config) {
+        return IxFn.existing(filters, config);
+    }
+
     // Atom creation
     /*
      * IxIn reference
