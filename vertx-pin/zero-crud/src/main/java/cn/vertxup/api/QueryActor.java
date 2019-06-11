@@ -45,7 +45,7 @@ public class QueryActor {
                     /* Verify */
                     .compose(input -> IxActor.verify().bind(request).procAsync(input, config))
                     /* Execution */
-                    .compose(params -> Ix.search(params, config).apply(dao))
+                    .compose(params -> Ix.query(params, config).apply(dao))
                     /* Completed */
                     .compose(Http::success200);
         });
