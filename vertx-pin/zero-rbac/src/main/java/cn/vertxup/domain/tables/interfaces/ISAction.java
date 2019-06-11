@@ -54,26 +54,6 @@ public interface ISAction extends Serializable {
     public String getCode();
 
     /**
-     * Setter for <code>DB_RBAC.S_ACTION.LEVEL</code>. 「level」- 操作级别
-     */
-    public ISAction setLevel(Integer value);
-
-    /**
-     * Getter for <code>DB_RBAC.S_ACTION.LEVEL</code>. 「level」- 操作级别
-     */
-    public Integer getLevel();
-
-    /**
-     * Setter for <code>DB_RBAC.S_ACTION.PRIORITY</code>. 「priority」- 操作优先级：用户优先、角色优先、统一（定义资源的访问表）
-     */
-    public ISAction setPriority(String value);
-
-    /**
-     * Getter for <code>DB_RBAC.S_ACTION.PRIORITY</code>. 「priority」- 操作优先级：用户优先、角色优先、统一（定义资源的访问表）
-     */
-    public String getPriority();
-
-    /**
      * Setter for <code>DB_RBAC.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
      */
     public ISAction setResourceId(String value);
@@ -84,22 +64,52 @@ public interface ISAction extends Serializable {
     public String getResourceId();
 
     /**
-     * Setter for <code>DB_RBAC.S_ACTION.CATEGORY</code>. 「category」- 组类型
+     * Setter for <code>DB_RBAC.S_ACTION.PERMISSION_ID</code>. 「permissionId」- 操作所属权限
      */
-    public ISAction setCategory(String value);
+    public ISAction setPermissionId(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_ACTION.CATEGORY</code>. 「category」- 组类型
+     * Getter for <code>DB_RBAC.S_ACTION.PERMISSION_ID</code>. 「permissionId」- 操作所属权限
      */
-    public String getCategory();
+    public String getPermissionId();
 
     /**
-     * Setter for <code>DB_RBAC.S_ACTION.SIGMA</code>. 「sigma」- 绑定的统一标识
+     * Setter for <code>DB_RBAC.S_ACTION.LEVEL</code>. 「level」- 操作级别, ACL控制
+     */
+    public ISAction setLevel(Integer value);
+
+    /**
+     * Getter for <code>DB_RBAC.S_ACTION.LEVEL</code>. 「level」- 操作级别, ACL控制
+     */
+    public Integer getLevel();
+
+    /**
+     * Setter for <code>DB_RBAC.S_ACTION.URI</code>. 「uri」- 资源地址
+     */
+    public ISAction setUri(String value);
+
+    /**
+     * Getter for <code>DB_RBAC.S_ACTION.URI</code>. 「uri」- 资源地址
+     */
+    public String getUri();
+
+    /**
+     * Setter for <code>DB_RBAC.S_ACTION.METHOD</code>. 「method」- 资源方法
+     */
+    public ISAction setMethod(String value);
+
+    /**
+     * Getter for <code>DB_RBAC.S_ACTION.METHOD</code>. 「method」- 资源方法
+     */
+    public String getMethod();
+
+    /**
+     * Setter for <code>DB_RBAC.S_ACTION.SIGMA</code>. 「sigma」- 统一标识
      */
     public ISAction setSigma(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_ACTION.SIGMA</code>. 「sigma」- 绑定的统一标识
+     * Getter for <code>DB_RBAC.S_ACTION.SIGMA</code>. 「sigma」- 统一标识
      */
     public String getSigma();
 
@@ -191,10 +201,11 @@ public interface ISAction extends Serializable {
         setKey(json.getString("KEY"));
         setName(json.getString("NAME"));
         setCode(json.getString("CODE"));
-        setLevel(json.getInteger("LEVEL"));
-        setPriority(json.getString("PRIORITY"));
         setResourceId(json.getString("RESOURCE_ID"));
-        setCategory(json.getString("CATEGORY"));
+        setPermissionId(json.getString("PERMISSION_ID"));
+        setLevel(json.getInteger("LEVEL"));
+        setUri(json.getString("URI"));
+        setMethod(json.getString("METHOD"));
         setSigma(json.getString("SIGMA"));
         setLanguage(json.getString("LANGUAGE"));
         setActive(json.getBoolean("ACTIVE"));
@@ -212,10 +223,11 @@ public interface ISAction extends Serializable {
         json.put("KEY",getKey());
         json.put("NAME",getName());
         json.put("CODE",getCode());
-        json.put("LEVEL",getLevel());
-        json.put("PRIORITY",getPriority());
         json.put("RESOURCE_ID",getResourceId());
-        json.put("CATEGORY",getCategory());
+        json.put("PERMISSION_ID",getPermissionId());
+        json.put("LEVEL",getLevel());
+        json.put("URI",getUri());
+        json.put("METHOD",getMethod());
         json.put("SIGMA",getSigma());
         json.put("LANGUAGE",getLanguage());
         json.put("ACTIVE",getActive());

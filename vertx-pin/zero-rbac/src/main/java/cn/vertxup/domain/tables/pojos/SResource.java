@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SResource implements ISResource {
 
-    private static final long serialVersionUID = 594813792;
+    private static final long serialVersionUID = 331000415;
 
     private String        key;
     private String        code;
@@ -34,13 +34,13 @@ public class SResource implements ISResource {
     private String        query;
     private Integer       level;
     private LocalDateTime expired;
-    private String        type;
-    private String        uri;
-    private String        method;
+    private String        modeRole;
+    private String        modeGroup;
+    private String        modeTree;
+    private String        sigma;
     private String        modelId;
     private String        modelKey;
     private String        category;
-    private String        sigma;
     private String        language;
     private Boolean       active;
     private String        metadata;
@@ -60,13 +60,13 @@ public class SResource implements ISResource {
         this.query = value.query;
         this.level = value.level;
         this.expired = value.expired;
-        this.type = value.type;
-        this.uri = value.uri;
-        this.method = value.method;
+        this.modeRole = value.modeRole;
+        this.modeGroup = value.modeGroup;
+        this.modeTree = value.modeTree;
+        this.sigma = value.sigma;
         this.modelId = value.modelId;
         this.modelKey = value.modelKey;
         this.category = value.category;
-        this.sigma = value.sigma;
         this.language = value.language;
         this.active = value.active;
         this.metadata = value.metadata;
@@ -85,13 +85,13 @@ public class SResource implements ISResource {
         String        query,
         Integer       level,
         LocalDateTime expired,
-        String        type,
-        String        uri,
-        String        method,
+        String        modeRole,
+        String        modeGroup,
+        String        modeTree,
+        String        sigma,
         String        modelId,
         String        modelKey,
         String        category,
-        String        sigma,
         String        language,
         Boolean       active,
         String        metadata,
@@ -108,13 +108,13 @@ public class SResource implements ISResource {
         this.query = query;
         this.level = level;
         this.expired = expired;
-        this.type = type;
-        this.uri = uri;
-        this.method = method;
+        this.modeRole = modeRole;
+        this.modeGroup = modeGroup;
+        this.modeTree = modeTree;
+        this.sigma = sigma;
         this.modelId = modelId;
         this.modelKey = modelKey;
         this.category = category;
-        this.sigma = sigma;
         this.language = language;
         this.active = active;
         this.metadata = metadata;
@@ -213,35 +213,46 @@ public class SResource implements ISResource {
     }
 
     @Override
-    public String getType() {
-        return this.type;
+    public String getModeRole() {
+        return this.modeRole;
     }
 
     @Override
-    public SResource setType(String type) {
-        this.type = type;
+    public SResource setModeRole(String modeRole) {
+        this.modeRole = modeRole;
         return this;
     }
 
     @Override
-    public String getUri() {
-        return this.uri;
+    public String getModeGroup() {
+        return this.modeGroup;
     }
 
     @Override
-    public SResource setUri(String uri) {
-        this.uri = uri;
+    public SResource setModeGroup(String modeGroup) {
+        this.modeGroup = modeGroup;
         return this;
     }
 
     @Override
-    public String getMethod() {
-        return this.method;
+    public String getModeTree() {
+        return this.modeTree;
     }
 
     @Override
-    public SResource setMethod(String method) {
-        this.method = method;
+    public SResource setModeTree(String modeTree) {
+        this.modeTree = modeTree;
+        return this;
+    }
+
+    @Override
+    public String getSigma() {
+        return this.sigma;
+    }
+
+    @Override
+    public SResource setSigma(String sigma) {
+        this.sigma = sigma;
         return this;
     }
 
@@ -275,17 +286,6 @@ public class SResource implements ISResource {
     @Override
     public SResource setCategory(String category) {
         this.category = category;
-        return this;
-    }
-
-    @Override
-    public String getSigma() {
-        return this.sigma;
-    }
-
-    @Override
-    public SResource setSigma(String sigma) {
-        this.sigma = sigma;
         return this;
     }
 
@@ -378,13 +378,13 @@ public class SResource implements ISResource {
         sb.append(", ").append(query);
         sb.append(", ").append(level);
         sb.append(", ").append(expired);
-        sb.append(", ").append(type);
-        sb.append(", ").append(uri);
-        sb.append(", ").append(method);
+        sb.append(", ").append(modeRole);
+        sb.append(", ").append(modeGroup);
+        sb.append(", ").append(modeTree);
+        sb.append(", ").append(sigma);
         sb.append(", ").append(modelId);
         sb.append(", ").append(modelKey);
         sb.append(", ").append(category);
-        sb.append(", ").append(sigma);
         sb.append(", ").append(language);
         sb.append(", ").append(active);
         sb.append(", ").append(metadata);
@@ -414,13 +414,13 @@ public class SResource implements ISResource {
         setQuery(from.getQuery());
         setLevel(from.getLevel());
         setExpired(from.getExpired());
-        setType(from.getType());
-        setUri(from.getUri());
-        setMethod(from.getMethod());
+        setModeRole(from.getModeRole());
+        setModeGroup(from.getModeGroup());
+        setModeTree(from.getModeTree());
+        setSigma(from.getSigma());
         setModelId(from.getModelId());
         setModelKey(from.getModelKey());
         setCategory(from.getCategory());
-        setSigma(from.getSigma());
         setLanguage(from.getLanguage());
         setActive(from.getActive());
         setMetadata(from.getMetadata());

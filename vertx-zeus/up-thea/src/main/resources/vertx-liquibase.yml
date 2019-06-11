@@ -1,8 +1,0 @@
-liquibase:
-  # liquibase
-  config:
-    driverClassName: "com.mysql.cj.jdbc.Driver"
-    username: htl
-    password: "pl,okmijn123"
-    catalog: DB_HTL
-    jdbcUrl: "jdbc:mysql://127.0.0.1:3306/DB_JOOQ?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false"

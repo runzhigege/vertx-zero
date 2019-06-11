@@ -1,3 +1,0 @@
-code:
-  - type: required
-    message: "对不起，角色编码不可为空！"

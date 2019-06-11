@@ -54,36 +54,6 @@ public interface ISPermission extends Serializable {
     public String getCode();
 
     /**
-     * Setter for <code>DB_RBAC.S_PERMISSION.PRIORITY</code>. 「priority」- 权限优先级：角色优先、组优先、用户优先
-     */
-    public ISPermission setPriority(String value);
-
-    /**
-     * Getter for <code>DB_RBAC.S_PERMISSION.PRIORITY</code>. 「priority」- 权限优先级：角色优先、组优先、用户优先
-     */
-    public String getPriority();
-
-    /**
-     * Setter for <code>DB_RBAC.S_PERMISSION.MODE</code>. 「mode」- 继承、限制、时域、指定
-     */
-    public ISPermission setMode(String value);
-
-    /**
-     * Getter for <code>DB_RBAC.S_PERMISSION.MODE</code>. 「mode」- 继承、限制、时域、指定
-     */
-    public String getMode();
-
-    /**
-     * Setter for <code>DB_RBAC.S_PERMISSION.CATEGORY</code>. 「category」- 组类型
-     */
-    public ISPermission setCategory(String value);
-
-    /**
-     * Getter for <code>DB_RBAC.S_PERMISSION.CATEGORY</code>. 「category」- 组类型
-     */
-    public String getCategory();
-
-    /**
      * Setter for <code>DB_RBAC.S_PERMISSION.SIGMA</code>. 「sigma」- 绑定的统一标识
      */
     public ISPermission setSigma(String value);
@@ -181,9 +151,6 @@ public interface ISPermission extends Serializable {
         setKey(json.getString("KEY"));
         setName(json.getString("NAME"));
         setCode(json.getString("CODE"));
-        setPriority(json.getString("PRIORITY"));
-        setMode(json.getString("MODE"));
-        setCategory(json.getString("CATEGORY"));
         setSigma(json.getString("SIGMA"));
         setLanguage(json.getString("LANGUAGE"));
         setActive(json.getBoolean("ACTIVE"));
@@ -201,9 +168,6 @@ public interface ISPermission extends Serializable {
         json.put("KEY",getKey());
         json.put("NAME",getName());
         json.put("CODE",getCode());
-        json.put("PRIORITY",getPriority());
-        json.put("MODE",getMode());
-        json.put("CATEGORY",getCategory());
         json.put("SIGMA",getSigma());
         json.put("LANGUAGE",getLanguage());
         json.put("ACTIVE",getActive());

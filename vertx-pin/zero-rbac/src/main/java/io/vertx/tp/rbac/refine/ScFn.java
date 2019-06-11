@@ -1,15 +1,41 @@
 package io.vertx.tp.rbac.refine;
 
+import io.vertx.core.CompositeFuture;
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
+import io.vertx.up.aiki.Uarr;
+import io.vertx.up.aiki.Ux;
+import io.vertx.up.exception.WebException;
+import io.vertx.up.exception._500InternalServerException;
+
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 class ScFn {
 
-    static <T, R> List<R> reduce(final List<T> list, final Function<T, R> function) {
-        return list.stream().filter(Objects::nonNull)
-                .map(function).filter(Objects::nonNull)
-                .collect(Collectors.toList());
+    private static final WebException ERROR = new _500InternalServerException(ScFn.class, null);
+
+    static <T> Future<JsonArray> relation(final String field, final String key, final Class<?> daoCls) {
+        return Ux.Jooq.on(daoCls).<T>fetchAsync(field, key)
+                .compose(Ux::fnJArray)
+                .compose(relation -> Uarr.create(relation)
+                        .remove(field).toFuture());
+    }
+
+    static <T> Future<List<T>> composite(final CompositeFuture res) {
+        if (res.succeeded()) {
+            final List<T> result = res.list();
+            return Future.succeededFuture(result);
+        } else {
+            final Throwable error = res.cause();
+            final WebException failure;
+            if (Objects.nonNull(error)) {
+                error.printStackTrace();
+                failure = new _500InternalServerException(ScFn.class, error.getMessage());
+            } else {
+                failure = ERROR;
+            }
+            return Future.failedFuture(failure);
+        }
     }
 }

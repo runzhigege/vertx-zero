@@ -3,6 +3,7 @@ package io.vertx.up.secure.handler;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
+import io.vertx.core.MultiMap;
 import io.vertx.core.http.*;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.AuthProvider;
@@ -10,6 +11,7 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.vertx.ext.web.handler.AuthHandler;
+import io.vertx.up.eon.ID;
 import io.vertx.up.exception.*;
 import io.vertx.up.log.Annal;
 import io.vertx.up.web.ZeroAnno;
@@ -20,6 +22,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@SuppressWarnings("all")
 public abstract class AuthPhylum implements AuthHandler {
 
     static final String AUTH_PROVIDER_CONTEXT_KEY = "io.vertx.ext.web.handler.AuthHandler.provider";
@@ -275,6 +278,17 @@ public abstract class AuthPhylum implements AuthHandler {
         metadata.put("requestUri", request.uri());
         metadata.put("method", request.method().name());
         data.put("metadata", metadata);
+        /*
+         * Build Custom Headers
+         */
+        final MultiMap inputHeaders = request.headers();
+        final JsonObject headers = new JsonObject();
+        inputHeaders.forEach(entry -> {
+            if (ID.Header.PARAM_MAP.containsKey(entry.getKey())) {
+                headers.put(entry.getKey(), entry.getValue());
+            }
+        });
+        data.put("headers", headers);
         this.getLogger().info("[ ZERO ] Auth Information: {0}", data.encode());
         return data;
     }

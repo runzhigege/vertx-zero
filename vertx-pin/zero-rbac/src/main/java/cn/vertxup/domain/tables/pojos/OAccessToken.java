@@ -24,44 +24,56 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class OAccessToken implements IOAccessToken {
 
-    private static final long serialVersionUID = 618837304;
+    private static final long serialVersionUID = 376621215;
 
     private String        key;
     private byte[]        token;
-    private LocalDateTime expiredTime;
+    private byte[]        auth;
+    private Long          expiredTime;
     private byte[]        refreshToken;
     private String        language;
     private Boolean       active;
     private String        metadata;
+    private LocalDateTime createdAt;
+    private String        createdBy;
 
     public OAccessToken() {}
 
     public OAccessToken(OAccessToken value) {
         this.key = value.key;
         this.token = value.token;
+        this.auth = value.auth;
         this.expiredTime = value.expiredTime;
         this.refreshToken = value.refreshToken;
         this.language = value.language;
         this.active = value.active;
         this.metadata = value.metadata;
+        this.createdAt = value.createdAt;
+        this.createdBy = value.createdBy;
     }
 
     public OAccessToken(
         String        key,
         byte[]        token,
-        LocalDateTime expiredTime,
+        byte[]        auth,
+        Long          expiredTime,
         byte[]        refreshToken,
         String        language,
         Boolean       active,
-        String        metadata
+        String        metadata,
+        LocalDateTime createdAt,
+        String        createdBy
     ) {
         this.key = key;
         this.token = token;
+        this.auth = auth;
         this.expiredTime = expiredTime;
         this.refreshToken = refreshToken;
         this.language = language;
         this.active = active;
         this.metadata = metadata;
+        this.createdAt = createdAt;
+        this.createdBy = createdBy;
     }
 
     @Override
@@ -87,12 +99,23 @@ public class OAccessToken implements IOAccessToken {
     }
 
     @Override
-    public LocalDateTime getExpiredTime() {
+    public byte[] getAuth() {
+        return this.auth;
+    }
+
+    @Override
+    public OAccessToken setAuth(byte... auth) {
+        this.auth = auth;
+        return this;
+    }
+
+    @Override
+    public Long getExpiredTime() {
         return this.expiredTime;
     }
 
     @Override
-    public OAccessToken setExpiredTime(LocalDateTime expiredTime) {
+    public OAccessToken setExpiredTime(Long expiredTime) {
         this.expiredTime = expiredTime;
         return this;
     }
@@ -142,16 +165,41 @@ public class OAccessToken implements IOAccessToken {
     }
 
     @Override
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    @Override
+    public OAccessToken setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    @Override
+    public String getCreatedBy() {
+        return this.createdBy;
+    }
+
+    @Override
+    public OAccessToken setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("OAccessToken (");
 
         sb.append(key);
+        sb.append(", ").append("[binary...]");
         sb.append(", ").append("[binary...]");
         sb.append(", ").append(expiredTime);
         sb.append(", ").append("[binary...]");
         sb.append(", ").append(language);
         sb.append(", ").append(active);
         sb.append(", ").append(metadata);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(createdBy);
 
         sb.append(")");
         return sb.toString();
@@ -168,11 +216,14 @@ public class OAccessToken implements IOAccessToken {
     public void from(IOAccessToken from) {
         setKey(from.getKey());
         setToken(from.getToken());
+        setAuth(from.getAuth());
         setExpiredTime(from.getExpiredTime());
         setRefreshToken(from.getRefreshToken());
         setLanguage(from.getLanguage());
         setActive(from.getActive());
         setMetadata(from.getMetadata());
+        setCreatedAt(from.getCreatedAt());
+        setCreatedBy(from.getCreatedBy());
     }
 
     /**

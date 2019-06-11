@@ -84,27 +84,6 @@ public class SPermissionDao extends DAOImpl<SPermissionRecord, cn.vertxup.domain
     }
 
     /**
-     * Fetch records that have <code>PRIORITY IN (values)</code>
-     */
-    public List<cn.vertxup.domain.tables.pojos.SPermission> fetchByPriority(String... values) {
-        return fetch(SPermission.S_PERMISSION.PRIORITY, values);
-    }
-
-    /**
-     * Fetch records that have <code>MODE IN (values)</code>
-     */
-    public List<cn.vertxup.domain.tables.pojos.SPermission> fetchByMode(String... values) {
-        return fetch(SPermission.S_PERMISSION.MODE, values);
-    }
-
-    /**
-     * Fetch records that have <code>CATEGORY IN (values)</code>
-     */
-    public List<cn.vertxup.domain.tables.pojos.SPermission> fetchByCategory(String... values) {
-        return fetch(SPermission.S_PERMISSION.CATEGORY, values);
-    }
-
-    /**
      * Fetch records that have <code>SIGMA IN (values)</code>
      */
     public List<cn.vertxup.domain.tables.pojos.SPermission> fetchBySigma(String... values) {
@@ -186,27 +165,6 @@ public class SPermissionDao extends DAOImpl<SPermissionRecord, cn.vertxup.domain
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SPermission>> fetchByCodeAsync(List<String> values) {
         return fetchAsync(SPermission.S_PERMISSION.CODE,values);
-    }
-
-    /**
-     * Fetch records that have <code>PRIORITY IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SPermission>> fetchByPriorityAsync(List<String> values) {
-        return fetchAsync(SPermission.S_PERMISSION.PRIORITY,values);
-    }
-
-    /**
-     * Fetch records that have <code>MODE IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SPermission>> fetchByModeAsync(List<String> values) {
-        return fetchAsync(SPermission.S_PERMISSION.MODE,values);
-    }
-
-    /**
-     * Fetch records that have <code>CATEGORY IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SPermission>> fetchByCategoryAsync(List<String> values) {
-        return fetchAsync(SPermission.S_PERMISSION.CATEGORY,values);
     }
 
     /**

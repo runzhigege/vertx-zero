@@ -39,7 +39,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SAction extends TableImpl<SActionRecord> {
 
-    private static final long serialVersionUID = -1110840011;
+    private static final long serialVersionUID = -2011422518;
 
     /**
      * The reference instance of <code>DB_RBAC.S_ACTION</code>
@@ -70,29 +70,34 @@ public class SAction extends TableImpl<SActionRecord> {
     public final TableField<SActionRecord, String> CODE = createField("CODE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「code」- 操作码");
 
     /**
-     * The column <code>DB_RBAC.S_ACTION.LEVEL</code>. 「level」- 操作级别
-     */
-    public final TableField<SActionRecord, Integer> LEVEL = createField("LEVEL", org.jooq.impl.SQLDataType.INTEGER, this, "「level」- 操作级别");
-
-    /**
-     * The column <code>DB_RBAC.S_ACTION.PRIORITY</code>. 「priority」- 操作优先级：用户优先、角色优先、统一（定义资源的访问表）
-     */
-    public final TableField<SActionRecord, String> PRIORITY = createField("PRIORITY", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「priority」- 操作优先级：用户优先、角色优先、统一（定义资源的访问表）");
-
-    /**
      * The column <code>DB_RBAC.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
      */
     public final TableField<SActionRecord, String> RESOURCE_ID = createField("RESOURCE_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「resourceId」- 操作关联资源ID");
 
     /**
-     * The column <code>DB_RBAC.S_ACTION.CATEGORY</code>. 「category」- 组类型
+     * The column <code>DB_RBAC.S_ACTION.PERMISSION_ID</code>. 「permissionId」- 操作所属权限
      */
-    public final TableField<SActionRecord, String> CATEGORY = createField("CATEGORY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「category」- 组类型");
+    public final TableField<SActionRecord, String> PERMISSION_ID = createField("PERMISSION_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「permissionId」- 操作所属权限");
 
     /**
-     * The column <code>DB_RBAC.S_ACTION.SIGMA</code>. 「sigma」- 绑定的统一标识
+     * The column <code>DB_RBAC.S_ACTION.LEVEL</code>. 「level」- 操作级别, ACL控制
      */
-    public final TableField<SActionRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(128), this, "「sigma」- 绑定的统一标识");
+    public final TableField<SActionRecord, Integer> LEVEL = createField("LEVEL", org.jooq.impl.SQLDataType.INTEGER, this, "「level」- 操作级别, ACL控制");
+
+    /**
+     * The column <code>DB_RBAC.S_ACTION.URI</code>. 「uri」- 资源地址
+     */
+    public final TableField<SActionRecord, String> URI = createField("URI", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「uri」- 资源地址");
+
+    /**
+     * The column <code>DB_RBAC.S_ACTION.METHOD</code>. 「method」- 资源方法
+     */
+    public final TableField<SActionRecord, String> METHOD = createField("METHOD", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「method」- 资源方法");
+
+    /**
+     * The column <code>DB_RBAC.S_ACTION.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public final TableField<SActionRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「sigma」- 统一标识");
 
     /**
      * The column <code>DB_RBAC.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
@@ -171,7 +176,7 @@ public class SAction extends TableImpl<SActionRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.S_ACTION_CODE, Indexes.S_ACTION_PRIMARY, Indexes.S_ACTION_RESOURCE_ID);
+        return Arrays.<Index>asList(Indexes.S_ACTION_CODE, Indexes.S_ACTION_PRIMARY, Indexes.S_ACTION_RESOURCE_ID, Indexes.S_ACTION_URI);
     }
 
     /**
@@ -187,7 +192,7 @@ public class SAction extends TableImpl<SActionRecord> {
      */
     @Override
     public List<UniqueKey<SActionRecord>> getKeys() {
-        return Arrays.<UniqueKey<SActionRecord>>asList(Keys.KEY_S_ACTION_PRIMARY, Keys.KEY_S_ACTION_CODE, Keys.KEY_S_ACTION_RESOURCE_ID);
+        return Arrays.<UniqueKey<SActionRecord>>asList(Keys.KEY_S_ACTION_PRIMARY, Keys.KEY_S_ACTION_CODE, Keys.KEY_S_ACTION_RESOURCE_ID, Keys.KEY_S_ACTION_URI);
     }
 
     /**

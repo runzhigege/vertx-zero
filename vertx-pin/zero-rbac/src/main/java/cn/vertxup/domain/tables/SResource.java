@@ -39,7 +39,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SResource extends TableImpl<SResourceRecord> {
 
-    private static final long serialVersionUID = 1509023664;
+    private static final long serialVersionUID = -255518397;
 
     /**
      * The reference instance of <code>DB_RBAC.S_RESOURCE</code>
@@ -95,19 +95,24 @@ public class SResource extends TableImpl<SResourceRecord> {
     public final TableField<SResourceRecord, LocalDateTime> EXPIRED = createField("EXPIRED", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「expired」- 资源过期时间（动态授权）");
 
     /**
-     * The column <code>DB_RBAC.S_RESOURCE.TYPE</code>. 「type」- 该资源类型：USER / ROLE / UNIFORM
+     * The column <code>DB_RBAC.S_RESOURCE.MODE_ROLE</code>. 「modeRole」- 该资源查找角色的模式
      */
-    public final TableField<SResourceRecord, String> TYPE = createField("TYPE", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「type」- 该资源类型：USER / ROLE / UNIFORM");
+    public final TableField<SResourceRecord, String> MODE_ROLE = createField("MODE_ROLE", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「modeRole」- 该资源查找角色的模式");
 
     /**
-     * The column <code>DB_RBAC.S_RESOURCE.URI</code>. 「uri」- 资源地址
+     * The column <code>DB_RBAC.S_RESOURCE.MODE_GROUP</code>. 「modeGroup」- 该资源查找组的模式
      */
-    public final TableField<SResourceRecord, String> URI = createField("URI", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「uri」- 资源地址");
+    public final TableField<SResourceRecord, String> MODE_GROUP = createField("MODE_GROUP", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「modeGroup」- 该资源查找组的模式");
 
     /**
-     * The column <code>DB_RBAC.S_RESOURCE.METHOD</code>. 「method」- 资源方法
+     * The column <code>DB_RBAC.S_RESOURCE.MODE_TREE</code>. 「modeTree」- 该资源处理树（用户组）的模式
      */
-    public final TableField<SResourceRecord, String> METHOD = createField("METHOD", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「method」- 资源方法");
+    public final TableField<SResourceRecord, String> MODE_TREE = createField("MODE_TREE", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「modeTree」- 该资源处理树（用户组）的模式");
+
+    /**
+     * The column <code>DB_RBAC.S_RESOURCE.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public final TableField<SResourceRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「sigma」- 统一标识");
 
     /**
      * The column <code>DB_RBAC.S_RESOURCE.MODEL_ID</code>. 「modelId」- 资源对应的模型identifier
@@ -123,11 +128,6 @@ public class SResource extends TableImpl<SResourceRecord> {
      * The column <code>DB_RBAC.S_RESOURCE.CATEGORY</code>. 「category」- 资源分类
      */
     public final TableField<SResourceRecord, String> CATEGORY = createField("CATEGORY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「category」- 资源分类");
-
-    /**
-     * The column <code>DB_RBAC.S_RESOURCE.SIGMA</code>. 「sigma」- 角色绑定的统一标识
-     */
-    public final TableField<SResourceRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「sigma」- 角色绑定的统一标识");
 
     /**
      * The column <code>DB_RBAC.S_RESOURCE.LANGUAGE</code>. 「language」- 使用的语言
@@ -206,7 +206,7 @@ public class SResource extends TableImpl<SResourceRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.S_RESOURCE_PRIMARY, Indexes.S_RESOURCE_SIGMA);
+        return Arrays.<Index>asList(Indexes.S_RESOURCE_PRIMARY);
     }
 
     /**
@@ -222,7 +222,7 @@ public class SResource extends TableImpl<SResourceRecord> {
      */
     @Override
     public List<UniqueKey<SResourceRecord>> getKeys() {
-        return Arrays.<UniqueKey<SResourceRecord>>asList(Keys.KEY_S_RESOURCE_PRIMARY, Keys.KEY_S_RESOURCE_SIGMA);
+        return Arrays.<UniqueKey<SResourceRecord>>asList(Keys.KEY_S_RESOURCE_PRIMARY);
     }
 
     /**

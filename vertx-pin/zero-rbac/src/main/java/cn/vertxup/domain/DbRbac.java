@@ -33,7 +33,7 @@ public class DbRbac extends SchemaImpl {
      * The reference instance of <code>DB_RBAC</code>
      */
     public static final DbRbac DB_RBAC = new DbRbac();
-    private static final long serialVersionUID = 126025009;
+    private static final long serialVersionUID = 1534465309;
     /**
      * The table <code>DB_RBAC.O_ACCESS_TOKEN</code>.
      */
@@ -48,11 +48,6 @@ public class DbRbac extends SchemaImpl {
      * The table <code>DB_RBAC.R_GROUP_ROLE</code>.
      */
     public final RGroupRole R_GROUP_ROLE = cn.vertxup.domain.tables.RGroupRole.R_GROUP_ROLE;
-
-    /**
-     * The table <code>DB_RBAC.R_PERM_ACTION</code>.
-     */
-    public final RPermAction R_PERM_ACTION = cn.vertxup.domain.tables.RPermAction.R_PERM_ACTION;
 
     /**
      * The table <code>DB_RBAC.R_RESOURCE_MATRIX</code>.
@@ -132,7 +127,6 @@ public class DbRbac extends SchemaImpl {
                 OAccessToken.O_ACCESS_TOKEN,
                 OUser.O_USER,
                 RGroupRole.R_GROUP_ROLE,
-                RPermAction.R_PERM_ACTION,
                 RResourceMatrix.R_RESOURCE_MATRIX,
                 RRolePerm.R_ROLE_PERM,
                 RUserGroup.R_USER_GROUP,
