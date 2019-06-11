@@ -5,7 +5,7 @@ package cn.vertxup.domain;
 
 
 import cn.vertxup.domain.tables.*;
-import io.vertx.tp.rbac.refine.Sc;
+import io.vertx.tp.shared.Ke;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
@@ -103,7 +103,7 @@ public class DbRbac extends SchemaImpl {
      * No further instances allowed
      */
     private DbRbac() {
-        super(Sc.getDatabase(), null);
+        super(Ke.getDatabase(), null);
     }
 
 
