@@ -84,7 +84,7 @@ public class ExcelClientImpl implements ExcelClient {
     private <T> T saveEntity(final JsonObject filters, final JsonObject data, final ExTable table) {
         T reference = null;
         if (Objects.nonNull(table.getPojo()) && Objects.nonNull(table.getDao())) {
-            LOGGER.info("[ Excel ] Filters: {0}", filters.encode());
+            LOGGER.info("[ Excel ] Filters: {0}, Table: {1}", filters.encode(), table.getName());
             final T entity = Ut.deserialize(data, table.getPojo());
             final UxJooq jooq = Ux.Jooq.on(table.getDao());
             if (null != jooq) {
