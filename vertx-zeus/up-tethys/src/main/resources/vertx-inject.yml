@@ -1,2 +1,0 @@
-mongo: io.vertx.up.plugin.mongo.MongoInfix
-redis: io.vertx.up.plugin.redis.RedisInfix

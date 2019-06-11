@@ -10,7 +10,6 @@
     <description>Vertx Zero Framework is a tool for Service Mesh Micro Service.</description>
     <url>http://www.vertxup.cn</url>
     <modules>
-        <module>vertx-zeus</module>
         <module>vertx-import</module>
         <module>vertx-gaia</module>
         <module>vertx-pin</module>
