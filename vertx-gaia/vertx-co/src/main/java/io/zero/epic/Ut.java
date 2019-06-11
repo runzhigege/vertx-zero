@@ -29,6 +29,19 @@ import java.util.function.*;
  * Uniform Tool
  */
 public class Ut {
+    // --- Collection
+    public static <T> Set<T> intersect(final Set<T> left, final Set<T> right) {
+        return Arithmetic.intersect(left, right);
+    }
+
+    public static <T> Set<T> union(final Set<T> left, final Set<T> right) {
+        return Arithmetic.union(left, right);
+    }
+
+    public static <T> Set<T> diff(final Set<T> subtrahend, final Set<T> minuend) {
+        return Arithmetic.diff(subtrahend, minuend);
+    }
+
     // --- Reflection
     public static <T> T instance(final String name, final Object... params) {
         return Instance.instance(clazz(name), params);

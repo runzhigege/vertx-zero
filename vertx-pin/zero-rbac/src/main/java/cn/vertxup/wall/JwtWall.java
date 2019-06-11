@@ -8,6 +8,7 @@ import io.vertx.ext.web.handler.AuthHandler;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.tp.rbac.service.jwt.JwtStub;
+import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Authenticate;
 import io.vertx.up.annotations.Wall;
 import io.vertx.up.log.Annal;
@@ -21,7 +22,7 @@ import javax.inject.Inject;
 public class JwtWall implements Security {
     private static final Annal LOGGER = Annal.get(JwtWall.class);
     @Inject
-    private transient JwtStub stub;
+    private transient JwtStub jwtStub;
 
     @Authenticate
     public AuthHandler authenticate(final Vertx vertx,
@@ -34,12 +35,20 @@ public class JwtWall implements Security {
     public Future<JsonObject> store(final JsonObject data) {
         final String userKey = data.getString("user");
         Sc.infoAuth(LOGGER, AuthMsg.TOKEN_STORE, userKey);
-        return this.stub.store(userKey, data);
+        return this.jwtStub.store(userKey, data);
     }
 
     @Override
     public Future<Boolean> verify(final JsonObject data) {
+        final String token = data.getString("jwt");
+        final JsonObject extracted = Ux.Jwt.extract(data);
+        Sc.infoAuth(LOGGER, AuthMsg.TOKEN_INPUT, token, extracted.encode());
+        return this.jwtStub.verify(extracted.getString("user"), token);
+    }
 
+    @Override
+    public Future<Boolean> access(final JsonObject data) {
+        System.out.println(data.encodePrettily());
         return Future.succeededFuture(Boolean.TRUE);
     }
 }

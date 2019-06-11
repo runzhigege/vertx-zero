@@ -42,7 +42,7 @@ public class PhylumAuth {
 
     public void mount(final Cliff reference) {
         /** Proxy **/
-        reference.setProxy(Ut.instance(this.clazz));
+        reference.setProxy(Ut.singleton(this.clazz));
         // Find the first: Authenticate
         final Optional<Method> authenticateMethod
                 = Arrays.stream(this.methods).filter(

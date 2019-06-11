@@ -13,7 +13,6 @@ import io.vertx.up.aiki.Ux;
 import io.vertx.up.log.Annal;
 
 public class UserService implements UserStub {
-
     private static final Annal LOGGER = Annal.get(UserService.class);
 
     @Override
@@ -24,18 +23,14 @@ public class UserService implements UserStub {
     }
 
     @Override
-    public Future<JsonArray> fetchGroups(final String userKey) {
-        Sc.infoAuth(LOGGER, AuthMsg.RELATION_GROUP, userKey);
-        return Ux.Jooq.on(RUserGroupDao.class)
-                .fetchAsync(AuthKey.F_USER_ID, userKey)
-                .compose(Ux::fnJArray);
+    public Future<JsonArray> fetchRoleIds(final String userKey) {
+        Sc.infoAuth(LOGGER, AuthMsg.RELATION_USER_ROLE, userKey);
+        return Sc.relation(AuthKey.F_USER_ID, userKey, RUserRoleDao.class);
     }
 
     @Override
-    public Future<JsonArray> fetchRoles(final String userKey) {
-        Sc.infoAuth(LOGGER, AuthMsg.RELATION_ROLE, userKey);
-        return Ux.Jooq.on(RUserRoleDao.class)
-                .fetchAsync(AuthKey.F_USER_ID, userKey)
-                .compose(Ux::fnJArray);
+    public Future<JsonArray> fetchGroupIds(final String userKey) {
+        Sc.infoAuth(LOGGER, AuthMsg.RELATION_GROUP, userKey);
+        return Sc.relation(AuthKey.F_USER_ID, userKey, RUserGroupDao.class);
     }
 }

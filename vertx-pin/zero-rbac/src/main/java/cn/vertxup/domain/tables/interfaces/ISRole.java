@@ -104,12 +104,12 @@ public interface ISRole extends Serializable {
     public String getCategory();
 
     /**
-     * Setter for <code>DB_RBAC.S_ROLE.SIGMA</code>. 「sigma」- 角色绑定的统一标识
+     * Setter for <code>DB_RBAC.S_ROLE.SIGMA</code>. 「sigma」- 统一标识
      */
     public ISRole setSigma(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_ROLE.SIGMA</code>. 「sigma」- 角色绑定的统一标识
+     * Getter for <code>DB_RBAC.S_ROLE.SIGMA</code>. 「sigma」- 统一标识
      */
     public String getSigma();
 

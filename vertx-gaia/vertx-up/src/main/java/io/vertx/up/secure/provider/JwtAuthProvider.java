@@ -55,27 +55,33 @@ public class JwtAuthProvider implements JwtAuth {
     @Override
     public void authenticate(final JsonObject authInfo, final Handler<AsyncResult<User>> resultHandler) {
         final String token = authInfo.getString("jwt");
-        // Set token as key for async map extraction;
+        /*
+         * Extract token from authorizeMap here
+         */
+
         if (null == this.authorizeMap) {
             // Async map initialized failure, execute common validation flow.
-            this.authenticate(authInfo).setHandler(this.authenticate(token, resultHandler));
+            this.authenticate(authInfo).setHandler(this.authorized(token, resultHandler));
         } else {
             // Get data from authorizeMap
             this.authorizeMap.get(token, res -> {
                 if (null != res && null != res.result() && res.result()) {
                     // Get data from cache.
                     LOGGER.info(Info.MAP_HIT, token, res.result());
-                    this.authorize(authInfo).setHandler(this.authenticate(token, resultHandler));
+                    // Append 403 authorized
+                    this.verify403(authInfo).compose(authorized ->
+                            // Common Validated
+                            this.authorize(authInfo).setHandler(this.authorized(token, resultHandler)));
                 } else {
                     // Couldn't getNull data from cache
                     LOGGER.debug(Info.MAP_MISSING, token);
-                    this.authenticate(authInfo).setHandler(this.authenticate(token, resultHandler));
+                    this.authenticate(authInfo).setHandler(this.authorized(token, resultHandler));
                 }
             });
         }
     }
 
-    private Handler<AsyncResult<User>> authenticate(final String token, final Handler<AsyncResult<User>> handler) {
+    private Handler<AsyncResult<User>> authorized(final String token, final Handler<AsyncResult<User>> handler) {
         return (user -> this.authorizeMap.get(token, res -> {
             if (!(null != res && null != res.result() && res.result())) {
                 this.authorizeMap.put(token, Boolean.TRUE, result -> {
@@ -89,34 +95,32 @@ public class JwtAuthProvider implements JwtAuth {
     }
 
     private Future<User> verify401(final JsonObject authInfo) {
-        return this.securer.authenticate(authInfo)
-                .compose(verified -> {
-                    if (verified) {
-                        /*
-                         * 401 Passed
-                         */
-                        return this.verify403(authInfo);
-                    } else {
-                        /*
-                         * Default system failure for 401 Jwt Exception
-                         */
-                        return Future.failedFuture(new _401JwtExecutorException(this.getClass(), authInfo.getString("jwt")));
-                    }
-                });
+        return this.securer.authenticate(authInfo).compose(verified -> {
+            if (verified) {
+                /*
+                 * 401 Passed
+                 */
+                return this.verify403(authInfo);
+            } else {
+                /*
+                 * Default system failure for 401 Jwt Exception
+                 */
+                return Future.failedFuture(new _401JwtExecutorException(this.getClass(), authInfo.getString("jwt")));
+            }
+        });
     }
 
     private Future<User> verify403(final JsonObject authInfo) {
-        return this.securer.authorize(authInfo)
-                .compose(verfied -> {
-                    if (verfied) {
-                        /*
-                         * 403 Passed
-                         */
-                        return this.authorize(authInfo);
-                    } else {
-                        return Future.failedFuture(new _403ForbiddenException(this.getClass()));
-                    }
-                });
+        return this.securer.authorize(authInfo).compose(verfied -> {
+            if (verfied) {
+                /*
+                 * 403 Passed
+                 */
+                return this.authorize(authInfo);
+            } else {
+                return Future.failedFuture(new _403ForbiddenException(this.getClass()));
+            }
+        });
     }
 
     private Future<User> authenticate(final JsonObject authInfo) {
@@ -144,6 +148,7 @@ public class JwtAuthProvider implements JwtAuth {
         }
     }
 
+    @SuppressWarnings("all")
     private Future<User> authorize(final JsonObject authInfo) {
         try {
             final JsonObject payload = this.jwt.decode(authInfo.getString("jwt"));

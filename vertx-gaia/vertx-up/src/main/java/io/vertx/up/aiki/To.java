@@ -17,9 +17,9 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+@SuppressWarnings("all")
 class To {
 
-    @SuppressWarnings("unchecked")
     static <T> Future<T> toFuture(final T entity) {
         return Fn.getNull(Future.succeededFuture(),
                 () -> Fn.getSemi(entity instanceof Throwable, null,

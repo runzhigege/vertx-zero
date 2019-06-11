@@ -84,20 +84,6 @@ public class SActionDao extends DAOImpl<SActionRecord, cn.vertxup.domain.tables.
     }
 
     /**
-     * Fetch records that have <code>LEVEL IN (values)</code>
-     */
-    public List<cn.vertxup.domain.tables.pojos.SAction> fetchByLevel(Integer... values) {
-        return fetch(SAction.S_ACTION.LEVEL, values);
-    }
-
-    /**
-     * Fetch records that have <code>PRIORITY IN (values)</code>
-     */
-    public List<cn.vertxup.domain.tables.pojos.SAction> fetchByPriority(String... values) {
-        return fetch(SAction.S_ACTION.PRIORITY, values);
-    }
-
-    /**
      * Fetch records that have <code>RESOURCE_ID IN (values)</code>
      */
     public List<cn.vertxup.domain.tables.pojos.SAction> fetchByResourceId(String... values) {
@@ -112,10 +98,31 @@ public class SActionDao extends DAOImpl<SActionRecord, cn.vertxup.domain.tables.
     }
 
     /**
-     * Fetch records that have <code>CATEGORY IN (values)</code>
+     * Fetch records that have <code>PERMISSION_ID IN (values)</code>
      */
-    public List<cn.vertxup.domain.tables.pojos.SAction> fetchByCategory(String... values) {
-        return fetch(SAction.S_ACTION.CATEGORY, values);
+    public List<cn.vertxup.domain.tables.pojos.SAction> fetchByPermissionId(String... values) {
+        return fetch(SAction.S_ACTION.PERMISSION_ID, values);
+    }
+
+    /**
+     * Fetch records that have <code>LEVEL IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.SAction> fetchByLevel(Integer... values) {
+        return fetch(SAction.S_ACTION.LEVEL, values);
+    }
+
+    /**
+     * Fetch records that have <code>URI IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.SAction> fetchByUri(String... values) {
+        return fetch(SAction.S_ACTION.URI, values);
+    }
+
+    /**
+     * Fetch records that have <code>METHOD IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.SAction> fetchByMethod(String... values) {
+        return fetch(SAction.S_ACTION.METHOD, values);
     }
 
     /**
@@ -203,20 +210,6 @@ public class SActionDao extends DAOImpl<SActionRecord, cn.vertxup.domain.tables.
     }
 
     /**
-     * Fetch records that have <code>LEVEL IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SAction>> fetchByLevelAsync(List<Integer> values) {
-        return fetchAsync(SAction.S_ACTION.LEVEL,values);
-    }
-
-    /**
-     * Fetch records that have <code>PRIORITY IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SAction>> fetchByPriorityAsync(List<String> values) {
-        return fetchAsync(SAction.S_ACTION.PRIORITY,values);
-    }
-
-    /**
      * Fetch records that have <code>RESOURCE_ID IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SAction>> fetchByResourceIdAsync(List<String> values) {
@@ -231,10 +224,31 @@ public class SActionDao extends DAOImpl<SActionRecord, cn.vertxup.domain.tables.
     }
 
     /**
-     * Fetch records that have <code>CATEGORY IN (values)</code> asynchronously
+     * Fetch records that have <code>PERMISSION_ID IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SAction>> fetchByCategoryAsync(List<String> values) {
-        return fetchAsync(SAction.S_ACTION.CATEGORY,values);
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SAction>> fetchByPermissionIdAsync(List<String> values) {
+        return fetchAsync(SAction.S_ACTION.PERMISSION_ID,values);
+    }
+
+    /**
+     * Fetch records that have <code>LEVEL IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SAction>> fetchByLevelAsync(List<Integer> values) {
+        return fetchAsync(SAction.S_ACTION.LEVEL,values);
+    }
+
+    /**
+     * Fetch records that have <code>URI IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SAction>> fetchByUriAsync(List<String> values) {
+        return fetchAsync(SAction.S_ACTION.URI,values);
+    }
+
+    /**
+     * Fetch records that have <code>METHOD IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SAction>> fetchByMethodAsync(List<String> values) {
+        return fetchAsync(SAction.S_ACTION.METHOD,values);
     }
 
     /**

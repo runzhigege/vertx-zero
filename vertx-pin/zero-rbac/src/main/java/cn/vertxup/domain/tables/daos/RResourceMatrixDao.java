@@ -69,13 +69,6 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
     }
 
     /**
-     * Fetch records that have <code>ROLE_ID IN (values)</code>
-     */
-    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByRoleId(String... values) {
-        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.ROLE_ID, values);
-    }
-
-    /**
      * Fetch records that have <code>USER_ID IN (values)</code>
      */
     public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByUserId(String... values) {
@@ -87,6 +80,34 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
      */
     public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByResourceId(String... values) {
         return fetch(RResourceMatrix.R_RESOURCE_MATRIX.RESOURCE_ID, values);
+    }
+
+    /**
+     * Fetch records that have <code>PROJECTION IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByProjection(String... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.PROJECTION, values);
+    }
+
+    /**
+     * Fetch records that have <code>QUERY IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByQuery(String... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.QUERY, values);
+    }
+
+    /**
+     * Fetch records that have <code>MODE_PROJECTION IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByModeProjection(String... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.MODE_PROJECTION, values);
+    }
+
+    /**
+     * Fetch records that have <code>MODE_QUERY IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByModeQuery(String... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.MODE_QUERY, values);
     }
 
     /**
@@ -111,13 +132,6 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
     }
 
     /**
-     * Fetch records that have <code>ROLE_ID IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByRoleIdAsync(List<String> values) {
-        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.ROLE_ID,values);
-    }
-
-    /**
      * Fetch records that have <code>USER_ID IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByUserIdAsync(List<String> values) {
@@ -129,6 +143,34 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByResourceIdAsync(List<String> values) {
         return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.RESOURCE_ID,values);
+    }
+
+    /**
+     * Fetch records that have <code>PROJECTION IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByProjectionAsync(List<String> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.PROJECTION,values);
+    }
+
+    /**
+     * Fetch records that have <code>QUERY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByQueryAsync(List<String> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.QUERY,values);
+    }
+
+    /**
+     * Fetch records that have <code>MODE_PROJECTION IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByModeProjectionAsync(List<String> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.MODE_PROJECTION,values);
+    }
+
+    /**
+     * Fetch records that have <code>MODE_QUERY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByModeQueryAsync(List<String> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.MODE_QUERY,values);
     }
 
     /**

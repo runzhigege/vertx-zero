@@ -39,7 +39,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SRole extends TableImpl<SRoleRecord> {
 
-    private static final long serialVersionUID = -696947234;
+    private static final long serialVersionUID = -1123736056;
 
     /**
      * The reference instance of <code>DB_RBAC.S_ROLE</code>
@@ -95,9 +95,9 @@ public class SRole extends TableImpl<SRoleRecord> {
     public final TableField<SRoleRecord, String> CATEGORY = createField("CATEGORY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「category」- 组类型");
 
     /**
-     * The column <code>DB_RBAC.S_ROLE.SIGMA</code>. 「sigma」- 角色绑定的统一标识
+     * The column <code>DB_RBAC.S_ROLE.SIGMA</code>. 「sigma」- 统一标识
      */
-    public final TableField<SRoleRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「sigma」- 角色绑定的统一标识");
+    public final TableField<SRoleRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「sigma」- 统一标识");
 
     /**
      * The column <code>DB_RBAC.S_ROLE.LANGUAGE</code>. 「language」- 使用的语言

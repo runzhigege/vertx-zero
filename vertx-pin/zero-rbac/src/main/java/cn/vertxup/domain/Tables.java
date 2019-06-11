@@ -7,7 +7,6 @@ package cn.vertxup.domain;
 import cn.vertxup.domain.tables.OAccessToken;
 import cn.vertxup.domain.tables.OUser;
 import cn.vertxup.domain.tables.RGroupRole;
-import cn.vertxup.domain.tables.RPermAction;
 import cn.vertxup.domain.tables.RResourceMatrix;
 import cn.vertxup.domain.tables.RRolePerm;
 import cn.vertxup.domain.tables.RUserGroup;
@@ -49,11 +48,6 @@ public class Tables {
      * The table <code>DB_RBAC.R_GROUP_ROLE</code>.
      */
     public static final RGroupRole R_GROUP_ROLE = cn.vertxup.domain.tables.RGroupRole.R_GROUP_ROLE;
-
-    /**
-     * The table <code>DB_RBAC.R_PERM_ACTION</code>.
-     */
-    public static final RPermAction R_PERM_ACTION = cn.vertxup.domain.tables.RPermAction.R_PERM_ACTION;
 
     /**
      * The table <code>DB_RBAC.R_RESOURCE_MATRIX</code>.

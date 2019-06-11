@@ -31,7 +31,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implements Record22<String, String, String, String, String, String, Integer, LocalDateTime, String, String, String, String, String, String, String, String, Boolean, String, LocalDateTime, String, LocalDateTime, String>, ISResource {
 
-    private static final long serialVersionUID = 1237289163;
+    private static final long serialVersionUID = -766973874;
 
     /**
      * Setter for <code>DB_RBAC.S_RESOURCE.KEY</code>. 「key」- 资源对应的ID
@@ -170,54 +170,71 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.TYPE</code>. 「type」- 该资源类型：USER / ROLE / UNIFORM
+     * Setter for <code>DB_RBAC.S_RESOURCE.MODE_ROLE</code>. 「modeRole」- 该资源查找角色的模式
      */
     @Override
-    public SResourceRecord setType(String value) {
+    public SResourceRecord setModeRole(String value) {
         set(8, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.TYPE</code>. 「type」- 该资源类型：USER / ROLE / UNIFORM
+     * Getter for <code>DB_RBAC.S_RESOURCE.MODE_ROLE</code>. 「modeRole」- 该资源查找角色的模式
      */
     @Override
-    public String getType() {
+    public String getModeRole() {
         return (String) get(8);
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.URI</code>. 「uri」- 资源地址
+     * Setter for <code>DB_RBAC.S_RESOURCE.MODE_GROUP</code>. 「modeGroup」- 该资源查找组的模式
      */
     @Override
-    public SResourceRecord setUri(String value) {
+    public SResourceRecord setModeGroup(String value) {
         set(9, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.URI</code>. 「uri」- 资源地址
+     * Getter for <code>DB_RBAC.S_RESOURCE.MODE_GROUP</code>. 「modeGroup」- 该资源查找组的模式
      */
     @Override
-    public String getUri() {
+    public String getModeGroup() {
         return (String) get(9);
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.METHOD</code>. 「method」- 资源方法
+     * Setter for <code>DB_RBAC.S_RESOURCE.MODE_TREE</code>. 「modeTree」- 该资源处理树（用户组）的模式
      */
     @Override
-    public SResourceRecord setMethod(String value) {
+    public SResourceRecord setModeTree(String value) {
         set(10, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.METHOD</code>. 「method」- 资源方法
+     * Getter for <code>DB_RBAC.S_RESOURCE.MODE_TREE</code>. 「modeTree」- 该资源处理树（用户组）的模式
      */
     @Override
-    public String getMethod() {
+    public String getModeTree() {
         return (String) get(10);
+    }
+
+    /**
+     * Setter for <code>DB_RBAC.S_RESOURCE.SIGMA</code>. 「sigma」- 统一标识
+     */
+    @Override
+    public SResourceRecord setSigma(String value) {
+        set(11, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_RBAC.S_RESOURCE.SIGMA</code>. 「sigma」- 统一标识
+     */
+    @Override
+    public String getSigma() {
+        return (String) get(11);
     }
 
     /**
@@ -225,7 +242,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public SResourceRecord setModelId(String value) {
-        set(11, value);
+        set(12, value);
         return this;
     }
 
@@ -234,7 +251,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public String getModelId() {
-        return (String) get(11);
+        return (String) get(12);
     }
 
     /**
@@ -242,7 +259,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public SResourceRecord setModelKey(String value) {
-        set(12, value);
+        set(13, value);
         return this;
     }
 
@@ -251,7 +268,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public String getModelKey() {
-        return (String) get(12);
+        return (String) get(13);
     }
 
     /**
@@ -259,7 +276,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public SResourceRecord setCategory(String value) {
-        set(13, value);
+        set(14, value);
         return this;
     }
 
@@ -268,23 +285,6 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public String getCategory() {
-        return (String) get(13);
-    }
-
-    /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.SIGMA</code>. 「sigma」- 角色绑定的统一标识
-     */
-    @Override
-    public SResourceRecord setSigma(String value) {
-        set(14, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.SIGMA</code>. 「sigma」- 角色绑定的统一标识
-     */
-    @Override
-    public String getSigma() {
         return (String) get(14);
     }
 
@@ -508,7 +508,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public Field<String> field9() {
-        return SResource.S_RESOURCE.TYPE;
+        return SResource.S_RESOURCE.MODE_ROLE;
     }
 
     /**
@@ -516,7 +516,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public Field<String> field10() {
-        return SResource.S_RESOURCE.URI;
+        return SResource.S_RESOURCE.MODE_GROUP;
     }
 
     /**
@@ -524,7 +524,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public Field<String> field11() {
-        return SResource.S_RESOURCE.METHOD;
+        return SResource.S_RESOURCE.MODE_TREE;
     }
 
     /**
@@ -532,7 +532,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public Field<String> field12() {
-        return SResource.S_RESOURCE.MODEL_ID;
+        return SResource.S_RESOURCE.SIGMA;
     }
 
     /**
@@ -540,7 +540,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public Field<String> field13() {
-        return SResource.S_RESOURCE.MODEL_KEY;
+        return SResource.S_RESOURCE.MODEL_ID;
     }
 
     /**
@@ -548,7 +548,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public Field<String> field14() {
-        return SResource.S_RESOURCE.CATEGORY;
+        return SResource.S_RESOURCE.MODEL_KEY;
     }
 
     /**
@@ -556,7 +556,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public Field<String> field15() {
-        return SResource.S_RESOURCE.SIGMA;
+        return SResource.S_RESOURCE.CATEGORY;
     }
 
     /**
@@ -684,7 +684,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public String component9() {
-        return getType();
+        return getModeRole();
     }
 
     /**
@@ -692,7 +692,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public String component10() {
-        return getUri();
+        return getModeGroup();
     }
 
     /**
@@ -700,7 +700,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public String component11() {
-        return getMethod();
+        return getModeTree();
     }
 
     /**
@@ -708,7 +708,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public String component12() {
-        return getModelId();
+        return getSigma();
     }
 
     /**
@@ -716,7 +716,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public String component13() {
-        return getModelKey();
+        return getModelId();
     }
 
     /**
@@ -724,7 +724,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public String component14() {
-        return getCategory();
+        return getModelKey();
     }
 
     /**
@@ -732,7 +732,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public String component15() {
-        return getSigma();
+        return getCategory();
     }
 
     /**
@@ -860,7 +860,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public String value9() {
-        return getType();
+        return getModeRole();
     }
 
     /**
@@ -868,7 +868,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public String value10() {
-        return getUri();
+        return getModeGroup();
     }
 
     /**
@@ -876,7 +876,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public String value11() {
-        return getMethod();
+        return getModeTree();
     }
 
     /**
@@ -884,7 +884,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public String value12() {
-        return getModelId();
+        return getSigma();
     }
 
     /**
@@ -892,7 +892,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public String value13() {
-        return getModelKey();
+        return getModelId();
     }
 
     /**
@@ -900,7 +900,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public String value14() {
-        return getCategory();
+        return getModelKey();
     }
 
     /**
@@ -908,7 +908,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public String value15() {
-        return getSigma();
+        return getCategory();
     }
 
     /**
@@ -1044,7 +1044,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public SResourceRecord value9(String value) {
-        setType(value);
+        setModeRole(value);
         return this;
     }
 
@@ -1053,7 +1053,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public SResourceRecord value10(String value) {
-        setUri(value);
+        setModeGroup(value);
         return this;
     }
 
@@ -1062,7 +1062,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public SResourceRecord value11(String value) {
-        setMethod(value);
+        setModeTree(value);
         return this;
     }
 
@@ -1071,7 +1071,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public SResourceRecord value12(String value) {
-        setModelId(value);
+        setSigma(value);
         return this;
     }
 
@@ -1080,7 +1080,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public SResourceRecord value13(String value) {
-        setModelKey(value);
+        setModelId(value);
         return this;
     }
 
@@ -1089,7 +1089,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public SResourceRecord value14(String value) {
-        setCategory(value);
+        setModelKey(value);
         return this;
     }
 
@@ -1098,7 +1098,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
      */
     @Override
     public SResourceRecord value15(String value) {
-        setSigma(value);
+        setCategory(value);
         return this;
     }
 
@@ -1212,13 +1212,13 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
         setQuery(from.getQuery());
         setLevel(from.getLevel());
         setExpired(from.getExpired());
-        setType(from.getType());
-        setUri(from.getUri());
-        setMethod(from.getMethod());
+        setModeRole(from.getModeRole());
+        setModeGroup(from.getModeGroup());
+        setModeTree(from.getModeTree());
+        setSigma(from.getSigma());
         setModelId(from.getModelId());
         setModelKey(from.getModelKey());
         setCategory(from.getCategory());
-        setSigma(from.getSigma());
         setLanguage(from.getLanguage());
         setActive(from.getActive());
         setMetadata(from.getMetadata());
@@ -1251,7 +1251,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     /**
      * Create a detached, initialised SResourceRecord
      */
-    public SResourceRecord(String key, String code, String name, String comment, String projection, String query, Integer level, LocalDateTime expired, String type, String uri, String method, String modelId, String modelKey, String category, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SResourceRecord(String key, String code, String name, String comment, String projection, String query, Integer level, LocalDateTime expired, String modeRole, String modeGroup, String modeTree, String sigma, String modelId, String modelKey, String category, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SResource.S_RESOURCE);
 
         set(0, key);
@@ -1262,13 +1262,13 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
         set(5, query);
         set(6, level);
         set(7, expired);
-        set(8, type);
-        set(9, uri);
-        set(10, method);
-        set(11, modelId);
-        set(12, modelKey);
-        set(13, category);
-        set(14, sigma);
+        set(8, modeRole);
+        set(9, modeGroup);
+        set(10, modeTree);
+        set(11, sigma);
+        set(12, modelId);
+        set(13, modelKey);
+        set(14, category);
         set(15, language);
         set(16, active);
         set(17, metadata);
