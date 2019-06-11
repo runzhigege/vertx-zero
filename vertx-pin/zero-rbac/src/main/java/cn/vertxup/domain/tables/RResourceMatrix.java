@@ -38,7 +38,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RResourceMatrix extends TableImpl<RResourceMatrixRecord> {
 
-    private static final long serialVersionUID = -1135721872;
+    private static final long serialVersionUID = -74635537;
 
     /**
      * The reference instance of <code>DB_RBAC.R_RESOURCE_MATRIX</code>
@@ -59,11 +59,6 @@ public class RResourceMatrix extends TableImpl<RResourceMatrixRecord> {
     public final TableField<RResourceMatrixRecord, String> KEY = createField("KEY", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「key」- 限定记录ID");
 
     /**
-     * The column <code>DB_RBAC.R_RESOURCE_MATRIX.ROLE_ID</code>. 「roleId」- 限定角色ID
-     */
-    public final TableField<RResourceMatrixRecord, String> ROLE_ID = createField("ROLE_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「roleId」- 限定角色ID");
-
-    /**
      * The column <code>DB_RBAC.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
      */
     public final TableField<RResourceMatrixRecord, String> USER_ID = createField("USER_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「userId」- 限定用户ID");
@@ -72,6 +67,26 @@ public class RResourceMatrix extends TableImpl<RResourceMatrixRecord> {
      * The column <code>DB_RBAC.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
      */
     public final TableField<RResourceMatrixRecord, String> RESOURCE_ID = createField("RESOURCE_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「resourceId」- 关联资源ID");
+
+    /**
+     * The column <code>DB_RBAC.R_RESOURCE_MATRIX.PROJECTION</code>. 「projection」- 该资源的列定义（单用户处理）
+     */
+    public final TableField<RResourceMatrixRecord, String> PROJECTION = createField("PROJECTION", org.jooq.impl.SQLDataType.CLOB, this, "「projection」- 该资源的列定义（单用户处理）");
+
+    /**
+     * The column <code>DB_RBAC.R_RESOURCE_MATRIX.QUERY</code>. 「query」- 该资源的行查询（单用户处理）
+     */
+    public final TableField<RResourceMatrixRecord, String> QUERY = createField("QUERY", org.jooq.impl.SQLDataType.CLOB, this, "「query」- 该资源的行查询（单用户处理）");
+
+    /**
+     * The column <code>DB_RBAC.R_RESOURCE_MATRIX.MODE_PROJECTION</code>. 「modeProject」- 资源过滤模式
+     */
+    public final TableField<RResourceMatrixRecord, String> MODE_PROJECTION = createField("MODE_PROJECTION", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「modeProject」- 资源过滤模式");
+
+    /**
+     * The column <code>DB_RBAC.R_RESOURCE_MATRIX.MODE_QUERY</code>. 「modeQuery」- 资源查询模式
+     */
+    public final TableField<RResourceMatrixRecord, String> MODE_QUERY = createField("MODE_QUERY", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「modeQuery」- 资源查询模式");
 
     /**
      * The column <code>DB_RBAC.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 所属APP的APPKEY
@@ -120,7 +135,7 @@ public class RResourceMatrix extends TableImpl<RResourceMatrixRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.R_RESOURCE_MATRIX_PRIMARY, Indexes.R_RESOURCE_MATRIX_SIGMA, Indexes.R_RESOURCE_MATRIX_SIGMA_2);
+        return Arrays.<Index>asList(Indexes.R_RESOURCE_MATRIX_PRIMARY, Indexes.R_RESOURCE_MATRIX_SIGMA);
     }
 
     /**
@@ -136,7 +151,7 @@ public class RResourceMatrix extends TableImpl<RResourceMatrixRecord> {
      */
     @Override
     public List<UniqueKey<RResourceMatrixRecord>> getKeys() {
-        return Arrays.<UniqueKey<RResourceMatrixRecord>>asList(Keys.KEY_R_RESOURCE_MATRIX_PRIMARY, Keys.KEY_R_RESOURCE_MATRIX_SIGMA_2, Keys.KEY_R_RESOURCE_MATRIX_SIGMA);
+        return Arrays.<UniqueKey<RResourceMatrixRecord>>asList(Keys.KEY_R_RESOURCE_MATRIX_PRIMARY, Keys.KEY_R_RESOURCE_MATRIX_SIGMA);
     }
 
     /**

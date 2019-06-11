@@ -31,7 +31,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Record16<String, String, String, Boolean, String, String, String, String, String, String, Boolean, String, LocalDateTime, String, LocalDateTime, String>, ISRole {
 
-    private static final long serialVersionUID = 1745260666;
+    private static final long serialVersionUID = -686795844;
 
     /**
      * Setter for <code>DB_RBAC.S_ROLE.KEY</code>. 「key」- 角色ID
@@ -170,7 +170,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_ROLE.SIGMA</code>. 「sigma」- 角色绑定的统一标识
+     * Setter for <code>DB_RBAC.S_ROLE.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
     public SRoleRecord setSigma(String value) {
@@ -179,7 +179,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_ROLE.SIGMA</code>. 「sigma」- 角色绑定的统一标识
+     * Getter for <code>DB_RBAC.S_ROLE.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
     public String getSigma() {

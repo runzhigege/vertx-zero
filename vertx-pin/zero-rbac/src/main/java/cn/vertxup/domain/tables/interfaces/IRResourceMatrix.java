@@ -33,16 +33,6 @@ public interface IRResourceMatrix extends Serializable {
     public String getKey();
 
     /**
-     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.ROLE_ID</code>. 「roleId」- 限定角色ID
-     */
-    public IRResourceMatrix setRoleId(String value);
-
-    /**
-     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.ROLE_ID</code>. 「roleId」- 限定角色ID
-     */
-    public String getRoleId();
-
-    /**
      * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
      */
     public IRResourceMatrix setUserId(String value);
@@ -61,6 +51,46 @@ public interface IRResourceMatrix extends Serializable {
      * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
      */
     public String getResourceId();
+
+    /**
+     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.PROJECTION</code>. 「projection」- 该资源的列定义（单用户处理）
+     */
+    public IRResourceMatrix setProjection(String value);
+
+    /**
+     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.PROJECTION</code>. 「projection」- 该资源的列定义（单用户处理）
+     */
+    public String getProjection();
+
+    /**
+     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.QUERY</code>. 「query」- 该资源的行查询（单用户处理）
+     */
+    public IRResourceMatrix setQuery(String value);
+
+    /**
+     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.QUERY</code>. 「query」- 该资源的行查询（单用户处理）
+     */
+    public String getQuery();
+
+    /**
+     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.MODE_PROJECTION</code>. 「modeProject」- 资源过滤模式
+     */
+    public IRResourceMatrix setModeProjection(String value);
+
+    /**
+     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.MODE_PROJECTION</code>. 「modeProject」- 资源过滤模式
+     */
+    public String getModeProjection();
+
+    /**
+     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.MODE_QUERY</code>. 「modeQuery」- 资源查询模式
+     */
+    public IRResourceMatrix setModeQuery(String value);
+
+    /**
+     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.MODE_QUERY</code>. 「modeQuery」- 资源查询模式
+     */
+    public String getModeQuery();
 
     /**
      * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 所属APP的APPKEY
@@ -88,9 +118,12 @@ public interface IRResourceMatrix extends Serializable {
 
     default IRResourceMatrix fromJson(io.vertx.core.json.JsonObject json) {
         setKey(json.getString("KEY"));
-        setRoleId(json.getString("ROLE_ID"));
         setUserId(json.getString("USER_ID"));
         setResourceId(json.getString("RESOURCE_ID"));
+        setProjection(json.getString("PROJECTION"));
+        setQuery(json.getString("QUERY"));
+        setModeProjection(json.getString("MODE_PROJECTION"));
+        setModeQuery(json.getString("MODE_QUERY"));
         setSigma(json.getString("SIGMA"));
         return this;
     }
@@ -99,9 +132,12 @@ public interface IRResourceMatrix extends Serializable {
     default io.vertx.core.json.JsonObject toJson() {
         io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
         json.put("KEY",getKey());
-        json.put("ROLE_ID",getRoleId());
         json.put("USER_ID",getUserId());
         json.put("RESOURCE_ID",getResourceId());
+        json.put("PROJECTION",getProjection());
+        json.put("QUERY",getQuery());
+        json.put("MODE_PROJECTION",getModeProjection());
+        json.put("MODE_QUERY",getModeQuery());
         json.put("SIGMA",getSigma());
         return json;
     }

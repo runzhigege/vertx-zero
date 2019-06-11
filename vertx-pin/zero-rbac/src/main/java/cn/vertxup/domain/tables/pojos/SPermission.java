@@ -24,14 +24,11 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SPermission implements ISPermission {
 
-    private static final long serialVersionUID = 1271131368;
+    private static final long serialVersionUID = 1412404951;
 
     private String        key;
     private String        name;
     private String        code;
-    private String        priority;
-    private String        mode;
-    private String        category;
     private String        sigma;
     private String        language;
     private Boolean       active;
@@ -47,9 +44,6 @@ public class SPermission implements ISPermission {
         this.key = value.key;
         this.name = value.name;
         this.code = value.code;
-        this.priority = value.priority;
-        this.mode = value.mode;
-        this.category = value.category;
         this.sigma = value.sigma;
         this.language = value.language;
         this.active = value.active;
@@ -64,9 +58,6 @@ public class SPermission implements ISPermission {
         String        key,
         String        name,
         String        code,
-        String        priority,
-        String        mode,
-        String        category,
         String        sigma,
         String        language,
         Boolean       active,
@@ -79,9 +70,6 @@ public class SPermission implements ISPermission {
         this.key = key;
         this.name = name;
         this.code = code;
-        this.priority = priority;
-        this.mode = mode;
-        this.category = category;
         this.sigma = sigma;
         this.language = language;
         this.active = active;
@@ -122,39 +110,6 @@ public class SPermission implements ISPermission {
     @Override
     public SPermission setCode(String code) {
         this.code = code;
-        return this;
-    }
-
-    @Override
-    public String getPriority() {
-        return this.priority;
-    }
-
-    @Override
-    public SPermission setPriority(String priority) {
-        this.priority = priority;
-        return this;
-    }
-
-    @Override
-    public String getMode() {
-        return this.mode;
-    }
-
-    @Override
-    public SPermission setMode(String mode) {
-        this.mode = mode;
-        return this;
-    }
-
-    @Override
-    public String getCategory() {
-        return this.category;
-    }
-
-    @Override
-    public SPermission setCategory(String category) {
-        this.category = category;
         return this;
     }
 
@@ -253,9 +208,6 @@ public class SPermission implements ISPermission {
         sb.append(key);
         sb.append(", ").append(name);
         sb.append(", ").append(code);
-        sb.append(", ").append(priority);
-        sb.append(", ").append(mode);
-        sb.append(", ").append(category);
         sb.append(", ").append(sigma);
         sb.append(", ").append(language);
         sb.append(", ").append(active);
@@ -281,9 +233,6 @@ public class SPermission implements ISPermission {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
-        setPriority(from.getPriority());
-        setMode(from.getMode());
-        setCategory(from.getCategory());
         setSigma(from.getSigma());
         setLanguage(from.getLanguage());
         setActive(from.getActive());
