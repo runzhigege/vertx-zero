@@ -3,7 +3,7 @@ package io.vertx.tp.crud.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.kern.AbstractVertical;
+import io.vertx.tp.ke.AbstractVertical;
 
 /*
  * Default Implementation

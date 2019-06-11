@@ -1,4 +1,4 @@
-package io.vertx.tp.kern;
+package io.vertx.tp.ke;
 
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.log.Annal;

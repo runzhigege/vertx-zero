@@ -1,4 +1,4 @@
-package io.vertx.tp.kern;
+package io.vertx.tp.ke;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;

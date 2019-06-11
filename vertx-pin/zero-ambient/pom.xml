@@ -11,5 +11,16 @@
 
     <artifactId>zero-ambient</artifactId>
     <name>（ Zero Pin ) -- Ambient Environment</name>
-
+    <dependencies>
+        <!-- Kern -->
+        <dependency>
+            <groupId>cn.vertxup</groupId>
+            <artifactId>zero-ke</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.vertxup</groupId>
+            <artifactId>zero-excel</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

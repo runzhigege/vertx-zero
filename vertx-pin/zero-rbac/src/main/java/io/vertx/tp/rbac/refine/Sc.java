@@ -62,12 +62,6 @@ public class Sc {
         return ScTool.generateCode();
     }
 
-    /*
-     * Read jooq configuration database name `catalog`
-     */
-    public static String getDatabase() {
-        return ScTool.getDatabase();
-    }
 
     /*
      * Jwt token process

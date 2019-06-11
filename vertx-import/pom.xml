@@ -96,7 +96,7 @@
             </dependency>
             <dependency>
                 <groupId>cn.vertxup</groupId>
-                <artifactId>vertx-zeus</artifactId>
+                <artifactId>zero-ke</artifactId>
                 <version>${zero.version}</version>
             </dependency>
             <!-- Inflx -->
