@@ -1,13 +1,13 @@
 {
-    "name": "role",
-    "daoCls": "up.zero.domain.tables.daos.SRoleDao",
-    "pojoCls": "up.zero.domain.tables.pojos.SRole",
+    "name": "dept",
+    "daoCls": "up.zero.domain.tables.daos.CiDeptDao",
+    "pojoCls": "up.zero.domain.tables.pojos.CiDept",
     "field": {
         "key": "key",
         "unique": [
             [
                 "code",
-                "sigma"
+                "appId"
             ]
         ],
         "created": {
@@ -20,12 +20,12 @@
         }
     },
     "header": {
-        "sigma": "Ox-Sigma"
+        "appId": "X-App-Id"
     },
     "column": {
         "actor": "module",
         "condition": [
-            "sigma",
+            "appId",
             "user"
         ]
     }

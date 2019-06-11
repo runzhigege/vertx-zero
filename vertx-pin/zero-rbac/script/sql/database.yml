@@ -31,9 +31,6 @@ databaseChangeLog:
       file: script/sql/schema/R_GROUP_ROLE.sql
       relativeToChangelogFile: false
   - include:
-      file: script/sql/schema/R_PERM_ACTION.sql
-      relativeToChangelogFile: false
-  - include:
       file: script/sql/schema/R_ROLE_PERM.sql
       relativeToChangelogFile: false
   - include:

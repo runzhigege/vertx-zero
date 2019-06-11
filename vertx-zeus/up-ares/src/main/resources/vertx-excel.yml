@@ -1,9 +1,9 @@
 excel:
   config:
     mapping:
-      - table: S_USER
-        pojo: cn.vertxup.domain.tables.pojos.SUser
-        dao: cn.vertxup.domain.tables.daos.SUserDao
+      - table: CI_DEPT
+        pojo: up.zero.domain.tables.pojos.CiDept
+        dao: up.zero.domain.tables.daos.CiDeptDao
         unique:
-          - username
-          - sigma
+          - code
+          - appId
