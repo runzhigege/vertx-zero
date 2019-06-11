@@ -16,6 +16,7 @@
         <module>zero-crud</module>
         <module>zero-rbac</module>
         <module>zero-ke</module>
+        <module>zero-ambient</module>
     </modules>
     <dependencies>
         <dependency>
