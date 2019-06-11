@@ -104,34 +104,44 @@ public interface ISResource extends Serializable {
     public LocalDateTime getExpired();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.TYPE</code>. 「type」- 该资源类型：USER / ROLE / UNIFORM
+     * Setter for <code>DB_RBAC.S_RESOURCE.MODE_ROLE</code>. 「modeRole」- 该资源查找角色的模式
      */
-    public ISResource setType(String value);
+    public ISResource setModeRole(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.TYPE</code>. 「type」- 该资源类型：USER / ROLE / UNIFORM
+     * Getter for <code>DB_RBAC.S_RESOURCE.MODE_ROLE</code>. 「modeRole」- 该资源查找角色的模式
      */
-    public String getType();
+    public String getModeRole();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.URI</code>. 「uri」- 资源地址
+     * Setter for <code>DB_RBAC.S_RESOURCE.MODE_GROUP</code>. 「modeGroup」- 该资源查找组的模式
      */
-    public ISResource setUri(String value);
+    public ISResource setModeGroup(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.URI</code>. 「uri」- 资源地址
+     * Getter for <code>DB_RBAC.S_RESOURCE.MODE_GROUP</code>. 「modeGroup」- 该资源查找组的模式
      */
-    public String getUri();
+    public String getModeGroup();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.METHOD</code>. 「method」- 资源方法
+     * Setter for <code>DB_RBAC.S_RESOURCE.MODE_TREE</code>. 「modeTree」- 该资源处理树（用户组）的模式
      */
-    public ISResource setMethod(String value);
+    public ISResource setModeTree(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.METHOD</code>. 「method」- 资源方法
+     * Getter for <code>DB_RBAC.S_RESOURCE.MODE_TREE</code>. 「modeTree」- 该资源处理树（用户组）的模式
      */
-    public String getMethod();
+    public String getModeTree();
+
+    /**
+     * Setter for <code>DB_RBAC.S_RESOURCE.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public ISResource setSigma(String value);
+
+    /**
+     * Getter for <code>DB_RBAC.S_RESOURCE.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public String getSigma();
 
     /**
      * Setter for <code>DB_RBAC.S_RESOURCE.MODEL_ID</code>. 「modelId」- 资源对应的模型identifier
@@ -162,16 +172,6 @@ public interface ISResource extends Serializable {
      * Getter for <code>DB_RBAC.S_RESOURCE.CATEGORY</code>. 「category」- 资源分类
      */
     public String getCategory();
-
-    /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.SIGMA</code>. 「sigma」- 角色绑定的统一标识
-     */
-    public ISResource setSigma(String value);
-
-    /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.SIGMA</code>. 「sigma」- 角色绑定的统一标识
-     */
-    public String getSigma();
 
     /**
      * Setter for <code>DB_RBAC.S_RESOURCE.LANGUAGE</code>. 「language」- 使用的语言
@@ -266,13 +266,13 @@ public interface ISResource extends Serializable {
         setQuery(json.getString("QUERY"));
         setLevel(json.getInteger("LEVEL"));
         // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED!
-        setType(json.getString("TYPE"));
-        setUri(json.getString("URI"));
-        setMethod(json.getString("METHOD"));
+        setModeRole(json.getString("MODE_ROLE"));
+        setModeGroup(json.getString("MODE_GROUP"));
+        setModeTree(json.getString("MODE_TREE"));
+        setSigma(json.getString("SIGMA"));
         setModelId(json.getString("MODEL_ID"));
         setModelKey(json.getString("MODEL_KEY"));
         setCategory(json.getString("CATEGORY"));
-        setSigma(json.getString("SIGMA"));
         setLanguage(json.getString("LANGUAGE"));
         setActive(json.getBoolean("ACTIVE"));
         setMetadata(json.getString("METADATA"));
@@ -294,13 +294,13 @@ public interface ISResource extends Serializable {
         json.put("QUERY",getQuery());
         json.put("LEVEL",getLevel());
         // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED!
-        json.put("TYPE",getType());
-        json.put("URI",getUri());
-        json.put("METHOD",getMethod());
+        json.put("MODE_ROLE",getModeRole());
+        json.put("MODE_GROUP",getModeGroup());
+        json.put("MODE_TREE",getModeTree());
+        json.put("SIGMA",getSigma());
         json.put("MODEL_ID",getModelId());
         json.put("MODEL_KEY",getModelKey());
         json.put("CATEGORY",getCategory());
-        json.put("SIGMA",getSigma());
         json.put("LANGUAGE",getLanguage());
         json.put("ACTIVE",getActive());
         json.put("METADATA",getMetadata());

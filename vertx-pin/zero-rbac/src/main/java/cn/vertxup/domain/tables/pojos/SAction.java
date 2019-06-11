@@ -24,15 +24,16 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SAction implements ISAction {
 
-    private static final long serialVersionUID = -1192279660;
+    private static final long serialVersionUID = -2064021298;
 
     private String        key;
     private String        name;
     private String        code;
-    private Integer       level;
-    private String        priority;
     private String        resourceId;
-    private String        category;
+    private String        permissionId;
+    private Integer       level;
+    private String        uri;
+    private String        method;
     private String        sigma;
     private String        language;
     private Boolean       active;
@@ -48,10 +49,11 @@ public class SAction implements ISAction {
         this.key = value.key;
         this.name = value.name;
         this.code = value.code;
-        this.level = value.level;
-        this.priority = value.priority;
         this.resourceId = value.resourceId;
-        this.category = value.category;
+        this.permissionId = value.permissionId;
+        this.level = value.level;
+        this.uri = value.uri;
+        this.method = value.method;
         this.sigma = value.sigma;
         this.language = value.language;
         this.active = value.active;
@@ -66,10 +68,11 @@ public class SAction implements ISAction {
         String        key,
         String        name,
         String        code,
-        Integer       level,
-        String        priority,
         String        resourceId,
-        String        category,
+        String        permissionId,
+        Integer       level,
+        String        uri,
+        String        method,
         String        sigma,
         String        language,
         Boolean       active,
@@ -82,10 +85,11 @@ public class SAction implements ISAction {
         this.key = key;
         this.name = name;
         this.code = code;
-        this.level = level;
-        this.priority = priority;
         this.resourceId = resourceId;
-        this.category = category;
+        this.permissionId = permissionId;
+        this.level = level;
+        this.uri = uri;
+        this.method = method;
         this.sigma = sigma;
         this.language = language;
         this.active = active;
@@ -130,28 +134,6 @@ public class SAction implements ISAction {
     }
 
     @Override
-    public Integer getLevel() {
-        return this.level;
-    }
-
-    @Override
-    public SAction setLevel(Integer level) {
-        this.level = level;
-        return this;
-    }
-
-    @Override
-    public String getPriority() {
-        return this.priority;
-    }
-
-    @Override
-    public SAction setPriority(String priority) {
-        this.priority = priority;
-        return this;
-    }
-
-    @Override
     public String getResourceId() {
         return this.resourceId;
     }
@@ -163,13 +145,46 @@ public class SAction implements ISAction {
     }
 
     @Override
-    public String getCategory() {
-        return this.category;
+    public String getPermissionId() {
+        return this.permissionId;
     }
 
     @Override
-    public SAction setCategory(String category) {
-        this.category = category;
+    public SAction setPermissionId(String permissionId) {
+        this.permissionId = permissionId;
+        return this;
+    }
+
+    @Override
+    public Integer getLevel() {
+        return this.level;
+    }
+
+    @Override
+    public SAction setLevel(Integer level) {
+        this.level = level;
+        return this;
+    }
+
+    @Override
+    public String getUri() {
+        return this.uri;
+    }
+
+    @Override
+    public SAction setUri(String uri) {
+        this.uri = uri;
+        return this;
+    }
+
+    @Override
+    public String getMethod() {
+        return this.method;
+    }
+
+    @Override
+    public SAction setMethod(String method) {
+        this.method = method;
         return this;
     }
 
@@ -268,10 +283,11 @@ public class SAction implements ISAction {
         sb.append(key);
         sb.append(", ").append(name);
         sb.append(", ").append(code);
-        sb.append(", ").append(level);
-        sb.append(", ").append(priority);
         sb.append(", ").append(resourceId);
-        sb.append(", ").append(category);
+        sb.append(", ").append(permissionId);
+        sb.append(", ").append(level);
+        sb.append(", ").append(uri);
+        sb.append(", ").append(method);
         sb.append(", ").append(sigma);
         sb.append(", ").append(language);
         sb.append(", ").append(active);
@@ -297,10 +313,11 @@ public class SAction implements ISAction {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
-        setLevel(from.getLevel());
-        setPriority(from.getPriority());
         setResourceId(from.getResourceId());
-        setCategory(from.getCategory());
+        setPermissionId(from.getPermissionId());
+        setLevel(from.getLevel());
+        setUri(from.getUri());
+        setMethod(from.getMethod());
         setSigma(from.getSigma());
         setLanguage(from.getLanguage());
         setActive(from.getActive());

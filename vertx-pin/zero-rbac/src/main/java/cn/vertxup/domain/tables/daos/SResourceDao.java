@@ -119,24 +119,31 @@ public class SResourceDao extends DAOImpl<SResourceRecord, cn.vertxup.domain.tab
     }
 
     /**
-     * Fetch records that have <code>TYPE IN (values)</code>
+     * Fetch records that have <code>MODE_ROLE IN (values)</code>
      */
-    public List<cn.vertxup.domain.tables.pojos.SResource> fetchByType(String... values) {
-        return fetch(SResource.S_RESOURCE.TYPE, values);
+    public List<cn.vertxup.domain.tables.pojos.SResource> fetchByModeRole(String... values) {
+        return fetch(SResource.S_RESOURCE.MODE_ROLE, values);
     }
 
     /**
-     * Fetch records that have <code>URI IN (values)</code>
+     * Fetch records that have <code>MODE_GROUP IN (values)</code>
      */
-    public List<cn.vertxup.domain.tables.pojos.SResource> fetchByUri(String... values) {
-        return fetch(SResource.S_RESOURCE.URI, values);
+    public List<cn.vertxup.domain.tables.pojos.SResource> fetchByModeGroup(String... values) {
+        return fetch(SResource.S_RESOURCE.MODE_GROUP, values);
     }
 
     /**
-     * Fetch records that have <code>METHOD IN (values)</code>
+     * Fetch records that have <code>MODE_TREE IN (values)</code>
      */
-    public List<cn.vertxup.domain.tables.pojos.SResource> fetchByMethod(String... values) {
-        return fetch(SResource.S_RESOURCE.METHOD, values);
+    public List<cn.vertxup.domain.tables.pojos.SResource> fetchByModeTree(String... values) {
+        return fetch(SResource.S_RESOURCE.MODE_TREE, values);
+    }
+
+    /**
+     * Fetch records that have <code>SIGMA IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.SResource> fetchBySigma(String... values) {
+        return fetch(SResource.S_RESOURCE.SIGMA, values);
     }
 
     /**
@@ -158,13 +165,6 @@ public class SResourceDao extends DAOImpl<SResourceRecord, cn.vertxup.domain.tab
      */
     public List<cn.vertxup.domain.tables.pojos.SResource> fetchByCategory(String... values) {
         return fetch(SResource.S_RESOURCE.CATEGORY, values);
-    }
-
-    /**
-     * Fetch records that have <code>SIGMA IN (values)</code>
-     */
-    public List<cn.vertxup.domain.tables.pojos.SResource> fetchBySigma(String... values) {
-        return fetch(SResource.S_RESOURCE.SIGMA, values);
     }
 
     /**
@@ -280,24 +280,31 @@ public class SResourceDao extends DAOImpl<SResourceRecord, cn.vertxup.domain.tab
     }
 
     /**
-     * Fetch records that have <code>TYPE IN (values)</code> asynchronously
+     * Fetch records that have <code>MODE_ROLE IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SResource>> fetchByTypeAsync(List<String> values) {
-        return fetchAsync(SResource.S_RESOURCE.TYPE,values);
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SResource>> fetchByModeRoleAsync(List<String> values) {
+        return fetchAsync(SResource.S_RESOURCE.MODE_ROLE,values);
     }
 
     /**
-     * Fetch records that have <code>URI IN (values)</code> asynchronously
+     * Fetch records that have <code>MODE_GROUP IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SResource>> fetchByUriAsync(List<String> values) {
-        return fetchAsync(SResource.S_RESOURCE.URI,values);
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SResource>> fetchByModeGroupAsync(List<String> values) {
+        return fetchAsync(SResource.S_RESOURCE.MODE_GROUP,values);
     }
 
     /**
-     * Fetch records that have <code>METHOD IN (values)</code> asynchronously
+     * Fetch records that have <code>MODE_TREE IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SResource>> fetchByMethodAsync(List<String> values) {
-        return fetchAsync(SResource.S_RESOURCE.METHOD,values);
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SResource>> fetchByModeTreeAsync(List<String> values) {
+        return fetchAsync(SResource.S_RESOURCE.MODE_TREE,values);
+    }
+
+    /**
+     * Fetch records that have <code>SIGMA IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SResource>> fetchBySigmaAsync(List<String> values) {
+        return fetchAsync(SResource.S_RESOURCE.SIGMA,values);
     }
 
     /**
@@ -319,13 +326,6 @@ public class SResourceDao extends DAOImpl<SResourceRecord, cn.vertxup.domain.tab
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SResource>> fetchByCategoryAsync(List<String> values) {
         return fetchAsync(SResource.S_RESOURCE.CATEGORY,values);
-    }
-
-    /**
-     * Fetch records that have <code>SIGMA IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SResource>> fetchBySigmaAsync(List<String> values) {
-        return fetchAsync(SResource.S_RESOURCE.SIGMA,values);
     }
 
     /**

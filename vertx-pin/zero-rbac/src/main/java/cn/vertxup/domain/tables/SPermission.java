@@ -39,7 +39,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SPermission extends TableImpl<SPermissionRecord> {
 
-    private static final long serialVersionUID = -1468328682;
+    private static final long serialVersionUID = -195559883;
 
     /**
      * The reference instance of <code>DB_RBAC.S_PERMISSION</code>
@@ -68,21 +68,6 @@ public class SPermission extends TableImpl<SPermissionRecord> {
      * The column <code>DB_RBAC.S_PERMISSION.CODE</code>. 「code」- 权限系统码
      */
     public final TableField<SPermissionRecord, String> CODE = createField("CODE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「code」- 权限系统码");
-
-    /**
-     * The column <code>DB_RBAC.S_PERMISSION.PRIORITY</code>. 「priority」- 权限优先级：角色优先、组优先、用户优先
-     */
-    public final TableField<SPermissionRecord, String> PRIORITY = createField("PRIORITY", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「priority」- 权限优先级：角色优先、组优先、用户优先");
-
-    /**
-     * The column <code>DB_RBAC.S_PERMISSION.MODE</code>. 「mode」- 继承、限制、时域、指定
-     */
-    public final TableField<SPermissionRecord, String> MODE = createField("MODE", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「mode」- 继承、限制、时域、指定");
-
-    /**
-     * The column <code>DB_RBAC.S_PERMISSION.CATEGORY</code>. 「category」- 组类型
-     */
-    public final TableField<SPermissionRecord, String> CATEGORY = createField("CATEGORY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「category」- 组类型");
 
     /**
      * The column <code>DB_RBAC.S_PERMISSION.SIGMA</code>. 「sigma」- 绑定的统一标识

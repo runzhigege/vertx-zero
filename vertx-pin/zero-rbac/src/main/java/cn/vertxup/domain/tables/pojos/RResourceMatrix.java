@@ -22,35 +22,47 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RResourceMatrix implements IRResourceMatrix {
 
-    private static final long serialVersionUID = 186459579;
+    private static final long serialVersionUID = -475957381;
 
     private String key;
-    private String roleId;
     private String userId;
     private String resourceId;
+    private String projection;
+    private String query;
+    private String modeProjection;
+    private String modeQuery;
     private String sigma;
 
     public RResourceMatrix() {}
 
     public RResourceMatrix(RResourceMatrix value) {
         this.key = value.key;
-        this.roleId = value.roleId;
         this.userId = value.userId;
         this.resourceId = value.resourceId;
+        this.projection = value.projection;
+        this.query = value.query;
+        this.modeProjection = value.modeProjection;
+        this.modeQuery = value.modeQuery;
         this.sigma = value.sigma;
     }
 
     public RResourceMatrix(
         String key,
-        String roleId,
         String userId,
         String resourceId,
+        String projection,
+        String query,
+        String modeProjection,
+        String modeQuery,
         String sigma
     ) {
         this.key = key;
-        this.roleId = roleId;
         this.userId = userId;
         this.resourceId = resourceId;
+        this.projection = projection;
+        this.query = query;
+        this.modeProjection = modeProjection;
+        this.modeQuery = modeQuery;
         this.sigma = sigma;
     }
 
@@ -62,17 +74,6 @@ public class RResourceMatrix implements IRResourceMatrix {
     @Override
     public RResourceMatrix setKey(String key) {
         this.key = key;
-        return this;
-    }
-
-    @Override
-    public String getRoleId() {
-        return this.roleId;
-    }
-
-    @Override
-    public RResourceMatrix setRoleId(String roleId) {
-        this.roleId = roleId;
         return this;
     }
 
@@ -99,6 +100,50 @@ public class RResourceMatrix implements IRResourceMatrix {
     }
 
     @Override
+    public String getProjection() {
+        return this.projection;
+    }
+
+    @Override
+    public RResourceMatrix setProjection(String projection) {
+        this.projection = projection;
+        return this;
+    }
+
+    @Override
+    public String getQuery() {
+        return this.query;
+    }
+
+    @Override
+    public RResourceMatrix setQuery(String query) {
+        this.query = query;
+        return this;
+    }
+
+    @Override
+    public String getModeProjection() {
+        return this.modeProjection;
+    }
+
+    @Override
+    public RResourceMatrix setModeProjection(String modeProjection) {
+        this.modeProjection = modeProjection;
+        return this;
+    }
+
+    @Override
+    public String getModeQuery() {
+        return this.modeQuery;
+    }
+
+    @Override
+    public RResourceMatrix setModeQuery(String modeQuery) {
+        this.modeQuery = modeQuery;
+        return this;
+    }
+
+    @Override
     public String getSigma() {
         return this.sigma;
     }
@@ -114,9 +159,12 @@ public class RResourceMatrix implements IRResourceMatrix {
         StringBuilder sb = new StringBuilder("RResourceMatrix (");
 
         sb.append(key);
-        sb.append(", ").append(roleId);
         sb.append(", ").append(userId);
         sb.append(", ").append(resourceId);
+        sb.append(", ").append(projection);
+        sb.append(", ").append(query);
+        sb.append(", ").append(modeProjection);
+        sb.append(", ").append(modeQuery);
         sb.append(", ").append(sigma);
 
         sb.append(")");
@@ -133,9 +181,12 @@ public class RResourceMatrix implements IRResourceMatrix {
     @Override
     public void from(IRResourceMatrix from) {
         setKey(from.getKey());
-        setRoleId(from.getRoleId());
         setUserId(from.getUserId());
         setResourceId(from.getResourceId());
+        setProjection(from.getProjection());
+        setQuery(from.getQuery());
+        setModeProjection(from.getModeProjection());
+        setModeQuery(from.getModeQuery());
         setSigma(from.getSigma());
     }
 
