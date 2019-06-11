@@ -1,4 +1,4 @@
-package io.vertx.tp.kern;
+package io.vertx.tp.ke;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.zero.marshal.node.Node;
