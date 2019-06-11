@@ -15,6 +15,15 @@ This framework contains four sub-projects, all these projects are put in `vertx-
 * `vertx-gaia/vertx-up`: Zero Up Engine with nested vert.x web container
 * `vertx-gaia/vertx-rx`: Zero Up Engine with nested rxjava web container instead of web container
 * `vertx-import`: Zero Usage dependency project to perform development, provide uniform dependency for your projects.
+
+Here are all modules of real project 
+
+* `vertx-pin/zero-rbac`: 「Business」 RBAC Framework
+* `vertx-pin/zero-crud`: 「Business」 CRUD operation common module ( There are some limitation )
+* `vertx-pin/zero-ambient`: 「Business」 Environment Framework ( Multi App )
+
+In latest version, examples have been moved to [https://github.com/silentbalanceyh/vertx-zero-example](https://github.com/silentbalanceyh/vertx-zero-example)
+
 * `vertx-zeus/*`: Zero Examples, it contains all the tutorials of this framework
 
 > If your wan't to study vert.x development skill, you can refer chinese tutorial:[《Vert.x逐陆记》](https://silentbalanceyh.gitbooks.io/vert-x/content/).
@@ -29,7 +38,7 @@ If you want to use Zero framework, you can add following dependency into you `po
     <parent>
         <artifactId>vertx-import</artifactId>
         <groupId>cn.vertxup</groupId>
-        <version>0.4.9</version>
+        <version>0.4.10</version>
     </parent>
 ```
 
