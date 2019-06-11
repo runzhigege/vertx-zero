@@ -1,8 +1,0 @@
-zero:
-  lime: mysql, mongo
-  vertx:
-    instance:
-    - name: vertx-zeus
-      options:
-        # Fix block 2000 limit issue.
-        maxEventLoopExecuteTime: 30000000000
