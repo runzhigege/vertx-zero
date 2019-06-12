@@ -14,6 +14,7 @@ import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -51,6 +52,16 @@ public class ExcelClientImpl implements ExcelClient {
     }
 
     @Override
+    public ExcelClient ingestList(final InputStream in, final boolean isXlsx, final Handler<AsyncResult<Set<ExTable>>> handler) {
+        /* 1. Get Workbook reference */
+        final Workbook workbook = this.helper.getWorkbook(in, isXlsx);
+        /* 2. Iterator for Sheet */
+        final Set<ExTable> tables = this.helper.getExTables(workbook);
+        handler.handle(Future.succeededFuture(tables));
+        return this;
+    }
+
+    @Override
     public ExcelClient ingest(final String filename, final Handler<AsyncResult<ExTable>> handler) {
         return this.ingestList(filename, processed -> {
             if (processed.succeeded()) {
@@ -62,23 +73,32 @@ public class ExcelClientImpl implements ExcelClient {
 
     @Override
     public <T> ExcelClient loading(final String filename, final Handler<AsyncResult<Set<T>>> handler) {
-        return this.ingestList(filename, process -> {
-            if (process.succeeded()) {
-                final Set<ExTable> tables = process.result();
-                /* 3. Loading data into the system */
-                final Set<T> entitySet = new HashSet<>();
-                tables.forEach(table -> this.extract(table).forEach(json -> {
-                    /* 4. Filters building */
-                    final JsonObject filters = table.getFilters(json);
-                    final T entity = this.saveEntity(filters, json, table);
-                    if (Objects.nonNull(entity)) {
-                        entitySet.add(entity);
-                    }
-                }));
-                /* 4. Set<T> handler */
-                handler.handle(Future.succeededFuture(entitySet));
-            }
-        });
+        return this.ingestList(filename, process -> handler.handle(this.handleIngested(process)));
+    }
+
+    @Override
+    public <T> ExcelClient loading(final InputStream in, final boolean isXlsx, final Handler<AsyncResult<Set<T>>> handler) {
+        return this.ingestList(in, isXlsx, process -> handler.handle(this.handleIngested(process)));
+    }
+
+    private <T> Future<Set<T>> handleIngested(final AsyncResult<Set<ExTable>> async) {
+        if (async.succeeded()) {
+            final Set<ExTable> tables = async.result();
+            /* 3. Loading data into the system */
+            final Set<T> entitySet = new HashSet<>();
+            tables.forEach(table -> this.extract(table).forEach(json -> {
+                /* 4. Filters building */
+                final JsonObject filters = table.getFilters(json);
+                final T entity = this.saveEntity(filters, json, table);
+                if (Objects.nonNull(entity)) {
+                    entitySet.add(entity);
+                }
+            }));
+            /* 4. Set<T> handler */
+            return Future.succeededFuture(entitySet);
+        } else {
+            return Future.succeededFuture();
+        }
     }
 
     private <T> T saveEntity(final JsonObject filters, final JsonObject data, final ExTable table) {

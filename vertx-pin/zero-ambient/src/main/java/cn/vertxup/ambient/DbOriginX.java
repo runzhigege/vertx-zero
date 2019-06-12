@@ -5,7 +5,7 @@ package cn.vertxup.ambient;
 
 
 import cn.vertxup.ambient.tables.*;
-import io.vertx.tp.shared.Ke;
+import io.vertx.tp.ke.tool.Ke;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
