@@ -123,16 +123,6 @@ public interface IXMenu extends Serializable {
     public String getAppId();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MENU.ENGINE</code>. 「engine」- 是否执行引擎渲染（引擎渲染使用动态页面流程，自动追加路由）
-     */
-    public IXMenu setEngine(Boolean value);
-
-    /**
-     * Getter for <code>DB_ORIGIN_X.X_MENU.ENGINE</code>. 「engine」- 是否执行引擎渲染（引擎渲染使用动态页面流程，自动追加路由）
-     */
-    public Boolean getEngine();
-
-    /**
      * Setter for <code>DB_ORIGIN_X.X_MENU.ACTIVE</code>. 「active」- 是否启用
      */
     public IXMenu setActive(Boolean value);
@@ -187,7 +177,6 @@ public interface IXMenu extends Serializable {
         setLevel(json.getLong("LEVEL"));
         setParentId(json.getString("PARENT_ID"));
         setAppId(json.getString("APP_ID"));
-        setEngine(json.getBoolean("ENGINE"));
         setActive(json.getBoolean("ACTIVE"));
         setLanguage(json.getString("LANGUAGE"));
         setMetadata(json.getString("METADATA"));
@@ -207,7 +196,6 @@ public interface IXMenu extends Serializable {
         json.put("LEVEL",getLevel());
         json.put("PARENT_ID",getParentId());
         json.put("APP_ID",getAppId());
-        json.put("ENGINE",getEngine());
         json.put("ACTIVE",getActive());
         json.put("LANGUAGE",getLanguage());
         json.put("METADATA",getMetadata());

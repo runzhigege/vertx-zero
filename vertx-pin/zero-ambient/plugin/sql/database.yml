@@ -1,41 +1,23 @@
 databaseChangeLog:
   # 系统表
   - include:
-      file: script/sql/schema/O_ACCESS_TOKEN.sql
+      file: script/sql/schema/X_APP.sql
       relativeToChangelogFile: false
   - include:
-      file: script/sql/schema/O_USER.sql
+      file: script/sql/schema/X_MODULE.sql
       relativeToChangelogFile: false
   - include:
-      file: script/sql/schema/S_ACTION.sql
+      file: script/sql/schema/X_CATEGORY.sql
       relativeToChangelogFile: false
   - include:
-      file: script/sql/schema/S_GROUP.sql
+      file: script/sql/schema/X_SOURCE.sql
       relativeToChangelogFile: false
   - include:
-      file: script/sql/schema/S_PERMISSION.sql
+      file: script/sql/schema/X_TABULAR.sql
       relativeToChangelogFile: false
   - include:
-      file: script/sql/schema/S_RESOURCE.sql
+      file: script/sql/schema/X_ATTACHMENT.sql
       relativeToChangelogFile: false
   - include:
-      file: script/sql/schema/S_USER.sql
-      relativeToChangelogFile: false
-  - include:
-      file: script/sql/schema/S_ROLE.sql
-      relativeToChangelogFile: false
-  - include:
-      file: script/sql/schema/S_RESOURCE_MATRIX.sql
-      relativeToChangelogFile: false
-  - include:
-      file: script/sql/schema/R_GROUP_ROLE.sql
-      relativeToChangelogFile: false
-  - include:
-      file: script/sql/schema/R_ROLE_PERM.sql
-      relativeToChangelogFile: false
-  - include:
-      file: script/sql/schema/R_USER_ROLE.sql
-      relativeToChangelogFile: false
-  - include:
-      file: script/sql/schema/R_USER_GROUP.sql
+      file: script/sql/schema/X_MENU.sql
       relativeToChangelogFile: false
