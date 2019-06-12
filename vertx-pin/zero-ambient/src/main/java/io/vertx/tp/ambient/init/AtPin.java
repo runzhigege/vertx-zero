@@ -6,6 +6,7 @@ import io.vertx.tp.ambient.extension.Prerequisite;
 import io.vertx.tp.ambient.refine.At;
 import io.vertx.tp.error._500InitSpecificationException;
 import io.vertx.tp.error._500PrerequisiteSpecException;
+import io.vertx.tp.ke.tool.Ke;
 import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
@@ -20,6 +21,7 @@ public class AtPin {
     private static final Annal LOGGER = Annal.get(AtPin.class);
 
     public static void init() {
+        Ke.banner("「περιβάλλων」- Ambient ( At )");
         At.infoInit(LOGGER, "AtConfiguration...");
         AtConfiguration.init();
     }
