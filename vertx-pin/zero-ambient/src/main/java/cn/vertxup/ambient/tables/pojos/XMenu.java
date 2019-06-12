@@ -22,7 +22,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XMenu implements IXMenu {
 
-    private static final long serialVersionUID = -559677084;
+    private static final long serialVersionUID = 810238677;
 
     private String  key;
     private String  name;
@@ -34,7 +34,6 @@ public class XMenu implements IXMenu {
     private Long    level;
     private String  parentId;
     private String  appId;
-    private Boolean engine;
     private Boolean active;
     private String  language;
     private String  metadata;
@@ -52,7 +51,6 @@ public class XMenu implements IXMenu {
         this.level = value.level;
         this.parentId = value.parentId;
         this.appId = value.appId;
-        this.engine = value.engine;
         this.active = value.active;
         this.language = value.language;
         this.metadata = value.metadata;
@@ -69,7 +67,6 @@ public class XMenu implements IXMenu {
         Long    level,
         String  parentId,
         String  appId,
-        Boolean engine,
         Boolean active,
         String  language,
         String  metadata
@@ -84,7 +81,6 @@ public class XMenu implements IXMenu {
         this.level = level;
         this.parentId = parentId;
         this.appId = appId;
-        this.engine = engine;
         this.active = active;
         this.language = language;
         this.metadata = metadata;
@@ -201,17 +197,6 @@ public class XMenu implements IXMenu {
     }
 
     @Override
-    public Boolean getEngine() {
-        return this.engine;
-    }
-
-    @Override
-    public XMenu setEngine(Boolean engine) {
-        this.engine = engine;
-        return this;
-    }
-
-    @Override
     public Boolean getActive() {
         return this.active;
     }
@@ -258,7 +243,6 @@ public class XMenu implements IXMenu {
         sb.append(", ").append(level);
         sb.append(", ").append(parentId);
         sb.append(", ").append(appId);
-        sb.append(", ").append(engine);
         sb.append(", ").append(active);
         sb.append(", ").append(language);
         sb.append(", ").append(metadata);
@@ -286,7 +270,6 @@ public class XMenu implements IXMenu {
         setLevel(from.getLevel());
         setParentId(from.getParentId());
         setAppId(from.getAppId());
-        setEngine(from.getEngine());
         setActive(from.getActive());
         setLanguage(from.getLanguage());
         setMetadata(from.getMetadata());

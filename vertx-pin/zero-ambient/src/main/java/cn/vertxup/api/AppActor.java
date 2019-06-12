@@ -1,6 +1,7 @@
 package cn.vertxup.api;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ambient.cv.Addr;
 import io.vertx.tp.ambient.service.AppStub;
@@ -18,5 +19,10 @@ public class AppActor {
     @Address(Addr.App.BY_NAME)
     public Future<JsonObject> byName(final String name) {
         return this.appStub.fetchByName(name);
+    }
+
+    @Address(Addr.Menu.BY_APP_ID)
+    public Future<JsonArray> fetchMenus(final String appId) {
+        return this.appStub.fetchMenus(appId);
     }
 }

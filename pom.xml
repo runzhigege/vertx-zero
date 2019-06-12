@@ -97,7 +97,7 @@
         <common.logging.version>1.2</common.logging.version>
         <common.net.version>3.6</common.net.version>
         <http.async.client.version>4.1.4</http.async.client.version>
-        <http.client.version>4.5.8</http.client.version>
+        <http.client.version>4.5.9</http.client.version>
         <http.core.version>4.4.11</http.core.version>
         <!-- Liquibase -->
         <liquibase.version>3.6.3</liquibase.version>
@@ -109,7 +109,7 @@
         <rxjava2.version>2.2.9</rxjava2.version>
         <netty.tcnative.version>2.0.25.Final</netty.tcnative.version>
         <netty.version>4.1.36.Final</netty.version>
-        <hazelcast.version>3.12</hazelcast.version>
+        <hazelcast.version>3.12.1</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
         <error.prone.version>2.3.3</error.prone.version>
         <reactive.streams>1.0.2</reactive.streams>

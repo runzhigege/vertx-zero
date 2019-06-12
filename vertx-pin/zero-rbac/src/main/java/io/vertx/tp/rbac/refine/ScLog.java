@@ -4,13 +4,13 @@ import io.vertx.up.log.Annal;
 
 class ScLog {
 
-    static void info(final Annal logger,
-                     final String flag, final String pattern, final Object... args) {
+    private static void info(final Annal logger,
+                             final String flag, final String pattern, final Object... args) {
         logger.info("[ Ακριβώς ] ( " + flag + " ) " + pattern, args);
     }
 
-    static void debug(final Annal logger,
-                      final String flag, final String pattern, final Object... args) {
+    private static void debug(final Annal logger,
+                              final String flag, final String pattern, final Object... args) {
         logger.debug("[ Ακριβώς ] ( " + flag + " ) " + pattern, args);
     }
 

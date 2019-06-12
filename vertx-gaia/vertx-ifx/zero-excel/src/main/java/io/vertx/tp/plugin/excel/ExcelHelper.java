@@ -55,6 +55,20 @@ class ExcelHelper {
         return workbook;
     }
 
+    @SuppressWarnings("all")
+    Workbook getWorkbook(final InputStream in, final boolean isXlsx) {
+        Fn.outWeb(null == in, _404ExcelFileNullException.class, this.target, "Stream");
+        final Workbook workbook;
+        if (isXlsx) {
+            workbook = Fn.pool(Pool.WORKBOOKS_STREAM, in.hashCode(),
+                    () -> Fn.getJvm(() -> new HSSFWorkbook(in)));
+        } else {
+            workbook = Fn.pool(Pool.WORKBOOKS_STREAM, in.hashCode(),
+                    () -> Fn.getJvm(() -> new XSSFWorkbook(in)));
+        }
+        return workbook;
+    }
+
     /*
      * Get Set<ExSheet> collection based on workbook
      */
