@@ -15,6 +15,7 @@ public interface KeField {
     String NAMESPACE = "namespace";
 
     String METADATA = "metadata";
+    String DATA = "data";
     String ACTIVE = "active";
     String LANGUAGE = "language";
     String KEY = "key";

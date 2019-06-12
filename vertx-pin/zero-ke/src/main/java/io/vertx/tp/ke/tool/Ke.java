@@ -1,6 +1,7 @@
 package io.vertx.tp.ke.tool;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
 
@@ -37,6 +38,10 @@ public class Ke {
 
         static JsonObject bool(final String key, final boolean checked) {
             return KeResult.bool(key, checked);
+        }
+
+        static JsonObject array(final JsonArray array) {
+            return KeResult.array(array);
         }
     }
 }
