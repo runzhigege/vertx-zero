@@ -131,3 +131,8 @@ E80205: "(403) - (RBAC) The profile required `{0}`, but current profile is `{1}`
 E80206: "(401) - (RBAC) The token counter is invalid ( size = {0} ) for user = {1}."
 E80207: "(401) - (RBAC) The token that you provided = `{0}` is invalid."
 E80208: "(401) - (RBAC) The token that you provided `{0}` is expired."
+# Ambient Module
+E80300: "(500) - (Ambient) The application environment error, could not get app data."
+E80301: "(500) - (Ambient) The application ( name = `{0}` ) could not be initialized."
+E80302: "(500) - (Ambient) The Init implementation class = {0} does not `implement` interface Init."
+E80303: "(500) - (Ambient) The Prerequisite class = {0} does not satisfy specification."

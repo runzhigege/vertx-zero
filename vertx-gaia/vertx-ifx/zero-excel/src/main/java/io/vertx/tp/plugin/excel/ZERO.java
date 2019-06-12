@@ -10,6 +10,9 @@ interface Pool {
     ConcurrentMap<String, Workbook> WORKBOOKS
             = new ConcurrentHashMap<>();
 
+    ConcurrentMap<Integer, Workbook> WORKBOOKS_STREAM
+            = new ConcurrentHashMap<>();
+
     ConcurrentMap<String, ExcelHelper> HELPERS
             = new ConcurrentHashMap<>();
 

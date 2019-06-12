@@ -14,11 +14,19 @@ class AtLog {
         logger.debug("[ περιβάλλων ] ( " + flag + " ) " + pattern, args);
     }
 
+    static void infoApp(final Annal logger, final String pattern, final Object... args) {
+        info(logger, "Application", pattern, args);
+    }
+
     static void infoEnv(final Annal logger, final String pattern, final Object... args) {
         info(logger, "Env", pattern, args);
     }
 
     static void infoInit(final Annal logger, final String pattern, final Object... args) {
         info(logger, "Init", pattern, args);
+    }
+
+    static void infoFile(final Annal logger, final String pattern, final Object... args) {
+        info(logger, "File", pattern, args);
     }
 }

@@ -8,6 +8,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.excel.atom.ExTable;
 import io.vertx.up.eon.TpClient;
 
+import java.io.InputStream;
 import java.util.Set;
 
 /**
@@ -37,8 +38,15 @@ public interface ExcelClient extends TpClient<ExcelClient> {
     <T> ExcelClient loading(String filename, Handler<AsyncResult<Set<T>>> handler);
 
     @Fluent
+    <T> ExcelClient loading(InputStream in, boolean isXlsx, Handler<AsyncResult<Set<T>>> handler);
+
+    @Fluent
     ExcelClient ingestList(String filename, Handler<AsyncResult<Set<ExTable>>> handler);
 
     @Fluent
+    ExcelClient ingestList(InputStream in, boolean isXlsx, Handler<AsyncResult<Set<ExTable>>> handler);
+
+    @Fluent
     ExcelClient ingest(String filename, Handler<AsyncResult<ExTable>> handler);
+
 }

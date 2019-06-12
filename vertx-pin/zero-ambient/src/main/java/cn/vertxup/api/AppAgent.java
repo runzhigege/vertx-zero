@@ -4,8 +4,10 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ambient.cv.Addr;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.EndPoint;
+import io.vertx.up.eon.ID;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
@@ -18,4 +20,9 @@ public interface AppAgent {
     @GET
     @Address(Addr.App.BY_NAME)
     JsonObject byName(@PathParam("name") String name);
+
+    @Path("/api/menus")
+    @GET
+    @Address(Addr.Menu.BY_APP_ID)
+    JsonObject fetchMenus(@HeaderParam(ID.Header.X_APP_ID) String appId);
 }
