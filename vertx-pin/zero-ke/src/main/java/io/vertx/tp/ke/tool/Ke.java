@@ -27,6 +27,10 @@ public class Ke {
         return KeTool.poolAsync(name, key, supplier);
     }
 
+    public static void banner(final String module) {
+        KeTool.banner(module);
+    }
+
     /*
      * Result for response
      */
