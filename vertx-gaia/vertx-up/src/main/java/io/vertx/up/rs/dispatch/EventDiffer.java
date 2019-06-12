@@ -93,6 +93,7 @@ class EventDiffer implements Differ<RoutingContext> {
         return async;
     }
 
+    @SuppressWarnings("all")
     private Method findReplier(final Event event) {
         final Annotation annotation = event.getAction().getDeclaredAnnotation(Address.class);
         final String address = Ut.invoke(annotation, "value");
@@ -100,11 +101,12 @@ class EventDiffer implements Differ<RoutingContext> {
         final Receipt found = RECEIPTS.stream()
                 .filter(item -> address.equals(item.getAddress()))
                 .findFirst().orElse(null);
+
         final Method method;
         // Get null found throw exception.
         Fn.outUp(null == found, LOGGER, WorkerMissingException.class,
                 this.getClass(), address);
-
+        /* Above sentence will throw exception when found is null */
         method = found.getMethod();
 
         Fn.outUp(null == method, LOGGER, WorkerMissingException.class,

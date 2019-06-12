@@ -27,7 +27,7 @@ public interface DatumAgent {
 
     @Path("/category/{type}/{code}")
     @GET
-    @Address(Addr.Datum.CATEGORY_TYPE)
+    @Address(Addr.Datum.CATEGORY_CODE)
     JsonArray fetchCategory(@HeaderParam(ID.Header.X_APP_ID) String appId,
                             @PathParam("type") String type,
                             @PathParam("code") String code);
@@ -46,7 +46,7 @@ public interface DatumAgent {
 
     @Path("/tabular/{type}/{code}")
     @GET
-    @Address(Addr.Datum.TABULAR_TYPE)
+    @Address(Addr.Datum.TABULAR_CODE)
     JsonArray fetchTabular(@HeaderParam(ID.Header.X_APP_ID) String appId,
                            @PathParam("type") String type,
                            @PathParam("code") String code);
