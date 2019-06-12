@@ -132,13 +132,6 @@ public class XMenuDao extends DAOImpl<XMenuRecord, cn.vertxup.ambient.tables.poj
     }
 
     /**
-     * Fetch records that have <code>ENGINE IN (values)</code>
-     */
-    public List<cn.vertxup.ambient.tables.pojos.XMenu> fetchByEngine(Boolean... values) {
-        return fetch(XMenu.X_MENU.ENGINE, values);
-    }
-
-    /**
      * Fetch records that have <code>ACTIVE IN (values)</code>
      */
     public List<cn.vertxup.ambient.tables.pojos.XMenu> fetchByActive(Boolean... values) {
@@ -234,13 +227,6 @@ public class XMenuDao extends DAOImpl<XMenuRecord, cn.vertxup.ambient.tables.poj
      */
     public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XMenu>> fetchByAppIdAsync(List<String> values) {
         return fetchAsync(XMenu.X_MENU.APP_ID,values);
-    }
-
-    /**
-     * Fetch records that have <code>ENGINE IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XMenu>> fetchByEngineAsync(List<Boolean> values) {
-        return fetchAsync(XMenu.X_MENU.ENGINE,values);
     }
 
     /**
