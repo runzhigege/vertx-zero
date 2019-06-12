@@ -30,14 +30,12 @@ public class EventAxis implements Axis<Router> {
      * Splitter
      */
     private transient final ModeSplitter splitter =
-            Fn.poolThread(Pool.THREADS,
-                    () -> Ut.instance(ModeSplitter.class));
+            Fn.poolThread(Pool.THREADS, () -> Ut.instance(ModeSplitter.class));
     /**
      * Sentry
      */
     private transient final Sentry<RoutingContext> verifier =
-            Fn.poolThread(Pool.VERIFIERS,
-                    () -> Ut.instance(StandardVerifier.class));
+            Fn.poolThread(Pool.VERIFIERS, () -> Ut.instance(StandardVerifier.class));
 
     /**
      * Secreter for security limitation
