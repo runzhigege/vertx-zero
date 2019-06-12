@@ -35,17 +35,13 @@ class IrInquiry implements Inquiry {
 
     private void ensure(final JsonObject input) {
         // Sorter checking
-        Inquiry.ensureType(input, KEY_SORTER, JsonArray.class,
-                Ut::isJArray, this.getClass());
+        Inquiry.ensureType(input, KEY_SORTER, JsonArray.class, Ut::isJArray, this.getClass());
         // Projection checking
-        Inquiry.ensureType(input, KEY_PROJECTION, JsonArray.class,
-                Ut::isJArray, this.getClass());
+        Inquiry.ensureType(input, KEY_PROJECTION, JsonArray.class, Ut::isJArray, this.getClass());
         // Pager checking
-        Inquiry.ensureType(input, KEY_PAGER, JsonObject.class,
-                Ut::isJObject, this.getClass());
+        Inquiry.ensureType(input, KEY_PAGER, JsonObject.class, Ut::isJObject, this.getClass());
         // Criteria
-        Inquiry.ensureType(input, KEY_CRITERIA, JsonObject.class,
-                Ut::isJObject, this.getClass());
+        Inquiry.ensureType(input, KEY_CRITERIA, JsonObject.class, Ut::isJObject, this.getClass());
     }
 
     @Override
@@ -79,21 +75,15 @@ class IrInquiry implements Inquiry {
     @Override
     public JsonObject toJson() {
         final JsonObject result = new JsonObject();
-        if (null != this.pager) {
-            result.put(KEY_PAGER, this.pager.toJson());
-        }
-        if (null != this.sorter) {
+        Fn.safeNull(() -> result.put(KEY_PAGER, this.pager.toJson()), this.pager);
+        Fn.safeNull(() -> {
             final JsonObject sorters = this.sorter.toJson();
             final JsonArray array = new JsonArray();
             Ut.<Boolean>itJObject(sorters, (value, key) -> array.add(key + "," + (value ? "ASC" : "DESC")));
             result.put(KEY_SORTER, array);
-        }
-        if (null != this.projection) {
-            result.put(KEY_PROJECTION, Ut.toJArray(this.projection));
-        }
-        if (null != this.criteria) {
-            result.put(KEY_CRITERIA, this.criteria.toJson());
-        }
+        }, this.sorter);
+        Fn.safeNull(() -> result.put(KEY_PROJECTION, Ut.toJArray(this.projection)), this.projection);
+        Fn.safeNull(() -> result.put(KEY_CRITERIA, this.criteria.toJson()), this.criteria);
         return result;
     }
 }

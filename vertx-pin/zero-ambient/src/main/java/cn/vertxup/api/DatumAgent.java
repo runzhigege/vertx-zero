@@ -13,40 +13,40 @@ import javax.ws.rs.*;
 @Path("/api")
 public interface DatumAgent {
 
-    @Path("/categories/type/{type}")
+    @Path("/type/categories/{type}")
     @GET
     @Address(Addr.Datum.CATEGORY_TYPE)
     JsonArray categoryByType(@HeaderParam(ID.Header.X_APP_ID) String appId,
                              @PathParam("type") String type);
 
-    @Path("/categories/by-types")
+    @Path("/types/categories")
     @POST
     @Address(Addr.Datum.CATEGORY_TYPES)
     JsonObject fetchCategories(@HeaderParam(ID.Header.X_APP_ID) String appId,
                                @BodyParam JsonArray types);
 
-    @Path("/category/{type}/{code}")
+    @Path("/{type}/{code}/category")
     @GET
-    @Address(Addr.Datum.CATEGORY_TYPE)
+    @Address(Addr.Datum.CATEGORY_CODE)
     JsonArray fetchCategory(@HeaderParam(ID.Header.X_APP_ID) String appId,
                             @PathParam("type") String type,
                             @PathParam("code") String code);
 
-    @Path("/tabulars/type/{type}")
+    @Path("/type/tabulars/{type}")
     @GET
     @Address(Addr.Datum.TABULAR_TYPE)
     JsonArray tabularByType(@HeaderParam(ID.Header.X_APP_ID) String appId,
                             @PathParam("type") String type);
 
-    @Path("/tabulars/by-types")
+    @Path("/types/tabulars")
     @POST
     @Address(Addr.Datum.TABULAR_TYPES)
     JsonObject fetchTabulars(@HeaderParam(ID.Header.X_APP_ID) String appId,
                              @BodyParam JsonArray types);
 
-    @Path("/tabular/{type}/{code}")
+    @Path("/{type}/{code}/tabular")
     @GET
-    @Address(Addr.Datum.TABULAR_TYPE)
+    @Address(Addr.Datum.TABULAR_CODE)
     JsonArray fetchTabular(@HeaderParam(ID.Header.X_APP_ID) String appId,
                            @PathParam("type") String type,
                            @PathParam("code") String code);

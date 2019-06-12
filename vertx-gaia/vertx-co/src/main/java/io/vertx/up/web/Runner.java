@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
+/**
+ * Multi thread helper tool to do some multi-thread works.
+ */
 public final class Runner {
 
     private static final Annal LOGGER = Annal.get(Runner.class);

@@ -15,7 +15,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * @Queue
+ * This class is For annotation @Queue scanning
+ * It will scan all classes that annotated with @Queue, zero system
+ * will extract worker class from this scanned classes.
  */
 public class QueueInquirer implements Inquirer<Set<Class<?>>> {
     private static final Annal LOGGER = Annal.get(QueueInquirer.class);
@@ -46,6 +48,7 @@ public class QueueInquirer implements Inquirer<Set<Class<?>>> {
                         Fn.outUp(void.class == returnType || Void.class == returnType, LOGGER,
                                 WorkerConflictException.class, this.getClass(), method);
                     }
-                });
+                })
+                .dispose();
     }
 }

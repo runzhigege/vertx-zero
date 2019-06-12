@@ -45,7 +45,6 @@ public class ModeSplitter {
 
             final Differ<RoutingContext> differ;
             if (annotated) {
-
                 // EventBus Mode for Mode: 1,3,5
                 differ = EventDiffer.create();
             } else if (rpc) {

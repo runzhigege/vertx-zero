@@ -1,6 +1,7 @@
 package io.vertx.tp.ke.tool;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
 
@@ -26,6 +27,10 @@ public class Ke {
         return KeTool.poolAsync(name, key, supplier);
     }
 
+    public static void banner(final String module) {
+        KeTool.banner(module);
+    }
+
     /*
      * Result for response
      */
@@ -37,6 +42,10 @@ public class Ke {
 
         static JsonObject bool(final String key, final boolean checked) {
             return KeResult.bool(key, checked);
+        }
+
+        static JsonObject array(final JsonArray array) {
+            return KeResult.array(array);
         }
     }
 }

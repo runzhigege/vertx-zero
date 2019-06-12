@@ -72,7 +72,6 @@ public class ReceiptExtractor implements Extractor<Set<Receipt>> {
         final Class<?> clazz = method.getDeclaringClass();
         final Annotation annotation = method.getDeclaredAnnotation(Address.class);
         final String address = Ut.invoke(annotation, "value");
-
         // 2. Ensure address incoming.
         Fn.outUp(!ADDRESS.contains(address), LOGGER,
                 AddressWrongException.class,

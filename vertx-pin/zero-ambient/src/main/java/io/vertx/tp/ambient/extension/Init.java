@@ -53,5 +53,8 @@ public interface Init {
     /*
      * Executor result hooker
      */
-    JsonObject result(JsonObject input, JsonObject appJson);
+    default JsonObject result(final JsonObject input, final JsonObject appJson) {
+        /* Default situation, return to appJson */
+        return appJson;
+    }
 }

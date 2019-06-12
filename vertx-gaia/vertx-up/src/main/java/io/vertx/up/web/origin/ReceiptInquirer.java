@@ -36,11 +36,9 @@ public class ReceiptInquirer implements Inquirer<Set<Receipt>> {
         }, LOGGER);
         /* 3.3. Return **/
         final Set<Receipt> receipts = new HashSet<>();
-        Fn.safeJvm(() -> {
-            for (final QueueThread item : threadReference) {
-                receipts.addAll(item.getReceipts());
-            }
-        }, LOGGER);
+        Fn.safeJvm(() -> threadReference.stream()
+                .map(QueueThread::getReceipts)
+                .forEach(receipts::addAll), LOGGER);
         return receipts;
     }
 }
