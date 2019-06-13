@@ -6,6 +6,8 @@ package cn.vertxup.domain.tables.pojos;
 
 import cn.vertxup.domain.tables.interfaces.IRResourceMatrix;
 
+import java.time.LocalDateTime;
+
 import javax.annotation.Generated;
 
 
@@ -22,16 +24,15 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RResourceMatrix implements IRResourceMatrix {
 
-    private static final long serialVersionUID = -475957381;
+    private static final long serialVersionUID = 1015965306;
 
-    private String key;
-    private String userId;
-    private String resourceId;
-    private String projection;
-    private String query;
-    private String modeProjection;
-    private String modeQuery;
-    private String sigma;
+    private String        key;
+    private String        userId;
+    private String        resourceId;
+    private String        projection;
+    private String        query;
+    private String        ids;
+    private LocalDateTime expired;
 
     public RResourceMatrix() {}
 
@@ -41,29 +42,26 @@ public class RResourceMatrix implements IRResourceMatrix {
         this.resourceId = value.resourceId;
         this.projection = value.projection;
         this.query = value.query;
-        this.modeProjection = value.modeProjection;
-        this.modeQuery = value.modeQuery;
-        this.sigma = value.sigma;
+        this.ids = value.ids;
+        this.expired = value.expired;
     }
 
     public RResourceMatrix(
-        String key,
-        String userId,
-        String resourceId,
-        String projection,
-        String query,
-        String modeProjection,
-        String modeQuery,
-        String sigma
+        String        key,
+        String        userId,
+        String        resourceId,
+        String        projection,
+        String        query,
+        String        ids,
+        LocalDateTime expired
     ) {
         this.key = key;
         this.userId = userId;
         this.resourceId = resourceId;
         this.projection = projection;
         this.query = query;
-        this.modeProjection = modeProjection;
-        this.modeQuery = modeQuery;
-        this.sigma = sigma;
+        this.ids = ids;
+        this.expired = expired;
     }
 
     @Override
@@ -122,35 +120,24 @@ public class RResourceMatrix implements IRResourceMatrix {
     }
 
     @Override
-    public String getModeProjection() {
-        return this.modeProjection;
+    public String getIds() {
+        return this.ids;
     }
 
     @Override
-    public RResourceMatrix setModeProjection(String modeProjection) {
-        this.modeProjection = modeProjection;
+    public RResourceMatrix setIds(String ids) {
+        this.ids = ids;
         return this;
     }
 
     @Override
-    public String getModeQuery() {
-        return this.modeQuery;
+    public LocalDateTime getExpired() {
+        return this.expired;
     }
 
     @Override
-    public RResourceMatrix setModeQuery(String modeQuery) {
-        this.modeQuery = modeQuery;
-        return this;
-    }
-
-    @Override
-    public String getSigma() {
-        return this.sigma;
-    }
-
-    @Override
-    public RResourceMatrix setSigma(String sigma) {
-        this.sigma = sigma;
+    public RResourceMatrix setExpired(LocalDateTime expired) {
+        this.expired = expired;
         return this;
     }
 
@@ -163,9 +150,8 @@ public class RResourceMatrix implements IRResourceMatrix {
         sb.append(", ").append(resourceId);
         sb.append(", ").append(projection);
         sb.append(", ").append(query);
-        sb.append(", ").append(modeProjection);
-        sb.append(", ").append(modeQuery);
-        sb.append(", ").append(sigma);
+        sb.append(", ").append(ids);
+        sb.append(", ").append(expired);
 
         sb.append(")");
         return sb.toString();
@@ -185,9 +171,8 @@ public class RResourceMatrix implements IRResourceMatrix {
         setResourceId(from.getResourceId());
         setProjection(from.getProjection());
         setQuery(from.getQuery());
-        setModeProjection(from.getModeProjection());
-        setModeQuery(from.getModeQuery());
-        setSigma(from.getSigma());
+        setIds(from.getIds());
+        setExpired(from.getExpired());
     }
 
     /**

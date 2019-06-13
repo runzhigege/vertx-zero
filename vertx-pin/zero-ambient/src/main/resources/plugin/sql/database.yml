@@ -1,23 +1,23 @@
 databaseChangeLog:
   # 系统表
   - include:
-      file: script/sql/schema/X_APP.sql
+      file: plugin/sql/ambient/X_APP.sql
       relativeToChangelogFile: false
   - include:
-      file: script/sql/schema/X_MODULE.sql
+      file: plugin/sql/ambient/X_MODULE.sql
       relativeToChangelogFile: false
   - include:
-      file: script/sql/schema/X_CATEGORY.sql
+      file: plugin/sql/ambient/X_CATEGORY.sql
       relativeToChangelogFile: false
   - include:
-      file: script/sql/schema/X_SOURCE.sql
+      file: plugin/sql/ambient/X_SOURCE.sql
       relativeToChangelogFile: false
   - include:
-      file: script/sql/schema/X_TABULAR.sql
+      file: plugin/sql/ambient/X_TABULAR.sql
       relativeToChangelogFile: false
   - include:
-      file: script/sql/schema/X_ATTACHMENT.sql
+      file: plugin/sql/ambient/X_ATTACHMENT.sql
       relativeToChangelogFile: false
   - include:
-      file: script/sql/schema/X_MENU.sql
+      file: plugin/sql/ambient/X_MENU.sql
       relativeToChangelogFile: false

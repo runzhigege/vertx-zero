@@ -39,7 +39,7 @@ import org.jooq.impl.Internal;
 
 /**
  * A class modelling foreign key relationships and constraints of tables of 
- * the <code>DB_RBAC</code> schema.
+ * the <code>DB_ORIGIN_X</code> schema.
  */
 @Generated(
     value = {
@@ -66,7 +66,6 @@ public class Keys {
     public static final UniqueKey<OUserRecord> KEY_O_USER_CLIENT_ID = UniqueKeys0.KEY_O_USER_CLIENT_ID;
     public static final UniqueKey<RGroupRoleRecord> KEY_R_GROUP_ROLE_PRIMARY = UniqueKeys0.KEY_R_GROUP_ROLE_PRIMARY;
     public static final UniqueKey<RResourceMatrixRecord> KEY_R_RESOURCE_MATRIX_PRIMARY = UniqueKeys0.KEY_R_RESOURCE_MATRIX_PRIMARY;
-    public static final UniqueKey<RResourceMatrixRecord> KEY_R_RESOURCE_MATRIX_SIGMA = UniqueKeys0.KEY_R_RESOURCE_MATRIX_SIGMA;
     public static final UniqueKey<RRolePermRecord> KEY_R_ROLE_PERM_PRIMARY = UniqueKeys0.KEY_R_ROLE_PERM_PRIMARY;
     public static final UniqueKey<RUserGroupRecord> KEY_R_USER_GROUP_PRIMARY = UniqueKeys0.KEY_R_USER_GROUP_PRIMARY;
     public static final UniqueKey<RUserRoleRecord> KEY_R_USER_ROLE_PRIMARY = UniqueKeys0.KEY_R_USER_ROLE_PRIMARY;
@@ -80,6 +79,7 @@ public class Keys {
     public static final UniqueKey<SPermissionRecord> KEY_S_PERMISSION_PRIMARY = UniqueKeys0.KEY_S_PERMISSION_PRIMARY;
     public static final UniqueKey<SPermissionRecord> KEY_S_PERMISSION_CODE = UniqueKeys0.KEY_S_PERMISSION_CODE;
     public static final UniqueKey<SResourceRecord> KEY_S_RESOURCE_PRIMARY = UniqueKeys0.KEY_S_RESOURCE_PRIMARY;
+    public static final UniqueKey<SResourceRecord> KEY_S_RESOURCE_CODE = UniqueKeys0.KEY_S_RESOURCE_CODE;
     public static final UniqueKey<SRoleRecord> KEY_S_ROLE_PRIMARY = UniqueKeys0.KEY_S_ROLE_PRIMARY;
     public static final UniqueKey<SRoleRecord> KEY_S_ROLE_CODE = UniqueKeys0.KEY_S_ROLE_CODE;
     public static final UniqueKey<SUserRecord> KEY_S_USER_PRIMARY = UniqueKeys0.KEY_S_USER_PRIMARY;
@@ -103,7 +103,6 @@ public class Keys {
         public static final UniqueKey<OUserRecord> KEY_O_USER_CLIENT_ID = Internal.createUniqueKey(OUser.O_USER, "KEY_O_USER_CLIENT_ID", OUser.O_USER.CLIENT_ID);
         public static final UniqueKey<RGroupRoleRecord> KEY_R_GROUP_ROLE_PRIMARY = Internal.createUniqueKey(RGroupRole.R_GROUP_ROLE, "KEY_R_GROUP_ROLE_PRIMARY", RGroupRole.R_GROUP_ROLE.GROUP_ID, RGroupRole.R_GROUP_ROLE.ROLE_ID);
         public static final UniqueKey<RResourceMatrixRecord> KEY_R_RESOURCE_MATRIX_PRIMARY = Internal.createUniqueKey(RResourceMatrix.R_RESOURCE_MATRIX, "KEY_R_RESOURCE_MATRIX_PRIMARY", RResourceMatrix.R_RESOURCE_MATRIX.KEY);
-        public static final UniqueKey<RResourceMatrixRecord> KEY_R_RESOURCE_MATRIX_SIGMA = Internal.createUniqueKey(RResourceMatrix.R_RESOURCE_MATRIX, "KEY_R_RESOURCE_MATRIX_SIGMA", RResourceMatrix.R_RESOURCE_MATRIX.SIGMA, RResourceMatrix.R_RESOURCE_MATRIX.RESOURCE_ID, RResourceMatrix.R_RESOURCE_MATRIX.USER_ID);
         public static final UniqueKey<RRolePermRecord> KEY_R_ROLE_PERM_PRIMARY = Internal.createUniqueKey(RRolePerm.R_ROLE_PERM, "KEY_R_ROLE_PERM_PRIMARY", RRolePerm.R_ROLE_PERM.PERM_ID, RRolePerm.R_ROLE_PERM.ROLE_ID);
         public static final UniqueKey<RUserGroupRecord> KEY_R_USER_GROUP_PRIMARY = Internal.createUniqueKey(RUserGroup.R_USER_GROUP, "KEY_R_USER_GROUP_PRIMARY", RUserGroup.R_USER_GROUP.GROUP_ID, RUserGroup.R_USER_GROUP.USER_ID);
         public static final UniqueKey<RUserRoleRecord> KEY_R_USER_ROLE_PRIMARY = Internal.createUniqueKey(RUserRole.R_USER_ROLE, "KEY_R_USER_ROLE_PRIMARY", RUserRole.R_USER_ROLE.USER_ID, RUserRole.R_USER_ROLE.ROLE_ID);
@@ -117,6 +116,7 @@ public class Keys {
         public static final UniqueKey<SPermissionRecord> KEY_S_PERMISSION_PRIMARY = Internal.createUniqueKey(SPermission.S_PERMISSION, "KEY_S_PERMISSION_PRIMARY", SPermission.S_PERMISSION.KEY);
         public static final UniqueKey<SPermissionRecord> KEY_S_PERMISSION_CODE = Internal.createUniqueKey(SPermission.S_PERMISSION, "KEY_S_PERMISSION_CODE", SPermission.S_PERMISSION.CODE, SPermission.S_PERMISSION.SIGMA);
         public static final UniqueKey<SResourceRecord> KEY_S_RESOURCE_PRIMARY = Internal.createUniqueKey(SResource.S_RESOURCE, "KEY_S_RESOURCE_PRIMARY", SResource.S_RESOURCE.KEY);
+        public static final UniqueKey<SResourceRecord> KEY_S_RESOURCE_CODE = Internal.createUniqueKey(SResource.S_RESOURCE, "KEY_S_RESOURCE_CODE", SResource.S_RESOURCE.CODE, SResource.S_RESOURCE.SIGMA);
         public static final UniqueKey<SRoleRecord> KEY_S_ROLE_PRIMARY = Internal.createUniqueKey(SRole.S_ROLE, "KEY_S_ROLE_PRIMARY", SRole.S_ROLE.KEY);
         public static final UniqueKey<SRoleRecord> KEY_S_ROLE_CODE = Internal.createUniqueKey(SRole.S_ROLE, "KEY_S_ROLE_CODE", SRole.S_ROLE.CODE, SRole.S_ROLE.SIGMA);
         public static final UniqueKey<SUserRecord> KEY_S_USER_PRIMARY = Internal.createUniqueKey(SUser.S_USER, "KEY_S_USER_PRIMARY", SUser.S_USER.KEY);

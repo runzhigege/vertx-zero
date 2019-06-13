@@ -3,6 +3,7 @@ package io.vertx.tp.crud.init;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxConfig;
 import io.vertx.tp.crud.cv.IxFolder;
+import io.vertx.tp.crud.cv.IxMsg;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
@@ -12,7 +13,9 @@ import io.vertx.zero.eon.Strings;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -28,6 +31,8 @@ class IxDao {
 
     private static final ConcurrentMap<String, IxConfig> CONFIG_MAP =
             new ConcurrentHashMap<>();
+    private static final Set<String> MODULE_REG =
+            new HashSet<>();
 
     static void init() {
         /*
@@ -48,20 +53,46 @@ class IxDao {
                 final IxConfig config = Ut.deserialize(configDao, IxConfig.class);
                 /* 3. Processed key */
                 final String key = file.replace(Strings.DOT + FileSuffix.JSON, Strings.EMPTY);
-
-                /* 4. Logger */
-                Ix.infoInit(LOGGER, "--- file = {0}, key = {1}", path, key);
-
-                CONFIG_MAP.put(key, config);
+                if (file.contains(config.getName())) {
+                    /* 4. Logger */
+                    Ix.infoInit(LOGGER, IxMsg.INIT_INFO, path, key);
+                    /*
+                     * Resolution for resource key calculation
+                     */
+                    initUri(key);
+                    CONFIG_MAP.put(key, config);
+                } else {
+                    Ix.errorInit(LOGGER, IxMsg.INIT_ERROR, path, config.getName());
+                }
             }, configDao);
         });
-        Ix.infoInit(LOGGER, "IxDao Finished ! Size = {0}", CONFIG_MAP.size());
+        Ix.infoInit(LOGGER, "IxDao Finished ! Size = {0}, Uris = {1}", CONFIG_MAP.size(), MODULE_REG.size());
+    }
+
+    private static void initUri(final String key) {
+        final Set<String> definition = new HashSet<>();
+        /*
+         * Specification of actor
+         */
+        definition.add("/api/" + key);
+        definition.add("/api/" + key + "/search");
+        definition.add("/api/" + key + "/missing");
+        definition.add("/api/" + key + "/existing");
+        definition.add("/api/batch/" + key + "/delete");
+        definition.add("/api/batch/" + key + "/update");
+        definition.add("/api/columns/" + key + "/my");
+        definition.add("/api/columns/" + key + "/full");
+        MODULE_REG.addAll(definition);
     }
 
     static IxConfig get(final String actor) {
         Ix.infoRest(LOGGER, "Actor = {0}", actor);
         final IxConfig config = CONFIG_MAP.get(actor);
         return Fn.getNull(null, () -> config, config);
+    }
+
+    static Set<String> getUris() {
+        return MODULE_REG;
     }
 
     static UxJooq get(final IxConfig config) {

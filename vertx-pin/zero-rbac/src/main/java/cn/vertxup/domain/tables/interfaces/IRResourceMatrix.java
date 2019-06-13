@@ -5,6 +5,7 @@ package cn.vertxup.domain.tables.interfaces;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.annotation.Generated;
 
@@ -23,84 +24,74 @@ import javax.annotation.Generated;
 public interface IRResourceMatrix extends Serializable {
 
     /**
-     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.KEY</code>. 「key」- 限定记录ID
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.KEY</code>. 「key」- 限定记录ID
      */
     public IRResourceMatrix setKey(String value);
 
     /**
-     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.KEY</code>. 「key」- 限定记录ID
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.KEY</code>. 「key」- 限定记录ID
      */
     public String getKey();
 
     /**
-     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
      */
     public IRResourceMatrix setUserId(String value);
 
     /**
-     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
      */
     public String getUserId();
 
     /**
-     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
      */
     public IRResourceMatrix setResourceId(String value);
 
     /**
-     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
      */
     public String getResourceId();
 
     /**
-     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.PROJECTION</code>. 「projection」- 该资源的列定义（单用户处理）
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.PROJECTION</code>. 「projection」- 该资源的列定义（单用户处理）
      */
     public IRResourceMatrix setProjection(String value);
 
     /**
-     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.PROJECTION</code>. 「projection」- 该资源的列定义（单用户处理）
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.PROJECTION</code>. 「projection」- 该资源的列定义（单用户处理）
      */
     public String getProjection();
 
     /**
-     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.QUERY</code>. 「query」- 该资源的行查询（单用户处理）
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.QUERY</code>. 「query」- 该资源的行查询（单用户处理）
      */
     public IRResourceMatrix setQuery(String value);
 
     /**
-     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.QUERY</code>. 「query」- 该资源的行查询（单用户处理）
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.QUERY</code>. 「query」- 该资源的行查询（单用户处理）
      */
     public String getQuery();
 
     /**
-     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.MODE_PROJECTION</code>. 「modeProject」- 资源过滤模式
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.IDS</code>. 「ids」- 该资源针对用户或角色的过滤处理
      */
-    public IRResourceMatrix setModeProjection(String value);
+    public IRResourceMatrix setIds(String value);
 
     /**
-     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.MODE_PROJECTION</code>. 「modeProject」- 资源过滤模式
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.IDS</code>. 「ids」- 该资源针对用户或角色的过滤处理
      */
-    public String getModeProjection();
+    public String getIds();
 
     /**
-     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.MODE_QUERY</code>. 「modeQuery」- 资源查询模式
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.EXPIRED</code>. 「expired」- 资源过期时间（动态授权）
      */
-    public IRResourceMatrix setModeQuery(String value);
+    public IRResourceMatrix setExpired(LocalDateTime value);
 
     /**
-     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.MODE_QUERY</code>. 「modeQuery」- 资源查询模式
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.EXPIRED</code>. 「expired」- 资源过期时间（动态授权）
      */
-    public String getModeQuery();
-
-    /**
-     * Setter for <code>DB_RBAC.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 所属APP的APPKEY
-     */
-    public IRResourceMatrix setSigma(String value);
-
-    /**
-     * Getter for <code>DB_RBAC.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 所属APP的APPKEY
-     */
-    public String getSigma();
+    public LocalDateTime getExpired();
 
     // -------------------------------------------------------------------------
     // FROM and INTO
@@ -122,9 +113,8 @@ public interface IRResourceMatrix extends Serializable {
         setResourceId(json.getString("RESOURCE_ID"));
         setProjection(json.getString("PROJECTION"));
         setQuery(json.getString("QUERY"));
-        setModeProjection(json.getString("MODE_PROJECTION"));
-        setModeQuery(json.getString("MODE_QUERY"));
-        setSigma(json.getString("SIGMA"));
+        setIds(json.getString("IDS"));
+        // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED!
         return this;
     }
 
@@ -136,9 +126,8 @@ public interface IRResourceMatrix extends Serializable {
         json.put("RESOURCE_ID",getResourceId());
         json.put("PROJECTION",getProjection());
         json.put("QUERY",getQuery());
-        json.put("MODE_PROJECTION",getModeProjection());
-        json.put("MODE_QUERY",getModeQuery());
-        json.put("SIGMA",getSigma());
+        json.put("IDS",getIds());
+        // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED!
         return json;
     }
 

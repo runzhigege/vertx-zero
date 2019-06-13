@@ -4,6 +4,7 @@ import io.reactivex.Observable;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.impl.ConcurrentHashSet;
 import io.vertx.tp.error.EventCodexMultiException;
+import io.vertx.up.annotations.Adjust;
 import io.vertx.up.annotations.Codex;
 import io.vertx.up.annotations.EndPoint;
 import io.vertx.up.atom.agent.Event;
@@ -147,6 +148,17 @@ public class EventExtractor implements Extractor<Set<Event>> {
             proxy = Ut.singleton(method.getDeclaringClass());
         }
         event.setProxy(proxy);
+        // 8. Order
+        if (method.isAnnotationPresent(Adjust.class)) {
+            final Annotation adjust = method.getDeclaredAnnotation(Adjust.class);
+            final Integer order = Ut.invoke(adjust, "value");
+            if (Objects.nonNull(order)) {
+                /*
+                 * Routing order modification.
+                 */
+                event.setOrder(order);
+            }
+        }
         return event;
     }
 }

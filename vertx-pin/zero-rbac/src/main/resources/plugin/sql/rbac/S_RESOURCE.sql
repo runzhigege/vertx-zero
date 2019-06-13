@@ -10,13 +10,10 @@ CREATE TABLE IF NOT EXISTS S_RESOURCE
     `NAME`       VARCHAR(255) COMMENT '「name」- 资源名称',
     `COMMENT`    TEXT COMMENT '「comment」- 备注信息',
 
-    -- 资源属性
-    `PROJECTION` TEXT COMMENT '「projection」- 该资源的列定义',
-    `QUERY`      TEXT COMMENT '「query」- 该资源的行查询',
+    -- 资源属性（正向查询专用）
     `LEVEL`      INTEGER COMMENT '「level」- 资源需求级别',
-    `EXPIRED`    DATETIME COMMENT '「expired」- 资源过期时间（动态授权）',
 
-    -- 计算Profile专用（资源所需的Profile详细信息）
+    -- 计算Profile专用（资源所需的Profile详细信息）=
     `MODE_ROLE`  VARCHAR(32) COMMENT '「modeRole」- 该资源查找角色的模式',
     `MODE_GROUP` VARCHAR(32) COMMENT '「modeGroup」- 该资源查找组的模式',
     `MODE_TREE`  VARCHAR(32) COMMENT '「modeTree」- 该资源处理树（用户组）的模式',
@@ -24,7 +21,7 @@ CREATE TABLE IF NOT EXISTS S_RESOURCE
     -- 资源标识
     `SIGMA`      VARCHAR(32) COMMENT '「sigma」- 统一标识',
 
-    -- 模块相关 Join
+    -- 模块相关 Join（反向查询专用，元数据驱动）
     `MODEL_ID`   VARCHAR(255) COMMENT '「modelId」- 资源对应的模型identifier',
     `MODEL_KEY`  VARCHAR(36) COMMENT '「modelKey」- 资源对应的单条记录ID',
 
@@ -41,3 +38,8 @@ CREATE TABLE IF NOT EXISTS S_RESOURCE
     `UPDATED_BY` VARCHAR(36) COMMENT '「updatedBy」- 更新人',
     PRIMARY KEY (`KEY`)
 );
+
+-- changeset Lang:ox-resource-2
+-- Unique Key：独立唯一主键，同一个Sigma中的资源code不可重复
+ALTER TABLE S_RESOURCE
+    ADD UNIQUE (`CODE`, `SIGMA`);

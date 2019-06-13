@@ -118,27 +118,6 @@ public class XAppDao extends DAOImpl<XAppRecord, cn.vertxup.ambient.tables.pojos
     }
 
     /**
-     * Fetch records that have <code>PATH IN (values)</code>
-     */
-    public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByPath(String... values) {
-        return fetch(XApp.X_APP.PATH, values);
-    }
-
-    /**
-     * Fetch records that have <code>ROUTE IN (values)</code>
-     */
-    public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByRoute(String... values) {
-        return fetch(XApp.X_APP.ROUTE, values);
-    }
-
-    /**
-     * Fetch records that have <code>APP_KEY IN (values)</code>
-     */
-    public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByAppKey(String... values) {
-        return fetch(XApp.X_APP.APP_KEY, values);
-    }
-
-    /**
      * Fetch records that have <code>APP_PORT IN (values)</code>
      */
     public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByAppPort(Integer... values) {
@@ -157,6 +136,27 @@ public class XAppDao extends DAOImpl<XAppRecord, cn.vertxup.ambient.tables.pojos
      */
     public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByUrlMain(String... values) {
         return fetch(XApp.X_APP.URL_MAIN, values);
+    }
+
+    /**
+     * Fetch records that have <code>PATH IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByPath(String... values) {
+        return fetch(XApp.X_APP.PATH, values);
+    }
+
+    /**
+     * Fetch records that have <code>ROUTE IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByRoute(String... values) {
+        return fetch(XApp.X_APP.ROUTE, values);
+    }
+
+    /**
+     * Fetch records that have <code>APP_KEY IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByAppKey(String... values) {
+        return fetch(XApp.X_APP.APP_KEY, values);
     }
 
     /**
@@ -251,27 +251,6 @@ public class XAppDao extends DAOImpl<XAppRecord, cn.vertxup.ambient.tables.pojos
     }
 
     /**
-     * Fetch records that have <code>PATH IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByPathAsync(List<String> values) {
-        return fetchAsync(XApp.X_APP.PATH,values);
-    }
-
-    /**
-     * Fetch records that have <code>ROUTE IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByRouteAsync(List<String> values) {
-        return fetchAsync(XApp.X_APP.ROUTE,values);
-    }
-
-    /**
-     * Fetch records that have <code>APP_KEY IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByAppKeyAsync(List<String> values) {
-        return fetchAsync(XApp.X_APP.APP_KEY,values);
-    }
-
-    /**
      * Fetch records that have <code>APP_PORT IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByAppPortAsync(List<Integer> values) {
@@ -290,6 +269,27 @@ public class XAppDao extends DAOImpl<XAppRecord, cn.vertxup.ambient.tables.pojos
      */
     public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByUrlMainAsync(List<String> values) {
         return fetchAsync(XApp.X_APP.URL_MAIN,values);
+    }
+
+    /**
+     * Fetch records that have <code>PATH IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByPathAsync(List<String> values) {
+        return fetchAsync(XApp.X_APP.PATH,values);
+    }
+
+    /**
+     * Fetch records that have <code>ROUTE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByRouteAsync(List<String> values) {
+        return fetchAsync(XApp.X_APP.ROUTE,values);
+    }
+
+    /**
+     * Fetch records that have <code>APP_KEY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByAppKeyAsync(List<String> values) {
+        return fetchAsync(XApp.X_APP.APP_KEY,values);
     }
 
     /**

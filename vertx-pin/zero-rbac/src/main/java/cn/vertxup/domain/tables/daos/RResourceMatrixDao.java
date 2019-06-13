@@ -9,6 +9,7 @@ import cn.vertxup.domain.tables.records.RResourceMatrixRecord;
 
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -97,24 +98,17 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
     }
 
     /**
-     * Fetch records that have <code>MODE_PROJECTION IN (values)</code>
+     * Fetch records that have <code>IDS IN (values)</code>
      */
-    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByModeProjection(String... values) {
-        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.MODE_PROJECTION, values);
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByIds(String... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.IDS, values);
     }
 
     /**
-     * Fetch records that have <code>MODE_QUERY IN (values)</code>
+     * Fetch records that have <code>EXPIRED IN (values)</code>
      */
-    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByModeQuery(String... values) {
-        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.MODE_QUERY, values);
-    }
-
-    /**
-     * Fetch records that have <code>SIGMA IN (values)</code>
-     */
-    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchBySigma(String... values) {
-        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.SIGMA, values);
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByExpired(LocalDateTime... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.EXPIRED, values);
     }
 
     /**
@@ -160,24 +154,17 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
     }
 
     /**
-     * Fetch records that have <code>MODE_PROJECTION IN (values)</code> asynchronously
+     * Fetch records that have <code>IDS IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByModeProjectionAsync(List<String> values) {
-        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.MODE_PROJECTION,values);
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByIdsAsync(List<String> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.IDS,values);
     }
 
     /**
-     * Fetch records that have <code>MODE_QUERY IN (values)</code> asynchronously
+     * Fetch records that have <code>EXPIRED IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByModeQueryAsync(List<String> values) {
-        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.MODE_QUERY,values);
-    }
-
-    /**
-     * Fetch records that have <code>SIGMA IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchBySigmaAsync(List<String> values) {
-        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.SIGMA,values);
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByExpiredAsync(List<LocalDateTime> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.EXPIRED,values);
     }
 
     private io.vertx.core.Vertx vertx;

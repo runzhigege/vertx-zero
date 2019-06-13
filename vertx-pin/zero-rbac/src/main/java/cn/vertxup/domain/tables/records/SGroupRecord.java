@@ -31,10 +31,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements Record15<String, String, String, String, String, String, String, String, String, Boolean, String, LocalDateTime, String, LocalDateTime, String>, ISGroup {
 
-    private static final long serialVersionUID = -727185822;
+    private static final long serialVersionUID = 1340982686;
 
     /**
-     * Setter for <code>DB_RBAC.S_GROUP.KEY</code>. 「key」- 组ID
+     * Setter for <code>DB_ORIGIN_X.S_GROUP.KEY</code>. 「key」- 组ID
      */
     @Override
     public SGroupRecord setKey(String value) {
@@ -43,7 +43,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_GROUP.KEY</code>. 「key」- 组ID
+     * Getter for <code>DB_ORIGIN_X.S_GROUP.KEY</code>. 「key」- 组ID
      */
     @Override
     public String getKey() {
@@ -51,7 +51,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_GROUP.NAME</code>. 「name」- 组名称
+     * Setter for <code>DB_ORIGIN_X.S_GROUP.NAME</code>. 「name」- 组名称
      */
     @Override
     public SGroupRecord setName(String value) {
@@ -60,7 +60,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_GROUP.NAME</code>. 「name」- 组名称
+     * Getter for <code>DB_ORIGIN_X.S_GROUP.NAME</code>. 「name」- 组名称
      */
     @Override
     public String getName() {
@@ -68,7 +68,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_GROUP.CODE</code>. 「code」- 组系统码
+     * Setter for <code>DB_ORIGIN_X.S_GROUP.CODE</code>. 「code」- 组系统码
      */
     @Override
     public SGroupRecord setCode(String value) {
@@ -77,7 +77,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_GROUP.CODE</code>. 「code」- 组系统码
+     * Getter for <code>DB_ORIGIN_X.S_GROUP.CODE</code>. 「code」- 组系统码
      */
     @Override
     public String getCode() {
@@ -85,7 +85,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_GROUP.PARENT_ID</code>. 「parentId」- 父组ID（组支持树形结构，角色平行结构）
+     * Setter for <code>DB_ORIGIN_X.S_GROUP.PARENT_ID</code>. 「parentId」- 父组ID（组支持树形结构，角色平行结构）
      */
     @Override
     public SGroupRecord setParentId(String value) {
@@ -94,7 +94,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_GROUP.PARENT_ID</code>. 「parentId」- 父组ID（组支持树形结构，角色平行结构）
+     * Getter for <code>DB_ORIGIN_X.S_GROUP.PARENT_ID</code>. 「parentId」- 父组ID（组支持树形结构，角色平行结构）
      */
     @Override
     public String getParentId() {
@@ -102,7 +102,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_GROUP.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
+     * Setter for <code>DB_ORIGIN_X.S_GROUP.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
      */
     @Override
     public SGroupRecord setModelId(String value) {
@@ -111,7 +111,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_GROUP.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
+     * Getter for <code>DB_ORIGIN_X.S_GROUP.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
      */
     @Override
     public String getModelId() {
@@ -119,7 +119,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_GROUP.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
+     * Setter for <code>DB_ORIGIN_X.S_GROUP.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
      */
     @Override
     public SGroupRecord setModelKey(String value) {
@@ -128,7 +128,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_GROUP.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
+     * Getter for <code>DB_ORIGIN_X.S_GROUP.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
      */
     @Override
     public String getModelKey() {
@@ -136,7 +136,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_GROUP.CATEGORY</code>. 「category」- 组类型
+     * Setter for <code>DB_ORIGIN_X.S_GROUP.CATEGORY</code>. 「category」- 组类型
      */
     @Override
     public SGroupRecord setCategory(String value) {
@@ -145,7 +145,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_GROUP.CATEGORY</code>. 「category」- 组类型
+     * Getter for <code>DB_ORIGIN_X.S_GROUP.CATEGORY</code>. 「category」- 组类型
      */
     @Override
     public String getCategory() {
@@ -153,7 +153,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_GROUP.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
+     * Setter for <code>DB_ORIGIN_X.S_GROUP.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
      */
     @Override
     public SGroupRecord setSigma(String value) {
@@ -162,7 +162,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_GROUP.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
+     * Getter for <code>DB_ORIGIN_X.S_GROUP.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
      */
     @Override
     public String getSigma() {
@@ -170,7 +170,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_GROUP.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ORIGIN_X.S_GROUP.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public SGroupRecord setLanguage(String value) {
@@ -179,7 +179,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_GROUP.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ORIGIN_X.S_GROUP.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public String getLanguage() {
@@ -187,7 +187,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_GROUP.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ORIGIN_X.S_GROUP.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public SGroupRecord setActive(Boolean value) {
@@ -196,7 +196,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_GROUP.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ORIGIN_X.S_GROUP.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public Boolean getActive() {
@@ -204,7 +204,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_GROUP.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ORIGIN_X.S_GROUP.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public SGroupRecord setMetadata(String value) {
@@ -213,7 +213,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_GROUP.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ORIGIN_X.S_GROUP.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public String getMetadata() {
@@ -221,7 +221,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_GROUP.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Setter for <code>DB_ORIGIN_X.S_GROUP.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
     public SGroupRecord setCreatedAt(LocalDateTime value) {
@@ -230,7 +230,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_GROUP.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Getter for <code>DB_ORIGIN_X.S_GROUP.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
     public LocalDateTime getCreatedAt() {
@@ -238,7 +238,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_GROUP.CREATED_BY</code>. 「createdBy」- 创建人
+     * Setter for <code>DB_ORIGIN_X.S_GROUP.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
     public SGroupRecord setCreatedBy(String value) {
@@ -247,7 +247,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_GROUP.CREATED_BY</code>. 「createdBy」- 创建人
+     * Getter for <code>DB_ORIGIN_X.S_GROUP.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
     public String getCreatedBy() {
@@ -255,7 +255,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_GROUP.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Setter for <code>DB_ORIGIN_X.S_GROUP.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
     public SGroupRecord setUpdatedAt(LocalDateTime value) {
@@ -264,7 +264,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_GROUP.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Getter for <code>DB_ORIGIN_X.S_GROUP.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
     public LocalDateTime getUpdatedAt() {
@@ -272,7 +272,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_RBAC.S_GROUP.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Setter for <code>DB_ORIGIN_X.S_GROUP.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
     public SGroupRecord setUpdatedBy(String value) {
@@ -281,7 +281,7 @@ public class SGroupRecord extends UpdatableRecordImpl<SGroupRecord> implements R
     }
 
     /**
-     * Getter for <code>DB_RBAC.S_GROUP.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Getter for <code>DB_ORIGIN_X.S_GROUP.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
     public String getUpdatedBy() {

@@ -29,10 +29,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RGroupRoleRecord extends UpdatableRecordImpl<RGroupRoleRecord> implements Record3<String, String, Integer>, IRGroupRole {
 
-    private static final long serialVersionUID = -673380946;
+    private static final long serialVersionUID = 900029256;
 
     /**
-     * Setter for <code>DB_RBAC.R_GROUP_ROLE.GROUP_ID</code>. 「groupId」- 关联组ID
+     * Setter for <code>DB_ORIGIN_X.R_GROUP_ROLE.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     @Override
     public RGroupRoleRecord setGroupId(String value) {
@@ -41,7 +41,7 @@ public class RGroupRoleRecord extends UpdatableRecordImpl<RGroupRoleRecord> impl
     }
 
     /**
-     * Getter for <code>DB_RBAC.R_GROUP_ROLE.GROUP_ID</code>. 「groupId」- 关联组ID
+     * Getter for <code>DB_ORIGIN_X.R_GROUP_ROLE.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     @Override
     public String getGroupId() {
@@ -49,7 +49,7 @@ public class RGroupRoleRecord extends UpdatableRecordImpl<RGroupRoleRecord> impl
     }
 
     /**
-     * Setter for <code>DB_RBAC.R_GROUP_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Setter for <code>DB_ORIGIN_X.R_GROUP_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     @Override
     public RGroupRoleRecord setRoleId(String value) {
@@ -58,7 +58,7 @@ public class RGroupRoleRecord extends UpdatableRecordImpl<RGroupRoleRecord> impl
     }
 
     /**
-     * Getter for <code>DB_RBAC.R_GROUP_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Getter for <code>DB_ORIGIN_X.R_GROUP_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     @Override
     public String getRoleId() {
@@ -66,7 +66,7 @@ public class RGroupRoleRecord extends UpdatableRecordImpl<RGroupRoleRecord> impl
     }
 
     /**
-     * Setter for <code>DB_RBAC.R_GROUP_ROLE.PRIORITY</code>. 「priority」- 角色优先级
+     * Setter for <code>DB_ORIGIN_X.R_GROUP_ROLE.PRIORITY</code>. 「priority」- 角色优先级
      */
     @Override
     public RGroupRoleRecord setPriority(Integer value) {
@@ -75,7 +75,7 @@ public class RGroupRoleRecord extends UpdatableRecordImpl<RGroupRoleRecord> impl
     }
 
     /**
-     * Getter for <code>DB_RBAC.R_GROUP_ROLE.PRIORITY</code>. 「priority」- 角色优先级
+     * Getter for <code>DB_ORIGIN_X.R_GROUP_ROLE.PRIORITY</code>. 「priority」- 角色优先级
      */
     @Override
     public Integer getPriority() {

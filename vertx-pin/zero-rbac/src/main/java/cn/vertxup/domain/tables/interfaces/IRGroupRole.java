@@ -23,32 +23,32 @@ import javax.annotation.Generated;
 public interface IRGroupRole extends Serializable {
 
     /**
-     * Setter for <code>DB_RBAC.R_GROUP_ROLE.GROUP_ID</code>. 「groupId」- 关联组ID
+     * Setter for <code>DB_ORIGIN_X.R_GROUP_ROLE.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     public IRGroupRole setGroupId(String value);
 
     /**
-     * Getter for <code>DB_RBAC.R_GROUP_ROLE.GROUP_ID</code>. 「groupId」- 关联组ID
+     * Getter for <code>DB_ORIGIN_X.R_GROUP_ROLE.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     public String getGroupId();
 
     /**
-     * Setter for <code>DB_RBAC.R_GROUP_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Setter for <code>DB_ORIGIN_X.R_GROUP_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     public IRGroupRole setRoleId(String value);
 
     /**
-     * Getter for <code>DB_RBAC.R_GROUP_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Getter for <code>DB_ORIGIN_X.R_GROUP_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     public String getRoleId();
 
     /**
-     * Setter for <code>DB_RBAC.R_GROUP_ROLE.PRIORITY</code>. 「priority」- 角色优先级
+     * Setter for <code>DB_ORIGIN_X.R_GROUP_ROLE.PRIORITY</code>. 「priority」- 角色优先级
      */
     public IRGroupRole setPriority(Integer value);
 
     /**
-     * Getter for <code>DB_RBAC.R_GROUP_ROLE.PRIORITY</code>. 「priority」- 角色优先级
+     * Getter for <code>DB_ORIGIN_X.R_GROUP_ROLE.PRIORITY</code>. 「priority」- 角色优先级
      */
     public Integer getPriority();
 

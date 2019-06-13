@@ -113,4 +113,8 @@ public class Ix {
     public static void infoDao(final Annal logger, final String pattern, final Object... args) {
         IxLog.infoDao(logger, pattern, args);
     }
+
+    public static void errorInit(final Annal logger, final String pattern, final Object... args) {
+        IxLog.errorInit(logger, pattern, args);
+    }
 }
