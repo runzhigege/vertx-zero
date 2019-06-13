@@ -4,7 +4,7 @@
 package cn.vertxup.ambient.tables;
 
 
-import cn.vertxup.ambient.DbAmbient;
+import cn.vertxup.ambient.Db;
 import cn.vertxup.ambient.Indexes;
 import cn.vertxup.ambient.Keys;
 import cn.vertxup.ambient.tables.records.XAppRecord;
@@ -34,7 +34,7 @@ public class XApp extends TableImpl<XAppRecord> {
      * The reference instance of <code>DB_ORIGIN_X.X_APP</code>
      */
     public static final XApp X_APP = new XApp();
-    private static final long serialVersionUID = -991761177;
+    private static final long serialVersionUID = -621052603;
     /**
      * The column <code>DB_ORIGIN_X.X_APP.KEY</code>. 「key」- 应用程序主键
      */
@@ -60,18 +60,6 @@ public class XApp extends TableImpl<XAppRecord> {
      */
     public final TableField<XAppRecord, String> DOMAIN = createField("DOMAIN", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「domain」- 应用程序所在域");
     /**
-     * The column <code>DB_ORIGIN_X.X_APP.PATH</code>. 「path」- 应用程序路径
-     */
-    public final TableField<XAppRecord, String> PATH = createField("PATH", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「path」- 应用程序路径");
-    /**
-     * The column <code>DB_ORIGIN_X.X_APP.ROUTE</code>. 「route」- 后端API的根路径，启动时需要
-     */
-    public final TableField<XAppRecord, String> ROUTE = createField("ROUTE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「route」- 后端API的根路径，启动时需要");
-    /**
-     * The column <code>DB_ORIGIN_X.X_APP.APP_KEY</code>. 「appKey」- 应用程序专用唯一hashKey
-     */
-    public final TableField<XAppRecord, String> APP_KEY = createField("APP_KEY", org.jooq.impl.SQLDataType.VARCHAR(128), this, "「appKey」- 应用程序专用唯一hashKey");
-    /**
      * The column <code>DB_ORIGIN_X.X_APP.APP_PORT</code>. 「appPort」- 应用程序端口号，和SOURCE的端口号区别开
      */
     public final TableField<XAppRecord, Integer> APP_PORT = createField("APP_PORT", org.jooq.impl.SQLDataType.INTEGER, this, "「appPort」- 应用程序端口号，和SOURCE的端口号区别开");
@@ -83,6 +71,18 @@ public class XApp extends TableImpl<XAppRecord> {
      * The column <code>DB_ORIGIN_X.X_APP.URL_MAIN</code>. 「urlMain」- 应用程序内置主页（带安全）
      */
     public final TableField<XAppRecord, String> URL_MAIN = createField("URL_MAIN", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「urlMain」- 应用程序内置主页（带安全）");
+    /**
+     * The column <code>DB_ORIGIN_X.X_APP.PATH</code>. 「path」- 应用程序路径
+     */
+    public final TableField<XAppRecord, String> PATH = createField("PATH", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「path」- 应用程序路径");
+    /**
+     * The column <code>DB_ORIGIN_X.X_APP.ROUTE</code>. 「route」- 后端API的根路径，启动时需要
+     */
+    public final TableField<XAppRecord, String> ROUTE = createField("ROUTE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「route」- 后端API的根路径，启动时需要");
+    /**
+     * The column <code>DB_ORIGIN_X.X_APP.APP_KEY</code>. 「appKey」- 应用程序专用唯一hashKey
+     */
+    public final TableField<XAppRecord, String> APP_KEY = createField("APP_KEY", org.jooq.impl.SQLDataType.VARCHAR(128), this, "「appKey」- 应用程序专用唯一hashKey");
     /**
      * The column <code>DB_ORIGIN_X.X_APP.SIGMA</code>. 「sigma」- 非系统模块使用的标识
      */
@@ -142,7 +142,7 @@ public class XApp extends TableImpl<XAppRecord> {
      */
     @Override
     public Schema getSchema() {
-        return DbAmbient.DB_ORIGIN_X;
+        return Db.DB_ORIGIN_X;
     }
 
     /**

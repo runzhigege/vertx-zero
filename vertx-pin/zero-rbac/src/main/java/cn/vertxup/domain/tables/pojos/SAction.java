@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SAction implements ISAction {
 
-    private static final long serialVersionUID = -2064021298;
+    private static final long serialVersionUID = -1538237680;
 
     private String        key;
     private String        name;
@@ -38,6 +38,7 @@ public class SAction implements ISAction {
     private String        language;
     private Boolean       active;
     private String        metadata;
+    private String        comment;
     private LocalDateTime createdAt;
     private String        createdBy;
     private LocalDateTime updatedAt;
@@ -58,6 +59,7 @@ public class SAction implements ISAction {
         this.language = value.language;
         this.active = value.active;
         this.metadata = value.metadata;
+        this.comment = value.comment;
         this.createdAt = value.createdAt;
         this.createdBy = value.createdBy;
         this.updatedAt = value.updatedAt;
@@ -77,6 +79,7 @@ public class SAction implements ISAction {
         String        language,
         Boolean       active,
         String        metadata,
+        String        comment,
         LocalDateTime createdAt,
         String        createdBy,
         LocalDateTime updatedAt,
@@ -94,6 +97,7 @@ public class SAction implements ISAction {
         this.language = language;
         this.active = active;
         this.metadata = metadata;
+        this.comment = comment;
         this.createdAt = createdAt;
         this.createdBy = createdBy;
         this.updatedAt = updatedAt;
@@ -233,6 +237,17 @@ public class SAction implements ISAction {
     }
 
     @Override
+    public String getComment() {
+        return this.comment;
+    }
+
+    @Override
+    public SAction setComment(String comment) {
+        this.comment = comment;
+        return this;
+    }
+
+    @Override
     public LocalDateTime getCreatedAt() {
         return this.createdAt;
     }
@@ -292,6 +307,7 @@ public class SAction implements ISAction {
         sb.append(", ").append(language);
         sb.append(", ").append(active);
         sb.append(", ").append(metadata);
+        sb.append(", ").append(comment);
         sb.append(", ").append(createdAt);
         sb.append(", ").append(createdBy);
         sb.append(", ").append(updatedAt);
@@ -322,6 +338,7 @@ public class SAction implements ISAction {
         setLanguage(from.getLanguage());
         setActive(from.getActive());
         setMetadata(from.getMetadata());
+        setComment(from.getComment());
         setCreatedAt(from.getCreatedAt());
         setCreatedBy(from.getCreatedBy());
         setUpdatedAt(from.getUpdatedAt());

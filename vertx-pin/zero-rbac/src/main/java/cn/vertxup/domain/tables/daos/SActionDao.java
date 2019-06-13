@@ -154,6 +154,13 @@ public class SActionDao extends DAOImpl<SActionRecord, cn.vertxup.domain.tables.
     }
 
     /**
+     * Fetch records that have <code>COMMENT IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.SAction> fetchByComment(String... values) {
+        return fetch(SAction.S_ACTION.COMMENT, values);
+    }
+
+    /**
      * Fetch records that have <code>CREATED_AT IN (values)</code>
      */
     public List<cn.vertxup.domain.tables.pojos.SAction> fetchByCreatedAt(LocalDateTime... values) {
@@ -277,6 +284,13 @@ public class SActionDao extends DAOImpl<SActionRecord, cn.vertxup.domain.tables.
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SAction>> fetchByMetadataAsync(List<String> values) {
         return fetchAsync(SAction.S_ACTION.METADATA,values);
+    }
+
+    /**
+     * Fetch records that have <code>COMMENT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SAction>> fetchByCommentAsync(List<String> values) {
+        return fetchAsync(SAction.S_ACTION.COMMENT,values);
     }
 
     /**

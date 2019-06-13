@@ -105,6 +105,13 @@ public class SPermissionDao extends DAOImpl<SPermissionRecord, cn.vertxup.domain
     }
 
     /**
+     * Fetch records that have <code>COMMENT IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.SPermission> fetchByComment(String... values) {
+        return fetch(SPermission.S_PERMISSION.COMMENT, values);
+    }
+
+    /**
      * Fetch records that have <code>METADATA IN (values)</code>
      */
     public List<cn.vertxup.domain.tables.pojos.SPermission> fetchByMetadata(String... values) {
@@ -186,6 +193,13 @@ public class SPermissionDao extends DAOImpl<SPermissionRecord, cn.vertxup.domain
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SPermission>> fetchByActiveAsync(List<Boolean> values) {
         return fetchAsync(SPermission.S_PERMISSION.ACTIVE,values);
+    }
+
+    /**
+     * Fetch records that have <code>COMMENT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SPermission>> fetchByCommentAsync(List<String> values) {
+        return fetchAsync(SPermission.S_PERMISSION.COMMENT,values);
     }
 
     /**

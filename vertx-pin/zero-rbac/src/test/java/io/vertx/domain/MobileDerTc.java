@@ -5,6 +5,10 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.aiki.Ux;
 import org.junit.Test;
 
+enum TestValue {
+    A, B
+}
+
 public class MobileDerTc {
 
     @Test
@@ -14,5 +18,11 @@ public class MobileDerTc {
         /* Number */
         final JsonObject object = Ux.toJson(user);
         System.err.println(object.encodePrettily());
+    }
+
+    @Test
+    public void testEnum() {
+        System.out.println(TestValue.A.ordinal());
+        System.out.println(TestValue.B.ordinal());
     }
 }

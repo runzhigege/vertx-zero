@@ -23,22 +23,22 @@ import javax.annotation.Generated;
 public interface IRRolePerm extends Serializable {
 
     /**
-     * Setter for <code>DB_RBAC.R_ROLE_PERM.PERM_ID</code>. 「permId」- 关联权限ID
+     * Setter for <code>DB_ORIGIN_X.R_ROLE_PERM.PERM_ID</code>. 「permId」- 关联权限ID
      */
     public IRRolePerm setPermId(String value);
 
     /**
-     * Getter for <code>DB_RBAC.R_ROLE_PERM.PERM_ID</code>. 「permId」- 关联权限ID
+     * Getter for <code>DB_ORIGIN_X.R_ROLE_PERM.PERM_ID</code>. 「permId」- 关联权限ID
      */
     public String getPermId();
 
     /**
-     * Setter for <code>DB_RBAC.R_ROLE_PERM.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Setter for <code>DB_ORIGIN_X.R_ROLE_PERM.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     public IRRolePerm setRoleId(String value);
 
     /**
-     * Getter for <code>DB_RBAC.R_ROLE_PERM.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Getter for <code>DB_ORIGIN_X.R_ROLE_PERM.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     public String getRoleId();
 

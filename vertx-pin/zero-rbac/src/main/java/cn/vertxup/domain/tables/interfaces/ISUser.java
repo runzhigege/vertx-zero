@@ -24,182 +24,182 @@ import javax.annotation.Generated;
 public interface ISUser extends Serializable {
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.KEY</code>. 「key」- 用户ID
+     * Setter for <code>DB_ORIGIN_X.S_USER.KEY</code>. 「key」- 用户ID
      */
     public ISUser setKey(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.KEY</code>. 「key」- 用户ID
+     * Getter for <code>DB_ORIGIN_X.S_USER.KEY</code>. 「key」- 用户ID
      */
     public String getKey();
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.USERNAME</code>. 「username」- 用户登录账号
+     * Setter for <code>DB_ORIGIN_X.S_USER.USERNAME</code>. 「username」- 用户登录账号
      */
     public ISUser setUsername(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.USERNAME</code>. 「username」- 用户登录账号
+     * Getter for <code>DB_ORIGIN_X.S_USER.USERNAME</code>. 「username」- 用户登录账号
      */
     public String getUsername();
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.REALNAME</code>. 「realname」- 用户真实姓名
+     * Setter for <code>DB_ORIGIN_X.S_USER.REALNAME</code>. 「realname」- 用户真实姓名
      */
     public ISUser setRealname(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.REALNAME</code>. 「realname」- 用户真实姓名
+     * Getter for <code>DB_ORIGIN_X.S_USER.REALNAME</code>. 「realname」- 用户真实姓名
      */
     public String getRealname();
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.ALIAS</code>. 「alias」- 用户昵称
+     * Setter for <code>DB_ORIGIN_X.S_USER.ALIAS</code>. 「alias」- 用户昵称
      */
     public ISUser setAlias(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.ALIAS</code>. 「alias」- 用户昵称
+     * Getter for <code>DB_ORIGIN_X.S_USER.ALIAS</code>. 「alias」- 用户昵称
      */
     public String getAlias();
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.MOBILE</code>. 「mobile」- 用户登录手机
+     * Setter for <code>DB_ORIGIN_X.S_USER.MOBILE</code>. 「mobile」- 用户登录手机
      */
     public ISUser setMobile(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.MOBILE</code>. 「mobile」- 用户登录手机
+     * Getter for <code>DB_ORIGIN_X.S_USER.MOBILE</code>. 「mobile」- 用户登录手机
      */
     public String getMobile();
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.EMAIL</code>. 「email」- 用户登录EMAIL地址
+     * Setter for <code>DB_ORIGIN_X.S_USER.EMAIL</code>. 「email」- 用户登录EMAIL地址
      */
     public ISUser setEmail(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.EMAIL</code>. 「email」- 用户登录EMAIL地址
+     * Getter for <code>DB_ORIGIN_X.S_USER.EMAIL</code>. 「email」- 用户登录EMAIL地址
      */
     public String getEmail();
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.PASSWORD</code>. 「password」- 用户登录密码
+     * Setter for <code>DB_ORIGIN_X.S_USER.PASSWORD</code>. 「password」- 用户登录密码
      */
     public ISUser setPassword(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.PASSWORD</code>. 「password」- 用户登录密码
+     * Getter for <code>DB_ORIGIN_X.S_USER.PASSWORD</code>. 「password」- 用户登录密码
      */
     public String getPassword();
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
+     * Setter for <code>DB_ORIGIN_X.S_USER.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
      */
     public ISUser setModelId(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
+     * Getter for <code>DB_ORIGIN_X.S_USER.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
      */
     public String getModelId();
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
+     * Setter for <code>DB_ORIGIN_X.S_USER.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
      */
     public ISUser setModelKey(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
+     * Getter for <code>DB_ORIGIN_X.S_USER.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
      */
     public String getModelKey();
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.CATEGORY</code>. 「category」- 用户分类
+     * Setter for <code>DB_ORIGIN_X.S_USER.CATEGORY</code>. 「category」- 用户分类
      */
     public ISUser setCategory(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.CATEGORY</code>. 「category」- 用户分类
+     * Getter for <code>DB_ORIGIN_X.S_USER.CATEGORY</code>. 「category」- 用户分类
      */
     public String getCategory();
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.SIGMA</code>. 「sigma」- 用户绑定的统一标识
+     * Setter for <code>DB_ORIGIN_X.S_USER.SIGMA</code>. 「sigma」- 用户绑定的统一标识
      */
     public ISUser setSigma(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.SIGMA</code>. 「sigma」- 用户绑定的统一标识
+     * Getter for <code>DB_ORIGIN_X.S_USER.SIGMA</code>. 「sigma」- 用户绑定的统一标识
      */
     public String getSigma();
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ORIGIN_X.S_USER.LANGUAGE</code>. 「language」- 使用的语言
      */
     public ISUser setLanguage(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ORIGIN_X.S_USER.LANGUAGE</code>. 「language」- 使用的语言
      */
     public String getLanguage();
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ORIGIN_X.S_USER.ACTIVE</code>. 「active」- 是否启用
      */
     public ISUser setActive(Boolean value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ORIGIN_X.S_USER.ACTIVE</code>. 「active」- 是否启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ORIGIN_X.S_USER.METADATA</code>. 「metadata」- 附加配置数据
      */
     public ISUser setMetadata(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ORIGIN_X.S_USER.METADATA</code>. 「metadata」- 附加配置数据
      */
     public String getMetadata();
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Setter for <code>DB_ORIGIN_X.S_USER.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public ISUser setCreatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Getter for <code>DB_ORIGIN_X.S_USER.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public LocalDateTime getCreatedAt();
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.CREATED_BY</code>. 「createdBy」- 创建人
+     * Setter for <code>DB_ORIGIN_X.S_USER.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public ISUser setCreatedBy(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.CREATED_BY</code>. 「createdBy」- 创建人
+     * Getter for <code>DB_ORIGIN_X.S_USER.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public String getCreatedBy();
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Setter for <code>DB_ORIGIN_X.S_USER.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     public ISUser setUpdatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Getter for <code>DB_ORIGIN_X.S_USER.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     public LocalDateTime getUpdatedAt();
 
     /**
-     * Setter for <code>DB_RBAC.S_USER.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Setter for <code>DB_ORIGIN_X.S_USER.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public ISUser setUpdatedBy(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_USER.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Getter for <code>DB_ORIGIN_X.S_USER.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public String getUpdatedBy();
 

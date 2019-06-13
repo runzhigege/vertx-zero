@@ -4,7 +4,7 @@
 package cn.vertxup.ambient.tables;
 
 
-import cn.vertxup.ambient.DbAmbient;
+import cn.vertxup.ambient.Db;
 import cn.vertxup.ambient.Indexes;
 import cn.vertxup.ambient.Keys;
 import cn.vertxup.ambient.tables.records.XMenuRecord;
@@ -130,7 +130,7 @@ public class XMenu extends TableImpl<XMenuRecord> {
      */
     @Override
     public Schema getSchema() {
-        return DbAmbient.DB_ORIGIN_X;
+        return Db.DB_ORIGIN_X;
     }
 
     /**

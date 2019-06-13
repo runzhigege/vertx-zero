@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SPermission implements ISPermission {
 
-    private static final long serialVersionUID = 1412404951;
+    private static final long serialVersionUID = 448608032;
 
     private String        key;
     private String        name;
@@ -32,6 +32,7 @@ public class SPermission implements ISPermission {
     private String        sigma;
     private String        language;
     private Boolean       active;
+    private String        comment;
     private String        metadata;
     private LocalDateTime createdAt;
     private String        createdBy;
@@ -47,6 +48,7 @@ public class SPermission implements ISPermission {
         this.sigma = value.sigma;
         this.language = value.language;
         this.active = value.active;
+        this.comment = value.comment;
         this.metadata = value.metadata;
         this.createdAt = value.createdAt;
         this.createdBy = value.createdBy;
@@ -61,6 +63,7 @@ public class SPermission implements ISPermission {
         String        sigma,
         String        language,
         Boolean       active,
+        String        comment,
         String        metadata,
         LocalDateTime createdAt,
         String        createdBy,
@@ -73,6 +76,7 @@ public class SPermission implements ISPermission {
         this.sigma = sigma;
         this.language = language;
         this.active = active;
+        this.comment = comment;
         this.metadata = metadata;
         this.createdAt = createdAt;
         this.createdBy = createdBy;
@@ -147,6 +151,17 @@ public class SPermission implements ISPermission {
     }
 
     @Override
+    public String getComment() {
+        return this.comment;
+    }
+
+    @Override
+    public SPermission setComment(String comment) {
+        this.comment = comment;
+        return this;
+    }
+
+    @Override
     public String getMetadata() {
         return this.metadata;
     }
@@ -211,6 +226,7 @@ public class SPermission implements ISPermission {
         sb.append(", ").append(sigma);
         sb.append(", ").append(language);
         sb.append(", ").append(active);
+        sb.append(", ").append(comment);
         sb.append(", ").append(metadata);
         sb.append(", ").append(createdAt);
         sb.append(", ").append(createdBy);
@@ -236,6 +252,7 @@ public class SPermission implements ISPermission {
         setSigma(from.getSigma());
         setLanguage(from.getLanguage());
         setActive(from.getActive());
+        setComment(from.getComment());
         setMetadata(from.getMetadata());
         setCreatedAt(from.getCreatedAt());
         setCreatedBy(from.getCreatedBy());
