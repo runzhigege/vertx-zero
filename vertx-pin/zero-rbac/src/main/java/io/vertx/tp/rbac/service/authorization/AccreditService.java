@@ -26,6 +26,7 @@ public class AccreditService implements AccreditStub {
                         /* Get resource by action */
                         .compose(resource -> {
 
+                            return Future.succeededFuture();
                         })
                 );
     }

@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS S_ACTION
     `LANGUAGE`      VARCHAR(10) COMMENT '「language」- 使用的语言',
     `ACTIVE`        BIT COMMENT '「active」- 是否启用',
     `METADATA`      TEXT COMMENT '「metadata」- 附加配置数据',
+    `COMMENT`       TEXT COMMENT '「action」- 操作说明',
 
     -- Auditor字段
     `CREATED_AT`    DATETIME COMMENT '「createdAt」- 创建时间',

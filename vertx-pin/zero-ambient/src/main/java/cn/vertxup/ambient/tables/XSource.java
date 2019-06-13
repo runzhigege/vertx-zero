@@ -4,7 +4,7 @@
 package cn.vertxup.ambient.tables;
 
 
-import cn.vertxup.ambient.DbAmbient;
+import cn.vertxup.ambient.Db;
 import cn.vertxup.ambient.Indexes;
 import cn.vertxup.ambient.Keys;
 import cn.vertxup.ambient.tables.records.XSourceRecord;
@@ -138,7 +138,7 @@ public class XSource extends TableImpl<XSourceRecord> {
      */
     @Override
     public Schema getSchema() {
-        return DbAmbient.DB_ORIGIN_X;
+        return Db.DB_ORIGIN_X;
     }
 
     /**

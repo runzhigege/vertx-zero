@@ -26,7 +26,7 @@ import org.jooq.impl.Internal;
 
 
 /**
- * A class modelling indexes of tables of the <code>DB_RBAC</code> schema.
+ * A class modelling indexes of tables of the <code>DB_ORIGIN_X</code> schema.
  */
 @Generated(
     value = {
@@ -48,7 +48,6 @@ public class Indexes {
     public static final Index O_USER_PRIMARY = Indexes0.O_USER_PRIMARY;
     public static final Index R_GROUP_ROLE_PRIMARY = Indexes0.R_GROUP_ROLE_PRIMARY;
     public static final Index R_RESOURCE_MATRIX_PRIMARY = Indexes0.R_RESOURCE_MATRIX_PRIMARY;
-    public static final Index R_RESOURCE_MATRIX_SIGMA = Indexes0.R_RESOURCE_MATRIX_SIGMA;
     public static final Index R_ROLE_PERM_PRIMARY = Indexes0.R_ROLE_PERM_PRIMARY;
     public static final Index R_USER_GROUP_PRIMARY = Indexes0.R_USER_GROUP_PRIMARY;
     public static final Index R_USER_ROLE_PRIMARY = Indexes0.R_USER_ROLE_PRIMARY;
@@ -61,6 +60,7 @@ public class Indexes {
     public static final Index S_GROUP_PRIMARY = Indexes0.S_GROUP_PRIMARY;
     public static final Index S_PERMISSION_CODE = Indexes0.S_PERMISSION_CODE;
     public static final Index S_PERMISSION_PRIMARY = Indexes0.S_PERMISSION_PRIMARY;
+    public static final Index S_RESOURCE_CODE = Indexes0.S_RESOURCE_CODE;
     public static final Index S_RESOURCE_PRIMARY = Indexes0.S_RESOURCE_PRIMARY;
     public static final Index S_ROLE_CODE = Indexes0.S_ROLE_CODE;
     public static final Index S_ROLE_PRIMARY = Indexes0.S_ROLE_PRIMARY;
@@ -80,7 +80,6 @@ public class Indexes {
         public static Index O_USER_PRIMARY = Internal.createIndex("PRIMARY", OUser.O_USER, new OrderField[] { OUser.O_USER.KEY }, true);
         public static Index R_GROUP_ROLE_PRIMARY = Internal.createIndex("PRIMARY", RGroupRole.R_GROUP_ROLE, new OrderField[] { RGroupRole.R_GROUP_ROLE.GROUP_ID, RGroupRole.R_GROUP_ROLE.ROLE_ID }, true);
         public static Index R_RESOURCE_MATRIX_PRIMARY = Internal.createIndex("PRIMARY", RResourceMatrix.R_RESOURCE_MATRIX, new OrderField[] { RResourceMatrix.R_RESOURCE_MATRIX.KEY }, true);
-        public static Index R_RESOURCE_MATRIX_SIGMA = Internal.createIndex("SIGMA", RResourceMatrix.R_RESOURCE_MATRIX, new OrderField[] { RResourceMatrix.R_RESOURCE_MATRIX.SIGMA, RResourceMatrix.R_RESOURCE_MATRIX.RESOURCE_ID, RResourceMatrix.R_RESOURCE_MATRIX.USER_ID }, true);
         public static Index R_ROLE_PERM_PRIMARY = Internal.createIndex("PRIMARY", RRolePerm.R_ROLE_PERM, new OrderField[] { RRolePerm.R_ROLE_PERM.PERM_ID, RRolePerm.R_ROLE_PERM.ROLE_ID }, true);
         public static Index R_USER_GROUP_PRIMARY = Internal.createIndex("PRIMARY", RUserGroup.R_USER_GROUP, new OrderField[] { RUserGroup.R_USER_GROUP.GROUP_ID, RUserGroup.R_USER_GROUP.USER_ID }, true);
         public static Index R_USER_ROLE_PRIMARY = Internal.createIndex("PRIMARY", RUserRole.R_USER_ROLE, new OrderField[] { RUserRole.R_USER_ROLE.USER_ID, RUserRole.R_USER_ROLE.ROLE_ID }, true);
@@ -93,6 +92,7 @@ public class Indexes {
         public static Index S_GROUP_PRIMARY = Internal.createIndex("PRIMARY", SGroup.S_GROUP, new OrderField[] { SGroup.S_GROUP.KEY }, true);
         public static Index S_PERMISSION_CODE = Internal.createIndex("CODE", SPermission.S_PERMISSION, new OrderField[] { SPermission.S_PERMISSION.CODE, SPermission.S_PERMISSION.SIGMA }, true);
         public static Index S_PERMISSION_PRIMARY = Internal.createIndex("PRIMARY", SPermission.S_PERMISSION, new OrderField[] { SPermission.S_PERMISSION.KEY }, true);
+        public static Index S_RESOURCE_CODE = Internal.createIndex("CODE", SResource.S_RESOURCE, new OrderField[] { SResource.S_RESOURCE.CODE, SResource.S_RESOURCE.SIGMA }, true);
         public static Index S_RESOURCE_PRIMARY = Internal.createIndex("PRIMARY", SResource.S_RESOURCE, new OrderField[] { SResource.S_RESOURCE.KEY }, true);
         public static Index S_ROLE_CODE = Internal.createIndex("CODE", SRole.S_ROLE, new OrderField[] { SRole.S_ROLE.CODE, SRole.S_ROLE.SIGMA }, true);
         public static Index S_ROLE_PRIMARY = Internal.createIndex("PRIMARY", SRole.S_ROLE, new OrderField[] { SRole.S_ROLE.KEY }, true);

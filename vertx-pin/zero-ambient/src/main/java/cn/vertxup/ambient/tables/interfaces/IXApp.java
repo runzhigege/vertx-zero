@@ -83,36 +83,6 @@ public interface IXApp extends Serializable {
     public String getDomain();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.PATH</code>. 「path」- 应用程序路径
-     */
-    public IXApp setPath(String value);
-
-    /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.PATH</code>. 「path」- 应用程序路径
-     */
-    public String getPath();
-
-    /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.ROUTE</code>. 「route」- 后端API的根路径，启动时需要
-     */
-    public IXApp setRoute(String value);
-
-    /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.ROUTE</code>. 「route」- 后端API的根路径，启动时需要
-     */
-    public String getRoute();
-
-    /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.APP_KEY</code>. 「appKey」- 应用程序专用唯一hashKey
-     */
-    public IXApp setAppKey(String value);
-
-    /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.APP_KEY</code>. 「appKey」- 应用程序专用唯一hashKey
-     */
-    public String getAppKey();
-
-    /**
      * Setter for <code>DB_ORIGIN_X.X_APP.APP_PORT</code>. 「appPort」- 应用程序端口号，和SOURCE的端口号区别开
      */
     public IXApp setAppPort(Integer value);
@@ -141,6 +111,36 @@ public interface IXApp extends Serializable {
      * Getter for <code>DB_ORIGIN_X.X_APP.URL_MAIN</code>. 「urlMain」- 应用程序内置主页（带安全）
      */
     public String getUrlMain();
+
+    /**
+     * Setter for <code>DB_ORIGIN_X.X_APP.PATH</code>. 「path」- 应用程序路径
+     */
+    public IXApp setPath(String value);
+
+    /**
+     * Getter for <code>DB_ORIGIN_X.X_APP.PATH</code>. 「path」- 应用程序路径
+     */
+    public String getPath();
+
+    /**
+     * Setter for <code>DB_ORIGIN_X.X_APP.ROUTE</code>. 「route」- 后端API的根路径，启动时需要
+     */
+    public IXApp setRoute(String value);
+
+    /**
+     * Getter for <code>DB_ORIGIN_X.X_APP.ROUTE</code>. 「route」- 后端API的根路径，启动时需要
+     */
+    public String getRoute();
+
+    /**
+     * Setter for <code>DB_ORIGIN_X.X_APP.APP_KEY</code>. 「appKey」- 应用程序专用唯一hashKey
+     */
+    public IXApp setAppKey(String value);
+
+    /**
+     * Getter for <code>DB_ORIGIN_X.X_APP.APP_KEY</code>. 「appKey」- 应用程序专用唯一hashKey
+     */
+    public String getAppKey();
 
     /**
      * Setter for <code>DB_ORIGIN_X.X_APP.SIGMA</code>. 「sigma」- 非系统模块使用的标识
@@ -203,12 +203,12 @@ public interface IXApp extends Serializable {
         setTitle(json.getString("TITLE"));
         setLogo(json.getString("LOGO"));
         setDomain(json.getString("DOMAIN"));
-        setPath(json.getString("PATH"));
-        setRoute(json.getString("ROUTE"));
-        setAppKey(json.getString("APP_KEY"));
         setAppPort(json.getInteger("APP_PORT"));
         setUrlEntry(json.getString("URL_ENTRY"));
         setUrlMain(json.getString("URL_MAIN"));
+        setPath(json.getString("PATH"));
+        setRoute(json.getString("ROUTE"));
+        setAppKey(json.getString("APP_KEY"));
         setSigma(json.getString("SIGMA"));
         setActive(json.getBoolean("ACTIVE"));
         setLanguage(json.getString("LANGUAGE"));
@@ -225,12 +225,12 @@ public interface IXApp extends Serializable {
         json.put("TITLE",getTitle());
         json.put("LOGO",getLogo());
         json.put("DOMAIN",getDomain());
-        json.put("PATH",getPath());
-        json.put("ROUTE",getRoute());
-        json.put("APP_KEY",getAppKey());
         json.put("APP_PORT",getAppPort());
         json.put("URL_ENTRY",getUrlEntry());
         json.put("URL_MAIN",getUrlMain());
+        json.put("PATH",getPath());
+        json.put("ROUTE",getRoute());
+        json.put("APP_KEY",getAppKey());
         json.put("SIGMA",getSigma());
         json.put("ACTIVE",getActive());
         json.put("LANGUAGE",getLanguage());

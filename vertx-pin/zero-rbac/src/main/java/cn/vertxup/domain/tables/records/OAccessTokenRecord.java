@@ -31,10 +31,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> implements Record10<String, byte[], byte[], Long, byte[], String, Boolean, String, LocalDateTime, String>, IOAccessToken {
 
-    private static final long serialVersionUID = -1410976108;
+    private static final long serialVersionUID = 972963302;
 
     /**
-     * Setter for <code>DB_RBAC.O_ACCESS_TOKEN.KEY</code>. 「key」- 令牌主键
+     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.KEY</code>. 「key」- 令牌主键
      */
     @Override
     public OAccessTokenRecord setKey(String value) {
@@ -43,7 +43,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Getter for <code>DB_RBAC.O_ACCESS_TOKEN.KEY</code>. 「key」- 令牌主键
+     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.KEY</code>. 「key」- 令牌主键
      */
     @Override
     public String getKey() {
@@ -51,7 +51,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Setter for <code>DB_RBAC.O_ACCESS_TOKEN.TOKEN</code>. 「token」- 用户的Token信息
+     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.TOKEN</code>. 「token」- 用户的Token信息
      */
     @Override
     public OAccessTokenRecord setToken(byte... value) {
@@ -60,7 +60,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Getter for <code>DB_RBAC.O_ACCESS_TOKEN.TOKEN</code>. 「token」- 用户的Token信息
+     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.TOKEN</code>. 「token」- 用户的Token信息
      */
     @Override
     public byte[] getToken() {
@@ -68,7 +68,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Setter for <code>DB_RBAC.O_ACCESS_TOKEN.AUTH</code>. 「auth」- 用户的ID的 byte[] 信息
+     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.AUTH</code>. 「auth」- 用户的ID的 byte[] 信息
      */
     @Override
     public OAccessTokenRecord setAuth(byte... value) {
@@ -77,7 +77,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Getter for <code>DB_RBAC.O_ACCESS_TOKEN.AUTH</code>. 「auth」- 用户的ID的 byte[] 信息
+     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.AUTH</code>. 「auth」- 用户的ID的 byte[] 信息
      */
     @Override
     public byte[] getAuth() {
@@ -85,7 +85,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Setter for <code>DB_RBAC.O_ACCESS_TOKEN.EXPIRED_TIME</code>. 「expiredTime」- 用户的Token过期时间
+     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.EXPIRED_TIME</code>. 「expiredTime」- 用户的Token过期时间
      */
     @Override
     public OAccessTokenRecord setExpiredTime(Long value) {
@@ -94,7 +94,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Getter for <code>DB_RBAC.O_ACCESS_TOKEN.EXPIRED_TIME</code>. 「expiredTime」- 用户的Token过期时间
+     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.EXPIRED_TIME</code>. 「expiredTime」- 用户的Token过期时间
      */
     @Override
     public Long getExpiredTime() {
@@ -102,7 +102,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Setter for <code>DB_RBAC.O_ACCESS_TOKEN.REFRESH_TOKEN</code>. 「refreshToken」- 用户的刷新令牌
+     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.REFRESH_TOKEN</code>. 「refreshToken」- 用户的刷新令牌
      */
     @Override
     public OAccessTokenRecord setRefreshToken(byte... value) {
@@ -111,7 +111,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Getter for <code>DB_RBAC.O_ACCESS_TOKEN.REFRESH_TOKEN</code>. 「refreshToken」- 用户的刷新令牌
+     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.REFRESH_TOKEN</code>. 「refreshToken」- 用户的刷新令牌
      */
     @Override
     public byte[] getRefreshToken() {
@@ -119,7 +119,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Setter for <code>DB_RBAC.O_ACCESS_TOKEN.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public OAccessTokenRecord setLanguage(String value) {
@@ -128,7 +128,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Getter for <code>DB_RBAC.O_ACCESS_TOKEN.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public String getLanguage() {
@@ -136,7 +136,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Setter for <code>DB_RBAC.O_ACCESS_TOKEN.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public OAccessTokenRecord setActive(Boolean value) {
@@ -145,7 +145,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Getter for <code>DB_RBAC.O_ACCESS_TOKEN.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public Boolean getActive() {
@@ -153,7 +153,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Setter for <code>DB_RBAC.O_ACCESS_TOKEN.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public OAccessTokenRecord setMetadata(String value) {
@@ -162,7 +162,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Getter for <code>DB_RBAC.O_ACCESS_TOKEN.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public String getMetadata() {
@@ -170,7 +170,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Setter for <code>DB_RBAC.O_ACCESS_TOKEN.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
     public OAccessTokenRecord setCreatedAt(LocalDateTime value) {
@@ -179,7 +179,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Getter for <code>DB_RBAC.O_ACCESS_TOKEN.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
     public LocalDateTime getCreatedAt() {
@@ -187,7 +187,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Setter for <code>DB_RBAC.O_ACCESS_TOKEN.CREATED_BY</code>. 「createdBy」- 创建人
+     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
     public OAccessTokenRecord setCreatedBy(String value) {
@@ -196,7 +196,7 @@ public class OAccessTokenRecord extends UpdatableRecordImpl<OAccessTokenRecord> 
     }
 
     /**
-     * Getter for <code>DB_RBAC.O_ACCESS_TOKEN.CREATED_BY</code>. 「createdBy」- 创建人
+     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
     public String getCreatedBy() {
