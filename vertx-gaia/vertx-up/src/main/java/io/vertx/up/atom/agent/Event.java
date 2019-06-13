@@ -20,7 +20,7 @@ public class Event implements Serializable {
     private String path;
     /**
      * order for current Event
-     * ( Could not be modified in current version )
+     * It could be modified in latest version by @Adjust
      */
     private int order = Orders.EVENT;
     /**
