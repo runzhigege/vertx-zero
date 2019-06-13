@@ -91,31 +91,10 @@ public class SResourceDao extends DAOImpl<SResourceRecord, cn.vertxup.domain.tab
     }
 
     /**
-     * Fetch records that have <code>PROJECTION IN (values)</code>
-     */
-    public List<cn.vertxup.domain.tables.pojos.SResource> fetchByProjection(String... values) {
-        return fetch(SResource.S_RESOURCE.PROJECTION, values);
-    }
-
-    /**
-     * Fetch records that have <code>QUERY IN (values)</code>
-     */
-    public List<cn.vertxup.domain.tables.pojos.SResource> fetchByQuery(String... values) {
-        return fetch(SResource.S_RESOURCE.QUERY, values);
-    }
-
-    /**
      * Fetch records that have <code>LEVEL IN (values)</code>
      */
     public List<cn.vertxup.domain.tables.pojos.SResource> fetchByLevel(Integer... values) {
         return fetch(SResource.S_RESOURCE.LEVEL, values);
-    }
-
-    /**
-     * Fetch records that have <code>EXPIRED IN (values)</code>
-     */
-    public List<cn.vertxup.domain.tables.pojos.SResource> fetchByExpired(LocalDateTime... values) {
-        return fetch(SResource.S_RESOURCE.EXPIRED, values);
     }
 
     /**
@@ -252,31 +231,10 @@ public class SResourceDao extends DAOImpl<SResourceRecord, cn.vertxup.domain.tab
     }
 
     /**
-     * Fetch records that have <code>PROJECTION IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SResource>> fetchByProjectionAsync(List<String> values) {
-        return fetchAsync(SResource.S_RESOURCE.PROJECTION,values);
-    }
-
-    /**
-     * Fetch records that have <code>QUERY IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SResource>> fetchByQueryAsync(List<String> values) {
-        return fetchAsync(SResource.S_RESOURCE.QUERY,values);
-    }
-
-    /**
      * Fetch records that have <code>LEVEL IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SResource>> fetchByLevelAsync(List<Integer> values) {
         return fetchAsync(SResource.S_RESOURCE.LEVEL,values);
-    }
-
-    /**
-     * Fetch records that have <code>EXPIRED IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SResource>> fetchByExpiredAsync(List<LocalDateTime> values) {
-        return fetchAsync(SResource.S_RESOURCE.EXPIRED,values);
     }
 
     /**

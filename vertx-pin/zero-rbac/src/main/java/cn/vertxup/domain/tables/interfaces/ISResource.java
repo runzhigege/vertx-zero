@@ -24,222 +24,192 @@ import javax.annotation.Generated;
 public interface ISResource extends Serializable {
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.KEY</code>. 「key」- 资源对应的ID
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.KEY</code>. 「key」- 资源对应的ID
      */
     public ISResource setKey(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.KEY</code>. 「key」- 资源对应的ID
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.KEY</code>. 「key」- 资源对应的ID
      */
     public String getKey();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.CODE</code>. 「code」- 资源编号
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.CODE</code>. 「code」- 资源编号
      */
     public ISResource setCode(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.CODE</code>. 「code」- 资源编号
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.CODE</code>. 「code」- 资源编号
      */
     public String getCode();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.NAME</code>. 「name」- 资源名称
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.NAME</code>. 「name」- 资源名称
      */
     public ISResource setName(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.NAME</code>. 「name」- 资源名称
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.NAME</code>. 「name」- 资源名称
      */
     public String getName();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.COMMENT</code>. 「comment」- 备注信息
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.COMMENT</code>. 「comment」- 备注信息
      */
     public ISResource setComment(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.COMMENT</code>. 「comment」- 备注信息
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.COMMENT</code>. 「comment」- 备注信息
      */
     public String getComment();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.PROJECTION</code>. 「projection」- 该资源的列定义
-     */
-    public ISResource setProjection(String value);
-
-    /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.PROJECTION</code>. 「projection」- 该资源的列定义
-     */
-    public String getProjection();
-
-    /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.QUERY</code>. 「query」- 该资源的行查询
-     */
-    public ISResource setQuery(String value);
-
-    /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.QUERY</code>. 「query」- 该资源的行查询
-     */
-    public String getQuery();
-
-    /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.LEVEL</code>. 「level」- 资源需求级别
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.LEVEL</code>. 「level」- 资源需求级别
      */
     public ISResource setLevel(Integer value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.LEVEL</code>. 「level」- 资源需求级别
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.LEVEL</code>. 「level」- 资源需求级别
      */
     public Integer getLevel();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.EXPIRED</code>. 「expired」- 资源过期时间（动态授权）
-     */
-    public ISResource setExpired(LocalDateTime value);
-
-    /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.EXPIRED</code>. 「expired」- 资源过期时间（动态授权）
-     */
-    public LocalDateTime getExpired();
-
-    /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.MODE_ROLE</code>. 「modeRole」- 该资源查找角色的模式
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.MODE_ROLE</code>. 「modeRole」- 该资源查找角色的模式
      */
     public ISResource setModeRole(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.MODE_ROLE</code>. 「modeRole」- 该资源查找角色的模式
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.MODE_ROLE</code>. 「modeRole」- 该资源查找角色的模式
      */
     public String getModeRole();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.MODE_GROUP</code>. 「modeGroup」- 该资源查找组的模式
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.MODE_GROUP</code>. 「modeGroup」- 该资源查找组的模式
      */
     public ISResource setModeGroup(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.MODE_GROUP</code>. 「modeGroup」- 该资源查找组的模式
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.MODE_GROUP</code>. 「modeGroup」- 该资源查找组的模式
      */
     public String getModeGroup();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.MODE_TREE</code>. 「modeTree」- 该资源处理树（用户组）的模式
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.MODE_TREE</code>. 「modeTree」- 该资源处理树（用户组）的模式
      */
     public ISResource setModeTree(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.MODE_TREE</code>. 「modeTree」- 该资源处理树（用户组）的模式
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.MODE_TREE</code>. 「modeTree」- 该资源处理树（用户组）的模式
      */
     public String getModeTree();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.SIGMA</code>. 「sigma」- 统一标识
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.SIGMA</code>. 「sigma」- 统一标识
      */
     public ISResource setSigma(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.SIGMA</code>. 「sigma」- 统一标识
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.SIGMA</code>. 「sigma」- 统一标识
      */
     public String getSigma();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.MODEL_ID</code>. 「modelId」- 资源对应的模型identifier
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.MODEL_ID</code>. 「modelId」- 资源对应的模型identifier
      */
     public ISResource setModelId(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.MODEL_ID</code>. 「modelId」- 资源对应的模型identifier
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.MODEL_ID</code>. 「modelId」- 资源对应的模型identifier
      */
     public String getModelId();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.MODEL_KEY</code>. 「modelKey」- 资源对应的单条记录ID
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.MODEL_KEY</code>. 「modelKey」- 资源对应的单条记录ID
      */
     public ISResource setModelKey(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.MODEL_KEY</code>. 「modelKey」- 资源对应的单条记录ID
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.MODEL_KEY</code>. 「modelKey」- 资源对应的单条记录ID
      */
     public String getModelKey();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.CATEGORY</code>. 「category」- 资源分类
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.CATEGORY</code>. 「category」- 资源分类
      */
     public ISResource setCategory(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.CATEGORY</code>. 「category」- 资源分类
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.CATEGORY</code>. 「category」- 资源分类
      */
     public String getCategory();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.LANGUAGE</code>. 「language」- 使用的语言
      */
     public ISResource setLanguage(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.LANGUAGE</code>. 「language」- 使用的语言
      */
     public String getLanguage();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.ACTIVE</code>. 「active」- 是否启用
      */
     public ISResource setActive(Boolean value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.ACTIVE</code>. 「active」- 是否启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.METADATA</code>. 「metadata」- 附加配置数据
      */
     public ISResource setMetadata(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.METADATA</code>. 「metadata」- 附加配置数据
      */
     public String getMetadata();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public ISResource setCreatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public LocalDateTime getCreatedAt();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.CREATED_BY</code>. 「createdBy」- 创建人
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public ISResource setCreatedBy(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.CREATED_BY</code>. 「createdBy」- 创建人
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public String getCreatedBy();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     public ISResource setUpdatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     public LocalDateTime getUpdatedAt();
 
     /**
-     * Setter for <code>DB_RBAC.S_RESOURCE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public ISResource setUpdatedBy(String value);
 
     /**
-     * Getter for <code>DB_RBAC.S_RESOURCE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public String getUpdatedBy();
 
@@ -262,10 +232,7 @@ public interface ISResource extends Serializable {
         setCode(json.getString("CODE"));
         setName(json.getString("NAME"));
         setComment(json.getString("COMMENT"));
-        setProjection(json.getString("PROJECTION"));
-        setQuery(json.getString("QUERY"));
         setLevel(json.getInteger("LEVEL"));
-        // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED!
         setModeRole(json.getString("MODE_ROLE"));
         setModeGroup(json.getString("MODE_GROUP"));
         setModeTree(json.getString("MODE_TREE"));
@@ -290,10 +257,7 @@ public interface ISResource extends Serializable {
         json.put("CODE",getCode());
         json.put("NAME",getName());
         json.put("COMMENT",getComment());
-        json.put("PROJECTION",getProjection());
-        json.put("QUERY",getQuery());
         json.put("LEVEL",getLevel());
-        // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED!
         json.put("MODE_ROLE",getModeRole());
         json.put("MODE_GROUP",getModeGroup());
         json.put("MODE_TREE",getModeTree());

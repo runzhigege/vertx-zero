@@ -24,16 +24,13 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SResource implements ISResource {
 
-    private static final long serialVersionUID = 331000415;
+    private static final long serialVersionUID = 355201338;
 
     private String        key;
     private String        code;
     private String        name;
     private String        comment;
-    private String        projection;
-    private String        query;
     private Integer       level;
-    private LocalDateTime expired;
     private String        modeRole;
     private String        modeGroup;
     private String        modeTree;
@@ -56,10 +53,7 @@ public class SResource implements ISResource {
         this.code = value.code;
         this.name = value.name;
         this.comment = value.comment;
-        this.projection = value.projection;
-        this.query = value.query;
         this.level = value.level;
-        this.expired = value.expired;
         this.modeRole = value.modeRole;
         this.modeGroup = value.modeGroup;
         this.modeTree = value.modeTree;
@@ -81,10 +75,7 @@ public class SResource implements ISResource {
         String        code,
         String        name,
         String        comment,
-        String        projection,
-        String        query,
         Integer       level,
-        LocalDateTime expired,
         String        modeRole,
         String        modeGroup,
         String        modeTree,
@@ -104,10 +95,7 @@ public class SResource implements ISResource {
         this.code = code;
         this.name = name;
         this.comment = comment;
-        this.projection = projection;
-        this.query = query;
         this.level = level;
-        this.expired = expired;
         this.modeRole = modeRole;
         this.modeGroup = modeGroup;
         this.modeTree = modeTree;
@@ -169,28 +157,6 @@ public class SResource implements ISResource {
     }
 
     @Override
-    public String getProjection() {
-        return this.projection;
-    }
-
-    @Override
-    public SResource setProjection(String projection) {
-        this.projection = projection;
-        return this;
-    }
-
-    @Override
-    public String getQuery() {
-        return this.query;
-    }
-
-    @Override
-    public SResource setQuery(String query) {
-        this.query = query;
-        return this;
-    }
-
-    @Override
     public Integer getLevel() {
         return this.level;
     }
@@ -198,17 +164,6 @@ public class SResource implements ISResource {
     @Override
     public SResource setLevel(Integer level) {
         this.level = level;
-        return this;
-    }
-
-    @Override
-    public LocalDateTime getExpired() {
-        return this.expired;
-    }
-
-    @Override
-    public SResource setExpired(LocalDateTime expired) {
-        this.expired = expired;
         return this;
     }
 
@@ -374,10 +329,7 @@ public class SResource implements ISResource {
         sb.append(", ").append(code);
         sb.append(", ").append(name);
         sb.append(", ").append(comment);
-        sb.append(", ").append(projection);
-        sb.append(", ").append(query);
         sb.append(", ").append(level);
-        sb.append(", ").append(expired);
         sb.append(", ").append(modeRole);
         sb.append(", ").append(modeGroup);
         sb.append(", ").append(modeTree);
@@ -410,10 +362,7 @@ public class SResource implements ISResource {
         setCode(from.getCode());
         setName(from.getName());
         setComment(from.getComment());
-        setProjection(from.getProjection());
-        setQuery(from.getQuery());
         setLevel(from.getLevel());
-        setExpired(from.getExpired());
         setModeRole(from.getModeRole());
         setModeGroup(from.getModeGroup());
         setModeTree(from.getModeTree());

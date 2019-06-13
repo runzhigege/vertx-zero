@@ -22,7 +22,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XApp implements IXApp {
 
-    private static final long serialVersionUID = 1772404493;
+    private static final long serialVersionUID = 1686997391;
 
     private String  key;
     private String  name;
@@ -30,12 +30,12 @@ public class XApp implements IXApp {
     private String  title;
     private String  logo;
     private String  domain;
-    private String  path;
-    private String  route;
-    private String  appKey;
     private Integer appPort;
     private String  urlEntry;
     private String  urlMain;
+    private String  path;
+    private String  route;
+    private String  appKey;
     private String  sigma;
     private Boolean active;
     private String  language;
@@ -50,12 +50,12 @@ public class XApp implements IXApp {
         this.title = value.title;
         this.logo = value.logo;
         this.domain = value.domain;
-        this.path = value.path;
-        this.route = value.route;
-        this.appKey = value.appKey;
         this.appPort = value.appPort;
         this.urlEntry = value.urlEntry;
         this.urlMain = value.urlMain;
+        this.path = value.path;
+        this.route = value.route;
+        this.appKey = value.appKey;
         this.sigma = value.sigma;
         this.active = value.active;
         this.language = value.language;
@@ -69,12 +69,12 @@ public class XApp implements IXApp {
         String  title,
         String  logo,
         String  domain,
-        String  path,
-        String  route,
-        String  appKey,
         Integer appPort,
         String  urlEntry,
         String  urlMain,
+        String  path,
+        String  route,
+        String  appKey,
         String  sigma,
         Boolean active,
         String  language,
@@ -86,12 +86,12 @@ public class XApp implements IXApp {
         this.title = title;
         this.logo = logo;
         this.domain = domain;
-        this.path = path;
-        this.route = route;
-        this.appKey = appKey;
         this.appPort = appPort;
         this.urlEntry = urlEntry;
         this.urlMain = urlMain;
+        this.path = path;
+        this.route = route;
+        this.appKey = appKey;
         this.sigma = sigma;
         this.active = active;
         this.language = language;
@@ -165,39 +165,6 @@ public class XApp implements IXApp {
     }
 
     @Override
-    public String getPath() {
-        return this.path;
-    }
-
-    @Override
-    public XApp setPath(String path) {
-        this.path = path;
-        return this;
-    }
-
-    @Override
-    public String getRoute() {
-        return this.route;
-    }
-
-    @Override
-    public XApp setRoute(String route) {
-        this.route = route;
-        return this;
-    }
-
-    @Override
-    public String getAppKey() {
-        return this.appKey;
-    }
-
-    @Override
-    public XApp setAppKey(String appKey) {
-        this.appKey = appKey;
-        return this;
-    }
-
-    @Override
     public Integer getAppPort() {
         return this.appPort;
     }
@@ -227,6 +194,39 @@ public class XApp implements IXApp {
     @Override
     public XApp setUrlMain(String urlMain) {
         this.urlMain = urlMain;
+        return this;
+    }
+
+    @Override
+    public String getPath() {
+        return this.path;
+    }
+
+    @Override
+    public XApp setPath(String path) {
+        this.path = path;
+        return this;
+    }
+
+    @Override
+    public String getRoute() {
+        return this.route;
+    }
+
+    @Override
+    public XApp setRoute(String route) {
+        this.route = route;
+        return this;
+    }
+
+    @Override
+    public String getAppKey() {
+        return this.appKey;
+    }
+
+    @Override
+    public XApp setAppKey(String appKey) {
+        this.appKey = appKey;
         return this;
     }
 
@@ -284,12 +284,12 @@ public class XApp implements IXApp {
         sb.append(", ").append(title);
         sb.append(", ").append(logo);
         sb.append(", ").append(domain);
-        sb.append(", ").append(path);
-        sb.append(", ").append(route);
-        sb.append(", ").append(appKey);
         sb.append(", ").append(appPort);
         sb.append(", ").append(urlEntry);
         sb.append(", ").append(urlMain);
+        sb.append(", ").append(path);
+        sb.append(", ").append(route);
+        sb.append(", ").append(appKey);
         sb.append(", ").append(sigma);
         sb.append(", ").append(active);
         sb.append(", ").append(language);
@@ -314,12 +314,12 @@ public class XApp implements IXApp {
         setTitle(from.getTitle());
         setLogo(from.getLogo());
         setDomain(from.getDomain());
-        setPath(from.getPath());
-        setRoute(from.getRoute());
-        setAppKey(from.getAppKey());
         setAppPort(from.getAppPort());
         setUrlEntry(from.getUrlEntry());
         setUrlMain(from.getUrlMain());
+        setPath(from.getPath());
+        setRoute(from.getRoute());
+        setAppKey(from.getAppKey());
         setSigma(from.getSigma());
         setActive(from.getActive());
         setLanguage(from.getLanguage());

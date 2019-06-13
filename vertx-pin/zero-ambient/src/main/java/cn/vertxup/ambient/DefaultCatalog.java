@@ -34,7 +34,7 @@ public class DefaultCatalog extends CatalogImpl {
     /**
      * The schema <code>DB_ORIGIN_X</code>.
      */
-    public final DbAmbient DB_ORIGIN_X = DbAmbient.DB_ORIGIN_X;
+    public final Db DB_ORIGIN_X = Db.DB_ORIGIN_X;
 
     /**
      * No further instances allowed
@@ -52,6 +52,6 @@ public class DefaultCatalog extends CatalogImpl {
 
     private final List<Schema> getSchemas0() {
         return Arrays.<Schema>asList(
-                DbAmbient.DB_ORIGIN_X);
+                Db.DB_ORIGIN_X);
     }
 }

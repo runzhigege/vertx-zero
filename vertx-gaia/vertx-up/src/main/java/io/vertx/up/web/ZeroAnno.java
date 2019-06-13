@@ -1,11 +1,11 @@
 package io.vertx.up.web;
 
+import io.vertx.core.http.HttpMethod;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.atom.worker.Receipt;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
-import io.vertx.up.micro.matcher.RegexPath;
 import io.vertx.up.web.origin.*;
 import io.vertx.zero.mirror.Pack;
 import io.zero.epic.Ut;
@@ -15,7 +15,6 @@ import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.regex.Pattern;
 
 /**
  * Transfer Class<?> set to difference mapping.
@@ -46,8 +45,6 @@ public class ZeroAnno {
             POINTER = new HashSet<>();
     private final static Set<Class<?>>
             TPS = new HashSet<>();
-    private final static Set<String>
-            URI_PATHS = new HashSet<>();
 
     static {
         /* 1.Scan the packages **/
@@ -66,11 +63,12 @@ public class ZeroAnno {
                     EVENTS.addAll(event.scan(ENDPOINTS));
                 });
         /* 1.1. Put Path Uri into Set */
-        EVENTS.stream().map(Event::getPath)
+        EVENTS.stream()
                 .filter(Objects::nonNull)
                 /* Only Uri Pattern will be extracted to URI_PATHS */
-                .filter(item -> 0 < item.indexOf(":"))
-                .forEach(URI_PATHS::add);
+                .filter(item -> 0 < item.getPath().indexOf(":"))
+                .forEach(ZeroUri::resolve);
+        ZeroUri.report();
 
         /* Wall -> Authenticate, Authorize **/
         final Inquirer<Set<Cliff>> walls =
@@ -221,14 +219,7 @@ public class ZeroAnno {
         return WALLS;
     }
 
-    public static String recoveryUri(final String uri) {
-        return URI_PATHS.stream()
-                .filter(path -> isMatch(uri, path))
-                .findFirst().orElse(uri);
-    }
-
-    private static boolean isMatch(final String uri, final String path) {
-        final Pattern pattern = RegexPath.createRegex(path);
-        return pattern.matcher(uri).matches();
+    public static String recoveryUri(final String uri, final HttpMethod method) {
+        return ZeroUri.recovery(uri, method);
     }
 }

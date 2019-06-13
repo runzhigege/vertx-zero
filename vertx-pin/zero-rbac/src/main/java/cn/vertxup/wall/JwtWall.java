@@ -7,6 +7,7 @@ import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.web.handler.AuthHandler;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.refine.Sc;
+import io.vertx.tp.rbac.service.authorization.AccreditStub;
 import io.vertx.tp.rbac.service.jwt.JwtStub;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Authenticate;
@@ -23,6 +24,8 @@ public class JwtWall implements Security {
     private static final Annal LOGGER = Annal.get(JwtWall.class);
     @Inject
     private transient JwtStub jwtStub;
+    @Inject
+    private transient AccreditStub accredit;
 
     @Authenticate
     public AuthHandler authenticate(final Vertx vertx,
@@ -48,7 +51,9 @@ public class JwtWall implements Security {
 
     @Override
     public Future<Boolean> access(final JsonObject data) {
-        System.out.println(data.encodePrettily());
-        return Future.succeededFuture(Boolean.TRUE);
+        /*
+         * User defined accessor
+         */
+        return this.accredit.authorize(data);
     }
 }
