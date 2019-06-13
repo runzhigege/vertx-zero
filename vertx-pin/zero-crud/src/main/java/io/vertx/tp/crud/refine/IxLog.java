@@ -14,8 +14,17 @@ class IxLog {
         logger.debug("[ Εκδήλωση ] ( " + flag + " ) " + pattern, args);
     }
 
+    private static void error(final Annal logger,
+                              final String flag, final String pattern, final Object... args) {
+        logger.error("[ Εκδήλωση ] ( " + flag + " ) " + pattern, args);
+    }
+
     static void infoInit(final Annal logger, final String pattern, final Object... args) {
         info(logger, "Init", pattern, args);
+    }
+
+    static void errorInit(final Annal logger, final String pattern, final Object... args) {
+        error(logger, "Init", pattern, args);
     }
 
     static void infoRest(final Annal logger, final String pattern, final Object... args) {

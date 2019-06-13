@@ -8,6 +8,7 @@ import io.vertx.up.atom.Rule;
 import io.vertx.up.log.Annal;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
 /*
@@ -33,6 +34,10 @@ public class IxPin {
 
     public static UxJooq getDao(final IxConfig config) {
         return IxDao.get(config);
+    }
+
+    public static Set<String> getUris() {
+        return IxDao.getUris();
     }
 
     public static ConcurrentMap<String, List<Rule>> getRules(final String actor) {

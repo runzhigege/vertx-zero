@@ -27,13 +27,13 @@ public interface GetAgent {
                        @PathParam("key") String key);
 
     @GET
-    @Path("/columns/full/{actor}")
+    @Path("/columns/{actor}/full")
     @Address(Addr.Get.COLUMN_FULL)
     @Adjust(Orders.MODULE)
     JsonArray getFull(@PathParam("actor") String actor);
 
     @GET
-    @Path("/columns/my/{actor}")
+    @Path("/columns/{actor}/my")
     @Address(Addr.Get.COLUMN_MY)
     @Adjust(Orders.MODULE)
     JsonArray getMy(@PathParam("actor") String actor);

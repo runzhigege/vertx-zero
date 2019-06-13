@@ -11,6 +11,8 @@ public interface ID {
 
     String DIRECT = "$$DIRECT$$";
 
+    String URI_KEY = "$$ALL$$";
+
     String IGNORE = "$$IGNORE$$";
 
     interface Addr {

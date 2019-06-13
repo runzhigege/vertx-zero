@@ -7,7 +7,17 @@ import io.vertx.core.json.JsonObject;
  * Uniform interface for authorization workflow on restful api.
  * Json Data:
  * {
- *      "jwt" : "<Token Value>"
+ *      "jwt" : "<Token Value>",
+ *      "options":{
+ *      },
+ *      "metadata":{
+ *          "uri" : "<Defined Uri>",
+ *          "requestUri" : "<Request Uri>",
+ *          "method" : "<HTTP Method>"
+ *      },
+ *      "headers":{
+ *          "X-Sigma": "Header Value"
+ *      }
  * }
  */
 public interface AccreditStub {
