@@ -73,6 +73,7 @@ E40057: "(Jooq) The method \"copyEntity(T target,T updated)\" require second arg
 E40058: "(Jooq) The mode required is {0}, but current filters are \"{1}\", they are conflict."
 E40059: "(Jooq) The field = \"{0}\" could not be found in type = \"{1}\""
 E40060: "(Jooq) Infix Jooq require vertx environment, but now vertx is null"
+E40061: "(Security) You are using Zero Security Framework, but the @Wall found Security reference is null. "
 # RxJava
 E45001: (V) - The field "{1}" of json array "{0}" must be mapped to unique element, but current reduced is "{2}"
 # (Web) Exception for web

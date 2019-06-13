@@ -10,13 +10,13 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.AsyncMap;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.jwt.JWTAuthOptions;
-import io.vertx.ext.auth.jwt.impl.JWTUser;
 import io.vertx.ext.jwt.JWT;
 import io.vertx.ext.jwt.JWTOptions;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.exception.*;
 import io.vertx.up.log.Annal;
 import io.vertx.up.secure.Security;
+import io.zero.epic.fn.Fn;
 
 import java.util.Collections;
 import java.util.function.Supplier;
@@ -28,19 +28,21 @@ public class JwtAuthProvider implements JwtAuth {
     private final JWT jwt;
     private final String permissionsClaimKey;
     private final JWTOptions jwtOptions;
-    private transient JwtSecurer securer;
+    private final transient JwtSecurer securer = JwtSecurer.create();
 
-    private transient AsyncMap<String, Boolean> authorizeMap;
+    private transient AsyncMap<String, Boolean> sessionTokens;
 
-    public JwtAuthProvider(final Vertx vertx, final JWTAuthOptions config) {
+    JwtAuthProvider(final Vertx vertx, final JWTAuthOptions config) {
         this.permissionsClaimKey = config.getPermissionsClaimKey();
+        // Set this key to securer
+        this.securer.setPermissionsClaimKey(this.permissionsClaimKey);
         this.jwtOptions = config.getJWTOptions();
         // File reading here.
         this.jwt = Ux.Jwt.create(config, vertx.fileSystem()::readFileBlocking);
         vertx.sharedData().<String, Boolean>getAsyncMap(AUTH_POOL, res -> {
             if (res.succeeded()) {
                 LOGGER.debug(Info.MAP_INITED, AUTH_POOL);
-                this.authorizeMap = res.result();
+                this.sessionTokens = res.result();
             }
         });
     }
@@ -48,110 +50,93 @@ public class JwtAuthProvider implements JwtAuth {
     @Override
     public JwtAuth bind(final Supplier<Security> supplier) {
         final Security security = supplier.get();
-        this.securer = JwtSecurer.create(security);
+        /*
+         * Zero Security Framework needed, could not break this rule.
+         */
+        Fn.outWeb(null == security, _500SecurityNotImplementException.class, this.getClass());
+        this.securer.setSecurity(security);
         return this;
     }
 
     @Override
-    public void authenticate(final JsonObject authInfo, final Handler<AsyncResult<User>> resultHandler) {
+    public void authenticate(final JsonObject authInfo, final Handler<AsyncResult<User>> handler) {
         final String token = authInfo.getString("jwt");
         /*
-         * Extract token from authorizeMap here
+         * Extract token from sessionTokens here
          */
-
-        if (null == this.authorizeMap) {
-            // Async map initialized failure, execute common validation flow.
-            this.authenticate(authInfo).setHandler(this.authorized(token, resultHandler));
+        if (null == this.sessionTokens) {
+            /*
+             * Session tokens is null, it means zero system will disabled token cache future here.
+             * It will go through common authenticate workflow here.
+             * 1) 401 Validation
+             * 2) 403 Validation ( If So )
+             */
+            LOGGER.debug(Info.FLOW_NULL, token);
+            this.prerequisite(token)
+                    /* 401 */
+                    .compose(nil -> this.securer.authenticate(authInfo))
+                    /* Mount Handler */
+                    .setHandler(this.authorized(token, handler));
         } else {
-            // Get data from authorizeMap
-            this.authorizeMap.get(token, res -> {
+            /*
+             * Get token from sessionTokens
+             */
+            this.sessionTokens.get(token, res -> {
                 if (null != res && null != res.result() && res.result()) {
-                    // Get data from cache.
+                    /* Token verified from cache */
                     LOGGER.info(Info.MAP_HIT, token, res.result());
-                    // Append 403 authorized
-                    this.verify403(authInfo).compose(authorized ->
-                            // Common Validated
-                            this.authorize(authInfo).setHandler(this.authorized(token, resultHandler)));
+                    /*
+                     * Also this situation, the prerequisite step could be skipped because it has
+                     * been calculated before, the token is valid and we could process this token
+                     * go to 403 workflow directly.
+                     * 401 Validation Skip
+                     * 403 Validation ( If So )
+                     */
+                    this.securer.authorize(authInfo)
+                            /* Mount Handler */
+                            .setHandler(this.authorized(token, handler));
                 } else {
-                    // Couldn't getNull data from cache
                     LOGGER.debug(Info.MAP_MISSING, token);
-                    this.authenticate(authInfo).setHandler(this.authorized(token, resultHandler));
+                    /*
+                     * Repeat do 401 validation & 403 validation
+                     * 1) 401 Validation
+                     * 2) 403 Validation ( If So )
+                     */
+                    this.prerequisite(token)
+                            /* 401 */
+                            .compose(nil -> this.securer.authenticate(authInfo))
+                            /* Mount Handler */
+                            .setHandler(this.authorized(token, handler));
                 }
             });
         }
     }
 
     private Handler<AsyncResult<User>> authorized(final String token, final Handler<AsyncResult<User>> handler) {
-        return (user -> this.authorizeMap.get(token, res -> {
-            if (!(null != res && null != res.result() && res.result())) {
-                this.authorizeMap.put(token, Boolean.TRUE, result -> {
+        return user -> {
+            if (user.succeeded()) {
+                /* Store token into async map to refresh cache and then return */
+                this.sessionTokens.put(token, Boolean.TRUE, result -> {
                     LOGGER.debug(Info.MAP_PUT, token, Boolean.TRUE);
                     handler.handle(Future.succeededFuture(user.result()));
                 });
             } else {
-                handler.handle(Future.succeededFuture(user.result()));
+                /* Capture the result from internal calling */
+                final Throwable error = user.cause();
+                handler.handle(Future.failedFuture(error));
             }
-        }));
+        };
     }
 
-    private Future<User> verify401(final JsonObject authInfo) {
-        return this.securer.authenticate(authInfo).compose(verified -> {
-            if (verified) {
-                /*
-                 * 401 Passed
-                 */
-                return this.verify403(authInfo);
-            } else {
-                /*
-                 * Default system failure for 401 Jwt Exception
-                 */
-                return Future.failedFuture(new _401JwtExecutorException(this.getClass(), authInfo.getString("jwt")));
-            }
-        });
-    }
-
-    private Future<User> verify403(final JsonObject authInfo) {
-        return this.securer.authorize(authInfo).compose(verfied -> {
-            if (verfied) {
-                /*
-                 * 403 Passed
-                 */
-                return this.authorize(authInfo);
-            } else {
-                return Future.failedFuture(new _403ForbiddenException(this.getClass()));
-            }
-        });
-    }
-
-    private Future<User> authenticate(final JsonObject authInfo) {
-        /*
-         * Sync code for different exception catch to enhancement 401/403 workflow
-         */
-        if (null == this.securer) {
-            /*
-             * It means that current provider did not bind any security interface,
-             * There is not user defined logical here.
-             */
-            return this.authorize(authInfo);
-        } else {
-            /*
-             * 401 Authenticate issue
-             */
-            try {
-                return this.verify401(authInfo);
-            } catch (final WebException ex) {
-                /*
-                 * 401 Method throw web exception
-                 */
-                return Future.failedFuture(ex);
-            }
-        }
-    }
-
+    /*
+     * Prerequisite for JWT token here based on jwtOptions & jwt
+     * This function is provided by zero system and it will verify jwt token specification only
+     * It does not contain any business code logical here.
+     */
     @SuppressWarnings("all")
-    private Future<User> authorize(final JsonObject authInfo) {
+    private Future<String> prerequisite(final String token) {
         try {
-            final JsonObject payload = this.jwt.decode(authInfo.getString("jwt"));
+            final JsonObject payload = this.jwt.decode(token);
             if (this.jwt.isExpired(payload, this.jwtOptions)) {
                 return Future.failedFuture(new _401JwtExpiredException(this.getClass(), payload));
             }
@@ -171,9 +156,9 @@ public class JwtAuthProvider implements JwtAuth {
             if (this.jwtOptions.getIssuer() != null && !this.jwtOptions.getIssuer().equals(payload.getString("iss"))) {
                 return Future.failedFuture(new _401JwtIssuerException(this.getClass(), payload.getString("iss")));
             }
-            return Future.succeededFuture(new JWTUser(payload, this.permissionsClaimKey));
-        } catch (final RuntimeException var5) {
-            return Future.failedFuture(new _500JwtRuntimeException(this.getClass(), var5));
+            return Future.succeededFuture(token);
+        } catch (final RuntimeException ex) {
+            return Future.failedFuture(new _500JwtRuntimeException(this.getClass(), ex));
         }
     }
 

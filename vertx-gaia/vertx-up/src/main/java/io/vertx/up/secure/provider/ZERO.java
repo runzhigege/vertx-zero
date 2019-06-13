@@ -9,4 +9,6 @@ interface Info {
     String MAP_MISSING = "[ ZERO ] ( Auth ) The async shared map cache has not been hitted by key = {0}";
 
     String MAP_PUT = "[ ZERO ] ( Auth ) The async shared map cache has been put with key = {0}, value = {1}";
+
+    String FLOW_NULL = "[ ZERO ] ( Auth ) No authorization cached: token = {0}";
 }
