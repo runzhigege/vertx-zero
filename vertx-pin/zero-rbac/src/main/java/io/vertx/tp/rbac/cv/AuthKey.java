@@ -32,4 +32,12 @@ public interface AuthKey {
     String F_CLIENT_ID = "clientId";
     String F_CLIENT_SECRET = "clientSecret";
     String F_GRANT_TYPE = "grantType";
+
+    /**
+     * Authorization Workflow
+     */
+    String F_URI = "uri";
+    String F_URI_REQUEST = "requestUri";
+    String F_METHOD = "method";
+    String F_METADATA = "metadata";
 }

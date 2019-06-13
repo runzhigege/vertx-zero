@@ -1,5 +1,10 @@
 package io.vertx.tp.rbac.atom;
 
+import com.fasterxml.jackson.databind.ClassDeserializer;
+import com.fasterxml.jackson.databind.ClassSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.io.Serializable;
 
 /*
@@ -49,6 +54,12 @@ public class ScConfig implements Serializable {
      * Role Pool when secondary cache enabled.
      */
     private String permissionPool;
+    /*
+     * Authorization Uri Interface
+     */
+    @JsonSerialize(using = ClassSerializer.class)
+    @JsonDeserialize(using = ClassDeserializer.class)
+    private Class<?> orbit;
 
     public ScCondition getCondition() {
         return this.condition;
@@ -126,6 +137,14 @@ public class ScConfig implements Serializable {
         this.supportGroup = supportGroup;
     }
 
+    public Class<?> getOrbit() {
+        return this.orbit;
+    }
+
+    public void setOrbit(final Class<?> orbit) {
+        this.orbit = orbit;
+    }
+
     @Override
     public String toString() {
         return "ScConfig{" +
@@ -138,6 +157,7 @@ public class ScConfig implements Serializable {
                 ", supportGroup=" + this.supportGroup +
                 ", supportSecondary=" + this.supportSecondary +
                 ", permissionPool='" + this.permissionPool + '\'' +
+                ", orbit=" + this.orbit +
                 '}';
     }
 }

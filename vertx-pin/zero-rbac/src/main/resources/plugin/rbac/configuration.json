@@ -26,5 +26,6 @@
     "tokenPool": "POOL_TOKEN",
     "permissionPool": "POOL_PERMISSIONS",
     "supportGroup": true,
-    "supportSecondary": true
+    "supportSecondary": true,
+    "orbit": ""
 }
