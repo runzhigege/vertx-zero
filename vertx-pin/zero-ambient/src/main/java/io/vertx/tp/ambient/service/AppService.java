@@ -12,8 +12,11 @@ import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.tool.Ke;
 import io.vertx.up.aiki.Uson;
 import io.vertx.up.aiki.Ux;
+import io.vertx.up.log.Annal;
 
 public class AppService implements AppStub {
+
+    private static final Annal LOGGER = Annal.get(AppService.class);
 
     @Override
     public Future<JsonObject> fetchByName(final String name) {

@@ -18,6 +18,7 @@ import io.vertx.up.web.ZeroAnno;
 import io.vertx.zero.eon.Strings;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -274,7 +275,7 @@ public abstract class AuthPhylum implements AuthHandler {
          * Build metadata
          */
         final JsonObject metadata = new JsonObject();
-        metadata.put("uri", ZeroAnno.recoveryUri(request.uri()));
+        metadata.put("uri", recoveryUri(context));
         metadata.put("requestUri", request.uri());
         metadata.put("method", request.method().name());
         data.put("metadata", metadata);
@@ -291,5 +292,21 @@ public abstract class AuthPhylum implements AuthHandler {
         data.put("headers", headers);
         this.getLogger().info("[ ZERO ] Auth Information: {0}", data.encode());
         return data;
+    }
+
+    /*
+     * Recovery Uri Pattern to definition
+     * /api/test/lang -> /api/test/:name
+     */
+    private String recoveryUri(final RoutingContext context) {
+        /* Get Path Parameters */
+        final Map<String, String> params = context.pathParams();
+        final String uri = context.request().uri();
+        /* Whether it's path */
+        if (params.isEmpty()) {
+            return uri;
+        } else {
+            return ZeroAnno.recoveryUri(uri);
+        }
     }
 }
