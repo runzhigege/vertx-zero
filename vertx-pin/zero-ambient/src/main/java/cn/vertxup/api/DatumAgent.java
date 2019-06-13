@@ -25,7 +25,7 @@ public interface DatumAgent {
     JsonObject fetchCategories(@HeaderParam(ID.Header.X_APP_ID) String appId,
                                @BodyParam JsonArray types);
 
-    @Path("/{type}/{code}/category")
+    @Path("/{type}/category/{code}")
     @GET
     @Address(Addr.Datum.CATEGORY_CODE)
     JsonArray fetchCategory(@HeaderParam(ID.Header.X_APP_ID) String appId,
@@ -44,7 +44,7 @@ public interface DatumAgent {
     JsonObject fetchTabulars(@HeaderParam(ID.Header.X_APP_ID) String appId,
                              @BodyParam JsonArray types);
 
-    @Path("/{type}/{code}/tabular")
+    @Path("/{type}/tabular/{code}")
     @GET
     @Address(Addr.Datum.TABULAR_CODE)
     JsonArray fetchTabular(@HeaderParam(ID.Header.X_APP_ID) String appId,

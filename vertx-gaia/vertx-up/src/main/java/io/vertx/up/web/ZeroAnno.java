@@ -68,6 +68,7 @@ public class ZeroAnno {
         /* 1.1. Put Path Uri into Set */
         EVENTS.stream().map(Event::getPath)
                 .filter(Objects::nonNull)
+                /* Only Uri Pattern will be extracted to URI_PATHS */
                 .filter(item -> 0 < item.indexOf(":"))
                 .forEach(URI_PATHS::add);
 
