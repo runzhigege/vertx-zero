@@ -11,26 +11,7 @@ import io.zero.epic.fn.Fn;
 
 import java.util.function.Function;
 
-public interface Infix {
-
-    static <R> R initTp(final String key,
-                        final Function<JsonObject, R> executor,
-                        final Class<?> clazz) {
-        final Annal logger = Annal.get(clazz);
-        final JsonObject options = init(logger, key, clazz);
-        final JsonObject config = null == options.getJsonObject(key) ? new JsonObject() : options.getJsonObject(key);
-        final JsonObject ready = config.containsKey("config") ? config.getJsonObject("config") : new JsonObject();
-        return init(logger, key, ready, executor);
-    }
-
-    static <R> R init(final String key,
-                      final Function<JsonObject, R> executor,
-                      final Class<?> clazz) {
-        final Annal logger = Annal.get(clazz);
-        final JsonObject options = init(logger, key, clazz);
-        final JsonObject config = null == options.getJsonObject(key) ? new JsonObject() : options.getJsonObject(key);
-        return init(logger, key, config, executor);
-    }
+interface InfixTool {
 
     static JsonObject init(
             final Annal logger,
@@ -51,6 +32,28 @@ public interface Infix {
             final Function<JsonObject, R> executor) {
         Fn.outUp(() -> Ruler.verify(key, config), logger);
         return executor.apply(config);
+    }
+}
+
+public interface Infix {
+
+    static <R> R initTp(final String key,
+                        final Function<JsonObject, R> executor,
+                        final Class<?> clazz) {
+        final Annal logger = Annal.get(clazz);
+        final JsonObject options = InfixTool.init(logger, key, clazz);
+        final JsonObject config = null == options.getJsonObject(key) ? new JsonObject() : options.getJsonObject(key);
+        final JsonObject ready = config.containsKey("config") ? config.getJsonObject("config") : new JsonObject();
+        return InfixTool.init(logger, key, ready, executor);
+    }
+
+    static <R> R init(final String key,
+                      final Function<JsonObject, R> executor,
+                      final Class<?> clazz) {
+        final Annal logger = Annal.get(clazz);
+        final JsonObject options = InfixTool.init(logger, key, clazz);
+        final JsonObject config = null == options.getJsonObject(key) ? new JsonObject() : options.getJsonObject(key);
+        return InfixTool.init(logger, key, config, executor);
     }
 
     <T> T get();

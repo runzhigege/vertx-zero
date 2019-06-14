@@ -7,7 +7,9 @@ import io.vertx.core.http.HttpMethod;
 
 public interface ActionStub {
 
-    Future<SAction> fetchAction(final String normalizedUri, final HttpMethod method);
+    Future<SAction> fetchAction(String normalizedUri, HttpMethod method);
 
-    Future<SResource> fetchResource(final String key);
+    Future<SAction> fetchAction(String normalizedUri, HttpMethod method, String sigma);
+
+    Future<SResource> fetchResource(String key);
 }

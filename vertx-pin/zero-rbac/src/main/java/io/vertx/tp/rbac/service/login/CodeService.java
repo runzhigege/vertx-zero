@@ -8,21 +8,17 @@ import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.aiki.Uson;
 import io.vertx.up.aiki.Ux;
-import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
 public class CodeService implements CodeStub {
 
     @Override
-    public Future<JsonObject> authorize(final String clientId, final String state) {
+    public Future<JsonObject> authorize(final String clientId) {
         // Generate random authorization code
         final String authCode = Sc.generateCode();
 
         // Whether existing state
         final JsonObject response = new JsonObject();
-        if (Ut.notNil(state)) {
-            response.put(AuthKey.STATE, state);
-        }
         // Enable SharedClient to store authCode
         return Sc.cacheCode(clientId, authCode)
                 .compose(item -> Uson.create(response)
@@ -40,7 +36,7 @@ public class CodeService implements CodeStub {
                 // Authorization Code Expired
                 Fn.branch(null == item, () -> Ux.thenError(_401CodeExpiredException.class, this.getClass(), clientId, code)),
                 // Wrong
-                Fn.branch(null != item && !code.equals(item), () -> Ux.thenError(_401CodeWrongException.class, this.getClass(), clientId))
+                Fn.branch(null != item && !code.equals(item), () -> Ux.thenError(_401CodeWrongException.class, this.getClass(), code))
         ));
     }
 }

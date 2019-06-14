@@ -49,7 +49,7 @@ public class JwtPhylum extends AuthorizationAuthPhylum implements JwtOstium {
                 } else {
                     /*
                      * {
-                     *     "jwt":"token value",
+                     *     "jwt": "token value",
                      *     "options":{
                      *     }
                      * }
