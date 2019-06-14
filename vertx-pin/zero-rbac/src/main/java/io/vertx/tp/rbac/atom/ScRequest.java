@@ -5,7 +5,7 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.init.ScPin;
-import io.vertx.tp.rbac.refine.Sc;
+import io.vertx.tp.rbac.profile.ScPrivilege;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.eon.ID;
 
@@ -20,6 +20,7 @@ public class ScRequest implements Serializable {
     private transient final String requestUri;
     private transient final String sigma;
     private transient final String user;
+    private transient final String sessionId;
     private transient final HttpMethod method;
 
     public ScRequest(final JsonObject data) {
@@ -46,6 +47,7 @@ public class ScRequest implements Serializable {
         final String token = data.getString("jwt");
         final JsonObject userData = Ux.Jwt.extract(token);
         this.user = userData.getString("user");
+        this.sessionId = userData.getString("session");
     }
 
     public String getNormalizedUri() {
@@ -65,6 +67,7 @@ public class ScRequest implements Serializable {
     }
 
     public Future<JsonObject> asyncProfile() {
-        return Sc.cacheAuthority(this.user);
+        return ScPrivilege.open(this.sessionId)
+                .compose(ScPrivilege::getProfileAsync);
     }
 }

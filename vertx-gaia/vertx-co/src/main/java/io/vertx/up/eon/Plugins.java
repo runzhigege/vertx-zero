@@ -25,8 +25,31 @@ public interface Plugins {
             INJECT, ERROR, SERVER,
             RESOLVER
     };
+    ConcurrentMap<Class<? extends Annotation>, String> INFIX_MAP =
+            new ConcurrentHashMap<Class<? extends Annotation>, String>() {
+                {
+                    this.put(Mongo.class, Infix.MONGO);
+                    this.put(MySql.class, Infix.MYSQL);
+                    this.put(Jooq.class, Infix.JOOQ);
+                    this.put(Rpc.class, Infix.RPC);
+                    this.put(Redis.class, Infix.REDIS);
+                }
+            };
+    Set<Class<? extends Annotation>> INJECT_ANNOTATIONS = new HashSet<Class<? extends Annotation>>() {
+        {
+            this.addAll(INFIX_MAP.keySet());
+            this.add(Inject.class);
+        }
+    };
 
-    // Default infix
+    /*
+     * Default supported in different file here.
+     * vertx-mongo.yml: MongoClient ( Native )
+     * vertx-mysql.yml: MySQLClient ( Native )
+     * vertx-jooq.yml: Jooq ( Zero Provided )
+     * vertx-rpc.yml: RpcClient ( Zero Provided )
+     * vertx-redis.yml: RedisClient ( Native )
+     */
     interface Infix {
 
         String MONGO = "mongo";
@@ -54,22 +77,4 @@ public interface Plugins {
             }
         };
     }
-
-    ConcurrentMap<Class<? extends Annotation>, String> INFIX_MAP =
-            new ConcurrentHashMap<Class<? extends Annotation>, String>() {
-                {
-                    this.put(Mongo.class, Infix.MONGO);
-                    this.put(MySql.class, Infix.MYSQL);
-                    this.put(Jooq.class, Infix.JOOQ);
-                    this.put(Rpc.class, Infix.RPC);
-                    this.put(Redis.class, Infix.REDIS);
-                }
-            };
-
-    Set<Class<? extends Annotation>> INJECT_ANNOTATIONS = new HashSet<Class<? extends Annotation>>() {
-        {
-            this.addAll(INFIX_MAP.keySet());
-            this.add(Inject.class);
-        }
-    };
 }

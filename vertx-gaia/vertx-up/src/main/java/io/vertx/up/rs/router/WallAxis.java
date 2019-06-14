@@ -5,10 +5,10 @@ import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.AuthHandler;
 import io.vertx.ext.web.handler.ChainAuthHandler;
-import io.vertx.ext.web.handler.SessionHandler;
-import io.vertx.ext.web.sstore.LocalSessionStore;
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.eon.Orders;
+import io.vertx.up.plugin.shared.SessionClient;
+import io.vertx.up.plugin.shared.SessionInfix;
 import io.vertx.up.rs.Axis;
 import io.vertx.up.rs.secure.Bolt;
 import io.vertx.up.web.ZeroAnno;
@@ -51,10 +51,16 @@ public class WallAxis implements Axis<Router> {
 
     @Override
     public void mount(final Router router) {
-        // Session Global for Authorzation
-        router.route().order(Orders.SESSION).handler(
-                SessionHandler.create(LocalSessionStore.create(this.vertx))
-        );
+        /*
+         * Session Global for Authorization, replace old mode with
+         * SessionClient, this client will get SessionStore
+         * by configuration information instead of create it directly.
+         */
+        final SessionClient client = SessionInfix.getOrCreate(this.vertx);
+        router.route().order(Orders.SESSION).handler(client.getHandler());
+        /*
+         * Wall mount for authorization
+         */
         Pool.WALL_MAP.forEach((path, cliffes) -> {
             // 1. Build Handler
             final AuthHandler handler = this.create(this.vertx, cliffes);

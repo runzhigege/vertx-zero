@@ -1,9 +1,17 @@
 package io.vertx.tp.rbac.refine;
 
 import io.vertx.core.Future;
+import io.vertx.ext.web.Session;
+import io.vertx.tp.error._409SessionConflictException;
 import io.vertx.tp.rbac.atom.ScConfig;
 import io.vertx.tp.rbac.init.ScPin;
+import io.vertx.tp.rbac.profile.ScSession;
 import io.vertx.up.aiki.Ux;
+import io.vertx.up.exception.WebException;
+import io.vertx.up.plugin.shared.SessionClient;
+import io.vertx.up.plugin.shared.SessionInfix;
+
+import java.util.Objects;
 
 /*
  * Data Pool ( Pond ) for Cache
@@ -19,6 +27,7 @@ import io.vertx.up.aiki.Ux;
 class ScCache {
 
     private static final ScConfig CONFIG = ScPin.getConfig();
+    private static final SessionClient CLIENT = SessionInfix.getClient();
 
     /*
      * Pool configured default parameters
@@ -44,22 +53,17 @@ class ScCache {
     }
 
     /*
-     * Pool configured default parameters
-     * - tokenPool
+     * Get Session by id
      */
-    static <V> Future<V> authority(final String key) {
-        final String tokenPool = CONFIG.getTokenPool();
-        return Ux.Pool.on(tokenPool).get(key);
-    }
-
-    /*
-     * Pool configured default parameters
-     * - tokenPool
-     */
-    static <V> Future<V> authority(final String key, final V value) {
-        final String tokenPool = CONFIG.getTokenPool();
-        return Ux.Pool.on(tokenPool).put(key, value)
-                .compose(item -> Ux.toFuture(item.getValue()));
+    static Future<Session> session(final String id) {
+        return CLIENT.get(id).compose(session -> {
+            if (Objects.nonNull(session) && !session.isDestroyed()) {
+                return Future.succeededFuture(session);
+            } else {
+                final WebException error = new _409SessionConflictException(ScSession.class, id);
+                return Future.failedFuture(error);
+            }
+        });
     }
 
     /*
