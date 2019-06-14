@@ -9,6 +9,7 @@ import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.aiki.Uson;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.log.Annal;
+import io.zero.epic.container.RxHod;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,6 +122,8 @@ public class ScSession {
                 .map(ProfileGroup::new)
                 .map(ProfileGroup::initAsync)
                 .forEach(futures::add);
+        final RxHod parentHod = new RxHod();
+        final RxHod childHod = new RxHod();
         return CompositeFuture.all(futures).compose(Sc::<ProfileGroup>composite).compose(profiles -> Ux.toFuture(profiles)
                 /* Group Direct Mode */
                 .compose(Align::flat)
@@ -129,18 +132,20 @@ public class ScSession {
 
                 /* Group Parent Mode */
                 .compose(Align::parent)
+                .compose(parentHod::future)
                 /** Parent Only */
-                .compose(parents -> ScDetent.parent(authority, profiles).procAsync(parents)
-                        /** Parent and Current */
-                        .compose(nil -> ScDetent.inherit(authority, profiles).procAsync(parents)))
+                .compose(parents -> ScDetent.parent(authority, profiles).procAsync(parents))
+                /** Parent and Current */
+                .compose(nil -> ScDetent.inherit(authority, profiles).procAsync(parentHod.get()))
                 .compose(nil -> Ux.toFuture(profiles))
 
                 /* Group Child Mode */
                 .compose(Align::children)
+                .compose(childHod::future)
                 /** Child Only */
-                .compose(children -> ScDetent.children(authority, profiles).procAsync(children)
-                        /** Child and Current */
-                        .compose(nil -> ScDetent.extend(authority, profiles).procAsync(children)))
+                .compose(children -> ScDetent.children(authority, profiles).procAsync(children))
+                /** Child and Current */
+                .compose(nil -> ScDetent.extend(authority, profiles).procAsync(childHod.get()))
                 .compose(nil -> Ux.toFuture(profiles))
         ).compose(nil -> Ux.toFuture(authority));
     }

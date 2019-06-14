@@ -1,6 +1,7 @@
 package io.vertx.tp.rbac.refine;
 
 import cn.vertxup.domain.tables.pojos.OAccessToken;
+import cn.vertxup.domain.tables.pojos.SResource;
 import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
@@ -62,6 +63,9 @@ public class Sc {
         return ScTool.generateCode();
     }
 
+    public static String generateProfileKey(final SResource resource) {
+        return ScTool.generateProfileKey(resource);
+    }
 
     /*
      * Jwt token process

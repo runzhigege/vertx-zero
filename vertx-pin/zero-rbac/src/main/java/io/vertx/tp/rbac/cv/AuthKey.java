@@ -40,4 +40,5 @@ public interface AuthKey {
     String F_URI_REQUEST = "requestUri";
     String F_METHOD = "method";
     String F_METADATA = "metadata";
+    String F_HEADERS = "headers";
 }
