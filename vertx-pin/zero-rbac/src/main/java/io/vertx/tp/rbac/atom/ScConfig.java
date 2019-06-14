@@ -51,6 +51,10 @@ public class ScConfig implements Serializable {
      */
     private Boolean supportSecondary = Boolean.FALSE;
     /*
+     * Enable multi application, whether search action with X-Sigma Header
+     */
+    private Boolean supportMultiApp = Boolean.TRUE;
+    /*
      * Role Pool when secondary cache enabled.
      */
     private String permissionPool;
@@ -145,6 +149,14 @@ public class ScConfig implements Serializable {
         this.orbit = orbit;
     }
 
+    public Boolean getSupportMultiApp() {
+        return this.supportMultiApp;
+    }
+
+    public void setSupportMultiApp(final Boolean supportMultiApp) {
+        this.supportMultiApp = supportMultiApp;
+    }
+
     @Override
     public String toString() {
         return "ScConfig{" +
@@ -156,6 +168,7 @@ public class ScConfig implements Serializable {
                 ", tokenPool='" + this.tokenPool + '\'' +
                 ", supportGroup=" + this.supportGroup +
                 ", supportSecondary=" + this.supportSecondary +
+                ", supportMultiApp=" + this.supportMultiApp +
                 ", permissionPool='" + this.permissionPool + '\'' +
                 ", orbit=" + this.orbit +
                 '}';

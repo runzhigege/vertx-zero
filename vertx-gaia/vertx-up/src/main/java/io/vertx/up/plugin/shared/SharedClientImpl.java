@@ -13,6 +13,7 @@ import io.vertx.up.log.Annal;
 import io.zero.epic.container.KeyPair;
 import io.zero.epic.fn.Fn;
 
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -110,8 +111,13 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
         KeyPair<K, V> result = this.put(key, value);
         LOGGER.info(Info.INFO_TIMER_PUT, key, String.valueOf(seconds));
         this.vertx.setTimer(seconds * 1000, id -> {
-            LOGGER.info(Info.INFO_TIMER_EXPIRE, key);
-            this.remove(key);
+            final V existing = this.get(key);
+            if (Objects.nonNull(existing)) {
+                LOGGER.info(Info.INFO_TIMER_EXPIRE, key);
+                this.remove(key);
+            } else {
+                LOGGER.info(Info.INFO_TIMER_REMOVED, key);
+            }
         });
         return result;
     }

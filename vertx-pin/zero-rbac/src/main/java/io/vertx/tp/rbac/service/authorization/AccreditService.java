@@ -1,15 +1,11 @@
 package io.vertx.tp.rbac.service.authorization;
 
-import cn.vertxup.domain.tables.pojos.SAction;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.error._403ActionMissingException;
 import io.vertx.tp.rbac.atom.ScRequest;
-import io.vertx.tp.rbac.cv.AuthKey;
-import io.vertx.up.exception.WebException;
+import io.zero.epic.container.RxHod;
 
 import javax.inject.Inject;
-import java.util.Objects;
 
 public class AccreditService implements AccreditStub {
 
@@ -18,26 +14,28 @@ public class AccreditService implements AccreditStub {
 
     @Override
     public Future<Boolean> authorize(final JsonObject data) {
-        final ScRequest request = new ScRequest(data.getJsonObject(AuthKey.F_METADATA));
-        return this.actionStub.fetchAction(request.getNormalizedUri(), request.getMethod())
+        final ScRequest request = new ScRequest(data);
+        /* RxHod for action / resource */
+        final RxHod actionHod = new RxHod();
+        final RxHod resourceHod = new RxHod();
+        return this.actionStub.fetchAction(request.getNormalizedUri(), request.getMethod(), request.getSigma())
+
                 /* SAction checking for ( Uri + Method ) */
-                .compose(action -> this.actionDinned(action, request))
-                .compose(action -> this.actionStub.fetchResource(action.getResourceId())
-                        /* Get resource by action */
-                        .compose(resource -> {
+                .compose(action -> AccreditFlow.inspectAction(this.getClass(), action, request))
+                .compose(actionHod::future)
+                .compose(action -> this.actionStub.fetchResource(action.getResourceId()))
 
-                            return Future.succeededFuture();
-                        })
-                );
-    }
+                /* SResource checking for ( ResourceId */
+                .compose(resource -> AccreditFlow.inspectResource(this.getClass(), resource, request, actionHod.get()))
 
-    private Future<SAction> actionDinned(final SAction action, final ScRequest request) {
-        if (Objects.isNull(action)) {
-            final String requestUri = request.getMethod() + " " + request.getNormalizedUri();
-            final WebException error = new _403ActionMissingException(this.getClass(), requestUri);
-            return Future.failedFuture(error);
-        } else {
-            return Future.succeededFuture(action);
-        }
+                /* Action Level Comparing */
+                .compose(resource -> AccreditFlow.inspectLevel(this.getClass(), resource, actionHod.get()))
+                .compose(resourceHod::future)
+
+                /* Find Profile Permission and Check Profile */
+                .compose(resource -> AccreditFlow.inspectPermission(this.getClass(), resource, request))
+
+                /* Permission / Action Comparing */
+                .compose(permissions -> AccreditFlow.inspectAuthorized(this.getClass(), actionHod.get(), permissions));
     }
 }

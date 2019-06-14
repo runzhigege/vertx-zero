@@ -3,6 +3,7 @@ package io.vertx.tp.rbac.service.login;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.web.Session;
 import io.vertx.tp.rbac.atom.ScConfig;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.init.ScPin;
@@ -25,7 +26,7 @@ public class TokenService implements TokenStub {
     private transient GroupStub groupStub;
 
     @Override
-    public Future<JsonObject> execute(final String clientId, final String code, final String state) {
+    public Future<JsonObject> execute(final String clientId, final String code, final Session session) {
         return this.codeStub.verify(clientId, code)
                 /* Fetch role keys */
                 .compose(item -> this.userStub.fetchRoleIds(item))
@@ -33,6 +34,9 @@ public class TokenService implements TokenStub {
                 /* Build Data in Token */
                 .compose(roles -> Uson.create()
                         .append("user", clientId)
+
+                        /* Session Pool will store user's critical permission data*/
+                        .append("session", session.id())
                         .append("role", roles).toFuture()
                 )
 

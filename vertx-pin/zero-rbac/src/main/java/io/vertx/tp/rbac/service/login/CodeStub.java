@@ -12,7 +12,7 @@ public interface CodeStub {
     /*
      * Get new authorization code / generate new code
      */
-    Future<JsonObject> authorize(String clientId, String state);
+    Future<JsonObject> authorize(String clientId);
 
     /*
      * Verify authorization code

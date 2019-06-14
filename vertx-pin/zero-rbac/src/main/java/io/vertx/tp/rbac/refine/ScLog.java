@@ -21,4 +21,8 @@ class ScLog {
     static void infoInit(final Annal logger, final String pattern, final Object... args) {
         info(logger, "Init", pattern, args);
     }
+
+    static void infoCredit(final Annal logger, final String pattern, final Object... args) {
+        info(logger, "Credit", pattern, args);
+    }
 }
