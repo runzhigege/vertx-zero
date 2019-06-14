@@ -41,4 +41,9 @@ public interface AuthKey {
     String F_METHOD = "method";
     String F_METADATA = "metadata";
     String F_HEADERS = "headers";
+
+    /**
+     * Could not configure authorization pool
+     */
+    String POOL_AUTHORIZATION = "POOL_AUTHORIZATION";
 }

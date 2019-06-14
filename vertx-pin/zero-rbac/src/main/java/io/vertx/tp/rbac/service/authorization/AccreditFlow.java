@@ -4,12 +4,13 @@ import cn.vertxup.domain.tables.pojos.SAction;
 import cn.vertxup.domain.tables.pojos.SResource;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error.*;
 import io.vertx.tp.rbac.atom.ScRequest;
+import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
+import io.vertx.up.log.Annal;
 
 import java.util.Objects;
 
@@ -17,6 +18,8 @@ import java.util.Objects;
  * Tool for authorization workflow
  */
 class AccreditFlow {
+
+    private static final Annal LOGGER = Annal.get(AccreditFlow.class);
 
     /*
      * 1. Whether action is existing
@@ -29,6 +32,7 @@ class AccreditFlow {
             final WebException error = new _403ActionMissingException(clazz, requestUri);
             return Future.failedFuture(error);
         } else {
+            Sc.infoCredit(LOGGER, AuthMsg.CREDIT_ACTION, request.getNormalizedUri(), request.getMethod());
             return Future.succeededFuture(action);
         }
     }
@@ -44,6 +48,7 @@ class AccreditFlow {
             final WebException error = new _404ResourceMissingException(clazz, action.getResourceId(), requestUri);
             return Future.failedFuture(error);
         } else {
+            Sc.infoCredit(LOGGER, AuthMsg.CREDIT_RESOURCE, resource.getKey());
             return Future.succeededFuture(resource);
         }
     }
@@ -60,6 +65,7 @@ class AccreditFlow {
             final WebException error = new _403ActionDinnedException(clazz, required, actual);
             return Future.failedFuture(error);
         } else {
+            Sc.infoCredit(LOGGER, AuthMsg.CREDIT_LEVEL, action.getLevel(), resource.getLevel());
             return Future.succeededFuture(resource);
         }
     }
@@ -71,14 +77,14 @@ class AccreditFlow {
             final Class<?> clazz, final SResource resource, final ScRequest request
     ) {
         final String profileKey = Sc.generateProfileKey(resource);
-        return request.asyncProfile().compose(data -> {
+        return request.asyncProfile().compose(profile -> {
             /* Profile Key */
-            final JsonObject profile = data.getJsonObject("profile");
             final JsonArray permissions = profile.getJsonArray(profileKey);
             if (Objects.isNull(permissions) || permissions.isEmpty()) {
                 final WebException error = new _403NoPermissionException(clazz, request.getUser(), profileKey);
                 return Future.failedFuture(error);
             } else {
+                Sc.infoCredit(LOGGER, AuthMsg.CREDIT_PERMISSION, profileKey);
                 return Future.succeededFuture(permissions);
             }
         });
@@ -93,6 +99,7 @@ class AccreditFlow {
         final String permissionId = action.getPermissionId();
         if (Objects.nonNull(permissionId)) {
             if (permission.contains(permissionId)) {
+                Sc.infoCredit(LOGGER, AuthMsg.CREDIT_AUTHORIZED, permissionId);
                 return Future.succeededFuture(Boolean.TRUE);
             } else {
                 final WebException error = new _403PermissionLimitException(clazz, action.getCode());

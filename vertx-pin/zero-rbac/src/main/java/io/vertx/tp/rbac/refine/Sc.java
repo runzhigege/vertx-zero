@@ -6,6 +6,7 @@ import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.web.Session;
 import io.vertx.up.log.Annal;
 
 import java.util.List;
@@ -22,6 +23,10 @@ public class Sc {
         ScLog.infoInit(logger, pattern, args);
     }
 
+    public static void infoCredit(final Annal logger, final String pattern, final Object... args) {
+        ScLog.infoCredit(logger, pattern, args);
+    }
+
     /*
      * cache information
      * 1. Code: Authorization Code Cache Pool
@@ -34,14 +39,6 @@ public class Sc {
 
     public static <V> Future<V> cacheCode(final String key, final V value) {
         return ScCache.code(key, value);
-    }
-
-    public static <V> Future<V> cacheAuthority(final String key) {
-        return ScCache.authority(key);
-    }
-
-    public static <V> Future<V> cacheAuthority(final String key, final V value) {
-        return ScCache.authority(key, value);
     }
 
     public static <V> Future<V> cachePermission(final String key) {
@@ -99,6 +96,10 @@ public class Sc {
      */
     public static <T> Future<JsonArray> relation(final String field, final String key, final Class<?> daoCls) {
         return ScFn.<T>relation(field, key, daoCls);
+    }
+
+    public static Future<Session> session(final String id) {
+        return ScCache.session(id);
     }
 
     public static <T> Future<List<T>> composite(final CompositeFuture res) {

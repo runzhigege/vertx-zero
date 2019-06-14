@@ -4,6 +4,7 @@ import cn.vertxup.domain.tables.daos.OUserDao;
 import cn.vertxup.domain.tables.pojos.OUser;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.web.Session;
 import io.vertx.tp.error._401CodeGenerationException;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.cv.AuthMsg;
@@ -29,12 +30,12 @@ public class AuthService implements AuthStub {
 
     @Override
     @SuppressWarnings("all")
-    public Future<JsonObject> authorize(final JsonObject filters, final String state) {
+    public Future<JsonObject> authorize(final JsonObject filters) {
         Sc.infoAuth(LOGGER, AuthMsg.CODE_FILTER, filters.encode());
         return Ux.Jooq.on(OUserDao.class).<OUser>fetchOneAndAsync(filters).compose(item -> Fn.match(
 
                 // Provide correct parameters, OUser record existing.
-                () -> Fn.fork(() -> this.codeStub.authorize(item.getClientId(), state)),
+                () -> Fn.fork(() -> this.codeStub.authorize(item.getClientId())),
 
                 // Could not identify OUser record, error throw.
                 Fn.branch(null == item,
@@ -44,11 +45,11 @@ public class AuthService implements AuthStub {
     }
 
     @Override
-    public Future<JsonObject> token(final JsonObject params, final String state) {
+    public Future<JsonObject> token(final JsonObject params, final Session session) {
         final String code = params.getString(AuthKey.AUTH_CODE);
         final String clientId = params.getString(AuthKey.CLIENT_ID);
         Sc.infoAuth(LOGGER, AuthMsg.CODE_VERIFY, clientId, code);
-        return this.tokenStub.execute(clientId, code, state)
+        return this.tokenStub.execute(clientId, code, session)
                 // Store token information
                 .compose(this.security::store);
     }
