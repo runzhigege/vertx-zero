@@ -67,16 +67,16 @@ public class ScSession {
          *
          **/
         return ScPrivilege.init(data).compose(reference -> {
-            final JsonObject authority = reference.getProfile();
+            final JsonObject profile = reference.getProfile();
 
             /* Initialize roles information */
-            return authority.isEmpty() ? initRoles(authority, data.getJsonArray("role"))
+            return profile.isEmpty() ? initRoles(profile, data.getJsonArray("role"))
                     /* Initialize group information */
                     .compose(processed -> initGroups(processed, data.getJsonArray("group")))
                     /* Refresh Cache */
                     .compose(reference::storeProfile)
                     /* Result Report */
-                    .compose(result -> Uson.create(data).append("profile", authority).toFuture())
+                    .compose(result -> Uson.create(data).append("profile", profile).toFuture())
                     .compose(ScSession::onReport)
                     .compose(nil -> Ux.toFuture(Boolean.TRUE)) :
                     /* Cached before, session existing */
@@ -92,7 +92,7 @@ public class ScSession {
      * 4) INTERSECT
      */
     @SuppressWarnings("all")
-    private static Future<JsonObject> initRoles(final JsonObject authority, final JsonArray roles) {
+    private static Future<JsonObject> initRoles(final JsonObject profile, final JsonArray roles) {
         Sc.infoAuth(LOGGER, "Roles : {0}", roles.encode());
         final List futures = new ArrayList<>();
         roles.stream().filter(Objects::nonNull)
@@ -104,11 +104,11 @@ public class ScSession {
                 /* Composite Result */
                 .compose(Sc::<ProfileRole>composite)
                 /* User Process */
-                .compose(ScDetent.user(authority)::procAsync);
+                .compose(ScDetent.user(profile)::procAsync);
     }
 
     @SuppressWarnings("all")
-    private static Future<JsonObject> initGroups(final JsonObject authority, final JsonArray groups) {
+    private static Future<JsonObject> initGroups(final JsonObject profile, final JsonArray groups) {
         Sc.infoAuth(LOGGER, "Groups: {0}", groups.encode());
         final List futures = new ArrayList();
         groups.stream().filter(Objects::nonNull)
@@ -121,27 +121,27 @@ public class ScSession {
         return CompositeFuture.all(futures).compose(Sc::<ProfileGroup>composite).compose(profiles -> Ux.toFuture(profiles)
                 /* Group Direct Mode */
                 .compose(Align::flat)
-                .compose(ScDetent.group(authority)::procAsync)
+                .compose(ScDetent.group(profile)::procAsync)
                 .compose(nil -> Ux.toFuture(profiles))
 
                 /* Group Parent Mode */
                 .compose(Align::parent)
                 .compose(parentHod::future)
                 /** Parent Only */
-                .compose(parents -> ScDetent.parent(authority, profiles).procAsync(parents))
+                .compose(parents -> ScDetent.parent(profile, profiles).procAsync(parents))
                 /** Parent and Current */
-                .compose(nil -> ScDetent.inherit(authority, profiles).procAsync(parentHod.get()))
+                .compose(nil -> ScDetent.inherit(profile, profiles).procAsync(parentHod.get()))
                 .compose(nil -> Ux.toFuture(profiles))
 
                 /* Group Child Mode */
                 .compose(Align::children)
                 .compose(childHod::future)
                 /** Child Only */
-                .compose(children -> ScDetent.children(authority, profiles).procAsync(children))
+                .compose(children -> ScDetent.children(profile, profiles).procAsync(children))
                 /** Child and Current */
-                .compose(nil -> ScDetent.extend(authority, profiles).procAsync(childHod.get()))
+                .compose(nil -> ScDetent.extend(profile, profiles).procAsync(childHod.get()))
                 .compose(nil -> Ux.toFuture(profiles))
-        ).compose(nil -> Ux.toFuture(authority));
+        ).compose(nil -> Ux.toFuture(profile));
     }
 
     private static Future<JsonObject> onReport(final JsonObject result) {

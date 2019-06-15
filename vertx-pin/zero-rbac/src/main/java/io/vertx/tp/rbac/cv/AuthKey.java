@@ -45,5 +45,6 @@ public interface AuthKey {
     /**
      * Could not configure authorization pool
      */
-    String POOL_AUTHORIZATION = "POOL_AUTHORIZATION";
+    String PROFILE_PERM = "PERM";
+    String PROFILE_ROLE = "ROLE";
 }

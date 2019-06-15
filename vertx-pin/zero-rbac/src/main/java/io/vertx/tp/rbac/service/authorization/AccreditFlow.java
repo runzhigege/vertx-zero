@@ -4,8 +4,10 @@ import cn.vertxup.domain.tables.pojos.SAction;
 import cn.vertxup.domain.tables.pojos.SResource;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error.*;
 import io.vertx.tp.rbac.atom.ScRequest;
+import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.exception.WebException;
@@ -79,7 +81,8 @@ class AccreditFlow {
         final String profileKey = Sc.generateProfileKey(resource);
         return request.asyncProfile().compose(profile -> {
             /* Profile Key */
-            final JsonArray permissions = profile.getJsonArray(profileKey);
+            final JsonObject profileData = profile.getJsonObject(profileKey);
+            final JsonArray permissions = profileData.getJsonArray(AuthKey.PROFILE_PERM);
             if (Objects.isNull(permissions) || permissions.isEmpty()) {
                 final WebException error = new _403NoPermissionException(clazz, request.getUser(), profileKey);
                 return Future.failedFuture(error);
