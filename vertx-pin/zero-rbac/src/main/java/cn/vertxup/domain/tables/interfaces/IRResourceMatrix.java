@@ -74,14 +74,14 @@ public interface IRResourceMatrix extends Serializable {
     public String getProjection();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.QUERY</code>. 「query」- 该资源的行查询（单用户处理）
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.CRITERIA</code>. 「criteria」- 该资源的行查询（单用户处理）
      */
-    public IRResourceMatrix setQuery(String value);
+    public IRResourceMatrix setCriteria(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.QUERY</code>. 「query」- 该资源的行查询（单用户处理）
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.CRITERIA</code>. 「criteria」- 该资源的行查询（单用户处理）
      */
-    public String getQuery();
+    public String getCriteria();
 
     /**
      * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.ROWS</code>. 「rows」- 该资源针对保存的行进行过滤
@@ -92,16 +92,6 @@ public interface IRResourceMatrix extends Serializable {
      * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.ROWS</code>. 「rows」- 该资源针对保存的行进行过滤
      */
     public String getRows();
-
-    /**
-     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.EXPIRED</code>. 「expired」- 资源过期时间（动态授权）
-     */
-    public IRResourceMatrix setExpired(LocalDateTime value);
-
-    /**
-     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.EXPIRED</code>. 「expired」- 资源过期时间（动态授权）
-     */
-    public LocalDateTime getExpired();
 
     /**
      * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
@@ -203,9 +193,8 @@ public interface IRResourceMatrix extends Serializable {
         setOwnerType(json.getString("OWNER_TYPE"));
         setResourceId(json.getString("RESOURCE_ID"));
         setProjection(json.getString("PROJECTION"));
-        setQuery(json.getString("QUERY"));
+        setCriteria(json.getString("CRITERIA"));
         setRows(json.getString("ROWS"));
-        // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED!
         setSigma(json.getString("SIGMA"));
         setLanguage(json.getString("LANGUAGE"));
         setActive(json.getBoolean("ACTIVE"));
@@ -225,9 +214,8 @@ public interface IRResourceMatrix extends Serializable {
         json.put("OWNER_TYPE",getOwnerType());
         json.put("RESOURCE_ID",getResourceId());
         json.put("PROJECTION",getProjection());
-        json.put("QUERY",getQuery());
+        json.put("CRITERIA",getCriteria());
         json.put("ROWS",getRows());
-        // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED!
         json.put("SIGMA",getSigma());
         json.put("LANGUAGE",getLanguage());
         json.put("ACTIVE",getActive());

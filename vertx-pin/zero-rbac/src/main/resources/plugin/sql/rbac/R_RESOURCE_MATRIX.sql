@@ -17,20 +17,34 @@ CREATE TABLE IF NOT EXISTS R_RESOURCE_MATRIX
      *    CARD：卡片类型，针对数据库中的属性进行过滤
      *    LIST：列表类型，针对数据库中的列进行过滤
      *    FORM：表单类型，针对数据库中的字段进行过滤
+     * 固定格式：
+     * [field1, field2, field3]
+     * -- 「后置列过滤」
      */
     `PROJECTION`  TEXT COMMENT '「projection」- 该资源的列定义（单用户处理）',
-    -- 2. 针对该资源，提供查询引擎的分支条件，和传入条件进行合并
-    `QUERY`       TEXT COMMENT '「query」- 该资源的行查询（单用户处理）',
+    /*
+     * 2. 针对该资源，提供查询引擎的分支条件，和传入条件进行合并
+     * 固定格式：
+     * {} （查询引擎语法）
+     * 当角色出现多个的时候，执行
+     * {} or {} 的模式来执行查询
+     * -- 「前置查询条件修改，只针对查询参数专用」
+     */
+    `CRITERIA`    TEXT COMMENT '「criteria」- 该资源的行查询（单用户处理）',
     /*
      * 3. 针对特殊资源，提供IDS的主键直接命中条件，用户处理复杂场景的直接Join（本来可以依靠查询引擎处理，但这里不设置）
      *    表单不存在这种类型，主要针对列表
      *    DATA：数据层面，在列表处理过程中，ROWS中存在的ID才会显示出来，不存在的不显示
      *    META：元数据层面，在处理过程中同样只读取ROWS中存在的ID信息
      *    （注）：对于界面呈现的ReadOnly模式，存在于UI的属性中，而不是出现在安全定义部分
+     * 固定格式：（合并过滤）
+     * {
+     *     "field1": ["value1", "value2"],
+     *     "field2": ["value2"]
+     * }
+     * -- 「后置行过滤」
      */
     `ROWS`        TEXT COMMENT '「rows」- 该资源针对保存的行进行过滤',
-    -- 4. 当前是否过期，过期则直接抛出异常信息（角色直接设成NULL，仅用户资源会出现该信息）
-    `EXPIRED`     DATETIME COMMENT '「expired」- 资源过期时间（动态授权）',
 
     -- 特殊字段
     `SIGMA`       VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',

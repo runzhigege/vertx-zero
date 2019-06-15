@@ -1,4 +1,4 @@
-package io.vertx.tp.rbac.authorization;
+package io.vertx.tp.rbac.accredit;
 
 import cn.vertxup.domain.tables.pojos.SAction;
 import cn.vertxup.domain.tables.pojos.SResource;

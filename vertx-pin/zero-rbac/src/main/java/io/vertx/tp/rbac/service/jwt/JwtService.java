@@ -4,7 +4,7 @@ import cn.vertxup.domain.tables.daos.OAccessTokenDao;
 import cn.vertxup.domain.tables.pojos.OAccessToken;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.rbac.profile.ScSession;
+import io.vertx.tp.rbac.authorization.ScSession;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.aiki.Ux;
 import io.vertx.zero.eon.Values;
