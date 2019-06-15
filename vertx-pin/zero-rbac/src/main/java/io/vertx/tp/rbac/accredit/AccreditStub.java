@@ -1,4 +1,4 @@
-package io.vertx.tp.rbac.service.authorization;
+package io.vertx.tp.rbac.authorization;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
