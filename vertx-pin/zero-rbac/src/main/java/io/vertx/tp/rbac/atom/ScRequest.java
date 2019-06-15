@@ -2,10 +2,11 @@ package io.vertx.tp.rbac.atom;
 
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.rbac.authorization.ScPrivilege;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.init.ScPin;
-import io.vertx.tp.rbac.profile.ScPrivilege;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.eon.ID;
 
@@ -66,8 +67,20 @@ public class ScRequest implements Serializable {
         return this.user;
     }
 
-    public Future<JsonObject> asyncProfile() {
+    private Future<JsonObject> asyncProfile() {
         return ScPrivilege.open(this.sessionId)
                 .compose(ScPrivilege::getProfileAsync);
+    }
+
+    public Future<JsonArray> asyncPermission(final String profileKey) {
+        return this.asyncProfile()
+                .compose(profile -> Ux.toFuture(profile.getJsonObject(profileKey)))
+                .compose(single -> Ux.toFuture(single.getJsonArray(AuthKey.PROFILE_PERM)));
+    }
+
+    public Future<JsonArray> asyncRole(final String profileKey) {
+        return this.asyncProfile()
+                .compose(profile -> Ux.toFuture(profile.getJsonObject(profileKey)))
+                .compose(single -> Ux.toFuture(single.getJsonArray(AuthKey.PROFILE_ROLE)));
     }
 }

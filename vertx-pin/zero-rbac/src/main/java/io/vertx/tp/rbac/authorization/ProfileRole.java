@@ -1,4 +1,4 @@
-package io.vertx.tp.rbac.profile;
+package io.vertx.tp.rbac.authorization;
 
 import cn.vertxup.domain.tables.daos.RRolePermDao;
 import cn.vertxup.domain.tables.pojos.RRolePerm;
