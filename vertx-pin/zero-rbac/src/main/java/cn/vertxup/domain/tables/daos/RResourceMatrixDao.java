@@ -79,7 +79,7 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
     /**
      * Fetch records that have <code>OWNER_TYPE IN (values)</code>
      */
-    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByOwnerType(Boolean... values) {
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByOwnerType(String... values) {
         return fetch(RResourceMatrix.R_RESOURCE_MATRIX.OWNER_TYPE, values);
     }
 
@@ -198,7 +198,7 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
     /**
      * Fetch records that have <code>OWNER_TYPE IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByOwnerTypeAsync(List<Boolean> values) {
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByOwnerTypeAsync(List<String> values) {
         return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.OWNER_TYPE,values);
     }
 
