@@ -1,4 +1,4 @@
-package io.vertx.tp.rbac.service.authorization;
+package io.vertx.tp.rbac.authorization;
 
 import cn.vertxup.domain.tables.pojos.SAction;
 import cn.vertxup.domain.tables.pojos.SResource;
