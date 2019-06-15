@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS R_RESOURCE_MATRIX
     `KEY`         VARCHAR(36) COMMENT '「key」- 限定记录ID',
     -- 用户优先模式，角色为默认（S_RESOURCE需要传入角色计算模式，多个角色处理时支持多角色的筛选字段需要保存在内
     `OWNER`       VARCHAR(36) COMMENT '「owner」- 用户 / 角色ID',
-    `OWNER_TYPE`  BIT COMMENT '「ownerType」- ROLE 角色，USER 用户',
+    `OWNER_TYPE`  VARCHAR(5) COMMENT '「ownerType」- ROLE 角色，USER 用户',
     `RESOURCE_ID` VARCHAR(36) COMMENT '「resourceId」- 关联资源ID',
 
     /*
