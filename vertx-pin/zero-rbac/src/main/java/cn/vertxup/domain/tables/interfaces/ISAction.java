@@ -84,6 +84,16 @@ public interface ISAction extends Serializable {
     public Integer getLevel();
 
     /**
+     * Setter for <code>DB_ORIGIN_X.S_ACTION.MODE</code>. 「mode」- 操作模式（决定是否触发副作用流程）, NODE | DEFINE
+     */
+    public ISAction setMode(String value);
+
+    /**
+     * Getter for <code>DB_ORIGIN_X.S_ACTION.MODE</code>. 「mode」- 操作模式（决定是否触发副作用流程）, NODE | DEFINE
+     */
+    public String getMode();
+
+    /**
      * Setter for <code>DB_ORIGIN_X.S_ACTION.URI</code>. 「uri」- 资源地址
      */
     public ISAction setUri(String value);
@@ -112,6 +122,26 @@ public interface ISAction extends Serializable {
      * Getter for <code>DB_ORIGIN_X.S_ACTION.SIGMA</code>. 「sigma」- 统一标识
      */
     public String getSigma();
+
+    /**
+     * Setter for <code>DB_ORIGIN_X.S_ACTION.EFFECT_COMPONENT</code>. 「effectComponent」- mode = DEFINE，自定义副作用流程
+     */
+    public ISAction setEffectComponent(String value);
+
+    /**
+     * Getter for <code>DB_ORIGIN_X.S_ACTION.EFFECT_COMPONENT</code>. 「effectComponent」- mode = DEFINE，自定义副作用流程
+     */
+    public String getEffectComponent();
+
+    /**
+     * Setter for <code>DB_ORIGIN_X.S_ACTION.EFFECT_CONFIG</code>. 「effectConfig」- 副作用配置信息
+     */
+    public ISAction setEffectConfig(String value);
+
+    /**
+     * Getter for <code>DB_ORIGIN_X.S_ACTION.EFFECT_CONFIG</code>. 「effectConfig」- 副作用配置信息
+     */
+    public String getEffectConfig();
 
     /**
      * Setter for <code>DB_ORIGIN_X.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
@@ -214,9 +244,12 @@ public interface ISAction extends Serializable {
         setResourceId(json.getString("RESOURCE_ID"));
         setPermissionId(json.getString("PERMISSION_ID"));
         setLevel(json.getInteger("LEVEL"));
+        setMode(json.getString("MODE"));
         setUri(json.getString("URI"));
         setMethod(json.getString("METHOD"));
         setSigma(json.getString("SIGMA"));
+        setEffectComponent(json.getString("EFFECT_COMPONENT"));
+        setEffectConfig(json.getString("EFFECT_CONFIG"));
         setLanguage(json.getString("LANGUAGE"));
         setActive(json.getBoolean("ACTIVE"));
         setMetadata(json.getString("METADATA"));
@@ -237,9 +270,12 @@ public interface ISAction extends Serializable {
         json.put("RESOURCE_ID",getResourceId());
         json.put("PERMISSION_ID",getPermissionId());
         json.put("LEVEL",getLevel());
+        json.put("MODE",getMode());
         json.put("URI",getUri());
         json.put("METHOD",getMethod());
         json.put("SIGMA",getSigma());
+        json.put("EFFECT_COMPONENT",getEffectComponent());
+        json.put("EFFECT_CONFIG",getEffectConfig());
         json.put("LANGUAGE",getLanguage());
         json.put("ACTIVE",getActive());
         json.put("METADATA",getMetadata());

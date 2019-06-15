@@ -70,10 +70,17 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
     }
 
     /**
-     * Fetch records that have <code>USER_ID IN (values)</code>
+     * Fetch records that have <code>OWNER IN (values)</code>
      */
-    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByUserId(String... values) {
-        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.USER_ID, values);
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByOwner(String... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.OWNER, values);
+    }
+
+    /**
+     * Fetch records that have <code>OWNER_TYPE IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByOwnerType(Boolean... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.OWNER_TYPE, values);
     }
 
     /**
@@ -98,10 +105,10 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
     }
 
     /**
-     * Fetch records that have <code>IDS IN (values)</code>
+     * Fetch records that have <code>ROWS IN (values)</code>
      */
-    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByIds(String... values) {
-        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.IDS, values);
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByRows(String... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.ROWS, values);
     }
 
     /**
@@ -109,6 +116,62 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
      */
     public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByExpired(LocalDateTime... values) {
         return fetch(RResourceMatrix.R_RESOURCE_MATRIX.EXPIRED, values);
+    }
+
+    /**
+     * Fetch records that have <code>SIGMA IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchBySigma(String... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.SIGMA, values);
+    }
+
+    /**
+     * Fetch records that have <code>LANGUAGE IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByLanguage(String... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.LANGUAGE, values);
+    }
+
+    /**
+     * Fetch records that have <code>ACTIVE IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByActive(Boolean... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.ACTIVE, values);
+    }
+
+    /**
+     * Fetch records that have <code>METADATA IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByMetadata(String... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.METADATA, values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_AT IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByCreatedAt(LocalDateTime... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.CREATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByCreatedBy(String... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.CREATED_BY, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByUpdatedAt(LocalDateTime... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.UPDATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByUpdatedBy(String... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.UPDATED_BY, values);
     }
 
     /**
@@ -126,10 +189,17 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
     }
 
     /**
-     * Fetch records that have <code>USER_ID IN (values)</code> asynchronously
+     * Fetch records that have <code>OWNER IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByUserIdAsync(List<String> values) {
-        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.USER_ID,values);
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByOwnerAsync(List<String> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.OWNER,values);
+    }
+
+    /**
+     * Fetch records that have <code>OWNER_TYPE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByOwnerTypeAsync(List<Boolean> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.OWNER_TYPE,values);
     }
 
     /**
@@ -154,10 +224,10 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
     }
 
     /**
-     * Fetch records that have <code>IDS IN (values)</code> asynchronously
+     * Fetch records that have <code>ROWS IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByIdsAsync(List<String> values) {
-        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.IDS,values);
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByRowsAsync(List<String> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.ROWS,values);
     }
 
     /**
@@ -165,6 +235,62 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByExpiredAsync(List<LocalDateTime> values) {
         return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.EXPIRED,values);
+    }
+
+    /**
+     * Fetch records that have <code>SIGMA IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchBySigmaAsync(List<String> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.SIGMA,values);
+    }
+
+    /**
+     * Fetch records that have <code>LANGUAGE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByLanguageAsync(List<String> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.LANGUAGE,values);
+    }
+
+    /**
+     * Fetch records that have <code>ACTIVE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByActiveAsync(List<Boolean> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.ACTIVE,values);
+    }
+
+    /**
+     * Fetch records that have <code>METADATA IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByMetadataAsync(List<String> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.METADATA,values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_AT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByCreatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.CREATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByCreatedByAsync(List<String> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.CREATED_BY,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByUpdatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.UPDATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByUpdatedByAsync(List<String> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.UPDATED_BY,values);
     }
 
     private io.vertx.core.Vertx vertx;

@@ -66,6 +66,7 @@ public class Keys {
     public static final UniqueKey<OUserRecord> KEY_O_USER_CLIENT_ID = UniqueKeys0.KEY_O_USER_CLIENT_ID;
     public static final UniqueKey<RGroupRoleRecord> KEY_R_GROUP_ROLE_PRIMARY = UniqueKeys0.KEY_R_GROUP_ROLE_PRIMARY;
     public static final UniqueKey<RResourceMatrixRecord> KEY_R_RESOURCE_MATRIX_PRIMARY = UniqueKeys0.KEY_R_RESOURCE_MATRIX_PRIMARY;
+    public static final UniqueKey<RResourceMatrixRecord> KEY_R_RESOURCE_MATRIX_OWNER = UniqueKeys0.KEY_R_RESOURCE_MATRIX_OWNER;
     public static final UniqueKey<RRolePermRecord> KEY_R_ROLE_PERM_PRIMARY = UniqueKeys0.KEY_R_ROLE_PERM_PRIMARY;
     public static final UniqueKey<RUserGroupRecord> KEY_R_USER_GROUP_PRIMARY = UniqueKeys0.KEY_R_USER_GROUP_PRIMARY;
     public static final UniqueKey<RUserRoleRecord> KEY_R_USER_ROLE_PRIMARY = UniqueKeys0.KEY_R_USER_ROLE_PRIMARY;
@@ -103,6 +104,7 @@ public class Keys {
         public static final UniqueKey<OUserRecord> KEY_O_USER_CLIENT_ID = Internal.createUniqueKey(OUser.O_USER, "KEY_O_USER_CLIENT_ID", OUser.O_USER.CLIENT_ID);
         public static final UniqueKey<RGroupRoleRecord> KEY_R_GROUP_ROLE_PRIMARY = Internal.createUniqueKey(RGroupRole.R_GROUP_ROLE, "KEY_R_GROUP_ROLE_PRIMARY", RGroupRole.R_GROUP_ROLE.GROUP_ID, RGroupRole.R_GROUP_ROLE.ROLE_ID);
         public static final UniqueKey<RResourceMatrixRecord> KEY_R_RESOURCE_MATRIX_PRIMARY = Internal.createUniqueKey(RResourceMatrix.R_RESOURCE_MATRIX, "KEY_R_RESOURCE_MATRIX_PRIMARY", RResourceMatrix.R_RESOURCE_MATRIX.KEY);
+        public static final UniqueKey<RResourceMatrixRecord> KEY_R_RESOURCE_MATRIX_OWNER = Internal.createUniqueKey(RResourceMatrix.R_RESOURCE_MATRIX, "KEY_R_RESOURCE_MATRIX_OWNER", RResourceMatrix.R_RESOURCE_MATRIX.OWNER, RResourceMatrix.R_RESOURCE_MATRIX.OWNER_TYPE, RResourceMatrix.R_RESOURCE_MATRIX.RESOURCE_ID);
         public static final UniqueKey<RRolePermRecord> KEY_R_ROLE_PERM_PRIMARY = Internal.createUniqueKey(RRolePerm.R_ROLE_PERM, "KEY_R_ROLE_PERM_PRIMARY", RRolePerm.R_ROLE_PERM.PERM_ID, RRolePerm.R_ROLE_PERM.ROLE_ID);
         public static final UniqueKey<RUserGroupRecord> KEY_R_USER_GROUP_PRIMARY = Internal.createUniqueKey(RUserGroup.R_USER_GROUP, "KEY_R_USER_GROUP_PRIMARY", RUserGroup.R_USER_GROUP.GROUP_ID, RUserGroup.R_USER_GROUP.USER_ID);
         public static final UniqueKey<RUserRoleRecord> KEY_R_USER_ROLE_PRIMARY = Internal.createUniqueKey(RUserRole.R_USER_ROLE, "KEY_R_USER_ROLE_PRIMARY", RUserRole.R_USER_ROLE.USER_ID, RUserRole.R_USER_ROLE.ROLE_ID);
