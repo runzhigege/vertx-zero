@@ -24,16 +24,15 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RResourceMatrix implements IRResourceMatrix {
 
-    private static final long serialVersionUID = 1689704762;
+    private static final long serialVersionUID = -2130206077;
 
     private String        key;
     private String        owner;
     private String        ownerType;
     private String        resourceId;
     private String        projection;
-    private String        query;
+    private String        criteria;
     private String        rows;
-    private LocalDateTime expired;
     private String        sigma;
     private String        language;
     private Boolean       active;
@@ -51,9 +50,8 @@ public class RResourceMatrix implements IRResourceMatrix {
         this.ownerType = value.ownerType;
         this.resourceId = value.resourceId;
         this.projection = value.projection;
-        this.query = value.query;
+        this.criteria = value.criteria;
         this.rows = value.rows;
-        this.expired = value.expired;
         this.sigma = value.sigma;
         this.language = value.language;
         this.active = value.active;
@@ -70,9 +68,8 @@ public class RResourceMatrix implements IRResourceMatrix {
         String        ownerType,
         String        resourceId,
         String        projection,
-        String        query,
+        String        criteria,
         String        rows,
-        LocalDateTime expired,
         String        sigma,
         String        language,
         Boolean       active,
@@ -87,9 +84,8 @@ public class RResourceMatrix implements IRResourceMatrix {
         this.ownerType = ownerType;
         this.resourceId = resourceId;
         this.projection = projection;
-        this.query = query;
+        this.criteria = criteria;
         this.rows = rows;
-        this.expired = expired;
         this.sigma = sigma;
         this.language = language;
         this.active = active;
@@ -156,13 +152,13 @@ public class RResourceMatrix implements IRResourceMatrix {
     }
 
     @Override
-    public String getQuery() {
-        return this.query;
+    public String getCriteria() {
+        return this.criteria;
     }
 
     @Override
-    public RResourceMatrix setQuery(String query) {
-        this.query = query;
+    public RResourceMatrix setCriteria(String criteria) {
+        this.criteria = criteria;
         return this;
     }
 
@@ -174,17 +170,6 @@ public class RResourceMatrix implements IRResourceMatrix {
     @Override
     public RResourceMatrix setRows(String rows) {
         this.rows = rows;
-        return this;
-    }
-
-    @Override
-    public LocalDateTime getExpired() {
-        return this.expired;
-    }
-
-    @Override
-    public RResourceMatrix setExpired(LocalDateTime expired) {
-        this.expired = expired;
         return this;
     }
 
@@ -285,9 +270,8 @@ public class RResourceMatrix implements IRResourceMatrix {
         sb.append(", ").append(ownerType);
         sb.append(", ").append(resourceId);
         sb.append(", ").append(projection);
-        sb.append(", ").append(query);
+        sb.append(", ").append(criteria);
         sb.append(", ").append(rows);
-        sb.append(", ").append(expired);
         sb.append(", ").append(sigma);
         sb.append(", ").append(language);
         sb.append(", ").append(active);
@@ -315,9 +299,8 @@ public class RResourceMatrix implements IRResourceMatrix {
         setOwnerType(from.getOwnerType());
         setResourceId(from.getResourceId());
         setProjection(from.getProjection());
-        setQuery(from.getQuery());
+        setCriteria(from.getCriteria());
         setRows(from.getRows());
-        setExpired(from.getExpired());
         setSigma(from.getSigma());
         setLanguage(from.getLanguage());
         setActive(from.getActive());

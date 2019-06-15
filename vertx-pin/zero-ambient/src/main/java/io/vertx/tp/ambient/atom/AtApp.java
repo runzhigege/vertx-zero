@@ -10,6 +10,7 @@ import io.vertx.up.aiki.UxJooq;
 import io.zero.epic.fn.Fn;
 import org.jooq.DSLContext;
 
+@SuppressWarnings("all")
 public class AtApp {
 
     private transient final XApp app;

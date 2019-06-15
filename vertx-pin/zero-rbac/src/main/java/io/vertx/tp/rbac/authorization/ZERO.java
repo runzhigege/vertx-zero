@@ -1,4 +1,4 @@
-package io.vertx.tp.rbac.profile;
+package io.vertx.tp.rbac.authorization;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

@@ -35,7 +35,7 @@ public class RResourceMatrix extends TableImpl<RResourceMatrixRecord> {
      * The reference instance of <code>DB_ORIGIN_X.R_RESOURCE_MATRIX</code>
      */
     public static final RResourceMatrix R_RESOURCE_MATRIX = new RResourceMatrix();
-    private static final long serialVersionUID = 1172106762;
+    private static final long serialVersionUID = 1676686610;
     /**
      * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.KEY</code>. 「key」- 限定记录ID
      */
@@ -57,17 +57,13 @@ public class RResourceMatrix extends TableImpl<RResourceMatrixRecord> {
      */
     public final TableField<RResourceMatrixRecord, String> PROJECTION = createField("PROJECTION", org.jooq.impl.SQLDataType.CLOB, this, "「projection」- 该资源的列定义（单用户处理）");
     /**
-     * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.QUERY</code>. 「query」- 该资源的行查询（单用户处理）
+     * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.CRITERIA</code>. 「criteria」- 该资源的行查询（单用户处理）
      */
-    public final TableField<RResourceMatrixRecord, String> QUERY = createField("QUERY", org.jooq.impl.SQLDataType.CLOB, this, "「query」- 该资源的行查询（单用户处理）");
+    public final TableField<RResourceMatrixRecord, String> CRITERIA = createField("CRITERIA", org.jooq.impl.SQLDataType.CLOB, this, "「criteria」- 该资源的行查询（单用户处理）");
     /**
      * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.ROWS</code>. 「rows」- 该资源针对保存的行进行过滤
      */
     public final TableField<RResourceMatrixRecord, String> ROWS = createField("ROWS", org.jooq.impl.SQLDataType.CLOB, this, "「rows」- 该资源针对保存的行进行过滤");
-    /**
-     * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.EXPIRED</code>. 「expired」- 资源过期时间（动态授权）
-     */
-    public final TableField<RResourceMatrixRecord, LocalDateTime> EXPIRED = createField("EXPIRED", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「expired」- 资源过期时间（动态授权）");
     /**
      * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
      */

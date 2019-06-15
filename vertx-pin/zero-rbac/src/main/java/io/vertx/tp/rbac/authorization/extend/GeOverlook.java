@@ -1,7 +1,7 @@
-package io.vertx.tp.rbac.profile.extend;
+package io.vertx.tp.rbac.authorization.extend;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.rbac.profile.*;
+import io.vertx.tp.rbac.authorization.*;
 
 import java.util.List;
 
