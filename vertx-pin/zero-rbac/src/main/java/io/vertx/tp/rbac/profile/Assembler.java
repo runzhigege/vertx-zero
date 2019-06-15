@@ -2,11 +2,13 @@ package io.vertx.tp.rbac.profile;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.rbac.cv.AuthKey;
 import io.zero.epic.Ut;
 
 import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /*
@@ -51,18 +53,43 @@ public class Assembler {
                                              final BinaryOperator<Set<String>> fnReduce) {
         return input -> {
             if (Objects.nonNull(input) && !profiles.isEmpty()) {
+                /*
+                 * For default permissions
+                 * When the profile size is 1, it means that the default permission should be
+                 * the only one role permissions, in this situation, the authorities set should
+                 * not be new HashSet<>() here, but first.getAuthorities() instead.
+                 * Refer below line:  DEFAULT AUTHORITIES
+                 */
                 final ProfileRole first = profiles.iterator().next();
-                /* Input process */
-                final Set<String> permissionIds = profiles.stream()
+                /* 1. permissions = [] */
+                /* 2. roles = [] */
+                final JsonArray roles = new JsonArray();
+                final JsonArray permissions = Ut.toJArray(profiles.stream()
                         .filter(Objects::nonNull)
+                        .map(bindRole(roles))
                         .map(ProfileRole::getAuthorities)
-                        .reduce(first.getAuthorities(), fnReduce);
-                /* JsonArray */
-                final JsonArray data = Ut.toJArray(permissionIds);
-                input.put(type.getKey(), data);
+                        /* DEFAULT AUTHORITIES */
+                        .reduce(first.getAuthorities(), fnReduce));
+
+                input.put(type.getKey(), bindResult(permissions, roles));
             } else {
-                input.put(type.getKey(), new JsonArray());
+                input.put(type.getKey(), bindResult(null, null));
             }
+        };
+    }
+
+    private static JsonObject bindResult(final JsonArray permissions,
+                                         final JsonArray roles) {
+        final JsonObject profile = new JsonObject();
+        profile.put(AuthKey.PROFILE_PERM, Objects.isNull(permissions) ? new JsonArray() : permissions);
+        profile.put(AuthKey.PROFILE_ROLE, Objects.isNull(roles) ? new JsonArray() : roles);
+        return profile;
+    }
+
+    private static Function<ProfileRole, ProfileRole> bindRole(final JsonArray roles) {
+        return profile -> {
+            roles.add(profile.getKey());
+            return profile;
         };
     }
 
@@ -71,23 +98,26 @@ public class Assembler {
                                              final boolean highPriority) {
         return input -> {
             if (Objects.nonNull(input) && !profiles.isEmpty()) {
-                /* Find */
-                final Set<String> found;
+                /* 1. permissions = [] */
+                final JsonArray permissions;
+                /* 2. roles = [] */
+                final JsonArray roles = new JsonArray();
                 if (highPriority) {
-                    found = profiles.stream()
+                    permissions = Ut.toJArray(profiles.stream()
                             .min(Comparator.comparing(ProfileRole::getPriority))
+                            .map(bindRole(roles))
                             .map(ProfileRole::getAuthorities)
-                            .orElse(new HashSet<>());
+                            .orElse(new HashSet<>()));
                 } else {
-                    found = profiles.stream()
+                    permissions = Ut.toJArray(profiles.stream()
                             .max(Comparator.comparing(ProfileRole::getPriority))
+                            .map(bindRole(roles))
                             .map(ProfileRole::getAuthorities)
-                            .orElse(new HashSet<>());
+                            .orElse(new HashSet<>()));
                 }
-                final JsonArray data = Ut.toJArray(found);
-                input.put(type.getKey(), data);
+                input.put(type.getKey(), bindResult(permissions, roles));
             } else {
-                input.put(type.getKey(), new JsonArray());
+                input.put(type.getKey(), bindResult(null, null));
             }
         };
     }

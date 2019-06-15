@@ -5,29 +5,36 @@
 DROP TABLE IF EXISTS S_ACTION;
 CREATE TABLE IF NOT EXISTS S_ACTION
 (
-    `KEY`           VARCHAR(36) COMMENT '「key」- 操作ID',
-    `NAME`          VARCHAR(255) COMMENT '「name」- 操作名称',
-    `CODE`          VARCHAR(255) COMMENT '「code」- 操作码',
-    `RESOURCE_ID`   VARCHAR(36) COMMENT '「resourceId」- 操作关联资源ID',
-    `PERMISSION_ID` VARCHAR(36) COMMENT '「permissionId」- 操作所属权限',
-    `LEVEL`         INTEGER COMMENT '「level」- 操作级别, ACL控制',
+    `KEY`              VARCHAR(36) COMMENT '「key」- 操作ID',
+    `NAME`             VARCHAR(255) COMMENT '「name」- 操作名称',
+    `CODE`             VARCHAR(255) COMMENT '「code」- 操作码',
+    `RESOURCE_ID`      VARCHAR(36) COMMENT '「resourceId」- 操作关联资源ID',
+    `PERMISSION_ID`    VARCHAR(36) COMMENT '「permissionId」- 操作所属权限',
+    `LEVEL`            INTEGER COMMENT '「level」- 操作级别, ACL控制',
+    `MODE`             VARCHAR(20) COMMENT '「mode」- 操作模式（决定是否触发副作用流程）, NODE | DEFINE',
 
     -- 操作行为捕捉
-    `URI`           VARCHAR(255) COMMENT '「uri」- 资源地址',
-    `METHOD`        VARCHAR(32) COMMENT '「method」- 资源方法',
-    `SIGMA`         VARCHAR(32) COMMENT '「sigma」- 统一标识',
+    `URI`              VARCHAR(255) COMMENT '「uri」- 资源地址',
+    `METHOD`           VARCHAR(32) COMMENT '「method」- 资源方法',
+    `SIGMA`            VARCHAR(32) COMMENT '「sigma」- 统一标识',
+
+    -- 副作用流程
+    -- 1. 自定义副作用
+    `EFFECT_COMPONENT` VARCHAR(255) COMMENT '「effectComponent」- mode = DEFINE，自定义副作用流程',
+    -- 2. 副作用配置
+    `EFFECT_CONFIG`    TEXT COMMENT '「effectConfig」- 副作用配置信息',
 
     -- 特殊字段
-    `LANGUAGE`      VARCHAR(10) COMMENT '「language」- 使用的语言',
-    `ACTIVE`        BIT COMMENT '「active」- 是否启用',
-    `METADATA`      TEXT COMMENT '「metadata」- 附加配置数据',
-    `COMMENT`       TEXT COMMENT '「action」- 操作说明',
+    `LANGUAGE`         VARCHAR(10) COMMENT '「language」- 使用的语言',
+    `ACTIVE`           BIT COMMENT '「active」- 是否启用',
+    `METADATA`         TEXT COMMENT '「metadata」- 附加配置数据',
+    `COMMENT`          TEXT COMMENT '「action」- 操作说明',
 
     -- Auditor字段
-    `CREATED_AT`    DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`    VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`    DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`    VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    `CREATED_AT`       DATETIME COMMENT '「createdAt」- 创建时间',
+    `CREATED_BY`       VARCHAR(36) COMMENT '「createdBy」- 创建人',
+    `UPDATED_AT`       DATETIME COMMENT '「updatedAt」- 更新时间',
+    `UPDATED_BY`       VARCHAR(36) COMMENT '「updatedBy」- 更新人',
     PRIMARY KEY (`KEY`)
 );
 

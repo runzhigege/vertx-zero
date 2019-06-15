@@ -35,15 +35,19 @@ public class RResourceMatrix extends TableImpl<RResourceMatrixRecord> {
      * The reference instance of <code>DB_ORIGIN_X.R_RESOURCE_MATRIX</code>
      */
     public static final RResourceMatrix R_RESOURCE_MATRIX = new RResourceMatrix();
-    private static final long serialVersionUID = 1216530983;
+    private static final long serialVersionUID = 461494051;
     /**
      * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.KEY</code>. 「key」- 限定记录ID
      */
     public final TableField<RResourceMatrixRecord, String> KEY = createField("KEY", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「key」- 限定记录ID");
     /**
-     * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
+     * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.OWNER</code>. 「owner」- 用户 / 角色ID
      */
-    public final TableField<RResourceMatrixRecord, String> USER_ID = createField("USER_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「userId」- 限定用户ID");
+    public final TableField<RResourceMatrixRecord, String> OWNER = createField("OWNER", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「owner」- 用户 / 角色ID");
+    /**
+     * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.OWNER_TYPE</code>. 「ownerType」- ROLE 角色，USER 用户
+     */
+    public final TableField<RResourceMatrixRecord, Boolean> OWNER_TYPE = createField("OWNER_TYPE", org.jooq.impl.SQLDataType.BIT, this, "「ownerType」- ROLE 角色，USER 用户");
     /**
      * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
      */
@@ -57,13 +61,45 @@ public class RResourceMatrix extends TableImpl<RResourceMatrixRecord> {
      */
     public final TableField<RResourceMatrixRecord, String> QUERY = createField("QUERY", org.jooq.impl.SQLDataType.CLOB, this, "「query」- 该资源的行查询（单用户处理）");
     /**
-     * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.IDS</code>. 「ids」- 该资源针对用户或角色的过滤处理
+     * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.ROWS</code>. 「rows」- 该资源针对保存的行进行过滤
      */
-    public final TableField<RResourceMatrixRecord, String> IDS = createField("IDS", org.jooq.impl.SQLDataType.CLOB, this, "「ids」- 该资源针对用户或角色的过滤处理");
+    public final TableField<RResourceMatrixRecord, String> ROWS = createField("ROWS", org.jooq.impl.SQLDataType.CLOB, this, "「rows」- 该资源针对保存的行进行过滤");
     /**
      * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.EXPIRED</code>. 「expired」- 资源过期时间（动态授权）
      */
     public final TableField<RResourceMatrixRecord, LocalDateTime> EXPIRED = createField("EXPIRED", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「expired」- 资源过期时间（动态授权）");
+    /**
+     * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
+     */
+    public final TableField<RResourceMatrixRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(128), this, "「sigma」- 用户组绑定的统一标识");
+    /**
+     * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.LANGUAGE</code>. 「language」- 使用的语言
+     */
+    public final TableField<RResourceMatrixRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
+    /**
+     * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.ACTIVE</code>. 「active」- 是否启用
+     */
+    public final TableField<RResourceMatrixRecord, Boolean> ACTIVE = createField("ACTIVE", org.jooq.impl.SQLDataType.BIT, this, "「active」- 是否启用");
+    /**
+     * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.METADATA</code>. 「metadata」- 附加配置数据
+     */
+    public final TableField<RResourceMatrixRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置数据");
+    /**
+     * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.CREATED_AT</code>. 「createdAt」- 创建时间
+     */
+    public final TableField<RResourceMatrixRecord, LocalDateTime> CREATED_AT = createField("CREATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「createdAt」- 创建时间");
+    /**
+     * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public final TableField<RResourceMatrixRecord, String> CREATED_BY = createField("CREATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「createdBy」- 创建人");
+    /**
+     * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public final TableField<RResourceMatrixRecord, LocalDateTime> UPDATED_AT = createField("UPDATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「updatedAt」- 更新时间");
+    /**
+     * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public final TableField<RResourceMatrixRecord, String> UPDATED_BY = createField("UPDATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「updatedBy」- 更新人");
 
     /**
      * Create a <code>DB_ORIGIN_X.R_RESOURCE_MATRIX</code> table reference
@@ -115,7 +151,7 @@ public class RResourceMatrix extends TableImpl<RResourceMatrixRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.R_RESOURCE_MATRIX_PRIMARY);
+        return Arrays.<Index>asList(Indexes.R_RESOURCE_MATRIX_OWNER, Indexes.R_RESOURCE_MATRIX_PRIMARY);
     }
 
     /**
@@ -131,7 +167,7 @@ public class RResourceMatrix extends TableImpl<RResourceMatrixRecord> {
      */
     @Override
     public List<UniqueKey<RResourceMatrixRecord>> getKeys() {
-        return Arrays.<UniqueKey<RResourceMatrixRecord>>asList(Keys.KEY_R_RESOURCE_MATRIX_PRIMARY);
+        return Arrays.<UniqueKey<RResourceMatrixRecord>>asList(Keys.KEY_R_RESOURCE_MATRIX_PRIMARY, Keys.KEY_R_RESOURCE_MATRIX_OWNER);
     }
 
     /**
