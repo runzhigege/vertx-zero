@@ -5,8 +5,9 @@
 DROP TABLE IF EXISTS R_RESOURCE_MATRIX;
 CREATE TABLE IF NOT EXISTS R_RESOURCE_MATRIX
 (
+    -- 资源拥有者：按角色/用户/组 处理
     `KEY`         VARCHAR(36) COMMENT '「key」- 限定记录ID',
-    `USER_ID`     VARCHAR(36) COMMENT '「userId」- 限定用户ID',
+    `OWNER`       VARCHAR(36) COMMENT '「owner」- 用户 / 组 / 角色ID',
     `RESOURCE_ID` VARCHAR(36) COMMENT '「resourceId」- 关联资源ID',
 
     -- 资源属性信息
