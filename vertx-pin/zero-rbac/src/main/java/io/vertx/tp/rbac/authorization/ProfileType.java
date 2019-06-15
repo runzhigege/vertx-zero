@@ -1,4 +1,4 @@
-package io.vertx.tp.rbac.profile;
+package io.vertx.tp.rbac.authorization;
 
 import io.vertx.tp.rbac.cv.em.SeekGroup;
 import io.vertx.tp.rbac.cv.em.SeekRole;

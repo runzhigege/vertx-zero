@@ -98,10 +98,10 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
     }
 
     /**
-     * Fetch records that have <code>QUERY IN (values)</code>
+     * Fetch records that have <code>CRITERIA IN (values)</code>
      */
-    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByQuery(String... values) {
-        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.QUERY, values);
+    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByCriteria(String... values) {
+        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.CRITERIA, values);
     }
 
     /**
@@ -109,13 +109,6 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
      */
     public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByRows(String... values) {
         return fetch(RResourceMatrix.R_RESOURCE_MATRIX.ROWS, values);
-    }
-
-    /**
-     * Fetch records that have <code>EXPIRED IN (values)</code>
-     */
-    public List<cn.vertxup.domain.tables.pojos.RResourceMatrix> fetchByExpired(LocalDateTime... values) {
-        return fetch(RResourceMatrix.R_RESOURCE_MATRIX.EXPIRED, values);
     }
 
     /**
@@ -217,10 +210,10 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
     }
 
     /**
-     * Fetch records that have <code>QUERY IN (values)</code> asynchronously
+     * Fetch records that have <code>CRITERIA IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByQueryAsync(List<String> values) {
-        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.QUERY,values);
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByCriteriaAsync(List<String> values) {
+        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.CRITERIA,values);
     }
 
     /**
@@ -228,13 +221,6 @@ public class RResourceMatrixDao extends DAOImpl<RResourceMatrixRecord, cn.vertxu
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByRowsAsync(List<String> values) {
         return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.ROWS,values);
-    }
-
-    /**
-     * Fetch records that have <code>EXPIRED IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.RResourceMatrix>> fetchByExpiredAsync(List<LocalDateTime> values) {
-        return fetchAsync(RResourceMatrix.R_RESOURCE_MATRIX.EXPIRED,values);
     }
 
     /**

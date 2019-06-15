@@ -1,6 +1,6 @@
 package io.vertx.tp.rbac.cv.em;
 
-public enum MatrixMode {
+public enum OwnerType {
     ROLE,       // Role Mode
     USER,       // User Mode
 }

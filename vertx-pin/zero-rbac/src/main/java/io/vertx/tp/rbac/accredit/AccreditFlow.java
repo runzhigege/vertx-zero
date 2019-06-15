@@ -1,18 +1,17 @@
-package io.vertx.tp.rbac.authorization;
+package io.vertx.tp.rbac.accredit;
 
 import cn.vertxup.domain.tables.pojos.SAction;
 import cn.vertxup.domain.tables.pojos.SResource;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error.*;
 import io.vertx.tp.rbac.atom.ScRequest;
-import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
 import io.vertx.up.log.Annal;
+import io.vertx.zero.matrix.DataBound;
 
 import java.util.Objects;
 
@@ -79,10 +78,8 @@ class AccreditFlow {
             final Class<?> clazz, final SResource resource, final ScRequest request
     ) {
         final String profileKey = Sc.generateProfileKey(resource);
-        return request.asyncProfile().compose(profile -> {
+        return request.asyncPermission(profileKey).compose(permissions -> {
             /* Profile Key */
-            final JsonObject profileData = profile.getJsonObject(profileKey);
-            final JsonArray permissions = profileData.getJsonArray(AuthKey.PROFILE_PERM);
             if (Objects.isNull(permissions) || permissions.isEmpty()) {
                 final WebException error = new _403NoPermissionException(clazz, request.getUser(), profileKey);
                 return Future.failedFuture(error);
@@ -112,5 +109,19 @@ class AccreditFlow {
             final WebException error = new _500InternalServerException(clazz, "Permission Id Null");
             return Future.failedFuture(error);
         }
+    }
+
+    /*
+     * 6. Final refresh session data
+     */
+    static Future<Void> inspectBound(final DataBound bound, final ScRequest request) {
+        /* */
+        System.out.println(bound.toJson().encodePrettily());
+        return Future.succeededFuture();
+    }
+
+    static Future<Void> inspectAuthorized(final ScRequest request) {
+
+        return Future.succeededFuture();
     }
 }
