@@ -46,12 +46,12 @@ public interface IRResourceMatrix extends Serializable {
     /**
      * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.OWNER_TYPE</code>. 「ownerType」- ROLE 角色，USER 用户
      */
-    public IRResourceMatrix setOwnerType(Boolean value);
+    public IRResourceMatrix setOwnerType(String value);
 
     /**
      * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.OWNER_TYPE</code>. 「ownerType」- ROLE 角色，USER 用户
      */
-    public Boolean getOwnerType();
+    public String getOwnerType();
 
     /**
      * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
@@ -200,7 +200,7 @@ public interface IRResourceMatrix extends Serializable {
     default IRResourceMatrix fromJson(io.vertx.core.json.JsonObject json) {
         setKey(json.getString("KEY"));
         setOwner(json.getString("OWNER"));
-        setOwnerType(json.getBoolean("OWNER_TYPE"));
+        setOwnerType(json.getString("OWNER_TYPE"));
         setResourceId(json.getString("RESOURCE_ID"));
         setProjection(json.getString("PROJECTION"));
         setQuery(json.getString("QUERY"));

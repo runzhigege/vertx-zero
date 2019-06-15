@@ -35,7 +35,7 @@ public class RResourceMatrix extends TableImpl<RResourceMatrixRecord> {
      * The reference instance of <code>DB_ORIGIN_X.R_RESOURCE_MATRIX</code>
      */
     public static final RResourceMatrix R_RESOURCE_MATRIX = new RResourceMatrix();
-    private static final long serialVersionUID = 461494051;
+    private static final long serialVersionUID = 1172106762;
     /**
      * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.KEY</code>. 「key」- 限定记录ID
      */
@@ -47,7 +47,7 @@ public class RResourceMatrix extends TableImpl<RResourceMatrixRecord> {
     /**
      * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.OWNER_TYPE</code>. 「ownerType」- ROLE 角色，USER 用户
      */
-    public final TableField<RResourceMatrixRecord, Boolean> OWNER_TYPE = createField("OWNER_TYPE", org.jooq.impl.SQLDataType.BIT, this, "「ownerType」- ROLE 角色，USER 用户");
+    public final TableField<RResourceMatrixRecord, String> OWNER_TYPE = createField("OWNER_TYPE", org.jooq.impl.SQLDataType.VARCHAR(5), this, "「ownerType」- ROLE 角色，USER 用户");
     /**
      * The column <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
      */

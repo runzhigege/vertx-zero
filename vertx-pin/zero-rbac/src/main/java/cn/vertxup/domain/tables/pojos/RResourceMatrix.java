@@ -24,11 +24,11 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RResourceMatrix implements IRResourceMatrix {
 
-    private static final long serialVersionUID = -998976170;
+    private static final long serialVersionUID = 1689704762;
 
     private String        key;
     private String        owner;
-    private Boolean       ownerType;
+    private String        ownerType;
     private String        resourceId;
     private String        projection;
     private String        query;
@@ -67,7 +67,7 @@ public class RResourceMatrix implements IRResourceMatrix {
     public RResourceMatrix(
         String        key,
         String        owner,
-        Boolean       ownerType,
+        String        ownerType,
         String        resourceId,
         String        projection,
         String        query,
@@ -123,12 +123,12 @@ public class RResourceMatrix implements IRResourceMatrix {
     }
 
     @Override
-    public Boolean getOwnerType() {
+    public String getOwnerType() {
         return this.ownerType;
     }
 
     @Override
-    public RResourceMatrix setOwnerType(Boolean ownerType) {
+    public RResourceMatrix setOwnerType(String ownerType) {
         this.ownerType = ownerType;
         return this;
     }
