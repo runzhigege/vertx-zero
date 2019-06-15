@@ -1,4 +1,4 @@
-package io.vertx.tp.rbac.service.authorization;
+package io.vertx.tp.rbac.authorization;
 
 import cn.vertxup.domain.tables.daos.SActionDao;
 import cn.vertxup.domain.tables.daos.SResourceDao;
