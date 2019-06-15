@@ -112,6 +112,13 @@ public class SActionDao extends DAOImpl<SActionRecord, cn.vertxup.domain.tables.
     }
 
     /**
+     * Fetch records that have <code>MODE IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.SAction> fetchByMode(String... values) {
+        return fetch(SAction.S_ACTION.MODE, values);
+    }
+
+    /**
      * Fetch records that have <code>URI IN (values)</code>
      */
     public List<cn.vertxup.domain.tables.pojos.SAction> fetchByUri(String... values) {
@@ -130,6 +137,20 @@ public class SActionDao extends DAOImpl<SActionRecord, cn.vertxup.domain.tables.
      */
     public List<cn.vertxup.domain.tables.pojos.SAction> fetchBySigma(String... values) {
         return fetch(SAction.S_ACTION.SIGMA, values);
+    }
+
+    /**
+     * Fetch records that have <code>EFFECT_COMPONENT IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.SAction> fetchByEffectComponent(String... values) {
+        return fetch(SAction.S_ACTION.EFFECT_COMPONENT, values);
+    }
+
+    /**
+     * Fetch records that have <code>EFFECT_CONFIG IN (values)</code>
+     */
+    public List<cn.vertxup.domain.tables.pojos.SAction> fetchByEffectConfig(String... values) {
+        return fetch(SAction.S_ACTION.EFFECT_CONFIG, values);
     }
 
     /**
@@ -245,6 +266,13 @@ public class SActionDao extends DAOImpl<SActionRecord, cn.vertxup.domain.tables.
     }
 
     /**
+     * Fetch records that have <code>MODE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SAction>> fetchByModeAsync(List<String> values) {
+        return fetchAsync(SAction.S_ACTION.MODE,values);
+    }
+
+    /**
      * Fetch records that have <code>URI IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SAction>> fetchByUriAsync(List<String> values) {
@@ -263,6 +291,20 @@ public class SActionDao extends DAOImpl<SActionRecord, cn.vertxup.domain.tables.
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SAction>> fetchBySigmaAsync(List<String> values) {
         return fetchAsync(SAction.S_ACTION.SIGMA,values);
+    }
+
+    /**
+     * Fetch records that have <code>EFFECT_COMPONENT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SAction>> fetchByEffectComponentAsync(List<String> values) {
+        return fetchAsync(SAction.S_ACTION.EFFECT_COMPONENT,values);
+    }
+
+    /**
+     * Fetch records that have <code>EFFECT_CONFIG IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SAction>> fetchByEffectConfigAsync(List<String> values) {
+        return fetchAsync(SAction.S_ACTION.EFFECT_CONFIG,values);
     }
 
     /**

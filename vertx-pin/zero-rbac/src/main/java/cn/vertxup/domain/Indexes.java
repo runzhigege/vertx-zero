@@ -47,6 +47,7 @@ public class Indexes {
     public static final Index O_USER_CLIENT_SECRET = Indexes0.O_USER_CLIENT_SECRET;
     public static final Index O_USER_PRIMARY = Indexes0.O_USER_PRIMARY;
     public static final Index R_GROUP_ROLE_PRIMARY = Indexes0.R_GROUP_ROLE_PRIMARY;
+    public static final Index R_RESOURCE_MATRIX_OWNER = Indexes0.R_RESOURCE_MATRIX_OWNER;
     public static final Index R_RESOURCE_MATRIX_PRIMARY = Indexes0.R_RESOURCE_MATRIX_PRIMARY;
     public static final Index R_ROLE_PERM_PRIMARY = Indexes0.R_ROLE_PERM_PRIMARY;
     public static final Index R_USER_GROUP_PRIMARY = Indexes0.R_USER_GROUP_PRIMARY;
@@ -79,6 +80,7 @@ public class Indexes {
         public static Index O_USER_CLIENT_SECRET = Internal.createIndex("CLIENT_SECRET", OUser.O_USER, new OrderField[] { OUser.O_USER.CLIENT_SECRET }, true);
         public static Index O_USER_PRIMARY = Internal.createIndex("PRIMARY", OUser.O_USER, new OrderField[] { OUser.O_USER.KEY }, true);
         public static Index R_GROUP_ROLE_PRIMARY = Internal.createIndex("PRIMARY", RGroupRole.R_GROUP_ROLE, new OrderField[] { RGroupRole.R_GROUP_ROLE.GROUP_ID, RGroupRole.R_GROUP_ROLE.ROLE_ID }, true);
+        public static Index R_RESOURCE_MATRIX_OWNER = Internal.createIndex("OWNER", RResourceMatrix.R_RESOURCE_MATRIX, new OrderField[] { RResourceMatrix.R_RESOURCE_MATRIX.OWNER, RResourceMatrix.R_RESOURCE_MATRIX.OWNER_TYPE, RResourceMatrix.R_RESOURCE_MATRIX.RESOURCE_ID }, true);
         public static Index R_RESOURCE_MATRIX_PRIMARY = Internal.createIndex("PRIMARY", RResourceMatrix.R_RESOURCE_MATRIX, new OrderField[] { RResourceMatrix.R_RESOURCE_MATRIX.KEY }, true);
         public static Index R_ROLE_PERM_PRIMARY = Internal.createIndex("PRIMARY", RRolePerm.R_ROLE_PERM, new OrderField[] { RRolePerm.R_ROLE_PERM.PERM_ID, RRolePerm.R_ROLE_PERM.ROLE_ID }, true);
         public static Index R_USER_GROUP_PRIMARY = Internal.createIndex("PRIMARY", RUserGroup.R_USER_GROUP, new OrderField[] { RUserGroup.R_USER_GROUP.GROUP_ID, RUserGroup.R_USER_GROUP.USER_ID }, true);

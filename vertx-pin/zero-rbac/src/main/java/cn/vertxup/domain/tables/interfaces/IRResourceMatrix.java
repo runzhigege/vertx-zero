@@ -34,14 +34,24 @@ public interface IRResourceMatrix extends Serializable {
     public String getKey();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.OWNER</code>. 「owner」- 用户 / 角色ID
      */
-    public IRResourceMatrix setUserId(String value);
+    public IRResourceMatrix setOwner(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.USER_ID</code>. 「userId」- 限定用户ID
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.OWNER</code>. 「owner」- 用户 / 角色ID
      */
-    public String getUserId();
+    public String getOwner();
+
+    /**
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.OWNER_TYPE</code>. 「ownerType」- ROLE 角色，USER 用户
+     */
+    public IRResourceMatrix setOwnerType(Boolean value);
+
+    /**
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.OWNER_TYPE</code>. 「ownerType」- ROLE 角色，USER 用户
+     */
+    public Boolean getOwnerType();
 
     /**
      * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.RESOURCE_ID</code>. 「resourceId」- 关联资源ID
@@ -74,14 +84,14 @@ public interface IRResourceMatrix extends Serializable {
     public String getQuery();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.IDS</code>. 「ids」- 该资源针对用户或角色的过滤处理
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.ROWS</code>. 「rows」- 该资源针对保存的行进行过滤
      */
-    public IRResourceMatrix setIds(String value);
+    public IRResourceMatrix setRows(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.IDS</code>. 「ids」- 该资源针对用户或角色的过滤处理
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.ROWS</code>. 「rows」- 该资源针对保存的行进行过滤
      */
-    public String getIds();
+    public String getRows();
 
     /**
      * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.EXPIRED</code>. 「expired」- 资源过期时间（动态授权）
@@ -92,6 +102,86 @@ public interface IRResourceMatrix extends Serializable {
      * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.EXPIRED</code>. 「expired」- 资源过期时间（动态授权）
      */
     public LocalDateTime getExpired();
+
+    /**
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
+     */
+    public IRResourceMatrix setSigma(String value);
+
+    /**
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
+     */
+    public String getSigma();
+
+    /**
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.LANGUAGE</code>. 「language」- 使用的语言
+     */
+    public IRResourceMatrix setLanguage(String value);
+
+    /**
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.LANGUAGE</code>. 「language」- 使用的语言
+     */
+    public String getLanguage();
+
+    /**
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.ACTIVE</code>. 「active」- 是否启用
+     */
+    public IRResourceMatrix setActive(Boolean value);
+
+    /**
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.ACTIVE</code>. 「active」- 是否启用
+     */
+    public Boolean getActive();
+
+    /**
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.METADATA</code>. 「metadata」- 附加配置数据
+     */
+    public IRResourceMatrix setMetadata(String value);
+
+    /**
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.METADATA</code>. 「metadata」- 附加配置数据
+     */
+    public String getMetadata();
+
+    /**
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.CREATED_AT</code>. 「createdAt」- 创建时间
+     */
+    public IRResourceMatrix setCreatedAt(LocalDateTime value);
+
+    /**
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.CREATED_AT</code>. 「createdAt」- 创建时间
+     */
+    public LocalDateTime getCreatedAt();
+
+    /**
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public IRResourceMatrix setCreatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public String getCreatedBy();
+
+    /**
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public IRResourceMatrix setUpdatedAt(LocalDateTime value);
+
+    /**
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public LocalDateTime getUpdatedAt();
+
+    /**
+     * Setter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public IRResourceMatrix setUpdatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ORIGIN_X.R_RESOURCE_MATRIX.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public String getUpdatedBy();
 
     // -------------------------------------------------------------------------
     // FROM and INTO
@@ -109,12 +199,21 @@ public interface IRResourceMatrix extends Serializable {
 
     default IRResourceMatrix fromJson(io.vertx.core.json.JsonObject json) {
         setKey(json.getString("KEY"));
-        setUserId(json.getString("USER_ID"));
+        setOwner(json.getString("OWNER"));
+        setOwnerType(json.getBoolean("OWNER_TYPE"));
         setResourceId(json.getString("RESOURCE_ID"));
         setProjection(json.getString("PROJECTION"));
         setQuery(json.getString("QUERY"));
-        setIds(json.getString("IDS"));
+        setRows(json.getString("ROWS"));
         // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED!
+        setSigma(json.getString("SIGMA"));
+        setLanguage(json.getString("LANGUAGE"));
+        setActive(json.getBoolean("ACTIVE"));
+        setMetadata(json.getString("METADATA"));
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        setCreatedBy(json.getString("CREATED_BY"));
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        setUpdatedBy(json.getString("UPDATED_BY"));
         return this;
     }
 
@@ -122,12 +221,21 @@ public interface IRResourceMatrix extends Serializable {
     default io.vertx.core.json.JsonObject toJson() {
         io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
         json.put("KEY",getKey());
-        json.put("USER_ID",getUserId());
+        json.put("OWNER",getOwner());
+        json.put("OWNER_TYPE",getOwnerType());
         json.put("RESOURCE_ID",getResourceId());
         json.put("PROJECTION",getProjection());
         json.put("QUERY",getQuery());
-        json.put("IDS",getIds());
+        json.put("ROWS",getRows());
         // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED!
+        json.put("SIGMA",getSigma());
+        json.put("LANGUAGE",getLanguage());
+        json.put("ACTIVE",getActive());
+        json.put("METADATA",getMetadata());
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        json.put("CREATED_BY",getCreatedBy());
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        json.put("UPDATED_BY",getUpdatedBy());
         return json;
     }
 
