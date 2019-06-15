@@ -193,6 +193,18 @@ class Types {
         }
     }
 
+    static JsonArray toJArray(final String literal) {
+        if (Ut.isNil(literal)) {
+            return new JsonArray();
+        } else {
+            try {
+                return new JsonArray(literal);
+            } catch (final DecodeException ex) {
+                return new JsonArray();
+            }
+        }
+    }
+
     static <T> JsonArray toJArray(final T entity, final int repeat) {
         final JsonArray array = new JsonArray();
         for (int idx = Values.IDX; idx < repeat; idx++) {
