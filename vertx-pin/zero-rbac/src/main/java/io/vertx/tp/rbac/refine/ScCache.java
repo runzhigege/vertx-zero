@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.ext.web.Session;
 import io.vertx.tp.error._409SessionConflictException;
 import io.vertx.tp.rbac.atom.ScConfig;
-import io.vertx.tp.rbac.authorization.ScSession;
+import io.vertx.tp.rbac.atom.ScSession;
 import io.vertx.tp.rbac.init.ScPin;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.exception.WebException;

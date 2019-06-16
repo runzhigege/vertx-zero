@@ -29,4 +29,10 @@ public interface AuthMsg {
     String CREDIT_LEVEL = "3. Accredit level ( action = {0}, resource = {1} ).";
     String CREDIT_PERMISSION = "4. Accredit profile ( profileKey = {0} ).";
     String CREDIT_AUTHORIZED = "5. Accredit authorized ( permission = {0} ).";
+    String CREDIT_BOUND = "6. Accredit bound ( bound = {0} and key = {1} )";
+    String CREDIT_SUCCESS = "7. Accredit authorized cache ( key = {0} )";
+
+    String REGION_BEFORE = "--> DataRegion Before: {0}";
+    String REGION_AFTER = "<-- DataRegion After: {0}";
+    String REGION_TYPE = "DataRegion Analyzed type: {0}, data = {1}";
 }

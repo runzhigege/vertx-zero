@@ -48,6 +48,10 @@ public abstract class HttpFilter implements Filter {
         return this.context.cookies();
     }
 
+    protected Annal getLogger() {
+        return Annal.get(this.getClass());
+    }
+
     public void init() {
         Fn.outUp(null == this.context, this.logger, FilterContextException.class, this.getClass());
     }

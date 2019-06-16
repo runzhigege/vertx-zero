@@ -3,7 +3,7 @@ package io.vertx.up.rs.router;
 import io.vertx.ext.web.Route;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.secure.Cliff;
-import io.vertx.up.rs.PlugRouter;
+import io.vertx.up.plugin.extension.PlugRouter;
 import io.vertx.up.rs.Sentry;
 import io.vertx.up.rs.dispatch.ModeSplitter;
 
@@ -17,9 +17,9 @@ interface Info {
 
     String DY_DETECT = "[ ZERO ] ( {0} ) The system is detecting dynamic routing component...";
 
-    String DY_SKIP = "[ ZERO ] ( {0} ) Skip dynamic routing because clazz is null or class {1} is not assignable from \"io.vertx.up.rs.PlugRouter\".";
+    String DY_SKIP = "[ ZERO ] ( {0} ) Skip dynamic routing because clazz is null or class {1} is not assignable from \"io.vertx.up.plugin.extension.PlugRouter\".";
 
-    String DY_FOUND = "[ ZERO ] ( {0} ) Zero system detect class {1} ( io.vertx.up.rs.PlugRouter ) with config {2}.";
+    String DY_FOUND = "[ ZERO ] ( {0} ) Zero system detect class {1} ( io.vertx.up.plugin.extension.PlugRouter ) with config {2}.";
 }
 
 interface Pool {

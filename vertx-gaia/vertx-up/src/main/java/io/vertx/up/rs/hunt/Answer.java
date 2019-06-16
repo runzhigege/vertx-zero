@@ -4,6 +4,7 @@ import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.agent.Event;
+import io.vertx.up.rs.pointer.PluginExtension;
 
 /**
  * Response process to normalize the response request.
@@ -22,6 +23,8 @@ public final class Answer {
         if (!response.closed()) {
             // 2. Media processing
             Normalizer.media(response, null);
+            /* Plugin Extension for response replying */
+            PluginExtension.Answer.reply(context, envelop);
             // 3. Response process
             Normalizer.out(response, envelop, null);
         }
@@ -41,7 +44,8 @@ public final class Answer {
             Normalizer.media(response, event);
             // 3. Store Session
             Normalizer.storeSession(context, envelop.data(), event.getAction());
-            // 4. Response process
+            /* Plugin Extension for response replying */
+            PluginExtension.Answer.reply(context, envelop);
             // 3. Response process
             Normalizer.out(response, envelop, event);
         }

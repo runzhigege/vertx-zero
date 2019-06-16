@@ -2,6 +2,8 @@ package io.vertx.tp.rbac.authorization;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.rbac.atom.ProfileGroup;
+import io.vertx.tp.rbac.atom.ProfileRole;
 import io.vertx.tp.rbac.authorization.child.GcCritical;
 import io.vertx.tp.rbac.authorization.child.GcHorizon;
 import io.vertx.tp.rbac.authorization.child.GcOverlook;
