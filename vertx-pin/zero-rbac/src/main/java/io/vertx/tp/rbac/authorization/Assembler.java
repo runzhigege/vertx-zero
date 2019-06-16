@@ -2,6 +2,9 @@ package io.vertx.tp.rbac.authorization;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.rbac.atom.ProfileGroup;
+import io.vertx.tp.rbac.atom.ProfileRole;
+import io.vertx.tp.rbac.atom.ProfileType;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.zero.epic.Ut;
 
