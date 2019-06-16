@@ -1,11 +1,10 @@
-package io.vertx.tp.rbac.authorization;
+package io.vertx.tp.rbac.atom;
 
 import cn.vertxup.domain.tables.daos.RRolePermDao;
 import cn.vertxup.domain.tables.pojos.RRolePerm;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.rbac.atom.ScConfig;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.init.ScPin;
 import io.vertx.tp.rbac.refine.Sc;
@@ -32,14 +31,14 @@ public class ProfileRole implements Serializable {
     /* GroupId Process */
     private transient ProfileGroup reference;
 
-    ProfileRole(final JsonObject data) {
+    public ProfileRole(final JsonObject data) {
         /* Role Id */
         this.roleId = data.getString(AuthKey.F_ROLE_ID);
         /* Priority */
         this.priority = data.getInteger(AuthKey.PRIORITY);
     }
 
-    public Future<ProfileRole> initAsync() {
+    Future<ProfileRole> initAsync() {
         /* Fetch permission */
         final boolean isSecondary = CONFIG.getSupportSecondary();
         return isSecondary ?
@@ -51,7 +50,8 @@ public class ProfileRole implements Serializable {
 
     public ProfileRole init() {
         /* Fetch permission ( Without Cache in Sync mode ) */
-        final JsonArray permissions = this.fetchAuthorities();
+        this.refreshAuthorities(Ux.Jooq.on(RRolePermDao.class)
+                .fetch(AuthKey.F_ROLE_ID, this.roleId));
         // Sc.infoAuth(LOGGER, "Extract Permissions: {0}", permissions.encode());
         return this;
     }
@@ -64,7 +64,7 @@ public class ProfileRole implements Serializable {
         return this.roleId;
     }
 
-    Set<String> getAuthorities() {
+    public Set<String> getAuthorities() {
         return this.authorities;
     }
 
@@ -111,11 +111,6 @@ public class ProfileRole implements Serializable {
                 .<RRolePerm>fetchAsync(AuthKey.F_ROLE_ID, this.roleId)
                 /* Refresh authorities in current profile */
                 .compose(this::refreshAuthoritiesAsync);
-    }
-
-    private JsonArray fetchAuthorities() {
-        return this.refreshAuthorities(Ux.Jooq.on(RRolePermDao.class)
-                .fetch(AuthKey.F_ROLE_ID, this.roleId));
     }
 
     /*

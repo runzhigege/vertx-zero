@@ -4,6 +4,7 @@ import cn.vertxup.domain.tables.pojos.SAction;
 import cn.vertxup.domain.tables.pojos.SResource;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error.*;
 import io.vertx.tp.rbac.atom.ScRequest;
 import io.vertx.tp.rbac.cv.AuthMsg;
@@ -78,16 +79,19 @@ class AccreditFlow {
             final Class<?> clazz, final SResource resource, final ScRequest request
     ) {
         final String profileKey = Sc.generateProfileKey(resource);
-        return request.asyncPermission(profileKey).compose(permissions -> {
-            /* Profile Key */
-            if (Objects.isNull(permissions) || permissions.isEmpty()) {
-                final WebException error = new _403NoPermissionException(clazz, request.getUser(), profileKey);
-                return Future.failedFuture(error);
-            } else {
-                Sc.infoCredit(LOGGER, AuthMsg.CREDIT_PERMISSION, profileKey);
-                return Future.succeededFuture(permissions);
-            }
-        });
+        return request.openSession()
+                /* Get Permission from Privilege */
+                .compose(privilege -> privilege.asyncPermission(profileKey))
+                .compose(permissions -> {
+                    /* Profile Key */
+                    if (Objects.isNull(permissions) || permissions.isEmpty()) {
+                        final WebException error = new _403NoPermissionException(clazz, request.getUser(), profileKey);
+                        return Future.failedFuture(error);
+                    } else {
+                        Sc.infoCredit(LOGGER, AuthMsg.CREDIT_PERMISSION, profileKey);
+                        return Future.succeededFuture(permissions);
+                    }
+                });
     }
 
     /*
@@ -112,16 +116,25 @@ class AccreditFlow {
     }
 
     /*
-     * 6. Final refresh session data
+     * 6. Final refresh session data for request
      */
-    static Future<Void> inspectBound(final DataBound bound, final ScRequest request) {
-        /* */
-        System.out.println(bound.toJson().encodePrettily());
-        return Future.succeededFuture();
+    static Future<JsonObject> inspectBound(final DataBound bound, final ScRequest request) {
+        /* Stored bound data into current session */
+        final JsonObject data = bound.toJson();
+        final String cacheKey = request.getCacheKey();
+        Sc.infoCredit(LOGGER, AuthMsg.CREDIT_BOUND, data.encode(), cacheKey);
+        return request.openSession()
+                .compose(privilege -> privilege.storedBound(cacheKey, data));
     }
 
-    static Future<Void> inspectAuthorized(final ScRequest request) {
-
-        return Future.succeededFuture();
+    /*
+     * 7. Last step for stored current uri information into cache.
+     */
+    static Future<Boolean> inspectAuthorized(final ScRequest request) {
+        /* Stored authorized */
+        final String authorizedKey = request.getAuthorizedKey();
+        Sc.infoCredit(LOGGER, AuthMsg.CREDIT_SUCCESS, authorizedKey);
+        return request.openSession()
+                .compose(privilege -> privilege.storedFinal(authorizedKey, Boolean.TRUE));
     }
 }

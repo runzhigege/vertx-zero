@@ -1,7 +1,11 @@
 package io.vertx.tp.rbac.authorization.parent;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.rbac.authorization.*;
+import io.vertx.tp.rbac.atom.ProfileRole;
+import io.vertx.tp.rbac.atom.ProfileType;
+import io.vertx.tp.rbac.authorization.Amalgam;
+import io.vertx.tp.rbac.authorization.Assembler;
+import io.vertx.tp.rbac.authorization.ScDetent;
 
 import java.util.List;
 

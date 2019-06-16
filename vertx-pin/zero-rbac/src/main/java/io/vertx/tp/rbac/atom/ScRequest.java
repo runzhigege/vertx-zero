@@ -2,9 +2,7 @@ package io.vertx.tp.rbac.atom;
 
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
-import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.rbac.authorization.ScPrivilege;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.init.ScPin;
 import io.vertx.up.aiki.Ux;
@@ -17,7 +15,6 @@ public class ScRequest implements Serializable {
     private static final ScConfig CONFIG = ScPin.getConfig();
 
     private transient final String uri;
-    private transient final String key;
     private transient final String requestUri;
     private transient final String sigma;
     private transient final String user;
@@ -26,13 +23,13 @@ public class ScRequest implements Serializable {
 
     public ScRequest(final JsonObject data) {
         final JsonObject metadata = data.getJsonObject(AuthKey.F_METADATA);
-        this.uri = metadata.getString(AuthKey.F_URI);
+        final String uri = metadata.getString(AuthKey.F_URI);
         this.requestUri = metadata.getString(AuthKey.F_URI_REQUEST);
         this.method = HttpMethod.valueOf(metadata.getString(AuthKey.F_METHOD));
         /*
          * Extension for orbit
          */
-        this.key = ScUri.getUriId(this.uri, this.requestUri);
+        this.uri = ScUri.getUriId(uri, this.requestUri);
         /*
          * Support multi applications
          */
@@ -52,7 +49,7 @@ public class ScRequest implements Serializable {
     }
 
     public String getNormalizedUri() {
-        return this.key;
+        return this.uri;
     }
 
     public HttpMethod getMethod() {
@@ -67,20 +64,15 @@ public class ScRequest implements Serializable {
         return this.user;
     }
 
-    private Future<JsonObject> asyncProfile() {
-        return ScPrivilege.open(this.sessionId)
-                .compose(ScPrivilege::getProfileAsync);
+    public String getCacheKey() {
+        return "session-" + this.method.name() + ":" + this.uri;
     }
 
-    public Future<JsonArray> asyncPermission(final String profileKey) {
-        return this.asyncProfile()
-                .compose(profile -> Ux.toFuture(profile.getJsonObject(profileKey)))
-                .compose(single -> Ux.toFuture(single.getJsonArray(AuthKey.PROFILE_PERM)));
+    public String getAuthorizedKey() {
+        return "authorized-" + this.method.name() + ":" + this.uri;
     }
 
-    public Future<JsonArray> asyncRole(final String profileKey) {
-        return this.asyncProfile()
-                .compose(profile -> Ux.toFuture(profile.getJsonObject(profileKey)))
-                .compose(single -> Ux.toFuture(single.getJsonArray(AuthKey.PROFILE_ROLE)));
+    public Future<ScPrivilege> openSession() {
+        return ScPrivilege.open(this.sessionId);
     }
 }
