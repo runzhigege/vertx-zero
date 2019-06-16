@@ -123,7 +123,8 @@ public class ZeroApiWorker extends AbstractVerticle {
                             LOGGER.info(Info.REG_FAILURE, result.cause().getMessage(), "Delete");
                         }
                     });
-                });
+                })
+                .dispose();
     }
 
     private void updateService(final ServiceDiscovery discovery,
@@ -139,7 +140,8 @@ public class ZeroApiWorker extends AbstractVerticle {
                     } else {
                         LOGGER.info(Info.REG_FAILURE, result.cause().getMessage(), "Update");
                     }
-                }));
+                }))
+                .dispose();
     }
 
     private void addService(final ServiceDiscovery discovery,
@@ -148,7 +150,8 @@ public class ZeroApiWorker extends AbstractVerticle {
         // Add service into current zero system.
         Observable.fromIterable(ids)
                 .map(services::get)
-                .subscribe(item -> this.publishSerivce(discovery, "Add").accept(item));
+                .subscribe(item -> this.publishSerivce(discovery, "Add").accept(item))
+                .dispose();
     }
 
     private Consumer<Record> publishSerivce(final ServiceDiscovery discovery, final String flag) {
@@ -176,7 +179,8 @@ public class ZeroApiWorker extends AbstractVerticle {
         // Read the services
         final Set<Record> services = new HashSet<>(ORIGIN.getRegistryData().values());
         Observable.fromIterable(services)
-                .subscribe(item -> this.publishSerivce(discovery, "Init").accept(item));
+                .subscribe(item -> this.publishSerivce(discovery, "Init").accept(item))
+                .dispose();
     }
 
     private ConcurrentMap<Flag, Set<String>> calculateServices(
@@ -184,7 +188,8 @@ public class ZeroApiWorker extends AbstractVerticle {
         // Read new services.
         final Set<String> populated = new HashSet<>();
         Observable.fromIterable(services.keySet())
-                .subscribe(populated::add);
+                .subscribe(populated::add)
+                .dispose();
 
         // Existed = Yes, Populated = No
         final Set<String> deleted = new HashSet<>(REGISTRITIONS.keySet());

@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface StreamParam {
     /**
-     * Default resolver to process the stream body
+     * Default resolver to process the stream regionInput
      */
     Class<?> resolver() default UnsetResolver.class;
 }

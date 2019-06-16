@@ -66,16 +66,16 @@ class EventDiffer implements Differ<RoutingContext> {
                 if (this.isAsync(replier)) {
                     // Mode 5: Event Bus: ( Async ) Request-Response
                     aim = Fn.pool(Pool.AIMS, Thread.currentThread().getName() + "-mode-vert.x",
-                            () -> Ut.instance(AsyncAim.class));
+                            AsyncAim::new);
                 } else {
                     // Mode 3: Event Bus: One-Way
                     aim = Fn.pool(Pool.AIMS, Thread.currentThread().getName() + "-mode-oneway",
-                            () -> Ut.instance(OneWayAim.class));
+                            OneWayAim::new);
                 }
             } else {
                 // Mode 1: Event Bus: Request-Response
                 aim = Fn.pool(Pool.AIMS, Thread.currentThread().getName() + "-mode-java",
-                        () -> Ut.instance(AsyncAim.class));
+                        AsyncAim::new);
             }
         }
         return aim;

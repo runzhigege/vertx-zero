@@ -10,6 +10,7 @@ import io.vertx.up.atom.hold.Virtual;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.announce.Rigor;
+import io.vertx.up.rs.pointer.PluginExtension;
 import io.vertx.up.rs.validation.Validator;
 import io.zero.epic.container.KeyPair;
 
@@ -36,8 +37,12 @@ class Flower {
         envelop.setUser(context.user());
         envelop.setSession(context.session());
         envelop.setContext(context.data());
-        // Extension for auditing system.
-        Auditor.audit(envelop);
+        /*
+         * Extension System of:
+         * 1) PlugAuditor
+         * 2) PlugRegion
+         */
+        PluginExtension.Flower.continuous(context, envelop);
 
         return envelop;
     }

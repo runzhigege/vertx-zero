@@ -1,7 +1,7 @@
 package io.vertx.tp.rbac.authorization.detent;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.rbac.authorization.ProfileRole;
+import io.vertx.tp.rbac.atom.ProfileRole;
 import io.vertx.tp.rbac.authorization.ScDetent;
 
 import java.util.List;

@@ -16,7 +16,7 @@ public class OneWayAim extends BaseAim implements Aim<RoutingContext> {
 
     @Override
     public Handler<RoutingContext> attack(final Event event) {
-        return Fn.getNull(() -> (context) -> Responser.exec(() -> {
+        return Fn.getNull(() -> (context) -> this.exec(() -> {
             // 1. Build Arguments
             final Object[] arguments = this.buildArgs(context, event);
 

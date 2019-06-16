@@ -4,9 +4,11 @@ import cn.vertxup.domain.tables.pojos.SResource;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.atom.ScRequest;
+import io.vertx.up.aiki.Ux;
 import io.zero.epic.container.RxHod;
 
 import javax.inject.Inject;
+import java.util.function.Supplier;
 
 public class AccreditService implements AccreditStub {
 
@@ -22,7 +24,7 @@ public class AccreditService implements AccreditStub {
         /* RxHod for action / resource */
         final RxHod actionHod = new RxHod();
         final RxHod resourceHod = new RxHod();
-        return this.actionStub.fetchAction(request.getNormalizedUri(), request.getMethod(), request.getSigma())
+        return this.authorizedWithCache(request, () -> this.actionStub.fetchAction(request.getNormalizedUri(), request.getMethod(), request.getSigma())
 
                 /* SAction checking for ( Uri + Method ) */
                 .compose(action -> AccreditFlow.inspectAction(this.getClass(), action, request))
@@ -43,7 +45,17 @@ public class AccreditService implements AccreditStub {
                 .compose(permissions -> AccreditFlow.inspectAuthorized(this.getClass(), actionHod.get(), permissions))
 
                 /* The final steps to execute matrix data here. */
-                .compose(result -> this.authorized(result, request, resourceHod.get()));
+                .compose(result -> this.authorized(result, request, resourceHod.get())));
+    }
+
+    private Future<Boolean> authorizedWithCache(final ScRequest request, final Supplier<Future<Boolean>> supplier) {
+        final String authorizedKey = request.getAuthorizedKey();
+        return request.openSession()
+                /* Get data from cache */
+                .compose(privilege -> privilege.asyncAuthorized(authorizedKey))
+                /* */
+                .compose(result -> result ? Ux.toFuture(Boolean.TRUE) :
+                        supplier.get());
     }
 
     private Future<Boolean> authorized(final Boolean result, final ScRequest request, final SResource resource) {
@@ -51,9 +63,9 @@ public class AccreditService implements AccreditStub {
             return this.matrixStub.fetchBound(request, resource)
                     /* DataBound stored */
                     .compose(bound -> AccreditFlow.inspectBound(bound, request))
-                    /* Authorized cached */
-                    .compose(nil -> AccreditFlow.inspectAuthorized(request))
-                    .compose(nil -> Future.succeededFuture(Boolean.TRUE));
+
+                    /* Authorized cached and get result */
+                    .compose(nil -> AccreditFlow.inspectAuthorized(request));
         } else {
             return Future.succeededFuture(Boolean.FALSE);
         }

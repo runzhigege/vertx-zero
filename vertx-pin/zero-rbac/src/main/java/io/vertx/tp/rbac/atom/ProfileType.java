@@ -1,4 +1,4 @@
-package io.vertx.tp.rbac.authorization;
+package io.vertx.tp.rbac.atom;
 
 import io.vertx.tp.rbac.cv.em.SeekGroup;
 import io.vertx.tp.rbac.cv.em.SeekRole;

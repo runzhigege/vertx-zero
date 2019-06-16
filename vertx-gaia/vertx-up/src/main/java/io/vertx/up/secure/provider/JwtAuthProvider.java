@@ -60,6 +60,7 @@ public class JwtAuthProvider implements JwtAuth {
 
     @Override
     public void authenticate(final JsonObject authInfo, final Handler<AsyncResult<User>> handler) {
+        LOGGER.info("[ ZERO ] Auth Information: {0}", authInfo.encode());
         final String token = authInfo.getString("jwt");
         /*
          * Extract token from sessionTokens here

@@ -15,7 +15,7 @@ public class AsyncAim extends BaseAim implements Aim<RoutingContext> {
 
     @Override
     public Handler<RoutingContext> attack(final Event event) {
-        return Fn.getNull(() -> (context) -> Responser.exec(() -> {
+        return Fn.getNull(() -> (context) -> this.exec(() -> {
             // 1. Build Envelop
             final Envelop request = this.invoke(context, event);
             // 2. Build event bus

@@ -1,4 +1,4 @@
-package io.vertx.tp.rbac.authorization;
+package io.vertx.tp.rbac.atom;
 
 import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
@@ -24,7 +24,7 @@ public class ProfileGroup implements Serializable {
     private transient final List<ProfileRole> roles = new ArrayList<>();
     private transient String reference;
 
-    ProfileGroup(final JsonObject data) {
+    public ProfileGroup(final JsonObject data) {
         /* Group Id */
         this.groupId = data.getString(AuthKey.F_GROUP_ID);
         /* Priority */
@@ -34,7 +34,7 @@ public class ProfileGroup implements Serializable {
                 ? new JsonArray() : data.getJsonArray("role");
     }
 
-    public Future<ProfileGroup> initAsync() {
+    Future<ProfileGroup> initAsync() {
         /* No determine */
         return this.fetchProfilesAsync().compose(profiles -> {
             /* Clear and add */

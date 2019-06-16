@@ -1,10 +1,12 @@
-package io.vertx.tp.rbac.authorization;
+package io.vertx.tp.rbac.atom;
 
 
 import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.rbac.authorization.Align;
+import io.vertx.tp.rbac.authorization.ScDetent;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.aiki.Uson;
 import io.vertx.up.aiki.Ux;
@@ -67,6 +69,9 @@ public class ScSession {
          *
          **/
         return ScPrivilege.init(data).compose(reference -> {
+            /*
+             * ScSession get Privilege
+             */
             final JsonObject profile = reference.getProfile();
 
             /* Initialize roles information */
