@@ -42,13 +42,13 @@ public class ZeroHttpAgent extends AbstractVerticle {
     public void start() {
         /* 1.Call router hub to mount commont **/
         final Axis<Router> routerAxiser = Fn.poolThread(Pool.ROUTERS,
-                () -> Ut.instance(RouterAxis.class));
+                RouterAxis::new);
 
         /* 2.Call route hub to mount defined **/
         final Axis<Router> axiser = Fn.poolThread(Pool.EVENTS,
-                () -> Ut.instance(EventAxis.class));
+                EventAxis::new);
         final Axis<Router> dynamic = Fn.poolThread(Pool.DYNAMICS,
-                () -> Ut.instance(DynamicAxis.class));
+                DynamicAxis::new);
 
         /* 3.Call route hub to mount walls **/
         final Axis<Router> wallAxiser = Fn.poolThread(Pool.WALLS,
@@ -56,7 +56,7 @@ public class ZeroHttpAgent extends AbstractVerticle {
 
         /* 4.Call route hub to mount filters **/
         final Axis<Router> filterAxiser = Fn.poolThread(Pool.FILTERS,
-                () -> Ut.instance(FilterAxis.class));
+                FilterAxis::new);
 
         /* 5.Get the default HttpServer Options **/
         ZeroAtomic.HTTP_OPTS.forEach((port, option) -> {
