@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface BodyParam {
     /**
-     * Default resolver to process the body
+     * Default resolver to process the regionInput
      */
     Class<?> resolver() default JsonResolver.class;
 }

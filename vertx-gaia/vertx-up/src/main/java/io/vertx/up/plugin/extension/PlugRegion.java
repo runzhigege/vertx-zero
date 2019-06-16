@@ -1,5 +1,6 @@
 package io.vertx.up.plugin.extension;
 
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.Envelop;
 
@@ -13,6 +14,11 @@ import io.vertx.up.atom.Envelop;
  * This plugin exist in agent only and could not be used in worker, standard
  */
 public interface PlugRegion {
+    /*
+     * DataRegion bind for plug
+     */
+    PlugRegion bind(JsonObject config);
+
     /*
      * Request processing
      */

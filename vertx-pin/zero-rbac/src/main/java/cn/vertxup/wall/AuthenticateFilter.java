@@ -19,6 +19,8 @@ public class AuthenticateFilter extends HttpFilter {
         final String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (Ut.notNil(token) && token.contains(" ")) {
             final String tokenString = token.substring(token.lastIndexOf(' '), token.length());
+            /* Put Data into session instead of context */
+            this.getLogger().info("[ ZERO ] Parse token string: {0}", tokenString);
             this.put("token", tokenString);
         }
     }

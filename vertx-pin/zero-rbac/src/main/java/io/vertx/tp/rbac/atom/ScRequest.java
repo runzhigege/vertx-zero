@@ -21,6 +21,20 @@ public class ScRequest implements Serializable {
     private transient final String sessionId;
     private transient final HttpMethod method;
 
+    /*
+     * {
+     *     "metadata" : {
+     *         "uri" : "xxx",
+     *         "requestUri" : "xxx",
+     *         "method" : "GET"
+     *     },
+     *     "jwt" : "xxxxx",
+     *     "headers" : {
+     *         "X-Sigma" : "xxx"
+     *     },
+     *     "options" : { }
+     * }
+     */
     public ScRequest(final JsonObject data) {
         final JsonObject metadata = data.getJsonObject(AuthKey.F_METADATA);
         final String uri = metadata.getString(AuthKey.F_URI);
