@@ -2,13 +2,15 @@ package cn.vertxup.plugin;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
+import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.Envelop;
-import io.vertx.up.plugin.auditor.ZeroAuditor;
+import io.vertx.up.plugin.extension.PlugAuditor;
 
-public class AuditorPin implements ZeroAuditor {
+public class AuditorPin implements PlugAuditor {
 
     @Override
-    public void audit(final Envelop envelop) {
+    public void audit(final RoutingContext context,
+                      final Envelop envelop) {
         /* Get User */
         final User user = envelop.user();
         if (null != user) {
