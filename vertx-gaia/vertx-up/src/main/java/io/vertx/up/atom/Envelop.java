@@ -333,6 +333,12 @@ public class Envelop implements Serializable {
         return this.key;
     }
 
+    // ------------------ Only Correct in PlugResion --------------
+
+    public JsonObject regionInput() {
+        return this.getData(null);
+    }
+
     /**
      * Read user's identifier
      */

@@ -17,6 +17,7 @@ import io.vertx.up.media.Analyzer;
 import io.vertx.up.media.MediaAnalyzer;
 import io.vertx.up.rs.validation.Validator;
 import io.zero.epic.Ut;
+import io.zero.epic.fn.Actuator;
 import io.zero.epic.fn.Fn;
 
 import java.lang.annotation.Annotation;
@@ -125,6 +126,17 @@ public abstract class BaseAim {
         } catch (final Exception ex) {
             // DEBUG:
             ex.printStackTrace();
+        }
+    }
+
+    protected void exec(final Actuator consumer,
+                        final RoutingContext context,
+                        final Event event) {
+        try {
+            consumer.execute();
+        } catch (final WebException ex) {
+            final Envelop envelop = Envelop.failure(ex);
+            Answer.reply(context, envelop, event);
         }
     }
 }
