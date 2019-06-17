@@ -3,6 +3,8 @@ package io.vertx.up.rs.pointer;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.Envelop;
 
+import java.util.Set;
+
 /*
  * Plugin Instance Pool for different usage.
  */
@@ -30,6 +32,16 @@ public interface PluginExtension {
 
             /* DataRegion before */
             PluginRegion.before(context, envelop);
+        }
+    }
+
+    /*
+     * ZeroRegistry for etcd
+     */
+    interface ZeroRegistry {
+        static void registryRoute(final Set<String> routes) {
+            /* Etcd Registry */
+            PluginRegistry.registry(routes);
         }
     }
 }

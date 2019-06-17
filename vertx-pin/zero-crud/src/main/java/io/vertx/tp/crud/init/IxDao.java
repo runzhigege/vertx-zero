@@ -75,6 +75,7 @@ class IxDao {
          * Specification of actor
          */
         definition.add("/api/" + key);
+        definition.add("/api/" + key + "/:key");    // Fix issue for micro service ci missing
         definition.add("/api/" + key + "/search");
         definition.add("/api/" + key + "/missing");
         definition.add("/api/" + key + "/existing");

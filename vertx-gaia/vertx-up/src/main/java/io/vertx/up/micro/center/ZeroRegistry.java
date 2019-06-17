@@ -9,15 +9,13 @@ import io.vertx.tp.etcd.center.EtcdData;
 import io.vertx.up.eon.em.Etat;
 import io.vertx.up.eon.em.EtcdPath;
 import io.vertx.up.log.Annal;
+import io.vertx.up.rs.pointer.PluginExtension;
 import io.vertx.zero.eon.Values;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
 import java.text.MessageFormat;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
@@ -37,6 +35,15 @@ public class ZeroRegistry {
     private static final String PATH_CATALOG = "/zero/{0}/{1}/services";
 
     private static final String ROUTE_TREE = "/zero/{0}/{1}/routes/{2}";
+    /*
+     * The default path that should not be registry to etcd.
+     */
+    private static final Set<String> DEFAULTS = new HashSet<String>() {
+        {
+            this.add("/");
+            this.add("/api/");
+        }
+    };
 
     private static final ConcurrentMap<String, ZeroRegistry>
             REGISTRY_MAP = new ConcurrentHashMap<>();
@@ -150,6 +157,9 @@ public class ZeroRegistry {
 
     public void registryRoute(final String name,
                               final HttpServerOptions options, final Set<String> routes) {
+        /*
+         * Console information for report micro service.
+         */
         final String path = MessageFormat.format(ROUTE_TREE, this.etcd.getApplication(),
                 EtcdPath.ENDPOINT.toString().toLowerCase(),
                 MessageFormat.format("{0}:{1}:{2}", name,
@@ -158,16 +168,28 @@ public class ZeroRegistry {
         final String endpoint = MessageFormat.format("http://{0}:{1}",
                 host,
                 String.valueOf(options.getPort()));
+        /*
+         * Sort naturally
+         */
+        final Set<String> processed = new TreeSet<>();
+        routes.stream().filter(route -> !DEFAULTS.contains(route))
+                .forEach(processed::add);
+        /*
+         * Scan configuration file and capture plug-in data
+         */
+        PluginExtension.ZeroRegistry.registryRoute(processed);
+
         // Screen Information
         final StringBuilder builder = new StringBuilder();
-        for (final String route : routes) {
+        for (final String route : processed) {
             builder.append("\n\t[ Up Micro ] \t").append(route);
         }
         this.logger.info(Info.ETCD_ROUTE, this.etcd.getApplication(),
                 path, name, endpoint, builder.toString());
+
         // Build Data
         final JsonArray routeData = new JsonArray();
-        Observable.fromIterable(routes)
+        Observable.fromIterable(processed)
                 .subscribe(routeData::add).dispose();
         this.etcd.write(path, routeData, Values.ZERO);
     }

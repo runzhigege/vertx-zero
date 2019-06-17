@@ -1,4 +1,4 @@
-package io.vertx.tp.ke;
+package io.vertx.tp.ke.element;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
@@ -11,9 +11,9 @@ import io.vertx.up.aiki.UxJooq;
  * 2. Save my columns
  * 3. Read my columns
  */
-public interface VerticalStub {
+public interface ColumnStub {
 
-    VerticalStub on(UxJooq jooq);
+    ColumnStub on(UxJooq jooq);
 
     /*
      * Read my columns
