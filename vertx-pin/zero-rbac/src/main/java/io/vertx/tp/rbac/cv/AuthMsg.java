@@ -35,4 +35,6 @@ public interface AuthMsg {
     String REGION_BEFORE = "--> DataRegion Before: {0}";
     String REGION_AFTER = "<-- DataRegion After: {0}";
     String REGION_TYPE = "DataRegion Analyzed type: {0}, data = {1}";
+    String REGION_ROWS = "DataRegion Rows -> {0}";
+    String REGION_PROJECTION = "DataRegion Projection -> {0}";
 }
