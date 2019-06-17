@@ -25,10 +25,10 @@ final class Instance {
     /**
      * Create new instance with reflection
      *
-     * @param clazz
-     * @param params
-     * @param <T>
-     * @return
+     * @param clazz  the instance type that you want to create
+     * @param params constructor parameters of this type
+     * @param <T>    Returned instance type
+     * @return return new created instance
      */
 
     static <T> T instance(final Class<?> clazz,
@@ -76,8 +76,7 @@ final class Instance {
      */
     static Class<?> clazz(final String name) {
         return Fn.pool(Storage.CLASSES, name,
-                () -> Fn.getJvm(() -> Thread
-                        .currentThread()
+                () -> Fn.getJvm(() -> Thread.currentThread()
                         .getContextClassLoader()
                         .loadClass(name), name));
     }

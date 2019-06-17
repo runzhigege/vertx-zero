@@ -3,12 +3,12 @@ package io.vertx.tp.crud.service;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.ke.AbstractVertical;
+import io.vertx.tp.ke.element.AbstractColumn;
 
 /*
  * Default Implementation
  */
-public class ColService extends AbstractVertical {
+public class ColService extends AbstractColumn {
     @Override
     public Future<JsonArray> fetchMy(final JsonObject filters) {
         return null;

@@ -17,6 +17,7 @@
         <module>zero-rbac</module>
         <module>zero-ke</module>
         <module>zero-ambient</module>
+        <module>zero-lbs</module>
     </modules>
     <dependencies>
         <dependency>
