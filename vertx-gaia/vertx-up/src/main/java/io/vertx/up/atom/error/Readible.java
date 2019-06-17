@@ -1,7 +1,6 @@
-package io.vertx.up.kidd;
+package io.vertx.up.atom.error;
 
 import io.vertx.up.exception.WebException;
-import io.vertx.up.kidd.outcome.CodeReadible;
 import io.zero.epic.Ut;
 
 /**

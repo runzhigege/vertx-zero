@@ -13,8 +13,8 @@ public class UxArrayTc extends StoreBase {
 
     @Test
     public void testArray() {
-        final JsonArray source = this.getArray("source.json");
-        final JsonArray target = this.getArray("target.json");
+        final JsonArray source = this.ioJArray("source.json");
+        final JsonArray target = this.ioJArray("target.json");
         final JsonArray result =
                 Uarr.create(source).zip(target, "key", "roomId").to();
         for (int idx = 0; idx < result.size(); idx++) {
@@ -25,7 +25,7 @@ public class UxArrayTc extends StoreBase {
 
     @Test
     public void testGrouped() {
-        final JsonArray source = this.getArray("source.json");
+        final JsonArray source = this.ioJArray("source.json");
         final JsonObject data = Ux.toGroup(source, "floorId");
         System.out.println(data);
     }

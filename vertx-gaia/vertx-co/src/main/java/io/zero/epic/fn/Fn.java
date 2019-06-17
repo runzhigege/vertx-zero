@@ -3,6 +3,7 @@ package io.zero.epic.fn;
 import io.vertx.core.Future;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.log.Annal;
+import io.vertx.zero.exception.UpException;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.ZeroRunException;
 import io.zero.epic.fn.wait.Case;
@@ -121,6 +122,24 @@ public class Fn {
         }
     }
 
+    public static void out(final boolean condition,
+                           final Class<?> clazz,
+                           final Object... args) {
+        if (condition) {
+            Announce.out(clazz, args);
+        }
+    }
+
+    public static void outUp(
+            final boolean condition,
+            final Class<? extends UpException> upClass,
+            final Object... args
+    ) {
+        if (condition) {
+            Announce.outUp(upClass, args);
+        }
+    }
+
     /**
      * WebException out
      *
@@ -140,9 +159,6 @@ public class Fn {
         }
     }
 
-    /*
-     * WebException out
-     */
     public static void outWeb(
             final boolean condition,
             final Class<? extends WebException> webClass,

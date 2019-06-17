@@ -38,7 +38,7 @@ public class JooqCondTc extends JooqBase {
 
     @Test
     public void testParse() {
-        final JsonObject filters = this.getJson("double.json");
+        final JsonObject filters = this.ioJObject("double.json");
         UxJooq.transform(filters, null);
         UxJooq.transform(filters, null);
     }

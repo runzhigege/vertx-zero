@@ -15,7 +15,7 @@ public class D10051Tc extends EpicBase {
 
     @Test
     public void testToJarray() {
-        final JsonArray data = this.getArray("d10051.json");
+        final JsonArray data = this.ioJArray("d10051.json");
         final List<D10051Obj> obj = Ut.deserialize(data, new TypeReference<List<D10051Obj>>() {
         });
         // Convert
@@ -26,7 +26,7 @@ public class D10051Tc extends EpicBase {
 
     @Test
     public void testToUnique() {
-        final JsonArray data = this.getArray("d10051.json");
+        final JsonArray data = this.ioJArray("d10051.json");
         final List<D10051Obj> obj = Ut.deserialize(data, new TypeReference<List<D10051Obj>>() {
         });
         // Convert
