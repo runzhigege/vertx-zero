@@ -9,6 +9,6 @@ public class StreamTe extends StoreBase {
 
     @Test(expected = EmptyStreamException.class)
     public void testRead(final TestContext context) {
-        context.assertNotNull(Stream.read(this.getFile("ini.txt")));
+        context.assertNotNull(Stream.read(this.ioFile("ini.txt")));
     }
 }

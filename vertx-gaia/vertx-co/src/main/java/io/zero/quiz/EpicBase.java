@@ -6,20 +6,22 @@ import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
 
 public class EpicBase {
-
-    protected String getFile(final String filename) {
+    /*
+     * Get file from the same package here.
+     */
+    protected String ioFile(final String filename) {
         final Class<?> clazz = this.getClass();
         final String file = "test/" + clazz.getPackage().getName() + "/" + filename;
         this.getLogger().info("[ ZERO Test ] Test input up.god.file: {0}", file);
         return file;
     }
 
-    protected JsonObject getJson(final String filename) {
-        return Ut.ioJObject(this.getFile(filename));
+    protected JsonObject ioJObject(final String filename) {
+        return Ut.ioJObject(this.ioFile(filename));
     }
 
-    protected JsonArray getArray(final String filename) {
-        return Ut.ioJArray(this.getFile(filename));
+    protected JsonArray ioJArray(final String filename) {
+        return Ut.ioJArray(this.ioFile(filename));
     }
 
     protected Annal getLogger() {

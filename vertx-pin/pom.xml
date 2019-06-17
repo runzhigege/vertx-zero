@@ -18,6 +18,8 @@
         <module>zero-ke</module>
         <module>zero-ambient</module>
         <module>zero-lbs</module>
+        <module>zero-ui</module>
+        <module>zero-quiz</module>
     </modules>
     <dependencies>
         <dependency>

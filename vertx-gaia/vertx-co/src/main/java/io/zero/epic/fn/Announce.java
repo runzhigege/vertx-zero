@@ -2,9 +2,12 @@ package io.zero.epic.fn;
 
 import io.vertx.up.exception.WebException;
 import io.vertx.up.log.Annal;
+import io.vertx.zero.exception.UpException;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.ZeroRunException;
 import io.zero.epic.Ut;
+
+import java.util.function.Supplier;
 
 /**
  * Announce means tell every one of Zero system that there occurs error, the error contains
@@ -66,16 +69,50 @@ class Announce {
         }
     }
 
+    /*
+     * New Structure to avoid Annal logger created.
+     * Uniform method for out exception
+     */
+    static void out(final Class<?> errorCls, final Object... args) {
+        if (UpException.class == errorCls.getSuperclass()) {
+            final UpException error = Ut.instance(errorCls, args);
+            if (null != error) {
+                logError(error::getTarget, error::getMessage);
+                throw error;
+            }
+        } else if (WebException.class == errorCls.getSuperclass()) {
+            final WebException error = Ut.instance(errorCls, args);
+            if (null != error) {
+                logError(error::getTarget, error::getMessage);
+                throw error;
+            }
+        }
+    }
+
+    static void outUp(final Class<? extends UpException> upClass,
+                      final Object... args) {
+        final UpException error = Ut.instance(upClass, args);
+        if (null != error) {
+            logError(error::getTarget, error::getMessage);
+            throw error;
+        }
+    }
+
     static void outWeb(final Class<? extends WebException> webClass,
                        final Object... args) {
         final WebException error = Ut.instance(webClass, args);
         if (null != error) {
-            final Class<?> target = error.getTarget();
-            if (null != target) {
-                final Annal logger = Annal.get(target);
-                logger.warn(error.getMessage());
-            }
+            logError(error::getTarget, error::getMessage);
             throw error;
+        }
+    }
+
+    private static void logError(final Supplier<Class<?>> supplier,
+                                 final Supplier<String> message) {
+        final Class<?> target = supplier.get();
+        if (null != target) {
+            final Annal logger = Annal.get(target);
+            logger.warn(message.get());
         }
     }
 

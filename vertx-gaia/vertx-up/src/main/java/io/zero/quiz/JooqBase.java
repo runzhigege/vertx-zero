@@ -48,7 +48,7 @@ public abstract class JooqBase extends ZeroBase {
     }
 
     public Condition condAnd(final String filename) {
-        final JsonObject filters = this.getJson(filename);
+        final JsonObject filters = this.ioJObject(filename);
         return UxJooq.transform(filters, Operator.AND);
     }
 
@@ -87,7 +87,7 @@ public abstract class JooqBase extends ZeroBase {
             final String pojo,
             final String... files) {
         final List<JsonObject> filters = new ArrayList<>();
-        Arrays.stream(files).forEach(file -> filters.add(this.getJson(file)));
+        Arrays.stream(files).forEach(file -> filters.add(this.ioJObject(file)));
         filters.forEach(filter -> {
             UxJooq jooq = Ux.Jooq.on(clazz);
             if (null != pojo) {
