@@ -10,7 +10,7 @@ public class EnrolJsonTc extends EpicBase {
 
     public void testWrite() {
         final Enrol<JsonObject> enrol = Ut.singleton(JObjectEnrol.class);
-        enrol.write("/zero/ipc/192.168.0.100/8080/", this.getJson("Store.json"));
+        enrol.write("/zero/ipc/192.168.0.100/8080/", this.ioJObject("Store.json"));
     }
 
     public void testRead() {

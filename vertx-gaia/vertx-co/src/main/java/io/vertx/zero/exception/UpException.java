@@ -8,10 +8,12 @@ import io.vertx.zero.log.Errors;
  */
 public abstract class UpException extends ZeroRunException {
     private final String message;
+    private final Class<?> target;
 
     public UpException(final Class<?> clazz, final Object... args) {
         super(Strings.EMPTY);
-        this.message = Errors.normalize(clazz, getCode(), args);
+        this.target = clazz;
+        this.message = Errors.normalize(clazz, this.getCode(), args);
     }
 
     public abstract int getCode();
@@ -19,5 +21,9 @@ public abstract class UpException extends ZeroRunException {
     @Override
     public String getMessage() {
         return this.message;
+    }
+
+    public Class<?> getTarget() {
+        return this.target;
     }
 }

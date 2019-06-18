@@ -13,43 +13,43 @@ public class JsonInsurerTc extends ZeroBase {
 
     @Test(expected = RequiredFieldException.class)
     public void testRequiredObj() throws ZeroException {
-        final JsonObject rule = Ut.ioYaml(this.getFile("rule-required.yml"));
-        final JsonObject data = Ut.ioJObject(this.getFile("rule-required-data.json"));
+        final JsonObject rule = Ut.ioYaml(this.ioFile("rule-required.yml"));
+        final JsonObject data = Ut.ioJObject(this.ioFile("rule-required-data.json"));
         this.ensure(RequiredInsurer.class, data, rule);
     }
 
     @Test(expected = RequiredFieldException.class)
     public void testRequiredArray() throws ZeroException {
-        final JsonObject rule = Ut.ioYaml(this.getFile("rule-required.yml"));
-        final JsonArray data = Ut.ioJArray(this.getFile("rule-required-array.json"));
+        final JsonObject rule = Ut.ioYaml(this.ioFile("rule-required.yml"));
+        final JsonArray data = Ut.ioJArray(this.ioFile("rule-required-array.json"));
         this.ensure(RequiredInsurer.class, data, rule);
     }
 
     @Test(expected = DataTypeWrongException.class)
     public void testTypedObj() throws ZeroException {
-        final JsonObject rule = Ut.ioYaml(this.getFile("rule-typed.yml"));
-        final JsonObject data = Ut.ioJObject(this.getFile("rule-typed-jobject.json"));
+        final JsonObject rule = Ut.ioYaml(this.ioFile("rule-typed.yml"));
+        final JsonObject data = Ut.ioJObject(this.ioFile("rule-typed-jobject.json"));
         this.ensure(TypedInsurer.class, data, rule);
     }
 
     @Test(expected = DataTypeWrongException.class)
     public void testTypedNumber() throws ZeroException {
-        final JsonObject rule = Ut.ioYaml(this.getFile("rule-typed.yml"));
-        final JsonObject data = Ut.ioJObject(this.getFile("rule-typed-number.json"));
+        final JsonObject rule = Ut.ioYaml(this.ioFile("rule-typed.yml"));
+        final JsonObject data = Ut.ioJObject(this.ioFile("rule-typed-number.json"));
         this.ensure(TypedInsurer.class, data, rule);
     }
 
     @Test(expected = DataTypeWrongException.class)
     public void testTypedDecimal() throws ZeroException {
-        final JsonObject rule = Ut.ioYaml(this.getFile("rule-typed.yml"));
-        final JsonObject data = Ut.ioJObject(this.getFile("rule-typed-decimal.json"));
+        final JsonObject rule = Ut.ioYaml(this.ioFile("rule-typed.yml"));
+        final JsonObject data = Ut.ioJObject(this.ioFile("rule-typed-decimal.json"));
         this.ensure(TypedInsurer.class, data, rule);
     }
 
     @Test
     public void testTypedCorrect() throws ZeroException {
-        final JsonObject rule = Ut.ioYaml(this.getFile("rule-typed.yml"));
-        final JsonObject data = Ut.ioJObject(this.getFile("rule-typed-correct.json"));
+        final JsonObject rule = Ut.ioYaml(this.ioFile("rule-typed.yml"));
+        final JsonObject data = Ut.ioJObject(this.ioFile("rule-typed-correct.json"));
         this.ensure(TypedInsurer.class, data, rule);
     }
 }

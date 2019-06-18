@@ -13,19 +13,19 @@ public abstract class StoreBase extends ZeroBase {
 
     protected void execJObject(final String filename,
                                final Handler<AsyncResult<JsonObject>> handler) {
-        final ConfigStoreOptions options = Ut.loadJson(this.getFile(filename));
+        final ConfigStoreOptions options = Ut.loadJson(this.ioFile(filename));
         this.exec(options, handler);
     }
 
     protected void execYaml(final String filename,
                             final Handler<AsyncResult<JsonObject>> handler) {
-        final ConfigStoreOptions options = Ut.loadYaml(this.getFile(filename));
+        final ConfigStoreOptions options = Ut.loadYaml(this.ioFile(filename));
         this.exec(options, handler);
     }
 
     protected void execProp(final String filename,
                             final Handler<AsyncResult<JsonObject>> handler) {
-        final ConfigStoreOptions options = Ut.loadProp(this.getFile(filename));
+        final ConfigStoreOptions options = Ut.loadProp(this.ioFile(filename));
         this.exec(options, handler);
     }
 

@@ -71,10 +71,11 @@ E40054: "The @WebFilter \"{0}\"could not be initialized, please check your class
 E40055: "(Jooq) Query with 3 length only support value of Date,DateTime,Time only, current = {0}"
 E40056: "(Database) Data pool initialized met issue, jdbcUrl = {0}, exception = {1}"
 E40057: "(Jooq) The method \"copyEntity(T target,T updated)\" require second argument updated must not be null. Class = {0}, Data = {1}"
-E40058: "(Jooq) The mode required is {0}, but current filters are \"{1}\", they are conflict."
+E40058: "(Jooq) The mode required is {0}, but current filters are \"{1}\", they are conflict"
 E40059: "(Jooq) The field = \"{0}\" could not be found in type = \"{1}\""
 E40060: "(Jooq) Infix Jooq require vertx environment, but now vertx is null"
-E40061: "(Security) You are using Zero Security Framework, but the @Wall found Security reference is null. "
+E40061: "(Security) You are using Zero Security Framework, but the @Wall found Security reference is null"
+E40062: "(Quiz) Current test case name = `{0}` is invalid when you enable Quiz Framework of Zero, name must end with `Tc`"
 # RxJava
 E45001: (V) - The field "{1}" of json array "{0}" must be mapped to unique element, but current reduced is "{2}"
 # (Web) Exception for web
