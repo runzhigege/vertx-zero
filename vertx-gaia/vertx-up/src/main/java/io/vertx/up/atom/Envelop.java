@@ -8,9 +8,9 @@ import io.vertx.core.http.HttpStatusCode;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.Session;
+import io.vertx.up.atom.error.Readible;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
-import io.vertx.up.kidd.Readible;
 import io.vertx.up.log.Annal;
 import io.vertx.up.web.ZeroSerializer;
 import io.vertx.zero.eon.Strings;
@@ -58,7 +58,7 @@ public class Envelop implements Serializable {
     /**
      * Empty content success
      *
-     * @return
+     * @return null body Envelop with 200
      */
     public static Envelop ok() {
         return success(null);

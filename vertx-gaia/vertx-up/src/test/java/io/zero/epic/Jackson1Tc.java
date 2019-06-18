@@ -13,7 +13,7 @@ public class Jackson1Tc extends StoreBase {
 
     @Test
     public void testLocalTime(final TestContext context) {
-        final JsonObject data = IO.getJObject(this.getFile("pojo.json"));
+        final JsonObject data = IO.getJObject(this.ioFile("pojo.json"));
         final PojoEntity entity = Ux.fromJson(data, PojoEntity.class);
         final Date endDate = Ut.parse(data.getString("end"));
         final Date startDate = Ut.parse(data.getString("start"));

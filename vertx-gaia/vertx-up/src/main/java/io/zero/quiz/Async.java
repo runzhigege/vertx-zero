@@ -7,11 +7,11 @@ import io.vertx.up.aiki.UxJooq;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-class Async {
+public class Async {
 
-    static <T> void async(final TestContext context,
-                          final Future<T> future,
-                          final Consumer<T> consumer) {
+    public static <T> void async(final TestContext context,
+                                 final Future<T> future,
+                                 final Consumer<T> consumer) {
         final io.vertx.ext.unit.Async async = context.async();
         future.setHandler(handler -> {
             if (handler.succeeded()) {

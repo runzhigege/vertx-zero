@@ -1,6 +1,7 @@
 package io.vertx.tp.ke;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.ke.element.ColumnStub;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
 import io.zero.epic.Ut;
@@ -23,7 +24,7 @@ public class KePin {
         return Fn.getJvm(() -> Ut.clazz(componentClsName), componentClsName);
     }
 
-    public static VerticalStub getVertical() {
+    public static ColumnStub getVertical() {
         final Class<?> columnCls = getComponent(COLUMN);
         return Objects.isNull(columnCls) ? null : Ut.singleton(columnCls);
     }

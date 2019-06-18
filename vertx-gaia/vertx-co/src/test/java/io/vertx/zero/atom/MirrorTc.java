@@ -9,7 +9,7 @@ public class MirrorTc extends ZeroBase {
 
     @Test
     public void testFromRule() {
-        final JsonObject input = Ut.ioJObject(this.getFile("user.json"));
+        final JsonObject input = Ut.ioJObject(this.ioFile("user.json"));
         final JsonObject user = Mirror.create(this.getClass())
                 .mount("user").connect(input).from().result();
         System.out.println(user);
@@ -17,7 +17,7 @@ public class MirrorTc extends ZeroBase {
 
     @Test
     public void testToRule() {
-        final JsonObject input = Ut.ioJObject(this.getFile("to.json"));
+        final JsonObject input = Ut.ioJObject(this.ioFile("to.json"));
         final JsonObject user = Mirror.create(this.getClass())
                 .mount("user").connect(input).to().result();
         System.out.println(user);
@@ -25,7 +25,7 @@ public class MirrorTc extends ZeroBase {
 
     @Test
     public void testFromPojo() {
-        final JsonObject input = Ut.ioJObject(this.getFile("user.json"));
+        final JsonObject input = Ut.ioJObject(this.ioFile("user.json"));
         final Mirror mirror = Mirror.create(this.getClass())
                 .mount("user").connect(input).from();
         final JsonObject user = mirror.result();
@@ -36,7 +36,7 @@ public class MirrorTc extends ZeroBase {
 
     @Test
     public void testApply() {
-        final JsonObject input = Ut.ioJObject(this.getFile("user.json"));
+        final JsonObject input = Ut.ioJObject(this.ioFile("user.json"));
         final User user = new User();
         user.setAge(13);
         final Mirror mirror = Mirror.create(this.getClass())
