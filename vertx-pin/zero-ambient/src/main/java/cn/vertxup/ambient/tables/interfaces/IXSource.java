@@ -5,6 +5,7 @@ package cn.vertxup.ambient.tables.interfaces;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.annotation.Generated;
 
@@ -133,6 +134,16 @@ public interface IXSource extends Serializable {
     public String getPassword();
 
     /**
+     * Setter for <code>DB_ETERNAL.X_SOURCE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     */
+    public IXSource setAppId(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_SOURCE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     */
+    public String getAppId();
+
+    /**
      * Setter for <code>DB_ETERNAL.X_SOURCE.ACTIVE</code>. 「active」- 是否启用
      */
     public IXSource setActive(Boolean value);
@@ -143,12 +154,22 @@ public interface IXSource extends Serializable {
     public Boolean getActive();
 
     /**
-     * Setter for <code>DB_ETERNAL.X_SOURCE.METADATA</code>. 「metadata」- 通过MetadataConnection分析读取的数据
+     * Setter for <code>DB_ETERNAL.X_SOURCE.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public IXSource setSigma(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_SOURCE.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public String getSigma();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_SOURCE.METADATA</code>. 「metadata」- 附加配置
      */
     public IXSource setMetadata(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.X_SOURCE.METADATA</code>. 「metadata」- 通过MetadataConnection分析读取的数据
+     * Getter for <code>DB_ETERNAL.X_SOURCE.METADATA</code>. 「metadata」- 附加配置
      */
     public String getMetadata();
 
@@ -163,14 +184,44 @@ public interface IXSource extends Serializable {
     public String getLanguage();
 
     /**
-     * Setter for <code>DB_ETERNAL.X_SOURCE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>DB_ETERNAL.X_SOURCE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
-    public IXSource setAppId(String value);
+    public IXSource setCreatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>DB_ETERNAL.X_SOURCE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>DB_ETERNAL.X_SOURCE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
-    public String getAppId();
+    public LocalDateTime getCreatedAt();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_SOURCE.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public IXSource setCreatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_SOURCE.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public String getCreatedBy();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_SOURCE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public IXSource setUpdatedAt(LocalDateTime value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_SOURCE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public LocalDateTime getUpdatedAt();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_SOURCE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public IXSource setUpdatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_SOURCE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public String getUpdatedBy();
 
     // -------------------------------------------------------------------------
     // FROM and INTO
@@ -198,10 +249,15 @@ public interface IXSource extends Serializable {
         setInstance(json.getString("INSTANCE"));
         setUsername(json.getString("USERNAME"));
         setPassword(json.getString("PASSWORD"));
+        setAppId(json.getString("APP_ID"));
         setActive(json.getBoolean("ACTIVE"));
+        setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
         setLanguage(json.getString("LANGUAGE"));
-        setAppId(json.getString("APP_ID"));
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        setCreatedBy(json.getString("CREATED_BY"));
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        setUpdatedBy(json.getString("UPDATED_BY"));
         return this;
     }
 
@@ -219,10 +275,15 @@ public interface IXSource extends Serializable {
         json.put("INSTANCE",getInstance());
         json.put("USERNAME",getUsername());
         json.put("PASSWORD",getPassword());
+        json.put("APP_ID",getAppId());
         json.put("ACTIVE",getActive());
+        json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());
         json.put("LANGUAGE",getLanguage());
-        json.put("APP_ID",getAppId());
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        json.put("CREATED_BY",getCreatedBy());
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        json.put("UPDATED_BY",getUpdatedBy());
         return json;
     }
 

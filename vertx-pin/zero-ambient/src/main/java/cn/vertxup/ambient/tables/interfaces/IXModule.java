@@ -5,6 +5,7 @@ package cn.vertxup.ambient.tables.interfaces;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.annotation.Generated;
 
@@ -103,12 +104,22 @@ public interface IXModule extends Serializable {
     public Boolean getActive();
 
     /**
-     * Setter for <code>DB_ETERNAL.X_MODULE.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ETERNAL.X_MODULE.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public IXModule setSigma(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_MODULE.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public String getSigma();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_MODULE.METADATA</code>. 「metadata」- 附加配置
      */
     public IXModule setMetadata(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.X_MODULE.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ETERNAL.X_MODULE.METADATA</code>. 「metadata」- 附加配置
      */
     public String getMetadata();
 
@@ -121,6 +132,46 @@ public interface IXModule extends Serializable {
      * Getter for <code>DB_ETERNAL.X_MODULE.LANGUAGE</code>. 「language」- 使用的语言
      */
     public String getLanguage();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_MODULE.CREATED_AT</code>. 「createdAt」- 创建时间
+     */
+    public IXModule setCreatedAt(LocalDateTime value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_MODULE.CREATED_AT</code>. 「createdAt」- 创建时间
+     */
+    public LocalDateTime getCreatedAt();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_MODULE.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public IXModule setCreatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_MODULE.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public String getCreatedBy();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_MODULE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public IXModule setUpdatedAt(LocalDateTime value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_MODULE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public LocalDateTime getUpdatedAt();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_MODULE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public IXModule setUpdatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_MODULE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public String getUpdatedBy();
 
     // -------------------------------------------------------------------------
     // FROM and INTO
@@ -145,8 +196,13 @@ public interface IXModule extends Serializable {
         setAppId(json.getString("APP_ID"));
         setModelId(json.getString("MODEL_ID"));
         setActive(json.getBoolean("ACTIVE"));
+        setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
         setLanguage(json.getString("LANGUAGE"));
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        setCreatedBy(json.getString("CREATED_BY"));
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        setUpdatedBy(json.getString("UPDATED_BY"));
         return this;
     }
 
@@ -161,8 +217,13 @@ public interface IXModule extends Serializable {
         json.put("APP_ID",getAppId());
         json.put("MODEL_ID",getModelId());
         json.put("ACTIVE",getActive());
+        json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());
         json.put("LANGUAGE",getLanguage());
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        json.put("CREATED_BY",getCreatedBy());
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        json.put("UPDATED_BY",getUpdatedBy());
         return json;
     }
 

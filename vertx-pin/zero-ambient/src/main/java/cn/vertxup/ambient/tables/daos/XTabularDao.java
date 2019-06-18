@@ -9,6 +9,7 @@ import cn.vertxup.ambient.tables.records.XTabularRecord;
 
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -111,10 +112,24 @@ public class XTabularDao extends DAOImpl<XTabularRecord, cn.vertxup.ambient.tabl
     }
 
     /**
+     * Fetch records that have <code>APP_ID IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XTabular> fetchByAppId(String... values) {
+        return fetch(XTabular.X_TABULAR.APP_ID, values);
+    }
+
+    /**
      * Fetch records that have <code>ACTIVE IN (values)</code>
      */
     public List<cn.vertxup.ambient.tables.pojos.XTabular> fetchByActive(Boolean... values) {
         return fetch(XTabular.X_TABULAR.ACTIVE, values);
+    }
+
+    /**
+     * Fetch records that have <code>SIGMA IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XTabular> fetchBySigma(String... values) {
+        return fetch(XTabular.X_TABULAR.SIGMA, values);
     }
 
     /**
@@ -132,10 +147,31 @@ public class XTabularDao extends DAOImpl<XTabularRecord, cn.vertxup.ambient.tabl
     }
 
     /**
-     * Fetch records that have <code>APP_ID IN (values)</code>
+     * Fetch records that have <code>CREATED_AT IN (values)</code>
      */
-    public List<cn.vertxup.ambient.tables.pojos.XTabular> fetchByAppId(String... values) {
-        return fetch(XTabular.X_TABULAR.APP_ID, values);
+    public List<cn.vertxup.ambient.tables.pojos.XTabular> fetchByCreatedAt(LocalDateTime... values) {
+        return fetch(XTabular.X_TABULAR.CREATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XTabular> fetchByCreatedBy(String... values) {
+        return fetch(XTabular.X_TABULAR.CREATED_BY, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XTabular> fetchByUpdatedAt(LocalDateTime... values) {
+        return fetch(XTabular.X_TABULAR.UPDATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XTabular> fetchByUpdatedBy(String... values) {
+        return fetch(XTabular.X_TABULAR.UPDATED_BY, values);
     }
 
     /**
@@ -195,10 +231,24 @@ public class XTabularDao extends DAOImpl<XTabularRecord, cn.vertxup.ambient.tabl
     }
 
     /**
+     * Fetch records that have <code>APP_ID IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XTabular>> fetchByAppIdAsync(List<String> values) {
+        return fetchAsync(XTabular.X_TABULAR.APP_ID,values);
+    }
+
+    /**
      * Fetch records that have <code>ACTIVE IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XTabular>> fetchByActiveAsync(List<Boolean> values) {
         return fetchAsync(XTabular.X_TABULAR.ACTIVE,values);
+    }
+
+    /**
+     * Fetch records that have <code>SIGMA IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XTabular>> fetchBySigmaAsync(List<String> values) {
+        return fetchAsync(XTabular.X_TABULAR.SIGMA,values);
     }
 
     /**
@@ -216,10 +266,31 @@ public class XTabularDao extends DAOImpl<XTabularRecord, cn.vertxup.ambient.tabl
     }
 
     /**
-     * Fetch records that have <code>APP_ID IN (values)</code> asynchronously
+     * Fetch records that have <code>CREATED_AT IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XTabular>> fetchByAppIdAsync(List<String> values) {
-        return fetchAsync(XTabular.X_TABULAR.APP_ID,values);
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XTabular>> fetchByCreatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(XTabular.X_TABULAR.CREATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XTabular>> fetchByCreatedByAsync(List<String> values) {
+        return fetchAsync(XTabular.X_TABULAR.CREATED_BY,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XTabular>> fetchByUpdatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(XTabular.X_TABULAR.UPDATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XTabular>> fetchByUpdatedByAsync(List<String> values) {
+        return fetchAsync(XTabular.X_TABULAR.UPDATED_BY,values);
     }
 
     private io.vertx.core.Vertx vertx;

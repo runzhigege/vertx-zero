@@ -5,6 +5,7 @@ package cn.vertxup.ambient.tables.interfaces;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.annotation.Generated;
 
@@ -123,6 +124,16 @@ public interface IXCategory extends Serializable {
     public String getComment();
 
     /**
+     * Setter for <code>DB_ETERNAL.X_CATEGORY.APP_ID</code>. 「appId」- 关联的应用程序ID
+     */
+    public IXCategory setAppId(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_CATEGORY.APP_ID</code>. 「appId」- 关联的应用程序ID
+     */
+    public String getAppId();
+
+    /**
      * Setter for <code>DB_ETERNAL.X_CATEGORY.ACTIVE</code>. 「active」- 是否启用
      */
     public IXCategory setActive(Boolean value);
@@ -133,12 +144,22 @@ public interface IXCategory extends Serializable {
     public Boolean getActive();
 
     /**
-     * Setter for <code>DB_ETERNAL.X_CATEGORY.METADATA</code>. 「metadata」-扩展配置信息
+     * Setter for <code>DB_ETERNAL.X_CATEGORY.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public IXCategory setSigma(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_CATEGORY.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public String getSigma();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_CATEGORY.METADATA</code>. 「metadata」- 附加配置
      */
     public IXCategory setMetadata(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.X_CATEGORY.METADATA</code>. 「metadata」-扩展配置信息
+     * Getter for <code>DB_ETERNAL.X_CATEGORY.METADATA</code>. 「metadata」- 附加配置
      */
     public String getMetadata();
 
@@ -153,14 +174,44 @@ public interface IXCategory extends Serializable {
     public String getLanguage();
 
     /**
-     * Setter for <code>DB_ETERNAL.X_CATEGORY.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>DB_ETERNAL.X_CATEGORY.CREATED_AT</code>. 「createdAt」- 创建时间
      */
-    public IXCategory setAppId(String value);
+    public IXCategory setCreatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>DB_ETERNAL.X_CATEGORY.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>DB_ETERNAL.X_CATEGORY.CREATED_AT</code>. 「createdAt」- 创建时间
      */
-    public String getAppId();
+    public LocalDateTime getCreatedAt();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_CATEGORY.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public IXCategory setCreatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_CATEGORY.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public String getCreatedBy();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_CATEGORY.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public IXCategory setUpdatedAt(LocalDateTime value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_CATEGORY.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public LocalDateTime getUpdatedAt();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_CATEGORY.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public IXCategory setUpdatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_CATEGORY.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public String getUpdatedBy();
 
     // -------------------------------------------------------------------------
     // FROM and INTO
@@ -187,10 +238,15 @@ public interface IXCategory extends Serializable {
         setParentId(json.getString("PARENT_ID"));
         setIdentifier(json.getString("IDENTIFIER"));
         setComment(json.getString("COMMENT"));
+        setAppId(json.getString("APP_ID"));
         setActive(json.getBoolean("ACTIVE"));
+        setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
         setLanguage(json.getString("LANGUAGE"));
-        setAppId(json.getString("APP_ID"));
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        setCreatedBy(json.getString("CREATED_BY"));
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        setUpdatedBy(json.getString("UPDATED_BY"));
         return this;
     }
 
@@ -207,10 +263,15 @@ public interface IXCategory extends Serializable {
         json.put("PARENT_ID",getParentId());
         json.put("IDENTIFIER",getIdentifier());
         json.put("COMMENT",getComment());
+        json.put("APP_ID",getAppId());
         json.put("ACTIVE",getActive());
+        json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());
         json.put("LANGUAGE",getLanguage());
-        json.put("APP_ID",getAppId());
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        json.put("CREATED_BY",getCreatedBy());
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        json.put("UPDATED_BY",getUpdatedBy());
         return json;
     }
 

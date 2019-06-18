@@ -5,6 +5,7 @@ package cn.vertxup.ambient.tables.interfaces;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.annotation.Generated;
 
@@ -153,6 +154,26 @@ public interface IXAttachment extends Serializable {
     public Boolean getActive();
 
     /**
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public IXAttachment setSigma(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public String getSigma();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.METADATA</code>. 「metadata」- 附加配置
+     */
+    public IXAttachment setMetadata(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.METADATA</code>. 「metadata」- 附加配置
+     */
+    public String getMetadata();
+
+    /**
      * Setter for <code>DB_ETERNAL.X_ATTACHMENT.LANGUAGE</code>. 「language」- 使用的语言
      */
     public IXAttachment setLanguage(String value);
@@ -163,14 +184,44 @@ public interface IXAttachment extends Serializable {
     public String getLanguage();
 
     /**
-     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.CREATED_AT</code>. 「createdAt」- 创建时间
      */
-    public IXAttachment setMetadata(String value);
+    public IXAttachment setCreatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.CREATED_AT</code>. 「createdAt」- 创建时间
      */
-    public String getMetadata();
+    public LocalDateTime getCreatedAt();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public IXAttachment setCreatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public String getCreatedBy();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public IXAttachment setUpdatedAt(LocalDateTime value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public LocalDateTime getUpdatedAt();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public IXAttachment setUpdatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public String getUpdatedBy();
 
     // -------------------------------------------------------------------------
     // FROM and INTO
@@ -200,8 +251,13 @@ public interface IXAttachment extends Serializable {
         setMime(json.getString("MIME"));
         setSize(json.getInteger("SIZE"));
         setActive(json.getBoolean("ACTIVE"));
-        setLanguage(json.getString("LANGUAGE"));
+        setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
+        setLanguage(json.getString("LANGUAGE"));
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        setCreatedBy(json.getString("CREATED_BY"));
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        setUpdatedBy(json.getString("UPDATED_BY"));
         return this;
     }
 
@@ -221,8 +277,13 @@ public interface IXAttachment extends Serializable {
         json.put("MIME",getMime());
         json.put("SIZE",getSize());
         json.put("ACTIVE",getActive());
-        json.put("LANGUAGE",getLanguage());
+        json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());
+        json.put("LANGUAGE",getLanguage());
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        json.put("CREATED_BY",getCreatedBy());
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        json.put("UPDATED_BY",getUpdatedBy());
         return json;
     }
 

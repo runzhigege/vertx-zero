@@ -5,6 +5,7 @@ package cn.vertxup.ambient.tables.interfaces;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.annotation.Generated;
 
@@ -143,16 +144,6 @@ public interface IXApp extends Serializable {
     public String getAppKey();
 
     /**
-     * Setter for <code>DB_ETERNAL.X_APP.SIGMA</code>. 「sigma」- 非系统模块使用的标识
-     */
-    public IXApp setSigma(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.X_APP.SIGMA</code>. 「sigma」- 非系统模块使用的标识
-     */
-    public String getSigma();
-
-    /**
      * Setter for <code>DB_ETERNAL.X_APP.ACTIVE</code>. 「active」- 是否启用
      */
     public IXApp setActive(Boolean value);
@@ -161,6 +152,26 @@ public interface IXApp extends Serializable {
      * Getter for <code>DB_ETERNAL.X_APP.ACTIVE</code>. 「active」- 是否启用
      */
     public Boolean getActive();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_APP.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public IXApp setSigma(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_APP.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public String getSigma();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_APP.METADATA</code>. 「metadata」- 附加配置
+     */
+    public IXApp setMetadata(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_APP.METADATA</code>. 「metadata」- 附加配置
+     */
+    public String getMetadata();
 
     /**
      * Setter for <code>DB_ETERNAL.X_APP.LANGUAGE</code>. 「language」- 使用的语言
@@ -173,14 +184,44 @@ public interface IXApp extends Serializable {
     public String getLanguage();
 
     /**
-     * Setter for <code>DB_ETERNAL.X_APP.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ETERNAL.X_APP.CREATED_AT</code>. 「createdAt」- 创建时间
      */
-    public IXApp setMetadata(String value);
+    public IXApp setCreatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>DB_ETERNAL.X_APP.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ETERNAL.X_APP.CREATED_AT</code>. 「createdAt」- 创建时间
      */
-    public String getMetadata();
+    public LocalDateTime getCreatedAt();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_APP.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public IXApp setCreatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_APP.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public String getCreatedBy();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_APP.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public IXApp setUpdatedAt(LocalDateTime value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_APP.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public LocalDateTime getUpdatedAt();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_APP.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public IXApp setUpdatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_APP.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public String getUpdatedBy();
 
     // -------------------------------------------------------------------------
     // FROM and INTO
@@ -209,10 +250,14 @@ public interface IXApp extends Serializable {
         setPath(json.getString("PATH"));
         setRoute(json.getString("ROUTE"));
         setAppKey(json.getString("APP_KEY"));
-        setSigma(json.getString("SIGMA"));
         setActive(json.getBoolean("ACTIVE"));
-        setLanguage(json.getString("LANGUAGE"));
+        setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
+        setLanguage(json.getString("LANGUAGE"));
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        setCreatedBy(json.getString("CREATED_BY"));
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        setUpdatedBy(json.getString("UPDATED_BY"));
         return this;
     }
 
@@ -231,10 +276,14 @@ public interface IXApp extends Serializable {
         json.put("PATH",getPath());
         json.put("ROUTE",getRoute());
         json.put("APP_KEY",getAppKey());
-        json.put("SIGMA",getSigma());
         json.put("ACTIVE",getActive());
-        json.put("LANGUAGE",getLanguage());
+        json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());
+        json.put("LANGUAGE",getLanguage());
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        json.put("CREATED_BY",getCreatedBy());
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        json.put("UPDATED_BY",getUpdatedBy());
         return json;
     }
 

@@ -6,6 +6,8 @@ package cn.vertxup.ambient.tables.pojos;
 
 import cn.vertxup.ambient.tables.interfaces.IXModule;
 
+import java.time.LocalDateTime;
+
 import javax.annotation.Generated;
 
 
@@ -22,18 +24,23 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XModule implements IXModule {
 
-    private static final long serialVersionUID = -374923604;
+    private static final long serialVersionUID = -1410350984;
 
-    private String  key;
-    private String  name;
-    private String  code;
-    private String  cat;
-    private String  urlEntry;
-    private String  appId;
-    private String  modelId;
-    private Boolean active;
-    private String  metadata;
-    private String  language;
+    private String        key;
+    private String        name;
+    private String        code;
+    private String        cat;
+    private String        urlEntry;
+    private String        appId;
+    private String        modelId;
+    private Boolean       active;
+    private String        sigma;
+    private String        metadata;
+    private String        language;
+    private LocalDateTime createdAt;
+    private String        createdBy;
+    private LocalDateTime updatedAt;
+    private String        updatedBy;
 
     public XModule() {}
 
@@ -46,21 +53,31 @@ public class XModule implements IXModule {
         this.appId = value.appId;
         this.modelId = value.modelId;
         this.active = value.active;
+        this.sigma = value.sigma;
         this.metadata = value.metadata;
         this.language = value.language;
+        this.createdAt = value.createdAt;
+        this.createdBy = value.createdBy;
+        this.updatedAt = value.updatedAt;
+        this.updatedBy = value.updatedBy;
     }
 
     public XModule(
-        String  key,
-        String  name,
-        String  code,
-        String  cat,
-        String  urlEntry,
-        String  appId,
-        String  modelId,
-        Boolean active,
-        String  metadata,
-        String  language
+        String        key,
+        String        name,
+        String        code,
+        String        cat,
+        String        urlEntry,
+        String        appId,
+        String        modelId,
+        Boolean       active,
+        String        sigma,
+        String        metadata,
+        String        language,
+        LocalDateTime createdAt,
+        String        createdBy,
+        LocalDateTime updatedAt,
+        String        updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -70,8 +87,13 @@ public class XModule implements IXModule {
         this.appId = appId;
         this.modelId = modelId;
         this.active = active;
+        this.sigma = sigma;
         this.metadata = metadata;
         this.language = language;
+        this.createdAt = createdAt;
+        this.createdBy = createdBy;
+        this.updatedAt = updatedAt;
+        this.updatedBy = updatedBy;
     }
 
     @Override
@@ -163,6 +185,17 @@ public class XModule implements IXModule {
     }
 
     @Override
+    public String getSigma() {
+        return this.sigma;
+    }
+
+    @Override
+    public XModule setSigma(String sigma) {
+        this.sigma = sigma;
+        return this;
+    }
+
+    @Override
     public String getMetadata() {
         return this.metadata;
     }
@@ -185,6 +218,50 @@ public class XModule implements IXModule {
     }
 
     @Override
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    @Override
+    public XModule setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    @Override
+    public String getCreatedBy() {
+        return this.createdBy;
+    }
+
+    @Override
+    public XModule setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    @Override
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    @Override
+    public XModule setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+        return this;
+    }
+
+    @Override
+    public String getUpdatedBy() {
+        return this.updatedBy;
+    }
+
+    @Override
+    public XModule setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+        return this;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("XModule (");
 
@@ -196,8 +273,13 @@ public class XModule implements IXModule {
         sb.append(", ").append(appId);
         sb.append(", ").append(modelId);
         sb.append(", ").append(active);
+        sb.append(", ").append(sigma);
         sb.append(", ").append(metadata);
         sb.append(", ").append(language);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(createdBy);
+        sb.append(", ").append(updatedAt);
+        sb.append(", ").append(updatedBy);
 
         sb.append(")");
         return sb.toString();
@@ -220,8 +302,13 @@ public class XModule implements IXModule {
         setAppId(from.getAppId());
         setModelId(from.getModelId());
         setActive(from.getActive());
+        setSigma(from.getSigma());
         setMetadata(from.getMetadata());
         setLanguage(from.getLanguage());
+        setCreatedAt(from.getCreatedAt());
+        setCreatedBy(from.getCreatedBy());
+        setUpdatedAt(from.getUpdatedAt());
+        setUpdatedBy(from.getUpdatedBy());
     }
 
     /**

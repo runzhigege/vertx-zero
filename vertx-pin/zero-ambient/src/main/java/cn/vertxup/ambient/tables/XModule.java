@@ -13,6 +13,7 @@ import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
 
 import javax.annotation.Generated;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class XModule extends TableImpl<XModuleRecord> {
      * The reference instance of <code>DB_ETERNAL.X_MODULE</code>
      */
     public static final XModule X_MODULE = new XModule();
-    private static final long serialVersionUID = 1136095738;
+    private static final long serialVersionUID = -797403402;
     /**
      * The column <code>DB_ETERNAL.X_MODULE.KEY</code>. 「key」- 模块唯一主键
      */
@@ -68,13 +69,33 @@ public class XModule extends TableImpl<XModuleRecord> {
      */
     public final TableField<XModuleRecord, Boolean> ACTIVE = createField("ACTIVE", org.jooq.impl.SQLDataType.BIT, this, "「active」- 是否启用");
     /**
-     * The column <code>DB_ETERNAL.X_MODULE.METADATA</code>. 「metadata」- 附加配置数据
+     * The column <code>DB_ETERNAL.X_MODULE.SIGMA</code>. 「sigma」- 统一标识
      */
-    public final TableField<XModuleRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置数据");
+    public final TableField<XModuleRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「sigma」- 统一标识");
+    /**
+     * The column <code>DB_ETERNAL.X_MODULE.METADATA</code>. 「metadata」- 附加配置
+     */
+    public final TableField<XModuleRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置");
     /**
      * The column <code>DB_ETERNAL.X_MODULE.LANGUAGE</code>. 「language」- 使用的语言
      */
-    public final TableField<XModuleRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
+    public final TableField<XModuleRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(8), this, "「language」- 使用的语言");
+    /**
+     * The column <code>DB_ETERNAL.X_MODULE.CREATED_AT</code>. 「createdAt」- 创建时间
+     */
+    public final TableField<XModuleRecord, LocalDateTime> CREATED_AT = createField("CREATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「createdAt」- 创建时间");
+    /**
+     * The column <code>DB_ETERNAL.X_MODULE.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public final TableField<XModuleRecord, String> CREATED_BY = createField("CREATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「createdBy」- 创建人");
+    /**
+     * The column <code>DB_ETERNAL.X_MODULE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public final TableField<XModuleRecord, LocalDateTime> UPDATED_AT = createField("UPDATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「updatedAt」- 更新时间");
+    /**
+     * The column <code>DB_ETERNAL.X_MODULE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public final TableField<XModuleRecord, String> UPDATED_BY = createField("UPDATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「updatedBy」- 更新人");
 
     /**
      * Create a <code>DB_ETERNAL.X_MODULE</code> table reference

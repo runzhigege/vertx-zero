@@ -9,6 +9,7 @@ import cn.vertxup.ambient.tables.records.XAppRecord;
 
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -160,6 +161,13 @@ public class XAppDao extends DAOImpl<XAppRecord, cn.vertxup.ambient.tables.pojos
     }
 
     /**
+     * Fetch records that have <code>ACTIVE IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByActive(Boolean... values) {
+        return fetch(XApp.X_APP.ACTIVE, values);
+    }
+
+    /**
      * Fetch records that have <code>SIGMA IN (values)</code>
      */
     public List<cn.vertxup.ambient.tables.pojos.XApp> fetchBySigma(String... values) {
@@ -167,10 +175,10 @@ public class XAppDao extends DAOImpl<XAppRecord, cn.vertxup.ambient.tables.pojos
     }
 
     /**
-     * Fetch records that have <code>ACTIVE IN (values)</code>
+     * Fetch records that have <code>METADATA IN (values)</code>
      */
-    public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByActive(Boolean... values) {
-        return fetch(XApp.X_APP.ACTIVE, values);
+    public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByMetadata(String... values) {
+        return fetch(XApp.X_APP.METADATA, values);
     }
 
     /**
@@ -181,10 +189,31 @@ public class XAppDao extends DAOImpl<XAppRecord, cn.vertxup.ambient.tables.pojos
     }
 
     /**
-     * Fetch records that have <code>METADATA IN (values)</code>
+     * Fetch records that have <code>CREATED_AT IN (values)</code>
      */
-    public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByMetadata(String... values) {
-        return fetch(XApp.X_APP.METADATA, values);
+    public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByCreatedAt(LocalDateTime... values) {
+        return fetch(XApp.X_APP.CREATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByCreatedBy(String... values) {
+        return fetch(XApp.X_APP.CREATED_BY, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByUpdatedAt(LocalDateTime... values) {
+        return fetch(XApp.X_APP.UPDATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByUpdatedBy(String... values) {
+        return fetch(XApp.X_APP.UPDATED_BY, values);
     }
 
     /**
@@ -293,6 +322,13 @@ public class XAppDao extends DAOImpl<XAppRecord, cn.vertxup.ambient.tables.pojos
     }
 
     /**
+     * Fetch records that have <code>ACTIVE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByActiveAsync(List<Boolean> values) {
+        return fetchAsync(XApp.X_APP.ACTIVE,values);
+    }
+
+    /**
      * Fetch records that have <code>SIGMA IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchBySigmaAsync(List<String> values) {
@@ -300,10 +336,10 @@ public class XAppDao extends DAOImpl<XAppRecord, cn.vertxup.ambient.tables.pojos
     }
 
     /**
-     * Fetch records that have <code>ACTIVE IN (values)</code> asynchronously
+     * Fetch records that have <code>METADATA IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByActiveAsync(List<Boolean> values) {
-        return fetchAsync(XApp.X_APP.ACTIVE,values);
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByMetadataAsync(List<String> values) {
+        return fetchAsync(XApp.X_APP.METADATA,values);
     }
 
     /**
@@ -314,10 +350,31 @@ public class XAppDao extends DAOImpl<XAppRecord, cn.vertxup.ambient.tables.pojos
     }
 
     /**
-     * Fetch records that have <code>METADATA IN (values)</code> asynchronously
+     * Fetch records that have <code>CREATED_AT IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByMetadataAsync(List<String> values) {
-        return fetchAsync(XApp.X_APP.METADATA,values);
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByCreatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(XApp.X_APP.CREATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByCreatedByAsync(List<String> values) {
+        return fetchAsync(XApp.X_APP.CREATED_BY,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByUpdatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(XApp.X_APP.UPDATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByUpdatedByAsync(List<String> values) {
+        return fetchAsync(XApp.X_APP.UPDATED_BY,values);
     }
 
     private io.vertx.core.Vertx vertx;

@@ -9,6 +9,7 @@ import cn.vertxup.ambient.tables.records.XMenuRecord;
 
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -139,10 +140,10 @@ public class XMenuDao extends DAOImpl<XMenuRecord, cn.vertxup.ambient.tables.poj
     }
 
     /**
-     * Fetch records that have <code>LANGUAGE IN (values)</code>
+     * Fetch records that have <code>SIGMA IN (values)</code>
      */
-    public List<cn.vertxup.ambient.tables.pojos.XMenu> fetchByLanguage(String... values) {
-        return fetch(XMenu.X_MENU.LANGUAGE, values);
+    public List<cn.vertxup.ambient.tables.pojos.XMenu> fetchBySigma(String... values) {
+        return fetch(XMenu.X_MENU.SIGMA, values);
     }
 
     /**
@@ -150,6 +151,41 @@ public class XMenuDao extends DAOImpl<XMenuRecord, cn.vertxup.ambient.tables.poj
      */
     public List<cn.vertxup.ambient.tables.pojos.XMenu> fetchByMetadata(String... values) {
         return fetch(XMenu.X_MENU.METADATA, values);
+    }
+
+    /**
+     * Fetch records that have <code>LANGUAGE IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XMenu> fetchByLanguage(String... values) {
+        return fetch(XMenu.X_MENU.LANGUAGE, values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_AT IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XMenu> fetchByCreatedAt(LocalDateTime... values) {
+        return fetch(XMenu.X_MENU.CREATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XMenu> fetchByCreatedBy(String... values) {
+        return fetch(XMenu.X_MENU.CREATED_BY, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XMenu> fetchByUpdatedAt(LocalDateTime... values) {
+        return fetch(XMenu.X_MENU.UPDATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XMenu> fetchByUpdatedBy(String... values) {
+        return fetch(XMenu.X_MENU.UPDATED_BY, values);
     }
 
     /**
@@ -237,10 +273,10 @@ public class XMenuDao extends DAOImpl<XMenuRecord, cn.vertxup.ambient.tables.poj
     }
 
     /**
-     * Fetch records that have <code>LANGUAGE IN (values)</code> asynchronously
+     * Fetch records that have <code>SIGMA IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XMenu>> fetchByLanguageAsync(List<String> values) {
-        return fetchAsync(XMenu.X_MENU.LANGUAGE,values);
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XMenu>> fetchBySigmaAsync(List<String> values) {
+        return fetchAsync(XMenu.X_MENU.SIGMA,values);
     }
 
     /**
@@ -248,6 +284,41 @@ public class XMenuDao extends DAOImpl<XMenuRecord, cn.vertxup.ambient.tables.poj
      */
     public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XMenu>> fetchByMetadataAsync(List<String> values) {
         return fetchAsync(XMenu.X_MENU.METADATA,values);
+    }
+
+    /**
+     * Fetch records that have <code>LANGUAGE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XMenu>> fetchByLanguageAsync(List<String> values) {
+        return fetchAsync(XMenu.X_MENU.LANGUAGE,values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_AT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XMenu>> fetchByCreatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(XMenu.X_MENU.CREATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XMenu>> fetchByCreatedByAsync(List<String> values) {
+        return fetchAsync(XMenu.X_MENU.CREATED_BY,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XMenu>> fetchByUpdatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(XMenu.X_MENU.UPDATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XMenu>> fetchByUpdatedByAsync(List<String> values) {
+        return fetchAsync(XMenu.X_MENU.UPDATED_BY,values);
     }
 
     private io.vertx.core.Vertx vertx;

@@ -13,6 +13,7 @@ import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
 
 import javax.annotation.Generated;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class XSource extends TableImpl<XSourceRecord> {
      * The reference instance of <code>DB_ETERNAL.X_SOURCE</code>
      */
     public static final XSource X_SOURCE = new XSource();
-    private static final long serialVersionUID = 766995839;
+    private static final long serialVersionUID = -1737850495;
     /**
      * The column <code>DB_ETERNAL.X_SOURCE.KEY</code>. 「key」- 数据源主键
      */
@@ -80,21 +81,41 @@ public class XSource extends TableImpl<XSourceRecord> {
      */
     public final TableField<XSourceRecord, String> PASSWORD = createField("PASSWORD", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「password」- 密码");
     /**
+     * The column <code>DB_ETERNAL.X_SOURCE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     */
+    public final TableField<XSourceRecord, String> APP_ID = createField("APP_ID", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「appId」- 关联的应用程序ID");
+    /**
      * The column <code>DB_ETERNAL.X_SOURCE.ACTIVE</code>. 「active」- 是否启用
      */
     public final TableField<XSourceRecord, Boolean> ACTIVE = createField("ACTIVE", org.jooq.impl.SQLDataType.BIT, this, "「active」- 是否启用");
     /**
-     * The column <code>DB_ETERNAL.X_SOURCE.METADATA</code>. 「metadata」- 通过MetadataConnection分析读取的数据
+     * The column <code>DB_ETERNAL.X_SOURCE.SIGMA</code>. 「sigma」- 统一标识
      */
-    public final TableField<XSourceRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 通过MetadataConnection分析读取的数据");
+    public final TableField<XSourceRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「sigma」- 统一标识");
+    /**
+     * The column <code>DB_ETERNAL.X_SOURCE.METADATA</code>. 「metadata」- 附加配置
+     */
+    public final TableField<XSourceRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置");
     /**
      * The column <code>DB_ETERNAL.X_SOURCE.LANGUAGE</code>. 「language」- 使用的语言
      */
-    public final TableField<XSourceRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
+    public final TableField<XSourceRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(8), this, "「language」- 使用的语言");
     /**
-     * The column <code>DB_ETERNAL.X_SOURCE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * The column <code>DB_ETERNAL.X_SOURCE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
-    public final TableField<XSourceRecord, String> APP_ID = createField("APP_ID", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「appId」- 关联的应用程序ID");
+    public final TableField<XSourceRecord, LocalDateTime> CREATED_AT = createField("CREATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「createdAt」- 创建时间");
+    /**
+     * The column <code>DB_ETERNAL.X_SOURCE.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public final TableField<XSourceRecord, String> CREATED_BY = createField("CREATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「createdBy」- 创建人");
+    /**
+     * The column <code>DB_ETERNAL.X_SOURCE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public final TableField<XSourceRecord, LocalDateTime> UPDATED_AT = createField("UPDATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「updatedAt」- 更新时间");
+    /**
+     * The column <code>DB_ETERNAL.X_SOURCE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public final TableField<XSourceRecord, String> UPDATED_BY = createField("UPDATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「updatedBy」- 更新人");
 
     /**
      * Create a <code>DB_ETERNAL.X_SOURCE</code> table reference

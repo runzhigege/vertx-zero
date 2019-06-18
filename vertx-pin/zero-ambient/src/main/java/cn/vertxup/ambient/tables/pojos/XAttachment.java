@@ -6,6 +6,8 @@ package cn.vertxup.ambient.tables.pojos;
 
 import cn.vertxup.ambient.tables.interfaces.IXAttachment;
 
+import java.time.LocalDateTime;
+
 import javax.annotation.Generated;
 
 
@@ -22,23 +24,28 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XAttachment implements IXAttachment {
 
-    private static final long serialVersionUID = 1074827566;
+    private static final long serialVersionUID = -1605704517;
 
-    private String  key;
-    private String  storeWay;
-    private String  status;
-    private String  name;
-    private String  fileName;
-    private String  fileKey;
-    private String  fileUrl;
-    private String  filePath;
-    private String  extension;
-    private String  module;
-    private String  mime;
-    private Integer size;
-    private Boolean active;
-    private String  language;
-    private String  metadata;
+    private String        key;
+    private String        storeWay;
+    private String        status;
+    private String        name;
+    private String        fileName;
+    private String        fileKey;
+    private String        fileUrl;
+    private String        filePath;
+    private String        extension;
+    private String        module;
+    private String        mime;
+    private Integer       size;
+    private Boolean       active;
+    private String        sigma;
+    private String        metadata;
+    private String        language;
+    private LocalDateTime createdAt;
+    private String        createdBy;
+    private LocalDateTime updatedAt;
+    private String        updatedBy;
 
     public XAttachment() {}
 
@@ -56,26 +63,36 @@ public class XAttachment implements IXAttachment {
         this.mime = value.mime;
         this.size = value.size;
         this.active = value.active;
-        this.language = value.language;
+        this.sigma = value.sigma;
         this.metadata = value.metadata;
+        this.language = value.language;
+        this.createdAt = value.createdAt;
+        this.createdBy = value.createdBy;
+        this.updatedAt = value.updatedAt;
+        this.updatedBy = value.updatedBy;
     }
 
     public XAttachment(
-        String  key,
-        String  storeWay,
-        String  status,
-        String  name,
-        String  fileName,
-        String  fileKey,
-        String  fileUrl,
-        String  filePath,
-        String  extension,
-        String  module,
-        String  mime,
-        Integer size,
-        Boolean active,
-        String  language,
-        String  metadata
+        String        key,
+        String        storeWay,
+        String        status,
+        String        name,
+        String        fileName,
+        String        fileKey,
+        String        fileUrl,
+        String        filePath,
+        String        extension,
+        String        module,
+        String        mime,
+        Integer       size,
+        Boolean       active,
+        String        sigma,
+        String        metadata,
+        String        language,
+        LocalDateTime createdAt,
+        String        createdBy,
+        LocalDateTime updatedAt,
+        String        updatedBy
     ) {
         this.key = key;
         this.storeWay = storeWay;
@@ -90,8 +107,13 @@ public class XAttachment implements IXAttachment {
         this.mime = mime;
         this.size = size;
         this.active = active;
-        this.language = language;
+        this.sigma = sigma;
         this.metadata = metadata;
+        this.language = language;
+        this.createdAt = createdAt;
+        this.createdBy = createdBy;
+        this.updatedAt = updatedAt;
+        this.updatedBy = updatedBy;
     }
 
     @Override
@@ -238,13 +260,13 @@ public class XAttachment implements IXAttachment {
     }
 
     @Override
-    public String getLanguage() {
-        return this.language;
+    public String getSigma() {
+        return this.sigma;
     }
 
     @Override
-    public XAttachment setLanguage(String language) {
-        this.language = language;
+    public XAttachment setSigma(String sigma) {
+        this.sigma = sigma;
         return this;
     }
 
@@ -256,6 +278,61 @@ public class XAttachment implements IXAttachment {
     @Override
     public XAttachment setMetadata(String metadata) {
         this.metadata = metadata;
+        return this;
+    }
+
+    @Override
+    public String getLanguage() {
+        return this.language;
+    }
+
+    @Override
+    public XAttachment setLanguage(String language) {
+        this.language = language;
+        return this;
+    }
+
+    @Override
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    @Override
+    public XAttachment setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    @Override
+    public String getCreatedBy() {
+        return this.createdBy;
+    }
+
+    @Override
+    public XAttachment setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    @Override
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    @Override
+    public XAttachment setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+        return this;
+    }
+
+    @Override
+    public String getUpdatedBy() {
+        return this.updatedBy;
+    }
+
+    @Override
+    public XAttachment setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
         return this;
     }
 
@@ -276,8 +353,13 @@ public class XAttachment implements IXAttachment {
         sb.append(", ").append(mime);
         sb.append(", ").append(size);
         sb.append(", ").append(active);
-        sb.append(", ").append(language);
+        sb.append(", ").append(sigma);
         sb.append(", ").append(metadata);
+        sb.append(", ").append(language);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(createdBy);
+        sb.append(", ").append(updatedAt);
+        sb.append(", ").append(updatedBy);
 
         sb.append(")");
         return sb.toString();
@@ -305,8 +387,13 @@ public class XAttachment implements IXAttachment {
         setMime(from.getMime());
         setSize(from.getSize());
         setActive(from.getActive());
-        setLanguage(from.getLanguage());
+        setSigma(from.getSigma());
         setMetadata(from.getMetadata());
+        setLanguage(from.getLanguage());
+        setCreatedAt(from.getCreatedAt());
+        setCreatedBy(from.getCreatedBy());
+        setUpdatedAt(from.getUpdatedAt());
+        setUpdatedBy(from.getUpdatedBy());
     }
 
     /**

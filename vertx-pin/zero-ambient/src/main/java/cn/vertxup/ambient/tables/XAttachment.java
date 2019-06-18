@@ -13,6 +13,7 @@ import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
 
 import javax.annotation.Generated;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class XAttachment extends TableImpl<XAttachmentRecord> {
      * The reference instance of <code>DB_ETERNAL.X_ATTACHMENT</code>
      */
     public static final XAttachment X_ATTACHMENT = new XAttachment();
-    private static final long serialVersionUID = 924410252;
+    private static final long serialVersionUID = 1807714686;
     /**
      * The column <code>DB_ETERNAL.X_ATTACHMENT.KEY</code>. 「key」- 附件的ID值
      */
@@ -88,13 +89,33 @@ public class XAttachment extends TableImpl<XAttachmentRecord> {
      */
     public final TableField<XAttachmentRecord, Boolean> ACTIVE = createField("ACTIVE", org.jooq.impl.SQLDataType.BIT, this, "「active」- 是否启用");
     /**
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public final TableField<XAttachmentRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「sigma」- 统一标识");
+    /**
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.METADATA</code>. 「metadata」- 附加配置
+     */
+    public final TableField<XAttachmentRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置");
+    /**
      * The column <code>DB_ETERNAL.X_ATTACHMENT.LANGUAGE</code>. 「language」- 使用的语言
      */
-    public final TableField<XAttachmentRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
+    public final TableField<XAttachmentRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(8), this, "「language」- 使用的语言");
     /**
-     * The column <code>DB_ETERNAL.X_ATTACHMENT.METADATA</code>. 「metadata」- 附加配置数据
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.CREATED_AT</code>. 「createdAt」- 创建时间
      */
-    public final TableField<XAttachmentRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置数据");
+    public final TableField<XAttachmentRecord, LocalDateTime> CREATED_AT = createField("CREATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「createdAt」- 创建时间");
+    /**
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public final TableField<XAttachmentRecord, String> CREATED_BY = createField("CREATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「createdBy」- 创建人");
+    /**
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public final TableField<XAttachmentRecord, LocalDateTime> UPDATED_AT = createField("UPDATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「updatedAt」- 更新时间");
+    /**
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public final TableField<XAttachmentRecord, String> UPDATED_BY = createField("UPDATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「updatedBy」- 更新人");
 
     /**
      * Create a <code>DB_ETERNAL.X_ATTACHMENT</code> table reference
