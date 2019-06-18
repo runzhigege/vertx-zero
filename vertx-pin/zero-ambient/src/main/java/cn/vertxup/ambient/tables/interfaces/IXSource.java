@@ -23,152 +23,152 @@ import javax.annotation.Generated;
 public interface IXSource extends Serializable {
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.KEY</code>. 「key」- 数据源主键
+     * Setter for <code>DB_ETERNAL.X_SOURCE.KEY</code>. 「key」- 数据源主键
      */
     public IXSource setKey(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.KEY</code>. 「key」- 数据源主键
+     * Getter for <code>DB_ETERNAL.X_SOURCE.KEY</code>. 「key」- 数据源主键
      */
     public String getKey();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.IP_V4</code>. 「ipV4」- IP v4地址
+     * Setter for <code>DB_ETERNAL.X_SOURCE.IP_V4</code>. 「ipV4」- IP v4地址
      */
     public IXSource setIpV4(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.IP_V4</code>. 「ipV4」- IP v4地址
+     * Getter for <code>DB_ETERNAL.X_SOURCE.IP_V4</code>. 「ipV4」- IP v4地址
      */
     public String getIpV4();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.IP_V6</code>. 「ipV6」- IP v6地址
+     * Setter for <code>DB_ETERNAL.X_SOURCE.IP_V6</code>. 「ipV6」- IP v6地址
      */
     public IXSource setIpV6(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.IP_V6</code>. 「ipV6」- IP v6地址
+     * Getter for <code>DB_ETERNAL.X_SOURCE.IP_V6</code>. 「ipV6」- IP v6地址
      */
     public String getIpV6();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.HOSTNAME</code>. 「hostname」- 主机地址
+     * Setter for <code>DB_ETERNAL.X_SOURCE.HOSTNAME</code>. 「hostname」- 主机地址
      */
     public IXSource setHostname(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.HOSTNAME</code>. 「hostname」- 主机地址
+     * Getter for <code>DB_ETERNAL.X_SOURCE.HOSTNAME</code>. 「hostname」- 主机地址
      */
     public String getHostname();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.PORT</code>. 「port」- 端口号
+     * Setter for <code>DB_ETERNAL.X_SOURCE.PORT</code>. 「port」- 端口号
      */
     public IXSource setPort(Integer value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.PORT</code>. 「port」- 端口号
+     * Getter for <code>DB_ETERNAL.X_SOURCE.PORT</code>. 「port」- 端口号
      */
     public Integer getPort();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.CATEGORY</code>. 「category」- 数据库类型
+     * Setter for <code>DB_ETERNAL.X_SOURCE.CATEGORY</code>. 「category」- 数据库类型
      */
     public IXSource setCategory(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.CATEGORY</code>. 「category」- 数据库类型
+     * Getter for <code>DB_ETERNAL.X_SOURCE.CATEGORY</code>. 「category」- 数据库类型
      */
     public String getCategory();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.JDBC_URL</code>. 「jdbcUrl」- JDBC连接字符串
+     * Setter for <code>DB_ETERNAL.X_SOURCE.JDBC_URL</code>. 「jdbcUrl」- JDBC连接字符串
      */
     public IXSource setJdbcUrl(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.JDBC_URL</code>. 「jdbcUrl」- JDBC连接字符串
+     * Getter for <code>DB_ETERNAL.X_SOURCE.JDBC_URL</code>. 「jdbcUrl」- JDBC连接字符串
      */
     public String getJdbcUrl();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」- 连接字符串中的配置key=value
+     * Setter for <code>DB_ETERNAL.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」- 连接字符串中的配置key=value
      */
     public IXSource setJdbcConfig(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」- 连接字符串中的配置key=value
+     * Getter for <code>DB_ETERNAL.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」- 连接字符串中的配置key=value
      */
     public String getJdbcConfig();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.INSTANCE</code>. 「instance」- 实例名称
+     * Setter for <code>DB_ETERNAL.X_SOURCE.INSTANCE</code>. 「instance」- 实例名称
      */
     public IXSource setInstance(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.INSTANCE</code>. 「instance」- 实例名称
+     * Getter for <code>DB_ETERNAL.X_SOURCE.INSTANCE</code>. 「instance」- 实例名称
      */
     public String getInstance();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.USERNAME</code>. 「username」- 账号
+     * Setter for <code>DB_ETERNAL.X_SOURCE.USERNAME</code>. 「username」- 账号
      */
     public IXSource setUsername(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.USERNAME</code>. 「username」- 账号
+     * Getter for <code>DB_ETERNAL.X_SOURCE.USERNAME</code>. 「username」- 账号
      */
     public String getUsername();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.PASSWORD</code>. 「password」- 密码
+     * Setter for <code>DB_ETERNAL.X_SOURCE.PASSWORD</code>. 「password」- 密码
      */
     public IXSource setPassword(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.PASSWORD</code>. 「password」- 密码
+     * Getter for <code>DB_ETERNAL.X_SOURCE.PASSWORD</code>. 「password」- 密码
      */
     public String getPassword();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ETERNAL.X_SOURCE.ACTIVE</code>. 「active」- 是否启用
      */
     public IXSource setActive(Boolean value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ETERNAL.X_SOURCE.ACTIVE</code>. 「active」- 是否启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.METADATA</code>. 「metadata」- 通过MetadataConnection分析读取的数据
+     * Setter for <code>DB_ETERNAL.X_SOURCE.METADATA</code>. 「metadata」- 通过MetadataConnection分析读取的数据
      */
     public IXSource setMetadata(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.METADATA</code>. 「metadata」- 通过MetadataConnection分析读取的数据
+     * Getter for <code>DB_ETERNAL.X_SOURCE.METADATA</code>. 「metadata」- 通过MetadataConnection分析读取的数据
      */
     public String getMetadata();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ETERNAL.X_SOURCE.LANGUAGE</code>. 「language」- 使用的语言
      */
     public IXSource setLanguage(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ETERNAL.X_SOURCE.LANGUAGE</code>. 「language」- 使用的语言
      */
     public String getLanguage();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>DB_ETERNAL.X_SOURCE.APP_ID</code>. 「appId」- 关联的应用程序ID
      */
     public IXSource setAppId(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>DB_ETERNAL.X_SOURCE.APP_ID</code>. 「appId」- 关联的应用程序ID
      */
     public String getAppId();
 

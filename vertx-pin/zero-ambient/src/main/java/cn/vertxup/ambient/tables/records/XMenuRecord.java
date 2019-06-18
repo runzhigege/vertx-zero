@@ -29,10 +29,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Record13<String, String, String, String, String, String, Long, Long, String, String, Boolean, String, String>, IXMenu {
 
-    private static final long serialVersionUID = 956373454;
+    private static final long serialVersionUID = -119121310;
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MENU.KEY</code>. 「key」- 菜单主键
+     * Setter for <code>DB_ETERNAL.X_MENU.KEY</code>. 「key」- 菜单主键
      */
     @Override
     public XMenuRecord setKey(String value) {
@@ -41,7 +41,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MENU.KEY</code>. 「key」- 菜单主键
+     * Getter for <code>DB_ETERNAL.X_MENU.KEY</code>. 「key」- 菜单主键
      */
     @Override
     public String getKey() {
@@ -49,7 +49,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MENU.NAME</code>. 「name」- 菜单名称
+     * Setter for <code>DB_ETERNAL.X_MENU.NAME</code>. 「name」- 菜单名称
      */
     @Override
     public XMenuRecord setName(String value) {
@@ -58,7 +58,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MENU.NAME</code>. 「name」- 菜单名称
+     * Getter for <code>DB_ETERNAL.X_MENU.NAME</code>. 「name」- 菜单名称
      */
     @Override
     public String getName() {
@@ -66,7 +66,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MENU.ICON</code>. 「icon」- 菜单使用的icon
+     * Setter for <code>DB_ETERNAL.X_MENU.ICON</code>. 「icon」- 菜单使用的icon
      */
     @Override
     public XMenuRecord setIcon(String value) {
@@ -75,7 +75,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MENU.ICON</code>. 「icon」- 菜单使用的icon
+     * Getter for <code>DB_ETERNAL.X_MENU.ICON</code>. 「icon」- 菜单使用的icon
      */
     @Override
     public String getIcon() {
@@ -83,7 +83,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MENU.TEXT</code>. 「text」- 菜单显示文字
+     * Setter for <code>DB_ETERNAL.X_MENU.TEXT</code>. 「text」- 菜单显示文字
      */
     @Override
     public XMenuRecord setText(String value) {
@@ -92,7 +92,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MENU.TEXT</code>. 「text」- 菜单显示文字
+     * Getter for <code>DB_ETERNAL.X_MENU.TEXT</code>. 「text」- 菜单显示文字
      */
     @Override
     public String getText() {
@@ -100,7 +100,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MENU.URI</code>. 「uri」- 菜单地址（不包含应用的path）
+     * Setter for <code>DB_ETERNAL.X_MENU.URI</code>. 「uri」- 菜单地址（不包含应用的path）
      */
     @Override
     public XMenuRecord setUri(String value) {
@@ -109,7 +109,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MENU.URI</code>. 「uri」- 菜单地址（不包含应用的path）
+     * Getter for <code>DB_ETERNAL.X_MENU.URI</code>. 「uri」- 菜单地址（不包含应用的path）
      */
     @Override
     public String getUri() {
@@ -117,7 +117,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MENU.TYPE</code>. 「type」- 菜单类型
+     * Setter for <code>DB_ETERNAL.X_MENU.TYPE</code>. 「type」- 菜单类型
      */
     @Override
     public XMenuRecord setType(String value) {
@@ -126,7 +126,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MENU.TYPE</code>. 「type」- 菜单类型
+     * Getter for <code>DB_ETERNAL.X_MENU.TYPE</code>. 「type」- 菜单类型
      */
     @Override
     public String getType() {
@@ -134,7 +134,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MENU.ORDER</code>. 「order」- 菜单排序
+     * Setter for <code>DB_ETERNAL.X_MENU.ORDER</code>. 「order」- 菜单排序
      */
     @Override
     public XMenuRecord setOrder(Long value) {
@@ -143,7 +143,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MENU.ORDER</code>. 「order」- 菜单排序
+     * Getter for <code>DB_ETERNAL.X_MENU.ORDER</code>. 「order」- 菜单排序
      */
     @Override
     public Long getOrder() {
@@ -151,7 +151,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MENU.LEVEL</code>. 「level」- 菜单层级
+     * Setter for <code>DB_ETERNAL.X_MENU.LEVEL</code>. 「level」- 菜单层级
      */
     @Override
     public XMenuRecord setLevel(Long value) {
@@ -160,7 +160,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MENU.LEVEL</code>. 「level」- 菜单层级
+     * Getter for <code>DB_ETERNAL.X_MENU.LEVEL</code>. 「level」- 菜单层级
      */
     @Override
     public Long getLevel() {
@@ -168,7 +168,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MENU.PARENT_ID</code>. 「parentId」- 菜单父ID
+     * Setter for <code>DB_ETERNAL.X_MENU.PARENT_ID</code>. 「parentId」- 菜单父ID
      */
     @Override
     public XMenuRecord setParentId(String value) {
@@ -177,7 +177,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MENU.PARENT_ID</code>. 「parentId」- 菜单父ID
+     * Getter for <code>DB_ETERNAL.X_MENU.PARENT_ID</code>. 「parentId」- 菜单父ID
      */
     @Override
     public String getParentId() {
@@ -185,7 +185,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MENU.APP_ID</code>. 「appId」- 应用程序ID
+     * Setter for <code>DB_ETERNAL.X_MENU.APP_ID</code>. 「appId」- 应用程序ID
      */
     @Override
     public XMenuRecord setAppId(String value) {
@@ -194,7 +194,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MENU.APP_ID</code>. 「appId」- 应用程序ID
+     * Getter for <code>DB_ETERNAL.X_MENU.APP_ID</code>. 「appId」- 应用程序ID
      */
     @Override
     public String getAppId() {
@@ -202,7 +202,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MENU.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ETERNAL.X_MENU.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public XMenuRecord setActive(Boolean value) {
@@ -211,7 +211,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MENU.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ETERNAL.X_MENU.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public Boolean getActive() {
@@ -219,7 +219,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MENU.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ETERNAL.X_MENU.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public XMenuRecord setLanguage(String value) {
@@ -228,7 +228,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MENU.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ETERNAL.X_MENU.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public String getLanguage() {
@@ -236,7 +236,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MENU.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ETERNAL.X_MENU.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public XMenuRecord setMetadata(String value) {
@@ -245,7 +245,7 @@ public class XMenuRecord extends UpdatableRecordImpl<XMenuRecord> implements Rec
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MENU.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ETERNAL.X_MENU.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public String getMetadata() {

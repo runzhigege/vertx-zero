@@ -31,67 +31,67 @@ import java.util.List;
 public class XModule extends TableImpl<XModuleRecord> {
 
     /**
-     * The reference instance of <code>DB_ORIGIN_X.X_MODULE</code>
+     * The reference instance of <code>DB_ETERNAL.X_MODULE</code>
      */
     public static final XModule X_MODULE = new XModule();
-    private static final long serialVersionUID = -819198574;
+    private static final long serialVersionUID = 1136095738;
     /**
-     * The column <code>DB_ORIGIN_X.X_MODULE.KEY</code>. 「key」- 模块唯一主键
+     * The column <code>DB_ETERNAL.X_MODULE.KEY</code>. 「key」- 模块唯一主键
      */
     public final TableField<XModuleRecord, String> KEY = createField("KEY", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「key」- 模块唯一主键");
     /**
-     * The column <code>DB_ORIGIN_X.X_MODULE.NAME</code>. 「name」- 模块名称
+     * The column <code>DB_ETERNAL.X_MODULE.NAME</code>. 「name」- 模块名称
      */
     public final TableField<XModuleRecord, String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「name」- 模块名称");
     /**
-     * The column <code>DB_ORIGIN_X.X_MODULE.CODE</code>. 「code」- 应用程序编码
+     * The column <code>DB_ETERNAL.X_MODULE.CODE</code>. 「code」- 应用程序编码
      */
     public final TableField<XModuleRecord, String> CODE = createField("CODE", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「code」- 应用程序编码");
     /**
-     * The column <code>DB_ORIGIN_X.X_MODULE.CAT</code>. 「cat」- 模块类型
+     * The column <code>DB_ETERNAL.X_MODULE.CAT</code>. 「cat」- 模块类型
      */
     public final TableField<XModuleRecord, String> CAT = createField("CAT", org.jooq.impl.SQLDataType.VARCHAR(20), this, "「cat」- 模块类型");
     /**
-     * The column <code>DB_ORIGIN_X.X_MODULE.URL_ENTRY</code>. 「urlEntry」— 模块入口地址
+     * The column <code>DB_ETERNAL.X_MODULE.URL_ENTRY</code>. 「urlEntry」— 模块入口地址
      */
     public final TableField<XModuleRecord, String> URL_ENTRY = createField("URL_ENTRY", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「urlEntry」— 模块入口地址");
     /**
-     * The column <code>DB_ORIGIN_X.X_MODULE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * The column <code>DB_ETERNAL.X_MODULE.APP_ID</code>. 「appId」- 关联的应用程序ID
      */
     public final TableField<XModuleRecord, String> APP_ID = createField("APP_ID", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「appId」- 关联的应用程序ID");
     /**
-     * The column <code>DB_ORIGIN_X.X_MODULE.MODEL_ID</code>. 「modelId」- 当前模块关联的主模型ID
+     * The column <code>DB_ETERNAL.X_MODULE.MODEL_ID</code>. 「modelId」- 当前模块关联的主模型ID
      */
     public final TableField<XModuleRecord, String> MODEL_ID = createField("MODEL_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「modelId」- 当前模块关联的主模型ID");
     /**
-     * The column <code>DB_ORIGIN_X.X_MODULE.ACTIVE</code>. 「active」- 是否启用
+     * The column <code>DB_ETERNAL.X_MODULE.ACTIVE</code>. 「active」- 是否启用
      */
     public final TableField<XModuleRecord, Boolean> ACTIVE = createField("ACTIVE", org.jooq.impl.SQLDataType.BIT, this, "「active」- 是否启用");
     /**
-     * The column <code>DB_ORIGIN_X.X_MODULE.METADATA</code>. 「metadata」- 附加配置数据
+     * The column <code>DB_ETERNAL.X_MODULE.METADATA</code>. 「metadata」- 附加配置数据
      */
     public final TableField<XModuleRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置数据");
     /**
-     * The column <code>DB_ORIGIN_X.X_MODULE.LANGUAGE</code>. 「language」- 使用的语言
+     * The column <code>DB_ETERNAL.X_MODULE.LANGUAGE</code>. 「language」- 使用的语言
      */
     public final TableField<XModuleRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
 
     /**
-     * Create a <code>DB_ORIGIN_X.X_MODULE</code> table reference
+     * Create a <code>DB_ETERNAL.X_MODULE</code> table reference
      */
     public XModule() {
         this(DSL.name("X_MODULE"), null);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.X_MODULE</code> table reference
+     * Create an aliased <code>DB_ETERNAL.X_MODULE</code> table reference
      */
     public XModule(String alias) {
         this(DSL.name(alias), X_MODULE);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.X_MODULE</code> table reference
+     * Create an aliased <code>DB_ETERNAL.X_MODULE</code> table reference
      */
     public XModule(Name alias) {
         this(alias, X_MODULE);
@@ -118,7 +118,7 @@ public class XModule extends TableImpl<XModuleRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Db.DB_ORIGIN_X;
+        return Db.DB_ETERNAL;
     }
 
     /**

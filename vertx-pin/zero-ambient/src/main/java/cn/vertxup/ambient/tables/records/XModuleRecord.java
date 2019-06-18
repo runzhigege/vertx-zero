@@ -29,10 +29,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements Record10<String, String, String, String, String, String, String, Boolean, String, String>, IXModule {
 
-    private static final long serialVersionUID = 1151776290;
+    private static final long serialVersionUID = 1935630120;
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.KEY</code>. 「key」- 模块唯一主键
+     * Setter for <code>DB_ETERNAL.X_MODULE.KEY</code>. 「key」- 模块唯一主键
      */
     @Override
     public XModuleRecord setKey(String value) {
@@ -41,7 +41,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.KEY</code>. 「key」- 模块唯一主键
+     * Getter for <code>DB_ETERNAL.X_MODULE.KEY</code>. 「key」- 模块唯一主键
      */
     @Override
     public String getKey() {
@@ -49,7 +49,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.NAME</code>. 「name」- 模块名称
+     * Setter for <code>DB_ETERNAL.X_MODULE.NAME</code>. 「name」- 模块名称
      */
     @Override
     public XModuleRecord setName(String value) {
@@ -58,7 +58,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.NAME</code>. 「name」- 模块名称
+     * Getter for <code>DB_ETERNAL.X_MODULE.NAME</code>. 「name」- 模块名称
      */
     @Override
     public String getName() {
@@ -66,7 +66,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.CODE</code>. 「code」- 应用程序编码
+     * Setter for <code>DB_ETERNAL.X_MODULE.CODE</code>. 「code」- 应用程序编码
      */
     @Override
     public XModuleRecord setCode(String value) {
@@ -75,7 +75,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.CODE</code>. 「code」- 应用程序编码
+     * Getter for <code>DB_ETERNAL.X_MODULE.CODE</code>. 「code」- 应用程序编码
      */
     @Override
     public String getCode() {
@@ -83,7 +83,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.CAT</code>. 「cat」- 模块类型
+     * Setter for <code>DB_ETERNAL.X_MODULE.CAT</code>. 「cat」- 模块类型
      */
     @Override
     public XModuleRecord setCat(String value) {
@@ -92,7 +92,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.CAT</code>. 「cat」- 模块类型
+     * Getter for <code>DB_ETERNAL.X_MODULE.CAT</code>. 「cat」- 模块类型
      */
     @Override
     public String getCat() {
@@ -100,7 +100,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.URL_ENTRY</code>. 「urlEntry」— 模块入口地址
+     * Setter for <code>DB_ETERNAL.X_MODULE.URL_ENTRY</code>. 「urlEntry」— 模块入口地址
      */
     @Override
     public XModuleRecord setUrlEntry(String value) {
@@ -109,7 +109,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.URL_ENTRY</code>. 「urlEntry」— 模块入口地址
+     * Getter for <code>DB_ETERNAL.X_MODULE.URL_ENTRY</code>. 「urlEntry」— 模块入口地址
      */
     @Override
     public String getUrlEntry() {
@@ -117,7 +117,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>DB_ETERNAL.X_MODULE.APP_ID</code>. 「appId」- 关联的应用程序ID
      */
     @Override
     public XModuleRecord setAppId(String value) {
@@ -126,7 +126,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>DB_ETERNAL.X_MODULE.APP_ID</code>. 「appId」- 关联的应用程序ID
      */
     @Override
     public String getAppId() {
@@ -134,7 +134,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.MODEL_ID</code>. 「modelId」- 当前模块关联的主模型ID
+     * Setter for <code>DB_ETERNAL.X_MODULE.MODEL_ID</code>. 「modelId」- 当前模块关联的主模型ID
      */
     @Override
     public XModuleRecord setModelId(String value) {
@@ -143,7 +143,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.MODEL_ID</code>. 「modelId」- 当前模块关联的主模型ID
+     * Getter for <code>DB_ETERNAL.X_MODULE.MODEL_ID</code>. 「modelId」- 当前模块关联的主模型ID
      */
     @Override
     public String getModelId() {
@@ -151,7 +151,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ETERNAL.X_MODULE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public XModuleRecord setActive(Boolean value) {
@@ -160,7 +160,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ETERNAL.X_MODULE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public Boolean getActive() {
@@ -168,7 +168,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ETERNAL.X_MODULE.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public XModuleRecord setMetadata(String value) {
@@ -177,7 +177,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ETERNAL.X_MODULE.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public String getMetadata() {
@@ -185,7 +185,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ETERNAL.X_MODULE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public XModuleRecord setLanguage(String value) {
@@ -194,7 +194,7 @@ public class XModuleRecord extends UpdatableRecordImpl<XModuleRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ETERNAL.X_MODULE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public String getLanguage() {

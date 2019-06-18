@@ -30,11 +30,11 @@ public class DefaultCatalog extends CatalogImpl {
      * The reference instance of <code></code>
      */
     public static final DefaultCatalog DEFAULT_CATALOG = new DefaultCatalog();
-    private static final long serialVersionUID = -744242084;
+    private static final long serialVersionUID = 78037053;
     /**
-     * The schema <code>DB_ORIGIN_X</code>.
+     * The schema <code>DB_ETERNAL</code>.
      */
-    public final Db DB_ORIGIN_X = Db.DB_ORIGIN_X;
+    public final Db DB_ETERNAL = Db.DB_ETERNAL;
 
     /**
      * No further instances allowed
@@ -52,6 +52,6 @@ public class DefaultCatalog extends CatalogImpl {
 
     private final List<Schema> getSchemas0() {
         return Arrays.<Schema>asList(
-                Db.DB_ORIGIN_X);
+                Db.DB_ETERNAL);
     }
 }

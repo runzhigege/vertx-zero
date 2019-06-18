@@ -31,71 +31,71 @@ import java.util.List;
 public class XTabular extends TableImpl<XTabularRecord> {
 
     /**
-     * The reference instance of <code>DB_ORIGIN_X.X_TABULAR</code>
+     * The reference instance of <code>DB_ETERNAL.X_TABULAR</code>
      */
     public static final XTabular X_TABULAR = new XTabular();
-    private static final long serialVersionUID = -843748730;
+    private static final long serialVersionUID = -1532333146;
     /**
-     * The column <code>DB_ORIGIN_X.X_TABULAR.KEY</code>. 「key」- 列表主键
+     * The column <code>DB_ETERNAL.X_TABULAR.KEY</code>. 「key」- 列表主键
      */
     public final TableField<XTabularRecord, String> KEY = createField("KEY", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「key」- 列表主键");
     /**
-     * The column <code>DB_ORIGIN_X.X_TABULAR.NAME</code>. 「name」- 列表名称
+     * The column <code>DB_ETERNAL.X_TABULAR.NAME</code>. 「name」- 列表名称
      */
     public final TableField<XTabularRecord, String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「name」- 列表名称");
     /**
-     * The column <code>DB_ORIGIN_X.X_TABULAR.CODE</code>. 「code」- 列表编号
+     * The column <code>DB_ETERNAL.X_TABULAR.CODE</code>. 「code」- 列表编号
      */
     public final TableField<XTabularRecord, String> CODE = createField("CODE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「code」- 列表编号");
     /**
-     * The column <code>DB_ORIGIN_X.X_TABULAR.TYPE</code>. 「type」- 列表类型
+     * The column <code>DB_ETERNAL.X_TABULAR.TYPE</code>. 「type」- 列表类型
      */
     public final TableField<XTabularRecord, String> TYPE = createField("TYPE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「type」- 列表类型");
     /**
-     * The column <code>DB_ORIGIN_X.X_TABULAR.ICON</code>. 「icon」- 列表图标
+     * The column <code>DB_ETERNAL.X_TABULAR.ICON</code>. 「icon」- 列表图标
      */
     public final TableField<XTabularRecord, String> ICON = createField("ICON", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「icon」- 列表图标");
     /**
-     * The column <code>DB_ORIGIN_X.X_TABULAR.SORT</code>. 「sort」- 排序信息
+     * The column <code>DB_ETERNAL.X_TABULAR.SORT</code>. 「sort」- 排序信息
      */
     public final TableField<XTabularRecord, Integer> SORT = createField("SORT", org.jooq.impl.SQLDataType.INTEGER, this, "「sort」- 排序信息");
     /**
-     * The column <code>DB_ORIGIN_X.X_TABULAR.COMMENT</code>. 「comment」- 备注信息
+     * The column <code>DB_ETERNAL.X_TABULAR.COMMENT</code>. 「comment」- 备注信息
      */
     public final TableField<XTabularRecord, String> COMMENT = createField("COMMENT", org.jooq.impl.SQLDataType.CLOB, this, "「comment」- 备注信息");
     /**
-     * The column <code>DB_ORIGIN_X.X_TABULAR.ACTIVE</code>. 「active」- 是否启用
+     * The column <code>DB_ETERNAL.X_TABULAR.ACTIVE</code>. 「active」- 是否启用
      */
     public final TableField<XTabularRecord, Boolean> ACTIVE = createField("ACTIVE", org.jooq.impl.SQLDataType.BIT, this, "「active」- 是否启用");
     /**
-     * The column <code>DB_ORIGIN_X.X_TABULAR.METADATA</code>. 「metadata」-扩展配置信息
+     * The column <code>DB_ETERNAL.X_TABULAR.METADATA</code>. 「metadata」-扩展配置信息
      */
     public final TableField<XTabularRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」-扩展配置信息");
     /**
-     * The column <code>DB_ORIGIN_X.X_TABULAR.LANGUAGE</code>. 「language」- 使用的语言
+     * The column <code>DB_ETERNAL.X_TABULAR.LANGUAGE</code>. 「language」- 使用的语言
      */
     public final TableField<XTabularRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
     /**
-     * The column <code>DB_ORIGIN_X.X_TABULAR.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * The column <code>DB_ETERNAL.X_TABULAR.APP_ID</code>. 「appId」- 关联的应用程序ID
      */
     public final TableField<XTabularRecord, String> APP_ID = createField("APP_ID", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「appId」- 关联的应用程序ID");
 
     /**
-     * Create a <code>DB_ORIGIN_X.X_TABULAR</code> table reference
+     * Create a <code>DB_ETERNAL.X_TABULAR</code> table reference
      */
     public XTabular() {
         this(DSL.name("X_TABULAR"), null);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.X_TABULAR</code> table reference
+     * Create an aliased <code>DB_ETERNAL.X_TABULAR</code> table reference
      */
     public XTabular(String alias) {
         this(DSL.name(alias), X_TABULAR);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.X_TABULAR</code> table reference
+     * Create an aliased <code>DB_ETERNAL.X_TABULAR</code> table reference
      */
     public XTabular(Name alias) {
         this(alias, X_TABULAR);
@@ -122,7 +122,7 @@ public class XTabular extends TableImpl<XTabularRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Db.DB_ORIGIN_X;
+        return Db.DB_ETERNAL;
     }
 
     /**

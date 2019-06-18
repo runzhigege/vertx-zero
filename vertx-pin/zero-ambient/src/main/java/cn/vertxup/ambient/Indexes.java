@@ -9,6 +9,7 @@ import cn.vertxup.ambient.tables.XAttachment;
 import cn.vertxup.ambient.tables.XCategory;
 import cn.vertxup.ambient.tables.XMenu;
 import cn.vertxup.ambient.tables.XModule;
+import cn.vertxup.ambient.tables.XNumber;
 import cn.vertxup.ambient.tables.XSource;
 import cn.vertxup.ambient.tables.XTabular;
 
@@ -20,7 +21,7 @@ import org.jooq.impl.Internal;
 
 
 /**
- * A class modelling indexes of tables of the <code>DB_ORIGIN_X</code> schema.
+ * A class modelling indexes of tables of the <code>DB_ETERNAL</code> schema.
  */
 @Generated(
     value = {
@@ -51,6 +52,8 @@ public class Indexes {
     public static final Index X_MENU_PRIMARY = Indexes0.X_MENU_PRIMARY;
     public static final Index X_MODULE_PRIMARY = Indexes0.X_MODULE_PRIMARY;
     public static final Index X_MODULE_URL_ENTRY = Indexes0.X_MODULE_URL_ENTRY;
+    public static final Index X_NUMBER_CODE = Indexes0.X_NUMBER_CODE;
+    public static final Index X_NUMBER_PRIMARY = Indexes0.X_NUMBER_PRIMARY;
     public static final Index X_SOURCE_APP_ID = Indexes0.X_SOURCE_APP_ID;
     public static final Index X_SOURCE_PRIMARY = Indexes0.X_SOURCE_PRIMARY;
     public static final Index X_TABULAR_APP_ID = Indexes0.X_TABULAR_APP_ID;
@@ -76,6 +79,8 @@ public class Indexes {
         public static Index X_MENU_PRIMARY = Internal.createIndex("PRIMARY", XMenu.X_MENU, new OrderField[] { XMenu.X_MENU.KEY }, true);
         public static Index X_MODULE_PRIMARY = Internal.createIndex("PRIMARY", XModule.X_MODULE, new OrderField[] { XModule.X_MODULE.KEY }, true);
         public static Index X_MODULE_URL_ENTRY = Internal.createIndex("URL_ENTRY", XModule.X_MODULE, new OrderField[] { XModule.X_MODULE.URL_ENTRY }, true);
+        public static Index X_NUMBER_CODE = Internal.createIndex("CODE", XNumber.X_NUMBER, new OrderField[] { XNumber.X_NUMBER.CODE, XNumber.X_NUMBER.SIGMA }, true);
+        public static Index X_NUMBER_PRIMARY = Internal.createIndex("PRIMARY", XNumber.X_NUMBER, new OrderField[] { XNumber.X_NUMBER.KEY }, true);
         public static Index X_SOURCE_APP_ID = Internal.createIndex("APP_ID", XSource.X_SOURCE, new OrderField[] { XSource.X_SOURCE.APP_ID }, true);
         public static Index X_SOURCE_PRIMARY = Internal.createIndex("PRIMARY", XSource.X_SOURCE, new OrderField[] { XSource.X_SOURCE.KEY }, true);
         public static Index X_TABULAR_APP_ID = Internal.createIndex("APP_ID", XTabular.X_TABULAR, new OrderField[] { XTabular.X_TABULAR.APP_ID, XTabular.X_TABULAR.TYPE, XTabular.X_TABULAR.CODE }, true);

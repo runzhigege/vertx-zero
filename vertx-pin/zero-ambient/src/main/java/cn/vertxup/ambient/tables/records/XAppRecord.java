@@ -29,10 +29,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Record16<String, String, String, String, String, String, Integer, String, String, String, String, String, String, Boolean, String, String>, IXApp {
 
-    private static final long serialVersionUID = -836093959;
+    private static final long serialVersionUID = -1299106139;
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.KEY</code>. 「key」- 应用程序主键
+     * Setter for <code>DB_ETERNAL.X_APP.KEY</code>. 「key」- 应用程序主键
      */
     @Override
     public XAppRecord setKey(String value) {
@@ -41,7 +41,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.KEY</code>. 「key」- 应用程序主键
+     * Getter for <code>DB_ETERNAL.X_APP.KEY</code>. 「key」- 应用程序主键
      */
     @Override
     public String getKey() {
@@ -49,7 +49,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.NAME</code>. 「name」- 应用程序名称
+     * Setter for <code>DB_ETERNAL.X_APP.NAME</code>. 「name」- 应用程序名称
      */
     @Override
     public XAppRecord setName(String value) {
@@ -58,7 +58,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.NAME</code>. 「name」- 应用程序名称
+     * Getter for <code>DB_ETERNAL.X_APP.NAME</code>. 「name」- 应用程序名称
      */
     @Override
     public String getName() {
@@ -66,7 +66,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.CODE</code>. 「code」- 应用程序编码
+     * Setter for <code>DB_ETERNAL.X_APP.CODE</code>. 「code」- 应用程序编码
      */
     @Override
     public XAppRecord setCode(String value) {
@@ -75,7 +75,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.CODE</code>. 「code」- 应用程序编码
+     * Getter for <code>DB_ETERNAL.X_APP.CODE</code>. 「code」- 应用程序编码
      */
     @Override
     public String getCode() {
@@ -83,7 +83,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.TITLE</code>. 「title」- 应用程序标题
+     * Setter for <code>DB_ETERNAL.X_APP.TITLE</code>. 「title」- 应用程序标题
      */
     @Override
     public XAppRecord setTitle(String value) {
@@ -92,7 +92,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.TITLE</code>. 「title」- 应用程序标题
+     * Getter for <code>DB_ETERNAL.X_APP.TITLE</code>. 「title」- 应用程序标题
      */
     @Override
     public String getTitle() {
@@ -100,7 +100,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.LOGO</code>. 「logo」- 应用程序图标
+     * Setter for <code>DB_ETERNAL.X_APP.LOGO</code>. 「logo」- 应用程序图标
      */
     @Override
     public XAppRecord setLogo(String value) {
@@ -109,7 +109,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.LOGO</code>. 「logo」- 应用程序图标
+     * Getter for <code>DB_ETERNAL.X_APP.LOGO</code>. 「logo」- 应用程序图标
      */
     @Override
     public String getLogo() {
@@ -117,7 +117,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.DOMAIN</code>. 「domain」- 应用程序所在域
+     * Setter for <code>DB_ETERNAL.X_APP.DOMAIN</code>. 「domain」- 应用程序所在域
      */
     @Override
     public XAppRecord setDomain(String value) {
@@ -126,7 +126,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.DOMAIN</code>. 「domain」- 应用程序所在域
+     * Getter for <code>DB_ETERNAL.X_APP.DOMAIN</code>. 「domain」- 应用程序所在域
      */
     @Override
     public String getDomain() {
@@ -134,7 +134,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.APP_PORT</code>. 「appPort」- 应用程序端口号，和SOURCE的端口号区别开
+     * Setter for <code>DB_ETERNAL.X_APP.APP_PORT</code>. 「appPort」- 应用程序端口号，和SOURCE的端口号区别开
      */
     @Override
     public XAppRecord setAppPort(Integer value) {
@@ -143,7 +143,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.APP_PORT</code>. 「appPort」- 应用程序端口号，和SOURCE的端口号区别开
+     * Getter for <code>DB_ETERNAL.X_APP.APP_PORT</code>. 「appPort」- 应用程序端口号，和SOURCE的端口号区别开
      */
     @Override
     public Integer getAppPort() {
@@ -151,7 +151,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.URL_ENTRY</code>. 「urlEntry」— 应用程序入口页面（登录页）
+     * Setter for <code>DB_ETERNAL.X_APP.URL_ENTRY</code>. 「urlEntry」— 应用程序入口页面（登录页）
      */
     @Override
     public XAppRecord setUrlEntry(String value) {
@@ -160,7 +160,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.URL_ENTRY</code>. 「urlEntry」— 应用程序入口页面（登录页）
+     * Getter for <code>DB_ETERNAL.X_APP.URL_ENTRY</code>. 「urlEntry」— 应用程序入口页面（登录页）
      */
     @Override
     public String getUrlEntry() {
@@ -168,7 +168,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.URL_MAIN</code>. 「urlMain」- 应用程序内置主页（带安全）
+     * Setter for <code>DB_ETERNAL.X_APP.URL_MAIN</code>. 「urlMain」- 应用程序内置主页（带安全）
      */
     @Override
     public XAppRecord setUrlMain(String value) {
@@ -177,7 +177,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.URL_MAIN</code>. 「urlMain」- 应用程序内置主页（带安全）
+     * Getter for <code>DB_ETERNAL.X_APP.URL_MAIN</code>. 「urlMain」- 应用程序内置主页（带安全）
      */
     @Override
     public String getUrlMain() {
@@ -185,7 +185,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.PATH</code>. 「path」- 应用程序路径
+     * Setter for <code>DB_ETERNAL.X_APP.PATH</code>. 「path」- 应用程序路径
      */
     @Override
     public XAppRecord setPath(String value) {
@@ -194,7 +194,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.PATH</code>. 「path」- 应用程序路径
+     * Getter for <code>DB_ETERNAL.X_APP.PATH</code>. 「path」- 应用程序路径
      */
     @Override
     public String getPath() {
@@ -202,7 +202,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.ROUTE</code>. 「route」- 后端API的根路径，启动时需要
+     * Setter for <code>DB_ETERNAL.X_APP.ROUTE</code>. 「route」- 后端API的根路径，启动时需要
      */
     @Override
     public XAppRecord setRoute(String value) {
@@ -211,7 +211,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.ROUTE</code>. 「route」- 后端API的根路径，启动时需要
+     * Getter for <code>DB_ETERNAL.X_APP.ROUTE</code>. 「route」- 后端API的根路径，启动时需要
      */
     @Override
     public String getRoute() {
@@ -219,7 +219,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.APP_KEY</code>. 「appKey」- 应用程序专用唯一hashKey
+     * Setter for <code>DB_ETERNAL.X_APP.APP_KEY</code>. 「appKey」- 应用程序专用唯一hashKey
      */
     @Override
     public XAppRecord setAppKey(String value) {
@@ -228,7 +228,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.APP_KEY</code>. 「appKey」- 应用程序专用唯一hashKey
+     * Getter for <code>DB_ETERNAL.X_APP.APP_KEY</code>. 「appKey」- 应用程序专用唯一hashKey
      */
     @Override
     public String getAppKey() {
@@ -236,7 +236,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.SIGMA</code>. 「sigma」- 非系统模块使用的标识
+     * Setter for <code>DB_ETERNAL.X_APP.SIGMA</code>. 「sigma」- 非系统模块使用的标识
      */
     @Override
     public XAppRecord setSigma(String value) {
@@ -245,7 +245,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.SIGMA</code>. 「sigma」- 非系统模块使用的标识
+     * Getter for <code>DB_ETERNAL.X_APP.SIGMA</code>. 「sigma」- 非系统模块使用的标识
      */
     @Override
     public String getSigma() {
@@ -253,7 +253,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ETERNAL.X_APP.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public XAppRecord setActive(Boolean value) {
@@ -262,7 +262,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ETERNAL.X_APP.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public Boolean getActive() {
@@ -270,7 +270,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ETERNAL.X_APP.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public XAppRecord setLanguage(String value) {
@@ -279,7 +279,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ETERNAL.X_APP.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public String getLanguage() {
@@ -287,7 +287,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ETERNAL.X_APP.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public XAppRecord setMetadata(String value) {
@@ -296,7 +296,7 @@ public class XAppRecord extends UpdatableRecordImpl<XAppRecord> implements Recor
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ETERNAL.X_APP.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public String getMetadata() {
