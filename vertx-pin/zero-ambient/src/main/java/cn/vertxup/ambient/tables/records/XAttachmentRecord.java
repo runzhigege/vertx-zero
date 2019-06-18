@@ -29,10 +29,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> implements Record15<String, String, String, String, String, String, String, String, String, String, String, Integer, Boolean, String, String>, IXAttachment {
 
-    private static final long serialVersionUID = 1983279849;
+    private static final long serialVersionUID = 1254821849;
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.KEY</code>. 「key」- 附件的ID值
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.KEY</code>. 「key」- 附件的ID值
      */
     @Override
     public XAttachmentRecord setKey(String value) {
@@ -41,7 +41,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.KEY</code>. 「key」- 附件的ID值
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.KEY</code>. 「key」- 附件的ID值
      */
     @Override
     public String getKey() {
@@ -49,7 +49,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.STORE_WAY</code>. 「storeWay」- 存储方式，BLOB / FILE / TPL / REMOTE
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.STORE_WAY</code>. 「storeWay」- 存储方式，BLOB / FILE / TPL / REMOTE
      */
     @Override
     public XAttachmentRecord setStoreWay(String value) {
@@ -58,7 +58,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.STORE_WAY</code>. 「storeWay」- 存储方式，BLOB / FILE / TPL / REMOTE
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.STORE_WAY</code>. 「storeWay」- 存储方式，BLOB / FILE / TPL / REMOTE
      */
     @Override
     public String getStoreWay() {
@@ -66,7 +66,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.STATUS</code>. 「status」- 状态，PROGRESS / SUCCESS
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.STATUS</code>. 「status」- 状态，PROGRESS / SUCCESS
      */
     @Override
     public XAttachmentRecord setStatus(String value) {
@@ -75,7 +75,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.STATUS</code>. 「status」- 状态，PROGRESS / SUCCESS
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.STATUS</code>. 「status」- 状态，PROGRESS / SUCCESS
      */
     @Override
     public String getStatus() {
@@ -83,7 +83,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.NAME</code>. 「name」- 文件名（带扩展名）
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.NAME</code>. 「name」- 文件名（带扩展名）
      */
     @Override
     public XAttachmentRecord setName(String value) {
@@ -92,7 +92,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.NAME</code>. 「name」- 文件名（带扩展名）
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.NAME</code>. 「name」- 文件名（带扩展名）
      */
     @Override
     public String getName() {
@@ -100,7 +100,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_NAME</code>. 「fileName」- 原始文件名（不带扩展名）
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.FILE_NAME</code>. 「fileName」- 原始文件名（不带扩展名）
      */
     @Override
     public XAttachmentRecord setFileName(String value) {
@@ -109,7 +109,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_NAME</code>. 「fileName」- 原始文件名（不带扩展名）
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.FILE_NAME</code>. 「fileName」- 原始文件名（不带扩展名）
      */
     @Override
     public String getFileName() {
@@ -117,7 +117,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_KEY</code>. 「fileKey」- TPL模式中的文件唯一的key（全局唯一）
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.FILE_KEY</code>. 「fileKey」- TPL模式中的文件唯一的key（全局唯一）
      */
     @Override
     public XAttachmentRecord setFileKey(String value) {
@@ -126,7 +126,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_KEY</code>. 「fileKey」- TPL模式中的文件唯一的key（全局唯一）
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.FILE_KEY</code>. 「fileKey」- TPL模式中的文件唯一的key（全局唯一）
      */
     @Override
     public String getFileKey() {
@@ -134,7 +134,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_URL</code>. 「fileUrl」- 该文件的下载链接（全局唯一）
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.FILE_URL</code>. 「fileUrl」- 该文件的下载链接（全局唯一）
      */
     @Override
     public XAttachmentRecord setFileUrl(String value) {
@@ -143,7 +143,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_URL</code>. 「fileUrl」- 该文件的下载链接（全局唯一）
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.FILE_URL</code>. 「fileUrl」- 该文件的下载链接（全局唯一）
      */
     @Override
     public String getFileUrl() {
@@ -151,7 +151,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_PATH</code>. 「filePath」- 该文件的存储地址，FILE时使用
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.FILE_PATH</code>. 「filePath」- 该文件的存储地址，FILE时使用
      */
     @Override
     public XAttachmentRecord setFilePath(String value) {
@@ -160,7 +160,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_PATH</code>. 「filePath」- 该文件的存储地址，FILE时使用
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.FILE_PATH</code>. 「filePath」- 该文件的存储地址，FILE时使用
      */
     @Override
     public String getFilePath() {
@@ -168,7 +168,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.EXTENSION</code>. 「extension」- 文件扩展名
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.EXTENSION</code>. 「extension」- 文件扩展名
      */
     @Override
     public XAttachmentRecord setExtension(String value) {
@@ -177,7 +177,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.EXTENSION</code>. 「extension」- 文件扩展名
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.EXTENSION</code>. 「extension」- 文件扩展名
      */
     @Override
     public String getExtension() {
@@ -185,7 +185,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.MODULE</code>. 「module」- 业务标识
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.MODULE</code>. 「module」- 业务标识
      */
     @Override
     public XAttachmentRecord setModule(String value) {
@@ -194,7 +194,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.MODULE</code>. 「module」- 业务标识
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.MODULE</code>. 「module」- 业务标识
      */
     @Override
     public String getModule() {
@@ -202,7 +202,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.MIME</code>. 「mime」- 该文件的MIME类型
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.MIME</code>. 「mime」- 该文件的MIME类型
      */
     @Override
     public XAttachmentRecord setMime(String value) {
@@ -211,7 +211,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.MIME</code>. 「mime」- 该文件的MIME类型
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.MIME</code>. 「mime」- 该文件的MIME类型
      */
     @Override
     public String getMime() {
@@ -219,7 +219,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.SIZE</code>. 「size」- 该文件的尺寸
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.SIZE</code>. 「size」- 该文件的尺寸
      */
     @Override
     public XAttachmentRecord setSize(Integer value) {
@@ -228,7 +228,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.SIZE</code>. 「size」- 该文件的尺寸
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.SIZE</code>. 「size」- 该文件的尺寸
      */
     @Override
     public Integer getSize() {
@@ -236,7 +236,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public XAttachmentRecord setActive(Boolean value) {
@@ -245,7 +245,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public Boolean getActive() {
@@ -253,7 +253,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public XAttachmentRecord setLanguage(String value) {
@@ -262,7 +262,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public String getLanguage() {
@@ -270,7 +270,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public XAttachmentRecord setMetadata(String value) {
@@ -279,7 +279,7 @@ public class XAttachmentRecord extends UpdatableRecordImpl<XAttachmentRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public String getMetadata() {

@@ -23,162 +23,162 @@ import javax.annotation.Generated;
 public interface IXApp extends Serializable {
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.KEY</code>. 「key」- 应用程序主键
+     * Setter for <code>DB_ETERNAL.X_APP.KEY</code>. 「key」- 应用程序主键
      */
     public IXApp setKey(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.KEY</code>. 「key」- 应用程序主键
+     * Getter for <code>DB_ETERNAL.X_APP.KEY</code>. 「key」- 应用程序主键
      */
     public String getKey();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.NAME</code>. 「name」- 应用程序名称
+     * Setter for <code>DB_ETERNAL.X_APP.NAME</code>. 「name」- 应用程序名称
      */
     public IXApp setName(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.NAME</code>. 「name」- 应用程序名称
+     * Getter for <code>DB_ETERNAL.X_APP.NAME</code>. 「name」- 应用程序名称
      */
     public String getName();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.CODE</code>. 「code」- 应用程序编码
+     * Setter for <code>DB_ETERNAL.X_APP.CODE</code>. 「code」- 应用程序编码
      */
     public IXApp setCode(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.CODE</code>. 「code」- 应用程序编码
+     * Getter for <code>DB_ETERNAL.X_APP.CODE</code>. 「code」- 应用程序编码
      */
     public String getCode();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.TITLE</code>. 「title」- 应用程序标题
+     * Setter for <code>DB_ETERNAL.X_APP.TITLE</code>. 「title」- 应用程序标题
      */
     public IXApp setTitle(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.TITLE</code>. 「title」- 应用程序标题
+     * Getter for <code>DB_ETERNAL.X_APP.TITLE</code>. 「title」- 应用程序标题
      */
     public String getTitle();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.LOGO</code>. 「logo」- 应用程序图标
+     * Setter for <code>DB_ETERNAL.X_APP.LOGO</code>. 「logo」- 应用程序图标
      */
     public IXApp setLogo(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.LOGO</code>. 「logo」- 应用程序图标
+     * Getter for <code>DB_ETERNAL.X_APP.LOGO</code>. 「logo」- 应用程序图标
      */
     public String getLogo();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.DOMAIN</code>. 「domain」- 应用程序所在域
+     * Setter for <code>DB_ETERNAL.X_APP.DOMAIN</code>. 「domain」- 应用程序所在域
      */
     public IXApp setDomain(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.DOMAIN</code>. 「domain」- 应用程序所在域
+     * Getter for <code>DB_ETERNAL.X_APP.DOMAIN</code>. 「domain」- 应用程序所在域
      */
     public String getDomain();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.APP_PORT</code>. 「appPort」- 应用程序端口号，和SOURCE的端口号区别开
+     * Setter for <code>DB_ETERNAL.X_APP.APP_PORT</code>. 「appPort」- 应用程序端口号，和SOURCE的端口号区别开
      */
     public IXApp setAppPort(Integer value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.APP_PORT</code>. 「appPort」- 应用程序端口号，和SOURCE的端口号区别开
+     * Getter for <code>DB_ETERNAL.X_APP.APP_PORT</code>. 「appPort」- 应用程序端口号，和SOURCE的端口号区别开
      */
     public Integer getAppPort();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.URL_ENTRY</code>. 「urlEntry」— 应用程序入口页面（登录页）
+     * Setter for <code>DB_ETERNAL.X_APP.URL_ENTRY</code>. 「urlEntry」— 应用程序入口页面（登录页）
      */
     public IXApp setUrlEntry(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.URL_ENTRY</code>. 「urlEntry」— 应用程序入口页面（登录页）
+     * Getter for <code>DB_ETERNAL.X_APP.URL_ENTRY</code>. 「urlEntry」— 应用程序入口页面（登录页）
      */
     public String getUrlEntry();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.URL_MAIN</code>. 「urlMain」- 应用程序内置主页（带安全）
+     * Setter for <code>DB_ETERNAL.X_APP.URL_MAIN</code>. 「urlMain」- 应用程序内置主页（带安全）
      */
     public IXApp setUrlMain(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.URL_MAIN</code>. 「urlMain」- 应用程序内置主页（带安全）
+     * Getter for <code>DB_ETERNAL.X_APP.URL_MAIN</code>. 「urlMain」- 应用程序内置主页（带安全）
      */
     public String getUrlMain();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.PATH</code>. 「path」- 应用程序路径
+     * Setter for <code>DB_ETERNAL.X_APP.PATH</code>. 「path」- 应用程序路径
      */
     public IXApp setPath(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.PATH</code>. 「path」- 应用程序路径
+     * Getter for <code>DB_ETERNAL.X_APP.PATH</code>. 「path」- 应用程序路径
      */
     public String getPath();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.ROUTE</code>. 「route」- 后端API的根路径，启动时需要
+     * Setter for <code>DB_ETERNAL.X_APP.ROUTE</code>. 「route」- 后端API的根路径，启动时需要
      */
     public IXApp setRoute(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.ROUTE</code>. 「route」- 后端API的根路径，启动时需要
+     * Getter for <code>DB_ETERNAL.X_APP.ROUTE</code>. 「route」- 后端API的根路径，启动时需要
      */
     public String getRoute();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.APP_KEY</code>. 「appKey」- 应用程序专用唯一hashKey
+     * Setter for <code>DB_ETERNAL.X_APP.APP_KEY</code>. 「appKey」- 应用程序专用唯一hashKey
      */
     public IXApp setAppKey(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.APP_KEY</code>. 「appKey」- 应用程序专用唯一hashKey
+     * Getter for <code>DB_ETERNAL.X_APP.APP_KEY</code>. 「appKey」- 应用程序专用唯一hashKey
      */
     public String getAppKey();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.SIGMA</code>. 「sigma」- 非系统模块使用的标识
+     * Setter for <code>DB_ETERNAL.X_APP.SIGMA</code>. 「sigma」- 非系统模块使用的标识
      */
     public IXApp setSigma(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.SIGMA</code>. 「sigma」- 非系统模块使用的标识
+     * Getter for <code>DB_ETERNAL.X_APP.SIGMA</code>. 「sigma」- 非系统模块使用的标识
      */
     public String getSigma();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ETERNAL.X_APP.ACTIVE</code>. 「active」- 是否启用
      */
     public IXApp setActive(Boolean value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ETERNAL.X_APP.ACTIVE</code>. 「active」- 是否启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ETERNAL.X_APP.LANGUAGE</code>. 「language」- 使用的语言
      */
     public IXApp setLanguage(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ETERNAL.X_APP.LANGUAGE</code>. 「language」- 使用的语言
      */
     public String getLanguage();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_APP.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ETERNAL.X_APP.METADATA</code>. 「metadata」- 附加配置数据
      */
     public IXApp setMetadata(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_APP.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ETERNAL.X_APP.METADATA</code>. 「metadata」- 附加配置数据
      */
     public String getMetadata();
 

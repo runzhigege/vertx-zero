@@ -31,79 +31,79 @@ import java.util.List;
 public class XMenu extends TableImpl<XMenuRecord> {
 
     /**
-     * The reference instance of <code>DB_ORIGIN_X.X_MENU</code>
+     * The reference instance of <code>DB_ETERNAL.X_MENU</code>
      */
     public static final XMenu X_MENU = new XMenu();
-    private static final long serialVersionUID = 1760228928;
+    private static final long serialVersionUID = 1172352150;
     /**
-     * The column <code>DB_ORIGIN_X.X_MENU.KEY</code>. 「key」- 菜单主键
+     * The column <code>DB_ETERNAL.X_MENU.KEY</code>. 「key」- 菜单主键
      */
     public final TableField<XMenuRecord, String> KEY = createField("KEY", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「key」- 菜单主键");
     /**
-     * The column <code>DB_ORIGIN_X.X_MENU.NAME</code>. 「name」- 菜单名称
+     * The column <code>DB_ETERNAL.X_MENU.NAME</code>. 「name」- 菜单名称
      */
     public final TableField<XMenuRecord, String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「name」- 菜单名称");
     /**
-     * The column <code>DB_ORIGIN_X.X_MENU.ICON</code>. 「icon」- 菜单使用的icon
+     * The column <code>DB_ETERNAL.X_MENU.ICON</code>. 「icon」- 菜单使用的icon
      */
     public final TableField<XMenuRecord, String> ICON = createField("ICON", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「icon」- 菜单使用的icon");
     /**
-     * The column <code>DB_ORIGIN_X.X_MENU.TEXT</code>. 「text」- 菜单显示文字
+     * The column <code>DB_ETERNAL.X_MENU.TEXT</code>. 「text」- 菜单显示文字
      */
     public final TableField<XMenuRecord, String> TEXT = createField("TEXT", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「text」- 菜单显示文字");
     /**
-     * The column <code>DB_ORIGIN_X.X_MENU.URI</code>. 「uri」- 菜单地址（不包含应用的path）
+     * The column <code>DB_ETERNAL.X_MENU.URI</code>. 「uri」- 菜单地址（不包含应用的path）
      */
     public final TableField<XMenuRecord, String> URI = createField("URI", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「uri」- 菜单地址（不包含应用的path）");
     /**
-     * The column <code>DB_ORIGIN_X.X_MENU.TYPE</code>. 「type」- 菜单类型
+     * The column <code>DB_ETERNAL.X_MENU.TYPE</code>. 「type」- 菜单类型
      */
     public final TableField<XMenuRecord, String> TYPE = createField("TYPE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「type」- 菜单类型");
     /**
-     * The column <code>DB_ORIGIN_X.X_MENU.ORDER</code>. 「order」- 菜单排序
+     * The column <code>DB_ETERNAL.X_MENU.ORDER</code>. 「order」- 菜单排序
      */
     public final TableField<XMenuRecord, Long> ORDER = createField("ORDER", org.jooq.impl.SQLDataType.BIGINT, this, "「order」- 菜单排序");
     /**
-     * The column <code>DB_ORIGIN_X.X_MENU.LEVEL</code>. 「level」- 菜单层级
+     * The column <code>DB_ETERNAL.X_MENU.LEVEL</code>. 「level」- 菜单层级
      */
     public final TableField<XMenuRecord, Long> LEVEL = createField("LEVEL", org.jooq.impl.SQLDataType.BIGINT, this, "「level」- 菜单层级");
     /**
-     * The column <code>DB_ORIGIN_X.X_MENU.PARENT_ID</code>. 「parentId」- 菜单父ID
+     * The column <code>DB_ETERNAL.X_MENU.PARENT_ID</code>. 「parentId」- 菜单父ID
      */
     public final TableField<XMenuRecord, String> PARENT_ID = createField("PARENT_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「parentId」- 菜单父ID");
     /**
-     * The column <code>DB_ORIGIN_X.X_MENU.APP_ID</code>. 「appId」- 应用程序ID
+     * The column <code>DB_ETERNAL.X_MENU.APP_ID</code>. 「appId」- 应用程序ID
      */
     public final TableField<XMenuRecord, String> APP_ID = createField("APP_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「appId」- 应用程序ID");
     /**
-     * The column <code>DB_ORIGIN_X.X_MENU.ACTIVE</code>. 「active」- 是否启用
+     * The column <code>DB_ETERNAL.X_MENU.ACTIVE</code>. 「active」- 是否启用
      */
     public final TableField<XMenuRecord, Boolean> ACTIVE = createField("ACTIVE", org.jooq.impl.SQLDataType.BIT, this, "「active」- 是否启用");
     /**
-     * The column <code>DB_ORIGIN_X.X_MENU.LANGUAGE</code>. 「language」- 使用的语言
+     * The column <code>DB_ETERNAL.X_MENU.LANGUAGE</code>. 「language」- 使用的语言
      */
     public final TableField<XMenuRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
     /**
-     * The column <code>DB_ORIGIN_X.X_MENU.METADATA</code>. 「metadata」- 附加配置数据
+     * The column <code>DB_ETERNAL.X_MENU.METADATA</code>. 「metadata」- 附加配置数据
      */
     public final TableField<XMenuRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置数据");
 
     /**
-     * Create a <code>DB_ORIGIN_X.X_MENU</code> table reference
+     * Create a <code>DB_ETERNAL.X_MENU</code> table reference
      */
     public XMenu() {
         this(DSL.name("X_MENU"), null);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.X_MENU</code> table reference
+     * Create an aliased <code>DB_ETERNAL.X_MENU</code> table reference
      */
     public XMenu(String alias) {
         this(DSL.name(alias), X_MENU);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.X_MENU</code> table reference
+     * Create an aliased <code>DB_ETERNAL.X_MENU</code> table reference
      */
     public XMenu(Name alias) {
         this(alias, X_MENU);
@@ -130,7 +130,7 @@ public class XMenu extends TableImpl<XMenuRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Db.DB_ORIGIN_X;
+        return Db.DB_ETERNAL;
     }
 
     /**

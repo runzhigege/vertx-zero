@@ -31,87 +31,87 @@ import java.util.List;
 public class XAttachment extends TableImpl<XAttachmentRecord> {
 
     /**
-     * The reference instance of <code>DB_ORIGIN_X.X_ATTACHMENT</code>
+     * The reference instance of <code>DB_ETERNAL.X_ATTACHMENT</code>
      */
     public static final XAttachment X_ATTACHMENT = new XAttachment();
-    private static final long serialVersionUID = 696974774;
+    private static final long serialVersionUID = 924410252;
     /**
-     * The column <code>DB_ORIGIN_X.X_ATTACHMENT.KEY</code>. 「key」- 附件的ID值
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.KEY</code>. 「key」- 附件的ID值
      */
     public final TableField<XAttachmentRecord, String> KEY = createField("KEY", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「key」- 附件的ID值");
     /**
-     * The column <code>DB_ORIGIN_X.X_ATTACHMENT.STORE_WAY</code>. 「storeWay」- 存储方式，BLOB / FILE / TPL / REMOTE
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.STORE_WAY</code>. 「storeWay」- 存储方式，BLOB / FILE / TPL / REMOTE
      */
     public final TableField<XAttachmentRecord, String> STORE_WAY = createField("STORE_WAY", org.jooq.impl.SQLDataType.VARCHAR(12), this, "「storeWay」- 存储方式，BLOB / FILE / TPL / REMOTE");
     /**
-     * The column <code>DB_ORIGIN_X.X_ATTACHMENT.STATUS</code>. 「status」- 状态，PROGRESS / SUCCESS
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.STATUS</code>. 「status」- 状态，PROGRESS / SUCCESS
      */
     public final TableField<XAttachmentRecord, String> STATUS = createField("STATUS", org.jooq.impl.SQLDataType.VARCHAR(12), this, "「status」- 状态，PROGRESS / SUCCESS");
     /**
-     * The column <code>DB_ORIGIN_X.X_ATTACHMENT.NAME</code>. 「name」- 文件名（带扩展名）
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.NAME</code>. 「name」- 文件名（带扩展名）
      */
     public final TableField<XAttachmentRecord, String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「name」- 文件名（带扩展名）");
     /**
-     * The column <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_NAME</code>. 「fileName」- 原始文件名（不带扩展名）
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.FILE_NAME</code>. 「fileName」- 原始文件名（不带扩展名）
      */
     public final TableField<XAttachmentRecord, String> FILE_NAME = createField("FILE_NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「fileName」- 原始文件名（不带扩展名）");
     /**
-     * The column <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_KEY</code>. 「fileKey」- TPL模式中的文件唯一的key（全局唯一）
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.FILE_KEY</code>. 「fileKey」- TPL模式中的文件唯一的key（全局唯一）
      */
     public final TableField<XAttachmentRecord, String> FILE_KEY = createField("FILE_KEY", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「fileKey」- TPL模式中的文件唯一的key（全局唯一）");
     /**
-     * The column <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_URL</code>. 「fileUrl」- 该文件的下载链接（全局唯一）
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.FILE_URL</code>. 「fileUrl」- 该文件的下载链接（全局唯一）
      */
     public final TableField<XAttachmentRecord, String> FILE_URL = createField("FILE_URL", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「fileUrl」- 该文件的下载链接（全局唯一）");
     /**
-     * The column <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_PATH</code>. 「filePath」- 该文件的存储地址，FILE时使用
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.FILE_PATH</code>. 「filePath」- 该文件的存储地址，FILE时使用
      */
     public final TableField<XAttachmentRecord, String> FILE_PATH = createField("FILE_PATH", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「filePath」- 该文件的存储地址，FILE时使用");
     /**
-     * The column <code>DB_ORIGIN_X.X_ATTACHMENT.EXTENSION</code>. 「extension」- 文件扩展名
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.EXTENSION</code>. 「extension」- 文件扩展名
      */
     public final TableField<XAttachmentRecord, String> EXTENSION = createField("EXTENSION", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「extension」- 文件扩展名");
     /**
-     * The column <code>DB_ORIGIN_X.X_ATTACHMENT.MODULE</code>. 「module」- 业务标识
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.MODULE</code>. 「module」- 业务标识
      */
     public final TableField<XAttachmentRecord, String> MODULE = createField("MODULE", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「module」- 业务标识");
     /**
-     * The column <code>DB_ORIGIN_X.X_ATTACHMENT.MIME</code>. 「mime」- 该文件的MIME类型
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.MIME</code>. 「mime」- 该文件的MIME类型
      */
     public final TableField<XAttachmentRecord, String> MIME = createField("MIME", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「mime」- 该文件的MIME类型");
     /**
-     * The column <code>DB_ORIGIN_X.X_ATTACHMENT.SIZE</code>. 「size」- 该文件的尺寸
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.SIZE</code>. 「size」- 该文件的尺寸
      */
     public final TableField<XAttachmentRecord, Integer> SIZE = createField("SIZE", org.jooq.impl.SQLDataType.INTEGER, this, "「size」- 该文件的尺寸");
     /**
-     * The column <code>DB_ORIGIN_X.X_ATTACHMENT.ACTIVE</code>. 「active」- 是否启用
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.ACTIVE</code>. 「active」- 是否启用
      */
     public final TableField<XAttachmentRecord, Boolean> ACTIVE = createField("ACTIVE", org.jooq.impl.SQLDataType.BIT, this, "「active」- 是否启用");
     /**
-     * The column <code>DB_ORIGIN_X.X_ATTACHMENT.LANGUAGE</code>. 「language」- 使用的语言
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.LANGUAGE</code>. 「language」- 使用的语言
      */
     public final TableField<XAttachmentRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
     /**
-     * The column <code>DB_ORIGIN_X.X_ATTACHMENT.METADATA</code>. 「metadata」- 附加配置数据
+     * The column <code>DB_ETERNAL.X_ATTACHMENT.METADATA</code>. 「metadata」- 附加配置数据
      */
     public final TableField<XAttachmentRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置数据");
 
     /**
-     * Create a <code>DB_ORIGIN_X.X_ATTACHMENT</code> table reference
+     * Create a <code>DB_ETERNAL.X_ATTACHMENT</code> table reference
      */
     public XAttachment() {
         this(DSL.name("X_ATTACHMENT"), null);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.X_ATTACHMENT</code> table reference
+     * Create an aliased <code>DB_ETERNAL.X_ATTACHMENT</code> table reference
      */
     public XAttachment(String alias) {
         this(DSL.name(alias), X_ATTACHMENT);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.X_ATTACHMENT</code> table reference
+     * Create an aliased <code>DB_ETERNAL.X_ATTACHMENT</code> table reference
      */
     public XAttachment(Name alias) {
         this(alias, X_ATTACHMENT);
@@ -138,7 +138,7 @@ public class XAttachment extends TableImpl<XAttachmentRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Db.DB_ORIGIN_X;
+        return Db.DB_ETERNAL;
     }
 
     /**

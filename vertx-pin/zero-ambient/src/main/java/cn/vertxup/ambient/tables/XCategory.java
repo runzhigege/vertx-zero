@@ -31,83 +31,83 @@ import java.util.List;
 public class XCategory extends TableImpl<XCategoryRecord> {
 
     /**
-     * The reference instance of <code>DB_ORIGIN_X.X_CATEGORY</code>
+     * The reference instance of <code>DB_ETERNAL.X_CATEGORY</code>
      */
     public static final XCategory X_CATEGORY = new XCategory();
-    private static final long serialVersionUID = 340093452;
+    private static final long serialVersionUID = 2012095736;
     /**
-     * The column <code>DB_ORIGIN_X.X_CATEGORY.KEY</code>. 「key」- 类型主键
+     * The column <code>DB_ETERNAL.X_CATEGORY.KEY</code>. 「key」- 类型主键
      */
     public final TableField<XCategoryRecord, String> KEY = createField("KEY", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「key」- 类型主键");
     /**
-     * The column <code>DB_ORIGIN_X.X_CATEGORY.NAME</code>. 「name」- 类型名称
+     * The column <code>DB_ETERNAL.X_CATEGORY.NAME</code>. 「name」- 类型名称
      */
     public final TableField<XCategoryRecord, String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「name」- 类型名称");
     /**
-     * The column <code>DB_ORIGIN_X.X_CATEGORY.CODE</code>. 「code」- 类型编号
+     * The column <code>DB_ETERNAL.X_CATEGORY.CODE</code>. 「code」- 类型编号
      */
     public final TableField<XCategoryRecord, String> CODE = createField("CODE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「code」- 类型编号");
     /**
-     * The column <code>DB_ORIGIN_X.X_CATEGORY.ICON</code>. 「icon」- 类型图标
+     * The column <code>DB_ETERNAL.X_CATEGORY.ICON</code>. 「icon」- 类型图标
      */
     public final TableField<XCategoryRecord, String> ICON = createField("ICON", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「icon」- 类型图标");
     /**
-     * The column <code>DB_ORIGIN_X.X_CATEGORY.TYPE</code>. 「type」- 类型的分类
+     * The column <code>DB_ETERNAL.X_CATEGORY.TYPE</code>. 「type」- 类型的分类
      */
     public final TableField<XCategoryRecord, String> TYPE = createField("TYPE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「type」- 类型的分类");
     /**
-     * The column <code>DB_ORIGIN_X.X_CATEGORY.SORT</code>. 「sort」- 排序信息
+     * The column <code>DB_ETERNAL.X_CATEGORY.SORT</code>. 「sort」- 排序信息
      */
     public final TableField<XCategoryRecord, Integer> SORT = createField("SORT", org.jooq.impl.SQLDataType.INTEGER, this, "「sort」- 排序信息");
     /**
-     * The column <code>DB_ORIGIN_X.X_CATEGORY.LEAF</code>. 「leaf」- 是否叶节点
+     * The column <code>DB_ETERNAL.X_CATEGORY.LEAF</code>. 「leaf」- 是否叶节点
      */
     public final TableField<XCategoryRecord, Boolean> LEAF = createField("LEAF", org.jooq.impl.SQLDataType.BIT, this, "「leaf」- 是否叶节点");
     /**
-     * The column <code>DB_ORIGIN_X.X_CATEGORY.PARENT_ID</code>. 「parentId」- 父类ID
+     * The column <code>DB_ETERNAL.X_CATEGORY.PARENT_ID</code>. 「parentId」- 父类ID
      */
     public final TableField<XCategoryRecord, String> PARENT_ID = createField("PARENT_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「parentId」- 父类ID");
     /**
-     * The column <code>DB_ORIGIN_X.X_CATEGORY.IDENTIFIER</code>. 「identifier」- 当前类型描述的Model的标识
+     * The column <code>DB_ETERNAL.X_CATEGORY.IDENTIFIER</code>. 「identifier」- 当前类型描述的Model的标识
      */
     public final TableField<XCategoryRecord, String> IDENTIFIER = createField("IDENTIFIER", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「identifier」- 当前类型描述的Model的标识");
     /**
-     * The column <code>DB_ORIGIN_X.X_CATEGORY.COMMENT</code>. 「comment」- 备注信息
+     * The column <code>DB_ETERNAL.X_CATEGORY.COMMENT</code>. 「comment」- 备注信息
      */
     public final TableField<XCategoryRecord, String> COMMENT = createField("COMMENT", org.jooq.impl.SQLDataType.CLOB, this, "「comment」- 备注信息");
     /**
-     * The column <code>DB_ORIGIN_X.X_CATEGORY.ACTIVE</code>. 「active」- 是否启用
+     * The column <code>DB_ETERNAL.X_CATEGORY.ACTIVE</code>. 「active」- 是否启用
      */
     public final TableField<XCategoryRecord, Boolean> ACTIVE = createField("ACTIVE", org.jooq.impl.SQLDataType.BIT, this, "「active」- 是否启用");
     /**
-     * The column <code>DB_ORIGIN_X.X_CATEGORY.METADATA</code>. 「metadata」-扩展配置信息
+     * The column <code>DB_ETERNAL.X_CATEGORY.METADATA</code>. 「metadata」-扩展配置信息
      */
     public final TableField<XCategoryRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」-扩展配置信息");
     /**
-     * The column <code>DB_ORIGIN_X.X_CATEGORY.LANGUAGE</code>. 「language」- 使用的语言
+     * The column <code>DB_ETERNAL.X_CATEGORY.LANGUAGE</code>. 「language」- 使用的语言
      */
     public final TableField<XCategoryRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
     /**
-     * The column <code>DB_ORIGIN_X.X_CATEGORY.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * The column <code>DB_ETERNAL.X_CATEGORY.APP_ID</code>. 「appId」- 关联的应用程序ID
      */
     public final TableField<XCategoryRecord, String> APP_ID = createField("APP_ID", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「appId」- 关联的应用程序ID");
 
     /**
-     * Create a <code>DB_ORIGIN_X.X_CATEGORY</code> table reference
+     * Create a <code>DB_ETERNAL.X_CATEGORY</code> table reference
      */
     public XCategory() {
         this(DSL.name("X_CATEGORY"), null);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.X_CATEGORY</code> table reference
+     * Create an aliased <code>DB_ETERNAL.X_CATEGORY</code> table reference
      */
     public XCategory(String alias) {
         this(DSL.name(alias), X_CATEGORY);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.X_CATEGORY</code> table reference
+     * Create an aliased <code>DB_ETERNAL.X_CATEGORY</code> table reference
      */
     public XCategory(Name alias) {
         this(alias, X_CATEGORY);
@@ -134,7 +134,7 @@ public class XCategory extends TableImpl<XCategoryRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Db.DB_ORIGIN_X;
+        return Db.DB_ETERNAL;
     }
 
     /**

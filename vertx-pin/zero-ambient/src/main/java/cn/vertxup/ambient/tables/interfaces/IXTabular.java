@@ -23,112 +23,112 @@ import javax.annotation.Generated;
 public interface IXTabular extends Serializable {
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.KEY</code>. 「key」- 列表主键
+     * Setter for <code>DB_ETERNAL.X_TABULAR.KEY</code>. 「key」- 列表主键
      */
     public IXTabular setKey(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.KEY</code>. 「key」- 列表主键
+     * Getter for <code>DB_ETERNAL.X_TABULAR.KEY</code>. 「key」- 列表主键
      */
     public String getKey();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.NAME</code>. 「name」- 列表名称
+     * Setter for <code>DB_ETERNAL.X_TABULAR.NAME</code>. 「name」- 列表名称
      */
     public IXTabular setName(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.NAME</code>. 「name」- 列表名称
+     * Getter for <code>DB_ETERNAL.X_TABULAR.NAME</code>. 「name」- 列表名称
      */
     public String getName();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.CODE</code>. 「code」- 列表编号
+     * Setter for <code>DB_ETERNAL.X_TABULAR.CODE</code>. 「code」- 列表编号
      */
     public IXTabular setCode(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.CODE</code>. 「code」- 列表编号
+     * Getter for <code>DB_ETERNAL.X_TABULAR.CODE</code>. 「code」- 列表编号
      */
     public String getCode();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.TYPE</code>. 「type」- 列表类型
+     * Setter for <code>DB_ETERNAL.X_TABULAR.TYPE</code>. 「type」- 列表类型
      */
     public IXTabular setType(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.TYPE</code>. 「type」- 列表类型
+     * Getter for <code>DB_ETERNAL.X_TABULAR.TYPE</code>. 「type」- 列表类型
      */
     public String getType();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.ICON</code>. 「icon」- 列表图标
+     * Setter for <code>DB_ETERNAL.X_TABULAR.ICON</code>. 「icon」- 列表图标
      */
     public IXTabular setIcon(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.ICON</code>. 「icon」- 列表图标
+     * Getter for <code>DB_ETERNAL.X_TABULAR.ICON</code>. 「icon」- 列表图标
      */
     public String getIcon();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.SORT</code>. 「sort」- 排序信息
+     * Setter for <code>DB_ETERNAL.X_TABULAR.SORT</code>. 「sort」- 排序信息
      */
     public IXTabular setSort(Integer value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.SORT</code>. 「sort」- 排序信息
+     * Getter for <code>DB_ETERNAL.X_TABULAR.SORT</code>. 「sort」- 排序信息
      */
     public Integer getSort();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.COMMENT</code>. 「comment」- 备注信息
+     * Setter for <code>DB_ETERNAL.X_TABULAR.COMMENT</code>. 「comment」- 备注信息
      */
     public IXTabular setComment(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.COMMENT</code>. 「comment」- 备注信息
+     * Getter for <code>DB_ETERNAL.X_TABULAR.COMMENT</code>. 「comment」- 备注信息
      */
     public String getComment();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ETERNAL.X_TABULAR.ACTIVE</code>. 「active」- 是否启用
      */
     public IXTabular setActive(Boolean value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ETERNAL.X_TABULAR.ACTIVE</code>. 「active」- 是否启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.METADATA</code>. 「metadata」-扩展配置信息
+     * Setter for <code>DB_ETERNAL.X_TABULAR.METADATA</code>. 「metadata」-扩展配置信息
      */
     public IXTabular setMetadata(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.METADATA</code>. 「metadata」-扩展配置信息
+     * Getter for <code>DB_ETERNAL.X_TABULAR.METADATA</code>. 「metadata」-扩展配置信息
      */
     public String getMetadata();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ETERNAL.X_TABULAR.LANGUAGE</code>. 「language」- 使用的语言
      */
     public IXTabular setLanguage(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ETERNAL.X_TABULAR.LANGUAGE</code>. 「language」- 使用的语言
      */
     public String getLanguage();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>DB_ETERNAL.X_TABULAR.APP_ID</code>. 「appId」- 关联的应用程序ID
      */
     public IXTabular setAppId(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>DB_ETERNAL.X_TABULAR.APP_ID</code>. 「appId」- 关联的应用程序ID
      */
     public String getAppId();
 

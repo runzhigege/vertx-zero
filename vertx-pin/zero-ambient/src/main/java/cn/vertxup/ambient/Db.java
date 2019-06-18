@@ -30,42 +30,47 @@ import java.util.List;
 public class Db extends SchemaImpl {
 
     /**
-     * The reference instance of <code>DB_ORIGIN_X</code>
+     * The reference instance of <code>DB_ETERNAL</code>
      */
-    public static final Db DB_ORIGIN_X = new Db();
-    private static final long serialVersionUID = 1407928917;
+    public static final Db DB_ETERNAL = new Db();
+    private static final long serialVersionUID = 1557967032;
     /**
-     * The table <code>DB_ORIGIN_X.X_APP</code>.
+     * The table <code>DB_ETERNAL.X_APP</code>.
      */
     public final XApp X_APP = cn.vertxup.ambient.tables.XApp.X_APP;
 
     /**
-     * The table <code>DB_ORIGIN_X.X_ATTACHMENT</code>.
+     * The table <code>DB_ETERNAL.X_ATTACHMENT</code>.
      */
     public final XAttachment X_ATTACHMENT = cn.vertxup.ambient.tables.XAttachment.X_ATTACHMENT;
 
     /**
-     * The table <code>DB_ORIGIN_X.X_CATEGORY</code>.
+     * The table <code>DB_ETERNAL.X_CATEGORY</code>.
      */
     public final XCategory X_CATEGORY = cn.vertxup.ambient.tables.XCategory.X_CATEGORY;
 
     /**
-     * The table <code>DB_ORIGIN_X.X_MENU</code>.
+     * The table <code>DB_ETERNAL.X_MENU</code>.
      */
     public final XMenu X_MENU = cn.vertxup.ambient.tables.XMenu.X_MENU;
 
     /**
-     * The table <code>DB_ORIGIN_X.X_MODULE</code>.
+     * The table <code>DB_ETERNAL.X_MODULE</code>.
      */
     public final XModule X_MODULE = cn.vertxup.ambient.tables.XModule.X_MODULE;
 
     /**
-     * The table <code>DB_ORIGIN_X.X_SOURCE</code>.
+     * The table <code>DB_ETERNAL.X_NUMBER</code>.
+     */
+    public final XNumber X_NUMBER = cn.vertxup.ambient.tables.XNumber.X_NUMBER;
+
+    /**
+     * The table <code>DB_ETERNAL.X_SOURCE</code>.
      */
     public final XSource X_SOURCE = cn.vertxup.ambient.tables.XSource.X_SOURCE;
 
     /**
-     * The table <code>DB_ORIGIN_X.X_TABULAR</code>.
+     * The table <code>DB_ETERNAL.X_TABULAR</code>.
      */
     public final XTabular X_TABULAR = cn.vertxup.ambient.tables.XTabular.X_TABULAR;
 
@@ -99,6 +104,7 @@ public class Db extends SchemaImpl {
                 XCategory.X_CATEGORY,
                 XMenu.X_MENU,
                 XModule.X_MODULE,
+                XNumber.X_NUMBER,
                 XSource.X_SOURCE,
                 XTabular.X_TABULAR);
     }

@@ -29,10 +29,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implements Record11<String, String, String, String, String, Integer, String, Boolean, String, String, String>, IXTabular {
 
-    private static final long serialVersionUID = -1528969677;
+    private static final long serialVersionUID = -685765989;
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.KEY</code>. 「key」- 列表主键
+     * Setter for <code>DB_ETERNAL.X_TABULAR.KEY</code>. 「key」- 列表主键
      */
     @Override
     public XTabularRecord setKey(String value) {
@@ -41,7 +41,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.KEY</code>. 「key」- 列表主键
+     * Getter for <code>DB_ETERNAL.X_TABULAR.KEY</code>. 「key」- 列表主键
      */
     @Override
     public String getKey() {
@@ -49,7 +49,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.NAME</code>. 「name」- 列表名称
+     * Setter for <code>DB_ETERNAL.X_TABULAR.NAME</code>. 「name」- 列表名称
      */
     @Override
     public XTabularRecord setName(String value) {
@@ -58,7 +58,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.NAME</code>. 「name」- 列表名称
+     * Getter for <code>DB_ETERNAL.X_TABULAR.NAME</code>. 「name」- 列表名称
      */
     @Override
     public String getName() {
@@ -66,7 +66,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.CODE</code>. 「code」- 列表编号
+     * Setter for <code>DB_ETERNAL.X_TABULAR.CODE</code>. 「code」- 列表编号
      */
     @Override
     public XTabularRecord setCode(String value) {
@@ -75,7 +75,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.CODE</code>. 「code」- 列表编号
+     * Getter for <code>DB_ETERNAL.X_TABULAR.CODE</code>. 「code」- 列表编号
      */
     @Override
     public String getCode() {
@@ -83,7 +83,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.TYPE</code>. 「type」- 列表类型
+     * Setter for <code>DB_ETERNAL.X_TABULAR.TYPE</code>. 「type」- 列表类型
      */
     @Override
     public XTabularRecord setType(String value) {
@@ -92,7 +92,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.TYPE</code>. 「type」- 列表类型
+     * Getter for <code>DB_ETERNAL.X_TABULAR.TYPE</code>. 「type」- 列表类型
      */
     @Override
     public String getType() {
@@ -100,7 +100,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.ICON</code>. 「icon」- 列表图标
+     * Setter for <code>DB_ETERNAL.X_TABULAR.ICON</code>. 「icon」- 列表图标
      */
     @Override
     public XTabularRecord setIcon(String value) {
@@ -109,7 +109,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.ICON</code>. 「icon」- 列表图标
+     * Getter for <code>DB_ETERNAL.X_TABULAR.ICON</code>. 「icon」- 列表图标
      */
     @Override
     public String getIcon() {
@@ -117,7 +117,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.SORT</code>. 「sort」- 排序信息
+     * Setter for <code>DB_ETERNAL.X_TABULAR.SORT</code>. 「sort」- 排序信息
      */
     @Override
     public XTabularRecord setSort(Integer value) {
@@ -126,7 +126,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.SORT</code>. 「sort」- 排序信息
+     * Getter for <code>DB_ETERNAL.X_TABULAR.SORT</code>. 「sort」- 排序信息
      */
     @Override
     public Integer getSort() {
@@ -134,7 +134,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.COMMENT</code>. 「comment」- 备注信息
+     * Setter for <code>DB_ETERNAL.X_TABULAR.COMMENT</code>. 「comment」- 备注信息
      */
     @Override
     public XTabularRecord setComment(String value) {
@@ -143,7 +143,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.COMMENT</code>. 「comment」- 备注信息
+     * Getter for <code>DB_ETERNAL.X_TABULAR.COMMENT</code>. 「comment」- 备注信息
      */
     @Override
     public String getComment() {
@@ -151,7 +151,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ETERNAL.X_TABULAR.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public XTabularRecord setActive(Boolean value) {
@@ -160,7 +160,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ETERNAL.X_TABULAR.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public Boolean getActive() {
@@ -168,7 +168,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.METADATA</code>. 「metadata」-扩展配置信息
+     * Setter for <code>DB_ETERNAL.X_TABULAR.METADATA</code>. 「metadata」-扩展配置信息
      */
     @Override
     public XTabularRecord setMetadata(String value) {
@@ -177,7 +177,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.METADATA</code>. 「metadata」-扩展配置信息
+     * Getter for <code>DB_ETERNAL.X_TABULAR.METADATA</code>. 「metadata」-扩展配置信息
      */
     @Override
     public String getMetadata() {
@@ -185,7 +185,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ETERNAL.X_TABULAR.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public XTabularRecord setLanguage(String value) {
@@ -194,7 +194,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ETERNAL.X_TABULAR.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public String getLanguage() {
@@ -202,7 +202,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_TABULAR.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>DB_ETERNAL.X_TABULAR.APP_ID</code>. 「appId」- 关联的应用程序ID
      */
     @Override
     public XTabularRecord setAppId(String value) {
@@ -211,7 +211,7 @@ public class XTabularRecord extends UpdatableRecordImpl<XTabularRecord> implemen
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_TABULAR.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>DB_ETERNAL.X_TABULAR.APP_ID</code>. 「appId」- 关联的应用程序ID
      */
     @Override
     public String getAppId() {

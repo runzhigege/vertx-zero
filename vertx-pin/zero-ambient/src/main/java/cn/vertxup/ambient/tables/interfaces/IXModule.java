@@ -23,102 +23,102 @@ import javax.annotation.Generated;
 public interface IXModule extends Serializable {
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.KEY</code>. 「key」- 模块唯一主键
+     * Setter for <code>DB_ETERNAL.X_MODULE.KEY</code>. 「key」- 模块唯一主键
      */
     public IXModule setKey(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.KEY</code>. 「key」- 模块唯一主键
+     * Getter for <code>DB_ETERNAL.X_MODULE.KEY</code>. 「key」- 模块唯一主键
      */
     public String getKey();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.NAME</code>. 「name」- 模块名称
+     * Setter for <code>DB_ETERNAL.X_MODULE.NAME</code>. 「name」- 模块名称
      */
     public IXModule setName(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.NAME</code>. 「name」- 模块名称
+     * Getter for <code>DB_ETERNAL.X_MODULE.NAME</code>. 「name」- 模块名称
      */
     public String getName();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.CODE</code>. 「code」- 应用程序编码
+     * Setter for <code>DB_ETERNAL.X_MODULE.CODE</code>. 「code」- 应用程序编码
      */
     public IXModule setCode(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.CODE</code>. 「code」- 应用程序编码
+     * Getter for <code>DB_ETERNAL.X_MODULE.CODE</code>. 「code」- 应用程序编码
      */
     public String getCode();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.CAT</code>. 「cat」- 模块类型
+     * Setter for <code>DB_ETERNAL.X_MODULE.CAT</code>. 「cat」- 模块类型
      */
     public IXModule setCat(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.CAT</code>. 「cat」- 模块类型
+     * Getter for <code>DB_ETERNAL.X_MODULE.CAT</code>. 「cat」- 模块类型
      */
     public String getCat();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.URL_ENTRY</code>. 「urlEntry」— 模块入口地址
+     * Setter for <code>DB_ETERNAL.X_MODULE.URL_ENTRY</code>. 「urlEntry」— 模块入口地址
      */
     public IXModule setUrlEntry(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.URL_ENTRY</code>. 「urlEntry」— 模块入口地址
+     * Getter for <code>DB_ETERNAL.X_MODULE.URL_ENTRY</code>. 「urlEntry」— 模块入口地址
      */
     public String getUrlEntry();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>DB_ETERNAL.X_MODULE.APP_ID</code>. 「appId」- 关联的应用程序ID
      */
     public IXModule setAppId(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>DB_ETERNAL.X_MODULE.APP_ID</code>. 「appId」- 关联的应用程序ID
      */
     public String getAppId();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.MODEL_ID</code>. 「modelId」- 当前模块关联的主模型ID
+     * Setter for <code>DB_ETERNAL.X_MODULE.MODEL_ID</code>. 「modelId」- 当前模块关联的主模型ID
      */
     public IXModule setModelId(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.MODEL_ID</code>. 「modelId」- 当前模块关联的主模型ID
+     * Getter for <code>DB_ETERNAL.X_MODULE.MODEL_ID</code>. 「modelId」- 当前模块关联的主模型ID
      */
     public String getModelId();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ETERNAL.X_MODULE.ACTIVE</code>. 「active」- 是否启用
      */
     public IXModule setActive(Boolean value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ETERNAL.X_MODULE.ACTIVE</code>. 「active」- 是否启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ETERNAL.X_MODULE.METADATA</code>. 「metadata」- 附加配置数据
      */
     public IXModule setMetadata(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ETERNAL.X_MODULE.METADATA</code>. 「metadata」- 附加配置数据
      */
     public String getMetadata();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_MODULE.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ETERNAL.X_MODULE.LANGUAGE</code>. 「language」- 使用的语言
      */
     public IXModule setLanguage(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_MODULE.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ETERNAL.X_MODULE.LANGUAGE</code>. 「language」- 使用的语言
      */
     public String getLanguage();
 
