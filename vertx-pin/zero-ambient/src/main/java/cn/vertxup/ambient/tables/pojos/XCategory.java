@@ -6,6 +6,8 @@ package cn.vertxup.ambient.tables.pojos;
 
 import cn.vertxup.ambient.tables.interfaces.IXCategory;
 
+import java.time.LocalDateTime;
+
 import javax.annotation.Generated;
 
 
@@ -22,22 +24,27 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XCategory implements IXCategory {
 
-    private static final long serialVersionUID = -1487817833;
+    private static final long serialVersionUID = -1093765713;
 
-    private String  key;
-    private String  name;
-    private String  code;
-    private String  icon;
-    private String  type;
-    private Integer sort;
-    private Boolean leaf;
-    private String  parentId;
-    private String  identifier;
-    private String  comment;
-    private Boolean active;
-    private String  metadata;
-    private String  language;
-    private String  appId;
+    private String        key;
+    private String        name;
+    private String        code;
+    private String        icon;
+    private String        type;
+    private Integer       sort;
+    private Boolean       leaf;
+    private String        parentId;
+    private String        identifier;
+    private String        comment;
+    private String        appId;
+    private Boolean       active;
+    private String        sigma;
+    private String        metadata;
+    private String        language;
+    private LocalDateTime createdAt;
+    private String        createdBy;
+    private LocalDateTime updatedAt;
+    private String        updatedBy;
 
     public XCategory() {}
 
@@ -52,27 +59,37 @@ public class XCategory implements IXCategory {
         this.parentId = value.parentId;
         this.identifier = value.identifier;
         this.comment = value.comment;
+        this.appId = value.appId;
         this.active = value.active;
+        this.sigma = value.sigma;
         this.metadata = value.metadata;
         this.language = value.language;
-        this.appId = value.appId;
+        this.createdAt = value.createdAt;
+        this.createdBy = value.createdBy;
+        this.updatedAt = value.updatedAt;
+        this.updatedBy = value.updatedBy;
     }
 
     public XCategory(
-        String  key,
-        String  name,
-        String  code,
-        String  icon,
-        String  type,
-        Integer sort,
-        Boolean leaf,
-        String  parentId,
-        String  identifier,
-        String  comment,
-        Boolean active,
-        String  metadata,
-        String  language,
-        String  appId
+        String        key,
+        String        name,
+        String        code,
+        String        icon,
+        String        type,
+        Integer       sort,
+        Boolean       leaf,
+        String        parentId,
+        String        identifier,
+        String        comment,
+        String        appId,
+        Boolean       active,
+        String        sigma,
+        String        metadata,
+        String        language,
+        LocalDateTime createdAt,
+        String        createdBy,
+        LocalDateTime updatedAt,
+        String        updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -84,10 +101,15 @@ public class XCategory implements IXCategory {
         this.parentId = parentId;
         this.identifier = identifier;
         this.comment = comment;
+        this.appId = appId;
         this.active = active;
+        this.sigma = sigma;
         this.metadata = metadata;
         this.language = language;
-        this.appId = appId;
+        this.createdAt = createdAt;
+        this.createdBy = createdBy;
+        this.updatedAt = updatedAt;
+        this.updatedBy = updatedBy;
     }
 
     @Override
@@ -201,6 +223,17 @@ public class XCategory implements IXCategory {
     }
 
     @Override
+    public String getAppId() {
+        return this.appId;
+    }
+
+    @Override
+    public XCategory setAppId(String appId) {
+        this.appId = appId;
+        return this;
+    }
+
+    @Override
     public Boolean getActive() {
         return this.active;
     }
@@ -208,6 +241,17 @@ public class XCategory implements IXCategory {
     @Override
     public XCategory setActive(Boolean active) {
         this.active = active;
+        return this;
+    }
+
+    @Override
+    public String getSigma() {
+        return this.sigma;
+    }
+
+    @Override
+    public XCategory setSigma(String sigma) {
+        this.sigma = sigma;
         return this;
     }
 
@@ -234,13 +278,46 @@ public class XCategory implements IXCategory {
     }
 
     @Override
-    public String getAppId() {
-        return this.appId;
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
     }
 
     @Override
-    public XCategory setAppId(String appId) {
-        this.appId = appId;
+    public XCategory setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    @Override
+    public String getCreatedBy() {
+        return this.createdBy;
+    }
+
+    @Override
+    public XCategory setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    @Override
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    @Override
+    public XCategory setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+        return this;
+    }
+
+    @Override
+    public String getUpdatedBy() {
+        return this.updatedBy;
+    }
+
+    @Override
+    public XCategory setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
         return this;
     }
 
@@ -258,10 +335,15 @@ public class XCategory implements IXCategory {
         sb.append(", ").append(parentId);
         sb.append(", ").append(identifier);
         sb.append(", ").append(comment);
+        sb.append(", ").append(appId);
         sb.append(", ").append(active);
+        sb.append(", ").append(sigma);
         sb.append(", ").append(metadata);
         sb.append(", ").append(language);
-        sb.append(", ").append(appId);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(createdBy);
+        sb.append(", ").append(updatedAt);
+        sb.append(", ").append(updatedBy);
 
         sb.append(")");
         return sb.toString();
@@ -286,10 +368,15 @@ public class XCategory implements IXCategory {
         setParentId(from.getParentId());
         setIdentifier(from.getIdentifier());
         setComment(from.getComment());
+        setAppId(from.getAppId());
         setActive(from.getActive());
+        setSigma(from.getSigma());
         setMetadata(from.getMetadata());
         setLanguage(from.getLanguage());
-        setAppId(from.getAppId());
+        setCreatedAt(from.getCreatedAt());
+        setCreatedBy(from.getCreatedBy());
+        setUpdatedAt(from.getUpdatedAt());
+        setUpdatedBy(from.getUpdatedBy());
     }
 
     /**

@@ -13,6 +13,7 @@ import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
 
 import javax.annotation.Generated;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class XMenu extends TableImpl<XMenuRecord> {
      * The reference instance of <code>DB_ETERNAL.X_MENU</code>
      */
     public static final XMenu X_MENU = new XMenu();
-    private static final long serialVersionUID = 1172352150;
+    private static final long serialVersionUID = 128053678;
     /**
      * The column <code>DB_ETERNAL.X_MENU.KEY</code>. 「key」- 菜单主键
      */
@@ -80,13 +81,33 @@ public class XMenu extends TableImpl<XMenuRecord> {
      */
     public final TableField<XMenuRecord, Boolean> ACTIVE = createField("ACTIVE", org.jooq.impl.SQLDataType.BIT, this, "「active」- 是否启用");
     /**
+     * The column <code>DB_ETERNAL.X_MENU.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public final TableField<XMenuRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「sigma」- 统一标识");
+    /**
+     * The column <code>DB_ETERNAL.X_MENU.METADATA</code>. 「metadata」- 附加配置
+     */
+    public final TableField<XMenuRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置");
+    /**
      * The column <code>DB_ETERNAL.X_MENU.LANGUAGE</code>. 「language」- 使用的语言
      */
-    public final TableField<XMenuRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
+    public final TableField<XMenuRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(8), this, "「language」- 使用的语言");
     /**
-     * The column <code>DB_ETERNAL.X_MENU.METADATA</code>. 「metadata」- 附加配置数据
+     * The column <code>DB_ETERNAL.X_MENU.CREATED_AT</code>. 「createdAt」- 创建时间
      */
-    public final TableField<XMenuRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置数据");
+    public final TableField<XMenuRecord, LocalDateTime> CREATED_AT = createField("CREATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「createdAt」- 创建时间");
+    /**
+     * The column <code>DB_ETERNAL.X_MENU.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public final TableField<XMenuRecord, String> CREATED_BY = createField("CREATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「createdBy」- 创建人");
+    /**
+     * The column <code>DB_ETERNAL.X_MENU.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public final TableField<XMenuRecord, LocalDateTime> UPDATED_AT = createField("UPDATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「updatedAt」- 更新时间");
+    /**
+     * The column <code>DB_ETERNAL.X_MENU.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public final TableField<XMenuRecord, String> UPDATED_BY = createField("UPDATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「updatedBy」- 更新人");
 
     /**
      * Create a <code>DB_ETERNAL.X_MENU</code> table reference

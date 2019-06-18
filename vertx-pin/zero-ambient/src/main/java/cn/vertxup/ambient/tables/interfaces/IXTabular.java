@@ -5,6 +5,7 @@ package cn.vertxup.ambient.tables.interfaces;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.annotation.Generated;
 
@@ -93,6 +94,16 @@ public interface IXTabular extends Serializable {
     public String getComment();
 
     /**
+     * Setter for <code>DB_ETERNAL.X_TABULAR.APP_ID</code>. 「appId」- 关联的应用程序ID
+     */
+    public IXTabular setAppId(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_TABULAR.APP_ID</code>. 「appId」- 关联的应用程序ID
+     */
+    public String getAppId();
+
+    /**
      * Setter for <code>DB_ETERNAL.X_TABULAR.ACTIVE</code>. 「active」- 是否启用
      */
     public IXTabular setActive(Boolean value);
@@ -103,12 +114,22 @@ public interface IXTabular extends Serializable {
     public Boolean getActive();
 
     /**
-     * Setter for <code>DB_ETERNAL.X_TABULAR.METADATA</code>. 「metadata」-扩展配置信息
+     * Setter for <code>DB_ETERNAL.X_TABULAR.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public IXTabular setSigma(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_TABULAR.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public String getSigma();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_TABULAR.METADATA</code>. 「metadata」- 附加配置
      */
     public IXTabular setMetadata(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.X_TABULAR.METADATA</code>. 「metadata」-扩展配置信息
+     * Getter for <code>DB_ETERNAL.X_TABULAR.METADATA</code>. 「metadata」- 附加配置
      */
     public String getMetadata();
 
@@ -123,14 +144,44 @@ public interface IXTabular extends Serializable {
     public String getLanguage();
 
     /**
-     * Setter for <code>DB_ETERNAL.X_TABULAR.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>DB_ETERNAL.X_TABULAR.CREATED_AT</code>. 「createdAt」- 创建时间
      */
-    public IXTabular setAppId(String value);
+    public IXTabular setCreatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>DB_ETERNAL.X_TABULAR.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>DB_ETERNAL.X_TABULAR.CREATED_AT</code>. 「createdAt」- 创建时间
      */
-    public String getAppId();
+    public LocalDateTime getCreatedAt();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_TABULAR.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public IXTabular setCreatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_TABULAR.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public String getCreatedBy();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_TABULAR.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public IXTabular setUpdatedAt(LocalDateTime value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_TABULAR.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public LocalDateTime getUpdatedAt();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_TABULAR.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public IXTabular setUpdatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_TABULAR.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public String getUpdatedBy();
 
     // -------------------------------------------------------------------------
     // FROM and INTO
@@ -154,10 +205,15 @@ public interface IXTabular extends Serializable {
         setIcon(json.getString("ICON"));
         setSort(json.getInteger("SORT"));
         setComment(json.getString("COMMENT"));
+        setAppId(json.getString("APP_ID"));
         setActive(json.getBoolean("ACTIVE"));
+        setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
         setLanguage(json.getString("LANGUAGE"));
-        setAppId(json.getString("APP_ID"));
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        setCreatedBy(json.getString("CREATED_BY"));
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        setUpdatedBy(json.getString("UPDATED_BY"));
         return this;
     }
 
@@ -171,10 +227,15 @@ public interface IXTabular extends Serializable {
         json.put("ICON",getIcon());
         json.put("SORT",getSort());
         json.put("COMMENT",getComment());
+        json.put("APP_ID",getAppId());
         json.put("ACTIVE",getActive());
+        json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());
         json.put("LANGUAGE",getLanguage());
-        json.put("APP_ID",getAppId());
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        json.put("CREATED_BY",getCreatedBy());
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        json.put("UPDATED_BY",getUpdatedBy());
         return json;
     }
 

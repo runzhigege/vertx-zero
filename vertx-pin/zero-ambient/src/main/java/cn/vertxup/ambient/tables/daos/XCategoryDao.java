@@ -9,6 +9,7 @@ import cn.vertxup.ambient.tables.records.XCategoryRecord;
 
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -132,10 +133,24 @@ public class XCategoryDao extends DAOImpl<XCategoryRecord, cn.vertxup.ambient.ta
     }
 
     /**
+     * Fetch records that have <code>APP_ID IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XCategory> fetchByAppId(String... values) {
+        return fetch(XCategory.X_CATEGORY.APP_ID, values);
+    }
+
+    /**
      * Fetch records that have <code>ACTIVE IN (values)</code>
      */
     public List<cn.vertxup.ambient.tables.pojos.XCategory> fetchByActive(Boolean... values) {
         return fetch(XCategory.X_CATEGORY.ACTIVE, values);
+    }
+
+    /**
+     * Fetch records that have <code>SIGMA IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XCategory> fetchBySigma(String... values) {
+        return fetch(XCategory.X_CATEGORY.SIGMA, values);
     }
 
     /**
@@ -153,10 +168,31 @@ public class XCategoryDao extends DAOImpl<XCategoryRecord, cn.vertxup.ambient.ta
     }
 
     /**
-     * Fetch records that have <code>APP_ID IN (values)</code>
+     * Fetch records that have <code>CREATED_AT IN (values)</code>
      */
-    public List<cn.vertxup.ambient.tables.pojos.XCategory> fetchByAppId(String... values) {
-        return fetch(XCategory.X_CATEGORY.APP_ID, values);
+    public List<cn.vertxup.ambient.tables.pojos.XCategory> fetchByCreatedAt(LocalDateTime... values) {
+        return fetch(XCategory.X_CATEGORY.CREATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XCategory> fetchByCreatedBy(String... values) {
+        return fetch(XCategory.X_CATEGORY.CREATED_BY, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XCategory> fetchByUpdatedAt(LocalDateTime... values) {
+        return fetch(XCategory.X_CATEGORY.UPDATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XCategory> fetchByUpdatedBy(String... values) {
+        return fetch(XCategory.X_CATEGORY.UPDATED_BY, values);
     }
 
     /**
@@ -237,10 +273,24 @@ public class XCategoryDao extends DAOImpl<XCategoryRecord, cn.vertxup.ambient.ta
     }
 
     /**
+     * Fetch records that have <code>APP_ID IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XCategory>> fetchByAppIdAsync(List<String> values) {
+        return fetchAsync(XCategory.X_CATEGORY.APP_ID,values);
+    }
+
+    /**
      * Fetch records that have <code>ACTIVE IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XCategory>> fetchByActiveAsync(List<Boolean> values) {
         return fetchAsync(XCategory.X_CATEGORY.ACTIVE,values);
+    }
+
+    /**
+     * Fetch records that have <code>SIGMA IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XCategory>> fetchBySigmaAsync(List<String> values) {
+        return fetchAsync(XCategory.X_CATEGORY.SIGMA,values);
     }
 
     /**
@@ -258,10 +308,31 @@ public class XCategoryDao extends DAOImpl<XCategoryRecord, cn.vertxup.ambient.ta
     }
 
     /**
-     * Fetch records that have <code>APP_ID IN (values)</code> asynchronously
+     * Fetch records that have <code>CREATED_AT IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XCategory>> fetchByAppIdAsync(List<String> values) {
-        return fetchAsync(XCategory.X_CATEGORY.APP_ID,values);
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XCategory>> fetchByCreatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(XCategory.X_CATEGORY.CREATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XCategory>> fetchByCreatedByAsync(List<String> values) {
+        return fetchAsync(XCategory.X_CATEGORY.CREATED_BY,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XCategory>> fetchByUpdatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(XCategory.X_CATEGORY.UPDATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XCategory>> fetchByUpdatedByAsync(List<String> values) {
+        return fetchAsync(XCategory.X_CATEGORY.UPDATED_BY,values);
     }
 
     private io.vertx.core.Vertx vertx;

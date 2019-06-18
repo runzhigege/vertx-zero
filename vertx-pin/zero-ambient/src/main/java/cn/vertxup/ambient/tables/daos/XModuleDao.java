@@ -9,6 +9,7 @@ import cn.vertxup.ambient.tables.records.XModuleRecord;
 
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -125,6 +126,13 @@ public class XModuleDao extends DAOImpl<XModuleRecord, cn.vertxup.ambient.tables
     }
 
     /**
+     * Fetch records that have <code>SIGMA IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XModule> fetchBySigma(String... values) {
+        return fetch(XModule.X_MODULE.SIGMA, values);
+    }
+
+    /**
      * Fetch records that have <code>METADATA IN (values)</code>
      */
     public List<cn.vertxup.ambient.tables.pojos.XModule> fetchByMetadata(String... values) {
@@ -136,6 +144,34 @@ public class XModuleDao extends DAOImpl<XModuleRecord, cn.vertxup.ambient.tables
      */
     public List<cn.vertxup.ambient.tables.pojos.XModule> fetchByLanguage(String... values) {
         return fetch(XModule.X_MODULE.LANGUAGE, values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_AT IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XModule> fetchByCreatedAt(LocalDateTime... values) {
+        return fetch(XModule.X_MODULE.CREATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XModule> fetchByCreatedBy(String... values) {
+        return fetch(XModule.X_MODULE.CREATED_BY, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XModule> fetchByUpdatedAt(LocalDateTime... values) {
+        return fetch(XModule.X_MODULE.UPDATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XModule> fetchByUpdatedBy(String... values) {
+        return fetch(XModule.X_MODULE.UPDATED_BY, values);
     }
 
     /**
@@ -209,6 +245,13 @@ public class XModuleDao extends DAOImpl<XModuleRecord, cn.vertxup.ambient.tables
     }
 
     /**
+     * Fetch records that have <code>SIGMA IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XModule>> fetchBySigmaAsync(List<String> values) {
+        return fetchAsync(XModule.X_MODULE.SIGMA,values);
+    }
+
+    /**
      * Fetch records that have <code>METADATA IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XModule>> fetchByMetadataAsync(List<String> values) {
@@ -220,6 +263,34 @@ public class XModuleDao extends DAOImpl<XModuleRecord, cn.vertxup.ambient.tables
      */
     public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XModule>> fetchByLanguageAsync(List<String> values) {
         return fetchAsync(XModule.X_MODULE.LANGUAGE,values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_AT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XModule>> fetchByCreatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(XModule.X_MODULE.CREATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XModule>> fetchByCreatedByAsync(List<String> values) {
+        return fetchAsync(XModule.X_MODULE.CREATED_BY,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XModule>> fetchByUpdatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(XModule.X_MODULE.UPDATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XModule>> fetchByUpdatedByAsync(List<String> values) {
+        return fetchAsync(XModule.X_MODULE.UPDATED_BY,values);
     }
 
     private io.vertx.core.Vertx vertx;
