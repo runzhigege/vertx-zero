@@ -14,6 +14,4 @@ public abstract class QzMicro extends QzTc {
         /* Rpc Infix */
         RpcInfix.init(VERTX);
     }
-
-
 }
