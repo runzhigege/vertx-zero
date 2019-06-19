@@ -23,7 +23,11 @@ class Dwarf {
          */
         if (!projection.isEmpty()) {
             Sc.infoAuth(LOGGER, AuthMsg.REGION_ROWS, projection.encode());
-            fields.stream().filter(field -> !projection.contains(field))
+            /*
+             * The method is the same as backend of Jooq
+             * Projection means filter
+             */
+            fields.stream().filter(projection::contains)
                     .forEach(input::remove);
         }
         return input;

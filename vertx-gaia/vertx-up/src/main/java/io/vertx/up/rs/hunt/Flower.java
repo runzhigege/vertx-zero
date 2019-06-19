@@ -28,15 +28,9 @@ class Flower {
      */
     static <T> Envelop continuous(final RoutingContext context,
                                   final T entity) {
-        final Envelop envelop = Envelop.success(entity);
-        envelop.setHeaders(context.request().headers());
-        /* Add Uri into Envelop for worker usage. */
-        envelop.setUri(context.request().uri());
-        envelop.setMethod(context.request().method());
-        /* User, Session, Context */
-        envelop.setUser(context.user());
-        envelop.setSession(context.session());
-        envelop.setContext(context.data());
+        final Envelop envelop = Envelop
+                .success(entity)
+                .bind(context);     // Bind Data Here.
         /*
          * Extension System of:
          * 1) PlugAuditor

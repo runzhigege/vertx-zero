@@ -1,2 +1,8 @@
 {
+    "configPath": "plugin/ui/column-definition",
+    "configStatic": {
+        "cn.vertxup.domain.tables.pojos.SGroup": "group.json"
+    },
+    "supportDynamic": true,
+    "configComponent": ""
 }

@@ -1,6 +1,7 @@
 package io.vertx.tp.rbac.extension.dwarf;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.error._500DwarfInstanceNullException;
 import io.vertx.tp.rbac.cv.em.RegionType;
 import io.zero.epic.fn.Fn;
 
@@ -17,6 +18,10 @@ public interface DataDwarf {
         } else if (RegionType.ARRAY == type) {
             return Fn.pool(Pool.DWARF_POOL, type, ArrayDwarf::new);
         } else {
+            /*
+             * Exception for unsupported type of Dwarf
+             */
+            Fn.out(true, _500DwarfInstanceNullException.class, DataDwarf.class, type);
             return null;
         }
     }

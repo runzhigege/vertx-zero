@@ -1,5 +1,6 @@
 package io.vertx.tp.rbac.extension;
 
+import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
@@ -22,15 +23,34 @@ public class DataRegion extends AbstractRegion {
             /* Get Critical parameters */
             final JsonObject matrix = DataTool.fetchMatrix(context);
             Sc.infoAuth(this.getLogger(), AuthMsg.REGION_BEFORE, matrix.encode());
-            /* Projection Modification */
-            final JsonArray projection = matrix.getJsonArray(Inquiry.KEY_PROJECTION);
-            if (Objects.nonNull(projection) && !projection.isEmpty()) {
-                envelop.onProjection(projection);
-            }
-            /* Criteria Modification */
-            final JsonObject criteria = matrix.getJsonObject(Inquiry.KEY_CRITERIA);
-            if (Objects.nonNull(criteria) && !criteria.isEmpty()) {
-                envelop.onCriteria(criteria);
+            /*
+             * Body modification is only available for POST/PUT
+             * 1) Because only POST/PUT support body parameter
+             * 2) Query engine parameters belong to body key such as
+             * {
+             *     criteria: {},
+             *     sorter: [],
+             *     projection: [],
+             *     pager:{
+             *         page: xx,
+             *         size: xx
+             *     }
+             * }
+             * 3) Get method will ignore this kind of situation and move the logical to
+             * After workflow
+             */
+            final HttpMethod method = envelop.getMethod();
+            if (HttpMethod.POST == method || HttpMethod.PUT == method) {
+                /* Projection Modification */
+                final JsonArray projection = matrix.getJsonArray(Inquiry.KEY_PROJECTION);
+                if (Objects.nonNull(projection) && !projection.isEmpty()) {
+                    envelop.onProjection(projection);
+                }
+                /* Criteria Modification */
+                final JsonObject criteria = matrix.getJsonObject(Inquiry.KEY_CRITERIA);
+                if (Objects.nonNull(criteria) && !criteria.isEmpty()) {
+                    envelop.onCriteria(criteria);
+                }
             }
         }
     }
@@ -43,8 +63,11 @@ public class DataRegion extends AbstractRegion {
             Sc.infoAuth(this.getLogger(), AuthMsg.REGION_AFTER, matrix.encode());
             /* Projection */
             DataTool.dwarfRecord(response, matrix);
-            /* Rows */
+
+            /* Rows / Projection */
             DataTool.dwarfCollection(response, matrix);
         }
     }
+
+
 }
