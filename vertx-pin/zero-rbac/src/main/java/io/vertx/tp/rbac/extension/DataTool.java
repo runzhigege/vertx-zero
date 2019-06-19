@@ -1,12 +1,12 @@
 package io.vertx.tp.rbac.extension;
 
 import io.vertx.core.buffer.Buffer;
-import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
+import io.vertx.tp.rbac.atom.ScUri;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.cv.em.RegionType;
 import io.vertx.tp.rbac.extension.dwarf.DataDwarf;
@@ -14,7 +14,6 @@ import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.log.Annal;
-import io.vertx.up.web.ZeroAnno;
 import io.vertx.zero.eon.Values;
 import io.zero.epic.Ut;
 
@@ -24,15 +23,22 @@ class DataTool {
 
     private static final Annal LOGGER = Annal.get(DataTool.class);
 
+    private static String fetchKey(final RoutingContext context) {
+        final HttpServerRequest request = context.request();
+        final String uri = ScUri.getUriId(context);
+        /* Cache Key */
+        final String cacheKey = "session-" + request.method().name() + ":" + uri;
+        /* Cache Data */
+        Sc.infoAuth(LOGGER, "Try cacheKey: {0}", cacheKey);
+
+        return cacheKey;
+    }
+
     static JsonObject fetchMatrix(final RoutingContext context) {
         /* Session Extract */
         final Session session = context.session();
-        final HttpServerRequest request = context.request();
-        final HttpMethod method = request.method();
-        final String recoveryUri = ZeroAnno.recoveryUri(request.uri(), method);
         /* Cache Key */
-        final String cacheKey = "session-" + request.method().name() + ":" + recoveryUri;
-        /* CacheData */
+        final String cacheKey = fetchKey(context);
         final Buffer buffer = session.get(cacheKey);
         if (Objects.nonNull(buffer)) {
             return buffer.toJsonObject();
