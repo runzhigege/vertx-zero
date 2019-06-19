@@ -1,4 +1,4 @@
-package io.vertx.tp.ke.element;
+package io.vertx.tp.ke.extension.ui;
 
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.log.Annal;

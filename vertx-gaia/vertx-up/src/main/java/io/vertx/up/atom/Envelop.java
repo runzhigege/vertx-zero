@@ -4,10 +4,12 @@ import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpMethod;
+import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpStatusCode;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
+import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.vertx.up.atom.envelop.Rib;
 import io.vertx.up.exception.WebException;
@@ -262,6 +264,24 @@ public class Envelop implements Serializable {
     /* Context Set */
     public void setContext(final Map<String, Object> data) {
         this.assist.context(data);
+    }
+
+    /*
+     * Bind Routing Context to process Assist structure
+     */
+    public Envelop bind(final RoutingContext context) {
+        final HttpServerRequest request = context.request();
+
+        /* Http Request Part */
+        this.assist.headers(request.headers());
+        this.assist.uri(request.uri());
+        this.assist.method(request.method());
+
+        /* Session, User, Data */
+        this.assist.session(context.session());
+        this.assist.user(context.user());
+        this.assist.context(context.data());
+        return this;
     }
 
     @Override

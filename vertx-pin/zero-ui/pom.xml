@@ -11,5 +11,27 @@
 
     <artifactId>zero-ui</artifactId>
     <name>（ Zero Pin ) -- User Interface</name>
-
+    <dependencies>
+        <!-- Kern -->
+        <dependency>
+            <groupId>cn.vertxup</groupId>
+            <artifactId>zero-ke</artifactId>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <configuration>
+                    <!-- 配置文件路径 -->
+                    <propertyFile>${basedir}/src/main/resources/plugin/sql/liquibase.properties</propertyFile>
+                    <changeLogFile>${basedir}/src/main/resources/plugin/sql/database.yml</changeLogFile>
+                    <!-- 配置参数 -->
+                    <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                    <outputFileEncoding>UTF-8</outputFileEncoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

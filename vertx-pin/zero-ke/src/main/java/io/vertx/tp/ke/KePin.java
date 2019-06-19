@@ -1,7 +1,7 @@
 package io.vertx.tp.ke;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.ke.element.ColumnStub;
+import io.vertx.tp.ke.extension.ui.ColumnStub;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
 import io.zero.epic.Ut;
