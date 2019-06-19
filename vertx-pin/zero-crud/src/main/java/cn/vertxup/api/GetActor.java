@@ -45,6 +45,7 @@ public class GetActor {
                     /* Remove User Filters */
                     .compose(filters -> Uson.create(filters).remove("user").toFuture())
                     /* Fetch Full Columns */
+                    .compose(Ux::debug)
                     // .compose(stub::fetchFullColumns)
                     /* Return Result */
                     .compose(Http::success200);

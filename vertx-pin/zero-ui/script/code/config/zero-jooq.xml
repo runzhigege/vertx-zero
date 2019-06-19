@@ -3,7 +3,7 @@
     <jdbc>
         <driver>com.mysql.cj.jdbc.Driver</driver>
         <url>
-            <![CDATA[ jdbc:mysql://ox.engine.cn:3306/DB_ORIGIN_X?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false ]]>
+            <![CDATA[ jdbc:mysql://ox.engine.cn:3306/DB_ETERNAL?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false ]]>
         </url>
         <username>root</username>
         <password>pl,okmijn123</password>
@@ -16,8 +16,8 @@
             <!--name for fake primary key-->
             <overridePrimaryKeys>override_primmary_key</overridePrimaryKeys>
             <name>org.jooq.util.mysql.MySQLDatabase</name>
-            <inputSchema>DB_ORIGIN_X</inputSchema>
-            <includes>(^(S_|SEC_|O_|OTH_|R_|REL_).*)</includes>
+            <inputSchema>DB_ETERNAL</inputSchema>
+            <includes>(^(UI_).*)</includes>
             <unsignedTypes>false</unsignedTypes>
             <forcedTypes>
                 <!-- Convert tinyint to boolean -->
@@ -51,7 +51,7 @@
             <fluentSetters>true</fluentSetters>
         </generate>
         <target>
-            <packageName>cn.vertxup.domain</packageName>
+            <packageName>cn.vertxup.ui</packageName>
             <directory>../../src/main/java</directory>
         </target>
         <strategy>
