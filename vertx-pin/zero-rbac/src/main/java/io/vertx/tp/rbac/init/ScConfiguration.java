@@ -13,9 +13,6 @@ import io.zero.epic.Ut;
  *
  */
 class ScConfiguration {
-    /*
-     * Logger for IxDao
-     */
     private static final Annal LOGGER = Annal.get(ScConfiguration.class);
     private static ScConfig CONFIG = null;
 

@@ -21,10 +21,15 @@ public final class Answer {
                 Normalizer.initialize(context, envelop);
         // FIX: java.lang.IllegalStateException: Response is closed
         if (!response.closed()) {
+            /* Bind Data */
+            envelop.bind(context);
+
             // 2. Media processing
             Normalizer.media(response, null);
+
             /* Plugin Extension for response replying */
             PluginExtension.Answer.reply(context, envelop);
+
             // 3. Response process
             Normalizer.out(response, envelop, null);
         }
@@ -40,12 +45,18 @@ public final class Answer {
                 Normalizer.initialize(context, envelop);
         // FIX: java.lang.IllegalStateException: Response is closed
         if (!response.closed()) {
+            /* Bind Data */
+            envelop.bind(context);
+
             // 2. Media processing
             Normalizer.media(response, event);
+
             // 3. Store Session
             Normalizer.storeSession(context, envelop.data(), event.getAction());
+
             /* Plugin Extension for response replying */
             PluginExtension.Answer.reply(context, envelop);
+
             // 3. Response process
             Normalizer.out(response, envelop, event);
         }
