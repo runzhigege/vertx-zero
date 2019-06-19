@@ -94,20 +94,20 @@ public final class Normalizer {
             final String headerStr = response.headers().get(HttpHeaders.CONTENT_TYPE);
             if (null == headerStr) {
                 // Default mode
-                response.end(envelop.responseString());
+                response.end(envelop.outString());
             } else {
                 final MediaType type = MediaType.valueOf(headerStr);
                 if (MediaType.WILDCARD_TYPE.equals(type)) {
                     // Default mode
-                    response.end(envelop.responseString());
+                    response.end(envelop.outString());
                 } else {
                     // Dispatch
                     if (MediaType.APPLICATION_OCTET_STREAM_TYPE.equals(type)) {
                         // Buffer only
-                        response.end(envelop.responseBuffer());
+                        response.end(envelop.outBuffer());
                     } else {
                         // Other uniform convert to string mode
-                        response.end(envelop.responseString());
+                        response.end(envelop.outString());
                     }
                 }
             }
