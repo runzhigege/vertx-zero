@@ -9,6 +9,7 @@ import cn.vertxup.ambient.tables.XAttachment;
 import cn.vertxup.ambient.tables.XCategory;
 import cn.vertxup.ambient.tables.XMenu;
 import cn.vertxup.ambient.tables.XModule;
+import cn.vertxup.ambient.tables.XNumber;
 import cn.vertxup.ambient.tables.XSource;
 import cn.vertxup.ambient.tables.XTabular;
 import cn.vertxup.ambient.tables.records.XAppRecord;
@@ -16,6 +17,7 @@ import cn.vertxup.ambient.tables.records.XAttachmentRecord;
 import cn.vertxup.ambient.tables.records.XCategoryRecord;
 import cn.vertxup.ambient.tables.records.XMenuRecord;
 import cn.vertxup.ambient.tables.records.XModuleRecord;
+import cn.vertxup.ambient.tables.records.XNumberRecord;
 import cn.vertxup.ambient.tables.records.XSourceRecord;
 import cn.vertxup.ambient.tables.records.XTabularRecord;
 
@@ -27,7 +29,7 @@ import org.jooq.impl.Internal;
 
 /**
  * A class modelling foreign key relationships and constraints of tables of 
- * the <code>DB_ORIGIN_X</code> schema.
+ * the <code>DB_ETERNAL</code> schema.
  */
 @Generated(
     value = {
@@ -63,6 +65,8 @@ public class Keys {
     public static final UniqueKey<XMenuRecord> KEY_X_MENU_NAME = UniqueKeys0.KEY_X_MENU_NAME;
     public static final UniqueKey<XModuleRecord> KEY_X_MODULE_PRIMARY = UniqueKeys0.KEY_X_MODULE_PRIMARY;
     public static final UniqueKey<XModuleRecord> KEY_X_MODULE_URL_ENTRY = UniqueKeys0.KEY_X_MODULE_URL_ENTRY;
+    public static final UniqueKey<XNumberRecord> KEY_X_NUMBER_PRIMARY = UniqueKeys0.KEY_X_NUMBER_PRIMARY;
+    public static final UniqueKey<XNumberRecord> KEY_X_NUMBER_CODE = UniqueKeys0.KEY_X_NUMBER_CODE;
     public static final UniqueKey<XSourceRecord> KEY_X_SOURCE_PRIMARY = UniqueKeys0.KEY_X_SOURCE_PRIMARY;
     public static final UniqueKey<XSourceRecord> KEY_X_SOURCE_APP_ID = UniqueKeys0.KEY_X_SOURCE_APP_ID;
     public static final UniqueKey<XTabularRecord> KEY_X_TABULAR_PRIMARY = UniqueKeys0.KEY_X_TABULAR_PRIMARY;
@@ -93,6 +97,8 @@ public class Keys {
         public static final UniqueKey<XMenuRecord> KEY_X_MENU_NAME = Internal.createUniqueKey(XMenu.X_MENU, "KEY_X_MENU_NAME", XMenu.X_MENU.NAME, XMenu.X_MENU.APP_ID);
         public static final UniqueKey<XModuleRecord> KEY_X_MODULE_PRIMARY = Internal.createUniqueKey(XModule.X_MODULE, "KEY_X_MODULE_PRIMARY", XModule.X_MODULE.KEY);
         public static final UniqueKey<XModuleRecord> KEY_X_MODULE_URL_ENTRY = Internal.createUniqueKey(XModule.X_MODULE, "KEY_X_MODULE_URL_ENTRY", XModule.X_MODULE.URL_ENTRY);
+        public static final UniqueKey<XNumberRecord> KEY_X_NUMBER_PRIMARY = Internal.createUniqueKey(XNumber.X_NUMBER, "KEY_X_NUMBER_PRIMARY", XNumber.X_NUMBER.KEY);
+        public static final UniqueKey<XNumberRecord> KEY_X_NUMBER_CODE = Internal.createUniqueKey(XNumber.X_NUMBER, "KEY_X_NUMBER_CODE", XNumber.X_NUMBER.CODE, XNumber.X_NUMBER.SIGMA);
         public static final UniqueKey<XSourceRecord> KEY_X_SOURCE_PRIMARY = Internal.createUniqueKey(XSource.X_SOURCE, "KEY_X_SOURCE_PRIMARY", XSource.X_SOURCE.KEY);
         public static final UniqueKey<XSourceRecord> KEY_X_SOURCE_APP_ID = Internal.createUniqueKey(XSource.X_SOURCE, "KEY_X_SOURCE_APP_ID", XSource.X_SOURCE.APP_ID);
         public static final UniqueKey<XTabularRecord> KEY_X_TABULAR_PRIMARY = Internal.createUniqueKey(XTabular.X_TABULAR, "KEY_X_TABULAR_PRIMARY", XTabular.X_TABULAR.KEY);

@@ -5,6 +5,7 @@ package cn.vertxup.ambient.tables.interfaces;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.annotation.Generated;
 
@@ -23,154 +24,204 @@ import javax.annotation.Generated;
 public interface IXSource extends Serializable {
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.KEY</code>. 「key」- 数据源主键
+     * Setter for <code>DB_ETERNAL.X_SOURCE.KEY</code>. 「key」- 数据源主键
      */
     public IXSource setKey(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.KEY</code>. 「key」- 数据源主键
+     * Getter for <code>DB_ETERNAL.X_SOURCE.KEY</code>. 「key」- 数据源主键
      */
     public String getKey();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.IP_V4</code>. 「ipV4」- IP v4地址
+     * Setter for <code>DB_ETERNAL.X_SOURCE.IP_V4</code>. 「ipV4」- IP v4地址
      */
     public IXSource setIpV4(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.IP_V4</code>. 「ipV4」- IP v4地址
+     * Getter for <code>DB_ETERNAL.X_SOURCE.IP_V4</code>. 「ipV4」- IP v4地址
      */
     public String getIpV4();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.IP_V6</code>. 「ipV6」- IP v6地址
+     * Setter for <code>DB_ETERNAL.X_SOURCE.IP_V6</code>. 「ipV6」- IP v6地址
      */
     public IXSource setIpV6(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.IP_V6</code>. 「ipV6」- IP v6地址
+     * Getter for <code>DB_ETERNAL.X_SOURCE.IP_V6</code>. 「ipV6」- IP v6地址
      */
     public String getIpV6();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.HOSTNAME</code>. 「hostname」- 主机地址
+     * Setter for <code>DB_ETERNAL.X_SOURCE.HOSTNAME</code>. 「hostname」- 主机地址
      */
     public IXSource setHostname(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.HOSTNAME</code>. 「hostname」- 主机地址
+     * Getter for <code>DB_ETERNAL.X_SOURCE.HOSTNAME</code>. 「hostname」- 主机地址
      */
     public String getHostname();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.PORT</code>. 「port」- 端口号
+     * Setter for <code>DB_ETERNAL.X_SOURCE.PORT</code>. 「port」- 端口号
      */
     public IXSource setPort(Integer value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.PORT</code>. 「port」- 端口号
+     * Getter for <code>DB_ETERNAL.X_SOURCE.PORT</code>. 「port」- 端口号
      */
     public Integer getPort();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.CATEGORY</code>. 「category」- 数据库类型
+     * Setter for <code>DB_ETERNAL.X_SOURCE.CATEGORY</code>. 「category」- 数据库类型
      */
     public IXSource setCategory(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.CATEGORY</code>. 「category」- 数据库类型
+     * Getter for <code>DB_ETERNAL.X_SOURCE.CATEGORY</code>. 「category」- 数据库类型
      */
     public String getCategory();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.JDBC_URL</code>. 「jdbcUrl」- JDBC连接字符串
+     * Setter for <code>DB_ETERNAL.X_SOURCE.JDBC_URL</code>. 「jdbcUrl」- JDBC连接字符串
      */
     public IXSource setJdbcUrl(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.JDBC_URL</code>. 「jdbcUrl」- JDBC连接字符串
+     * Getter for <code>DB_ETERNAL.X_SOURCE.JDBC_URL</code>. 「jdbcUrl」- JDBC连接字符串
      */
     public String getJdbcUrl();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」- 连接字符串中的配置key=value
+     * Setter for <code>DB_ETERNAL.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」- 连接字符串中的配置key=value
      */
     public IXSource setJdbcConfig(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」- 连接字符串中的配置key=value
+     * Getter for <code>DB_ETERNAL.X_SOURCE.JDBC_CONFIG</code>. 「jdbcConfig」- 连接字符串中的配置key=value
      */
     public String getJdbcConfig();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.INSTANCE</code>. 「instance」- 实例名称
+     * Setter for <code>DB_ETERNAL.X_SOURCE.INSTANCE</code>. 「instance」- 实例名称
      */
     public IXSource setInstance(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.INSTANCE</code>. 「instance」- 实例名称
+     * Getter for <code>DB_ETERNAL.X_SOURCE.INSTANCE</code>. 「instance」- 实例名称
      */
     public String getInstance();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.USERNAME</code>. 「username」- 账号
+     * Setter for <code>DB_ETERNAL.X_SOURCE.USERNAME</code>. 「username」- 账号
      */
     public IXSource setUsername(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.USERNAME</code>. 「username」- 账号
+     * Getter for <code>DB_ETERNAL.X_SOURCE.USERNAME</code>. 「username」- 账号
      */
     public String getUsername();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.PASSWORD</code>. 「password」- 密码
+     * Setter for <code>DB_ETERNAL.X_SOURCE.PASSWORD</code>. 「password」- 密码
      */
     public IXSource setPassword(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.PASSWORD</code>. 「password」- 密码
+     * Getter for <code>DB_ETERNAL.X_SOURCE.PASSWORD</code>. 「password」- 密码
      */
     public String getPassword();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.ACTIVE</code>. 「active」- 是否启用
-     */
-    public IXSource setActive(Boolean value);
-
-    /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.ACTIVE</code>. 「active」- 是否启用
-     */
-    public Boolean getActive();
-
-    /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.METADATA</code>. 「metadata」- 通过MetadataConnection分析读取的数据
-     */
-    public IXSource setMetadata(String value);
-
-    /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.METADATA</code>. 「metadata」- 通过MetadataConnection分析读取的数据
-     */
-    public String getMetadata();
-
-    /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.LANGUAGE</code>. 「language」- 使用的语言
-     */
-    public IXSource setLanguage(String value);
-
-    /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.LANGUAGE</code>. 「language」- 使用的语言
-     */
-    public String getLanguage();
-
-    /**
-     * Setter for <code>DB_ORIGIN_X.X_SOURCE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Setter for <code>DB_ETERNAL.X_SOURCE.APP_ID</code>. 「appId」- 关联的应用程序ID
      */
     public IXSource setAppId(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_SOURCE.APP_ID</code>. 「appId」- 关联的应用程序ID
+     * Getter for <code>DB_ETERNAL.X_SOURCE.APP_ID</code>. 「appId」- 关联的应用程序ID
      */
     public String getAppId();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_SOURCE.ACTIVE</code>. 「active」- 是否启用
+     */
+    public IXSource setActive(Boolean value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_SOURCE.ACTIVE</code>. 「active」- 是否启用
+     */
+    public Boolean getActive();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_SOURCE.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public IXSource setSigma(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_SOURCE.SIGMA</code>. 「sigma」- 统一标识
+     */
+    public String getSigma();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_SOURCE.METADATA</code>. 「metadata」- 附加配置
+     */
+    public IXSource setMetadata(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_SOURCE.METADATA</code>. 「metadata」- 附加配置
+     */
+    public String getMetadata();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_SOURCE.LANGUAGE</code>. 「language」- 使用的语言
+     */
+    public IXSource setLanguage(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_SOURCE.LANGUAGE</code>. 「language」- 使用的语言
+     */
+    public String getLanguage();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_SOURCE.CREATED_AT</code>. 「createdAt」- 创建时间
+     */
+    public IXSource setCreatedAt(LocalDateTime value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_SOURCE.CREATED_AT</code>. 「createdAt」- 创建时间
+     */
+    public LocalDateTime getCreatedAt();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_SOURCE.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public IXSource setCreatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_SOURCE.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public String getCreatedBy();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_SOURCE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public IXSource setUpdatedAt(LocalDateTime value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_SOURCE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public LocalDateTime getUpdatedAt();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_SOURCE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public IXSource setUpdatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_SOURCE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public String getUpdatedBy();
 
     // -------------------------------------------------------------------------
     // FROM and INTO
@@ -198,10 +249,15 @@ public interface IXSource extends Serializable {
         setInstance(json.getString("INSTANCE"));
         setUsername(json.getString("USERNAME"));
         setPassword(json.getString("PASSWORD"));
+        setAppId(json.getString("APP_ID"));
         setActive(json.getBoolean("ACTIVE"));
+        setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
         setLanguage(json.getString("LANGUAGE"));
-        setAppId(json.getString("APP_ID"));
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        setCreatedBy(json.getString("CREATED_BY"));
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        setUpdatedBy(json.getString("UPDATED_BY"));
         return this;
     }
 
@@ -219,10 +275,15 @@ public interface IXSource extends Serializable {
         json.put("INSTANCE",getInstance());
         json.put("USERNAME",getUsername());
         json.put("PASSWORD",getPassword());
+        json.put("APP_ID",getAppId());
         json.put("ACTIVE",getActive());
+        json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());
         json.put("LANGUAGE",getLanguage());
-        json.put("APP_ID",getAppId());
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        json.put("CREATED_BY",getCreatedBy());
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        json.put("UPDATED_BY",getUpdatedBy());
         return json;
     }
 

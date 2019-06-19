@@ -11,4 +11,11 @@
 
     <artifactId>zero-ke</artifactId>
     <name>（ Zero Pin Core ) -- Zero Kernel</name>
+    <dependencies>
+        <dependency>
+            <groupId>cn.vertxup</groupId>
+            <artifactId>zero-excel</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

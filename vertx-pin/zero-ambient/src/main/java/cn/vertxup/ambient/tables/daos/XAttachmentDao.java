@@ -9,6 +9,7 @@ import cn.vertxup.ambient.tables.records.XAttachmentRecord;
 
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -174,10 +175,10 @@ public class XAttachmentDao extends DAOImpl<XAttachmentRecord, cn.vertxup.ambien
     }
 
     /**
-     * Fetch records that have <code>LANGUAGE IN (values)</code>
+     * Fetch records that have <code>SIGMA IN (values)</code>
      */
-    public List<cn.vertxup.ambient.tables.pojos.XAttachment> fetchByLanguage(String... values) {
-        return fetch(XAttachment.X_ATTACHMENT.LANGUAGE, values);
+    public List<cn.vertxup.ambient.tables.pojos.XAttachment> fetchBySigma(String... values) {
+        return fetch(XAttachment.X_ATTACHMENT.SIGMA, values);
     }
 
     /**
@@ -185,6 +186,41 @@ public class XAttachmentDao extends DAOImpl<XAttachmentRecord, cn.vertxup.ambien
      */
     public List<cn.vertxup.ambient.tables.pojos.XAttachment> fetchByMetadata(String... values) {
         return fetch(XAttachment.X_ATTACHMENT.METADATA, values);
+    }
+
+    /**
+     * Fetch records that have <code>LANGUAGE IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XAttachment> fetchByLanguage(String... values) {
+        return fetch(XAttachment.X_ATTACHMENT.LANGUAGE, values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_AT IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XAttachment> fetchByCreatedAt(LocalDateTime... values) {
+        return fetch(XAttachment.X_ATTACHMENT.CREATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XAttachment> fetchByCreatedBy(String... values) {
+        return fetch(XAttachment.X_ATTACHMENT.CREATED_BY, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XAttachment> fetchByUpdatedAt(LocalDateTime... values) {
+        return fetch(XAttachment.X_ATTACHMENT.UPDATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XAttachment> fetchByUpdatedBy(String... values) {
+        return fetch(XAttachment.X_ATTACHMENT.UPDATED_BY, values);
     }
 
     /**
@@ -307,10 +343,10 @@ public class XAttachmentDao extends DAOImpl<XAttachmentRecord, cn.vertxup.ambien
     }
 
     /**
-     * Fetch records that have <code>LANGUAGE IN (values)</code> asynchronously
+     * Fetch records that have <code>SIGMA IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XAttachment>> fetchByLanguageAsync(List<String> values) {
-        return fetchAsync(XAttachment.X_ATTACHMENT.LANGUAGE,values);
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XAttachment>> fetchBySigmaAsync(List<String> values) {
+        return fetchAsync(XAttachment.X_ATTACHMENT.SIGMA,values);
     }
 
     /**
@@ -318,6 +354,41 @@ public class XAttachmentDao extends DAOImpl<XAttachmentRecord, cn.vertxup.ambien
      */
     public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XAttachment>> fetchByMetadataAsync(List<String> values) {
         return fetchAsync(XAttachment.X_ATTACHMENT.METADATA,values);
+    }
+
+    /**
+     * Fetch records that have <code>LANGUAGE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XAttachment>> fetchByLanguageAsync(List<String> values) {
+        return fetchAsync(XAttachment.X_ATTACHMENT.LANGUAGE,values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_AT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XAttachment>> fetchByCreatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(XAttachment.X_ATTACHMENT.CREATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>CREATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XAttachment>> fetchByCreatedByAsync(List<String> values) {
+        return fetchAsync(XAttachment.X_ATTACHMENT.CREATED_BY,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XAttachment>> fetchByUpdatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(XAttachment.X_ATTACHMENT.UPDATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XAttachment>> fetchByUpdatedByAsync(List<String> values) {
+        return fetchAsync(XAttachment.X_ATTACHMENT.UPDATED_BY,values);
     }
 
     private io.vertx.core.Vertx vertx;

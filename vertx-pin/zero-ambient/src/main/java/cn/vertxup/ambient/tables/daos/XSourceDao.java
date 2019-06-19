@@ -9,6 +9,7 @@ import cn.vertxup.ambient.tables.records.XSourceRecord;
 
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -139,10 +140,31 @@ public class XSourceDao extends DAOImpl<XSourceRecord, cn.vertxup.ambient.tables
     }
 
     /**
+     * Fetch records that have <code>APP_ID IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XSource> fetchByAppId(String... values) {
+        return fetch(XSource.X_SOURCE.APP_ID, values);
+    }
+
+    /**
+     * Fetch a unique record that has <code>APP_ID = value</code>
+     */
+    public cn.vertxup.ambient.tables.pojos.XSource fetchOneByAppId(String value) {
+        return fetchOne(XSource.X_SOURCE.APP_ID, value);
+    }
+
+    /**
      * Fetch records that have <code>ACTIVE IN (values)</code>
      */
     public List<cn.vertxup.ambient.tables.pojos.XSource> fetchByActive(Boolean... values) {
         return fetch(XSource.X_SOURCE.ACTIVE, values);
+    }
+
+    /**
+     * Fetch records that have <code>SIGMA IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XSource> fetchBySigma(String... values) {
+        return fetch(XSource.X_SOURCE.SIGMA, values);
     }
 
     /**
@@ -160,17 +182,31 @@ public class XSourceDao extends DAOImpl<XSourceRecord, cn.vertxup.ambient.tables
     }
 
     /**
-     * Fetch records that have <code>APP_ID IN (values)</code>
+     * Fetch records that have <code>CREATED_AT IN (values)</code>
      */
-    public List<cn.vertxup.ambient.tables.pojos.XSource> fetchByAppId(String... values) {
-        return fetch(XSource.X_SOURCE.APP_ID, values);
+    public List<cn.vertxup.ambient.tables.pojos.XSource> fetchByCreatedAt(LocalDateTime... values) {
+        return fetch(XSource.X_SOURCE.CREATED_AT, values);
     }
 
     /**
-     * Fetch a unique record that has <code>APP_ID = value</code>
+     * Fetch records that have <code>CREATED_BY IN (values)</code>
      */
-    public cn.vertxup.ambient.tables.pojos.XSource fetchOneByAppId(String value) {
-        return fetchOne(XSource.X_SOURCE.APP_ID, value);
+    public List<cn.vertxup.ambient.tables.pojos.XSource> fetchByCreatedBy(String... values) {
+        return fetch(XSource.X_SOURCE.CREATED_BY, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XSource> fetchByUpdatedAt(LocalDateTime... values) {
+        return fetch(XSource.X_SOURCE.UPDATED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XSource> fetchByUpdatedBy(String... values) {
+        return fetch(XSource.X_SOURCE.UPDATED_BY, values);
     }
 
     /**
@@ -258,10 +294,31 @@ public class XSourceDao extends DAOImpl<XSourceRecord, cn.vertxup.ambient.tables
     }
 
     /**
+     * Fetch records that have <code>APP_ID IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XSource>> fetchByAppIdAsync(List<String> values) {
+        return fetchAsync(XSource.X_SOURCE.APP_ID,values);
+    }
+
+    /**
+     * Fetch a unique record that has <code>APP_ID = value</code> asynchronously
+     */
+    public CompletableFuture<cn.vertxup.ambient.tables.pojos.XSource> fetchOneByAppIdAsync(String value) {
+        return FutureTool.executeBlocking(h->h.complete(fetchOneByAppId(value)),vertx());
+    }
+
+    /**
      * Fetch records that have <code>ACTIVE IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XSource>> fetchByActiveAsync(List<Boolean> values) {
         return fetchAsync(XSource.X_SOURCE.ACTIVE,values);
+    }
+
+    /**
+     * Fetch records that have <code>SIGMA IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XSource>> fetchBySigmaAsync(List<String> values) {
+        return fetchAsync(XSource.X_SOURCE.SIGMA,values);
     }
 
     /**
@@ -279,17 +336,31 @@ public class XSourceDao extends DAOImpl<XSourceRecord, cn.vertxup.ambient.tables
     }
 
     /**
-     * Fetch records that have <code>APP_ID IN (values)</code> asynchronously
+     * Fetch records that have <code>CREATED_AT IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XSource>> fetchByAppIdAsync(List<String> values) {
-        return fetchAsync(XSource.X_SOURCE.APP_ID,values);
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XSource>> fetchByCreatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(XSource.X_SOURCE.CREATED_AT,values);
     }
 
     /**
-     * Fetch a unique record that has <code>APP_ID = value</code> asynchronously
+     * Fetch records that have <code>CREATED_BY IN (values)</code> asynchronously
      */
-    public CompletableFuture<cn.vertxup.ambient.tables.pojos.XSource> fetchOneByAppIdAsync(String value) {
-        return FutureTool.executeBlocking(h->h.complete(fetchOneByAppId(value)),vertx());
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XSource>> fetchByCreatedByAsync(List<String> values) {
+        return fetchAsync(XSource.X_SOURCE.CREATED_BY,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_AT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XSource>> fetchByUpdatedAtAsync(List<LocalDateTime> values) {
+        return fetchAsync(XSource.X_SOURCE.UPDATED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>UPDATED_BY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XSource>> fetchByUpdatedByAsync(List<String> values) {
+        return fetchAsync(XSource.X_SOURCE.UPDATED_BY,values);
     }
 
     private io.vertx.core.Vertx vertx;

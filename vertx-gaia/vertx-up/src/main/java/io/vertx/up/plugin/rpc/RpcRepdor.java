@@ -36,7 +36,7 @@ public class RpcRepdor {
             if (null != ex) {
                 final Envelop envelop =
                         Envelop.failure(new _500UnexpectedRpcException(this.clazz, ex));
-                handler.complete(envelop.responseJson());
+                handler.complete(envelop.outJson());
                 // TODO: Debug Now, Remove In Future
                 ex.printStackTrace();
             }

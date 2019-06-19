@@ -6,6 +6,8 @@ package cn.vertxup.ambient.tables.pojos;
 
 import cn.vertxup.ambient.tables.interfaces.IXApp;
 
+import java.time.LocalDateTime;
+
 import javax.annotation.Generated;
 
 
@@ -22,24 +24,28 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XApp implements IXApp {
 
-    private static final long serialVersionUID = 1686997391;
+    private static final long serialVersionUID = -1510288610;
 
-    private String  key;
-    private String  name;
-    private String  code;
-    private String  title;
-    private String  logo;
-    private String  domain;
-    private Integer appPort;
-    private String  urlEntry;
-    private String  urlMain;
-    private String  path;
-    private String  route;
-    private String  appKey;
-    private String  sigma;
-    private Boolean active;
-    private String  language;
-    private String  metadata;
+    private String        key;
+    private String        name;
+    private String        code;
+    private String        title;
+    private String        logo;
+    private String        domain;
+    private Integer       appPort;
+    private String        urlEntry;
+    private String        urlMain;
+    private String        path;
+    private String        route;
+    private String        appKey;
+    private Boolean       active;
+    private String        sigma;
+    private String        metadata;
+    private String        language;
+    private LocalDateTime createdAt;
+    private String        createdBy;
+    private LocalDateTime updatedAt;
+    private String        updatedBy;
 
     public XApp() {}
 
@@ -56,29 +62,37 @@ public class XApp implements IXApp {
         this.path = value.path;
         this.route = value.route;
         this.appKey = value.appKey;
-        this.sigma = value.sigma;
         this.active = value.active;
-        this.language = value.language;
+        this.sigma = value.sigma;
         this.metadata = value.metadata;
+        this.language = value.language;
+        this.createdAt = value.createdAt;
+        this.createdBy = value.createdBy;
+        this.updatedAt = value.updatedAt;
+        this.updatedBy = value.updatedBy;
     }
 
     public XApp(
-        String  key,
-        String  name,
-        String  code,
-        String  title,
-        String  logo,
-        String  domain,
-        Integer appPort,
-        String  urlEntry,
-        String  urlMain,
-        String  path,
-        String  route,
-        String  appKey,
-        String  sigma,
-        Boolean active,
-        String  language,
-        String  metadata
+        String        key,
+        String        name,
+        String        code,
+        String        title,
+        String        logo,
+        String        domain,
+        Integer       appPort,
+        String        urlEntry,
+        String        urlMain,
+        String        path,
+        String        route,
+        String        appKey,
+        Boolean       active,
+        String        sigma,
+        String        metadata,
+        String        language,
+        LocalDateTime createdAt,
+        String        createdBy,
+        LocalDateTime updatedAt,
+        String        updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -92,10 +106,14 @@ public class XApp implements IXApp {
         this.path = path;
         this.route = route;
         this.appKey = appKey;
-        this.sigma = sigma;
         this.active = active;
-        this.language = language;
+        this.sigma = sigma;
         this.metadata = metadata;
+        this.language = language;
+        this.createdAt = createdAt;
+        this.createdBy = createdBy;
+        this.updatedAt = updatedAt;
+        this.updatedBy = updatedBy;
     }
 
     @Override
@@ -231,6 +249,17 @@ public class XApp implements IXApp {
     }
 
     @Override
+    public Boolean getActive() {
+        return this.active;
+    }
+
+    @Override
+    public XApp setActive(Boolean active) {
+        this.active = active;
+        return this;
+    }
+
+    @Override
     public String getSigma() {
         return this.sigma;
     }
@@ -242,13 +271,13 @@ public class XApp implements IXApp {
     }
 
     @Override
-    public Boolean getActive() {
-        return this.active;
+    public String getMetadata() {
+        return this.metadata;
     }
 
     @Override
-    public XApp setActive(Boolean active) {
-        this.active = active;
+    public XApp setMetadata(String metadata) {
+        this.metadata = metadata;
         return this;
     }
 
@@ -264,13 +293,46 @@ public class XApp implements IXApp {
     }
 
     @Override
-    public String getMetadata() {
-        return this.metadata;
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
     }
 
     @Override
-    public XApp setMetadata(String metadata) {
-        this.metadata = metadata;
+    public XApp setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    @Override
+    public String getCreatedBy() {
+        return this.createdBy;
+    }
+
+    @Override
+    public XApp setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    @Override
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    @Override
+    public XApp setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+        return this;
+    }
+
+    @Override
+    public String getUpdatedBy() {
+        return this.updatedBy;
+    }
+
+    @Override
+    public XApp setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
         return this;
     }
 
@@ -290,10 +352,14 @@ public class XApp implements IXApp {
         sb.append(", ").append(path);
         sb.append(", ").append(route);
         sb.append(", ").append(appKey);
-        sb.append(", ").append(sigma);
         sb.append(", ").append(active);
-        sb.append(", ").append(language);
+        sb.append(", ").append(sigma);
         sb.append(", ").append(metadata);
+        sb.append(", ").append(language);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(createdBy);
+        sb.append(", ").append(updatedAt);
+        sb.append(", ").append(updatedBy);
 
         sb.append(")");
         return sb.toString();
@@ -320,10 +386,14 @@ public class XApp implements IXApp {
         setPath(from.getPath());
         setRoute(from.getRoute());
         setAppKey(from.getAppKey());
-        setSigma(from.getSigma());
         setActive(from.getActive());
-        setLanguage(from.getLanguage());
+        setSigma(from.getSigma());
         setMetadata(from.getMetadata());
+        setLanguage(from.getLanguage());
+        setCreatedAt(from.getCreatedAt());
+        setCreatedBy(from.getCreatedBy());
+        setUpdatedAt(from.getUpdatedAt());
+        setUpdatedBy(from.getUpdatedBy());
     }
 
     /**

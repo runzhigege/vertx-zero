@@ -19,10 +19,10 @@ public class DataRegion extends AbstractRegion {
             /* Get Critical parameters */
             final JsonObject matrix = DataTool.fetchMatrix(context);
             Sc.infoAuth(this.getLogger(), AuthMsg.REGION_BEFORE, matrix.encode());
-            /* Criteria Modification */
-            DataTool.updateProjection(envelop, matrix.getJsonArray(Inquiry.KEY_PROJECTION));
             /* Projection Modification */
-            DataTool.updateCriteria(envelop, matrix.getJsonObject(Inquiry.KEY_CRITERIA));
+            envelop.onProjection(matrix.getJsonArray(Inquiry.KEY_PROJECTION));
+            /* Projection Modification */
+            envelop.onCriteria(matrix.getJsonObject(Inquiry.KEY_CRITERIA));
         }
     }
 

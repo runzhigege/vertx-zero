@@ -5,6 +5,7 @@ package cn.vertxup.ambient.tables.interfaces;
 
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.annotation.Generated;
 
@@ -23,154 +24,204 @@ import javax.annotation.Generated;
 public interface IXAttachment extends Serializable {
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.KEY</code>. 「key」- 附件的ID值
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.KEY</code>. 「key」- 附件的ID值
      */
     public IXAttachment setKey(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.KEY</code>. 「key」- 附件的ID值
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.KEY</code>. 「key」- 附件的ID值
      */
     public String getKey();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.STORE_WAY</code>. 「storeWay」- 存储方式，BLOB / FILE / TPL / REMOTE
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.STORE_WAY</code>. 「storeWay」- 存储方式，BLOB / FILE / TPL / REMOTE
      */
     public IXAttachment setStoreWay(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.STORE_WAY</code>. 「storeWay」- 存储方式，BLOB / FILE / TPL / REMOTE
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.STORE_WAY</code>. 「storeWay」- 存储方式，BLOB / FILE / TPL / REMOTE
      */
     public String getStoreWay();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.STATUS</code>. 「status」- 状态，PROGRESS / SUCCESS
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.STATUS</code>. 「status」- 状态，PROGRESS / SUCCESS
      */
     public IXAttachment setStatus(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.STATUS</code>. 「status」- 状态，PROGRESS / SUCCESS
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.STATUS</code>. 「status」- 状态，PROGRESS / SUCCESS
      */
     public String getStatus();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.NAME</code>. 「name」- 文件名（带扩展名）
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.NAME</code>. 「name」- 文件名（带扩展名）
      */
     public IXAttachment setName(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.NAME</code>. 「name」- 文件名（带扩展名）
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.NAME</code>. 「name」- 文件名（带扩展名）
      */
     public String getName();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_NAME</code>. 「fileName」- 原始文件名（不带扩展名）
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.FILE_NAME</code>. 「fileName」- 原始文件名（不带扩展名）
      */
     public IXAttachment setFileName(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_NAME</code>. 「fileName」- 原始文件名（不带扩展名）
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.FILE_NAME</code>. 「fileName」- 原始文件名（不带扩展名）
      */
     public String getFileName();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_KEY</code>. 「fileKey」- TPL模式中的文件唯一的key（全局唯一）
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.FILE_KEY</code>. 「fileKey」- TPL模式中的文件唯一的key（全局唯一）
      */
     public IXAttachment setFileKey(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_KEY</code>. 「fileKey」- TPL模式中的文件唯一的key（全局唯一）
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.FILE_KEY</code>. 「fileKey」- TPL模式中的文件唯一的key（全局唯一）
      */
     public String getFileKey();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_URL</code>. 「fileUrl」- 该文件的下载链接（全局唯一）
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.FILE_URL</code>. 「fileUrl」- 该文件的下载链接（全局唯一）
      */
     public IXAttachment setFileUrl(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_URL</code>. 「fileUrl」- 该文件的下载链接（全局唯一）
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.FILE_URL</code>. 「fileUrl」- 该文件的下载链接（全局唯一）
      */
     public String getFileUrl();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_PATH</code>. 「filePath」- 该文件的存储地址，FILE时使用
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.FILE_PATH</code>. 「filePath」- 该文件的存储地址，FILE时使用
      */
     public IXAttachment setFilePath(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.FILE_PATH</code>. 「filePath」- 该文件的存储地址，FILE时使用
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.FILE_PATH</code>. 「filePath」- 该文件的存储地址，FILE时使用
      */
     public String getFilePath();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.EXTENSION</code>. 「extension」- 文件扩展名
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.EXTENSION</code>. 「extension」- 文件扩展名
      */
     public IXAttachment setExtension(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.EXTENSION</code>. 「extension」- 文件扩展名
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.EXTENSION</code>. 「extension」- 文件扩展名
      */
     public String getExtension();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.MODULE</code>. 「module」- 业务标识
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.MODULE</code>. 「module」- 业务标识
      */
     public IXAttachment setModule(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.MODULE</code>. 「module」- 业务标识
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.MODULE</code>. 「module」- 业务标识
      */
     public String getModule();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.MIME</code>. 「mime」- 该文件的MIME类型
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.MIME</code>. 「mime」- 该文件的MIME类型
      */
     public IXAttachment setMime(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.MIME</code>. 「mime」- 该文件的MIME类型
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.MIME</code>. 「mime」- 该文件的MIME类型
      */
     public String getMime();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.SIZE</code>. 「size」- 该文件的尺寸
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.SIZE</code>. 「size」- 该文件的尺寸
      */
     public IXAttachment setSize(Integer value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.SIZE</code>. 「size」- 该文件的尺寸
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.SIZE</code>. 「size」- 该文件的尺寸
      */
     public Integer getSize();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.ACTIVE</code>. 「active」- 是否启用
      */
     public IXAttachment setActive(Boolean value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.ACTIVE</code>. 「active」- 是否启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.SIGMA</code>. 「sigma」- 统一标识
      */
-    public IXAttachment setLanguage(String value);
+    public IXAttachment setSigma(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.SIGMA</code>. 「sigma」- 统一标识
      */
-    public String getLanguage();
+    public String getSigma();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.X_ATTACHMENT.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.METADATA</code>. 「metadata」- 附加配置
      */
     public IXAttachment setMetadata(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.X_ATTACHMENT.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.METADATA</code>. 「metadata」- 附加配置
      */
     public String getMetadata();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.LANGUAGE</code>. 「language」- 使用的语言
+     */
+    public IXAttachment setLanguage(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.LANGUAGE</code>. 「language」- 使用的语言
+     */
+    public String getLanguage();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.CREATED_AT</code>. 「createdAt」- 创建时间
+     */
+    public IXAttachment setCreatedAt(LocalDateTime value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.CREATED_AT</code>. 「createdAt」- 创建时间
+     */
+    public LocalDateTime getCreatedAt();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public IXAttachment setCreatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.CREATED_BY</code>. 「createdBy」- 创建人
+     */
+    public String getCreatedBy();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public IXAttachment setUpdatedAt(LocalDateTime value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     */
+    public LocalDateTime getUpdatedAt();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_ATTACHMENT.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public IXAttachment setUpdatedBy(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_ATTACHMENT.UPDATED_BY</code>. 「updatedBy」- 更新人
+     */
+    public String getUpdatedBy();
 
     // -------------------------------------------------------------------------
     // FROM and INTO
@@ -200,8 +251,13 @@ public interface IXAttachment extends Serializable {
         setMime(json.getString("MIME"));
         setSize(json.getInteger("SIZE"));
         setActive(json.getBoolean("ACTIVE"));
-        setLanguage(json.getString("LANGUAGE"));
+        setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
+        setLanguage(json.getString("LANGUAGE"));
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        setCreatedBy(json.getString("CREATED_BY"));
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        setUpdatedBy(json.getString("UPDATED_BY"));
         return this;
     }
 
@@ -221,8 +277,13 @@ public interface IXAttachment extends Serializable {
         json.put("MIME",getMime());
         json.put("SIZE",getSize());
         json.put("ACTIVE",getActive());
-        json.put("LANGUAGE",getLanguage());
+        json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());
+        json.put("LANGUAGE",getLanguage());
+        // Omitting unrecognized type java.time.LocalDateTime for column CREATED_AT!
+        json.put("CREATED_BY",getCreatedBy());
+        // Omitting unrecognized type java.time.LocalDateTime for column UPDATED_AT!
+        json.put("UPDATED_BY",getUpdatedBy());
         return json;
     }
 
