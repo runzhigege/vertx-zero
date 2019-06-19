@@ -17,7 +17,11 @@ import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Values;
 import io.zero.epic.Ut;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 class DataTool {
 
@@ -54,16 +58,11 @@ class DataTool {
     @SuppressWarnings("all")
     static void dwarfRecord(final Envelop envelop, final JsonObject matrix) {
         final JsonArray projection = matrix.getJsonArray(Inquiry.KEY_PROJECTION);
-        if (Objects.nonNull(projection) && !projection.isEmpty()) {
-            final JsonObject responseJson = envelop.outJson();
-            if (Objects.nonNull(responseJson)) {
-                final RegionType type = analyzeRegion(responseJson);
-                Sc.infoAuth(LOGGER, AuthMsg.REGION_TYPE, type, responseJson.encode());
-                if (RegionType.RECORD == type) {
-                    DataDwarf.create(type).minimize(responseJson, matrix);
-                }
+        dwarfUniform(envelop, projection, new HashSet<RegionType>() {
+            {
+                this.add(RegionType.RECORD);
             }
-        }
+        }, (responseJson, type) -> DataDwarf.create(type).minimize(responseJson, matrix));
     }
 
     /*
@@ -74,13 +73,42 @@ class DataTool {
     @SuppressWarnings("all")
     static void dwarfCollection(final Envelop envelop, final JsonObject matrix) {
         final JsonObject rows = matrix.getJsonObject("rows");
-        if (Objects.nonNull(rows) && !rows.isEmpty()) {
-            final JsonObject responseJson = envelop.outJson();
-            if (Objects.nonNull(responseJson)) {
-                final RegionType type = analyzeRegion(responseJson);
-                Sc.infoAuth(LOGGER, AuthMsg.REGION_TYPE, type, responseJson.encode());
-                if (RegionType.ARRAY == type || RegionType.PAGINATION == type) {
-                    DataDwarf.create(type).minimize(responseJson, matrix);
+        dwarfUniform(envelop, rows, new HashSet<RegionType>() {
+            {
+                this.add(RegionType.ARRAY);
+                this.add(RegionType.PAGINATION);
+            }
+        }, (responseJson, type) -> DataDwarf.create(type).minimize(responseJson, matrix));
+    }
+
+    /*
+     * Uniform called by static method for different workflow of region type
+     */
+    private static <T> void dwarfUniform(final Envelop envelop,
+                                         final T hitted,
+                                         final Set<RegionType> expected,
+                                         final BiConsumer<JsonObject, RegionType> consumer) {
+        if (Objects.nonNull(hitted)) {
+            Supplier<Boolean> isEmpty = null;
+            if (hitted instanceof JsonObject) {
+                isEmpty = ((JsonObject) hitted)::isEmpty;
+            } else if (hitted instanceof JsonArray) {
+                isEmpty = ((JsonArray) hitted)::isEmpty;
+            }
+            /*
+             * Whether supplier is available here for predicate
+             */
+            if (Objects.nonNull(isEmpty) && !isEmpty.get()) {
+                final JsonObject responseJson = envelop.outJson();
+                if (Objects.nonNull(responseJson)) {
+                    /*
+                     * Analyze result for type here.
+                     */
+                    final RegionType type = analyzeRegion(responseJson);
+                    Sc.infoAuth(LOGGER, AuthMsg.REGION_TYPE, type, responseJson.encode());
+                    if (expected.contains(type)) {
+                        consumer.accept(responseJson, type);
+                    }
                 }
             }
         }

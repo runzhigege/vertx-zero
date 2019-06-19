@@ -1,0 +1,26 @@
+databaseChangeLog:
+  # Schema表结构 - UI表
+  - include:
+      file: plugin/sql/ui/UI_LAYOUT.sql
+      relativeToChangelogFile: false
+  - include:
+      file: plugin/sql/ui/UI_PAGE.sql
+      relativeToChangelogFile: false
+  - include:
+      file: plugin/sql/ui/UI_CONTROL.sql
+      relativeToChangelogFile: false
+  - include:
+      file: plugin/sql/ui/UI_FORM.sql
+      relativeToChangelogFile: false
+  - include:
+      file: plugin/sql/ui/UI_EVENT.sql
+      relativeToChangelogFile: false
+  - include:
+      file: plugin/sql/ui/UI_AJAX.sql
+      relativeToChangelogFile: false
+  - include:
+      file: plugin/sql/ui/UI_FIELD.sql
+      relativeToChangelogFile: false
+  - include:
+      file: plugin/sql/ui/UI_COLUMN.sql
+      relativeToChangelogFile: false
