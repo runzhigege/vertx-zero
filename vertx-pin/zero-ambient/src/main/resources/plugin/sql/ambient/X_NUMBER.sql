@@ -25,6 +25,8 @@ CREATE TABLE `X_NUMBER`
     `STEP`       INT(11)     NOT NULL COMMENT '「step」编号的步进系数，每次按照step进行变化,step,I_STEP',
     `DECREMENT`  BIT         NOT NULL COMMENT '「decrement」递增/递减？如果为true则递减，为false则是递增,decrement,IS_DECREMENT',
 
+    `APP_ID`     VARCHAR(255) COMMENT '「appId」- 关联的应用程序ID',
+
     -- 特殊字段
     `ACTIVE`     BIT          DEFAULT NULL COMMENT '「active」- 是否启用',
     `SIGMA`      VARCHAR(32)  DEFAULT NULL COMMENT '「sigma」- 统一标识',
@@ -41,5 +43,5 @@ CREATE TABLE `X_NUMBER`
 
 -- changeset Lang:ox-number-2
 ALTER TABLE X_NUMBER
-    ADD UNIQUE (`CODE`, `SIGMA`);
+    ADD UNIQUE (`APP_ID`, `IDENTIFIER`, `CODE`);
 SET FOREIGN_KEY_CHECKS = 1;
