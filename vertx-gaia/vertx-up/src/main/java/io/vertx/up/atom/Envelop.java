@@ -17,6 +17,8 @@ import io.zero.epic.fn.Fn;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.Objects;
+import java.util.function.Consumer;
 
 public class Envelop implements Serializable {
 
@@ -171,13 +173,29 @@ public class Envelop implements Serializable {
     }
 
     // ------------------ Below are Query part ----------------
-    /* Query Part for projection */
-    public void onProjection(final JsonArray projection) {
-
+    private void reference(final Consumer<JsonObject> consumer) {
+        final JsonObject reference = Rib.getBody(this.data);
+        if (Objects.nonNull(reference)) {
+            consumer.accept(reference);
+        }
     }
 
-    public void onCriteria(final JsonObject criteria) {
+    /* Query Part for projection */
+    public void onProjection(final JsonArray projection) {
+        this.reference(reference -> Rib.projection(reference, projection, false));
+    }
 
+    public void inProjection(final JsonArray projection) {
+        this.reference(reference -> Rib.projection(reference, projection, true));
+    }
+
+    /* Query Part for criteria */
+    public void onCriteria(final JsonObject criteria) {
+        this.reference(reference -> Rib.criteria(reference, criteria, false));
+    }
+
+    public void inCriteria(final JsonObject criteria) {
+        this.reference(reference -> Rib.criteria(reference, criteria, true));
     }
 
     // ------------------ Below are assist method -------------------

@@ -32,7 +32,7 @@ public class AuthService implements AuthStub {
     @SuppressWarnings("all")
     public Future<JsonObject> authorize(final JsonObject filters) {
         Sc.infoAuth(LOGGER, AuthMsg.CODE_FILTER, filters.encode());
-        return Ux.Jooq.on(OUserDao.class).<OUser>fetchOneAndAsync(filters).compose(item -> Fn.match(
+        return Ux.Jooq.on(OUserDao.class).<OUser>fetchOneAsync(filters).compose(item -> Fn.match(
 
                 // Provide correct parameters, OUser record existing.
                 () -> Fn.fork(() -> this.codeStub.authorize(item.getClientId())),
