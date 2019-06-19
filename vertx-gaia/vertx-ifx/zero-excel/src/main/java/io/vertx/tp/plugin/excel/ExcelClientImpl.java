@@ -108,7 +108,7 @@ public class ExcelClientImpl implements ExcelClient {
             final T entity = Ut.deserialize(data, table.getPojo());
             final UxJooq jooq = Ux.Jooq.on(table.getDao());
             if (null != jooq) {
-                final T queried = jooq.fetchOneAnd(filters);
+                final T queried = jooq.fetchOne(filters);
                 if (null == queried) {
                     reference = jooq.insert(entity);
                 } else {

@@ -15,6 +15,10 @@ public interface ID {
 
     String IGNORE = "$$IGNORE$$";
 
+    /* Criteria Ir Key */
+    String TREE_ORIGINAL = "$ORIGINAL$";
+    String TREE_MATRIX = "$MATRIX$";
+
     interface Addr {
 
         String REGISTRY_START = "ZERO://MICRO/REGISTRY/START";
