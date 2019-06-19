@@ -47,7 +47,4 @@ public interface AuthKey {
      */
     String PROFILE_PERM = "PERM";
     String PROFILE_ROLE = "ROLE";
-
-    String TREE_ORIGINAL = "$ORIGINAL$";
-    String TREE_MATRIX = "$MATRIX$";
 }

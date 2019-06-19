@@ -27,6 +27,10 @@ public class Rib {
         return RibTool.outBuffer(data, error);
     }
 
+    public static JsonObject getBody(final JsonObject data) {
+        return RibData.getBody(data);
+    }
+
     public static <T> T get(final JsonObject data) {
         return RibData.get(data);
     }

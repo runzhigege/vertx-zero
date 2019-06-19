@@ -47,6 +47,10 @@ class RibData {
         return reference;
     }
 
+    static JsonObject getBody(final JsonObject data) {
+        return getData(data, null);
+    }
+
     /*
      * Extract Data by Index
      */
