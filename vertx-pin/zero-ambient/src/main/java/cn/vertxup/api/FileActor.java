@@ -34,7 +34,7 @@ public class FileActor {
     public Future<Buffer> download(final JsonObject filters) {
         At.infoFile(LOGGER, AtMsg.FILE_DOWNLOAD, filters.encodePrettily());
         return Ux.Jooq.on(XAttachmentDao.class)
-                .<XAttachment>fetchOneAndAsync(filters)
+                .<XAttachment>fetchOneAsync(filters)
                 .compose(entity -> {
                     Buffer buffer = Buffer.buffer();
                     if (Objects.nonNull(entity)) {

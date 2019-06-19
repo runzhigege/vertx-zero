@@ -23,14 +23,14 @@ public class DatumService implements DatumStub {
     @Override
     public Future<JsonObject> tabular(final String appId, final String type, final String code) {
         return Ux.Jooq.on(XTabularDao.class)
-                .fetchOneAndAsync(At.filters(appId, type, code))
+                .fetchOneAsync(At.filters(appId, type, code))
                 .compose(Ux::fnJObject);
     }
 
     @Override
     public Future<JsonObject> category(final String appId, final String type, final String code) {
         return Ux.Jooq.on(XCategoryDao.class)
-                .fetchOneAndAsync(At.filters(appId, type, code))
+                .fetchOneAsync(At.filters(appId, type, code))
                 .compose(Ux::fnJObject);
     }
 
