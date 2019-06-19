@@ -3,7 +3,6 @@ package io.vertx.tp.plugin.excel.atom;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error._404ConnectMissingException;
-import io.vertx.zero.eon.Strings;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
@@ -64,7 +63,7 @@ public class ExTable implements Serializable {
                 filters.put(field, value);
             }
         });
-        return filters.put(Strings.EMPTY, Boolean.TRUE);
+        return filters;
     }
 
     /*

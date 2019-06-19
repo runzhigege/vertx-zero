@@ -94,7 +94,7 @@ public abstract class JooqBase extends ZeroBase {
                 jooq = jooq.on(pojo);
             }
             this.asyncFlow(context,
-                    jooq.fetchOneAndAsync(filter),
+                    jooq.fetchOneAsync(filter),
                     context::assertNotNull);
         });
     }

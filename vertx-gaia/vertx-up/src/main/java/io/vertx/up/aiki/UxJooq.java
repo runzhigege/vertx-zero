@@ -101,8 +101,8 @@ public class UxJooq {
 
     // -------------------- UPDATE --------------------
     /* Async Only */
-    public <T> Future<T> upsertReturningPrimaryAsync(final JsonObject andFilters, final T updated, final Consumer<Long> consumer) {
-        return this.<T>fetchOneAndAsync(andFilters).compose(item -> Fn.match(
+    public <T> Future<T> upsertReturningPrimaryAsync(final JsonObject filters, final T updated, final Consumer<Long> consumer) {
+        return this.<T>fetchOneAsync(filters).compose(item -> Fn.match(
                 Fn.fork(() -> this.<T>updateAsync(this.analyzer.copyEntity(item, updated))),
                 Fn.branch(null == item, () -> this.insertReturningPrimaryAsync(updated, consumer))
         ));
@@ -186,6 +186,14 @@ public class UxJooq {
         return this.reader.fetchOne(field, value);
     }
 
+    public <T> Future<T> fetchOneAsync(final JsonObject filters) {
+        return this.reader.fetchOneAndAsync(filters);
+    }
+
+    public <T> T fetchOne(final JsonObject filters) {
+        return this.reader.fetchOneAnd(filters);
+    }
+
     /* (Async / Sync) Find By ID */
     public <T> Future<T> findByIdAsync(final Object id) {
         return this.reader.findByIdAsync(id);
@@ -235,13 +243,13 @@ public class UxJooq {
 
 
     /* (Async / Sync) Exist By Filters Operation */
-    public <T> Future<Boolean> existsOneAsync(final JsonObject andFilters) {
-        return this.<T>fetchOneAndAsync(andFilters)
+    public <T> Future<Boolean> existsOneAsync(final JsonObject filters) {
+        return this.<T>fetchOneAsync(filters)
                 .compose(item -> Future.succeededFuture(null != item));
     }
 
-    public <T> Boolean existsOne(final JsonObject andFilters) {
-        final T result = this.<T>fetchOneAnd(andFilters);
+    public <T> Boolean existsOne(final JsonObject filters) {
+        final T result = this.<T>fetchOne(filters);
         return null != result;
     }
 
@@ -305,7 +313,7 @@ public class UxJooq {
     /* (Async / Sync) Count Operation */
     public Future<Integer> countAsync(final JsonObject params, final String pojo) {
         final Inquiry inquiry = Query.getInquiry(params, pojo);
-        return this.analyzer.countAsync(inquiry, null);
+        return this.analyzer.countAsync(inquiry);
     }
 
     public Future<Integer> countAsync(final JsonObject params) {
@@ -314,7 +322,7 @@ public class UxJooq {
 
     public Integer count(final JsonObject params, final String pojo) {
         final Inquiry inquiry = Query.getInquiry(params, pojo);
-        return this.analyzer.count(inquiry, null);
+        return this.analyzer.count(inquiry);
     }
 
     public Integer count(final JsonObject params) {
@@ -333,7 +341,7 @@ public class UxJooq {
     }
 
     public Future<JsonObject> searchAsync(final Inquiry inquiry, final String pojo) {
-        return this.analyzer.searchJObjectAsync(inquiry, pojo);
+        return this.analyzer.searchPaginationAsync(inquiry, pojo);
     }
 
     public JsonObject search(final JsonObject params, final String pojo) {
@@ -346,89 +354,16 @@ public class UxJooq {
     }
 
     public JsonObject search(final Inquiry inquiry, final String pojo) {
-        return this.analyzer.searchJObject(inquiry, pojo);
+        return this.analyzer.searchPagination(inquiry, pojo);
     }
 
-    // -------------------- Spec Search Operation ( AND / OR ) --------
-
-    /* (Async / Sync) ROOT = OR, Sort, Projection, Criteria, Pager Search Operations */
-    public Future<JsonObject> searchOrAsync(final Inquiry inquiry) {
-        return this.searchOrAsync(inquiry, "");
+    // -------------------- Fetch List -------------------
+    public <T> Future<List<T>> fetchAndAsync(final JsonObject filters) {
+        return this.reader.fetchAsync(JooqCond.transform(filters, Operator.AND, this.analyzer::getColumn));
     }
 
-    public Future<JsonObject> searchOrAsync(final JsonObject params, final String pojo) {
-        final Inquiry inquiry = Query.getInquiry(params, pojo);
-        return searchOrAsync(inquiry, pojo);
-    }
-
-    public Future<JsonObject> searchOrAsync(final Inquiry inquiry, final String pojo) {
-        return this.analyzer.searchJObjectAsync(inquiry, pojo, Operator.OR);
-    }
-
-    public JsonObject searchOr(final Inquiry inquiry) {
-        return this.searchOr(inquiry, "");
-    }
-
-    public JsonObject searchOr(final JsonObject params, final String pojo) {
-        final Inquiry inquiry = Query.getInquiry(params, pojo);
-        return this.searchOr(inquiry, pojo);
-    }
-
-    public JsonObject searchOr(final Inquiry inquiry, final String pojo) {
-        return this.analyzer.searchJObject(inquiry, pojo, Operator.OR);
-    }
-
-    /* (Async / Sync) ROOT = AND, Sort, Projection, Criteria, Pager Search Operations */
-    public Future<JsonObject> searchAndAsync(final Inquiry inquiry) {
-        return this.searchAndAsync(inquiry, "");
-    }
-
-    public Future<JsonObject> searchAndAsync(final JsonObject params, final String pojo) {
-        final Inquiry inquiry = Query.getInquiry(params, pojo);
-        return searchAndAsync(inquiry, pojo);
-    }
-
-    public Future<JsonObject> searchAndAsync(final Inquiry inquiry, final String pojo) {
-        return this.analyzer.searchJObjectAsync(inquiry, pojo, Operator.AND);
-    }
-
-    public JsonObject searchAnd(final Inquiry inquiry) {
-        return this.searchAnd(inquiry, "");
-    }
-
-    public JsonObject searchAnd(final JsonObject params, final String pojo) {
-        final Inquiry inquiry = Query.getInquiry(params, pojo);
-        return this.searchAnd(inquiry, pojo);
-    }
-
-    public JsonObject searchAnd(final Inquiry inquiry, final String pojo) {
-        return this.analyzer.searchJObject(inquiry, pojo, Operator.AND);
-    }
-
-    /* (Async / Sync) Sort, Projection, Criteria, Pager Search Operations to List<T> Only */
-    public <T> Future<List<T>> searchAndListAsync(final Inquiry inquiry) {
-        return this.analyzer.searchAsync(inquiry, Operator.AND);
-    }
-
-    public <T> Future<List<T>> searchOrListAsync(final Inquiry inquiry) {
-        return this.analyzer.searchAsync(inquiry, Operator.OR);
-    }
-
-    public <T> List<T> searchAndList(final Inquiry inquiry) {
-        return this.analyzer.search(inquiry, Operator.AND);
-    }
-
-    public <T> List<T> searchOrList(final Inquiry inquiry) {
-        return this.analyzer.search(inquiry, Operator.OR);
-    }
-    // -------------------- Spec Operation ( AND / OR ) ---------
-
-    public <T> Future<List<T>> fetchAndAsync(final JsonObject andFilters) {
-        return this.reader.fetchAsync(JooqCond.transform(andFilters, Operator.AND, this.analyzer::getColumn));
-    }
-
-    public <T> List<T> fetchAnd(final JsonObject andFilters) {
-        return this.reader.fetch(JooqCond.transform(andFilters, Operator.AND, this.analyzer::getColumn));
+    public <T> List<T> fetchAnd(final JsonObject filters) {
+        return this.reader.fetch(JooqCond.transform(filters, Operator.AND, this.analyzer::getColumn));
     }
 
     public <T> Future<List<T>> fetchOrAsync(final JsonObject orFilters) {
@@ -439,17 +374,9 @@ public class UxJooq {
         return this.reader.fetch(JooqCond.transform(orFilters, Operator.OR, this.analyzer::getColumn));
     }
 
-    public <T> Future<T> fetchOneAndAsync(final JsonObject andFilters) {
-        return this.reader.fetchOneAndAsync(andFilters);
-    }
-
-    public <T> T fetchOneAnd(final JsonObject andFilters) {
-        return this.reader.fetchOneAnd(andFilters);
-    }
-
     // -------------------- Upsert ---------
-    public <T> Future<T> upsertAsync(final JsonObject andFilters, final T updated) {
-        return this.<T>fetchOneAndAsync(andFilters).compose(item -> Fn.match(
+    public <T> Future<T> upsertAsync(final JsonObject filters, final T updated) {
+        return this.<T>fetchOneAsync(filters).compose(item -> Fn.match(
                 // null != item, updated to existing item.
                 Fn.fork(() -> this.<T>updateAsync(this.analyzer.copyEntity(item, updated))),
                 // null == item, insert data
@@ -457,8 +384,8 @@ public class UxJooq {
         ));
     }
 
-    public <T> T upsert(final JsonObject andFilters, final T updated) {
-        final T entity = this.fetchOneAnd(andFilters);
+    public <T> T upsert(final JsonObject filters, final T updated) {
+        final T entity = this.fetchOne(filters);
         if (null == entity) {
             return this.insert(updated);
         } else {

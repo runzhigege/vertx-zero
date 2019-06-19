@@ -79,11 +79,16 @@ class JooqCond {
 
     // Condition ---------------------------------------------------------
     static Condition transform(final JsonObject filters,
+                               final Function<String, Field> fnAnalyze) {
+        return transform(filters, null, fnAnalyze);
+    }
+
+    static Condition transform(final JsonObject filters,
                                Operator operator,
                                final Function<String, Field> fnAnalyze) {
         final Condition condition;
         final Criteria criteria = Criteria.create(filters);
-        /**
+        /*
          * The mode has been selected by criteria, the condition is as following:
          * When filters contains the key = value ( value = JsonObject ), TREE
          * Otherwise it's LINEAR.
@@ -95,13 +100,13 @@ class JooqCond {
         if (Inquiry.Mode.LINEAR == criteria.getMode()) {
             JsonObject inputFilters = filters;
             if (null == operator) {
-                /**
+                /*
                  * When the mode is linear, the system will be sure filters contains
                  * no value with JsonObject, remove all JsonObject value to switch
                  * LINEAR mode.
                  */
                 inputFilters = transformLinear(filters);
-                /**
+                /*
                  * Re-calculate the operator AND / OR
                  * For complex normalize linear query tree.
                  */
@@ -114,7 +119,7 @@ class JooqCond {
                     inputFilters.remove(Strings.EMPTY);
                 }
             } else {
-                /**
+                /*
                  * When LINEAR mode, operator is hight priority, the query engine will
                  * ignore the flag key = value. ( key = "", value = true )
                  * It's defined by zero.
@@ -123,7 +128,7 @@ class JooqCond {
             }
             condition = transformLinear(inputFilters, operator, fnAnalyze);
         } else {
-            /**
+            /*
              * When the mode is Tree, you mustn't set operator, because the operator will
              * be parsed by query tree engine, this operation is unsupported and it will
              * throw out exception JooqModeConflictException,

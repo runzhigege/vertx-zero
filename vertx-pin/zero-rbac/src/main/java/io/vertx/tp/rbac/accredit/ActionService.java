@@ -31,7 +31,7 @@ public class ActionService implements ActionStub {
         }
         actionFilters.put("method", method.name());
         return Ux.Jooq.on(SActionDao.class)
-                .fetchOneAndAsync(actionFilters);
+                .fetchOneAsync(actionFilters);
     }
 
     @Override

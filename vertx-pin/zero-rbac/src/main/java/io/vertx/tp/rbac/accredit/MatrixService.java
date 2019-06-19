@@ -54,7 +54,7 @@ public class MatrixService implements MatrixStub {
         filters.put("owner", userId);
         filters.put("ownerType", OwnerType.USER.name());
         return Ux.Jooq.on(RResourceMatrixDao.class)
-                .fetchOneAndAsync(new JsonObject().put("criteria", filters));
+                .fetchOneAsync(new JsonObject().put("criteria", filters));
     }
 
     @Override
