@@ -254,18 +254,18 @@ class JooqAnalyzer {
                 pagerStep = selectStep.offset(pager.getStart()).limit(pager.getSize());
             }
         }
-        // Returned one by one
-        if (null != pagerStep) {
-            return pagerStep.fetch(this.vertxDAO.mapper());
-        }
-        if (null != selectStep) {
-            return selectStep.fetch(this.vertxDAO.mapper());
-        }
-        if (null != conditionStep) {
-            return conditionStep.fetch(this.vertxDAO.mapper());
-        }
         // Projection
         final JsonArray projection = Ut.toJArray(inquiry.getProjection());
+        // Returned one by one
+        if (null != pagerStep) {
+            return JooqResult.toResult(pagerStep.fetch(this.vertxDAO.mapper()), projection, this.pojo);
+        }
+        if (null != selectStep) {
+            return JooqResult.toResult(selectStep.fetch(this.vertxDAO.mapper()), projection, this.pojo);
+        }
+        if (null != conditionStep) {
+            return JooqResult.toResult(conditionStep.fetch(this.vertxDAO.mapper()), projection, this.pojo);
+        }
         return JooqResult.toResult(started.fetch(this.vertxDAO.mapper()), projection, this.pojo);
     }
 
@@ -279,7 +279,6 @@ class JooqAnalyzer {
             conditionStep = started.where(condition);
         }
         // Projection
-        final JsonArray projection = criteria.getJsonArray(Inquiry.KEY_PROJECTION);
-        return JooqResult.toResult(started.fetch(this.vertxDAO.mapper()), projection, this.pojo);
+        return started.fetch(this.vertxDAO.mapper());
     }
 }
