@@ -5,325 +5,162 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpStatusCode;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.Session;
-import io.vertx.up.atom.error.Readible;
+import io.vertx.up.atom.envelop.Rib;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
-import io.vertx.up.log.Annal;
-import io.vertx.up.web.ZeroSerializer;
-import io.vertx.zero.eon.Strings;
 import io.vertx.zero.exception.IndexExceedException;
-import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Envelop implements Serializable {
 
-    private static final Annal LOGGER = Annal.get(Envelop.class);
-
+    /* Basic Data for Envelop such as: Data, Error, Status */
     private final HttpStatusCode status;
     private final WebException error;
     private final JsonObject data;
-    private final Map<String, Object> context = new HashMap<>();
-    private MultiMap headers;
-    private User user;
-    // Http Method
-    private String uri;
-    private HttpMethod method;
-    // Message Id communication in Event Bus
+
+    /* Additional Data for Envelop, Assist Data here. */
+    private final Assist assist = new Assist();
+
+    /* Communicate Key in Event Bus, to identify the Envelop */
     private String key;
+    /*
+     * Constructor for Envelop creation, two constructor for
+     * 1) Success Envelop
+     * 2) Failure Envelop
+     * All Envelop are private mode with non-single because it's
+     * Data Object instead of tool or other reference
+     */
 
-    private Session session;
-
+    /**
+     * @param data   input data that stored into Envelop
+     * @param status http status of this Envelop
+     * @param <T>    The type of stored data
+     */
     private <T> Envelop(final T data, final HttpStatusCode status) {
-        final Object serialized = ZeroSerializer.toSupport(data);
-        final JsonObject bodyData = new JsonObject();
-        bodyData.put(Key.DATA, serialized);
-        this.data = bodyData;
+        this.data = Rib.input(data);
         this.error = null;
         this.status = status;
     }
 
+    /**
+     * @param error input error that stored into Envelop
+     */
     private Envelop(final WebException error) {
         this.status = error.getStatus();
         this.error = error;
         this.data = error.toJson();
     }
 
-    /**
-     * Empty content success
-     *
-     * @return null body Envelop with 200
+    /*
+     * Static method to create new Envelop with different fast mode here.
+     * 1) Success: 204 Empty Envelop ( data = null )
+     * 2) Success: 200 With input data ( data = T )
+     * 3) Success: XXX with input data ( data = T ) XXX means that you can have any HttpStatus
+     * 4) Error: 500 Default error with description
+     * 5) Error: XXX with input WebException
+     * 6) Error: 500 Default with Throwable ( JVM Error )
      */
+    // 204, null
     public static Envelop ok() {
-        return success(null);
+        return new Envelop(null, HttpStatusCode.NO_CONTENT);
     }
 
+    // 200, T
     public static <T> Envelop success(final T entity) {
         return new Envelop(entity, HttpStatusCode.OK);
     }
 
-    public static Envelop failure(final String message) {
-        return new Envelop(new _500InternalServerException(Envelop.class, message));
-    }
-
+    // xxx, T
     public static <T> Envelop success(final T entity, final HttpStatusCode status) {
         return new Envelop(entity, status);
     }
 
-    /**
-     * Failure response with exception
-     *
-     * @param error
-     * @return
-     */
-    public static Envelop failure(final WebException error) {
-        // Inner building error
-        final Readible readible = Readible.get();
-        readible.interpret(error);
-        return new Envelop(error);
+    // default error 500
+    public static Envelop failure(final String message) {
+        return new Envelop(new _500InternalServerException(Envelop.class, message));
     }
 
-    /**
-     * Whether this envelop is valid.
-     *
-     * @return
+    // default error 500 ( JVM Error )
+    public static Envelop failure(final Throwable ex) {
+        return new Envelop(new _500InternalServerException(Envelop.class, ex.getMessage()));
+    }
+
+    // other error with WebException
+    public static Envelop failure(final WebException error) {
+        return new Envelop(Rib.normalize(error));
+    }
+
+    // ------------------ Above are initialization method -------------------
+    /*
+     * Predicate to check envelop to see whether is't valid
+     * Error = null means valid
      */
     public boolean valid() {
         return null == this.error;
     }
 
-    /**
-     * Extract data port to T
-     *
-     * @return
-     */
-    @SuppressWarnings("unchecked")
+    // ------------------ Below are data part -------------------
+    /* Get `data` part */
     public <T> T data() {
-        if (null != this.data && this.data.containsKey(Key.DATA)) {
-            final Object value = this.data.getValue(Key.DATA);
-            if (null != value) {
-                return (T) value;
-            } else {
-                return null;
-            }
-        } else {
-            return null;
-        }
+        return Rib.get(this.data);
     }
 
-    /**
-     * Extract request part to t
-     *
-     * @param clazz
-     * @param <T>
-     * @return
-     */
+    /* Get `data` part by type */
     public <T> T data(final Class<T> clazz) {
-        T reference = null;
-        if (this.data.containsKey(Key.DATA)) {
-            reference = this.extract(this.data.getValue(Key.DATA), clazz);
-        }
-        return reference;
+        return Rib.get(this.data, clazz);
     }
 
-    /**
-     * Extract data from context
-     *
-     * @param clazz
-     * @param <T>
-     * @return
-     */
-    public <T> T context(final String key, final Class<T> clazz) {
-        T reference = null;
-        if (this.context.containsKey(key)) {
-            reference = this.extract(this.context.get(key), clazz);
-        }
-        return reference;
-    }
-
-    /**
-     * Extract request part to t ( Direct Mode )
-     *
-     * @param argIndex
-     * @param <T>
-     * @return
-     */
+    /* Get `data` part by argIndex here */
     public <T> T data(final Integer argIndex, final Class<T> clazz) {
-        T reference = null;
-        Fn.outUp(0 > argIndex, LOGGER,
-                IndexExceedException.class, this.getClass(), argIndex);
-        if (this.data.containsKey(Key.DATA)) {
-            final JsonObject raw = this.data.getJsonObject(Key.DATA);
-            if (null != raw) {
-                final String key = argIndex.toString();
-                if (raw.containsKey(key)) {
-                    reference = this.extract(raw.getValue(key), clazz);
-                }
-            }
-        }
-        return reference;
+        Fn.outUp(!Rib.isIndex(argIndex), IndexExceedException.class, this.getClass(), argIndex);
+        return Rib.get(this.data, clazz, argIndex);
     }
 
-    private JsonObject getData(final Integer argIndex) {
-        JsonObject data = new JsonObject();
-        // if the data ( JsonObject this.data ) does not contains "data"
-        final Object reference = Fn.getNull(null, () -> this.data.getValue(Key.DATA), this.data);
-        if (reference instanceof JsonObject) {
-            // -> JsonObject -> key = "data"
-            data = (JsonObject) reference;
-        }
-        // set data by index.
-        if (null == argIndex) {
-            // Find the first value of type JsonObject
-            final JsonObject extracted = new JsonObject();
-            for (int idx = 0; idx < 10; idx++) {
-                // Normalized key of index
-                final String key = String.valueOf(idx);
-                final Object value = data.getValue(key);
-                // Switch or break
-                if (value instanceof JsonObject) {
-                    extracted.mergeIn((JsonObject) value);
-                    break;
-                }
-            }
-            if (!Ut.isNil(extracted)) {
-                data = extracted;
-            }
-        } else {
-            // Extract data by "argIndex" that passed by developers.
-            data = data.getJsonObject(String.valueOf(argIndex));
-        }
-        return data;
-    }
-
+    /* Set value in `data` part */
     public void setValue(final String field, final Object value) {
-        this.setValue(null, field, value);
+        Rib.set(this.data, field, value, null);
     }
 
+    /* Set value in `data` part ( with Index ) */
     public void setValue(final Integer argIndex, final String field, final Object value) {
-        final JsonObject reference = this.getData(argIndex);
-        if (null != reference) {
-            reference.put(field, value);
-        }
+        Rib.set(this.data, field, value, argIndex);
     }
 
-    /**
-     * Result
-     *
-     * @param value
-     * @param clazz
-     * @param <T>
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    private <T> T extract(final Object value, final Class<T> clazz) {
-        T reference = null;
-        if (null != value) {
-            final Object result = ZeroSerializer.getValue(clazz, value.toString());
-            reference = Fn.getNull(() -> (T) result, result);
-        }
-        return reference;
+    // ------------------ Below are response Part -------------------
+    /* String */
+    public String outString() {
+        return this.outJson().encode();
     }
 
-    /**
-     * Convert to response
-     *
-     * @return
-     */
-    public String responseString() {
-        // Exclude special situation
-        return this.responseJson().encode();
+    /* Json */
+    public JsonObject outJson() {
+        return Rib.outJson(this.data, this.error);
     }
 
-    public JsonObject responseJson() {
-        final JsonObject response;
-        if (null == this.error) {
-            response = this.data;
-        } else {
-            response = this.error.toJson();
-        }
-        return response;
+    /* Buffer */
+    public Buffer outBuffer() {
+        return Rib.outBuffer(this.data, this.error);
     }
 
-    @SuppressWarnings("all")
-    public Buffer responseBuffer() {
-        Buffer buffer = Buffer.buffer();
-        if (null == this.error) {
-            final JsonObject response = this.data.getJsonObject(Key.DATA);
-            buffer = Buffer.buffer(response.getBinary("bytes"));
-        } else {
-            final JsonObject error = this.error.toJson();
-            buffer = Buffer.buffer(error.encode());
-        }
-        return buffer;
-    }
-
+    /* Future */
     public Future<Envelop> toFuture() {
         return Future.succeededFuture(this);
     }
 
+    // ------------------ Below are Bean Get -------------------
+    /* HttpStatusCode */
     public HttpStatusCode status() {
         return this.status;
     }
 
-    public User user() {
-        return this.user;
-    }
-
-    public MultiMap headers() {
-        return this.headers;
-    }
-
-    public void setUser(final User user) {
-        this.user = user;
-    }
-
-    public void setHeaders(final MultiMap headers) {
-        this.headers = headers;
-    }
-
-    public Session getSession() {
-        return this.session;
-    }
-
-    // ------------------ Failure resource model ------------------
-
-    public void setSession(final Session session) {
-        this.session = session;
-    }
-
-    // ----------------- Http -----------------
-    public String getUri() {
-        return this.uri;
-    }
-
-    public void setUri(final String uri) {
-        this.uri = uri;
-    }
-
-    public HttpMethod getMethod() {
-        return this.method;
-    }
-
-    public void setMethod(final HttpMethod method) {
-        this.method = method;
-    }
-
-    public Map<String, Object> context() {
-        return this.context;
-    }
-
-    public void setContext(final Map<String, Object> data) {
-        this.context.putAll(data);
-    }
-
-    // ------------------ Key for communication in Event bus ------
+    /* Communicate Id */
     public Envelop key(final String key) {
         this.key = key;
         return this;
@@ -333,34 +170,90 @@ public class Envelop implements Serializable {
         return this.key;
     }
 
-    // ------------------ Only Correct in PlugResion --------------
+    // ------------------ Below are Query part ----------------
+    /* Query Part for projection */
+    public void onProjection(final JsonArray projection) {
 
-    public JsonObject regionInput() {
-        return this.getData(null);
     }
 
-    /**
-     * Read user's identifier
+    public void onCriteria(final JsonObject criteria) {
+
+    }
+
+    // ------------------ Below are assist method -------------------
+    /*
+     * Assist Data for current Envelop, all these methods will resolve the issue
+     * of EventBus splitted. Because all the request data could not be got from Worker class,
+     * then the system will store some reference/data into Envelop and then after
+     * this envelop passed from EventBus address, it also could keep state here.
      */
-    @SuppressWarnings("all")
+    /* Extract data from Context Map */
+    public <T> T context(final String key, final Class<T> clazz) {
+        return this.assist.getContextData(key, clazz);
+    }
+
+    /* Get user data from User of Context */
     public String identifier(final String field) {
-        return Fn.getJvm(Strings.EMPTY, () -> {
-            final JsonObject credential = this.user.principal();
-            return Fn.getSemi(null != credential && credential.containsKey(field),
-                    () -> credential.getString(field),
-                    () -> Strings.EMPTY);
-        }, this.user);
+        return this.assist.principal(field);
+    }
+
+    public User user() {
+        return this.assist.user();
+    }
+
+    public void setUser(final User user) {
+        this.assist.user(user);
+    }
+
+    /* Get Headers */
+    public MultiMap headers() {
+        return this.assist.headers();
+    }
+
+    public void setHeaders(final MultiMap headers) {
+        this.assist.headers(headers);
+    }
+
+    /* Session */
+    public Session getSession() {
+        return this.assist.session();
+    }
+
+    public void setSession(final Session session) {
+        this.assist.session(session);
+    }
+
+    /* Uri */
+    public String getUri() {
+        return this.assist.uri();
+    }
+
+    public void setUri(final String uri) {
+        this.assist.uri(uri);
+    }
+
+    /* Method of Http */
+    public HttpMethod getMethod() {
+        return this.assist.method();
+    }
+
+    public void setMethod(final HttpMethod method) {
+        this.assist.method(method);
+    }
+
+    /* Context Set */
+    public void setContext(final Map<String, Object> data) {
+        this.assist.context(data);
     }
 
     @Override
     public String toString() {
         return "Envelop{" +
                 "status=" + this.status +
-                ", \nheaders=\n[" + this.headers +
-                "], \nerror=" + this.error +
-                ", \ndata=" + this.data +
-                ", \nuser=" + this.user +
-                ", \nuri=" + this.uri +
+                ", error=" + this.error +
+                ", data=" + this.data +
+                ", assist=" + this.assist +
+                ", key='" + this.key + '\'' +
                 '}';
     }
 }

@@ -7,7 +7,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
-import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.cv.em.RegionType;
 import io.vertx.tp.rbac.extension.dwarf.DataDwarf;
@@ -16,13 +15,10 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.log.Annal;
 import io.vertx.up.web.ZeroAnno;
-import io.vertx.zero.eon.Strings;
 import io.vertx.zero.eon.Values;
 import io.zero.epic.Ut;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 class DataTool {
 
@@ -45,51 +41,6 @@ class DataTool {
         }
     }
 
-    static void updateProjection(final Envelop envelop, final JsonArray projection) {
-        if (Objects.nonNull(projection) && !projection.isEmpty()) {
-            final JsonObject referenceForParameters = envelop.regionInput();
-            if (Objects.nonNull(referenceForParameters)) {
-                /*
-                 * If no parameters
-                 */
-                final Set<String> projectionSet = new HashSet<>();
-                if (referenceForParameters.containsKey(Inquiry.KEY_PROJECTION)) {
-                    referenceForParameters.getJsonArray(Inquiry.KEY_PROJECTION).stream()
-                            .map(item -> (String) item).forEach(projectionSet::add);
-                }
-                projection.stream()
-                        .map(item -> (String) item).forEach(projectionSet::add);
-                /*
-                 * Replace
-                 */
-                referenceForParameters.put(Inquiry.KEY_PROJECTION, Ut.toJArray(projectionSet));
-            }
-        }
-    }
-
-    static void updateCriteria(final Envelop envelop, final JsonObject criteria) {
-        if (Objects.nonNull(criteria) && !criteria.isEmpty()) {
-            final JsonObject referenceForParameters = envelop.regionInput();
-            if (Objects.nonNull(referenceForParameters)) {
-                /*
-                 * If no parameters
-                 */
-                final JsonObject criteriaResult = new JsonObject();
-                if (referenceForParameters.containsKey(Inquiry.KEY_CRITERIA)) {
-                    criteriaResult.put(Strings.EMPTY, Boolean.TRUE);
-                    criteriaResult.put(AuthKey.TREE_ORIGINAL, referenceForParameters.getJsonObject(Inquiry.KEY_CRITERIA).copy());
-                    criteriaResult.put(AuthKey.TREE_MATRIX, criteria);
-                } else {
-                    criteriaResult.mergeIn(referenceForParameters.getJsonObject(Inquiry.KEY_CRITERIA));
-                }
-                /*
-                 * Replace
-                 */
-                referenceForParameters.put(Inquiry.KEY_CRITERIA, criteriaResult);
-            }
-        }
-    }
-
     /*
      * projection on result
      * RegionType.RECORD
@@ -98,7 +49,7 @@ class DataTool {
     static void dwarfRecord(final Envelop envelop, final JsonObject matrix) {
         final JsonArray projection = matrix.getJsonArray(Inquiry.KEY_PROJECTION);
         if (Objects.nonNull(projection) && !projection.isEmpty()) {
-            final JsonObject responseJson = envelop.responseJson();
+            final JsonObject responseJson = envelop.outJson();
             if (Objects.nonNull(responseJson)) {
                 final RegionType type = analyzeRegion(responseJson);
                 Sc.infoAuth(LOGGER, AuthMsg.REGION_TYPE, type, responseJson.encode());
@@ -118,7 +69,7 @@ class DataTool {
     static void dwarfCollection(final Envelop envelop, final JsonObject matrix) {
         final JsonObject rows = matrix.getJsonObject("rows");
         if (Objects.nonNull(rows) && !rows.isEmpty()) {
-            final JsonObject responseJson = envelop.responseJson();
+            final JsonObject responseJson = envelop.outJson();
             if (Objects.nonNull(responseJson)) {
                 final RegionType type = analyzeRegion(responseJson);
                 Sc.infoAuth(LOGGER, AuthMsg.REGION_TYPE, type, responseJson.encode());

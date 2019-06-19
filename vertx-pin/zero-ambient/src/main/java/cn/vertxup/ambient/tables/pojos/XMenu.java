@@ -6,6 +6,8 @@ package cn.vertxup.ambient.tables.pojos;
 
 import cn.vertxup.ambient.tables.interfaces.IXMenu;
 
+import java.time.LocalDateTime;
+
 import javax.annotation.Generated;
 
 
@@ -22,21 +24,26 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XMenu implements IXMenu {
 
-    private static final long serialVersionUID = 810238677;
+    private static final long serialVersionUID = 2045417154;
 
-    private String  key;
-    private String  name;
-    private String  icon;
-    private String  text;
-    private String  uri;
-    private String  type;
-    private Long    order;
-    private Long    level;
-    private String  parentId;
-    private String  appId;
-    private Boolean active;
-    private String  language;
-    private String  metadata;
+    private String        key;
+    private String        name;
+    private String        icon;
+    private String        text;
+    private String        uri;
+    private String        type;
+    private Long          order;
+    private Long          level;
+    private String        parentId;
+    private String        appId;
+    private Boolean       active;
+    private String        sigma;
+    private String        metadata;
+    private String        language;
+    private LocalDateTime createdAt;
+    private String        createdBy;
+    private LocalDateTime updatedAt;
+    private String        updatedBy;
 
     public XMenu() {}
 
@@ -52,24 +59,34 @@ public class XMenu implements IXMenu {
         this.parentId = value.parentId;
         this.appId = value.appId;
         this.active = value.active;
-        this.language = value.language;
+        this.sigma = value.sigma;
         this.metadata = value.metadata;
+        this.language = value.language;
+        this.createdAt = value.createdAt;
+        this.createdBy = value.createdBy;
+        this.updatedAt = value.updatedAt;
+        this.updatedBy = value.updatedBy;
     }
 
     public XMenu(
-        String  key,
-        String  name,
-        String  icon,
-        String  text,
-        String  uri,
-        String  type,
-        Long    order,
-        Long    level,
-        String  parentId,
-        String  appId,
-        Boolean active,
-        String  language,
-        String  metadata
+        String        key,
+        String        name,
+        String        icon,
+        String        text,
+        String        uri,
+        String        type,
+        Long          order,
+        Long          level,
+        String        parentId,
+        String        appId,
+        Boolean       active,
+        String        sigma,
+        String        metadata,
+        String        language,
+        LocalDateTime createdAt,
+        String        createdBy,
+        LocalDateTime updatedAt,
+        String        updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -82,8 +99,13 @@ public class XMenu implements IXMenu {
         this.parentId = parentId;
         this.appId = appId;
         this.active = active;
-        this.language = language;
+        this.sigma = sigma;
         this.metadata = metadata;
+        this.language = language;
+        this.createdAt = createdAt;
+        this.createdBy = createdBy;
+        this.updatedAt = updatedAt;
+        this.updatedBy = updatedBy;
     }
 
     @Override
@@ -208,13 +230,13 @@ public class XMenu implements IXMenu {
     }
 
     @Override
-    public String getLanguage() {
-        return this.language;
+    public String getSigma() {
+        return this.sigma;
     }
 
     @Override
-    public XMenu setLanguage(String language) {
-        this.language = language;
+    public XMenu setSigma(String sigma) {
+        this.sigma = sigma;
         return this;
     }
 
@@ -226,6 +248,61 @@ public class XMenu implements IXMenu {
     @Override
     public XMenu setMetadata(String metadata) {
         this.metadata = metadata;
+        return this;
+    }
+
+    @Override
+    public String getLanguage() {
+        return this.language;
+    }
+
+    @Override
+    public XMenu setLanguage(String language) {
+        this.language = language;
+        return this;
+    }
+
+    @Override
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    @Override
+    public XMenu setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    @Override
+    public String getCreatedBy() {
+        return this.createdBy;
+    }
+
+    @Override
+    public XMenu setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    @Override
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    @Override
+    public XMenu setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+        return this;
+    }
+
+    @Override
+    public String getUpdatedBy() {
+        return this.updatedBy;
+    }
+
+    @Override
+    public XMenu setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
         return this;
     }
 
@@ -244,8 +321,13 @@ public class XMenu implements IXMenu {
         sb.append(", ").append(parentId);
         sb.append(", ").append(appId);
         sb.append(", ").append(active);
-        sb.append(", ").append(language);
+        sb.append(", ").append(sigma);
         sb.append(", ").append(metadata);
+        sb.append(", ").append(language);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(createdBy);
+        sb.append(", ").append(updatedAt);
+        sb.append(", ").append(updatedBy);
 
         sb.append(")");
         return sb.toString();
@@ -271,8 +353,13 @@ public class XMenu implements IXMenu {
         setParentId(from.getParentId());
         setAppId(from.getAppId());
         setActive(from.getActive());
-        setLanguage(from.getLanguage());
+        setSigma(from.getSigma());
         setMetadata(from.getMetadata());
+        setLanguage(from.getLanguage());
+        setCreatedAt(from.getCreatedAt());
+        setCreatedBy(from.getCreatedBy());
+        setUpdatedAt(from.getUpdatedAt());
+        setUpdatedBy(from.getUpdatedBy());
     }
 
     /**

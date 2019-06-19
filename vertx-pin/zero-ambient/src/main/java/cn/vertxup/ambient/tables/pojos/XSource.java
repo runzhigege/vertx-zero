@@ -6,6 +6,8 @@ package cn.vertxup.ambient.tables.pojos;
 
 import cn.vertxup.ambient.tables.interfaces.IXSource;
 
+import java.time.LocalDateTime;
+
 import javax.annotation.Generated;
 
 
@@ -22,23 +24,28 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XSource implements IXSource {
 
-    private static final long serialVersionUID = 2103674912;
+    private static final long serialVersionUID = 1968551671;
 
-    private String  key;
-    private String  ipV4;
-    private String  ipV6;
-    private String  hostname;
-    private Integer port;
-    private String  category;
-    private String  jdbcUrl;
-    private String  jdbcConfig;
-    private String  instance;
-    private String  username;
-    private String  password;
-    private Boolean active;
-    private String  metadata;
-    private String  language;
-    private String  appId;
+    private String        key;
+    private String        ipV4;
+    private String        ipV6;
+    private String        hostname;
+    private Integer       port;
+    private String        category;
+    private String        jdbcUrl;
+    private String        jdbcConfig;
+    private String        instance;
+    private String        username;
+    private String        password;
+    private String        appId;
+    private Boolean       active;
+    private String        sigma;
+    private String        metadata;
+    private String        language;
+    private LocalDateTime createdAt;
+    private String        createdBy;
+    private LocalDateTime updatedAt;
+    private String        updatedBy;
 
     public XSource() {}
 
@@ -54,28 +61,38 @@ public class XSource implements IXSource {
         this.instance = value.instance;
         this.username = value.username;
         this.password = value.password;
+        this.appId = value.appId;
         this.active = value.active;
+        this.sigma = value.sigma;
         this.metadata = value.metadata;
         this.language = value.language;
-        this.appId = value.appId;
+        this.createdAt = value.createdAt;
+        this.createdBy = value.createdBy;
+        this.updatedAt = value.updatedAt;
+        this.updatedBy = value.updatedBy;
     }
 
     public XSource(
-        String  key,
-        String  ipV4,
-        String  ipV6,
-        String  hostname,
-        Integer port,
-        String  category,
-        String  jdbcUrl,
-        String  jdbcConfig,
-        String  instance,
-        String  username,
-        String  password,
-        Boolean active,
-        String  metadata,
-        String  language,
-        String  appId
+        String        key,
+        String        ipV4,
+        String        ipV6,
+        String        hostname,
+        Integer       port,
+        String        category,
+        String        jdbcUrl,
+        String        jdbcConfig,
+        String        instance,
+        String        username,
+        String        password,
+        String        appId,
+        Boolean       active,
+        String        sigma,
+        String        metadata,
+        String        language,
+        LocalDateTime createdAt,
+        String        createdBy,
+        LocalDateTime updatedAt,
+        String        updatedBy
     ) {
         this.key = key;
         this.ipV4 = ipV4;
@@ -88,10 +105,15 @@ public class XSource implements IXSource {
         this.instance = instance;
         this.username = username;
         this.password = password;
+        this.appId = appId;
         this.active = active;
+        this.sigma = sigma;
         this.metadata = metadata;
         this.language = language;
-        this.appId = appId;
+        this.createdAt = createdAt;
+        this.createdBy = createdBy;
+        this.updatedAt = updatedAt;
+        this.updatedBy = updatedBy;
     }
 
     @Override
@@ -216,6 +238,17 @@ public class XSource implements IXSource {
     }
 
     @Override
+    public String getAppId() {
+        return this.appId;
+    }
+
+    @Override
+    public XSource setAppId(String appId) {
+        this.appId = appId;
+        return this;
+    }
+
+    @Override
     public Boolean getActive() {
         return this.active;
     }
@@ -223,6 +256,17 @@ public class XSource implements IXSource {
     @Override
     public XSource setActive(Boolean active) {
         this.active = active;
+        return this;
+    }
+
+    @Override
+    public String getSigma() {
+        return this.sigma;
+    }
+
+    @Override
+    public XSource setSigma(String sigma) {
+        this.sigma = sigma;
         return this;
     }
 
@@ -249,13 +293,46 @@ public class XSource implements IXSource {
     }
 
     @Override
-    public String getAppId() {
-        return this.appId;
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
     }
 
     @Override
-    public XSource setAppId(String appId) {
-        this.appId = appId;
+    public XSource setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    @Override
+    public String getCreatedBy() {
+        return this.createdBy;
+    }
+
+    @Override
+    public XSource setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    @Override
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    @Override
+    public XSource setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+        return this;
+    }
+
+    @Override
+    public String getUpdatedBy() {
+        return this.updatedBy;
+    }
+
+    @Override
+    public XSource setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
         return this;
     }
 
@@ -274,10 +351,15 @@ public class XSource implements IXSource {
         sb.append(", ").append(instance);
         sb.append(", ").append(username);
         sb.append(", ").append(password);
+        sb.append(", ").append(appId);
         sb.append(", ").append(active);
+        sb.append(", ").append(sigma);
         sb.append(", ").append(metadata);
         sb.append(", ").append(language);
-        sb.append(", ").append(appId);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(createdBy);
+        sb.append(", ").append(updatedAt);
+        sb.append(", ").append(updatedBy);
 
         sb.append(")");
         return sb.toString();
@@ -303,10 +385,15 @@ public class XSource implements IXSource {
         setInstance(from.getInstance());
         setUsername(from.getUsername());
         setPassword(from.getPassword());
+        setAppId(from.getAppId());
         setActive(from.getActive());
+        setSigma(from.getSigma());
         setMetadata(from.getMetadata());
         setLanguage(from.getLanguage());
-        setAppId(from.getAppId());
+        setCreatedAt(from.getCreatedAt());
+        setCreatedBy(from.getCreatedBy());
+        setUpdatedAt(from.getUpdatedAt());
+        setUpdatedBy(from.getUpdatedBy());
     }
 
     /**

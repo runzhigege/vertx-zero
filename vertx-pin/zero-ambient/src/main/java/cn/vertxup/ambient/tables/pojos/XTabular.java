@@ -6,6 +6,8 @@ package cn.vertxup.ambient.tables.pojos;
 
 import cn.vertxup.ambient.tables.interfaces.IXTabular;
 
+import java.time.LocalDateTime;
+
 import javax.annotation.Generated;
 
 
@@ -22,19 +24,24 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XTabular implements IXTabular {
 
-    private static final long serialVersionUID = -1940809441;
+    private static final long serialVersionUID = -108904170;
 
-    private String  key;
-    private String  name;
-    private String  code;
-    private String  type;
-    private String  icon;
-    private Integer sort;
-    private String  comment;
-    private Boolean active;
-    private String  metadata;
-    private String  language;
-    private String  appId;
+    private String        key;
+    private String        name;
+    private String        code;
+    private String        type;
+    private String        icon;
+    private Integer       sort;
+    private String        comment;
+    private String        appId;
+    private Boolean       active;
+    private String        sigma;
+    private String        metadata;
+    private String        language;
+    private LocalDateTime createdAt;
+    private String        createdBy;
+    private LocalDateTime updatedAt;
+    private String        updatedBy;
 
     public XTabular() {}
 
@@ -46,24 +53,34 @@ public class XTabular implements IXTabular {
         this.icon = value.icon;
         this.sort = value.sort;
         this.comment = value.comment;
+        this.appId = value.appId;
         this.active = value.active;
+        this.sigma = value.sigma;
         this.metadata = value.metadata;
         this.language = value.language;
-        this.appId = value.appId;
+        this.createdAt = value.createdAt;
+        this.createdBy = value.createdBy;
+        this.updatedAt = value.updatedAt;
+        this.updatedBy = value.updatedBy;
     }
 
     public XTabular(
-        String  key,
-        String  name,
-        String  code,
-        String  type,
-        String  icon,
-        Integer sort,
-        String  comment,
-        Boolean active,
-        String  metadata,
-        String  language,
-        String  appId
+        String        key,
+        String        name,
+        String        code,
+        String        type,
+        String        icon,
+        Integer       sort,
+        String        comment,
+        String        appId,
+        Boolean       active,
+        String        sigma,
+        String        metadata,
+        String        language,
+        LocalDateTime createdAt,
+        String        createdBy,
+        LocalDateTime updatedAt,
+        String        updatedBy
     ) {
         this.key = key;
         this.name = name;
@@ -72,10 +89,15 @@ public class XTabular implements IXTabular {
         this.icon = icon;
         this.sort = sort;
         this.comment = comment;
+        this.appId = appId;
         this.active = active;
+        this.sigma = sigma;
         this.metadata = metadata;
         this.language = language;
-        this.appId = appId;
+        this.createdAt = createdAt;
+        this.createdBy = createdBy;
+        this.updatedAt = updatedAt;
+        this.updatedBy = updatedBy;
     }
 
     @Override
@@ -156,6 +178,17 @@ public class XTabular implements IXTabular {
     }
 
     @Override
+    public String getAppId() {
+        return this.appId;
+    }
+
+    @Override
+    public XTabular setAppId(String appId) {
+        this.appId = appId;
+        return this;
+    }
+
+    @Override
     public Boolean getActive() {
         return this.active;
     }
@@ -163,6 +196,17 @@ public class XTabular implements IXTabular {
     @Override
     public XTabular setActive(Boolean active) {
         this.active = active;
+        return this;
+    }
+
+    @Override
+    public String getSigma() {
+        return this.sigma;
+    }
+
+    @Override
+    public XTabular setSigma(String sigma) {
+        this.sigma = sigma;
         return this;
     }
 
@@ -189,13 +233,46 @@ public class XTabular implements IXTabular {
     }
 
     @Override
-    public String getAppId() {
-        return this.appId;
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
     }
 
     @Override
-    public XTabular setAppId(String appId) {
-        this.appId = appId;
+    public XTabular setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    @Override
+    public String getCreatedBy() {
+        return this.createdBy;
+    }
+
+    @Override
+    public XTabular setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    @Override
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    @Override
+    public XTabular setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+        return this;
+    }
+
+    @Override
+    public String getUpdatedBy() {
+        return this.updatedBy;
+    }
+
+    @Override
+    public XTabular setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
         return this;
     }
 
@@ -210,10 +287,15 @@ public class XTabular implements IXTabular {
         sb.append(", ").append(icon);
         sb.append(", ").append(sort);
         sb.append(", ").append(comment);
+        sb.append(", ").append(appId);
         sb.append(", ").append(active);
+        sb.append(", ").append(sigma);
         sb.append(", ").append(metadata);
         sb.append(", ").append(language);
-        sb.append(", ").append(appId);
+        sb.append(", ").append(createdAt);
+        sb.append(", ").append(createdBy);
+        sb.append(", ").append(updatedAt);
+        sb.append(", ").append(updatedBy);
 
         sb.append(")");
         return sb.toString();
@@ -235,10 +317,15 @@ public class XTabular implements IXTabular {
         setIcon(from.getIcon());
         setSort(from.getSort());
         setComment(from.getComment());
+        setAppId(from.getAppId());
         setActive(from.getActive());
+        setSigma(from.getSigma());
         setMetadata(from.getMetadata());
         setLanguage(from.getLanguage());
-        setAppId(from.getAppId());
+        setCreatedAt(from.getCreatedAt());
+        setCreatedBy(from.getCreatedBy());
+        setUpdatedAt(from.getUpdatedAt());
+        setUpdatedBy(from.getUpdatedBy());
     }
 
     /**
