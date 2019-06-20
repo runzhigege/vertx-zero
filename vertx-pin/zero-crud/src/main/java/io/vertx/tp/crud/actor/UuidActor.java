@@ -1,8 +1,8 @@
 package io.vertx.tp.crud.actor;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.crud.atom.IxConfig;
 import io.vertx.tp.crud.atom.IxField;
+import io.vertx.tp.crud.atom.IxModule;
 import io.zero.epic.Ut;
 
 import java.util.UUID;
@@ -10,7 +10,7 @@ import java.util.UUID;
 class UuidActor extends AbstractActor {
 
     @Override
-    public JsonObject proc(final JsonObject data, final IxConfig config) {
+    public JsonObject proc(final JsonObject data, final IxModule config) {
         final IxField field = config.getField();
         /* Primary Key Add */
         final String keyField = field.getKey();

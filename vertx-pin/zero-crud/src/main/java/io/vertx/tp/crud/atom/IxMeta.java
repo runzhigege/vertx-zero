@@ -15,7 +15,7 @@ import java.util.function.BiFunction;
 
 public class IxMeta {
     private final transient Class<?> target;
-    private transient IxConfig config;
+    private transient IxModule config;
     private transient UxJooq jooq;
     private transient WebException ex;
 
@@ -56,7 +56,7 @@ public class IxMeta {
         return this;
     }
 
-    public Future<Envelop> envelop(final BiFunction<UxJooq, IxConfig, Future<Envelop>> actuator) {
+    public Future<Envelop> envelop(final BiFunction<UxJooq, IxModule, Future<Envelop>> actuator) {
         final WebException error = this.ex;
         if (null == error) {
             try {

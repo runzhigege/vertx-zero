@@ -1,42 +1,37 @@
 package io.vertx.tp.crud.atom;
 
-import com.fasterxml.jackson.databind.JsonArrayDeserializer;
-import com.fasterxml.jackson.databind.JsonArraySerializer;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.vertx.core.json.JsonArray;
+import io.zero.epic.Ut;
 
 import java.io.Serializable;
 
 public class IxColumn implements Serializable {
 
-    private String actor;
+    private transient Boolean dynamic = Boolean.FALSE;
+    private transient String identifier;
 
-    @JsonSerialize(using = JsonArraySerializer.class)
-    @JsonDeserialize(using = JsonArrayDeserializer.class)
-    private JsonArray condition;
-
-    public String getActor() {
-        return this.actor;
+    public Boolean getDynamic() {
+        /* Basic calculation for column extract mode */
+        this.dynamic = Ut.isNil(this.identifier);
+        return this.dynamic;
     }
 
-    public void setActor(final String actor) {
-        this.actor = actor;
+    public void setDynamic(final Boolean dynamic) {
+        this.dynamic = dynamic;
     }
 
-    public JsonArray getCondition() {
-        return this.condition;
+    public String getIdentifier() {
+        return this.identifier;
     }
 
-    public void setCondition(final JsonArray condition) {
-        this.condition = condition;
+    public void setIdentifier(final String identifier) {
+        this.identifier = identifier;
     }
 
     @Override
     public String toString() {
         return "IxColumn{" +
-                "actor='" + this.actor + '\'' +
-                ", condition=" + this.condition +
+                "dynamic=" + this.dynamic +
+                ", identifier='" + this.identifier + '\'' +
                 '}';
     }
 }

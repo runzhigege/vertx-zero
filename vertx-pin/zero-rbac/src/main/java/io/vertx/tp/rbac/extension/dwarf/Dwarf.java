@@ -22,7 +22,7 @@ class Dwarf {
          * If projection is empty, do nothing
          */
         if (!projection.isEmpty()) {
-            Sc.infoAuth(LOGGER, AuthMsg.REGION_ROWS, projection.encode());
+            Sc.infoAuth(LOGGER, AuthMsg.REGION_PROJECTION, projection.encode());
             /*
              * The method is the same as backend of Jooq
              * Projection means filter

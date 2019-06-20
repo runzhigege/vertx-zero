@@ -3,8 +3,8 @@ package io.vertx.tp.crud.refine;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.crud.atom.IxConfig;
 import io.vertx.tp.crud.atom.IxMeta;
+import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.atom.Envelop;
@@ -33,15 +33,15 @@ public class Ix {
     /*
      * search operation
      */
-    public static Function<UxJooq, Future<JsonObject>> search(final JsonObject filters, final IxConfig config) {
+    public static Function<UxJooq, Future<JsonObject>> search(final JsonObject filters, final IxModule config) {
         return IxFn.search(filters, config);
     }
 
-    public static Function<UxJooq, Future<JsonObject>> query(final JsonObject filters, final IxConfig config) {
+    public static Function<UxJooq, Future<JsonObject>> query(final JsonObject filters, final IxModule config) {
         return IxFn.query(filters, config);
     }
 
-    public static Function<UxJooq, Future<Boolean>> existing(final JsonObject filters, final IxConfig config) {
+    public static Function<UxJooq, Future<Boolean>> existing(final JsonObject filters, final IxModule config) {
         return IxFn.existing(filters, config);
     }
 
@@ -68,26 +68,26 @@ public class Ix {
     /*
      * Deserialize to T
      */
-    public static <T> Future<T> entityAsync(final JsonObject data, final IxConfig config) {
+    public static <T> Future<T> entityAsync(final JsonObject data, final IxModule config) {
         final T reference = IxSerialize.entity(data, config);
         return Ux.toFuture(reference);
     }
 
     @SuppressWarnings("all")
-    public static <T> Future<List<T>> entityAsync(final JsonArray data, final IxConfig config) {
+    public static <T> Future<List<T>> entityAsync(final JsonArray data, final IxModule config) {
         return Ux.toFuture(IxSerialize.entity(data, config));
     }
 
-    public static Future<JsonArray> zipperAsync(final JsonArray from, final JsonArray to, final IxConfig config) {
+    public static Future<JsonArray> zipperAsync(final JsonArray from, final JsonArray to, final IxModule config) {
         return Ux.toFuture(IxSerialize.zipper(from, to, config));
     }
 
     // Query
-    public static Future<JsonObject> inKeys(final JsonArray array, final IxConfig config) {
+    public static Future<JsonObject> inKeys(final JsonArray array, final IxModule config) {
         return Ux.toFuture(IxQuery.inKeys(array, config));
     }
 
-    public static Future<JsonObject> inColumns(final Envelop envelop, final IxConfig config) {
+    public static Future<JsonObject> inColumns(final Envelop envelop, final IxModule config) {
         return Ux.toFuture(IxQuery.inColumns(envelop, config));
     }
 
