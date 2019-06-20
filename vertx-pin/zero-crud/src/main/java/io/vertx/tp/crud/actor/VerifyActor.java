@@ -1,7 +1,7 @@
 package io.vertx.tp.crud.actor;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.crud.atom.IxConfig;
+import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.crud.init.IxPin;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.up.atom.Envelop;
@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentMap;
 class VerifyActor extends AbstractActor {
 
     @Override
-    public JsonObject proc(final JsonObject data, final IxConfig config) {
+    public JsonObject proc(final JsonObject data, final IxModule config) {
         /* 1.method, uri */
         final String key = this.getKey(data, config);
 
@@ -39,7 +39,7 @@ class VerifyActor extends AbstractActor {
         return data;
     }
 
-    private String getKey(final JsonObject data, final IxConfig config) {
+    private String getKey(final JsonObject data, final IxModule config) {
         final Envelop request = this.getRequest();
         /* 1.method, uri */
         String uri = request.getUri();

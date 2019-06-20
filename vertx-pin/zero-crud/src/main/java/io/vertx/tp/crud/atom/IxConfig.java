@@ -2,99 +2,33 @@ package io.vertx.tp.crud.atom;
 
 import com.fasterxml.jackson.databind.ClassDeserializer;
 import com.fasterxml.jackson.databind.ClassSerializer;
-import com.fasterxml.jackson.databind.JsonObjectDeserializer;
-import com.fasterxml.jackson.databind.JsonObjectSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
 
 public class IxConfig implements Serializable {
-
-    private String name;
-    private String pojo;
-    private IxField field;
-    private IxColumn column;
-
+    /*
+     * /api/columns/{actor}/full
+     * /api/columns/{actor}/my
+     * Support, must be implemented with extension here.
+     */
     @JsonSerialize(using = ClassSerializer.class)
     @JsonDeserialize(using = ClassDeserializer.class)
-    private Class<?> pojoCls;
+    private Class<?> columnComponent;
 
-    @JsonSerialize(using = ClassSerializer.class)
-    @JsonDeserialize(using = ClassDeserializer.class)
-    private Class<?> daoCls;
-
-    @JsonSerialize(using = JsonObjectSerializer.class)
-    @JsonDeserialize(using = JsonObjectDeserializer.class)
-    private JsonObject header;
-
-    public IxField getField() {
-        return this.field;
+    public Class<?> getColumnComponent() {
+        return this.columnComponent;
     }
 
-    public void setField(final IxField field) {
-        this.field = field;
-    }
-
-    public IxColumn getColumn() {
-        return this.column;
-    }
-
-    public void setColumn(final IxColumn column) {
-        this.column = column;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getPojo() {
-        return this.pojo;
-    }
-
-    public void setPojo(final String pojo) {
-        this.pojo = pojo;
-    }
-
-    public Class<?> getPojoCls() {
-        return this.pojoCls;
-    }
-
-    public void setPojoCls(final Class<?> pojoCls) {
-        this.pojoCls = pojoCls;
-    }
-
-    public Class<?> getDaoCls() {
-        return this.daoCls;
-    }
-
-    public void setDaoCls(final Class<?> daoCls) {
-        this.daoCls = daoCls;
-    }
-
-    public JsonObject getHeader() {
-        return this.header;
-    }
-
-    public void setHeader(final JsonObject header) {
-        this.header = header;
+    public void setColumnComponent(final Class<?> columnComponent) {
+        this.columnComponent = columnComponent;
     }
 
     @Override
     public String toString() {
         return "IxConfig{" +
-                "name='" + this.name + '\'' +
-                ", pojo='" + this.pojo + '\'' +
-                ", field=" + this.field +
-                ", pojoCls=" + this.pojoCls +
-                ", daoCls=" + this.daoCls +
-                ", header=" + this.header +
-                ", column=" + this.column +
+                "componentColumn=" + this.columnComponent +
                 '}';
     }
 }

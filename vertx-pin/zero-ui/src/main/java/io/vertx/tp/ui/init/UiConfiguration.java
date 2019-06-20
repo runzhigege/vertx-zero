@@ -23,7 +23,7 @@ class UiConfiguration {
      * Static configuration mapping for column, it could not be modified
      * once configured into
      */
-    private static final ConcurrentMap<Class<?>, JsonArray> COLUMN_MAP =
+    private static final ConcurrentMap<String, JsonArray> COLUMN_MAP =
             new ConcurrentHashMap<>();
     private static UiConfig CONFIG = null;
 
@@ -44,28 +44,20 @@ class UiConfiguration {
     }
 
     private static void initColumn(final UiConfig config) {
-        final JsonObject staticConfig = config.getConfigStatic();
-        if (!Ut.isNil(staticConfig)) {
-            final String configPath = config.getConfigPath();
-            staticConfig.fieldNames().forEach(clazz -> {
-                final String file = staticConfig.getString(clazz);
+        final JsonObject mapping = config.getMapping();
+        if (!Ut.isNil(mapping)) {
+            final String configPath = config.getDefinition();
+            mapping.fieldNames().forEach(fileKey -> {
+                final String file = mapping.getString(fileKey);
                 final String filePath = configPath + '/' + file;
-                initColumn(clazz, filePath);
+                /*
+                 * Read column from configuration path
+                 */
+                final JsonArray columns = Ut.ioJArray(filePath);
+                if (Objects.nonNull(columns) && !columns.isEmpty()) {
+                    COLUMN_MAP.put(fileKey, columns);
+                }
             });
-        }
-    }
-
-    private static void initColumn(final String className, final String file) {
-        /* 1. Class Not Found */
-        final Class<?> keyCls = Ut.clazz(className);
-        if (Objects.nonNull(keyCls)) {
-            /* 2. Read columns */
-            final JsonArray columns = Ut.ioJArray(file);
-            if (Objects.nonNull(columns) && !columns.isEmpty()) {
-                COLUMN_MAP.put(keyCls, columns);
-            }
-        } else {
-            Ui.infoWarn(LOGGER, "Ui Class Null: {0}", className);
         }
     }
 }
