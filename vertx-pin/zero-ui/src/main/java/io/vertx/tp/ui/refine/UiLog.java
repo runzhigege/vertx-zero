@@ -23,6 +23,10 @@ class UiLog {
         info(logger, "Init", pattern, args);
     }
 
+    static void infoUi(final Annal logger, final String pattern, final Object... args) {
+        info(logger, "UI", pattern, args);
+    }
+
     static void infoWarn(final Annal logger, final String pattern, final Object... args) {
         error(logger, "Warn", pattern, args);
     }

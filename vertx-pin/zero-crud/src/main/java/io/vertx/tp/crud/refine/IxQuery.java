@@ -4,8 +4,10 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
+import io.vertx.tp.crud.atom.IxColumn;
 import io.vertx.tp.crud.atom.IxField;
 import io.vertx.tp.crud.atom.IxModule;
+import io.vertx.tp.ke.cv.KeField;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
 import io.zero.epic.Ut;
@@ -35,16 +37,28 @@ class IxQuery {
         return filters.put(keyField + ",i", keys);
     }
 
-    static JsonObject inColumns(final Envelop envelop, final IxModule config) {
+    static JsonObject inColumns(final Envelop envelop, final IxModule module) {
         final String actor = Ux.getString(envelop);
         /* Filters */
-        final JsonObject filters = new JsonObject();
-        /* ColumnStub */
-        System.err.println(config);
-        return filters;
+        final JsonObject params = new JsonObject();
+        /* Extract column information to params */
+        {
+            final IxColumn column = module.getColumn();
+            /*
+             * In static mode, identifier could found ui file
+             * In dynamic mode, identifier & sigma could let system fetch columns
+             * from database directly.
+             */
+            params.put(KeField.IDENTIFIER, column.getIdentifier());
+            params.put(KeField.DYNAMIC, column.getDynamic());
+        }
+        return params;
     }
 
-    private static JsonObject input(final Envelop envelop) {
+    /*
+     * TODO: Reserved for future use
+     */
+    static JsonObject input(final Envelop envelop) {
         final JsonObject data = new JsonObject();
         /* Data */
         final User user = envelop.user();

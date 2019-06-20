@@ -23,6 +23,7 @@ public interface KeField {
     String FILE_KEY = "fileKey";
 
     String IDENTIFIER = "identifier";
+    String DYNAMIC = "dynamic";
 
     String LOGO = "logo";
 
