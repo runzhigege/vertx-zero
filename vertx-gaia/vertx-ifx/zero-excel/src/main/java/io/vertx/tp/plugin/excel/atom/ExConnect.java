@@ -1,5 +1,9 @@
 package io.vertx.tp.plugin.excel.atom;
 
+import com.fasterxml.jackson.databind.JsonArrayDeserializer;
+import com.fasterxml.jackson.databind.JsonArraySerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonArray;
 
 import java.io.Serializable;
@@ -13,7 +17,11 @@ public class ExConnect implements Serializable {
     private transient String table;
     private transient Class<?> pojo;
     private transient Class<?> dao;
+
+    @JsonSerialize(using = JsonArraySerializer.class)
+    @JsonDeserialize(using = JsonArrayDeserializer.class)
     private transient JsonArray unique;
+    private transient String key;
 
     public String getTable() {
         return this.table;
@@ -47,6 +55,14 @@ public class ExConnect implements Serializable {
         this.unique = unique;
     }
 
+    public String getKey() {
+        return this.key;
+    }
+
+    public void setKey(final String key) {
+        this.key = key;
+    }
+
     @Override
     public String toString() {
         return "ExConnect{" +
@@ -54,6 +70,7 @@ public class ExConnect implements Serializable {
                 ", pojo=" + this.pojo +
                 ", dao=" + this.dao +
                 ", unique=" + this.unique +
+                ", key=" + this.key +
                 '}';
     }
 }
