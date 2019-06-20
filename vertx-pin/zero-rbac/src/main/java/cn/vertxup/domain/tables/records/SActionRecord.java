@@ -31,10 +31,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements Record20<String, String, String, String, String, Integer, String, String, String, String, String, String, String, Boolean, String, String, LocalDateTime, String, LocalDateTime, String>, ISAction {
 
-    private static final long serialVersionUID = -497923079;
+    private static final long serialVersionUID = 133393573;
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.KEY</code>. 「key」- 操作ID
+     * Setter for <code>DB_ETERNAL.S_ACTION.KEY</code>. 「key」- 操作ID
      */
     @Override
     public SActionRecord setKey(String value) {
@@ -43,7 +43,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.KEY</code>. 「key」- 操作ID
+     * Getter for <code>DB_ETERNAL.S_ACTION.KEY</code>. 「key」- 操作ID
      */
     @Override
     public String getKey() {
@@ -51,7 +51,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.NAME</code>. 「name」- 操作名称
+     * Setter for <code>DB_ETERNAL.S_ACTION.NAME</code>. 「name」- 操作名称
      */
     @Override
     public SActionRecord setName(String value) {
@@ -60,7 +60,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.NAME</code>. 「name」- 操作名称
+     * Getter for <code>DB_ETERNAL.S_ACTION.NAME</code>. 「name」- 操作名称
      */
     @Override
     public String getName() {
@@ -68,7 +68,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.CODE</code>. 「code」- 操作码
+     * Setter for <code>DB_ETERNAL.S_ACTION.CODE</code>. 「code」- 操作码
      */
     @Override
     public SActionRecord setCode(String value) {
@@ -77,7 +77,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.CODE</code>. 「code」- 操作码
+     * Getter for <code>DB_ETERNAL.S_ACTION.CODE</code>. 「code」- 操作码
      */
     @Override
     public String getCode() {
@@ -85,7 +85,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
+     * Setter for <code>DB_ETERNAL.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
      */
     @Override
     public SActionRecord setResourceId(String value) {
@@ -94,7 +94,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
+     * Getter for <code>DB_ETERNAL.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
      */
     @Override
     public String getResourceId() {
@@ -102,7 +102,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.PERMISSION_ID</code>. 「permissionId」- 操作所属权限
+     * Setter for <code>DB_ETERNAL.S_ACTION.PERMISSION_ID</code>. 「permissionId」- 操作所属权限
      */
     @Override
     public SActionRecord setPermissionId(String value) {
@@ -111,7 +111,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.PERMISSION_ID</code>. 「permissionId」- 操作所属权限
+     * Getter for <code>DB_ETERNAL.S_ACTION.PERMISSION_ID</code>. 「permissionId」- 操作所属权限
      */
     @Override
     public String getPermissionId() {
@@ -119,7 +119,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.LEVEL</code>. 「level」- 操作级别, ACL控制
+     * Setter for <code>DB_ETERNAL.S_ACTION.LEVEL</code>. 「level」- 操作级别, ACL控制
      */
     @Override
     public SActionRecord setLevel(Integer value) {
@@ -128,7 +128,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.LEVEL</code>. 「level」- 操作级别, ACL控制
+     * Getter for <code>DB_ETERNAL.S_ACTION.LEVEL</code>. 「level」- 操作级别, ACL控制
      */
     @Override
     public Integer getLevel() {
@@ -136,7 +136,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.MODE</code>. 「mode」- 操作模式（决定是否触发副作用流程）, NODE | DEFINE
+     * Setter for <code>DB_ETERNAL.S_ACTION.MODE</code>. 「mode」- 操作模式（决定是否触发副作用流程）, NODE | DEFINE
      */
     @Override
     public SActionRecord setMode(String value) {
@@ -145,7 +145,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.MODE</code>. 「mode」- 操作模式（决定是否触发副作用流程）, NODE | DEFINE
+     * Getter for <code>DB_ETERNAL.S_ACTION.MODE</code>. 「mode」- 操作模式（决定是否触发副作用流程）, NODE | DEFINE
      */
     @Override
     public String getMode() {
@@ -153,7 +153,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.URI</code>. 「uri」- 资源地址
+     * Setter for <code>DB_ETERNAL.S_ACTION.URI</code>. 「uri」- 资源地址
      */
     @Override
     public SActionRecord setUri(String value) {
@@ -162,7 +162,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.URI</code>. 「uri」- 资源地址
+     * Getter for <code>DB_ETERNAL.S_ACTION.URI</code>. 「uri」- 资源地址
      */
     @Override
     public String getUri() {
@@ -170,7 +170,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.METHOD</code>. 「method」- 资源方法
+     * Setter for <code>DB_ETERNAL.S_ACTION.METHOD</code>. 「method」- 资源方法
      */
     @Override
     public SActionRecord setMethod(String value) {
@@ -179,7 +179,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.METHOD</code>. 「method」- 资源方法
+     * Getter for <code>DB_ETERNAL.S_ACTION.METHOD</code>. 「method」- 资源方法
      */
     @Override
     public String getMethod() {
@@ -187,7 +187,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.SIGMA</code>. 「sigma」- 统一标识
+     * Setter for <code>DB_ETERNAL.S_ACTION.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
     public SActionRecord setSigma(String value) {
@@ -196,7 +196,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.SIGMA</code>. 「sigma」- 统一标识
+     * Getter for <code>DB_ETERNAL.S_ACTION.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
     public String getSigma() {
@@ -204,7 +204,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.EFFECT_COMPONENT</code>. 「effectComponent」- mode = DEFINE，自定义副作用流程
+     * Setter for <code>DB_ETERNAL.S_ACTION.EFFECT_COMPONENT</code>. 「effectComponent」- mode = DEFINE，自定义副作用流程
      */
     @Override
     public SActionRecord setEffectComponent(String value) {
@@ -213,7 +213,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.EFFECT_COMPONENT</code>. 「effectComponent」- mode = DEFINE，自定义副作用流程
+     * Getter for <code>DB_ETERNAL.S_ACTION.EFFECT_COMPONENT</code>. 「effectComponent」- mode = DEFINE，自定义副作用流程
      */
     @Override
     public String getEffectComponent() {
@@ -221,7 +221,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.EFFECT_CONFIG</code>. 「effectConfig」- 副作用配置信息
+     * Setter for <code>DB_ETERNAL.S_ACTION.EFFECT_CONFIG</code>. 「effectConfig」- 副作用配置信息
      */
     @Override
     public SActionRecord setEffectConfig(String value) {
@@ -230,7 +230,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.EFFECT_CONFIG</code>. 「effectConfig」- 副作用配置信息
+     * Getter for <code>DB_ETERNAL.S_ACTION.EFFECT_CONFIG</code>. 「effectConfig」- 副作用配置信息
      */
     @Override
     public String getEffectConfig() {
@@ -238,7 +238,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ETERNAL.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public SActionRecord setLanguage(String value) {
@@ -247,7 +247,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ETERNAL.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public String getLanguage() {
@@ -255,7 +255,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ETERNAL.S_ACTION.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public SActionRecord setActive(Boolean value) {
@@ -264,7 +264,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ETERNAL.S_ACTION.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public Boolean getActive() {
@@ -272,7 +272,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ETERNAL.S_ACTION.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public SActionRecord setMetadata(String value) {
@@ -281,7 +281,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ETERNAL.S_ACTION.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public String getMetadata() {
@@ -289,7 +289,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.COMMENT</code>. 「action」- 操作说明
+     * Setter for <code>DB_ETERNAL.S_ACTION.COMMENT</code>. 「action」- 操作说明
      */
     @Override
     public SActionRecord setComment(String value) {
@@ -298,7 +298,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.COMMENT</code>. 「action」- 操作说明
+     * Getter for <code>DB_ETERNAL.S_ACTION.COMMENT</code>. 「action」- 操作说明
      */
     @Override
     public String getComment() {
@@ -306,7 +306,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Setter for <code>DB_ETERNAL.S_ACTION.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
     public SActionRecord setCreatedAt(LocalDateTime value) {
@@ -315,7 +315,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Getter for <code>DB_ETERNAL.S_ACTION.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
     public LocalDateTime getCreatedAt() {
@@ -323,7 +323,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.CREATED_BY</code>. 「createdBy」- 创建人
+     * Setter for <code>DB_ETERNAL.S_ACTION.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
     public SActionRecord setCreatedBy(String value) {
@@ -332,7 +332,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.CREATED_BY</code>. 「createdBy」- 创建人
+     * Getter for <code>DB_ETERNAL.S_ACTION.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
     public String getCreatedBy() {
@@ -340,7 +340,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Setter for <code>DB_ETERNAL.S_ACTION.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
     public SActionRecord setUpdatedAt(LocalDateTime value) {
@@ -349,7 +349,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Getter for <code>DB_ETERNAL.S_ACTION.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
     public LocalDateTime getUpdatedAt() {
@@ -357,7 +357,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Setter for <code>DB_ETERNAL.S_ACTION.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
     public SActionRecord setUpdatedBy(String value) {
@@ -366,7 +366,7 @@ public class SActionRecord extends UpdatableRecordImpl<SActionRecord> implements
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Getter for <code>DB_ETERNAL.S_ACTION.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
     public String getUpdatedBy() {

@@ -1,6 +1,6 @@
 package io.vertx.tp.rbac.accredit;
 
-import cn.vertxup.domain.tables.pojos.RResourceMatrix;
+import cn.vertxup.domain.tables.pojos.SView;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.zero.eon.Strings;
@@ -11,13 +11,13 @@ import java.util.List;
 
 class MatrixFlow {
 
-    static Future<List<RResourceMatrix>> toResult(final RResourceMatrix entity) {
-        final List<RResourceMatrix> matrixList = new ArrayList<>();
+    static Future<List<SView>> toResult(final SView entity) {
+        final List<SView> matrixList = new ArrayList<>();
         matrixList.add(entity);
         return Future.succeededFuture(matrixList);
     }
 
-    static Future<DataBound> toBound(final List<RResourceMatrix> matrices) {
+    static Future<DataBound> toBound(final List<SView> matrices) {
         final DataBound bound = new DataBound();
         matrices.forEach(matrix -> bound.addProjection(matrix.getProjection())
                 .addRows(matrix.getRows())

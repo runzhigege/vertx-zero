@@ -32,103 +32,103 @@ import java.util.List;
 public class SResource extends TableImpl<SResourceRecord> {
 
     /**
-     * The reference instance of <code>DB_ORIGIN_X.S_RESOURCE</code>
+     * The reference instance of <code>DB_ETERNAL.S_RESOURCE</code>
      */
     public static final SResource S_RESOURCE = new SResource();
-    private static final long serialVersionUID = -1307363747;
+    private static final long serialVersionUID = 607755109;
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.KEY</code>. 「key」- 资源对应的ID
+     * The column <code>DB_ETERNAL.S_RESOURCE.KEY</code>. 「key」- 资源对应的ID
      */
     public final TableField<SResourceRecord, String> KEY = createField("KEY", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「key」- 资源对应的ID");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.CODE</code>. 「code」- 资源编号
+     * The column <code>DB_ETERNAL.S_RESOURCE.CODE</code>. 「code」- 资源编号
      */
     public final TableField<SResourceRecord, String> CODE = createField("CODE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「code」- 资源编号");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.NAME</code>. 「name」- 资源名称
+     * The column <code>DB_ETERNAL.S_RESOURCE.NAME</code>. 「name」- 资源名称
      */
     public final TableField<SResourceRecord, String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「name」- 资源名称");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.COMMENT</code>. 「comment」- 备注信息
+     * The column <code>DB_ETERNAL.S_RESOURCE.COMMENT</code>. 「comment」- 备注信息
      */
     public final TableField<SResourceRecord, String> COMMENT = createField("COMMENT", org.jooq.impl.SQLDataType.CLOB, this, "「comment」- 备注信息");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.LEVEL</code>. 「level」- 资源需求级别
+     * The column <code>DB_ETERNAL.S_RESOURCE.LEVEL</code>. 「level」- 资源需求级别
      */
     public final TableField<SResourceRecord, Integer> LEVEL = createField("LEVEL", org.jooq.impl.SQLDataType.INTEGER, this, "「level」- 资源需求级别");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.MODE_ROLE</code>. 「modeRole」- 该资源查找角色的模式
+     * The column <code>DB_ETERNAL.S_RESOURCE.MODE_ROLE</code>. 「modeRole」- 该资源查找角色的模式
      */
     public final TableField<SResourceRecord, String> MODE_ROLE = createField("MODE_ROLE", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「modeRole」- 该资源查找角色的模式");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.MODE_GROUP</code>. 「modeGroup」- 该资源查找组的模式
+     * The column <code>DB_ETERNAL.S_RESOURCE.MODE_GROUP</code>. 「modeGroup」- 该资源查找组的模式
      */
     public final TableField<SResourceRecord, String> MODE_GROUP = createField("MODE_GROUP", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「modeGroup」- 该资源查找组的模式");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.MODE_TREE</code>. 「modeTree」- 该资源处理树（用户组）的模式
+     * The column <code>DB_ETERNAL.S_RESOURCE.MODE_TREE</code>. 「modeTree」- 该资源处理树（用户组）的模式
      */
     public final TableField<SResourceRecord, String> MODE_TREE = createField("MODE_TREE", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「modeTree」- 该资源处理树（用户组）的模式");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.SIGMA</code>. 「sigma」- 统一标识
+     * The column <code>DB_ETERNAL.S_RESOURCE.SIGMA</code>. 「sigma」- 统一标识
      */
     public final TableField<SResourceRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「sigma」- 统一标识");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.MODEL_ID</code>. 「modelId」- 资源对应的模型identifier
+     * The column <code>DB_ETERNAL.S_RESOURCE.MODEL_ID</code>. 「modelId」- 资源对应的模型identifier
      */
     public final TableField<SResourceRecord, String> MODEL_ID = createField("MODEL_ID", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「modelId」- 资源对应的模型identifier");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.MODEL_KEY</code>. 「modelKey」- 资源对应的单条记录ID
+     * The column <code>DB_ETERNAL.S_RESOURCE.MODEL_KEY</code>. 「modelKey」- 资源对应的单条记录ID
      */
     public final TableField<SResourceRecord, String> MODEL_KEY = createField("MODEL_KEY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「modelKey」- 资源对应的单条记录ID");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.CATEGORY</code>. 「category」- 资源分类
+     * The column <code>DB_ETERNAL.S_RESOURCE.CATEGORY</code>. 「category」- 资源分类
      */
     public final TableField<SResourceRecord, String> CATEGORY = createField("CATEGORY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「category」- 资源分类");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.LANGUAGE</code>. 「language」- 使用的语言
+     * The column <code>DB_ETERNAL.S_RESOURCE.LANGUAGE</code>. 「language」- 使用的语言
      */
     public final TableField<SResourceRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.ACTIVE</code>. 「active」- 是否启用
+     * The column <code>DB_ETERNAL.S_RESOURCE.ACTIVE</code>. 「active」- 是否启用
      */
     public final TableField<SResourceRecord, Boolean> ACTIVE = createField("ACTIVE", org.jooq.impl.SQLDataType.BIT, this, "「active」- 是否启用");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.METADATA</code>. 「metadata」- 附加配置数据
+     * The column <code>DB_ETERNAL.S_RESOURCE.METADATA</code>. 「metadata」- 附加配置数据
      */
     public final TableField<SResourceRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置数据");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.CREATED_AT</code>. 「createdAt」- 创建时间
+     * The column <code>DB_ETERNAL.S_RESOURCE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public final TableField<SResourceRecord, LocalDateTime> CREATED_AT = createField("CREATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「createdAt」- 创建时间");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.CREATED_BY</code>. 「createdBy」- 创建人
+     * The column <code>DB_ETERNAL.S_RESOURCE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public final TableField<SResourceRecord, String> CREATED_BY = createField("CREATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「createdBy」- 创建人");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * The column <code>DB_ETERNAL.S_RESOURCE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     public final TableField<SResourceRecord, LocalDateTime> UPDATED_AT = createField("UPDATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「updatedAt」- 更新时间");
     /**
-     * The column <code>DB_ORIGIN_X.S_RESOURCE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * The column <code>DB_ETERNAL.S_RESOURCE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public final TableField<SResourceRecord, String> UPDATED_BY = createField("UPDATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「updatedBy」- 更新人");
 
     /**
-     * Create a <code>DB_ORIGIN_X.S_RESOURCE</code> table reference
+     * Create a <code>DB_ETERNAL.S_RESOURCE</code> table reference
      */
     public SResource() {
         this(DSL.name("S_RESOURCE"), null);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.S_RESOURCE</code> table reference
+     * Create an aliased <code>DB_ETERNAL.S_RESOURCE</code> table reference
      */
     public SResource(String alias) {
         this(DSL.name(alias), S_RESOURCE);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.S_RESOURCE</code> table reference
+     * Create an aliased <code>DB_ETERNAL.S_RESOURCE</code> table reference
      */
     public SResource(Name alias) {
         this(alias, S_RESOURCE);
@@ -155,7 +155,7 @@ public class SResource extends TableImpl<SResourceRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Db.DB_ORIGIN_X;
+        return Db.DB_ETERNAL;
     }
 
     /**

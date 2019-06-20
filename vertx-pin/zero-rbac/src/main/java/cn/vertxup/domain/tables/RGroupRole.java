@@ -31,39 +31,39 @@ import java.util.List;
 public class RGroupRole extends TableImpl<RGroupRoleRecord> {
 
     /**
-     * The reference instance of <code>DB_ORIGIN_X.R_GROUP_ROLE</code>
+     * The reference instance of <code>DB_ETERNAL.R_GROUP_ROLE</code>
      */
     public static final RGroupRole R_GROUP_ROLE = new RGroupRole();
-    private static final long serialVersionUID = -708839161;
+    private static final long serialVersionUID = -1194685739;
     /**
-     * The column <code>DB_ORIGIN_X.R_GROUP_ROLE.GROUP_ID</code>. 「groupId」- 关联组ID
+     * The column <code>DB_ETERNAL.R_GROUP_ROLE.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     public final TableField<RGroupRoleRecord, String> GROUP_ID = createField("GROUP_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「groupId」- 关联组ID");
     /**
-     * The column <code>DB_ORIGIN_X.R_GROUP_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * The column <code>DB_ETERNAL.R_GROUP_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     public final TableField<RGroupRoleRecord, String> ROLE_ID = createField("ROLE_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「roleId」- 关联角色ID");
     /**
-     * The column <code>DB_ORIGIN_X.R_GROUP_ROLE.PRIORITY</code>. 「priority」- 角色优先级
+     * The column <code>DB_ETERNAL.R_GROUP_ROLE.PRIORITY</code>. 「priority」- 角色优先级
      */
     public final TableField<RGroupRoleRecord, Integer> PRIORITY = createField("PRIORITY", org.jooq.impl.SQLDataType.INTEGER, this, "「priority」- 角色优先级");
 
     /**
-     * Create a <code>DB_ORIGIN_X.R_GROUP_ROLE</code> table reference
+     * Create a <code>DB_ETERNAL.R_GROUP_ROLE</code> table reference
      */
     public RGroupRole() {
         this(DSL.name("R_GROUP_ROLE"), null);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.R_GROUP_ROLE</code> table reference
+     * Create an aliased <code>DB_ETERNAL.R_GROUP_ROLE</code> table reference
      */
     public RGroupRole(String alias) {
         this(DSL.name(alias), R_GROUP_ROLE);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.R_GROUP_ROLE</code> table reference
+     * Create an aliased <code>DB_ETERNAL.R_GROUP_ROLE</code> table reference
      */
     public RGroupRole(Name alias) {
         this(alias, R_GROUP_ROLE);
@@ -90,7 +90,7 @@ public class RGroupRole extends TableImpl<RGroupRoleRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Db.DB_ORIGIN_X;
+        return Db.DB_ETERNAL;
     }
 
     /**

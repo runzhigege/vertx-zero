@@ -23,32 +23,32 @@ import javax.annotation.Generated;
 public interface IRUserRole extends Serializable {
 
     /**
-     * Setter for <code>DB_ORIGIN_X.R_USER_ROLE.USER_ID</code>. 「userId」- 关联用户ID
+     * Setter for <code>DB_ETERNAL.R_USER_ROLE.USER_ID</code>. 「userId」- 关联用户ID
      */
     public IRUserRole setUserId(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.R_USER_ROLE.USER_ID</code>. 「userId」- 关联用户ID
+     * Getter for <code>DB_ETERNAL.R_USER_ROLE.USER_ID</code>. 「userId」- 关联用户ID
      */
     public String getUserId();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.R_USER_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Setter for <code>DB_ETERNAL.R_USER_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     public IRUserRole setRoleId(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.R_USER_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * Getter for <code>DB_ETERNAL.R_USER_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     public String getRoleId();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.R_USER_ROLE.PRIORITY</code>. 「priority」- 角色优先级
+     * Setter for <code>DB_ETERNAL.R_USER_ROLE.PRIORITY</code>. 「priority」- 角色优先级
      */
     public IRUserRole setPriority(Integer value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.R_USER_ROLE.PRIORITY</code>. 「priority」- 角色优先级
+     * Getter for <code>DB_ETERNAL.R_USER_ROLE.PRIORITY</code>. 「priority」- 角色优先级
      */
     public Integer getPriority();
 

@@ -3,6 +3,7 @@ package io.vertx.tp.crud.init;
 import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.tp.ke.extension.ui.ColumnStub;
+import io.vertx.tp.ke.extension.view.ColumnMyStub;
 import io.vertx.tp.ke.tool.Ke;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.atom.Rule;
@@ -54,6 +55,15 @@ public class IxPin {
             return null;
         } else {
             return ColumnStub.generate(clazz);
+        }
+    }
+
+    public static ColumnMyStub getMyStub() {
+        final Class<?> clazz = IxConfiguration.getConfig().getColumnMyComponent();
+        if (Objects.isNull(clazz)) {
+            return null;
+        } else {
+            return ColumnMyStub.generate(clazz);
         }
     }
 

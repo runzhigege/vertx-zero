@@ -27,6 +27,7 @@ public class ColumnService extends AbstractColumn {
         /* Whether this module used dynamic column here */
         final String identifier = config.getString(KeField.IDENTIFIER);
         final String sigma = config.getString(KeField.SIGMA);
-        return valve.fetchColumn(identifier, sigma);
+        final String view = config.getString(KeField.VIEW);
+        return valve.fetchColumn(view, identifier, sigma);
     }
 }

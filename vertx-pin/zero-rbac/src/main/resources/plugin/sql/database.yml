@@ -25,7 +25,7 @@ databaseChangeLog:
       file: plugin/sql/rbac/S_ROLE.sql
       relativeToChangelogFile: false
   - include:
-      file: plugin/sql/rbac/R_RESOURCE_MATRIX.sql
+      file: plugin/sql/rbac/S_VIEW.sql
       relativeToChangelogFile: false
   - include:
       file: plugin/sql/rbac/R_GROUP_ROLE.sql

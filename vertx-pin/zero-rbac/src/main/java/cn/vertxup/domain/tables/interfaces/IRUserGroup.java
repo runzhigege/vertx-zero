@@ -23,32 +23,32 @@ import javax.annotation.Generated;
 public interface IRUserGroup extends Serializable {
 
     /**
-     * Setter for <code>DB_ORIGIN_X.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
+     * Setter for <code>DB_ETERNAL.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     public IRUserGroup setGroupId(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
+     * Getter for <code>DB_ETERNAL.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     public String getGroupId();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.R_USER_GROUP.USER_ID</code>. 「userId」- 关联用户ID
+     * Setter for <code>DB_ETERNAL.R_USER_GROUP.USER_ID</code>. 「userId」- 关联用户ID
      */
     public IRUserGroup setUserId(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.R_USER_GROUP.USER_ID</code>. 「userId」- 关联用户ID
+     * Getter for <code>DB_ETERNAL.R_USER_GROUP.USER_ID</code>. 「userId」- 关联用户ID
      */
     public String getUserId();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.R_USER_GROUP.PRIORITY</code>. 「priority」- 组优先级
+     * Setter for <code>DB_ETERNAL.R_USER_GROUP.PRIORITY</code>. 「priority」- 组优先级
      */
     public IRUserGroup setPriority(Integer value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.R_USER_GROUP.PRIORITY</code>. 「priority」- 组优先级
+     * Getter for <code>DB_ETERNAL.R_USER_GROUP.PRIORITY</code>. 「priority」- 组优先级
      */
     public Integer getPriority();
 

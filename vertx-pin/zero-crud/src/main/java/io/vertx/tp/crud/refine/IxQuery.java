@@ -48,9 +48,11 @@ class IxQuery {
              * In static mode, identifier could found ui file
              * In dynamic mode, identifier & sigma could let system fetch columns
              * from database directly.
+             * Here add new parameter `view` for future usage to support multi views
              */
             params.put(KeField.IDENTIFIER, column.getIdentifier());
             params.put(KeField.DYNAMIC, column.getDynamic());
+            params.put(KeField.VIEW, column.getView());
         }
         return params;
     }
