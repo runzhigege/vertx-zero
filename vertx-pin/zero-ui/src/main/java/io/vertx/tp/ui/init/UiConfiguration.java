@@ -21,7 +21,15 @@ class UiConfiguration {
     private static final Annal LOGGER = Annal.get(UiConfiguration.class);
     /*
      * Static configuration mapping for column, it could not be modified
-     * once configured into
+     * once configured into the column mapping
+     * column map stored fileKey = filename
+     * Here `fileKey` will be configured in other place to be connected.
+     * The file absolute path should be `definition` + `filename` to be calculated
+     * the final result.
+     * Such as `ColumnStub` in CRUD, this service will be called to read
+     * different columns, it support two mode:
+     * Static: read column information from file ( column map support )
+     * Dynamic: read column information from database ( skip file )
      */
     private static final ConcurrentMap<String, JsonArray> COLUMN_MAP =
             new ConcurrentHashMap<>();
@@ -59,5 +67,9 @@ class UiConfiguration {
                 }
             });
         }
+    }
+
+    static JsonArray getColumn(final String key) {
+        return COLUMN_MAP.getOrDefault(key, new JsonArray());
     }
 }

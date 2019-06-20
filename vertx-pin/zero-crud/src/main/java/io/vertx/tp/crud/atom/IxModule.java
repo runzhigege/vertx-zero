@@ -15,6 +15,7 @@ public class IxModule implements Serializable {
     private String name;
     private String pojo;
     private IxField field;
+    private IxColumn column;
 
     @JsonSerialize(using = ClassSerializer.class)
     @JsonDeserialize(using = ClassDeserializer.class)
@@ -76,12 +77,21 @@ public class IxModule implements Serializable {
         this.header = header;
     }
 
+    public IxColumn getColumn() {
+        return this.column;
+    }
+
+    public void setColumn(final IxColumn column) {
+        this.column = column;
+    }
+
     @Override
     public String toString() {
-        return "IxConfig{" +
+        return "IxModule{" +
                 "name='" + this.name + '\'' +
                 ", pojo='" + this.pojo + '\'' +
                 ", field=" + this.field +
+                ", column=" + this.column +
                 ", pojoCls=" + this.pojoCls +
                 ", daoCls=" + this.daoCls +
                 ", header=" + this.header +

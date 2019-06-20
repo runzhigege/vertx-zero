@@ -7,7 +7,6 @@ import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.init.IxPin;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.tp.ke.extension.ui.ColumnStub;
-import io.vertx.up.aiki.Uson;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
@@ -57,8 +56,6 @@ public class GetActor {
                 return Ix.inColumns(request, config)
                         /* Header */
                         .compose(input -> IxActor.header().bind(request).procAsync(input, config))
-                        /* Remove User Filters */
-                        .compose(filters -> Uson.create(filters).remove("user").toFuture())
                         /* Fetch Full Columns */
                         .compose(stub::fetchFull)
                         /* Return Result */
