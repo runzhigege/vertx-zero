@@ -2,8 +2,8 @@ package io.vertx.tp.crud.refine;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.crud.atom.IxConfig;
 import io.vertx.tp.crud.atom.IxField;
+import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.up.aiki.Uarr;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.log.Annal;
@@ -31,7 +31,7 @@ class IxSerialize {
         return list;
     }
 
-    static JsonArray zipper(final JsonArray from, final JsonArray to, final IxConfig config) {
+    static JsonArray zipper(final JsonArray from, final JsonArray to, final IxModule config) {
         final IxField field = config.getField();
         final String keyField = field.getKey();
         return Uarr.create(from)
@@ -40,7 +40,7 @@ class IxSerialize {
     }
 
     @SuppressWarnings("all")
-    static <T> T entity(final JsonObject data, final IxConfig config) {
+    static <T> T entity(final JsonObject data, final IxModule config) {
         IxLog.infoDao(LOGGER, "Normalized: \n{0}", data.encodePrettily());
         final String pojo = config.getPojo();
         final T reference = Ut.isNil(pojo) ?
@@ -51,7 +51,7 @@ class IxSerialize {
     }
 
     @SuppressWarnings("all")
-    static <T> List<T> entity(final JsonArray data, final IxConfig config) {
+    static <T> List<T> entity(final JsonArray data, final IxModule config) {
         final List<T> list = new ArrayList<>();
         data.stream()
                 .filter(Objects::nonNull)

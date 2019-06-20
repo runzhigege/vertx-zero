@@ -1,7 +1,5 @@
 package io.vertx.tp.ui.atom;
 
-import com.fasterxml.jackson.databind.ClassDeserializer;
-import com.fasterxml.jackson.databind.ClassSerializer;
 import com.fasterxml.jackson.databind.JsonObjectDeserializer;
 import com.fasterxml.jackson.databind.JsonObjectSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -15,57 +13,33 @@ import java.io.Serializable;
  */
 public class UiConfig implements Serializable {
 
-    private transient String configPath;
+    private transient String definition;
 
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
-    private transient JsonObject configStatic;
+    private transient JsonObject mapping;
 
-    private transient Boolean supportDynamic;
-
-    @JsonSerialize(using = ClassSerializer.class)
-    @JsonDeserialize(using = ClassDeserializer.class)
-    private transient Class<?> componentColumn;
-
-    public String getConfigPath() {
-        return this.configPath;
+    public String getDefinition() {
+        return this.definition;
     }
 
-    public void setConfigPath(final String configPath) {
-        this.configPath = configPath;
+    public void setDefinition(final String definition) {
+        this.definition = definition;
     }
 
-    public JsonObject getConfigStatic() {
-        return this.configStatic;
+    public JsonObject getMapping() {
+        return this.mapping;
     }
 
-    public void setConfigStatic(final JsonObject configStatic) {
-        this.configStatic = configStatic;
-    }
-
-    public Boolean getSupportDynamic() {
-        return this.supportDynamic;
-    }
-
-    public void setSupportDynamic(final Boolean supportDynamic) {
-        this.supportDynamic = supportDynamic;
-    }
-
-    public Class<?> getComponentColumn() {
-        return this.componentColumn;
-    }
-
-    public void setComponentColumn(final Class<?> componentColumn) {
-        this.componentColumn = componentColumn;
+    public void setMapping(final JsonObject mapping) {
+        this.mapping = mapping;
     }
 
     @Override
     public String toString() {
         return "UiConfig{" +
-                "configPath='" + this.configPath + '\'' +
-                ", configStatic=" + this.configStatic +
-                ", supportDynamic=" + this.supportDynamic +
-                ", componentColumn=" + this.componentColumn +
+                "definition='" + this.definition + '\'' +
+                ", mapping=" + this.mapping +
                 '}';
     }
 }

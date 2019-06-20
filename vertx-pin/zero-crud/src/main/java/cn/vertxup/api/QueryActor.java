@@ -3,7 +3,7 @@ package cn.vertxup.api;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.actor.IxActor;
-import io.vertx.tp.crud.atom.IxConfig;
+import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.up.aiki.Ux;
@@ -71,7 +71,7 @@ public class QueryActor {
         });
     }
 
-    private Future<Boolean> isExisting(final UxJooq dao, final IxConfig config, final Envelop request) {
+    private Future<Boolean> isExisting(final UxJooq dao, final IxModule config, final Envelop request) {
         /* Parameters Extraction */
         final JsonObject body = Ux.getJson1(request);
         /* Pojo Extract */

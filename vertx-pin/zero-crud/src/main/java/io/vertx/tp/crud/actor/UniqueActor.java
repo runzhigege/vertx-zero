@@ -2,8 +2,8 @@ package io.vertx.tp.crud.actor;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.crud.atom.IxConfig;
 import io.vertx.tp.crud.atom.IxField;
+import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.eon.Values;
@@ -12,7 +12,7 @@ import io.zero.epic.Ut;
 class UniqueActor extends AbstractActor {
 
     @Override
-    public JsonObject proc(final JsonObject data, final IxConfig config) {
+    public JsonObject proc(final JsonObject data, final IxModule config) {
         /* Unique Keys */
         final IxField field = config.getField();
         final JsonArray unique = field.getUnique();

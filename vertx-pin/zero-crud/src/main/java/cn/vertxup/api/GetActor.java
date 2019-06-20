@@ -1,14 +1,19 @@
 package cn.vertxup.api;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.tp.crud.actor.IxActor;
 import io.vertx.tp.crud.cv.Addr;
+import io.vertx.tp.crud.init.IxPin;
 import io.vertx.tp.crud.refine.Ix;
+import io.vertx.tp.ke.extension.ui.ColumnStub;
 import io.vertx.up.aiki.Uson;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.atom.Envelop;
+
+import java.util.Objects;
 
 @Queue
 public class GetActor {
@@ -38,17 +43,27 @@ public class GetActor {
     public Future<Envelop> getFull(final Envelop request) {
         return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Get Stub */
-            // final ColSub stub = IxStub.getStub().on(dao).on(config);
-            return Ix.inColumns(request, config)
-                    /* Header */
-                    .compose(input -> IxActor.header().bind(request).procAsync(input, config))
-                    /* Remove User Filters */
-                    .compose(filters -> Uson.create(filters).remove("user").toFuture())
-                    /* Fetch Full Columns */
-                    .compose(Ux::debug)
-                    // .compose(stub::fetchFullColumns)
-                    /* Return Result */
-                    .compose(Http::success200);
+            final ColumnStub stub = IxPin.getStub();
+            /* If null */
+            if (Objects.isNull(stub)) {
+                /* No thing return from this interface */
+                return Ux.toFuture(new JsonArray())
+                        /* Return Result */
+                        .compose(Http::success200);
+            } else {
+                /* Bind Jooq */
+                stub.on(dao);
+                /* Standard workflow */
+                return Ix.inColumns(request, config)
+                        /* Header */
+                        .compose(input -> IxActor.header().bind(request).procAsync(input, config))
+                        /* Remove User Filters */
+                        .compose(filters -> Uson.create(filters).remove("user").toFuture())
+                        /* Fetch Full Columns */
+                        .compose(stub::fetchFull)
+                        /* Return Result */
+                        .compose(Http::success200);
+            }
         });
     }
 

@@ -1,7 +1,7 @@
 package io.vertx.tp.crud.init;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.crud.atom.IxConfig;
+import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.crud.cv.IxFolder;
 import io.vertx.tp.crud.cv.IxMsg;
 import io.vertx.tp.crud.refine.Ix;
@@ -29,7 +29,7 @@ class IxDao {
      */
     private static final Annal LOGGER = Annal.get(IxDao.class);
 
-    private static final ConcurrentMap<String, IxConfig> CONFIG_MAP =
+    private static final ConcurrentMap<String, IxModule> CONFIG_MAP =
             new ConcurrentHashMap<>();
     private static final Set<String> MODULE_REG =
             new HashSet<>();
@@ -50,7 +50,7 @@ class IxDao {
 
             Fn.safeNull(() -> {
                 /* 2. Deserialize to IxConfig object */
-                final IxConfig config = Ut.deserialize(configDao, IxConfig.class);
+                final IxModule config = Ut.deserialize(configDao, IxModule.class);
                 /* 3. Processed key */
                 final String key = file.replace(Strings.DOT + FileSuffix.JSON, Strings.EMPTY);
                 if (file.contains(config.getName())) {
@@ -86,9 +86,9 @@ class IxDao {
         MODULE_REG.addAll(definition);
     }
 
-    static IxConfig get(final String actor) {
+    static IxModule get(final String actor) {
         Ix.infoRest(LOGGER, "Actor = {0}", actor);
-        final IxConfig config = CONFIG_MAP.get(actor);
+        final IxModule config = CONFIG_MAP.get(actor);
         return Fn.getNull(null, () -> config, config);
     }
 
@@ -96,7 +96,7 @@ class IxDao {
         return MODULE_REG;
     }
 
-    static UxJooq get(final IxConfig config) {
+    static UxJooq get(final IxModule config) {
         return Fn.getNull(null, () -> {
             final Class<?> daoCls = config.getDaoCls();
             assert null != daoCls : " Should not be null, check configuration";
