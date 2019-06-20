@@ -20,6 +20,8 @@ import org.jooq.impl.DSL;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
@@ -255,7 +257,8 @@ class JooqAnalyzer {
             }
         }
         // Projection
-        final JsonArray projection = Ut.toJArray(inquiry.getProjection());
+        final Set<String> projectionSet = inquiry.getProjection();
+        final JsonArray projection = Objects.isNull(projectionSet) ? new JsonArray() : Ut.toJArray(projectionSet);
         // Returned one by one
         if (null != pagerStep) {
             return JooqResult.toResult(pagerStep.fetch(this.vertxDAO.mapper()), projection, this.pojo);
