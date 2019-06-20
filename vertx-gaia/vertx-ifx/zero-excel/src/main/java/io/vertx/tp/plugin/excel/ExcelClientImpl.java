@@ -88,8 +88,7 @@ public class ExcelClientImpl implements ExcelClient {
             final Set<T> entitySet = new HashSet<>();
             tables.forEach(table -> this.extract(table).forEach(json -> {
                 /* 4. Filters building */
-                final JsonObject filters = table.getFilters(json);
-                final T entity = this.saveEntity(filters, json, table);
+                final T entity = this.saveEntity(json, table);
                 if (Objects.nonNull(entity)) {
                     entitySet.add(entity);
                 }
@@ -101,17 +100,67 @@ public class ExcelClientImpl implements ExcelClient {
         }
     }
 
-    private <T> T saveEntity(final JsonObject filters, final JsonObject data, final ExTable table) {
+    private <T> T saveEntity(final JsonObject data, final ExTable table) {
         T reference = null;
         if (Objects.nonNull(table.getPojo()) && Objects.nonNull(table.getDao())) {
+            /*
+             * First, find the record by unique filters that defined in business here.
+             */
+            final JsonObject filters = table.whereUnique(data);
             LOGGER.info("[ Excel ] Filters: {0}, Table: {1}", filters.encode(), table.getName());
             final T entity = Ut.deserialize(data, table.getPojo());
             final UxJooq jooq = Ux.Jooq.on(table.getDao());
             if (null != jooq) {
+                /*
+                 * Unique filter to fetch single record database here.
+                 * Such as code + sigma
+                 */
                 final T queried = jooq.fetchOne(filters);
                 if (null == queried) {
-                    reference = jooq.insert(entity);
+                    /*
+                     * Here are two situations that we could be careful
+                     * 1. Unique Condition in source does not change, do insert here.
+                     * 2. Key Condition existing in database, do update here.
+                     */
+                    final String key = table.whereKey(data);
+                    if (Ut.isNil(key)) {
+                        /*
+                         * No definition of key here, insert directly.
+                         */
+                        reference = jooq.insert(entity);
+                    } else {
+                        /*
+                         * Double check to avoid issue:
+                         * java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'xxx' for key 'PRIMARY'
+                         */
+                        final T fetched = jooq.findById(key);
+                        if (null == fetched) {
+                            /*
+                             * In this situation, it common workflow to do data loading.
+                             */
+                            reference = jooq.insert(entity);
+                        } else {
+                            /*
+                             * In this situation, it means the old unique filters have been changed.
+                             * Such as:
+                             * From
+                             * id,      code,      sigma
+                             * 001,     AB.CODE,   5sLyA90qSo7
+                             *
+                             * To
+                             * id,      code,      sigma
+                             * 001,     AB.CODE1,  5sLyA90qSo7
+                             *
+                             * Above example could show that primary key has not been modified
+                             */
+                            reference = jooq.update(entity);
+                        }
+                    }
                 } else {
+                    /*
+                     * code, sigma did not change and we could identify this record
+                     * do update directly to modify old information.
+                     */
                     reference = jooq.update(entity);
                 }
             }
