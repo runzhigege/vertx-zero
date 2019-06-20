@@ -54,7 +54,10 @@ public class ExTable implements Serializable {
         return this.getConnect().getDao();
     }
 
-    public JsonObject getFilters(final JsonObject data) {
+    /*
+     * Business Unique
+     */
+    public JsonObject whereUnique(final JsonObject data) {
         final JsonArray unique = this.getConnect().getUnique();
         final JsonObject filters = new JsonObject();
         Ut.itJArray(unique, String.class, (field, index) -> {
@@ -64,6 +67,19 @@ public class ExTable implements Serializable {
             }
         });
         return filters;
+    }
+
+    /*
+     * System Unique
+     */
+    public <ID> ID whereKey(final JsonObject data) {
+        final String keyField = this.getConnect().getKey();
+        if (Objects.nonNull(keyField)) {
+            final Object id = data.getValue(keyField);
+            return null == id ? null : (ID) id;
+        } else {
+            return null;
+        }
     }
 
     /*
