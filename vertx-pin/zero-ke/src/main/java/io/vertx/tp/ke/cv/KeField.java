@@ -24,6 +24,7 @@ public interface KeField {
 
     String IDENTIFIER = "identifier";
     String DYNAMIC = "dynamic";
+    String VIEW = "view";
 
     String LOGO = "logo";
 

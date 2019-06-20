@@ -1,7 +1,7 @@
 package io.vertx.tp.rbac.accredit;
 
-import cn.vertxup.domain.tables.pojos.RResourceMatrix;
 import cn.vertxup.domain.tables.pojos.SResource;
+import cn.vertxup.domain.tables.pojos.SView;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.tp.rbac.atom.ScRequest;
@@ -19,7 +19,7 @@ public interface MatrixStub {
      */
     Future<DataBound> fetchBound(ScRequest request, SResource resource);
 
-    Future<RResourceMatrix> fetchMatrix(String user, String resourceId);
+    Future<SView> fetchMatrix(String user, String resourceId);
 
-    Future<List<RResourceMatrix>> fetchMatrix(JsonArray role, String resourceId);
+    Future<List<SView>> fetchMatrix(JsonArray role, String resourceId);
 }

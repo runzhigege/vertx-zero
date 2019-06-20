@@ -31,10 +31,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> implements Record12<String, String, String, String, String, Boolean, String, String, LocalDateTime, String, LocalDateTime, String>, ISPermission {
 
-    private static final long serialVersionUID = -694510254;
+    private static final long serialVersionUID = -491716758;
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.KEY</code>. 「key」- 权限ID
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.KEY</code>. 「key」- 权限ID
      */
     @Override
     public SPermissionRecord setKey(String value) {
@@ -43,7 +43,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.KEY</code>. 「key」- 权限ID
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.KEY</code>. 「key」- 权限ID
      */
     @Override
     public String getKey() {
@@ -51,7 +51,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.NAME</code>. 「name」- 权限名称
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.NAME</code>. 「name」- 权限名称
      */
     @Override
     public SPermissionRecord setName(String value) {
@@ -60,7 +60,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.NAME</code>. 「name」- 权限名称
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.NAME</code>. 「name」- 权限名称
      */
     @Override
     public String getName() {
@@ -68,7 +68,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.CODE</code>. 「code」- 权限系统码
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.CODE</code>. 「code」- 权限系统码
      */
     @Override
     public SPermissionRecord setCode(String value) {
@@ -77,7 +77,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.CODE</code>. 「code」- 权限系统码
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.CODE</code>. 「code」- 权限系统码
      */
     @Override
     public String getCode() {
@@ -85,7 +85,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.SIGMA</code>. 「sigma」- 绑定的统一标识
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.SIGMA</code>. 「sigma」- 绑定的统一标识
      */
     @Override
     public SPermissionRecord setSigma(String value) {
@@ -94,7 +94,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.SIGMA</code>. 「sigma」- 绑定的统一标识
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.SIGMA</code>. 「sigma」- 绑定的统一标识
      */
     @Override
     public String getSigma() {
@@ -102,7 +102,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public SPermissionRecord setLanguage(String value) {
@@ -111,7 +111,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public String getLanguage() {
@@ -119,7 +119,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public SPermissionRecord setActive(Boolean value) {
@@ -128,7 +128,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public Boolean getActive() {
@@ -136,7 +136,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.COMMENT</code>. 「comment」- 权限说明
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.COMMENT</code>. 「comment」- 权限说明
      */
     @Override
     public SPermissionRecord setComment(String value) {
@@ -145,7 +145,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.COMMENT</code>. 「comment」- 权限说明
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.COMMENT</code>. 「comment」- 权限说明
      */
     @Override
     public String getComment() {
@@ -153,7 +153,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public SPermissionRecord setMetadata(String value) {
@@ -162,7 +162,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public String getMetadata() {
@@ -170,7 +170,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
     public SPermissionRecord setCreatedAt(LocalDateTime value) {
@@ -179,7 +179,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
     public LocalDateTime getCreatedAt() {
@@ -187,7 +187,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.CREATED_BY</code>. 「createdBy」- 创建人
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
     public SPermissionRecord setCreatedBy(String value) {
@@ -196,7 +196,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.CREATED_BY</code>. 「createdBy」- 创建人
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
     public String getCreatedBy() {
@@ -204,7 +204,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
     public SPermissionRecord setUpdatedAt(LocalDateTime value) {
@@ -213,7 +213,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
     public LocalDateTime getUpdatedAt() {
@@ -221,7 +221,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
     public SPermissionRecord setUpdatedBy(String value) {
@@ -230,7 +230,7 @@ public class SPermissionRecord extends UpdatableRecordImpl<SPermissionRecord> im
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
     public String getUpdatedBy() {

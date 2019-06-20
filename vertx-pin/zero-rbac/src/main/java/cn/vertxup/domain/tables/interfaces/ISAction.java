@@ -24,202 +24,202 @@ import javax.annotation.Generated;
 public interface ISAction extends Serializable {
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.KEY</code>. 「key」- 操作ID
+     * Setter for <code>DB_ETERNAL.S_ACTION.KEY</code>. 「key」- 操作ID
      */
     public ISAction setKey(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.KEY</code>. 「key」- 操作ID
+     * Getter for <code>DB_ETERNAL.S_ACTION.KEY</code>. 「key」- 操作ID
      */
     public String getKey();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.NAME</code>. 「name」- 操作名称
+     * Setter for <code>DB_ETERNAL.S_ACTION.NAME</code>. 「name」- 操作名称
      */
     public ISAction setName(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.NAME</code>. 「name」- 操作名称
+     * Getter for <code>DB_ETERNAL.S_ACTION.NAME</code>. 「name」- 操作名称
      */
     public String getName();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.CODE</code>. 「code」- 操作码
+     * Setter for <code>DB_ETERNAL.S_ACTION.CODE</code>. 「code」- 操作码
      */
     public ISAction setCode(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.CODE</code>. 「code」- 操作码
+     * Getter for <code>DB_ETERNAL.S_ACTION.CODE</code>. 「code」- 操作码
      */
     public String getCode();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
+     * Setter for <code>DB_ETERNAL.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
      */
     public ISAction setResourceId(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
+     * Getter for <code>DB_ETERNAL.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
      */
     public String getResourceId();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.PERMISSION_ID</code>. 「permissionId」- 操作所属权限
+     * Setter for <code>DB_ETERNAL.S_ACTION.PERMISSION_ID</code>. 「permissionId」- 操作所属权限
      */
     public ISAction setPermissionId(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.PERMISSION_ID</code>. 「permissionId」- 操作所属权限
+     * Getter for <code>DB_ETERNAL.S_ACTION.PERMISSION_ID</code>. 「permissionId」- 操作所属权限
      */
     public String getPermissionId();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.LEVEL</code>. 「level」- 操作级别, ACL控制
+     * Setter for <code>DB_ETERNAL.S_ACTION.LEVEL</code>. 「level」- 操作级别, ACL控制
      */
     public ISAction setLevel(Integer value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.LEVEL</code>. 「level」- 操作级别, ACL控制
+     * Getter for <code>DB_ETERNAL.S_ACTION.LEVEL</code>. 「level」- 操作级别, ACL控制
      */
     public Integer getLevel();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.MODE</code>. 「mode」- 操作模式（决定是否触发副作用流程）, NODE | DEFINE
+     * Setter for <code>DB_ETERNAL.S_ACTION.MODE</code>. 「mode」- 操作模式（决定是否触发副作用流程）, NODE | DEFINE
      */
     public ISAction setMode(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.MODE</code>. 「mode」- 操作模式（决定是否触发副作用流程）, NODE | DEFINE
+     * Getter for <code>DB_ETERNAL.S_ACTION.MODE</code>. 「mode」- 操作模式（决定是否触发副作用流程）, NODE | DEFINE
      */
     public String getMode();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.URI</code>. 「uri」- 资源地址
+     * Setter for <code>DB_ETERNAL.S_ACTION.URI</code>. 「uri」- 资源地址
      */
     public ISAction setUri(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.URI</code>. 「uri」- 资源地址
+     * Getter for <code>DB_ETERNAL.S_ACTION.URI</code>. 「uri」- 资源地址
      */
     public String getUri();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.METHOD</code>. 「method」- 资源方法
+     * Setter for <code>DB_ETERNAL.S_ACTION.METHOD</code>. 「method」- 资源方法
      */
     public ISAction setMethod(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.METHOD</code>. 「method」- 资源方法
+     * Getter for <code>DB_ETERNAL.S_ACTION.METHOD</code>. 「method」- 资源方法
      */
     public String getMethod();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.SIGMA</code>. 「sigma」- 统一标识
+     * Setter for <code>DB_ETERNAL.S_ACTION.SIGMA</code>. 「sigma」- 统一标识
      */
     public ISAction setSigma(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.SIGMA</code>. 「sigma」- 统一标识
+     * Getter for <code>DB_ETERNAL.S_ACTION.SIGMA</code>. 「sigma」- 统一标识
      */
     public String getSigma();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.EFFECT_COMPONENT</code>. 「effectComponent」- mode = DEFINE，自定义副作用流程
+     * Setter for <code>DB_ETERNAL.S_ACTION.EFFECT_COMPONENT</code>. 「effectComponent」- mode = DEFINE，自定义副作用流程
      */
     public ISAction setEffectComponent(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.EFFECT_COMPONENT</code>. 「effectComponent」- mode = DEFINE，自定义副作用流程
+     * Getter for <code>DB_ETERNAL.S_ACTION.EFFECT_COMPONENT</code>. 「effectComponent」- mode = DEFINE，自定义副作用流程
      */
     public String getEffectComponent();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.EFFECT_CONFIG</code>. 「effectConfig」- 副作用配置信息
+     * Setter for <code>DB_ETERNAL.S_ACTION.EFFECT_CONFIG</code>. 「effectConfig」- 副作用配置信息
      */
     public ISAction setEffectConfig(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.EFFECT_CONFIG</code>. 「effectConfig」- 副作用配置信息
+     * Getter for <code>DB_ETERNAL.S_ACTION.EFFECT_CONFIG</code>. 「effectConfig」- 副作用配置信息
      */
     public String getEffectConfig();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ETERNAL.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
      */
     public ISAction setLanguage(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ETERNAL.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
      */
     public String getLanguage();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ETERNAL.S_ACTION.ACTIVE</code>. 「active」- 是否启用
      */
     public ISAction setActive(Boolean value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ETERNAL.S_ACTION.ACTIVE</code>. 「active」- 是否启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ETERNAL.S_ACTION.METADATA</code>. 「metadata」- 附加配置数据
      */
     public ISAction setMetadata(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ETERNAL.S_ACTION.METADATA</code>. 「metadata」- 附加配置数据
      */
     public String getMetadata();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.COMMENT</code>. 「action」- 操作说明
+     * Setter for <code>DB_ETERNAL.S_ACTION.COMMENT</code>. 「action」- 操作说明
      */
     public ISAction setComment(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.COMMENT</code>. 「action」- 操作说明
+     * Getter for <code>DB_ETERNAL.S_ACTION.COMMENT</code>. 「action」- 操作说明
      */
     public String getComment();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Setter for <code>DB_ETERNAL.S_ACTION.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public ISAction setCreatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Getter for <code>DB_ETERNAL.S_ACTION.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public LocalDateTime getCreatedAt();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.CREATED_BY</code>. 「createdBy」- 创建人
+     * Setter for <code>DB_ETERNAL.S_ACTION.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public ISAction setCreatedBy(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.CREATED_BY</code>. 「createdBy」- 创建人
+     * Getter for <code>DB_ETERNAL.S_ACTION.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public String getCreatedBy();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Setter for <code>DB_ETERNAL.S_ACTION.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     public ISAction setUpdatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Getter for <code>DB_ETERNAL.S_ACTION.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     public LocalDateTime getUpdatedAt();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_ACTION.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Setter for <code>DB_ETERNAL.S_ACTION.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public ISAction setUpdatedBy(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_ACTION.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Getter for <code>DB_ETERNAL.S_ACTION.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public String getUpdatedBy();
 

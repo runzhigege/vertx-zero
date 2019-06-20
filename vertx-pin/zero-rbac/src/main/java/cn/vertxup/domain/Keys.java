@@ -7,7 +7,6 @@ package cn.vertxup.domain;
 import cn.vertxup.domain.tables.OAccessToken;
 import cn.vertxup.domain.tables.OUser;
 import cn.vertxup.domain.tables.RGroupRole;
-import cn.vertxup.domain.tables.RResourceMatrix;
 import cn.vertxup.domain.tables.RRolePerm;
 import cn.vertxup.domain.tables.RUserGroup;
 import cn.vertxup.domain.tables.RUserRole;
@@ -17,10 +16,10 @@ import cn.vertxup.domain.tables.SPermission;
 import cn.vertxup.domain.tables.SResource;
 import cn.vertxup.domain.tables.SRole;
 import cn.vertxup.domain.tables.SUser;
+import cn.vertxup.domain.tables.SView;
 import cn.vertxup.domain.tables.records.OAccessTokenRecord;
 import cn.vertxup.domain.tables.records.OUserRecord;
 import cn.vertxup.domain.tables.records.RGroupRoleRecord;
-import cn.vertxup.domain.tables.records.RResourceMatrixRecord;
 import cn.vertxup.domain.tables.records.RRolePermRecord;
 import cn.vertxup.domain.tables.records.RUserGroupRecord;
 import cn.vertxup.domain.tables.records.RUserRoleRecord;
@@ -30,6 +29,7 @@ import cn.vertxup.domain.tables.records.SPermissionRecord;
 import cn.vertxup.domain.tables.records.SResourceRecord;
 import cn.vertxup.domain.tables.records.SRoleRecord;
 import cn.vertxup.domain.tables.records.SUserRecord;
+import cn.vertxup.domain.tables.records.SViewRecord;
 
 import javax.annotation.Generated;
 
@@ -39,7 +39,7 @@ import org.jooq.impl.Internal;
 
 /**
  * A class modelling foreign key relationships and constraints of tables of 
- * the <code>DB_ORIGIN_X</code> schema.
+ * the <code>DB_ETERNAL</code> schema.
  */
 @Generated(
     value = {
@@ -65,8 +65,6 @@ public class Keys {
     public static final UniqueKey<OUserRecord> KEY_O_USER_CLIENT_SECRET = UniqueKeys0.KEY_O_USER_CLIENT_SECRET;
     public static final UniqueKey<OUserRecord> KEY_O_USER_CLIENT_ID = UniqueKeys0.KEY_O_USER_CLIENT_ID;
     public static final UniqueKey<RGroupRoleRecord> KEY_R_GROUP_ROLE_PRIMARY = UniqueKeys0.KEY_R_GROUP_ROLE_PRIMARY;
-    public static final UniqueKey<RResourceMatrixRecord> KEY_R_RESOURCE_MATRIX_PRIMARY = UniqueKeys0.KEY_R_RESOURCE_MATRIX_PRIMARY;
-    public static final UniqueKey<RResourceMatrixRecord> KEY_R_RESOURCE_MATRIX_OWNER = UniqueKeys0.KEY_R_RESOURCE_MATRIX_OWNER;
     public static final UniqueKey<RRolePermRecord> KEY_R_ROLE_PERM_PRIMARY = UniqueKeys0.KEY_R_ROLE_PERM_PRIMARY;
     public static final UniqueKey<RUserGroupRecord> KEY_R_USER_GROUP_PRIMARY = UniqueKeys0.KEY_R_USER_GROUP_PRIMARY;
     public static final UniqueKey<RUserRoleRecord> KEY_R_USER_ROLE_PRIMARY = UniqueKeys0.KEY_R_USER_ROLE_PRIMARY;
@@ -87,6 +85,8 @@ public class Keys {
     public static final UniqueKey<SUserRecord> KEY_S_USER_USERNAME = UniqueKeys0.KEY_S_USER_USERNAME;
     public static final UniqueKey<SUserRecord> KEY_S_USER_MOBILE = UniqueKeys0.KEY_S_USER_MOBILE;
     public static final UniqueKey<SUserRecord> KEY_S_USER_EMAIL = UniqueKeys0.KEY_S_USER_EMAIL;
+    public static final UniqueKey<SViewRecord> KEY_S_VIEW_PRIMARY = UniqueKeys0.KEY_S_VIEW_PRIMARY;
+    public static final UniqueKey<SViewRecord> KEY_S_VIEW_OWNER = UniqueKeys0.KEY_S_VIEW_OWNER;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -103,8 +103,6 @@ public class Keys {
         public static final UniqueKey<OUserRecord> KEY_O_USER_CLIENT_SECRET = Internal.createUniqueKey(OUser.O_USER, "KEY_O_USER_CLIENT_SECRET", OUser.O_USER.CLIENT_SECRET);
         public static final UniqueKey<OUserRecord> KEY_O_USER_CLIENT_ID = Internal.createUniqueKey(OUser.O_USER, "KEY_O_USER_CLIENT_ID", OUser.O_USER.CLIENT_ID);
         public static final UniqueKey<RGroupRoleRecord> KEY_R_GROUP_ROLE_PRIMARY = Internal.createUniqueKey(RGroupRole.R_GROUP_ROLE, "KEY_R_GROUP_ROLE_PRIMARY", RGroupRole.R_GROUP_ROLE.GROUP_ID, RGroupRole.R_GROUP_ROLE.ROLE_ID);
-        public static final UniqueKey<RResourceMatrixRecord> KEY_R_RESOURCE_MATRIX_PRIMARY = Internal.createUniqueKey(RResourceMatrix.R_RESOURCE_MATRIX, "KEY_R_RESOURCE_MATRIX_PRIMARY", RResourceMatrix.R_RESOURCE_MATRIX.KEY);
-        public static final UniqueKey<RResourceMatrixRecord> KEY_R_RESOURCE_MATRIX_OWNER = Internal.createUniqueKey(RResourceMatrix.R_RESOURCE_MATRIX, "KEY_R_RESOURCE_MATRIX_OWNER", RResourceMatrix.R_RESOURCE_MATRIX.OWNER, RResourceMatrix.R_RESOURCE_MATRIX.OWNER_TYPE, RResourceMatrix.R_RESOURCE_MATRIX.RESOURCE_ID);
         public static final UniqueKey<RRolePermRecord> KEY_R_ROLE_PERM_PRIMARY = Internal.createUniqueKey(RRolePerm.R_ROLE_PERM, "KEY_R_ROLE_PERM_PRIMARY", RRolePerm.R_ROLE_PERM.PERM_ID, RRolePerm.R_ROLE_PERM.ROLE_ID);
         public static final UniqueKey<RUserGroupRecord> KEY_R_USER_GROUP_PRIMARY = Internal.createUniqueKey(RUserGroup.R_USER_GROUP, "KEY_R_USER_GROUP_PRIMARY", RUserGroup.R_USER_GROUP.GROUP_ID, RUserGroup.R_USER_GROUP.USER_ID);
         public static final UniqueKey<RUserRoleRecord> KEY_R_USER_ROLE_PRIMARY = Internal.createUniqueKey(RUserRole.R_USER_ROLE, "KEY_R_USER_ROLE_PRIMARY", RUserRole.R_USER_ROLE.USER_ID, RUserRole.R_USER_ROLE.ROLE_ID);
@@ -125,5 +123,7 @@ public class Keys {
         public static final UniqueKey<SUserRecord> KEY_S_USER_USERNAME = Internal.createUniqueKey(SUser.S_USER, "KEY_S_USER_USERNAME", SUser.S_USER.USERNAME, SUser.S_USER.SIGMA);
         public static final UniqueKey<SUserRecord> KEY_S_USER_MOBILE = Internal.createUniqueKey(SUser.S_USER, "KEY_S_USER_MOBILE", SUser.S_USER.MOBILE, SUser.S_USER.SIGMA);
         public static final UniqueKey<SUserRecord> KEY_S_USER_EMAIL = Internal.createUniqueKey(SUser.S_USER, "KEY_S_USER_EMAIL", SUser.S_USER.EMAIL, SUser.S_USER.SIGMA);
+        public static final UniqueKey<SViewRecord> KEY_S_VIEW_PRIMARY = Internal.createUniqueKey(SView.S_VIEW, "KEY_S_VIEW_PRIMARY", SView.S_VIEW.KEY);
+        public static final UniqueKey<SViewRecord> KEY_S_VIEW_OWNER = Internal.createUniqueKey(SView.S_VIEW, "KEY_S_VIEW_OWNER", SView.S_VIEW.OWNER, SView.S_VIEW.OWNER_TYPE, SView.S_VIEW.RESOURCE_ID, SView.S_VIEW.NAME);
     }
 }

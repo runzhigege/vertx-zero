@@ -31,71 +31,71 @@ import java.util.List;
 public class OUser extends TableImpl<OUserRecord> {
 
     /**
-     * The reference instance of <code>DB_ORIGIN_X.O_USER</code>
+     * The reference instance of <code>DB_ETERNAL.O_USER</code>
      */
     public static final OUser O_USER = new OUser();
-    private static final long serialVersionUID = -293967187;
+    private static final long serialVersionUID = 935260147;
     /**
-     * The column <code>DB_ORIGIN_X.O_USER.KEY</code>. 「key」- OAuth用户ID
+     * The column <code>DB_ETERNAL.O_USER.KEY</code>. 「key」- OAuth用户ID
      */
     public final TableField<OUserRecord, String> KEY = createField("KEY", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「key」- OAuth用户ID");
     /**
-     * The column <code>DB_ORIGIN_X.O_USER.REDIRECT_URI</code>. 「redirectUri」- 回调重定向地址
+     * The column <code>DB_ETERNAL.O_USER.REDIRECT_URI</code>. 「redirectUri」- 回调重定向地址
      */
     public final TableField<OUserRecord, String> REDIRECT_URI = createField("REDIRECT_URI", org.jooq.impl.SQLDataType.CLOB, this, "「redirectUri」- 回调重定向地址");
     /**
-     * The column <code>DB_ORIGIN_X.O_USER.CODE</code>. 「code」- 系统编号
+     * The column <code>DB_ETERNAL.O_USER.CODE</code>. 「code」- 系统编号
      */
     public final TableField<OUserRecord, String> CODE = createField("CODE", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「code」- 系统编号");
     /**
-     * The column <code>DB_ORIGIN_X.O_USER.CLIENT_SECRET</code>. 「clientSecret」- 客户端密钥
+     * The column <code>DB_ETERNAL.O_USER.CLIENT_SECRET</code>. 「clientSecret」- 客户端密钥
      */
     public final TableField<OUserRecord, String> CLIENT_SECRET = createField("CLIENT_SECRET", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「clientSecret」- 客户端密钥");
     /**
-     * The column <code>DB_ORIGIN_X.O_USER.CLIENT_ID</code>. 「clientId」- 客户端ID
+     * The column <code>DB_ETERNAL.O_USER.CLIENT_ID</code>. 「clientId」- 客户端ID
      */
     public final TableField<OUserRecord, String> CLIENT_ID = createField("CLIENT_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「clientId」- 客户端ID");
     /**
-     * The column <code>DB_ORIGIN_X.O_USER.GRANT_TYPE</code>. 「grantType」- 认证方式
+     * The column <code>DB_ETERNAL.O_USER.GRANT_TYPE</code>. 「grantType」- 认证方式
      */
     public final TableField<OUserRecord, String> GRANT_TYPE = createField("GRANT_TYPE", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「grantType」- 认证方式");
     /**
-     * The column <code>DB_ORIGIN_X.O_USER.SCOPE</code>. 「scope」- 对应名空间，以应用为中心
+     * The column <code>DB_ETERNAL.O_USER.SCOPE</code>. 「scope」- 对应名空间，以应用为中心
      */
     public final TableField<OUserRecord, String> SCOPE = createField("SCOPE", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「scope」- 对应名空间，以应用为中心");
     /**
-     * The column <code>DB_ORIGIN_X.O_USER.STATE</code>. 「state」- 客户端状态
+     * The column <code>DB_ETERNAL.O_USER.STATE</code>. 「state」- 客户端状态
      */
     public final TableField<OUserRecord, String> STATE = createField("STATE", org.jooq.impl.SQLDataType.VARCHAR(128), this, "「state」- 客户端状态");
     /**
-     * The column <code>DB_ORIGIN_X.O_USER.LANGUAGE</code>. 「language」- 使用的语言
+     * The column <code>DB_ETERNAL.O_USER.LANGUAGE</code>. 「language」- 使用的语言
      */
     public final TableField<OUserRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
     /**
-     * The column <code>DB_ORIGIN_X.O_USER.ACTIVE</code>. 「active」- 是否启用
+     * The column <code>DB_ETERNAL.O_USER.ACTIVE</code>. 「active」- 是否启用
      */
     public final TableField<OUserRecord, Boolean> ACTIVE = createField("ACTIVE", org.jooq.impl.SQLDataType.BIT, this, "「active」- 是否启用");
     /**
-     * The column <code>DB_ORIGIN_X.O_USER.METADATA</code>. 「metadata」- 附加配置数据
+     * The column <code>DB_ETERNAL.O_USER.METADATA</code>. 「metadata」- 附加配置数据
      */
     public final TableField<OUserRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置数据");
 
     /**
-     * Create a <code>DB_ORIGIN_X.O_USER</code> table reference
+     * Create a <code>DB_ETERNAL.O_USER</code> table reference
      */
     public OUser() {
         this(DSL.name("O_USER"), null);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.O_USER</code> table reference
+     * Create an aliased <code>DB_ETERNAL.O_USER</code> table reference
      */
     public OUser(String alias) {
         this(DSL.name(alias), O_USER);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.O_USER</code> table reference
+     * Create an aliased <code>DB_ETERNAL.O_USER</code> table reference
      */
     public OUser(Name alias) {
         this(alias, O_USER);
@@ -122,7 +122,7 @@ public class OUser extends TableImpl<OUserRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Db.DB_ORIGIN_X;
+        return Db.DB_ETERNAL;
     }
 
     /**

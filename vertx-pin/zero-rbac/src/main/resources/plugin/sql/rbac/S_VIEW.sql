@@ -1,13 +1,14 @@
 -- liquibase formatted sql
 
--- changeset Lang:ox-resource-matrix-1
+-- changeset Lang:ox-view-1
 -- 用户/ 角色资源限定表，用于处理资源的行、列基本信息
-DROP TABLE IF EXISTS R_RESOURCE_MATRIX;
-CREATE TABLE IF NOT EXISTS R_RESOURCE_MATRIX
+DROP TABLE IF EXISTS S_VIEW;
+CREATE TABLE IF NOT EXISTS S_VIEW
 (
     -- 资源拥有者：按角色/用户 处理
     `KEY`         VARCHAR(36) COMMENT '「key」- 限定记录ID',
     -- 用户优先模式，角色为默认（S_RESOURCE需要传入角色计算模式，多个角色处理时支持多角色的筛选字段需要保存在内
+    `NAME`        VARCHAR(255) COMMENT '「name」- 视图名称，每个 MATRIX 对应一个视图',
     `OWNER`       VARCHAR(36) COMMENT '「owner」- 用户 / 角色ID',
     `OWNER_TYPE`  VARCHAR(5) COMMENT '「ownerType」- ROLE 角色，USER 用户',
     `RESOURCE_ID` VARCHAR(36) COMMENT '「resourceId」- 关联资源ID',
@@ -60,9 +61,9 @@ CREATE TABLE IF NOT EXISTS R_RESOURCE_MATRIX
     PRIMARY KEY (`KEY`)
 );
 
--- changeset Lang:ox-resource-matrix-2
+-- changeset Lang:ox-view-2
 -- Unique
 -- 用户、资源：唯一记录：高优先级
 -- 角色、资源：唯一记录：低优先级
-ALTER TABLE R_RESOURCE_MATRIX
-    ADD UNIQUE (`OWNER`, `OWNER_TYPE`, `RESOURCE_ID`);
+ALTER TABLE S_VIEW
+    ADD UNIQUE (`OWNER`, `OWNER_TYPE`, `RESOURCE_ID`, `NAME`);

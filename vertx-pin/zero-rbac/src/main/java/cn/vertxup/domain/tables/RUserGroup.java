@@ -31,39 +31,39 @@ import java.util.List;
 public class RUserGroup extends TableImpl<RUserGroupRecord> {
 
     /**
-     * The reference instance of <code>DB_ORIGIN_X.R_USER_GROUP</code>
+     * The reference instance of <code>DB_ETERNAL.R_USER_GROUP</code>
      */
     public static final RUserGroup R_USER_GROUP = new RUserGroup();
-    private static final long serialVersionUID = -1839187802;
+    private static final long serialVersionUID = 1170270290;
     /**
-     * The column <code>DB_ORIGIN_X.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
+     * The column <code>DB_ETERNAL.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     public final TableField<RUserGroupRecord, String> GROUP_ID = createField("GROUP_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「groupId」- 关联组ID");
     /**
-     * The column <code>DB_ORIGIN_X.R_USER_GROUP.USER_ID</code>. 「userId」- 关联用户ID
+     * The column <code>DB_ETERNAL.R_USER_GROUP.USER_ID</code>. 「userId」- 关联用户ID
      */
     public final TableField<RUserGroupRecord, String> USER_ID = createField("USER_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「userId」- 关联用户ID");
     /**
-     * The column <code>DB_ORIGIN_X.R_USER_GROUP.PRIORITY</code>. 「priority」- 组优先级
+     * The column <code>DB_ETERNAL.R_USER_GROUP.PRIORITY</code>. 「priority」- 组优先级
      */
     public final TableField<RUserGroupRecord, Integer> PRIORITY = createField("PRIORITY", org.jooq.impl.SQLDataType.INTEGER, this, "「priority」- 组优先级");
 
     /**
-     * Create a <code>DB_ORIGIN_X.R_USER_GROUP</code> table reference
+     * Create a <code>DB_ETERNAL.R_USER_GROUP</code> table reference
      */
     public RUserGroup() {
         this(DSL.name("R_USER_GROUP"), null);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.R_USER_GROUP</code> table reference
+     * Create an aliased <code>DB_ETERNAL.R_USER_GROUP</code> table reference
      */
     public RUserGroup(String alias) {
         this(DSL.name(alias), R_USER_GROUP);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.R_USER_GROUP</code> table reference
+     * Create an aliased <code>DB_ETERNAL.R_USER_GROUP</code> table reference
      */
     public RUserGroup(Name alias) {
         this(alias, R_USER_GROUP);
@@ -90,7 +90,7 @@ public class RUserGroup extends TableImpl<RUserGroupRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Db.DB_ORIGIN_X;
+        return Db.DB_ETERNAL;
     }
 
     /**

@@ -31,10 +31,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implements Record19<String, String, String, String, Integer, String, String, String, String, String, String, String, String, Boolean, String, LocalDateTime, String, LocalDateTime, String>, ISResource {
 
-    private static final long serialVersionUID = -866340434;
+    private static final long serialVersionUID = -1687635274;
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.KEY</code>. 「key」- 资源对应的ID
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.KEY</code>. 「key」- 资源对应的ID
      */
     @Override
     public SResourceRecord setKey(String value) {
@@ -43,7 +43,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.KEY</code>. 「key」- 资源对应的ID
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.KEY</code>. 「key」- 资源对应的ID
      */
     @Override
     public String getKey() {
@@ -51,7 +51,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.CODE</code>. 「code」- 资源编号
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.CODE</code>. 「code」- 资源编号
      */
     @Override
     public SResourceRecord setCode(String value) {
@@ -60,7 +60,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.CODE</code>. 「code」- 资源编号
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.CODE</code>. 「code」- 资源编号
      */
     @Override
     public String getCode() {
@@ -68,7 +68,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.NAME</code>. 「name」- 资源名称
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.NAME</code>. 「name」- 资源名称
      */
     @Override
     public SResourceRecord setName(String value) {
@@ -77,7 +77,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.NAME</code>. 「name」- 资源名称
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.NAME</code>. 「name」- 资源名称
      */
     @Override
     public String getName() {
@@ -85,7 +85,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.COMMENT</code>. 「comment」- 备注信息
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.COMMENT</code>. 「comment」- 备注信息
      */
     @Override
     public SResourceRecord setComment(String value) {
@@ -94,7 +94,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.COMMENT</code>. 「comment」- 备注信息
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.COMMENT</code>. 「comment」- 备注信息
      */
     @Override
     public String getComment() {
@@ -102,7 +102,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.LEVEL</code>. 「level」- 资源需求级别
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.LEVEL</code>. 「level」- 资源需求级别
      */
     @Override
     public SResourceRecord setLevel(Integer value) {
@@ -111,7 +111,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.LEVEL</code>. 「level」- 资源需求级别
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.LEVEL</code>. 「level」- 资源需求级别
      */
     @Override
     public Integer getLevel() {
@@ -119,7 +119,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.MODE_ROLE</code>. 「modeRole」- 该资源查找角色的模式
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.MODE_ROLE</code>. 「modeRole」- 该资源查找角色的模式
      */
     @Override
     public SResourceRecord setModeRole(String value) {
@@ -128,7 +128,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.MODE_ROLE</code>. 「modeRole」- 该资源查找角色的模式
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.MODE_ROLE</code>. 「modeRole」- 该资源查找角色的模式
      */
     @Override
     public String getModeRole() {
@@ -136,7 +136,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.MODE_GROUP</code>. 「modeGroup」- 该资源查找组的模式
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.MODE_GROUP</code>. 「modeGroup」- 该资源查找组的模式
      */
     @Override
     public SResourceRecord setModeGroup(String value) {
@@ -145,7 +145,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.MODE_GROUP</code>. 「modeGroup」- 该资源查找组的模式
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.MODE_GROUP</code>. 「modeGroup」- 该资源查找组的模式
      */
     @Override
     public String getModeGroup() {
@@ -153,7 +153,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.MODE_TREE</code>. 「modeTree」- 该资源处理树（用户组）的模式
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.MODE_TREE</code>. 「modeTree」- 该资源处理树（用户组）的模式
      */
     @Override
     public SResourceRecord setModeTree(String value) {
@@ -162,7 +162,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.MODE_TREE</code>. 「modeTree」- 该资源处理树（用户组）的模式
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.MODE_TREE</code>. 「modeTree」- 该资源处理树（用户组）的模式
      */
     @Override
     public String getModeTree() {
@@ -170,7 +170,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.SIGMA</code>. 「sigma」- 统一标识
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
     public SResourceRecord setSigma(String value) {
@@ -179,7 +179,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.SIGMA</code>. 「sigma」- 统一标识
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.SIGMA</code>. 「sigma」- 统一标识
      */
     @Override
     public String getSigma() {
@@ -187,7 +187,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.MODEL_ID</code>. 「modelId」- 资源对应的模型identifier
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.MODEL_ID</code>. 「modelId」- 资源对应的模型identifier
      */
     @Override
     public SResourceRecord setModelId(String value) {
@@ -196,7 +196,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.MODEL_ID</code>. 「modelId」- 资源对应的模型identifier
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.MODEL_ID</code>. 「modelId」- 资源对应的模型identifier
      */
     @Override
     public String getModelId() {
@@ -204,7 +204,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.MODEL_KEY</code>. 「modelKey」- 资源对应的单条记录ID
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.MODEL_KEY</code>. 「modelKey」- 资源对应的单条记录ID
      */
     @Override
     public SResourceRecord setModelKey(String value) {
@@ -213,7 +213,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.MODEL_KEY</code>. 「modelKey」- 资源对应的单条记录ID
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.MODEL_KEY</code>. 「modelKey」- 资源对应的单条记录ID
      */
     @Override
     public String getModelKey() {
@@ -221,7 +221,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.CATEGORY</code>. 「category」- 资源分类
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.CATEGORY</code>. 「category」- 资源分类
      */
     @Override
     public SResourceRecord setCategory(String value) {
@@ -230,7 +230,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.CATEGORY</code>. 「category」- 资源分类
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.CATEGORY</code>. 「category」- 资源分类
      */
     @Override
     public String getCategory() {
@@ -238,7 +238,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public SResourceRecord setLanguage(String value) {
@@ -247,7 +247,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.LANGUAGE</code>. 「language」- 使用的语言
      */
     @Override
     public String getLanguage() {
@@ -255,7 +255,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public SResourceRecord setActive(Boolean value) {
@@ -264,7 +264,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.ACTIVE</code>. 「active」- 是否启用
      */
     @Override
     public Boolean getActive() {
@@ -272,7 +272,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public SResourceRecord setMetadata(String value) {
@@ -281,7 +281,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.METADATA</code>. 「metadata」- 附加配置数据
      */
     @Override
     public String getMetadata() {
@@ -289,7 +289,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
     public SResourceRecord setCreatedAt(LocalDateTime value) {
@@ -298,7 +298,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     @Override
     public LocalDateTime getCreatedAt() {
@@ -306,7 +306,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.CREATED_BY</code>. 「createdBy」- 创建人
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
     public SResourceRecord setCreatedBy(String value) {
@@ -315,7 +315,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.CREATED_BY</code>. 「createdBy」- 创建人
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.CREATED_BY</code>. 「createdBy」- 创建人
      */
     @Override
     public String getCreatedBy() {
@@ -323,7 +323,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
     public SResourceRecord setUpdatedAt(LocalDateTime value) {
@@ -332,7 +332,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     @Override
     public LocalDateTime getUpdatedAt() {
@@ -340,7 +340,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_RESOURCE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Setter for <code>DB_ETERNAL.S_RESOURCE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
     public SResourceRecord setUpdatedBy(String value) {
@@ -349,7 +349,7 @@ public class SResourceRecord extends UpdatableRecordImpl<SResourceRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_RESOURCE.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Getter for <code>DB_ETERNAL.S_RESOURCE.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     @Override
     public String getUpdatedBy() {

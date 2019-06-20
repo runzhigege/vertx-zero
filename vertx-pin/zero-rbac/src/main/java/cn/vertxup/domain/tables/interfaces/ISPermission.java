@@ -24,122 +24,122 @@ import javax.annotation.Generated;
 public interface ISPermission extends Serializable {
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.KEY</code>. 「key」- 权限ID
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.KEY</code>. 「key」- 权限ID
      */
     public ISPermission setKey(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.KEY</code>. 「key」- 权限ID
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.KEY</code>. 「key」- 权限ID
      */
     public String getKey();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.NAME</code>. 「name」- 权限名称
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.NAME</code>. 「name」- 权限名称
      */
     public ISPermission setName(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.NAME</code>. 「name」- 权限名称
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.NAME</code>. 「name」- 权限名称
      */
     public String getName();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.CODE</code>. 「code」- 权限系统码
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.CODE</code>. 「code」- 权限系统码
      */
     public ISPermission setCode(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.CODE</code>. 「code」- 权限系统码
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.CODE</code>. 「code」- 权限系统码
      */
     public String getCode();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.SIGMA</code>. 「sigma」- 绑定的统一标识
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.SIGMA</code>. 「sigma」- 绑定的统一标识
      */
     public ISPermission setSigma(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.SIGMA</code>. 「sigma」- 绑定的统一标识
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.SIGMA</code>. 「sigma」- 绑定的统一标识
      */
     public String getSigma();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.LANGUAGE</code>. 「language」- 使用的语言
      */
     public ISPermission setLanguage(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.LANGUAGE</code>. 「language」- 使用的语言
      */
     public String getLanguage();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.ACTIVE</code>. 「active」- 是否启用
      */
     public ISPermission setActive(Boolean value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.ACTIVE</code>. 「active」- 是否启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.COMMENT</code>. 「comment」- 权限说明
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.COMMENT</code>. 「comment」- 权限说明
      */
     public ISPermission setComment(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.COMMENT</code>. 「comment」- 权限说明
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.COMMENT</code>. 「comment」- 权限说明
      */
     public String getComment();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.METADATA</code>. 「metadata」- 附加配置数据
      */
     public ISPermission setMetadata(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.METADATA</code>. 「metadata」- 附加配置数据
      */
     public String getMetadata();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public ISPermission setCreatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public LocalDateTime getCreatedAt();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.CREATED_BY</code>. 「createdBy」- 创建人
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public ISPermission setCreatedBy(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.CREATED_BY</code>. 「createdBy」- 创建人
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public String getCreatedBy();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     public ISPermission setUpdatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     public LocalDateTime getUpdatedAt();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_PERMISSION.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Setter for <code>DB_ETERNAL.S_PERMISSION.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public ISPermission setUpdatedBy(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_PERMISSION.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Getter for <code>DB_ETERNAL.S_PERMISSION.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public String getUpdatedBy();
 
