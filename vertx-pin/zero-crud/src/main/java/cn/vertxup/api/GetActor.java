@@ -7,12 +7,14 @@ import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.init.IxPin;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.tp.ke.extension.ui.ColumnStub;
+import io.vertx.tp.ke.extension.view.ColumnMyStub;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.atom.Envelop;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
 @Queue
 public class GetActor {
@@ -39,28 +41,18 @@ public class GetActor {
      * GET: /api/columns/full/{actor}
      */
     @Address(Addr.Get.COLUMN_FULL)
+    @SuppressWarnings("all")
     public Future<Envelop> getFull(final Envelop request) {
         return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Get Stub */
             final ColumnStub stub = IxPin.getStub();
-            /* If null */
-            if (Objects.isNull(stub)) {
-                /* No thing return from this interface */
-                return Ux.toFuture(new JsonArray())
-                        /* Return Result */
-                        .compose(Http::success200);
-            } else {
-                /* Bind Jooq */
-                stub.on(dao);
-                /* Standard workflow */
-                return Ix.inColumns(request, config)
-                        /* Header */
-                        .compose(input -> IxActor.header().bind(request).procAsync(input, config))
-                        /* Fetch Full Columns */
-                        .compose(stub::fetchFull)
-                        /* Return Result */
-                        .compose(Http::success200);
-            }
+            return this.getUniform(stub, () -> Ix.inColumns(request, config)
+                    /* Header */
+                    .compose(input -> IxActor.header().bind(request).procAsync(input, config))
+                    /* Fetch Full Columns */
+                    .compose(stub.on(dao)::fetchFull)
+                    /* Return Result */
+                    .compose(Http::success200));
         });
     }
 
@@ -68,10 +60,30 @@ public class GetActor {
      * GET: /api/columns/my/{actor}
      */
     @Address(Addr.Get.COLUMN_MY)
+    @SuppressWarnings("all")
     public Future<Envelop> getMy(final Envelop request) {
         return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
-
-            return null;
+            /* Get Stub */
+            final ColumnMyStub stub = IxPin.getMyStub();
+            return this.getUniform(stub, () -> Ix.inColumns(request, config)
+                    /* Header */
+                    .compose(input -> IxActor.header().bind(request).procAsync(input, config))
+                    /* Fetch My Columns */
+                    .compose(stub.on(dao)::fetchMy)
+                    /* Return Result */
+                    .compose(Http::success200));
         });
+    }
+
+    private <T> Future<Envelop> getUniform(final T stub, final Supplier<Future<Envelop>> executor) {
+        /* If null */
+        if (Objects.isNull(stub)) {
+            /* No thing return from this interface */
+            return Ux.toFuture(new JsonArray())
+                    /* Return Result */
+                    .compose(Http::success200);
+        } else {
+            return executor.get();
+        }
     }
 }

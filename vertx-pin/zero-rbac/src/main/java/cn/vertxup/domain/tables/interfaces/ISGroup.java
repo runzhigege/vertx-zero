@@ -24,152 +24,152 @@ import javax.annotation.Generated;
 public interface ISGroup extends Serializable {
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_GROUP.KEY</code>. 「key」- 组ID
+     * Setter for <code>DB_ETERNAL.S_GROUP.KEY</code>. 「key」- 组ID
      */
     public ISGroup setKey(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_GROUP.KEY</code>. 「key」- 组ID
+     * Getter for <code>DB_ETERNAL.S_GROUP.KEY</code>. 「key」- 组ID
      */
     public String getKey();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_GROUP.NAME</code>. 「name」- 组名称
+     * Setter for <code>DB_ETERNAL.S_GROUP.NAME</code>. 「name」- 组名称
      */
     public ISGroup setName(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_GROUP.NAME</code>. 「name」- 组名称
+     * Getter for <code>DB_ETERNAL.S_GROUP.NAME</code>. 「name」- 组名称
      */
     public String getName();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_GROUP.CODE</code>. 「code」- 组系统码
+     * Setter for <code>DB_ETERNAL.S_GROUP.CODE</code>. 「code」- 组系统码
      */
     public ISGroup setCode(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_GROUP.CODE</code>. 「code」- 组系统码
+     * Getter for <code>DB_ETERNAL.S_GROUP.CODE</code>. 「code」- 组系统码
      */
     public String getCode();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_GROUP.PARENT_ID</code>. 「parentId」- 父组ID（组支持树形结构，角色平行结构）
+     * Setter for <code>DB_ETERNAL.S_GROUP.PARENT_ID</code>. 「parentId」- 父组ID（组支持树形结构，角色平行结构）
      */
     public ISGroup setParentId(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_GROUP.PARENT_ID</code>. 「parentId」- 父组ID（组支持树形结构，角色平行结构）
+     * Getter for <code>DB_ETERNAL.S_GROUP.PARENT_ID</code>. 「parentId」- 父组ID（组支持树形结构，角色平行结构）
      */
     public String getParentId();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_GROUP.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
+     * Setter for <code>DB_ETERNAL.S_GROUP.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
      */
     public ISGroup setModelId(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_GROUP.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
+     * Getter for <code>DB_ETERNAL.S_GROUP.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
      */
     public String getModelId();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_GROUP.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
+     * Setter for <code>DB_ETERNAL.S_GROUP.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
      */
     public ISGroup setModelKey(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_GROUP.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
+     * Getter for <code>DB_ETERNAL.S_GROUP.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
      */
     public String getModelKey();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_GROUP.CATEGORY</code>. 「category」- 组类型
+     * Setter for <code>DB_ETERNAL.S_GROUP.CATEGORY</code>. 「category」- 组类型
      */
     public ISGroup setCategory(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_GROUP.CATEGORY</code>. 「category」- 组类型
+     * Getter for <code>DB_ETERNAL.S_GROUP.CATEGORY</code>. 「category」- 组类型
      */
     public String getCategory();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_GROUP.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
+     * Setter for <code>DB_ETERNAL.S_GROUP.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
      */
     public ISGroup setSigma(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_GROUP.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
+     * Getter for <code>DB_ETERNAL.S_GROUP.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
      */
     public String getSigma();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_GROUP.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ETERNAL.S_GROUP.LANGUAGE</code>. 「language」- 使用的语言
      */
     public ISGroup setLanguage(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_GROUP.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ETERNAL.S_GROUP.LANGUAGE</code>. 「language」- 使用的语言
      */
     public String getLanguage();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_GROUP.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ETERNAL.S_GROUP.ACTIVE</code>. 「active」- 是否启用
      */
     public ISGroup setActive(Boolean value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_GROUP.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ETERNAL.S_GROUP.ACTIVE</code>. 「active」- 是否启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_GROUP.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ETERNAL.S_GROUP.METADATA</code>. 「metadata」- 附加配置数据
      */
     public ISGroup setMetadata(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_GROUP.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ETERNAL.S_GROUP.METADATA</code>. 「metadata」- 附加配置数据
      */
     public String getMetadata();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_GROUP.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Setter for <code>DB_ETERNAL.S_GROUP.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public ISGroup setCreatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_GROUP.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Getter for <code>DB_ETERNAL.S_GROUP.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public LocalDateTime getCreatedAt();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_GROUP.CREATED_BY</code>. 「createdBy」- 创建人
+     * Setter for <code>DB_ETERNAL.S_GROUP.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public ISGroup setCreatedBy(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_GROUP.CREATED_BY</code>. 「createdBy」- 创建人
+     * Getter for <code>DB_ETERNAL.S_GROUP.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public String getCreatedBy();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_GROUP.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Setter for <code>DB_ETERNAL.S_GROUP.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     public ISGroup setUpdatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_GROUP.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * Getter for <code>DB_ETERNAL.S_GROUP.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     public LocalDateTime getUpdatedAt();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.S_GROUP.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Setter for <code>DB_ETERNAL.S_GROUP.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public ISGroup setUpdatedBy(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.S_GROUP.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * Getter for <code>DB_ETERNAL.S_GROUP.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public String getUpdatedBy();
 

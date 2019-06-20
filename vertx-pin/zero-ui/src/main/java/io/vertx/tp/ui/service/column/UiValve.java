@@ -18,5 +18,5 @@ public interface UiValve {
         return Fn.pool(Pool.VALVE_MAP, FileValve.class.getName(), FileValve::new);
     }
 
-    Future<JsonArray> fetchColumn(String identifier, String sigma);
+    Future<JsonArray> fetchColumn(String view, String identifier, String sigma);
 }

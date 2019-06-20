@@ -32,107 +32,107 @@ import java.util.List;
 public class SAction extends TableImpl<SActionRecord> {
 
     /**
-     * The reference instance of <code>DB_ORIGIN_X.S_ACTION</code>
+     * The reference instance of <code>DB_ETERNAL.S_ACTION</code>
      */
     public static final SAction S_ACTION = new SAction();
-    private static final long serialVersionUID = -958464862;
+    private static final long serialVersionUID = -1306436748;
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.KEY</code>. 「key」- 操作ID
+     * The column <code>DB_ETERNAL.S_ACTION.KEY</code>. 「key」- 操作ID
      */
     public final TableField<SActionRecord, String> KEY = createField("KEY", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「key」- 操作ID");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.NAME</code>. 「name」- 操作名称
+     * The column <code>DB_ETERNAL.S_ACTION.NAME</code>. 「name」- 操作名称
      */
     public final TableField<SActionRecord, String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「name」- 操作名称");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.CODE</code>. 「code」- 操作码
+     * The column <code>DB_ETERNAL.S_ACTION.CODE</code>. 「code」- 操作码
      */
     public final TableField<SActionRecord, String> CODE = createField("CODE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「code」- 操作码");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
+     * The column <code>DB_ETERNAL.S_ACTION.RESOURCE_ID</code>. 「resourceId」- 操作关联资源ID
      */
     public final TableField<SActionRecord, String> RESOURCE_ID = createField("RESOURCE_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「resourceId」- 操作关联资源ID");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.PERMISSION_ID</code>. 「permissionId」- 操作所属权限
+     * The column <code>DB_ETERNAL.S_ACTION.PERMISSION_ID</code>. 「permissionId」- 操作所属权限
      */
     public final TableField<SActionRecord, String> PERMISSION_ID = createField("PERMISSION_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「permissionId」- 操作所属权限");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.LEVEL</code>. 「level」- 操作级别, ACL控制
+     * The column <code>DB_ETERNAL.S_ACTION.LEVEL</code>. 「level」- 操作级别, ACL控制
      */
     public final TableField<SActionRecord, Integer> LEVEL = createField("LEVEL", org.jooq.impl.SQLDataType.INTEGER, this, "「level」- 操作级别, ACL控制");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.MODE</code>. 「mode」- 操作模式（决定是否触发副作用流程）, NODE | DEFINE
+     * The column <code>DB_ETERNAL.S_ACTION.MODE</code>. 「mode」- 操作模式（决定是否触发副作用流程）, NODE | DEFINE
      */
     public final TableField<SActionRecord, String> MODE = createField("MODE", org.jooq.impl.SQLDataType.VARCHAR(20), this, "「mode」- 操作模式（决定是否触发副作用流程）, NODE | DEFINE");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.URI</code>. 「uri」- 资源地址
+     * The column <code>DB_ETERNAL.S_ACTION.URI</code>. 「uri」- 资源地址
      */
     public final TableField<SActionRecord, String> URI = createField("URI", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「uri」- 资源地址");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.METHOD</code>. 「method」- 资源方法
+     * The column <code>DB_ETERNAL.S_ACTION.METHOD</code>. 「method」- 资源方法
      */
     public final TableField<SActionRecord, String> METHOD = createField("METHOD", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「method」- 资源方法");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.SIGMA</code>. 「sigma」- 统一标识
+     * The column <code>DB_ETERNAL.S_ACTION.SIGMA</code>. 「sigma」- 统一标识
      */
     public final TableField<SActionRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「sigma」- 统一标识");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.EFFECT_COMPONENT</code>. 「effectComponent」- mode = DEFINE，自定义副作用流程
+     * The column <code>DB_ETERNAL.S_ACTION.EFFECT_COMPONENT</code>. 「effectComponent」- mode = DEFINE，自定义副作用流程
      */
     public final TableField<SActionRecord, String> EFFECT_COMPONENT = createField("EFFECT_COMPONENT", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「effectComponent」- mode = DEFINE，自定义副作用流程");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.EFFECT_CONFIG</code>. 「effectConfig」- 副作用配置信息
+     * The column <code>DB_ETERNAL.S_ACTION.EFFECT_CONFIG</code>. 「effectConfig」- 副作用配置信息
      */
     public final TableField<SActionRecord, String> EFFECT_CONFIG = createField("EFFECT_CONFIG", org.jooq.impl.SQLDataType.CLOB, this, "「effectConfig」- 副作用配置信息");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
+     * The column <code>DB_ETERNAL.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
      */
     public final TableField<SActionRecord, String> LANGUAGE = createField("LANGUAGE", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「language」- 使用的语言");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.ACTIVE</code>. 「active」- 是否启用
+     * The column <code>DB_ETERNAL.S_ACTION.ACTIVE</code>. 「active」- 是否启用
      */
     public final TableField<SActionRecord, Boolean> ACTIVE = createField("ACTIVE", org.jooq.impl.SQLDataType.BIT, this, "「active」- 是否启用");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.METADATA</code>. 「metadata」- 附加配置数据
+     * The column <code>DB_ETERNAL.S_ACTION.METADATA</code>. 「metadata」- 附加配置数据
      */
     public final TableField<SActionRecord, String> METADATA = createField("METADATA", org.jooq.impl.SQLDataType.CLOB, this, "「metadata」- 附加配置数据");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.COMMENT</code>. 「action」- 操作说明
+     * The column <code>DB_ETERNAL.S_ACTION.COMMENT</code>. 「action」- 操作说明
      */
     public final TableField<SActionRecord, String> COMMENT = createField("COMMENT", org.jooq.impl.SQLDataType.CLOB, this, "「action」- 操作说明");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.CREATED_AT</code>. 「createdAt」- 创建时间
+     * The column <code>DB_ETERNAL.S_ACTION.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public final TableField<SActionRecord, LocalDateTime> CREATED_AT = createField("CREATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「createdAt」- 创建时间");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.CREATED_BY</code>. 「createdBy」- 创建人
+     * The column <code>DB_ETERNAL.S_ACTION.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public final TableField<SActionRecord, String> CREATED_BY = createField("CREATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「createdBy」- 创建人");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.UPDATED_AT</code>. 「updatedAt」- 更新时间
+     * The column <code>DB_ETERNAL.S_ACTION.UPDATED_AT</code>. 「updatedAt」- 更新时间
      */
     public final TableField<SActionRecord, LocalDateTime> UPDATED_AT = createField("UPDATED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「updatedAt」- 更新时间");
     /**
-     * The column <code>DB_ORIGIN_X.S_ACTION.UPDATED_BY</code>. 「updatedBy」- 更新人
+     * The column <code>DB_ETERNAL.S_ACTION.UPDATED_BY</code>. 「updatedBy」- 更新人
      */
     public final TableField<SActionRecord, String> UPDATED_BY = createField("UPDATED_BY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「updatedBy」- 更新人");
 
     /**
-     * Create a <code>DB_ORIGIN_X.S_ACTION</code> table reference
+     * Create a <code>DB_ETERNAL.S_ACTION</code> table reference
      */
     public SAction() {
         this(DSL.name("S_ACTION"), null);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.S_ACTION</code> table reference
+     * Create an aliased <code>DB_ETERNAL.S_ACTION</code> table reference
      */
     public SAction(String alias) {
         this(DSL.name(alias), S_ACTION);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.S_ACTION</code> table reference
+     * Create an aliased <code>DB_ETERNAL.S_ACTION</code> table reference
      */
     public SAction(Name alias) {
         this(alias, S_ACTION);
@@ -159,7 +159,7 @@ public class SAction extends TableImpl<SActionRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Db.DB_ORIGIN_X;
+        return Db.DB_ETERNAL;
     }
 
     /**
