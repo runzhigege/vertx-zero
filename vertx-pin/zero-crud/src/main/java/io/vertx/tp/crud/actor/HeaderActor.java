@@ -2,14 +2,14 @@ package io.vertx.tp.crud.actor;
 
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.crud.atom.IxConfig;
+import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.up.atom.Envelop;
 import io.zero.epic.Ut;
 
 class HeaderActor extends AbstractActor {
 
     @Override
-    public JsonObject proc(final JsonObject data, final IxConfig config) {
+    public JsonObject proc(final JsonObject data, final IxModule config) {
         final Envelop request = this.getRequest();
         final MultiMap headers = request.headers();
         /* Header Data */

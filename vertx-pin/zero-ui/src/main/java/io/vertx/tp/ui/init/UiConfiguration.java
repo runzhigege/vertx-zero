@@ -21,9 +21,17 @@ class UiConfiguration {
     private static final Annal LOGGER = Annal.get(UiConfiguration.class);
     /*
      * Static configuration mapping for column, it could not be modified
-     * once configured into
+     * once configured into the column mapping
+     * column map stored fileKey = filename
+     * Here `fileKey` will be configured in other place to be connected.
+     * The file absolute path should be `definition` + `filename` to be calculated
+     * the final result.
+     * Such as `ColumnStub` in CRUD, this service will be called to read
+     * different columns, it support two mode:
+     * Static: read column information from file ( column map support )
+     * Dynamic: read column information from database ( skip file )
      */
-    private static final ConcurrentMap<Class<?>, JsonArray> COLUMN_MAP =
+    private static final ConcurrentMap<String, JsonArray> COLUMN_MAP =
             new ConcurrentHashMap<>();
     private static UiConfig CONFIG = null;
 
@@ -44,28 +52,24 @@ class UiConfiguration {
     }
 
     private static void initColumn(final UiConfig config) {
-        final JsonObject staticConfig = config.getConfigStatic();
-        if (!Ut.isNil(staticConfig)) {
-            final String configPath = config.getConfigPath();
-            staticConfig.fieldNames().forEach(clazz -> {
-                final String file = staticConfig.getString(clazz);
+        final JsonObject mapping = config.getMapping();
+        if (!Ut.isNil(mapping)) {
+            final String configPath = config.getDefinition();
+            mapping.fieldNames().forEach(fileKey -> {
+                final String file = mapping.getString(fileKey);
                 final String filePath = configPath + '/' + file;
-                initColumn(clazz, filePath);
+                /*
+                 * Read column from configuration path
+                 */
+                final JsonArray columns = Ut.ioJArray(filePath);
+                if (Objects.nonNull(columns) && !columns.isEmpty()) {
+                    COLUMN_MAP.put(fileKey, columns);
+                }
             });
         }
     }
 
-    private static void initColumn(final String className, final String file) {
-        /* 1. Class Not Found */
-        final Class<?> keyCls = Ut.clazz(className);
-        if (Objects.nonNull(keyCls)) {
-            /* 2. Read columns */
-            final JsonArray columns = Ut.ioJArray(file);
-            if (Objects.nonNull(columns) && !columns.isEmpty()) {
-                COLUMN_MAP.put(keyCls, columns);
-            }
-        } else {
-            Ui.infoWarn(LOGGER, "Ui Class Null: {0}", className);
-        }
+    static JsonArray getColumn(final String key) {
+        return COLUMN_MAP.getOrDefault(key, new JsonArray());
     }
 }

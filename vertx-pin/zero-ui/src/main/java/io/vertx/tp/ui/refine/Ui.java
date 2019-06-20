@@ -10,6 +10,10 @@ public class Ui {
         UiLog.infoInit(logger, pattern, args);
     }
 
+    public static void infoUi(final Annal logger, final String pattern, final Object... args) {
+        UiLog.infoUi(logger, pattern, args);
+    }
+
     public static void infoWarn(final Annal logger, final String pattern, final Object... args) {
         UiLog.infoWarn(logger, pattern, args);
     }

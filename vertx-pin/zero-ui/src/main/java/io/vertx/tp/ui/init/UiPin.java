@@ -1,5 +1,6 @@
 package io.vertx.tp.ui.init;
 
+import io.vertx.core.json.JsonArray;
 import io.vertx.tp.ke.tool.Ke;
 import io.vertx.tp.ui.atom.UiConfig;
 import io.vertx.tp.ui.refine.Ui;
@@ -17,5 +18,9 @@ public class UiPin {
 
     public static UiConfig getConfig() {
         return UiConfiguration.getConfig();
+    }
+
+    public static JsonArray getColumn(final String identifier) {
+        return UiConfiguration.getColumn(identifier);
     }
 }
