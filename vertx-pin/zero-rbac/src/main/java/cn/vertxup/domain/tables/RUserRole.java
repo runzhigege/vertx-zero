@@ -31,39 +31,39 @@ import java.util.List;
 public class RUserRole extends TableImpl<RUserRoleRecord> {
 
     /**
-     * The reference instance of <code>DB_ORIGIN_X.R_USER_ROLE</code>
+     * The reference instance of <code>DB_ETERNAL.R_USER_ROLE</code>
      */
     public static final RUserRole R_USER_ROLE = new RUserRole();
-    private static final long serialVersionUID = -491040213;
+    private static final long serialVersionUID = -263081485;
     /**
-     * The column <code>DB_ORIGIN_X.R_USER_ROLE.USER_ID</code>. 「userId」- 关联用户ID
+     * The column <code>DB_ETERNAL.R_USER_ROLE.USER_ID</code>. 「userId」- 关联用户ID
      */
     public final TableField<RUserRoleRecord, String> USER_ID = createField("USER_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「userId」- 关联用户ID");
     /**
-     * The column <code>DB_ORIGIN_X.R_USER_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * The column <code>DB_ETERNAL.R_USER_ROLE.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     public final TableField<RUserRoleRecord, String> ROLE_ID = createField("ROLE_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「roleId」- 关联角色ID");
     /**
-     * The column <code>DB_ORIGIN_X.R_USER_ROLE.PRIORITY</code>. 「priority」- 角色优先级
+     * The column <code>DB_ETERNAL.R_USER_ROLE.PRIORITY</code>. 「priority」- 角色优先级
      */
     public final TableField<RUserRoleRecord, Integer> PRIORITY = createField("PRIORITY", org.jooq.impl.SQLDataType.INTEGER, this, "「priority」- 角色优先级");
 
     /**
-     * Create a <code>DB_ORIGIN_X.R_USER_ROLE</code> table reference
+     * Create a <code>DB_ETERNAL.R_USER_ROLE</code> table reference
      */
     public RUserRole() {
         this(DSL.name("R_USER_ROLE"), null);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.R_USER_ROLE</code> table reference
+     * Create an aliased <code>DB_ETERNAL.R_USER_ROLE</code> table reference
      */
     public RUserRole(String alias) {
         this(DSL.name(alias), R_USER_ROLE);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.R_USER_ROLE</code> table reference
+     * Create an aliased <code>DB_ETERNAL.R_USER_ROLE</code> table reference
      */
     public RUserRole(Name alias) {
         this(alias, R_USER_ROLE);
@@ -90,7 +90,7 @@ public class RUserRole extends TableImpl<RUserRoleRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Db.DB_ORIGIN_X;
+        return Db.DB_ETERNAL;
     }
 
     /**

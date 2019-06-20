@@ -24,102 +24,102 @@ import javax.annotation.Generated;
 public interface IOAccessToken extends Serializable {
 
     /**
-     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.KEY</code>. 「key」- 令牌主键
+     * Setter for <code>DB_ETERNAL.O_ACCESS_TOKEN.KEY</code>. 「key」- 令牌主键
      */
     public IOAccessToken setKey(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.KEY</code>. 「key」- 令牌主键
+     * Getter for <code>DB_ETERNAL.O_ACCESS_TOKEN.KEY</code>. 「key」- 令牌主键
      */
     public String getKey();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.TOKEN</code>. 「token」- 用户的Token信息
+     * Setter for <code>DB_ETERNAL.O_ACCESS_TOKEN.TOKEN</code>. 「token」- 用户的Token信息
      */
     public IOAccessToken setToken(byte... value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.TOKEN</code>. 「token」- 用户的Token信息
+     * Getter for <code>DB_ETERNAL.O_ACCESS_TOKEN.TOKEN</code>. 「token」- 用户的Token信息
      */
     public byte[] getToken();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.AUTH</code>. 「auth」- 用户的ID的 byte[] 信息
+     * Setter for <code>DB_ETERNAL.O_ACCESS_TOKEN.AUTH</code>. 「auth」- 用户的ID的 byte[] 信息
      */
     public IOAccessToken setAuth(byte... value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.AUTH</code>. 「auth」- 用户的ID的 byte[] 信息
+     * Getter for <code>DB_ETERNAL.O_ACCESS_TOKEN.AUTH</code>. 「auth」- 用户的ID的 byte[] 信息
      */
     public byte[] getAuth();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.EXPIRED_TIME</code>. 「expiredTime」- 用户的Token过期时间
+     * Setter for <code>DB_ETERNAL.O_ACCESS_TOKEN.EXPIRED_TIME</code>. 「expiredTime」- 用户的Token过期时间
      */
     public IOAccessToken setExpiredTime(Long value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.EXPIRED_TIME</code>. 「expiredTime」- 用户的Token过期时间
+     * Getter for <code>DB_ETERNAL.O_ACCESS_TOKEN.EXPIRED_TIME</code>. 「expiredTime」- 用户的Token过期时间
      */
     public Long getExpiredTime();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.REFRESH_TOKEN</code>. 「refreshToken」- 用户的刷新令牌
+     * Setter for <code>DB_ETERNAL.O_ACCESS_TOKEN.REFRESH_TOKEN</code>. 「refreshToken」- 用户的刷新令牌
      */
     public IOAccessToken setRefreshToken(byte... value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.REFRESH_TOKEN</code>. 「refreshToken」- 用户的刷新令牌
+     * Getter for <code>DB_ETERNAL.O_ACCESS_TOKEN.REFRESH_TOKEN</code>. 「refreshToken」- 用户的刷新令牌
      */
     public byte[] getRefreshToken();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.LANGUAGE</code>. 「language」- 使用的语言
+     * Setter for <code>DB_ETERNAL.O_ACCESS_TOKEN.LANGUAGE</code>. 「language」- 使用的语言
      */
     public IOAccessToken setLanguage(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.LANGUAGE</code>. 「language」- 使用的语言
+     * Getter for <code>DB_ETERNAL.O_ACCESS_TOKEN.LANGUAGE</code>. 「language」- 使用的语言
      */
     public String getLanguage();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.ACTIVE</code>. 「active」- 是否启用
+     * Setter for <code>DB_ETERNAL.O_ACCESS_TOKEN.ACTIVE</code>. 「active」- 是否启用
      */
     public IOAccessToken setActive(Boolean value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.ACTIVE</code>. 「active」- 是否启用
+     * Getter for <code>DB_ETERNAL.O_ACCESS_TOKEN.ACTIVE</code>. 「active」- 是否启用
      */
     public Boolean getActive();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.METADATA</code>. 「metadata」- 附加配置数据
+     * Setter for <code>DB_ETERNAL.O_ACCESS_TOKEN.METADATA</code>. 「metadata」- 附加配置数据
      */
     public IOAccessToken setMetadata(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.METADATA</code>. 「metadata」- 附加配置数据
+     * Getter for <code>DB_ETERNAL.O_ACCESS_TOKEN.METADATA</code>. 「metadata」- 附加配置数据
      */
     public String getMetadata();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Setter for <code>DB_ETERNAL.O_ACCESS_TOKEN.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public IOAccessToken setCreatedAt(LocalDateTime value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.CREATED_AT</code>. 「createdAt」- 创建时间
+     * Getter for <code>DB_ETERNAL.O_ACCESS_TOKEN.CREATED_AT</code>. 「createdAt」- 创建时间
      */
     public LocalDateTime getCreatedAt();
 
     /**
-     * Setter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.CREATED_BY</code>. 「createdBy」- 创建人
+     * Setter for <code>DB_ETERNAL.O_ACCESS_TOKEN.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public IOAccessToken setCreatedBy(String value);
 
     /**
-     * Getter for <code>DB_ORIGIN_X.O_ACCESS_TOKEN.CREATED_BY</code>. 「createdBy」- 创建人
+     * Getter for <code>DB_ETERNAL.O_ACCESS_TOKEN.CREATED_BY</code>. 「createdBy」- 创建人
      */
     public String getCreatedBy();
 

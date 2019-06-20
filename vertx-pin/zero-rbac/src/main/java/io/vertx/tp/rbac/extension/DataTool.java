@@ -34,7 +34,6 @@ class DataTool {
         final String cacheKey = "session-" + request.method().name() + ":" + uri;
         /* Cache Data */
         Sc.infoAuth(LOGGER, "Try cacheKey: {0}", cacheKey);
-
         return cacheKey;
     }
 
@@ -133,7 +132,6 @@ class DataTool {
      * }
      */
     private static RegionType analyzeRegion(final JsonObject reference) {
-        /* Response Data Extract */
         /* Extract Data Object */
         final Object value = reference.getValue("data");
         if (Objects.nonNull(value)) {

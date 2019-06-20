@@ -31,35 +31,35 @@ import java.util.List;
 public class RRolePerm extends TableImpl<RRolePermRecord> {
 
     /**
-     * The reference instance of <code>DB_ORIGIN_X.R_ROLE_PERM</code>
+     * The reference instance of <code>DB_ETERNAL.R_ROLE_PERM</code>
      */
     public static final RRolePerm R_ROLE_PERM = new RRolePerm();
-    private static final long serialVersionUID = -89963084;
+    private static final long serialVersionUID = -532706224;
     /**
-     * The column <code>DB_ORIGIN_X.R_ROLE_PERM.PERM_ID</code>. 「permId」- 关联权限ID
+     * The column <code>DB_ETERNAL.R_ROLE_PERM.PERM_ID</code>. 「permId」- 关联权限ID
      */
     public final TableField<RRolePermRecord, String> PERM_ID = createField("PERM_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「permId」- 关联权限ID");
     /**
-     * The column <code>DB_ORIGIN_X.R_ROLE_PERM.ROLE_ID</code>. 「roleId」- 关联角色ID
+     * The column <code>DB_ETERNAL.R_ROLE_PERM.ROLE_ID</code>. 「roleId」- 关联角色ID
      */
     public final TableField<RRolePermRecord, String> ROLE_ID = createField("ROLE_ID", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「roleId」- 关联角色ID");
 
     /**
-     * Create a <code>DB_ORIGIN_X.R_ROLE_PERM</code> table reference
+     * Create a <code>DB_ETERNAL.R_ROLE_PERM</code> table reference
      */
     public RRolePerm() {
         this(DSL.name("R_ROLE_PERM"), null);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.R_ROLE_PERM</code> table reference
+     * Create an aliased <code>DB_ETERNAL.R_ROLE_PERM</code> table reference
      */
     public RRolePerm(String alias) {
         this(DSL.name(alias), R_ROLE_PERM);
     }
 
     /**
-     * Create an aliased <code>DB_ORIGIN_X.R_ROLE_PERM</code> table reference
+     * Create an aliased <code>DB_ETERNAL.R_ROLE_PERM</code> table reference
      */
     public RRolePerm(Name alias) {
         this(alias, R_ROLE_PERM);
@@ -86,7 +86,7 @@ public class RRolePerm extends TableImpl<RRolePermRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Db.DB_ORIGIN_X;
+        return Db.DB_ETERNAL;
     }
 
     /**

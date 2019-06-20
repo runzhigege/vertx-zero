@@ -13,7 +13,7 @@ class FileValve implements UiValve {
     private static final Annal LOGGER = Annal.get(FileValve.class);
 
     @Override
-    public Future<JsonArray> fetchColumn(final String identifier, final String sigma) {
+    public Future<JsonArray> fetchColumn(final String view, final String identifier, final String sigma) {
         /* Default column JsonArray */
         final JsonArray columns = UiPin.getColumn(identifier);
         Ui.infoUi(LOGGER, UiMsg.COLUMN_STATIC, sigma, columns.size(), columns.encode());

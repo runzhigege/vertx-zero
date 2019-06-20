@@ -29,10 +29,10 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> implements Record3<String, String, Integer>, IRUserGroup {
 
-    private static final long serialVersionUID = 1078609324;
+    private static final long serialVersionUID = 1228233880;
 
     /**
-     * Setter for <code>DB_ORIGIN_X.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
+     * Setter for <code>DB_ETERNAL.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     @Override
     public RUserGroupRecord setGroupId(String value) {
@@ -41,7 +41,7 @@ public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> impl
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
+     * Getter for <code>DB_ETERNAL.R_USER_GROUP.GROUP_ID</code>. 「groupId」- 关联组ID
      */
     @Override
     public String getGroupId() {
@@ -49,7 +49,7 @@ public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> impl
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.R_USER_GROUP.USER_ID</code>. 「userId」- 关联用户ID
+     * Setter for <code>DB_ETERNAL.R_USER_GROUP.USER_ID</code>. 「userId」- 关联用户ID
      */
     @Override
     public RUserGroupRecord setUserId(String value) {
@@ -58,7 +58,7 @@ public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> impl
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.R_USER_GROUP.USER_ID</code>. 「userId」- 关联用户ID
+     * Getter for <code>DB_ETERNAL.R_USER_GROUP.USER_ID</code>. 「userId」- 关联用户ID
      */
     @Override
     public String getUserId() {
@@ -66,7 +66,7 @@ public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> impl
     }
 
     /**
-     * Setter for <code>DB_ORIGIN_X.R_USER_GROUP.PRIORITY</code>. 「priority」- 组优先级
+     * Setter for <code>DB_ETERNAL.R_USER_GROUP.PRIORITY</code>. 「priority」- 组优先级
      */
     @Override
     public RUserGroupRecord setPriority(Integer value) {
@@ -75,7 +75,7 @@ public class RUserGroupRecord extends UpdatableRecordImpl<RUserGroupRecord> impl
     }
 
     /**
-     * Getter for <code>DB_ORIGIN_X.R_USER_GROUP.PRIORITY</code>. 「priority」- 组优先级
+     * Getter for <code>DB_ETERNAL.R_USER_GROUP.PRIORITY</code>. 「priority」- 组优先级
      */
     @Override
     public Integer getPriority() {
