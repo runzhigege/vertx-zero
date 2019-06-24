@@ -9,14 +9,14 @@ import io.zero.epic.fn.Fn;
 class From {
 
     static <T> T fromJson(final JsonObject data, final Class<T> clazz, final String pojo) {
-        return Fn.getNull(Ut.instance(clazz), () -> Fn.getSemi(Ut.isNil(pojo), null,
+        return Fn.getSemi(Ut.isNil(pojo), null,
                 () -> Ut.deserialize(data, clazz),
                 () -> Mirror.create(From.class)
                         .mount(pojo)
                         .connect(data)
                         .type(clazz)
                         .from()
-                        .get()), pojo);
+                        .get());
     }
 
     static JsonObject fromJson(final JsonObject criteria, final String pojo) {
