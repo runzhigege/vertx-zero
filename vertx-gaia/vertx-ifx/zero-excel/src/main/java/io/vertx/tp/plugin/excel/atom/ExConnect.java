@@ -17,6 +17,7 @@ public class ExConnect implements Serializable {
     private transient String table;
     private transient Class<?> pojo;
     private transient Class<?> dao;
+    private transient String pojoFile;
 
     @JsonSerialize(using = JsonArraySerializer.class)
     @JsonDeserialize(using = JsonArrayDeserializer.class)
@@ -47,6 +48,10 @@ public class ExConnect implements Serializable {
         this.dao = dao;
     }
 
+    public String getPojoFile() { return pojoFile; }
+
+    public void setPojoFile(String pojoFile) { this.pojoFile = pojoFile; }
+
     public JsonArray getUnique() {
         return this.unique;
     }
@@ -66,11 +71,12 @@ public class ExConnect implements Serializable {
     @Override
     public String toString() {
         return "ExConnect{" +
-                "table='" + this.table + '\'' +
-                ", pojo=" + this.pojo +
-                ", dao=" + this.dao +
-                ", unique=" + this.unique +
-                ", key=" + this.key +
+                "table='" + table + '\'' +
+                ", pojo=" + pojo +
+                ", dao=" + dao +
+                ", pojoFile='" + pojoFile + '\'' +
+                ", unique=" + unique +
+                ", key='" + key + '\'' +
                 '}';
     }
 }
