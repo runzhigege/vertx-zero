@@ -119,6 +119,8 @@ E60033: "(401) - (Jwt) Jwt executor result is false, authorization token = {0}"
 # (Web) Exception for standard third part
 E60034: "(501) - (Shared) You configured (async = {0}) mode, but now your client is called with (async = {1})"
 E60035: "(500) - (Shared) Your map {0} processing met issue when execute method {1}"
+E60039: "(501) - (Extension) Your extension class {0} does not `implement` the interface `{1}`"
+E60040: "(501) - (Extension) Your extension class {0} must extend `{1}` class because of Jooq Bind"
 # Excel exception
 E60037: "(404) - (EXCEL) The file that you provided ( filename = `{0}` ) is missing or null"
 E60038: "(404) - (EXCEL) The configuration of ( table = `{0}` ) is missing, please check your excel config"

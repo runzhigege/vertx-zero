@@ -2,8 +2,9 @@ package io.vertx.tp.crud.init;
 
 import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.tp.ke.extension.ui.ColumnStub;
-import io.vertx.tp.ke.extension.view.ColumnMyStub;
+import io.vertx.tp.ke.extension.KeBus;
+import io.vertx.tp.ke.extension.jooq.Epidemia;
+import io.vertx.tp.ke.extension.jooq.EpidemiaMy;
 import io.vertx.tp.ke.tool.Ke;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.atom.Rule;
@@ -49,21 +50,21 @@ public class IxPin {
         return IxDao.getUris();
     }
 
-    public static ColumnStub getStub() {
+    public static Epidemia getStub() {
         final Class<?> clazz = IxConfiguration.getConfig().getColumnComponent();
         if (Objects.isNull(clazz)) {
             return null;
         } else {
-            return ColumnStub.generate(clazz);
+            return KeBus.epidemia(clazz);
         }
     }
 
-    public static ColumnMyStub getMyStub() {
+    public static EpidemiaMy getMyStub() {
         final Class<?> clazz = IxConfiguration.getConfig().getColumnMyComponent();
         if (Objects.isNull(clazz)) {
             return null;
         } else {
-            return ColumnMyStub.generate(clazz);
+            return KeBus.epidemiaMy(clazz);
         }
     }
 
