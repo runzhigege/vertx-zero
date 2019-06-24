@@ -88,7 +88,16 @@ public class Ix {
     }
 
     public static Future<JsonObject> inColumns(final Envelop envelop, final IxModule config) {
-        return Ux.toFuture(IxQuery.inColumns(envelop, config));
+        final JsonObject params = new JsonObject();
+        return inColumns(envelop, config, params);
+    }
+
+    public static Future<JsonObject> inColumns(final Envelop envelop, final IxModule config, final JsonObject initialized) {
+        return Ux.toFuture(IxQuery.inColumns(envelop, config, initialized));
+    }
+
+    public static Future<JsonObject> inSeekers(final Envelop envelop) {
+        return Ux.toFuture(IxQuery.inSeekers(envelop));
     }
 
     /*

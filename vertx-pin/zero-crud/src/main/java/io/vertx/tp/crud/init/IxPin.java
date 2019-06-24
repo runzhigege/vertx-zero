@@ -1,17 +1,18 @@
 package io.vertx.tp.crud.init;
 
+import io.vertx.core.http.HttpMethod;
 import io.vertx.tp.crud.atom.IxModule;
+import io.vertx.tp.crud.atom.IxSeeker;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.tp.ke.extension.KeBus;
-import io.vertx.tp.ke.extension.jooq.Epidemia;
-import io.vertx.tp.ke.extension.jooq.EpidemiaMy;
+import io.vertx.tp.ke.extension.jooq.Apeak;
+import io.vertx.tp.ke.extension.jooq.ApeakMy;
+import io.vertx.tp.ke.extension.jooq.Seeker;
 import io.vertx.tp.ke.tool.Ke;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.atom.Rule;
 import io.vertx.up.log.Annal;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
@@ -27,7 +28,6 @@ public class IxPin {
         Ix.infoInit(LOGGER, "IxConfiguration...");
         /* Configuration Init */
         IxConfiguration.init();
-        ;
 
         Ix.infoInit(LOGGER, "IxDao...");
         /* Dao Init */
@@ -50,22 +50,20 @@ public class IxPin {
         return IxDao.getUris();
     }
 
-    public static Epidemia getStub() {
-        final Class<?> clazz = IxConfiguration.getConfig().getColumnComponent();
-        if (Objects.isNull(clazz)) {
-            return null;
-        } else {
-            return KeBus.epidemia(clazz);
-        }
+    public static Apeak getStub() {
+        return IxExtension.getStub();
     }
 
-    public static EpidemiaMy getMyStub() {
-        final Class<?> clazz = IxConfiguration.getConfig().getColumnMyComponent();
-        if (Objects.isNull(clazz)) {
-            return null;
-        } else {
-            return KeBus.epidemiaMy(clazz);
-        }
+    public static ApeakMy getMyStub() {
+        return IxExtension.getMyStub();
+    }
+
+    public static IxSeeker getSeeker(final String requestUri, final HttpMethod method) {
+        return IxConfiguration.getSeeker(requestUri, method);
+    }
+
+    public static Seeker getSeeker() {
+        return IxExtension.getSeeker();
     }
 
     public static ConcurrentMap<String, List<Rule>> getRules(final String actor) {

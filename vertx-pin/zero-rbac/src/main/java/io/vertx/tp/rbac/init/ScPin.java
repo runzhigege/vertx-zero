@@ -7,8 +7,6 @@ import io.vertx.tp.rbac.atom.ScConfig;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.log.Annal;
 
-import java.util.Objects;
-
 /*
  * Init Plugin for `initAsync` static life
  */
@@ -29,10 +27,6 @@ public class ScPin {
 
     public static Orbit getOrbit() {
         final Class<?> clazz = getConfig().getOrbit();
-        if (Objects.isNull(clazz)) {
-            return null;
-        } else {
-            return KeBus.orbit(clazz);
-        }
+        return Ke.generate(clazz, () -> KeBus.orbit(clazz));
     }
 }

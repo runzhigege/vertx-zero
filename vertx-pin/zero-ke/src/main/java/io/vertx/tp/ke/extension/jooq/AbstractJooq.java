@@ -6,7 +6,7 @@ import io.vertx.up.log.Annal;
 /*
  * All sub-class for extension of Jooq type
  */
-public abstract class AbstractJewel<T> {
+public abstract class AbstractJooq<T> {
 
     private transient UxJooq jooq;
 

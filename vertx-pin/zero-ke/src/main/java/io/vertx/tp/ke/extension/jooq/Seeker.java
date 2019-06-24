@@ -9,12 +9,15 @@ import io.vertx.up.aiki.UxJooq;
  * Fetch default view that will be impact and then the system will get
  * Resource Id here.
  */
-public interface Manhunt {
+public interface Seeker {
 
-    Manhunt on(UxJooq jooq);
+    String PARAM_SEEKER = "seeker";
+
+    Seeker on(UxJooq jooq);
 
     /*
-     * Seek resource by params and return to unique resourceId
+     * Seeker resource by params and return to unique resourceId
+     * The target resource should be impact by input params
      */
-    Future<String> seekResource(JsonObject params);
+    Future<JsonObject> fetchImpact(JsonObject params);
 }

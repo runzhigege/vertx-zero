@@ -16,6 +16,10 @@ public class Ke {
         return KeTool.getCatalog();
     }
 
+    public static <T> T generate(final Class<?> clazz, final Supplier<T> supplier) {
+        return KeFn.generate(clazz, supplier);
+    }
+
     /*
      * Process image field.
      */

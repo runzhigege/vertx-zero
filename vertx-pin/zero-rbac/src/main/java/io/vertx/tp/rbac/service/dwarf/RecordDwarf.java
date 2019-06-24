@@ -1,4 +1,4 @@
-package io.vertx.tp.rbac.extension.dwarf;
+package io.vertx.tp.rbac.service.dwarf;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.query.Inquiry;

@@ -33,4 +33,11 @@ public interface PutAgent {
     @Adjust(Orders.MODULE)
     JsonArray updateBatch(@PathParam("actor") String actor,
                           @BodyParam JsonArray dataArray);
+
+    @PUT
+    @Path("/columns/{actor}/my")
+    @Address(Addr.Put.COLUMN_MY)
+    @Adjust(Orders.MODULE)
+    JsonArray getMy(@PathParam("actor") String actor,
+                    @BodyParam JsonArray projection);
 }

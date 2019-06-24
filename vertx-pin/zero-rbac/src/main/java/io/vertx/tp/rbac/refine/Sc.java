@@ -23,6 +23,10 @@ public class Sc {
         ScLog.infoInit(logger, pattern, args);
     }
 
+    public static void infoResource(final Annal logger, final String pattern, final Object... args) {
+        ScLog.infoResource(logger, pattern, args);
+    }
+
     public static void infoCredit(final Annal logger, final String pattern, final Object... args) {
         ScLog.infoCredit(logger, pattern, args);
     }
