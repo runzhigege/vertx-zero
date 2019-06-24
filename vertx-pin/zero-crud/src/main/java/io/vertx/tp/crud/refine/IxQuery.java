@@ -11,6 +11,7 @@ import io.vertx.tp.ke.cv.KeField;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
 import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
 
 import java.util.Objects;
 
@@ -53,6 +54,16 @@ class IxQuery {
             params.put(KeField.IDENTIFIER, column.getIdentifier());
             params.put(KeField.DYNAMIC, column.getDynamic());
             params.put(KeField.VIEW, column.getView());
+            /*
+             * User principal data will be passed into params
+             * Extract data here for data passing.
+             */
+            final User user = envelop.user();
+            Fn.safeNull(() -> params.put(KeField.PRINCIPLE, user.principal()), user);
+            /*
+             * Actor params
+             */
+            params.put(KeField.ACTOR, actor);
         }
         return params;
     }

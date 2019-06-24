@@ -1,22 +1,19 @@
 package io.vertx.tp.rbac.accredit;
 
-import cn.vertxup.domain.tables.daos.SViewDao;
 import cn.vertxup.domain.tables.pojos.SResource;
-import cn.vertxup.domain.tables.pojos.SView;
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonArray;
-import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.atom.ScRequest;
-import io.vertx.tp.rbac.cv.AuthKey;
-import io.vertx.tp.rbac.cv.em.OwnerType;
 import io.vertx.tp.rbac.refine.Sc;
-import io.vertx.up.aiki.Ux;
+import io.vertx.tp.rbac.service.view.ViewStub;
 import io.vertx.zero.matrix.DataBound;
 
-import java.util.List;
+import javax.inject.Inject;
 import java.util.Objects;
 
 public class MatrixService implements MatrixStub {
+
+    @Inject
+    private transient ViewStub stub;
 
     @Override
     public Future<DataBound> fetchBound(final ScRequest request,
@@ -26,7 +23,7 @@ public class MatrixService implements MatrixStub {
         final String resourceId = resource.getKey();
         final String profileKey = Sc.generateProfileKey(resource);
         /* Fetch User First */
-        return this.fetchMatrix(userId, resourceId)
+        return this.stub.fetchMatrix(userId, resourceId, request.getView())
                 /* Whether userId exist */
                 .compose(result -> Objects.isNull(result) ?
                         /*
@@ -36,7 +33,7 @@ public class MatrixService implements MatrixStub {
                         request.openSession()
                                 /* Extract Roles from Privilege */
                                 .compose(privilege -> privilege.asyncRole(profileKey))
-                                .compose(roles -> this.fetchMatrix(roles, resourceId))
+                                .compose(roles -> this.stub.fetchMatrix(roles, resourceId, request.getView()))
                         :
                         /*
                          * It means that there is defined user resource instead of role resource.
@@ -46,29 +43,5 @@ public class MatrixService implements MatrixStub {
                 )
                 /* DataBound calculate */
                 .compose(MatrixFlow::toBound);
-    }
-
-    @Override
-    public Future<SView> fetchMatrix(final String userId, final String resourceId) {
-        /* Find user matrix */
-        final JsonObject filters = MatrixFlow.toFilters(resourceId);
-        filters.put("owner", userId);
-        filters.put("ownerType", OwnerType.USER.name());
-        // TODO: One View of Default
-        filters.put("name", AuthKey.VIEW_DEFAULT);
-        return Ux.Jooq.on(SViewDao.class)
-                .fetchOneAsync(new JsonObject().put("criteria", filters));
-    }
-
-    @Override
-    public Future<List<SView>> fetchMatrix(final JsonArray roleIds, final String resourceId) {
-        /* Find user matrix */
-        final JsonObject filters = MatrixFlow.toFilters(resourceId);
-        filters.put("owner,i", roleIds);
-        filters.put("ownerType", OwnerType.ROLE.name());
-        filters.put("name", AuthKey.VIEW_DEFAULT);
-        // TODO: One View of Default
-        return Ux.Jooq.on(SViewDao.class)
-                .fetchAndAsync(new JsonObject().put("criteria", filters));
     }
 }

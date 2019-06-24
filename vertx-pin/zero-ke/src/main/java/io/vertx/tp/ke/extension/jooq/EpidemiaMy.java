@@ -1,22 +1,17 @@
-package io.vertx.tp.ke.extension.view;
+package io.vertx.tp.ke.extension.jooq;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.aiki.UxJooq;
-import io.zero.epic.Ut;
 
 /*
  * Column implementation by some specific definition
  * Only full column contains render part for different usage
  */
-public interface ColumnMyStub {
+public interface EpidemiaMy {
 
-    static ColumnMyStub generate(final Class<?> clazz) {
-        return Ut.singleton(clazz);
-    }
-
-    ColumnMyStub on(UxJooq jooq);
+    EpidemiaMy on(UxJooq jooq);
 
     /*
      * Read my columns with filters here.

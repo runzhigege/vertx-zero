@@ -6,8 +6,8 @@ import io.vertx.tp.crud.actor.IxActor;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.init.IxPin;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.tp.ke.extension.ui.ColumnStub;
-import io.vertx.tp.ke.extension.view.ColumnMyStub;
+import io.vertx.tp.ke.extension.jooq.Epidemia;
+import io.vertx.tp.ke.extension.jooq.EpidemiaMy;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
@@ -45,7 +45,7 @@ public class GetActor {
     public Future<Envelop> getFull(final Envelop request) {
         return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Get Stub */
-            final ColumnStub stub = IxPin.getStub();
+            final Epidemia stub = IxPin.getStub();
             return this.getUniform(stub, () -> Ix.inColumns(request, config)
                     /* Header */
                     .compose(input -> IxActor.header().bind(request).procAsync(input, config))
@@ -64,7 +64,7 @@ public class GetActor {
     public Future<Envelop> getMy(final Envelop request) {
         return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Get Stub */
-            final ColumnMyStub stub = IxPin.getMyStub();
+            final EpidemiaMy stub = IxPin.getMyStub();
             return this.getUniform(stub, () -> Ix.inColumns(request, config)
                     /* Header */
                     .compose(input -> IxActor.header().bind(request).procAsync(input, config))
