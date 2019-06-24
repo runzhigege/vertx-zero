@@ -2,8 +2,6 @@ package io.vertx.tp.rbac.accredit;
 
 import cn.vertxup.domain.tables.pojos.SView;
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonObject;
-import io.vertx.zero.eon.Strings;
 import io.vertx.zero.matrix.DataBound;
 
 import java.util.ArrayList;
@@ -24,12 +22,5 @@ class MatrixFlow {
                 .addCriteria(matrix.getCriteria())
         );
         return Future.succeededFuture(bound);
-    }
-
-    static JsonObject toFilters(final String resourceId) {
-        final JsonObject filters = new JsonObject();
-        filters.put(Strings.EMPTY, Boolean.TRUE);
-        filters.put("resourceId", resourceId);
-        return filters;
     }
 }

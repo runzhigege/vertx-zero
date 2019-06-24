@@ -19,6 +19,7 @@ public class ScRequest implements Serializable {
     private transient final String sigma;
     private transient final String user;
     private transient final String sessionId;
+    private transient final String view = AuthKey.VIEW_DEFAULT;
     private transient final HttpMethod method;
 
     /*
@@ -76,6 +77,10 @@ public class ScRequest implements Serializable {
 
     public String getUser() {
         return this.user;
+    }
+
+    public String getView() {
+        return this.view;
     }
 
     public String getCacheKey() {

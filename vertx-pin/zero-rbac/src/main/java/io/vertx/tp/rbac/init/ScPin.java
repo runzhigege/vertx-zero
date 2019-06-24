@@ -1,5 +1,6 @@
 package io.vertx.tp.rbac.init;
 
+import io.vertx.tp.ke.extension.KeBus;
 import io.vertx.tp.ke.extension.Orbit;
 import io.vertx.tp.ke.tool.Ke;
 import io.vertx.tp.rbac.atom.ScConfig;
@@ -31,7 +32,7 @@ public class ScPin {
         if (Objects.isNull(clazz)) {
             return null;
         } else {
-            return Orbit.generate(clazz);
+            return KeBus.orbit(clazz);
         }
     }
 }

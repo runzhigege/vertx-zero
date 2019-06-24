@@ -4,7 +4,10 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
-import io.vertx.tp.ke.extension.ui.AbstractColumn;
+import io.vertx.tp.ke.extension.jooq.AbstractJewel;
+import io.vertx.tp.ke.extension.jooq.Epidemia;
+import io.vertx.tp.ui.cv.UiMsg;
+import io.vertx.tp.ui.refine.Ui;
 import io.vertx.tp.ui.service.column.UiValve;
 
 /*
@@ -12,10 +15,11 @@ import io.vertx.tp.ui.service.column.UiValve;
  * 1. Dynamic Column
  * 2. Static Column
  */
-public class ColumnService extends AbstractColumn {
+public class ColumnService extends AbstractJewel<Epidemia> implements Epidemia {
 
     @Override
     public Future<JsonArray> fetchFull(final JsonObject config) {
+        Ui.infoUi(this.getLogger(), UiMsg.COLUMN_FULL, config.encodePrettily());
         final Boolean dynamic = config.getBoolean(KeField.DYNAMIC);
         /* Ui valve initialization */
         final UiValve valve;
