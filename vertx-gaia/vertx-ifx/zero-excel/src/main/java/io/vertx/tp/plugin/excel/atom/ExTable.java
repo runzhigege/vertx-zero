@@ -54,6 +54,8 @@ public class ExTable implements Serializable {
         return this.getConnect().getDao();
     }
 
+    public String getPojoFile() {return this.getConnect().getPojoFile();}
+
     /*
      * Business Unique
      */

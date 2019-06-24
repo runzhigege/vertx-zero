@@ -15,10 +15,7 @@ import io.zero.epic.Ut;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.InputStream;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ExcelClientImpl implements ExcelClient {
@@ -108,9 +105,13 @@ public class ExcelClientImpl implements ExcelClient {
              */
             final JsonObject filters = table.whereUnique(data);
             LOGGER.info("[ Excel ] Filters: {0}, Table: {1}", filters.encode(), table.getName());
-            final T entity = Ut.deserialize(data, table.getPojo());
+            final T entity = Ux.fromJson(data, table.getPojo(), table.getPojoFile());
             final UxJooq jooq = Ux.Jooq.on(table.getDao());
             if (null != jooq) {
+                final String pojoFile = table.getPojoFile();
+                if (Ut.notNil(pojoFile)) {
+                    jooq.on(pojoFile);
+                }
                 /*
                  * Unique filter to fetch single record database here.
                  * Such as code + sigma
