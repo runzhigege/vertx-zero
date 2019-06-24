@@ -1,4 +1,4 @@
-package io.vertx.tp.rbac.extension.dwarf;
+package io.vertx.tp.rbac.service.dwarf;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -20,7 +20,6 @@ class ArrayDwarf implements DataDwarf {
         final JsonArray inputArray = dataReference.getJsonArray("data");
         /* rows */
         JsonArray updated = Dwarf.onRows(inputArray, matrix.getJsonObject("rows"));
-
         /* projection: for After Get only */
         updated = Dwarf.onProjection(updated, matrix.getJsonArray(Inquiry.KEY_PROJECTION));
         /* Updated */

@@ -1,21 +1,21 @@
-package io.vertx.tp.ui.service;
+package io.vertx.tp.ui.extension;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
-import io.vertx.tp.ke.extension.jooq.AbstractJewel;
-import io.vertx.tp.ke.extension.jooq.Epidemia;
+import io.vertx.tp.ke.extension.jooq.AbstractJooq;
+import io.vertx.tp.ke.extension.jooq.Apeak;
 import io.vertx.tp.ui.cv.UiMsg;
 import io.vertx.tp.ui.refine.Ui;
 import io.vertx.tp.ui.service.column.UiValve;
 
 /*
  * Bridge design for call internal actual column service
- * 1. Dynamic Column
- * 2. Static Column
+ * 1. Dynamic Apeak
+ * 2. Static Apeak
  */
-public class ColumnService extends AbstractJewel<Epidemia> implements Epidemia {
+public class ColumnService extends AbstractJooq<Apeak> implements Apeak {
 
     @Override
     public Future<JsonArray> fetchFull(final JsonObject config) {

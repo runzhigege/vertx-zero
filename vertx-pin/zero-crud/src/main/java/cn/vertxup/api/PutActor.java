@@ -5,7 +5,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.actor.IxActor;
 import io.vertx.tp.crud.cv.Addr;
+import io.vertx.tp.crud.init.IxPin;
 import io.vertx.tp.crud.refine.Ix;
+import io.vertx.tp.ke.extension.jooq.ApeakMy;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
@@ -60,6 +62,22 @@ public class PutActor {
                     .compose(dao::updateAsync)
                     /* JsonArray */
                     .compose(Http::success200);
+        });
+    }
+
+    @Address(Addr.Put.COLUMN_MY)
+    public <T> Future<Envelop> updateColumn(final Envelop request) {
+        /* Batch Extract */
+        return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
+            /* Data Get */
+            final JsonArray projection = Ux.getArray1(request);
+            /* Put Stub */
+            final ApeakMy stub = IxPin.getMyStub();
+            return Uniform.call(stub, () -> Uniform.seeker(dao, request, config)
+                    /* Fetch My Columns */
+                    .compose(params -> stub.on(dao).saveMy(params, projection))
+                    /* Return Result */
+                    .compose(Http::success200));
         });
     }
 }

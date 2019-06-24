@@ -1,20 +1,16 @@
 package cn.vertxup.api;
 
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonArray;
 import io.vertx.tp.crud.actor.IxActor;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.init.IxPin;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.tp.ke.extension.jooq.Epidemia;
-import io.vertx.tp.ke.extension.jooq.EpidemiaMy;
+import io.vertx.tp.ke.extension.jooq.Apeak;
+import io.vertx.tp.ke.extension.jooq.ApeakMy;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.atom.Envelop;
-
-import java.util.Objects;
-import java.util.function.Supplier;
 
 @Queue
 public class GetActor {
@@ -45,8 +41,8 @@ public class GetActor {
     public Future<Envelop> getFull(final Envelop request) {
         return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Get Stub */
-            final Epidemia stub = IxPin.getStub();
-            return this.getUniform(stub, () -> Ix.inColumns(request, config)
+            final Apeak stub = IxPin.getStub();
+            return Uniform.call(stub, () -> Ix.inColumns(request, config)
                     /* Header */
                     .compose(input -> IxActor.header().bind(request).procAsync(input, config))
                     /* Fetch Full Columns */
@@ -64,26 +60,12 @@ public class GetActor {
     public Future<Envelop> getMy(final Envelop request) {
         return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Get Stub */
-            final EpidemiaMy stub = IxPin.getMyStub();
-            return this.getUniform(stub, () -> Ix.inColumns(request, config)
-                    /* Header */
-                    .compose(input -> IxActor.header().bind(request).procAsync(input, config))
+            final ApeakMy stub = IxPin.getMyStub();
+            return Uniform.call(stub, () -> Uniform.seeker(dao, request, config)
                     /* Fetch My Columns */
                     .compose(stub.on(dao)::fetchMy)
                     /* Return Result */
                     .compose(Http::success200));
         });
-    }
-
-    private <T> Future<Envelop> getUniform(final T stub, final Supplier<Future<Envelop>> executor) {
-        /* If null */
-        if (Objects.isNull(stub)) {
-            /* No thing return from this interface */
-            return Ux.toFuture(new JsonArray())
-                    /* Return Result */
-                    .compose(Http::success200);
-        } else {
-            return executor.get();
-        }
     }
 }

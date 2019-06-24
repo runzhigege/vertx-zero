@@ -2,10 +2,10 @@ package io.vertx.tp.ke.extension;
 
 import io.vertx.tp.error._501ExtensionAbstractException;
 import io.vertx.tp.error._501ExtensionInterfaceException;
-import io.vertx.tp.ke.extension.jooq.AbstractJewel;
-import io.vertx.tp.ke.extension.jooq.Epidemia;
-import io.vertx.tp.ke.extension.jooq.EpidemiaMy;
-import io.vertx.tp.ke.extension.jooq.Manhunt;
+import io.vertx.tp.ke.extension.jooq.AbstractJooq;
+import io.vertx.tp.ke.extension.jooq.Apeak;
+import io.vertx.tp.ke.extension.jooq.ApeakMy;
+import io.vertx.tp.ke.extension.jooq.Seeker;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
@@ -21,18 +21,18 @@ public class KeBus {
         return Ut.singleton(clazz);
     }
 
-    public static Epidemia epidemia(final Class<?> clazz) {
-        ensure(clazz, AbstractJewel.class, Epidemia.class);
+    public static Apeak epidemia(final Class<?> clazz) {
+        ensure(clazz, AbstractJooq.class, Apeak.class);
         return Ut.singleton(clazz);
     }
 
-    public static EpidemiaMy epidemiaMy(final Class<?> clazz) {
-        ensure(clazz, AbstractJewel.class, EpidemiaMy.class);
+    public static ApeakMy epidemiaMy(final Class<?> clazz) {
+        ensure(clazz, AbstractJooq.class, ApeakMy.class);
         return Ut.singleton(clazz);
     }
 
-    public static Manhunt manhunt(final Class<?> clazz) {
-        ensure(clazz, AbstractJewel.class, Manhunt.class);
+    public static Seeker seeker(final Class<?> clazz) {
+        ensure(clazz, AbstractJooq.class, Seeker.class);
         return Ut.singleton(clazz);
     }
 

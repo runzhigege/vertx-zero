@@ -10,5 +10,8 @@ public interface ViewStub {
 
     Future<SView> fetchMatrix(String user, String resourceId, String view);
 
+    Future<SView> saveMatrix(String user, String resourceId, String view,
+                             String sigma, JsonArray projection);
+
     Future<List<SView>> fetchMatrix(JsonArray role, String resourceId, String view);
 }

@@ -261,6 +261,10 @@ public class Ut {
         return Net.getIP();
     }
 
+    public static JsonObject netStatus(final String line) {
+        return Net.netStatus(line);
+    }
+
     public static String netUri(final String url) {
         return Net.netUri(url);
     }

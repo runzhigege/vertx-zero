@@ -17,7 +17,7 @@
  * POST   /oauth/token          Token Exchange
  *
  * Here are some plugin:
- * 1) Column Plugin
+ * 1) Apeak Plugin
  * column:
  *   component: xxx.xxx.ColService ( Must implement ColStub )
  * 2) Auditor Plugin

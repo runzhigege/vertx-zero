@@ -8,6 +8,7 @@ public interface KeField {
 
     String ENTITY_ID = "entityId";
     String MODEL_ID = "modelId";
+    String RESOURCE_ID = "resourceId";
 
     String NAME = "name";
     String CODE = "code";
@@ -36,6 +37,7 @@ public interface KeField {
 
     String METHOD = "method";
     String URI = "uri";
+    String URI_REQUEST = "requestUri";
 
     String USERNAME = "username";
     String CLIENT_ID = "clientId";

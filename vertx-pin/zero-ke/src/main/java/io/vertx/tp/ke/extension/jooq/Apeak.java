@@ -6,12 +6,12 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.aiki.UxJooq;
 
 /*
- * Column implementation by some specific definition
+ * Apeak implementation by some specific definition
  * Only full column contains render part for different usage
  */
-public interface Epidemia {
+public interface Apeak {
 
-    Epidemia on(UxJooq jooq);
+    Apeak on(UxJooq jooq);
 
     /*
      * Read full columns with filters here.

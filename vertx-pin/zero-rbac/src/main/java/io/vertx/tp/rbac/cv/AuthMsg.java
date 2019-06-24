@@ -37,4 +37,7 @@ public interface AuthMsg {
     String REGION_TYPE = "DataRegion Analyzed type: {0}, data = {1}";
     String REGION_ROWS = "DataRegion Rows -> {0}";
     String REGION_PROJECTION = "DataRegion Projection -> {0}";
+
+    String SEEKER_RESOURCE = "Seeking Resource with uri = {0}, method = {1}, sigma = {2}";
+    String VIEW_PROCESS = "My View Operation: {0}, filters = {1}";
 }
