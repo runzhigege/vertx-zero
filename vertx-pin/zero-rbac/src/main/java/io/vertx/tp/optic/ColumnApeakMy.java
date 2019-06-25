@@ -1,11 +1,10 @@
-package io.vertx.tp.rbac.extension;
+package io.vertx.tp.optic;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
-import io.vertx.tp.ke.extension.jooq.AbstractJooq;
-import io.vertx.tp.ke.extension.jooq.ApeakMy;
+import io.vertx.tp.optic.fantom.Anchoret;
 import io.vertx.tp.rbac.service.view.ViewService;
 import io.vertx.tp.rbac.service.view.ViewStub;
 import io.vertx.up.aiki.Ux;
@@ -14,7 +13,7 @@ import io.zero.epic.Ut;
 import java.util.Objects;
 import java.util.function.BiFunction;
 
-public class ColumnMyService extends AbstractJooq<ApeakMy> implements ApeakMy {
+public class ColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
 
     private final transient ViewStub stub = Ut.singleton(ViewService.class);
 

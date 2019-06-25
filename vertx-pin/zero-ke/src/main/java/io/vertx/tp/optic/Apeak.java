@@ -1,4 +1,4 @@
-package io.vertx.tp.ke.extension.jooq;
+package io.vertx.tp.optic;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
@@ -8,6 +8,7 @@ import io.vertx.up.aiki.UxJooq;
 /*
  * Apeak implementation by some specific definition
  * Only full column contains render part for different usage
+ * The implementation class should be in zero-ui to read column information.
  */
 public interface Apeak {
 

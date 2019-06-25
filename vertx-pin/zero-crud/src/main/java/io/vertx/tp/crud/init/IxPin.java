@@ -4,9 +4,6 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.crud.atom.IxSeeker;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.tp.ke.extension.jooq.Apeak;
-import io.vertx.tp.ke.extension.jooq.ApeakMy;
-import io.vertx.tp.ke.extension.jooq.Seeker;
 import io.vertx.tp.ke.tool.Ke;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.atom.Rule;
@@ -50,20 +47,8 @@ public class IxPin {
         return IxDao.getUris();
     }
 
-    public static Apeak getStub() {
-        return IxExtension.getStub();
-    }
-
-    public static ApeakMy getMyStub() {
-        return IxExtension.getMyStub();
-    }
-
     public static IxSeeker getSeeker(final String requestUri, final HttpMethod method) {
         return IxConfiguration.getSeeker(requestUri, method);
-    }
-
-    public static Seeker getSeeker() {
-        return IxExtension.getSeeker();
     }
 
     public static ConcurrentMap<String, List<Rule>> getRules(final String actor) {
