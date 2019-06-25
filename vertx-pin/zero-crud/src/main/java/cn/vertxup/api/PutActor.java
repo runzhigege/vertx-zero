@@ -5,9 +5,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.actor.IxActor;
 import io.vertx.tp.crud.cv.Addr;
-import io.vertx.tp.crud.init.IxPin;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.tp.ke.extension.jooq.ApeakMy;
+import io.vertx.tp.optic.ApeakMy;
+import io.vertx.tp.optic.Pocket;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
@@ -72,7 +72,7 @@ public class PutActor {
             /* Data Get */
             final JsonArray projection = Ux.getArray1(request);
             /* Put Stub */
-            final ApeakMy stub = IxPin.getMyStub();
+            final ApeakMy stub = Pocket.lookup(ApeakMy.class);
             return Uniform.call(stub, () -> Uniform.seeker(dao, request, config)
                     /* Fetch My Columns */
                     .compose(params -> stub.on(dao).saveMy(params, projection))

@@ -9,6 +9,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class Ke {
+
     /*
      * Read jooq configuration database name `catalog`
      */

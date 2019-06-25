@@ -1,11 +1,10 @@
-package io.vertx.tp.rbac.extension;
+package io.vertx.tp.optic;
 
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
-import io.vertx.tp.ke.extension.jooq.AbstractJooq;
-import io.vertx.tp.ke.extension.jooq.Seeker;
+import io.vertx.tp.optic.fantom.Anchoret;
 import io.vertx.tp.rbac.accredit.ActionService;
 import io.vertx.tp.rbac.accredit.ActionStub;
 import io.vertx.tp.rbac.cv.AuthMsg;
@@ -16,7 +15,7 @@ import io.zero.epic.Ut;
 /*
  * Seek impact resource for params here, it will be passed by crud
  */
-public class ResourceSeeker extends AbstractJooq<Seeker> implements Seeker {
+public class IntimitySeeker extends Anchoret<Seeker> implements Seeker {
 
     private transient final ActionStub stub = Ut.singleton(ActionService.class);
 

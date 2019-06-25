@@ -1,7 +1,5 @@
 package io.vertx.tp.rbac.init;
 
-import io.vertx.tp.ke.extension.KeBus;
-import io.vertx.tp.ke.extension.Orbit;
 import io.vertx.tp.ke.tool.Ke;
 import io.vertx.tp.rbac.atom.ScConfig;
 import io.vertx.tp.rbac.refine.Sc;
@@ -23,10 +21,5 @@ public class ScPin {
 
     public static ScConfig getConfig() {
         return ScConfiguration.getConfig();
-    }
-
-    public static Orbit getOrbit() {
-        final Class<?> clazz = getConfig().getOrbit();
-        return Ke.generate(clazz, () -> KeBus.orbit(clazz));
     }
 }

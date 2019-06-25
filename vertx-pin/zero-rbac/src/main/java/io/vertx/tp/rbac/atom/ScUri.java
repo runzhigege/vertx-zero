@@ -3,8 +3,8 @@ package io.vertx.tp.rbac.atom;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.tp.ke.extension.Orbit;
-import io.vertx.tp.rbac.init.ScPin;
+import io.vertx.tp.optic.Orbit;
+import io.vertx.tp.optic.Pocket;
 import io.vertx.up.web.ZeroAnno;
 
 /*
@@ -13,7 +13,7 @@ import io.vertx.up.web.ZeroAnno;
 public class ScUri {
 
     static String getUriId(final String uri, final String requestUri) {
-        final Orbit orbit = ScPin.getOrbit();
+        final Orbit orbit = Pocket.lookup(Orbit.class);
         if (null == orbit) {
             return uri;
         } else {

@@ -1,4 +1,4 @@
-package io.vertx.tp.ke.extension.jooq;
+package io.vertx.tp.optic;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;

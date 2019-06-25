@@ -20,6 +20,7 @@
         <module>zero-lbs</module>
         <module>zero-ui</module>
         <module>zero-quiz</module>
+        <module>zero-jet</module>
     </modules>
     <dependencies>
         <dependency>

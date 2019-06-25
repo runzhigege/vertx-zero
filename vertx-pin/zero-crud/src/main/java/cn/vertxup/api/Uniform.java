@@ -5,9 +5,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.actor.IxActor;
 import io.vertx.tp.crud.atom.IxModule;
-import io.vertx.tp.crud.init.IxPin;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.tp.ke.extension.jooq.Seeker;
+import io.vertx.tp.optic.Pocket;
+import io.vertx.tp.optic.Seeker;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.atom.Envelop;
@@ -33,7 +33,7 @@ class Uniform {
 
     static Future<JsonObject> seeker(final UxJooq dao, final Envelop request, final IxModule config) {
         /* Seeker Stub */
-        final Seeker seeker = IxPin.getSeeker();
+        final Seeker seeker = Pocket.lookup(Seeker.class);
         return Ix.inSeekers(request)
                 /* Header */
                 .compose(input -> IxActor.header().bind(request).procAsync(input, config))
