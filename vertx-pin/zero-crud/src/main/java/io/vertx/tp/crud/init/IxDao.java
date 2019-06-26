@@ -13,9 +13,7 @@ import io.vertx.zero.eon.Strings;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -31,8 +29,6 @@ class IxDao {
 
     private static final ConcurrentMap<String, IxModule> CONFIG_MAP =
             new ConcurrentHashMap<>();
-    private static final Set<String> MODULE_REG =
-            new HashSet<>();
 
     static void init() {
         /*
@@ -59,41 +55,21 @@ class IxDao {
                     /*
                      * Resolution for resource key calculation
                      */
-                    initUri(key);
+                    IxConfiguration.addUrs(key);
                     CONFIG_MAP.put(key, config);
                 } else {
                     Ix.errorInit(LOGGER, IxMsg.INIT_ERROR, path, config.getName());
                 }
             }, configDao);
         });
-        Ix.infoInit(LOGGER, "IxDao Finished ! Size = {0}, Uris = {1}", CONFIG_MAP.size(), MODULE_REG.size());
-    }
-
-    private static void initUri(final String key) {
-        final Set<String> definition = new HashSet<>();
-        /*
-         * Specification of actor
-         */
-        definition.add("/api/" + key);
-        definition.add("/api/" + key + "/:key");    // Fix issue for micro service ci missing
-        definition.add("/api/" + key + "/search");
-        definition.add("/api/" + key + "/missing");
-        definition.add("/api/" + key + "/existing");
-        definition.add("/api/batch/" + key + "/delete");
-        definition.add("/api/batch/" + key + "/update");
-        definition.add("/api/columns/" + key + "/my");
-        definition.add("/api/columns/" + key + "/full");
-        MODULE_REG.addAll(definition);
+        Ix.infoInit(LOGGER, "IxDao Finished ! Size = {0}, Uris = {0}",
+                CONFIG_MAP.size(), IxConfiguration.getUris().size());
     }
 
     static IxModule get(final String actor) {
         Ix.infoRest(LOGGER, "Actor = {0}", actor);
         final IxModule config = CONFIG_MAP.get(actor);
         return Fn.getNull(null, () -> config, config);
-    }
-
-    static Set<String> getUris() {
-        return MODULE_REG;
     }
 
     static UxJooq get(final IxModule config) {
