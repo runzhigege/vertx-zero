@@ -3,7 +3,9 @@ package io.vertx.tp.ke.tool;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.web.Session;
 import io.vertx.tp.ke.cv.KeField;
+import io.vertx.up.atom.Envelop;
 import io.vertx.up.log.Annal;
 
 import java.util.function.Function;
@@ -35,6 +37,36 @@ public class Ke {
 
     public static void infoKe(final Annal logger, final String pattern, final Object... args) {
         KeLog.infoKe(logger, pattern, args);
+    }
+
+    /*
+     * Session key generation
+     */
+    public static String keySession(final String method, final String uri) {
+        return KeCache.keySession(method, uri);
+    }
+
+    public static String keySession(final Envelop envelop) {
+        return KeCache.keyEnvelop(envelop, KeCache::keySession);
+    }
+
+    public static String keyAuthorized(final String method, final String uri) {
+        return KeCache.keyAuthorized(method, uri);
+    }
+
+    public static String keyAuthorized(final Envelop envelop) {
+        return KeCache.keyEnvelop(envelop, KeCache::keyAuthorized);
+    }
+
+    /*
+     * Get keySession here for current logged user
+     */
+    public static Future<Session> session(final String id) {
+        return KeCache.session(id);
+    }
+
+    public static <T> Future<T> session(final Session session, final String sessionKey, final String dataKey, final T value) {
+        return KeCache.session(session, sessionKey, dataKey, value);
     }
 
     /*

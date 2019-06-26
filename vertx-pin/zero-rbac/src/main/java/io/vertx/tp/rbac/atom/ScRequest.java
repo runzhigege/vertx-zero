@@ -4,6 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeDefault;
+import io.vertx.tp.ke.tool.Ke;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.init.ScPin;
 import io.vertx.tp.rbac.refine.Sc;
@@ -86,11 +87,11 @@ public class ScRequest implements Serializable {
     }
 
     public String getCacheKey() {
-        return "session-" + this.method.name() + ":" + this.uri;
+        return Ke.keySession(this.method.name(), this.uri);
     }
 
     public String getAuthorizedKey() {
-        return "authorized-" + this.method.name() + ":" + this.uri;
+        return Ke.keyAuthorized(this.method.name(), this.uri);
     }
 
     public Future<ScPrivilege> openSession() {

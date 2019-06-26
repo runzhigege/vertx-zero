@@ -36,6 +36,7 @@ public class ExColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
         final String view = params.getString(ARG2);
         return this.uniform(params, (resourceId) ->
                 this.stub.saveMatrix(userId, resourceId, view, projection)
+                        /* New projection */
                         .compose(updated -> Ux.toFuture(Ut.toJArray(updated.getProjection()))));
     }
 
