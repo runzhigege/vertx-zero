@@ -28,6 +28,13 @@ public interface Addr {
         String BATCH = Prefix._EVENT + "X-DELETE/BATCH";
     }
 
+    interface File {
+
+        String IMPORT = Prefix._EVENT + "X-FILE/IMPORT";
+
+        String EXPORT = Prefix._EVENT + "X-FILE/EXPORT";
+    }
+
     interface Post {
 
         String ADD = Prefix._EVENT + "X-ADD";

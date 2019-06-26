@@ -43,6 +43,8 @@ class ScPhase {
     private static String cacheKey(final RoutingContext context) {
         final HttpServerRequest request = context.request();
         final String uri = uri(context);
+        /* Cache Data */
+        Sc.infoAuth(LOGGER, "Processed Uri: {0}", uri);
         /* Cache Key */
         final String cacheKey = Ke.keySession(request.method().name(), uri);
         /* Cache Data */
