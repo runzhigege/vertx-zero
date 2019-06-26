@@ -87,6 +87,10 @@ public class Ut {
         return Instance.get(instance, name);
     }
 
+    public static <T> T field(final Class<?> interfaceCls, final String name) {
+        return Instance.getI(interfaceCls, name);
+    }
+
     public static Field[] fields(final Class<?> clazz) {
         return Instance.get(clazz);
     }
@@ -259,6 +263,10 @@ public class Ut {
 
     public static String netIP() {
         return Net.getIP();
+    }
+
+    public static JsonObject netStatus(final String line) {
+        return Net.netStatus(line);
     }
 
     public static String netUri(final String url) {

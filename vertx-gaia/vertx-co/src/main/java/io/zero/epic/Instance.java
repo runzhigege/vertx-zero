@@ -142,6 +142,19 @@ final class Instance {
         }, clazz, name);
     }
 
+    static <T> T getI(final Class<?> interfaceCls, final String name) {
+        return Fn.getNull(() -> Fn.safeJvm(() -> {
+                    final Field field = interfaceCls.getField(name);
+                    final Object result = field.get(null);
+                    if (null != result) {
+                        return (T) result;
+                    } else {
+                        return null;
+                    }
+                }, LOGGER)
+                , interfaceCls, name);
+    }
+
     static <T> T get(final Object instance,
                      final String name) {
         return Fn.getNull(() -> Fn.safeJvm(() -> {

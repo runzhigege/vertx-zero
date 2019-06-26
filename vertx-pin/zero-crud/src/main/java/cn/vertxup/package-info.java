@@ -23,9 +23,9 @@
  * POST     /api/{actor}/export             Export Operation
  * POST     /api/{actor}/import             Import Operation
  * POST     /api/{actor}/search             Search ( Search Engine )
- * GET      /api/columns/full/{actor}       Column Full
- * GET      /api/columns/my/{actor}         Column of My
- * POST     /api/columns/my/{actor}         Column Saving of My
+ * GET      /api/columns/full/{actor}       Apeak Full
+ * GET      /api/columns/my/{actor}         Apeak of My
+ * POST     /api/columns/my/{actor}         Apeak Saving of My
  *
  */
 package cn.vertxup;

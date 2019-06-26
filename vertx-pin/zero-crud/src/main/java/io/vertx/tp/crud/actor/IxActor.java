@@ -12,6 +12,32 @@ import io.zero.epic.fn.Fn;
  * Actor workflow for each Envelop
  */
 public interface IxActor {
+
+    static IxActor user() {
+        return Fn.pool(Pool.ACTOR_MAP, UserActor.class.getName(),
+                UserActor::new);
+    }
+
+    static IxActor uri() {
+        return Fn.pool(Pool.ACTOR_MAP, UriActor.class.getName(),
+                UriActor::new);
+    }
+
+    static IxActor view() {
+        return Fn.pool(Pool.ACTOR_MAP, ViewActor.class.getName(),
+                ViewActor::new);
+    }
+
+    static IxActor actor() {
+        return Fn.pool(Pool.ACTOR_MAP, ModuleActor.class.getName(),
+                ModuleActor::new);
+    }
+
+    static IxActor apeak() {
+        return Fn.pool(Pool.ACTOR_MAP, ApeakActor.class.getName(),
+                ApeakActor::new);
+    }
+
     static IxActor unique() {
         return Fn.pool(Pool.ACTOR_MAP, UniqueActor.class.getName(),
                 UniqueActor::new);
@@ -45,6 +71,10 @@ public interface IxActor {
     static IxActor update() {
         return Fn.pool(Pool.ACTOR_MAP, UpdateActor.class.getName(),
                 UpdateActor::new);
+    }
+
+    static Future<JsonObject> start() {
+        return Ux.toFuture(new JsonObject());
     }
 
     /*

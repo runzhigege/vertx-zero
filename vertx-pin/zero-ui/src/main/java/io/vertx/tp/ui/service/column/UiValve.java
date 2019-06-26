@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.zero.epic.fn.Fn;
 
 /*
- * Column choice for different usage,
+ * Apeak choice for different usage,
  * valve means small door to do selection on mode
  */
 public interface UiValve {

@@ -1,11 +1,14 @@
 package io.zero.epic;
 
+import io.vertx.core.json.JsonObject;
+import io.vertx.zero.eon.Values;
 import io.zero.epic.fn.Fn;
 import io.zero.epic.net.IPHost;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.Locale;
 
 class Net {
 
@@ -69,6 +72,20 @@ class Net {
             return url.split("\\?")[0];
         } else {
             return url;
+        }
+    }
+
+    static JsonObject netStatus(final String line) {
+        if (null == line || !line.contains(" ")) {
+            return new JsonObject();
+        }
+        final String[] splitted = line.split(" ");
+        if (2 == splitted.length) {
+            final String method = splitted[Values.IDX].trim().toUpperCase(Locale.getDefault());
+            final String uri = splitted[Values.ONE].trim();
+            return new JsonObject().put("method", method).put("uri", uri);
+        } else {
+            return new JsonObject();
         }
     }
 }
