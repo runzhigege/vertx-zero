@@ -74,6 +74,10 @@ public class PutActor {
             /* Put Stub */
             final ApeakMy stub = Pocket.lookup(ApeakMy.class);
             return Unity.call(stub, () -> Unity.seeker(dao, request, config)
+                    /* View parameters filling */
+                    .compose(input -> IxActor.view().procAsync(input, config))
+                    /* User filling */
+                    .compose(input -> IxActor.user().bind(request).procAsync(input, config))
                     /* Fetch My Columns */
                     .compose(params -> stub.on(dao).saveMy(params, projection))
                     /* Return Result */

@@ -14,6 +14,8 @@ import io.vertx.up.aiki.UxJooq;
 public interface ApeakMy {
 
     String ARG0 = KeField.RESOURCE_ID;
+    String ARG1 = "user";
+    String ARG2 = KeField.VIEW;
 
     ApeakMy on(UxJooq jooq);
 
