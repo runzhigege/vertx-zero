@@ -43,10 +43,6 @@ public class Sc {
         return ScPhase.uri(context);
     }
 
-    public static String cacheKey(final RoutingContext context) {
-        return ScPhase.cacheKey(context);
-    }
-
     public static JsonObject cacheData(final RoutingContext context) {
         return ScPhase.cacheData(context);
     }

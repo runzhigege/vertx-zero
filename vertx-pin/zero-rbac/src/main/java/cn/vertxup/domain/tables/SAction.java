@@ -35,7 +35,7 @@ public class SAction extends TableImpl<SActionRecord> {
      * The reference instance of <code>DB_ETERNAL.S_ACTION</code>
      */
     public static final SAction S_ACTION = new SAction();
-    private static final long serialVersionUID = -1306436748;
+    private static final long serialVersionUID = 453432768;
     /**
      * The column <code>DB_ETERNAL.S_ACTION.KEY</code>. 「key」- 操作ID
      */
@@ -61,10 +61,6 @@ public class SAction extends TableImpl<SActionRecord> {
      */
     public final TableField<SActionRecord, Integer> LEVEL = createField("LEVEL", org.jooq.impl.SQLDataType.INTEGER, this, "「level」- 操作级别, ACL控制");
     /**
-     * The column <code>DB_ETERNAL.S_ACTION.MODE</code>. 「mode」- 操作模式（决定是否触发副作用流程）, NODE | DEFINE
-     */
-    public final TableField<SActionRecord, String> MODE = createField("MODE", org.jooq.impl.SQLDataType.VARCHAR(20), this, "「mode」- 操作模式（决定是否触发副作用流程）, NODE | DEFINE");
-    /**
      * The column <code>DB_ETERNAL.S_ACTION.URI</code>. 「uri」- 资源地址
      */
     public final TableField<SActionRecord, String> URI = createField("URI", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「uri」- 资源地址");
@@ -77,13 +73,9 @@ public class SAction extends TableImpl<SActionRecord> {
      */
     public final TableField<SActionRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「sigma」- 统一标识");
     /**
-     * The column <code>DB_ETERNAL.S_ACTION.EFFECT_COMPONENT</code>. 「effectComponent」- mode = DEFINE，自定义副作用流程
+     * The column <code>DB_ETERNAL.S_ACTION.RENEWAL_CREDIT</code>. 「renewalCredit」- 被刷新的凭证
      */
-    public final TableField<SActionRecord, String> EFFECT_COMPONENT = createField("EFFECT_COMPONENT", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「effectComponent」- mode = DEFINE，自定义副作用流程");
-    /**
-     * The column <code>DB_ETERNAL.S_ACTION.EFFECT_CONFIG</code>. 「effectConfig」- 副作用配置信息
-     */
-    public final TableField<SActionRecord, String> EFFECT_CONFIG = createField("EFFECT_CONFIG", org.jooq.impl.SQLDataType.CLOB, this, "「effectConfig」- 副作用配置信息");
+    public final TableField<SActionRecord, String> RENEWAL_CREDIT = createField("RENEWAL_CREDIT", org.jooq.impl.SQLDataType.CLOB, this, "「renewalCredit」- 被刷新的凭证");
     /**
      * The column <code>DB_ETERNAL.S_ACTION.LANGUAGE</code>. 「language」- 使用的语言
      */

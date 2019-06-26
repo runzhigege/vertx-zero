@@ -126,20 +126,6 @@ public class SResourceDao extends DAOImpl<SResourceRecord, cn.vertxup.domain.tab
     }
 
     /**
-     * Fetch records that have <code>MODEL_ID IN (values)</code>
-     */
-    public List<cn.vertxup.domain.tables.pojos.SResource> fetchByModelId(String... values) {
-        return fetch(SResource.S_RESOURCE.MODEL_ID, values);
-    }
-
-    /**
-     * Fetch records that have <code>MODEL_KEY IN (values)</code>
-     */
-    public List<cn.vertxup.domain.tables.pojos.SResource> fetchByModelKey(String... values) {
-        return fetch(SResource.S_RESOURCE.MODEL_KEY, values);
-    }
-
-    /**
      * Fetch records that have <code>CATEGORY IN (values)</code>
      */
     public List<cn.vertxup.domain.tables.pojos.SResource> fetchByCategory(String... values) {
@@ -263,20 +249,6 @@ public class SResourceDao extends DAOImpl<SResourceRecord, cn.vertxup.domain.tab
      */
     public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SResource>> fetchBySigmaAsync(List<String> values) {
         return fetchAsync(SResource.S_RESOURCE.SIGMA,values);
-    }
-
-    /**
-     * Fetch records that have <code>MODEL_ID IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SResource>> fetchByModelIdAsync(List<String> values) {
-        return fetchAsync(SResource.S_RESOURCE.MODEL_ID,values);
-    }
-
-    /**
-     * Fetch records that have <code>MODEL_KEY IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.domain.tables.pojos.SResource>> fetchByModelKeyAsync(List<String> values) {
-        return fetchAsync(SResource.S_RESOURCE.MODEL_KEY,values);
     }
 
     /**
