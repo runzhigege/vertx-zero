@@ -37,8 +37,6 @@ public interface Addr {
         String EXISTING = Prefix._EVENT + "X-EXISTING";
 
         String MISSING = Prefix._EVENT + "X-MISSING";
-
-        String COLUMN = Prefix._EVENT + "X-COLUMN";
     }
 
     interface Put {
@@ -46,5 +44,7 @@ public interface Addr {
         String BY_ID = Prefix._EVENT + "X-PUT/ID";
 
         String BATCH = Prefix._EVENT + "X-PUT/BATCH";
+
+        String COLUMN_MY = Prefix._EVENT + "X-COLUMN/MY/PUT";
     }
 }

@@ -1,20 +1,16 @@
 package cn.vertxup.api;
 
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonArray;
 import io.vertx.tp.crud.actor.IxActor;
 import io.vertx.tp.crud.cv.Addr;
-import io.vertx.tp.crud.init.IxPin;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.tp.ke.extension.jooq.Epidemia;
-import io.vertx.tp.ke.extension.jooq.EpidemiaMy;
+import io.vertx.tp.optic.Apeak;
+import io.vertx.tp.optic.ApeakMy;
+import io.vertx.tp.optic.Pocket;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.atom.Envelop;
-
-import java.util.Objects;
-import java.util.function.Supplier;
 
 @Queue
 public class GetActor {
@@ -45,8 +41,11 @@ public class GetActor {
     public Future<Envelop> getFull(final Envelop request) {
         return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Get Stub */
-            final Epidemia stub = IxPin.getStub();
-            return this.getUniform(stub, () -> Ix.inColumns(request, config)
+            final Apeak stub = Pocket.lookup(Apeak.class);
+
+            return Unity.call(stub, () -> IxActor.start()
+                    /* Apeak column definition here */
+                    .compose(input -> IxActor.apeak().bind(request).procAsync(input, config))
                     /* Header */
                     .compose(input -> IxActor.header().bind(request).procAsync(input, config))
                     /* Fetch Full Columns */
@@ -64,26 +63,19 @@ public class GetActor {
     public Future<Envelop> getMy(final Envelop request) {
         return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Get Stub */
-            final EpidemiaMy stub = IxPin.getMyStub();
-            return this.getUniform(stub, () -> Ix.inColumns(request, config)
-                    /* Header */
-                    .compose(input -> IxActor.header().bind(request).procAsync(input, config))
+            final ApeakMy stub = Pocket.lookup(ApeakMy.class);
+            return Unity.call(stub, () -> Unity.seeker(dao, request, config)
+                    /* View parameters filling */
+                    .compose(input -> IxActor.view().procAsync(input, config))
+                    /* Uri filling, replace inited information: uri , method */
+                    .compose(input -> IxActor.uri().bind(request).procAsync(input, config))
+                    /* User filling */
+                    .compose(input -> IxActor.user().bind(request).procAsync(input, config))
                     /* Fetch My Columns */
                     .compose(stub.on(dao)::fetchMy)
                     /* Return Result */
-                    .compose(Http::success200));
+                    .compose(Http::success200)
+            );
         });
-    }
-
-    private <T> Future<Envelop> getUniform(final T stub, final Supplier<Future<Envelop>> executor) {
-        /* If null */
-        if (Objects.isNull(stub)) {
-            /* No thing return from this interface */
-            return Ux.toFuture(new JsonArray())
-                    /* Return Result */
-                    .compose(Http::success200);
-        } else {
-            return executor.get();
-        }
     }
 }

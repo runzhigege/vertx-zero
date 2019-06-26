@@ -1,21 +1,26 @@
-package io.vertx.tp.crud.extension;
+package io.vertx.tp.optic;
 
+import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.init.IxPin;
-import io.vertx.tp.ke.extension.Orbit;
 
 import java.util.Set;
 
 /*
  * Calculate Resource Key;
  */
-public class ActorOrbit implements Orbit {
+public class ExActorOrbit implements Orbit {
     /*
      * Critical Pool For URI Here.
      */
     private static final Set<String> URIS = IxPin.getUris();
 
     @Override
-    public String extract(final String uri, final String requestUri) {
+    public String analyze(final JsonObject arguments) {
+        /* Extract arguments by Orbit.ARGX */
+        final String uri = arguments.getString(ARG0);
+        final String requestUri = arguments.getString(ARG1);
+
+        /* Code Logical */
         if (this.isMatch(requestUri)) {
             final String[] source = uri.split("/");
             final String[] request = requestUri.split("/");

@@ -4,11 +4,13 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
+import io.vertx.up.log.Annal;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class Ke {
+
     /*
      * Read jooq configuration database name `catalog`
      */
@@ -29,6 +31,10 @@ public class Ke {
 
     public static void banner(final String module) {
         KeTool.banner(module);
+    }
+
+    public static void infoKe(final Annal logger, final String pattern, final Object... args) {
+        KeLog.infoKe(logger, pattern, args);
     }
 
     /*

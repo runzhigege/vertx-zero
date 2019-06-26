@@ -5,9 +5,9 @@ import java.util.concurrent.ConcurrentMap;
 
 interface Pool {
     /*
-     * DSLContext = AppDao bind
+     * DSLContext = AppDao in
      * For multi application usage, each application should has
-     * only one AppDao that bind to DSLContext.
+     * only one AppDao that in to DSLContext.
      */
     ConcurrentMap<String, AtApp> APP_POOL
             = new ConcurrentHashMap<>();

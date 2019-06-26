@@ -7,6 +7,12 @@ import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
 import io.zero.epic.Ut;
 
+/*
+ * key for primary key generation here
+ * {
+ *      "key": ""
+ * }
+ */
 class KeyActor extends AbstractActor {
 
     @Override

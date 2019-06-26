@@ -21,7 +21,7 @@ public class DataRegion extends AbstractRegion {
     public void before(final RoutingContext context, final Envelop envelop) {
         if (this.isEnabled(context)) {
             /* Get Critical parameters */
-            final JsonObject matrix = DataTool.fetchMatrix(context);
+            final JsonObject matrix = Sc.cacheData(context);
             Sc.infoAuth(this.getLogger(), AuthMsg.REGION_BEFORE, matrix.encode());
             /*
              * Body modification is only available for POST/PUT
@@ -59,13 +59,13 @@ public class DataRegion extends AbstractRegion {
     public void after(final RoutingContext context, final Envelop response) {
         if (this.isEnabled(context)) {
             /* Get Critical parameters */
-            final JsonObject matrix = DataTool.fetchMatrix(context);
+            final JsonObject matrix = Sc.cacheData(context);
             Sc.infoAuth(this.getLogger(), AuthMsg.REGION_AFTER, matrix.encode());
             /* Projection */
-            DataTool.dwarfRecord(response, matrix);
+            DataMin.dwarfRecord(response, matrix);
 
             /* Rows / Projection */
-            DataTool.dwarfCollection(response, matrix);
+            DataMin.dwarfCollection(response, matrix);
         }
     }
 

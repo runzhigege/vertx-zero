@@ -21,10 +21,6 @@ CREATE TABLE IF NOT EXISTS S_RESOURCE
     -- 资源标识
     `SIGMA`      VARCHAR(32) COMMENT '「sigma」- 统一标识',
 
-    -- 模块相关 Join（反向查询专用，元数据驱动）
-    `MODEL_ID`   VARCHAR(255) COMMENT '「modelId」- 资源对应的模型identifier',
-    `MODEL_KEY`  VARCHAR(36) COMMENT '「modelKey」- 资源对应的单条记录ID',
-
     -- 特殊字段
     `CATEGORY`   VARCHAR(36) COMMENT '「category」- 资源分类',
     `LANGUAGE`   VARCHAR(10) COMMENT '「language」- 使用的语言',

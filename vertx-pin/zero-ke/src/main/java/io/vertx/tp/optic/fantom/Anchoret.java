@@ -1,4 +1,4 @@
-package io.vertx.tp.ke.extension.jooq;
+package io.vertx.tp.optic.fantom;
 
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.log.Annal;
@@ -6,7 +6,7 @@ import io.vertx.up.log.Annal;
 /*
  * All sub-class for extension of Jooq type
  */
-public abstract class AbstractJewel<T> {
+public abstract class Anchoret<T> {
 
     private transient UxJooq jooq;
 

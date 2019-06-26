@@ -6,6 +6,13 @@ import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.up.atom.Envelop;
 import io.zero.epic.Ut;
 
+/*
+ * {
+ *      "sigma": "From X-Sigma",
+ *      "appId": "From X-App-Id",
+ *      "appKey": "From X-App-Key"
+ * }
+ */
 class HeaderActor extends AbstractActor {
 
     @Override

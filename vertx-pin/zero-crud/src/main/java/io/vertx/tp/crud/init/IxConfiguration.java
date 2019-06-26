@@ -23,9 +23,9 @@ class IxConfiguration {
          */
         if (null == CONFIG) {
             final JsonObject configData = Ut.ioJObject(IxFolder.CONFIG_FILE);
-            Ix.infoInit(LOGGER, "Sc Json Data: {0}", configData.encode());
+            Ix.infoInit(LOGGER, "Ix Json Data: {0}", configData.encode());
             CONFIG = Ut.deserialize(configData, IxConfig.class);
-            Ix.infoInit(LOGGER, "Sc Configuration: {0}", CONFIG.toString());
+            Ix.infoInit(LOGGER, "Ix Configuration: {0}", CONFIG.toString());
         }
     }
 
