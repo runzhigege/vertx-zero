@@ -1,11 +1,16 @@
 package io.vertx.tp.crud.init;
 
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxConfig;
 import io.vertx.tp.crud.cv.IxFolder;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
+
+import java.text.MessageFormat;
+import java.util.HashSet;
+import java.util.Set;
 
 /*
  * Configuration class initialization
@@ -15,6 +20,9 @@ import io.zero.epic.Ut;
 class IxConfiguration {
 
     private static final Annal LOGGER = Annal.get(IxConfiguration.class);
+    /* Module Registry */
+    private static final Set<String> MODULE_REG =
+            new HashSet<>();
     private static IxConfig CONFIG = null;
 
     static void init() {
@@ -29,7 +37,15 @@ class IxConfiguration {
         }
     }
 
-    static IxConfig getConfig() {
-        return CONFIG;
+    static void addUrs(final String key) {
+        final JsonArray patterns = CONFIG.getPatterns();
+        patterns.stream()
+                .map(item -> (String) item)
+                .map(pattern -> MessageFormat.format(pattern, key))
+                .forEach(MODULE_REG::add);
+    }
+
+    static Set<String> getUris() {
+        return MODULE_REG;
     }
 }
