@@ -19,7 +19,6 @@ public class ExActorOrbit implements Orbit {
         /* Extract arguments by Orbit.ARGX */
         final String uri = arguments.getString(ARG0);
         final String requestUri = arguments.getString(ARG1);
-
         /* Code Logical */
         if (this.isMatch(requestUri)) {
             final String[] source = uri.split("/");

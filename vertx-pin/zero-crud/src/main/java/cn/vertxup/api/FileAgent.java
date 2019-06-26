@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.up.annotations.Address;
+import io.vertx.up.annotations.Codex;
 import io.vertx.up.annotations.EndPoint;
 
 import javax.ws.rs.*;
@@ -21,7 +22,7 @@ public class FileAgent {
     @POST
     @Address(Addr.File.IMPORT)
     public JsonObject importFile(@PathParam("actor") final String actor,
-                                 @StreamParam final FileUpload fileUpload) {
+                                 @StreamParam @Codex final FileUpload fileUpload) {
         System.out.println("Import " + actor);
         return null;
     }
