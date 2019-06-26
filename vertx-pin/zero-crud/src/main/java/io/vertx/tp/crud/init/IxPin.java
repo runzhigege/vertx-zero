@@ -20,6 +20,7 @@ public class IxPin {
 
     public static void init() {
         Ke.banner("「Εκδήλωση」- Crud ( Ix )");
+
         Ix.infoInit(LOGGER, "IxConfiguration...");
         /* Configuration Init */
         IxConfiguration.init();
@@ -42,7 +43,7 @@ public class IxPin {
     }
 
     public static Set<String> getUris() {
-        return IxDao.getUris();
+        return IxConfiguration.getUris();
     }
 
     public static ConcurrentMap<String, List<Rule>> getRules(final String actor) {
