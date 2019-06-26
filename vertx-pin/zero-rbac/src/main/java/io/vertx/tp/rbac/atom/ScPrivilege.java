@@ -54,7 +54,7 @@ public class ScPrivilege implements Serializable {
     }
 
     /*
-     * Async extract permission
+     * Async analyze permission
      */
     public Future<JsonArray> asyncPermission(final String profileKey) {
         return this.asyncProfile()
@@ -63,7 +63,7 @@ public class ScPrivilege implements Serializable {
     }
 
     /*
-     * Async extract role
+     * Async analyze role
      */
     public Future<JsonArray> asyncRole(final String profileKey) {
         return this.asyncProfile()

@@ -6,6 +6,7 @@ import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.vertx.up.log.Annal;
 
@@ -29,6 +30,25 @@ public class Sc {
 
     public static void infoCredit(final Annal logger, final String pattern, final Object... args) {
         ScLog.infoCredit(logger, pattern, args);
+    }
+
+    /*
+     * Uri normalize and extraction of tool
+     */
+    public static String uri(final String uri, final String requestUri) {
+        return ScPhase.uri(uri, requestUri);
+    }
+
+    public static String uri(final RoutingContext context) {
+        return ScPhase.uri(context);
+    }
+
+    public static String cacheKey(final RoutingContext context) {
+        return ScPhase.cacheKey(context);
+    }
+
+    public static JsonObject cacheData(final RoutingContext context) {
+        return ScPhase.cacheData(context);
     }
 
     /*

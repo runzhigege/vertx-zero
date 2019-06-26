@@ -42,7 +42,10 @@ public class GetActor {
         return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Get Stub */
             final Apeak stub = Pocket.lookup(Apeak.class);
-            return Uniform.call(stub, () -> Ix.inColumns(request, config)
+
+            return Unity.call(stub, () -> IxActor.start()
+                    /* Apeak column definition here */
+                    .compose(input -> IxActor.apeak().bind(request).procAsync(input, config))
                     /* Header */
                     .compose(input -> IxActor.header().bind(request).procAsync(input, config))
                     /* Fetch Full Columns */
@@ -61,11 +64,18 @@ public class GetActor {
         return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Get Stub */
             final ApeakMy stub = Pocket.lookup(ApeakMy.class);
-            return Uniform.call(stub, () -> Uniform.seeker(dao, request, config)
+            return Unity.call(stub, () -> Unity.seeker(dao, request, config)
+                    /* View parameters filling */
+                    .compose(input -> IxActor.view().procAsync(input, config))
+                    /* Uri filling, replace inited information: uri , method */
+                    .compose(input -> IxActor.uri().bind(request).procAsync(input, config))
+                    /* User filling */
+                    .compose(input -> IxActor.user().bind(request).procAsync(input, config))
                     /* Fetch My Columns */
                     .compose(stub.on(dao)::fetchMy)
                     /* Return Result */
-                    .compose(Http::success200));
+                    .compose(Http::success200)
+            );
         });
     }
 }

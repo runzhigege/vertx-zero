@@ -47,6 +47,4 @@ public interface AuthKey {
      */
     String PROFILE_PERM = "PERM";
     String PROFILE_ROLE = "ROLE";
-
-    String VIEW_DEFAULT = "DEFAULT";
 }

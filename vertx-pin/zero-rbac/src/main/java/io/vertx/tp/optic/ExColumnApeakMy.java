@@ -13,7 +13,7 @@ import io.zero.epic.Ut;
 import java.util.Objects;
 import java.util.function.BiFunction;
 
-public class ColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
+public class ExColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
 
     private final transient ViewStub stub = Ut.singleton(ViewService.class);
 
@@ -46,6 +46,7 @@ public class ColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
         } else {
             /* User */
             final JsonObject principle = params.getJsonObject(KeField.PRINCIPLE);
+            System.err.println(principle.encodePrettily());
             final JsonObject token = Ux.Jwt.extract(principle.getString("jwt"));
             final String userId = token.getString("user");
             return function.apply(resourceId, userId);

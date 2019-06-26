@@ -7,7 +7,6 @@ import io.vertx.tp.crud.atom.IxMeta;
 import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
-import io.vertx.up.atom.Envelop;
 import io.vertx.up.log.Annal;
 
 import java.util.List;
@@ -55,7 +54,7 @@ public class Ix {
 
     // Serialization for entity/list
     /*
-     * extract unique record
+     * analyze unique record
      */
     public static Future<JsonObject> unique(final JsonObject result) {
         return Ux.toFuture(IxSerialize.unique(result));
@@ -85,19 +84,6 @@ public class Ix {
     // Query
     public static Future<JsonObject> inKeys(final JsonArray array, final IxModule config) {
         return Ux.toFuture(IxQuery.inKeys(array, config));
-    }
-
-    public static Future<JsonObject> inColumns(final Envelop envelop, final IxModule config) {
-        final JsonObject params = new JsonObject();
-        return inColumns(envelop, config, params);
-    }
-
-    public static Future<JsonObject> inColumns(final Envelop envelop, final IxModule config, final JsonObject initialized) {
-        return Ux.toFuture(IxQuery.inColumns(envelop, config, initialized));
-    }
-
-    public static Future<JsonObject> inSeekers(final Envelop envelop) {
-        return Ux.toFuture(IxQuery.inSeekers(envelop));
     }
 
     /*

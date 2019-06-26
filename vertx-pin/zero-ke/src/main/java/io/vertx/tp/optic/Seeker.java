@@ -2,6 +2,7 @@ package io.vertx.tp.optic;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.ke.cv.KeField;
 import io.vertx.up.aiki.UxJooq;
 
 /*
@@ -11,7 +12,9 @@ import io.vertx.up.aiki.UxJooq;
  */
 public interface Seeker {
 
-    String PARAM_SEEKER = "seeker";
+    String ARG0 = KeField.URI;
+    String ARG1 = KeField.METHOD;
+    String ARG2 = KeField.SIGMA;
 
     Seeker on(UxJooq jooq);
 

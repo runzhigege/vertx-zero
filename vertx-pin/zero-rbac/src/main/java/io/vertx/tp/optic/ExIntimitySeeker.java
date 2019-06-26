@@ -15,24 +15,21 @@ import io.zero.epic.Ut;
 /*
  * Seek impact resource for params here, it will be passed by crud
  */
-public class IntimitySeeker extends Anchoret<Seeker> implements Seeker {
+public class ExIntimitySeeker extends Anchoret<Seeker> implements Seeker {
 
     private transient final ActionStub stub = Ut.singleton(ActionService.class);
 
     @Override
     public Future<JsonObject> fetchImpact(final JsonObject params) {
-
-        final JsonObject seekers = params.getJsonObject(PARAM_SEEKER);
         /*
          * Uri, Method
          */
-        final String uri = seekers.getString(KeField.URI);
-        final HttpMethod method = HttpMethod.valueOf(seekers.getString(KeField.METHOD));
-        final String sigma = params.getString(KeField.SIGMA);
+        final String uri = params.getString(ARG0);
+        final HttpMethod method = HttpMethod.valueOf(params.getString(ARG1));
+        final String sigma = params.getString(ARG2);
         Sc.infoResource(this.getLogger(), AuthMsg.SEEKER_RESOURCE, uri, method, sigma);
         return this.stub.fetchAction(uri, method, sigma)
                 .compose(action -> Uson.create(params)
-                        .remove(PARAM_SEEKER)
                         .append(KeField.RESOURCE_ID, action.getResourceId())
                         .toFuture());
     }

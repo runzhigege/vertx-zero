@@ -1,5 +1,8 @@
 package io.vertx.tp.optic;
 
+import io.vertx.core.json.JsonObject;
+import io.vertx.tp.ke.cv.KeField;
+
 /*
  * Interface for authorization resource key processing
  * 1) Request Uri: /api/group/search
@@ -9,8 +12,12 @@ package io.vertx.tp.optic;
  */
 public interface Orbit {
 
+    String ARG0 = KeField.URI;
+    String ARG1 = KeField.URI_REQUEST;
+
     /*
-     * Calculation method here.
+     * Calculation method here, stack should be
+     * parameter stack
      */
-    String extract(String uri, String requestUri);
+    String analyze(JsonObject arguments);
 }

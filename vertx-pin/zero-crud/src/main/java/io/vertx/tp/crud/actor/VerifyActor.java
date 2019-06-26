@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentMap;
 
+/*
+ * Validation for body
+ */
 class VerifyActor extends AbstractActor {
 
     @Override
