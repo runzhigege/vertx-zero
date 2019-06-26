@@ -137,17 +137,4 @@ class AccreditFlow {
         return request.openSession()
                 .compose(privilege -> privilege.storedFinal(authorizedKey, Boolean.TRUE));
     }
-
-    /*
-     * 8. Cache clean up
-     */
-    static Future<Boolean> inspectImpact(final Boolean result, final ScRequest request) {
-        final String cacheKey = request.getCacheKey();
-        Sc.infoCredit(LOGGER, AuthMsg.RENEWAL_SUCCESS, cacheKey);
-        return request.openSession()
-                .compose(privilege -> {
-
-                    return Future.succeededFuture(result);
-                });
-    }
 }

@@ -7,7 +7,6 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.ext.web.Session;
 import io.vertx.up.log.Annal;
 
 import java.util.List;
@@ -116,10 +115,6 @@ public class Sc {
      */
     public static <T> Future<JsonArray> relation(final String field, final String key, final Class<?> daoCls) {
         return ScFn.<T>relation(field, key, daoCls);
-    }
-
-    public static Future<Session> session(final String id) {
-        return ScCache.session(id);
     }
 
     public static <T> Future<List<T>> composite(final CompositeFuture res) {

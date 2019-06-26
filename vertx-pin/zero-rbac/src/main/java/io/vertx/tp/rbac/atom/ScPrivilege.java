@@ -5,8 +5,8 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
+import io.vertx.tp.ke.tool.Ke;
 import io.vertx.tp.rbac.cv.AuthKey;
-import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.aiki.Ux;
 
 import java.io.Serializable;
@@ -98,7 +98,7 @@ public class ScPrivilege implements Serializable {
 
     // --- Private method below
     private Future<ScPrivilege> open() {
-        return Sc.session(this.sessionId).compose(session -> {
+        return Ke.session(this.sessionId).compose(session -> {
             this.session = session;
             return Ux.toFuture(this);
         });
