@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SResource implements ISResource {
 
-    private static final long serialVersionUID = 355201338;
+    private static final long serialVersionUID = 964736924;
 
     private String        key;
     private String        code;
@@ -35,8 +35,6 @@ public class SResource implements ISResource {
     private String        modeGroup;
     private String        modeTree;
     private String        sigma;
-    private String        modelId;
-    private String        modelKey;
     private String        category;
     private String        language;
     private Boolean       active;
@@ -58,8 +56,6 @@ public class SResource implements ISResource {
         this.modeGroup = value.modeGroup;
         this.modeTree = value.modeTree;
         this.sigma = value.sigma;
-        this.modelId = value.modelId;
-        this.modelKey = value.modelKey;
         this.category = value.category;
         this.language = value.language;
         this.active = value.active;
@@ -80,8 +76,6 @@ public class SResource implements ISResource {
         String        modeGroup,
         String        modeTree,
         String        sigma,
-        String        modelId,
-        String        modelKey,
         String        category,
         String        language,
         Boolean       active,
@@ -100,8 +94,6 @@ public class SResource implements ISResource {
         this.modeGroup = modeGroup;
         this.modeTree = modeTree;
         this.sigma = sigma;
-        this.modelId = modelId;
-        this.modelKey = modelKey;
         this.category = category;
         this.language = language;
         this.active = active;
@@ -212,28 +204,6 @@ public class SResource implements ISResource {
     }
 
     @Override
-    public String getModelId() {
-        return this.modelId;
-    }
-
-    @Override
-    public SResource setModelId(String modelId) {
-        this.modelId = modelId;
-        return this;
-    }
-
-    @Override
-    public String getModelKey() {
-        return this.modelKey;
-    }
-
-    @Override
-    public SResource setModelKey(String modelKey) {
-        this.modelKey = modelKey;
-        return this;
-    }
-
-    @Override
     public String getCategory() {
         return this.category;
     }
@@ -334,8 +304,6 @@ public class SResource implements ISResource {
         sb.append(", ").append(modeGroup);
         sb.append(", ").append(modeTree);
         sb.append(", ").append(sigma);
-        sb.append(", ").append(modelId);
-        sb.append(", ").append(modelKey);
         sb.append(", ").append(category);
         sb.append(", ").append(language);
         sb.append(", ").append(active);
@@ -367,8 +335,6 @@ public class SResource implements ISResource {
         setModeGroup(from.getModeGroup());
         setModeTree(from.getModeTree());
         setSigma(from.getSigma());
-        setModelId(from.getModelId());
-        setModelKey(from.getModelKey());
         setCategory(from.getCategory());
         setLanguage(from.getLanguage());
         setActive(from.getActive());

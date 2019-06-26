@@ -114,26 +114,6 @@ public interface ISResource extends Serializable {
     public String getSigma();
 
     /**
-     * Setter for <code>DB_ETERNAL.S_RESOURCE.MODEL_ID</code>. 「modelId」- 资源对应的模型identifier
-     */
-    public ISResource setModelId(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.S_RESOURCE.MODEL_ID</code>. 「modelId」- 资源对应的模型identifier
-     */
-    public String getModelId();
-
-    /**
-     * Setter for <code>DB_ETERNAL.S_RESOURCE.MODEL_KEY</code>. 「modelKey」- 资源对应的单条记录ID
-     */
-    public ISResource setModelKey(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.S_RESOURCE.MODEL_KEY</code>. 「modelKey」- 资源对应的单条记录ID
-     */
-    public String getModelKey();
-
-    /**
      * Setter for <code>DB_ETERNAL.S_RESOURCE.CATEGORY</code>. 「category」- 资源分类
      */
     public ISResource setCategory(String value);
@@ -237,8 +217,6 @@ public interface ISResource extends Serializable {
         setModeGroup(json.getString("MODE_GROUP"));
         setModeTree(json.getString("MODE_TREE"));
         setSigma(json.getString("SIGMA"));
-        setModelId(json.getString("MODEL_ID"));
-        setModelKey(json.getString("MODEL_KEY"));
         setCategory(json.getString("CATEGORY"));
         setLanguage(json.getString("LANGUAGE"));
         setActive(json.getBoolean("ACTIVE"));
@@ -262,8 +240,6 @@ public interface ISResource extends Serializable {
         json.put("MODE_GROUP",getModeGroup());
         json.put("MODE_TREE",getModeTree());
         json.put("SIGMA",getSigma());
-        json.put("MODEL_ID",getModelId());
-        json.put("MODEL_KEY",getModelKey());
         json.put("CATEGORY",getCategory());
         json.put("LANGUAGE",getLanguage());
         json.put("ACTIVE",getActive());
