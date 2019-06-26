@@ -35,14 +35,14 @@ public class ViewService implements ViewStub {
 
     @Override
     public Future<SView> saveMatrix(final String userId, final String resourceId,
-                                    final String view, final String sigma, final JsonArray projection) {
+                                    final String view, final JsonArray projection) {
         /* Find user matrix */
         final JsonObject filters = this.toFilters(resourceId, view);
         filters.put("owner", userId);
         filters.put("ownerType", OwnerType.USER.name());
         /* SView projection */
         Sc.infoResource(LOGGER, AuthMsg.VIEW_PROCESS, "save", filters.encode());
-        final SView myView = this.toView(filters, sigma, projection);
+        final SView myView = this.toView(filters, projection);
         return Ux.Jooq.on(SViewDao.class)
                 .upsertAsync(filters, myView);
     }
@@ -65,14 +65,13 @@ public class ViewService implements ViewStub {
         return filters;
     }
 
-    private SView toView(final JsonObject filters, final String sigma, final JsonArray projection) {
+    private SView toView(final JsonObject filters, final JsonArray projection) {
         final JsonObject data = filters.copy()
                 .put(Inquiry.KEY_PROJECTION, projection.encode());
         data.put(KeField.KEY, UUID.randomUUID().toString());
         data.put(KeField.ACTIVE, Boolean.TRUE);
         data.put("rows", new JsonObject().encode());
         data.put(Inquiry.KEY_CRITERIA, new JsonObject().encode());
-        data.put(KeField.SIGMA, sigma);
         return Ut.deserialize(data, SView.class);
     }
 }
