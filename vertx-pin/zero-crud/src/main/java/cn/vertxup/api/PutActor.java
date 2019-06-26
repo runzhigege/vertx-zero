@@ -73,7 +73,7 @@ public class PutActor {
             final JsonArray projection = Ux.getArray1(request);
             /* Put Stub */
             final ApeakMy stub = Pocket.lookup(ApeakMy.class);
-            return Uniform.call(stub, () -> Uniform.seeker(dao, request, config)
+            return Unity.call(stub, () -> Unity.seeker(dao, request, config)
                     /* Fetch My Columns */
                     .compose(params -> stub.on(dao).saveMy(params, projection))
                     /* Return Result */

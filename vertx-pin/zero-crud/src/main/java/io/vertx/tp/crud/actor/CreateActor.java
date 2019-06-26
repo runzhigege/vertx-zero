@@ -6,6 +6,13 @@ import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.crud.refine.Ix;
 import io.zero.epic.Ut;
 
+/*
+ * Creation for body processing and inject auditor information
+ * {
+ *     "createdAt": "x",
+ *     "createdBy": "xx"
+ * }
+ */
 class CreateActor extends AbstractActor {
 
     @Override

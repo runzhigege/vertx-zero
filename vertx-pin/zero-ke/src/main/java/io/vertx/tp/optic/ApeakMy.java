@@ -3,6 +3,7 @@ package io.vertx.tp.optic;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.ke.cv.KeField;
 import io.vertx.up.aiki.UxJooq;
 
 /*
@@ -11,6 +12,8 @@ import io.vertx.up.aiki.UxJooq;
  * Implementation class will be rbac to read projection
  */
 public interface ApeakMy {
+
+    String ARG0 = KeField.RESOURCE_ID;
 
     ApeakMy on(UxJooq jooq);
 

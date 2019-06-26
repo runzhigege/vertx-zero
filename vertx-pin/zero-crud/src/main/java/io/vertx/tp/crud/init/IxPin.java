@@ -1,8 +1,6 @@
 package io.vertx.tp.crud.init;
 
-import io.vertx.core.http.HttpMethod;
 import io.vertx.tp.crud.atom.IxModule;
-import io.vertx.tp.crud.atom.IxSeeker;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.tp.ke.tool.Ke;
 import io.vertx.up.aiki.UxJooq;
@@ -45,10 +43,6 @@ public class IxPin {
 
     public static Set<String> getUris() {
         return IxDao.getUris();
-    }
-
-    public static IxSeeker getSeeker(final String requestUri, final HttpMethod method) {
-        return IxConfiguration.getSeeker(requestUri, method);
     }
 
     public static ConcurrentMap<String, List<Rule>> getRules(final String actor) {

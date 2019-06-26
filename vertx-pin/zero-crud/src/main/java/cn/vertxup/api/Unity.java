@@ -1,24 +1,24 @@
 package cn.vertxup.api;
 
 import io.vertx.core.Future;
+import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.actor.IxActor;
 import io.vertx.tp.crud.atom.IxModule;
-import io.vertx.tp.crud.refine.Ix;
+import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.optic.Pocket;
 import io.vertx.tp.optic.Seeker;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.atom.Envelop;
 
+import java.text.MessageFormat;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-class Uniform {
-    /*
-     * Uniform call stub
-     */
+class Unity {
+
     static <T> Future<Envelop> call(final T stub, final Supplier<Future<Envelop>> executor) {
         /* If null */
         if (Objects.isNull(stub)) {
@@ -31,15 +31,26 @@ class Uniform {
         }
     }
 
+    /*
+     * Uri, Method instead
+     */
+    private static JsonObject initMy(final Envelop envelop) {
+        final String pattern = "/api/{0}/search";
+        final String actor = Ux.getString(envelop);
+        return new JsonObject()
+                .put(KeField.URI, MessageFormat.format(pattern, actor))
+                .put(KeField.METHOD, HttpMethod.POST.name());
+    }
+
     static Future<JsonObject> seeker(final UxJooq dao, final Envelop request, final IxModule config) {
-        /* Seeker Stub */
+        /* Get Seeker */
         final Seeker seeker = Pocket.lookup(Seeker.class);
-        return Ix.inSeekers(request)
+        /* init parameters */
+        final JsonObject params = Unity.initMy(request);
+        return Ux.toFuture(params)
                 /* Header */
                 .compose(input -> IxActor.header().bind(request).procAsync(input, config))
-                /* Fetch Impact Resource */
-                .compose(seeker.on(dao)::fetchImpact)
-                /* Column Fetch */
-                .compose(result -> Ix.inColumns(request, config, result));
+                /* Fetch Impact */
+                .compose(seeker.on(dao)::fetchImpact);
     }
 }

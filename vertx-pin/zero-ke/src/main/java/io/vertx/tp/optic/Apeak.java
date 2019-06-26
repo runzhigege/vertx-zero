@@ -3,6 +3,7 @@ package io.vertx.tp.optic;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.ke.cv.KeField;
 import io.vertx.up.aiki.UxJooq;
 
 /*
@@ -11,6 +12,11 @@ import io.vertx.up.aiki.UxJooq;
  * The implementation class should be in zero-ui to read column information.
  */
 public interface Apeak {
+
+    String ARG0 = KeField.DYNAMIC;
+    String ARG1 = KeField.IDENTIFIER;
+    String ARG2 = KeField.SIGMA;
+    String ARG3 = KeField.VIEW;
 
     Apeak on(UxJooq jooq);
 

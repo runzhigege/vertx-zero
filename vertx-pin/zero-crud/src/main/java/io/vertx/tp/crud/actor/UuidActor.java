@@ -7,6 +7,11 @@ import io.zero.epic.Ut;
 
 import java.util.UUID;
 
+/*
+ * {
+ *    "key": "uuid"
+ * }
+ */
 class UuidActor extends AbstractActor {
 
     @Override

@@ -1,5 +1,6 @@
 package io.vertx.tp.ke.booter;
 
+import io.vertx.tp.ke.tool.Ke;
 import io.vertx.tp.plugin.excel.ExcelClient;
 import io.vertx.tp.plugin.excel.ExcelInfix;
 import io.vertx.up.log.Annal;
@@ -22,7 +23,7 @@ class BtLoader {
         /* Single file */
         client.loading(filename, handler -> {
             final Annal LOGGER = Annal.get(BtLoader.class);
-            LOGGER.info("[ ZERO ] Successfully to finish loading ! data file = {0}", filename);
+            Ke.infoKe(LOGGER, "Successfully to finish loading ! data file = {0}", filename);
         });
     }
 }

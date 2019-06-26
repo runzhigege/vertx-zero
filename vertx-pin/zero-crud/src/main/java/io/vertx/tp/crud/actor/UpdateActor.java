@@ -6,6 +6,12 @@ import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.crud.refine.Ix;
 import io.zero.epic.Ut;
 
+/*
+ * {
+ *      "updatedAt":"",
+ *      "updatedBy":""
+ * }
+ */
 class UpdateActor extends AbstractActor {
 
     @Override

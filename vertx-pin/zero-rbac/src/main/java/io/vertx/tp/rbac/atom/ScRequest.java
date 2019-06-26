@@ -3,8 +3,10 @@ package io.vertx.tp.rbac.atom;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.ke.cv.KeDefault;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.init.ScPin;
+import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.eon.ID;
 
@@ -19,7 +21,7 @@ public class ScRequest implements Serializable {
     private transient final String sigma;
     private transient final String user;
     private transient final String sessionId;
-    private transient final String view = AuthKey.VIEW_DEFAULT;
+    private transient final String view = KeDefault.VIEW_DEFAULT;
     private transient final HttpMethod method;
 
     /*
@@ -44,7 +46,7 @@ public class ScRequest implements Serializable {
         /*
          * Extension for orbit
          */
-        this.uri = ScUri.getUriId(uri, this.requestUri);
+        this.uri = Sc.uri(uri, this.requestUri);
         /*
          * Support multi applications
          */
@@ -55,7 +57,7 @@ public class ScRequest implements Serializable {
             this.sigma = null;
         }
         /*
-         * Token extract
+         * Token analyze
          */
         final String token = data.getString("jwt");
         final JsonObject userData = Ux.Jwt.extract(token);

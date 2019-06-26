@@ -11,7 +11,7 @@ public class IxColumn implements Serializable {
     private transient String view = "DEFAULT";  // Default name
 
     public Boolean getDynamic() {
-        /* Basic calculation for column extract mode */
+        /* Basic calculation for column analyze mode */
         this.dynamic = Ut.isNil(this.identifier);
         return this.dynamic;
     }

@@ -6,7 +6,7 @@ import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
 
 /*
- * SAction means Backend event, it's bind to SResource
+ * SAction means Backend event, it's in to SResource
  * Here are the relations between SAction & SResource
  * 1) The SAction could be identified by URI & Method, here URI means uri patterns, not request uri.
  * 2) The SResource could be triggered by multi SAction here, it means that front end events could send multi time.
