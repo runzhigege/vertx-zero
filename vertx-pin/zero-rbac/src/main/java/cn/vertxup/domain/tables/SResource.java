@@ -35,7 +35,7 @@ public class SResource extends TableImpl<SResourceRecord> {
      * The reference instance of <code>DB_ETERNAL.S_RESOURCE</code>
      */
     public static final SResource S_RESOURCE = new SResource();
-    private static final long serialVersionUID = 607755109;
+    private static final long serialVersionUID = 2139953048;
     /**
      * The column <code>DB_ETERNAL.S_RESOURCE.KEY</code>. 「key」- 资源对应的ID
      */
@@ -72,14 +72,6 @@ public class SResource extends TableImpl<SResourceRecord> {
      * The column <code>DB_ETERNAL.S_RESOURCE.SIGMA</code>. 「sigma」- 统一标识
      */
     public final TableField<SResourceRecord, String> SIGMA = createField("SIGMA", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「sigma」- 统一标识");
-    /**
-     * The column <code>DB_ETERNAL.S_RESOURCE.MODEL_ID</code>. 「modelId」- 资源对应的模型identifier
-     */
-    public final TableField<SResourceRecord, String> MODEL_ID = createField("MODEL_ID", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「modelId」- 资源对应的模型identifier");
-    /**
-     * The column <code>DB_ETERNAL.S_RESOURCE.MODEL_KEY</code>. 「modelKey」- 资源对应的单条记录ID
-     */
-    public final TableField<SResourceRecord, String> MODEL_KEY = createField("MODEL_KEY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「modelKey」- 资源对应的单条记录ID");
     /**
      * The column <code>DB_ETERNAL.S_RESOURCE.CATEGORY</code>. 「category」- 资源分类
      */

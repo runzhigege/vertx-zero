@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SAction implements ISAction {
 
-    private static final long serialVersionUID = 2079319091;
+    private static final long serialVersionUID = 425211720;
 
     private String        key;
     private String        name;
@@ -32,12 +32,10 @@ public class SAction implements ISAction {
     private String        resourceId;
     private String        permissionId;
     private Integer       level;
-    private String        mode;
     private String        uri;
     private String        method;
     private String        sigma;
-    private String        effectComponent;
-    private String        effectConfig;
+    private String        renewalCredit;
     private String        language;
     private Boolean       active;
     private String        metadata;
@@ -56,12 +54,10 @@ public class SAction implements ISAction {
         this.resourceId = value.resourceId;
         this.permissionId = value.permissionId;
         this.level = value.level;
-        this.mode = value.mode;
         this.uri = value.uri;
         this.method = value.method;
         this.sigma = value.sigma;
-        this.effectComponent = value.effectComponent;
-        this.effectConfig = value.effectConfig;
+        this.renewalCredit = value.renewalCredit;
         this.language = value.language;
         this.active = value.active;
         this.metadata = value.metadata;
@@ -79,12 +75,10 @@ public class SAction implements ISAction {
         String        resourceId,
         String        permissionId,
         Integer       level,
-        String        mode,
         String        uri,
         String        method,
         String        sigma,
-        String        effectComponent,
-        String        effectConfig,
+        String        renewalCredit,
         String        language,
         Boolean       active,
         String        metadata,
@@ -100,12 +94,10 @@ public class SAction implements ISAction {
         this.resourceId = resourceId;
         this.permissionId = permissionId;
         this.level = level;
-        this.mode = mode;
         this.uri = uri;
         this.method = method;
         this.sigma = sigma;
-        this.effectComponent = effectComponent;
-        this.effectConfig = effectConfig;
+        this.renewalCredit = renewalCredit;
         this.language = language;
         this.active = active;
         this.metadata = metadata;
@@ -183,17 +175,6 @@ public class SAction implements ISAction {
     }
 
     @Override
-    public String getMode() {
-        return this.mode;
-    }
-
-    @Override
-    public SAction setMode(String mode) {
-        this.mode = mode;
-        return this;
-    }
-
-    @Override
     public String getUri() {
         return this.uri;
     }
@@ -227,24 +208,13 @@ public class SAction implements ISAction {
     }
 
     @Override
-    public String getEffectComponent() {
-        return this.effectComponent;
+    public String getRenewalCredit() {
+        return this.renewalCredit;
     }
 
     @Override
-    public SAction setEffectComponent(String effectComponent) {
-        this.effectComponent = effectComponent;
-        return this;
-    }
-
-    @Override
-    public String getEffectConfig() {
-        return this.effectConfig;
-    }
-
-    @Override
-    public SAction setEffectConfig(String effectConfig) {
-        this.effectConfig = effectConfig;
+    public SAction setRenewalCredit(String renewalCredit) {
+        this.renewalCredit = renewalCredit;
         return this;
     }
 
@@ -346,12 +316,10 @@ public class SAction implements ISAction {
         sb.append(", ").append(resourceId);
         sb.append(", ").append(permissionId);
         sb.append(", ").append(level);
-        sb.append(", ").append(mode);
         sb.append(", ").append(uri);
         sb.append(", ").append(method);
         sb.append(", ").append(sigma);
-        sb.append(", ").append(effectComponent);
-        sb.append(", ").append(effectConfig);
+        sb.append(", ").append(renewalCredit);
         sb.append(", ").append(language);
         sb.append(", ").append(active);
         sb.append(", ").append(metadata);
@@ -380,12 +348,10 @@ public class SAction implements ISAction {
         setResourceId(from.getResourceId());
         setPermissionId(from.getPermissionId());
         setLevel(from.getLevel());
-        setMode(from.getMode());
         setUri(from.getUri());
         setMethod(from.getMethod());
         setSigma(from.getSigma());
-        setEffectComponent(from.getEffectComponent());
-        setEffectConfig(from.getEffectConfig());
+        setRenewalCredit(from.getRenewalCredit());
         setLanguage(from.getLanguage());
         setActive(from.getActive());
         setMetadata(from.getMetadata());

@@ -3,6 +3,7 @@ package io.vertx.zero.matrix;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.zero.eon.Strings;
+import io.vertx.zero.eon.Values;
 import io.zero.epic.Ut;
 
 import java.io.Serializable;
@@ -31,6 +32,7 @@ public class DataBound implements Serializable {
 
     private final transient Set<String> projection = new HashSet<>();
     private final transient JsonObject criteria = new JsonObject();
+    private final transient JsonArray credit = new JsonArray();
     private final transient ConcurrentMap<String, Set<String>> rows =
             new ConcurrentHashMap<>();
 
@@ -42,6 +44,7 @@ public class DataBound implements Serializable {
         final JsonObject rows = new JsonObject();
         Ut.itMap(this.rows, (field, rowSet) -> rows.put(field, Ut.toJArray(rowSet)));
         json.put("rows", rows);
+        json.put("credit", credit);
         return json;
     }
 
@@ -73,6 +76,22 @@ public class DataBound implements Serializable {
                 this.rows.put(key, origianl);
             }
         });
+        return this;
+    }
+
+    /*
+     * Specification data flow for credit refresh about impact
+     */
+    public DataBound addCredit(final String credit) {
+        final JsonArray array = Ut.toJArray(credit);
+        array.stream().filter(Objects::nonNull)
+                .map(item -> (String) item)
+                .map(literal -> literal.split(" "))
+                .filter(splitted -> Values.TWO == splitted.length)
+                .map(splitted -> new JsonObject()
+                        .put("method", splitted[0])
+                        .put("uri", splitted[1])
+                ).forEach(this.credit::add);
         return this;
     }
 
