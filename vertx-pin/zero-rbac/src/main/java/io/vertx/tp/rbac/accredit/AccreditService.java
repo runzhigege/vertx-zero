@@ -1,5 +1,6 @@
 package io.vertx.tp.rbac.accredit;
 
+import cn.vertxup.domain.tables.pojos.SAction;
 import cn.vertxup.domain.tables.pojos.SResource;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
@@ -44,8 +45,14 @@ public class AccreditService implements AccreditStub {
                 /* Permission / Action Comparing */
                 .compose(permissions -> AccreditFlow.inspectAuthorized(this.getClass(), actionHod.get(), permissions))
 
-                /* The final steps to execute matrix data here. */
-                .compose(result -> this.authorized(result, request, resourceHod.get())));
+                /* The Final steps to execute matrix data here. */
+                .compose(result -> this.authorized(result, request, resourceHod.get(), actionHod.get())))
+                /*
+                 * Refresh Credit Action
+                 * This action must happen in each request, that's why the second time we also need to use ScRequest
+                 * instead of SAction here.
+                 * */
+                .compose(result -> AccreditFlow.inspectImpact(result, request));
     }
 
     private Future<Boolean> authorizedWithCache(final ScRequest request, final Supplier<Future<Boolean>> supplier) {
@@ -58,12 +65,14 @@ public class AccreditService implements AccreditStub {
                         supplier.get());
     }
 
-    private Future<Boolean> authorized(final Boolean result, final ScRequest request, final SResource resource) {
+    private Future<Boolean> authorized(final Boolean result, final ScRequest request,
+                                       final SResource resource, final SAction action) {
         if (result) {
             return this.matrixStub.fetchBound(request, resource)
+                    /* DataBound credit parsing from SAction */
+                    .compose(bound -> Ux.toFuture(bound.addCredit(action.getRenewalCredit())))
                     /* DataBound stored */
                     .compose(bound -> AccreditFlow.inspectBound(bound, request))
-
                     /* Authorized cached and get result */
                     .compose(nil -> AccreditFlow.inspectAuthorized(request));
         } else {
