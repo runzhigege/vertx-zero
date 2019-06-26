@@ -4,20 +4,28 @@ import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.web.Session;
 import io.vertx.tp.crud.actor.IxActor;
 import io.vertx.tp.crud.atom.IxModule;
+import io.vertx.tp.crud.cv.IxMsg;
+import io.vertx.tp.crud.refine.Ix;
 import io.vertx.tp.ke.cv.KeField;
+import io.vertx.tp.ke.tool.Ke;
 import io.vertx.tp.optic.Pocket;
 import io.vertx.tp.optic.Seeker;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.atom.query.Inquiry;
+import io.vertx.up.log.Annal;
 
 import java.text.MessageFormat;
 import java.util.Objects;
 import java.util.function.Supplier;
 
 class Unity {
+
+    private static final Annal LOGGER = Annal.get(Unity.class);
 
     static <T> Future<Envelop> call(final T stub, final Supplier<Future<Envelop>> executor) {
         /* If null */
@@ -52,5 +60,15 @@ class Unity {
                 .compose(input -> IxActor.header().bind(request).procAsync(input, config))
                 /* Fetch Impact */
                 .compose(seeker.on(dao)::fetchImpact);
+    }
+
+    static Future<JsonArray> flush(final Envelop request, final JsonArray projection) {
+        /* Do not modify current session data */
+        final JsonObject params = initMy(request);
+        final String sessionKey = Ke.keySession(params.getString(KeField.METHOD), params.getString(KeField.URI));
+        /* Session */
+        final Session session = request.getSession();
+        Ix.infoDao(LOGGER, IxMsg.CACHE_KEY_PROJECTION, sessionKey);
+        return Ke.session(session, sessionKey, Inquiry.KEY_PROJECTION, projection);
     }
 }

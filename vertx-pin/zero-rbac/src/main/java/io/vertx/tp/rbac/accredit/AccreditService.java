@@ -46,13 +46,7 @@ public class AccreditService implements AccreditStub {
                 .compose(permissions -> AccreditFlow.inspectAuthorized(this.getClass(), actionHod.get(), permissions))
 
                 /* The Final steps to execute matrix data here. */
-                .compose(result -> this.authorized(result, request, resourceHod.get(), actionHod.get())))
-                /*
-                 * Refresh Credit Action
-                 * This action must happen in each request, that's why the second time we also need to use ScRequest
-                 * instead of SAction here.
-                 * */
-                .compose(result -> AccreditFlow.inspectImpact(result, request));
+                .compose(result -> this.authorized(result, request, resourceHod.get(), actionHod.get())));
     }
 
     private Future<Boolean> authorizedWithCache(final ScRequest request, final Supplier<Future<Boolean>> supplier) {
