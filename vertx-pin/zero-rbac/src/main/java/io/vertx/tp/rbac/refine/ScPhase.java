@@ -39,9 +39,9 @@ class ScPhase {
         return uri(requestUri, request.uri());
     }
 
-    static String cacheKey(final RoutingContext context) {
+    private static String cacheKey(final RoutingContext context) {
         final HttpServerRequest request = context.request();
-        final String uri = Sc.uri(context);
+        final String uri = uri(context);
         /* Cache Key */
         final String cacheKey = "session-" + request.method().name() + ":" + uri;
         /* Cache Data */

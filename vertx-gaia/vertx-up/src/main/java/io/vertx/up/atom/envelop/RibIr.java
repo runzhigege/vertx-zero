@@ -19,12 +19,12 @@ class RibIr {
     static void irProjection(final JsonObject reference, final JsonArray projection, final boolean clear) {
         if (clear) {
             /* Overwrite Mode */
-            reference.put(Inquiry.KEY_PROJECTION, projection);
+            reference.put(Inquiry.KEY_PROJECTION, projection.copy());
         } else {
             /* Update Mode */
             final Set<String> originalSet = originalProjection(reference);
             /* Add New */
-            projection.stream().filter(Objects::nonNull)
+            projection.copy().stream().filter(Objects::nonNull)
                     .map(item -> (String) item)
                     .forEach(originalSet::add);
             /* Replace */
@@ -36,7 +36,7 @@ class RibIr {
     static void irCriteria(final JsonObject reference, final JsonObject criteria, final boolean clear) {
         if (clear) {
             /* Overwrite Mode */
-            reference.put(Inquiry.KEY_CRITERIA, criteria);
+            reference.put(Inquiry.KEY_CRITERIA, criteria.copy());
         } else {
             /* Update Mode */
             final JsonObject originalCriteria = reference.getJsonObject(Inquiry.KEY_CRITERIA);
