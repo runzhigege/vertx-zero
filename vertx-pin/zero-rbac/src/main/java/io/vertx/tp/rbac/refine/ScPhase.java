@@ -6,6 +6,7 @@ import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
+import io.vertx.tp.ke.tool.Ke;
 import io.vertx.tp.optic.Orbit;
 import io.vertx.tp.optic.Pocket;
 import io.vertx.tp.optic.atom.Income;
@@ -43,7 +44,7 @@ class ScPhase {
         final HttpServerRequest request = context.request();
         final String uri = uri(context);
         /* Cache Key */
-        final String cacheKey = "session-" + request.method().name() + ":" + uri;
+        final String cacheKey = Ke.keySession(request.method().name(), uri);
         /* Cache Data */
         Sc.infoAuth(LOGGER, "Try cacheKey: {0}", cacheKey);
         return cacheKey;

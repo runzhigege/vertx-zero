@@ -6,5 +6,5 @@ public interface IxMsg {
 
     String INIT_ERROR = " file = {0} will be ignored because the name ( name = `{1}` ) of definition does not match. ";
 
-    String OPTIC_ORBIT = " Optic, ARG0 = {0}, ARG1 = {1}";
+    String CACHE_KEY_PROJECTION = " Update projection of cacheKey = {0}";
 }
