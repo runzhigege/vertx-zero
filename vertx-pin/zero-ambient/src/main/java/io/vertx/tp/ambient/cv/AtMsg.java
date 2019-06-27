@@ -19,4 +19,8 @@ public interface AtMsg {
     String FILE_UPLOAD = "Upload parameters: {0}";
 
     String FILE_DOWNLOAD = "Download: key = {0}";
+
+    String UNITY_APP = "{0} Application have been initialized successfully!";
+
+    String UNITY_SOURCE = "{0} Data source have been initialized successfully!";
 }

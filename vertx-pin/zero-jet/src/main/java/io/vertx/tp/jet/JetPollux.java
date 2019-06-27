@@ -19,7 +19,7 @@ public class JetPollux implements PlugRouter {
 
     @Override
     public void mount(final Router router, final JsonObject config) {
-
+        /* Configuration Json */
     }
 
     /*
