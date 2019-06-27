@@ -32,8 +32,8 @@ class MediaResolver {
     /**
      * Capture the consume media types
      *
-     * @param method
-     * @return
+     * @param method method reference
+     * @return return MIME
      */
     public static Set<MediaType> consumes(final Method method) {
         return resolve(method, Consumes.class);
@@ -42,8 +42,8 @@ class MediaResolver {
     /**
      * Capture the produces media types
      *
-     * @param method
-     * @return
+     * @param method method reference
+     * @return return MIME
      */
     public static Set<MediaType> produces(final Method method) {
         return resolve(method, Produces.class);
