@@ -5,21 +5,28 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.actor.IxActor;
+import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.crud.cv.Addr;
+import io.vertx.tp.crud.cv.IxMsg;
 import io.vertx.tp.crud.init.IxPin;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.tp.error._500ExportingErrorException;
 import io.vertx.tp.plugin.excel.ExcelClient;
-import io.vertx.tp.plugin.excel.ExcelInfix;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Address;
+import io.vertx.up.annotations.Plugin;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
+import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -28,10 +35,32 @@ import java.util.stream.Collectors;
 @Queue
 public class FileActor {
 
-    @Address(Addr.File.IMPORT)
-    public Future<JsonObject> importFile(final Envelop envelop) {
+    private static final Annal LOGGER = Annal.get(FileActor.class);
 
-        return Future.succeededFuture();
+    @Plugin
+    private transient ExcelClient client;
+
+    @Address(Addr.File.IMPORT)
+    public Future<Envelop> importFile(final Envelop request) {
+        /* Import data here for result */
+        final String actor = Ux.getString(request);
+        final String filename = Ux.getString1(request);
+        /* IxConfig */
+        final IxModule config = IxPin.getActor(actor);
+        final Future<Envelop> future = Future.future();
+        final File file = new File(filename);
+        if (file.exists()) {
+            Fn.safeJvm(() -> {
+                final InputStream inputStream = new FileInputStream(file);
+                this.client.importTable(config.getTable(), inputStream, handler -> {
+                    Ix.infoDao(LOGGER, IxMsg.FILE_LOADED, filename);
+                    future.complete(Envelop.success(Boolean.TRUE));
+                });
+            });
+        } else {
+            future.complete(Envelop.success(Boolean.FALSE));
+        }
+        return future;
     }
 
     @Address(Addr.File.EXPORT)
@@ -133,9 +162,8 @@ public class FileActor {
 
     private Future<Buffer> exportTable(final String identifier, final JsonArray data) {
         /* Excel Client */
-        final ExcelClient client = ExcelInfix.getClient();
         final Future<Buffer> future = Future.future();
-        client.exportTable(identifier, data, handler -> {
+        this.client.exportTable(identifier, data, handler -> {
             if (handler.succeeded()) {
                 future.complete(handler.result());
             } else {

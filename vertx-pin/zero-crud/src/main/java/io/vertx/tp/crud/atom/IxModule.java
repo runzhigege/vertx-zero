@@ -13,6 +13,7 @@ import java.io.Serializable;
 public class IxModule implements Serializable {
 
     private String name;
+    private String table;
     private String pojo;
     private IxField field;
     private IxColumn column;
@@ -85,10 +86,19 @@ public class IxModule implements Serializable {
         this.column = column;
     }
 
+    public String getTable() {
+        return this.table;
+    }
+
+    public void setTable(final String table) {
+        this.table = table;
+    }
+
     @Override
     public String toString() {
         return "IxModule{" +
                 "name='" + this.name + '\'' +
+                ", table='" + this.table + '\'' +
                 ", pojo='" + this.pojo + '\'' +
                 ", field=" + this.field +
                 ", column=" + this.column +

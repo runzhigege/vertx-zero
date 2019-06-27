@@ -53,4 +53,10 @@ public interface ExcelClient extends TpClient<ExcelClient> {
 
     @Fluent
     ExcelClient exportTable(String identifier, JsonArray data, Handler<AsyncResult<Buffer>> handler);
+
+    @Fluent
+    <T> ExcelClient importTable(String tableOnly, final String filename, Handler<AsyncResult<Set<T>>> handler);
+
+    @Fluent
+    <T> ExcelClient importTable(String tableOnly, final InputStream in, Handler<AsyncResult<Set<T>>> handler);
 }
