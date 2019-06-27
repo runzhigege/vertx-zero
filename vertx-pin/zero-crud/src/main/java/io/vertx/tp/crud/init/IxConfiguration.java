@@ -48,4 +48,12 @@ class IxConfiguration {
     static Set<String> getUris() {
         return MODULE_REG;
     }
+
+    static String getField() {
+        return CONFIG.getColumnKeyField();
+    }
+
+    static String getLabel() {
+        return CONFIG.getColumnLabelField();
+    }
 }

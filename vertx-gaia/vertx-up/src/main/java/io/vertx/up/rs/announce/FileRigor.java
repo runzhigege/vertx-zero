@@ -25,7 +25,8 @@ public class FileRigor implements Rigor {
             Observable.fromIterable(rulers.keySet())
                     .map(rulers::get)
                     .flatMap(Observable::fromIterable)
-                    .subscribe(rules::add);
+                    .subscribe(rules::add)
+                    .dispose();
             // Rules here.
             error = Ruler.verify(rules, "BODY", body);
         }

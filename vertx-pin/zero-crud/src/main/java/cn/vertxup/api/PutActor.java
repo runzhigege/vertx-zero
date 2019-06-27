@@ -3,18 +3,43 @@ package cn.vertxup.api;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.web.Session;
 import io.vertx.tp.crud.actor.IxActor;
 import io.vertx.tp.crud.cv.Addr;
+import io.vertx.tp.crud.cv.IxMsg;
 import io.vertx.tp.crud.refine.Ix;
+import io.vertx.tp.ke.cv.KeField;
+import io.vertx.tp.ke.tool.Ke;
 import io.vertx.tp.optic.ApeakMy;
 import io.vertx.tp.optic.Pocket;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.atom.query.Inquiry;
+import io.vertx.up.log.Annal;
 
 @Queue
 public class PutActor {
+    private static final Annal LOGGER = Annal.get(PutActor.class);
+
+    /*
+     * Flush cache of session on impacted uri
+     * This method is for projection refresh here
+     * /api/columns/{actor}/my -> save projection on
+     * /api/{actor}/search
+     * This impact will be in time when this method called.
+     * The method is used in this class only and could not be shared.
+     */
+    private Future<JsonArray> flush(final Envelop request, final JsonArray projection) {
+        /* Do not modify current session data */
+        final JsonObject params = Unity.initMy(request);
+        final String sessionKey = Ke.keySession(params.getString(KeField.METHOD), params.getString(KeField.URI));
+        /* Session */
+        final Session session = request.getSession();
+        Ix.infoDao(LOGGER, IxMsg.CACHE_KEY_PROJECTION, sessionKey);
+        return Ke.session(session, sessionKey, Inquiry.KEY_PROJECTION, projection);
+    }
 
     @Address(Addr.Put.BY_ID)
     public <T> Future<Envelop> update(final Envelop request) {
@@ -70,7 +95,7 @@ public class PutActor {
             final JsonArray projection = Ux.getArray1(request);
             /* Put Stub */
             final ApeakMy stub = Pocket.lookup(ApeakMy.class);
-            return Unity.call(stub, () -> Unity.seeker(dao, request, config)
+            return Unity.safeCall(stub, () -> Unity.fetchView(dao, request, config)
                     /* View parameters filling */
                     .compose(input -> IxActor.view().procAsync(input, config))
                     /* User filling */
@@ -78,7 +103,7 @@ public class PutActor {
                     /* Fetch My Columns */
                     .compose(params -> stub.on(dao).saveMy(params, projection))
                     /* Flush Cache based on Ke */
-                    .compose(updated -> Unity.flush(request, updated))
+                    .compose(updated -> this.flush(request, updated))
                     /* Return Result */
                     .compose(Http::success200));
         });
