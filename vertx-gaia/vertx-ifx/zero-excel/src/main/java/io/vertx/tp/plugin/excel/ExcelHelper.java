@@ -61,10 +61,10 @@ class ExcelHelper {
         final Workbook workbook;
         if (isXlsx) {
             workbook = Fn.pool(Pool.WORKBOOKS_STREAM, in.hashCode(),
-                    () -> Fn.getJvm(() -> new HSSFWorkbook(in)));
+                    () -> Fn.getJvm(() -> new XSSFWorkbook(in)));
         } else {
             workbook = Fn.pool(Pool.WORKBOOKS_STREAM, in.hashCode(),
-                    () -> Fn.getJvm(() -> new XSSFWorkbook(in)));
+                    () -> Fn.getJvm(() -> new HSSFWorkbook(in)));
         }
         return workbook;
     }
