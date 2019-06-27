@@ -4,21 +4,25 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.excel.atom.ExRecord;
 import io.vertx.tp.plugin.excel.atom.ExTable;
+import io.vertx.tp.plugin.excel.tool.ExFn;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.io.OutputStream;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ExcelClientImpl implements ExcelClient {
@@ -27,9 +31,12 @@ public class ExcelClientImpl implements ExcelClient {
 
     private transient final Vertx vertx;
     private transient final ExcelHelper helper = ExcelHelper.helper(this.getClass());
+    private transient final String temp;
 
     ExcelClientImpl(final Vertx vertx, final JsonObject config) {
         this.vertx = vertx;
+        final String temp = config.getString("temp");
+        this.temp = Ut.isNil(temp) ? "/tmp" : temp;
         this.init(config);
     }
 
@@ -166,6 +173,27 @@ public class ExcelClientImpl implements ExcelClient {
             }
         }
         return reference;
+    }
+
+    @Override
+    public ExcelClient exportTable(final String identifier, final JsonArray data, final Handler<AsyncResult<Buffer>> handler) {
+        /* 1. Workbook created */
+        final XSSFWorkbook workbook = new XSSFWorkbook();
+        /* 2. Sheet created */
+        final XSSFSheet sheet = workbook.createSheet(identifier);
+        /* 3. Row created */
+        Ut.itJArray(data, JsonArray.class, (rowData, index) ->
+                ExFn.generateData(sheet, index, rowData));
+        /* 4. OutputStream */
+        Fn.safeJvm(() -> {
+            // TODO: Modified in future
+            final String filename = identifier + "." + UUID.randomUUID() + ".xlsx";
+            final OutputStream out = new FileOutputStream(filename);
+            workbook.write(out);
+            // InputStream converted
+            handler.handle(Ux.toFuture(Ut.ioBuffer(filename)));
+        });
+        return this;
     }
 
     private List<JsonObject> extract(final ExTable table) {

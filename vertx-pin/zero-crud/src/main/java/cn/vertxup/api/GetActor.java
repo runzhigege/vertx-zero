@@ -4,7 +4,6 @@ import io.vertx.core.Future;
 import io.vertx.tp.crud.actor.IxActor;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.tp.optic.Apeak;
 import io.vertx.tp.optic.ApeakMy;
 import io.vertx.tp.optic.Pocket;
 import io.vertx.up.aiki.Ux;
@@ -34,29 +33,20 @@ public class GetActor {
     }
 
     /*
-     * GET: /api/columns/full/{actor}
+     * GET: /api/columns/{actor}/full
      */
     @Address(Addr.Get.COLUMN_FULL)
     @SuppressWarnings("all")
     public Future<Envelop> getFull(final Envelop request) {
-        return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
-            /* Get Stub */
-            final Apeak stub = Pocket.lookup(Apeak.class);
-
-            return Unity.call(stub, () -> IxActor.start()
-                    /* Apeak column definition here */
-                    .compose(input -> IxActor.apeak().bind(request).procAsync(input, config))
-                    /* Header */
-                    .compose(input -> IxActor.header().bind(request).procAsync(input, config))
-                    /* Fetch Full Columns */
-                    .compose(stub.on(dao)::fetchFull)
-                    /* Return Result */
-                    .compose(Http::success200));
-        });
+        return Ix.create(this.getClass()).input(request).envelop(
+                /* Search full column and it will be used in another method */
+                (dao, config) -> Unity.fetchFull(dao, request, config)
+                        /* Result Wrapper to Envelop */
+                        .compose(Http::success200));
     }
 
     /*
-     * GET: /api/columns/my/{actor}
+     * GET: /api/columns/{actor}/my
      */
     @Address(Addr.Get.COLUMN_MY)
     @SuppressWarnings("all")
@@ -64,7 +54,7 @@ public class GetActor {
         return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Get Stub */
             final ApeakMy stub = Pocket.lookup(ApeakMy.class);
-            return Unity.call(stub, () -> Unity.seeker(dao, request, config)
+            return Unity.safeCall(stub, () -> Unity.fetchView(dao, request, config)
                     /* View parameters filling */
                     .compose(input -> IxActor.view().procAsync(input, config))
                     /* Uri filling, replace inited information: uri , method */

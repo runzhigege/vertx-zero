@@ -103,6 +103,11 @@ public final class Ux {
         return To.toFilters(columns, supplier);
     }
 
+    // Toggle switch from interface style to worker here, the key should be "0", "1", "2", "3", ....
+    public static JsonObject toToggle(final Object... args) {
+        return To.toToggle(args);
+    }
+
     public static <T> T fromJson(final JsonObject data, final Class<T> clazz) {
         return From.fromJson(data, clazz, "");
     }
