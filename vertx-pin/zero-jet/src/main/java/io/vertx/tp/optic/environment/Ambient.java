@@ -1,8 +1,14 @@
 package io.vertx.tp.optic.environment;
 
+import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error._500AmbientConnectException;
+import io.vertx.tp.jet.atom.JtEnv;
 import io.vertx.tp.jet.init.JtPin;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /*
  * The environment data, it's for multi-app deployment here
@@ -10,6 +16,9 @@ import io.zero.epic.fn.Fn;
  */
 @SuppressWarnings("all")
 public class Ambient {
+
+    private static final ConcurrentMap<String, JtEnv> ENVRIONMENT =
+            new ConcurrentHashMap<>();
 
     static {
         /*
@@ -24,5 +33,7 @@ public class Ambient {
         /*
          * 3. Application environment initialization
          */
+        final ConcurrentMap<String, JsonObject> unityData = unity.connect();
+        unityData.forEach((key, json) -> ENVRIONMENT.put(key, Ut.deserialize(json, JtEnv.class)));
     }
 }

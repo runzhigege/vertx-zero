@@ -35,7 +35,7 @@ public class XApp extends TableImpl<XAppRecord> {
      * The reference instance of <code>DB_ETERNAL.X_APP</code>
      */
     public static final XApp X_APP = new XApp();
-    private static final long serialVersionUID = 1760919073;
+    private static final long serialVersionUID = 883375629;
     /**
      * The column <code>DB_ETERNAL.X_APP.KEY</code>. 「key」- 应用程序主键
      */
@@ -56,6 +56,18 @@ public class XApp extends TableImpl<XAppRecord> {
      * The column <code>DB_ETERNAL.X_APP.LOGO</code>. 「logo」- 应用程序图标
      */
     public final TableField<XAppRecord, String> LOGO = createField("LOGO", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「logo」- 应用程序图标");
+    /**
+     * The column <code>DB_ETERNAL.X_APP.ICP</code>. 「icp」- ICP备案号
+     */
+    public final TableField<XAppRecord, String> ICP = createField("ICP", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「icp」- ICP备案号");
+    /**
+     * The column <code>DB_ETERNAL.X_APP.COPY_RIGHT</code>. 「copyRight」- CopyRight版权信息
+     */
+    public final TableField<XAppRecord, String> COPY_RIGHT = createField("COPY_RIGHT", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「copyRight」- CopyRight版权信息");
+    /**
+     * The column <code>DB_ETERNAL.X_APP.EMAIL</code>. 「email」- 应用Email信息
+     */
+    public final TableField<XAppRecord, String> EMAIL = createField("EMAIL", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「email」- 应用Email信息");
     /**
      * The column <code>DB_ETERNAL.X_APP.DOMAIN</code>. 「domain」- 应用程序所在域
      */

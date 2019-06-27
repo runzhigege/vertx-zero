@@ -30,19 +30,9 @@ class UnityAsker {
         final List<XSource> sources = Ux.Jooq.on(XSourceDao.class).findAll();
         At.infoApp(LOGGER, AtMsg.UNITY_SOURCE, sources.size());
 
-        /* Data */
-        APP_POOL.putAll(Fn.zipper(applications, XApp::getName, app -> app));
+        /* Data, use application key as key here. */
+        APP_POOL.putAll(Fn.zipper(applications, XApp::getKey, app -> app));
         SOURCE_POOL.putAll(Fn.zipper(sources, XSource::getAppId, source -> source));
-
-        /* Key -> Sigma */
-        UnityKey.ID_KEY.putAll(Fn.zipper(applications, XApp::getKey, XApp::getAppKey));
-        UnityKey.KEY_ID.putAll(Fn.zipper(applications, XApp::getAppKey, XApp::getKey));
-
-        UnityKey.ID_SIGMA.putAll(Fn.zipper(applications, XApp::getKey, XApp::getSigma));
-        UnityKey.SIGMA_ID.putAll(Fn.zipper(applications, XApp::getSigma, XApp::getKey));
-
-        UnityKey.KEY_SIGMA.putAll(Fn.zipper(applications, XApp::getKey, XApp::getSigma));
-        UnityKey.SIGMA_KEY.putAll(Fn.zipper(applications, XApp::getSigma, XApp::getKey));
     }
 
     static ConcurrentMap<String, XApp> getApps() {
