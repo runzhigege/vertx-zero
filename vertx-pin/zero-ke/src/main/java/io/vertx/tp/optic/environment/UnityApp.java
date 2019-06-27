@@ -13,6 +13,4 @@ public interface UnityApp {
     void initialize();
 
     ConcurrentMap<String, JsonObject> connect();
-
-
 }

@@ -14,7 +14,6 @@ import java.io.Serializable;
  * Configuration in lime for dynamic router
  * {
  *      "wall": "/api"
- *      "context": "/ox"
  *      "worker":{
  *          "instances": 64
  *      },
@@ -25,7 +24,6 @@ import java.io.Serializable;
  */
 public class JtConfig implements Serializable {
     private transient String wall;
-    private transient String context;
 
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
@@ -47,14 +45,6 @@ public class JtConfig implements Serializable {
 
     public void setWall(final String wall) {
         this.wall = wall;
-    }
-
-    public String getContext() {
-        return this.context;
-    }
-
-    public void setContext(final String context) {
-        this.context = context;
     }
 
     public JsonObject getWorker() {
@@ -93,7 +83,6 @@ public class JtConfig implements Serializable {
     public String toString() {
         return "JtConfig{" +
                 "wall='" + this.wall + '\'' +
-                ", context='" + this.context + '\'' +
                 ", worker=" + this.worker +
                 ", agent=" + this.agent +
                 ", options=" + this.options +

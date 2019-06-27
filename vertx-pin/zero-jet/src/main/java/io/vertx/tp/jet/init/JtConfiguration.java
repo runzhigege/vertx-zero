@@ -29,7 +29,6 @@ class JtConfiguration {
                 CONFIG = Ut.deserialize(router, JtConfig.class);
                 Jt.infoInit(LOGGER, "Jt Configuration: {0}", CONFIG.toString());
                 Jt.infoInit(LOGGER, "---> Jt @Wall for `{0}`", CONFIG.getWall());
-                Jt.infoInit(LOGGER, "---> Jt @EndPoint for context `{0}`", CONFIG.getContext());
             }
         }
     }
