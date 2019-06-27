@@ -144,6 +144,16 @@ public interface IXNumber extends Serializable {
     public Boolean getDecrement();
 
     /**
+     * Setter for <code>DB_ETERNAL.X_NUMBER.APP_ID</code>. 「appId」- 关联的应用程序ID
+     */
+    public IXNumber setAppId(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_NUMBER.APP_ID</code>. 「appId」- 关联的应用程序ID
+     */
+    public String getAppId();
+
+    /**
      * Setter for <code>DB_ETERNAL.X_NUMBER.ACTIVE</code>. 「active」- 是否启用
      */
     public IXNumber setActive(Boolean value);
@@ -250,6 +260,7 @@ public interface IXNumber extends Serializable {
         setLength(json.getInteger("LENGTH"));
         setStep(json.getInteger("STEP"));
         setDecrement(json.getBoolean("DECREMENT"));
+        setAppId(json.getString("APP_ID"));
         setActive(json.getBoolean("ACTIVE"));
         setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
@@ -276,6 +287,7 @@ public interface IXNumber extends Serializable {
         json.put("LENGTH",getLength());
         json.put("STEP",getStep());
         json.put("DECREMENT",getDecrement());
+        json.put("APP_ID",getAppId());
         json.put("ACTIVE",getActive());
         json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());

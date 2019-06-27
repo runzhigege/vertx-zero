@@ -35,7 +35,7 @@ public class XNumber extends TableImpl<XNumberRecord> {
      * The reference instance of <code>DB_ETERNAL.X_NUMBER</code>
      */
     public static final XNumber X_NUMBER = new XNumber();
-    private static final long serialVersionUID = -1806915034;
+    private static final long serialVersionUID = -1569161409;
     /**
      * The column <code>DB_ETERNAL.X_NUMBER.KEY</code>. 「key」- 主键
      */
@@ -84,6 +84,10 @@ public class XNumber extends TableImpl<XNumberRecord> {
      * The column <code>DB_ETERNAL.X_NUMBER.DECREMENT</code>. 「decrement」递增/递减？如果为true则递减，为false则是递增,decrement,IS_DECREMENT
      */
     public final TableField<XNumberRecord, Boolean> DECREMENT = createField("DECREMENT", org.jooq.impl.SQLDataType.BIT.nullable(false), this, "「decrement」递增/递减？如果为true则递减，为false则是递增,decrement,IS_DECREMENT");
+    /**
+     * The column <code>DB_ETERNAL.X_NUMBER.APP_ID</code>. 「appId」- 关联的应用程序ID
+     */
+    public final TableField<XNumberRecord, String> APP_ID = createField("APP_ID", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「appId」- 关联的应用程序ID");
     /**
      * The column <code>DB_ETERNAL.X_NUMBER.ACTIVE</code>. 「active」- 是否启用
      */
@@ -167,7 +171,7 @@ public class XNumber extends TableImpl<XNumberRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.X_NUMBER_CODE, Indexes.X_NUMBER_PRIMARY);
+        return Arrays.<Index>asList(Indexes.X_NUMBER_APP_ID, Indexes.X_NUMBER_PRIMARY);
     }
 
     /**
@@ -183,7 +187,7 @@ public class XNumber extends TableImpl<XNumberRecord> {
      */
     @Override
     public List<UniqueKey<XNumberRecord>> getKeys() {
-        return Arrays.<UniqueKey<XNumberRecord>>asList(Keys.KEY_X_NUMBER_PRIMARY, Keys.KEY_X_NUMBER_CODE);
+        return Arrays.<UniqueKey<XNumberRecord>>asList(Keys.KEY_X_NUMBER_PRIMARY, Keys.KEY_X_NUMBER_APP_ID);
     }
 
     /**

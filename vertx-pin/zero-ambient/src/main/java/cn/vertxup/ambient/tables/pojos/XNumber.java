@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XNumber implements IXNumber {
 
-    private static final long serialVersionUID = 29142636;
+    private static final long serialVersionUID = 756045549;
 
     private String        key;
     private String        code;
@@ -38,6 +38,7 @@ public class XNumber implements IXNumber {
     private Integer       length;
     private Integer       step;
     private Boolean       decrement;
+    private String        appId;
     private Boolean       active;
     private String        sigma;
     private String        metadata;
@@ -62,6 +63,7 @@ public class XNumber implements IXNumber {
         this.length = value.length;
         this.step = value.step;
         this.decrement = value.decrement;
+        this.appId = value.appId;
         this.active = value.active;
         this.sigma = value.sigma;
         this.metadata = value.metadata;
@@ -85,6 +87,7 @@ public class XNumber implements IXNumber {
         Integer       length,
         Integer       step,
         Boolean       decrement,
+        String        appId,
         Boolean       active,
         String        sigma,
         String        metadata,
@@ -106,6 +109,7 @@ public class XNumber implements IXNumber {
         this.length = length;
         this.step = step;
         this.decrement = decrement;
+        this.appId = appId;
         this.active = active;
         this.sigma = sigma;
         this.metadata = metadata;
@@ -249,6 +253,17 @@ public class XNumber implements IXNumber {
     }
 
     @Override
+    public String getAppId() {
+        return this.appId;
+    }
+
+    @Override
+    public XNumber setAppId(String appId) {
+        this.appId = appId;
+        return this;
+    }
+
+    @Override
     public Boolean getActive() {
         return this.active;
     }
@@ -352,6 +367,7 @@ public class XNumber implements IXNumber {
         sb.append(", ").append(length);
         sb.append(", ").append(step);
         sb.append(", ").append(decrement);
+        sb.append(", ").append(appId);
         sb.append(", ").append(active);
         sb.append(", ").append(sigma);
         sb.append(", ").append(metadata);
@@ -386,6 +402,7 @@ public class XNumber implements IXNumber {
         setLength(from.getLength());
         setStep(from.getStep());
         setDecrement(from.getDecrement());
+        setAppId(from.getAppId());
         setActive(from.getActive());
         setSigma(from.getSigma());
         setMetadata(from.getMetadata());
