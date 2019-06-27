@@ -115,9 +115,13 @@ public class ExcelClientImpl implements ExcelClient {
              */
             final JsonObject filters = table.whereUnique(data);
             LOGGER.info("[ Excel ] Filters: {0}, Table: {1}", filters.encode(), table.getName());
-            final T entity = Ut.deserialize(data, table.getPojo());
+            final T entity = Ux.fromJson(data, table.getPojo(), table.getPojoFile());
             final UxJooq jooq = Ux.Jooq.on(table.getDao());
             if (null != jooq) {
+                final String pojoFile = table.getPojoFile();
+                if (Ut.notNil(pojoFile)) {
+                    jooq.on(pojoFile);
+                }
                 /*
                  * Unique filter to fetch single record database here.
                  * Such as code + sigma
