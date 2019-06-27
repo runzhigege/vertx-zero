@@ -27,8 +27,7 @@ public interface KeField {
     String DYNAMIC = "dynamic";
     String VIEW = "view";
     String ACTOR = "actor";
-    // User Info
-    String PRINCIPLE = "principle";
+    String QUERY = "query";
 
     String LOGO = "logo";
 

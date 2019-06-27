@@ -13,6 +13,9 @@ public class IxConfig implements Serializable {
     @JsonDeserialize(using = JsonArrayDeserializer.class)
     private transient JsonArray patterns;
 
+    private transient String columnKeyField = "dataIndex";  // Render for column
+    private transient String columnLabelField = "title";
+
     public JsonArray getPatterns() {
         return this.patterns;
     }
@@ -21,10 +24,28 @@ public class IxConfig implements Serializable {
         this.patterns = patterns;
     }
 
+    public String getColumnKeyField() {
+        return this.columnKeyField;
+    }
+
+    public void setColumnKeyField(final String columnKeyField) {
+        this.columnKeyField = columnKeyField;
+    }
+
+    public String getColumnLabelField() {
+        return this.columnLabelField;
+    }
+
+    public void setColumnLabelField(final String columnLabelField) {
+        this.columnLabelField = columnLabelField;
+    }
+
     @Override
     public String toString() {
         return "IxConfig{" +
                 "patterns=" + this.patterns +
+                ", columnKeyField='" + this.columnKeyField + '\'' +
+                ", columnLabelField='" + this.columnLabelField + '\'' +
                 '}';
     }
 }

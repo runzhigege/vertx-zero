@@ -4,6 +4,8 @@ import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
+import io.vertx.core.buffer.Buffer;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.excel.atom.ExTable;
 import io.vertx.up.eon.TpClient;
@@ -49,4 +51,6 @@ public interface ExcelClient extends TpClient<ExcelClient> {
     @Fluent
     ExcelClient ingest(String filename, Handler<AsyncResult<ExTable>> handler);
 
+    @Fluent
+    ExcelClient exportTable(String identifier, JsonArray data, Handler<AsyncResult<Buffer>> handler);
 }

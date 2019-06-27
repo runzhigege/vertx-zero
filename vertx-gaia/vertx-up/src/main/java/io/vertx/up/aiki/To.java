@@ -159,4 +159,13 @@ class To {
                 () -> toJson(null, pojo),
                 () -> toJson(array.getValue(0), pojo));
     }
+
+    static JsonObject toToggle(final Object... args) {
+        final JsonObject params = new JsonObject();
+        for (int idx = 0; idx < args.length; idx++) {
+            final String idxStr = String.valueOf(idx);
+            params.put(idxStr, args[idx]);
+        }
+        return params;
+    }
 }
