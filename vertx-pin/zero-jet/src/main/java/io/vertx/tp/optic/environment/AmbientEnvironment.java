@@ -12,7 +12,9 @@ import io.zero.epic.fn.Fn;
 import org.jooq.Configuration;
 
 import java.sql.Connection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -77,5 +79,9 @@ public class AmbientEnvironment {
 
     public Connection getConnection() {
         return Fn.getJvm(() -> this.pool.getDataSource().getConnection(), this.pool);
+    }
+
+    public Set<JtUri> routes() {
+        return new HashSet<>(this.uris.values());
     }
 }

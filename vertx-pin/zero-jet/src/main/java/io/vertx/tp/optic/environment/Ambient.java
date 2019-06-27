@@ -30,30 +30,39 @@ public class Ambient {
             new ConcurrentHashMap<>();
 
     static {
-        /*
-         * 1. UnityApp fetching here.
-         */
-        final UnityApp unity = JtPin.getUnity();
-        Fn.out(null == unity, _500AmbientConnectException.class, Ambient.class);
-        /*
-         * 2. UnityApp initializing, the whole environment will be initianlized
-         */
-        unity.initialize();
-        /*
-         * 3. Application environment initialization
-         */
-        final ConcurrentMap<String, JsonObject> unityData = unity.connect();
-        unityData.forEach((key, json) -> APPS.put(key, Ut.deserialize(json, JtApp.class)));
-        /*
-         * 4. Binding configuration of this environment
-         * - DSLContext ( reference )
-         * - Service/Api -> Uri
-         * - Router -> Route of Vert.x
-         */
-        APPS.forEach((appId, app) -> ENVIRONMENTS.put(appId, new AmbientEnvironment(app).init()));
+        try {
+            /*
+             * 1. UnityApp fetching here.
+             */
+            final UnityApp unity = JtPin.getUnity();
+            Fn.out(null == unity, _500AmbientConnectException.class, Ambient.class);
+            /*
+             * 2. UnityApp initializing, the whole environment will be initianlized
+             */
+            unity.initialize();
+            /*
+             * 3. Application environment initialization
+             */
+            final ConcurrentMap<String, JsonObject> unityData = unity.connect();
+            unityData.forEach((key, json) -> APPS.put(key, Ut.deserialize(json, JtApp.class)));
+            /*
+             * 4. Binding configuration of this environment
+             * - DSLContext ( reference )
+             * - Service/Api -> Uri
+             * - Router -> Route of Vert.x
+             */
+            APPS.forEach((appId, app) -> ENVIRONMENTS.put(appId, new AmbientEnvironment(app).init()));
+        } catch (Throwable ex) {
+            // TODO: Start up exception
+            ex.printStackTrace();
+        }
     }
 
     public static ConcurrentMap<String, AmbientEnvironment> getEnvironments() {
         return ENVIRONMENTS;
+    }
+
+    public static JtApp getApp(final String key) {
+        return APPS.get(key);
     }
 }
