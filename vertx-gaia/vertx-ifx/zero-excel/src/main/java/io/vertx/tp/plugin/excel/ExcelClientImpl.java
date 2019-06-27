@@ -1,5 +1,6 @@
 package io.vertx.tp.plugin.excel;
 
+import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -81,6 +82,30 @@ public class ExcelClientImpl implements ExcelClient {
     @Override
     public <T> ExcelClient loading(final String filename, final Handler<AsyncResult<Set<T>>> handler) {
         return this.ingestList(filename, process -> handler.handle(this.handleIngested(process)));
+    }
+
+    @Override
+    @Fluent
+    public <T> ExcelClient importTable(final String tableOnly, final String filename, final Handler<AsyncResult<Set<T>>> handler) {
+        return this.ingestList(filename, processed -> {
+            if (processed.succeeded()) {
+                /* Filtered valid table here */
+                final Set<ExTable> execution = this.getFiltered(processed.result(), tableOnly);
+                handler.handle(this.handleIngested(Ux.toFuture(execution)));
+            }
+        });
+    }
+
+    @Override
+    @Fluent
+    public <T> ExcelClient importTable(final String tableOnly, final InputStream in, final Handler<AsyncResult<Set<T>>> handler) {
+        return this.ingestList(in, true, processed -> {
+            if (processed.succeeded()) {
+                /* Filtered valid table here */
+                final Set<ExTable> execution = this.getFiltered(processed.result(), tableOnly);
+                handler.handle(this.handleIngested(Ux.toFuture(execution)));
+            }
+        });
     }
 
     @Override
@@ -198,6 +223,12 @@ public class ExcelClientImpl implements ExcelClient {
             handler.handle(Ux.toFuture(Ut.ioBuffer(filename)));
         });
         return this;
+    }
+
+    private Set<ExTable> getFiltered(final Set<ExTable> processed, final String tableOnly) {
+        return processed.stream()
+                .filter(table -> tableOnly.equals(table.getName()))
+                .collect(Collectors.toSet());
     }
 
     private List<JsonObject> extract(final ExTable table) {
