@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonObjectSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.ke.cv.KeField;
 import io.vertx.zero.atom.Database;
 
 import java.io.Serializable;
@@ -147,36 +148,27 @@ public class JtApp implements Serializable {
         this.title = title;
     }
 
-    public JsonObject getBusiness() {
-        return this.business;
-    }
-
     public void setBusiness(final JsonObject business) {
         this.business = business;
-    }
-
-    public JsonObject getBackend() {
-        return this.backend;
     }
 
     public void setBackend(final JsonObject backend) {
         this.backend = backend;
     }
 
-    public JsonObject getFrontend() {
-        return this.frontend;
-    }
-
     public void setFrontend(final JsonObject frontend) {
         this.frontend = frontend;
     }
 
-    public JsonObject getAuditor() {
-        return this.auditor;
-    }
-
     public void setAuditor(final JsonObject auditor) {
         this.auditor = auditor;
+    }
+
+    /*
+     * Defined Method
+     */
+    public String getRoute() {
+        return this.backend.getString(KeField.App.ROUTE);
     }
 
     public Database getSource() {

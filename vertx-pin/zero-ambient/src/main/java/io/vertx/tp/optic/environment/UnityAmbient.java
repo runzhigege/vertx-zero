@@ -5,6 +5,7 @@ import cn.vertxup.ambient.tables.pojos.XSource;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
 import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -126,9 +127,9 @@ public class UnityAmbient implements UnityApp {
              */
             final JsonObject auditor = new JsonObject();
             auditor.put("createdBy", app.getCreatedBy());
-            auditor.put("createdAt", Ut.parse(app.getCreatedAt()).toInstant());
+            Fn.safeNull(() -> auditor.put("createdAt", Ut.parse(app.getCreatedAt()).toInstant()), app.getCreatedAt());
             auditor.put("updatedBy", app.getUpdatedBy());
-            auditor.put("updatedAt", Ut.parse(app.getUpdatedAt()).toInstant());
+            Fn.safeNull(() -> auditor.put("updatedAt", Ut.parse(app.getUpdatedAt()).toInstant()), app.getUpdatedAt());
             normalized.put("auditor", auditor);
         }
         /* Database information */

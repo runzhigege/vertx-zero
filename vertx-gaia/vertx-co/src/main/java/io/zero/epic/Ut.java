@@ -478,6 +478,10 @@ public class Ut {
         return Types.toEnum(clazz, input);
     }
 
+    public static <T extends Enum<T>> T toEnum(final Supplier<String> supplier, final Class<T> type, final T defaultEnum) {
+        return Types.toEnum(supplier, type, defaultEnum);
+    }
+
     public static String toString(final Object reference) {
         return Types.toString(reference);
     }
