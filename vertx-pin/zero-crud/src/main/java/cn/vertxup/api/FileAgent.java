@@ -4,6 +4,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
 import io.vertx.tp.crud.cv.Addr;
+import io.vertx.up.aiki.Uson;
+import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Codex;
 import io.vertx.up.annotations.EndPoint;
@@ -30,12 +32,23 @@ public class FileAgent {
     @Path("/{actor}/export")
     @POST
     @Address(Addr.File.EXPORT)
-    @Produces(MediaType.APPLICATION_OCTET_STREAM)
     @Consumes(MediaType.APPLICATION_OCTET_STREAM)
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public JsonObject exportFile(@PathParam("actor") final String actor,
-                                 @BodyParam final JsonArray columns) {
-
-        System.out.println("Export " + actor);
-        return null;
+                                 @BodyParam final JsonObject condition) {
+        /* Exported columns here for future calculation */
+        final JsonArray columns = condition.getJsonArray("columns");
+        /* Remove columns here and set criteria as condition */
+        final JsonObject query = Uson.create(condition).remove("columns").to();
+        /*
+         * Toggle format here
+         * {
+         *     "0": xxx,
+         *     "1": yyy,
+         *     "2": zzz,
+         *     ......
+         * }
+         */
+        return Ux.toToggle(actor, query, columns);
     }
 }

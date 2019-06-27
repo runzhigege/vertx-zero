@@ -1,5 +1,6 @@
 package io.vertx.tp.plugin.excel.tool;
 
+import io.vertx.core.json.JsonArray;
 import io.vertx.tp.plugin.excel.ranger.ExBound;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -116,5 +117,9 @@ public class ExFn {
                               final int columnIndex,
                               final Consumer<Cell> consumer) {
         onCell(row, columnIndex, consumer, null);
+    }
+
+    public static void generateData(final Sheet sheet, final Integer index, final JsonArray rowData) {
+        ExData.generateData(sheet, index, rowData);
     }
 }

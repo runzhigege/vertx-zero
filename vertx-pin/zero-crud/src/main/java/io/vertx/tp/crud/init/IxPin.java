@@ -49,4 +49,12 @@ public class IxPin {
     public static ConcurrentMap<String, List<Rule>> getRules(final String actor) {
         return IxValidator.getRules(actor);
     }
+
+    public static String getColumnKey() {
+        return IxConfiguration.getField();
+    }
+
+    public static String getColumnLabel() {
+        return IxConfiguration.getLabel();
+    }
 }
