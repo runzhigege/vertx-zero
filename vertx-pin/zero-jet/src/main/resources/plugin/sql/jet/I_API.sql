@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS I_API
     `IN_SCRIPT`       VARCHAR(255) COMMENT '「inScript」- 【保留】参数请求流程中的脚本控制',
 
     -- 服务层连接器
-    `WORKER_TYPE`     VARCHAR(255) COMMENT '「workerType」- Worker类型：JS / OX / PLUG',
+    `WORKER_TYPE`     VARCHAR(255) COMMENT '「workerType」- Worker类型：JS / PLUG / STD',
     `WORKER_ADDRESS`  VARCHAR(255) COMMENT '「workerAddress」- 请求发送地址',
     `WORKER_CONSUMER` VARCHAR(255) COMMENT '「workerConsumer」- 请求地址消费专用组件',
     `WORKER_CLASS`    VARCHAR(255) COMMENT '「workerClass」- OX | PLUG专用，请求执行器对应的JavaClass名称',

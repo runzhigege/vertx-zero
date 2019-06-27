@@ -42,9 +42,21 @@ public interface KeField {
 
     String RESULT = "result";
 
-    String TITLE = "title";
-    String COPY_RIGHT = "copyRight";
-    String ICP = "icp";
     String LOGO = "logo";
-    String EMAIL = "email";
+
+    interface App {
+
+        String COPY_RIGHT = "copyRight";
+        String ICP = "icp";
+        String TITLE = "title";
+        String EMAIL = "email";
+
+        String DOMAIN = "domain";
+        String APP_PORT = "appPort";
+        String ROUTE = "route";
+
+        String PATH = "path";
+        String URL_ENTRY = "urlEntry";
+        String URL_MAIN = "urlMain";
+    }
 }

@@ -4,6 +4,7 @@ import cn.vertxup.ambient.tables.pojos.XApp;
 import cn.vertxup.ambient.tables.pojos.XSource;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
+import io.zero.epic.Ut;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -62,12 +63,19 @@ public class UnityAmbient implements UnityApp {
              * 「Front App」
              * name - the unique name that will be used in front environment variable.  Z_APP
              * code - the application system code here that could be parsed by system.
+             * language - language of this application
+             * active - Whether enabled ( it's for future )
              */
             normalized.put(KeField.NAME, app.getName());
             normalized.put(KeField.CODE, app.getCode());
+            normalized.put(KeField.LANGUAGE, app.getLanguage());
+            normalized.put(KeField.ACTIVE, app.getActive());
         }
         /* Business information */
         {
+            /* Major: Logo and Title */
+            normalized.put(KeField.LOGO, app.getLogo());
+            normalized.put(KeField.App.TITLE, app.getTitle());
             /*
              * Business information
              * title - display the information on front app
@@ -77,16 +85,73 @@ public class UnityAmbient implements UnityApp {
              * email - administrator email that could be contacted
              */
             final JsonObject business = new JsonObject();
-            business.put(KeField.TITLE, app.getTitle());
-            business.put(KeField.LOGO, app.getLogo());
-            business.put(KeField.ICP, app.getIcp());
-            business.put(KeField.EMAIL, app.getEmail());
-            business.put(KeField.COPY_RIGHT, app.getCopyRight());
+            business.put(KeField.App.ICP, app.getIcp());
+            business.put(KeField.App.EMAIL, app.getEmail());
+            business.put(KeField.App.COPY_RIGHT, app.getCopyRight());
             normalized.put("business", business);
         }
         /* Deployment information */
         {
-            final JsonObject deployment = new JsonObject();
+            /*
+             * Deployment information
+             * Back-End
+             * domain - application domain information that will be deployed
+             * port - application port information that will be exposed.
+             * route - application sub routing information
+             */
+            final JsonObject backend = new JsonObject();
+            backend.put(KeField.App.DOMAIN, app.getDomain());
+            backend.put(KeField.App.APP_PORT, app.getAppPort());
+            backend.put(KeField.App.ROUTE, app.getRoute());
+            normalized.put("backend", backend);
+            /*
+             * Front-End
+             * path - front end application information
+             * urlEntry - Url Entry of Login Home
+             * urlMain - Url Entry of Admin Home
+             *
+             */
+            final JsonObject frontend = new JsonObject();
+            frontend.put(KeField.App.PATH, app.getPath());
+            frontend.put(KeField.App.URL_ENTRY, app.getUrlEntry());
+            frontend.put(KeField.App.URL_MAIN, app.getUrlMain());
+            normalized.put("frontend", frontend);
+        }
+        /* Auditor information */
+        {
+            /*
+             * Auditor information of current application.
+             * createdAt, createdBy
+             * updatedAt, updatedBy
+             */
+            final JsonObject auditor = new JsonObject();
+            auditor.put("createdBy", app.getCreatedBy());
+            auditor.put("createdAt", Ut.parse(app.getCreatedAt()).toInstant());
+            auditor.put("updatedBy", app.getUpdatedBy());
+            auditor.put("updatedAt", Ut.parse(app.getUpdatedAt()).toInstant());
+            normalized.put("auditor", auditor);
+        }
+        /* Database information */
+        {
+            /*
+             * Database information for JDBC
+             * hostname - database server host
+             * instance - database name
+             * port - database server port
+             * category - database type here
+             * jdbcUrl - JDBC connection string
+             * username - JDBC username
+             * password - JDBC password
+             */
+            final JsonObject sourceJson = new JsonObject();
+            sourceJson.put("hostname", source.getHostname());
+            sourceJson.put("instance", source.getInstance());
+            sourceJson.put("port", source.getPort());
+            sourceJson.put("category", source.getCategory());
+            sourceJson.put("jdbcUrl", source.getJdbcUrl());
+            sourceJson.put("username", source.getUsername());
+            sourceJson.put("password", source.getPassword());
+            normalized.put("source", sourceJson);
         }
         return normalized;
     }
