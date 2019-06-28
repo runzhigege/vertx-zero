@@ -1,5 +1,6 @@
 package io.vertx.tp.jet;
 
+import io.vertx.tp.error._400RequiredParamException;
 import io.vertx.up.atom.Envelop;
 import io.zero.epic.fn.Fn;
 
@@ -20,6 +21,6 @@ public class JetThanatos {
     }
 
     public Envelop to400RequiredParam(final String filename) {
-        return null;
+        return Envelop.failure(new _400RequiredParamException(this.target, filename));
     }
 }

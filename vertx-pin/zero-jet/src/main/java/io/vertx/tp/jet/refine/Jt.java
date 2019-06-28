@@ -19,6 +19,10 @@ public class Jt {
         JtLog.infoRoute(logger, pattern, args);
     }
 
+    public static void infoWeb(final Annal logger, final String pattern, final Object... args) {
+        JtLog.infoWeb(logger, pattern, args);
+    }
+
     /*
      * Extraction for some specification data
      */

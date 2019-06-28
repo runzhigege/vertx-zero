@@ -8,6 +8,8 @@ import io.vertx.ext.web.Session;
 import io.vertx.up.annotations.SessionData;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.agent.Event;
+import io.vertx.up.eon.ID;
+import io.vertx.up.exception._500InternalServerException;
 import io.vertx.up.rs.pointer.PluginExtension;
 import io.zero.epic.Ut;
 
@@ -25,6 +27,39 @@ import java.util.function.Supplier;
  * 2. Operation based on event, envelop, context
  */
 public final class Answer {
+
+    public static Envelop previous(final RoutingContext context) {
+        Envelop envelop = context.get(ID.REQUEST_BODY);
+        if (Objects.isNull(envelop)) {
+            envelop = Envelop.failure(new _500InternalServerException(Answer.class, "Previous Error of " + ID.REQUEST_BODY));
+        }
+        return envelop;
+    }
+
+    public static void next(final RoutingContext context, final Envelop envelop) {
+        if (envelop.valid()) {
+            /*
+             * Next step here
+             */
+            context.put(ID.REQUEST_BODY, envelop);
+            context.next();
+        } else {
+            reply(context, envelop);
+        }
+    }
+
+    public static void normalize(final RoutingContext context, final Envelop envelop) {
+        if (envelop.valid()) {
+            /*
+             * Updated here
+             */
+            envelop.bind(context);
+            context.put(ID.REQUEST_BODY, envelop);
+            context.next();
+        } else {
+            reply(context, envelop);
+        }
+    }
 
     public static void reply(final RoutingContext context, final Envelop envelop) {
         reply(context, envelop, new HashSet<>());

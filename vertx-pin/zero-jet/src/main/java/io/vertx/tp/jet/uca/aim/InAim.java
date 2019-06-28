@@ -4,6 +4,9 @@ import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.uca.JtAim;
+import io.vertx.tp.jet.uca.valve.JtIn;
+import io.vertx.up.atom.Envelop;
+import io.vertx.up.rs.hunt.Answer;
 
 /**
  * The handler chain contains 4 rules in sequence, it's for complex routing design
@@ -38,7 +41,29 @@ public class InAim implements JtAim {
          * 4. IN_SCRIPT Specification
          */
         return context -> {
-
+            Envelop request = Answer.previous(context);
+            // IN_RULE
+            request = JtIn.rule().execute(request, uri);
+            if (!request.valid()) {
+                Answer.reply(context, request);
+            }
+            // IN_MAPPING
+            request = JtIn.mapping().execute(request, uri);
+            if (!request.valid()) {
+                Answer.reply(context, request);
+            }
+            // IN_PLUG
+            request = JtIn.plug().execute(request, uri);
+            if (!request.valid()) {
+                Answer.reply(context, request);
+            }
+            // IN_SCRIPT
+            request = JtIn.script().execute(request, uri);
+            /*
+             * Here should not resume directly because the data must be bind to Envelop
+             * All the data should be stored into Envelop
+             */
+            Answer.normalize(context, request);
         };
     }
 }

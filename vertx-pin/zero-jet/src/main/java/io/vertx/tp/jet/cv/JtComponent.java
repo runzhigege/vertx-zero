@@ -17,4 +17,8 @@ public interface JtComponent {
     String COMPONENT_DEFAULT_AGENT = JtAiakos.class.getName();
     String COMPONENT_DEFAULT_WORKER = JtMinos.class.getName();
     String COMPONENT_DEFAULT_CONSUMER = JtRadamanteis.class.getName();
+    /*
+     * Parameter component extract key
+     */
+    String COMPONENT_PARAM_KEY = "io.vertx.tp.jet.uca.micro.JtValentane";
 }
