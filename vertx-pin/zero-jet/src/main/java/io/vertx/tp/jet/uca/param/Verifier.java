@@ -3,8 +3,8 @@ package io.vertx.tp.jet.uca.param;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.JetThanatos;
-import io.vertx.tp.jet.cv.JtKey;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.eon.ID;
 import io.zero.epic.Ut;
 
 import java.util.Iterator;
@@ -23,7 +23,7 @@ class Verifier {
         Envelop envelop = null;
         if (null != paramContained && !paramContained.isEmpty()) {
             final JetThanatos verifier = JetThanatos.create(clazz);
-            final Object value = data.getValue(JtKey.PARAM_BODY);
+            final Object value = data.getValue(ID.PARAM_BODY);
             if (null == value) {
                 /*
                  * 400, bad request, Contained existing rule value, null value should be throw out

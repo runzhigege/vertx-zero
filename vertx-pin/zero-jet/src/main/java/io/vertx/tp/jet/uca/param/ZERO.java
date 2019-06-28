@@ -1,6 +1,7 @@
 package io.vertx.tp.jet.uca.param;
 
 import io.vertx.tp.jet.cv.em.ParamMode;
+import io.vertx.tp.optic.jet.JtIngest;
 import io.zero.epic.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -8,7 +9,6 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
 
 interface Pool {
-    ConcurrentMap<String, JtIngest> POOL_INGEST = new ConcurrentHashMap<>();
 
     ConcurrentMap<String, JtIngest> POOL_INGEST_QUERY = new ConcurrentHashMap<>();
     ConcurrentMap<String, JtIngest> POOL_INGEST_PATH = new ConcurrentHashMap<>();

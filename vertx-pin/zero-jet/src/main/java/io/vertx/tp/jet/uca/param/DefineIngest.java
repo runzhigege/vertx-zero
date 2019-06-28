@@ -4,7 +4,8 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.tp.error._501IngestMissingException;
 import io.vertx.tp.error._501IngestSpecException;
 import io.vertx.tp.jet.atom.JtUri;
-import io.vertx.tp.jet.cv.JtComponent;
+import io.vertx.tp.jet.cv.JtConstant;
+import io.vertx.tp.optic.jet.JtIngest;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.web.ZeroAmbient;
 import io.zero.epic.Ut;
@@ -14,7 +15,7 @@ import java.util.Objects;
 class DefineIngest implements JtIngest {
     @Override
     public Envelop in(final RoutingContext context, final JtUri uri) {
-        final Class<?> clazz = ZeroAmbient.getPlugin(JtComponent.COMPONENT_INGEST_KEY.getName());
+        final Class<?> clazz = ZeroAmbient.getPlugin(JtConstant.COMPONENT_INGEST_KEY);
         if (Objects.isNull(clazz)) {
             return Envelop.failure(new _501IngestMissingException(this.getClass()));
         } else if (!Ut.isImplement(clazz, JtIngest.class)) {

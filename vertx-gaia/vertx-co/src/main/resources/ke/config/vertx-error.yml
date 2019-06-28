@@ -157,3 +157,4 @@ E80402: "(501) - (Jet) The `ingest` specification is invalid, the class = `{0}` 
 E80403: "(400) - The required parameter `{0}` is missing and please input valid parameter here"
 E80404: "(500) - (Jet) The class = `{0}` does not extend from `AbstractVerticle`, it''s invalid"
 E80405: "(500) - (Jet) The class = `{0}` does not implement `JtConsumer` interface, it''s invalid"
+E80406: "(500) - (Jet) The definition from IApi/IService met error, system could not find configuration of key = `{0}`"

@@ -4,9 +4,10 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.tp.jet.atom.JtUri;
-import io.vertx.tp.jet.cv.JtKey;
 import io.vertx.tp.jet.cv.em.ParamMode;
+import io.vertx.tp.optic.jet.JtIngest;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.eon.ID;
 import io.zero.epic.Ut;
 
 import java.util.function.Supplier;
@@ -34,13 +35,13 @@ class BodyIngest implements JtIngest {
         final String body = context.getBodyAsString();
         if (Ut.isJArray(body)) {
             // JsonArray格式
-            envelop.setValue(JtKey.PARAM_BODY, new JsonArray(body));
+            envelop.setValue(ID.PARAM_BODY, new JsonArray(body));
         } else if (Ut.isJObject(body)) {
             // JsonObject格式
-            envelop.setValue(JtKey.PARAM_BODY, new JsonObject(body));
+            envelop.setValue(ID.PARAM_BODY, new JsonObject(body));
         } else {
             // String格式
-            envelop.setValue(JtKey.PARAM_BODY, body);
+            envelop.setValue(ID.PARAM_BODY, body);
         }
         return envelop;
     }

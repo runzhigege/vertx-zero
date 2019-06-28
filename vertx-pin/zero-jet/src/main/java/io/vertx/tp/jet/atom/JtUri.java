@@ -4,14 +4,15 @@ import cn.vertxup.jet.tables.pojos.IApi;
 import cn.vertxup.jet.tables.pojos.IService;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.jet.cv.JtComponent;
+import io.vertx.tp.jet.cv.JtConstant;
 import io.vertx.tp.jet.cv.JtKey;
 import io.vertx.tp.jet.cv.em.ParamMode;
 import io.vertx.tp.jet.cv.em.WorkerType;
 import io.vertx.tp.jet.refine.Jt;
 import io.vertx.tp.optic.environment.Ambient;
+import io.vertx.up.commune.ZApi;
 import io.vertx.up.eon.Orders;
-import io.vertx.up.eon.ZJson;
+import io.vertx.up.eon.em.ChannelType;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
@@ -22,7 +23,7 @@ import java.util.Set;
 /*
  * Uri ( API + SERVICE )
  */
-public class JtUri implements ZJson {
+public class JtUri implements ZApi {
 
     /*
      * Worker
@@ -37,6 +38,9 @@ public class JtUri implements ZJson {
     private transient JtApp app;
     private transient Integer order;
     private transient JtConfig config;
+
+    public JtUri() {
+    }
 
     public JtUri(final IApi api, final IService service) {
         this.api = api;
@@ -74,14 +78,6 @@ public class JtUri implements ZJson {
      */
     public Integer order() {
         return Objects.nonNull(this.order) ? this.order : Orders.DYNAMIC;
-    }
-
-    public String path() {
-        return Jt.toPath(this.app::getRoute, this.api::getUri, this.api.getSecure(), this.config);
-    }
-
-    public HttpMethod method() {
-        return Ut.toEnum(this.api::getMethod, HttpMethod.class, HttpMethod.GET);
     }
 
     /*
@@ -130,6 +126,42 @@ public class JtUri implements ZJson {
         return this.worker;
     }
 
+    // ------------- Api / Service
+    public IApi api() {
+        return this.api;
+    }
+
+    public IService service() {
+        return this.service;
+    }
+
+    // ------------- Overwrite
+
+    @Override
+    public String path() {
+        return Jt.toPath(this.app::getRoute, this.api::getUri, this.api.getSecure(), this.config);
+    }
+
+    @Override
+    public HttpMethod method() {
+        return Ut.toEnum(this.api::getMethod, HttpMethod.class, HttpMethod.GET);
+    }
+
+    @Override
+    public ChannelType channelType() {
+        return Ut.toEnum(this.service::getType, ChannelType.class, ChannelType.ADAPTOR);
+    }
+
+    @Override
+    public Class<?> channelComponent() {
+        return Jt.toChannel(this.service::getServiceChannel, this.channelType());
+    }
+
+    @Override
+    public Class<?> businessComponent() {
+        return Ut.clazz(this.service.getServiceComponent());
+    }
+
     private void initialize(final IApi api) {
         /*
          * Set default value in I_API related to worker
@@ -140,11 +172,11 @@ public class JtUri implements ZJson {
          * workerJs
          */
         Fn.safeSemi(Ut.isNil(api.getWorkerClass()),
-                () -> api.setWorkerClass(JtComponent.COMPONENT_DEFAULT_WORKER.getName()));
+                () -> api.setWorkerClass(JtConstant.COMPONENT_DEFAULT_WORKER.getName()));
         Fn.safeSemi(Ut.isNil(api.getWorkerAddress()),
-                () -> api.setWorkerAddress(JtComponent.EVENT_ADDRESS));
+                () -> api.setWorkerAddress(JtConstant.EVENT_ADDRESS));
         Fn.safeSemi(Ut.isNil(api.getWorkerConsumer()),
-                () -> api.setWorkerConsumer(JtComponent.COMPONENT_DEFAULT_CONSUMER.getName()));
+                () -> api.setWorkerConsumer(JtConstant.COMPONENT_DEFAULT_CONSUMER.getName()));
         Fn.safeSemi(Ut.isNil(api.getWorkerType()),
                 () -> api.setWorkerType(WorkerType.STD.name()));
     }

@@ -8,8 +8,6 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.web.Runner;
 
 import java.util.Objects;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 class JtAtomic {
@@ -19,8 +17,8 @@ class JtAtomic {
     private static final AtomicBoolean AGENT_CONFIG = new AtomicBoolean(Boolean.FALSE);
     private static final AtomicBoolean WORKER_DEPLOY = new AtomicBoolean(Boolean.FALSE);
     private static final AtomicBoolean WORKER_FAILURE = new AtomicBoolean(Boolean.FALSE);
-    private static final ConcurrentMap<String, AtomicBoolean> WORKER_DEPLOYING = new ConcurrentHashMap<>();
-    private static final ConcurrentMap<String, AtomicBoolean> WORKER_DEPLOYED = new ConcurrentHashMap<>();
+    private static final AtomicBoolean WORKER_DEPLOYING = new AtomicBoolean(Boolean.FALSE);
+    private static final AtomicBoolean WORKER_DEPLOYED = new AtomicBoolean(Boolean.FALSE);
 
 
     void start(final Annal logger, final JsonObject config) {
@@ -42,7 +40,7 @@ class JtAtomic {
     }
 
     void workerDeploying(final Annal logger, final Integer instances, final String name) {
-        if (!WORKER_DEPLOYING.getOrDefault(name, new AtomicBoolean(Boolean.FALSE)).getAndSet(Boolean.TRUE)) {
+        if (!WORKER_DEPLOYING.getAndSet(Boolean.TRUE)) {
             Runner.run(() -> Jt.infoWorker(logger, JtMsg.WORKER_DEPLOYING,
                     String.valueOf(instances), name), "jet-worker-deploying");
         }
@@ -50,9 +48,9 @@ class JtAtomic {
 
     void workerDeployed(final Annal logger, final AsyncResult<String> handler, final String name) {
         if (handler.succeeded()) {
-            if (!WORKER_DEPLOYED.getOrDefault(name, new AtomicBoolean(Boolean.FALSE)).getAndSet(Boolean.TRUE)) {
+            if (!WORKER_DEPLOYED.getAndSet(Boolean.TRUE)) {
                 Runner.run(() -> Jt.infoWorker(logger, JtMsg.WORKER_DEPLOYED,
-                        handler.result(), name), "jet-worker-deployed");
+                        name), "jet-worker-deployed");
             }
         } else {
             final Throwable ex = handler.cause();

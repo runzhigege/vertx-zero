@@ -39,10 +39,11 @@ public abstract class BaseAim {
     /**
      * Template method
      *
-     * @param context
-     * @param event
-     * @return
+     * @param context RoutingContext reference
+     * @param event   Event object of definition
+     * @return Arguments ( Object[] )
      */
+    @SuppressWarnings("all")
     protected Object[] buildArgs(final RoutingContext context,
                                  final Event event) {
         Object[] cached = context.get(ID.PARAMS_CONTENT);
@@ -58,8 +59,8 @@ public abstract class BaseAim {
     /**
      * Get event bus address.
      *
-     * @param event
-     * @return
+     * @param event Event object of definition
+     * @return Get event bus address
      */
     protected String address(final Event event) {
         final Method method = event.getAction();
@@ -68,9 +69,9 @@ public abstract class BaseAim {
     }
 
     /**
-     * @param event
-     * @param args
-     * @return
+     * @param event Event object of definition
+     * @param args  Arguments ( Object[] )
+     * @return Return invoked result
      */
     protected Object invoke(final Event event, final Object[] args) {
         final Method method = event.getAction();

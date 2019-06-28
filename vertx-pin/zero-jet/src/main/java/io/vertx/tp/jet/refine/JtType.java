@@ -5,9 +5,11 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.tp.error._500ConsumerSpecException;
 import io.vertx.tp.error._500WorkerSpecException;
 import io.vertx.tp.jet.atom.JtWorker;
-import io.vertx.tp.jet.cv.JtComponent;
+import io.vertx.tp.jet.cv.JtConstant;
 import io.vertx.tp.jet.cv.em.WorkerType;
-import io.vertx.tp.jet.uca.consume.JtConsumer;
+import io.vertx.tp.jet.uca.tunnel.AdaptorChannel;
+import io.vertx.tp.optic.jet.JtConsumer;
+import io.vertx.up.eon.em.ChannelType;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
@@ -15,10 +17,17 @@ import java.util.function.Supplier;
 
 class JtType {
 
-    static Class<?> toWorker(final Supplier<String> supplier) {
+    private static Class<?> toWorker(final Supplier<String> supplier) {
         final String workerStr = supplier.get();
-        final Class<?> clazz = Ut.clazz(workerStr, JtComponent.COMPONENT_DEFAULT_WORKER);
+        final Class<?> clazz = Ut.clazz(workerStr, JtConstant.COMPONENT_DEFAULT_WORKER);
         Fn.out(AbstractVerticle.class != clazz.getSuperclass(), _500WorkerSpecException.class, JtRoute.class, clazz);
+        return clazz;
+    }
+
+    private static Class<?> toConsumer(final Supplier<String> supplier) {
+        final String consumerStr = supplier.get();
+        final Class<?> clazz = Ut.clazz(consumerStr, JtConstant.COMPONENT_DEFAULT_CONSUMER);
+        Fn.out(!Ut.isImplement(clazz, JtConsumer.class), _500ConsumerSpecException.class, JtRoute.class, clazz);
         return clazz;
     }
 
@@ -36,10 +45,14 @@ class JtType {
         return worker;
     }
 
-    static Class<?> toConsumer(final Supplier<String> supplier) {
-        final String consumerStr = supplier.get();
-        final Class<?> clazz = Ut.clazz(consumerStr, JtComponent.COMPONENT_DEFAULT_CONSUMER);
-        Fn.out(!Ut.isImplement(clazz, JtConsumer.class), _500ConsumerSpecException.class, JtRoute.class, clazz);
+    static Class<?> toChannel(final Supplier<String> supplier, final ChannelType type) {
+        final String channelClass = supplier.get();
+        final Class<?> clazz;
+        if (Ut.isNil(channelClass)) {
+            clazz = Pool.CHANNELS.getOrDefault(type, AdaptorChannel.class);
+        } else {
+            clazz = Ut.clazz(channelClass);
+        }
         return clazz;
     }
 }
