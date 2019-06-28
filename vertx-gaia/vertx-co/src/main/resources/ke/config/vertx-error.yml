@@ -152,3 +152,6 @@ E80302: "(500) - (Ambient) The Init implementation class = {0} does not `impleme
 E80303: "(500) - (Ambient) The Prerequisite class = {0} does not satisfy specification"
 # Jet
 E80400: "(500) - (Jet) The container try to connect App/Source, but `UnityApp` is null and could not start up"
+E80401: "(501) - (Jet) The infix of parameter `ingest` is null, could not be used in `DEFINE` mode"
+E80402: "(501) - (Jet) The `ingest` specification is invalid, the class = `{0}` did not implement `JtIngest`"
+E80403: "(400) - The required parameter `{0}` is missing and please input valid parameter here"

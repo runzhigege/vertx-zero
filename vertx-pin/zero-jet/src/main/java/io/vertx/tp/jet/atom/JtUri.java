@@ -4,6 +4,7 @@ import cn.vertxup.jet.tables.pojos.IApi;
 import cn.vertxup.jet.tables.pojos.IService;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.tp.jet.cv.JtComponent;
+import io.vertx.tp.jet.cv.em.ParamMode;
 import io.vertx.tp.jet.cv.em.WorkerType;
 import io.vertx.tp.jet.refine.Jt;
 import io.vertx.tp.optic.environment.Ambient;
@@ -83,6 +84,22 @@ public class JtUri {
 
     public Set<String> consumes() {
         return Jt.toMimeString(this.api::getConsumes);
+    }
+
+    // ------------ param
+    /*
+     * Param mode, default BODY
+     */
+    public ParamMode paramMode() {
+        return Ut.toEnum(this.api::getParamMode, ParamMode.class, ParamMode.BODY);
+    }
+
+    public Set<String> paramRequired() {
+        return Jt.toSet(this.api::getParamRequired);
+    }
+
+    public Set<String> paramContained() {
+        return Jt.toSet(this.api::getParamContained);
     }
 
     private void initWorker(final IApi api) {

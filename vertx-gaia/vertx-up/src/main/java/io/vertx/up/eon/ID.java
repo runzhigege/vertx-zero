@@ -7,13 +7,11 @@ public interface ID {
 
     String PARAMS_CONTENT = "$$PARAM_CONTENT$$";
 
-    String PARAMS_LENGTH = "$$PARAM_LENGTH$$";
-
     String DIRECT = "$$DIRECT$$";
 
-    String URI_KEY = "$$ALL$$";
-
     String IGNORE = "$$IGNORE$$";
+
+    String REQUEST_BODY = "$$CONTEXT_REQUEST$$";
 
     /* Criteria Ir Key */
     String TREE_ORIGINAL = "$ORIGINAL$";
