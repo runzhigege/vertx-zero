@@ -1,11 +1,15 @@
 package io.vertx.tp.jet.monitor;
 
+import io.vertx.core.AsyncResult;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.cv.JtMsg;
 import io.vertx.tp.jet.refine.Jt;
 import io.vertx.up.log.Annal;
 import io.vertx.up.web.Runner;
 
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 class JtAtomic {
@@ -15,6 +19,9 @@ class JtAtomic {
     private static final AtomicBoolean AGENT_CONFIG = new AtomicBoolean(Boolean.FALSE);
     private static final AtomicBoolean WORKER_DEPLOY = new AtomicBoolean(Boolean.FALSE);
     private static final AtomicBoolean WORKER_FAILURE = new AtomicBoolean(Boolean.FALSE);
+    private static final ConcurrentMap<String, AtomicBoolean> WORKER_DEPLOYING = new ConcurrentHashMap<>();
+    private static final ConcurrentMap<String, AtomicBoolean> WORKER_DEPLOYED = new ConcurrentHashMap<>();
+
 
     void start(final Annal logger, final JsonObject config) {
         if (!AGENT_CONFIG.getAndSet(Boolean.TRUE)) {
@@ -24,13 +31,36 @@ class JtAtomic {
 
     void worker(final Annal logger) {
         if (!WORKER_DEPLOY.getAndSet(Boolean.TRUE)) {
-            Runner.run(() -> Jt.infoRoute(logger, JtMsg.WORKER_DEPLOY), "jet-worker-deploy");
+            Runner.run(() -> Jt.infoWorker(logger, JtMsg.WORKER_DEPLOY), "jet-worker-deploy");
         }
     }
 
     void workerFailure(final Annal logger) {
         if (!WORKER_FAILURE.getAndSet(Boolean.TRUE)) {
-            Runner.run(() -> Jt.infoRoute(logger, JtMsg.WORKER_FAILURE), "jet-worker-failure");
+            Runner.run(() -> Jt.infoWorker(logger, JtMsg.WORKER_FAILURE), "jet-worker-failure");
+        }
+    }
+
+    void workerDeploying(final Annal logger, final Integer instances, final String name) {
+        if (!WORKER_DEPLOYING.getOrDefault(name, new AtomicBoolean(Boolean.FALSE)).getAndSet(Boolean.TRUE)) {
+            Runner.run(() -> Jt.infoWorker(logger, JtMsg.WORKER_DEPLOYING,
+                    String.valueOf(instances), name), "jet-worker-deploying");
+        }
+    }
+
+    void workerDeployed(final Annal logger, final AsyncResult<String> handler, final String name) {
+        if (handler.succeeded()) {
+            if (!WORKER_DEPLOYED.getOrDefault(name, new AtomicBoolean(Boolean.FALSE)).getAndSet(Boolean.TRUE)) {
+                Runner.run(() -> Jt.infoWorker(logger, JtMsg.WORKER_DEPLOYED,
+                        handler.result(), name), "jet-worker-deployed");
+            }
+        } else {
+            final Throwable ex = handler.cause();
+            if (Objects.nonNull(ex)) {
+                // TODO: Debug
+                ex.printStackTrace();
+            }
+
         }
     }
 }

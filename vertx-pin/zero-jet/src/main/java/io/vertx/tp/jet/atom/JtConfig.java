@@ -6,9 +6,11 @@ import com.fasterxml.jackson.databind.JsonObjectDeserializer;
 import com.fasterxml.jackson.databind.JsonObjectSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.vertx.core.DeploymentOptions;
 import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /*
  * Configuration in lime for dynamic router
@@ -77,6 +79,17 @@ public class JtConfig implements Serializable {
 
     public void setUnity(final Class<?> unity) {
         this.unity = unity;
+    }
+
+    public DeploymentOptions getWorkerOptions() {
+        final DeploymentOptions options = new DeploymentOptions();
+        options.fromJson(Objects.isNull(this.worker) ? new JsonObject() : this.worker);
+        /*
+         * Specific configuration
+         */
+        options.setWorker(true);
+        options.setHa(true);
+        return options;
     }
 
     @Override

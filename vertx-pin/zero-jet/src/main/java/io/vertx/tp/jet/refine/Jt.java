@@ -1,6 +1,8 @@
 package io.vertx.tp.jet.refine;
 
+import cn.vertxup.jet.tables.pojos.IApi;
 import io.vertx.tp.jet.atom.JtConfig;
+import io.vertx.tp.jet.atom.JtWorker;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Strings;
 
@@ -17,6 +19,10 @@ public class Jt {
 
     public static void infoRoute(final Annal logger, final String pattern, final Object... args) {
         JtLog.infoRoute(logger, pattern, args);
+    }
+
+    public static void infoWorker(final Annal logger, final String pattern, final Object... args) {
+        JtLog.infoWorker(logger, pattern, args);
     }
 
     public static void infoWeb(final Annal logger, final String pattern, final Object... args) {
@@ -48,11 +54,8 @@ public class Jt {
     /*
      * Type extraction
      */
-    public static Class<?> toWorker(final Supplier<String> supplier) {
-        return JtType.toWorker(supplier);
-    }
 
-    public static Class<?> toConsumer(final Supplier<String> supplier) {
-        return JtType.toConsumer(supplier);
+    public static JtWorker toWorker(final IApi api) {
+        return JtType.toWorker(api);
     }
 }
