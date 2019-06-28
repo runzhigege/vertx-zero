@@ -1,9 +1,12 @@
 package io.vertx.tp.jet.refine;
 
+import cn.vertxup.jet.tables.pojos.IApi;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.tp.error._500ConsumerSpecException;
 import io.vertx.tp.error._500WorkerSpecException;
+import io.vertx.tp.jet.atom.JtWorker;
 import io.vertx.tp.jet.cv.JtComponent;
+import io.vertx.tp.jet.cv.em.WorkerType;
 import io.vertx.tp.jet.uca.consume.JtConsumer;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
@@ -17,6 +20,20 @@ class JtType {
         final Class<?> clazz = Ut.clazz(workerStr, JtComponent.COMPONENT_DEFAULT_WORKER);
         Fn.out(AbstractVerticle.class != clazz.getSuperclass(), _500WorkerSpecException.class, JtRoute.class, clazz);
         return clazz;
+    }
+
+    static JtWorker toWorker(final IApi api) {
+        final JtWorker worker = new JtWorker();
+
+        /*
+         * Worker object instance in current uri here.
+         */
+        worker.setWorkerAddress(api.getWorkerAddress());
+        worker.setWorkerJs(api.getWorkerJs());
+        worker.setWorkerType(Ut.toEnum(api::getWorkerType, WorkerType.class, WorkerType.STD));
+        worker.setWorkerClass(toWorker(api::getWorkerClass));
+        worker.setWorkerConsumer(toConsumer(api::getWorkerConsumer));
+        return worker;
     }
 
     static Class<?> toConsumer(final Supplier<String> supplier) {

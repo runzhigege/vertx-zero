@@ -1,5 +1,6 @@
 package io.vertx.tp.jet.monitor;
 
+import io.vertx.core.AsyncResult;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.cv.JtMsg;
@@ -40,6 +41,14 @@ public class JtMonitor {
 
     public void workerFailure() {
         this.atomic.workerFailure(this.logger);
+    }
+
+    public void workerDeploying(final Integer instances, final String name) {
+        this.atomic.workerDeploying(this.logger, instances, name);
+    }
+
+    public void workerDeployed(final AsyncResult<String> handler, final String name) {
+        this.atomic.workerDeployed(this.logger, handler, name);
     }
 
     // ---------------- Ingest

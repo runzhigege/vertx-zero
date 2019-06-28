@@ -33,7 +33,7 @@ public class SendAim implements JtAim {
             request.key(uri.key());
 
             final JsonObject data = request.data();
-            final String address = uri.address();
+            final String address = uri.worker().getWorkerAddress(); // Address
             /*
              * Monitor data and address
              */

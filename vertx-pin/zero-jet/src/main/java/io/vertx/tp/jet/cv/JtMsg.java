@@ -11,4 +11,6 @@ public interface JtMsg {
 
     String WORKER_DEPLOY = "Workers will be deployed in background async ......";
     String WORKER_FAILURE = "Ambient Environment booting error, initialized failure";
+    String WORKER_DEPLOYING = "Worker instance = {0}, class = {1}";
+    String WORKER_DEPLOYED = "Worker {0} = {1} has been deployed successfully";
 }

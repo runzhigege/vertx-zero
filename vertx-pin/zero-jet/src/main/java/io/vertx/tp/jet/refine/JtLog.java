@@ -31,4 +31,8 @@ class JtLog {
     static void infoWeb(final Annal logger, final String pattern, final Object... args) {
         info(logger, "Web", pattern, args);
     }
+
+    static void infoWorker(final Annal logger, final String pattern, final Object... args) {
+        info(logger, "Worker", pattern, args);
+    }
 }

@@ -3,12 +3,15 @@ package io.vertx.tp.jet.atom;
 import cn.vertxup.jet.tables.pojos.IApi;
 import cn.vertxup.jet.tables.pojos.IService;
 import io.vertx.core.http.HttpMethod;
+import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.cv.JtComponent;
+import io.vertx.tp.jet.cv.JtKey;
 import io.vertx.tp.jet.cv.em.ParamMode;
 import io.vertx.tp.jet.cv.em.WorkerType;
 import io.vertx.tp.jet.refine.Jt;
 import io.vertx.tp.optic.environment.Ambient;
 import io.vertx.up.eon.Orders;
+import io.vertx.up.eon.ZJson;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
@@ -19,15 +22,15 @@ import java.util.Set;
 /*
  * Uri ( API + SERVICE )
  */
-public class JtUri {
+public class JtUri implements ZJson {
 
-    private final transient IApi api;
-    private final transient IService service;
-    private final transient String key;
     /*
      * Worker
      */
-    private final transient JtWorker worker = new JtWorker();
+    private transient JtWorker worker;
+    private transient IApi api;
+    private transient IService service;
+    private transient String key;
     /*
      * App / Config
      */
@@ -42,7 +45,11 @@ public class JtUri {
         this.key = api.getKey();
 
         /* Default Component Value */
-        this.initWorker(api);
+        this.initialize(api);
+        /*
+         * JtWorker instance here for future use
+         */
+        this.worker = Jt.toWorker(api);
     }
 
     public JtUri bind(final Integer order) {
@@ -119,11 +126,11 @@ public class JtUri {
     }
 
     // ------------- worker
-    public String address() {
-        return this.api.getWorkerAddress();
+    public JtWorker worker() {
+        return this.worker;
     }
 
-    private void initWorker(final IApi api) {
+    private void initialize(final IApi api) {
         /*
          * Set default value in I_API related to worker
          * workerType
@@ -140,14 +147,6 @@ public class JtUri {
                 () -> api.setWorkerConsumer(JtComponent.COMPONENT_DEFAULT_CONSUMER.getName()));
         Fn.safeSemi(Ut.isNil(api.getWorkerType()),
                 () -> api.setWorkerType(WorkerType.STD.name()));
-        /*
-         * Worker object instance in current uri here.
-         */
-        this.worker.setWorkerAddress(this.api.getWorkerAddress());
-        this.worker.setWorkerJs(this.api.getWorkerJs());
-        this.worker.setWorkerType(Ut.toEnum(this.api::getWorkerType, WorkerType.class, WorkerType.STD));
-        this.worker.setWorkerClass(Jt.toWorker(this.api::getWorkerClass));
-        this.worker.setWorkerConsumer(Jt.toConsumer(this.api::getWorkerConsumer));
     }
 
     /*
@@ -168,5 +167,42 @@ public class JtUri {
     @Override
     public int hashCode() {
         return Objects.hash(this.key);
+    }
+
+    @Override
+    public JsonObject toJson() {
+        final JsonObject data = new JsonObject();
+        data.put(JtKey.Delivery.KEY, this.key);
+        data.put(JtKey.Delivery.ORDER, this.order);
+
+        data.put(JtKey.Delivery.API, (JsonObject) Ut.serializeJson(this.api));
+        data.put(JtKey.Delivery.SERVICE, (JsonObject) Ut.serializeJson(this.service));
+        data.put(JtKey.Delivery.CONFIG, (JsonObject) Ut.serializeJson(this.config));
+        /* Connect App Id */
+        data.put(JtKey.Delivery.APP_ID, this.app.getAppId());
+        return data;
+    }
+
+    @Override
+    public void fromJson(final JsonObject data) {
+        /*
+         * Basic attributes
+         */
+        this.key = data.getString(JtKey.Delivery.KEY);
+        this.order = data.getInteger(JtKey.Delivery.ORDER);
+
+        /*
+         * api, service, config
+         */
+        this.api = Ut.deserialize(data.getJsonObject(JtKey.Delivery.API), IApi.class);
+        this.service = Ut.deserialize(data.getJsonObject(JtKey.Delivery.SERVICE), IService.class);
+        this.config = Ut.deserialize(data.getJsonObject(JtKey.Delivery.CONFIG), JtConfig.class);
+
+        /*
+         * app, worker
+         */
+        this.worker = Jt.toWorker(this.api);
+        final String appId = data.getString(JtKey.Delivery.APP_ID);
+        this.app = Ambient.getApp(appId);
     }
 }
