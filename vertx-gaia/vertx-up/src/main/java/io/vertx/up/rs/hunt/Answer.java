@@ -1,10 +1,23 @@
 package io.vertx.up.rs.hunt;
 
 import io.vertx.core.http.HttpServerResponse;
+import io.vertx.core.http.HttpStatusCode;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.Session;
+import io.vertx.up.annotations.SessionData;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.rs.pointer.PluginExtension;
+import io.zero.epic.Ut;
+
+import javax.ws.rs.core.MediaType;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+import java.util.function.Supplier;
 
 /**
  * Response process to normalize the response request.
@@ -13,52 +26,98 @@ import io.vertx.up.rs.pointer.PluginExtension;
  */
 public final class Answer {
 
-    public static void reply(
-            final RoutingContext context,
-            final Envelop envelop) {
-        // 1. Get response reference
-        final HttpServerResponse response =
-                Normalizer.initialize(context, envelop);
-        // FIX: java.lang.IllegalStateException: Response is closed
+    public static void reply(final RoutingContext context, final Envelop envelop) {
+        reply(context, envelop, new HashSet<>());
+    }
+
+    public static void reply(final RoutingContext context, final Envelop envelop, final Supplier<Set<MediaType>> supplier) {
+        Set<MediaType> produces = Objects.isNull(supplier) ? new HashSet<>() : supplier.get();
+        if (Objects.isNull(produces)) {
+            produces = new HashSet<>();
+        }
+        reply(context, envelop, produces);
+    }
+
+    public static void reply(final RoutingContext context, final Envelop envelop, final Event event) {
+        Set<MediaType> produces;
+        if (Objects.isNull(event)) {
+            produces = new HashSet<>();
+        } else {
+            produces = event.getProduces();
+            if (Objects.isNull(produces)) {
+                produces = new HashSet<>();
+            }
+        }
+        reply(context, envelop, produces, Objects.isNull(event) ? null : event.getAction());
+    }
+
+    private static void reply(final RoutingContext context, final Envelop envelop, final Set<MediaType> mediaTypes) {
+        reply(context, envelop, mediaTypes, null);
+    }
+
+    private static void reply(final RoutingContext context, final Envelop envelop,
+                              final Set<MediaType> mediaTypes, final Method sessionAction) {
+        /*
+         * New workflow here, firstly checking response after get response reference.
+         */
+        final HttpServerResponse response = context.response();
+        /*
+         * FIX: java.lang.IllegalStateException: Response is closed
+         */
         if (!response.closed()) {
-            /* Bind Data */
+            /*
+             * Set http status information on response, all information came from `Envelop`
+             * 1) Status Code
+             * 2) Status Message
+             */
+            final HttpStatusCode code = envelop.status();
+            response.setStatusCode(code.code());
+            response.setStatusMessage(code.message());
+            /*
+             * Bind Data
+             */
             envelop.bind(context);
 
-            // 2. Media processing
-            Normalizer.media(response, null);
+            /*
+             * Media processing
+             */
+            Outcome.media(response, mediaTypes);
 
-            /* Plugin Extension for response replying */
+            /*
+             * SessionData Stored
+             */
+            storeSession(context, envelop.data(), sessionAction);
+
+            /*
+             * Plugin Extension for response replying here ( Plug-in )
+             */
             PluginExtension.Answer.reply(context, envelop);
 
-            // 3. Response process
-            Normalizer.out(response, envelop, null);
+            /*
+             * Output of current situation
+             */
+            Outcome.out(response, envelop, mediaTypes);
         }
     }
 
-    public static void reply(
-            final RoutingContext context,
-            final Envelop envelop,
-            final Event event
-    ) {
-        // 1. Get response reference
-        final HttpServerResponse response =
-                Normalizer.initialize(context, envelop);
-        // FIX: java.lang.IllegalStateException: Response is closed
-        if (!response.closed()) {
-            /* Bind Data */
-            envelop.bind(context);
-
-            // 2. Media processing
-            Normalizer.media(response, event);
-
-            // 3. Store Session
-            Normalizer.storeSession(context, envelop.data(), event.getAction());
-
-            /* Plugin Extension for response replying */
-            PluginExtension.Answer.reply(context, envelop);
-
-            // 3. Response process
-            Normalizer.out(response, envelop, event);
+    private static <T> void storeSession(final RoutingContext context,
+                                         final T data,
+                                         final Method method) {
+        final Session session = context.session();
+        if (null != session && null != data) {
+            if (Objects.nonNull(method) && method.isAnnotationPresent(SessionData.class)) {
+                final Annotation annotation = method.getAnnotation(SessionData.class);
+                final String key = Ut.invoke(annotation, "value");
+                final String field = Ut.invoke(annotation, "field");
+                // Data Storage
+                Object reference = data;
+                if (Ut.isJObject(data) && Ut.notNil(field)) {
+                    final JsonObject target = (JsonObject) data;
+                    reference = target.getValue(field);
+                }
+                // Session Put / Include Session ID
+                session.put(key, reference);
+            }
         }
     }
 }
