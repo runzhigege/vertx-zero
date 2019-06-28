@@ -1,0 +1,8 @@
+databaseChangeLog:
+  # 安全表
+  - include:
+      file: plugin/sql/jet/I_API.sql
+      relativeToChangelogFile: false
+  - include:
+      file: plugin/sql/jet/I_SERVICE.sql
+      relativeToChangelogFile: false

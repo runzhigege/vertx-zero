@@ -71,6 +71,10 @@ public class Ut {
         return Instance.clazz(name);
     }
 
+    public static Class<?> clazz(final String name, final Class<?> defaultCls) {
+        return Instance.clazz(name, defaultCls);
+    }
+
     public static boolean isImplement(final Class<?> clazz, final Class<?> interfaceCls) {
         return Instance.isMatch(clazz, interfaceCls);
     }
@@ -476,6 +480,10 @@ public class Ut {
 
     public static <T extends Enum<T>> T toEnum(final Class<T> clazz, final String input) {
         return Types.toEnum(clazz, input);
+    }
+
+    public static <T extends Enum<T>> T toEnum(final Supplier<String> supplier, final Class<T> type, final T defaultEnum) {
+        return Types.toEnum(supplier, type, defaultEnum);
     }
 
     public static String toString(final Object reference) {

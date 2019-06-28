@@ -8,9 +8,15 @@ CREATE TABLE IF NOT EXISTS X_APP
     `KEY`        VARCHAR(36) COMMENT '「key」- 应用程序主键',
     `NAME`       VARCHAR(255) COMMENT '「name」- 应用程序名称',
     `CODE`       VARCHAR(36) COMMENT '「code」- 应用程序编码',
+
     -- 常用属性
     `TITLE`      VARCHAR(64) COMMENT '「title」- 应用程序标题',
     `LOGO`       VARCHAR(255) COMMENT '「logo」- 应用程序图标',
+    `ICP`        VARCHAR(64) COMMENT '「icp」- ICP备案号',
+    `COPY_RIGHT` VARCHAR(255) COMMENT '「copyRight」- CopyRight版权信息',
+    `EMAIL`      VARCHAR(255) COMMENT '「email」- 应用Email信息',
+
+    -- 部署常用
     `DOMAIN`     VARCHAR(255) COMMENT '「domain」- 应用程序所在域',
     `APP_PORT`   INTEGER COMMENT '「appPort」- 应用程序端口号，和SOURCE的端口号区别开',
     `URL_ENTRY`  VARCHAR(255) COMMENT '「urlEntry」— 应用程序入口页面（登录页）',

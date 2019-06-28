@@ -1,13 +1,13 @@
 package io.vertx.up.rs.config;
 
 import io.vertx.core.DeploymentOptions;
-import io.vertx.up.annotations.Worker;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
+import io.vertx.up.rs.equip.DeployRotate;
+import io.vertx.up.rs.equip.Rotate;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
-import java.lang.annotation.Annotation;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -24,23 +24,8 @@ public class WorkerExtractor implements Extractor<DeploymentOptions> {
     @Override
     public DeploymentOptions extract(final Class<?> clazz) {
         Fn.safeNull(() -> LOGGER.info(Info.WORKER_HIT, clazz.getName()), clazz);
-        return Fn.pool(OPTIONS, clazz, () -> this.transform(clazz));
-    }
+        final Rotate rotate = Ut.singleton(DeployRotate.class);
 
-    private DeploymentOptions transform(final Class<?> clazz) {
-        final Annotation annotation = clazz.getDeclaredAnnotation(Worker.class);
-        // 1. Instance
-        final int instances = Ut.invoke(annotation, Key.INSTANCES);
-        final boolean ha = Ut.invoke(annotation, Key.HA);
-        final String group = Ut.invoke(annotation, Key.GROUP);
-        // 2. Record Log information
-        final DeploymentOptions options = new DeploymentOptions();
-        options.setHa(ha);
-        options.setInstances(instances);
-        options.setIsolationGroup(group);
-        // 3. Disabled worker fetures.
-        options.setWorker(true);
-        LOGGER.info(Info.VTC_OPT, instances, group, ha, options.toJson());
-        return options;
+        return Fn.pool(OPTIONS, clazz, () -> rotate.spinWorker(clazz));
     }
 }

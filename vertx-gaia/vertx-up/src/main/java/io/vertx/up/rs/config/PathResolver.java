@@ -23,8 +23,8 @@ class PathResolver {
     /**
      * Parse the api endpoint for @Path ( Class Level )
      *
-     * @param path
-     * @return
+     * @param path JSR311 annotation
+     * @return normalized uri
      */
     public static String resolve(final Path path) {
         Fn.outUp(null == path, LOGGER,
@@ -36,10 +36,11 @@ class PathResolver {
     /**
      * Parse the api endpoint for @Path ( Method Level )
      *
-     * @param path
-     * @param root
-     * @return
+     * @param path JSR311 annotation
+     * @param root root folder or path
+     * @return normalized uri
      */
+    @SuppressWarnings("all")
     public static String resolve(final Path path, final String root) {
         Fn.outUp(null == path, LOGGER,
                 PathAnnoEmptyException.class, PathResolver.class);
@@ -57,9 +58,10 @@ class PathResolver {
      * JSR311: /query/{name}
      * Named: /query/:name ( Vertx Format )
      *
-     * @param path
-     * @return
+     * @param path JSR311 annotation
+     * @return resolved Vert.x and JSR311
      */
+    @SuppressWarnings("all")
     private static String path(final String path) {
         final String regex = "\\{\\w+\\}";
         final Pattern pattern = Pattern.compile(regex);
@@ -84,6 +86,7 @@ class PathResolver {
      * @param path input path no normalized.
      * @return calculated uri
      */
+    @SuppressWarnings("all")
     private static String calculate(final String path) {
         String uri = path;
         // 1. Shift the SLASH: Multi -> Single one.

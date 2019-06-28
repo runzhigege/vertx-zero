@@ -1,9 +1,11 @@
 package io.vertx.zero.atom;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.eon.ZJson;
+import io.vertx.up.commune.ZJson;
 import io.vertx.up.eon.em.DatabaseType;
 import io.vertx.up.log.Annal;
+import io.vertx.zero.marshal.node.Node;
+import io.vertx.zero.marshal.node.ZeroUniform;
 import io.zero.epic.Ut;
 
 import java.io.Serializable;
@@ -16,6 +18,7 @@ import java.sql.SQLException;
 public class Database implements Serializable, ZJson {
 
     private static final Annal LOGGER = Annal.get(Database.class);
+    private static final Node<JsonObject> VISITOR = Ut.singleton(ZeroUniform.class);
     /* Database host name */
     private transient String hostname;
     /* Database instance name */
@@ -42,6 +45,30 @@ public class Database implements Serializable, ZJson {
             LOGGER.jvm(ex);
             return false;
         }
+    }
+
+    /*
+     * Get current jooq configuration for Application / Source
+     */
+    public static Database getCurrent() {
+        final JsonObject raw = VISITOR.read();
+        final JsonObject jooq = Ut.visitJObject(raw, "jooq", "provider");
+        final Database database = new Database();
+        /*
+         * type of database
+         */
+        final String type = jooq.getString("type");
+        if (Ut.isNil(type)) {
+            database.setCategory(DatabaseType.MYSQL5);
+        } else {
+            final DatabaseType databaseType = Ut.toEnum(DatabaseType.class, type);
+            database.setCategory(null == databaseType ? DatabaseType.MYSQL5 : databaseType);
+        }
+        database.setInstance(jooq.getString("catalog"));
+        database.setJdbcUrl(jooq.getString("jdbcUrl"));
+        database.setUsername(jooq.getString("username"));
+        database.setPassword(jooq.getString("password"));
+        return database;
     }
 
     /* Database Connection Testing */

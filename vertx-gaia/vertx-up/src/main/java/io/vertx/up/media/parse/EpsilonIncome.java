@@ -40,16 +40,16 @@ public class EpsilonIncome implements Income<List<Epsilon<Object>>> {
         final List<Epsilon<Object>> args = new ArrayList<>();
         for (int idx = 0; idx < paramTypes.length; idx++) {
 
-            /** For each field specification **/
+            /* For each field specification **/
             final Epsilon<Object> epsilon = new Epsilon<>();
             epsilon.setArgType(paramTypes[idx]);
             epsilon.setAnnotation(this.getAnnotation(annoTypes[idx]));
             epsilon.setName(this.getName(epsilon.getAnnotation()));
 
-            /** Default Value **/
+            /* Default Value **/
             epsilon.setDefaultValue(this.getDefault(annoTypes[idx], epsilon.getArgType()));
 
-            /** Epsilon income -> outcome **/
+            /* Epsilon income -> outcome **/
             final Epsilon<Object> outcome =
                     this.atomic.ingest(context, epsilon);
             args.add(Fn.getNull(() -> outcome, outcome));
@@ -57,6 +57,7 @@ public class EpsilonIncome implements Income<List<Epsilon<Object>>> {
         return args;
     }
 
+    @SuppressWarnings("all")
     private String getName(final Annotation annotation) {
         return Fn.getSemi(null == annotation, LOGGER,
                 () -> ID.IGNORE,

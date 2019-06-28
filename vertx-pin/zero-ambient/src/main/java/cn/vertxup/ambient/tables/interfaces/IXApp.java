@@ -74,6 +74,36 @@ public interface IXApp extends Serializable {
     public String getLogo();
 
     /**
+     * Setter for <code>DB_ETERNAL.X_APP.ICP</code>. 「icp」- ICP备案号
+     */
+    public IXApp setIcp(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_APP.ICP</code>. 「icp」- ICP备案号
+     */
+    public String getIcp();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_APP.COPY_RIGHT</code>. 「copyRight」- CopyRight版权信息
+     */
+    public IXApp setCopyRight(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_APP.COPY_RIGHT</code>. 「copyRight」- CopyRight版权信息
+     */
+    public String getCopyRight();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_APP.EMAIL</code>. 「email」- 应用Email信息
+     */
+    public IXApp setEmail(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_APP.EMAIL</code>. 「email」- 应用Email信息
+     */
+    public String getEmail();
+
+    /**
      * Setter for <code>DB_ETERNAL.X_APP.DOMAIN</code>. 「domain」- 应用程序所在域
      */
     public IXApp setDomain(String value);
@@ -243,6 +273,9 @@ public interface IXApp extends Serializable {
         setCode(json.getString("CODE"));
         setTitle(json.getString("TITLE"));
         setLogo(json.getString("LOGO"));
+        setIcp(json.getString("ICP"));
+        setCopyRight(json.getString("COPY_RIGHT"));
+        setEmail(json.getString("EMAIL"));
         setDomain(json.getString("DOMAIN"));
         setAppPort(json.getInteger("APP_PORT"));
         setUrlEntry(json.getString("URL_ENTRY"));
@@ -269,6 +302,9 @@ public interface IXApp extends Serializable {
         json.put("CODE",getCode());
         json.put("TITLE",getTitle());
         json.put("LOGO",getLogo());
+        json.put("ICP",getIcp());
+        json.put("COPY_RIGHT",getCopyRight());
+        json.put("EMAIL",getEmail());
         json.put("DOMAIN",getDomain());
         json.put("APP_PORT",getAppPort());
         json.put("URL_ENTRY",getUrlEntry());
