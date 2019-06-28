@@ -24,13 +24,16 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XApp implements IXApp {
 
-    private static final long serialVersionUID = -1510288610;
+    private static final long serialVersionUID = -814423470;
 
     private String        key;
     private String        name;
     private String        code;
     private String        title;
     private String        logo;
+    private String        icp;
+    private String        copyRight;
+    private String        email;
     private String        domain;
     private Integer       appPort;
     private String        urlEntry;
@@ -55,6 +58,9 @@ public class XApp implements IXApp {
         this.code = value.code;
         this.title = value.title;
         this.logo = value.logo;
+        this.icp = value.icp;
+        this.copyRight = value.copyRight;
+        this.email = value.email;
         this.domain = value.domain;
         this.appPort = value.appPort;
         this.urlEntry = value.urlEntry;
@@ -78,6 +84,9 @@ public class XApp implements IXApp {
         String        code,
         String        title,
         String        logo,
+        String        icp,
+        String        copyRight,
+        String        email,
         String        domain,
         Integer       appPort,
         String        urlEntry,
@@ -99,6 +108,9 @@ public class XApp implements IXApp {
         this.code = code;
         this.title = title;
         this.logo = logo;
+        this.icp = icp;
+        this.copyRight = copyRight;
+        this.email = email;
         this.domain = domain;
         this.appPort = appPort;
         this.urlEntry = urlEntry;
@@ -168,6 +180,39 @@ public class XApp implements IXApp {
     @Override
     public XApp setLogo(String logo) {
         this.logo = logo;
+        return this;
+    }
+
+    @Override
+    public String getIcp() {
+        return this.icp;
+    }
+
+    @Override
+    public XApp setIcp(String icp) {
+        this.icp = icp;
+        return this;
+    }
+
+    @Override
+    public String getCopyRight() {
+        return this.copyRight;
+    }
+
+    @Override
+    public XApp setCopyRight(String copyRight) {
+        this.copyRight = copyRight;
+        return this;
+    }
+
+    @Override
+    public String getEmail() {
+        return this.email;
+    }
+
+    @Override
+    public XApp setEmail(String email) {
+        this.email = email;
         return this;
     }
 
@@ -345,6 +390,9 @@ public class XApp implements IXApp {
         sb.append(", ").append(code);
         sb.append(", ").append(title);
         sb.append(", ").append(logo);
+        sb.append(", ").append(icp);
+        sb.append(", ").append(copyRight);
+        sb.append(", ").append(email);
         sb.append(", ").append(domain);
         sb.append(", ").append(appPort);
         sb.append(", ").append(urlEntry);
@@ -379,6 +427,9 @@ public class XApp implements IXApp {
         setCode(from.getCode());
         setTitle(from.getTitle());
         setLogo(from.getLogo());
+        setIcp(from.getIcp());
+        setCopyRight(from.getCopyRight());
+        setEmail(from.getEmail());
         setDomain(from.getDomain());
         setAppPort(from.getAppPort());
         setUrlEntry(from.getUrlEntry());

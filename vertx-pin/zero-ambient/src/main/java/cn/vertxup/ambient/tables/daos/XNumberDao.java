@@ -147,6 +147,13 @@ public class XNumberDao extends DAOImpl<XNumberRecord, cn.vertxup.ambient.tables
     }
 
     /**
+     * Fetch records that have <code>APP_ID IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XNumber> fetchByAppId(String... values) {
+        return fetch(XNumber.X_NUMBER.APP_ID, values);
+    }
+
+    /**
      * Fetch records that have <code>ACTIVE IN (values)</code>
      */
     public List<cn.vertxup.ambient.tables.pojos.XNumber> fetchByActive(Boolean... values) {
@@ -291,6 +298,13 @@ public class XNumberDao extends DAOImpl<XNumberRecord, cn.vertxup.ambient.tables
      */
     public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XNumber>> fetchByDecrementAsync(List<Boolean> values) {
         return fetchAsync(XNumber.X_NUMBER.DECREMENT,values);
+    }
+
+    /**
+     * Fetch records that have <code>APP_ID IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XNumber>> fetchByAppIdAsync(List<String> values) {
+        return fetchAsync(XNumber.X_NUMBER.APP_ID,values);
     }
 
     /**

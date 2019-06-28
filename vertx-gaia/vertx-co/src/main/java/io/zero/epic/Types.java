@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Supplier;
 
 class Types {
 
@@ -34,6 +35,18 @@ class Types {
             final Class<T> clazz,
             final String input) {
         return Fn.getNull(null, () -> Enum.valueOf(clazz, input), clazz, input);
+    }
+
+    static <T extends Enum<T>> T toEnum(
+            final Supplier<String> supplier,
+            final Class<T> type,
+            final T defaultEnum) {
+        final String method = supplier.get();
+        T result = Ut.toEnum(type, method);
+        if (null == result) {
+            result = defaultEnum;
+        }
+        return result;
     }
 
     static boolean isJArray(final String literal) {

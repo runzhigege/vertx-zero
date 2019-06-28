@@ -112,6 +112,27 @@ public class XAppDao extends DAOImpl<XAppRecord, cn.vertxup.ambient.tables.pojos
     }
 
     /**
+     * Fetch records that have <code>ICP IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByIcp(String... values) {
+        return fetch(XApp.X_APP.ICP, values);
+    }
+
+    /**
+     * Fetch records that have <code>COPY_RIGHT IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByCopyRight(String... values) {
+        return fetch(XApp.X_APP.COPY_RIGHT, values);
+    }
+
+    /**
+     * Fetch records that have <code>EMAIL IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByEmail(String... values) {
+        return fetch(XApp.X_APP.EMAIL, values);
+    }
+
+    /**
      * Fetch records that have <code>DOMAIN IN (values)</code>
      */
     public List<cn.vertxup.ambient.tables.pojos.XApp> fetchByDomain(String... values) {
@@ -270,6 +291,27 @@ public class XAppDao extends DAOImpl<XAppRecord, cn.vertxup.ambient.tables.pojos
      */
     public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByLogoAsync(List<String> values) {
         return fetchAsync(XApp.X_APP.LOGO,values);
+    }
+
+    /**
+     * Fetch records that have <code>ICP IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByIcpAsync(List<String> values) {
+        return fetchAsync(XApp.X_APP.ICP,values);
+    }
+
+    /**
+     * Fetch records that have <code>COPY_RIGHT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByCopyRightAsync(List<String> values) {
+        return fetchAsync(XApp.X_APP.COPY_RIGHT,values);
+    }
+
+    /**
+     * Fetch records that have <code>EMAIL IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.tables.pojos.XApp>> fetchByEmailAsync(List<String> values) {
+        return fetchAsync(XApp.X_APP.EMAIL,values);
     }
 
     /**

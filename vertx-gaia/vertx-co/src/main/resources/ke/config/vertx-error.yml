@@ -150,3 +150,11 @@ E80300: "(500) - (Ambient) The application environment error, could not get app 
 E80301: "(500) - (Ambient) The application ( name = `{0}` ) could not be initialized"
 E80302: "(500) - (Ambient) The Init implementation class = {0} does not `implement` interface Init"
 E80303: "(500) - (Ambient) The Prerequisite class = {0} does not satisfy specification"
+# Jet
+E80400: "(500) - (Jet) The container try to connect App/Source, but `UnityApp` is null and could not start up"
+E80401: "(501) - (Jet) The infix of parameter `ingest` is null, could not be used in `DEFINE` mode"
+E80402: "(501) - (Jet) The `ingest` specification is invalid, the class = `{0}` did not implement `JtIngest`"
+E80403: "(400) - The required parameter `{0}` is missing and please input valid parameter here"
+E80404: "(500) - (Jet) The class = `{0}` does not extend from `AbstractVerticle`, it''s invalid"
+E80405: "(500) - (Jet) The class = `{0}` does not implement `JtConsumer` interface, it''s invalid"
+E80406: "(500) - (Jet) The definition from IApi/IService met error, system could not find configuration of key = `{0}`"

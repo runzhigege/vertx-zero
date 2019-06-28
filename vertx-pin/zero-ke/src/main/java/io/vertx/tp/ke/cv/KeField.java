@@ -29,7 +29,6 @@ public interface KeField {
     String ACTOR = "actor";
     String QUERY = "query";
 
-    String LOGO = "logo";
 
     String SOURCE = "source";
     String MODELS = "models";
@@ -42,4 +41,22 @@ public interface KeField {
     String CLIENT_ID = "clientId";
 
     String RESULT = "result";
+
+    String LOGO = "logo";
+
+    interface App {
+
+        String COPY_RIGHT = "copyRight";
+        String ICP = "icp";
+        String TITLE = "title";
+        String EMAIL = "email";
+
+        String DOMAIN = "domain";
+        String APP_PORT = "appPort";
+        String ROUTE = "route";
+
+        String PATH = "path";
+        String URL_ENTRY = "urlEntry";
+        String URL_MAIN = "urlMain";
+    }
 }
