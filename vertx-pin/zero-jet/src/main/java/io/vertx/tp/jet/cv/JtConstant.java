@@ -2,9 +2,8 @@ package io.vertx.tp.jet.cv;
 
 import io.vertx.tp.jet.uca.micro.JtAiakos;
 import io.vertx.tp.jet.uca.micro.JtMinos;
-import io.vertx.tp.jet.uca.micro.JtRadamanteis;
 
-public interface JtComponent {
+public interface JtConstant {
     /* Default namespace build by JtApp */
     String NAMESPACE_PATTERN = "zero.jet.{0}";
     String EVENT_ADDRESS = "Πίδακας δρομολογητή://EVENT-JET/ZERO/UNIFORM";
@@ -18,5 +17,5 @@ public interface JtComponent {
     /*
      * Parameter component extract key
      */
-    Class<?> COMPONENT_INGEST_KEY = JtRadamanteis.class;
+    String COMPONENT_INGEST_KEY = "zero.jet.param.ingest";
 }

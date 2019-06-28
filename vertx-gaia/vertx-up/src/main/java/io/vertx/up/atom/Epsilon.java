@@ -12,7 +12,7 @@ import java.lang.annotation.Annotation;
 @SuppressWarnings("unchecked")
 public class Epsilon<T> implements Serializable {
 
-    public Object defaultValue;
+    private Object defaultValue;
     private String name;
     private MimeFlow mime;
     private Class<?> argType;

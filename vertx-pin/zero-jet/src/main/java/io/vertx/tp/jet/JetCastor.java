@@ -9,9 +9,9 @@ import io.vertx.tp.jet.atom.JtWorker;
 import io.vertx.tp.jet.cv.em.WorkerType;
 import io.vertx.tp.jet.init.JtPin;
 import io.vertx.tp.jet.monitor.JtMonitor;
+import io.vertx.tp.jet.refine.Jt;
 
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /*
@@ -48,7 +48,7 @@ public class JetCastor {
             /*
              * Configuration preparing
              */
-            final ConcurrentMap<String, JsonObject> config = this.configuration(uriSet);
+            final ConcurrentMap<String, JsonObject> config = Jt.ask(uriSet);
 
             /*
              * Deployment of workers
@@ -61,6 +61,26 @@ public class JetCastor {
                 final String name = workerCls.getName();
                 final DeploymentOptions options = configData.getWorkerOptions();
                 final JsonObject deliveryConfig = config.get(name);
+                /*
+                 * Data Structure
+                 * {
+                 *      "workerClass":{
+                 *          "apiKey":{
+                 *              {
+                 *                  "key": "API Primary Key",
+                 *                  "order": "Vert.x order",
+                 *                  "api": {
+                 *                  },
+                 *                  "service":{
+                 *                  },
+                 *                  "config":{
+                 *                  },
+                 *                  "appId": "Application Key"
+                 *              }
+                 *          }
+                 *      }
+                 * }
+                 */
                 options.setConfig(deliveryConfig);
                 /*
                  * Logging information of current worker here
@@ -79,52 +99,5 @@ public class JetCastor {
         {
 
         }
-    }
-
-    /*
-     * Data Structure
-     * {
-     *      "workerClass":{
-     *          "apiKey":{
-     *              {
-     *                  "key": "API Primary Key",
-     *                  "order": "Vert.x order",
-     *                  "api": {
-     *                  },
-     *                  "service":{
-     *                  },
-     *                  "config":{
-     *                  },
-     *                  "appId": "Application Key"
-     *              }
-     *          }
-     *      }
-     * }
-     */
-    private ConcurrentMap<String, JsonObject> configuration(final Set<JtUri> uriSet) {
-        final ConcurrentMap<String, JsonObject> configMap = new ConcurrentHashMap<>();
-        /*
-         * Build each worker config as structure here
-         */
-        uriSet.forEach(uri -> {
-            /*
-             * Worker here
-             */
-            final JtWorker worker = uri.worker();
-            /*
-             * Consider worker name as `key`
-             */
-            final String key = worker.getWorkerClass().getName();
-            /*
-             * JsonObject configuration of JsonObject
-             */
-            final JsonObject config = configMap.getOrDefault(key, new JsonObject());
-            /*
-             * Api Key = config
-             */
-            config.put(uri.key(), uri.toJson());
-            configMap.put(key, config);
-        });
-        return configMap;
     }
 }

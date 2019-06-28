@@ -3,6 +3,7 @@ package io.vertx.tp.jet.uca.param;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.cv.em.ParamMode;
+import io.vertx.tp.optic.jet.JtIngest;
 import io.vertx.up.atom.Envelop;
 
 import java.util.Map;

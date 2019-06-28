@@ -1,7 +1,7 @@
 package io.vertx.zero.atom;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.eon.ZJson;
+import io.vertx.up.commune.ZJson;
 import io.vertx.up.eon.em.DatabaseType;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.marshal.node.Node;

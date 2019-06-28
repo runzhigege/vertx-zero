@@ -12,5 +12,13 @@ public interface JtMsg {
     String WORKER_DEPLOY = "Workers will be deployed in background async ......";
     String WORKER_FAILURE = "Ambient Environment booting error, initialized failure";
     String WORKER_DEPLOYING = "Worker instance = {0}, class = {1}";
-    String WORKER_DEPLOYED = "Worker {0} = {1} has been deployed successfully";
+    String WORKER_DEPLOYED = "Worker `{0}` has been deployed successfully!!!";
+
+    String CONSUME_MESSAGE = "Api interface: id = {0}, method = {1}, path = {2}";
+    String CONSUME_API = "---> Api Json: {0}";
+    String CONSUME_SERVICE = "---> Service Json: {0}";
+    String CONSUME_WORKER = "---> Worker Json: {0}";
+
+    String CHANNEL_SELECT = "Channel selection: channel class = {0}";
+    String COMPONENT_SELECT = "Component selection: business class = {0}";
 }

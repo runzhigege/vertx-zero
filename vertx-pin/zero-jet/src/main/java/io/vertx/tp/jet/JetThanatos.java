@@ -1,6 +1,7 @@
 package io.vertx.tp.jet;
 
 import io.vertx.tp.error._400RequiredParamException;
+import io.vertx.tp.error._500DefinitionErrorException;
 import io.vertx.up.atom.Envelop;
 import io.zero.epic.fn.Fn;
 
@@ -22,5 +23,9 @@ public class JetThanatos {
 
     public Envelop to400RequiredParam(final String filename) {
         return Envelop.failure(new _400RequiredParamException(this.target, filename));
+    }
+
+    public Envelop to500DefinitionError(final String key) {
+        return Envelop.failure(new _500DefinitionErrorException(this.target, key));
     }
 }
