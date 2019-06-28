@@ -14,7 +14,7 @@ import java.util.Objects;
 class DefineIngest implements JtIngest {
     @Override
     public Envelop in(final RoutingContext context, final JtUri uri) {
-        final Class<?> clazz = ZeroAmbient.getPlugin(JtComponent.COMPONENT_PARAM_KEY);
+        final Class<?> clazz = ZeroAmbient.getPlugin(JtComponent.COMPONENT_INGEST_KEY.getName());
         if (Objects.isNull(clazz)) {
             return Envelop.failure(new _501IngestMissingException(this.getClass()));
         } else if (!Ut.isImplement(clazz, JtIngest.class)) {

@@ -71,6 +71,10 @@ public class Ut {
         return Instance.clazz(name);
     }
 
+    public static Class<?> clazz(final String name, final Class<?> defaultCls) {
+        return Instance.clazz(name, defaultCls);
+    }
+
     public static boolean isImplement(final Class<?> clazz, final Class<?> interfaceCls) {
         return Instance.isMatch(clazz, interfaceCls);
     }

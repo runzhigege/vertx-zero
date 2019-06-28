@@ -8,10 +8,7 @@ import io.vertx.zero.mirror.Pack;
 import io.zero.epic.fn.Fn;
 
 import java.lang.reflect.*;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @SuppressWarnings({"unchecked"})
@@ -40,25 +37,16 @@ final class Instance {
 
     /**
      * Generic type
-     *
-     * @param target
-     * @return
      */
     static <T> Class<?> genericT(final Class<?> target) {
         return Fn.getJvm(() -> {
             final Type type = target.getGenericSuperclass();
-            final Class<T> clazz = (Class) (((ParameterizedType) type).getActualTypeArguments()[0]);
-            return clazz;
+            return (Class) (((ParameterizedType) type).getActualTypeArguments()[0]);
         }, target);
     }
 
     /**
      * Singleton instances
-     *
-     * @param clazz
-     * @param params
-     * @param <T>
-     * @return
      */
     static <T> T singleton(final Class<?> clazz,
                            final Object... params) {
@@ -71,8 +59,8 @@ final class Instance {
     /**
      * Get class from name, cached into memory pool
      *
-     * @param name
-     * @return
+     * @param name class Name
+     * @return Class<?>
      */
     static Class<?> clazz(final String name) {
         return Fn.pool(Storage.CLASSES, name,
@@ -81,13 +69,27 @@ final class Instance {
                         .loadClass(name), name));
     }
 
+    static Class<?> clazz(final String name, final Class<?> defaultCls) {
+        if (Ut.isNil(name)) {
+            return defaultCls;
+        } else {
+            final Class<?> clazz = clazz(name);
+            if (Objects.isNull(clazz)) {
+                return defaultCls;
+            } else {
+                return clazz;
+            }
+        }
+    }
+
     /**
      * Check whether clazz implement the interfaceCls
      *
-     * @param clazz
-     * @param interfaceCls
-     * @return
+     * @param clazz        classname
+     * @param interfaceCls interface name that will be implement
+     * @return whether OK here
      */
+    @SuppressWarnings("all")
     static boolean isMatch(final Class<?> clazz, final Class<?> interfaceCls) {
         final Class<?>[] interfaces = clazz.getInterfaces();
         return Arrays.stream(interfaces)
@@ -182,9 +184,6 @@ final class Instance {
 
     /**
      * Whether the class contains no-arg constructor
-     *
-     * @param clazz
-     * @return
      */
     static boolean noarg(final Class<?> clazz) {
         return Fn.getNull(Boolean.FALSE, () -> {
@@ -201,9 +200,6 @@ final class Instance {
 
     /**
      * Find the unique implementation for interfaceCls
-     *
-     * @param interfaceCls
-     * @return
      */
     static Class<?> uniqueChild(final Class<?> interfaceCls) {
         return Fn.getNull(null, () -> {

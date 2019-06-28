@@ -10,15 +10,13 @@ public interface JtComponent {
     String EVENT_ADDRESS = "Πίδακας δρομολογητή://EVENT-JET/ZERO/UNIFORM";
     /*
      * Component Default
-     * - Agent
      * - Worker
      * - Consumer
      */
-    String COMPONENT_DEFAULT_AGENT = JtAiakos.class.getName();
-    String COMPONENT_DEFAULT_WORKER = JtMinos.class.getName();
-    String COMPONENT_DEFAULT_CONSUMER = JtRadamanteis.class.getName();
+    Class<?> COMPONENT_DEFAULT_WORKER = JtMinos.class;
+    Class<?> COMPONENT_DEFAULT_CONSUMER = JtAiakos.class;
     /*
      * Parameter component extract key
      */
-    String COMPONENT_PARAM_KEY = "io.vertx.tp.jet.uca.micro.JtValentane";
+    Class<?> COMPONENT_INGEST_KEY = JtRadamanteis.class;
 }

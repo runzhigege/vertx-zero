@@ -8,15 +8,29 @@ import io.vertx.up.web.Runner;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-class JtRouter {
+class JtAtomic {
     /*
      * Monitor for router of each App
      */
     private static final AtomicBoolean AGENT_CONFIG = new AtomicBoolean(Boolean.FALSE);
+    private static final AtomicBoolean WORKER_DEPLOY = new AtomicBoolean(Boolean.FALSE);
+    private static final AtomicBoolean WORKER_FAILURE = new AtomicBoolean(Boolean.FALSE);
 
     void start(final Annal logger, final JsonObject config) {
         if (!AGENT_CONFIG.getAndSet(Boolean.TRUE)) {
             Runner.run(() -> Jt.infoRoute(logger, JtMsg.AGENT_CONFIG, config.encode()), "jet-agent-config");
+        }
+    }
+
+    void worker(final Annal logger) {
+        if (!WORKER_DEPLOY.getAndSet(Boolean.TRUE)) {
+            Runner.run(() -> Jt.infoRoute(logger, JtMsg.WORKER_DEPLOY), "jet-worker-deploy");
+        }
+    }
+
+    void workerFailure(final Annal logger) {
+        if (!WORKER_FAILURE.getAndSet(Boolean.TRUE)) {
+            Runner.run(() -> Jt.infoRoute(logger, JtMsg.WORKER_FAILURE), "jet-worker-failure");
         }
     }
 }

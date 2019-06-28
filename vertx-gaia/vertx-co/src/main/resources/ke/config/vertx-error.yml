@@ -155,3 +155,5 @@ E80400: "(500) - (Jet) The container try to connect App/Source, but `UnityApp` i
 E80401: "(501) - (Jet) The infix of parameter `ingest` is null, could not be used in `DEFINE` mode"
 E80402: "(501) - (Jet) The `ingest` specification is invalid, the class = `{0}` did not implement `JtIngest`"
 E80403: "(400) - The required parameter `{0}` is missing and please input valid parameter here"
+E80404: "(500) - (Jet) The class = `{0}` does not extend from `AbstractVerticle`, it''s invalid"
+E80405: "(500) - (Jet) The class = `{0}` does not implement `JtConsumer` interface, it''s invalid"
