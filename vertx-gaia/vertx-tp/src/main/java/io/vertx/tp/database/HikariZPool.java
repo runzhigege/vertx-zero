@@ -65,19 +65,21 @@ public class HikariZPool implements ZPool {
     private void initJdbc() {
         if (null == this.dataSource) {
             /*
-             * Very important here.
-             * 唯一数据源，单件模式
+             * Very important here, here are unique pool of old code with singleton
              * this.dataSource = Ut.singleton(HikariDataSource.class);
+             *
              * Fix Issue: IllegalState The configuration of the pool is sealed once started
-             * 问题来源：这里不可以使用单件模式，而是创建新的DataSource，原因很简单，如果使用了单间模式
-             * 在切换数据源或者重新使用数据源的时候，会带来上述问题，问题根源是在于：HikariCPPool一旦
-             * 启动过后，就不可以更改它本身的jdbcUrl，一旦更改，则会报出上述错误信息，但前提是某个已经设置
-             * 过jdbcUrl的数据源，并且它并不是依赖jdbcUrl来判断是否同一数据源的，而是直接以引用为主，
-             * 如果这个地方使用了单件，则不论任何时候创建的数据源都是唯一的，即引用相等，那么再设置jdbcUrl
-             * 的时候就会抛出上述错误。
-             * 在Origin X Engine的架构中，数据源的唯一性在上层由JdbcConnection来控制，而不是在这里控制
-             * key = value的模式下，Origin X Engine会针对不同的jdbcUrl创建 OxPool实例，那么在这种
-             * 情况下，是不会因为连接的建立创建多个数据源的。
+             * Root Cause: Here we could not use singleton pool, must create new one of DataSource.
+             * If you use singleton design pattern here, when you want to switch datasource or reuse
+             * the old data source, above issue will re-produce.
+             *
+             * Here are some background: once HikariCPPool started, you should not change the jdbcUrl.
+             * If you want to change the jdbcUrl, above exception will throw out.
+             *
+             * The pre-condition is that you have set jdbcUrl before, and the HikariCPPool did not
+             * distinguish whether it's the same data source by `jdbcUrl`, instead by java reference.
+             * If we used singleton design pattern here, it means that you get previous reference each time
+             * `old == new` will be true, when you set jdbcUrl again, above issue will throw out.
              *
              */
             this.dataSource = new HikariDataSource();
