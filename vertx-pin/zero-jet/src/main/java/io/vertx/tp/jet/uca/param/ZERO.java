@@ -9,6 +9,7 @@ import java.util.function.Supplier;
 
 interface Pool {
     ConcurrentMap<String, JtIngest> POOL_INGEST = new ConcurrentHashMap<>();
+
     ConcurrentMap<String, JtIngest> POOL_INGEST_QUERY = new ConcurrentHashMap<>();
     ConcurrentMap<String, JtIngest> POOL_INGEST_PATH = new ConcurrentHashMap<>();
     ConcurrentMap<String, JtIngest> POOL_INGEST_BODY = new ConcurrentHashMap<>();

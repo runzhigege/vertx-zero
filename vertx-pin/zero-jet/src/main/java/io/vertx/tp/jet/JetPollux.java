@@ -20,7 +20,9 @@ import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
 
 /*
  * Agent entry of dynamic deployment, this component is mount to router also.
@@ -39,29 +41,50 @@ public class JetPollux implements PlugRouter {
     private transient JetCastor castor;
 
     @Override
+    @SuppressWarnings("all")
     public void mount(final Router router, final JsonObject config) {
         // MONITOR
         this.monitor.agentConfig(config);
-        /*
-         * 「Booting」( Multi application deployment on Router )
-         */
-        AMBIENT.keySet().stream()
-                .flatMap(appId -> AMBIENT.get(appId).routes().stream()
-                        /* Bind appId */
-                        .map(uri -> uri.bind(appId))
-                )
+        if (Objects.isNull(AMBIENT) || AMBIENT.isEmpty()) {
+            /*
+             * 「Failure」Deployment failure
+             */
+            this.monitor.workerFailure();
+        } else {
+            /*
+             * 「Booting」( Multi application deployment on Router )
+             */
+            final Set<JtUri> uriSet = AMBIENT.keySet().stream()
+                    .flatMap(appId -> AMBIENT.get(appId).routes().stream()
+                            /* Bind appId */
+                            .map(uri -> uri.bind(appId))
+                    )
+                    /*
+                     * Start up and bind `order` and `config`
+                     */
+                    .map(uri -> uri.bind(this.getOrder())
+                            .bind(Ut.deserialize(config.copy(), JtConfig.class)))
+                    /*
+                     * Routing deployment
+                     */
+                    .map(uri -> {
+                        // 「Route」
+                        final Route route = router.route();
+                        // Single route registry
+                        this.registryUri(route, uri);
+                        return uri;
+                    }).collect(Collectors.toSet());
+            /*
+             * 「Starting」
+             */
+            this.monitor.workerStart();
+            if (Objects.nonNull(this.castor)) {
                 /*
-                 * Start up and bind `order` and `config`
+                 * Worker deployment
                  */
-                .map(uri -> uri.bind(this.getOrder())
-                        .bind(Ut.deserialize(config.copy(), JtConfig.class)))
-                .forEach(uri -> {
-                    // 「Route」
-                    final Route route = router.route();
-
-                    // Single route registry
-                    this.registryUri(route, uri);
-                });
+                this.castor.startWorkers(uriSet);
+            }
+        }
     }
 
     /*

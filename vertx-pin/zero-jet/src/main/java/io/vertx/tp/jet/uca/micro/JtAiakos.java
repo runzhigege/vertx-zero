@@ -1,4 +1,9 @@
 package io.vertx.tp.jet.uca.micro;
 
-public class JtAiakos {
+import io.vertx.tp.jet.uca.consume.JtConsumer;
+
+/*
+ * 「Consumer」
+ */
+public class JtAiakos implements JtConsumer {
 }

@@ -1,4 +1,9 @@
 package io.vertx.tp.jet.uca.micro;
 
-public class JtMinos {
+import io.vertx.core.AbstractVerticle;
+
+/*
+ *「Worker」
+ */
+public class JtMinos extends AbstractVerticle {
 }

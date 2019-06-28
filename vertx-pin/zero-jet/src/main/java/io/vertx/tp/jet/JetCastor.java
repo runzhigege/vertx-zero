@@ -1,6 +1,9 @@
 package io.vertx.tp.jet;
 
 import io.vertx.core.Vertx;
+import io.vertx.tp.jet.atom.JtUri;
+
+import java.util.Set;
 
 /*
  * Worker entry of dynamic deployment,
@@ -15,5 +18,14 @@ public class JetCastor {
 
     public static JetCastor create(final Vertx vertx) {
         return new JetCastor(vertx);
+    }
+
+    /*
+     * Package scope to start workers
+     */
+    void startWorkers(final Set<JtUri> uriSet) {
+        {
+
+        }
     }
 }

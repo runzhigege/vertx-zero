@@ -72,7 +72,7 @@ public class AmbientEnvironment {
             /* Uri / Service Bind into data here */
             apiMap.keySet().stream()
                     .map(serviceId -> new JtUri(apiMap.get(serviceId), serviceMap.get(serviceId)))
-                    .forEach(entry -> this.uris.put(entry.getKey(), entry));
+                    .forEach(entry -> this.uris.put(entry.key(), entry));
         }
         return this;
     }

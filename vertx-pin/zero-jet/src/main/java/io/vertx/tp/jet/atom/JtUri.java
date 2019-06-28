@@ -12,6 +12,7 @@ import io.vertx.up.eon.Orders;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
+import javax.ws.rs.core.MediaType;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,7 +24,13 @@ public class JtUri {
     private final transient IApi api;
     private final transient IService service;
     private final transient String key;
-
+    /*
+     * Worker
+     */
+    private final transient JtWorker worker = new JtWorker();
+    /*
+     * App / Config
+     */
     private transient JtApp app;
     private transient Integer order;
     private transient JtConfig config;
@@ -36,10 +43,6 @@ public class JtUri {
 
         /* Default Component Value */
         this.initWorker(api);
-    }
-
-    public String getKey() {
-        return this.key;
     }
 
     public JtUri bind(final Integer order) {
@@ -82,6 +85,10 @@ public class JtUri {
         return Jt.toMimeString(this.api::getProduces);
     }
 
+    public Set<MediaType> producesMime() {
+        return Jt.toMime(this.api::getProduces);
+    }
+
     public Set<String> consumes() {
         return Jt.toMimeString(this.api::getConsumes);
     }
@@ -102,6 +109,20 @@ public class JtUri {
         return Jt.toSet(this.api::getParamContained);
     }
 
+    // ------------- api & service
+    public String key() {
+        return this.key;
+    }
+
+    public String identifier() {
+        return this.service.getIdentifier();
+    }
+
+    // ------------- worker
+    public String address() {
+        return this.api.getWorkerAddress();
+    }
+
     private void initWorker(final IApi api) {
         /*
          * Set default value in I_API related to worker
@@ -112,12 +133,40 @@ public class JtUri {
          * workerJs
          */
         Fn.safeSemi(Ut.isNil(api.getWorkerClass()),
-                () -> api.setWorkerClass(JtComponent.COMPONENT_DEFAULT_WORKER));
+                () -> api.setWorkerClass(JtComponent.COMPONENT_DEFAULT_WORKER.getName()));
         Fn.safeSemi(Ut.isNil(api.getWorkerAddress()),
                 () -> api.setWorkerAddress(JtComponent.EVENT_ADDRESS));
         Fn.safeSemi(Ut.isNil(api.getWorkerConsumer()),
-                () -> api.setWorkerConsumer(JtComponent.COMPONENT_DEFAULT_CONSUMER));
+                () -> api.setWorkerConsumer(JtComponent.COMPONENT_DEFAULT_CONSUMER.getName()));
         Fn.safeSemi(Ut.isNil(api.getWorkerType()),
                 () -> api.setWorkerType(WorkerType.STD.name()));
+        /*
+         * Worker object instance in current uri here.
+         */
+        this.worker.setWorkerAddress(this.api.getWorkerAddress());
+        this.worker.setWorkerJs(this.api.getWorkerJs());
+        this.worker.setWorkerType(Ut.toEnum(this.api::getWorkerType, WorkerType.class, WorkerType.STD));
+        this.worker.setWorkerClass(Jt.toWorker(this.api::getWorkerClass));
+        this.worker.setWorkerConsumer(Jt.toConsumer(this.api::getWorkerConsumer));
+    }
+
+    /*
+     * Api Key as id of current Uri
+     */
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof JtUri)) {
+            return false;
+        }
+        final JtUri jtUri = (JtUri) o;
+        return this.key.equals(jtUri.key);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.key);
     }
 }

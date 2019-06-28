@@ -44,4 +44,15 @@ public class Jt {
     public static Set<String> toSet(final Supplier<String> supplier) {
         return JtRoute.toSet(supplier);
     }
+
+    /*
+     * Type extraction
+     */
+    public static Class<?> toWorker(final Supplier<String> supplier) {
+        return JtType.toWorker(supplier);
+    }
+
+    public static Class<?> toConsumer(final Supplier<String> supplier) {
+        return JtType.toConsumer(supplier);
+    }
 }
