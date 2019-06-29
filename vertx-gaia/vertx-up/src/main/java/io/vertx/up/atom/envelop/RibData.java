@@ -2,6 +2,7 @@ package io.vertx.up.atom.envelop;
 
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.eon.ZeroValue;
 import io.zero.epic.Ut;
 
 import java.util.Objects;
@@ -60,7 +61,7 @@ class RibData {
             final JsonObject raw = data.getJsonObject(Key.DATA);
             if (!Ut.isNil(raw)) {
                 /* Key */
-                final String key = Arg.get(index);
+                final String key = ZeroValue.INDEXES.get(index);
                 reference = Rib.deserialize(raw.getValue(key), clazz);
             }
         }
@@ -129,7 +130,7 @@ class RibData {
              *
              * Here argIndex should not be null
              */
-            found = found.getJsonObject(Arg.get(argIndex));
+            found = found.getJsonObject(ZeroValue.INDEXES.get(argIndex));
         }
         return found;
     }

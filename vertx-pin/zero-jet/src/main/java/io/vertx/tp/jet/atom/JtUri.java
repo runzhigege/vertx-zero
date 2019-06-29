@@ -13,6 +13,8 @@ import io.vertx.tp.optic.environment.Ambient;
 import io.vertx.up.commune.Api;
 import io.vertx.up.eon.Orders;
 import io.vertx.up.eon.em.ChannelType;
+import io.vertx.zero.atom.Database;
+import io.vertx.zero.atom.Integration;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
@@ -160,6 +162,26 @@ public class JtUri implements Api {
     @Override
     public Class<?> businessComponent() {
         return Ut.clazz(this.service.getServiceComponent());
+    }
+
+    @Override
+    public Class<?> recordComponent() {
+        return Ut.clazz(this.service.getServiceRecord());
+    }
+
+    @Override
+    public Database database() {
+        return Jt.toDatabase(this.service::getConfigDatabase, this.app.getSource());
+    }
+
+    @Override
+    public Integration integration() {
+        return Jt.toIntegration(this.service::getConfigIntegration);
+    }
+
+    @Override
+    public String app() {
+        return this.app.getAppId();
     }
 
     private void initialize(final IApi api) {

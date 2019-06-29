@@ -19,6 +19,8 @@ public interface Inquiry {
     String KEY_CRITERIA = "criteria";
     String KEY_PROJECTION = "projection";
 
+    String[] KEY_QUERY = new String[]{KEY_CRITERIA, KEY_PAGER, KEY_PROJECTION, KEY_SORTER};
+
     /**
      * Create Inquiry
      *
