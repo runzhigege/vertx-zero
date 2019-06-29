@@ -40,4 +40,6 @@ public enum ChannelType {
      *  2）You can access different Dao async in this channel and connect to different `Component` here.
      */
     DIRECTOR,
+
+    DEFINE,
 }

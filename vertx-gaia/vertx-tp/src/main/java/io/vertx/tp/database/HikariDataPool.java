@@ -12,15 +12,15 @@ import org.jooq.impl.DSL;
 import org.jooq.impl.DefaultConfiguration;
 import org.jooq.impl.DefaultConnectionProvider;
 
-public class HikariZPool implements ZPool {
-    private static final Annal LOGGER = Annal.get(HikariZPool.class);
+public class HikariDataPool implements DataPool {
+    private static final Annal LOGGER = Annal.get(HikariDataPool.class);
     private final transient Database database;
 
     /* Each jdbc url has one Pool here **/
     private transient DSLContext context;
     private transient HikariDataSource dataSource;
 
-    HikariZPool(final Database database) {
+    HikariDataPool(final Database database) {
         this.database = database;
         /*
          * Initializing data source

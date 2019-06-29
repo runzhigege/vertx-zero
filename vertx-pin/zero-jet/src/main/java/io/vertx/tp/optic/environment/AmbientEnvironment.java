@@ -5,7 +5,7 @@ import cn.vertxup.jet.tables.daos.IServiceDao;
 import cn.vertxup.jet.tables.pojos.IApi;
 import cn.vertxup.jet.tables.pojos.IService;
 import io.vertx.codegen.annotations.Fluent;
-import io.vertx.tp.database.ZPool;
+import io.vertx.tp.database.DataPool;
 import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.atom.JtUri;
 import io.zero.epic.fn.Fn;
@@ -30,7 +30,7 @@ public class AmbientEnvironment {
     /* XApp application, class JtApp */
     private final transient JtApp app;
     /* Data source, DSLContext, DataSource */
-    private final transient ZPool pool;
+    private final transient DataPool pool;
 
     /*
      * IApiDao and IServiceDao
@@ -45,7 +45,7 @@ public class AmbientEnvironment {
         /* Reference of application */
         this.app = app;
         /* ZPool created by Database */
-        this.pool = ZPool.create(app.getSource());
+        this.pool = DataPool.create(app.getSource());
         /* IApi / IService Extracting from database */
         {
             final Configuration configuration = this.pool.getExecutor().configuration();

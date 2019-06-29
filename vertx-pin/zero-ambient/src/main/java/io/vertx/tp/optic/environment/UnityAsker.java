@@ -6,7 +6,7 @@ import cn.vertxup.ambient.tables.pojos.XApp;
 import cn.vertxup.ambient.tables.pojos.XSource;
 import io.vertx.tp.ambient.cv.AtMsg;
 import io.vertx.tp.ambient.refine.At;
-import io.vertx.tp.database.ZPool;
+import io.vertx.tp.database.DataPool;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.atom.Database;
 import io.zero.epic.Ut;
@@ -48,7 +48,7 @@ class UnityAsker {
 
     private static Configuration getConfiguration() {
         final Database database = Database.getCurrent();
-        final ZPool pool = ZPool.create(database);
+        final DataPool pool = DataPool.create(database);
         return pool.getExecutor().configuration();
     }
 

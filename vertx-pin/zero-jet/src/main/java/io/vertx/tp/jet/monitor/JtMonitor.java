@@ -94,4 +94,9 @@ public class JtMonitor {
         Runner.run(() -> Jt.infoWeb(this.logger, JtMsg.COMPONENT_SELECT, null == clazz ? null : clazz.getName()),
                 "jet-component-selector");
     }
+
+    public void recordHit(final Class<?> clazz) {
+        Runner.run(() -> Jt.infoWeb(this.logger, JtMsg.RECORD_SELECT, null == clazz ? null : clazz.getName()),
+                "jet-record-selector");
+    }
 }

@@ -1,7 +1,7 @@
 package io.vertx.tp.optic.environment;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.database.ZPool;
+import io.vertx.tp.database.DataPool;
 import io.vertx.tp.error._500AmbientConnectException;
 import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.init.JtPin;
@@ -22,7 +22,7 @@ public class Ambient {
             new ConcurrentHashMap<>();
 
     /* Database Pool of each application */
-    private static final ConcurrentMap<String, ZPool> POOL =
+    private static final ConcurrentMap<String, DataPool> POOL =
             new ConcurrentHashMap<>();
 
     /* Environment information of Ambient */

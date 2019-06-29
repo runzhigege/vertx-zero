@@ -18,4 +18,6 @@ public interface JtConstant {
      * Parameter component extract key
      */
     String COMPONENT_INGEST_KEY = "zero.jet.param.ingest";
+
+    String DEFAULT_POOL_DATABASE = "OX_MULTI_APP_DATABASE";
 }
