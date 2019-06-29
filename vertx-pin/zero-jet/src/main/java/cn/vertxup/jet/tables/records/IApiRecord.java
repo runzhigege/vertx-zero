@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements IIApi {
 
-    private static final long serialVersionUID = -1504367011;
+    private static final long serialVersionUID = -1744974697;
 
     /**
      * Setter for <code>DB_ETERNAL.I_API.KEY</code>. 「key」- 接口ID
@@ -303,7 +303,7 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements IIApi
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.I_API.WORKER_TYPE</code>. 「workerType」- Worker类型：JS / OX / PLUG
+     * Setter for <code>DB_ETERNAL.I_API.WORKER_TYPE</code>. 「workerType」- Worker类型：JS / PLUG / STD
      */
     @Override
     public IApiRecord setWorkerType(String value) {
@@ -312,7 +312,7 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements IIApi
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.I_API.WORKER_TYPE</code>. 「workerType」- Worker类型：JS / OX / PLUG
+     * Getter for <code>DB_ETERNAL.I_API.WORKER_TYPE</code>. 「workerType」- Worker类型：JS / PLUG / STD
      */
     @Override
     public String getWorkerType() {

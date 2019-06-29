@@ -1,7 +1,7 @@
 package io.vertx.zero.atom;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.commune.ZJson;
+import io.vertx.up.commune.Json;
 import io.vertx.up.eon.em.DatabaseType;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.marshal.node.Node;
@@ -15,7 +15,7 @@ import java.sql.SQLException;
 /**
  * Database linker for JDBC
  */
-public class Database implements Serializable, ZJson {
+public class Database implements Serializable, Json {
 
     private static final Annal LOGGER = Annal.get(Database.class);
     private static final Node<JsonObject> VISITOR = Ut.singleton(ZeroUniform.class);

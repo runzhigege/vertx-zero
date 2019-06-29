@@ -184,12 +184,12 @@ public interface IIApi extends Serializable {
     public String getInScript();
 
     /**
-     * Setter for <code>DB_ETERNAL.I_API.WORKER_TYPE</code>. 「workerType」- Worker类型：JS / OX / PLUG
+     * Setter for <code>DB_ETERNAL.I_API.WORKER_TYPE</code>. 「workerType」- Worker类型：JS / PLUG / STD
      */
     public IIApi setWorkerType(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.I_API.WORKER_TYPE</code>. 「workerType」- Worker类型：JS / OX / PLUG
+     * Getter for <code>DB_ETERNAL.I_API.WORKER_TYPE</code>. 「workerType」- Worker类型：JS / PLUG / STD
      */
     public String getWorkerType();
 

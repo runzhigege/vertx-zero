@@ -24,22 +24,24 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IService implements IIService {
 
-    private static final long serialVersionUID = 755926054;
+    private static final long serialVersionUID = -441795553;
 
     private String        key;
     private String        namespace;
     private String        name;
     private String        comment;
-    private String        type;
     private Boolean       isWorkflow;
     private Boolean       isGraphic;
     private String        inScript;
     private String        outScript;
-    private String        serviceChannel;
+    private String        channelType;
+    private String        channelComponent;
+    private String        configChannel;
+    private String        configIntegration;
+    private String        configDatabase;
+    private String        configService;
+    private String        serviceRecord;
     private String        serviceComponent;
-    private String        serviceConfig;
-    private String        serviceSpec;
-    private String        serviceResponser;
     private String        identifier;
     private String        sigma;
     private String        language;
@@ -57,16 +59,18 @@ public class IService implements IIService {
         this.namespace = value.namespace;
         this.name = value.name;
         this.comment = value.comment;
-        this.type = value.type;
         this.isWorkflow = value.isWorkflow;
         this.isGraphic = value.isGraphic;
         this.inScript = value.inScript;
         this.outScript = value.outScript;
-        this.serviceChannel = value.serviceChannel;
+        this.channelType = value.channelType;
+        this.channelComponent = value.channelComponent;
+        this.configChannel = value.configChannel;
+        this.configIntegration = value.configIntegration;
+        this.configDatabase = value.configDatabase;
+        this.configService = value.configService;
+        this.serviceRecord = value.serviceRecord;
         this.serviceComponent = value.serviceComponent;
-        this.serviceConfig = value.serviceConfig;
-        this.serviceSpec = value.serviceSpec;
-        this.serviceResponser = value.serviceResponser;
         this.identifier = value.identifier;
         this.sigma = value.sigma;
         this.language = value.language;
@@ -83,16 +87,18 @@ public class IService implements IIService {
         String        namespace,
         String        name,
         String        comment,
-        String        type,
         Boolean       isWorkflow,
         Boolean       isGraphic,
         String        inScript,
         String        outScript,
-        String        serviceChannel,
+        String        channelType,
+        String        channelComponent,
+        String        configChannel,
+        String        configIntegration,
+        String        configDatabase,
+        String        configService,
+        String        serviceRecord,
         String        serviceComponent,
-        String        serviceConfig,
-        String        serviceSpec,
-        String        serviceResponser,
         String        identifier,
         String        sigma,
         String        language,
@@ -107,16 +113,18 @@ public class IService implements IIService {
         this.namespace = namespace;
         this.name = name;
         this.comment = comment;
-        this.type = type;
         this.isWorkflow = isWorkflow;
         this.isGraphic = isGraphic;
         this.inScript = inScript;
         this.outScript = outScript;
-        this.serviceChannel = serviceChannel;
+        this.channelType = channelType;
+        this.channelComponent = channelComponent;
+        this.configChannel = configChannel;
+        this.configIntegration = configIntegration;
+        this.configDatabase = configDatabase;
+        this.configService = configService;
+        this.serviceRecord = serviceRecord;
         this.serviceComponent = serviceComponent;
-        this.serviceConfig = serviceConfig;
-        this.serviceSpec = serviceSpec;
-        this.serviceResponser = serviceResponser;
         this.identifier = identifier;
         this.sigma = sigma;
         this.language = language;
@@ -173,17 +181,6 @@ public class IService implements IIService {
     }
 
     @Override
-    public String getType() {
-        return this.type;
-    }
-
-    @Override
-    public IService setType(String type) {
-        this.type = type;
-        return this;
-    }
-
-    @Override
     public Boolean getIsWorkflow() {
         return this.isWorkflow;
     }
@@ -228,13 +225,79 @@ public class IService implements IIService {
     }
 
     @Override
-    public String getServiceChannel() {
-        return this.serviceChannel;
+    public String getChannelType() {
+        return this.channelType;
     }
 
     @Override
-    public IService setServiceChannel(String serviceChannel) {
-        this.serviceChannel = serviceChannel;
+    public IService setChannelType(String channelType) {
+        this.channelType = channelType;
+        return this;
+    }
+
+    @Override
+    public String getChannelComponent() {
+        return this.channelComponent;
+    }
+
+    @Override
+    public IService setChannelComponent(String channelComponent) {
+        this.channelComponent = channelComponent;
+        return this;
+    }
+
+    @Override
+    public String getConfigChannel() {
+        return this.configChannel;
+    }
+
+    @Override
+    public IService setConfigChannel(String configChannel) {
+        this.configChannel = configChannel;
+        return this;
+    }
+
+    @Override
+    public String getConfigIntegration() {
+        return this.configIntegration;
+    }
+
+    @Override
+    public IService setConfigIntegration(String configIntegration) {
+        this.configIntegration = configIntegration;
+        return this;
+    }
+
+    @Override
+    public String getConfigDatabase() {
+        return this.configDatabase;
+    }
+
+    @Override
+    public IService setConfigDatabase(String configDatabase) {
+        this.configDatabase = configDatabase;
+        return this;
+    }
+
+    @Override
+    public String getConfigService() {
+        return this.configService;
+    }
+
+    @Override
+    public IService setConfigService(String configService) {
+        this.configService = configService;
+        return this;
+    }
+
+    @Override
+    public String getServiceRecord() {
+        return this.serviceRecord;
+    }
+
+    @Override
+    public IService setServiceRecord(String serviceRecord) {
+        this.serviceRecord = serviceRecord;
         return this;
     }
 
@@ -246,39 +309,6 @@ public class IService implements IIService {
     @Override
     public IService setServiceComponent(String serviceComponent) {
         this.serviceComponent = serviceComponent;
-        return this;
-    }
-
-    @Override
-    public String getServiceConfig() {
-        return this.serviceConfig;
-    }
-
-    @Override
-    public IService setServiceConfig(String serviceConfig) {
-        this.serviceConfig = serviceConfig;
-        return this;
-    }
-
-    @Override
-    public String getServiceSpec() {
-        return this.serviceSpec;
-    }
-
-    @Override
-    public IService setServiceSpec(String serviceSpec) {
-        this.serviceSpec = serviceSpec;
-        return this;
-    }
-
-    @Override
-    public String getServiceResponser() {
-        return this.serviceResponser;
-    }
-
-    @Override
-    public IService setServiceResponser(String serviceResponser) {
-        this.serviceResponser = serviceResponser;
         return this;
     }
 
@@ -389,16 +419,18 @@ public class IService implements IIService {
         sb.append(", ").append(namespace);
         sb.append(", ").append(name);
         sb.append(", ").append(comment);
-        sb.append(", ").append(type);
         sb.append(", ").append(isWorkflow);
         sb.append(", ").append(isGraphic);
         sb.append(", ").append(inScript);
         sb.append(", ").append(outScript);
-        sb.append(", ").append(serviceChannel);
+        sb.append(", ").append(channelType);
+        sb.append(", ").append(channelComponent);
+        sb.append(", ").append(configChannel);
+        sb.append(", ").append(configIntegration);
+        sb.append(", ").append(configDatabase);
+        sb.append(", ").append(configService);
+        sb.append(", ").append(serviceRecord);
         sb.append(", ").append(serviceComponent);
-        sb.append(", ").append(serviceConfig);
-        sb.append(", ").append(serviceSpec);
-        sb.append(", ").append(serviceResponser);
         sb.append(", ").append(identifier);
         sb.append(", ").append(sigma);
         sb.append(", ").append(language);
@@ -426,16 +458,18 @@ public class IService implements IIService {
         setNamespace(from.getNamespace());
         setName(from.getName());
         setComment(from.getComment());
-        setType(from.getType());
         setIsWorkflow(from.getIsWorkflow());
         setIsGraphic(from.getIsGraphic());
         setInScript(from.getInScript());
         setOutScript(from.getOutScript());
-        setServiceChannel(from.getServiceChannel());
+        setChannelType(from.getChannelType());
+        setChannelComponent(from.getChannelComponent());
+        setConfigChannel(from.getConfigChannel());
+        setConfigIntegration(from.getConfigIntegration());
+        setConfigDatabase(from.getConfigDatabase());
+        setConfigService(from.getConfigService());
+        setServiceRecord(from.getServiceRecord());
         setServiceComponent(from.getServiceComponent());
-        setServiceConfig(from.getServiceConfig());
-        setServiceSpec(from.getServiceSpec());
-        setServiceResponser(from.getServiceResponser());
         setIdentifier(from.getIdentifier());
         setSigma(from.getSigma());
         setLanguage(from.getLanguage());
