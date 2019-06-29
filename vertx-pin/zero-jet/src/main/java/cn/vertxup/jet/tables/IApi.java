@@ -35,7 +35,7 @@ public class IApi extends TableImpl<IApiRecord> {
      * The reference instance of <code>DB_ETERNAL.I_API</code>
      */
     public static final IApi I_API = new IApi();
-    private static final long serialVersionUID = 1018515545;
+    private static final long serialVersionUID = -1801354481;
     /**
      * The column <code>DB_ETERNAL.I_API.KEY</code>. 「key」- 接口ID
      */
@@ -101,9 +101,9 @@ public class IApi extends TableImpl<IApiRecord> {
      */
     public final TableField<IApiRecord, String> IN_SCRIPT = createField("IN_SCRIPT", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「inScript」- 【保留】参数请求流程中的脚本控制");
     /**
-     * The column <code>DB_ETERNAL.I_API.WORKER_TYPE</code>. 「workerType」- Worker类型：JS / OX / PLUG
+     * The column <code>DB_ETERNAL.I_API.WORKER_TYPE</code>. 「workerType」- Worker类型：JS / PLUG / STD
      */
-    public final TableField<IApiRecord, String> WORKER_TYPE = createField("WORKER_TYPE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「workerType」- Worker类型：JS / OX / PLUG");
+    public final TableField<IApiRecord, String> WORKER_TYPE = createField("WORKER_TYPE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「workerType」- Worker类型：JS / PLUG / STD");
     /**
      * The column <code>DB_ETERNAL.I_API.WORKER_ADDRESS</code>. 「workerAddress」- 请求发送地址
      */

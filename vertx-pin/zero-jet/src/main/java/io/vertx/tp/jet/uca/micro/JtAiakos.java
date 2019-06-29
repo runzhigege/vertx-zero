@@ -5,7 +5,7 @@ import io.vertx.tp.jet.monitor.JtMonitor;
 import io.vertx.tp.optic.jet.JtChannel;
 import io.vertx.tp.optic.jet.JtConsumer;
 import io.vertx.up.atom.Envelop;
-import io.vertx.up.commune.ZApi;
+import io.vertx.up.commune.Api;
 import io.zero.epic.Ut;
 
 /*
@@ -17,7 +17,7 @@ public class JtAiakos implements JtConsumer {
     private transient final JtMonitor monitor = JtMonitor.create(this.getClass());
 
     @Override
-    public Future<Envelop> async(final Envelop envelop, final ZApi uri) {
+    public Future<Envelop> async(final Envelop envelop, final Api uri) {
         /* Channel class for current consumer thread */
         final Class<?> channelClass = uri.channelComponent();
         this.monitor.channelHit(channelClass);
@@ -28,6 +28,7 @@ public class JtAiakos implements JtConsumer {
         /* Bind reference to ZApi */
         channel.bind(uri);
 
+        /* Transfer the `Envelop` request data into channel and let channel do next works */
         return channel.transferAsync(envelop);
     }
 }

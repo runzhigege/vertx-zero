@@ -13,7 +13,7 @@ import java.util.Set;
  *  2.1 ) namespace + identifier should be unique ( Business Scope )
  *  2.2 ) Above format should be global id of one defined model.
  */
-public interface ZRecord extends Serializable, ZMeta, ZCheck, ZClone, ZJson {
+public interface Record extends Serializable, Meta, Check, Clone, Json {
     /*
      * Provide attribute name and get related value
      * 1) field -> single field value
@@ -32,31 +32,31 @@ public interface ZRecord extends Serializable, ZMeta, ZCheck, ZClone, ZJson {
      * 1) Single field = value set
      * 2) JsonObject set into current record
      */
-    <V> ZRecord set(String field, V value);
+    <V> Record set(String field, V value);
 
-    ZRecord set(JsonObject data);
+    Record set(JsonObject data);
 
     /*
      * 「Append Mode」
      * Set data or missing, if existing do not set the value
      */
-    <V> ZRecord setOrMissing(String field, V value);
+    <V> Record setOrMissing(String field, V value);
 
-    ZRecord setOrMissing(JsonObject data);
+    Record setOrMissing(JsonObject data);
 
     /*
      * Remove by field / field
      */
-    ZRecord remove(String field);
+    Record remove(String field);
 
-    ZRecord remove(final String... fields);
+    Record remove(final String... fields);
 
 }
 
 /*
  * Package scope here, checking here
  */
-interface ZCheck {
+interface Check {
     /*
      * Check whether current record has data
      */
@@ -75,27 +75,27 @@ interface ZCheck {
 /*
  * Package scope here, provide record copying method
  */
-interface ZClone {
+interface Clone {
     /*
      * Create new record with `attributes`, the subset of current record.
      */
-    ZRecord createSubset(String... attributes);
+    Record createSubset(String... attributes);
 
     /*
      * Create new record
      */
-    ZRecord createNew();
+    Record createNew();
 
     /*
      * Create new record based on current
      */
-    ZRecord createCopy();
+    Record createCopy();
 }
 
 /*
  * Package scope here, provide metadata extraction interface.
  */
-interface ZMeta {
+interface Meta {
     /*
      * JsonObject ( field names ) based on existing data
      */

@@ -91,13 +91,6 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.tables.p
     }
 
     /**
-     * Fetch records that have <code>TYPE IN (values)</code>
-     */
-    public List<cn.vertxup.jet.tables.pojos.IService> fetchByType(String... values) {
-        return fetch(IService.I_SERVICE.TYPE, values);
-    }
-
-    /**
      * Fetch records that have <code>IS_WORKFLOW IN (values)</code>
      */
     public List<cn.vertxup.jet.tables.pojos.IService> fetchByIsWorkflow(Boolean... values) {
@@ -126,10 +119,52 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.tables.p
     }
 
     /**
-     * Fetch records that have <code>SERVICE_CHANNEL IN (values)</code>
+     * Fetch records that have <code>CHANNEL_TYPE IN (values)</code>
      */
-    public List<cn.vertxup.jet.tables.pojos.IService> fetchByServiceChannel(String... values) {
-        return fetch(IService.I_SERVICE.SERVICE_CHANNEL, values);
+    public List<cn.vertxup.jet.tables.pojos.IService> fetchByChannelType(String... values) {
+        return fetch(IService.I_SERVICE.CHANNEL_TYPE, values);
+    }
+
+    /**
+     * Fetch records that have <code>CHANNEL_COMPONENT IN (values)</code>
+     */
+    public List<cn.vertxup.jet.tables.pojos.IService> fetchByChannelComponent(String... values) {
+        return fetch(IService.I_SERVICE.CHANNEL_COMPONENT, values);
+    }
+
+    /**
+     * Fetch records that have <code>CONFIG_CHANNEL IN (values)</code>
+     */
+    public List<cn.vertxup.jet.tables.pojos.IService> fetchByConfigChannel(String... values) {
+        return fetch(IService.I_SERVICE.CONFIG_CHANNEL, values);
+    }
+
+    /**
+     * Fetch records that have <code>CONFIG_INTEGRATION IN (values)</code>
+     */
+    public List<cn.vertxup.jet.tables.pojos.IService> fetchByConfigIntegration(String... values) {
+        return fetch(IService.I_SERVICE.CONFIG_INTEGRATION, values);
+    }
+
+    /**
+     * Fetch records that have <code>CONFIG_DATABASE IN (values)</code>
+     */
+    public List<cn.vertxup.jet.tables.pojos.IService> fetchByConfigDatabase(String... values) {
+        return fetch(IService.I_SERVICE.CONFIG_DATABASE, values);
+    }
+
+    /**
+     * Fetch records that have <code>CONFIG_SERVICE IN (values)</code>
+     */
+    public List<cn.vertxup.jet.tables.pojos.IService> fetchByConfigService(String... values) {
+        return fetch(IService.I_SERVICE.CONFIG_SERVICE, values);
+    }
+
+    /**
+     * Fetch records that have <code>SERVICE_RECORD IN (values)</code>
+     */
+    public List<cn.vertxup.jet.tables.pojos.IService> fetchByServiceRecord(String... values) {
+        return fetch(IService.I_SERVICE.SERVICE_RECORD, values);
     }
 
     /**
@@ -137,27 +172,6 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.tables.p
      */
     public List<cn.vertxup.jet.tables.pojos.IService> fetchByServiceComponent(String... values) {
         return fetch(IService.I_SERVICE.SERVICE_COMPONENT, values);
-    }
-
-    /**
-     * Fetch records that have <code>SERVICE_CONFIG IN (values)</code>
-     */
-    public List<cn.vertxup.jet.tables.pojos.IService> fetchByServiceConfig(String... values) {
-        return fetch(IService.I_SERVICE.SERVICE_CONFIG, values);
-    }
-
-    /**
-     * Fetch records that have <code>SERVICE_SPEC IN (values)</code>
-     */
-    public List<cn.vertxup.jet.tables.pojos.IService> fetchByServiceSpec(String... values) {
-        return fetch(IService.I_SERVICE.SERVICE_SPEC, values);
-    }
-
-    /**
-     * Fetch records that have <code>SERVICE_RESPONSER IN (values)</code>
-     */
-    public List<cn.vertxup.jet.tables.pojos.IService> fetchByServiceResponser(String... values) {
-        return fetch(IService.I_SERVICE.SERVICE_RESPONSER, values);
     }
 
     /**
@@ -259,13 +273,6 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.tables.p
     }
 
     /**
-     * Fetch records that have <code>TYPE IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IService>> fetchByTypeAsync(List<String> values) {
-        return fetchAsync(IService.I_SERVICE.TYPE,values);
-    }
-
-    /**
      * Fetch records that have <code>IS_WORKFLOW IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IService>> fetchByIsWorkflowAsync(List<Boolean> values) {
@@ -294,10 +301,52 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.tables.p
     }
 
     /**
-     * Fetch records that have <code>SERVICE_CHANNEL IN (values)</code> asynchronously
+     * Fetch records that have <code>CHANNEL_TYPE IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IService>> fetchByServiceChannelAsync(List<String> values) {
-        return fetchAsync(IService.I_SERVICE.SERVICE_CHANNEL,values);
+    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IService>> fetchByChannelTypeAsync(List<String> values) {
+        return fetchAsync(IService.I_SERVICE.CHANNEL_TYPE,values);
+    }
+
+    /**
+     * Fetch records that have <code>CHANNEL_COMPONENT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IService>> fetchByChannelComponentAsync(List<String> values) {
+        return fetchAsync(IService.I_SERVICE.CHANNEL_COMPONENT,values);
+    }
+
+    /**
+     * Fetch records that have <code>CONFIG_CHANNEL IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IService>> fetchByConfigChannelAsync(List<String> values) {
+        return fetchAsync(IService.I_SERVICE.CONFIG_CHANNEL,values);
+    }
+
+    /**
+     * Fetch records that have <code>CONFIG_INTEGRATION IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IService>> fetchByConfigIntegrationAsync(List<String> values) {
+        return fetchAsync(IService.I_SERVICE.CONFIG_INTEGRATION,values);
+    }
+
+    /**
+     * Fetch records that have <code>CONFIG_DATABASE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IService>> fetchByConfigDatabaseAsync(List<String> values) {
+        return fetchAsync(IService.I_SERVICE.CONFIG_DATABASE,values);
+    }
+
+    /**
+     * Fetch records that have <code>CONFIG_SERVICE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IService>> fetchByConfigServiceAsync(List<String> values) {
+        return fetchAsync(IService.I_SERVICE.CONFIG_SERVICE,values);
+    }
+
+    /**
+     * Fetch records that have <code>SERVICE_RECORD IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IService>> fetchByServiceRecordAsync(List<String> values) {
+        return fetchAsync(IService.I_SERVICE.SERVICE_RECORD,values);
     }
 
     /**
@@ -305,27 +354,6 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.tables.p
      */
     public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IService>> fetchByServiceComponentAsync(List<String> values) {
         return fetchAsync(IService.I_SERVICE.SERVICE_COMPONENT,values);
-    }
-
-    /**
-     * Fetch records that have <code>SERVICE_CONFIG IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IService>> fetchByServiceConfigAsync(List<String> values) {
-        return fetchAsync(IService.I_SERVICE.SERVICE_CONFIG,values);
-    }
-
-    /**
-     * Fetch records that have <code>SERVICE_SPEC IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IService>> fetchByServiceSpecAsync(List<String> values) {
-        return fetchAsync(IService.I_SERVICE.SERVICE_SPEC,values);
-    }
-
-    /**
-     * Fetch records that have <code>SERVICE_RESPONSER IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IService>> fetchByServiceResponserAsync(List<String> values) {
-        return fetchAsync(IService.I_SERVICE.SERVICE_RESPONSER,values);
     }
 
     /**

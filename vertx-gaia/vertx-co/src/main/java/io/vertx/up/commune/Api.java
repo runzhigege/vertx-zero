@@ -7,7 +7,7 @@ import io.vertx.up.eon.em.ChannelType;
  * API definition here, there are some complex definitions
  * 1）Critical attributes: method, uri
  */
-public interface ZApi extends ZJson, ZChannel, ZComponent {
+public interface Api extends Json, Channel, Component {
     /*
      * Http Method
      *
@@ -25,7 +25,7 @@ public interface ZApi extends ZJson, ZChannel, ZComponent {
 /*
  * Channel Definition
  */
-interface ZChannel {
+interface Channel {
     /*
      * Get channel type of definition ( 1 of 4 )
      * The channel class is fixed in current version, mapped to channel type.
@@ -38,7 +38,7 @@ interface ZChannel {
     Class<?> channelComponent();
 }
 
-interface ZComponent {
+interface Component {
     /*
      * Get business component class, it will be initialized by other positions
      */

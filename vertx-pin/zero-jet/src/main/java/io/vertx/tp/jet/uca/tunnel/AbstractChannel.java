@@ -7,7 +7,7 @@ import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.commune.ActRequest;
 import io.vertx.up.commune.ActResponse;
-import io.vertx.up.commune.ZApi;
+import io.vertx.up.commune.Api;
 import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
@@ -18,10 +18,10 @@ import io.zero.epic.fn.Fn;
 public abstract class AbstractChannel implements JtChannel {
 
     private final transient JtMonitor monitor = JtMonitor.create(this.getClass());
-    private transient ZApi apiRef;
+    private transient Api apiRef;
 
     @Override
-    public JtChannel bind(final ZApi apiRef) {
+    public JtChannel bind(final Api apiRef) {
         this.apiRef = apiRef;
         return this;
     }
@@ -29,9 +29,10 @@ public abstract class AbstractChannel implements JtChannel {
     @Override
     public Future<Envelop> transferAsync(final Envelop envelop) {
         /*
-         * Build ActRequest
+         * First step for channel
+         * Initialize the `ActRequest` object and reference
          */
-        final ActRequest request = new ActRequest(envelop).input(this.getRecord(this.apiRef));
+        final ActRequest request = new ActRequest(envelop);
         /*
          * Build component
          */
@@ -40,7 +41,7 @@ public abstract class AbstractChannel implements JtChannel {
         /*
          * Init JtComponent
          */
-        final JtComponent component = ((JtComponent) Ut.singleton(componentClass)).bind(this.apiRef);
+        final JtComponent component = Ut.singleton(componentClass);
         return Fn.getJvm(() -> component.transferAsync(request)
                 .compose(ActResponse::async), component);
     }
