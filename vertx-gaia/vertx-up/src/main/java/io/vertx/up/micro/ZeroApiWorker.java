@@ -1,8 +1,8 @@
 package io.vertx.up.micro;
 
-import io.netty.util.internal.ConcurrentSet;
 import io.reactivex.Observable;
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.impl.ConcurrentHashSet;
 import io.vertx.core.json.JsonObject;
 import io.vertx.servicediscovery.Record;
 import io.vertx.servicediscovery.ServiceDiscovery;
@@ -38,7 +38,7 @@ public class ZeroApiWorker extends AbstractVerticle {
             = new ConcurrentHashMap<>();
     private static final ConcurrentMap<String, String> ID_MAP
             = new ConcurrentHashMap<>();
-    private static final ConcurrentSet<String> REGISTRY = new ConcurrentSet<>();
+    private static final ConcurrentHashSet<String> REGISTRY = new ConcurrentHashSet<>();
 
     private static final AtomicBoolean initialized =
             new AtomicBoolean(false);

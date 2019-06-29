@@ -2,7 +2,7 @@ package io.vertx.tp.optic.jet;
 
 import io.vertx.core.Future;
 import io.vertx.up.atom.Envelop;
-import io.vertx.up.commune.ZApi;
+import io.vertx.up.commune.Api;
 
 /*
  * Consumer interface
@@ -18,5 +18,5 @@ public interface JtConsumer {
     /*
      * Consumer will consume the data from address
      */
-    Future<Envelop> async(Envelop envelop, ZApi uri);
+    Future<Envelop> async(Envelop envelop, Api uri);
 }

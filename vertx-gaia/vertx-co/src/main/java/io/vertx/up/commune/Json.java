@@ -9,7 +9,7 @@ import io.zero.epic.Ut;
  * 2) Json File to T
  * 3) T to Json
  */
-public interface ZJson {
+public interface Json {
     /**
      * T to Json
      *

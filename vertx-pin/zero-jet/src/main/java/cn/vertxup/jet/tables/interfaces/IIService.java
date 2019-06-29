@@ -64,16 +64,6 @@ public interface IIService extends Serializable {
     public String getComment();
 
     /**
-     * Setter for <code>DB_ETERNAL.I_SERVICE.TYPE</code>. 「type」- 服务类型：ADAPTOR / CONNECTOR / ACTOR / DIRECTOR
-     */
-    public IIService setType(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.I_SERVICE.TYPE</code>. 「type」- 服务类型：ADAPTOR / CONNECTOR / ACTOR / DIRECTOR
-     */
-    public String getType();
-
-    /**
      * Setter for <code>DB_ETERNAL.I_SERVICE.IS_WORKFLOW</code>. 「isWorkflow」- 是否驱动工作流引擎
      */
     public IIService setIsWorkflow(Boolean value);
@@ -114,14 +104,74 @@ public interface IIService extends Serializable {
     public String getOutScript();
 
     /**
-     * Setter for <code>DB_ETERNAL.I_SERVICE.SERVICE_CHANNEL</code>. 「serviceChannel」- 服务通道定义
+     * Setter for <code>DB_ETERNAL.I_SERVICE.CHANNEL_TYPE</code>. 「channelType」- 通道类型：ADAPTOR / CONNECTOR / ACTOR / DIRECTOR / DEFINE
      */
-    public IIService setServiceChannel(String value);
+    public IIService setChannelType(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.I_SERVICE.SERVICE_CHANNEL</code>. 「serviceChannel」- 服务通道定义
+     * Getter for <code>DB_ETERNAL.I_SERVICE.CHANNEL_TYPE</code>. 「channelType」- 通道类型：ADAPTOR / CONNECTOR / ACTOR / DIRECTOR / DEFINE
      */
-    public String getServiceChannel();
+    public String getChannelType();
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.CHANNEL_COMPONENT</code>. 「channelComponent」- 自定义通道专用组件
+     */
+    public IIService setChannelComponent(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.CHANNEL_COMPONENT</code>. 「channelComponent」- 自定义通道专用组件
+     */
+    public String getChannelComponent();
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.CONFIG_CHANNEL</code>. 「configChannel」- 通道（自定义）配置信息，Channel专用
+     */
+    public IIService setConfigChannel(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.CONFIG_CHANNEL</code>. 「configChannel」- 通道（自定义）配置信息，Channel专用
+     */
+    public String getConfigChannel();
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.CONFIG_INTEGRATION</code>. 「configIntegration」- 集成配置信息，第三方专用
+     */
+    public IIService setConfigIntegration(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.CONFIG_INTEGRATION</code>. 「configIntegration」- 集成配置信息，第三方专用
+     */
+    public String getConfigIntegration();
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.CONFIG_DATABASE</code>. 「configDatabase」- 数据库配置，当前通道访问的Database
+     */
+    public IIService setConfigDatabase(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.CONFIG_DATABASE</code>. 「configDatabase」- 数据库配置，当前通道访问的Database
+     */
+    public String getConfigDatabase();
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.CONFIG_SERVICE</code>. 「configService」- 业务组件配置，业务组件专用
+     */
+    public IIService setConfigService(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.CONFIG_SERVICE</code>. 「configService」- 业务组件配置，业务组件专用
+     */
+    public String getConfigService();
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.SERVICE_RECORD</code>. 「serviceRecord」- 服务记录定义
+     */
+    public IIService setServiceRecord(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.SERVICE_RECORD</code>. 「serviceRecord」- 服务记录定义
+     */
+    public String getServiceRecord();
 
     /**
      * Setter for <code>DB_ETERNAL.I_SERVICE.SERVICE_COMPONENT</code>. 「serviceComponent」- 服务组件定义
@@ -132,36 +182,6 @@ public interface IIService extends Serializable {
      * Getter for <code>DB_ETERNAL.I_SERVICE.SERVICE_COMPONENT</code>. 「serviceComponent」- 服务组件定义
      */
     public String getServiceComponent();
-
-    /**
-     * Setter for <code>DB_ETERNAL.I_SERVICE.SERVICE_CONFIG</code>. 「serviceConfig」- 服务配置描述
-     */
-    public IIService setServiceConfig(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.I_SERVICE.SERVICE_CONFIG</code>. 「serviceConfig」- 服务配置描述
-     */
-    public String getServiceConfig();
-
-    /**
-     * Setter for <code>DB_ETERNAL.I_SERVICE.SERVICE_SPEC</code>. 「serviceSpec」- 服务规范描述
-     */
-    public IIService setServiceSpec(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.I_SERVICE.SERVICE_SPEC</code>. 「serviceSpec」- 服务规范描述
-     */
-    public String getServiceSpec();
-
-    /**
-     * Setter for <code>DB_ETERNAL.I_SERVICE.SERVICE_RESPONSER</code>. 「serviceResponser」- 服务响应器
-     */
-    public IIService setServiceResponser(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.I_SERVICE.SERVICE_RESPONSER</code>. 「serviceResponser」- 服务响应器
-     */
-    public String getServiceResponser();
 
     /**
      * Setter for <code>DB_ETERNAL.I_SERVICE.IDENTIFIER</code>. 「identifier」- 当前类型描述的Model的标识
@@ -272,16 +292,18 @@ public interface IIService extends Serializable {
         setNamespace(json.getString("NAMESPACE"));
         setName(json.getString("NAME"));
         setComment(json.getString("COMMENT"));
-        setType(json.getString("TYPE"));
         setIsWorkflow(json.getBoolean("IS_WORKFLOW"));
         setIsGraphic(json.getBoolean("IS_GRAPHIC"));
         setInScript(json.getString("IN_SCRIPT"));
         setOutScript(json.getString("OUT_SCRIPT"));
-        setServiceChannel(json.getString("SERVICE_CHANNEL"));
+        setChannelType(json.getString("CHANNEL_TYPE"));
+        setChannelComponent(json.getString("CHANNEL_COMPONENT"));
+        setConfigChannel(json.getString("CONFIG_CHANNEL"));
+        setConfigIntegration(json.getString("CONFIG_INTEGRATION"));
+        setConfigDatabase(json.getString("CONFIG_DATABASE"));
+        setConfigService(json.getString("CONFIG_SERVICE"));
+        setServiceRecord(json.getString("SERVICE_RECORD"));
         setServiceComponent(json.getString("SERVICE_COMPONENT"));
-        setServiceConfig(json.getString("SERVICE_CONFIG"));
-        setServiceSpec(json.getString("SERVICE_SPEC"));
-        setServiceResponser(json.getString("SERVICE_RESPONSER"));
         setIdentifier(json.getString("IDENTIFIER"));
         setSigma(json.getString("SIGMA"));
         setLanguage(json.getString("LANGUAGE"));
@@ -301,16 +323,18 @@ public interface IIService extends Serializable {
         json.put("NAMESPACE",getNamespace());
         json.put("NAME",getName());
         json.put("COMMENT",getComment());
-        json.put("TYPE",getType());
         json.put("IS_WORKFLOW",getIsWorkflow());
         json.put("IS_GRAPHIC",getIsGraphic());
         json.put("IN_SCRIPT",getInScript());
         json.put("OUT_SCRIPT",getOutScript());
-        json.put("SERVICE_CHANNEL",getServiceChannel());
+        json.put("CHANNEL_TYPE",getChannelType());
+        json.put("CHANNEL_COMPONENT",getChannelComponent());
+        json.put("CONFIG_CHANNEL",getConfigChannel());
+        json.put("CONFIG_INTEGRATION",getConfigIntegration());
+        json.put("CONFIG_DATABASE",getConfigDatabase());
+        json.put("CONFIG_SERVICE",getConfigService());
+        json.put("SERVICE_RECORD",getServiceRecord());
         json.put("SERVICE_COMPONENT",getServiceComponent());
-        json.put("SERVICE_CONFIG",getServiceConfig());
-        json.put("SERVICE_SPEC",getServiceSpec());
-        json.put("SERVICE_RESPONSER",getServiceResponser());
         json.put("IDENTIFIER",getIdentifier());
         json.put("SIGMA",getSigma());
         json.put("LANGUAGE",getLanguage());

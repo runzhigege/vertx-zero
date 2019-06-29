@@ -19,5 +19,15 @@
  *     whole request.
  *     !!!: Another thing is that if you defined consumer, you must import `zero-jet` project because the class
  *     appear in interface className = `io.vertx.tp.jet.atom.JtUri`.
+ *
+ * Extension 4:
+ * 4. 「Channel」
+ *     The channel could be defined by user with `serviceChannel` field of I_SERVICE instead of four default category
+ *     ADAPTOR, DIRECTOR, ACTOR, CONNECTOR
+ *
+ * Extension 5:
+ * 5. 「Component」
+ *     The component could be defined by user with `serviceComponent` field of I_SERVICE instead of others, there are
+ *     no definition of Component
  */
 package io.vertx.tp.optic.jet;

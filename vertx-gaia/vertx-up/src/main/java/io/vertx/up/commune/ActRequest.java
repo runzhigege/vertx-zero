@@ -28,7 +28,7 @@ public class ActRequest implements Serializable {
     /* Inner reference of Act Request */
     private final transient Envelop envelop;
     private final transient JsonObject data;
-    private transient ZRecord record;
+    private transient Record record;
 
     public ActRequest(final Envelop envelop) {
         /* Envelop reference here */
@@ -46,7 +46,7 @@ public class ActRequest implements Serializable {
     /*
      * User input record data structure
      */
-    public ActRequest input(final ZRecord record) {
+    public ActRequest input(final Record record) {
         /*
          * First the reference of current record should be set here.
          */
@@ -61,7 +61,7 @@ public class ActRequest implements Serializable {
         return this;
     }
 
-    public ZRecord getRecord() {
+    public Record getRecord() {
         return this.record;
     }
 }
