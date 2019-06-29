@@ -4,10 +4,8 @@ import cn.vertxup.jet.tables.pojos.IApi;
 import cn.vertxup.jet.tables.pojos.IService;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.jet.cv.JtConstant;
 import io.vertx.tp.jet.cv.JtKey;
 import io.vertx.tp.jet.cv.em.ParamMode;
-import io.vertx.tp.jet.cv.em.WorkerType;
 import io.vertx.tp.jet.refine.Jt;
 import io.vertx.tp.optic.environment.Ambient;
 import io.vertx.up.commune.Api;
@@ -16,7 +14,6 @@ import io.vertx.up.eon.em.ChannelType;
 import io.vertx.zero.atom.Database;
 import io.vertx.zero.atom.Integration;
 import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
 
 import javax.ws.rs.core.MediaType;
 import java.util.Objects;
@@ -51,7 +48,7 @@ public class JtUri implements Api {
         this.key = api.getKey();
 
         /* Default Component Value */
-        this.initialize(api);
+        Jt.initApi(api);
         /*
          * JtWorker instance here for future use
          */
@@ -184,23 +181,9 @@ public class JtUri implements Api {
         return this.app.getAppId();
     }
 
-    private void initialize(final IApi api) {
-        /*
-         * Set default value in I_API related to worker
-         * workerType
-         * workerAddress
-         * workerConsumer
-         * workerClass
-         * workerJs
-         */
-        Fn.safeSemi(Ut.isNil(api.getWorkerClass()),
-                () -> api.setWorkerClass(JtConstant.COMPONENT_DEFAULT_WORKER.getName()));
-        Fn.safeSemi(Ut.isNil(api.getWorkerAddress()),
-                () -> api.setWorkerAddress(JtConstant.EVENT_ADDRESS));
-        Fn.safeSemi(Ut.isNil(api.getWorkerConsumer()),
-                () -> api.setWorkerConsumer(JtConstant.COMPONENT_DEFAULT_CONSUMER.getName()));
-        Fn.safeSemi(Ut.isNil(api.getWorkerType()),
-                () -> api.setWorkerType(WorkerType.STD.name()));
+    @Override
+    public JsonObject options() {
+        return Jt.toOptions(this.app, this.api, this.service);
     }
 
     /*

@@ -1,7 +1,9 @@
 package io.vertx.tp.jet.refine;
 
 import cn.vertxup.jet.tables.pojos.IApi;
+import cn.vertxup.jet.tables.pojos.IService;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.atom.JtConfig;
 import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.atom.JtWorker;
@@ -12,7 +14,6 @@ import io.vertx.zero.atom.Integration;
 import io.vertx.zero.eon.Strings;
 
 import javax.ws.rs.core.MediaType;
-import java.lang.reflect.Field;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
@@ -77,8 +78,12 @@ public class Jt {
         return JtType.toChannel(supplier, type);
     }
 
-    public static <T> Field toContract(final Class<?> executor, final T instance, final Class<?> fieldType) {
-        return JtType.toContract(executor, instance, fieldType);
+    public static void initApi(final IApi api) {
+        JtDataObject.initApi(api);
+    }
+
+    public static JsonObject toOptions(final JtApp app, final IApi api, final IService service) {
+        return JtDataObject.toOptions(app, api, service);
     }
 
     /*

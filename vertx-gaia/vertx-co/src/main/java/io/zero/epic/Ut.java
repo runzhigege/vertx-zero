@@ -110,17 +110,22 @@ public class Ut {
         return InstanceField.getI(interfaceCls, name);
     }
 
-    /*
-     * These two are special ( By Type )
-     */
-    public static Field[] fieldAll(final Object instance, final Class<?> fieldType) {
-        return InstanceField.fieldAll(instance, fieldType);
-    }
-
     public static Field[] fields(final Class<?> clazz) {
         return InstanceField.fields(clazz);
     }
 
+    public static <T> Field contract(final T instance, final Class<?> fieldType) {
+        return InstanceField.contract(InstanceField.class, instance, fieldType);
+    }
+
+    public static <T, V> void contract(final T instance, final Class<?> fieldType, final V value) {
+        InstanceField.contract(InstanceField.class, instance, fieldType, value);
+    }
+
+    public static <T, V> Future<Boolean> contractAsync(final T instance, final Class<?> fieldType, final V value) {
+        contract(instance, fieldType, value);
+        return Future.succeededFuture(Boolean.TRUE);
+    }
 
     // --- IO
     public static <T> T ioYaml(final String filename) {
