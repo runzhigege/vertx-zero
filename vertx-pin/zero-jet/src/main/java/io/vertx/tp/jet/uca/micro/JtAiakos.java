@@ -2,11 +2,14 @@ package io.vertx.tp.jet.uca.micro;
 
 import io.vertx.core.Future;
 import io.vertx.tp.jet.monitor.JtMonitor;
+import io.vertx.tp.jet.refine.Jt;
 import io.vertx.tp.optic.jet.JtChannel;
 import io.vertx.tp.optic.jet.JtConsumer;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.commune.Api;
 import io.zero.epic.Ut;
+
+import java.lang.reflect.Field;
 
 /*
  * 「Consumer」
@@ -20,13 +23,14 @@ public class JtAiakos implements JtConsumer {
     public Future<Envelop> async(final Envelop envelop, final Api uri) {
         /* Channel class for current consumer thread */
         final Class<?> channelClass = uri.channelComponent();
-        this.monitor.channelHit(channelClass);
 
         /* Initialization for channel */
         final JtChannel channel = Ut.instance(channelClass);
 
-        /* Bind reference to ZApi */
-        channel.bind(uri);
+        /* Find the target Field */
+        final Field field = Jt.toContract(this.getClass(), channel, Api.class);
+        Ut.field(channel, field, uri);
+        this.monitor.channelHit(channelClass);
 
         /* Transfer the `Envelop` request data into channel and let channel do next works */
         return channel.transferAsync(envelop);
