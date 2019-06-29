@@ -1,9 +1,9 @@
 package io.vertx.tp.jet.uca.tunnel;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error._501ChannelErrorException;
 import io.vertx.tp.jet.monitor.JtMonitor;
-import io.vertx.tp.jet.refine.Jt;
 import io.vertx.tp.optic.jet.JtChannel;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.annotations.Contract;
@@ -13,11 +13,8 @@ import io.vertx.up.commune.ActResponse;
 import io.vertx.up.commune.Api;
 import io.vertx.up.commune.Record;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.atom.Database;
-import io.vertx.zero.atom.Integration;
 import io.zero.epic.Ut;
 
-import java.lang.reflect.Field;
 import java.util.Objects;
 
 /*
@@ -68,6 +65,10 @@ public abstract class AbstractChannel implements JtChannel {
                  */
                 return this.initAsync(component, request)
                         /*
+                         * options injection
+                         */
+                        .compose(child -> Ut.contractAsync(component, JsonObject.class, this.apiRef.options()))
+                        /*
                          * Children initialized
                          */
                         .compose(initialized -> component.transferAsync(request))
@@ -95,17 +96,5 @@ public abstract class AbstractChannel implements JtChannel {
 
     protected Api getApi() {
         return this.apiRef;
-    }
-
-    Future<Boolean> onDatabase(final JtComponent component, final Database database) {
-        final Field field = Jt.toContract(this.getClass(), component, Database.class);
-        Ut.field(component, field, database);
-        return Future.succeededFuture(Boolean.TRUE);
-    }
-
-    Future<Boolean> onIntegration(final JtComponent component, final Integration integration) {
-        final Field field = Jt.toContract(this.getClass(), component, Integration.class);
-        Ut.field(component, field, integration);
-        return Future.succeededFuture(Boolean.TRUE);
     }
 }

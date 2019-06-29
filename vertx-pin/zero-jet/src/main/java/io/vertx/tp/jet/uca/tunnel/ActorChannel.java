@@ -4,6 +4,8 @@ import io.vertx.core.Future;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.commune.ActRequest;
+import io.vertx.zero.atom.Database;
+import io.zero.epic.Ut;
 
 public class ActorChannel extends AbstractChannel {
     /*
@@ -21,6 +23,6 @@ public class ActorChannel extends AbstractChannel {
                 /*
                  * Mount database to `JtComponent`
                  */
-                .compose(database -> this.onDatabase(component, database));
+                .compose(database -> Ut.contractAsync(component, Database.class, database));
     }
 }
