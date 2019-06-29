@@ -158,6 +158,10 @@ public class ActRequest implements Serializable {
         return this.query;
     }
 
+    public Record getRecord() {
+        return this.record;
+    }
+
     /*
      * Set input data to Record object ( reference here )
      */
