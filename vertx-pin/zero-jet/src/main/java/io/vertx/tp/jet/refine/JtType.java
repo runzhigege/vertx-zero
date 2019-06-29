@@ -9,15 +9,10 @@ import io.vertx.tp.jet.cv.JtConstant;
 import io.vertx.tp.jet.cv.em.WorkerType;
 import io.vertx.tp.jet.uca.tunnel.AdaptorChannel;
 import io.vertx.tp.optic.jet.JtConsumer;
-import io.vertx.up.annotations.Contract;
 import io.vertx.up.eon.em.ChannelType;
-import io.vertx.up.exception._412ContractFieldException;
-import io.vertx.zero.eon.Values;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.function.Supplier;
 
 class JtType {
@@ -76,23 +71,5 @@ class JtType {
             clazz = Pool.CHANNELS.getOrDefault(type, AdaptorChannel.class);
         }
         return clazz;
-    }
-
-    static <T> Field toContract(final Class<?> executor, final T instance, final Class<?> fieldType) {
-        /*
-         * Reflect to set Api reference in target channel here
-         * 1) The fields length must be 1
-         * 2) The fields length must not be 0
-         *  */
-        final Field[] fields = Ut.fieldAll(instance, fieldType);
-        /*
-         * Counter
-         */
-        final Field[] filtered = Arrays.stream(fields)
-                .filter(field -> field.isAnnotationPresent(Contract.class))
-                .toArray(Field[]::new);
-        Fn.out(1 != filtered.length, _412ContractFieldException.class,
-                executor, fieldType, instance.getClass(), filtered.length);
-        return filtered[Values.IDX];
     }
 }

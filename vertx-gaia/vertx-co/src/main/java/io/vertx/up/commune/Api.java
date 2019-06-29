@@ -1,6 +1,7 @@
 package io.vertx.up.commune;
 
 import io.vertx.core.http.HttpMethod;
+import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.em.ChannelType;
 import io.vertx.zero.atom.Database;
 import io.vertx.zero.atom.Integration;
@@ -64,4 +65,9 @@ interface Commercial {
      * Get integration reference
      */
     Integration integration();
+
+    /*
+     * Get business component config
+     */
+    JsonObject options();
 }

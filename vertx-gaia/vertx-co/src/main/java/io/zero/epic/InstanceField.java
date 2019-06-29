@@ -1,6 +1,9 @@
 package io.zero.epic;
 
+import io.vertx.up.annotations.Contract;
+import io.vertx.up.exception._412ContractFieldException;
 import io.vertx.up.log.Annal;
+import io.vertx.zero.eon.Values;
 import io.zero.epic.fn.Fn;
 
 import java.lang.reflect.Field;
@@ -119,5 +122,28 @@ class InstanceField {
                             fieldType == field.getType().getSuperclass() ||  // Super
                             Instance.isMatch(field.getType(), fieldType));
         });
+    }
+
+    static <T> Field contract(final Class<?> executor, final T instance, final Class<?> fieldType) {
+        /*
+         * Reflect to set Api reference in target channel here
+         * 1) The fields length must be 1
+         * 2) The fields length must not be 0
+         *  */
+        final Field[] fields = fieldAll(instance, fieldType);
+        /*
+         * Counter
+         */
+        final Field[] filtered = Arrays.stream(fields)
+                .filter(field -> field.isAnnotationPresent(Contract.class))
+                .toArray(Field[]::new);
+        Fn.out(1 != filtered.length, _412ContractFieldException.class,
+                executor, fieldType, instance.getClass(), filtered.length);
+        return filtered[Values.IDX];
+    }
+
+    static <T, V> void contract(final Class<?> executor, final T instance, final Class<?> fieldType, final V value) {
+        final Field field = contract(executor, instance, fieldType);
+        Ut.field(instance, field, value);
     }
 }
