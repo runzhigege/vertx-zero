@@ -7,9 +7,12 @@ import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.atom.JtWorker;
 import io.vertx.up.eon.em.ChannelType;
 import io.vertx.up.log.Annal;
+import io.vertx.zero.atom.Database;
+import io.vertx.zero.atom.Integration;
 import io.vertx.zero.eon.Strings;
 
 import javax.ws.rs.core.MediaType;
+import java.lang.reflect.Field;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
@@ -51,6 +54,14 @@ public class Jt {
                 .collect(Collectors.toSet());
     }
 
+    public static Database toDatabase(final Supplier<String> supplier, final Database defaultDatabase) {
+        return JtDataObject.toDatabase(supplier, defaultDatabase);
+    }
+
+    public static Integration toIntegration(final Supplier<String> supplier) {
+        return JtDataObject.toIntegration(supplier);
+    }
+
     public static Set<String> toSet(final Supplier<String> supplier) {
         return JtRoute.toSet(supplier);
     }
@@ -64,6 +75,10 @@ public class Jt {
 
     public static Class<?> toChannel(final Supplier<String> supplier, final ChannelType type) {
         return JtType.toChannel(supplier, type);
+    }
+
+    public static <T> Field toContract(final Class<?> executor, final T instance, final Class<?> fieldType) {
+        return JtType.toContract(executor, instance, fieldType);
     }
 
     /*

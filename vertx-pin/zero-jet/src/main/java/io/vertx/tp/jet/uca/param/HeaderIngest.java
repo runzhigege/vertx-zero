@@ -8,6 +8,7 @@ import io.vertx.tp.optic.jet.JtIngest;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.eon.ID;
 
+@Deprecated
 class HeaderIngest implements JtIngest {
     @Override
     public Envelop in(final RoutingContext context, final JtUri uri) {

@@ -2,7 +2,6 @@ package io.vertx.tp.optic.jet;
 
 import io.vertx.core.Future;
 import io.vertx.up.atom.Envelop;
-import io.vertx.up.commune.Api;
 
 /*
  * The channel, it will be selected by ChannelSelector,
@@ -14,8 +13,8 @@ public interface JtChannel {
      * Bind current to `ZApi` object here, in this situation
      * Your defined channel could store `ZApi` in memory and then
      * All the configuration information came from `ZApi` instead of other place.
+     * JtChannel bind(Api api);
      */
-    JtChannel bind(Api api);
 
     /*
      * Async implementation

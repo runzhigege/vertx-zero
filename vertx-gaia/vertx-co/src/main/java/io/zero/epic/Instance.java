@@ -7,8 +7,14 @@ import io.vertx.zero.exception.DuplicatedImplException;
 import io.vertx.zero.mirror.Pack;
 import io.zero.epic.fn.Fn;
 
-import java.lang.reflect.*;
-import java.util.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @SuppressWarnings({"unchecked"})
@@ -112,74 +118,6 @@ final class Instance {
             final Method method) {
         final Class<?> interfaceCls = method.getDeclaringClass();
         return Fantam.getProxy(interfaceCls);
-    }
-
-    static <T> void set(final Object instance,
-                        final String name,
-                        final T value) {
-        Fn.safeNull(() -> Fn.safeJvm(() -> {
-            final Field field = instance.getClass().getDeclaredField(name);
-            if (!field.isAccessible()) {
-                field.setAccessible(true);
-            }
-            field.set(instance, value);
-        }, LOGGER), instance, name);
-    }
-
-    private static Field get(final Class<?> clazz,
-                             final String name) {
-        return Fn.getNull(() -> {
-            if (clazz == Object.class) {
-                return null;
-            }
-            final Field[] fields = clazz.getDeclaredFields();
-            final Optional<Field> field = Arrays.stream(fields)
-                    .filter(item -> name.equals(item.getName())).findFirst();
-            if (field.isPresent()) {
-                return field.get();
-            } else {
-                final Class<?> parentCls = clazz.getSuperclass();
-                return get(parentCls, name);
-            }
-        }, clazz, name);
-    }
-
-    static <T> T getI(final Class<?> interfaceCls, final String name) {
-        return Fn.getNull(() -> Fn.safeJvm(() -> {
-                    final Field field = interfaceCls.getField(name);
-                    final Object result = field.get(null);
-                    if (null != result) {
-                        return (T) result;
-                    } else {
-                        return null;
-                    }
-                }, LOGGER)
-                , interfaceCls, name);
-    }
-
-    static <T> T get(final Object instance,
-                     final String name) {
-        return Fn.getNull(() -> Fn.safeJvm(() -> {
-                    final Field field = get(instance.getClass(), name);
-                    if (!field.isAccessible()) {
-                        field.setAccessible(true);
-                    }
-                    final Object result = field.get(instance);
-                    if (null != result) {
-                        return (T) result;
-                    } else {
-                        return null;
-                    }
-                }, LOGGER)
-                , instance, name);
-    }
-
-    static Field[] get(final Class<?> clazz) {
-        final Field[] fields = clazz.getDeclaredFields();
-        return Arrays.stream(fields)
-                .filter(item -> !Modifier.isStatic(item.getModifiers()))
-                .filter(item -> !Modifier.isAbstract(item.getModifiers()))
-                .toArray(Field[]::new);
     }
 
     /**

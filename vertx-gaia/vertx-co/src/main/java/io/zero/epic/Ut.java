@@ -59,6 +59,7 @@ public class Ut {
         return Instance.singleton(clazz, params);
     }
 
+    // --- Reflection Method
     public static <T> T invoke(final Object instance, final String name, final Object... args) {
         return Instance.invoke(instance, name, args);
     }
@@ -83,23 +84,6 @@ public class Ut {
         return Instance.getProxy(method);
     }
 
-    public static <T> void field(final Object instance, final String name, final T value) {
-        Instance.set(instance, name, value);
-    }
-
-    public static <T> T field(final Object instance, final String name) {
-        return Instance.get(instance, name);
-    }
-
-    public static <T> T field(final Class<?> interfaceCls, final String name) {
-        return Instance.getI(interfaceCls, name);
-    }
-
-    public static Field[] fields(final Class<?> clazz) {
-        return Instance.get(clazz);
-    }
-
-
     public static boolean withNoArgConstructor(final Class<?> clazz) {
         return Instance.noarg(clazz);
     }
@@ -107,6 +91,36 @@ public class Ut {
     public static Class<?> childUnique(final Class<?> clazz) {
         return Instance.uniqueChild(clazz);
     }
+
+    // --- Reflection Field
+    public static <T> void field(final Object instance, final String name, final T value) {
+        InstanceField.set(instance, name, value);
+    }
+
+    public static <T> void field(final Object instance, final Field field, final T value) {
+        InstanceField.set(instance, field, value);
+    }
+
+    public static <T> T field(final Object instance, final String name) {
+        return InstanceField.get(instance, name);
+    }
+
+
+    public static <T> T field(final Class<?> interfaceCls, final String name) {
+        return InstanceField.getI(interfaceCls, name);
+    }
+
+    /*
+     * These two are special ( By Type )
+     */
+    public static Field[] fieldAll(final Object instance, final Class<?> fieldType) {
+        return InstanceField.fieldAll(instance, fieldType);
+    }
+
+    public static Field[] fields(final Class<?> clazz) {
+        return InstanceField.fields(clazz);
+    }
+
 
     // --- IO
     public static <T> T ioYaml(final String filename) {

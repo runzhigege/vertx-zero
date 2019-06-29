@@ -12,13 +12,13 @@ import javax.sql.DataSource;
  * 1) Basic JDBC configuration
  * 2) Additional configuration
  */
-public interface ZPool {
-    static ZPool create() {
+public interface DataPool {
+    static DataPool create() {
         return create(Database.getCurrent());
     }
 
-    static ZPool create(final Database database) {
-        return Fn.pool(Pool.POOL, database.getJdbcUrl(), () -> new HikariZPool(database));
+    static DataPool create(final Database database) {
+        return Fn.pool(Pool.POOL, database.getJdbcUrl(), () -> new HikariDataPool(database));
     }
 
     /*
