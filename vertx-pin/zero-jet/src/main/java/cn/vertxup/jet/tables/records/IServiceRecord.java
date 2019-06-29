@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implements IIService {
 
-    private static final long serialVersionUID = -1809918872;
+    private static final long serialVersionUID = -95740115;
 
     /**
      * Setter for <code>DB_ETERNAL.I_SERVICE.KEY</code>. 「key」- 服务ID
@@ -99,28 +99,11 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.I_SERVICE.TYPE</code>. 「type」- 服务类型：ADAPTOR / CONNECTOR / ACTOR / DIRECTOR
-     */
-    @Override
-    public IServiceRecord setType(String value) {
-        set(4, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.I_SERVICE.TYPE</code>. 「type」- 服务类型：ADAPTOR / CONNECTOR / ACTOR / DIRECTOR
-     */
-    @Override
-    public String getType() {
-        return (String) get(4);
-    }
-
-    /**
      * Setter for <code>DB_ETERNAL.I_SERVICE.IS_WORKFLOW</code>. 「isWorkflow」- 是否驱动工作流引擎
      */
     @Override
     public IServiceRecord setIsWorkflow(Boolean value) {
-        set(5, value);
+        set(4, value);
         return this;
     }
 
@@ -129,7 +112,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public Boolean getIsWorkflow() {
-        return (Boolean) get(5);
+        return (Boolean) get(4);
     }
 
     /**
@@ -137,7 +120,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setIsGraphic(Boolean value) {
-        set(6, value);
+        set(5, value);
         return this;
     }
 
@@ -146,7 +129,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public Boolean getIsGraphic() {
-        return (Boolean) get(6);
+        return (Boolean) get(5);
     }
 
     /**
@@ -154,7 +137,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setInScript(String value) {
-        set(7, value);
+        set(6, value);
         return this;
     }
 
@@ -163,7 +146,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getInScript() {
-        return (String) get(7);
+        return (String) get(6);
     }
 
     /**
@@ -171,7 +154,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setOutScript(String value) {
-        set(8, value);
+        set(7, value);
         return this;
     }
 
@@ -180,24 +163,126 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getOutScript() {
+        return (String) get(7);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.CHANNEL_TYPE</code>. 「channelType」- 通道类型：ADAPTOR / CONNECTOR / ACTOR / DIRECTOR / DEFINE
+     */
+    @Override
+    public IServiceRecord setChannelType(String value) {
+        set(8, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.CHANNEL_TYPE</code>. 「channelType」- 通道类型：ADAPTOR / CONNECTOR / ACTOR / DIRECTOR / DEFINE
+     */
+    @Override
+    public String getChannelType() {
         return (String) get(8);
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.I_SERVICE.SERVICE_CHANNEL</code>. 「serviceChannel」- 服务通道定义
+     * Setter for <code>DB_ETERNAL.I_SERVICE.CHANNEL_COMPONENT</code>. 「channelComponent」- 自定义通道专用组件
      */
     @Override
-    public IServiceRecord setServiceChannel(String value) {
+    public IServiceRecord setChannelComponent(String value) {
         set(9, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.I_SERVICE.SERVICE_CHANNEL</code>. 「serviceChannel」- 服务通道定义
+     * Getter for <code>DB_ETERNAL.I_SERVICE.CHANNEL_COMPONENT</code>. 「channelComponent」- 自定义通道专用组件
      */
     @Override
-    public String getServiceChannel() {
+    public String getChannelComponent() {
         return (String) get(9);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.CONFIG_CHANNEL</code>. 「configChannel」- 通道（自定义）配置信息，Channel专用
+     */
+    @Override
+    public IServiceRecord setConfigChannel(String value) {
+        set(10, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.CONFIG_CHANNEL</code>. 「configChannel」- 通道（自定义）配置信息，Channel专用
+     */
+    @Override
+    public String getConfigChannel() {
+        return (String) get(10);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.CONFIG_INTEGRATION</code>. 「configIntegration」- 集成配置信息，第三方专用
+     */
+    @Override
+    public IServiceRecord setConfigIntegration(String value) {
+        set(11, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.CONFIG_INTEGRATION</code>. 「configIntegration」- 集成配置信息，第三方专用
+     */
+    @Override
+    public String getConfigIntegration() {
+        return (String) get(11);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.CONFIG_DATABASE</code>. 「configDatabase」- 数据库配置，当前通道访问的Database
+     */
+    @Override
+    public IServiceRecord setConfigDatabase(String value) {
+        set(12, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.CONFIG_DATABASE</code>. 「configDatabase」- 数据库配置，当前通道访问的Database
+     */
+    @Override
+    public String getConfigDatabase() {
+        return (String) get(12);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.CONFIG_SERVICE</code>. 「configService」- 业务组件配置，业务组件专用
+     */
+    @Override
+    public IServiceRecord setConfigService(String value) {
+        set(13, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.CONFIG_SERVICE</code>. 「configService」- 业务组件配置，业务组件专用
+     */
+    @Override
+    public String getConfigService() {
+        return (String) get(13);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.SERVICE_RECORD</code>. 「serviceRecord」- 服务记录定义
+     */
+    @Override
+    public IServiceRecord setServiceRecord(String value) {
+        set(14, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.SERVICE_RECORD</code>. 「serviceRecord」- 服务记录定义
+     */
+    @Override
+    public String getServiceRecord() {
+        return (String) get(14);
     }
 
     /**
@@ -205,7 +290,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setServiceComponent(String value) {
-        set(10, value);
+        set(15, value);
         return this;
     }
 
@@ -214,58 +299,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getServiceComponent() {
-        return (String) get(10);
-    }
-
-    /**
-     * Setter for <code>DB_ETERNAL.I_SERVICE.SERVICE_CONFIG</code>. 「serviceConfig」- 服务配置描述
-     */
-    @Override
-    public IServiceRecord setServiceConfig(String value) {
-        set(11, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.I_SERVICE.SERVICE_CONFIG</code>. 「serviceConfig」- 服务配置描述
-     */
-    @Override
-    public String getServiceConfig() {
-        return (String) get(11);
-    }
-
-    /**
-     * Setter for <code>DB_ETERNAL.I_SERVICE.SERVICE_SPEC</code>. 「serviceSpec」- 服务规范描述
-     */
-    @Override
-    public IServiceRecord setServiceSpec(String value) {
-        set(12, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.I_SERVICE.SERVICE_SPEC</code>. 「serviceSpec」- 服务规范描述
-     */
-    @Override
-    public String getServiceSpec() {
-        return (String) get(12);
-    }
-
-    /**
-     * Setter for <code>DB_ETERNAL.I_SERVICE.SERVICE_RESPONSER</code>. 「serviceResponser」- 服务响应器
-     */
-    @Override
-    public IServiceRecord setServiceResponser(String value) {
-        set(13, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.I_SERVICE.SERVICE_RESPONSER</code>. 「serviceResponser」- 服务响应器
-     */
-    @Override
-    public String getServiceResponser() {
-        return (String) get(13);
+        return (String) get(15);
     }
 
     /**
@@ -273,7 +307,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setIdentifier(String value) {
-        set(14, value);
+        set(16, value);
         return this;
     }
 
@@ -282,7 +316,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getIdentifier() {
-        return (String) get(14);
+        return (String) get(16);
     }
 
     /**
@@ -290,7 +324,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setSigma(String value) {
-        set(15, value);
+        set(17, value);
         return this;
     }
 
@@ -299,7 +333,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getSigma() {
-        return (String) get(15);
+        return (String) get(17);
     }
 
     /**
@@ -307,7 +341,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setLanguage(String value) {
-        set(16, value);
+        set(18, value);
         return this;
     }
 
@@ -316,7 +350,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getLanguage() {
-        return (String) get(16);
+        return (String) get(18);
     }
 
     /**
@@ -324,7 +358,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setActive(Boolean value) {
-        set(17, value);
+        set(19, value);
         return this;
     }
 
@@ -333,7 +367,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public Boolean getActive() {
-        return (Boolean) get(17);
+        return (Boolean) get(19);
     }
 
     /**
@@ -341,7 +375,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setMetadata(String value) {
-        set(18, value);
+        set(20, value);
         return this;
     }
 
@@ -350,7 +384,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getMetadata() {
-        return (String) get(18);
+        return (String) get(20);
     }
 
     /**
@@ -358,7 +392,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setCreatedAt(LocalDateTime value) {
-        set(19, value);
+        set(21, value);
         return this;
     }
 
@@ -367,7 +401,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(19);
+        return (LocalDateTime) get(21);
     }
 
     /**
@@ -375,7 +409,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setCreatedBy(String value) {
-        set(20, value);
+        set(22, value);
         return this;
     }
 
@@ -384,7 +418,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getCreatedBy() {
-        return (String) get(20);
+        return (String) get(22);
     }
 
     /**
@@ -392,7 +426,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setUpdatedAt(LocalDateTime value) {
-        set(21, value);
+        set(23, value);
         return this;
     }
 
@@ -401,7 +435,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public LocalDateTime getUpdatedAt() {
-        return (LocalDateTime) get(21);
+        return (LocalDateTime) get(23);
     }
 
     /**
@@ -409,7 +443,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setUpdatedBy(String value) {
-        set(22, value);
+        set(24, value);
         return this;
     }
 
@@ -418,7 +452,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getUpdatedBy() {
-        return (String) get(22);
+        return (String) get(24);
     }
 
     // -------------------------------------------------------------------------
@@ -446,16 +480,18 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
         setNamespace(from.getNamespace());
         setName(from.getName());
         setComment(from.getComment());
-        setType(from.getType());
         setIsWorkflow(from.getIsWorkflow());
         setIsGraphic(from.getIsGraphic());
         setInScript(from.getInScript());
         setOutScript(from.getOutScript());
-        setServiceChannel(from.getServiceChannel());
+        setChannelType(from.getChannelType());
+        setChannelComponent(from.getChannelComponent());
+        setConfigChannel(from.getConfigChannel());
+        setConfigIntegration(from.getConfigIntegration());
+        setConfigDatabase(from.getConfigDatabase());
+        setConfigService(from.getConfigService());
+        setServiceRecord(from.getServiceRecord());
         setServiceComponent(from.getServiceComponent());
-        setServiceConfig(from.getServiceConfig());
-        setServiceSpec(from.getServiceSpec());
-        setServiceResponser(from.getServiceResponser());
         setIdentifier(from.getIdentifier());
         setSigma(from.getSigma());
         setLanguage(from.getLanguage());
@@ -490,31 +526,33 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
     /**
      * Create a detached, initialised IServiceRecord
      */
-    public IServiceRecord(String key, String namespace, String name, String comment, String type, Boolean isWorkflow, Boolean isGraphic, String inScript, String outScript, String serviceChannel, String serviceComponent, String serviceConfig, String serviceSpec, String serviceResponser, String identifier, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public IServiceRecord(String key, String namespace, String name, String comment, Boolean isWorkflow, Boolean isGraphic, String inScript, String outScript, String channelType, String channelComponent, String configChannel, String configIntegration, String configDatabase, String configService, String serviceRecord, String serviceComponent, String identifier, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(IService.I_SERVICE);
 
         set(0, key);
         set(1, namespace);
         set(2, name);
         set(3, comment);
-        set(4, type);
-        set(5, isWorkflow);
-        set(6, isGraphic);
-        set(7, inScript);
-        set(8, outScript);
-        set(9, serviceChannel);
-        set(10, serviceComponent);
-        set(11, serviceConfig);
-        set(12, serviceSpec);
-        set(13, serviceResponser);
-        set(14, identifier);
-        set(15, sigma);
-        set(16, language);
-        set(17, active);
-        set(18, metadata);
-        set(19, createdAt);
-        set(20, createdBy);
-        set(21, updatedAt);
-        set(22, updatedBy);
+        set(4, isWorkflow);
+        set(5, isGraphic);
+        set(6, inScript);
+        set(7, outScript);
+        set(8, channelType);
+        set(9, channelComponent);
+        set(10, configChannel);
+        set(11, configIntegration);
+        set(12, configDatabase);
+        set(13, configService);
+        set(14, serviceRecord);
+        set(15, serviceComponent);
+        set(16, identifier);
+        set(17, sigma);
+        set(18, language);
+        set(19, active);
+        set(20, metadata);
+        set(21, createdAt);
+        set(22, createdBy);
+        set(23, updatedAt);
+        set(24, updatedBy);
     }
 }

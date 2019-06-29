@@ -10,7 +10,7 @@ import io.vertx.tp.jet.cv.em.ParamMode;
 import io.vertx.tp.jet.cv.em.WorkerType;
 import io.vertx.tp.jet.refine.Jt;
 import io.vertx.tp.optic.environment.Ambient;
-import io.vertx.up.commune.ZApi;
+import io.vertx.up.commune.Api;
 import io.vertx.up.eon.Orders;
 import io.vertx.up.eon.em.ChannelType;
 import io.zero.epic.Ut;
@@ -23,7 +23,7 @@ import java.util.Set;
 /*
  * Uri ( API + SERVICE )
  */
-public class JtUri implements ZApi {
+public class JtUri implements Api {
 
     /*
      * Worker
@@ -149,12 +149,12 @@ public class JtUri implements ZApi {
 
     @Override
     public ChannelType channelType() {
-        return Ut.toEnum(this.service::getType, ChannelType.class, ChannelType.ADAPTOR);
+        return Ut.toEnum(this.service::getChannelType, ChannelType.class, ChannelType.ADAPTOR);
     }
 
     @Override
     public Class<?> channelComponent() {
-        return Jt.toChannel(this.service::getServiceChannel, this.channelType());
+        return Jt.toChannel(this.service::getChannelComponent, this.channelType());
     }
 
     @Override

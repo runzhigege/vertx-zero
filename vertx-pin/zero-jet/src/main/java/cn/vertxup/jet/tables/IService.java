@@ -35,7 +35,7 @@ public class IService extends TableImpl<IServiceRecord> {
      * The reference instance of <code>DB_ETERNAL.I_SERVICE</code>
      */
     public static final IService I_SERVICE = new IService();
-    private static final long serialVersionUID = 1116235734;
+    private static final long serialVersionUID = 1024294812;
     /**
      * The column <code>DB_ETERNAL.I_SERVICE.KEY</code>. 「key」- 服务ID
      */
@@ -53,10 +53,6 @@ public class IService extends TableImpl<IServiceRecord> {
      */
     public final TableField<IServiceRecord, String> COMMENT = createField("COMMENT", org.jooq.impl.SQLDataType.CLOB, this, "「comment」- 备注信息");
     /**
-     * The column <code>DB_ETERNAL.I_SERVICE.TYPE</code>. 「type」- 服务类型：ADAPTOR / CONNECTOR / ACTOR / DIRECTOR
-     */
-    public final TableField<IServiceRecord, String> TYPE = createField("TYPE", org.jooq.impl.SQLDataType.VARCHAR(20), this, "「type」- 服务类型：ADAPTOR / CONNECTOR / ACTOR / DIRECTOR");
-    /**
      * The column <code>DB_ETERNAL.I_SERVICE.IS_WORKFLOW</code>. 「isWorkflow」- 是否驱动工作流引擎
      */
     public final TableField<IServiceRecord, Boolean> IS_WORKFLOW = createField("IS_WORKFLOW", org.jooq.impl.SQLDataType.BIT, this, "「isWorkflow」- 是否驱动工作流引擎");
@@ -73,25 +69,37 @@ public class IService extends TableImpl<IServiceRecord> {
      */
     public final TableField<IServiceRecord, String> OUT_SCRIPT = createField("OUT_SCRIPT", org.jooq.impl.SQLDataType.CLOB, this, "「outScript」- 本次不使用，加载脚本引擎ScriptEngine后置脚本");
     /**
-     * The column <code>DB_ETERNAL.I_SERVICE.SERVICE_CHANNEL</code>. 「serviceChannel」- 服务通道定义
+     * The column <code>DB_ETERNAL.I_SERVICE.CHANNEL_TYPE</code>. 「channelType」- 通道类型：ADAPTOR / CONNECTOR / ACTOR / DIRECTOR / DEFINE
      */
-    public final TableField<IServiceRecord, String> SERVICE_CHANNEL = createField("SERVICE_CHANNEL", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「serviceChannel」- 服务通道定义");
+    public final TableField<IServiceRecord, String> CHANNEL_TYPE = createField("CHANNEL_TYPE", org.jooq.impl.SQLDataType.VARCHAR(20), this, "「channelType」- 通道类型：ADAPTOR / CONNECTOR / ACTOR / DIRECTOR / DEFINE");
+    /**
+     * The column <code>DB_ETERNAL.I_SERVICE.CHANNEL_COMPONENT</code>. 「channelComponent」- 自定义通道专用组件
+     */
+    public final TableField<IServiceRecord, String> CHANNEL_COMPONENT = createField("CHANNEL_COMPONENT", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「channelComponent」- 自定义通道专用组件");
+    /**
+     * The column <code>DB_ETERNAL.I_SERVICE.CONFIG_CHANNEL</code>. 「configChannel」- 通道（自定义）配置信息，Channel专用
+     */
+    public final TableField<IServiceRecord, String> CONFIG_CHANNEL = createField("CONFIG_CHANNEL", org.jooq.impl.SQLDataType.CLOB, this, "「configChannel」- 通道（自定义）配置信息，Channel专用");
+    /**
+     * The column <code>DB_ETERNAL.I_SERVICE.CONFIG_INTEGRATION</code>. 「configIntegration」- 集成配置信息，第三方专用
+     */
+    public final TableField<IServiceRecord, String> CONFIG_INTEGRATION = createField("CONFIG_INTEGRATION", org.jooq.impl.SQLDataType.CLOB, this, "「configIntegration」- 集成配置信息，第三方专用");
+    /**
+     * The column <code>DB_ETERNAL.I_SERVICE.CONFIG_DATABASE</code>. 「configDatabase」- 数据库配置，当前通道访问的Database
+     */
+    public final TableField<IServiceRecord, String> CONFIG_DATABASE = createField("CONFIG_DATABASE", org.jooq.impl.SQLDataType.CLOB, this, "「configDatabase」- 数据库配置，当前通道访问的Database");
+    /**
+     * The column <code>DB_ETERNAL.I_SERVICE.CONFIG_SERVICE</code>. 「configService」- 业务组件配置，业务组件专用
+     */
+    public final TableField<IServiceRecord, String> CONFIG_SERVICE = createField("CONFIG_SERVICE", org.jooq.impl.SQLDataType.CLOB, this, "「configService」- 业务组件配置，业务组件专用");
+    /**
+     * The column <code>DB_ETERNAL.I_SERVICE.SERVICE_RECORD</code>. 「serviceRecord」- 服务记录定义
+     */
+    public final TableField<IServiceRecord, String> SERVICE_RECORD = createField("SERVICE_RECORD", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「serviceRecord」- 服务记录定义");
     /**
      * The column <code>DB_ETERNAL.I_SERVICE.SERVICE_COMPONENT</code>. 「serviceComponent」- 服务组件定义
      */
     public final TableField<IServiceRecord, String> SERVICE_COMPONENT = createField("SERVICE_COMPONENT", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「serviceComponent」- 服务组件定义");
-    /**
-     * The column <code>DB_ETERNAL.I_SERVICE.SERVICE_CONFIG</code>. 「serviceConfig」- 服务配置描述
-     */
-    public final TableField<IServiceRecord, String> SERVICE_CONFIG = createField("SERVICE_CONFIG", org.jooq.impl.SQLDataType.CLOB, this, "「serviceConfig」- 服务配置描述");
-    /**
-     * The column <code>DB_ETERNAL.I_SERVICE.SERVICE_SPEC</code>. 「serviceSpec」- 服务规范描述
-     */
-    public final TableField<IServiceRecord, String> SERVICE_SPEC = createField("SERVICE_SPEC", org.jooq.impl.SQLDataType.CLOB, this, "「serviceSpec」- 服务规范描述");
-    /**
-     * The column <code>DB_ETERNAL.I_SERVICE.SERVICE_RESPONSER</code>. 「serviceResponser」- 服务响应器
-     */
-    public final TableField<IServiceRecord, String> SERVICE_RESPONSER = createField("SERVICE_RESPONSER", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「serviceResponser」- 服务响应器");
     /**
      * The column <code>DB_ETERNAL.I_SERVICE.IDENTIFIER</code>. 「identifier」- 当前类型描述的Model的标识
      */
