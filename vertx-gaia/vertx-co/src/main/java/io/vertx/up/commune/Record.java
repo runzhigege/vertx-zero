@@ -106,6 +106,11 @@ interface Meta {
     Set<String> declaredFields();
 
     /*
+     * Get MJoin entityKey set
+     */
+    Set<String> joins();
+
+    /*
      * attributes count.
      */
     int size();
