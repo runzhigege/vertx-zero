@@ -50,7 +50,6 @@ public interface Record extends Serializable, Meta, Check, Clone, Json {
     Record remove(String field);
 
     Record remove(final String... fields);
-
 }
 
 /*
