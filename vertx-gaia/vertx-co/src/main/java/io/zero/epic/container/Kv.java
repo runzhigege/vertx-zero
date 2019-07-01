@@ -3,22 +3,22 @@ package io.zero.epic.container;
 import java.util.Map;
 import java.util.Objects;
 
-public class KeyPair<K, V> {
+public final class Kv<K, V> {
     private K key;
     private V value;
 
-    private KeyPair(final K key, final V value) {
+    private Kv(final K key, final V value) {
         this.key = key;
         this.value = value;
     }
 
-    public static <K, V> KeyPair<K, V> create() {
-        return new KeyPair<>(null, null);
+    public static <K, V> Kv<K, V> create() {
+        return new Kv<>(null, null);
     }
 
-    public static <K, V> KeyPair<K, V> create(final K key,
-                                              final V value) {
-        return new KeyPair<>(key, value);
+    public static <K, V> Kv<K, V> create(final K key,
+                                         final V value) {
+        return new Kv<>(key, value);
     }
 
     public final K getKey() {
@@ -54,7 +54,7 @@ public class KeyPair<K, V> {
 
     @Override
     public String toString() {
-        return "KeyPair{" +
+        return "Kv{" +
                 "key=" + this.key +
                 ", value=" + this.value +
                 '}';

@@ -8,17 +8,19 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-class Pond {
+final class Pond {
+    private Pond() {
+    }
 
     /**
-     * Enhancement
+     * Memory cache pool implemented by ConcurrentMap( k = v ) instead of create new each time
      *
-     * @param pool
-     * @param key
-     * @param poolFn
-     * @param <K>
-     * @param <V>
-     * @return
+     * @param pool   Memory concurrent hash map
+     * @param key    Input key for cache
+     * @param poolFn Supplier of value when create new ( If not in cache )
+     * @param <K>    key type
+     * @param <V>    value type
+     * @return Get or Created V for value
      */
     static <K, V> V exec(final ConcurrentMap<K, V> pool,
                          final K key,
@@ -36,19 +38,15 @@ class Pond {
     /**
      * Group function
      *
-     * @param object
-     * @param keyFn
-     * @param valueFn
-     * @param <K>
-     * @param <V>
-     * @param <E>
-     * @return
+     * @param object  The collection that want to be grouped.
+     * @param keyFn   key function ( e -> key )
+     * @param valueFn value function ( e -> value )
+     * @param <K>     key type
+     * @param <V>     value type
+     * @param <E>     element type
+     * @return Grouped result
      */
-    static <K, V, E> ConcurrentMap<K, List<V>> group(
-            final Collection<E> object,
-            final Function<E, K> keyFn,
-            final Function<E, V> valueFn
-    ) {
+    static <K, V, E> ConcurrentMap<K, List<V>> group(final Collection<E> object, final Function<E, K> keyFn, final Function<E, V> valueFn) {
         final ConcurrentMap<K, List<V>> ret = new ConcurrentHashMap<>();
         if (0 < object.size()) {
             for (final E item : object) {
@@ -80,17 +78,13 @@ class Pond {
     /**
      * Zipper
      *
-     * @param object
-     * @param <K>
-     * @param <V>
-     * @param <E>
-     * @return
+     * @param object The collection that will be zipper
+     * @param <K>    key type
+     * @param <V>    value type
+     * @param <E>    element type
+     * @return returned function
      */
-    static <K, V, E> ConcurrentMap<K, V> zipper(
-            final Collection<E> object,
-            final Function<E, K> keyFn,
-            final Function<E, V> valueFn
-    ) {
+    static <K, V, E> ConcurrentMap<K, V> zipper(final Collection<E> object, final Function<E, K> keyFn, final Function<E, V> valueFn) {
         final ConcurrentMap<K, V> ret = new ConcurrentHashMap<>();
         if (0 < object.size()) {
             for (final E item : object) {

@@ -8,7 +8,7 @@ import io.vertx.ext.unit.junit.VertxUnitRunner;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.log.Annal;
-import io.zero.epic.container.KeyPair;
+import io.zero.epic.container.Kv;
 import org.jooq.Condition;
 import org.jooq.Operator;
 import org.jooq.impl.DSL;
@@ -62,15 +62,15 @@ public abstract class JooqBase extends ZeroBase {
             final Class<?> clazzDao,
             final String pojo,
             final Object... args) {
-        final List<KeyPair<String, Object>> keyPairs = new ArrayList<>();
+        final List<Kv<String, Object>> kvs = new ArrayList<>();
         final int length = args.length / 2;
         for (int idx = 0; idx < length; idx++) {
             final int index = idx * 2;
             final String key = args[index].toString();
             final Object value = args[index + 1];
-            keyPairs.add(KeyPair.create(key, value));
+            kvs.add(Kv.create(key, value));
         }
-        keyPairs.forEach(kv -> {
+        kvs.forEach(kv -> {
             UxJooq jooq = Ux.Jooq.on(clazzDao);
             if (null != pojo) {
                 jooq = jooq.on(pojo);

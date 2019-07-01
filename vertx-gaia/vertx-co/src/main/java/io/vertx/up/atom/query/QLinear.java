@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.exception._400OpUnsupportException;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Strings;
-import io.zero.epic.container.KeyPair;
+import io.zero.epic.container.Kv;
 import io.zero.epic.fn.Fn;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.List;
 public class QLinear {
 
     private static final Annal LOGGER = Annal.get(QLinear.class);
-    private final List<KeyPair<String, KeyPair<String, Object>>> conditions = new ArrayList<>();
+    private final List<Kv<String, Kv<String, Object>>> conditions = new ArrayList<>();
     private final transient JsonObject raw = new JsonObject();
 
     private QLinear(final JsonObject data) {
@@ -28,7 +28,7 @@ public class QLinear {
         return new QLinear(data);
     }
 
-    public List<KeyPair<String, KeyPair<String, Object>>> getConditions() {
+    public List<Kv<String, Kv<String, Object>>> getConditions() {
         return this.conditions;
     }
 
@@ -49,8 +49,8 @@ public class QLinear {
         }
         Fn.outWeb(!Inquiry.Op.VALUES.contains(op), LOGGER,
                 _400OpUnsupportException.class, this.getClass(), op);
-        final KeyPair<String, Object> condition = KeyPair.create(op, value);
-        final KeyPair<String, KeyPair<String, Object>> item = KeyPair.create(filterField, condition);
+        final Kv<String, Object> condition = Kv.create(op, value);
+        final Kv<String, Kv<String, Object>> item = Kv.create(filterField, condition);
         // At the same time.
         this.conditions.add(item);
         this.raw.put(field, value);

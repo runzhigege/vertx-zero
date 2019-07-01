@@ -9,21 +9,23 @@ import io.vertx.zero.exception.ZeroRunException;
  * Defend means swapper the exception part for specific statement.
  * Uniform to manage exception code flow.
  */
-class Defend {
+final class Defend {
+    private Defend() {
+    }
+
     /**
      * Execute without any return type
      *
-     * @param actuator
-     * @param logger
+     * @param actuator Jvm Executor
+     * @param logger   Zero logger
      */
     static void jvmVoid(final JvmActuator actuator,
                         final Annal logger) {
         try {
             actuator.execute();
         } catch (final Throwable ex) {
-            if (null != logger) {
-                logger.jvm(ex);
-            }
+            Annal.sure(logger, () -> logger.jvm(ex));
+            // TODO: Debug for JVM
             ex.printStackTrace();
         }
     }
@@ -31,10 +33,10 @@ class Defend {
     /**
      * Execute with return T
      *
-     * @param supplier
-     * @param logger
-     * @param <T>
-     * @return
+     * @param supplier Jvm Supplier
+     * @param logger   Zero logger
+     * @param <T>      returned supplier T
+     * @return T supplier or null
      */
     static <T> T jvmReturn(final JvmSupplier<T> supplier,
                            final Annal logger) {
@@ -42,42 +44,35 @@ class Defend {
         try {
             reference = supplier.get();
         } catch (final Exception ex) {
-            if (null != logger) {
-                logger.jvm(ex);
-            }
+            Annal.sure(logger, () -> logger.jvm(ex));
         }
         return reference;
     }
 
     /**
-     * @param actuator
-     * @param logger
+     * @param actuator Zero executor
+     * @param logger   Zero logger
      */
     static void zeroVoid(final ZeroActuator actuator,
                          final Annal logger) {
         try {
             actuator.execute();
         } catch (final ZeroException ex) {
-            if (null != logger) {
-                logger.zero(ex);
-            }
+            Annal.sure(logger, () -> logger.zero(ex));
         } catch (final VertxException ex) {
-            if (null != logger) {
-                logger.vertx(ex);
-            }
+            Annal.sure(logger, () -> logger.vertx(ex));
         } catch (final Throwable ex) {
-            if (null != logger) {
-                logger.jvm(ex);
-            }
+            Annal.sure(logger, () -> logger.jvm(ex));
+            // TODO: Debug for JVM
             ex.printStackTrace();
         }
     }
 
     /**
-     * @param supplier
-     * @param logger
-     * @param <T>
-     * @return
+     * @param supplier Zero Supplier
+     * @param logger   Zero Logger
+     * @param <T>      Element of supplier ( T )
+     * @return T or throw out zero run exception
      */
     static <T> T zeroReturn(final ZeroSupplier<T> supplier,
                             final Annal logger) {
@@ -85,22 +80,17 @@ class Defend {
         try {
             ret = supplier.get();
         } catch (final ZeroException ex) {
-            if (null != logger) {
-                logger.zero(ex);
-            }
+            Annal.sure(logger, () -> logger.zero(ex));
         } catch (final ZeroRunException ex) {
-            if (null != logger) {
+            Annal.sure(logger, () -> {
                 logger.vertx(ex);
                 throw ex;
-            }
+            });
         } catch (final VertxException ex) {
-            if (null != logger) {
-                logger.vertx(ex);
-            }
+            Annal.sure(logger, () -> logger.vertx(ex));
         } catch (final Throwable ex) {
-            if (null != logger) {
-                logger.jvm(ex);
-            }
+            Annal.sure(logger, () -> logger.jvm(ex));
+            // TODO: Debug for JVM
             ex.printStackTrace();
         }
         return ret;
