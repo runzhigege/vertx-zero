@@ -78,7 +78,7 @@ public abstract class AbstractChannel implements JtChannel {
                         .compose(ActResponse::async);
             } else {
                 /*
-                 * singleton initialize error
+                 * singleton singleton error
                  */
                 return Future.failedFuture(new _501ChannelErrorException(this.getClass(), componentClass.getName()));
             }

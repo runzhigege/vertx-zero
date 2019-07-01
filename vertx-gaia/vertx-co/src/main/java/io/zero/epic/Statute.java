@@ -34,7 +34,7 @@ final class Statute {
             final List<T> filtered = list.stream()
                     .filter(fnFilter).collect(Collectors.toList());
             return Fn.getSemi(filtered.isEmpty(), LOGGER,
-                    Fn::nil,
+                    () -> null,
                     () -> filtered.get(Values.IDX));
         }, list, fnFilter);
     }

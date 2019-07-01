@@ -877,22 +877,26 @@ public final class Ux {
         return UxJooq.transform(criteria.toJson());
     }
 
+    public static void initComponent(final JsonObject init) {
+        Atomic.initComponent(init);
+    }
+
     // -> Jooq
     public static class Jooq {
 
         public static UxJooq on(final Class<?> clazz) {
-            return Fn.pool(Cache.JOOQ, clazz, () -> new UxJooq(clazz));
+            return Fn.pool(io.vertx.up.aiki.Pool.JOOQ, clazz, () -> new UxJooq(clazz));
         }
 
         public static UxJooq on(final Class<?> clazz, final VertxDAO vertxDAO) {
-            return Fn.pool(Cache.JOOQ, clazz, () -> new UxJooq(clazz, vertxDAO));
+            return Fn.pool(io.vertx.up.aiki.Pool.JOOQ, clazz, () -> new UxJooq(clazz, vertxDAO));
         }
     }
 
     public static class Pool {
 
         public static UxPool on(final String name) {
-            return Fn.pool(Cache.POOL, name, () -> new UxPool(name));
+            return Fn.pool(io.vertx.up.aiki.Pool.POOL, name, () -> new UxPool(name));
         }
 
         public static UxPool on() {

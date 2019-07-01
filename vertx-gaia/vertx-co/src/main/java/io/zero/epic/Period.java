@@ -212,29 +212,35 @@ class Period {
     }
 
     /**
-     * Not recommend directly for deep parsing
+     * 「Not Recommend」directly for deep parsing
      *
-     * @param literal
-     * @return
+     * @param literal Date/DateTime/Time literal value here.
+     * @return null or valid `java.util.Date` object
      */
     static Date parseFull(final String literal) {
         return Fn.getNull(null, () -> {
             // Datetime parsing
             final LocalDateTime datetime = toDateTime(literal);
             final ZoneId zoneId = getAdjust(literal);
-            return Fn.nullFlow(datetime,
-                    (ref) -> Date.from(ref.atZone(zoneId).toInstant()),
-                    () -> {
-                        // Date parsing
-                        final LocalDate date = toDate(literal);
-                        return Fn.nullFlow(date,
-                                (ref) -> Date.from(ref.atStartOfDay().atZone(zoneId).toInstant()),
-                                () -> {
-                                    // Time parsing
-                                    final LocalTime time = toTime(literal);
-                                    return null == time ? null : parse(time);
-                                });
-                    });
+            if (Objects.isNull(datetime)) {
+                // Date parsing
+                final LocalDate date = toDate(literal);
+                if (Objects.isNull(date)) {
+                    // Time parsing
+                    final LocalTime time = toTime(literal);
+                    return null == time ? null : parse(time);
+                } else {
+                    /*
+                     * Not null datetime
+                     */
+                    return Date.from(date.atStartOfDay().atZone(zoneId).toInstant());
+                }
+            } else {
+                /*
+                 * Not null datetime
+                 */
+                return Date.from(datetime.atZone(zoneId).toInstant());
+            }
         }, literal);
     }
 

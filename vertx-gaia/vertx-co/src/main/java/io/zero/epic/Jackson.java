@@ -123,7 +123,7 @@ final class Jackson {
                     }
                     return result;
                 },
-                Fn::nil);
+                () -> null);
     }
 
     static JsonArray mergeZip(final JsonArray source, final JsonArray target,

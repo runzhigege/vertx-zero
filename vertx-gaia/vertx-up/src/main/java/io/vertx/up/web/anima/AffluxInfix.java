@@ -15,7 +15,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Set;
 
-class AffluxInfix {
+public class AffluxInfix {
 
     private transient final Class<?> clazz;
     private transient final Annal logger;
@@ -25,7 +25,7 @@ class AffluxInfix {
         this.logger = Annal.get(clazz);
     }
 
-    static AffluxInfix create(final Class<?> clazz) {
+    public static AffluxInfix create(final Class<?> clazz) {
         return Fn.pool(Pool.INFIXES, clazz, () -> new AffluxInfix(clazz));
     }
 
@@ -45,7 +45,7 @@ class AffluxInfix {
         return hitted;
     }
 
-    Object inject(final Field field) {
+    public Object initialize(final Field field) {
         final Class<? extends Annotation> key = this.search(field);
         final String pluginKey = Plugins.INFIX_MAP.get(key);
         final Class<?> infixCls = ZeroAmbient.getPlugin(pluginKey);

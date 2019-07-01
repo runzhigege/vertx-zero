@@ -29,7 +29,7 @@ import java.util.function.*;
  * Uniform Tool
  */
 public class Ut {
-    // --- Collection
+    // --- Collection Calculation Begin
     public static <T> Set<T> intersect(final Set<T> left, final Set<T> right) {
         return Arithmetic.intersect(left, right);
     }
@@ -41,6 +41,7 @@ public class Ut {
     public static <T> Set<T> diff(final Set<T> subtrahend, final Set<T> minuend) {
         return Arithmetic.diff(subtrahend, minuend);
     }
+    // --- Collection Calculation End
 
     // --- Reflection
     public static <T> T instance(final String name, final Object... params) {

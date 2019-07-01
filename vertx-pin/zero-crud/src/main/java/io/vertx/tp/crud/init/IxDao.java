@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentMap;
 
 /*
  * Dao class initialization
- * plugin/crud/module/ folder initialize
+ * plugin/crud/module/ folder singleton
  */
 class IxDao {
     /*

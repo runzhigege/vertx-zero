@@ -20,7 +20,7 @@ import java.util.Objects;
 /*
  * Profile information to normalize all permission data
  * 1) After logged into the system , this class stored token information into POOL
- * 2) Get the json data and initialize profile information
+ * 2) Get the json data and singleton profile information
  * {
  *     "user": "user id",
  *     "role": [
