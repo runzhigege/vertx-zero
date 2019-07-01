@@ -10,7 +10,9 @@ import java.util.List;
  * Call interface method by cglib
  */
 @SuppressWarnings("unchecked")
-class Fantam {
+final class Invoker {
+    private Invoker() {
+    }
 
     static <T> T invokeObject(
             final Object instance,

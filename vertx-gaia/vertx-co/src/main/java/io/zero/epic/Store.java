@@ -20,8 +20,8 @@ final class Store {
     /**
      * Return json
      *
-     * @param filename
-     * @return
+     * @param filename input filename
+     * @return Stored
      */
     static ConfigStoreOptions getJson(final String filename) {
         return Fn.getJvm(() -> {
@@ -38,8 +38,8 @@ final class Store {
     /**
      * Return yaml
      *
-     * @param filename
-     * @return
+     * @param filename input filename
+     * @return Stored
      */
     static ConfigStoreOptions getYaml(final String filename) {
         return getFile(filename, StoreFormat.YAML);
@@ -48,8 +48,8 @@ final class Store {
     /**
      * Return properties
      *
-     * @param filename
-     * @return
+     * @param filename input filename
+     * @return Stored
      */
     static ConfigStoreOptions getProp(final String filename) {
         return getFile(filename, StoreFormat.PROP);

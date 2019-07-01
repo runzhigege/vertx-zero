@@ -14,7 +14,6 @@ import io.zero.epic.fn.ZeroBiConsumer;
 
 import java.io.File;
 import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -28,8 +27,12 @@ import java.util.function.*;
 /**
  * Uniform Tool
  */
-public class Ut {
-    // --- Collection Calculation Begin
+@SuppressWarnings("all")
+public final class Ut {
+    private Ut() {
+    }
+
+    // --- Collection Calculation
     public static <T> Set<T> intersect(final Set<T> left, final Set<T> right) {
         return Arithmetic.intersect(left, right);
     }
@@ -41,7 +44,133 @@ public class Ut {
     public static <T> Set<T> diff(final Set<T> subtrahend, final Set<T> minuend) {
         return Arithmetic.diff(subtrahend, minuend);
     }
-    // --- Collection Calculation End
+
+    // --- Array Utility
+    public static <T> T[] elementAdd(final T[] array, final T element) {
+        return ArrayUtil.add(array, element);
+    }
+
+    public static JsonArray elementAdd(final JsonArray array, final JsonObject jsonObject, final String field) {
+        return ArrayUtil.add(array, jsonObject, field);
+    }
+
+    public static <T> T elementFind(final List<T> list, final Predicate<T> fnFilter) {
+        return Statute.find(list, fnFilter);
+    }
+
+    // --- Encrypt
+    public static String encryptMD5(final String input) {
+        return Codec.md5(input);
+    }
+
+    public static String encryptSHA256(final String input) {
+        return Codec.sha256(input);
+    }
+
+    public static String encryptSHA512(final String input) {
+        return Codec.sha512(input);
+    }
+
+    // --- Compare
+    public static int compareTo(final int left, final int right) {
+        return Compare.compareTo(left, right);
+    }
+
+    public static int compareTo(final String left, final String right) {
+        return Compare.compareTo(left, right);
+    }
+
+    public static <T> int compareTo(final T left, final T right, final BiFunction<T, T, Integer> fnCompare) {
+        return Compare.compareTo(left, right, fnCompare);
+    }
+
+    // --- Iterator
+    public static <K, V> void itMap(final ConcurrentMap<K, V> map, final BiConsumer<K, V> fnEach) {
+        Congregation.exec(map, fnEach);
+    }
+
+    public static <V> void itSet(final Set<V> set, final BiConsumer<V, Integer> fnEach) {
+        final List<V> list = new ArrayList<>(set);
+        Congregation.exec(list, fnEach);
+    }
+
+    public static void itDay(final String from, final String to, final Consumer<Date> consumer) {
+        Period.itDay(from, to, consumer);
+    }
+
+    public static void itWeek(final String from, final String to, final Consumer<Date> consumer) {
+        Period.itWeek(from, to, consumer);
+    }
+
+    public static <V> void itList(final List<V> list, final BiConsumer<V, Integer> fnEach) {
+        Congregation.exec(list, fnEach);
+    }
+
+    public static <V> void itArray(final V[] array, final BiConsumer<V, Integer> fnEach) {
+        Congregation.exec(Arrays.asList(array), fnEach);
+    }
+
+    public static <V> void itMatrix(final V[][] array, final Consumer<V> fnEach) {
+        Congregation.exec(array, fnEach);
+    }
+
+    public static <F, S> void itCollection(final Collection<F> firsts, final Function<F, Collection<S>> seconds, final BiConsumer<F, S> consumer) {
+        Congregation.exec(firsts, seconds, consumer);
+    }
+
+    public static <F, S> void itCollection(final Collection<F> firsts, final Function<F, Collection<S>> seconds, final BiConsumer<F, S> consumer, final BiPredicate<F, S> predicate) {
+        Congregation.exec(firsts, seconds, consumer, predicate);
+    }
+
+    public static void itRepeat(final Integer times, final Actuator actuator) {
+        Congregation.exec(times, actuator);
+    }
+
+    public static <T> void itJObject(final JsonObject data, final BiConsumer<T, String> fnEach) {
+        Congregation.exec(data, fnEach);
+    }
+
+    public static <T> void etJObject(final JsonObject data, final ZeroBiConsumer<T, String> fnIt) throws ZeroException {
+        Congregation.execZero(data, fnIt);
+    }
+
+    public static <T> void itJArray(final JsonArray array, final Class<T> clazz, final BiConsumer<T, Integer> fnEach) {
+        Congregation.exec(array, clazz, fnEach);
+    }
+
+    public static void itJArray(final JsonArray array, final BiConsumer<JsonObject, Integer> fnEach) {
+        Congregation.exec(array, JsonObject.class, fnEach);
+    }
+
+    public static <T> void etJArray(final JsonArray dataArray, final Class<T> clazz, final ZeroBiConsumer<T, Integer> fnIt) throws ZeroException {
+        Congregation.execZero(dataArray, clazz, fnIt);
+    }
+
+    public static <T> void etJArray(final JsonArray dataArray, final ZeroBiConsumer<T, String> fnIt) throws ZeroException {
+        Congregation.execZero(dataArray, fnIt);
+    }
+
+    // --- Ensure Argument Length
+    public static void ensureEqualLength(final Class<?> clazz, final int expected, final Object... args) {
+        Ensurer.eqLength(clazz, expected, args);
+    }
+
+    public static void ensureMinLength(final Class<?> clazz, final int min, final Object... args) {
+        Ensurer.gtLength(clazz, min, args);
+    }
+
+    // --- IO method
+    public static List<String> ioFiles(final String folder) {
+        return Folder.listFiles(folder);
+    }
+
+    public static List<String> ioFiles(final String folder, final String extension) {
+        return Folder.listFiles(folder, extension);
+    }
+
+    public static List<String> ioDirectories(final String folder) {
+        return Folder.listDirectories(folder);
+    }
 
     // --- Reflection
     public static <T> T instance(final String name, final Object... params) {
@@ -93,12 +222,12 @@ public class Ut {
         return Instance.uniqueChild(clazz);
     }
 
-    // --- Reflection Field
+    // --- Reflection InstanceField
     public static <T> void field(final Object instance, final String name, final T value) {
         InstanceField.set(instance, name, value);
     }
 
-    public static <T> void field(final Object instance, final Field field, final T value) {
+    public static <T> void field(final Object instance, final java.lang.reflect.Field field, final T value) {
         InstanceField.set(instance, field, value);
     }
 
@@ -111,11 +240,11 @@ public class Ut {
         return InstanceField.getI(interfaceCls, name);
     }
 
-    public static Field[] fields(final Class<?> clazz) {
+    public static java.lang.reflect.Field[] fields(final Class<?> clazz) {
         return InstanceField.fields(clazz);
     }
 
-    public static <T> Field contract(final T instance, final Class<?> fieldType) {
+    public static <T> java.lang.reflect.Field contract(final T instance, final Class<?> fieldType) {
         return InstanceField.contract(InstanceField.class, instance, fieldType);
     }
 
@@ -133,7 +262,10 @@ public class Ut {
         return IO.getYaml(filename);
     }
 
-    // --- properties
+    public static File ioFile(final String filename) {
+        return IO.getFile(filename);
+    }
+
     public static Properties ioProperties(final String filename) {
         return IO.getProp(filename);
     }
@@ -158,14 +290,6 @@ public class Ut {
         return IO.getBuffer(filename);
     }
 
-    public static List<String> ioFiles(final String folder) {
-        return Folder.listFiles(folder);
-    }
-
-    public static List<String> ioFiles(final String folder, final String extension) {
-        return Folder.listFiles(folder, extension);
-    }
-
     public static InputStream ioStream(final File file) {
         return Stream.in(file);
     }
@@ -179,16 +303,45 @@ public class Ut {
     }
 
     // --- Out
-    public static boolean outString(final String file, final String data) {
-        return Out.write(file, data);
+    public static void ioOut(final String file, final String data) {
+        Out.write(file, data);
     }
 
-    public static boolean outJson(final String file, final JsonObject data) {
-        return Out.write(file, data);
+    public static void ioOut(final String file, final JsonObject data) {
+        Out.write(file, data);
     }
 
-    public static boolean outJson(final String file, final JsonArray data) {
-        return Out.write(file, data);
+    public static void ioOut(final String file, final JsonArray data) {
+        Out.write(file, data);
+    }
+
+    // --- Serialization
+    public static <T, R extends Iterable> R serializeJson(final T t) {
+        return Jackson.serializeJson(t);
+    }
+
+    public static <T> String serialize(final T t) {
+        return Jackson.serialize(t);
+    }
+
+    public static <T> T deserialize(final JsonObject value, final Class<T> type) {
+        return Jackson.deserialize(value, type);
+    }
+
+    public static <T> T deserialize(final JsonArray value, final Class<T> type) {
+        return Jackson.deserialize(value, type);
+    }
+
+    public static <T> List<T> deserialize(final JsonArray value, final TypeReference<List<T>> type) {
+        return Jackson.deserialize(value, type);
+    }
+
+    public static <T> T deserialize(final String value, final Class<T> clazz) {
+        return Jackson.deserialize(value, clazz);
+    }
+
+    public static <T> T deserialize(final String value, final TypeReference<T> type) {
+        return Jackson.deserialize(value, type);
     }
 
     // --- Reduce
@@ -216,32 +369,6 @@ public class Ut {
         return entity;
     }
 
-    // --- Encrypt
-    public static String encryptMD5(final String input) {
-        return Codec.md5(input);
-    }
-
-    public static String encryptSHA256(final String input) {
-        return Codec.sha256(input);
-    }
-
-    public static String encryptSHA512(final String input) {
-        return Codec.sha512(input);
-    }
-
-    // --- Compare
-    public static int compareTo(final int left, final int right) {
-        return Compare.compareTo(left, right);
-    }
-
-    public static int compareTo(final String left, final String right) {
-        return Compare.compareTo(left, right);
-    }
-
-    public static <T> int compareTo(final T left, final T right, final BiFunction<T, T, Integer> fnCompare) {
-        return Compare.compareTo(left, right, fnCompare);
-    }
-
     public static boolean equalDate(final Date left, final Date right) {
         return Period.equalDate(left, right);
     }
@@ -259,18 +386,13 @@ public class Ut {
         return Store.getProp(filename);
     }
 
-    // --- Ensure Argument Length
-    public static void ensureEqualLength(final Class<?> clazz, final int expected, final Object... args) {
-        Ensurer.eqLength(clazz, expected, args);
-    }
-
-    public static void ensureMinLength(final Class<?> clazz, final int min, final Object... args) {
-        Ensurer.gtLength(clazz, min, args);
-    }
-
     // --- Network
     public static boolean netOk(final String host, final int port) {
         return Net.isReach(host, port);
+    }
+
+    public static boolean netOk(final String host, final int port, final int timeout) {
+        return Net.isReach(host, port, timeout);
     }
 
     public static String netIPv4() {
@@ -295,19 +417,6 @@ public class Ut {
 
     public static String netUri(final String url) {
         return Net.netUri(url);
-    }
-
-    // --- Array
-    public static <T> T[] elementAdd(final T[] array, final T element) {
-        return ArrayUtil.add(array, element);
-    }
-
-    public static JsonArray elementAdd(final JsonArray array, final JsonObject jsonObject, final String field) {
-        return ArrayUtil.add(array, jsonObject, field);
-    }
-
-    public static <T> T elementFind(final List<T> list, final Predicate<T> fnFilter) {
-        return Statute.find(list, fnFilter);
     }
 
     // --- Mr
@@ -428,58 +537,33 @@ public class Ut {
         return StringUtil.notNil(input);
     }
 
-    // --- Serialization
-    public static <T, R extends Iterable> R serializeJson(final T t) {
-        return Jackson.serializeJson(t);
-    }
-
-    public static <T> String serialize(final T t) {
-        return Jackson.serialize(t);
-    }
-
-    public static <T> T deserialize(final JsonObject value, final Class<T> type) {
-        return Jackson.deserialize(value, type);
-    }
-
-    public static <T> T deserialize(final JsonArray value, final Class<T> type) {
-        return Jackson.deserialize(value, type);
-    }
-
-    public static <T> List<T> deserialize(final JsonArray value, final TypeReference<List<T>> type) {
-        return Jackson.deserialize(value, type);
-    }
-
-    public static <T> T deserialize(final String value, final Class<T> clazz) {
-        return Jackson.deserialize(value, clazz);
-    }
-
-    public static <T> T deserialize(final String value, final TypeReference<T> type) {
-        return Jackson.deserialize(value, type);
-    }
-
     // --- To
     public static JsonArray toJArray(final Object value) {
         return Jackson.toJArray(value);
     }
 
     public static JsonArray toJArray(final String literal) {
-        return Types.toJArray(literal);
+        return To.toJArray(literal);
     }
 
     public static <T> JsonArray toJArray(final T value, final int repeat) {
-        return Types.toJArray(value, repeat);
+        return To.toJArray(value, repeat);
     }
 
     public static <T> JsonArray toJArray(final Set<T> set) {
-        return Types.toJArray(set);
+        return To.toJArray(set);
     }
 
     public static <T> JsonArray toJArray(final List<T> list) {
-        return Types.toJArray(list);
+        return To.toJArray(list);
     }
 
     public static JsonObject toJObject(final String literal) {
-        return Types.toJObject(literal);
+        return To.toJObject(literal);
+    }
+
+    public static JsonObject toJObject(final Map<String, Object> map) {
+        return To.toJObject(map);
     }
 
     public static int toMonth(final String literal) {
@@ -499,23 +583,23 @@ public class Ut {
     }
 
     public static <T extends Enum<T>> T toEnum(final Class<T> clazz, final String input) {
-        return Types.toEnum(clazz, input);
+        return To.toEnum(clazz, input);
     }
 
     public static <T extends Enum<T>> T toEnum(final Supplier<String> supplier, final Class<T> type, final T defaultEnum) {
-        return Types.toEnum(supplier, type, defaultEnum);
+        return To.toEnum(supplier, type, defaultEnum);
     }
 
     public static String toString(final Object reference) {
-        return Types.toString(reference);
+        return To.toString(reference);
     }
 
     public static Collection toCollection(final Object value) {
-        return Types.toCollection(value);
+        return To.toCollection(value);
     }
 
     public static Class<?> toPrimary(final Class<?> source) {
-        return Types.toPrimary(source);
+        return To.toPrimary(source);
     }
 
     // --- Period
@@ -722,73 +806,6 @@ public class Ut {
 
     public static Long mathSumLong(final JsonArray source, final String field) {
         return Numeric.mathJSum(source, field, Long.class);
-    }
-
-    // --- Iterator
-
-    public static <K, V> void itMap(final ConcurrentMap<K, V> map, final BiConsumer<K, V> fnEach) {
-        Congregation.exec(map, fnEach);
-    }
-
-    public static <V> void itSet(final Set<V> set, final BiConsumer<V, Integer> fnEach) {
-        final List<V> list = new ArrayList<>(set);
-        Congregation.exec(list, fnEach);
-    }
-
-    public static void itDay(final String from, final String to, final Consumer<Date> consumer) {
-        Period.itDay(from, to, consumer);
-    }
-
-    public static void itWeek(final String from, final String to, final Consumer<Date> consumer) {
-        Period.itWeek(from, to, consumer);
-    }
-
-    public static <V> void itList(final List<V> list, final BiConsumer<V, Integer> fnEach) {
-        Congregation.exec(list, fnEach);
-    }
-
-    public static <V> void itArray(final V[] array, final BiConsumer<V, Integer> fnEach) {
-        Congregation.exec(Arrays.asList(array), fnEach);
-    }
-
-    public static <V> void itMatrix(final V[][] array, final Consumer<V> fnEach) {
-        Congregation.exec(array, fnEach);
-    }
-
-    public static <F, S> void itCollection(final Collection<F> firsts, final Function<F, Collection<S>> seconds, final BiConsumer<F, S> consumer) {
-        Congregation.exec(firsts, seconds, consumer);
-    }
-
-    public static <F, S> void itCollection(final Collection<F> firsts, final Function<F, Collection<S>> seconds, final BiConsumer<F, S> consumer, final BiPredicate<F, S> predicate) {
-        Congregation.exec(firsts, seconds, consumer, predicate);
-    }
-
-    public static void itRepeat(final Integer times, final Actuator actuator) {
-        Congregation.exec(times, actuator);
-    }
-
-    public static <T> void itJObject(final JsonObject data, final BiConsumer<T, String> fnEach) {
-        Congregation.exec(data, fnEach);
-    }
-
-    public static <T> void etJObject(final JsonObject data, final ZeroBiConsumer<T, String> fnIt) throws ZeroException {
-        Congregation.execZero(data, fnIt);
-    }
-
-    public static <T> void itJArray(final JsonArray array, final Class<T> clazz, final BiConsumer<T, Integer> fnEach) {
-        Congregation.exec(array, clazz, fnEach);
-    }
-
-    public static void itJArray(final JsonArray array, final BiConsumer<JsonObject, Integer> fnEach) {
-        Congregation.exec(array, JsonObject.class, fnEach);
-    }
-
-    public static <T> void etJArray(final JsonArray dataArray, final Class<T> clazz, final ZeroBiConsumer<T, Integer> fnIt) throws ZeroException {
-        Congregation.execZero(dataArray, clazz, fnIt);
-    }
-
-    public static <T> void etJArray(final JsonArray dataArray, final ZeroBiConsumer<T, String> fnIt) throws ZeroException {
-        Congregation.execZero(dataArray, fnIt);
     }
 
     public static boolean inRange(final Integer value, final Integer min, final Integer max) {

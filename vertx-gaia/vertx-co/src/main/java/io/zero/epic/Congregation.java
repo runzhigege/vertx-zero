@@ -20,75 +20,68 @@ import java.util.function.Function;
  * For collection
  */
 @SuppressWarnings("unchecked")
-class Congregation {
-
+final class Congregation {
     private static final Annal LOGGER = Annal.get(Congregation.class);
 
+    private Congregation() {
+    }
+
     /**
-     * @param map
-     * @param fnEach
-     * @param <K>
-     * @param <V>
+     * @param map      Iterated hash map
+     * @param consumer kv consumer
+     * @param <K>      key type
+     * @param <V>      value type
      */
-    static <K, V> void exec(final ConcurrentMap<K, V> map,
-                            final BiConsumer<K, V> fnEach) {
+    static <K, V> void exec(final ConcurrentMap<K, V> map, final BiConsumer<K, V> consumer) {
         map.forEach((key, value) -> {
             if (null != key && null != value) {
-                fnEach.accept(key, value);
+                consumer.accept(key, value);
             }
         });
     }
 
     /**
-     * @param list
-     * @param fnEach
-     * @param <V>
+     * @param list     Iterated list
+     * @param consumer element index consumer
+     * @param <V>      value type
      */
-    static <V> void exec(final List<V> list,
-                         final BiConsumer<V, Integer> fnEach) {
+    static <V> void exec(final List<V> list, final BiConsumer<V, Integer> consumer) {
         final int size = list.size();
         for (int idx = Values.IDX; idx < size; idx++) {
             final V item = list.get(idx);
             if (null != item) {
-                fnEach.accept(item, idx);
+                consumer.accept(item, idx);
             }
         }
     }
 
     /**
-     * @param matrix
-     * @param fnEach
-     * @param <V>
+     * @param matrix   Iterated matrix
+     * @param consumer item consumer
+     * @param <V>      value type
      */
-    static <V> void exec(final V[][] matrix,
-                         final Consumer<V> fnEach) {
+    static <V> void exec(final V[][] matrix, final Consumer<V> consumer) {
         for (final V[] arr : matrix) {
             for (final V item : arr) {
                 if (null != item) {
-                    fnEach.accept(item);
+                    consumer.accept(item);
                 }
             }
         }
     }
 
-    static <F, S> void exec(final Collection<F> firsts,
-                            final Function<F, Collection<S>> seconds,
-                            final BiConsumer<F, S> consumer) {
+    static <F, S> void exec(final Collection<F> firsts, final Function<F, Collection<S>> seconds, final BiConsumer<F, S> consumer) {
         firsts.forEach(first -> seconds.apply(first)
                 .forEach(second -> consumer.accept(first, second)));
     }
 
-    static <F, S> void exec(final Collection<F> firsts,
-                            final Function<F, Collection<S>> seconds,
-                            final BiConsumer<F, S> consumer,
-                            final BiPredicate<F, S> predicate) {
+    static <F, S> void exec(final Collection<F> firsts, final Function<F, Collection<S>> seconds, final BiConsumer<F, S> consumer, final BiPredicate<F, S> predicate) {
         firsts.forEach(first -> seconds.apply(first)
                 .stream().filter(second -> predicate.test(first, second))
                 .forEach(second -> consumer.accept(first, second)));
     }
 
-    static <T> void exec(final Integer times,
-                         final Actuator actuator) {
+    static void exec(final Integer times, final Actuator actuator) {
         int start = 0;
         while (start < times) {
             actuator.execute();
@@ -97,21 +90,20 @@ class Congregation {
     }
 
     /**
-     * @param data
-     * @param fnEach
-     * @param <T>
+     * @param data     JsonObject that will be iterated
+     * @param consumer consumer of field, value
+     * @param <T>      Value type
      */
     static <T> void exec(final JsonObject data,
-                         final BiConsumer<T, String> fnEach) {
+                         final BiConsumer<T, String> consumer) {
         try {
-            execZero(data, fnEach::accept);
+            execZero(data, consumer::accept);
         } catch (final ZeroException ex) {
             LOGGER.jvm(ex);
         }
     }
 
-    static <T> void execZero(final JsonObject data,
-                             final ZeroBiConsumer<T, String> fnIt)
+    static <T> void execZero(final JsonObject data, final ZeroBiConsumer<T, String> fnIt)
             throws ZeroException {
         for (final String name : data.fieldNames()) {
             final Object item = data.getValue(name);
@@ -122,44 +114,37 @@ class Congregation {
     }
 
     /**
-     * @param dataArray
-     * @param clazz
-     * @param fnEach
-     * @param <T>
+     * @param dataArray JsonArray that will be iterated
+     * @param clazz     element expected type ( Others will be ignored )
+     * @param consumer  consumer of element
+     * @param <T>       element expected
      */
-    static <T> void exec(final JsonArray dataArray,
-                         final Class<T> clazz,
-                         final BiConsumer<T, Integer> fnEach) {
+    static <T> void exec(final JsonArray dataArray, final Class<T> clazz, final BiConsumer<T, Integer> consumer) {
         try {
-            execZero(dataArray, clazz, fnEach::accept);
+            execZero(dataArray, clazz, consumer::accept);
         } catch (final ZeroException ex) {
             LOGGER.jvm(ex);
         }
     }
 
     /**
-     * @param dataArray
-     * @param fnIt
-     * @param <T>
+     * @param dataArray JsonArray that will be iterated
+     * @param fnIt      iterator
+     * @param <T>       element type
      */
-    static <T> void execZero(final JsonArray dataArray,
-                             final ZeroBiConsumer<T, String> fnIt)
+    static <T> void execZero(final JsonArray dataArray, final ZeroBiConsumer<T, String> fnIt)
             throws ZeroException {
-        execZero(dataArray, JsonObject.class, (element, index) -> {
-            execZero(element, fnIt::accept);
-        });
+        execZero(dataArray, JsonObject.class, (element, index) -> execZero(element, fnIt));
     }
 
     /**
-     * @param dataArray
-     * @param clazz
-     * @param fnIt
-     * @param <T>
-     * @throws ZeroException
+     * @param dataArray JsonArray that will be iterated
+     * @param clazz     expected class
+     * @param fnIt      iterator
+     * @param <T>       element type T ( generic )
+     * @throws ZeroException element zero here
      */
-    static <T> void execZero(final JsonArray dataArray,
-                             final Class<T> clazz,
-                             final ZeroBiConsumer<T, Integer> fnIt)
+    static <T> void execZero(final JsonArray dataArray, final Class<T> clazz, final ZeroBiConsumer<T, Integer> fnIt)
             throws ZeroException {
         final int size = dataArray.size();
         for (int idx = Values.IDX; idx < size; idx++) {

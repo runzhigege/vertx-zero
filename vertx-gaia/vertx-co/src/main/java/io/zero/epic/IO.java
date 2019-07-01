@@ -68,8 +68,8 @@ final class IO {
     /**
      * Read to String
      *
-     * @param in
-     * @return
+     * @param in input stream
+     * @return converted stream
      */
     static String getString(final InputStream in) {
         final StringBuilder buffer = new StringBuilder(Values.BUFFER_SIZE);
@@ -96,8 +96,8 @@ final class IO {
     /**
      * Read yaml to JsonObject
      *
-     * @param filename
-     * @return
+     * @param filename input filename
+     * @return Deserialized type of T
      */
     @SuppressWarnings("unchecked")
     static <T> T getYaml(final String filename) {
@@ -128,10 +128,10 @@ final class IO {
     /**
      * Check yaml type
      *
-     * @param filename
-     * @return
+     * @param filename input file name
+     * @return YamlType of the file by format
      */
-    static YamlType getYamlType(final String filename) {
+    private static YamlType getYamlType(final String filename) {
         final String content = IO.getString(filename);
         return Fn.getNull(YamlType.OBJECT, () -> {
             if (content.trim().startsWith(Strings.DASH)) {
@@ -145,8 +145,8 @@ final class IO {
     /**
      * Read to property object
      *
-     * @param filename
-     * @return
+     * @param filename input filename
+     * @return Properties that will be returned
      */
     static Properties getProp(final String filename) {
         return Fn.getJvm(() -> {
@@ -161,8 +161,8 @@ final class IO {
     /**
      * Read to URL
      *
-     * @param filename
-     * @return
+     * @param filename input filename
+     * @return URL of this filename include ZIP/JAR url
      */
     static URL getURL(final String filename) {
         return Fn.getJvm(() -> {
@@ -177,9 +177,10 @@ final class IO {
     /**
      * Read to Buffer
      *
-     * @param filename
-     * @return
+     * @param filename input filename
+     * @return Buffer from filename
      */
+    @SuppressWarnings("all")
     static Buffer getBuffer(final String filename) {
         final InputStream in = Stream.read(filename);
         return Fn.getJvm(() -> {
@@ -193,8 +194,8 @@ final class IO {
     /**
      * Read to File
      *
-     * @param filename
-     * @return
+     * @param filename input filename
+     * @return File object by filename that input
      */
     static File getFile(final String filename) {
         return Fn.getJvm(() -> {
@@ -214,8 +215,8 @@ final class IO {
     /**
      * Read to Path
      *
-     * @param filename
-     * @return
+     * @param filename input filename
+     * @return file content that converted to String
      */
     static String getPath(final String filename) {
         return Fn.getJvm(() -> {

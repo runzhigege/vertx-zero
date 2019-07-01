@@ -10,8 +10,7 @@ import java.util.function.Consumer;
 /**
  * Period for datetime processing based on Java8
  */
-class Period {
-
+final class Period {
     private static final List<DateTimeFormatter> DATETIMES = new ArrayList<DateTimeFormatter>() {
         {
             this.add(Iso.DATE_TIME);
@@ -21,7 +20,6 @@ class Period {
             this.add(Iso.READBALE);
         }
     };
-
     private static final List<DateTimeFormatter> DATES = new ArrayList<DateTimeFormatter>() {
         {
             this.add(Iso.DATE);
@@ -29,7 +27,6 @@ class Period {
             this.add(Iso.ORDINAL_DATE);
         }
     };
-
     private static final List<DateTimeFormatter> TIMES = new ArrayList<DateTimeFormatter>() {
         {
             this.add(Iso.TIME);
@@ -42,9 +39,10 @@ class Period {
     /**
      * Convert to datetime
      *
-     * @param literal
-     * @return
+     * @param literal the literal that will be
+     * @return null or valid DateTime
      */
+    @SuppressWarnings("all")
     static LocalDateTime toDateTime(final String literal) {
         final Optional<DateTimeFormatter> hit =
                 Fn.getNull(Optional.empty(),
@@ -55,14 +53,14 @@ class Period {
                                                 () -> LocalDateTime.parse(literal, formatter),
                                                 literal))
                                 .findAny(), literal);
-        return hit.isPresent() ? LocalDateTime.parse(literal, hit.get()) : null;
+        return Optional.of(LocalDateTime.parse(literal, hit.get())).orElse(null);
     }
 
     /**
      * Convert to date
      *
-     * @param date
-     * @return
+     * @param date input java.util.Date
+     * @return parsed LocalDateTime
      */
     static LocalDateTime toDateTime(final Date date) {
         return toDateTime(date.toInstant());
@@ -78,9 +76,10 @@ class Period {
     /**
      * Convert to date
      *
-     * @param literal
-     * @return
+     * @param literal literal that will be parsed
+     * @return parsed LocalDate
      */
+    @SuppressWarnings("all")
     static LocalDate toDate(final String literal) {
         final Optional<DateTimeFormatter> hit =
                 Fn.getNull(Optional.empty(),
@@ -97,8 +96,8 @@ class Period {
     /**
      * Convert to date
      *
-     * @param date
-     * @return
+     * @param date input Date
+     * @return LocalDate parsed
      */
     static LocalDate toDate(final Date date) {
         final LocalDateTime datetime = toDateTime(date);
@@ -113,9 +112,10 @@ class Period {
     /**
      * Convert to time
      *
-     * @param literal
-     * @return
+     * @param literal input literal
+     * @return LocalTime parsed
      */
+    @SuppressWarnings("all")
     static LocalTime toTime(final String literal) {
         final Optional<DateTimeFormatter> hit =
                 Fn.getNull(Optional.empty(),
@@ -132,8 +132,8 @@ class Period {
     /**
      * Convert to date
      *
-     * @param date
-     * @return
+     * @param date input Date
+     * @return LocalTime parsed
      */
     static LocalTime toTime(final Date date) {
         final LocalDateTime datetime = toDateTime(date);
@@ -148,8 +148,8 @@ class Period {
     /**
      * Check whether it's valid
      *
-     * @param literal
-     * @return
+     * @param literal input literal
+     * @return checked result whether it's valid date
      */
     static boolean isValid(final String literal) {
         final Date parsed = parse(literal);
@@ -245,7 +245,7 @@ class Period {
     }
 
     static List<String> valueDurationDays(final String from, final String to) {
-        final List<String> result = new ArrayList<String>();
+        final List<String> result = new ArrayList();
         LocalDate begin = LocalDate.parse(from);
         result.add(begin.format(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US)));
         final LocalDate end = LocalDate.parse(to);
@@ -326,7 +326,7 @@ class Period {
         return parse(time, ZoneId.systemDefault());
     }
 
-    static Date parse(final LocalTime time, final ZoneId zoneId) {
+    private static Date parse(final LocalTime time, final ZoneId zoneId) {
         final LocalDate date = LocalDate.now();
         final LocalDateTime datetime = LocalDateTime.of(date, time);
         return Date.from(datetime.atZone(zoneId).toInstant());
@@ -336,7 +336,7 @@ class Period {
         return parse(datetime, ZoneId.systemDefault());
     }
 
-    static Date parse(final LocalDateTime datetime, final ZoneId zoneId) {
+    private static Date parse(final LocalDateTime datetime, final ZoneId zoneId) {
         return Date.from(datetime.atZone(zoneId).toInstant());
     }
 
@@ -344,7 +344,7 @@ class Period {
         return parse(datetime, ZoneId.systemDefault());
     }
 
-    static Date parse(final LocalDate datetime, final ZoneId zoneId) {
+    private static Date parse(final LocalDate datetime, final ZoneId zoneId) {
         return Date.from(datetime.atStartOfDay(zoneId).toInstant());
     }
 }

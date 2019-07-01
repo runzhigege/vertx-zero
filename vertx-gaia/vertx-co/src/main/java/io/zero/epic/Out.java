@@ -10,10 +10,12 @@ import java.io.FileWriter;
 /*
  *
  */
-class Out {
+final class Out {
+    private Out() {
+    }
 
     @SuppressWarnings("all")
-    static boolean write(final String path, final String data) {
+    static void write(final String path, final String data) {
         Fn.safeNull(() -> Fn.safeJvm(() -> {
             final File file = new File(path);
             if (!file.exists()) {
@@ -23,16 +25,15 @@ class Out {
             writer.write(data);
             writer.close();
         }), path, data);
-        return true;
     }
 
-    static boolean write(final String path, final JsonObject data) {
+    static void write(final String path, final JsonObject data) {
         final String target = null == data ? "{}" : data.encodePrettily();
-        return write(path, target);
+        write(path, target);
     }
 
-    static boolean write(final String path, final JsonArray data) {
+    static void write(final String path, final JsonArray data) {
         final String target = null == data ? "[]" : data.encodePrettily();
-        return write(path, target);
+        write(path, target);
     }
 }
