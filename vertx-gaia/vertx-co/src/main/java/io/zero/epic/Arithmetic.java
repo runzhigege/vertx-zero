@@ -8,7 +8,10 @@ import java.util.Set;
  * Here List is not needed for this arithmetic because all the calculation method require your
  * collection support non-duplicated and non-sequence.
  */
-class Arithmetic {
+final class Arithmetic {
+    private Arithmetic() {
+    }
+
     /**
      * Collection intersect ( HashSet / TreeSet )
      * A = {1, 2}

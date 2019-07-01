@@ -10,14 +10,16 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Locale;
 
-class Net {
+final class Net {
+    private Net() {
+    }
 
     /**
      * Check whether host:port is ok to connect
      *
-     * @param host
-     * @param port
-     * @return
+     * @param host checked host
+     * @param port checked port
+     * @return whether it's reached
      */
     static boolean isReach(final String host, final int port) {
         return isReach(host, port, 3000);
@@ -40,7 +42,7 @@ class Net {
     }
 
     /**
-     * @return
+     * @return ip address of ipv4 format
      */
     static String getIPv4() {
         return IPHost.getInstance().getExtranetIPv4Address();
@@ -51,14 +53,14 @@ class Net {
     }
 
     /**
-     * @return
+     * @return ip address of ipv6 format
      */
     static String getIPv6() {
         return IPHost.getInstance().getExtranetIPv6Address();
     }
 
     /**
-     * @return
+     * @return ip address of common format ( detect by system about 4 or 6 )
      */
     static String getIP() {
         return IPHost.getInstance().getExtranetIPAddress();

@@ -39,16 +39,6 @@ final class Statute {
         }, list, fnFilter);
     }
 
-    /**
-     * Merge two map
-     *
-     * @param from
-     * @param to
-     * @param <K>
-     * @param <T>
-     * @param <V>
-     * @return
-     */
     static <K, T, V> ConcurrentMap<K, V> reduce(
             final ConcurrentMap<K, T> from,
             final ConcurrentMap<T, V> to) {
@@ -62,13 +52,6 @@ final class Statute {
         return result;
     }
 
-    /**
-     * @param from
-     * @param to
-     * @param <K>
-     * @param <V>
-     * @return
-     */
     static <K, V> ConcurrentMap<K, V> reduce(
             final Set<K> from,
             final ConcurrentMap<K, V> to
@@ -83,11 +66,6 @@ final class Statute {
         return result;
     }
 
-    /**
-     * @param <F>
-     * @param <T>
-     * @return
-     */
     static <F, T> ConcurrentMap<F, T> zipper(
             final List<F> keys,
             final List<T> values
@@ -103,15 +81,6 @@ final class Statute {
         return result;
     }
 
-    /**
-     * @param first
-     * @param second
-     * @param function
-     * @param <F>
-     * @param <S>
-     * @param <T>
-     * @return
-     */
     static <F, S, T> List<T> zipper(
             final List<F> first,
             final List<S> second,

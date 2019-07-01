@@ -14,13 +14,14 @@ import java.util.Set;
 /**
  * @author lang
  */
-class StringUtil {
-
+final class StringUtil {
     private static final JexlEngine EXPR = new JexlBuilder()
             .cache(512).silent(false).create();
-
     private static final String SEED =
             "01234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+
+    private StringUtil() {
+    }
 
     static String from(final Object value) {
         return null == value ? Strings.EMPTY : value.toString();
@@ -41,10 +42,6 @@ class StringUtil {
         }, input, separator);
     }
 
-    private static String join(final Set<String> input) {
-        return join(input, null);
-    }
-
     static String join(final Collection<String> input, final String separator) {
         final String connector = (null == separator) ? Strings.COMMA : separator;
         return Fn.getJvm(() -> {
@@ -60,16 +57,6 @@ class StringUtil {
             }
             return builder.toString();
         }, input);
-    }
-
-    static String join(final Object[] input) {
-        final Set<String> data = new HashSet<>();
-        for (final Object item : input) {
-            if (null != item) {
-                data.add(item.toString());
-            }
-        }
-        return join(data);
     }
 
     private static String repeat(final Integer times, final char fill) {

@@ -8,6 +8,7 @@ import io.vertx.zero.log.Log;
 import io.zero.epic.fn.Fn;
 
 import java.io.*;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 /**
@@ -17,8 +18,7 @@ final class Stream {
     /**
      * Direct read by vert.x logger to avoid dead lock.
      */
-    private static final Logger LOGGER
-            = LoggerFactory.getLogger(Stream.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Stream.class);
 
     private Stream() {
     }
@@ -50,6 +50,7 @@ final class Stream {
      */
     @SuppressWarnings("unchecked")
     static <T> T from(final int pos, final Buffer buffer) {
+        LOGGER.debug("[ Position ] {}", pos);
         final ByteArrayInputStream stream = new ByteArrayInputStream(buffer.getBytes());
         return Fn.getJvm(null, () -> {
             final ObjectInputStream in = new ObjectInputStream(stream);
@@ -62,7 +63,11 @@ final class Stream {
      * @return Return the InputStream object mount to source path.
      */
     static InputStream read(final String filename) {
-        return read(filename, null);
+        InputStream in = read(filename, null);
+        if (Objects.isNull(in)) {
+            in = read(filename, Stream.class);
+        }
+        return in;
     }
 
     /**
@@ -75,8 +80,8 @@ final class Stream {
      * @param clazz    The class loader related class
      * @return Return the InputStream object mount to source path.
      */
-    static InputStream read(final String filename,
-                            final Class<?> clazz) {
+    private static InputStream read(final String filename,
+                                    final Class<?> clazz) {
         final File file = new File(filename);
         if (file.exists()) {
             Log.debug(LOGGER, Info.INF_CUR, file.exists());

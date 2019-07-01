@@ -17,9 +17,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @SuppressWarnings("all")
-class InstanceField {
-
+final class InstanceField {
     private static final Annal LOGGER = Annal.get(InstanceField.class);
+
+    private InstanceField() {
+    }
 
     static <T> void set(final Object instance, final String name, final T value) {
         final Field field = Fn.getNull(() ->
