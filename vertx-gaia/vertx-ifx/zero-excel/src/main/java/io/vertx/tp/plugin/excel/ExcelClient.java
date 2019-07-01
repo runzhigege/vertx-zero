@@ -39,17 +39,12 @@ public interface ExcelClient extends TpClient<ExcelClient> {
     @Fluent
     <T> ExcelClient loading(String filename, Handler<AsyncResult<Set<T>>> handler);
 
-    @Fluent
-    <T> ExcelClient loading(InputStream in, boolean isXlsx, Handler<AsyncResult<Set<T>>> handler);
 
     @Fluent
-    ExcelClient ingestList(String filename, Handler<AsyncResult<Set<ExTable>>> handler);
+    ExcelClient ingest(String filename, Handler<AsyncResult<Set<ExTable>>> handler);
 
-    @Fluent
-    ExcelClient ingestList(InputStream in, boolean isXlsx, Handler<AsyncResult<Set<ExTable>>> handler);
+    Set<ExTable> ingest(String filename);
 
-    @Fluent
-    ExcelClient ingest(String filename, Handler<AsyncResult<ExTable>> handler);
 
     @Fluent
     ExcelClient exportTable(String identifier, JsonArray data, Handler<AsyncResult<Buffer>> handler);
@@ -59,4 +54,15 @@ public interface ExcelClient extends TpClient<ExcelClient> {
 
     @Fluent
     <T> ExcelClient importTable(String tableOnly, final InputStream in, Handler<AsyncResult<Set<T>>> handler);
+
+    /**
+     * Two format supported here: 2013 / 2017
+     */
+    @Fluent
+    <T> ExcelClient loading(InputStream in, boolean isXlsx, Handler<AsyncResult<Set<T>>> handler);
+
+    @Fluent
+    ExcelClient ingest(InputStream in, boolean isXlsx, Handler<AsyncResult<Set<ExTable>>> handler);
+
+    Set<ExTable> ingest(InputStream in, boolean isXlsx);
 }
