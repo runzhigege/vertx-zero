@@ -2,8 +2,10 @@ package io.vertx.up.aiki;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
+import java.lang.reflect.Method;
 import java.util.function.Function;
 
 class Atomic {
@@ -24,5 +26,18 @@ class Atomic {
             }
             return Future.succeededFuture(source);
         }, from);
+    }
+
+    static void initComponent(final JsonObject init) {
+        /* Extract Component Class */
+        final String className = init.getString("component");
+        final Class<?> clazz = Ut.clazz(className);
+        if (null != clazz) {
+            /* Call init() method here */
+            Fn.safeJvm(() -> {
+                final Method initMethod = clazz.getDeclaredMethod("init");
+                initMethod.invoke(null);
+            });
+        }
     }
 }

@@ -4,7 +4,7 @@ interface Info {
 
     String INFO_SYNC = "[ ZERO ] ( Sync ) You are using sync mode to create LocalMap: {0}";
 
-    String INFO_ASYNC_START = "[ ZERO ] ( Async ) You are using async mode to create AsyncMap, start to initialize.";
+    String INFO_ASYNC_START = "[ ZERO ] ( Async ) You are using async mode to create AsyncMap, start to singleton.";
 
     String INFO_ASYNC_END = "[ ZERO ] ( Async ) Your AsyncMap {0} has been created successfully, you can use it now.";
 

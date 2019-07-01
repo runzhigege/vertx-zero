@@ -12,7 +12,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.rs.announce.Rigor;
 import io.vertx.up.rs.pointer.PluginExtension;
 import io.vertx.up.rs.validation.Validator;
-import io.zero.epic.container.KeyPair;
+import io.zero.epic.container.Kv;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -52,7 +52,7 @@ class Flower {
         if (null == error) {
 
             // Check if annotated with @Codex
-            final KeyPair<Integer, Class<?>> found = findParameter(depot.getEvent().getAction());
+            final Kv<Integer, Class<?>> found = findParameter(depot.getEvent().getAction());
             if (null == found.getValue()) {
                 context.next();
             } else {
@@ -67,10 +67,10 @@ class Flower {
         }
     }
 
-    private static KeyPair<Integer, Class<?>> findParameter(
+    private static Kv<Integer, Class<?>> findParameter(
             final Method method) {
         int index = 0;
-        final KeyPair<Integer, Class<?>> result = KeyPair.create();
+        final Kv<Integer, Class<?>> result = Kv.create();
         for (final Parameter parameter : method.getParameters()) {
             if (parameter.isAnnotationPresent(Codex.class)) {
                 result.set(index, parameter.getType());

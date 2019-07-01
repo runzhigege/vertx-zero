@@ -9,6 +9,7 @@ import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.log.Log;
 import io.vertx.zero.log.internal.Log4JAnnal;
 import io.zero.epic.Ut;
+import io.zero.epic.fn.Actuator;
 
 import java.util.Set;
 
@@ -19,6 +20,16 @@ public interface Annal {
 
     static Annal get(final Class<?> clazz) {
         return new CommonAnnal(clazz);
+    }
+
+    /*
+     * Re-invoked logging for executing, here are logger sure to
+     * Avoid Null Pointer exception
+     */
+    static <T> void sure(final Annal logger, final Actuator actuator) {
+        if (null != logger) {
+            actuator.execute();
+        }
     }
 
     void vertx(VertxException ex);

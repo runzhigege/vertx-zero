@@ -13,9 +13,11 @@ import java.util.regex.Pattern;
 /**
  * Number checking
  */
-class Numeric {
-
+final class Numeric {
     private static final Annal LOGGER = Annal.get(Numeric.class);
+
+    private Numeric() {
+    }
 
     static Integer mathMultiply(final Integer left, final Integer right) {
         final Integer leftValue = Fn.getNull(0, () -> left, left);
@@ -28,7 +30,7 @@ class Numeric {
         return Fn.getNull(null, () -> {
             Object returnValue = null;
             if (Double.class == clazz || BigDecimal.class == clazz) {
-                final Double result = source.stream().mapToDouble(item -> JsonObject.mapFrom(item).getDouble(field)).sum();
+                final double result = source.stream().mapToDouble(item -> JsonObject.mapFrom(item).getDouble(field)).sum();
                 returnValue = BigDecimal.class == clazz ? new BigDecimal(result) : result;
             } else if (Long.class == clazz) {
                 returnValue = source.stream().mapToLong(item -> JsonObject.mapFrom(item).getLong(field)).sum();

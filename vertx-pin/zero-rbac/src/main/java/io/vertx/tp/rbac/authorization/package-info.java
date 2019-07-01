@@ -1,6 +1,6 @@
 /*
  * Package for profile storage
- * After user logged into the system, RBAC module should initialize Profile Pool
+ * After user logged into the system, RBAC module should singleton Profile Pool
  * 1) Based on User - Role ( Calculated User Profile )
  * 2) Based on Group - Role ( Calculated Group Profile )
  * 3) The data structure should be:

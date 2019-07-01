@@ -64,7 +64,7 @@ class Query {
         for (final String field : criteria.fieldNames()) {
             // Filter processed
             final String key = field.contains(Strings.COMMA) ? field.split(Strings.COMMA)[0] : field;
-            String targetField = "";
+            final String targetField;
             if (mapping.containsKey(key)) {
                 if (field.contains(Strings.COMMA)) {
                     targetField = mapping.get(key) + Strings.COMMA + field.split(Strings.COMMA)[1];

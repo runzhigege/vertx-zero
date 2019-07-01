@@ -18,7 +18,7 @@ public abstract class NumericSaber extends BaseSaber {
                                 () -> {
                                     this.verifyInput(!Ut.isInteger(literal), paramType, literal);
                                     return this.getFun().apply(literal);
-                                }, Fn::nil),
+                                }, () -> null),
                 paramType, literal);
     }
 

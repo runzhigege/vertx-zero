@@ -29,7 +29,8 @@ class Fluctuate {
             Observable.fromIterable(first)
                     .map(generateFun::apply)
                     .filter(Objects::nonNull)
-                    .subscribe(secondFutures::add);
+                    .subscribe(secondFutures::add)
+                    .dispose();
             final Future<List<T>> result = Future.future();
             CompositeFuture.all(secondFutures).setHandler(res -> {
                 final List<S> secondary = res.result().list();
@@ -51,7 +52,8 @@ class Fluctuate {
             Observable.fromIterable(first)
                     .map(item -> (JsonObject) item)
                     .map(generateFun::apply)
-                    .subscribe(secondFutures::add);
+                    .subscribe(secondFutures::add)
+                    .dispose();
             final Future<JsonArray> result = Future.future();
             CompositeFuture.all(secondFutures).setHandler(res -> {
                 final List<JsonArray> secondary = res.result().list();
@@ -73,7 +75,8 @@ class Fluctuate {
             Observable.fromIterable(first)
                     .map(item -> (JsonObject) item)
                     .map(generateFun::apply)
-                    .subscribe(secondFutures::add);
+                    .subscribe(secondFutures::add)
+                    .dispose();
             final Future<JsonArray> result = Future.future();
             CompositeFuture.all(secondFutures).setHandler(res -> {
                 final List<JsonObject> secondary = res.result().list();
@@ -146,7 +149,8 @@ class Fluctuate {
             final List<Future> secondFutures = new ArrayList<>();
             Observable.fromArray(suppliers)
                     .map(Supplier::get)
-                    .subscribe(secondFutures::add);
+                    .subscribe(secondFutures::add)
+                    .dispose();
             // thenResponse
             return thenResponse(secondFutures, first, mergeFun);
         });
@@ -172,7 +176,8 @@ class Fluctuate {
             final List<Future> secondFutures = new ArrayList<>();
             Observable.fromArray(functions)
                     .map(item -> item.apply(first))
-                    .subscribe(secondFutures::add);
+                    .subscribe(secondFutures::add)
+                    .dispose();
             // thenResponse
             return thenResponse(secondFutures, first, mergeFun);
         });

@@ -25,9 +25,11 @@ interface Info {
     String POOL_GET = "[ ZERO ] ( Shared ) key = {0} has been picked from {1}, mode = {2}";
 }
 
-interface Cache {
+interface Pool {
 
     ConcurrentMap<Class<?>, UxJooq> JOOQ = new ConcurrentHashMap<>();
 
     ConcurrentMap<String, UxPool> POOL = new ConcurrentHashMap<>();
+
+    ConcurrentMap<Class<?>, Uobj> INJECTION = new ConcurrentHashMap<>();
 }

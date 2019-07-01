@@ -10,7 +10,7 @@ import io.vertx.core.shareddata.LocalMap;
 import io.vertx.core.shareddata.SharedData;
 import io.vertx.up.exception._501SharedDataModeException;
 import io.vertx.up.log.Annal;
-import io.zero.epic.container.KeyPair;
+import io.zero.epic.container.Kv;
 import io.zero.epic.fn.Fn;
 
 import java.util.Objects;
@@ -96,19 +96,19 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
     }
 
     @Override
-    public KeyPair<K, V> put(final K key, final V value) {
+    public Kv<K, V> put(final K key, final V value) {
         this.ensure(false);
         final V reference = this.syncMap.get(key);
         // Add & Replace
         Fn.safeSemi(null == reference, LOGGER,
                 () -> this.syncMap.put(key, value),
                 () -> this.syncMap.replace(key, value));
-        return KeyPair.create(key, value);
+        return Kv.create(key, value);
     }
 
     @Override
-    public KeyPair<K, V> put(final K key, final V value, final int seconds) {
-        KeyPair<K, V> result = this.put(key, value);
+    public Kv<K, V> put(final K key, final V value, final int seconds) {
+        Kv<K, V> result = this.put(key, value);
         LOGGER.info(Info.INFO_TIMER_PUT, key, String.valueOf(seconds));
         this.vertx.setTimer(seconds * 1000, id -> {
             final V existing = this.get(key);
@@ -124,7 +124,7 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
 
     @Override
     public SharedClient<K, V> put(final K key, final V value,
-                                  final Handler<AsyncResult<KeyPair<K, V>>> handler) {
+                                  final Handler<AsyncResult<Kv<K, V>>> handler) {
         this.ensure(true);
         this.asyncMap.get(key, res -> {
             if (res.succeeded()) {
@@ -132,12 +132,12 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
                 Fn.safeSemi(null == reference, LOGGER,
                         () -> this.asyncMap.put(key, value, added -> {
                             if (added.succeeded()) {
-                                handler.handle(Future.succeededFuture(KeyPair.create(key, value)));
+                                handler.handle(Future.succeededFuture(Kv.create(key, value)));
                             }
                         }),
                         () -> this.asyncMap.replace(key, value, replaced -> {
                             if (replaced.succeeded()) {
-                                handler.handle(Future.succeededFuture(KeyPair.create(key, value)));
+                                handler.handle(Future.succeededFuture(Kv.create(key, value)));
                             }
                         }));
             }
@@ -147,7 +147,7 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
 
     @Override
     public SharedClient<K, V> put(final K key, final V value, final int seconds,
-                                  final Handler<AsyncResult<KeyPair<K, V>>> handler) {
+                                  final Handler<AsyncResult<Kv<K, V>>> handler) {
         final SharedClient<K, V> reference = this.put(key, value, handler);
         LOGGER.info(Info.INFO_TIMER_PUT, key, String.valueOf(seconds));
         this.vertx.setTimer(seconds * 1000, id -> this.remove(key, res -> LOGGER.info(Info.INFO_TIMER_EXPIRE, key)));
@@ -155,10 +155,10 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
     }
 
     @Override
-    public KeyPair<K, V> remove(final K key) {
+    public Kv<K, V> remove(final K key) {
         this.ensure(false);
         final V removed = this.syncMap.remove(key);
-        return KeyPair.create(key, removed);
+        return Kv.create(key, removed);
     }
 
     @Override
@@ -178,12 +178,12 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
 
     @Override
     public SharedClient<K, V> remove(final K key,
-                                     final Handler<AsyncResult<KeyPair<K, V>>> handler) {
+                                     final Handler<AsyncResult<Kv<K, V>>> handler) {
         this.ensure(true);
         this.asyncMap.remove(key, res -> {
             if (res.succeeded()) {
                 final V reference = res.result();
-                handler.handle(Future.succeededFuture(KeyPair.create(key, reference)));
+                handler.handle(Future.succeededFuture(Kv.create(key, reference)));
             }
         });
         return this;

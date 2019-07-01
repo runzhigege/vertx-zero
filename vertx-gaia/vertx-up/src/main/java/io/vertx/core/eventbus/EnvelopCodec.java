@@ -22,12 +22,6 @@ public final class EnvelopCodec implements MessageCodec<Envelop, Envelop> {
         return Ut.fromBuffer(i, buffer);
     }
 
-    /**
-     * Local usage
-     *
-     * @param message
-     * @return
-     */
     @Override
     public Envelop transform(final Envelop message) {
         return message;

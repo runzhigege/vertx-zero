@@ -33,6 +33,7 @@ import java.util.function.Function;
 /**
  * Jwt token extract
  */
+@SuppressWarnings("all")
 class UxJwt {
 
     private static JWT JWT_INSTANCE;

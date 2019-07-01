@@ -7,10 +7,13 @@ import io.vertx.zero.eon.Values;
 import java.lang.reflect.Array;
 import java.util.Objects;
 
-class ArrayUtil {
+final class ArrayUtil {
 
-    private static Object copyArrayGrow1(final Object array,
-                                         final Class<?> newArrayComponentType) {
+    private ArrayUtil() {
+    }
+
+    @SuppressWarnings("all")
+    private static Object copyArrayGrow1(final Object array, final Class<?> newArrayComponentType) {
         if (array != null) {
             final int arrayLength = Array.getLength(array);
             final Object newArray = Array.newInstance(array.getClass().getComponentType(), arrayLength + 1);

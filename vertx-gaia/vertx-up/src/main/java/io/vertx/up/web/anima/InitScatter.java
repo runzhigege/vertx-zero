@@ -3,15 +3,13 @@ package io.vertx.up.web.anima;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.aiki.Ux;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
 import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
-
-import java.lang.reflect.Method;
 
 /**
- * Data initialize: default with liquibase
+ * Data singleton: default with liquibase
  */
 public class InitScatter implements Scatter<Vertx> {
 
@@ -34,20 +32,7 @@ public class InitScatter implements Scatter<Vertx> {
         if (config.containsKey(INIT)) {
             final JsonArray initArray = config.getJsonArray(INIT);
             /* Component Init */
-            Ut.itJArray(initArray, (init, index) -> this.init(init));
-        }
-    }
-
-    private void init(final JsonObject init) {
-        /* Extract Component Class */
-        final String className = init.getString("component");
-        final Class<?> clazz = Ut.clazz(className);
-        if (null != clazz) {
-            /* Call init() method here */
-            Fn.safeJvm(() -> {
-                final Method initMethod = clazz.getDeclaredMethod("init");
-                initMethod.invoke(null);
-            });
+            Ut.itJArray(initArray, (init, index) -> Ux.initComponent(init));
         }
     }
 }
