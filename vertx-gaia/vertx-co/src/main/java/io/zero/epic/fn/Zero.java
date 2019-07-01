@@ -7,6 +7,7 @@ import io.vertx.zero.exception.ZeroRunException;
 import java.net.ConnectException;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -34,7 +35,7 @@ class Zero {
     static void exec(final Actuator actuator, final Object... input) {
         if (0 < input.length) {
             final boolean match =
-                    Arrays.stream(input).allMatch(Zero::not);
+                    Arrays.stream(input).allMatch(Objects::nonNull);
             if (match) {
                 actuator.execute();
             }
@@ -50,7 +51,7 @@ class Zero {
             actuator.execute();
         } else {
             final boolean match =
-                    Arrays.stream(input).allMatch(Zero::not);
+                    Arrays.stream(input).allMatch(Objects::nonNull);
             if (match) {
                 actuator.execute();
             }
@@ -64,7 +65,7 @@ class Zero {
     ) {
         T ret = null;
         try {
-            final boolean match = Arrays.stream(input).allMatch(Zero::not);
+            final boolean match = Arrays.stream(input).allMatch(Objects::nonNull);
             if (match) {
                 ret = supplier.get();
             }
@@ -95,20 +96,12 @@ class Zero {
                      final Supplier<T> fnGet,
                      final Object... reference) {
         final boolean match =
-                Arrays.stream(reference).allMatch(Zero::not);
+                Arrays.stream(reference).allMatch(Objects::nonNull);
         if (match) {
             final T ret = fnGet.get();
             return (null == ret) ? defaultValue : ret;
         } else {
             return defaultValue;
         }
-    }
-
-    private static boolean is(final Object item) {
-        return null == item;
-    }
-
-    private static boolean not(final Object item) {
-        return !is(item);
     }
 }
