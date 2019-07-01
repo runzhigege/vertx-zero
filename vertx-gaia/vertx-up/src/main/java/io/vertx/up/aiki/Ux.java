@@ -15,8 +15,6 @@ import io.vertx.ext.mongo.FindOptions;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.query.Criteria;
 import io.vertx.up.atom.query.Inquiry;
-import io.vertx.up.atom.query.Pager;
-import io.vertx.up.atom.query.Sorter;
 import io.vertx.up.exception.WebException;
 import io.vertx.zero.eon.Strings;
 import io.zero.epic.Ut;
@@ -28,14 +26,13 @@ import org.jooq.Condition;
 
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 import java.util.function.*;
 
 /**
  * Here Ux is a util interface of uniform to call different tools.
  * It just like helper for business usage.
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings("all")
 public final class Ux {
 
     // ---------------------- Fast Logging ----------------------------
@@ -59,33 +56,6 @@ public final class Ux {
 
     public static <T> T timer(final Class<?> clazz, final Supplier<T> supplier) {
         return Debug.timer(clazz, supplier);
-    }
-
-    // ---------------------- Pager/Sort --------------------------
-    // Business method
-    // page, size -> JsonObject
-    public static JsonObject toPagerJson(final int page, final int size) {
-        return Pagination.toPager(page, size).toJson();
-    }
-
-    // page, size -> Pager
-    public static Pager toPager(final int page, final int size) {
-        return Pagination.toPager(page, size);
-    }
-
-    // JsonObject -> Pager
-    public static Pager toPager(final JsonObject data) {
-        return Pagination.toPager(data);
-    }
-
-    // field, asc -> Sorter
-    public static Sorter toSorter(final String field, final boolean asc) {
-        return Pagination.toSorter(field, asc);
-    }
-
-    // field, mode -> Sorter
-    public static Sorter toSorter(final String field, final int mode) {
-        return Pagination.toSorter(field, mode);
     }
 
     // ---------------------- JsonObject Returned --------------------------
@@ -120,13 +90,8 @@ public final class Ux {
         return From.fromJson(data, pojo);
     }
 
-    // T -> JsonObject ( with convert )
-    public static <T> JsonObject toJsonFun(final T entity, final Function<JsonObject, JsonObject> convert) {
-        return To.toJson(entity, convert);
-    }
-
     // JsonArray -> JsonObject ( with field grouped )
-    public static <T> JsonObject toGroup(final JsonArray array, final String field) {
+    public static JsonObject toGroup(final JsonArray array, final String field) {
         return Calculator.groupBy(array, field);
     }
 
@@ -146,11 +111,6 @@ public final class Ux {
         return To.toError(clazz, args);
     }
 
-    // -> WebException transfer
-    public static WebException toError(final Class<?> clazz, final Throwable error) {
-        return To.toError(clazz, error);
-    }
-
     // ---------------------- JsonArray Returned --------------------------
     // -> List<T> -> JsonArray
     public static <T> JsonArray toArray(final List<T> list) {
@@ -160,15 +120,6 @@ public final class Ux {
     // -> List<T> -> JsonArray ( with Pojo )
     public static <T> JsonArray toArray(final List<T> list, final String pojo) {
         return To.toArray(list, pojo);
-    }
-
-    // -> List<T> -> JsonArray ( convert )
-    public static <T> JsonArray toArrayFun(final List<T> list, final Function<JsonObject, JsonObject> convert) {
-        return To.toArray(list, convert);
-    }
-
-    public static BiConsumer<JsonArray, Object> fnCollectJArray() {
-        return Functions.fnCollectJArray();
     }
 
     // ---------------------- Envelop Returned --------------------------
@@ -232,13 +183,15 @@ public final class Ux {
     // ---------------------- User Data -------------------------------------
 
     // -> Message<Envelop> -> String ( Security )
+    @Deprecated
+    public static String getUserID(final Envelop envelop, final String field) {
+        return In.requestUser(envelop, field);
+    }
+    /*
     public static String getUserID(final Message<Envelop> message, final String field) {
         return In.requestUser(message, field);
     }
 
-    public static String getUserID(final Envelop envelop, final String field) {
-        return In.requestUser(envelop, field);
-    }
 
     // -> Message<Envelop> -> UUID ( Security )
     public static UUID getUserUUID(final Message<Envelop> message, final String field) {
@@ -247,41 +200,25 @@ public final class Ux {
 
     public static UUID getUserUUID(final Envelop envelop, final String field) {
         return UUID.fromString(getUserID(envelop, field));
-    }
-
-    public static String getToken(final String token, final String field) {
-        return In.requestTokenData(token, field);
-    }
+    }*/
 
     // -> Message<Envelop> -> Session ( Key )
+    /*
     public static Object getSession(final Message<Envelop> message, final String field) {
         return In.requestSession(message, field);
     }
 
     public static Object getSession(final Envelop envelop, final String field) {
         return In.requestSession(envelop, field);
-    }
+    }*/
 
     // -> JsonArray ( JsonObject ) + JsonArray ( String ) -> add 'serial'
-
-    public static JsonArray fillSerial(final JsonArray items, final JsonArray serials) {
-        return In.assignValue(items, serials, "serial", false);
-    }
-
-    public static JsonArray assignSerial(final JsonArray items, final JsonArray serials) {
+    public static JsonArray serial(final JsonArray items, final JsonArray serials) {
         return In.assignValue(items, serials, "serial", true);
     }
 
-    public static JsonArray fillField(final JsonArray items, final JsonArray targets, final String field) {
-        return In.assignValue(items, targets, field, false);
-    }
-
-    public static JsonArray assignField(final JsonArray items, final JsonArray targets, final String field) {
+    public static JsonArray field(final JsonArray items, final JsonArray targets, final String field) {
         return In.assignValue(items, targets, field, true);
-    }
-
-    public static void assignAuditor(final Object reference, final boolean isUpdate) {
-        In.assignAuditor(reference, isUpdate);
     }
 
     // ---------------------- Function Generator --------------------------------------
@@ -310,12 +247,8 @@ public final class Ux {
     }
 
     // ---------------------- Web Flow --------------------------------------
-    public static <T> Handler<AsyncResult<T>> toHandler(final Message<Envelop> message) {
+    public static <T> Handler<AsyncResult<T>> handler(final Message<Envelop> message) {
         return Web.toHandler(message);
-    }
-
-    public static <T> Handler<AsyncResult<Boolean>> toHandler(final Message<Envelop> message, final JsonObject data) {
-        return Web.toHandler(message, data);
     }
 
     // ---------------------- Future --------------------------
@@ -509,108 +442,67 @@ public final class Ux {
 
     // ---------------------- Request Data Extract --------------------------
     // -> Message<Envelop> -> T ( Interface mode )
-    public static JsonArray getArray(final Message<Envelop> message, final int index) {
-        return In.request(message, index, JsonArray.class);
-    }
 
     public static JsonArray getArray(final Envelop envelop, final int index) {
         return In.request(envelop, index, JsonArray.class);
     }
 
     // -> Message<Envelop> -> T ( Interface mode )
-    public static JsonArray getArray(final Message<Envelop> message) {
-        return In.request(message, 0, JsonArray.class);
-    }
-
     public static JsonArray getArray(final Envelop envelop) {
         return In.request(envelop, 0, JsonArray.class);
     }
 
     // -> Message<Envelop> -> T ( Interface mode )
-    public static JsonArray getArray1(final Message<Envelop> message) {
-        return In.request(message, 1, JsonArray.class);
-    }
 
     public static JsonArray getArray1(final Envelop envelop) {
         return In.request(envelop, 1, JsonArray.class);
     }
 
     // -> Message<Envelop> -> T ( Interface mode )
-    public static JsonArray getArray2(final Message<Envelop> message) {
-        return In.request(message, 2, JsonArray.class);
-    }
 
     public static JsonArray getArray2(final Envelop envelop) {
         return In.request(envelop, 2, JsonArray.class);
     }
 
     // -> Message<Envelop> -> T ( Interface mode )
-    public static JsonArray getArray3(final Message<Envelop> message) {
-        return In.request(message, 3, JsonArray.class);
-    }
 
     public static JsonArray getArray3(final Envelop envelop) {
         return In.request(envelop, 3, JsonArray.class);
     }
 
     // -> Message<Envelop> -> String ( Interface mode )
-    public static String getString(final Message<Envelop> message, final int index) {
-        return In.request(message, index, String.class);
-    }
 
     public static String getString(final Envelop envelop, final int index) {
         return In.request(envelop, index, String.class);
     }
 
     // -> Message<Envelop> -> String ( Interface mode )
-    public static String getString(final Message<Envelop> message) {
-        return In.request(message, 0, String.class);
-    }
-
     public static String getString(final Envelop envelop) {
         return In.request(envelop, 0, String.class);
     }
 
     // -> Message<Envelop> -> String ( Interface mode )
-    public static String getString1(final Message<Envelop> message) {
-        return In.request(message, 1, String.class);
-    }
-
     public static String getString1(final Envelop envelop) {
         return In.request(envelop, 1, String.class);
     }
 
     // -> Message<Envelop> -> String ( Interface mode )
-    public static String getString2(final Message<Envelop> message) {
-        return In.request(message, 2, String.class);
-    }
-
     public static String getString2(final Envelop envelop) {
         return In.request(envelop, 2, String.class);
     }
 
     // -> Message<Envelop> -> String ( Interface mode )
-    public static String getString3(final Message<Envelop> message) {
-        return In.request(message, 3, String.class);
-    }
-
     public static String getString3(final Envelop envelop) {
         return In.request(envelop, 3, String.class);
     }
 
     // -> Message<Envelop> -> JsonObject ( Interface mode )
-    public static JsonObject getJson(final Message<Envelop> message, final int index) {
-        return In.request(message, index, JsonObject.class);
-    }
 
     public static JsonObject getJson(final Envelop envelop, final int index) {
         return In.request(envelop, index, JsonObject.class);
     }
 
     // -> Message<Envelop> -> JsonObject ( Interface mode )
-    public static JsonObject getJson(final Message<Envelop> message) {
-        return In.request(message, 0, JsonObject.class);
-    }
 
     public static <T> T fromEnvelop(final Envelop envelop, final Class<T> clazz, final String pojo) {
         return From.fromJson(getJson(envelop), clazz, pojo);
@@ -633,9 +525,6 @@ public final class Ux {
     }
 
     // -> Message<Envelop> -> JsonObject ( Interface mode )
-    public static JsonObject getJson1(final Message<Envelop> message) {
-        return In.request(message, 1, JsonObject.class);
-    }
 
     public static <T> T fromEnvelop1(final Envelop envelop, final Class<T> clazz, final String pojo) {
         return From.fromJson(getJson1(envelop), clazz, pojo);
@@ -650,9 +539,6 @@ public final class Ux {
     }
 
     // -> Message<Envelop> -> JsonObject ( Interface mode )
-    public static JsonObject getJson2(final Message<Envelop> message) {
-        return In.request(message, 2, JsonObject.class);
-    }
 
     public static JsonObject getJson2(final Envelop envelop) {
         return In.request(envelop, 2, JsonObject.class);
@@ -667,9 +553,6 @@ public final class Ux {
     }
 
     // -> Message<Envelop> -> JsonObject ( Interface mode )
-    public static JsonObject getJson3(final Message<Envelop> message) {
-        return In.request(message, 3, JsonObject.class);
-    }
 
     public static JsonObject getJson3(final Envelop envelop) {
         return In.request(envelop, 3, JsonObject.class);
@@ -684,16 +567,9 @@ public final class Ux {
     }
 
     // -> Message<Envelop> -> Integer ( Interface mode )
-    public static Integer getInteger(final Message<Envelop> message, final int index) {
-        return In.request(message, index, Integer.class);
-    }
 
     public static Integer getInteger(final Envelop envelop, final int index) {
         return In.request(envelop, index, Integer.class);
-    }
-
-    public static Integer getInteger(final Message<Envelop> message) {
-        return In.request(message, 0, Integer.class);
     }
 
     public static Integer getInteger(final Envelop envelop) {
@@ -701,117 +577,71 @@ public final class Ux {
     }
 
     // -> Message<Envelop> -> Integer ( Interface mode )
-    public static Integer getInteger1(final Message<Envelop> message) {
-        return In.request(message, 1, Integer.class);
-    }
-
     public static Integer getInteger1(final Envelop envelop) {
         return In.request(envelop, 1, Integer.class);
     }
 
     // -> Message<Envelop> -> Integer ( Interface mode )
-    public static Integer getInteger2(final Message<Envelop> message) {
-        return In.request(message, 2, Integer.class);
-    }
-
     public static Integer getInteger2(final Envelop envelop) {
         return In.request(envelop, 2, Integer.class);
     }
 
     // -> Message<Envelop> -> Integer ( Interface mode )
-    public static Integer getInteger3(final Message<Envelop> message) {
-        return In.request(message, 3, Integer.class);
-    }
-
     public static Integer getInteger3(final Envelop envelop) {
         return In.request(envelop, 3, Integer.class);
     }
 
     // -> Message<Envelop> -> Long ( Interface mode )
-    public static Long getLong(final Message<Envelop> message, final int index) {
-        return In.request(message, index, Long.class);
-    }
 
     public static Long getLong(final Envelop envelop, final int index) {
         return In.request(envelop, index, Long.class);
     }
 
     // -> Message<Envelop> -> Long ( Interface mode )
-    public static Long getLong(final Message<Envelop> message) {
-        return In.request(message, 0, Long.class);
-    }
-
     public static Long getLong(final Envelop envelop) {
         return In.request(envelop, 0, Long.class);
     }
 
     // -> Message<Envelop> -> Long ( Interface mode )
-    public static Long getLong1(final Message<Envelop> message) {
-        return In.request(message, 1, Long.class);
-    }
-
     public static Long getLong1(final Envelop envelop) {
         return In.request(envelop, 1, Long.class);
     }
 
     // -> Message<Envelop> -> Long ( Interface mode )
-    public static Long getLong2(final Message<Envelop> message) {
-        return In.request(message, 2, Long.class);
-    }
-
     public static Long getLong2(final Envelop envelop) {
         return In.request(envelop, 2, Long.class);
     }
 
     // -> Message<Envelop> -> Long ( Interface mode )
-    public static Long getLong3(final Message<Envelop> message) {
-        return In.request(message, 3, Long.class);
-    }
-
     public static Long getLong3(final Envelop envelop) {
         return In.request(envelop, 3, Long.class);
     }
 
     // -> Message<Envelop> -> T ( Interface mode )
-    public static <T> T getT(final Message<Envelop> message, final int index, final Class<T> clazz) {
-        return In.request(message, index, clazz);
-    }
 
     public static <T> T getT(final Envelop envelop, final int index, final Class<T> clazz) {
         return In.request(envelop, index, clazz);
     }
 
     // -> Message<Envelop> -> T ( Interface mode )
-    public static <T> T getT(final Message<Envelop> message, final Class<T> clazz) {
-        return In.request(message, 0, clazz);
-    }
 
     public static <T> T getT(final Envelop envelop, final Class<T> clazz) {
         return In.request(envelop, 0, clazz);
     }
 
     // -> Message<Envelop> -> T ( Interface mode )
-    public static <T> T getT1(final Message<Envelop> message, final Class<T> clazz) {
-        return In.request(message, 1, clazz);
-    }
 
     public static <T> T getT1(final Envelop envelop, final Class<T> clazz) {
         return In.request(envelop, 1, clazz);
     }
 
     // -> Message<Envelop> -> T ( Interface mode )
-    public static <T> T getT2(final Message<Envelop> message, final Class<T> clazz) {
-        return In.request(message, 2, clazz);
-    }
 
     public static <T> T getT2(final Envelop envelop, final Class<T> clazz) {
         return In.request(envelop, 2, clazz);
     }
 
     // -> Message<Envelop> -> T ( Interface mode )
-    public static <T> T getT3(final Message<Envelop> message, final Class<T> clazz) {
-        return In.request(message, 3, clazz);
-    }
 
     public static <T> T getT3(final Envelop envelop, final Class<T> clazz) {
         return In.request(envelop, 3, clazz);
@@ -819,19 +649,12 @@ public final class Ux {
 
     // ---------------------- Agent mode usage --------------------------
     // -> Message<Envelop> -> JsonObject ( Agent mode )
-    public static JsonObject getBody(final Message<Envelop> message) {
-        return In.request(message, JsonObject.class);
-    }
-
     // -> Envelop -> JsonObject ( Agent mode )
     public static JsonObject getBody(final Envelop envelop) {
         return In.request(envelop, JsonObject.class);
     }
 
     // -> Message<Envelop> -> T ( Agent mode )
-    public static <T> T getBodyT(final Message<Envelop> message, final Class<T> clazz) {
-        return In.request(message, clazz);
-    }
 
     // -> Envelop -> T ( Agent mode )
     public static <T> T getBodyT(final Envelop envelop, final Class<T> clazz) {

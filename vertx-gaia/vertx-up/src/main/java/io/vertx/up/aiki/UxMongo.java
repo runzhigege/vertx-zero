@@ -112,7 +112,8 @@ class UxMongo {
             final JsonArray result = new JsonArray();
             Observable.fromIterable(res.result())
                     .filter(Objects::nonNull)
-                    .subscribe(result::add);
+                    .subscribe(result::add)
+                    .dispose();
             LOGGER.debug(Info.MONGO_FIND, collection, filter, options.toJson(), result);
             future.complete(result);
         }));

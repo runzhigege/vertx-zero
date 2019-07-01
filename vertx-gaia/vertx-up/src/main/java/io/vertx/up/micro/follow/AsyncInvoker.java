@@ -41,16 +41,16 @@ public class AsyncInvoker extends AbstractInvoker {
             final Object returnValue = this.invokeInternal(proxy, method, envelop);
             if (null == returnValue) {
                 final Future future = Future.future();
-                future.setHandler(Ux.toHandler(message));
+                future.setHandler(Ux.handler(message));
             } else {
                 final Future future = (Future) returnValue;
-                future.setHandler(Ux.toHandler(message));
+                future.setHandler(Ux.handler(message));
             }
             /*
             final Object reference = envelop.data();
             final Object arguments = Ut.deserialize(Ut.toString(reference), argType);
             final Future tResult = Ut.invoke(proxy, method.getName(), arguments);
-            tResult.setHandler(Ux.toHandler(message));
+            tResult.setHandler(Ux.handler(message));
             */
         }
     }
@@ -75,9 +75,9 @@ public class AsyncInvoker extends AbstractInvoker {
                     .connect(vertx)
                     .connect(method)
                     .send(item))
-                    .setHandler(Ux.toHandler(message)); */
+                    .setHandler(Ux.handler(message)); */
             result.compose(this.nextEnvelop(vertx, method))
-                    .setHandler(Ux.toHandler(message));
+                    .setHandler(Ux.handler(message));
         } else {
             final Future future = this.invokeJson(proxy, method, envelop);
             /* replaced old code
@@ -86,9 +86,9 @@ public class AsyncInvoker extends AbstractInvoker {
                     .connect(method)
                     .send(Ux.to(item)))
                     .compose(item -> Future.succeededFuture(Ux.to(item)))
-                    .setHandler(Ux.toHandler(message)); */
+                    .setHandler(Ux.handler(message)); */
             future.compose(this.nextEnvelop(vertx, method))
-                    .setHandler(Ux.toHandler(message));
+                    .setHandler(Ux.handler(message));
         }
     }
 }
