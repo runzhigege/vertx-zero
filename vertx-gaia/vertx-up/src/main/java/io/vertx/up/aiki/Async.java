@@ -12,6 +12,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+@SuppressWarnings("all")
 class Async {
 
     private static final Annal LOGGER = Annal.get(Async.class);
@@ -62,6 +63,7 @@ class Async {
         return future;
     }
 
+    @SuppressWarnings("all")
     static <T> Future<JsonObject> toJsonFuture(
             final String pojo,
             final CompletableFuture<T> completableFuture
@@ -81,6 +83,7 @@ class Async {
         return future;
     }
 
+    @SuppressWarnings("all")
     static <T> Future<JsonArray> toArrayFuture(
             final String pojo,
             final CompletableFuture<List<T>> completableFuture
@@ -100,6 +103,7 @@ class Async {
         return future;
     }
 
+    @SuppressWarnings("all")
     static <T> Future<JsonObject> toUpsertFuture(final T entity, final String pojo,
                                                  final Supplier<Future<JsonObject>> supplier,
                                                  final Function<JsonObject, JsonObject> updateFun) {

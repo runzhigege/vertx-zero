@@ -30,20 +30,15 @@ class UxRpc {
 
     public static Future<JsonObject> fnRpc(
             final JsonArray data) {
-        return Future.succeededFuture(
-                new JsonObject()
-                        .put("data", data)
-                        .put("count", data.size())
+        return Future.succeededFuture(new JsonObject()
+                .put("data", data)
+                .put("count", data.size())
         );
     }
 
     public static Future<JsonArray> fnRpc(
             final JsonObject item
     ) {
-        return Future.succeededFuture(
-                null == item ?
-                        new JsonArray() :
-                        item.getJsonArray("data")
-        );
+        return Future.succeededFuture(null == item ? new JsonArray() : item.getJsonArray("data"));
     }
 }

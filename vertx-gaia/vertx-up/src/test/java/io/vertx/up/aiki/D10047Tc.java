@@ -46,16 +46,6 @@ public class D10047Tc extends EpicBase {
     }
 
     @Test
-    public void testToJsonFun() {
-        final JsonObject data = this.ioJObject("d10047.json");
-        final D10047Obj obj = Ut.deserialize(data, D10047Obj.class);
-        final JsonObject result = Ux.toJsonFun(obj,
-                (from) -> from.put("username", from.getString("email")));
-        Assert.assertEquals(result.getString("username"),
-                result.getString("email"));
-    }
-
-    @Test
     public void testFromJson() {
         final JsonObject data = this.ioJObject("d10047.json");
         final D10047Obj obj = Ux.fromJson(data, D10047Obj.class);
