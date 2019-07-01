@@ -7,7 +7,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.AsyncMap;
 import io.vertx.core.shareddata.LocalMap;
-import io.zero.epic.container.KeyPair;
+import io.zero.epic.container.Kv;
 
 /**
  * Shared client for shared data in vert.x
@@ -32,24 +32,24 @@ public interface SharedClient<K, V> {
 
     SharedClient<K, V> switchClient(final String name);
 
-    KeyPair<K, V> put(K key, V value);
+    Kv<K, V> put(K key, V value);
 
-    KeyPair<K, V> put(K key, V value, int expiredSecs);
+    Kv<K, V> put(K key, V value, int expiredSecs);
 
-    KeyPair<K, V> remove(K key);
+    Kv<K, V> remove(K key);
 
     V get(K key);
 
     V get(K key, boolean once);
 
     @Fluent
-    SharedClient<K, V> put(K key, V value, Handler<AsyncResult<KeyPair<K, V>>> handler);
+    SharedClient<K, V> put(K key, V value, Handler<AsyncResult<Kv<K, V>>> handler);
 
     @Fluent
-    SharedClient<K, V> put(K key, V value, int expiredSecs, Handler<AsyncResult<KeyPair<K, V>>> handler);
+    SharedClient<K, V> put(K key, V value, int expiredSecs, Handler<AsyncResult<Kv<K, V>>> handler);
 
     @Fluent
-    SharedClient<K, V> remove(K key, Handler<AsyncResult<KeyPair<K, V>>> handler);
+    SharedClient<K, V> remove(K key, Handler<AsyncResult<Kv<K, V>>> handler);
 
     @Fluent
     SharedClient<K, V> get(K key, Handler<AsyncResult<V>> handler);

@@ -2,7 +2,7 @@ package io.vertx.up.aiki;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.zero.epic.container.RxHod;
+import io.zero.epic.container.Refer;
 import io.zero.epic.fn.Fn;
 
 import java.util.function.BiConsumer;
@@ -16,7 +16,7 @@ class Functions {
         return (collection, item) -> collection.add(item);
     }
 
-    static <E, T> Future<E> fnSupplier(final RxHod container, final E entity, final Supplier<T> supplier) {
+    static <E, T> Future<E> fnSupplier(final Refer container, final E entity, final Supplier<T> supplier) {
         return Fn.getNull(Future.succeededFuture(), () -> {
             if (null == supplier) {
                 container.add(entity);
@@ -27,7 +27,7 @@ class Functions {
         }, container, entity);
     }
 
-    static <E, T> Future<E> fnConsumer(final RxHod container, final E entity, final Consumer<T> consumer) {
+    static <E, T> Future<E> fnConsumer(final Refer container, final E entity, final Consumer<T> consumer) {
         return Fn.getNull(Future.succeededFuture(), () -> {
             consumer.accept(container.get());
             return Future.succeededFuture(entity);

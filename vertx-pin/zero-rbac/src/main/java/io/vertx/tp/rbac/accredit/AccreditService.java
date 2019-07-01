@@ -6,7 +6,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.atom.ScRequest;
 import io.vertx.up.aiki.Ux;
-import io.zero.epic.container.RxHod;
+import io.zero.epic.container.Refer;
 
 import javax.inject.Inject;
 import java.util.function.Supplier;
@@ -22,9 +22,9 @@ public class AccreditService implements AccreditStub {
     @Override
     public Future<Boolean> authorize(final JsonObject data) {
         final ScRequest request = new ScRequest(data);
-        /* RxHod for action / resource */
-        final RxHod actionHod = new RxHod();
-        final RxHod resourceHod = new RxHod();
+        /* Refer for action / resource */
+        final Refer actionHod = new Refer();
+        final Refer resourceHod = new Refer();
         return this.authorizedWithCache(request, () -> this.actionStub.fetchAction(request.getNormalizedUri(), request.getMethod(), request.getSigma())
 
                 /* SAction checking for ( Uri + Method ) */

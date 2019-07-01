@@ -11,7 +11,7 @@ import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.aiki.Uson;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.log.Annal;
-import io.zero.epic.container.RxHod;
+import io.zero.epic.container.Refer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -121,8 +121,8 @@ public class ScSession {
                 .map(ProfileGroup::new)
                 .map(ProfileGroup::initAsync)
                 .forEach(futures::add);
-        final RxHod parentHod = new RxHod();
-        final RxHod childHod = new RxHod();
+        final Refer parentHod = new Refer();
+        final Refer childHod = new Refer();
         return CompositeFuture.all(futures).compose(Sc::<ProfileGroup>composite).compose(profiles -> Ux.toFuture(profiles)
                 /* Group Direct Mode */
                 .compose(Align::flat)

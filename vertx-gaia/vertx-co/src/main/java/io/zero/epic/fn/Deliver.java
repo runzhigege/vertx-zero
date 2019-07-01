@@ -8,16 +8,17 @@ import java.util.function.Supplier;
 /**
  * Convert exception type
  */
-class Deliver {
+final class Deliver {
+    private Deliver() {
+    }
+
     /**
-     * @param supplier
-     * @param runCls
-     * @param <T>
-     * @return
+     * @param supplier T supplier function
+     * @param runCls   ZeroRunException definition
+     * @param <T>      T type of object
+     * @return Final T or throw our exception
      */
-    static <T> T execRun(final Supplier<T> supplier,
-                         final Class<? extends ZeroRunException> runCls,
-                         final Object... args) {
+    static <T> T execRun(final Supplier<T> supplier, final Class<? extends ZeroRunException> runCls, final Object... args) {
         T ret = null;
         try {
             ret = supplier.get();

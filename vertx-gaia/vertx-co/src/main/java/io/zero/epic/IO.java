@@ -48,7 +48,7 @@ final class IO {
      * @return Return to JsonArray object
      */
     static JsonArray getJArray(final String filename) {
-        return Fn.transRun(() -> new JsonArray(getString(filename)),
+        return Fn.outRun(() -> new JsonArray(getString(filename)),
                 JsonFormatException.class, filename);
     }
 
@@ -61,7 +61,7 @@ final class IO {
     static JsonObject getJObject(final String filename) {
         final String content = getString(filename);
         // TODO: For debug
-        return Fn.transRun(() -> new JsonObject(content),
+        return Fn.outRun(() -> new JsonObject(content),
                 JsonFormatException.class, filename);
     }
 

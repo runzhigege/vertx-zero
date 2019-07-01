@@ -20,7 +20,10 @@ import java.util.function.Supplier;
  * Unique interface to call function
  */
 @SuppressWarnings("all")
-public class Fn {
+public final class Fn {
+    private Fn() {
+    }
+
     // ------ Case Match
     public static <T> Future<T> match(final Case.DefaultCase<T> defaultCase, final Case<T>... matchers) {
         return Wait.match(() -> defaultCase, matchers).second.get();
@@ -213,7 +216,7 @@ public class Fn {
     }
 
     // ------ Specification for JsonFormat
-    public static <T> T transRun(final Supplier<T> supplier, final Class<? extends ZeroRunException> runCls, final Object... args) {
+    public static <T> T outRun(final Supplier<T> supplier, final Class<? extends ZeroRunException> runCls, final Object... args) {
         return Deliver.execRun(supplier, runCls, args);
     }
 
