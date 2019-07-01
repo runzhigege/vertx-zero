@@ -40,7 +40,7 @@ public class FutureInvoker extends AbstractInvoker {
             result.setHandler(item -> message.reply(item.result()));
         } else {
             final Future tResult = Ut.invoke(proxy, method.getName(), envelop);
-            tResult.setHandler(Ux.toHandler(message));
+            tResult.setHandler(Ux.handler(message));
         }
     }
 
@@ -65,9 +65,9 @@ public class FutureInvoker extends AbstractInvoker {
                     .connect(vertx)
                     .connect(method)
                     .send(item))
-                    .setHandler(Ux.toHandler(message)); */
+                    .setHandler(Ux.handler(message)); */
             future.compose(this.nextEnvelop(vertx, method))
-                    .setHandler(Ux.toHandler(message));
+                    .setHandler(Ux.handler(message));
         } else {
             final Future future = Ut.invoke(proxy, method.getName(), envelop);
             /*
@@ -76,9 +76,9 @@ public class FutureInvoker extends AbstractInvoker {
                     .connect(method)
                     .send(Ux.to(item)))
                     .compose(item -> Future.succeededFuture(Ux.to(item)))
-                    .setHandler(Ux.toHandler(message)); */
+                    .setHandler(Ux.handler(message)); */
             future.compose(this.nextEnvelop(vertx, method))
-                    .setHandler(Ux.toHandler(message));
+                    .setHandler(Ux.handler(message));
         }
     }
 }

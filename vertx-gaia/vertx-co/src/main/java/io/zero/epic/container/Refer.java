@@ -8,11 +8,11 @@ import io.zero.epic.fn.Fn;
  * Rxjava2.
  */
 @SuppressWarnings("all")
-public class RxHod {
+public final class Refer {
 
     private Object reference;
 
-    public <T> RxHod add(final T reference) {
+    public <T> Refer add(final T reference) {
         this.reference = reference;
         return this;
     }

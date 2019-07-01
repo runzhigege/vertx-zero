@@ -37,6 +37,6 @@ public class DynamicInvoker extends AbstractInvoker {
         this.getLogger().info(Info.MSG_FUTURE, this.getClass(), method.getReturnType(), true);
         final Object returnValue = this.invokeInternal(proxy, method, envelop);
         this.nextEnvelop(vertx, method, Envelop.success(returnValue))
-                .setHandler(Ux.toHandler(message));
+                .setHandler(Ux.handler(message));
     }
 }

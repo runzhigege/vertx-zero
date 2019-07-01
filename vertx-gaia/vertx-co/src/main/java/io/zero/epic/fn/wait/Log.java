@@ -8,7 +8,7 @@ import io.zero.epic.fn.Fn;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-public class Log {
+public final class Log {
 
     private static final ConcurrentMap<Integer, Annal> LOGGERS
             = new ConcurrentHashMap<>();

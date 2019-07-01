@@ -44,7 +44,7 @@ final class Instance {
     /**
      * Generic type
      */
-    static <T> Class<?> genericT(final Class<?> target) {
+    static Class<?> genericT(final Class<?> target) {
         return Fn.getJvm(() -> {
             final Type type = target.getGenericSuperclass();
             return (Class) (((ParameterizedType) type).getActualTypeArguments()[0]);
@@ -105,19 +105,19 @@ final class Instance {
     static <T> T invoke(final Object instance,
                         final String name,
                         final Object... args) {
-        return Fantam.invokeObject(instance, name, args);
+        return Invoker.invokeObject(instance, name, args);
     }
 
     static <T> T invoke(final Class<?> interfaceCls,
                         final String name,
                         final Object... args) {
-        return Fantam.invokeInterface(interfaceCls, name, args);
+        return Invoker.invokeInterface(interfaceCls, name, args);
     }
 
     static <T> T getProxy(
             final Method method) {
         final Class<?> interfaceCls = method.getDeclaringClass();
-        return Fantam.getProxy(interfaceCls);
+        return Invoker.getProxy(interfaceCls);
     }
 
     /**

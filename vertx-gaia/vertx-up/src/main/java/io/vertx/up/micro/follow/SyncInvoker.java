@@ -41,6 +41,6 @@ public class SyncInvoker extends AbstractInvoker {
         this.getLogger().info(Info.MSG_FUTURE, this.getClass(), method.getReturnType(), true);
         final Envelop result = Ut.invoke(proxy, method.getName(), envelop);
         this.nextEnvelop(vertx, method, result)
-                .setHandler(Ux.toHandler(message));
+                .setHandler(Ux.handler(message));
     }
 }

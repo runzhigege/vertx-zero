@@ -14,58 +14,36 @@ import java.util.UUID;
 
 class In {
 
-    static <T> T request(
-            final Message<Envelop> message,
-            final Class<T> clazz
-    ) {
+    static <T> T request(final Message<Envelop> message, final Class<T> clazz) {
         final Envelop body = message.body();
         return request(body, clazz);
     }
 
-    static <T> T request(
-            final Envelop envelop,
-            final Class<T> clazz
-    ) {
-        return Fn.getSemi(null == envelop, null, Fn::nil,
-                () -> envelop.data(clazz));
+    static <T> T request(final Envelop envelop, final Class<T> clazz) {
+        return Fn.getSemi(null == envelop, null, () -> null, () -> envelop.data(clazz));
     }
 
-    static <T> T request(
-            final Message<Envelop> message,
-            final Integer index,
-            final Class<T> clazz) {
+    static <T> T request(final Message<Envelop> message, final Integer index, final Class<T> clazz) {
         final Envelop body = message.body();
         return request(body, index, clazz);
     }
 
-    static <T> T request(
-            final Envelop envelop,
-            final Integer index,
-            final Class<T> clazz
+    static <T> T request(final Envelop envelop, final Integer index, final Class<T> clazz
     ) {
-        return Fn.getSemi(null == envelop, null, Fn::nil,
-                () -> envelop.data(index, clazz));
+        return Fn.getSemi(null == envelop, null, () -> null, () -> envelop.data(index, clazz));
     }
 
-    static String requestUser(
-            final Message<Envelop> message,
-            final String field
+    static String requestUser(final Message<Envelop> message, final String field
     ) {
         return requestUser(message.body(), field);
     }
 
-    static String requestUser(
-            final Envelop envelop,
-            final String field
-    ) {
-        return Fn.getSemi(null == envelop, null, Fn::nil,
+    static String requestUser(final Envelop envelop, final String field) {
+        return Fn.getSemi(null == envelop, null, () -> null,
                 () -> envelop.identifier(field));
     }
 
-    static String requestTokenData(
-            final String tokenString,
-            final String field
-    ) {
+    static String requestTokenData(final String tokenString, final String field) {
         String result = null;
         if (Ut.notNil(tokenString)) {
             final JsonObject token = UxJwt.extract(tokenString);
@@ -87,7 +65,7 @@ class In {
             final Envelop envelop,
             final String field
     ) {
-        return Fn.getSemi(null == envelop, null, Fn::nil,
+        return Fn.getSemi(null == envelop, null, () -> null,
                 () -> {
                     final Session session = envelop.getSession();
                     return null == session ? null : session.get(field);

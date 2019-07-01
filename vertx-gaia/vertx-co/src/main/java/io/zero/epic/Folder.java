@@ -9,7 +9,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class Folder {
+final class Folder {
+    private Folder() {
+    }
 
     static List<String> listFiles(final String folder) {
         return listFiles(folder, null);

@@ -6,7 +6,10 @@ import java.util.function.BiFunction;
  * For comparing
  */
 @SuppressWarnings("all")
-class Compare {
+final class Compare {
+
+    private Compare() {
+    }
 
     static int compareTo(final int left, final int right) {
         return left - right;

@@ -11,7 +11,7 @@ interface Hello {
 public class ProxyTc extends ZeroBase {
     @Test
     public void testInvoke(final TestContext context) {
-        final Object proxy = Fantam.getProxy(Hello.class);
+        final Object proxy = Invoker.getProxy(Hello.class);
         Ut.invoke(proxy, "sayHello");
     }
 }

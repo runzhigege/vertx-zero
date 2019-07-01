@@ -80,7 +80,7 @@ public class EpsilonIncome implements Income<List<Epsilon<Object>>> {
                 .filter(item -> item.annotationType() == DefaultValue.class)
                 .collect(Collectors.toList());
         return Fn.getSemi(annotationList.isEmpty(), LOGGER,
-                Fn::nil,
+                () -> null,
                 () -> {
                     final Annotation annotation = annotationList.get(Values.IDX);
                     return ZeroSerializer.getValue(paramType,

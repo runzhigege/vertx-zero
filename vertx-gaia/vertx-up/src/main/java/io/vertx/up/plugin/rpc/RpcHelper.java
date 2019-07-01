@@ -10,7 +10,7 @@ import io.vertx.up.micro.discovery.IpcOrigin;
 import io.vertx.up.micro.discovery.Origin;
 import io.vertx.zero.atom.Ruler;
 import io.zero.epic.Ut;
-import io.zero.epic.container.RxHod;
+import io.zero.epic.container.Refer;
 import io.zero.epic.fn.Fn;
 
 import java.util.Objects;
@@ -37,7 +37,7 @@ class RpcHelper {
                 name, address);
 
         // Service status checking
-        final RxHod container = new RxHod();
+        final Refer container = new Refer();
         // Lookup Record instance
         Observable.fromIterable(registryData.values())
                 .filter(Objects::nonNull)

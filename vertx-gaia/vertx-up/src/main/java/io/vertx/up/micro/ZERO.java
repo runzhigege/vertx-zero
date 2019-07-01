@@ -27,7 +27,7 @@ interface Info {
 
     String RPC_FAILURE = "[ ZERO ] ( Rpc Server ) Rpc Server met failure: details = {0}.";
 
-    String ETCD_SUCCESS = "[ ZERO ] ( Etcd Center ) Zero system detected configuration {0}, start to initialize Etcd Center.";
+    String ETCD_SUCCESS = "[ ZERO ] ( Etcd Center ) Zero system detected configuration {0}, start to singleton Etcd Center.";
 
     String REG_SUCCESS = "[ ZERO ] ( Discovery ) Record : ( name = {2}, uri = {3} ) " +
             "key = {4}, id = {5}, status = {0}, type = {1} " +

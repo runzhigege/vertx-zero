@@ -14,7 +14,7 @@ public interface AuthMsg {
     String LOGIN_PWD = "[ Ακριβώς ] username = {0}, the password ( {1} ) you provided is wrong.";
     String LOGIN_INPUT = "Login processing execute ( username = {0} )";
 
-    String TOKEN_STORE = "The system will initialize user''s principle information. user key: {0}.";
+    String TOKEN_STORE = "The system will singleton user''s principle information. user key: {0}.";
     String TOKEN_INPUT = "The system will verify token = {0}";
     String TOKEN_JWT = "Jwt token data stored: {0}.";
 

@@ -18,7 +18,7 @@ public class Case<T> extends Tuple<Supplier<Boolean>, Supplier<Future<T>>> {
         return new Case.DefaultCase<>(() -> true, value);
     }
 
-    public static class DefaultCase<T> extends Case<T> {
+    public static final class DefaultCase<T> extends Case<T> {
         private DefaultCase(final Supplier<Boolean> condition, final Supplier<Future<T>> result) {
             super(condition, result);
         }

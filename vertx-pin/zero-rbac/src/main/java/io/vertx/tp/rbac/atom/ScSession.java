@@ -11,7 +11,7 @@ import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.aiki.Uson;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.log.Annal;
-import io.zero.epic.container.RxHod;
+import io.zero.epic.container.Refer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.Objects;
 /*
  * Profile information to normalize all permission data
  * 1) After logged into the system , this class stored token information into POOL
- * 2) Get the json data and initialize profile information
+ * 2) Get the json data and singleton profile information
  * {
  *     "user": "user id",
  *     "role": [
@@ -121,8 +121,8 @@ public class ScSession {
                 .map(ProfileGroup::new)
                 .map(ProfileGroup::initAsync)
                 .forEach(futures::add);
-        final RxHod parentHod = new RxHod();
-        final RxHod childHod = new RxHod();
+        final Refer parentHod = new Refer();
+        final Refer childHod = new Refer();
         return CompositeFuture.all(futures).compose(Sc::<ProfileGroup>composite).compose(profiles -> Ux.toFuture(profiles)
                 /* Group Direct Mode */
                 .compose(Align::flat)

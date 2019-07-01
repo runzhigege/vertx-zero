@@ -16,7 +16,7 @@ public class Tuple<T, U> {
         return p.apply(t.first).apply(t.second) ? t.swap() : t;
     }
 
-    Tuple<U, T> swap() {
+    private Tuple<U, T> swap() {
         return new Tuple<>(this.second, this.first);
     }
 

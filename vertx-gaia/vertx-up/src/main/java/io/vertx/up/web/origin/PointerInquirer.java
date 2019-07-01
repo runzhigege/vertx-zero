@@ -19,7 +19,8 @@ public class PointerInquirer implements Inquirer<Set<Class<?>>> {
                 .filter(clazz -> !clazz.isAnnotationPresent(Queue.class) &&
                         !clazz.isAnnotationPresent(EndPoint.class))
                 .filter(this::isValid)
-                .subscribe(pointers::add);
+                .subscribe(pointers::add)
+                .dispose();
         return pointers;
     }
 
