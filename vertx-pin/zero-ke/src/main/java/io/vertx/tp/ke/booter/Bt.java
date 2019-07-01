@@ -1,35 +1,34 @@
 package io.vertx.tp.ke.booter;
 
+import io.vertx.core.AsyncResult;
+import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
-import io.vertx.core.VertxOptions;
-import io.vertx.tp.plugin.excel.ExcelInfix;
-import io.vertx.tp.plugin.jooq.JooqInfix;
+
+import java.util.List;
 
 /*
  * Split booter for some divide application of tool
  * 1) Loader
  */
 public class Bt {
-    /*
-     * Environment Init for Split Booter
-     */
-    static {
-        /* Prepare another vert.x instance */
-        final VertxOptions options = new VertxOptions();
-        options.setMaxEventLoopExecuteTime(30000000000L);
-        final Vertx vertx = Vertx.vertx(options);
 
-        /* Excel Init */
-        ExcelInfix.init(vertx);
-        /* Jooq Init */
-        JooqInfix.init(vertx);
+    public static Vertx getVertx() {
+        return BtVertx.getVertx();
     }
 
-    public static void importExcels(final String folder) {
-        BtLoader.importExcels(folder);
+    public static void importSyncs(final String folder) {
+        BtLoader.importSyncs(folder);
     }
 
-    public static void importExcel(final String filename) {
-        BtLoader.importExcel(filename);
+    public static void importSync(final String filename) {
+        BtLoader.importSync(filename, handler -> BtLoader.asyncOut(handler.result()));
+    }
+
+    public static void importSync(final String filename, final Handler<AsyncResult<String>> callback) {
+        BtLoader.importSync(filename, callback);
+    }
+
+    public static void importSyncs(final String folder, final Handler<AsyncResult<List<String>>> callback) {
+        BtLoader.importSyncs(folder, callback);
     }
 }
