@@ -50,44 +50,42 @@ public class ExcelClientImpl implements ExcelClient {
     }
 
     @Override
-    public ExcelClient ingestList(final String filename, final Handler<AsyncResult<Set<ExTable>>> handler) {
+    public ExcelClient ingest(final String filename, final Handler<AsyncResult<Set<ExTable>>> handler) {
+        handler.handle(Future.succeededFuture(this.ingest(filename)));
+        return this;
+    }
+
+    @Override
+    public Set<ExTable> ingest(final String filename) {
         /* 1. Get Workbook reference */
         final Workbook workbook = this.helper.getWorkbook(filename);
         /* 2. Iterator for Sheet */
-        final Set<ExTable> tables = this.helper.getExTables(workbook);
-        handler.handle(Future.succeededFuture(tables));
+        return this.helper.getExTables(workbook);
+    }
+
+    @Override
+    public ExcelClient ingest(final InputStream in, final boolean isXlsx, final Handler<AsyncResult<Set<ExTable>>> handler) {
+        handler.handle(Future.succeededFuture(this.ingest(in, isXlsx)));
         return this;
     }
 
     @Override
-    public ExcelClient ingestList(final InputStream in, final boolean isXlsx, final Handler<AsyncResult<Set<ExTable>>> handler) {
+    public Set<ExTable> ingest(final InputStream in, final boolean isXlsx) {
         /* 1. Get Workbook reference */
         final Workbook workbook = this.helper.getWorkbook(in, isXlsx);
         /* 2. Iterator for Sheet */
-        final Set<ExTable> tables = this.helper.getExTables(workbook);
-        handler.handle(Future.succeededFuture(tables));
-        return this;
-    }
-
-    @Override
-    public ExcelClient ingest(final String filename, final Handler<AsyncResult<ExTable>> handler) {
-        return this.ingestList(filename, processed -> {
-            if (processed.succeeded()) {
-                processed.result().forEach(table ->
-                        handler.handle(Future.succeededFuture(table)));
-            }
-        });
+        return this.helper.getExTables(workbook);
     }
 
     @Override
     public <T> ExcelClient loading(final String filename, final Handler<AsyncResult<Set<T>>> handler) {
-        return this.ingestList(filename, process -> handler.handle(this.handleIngested(process)));
+        return this.ingest(filename, process -> handler.handle(this.handleIngested(process)));
     }
 
     @Override
     @Fluent
     public <T> ExcelClient importTable(final String tableOnly, final String filename, final Handler<AsyncResult<Set<T>>> handler) {
-        return this.ingestList(filename, processed -> {
+        return this.ingest(filename, processed -> {
             if (processed.succeeded()) {
                 /* Filtered valid table here */
                 final Set<ExTable> execution = this.getFiltered(processed.result(), tableOnly);
@@ -99,7 +97,7 @@ public class ExcelClientImpl implements ExcelClient {
     @Override
     @Fluent
     public <T> ExcelClient importTable(final String tableOnly, final InputStream in, final Handler<AsyncResult<Set<T>>> handler) {
-        return this.ingestList(in, true, processed -> {
+        return this.ingest(in, true, processed -> {
             if (processed.succeeded()) {
                 /* Filtered valid table here */
                 final Set<ExTable> execution = this.getFiltered(processed.result(), tableOnly);
@@ -110,7 +108,7 @@ public class ExcelClientImpl implements ExcelClient {
 
     @Override
     public <T> ExcelClient loading(final InputStream in, final boolean isXlsx, final Handler<AsyncResult<Set<T>>> handler) {
-        return this.ingestList(in, isXlsx, process -> handler.handle(this.handleIngested(process)));
+        return this.ingest(in, isXlsx, process -> handler.handle(this.handleIngested(process)));
     }
 
     private <T> Future<Set<T>> handleIngested(final AsyncResult<Set<ExTable>> async) {
