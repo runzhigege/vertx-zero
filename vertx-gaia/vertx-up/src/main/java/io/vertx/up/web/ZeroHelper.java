@@ -26,14 +26,18 @@ public class ZeroHelper {
 
     private static final Annal LOGGER = Annal.get(ZeroHelper.class);
 
-    /** **/
+    /**
+     *
+     **/
     public static ServerType getAgentKey(final Class<?> clazz) {
         return Fn.getSemi(clazz.isAnnotationPresent(Agent.class), LOGGER,
                 () -> Ut.invoke(clazz.getDeclaredAnnotation(Agent.class), "type"),
-                Fn::nil);
+                () -> null);
     }
 
-    /** **/
+    /**
+     *
+     **/
     public static ConcurrentMap<ServerType, Boolean> isAgentDefined(
             final ConcurrentMap<ServerType, List<Class<?>>> agents,
             final Class<?>... exclude) {
@@ -62,12 +66,16 @@ public class ZeroHelper {
         return defined;
     }
 
-    /** **/
+    /**
+     *
+     **/
     public static Path getPath(final Class<?> clazz) {
         return getPath(clazz.getDeclaredAnnotation(Path.class));
     }
 
-    /** **/
+    /**
+     *
+     **/
     public static Path getPath(final Method method) {
         return getPath(method.getDeclaredAnnotation(Path.class));
     }

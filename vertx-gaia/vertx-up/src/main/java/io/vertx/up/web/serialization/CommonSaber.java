@@ -11,7 +11,7 @@ public class CommonSaber extends BaseSaber {
         return Fn.getNull(() ->
                         Fn.getSemi(!SaberTypes.isSupport(paramType), this.getLogger(),
                                 () -> Ut.deserialize(literal, paramType),
-                                Fn::nil),
+                                () -> null),
                 paramType, literal);
     }
 

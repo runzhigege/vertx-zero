@@ -23,7 +23,7 @@ public abstract class JsonSaber extends BaseSaber {
                         // getLogger().jvm(ex);
                         throw new _400ParameterFromStringException(this.getClass(), paramType, literal);
                     }
-                }, Fn::nil),
+                }, () -> null),
                 paramType, literal);
     }
 
