@@ -2,6 +2,7 @@ package io.vertx.up.job.refine;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Info;
+import io.vertx.up.job.store.JobStore;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
@@ -13,6 +14,7 @@ public class JobPin {
     private static final Node<JsonObject> VISITOR = Ut.singleton(ZeroUniform.class);
     private static final String JOB = "job";
     private static transient JobConfig CONFIG;
+    private static JobStore STORE;
 
     static {
         final JsonObject config = VISITOR.read();

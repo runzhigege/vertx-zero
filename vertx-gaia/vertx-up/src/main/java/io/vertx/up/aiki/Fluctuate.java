@@ -35,7 +35,7 @@ class Fluctuate {
             CompositeFuture.all(secondFutures).setHandler(res -> {
                 final List<S> secondary = res.result().list();
                 // Zipper Operation, the base list is first.
-                final List<T> completed = Ut.zipperList(first, secondary, mergeFun);
+                final List<T> completed = Ut.elementZip(first, secondary, mergeFun);
                 result.complete(completed);
             });
             return result;
@@ -58,7 +58,7 @@ class Fluctuate {
             CompositeFuture.all(secondFutures).setHandler(res -> {
                 final List<JsonArray> secondary = res.result().list();
                 // Zipper Operation, the base list is first
-                final List<JsonObject> completed = Ut.zipperList(first.getList(), secondary, mergeFun);
+                final List<JsonObject> completed = Ut.elementZip(first.getList(), secondary, mergeFun);
                 result.complete(new JsonArray(completed));
             });
             return result;
@@ -81,7 +81,7 @@ class Fluctuate {
             CompositeFuture.all(secondFutures).setHandler(res -> {
                 final List<JsonObject> secondary = res.result().list();
                 // Zipper Operation, the base list is first
-                final List<JsonObject> completed = Ut.zipperList(first.getList(), secondary, operatorFun);
+                final List<JsonObject> completed = Ut.elementZip(first.getList(), secondary, operatorFun);
                 result.complete(new JsonArray(completed));
             });
             return result;
