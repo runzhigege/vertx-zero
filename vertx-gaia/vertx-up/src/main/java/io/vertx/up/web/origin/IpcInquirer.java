@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * @Ipc and @Address must be in @Queue class instead of other specification.
+ * This class is for @Ipc and @Address must be in @Queue class instead of other specification.
  */
 public class IpcInquirer implements Inquirer<ConcurrentMap<String, Method>> {
 
@@ -25,11 +25,11 @@ public class IpcInquirer implements Inquirer<ConcurrentMap<String, Method>> {
 
     /**
      * @param classes all classes must be annotated with @Queue
-     * @return
+     * @return scanned classes.
      */
     @Override
     public ConcurrentMap<String, Method> scan(final Set<Class<?>> classes) {
-        /**
+        /*
          * Here are some specification for IPC community
          * 1. As IPC server, must extract @Ipc ( from ) part and registred to Etcd
          * 2. This address is published and other nodes could visit current Micro service.
@@ -46,15 +46,16 @@ public class IpcInquirer implements Inquirer<ConcurrentMap<String, Method>> {
                     final Annotation annotation = method.getAnnotation(Ipc.class);
                     final String address = Ut.invoke(annotation, "value");
                     addresses.put(address, method);
-                });
+                })
+                .dispose();
         return addresses;
     }
 
     /**
      * Method with @Ipc must contain return type
      *
-     * @param method
-     * @return
+     * @param method method reference that scanned by zero
+     * @return Whether this method is valid
      */
     private Method ensureSpec(final Method method) {
         Fn.outUp(Ut.isVoid(method.getReturnType()), LOGGER,
@@ -75,8 +76,8 @@ public class IpcInquirer implements Inquirer<ConcurrentMap<String, Method>> {
     /**
      * If declaring class is interface, it must contains implementation classes.
      *
-     * @param classes
-     * @return
+     * @param classes all classes that be sure to consider as agent
+     * @return valid method reference
      */
     private Method ensureAgent(final Method method, final Set<Class<?>> classes) {
         // Get declare clazz
@@ -97,8 +98,8 @@ public class IpcInquirer implements Inquirer<ConcurrentMap<String, Method>> {
     /**
      * If set to or name, must not be null/empty at the sametime.
      *
-     * @param method
-     * @return
+     * @param method the method that should be checked here.
+     * @return valid method reference in the container
      */
     private Method ensureTarget(final Method method) {
         final Annotation annotation = method.getAnnotation(Ipc.class);
