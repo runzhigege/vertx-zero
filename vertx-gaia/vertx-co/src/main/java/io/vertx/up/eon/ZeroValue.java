@@ -11,6 +11,8 @@ public interface ZeroValue {
 
     boolean DEFAULT_HA = true;
 
+    String DEFAULT_JOB = "jobs";
+
     /**
      * Scanned data to distinguish mode
      * 1) Only Interface Style could have the indexes key such as 0,1,2 consider as data key.

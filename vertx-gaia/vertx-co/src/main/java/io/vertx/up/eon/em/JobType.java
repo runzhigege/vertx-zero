@@ -2,6 +2,6 @@ package io.vertx.up.eon.em;
 
 public enum JobType {
     FIXED,      // Run at timestamp
-    SCHEDULED,  // Scheduled
+    PLAN,       // Scheduled
     ONCE        // Run once
 }
