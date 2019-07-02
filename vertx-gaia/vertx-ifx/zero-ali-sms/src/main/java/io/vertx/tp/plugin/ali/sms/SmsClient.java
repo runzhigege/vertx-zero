@@ -1,4 +1,4 @@
-package io.vertx.tp.ali.sms;
+package io.vertx.tp.plugin.ali.sms;
 
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.AsyncResult;
