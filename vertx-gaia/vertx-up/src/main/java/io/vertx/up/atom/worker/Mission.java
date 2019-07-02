@@ -1,10 +1,16 @@
 package io.vertx.up.atom.worker;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.JsonObjectDeserializer;
+import com.fasterxml.jackson.databind.JsonObjectSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.em.JobStatus;
 import io.vertx.up.eon.em.JobType;
 
 import java.io.Serializable;
+import java.lang.reflect.Method;
 import java.time.Instant;
 
 /**
@@ -14,7 +20,7 @@ import java.time.Instant;
  */
 public class Mission implements Serializable {
     /* Job status, default job is 'ready' */
-    private final JobStatus status = JobStatus.READY;
+    private JobStatus status = JobStatus.READY;
     /* Job name */
     private String name;
     /* Job type */
@@ -24,16 +30,35 @@ public class Mission implements Serializable {
     /* Job description */
     private String description;
     /* Job configuration */
+    @JsonSerialize(using = JsonObjectSerializer.class)
+    @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject config = new JsonObject();
     /* Job additional */
+    @JsonSerialize(using = JsonObjectSerializer.class)
+    @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject additional = new JsonObject();
     /* Time: started time */
+    @JsonIgnore
     private Instant instant = Instant.now();
     /* Time: duration */
     private long duration = -1L;
 
+    /* Job reference */
+    @JsonIgnore
+    private Object proxy;
+    /* Job start method */
+    @JsonIgnore
+    private Method on;
+    /* Job end method */
+    @JsonIgnore
+    private Method off;
+
     public JobStatus getStatus() {
         return this.status;
+    }
+
+    public void setStatus(final JobStatus status) {
+        this.status = status;
     }
 
     public String getName() {
@@ -100,6 +125,30 @@ public class Mission implements Serializable {
         this.duration = duration;
     }
 
+    public Object getProxy() {
+        return this.proxy;
+    }
+
+    public void setProxy(final Object proxy) {
+        this.proxy = proxy;
+    }
+
+    public Method getOn() {
+        return this.on;
+    }
+
+    public void setOn(final Method on) {
+        this.on = on;
+    }
+
+    public Method getOff() {
+        return this.off;
+    }
+
+    public void setOff(final Method off) {
+        this.off = off;
+    }
+
     @Override
     public String toString() {
         return "Mission{" +
@@ -112,6 +161,9 @@ public class Mission implements Serializable {
                 ", additional=" + this.additional +
                 ", instant=" + this.instant +
                 ", duration=" + this.duration +
+                ", proxy=" + this.proxy +
+                ", on=" + this.on +
+                ", off=" + this.off +
                 '}';
     }
 }

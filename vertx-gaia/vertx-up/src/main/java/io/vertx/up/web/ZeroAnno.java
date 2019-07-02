@@ -159,6 +159,13 @@ public class ZeroAnno {
     }
 
     /**
+     * Get Jobs for current
+     */
+    public static Set<Mission> getJobs() {
+        return JOBS;
+    }
+
+    /**
      * Get all workers
      *
      * @return worker set
