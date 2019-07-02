@@ -15,6 +15,9 @@ public interface Info {
     String SCANED_ENDPOINT = "[ ZERO ] ( {0} EndPoint ) The Zero system has found " +
             "{0} components of @EndPoint.";
 
+    String SCANED_JOB = "[ ZERO ] ( {0} Job ) The Zero system has found " +
+            "{0} components of @Job.";
+
     String SCANED_QUEUE = "[ ZERO ] ( {0} Queue ) The Zero system has found " +
             "{0} components of @Queue.";
 
@@ -27,4 +30,12 @@ public interface Info {
     String SOCK_ENABLED = "[ ZERO ] ( Micro -> Sock ) Zero system detected the socket server is Enabled.";
 
     String RPC_ENABLED = "[ ZERO ] ( Micro -> Rpc ) Zero system detected the rpc server is Enabled. ";
+
+    String JOB_IGNORE = "[ ZERO ] ( Job ) The class {0} annotated with @Job will be ignored because there is no @On method defined.";
+
+    String JOB_EMPTY = "[ ZERO ] ( Job ) Zero system detect no jobs, the scheduler will be stopped.";
+
+    String JOB_MONITOR = "[ ZERO ] ( Job ) Zero system detect {0} jobs, the scheduler will start....";
+
+    String JOB_CONFIG = "[ ZERO ] ( Job ) Job configuration read : {0}";
 }
