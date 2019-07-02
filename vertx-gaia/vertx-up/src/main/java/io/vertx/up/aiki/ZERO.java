@@ -23,6 +23,11 @@ interface Info {
     String POOL_PUT_TIMER = "[ ZERO ] ( Shared ) key = {0}, value = {1} has been put into {2} to keep {3} seconds";
     String POOL_REMOVE = "[ ZERO ] ( Shared ) key = {0} has been removed from pool name = {2}.";
     String POOL_GET = "[ ZERO ] ( Shared ) key = {0} has been picked from {1}, mode = {2}";
+    String INFIX_NULL = "[ ZERO ] The system scanned null infix for key = {0} " +
+            "on the field \"{1}\" of {2}";
+
+    String INFIX_IMPL = "[ ZERO ] The hitted class {0} does not implement the interface" +
+            "of {1}";
 }
 
 interface Pool {
@@ -32,4 +37,6 @@ interface Pool {
     ConcurrentMap<String, UxPool> POOL = new ConcurrentHashMap<>();
 
     ConcurrentMap<Class<?>, Uobj> INJECTION = new ConcurrentHashMap<>();
+
+    ConcurrentMap<Class<?>, Uimmit> INFIXES = new ConcurrentHashMap<>();
 }

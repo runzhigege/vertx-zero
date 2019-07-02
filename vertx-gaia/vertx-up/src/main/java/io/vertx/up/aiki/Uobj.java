@@ -3,8 +3,6 @@ package io.vertx.up.aiki;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.log.Annal;
 import io.vertx.up.web.ZeroAnno;
-import io.vertx.up.web.anima.AffluxInfix;
-import io.vertx.up.web.anima.AffluxScatter;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
@@ -24,7 +22,7 @@ public class Uobj {
     private static final ConcurrentMap<Class<?>, ConcurrentMap<String, Class<?>>>
             PENDINGS = ZeroAnno.getPlugins();
 
-    private static final AffluxInfix INJECTOR = AffluxInfix.create(AffluxScatter.class);
+    private static final Uimmit INJECTOR = Uimmit.create(Uobj.class);
 
     private final transient Annal logger;
 

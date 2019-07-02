@@ -17,6 +17,5 @@
         <module>zero-ali-sms</module>
         <module>zero-qiniu</module>
         <module>zero-excel</module>
-        <module>zero-job</module>
     </modules>
 </project>

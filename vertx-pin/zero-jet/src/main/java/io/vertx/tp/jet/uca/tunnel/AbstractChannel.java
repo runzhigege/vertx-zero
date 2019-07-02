@@ -8,8 +8,8 @@ import io.vertx.tp.optic.jet.JtChannel;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.annotations.Contract;
 import io.vertx.up.atom.Envelop;
-import io.vertx.up.commune.ActRequest;
-import io.vertx.up.commune.ActResponse;
+import io.vertx.up.commune.ActIn;
+import io.vertx.up.commune.ActOut;
 import io.vertx.up.commune.Api;
 import io.vertx.up.commune.Record;
 import io.vertx.up.log.Annal;
@@ -41,9 +41,9 @@ public abstract class AbstractChannel implements JtChannel {
 
         /*
          * First step for channel
-         * Initialize the `ActRequest` object and reference
+         * Initialize the `ActIn` object and reference
          */
-        final ActRequest request = new ActRequest(envelop);
+        final ActIn request = new ActIn(envelop);
         request.connect(record);
         /*
          * Build component and init
@@ -75,7 +75,7 @@ public abstract class AbstractChannel implements JtChannel {
                         /*
                          * Response here for future custom
                          */
-                        .compose(ActResponse::async);
+                        .compose(ActOut::async);
             } else {
                 /*
                  * singleton singleton error
@@ -88,7 +88,7 @@ public abstract class AbstractChannel implements JtChannel {
     /*
      * Initialize component
      */
-    public abstract Future<Boolean> initAsync(JtComponent component, ActRequest request);
+    public abstract Future<Boolean> initAsync(JtComponent component, ActIn request);
 
     protected Annal getLogger() {
         return Annal.get(this.getClass());

@@ -1,15 +1,15 @@
 package io.vertx.tp.optic.jet;
 
 import io.vertx.core.Future;
-import io.vertx.up.commune.ActRequest;
-import io.vertx.up.commune.ActResponse;
+import io.vertx.up.commune.ActIn;
+import io.vertx.up.commune.ActOut;
 
 /*
  * Business component, connect to dao, basic condition:
  */
 public interface JtComponent {
     /*
-     * Access for ActRequest here
+     * Access for ActIn here
      */
-    Future<ActResponse> transferAsync(ActRequest request);
+    Future<ActOut> transferAsync(ActIn request);
 }
