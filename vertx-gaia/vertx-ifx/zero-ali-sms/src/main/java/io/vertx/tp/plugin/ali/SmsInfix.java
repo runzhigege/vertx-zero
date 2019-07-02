@@ -1,7 +1,7 @@
-package io.vertx.tp.ali;
+package io.vertx.tp.plugin.ali;
 
 import io.vertx.core.Vertx;
-import io.vertx.tp.ali.sms.SmsClient;
+import io.vertx.tp.plugin.ali.sms.SmsClient;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.plugin.Infix;
 import io.zero.epic.fn.Fn;

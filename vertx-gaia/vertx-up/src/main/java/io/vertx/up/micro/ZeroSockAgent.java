@@ -26,7 +26,7 @@ public class ZeroSockAgent extends AbstractVerticle {
             final Router router = Router.router(this.vertx);
 
             /* Handler **/
-            server.requestHandler(router::accept).listen();
+            server.requestHandler(router).listen();
         });
     }
 }

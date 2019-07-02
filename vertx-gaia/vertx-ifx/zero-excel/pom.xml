@@ -31,5 +31,10 @@
             <artifactId>poi-ooxml-schemas</artifactId>
             <version>${poi.version}</version>
         </dependency>
+        <!-- Higher dependency -->
+        <dependency>
+            <groupId>cn.vertxup</groupId>
+            <artifactId>vertx-up</artifactId>
+        </dependency>
     </dependencies>
 </project>

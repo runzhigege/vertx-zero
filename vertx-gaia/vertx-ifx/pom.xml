@@ -18,10 +18,4 @@
         <module>zero-qiniu</module>
         <module>zero-excel</module>
     </modules>
-    <dependencies>
-        <dependency>
-            <groupId>cn.vertxup</groupId>
-            <artifactId>vertx-up</artifactId>
-        </dependency>
-    </dependencies>
 </project>

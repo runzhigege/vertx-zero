@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS I_SERVICE
     `OUT_SCRIPT`         TEXT COMMENT '「outScript」- 本次不使用，加载脚本引擎ScriptEngine后置脚本',
 
     /*
-     * 通道定义，主要目的是创建：ActRequest 并且传给 Service 层，通道的输入为：Envelop（数据） 和 ZApi（配置）
+     * 通道定义，主要目的是创建：ActIn 并且传给 Service 层，通道的输入为：Envelop（数据） 和 ZApi（配置）
      * 通道主要包含五种基本类型：
      * ADAPTOR：「适配器模式」访问自身数据库专用（需要初始化DAO）
      *          Input --> Database
@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS I_SERVICE
 
     /*
      * 中间层专用信息
-     * Channel：只可见 Envelop，生成 ActRequest，并且传入
-     * Component：只可见 Record，生成 ActResponse
+     * Channel：只可见 Envelop，生成 ActIn，并且传入
+     * Component：只可见 Record，生成 ActOut
      */
     `CONFIG_CHANNEL`     TEXT COMMENT '「configChannel」- 通道（自定义）配置信息，Channel专用',
     `CONFIG_INTEGRATION` TEXT COMMENT '「configIntegration」- 集成配置信息，第三方专用',
@@ -53,8 +53,8 @@ CREATE TABLE IF NOT EXISTS I_SERVICE
     `CONFIG_SERVICE`     TEXT COMMENT '「configService」- 业务组件配置，业务组件专用',
 
     /*
-     * 服务组件定义，消费 ActRequest，并且生成 ActResponse
-     * 1）只消费 ActRequest，不消费 Envelop（下层转换成 ZRecord 和 ActRequest执行，不再处理 Envelop）
+     * 服务组件定义，消费 ActIn，并且生成 ActOut
+     * 1）只消费 ActIn，不消费 Envelop（下层转换成 ZRecord 和 ActRequest执行，不再处理 Envelop）
      * 2）当前服务组件需要使用的 Record 类型（框架初始化，提交给内置使用），必须实现 Record 接口（ZRecord对Channel不可见）
      */
     `SERVICE_RECORD`     VARCHAR(255) COMMENT '「serviceRecord」- 服务记录定义',

@@ -1,4 +1,4 @@
-package io.vertx.up.web.anima;
+package io.vertx.up.aiki;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Plugins;
@@ -15,26 +15,25 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Set;
 
-public class AffluxInfix {
+public class Uimmit {
 
     private transient final Class<?> clazz;
     private transient final Annal logger;
 
-    private AffluxInfix(final Class<?> clazz) {
+    private Uimmit(final Class<?> clazz) {
         this.clazz = clazz;
         this.logger = Annal.get(clazz);
     }
 
-    public static AffluxInfix create(final Class<?> clazz) {
-        return Fn.pool(Pool.INFIXES, clazz, () -> new AffluxInfix(clazz));
+    public static Uimmit create(final Class<?> clazz) {
+        return Fn.pool(Pool.INFIXES, clazz, () -> new Uimmit(clazz));
     }
 
     private Class<? extends Annotation> search(
             final Field field
     ) {
         final Annotation[] annotations = field.getDeclaredAnnotations();
-        final Set<Class<? extends Annotation>>
-                annotationCls = Plugins.INFIX_MAP.keySet();
+        final Set<Class<? extends Annotation>> annotationCls = Plugins.INFIX_MAP.keySet();
         Class<? extends Annotation> hitted = null;
         for (final Annotation annotation : annotations) {
             if (annotationCls.contains(annotation.annotationType())) {

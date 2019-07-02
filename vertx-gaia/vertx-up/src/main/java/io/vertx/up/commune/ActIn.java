@@ -13,22 +13,22 @@ import java.util.Objects;
 
 /*
  * Business Request
- * 「ActRequest」 means Action Request and offer business component parameters here.
+ * 「ActIn」 means Action Request and offer business component parameters here.
  * 1) This DTO contains: JsonObject ( Pure Data ), ZRecord ( Record Structure )
  * 2) Bind record data structure for serialization/deserialization.
  *
  * 「Workflow」
  *  In ——
  *      Consumer -> ZApi/Envelop ->
- *                      Channel -> ActRequest ->
+ *                      Channel -> ActIn ->
  *                                          Component
  *  Out ——
- *      Component -> ActResponse ->
+ *      Component -> ActOut ->
  *                      Envelop ->
  *                             Consumer ->
  *                                    SendAim ( Callback )
  */
-public class ActRequest implements Serializable {
+public class ActIn implements Serializable {
 
     /* Raw data of `Envelop` object/reference */
     private final transient Envelop envelop;
@@ -36,7 +36,7 @@ public class ActRequest implements Serializable {
     private final transient JsonObject query = new JsonObject();
     private transient Record record;
 
-    public ActRequest(final Envelop envelop) {
+    public ActIn(final Envelop envelop) {
         /* Envelop reference here */
         this.envelop = envelop;
 
