@@ -1,4 +1,4 @@
-package io.vertx.tp.plugin.quartz;
+package io.vertx.tp.plugin.job;
 
 import io.vertx.core.Vertx;
 import io.vertx.up.annotations.Plugin;
