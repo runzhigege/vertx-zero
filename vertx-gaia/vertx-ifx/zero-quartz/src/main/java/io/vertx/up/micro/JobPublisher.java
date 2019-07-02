@@ -10,7 +10,7 @@ import io.vertx.zero.eon.Values;
  * 2) This task should worker in specific mode
  */
 @Worker(instances = Values.SINGLE)
-public class ZeroPublisher extends AbstractVerticle {
+public class JobPublisher extends AbstractVerticle {
 
     @Override
     public void start() {
