@@ -86,7 +86,7 @@ public class ZeroHttpAgent extends AbstractVerticle {
             filterAxiser.mount(router);
 
             /* 5.4.Listen for router on the server **/
-            server.requestHandler(router::accept).listen();
+            server.requestHandler(router).listen();
             {
                 // 5.5. Log output
                 this.registryServer(option, router);

@@ -43,9 +43,9 @@ public class Pager implements Serializable {
     /**
      * Create pager by page, size
      *
-     * @param page
-     * @param size
-     * @return
+     * @param page page index + 1
+     * @param size page size
+     * @return valid Pager of new
      */
     public static Pager create(final Integer page, final Integer size) {
         return new Pager(page, size);
@@ -54,13 +54,14 @@ public class Pager implements Serializable {
     /**
      * Another mode to create Pager
      *
-     * @param pageJson
-     * @return
+     * @param pageJson parsed pager
+     * @return valid Pager
      */
     public static Pager create(final JsonObject pageJson) {
         return new Pager(pageJson);
     }
 
+    @SuppressWarnings("all")
     private void ensure(final JsonObject pageJson) {
         // Pager building checking
         Fn.outWeb(null == pageJson, LOGGER,
@@ -112,9 +113,5 @@ public class Pager implements Serializable {
 
     public int getEnd() {
         return this.end;
-    }
-
-    public int getTop() {
-        return this.size;
     }
 }

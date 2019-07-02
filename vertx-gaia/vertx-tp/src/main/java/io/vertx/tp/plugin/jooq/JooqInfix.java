@@ -1,7 +1,7 @@
 package io.vertx.tp.plugin.jooq;
 
 import io.vertx.core.Vertx;
-import io.vertx.tp.hikari.HikariCpPool;
+import io.vertx.tp.database.DataPool;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.log.Annal;
@@ -16,6 +16,7 @@ import org.jooq.SQLDialect;
 import org.jooq.impl.DefaultConfiguration;
 import org.jooq.impl.DefaultConnectionProvider;
 
+import java.sql.Connection;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -41,10 +42,11 @@ public class JooqInfix implements Infix {
                             // Initialized client
                             final Configuration configuration = new DefaultConfiguration();
                             configuration.set(SQLDialect.MYSQL_5_7);
-                            final ConnectionProvider provider =
-                                    new DefaultConnectionProvider(HikariCpPool.getConnection(
-                                            config.getJsonObject("provider")
-                                    ));
+                            // Switch to Data Pool
+                            final DataPool pool = DataPool.create();
+                            final Connection connection = Fn.getJvm(() -> pool.getDataSource().getConnection());
+                            // Database object it bind to jooq configuration
+                            final ConnectionProvider provider = new DefaultConnectionProvider(connection);
                             // Initialized default configuration
                             configuration.set(provider);
                             return configuration;

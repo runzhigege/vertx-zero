@@ -50,31 +50,31 @@ public class ZeroApiAgent extends AbstractVerticle {
 
     @Override
     public void start() {
-        /** 1.Call router hub to mount commont **/
+        /* 1.Call router hub to mount commont **/
         final Axis<Router> routerAxiser = Fn.poolThread(Pool.ROUTERS,
                 () -> Ut.instance(RouterAxis.class));
-        /** 2.Call route hub to mount walls **/
+        /* 2.Call route hub to mount walls **/
         final Axis<Router> wallAxiser = Fn.poolThread(Pool.WALLS,
                 () -> Ut.instance(WallAxis.class, this.vertx));
         Fn.outUp(() -> {
 
             // Set breaker for each server
             ZeroAtomic.API_OPTS.forEach((port, option) -> {
-                /** Mount to api hub **/
+                /* Mount to api hub **/
                 final Axis<Router> axiser = Fn.poolThread(Pool.APIS,
                         () -> Ut.instance(PointAxis.class, option, this.vertx));
-                /** Single server processing **/
+                /* Single server processing **/
                 final HttpServer server = this.vertx.createHttpServer(option);
-                /** Router **/
+                /* Router **/
                 final Router router = Router.router(this.vertx);
                 routerAxiser.mount(router);
                 // Wall
                 wallAxiser.mount(router);
-                /** Api Logical **/
+                /* Api Logical **/
                 axiser.mount(router);
 
-                /** Listening **/
-                server.requestHandler(router::accept).listen();
+                /* Listening **/
+                server.requestHandler(router).listen();
                 {
                     this.registryServer(option);
                 }

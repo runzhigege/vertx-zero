@@ -7,20 +7,20 @@ import io.vertx.up.atom.Envelop;
 
 import java.io.Serializable;
 
-public class ActResponse implements Serializable {
+public class ActOut implements Serializable {
 
     private transient final Envelop envelop;
 
-    public ActResponse(final Object data) {
+    public ActOut(final Object data) {
         this.envelop = Envelop.success(data);
     }
 
-    public ActResponse(final Throwable ex) {
+    public ActOut(final Throwable ex) {
         this.envelop = Envelop.failure(ex);
     }
 
-    public static Future<ActResponse> future() {
-        return Ux.toFuture(new ActResponse(new JsonObject()));
+    public static Future<ActOut> future() {
+        return Ux.toFuture(new ActOut(new JsonObject()));
     }
 
     public Envelop sync() {
