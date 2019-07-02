@@ -3,20 +3,19 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>vertx-gaia</artifactId>
+        <artifactId>vertx-ifx</artifactId>
         <groupId>cn.vertxup</groupId>
         <version>0.4.11-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>vertx-ifx</artifactId>
-    <packaging>pom</packaging>
-    <name>( Vertx Infix ) vertx-ifx: Zero Plugins</name>
-    <modules>
-        <module>zero-iqiy</module>
-        <module>zero-ali-sms</module>
-        <module>zero-qiniu</module>
-        <module>zero-excel</module>
-        <module>zero-quartz</module>
-    </modules>
+    <artifactId>zero-quartz</artifactId>
+    <name>( Vertx Infix ) zero-quartz: Background schedulers</name>
+    <dependencies>
+        <!-- Low dependency -->
+        <dependency>
+            <groupId>cn.vertxup</groupId>
+            <artifactId>vertx-tp</artifactId>
+        </dependency>
+    </dependencies>
 </project>

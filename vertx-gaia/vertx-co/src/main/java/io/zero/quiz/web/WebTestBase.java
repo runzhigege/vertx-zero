@@ -40,7 +40,7 @@ public class WebTestBase extends VertxTestBase {
         this.server = this.vertx.createHttpServer(this.getHttpServerOptions());
         this.client = this.vertx.createHttpClient(this.getHttpClientOptions());
         final CountDownLatch latch = new CountDownLatch(1);
-        this.server.requestHandler(this.router::accept).listen(this.onSuccess(res -> latch.countDown()));
+        this.server.requestHandler(this.router).listen(this.onSuccess(res -> latch.countDown()));
         this.awaitLatch(latch);
     }
 

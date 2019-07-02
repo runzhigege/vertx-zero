@@ -6,9 +6,7 @@ import java.nio.charset.Charset;
  * Value constants
  */
 public interface Values {
-    /**
-     *
-     **/
+    /* Buffer size */
     int BUFFER_SIZE = 16;
     /**
      *
@@ -44,6 +42,8 @@ public interface Values {
      *
      **/
     int ONE = 1;
+
+    int SINGLE = ONE;
     /**
      *
      **/

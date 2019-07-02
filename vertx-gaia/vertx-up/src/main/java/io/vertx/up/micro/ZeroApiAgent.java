@@ -74,7 +74,7 @@ public class ZeroApiAgent extends AbstractVerticle {
                 axiser.mount(router);
 
                 /** Listening **/
-                server.requestHandler(router::accept).listen();
+                server.requestHandler(router).listen();
                 {
                     this.registryServer(option);
                 }

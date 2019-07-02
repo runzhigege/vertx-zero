@@ -1,4 +1,4 @@
-package io.vertx.tp.ali.sms;
+package io.vertx.tp.plugin.ali.sms;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.init.TpConfig;
