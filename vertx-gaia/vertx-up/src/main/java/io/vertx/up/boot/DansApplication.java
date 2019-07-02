@@ -64,17 +64,17 @@ public class DansApplication {
         final Launcher<Vertx> launcher = Ut.singleton(ZeroLauncher.class);
 
         launcher.start(vertx -> {
-            /** 1.Find Agent for deploy **/
+            /* 1.Find Agent for deploy **/
             Runner.run(() -> {
                 final Scatter<Vertx> scatter = Ut.singleton(PointScatter.class);
                 scatter.connect(vertx);
             }, "gateway-runner");
-            /** 2.Find Worker for deploy **/
+            /* 2.Find Worker for deploy **/
             Runner.run(() -> {
                 final Scatter<Vertx> scatter = Ut.singleton(DetectScatter.class);
                 scatter.connect(vertx);
             }, "detect-runner");
-            /** 3.Initialize Infix **/
+            /* 3.Initialize Infix **/
             Runner.run(() -> {
                 // Infix For Api Gateway
                 final Scatter<Vertx> scatter = Ut.singleton(InfixScatter.class);

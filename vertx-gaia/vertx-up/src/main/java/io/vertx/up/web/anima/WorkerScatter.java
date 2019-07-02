@@ -24,9 +24,9 @@ public class WorkerScatter implements Scatter<Vertx> {
 
     @Override
     public void connect(final Vertx vertx) {
-        /** 1.Find Workers for deploy **/
+        /* 1.Find Workers for deploy **/
         final Set<Class<?>> sources = ZeroAnno.getWorkers();
-        /** 2.Default Workers **/
+        /* 2.Default Workers **/
         if (sources.isEmpty()) {
             sources.add(ZeroHttpWorker.class);
         }
@@ -60,8 +60,7 @@ public class WorkerScatter implements Scatter<Vertx> {
     private Set<Class<?>> getTargets(final Set<Class<?>> sources) {
         final Set<Class<?>> workers = new HashSet<>();
         for (final Class<?> source : sources) {
-            final MessageModel model =
-                    Ut.invoke(source.getAnnotation(Worker.class), "value");
+            final MessageModel model = Ut.invoke(source.getAnnotation(Worker.class), "value");
             if (this.getModel().contains(model)) {
                 workers.add(source);
             }
