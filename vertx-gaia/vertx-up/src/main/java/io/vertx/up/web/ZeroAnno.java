@@ -3,6 +3,7 @@ package io.vertx.up.web;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.secure.Cliff;
+import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.atom.worker.Receipt;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
@@ -45,6 +46,8 @@ public class ZeroAnno {
             POINTER = new HashSet<>();
     private final static Set<Class<?>>
             TPS = new HashSet<>();
+    private final static Set<Mission>
+            JOBS = new HashSet<>();
 
     static {
         /* 1.Scan the packages **/
@@ -58,8 +61,7 @@ public class ZeroAnno {
         Fn.safeSemi(!ENDPOINTS.isEmpty(),
                 LOGGER,
                 () -> {
-                    final Inquirer<Set<Event>> event =
-                            Ut.singleton(EventInquirer.class);
+                    final Inquirer<Set<Event>> event = Ut.singleton(EventInquirer.class);
                     EVENTS.addAll(event.scan(ENDPOINTS));
                 });
         /* 1.1. Put Path Uri into Set */
@@ -88,40 +90,35 @@ public class ZeroAnno {
         Fn.safeSemi(!queues.isEmpty(),
                 LOGGER,
                 () -> {
-                    final Inquirer<Set<Receipt>> receipt =
-                            Ut.singleton(ReceiptInquirer.class);
+                    final Inquirer<Set<Receipt>> receipt = Ut.singleton(ReceiptInquirer.class);
                     RECEIPTS.addAll(receipt.scan(queues));
                 });
 
         /* Ipc Only **/
-        final Inquirer<ConcurrentMap<String, Method>> ipc =
-                Ut.singleton(IpcInquirer.class);
+        final Inquirer<ConcurrentMap<String, Method>> ipc = Ut.singleton(IpcInquirer.class);
         IPCS.putAll(ipc.scan(clazzes));
         /* Agent **/
-        final Inquirer<ConcurrentMap<ServerType, List<Class<?>>>> agent =
-                Ut.singleton(AgentInquirer.class);
+        final Inquirer<ConcurrentMap<ServerType, List<Class<?>>>> agent = Ut.singleton(AgentInquirer.class);
         AGENTS.putAll(agent.scan(clazzes));
 
         /* JSR330 Fix **/
-        final Inquirer<Set<Class<?>>> pointer =
-                Ut.singleton(PointerInquirer.class);
+        final Inquirer<Set<Class<?>>> pointer = Ut.singleton(PointerInquirer.class);
         POINTER.addAll(pointer.scan(clazzes));
 
         /* Tp Clients **/
-        final Inquirer<Set<Class<?>>> tps =
-                Ut.singleton(PluginInquirer.class);
+        final Inquirer<Set<Class<?>>> tps = Ut.singleton(PluginInquirer.class);
         TPS.addAll(tps.scan(clazzes));
 
         /* Worker **/
-        final Inquirer<Set<Class<?>>> worker =
-                Ut.singleton(WorkerInquirer.class);
+        final Inquirer<Set<Class<?>>> worker = Ut.singleton(WorkerInquirer.class);
         WORKERS.addAll(worker.scan(clazzes));
 
-        /* Walls **/
+        /* Jobs with description in zero */
+        final Inquirer<Set<Mission>> jobs = Ut.singleton(JobInquirer.class);
+        JOBS.addAll(jobs.scan(clazzes));
 
         /* Injections **/
-        final Inquirer<ConcurrentMap<Class<?>, ConcurrentMap<String, Class<?>>>> afflux =
-                Ut.singleton(AffluxInquirer.class);
+        final Inquirer<ConcurrentMap<Class<?>, ConcurrentMap<String, Class<?>>>> afflux = Ut.singleton(AffluxInquirer.class);
         PLUGINS.putAll(afflux.scan(clazzes));
     }
 

@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 /**
- * @Agent
+ * This component is for @Agent annotated class
  */
 public class AgentInquirer implements
         Inquirer<ConcurrentMap<ServerType, List<Class<?>>>> {

@@ -15,7 +15,8 @@ public class PluginInquirer implements Inquirer<Set<Class<?>>> {
         // Filter Client
         Observable.fromIterable(allClasses)
                 .filter(this::isPlugin)
-                .subscribe(plugins::add);
+                .subscribe(plugins::add)
+                .dispose();
         // Ensure Tp Client
         return plugins;
     }
