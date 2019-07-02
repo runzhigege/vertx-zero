@@ -40,7 +40,8 @@ public class FilterInquirer implements Inquirer<ConcurrentMap<String, Set<Event>
         Observable.fromIterable(clazzes)
                 .filter(item -> item.isAnnotationPresent(WebFilter.class))
                 .map(this::ensure)
-                .subscribe(item -> this.extract(filters, item));
+                .subscribe(item -> this.extract(filters, item))
+                .dispose();
         return filters;
     }
 
@@ -102,7 +103,8 @@ public class FilterInquirer implements Inquirer<ConcurrentMap<String, Set<Event>
         final Method[] scanned = clazz.getDeclaredMethods();
         Observable.fromArray(scanned)
                 .filter(item -> "doFilter".equals(item.getName()))
-                .subscribe(methods::add);
+                .subscribe(methods::add)
+                .dispose();
         // No overwritting
         if (Values.ONE == methods.size()) {
             return methods.get(Values.IDX);
