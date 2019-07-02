@@ -58,6 +58,31 @@ public final class Ut {
         return Statute.find(list, fnFilter);
     }
 
+    // --- Json Zip
+    public static JsonArray elementZip(final JsonArray source, final JsonArray target, final String sourceKey, final String targetKey) {
+        return Jackson.mergeZip(source, target, sourceKey, targetKey);
+    }
+
+    public static <F, S, T> List<T> elementZip(final List<F> first, final List<S> second, final BiFunction<F, S, T> function) {
+        return Statute.zipper(first, second, function);
+    }
+
+    public static <F, T> ConcurrentMap<F, T> elementZip(final List<F> keys, final List<T> values) {
+        return Statute.zipper(keys, values);
+    }
+
+    public static <K, V, E> ConcurrentMap<K, V> elementZip(final Collection<E> object, final Function<E, K> keyFn, final Function<E, V> valueFn) {
+        return Statute.zipper(object, keyFn, valueFn);
+    }
+
+    public static <K, V, E> ConcurrentMap<K, V> elementZip(final E[] object, final Function<E, K> keyFn, final Function<E, V> valueFn) {
+        return Statute.zipper(Arrays.asList(object), keyFn, valueFn);
+    }
+
+    public static <K, V, E> ConcurrentMap<K, List<V>> elementGroup(final Collection<E> object, final Function<E, K> keyFn, final Function<E, V> valueFn) {
+        return Statute.group(object, keyFn, valueFn);
+    }
+
     // --- Encrypt
     public static String encryptMD5(final String input) {
         return Codec.md5(input);
@@ -349,7 +374,7 @@ public final class Ut {
         return collection.add(element);
     }
 
-    public static List<Future<JsonObject>> reduceListFuture(final List<Future<JsonObject>> list, final Future<JsonObject> element) {
+    public static List<Future<JsonObject>> reduceAsync(final List<Future<JsonObject>> list, final Future<JsonObject> element) {
         list.add(element);
         return list;
     }
@@ -634,19 +659,6 @@ public final class Ut {
 
     public static String visitString(final JsonObject item, final String... keys) {
         return Jackson.visitString(item, keys);
-    }
-
-    // --- Json Zip
-    public static JsonArray zipperJArray(final JsonArray source, final JsonArray target, final String sourceKey, final String targetKey) {
-        return Jackson.mergeZip(source, target, sourceKey, targetKey);
-    }
-
-    public static <F, S, T> List<T> zipperList(final List<F> first, final List<S> second, final BiFunction<F, S, T> function) {
-        return Statute.zipper(first, second, function);
-    }
-
-    public static <F, T> ConcurrentMap<F, T> zipperList(final List<F> keys, final List<T> values) {
-        return Statute.zipper(keys, values);
     }
 
     // --- Random
