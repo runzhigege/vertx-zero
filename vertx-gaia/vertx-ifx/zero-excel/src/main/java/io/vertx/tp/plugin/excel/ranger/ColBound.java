@@ -38,7 +38,7 @@ public class ColBound implements ExBound {
     @Override
     public String toString() {
         return "ColBound{" +
-                "start=" + this.start +
+                "begin=" + this.start +
                 ", end=" + this.end +
                 '}';
     }

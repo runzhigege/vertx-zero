@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * This factor could start following:
+ * This factor could begin following:
  * 1. Rx Http Server,
  * 2. Rx Rpc Server.
  */
@@ -24,7 +24,7 @@ public class RxFactor implements Factor {
     private static final ConcurrentMap<ServerType, Class<?>> INTERNALS
             = new ConcurrentHashMap<ServerType, Class<?>>() {
         {
-            put(ServerType.RX, ZeroRxAgent.class);
+            this.put(ServerType.RX, ZeroRxAgent.class);
         }
     };
 

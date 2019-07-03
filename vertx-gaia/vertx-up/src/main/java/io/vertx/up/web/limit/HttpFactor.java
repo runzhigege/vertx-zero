@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * This factor could start following:
+ * This factor could begin following:
  * 1. Http Server,
  * 2. Rpc Server.
  */

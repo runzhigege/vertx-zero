@@ -46,7 +46,7 @@ public class Mission implements Serializable {
     /* Job reference */
     @JsonIgnore
     private Object proxy;
-    /* Job start method */
+    /* Job begin method */
     @JsonIgnore
     private Method on;
     /* Job end method */

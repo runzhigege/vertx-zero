@@ -13,6 +13,8 @@ public interface ZeroValue {
 
     String DEFAULT_JOB = "jobs";
 
+    Class<?> DEFAULT_CLASS = DefaultClass.class;
+
     /**
      * Scanned data to distinguish mode
      * 1) Only Interface Style could have the indexes key such as 0,1,2 consider as data key.

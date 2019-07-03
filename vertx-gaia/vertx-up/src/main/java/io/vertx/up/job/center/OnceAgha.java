@@ -8,7 +8,7 @@ import io.vertx.up.atom.worker.Mission;
 class OnceAgha extends AbstractAgha {
 
     @Override
-    public boolean start(final Mission mission) {
+    public boolean begin(final Mission mission) {
         /*
          * 1. Execute this mission directly
          * -  This category could not be started when worker deployed, instead, this Agha should
@@ -21,5 +21,11 @@ class OnceAgha extends AbstractAgha {
             System.out.println("Hello");
         });
         return Boolean.TRUE;
+    }
+
+    @Override
+    public boolean end(final Mission mission) {
+
+        return false;
     }
 }

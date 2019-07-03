@@ -54,7 +54,7 @@ public class ZeroScheduler extends AbstractVerticle {
         } else {
             LOGGER.info(Info.JOB_MONITOR, missions.size());
             /* Start each job here by different types */
-            missions.forEach(mission -> this.agha.get(mission.getType()).start(mission));
+            missions.forEach(this::start);
         }
     }
 
@@ -64,7 +64,13 @@ public class ZeroScheduler extends AbstractVerticle {
          * instead of bind(Vertx) method.
          */
         final Object reference = mission.getProxy();
-        this.bind(reference);
+        if (Objects.nonNull(reference)) {
+            /*
+             * Bind vertx
+             */
+            Ut.contract(reference, Vertx.class, this.vertx);
+            Ut.contractOptional(reference, JobStore.class, STORE);
+        }
         /*
          * Agha calling
          */
@@ -73,22 +79,16 @@ public class ZeroScheduler extends AbstractVerticle {
             /*
              * To avoid other use, bind
              */
-            this.bind(agha);
-
-            agha.start(mission);
-        }
-    }
-
-    private void bind(final Object reference) {
-        if (Objects.nonNull(reference)) {
             /*
-             * Bind vertx
+             * Bind vertx, because Agha class could get JobStore directly
+             * It's not needed to bind JobStore in Agha here.
              */
-            Ut.contract(reference, Vertx.class, this.vertx);
+            Ut.contract(agha, Vertx.class, this.vertx);
+            Ut.contractOptional(agha, JobStore.class, STORE);
             /*
-             * The JobStore could not be empty or null
+             * Invoke here to provide input
              */
-            Ut.contract(reference, JobStore.class, STORE);
+            agha.begin(mission);
         }
     }
 }
