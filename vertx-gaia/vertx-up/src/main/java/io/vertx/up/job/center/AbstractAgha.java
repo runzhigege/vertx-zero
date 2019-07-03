@@ -6,9 +6,12 @@ import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Contract;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Mission;
+import io.vertx.up.job.cv.JobMsg;
+import io.vertx.up.job.phase.Phase;
 import io.vertx.up.job.store.JobConfig;
 import io.vertx.up.job.store.JobPin;
 import io.vertx.up.job.timer.Interval;
+import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
 
 public abstract class AbstractAgha implements Agha {
@@ -18,10 +21,13 @@ public abstract class AbstractAgha implements Agha {
     @Contract
     private transient Vertx vertx;
 
+    private transient Phase phase;
+
     Interval interval() {
         final Class<?> intervalCls = CONFIG.getInterval().getComponent();
         final Interval interval = Ut.singleton(intervalCls);
         Ut.contract(interval, Vertx.class, this.vertx);
+        this.getLogger().info(JobMsg.COMPONENT_SELECTED, "Interval", interval.getClass().getName());
         return interval;
     }
 
@@ -48,6 +54,26 @@ public abstract class AbstractAgha implements Agha {
                 /*
                  * 2. Step 2:  JobIncome ( Process )
                  */
-                .compose(phase::incomeAsync);
+                .compose(phase::incomeAsync)
+                /*
+                 * 3. Step 3:  Major cole logical here
+                 */
+                .compose(phase::invokeAsync)
+                /*
+                 * 4. Step 4:  JobOutcome ( Process )
+                 */
+                .compose(phase::outcomeAsync)
+                /*
+                 * 5. Step 5: EventBus ( Output )
+                 */
+                .compose(phase::outputAsync)
+                /*
+                 * 6. Final steps here
+                 */
+                .compose(phase::callbackAsync);
+    }
+
+    protected Annal getLogger() {
+        return Annal.get(this.getClass());
     }
 }

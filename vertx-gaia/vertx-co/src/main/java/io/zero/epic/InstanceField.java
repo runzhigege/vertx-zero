@@ -8,7 +8,10 @@ import io.zero.epic.fn.Fn;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -123,7 +126,7 @@ final class InstanceField {
         });
     }
 
-    static <T> Field contract(final Class<?> executor, final T instance, final Class<?> fieldType, final boolean strict) {
+    static <T> Field contract(final Class<?> executor, final T instance, final Class<?> fieldType) {
         /*
          * Reflect to set Api reference in target channel here
          * 1) The fields length must be 1
@@ -136,21 +139,13 @@ final class InstanceField {
         final Field[] filtered = Arrays.stream(fields)
                 .filter(field -> field.isAnnotationPresent(Contract.class))
                 .toArray(Field[]::new);
-        if (strict) {
-            Fn.out(1 != filtered.length, _412ContractFieldException.class,
-                    executor, fieldType, instance.getClass(), filtered.length);
-            return filtered[Values.IDX];
-        } else {
-            return null;
-        }
+        Fn.out(1 != filtered.length, _412ContractFieldException.class,
+                executor, fieldType, instance.getClass(), filtered.length);
+        return filtered[Values.IDX];
     }
 
-    static <T, V> void contract(final Class<?> executor,
-                                final T instance, final Class<?> fieldType, final V value,
-                                final boolean strict) {
-        final Field field = contract(executor, instance, fieldType, strict);
-        if (Objects.nonNull(field)) {
-            Ut.field(instance, field, value);
-        }
+    static <T, V> void contract(final Class<?> executor, final T instance, final Class<?> fieldType, final V value) {
+        final Field field = contract(executor, instance, fieldType);
+        Ut.field(instance, field, value);
     }
 }
