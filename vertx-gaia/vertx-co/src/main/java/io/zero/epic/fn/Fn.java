@@ -8,12 +8,8 @@ import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.ZeroRunException;
 import io.zero.epic.fn.wait.Case;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
@@ -231,7 +227,7 @@ public final class Fn {
 
     // ------ Pool
     public static <K, V> V pool(final ConcurrentMap<K, V> pool, final K key, final Supplier<V> poolFn) {
-        return Pond.exec(pool, key, poolFn);
+        return Deliver.exec(pool, key, poolFn);
     }
 
     /*
@@ -239,19 +235,6 @@ public final class Fn {
      */
     public static <V> V poolThread(final ConcurrentMap<String, V> pool, final Supplier<V> poolFn) {
         final String threadName = Thread.currentThread().getName();
-        return Pond.exec(pool, threadName, poolFn);
-    }
-
-    // ------ Collection calculation
-    public static <K, V, E> ConcurrentMap<K, List<V>> packet(final Collection<E> object, final Function<E, K> keyFn, final Function<E, V> valueFn) {
-        return Pond.group(object, keyFn, valueFn);
-    }
-
-    public static <K, V, E> ConcurrentMap<K, V> zipper(final E[] object, final Function<E, K> keyFn, final Function<E, V> valueFn) {
-        return Pond.zipper(Arrays.asList(object), keyFn, valueFn);
-    }
-
-    public static <K, V, E> ConcurrentMap<K, V> zipper(final Collection<E> object, final Function<E, K> keyFn, final Function<E, V> valueFn) {
-        return Pond.zipper(object, keyFn, valueFn);
+        return Deliver.exec(pool, threadName, poolFn);
     }
 }

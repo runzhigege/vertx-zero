@@ -1,5 +1,6 @@
 package io.vertx.zero.mirror;
 
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
 import java.lang.annotation.Annotation;
@@ -27,7 +28,7 @@ public final class Anno {
      * @return hash map that stored (name = Annotation) scanned results.
      */
     public static ConcurrentMap<String, Annotation> get(final Class<?> clazz) {
-        return Fn.getNull(() -> Fn.zipper(clazz.getDeclaredAnnotations(),
+        return Fn.getNull(() -> Ut.elementZip(clazz.getDeclaredAnnotations(),
                 (item) -> item.annotationType().getName(),
                 (item) -> item), clazz);
     }

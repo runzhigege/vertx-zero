@@ -29,4 +29,8 @@ class JobPool {
     static void save(final Mission mission) {
         JOBS.put(mission.getName(), mission);
     }
+
+    static boolean valid(final Mission mission) {
+        return JOBS.containsKey(mission.getName());
+    }
 }

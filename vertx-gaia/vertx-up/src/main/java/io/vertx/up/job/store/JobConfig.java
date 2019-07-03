@@ -1,8 +1,10 @@
-package io.vertx.up.job.refine;
+package io.vertx.up.job.store;
 
 import io.vertx.up.atom.config.ComponentOpts;
+import io.vertx.up.job.timer.VertxInterval;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Optional;
 
 /*
@@ -32,7 +34,11 @@ public class JobConfig implements Serializable {
     }
 
     public ComponentOpts getInterval() {
-        return Optional.ofNullable(this.interval).orElse(new ComponentOpts());
+        final ComponentOpts componentOpts = Optional.ofNullable(this.interval).orElse(new ComponentOpts());
+        if (Objects.isNull(componentOpts.getComponent())) {
+            componentOpts.setComponent(VertxInterval.class);
+        }
+        return componentOpts;
     }
 
     public void setInterval(final ComponentOpts interval) {
