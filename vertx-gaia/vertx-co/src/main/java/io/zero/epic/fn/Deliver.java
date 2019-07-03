@@ -3,6 +3,7 @@ package io.zero.epic.fn;
 import io.vertx.zero.exception.ZeroRunException;
 import io.zero.epic.Ut;
 
+import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
 
 /**
@@ -30,5 +31,26 @@ final class Deliver {
             }
         }
         return ret;
+    }
+
+    /**
+     * Memory cache pool implemented by ConcurrentMap( k = v ) instead of create new each time
+     *
+     * @param pool   Memory concurrent hash map
+     * @param key    Input key for cache
+     * @param poolFn Supplier of value when create new ( If not in cache )
+     * @param <K>    key type
+     * @param <V>    value type
+     * @return Get or Created V for value
+     */
+    static <K, V> V exec(final ConcurrentMap<K, V> pool, final K key, final Supplier<V> poolFn) {
+        V reference = pool.get(key);
+        if (null == reference) {
+            reference = poolFn.get();
+            if (null != reference) {
+                pool.put(key, reference);
+            }
+        }
+        return reference;
     }
 }

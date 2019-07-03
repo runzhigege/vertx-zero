@@ -8,6 +8,7 @@ import io.vertx.codegen.annotations.Fluent;
 import io.vertx.tp.database.DataPool;
 import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.atom.JtUri;
+import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 import org.jooq.Configuration;
 
@@ -66,8 +67,8 @@ public class AmbientEnvironment {
              * serviceKey -> api
              * serviceKey -> service
              */
-            final ConcurrentMap<String, IApi> apiMap = Fn.zipper(apiList, IApi::getServiceId, api -> api);
-            final ConcurrentMap<String, IService> serviceMap = Fn.zipper(serviceList, IService::getKey, service -> service);
+            final ConcurrentMap<String, IApi> apiMap = Ut.elementZip(apiList, IApi::getServiceId, api -> api);
+            final ConcurrentMap<String, IService> serviceMap = Ut.elementZip(serviceList, IService::getKey, service -> service);
 
             /* Uri / Service Bind into data here */
             apiMap.keySet().stream()

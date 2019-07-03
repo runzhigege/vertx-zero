@@ -1,8 +1,6 @@
 package io.vertx.up.job.store;
 
 import io.vertx.up.atom.worker.Mission;
-import io.vertx.up.job.refine.JobConfig;
-import io.vertx.up.job.refine.JobPin;
 import io.zero.epic.Ut;
 
 import java.util.HashSet;
@@ -20,13 +18,15 @@ class ExtensionStore implements JobStore {
     private transient boolean isExtension;
 
     ExtensionStore() {
-        final Class<?> storeCls = CONFIG.getStore().getComponent();
-        Optional.ofNullable(storeCls).ifPresent(clazz -> {
-            this.reference = Ut.instance(clazz);
-            if (Objects.nonNull(this.reference)) {
-                this.isExtension = true;
-            }
-        });
+        if (Objects.nonNull(CONFIG)) {
+            final Class<?> storeCls = CONFIG.getStore().getComponent();
+            Optional.ofNullable(storeCls).ifPresent(clazz -> {
+                this.reference = Ut.instance(clazz);
+                if (Objects.nonNull(this.reference)) {
+                    this.isExtension = true;
+                }
+            });
+        }
     }
 
     @Override

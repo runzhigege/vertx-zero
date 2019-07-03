@@ -6,7 +6,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.ZeroModule;
 import io.reactivex.Observable;
-import io.vertx.core.json.DecodeException;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.zero.eon.Strings;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Supplier;
 
 /**
  * Lookup the json tree data
@@ -146,26 +144,6 @@ final class Jackson {
                 .filter(item -> null != item.getValue(key))
                 .filter(item -> value == item.getValue(key) || item.getValue(key).equals(value))
                 .first(new JsonObject()).blockingGet(), source, key);
-    }
-
-    static JsonObject validJObject(final Supplier<JsonObject> supplier) {
-        JsonObject result;
-        try {
-            result = supplier.get();
-        } catch (final DecodeException ex) {
-            result = new JsonObject();
-        }
-        return result;
-    }
-
-    static JsonArray validJArray(final Supplier<JsonArray> supplier) {
-        JsonArray result;
-        try {
-            result = supplier.get();
-        } catch (final DecodeException ex) {
-            result = new JsonArray();
-        }
-        return result;
     }
 
     static JsonArray toJArray(final Object value) {

@@ -5,11 +5,13 @@ import io.vertx.zero.eon.Values;
 import io.zero.epic.fn.Fn;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -31,17 +33,14 @@ final class Statute {
      */
     static <T> T find(final List<T> list, final Predicate<T> fnFilter) {
         return Fn.getNull(() -> {
-            final List<T> filtered = list.stream()
-                    .filter(fnFilter).collect(Collectors.toList());
+            final List<T> filtered = list.stream().filter(fnFilter).collect(Collectors.toList());
             return Fn.getSemi(filtered.isEmpty(), LOGGER,
                     () -> null,
                     () -> filtered.get(Values.IDX));
         }, list, fnFilter);
     }
 
-    static <K, T, V> ConcurrentMap<K, V> reduce(
-            final ConcurrentMap<K, T> from,
-            final ConcurrentMap<T, V> to) {
+    static <K, T, V> ConcurrentMap<K, V> reduce(final ConcurrentMap<K, T> from, final ConcurrentMap<T, V> to) {
         final ConcurrentMap<K, V> result = new ConcurrentHashMap<>();
         from.forEach((key, middle) -> {
             final V value = to.get(middle);
@@ -52,10 +51,7 @@ final class Statute {
         return result;
     }
 
-    static <K, V> ConcurrentMap<K, V> reduce(
-            final Set<K> from,
-            final ConcurrentMap<K, V> to
-    ) {
+    static <K, V> ConcurrentMap<K, V> reduce(final Set<K> from, final ConcurrentMap<K, V> to) {
         final ConcurrentMap<K, V> result = new ConcurrentHashMap<>();
         from.forEach((key) -> {
             final V value = to.get(key);
@@ -66,10 +62,7 @@ final class Statute {
         return result;
     }
 
-    static <F, T> ConcurrentMap<F, T> zipper(
-            final List<F> keys,
-            final List<T> values
-    ) {
+    static <F, T> ConcurrentMap<F, T> zipper(final List<F> keys, final List<T> values) {
         final ConcurrentMap<F, T> result = new ConcurrentHashMap<>();
         Ut.itList(keys, (key, index) -> {
             final T value = getEnsure(values, index);
@@ -81,11 +74,52 @@ final class Statute {
         return result;
     }
 
-    static <F, S, T> List<T> zipper(
-            final List<F> first,
-            final List<S> second,
-            final BiFunction<F, S, T> function
-    ) {
+    static <K, V, E> ConcurrentMap<K, V> zipper(final Collection<E> object, final Function<E, K> keyFn, final Function<E, V> valueFn) {
+        final ConcurrentMap<K, V> ret = new ConcurrentHashMap<>();
+        if (0 < object.size()) {
+            for (final E item : object) {
+                if (null != item) {
+                    final K key = keyFn.apply(item);
+                    final V value = valueFn.apply(item);
+                    if (null != key && null != value) {
+                        ret.put(key, value);
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+
+    static <K, V, E> ConcurrentMap<K, List<V>> group(final Collection<E> object, final Function<E, K> keyFn, final Function<E, V> valueFn) {
+        final ConcurrentMap<K, List<V>> ret = new ConcurrentHashMap<>();
+        if (0 < object.size()) {
+            for (final E item : object) {
+                if (null != item) {
+                    final K key = keyFn.apply(item);
+                    if (null != key) {
+                        // Extract List
+                        List<V> reference = null;
+                        if (ret.containsKey(key)) {
+                            reference = ret.get(key);
+                        }
+                        // Double check
+                        if (null == reference) {
+                            reference = new ArrayList<>();
+                        }
+                        final V value = valueFn.apply(item);
+                        if (null != value) {
+                            reference.add(value);
+                        }
+                        // Replace finally
+                        ret.put(key, reference);
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+
+    static <F, S, T> List<T> zipper(final List<F> first, final List<S> second, final BiFunction<F, S, T> function) {
         final List<T> result = new ArrayList<>();
         Ut.itList(first, (key, index) -> {
             final S value = getEnsure(second, index);

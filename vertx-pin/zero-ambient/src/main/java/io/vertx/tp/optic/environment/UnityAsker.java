@@ -10,7 +10,6 @@ import io.vertx.tp.database.DataPool;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.atom.Database;
 import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
 import org.jooq.Configuration;
 
 import java.util.List;
@@ -42,8 +41,8 @@ class UnityAsker {
         At.infoApp(LOGGER, AtMsg.UNITY_SOURCE, sources.size());
 
         /* Data, use application key as key here. */
-        APP_POOL.putAll(Fn.zipper(applications, XApp::getKey, app -> app));
-        SOURCE_POOL.putAll(Fn.zipper(sources, XSource::getAppId, source -> source));
+        APP_POOL.putAll(Ut.elementZip(applications, XApp::getKey, app -> app));
+        SOURCE_POOL.putAll(Ut.elementZip(sources, XSource::getAppId, source -> source));
     }
 
     private static Configuration getConfiguration() {
