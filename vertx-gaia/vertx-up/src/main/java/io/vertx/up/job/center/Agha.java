@@ -9,13 +9,13 @@ import io.vertx.up.eon.em.JobType;
 public interface Agha {
 
     static Agha get(final JobType type) {
-        return Pool.AGHAS.getOrDefault(type, PlanAgha::new).get();
+        return Pool.AGHAS.getOrDefault(type, new PlanAgha());
     }
 
     /**
      * Start new job by definition of Mission here.
      */
-    boolean begin(Mission mission);
+    long begin(Mission mission);
 
     /**
      * End current job here.

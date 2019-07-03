@@ -1,25 +1,28 @@
 package io.vertx.up.job.timer;
 
+import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.up.annotations.Contract;
-import io.zero.epic.fn.Actuator;
 
 public class VertxInterval implements Interval {
     @Contract
     private transient Vertx vertx;
 
     @Override
-    public void startAt(final long delay, final long duration, final Actuator actuator) {
+    public long startAt(final long delay, final long duration, final Handler<Long> actuator) {
 
+        return -1L;
     }
 
     @Override
-    public void startAt(final long duration, final Actuator actuator) {
+    public long startAt(final long duration, final Handler<Long> actuator) {
 
+        return -1L;
     }
 
     @Override
-    public void startAt(final Actuator actuator) {
-
+    public long startAt(final Handler<Long> handler) {
+        // Cannot schedule a timer with delay < 1 ms
+        return this.vertx.setTimer(10, handler);
     }
 }

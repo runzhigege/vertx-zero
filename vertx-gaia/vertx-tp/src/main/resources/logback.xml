@@ -16,7 +16,7 @@
 
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <!-- Format http://logback.qos.ch/manual/layouts.html#ClassicPatternLayout -->
-            <Pattern>%d [%thread] %-5level %40logger{40} - %msg%n</Pattern>
+            <Pattern>%d [%thread] %-5level %msg%n %40logger{40}</Pattern>
         </encoder>
     </appender>
 

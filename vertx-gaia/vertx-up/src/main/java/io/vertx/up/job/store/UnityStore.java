@@ -1,6 +1,7 @@
 package io.vertx.up.job.store;
 
 import io.vertx.up.atom.worker.Mission;
+import io.vertx.up.plugin.job.JobPool;
 
 import java.util.HashSet;
 import java.util.Objects;

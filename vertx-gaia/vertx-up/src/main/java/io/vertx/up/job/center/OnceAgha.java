@@ -8,7 +8,7 @@ import io.vertx.up.atom.worker.Mission;
 class OnceAgha extends AbstractAgha {
 
     @Override
-    public boolean begin(final Mission mission) {
+    public long begin(final Mission mission) {
         /*
          * 1. Execute this mission directly
          * -  This category could not be started when worker deployed, instead, this Agha should
@@ -17,10 +17,9 @@ class OnceAgha extends AbstractAgha {
          * 3. This kind fo task must be triggered, could not be in plan here. It's not needed to call
          *    Interval to process task.
          * */
-        this.interval().startAt(() -> {
+        return this.interval().startAt((timeId) -> {
             System.out.println("Hello");
         });
-        return Boolean.TRUE;
     }
 
     @Override

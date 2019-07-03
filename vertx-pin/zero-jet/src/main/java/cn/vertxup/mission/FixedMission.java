@@ -1,4 +1,4 @@
-package io.vertx.tp.jet.mission;
+package cn.vertxup.mission;
 
 import io.vertx.up.annotations.Job;
 import io.vertx.up.annotations.Off;
@@ -7,8 +7,8 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.eon.em.JobType;
 import io.vertx.up.job.AbstractMission;
 
-@Job(JobType.ONCE)
-public class DemoOnceMission extends AbstractMission {
+@Job(value = JobType.ONCE, name = "demo-fixed")
+public class FixedMission extends AbstractMission {
 
     @On
     public void start(final Envelop envelop) {
