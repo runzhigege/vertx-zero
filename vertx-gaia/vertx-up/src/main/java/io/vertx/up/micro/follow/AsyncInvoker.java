@@ -49,7 +49,7 @@ public class AsyncInvoker extends AbstractInvoker {
             /*
             final Object reference = envelop.data();
             final Object arguments = Ut.deserialize(Ut.toString(reference), argType);
-            final Future tResult = Ut.invoke(proxy, method.getName(), arguments);
+            final Future tResult = Ut.invoke(proxy, method.name(), arguments);
             tResult.setHandler(Ux.handler(message));
             */
         }

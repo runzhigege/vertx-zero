@@ -16,7 +16,7 @@ public class Jackson1Tc extends StoreBase {
         final JsonObject data = IO.getJObject(this.ioFile("pojo.json"));
         final PojoEntity entity = Ux.fromJson(data, PojoEntity.class);
         final Date endDate = Ut.parse(data.getString("end"));
-        final Date startDate = Ut.parse(data.getString("begin"));
+        final Date startDate = Ut.parse(data.getString("start"));
         System.out.println(TimeZone.getDefault());
         System.out.println("---- Actual ------------");
         System.out.println(data.getString("end"));
@@ -25,7 +25,7 @@ public class Jackson1Tc extends StoreBase {
         System.out.println(endDate);
         System.out.println(Ut.toDateTime(endDate));
         System.out.println("---- Actual ------------");
-        System.out.println(data.getString("begin"));
+        System.out.println(data.getString("start"));
         System.out.println(entity.getStart());
         System.out.println("---- Expected ----------");
         System.out.println(startDate);

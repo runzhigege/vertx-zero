@@ -5,7 +5,6 @@ import io.vertx.core.Vertx;
 import io.vertx.up.annotations.Worker;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
-import io.vertx.up.eon.em.JobType;
 import io.vertx.up.job.center.Agha;
 import io.vertx.up.job.store.JobConfig;
 import io.vertx.up.job.store.JobPin;
@@ -16,8 +15,6 @@ import io.zero.epic.Ut;
 
 import java.util.Objects;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * Background worker of Zero framework, it's for schedule of background tasks here.
@@ -30,19 +27,8 @@ public class ZeroScheduler extends AbstractVerticle {
 
     private static final Annal LOGGER = Annal.get(ZeroScheduler.class);
     private static final JobStore STORE = JobPin.getStore();
-    private transient final ConcurrentMap<JobType, Agha> agha = new
-            ConcurrentHashMap<>();
 
     public ZeroScheduler() {
-        /* Group missions by type, each type should has one reference */
-        this.agha.putAll(new ConcurrentHashMap<JobType, Agha>() {
-            {
-                this.put(JobType.FIXED, Agha.get(JobType.FIXED));
-                this.put(JobType.PLAN, Agha.get(JobType.PLAN));
-                this.put(JobType.ONCE, Agha.get(JobType.ONCE));
-            }
-        });
-        this.agha.values().forEach(each -> Ut.contract(each, Vertx.class, this.vertx));
     }
 
     @Override
@@ -79,19 +65,15 @@ public class ZeroScheduler extends AbstractVerticle {
             /*
              * Bind job store ( this method should access job store to process job )
              */
-            Ut.contract(reference, JobStore.class, STORE);
+            Ut.contract(reference, Mission.class, mission);
         }
         /*
          * Agha calling
          */
-        final Agha agha = this.agha.get(mission.getType());
+        final Agha agha = Agha.get(mission.getType());
         if (Objects.nonNull(agha)) {
             /*
-             * To avoid other use, bind
-             */
-            /*
-             * Bind vertx, because Agha class could get JobStore directly
-             * It's not needed to bind JobStore in Agha here.
+             * Bind vertx
              */
             Ut.contract(agha, Vertx.class, this.vertx);
             /*

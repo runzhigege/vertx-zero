@@ -5,9 +5,9 @@ import io.vertx.up.atom.worker.Mission;
 class FixedAgha extends AbstractAgha {
 
     @Override
-    public boolean begin(final Mission mission) {
+    public long begin(final Mission mission) {
         System.out.println("F");
-        return false;
+        return -1L;
     }
 
     @Override

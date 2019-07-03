@@ -21,8 +21,6 @@ public abstract class AbstractAgha implements Agha {
     @Contract
     private transient Vertx vertx;
 
-    private transient Phase phase;
-
     Interval interval() {
         final Class<?> intervalCls = CONFIG.getInterval().getComponent();
         final Interval interval = Ut.singleton(intervalCls);
@@ -36,9 +34,13 @@ public abstract class AbstractAgha implements Agha {
      * 1. Whether address configured ?
      *    - Yes, get Envelop from event bus as secondary input
      *    - No, get Envelop of `Envelop.ok()` instead
-     * 2. Extract `JobIncome` and execute
+     * 2. Extract `JobIncome`
+     * 3. Major
+     * 4. JobOutcome
+     * 5. Whether defined address of output
+     * 6. If 5, provide callback function of this job here.
      */
-    protected Future<Envelop> before(final Mission mission) {
+    protected Future<Envelop> working(final Mission mission) {
         /*
          * Initializing phase reference here.
          */
