@@ -1,4 +1,4 @@
-package io.vertx.up.job.refine;
+package io.vertx.up.job.store;
 
 import io.vertx.up.atom.config.ComponentOpts;
 import io.vertx.up.job.timer.VertxInterval;

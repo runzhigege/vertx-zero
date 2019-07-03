@@ -670,15 +670,6 @@ public final class Ut {
         return StringUtil.random(length);
     }
 
-    // --- Return
-    public static JsonObject returnJObject(final Supplier<JsonObject> supplier) {
-        return Jackson.validJObject(supplier);
-    }
-
-    public static JsonArray returnJArray(final Supplier<JsonArray> supplier) {
-        return Jackson.validJArray(supplier);
-    }
-
     // --- Perse
     public static Date parse(final String literal) {
         return Period.parse(literal);

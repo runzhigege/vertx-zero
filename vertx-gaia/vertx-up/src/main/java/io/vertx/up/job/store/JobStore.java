@@ -8,17 +8,6 @@ import io.vertx.up.atom.worker.Mission;
  * 2) Database job store here that configured in vertx-job.yml
  */
 public interface JobStore extends JobReader {
-    static JobStore get() {
-        /*
-         * Singleton for UnityStore ( package scope )
-         */
-        synchronized (JobStore.class) {
-            if (null == UnityStore.INSTANCE) {
-                UnityStore.INSTANCE = new UnityStore();
-            }
-            return UnityStore.INSTANCE;
-        }
-    }
 
     /*
      * Remove mission from store
