@@ -5,8 +5,14 @@ import io.vertx.up.atom.worker.Mission;
 class PlanAgha extends AbstractAgha {
 
     @Override
-    public boolean start(final Mission mission) {
-        System.out.println("P");
+    public boolean begin(final Mission mission) {
+
+        return false;
+    }
+
+    @Override
+    public boolean end(final Mission mission) {
+
         return false;
     }
 }

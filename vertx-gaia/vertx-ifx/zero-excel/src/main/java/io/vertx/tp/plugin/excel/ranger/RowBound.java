@@ -38,7 +38,7 @@ public class RowBound implements ExBound {
     @Override
     public String toString() {
         return "RowBound{" +
-                "start=" + this.start +
+                "begin=" + this.start +
                 ", end=" + this.end +
                 '}';
     }

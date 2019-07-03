@@ -95,7 +95,7 @@ class PathResolver {
         if (uri.endsWith(Strings.SLASH)) {
             uri = uri.substring(0, uri.lastIndexOf(Strings.SLASH));
         }
-        // Uri must start with SLASH
+        // Uri must begin with SLASH
         final String processed = uri;
         return Fn.getNull(() ->
                         processed.startsWith(Strings.SLASH) ?

@@ -14,6 +14,7 @@ import io.zero.epic.fn.ZeroBiConsumer;
 
 import java.io.File;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -252,7 +253,7 @@ public final class Ut {
         InstanceField.set(instance, name, value);
     }
 
-    public static <T> void field(final Object instance, final java.lang.reflect.Field field, final T value) {
+    public static <T> void field(final Object instance, final Field field, final T value) {
         InstanceField.set(instance, field, value);
     }
 
@@ -265,16 +266,20 @@ public final class Ut {
         return InstanceField.getI(interfaceCls, name);
     }
 
-    public static java.lang.reflect.Field[] fields(final Class<?> clazz) {
+    public static Field[] fields(final Class<?> clazz) {
         return InstanceField.fields(clazz);
     }
 
-    public static <T> java.lang.reflect.Field contract(final T instance, final Class<?> fieldType) {
-        return InstanceField.contract(InstanceField.class, instance, fieldType);
+    public static <T> Field contract(final T instance, final Class<?> fieldType) {
+        return InstanceField.contract(InstanceField.class, instance, fieldType, true);
     }
 
     public static <T, V> void contract(final T instance, final Class<?> fieldType, final V value) {
-        InstanceField.contract(InstanceField.class, instance, fieldType, value);
+        InstanceField.contract(InstanceField.class, instance, fieldType, value, true);
+    }
+
+    public static <T, V> void contractOptional(final T instance, final Class<?> fieldType, final V value) {
+        InstanceField.contract(InstanceField.class, instance, fieldType, value, false);
     }
 
     public static <T, V> Future<Boolean> contractAsync(final T instance, final Class<?> fieldType, final V value) {

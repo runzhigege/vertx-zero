@@ -27,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * Vertx Application start information
+ * Vertx Application begin information
  */
 public class VertxApplication {
 

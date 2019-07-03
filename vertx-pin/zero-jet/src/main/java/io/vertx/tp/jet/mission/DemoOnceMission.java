@@ -4,9 +4,10 @@ import io.vertx.up.annotations.Job;
 import io.vertx.up.annotations.Off;
 import io.vertx.up.annotations.On;
 import io.vertx.up.eon.em.JobType;
+import io.vertx.up.job.AbstractMission;
 
 @Job(JobType.ONCE)
-public class DemoOnceMission {
+public class DemoOnceMission extends AbstractMission {
 
     @On
     public void start() {

@@ -9,7 +9,7 @@ public interface Interval {
     /**
      * Start schedule at
      *
-     * @param delay    delay ms to start
+     * @param delay    delay ms to begin
      * @param duration repeat for each duration
      * @param actuator Executor
      */
