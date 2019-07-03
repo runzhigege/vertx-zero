@@ -1,46 +1,32 @@
-package io.vertx.up.job.center;
+package io.vertx.up.job.phase;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Mission;
-import io.vertx.up.job.in.JobIncome;
+import io.vertx.up.job.cv.JobMsg;
+import io.vertx.up.job.plugin.JobIncome;
+import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
 
 import java.util.Objects;
 
-/*
- * Major phase for code logical here
- */
-class Phase {
+class Input {
 
-    private transient Vertx vertx;
-    private transient Mission mission;
+    private static final Annal LOGGER = Annal.get(Input.class);
 
-    private Phase() {
-    }
+    private transient final Vertx vertx;
 
-    static Phase start(final String name) {
-        return Fn.pool(Pool.PHASES, name, Phase::new);
-    }
-
-    Phase bind(final Vertx vertx) {
+    Input(final Vertx vertx) {
         this.vertx = vertx;
-        return this;
-    }
-
-    Phase bind(final Mission mission) {
-        this.mission = mission;
-        return this;
     }
 
     Future<Envelop> inputAsync(final Mission mission) {
         /*
          * Get income address
          * */
-        final String address = Akka.address(mission, true);
+        final String address = Element.address(mission, true);
         if (Ut.isNil(address)) {
             /*
              * Event bus did not provide any input here
@@ -50,6 +36,7 @@ class Phase {
             /*
              * Event bus provide input and then it will pass to @On
              */
+            LOGGER.info(JobMsg.ADDRESS_EVENT_BUS, "Income", address);
             final Future<Envelop> input = Future.future();
             final EventBus eventBus = this.vertx.eventBus();
             eventBus.<Envelop>consumer(address, handler -> {
@@ -64,11 +51,11 @@ class Phase {
         }
     }
 
-    Future<Envelop> incomeAsync(final Envelop envelop) {
+    Future<Envelop> incomeAsync(final Envelop envelop, final Mission mission) {
         /*
          * Get JobIncome
          */
-        final JobIncome income = Akka.income(this.mission);
+        final JobIncome income = Element.income(mission);
         if (Objects.isNull(income)) {
             /*
              * Directly
@@ -79,8 +66,9 @@ class Phase {
              * JobIncome processing here
              * Contract for vertx/mission
              */
+            LOGGER.info(JobMsg.COMPONENT_SELECTED, "JobIncome", income.getClass().getName());
             Ut.contract(income, Vertx.class, this.vertx);
-            Ut.contract(income, Mission.class, this.mission);
+            Ut.contract(income, Mission.class, mission);
             return income.beforeAsync(envelop);
         }
     }

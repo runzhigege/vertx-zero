@@ -271,15 +271,11 @@ public final class Ut {
     }
 
     public static <T> Field contract(final T instance, final Class<?> fieldType) {
-        return InstanceField.contract(InstanceField.class, instance, fieldType, true);
+        return InstanceField.contract(InstanceField.class, instance, fieldType);
     }
 
     public static <T, V> void contract(final T instance, final Class<?> fieldType, final V value) {
-        InstanceField.contract(InstanceField.class, instance, fieldType, value, true);
-    }
-
-    public static <T, V> void contractOptional(final T instance, final Class<?> fieldType, final V value) {
-        InstanceField.contract(InstanceField.class, instance, fieldType, value, false);
+        InstanceField.contract(InstanceField.class, instance, fieldType, value);
     }
 
     public static <T, V> Future<Boolean> contractAsync(final T instance, final Class<?> fieldType, final V value) {

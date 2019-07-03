@@ -22,8 +22,10 @@ public class JobPin {
             if (!Ut.isNil(job)) {
                 /* Extension job-store */
                 CONFIG = Ut.deserialize(config, JobConfig.class);
-                LOGGER.info(Info.JOB_CONFIG, CONFIG);
+            } else {
+                CONFIG = new JobConfig();
             }
+            LOGGER.info(Info.JOB_CONFIG, CONFIG);
         }
     }
 

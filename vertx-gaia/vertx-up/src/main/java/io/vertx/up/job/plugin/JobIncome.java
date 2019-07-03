@@ -1,4 +1,4 @@
-package io.vertx.up.job.in;
+package io.vertx.up.job.plugin;
 
 import io.vertx.core.Future;
 import io.vertx.up.atom.Envelop;

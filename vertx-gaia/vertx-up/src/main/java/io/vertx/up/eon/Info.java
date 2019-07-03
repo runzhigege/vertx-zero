@@ -35,6 +35,8 @@ public interface Info {
 
     String JOB_EMPTY = "[ ZERO ] ( Job ) Zero system detect no jobs, the scheduler will be stopped.";
 
+    String JOB_CONFIG_NULL = "[ ZERO ] ( Ignore ) Because there is no definition in `vertx-job.yml`, Job container is stop....";
+
     String JOB_MONITOR = "[ ZERO ] ( Job ) Zero system detect {0} jobs, the scheduler will begin....";
 
     String JOB_CONFIG = "[ ZERO ] ( Job ) Job configuration read : {0}";
