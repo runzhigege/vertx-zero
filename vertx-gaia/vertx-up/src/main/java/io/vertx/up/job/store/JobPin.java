@@ -1,8 +1,8 @@
-package io.vertx.up.job.refine;
+package io.vertx.up.job.store;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
-import io.vertx.up.job.store.JobStore;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
@@ -14,7 +14,6 @@ public class JobPin {
     private static final Node<JsonObject> VISITOR = Ut.singleton(ZeroUniform.class);
     private static final String JOB = "job";
     private static transient JobConfig CONFIG;
-    private static JobStore STORE;
 
     static {
         final JsonObject config = VISITOR.read();
@@ -30,5 +29,25 @@ public class JobPin {
 
     public static JobConfig getConfig() {
         return CONFIG;
+    }
+
+    public static JobStore getStore() {
+        /*
+         * Singleton for UnityStore ( package scope )
+         */
+        synchronized (JobStore.class) {
+            if (null == UnityStore.INSTANCE) {
+                UnityStore.INSTANCE = new UnityStore();
+            }
+            return UnityStore.INSTANCE;
+        }
+    }
+
+    /*
+     * Whether the mission is in JobPool
+     * Only job pool could be accessed by JobClient in future here.
+     */
+    public static boolean isIn(final Mission mission) {
+        return JobPool.valid(mission);
     }
 }
