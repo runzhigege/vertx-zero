@@ -51,7 +51,7 @@ public abstract class AbstractAgha implements Agha {
      * 5. Whether defined address of output
      * 6. If 5, provide callback function of this job here.
      */
-    protected Future<Envelop> working(final Mission mission) {
+    Future<Envelop> working(final Mission mission) {
         /*
          * Initializing phase reference here.
          */

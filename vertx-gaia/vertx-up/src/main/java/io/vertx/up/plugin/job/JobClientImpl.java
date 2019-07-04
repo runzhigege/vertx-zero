@@ -7,12 +7,14 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.job.center.Agha;
+import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
 
 import java.util.Objects;
 
 public class JobClientImpl implements JobClient {
 
+    private static final Annal LOGGER = Annal.get(JobClientImpl.class);
     private transient final Vertx vertx;
     private transient final JsonObject config;
 
@@ -32,10 +34,10 @@ public class JobClientImpl implements JobClient {
             Ut.contract(agha, Vertx.class, this.vertx);
             /* Start new job */
             final Long timeId = agha.begin(mission);
-            /* Started */
-            JobPool.start(timeId, mission.getName());
             /* Returned */
             handler.handle(Future.succeededFuture(timeId));
+        } else {
+            LOGGER.info("[ ZERO ] ( JobClient ) The pool could not find job of name = `{0}`", name);
         }
         return this;
     }

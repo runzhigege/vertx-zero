@@ -43,11 +43,11 @@ public interface Info {
 
     String JOB_CONFIG = "[ ZERO ] ( Job ) Job configuration read : {0}";
 
-    String JOB_AGHA_SELECTED = "[ ZERO ] ( Job ) Agha = {0} has been selected for job {1} of type {2}";
+    String JOB_AGHA_SELECTED = "[ ZERO ] ( Job: {1} ) Agha = {0} has been selected for job {1} of type {2}";
 
-    String JOB_READY = "[ ZERO ] ( Job ) Job {0} status has been ready: STARTING -> READY";
+    String JOB_READY = "[ ZERO ] ( Job: {0} ) The status has been ready: STARTING -> READY";
 
     String JOB_COMPONENT_SELECTED = "[ ZERO ] ( Job ) {0} selected: {1}";
 
-    String JOB_ADDRESS_EVENT_BUS = "[ ZERO ] ( Job } {0} event bus enabled: {1}";
+    String JOB_ADDRESS_EVENT_BUS = "[ ZERO ] ( Job ) {0} event bus enabled: {1}";
 }

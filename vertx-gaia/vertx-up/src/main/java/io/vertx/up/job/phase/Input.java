@@ -67,6 +67,11 @@ class Input {
              * Contract for vertx/mission
              */
             LOGGER.info(Info.JOB_COMPONENT_SELECTED, "JobIncome", income.getClass().getName());
+            /*
+             * JobIncome must define
+             * - Vertx reference
+             * - Mission reference
+             */
             Ut.contract(income, Vertx.class, this.vertx);
             Ut.contract(income, Mission.class, mission);
             return income.beforeAsync(envelop);

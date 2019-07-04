@@ -59,9 +59,18 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
 
         /* Initialization */
         final Mission mission = this.config(annotation);
+
         /* Basic data object initialized */
         mission.setName(name);
-        mission.setType(type);
+        /*
+         * Let type could be configured,
+         * 1) Annotation type priority should be low
+         * 2) Config type priority is higher than annotation
+         */
+        if (Objects.isNull(mission.getType())) {
+            mission.setType(type);
+        }
+
         /* The first status of each Job */
         mission.setStatus(JobStatus.STARTING);
         /* Time Unit */
@@ -72,6 +81,7 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
         if (Ut.isNil(mission.getCode())) {
             mission.setCode(mission.getName());
         }
+
         this.mount(mission, clazz);
         /* on method must existing */
         if (Objects.isNull(mission.getOn())) {
