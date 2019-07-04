@@ -6,3 +6,6 @@ databaseChangeLog:
   - include:
       file: plugin/sql/jet/I_SERVICE.sql
       relativeToChangelogFile: false
+  - include:
+      file: plugin/sql/jet/I_JOB.sql
+      relativeToChangelogFile: false
