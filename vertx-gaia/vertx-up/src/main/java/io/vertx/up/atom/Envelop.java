@@ -76,6 +76,10 @@ public class Envelop implements Serializable {
         return new Envelop(null, HttpStatusCode.NO_CONTENT);
     }
 
+    public static Envelop okJson() {
+        return new Envelop(new JsonObject(), HttpStatusCode.OK);
+    }
+
     // 200, T
     public static <T> Envelop success(final T entity) {
         return new Envelop(entity, HttpStatusCode.OK);
@@ -108,6 +112,10 @@ public class Envelop implements Serializable {
      */
     public boolean valid() {
         return null == this.error;
+    }
+
+    public WebException error() {
+        return this.error;
     }
 
     // ------------------ Below are data part -------------------

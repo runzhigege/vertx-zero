@@ -50,4 +50,27 @@ public interface Info {
     String JOB_COMPONENT_SELECTED = "[ ZERO ] ( Job ) {0} selected: {1}";
 
     String JOB_ADDRESS_EVENT_BUS = "[ ZERO ] ( Job ) {0} event bus enabled: {1}";
+
+    // ------------- Job monitor for ONCE
+    String PHASE_1ST_JOB = "[ ZERO ] ( Job: {0} ) 1. Input new data of JsonObject";
+
+    String PHASE_1ST_JOB_ASYNC = "[ ZERO ] ( Job: {0} ) 1. Input from address {1}";
+
+    String PHASE_2ND_JOB = "[ ZERO ] ( Job: {0} ) 2. Input without `JobIncome`";
+
+    String PHASE_2ND_JOB_ASYNC = "[ ZERO ] ( Job: {0} ) 2. Input with `JobIncome` = {1}";
+
+    String PHASE_3RD_JOB_RUN = "[ ZERO ] ( Job: {0} ) 3. --> @On Method call {1}";
+
+    String PHASE_6TH_JOB_CALLBACK = "[ ZERO ] ( Job: {0} ) 6. --> @Off Method call {1}";
+
+    String PHASE_4TH_JOB_ASYNC = "[ ZERO ] ( Job: {0} ) 4. Output with `JobOutcome` = {1}";
+
+    String PHASE_4TH_JOB = "[ ZERO ] ( Job: {0} ) 4. Output without `JobOutcome`";
+
+    String PHASE_5TH_JOB = "[ ZERO ] ( Job: {0} ) 5. Output directly, ignore next EventBus steps";
+
+    String PHASE_5TH_JOB_ASYNC = "[ ZERO ] ( Job: {0} ) 5. Output send to address {1}";
+
+    String PHASE_ERROR = "[ ZERO ] ( Job: {0} ) Terminal with error: {1}";
 }

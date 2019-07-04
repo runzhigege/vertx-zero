@@ -32,10 +32,14 @@ public class JobClientImpl implements JobClient {
             final Agha agha = Agha.get(mission.getType());
             /* Bind vertx */
             Ut.contract(agha, Vertx.class, this.vertx);
-            /* Start new job */
-            final Long timeId = agha.begin(mission);
-            /* Returned */
-            handler.handle(Future.succeededFuture(timeId));
+            /*
+             * begin method return Future<Long>, it's async result
+             * that's why here it's not needed to use:
+             * Future.successedFuture() to wrappe result, instead
+             * returned directly.
+             * */
+            final Future<Long> future = agha.begin(mission);
+            future.setHandler(handler);
         } else {
             LOGGER.info("[ ZERO ] ( JobClient ) The pool could not find job of name = `{0}`", name);
         }

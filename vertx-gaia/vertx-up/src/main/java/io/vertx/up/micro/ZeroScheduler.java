@@ -62,10 +62,6 @@ public class ZeroScheduler extends AbstractVerticle {
              * Bind vertx
              */
             Ut.contract(reference, Vertx.class, this.vertx);
-            /*
-             * Bind job store ( this method should access job store to process job )
-             */
-            Ut.contract(reference, Mission.class, mission);
         }
         /*
          * Agha calling

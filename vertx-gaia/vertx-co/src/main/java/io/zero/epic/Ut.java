@@ -217,11 +217,15 @@ public final class Ut {
 
     // --- Reflection Method
     public static <T> T invoke(final Object instance, final String name, final Object... args) {
-        return Instance.invoke(instance, name, args);
+        return Invoker.invokeObject(instance, name, args);
     }
 
     public static <T> T invoke(final Class<?> interfaceCls, final String name, final Object... args) {
-        return Instance.invoke(interfaceCls, name, args);
+        return Invoker.invokeInterface(interfaceCls, name, args);
+    }
+
+    public static <T> Future<T> invokeAsync(final Object instance, final Method method, final Object... args) {
+        return Invoker.invokeAsync(instance, method, args);
     }
 
     public static Class<?> clazz(final String name) {

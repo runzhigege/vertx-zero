@@ -1,5 +1,6 @@
 package io.vertx.up.job.center;
 
+import io.vertx.core.Future;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.em.JobType;
 
@@ -14,11 +15,8 @@ public interface Agha {
 
     /**
      * Start new job by definition of Mission here.
+     * Async start and return Future<Long>,
+     * here long type is timerId, you can control this job by timerId
      */
-    long begin(Mission mission);
-
-    /**
-     * End current job here.
-     */
-    boolean end(Mission mission);
+    Future<Long> begin(Mission mission);
 }

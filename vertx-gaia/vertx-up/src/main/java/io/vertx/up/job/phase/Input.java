@@ -31,7 +31,10 @@ class Input {
             /*
              * Event bus did not provide any input here
              */
-            return Future.succeededFuture(Envelop.ok());
+            Element.onceLog(mission,
+                    () -> LOGGER.info(Info.PHASE_1ST_JOB, mission.getName()));
+
+            return Future.succeededFuture(Envelop.okJson());
         } else {
             /*
              * Event bus provide input and then it will pass to @On
@@ -40,10 +43,19 @@ class Input {
             final Future<Envelop> input = Future.future();
             final EventBus eventBus = this.vertx.eventBus();
             eventBus.<Envelop>consumer(address, handler -> {
+
+                Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_1ST_JOB_ASYNC, mission.getName(), address));
+
                 final Envelop envelop = handler.body();
                 if (Objects.isNull(envelop)) {
+                    /*
+                     * Success
+                     */
                     input.complete(Envelop.ok());
                 } else {
+                    /*
+                     * Failure
+                     */
                     input.complete(envelop);
                 }
             });
@@ -52,29 +64,43 @@ class Input {
     }
 
     Future<Envelop> incomeAsync(final Envelop envelop, final Mission mission) {
-        /*
-         * Get JobIncome
-         */
-        final JobIncome income = Element.income(mission);
-        if (Objects.isNull(income)) {
+        if (envelop.valid()) {
             /*
-             * Directly
+             * Get JobIncome
              */
-            return Future.succeededFuture(envelop);
+            final JobIncome income = Element.income(mission);
+            if (Objects.isNull(income)) {
+                /*
+                 * Directly
+                 */
+                Element.onceLog(mission,
+                        () -> LOGGER.info(Info.PHASE_2ND_JOB, mission.getName()));
+
+                return Future.succeededFuture(envelop);
+            } else {
+                /*
+                 * JobIncome processing here
+                 * Contract for vertx/mission
+                 */
+                LOGGER.info(Info.JOB_COMPONENT_SELECTED, "JobIncome", income.getClass().getName());
+                /*
+                 * JobIncome must define
+                 * - Vertx reference
+                 * - Mission reference
+                 */
+                Ut.contract(income, Vertx.class, this.vertx);
+                Ut.contract(income, Mission.class, mission);
+                Element.onceLog(mission,
+                        () -> LOGGER.info(Info.PHASE_2ND_JOB_ASYNC, mission.getName(), income.getClass().getName()));
+
+                return income.beforeAsync(envelop);
+            }
         } else {
-            /*
-             * JobIncome processing here
-             * Contract for vertx/mission
-             */
-            LOGGER.info(Info.JOB_COMPONENT_SELECTED, "JobIncome", income.getClass().getName());
-            /*
-             * JobIncome must define
-             * - Vertx reference
-             * - Mission reference
-             */
-            Ut.contract(income, Vertx.class, this.vertx);
-            Ut.contract(income, Mission.class, mission);
-            return income.beforeAsync(envelop);
+            Element.onceLog(mission,
+                    () -> LOGGER.info(Info.PHASE_ERROR, mission.getName(),
+                            envelop.error().getClass().getName()));
+
+            return envelop.toFuture();
         }
     }
 }
