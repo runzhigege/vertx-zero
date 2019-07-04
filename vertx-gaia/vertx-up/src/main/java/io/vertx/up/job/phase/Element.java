@@ -3,9 +3,12 @@ package io.vertx.up.job.phase;
 import io.vertx.up.annotations.Off;
 import io.vertx.up.annotations.On;
 import io.vertx.up.atom.worker.Mission;
+import io.vertx.up.eon.em.JobType;
 import io.vertx.up.job.plugin.JobIncome;
 import io.vertx.up.job.plugin.JobOutcome;
+import io.vertx.up.web.Runner;
 import io.zero.epic.Ut;
+import io.zero.epic.fn.Actuator;
 import io.zero.epic.fn.Fn;
 
 import java.lang.annotation.Annotation;
@@ -47,5 +50,11 @@ class Element {
     static String address(final Mission mission, final boolean isOn) {
         final Annotation annotation = isOn ? on(mission) : off(mission);
         return Ut.invoke(annotation, "address");
+    }
+
+    static void onceLog(final Mission mission, final Actuator actuator) {
+        if (JobType.ONCE == mission.getType()) {
+            Runner.run(actuator::execute, "once-logger-debug");
+        }
     }
 }

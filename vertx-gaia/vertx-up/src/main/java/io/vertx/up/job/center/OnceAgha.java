@@ -1,5 +1,6 @@
 package io.vertx.up.job.center;
 
+import io.vertx.core.Future;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
 import io.vertx.up.eon.em.JobStatus;
@@ -10,7 +11,7 @@ import io.vertx.up.eon.em.JobStatus;
 class OnceAgha extends AbstractAgha {
 
     @Override
-    public long begin(final Mission mission) {
+    public Future<Long> begin(final Mission mission) {
         /*
          * 1. Execute this mission directly
          * -  This category could not be started when worker deployed, instead, this Agha should
@@ -19,7 +20,8 @@ class OnceAgha extends AbstractAgha {
          * 3. This kind fo task must be triggered, could not be in plan here. It's not needed to call
          *    Interval to process task.
          * */
-        return this.interval().startAt((timeId) -> {
+        final Future<Long> future = Future.future();
+        this.interval().startAt((timeId) -> {
             /*
              * Preparing for job
              **/
@@ -30,19 +32,24 @@ class OnceAgha extends AbstractAgha {
                 mission.setStatus(JobStatus.READY);
                 this.getLogger().info(Info.JOB_READY, mission.getName());
                 this.store().update(mission);
+                /*
+                 * Complete future and returned: Sync
+                 */
+                future.complete(timeId);
             } else if (JobStatus.READY == mission.getStatus()) {
                 /*
                  * Running the job next time when current job get event
                  * from event bus trigger
                  */
-                this.working(mission);
+                this.working(mission).compose(envelop -> {
+                    /*
+                     * Complete future and returned: Async
+                     */
+                    future.complete(timeId);
+                    return Future.succeededFuture(envelop);
+                });
             }
         });
-    }
-
-    @Override
-    public boolean end(final Mission mission) {
-
-        return false;
+        return future;
     }
 }

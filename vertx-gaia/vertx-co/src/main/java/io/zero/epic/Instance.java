@@ -102,18 +102,6 @@ final class Instance {
                 .anyMatch(item -> item.equals(interfaceCls));
     }
 
-    static <T> T invoke(final Object instance,
-                        final String name,
-                        final Object... args) {
-        return Invoker.invokeObject(instance, name, args);
-    }
-
-    static <T> T invoke(final Class<?> interfaceCls,
-                        final String name,
-                        final Object... args) {
-        return Invoker.invokeInterface(interfaceCls, name, args);
-    }
-
     static <T> T getProxy(
             final Method method) {
         final Class<?> interfaceCls = method.getDeclaringClass();

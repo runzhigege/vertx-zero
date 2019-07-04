@@ -76,6 +76,7 @@ E40059: "(Jooq) The field = \"{0}\" could not be found in type = \"{1}\""
 E40060: "(Jooq) Infix Jooq require vertx environment, but now vertx is null"
 E40061: "(Security) You are using Zero Security Framework, but the @Wall found Security reference is null"
 E40062: "(Quiz) Current test case name = `{0}` is invalid when you enable Quiz Framework of Zero, name must end with `Tc`"
+E40063: "Your reflect invoking does not satisfy the pre-condition, method = {0}"
 # RxJava
 E45001: (V) - The field "{1}" of json array "{0}" must be mapped to unique element, but current reduced is "{2}"
 # (Web) Exception for web
@@ -126,6 +127,7 @@ E60037: "(404) - (EXCEL) The file that you provided ( filename = `{0}` ) is miss
 E60038: "(404) - (EXCEL) The configuration of ( table = `{0}` ) is missing, please check your excel config"
 E60039: "(500) - (EXCEL) The exporting met error, detail = {0}"
 E60040: "(412) - The field of type `{0}` must be declared only once in target `{1}` with annotation @Contract, now it occurs {2} times"
+E60041: "(417) - The job `{0}` method parameter definitions are wrong"
 # CRUD Module
 E80100: "(404) - (CRUD) You missed `module` = `{0}` definition in file \"plugin/crud/module/\" folder"
 E80101: "(404) - (CRUD) You missed `column` configuration and instance is null. access module = {0}"

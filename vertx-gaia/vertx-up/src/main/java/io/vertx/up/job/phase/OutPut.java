@@ -21,52 +21,78 @@ class OutPut {
     }
 
     Future<Envelop> outcomeAsync(final Envelop envelop, final Mission mission) {
-        /*
-         * Get JobOutcome
-         */
-        final JobOutcome outcome = Element.outcome(mission);
-        if (Objects.isNull(outcome)) {
+        if (envelop.valid()) {
             /*
-             * Directly
+             * Get JobOutcome
              */
-            return Future.succeededFuture(envelop);
+            final JobOutcome outcome = Element.outcome(mission);
+            if (Objects.isNull(outcome)) {
+                /*
+                 * Directly
+                 */
+                Element.onceLog(mission,
+                        () -> LOGGER.info(Info.PHASE_4TH_JOB, mission.getName()));
+
+                return Future.succeededFuture(envelop);
+            } else {
+                /*
+                 * JobOutcome processing here
+                 * Contract for vertx/mission
+                 */
+                LOGGER.info(Info.JOB_COMPONENT_SELECTED, "JobOutcome", outcome.getClass().getName());
+                Ut.contract(outcome, Vertx.class, this.vertx);
+                Ut.contract(outcome, Mission.class, mission);
+
+                Element.onceLog(mission,
+                        () -> LOGGER.info(Info.PHASE_4TH_JOB_ASYNC, mission.getName(), outcome.getClass().getName()));
+                return outcome.afterAsync(envelop);
+            }
         } else {
-            /*
-             * JobOutcome processing here
-             * Contract for vertx/mission
-             */
-            LOGGER.info(Info.JOB_COMPONENT_SELECTED, "JobOutcome", outcome.getClass().getName());
-            Ut.contract(outcome, Vertx.class, this.vertx);
-            Ut.contract(outcome, Mission.class, mission);
-            return outcome.afterAsync(envelop);
+            Element.onceLog(mission,
+                    () -> LOGGER.info(Info.PHASE_ERROR, mission.getName(),
+                            envelop.error().getClass().getName()));
+
+            return envelop.toFuture();
         }
     }
 
     Future<Envelop> outputAsync(final Envelop envelop, final Mission mission) {
-        /*
-         * Get outcome address
-         */
-        final String address = Element.address(mission, false);
-        if (Ut.isNil(address)) {
+        if (envelop.valid()) {
             /*
-             * Directly
+             * Get outcome address
              */
-            return Future.succeededFuture(envelop);
+            final String address = Element.address(mission, false);
+            if (Ut.isNil(address)) {
+                /*
+                 * Directly
+                 */
+                Element.onceLog(mission,
+                        () -> LOGGER.info(Info.PHASE_5TH_JOB, mission.getName()));
+                return Future.succeededFuture(envelop);
+            } else {
+                /*
+                 * Event bus provide output and then it will execute
+                 */
+                LOGGER.info(Info.JOB_ADDRESS_EVENT_BUS, "Outcome", address);
+                final Future<Envelop> output = Future.future();
+                final EventBus eventBus = this.vertx.eventBus();
+                Element.onceLog(mission,
+                        () -> LOGGER.info(Info.PHASE_5TH_JOB_ASYNC, mission.getName(), address));
+                eventBus.<Envelop>send(address, envelop, handler -> {
+                    if (handler.succeeded()) {
+                        output.complete(handler.result().body());
+                    } else {
+                        output.complete(Envelop.failure(handler.cause()));
+                    }
+                });
+                return output;
+            }
         } else {
-            /*
-             * Event bus provide output and then it will execute
-             */
-            LOGGER.info(Info.JOB_ADDRESS_EVENT_BUS, "Outcome", address);
-            final Future<Envelop> output = Future.future();
-            final EventBus eventBus = this.vertx.eventBus();
-            eventBus.<Envelop>send(address, envelop, handler -> {
-                if (handler.succeeded()) {
-                    output.complete(handler.result().body());
-                } else {
-                    output.complete(Envelop.failure(handler.cause()));
-                }
-            });
-            return output;
+            Element.onceLog(mission,
+                    () -> LOGGER.info(Info.PHASE_ERROR, mission.getName(),
+                            envelop.error().getClass().getName()));
+
+            return envelop.toFuture();
         }
     }
 }
