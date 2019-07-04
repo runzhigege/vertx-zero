@@ -1,6 +1,8 @@
 package io.vertx.up.job.center;
 
 import io.vertx.up.atom.worker.Mission;
+import io.vertx.up.eon.Info;
+import io.vertx.up.eon.em.JobStatus;
 
 /**
  * Start one time
@@ -18,7 +20,26 @@ class OnceAgha extends AbstractAgha {
          *    Interval to process task.
          * */
         return this.interval().startAt((timeId) -> {
-            System.out.println("Hello");
+            /*
+             * Preparing for job
+             **/
+            if (JobStatus.STARTING == mission.getStatus()) {
+                /*
+                 * STARTING -> READY
+                 * */
+                mission.setStatus(JobStatus.READY);
+                this.getLogger().info(Info.JOB_READY, mission.getName());
+                this.store().update(mission);
+            }
+            /*
+             * Run job
+             */
+            if (JobStatus.READY == mission.getStatus()) {
+                /*
+                 * Running the job
+                 */
+                this.working(mission);
+            }
         });
     }
 

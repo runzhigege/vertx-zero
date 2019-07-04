@@ -6,17 +6,21 @@ import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Contract;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Mission;
-import io.vertx.up.job.cv.JobMsg;
+import io.vertx.up.eon.Info;
 import io.vertx.up.job.phase.Phase;
 import io.vertx.up.job.store.JobConfig;
 import io.vertx.up.job.store.JobPin;
+import io.vertx.up.job.store.JobStore;
 import io.vertx.up.job.timer.Interval;
 import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public abstract class AbstractAgha implements Agha {
 
     private static final JobConfig CONFIG = JobPin.getConfig();
+    private static final AtomicBoolean SELECTED = new AtomicBoolean(Boolean.TRUE);
 
     @Contract
     private transient Vertx vertx;
@@ -25,8 +29,15 @@ public abstract class AbstractAgha implements Agha {
         final Class<?> intervalCls = CONFIG.getInterval().getComponent();
         final Interval interval = Ut.singleton(intervalCls);
         Ut.contract(interval, Vertx.class, this.vertx);
-        this.getLogger().info(JobMsg.COMPONENT_SELECTED, "Interval", interval.getClass().getName());
+        if (SELECTED.getAndSet(Boolean.FALSE)) {
+            /* Be sure the log only provide once */
+            this.getLogger().info(Info.JOB_COMPONENT_SELECTED, "Interval", interval.getClass().getName());
+        }
         return interval;
+    }
+
+    JobStore store() {
+        return JobPin.getStore();
     }
 
     /*

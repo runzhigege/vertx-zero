@@ -62,7 +62,8 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
         /* Basic data object initialized */
         mission.setName(name);
         mission.setType(type);
-        mission.setStatus(JobStatus.READY);
+        /* The first status of each Job */
+        mission.setStatus(JobStatus.STARTING);
         /* Time Unit */
         if (Values.RANGE == mission.getDuration()) {
             mission.setDuration(this.duration(annotation));

@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Mission;
-import io.vertx.up.job.cv.JobMsg;
+import io.vertx.up.eon.Info;
 import io.vertx.up.job.plugin.JobIncome;
 import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
@@ -36,7 +36,7 @@ class Input {
             /*
              * Event bus provide input and then it will pass to @On
              */
-            LOGGER.info(JobMsg.ADDRESS_EVENT_BUS, "Income", address);
+            LOGGER.info(Info.JOB_ADDRESS_EVENT_BUS, "Income", address);
             final Future<Envelop> input = Future.future();
             final EventBus eventBus = this.vertx.eventBus();
             eventBus.<Envelop>consumer(address, handler -> {
@@ -66,7 +66,7 @@ class Input {
              * JobIncome processing here
              * Contract for vertx/mission
              */
-            LOGGER.info(JobMsg.COMPONENT_SELECTED, "JobIncome", income.getClass().getName());
+            LOGGER.info(Info.JOB_COMPONENT_SELECTED, "JobIncome", income.getClass().getName());
             Ut.contract(income, Vertx.class, this.vertx);
             Ut.contract(income, Mission.class, mission);
             return income.beforeAsync(envelop);

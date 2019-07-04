@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Mission;
-import io.vertx.up.job.cv.JobMsg;
+import io.vertx.up.eon.Info;
 import io.vertx.up.job.plugin.JobOutcome;
 import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
@@ -35,7 +35,7 @@ class OutPut {
              * JobOutcome processing here
              * Contract for vertx/mission
              */
-            LOGGER.info(JobMsg.COMPONENT_SELECTED, "JobOutcome", outcome.getClass().getName());
+            LOGGER.info(Info.JOB_COMPONENT_SELECTED, "JobOutcome", outcome.getClass().getName());
             Ut.contract(outcome, Vertx.class, this.vertx);
             Ut.contract(outcome, Mission.class, mission);
             return outcome.afterAsync(envelop);
@@ -56,7 +56,7 @@ class OutPut {
             /*
              * Event bus provide output and then it will execute
              */
-            LOGGER.info(JobMsg.ADDRESS_EVENT_BUS, "Outcome", address);
+            LOGGER.info(Info.JOB_ADDRESS_EVENT_BUS, "Outcome", address);
             final Future<Envelop> output = Future.future();
             final EventBus eventBus = this.vertx.eventBus();
             eventBus.<Envelop>send(address, envelop, handler -> {
