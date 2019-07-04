@@ -30,13 +30,10 @@ class OnceAgha extends AbstractAgha {
                 mission.setStatus(JobStatus.READY);
                 this.getLogger().info(Info.JOB_READY, mission.getName());
                 this.store().update(mission);
-            }
-            /*
-             * Run job
-             */
-            if (JobStatus.READY == mission.getStatus()) {
+            } else if (JobStatus.READY == mission.getStatus()) {
                 /*
-                 * Running the job
+                 * Running the job next time when current job get event
+                 * from event bus trigger
                  */
                 this.working(mission);
             }
