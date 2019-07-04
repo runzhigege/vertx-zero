@@ -73,4 +73,7 @@ public interface Info {
     String PHASE_5TH_JOB_ASYNC = "[ ZERO ] ( Job: {0} ) 5. Output send to address {1}";
 
     String PHASE_ERROR = "[ ZERO ] ( Job: {0} ) Terminal with error: {1}";
+
+    // ------------ Job
+    String JOB_DELAY = "[ ZERO ] ( Job: {0} ) Job will started after {1} ms";
 }

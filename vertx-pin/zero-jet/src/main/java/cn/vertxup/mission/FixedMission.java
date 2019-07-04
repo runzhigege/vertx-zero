@@ -1,5 +1,6 @@
 package cn.vertxup.mission;
 
+import io.vertx.core.Future;
 import io.vertx.up.annotations.Job;
 import io.vertx.up.annotations.Off;
 import io.vertx.up.annotations.On;
@@ -9,14 +10,21 @@ import io.vertx.up.job.AbstractMission;
 
 @Job(value = JobType.FIXED, name = "demo-fixed")
 public class FixedMission extends AbstractMission {
-
     @On
-    public void start(final Envelop envelop) {
-
+    public Future<Envelop> startAsync(final Envelop envelop) {
+        /*
+         *
+         */
+        System.out.println("FIXED: execute");
+        return Future.succeededFuture(envelop);
     }
 
     @Off
-    public void end(final Envelop envelop) {
-
+    public Future<Envelop> endAsync(final Envelop envelop) {
+        /*
+         *
+         */
+        System.out.println("FIXED: callback");
+        return Future.succeededFuture(envelop);
     }
 }
