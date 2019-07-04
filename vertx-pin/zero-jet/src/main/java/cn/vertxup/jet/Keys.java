@@ -5,8 +5,10 @@ package cn.vertxup.jet;
 
 
 import cn.vertxup.jet.tables.IApi;
+import cn.vertxup.jet.tables.IJob;
 import cn.vertxup.jet.tables.IService;
 import cn.vertxup.jet.tables.records.IApiRecord;
+import cn.vertxup.jet.tables.records.IJobRecord;
 import cn.vertxup.jet.tables.records.IServiceRecord;
 
 import javax.annotation.Generated;
@@ -40,6 +42,8 @@ public class Keys {
 
     public static final UniqueKey<IApiRecord> KEY_I_API_PRIMARY = UniqueKeys0.KEY_I_API_PRIMARY;
     public static final UniqueKey<IApiRecord> KEY_I_API_URI = UniqueKeys0.KEY_I_API_URI;
+    public static final UniqueKey<IJobRecord> KEY_I_JOB_PRIMARY = UniqueKeys0.KEY_I_JOB_PRIMARY;
+    public static final UniqueKey<IJobRecord> KEY_I_JOB_SIGMA = UniqueKeys0.KEY_I_JOB_SIGMA;
     public static final UniqueKey<IServiceRecord> KEY_I_SERVICE_PRIMARY = UniqueKeys0.KEY_I_SERVICE_PRIMARY;
     public static final UniqueKey<IServiceRecord> KEY_I_SERVICE_NAME = UniqueKeys0.KEY_I_SERVICE_NAME;
 
@@ -55,6 +59,8 @@ public class Keys {
     private static class UniqueKeys0 {
         public static final UniqueKey<IApiRecord> KEY_I_API_PRIMARY = Internal.createUniqueKey(IApi.I_API, "KEY_I_API_PRIMARY", IApi.I_API.KEY);
         public static final UniqueKey<IApiRecord> KEY_I_API_URI = Internal.createUniqueKey(IApi.I_API, "KEY_I_API_URI", IApi.I_API.URI, IApi.I_API.METHOD, IApi.I_API.SIGMA);
+        public static final UniqueKey<IJobRecord> KEY_I_JOB_PRIMARY = Internal.createUniqueKey(IJob.I_JOB, "KEY_I_JOB_PRIMARY", IJob.I_JOB.KEY);
+        public static final UniqueKey<IJobRecord> KEY_I_JOB_SIGMA = Internal.createUniqueKey(IJob.I_JOB, "KEY_I_JOB_SIGMA", IJob.I_JOB.SIGMA, IJob.I_JOB.NAMESPACE, IJob.I_JOB.CODE);
         public static final UniqueKey<IServiceRecord> KEY_I_SERVICE_PRIMARY = Internal.createUniqueKey(IService.I_SERVICE, "KEY_I_SERVICE_PRIMARY", IService.I_SERVICE.KEY);
         public static final UniqueKey<IServiceRecord> KEY_I_SERVICE_NAME = Internal.createUniqueKey(IService.I_SERVICE, "KEY_I_SERVICE_NAME", IService.I_SERVICE.NAME, IService.I_SERVICE.NAMESPACE);
     }

@@ -5,6 +5,7 @@ package cn.vertxup.jet;
 
 
 import cn.vertxup.jet.tables.IApi;
+import cn.vertxup.jet.tables.IJob;
 import cn.vertxup.jet.tables.IService;
 
 import javax.annotation.Generated;
@@ -27,6 +28,11 @@ public class Tables {
      * The table <code>DB_ETERNAL.I_API</code>.
      */
     public static final IApi I_API = cn.vertxup.jet.tables.IApi.I_API;
+
+    /**
+     * The table <code>DB_ETERNAL.I_JOB</code>.
+     */
+    public static final IJob I_JOB = cn.vertxup.jet.tables.IJob.I_JOB;
 
     /**
      * The table <code>DB_ETERNAL.I_SERVICE</code>.
