@@ -31,6 +31,8 @@ public interface Info {
 
     String RPC_ENABLED = "[ ZERO ] ( Micro -> Rpc ) Zero system detected the rpc server is Enabled. ";
 
+    // ----------- Job related information
+
     String JOB_IGNORE = "[ ZERO ] ( Job ) The class {0} annotated with @Job will be ignored because there is no @On method defined.";
 
     String JOB_EMPTY = "[ ZERO ] ( Job ) Zero system detect no jobs, the scheduler will be stopped.";
@@ -40,4 +42,12 @@ public interface Info {
     String JOB_MONITOR = "[ ZERO ] ( Job ) Zero system detect {0} jobs, the scheduler will begin....";
 
     String JOB_CONFIG = "[ ZERO ] ( Job ) Job configuration read : {0}";
+
+    String JOB_AGHA_SELECTED = "[ ZERO ] ( Job ) Agha = {0} has been selected for job {1} of type {2}";
+
+    String JOB_READY = "[ ZERO ] ( Job ) Job {0} status has been ready: STARTING -> READY";
+
+    String JOB_COMPONENT_SELECTED = "[ ZERO ] ( Job ) {0} selected: {1}";
+
+    String JOB_ADDRESS_EVENT_BUS = "[ ZERO ] ( Job } {0} event bus enabled: {1}";
 }

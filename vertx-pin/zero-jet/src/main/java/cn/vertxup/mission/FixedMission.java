@@ -7,7 +7,7 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.eon.em.JobType;
 import io.vertx.up.job.AbstractMission;
 
-@Job(value = JobType.ONCE, name = "demo-fixed")
+@Job(value = JobType.FIXED, name = "demo-fixed")
 public class FixedMission extends AbstractMission {
 
     @On

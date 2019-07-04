@@ -79,6 +79,7 @@ public class ZeroScheduler extends AbstractVerticle {
             /*
              * Invoke here to provide input
              */
+            LOGGER.info(Info.JOB_AGHA_SELECTED, agha.getClass(), mission.getName(), mission.getType());
             agha.begin(mission);
         }
     }

@@ -7,7 +7,7 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.eon.em.JobType;
 import io.vertx.up.job.AbstractMission;
 
-@Job(value = JobType.ONCE, name = "demo-plan")
+@Job(value = JobType.PLAN, name = "demo-plan")
 public class PlanMission extends AbstractMission {
 
     @On
