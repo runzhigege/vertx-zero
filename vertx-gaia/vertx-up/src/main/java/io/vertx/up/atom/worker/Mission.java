@@ -40,8 +40,8 @@ public class Mission implements Serializable {
     /* Time: started time */
     @JsonIgnore
     private Instant instant = Instant.now();
-    /* Time: duration */
-    private long duration = -1L;
+    /* Time: duration, default is 5min */
+    private long duration = 5_000L;
 
     /* Job reference */
     @JsonIgnore

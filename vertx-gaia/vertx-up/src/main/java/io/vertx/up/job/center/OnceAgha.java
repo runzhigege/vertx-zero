@@ -2,7 +2,6 @@ package io.vertx.up.job.center;
 
 import io.vertx.core.Future;
 import io.vertx.up.atom.worker.Mission;
-import io.vertx.up.eon.Info;
 import io.vertx.up.eon.em.JobStatus;
 
 /**
@@ -22,19 +21,11 @@ class OnceAgha extends AbstractAgha {
          * */
         final Future<Long> future = Future.future();
         this.interval().startAt((timeId) -> {
-            /*
-             * Preparing for job
-             **/
             if (JobStatus.STARTING == mission.getStatus()) {
                 /*
-                 * STARTING -> READY
-                 * */
-                mission.setStatus(JobStatus.READY);
-                this.getLogger().info(Info.JOB_READY, mission.getName());
-                this.store().update(mission);
-                /*
-                 * Complete future and returned: Sync
-                 */
+                 * Preparing for job
+                 **/
+                this.preparing(mission);
                 future.complete(timeId);
             } else if (JobStatus.READY == mission.getStatus()) {
                 /*

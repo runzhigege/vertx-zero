@@ -7,6 +7,7 @@ import io.vertx.up.annotations.Contract;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
+import io.vertx.up.eon.em.JobStatus;
 import io.vertx.up.job.phase.Phase;
 import io.vertx.up.job.store.JobConfig;
 import io.vertx.up.job.store.JobPin;
@@ -84,6 +85,20 @@ public abstract class AbstractAgha implements Agha {
                  * 6. Final steps here
                  */
                 .compose(phase::callbackAsync);
+    }
+
+    protected void preparing(final Mission mission) {
+        /*
+         * Preparing for job
+         **/
+        if (JobStatus.STARTING == mission.getStatus()) {
+            /*
+             * STARTING -> READY
+             * */
+            mission.setStatus(JobStatus.READY);
+            this.getLogger().info(Info.JOB_READY, mission.getName());
+            this.store().update(mission);
+        }
     }
 
     protected Annal getLogger() {
