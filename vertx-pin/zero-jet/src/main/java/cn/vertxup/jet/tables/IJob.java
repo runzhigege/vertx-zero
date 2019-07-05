@@ -35,7 +35,7 @@ public class IJob extends TableImpl<IJobRecord> {
      * The reference instance of <code>DB_ETERNAL.I_JOB</code>
      */
     public static final IJob I_JOB = new IJob();
-    private static final long serialVersionUID = -1900379455;
+    private static final long serialVersionUID = 545197907;
     /**
      * The column <code>DB_ETERNAL.I_JOB.KEY</code>. 「key」- 任务ID
      */
@@ -179,7 +179,7 @@ public class IJob extends TableImpl<IJobRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.I_JOB_PRIMARY, Indexes.I_JOB_SIGMA);
+        return Arrays.<Index>asList(Indexes.I_JOB_NAMESPACE, Indexes.I_JOB_PRIMARY, Indexes.I_JOB_SIGMA, Indexes.I_JOB_SIGMA_2);
     }
 
     /**
@@ -195,7 +195,7 @@ public class IJob extends TableImpl<IJobRecord> {
      */
     @Override
     public List<UniqueKey<IJobRecord>> getKeys() {
-        return Arrays.<UniqueKey<IJobRecord>>asList(Keys.KEY_I_JOB_PRIMARY, Keys.KEY_I_JOB_SIGMA);
+        return Arrays.<UniqueKey<IJobRecord>>asList(Keys.KEY_I_JOB_PRIMARY, Keys.KEY_I_JOB_NAMESPACE, Keys.KEY_I_JOB_SIGMA_2, Keys.KEY_I_JOB_SIGMA);
     }
 
     /**
