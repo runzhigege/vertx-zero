@@ -76,4 +76,6 @@ public interface Info {
 
     // ------------ Job
     String JOB_DELAY = "[ ZERO ] ( Job: {0} ) Job will started after {1} ms";
+
+    String JOB_SCANNED = "[ ZERO ] ( Job ) The system scanned {0} jobs with type {1}";
 }

@@ -136,4 +136,8 @@ public class AmbientEnvironment {
     public Set<JtUri> routes() {
         return new HashSet<>(this.uris.values());
     }
+
+    public Set<JtJob> jobs() {
+        return new HashSet<>(this.jobs.values());
+    }
 }
