@@ -14,6 +14,7 @@ import io.zero.epic.fn.ZeroBiConsumer;
 
 import java.io.File;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -216,11 +217,15 @@ public final class Ut {
 
     // --- Reflection Method
     public static <T> T invoke(final Object instance, final String name, final Object... args) {
-        return Instance.invoke(instance, name, args);
+        return Invoker.invokeObject(instance, name, args);
     }
 
     public static <T> T invoke(final Class<?> interfaceCls, final String name, final Object... args) {
-        return Instance.invoke(interfaceCls, name, args);
+        return Invoker.invokeInterface(interfaceCls, name, args);
+    }
+
+    public static <T> Future<T> invokeAsync(final Object instance, final Method method, final Object... args) {
+        return Invoker.invokeAsync(instance, method, args);
     }
 
     public static Class<?> clazz(final String name) {
@@ -252,7 +257,7 @@ public final class Ut {
         InstanceField.set(instance, name, value);
     }
 
-    public static <T> void field(final Object instance, final java.lang.reflect.Field field, final T value) {
+    public static <T> void field(final Object instance, final Field field, final T value) {
         InstanceField.set(instance, field, value);
     }
 
@@ -265,11 +270,11 @@ public final class Ut {
         return InstanceField.getI(interfaceCls, name);
     }
 
-    public static java.lang.reflect.Field[] fields(final Class<?> clazz) {
+    public static Field[] fields(final Class<?> clazz) {
         return InstanceField.fields(clazz);
     }
 
-    public static <T> java.lang.reflect.Field contract(final T instance, final Class<?> fieldType) {
+    public static <T> Field contract(final T instance, final Class<?> fieldType) {
         return InstanceField.contract(InstanceField.class, instance, fieldType);
     }
 

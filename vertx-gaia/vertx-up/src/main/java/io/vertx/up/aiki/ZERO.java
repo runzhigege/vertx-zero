@@ -28,6 +28,10 @@ interface Info {
 
     String INFIX_IMPL = "[ ZERO ] The hitted class {0} does not implement the interface" +
             "of {1}";
+
+    String JOB_START = "[ ZERO ] ( UxJob ) The job {0} has been started with timeId: {1}.";
+    String JOB_STOP = "[ ZERO ] ( UxJob ) The job {0} has been stopped and timeId: {1} removed.";
+    String JOB_RESUME = "[ ZERO ] ( UxJob ) The job {0} will be resume and new timeId generated: {1}.";
 }
 
 interface Pool {

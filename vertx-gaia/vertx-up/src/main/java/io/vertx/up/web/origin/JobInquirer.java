@@ -2,8 +2,6 @@ package io.vertx.up.web.origin;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Job;
-import io.vertx.up.annotations.Off;
-import io.vertx.up.annotations.On;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
 import io.vertx.up.eon.ZeroValue;
@@ -16,8 +14,6 @@ import io.vertx.zero.eon.Values;
 import io.zero.epic.Ut;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -59,10 +55,20 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
 
         /* Initialization */
         final Mission mission = this.config(annotation);
+
         /* Basic data object initialized */
         mission.setName(name);
-        mission.setType(type);
-        mission.setStatus(JobStatus.READY);
+        /*
+         * Let type could be configured,
+         * 1) Annotation type priority should be low
+         * 2) Config type priority is higher than annotation
+         */
+        if (Objects.isNull(mission.getType())) {
+            mission.setType(type);
+        }
+
+        /* The first status of each Job */
+        mission.setStatus(JobStatus.STARTING);
         /* Time Unit */
         if (Values.RANGE == mission.getDuration()) {
             mission.setDuration(this.duration(annotation));
@@ -71,27 +77,13 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
         if (Ut.isNil(mission.getCode())) {
             mission.setCode(mission.getName());
         }
-        this.mount(mission, clazz);
+        mission.connect(clazz);
         /* on method must existing */
         if (Objects.isNull(mission.getOn())) {
             LOGGER.warn(Info.JOB_IGNORE, clazz.getName());
             return null;
         }
         return mission;
-    }
-
-    private void mount(final Mission mission, final Class<?> clazz) {
-        /* Proxy */
-        final Object proxy = Ut.singleton(clazz);
-        mission.setProxy(proxy);
-        /* Method */
-        final Method on = Arrays.stream(clazz.getDeclaredMethods()).filter(method -> method.isAnnotationPresent(On.class))
-                .findFirst().orElse(null);
-        final Method off = Arrays.stream(clazz.getDeclaredMethods()).filter(method -> method.isAnnotationPresent(Off.class))
-                .findFirst().orElse(null);
-
-        mission.setOn(on);
-        mission.setOff(off);
     }
 
     private Mission config(final Annotation annotation) {
@@ -105,6 +97,11 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
              * - status
              * - name
              * - type
+             * Be carefule, here include
+             * - income
+             * - incomeAddress
+             * - outcome
+             * - outcomeAddress
              * */
             json.remove("status");
             json.remove("name");

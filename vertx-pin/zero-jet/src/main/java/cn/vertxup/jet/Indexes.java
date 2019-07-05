@@ -5,6 +5,7 @@ package cn.vertxup.jet;
 
 
 import cn.vertxup.jet.tables.IApi;
+import cn.vertxup.jet.tables.IJob;
 import cn.vertxup.jet.tables.IService;
 
 import javax.annotation.Generated;
@@ -33,6 +34,10 @@ public class Indexes {
 
     public static final Index I_API_PRIMARY = Indexes0.I_API_PRIMARY;
     public static final Index I_API_URI = Indexes0.I_API_URI;
+    public static final Index I_JOB_NAMESPACE = Indexes0.I_JOB_NAMESPACE;
+    public static final Index I_JOB_PRIMARY = Indexes0.I_JOB_PRIMARY;
+    public static final Index I_JOB_SIGMA = Indexes0.I_JOB_SIGMA;
+    public static final Index I_JOB_SIGMA_2 = Indexes0.I_JOB_SIGMA_2;
     public static final Index I_SERVICE_NAME = Indexes0.I_SERVICE_NAME;
     public static final Index I_SERVICE_PRIMARY = Indexes0.I_SERVICE_PRIMARY;
 
@@ -43,6 +48,10 @@ public class Indexes {
     private static class Indexes0 {
         public static Index I_API_PRIMARY = Internal.createIndex("PRIMARY", IApi.I_API, new OrderField[] { IApi.I_API.KEY }, true);
         public static Index I_API_URI = Internal.createIndex("URI", IApi.I_API, new OrderField[] { IApi.I_API.URI, IApi.I_API.METHOD, IApi.I_API.SIGMA }, true);
+        public static Index I_JOB_NAMESPACE = Internal.createIndex("NAMESPACE", IJob.I_JOB, new OrderField[] { IJob.I_JOB.NAMESPACE, IJob.I_JOB.NAME }, true);
+        public static Index I_JOB_PRIMARY = Internal.createIndex("PRIMARY", IJob.I_JOB, new OrderField[] { IJob.I_JOB.KEY }, true);
+        public static Index I_JOB_SIGMA = Internal.createIndex("SIGMA", IJob.I_JOB, new OrderField[] { IJob.I_JOB.SIGMA, IJob.I_JOB.CODE }, true);
+        public static Index I_JOB_SIGMA_2 = Internal.createIndex("SIGMA_2", IJob.I_JOB, new OrderField[] { IJob.I_JOB.SIGMA, IJob.I_JOB.NAME }, true);
         public static Index I_SERVICE_NAME = Internal.createIndex("NAME", IService.I_SERVICE, new OrderField[] { IService.I_SERVICE.NAME, IService.I_SERVICE.NAMESPACE }, true);
         public static Index I_SERVICE_PRIMARY = Internal.createIndex("PRIMARY", IService.I_SERVICE, new OrderField[] { IService.I_SERVICE.KEY }, true);
     }

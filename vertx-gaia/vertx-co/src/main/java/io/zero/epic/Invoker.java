@@ -1,10 +1,17 @@
 package io.zero.epic;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
+import io.vertx.core.AsyncResult;
+import io.vertx.core.Future;
+import io.vertx.core.Handler;
+import io.vertx.zero.exception.InvokingSpecException;
+import io.zero.epic.fn.Actuator;
 import io.zero.epic.fn.Fn;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Call interface method by cglib
@@ -40,6 +47,94 @@ final class Invoker {
             final Object ret = result;
             return Fn.getNull(() -> (T) ret, ret);
         }, instance, name);
+    }
+
+    static <T> Future<T> invokeAsync(final Object instance,
+                                     final Method method,
+                                     final Object... args) {
+        /*
+         * Analyzing method returnType first
+         */
+        final Class<?> returnType = method.getReturnType();
+        final Future<T> future = Future.future();
+        try {
+            /*
+             * Void return for continue calling
+             */
+            if (void.class == returnType) {
+                /*
+                 * When void returned, here you must set the last argument to Future<T>
+                 * Arguments [] + Future<T> future
+                 *
+                 * Critical:
+                 * -- It means that if you want to return void.class, you must provide
+                 *    argument future and let the future as last arguments
+                 * -- The basic condition is
+                 *    method declared length = args length + 1
+                 */
+                Fn.out(method.getParameters().length != args.length + 1,
+                        InvokingSpecException.class, Invoker.class, method);
+                final Object[] arguments = Ut.elementAdd(args, future);
+                method.invoke(instance, arguments);
+            } else {
+                final Object returnValue = method.invoke(instance, args);
+                if (Objects.isNull(returnValue)) {
+                    /*
+                     * Future also null
+                     */
+                    future.complete(null);
+                } else {
+                    if (Instance.isMatch(returnType, Future.class)) {
+                        /*
+                         * Future<T> returned directly,
+                         * Connect future -> future
+                         */
+                        ((Future<T>) returnValue).setHandler(handler -> {
+                            if (handler.succeeded()) {
+                                future.complete(handler.result());
+                            } else {
+                                future.fail(handler.cause());
+                            }
+                        });
+                    } else if (Instance.isMatch(returnType, AsyncResult.class)) {
+                        /*
+                         * AsyncResult
+                         */
+                        final AsyncResult<T> async = (AsyncResult<T>) returnValue;
+                        if (async.succeeded()) {
+                            future.complete(async.result());
+                        } else {
+                            future.fail(async.cause());
+                        }
+                    } else if (Instance.isMatch(returnType, Handler.class)) {
+                        /*
+                         * Handler, not testing here.
+                         * Connect future to handler
+                         */
+                        future.setHandler(((Handler<AsyncResult<T>>) returnValue));
+                    } else {
+                        /*
+                         * Sync calling
+                         */
+                        final T returnT = (T) returnValue;
+                        future.complete(returnT);
+                    }
+                }
+            }
+        } catch (final Throwable ex) {
+            // TODO: DEBUG for JVM
+            ex.printStackTrace();
+            future.fail(ex);
+        }
+        return future;
+    }
+
+    private static <T> void invokeAsync(final Future<T> future, final Actuator actuator) {
+        try {
+            actuator.execute();
+        } catch (final Throwable ex) {
+            future.fail(ex);
+        }
     }
 
     static <T> T invokeInterface(

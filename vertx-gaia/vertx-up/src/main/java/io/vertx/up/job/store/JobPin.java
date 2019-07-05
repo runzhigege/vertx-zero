@@ -4,6 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
 import io.vertx.up.log.Annal;
+import io.vertx.up.plugin.job.JobPool;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
 import io.zero.epic.Ut;
@@ -14,6 +15,7 @@ public class JobPin {
     private static final Node<JsonObject> VISITOR = Ut.singleton(ZeroUniform.class);
     private static final String JOB = "job";
     private static transient JobConfig CONFIG;
+    private static transient JobStore STORE;
 
     static {
         final JsonObject config = VISITOR.read();
@@ -21,9 +23,11 @@ public class JobPin {
             final JsonObject job = config.getJsonObject(JOB);
             if (!Ut.isNil(job)) {
                 /* Extension job-store */
-                CONFIG = Ut.deserialize(config, JobConfig.class);
-                LOGGER.info(Info.JOB_CONFIG, CONFIG);
+                CONFIG = Ut.deserialize(job, JobConfig.class);
+            } else {
+                CONFIG = new JobConfig();
             }
+            LOGGER.info(Info.JOB_CONFIG, CONFIG);
         }
     }
 
@@ -36,10 +40,10 @@ public class JobPin {
          * Singleton for UnityStore ( package scope )
          */
         synchronized (JobStore.class) {
-            if (null == UnityStore.INSTANCE) {
-                UnityStore.INSTANCE = new UnityStore();
+            if (null == STORE) {
+                STORE = new UnityStore();
             }
-            return UnityStore.INSTANCE;
+            return STORE;
         }
     }
 

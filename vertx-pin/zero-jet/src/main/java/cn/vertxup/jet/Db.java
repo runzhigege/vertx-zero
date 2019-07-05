@@ -5,6 +5,7 @@ package cn.vertxup.jet;
 
 
 import cn.vertxup.jet.tables.IApi;
+import cn.vertxup.jet.tables.IJob;
 import cn.vertxup.jet.tables.IService;
 import io.vertx.tp.ke.tool.Ke;
 import org.jooq.Catalog;
@@ -34,11 +35,16 @@ public class Db extends SchemaImpl {
      * The reference instance of <code>DB_ETERNAL</code>
      */
     public static final Db DB_ETERNAL = new Db();
-    private static final long serialVersionUID = 1983700009;
+    private static final long serialVersionUID = 1619077380;
     /**
      * The table <code>DB_ETERNAL.I_API</code>.
      */
     public final IApi I_API = cn.vertxup.jet.tables.IApi.I_API;
+
+    /**
+     * The table <code>DB_ETERNAL.I_JOB</code>.
+     */
+    public final IJob I_JOB = cn.vertxup.jet.tables.IJob.I_JOB;
 
     /**
      * The table <code>DB_ETERNAL.I_SERVICE</code>.
@@ -71,6 +77,7 @@ public class Db extends SchemaImpl {
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
                 IApi.I_API,
+                IJob.I_JOB,
                 IService.I_SERVICE);
     }
 }

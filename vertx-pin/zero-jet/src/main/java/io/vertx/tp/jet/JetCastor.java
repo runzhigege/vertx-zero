@@ -31,7 +31,7 @@ public class JetCastor {
     }
 
     /*
-     * Package scope to start workers
+     * Package scope to begin workers
      */
     void startWorkers(final Set<JtUri> uriSet) {
         /*

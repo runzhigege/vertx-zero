@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * This factor could start following:
+ * This factor could begin following:
  * 1. Http Api Gateway
  * 2. Rx/Http mode shared.
  */

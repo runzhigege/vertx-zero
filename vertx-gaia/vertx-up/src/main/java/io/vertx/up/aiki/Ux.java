@@ -727,6 +727,12 @@ public final class Ux {
         }
     }
 
+    public static class Job {
+        public static UxJob on() {
+            return new UxJob();
+        }
+    }
+
     // -> Jwt
     public static class Jwt {
 

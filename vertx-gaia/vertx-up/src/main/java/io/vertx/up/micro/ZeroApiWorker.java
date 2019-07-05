@@ -55,7 +55,7 @@ public class ZeroApiWorker extends AbstractVerticle {
         /**
          this.vertx.setPeriodic(5000, id -> {
          // Clean ko services ( Ipc & Api )
-         Fn.safeJvm(() -> EtcdEraser.create().start(), LOGGER);
+         Fn.safeJvm(() -> EtcdEraser.create().begin(), LOGGER);
          });**/
 
         // Scan the services every 3s
