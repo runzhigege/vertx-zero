@@ -35,7 +35,7 @@ public class IJob extends TableImpl<IJobRecord> {
      * The reference instance of <code>DB_ETERNAL.I_JOB</code>
      */
     public static final IJob I_JOB = new IJob();
-    private static final long serialVersionUID = 545197907;
+    private static final long serialVersionUID = 334357867;
     /**
      * The column <code>DB_ETERNAL.I_JOB.KEY</code>. 「key」- 任务ID
      */
@@ -77,21 +77,21 @@ public class IJob extends TableImpl<IJobRecord> {
      */
     public final TableField<IJobRecord, String> PROXY = createField("PROXY", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「proxy」- 代理类，带有@On/@Off");
     /**
-     * The column <code>DB_ETERNAL.I_JOB.ADDRESS_IN</code>. 「addressIn」- 入地址
+     * The column <code>DB_ETERNAL.I_JOB.INCOME_COMPONENT</code>. 「incomeComponent」对应income，必须是JobIncome，@On -&gt; income
      */
-    public final TableField<IJobRecord, String> ADDRESS_IN = createField("ADDRESS_IN", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「addressIn」- 入地址");
+    public final TableField<IJobRecord, String> INCOME_COMPONENT = createField("INCOME_COMPONENT", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「incomeComponent」对应income，必须是JobIncome，@On -> income");
     /**
-     * The column <code>DB_ETERNAL.I_JOB.INCOME</code>. 「income」- 入组件JobIncome
+     * The column <code>DB_ETERNAL.I_JOB.INCOME_ADDRESS</code>. 「incomeAddress」对应incomeAddress，字符串，@On -&gt; address
      */
-    public final TableField<IJobRecord, String> INCOME = createField("INCOME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「income」- 入组件JobIncome");
+    public final TableField<IJobRecord, String> INCOME_ADDRESS = createField("INCOME_ADDRESS", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「incomeAddress」对应incomeAddress，字符串，@On -> address");
     /**
-     * The column <code>DB_ETERNAL.I_JOB.ADDRESS_OUT</code>. 「addressOut」- 出地址
+     * The column <code>DB_ETERNAL.I_JOB.OUTCOME_COMPONENT</code>. 「outcomeComponent」对应outcome，必须是JobOutcome，@Off -&gt; outcome
      */
-    public final TableField<IJobRecord, String> ADDRESS_OUT = createField("ADDRESS_OUT", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「addressOut」- 出地址");
+    public final TableField<IJobRecord, String> OUTCOME_COMPONENT = createField("OUTCOME_COMPONENT", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「outcomeComponent」对应outcome，必须是JobOutcome，@Off -> outcome");
     /**
-     * The column <code>DB_ETERNAL.I_JOB.OUTCOME</code>. 「outcome」- 出组件JobOutcome
+     * The column <code>DB_ETERNAL.I_JOB.OUTCOME_ADDRESS</code>. 「outcomeAddress」对应outcomeAddress，字符串，@Off -&gt; address
      */
-    public final TableField<IJobRecord, String> OUTCOME = createField("OUTCOME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「outcome」- 出组件JobOutcome");
+    public final TableField<IJobRecord, String> OUTCOME_ADDRESS = createField("OUTCOME_ADDRESS", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「outcomeAddress」对应outcomeAddress，字符串，@Off -> address");
     /**
      * The column <code>DB_ETERNAL.I_JOB.SERVICE_ID</code>. 「serviceId」- 关联的服务ID
      */

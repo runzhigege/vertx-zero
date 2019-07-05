@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements IIJob {
 
-    private static final long serialVersionUID = 698829770;
+    private static final long serialVersionUID = 1690184756;
 
     /**
      * Setter for <code>DB_ETERNAL.I_JOB.KEY</code>. 「key」- 任务ID
@@ -201,70 +201,70 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements IIJob
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.I_JOB.ADDRESS_IN</code>. 「addressIn」- 入地址
+     * Setter for <code>DB_ETERNAL.I_JOB.INCOME_COMPONENT</code>. 「incomeComponent」对应income，必须是JobIncome，@On -&gt; income
      */
     @Override
-    public IJobRecord setAddressIn(String value) {
+    public IJobRecord setIncomeComponent(String value) {
         set(10, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.I_JOB.ADDRESS_IN</code>. 「addressIn」- 入地址
+     * Getter for <code>DB_ETERNAL.I_JOB.INCOME_COMPONENT</code>. 「incomeComponent」对应income，必须是JobIncome，@On -&gt; income
      */
     @Override
-    public String getAddressIn() {
+    public String getIncomeComponent() {
         return (String) get(10);
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.I_JOB.INCOME</code>. 「income」- 入组件JobIncome
+     * Setter for <code>DB_ETERNAL.I_JOB.INCOME_ADDRESS</code>. 「incomeAddress」对应incomeAddress，字符串，@On -&gt; address
      */
     @Override
-    public IJobRecord setIncome(String value) {
+    public IJobRecord setIncomeAddress(String value) {
         set(11, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.I_JOB.INCOME</code>. 「income」- 入组件JobIncome
+     * Getter for <code>DB_ETERNAL.I_JOB.INCOME_ADDRESS</code>. 「incomeAddress」对应incomeAddress，字符串，@On -&gt; address
      */
     @Override
-    public String getIncome() {
+    public String getIncomeAddress() {
         return (String) get(11);
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.I_JOB.ADDRESS_OUT</code>. 「addressOut」- 出地址
+     * Setter for <code>DB_ETERNAL.I_JOB.OUTCOME_COMPONENT</code>. 「outcomeComponent」对应outcome，必须是JobOutcome，@Off -&gt; outcome
      */
     @Override
-    public IJobRecord setAddressOut(String value) {
+    public IJobRecord setOutcomeComponent(String value) {
         set(12, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.I_JOB.ADDRESS_OUT</code>. 「addressOut」- 出地址
+     * Getter for <code>DB_ETERNAL.I_JOB.OUTCOME_COMPONENT</code>. 「outcomeComponent」对应outcome，必须是JobOutcome，@Off -&gt; outcome
      */
     @Override
-    public String getAddressOut() {
+    public String getOutcomeComponent() {
         return (String) get(12);
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.I_JOB.OUTCOME</code>. 「outcome」- 出组件JobOutcome
+     * Setter for <code>DB_ETERNAL.I_JOB.OUTCOME_ADDRESS</code>. 「outcomeAddress」对应outcomeAddress，字符串，@Off -&gt; address
      */
     @Override
-    public IJobRecord setOutcome(String value) {
+    public IJobRecord setOutcomeAddress(String value) {
         set(13, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.I_JOB.OUTCOME</code>. 「outcome」- 出组件JobOutcome
+     * Getter for <code>DB_ETERNAL.I_JOB.OUTCOME_ADDRESS</code>. 「outcomeAddress」对应outcomeAddress，字符串，@Off -&gt; address
      */
     @Override
-    public String getOutcome() {
+    public String getOutcomeAddress() {
         return (String) get(13);
     }
 
@@ -452,10 +452,10 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements IIJob
         setRunAt(from.getRunAt());
         setDuration(from.getDuration());
         setProxy(from.getProxy());
-        setAddressIn(from.getAddressIn());
-        setIncome(from.getIncome());
-        setAddressOut(from.getAddressOut());
-        setOutcome(from.getOutcome());
+        setIncomeComponent(from.getIncomeComponent());
+        setIncomeAddress(from.getIncomeAddress());
+        setOutcomeComponent(from.getOutcomeComponent());
+        setOutcomeAddress(from.getOutcomeAddress());
         setServiceId(from.getServiceId());
         setSigma(from.getSigma());
         setLanguage(from.getLanguage());
@@ -490,7 +490,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements IIJob
     /**
      * Create a detached, initialised IJobRecord
      */
-    public IJobRecord(String key, String namespace, String name, String code, String type, String comment, String additional, LocalDateTime runAt, Long duration, String proxy, String addressIn, String income, String addressOut, String outcome, String serviceId, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public IJobRecord(String key, String namespace, String name, String code, String type, String comment, String additional, LocalDateTime runAt, Long duration, String proxy, String incomeComponent, String incomeAddress, String outcomeComponent, String outcomeAddress, String serviceId, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(IJob.I_JOB);
 
         set(0, key);
@@ -503,10 +503,10 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements IIJob
         set(7, runAt);
         set(8, duration);
         set(9, proxy);
-        set(10, addressIn);
-        set(11, income);
-        set(12, addressOut);
-        set(13, outcome);
+        set(10, incomeComponent);
+        set(11, incomeAddress);
+        set(12, outcomeComponent);
+        set(13, outcomeAddress);
         set(14, serviceId);
         set(15, sigma);
         set(16, language);
