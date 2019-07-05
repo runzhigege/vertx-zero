@@ -133,31 +133,31 @@ public class IJobDao extends DAOImpl<IJobRecord, cn.vertxup.jet.tables.pojos.IJo
     }
 
     /**
-     * Fetch records that have <code>ADDRESS_IN IN (values)</code>
+     * Fetch records that have <code>INCOME_COMPONENT IN (values)</code>
      */
-    public List<cn.vertxup.jet.tables.pojos.IJob> fetchByAddressIn(String... values) {
-        return fetch(IJob.I_JOB.ADDRESS_IN, values);
+    public List<cn.vertxup.jet.tables.pojos.IJob> fetchByIncomeComponent(String... values) {
+        return fetch(IJob.I_JOB.INCOME_COMPONENT, values);
     }
 
     /**
-     * Fetch records that have <code>INCOME IN (values)</code>
+     * Fetch records that have <code>INCOME_ADDRESS IN (values)</code>
      */
-    public List<cn.vertxup.jet.tables.pojos.IJob> fetchByIncome(String... values) {
-        return fetch(IJob.I_JOB.INCOME, values);
+    public List<cn.vertxup.jet.tables.pojos.IJob> fetchByIncomeAddress(String... values) {
+        return fetch(IJob.I_JOB.INCOME_ADDRESS, values);
     }
 
     /**
-     * Fetch records that have <code>ADDRESS_OUT IN (values)</code>
+     * Fetch records that have <code>OUTCOME_COMPONENT IN (values)</code>
      */
-    public List<cn.vertxup.jet.tables.pojos.IJob> fetchByAddressOut(String... values) {
-        return fetch(IJob.I_JOB.ADDRESS_OUT, values);
+    public List<cn.vertxup.jet.tables.pojos.IJob> fetchByOutcomeComponent(String... values) {
+        return fetch(IJob.I_JOB.OUTCOME_COMPONENT, values);
     }
 
     /**
-     * Fetch records that have <code>OUTCOME IN (values)</code>
+     * Fetch records that have <code>OUTCOME_ADDRESS IN (values)</code>
      */
-    public List<cn.vertxup.jet.tables.pojos.IJob> fetchByOutcome(String... values) {
-        return fetch(IJob.I_JOB.OUTCOME, values);
+    public List<cn.vertxup.jet.tables.pojos.IJob> fetchByOutcomeAddress(String... values) {
+        return fetch(IJob.I_JOB.OUTCOME_ADDRESS, values);
     }
 
     /**
@@ -301,31 +301,31 @@ public class IJobDao extends DAOImpl<IJobRecord, cn.vertxup.jet.tables.pojos.IJo
     }
 
     /**
-     * Fetch records that have <code>ADDRESS_IN IN (values)</code> asynchronously
+     * Fetch records that have <code>INCOME_COMPONENT IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IJob>> fetchByAddressInAsync(List<String> values) {
-        return fetchAsync(IJob.I_JOB.ADDRESS_IN,values);
+    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IJob>> fetchByIncomeComponentAsync(List<String> values) {
+        return fetchAsync(IJob.I_JOB.INCOME_COMPONENT,values);
     }
 
     /**
-     * Fetch records that have <code>INCOME IN (values)</code> asynchronously
+     * Fetch records that have <code>INCOME_ADDRESS IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IJob>> fetchByIncomeAsync(List<String> values) {
-        return fetchAsync(IJob.I_JOB.INCOME,values);
+    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IJob>> fetchByIncomeAddressAsync(List<String> values) {
+        return fetchAsync(IJob.I_JOB.INCOME_ADDRESS,values);
     }
 
     /**
-     * Fetch records that have <code>ADDRESS_OUT IN (values)</code> asynchronously
+     * Fetch records that have <code>OUTCOME_COMPONENT IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IJob>> fetchByAddressOutAsync(List<String> values) {
-        return fetchAsync(IJob.I_JOB.ADDRESS_OUT,values);
+    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IJob>> fetchByOutcomeComponentAsync(List<String> values) {
+        return fetchAsync(IJob.I_JOB.OUTCOME_COMPONENT,values);
     }
 
     /**
-     * Fetch records that have <code>OUTCOME IN (values)</code> asynchronously
+     * Fetch records that have <code>OUTCOME_ADDRESS IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IJob>> fetchByOutcomeAsync(List<String> values) {
-        return fetchAsync(IJob.I_JOB.OUTCOME,values);
+    public CompletableFuture<List<cn.vertxup.jet.tables.pojos.IJob>> fetchByOutcomeAddressAsync(List<String> values) {
+        return fetchAsync(IJob.I_JOB.OUTCOME_ADDRESS,values);
     }
 
     /**

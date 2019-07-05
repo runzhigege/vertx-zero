@@ -123,7 +123,7 @@ class RunOn {
                 /*
                  * Non @BodyParam, it's for configuration of current job here.
                  */
-                JsonObject config = mission.getConfig();
+                JsonObject config = mission.getMetadata();
                 if (Ut.isNil(config)) {
                     config = new JsonObject();
                 }

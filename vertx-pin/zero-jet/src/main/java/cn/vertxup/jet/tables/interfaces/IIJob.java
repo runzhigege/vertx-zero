@@ -124,44 +124,44 @@ public interface IIJob extends Serializable {
     public String getProxy();
 
     /**
-     * Setter for <code>DB_ETERNAL.I_JOB.ADDRESS_IN</code>. 「addressIn」- 入地址
+     * Setter for <code>DB_ETERNAL.I_JOB.INCOME_COMPONENT</code>. 「incomeComponent」对应income，必须是JobIncome，@On -&gt; income
      */
-    public IIJob setAddressIn(String value);
+    public IIJob setIncomeComponent(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.I_JOB.ADDRESS_IN</code>. 「addressIn」- 入地址
+     * Getter for <code>DB_ETERNAL.I_JOB.INCOME_COMPONENT</code>. 「incomeComponent」对应income，必须是JobIncome，@On -&gt; income
      */
-    public String getAddressIn();
+    public String getIncomeComponent();
 
     /**
-     * Setter for <code>DB_ETERNAL.I_JOB.INCOME</code>. 「income」- 入组件JobIncome
+     * Setter for <code>DB_ETERNAL.I_JOB.INCOME_ADDRESS</code>. 「incomeAddress」对应incomeAddress，字符串，@On -&gt; address
      */
-    public IIJob setIncome(String value);
+    public IIJob setIncomeAddress(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.I_JOB.INCOME</code>. 「income」- 入组件JobIncome
+     * Getter for <code>DB_ETERNAL.I_JOB.INCOME_ADDRESS</code>. 「incomeAddress」对应incomeAddress，字符串，@On -&gt; address
      */
-    public String getIncome();
+    public String getIncomeAddress();
 
     /**
-     * Setter for <code>DB_ETERNAL.I_JOB.ADDRESS_OUT</code>. 「addressOut」- 出地址
+     * Setter for <code>DB_ETERNAL.I_JOB.OUTCOME_COMPONENT</code>. 「outcomeComponent」对应outcome，必须是JobOutcome，@Off -&gt; outcome
      */
-    public IIJob setAddressOut(String value);
+    public IIJob setOutcomeComponent(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.I_JOB.ADDRESS_OUT</code>. 「addressOut」- 出地址
+     * Getter for <code>DB_ETERNAL.I_JOB.OUTCOME_COMPONENT</code>. 「outcomeComponent」对应outcome，必须是JobOutcome，@Off -&gt; outcome
      */
-    public String getAddressOut();
+    public String getOutcomeComponent();
 
     /**
-     * Setter for <code>DB_ETERNAL.I_JOB.OUTCOME</code>. 「outcome」- 出组件JobOutcome
+     * Setter for <code>DB_ETERNAL.I_JOB.OUTCOME_ADDRESS</code>. 「outcomeAddress」对应outcomeAddress，字符串，@Off -&gt; address
      */
-    public IIJob setOutcome(String value);
+    public IIJob setOutcomeAddress(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.I_JOB.OUTCOME</code>. 「outcome」- 出组件JobOutcome
+     * Getter for <code>DB_ETERNAL.I_JOB.OUTCOME_ADDRESS</code>. 「outcomeAddress」对应outcomeAddress，字符串，@Off -&gt; address
      */
-    public String getOutcome();
+    public String getOutcomeAddress();
 
     /**
      * Setter for <code>DB_ETERNAL.I_JOB.SERVICE_ID</code>. 「serviceId」- 关联的服务ID
@@ -278,10 +278,10 @@ public interface IIJob extends Serializable {
         // Omitting unrecognized type java.time.LocalDateTime for column RUN_AT!
         setDuration(json.getLong("DURATION"));
         setProxy(json.getString("PROXY"));
-        setAddressIn(json.getString("ADDRESS_IN"));
-        setIncome(json.getString("INCOME"));
-        setAddressOut(json.getString("ADDRESS_OUT"));
-        setOutcome(json.getString("OUTCOME"));
+        setIncomeComponent(json.getString("INCOME_COMPONENT"));
+        setIncomeAddress(json.getString("INCOME_ADDRESS"));
+        setOutcomeComponent(json.getString("OUTCOME_COMPONENT"));
+        setOutcomeAddress(json.getString("OUTCOME_ADDRESS"));
         setServiceId(json.getString("SERVICE_ID"));
         setSigma(json.getString("SIGMA"));
         setLanguage(json.getString("LANGUAGE"));
@@ -307,10 +307,10 @@ public interface IIJob extends Serializable {
         // Omitting unrecognized type java.time.LocalDateTime for column RUN_AT!
         json.put("DURATION",getDuration());
         json.put("PROXY",getProxy());
-        json.put("ADDRESS_IN",getAddressIn());
-        json.put("INCOME",getIncome());
-        json.put("ADDRESS_OUT",getAddressOut());
-        json.put("OUTCOME",getOutcome());
+        json.put("INCOME_COMPONENT",getIncomeComponent());
+        json.put("INCOME_ADDRESS",getIncomeAddress());
+        json.put("OUTCOME_COMPONENT",getOutcomeComponent());
+        json.put("OUTCOME_ADDRESS",getOutcomeAddress());
         json.put("SERVICE_ID",getServiceId());
         json.put("SIGMA",getSigma());
         json.put("LANGUAGE",getLanguage());

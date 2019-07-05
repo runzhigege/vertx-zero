@@ -61,7 +61,7 @@ class OutPut {
             /*
              * Get outcome address
              */
-            final String address = Element.address(mission, false);
+            final String address = mission.getOutcomeAddress();
             if (Ut.isNil(address)) {
                 /*
                  * Directly

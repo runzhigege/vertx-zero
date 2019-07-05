@@ -26,7 +26,7 @@ class Input {
         /*
          * Get income address
          * */
-        final String address = Element.address(mission, true);
+        final String address = mission.getIncomeAddress();
         if (Ut.isNil(address)) {
             /*
              * Event bus did not provide any input here

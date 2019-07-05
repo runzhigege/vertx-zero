@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IJob implements IIJob {
 
-    private static final long serialVersionUID = -2030606378;
+    private static final long serialVersionUID = 1667202580;
 
     private String        key;
     private String        namespace;
@@ -36,10 +36,10 @@ public class IJob implements IIJob {
     private LocalDateTime runAt;
     private Long          duration;
     private String        proxy;
-    private String        addressIn;
-    private String        income;
-    private String        addressOut;
-    private String        outcome;
+    private String        incomeComponent;
+    private String        incomeAddress;
+    private String        outcomeComponent;
+    private String        outcomeAddress;
     private String        serviceId;
     private String        sigma;
     private String        language;
@@ -63,10 +63,10 @@ public class IJob implements IIJob {
         this.runAt = value.runAt;
         this.duration = value.duration;
         this.proxy = value.proxy;
-        this.addressIn = value.addressIn;
-        this.income = value.income;
-        this.addressOut = value.addressOut;
-        this.outcome = value.outcome;
+        this.incomeComponent = value.incomeComponent;
+        this.incomeAddress = value.incomeAddress;
+        this.outcomeComponent = value.outcomeComponent;
+        this.outcomeAddress = value.outcomeAddress;
         this.serviceId = value.serviceId;
         this.sigma = value.sigma;
         this.language = value.language;
@@ -89,10 +89,10 @@ public class IJob implements IIJob {
         LocalDateTime runAt,
         Long          duration,
         String        proxy,
-        String        addressIn,
-        String        income,
-        String        addressOut,
-        String        outcome,
+        String        incomeComponent,
+        String        incomeAddress,
+        String        outcomeComponent,
+        String        outcomeAddress,
         String        serviceId,
         String        sigma,
         String        language,
@@ -113,10 +113,10 @@ public class IJob implements IIJob {
         this.runAt = runAt;
         this.duration = duration;
         this.proxy = proxy;
-        this.addressIn = addressIn;
-        this.income = income;
-        this.addressOut = addressOut;
-        this.outcome = outcome;
+        this.incomeComponent = incomeComponent;
+        this.incomeAddress = incomeAddress;
+        this.outcomeComponent = outcomeComponent;
+        this.outcomeAddress = outcomeAddress;
         this.serviceId = serviceId;
         this.sigma = sigma;
         this.language = language;
@@ -239,46 +239,46 @@ public class IJob implements IIJob {
     }
 
     @Override
-    public String getAddressIn() {
-        return this.addressIn;
+    public String getIncomeComponent() {
+        return this.incomeComponent;
     }
 
     @Override
-    public IJob setAddressIn(String addressIn) {
-        this.addressIn = addressIn;
+    public IJob setIncomeComponent(String incomeComponent) {
+        this.incomeComponent = incomeComponent;
         return this;
     }
 
     @Override
-    public String getIncome() {
-        return this.income;
+    public String getIncomeAddress() {
+        return this.incomeAddress;
     }
 
     @Override
-    public IJob setIncome(String income) {
-        this.income = income;
+    public IJob setIncomeAddress(String incomeAddress) {
+        this.incomeAddress = incomeAddress;
         return this;
     }
 
     @Override
-    public String getAddressOut() {
-        return this.addressOut;
+    public String getOutcomeComponent() {
+        return this.outcomeComponent;
     }
 
     @Override
-    public IJob setAddressOut(String addressOut) {
-        this.addressOut = addressOut;
+    public IJob setOutcomeComponent(String outcomeComponent) {
+        this.outcomeComponent = outcomeComponent;
         return this;
     }
 
     @Override
-    public String getOutcome() {
-        return this.outcome;
+    public String getOutcomeAddress() {
+        return this.outcomeAddress;
     }
 
     @Override
-    public IJob setOutcome(String outcome) {
-        this.outcome = outcome;
+    public IJob setOutcomeAddress(String outcomeAddress) {
+        this.outcomeAddress = outcomeAddress;
         return this;
     }
 
@@ -395,10 +395,10 @@ public class IJob implements IIJob {
         sb.append(", ").append(runAt);
         sb.append(", ").append(duration);
         sb.append(", ").append(proxy);
-        sb.append(", ").append(addressIn);
-        sb.append(", ").append(income);
-        sb.append(", ").append(addressOut);
-        sb.append(", ").append(outcome);
+        sb.append(", ").append(incomeComponent);
+        sb.append(", ").append(incomeAddress);
+        sb.append(", ").append(outcomeComponent);
+        sb.append(", ").append(outcomeAddress);
         sb.append(", ").append(serviceId);
         sb.append(", ").append(sigma);
         sb.append(", ").append(language);
@@ -432,10 +432,10 @@ public class IJob implements IIJob {
         setRunAt(from.getRunAt());
         setDuration(from.getDuration());
         setProxy(from.getProxy());
-        setAddressIn(from.getAddressIn());
-        setIncome(from.getIncome());
-        setAddressOut(from.getAddressOut());
-        setOutcome(from.getOutcome());
+        setIncomeComponent(from.getIncomeComponent());
+        setIncomeAddress(from.getIncomeAddress());
+        setOutcomeComponent(from.getOutcomeComponent());
+        setOutcomeAddress(from.getOutcomeAddress());
         setServiceId(from.getServiceId());
         setSigma(from.getSigma());
         setLanguage(from.getLanguage());
