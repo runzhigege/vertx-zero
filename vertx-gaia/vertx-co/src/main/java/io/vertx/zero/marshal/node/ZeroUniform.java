@@ -27,8 +27,7 @@ public class ZeroUniform implements Node<JsonObject> {
         Observable.fromIterable(keys.keySet())
                 .filter(item -> !skipped.contains(item))
                 .map(key -> Fn.pool(Storage.CONFIG, keys.get(key),
-                        () -> Fn.getJvm(new JsonObject(),
-                                () -> Ut.ioYaml(keys.get(key)),
+                        () -> Fn.getJvm(new JsonObject(), () -> Ut.ioYaml(keys.get(key)),
                                 keys.get(key))))
                 .filter(Objects::nonNull)
                 .subscribe(item -> data.mergeIn(item, true))
