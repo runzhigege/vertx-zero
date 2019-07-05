@@ -52,6 +52,18 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
         }
         /* Default type */
         final JobType type = Ut.invoke(annotation, "value");
+        if (JobType.EXTENSION == type) {
+            /*
+             * When you defined another extension job store, it means
+             * That you should use defined job code logical instead of original
+             * In this kind of situation,
+             * Job Type = EXTENSION
+             * 1) When you stored job configuration into json file
+             * 2) This feature should be used with JobStore component that has been configured
+             * in `vertx-job.yml` file.
+             */
+            return null;
+        }
 
         /* Default name -> class name */
         String name = Ut.invoke(annotation, "name");
