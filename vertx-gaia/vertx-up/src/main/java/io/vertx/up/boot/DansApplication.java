@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * Vertx Application start launcher for api gateway.
+ * Vertx Application begin launcher for api gateway.
  * It's only used in Micro Service mode.
  */
 public class DansApplication {

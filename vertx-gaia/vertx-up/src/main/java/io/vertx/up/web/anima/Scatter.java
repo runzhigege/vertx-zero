@@ -5,7 +5,7 @@ package io.vertx.up.web.anima;
  */
 public interface Scatter<Vertx> {
     /**
-     * Connect to vert.x to execute start up works.
+     * Connect to vert.x to execute begin up works.
      *
      * @param vertx common vertx.
      */

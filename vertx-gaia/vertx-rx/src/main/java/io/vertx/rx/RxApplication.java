@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * RxJava Application start information
+ * RxJava Application begin information
  */
 public class RxApplication {
 

@@ -27,7 +27,7 @@ class UnityAsker {
 
     /*
      * Be careful, in this step there is no Vert.x instance available, it means that you must
-     * set Jooq environment before vert.x start up, in this situation, here you couldn't
+     * set Jooq environment before vert.x begin up, in this situation, here you couldn't
      * use `Ux.Jooq.on(Dao.class)` mode to get Dao reference.
      */
     static void init() {
