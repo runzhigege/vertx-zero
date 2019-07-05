@@ -16,7 +16,7 @@ public class JtPin {
         Ke.banner("「Πίδακας δρομολογητή」- ( Api )");
         Jt.infoInit(LOGGER, "JtConfiguration...");
         JtConfiguration.init();
-        /* Specific init for Ambient */
+
         Jt.infoInit(LOGGER, "Ambient Environment Start...");
     }
 
