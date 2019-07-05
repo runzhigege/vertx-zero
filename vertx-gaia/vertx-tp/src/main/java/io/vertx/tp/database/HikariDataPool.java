@@ -3,7 +3,6 @@ package io.vertx.tp.database;
 import com.zaxxer.hikari.HikariDataSource;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.atom.Database;
-import io.zero.epic.fn.Fn;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
 import org.jooq.DSLContext;
@@ -12,16 +11,21 @@ import org.jooq.impl.DSL;
 import org.jooq.impl.DefaultConfiguration;
 import org.jooq.impl.DefaultConnectionProvider;
 
+import java.sql.SQLException;
+import java.util.Objects;
+
 public class HikariDataPool implements DataPool {
     private static final Annal LOGGER = Annal.get(HikariDataPool.class);
     private final transient Database database;
-
     /* Each jdbc url has one Pool here **/
     private transient DSLContext context;
     private transient HikariDataSource dataSource;
 
     HikariDataPool(final Database database) {
         this.database = database;
+    }
+
+    private void initDelay() {
         /*
          * Initializing data source
          */
@@ -38,27 +42,35 @@ public class HikariDataPool implements DataPool {
 
     @Override
     public DSLContext getExecutor() {
+        if (Objects.isNull(this.context)) {
+            this.initDelay();
+        }
         return this.context;
     }
 
     @Override
     public HikariDataSource getDataSource() {
+        if (Objects.isNull(this.dataSource)) {
+            this.initDelay();
+        }
         return this.dataSource;
     }
 
     private void initJooq() {
         if (null == this.context) {
-            Fn.safeJvm(() -> {
-                // 初始化Jooq配置
+            try {
+                /* Init Jooq configuration */
                 final Configuration configuration = new DefaultConfiguration();
                 final ConnectionProvider provider = new DefaultConnectionProvider(this.dataSource.getConnection());
                 configuration.set(provider);
-                // 设置数据库方言
+                /* Dialect selected */
                 final SQLDialect dialect = Pool.DIALECT.get(this.database.getCategory());
                 LOGGER.debug("[ ZERO ] Jooq Database ：Dialect = {0}, Database = {1}, ", dialect, this.database.toJson().encodePrettily());
                 configuration.set(dialect);
                 this.context = DSL.using(configuration);
-            });
+            } catch (final SQLException ex) {
+                // LOGGER.jvm(ex);
+            }
         }
     }
 
@@ -93,20 +105,22 @@ public class HikariDataPool implements DataPool {
     }
 
     private void initPool() {
-        // Default configuration
-        this.dataSource.setAutoCommit(true);
-        this.dataSource.setConnectionTimeout(30000L);
-        this.dataSource.setIdleTimeout(600000L);
-        this.dataSource.setMaxLifetime(25600000L);
-        this.dataSource.setMinimumIdle(256);
-        this.dataSource.setMaximumPoolSize(512);
+        if (Objects.nonNull(this.database)) {
+            // Default configuration
+            this.dataSource.setAutoCommit(true);
+            this.dataSource.setConnectionTimeout(30000L);
+            this.dataSource.setIdleTimeout(600000L);
+            this.dataSource.setMaxLifetime(25600000L);
+            this.dataSource.setMinimumIdle(256);
+            this.dataSource.setMaximumPoolSize(512);
 
-        // Default attributes
-        this.dataSource.addDataSourceProperty("cachePrepStmts", "true");
-        this.dataSource.addDataSourceProperty("prepStmtCacheSize", "1024");
-        this.dataSource.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+            // Default attributes
+            this.dataSource.addDataSourceProperty("cachePrepStmts", "true");
+            this.dataSource.addDataSourceProperty("prepStmtCacheSize", "1024");
+            this.dataSource.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
 
-        // Data pool name
-        this.dataSource.setPoolName("ZERO-POOL-DATA");
+            // Data pool name
+            this.dataSource.setPoolName("ZERO-POOL-DATA");
+        }
     }
 }
