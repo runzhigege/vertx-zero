@@ -2,6 +2,8 @@ package io.vertx.tp.jet.atom;
 
 import cn.vertxup.jet.tables.pojos.IJob;
 import cn.vertxup.jet.tables.pojos.IService;
+import io.vertx.core.json.JsonObject;
+import io.vertx.tp.ke.cv.KeField;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.em.JobType;
 import io.vertx.zero.eon.Strings;
@@ -32,16 +34,28 @@ public class JtJob {
         /*
          * IJob -> Mission：name
          * The job unique identifier: namespace + name
+         * The splitted character is `$$`
          */
-        mission.setName(this.job.getNamespace() + Strings.DASH + this.job.getName());
+        mission.setName(this.job.getNamespace() +
+                Strings.DOLLER + Strings.DOLLER + this.job.getName());
         mission.setType(Ut.toEnum(this.job::getType, JobType.class, JobType.ONCE));
-        mission.setCode(this.job.getNamespace() + Strings.DASH + this.job.getCode());
+        mission.setCode(this.job.getNamespace() +
+                Strings.DOLLER + Strings.DOLLER + this.job.getCode());
         /*
          * Basic information
          */
         mission.setComment(this.job.getComment());
         mission.setAdditional(Ut.toJObject(this.job.getAdditional()));
-        mission.setMetadata(Ut.toJObject(this.job.getMetadata()));
+        /*
+         * Set job configuration of current environment. bind to `service`
+         */
+        final JsonObject metadata = Ut.toJObject(this.job.getMetadata());
+        final JsonObject service = Ut.serializeJson(this.service);
+        mission.setMetadata(new JsonObject()
+                /* Bind configuration */
+                .put(KeField.METADATA, metadata)
+                .mergeIn(service.copy())
+        );
         /*
          * Instant / duration
          */
@@ -80,5 +94,22 @@ public class JtJob {
         } else {
             return mission;
         }
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof JtJob)) {
+            return false;
+        }
+        final JtJob jtJob = (JtJob) o;
+        return this.key.equals(jtJob.key);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.key);
     }
 }

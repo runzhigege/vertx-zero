@@ -1,6 +1,8 @@
 package io.vertx.up.job.store;
 
 import io.vertx.up.atom.worker.Mission;
+import io.vertx.up.eon.Info;
+import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.job.JobPool;
 
 import java.util.HashSet;
@@ -12,7 +14,7 @@ import java.util.Set;
  */
 class UnityStore implements JobStore {
 
-    static JobStore INSTANCE;
+    private static final Annal LOGGER = Annal.get(UnityStore.class);
     /*
      * Code in programming here ( Could not modify, read-only )
      */
@@ -25,7 +27,9 @@ class UnityStore implements JobStore {
     @Override
     public Set<Mission> fetch() {
         final Set<Mission> missions = this.reader.fetch();
+        LOGGER.info(Info.JOB_SCANNED, missions.size(), "Programming");
         final Set<Mission> storage = this.store.fetch();
+        LOGGER.info(Info.JOB_SCANNED, storage.size(), "Dynamic/Stored");
         /* Merged */
         final Set<Mission> result = new HashSet<>();
         result.addAll(missions);

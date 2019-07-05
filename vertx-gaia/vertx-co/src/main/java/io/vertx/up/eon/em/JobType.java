@@ -4,5 +4,5 @@ public enum JobType {
     FIXED,      // Run at timestamp
     PLAN,       // Scheduled
     ONCE,       // Run once
-    EXTENSION,  //
+    CONTAINER,  // Task container
 }
