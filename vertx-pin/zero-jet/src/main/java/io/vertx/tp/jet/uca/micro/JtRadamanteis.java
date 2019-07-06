@@ -11,7 +11,7 @@ import io.vertx.up.atom.Envelop;
 public class JtRadamanteis implements JtIngest {
     @Override
     public Envelop in(final RoutingContext context, final JtUri uri) {
-        // TODO: JtIngest
+        // TODO: JtIngest code logical
         return null;
     }
 }
