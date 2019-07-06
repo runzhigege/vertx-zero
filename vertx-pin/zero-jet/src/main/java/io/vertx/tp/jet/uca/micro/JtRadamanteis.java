@@ -5,13 +5,14 @@ import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.optic.jet.JtIngest;
 import io.vertx.up.atom.Envelop;
 
-/*
- * 「Ingest」 Parameter extraction
+/**
+ * 「Ingest」
+ * Parameter extraction when paramMode = DEFINE, it's valid
  */
 public class JtRadamanteis implements JtIngest {
     @Override
     public Envelop in(final RoutingContext context, final JtUri uri) {
-        // TODO: JtIngest
+        // TODO: JtIngest code logical
         return null;
     }
 }

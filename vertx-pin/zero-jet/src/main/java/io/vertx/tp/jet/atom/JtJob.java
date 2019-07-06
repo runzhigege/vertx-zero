@@ -3,7 +3,8 @@ package io.vertx.tp.jet.atom;
 import cn.vertxup.jet.tables.pojos.IJob;
 import cn.vertxup.jet.tables.pojos.IService;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.ke.cv.KeField;
+import io.vertx.tp.jet.cv.JtKey;
+import io.vertx.tp.jet.refine.Jt;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.em.JobType;
 import io.vertx.zero.eon.Strings;
@@ -11,23 +12,60 @@ import io.zero.epic.Ut;
 
 import java.util.Objects;
 
-public class JtJob {
+/*
+ * Job ( JOB + SERVICE )
+ */
+public class JtJob extends JtCommercial {
 
-    private final transient IJob job;
-    private final transient IService service;
-    private final transient String key;
+    private transient IJob job;
+    private transient String key;
+
+    /*
+     * For deserialization
+     */
+    public JtJob() {
+    }
 
     public JtJob(final IJob job, final IService service) {
+        super(service);
         this.job = job;
-        this.service = service;
         /* */
         this.key = job.getKey();
     }
+    // ----------- override
 
-    // ----------- job & service
+    @Override
+    public JsonObject options() {
+        return Jt.toOptions(this.getApp(), this.job, this.service());
+    }
+
+    @Override
     public String key() {
         return this.key;
     }
+
+    @Override
+    public JsonObject toJson() {
+        final JsonObject data = super.toJson();
+        /* key data */
+        data.put(JtKey.Delivery.JOB, (JsonObject) Ut.serializeJson(this.job));
+        return data;
+    }
+
+    @Override
+    public void fromJson(final JsonObject data) {
+        super.fromJson(data);
+        /*
+         * Basic attributes
+         */
+        this.key = data.getString(JtKey.Delivery.KEY);
+        /*
+         * job
+         */
+        this.job = Ut.deserialize(data.getJsonObject(JtKey.Delivery.JOB), IJob.class);
+    }
+
+    // ----------- job & service
 
     public Mission toJob() {
         final Mission mission = new Mission();
@@ -49,13 +87,7 @@ public class JtJob {
         /*
          * Set job configuration of current environment. bind to `service`
          */
-        final JsonObject metadata = Ut.toJObject(this.job.getMetadata());
-        final JsonObject service = Ut.serializeJson(this.service);
-        mission.setMetadata(new JsonObject()
-                /* Bind configuration */
-                .put(KeField.METADATA, metadata)
-                .mergeIn(service.copy())
-        );
+        mission.setMetadata(this.toJson().copy());
         /*
          * Instant / duration
          */
@@ -94,22 +126,5 @@ public class JtJob {
         } else {
             return mission;
         }
-    }
-
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof JtJob)) {
-            return false;
-        }
-        final JtJob jtJob = (JtJob) o;
-        return this.key.equals(jtJob.key);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.key);
     }
 }

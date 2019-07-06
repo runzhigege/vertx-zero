@@ -98,8 +98,15 @@ final class Instance {
     @SuppressWarnings("all")
     static boolean isMatch(final Class<?> clazz, final Class<?> interfaceCls) {
         final Class<?>[] interfaces = clazz.getInterfaces();
-        return Arrays.stream(interfaces)
+        boolean match = Arrays.stream(interfaces)
                 .anyMatch(item -> item.equals(interfaceCls));
+        if (!match) {
+            /* continue to check parent */
+            if (Objects.nonNull(clazz.getSuperclass())) {
+                match = isMatch(clazz.getSuperclass(), interfaceCls);
+            }
+        }
+        return match;
     }
 
     static <T> T getProxy(

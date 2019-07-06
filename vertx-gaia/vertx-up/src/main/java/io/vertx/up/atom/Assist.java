@@ -18,7 +18,8 @@ import java.util.Map;
  */
 class Assist implements Serializable {
     private final Map<String, Object> context = new HashMap<>();
-    private MultiMap headers;
+    /* Fixed header null pointer */
+    private MultiMap headers = MultiMap.caseInsensitiveMultiMap();
     private User user;
     private String uri;
     private HttpMethod method;

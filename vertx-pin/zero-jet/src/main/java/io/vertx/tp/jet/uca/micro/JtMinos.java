@@ -16,8 +16,9 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-/*
- *「Worker」
+/**
+ * 「Worker」
+ * Important worker here
  */
 public class JtMinos extends AbstractVerticle {
 

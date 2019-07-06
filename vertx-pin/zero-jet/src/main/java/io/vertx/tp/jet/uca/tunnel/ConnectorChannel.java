@@ -18,7 +18,7 @@ public class ConnectorChannel extends AbstractChannel {
      */
     @Override
     public Future<Boolean> initAsync(final JtComponent component, final ActIn request) {
-        return Ux.toFuture(this.getApi())
+        return Ux.toFuture(this.getCommercial())
                 /*
                  * Database initialized, Mount database to `JtComponent`
                  */
@@ -27,7 +27,7 @@ public class ConnectorChannel extends AbstractChannel {
                 /*
                  * Integration inited, mount to `JtComponent`
                  */
-                .compose(dbed -> Ux.toFuture(this.getApi().integration()))
+                .compose(dbed -> Ux.toFuture(this.getCommercial().integration()))
                 .compose(integration -> Ut.contractAsync(component, Integration.class, integration));
     }
 }
