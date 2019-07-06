@@ -21,16 +21,25 @@ public class JetStore implements JobStore {
 
     @Override
     public JobStore remove(final Mission mission) {
+        // TODO: Remove in future
         return null;
     }
 
     @Override
     public JobStore update(final Mission mission) {
+        // TODO: Update in future
         return null;
     }
 
     @Override
     public JobStore add(final Mission mission) {
+        // TODO: Add in future
+        return null;
+    }
+
+    @Override
+    public Mission fetch(final String name) {
+        // TODO: Fetch in future
         return null;
     }
 
@@ -42,8 +51,4 @@ public class JetStore implements JobStore {
                 .collect(Collectors.toSet());
     }
 
-    @Override
-    public Mission fetch(final String name) {
-        return null;
-    }
 }

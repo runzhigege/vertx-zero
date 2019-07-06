@@ -12,6 +12,10 @@ import io.vertx.up.job.AbstractMission;
  */
 // @Job(value = JobType.CONTAINER)
 public class JetMission extends AbstractMission {
+    /*
+     * Data example
+     * refer mission-config.json
+     */
     @On
     public Future<Envelop> start(final JsonObject config) {
         System.out.println("Hello" + config.encodePrettily());
