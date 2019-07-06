@@ -1,4 +1,4 @@
-package io.vertx.tp.jet.extension;
+package io.vertx.tp.jet.uca.micro;
 
 import io.vertx.tp.jet.atom.JtJob;
 import io.vertx.tp.optic.environment.Ambient;
@@ -12,9 +12,10 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 /**
+ * 「JobStore」
  * Database job store that will be used in `vertx-jet`.
  */
-public class JetStore implements JobStore {
+public class JtHypnos implements JobStore {
 
     private static final ConcurrentMap<String, AmbientEnvironment> ENVS =
             Ambient.getEnvironments();
@@ -50,5 +51,4 @@ public class JetStore implements JobStore {
                 .map(JtJob::toJob)
                 .collect(Collectors.toSet());
     }
-
 }

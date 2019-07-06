@@ -6,6 +6,7 @@ import io.vertx.tp.jet.cv.JtKey;
 import io.vertx.tp.jet.refine.Jt;
 import io.vertx.tp.optic.environment.Ambient;
 import io.vertx.up.commune.Commercial;
+import io.vertx.up.eon.ID;
 import io.vertx.up.eon.em.ChannelType;
 import io.vertx.zero.atom.Database;
 import io.vertx.zero.atom.Integration;
@@ -144,6 +145,8 @@ public abstract class JtCommercial implements Commercial {
 
         /* appId */
         data.put(JtKey.Delivery.APP_ID, this.app.getAppId());
+        /* Reflection */
+        data.put(ID.CLASS, this.getClass().getName());
         return data;
     }
 

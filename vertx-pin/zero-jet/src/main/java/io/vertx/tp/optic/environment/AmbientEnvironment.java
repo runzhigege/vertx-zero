@@ -108,7 +108,10 @@ public class AmbientEnvironment {
             final ConcurrentMap<String, IJob> jobMap = Ut.elementZip(jobList, IJob::getServiceId, job -> job);
             /* Job / Service Bind into data here */
             jobMap.keySet().stream()
-                    .map(serviceId -> new JtJob(jobMap.get(serviceId), this.serviceMap.get(serviceId)))
+                    .map(serviceId -> new JtJob(jobMap.get(serviceId), this.serviceMap.get(serviceId))
+                            /* Job Bind app id directly */
+                            .<JtJob>bind(this.app.getAppId())
+                    )
                     .forEach(entry -> this.jobs.put(entry.key(), entry));
         }
     }
@@ -124,7 +127,9 @@ public class AmbientEnvironment {
             final ConcurrentMap<String, IApi> apiMap = Ut.elementZip(apiList, IApi::getServiceId, api -> api);
             /* Uri / Service Bind into data here */
             apiMap.keySet().stream()
-                    .map(serviceId -> new JtUri(apiMap.get(serviceId), this.serviceMap.get(serviceId)))
+                    .map(serviceId -> new JtUri(apiMap.get(serviceId), this.serviceMap.get(serviceId))
+                            /* Job Bind app id directly */
+                            .<JtUri>bind(this.app.getAppId()))
                     .forEach(entry -> this.uris.put(entry.key(), entry));
         }
     }

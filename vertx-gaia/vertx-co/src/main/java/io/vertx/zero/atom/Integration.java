@@ -1,6 +1,7 @@
 package io.vertx.zero.atom;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -104,5 +105,19 @@ public class Integration implements Serializable {
 
     public void setPrivateKey(final byte[] privateKey) {
         this.privateKey = privateKey;
+    }
+
+    @Override
+    public String toString() {
+        return "Integration{" +
+                "apis=" + this.apis +
+                ", endpoint='" + this.endpoint + '\'' +
+                ", port=" + this.port +
+                ", username='" + this.username + '\'' +
+                ", password='" + this.password + '\'' +
+                ", hostname='" + this.hostname + '\'' +
+                ", publicKey=" + Arrays.toString(this.publicKey) +
+                ", privateKey=" + Arrays.toString(this.privateKey) +
+                '}';
     }
 }

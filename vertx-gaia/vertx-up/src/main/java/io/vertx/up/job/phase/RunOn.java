@@ -8,6 +8,8 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.web.Session;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Mission;
+import io.vertx.up.commune.Commercial;
+import io.vertx.up.eon.ID;
 import io.vertx.up.eon.Info;
 import io.vertx.up.exception._417JobMethodException;
 import io.vertx.up.log.Annal;
@@ -113,6 +115,19 @@ class RunOn {
              * 「ONCE Only」Headers
              */
             return envelop.headers();
+        } else if (Commercial.class == clazz) {
+            /*
+             * Commercial specification
+             */
+            final JsonObject metadata = mission.getMetadata();
+            final String className = metadata.getString(ID.CLASS);
+            if (Ut.notNil(className)) {
+                final Commercial commercial = Ut.instance(className);
+                commercial.fromJson(metadata);
+                return commercial;
+            } else {
+                return null;
+            }
         } else if (JsonObject.class == clazz) {
             if (clazz.isAnnotationPresent(BodyParam.class)) {
                 /*
@@ -122,13 +137,10 @@ class RunOn {
             } else {
                 /*
                  * Non @BodyParam, it's for configuration of current job here.
+                 * Return to additional data of JsonObject
+                 * This method will be used in future.
                  */
-                JsonObject config = mission.getMetadata();
-                if (Ut.isNil(config)) {
-                    config = new JsonObject();
-                }
-                config.put("addon", mission.getAdditional());
-                return config;
+                return mission.getAdditional().copy();
             }
         } else {
             throw new _417JobMethodException(this.getClass(), mission.getName());

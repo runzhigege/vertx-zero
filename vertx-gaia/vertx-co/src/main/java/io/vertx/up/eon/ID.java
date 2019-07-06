@@ -42,6 +42,10 @@ public interface ID {
      */
     String TREE_ORIGINAL = "$ORIGINAL$";
     String TREE_MATRIX = "$MATRIX$";
+    /*
+     * For reflection
+     */
+    String CLASS = "_class";
 
     interface Addr {
         /*
