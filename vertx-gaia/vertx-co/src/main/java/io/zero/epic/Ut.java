@@ -567,6 +567,10 @@ public final class Ut {
         return StringUtil.notNil(input);
     }
 
+    public static boolean notNil(final JsonObject json) {
+        return !isNil(json);
+    }
+
     // --- To
     public static JsonArray toJArray(final Object value) {
         return Jackson.toJArray(value);

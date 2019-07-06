@@ -86,7 +86,7 @@
         <scala.version>2.13.0</scala.version>
         <feign.version>8.18.0</feign.version>
         <guava.version>28.0-jre</guava.version>
-        <codehaus.janino.version>3.0.13</codehaus.janino.version>
+        <codehaus.janino.version>3.0.14</codehaus.janino.version>
         <cglib.version>3.2.12</cglib.version>
         <ignite.version>2.7.5</ignite.version>
         <etcd.version>2.17.0</etcd.version>
