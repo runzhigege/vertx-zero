@@ -7,6 +7,7 @@ public interface JtKey {
         String ORDER = "order";
         String SERVICE = "service";
         String API = "api";
+        String JOB = "job";
         String KEY = "key";
         String APP_ID = "appId";
     }

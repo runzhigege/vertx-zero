@@ -55,10 +55,7 @@ public class JetPollux implements PlugRouter {
              * 「Booting」( Multi application deployment on Router )
              */
             final Set<JtUri> uriSet = AMBIENT.keySet().stream()
-                    .flatMap(appId -> AMBIENT.get(appId).routes().stream()
-                            /* Bind appId */
-                            .map(uri -> uri.<JtUri>bind(appId))
-                    )
+                    .flatMap(appId -> AMBIENT.get(appId).routes().stream())
                     /*
                      * Start up and bind `order` and `config`
                      */

@@ -31,8 +31,10 @@ public class JtUri extends JtCommercial implements Api {
      */
     private transient Integer order;
 
+    /*
+     * For deserialization
+     */
     public JtUri() {
-
     }
 
     public JtUri(final IApi api, final IService service) {

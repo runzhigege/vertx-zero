@@ -14,7 +14,6 @@ public abstract class AbstractMission {
         return this.vertx;
     }
 
-
     protected JobStore store() {
         return this.store;
     }
