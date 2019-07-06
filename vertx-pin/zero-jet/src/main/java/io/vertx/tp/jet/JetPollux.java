@@ -57,13 +57,13 @@ public class JetPollux implements PlugRouter {
             final Set<JtUri> uriSet = AMBIENT.keySet().stream()
                     .flatMap(appId -> AMBIENT.get(appId).routes().stream()
                             /* Bind appId */
-                            .map(uri -> uri.bind(appId))
+                            .map(uri -> uri.<JtUri>bind(appId))
                     )
                     /*
                      * Start up and bind `order` and `config`
                      */
                     .map(uri -> uri.bind(this.getOrder())
-                            .bind(Ut.deserialize(config.copy(), JtConfig.class)))
+                            .<JtUri>bind(Ut.deserialize(config.copy(), JtConfig.class)))
                     /*
                      * Routing deployment
                      */
