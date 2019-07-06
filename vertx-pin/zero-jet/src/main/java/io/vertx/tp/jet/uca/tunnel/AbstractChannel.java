@@ -10,7 +10,7 @@ import io.vertx.up.annotations.Contract;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.commune.ActIn;
 import io.vertx.up.commune.ActOut;
-import io.vertx.up.commune.Api;
+import io.vertx.up.commune.Commercial;
 import io.vertx.up.commune.Record;
 import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
@@ -25,14 +25,14 @@ public abstract class AbstractChannel implements JtChannel {
     private final transient JtMonitor monitor = JtMonitor.create(this.getClass());
     /* This field will be injected by zero directly from backend */
     @Contract
-    private transient Api apiRef;
+    private transient Commercial commercial;
 
     @Override
     public Future<Envelop> transferAsync(final Envelop envelop) {
         /*
          * Build record and init
          */
-        final Class<?> recordClass = this.apiRef.recordComponent();
+        final Class<?> recordClass = this.commercial.recordComponent();
         this.monitor.recordHit(recordClass);
         /*
          * Data object, could not be singleton
@@ -48,7 +48,7 @@ public abstract class AbstractChannel implements JtChannel {
         /*
          * Build component and init
          */
-        final Class<?> componentClass = this.apiRef.businessComponent();
+        final Class<?> componentClass = this.commercial.businessComponent();
         if (Objects.isNull(componentClass)) {
             /*
              * null class of component
@@ -67,7 +67,7 @@ public abstract class AbstractChannel implements JtChannel {
                         /*
                          * options injection
                          */
-                        .compose(child -> Ut.contractAsync(component, JsonObject.class, this.apiRef.options()))
+                        .compose(child -> Ut.contractAsync(component, JsonObject.class, this.commercial.options()))
                         /*
                          * Children initialized
                          */
@@ -94,7 +94,7 @@ public abstract class AbstractChannel implements JtChannel {
         return Annal.get(this.getClass());
     }
 
-    protected Api getApi() {
-        return this.apiRef;
+    protected Commercial getCommercial() {
+        return this.commercial;
     }
 }

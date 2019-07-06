@@ -1,6 +1,7 @@
 package io.vertx.tp.jet.refine;
 
 import cn.vertxup.jet.tables.pojos.IApi;
+import cn.vertxup.jet.tables.pojos.IJob;
 import cn.vertxup.jet.tables.pojos.IService;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.atom.JtApp;
@@ -61,7 +62,21 @@ class JtDataObject {
         }
     }
 
+    @SuppressWarnings("all")
     static JsonObject toOptions(final JtApp app, final IApi api, final IService service) {
+        final JsonObject options = toOptions(app, service);
+        // TODO: Api configuration
+        return options;
+    }
+
+    @SuppressWarnings("all")
+    static JsonObject toOptions(final JtApp app, final IJob job, final IService service) {
+        final JsonObject options = toOptions(app, service);
+        // TODO: Job configuration
+        return options;
+    }
+
+    private static JsonObject toOptions(final JtApp app, final IService service) {
         final JsonObject options = Ut.toJObject(service.getConfigService());
         {
             /* default options, you can add more */

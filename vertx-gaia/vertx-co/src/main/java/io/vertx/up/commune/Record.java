@@ -40,9 +40,9 @@ public interface Record extends Serializable, Meta, Check, Clone, Json {
      * 「Append Mode」
      * Set data or missing, if existing do not set the value
      */
-    <V> Record setOrMissing(String field, V value);
+    <V> Record add(String field, V value);
 
-    Record setOrMissing(JsonObject data);
+    Record add(JsonObject data);
 
     /*
      * Remove by field / field
