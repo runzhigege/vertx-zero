@@ -128,6 +128,7 @@ E60038: "(404) - (EXCEL) The configuration of ( table = `{0}` ) is missing, plea
 E60039: "(500) - (EXCEL) The exporting met error, detail = {0}"
 E60040: "(412) - The field of type `{0}` must be declared only once in target `{1}` with annotation @Contract, now it occurs {2} times"
 E60041: "(417) - The job `{0}` method parameter definitions are wrong"
+E60042: "(501) - The class `{0}` does not define any method annotated with @On"
 # CRUD Module
 E80100: "(404) - (CRUD) You missed `module` = `{0}` definition in file \"plugin/crud/module/\" folder"
 E80101: "(404) - (CRUD) You missed `column` configuration and instance is null. access module = {0}"
@@ -162,3 +163,6 @@ E80404: "(500) - (Jet) The class = `{0}` does not extend from `AbstractVerticle`
 E80405: "(500) - (Jet) The class = `{0}` does not implement `JtConsumer` interface, it''s invalid"
 E80406: "(500) - (Jet) The definition from IApi/IService met error, system could not find configuration of key = `{0}`"
 E80407: "(501) - (Jet) The channel component met error and coult not be initialized with class {0}"
+E80408: "(424) - (Jet) The component `{0}` does not match channel type `{1}` "
+E80409: "(424) - (Jet) The channel must be one of `{0}`, but now your class `{1}` does not match ( current = {2} )"
+E80410: "(424) - (Jet) The component `{0}` with `DEFINE` type must implements `JtChannel` interface"
