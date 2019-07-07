@@ -20,6 +20,5 @@ public interface JtMsg {
     String CONSUME_WORKER = "---> Worker Json: {0}";
 
     String CHANNEL_SELECT = "Channel selected: class = {0}";
-    String COMPONENT_SELECT = "Component selected: class = {0}";
-    String RECORD_SELECT = "Record selected: class = {0}";
+    String COMPONENT_SELECT = "Component = {0}, Record = {1}";
 }

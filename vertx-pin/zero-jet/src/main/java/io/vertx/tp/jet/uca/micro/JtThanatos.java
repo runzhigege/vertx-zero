@@ -1,11 +1,10 @@
 package io.vertx.tp.jet.uca.micro;
 
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.monitor.JtMonitor;
-import io.vertx.up.annotations.Off;
 import io.vertx.up.annotations.On;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.Commercial;
 import io.vertx.up.job.AbstractMission;
 
@@ -59,12 +58,12 @@ public class JtThanatos extends AbstractMission {
      * }
      */
     @On
-    public Future<Envelop> start(final Envelop envelop, final Commercial commercial) {
-        return JtPandora.async(envelop, commercial, this.monitor);
-    }
-
-    @Off
-    public Future<Envelop> end(final Envelop envelop, final JsonObject config) {
-        return Future.succeededFuture();
+    public Future<Envelop> start(final Envelop envelop,
+                                 final Mission mission,
+                                 final Commercial commercial) {
+        /*
+         * Here provide another reference for Mission injection
+         */
+        return JtPandora.async(envelop, commercial, mission, this.monitor);
     }
 }
