@@ -9,7 +9,7 @@ import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.cv.IxMsg;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.tp.ke.cv.KeField;
-import io.vertx.tp.ke.tool.Ke;
+import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.optic.ApeakMy;
 import io.vertx.tp.optic.Pocket;
 import io.vertx.up.aiki.Ux;

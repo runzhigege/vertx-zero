@@ -11,6 +11,7 @@ import io.zero.epic.Ut;
 import java.io.Serializable;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Objects;
 
 /**
  * Database linker for JDBC
@@ -146,5 +147,22 @@ public class Database implements Serializable, Json {
         this.jdbcUrl = data.getString("jdbcUrl");
         this.username = data.getString("username");
         this.password = data.getString("password");
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Database)) {
+            return false;
+        }
+        final Database database = (Database) o;
+        return this.jdbcUrl.equals(database.jdbcUrl);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.jdbcUrl);
     }
 }

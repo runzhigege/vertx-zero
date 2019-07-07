@@ -147,8 +147,9 @@ E80210: "(404) - (RBAC) The resource of id = `{0}` for request = {1} could not b
 E80211: "(403) - (RBAC) The resource level is {0}, action level is {0} and lower than resource required"
 E80212: "(403) - (RBAC) The user = `{0}` of profile = `{1}` has no permission for access any resource"
 E80213: "(403) - (RBAC) Sorry, you have no access to visit the resource that you required, action = `{0}`"
-E80214: "(409) - (RBAC) Zero system could not identify the session you provided `{0}`, maybe it''s expired or destroyed"
 E80215: "(500) - (RBAC) Dwarf instance is null when analyzed result type = {0}"
+# Kernel Module
+E80214: "(409) - (Ke) Zero system could not identify the session you provided `{0}`, maybe it''s expired or destroyed"
 # Ambient Module
 E80300: "(500) - (Ambient) The application environment error, could not get app data"
 E80301: "(500) - (Ambient) The application ( name = `{0}` ) could not be initialized"

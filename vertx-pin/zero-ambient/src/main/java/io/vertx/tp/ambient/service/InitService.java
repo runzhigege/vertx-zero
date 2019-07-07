@@ -7,7 +7,7 @@ import io.vertx.tp.ambient.extension.Init;
 import io.vertx.tp.ambient.extension.Prerequisite;
 import io.vertx.tp.ambient.init.AtPin;
 import io.vertx.tp.ke.cv.KeField;
-import io.vertx.tp.ke.tool.Ke;
+import io.vertx.tp.ke.refine.Ke;
 import io.vertx.up.aiki.Uson;
 import io.vertx.up.aiki.Ux;
 
