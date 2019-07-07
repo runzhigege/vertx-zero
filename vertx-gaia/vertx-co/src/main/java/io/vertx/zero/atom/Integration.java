@@ -5,6 +5,7 @@ import io.vertx.up.commune.Json;
 import io.zero.epic.Ut;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -126,6 +127,32 @@ public class Integration implements Json, Serializable {
                 this.apis.put(field, request);
             });
         }
+    }
+
+    public IntegrationRequest createRequest(final String key) {
+        final IntegrationRequest request = new IntegrationRequest();
+        final IntegrationRequest original = this.apis.get(key);
+        request.setHeaders(original.getHeaders().copy());
+        request.setMethod(original.getMethod());
+        request.setPath(this.endpoint + original.getPath());
+        return request;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Integration)) {
+            return false;
+        }
+        final Integration that = (Integration) o;
+        return this.endpoint.equals(that.endpoint);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.endpoint);
     }
 
     @Override

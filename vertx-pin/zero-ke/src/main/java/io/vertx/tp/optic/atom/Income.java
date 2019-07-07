@@ -2,7 +2,7 @@ package io.vertx.tp.optic.atom;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.init.KePin;
-import io.vertx.tp.ke.tool.Ke;
+import io.vertx.tp.ke.refine.Ke;
 import io.vertx.up.log.Annal;
 
 import java.io.Serializable;
