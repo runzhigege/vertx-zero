@@ -10,7 +10,6 @@ import io.vertx.tp.jet.cv.em.WorkerType;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.zero.atom.Database;
 import io.vertx.zero.atom.Integration;
-import io.vertx.zero.atom.IntegrationRequest;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
@@ -24,21 +23,7 @@ class JtDataObject {
          * Integration data here.
          */
         final Integration integration = new Integration();
-        integration.setEndpoint(data.getString("endpoint"));
-        integration.setHostname(data.getString("hostname"));
-        integration.setUsername(data.getString("username"));
-        integration.setPassword(data.getString("password"));
-        integration.setPort(data.getInteger("port"));
-        /*
-         * Integration Request
-         */
-        final JsonObject apis = data.getJsonObject("apis");
-        if (Ut.notNil(apis)) {
-            Ut.<JsonObject>itJObject(apis, (json, field) -> {
-                final IntegrationRequest request = Ut.deserialize(json, IntegrationRequest.class);
-                integration.getApis().put(field, request);
-            });
-        }
+        integration.fromJson(data);
         /*
          * SSL Options
          */
