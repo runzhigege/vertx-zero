@@ -10,9 +10,13 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Off;
 import io.vertx.up.annotations.On;
+import io.vertx.up.eon.Info;
 import io.vertx.up.eon.em.JobStatus;
 import io.vertx.up.eon.em.JobType;
+import io.vertx.up.exception._501JobOnMissingException;
+import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
+import io.zero.epic.fn.Fn;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
@@ -28,6 +32,7 @@ import java.util.function.Supplier;
  * 2) The definition came from JobStore interface ( the job definition may be stored into database or other
  */
 public class Mission implements Serializable {
+    private static final Annal LOGGER = Annal.get(Mission.class);
     /* Job status, default job is 'ready' */
     private JobStatus status = JobStatus.READY;
     /* Job name */
@@ -221,16 +226,14 @@ public class Mission implements Serializable {
              */
             this.proxy = proxy;
             /*
-             * 2. @On / @Off
+             * 2. @On
+             *  It's required in clazz definition or here should throw exception or errors
              */
-            /* Method */
             this.on = Arrays.stream(clazz.getDeclaredMethods())
                     .filter(method -> method.isAnnotationPresent(On.class))
                     .findFirst().orElse(null);
-            this.off = Arrays.stream(clazz.getDeclaredMethods())
-                    .filter(method -> method.isAnnotationPresent(Off.class))
-                    .findFirst().orElse(null);
-
+            Fn.out(null == this.on, _501JobOnMissingException.class,
+                    this.getClass(), clazz.getName());
             /*
              * Income / IncomeAddress
              */
@@ -240,14 +243,26 @@ public class Mission implements Serializable {
             if (Ut.isNil(this.incomeAddress)) {
                 this.incomeAddress = null;
             }
+
             /*
-             * Outcome / OutcomeAddress
+             * 3. @Off
+             * It's optional in clazz definition
              */
-            final Annotation out = this.off.getAnnotation(Off.class);
-            this.outcomeAddress = this.invoke(out, "address", this::getOutcomeAddress);
-            this.outcome = this.invoke(out, "outcome", this::getOutcome);
-            if (Ut.isNil(this.outcomeAddress)) {
-                this.outcomeAddress = null;
+            this.off = Arrays.stream(clazz.getDeclaredMethods())
+                    .filter(method -> method.isAnnotationPresent(Off.class))
+                    .findFirst().orElse(null);
+            if (Objects.nonNull(this.off)) {
+                /*
+                 * Outcome / OutcomeAddress
+                 */
+                final Annotation out = this.off.getAnnotation(Off.class);
+                this.outcomeAddress = this.invoke(out, "address", this::getOutcomeAddress);
+                this.outcome = this.invoke(out, "outcome", this::getOutcome);
+                if (Ut.isNil(this.outcomeAddress)) {
+                    this.outcomeAddress = null;
+                }
+            } else {
+                LOGGER.info(Info.JOB_NO_OFF, this.getName());
             }
         }
         return this;

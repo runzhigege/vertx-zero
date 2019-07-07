@@ -33,49 +33,51 @@ public interface Info {
 
     // ----------- Job related information
 
-    String JOB_IGNORE = "[ ZERO ] ( Job ) The class {0} annotated with @Job will be ignored because there is no @On method defined.";
+    String JOB_IGNORE = "[ Job ] The class {0} annotated with @Job will be ignored because there is no @On method defined.";
 
-    String JOB_EMPTY = "[ ZERO ] ( Job ) Zero system detect no jobs, the scheduler will be stopped.";
+    String JOB_EMPTY = "[ Job ] Zero system detect no jobs, the scheduler will be stopped.";
 
-    String JOB_CONFIG_NULL = "[ ZERO ] ( Ignore ) Because there is no definition in `vertx-job.yml`, Job container is stop....";
+    String JOB_CONFIG_NULL = "[ Job ] ( Ignore ) Because there is no definition in `vertx-job.yml`, Job container is stop....";
 
-    String JOB_MONITOR = "[ ZERO ] ( Job ) Zero system detect {0} jobs, the scheduler will begin....";
+    String JOB_MONITOR = "[ Job ] Zero system detect {0} jobs, the scheduler will begin....";
 
-    String JOB_CONFIG = "[ ZERO ] ( Job ) Job configuration read : {0}";
+    String JOB_CONFIG = "[ Job ] Job configuration read : {0}";
 
-    String JOB_AGHA_SELECTED = "[ ZERO ] ( Job: {1} ) Agha = {0} has been selected for job {1} of type {2}";
+    String JOB_AGHA_SELECTED = "[ Job: {1} ] Agha = {0} has been selected for job {1} of type {2}";
 
-    String JOB_READY = "[ ZERO ] ( Job: {0} ) The status has been ready: STARTING -> READY";
+    String JOB_READY = "[ Job: {0} ] The status has been ready: STARTING -> READY";
 
-    String JOB_COMPONENT_SELECTED = "[ ZERO ] ( Job ) {0} selected: {1}";
+    String JOB_COMPONENT_SELECTED = "[ Job ] {0} selected: {1}";
 
-    String JOB_ADDRESS_EVENT_BUS = "[ ZERO ] ( Job ) {0} event bus enabled: {1}";
+    String JOB_ADDRESS_EVENT_BUS = "[ Job ] {0} event bus enabled: {1}";
 
     // ------------- Job monitor for ONCE
-    String PHASE_1ST_JOB = "[ ZERO ] ( Job: {0} ) 1. Input new data of JsonObject";
+    String PHASE_1ST_JOB = "[ Job: {0} ] 1. Input new data of JsonObject";
 
-    String PHASE_1ST_JOB_ASYNC = "[ ZERO ] ( Job: {0} ) 1. Input from address {1}";
+    String PHASE_1ST_JOB_ASYNC = "[ Job: {0} ] 1. Input from address {1}";
 
-    String PHASE_2ND_JOB = "[ ZERO ] ( Job: {0} ) 2. Input without `JobIncome`";
+    String PHASE_2ND_JOB = "[ Job: {0} ] 2. Input without `JobIncome`";
 
-    String PHASE_2ND_JOB_ASYNC = "[ ZERO ] ( Job: {0} ) 2. Input with `JobIncome` = {1}";
+    String PHASE_2ND_JOB_ASYNC = "[ Job: {0} ] 2. Input with `JobIncome` = {1}";
 
-    String PHASE_3RD_JOB_RUN = "[ ZERO ] ( Job: {0} ) 3. --> @On Method call {1}";
+    String PHASE_3RD_JOB_RUN = "[ Job: {0} ] 3. --> @On Method call {1}";
 
-    String PHASE_6TH_JOB_CALLBACK = "[ ZERO ] ( Job: {0} ) 6. --> @Off Method call {1}";
+    String PHASE_6TH_JOB_CALLBACK = "[ Job: {0} ] 6. --> @Off Method call {1}";
 
-    String PHASE_4TH_JOB_ASYNC = "[ ZERO ] ( Job: {0} ) 4. Output with `JobOutcome` = {1}";
+    String PHASE_4TH_JOB_ASYNC = "[ Job: {0} ] 4. Output with `JobOutcome` = {1}";
 
-    String PHASE_4TH_JOB = "[ ZERO ] ( Job: {0} ) 4. Output without `JobOutcome`";
+    String PHASE_4TH_JOB = "[ Job: {0} ] 4. Output without `JobOutcome`";
 
-    String PHASE_5TH_JOB = "[ ZERO ] ( Job: {0} ) 5. Output directly, ignore next EventBus steps";
+    String PHASE_5TH_JOB = "[ Job: {0} ] 5. Output directly, ignore next EventBus steps";
 
-    String PHASE_5TH_JOB_ASYNC = "[ ZERO ] ( Job: {0} ) 5. Output send to address {1}";
+    String PHASE_5TH_JOB_ASYNC = "[ Job: {0} ] 5. Output send to address {1}";
 
-    String PHASE_ERROR = "[ ZERO ] ( Job: {0} ) Terminal with error: {1}";
+    String PHASE_ERROR = "[ Job: {0} ] Terminal with error: {1}";
 
     // ------------ Job
-    String JOB_DELAY = "[ ZERO ] ( Job: {0} ) Job will started after {1} ms";
+    String JOB_DELAY = "[ Job: {0} ] Job will started after {1} ms";
 
-    String JOB_SCANNED = "[ ZERO ] ( Job ) The system scanned {0} jobs with type {1}";
+    String JOB_SCANNED = "[ Job ] The system scanned {0} jobs with type {1}";
+
+    String JOB_NO_OFF = "[ Job ] Current job `{0}` does not has @Off method.";
 }
