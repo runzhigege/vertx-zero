@@ -33,10 +33,12 @@ class JtDataObject {
          * Integration Request
          */
         final JsonObject apis = data.getJsonObject("apis");
-        Ut.<JsonObject>itJObject(apis, (json, field) -> {
-            final IntegrationRequest request = Ut.deserialize(json, IntegrationRequest.class);
-            integration.getApis().put(field, request);
-        });
+        if (Ut.notNil(apis)) {
+            Ut.<JsonObject>itJObject(apis, (json, field) -> {
+                final IntegrationRequest request = Ut.deserialize(json, IntegrationRequest.class);
+                integration.getApis().put(field, request);
+            });
+        }
         /*
          * SSL Options
          */

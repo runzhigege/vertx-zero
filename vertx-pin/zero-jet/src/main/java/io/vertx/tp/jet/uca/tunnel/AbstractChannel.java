@@ -6,6 +6,7 @@ import io.vertx.tp.error._501ChannelErrorException;
 import io.vertx.tp.jet.monitor.JtMonitor;
 import io.vertx.tp.optic.jet.JtChannel;
 import io.vertx.tp.optic.jet.JtComponent;
+import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Contract;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Mission;
@@ -75,15 +76,19 @@ public abstract class AbstractChannel implements JtChannel {
              */
             return Future.failedFuture(new _501ChannelErrorException(this.getClass(), null));
         } else {
-            this.monitor.componentHit(componentClass, recordClass);
-
             /* Singleton because it's not data object */
             final JtComponent component = Ut.singleton(componentClass);
             if (Objects.nonNull(component)) {
+                this.monitor.componentHit(componentClass, recordClass);
                 /*
                  * Initialized first and then
                  */
+                Ux.debug();
                 return this.initAsync(component, request)
+                        /*
+                         * Debug for trace errors
+                         */
+                        .otherwise(error -> Ux.debug(error, () -> Boolean.FALSE))
                         /*
                          * options injection
                          */
