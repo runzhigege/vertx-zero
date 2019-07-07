@@ -8,6 +8,7 @@ import io.vertx.tp.optic.jet.JtChannel;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.annotations.Contract;
 import io.vertx.up.atom.Envelop;
+import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.ActIn;
 import io.vertx.up.commune.ActOut;
 import io.vertx.up.commune.Commercial;
@@ -17,8 +18,26 @@ import io.zero.epic.Ut;
 
 import java.util.Objects;
 
-/*
+/**
  * Abstract channel
+ * reference matrix
+ * Database            Integration         Mission
+ * AdaptorChannel       Yes                 No                  No
+ * ConnectorChannel     Yes                 Yes                 No
+ * DirectorChannel      Yes                 No                  Yes
+ * ActorChannel         Yes                 Yes                 Yes
+ * <p>
+ * For above support list, here are some rules:
+ * 1) Request - Response MODE, Client send request
+ * 2) Publish - Subscribe MODE, Server send request
+ * <p>
+ * For common usage, it should use AdaptorChannel instead of other three types; If you want to send
+ * request to third part interface ( API ), you can use ConnectorChannel instead of others.
+ * <p>
+ * The left two: ActorChannel & DirectorChannel are Background task in zero ( Job Support ), the
+ * difference between them is that whether the channel support Integration.
+ * <p>
+ * The full feature of channel should be : ActorChannel
  */
 public abstract class AbstractChannel implements JtChannel {
 
@@ -26,6 +45,8 @@ public abstract class AbstractChannel implements JtChannel {
     /* This field will be injected by zero directly from backend */
     @Contract
     private transient Commercial commercial;
+    @Contract
+    private transient Mission mission;
 
     @Override
     public Future<Envelop> transferAsync(final Envelop envelop) {
@@ -33,7 +54,6 @@ public abstract class AbstractChannel implements JtChannel {
          * Build record and init
          */
         final Class<?> recordClass = this.commercial.recordComponent();
-        this.monitor.recordHit(recordClass);
         /*
          * Data object, could not be singleton
          *  */
@@ -55,7 +75,7 @@ public abstract class AbstractChannel implements JtChannel {
              */
             return Future.failedFuture(new _501ChannelErrorException(this.getClass(), null));
         } else {
-            this.monitor.componentHit(componentClass);
+            this.monitor.componentHit(componentClass, recordClass);
 
             /* Singleton because it's not data object */
             final JtComponent component = Ut.singleton(componentClass);
@@ -96,5 +116,9 @@ public abstract class AbstractChannel implements JtChannel {
 
     protected Commercial getCommercial() {
         return this.commercial;
+    }
+
+    protected Mission getMission() {
+        return this.mission;
     }
 }

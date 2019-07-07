@@ -142,7 +142,13 @@ class RunOn {
                  */
                 return mission.getAdditional().copy();
             }
+        } else if (Mission.class == clazz) {
+            /*
+             * Actor/Director must
+             */
+            return mission;
         } else {
+
             throw new _417JobMethodException(this.getClass(), mission.getName());
         }
     }

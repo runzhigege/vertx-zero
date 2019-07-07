@@ -19,7 +19,6 @@ public class JtAiakos implements JtConsumer {
      */
     @Override
     public Future<Envelop> async(final Envelop envelop, final Commercial commercial) {
-        System.out.println(commercial.toJson().encodePrettily());
         return JtPandora.async(envelop, commercial, this.monitor);
     }
 }

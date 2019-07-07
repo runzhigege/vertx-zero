@@ -23,9 +23,6 @@ public class AdaptorChannel extends AbstractChannel {
                  * Database initialized
                  */
                 .compose(Anagogic::databaseAsync)
-                /*
-                 * Mount database to `JtComponent`
-                 */
                 .compose(database -> Ut.contractAsync(component, Database.class, database));
     }
 }
