@@ -83,6 +83,7 @@ final class IO {
             while (null != (line = reader.readLine())) {
                 buffer.append(line);
             }
+            in.close();
             reader.close();
             return buffer.toString();
         }, in);

@@ -5,7 +5,7 @@ package cn.vertxup.domain;
 
 
 import cn.vertxup.domain.tables.*;
-import io.vertx.tp.ke.tool.Ke;
+import io.vertx.tp.ke.refine.Ke;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;

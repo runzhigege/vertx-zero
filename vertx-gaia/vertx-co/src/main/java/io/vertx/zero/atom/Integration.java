@@ -1,7 +1,11 @@
 package io.vertx.zero.atom;
 
+import io.vertx.core.json.JsonObject;
+import io.vertx.up.commune.Json;
+import io.zero.epic.Ut;
+
 import java.io.Serializable;
-import java.util.Arrays;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -13,21 +17,22 @@ import java.util.concurrent.ConcurrentMap;
  *      "username": "lang",
  *      "password": "xxxx",
  *      "hostname": "www.demo.cn or 192.168.0.12",
- *      "publicKey": "xxx",
- *      "privateKey": "xxx",
+ *      "publicKeyFile": "public key path",
  *      "apis":{
  *          "get.username": {
  *              "method": "POST",
- *              "uri": "/uri/getinfo"
+ *              "uri": "/uri/getinfo",
+ *              "headers": {}
  *          },
  *          "post.test": {
  *              "method": "GET",
- *              "uri": "/uri/getinfo"
+ *              "uri": "/uri/getinfo",
+ *              "headers": {}
  *          }
  *      }
  * }
  */
-public class Integration implements Serializable {
+public class Integration implements Json, Serializable {
 
     private final transient ConcurrentMap<String, IntegrationRequest> apis
             = new ConcurrentHashMap<>();
@@ -38,14 +43,14 @@ public class Integration implements Serializable {
     private transient String endpoint;
     private transient Integer port;
     private transient String username;
-    private transient String password;
-    private transient String hostname;
     /*
      * SSL enabled, these two fields stored
-     * publicKey / privateKey
+     * 1) publicKeyFile
+     * 2) Authentication
      */
-    private transient byte[] publicKey;
-    private transient byte[] privateKey;
+    private transient String password;
+    private transient String hostname;
+    private transient String publicKeyFile;
 
     public ConcurrentMap<String, IntegrationRequest> getApis() {
         return this.apis;
@@ -91,20 +96,63 @@ public class Integration implements Serializable {
         this.hostname = hostname;
     }
 
-    public byte[] getPublicKey() {
-        return this.publicKey;
+    public String getPublicKeyFile() {
+        return this.publicKeyFile;
     }
 
-    public void setPublicKey(final byte[] publicKey) {
-        this.publicKey = publicKey;
+    public void setPublicKeyFile(final String publicKeyFile) {
+        this.publicKeyFile = publicKeyFile;
     }
 
-    public byte[] getPrivateKey() {
-        return this.privateKey;
+    @Override
+    public JsonObject toJson() {
+        return Ut.serializeJson(this);
     }
 
-    public void setPrivateKey(final byte[] privateKey) {
-        this.privateKey = privateKey;
+    @Override
+    public void fromJson(final JsonObject data) {
+        this.endpoint = data.getString("endpoint");
+        this.hostname = data.getString("hostname");
+        this.username = data.getString("username");
+        this.password = data.getString("password");
+        this.port = data.getInteger("port");
+        this.publicKeyFile = data.getString("publicKeyFile");
+        /*
+         * Integration Request
+         */
+        final JsonObject apis = data.getJsonObject("apis");
+        if (Ut.notNil(apis)) {
+            Ut.<JsonObject>itJObject(apis, (json, field) -> {
+                final IntegrationRequest request = Ut.deserialize(json, IntegrationRequest.class);
+                this.apis.put(field, request);
+            });
+        }
+    }
+
+    public IntegrationRequest createRequest(final String key) {
+        final IntegrationRequest request = new IntegrationRequest();
+        final IntegrationRequest original = this.apis.get(key);
+        request.setHeaders(original.getHeaders().copy());
+        request.setMethod(original.getMethod());
+        request.setPath(this.endpoint + original.getPath());
+        return request;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Integration)) {
+            return false;
+        }
+        final Integration that = (Integration) o;
+        return this.endpoint.equals(that.endpoint);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.endpoint);
     }
 
     @Override
@@ -116,8 +164,7 @@ public class Integration implements Serializable {
                 ", username='" + this.username + '\'' +
                 ", password='" + this.password + '\'' +
                 ", hostname='" + this.hostname + '\'' +
-                ", publicKey=" + Arrays.toString(this.publicKey) +
-                ", privateKey=" + Arrays.toString(this.privateKey) +
+                ", publicKeyFile='" + this.publicKeyFile + '\'' +
                 '}';
     }
 }

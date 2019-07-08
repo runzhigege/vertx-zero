@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zero-quiz</artifactId>
-    <name>（ Zero Pin ) -- Quiz Framework ( Testing )</name>
+    <name>Ts:（ Zero Pin ) -- Quiz Framework ( Testing )</name>
     <dependencies>
         <dependency>
             <groupId>cn.vertxup</groupId>

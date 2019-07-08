@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zero-ui</artifactId>
-    <name>（ Zero Pin ) -- User Interface</name>
+    <name>Ui:（ Zero Pin ) -- User Interface</name>
     <dependencies>
         <!-- Kern -->
         <dependency>
