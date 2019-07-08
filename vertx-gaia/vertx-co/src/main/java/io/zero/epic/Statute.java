@@ -1,13 +1,12 @@
 package io.zero.epic;
 
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Values;
 import io.zero.epic.fn.Fn;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
@@ -88,6 +87,15 @@ final class Statute {
             }
         }
         return ret;
+    }
+
+    static JsonObject zipper(final JsonArray array, final String field) {
+        final JsonObject grouped = new JsonObject();
+        array.stream().map(item -> (JsonObject) item)
+                .filter(Objects::nonNull)
+                .filter(item -> Objects.nonNull(item.getValue(field)))
+                .forEach(item -> grouped.put(item.getString(field), item.copy()));
+        return grouped;
     }
 
     static <K, V, E> ConcurrentMap<K, List<V>> group(final Collection<E> object, final Function<E, K> keyFn, final Function<E, V> valueFn) {
