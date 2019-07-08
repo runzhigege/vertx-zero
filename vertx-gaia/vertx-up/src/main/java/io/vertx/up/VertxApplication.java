@@ -23,11 +23,13 @@ import io.zero.epic.fn.Fn;
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * Vertx Application begin information
+ * Vertx Application entry
+ * 1) VertxApplication: start up zero framework in `application` mode. ( Service | Application )
+ * 2) DansApplication: start up zero framework in `micro` mode. ( Service & Gateway )
+ * 3) Five scanners for critical components starting up
  */
 public class VertxApplication {
 
@@ -35,36 +37,61 @@ public class VertxApplication {
 
     private transient final Class<?> clazz;
 
-    private transient ConcurrentMap<String, Annotation> annotationMap = new ConcurrentHashMap<>();
+    private final transient ConcurrentMap<String, Annotation> annotationMap;
 
     private VertxApplication(final Class<?> clazz) {
-        // Must not null
-        Fn.outUp(null == clazz, LOGGER,
-                UpClassArgsException.class, this.getClass());
+        /*
+         * Although the input `clazz` is not important, but zero container require the input
+         * clazz mustn't be null, for future usage such as plugin extension for it.
+         */
+        Fn.out(null == clazz, UpClassArgsException.class, this.getClass());
+
+        /*
+         * Stored clazz information
+         * 1. clazz stored
+         * 2. annotation extraction from Annotation[] -> Annotation Map
+         */
         this.clazz = clazz;
         this.annotationMap = Anno.get(clazz);
-        // Must be invalid
-        Fn.outUp(!this.annotationMap.containsKey(Up.class.getName()), LOGGER,
-                UpClassInvalidException.class, this.getClass(), clazz.getName());
+
+        /*
+         * Zero specification definition for @Up here.
+         * The input class must annotated with @Up instead of other description
+         */
+
+        Fn.out(!this.annotationMap.containsKey(Up.class.getName()), UpClassInvalidException.class, this.getClass(),
+                null == this.clazz ? null : this.clazz.getName());
     }
 
     public static void run(final Class<?> clazz, final Object... args) {
         Fn.shuntRun(() -> {
-            // Precheck mode
+            /*
+             * Class definition predicate
+             */
             ensureEtcd(clazz);
-            // Run vertx application.
             if (isGateway()) {
-                // Api Gateway
+                /*
+                 * Api Gateway:
+                 * `Micro` mode only
+                 * Current zero node will run as api gateway
+                 */
                 DansApplication.run(clazz);
             } else {
-                // Service Node
+                /*
+                 * Standard application
+                 * 1. In `Micro` mode, it will run as service node.
+                 * 2. In `Standalone` mode, it will run as application.
+                 */
                 new VertxApplication(clazz).run(args);
             }
         }, LOGGER);
     }
 
     private static boolean isGateway() {
-        // Secondary Scanned for Api Gateway
+        /*
+         * This method is only ok when `micro` mode
+         * Secondary Scanned for Api Gateway
+         */
         final Set<Integer> apiScanned = new HashSet<>();
         Fn.outUp(() -> {
             final ServerVisitor<HttpServerOptions> visitor =
@@ -75,6 +102,12 @@ public class VertxApplication {
     }
 
     private static void ensureEtcd(final Class<?> clazz) {
+        /*
+         * Whether startup etcd environment
+         * 1) Etcd environment depend on `vertx-micro.yml`
+         * 2) If it's start up, zero container must check etcd configuration and try to connect
+         * 3) Zero will initialize etcd nodes information for current micro environment.
+         */
         if (EtcdData.enabled()) {
             try {
                 EtcdData.create(clazz);
