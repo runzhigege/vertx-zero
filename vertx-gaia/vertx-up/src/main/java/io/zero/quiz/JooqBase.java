@@ -22,7 +22,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 @RunWith(VertxUnitRunner.class)
-public abstract class JooqBase extends ZeroBase {
+public abstract class JooqBase extends AsyncBase {
 
     @Rule
     public final RunTestOnContext rule = new RunTestOnContext();
@@ -31,16 +31,21 @@ public abstract class JooqBase extends ZeroBase {
         return null;
     }
 
-    public <T> void async(final TestContext context,
-                          final Supplier<Future<T>> supplier,
-                          final Consumer<T> function) {
-        Async.async(context, supplier, function, this::getDao);
+    public <T> void asyncJooq(final TestContext context,
+                              final Supplier<Future<T>> supplier,
+                              final Consumer<T> function) {
+        this.asyncJooq(context, supplier, function, this::getDao);
     }
 
-    public <T> void asyncFlow(final TestContext context,
-                              final Future<T> future,
-                              final Consumer<T> consumer) {
-        Async.async(context, future, consumer);
+    private <T> void asyncJooq(final TestContext context,
+                               final Supplier<Future<T>> supplier,
+                               final Consumer<T> consumer,
+                               final Supplier<UxJooq> daoSupplier) {
+        final UxJooq jooq = daoSupplier.get();
+        if (null != jooq) {
+            final Future<T> future = supplier.get();
+            Async.async(context, future, consumer);
+        }
     }
 
     public Condition eq(final String name, final Object value) {
@@ -75,7 +80,7 @@ public abstract class JooqBase extends ZeroBase {
             if (null != pojo) {
                 jooq = jooq.on(pojo);
             }
-            this.asyncFlow(context,
+            this.async(context,
                     jooq.fetchOneAsync(kv.getKey(), kv.getValue()),
                     context::assertNotNull);
         });
@@ -93,7 +98,7 @@ public abstract class JooqBase extends ZeroBase {
             if (null != pojo) {
                 jooq = jooq.on(pojo);
             }
-            this.asyncFlow(context,
+            this.async(context,
                     jooq.fetchOneAsync(filter),
                     context::assertNotNull);
         });

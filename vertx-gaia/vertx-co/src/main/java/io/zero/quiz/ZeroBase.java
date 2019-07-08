@@ -1,5 +1,6 @@
 package io.zero.quiz;
 
+import io.vertx.core.VertxOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.junit.RunTestOnContext;
@@ -14,7 +15,10 @@ import org.junit.runner.RunWith;
 public abstract class ZeroBase extends EpicBase {
 
     @Rule
-    public final RunTestOnContext rule = new RunTestOnContext();
+    public final RunTestOnContext rule = new RunTestOnContext(
+            /* Block issue of 2000ms for testing of long time works */
+            new VertxOptions().setMaxEventLoopExecuteTime(30000000000L)
+    );
 
     public void ensure(final Class<?> insurerCls,
                        final JsonObject data, final JsonObject rule)
