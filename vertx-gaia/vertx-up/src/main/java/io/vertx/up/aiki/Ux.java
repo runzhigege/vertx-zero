@@ -25,6 +25,7 @@ import io.zero.epic.fn.wait.Log;
 import org.jooq.Condition;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.*;
 
@@ -48,6 +49,14 @@ public final class Ux {
     public static <T> Future<T> debug(final T item) {
         Fn.safeNull(() -> Debug.monitor(item), item);
         return Future.succeededFuture(item);
+    }
+
+    public static <T> T debug(final Throwable error, final Supplier<T> supplier) {
+        if (Objects.nonNull(error)) {
+            // TODO: Debug for JVM;
+            error.printStackTrace();
+        }
+        return supplier.get();
     }
 
     public static void timer(final Class<?> clazz, final Actuator actuator) {

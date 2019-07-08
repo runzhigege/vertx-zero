@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.security.interfaces.RSAPublicKey;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -87,6 +88,14 @@ public final class Ut {
     // --- Encrypt
     public static String encryptMD5(final String input) {
         return Codec.md5(input);
+    }
+
+    public static String encryptRSA(final String input, final String filePath) {
+        return Rsa.encrypt(input, filePath);
+    }
+
+    public static String encryptRSA(final String input, final RSAPublicKey publicKey) {
+        return Rsa.encrypt(input, publicKey);
     }
 
     public static String encryptSHA256(final String input) {

@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zero-rbac</artifactId>
-    <name>（ Zero Pin ) -- Rbac Management</name>
+    <name>Sc:（ Zero Pin ) -- Rbac Management</name>
     <dependencies>
         <!-- Kern -->
         <dependency>

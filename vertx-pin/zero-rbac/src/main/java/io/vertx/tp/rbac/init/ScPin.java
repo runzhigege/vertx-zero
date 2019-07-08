@@ -1,6 +1,6 @@
 package io.vertx.tp.rbac.init;
 
-import io.vertx.tp.ke.tool.Ke;
+import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.rbac.atom.ScConfig;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.log.Annal;
