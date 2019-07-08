@@ -34,7 +34,7 @@ public interface Init {
      * Initializer generate method.
      */
     static Init generate(final Class<?> clazz) {
-        return Fn.pool(Pool.INIT_POOL, clazz.getName(), Ut.instance(clazz));
+        return Fn.pool(Pool.INIT_POOL, clazz.getName(), () -> Ut.instance(clazz));
     }
 
     /*
