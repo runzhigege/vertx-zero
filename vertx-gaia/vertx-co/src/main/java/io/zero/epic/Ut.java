@@ -81,6 +81,10 @@ public final class Ut {
         return Statute.zipper(Arrays.asList(object), keyFn, valueFn);
     }
 
+    public static JsonObject elementZip(final JsonArray array, final String field) {
+        return Statute.zipper(array, field);
+    }
+
     public static <K, V, E> ConcurrentMap<K, List<V>> elementGroup(final Collection<E> object, final Function<E, K> keyFn, final Function<E, V> valueFn) {
         return Statute.group(object, keyFn, valueFn);
     }
@@ -175,6 +179,10 @@ public final class Ut {
 
     public static void itJArray(final JsonArray array, final BiConsumer<JsonObject, Integer> fnEach) {
         Congregation.exec(array, JsonObject.class, fnEach);
+    }
+
+    public static java.util.stream.Stream<JsonObject> itJArray(final JsonArray array) {
+        return array.stream().filter(Objects::nonNull).map(item -> (JsonObject) item);
     }
 
     public static <T> void etJArray(final JsonArray dataArray, final Class<T> clazz, final ZeroBiConsumer<T, Integer> fnIt) throws ZeroException {
