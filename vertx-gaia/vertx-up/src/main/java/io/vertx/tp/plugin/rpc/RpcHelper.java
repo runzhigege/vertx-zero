@@ -1,4 +1,4 @@
-package io.vertx.up.plugin.rpc;
+package io.vertx.tp.plugin.rpc;
 
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonObject;
@@ -23,7 +23,7 @@ class RpcHelper {
 
 
     static Record getRecord(final JsonObject config) {
-        /** Config Verify **/
+        /* Config Verify **/
         Fn.outUp(() -> Fn.shuntZero(() -> Ruler.verify(Key.RULE_KEY, config), config),
                 LOGGER);
         // Connect remote etcd to check service
@@ -44,7 +44,8 @@ class RpcHelper {
                 .filter(item -> Ut.notNil(item.getName()))
                 .filter(item -> name.equals(item.getName()) &&
                         address.equals(item.getMetadata().getString(Key.PATH)))
-                .subscribe(container::add);
+                .subscribe(container::add)
+                .dispose();
         // Service Not Found
         Fn.outWeb(!container.successed(), LOGGER,
                 _424RpcServiceException.class, RpcHelper.class,

@@ -51,6 +51,7 @@ public class DatumInit implements Init {
         /* List<Future> */
         final List<Future<JsonObject>> futures = files.stream()
                 .filter(Ut::notNil)
+                .map(file -> dataFolder + file)
                 .map(this::doLoading)
                 .collect(Collectors.toList());
         return Ux.thenComposite(futures)

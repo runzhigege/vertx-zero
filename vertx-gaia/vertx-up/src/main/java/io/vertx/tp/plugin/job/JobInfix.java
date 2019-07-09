@@ -1,8 +1,9 @@
-package io.vertx.up.plugin.shared;
+package io.vertx.tp.plugin.job;
 
 import io.vertx.core.Vertx;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.plugin.Infix;
+import io.vertx.up.plugin.session.SessionInfix;
 import io.zero.epic.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -10,17 +11,18 @@ import java.util.concurrent.ConcurrentMap;
 
 @Plugin
 @SuppressWarnings("unchecked")
-public class SessionInfix implements Infix {
+public class JobInfix implements Infix {
 
-    private static final String NAME = "ZERO_SESSION_POOL";
-    private static final ConcurrentMap<String, SessionClient> CLIENTS
+    private static final String NAME = "ZERO_JOB_POOL";
+
+    private static final ConcurrentMap<String, JobClient> CLIENTS
             = new ConcurrentHashMap<>();
 
     private static void initInternal(final Vertx vertx,
                                      final String name) {
         Fn.pool(CLIENTS, name,
-                () -> Infix.initTp("session",
-                        (config) -> SessionClient.createShared(vertx, config),
+                () -> Infix.initTp("job",
+                        (config) -> JobClient.createShared(vertx, config.getJsonObject("client")),
                         SessionInfix.class));
     }
 
@@ -28,16 +30,12 @@ public class SessionInfix implements Infix {
         initInternal(vertx, NAME);
     }
 
-    public static SessionClient getClient() {
+    public static JobClient getClient() {
         return CLIENTS.get(NAME);
     }
 
-    public static SessionClient getOrCreate(final Vertx vertx) {
-        return Fn.pool(CLIENTS, NAME, () -> SessionClient.createShared(vertx));
-    }
-
     @Override
-    public SessionClient get() {
+    public JobClient get() {
         return getClient();
     }
 }

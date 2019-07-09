@@ -13,6 +13,4 @@ interface Info {
     String INFO_TIMER_EXPIRE = "[ ZERO ] ( Timer ) The key \"{0}\" refered data has been removed.";
 
     String INFO_TIMER_REMOVED = "[ ZERO ] ( Timer ) The key \"{0}\" does not exist, it has been removed before.";
-
-    String SESSION_MODE = "[ ZERO ] ( Session ) System will selected mode = \"{0}\" of session.";
 }

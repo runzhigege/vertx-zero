@@ -1,9 +1,9 @@
 package io.vertx.up.job.phase;
 
-import io.vertx.up.atom.worker.Mission;
-import io.vertx.up.eon.em.JobType;
 import io.vertx.up.job.plugin.JobIncome;
 import io.vertx.up.job.plugin.JobOutcome;
+import io.vertx.up.atom.worker.Mission;
+import io.vertx.up.eon.em.JobType;
 import io.vertx.up.web.Runner;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Actuator;
