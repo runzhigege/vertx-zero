@@ -2,9 +2,9 @@ package io.vertx.up.aiki;
 
 import io.vertx.core.Future;
 import io.vertx.up.log.Annal;
-import io.vertx.up.plugin.job.JobClient;
-import io.vertx.up.plugin.job.JobInfix;
-import io.vertx.up.plugin.job.JobPool;
+import io.vertx.tp.plugin.job.JobClient;
+import io.vertx.tp.plugin.job.JobInfix;
+import io.vertx.tp.plugin.job.JobPool;
 
 public class UxJob {
     private static final Annal LOGGER = Annal.get(UxJob.class);

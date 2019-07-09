@@ -157,7 +157,7 @@ rpc:
 **vertx-inject.yml**
 
 ```yaml
-rpc: io.vertx.up.plugin.rpc.RpcInfix
+rpc: io.vertx.tp.plugin.rpc.RpcInfix
 ```
 
 Above Rpc configuration is required.

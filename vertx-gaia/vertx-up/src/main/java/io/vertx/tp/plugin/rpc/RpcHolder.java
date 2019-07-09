@@ -1,13 +1,11 @@
-package io.vertx.up.plugin.rpc;
+package io.vertx.tp.plugin.rpc;
 
 import io.grpc.ManagedChannel;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.Shareable;
-import io.vertx.up.log.Annal;
 
 class RpcHolder implements Shareable {
-    private static final Annal LOGGER = Annal.get(RpcHolder.class);
     private final JsonObject config;
     private final Vertx vertx;
     private final Runnable closeRunner;

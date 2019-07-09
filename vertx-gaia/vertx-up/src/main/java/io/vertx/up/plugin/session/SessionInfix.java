@@ -1,4 +1,4 @@
-package io.vertx.up.plugin.rpc;
+package io.vertx.up.plugin.session;
 
 import io.vertx.core.Vertx;
 import io.vertx.up.annotations.Plugin;
@@ -9,37 +9,36 @@ import io.zero.epic.fn.Fn;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-/**
- * Rpc Client for specific
- */
 @Plugin
 @SuppressWarnings("unchecked")
-public class RpcInfix implements Infix {
+public class SessionInfix implements Infix {
 
-    private static final String NAME = "ZERO_RPC_POOL";
-
-    private static final ConcurrentMap<String, RpcClient> CLIENTS
+    private static final String NAME = "ZERO_SESSION_POOL";
+    private static final ConcurrentMap<String, SessionClient> CLIENTS
             = new ConcurrentHashMap<>();
-
 
     private static void initInternal(final Vertx vertx,
                                      final String name) {
         Fn.pool(CLIENTS, name,
-                () -> Infix.init(Plugins.Infix.RPC,
-                        (config) -> RpcClient.createShared(vertx, config, name),
-                        RpcInfix.class));
+                () -> Infix.initTp(Plugins.Infix.SESSION,
+                        (config) -> SessionClient.createShared(vertx, config),
+                        SessionInfix.class));
     }
 
     public static void init(final Vertx vertx) {
         initInternal(vertx, NAME);
     }
 
-    public static RpcClient getClient() {
+    public static SessionClient getClient() {
         return CLIENTS.get(NAME);
     }
 
+    public static SessionClient getOrCreate(final Vertx vertx) {
+        return Fn.pool(CLIENTS, NAME, () -> SessionClient.createShared(vertx));
+    }
+
     @Override
-    public RpcClient get() {
+    public SessionClient get() {
         return getClient();
     }
 }

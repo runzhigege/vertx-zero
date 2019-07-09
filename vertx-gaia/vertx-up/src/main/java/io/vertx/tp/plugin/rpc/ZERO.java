@@ -1,4 +1,4 @@
-package io.vertx.up.plugin.rpc;
+package io.vertx.tp.plugin.rpc;
 
 interface Info {
 

@@ -1,4 +1,4 @@
-package io.vertx.up.plugin.rpc.client;
+package io.vertx.tp.plugin.rpc.client;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;

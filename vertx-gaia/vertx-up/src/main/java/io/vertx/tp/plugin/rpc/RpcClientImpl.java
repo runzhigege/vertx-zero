@@ -1,4 +1,4 @@
-package io.vertx.up.plugin.rpc;
+package io.vertx.tp.plugin.rpc;
 
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -12,8 +12,8 @@ import io.vertx.up.atom.flux.IpcData;
 import io.vertx.up.eon.em.IpcType;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ipc.DataEncap;
-import io.vertx.up.plugin.rpc.client.RpcStub;
-import io.vertx.up.plugin.rpc.client.UnityStub;
+import io.vertx.tp.plugin.rpc.client.RpcStub;
+import io.vertx.tp.plugin.rpc.client.UnityStub;
 import io.zero.epic.Ut;
 
 import java.text.MessageFormat;

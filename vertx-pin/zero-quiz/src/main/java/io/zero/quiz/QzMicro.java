@@ -1,7 +1,7 @@
 package io.zero.quiz;
 
 import io.vertx.ext.unit.junit.VertxUnitRunner;
-import io.vertx.up.plugin.rpc.RpcInfix;
+import io.vertx.tp.plugin.rpc.RpcInfix;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 

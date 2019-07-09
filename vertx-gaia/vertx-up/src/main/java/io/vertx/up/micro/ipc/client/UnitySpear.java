@@ -8,8 +8,8 @@ import io.vertx.tp.ipc.service.UnityServiceGrpc;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.flux.IpcData;
 import io.vertx.up.micro.ipc.DataEncap;
-import io.vertx.up.plugin.rpc.RpcRepdor;
-import io.vertx.up.plugin.rpc.RpcSslTool;
+import io.vertx.tp.plugin.rpc.RpcRepdor;
+import io.vertx.tp.plugin.rpc.RpcSslTool;
 
 public class UnitySpear implements Spear {
 

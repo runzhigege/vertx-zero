@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
 import io.vertx.up.log.Annal;
-import io.vertx.up.plugin.job.JobPool;
+import io.vertx.tp.plugin.job.JobPool;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
 import io.zero.epic.Ut;
