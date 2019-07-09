@@ -2,11 +2,11 @@ package io.vertx.tp.jet.uca.micro;
 
 import io.vertx.core.Future;
 import io.vertx.tp.jet.monitor.JtMonitor;
+import io.vertx.up.job.AbstractMission;
 import io.vertx.up.annotations.On;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.Commercial;
-import io.vertx.up.job.AbstractMission;
 
 /**
  * 「Job Instance」

@@ -4,8 +4,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
-import io.vertx.up.plugin.rpc.RpcClient;
-import io.vertx.up.plugin.rpc.RpcInfix;
+import io.vertx.tp.plugin.rpc.RpcClient;
+import io.vertx.tp.plugin.rpc.RpcInfix;
 
 class UxRpc {
 

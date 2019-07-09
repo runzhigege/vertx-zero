@@ -2,17 +2,17 @@ package io.vertx.up.job.center;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
+import io.vertx.up.job.phase.Phase;
+import io.vertx.up.job.store.JobConfig;
+import io.vertx.up.job.store.JobPin;
+import io.vertx.up.job.store.JobStore;
+import io.vertx.up.job.timer.Interval;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Contract;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
 import io.vertx.up.eon.em.JobStatus;
-import io.vertx.up.job.phase.Phase;
-import io.vertx.up.job.store.JobConfig;
-import io.vertx.up.job.store.JobPin;
-import io.vertx.up.job.store.JobStore;
-import io.vertx.up.job.timer.Interval;
 import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
 

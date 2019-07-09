@@ -1,4 +1,4 @@
-package io.vertx.up.plugin.rpc.client;
+package io.vertx.tp.plugin.rpc.client;
 
 import io.grpc.ManagedChannel;
 import io.vertx.core.Future;
@@ -7,7 +7,7 @@ import io.vertx.tp.ipc.eon.IpcRequest;
 import io.vertx.tp.ipc.service.UnityServiceGrpc;
 import io.vertx.up.atom.flux.IpcData;
 import io.vertx.up.micro.ipc.DataEncap;
-import io.vertx.up.plugin.rpc.RpcRepdor;
+import io.vertx.tp.plugin.rpc.RpcRepdor;
 
 /**
  * Used by rpc client.

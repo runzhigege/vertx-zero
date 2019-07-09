@@ -1,4 +1,4 @@
-package io.vertx.up.plugin.rpc;
+package io.vertx.tp.plugin.rpc;
 
 import io.grpc.ManagedChannel;
 import io.vertx.core.Vertx;
@@ -43,10 +43,7 @@ public class RpcSslTool {
             Fn.safeSemi(null != config.getValue(Key.SSL), LOGGER, () -> {
                 final JsonObject sslConfig = config.getJsonObject(Key.SSL);
                 if (null != sslConfig && !sslConfig.isEmpty()) {
-                    final Object type = sslConfig.getValue("type");
-                    final CertType certType = null == type ?
-                            CertType.PEM : Ut.toEnum(CertType.class, type.toString());
-                    final TrustPipe<JsonObject> pipe = TrustPipe.get(certType);
+                    final TrustPipe<JsonObject> pipe = getPipe(sslConfig);
                     // Enable SSL
                     builder.useSsl(pipe.parse(sslConfig));
                 } else {
@@ -87,15 +84,19 @@ public class RpcSslTool {
                     // Disabled SSL
                     builder.usePlaintext(true);
                 } else {
-                    final Object type = ssl.getValue("type");
-                    final CertType certType = null == type ?
-                            CertType.PEM : Ut.toEnum(CertType.class, type.toString());
-                    final TrustPipe<JsonObject> pipe = TrustPipe.get(certType);
+                    final TrustPipe<JsonObject> pipe = getPipe(ssl);
                     // Enabled SSL
                     builder.useSsl(pipe.parse(ssl));
                 }
             });
             return builder.build();
         });
+    }
+
+    private static TrustPipe<JsonObject> getPipe(final JsonObject ssl) {
+        final Object type = ssl.getValue("type");
+        final CertType certType = null == type ?
+                CertType.PEM : Ut.toEnum(CertType.class, type.toString());
+        return TrustPipe.get(certType);
     }
 }

@@ -35,7 +35,7 @@ rpc:
 
 ```yaml
 mongo: io.vertx.up.plugin.mongo.MongoInfix
-rpc: io.vertx.up.plugin.rpc.RpcInfix
+rpc: io.vertx.tp.plugin.rpc.RpcInfix
 ```
 
 ## 2. Code for Rpc
@@ -77,7 +77,7 @@ Start up console
 ```java
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.EndPoint;
-import io.vertx.up.plugin.rpc.RpcClient;
+import io.vertx.tp.plugin.rpc.RpcClient;
 
 import javax.inject.infix.Rpc;
 import javax.ws.rs.BodyParam;

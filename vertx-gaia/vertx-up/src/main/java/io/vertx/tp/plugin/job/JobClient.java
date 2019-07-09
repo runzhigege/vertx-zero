@@ -1,4 +1,4 @@
-package io.vertx.up.plugin.job;
+package io.vertx.tp.plugin.job;
 
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.AsyncResult;

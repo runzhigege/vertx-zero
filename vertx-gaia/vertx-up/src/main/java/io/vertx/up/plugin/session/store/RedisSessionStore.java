@@ -1,4 +1,4 @@
-package io.vertx.up.plugin.shared.store;
+package io.vertx.up.plugin.session.store;
 
 /**
  * TODO: Redis Session Store wait for implementation

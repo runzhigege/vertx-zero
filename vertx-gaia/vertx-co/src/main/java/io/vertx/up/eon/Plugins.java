@@ -56,12 +56,15 @@ public interface Plugins {
 
         String MYSQL = "mysql";
 
-        String JOOQ = "jooq";
-
-        String RPC = "rpc";
-
         String REDIS = "redis";
 
+        String SESSION = "session";
+
+        String SHARED = "shared";
+
+
+        String JOOQ = "jooq";
+        String RPC = "rpc";
         String SECURE = "secure";
 
         String LOGGER = "logger";
@@ -70,9 +73,12 @@ public interface Plugins {
             {
                 this.add(MONGO);
                 this.add(MYSQL);
-                this.add(JOOQ);
                 this.add(REDIS);
+                this.add(SESSION);
+                this.add(SHARED);
+
                 this.add(RPC);
+                this.add(JOOQ);
                 this.add(LOGGER);
             }
         };

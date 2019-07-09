@@ -1,4 +1,4 @@
-package io.vertx.up.plugin.job;
+package io.vertx.tp.plugin.job;
 
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.em.JobStatus;

@@ -1,7 +1,7 @@
 package io.vertx.up.job.store;
 
-import io.vertx.up.atom.config.ComponentOpts;
 import io.vertx.up.job.timer.VertxInterval;
+import io.vertx.up.atom.config.ComponentOpts;
 
 import java.io.Serializable;
 import java.util.Objects;
