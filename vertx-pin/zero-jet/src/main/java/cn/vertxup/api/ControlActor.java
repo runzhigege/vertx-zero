@@ -7,7 +7,7 @@ import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.atom.worker.Mission;
-import io.vertx.up.plugin.job.JobPool;
+import io.vertx.tp.plugin.job.JobPool;
 
 @Queue
 public class ControlActor {

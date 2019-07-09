@@ -60,13 +60,12 @@ public class EtcdData {
     private final transient JsonArray config = new JsonArray();
     private final transient EtcdClient client;
     private final transient Class<?> clazz;
-    private final transient Annal logger;
     private transient long timeout = -1;
     private transient String application = Strings.EMPTY;
 
     private EtcdData(final Class<?> clazz) {
         this.clazz = clazz;
-        this.logger = Annal.get(clazz);
+        final Annal logger = Annal.get(clazz);
         // Read configuration
         final JsonObject config = NODE.read();
         if (config.containsKey(KEY)) {
@@ -87,7 +86,7 @@ public class EtcdData {
             LOGGER.info(Info.ETCD_TIMEOUT,
                     this.application, this.timeout, this.config.size());
         }
-        Fn.outUp(this.config.isEmpty(), this.logger,
+        Fn.outUp(this.config.isEmpty(), logger,
                 EtcdConfigEmptyException.class, this.clazz);
 
         final Set<URI> uris = new HashSet<>();
@@ -104,7 +103,8 @@ public class EtcdData {
                     return "http://" + host + ":" + port;
                 })
                 .map(URI::create)
-                .subscribe(uris::add);
+                .subscribe(uris::add)
+                .dispose();
         // Network checking
         networks.forEach((port, host) ->
                 Fn.outUp(!Ut.netOk(host, port), LOGGER,
@@ -124,7 +124,7 @@ public class EtcdData {
     /**
      * Whether Etcd Enabled.
      *
-     * @return
+     * @return predicated result
      */
     public static boolean enabled() {
         final JsonObject config = NODE.read();
@@ -146,12 +146,16 @@ public class EtcdData {
     public ConcurrentMap<String, String> readDir(
             final String path,
             final boolean shiftted) {
-        // Ensure Path created when read exception
+        /*
+         * Ensure Path created when read exception
+         */
         return Fn.getJvm(new ConcurrentHashMap<>(), () -> {
             final EtcdKeysResponse.EtcdNode node = this.readNode(path, this.client::getDir);
             return Fn.getJvm(new ConcurrentHashMap<>(), () -> {
                 final ConcurrentMap<String, String> result = new ConcurrentHashMap<>();
-                /** Nodes **/
+                /*
+                 * Read all nodes information
+                 * */
                 final List<EtcdKeysResponse.EtcdNode> nodes = node.getNodes();
                 for (final EtcdKeysResponse.EtcdNode nodeItem : nodes) {
                     String key = nodeItem.getKey();
@@ -165,6 +169,7 @@ public class EtcdData {
         }, path);
     }
 
+    @SuppressWarnings("unused")
     private void ensurePath(final String path) {
         if (0 <= path.lastIndexOf('/')) {
             final String parent = path.substring(0, path.lastIndexOf('/'));
@@ -196,7 +201,9 @@ public class EtcdData {
 
         return Fn.getJvm(null, () -> {
             final EtcdKeyGetRequest request = executor.apply(path);
-            /** Timeout **/
+            /*
+             * Set timeout parameters
+             */
             if (-1 != this.timeout) {
                 request.timeout(this.timeout, TimeUnit.SECONDS);
             }
@@ -230,7 +237,9 @@ public class EtcdData {
             if (Values.ZERO != ttl) {
                 request.ttl(ttl);
             }
-            /** Timeout **/
+            /*
+             * Set timeout parameters
+             */
             if (-1 != this.timeout) {
                 request.timeout(this.timeout, TimeUnit.SECONDS);
             }

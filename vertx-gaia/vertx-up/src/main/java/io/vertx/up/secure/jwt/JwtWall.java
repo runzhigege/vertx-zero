@@ -1,4 +1,4 @@
-package io.vertx.up.plugin.jwt;
+package io.vertx.up.secure.jwt;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.secure.Cliff;

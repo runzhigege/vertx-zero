@@ -2,8 +2,8 @@ package io.vertx.up.secure;
 
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.eon.em.WallType;
-import io.vertx.up.plugin.jwt.JwtWall;
 import io.vertx.up.plugin.mongo.MongoWall;
+import io.vertx.up.secure.jwt.JwtWall;
 import io.vertx.zero.marshal.Transformer;
 import io.zero.epic.Ut;
 

@@ -3,7 +3,7 @@ package io.vertx.up.job.store;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
 import io.vertx.up.log.Annal;
-import io.vertx.up.plugin.job.JobPool;
+import io.vertx.tp.plugin.job.JobPool;
 
 import java.util.HashSet;
 import java.util.Objects;

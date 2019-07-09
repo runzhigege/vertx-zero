@@ -10,8 +10,8 @@ import io.vertx.tp.ke.cv.KeField;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.exception.WebException;
-import io.vertx.up.plugin.shared.SessionClient;
-import io.vertx.up.plugin.shared.SessionInfix;
+import io.vertx.up.plugin.session.SessionClient;
+import io.vertx.up.plugin.session.SessionInfix;
 import io.zero.epic.Ut;
 
 import java.util.Objects;

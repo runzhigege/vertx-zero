@@ -1,4 +1,4 @@
-package io.vertx.up.plugin.shared;
+package io.vertx.up.plugin.session;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;

@@ -1,4 +1,4 @@
-package io.vertx.up.plugin.rpc;
+package io.vertx.tp.plugin.rpc;
 
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.AsyncResult;

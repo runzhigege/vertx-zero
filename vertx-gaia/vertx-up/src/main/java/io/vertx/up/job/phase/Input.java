@@ -3,10 +3,10 @@ package io.vertx.up.job.phase;
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.EventBus;
+import io.vertx.up.job.plugin.JobIncome;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
-import io.vertx.up.job.plugin.JobIncome;
 import io.vertx.up.log.Annal;
 import io.zero.epic.Ut;
 

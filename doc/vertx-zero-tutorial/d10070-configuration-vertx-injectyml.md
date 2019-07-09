@@ -37,7 +37,7 @@ mysql: io.vertx.up.plugin.jdbc.MySqlInfix
 When you set zero micro system, following rpc injection is required for service communication
 
 ```yaml
-rpc: io.vertx.up.plugin.rpc.RpcInfix
+rpc: io.vertx.tp.plugin.rpc.RpcInfix
 ```
 
 ## 4. Summary
