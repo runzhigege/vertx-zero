@@ -1,4 +1,4 @@
-package io.vertx.zero.mirror.backup;
+package io.vertx.zero.mirror.upgrade;
 
 import java.io.IOException;
 import java.net.JarURLConnection;
@@ -18,28 +18,40 @@ public class JarScan implements Scan {
         final Set<Class<?>> classes = new HashSet<>();
 
         try {
-            //通过当前线程得到类加载器从而得到URL的枚举
+            /*
+             * Get url of current thread.
+             */
             final Enumeration<URL> urlEnumeration = Thread.currentThread().getContextClassLoader().getResources(packageName.replace(".", "/"));
             while (urlEnumeration.hasMoreElements()) {
-                final URL url = urlEnumeration.nextElement();//得到的结果大概是：jar:file:/C:/Users/ibm/.m2/repository/junit/junit/4.12/junit-4.12.jar!/org/junit
-                final String protocol = url.getProtocol();//大概是jar
+                /*
+                 * The result maybe: jar:file:/C:/Users/ibm/.m2/repository/junit/junit/4.12/junit-4.12.jar!/org/junit
+                 */
+                final URL url = urlEnumeration.nextElement();
+                /*
+                 * jar here
+                 */
+                final String protocol = url.getProtocol();
                 if ("jar".equalsIgnoreCase(protocol)) {
-                    //转换为JarURLConnection
+                    /*
+                     * Convert to jar connection
+                     */
                     final JarURLConnection connection = (JarURLConnection) url.openConnection();
                     if (connection != null) {
                         final JarFile jarFile = connection.getJarFile();
                         if (jarFile != null) {
-                            //得到该jar文件下面的类实体
+
                             final Enumeration<JarEntry> jarEntryEnumeration = jarFile.entries();
                             while (jarEntryEnumeration.hasMoreElements()) {
-                            /*entry的结果大概是这样：
-                                    org/
-                                    org/junit/
-                                    org/junit/rules/
-                                    org/junit/runners/*/
+                                /* just like:
+                                 * org/
+                                 * org/junit/
+                                 * org/junit/rules/
+                                 * org/junit/runners/*/
                                 final JarEntry entry = jarEntryEnumeration.nextElement();
                                 final String jarEntryName = entry.getName();
-                                //这里我们需要过滤不是class文件和不在basePack包名下的类
+                                /*
+                                 * Here should do some filters that does not exist in basePack
+                                 */
                                 if (jarEntryName.contains(".class") && jarEntryName.replaceAll("/", ".").startsWith(packageName)) {
                                     final String className = jarEntryName.substring(0, jarEntryName.lastIndexOf(".")).replace("/", ".");
                                     final Class cls = Class.forName(className);
@@ -51,14 +63,16 @@ public class JarScan implements Scan {
                         }
                     }
                 } else if ("file".equalsIgnoreCase(protocol)) {
-                    //从maven子项目中扫描
+                    /*
+                     * From maven sub-project instead of other.
+                     */
                     final FileScan fileScanner = new FileScan();
                     fileScanner.setDefaultClassPath(url.getPath().replace(packageName.replace(".", "/"), ""));
                     classes.addAll(fileScanner.search(packageName, predicate));
                 }
             }
         } catch (final ClassNotFoundException | IOException e) {
-            e.printStackTrace();
+            // Nothing to do
         }
         return classes;
     }

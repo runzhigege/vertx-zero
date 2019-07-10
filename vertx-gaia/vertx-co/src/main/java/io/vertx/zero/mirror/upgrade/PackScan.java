@@ -1,19 +1,19 @@
-package io.vertx.zero.mirror.backup;
+package io.vertx.zero.mirror.upgrade;
 
 import java.util.Set;
 import java.util.function.Predicate;
 
-public class ScanExecutor implements Scan {
-    private volatile static ScanExecutor instance;
+public class PackScan implements Scan {
+    private volatile static PackScan instance;
 
-    private ScanExecutor() {
+    private PackScan() {
     }
 
-    public static ScanExecutor getInstance() {
+    public static PackScan getInstance() {
         if (instance == null) {
-            synchronized (ScanExecutor.class) {
+            synchronized (PackScan.class) {
                 if (instance == null) {
-                    instance = new ScanExecutor();
+                    instance = new PackScan();
                 }
             }
         }

@@ -8,6 +8,7 @@ import io.vertx.up.boot.DansApplication;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
 import io.vertx.up.web.Runner;
+import io.vertx.up.web.ZeroAnno;
 import io.vertx.up.web.ZeroLauncher;
 import io.vertx.up.web.anima.*;
 import io.vertx.zero.config.ServerVisitor;
@@ -69,6 +70,23 @@ public class VertxApplication {
              * Class definition predicate
              */
             ensureEtcd(clazz);
+            /*
+             * Before launcher, start package scanning for preparing metadata
+             * This step is critical because it's environment core preparing steps.
+             * 1) Before vert.x started, the system must be scanned all to capture some metadata classes instead.
+             * 2) PackScan will scan all classes to capture Annotation information
+             * 3) For zero extension module, although it's not in ClassLoader, we also need to scan dependency library
+             *    to capture zero extension module annotation
+             *
+             * Because static {} initializing will be triggered when `ZeroAnno` is called first time, to avoid
+             * some preparing failure, here we replaced `static {}` with `prepare()` calling before any instance
+             * of VertxApplication/DansApplication.
+             */
+            ZeroAnno.prepare();
+
+            /*
+             * Then the container could start
+             */
             if (isGateway()) {
                 /*
                  * Api Gateway:

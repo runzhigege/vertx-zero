@@ -1,4 +1,4 @@
-package io.vertx.zero.mirror.backup;
+package io.vertx.zero.mirror.upgrade;
 
 import java.util.Set;
 import java.util.function.Predicate;
@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 /*
  * The interface that will be triggered by package scanner
  */
-interface Scan {
+public interface Scan {
     /*
      * Class suffix for scanner
      */

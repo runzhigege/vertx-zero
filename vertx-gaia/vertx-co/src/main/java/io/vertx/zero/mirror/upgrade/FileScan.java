@@ -1,12 +1,13 @@
-package io.vertx.zero.mirror.backup;
+package io.vertx.zero.mirror.upgrade;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 
 class FileScan implements Scan {
-    private String defaultClassPath = FileScan.class.getResource("/").getPath();
+    private String defaultClassPath = FileScan.class.getResource(".").getPath();
 
     FileScan(final String defaultClassPath) {
         this.defaultClassPath = defaultClassPath;
@@ -21,9 +22,13 @@ class FileScan implements Scan {
 
     @Override
     public Set<Class<?>> search(final String packageName, final Predicate<Class<?>> predicate) {
-        //先把包名转换为路径,首先得到项目的classpath
+        /*
+         * Convert package name to path and get classpath
+         */
         final String classpath = this.defaultClassPath;
-        //然后把我们的包名basPack转换为路径名
+        /*
+         * Put our basPack convert to path name.
+         */
         final String basePackPath = packageName.replace(".", File.separator);
         final String searchPath = classpath + basePackPath;
         return new ClassSearcher().doPath(new File(searchPath), packageName, predicate, true);
@@ -33,28 +38,39 @@ class FileScan implements Scan {
         private final Set<Class<?>> classPaths = new HashSet<>();
 
         private Set<Class<?>> doPath(final File file, String packageName, final Predicate<Class<?>> predicate, final boolean flag) {
-
             if (file.isDirectory()) {
-                //文件夹我们就递归
+                /*
+                 * Folder to continue
+                 */
                 final File[] files = file.listFiles();
                 if (!flag) {
                     packageName = packageName + "." + file.getName();
                 }
-
-                for (final File f1 : files) {
-                    this.doPath(f1, packageName, predicate, false);
+                if (Objects.nonNull(files)) {
+                    for (final File f1 : files) {
+                        this.doPath(f1, packageName, predicate, false);
+                    }
                 }
-            } else {//标准文件
-                //标准文件我们就判断是否是class文件
+            } else {
+                /*
+                 * Whether it's .class file
+                 */
                 if (file.getName().endsWith(CLASS_SUFFIX)) {
-                    //如果是class文件我们就放入我们的集合中。
+                    /*
+                     * If it's class, put into our set here.
+                     */
                     try {
-                        final Class<?> clazz = Class.forName(packageName + "." + file.getName().substring(0, file.getName().lastIndexOf(".")));
+                        /*
+                         * Class name extraction
+                         */
+                        final Class<?> clazz = Thread
+                                .currentThread().getContextClassLoader()
+                                .loadClass(packageName + "." + file.getName().substring(0, file.getName().lastIndexOf(".")));
                         if (predicate == null || predicate.test(clazz)) {
                             this.classPaths.add(clazz);
                         }
                     } catch (final ClassNotFoundException e) {
-                        e.printStackTrace();
+                        // Nothing to do when could not found.
                     }
                 }
             }

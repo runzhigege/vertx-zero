@@ -32,6 +32,12 @@ class PackHunter {
         }
     }
 
+    /*
+     * Scanned target package here
+     * Verified between
+     * 1) development environment
+     * 2) production environment
+     */
     static Set<String> getPackages() {
         final Package[] packages = Package.getPackages();
         final Set<String> packageDirs = new TreeSet<>();
