@@ -10,7 +10,7 @@ public class ScanBase {
     private final transient Set<Class<?>> classes;
 
     public ScanBase() {
-        this.classes = Pack.getClasses(null);
+        this.classes = Pack.getClasses();
     }
 
     protected Set<Class<?>> getClasses() {

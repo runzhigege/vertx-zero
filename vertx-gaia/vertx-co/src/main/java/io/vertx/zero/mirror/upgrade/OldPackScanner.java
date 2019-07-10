@@ -1,4 +1,4 @@
-package io.vertx.zero.mirror;
+package io.vertx.zero.mirror.upgrade;
 
 import io.vertx.zero.eon.FileSuffix;
 import io.vertx.zero.eon.Protocols;
@@ -20,9 +20,9 @@ import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 
 /**
- * PackScanner
+ * OldPackScanner
  */
-class PackScanner {
+class OldPackScanner {
 
     static Set<Class<?>> getClasses(final Predicate<Class<?>> filter,
                                     final String zeroScan) {
@@ -127,7 +127,7 @@ class PackScanner {
         final File[] dirfiles = file.listFiles(new ClassFileFilter());
         // Pack all files
         final String packageName = (packName.startsWith(Strings.DOT)) ?
-                packName.substring(1, packName.length()) :
+                packName.substring(1) :
                 packName;
         // Whether there exist another folder
         final String processedName = packageName.replace("/", Strings.DOT);

@@ -51,7 +51,7 @@ public class ZeroAnno {
 
     static {
         /* 1.Scan the packages **/
-        final Set<Class<?>> clazzes = Pack.getClasses(null);
+        final Set<Class<?>> clazzes = Pack.getClasses();
         /* EndPoint **/
         Inquirer<Set<Class<?>>> inquirer =
                 Ut.singleton(EndPointInquirer.class);
