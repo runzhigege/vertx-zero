@@ -20,9 +20,9 @@ import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 
 /**
- * PackScanner
+ * OldPackScanner
  */
-class PackScanner {
+class OldPackScanner {
 
     static Set<Class<?>> getClasses(final Predicate<Class<?>> filter,
                                     final String zeroScan) {
