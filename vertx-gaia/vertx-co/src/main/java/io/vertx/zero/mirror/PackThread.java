@@ -1,10 +1,6 @@
 package io.vertx.zero.mirror;
 
-import org.reflections.Reflections;
-import org.reflections.scanners.ResourcesScanner;
-import org.reflections.scanners.SubTypesScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
+import io.vertx.zero.mirror.previous.PackScan;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +11,6 @@ import java.util.Set;
  */
 class PackThread extends Thread {
     private final transient String pkg;
-    private final transient Reflections reflections;
     private final Set<Class<?>> classes = new HashSet<>();
 
     PackThread(final String pkg) {
@@ -24,37 +19,21 @@ class PackThread extends Thread {
          */
         this.setName("package-scanner-" + super.getId());
         this.pkg = pkg;
-        this.reflections = new Reflections(new ConfigurationBuilder()
-                .setUrls(ClasspathHelper.forPackage(pkg))
-                .setScanners(
-                        new SubTypesScanner(false),
-                        new ResourcesScanner()
-                )
-        );
     }
 
     @Override
     public void run() {
         /*
-         * Get all types in current reflection of package.
+         * Scanned classes in current environment.
          */
-        final Set<String> names = this.reflections.getAllTypes();
-        final Set<Class<?>> classSet = new HashSet<>();
+        final Set<Class<?>> scanned = PackScan.getClasses(null, this.pkg);
         /*
-         * Old version
+         * Scanned classes with previous mode.
          */
-        // SCANNER.search(this.pkg, this.filter);
-        // OldPackScanner.getClasses(this.filter, this.pkg);
-        names.forEach(name -> {
-            try {
-                classSet.add(Thread
-                        .currentThread().getContextClassLoader()
-                        .loadClass(name));
-            } catch (final Throwable ex) {
-                // LOGGER.info(ex.getMessage());
-            }
-        });
-        this.classes.addAll(classSet);
+        /* final Set<Class<?>> previous =
+                PackScan.getClasses(null, this.pkg); */
+
+        this.classes.addAll(scanned);
     }
 
     public Set<Class<?>> getClasses() {
