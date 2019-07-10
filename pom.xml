@@ -75,21 +75,25 @@
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
         <vertx.jooq.code.version>4.1.0</vertx.jooq.code.version>
         <mysql.version>8.0.16</mysql.version>
+        <!-- Java Reflection -->
+        <reflect.asm.version>1.11.9</reflect.asm.version>
+        <lombok.version>1.18.8</lombok.version>
+        <asm.version>7.1</asm.version>
+        <cglib.version>3.2.12</cglib.version>
+        <reflection.version>0.9.11</reflection.version>
+        <!-- Etcd -->
+        <etcd.version>2.17.0</etcd.version>
+        <!-- Bean Validation -->
+        <hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
 
         <jwt.version>3.8.1</jwt.version>
-        <reflect.asm.version>1.11.9</reflect.asm.version>
-        <asm.version>7.1</asm.version>
-        <lombok.version>1.18.8</lombok.version>
         <jetbrains.version>17.0.0</jetbrains.version>
         <guice.version>4.1.0</guice.version>
-        <hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
         <scala.version>2.13.0</scala.version>
         <feign.version>8.18.0</feign.version>
         <guava.version>28.0-jre</guava.version>
         <codehaus.janino.version>3.0.14</codehaus.janino.version>
-        <cglib.version>3.2.12</cglib.version>
         <ignite.version>2.7.5</ignite.version>
-        <etcd.version>2.17.0</etcd.version>
         <mongodb.async.version>3.10.1</mongodb.async.version>
         <!-- Apache Common -->
         <common.jexl.version>3.1</common.jexl.version>
@@ -590,6 +594,12 @@
                 <groupId>com.esotericsoftware</groupId>
                 <artifactId>reflectasm</artifactId>
                 <version>${reflect.asm.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${reflection.version}</version>
             </dependency>
             <!-- http://mvnrepository.com/artifact/junit/junit -->
             <dependency>

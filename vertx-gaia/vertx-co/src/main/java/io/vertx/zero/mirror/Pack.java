@@ -11,7 +11,6 @@ import io.zero.epic.Ut;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.function.Predicate;
 
 /**
  * Pack the package to extract classes.
@@ -26,10 +25,6 @@ public final class Pack {
     }
 
     public static Set<Class<?>> getClasses() {
-        return getClasses(null);
-    }
-
-    public static Set<Class<?>> getClasses(final Predicate<Class<?>> filter) {
         /*
          * Get all packages that will be scanned.
          */
@@ -45,7 +40,7 @@ public final class Pack {
              * 1) Current project classes
              * 2) For zero extension module, we also should add dependency classes into result.
              */
-            CLASSES.addAll(multiClasses(packageDirs.toArray(new String[]{}), filter));
+            CLASSES.addAll(multiClasses(packageDirs.toArray(new String[]{})));
             LOGGER.info(Info.CLASSES, String.valueOf(CLASSES.size()));
             /*
              * Debug in file
@@ -65,14 +60,13 @@ public final class Pack {
      * It's turning performance for scanner.
      */
     private static Set<Class<?>> multiClasses(
-            final String[] packageDir,
-            final Predicate<Class<?>> filter) {
+            final String[] packageDir) {
         /*
          * Counter of all references of `PackThread`
          */
         final Set<PackThread> references = new HashSet<>();
         final Disposable disposable = Observable.fromArray(packageDir)
-                .map(item -> new PackThread(item, filter))
+                .map(PackThread::new)
                 .map(item -> Ut.addThen(references, item))
                 .subscribe(Thread::start);
 

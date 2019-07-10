@@ -48,8 +48,7 @@ class PackHunter {
                 packageDirs.add(pending);
             }
         }
-        LOGGER.info(Info.PACKAGES, String.valueOf(packageDirs.size()),
-                String.valueOf(packages.length));
+        LOGGER.info(Info.PACKAGES, String.valueOf(packageDirs.size()), String.valueOf(packages.length));
         return packageDirs;
     }
 }

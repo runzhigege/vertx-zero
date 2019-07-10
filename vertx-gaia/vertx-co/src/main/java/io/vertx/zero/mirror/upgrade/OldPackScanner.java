@@ -1,4 +1,4 @@
-package io.vertx.zero.mirror;
+package io.vertx.zero.mirror.upgrade;
 
 import io.vertx.zero.eon.FileSuffix;
 import io.vertx.zero.eon.Protocols;
