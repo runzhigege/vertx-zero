@@ -10,7 +10,7 @@ public class PackTc extends ZeroBase {
 
     @Test
     public void testScan(final TestContext context) {
-        final Set<Class<?>> clazzes = Pack.getClasses(null);
+        final Set<Class<?>> clazzes = Pack.getClasses();
         for (final Class<?> clazz : clazzes) {
             // System.out.println(clazz);
         }
