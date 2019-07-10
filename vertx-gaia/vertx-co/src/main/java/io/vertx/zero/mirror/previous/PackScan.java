@@ -1,4 +1,4 @@
-package io.vertx.zero.mirror.upgrade;
+package io.vertx.zero.mirror.previous;
 
 import io.vertx.zero.eon.FileSuffix;
 import io.vertx.zero.eon.Protocols;
@@ -20,12 +20,12 @@ import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 
 /**
- * OldPackScanner
+ * PackScan
  */
-class OldPackScanner {
+public class PackScan {
 
-    static Set<Class<?>> getClasses(final Predicate<Class<?>> filter,
-                                    final String zeroScan) {
+    public static Set<Class<?>> getClasses(final Predicate<Class<?>> filter,
+                                           final String zeroScan) {
         // The first class collection
         final Set<Class<?>> classes = new LinkedHashSet<>();
         return Fn.getNull(() -> {
