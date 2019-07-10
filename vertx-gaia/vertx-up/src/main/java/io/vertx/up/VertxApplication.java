@@ -8,7 +8,6 @@ import io.vertx.up.boot.DansApplication;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
 import io.vertx.up.web.Runner;
-import io.vertx.up.web.ZeroAnno;
 import io.vertx.up.web.ZeroLauncher;
 import io.vertx.up.web.anima.*;
 import io.vertx.zero.config.ServerVisitor;
@@ -82,7 +81,7 @@ public class VertxApplication {
              * some preparing failure, here we replaced `static {}` with `prepare()` calling before any instance
              * of VertxApplication/DansApplication.
              */
-            ZeroAnno.prepare();
+            // ZeroAnno.prepare();
 
             /*
              * Then the container could start

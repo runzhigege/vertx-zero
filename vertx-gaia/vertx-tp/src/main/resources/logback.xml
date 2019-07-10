@@ -63,6 +63,7 @@
     <!-- Logback -->
     <logger name="ch.qos.logback" level="WARN"/>
     <logger name="cn.justfly.training.logging" level="WARN"/>
+    <logger name="org.reflections" level="WARN"/>
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>

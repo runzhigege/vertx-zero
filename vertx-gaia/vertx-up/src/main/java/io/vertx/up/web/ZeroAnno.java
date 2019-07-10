@@ -49,7 +49,7 @@ public class ZeroAnno {
     private final static Set<Mission>
             JOBS = new HashSet<>();
 
-    public static void prepare() {
+    static {
         /* 1.Scan the packages **/
         final Set<Class<?>> clazzes = Pack.getClasses();
         /* EndPoint **/
