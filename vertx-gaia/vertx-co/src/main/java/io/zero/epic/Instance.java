@@ -136,7 +136,7 @@ final class Instance {
      */
     static Class<?> uniqueChild(final Class<?> interfaceCls) {
         return Fn.getNull(null, () -> {
-            final Set<Class<?>> classes = Pack.getClasses(null);
+            final Set<Class<?>> classes = Pack.getClasses();
             final List<Class<?>> filtered = classes.stream()
                     .filter(item -> interfaceCls.isAssignableFrom(item)
                             && item != interfaceCls)

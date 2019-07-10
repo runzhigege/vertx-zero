@@ -127,7 +127,7 @@ class PackScanner {
         final File[] dirfiles = file.listFiles(new ClassFileFilter());
         // Pack all files
         final String packageName = (packName.startsWith(Strings.DOT)) ?
-                packName.substring(1, packName.length()) :
+                packName.substring(1) :
                 packName;
         // Whether there exist another folder
         final String processedName = packageName.replace("/", Strings.DOT);

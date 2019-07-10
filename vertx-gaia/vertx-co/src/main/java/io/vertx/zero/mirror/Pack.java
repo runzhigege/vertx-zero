@@ -18,86 +18,26 @@ public final class Pack {
 
     private static final Annal LOGGER = Annal.get(Pack.class);
 
-    private static final Set<Class<?>> CLASSES = new HashSet<>();
-
-    private static final ConcurrentHashSet<String> FORBIDDEN = new ConcurrentHashSet<String>() {
-        {
-            this.add("java");
-            this.add("javax");
-            this.add("jdk");
-            // Sax & Yaml
-            this.add("org.xml");
-            this.add("org.yaml");
-            // Idea
-            this.add("com.intellij");
-            // Sun
-            this.add("sun");
-            this.add("com.sun");
-            // Netty
-            this.add("io.netty");
-            // Rxjava
-            this.add("io.reactivex");
-            // Jackson
-            this.add("com.fasterxml");
-            // Logback
-            this.add("ch.qos");
-            this.add("org.slf4j");
-            this.add("org.apache");
-            // Vert.x
-            this.add("io.vertx.core");
-            this.add("io.vertx.spi");
-            // Asm
-            this.add("org.ow2");
-            this.add("org.objectweb");
-            this.add("com.esotericsoftware");
-            // Hazelcast
-            this.add("com.hazelcast");
-            // Glassfish
-            this.add("org.glassfish");
-            // Junit
-            this.add("org.junit");
-            this.add("junit");
-            // Hamcrest
-            this.add("org.hamcrest");
-        }
-    };
+    private static final Set<Class<?>> CLASSES = new ConcurrentHashSet<>();
 
     private Pack() {
     }
 
-    public static Set<Class<?>> getClasses(final Predicate<Class<?>> filter,
-                                           final String... zeroScans) {
-        if (CLASSES.isEmpty()) {
-            if (0 < zeroScans.length) {
-                CLASSES.addAll(multiClasses(zeroScans, filter));
-            } else {
-                final Package[] packages = Package.getPackages();
-                final Set<String> packageDirs = new HashSet<>();
-                for (final Package pkg : packages) {
-                    final String pending = pkg.getName();
-                    final boolean skip = FORBIDDEN.stream().anyMatch(pending::startsWith);
-                    if (!skip) {
-                        packageDirs.add(pending);
-                    }
-                }
-                // Fix big issue of current classpath scan, Must put . of classpath into current scan path.
-                packageDirs.add(Strings.DOT);
-                LOGGER.info(Info.PACKAGES, String.valueOf(packageDirs.size()),
-                        String.valueOf(packages.length));
-                CLASSES.addAll(multiClasses(packageDirs.toArray(new String[]{}), filter));
-            }
-        }
-        return CLASSES;
+    public static Set<Class<?>> getClasses() {
+        return getClasses(null);
     }
 
-    @SuppressWarnings("unused")
-    private static Set<Class<?>> singleClasses(
-            final String[] packageDir,
-            final Predicate<Class<?>> filter) {
-        return Observable.fromArray(packageDir)
-                .map(pkgName -> PackScanner.getClasses(filter, pkgName))
-                .reduce(new HashSet<Class<?>>(), Ut::combineSet)
-                .blockingGet();
+    public static Set<Class<?>> getClasses(final Predicate<Class<?>> filter) {
+        /*
+         * Get all packages that will be scanned.
+         */
+        if (CLASSES.isEmpty()) {
+            final Set<String> packageDirs = PackHunter.getPackages();
+            packageDirs.add(Strings.DOT);
+            CLASSES.addAll(multiClasses(packageDirs.toArray(new String[]{}), filter));
+            LOGGER.info(Info.CLASSES, String.valueOf(CLASSES.size()));
+        }
+        return CLASSES;
     }
 
     private static Set<Class<?>> multiClasses(
