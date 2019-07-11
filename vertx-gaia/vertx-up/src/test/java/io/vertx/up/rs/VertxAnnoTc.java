@@ -5,8 +5,8 @@ import io.vertx.quiz.example.AnnoAgent;
 import io.vertx.quiz.example.AnnoExceAgent;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.micro.ZeroHttpAgent;
-import io.vertx.up.web.ZeroAnno;
-import io.vertx.up.web.ZeroHelper;
+import io.zero.runtime.ZeroAnno;
+import io.zero.runtime.ZeroHelper;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
@@ -33,18 +33,18 @@ public class VertxAnnoTc {
     }
 
     public void testDefined(final TestContext context) {
-        final boolean isDefined = isDefine(AnnoExceAgent.class,
+        final boolean isDefined = this.isDefine(AnnoExceAgent.class,
                 ZeroHttpAgent.class);
         context.assertTrue(isDefined);
     }
 
     public void testUndefined(final TestContext context) {
-        final boolean isDefined = isDefine(AnnoExceAgent.class,
+        final boolean isDefined = this.isDefine(AnnoExceAgent.class,
                 ZeroHttpAgent.class, AnnoAgent.class);
         context.assertFalse(isDefined);
     }
 
     public void testExcpetion() {
-        isDefine(ZeroHttpAgent.class);
+        this.isDefine(ZeroHttpAgent.class);
     }
 }

@@ -1,10 +1,10 @@
 package io.vertx.up.rs.config;
 
 import io.vertx.ext.unit.TestContext;
-import io.zero.quiz.ZeroBase;
 import io.vertx.quiz.example.*;
 import io.vertx.zero.exception.PathAnnoEmptyException;
-import io.vertx.up.web.ZeroHelper;
+import io.zero.quiz.ZeroBase;
+import io.zero.runtime.ZeroHelper;
 import org.junit.Test;
 
 import javax.ws.rs.Path;
@@ -24,17 +24,17 @@ public class PathResolverTc extends ZeroBase {
         final Method[] methods = root.getDeclaredMethods();
         for (final Method method : methods) {
             final Path path = ZeroHelper.getPath(method);
-            getLogger().info("[TEST] Parse info: {0}, method = {1}, Path = {2}.",
+            this.getLogger().info("[TEST] Parse info: {0}, method = {1}, Path = {2}.",
                     root.getName(),
                     method.getName(),
                     (null == path) ? null : path.value());
             if (null != path) {
                 final String uri = PathResolver.resolve(
-                        path, parseRoot(root));
+                        path, this.parseRoot(root));
                 pathes.add(uri);
             }
         }
-        getLogger().info("[TEST] Parsed :{0}", pathes);
+        this.getLogger().info("[TEST] Parsed :{0}", pathes);
         return pathes;
     }
 
@@ -45,25 +45,25 @@ public class PathResolverTc extends ZeroBase {
 
     @Test
     public void testRt1(final TestContext context) {
-        context.assertEquals("/api", parseRoot(Root1.class));
+        context.assertEquals("/api", this.parseRoot(Root1.class));
     }
 
     @Test
     public void testRt2(final TestContext context) {
-        context.assertEquals("/api", parseRoot(Root2.class));
+        context.assertEquals("/api", this.parseRoot(Root2.class));
     }
 
     @Test
     public void testRt3(final TestContext context) {
-        context.assertEquals("/api", parseRoot(Root3.class));
+        context.assertEquals("/api", this.parseRoot(Root3.class));
     }
 
     @Test
     public void testMd1(final TestContext context) {
-        final Set<String> pathes = parseMethod(Method1.class);
+        final Set<String> pathes = this.parseMethod(Method1.class);
         final Set<String> expected = new TreeSet<String>() {
             {
-                add("/api/test");
+                this.add("/api/test");
             }
         };
         context.assertEquals(expected, pathes);
@@ -71,10 +71,10 @@ public class PathResolverTc extends ZeroBase {
 
     @Test
     public void testMd2(final TestContext context) {
-        final Set<String> pathes = parseMethod(Method2.class);
+        final Set<String> pathes = this.parseMethod(Method2.class);
         final Set<String> expected = new TreeSet<String>() {
             {
-                add("/api/test/:name");
+                this.add("/api/test/:name");
             }
         };
         context.assertEquals(expected, pathes);
@@ -82,11 +82,11 @@ public class PathResolverTc extends ZeroBase {
 
     @Test
     public void testMd3(final TestContext context) {
-        final Set<String> pathes = parseMethod(Method3.class);
+        final Set<String> pathes = this.parseMethod(Method3.class);
         final Set<String> expected = new TreeSet<String>() {
             {
-                add("/api/test/:name");
-                add("/api/test/:id");
+                this.add("/api/test/:name");
+                this.add("/api/test/:id");
             }
         };
         context.assertEquals(expected, pathes);
@@ -94,11 +94,11 @@ public class PathResolverTc extends ZeroBase {
 
     @Test
     public void testMd4(final TestContext context) {
-        final Set<String> pathes = parseMethod(Method4.class);
+        final Set<String> pathes = this.parseMethod(Method4.class);
         final Set<String> expected = new TreeSet<String>() {
             {
-                add("/test/:name");
-                add("/test/:id");
+                this.add("/test/:name");
+                this.add("/test/:id");
             }
         };
         context.assertEquals(expected, pathes);

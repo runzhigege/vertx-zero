@@ -2,8 +2,8 @@ package io.vertx.up.rs.argument;
 
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.rs.Filler;
-import io.vertx.up.web.ZeroSerializer;
 import io.zero.epic.fn.Fn;
+import io.zero.runtime.ZeroSerializer;
 
 import java.util.Map;
 

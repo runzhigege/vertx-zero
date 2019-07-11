@@ -9,12 +9,12 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Aim;
 import io.vertx.up.rs.hunt.AsyncAim;
 import io.vertx.up.rs.hunt.OneWayAim;
-import io.vertx.up.web.ZeroAnno;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.ReturnTypeException;
 import io.vertx.zero.exception.WorkerMissingException;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
+import io.zero.runtime.ZeroAnno;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

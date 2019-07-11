@@ -3,7 +3,7 @@ package io.vertx.tp.rbac.accredit;
 import cn.vertxup.domain.tables.pojos.SResource;
 import io.vertx.core.Future;
 import io.vertx.tp.rbac.atom.ScRequest;
-import io.vertx.zero.matrix.DataBound;
+import io.vertx.zero.atom.DataBound;
 
 /*
  * ResourceMatrix capture for user/role session storage

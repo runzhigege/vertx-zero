@@ -2,7 +2,7 @@ package io.vertx.up.micro;
 
 import io.vertx.core.ServidorOptions;
 import io.vertx.core.http.HttpServerOptions;
-import io.vertx.up.web.ZeroGrid;
+import io.zero.runtime.ZeroGrid;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
