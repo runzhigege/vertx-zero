@@ -54,7 +54,8 @@ public class ZeroTool {
                     data.mergeIn(yamlData);
                 }
             }catch (EmptyStreamException ex){
-                LOGGER.warn(ex.getMessage());
+                // LOGGER.warn(ex.getMessage());
+                // Here do nothing to avoid useless log out
             }
             if (!data.isEmpty()) {
                 Storage.CONFIG.put(filename, data);
