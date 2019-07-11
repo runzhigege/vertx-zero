@@ -3,6 +3,7 @@ package io.vertx.up.uca.yaml;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.FileSuffix;
 import io.vertx.up.eon.Strings;
+import io.vertx.up.eon.Values;
 import io.vertx.up.exception.heart.EmptyStreamException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
@@ -25,7 +26,7 @@ public class ZeroTool {
         final JsonObject merged = new JsonObject();
         if (extension) {
             // Read the internal configuration instead
-            final JsonObject internal = readDirect("ke/config/" + produce(key));
+            final JsonObject internal = readDirect(Values.CONFIG_INTERNAL_FILE + produce(key));
             if (null != internal) {
                 merged.mergeIn(internal, true);
             }
@@ -55,6 +56,7 @@ public class ZeroTool {
             } catch (final EmptyStreamException ex) {
                 // LOGGER.warn(ex.getMessage());
                 // Here do nothing to avoid useless log out
+                // ex.printStackTrace();
             }
             if (!data.isEmpty()) {
                 Storage.CONFIG.put(filename, data);
