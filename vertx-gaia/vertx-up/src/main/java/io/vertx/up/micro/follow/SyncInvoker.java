@@ -3,7 +3,7 @@ package io.vertx.up.micro.follow;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.up.unity.Ux;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.util.Ut;
 
 import java.lang.reflect.Method;

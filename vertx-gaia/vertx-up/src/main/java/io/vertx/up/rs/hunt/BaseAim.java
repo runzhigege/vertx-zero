@@ -4,7 +4,7 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.eventbus.Message;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.annotations.Address;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.Rule;
 import io.vertx.up.atom.agent.Depot;
 import io.vertx.up.atom.agent.Event;

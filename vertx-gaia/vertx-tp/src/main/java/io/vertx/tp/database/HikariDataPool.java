@@ -1,7 +1,7 @@
 package io.vertx.tp.database;
 
 import com.zaxxer.hikari.HikariDataSource;
-import io.vertx.up.atom.Database;
+import io.vertx.up.commune.config.Database;
 import io.vertx.up.log.Annal;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;

@@ -1,4 +1,4 @@
-package io.vertx.up.atom;
+package io.vertx.up.commune.config;
 
 import com.fasterxml.jackson.databind.JsonObjectDeserializer;
 import com.fasterxml.jackson.databind.JsonObjectSerializer;

@@ -1,7 +1,7 @@
 package io.vertx.up.job.plugin;
 
 import io.vertx.core.Future;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 /*
  * Job income before, this income interface should provide Future<JobIn> to Job to consume

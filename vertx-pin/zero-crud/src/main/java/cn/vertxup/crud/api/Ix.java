@@ -3,7 +3,7 @@ package cn.vertxup.crud.api;
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpStatusCode;
 import io.vertx.up.unity.Ux;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 interface Http {
     /* 201 */

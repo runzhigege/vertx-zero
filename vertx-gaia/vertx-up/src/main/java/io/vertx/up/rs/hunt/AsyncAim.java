@@ -5,7 +5,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.hold.Virtual;
 import io.vertx.up.rs.Aim;

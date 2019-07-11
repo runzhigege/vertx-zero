@@ -2,7 +2,7 @@ package io.vertx.up.plugin.extension;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 /**
  * 「Extension」

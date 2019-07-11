@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.servicediscovery.Record;
 import io.vertx.up.annotations.Ipc;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.flux.IpcData;
 import io.vertx.up.eon.em.IpcType;
 import io.vertx.up.exception._501RpcAddressWrongException;

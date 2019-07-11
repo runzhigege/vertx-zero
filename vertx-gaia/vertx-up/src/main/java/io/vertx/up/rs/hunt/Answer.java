@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.vertx.up.annotations.SessionData;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.eon.ID;
 import io.vertx.up.exception._500InternalServerException;

@@ -6,7 +6,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.Session;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.Commercial;
 import io.vertx.up.eon.ID;

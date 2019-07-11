@@ -50,7 +50,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 @Queue
 public class FutureWorker {
@@ -74,7 +74,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.unity.Uson;
 import io.vertx.up.annotations.Ipc;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 public class HelloInsider {
 

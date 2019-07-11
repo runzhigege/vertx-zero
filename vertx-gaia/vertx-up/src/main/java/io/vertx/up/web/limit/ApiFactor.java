@@ -1,6 +1,6 @@
 package io.vertx.up.web.limit;
 
-import io.vertx.up.boot.Motor;
+import io.vertx.up.runtime.ZeroMotor;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.micro.ZeroApiAgent;
 
@@ -31,7 +31,7 @@ public class ApiFactor implements Factor {
     public ConcurrentMap<ServerType, Class<?>> agents() {
         /* 1.Find Agent for deploy **/
         final ConcurrentMap<ServerType, Class<?>> agents
-                = Motor.agents(ServerType.HTTP, DEFAULT_AGENTS, INTERNALS);
+                = ZeroMotor.agents(ServerType.HTTP, DEFAULT_AGENTS, INTERNALS);
         /* 2. Filter invalid agents. **/
         final Set<ServerType> scanned = new HashSet<>(agents.keySet());
         final Set<ServerType> keeped = INTERNALS.keySet();

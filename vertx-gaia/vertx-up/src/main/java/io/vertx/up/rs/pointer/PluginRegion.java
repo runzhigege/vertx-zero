@@ -1,7 +1,7 @@
 package io.vertx.up.rs.pointer;
 
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.plugin.extension.PlugRegion;
 import io.vertx.up.util.Ut;
 

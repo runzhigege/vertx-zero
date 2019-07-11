@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Contract;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
 import io.vertx.up.eon.em.JobStatus;

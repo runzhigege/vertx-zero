@@ -4,7 +4,7 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.up.annotations.Ipc;
 import io.vertx.up.annotations.Worker;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.worker.Receipt;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.follow.Invoker;

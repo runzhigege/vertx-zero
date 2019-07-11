@@ -2,7 +2,7 @@ package io.vertx.up.rs.hunt;
 
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.annotations.Codex;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.Rule;
 import io.vertx.up.atom.agent.Depot;
 import io.vertx.up.atom.agent.Event;

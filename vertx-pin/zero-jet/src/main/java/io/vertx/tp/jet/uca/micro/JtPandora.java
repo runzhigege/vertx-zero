@@ -10,7 +10,7 @@ import io.vertx.tp.jet.uca.tunnel.AdaptorChannel;
 import io.vertx.tp.jet.uca.tunnel.ConnectorChannel;
 import io.vertx.tp.jet.uca.tunnel.DirectorChannel;
 import io.vertx.tp.optic.jet.JtChannel;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.Commercial;
 import io.vertx.up.eon.em.ChannelType;

@@ -1,4 +1,4 @@
-package io.vertx.up.atom;
+package io.vertx.up.commune;
 
 import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
@@ -11,7 +11,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
-import io.vertx.up.atom.envelop.Rib;
+import io.vertx.up.commune.envelop.Rib;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
 import io.vertx.zero.exception.IndexExceedException;

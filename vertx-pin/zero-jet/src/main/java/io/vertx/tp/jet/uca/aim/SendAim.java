@@ -9,7 +9,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.monitor.JtMonitor;
 import io.vertx.tp.jet.uca.JtAim;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.rs.hunt.Answer;
 
 public class SendAim implements JtAim {

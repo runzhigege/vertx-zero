@@ -4,7 +4,7 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ipc.eon.IpcResponse;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.exception._500UnexpectedRpcException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ipc.DataEncap;

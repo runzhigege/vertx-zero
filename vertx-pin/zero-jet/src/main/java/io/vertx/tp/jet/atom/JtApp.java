@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
-import io.vertx.up.atom.Database;
+import io.vertx.up.commune.config.Database;
 
 import java.io.Serializable;
 

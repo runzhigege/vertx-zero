@@ -3,7 +3,7 @@ package io.vertx.tp.optic.jet;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.uca.param.DataIngest;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.fn.Fn;
 
 /*

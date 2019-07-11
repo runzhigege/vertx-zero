@@ -3,7 +3,7 @@ package io.vertx.up.rs.hunt;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.micro.ipc.client.TunnelClient;
 import io.vertx.up.rs.Aim;

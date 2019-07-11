@@ -1,7 +1,7 @@
 package io.vertx.up.media;
 
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.Epsilon;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.exception.WebException;

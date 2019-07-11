@@ -12,7 +12,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.client.HttpResponse;
 import io.vertx.servicediscovery.Record;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._404ServiceNotFoundException;
 import io.vertx.up.exception._405MethodForbiddenException;

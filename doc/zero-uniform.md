@@ -95,7 +95,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.FindOptions;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.kidd.Rapider;
 
 import javax.inject.Inject;
@@ -154,7 +154,7 @@ package com.tlk.topic.api;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.FindOptions;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 public interface TopicStub {
 
@@ -174,7 +174,7 @@ import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.FindOptions;
 import io.vertx.ext.mongo.MongoClient;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.kidd.Heart;
 
 import javax.inject.infix.Mongo;

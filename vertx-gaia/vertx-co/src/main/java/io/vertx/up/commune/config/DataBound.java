@@ -1,4 +1,4 @@
-package io.vertx.up.atom;
+package io.vertx.up.commune.config;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;

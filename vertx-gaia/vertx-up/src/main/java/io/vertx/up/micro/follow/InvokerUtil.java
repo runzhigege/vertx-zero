@@ -2,7 +2,7 @@ package io.vertx.up.micro.follow;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Values;
 import io.vertx.zero.exception.AsyncSignatureException;

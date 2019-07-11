@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.up.unity.Ux;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.fn.Fn;
 

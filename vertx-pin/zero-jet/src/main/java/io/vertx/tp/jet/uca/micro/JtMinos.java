@@ -8,7 +8,7 @@ import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.monitor.JtMonitor;
 import io.vertx.tp.jet.refine.Jt;
 import io.vertx.tp.optic.jet.JtConsumer;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 

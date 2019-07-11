@@ -1,4 +1,4 @@
-package io.vertx.up.atom.envelop;
+package io.vertx.up.commune.envelop;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
