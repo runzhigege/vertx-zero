@@ -4,8 +4,8 @@ import io.vertx.core.json.DecodeException;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Values;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.up.eon.Values;
+import io.vertx.zero.fn.Fn;
 
 import java.math.BigDecimal;
 import java.util.Collection;

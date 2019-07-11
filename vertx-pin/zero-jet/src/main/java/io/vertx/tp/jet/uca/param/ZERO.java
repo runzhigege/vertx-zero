@@ -2,7 +2,7 @@ package io.vertx.tp.jet.uca.param;
 
 import io.vertx.tp.jet.cv.em.ParamMode;
 import io.vertx.tp.optic.jet.JtIngest;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

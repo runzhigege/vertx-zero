@@ -3,9 +3,9 @@ package io.vertx.tp.optic.atom;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.Strings;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;

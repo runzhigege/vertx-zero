@@ -3,7 +3,7 @@ package io.vertx.tp.plugin.excel.atom;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.excel.cell.ExValue;
 import io.vertx.up.commune.Json;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.Strings;
 
 import java.io.Serializable;
 import java.util.HashMap;

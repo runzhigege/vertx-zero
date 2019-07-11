@@ -6,7 +6,7 @@ import io.vertx.up.rs.Extractor;
 import io.vertx.up.rs.equip.DeployRotate;
 import io.vertx.up.rs.equip.Rotate;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

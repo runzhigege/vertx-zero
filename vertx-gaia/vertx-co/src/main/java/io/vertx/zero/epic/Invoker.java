@@ -5,8 +5,8 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.zero.exception.InvokingSpecException;
-import io.vertx.zero.epic.fn.Actuator;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Actuator;
+import io.vertx.zero.fn.Fn;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

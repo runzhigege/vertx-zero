@@ -3,10 +3,10 @@ package io.vertx.zero.epic;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 import io.vertx.zero.exception.ZeroException;
-import io.vertx.zero.epic.fn.Actuator;
-import io.vertx.zero.epic.fn.ZeroBiConsumer;
+import io.vertx.zero.fn.Actuator;
+import io.vertx.zero.fn.ZeroBiConsumer;
 
 import java.util.Collection;
 import java.util.List;

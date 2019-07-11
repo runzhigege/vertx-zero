@@ -5,8 +5,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxField;
 import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.zero.eon.Strings;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Strings;
+import io.vertx.up.eon.Values;
 import io.vertx.zero.epic.Ut;
 
 class UniqueActor extends AbstractActor {

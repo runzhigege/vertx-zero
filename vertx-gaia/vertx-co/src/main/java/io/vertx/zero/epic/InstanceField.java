@@ -3,8 +3,8 @@ package io.vertx.zero.epic;
 import io.vertx.up.annotations.Contract;
 import io.vertx.up.exception._412ContractFieldException;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Values;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.up.eon.Values;
+import io.vertx.zero.fn.Fn;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

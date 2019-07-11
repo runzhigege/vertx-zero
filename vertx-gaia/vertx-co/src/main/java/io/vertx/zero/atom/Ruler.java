@@ -3,14 +3,14 @@ package io.vertx.zero.atom;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.Strings;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.marshal.reliable.ForbiddenInsurer;
 import io.vertx.zero.marshal.reliable.Insurer;
 import io.vertx.zero.marshal.reliable.RequiredInsurer;
 import io.vertx.zero.marshal.reliable.TypedInsurer;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.text.MessageFormat;
 import java.util.concurrent.ConcurrentHashMap;

@@ -10,7 +10,7 @@ import io.vertx.up.eon.em.Etat;
 import io.vertx.up.eon.em.MessageModel;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.center.ZeroRegistry;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.Strings;
 
 import java.util.Arrays;
 import java.util.Set;

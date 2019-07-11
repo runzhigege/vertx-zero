@@ -15,19 +15,19 @@ class FixedAgha extends AbstractAgha {
         /*
          * Calculate started for delay output
          */
-        final long delay = this.getDelay(mission);
+        final long delay = getDelay(mission);
         final Future<Long> future = Future.future();
         /*
          * Preparing for job
          **/
-        this.preparing(mission);
+        preparing(mission);
 
-        this.interval().startAt(delay, mission.getDuration(), (timeId) -> {
+        interval().startAt(delay, mission.getDuration(), (timeId) -> {
             if (JobStatus.READY == mission.getStatus()) {
                 /*
                  * Running the job
                  */
-                this.working(mission).compose(envelop -> {
+                working(mission).compose(envelop -> {
                     /*
                      * Complete future and returned Async
                      */
@@ -43,7 +43,7 @@ class FixedAgha extends AbstractAgha {
         final Instant end = mission.getInstant();
         final Instant start = Instant.now();
         final long delay = ChronoUnit.MILLIS.between(start, end);
-        this.getLogger().info(Info.JOB_DELAY, mission.getName(), String.valueOf(delay));
+        getLogger().info(Info.JOB_DELAY, mission.getName(), String.valueOf(delay));
         return delay < 0 ? 0L : delay;
     }
 }

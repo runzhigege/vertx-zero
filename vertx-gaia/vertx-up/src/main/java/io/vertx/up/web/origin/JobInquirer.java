@@ -3,14 +3,10 @@ package io.vertx.up.web.origin;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Job;
 import io.vertx.up.atom.worker.Mission;
-import io.vertx.up.eon.Info;
-import io.vertx.up.eon.ZeroValue;
+import io.vertx.up.eon.*;
 import io.vertx.up.eon.em.JobStatus;
 import io.vertx.up.eon.em.JobType;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.FileSuffix;
-import io.vertx.zero.eon.Strings;
-import io.vertx.zero.eon.Values;
 import io.vertx.zero.epic.Ut;
 
 import java.lang.annotation.Annotation;
@@ -54,7 +50,7 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
         name = Ut.isNil(name) ? clazz.getName() : name;
 
         /* Initialization */
-        final Mission mission = this.config(annotation);
+        final Mission mission = config(annotation);
 
         /* Basic data object initialized */
         mission.setName(name);
@@ -71,7 +67,7 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
         mission.setStatus(JobStatus.STARTING);
         /* Time Unit */
         if (Values.RANGE == mission.getDuration()) {
-            mission.setDuration(this.duration(annotation));
+            mission.setDuration(duration(annotation));
         }
         /* code sync */
         if (Ut.isNil(mission.getCode())) {
@@ -91,7 +87,7 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
         final String config = Ut.invoke(annotation, "config");
         final Mission mission;
         if (Ut.notNil(config)) {
-            final JsonObject json = Ut.ioJObject(this.resolve(config));
+            final JsonObject json = Ut.ioJObject(resolve(config));
             /*
              * Removed
              * - status

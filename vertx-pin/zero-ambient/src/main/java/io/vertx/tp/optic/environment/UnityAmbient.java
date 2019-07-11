@@ -5,7 +5,7 @@ import cn.vertxup.ambient.domain.tables.pojos.XSource;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

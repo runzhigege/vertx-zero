@@ -4,13 +4,13 @@ import io.reactivex.Observable;
 import io.vertx.up.annotations.Qualifier;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 import io.vertx.zero.exception.MultiAnnotatedException;
 import io.vertx.zero.exception.NamedImplementionException;
 import io.vertx.zero.exception.NamedNotFoundException;
 import io.vertx.zero.exception.QualifierMissedException;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import javax.inject.Inject;
 import javax.inject.Named;

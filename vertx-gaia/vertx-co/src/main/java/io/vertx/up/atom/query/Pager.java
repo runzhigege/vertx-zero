@@ -5,7 +5,7 @@ import io.vertx.up.exception._400PagerInvalidException;
 import io.vertx.up.exception._500QueryMetaNullException;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.io.Serializable;
 

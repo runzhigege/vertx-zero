@@ -1,7 +1,7 @@
 package io.vertx.zero.runtime;
 
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.lang.annotation.Annotation;
 import java.util.Arrays;

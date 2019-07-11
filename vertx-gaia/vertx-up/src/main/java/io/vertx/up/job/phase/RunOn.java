@@ -33,21 +33,21 @@ class RunOn {
         final Method method = mission.getOn();
         Element.onceLog(mission,
                 () -> LOGGER.info(Info.PHASE_3RD_JOB_RUN, mission.getName(), method.getName()));
-        return this.execute(envelop, method, mission);
+        return execute(envelop, method, mission);
     }
 
     Future<Envelop> callback(final Envelop envelop, final Mission mission) {
         final Method method = mission.getOff();
         Element.onceLog(mission,
                 () -> LOGGER.info(Info.PHASE_6TH_JOB_CALLBACK, mission.getName(), method.getName()));
-        return this.execute(envelop, method, mission);
+        return execute(envelop, method, mission);
     }
 
     private Future<Envelop> execute(final Envelop envelop, final Method method, final Mission mission) {
         if (envelop.valid()) {
             final Object proxy = mission.getProxy();
             try {
-                final Object[] arguments = this.buildArgs(envelop, method, mission);
+                final Object[] arguments = buildArgs(envelop, method, mission);
                 return Ut.invokeAsync(proxy, method, arguments)
                         /* Normalizing data */
                         .compose(this::normalize);
@@ -86,10 +86,10 @@ class RunOn {
         final List<Object> argsList = new ArrayList<>();
         if (0 < parameters.length) {
             for (final Class<?> parameterType : parameters) {
-                argsList.add(this.buildArgs(parameterType, envelop, mission));
+                argsList.add(buildArgs(parameterType, envelop, mission));
             }
         } else {
-            throw new _417JobMethodException(this.getClass(), mission.getName());
+            throw new _417JobMethodException(getClass(), mission.getName());
         }
         return argsList.toArray();
     }
@@ -149,7 +149,7 @@ class RunOn {
             return mission;
         } else {
 
-            throw new _417JobMethodException(this.getClass(), mission.getName());
+            throw new _417JobMethodException(getClass(), mission.getName());
         }
     }
 }

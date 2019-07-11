@@ -1,10 +1,10 @@
 package io.vertx.zero.runtime.pkg;
 
-import io.vertx.zero.eon.FileSuffix;
-import io.vertx.zero.eon.Protocols;
-import io.vertx.zero.eon.Strings;
-import io.vertx.zero.eon.Values;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.up.eon.FileSuffix;
+import io.vertx.up.eon.Protocols;
+import io.vertx.up.eon.Strings;
+import io.vertx.up.eon.Values;
+import io.vertx.zero.fn.Fn;
 
 import javax.io.filter.ClassFileFilter;
 import java.io.File;

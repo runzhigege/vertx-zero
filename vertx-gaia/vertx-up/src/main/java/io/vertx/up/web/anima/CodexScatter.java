@@ -2,11 +2,12 @@ package io.vertx.up.web.anima;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.eon.FileSuffix;
+import io.vertx.up.eon.Info;
+import io.vertx.up.eon.Strings;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.FileSuffix;
-import io.vertx.zero.eon.Strings;
-import io.vertx.zero.exception.heart.EmptyStreamException;
 import io.vertx.zero.epic.Ut;
+import io.vertx.zero.exception.heart.EmptyStreamException;
 import io.vertx.zero.runtime.ZeroCodex;
 
 import java.util.List;

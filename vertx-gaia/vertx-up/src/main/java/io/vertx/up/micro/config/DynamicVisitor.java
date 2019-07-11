@@ -3,17 +3,17 @@ package io.vertx.up.micro.config;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.eon.Info;
 import io.vertx.up.eon.Plugins;
+import io.vertx.up.eon.Values;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.atom.Ruler;
-import io.vertx.zero.eon.Info;
-import io.vertx.zero.eon.Values;
+import io.vertx.zero.epic.Ut;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.demon.ServerConfigException;
+import io.vertx.zero.fn.Fn;
 import io.vertx.zero.marshal.node.Node;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -34,32 +34,32 @@ public class DynamicVisitor extends HttpServerVisitor {
     public ConcurrentMap<Integer, HttpServerOptions> visit(final String... key)
             throws ZeroException {
         // 1. Must be the first line, fixed position.
-        Ut.ensureEqualLength(this.getClass(), 1, (Object[]) key);
+        Ut.ensureEqualLength(getClass(), 1, (Object[]) key);
         // 2. Visit the node for server
-        final JsonObject data = this.NODE.read();
+        final JsonObject data = NODE.read();
 
         Fn.outZero(null == data || !data.containsKey(KEY), LOGGER,
                 ServerConfigException.class,
-                this.getClass(), null == data ? null : data.encode());
+                getClass(), null == data ? null : data.encode());
         // 3. Convert input parameters.
-        this.type = ServerType.valueOf(key[Values.IDX]);
-        return this.visit(data.getJsonArray(KEY));
+        type = ServerType.valueOf(key[Values.IDX]);
+        return visit(data.getJsonArray(KEY));
     }
 
     private ConcurrentMap<Integer, HttpServerOptions> visit(final JsonArray serverData)
             throws ZeroException {
-        this.getLogger().info(Info.INF_B_VERIFY, KEY, this.type, serverData.encode());
+        getLogger().info(Info.INF_B_VERIFY, KEY, type, serverData.encode());
         Ruler.verify(KEY, serverData);
         final ConcurrentMap<Integer, HttpServerOptions> map =
                 new ConcurrentHashMap<>();
-        this.extract(serverData, map);
-        this.getLogger().info(Info.INF_A_VERIFY, KEY, this.type, map.keySet());
+        extract(serverData, map);
+        getLogger().info(Info.INF_A_VERIFY, KEY, type, map.keySet());
         return map;
     }
 
     @Override
     protected boolean isServer(final JsonObject item) {
-        return null != this.type &&
-                this.type.match(item.getString(YKEY_TYPE));
+        return null != type &&
+                type.match(item.getString(YKEY_TYPE));
     }
 }

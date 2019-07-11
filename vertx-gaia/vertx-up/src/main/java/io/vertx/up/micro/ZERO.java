@@ -44,6 +44,14 @@ interface Info {
 
     String MSG_INVOKER = "[ ZERO ] ( Invoker ) Zero system selected {0} as invoker," +
             "the metadata receipt hash code = {1}, invoker size = {2}.";
+
+    String JOB_EMPTY = "[ Job ] Zero system detect no jobs, the scheduler will be stopped.";
+
+    String JOB_CONFIG_NULL = "[ Job ] ( Ignore ) Because there is no definition in `vertx-job.yml`, Job container is stop....";
+
+    String JOB_MONITOR = "[ Job ] Zero system detect {0} jobs, the scheduler will begin....";
+
+    String JOB_AGHA_SELECTED = "[ Job: {1} ] Agha = {0} has been selected for job {1} of type {2}";
 }
 
 interface Pool {

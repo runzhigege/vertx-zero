@@ -7,7 +7,7 @@ import io.vertx.core.net.PemKeyCertOptions;
 import io.vertx.core.net.TCPSSLOptions;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ssl.CertPipe;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 import io.vertx.quiz.core.tls.Cert;
 
 /**

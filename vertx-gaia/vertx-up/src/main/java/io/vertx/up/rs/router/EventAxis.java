@@ -13,7 +13,7 @@ import io.vertx.up.rs.dispatch.ModeSplitter;
 import io.vertx.up.rs.dispatch.StandardVerifier;
 import io.vertx.up.web.failure.CommonEndurer;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 import io.vertx.zero.runtime.ZeroAnno;
 
 import java.util.Set;

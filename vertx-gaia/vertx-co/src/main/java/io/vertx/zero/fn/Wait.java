@@ -1,9 +1,9 @@
-package io.vertx.zero.epic.fn;
+package io.vertx.zero.fn;
 
 
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
-import io.vertx.zero.epic.fn.wait.Case;
+import io.vertx.zero.fn.wait.Case;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;

@@ -1,7 +1,7 @@
 package io.vertx.up.web.serialization;
 
-import io.vertx.zero.eon.Strings;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.up.eon.Strings;
+import io.vertx.zero.fn.Fn;
 
 /**
  * String

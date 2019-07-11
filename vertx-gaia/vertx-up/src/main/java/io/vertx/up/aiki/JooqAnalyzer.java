@@ -10,11 +10,11 @@ import io.vertx.up.atom.query.Pager;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.atom.Mirror;
 import io.vertx.zero.atom.Mojo;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 import io.vertx.zero.exception.JooqFieldMissingException;
 import io.vertx.zero.exception.JooqMergeException;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 

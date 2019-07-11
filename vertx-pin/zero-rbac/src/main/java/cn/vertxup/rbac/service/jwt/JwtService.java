@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.atom.ScSession;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.aiki.Ux;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 
 /*
  * Jwt Token Service for:

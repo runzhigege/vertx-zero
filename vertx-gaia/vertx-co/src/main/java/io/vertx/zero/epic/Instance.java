@@ -2,10 +2,10 @@ package io.vertx.zero.epic;
 
 import com.esotericsoftware.reflectasm.ConstructorAccess;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 import io.vertx.zero.exception.DuplicatedImplException;
 import io.vertx.zero.runtime.ZeroPack;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;

@@ -12,7 +12,7 @@ import io.vertx.up.eon.em.ChannelType;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.atom.Database;
 import io.vertx.zero.atom.Integration;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.Strings;
 
 import javax.ws.rs.core.MediaType;
 import java.util.Set;

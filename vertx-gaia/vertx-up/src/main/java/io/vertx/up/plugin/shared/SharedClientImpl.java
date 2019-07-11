@@ -11,7 +11,7 @@ import io.vertx.core.shareddata.SharedData;
 import io.vertx.up.exception._501SharedDataModeException;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.epic.container.Kv;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

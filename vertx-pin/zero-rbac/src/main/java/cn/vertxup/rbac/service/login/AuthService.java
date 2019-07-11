@@ -12,7 +12,7 @@ import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.log.Annal;
 import io.vertx.up.secure.Security;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import javax.inject.Inject;
 

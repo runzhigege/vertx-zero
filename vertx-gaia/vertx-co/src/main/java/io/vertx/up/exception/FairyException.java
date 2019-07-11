@@ -1,6 +1,6 @@
 package io.vertx.up.exception;
 
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.Strings;
 
 public abstract class FairyException extends WebException {
 

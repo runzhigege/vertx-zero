@@ -2,7 +2,7 @@ package io.vertx.up.web.serialization;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 public class CommonSaber extends BaseSaber {
     @Override

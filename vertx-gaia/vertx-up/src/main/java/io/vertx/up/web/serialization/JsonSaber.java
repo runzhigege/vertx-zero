@@ -2,7 +2,7 @@ package io.vertx.up.web.serialization;
 
 import io.vertx.core.json.DecodeException;
 import io.vertx.up.exception._400ParameterFromStringException;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.util.function.Function;
 

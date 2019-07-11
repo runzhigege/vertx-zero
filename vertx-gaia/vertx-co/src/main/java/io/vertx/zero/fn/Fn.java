@@ -1,4 +1,4 @@
-package io.vertx.zero.epic.fn;
+package io.vertx.zero.fn;
 
 import io.vertx.core.Future;
 import io.vertx.up.exception.WebException;
@@ -6,7 +6,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.UpException;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.ZeroRunException;
-import io.vertx.zero.epic.fn.wait.Case;
+import io.vertx.zero.fn.wait.Case;
 
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Consumer;

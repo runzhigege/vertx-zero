@@ -1,4 +1,4 @@
-package io.vertx.zero.epic.fn.wait;
+package io.vertx.zero.fn.wait;
 
 import java.util.Objects;
 import java.util.function.Function;

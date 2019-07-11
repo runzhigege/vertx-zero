@@ -5,7 +5,7 @@ import io.vertx.core.impl.ConcurrentHashSet;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Actuator;
+import io.vertx.zero.fn.Actuator;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.log.Log;
 import io.vertx.zero.log.internal.Log4JAnnal;

@@ -7,8 +7,8 @@ import io.vertx.servicediscovery.Record;
 import io.vertx.servicediscovery.types.HttpEndpoint;
 import io.vertx.up.eon.em.EtcdPath;
 import io.vertx.up.micro.center.ZeroRegistry;
-import io.vertx.zero.eon.Strings;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Strings;
+import io.vertx.up.eon.Values;
 import io.vertx.zero.epic.Ut;
 
 import java.util.HashSet;

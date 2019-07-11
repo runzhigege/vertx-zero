@@ -3,8 +3,8 @@ package io.vertx.zero.epic;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Values;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.up.eon.Values;
+import io.vertx.zero.fn.Fn;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

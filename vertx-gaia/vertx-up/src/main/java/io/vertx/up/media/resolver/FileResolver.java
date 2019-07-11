@@ -7,7 +7,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.Epsilon;
 import io.vertx.up.log.Annal;
 import io.vertx.up.media.Resolver;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 import io.vertx.zero.runtime.ZeroSerializer;
 
 import java.io.File;

@@ -6,7 +6,7 @@ import io.vertx.up.annotations.Authorize;
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

@@ -1,9 +1,9 @@
 package io.vertx.zero.epic;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.Strings;
 import io.vertx.zero.exception.heart.JexlExpressionException;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 import org.apache.commons.jexl3.*;
 
 import java.util.Collection;

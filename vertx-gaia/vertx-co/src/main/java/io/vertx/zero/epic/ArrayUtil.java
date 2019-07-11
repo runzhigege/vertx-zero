@@ -2,7 +2,7 @@ package io.vertx.zero.epic;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 
 import java.lang.reflect.Array;
 import java.util.Objects;

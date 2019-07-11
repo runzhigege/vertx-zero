@@ -12,7 +12,7 @@ import io.vertx.up.plugin.session.SessionInfix;
 import io.vertx.up.rs.Axis;
 import io.vertx.up.rs.secure.Bolt;
 import io.vertx.up.web.failure.AuthenticateEndurer;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 import io.vertx.zero.runtime.ZeroAnno;
 
 import java.util.Set;

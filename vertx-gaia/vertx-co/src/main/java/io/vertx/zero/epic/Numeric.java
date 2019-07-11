@@ -3,7 +3,7 @@ package io.vertx.zero.epic;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.math.BigDecimal;
 import java.util.Random;

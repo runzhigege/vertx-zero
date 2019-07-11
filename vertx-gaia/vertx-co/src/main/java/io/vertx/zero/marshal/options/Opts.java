@@ -6,7 +6,7 @@ import io.vertx.zero.exception.heart.EmptyStreamException;
 import io.vertx.zero.exception.heart.LimeFileException;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroTool;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

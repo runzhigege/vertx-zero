@@ -6,7 +6,7 @@ import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ipc.client.TunnelClient;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 import io.vertx.zero.epic.Ut;
 
 import java.lang.reflect.Method;

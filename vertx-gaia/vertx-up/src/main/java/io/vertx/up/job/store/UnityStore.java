@@ -1,9 +1,9 @@
 package io.vertx.up.job.store;
 
+import io.vertx.tp.plugin.job.JobPool;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
 import io.vertx.up.log.Annal;
-import io.vertx.tp.plugin.job.JobPool;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -26,9 +26,9 @@ class UnityStore implements JobStore {
 
     @Override
     public Set<Mission> fetch() {
-        final Set<Mission> missions = this.reader.fetch();
+        final Set<Mission> missions = reader.fetch();
         LOGGER.info(Info.JOB_SCANNED, missions.size(), "Programming");
-        final Set<Mission> storage = this.store.fetch();
+        final Set<Mission> storage = store.fetch();
         LOGGER.info(Info.JOB_SCANNED, storage.size(), "Dynamic/Stored");
         /* Merged */
         final Set<Mission> result = new HashSet<>();
@@ -43,15 +43,15 @@ class UnityStore implements JobStore {
     @Override
     public JobStore add(final Mission mission) {
         JobPool.save(mission);
-        return this.store.add(mission);
+        return store.add(mission);
     }
 
     @Override
     public Mission fetch(final String name) {
         return JobPool.get(name, () -> {
-            Mission mission = this.reader.fetch(name);
+            Mission mission = reader.fetch(name);
             if (Objects.isNull(mission)) {
-                mission = this.store.fetch(name);
+                mission = store.fetch(name);
             }
             return mission;
         });
@@ -60,12 +60,12 @@ class UnityStore implements JobStore {
     @Override
     public JobStore remove(final Mission mission) {
         JobPool.remove(mission.getName());
-        return this.store.remove(mission);
+        return store.remove(mission);
     }
 
     @Override
     public JobStore update(final Mission mission) {
         JobPool.save(mission);
-        return this.store.update(mission);
+        return store.update(mission);
     }
 }

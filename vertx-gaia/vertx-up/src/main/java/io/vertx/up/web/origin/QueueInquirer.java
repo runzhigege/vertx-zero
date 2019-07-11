@@ -7,7 +7,7 @@ import io.vertx.up.annotations.Queue;
 import io.vertx.up.eon.Info;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.WorkerConflictException;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;
@@ -28,7 +28,7 @@ public class QueueInquirer implements Inquirer<Set<Class<?>>> {
                 .filter((item) -> item.isAnnotationPresent(Queue.class))
                 .collect(Collectors.toSet());
         LOGGER.info(Info.SCANED_QUEUE, queues.size());
-        this.ensure(queues);
+        ensure(queues);
         return queues;
     }
 
@@ -43,10 +43,10 @@ public class QueueInquirer implements Inquirer<Set<Class<?>>> {
                     final Class<?> parameterTypes = method.getParameterTypes()[0];
                     if (Message.class.isAssignableFrom(parameterTypes)) {
                         Fn.outUp(void.class != returnType && Void.class != returnType, LOGGER,
-                                WorkerConflictException.class, this.getClass(), method);
+                                WorkerConflictException.class, getClass(), method);
                     } else {
                         Fn.outUp(void.class == returnType || Void.class == returnType, LOGGER,
-                                WorkerConflictException.class, this.getClass(), method);
+                                WorkerConflictException.class, getClass(), method);
                     }
                 })
                 .dispose();

@@ -8,7 +8,7 @@ import io.vertx.up.exception._500RpcMethodInvokeException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ipc.client.TunnelClient;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.lang.reflect.Method;
 
