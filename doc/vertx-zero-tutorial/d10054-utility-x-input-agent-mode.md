@@ -67,7 +67,7 @@ public interface IrCommentApi {
 package com.tlk.micro.comment;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.fn.Fn;
 
 public class IrCommentActor implements IrCommentApi {
@@ -95,7 +95,7 @@ import com.tlk.eon.TargetType;
 import com.tlk.infra.up.god.cv.Addr;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.atom.Envelop;

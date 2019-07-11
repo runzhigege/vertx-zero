@@ -8,7 +8,7 @@ import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.init.ScPin;
 import io.vertx.tp.rbac.refine.Sc;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.eon.ID;
 
 import java.io.Serializable;

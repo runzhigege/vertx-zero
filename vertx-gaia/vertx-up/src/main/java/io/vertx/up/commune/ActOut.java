@@ -2,7 +2,7 @@ package io.vertx.up.commune;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.atom.Envelop;
 
 import java.io.Serializable;

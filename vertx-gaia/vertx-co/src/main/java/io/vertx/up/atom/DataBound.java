@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.Values;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
 import java.util.HashSet;

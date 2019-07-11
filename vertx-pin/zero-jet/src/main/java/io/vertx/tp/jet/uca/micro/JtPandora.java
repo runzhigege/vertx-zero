@@ -14,7 +14,7 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.Commercial;
 import io.vertx.up.eon.em.ChannelType;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;

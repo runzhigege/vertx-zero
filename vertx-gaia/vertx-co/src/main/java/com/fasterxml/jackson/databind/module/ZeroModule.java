@@ -16,7 +16,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.InstantSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.key.ZonedDateTimeKeySerializer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.aiki.Uson;
+import io.vertx.up.unity.Uson;
 
 import java.time.*;
 import java.util.Iterator;

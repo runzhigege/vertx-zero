@@ -9,8 +9,8 @@ import io.vertx.tp.error._401PasswordWrongException;
 import io.vertx.tp.error._449UserNotFoundException;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.cv.AuthMsg;
-import io.vertx.up.aiki.Uson;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Uson;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.fn.Fn;
 
 import javax.inject.Inject;

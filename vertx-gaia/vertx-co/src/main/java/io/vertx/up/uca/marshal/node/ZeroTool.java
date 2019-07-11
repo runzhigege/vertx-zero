@@ -5,7 +5,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.eon.FileSuffix;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.exception.heart.EmptyStreamException;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 public class ZeroTool {
     private static final Annal LOGGER = Annal.get(ZeroTool.class);

@@ -9,7 +9,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.media.Resolver;
 import io.vertx.up.media.resolver.UnsetResolver;
 import io.vertx.up.uca.marshal.node.Node;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;

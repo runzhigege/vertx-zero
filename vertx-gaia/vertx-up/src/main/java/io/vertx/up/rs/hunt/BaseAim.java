@@ -16,7 +16,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.media.Analyzer;
 import io.vertx.up.media.MediaAnalyzer;
 import io.vertx.up.rs.validation.Validator;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Actuator;
 import io.vertx.up.fn.Fn;
 

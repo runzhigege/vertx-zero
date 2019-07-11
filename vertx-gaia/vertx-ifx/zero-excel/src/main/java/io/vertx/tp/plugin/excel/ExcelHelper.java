@@ -8,7 +8,7 @@ import io.vertx.tp.plugin.excel.atom.ExTable;
 import io.vertx.tp.plugin.excel.ranger.ExBound;
 import io.vertx.tp.plugin.excel.ranger.RowBound;
 import io.vertx.up.eon.FileSuffix;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;

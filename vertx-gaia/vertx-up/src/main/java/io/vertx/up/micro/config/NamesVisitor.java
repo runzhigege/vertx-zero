@@ -10,7 +10,7 @@ import io.vertx.up.eon.Values;
 import io.vertx.up.exception.ZeroException;
 import io.vertx.up.exception.demon.ServerConfigException;
 import io.vertx.up.uca.marshal.node.Node;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;

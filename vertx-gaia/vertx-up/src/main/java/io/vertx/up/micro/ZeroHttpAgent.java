@@ -16,7 +16,7 @@ import io.vertx.up.micro.center.ZeroRegistry;
 import io.vertx.up.rs.Axis;
 import io.vertx.up.rs.router.*;
 import io.vertx.up.eon.Values;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.runtime.ZeroGrid;
 

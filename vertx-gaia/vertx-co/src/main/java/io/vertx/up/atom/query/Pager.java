@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.exception._400PagerInvalidException;
 import io.vertx.up.exception._500QueryMetaNullException;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 import java.io.Serializable;

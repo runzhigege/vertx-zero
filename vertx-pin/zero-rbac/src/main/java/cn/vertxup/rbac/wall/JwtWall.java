@@ -9,7 +9,7 @@ import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.web.handler.AuthHandler;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.refine.Sc;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Authenticate;
 import io.vertx.up.annotations.Wall;
 import io.vertx.up.log.Annal;

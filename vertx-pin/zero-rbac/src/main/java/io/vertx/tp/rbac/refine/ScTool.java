@@ -4,7 +4,7 @@ import cn.vertxup.rbac.domain.tables.pojos.SResource;
 import io.vertx.tp.rbac.atom.ScConfig;
 import io.vertx.tp.rbac.init.ScPin;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.util.Locale;
 

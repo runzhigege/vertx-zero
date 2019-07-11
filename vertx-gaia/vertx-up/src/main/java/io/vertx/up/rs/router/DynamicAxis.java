@@ -9,7 +9,7 @@ import io.vertx.up.rs.Axis;
 import io.vertx.up.eon.Values;
 import io.vertx.up.uca.marshal.node.Node;
 import io.vertx.up.uca.marshal.node.ZeroUniform;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.runtime.ZeroAmbient;
 

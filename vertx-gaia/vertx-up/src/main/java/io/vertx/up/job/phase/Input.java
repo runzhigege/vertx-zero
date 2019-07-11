@@ -8,7 +8,7 @@ import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
 import io.vertx.up.job.plugin.JobIncome;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.util.Objects;
 

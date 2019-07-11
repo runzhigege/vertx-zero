@@ -6,7 +6,7 @@ import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.eon.ID;
 import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Strings;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.util.HashSet;
 import java.util.Objects;

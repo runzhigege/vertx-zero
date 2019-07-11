@@ -45,7 +45,7 @@ public interface EnvelopApi {
 package up.god.micro.worker;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Ipc;
 import io.vertx.up.annotations.Queue;

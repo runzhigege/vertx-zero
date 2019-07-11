@@ -15,7 +15,7 @@ import io.vertx.up.exception.zero.EtcdNetworkException;
 import io.vertx.zero.exception.MicroModeUpException;
 import io.vertx.zero.exception.UpClassArgsException;
 import io.vertx.zero.exception.UpClassInvalidException;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.runtime.Anno;
 import io.vertx.up.runtime.Runner;

@@ -1,6 +1,6 @@
 package io.vertx.tp.optic.fantom;
 
-import io.vertx.up.aiki.UxJooq;
+import io.vertx.up.unity.UxJooq;
 import io.vertx.up.log.Annal;
 
 /*

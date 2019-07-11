@@ -6,7 +6,7 @@ import io.vertx.tp.ui.atom.UiConfig;
 import io.vertx.tp.ui.cv.UiFolder;
 import io.vertx.tp.ui.refine.Ui;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

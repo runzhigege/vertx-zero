@@ -2,7 +2,7 @@ package com.fasterxml.jackson.databind;
 
 import com.fasterxml.jackson.core.JsonParser;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.aiki.Uson;
+import io.vertx.up.unity.Uson;
 
 import java.io.IOException;
 

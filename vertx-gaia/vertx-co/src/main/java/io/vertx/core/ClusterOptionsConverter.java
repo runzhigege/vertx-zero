@@ -2,7 +2,7 @@ package io.vertx.core;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.spi.cluster.ClusterManager;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 class ClusterOptionsConverter {

@@ -3,7 +3,7 @@ package io.vertx.tp.crud.actor;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.tp.ke.cv.KeField;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.log.Annal;
 

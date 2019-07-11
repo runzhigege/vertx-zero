@@ -6,7 +6,7 @@ import io.vertx.tp.error._501ChannelErrorException;
 import io.vertx.tp.jet.monitor.JtMonitor;
 import io.vertx.tp.optic.jet.JtChannel;
 import io.vertx.tp.optic.jet.JtComponent;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Contract;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Mission;
@@ -15,7 +15,7 @@ import io.vertx.up.commune.ActOut;
 import io.vertx.up.commune.Commercial;
 import io.vertx.up.commune.Record;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.util.Objects;
 

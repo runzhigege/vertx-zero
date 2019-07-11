@@ -10,7 +10,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ssl.TrustPipe;
 import io.vertx.up.uca.marshal.node.Node;
 import io.vertx.up.uca.marshal.node.ZeroUniform;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;

@@ -4,7 +4,7 @@ import io.vertx.core.VertxException;
 import io.vertx.core.impl.ConcurrentHashSet;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.exception.ZeroException;
 import io.vertx.up.fn.Actuator;
 import io.vertx.up.log.internal.Log4JAnnal;
@@ -13,7 +13,7 @@ import io.vertx.up.runtime.ZeroAmbient;
 import java.util.Set;
 
 /**
- * Unite Logging system connect to vert.x, io.vertx.zero.io.vertx.zero.io.vertx.up.io.vertx.up.io.vertx.up.epic kit of Vertx-Zero
+ * Unite Logging system connect to vert.x, io.vertx.zero.io.vertx.zero.io.vertx.up.io.vertx.up.io.vertx.up.util kit of Vertx-Zero
  */
 public interface Annal {
 

@@ -9,7 +9,7 @@ import io.vertx.up.eon.em.DeployMode;
 import io.vertx.up.log.Annal;
 import io.vertx.up.uca.marshal.node.Node;
 import io.vertx.up.uca.marshal.node.ZeroUniform;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.lang.annotation.Annotation;
 import java.util.concurrent.ConcurrentHashMap;

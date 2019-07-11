@@ -13,7 +13,7 @@ import io.vertx.up.eon.ID;
 import io.vertx.up.eon.Info;
 import io.vertx.up.exception._417JobMethodException;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import javax.ws.rs.BodyParam;
 import java.lang.reflect.Method;

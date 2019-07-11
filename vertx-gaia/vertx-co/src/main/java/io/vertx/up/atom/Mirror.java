@@ -3,7 +3,7 @@ package io.vertx.up.atom;
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 import java.text.MessageFormat;

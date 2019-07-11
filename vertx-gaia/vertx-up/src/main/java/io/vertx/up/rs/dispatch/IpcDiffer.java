@@ -6,7 +6,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Aim;
 import io.vertx.up.rs.hunt.IpcAim;
 import io.vertx.zero.exception.ReturnTypeException;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 import java.lang.reflect.Method;

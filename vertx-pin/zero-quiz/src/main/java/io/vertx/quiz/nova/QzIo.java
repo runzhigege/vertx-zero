@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
 import io.vertx.up.eon.FileSuffix;
 import io.vertx.up.eon.Strings;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 import io.vertx.quiz.cv.QzApi;
 

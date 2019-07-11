@@ -12,7 +12,7 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.jwt.JWT;
 import io.vertx.ext.jwt.JWTOptions;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.exception.*;
 import io.vertx.up.log.Annal;
 import io.vertx.up.secure.Security;

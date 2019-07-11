@@ -4,7 +4,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.Values;
 import io.vertx.zero.exception.PathAnnoEmptyException;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 import javax.ws.rs.Path;

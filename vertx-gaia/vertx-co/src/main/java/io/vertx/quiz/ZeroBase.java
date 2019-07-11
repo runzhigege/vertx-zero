@@ -7,7 +7,7 @@ import io.vertx.ext.unit.junit.RunTestOnContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
 import io.vertx.up.exception.ZeroException;
 import io.vertx.up.uca.marshal.reliable.Insurer;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
 

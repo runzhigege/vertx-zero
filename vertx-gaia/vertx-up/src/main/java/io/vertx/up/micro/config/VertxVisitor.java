@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.Ruler;
 import io.vertx.up.eon.Info;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.exception.ZeroException;
 import io.vertx.up.exception.demon.ClusterConflictException;
 import io.vertx.up.fn.Fn;

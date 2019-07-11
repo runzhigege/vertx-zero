@@ -12,7 +12,7 @@ The first batch methods in Utility X is for Json Processing, these methods start
 Above three methods could process the data type conversion of `io.vertx.core.json.JsonObject`. this chapter focus on these three methods usage. Before you do this testing, we'll create new Data Object for the type `T`.
 
 ```java
-package io.vertx.up.aiki;
+package io.vertx.up.unity;
 
 import java.io.Serializable;
 
@@ -73,11 +73,11 @@ Then create the resource up.god.file `d10047.json`, the up.god.file content shou
 This chapter focus on `toJson(T)` method for conversion between Data Object and Json Object. The testing code should be as following:
 
 ```java
-package io.vertx.up.aiki;
+package io.vertx.up.unity;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.quiz.TestBase;
-import io.vertx.up.epic.Jackson;
+import io.vertx.up.util.Jackson;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -102,7 +102,7 @@ Here we could see that `Ux.toJson` method could convert a data object to JsonObj
 This chapter focus on `toJson(T,String)` method for conversion between Data Object and Json Object based on configuration files. Firstly you should create new configuration up.god.file:
 
 ```yaml
-type: "io.vertx.up.aiki.D10047Obj"
+type: "io.vertx.up.unity.D10047Obj"
 mapping:
   name: username
 ```
@@ -184,7 +184,7 @@ D10047Obj{name='Lang', email='lang.yu@hpe.com', age=32, male=true}
 This method will involve the same mapping up.god.file:
 
 ```yaml
-type: "io.vertx.up.aiki.D10047Obj"
+type: "io.vertx.up.unity.D10047Obj"
 mapping:
   name: username
 ```

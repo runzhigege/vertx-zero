@@ -6,7 +6,7 @@ import io.vertx.up.atom.worker.Receipt;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
 import io.vertx.zero.exception.AddressWrongException;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.runtime.Anno;
 import io.vertx.up.runtime.ZeroAnno;

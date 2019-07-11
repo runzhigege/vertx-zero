@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.Values;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 class AtQuery {
 

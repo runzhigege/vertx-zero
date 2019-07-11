@@ -10,7 +10,7 @@ import io.vertx.up.eon.ID;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._400ValidationException;
 import io.vertx.up.eon.Strings;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.runtime.ZeroCodex;
 
 import javax.validation.ConstraintViolation;

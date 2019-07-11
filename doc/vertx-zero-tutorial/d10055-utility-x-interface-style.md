@@ -131,7 +131,7 @@ import com.htl.up.god.cv.Addr;
 import com.htl.micro.login.LoginStub;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.atom.Envelop;

@@ -5,7 +5,7 @@ import io.vertx.up.exception.ZeroException;
 import io.vertx.up.uca.marshal.Visitor;
 import io.vertx.up.uca.marshal.node.Node;
 import io.vertx.up.uca.marshal.node.ZeroVertx;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 public class JObjectOpts implements Visitor<JsonObject> {
 

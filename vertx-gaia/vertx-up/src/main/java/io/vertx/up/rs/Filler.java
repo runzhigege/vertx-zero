@@ -2,7 +2,7 @@ package io.vertx.up.rs;
 
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.rs.argument.*;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import javax.ws.rs.*;
 import java.lang.annotation.Annotation;

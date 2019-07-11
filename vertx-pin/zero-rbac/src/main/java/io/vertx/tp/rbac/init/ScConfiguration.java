@@ -5,7 +5,7 @@ import io.vertx.tp.rbac.atom.ScConfig;
 import io.vertx.tp.rbac.cv.ScFolder;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 /*
  * Configuration class initialization

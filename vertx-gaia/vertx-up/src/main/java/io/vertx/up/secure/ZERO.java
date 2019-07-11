@@ -5,7 +5,7 @@ import io.vertx.up.eon.em.WallType;
 import io.vertx.up.plugin.mongo.MongoWall;
 import io.vertx.up.secure.jwt.JwtWall;
 import io.vertx.up.uca.marshal.Transformer;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
