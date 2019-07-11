@@ -1,11 +1,11 @@
 package io.vertx.up.atom.query;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.exception._400PagerInvalidException;
-import io.vertx.up.exception._500QueryMetaNullException;
+import io.vertx.up.exception.web._400PagerInvalidException;
+import io.vertx.up.exception.web._500QueryMetaNullException;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
-import io.vertx.up.fn.Fn;
 
 import java.io.Serializable;
 
@@ -32,12 +32,12 @@ public class Pager implements Serializable {
     private transient int end;
 
     private Pager(final Integer page, final Integer size) {
-        this.init(page, size);
+        init(page, size);
     }
 
     private Pager(final JsonObject pageJson) {
-        this.ensure(pageJson);
-        this.init(pageJson.getInteger(PAGE), pageJson.getInteger(SIZE));
+        ensure(pageJson);
+        init(pageJson.getInteger(PAGE), pageJson.getInteger(SIZE));
     }
 
     /**
@@ -81,37 +81,37 @@ public class Pager implements Serializable {
     private void init(final Integer page, final Integer size) {
         // Page/Size
         Fn.outWeb(1 > page, LOGGER,
-                _400PagerInvalidException.class, this.getClass(), page);
+                _400PagerInvalidException.class, getClass(), page);
         this.page = page;
         // Default Size is 10
         this.size = 0 < size ? size : 10;
         Fn.safeNull(() -> {
             // Caculate
-            this.start = (this.page - 1) * this.size;
-            this.end = this.page * this.size;
+            start = (this.page - 1) * this.size;
+            end = this.page * this.size;
         }, this.page, this.size);
     }
 
     public JsonObject toJson() {
         final JsonObject data = new JsonObject();
-        data.put(PAGE, this.page);
-        data.put(SIZE, this.size);
+        data.put(PAGE, page);
+        data.put(SIZE, size);
         return data;
     }
 
     public int getPage() {
-        return this.page;
+        return page;
     }
 
     public int getSize() {
-        return this.size;
+        return size;
     }
 
     public int getStart() {
-        return this.start;
+        return start;
     }
 
     public int getEnd() {
-        return this.end;
+        return end;
     }
 }

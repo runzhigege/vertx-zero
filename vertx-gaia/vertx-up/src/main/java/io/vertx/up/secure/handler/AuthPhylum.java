@@ -9,9 +9,13 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.vertx.ext.web.handler.AuthHandler;
-import io.vertx.up.exception.*;
-import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Strings;
+import io.vertx.up.exception.WebException;
+import io.vertx.up.exception.web._400BadRequestException;
+import io.vertx.up.exception.web._401UnauthorizedException;
+import io.vertx.up.exception.web._403ForbiddenException;
+import io.vertx.up.exception.web._500InternalServerException;
+import io.vertx.up.log.Annal;
 
 import java.util.HashSet;
 import java.util.Set;

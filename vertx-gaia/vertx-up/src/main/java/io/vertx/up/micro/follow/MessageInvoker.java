@@ -3,7 +3,7 @@ package io.vertx.up.micro.follow;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.up.commune.Envelop;
-import io.vertx.up.exception._501RpcRejectException;
+import io.vertx.up.exception.web._501RpcRejectException;
 import io.vertx.up.util.Ut;
 
 import java.lang.reflect.Method;
@@ -19,7 +19,7 @@ public class MessageInvoker extends AbstractInvoker {
         final boolean valid =
                 (void.class == returnType || Void.class == returnType)
                         && Message.class.isAssignableFrom(paramCls);
-        InvokerUtil.verify(!valid, returnType, paramCls, this.getClass());
+        InvokerUtil.verify(!valid, returnType, paramCls, getClass());
     }
 
     @Override
@@ -36,6 +36,6 @@ public class MessageInvoker extends AbstractInvoker {
                      final Message<Envelop> message,
                      final Vertx vertx) {
         // Return void is reject by Rpc continue
-        throw new _501RpcRejectException(this.getClass());
+        throw new _501RpcRejectException(getClass());
     }
 }

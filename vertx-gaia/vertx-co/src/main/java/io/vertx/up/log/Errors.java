@@ -2,9 +2,8 @@ package io.vertx.up.log;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.eon.Tpl;
-import io.vertx.up.fn.Fn;
 import io.vertx.up.exception.heart.ErrorMissingException;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.uca.marshal.node.Node;
 
 import java.text.MessageFormat;
@@ -14,16 +13,19 @@ import java.text.MessageFormat;
  */
 public final class Errors {
 
+    private static final String ZERO_ERROR = "[ERR{0}] ({1}) ZeroException occus: {2}.";
+    private static final String WEB_ERROR = "[ERR{0}] ({1}) Web Exception occus: {2}.";
+
     public static String normalize(final Class<?> clazz,
                                    final int code,
                                    final Object... args) {
-        return normalize(clazz, code, Tpl.ZERO_ERROR, args);
+        return normalize(clazz, code, ZERO_ERROR, args);
     }
 
     public static String normalizeWeb(final Class<?> clazz,
                                       final int code,
                                       final Object... args) {
-        return normalize(clazz, code, Tpl.WEB_ERROR, args);
+        return normalize(clazz, code, WEB_ERROR, args);
     }
 
     private static String normalize(final Class<?> clazz,

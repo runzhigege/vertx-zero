@@ -4,21 +4,21 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.eventbus.Message;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.annotations.Address;
-import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.Rule;
 import io.vertx.up.atom.agent.Depot;
 import io.vertx.up.atom.agent.Event;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.eon.ID;
 import io.vertx.up.exception.WebException;
-import io.vertx.up.exception._500DeliveryErrorException;
-import io.vertx.up.exception._500EntityCastException;
+import io.vertx.up.exception.web._500DeliveryErrorException;
+import io.vertx.up.exception.web._500EntityCastException;
+import io.vertx.up.fn.Actuator;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.media.Analyzer;
 import io.vertx.up.media.MediaAnalyzer;
 import io.vertx.up.rs.validation.Validator;
 import io.vertx.up.util.Ut;
-import io.vertx.up.fn.Actuator;
-import io.vertx.up.fn.Fn;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -75,7 +75,7 @@ public abstract class BaseAim {
      */
     protected Object invoke(final Event event, final Object[] args) {
         final Method method = event.getAction();
-        this.getLogger().info("[ ZERO-DEBUG ] Method = {0}, Args = {1}",
+        getLogger().info("[ ZERO-DEBUG ] Method = {0}, Args = {1}",
                 method.getName(), Ut.fromJoin(args));
         return Ut.invoke(event.getProxy(), method.getName(), args);
     }
@@ -83,7 +83,7 @@ public abstract class BaseAim {
     protected Envelop failure(final String address,
                               final AsyncResult<Message<Envelop>> handler) {
         final WebException error
-                = new _500DeliveryErrorException(this.getClass(),
+                = new _500DeliveryErrorException(getClass(),
                 address,
                 Fn.getNull(null,
                         () -> handler.cause().getMessage(), handler.cause()));
@@ -99,7 +99,7 @@ public abstract class BaseAim {
             envelop = message.body();
         } catch (final Throwable ex) {
             final WebException error
-                    = new _500EntityCastException(this.getClass(),
+                    = new _500EntityCastException(getClass(),
                     address, ex.getMessage());
             envelop = Envelop.failure(error);
         }
@@ -107,20 +107,20 @@ public abstract class BaseAim {
     }
 
     protected Validator verifier() {
-        return this.verifier;
+        return verifier;
     }
 
     protected Annal getLogger() {
-        return Annal.get(this.getClass());
+        return Annal.get(getClass());
     }
 
     protected void executeRequest(final RoutingContext context,
                                   final Map<String, List<Rule>> rulers,
                                   final Depot depot) {
         try {
-            final Object[] args = this.buildArgs(context, depot.getEvent());
+            final Object[] args = buildArgs(context, depot.getEvent());
             // Execute web flow and uniform call.
-            Flower.executeRequest(context, rulers, depot, args, this.verifier());
+            Flower.executeRequest(context, rulers, depot, args, verifier());
         } catch (final WebException error) {
             // Bad request of 400 for parameter processing
             Flower.replyError(context, error, depot.getEvent());

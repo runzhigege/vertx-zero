@@ -1,10 +1,10 @@
 package io.vertx.up.util;
 
 import io.vertx.up.annotations.Contract;
-import io.vertx.up.exception._412ContractFieldException;
-import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Values;
+import io.vertx.up.exception.web._412ContractFieldException;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

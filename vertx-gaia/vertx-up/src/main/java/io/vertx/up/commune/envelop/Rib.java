@@ -3,7 +3,7 @@ package io.vertx.up.commune.envelop;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.eon.ZeroValue;
+import io.vertx.up.eon.Constants;
 import io.vertx.up.exception.WebException;
 
 public class Rib {
@@ -49,7 +49,7 @@ public class Rib {
     }
 
     public static boolean isIndex(final Integer argIndex) {
-        return ZeroValue.INDEXES.keySet().contains(argIndex);
+        return Constants.INDEXES.keySet().contains(argIndex);
     }
 
     public static void projection(final JsonObject reference, final JsonArray projection, final boolean clear) {

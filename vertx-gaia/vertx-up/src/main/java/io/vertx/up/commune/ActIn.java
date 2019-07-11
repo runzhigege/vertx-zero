@@ -2,8 +2,8 @@ package io.vertx.up.commune;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.query.Inquiry;
+import io.vertx.up.eon.Constants;
 import io.vertx.up.eon.ID;
-import io.vertx.up.eon.ZeroValue;
 import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
@@ -67,7 +67,7 @@ public class ActIn implements Serializable {
         final JsonObject rawJson = envelop.data();
         if (!Ut.isNil(rawJson)) {
             final long counter = rawJson.fieldNames().stream()
-                    .filter(ZeroValue.INDEXES::containsValue)
+                    .filter(Constants.INDEXES::containsValue)
                     .count();
             final JsonObject body;
             if (0 < counter) {

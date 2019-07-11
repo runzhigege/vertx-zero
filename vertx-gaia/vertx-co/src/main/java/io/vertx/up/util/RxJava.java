@@ -4,10 +4,10 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Values;
-import io.vertx.up.exception.rx.ReduceVerticalException;
+import io.vertx.up.exception.zero.ReduceVerticalException;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
 
 import java.util.HashSet;
 import java.util.Set;

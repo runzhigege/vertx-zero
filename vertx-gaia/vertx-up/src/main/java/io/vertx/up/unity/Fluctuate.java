@@ -8,7 +8,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.exception.WebException;
-import io.vertx.up.exception._500InternalServerException;
+import io.vertx.up.exception.web._500InternalServerException;
 import io.vertx.up.util.Ut;
 
 import java.util.*;

@@ -7,11 +7,11 @@ import io.vertx.up.atom.Rule;
 import io.vertx.up.atom.agent.Depot;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.eon.ID;
-import io.vertx.up.exception.WebException;
-import io.vertx.up.exception._400ValidationException;
 import io.vertx.up.eon.Strings;
-import io.vertx.up.util.Ut;
+import io.vertx.up.exception.WebException;
+import io.vertx.up.exception.web._400ValidationException;
 import io.vertx.up.runtime.ZeroCodex;
+import io.vertx.up.util.Ut;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -67,7 +67,7 @@ public class Validator {
         // 3. Throw out exception
         if (!constraints.isEmpty()) {
             final ConstraintViolation<T> item = constraints.iterator().next();
-            this.replyError(proxy, method, item);
+            replyError(proxy, method, item);
         }
     }
 
@@ -75,7 +75,7 @@ public class Validator {
                                 final ConstraintViolation<T> item) {
         if (null != item) {
             final WebException error
-                    = new _400ValidationException(this.getClass(),
+                    = new _400ValidationException(getClass(),
                     proxy.getClass(), method, item.getMessage());
             error.setReadible(item.getMessage());
             throw error;
@@ -100,7 +100,7 @@ public class Validator {
                 // 1. Check whether contains @BodyParam
                 .any(item -> BodyParam.class == item)
                 // 2. Build rulers
-                .map(item -> this.buildKey(depot.getEvent()))
+                .map(item -> buildKey(depot.getEvent()))
                 .map(this::buildRulers)
                 .subscribe(rulers::putAll).dispose();
         return rulers;
@@ -116,7 +116,7 @@ public class Validator {
             if (null != rule) {
                 Ut.itJObject(rule, (value, field) -> {
                     // Checked valid rule config
-                    final List<Rule> rulers = this.buildRulers(value);
+                    final List<Rule> rulers = buildRulers(value);
                     if (!rulers.isEmpty()) {
                         ruler.put(field, rulers);
                     }

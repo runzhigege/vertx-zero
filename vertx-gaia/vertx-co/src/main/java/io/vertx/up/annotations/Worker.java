@@ -1,6 +1,6 @@
 package io.vertx.up.annotations;
 
-import io.vertx.up.eon.ZeroValue;
+import io.vertx.up.eon.Constants;
 import io.vertx.up.eon.em.MessageModel;
 
 import java.lang.annotation.*;
@@ -29,7 +29,7 @@ public @interface Worker {
      *
      * @return default instance number
      */
-    int instances() default ZeroValue.DEFAULT_INSTANCES;
+    int instances() default Constants.DEFAULT_INSTANCES;
 
     /**
      * Isolation Group
@@ -37,10 +37,10 @@ public @interface Worker {
      *
      * @return default vert.x group
      */
-    String group() default ZeroValue.DEFAULT_GROUP;
+    String group() default Constants.DEFAULT_GROUP;
 
     /**
      * @return whether support HA feature for current worker.
      */
-    boolean ha() default ZeroValue.DEFAULT_HA;
+    boolean ha() default Constants.DEFAULT_HA;
 }

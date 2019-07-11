@@ -12,12 +12,12 @@ import io.vertx.ext.jwt.JWK;
 import io.vertx.ext.jwt.JWT;
 import io.vertx.ext.jwt.JWTOptions;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.exception._500JwtRuntimeException;
+import io.vertx.up.exception.web._500JwtRuntimeException;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.secure.provider.JwtAuthProvider;
 import io.vertx.up.uca.marshal.node.Node;
 import io.vertx.up.uca.marshal.node.ZeroUniform;
 import io.vertx.up.util.Ut;
-import io.vertx.up.fn.Fn;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

@@ -1,10 +1,10 @@
 package io.vertx.up.atom.query;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.exception._500QueryMetaNullException;
+import io.vertx.up.exception.web._500QueryMetaNullException;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
-import io.vertx.up.fn.Fn;
 
 import java.io.Serializable;
 
@@ -21,12 +21,12 @@ public class Criteria implements Serializable {
 
     private Criteria(final JsonObject data) {
         Fn.outWeb(null == data, LOGGER,
-                _500QueryMetaNullException.class, this.getClass());
-        this.mode = this.parseMode(data);
-        if (Inquiry.Mode.LINEAR == this.mode) {
-            this.linear = QLinear.create(data);
+                _500QueryMetaNullException.class, getClass());
+        mode = parseMode(data);
+        if (Inquiry.Mode.LINEAR == mode) {
+            linear = QLinear.create(data);
         } else {
-            this.tree = QTree.create(data);
+            tree = QTree.create(data);
         }
     }
 
@@ -46,29 +46,29 @@ public class Criteria implements Serializable {
     }
 
     public boolean isValid() {
-        if (Inquiry.Mode.LINEAR == this.mode) {
-            return this.linear.isValid();
+        if (Inquiry.Mode.LINEAR == mode) {
+            return linear.isValid();
         } else {
-            return this.tree.isValid();
+            return tree.isValid();
         }
     }
 
     public Inquiry.Mode getMode() {
-        return this.mode;
+        return mode;
     }
 
     public Criteria add(final String field, final Object value) {
-        if (Inquiry.Mode.LINEAR == this.mode) {
-            this.linear.add(field, value);
+        if (Inquiry.Mode.LINEAR == mode) {
+            linear.add(field, value);
         }
         return this;
     }
 
     public JsonObject toJson() {
-        if (Inquiry.Mode.LINEAR == this.mode) {
-            return this.linear.toJson();
+        if (Inquiry.Mode.LINEAR == mode) {
+            return linear.toJson();
         } else {
-            return this.tree.toJson();
+            return tree.toJson();
         }
     }
 }
