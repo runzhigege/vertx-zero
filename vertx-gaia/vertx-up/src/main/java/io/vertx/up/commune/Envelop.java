@@ -13,9 +13,9 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.vertx.up.commune.envelop.Rib;
 import io.vertx.up.exception.WebException;
-import io.vertx.up.exception._500InternalServerException;
-import io.vertx.zero.exception.IndexExceedException;
+import io.vertx.up.exception.web._500InternalServerException;
 import io.vertx.up.fn.Fn;
+import io.vertx.zero.exception.IndexExceedException;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -49,7 +49,7 @@ public class Envelop implements Serializable {
      */
     private <T> Envelop(final T data, final HttpStatusCode status) {
         this.data = Rib.input(data);
-        this.error = null;
+        error = null;
         this.status = status;
     }
 
@@ -57,9 +57,9 @@ public class Envelop implements Serializable {
      * @param error input error that stored into Envelop
      */
     private Envelop(final WebException error) {
-        this.status = error.getStatus();
+        status = error.getStatus();
         this.error = error;
-        this.data = error.toJson();
+        data = error.toJson();
     }
 
     /*
@@ -111,54 +111,54 @@ public class Envelop implements Serializable {
      * Error = null means valid
      */
     public boolean valid() {
-        return null == this.error;
+        return null == error;
     }
 
     public WebException error() {
-        return this.error;
+        return error;
     }
 
     // ------------------ Below are data part -------------------
     /* Get `data` part */
     public <T> T data() {
-        return Rib.get(this.data);
+        return Rib.get(data);
     }
 
     /* Get `data` part by type */
     public <T> T data(final Class<T> clazz) {
-        return Rib.get(this.data, clazz);
+        return Rib.get(data, clazz);
     }
 
     /* Get `data` part by argIndex here */
     public <T> T data(final Integer argIndex, final Class<T> clazz) {
-        Fn.outUp(!Rib.isIndex(argIndex), IndexExceedException.class, this.getClass(), argIndex);
-        return Rib.get(this.data, clazz, argIndex);
+        Fn.outUp(!Rib.isIndex(argIndex), IndexExceedException.class, getClass(), argIndex);
+        return Rib.get(data, clazz, argIndex);
     }
 
     /* Set value in `data` part */
     public void setValue(final String field, final Object value) {
-        Rib.set(this.data, field, value, null);
+        Rib.set(data, field, value, null);
     }
 
     /* Set value in `data` part ( with Index ) */
     public void setValue(final Integer argIndex, final String field, final Object value) {
-        Rib.set(this.data, field, value, argIndex);
+        Rib.set(data, field, value, argIndex);
     }
 
     // ------------------ Below are response Part -------------------
     /* String */
     public String outString() {
-        return this.outJson().encode();
+        return outJson().encode();
     }
 
     /* Json */
     public JsonObject outJson() {
-        return Rib.outJson(this.data, this.error);
+        return Rib.outJson(data, error);
     }
 
     /* Buffer */
     public Buffer outBuffer() {
-        return Rib.outBuffer(this.data, this.error);
+        return Rib.outBuffer(data, error);
     }
 
     /* Future */
@@ -169,7 +169,7 @@ public class Envelop implements Serializable {
     // ------------------ Below are Bean Get -------------------
     /* HttpStatusCode */
     public HttpStatusCode status() {
-        return this.status;
+        return status;
     }
 
     /* Communicate Id */
@@ -179,12 +179,12 @@ public class Envelop implements Serializable {
     }
 
     public String key() {
-        return this.key;
+        return key;
     }
 
     // ------------------ Below are Query part ----------------
     private void reference(final Consumer<JsonObject> consumer) {
-        final JsonObject reference = Rib.getBody(this.data);
+        final JsonObject reference = Rib.getBody(data);
         if (Objects.nonNull(reference)) {
             consumer.accept(reference);
         }
@@ -192,20 +192,20 @@ public class Envelop implements Serializable {
 
     /* Query Part for projection */
     public void onProjection(final JsonArray projection) {
-        this.reference(reference -> Rib.projection(reference, projection, false));
+        reference(reference -> Rib.projection(reference, projection, false));
     }
 
     public void inProjection(final JsonArray projection) {
-        this.reference(reference -> Rib.projection(reference, projection, true));
+        reference(reference -> Rib.projection(reference, projection, true));
     }
 
     /* Query Part for criteria */
     public void onCriteria(final JsonObject criteria) {
-        this.reference(reference -> Rib.criteria(reference, criteria, false));
+        reference(reference -> Rib.criteria(reference, criteria, false));
     }
 
     public void inCriteria(final JsonObject criteria) {
-        this.reference(reference -> Rib.criteria(reference, criteria, true));
+        reference(reference -> Rib.criteria(reference, criteria, true));
     }
 
     // ------------------ Below are assist method -------------------
@@ -217,61 +217,61 @@ public class Envelop implements Serializable {
      */
     /* Extract data from Context Map */
     public <T> T context(final String key, final Class<T> clazz) {
-        return this.assist.getContextData(key, clazz);
+        return assist.getContextData(key, clazz);
     }
 
     /* Get user data from User of Context */
     public String identifier(final String field) {
-        return this.assist.principal(field);
+        return assist.principal(field);
     }
 
     public User user() {
-        return this.assist.user();
+        return assist.user();
     }
 
     public void setUser(final User user) {
-        this.assist.user(user);
+        assist.user(user);
     }
 
     /* Get Headers */
     public MultiMap headers() {
-        return this.assist.headers();
+        return assist.headers();
     }
 
     public void setHeaders(final MultiMap headers) {
-        this.assist.headers(headers);
+        assist.headers(headers);
     }
 
     /* Session */
     public Session getSession() {
-        return this.assist.session();
+        return assist.session();
     }
 
     public void setSession(final Session session) {
-        this.assist.session(session);
+        assist.session(session);
     }
 
     /* Uri */
     public String getUri() {
-        return this.assist.uri();
+        return assist.uri();
     }
 
     public void setUri(final String uri) {
-        this.assist.uri(uri);
+        assist.uri(uri);
     }
 
     /* Method of Http */
     public HttpMethod getMethod() {
-        return this.assist.method();
+        return assist.method();
     }
 
     public void setMethod(final HttpMethod method) {
-        this.assist.method(method);
+        assist.method(method);
     }
 
     /* Context Set */
     public void setContext(final Map<String, Object> data) {
-        this.assist.context(data);
+        assist.context(data);
     }
 
     /*
@@ -281,25 +281,25 @@ public class Envelop implements Serializable {
         final HttpServerRequest request = context.request();
 
         /* Http Request Part */
-        this.assist.headers(request.headers());
-        this.assist.uri(request.uri());
-        this.assist.method(request.method());
+        assist.headers(request.headers());
+        assist.uri(request.uri());
+        assist.method(request.method());
 
         /* Session, User, Data */
-        this.assist.session(context.session());
-        this.assist.user(context.user());
-        this.assist.context(context.data());
+        assist.session(context.session());
+        assist.user(context.user());
+        assist.context(context.data());
         return this;
     }
 
     @Override
     public String toString() {
         return "Envelop{" +
-                "status=" + this.status +
-                ", error=" + this.error +
-                ", data=" + this.data +
-                ", assist=" + this.assist +
-                ", key='" + this.key + '\'' +
+                "status=" + status +
+                ", error=" + error +
+                ", data=" + data +
+                ", assist=" + assist +
+                ", key='" + key + '\'' +
                 '}';
     }
 }

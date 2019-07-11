@@ -9,10 +9,10 @@ import io.vertx.ext.web.sstore.ClusteredSessionStore;
 import io.vertx.ext.web.sstore.LocalSessionStore;
 import io.vertx.ext.web.sstore.SessionStore;
 import io.vertx.up.eon.em.StoreType;
-import io.vertx.up.exception._500SessionClientInitException;
+import io.vertx.up.exception.web._500SessionClientInitException;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
-import io.vertx.up.fn.Fn;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -36,7 +36,7 @@ public class SessionClientImpl implements SessionClient {
                 STORE = ClusteredSessionStore.create(this.vertx);
             } else {
                 final String store = config.getString("store");
-                Fn.outWeb(Ut.isNil(store), _500SessionClientInitException.class, this.getClass());
+                Fn.outWeb(Ut.isNil(store), _500SessionClientInitException.class, getClass());
                 STORE = null;
             }
         }

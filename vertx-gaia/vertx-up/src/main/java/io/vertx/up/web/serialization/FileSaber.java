@@ -1,6 +1,6 @@
 package io.vertx.up.web.serialization;
 
-import io.vertx.up.exception._400FilePathMissingException;
+import io.vertx.up.exception.web._400FilePathMissingException;
 import io.vertx.up.fn.Fn;
 
 import java.io.File;
@@ -13,8 +13,8 @@ public class FileSaber extends BaseSaber {
         return Fn.getNull(() -> {
             final File file = new File(filename);
             // Throw 400 Error
-            Fn.outWeb(!file.exists() || !file.canRead(), this.getLogger(),
-                    _400FilePathMissingException.class, this.getClass(), filename);
+            Fn.outWeb(!file.exists() || !file.canRead(), getLogger(),
+                    _400FilePathMissingException.class, getClass(), filename);
             return file;
         }, paramType, filename);
     }

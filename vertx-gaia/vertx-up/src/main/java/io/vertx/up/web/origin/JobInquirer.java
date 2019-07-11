@@ -117,7 +117,7 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
     }
 
     private String resolve(final String config) {
-        final StringBuilder file = new StringBuilder(ZeroValue.DEFAULT_JOB);
+        final StringBuilder file = new StringBuilder(Constants.DEFAULT_JOB);
         if (config.startsWith(Strings.SLASH)) {
             /* config contains `/` prefix */
             file.append(config);

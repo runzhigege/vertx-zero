@@ -2,13 +2,13 @@ package io.vertx.up.rs.config;
 
 import io.vertx.core.DeploymentOptions;
 import io.vertx.ext.unit.TestContext;
+import io.vertx.quiz.UpBase;
 import io.vertx.quiz.example.User;
-import io.vertx.up.eon.ZeroValue;
+import io.vertx.up.eon.Constants;
 import io.vertx.up.micro.ZeroHttpAgent;
 import io.vertx.up.rs.Extractor;
-import io.vertx.zero.exception.EventSourceException;
 import io.vertx.up.util.Ut;
-import io.vertx.quiz.UpBase;
+import io.vertx.zero.exception.EventSourceException;
 import org.junit.Test;
 
 public class ExtractorTc extends UpBase {
@@ -19,18 +19,18 @@ public class ExtractorTc extends UpBase {
                 Ut.singleton(AgentExtractor.class);
         final DeploymentOptions options =
                 extractor.extract(ZeroHttpAgent.class);
-        context.assertEquals(ZeroValue.DEFAULT_GROUP, options.getIsolationGroup());
-        context.assertEquals(ZeroValue.DEFAULT_HA, options.isHa());
-        context.assertEquals(ZeroValue.DEFAULT_INSTANCES, options.getInstances());
+        context.assertEquals(Constants.DEFAULT_GROUP, options.getIsolationGroup());
+        context.assertEquals(Constants.DEFAULT_HA, options.isHa());
+        context.assertEquals(Constants.DEFAULT_INSTANCES, options.getInstances());
     }
 
     @Test(expected = EventSourceException.class)
     public void testExtractEndpoint() {
-        this.extractor().extract(this.getClass());
+        extractor().extract(getClass());
     }
 
     @Test
     public void testEvent1() {
-        this.extractor().extract(User.class);
+        extractor().extract(User.class);
     }
 }

@@ -5,13 +5,13 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.servicediscovery.Record;
 import io.vertx.up.atom.Ruler;
 import io.vertx.up.eon.em.IpcType;
-import io.vertx.up.exception._424RpcServiceException;
+import io.vertx.up.exception.web._424RpcServiceException;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.discovery.IpcOrigin;
 import io.vertx.up.micro.discovery.Origin;
 import io.vertx.up.util.Ut;
 import io.vertx.up.util.container.Refer;
-import io.vertx.up.fn.Fn;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;

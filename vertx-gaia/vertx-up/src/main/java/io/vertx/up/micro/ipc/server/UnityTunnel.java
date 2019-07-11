@@ -7,10 +7,10 @@ import io.vertx.tp.ipc.eon.IpcRequest;
 import io.vertx.tp.ipc.eon.IpcResponse;
 import io.vertx.tp.ipc.service.UnityServiceGrpc;
 import io.vertx.up.annotations.Ipc;
-import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.flux.IpcData;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.eon.em.IpcType;
-import io.vertx.up.exception._501RpcMethodMissingException;
+import io.vertx.up.exception.web._501RpcMethodMissingException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ipc.DataEncap;
 import io.vertx.up.micro.ipc.tower.FinalTransit;
@@ -43,18 +43,18 @@ public class UnityTunnel implements Tunnel {
                 if (null == method) {
                     // No Rpc Handler here
                     final Envelop community = Envelop.failure(
-                            new _501RpcMethodMissingException(this.getClass(), data.getAddress()));
+                            new _501RpcMethodMissingException(getClass(), data.getAddress()));
                     // Build IpcData
-                    final IpcData responseData = UnityTunnel.this.build(community, envelop);
+                    final IpcData responseData = build(community, envelop);
                     future.complete(DataEncap.out(responseData));
                 } else {
                     // Execute Transit
-                    final Transit transit = UnityTunnel.this.getTransit(method, vertx);
+                    final Transit transit = getTransit(method, vertx);
                     // Execute Transit
                     final Future<Envelop> result = transit.async(envelop);
                     result.setHandler(res -> {
                         if (res.succeeded()) {
-                            final IpcData responseData = UnityTunnel.this.build(res.result(), envelop);
+                            final IpcData responseData = build(res.result(), envelop);
                             future.complete(DataEncap.out(responseData));
                         } else {
                             res.cause().printStackTrace();

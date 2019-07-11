@@ -2,9 +2,9 @@ package io.vertx.up.media;
 
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.exception.WebException;
-import io.vertx.up.exception._415MediaNotSupportException;
-import io.vertx.up.log.Annal;
+import io.vertx.up.exception.web._415MediaNotSupportException;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
 
 import javax.ws.rs.core.MediaType;
 import java.util.Set;

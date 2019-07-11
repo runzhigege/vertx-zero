@@ -1,7 +1,7 @@
 package io.vertx.up.unity;
 
 import io.vertx.core.Future;
-import io.vertx.up.exception._500PoolInternalException;
+import io.vertx.up.exception.web._500PoolInternalException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.shared.MapInfix;
 import io.vertx.up.plugin.shared.SharedClient;

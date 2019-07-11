@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ipc.eon.IpcResponse;
 import io.vertx.up.commune.Envelop;
-import io.vertx.up.exception._500UnexpectedRpcException;
+import io.vertx.up.exception.web._500UnexpectedRpcException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ipc.DataEncap;
 
@@ -35,7 +35,7 @@ public class RpcRepdor {
             final Throwable ex = response.cause();
             if (null != ex) {
                 final Envelop envelop =
-                        Envelop.failure(new _500UnexpectedRpcException(this.clazz, ex));
+                        Envelop.failure(new _500UnexpectedRpcException(clazz, ex));
                 handler.complete(envelop.outJson());
                 // TODO: Debug Now, Remove In Future
                 ex.printStackTrace();
@@ -53,7 +53,7 @@ public class RpcRepdor {
             final Throwable ex = response.cause();
             if (null != ex) {
                 final Envelop envelop =
-                        Envelop.failure(new _500UnexpectedRpcException(this.clazz, ex));
+                        Envelop.failure(new _500UnexpectedRpcException(clazz, ex));
                 handler.complete(envelop);
                 // TODO: Debug Now, Remove In Future
                 ex.printStackTrace();
