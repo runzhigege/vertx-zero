@@ -4,9 +4,9 @@ import io.vertx.core.Vertx;
 import io.vertx.up.aiki.Uobj;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.worker.Receipt;
-import io.zero.epic.Ut;
-import io.zero.runtime.Runner;
-import io.zero.runtime.ZeroAnno;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.runtime.Runner;
+import io.vertx.zero.runtime.ZeroAnno;
 
 import java.util.Set;
 

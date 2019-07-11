@@ -4,7 +4,7 @@ import io.vertx.up.atom.agent.Event;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._415MediaNotSupportException;
 import io.vertx.up.log.Annal;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.fn.Fn;
 
 import javax.ws.rs.core.MediaType;
 import java.util.Set;

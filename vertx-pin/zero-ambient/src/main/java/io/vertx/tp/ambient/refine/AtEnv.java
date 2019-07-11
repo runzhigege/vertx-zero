@@ -15,7 +15,7 @@ import io.vertx.tp.ke.refine.Ke;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.atom.Database;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 import org.jooq.DSLContext;
 
 import java.text.MessageFormat;

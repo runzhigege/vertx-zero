@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.aiki.Ux;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 /**
  * Data initialize: default with liquibase

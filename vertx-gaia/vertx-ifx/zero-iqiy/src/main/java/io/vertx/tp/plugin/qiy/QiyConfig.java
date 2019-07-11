@@ -3,7 +3,7 @@ package io.vertx.tp.plugin.qiy;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.feign.FeignDepot;
 import io.vertx.up.log.Annal;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.io.Serializable;
 import java.util.Objects;

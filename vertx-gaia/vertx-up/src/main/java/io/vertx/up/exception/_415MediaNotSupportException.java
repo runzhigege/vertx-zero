@@ -1,7 +1,7 @@
 package io.vertx.up.exception;
 
 import io.vertx.core.http.HttpStatusCode;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 import javax.ws.rs.core.MediaType;
 import java.util.Set;

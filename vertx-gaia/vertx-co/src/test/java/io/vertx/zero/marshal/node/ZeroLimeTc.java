@@ -1,7 +1,7 @@
 package io.vertx.zero.marshal.node;
 
 import io.vertx.core.json.JsonObject;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 import org.junit.Test;
 
 import java.util.concurrent.ConcurrentMap;

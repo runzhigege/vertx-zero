@@ -2,7 +2,7 @@ package io.vertx.up.aiki;
 
 import io.reactivex.Observable;
 import io.vertx.ext.unit.TestContext;
-import io.zero.quiz.StoreBase;
+import io.vertx.quiz.StoreBase;
 import org.junit.Test;
 
 import java.util.HashSet;

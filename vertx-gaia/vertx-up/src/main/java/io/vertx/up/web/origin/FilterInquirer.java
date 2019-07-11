@@ -12,8 +12,8 @@ import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.FilterInitialException;
 import io.vertx.zero.exception.FilterOrderException;
 import io.vertx.zero.exception.FilterSpecificationException;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 
 import javax.servlet.annotation.WebFilter;
 import java.lang.annotation.Annotation;

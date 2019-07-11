@@ -7,7 +7,7 @@ import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.eon.Values;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 class UniqueActor extends AbstractActor {
 

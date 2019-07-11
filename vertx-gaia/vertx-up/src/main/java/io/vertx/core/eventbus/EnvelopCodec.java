@@ -3,7 +3,7 @@ package io.vertx.core.eventbus;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.up.atom.Envelop;
 import io.vertx.zero.eon.Values;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 /**
  * Codec to transfer envelop

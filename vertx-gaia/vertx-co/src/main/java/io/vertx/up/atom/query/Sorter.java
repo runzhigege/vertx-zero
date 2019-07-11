@@ -3,8 +3,8 @@ package io.vertx.up.atom.query;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.zero.eon.Strings;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.io.Serializable;
 import java.util.ArrayList;

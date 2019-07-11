@@ -1,7 +1,7 @@
 package io.vertx.up.atom;
 
 import io.vertx.core.json.JsonObject;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.io.Serializable;
 

@@ -1,7 +1,7 @@
 package io.vertx.up.aiki;
 
 import io.vertx.core.json.JsonObject;
-import io.zero.quiz.JooqBase;
+import io.vertx.quiz.JooqBase;
 import org.jooq.Condition;
 import org.junit.Assert;
 import org.junit.Test;

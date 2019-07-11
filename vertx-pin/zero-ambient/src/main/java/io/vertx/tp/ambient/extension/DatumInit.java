@@ -13,7 +13,7 @@ import io.vertx.tp.plugin.excel.ExcelInfix;
 import io.vertx.up.aiki.Uson;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.log.Annal;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 import java.util.List;
 import java.util.Objects;

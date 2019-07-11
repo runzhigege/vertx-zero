@@ -8,7 +8,7 @@ import io.vertx.up.atom.Epsilon;
 import io.vertx.up.log.Annal;
 import io.vertx.up.media.Resolver;
 import io.vertx.zero.eon.Values;
-import io.zero.runtime.ZeroSerializer;
+import io.vertx.zero.runtime.ZeroSerializer;
 
 import java.io.File;
 import java.util.Set;

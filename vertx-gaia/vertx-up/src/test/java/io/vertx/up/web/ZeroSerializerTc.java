@@ -1,8 +1,8 @@
 package io.vertx.up.web;
 
 import io.vertx.core.json.JsonObject;
-import io.zero.quiz.ZeroBase;
-import io.zero.runtime.ZeroSerializer;
+import io.vertx.quiz.ZeroBase;
+import io.vertx.zero.runtime.ZeroSerializer;
 import org.junit.Test;
 
 import java.math.BigDecimal;

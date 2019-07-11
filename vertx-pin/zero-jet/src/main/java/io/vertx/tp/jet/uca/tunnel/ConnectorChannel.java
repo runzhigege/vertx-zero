@@ -6,7 +6,7 @@ import io.vertx.up.aiki.Ux;
 import io.vertx.up.commune.ActIn;
 import io.vertx.zero.atom.Database;
 import io.vertx.zero.atom.Integration;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 public class ConnectorChannel extends AbstractChannel {
     /*

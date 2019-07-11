@@ -6,8 +6,8 @@ import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.demon.JObjectElementException;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 
 /**
  * @author lang

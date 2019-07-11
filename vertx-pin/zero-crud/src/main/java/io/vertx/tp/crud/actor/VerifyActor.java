@@ -9,7 +9,7 @@ import io.vertx.up.atom.Rule;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.rs.announce.Rigor;
 import io.vertx.zero.eon.Strings;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 import java.util.List;
 import java.util.Locale;

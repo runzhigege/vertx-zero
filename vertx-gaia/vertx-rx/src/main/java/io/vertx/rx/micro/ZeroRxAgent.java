@@ -14,8 +14,8 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ZeroAtomic;
 import io.vertx.up.rs.Axis;
 import io.vertx.zero.eon.Values;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.text.MessageFormat;
 import java.util.List;

@@ -3,7 +3,7 @@ package io.vertx.up.rs.pointer;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.plugin.extension.PlugAuditor;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 class PluginAuditor {
     /*

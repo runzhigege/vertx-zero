@@ -10,7 +10,7 @@ import io.vertx.tp.optic.fantom.Anchoret;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.aiki.Uson;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 /*
  * Seek impact resource for params here, it will be passed by crud

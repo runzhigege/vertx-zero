@@ -3,8 +3,8 @@ package io.vertx.zero.atom;
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.text.MessageFormat;
 import java.util.concurrent.ConcurrentMap;

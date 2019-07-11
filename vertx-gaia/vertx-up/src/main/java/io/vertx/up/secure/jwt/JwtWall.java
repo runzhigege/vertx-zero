@@ -7,7 +7,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.mongo.MongoWall;
 import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.marshal.Transformer;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.fn.Fn;
 
 public class JwtWall implements Transformer<Cliff> {
 

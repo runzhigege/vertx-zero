@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Vertx;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Mission;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.fn.Fn;
 
 /*
  * Major phase for code logical here

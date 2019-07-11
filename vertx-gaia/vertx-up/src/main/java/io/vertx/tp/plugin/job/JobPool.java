@@ -3,7 +3,7 @@ package io.vertx.tp.plugin.job;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.em.JobStatus;
 import io.vertx.up.log.Annal;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 import java.util.Objects;
 import java.util.Set;

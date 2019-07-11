@@ -2,7 +2,7 @@ package io.vertx.up.rs.argument;
 
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.rs.Filler;
-import io.zero.runtime.ZeroSerializer;
+import io.vertx.zero.runtime.ZeroSerializer;
 
 public class FormFiller implements Filler {
 

@@ -9,9 +9,9 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.micro.discovery.IpcOrigin;
 import io.vertx.up.micro.discovery.Origin;
 import io.vertx.zero.atom.Ruler;
-import io.zero.epic.Ut;
-import io.zero.epic.container.Refer;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.container.Refer;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;

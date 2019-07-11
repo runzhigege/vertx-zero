@@ -5,7 +5,7 @@ import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.eon.ID;
-import io.zero.runtime.ZeroAnno;
+import io.vertx.zero.runtime.ZeroAnno;
 
 public class AuthReady {
     /*

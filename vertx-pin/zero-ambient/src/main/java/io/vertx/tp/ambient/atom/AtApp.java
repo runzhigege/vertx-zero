@@ -7,7 +7,7 @@ import io.vertx.tp.error._500ApplicationInitException;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.fn.Fn;
 import org.jooq.DSLContext;
 
 @SuppressWarnings("all")

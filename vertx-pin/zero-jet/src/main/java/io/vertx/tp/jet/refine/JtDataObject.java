@@ -10,8 +10,8 @@ import io.vertx.tp.jet.cv.em.WorkerType;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.zero.atom.Database;
 import io.vertx.zero.atom.Integration;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.util.function.Supplier;
 

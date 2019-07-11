@@ -7,7 +7,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.tp.plugin.job.JobPool;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 public class JobPin {
 

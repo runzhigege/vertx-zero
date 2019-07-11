@@ -4,10 +4,10 @@ import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.em.JobType;
 import io.vertx.up.job.plugin.JobIncome;
 import io.vertx.up.job.plugin.JobOutcome;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Actuator;
-import io.zero.epic.fn.Fn;
-import io.zero.runtime.Runner;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Actuator;
+import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.runtime.Runner;
 
 /*
  * Assist class to help Agha object to process income / outcome extraction

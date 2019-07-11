@@ -11,8 +11,8 @@ import io.vertx.ext.web.sstore.SessionStore;
 import io.vertx.up.eon.em.StoreType;
 import io.vertx.up.exception._500SessionClientInitException;
 import io.vertx.up.log.Annal;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 

@@ -3,8 +3,8 @@ package io.vertx.up.rs.config;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.quiz.example.*;
 import io.vertx.zero.exception.PathAnnoEmptyException;
-import io.zero.quiz.ZeroBase;
-import io.zero.runtime.ZeroHelper;
+import io.vertx.quiz.ZeroBase;
+import io.vertx.zero.runtime.ZeroHelper;
 import org.junit.Test;
 
 import javax.ws.rs.Path;

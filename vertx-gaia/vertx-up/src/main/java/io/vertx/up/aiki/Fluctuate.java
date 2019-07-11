@@ -9,7 +9,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 import java.util.*;
 import java.util.function.*;

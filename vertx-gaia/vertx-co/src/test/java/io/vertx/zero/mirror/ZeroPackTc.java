@@ -1,8 +1,8 @@
 package io.vertx.zero.mirror;
 
 import io.vertx.ext.unit.TestContext;
-import io.zero.quiz.ZeroBase;
-import io.zero.runtime.ZeroPack;
+import io.vertx.quiz.ZeroBase;
+import io.vertx.zero.runtime.ZeroPack;
 import org.junit.Test;
 
 import java.util.Set;

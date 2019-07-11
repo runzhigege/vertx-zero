@@ -49,7 +49,7 @@ import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import javax.inject.infix.Mongo;
 import io.vertx.up.atom.Envelop;
-import io.zero.epic.Jackson;
+import io.vertx.zero.epic.Jackson;
 
 @Queue
 public class UserWorker {

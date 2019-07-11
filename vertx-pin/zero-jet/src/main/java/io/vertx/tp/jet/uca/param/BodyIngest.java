@@ -8,7 +8,7 @@ import io.vertx.tp.jet.cv.em.ParamMode;
 import io.vertx.tp.optic.jet.JtIngest;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.eon.ID;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 import java.util.function.Supplier;
 
