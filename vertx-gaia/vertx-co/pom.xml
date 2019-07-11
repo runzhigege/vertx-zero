@@ -292,6 +292,7 @@
             <version>${jetbrains.version}</version>
             <scope>compile</scope>
         </dependency>
+        <!-- Reflection -->
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>

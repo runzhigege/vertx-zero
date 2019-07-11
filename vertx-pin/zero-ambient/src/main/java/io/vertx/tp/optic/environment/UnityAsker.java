@@ -1,9 +1,9 @@
 package io.vertx.tp.optic.environment;
 
-import cn.vertxup.ambient.tables.daos.XAppDao;
-import cn.vertxup.ambient.tables.daos.XSourceDao;
-import cn.vertxup.ambient.tables.pojos.XApp;
-import cn.vertxup.ambient.tables.pojos.XSource;
+import cn.vertxup.ambient.domain.tables.daos.XAppDao;
+import cn.vertxup.ambient.domain.tables.daos.XSourceDao;
+import cn.vertxup.ambient.domain.tables.pojos.XApp;
+import cn.vertxup.ambient.domain.tables.pojos.XSource;
 import io.vertx.tp.ambient.cv.AtMsg;
 import io.vertx.tp.ambient.refine.At;
 import io.vertx.tp.database.DataPool;

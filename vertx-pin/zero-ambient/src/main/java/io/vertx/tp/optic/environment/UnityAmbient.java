@@ -1,7 +1,7 @@
 package io.vertx.tp.optic.environment;
 
-import cn.vertxup.ambient.tables.pojos.XApp;
-import cn.vertxup.ambient.tables.pojos.XSource;
+import cn.vertxup.ambient.domain.tables.pojos.XApp;
+import cn.vertxup.ambient.domain.tables.pojos.XSource;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
 import io.zero.epic.Ut;
@@ -34,7 +34,7 @@ public class UnityAmbient implements UnityApp {
                 .filter(appId -> Objects.nonNull(apps.get(appId)))
                 .filter(appId -> Objects.nonNull(sources.get(appId)))
                 /* JsonObject converted here for app & source data */
-                .map(appId -> this.connect(apps.get(appId), sources.get(appId)))
+                .map(appId -> connect(apps.get(appId), sources.get(appId)))
                 .forEach(item -> UNITY_POOL.put(item.getString(KeField.APP_ID), item));
     }
 

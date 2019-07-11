@@ -7,18 +7,20 @@ import io.vertx.up.annotations.Up;
 import io.vertx.up.boot.DansApplication;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
-import io.vertx.up.web.Runner;
+import io.vertx.up.micro.config.DynamicVisitor;
+import io.vertx.up.micro.config.ServerVisitor;
 import io.vertx.up.web.ZeroLauncher;
 import io.vertx.up.web.anima.*;
-import io.vertx.zero.config.ServerVisitor;
 import io.vertx.zero.exception.EtcdNetworkException;
 import io.vertx.zero.exception.MicroModeUpException;
 import io.vertx.zero.exception.UpClassArgsException;
 import io.vertx.zero.exception.UpClassInvalidException;
-import io.vertx.zero.micro.config.DynamicVisitor;
-import io.vertx.zero.mirror.Anno;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
+import io.zero.runtime.Anno;
+import io.zero.runtime.Runner;
+import io.zero.runtime.ZeroAnno;
+import io.zero.runtime.ZeroHeart;
 
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
@@ -44,7 +46,7 @@ public class VertxApplication {
          * Although the input `clazz` is not important, but zero container require the input
          * clazz mustn't be null, for future usage such as plugin extension for it.
          */
-        Fn.out(null == clazz, UpClassArgsException.class, this.getClass());
+        Fn.out(null == clazz, UpClassArgsException.class, getClass());
 
         /*
          * Stored clazz information
@@ -52,14 +54,14 @@ public class VertxApplication {
          * 2. annotation extraction from Annotation[] -> Annotation Map
          */
         this.clazz = clazz;
-        this.annotationMap = Anno.get(clazz);
+        annotationMap = Anno.get(clazz);
 
         /*
          * Zero specification definition for @Up here.
          * The input class must annotated with @Up instead of other description
          */
 
-        Fn.out(!this.annotationMap.containsKey(Up.class.getName()), UpClassInvalidException.class, this.getClass(),
+        Fn.out(!annotationMap.containsKey(Up.class.getName()), UpClassInvalidException.class, getClass(),
                 null == this.clazz ? null : this.clazz.getName());
     }
 
@@ -69,6 +71,12 @@ public class VertxApplication {
              * Class definition predicate
              */
             ensureEtcd(clazz);
+            /*
+             * To avoid getPackages issue here
+             * Move to InitScatter here
+             */
+            ZeroHeart.init();
+
             /*
              * Before launcher, start package scanning for preparing metadata
              * This step is critical because it's environment core preparing steps.
@@ -81,7 +89,7 @@ public class VertxApplication {
              * some preparing failure, here we replaced `static {}` with `prepare()` calling before any instance
              * of VertxApplication/DansApplication.
              */
-            // ZeroAnno.prepare();
+            ZeroAnno.prepare();
 
             /*
              * Then the container could start
@@ -168,10 +176,11 @@ public class VertxApplication {
             }, "codex-engine-runner");
 
             /* 5.Plugin init */
+            /*
             Runner.run(() -> {
                 final Scatter<Vertx> scatter = Ut.singleton(InitScatter.class);
                 scatter.connect(vertx);
-            }, "initializer-runner");
+            }, "initializer-runner");*/
         });
     }
 }

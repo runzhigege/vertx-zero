@@ -11,7 +11,7 @@ import io.vertx.tp.optic.Orbit;
 import io.vertx.tp.optic.Pocket;
 import io.vertx.tp.optic.atom.Income;
 import io.vertx.up.log.Annal;
-import io.vertx.up.web.ZeroAnno;
+import io.zero.runtime.ZeroAnno;
 
 import java.util.Objects;
 

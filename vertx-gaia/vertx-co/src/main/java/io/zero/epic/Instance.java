@@ -4,7 +4,7 @@ import com.esotericsoftware.reflectasm.ConstructorAccess;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.DuplicatedImplException;
-import io.vertx.zero.mirror.Pack;
+import io.zero.runtime.ZeroPack;
 import io.zero.epic.fn.Fn;
 
 import java.lang.reflect.Constructor;
@@ -136,7 +136,7 @@ final class Instance {
      */
     static Class<?> uniqueChild(final Class<?> interfaceCls) {
         return Fn.getNull(null, () -> {
-            final Set<Class<?>> classes = Pack.getClasses();
+            final Set<Class<?>> classes = ZeroPack.getClasses();
             final List<Class<?>> filtered = classes.stream()
                     .filter(item -> interfaceCls.isAssignableFrom(item)
                             && item != interfaceCls)
@@ -156,7 +156,7 @@ final class Instance {
         return Fn.getJvm(() -> {
             T ret = null;
             final Constructor<?>[] constructors = clazz.getDeclaredConstructors();
-            // Pack all constructors
+            // ZeroPack all constructors
             for (final Constructor<?> constructor : constructors) {
                 // Fast to construct
                 if (0 == params.length) {

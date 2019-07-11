@@ -10,10 +10,10 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.micro.follow.Invoker;
 import io.vertx.up.micro.follow.InvokerUtil;
 import io.vertx.up.micro.follow.JetSelector;
-import io.vertx.up.web.ZeroAnno;
 import io.vertx.zero.eon.Values;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
+import io.zero.runtime.ZeroAnno;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;

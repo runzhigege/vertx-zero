@@ -5,8 +5,9 @@ import io.zero.quiz.ZeroBase;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.heart.LimeFileException;
 import io.vertx.zero.marshal.options.Opts;
+import org.junit.Ignore;
 import org.junit.Test;
-
+@Ignore
 public class YamlOptsTc extends ZeroBase {
 
     @Test(expected = LimeFileException.class)

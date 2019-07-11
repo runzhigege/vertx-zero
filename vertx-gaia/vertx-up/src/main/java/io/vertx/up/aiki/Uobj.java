@@ -2,9 +2,9 @@ package io.vertx.up.aiki;
 
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.log.Annal;
-import io.vertx.up.web.ZeroAnno;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
+import io.zero.runtime.ZeroAnno;
 
 import java.lang.reflect.Field;
 import java.util.Objects;

@@ -9,7 +9,7 @@ import io.vertx.zero.marshal.node.ZeroUniform;
 import io.zero.epic.Ut;
 
 /**
- * Data singleton: default with liquibase
+ * Data initialize: default with liquibase
  */
 public class InitScatter implements Scatter<Vertx> {
 

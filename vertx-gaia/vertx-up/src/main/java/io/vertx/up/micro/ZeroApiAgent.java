@@ -7,13 +7,13 @@ import io.vertx.ext.web.Router;
 import io.vertx.up.annotations.Agent;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
+import io.vertx.up.micro.config.DynamicVisitor;
+import io.vertx.up.micro.config.ServerVisitor;
 import io.vertx.up.rs.Axis;
 import io.vertx.up.rs.router.PointAxis;
 import io.vertx.up.rs.router.RouterAxis;
 import io.vertx.up.rs.router.WallAxis;
-import io.vertx.zero.config.ServerVisitor;
 import io.vertx.zero.eon.Values;
-import io.vertx.zero.micro.config.DynamicVisitor;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
