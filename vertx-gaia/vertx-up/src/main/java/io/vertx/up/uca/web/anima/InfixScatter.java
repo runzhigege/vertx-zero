@@ -20,6 +20,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
@@ -39,15 +40,16 @@ public class InfixScatter implements Scatter<Vertx> {
     private static final InfixPlugin PLUGIN = InfixPlugin.create(InfixScatter.class);
 
     @Override
+    @SuppressWarnings("all")
     public void connect(final Vertx vertx) {
         final ConcurrentMap<String, Class<?>> wholeInjections = ZeroAmbient.getInjections();
-        /** Enabled **/
+        /* Enabled **/
         final ConcurrentMap<String, Class<?>> enabled =
                 Ut.reduce(node.read().keySet(), wholeInjections);
-        /** Scan all Infix **/
+        /* Scan all Infix **/
         final ConcurrentMap<Class<? extends Annotation>, Class<?>> injections =
                 Ut.reduce(Plugins.INFIX_MAP, enabled);
-        injections.values().stream().forEach(item -> {
+        injections.values().forEach(item -> {
             if (null != item && item.isAnnotationPresent(Plugin.class)) {
                 final Method method = findInit(item);
                 Fn.outUp(null == method, LOGGER,
@@ -56,23 +58,25 @@ public class InfixScatter implements Scatter<Vertx> {
                 Fn.safeJvm(() -> method.invoke(null, vertx), LOGGER);
             }
         });
-        /** Scan all extension Infix **/
+        /* Scan all extension Infix **/
         Observable.fromIterable(wholeInjections.keySet())
                 .filter(key -> !Plugins.Infix.STANDAND.contains(key))
                 .map(wholeInjections::get)
-                .filter(item -> null != item && item.isAnnotationPresent(Plugin.class))
+                .filter(Objects::nonNull)
+                .filter(item -> item.isAnnotationPresent(Plugin.class))
                 .subscribe(item -> {
                     final Method method = findInit(item);
                     Fn.outUp(null == method, LOGGER,
                             PluginSpecificationException.class,
                             getClass(), item.getName());
                     Fn.safeJvm(() -> method.invoke(null, vertx), LOGGER);
-                });
-        /** After infix inject plugins **/
+                })
+                .dispose();
+        /* After infix inject plugins **/
         Ut.itSet(PLUGINS, (clazz, index) -> Runner.run(() -> {
-            /** Instance reference **/
+            /* Instance reference **/
             final Object reference = Ut.singleton(clazz);
-            /** Injects scanner **/
+            /* Injects scanner **/
             PLUGIN.inject(reference);
         }, "injects-plugin-scannner"));
     }
@@ -80,9 +84,6 @@ public class InfixScatter implements Scatter<Vertx> {
 
     /**
      * Check whether clazz has the method of name
-     *
-     * @param clazz
-     * @return
      */
     private Method findInit(final Class<?> clazz) {
         return Fn.getNull(() -> {
