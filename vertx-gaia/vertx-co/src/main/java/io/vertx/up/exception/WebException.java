@@ -3,9 +3,9 @@ package io.vertx.up.exception;
 import io.vertx.core.http.HttpStatusCode;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Strings;
-import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Errors;
+import io.vertx.up.util.Ut;
 
 import java.text.MessageFormat;
 
@@ -14,10 +14,9 @@ import java.text.MessageFormat;
  */
 public abstract class WebException extends ZeroRunException {
 
-    protected static final String MESSAGE = "message";
     protected static final String INFO = "info";
     protected static final String CODE = "code";
-
+    private static final String MESSAGE = "message";
     private final String message;
     private final Class<?> target;
     protected HttpStatusCode status;
