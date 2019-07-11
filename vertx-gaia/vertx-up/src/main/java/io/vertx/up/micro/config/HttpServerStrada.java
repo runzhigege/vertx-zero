@@ -3,7 +3,6 @@ package io.vertx.up.micro.config;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.config.ServerVisitor;
 import io.vertx.zero.marshal.Transformer;
 import io.zero.epic.fn.Fn;
 

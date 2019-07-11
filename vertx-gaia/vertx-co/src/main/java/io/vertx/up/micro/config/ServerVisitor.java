@@ -1,4 +1,4 @@
-package io.vertx.zero.config;
+package io.vertx.up.micro.config;
 
 import io.vertx.zero.marshal.Visitor;
 

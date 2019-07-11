@@ -57,8 +57,7 @@ public class PackHunter {
                 packageDirs.add(pending);
             }
         }
-        LOGGER.info(Info.PACKAGES, String.valueOf(packageDirs.size()), String.valueOf(packageDirs.size()));
-        // System.exit(0);
+        LOGGER.info(Info.PACKAGES, String.valueOf(packageDirs.size()), String.valueOf(packages.length));
         return packageDirs;
     }
 
@@ -68,6 +67,7 @@ public class PackHunter {
          */
         final Set<String> resource = new HashSet<>();// Ut.ioResources();
         resource.forEach(System.out::println);
+
 
         return new HashSet<>();
     }

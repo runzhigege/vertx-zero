@@ -8,8 +8,6 @@ import io.vertx.tp.ipc.marshal.RpcServerVisitor;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.config.*;
-import io.vertx.zero.config.NodeVisitor;
-import io.vertx.zero.config.ServerVisitor;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 

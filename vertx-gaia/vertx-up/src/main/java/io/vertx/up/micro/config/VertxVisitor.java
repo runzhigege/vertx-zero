@@ -6,7 +6,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.atom.Ruler;
-import io.vertx.zero.config.NodeVisitor;
 import io.vertx.zero.eon.Info;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.demon.ClusterConflictException;
