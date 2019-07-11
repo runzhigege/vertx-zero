@@ -15,8 +15,8 @@ import io.vertx.up.eon.Plugins;
 import io.vertx.up.exception.web._500JwtRuntimeException;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.secure.provider.JwtAuthProvider;
-import io.vertx.up.uca.marshal.node.Node;
-import io.vertx.up.uca.marshal.node.ZeroUniform;
+import io.vertx.up.uca.yaml.Node;
+import io.vertx.up.uca.yaml.ZeroUniform;
 import io.vertx.up.util.Ut;
 
 import java.io.ByteArrayInputStream;

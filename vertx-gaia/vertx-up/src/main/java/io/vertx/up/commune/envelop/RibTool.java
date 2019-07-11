@@ -2,10 +2,10 @@ package io.vertx.up.commune.envelop;
 
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.atom.error.Readible;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.runtime.ZeroSerializer;
+import io.vertx.up.uca.failure.Readible;
 
 import java.util.Objects;
 

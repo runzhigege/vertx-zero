@@ -4,8 +4,8 @@ import io.vertx.core.Handler;
 import io.vertx.reactivex.ext.web.RoutingContext;
 import io.vertx.up.atom.Rule;
 import io.vertx.up.atom.agent.Depot;
-import io.vertx.up.rs.Sentry;
-import io.vertx.up.rs.hunt.BaseAim;
+import io.vertx.up.uca.rs.Sentry;
+import io.vertx.up.uca.rs.hunt.BaseAim;
 
 import java.util.List;
 import java.util.Map;

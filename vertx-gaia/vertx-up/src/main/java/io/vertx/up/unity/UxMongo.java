@@ -6,8 +6,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.FindOptions;
 import io.vertx.ext.mongo.MongoClient;
+import io.vertx.tp.plugin.mongo.MongoInfix;
 import io.vertx.up.log.Annal;
-import io.vertx.up.plugin.mongo.MongoInfix;
 
 import java.util.Objects;
 import java.util.function.BinaryOperator;

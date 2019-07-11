@@ -9,11 +9,11 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.runtime.Anno;
 import io.vertx.up.runtime.Runner;
 import io.vertx.up.util.Ut;
-import io.vertx.up.web.ZeroLauncher;
-import io.vertx.up.web.anima.DetectScatter;
-import io.vertx.up.web.anima.InfixScatter;
-import io.vertx.up.web.anima.PointScatter;
-import io.vertx.up.web.anima.Scatter;
+import io.vertx.up.uca.web.ZeroLauncher;
+import io.vertx.up.uca.web.anima.DetectScatter;
+import io.vertx.up.uca.web.anima.InfixScatter;
+import io.vertx.up.uca.web.anima.PointScatter;
+import io.vertx.up.uca.web.anima.Scatter;
 import io.vertx.zero.exception.UpClassArgsException;
 import io.vertx.zero.exception.UpClassInvalidException;
 

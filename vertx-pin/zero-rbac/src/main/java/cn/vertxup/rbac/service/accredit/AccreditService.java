@@ -5,8 +5,8 @@ import cn.vertxup.rbac.domain.tables.pojos.SResource;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.atom.ScRequest;
+import io.vertx.up.uca.container.Refer;
 import io.vertx.up.unity.Ux;
-import io.vertx.up.util.container.Refer;
 
 import javax.inject.Inject;
 import java.util.function.Supplier;

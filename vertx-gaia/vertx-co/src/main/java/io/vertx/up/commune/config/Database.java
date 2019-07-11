@@ -4,8 +4,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.commune.Json;
 import io.vertx.up.eon.em.DatabaseType;
 import io.vertx.up.log.Annal;
-import io.vertx.up.uca.marshal.node.Node;
-import io.vertx.up.uca.marshal.node.ZeroUniform;
+import io.vertx.up.uca.yaml.Node;
+import io.vertx.up.uca.yaml.ZeroUniform;
 import io.vertx.up.util.Ut;
 
 import java.io.Serializable;

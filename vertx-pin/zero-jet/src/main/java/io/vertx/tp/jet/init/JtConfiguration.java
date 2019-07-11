@@ -4,8 +4,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.atom.JtConfig;
 import io.vertx.tp.jet.refine.Jt;
 import io.vertx.up.log.Annal;
-import io.vertx.up.uca.marshal.node.Node;
-import io.vertx.up.uca.marshal.node.ZeroUniform;
+import io.vertx.up.uca.yaml.Node;
+import io.vertx.up.uca.yaml.ZeroUniform;
 import io.vertx.up.util.Ut;
 
 /*

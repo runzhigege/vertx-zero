@@ -2,12 +2,12 @@ package io.vertx.up.plugin;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.Ruler;
-import io.vertx.up.log.Annal;
-import io.vertx.up.util.Ut;
 import io.vertx.up.exception.zero.ConfigKeyMissingException;
 import io.vertx.up.fn.Fn;
-import io.vertx.up.uca.marshal.node.Node;
-import io.vertx.up.uca.marshal.node.ZeroUniform;
+import io.vertx.up.log.Annal;
+import io.vertx.up.uca.yaml.Node;
+import io.vertx.up.uca.yaml.ZeroUniform;
+import io.vertx.up.util.Ut;
 
 import java.util.function.Function;
 

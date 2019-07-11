@@ -5,8 +5,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ipc.eon.IpcRequest;
 import io.vertx.tp.ipc.service.UnityServiceGrpc;
-import io.vertx.up.atom.flux.IpcData;
-import io.vertx.up.micro.ipc.DataEncap;
+import io.vertx.up.atom.rpc.IpcData;
+import io.vertx.up.uca.micro.ipc.DataEncap;
 import io.vertx.tp.plugin.rpc.RpcRepdor;
 
 /**

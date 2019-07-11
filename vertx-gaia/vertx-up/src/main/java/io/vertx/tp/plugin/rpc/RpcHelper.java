@@ -8,10 +8,10 @@ import io.vertx.up.eon.em.IpcType;
 import io.vertx.up.exception.web._424RpcServiceException;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.micro.discovery.IpcOrigin;
-import io.vertx.up.micro.discovery.Origin;
+import io.vertx.up.uca.micro.discovery.IpcOrigin;
+import io.vertx.up.uca.micro.discovery.Origin;
+import io.vertx.up.uca.container.Refer;
 import io.vertx.up.util.Ut;
-import io.vertx.up.util.container.Refer;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;

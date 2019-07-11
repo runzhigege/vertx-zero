@@ -34,7 +34,7 @@ shared:
 The last configuration for shared data usage is that you must set `inject` in your configuration:
 
 ```yaml
-shared: io.vertx.up.plugin.shared.MapInfix
+shared: io.vertx.tp.plugin.shared.MapInfix
 ```
 
 Once you have finished above three configuration, the shared data will be enabled.

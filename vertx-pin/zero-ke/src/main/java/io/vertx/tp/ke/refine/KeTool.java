@@ -3,8 +3,8 @@ package io.vertx.tp.ke.refine;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.unity.Ux;
-import io.vertx.up.uca.marshal.node.Node;
-import io.vertx.up.uca.marshal.node.ZeroUniform;
+import io.vertx.up.uca.yaml.Node;
+import io.vertx.up.uca.yaml.ZeroUniform;
 import io.vertx.up.util.Ut;
 
 import java.util.function.Supplier;

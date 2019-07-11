@@ -23,7 +23,7 @@ jooq: io.vertx.tp.plugin.jooq.JooqInfix
 ### 1.2. mongo
 
 ```yaml
-mongo: io.vertx.up.plugin.mongo.MongoInfix
+mongo: io.vertx.tp.plugin.mongo.MongoInfix
 ```
 
 ### 1.3. mysql

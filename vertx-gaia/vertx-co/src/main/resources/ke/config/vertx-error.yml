@@ -65,7 +65,7 @@ E40048: "(Rpc) Zero system detect agent interface \"{0}\" only without implement
 E40049: "Zero worker method signature conflicts, method = {0}, class = {1}"
 E40050: "You''ll run zero in \"Micro Mode\", but etcd configuration is not prepared, system detected error: {0}"
 E40051: "Your RoutingContext object reference is null, could not be getNull by getContext()."
-E40052: "You defined @WebFilter \"{0}\", but it does not implement interface \"io.vertx.up.web.filter\"."
+E40052: "You defined @WebFilter \"{0}\", but it does not implement interface \"io.vertx.up.uca.web.filter\"."
 E40053: "The order of @WebFilter must be greater than or equal 0 ( >= 0 ), but now \"{0}\" @Ordered value is negative number."
 E40054: "The @WebFilter \"{0}\"could not be initialized, please check your class."
 E40055: "(Jooq) Query with 3 length only support value of Date,DateTime,Time only, current = {0}"

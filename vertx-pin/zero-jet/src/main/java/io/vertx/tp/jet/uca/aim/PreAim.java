@@ -6,7 +6,7 @@ import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.uca.JtAim;
 import io.vertx.tp.optic.jet.JtIngest;
 import io.vertx.up.commune.Envelop;
-import io.vertx.up.rs.hunt.Answer;
+import io.vertx.up.uca.rs.hunt.Answer;
 
 /**
  * The first handler in routing

@@ -7,7 +7,7 @@ import io.vertx.tp.crud.refine.Ix;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.Rule;
 import io.vertx.up.exception.WebException;
-import io.vertx.up.rs.announce.Rigor;
+import io.vertx.up.uca.rs.announce.Rigor;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.util.Ut;
 

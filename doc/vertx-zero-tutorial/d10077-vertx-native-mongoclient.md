@@ -25,7 +25,7 @@ zero:
 ### 1.2. vertx-inject.yml
 
 ```yaml
-mongo: io.vertx.up.plugin.mongo.MongoInfix
+mongo: io.vertx.tp.plugin.mongo.MongoInfix
 ```
 
 ### 1.3. vertx-mongo.yml

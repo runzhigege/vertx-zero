@@ -2,11 +2,11 @@ package io.vertx.tp.plugin.init;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.Ruler;
-import io.vertx.up.log.Annal;
 import io.vertx.up.exception.zero.DynamicConfigTypeException;
 import io.vertx.up.exception.zero.DynamicKeyMissingException;
 import io.vertx.up.fn.Fn;
-import io.vertx.up.uca.marshal.node.Node;
+import io.vertx.up.log.Annal;
+import io.vertx.up.uca.yaml.Node;
 
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;

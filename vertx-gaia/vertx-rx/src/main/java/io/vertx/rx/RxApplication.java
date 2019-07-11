@@ -6,7 +6,7 @@ import io.vertx.rx.web.anima.AgentScatter;
 import io.vertx.up.Launcher;
 import io.vertx.up.annotations.Up;
 import io.vertx.up.log.Annal;
-import io.vertx.up.web.anima.Scatter;
+import io.vertx.up.uca.web.anima.Scatter;
 import io.vertx.zero.exception.UpClassArgsException;
 import io.vertx.zero.exception.UpClassInvalidException;
 import io.vertx.up.util.Ut;

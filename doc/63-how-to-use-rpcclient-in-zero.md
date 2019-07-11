@@ -34,7 +34,7 @@ rpc:
 **vertx-inject.yml**
 
 ```yaml
-mongo: io.vertx.up.plugin.mongo.MongoInfix
+mongo: io.vertx.tp.plugin.mongo.MongoInfix
 rpc: io.vertx.tp.plugin.rpc.RpcInfix
 ```
 
