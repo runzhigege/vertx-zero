@@ -1,0 +1,33 @@
+package io.vertx.tp.plugin.session;
+
+import io.vertx.core.Future;
+import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonObject;
+import io.vertx.ext.web.Session;
+import io.vertx.ext.web.handler.SessionHandler;
+
+/*
+ * Session Client in zero system, it could be enabled by zero
+ * and keep session when authorization.
+ *
+ * Keep only one session store.
+ */
+public interface SessionClient {
+    /*
+     * Create local session store bind data
+     */
+    static SessionClient createShared(final Vertx vertx, final JsonObject config) {
+        return SessionClientImpl.create(vertx, config);
+    }
+
+    static SessionClient createShared(final Vertx vertx) {
+        return SessionClientImpl.create(vertx, new JsonObject());
+    }
+
+    SessionHandler getHandler();
+
+    /*
+     * Get Session by id
+     */
+    Future<Session> get(String id);
+}

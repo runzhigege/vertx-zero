@@ -7,7 +7,7 @@ import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.atom.worker.Receipt;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
-import io.vertx.up.web.origin.*;
+import io.vertx.up.uca.web.origin.*;
 import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 

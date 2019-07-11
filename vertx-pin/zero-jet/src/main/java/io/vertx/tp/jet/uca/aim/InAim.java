@@ -6,7 +6,7 @@ import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.uca.JtAim;
 import io.vertx.tp.jet.uca.valve.JtIn;
 import io.vertx.up.commune.Envelop;
-import io.vertx.up.rs.hunt.Answer;
+import io.vertx.up.uca.rs.hunt.Answer;
 
 /**
  * The handler chain contains 4 rules in sequence, it's for complex routing design

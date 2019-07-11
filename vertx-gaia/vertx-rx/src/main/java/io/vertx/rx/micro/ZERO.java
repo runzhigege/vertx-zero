@@ -1,7 +1,7 @@
 package io.vertx.rx.micro;
 
 import io.vertx.reactivex.ext.web.Router;
-import io.vertx.up.rs.Axis;
+import io.vertx.up.uca.rs.Axis;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

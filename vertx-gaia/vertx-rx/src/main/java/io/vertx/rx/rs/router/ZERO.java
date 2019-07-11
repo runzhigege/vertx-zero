@@ -2,9 +2,9 @@ package io.vertx.rx.rs.router;
 
 import io.vertx.reactivex.ext.web.Route;
 import io.vertx.reactivex.ext.web.RoutingContext;
-import io.vertx.up.rs.Sentry;
-import io.vertx.up.rs.dispatch.ModeSplitter;
-import io.vertx.up.rs.router.Hub;
+import io.vertx.up.uca.rs.Sentry;
+import io.vertx.up.uca.rs.dispatch.ModeSplitter;
+import io.vertx.up.uca.rs.router.Hub;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

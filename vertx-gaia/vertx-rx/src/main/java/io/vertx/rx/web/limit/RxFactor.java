@@ -3,7 +3,7 @@ package io.vertx.rx.web.limit;
 import io.vertx.rx.micro.ZeroRxAgent;
 import io.vertx.up.runtime.ZeroMotor;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.web.limit.Factor;
+import io.vertx.up.uca.web.limit.Factor;
 
 import java.util.HashSet;
 import java.util.Set;

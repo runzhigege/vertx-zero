@@ -36,7 +36,7 @@ You must set the up.god.file name in resource path is as `vertx-mongo-db.yml`, t
 **vertx-inject.yml**
 
 ```yaml
-mongo: io.vertx.up.plugin.mongo.MongoInfix
+mongo: io.vertx.tp.plugin.mongo.MongoInfix
 ```
 
 ## 2. Consumer Code

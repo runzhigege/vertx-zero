@@ -2,14 +2,14 @@ package io.vertx.up.unity;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Plugins;
+import io.vertx.up.exception.zero.InjectionLimeKeyException;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.Infix;
 import io.vertx.up.runtime.ZeroAmbient;
-import io.vertx.up.exception.zero.InjectionLimeKeyException;
-import io.vertx.up.uca.marshal.node.Node;
-import io.vertx.up.uca.marshal.node.ZeroUniform;
+import io.vertx.up.uca.yaml.Node;
+import io.vertx.up.uca.yaml.ZeroUniform;
 import io.vertx.up.util.Ut;
-import io.vertx.up.fn.Fn;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -22,7 +22,7 @@ public class Uimmit {
 
     private Uimmit(final Class<?> clazz) {
         this.clazz = clazz;
-        this.logger = Annal.get(clazz);
+        logger = Annal.get(clazz);
     }
 
     public static Uimmit create(final Class<?> clazz) {
@@ -45,7 +45,7 @@ public class Uimmit {
     }
 
     public Object initialize(final Field field) {
-        final Class<? extends Annotation> key = this.search(field);
+        final Class<? extends Annotation> key = search(field);
         final String pluginKey = Plugins.INFIX_MAP.get(key);
         final Class<?> infixCls = ZeroAmbient.getPlugin(pluginKey);
         Object ret = null;
@@ -55,18 +55,18 @@ public class Uimmit {
                 final Node<JsonObject> node = Ut.instance(ZeroUniform.class);
                 final JsonObject options = node.read();
 
-                Fn.outUp(!options.containsKey(pluginKey), this.logger,
+                Fn.outUp(!options.containsKey(pluginKey), logger,
                         InjectionLimeKeyException.class,
-                        this.clazz, infixCls, pluginKey);
+                        clazz, infixCls, pluginKey);
 
                 final Infix reference = Ut.singleton(infixCls);
 
                 ret = Ut.invoke(reference, "get");
             } else {
-                this.logger.warn(Info.INFIX_IMPL, infixCls.getName(), Infix.class.getName());
+                logger.warn(Info.INFIX_IMPL, infixCls.getName(), Infix.class.getName());
             }
         } else {
-            this.logger.warn(Info.INFIX_NULL, pluginKey, field.getName(), field.getDeclaringClass().getName());
+            logger.warn(Info.INFIX_NULL, pluginKey, field.getName(), field.getDeclaringClass().getName());
         }
         return ret;
     }

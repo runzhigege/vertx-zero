@@ -1,6 +1,6 @@
 package javax.ws.rs;
 
-import io.vertx.up.media.resolver.JsonResolver;
+import io.vertx.up.uca.rs.media.resolver.JsonResolver;
 
 import java.lang.annotation.*;
 

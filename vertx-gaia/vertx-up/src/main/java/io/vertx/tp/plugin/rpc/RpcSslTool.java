@@ -4,12 +4,12 @@ import io.grpc.ManagedChannel;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.grpc.VertxChannelBuilder;
-import io.vertx.up.atom.flux.IpcData;
+import io.vertx.up.atom.rpc.IpcData;
 import io.vertx.up.eon.em.CertType;
 import io.vertx.up.log.Annal;
-import io.vertx.up.micro.ssl.TrustPipe;
-import io.vertx.up.uca.marshal.node.Node;
-import io.vertx.up.uca.marshal.node.ZeroUniform;
+import io.vertx.up.uca.micro.ssl.TrustPipe;
+import io.vertx.up.uca.yaml.Node;
+import io.vertx.up.uca.yaml.ZeroUniform;
 import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 

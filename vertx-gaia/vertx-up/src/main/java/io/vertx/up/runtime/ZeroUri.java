@@ -3,7 +3,7 @@ package io.vertx.up.runtime;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.log.Annal;
-import io.vertx.up.micro.matcher.RegexPath;
+import io.vertx.up.uca.micro.matcher.RegexPath;
 
 import java.util.HashSet;
 import java.util.Objects;

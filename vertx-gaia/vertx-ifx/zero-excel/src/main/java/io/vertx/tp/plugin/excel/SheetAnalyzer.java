@@ -9,9 +9,9 @@ import io.vertx.tp.plugin.excel.ranger.ColBound;
 import io.vertx.tp.plugin.excel.ranger.ExBound;
 import io.vertx.tp.plugin.excel.ranger.RowBound;
 import io.vertx.tp.plugin.excel.tool.ExFn;
-import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Values;
-import io.vertx.up.util.container.Refer;
+import io.vertx.up.log.Annal;
+import io.vertx.up.uca.container.Refer;
 import org.apache.poi.ss.usermodel.*;
 
 import java.io.Serializable;
@@ -47,7 +47,7 @@ public class SheetAnalyzer implements Serializable {
 
         /* Row scanning for {TABLE} */
         final List<Cell> tableCell = new ArrayList<>();
-        ExFn.itSheet(this.sheet, bound, (row, index) -> {
+        ExFn.itSheet(sheet, bound, (row, index) -> {
 
             final ExBound colBound = new ColBound(row);
             ExFn.itRow(row, colBound,
@@ -60,16 +60,16 @@ public class SheetAnalyzer implements Serializable {
         /* analyzedBounds */
         if (!tableCell.isEmpty()) {
             LOGGER.info("[ Excel ] Scanned sheet: {0}, tables = {1}",
-                    this.sheet.getSheetName(), String.valueOf(tableCell.size()));
+                    sheet.getSheetName(), String.valueOf(tableCell.size()));
             /* Range scaned */
-            final ConcurrentMap<Integer, Integer> range = this.getRange(tableCell);
+            final ConcurrentMap<Integer, Integer> range = getRange(tableCell);
             tableCell.stream().map(cell -> {
-                final Row row = this.sheet.getRow(cell.getRowIndex());
+                final Row row = sheet.getRow(cell.getRowIndex());
                 if (null == row) {
                     return null;
                 } else {
                     final Integer limit = range.get(cell.hashCode());
-                    return this.analyzed(row, cell, limit);
+                    return analyzed(row, cell, limit);
                 }
             }).filter(Objects::nonNull).forEach(tables::add);
         }
@@ -85,7 +85,7 @@ public class SheetAnalyzer implements Serializable {
             indexes.add(cell.getRowIndex() - 1);
             hashCodes.add(cell.hashCode());
         });
-        indexes.add(this.sheet.getLastRowNum());
+        indexes.add(sheet.getLastRowNum());
         indexes.remove(Values.IDX);
         final ConcurrentMap<Integer, Integer> indexMap = new ConcurrentHashMap<>();
         for (int idx = 0; idx < hashCodes.size(); idx++) {
@@ -101,11 +101,11 @@ public class SheetAnalyzer implements Serializable {
      */
     private ExTable analyzed(final Row row, final Cell cell, final Integer limitation) {
         /* Build ExTable */
-        final ExTable table = this.create(row, cell);
+        final ExTable table = create(row, cell);
 
         /* Scan Field, Once scanning */
         final Refer hod = new Refer();
-        ExFn.onRow(this.sheet, row.getRowNum() + 2, foundRow -> {
+        ExFn.onRow(sheet, row.getRowNum() + 2, foundRow -> {
             /* Build Field Col */
             final ExBound bound = new ColBound(cell.getColumnIndex(), row.getLastCellNum());
             ExFn.itRow(foundRow, bound, (foundCell, colIndex) ->
@@ -116,12 +116,12 @@ public class SheetAnalyzer implements Serializable {
 
         /* Data Range */
         final ExBound dataRange = hod.get();
-        ExFn.itSheet(this.sheet, dataRange, (dataRow, dataIndex) -> {
+        ExFn.itSheet(sheet, dataRange, (dataRow, dataIndex) -> {
             /* Build Data Col Range */
             final ExBound bound = new ColBound(cell.getColumnIndex(),
                     cell.getColumnIndex() + table.size());
             /* Each row should be record */
-            final ExRecord record = this.create(dataRow, bound, table);
+            final ExRecord record = create(dataRow, bound, table);
             /* Not Empty to add */
             table.add(record);
         });
@@ -133,7 +133,7 @@ public class SheetAnalyzer implements Serializable {
         ExFn.itRow(row, bound, (dataCell, dataIndex) -> {
             /* Field / Value */
             final String field = table.field(dataIndex);
-            final Object value = ExValue.getValue(dataCell, this.evaluator);
+            final Object value = ExValue.getValue(dataCell, evaluator);
             /* Stored into record */
             record.put(field, value);
         });
@@ -142,7 +142,7 @@ public class SheetAnalyzer implements Serializable {
 
     private ExTable create(final Row row, final Cell cell) {
         /* Sheet Name */
-        final ExTable table = new ExTable(this.sheet.getSheetName());
+        final ExTable table = new ExTable(sheet.getSheetName());
         /* Name, Connect, Description - Cell */
         ExFn.onCell(row, cell.getColumnIndex() + 1,
                 found -> table.setName(found.getStringCellValue()));

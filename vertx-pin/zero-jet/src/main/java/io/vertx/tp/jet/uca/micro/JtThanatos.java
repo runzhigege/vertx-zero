@@ -2,11 +2,11 @@ package io.vertx.tp.jet.uca.micro;
 
 import io.vertx.core.Future;
 import io.vertx.tp.jet.monitor.JtMonitor;
-import io.vertx.up.job.AbstractMission;
 import io.vertx.up.annotations.On;
-import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.Commercial;
+import io.vertx.up.commune.Envelop;
+import io.vertx.up.uca.job.AbstractMission;
 
 /**
  * 「Job Instance」
@@ -20,7 +20,7 @@ import io.vertx.up.commune.Commercial;
  */
 // @Job(value = JobType.CONTAINER)
 public class JtThanatos extends AbstractMission {
-    private transient final JtMonitor monitor = JtMonitor.create(this.getClass());
+    private transient final JtMonitor monitor = JtMonitor.create(getClass());
 
     /*
      * Data example
@@ -64,6 +64,6 @@ public class JtThanatos extends AbstractMission {
         /*
          * Here provide another reference for Mission injection
          */
-        return JtPandora.async(envelop, commercial, mission, this.monitor);
+        return JtPandora.async(envelop, commercial, mission, monitor);
     }
 }

@@ -5,7 +5,7 @@ import io.vertx.up.atom.Ruler;
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.eon.em.WallType;
 import io.vertx.up.log.Annal;
-import io.vertx.up.plugin.mongo.MongoWall;
+import io.vertx.tp.plugin.mongo.MongoWall;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.uca.marshal.Transformer;
 

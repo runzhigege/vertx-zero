@@ -4,7 +4,7 @@ import io.vertx.reactivex.ext.web.Router;
 import io.vertx.reactivex.ext.web.handler.BodyHandler;
 import io.vertx.reactivex.ext.web.handler.CookieHandler;
 import io.vertx.up.eon.Orders;
-import io.vertx.up.rs.Axis;
+import io.vertx.up.uca.rs.Axis;
 
 public class RouterAxis implements Axis<Router> {
 

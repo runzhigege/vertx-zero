@@ -99,7 +99,7 @@ import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.commune.Envelop;
-import io.vertx.up.plugin.mongo.MongoReadOpts;
+import io.vertx.tp.plugin.mongo.MongoReadOpts;
 
 import javax.inject.Inject;
 

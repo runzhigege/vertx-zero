@@ -4,7 +4,7 @@ import io.vertx.core.VertxException;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
-import io.vertx.up.web.filter.HttpFilter;
+import io.vertx.up.uca.web.filter.HttpFilter;
 import io.vertx.up.util.Ut;
 
 import javax.servlet.annotation.WebFilter;
