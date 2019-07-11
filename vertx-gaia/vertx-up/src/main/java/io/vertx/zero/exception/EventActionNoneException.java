@@ -1,6 +1,7 @@
 package io.vertx.zero.exception;
 
 import io.vertx.up.atom.agent.Event;
+import io.vertx.up.exception.UpException;
 
 public class EventActionNoneException extends UpException {
 

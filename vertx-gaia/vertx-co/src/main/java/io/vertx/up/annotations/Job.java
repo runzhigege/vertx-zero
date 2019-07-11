@@ -1,7 +1,7 @@
 package io.vertx.up.annotations;
 
 import io.vertx.up.eon.em.JobType;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.Strings;
 
 import java.lang.annotation.*;
 import java.util.concurrent.TimeUnit;

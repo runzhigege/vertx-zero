@@ -2,8 +2,8 @@ package io.vertx.rx.rs.router;
 
 import io.vertx.reactivex.ext.web.Route;
 import io.vertx.up.atom.agent.Event;
-import io.vertx.up.rs.router.Hub;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.uca.rs.router.Hub;
+import io.vertx.up.eon.Strings;
 
 import javax.ws.rs.core.MediaType;
 import java.util.Set;

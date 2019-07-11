@@ -1,7 +1,7 @@
 package io.vertx.tp.crud.extension;
 
 import io.vertx.tp.crud.init.IxPin;
-import io.vertx.up.plugin.extension.PlugRegistry;
+import io.vertx.up.extension.PlugRegistry;
 
 import java.util.Set;
 import java.util.stream.Collectors;

@@ -28,17 +28,17 @@ public interface Plugins {
     ConcurrentMap<Class<? extends Annotation>, String> INFIX_MAP =
             new ConcurrentHashMap<Class<? extends Annotation>, String>() {
                 {
-                    this.put(Mongo.class, Infix.MONGO);
-                    this.put(MySql.class, Infix.MYSQL);
-                    this.put(Jooq.class, Infix.JOOQ);
-                    this.put(Rpc.class, Infix.RPC);
-                    this.put(Redis.class, Infix.REDIS);
+                    put(Mongo.class, Infix.MONGO);
+                    put(MySql.class, Infix.MYSQL);
+                    put(Jooq.class, Infix.JOOQ);
+                    put(Rpc.class, Infix.RPC);
+                    put(Redis.class, Infix.REDIS);
                 }
             };
     Set<Class<? extends Annotation>> INJECT_ANNOTATIONS = new HashSet<Class<? extends Annotation>>() {
         {
-            this.addAll(INFIX_MAP.keySet());
-            this.add(Inject.class);
+            addAll(INFIX_MAP.keySet());
+            add(Inject.class);
         }
     };
 
@@ -68,18 +68,21 @@ public interface Plugins {
         String SECURE = "secure";
 
         String LOGGER = "logger";
-
+        /*
+         *
+         */
         Set<String> STANDAND = new HashSet<String>() {
             {
-                this.add(MONGO);
-                this.add(MYSQL);
-                this.add(REDIS);
-                this.add(SESSION);
-                this.add(SHARED);
+                add(MONGO);
+                add(MYSQL);
+                add(REDIS);
+                // Could not put session  / shared in to standard
+                // this.add(SESSION);
+                // this.add(SHARED);
 
-                this.add(RPC);
-                this.add(JOOQ);
-                this.add(LOGGER);
+                add(RPC);
+                add(JOOQ);
+                add(LOGGER);
             }
         };
     }

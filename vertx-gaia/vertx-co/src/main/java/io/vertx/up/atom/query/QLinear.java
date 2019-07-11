@@ -1,11 +1,11 @@
 package io.vertx.up.atom.query;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.exception._400OpUnsupportException;
+import io.vertx.up.eon.Strings;
+import io.vertx.up.exception.web._400OpUnsupportException;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Strings;
-import io.zero.epic.container.Kv;
-import io.zero.epic.fn.Fn;
+import io.vertx.up.uca.container.Kv;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +17,10 @@ public class QLinear {
     private final transient JsonObject raw = new JsonObject();
 
     private QLinear(final JsonObject data) {
-        this.raw.mergeIn(data.copy());
+        raw.mergeIn(data.copy());
         for (final String field : data.fieldNames()) {
             // Add
-            this.add(field, data.getValue(field));
+            add(field, data.getValue(field));
         }
     }
 
@@ -29,11 +29,11 @@ public class QLinear {
     }
 
     public List<Kv<String, Kv<String, Object>>> getConditions() {
-        return this.conditions;
+        return conditions;
     }
 
     public boolean isValid() {
-        return !this.conditions.isEmpty();
+        return !conditions.isEmpty();
     }
 
     public QLinear add(final String field, final Object value) {
@@ -48,16 +48,16 @@ public class QLinear {
             op = Inquiry.Op.EQ;
         }
         Fn.outWeb(!Inquiry.Op.VALUES.contains(op), LOGGER,
-                _400OpUnsupportException.class, this.getClass(), op);
+                _400OpUnsupportException.class, getClass(), op);
         final Kv<String, Object> condition = Kv.create(op, value);
         final Kv<String, Kv<String, Object>> item = Kv.create(filterField, condition);
         // At the same time.
-        this.conditions.add(item);
-        this.raw.put(field, value);
+        conditions.add(item);
+        raw.put(field, value);
         return this;
     }
 
     public JsonObject toJson() {
-        return this.raw;
+        return raw;
     }
 }

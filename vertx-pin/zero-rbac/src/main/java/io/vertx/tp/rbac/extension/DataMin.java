@@ -6,11 +6,11 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.cv.em.RegionType;
 import io.vertx.tp.rbac.refine.Sc;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Values;
-import io.zero.epic.Ut;
+import io.vertx.up.eon.Values;
+import io.vertx.up.util.Ut;
 
 import java.util.HashSet;
 import java.util.Objects;

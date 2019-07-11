@@ -2,10 +2,10 @@ package io.vertx.tp.jet.uca.tunnel;
 
 import io.vertx.core.Future;
 import io.vertx.tp.jet.cv.JtConstant;
-import io.vertx.up.aiki.Ux;
-import io.vertx.up.aiki.UxPool;
 import io.vertx.up.commune.Commercial;
-import io.vertx.zero.atom.Database;
+import io.vertx.up.commune.config.Database;
+import io.vertx.up.unity.Ux;
+import io.vertx.up.unity.UxPool;
 
 import java.util.Objects;
 

@@ -1,6 +1,6 @@
 package io.vertx.quiz.example;
 
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.Strings;
 
 import javax.ws.rs.GET;
 

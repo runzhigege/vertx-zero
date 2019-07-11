@@ -57,7 +57,7 @@ package up.god.micro.request;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 @Queue
 public class AsyncWorker {

@@ -9,7 +9,7 @@ import io.vertx.tp.plugin.excel.ExcelClient;
 import io.vertx.tp.plugin.excel.ExcelInfix;
 import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.log.Annal;
-import io.zero.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.util.List;
 import java.util.stream.Collectors;

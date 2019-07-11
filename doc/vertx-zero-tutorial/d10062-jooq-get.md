@@ -38,10 +38,10 @@ package up.god.micro.tabular;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 import javax.inject.Inject;
 
@@ -80,7 +80,7 @@ package up.god.micro.tabular;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import up.god.domain.tables.daos.SysTabularDao;
 
 public class TabularService implements TabularStub {
@@ -94,7 +94,7 @@ public class TabularService implements TabularStub {
 
 ## 2. Utility X of Jooq
 
-In this example we used an api of `Ux.Jooq` class, this class is provided by zero system, once you have finished the configuration of Jooq, you can use `Ux.Jooq` tool in any place of zero system code. When you used `Ux.Jooq` class, you must call `on(Class<?>)` first and returned `io.vertx.up.aiki.UxJooq` reference, once you get this reference you can call some common api now.
+In this example we used an api of `Ux.Jooq` class, this class is provided by zero system, once you have finished the configuration of Jooq, you can use `Ux.Jooq` tool in any place of zero system code. When you used `Ux.Jooq` class, you must call `on(Class<?>)` first and returned `io.vertx.up.unity.UxJooq` reference, once you get this reference you can call some common api now.
 
 Current example, we used `fetchOnneByID` method, you can check this method signature:
 
@@ -155,7 +155,7 @@ package up.god.micro.tabular;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import up.god.domain.tables.daos.SysTabularDao;
 import up.god.domain.tables.pojos.SysTabular;
 

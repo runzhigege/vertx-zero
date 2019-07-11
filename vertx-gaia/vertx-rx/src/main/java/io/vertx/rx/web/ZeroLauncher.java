@@ -4,8 +4,8 @@ import io.reactivex.Single;
 import io.vertx.core.spi.cluster.ClusterManager;
 import io.vertx.reactivex.core.Vertx;
 import io.vertx.up.Launcher;
-import io.vertx.up.boot.Motor;
 import io.vertx.up.log.Annal;
+import io.vertx.up.runtime.ZeroMotor;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -19,7 +19,7 @@ public class ZeroLauncher implements Launcher<Vertx> {
 
     @Override
     public void start(final Consumer<Vertx> callback) {
-        Motor.start(getClass(),
+        ZeroMotor.start(getClass(),
                 callback,
                 this::startStandalone,
                 this::startCluster,
@@ -32,11 +32,11 @@ public class ZeroLauncher implements Launcher<Vertx> {
     }
 
     private void startStandalone(final Consumer<Vertx> consumer) {
-        Motor.each((name, option) -> {
+        ZeroMotor.each((name, option) -> {
 
             final Vertx vertx = Vertx.vertx(option);
 
-            Motor.codec(vertx.eventBus().getDelegate());
+            ZeroMotor.codec(vertx.eventBus().getDelegate());
 
             VERTX.putIfAbsent(name, vertx);
             consumer.accept(vertx);
@@ -45,13 +45,13 @@ public class ZeroLauncher implements Launcher<Vertx> {
 
     private void startCluster(final ClusterManager manager,
                               final Consumer<Vertx> consumer) {
-        Motor.each((name, option) -> {
+        ZeroMotor.each((name, option) -> {
             // Set cluster manager
             option.setClusterManager(manager);
 
             final Single<Vertx> observable = Vertx.rxClusteredVertx(option);
             observable.subscribe(vertx -> {
-                Motor.codec(vertx.eventBus().getDelegate());
+                ZeroMotor.codec(vertx.eventBus().getDelegate());
                 // Finalized
                 VERTX.putIfAbsent(name, vertx);
                 consumer.accept(vertx);

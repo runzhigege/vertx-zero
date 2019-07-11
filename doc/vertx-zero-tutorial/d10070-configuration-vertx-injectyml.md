@@ -3,7 +3,7 @@
 This configuration up.god.file provide extension system especially for vert.x native components. The default content is as following:
 
 ```yaml
-logger: io.vertx.zero.log.internal.Log4JAnnal
+logger: io.vertx.up.log.internal.Log4JAnnal
 ```
 
 It's the only one component that enabled by default, you can replace this component by yourself when you want to use ELK or other logger. This chapter we'll focus on frequently used `injection` component so that you could know how to set the configuration in zero system.
@@ -23,7 +23,7 @@ jooq: io.vertx.tp.plugin.jooq.JooqInfix
 ### 1.2. mongo
 
 ```yaml
-mongo: io.vertx.up.plugin.mongo.MongoInfix
+mongo: io.vertx.tp.plugin.mongo.MongoInfix
 ```
 
 ### 1.3. mysql

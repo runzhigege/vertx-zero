@@ -5,10 +5,10 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.job.center.Agha;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.log.Annal;
-import io.zero.epic.Ut;
+import io.vertx.up.uca.job.center.Agha;
+import io.vertx.up.util.Ut;
 
 import java.util.Objects;
 
@@ -31,7 +31,7 @@ public class JobClientImpl implements JobClient {
             /* Start new job here */
             final Agha agha = Agha.get(mission.getType());
             /* Bind vertx */
-            Ut.contract(agha, Vertx.class, this.vertx);
+            Ut.contract(agha, Vertx.class, vertx);
             /*
              * begin method return Future<Long>, it's async result
              * that's why here it's not needed to use:
@@ -52,7 +52,7 @@ public class JobClientImpl implements JobClient {
         JobPool.stop(timerId);
         handler.handle(Future.succeededFuture(Boolean.TRUE));
         /* Cancel job */
-        this.vertx.cancelTimer(timerId);
+        vertx.cancelTimer(timerId);
         return this;
     }
 
@@ -61,6 +61,6 @@ public class JobClientImpl implements JobClient {
         JobPool.resume(timeId);
         /* String name get and then start */
         final String name = JobPool.name(timeId);
-        return this.start(name, handler);
+        return start(name, handler);
     }
 }

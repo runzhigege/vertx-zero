@@ -15,7 +15,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error._424MessageSendException;
 import io.vertx.tp.error._424ProfileEndPointException;
 import io.vertx.up.log.Annal;
-import io.zero.epic.fn.Fn;
+import io.vertx.up.fn.Fn;
 
 public class SmsClientImpl implements SmsClient {
 

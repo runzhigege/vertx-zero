@@ -2,25 +2,24 @@ package io.vertx.up;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServerOptions;
-import io.vertx.tp.etcd.center.EtcdData;
+import io.vertx.tp.plugin.etcd.center.EtcdData;
 import io.vertx.up.annotations.Up;
-import io.vertx.up.boot.DansApplication;
 import io.vertx.up.eon.em.ServerType;
+import io.vertx.up.exception.zero.EtcdNetworkException;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.micro.config.DynamicVisitor;
-import io.vertx.up.micro.config.ServerVisitor;
-import io.vertx.up.web.ZeroLauncher;
-import io.vertx.up.web.anima.*;
-import io.vertx.zero.exception.EtcdNetworkException;
+import io.vertx.up.runtime.Anno;
+import io.vertx.up.runtime.Runner;
+import io.vertx.up.runtime.ZeroAnno;
+import io.vertx.up.runtime.ZeroHeart;
+import io.vertx.up.uca.options.DynamicVisitor;
+import io.vertx.up.uca.options.ServerVisitor;
+import io.vertx.up.util.Ut;
+import io.vertx.up.uca.web.ZeroLauncher;
+import io.vertx.up.uca.web.anima.*;
 import io.vertx.zero.exception.MicroModeUpException;
 import io.vertx.zero.exception.UpClassArgsException;
 import io.vertx.zero.exception.UpClassInvalidException;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
-import io.zero.runtime.Anno;
-import io.zero.runtime.Runner;
-import io.zero.runtime.ZeroAnno;
-import io.zero.runtime.ZeroHeart;
 
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
@@ -30,7 +29,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * Vertx Application entry
  * 1) VertxApplication: start up zero framework in `application` mode. ( Service | Application )
- * 2) DansApplication: start up zero framework in `micro` mode. ( Service & Gateway )
+ * 2) MicroApplication: start up zero framework in `micro` mode. ( Service & Gateway )
  * 3) Five scanners for critical components starting up
  */
 public class VertxApplication {
@@ -87,7 +86,7 @@ public class VertxApplication {
              *
              * Because static {} initializing will be triggered when `ZeroAnno` is called first time, to avoid
              * some preparing failure, here we replaced `static {}` with `prepare()` calling before any instance
-             * of VertxApplication/DansApplication.
+             * of VertxApplication/MicroApplication.
              */
             ZeroAnno.prepare();
 
@@ -100,7 +99,7 @@ public class VertxApplication {
                  * `Micro` mode only
                  * Current zero node will run as api gateway
                  */
-                DansApplication.run(clazz);
+                MicroApplication.run(clazz);
             } else {
                 /*
                  * Standard application

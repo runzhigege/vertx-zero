@@ -1,9 +1,9 @@
 package io.vertx.up.atom.query;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.exception._400QueryKeyTypeException;
+import io.vertx.up.exception.web._400QueryKeyTypeException;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
-import io.zero.epic.fn.Fn;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -131,21 +131,21 @@ public interface Inquiry {
 
         Set<String> VALUES = new HashSet<String>() {
             {
-                this.add(LT);
-                this.add(LE);
-                this.add(GT);
-                this.add(GE);
-                this.add(EQ);
-                this.add(NEQ);
-                this.add(NOT_NULL);
-                this.add(NULL);
-                this.add(TRUE);
-                this.add(FALSE);
-                this.add(IN);
-                this.add(NOT_IN);
-                this.add(START);
-                this.add(END);
-                this.add(CONTAIN);
+                add(LT);
+                add(LE);
+                add(GT);
+                add(GE);
+                add(EQ);
+                add(NEQ);
+                add(NOT_NULL);
+                add(NULL);
+                add(TRUE);
+                add(FALSE);
+                add(IN);
+                add(NOT_IN);
+                add(START);
+                add(END);
+                add(CONTAIN);
             }
         };
     }

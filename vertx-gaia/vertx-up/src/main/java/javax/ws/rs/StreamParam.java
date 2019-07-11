@@ -1,6 +1,6 @@
 package javax.ws.rs;
 
-import io.vertx.up.media.resolver.UnsetResolver;
+import io.vertx.up.uca.rs.mime.resolver.UnsetResolver;
 
 import java.lang.annotation.*;
 

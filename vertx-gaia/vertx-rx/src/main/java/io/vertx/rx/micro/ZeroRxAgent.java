@@ -11,11 +11,11 @@ import io.vertx.rx.rs.router.RouterAxis;
 import io.vertx.up.annotations.Agent;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
-import io.vertx.up.micro.ZeroAtomic;
-import io.vertx.up.rs.Axis;
-import io.vertx.zero.eon.Values;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.up.verticle.ZeroAtomic;
+import io.vertx.up.uca.rs.Axis;
+import io.vertx.up.eon.Values;
+import io.vertx.up.util.Ut;
+import io.vertx.up.fn.Fn;
 
 import java.text.MessageFormat;
 import java.util.List;

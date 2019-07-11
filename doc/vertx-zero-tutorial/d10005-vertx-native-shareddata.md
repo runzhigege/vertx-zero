@@ -39,7 +39,7 @@ shared:
 The last configuration for shared data usage is that you must set `inject` in your configuration:
 
 ```yaml
-shared: io.vertx.up.plugin.shared.MapInfix
+shared: io.vertx.tp.plugin.shared.MapInfix
 ```
 
 Once you have finished above three configuration, the shared data will be enabled.
@@ -52,7 +52,7 @@ package up.god.micro;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.EndPoint;
 import io.vertx.up.annotations.Plugin;
-import io.vertx.up.plugin.shared.SharedClient;
+import io.vertx.tp.plugin.shared.SharedClient;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -76,7 +76,7 @@ public class SharedActor {
 When you test this url, you should see following information in output console:
 
 ```shell
-io.vertx.up.plugin.shared.SharedClientImpl@245fc212
+io.vertx.tp.plugin.shared.SharedClientImpl@245fc212
 ```
 
 It means that you have got reference of `SharedClient`, then we'll move to some apis of SharedClient to see how to use this client in different situations.

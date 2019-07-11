@@ -10,8 +10,8 @@ import io.vertx.tp.jet.cv.em.WorkerType;
 import io.vertx.tp.jet.uca.tunnel.AdaptorChannel;
 import io.vertx.tp.optic.jet.JtConsumer;
 import io.vertx.up.eon.em.ChannelType;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.up.util.Ut;
+import io.vertx.up.fn.Fn;
 
 import java.util.function.Supplier;
 

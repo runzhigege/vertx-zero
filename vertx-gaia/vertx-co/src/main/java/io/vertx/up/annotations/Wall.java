@@ -1,6 +1,6 @@
 package io.vertx.up.annotations;
 
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 
 import java.lang.annotation.*;
 
@@ -40,7 +40,7 @@ public @interface Wall {
     /**
      * Value for wall sequence, it's for auth handler chain.
      * 1. All the wall class must contains different value
-     * 2. The major wall should be 0, others could follow be 1, 2, 3.
+     * 2. The major wall should be 0, others could invoke be 1, 2, 3.
      * 3. The wall handler sequence should be triggered by 0,1,2,3...
      * Multi handler mode needed for this value.
      *

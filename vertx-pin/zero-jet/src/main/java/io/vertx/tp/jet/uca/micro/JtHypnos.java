@@ -3,8 +3,8 @@ package io.vertx.tp.jet.uca.micro;
 import io.vertx.tp.jet.atom.JtJob;
 import io.vertx.tp.optic.environment.Ambient;
 import io.vertx.tp.optic.environment.AmbientEnvironment;
-import io.vertx.up.job.store.JobStore;
 import io.vertx.up.atom.worker.Mission;
+import io.vertx.up.uca.job.store.JobStore;
 
 import java.util.Objects;
 import java.util.Set;

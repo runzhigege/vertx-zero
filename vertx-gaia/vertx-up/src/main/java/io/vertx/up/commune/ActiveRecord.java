@@ -2,7 +2,7 @@ package io.vertx.up.commune;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
-import io.zero.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.util.Arrays;
 import java.util.HashSet;

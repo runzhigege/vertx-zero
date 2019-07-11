@@ -7,14 +7,14 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.LocalMap;
 import io.vertx.servicediscovery.Record;
-import io.vertx.up.atom.Envelop;
-import io.vertx.up.atom.flux.IpcData;
+import io.vertx.up.commune.Envelop;
+import io.vertx.up.atom.rpc.IpcData;
 import io.vertx.up.eon.em.IpcType;
 import io.vertx.up.log.Annal;
-import io.vertx.up.micro.ipc.DataEncap;
+import io.vertx.up.uca.micro.ipc.DataEncap;
 import io.vertx.tp.plugin.rpc.client.RpcStub;
 import io.vertx.tp.plugin.rpc.client.UnityStub;
-import io.zero.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.text.MessageFormat;
 import java.util.Objects;

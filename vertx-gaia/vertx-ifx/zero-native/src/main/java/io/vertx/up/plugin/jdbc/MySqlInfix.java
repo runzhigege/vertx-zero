@@ -6,8 +6,8 @@ import io.vertx.ext.sql.SQLClient;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.plugin.Infix;
-import io.vertx.up.plugin.mongo.MongoInfix;
-import io.zero.epic.fn.Fn;
+import io.vertx.tp.plugin.mongo.MongoInfix;
+import io.vertx.up.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
