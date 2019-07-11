@@ -1,4 +1,4 @@
-package io.vertx.zero.epic.fn;
+package io.vertx.zero.fn;
 
 /**
  * Actuator function interface, this interface could throw out

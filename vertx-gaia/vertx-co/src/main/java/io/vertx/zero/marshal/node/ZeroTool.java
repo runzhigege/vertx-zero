@@ -2,8 +2,8 @@ package io.vertx.zero.marshal.node;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.FileSuffix;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.FileSuffix;
+import io.vertx.up.eon.Strings;
 import io.vertx.zero.exception.heart.EmptyStreamException;
 import io.vertx.zero.epic.Ut;
 

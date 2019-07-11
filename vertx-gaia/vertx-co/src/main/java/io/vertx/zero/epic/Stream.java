@@ -5,7 +5,7 @@ import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import io.vertx.zero.exception.heart.EmptyStreamException;
 import io.vertx.zero.log.Log;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.io.*;
 import java.util.Objects;

@@ -12,7 +12,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.micro.discovery.ApiOrigin;
 import io.vertx.up.micro.discovery.Origin;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 import io.vertx.zero.runtime.Runner;
 
 import java.text.MessageFormat;

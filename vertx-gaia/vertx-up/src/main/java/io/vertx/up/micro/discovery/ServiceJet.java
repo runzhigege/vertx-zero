@@ -26,7 +26,7 @@ import io.vertx.up.micro.matcher.Arithmetic;
 import io.vertx.up.micro.matcher.CommonArithmetic;
 import io.vertx.zero.marshal.Visitor;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.util.List;
 import java.util.function.Consumer;

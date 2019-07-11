@@ -6,11 +6,11 @@ import io.vertx.ext.web.Router;
 import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.extension.PlugRouter;
 import io.vertx.up.rs.Axis;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 import io.vertx.zero.runtime.ZeroAmbient;
 
 import java.util.concurrent.atomic.AtomicInteger;

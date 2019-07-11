@@ -7,7 +7,7 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.*;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

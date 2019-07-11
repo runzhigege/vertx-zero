@@ -14,7 +14,7 @@ import io.vertx.up.micro.discovery.IpcOrigin;
 import io.vertx.up.micro.discovery.Origin;
 import io.vertx.up.micro.ipc.DataEncap;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

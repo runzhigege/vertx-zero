@@ -1,4 +1,4 @@
-package io.vertx.zero.epic.fn;
+package io.vertx.zero.fn;
 
 /*
  * Be careful about this interface because it's only support

@@ -3,8 +3,8 @@ package io.vertx.tp.ambient.refine;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
-import io.vertx.zero.eon.Strings;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Strings;
+import io.vertx.up.eon.Values;
 import io.vertx.zero.epic.Ut;
 
 class AtQuery {

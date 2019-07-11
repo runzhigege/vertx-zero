@@ -4,7 +4,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.error.Readible;
 import io.vertx.up.exception.WebException;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 import io.vertx.zero.runtime.ZeroSerializer;
 
 import java.util.Objects;

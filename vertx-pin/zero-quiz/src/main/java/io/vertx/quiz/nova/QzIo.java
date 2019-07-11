@@ -2,10 +2,10 @@ package io.vertx.quiz.nova;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.FileSuffix;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.FileSuffix;
+import io.vertx.up.eon.Strings;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 import io.vertx.quiz.cv.QzApi;
 
 class QzIo {

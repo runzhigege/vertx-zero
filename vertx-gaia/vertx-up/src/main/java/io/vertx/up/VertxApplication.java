@@ -16,7 +16,7 @@ import io.vertx.zero.exception.MicroModeUpException;
 import io.vertx.zero.exception.UpClassArgsException;
 import io.vertx.zero.exception.UpClassInvalidException;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 import io.vertx.zero.runtime.Anno;
 import io.vertx.zero.runtime.Runner;
 import io.vertx.zero.runtime.ZeroAnno;

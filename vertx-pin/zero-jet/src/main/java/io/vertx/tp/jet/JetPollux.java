@@ -17,7 +17,7 @@ import io.vertx.tp.optic.environment.AmbientEnvironment;
 import io.vertx.up.plugin.extension.PlugRouter;
 import io.vertx.up.web.failure.CommonEndurer;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.util.Objects;
 import java.util.Set;

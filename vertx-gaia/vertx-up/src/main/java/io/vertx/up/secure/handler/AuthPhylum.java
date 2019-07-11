@@ -11,7 +11,7 @@ import io.vertx.ext.web.Session;
 import io.vertx.ext.web.handler.AuthHandler;
 import io.vertx.up.exception.*;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.Strings;
 
 import java.util.HashSet;
 import java.util.Set;

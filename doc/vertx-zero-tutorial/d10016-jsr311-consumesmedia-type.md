@@ -13,7 +13,7 @@ package up.god.micro.media;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.EndPoint;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

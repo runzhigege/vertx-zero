@@ -1,8 +1,8 @@
 package io.vertx.zero.epic.net;
 
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Strings;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.up.eon.Strings;
+import io.vertx.zero.fn.Fn;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;

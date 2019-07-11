@@ -1,6 +1,6 @@
 package io.vertx.up.annotations;
 
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 
 import java.lang.annotation.*;
 

@@ -1,4 +1,4 @@
-package io.vertx.zero.epic.fn;
+package io.vertx.zero.fn;
 
 import io.vertx.core.VertxException;
 import io.vertx.up.log.Annal;

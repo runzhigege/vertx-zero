@@ -1,6 +1,6 @@
 package io.vertx.zero.exception.demon;
 
-import io.vertx.zero.eon.em.DataType;
+import io.vertx.up.eon.em.DataType;
 import io.vertx.zero.exception.DemonException;
 
 public class DataTypeWrongException extends DemonException {

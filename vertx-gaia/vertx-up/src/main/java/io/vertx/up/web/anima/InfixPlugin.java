@@ -2,10 +2,11 @@ package io.vertx.up.web.anima;
 
 import io.reactivex.Observable;
 import io.vertx.up.annotations.Plugin;
+import io.vertx.up.eon.Info;
 import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.Infix;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 import io.vertx.zero.runtime.ZeroAmbient;
 
 import java.lang.reflect.Method;
@@ -21,7 +22,7 @@ class InfixPlugin {
 
     private InfixPlugin(final Class<?> clazz) {
         this.clazz = clazz;
-        this.logger = Annal.get(clazz);
+        logger = Annal.get(clazz);
     }
 
     static InfixPlugin create(final Class<?> clazz) {
@@ -29,7 +30,7 @@ class InfixPlugin {
     }
 
     void inject(final Object proxy) {
-        final ConcurrentMap<Class<?>, Class<?>> binds = this.getBind();
+        final ConcurrentMap<Class<?>, Class<?>> binds = getBind();
         final Class<?> type = proxy.getClass();
         Observable.fromArray(type.getDeclaredFields())
                 .filter(field -> field.isAnnotationPresent(Plugin.class))
@@ -43,10 +44,10 @@ class InfixPlugin {
                             final String fieldName = field.getName();
                             Ut.field(proxy, fieldName, tpRef);
                         } else {
-                            this.logger.warn(Info.INFIX_IMPL, infixCls.getName(), Infix.class.getName());
+                            logger.warn(Info.INFIX_IMPL, infixCls.getName(), Infix.class.getName());
                         }
                     } else {
-                        this.logger.warn(Info.INFIX_NULL, "tp", field.getName(), type.getName());
+                        logger.warn(Info.INFIX_NULL, "tp", field.getName(), type.getName());
                     }
                 });
     }

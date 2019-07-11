@@ -1,6 +1,6 @@
 package io.vertx.zero.epic;
 
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.io.File;
 import java.net.URL;

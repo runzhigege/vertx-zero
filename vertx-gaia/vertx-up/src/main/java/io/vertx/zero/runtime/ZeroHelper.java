@@ -3,10 +3,10 @@ package io.vertx.zero.runtime;
 import io.vertx.up.annotations.Agent;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 import io.vertx.zero.exception.AgentDuplicatedException;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import javax.ws.rs.Path;
 import java.lang.annotation.Annotation;

@@ -1,7 +1,7 @@
 package io.vertx.up.rs.validation;
 
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 import org.hibernate.validator.internal.engine.messageinterpolation.InterpolationTermType;
 import org.hibernate.validator.internal.engine.messageinterpolation.LocalizedMessage;
 import org.hibernate.validator.internal.engine.messageinterpolation.parser.MessageDescriptorFormatException;

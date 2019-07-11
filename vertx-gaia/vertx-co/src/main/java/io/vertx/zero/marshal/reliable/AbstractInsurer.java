@@ -3,11 +3,11 @@ package io.vertx.zero.marshal.reliable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.demon.JObjectElementException;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 /**
  * @author lang

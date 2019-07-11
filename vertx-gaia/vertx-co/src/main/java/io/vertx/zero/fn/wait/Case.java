@@ -1,4 +1,4 @@
-package io.vertx.zero.epic.fn.wait;
+package io.vertx.zero.fn.wait;
 
 import io.vertx.core.Future;
 

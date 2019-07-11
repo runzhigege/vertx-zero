@@ -1,4 +1,4 @@
-package io.vertx.zero.eon;
+package io.vertx.up.eon;
 
 public interface Tpl {
     /**

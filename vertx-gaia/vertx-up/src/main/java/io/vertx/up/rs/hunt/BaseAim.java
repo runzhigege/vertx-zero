@@ -17,8 +17,8 @@ import io.vertx.up.media.Analyzer;
 import io.vertx.up.media.MediaAnalyzer;
 import io.vertx.up.rs.validation.Validator;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Actuator;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Actuator;
+import io.vertx.zero.fn.Fn;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

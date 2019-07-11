@@ -8,13 +8,13 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
-import io.vertx.zero.eon.Strings;
-import io.vertx.zero.eon.Values;
-import io.vertx.zero.eon.em.YamlType;
+import io.vertx.up.eon.Strings;
+import io.vertx.up.eon.Values;
+import io.vertx.up.eon.em.YamlType;
 import io.vertx.zero.exception.heart.EmptyStreamException;
 import io.vertx.zero.exception.heart.JsonFormatException;
 import io.vertx.zero.log.Log;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.io.BufferedReader;
 import java.io.File;

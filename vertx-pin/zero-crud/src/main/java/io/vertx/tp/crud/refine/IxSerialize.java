@@ -7,7 +7,7 @@ import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.up.aiki.Uarr;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 import io.vertx.zero.epic.Ut;
 
 import java.util.ArrayList;

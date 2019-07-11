@@ -5,8 +5,8 @@ import io.vertx.up.eon.em.JobType;
 import io.vertx.up.job.plugin.JobIncome;
 import io.vertx.up.job.plugin.JobOutcome;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Actuator;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Actuator;
+import io.vertx.zero.fn.Fn;
 import io.vertx.zero.runtime.Runner;
 
 /*

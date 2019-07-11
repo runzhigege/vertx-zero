@@ -10,9 +10,9 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.micro.follow.Invoker;
 import io.vertx.up.micro.follow.InvokerUtil;
 import io.vertx.up.micro.follow.JetSelector;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 import io.vertx.zero.runtime.ZeroAnno;
 
 import java.lang.reflect.Method;

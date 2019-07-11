@@ -13,7 +13,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
 import io.vertx.zero.exception.EventSourceException;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 import io.vertx.zero.runtime.ZeroHelper;
 
 import javax.ws.rs.Path;

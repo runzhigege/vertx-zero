@@ -4,7 +4,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.AccessProxyException;
 import io.vertx.zero.exception.NoArgConstructorException;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.lang.reflect.Modifier;
 

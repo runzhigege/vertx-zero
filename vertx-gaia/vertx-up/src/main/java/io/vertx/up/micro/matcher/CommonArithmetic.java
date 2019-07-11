@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.servicediscovery.Record;
 import io.vertx.up.micro.discovery.Origin;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.Strings;
 import io.vertx.zero.epic.Ut;
 
 import java.util.List;

@@ -8,13 +8,13 @@ import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.config.ServerVisitor;
 import io.vertx.zero.atom.Ruler;
-import io.vertx.zero.eon.Info;
+import io.vertx.up.eon.Info;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.demon.ServerConfigException;
 import io.vertx.zero.marshal.Transformer;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

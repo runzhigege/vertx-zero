@@ -8,9 +8,9 @@ import com.fasterxml.jackson.databind.module.ZeroModule;
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.zero.eon.Strings;
-import io.vertx.zero.eon.Values;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.up.eon.Strings;
+import io.vertx.up.eon.Values;
+import io.vertx.zero.fn.Fn;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -2,15 +2,14 @@ package io.vertx.up.micro;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Vertx;
+import io.vertx.up.annotations.Worker;
+import io.vertx.up.atom.worker.Mission;
+import io.vertx.up.eon.Values;
 import io.vertx.up.job.center.Agha;
 import io.vertx.up.job.store.JobConfig;
 import io.vertx.up.job.store.JobPin;
 import io.vertx.up.job.store.JobStore;
-import io.vertx.up.annotations.Worker;
-import io.vertx.up.atom.worker.Mission;
-import io.vertx.up.eon.Info;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Values;
 import io.vertx.zero.epic.Ut;
 
 import java.util.Objects;
@@ -61,7 +60,7 @@ public class ZeroScheduler extends AbstractVerticle {
             /*
              * Bind vertx
              */
-            Ut.contract(reference, Vertx.class, this.vertx);
+            Ut.contract(reference, Vertx.class, vertx);
         }
         /*
          * Agha calling
@@ -71,7 +70,7 @@ public class ZeroScheduler extends AbstractVerticle {
             /*
              * Bind vertx
              */
-            Ut.contract(agha, Vertx.class, this.vertx);
+            Ut.contract(agha, Vertx.class, vertx);
             /*
              * Invoke here to provide input
              */

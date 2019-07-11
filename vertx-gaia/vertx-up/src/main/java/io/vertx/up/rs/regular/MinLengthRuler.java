@@ -2,7 +2,7 @@ package io.vertx.up.rs.regular;
 
 import io.vertx.up.atom.Rule;
 import io.vertx.up.exception.WebException;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 
 /**
  * {

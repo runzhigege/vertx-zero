@@ -3,7 +3,7 @@ package io.vertx.up.atom.query;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.exception._400QueryKeyTypeException;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.util.HashSet;
 import java.util.Set;

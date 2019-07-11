@@ -19,10 +19,10 @@ import io.vertx.up.exception._405MethodForbiddenException;
 import io.vertx.up.exception._500InternalServerException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.hunt.Answer;
-import io.vertx.zero.eon.Strings;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Strings;
+import io.vertx.up.eon.Values;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 import org.apache.http.Header;
 import org.apache.http.StatusLine;
 

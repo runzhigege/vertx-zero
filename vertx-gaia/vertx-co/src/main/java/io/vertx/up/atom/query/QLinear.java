@@ -3,9 +3,9 @@ package io.vertx.up.atom.query;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.exception._400OpUnsupportException;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.Strings;
 import io.vertx.zero.epic.container.Kv;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.util.ArrayList;
 import java.util.List;

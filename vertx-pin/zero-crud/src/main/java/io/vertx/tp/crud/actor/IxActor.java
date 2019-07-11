@@ -6,7 +6,7 @@ import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.exception.WebException;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 /*
  * Actor workflow for each Envelop

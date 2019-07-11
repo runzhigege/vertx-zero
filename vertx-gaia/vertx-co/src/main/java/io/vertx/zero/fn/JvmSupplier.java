@@ -1,4 +1,4 @@
-package io.vertx.zero.epic.fn;
+package io.vertx.zero.fn;
 
 /**
  * Supplier function interface, this interface could throw out

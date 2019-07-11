@@ -4,7 +4,7 @@ import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.vertx.core.impl.ConcurrentHashSet;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.Strings;
 import io.vertx.zero.epic.Ut;
 import io.vertx.zero.runtime.pkg.PackHunter;
 import io.vertx.zero.runtime.pkg.PackThread;

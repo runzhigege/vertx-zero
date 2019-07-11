@@ -1,4 +1,4 @@
-package io.vertx.zero.eon.em;
+package io.vertx.up.eon.em;
 
 public enum YamlType {
     OBJECT,

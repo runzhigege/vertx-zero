@@ -9,8 +9,8 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.zero.exception.ZeroException;
-import io.vertx.zero.epic.fn.Actuator;
-import io.vertx.zero.epic.fn.ZeroBiConsumer;
+import io.vertx.zero.fn.Actuator;
+import io.vertx.zero.fn.ZeroBiConsumer;
 
 import java.io.File;
 import java.io.InputStream;

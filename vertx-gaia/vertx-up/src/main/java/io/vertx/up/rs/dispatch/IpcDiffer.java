@@ -7,7 +7,7 @@ import io.vertx.up.rs.Aim;
 import io.vertx.up.rs.hunt.IpcAim;
 import io.vertx.zero.exception.ReturnTypeException;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.lang.reflect.Method;
 

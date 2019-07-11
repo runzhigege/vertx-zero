@@ -7,7 +7,7 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.micro.ipc.client.TunnelClient;
 import io.vertx.up.rs.Aim;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 public class IpcAim extends BaseAim implements Aim<RoutingContext> {
 

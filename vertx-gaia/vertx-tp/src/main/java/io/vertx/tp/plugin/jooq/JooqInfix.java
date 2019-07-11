@@ -8,7 +8,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.Infix;
 import io.vertx.zero.exception.JooqVertxNullException;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
 import org.jooq.DSLContext;

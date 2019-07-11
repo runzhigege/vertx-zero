@@ -11,7 +11,7 @@ import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.up.aiki.Uson;
 import io.vertx.up.aiki.Ux;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import javax.inject.Inject;
 import java.util.Arrays;

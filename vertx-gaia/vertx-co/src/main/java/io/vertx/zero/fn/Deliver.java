@@ -1,4 +1,4 @@
-package io.vertx.zero.epic.fn;
+package io.vertx.zero.fn;
 
 import io.vertx.zero.exception.ZeroRunException;
 import io.vertx.zero.epic.Ut;

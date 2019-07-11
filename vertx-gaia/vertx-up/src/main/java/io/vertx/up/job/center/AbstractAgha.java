@@ -2,17 +2,17 @@ package io.vertx.up.job.center;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.vertx.up.job.phase.Phase;
-import io.vertx.up.job.store.JobConfig;
-import io.vertx.up.job.store.JobPin;
-import io.vertx.up.job.store.JobStore;
-import io.vertx.up.job.timer.Interval;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.annotations.Contract;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
 import io.vertx.up.eon.em.JobStatus;
+import io.vertx.up.job.phase.Phase;
+import io.vertx.up.job.store.JobConfig;
+import io.vertx.up.job.store.JobPin;
+import io.vertx.up.job.store.JobStore;
+import io.vertx.up.job.timer.Interval;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.epic.Ut;
 
@@ -29,10 +29,10 @@ public abstract class AbstractAgha implements Agha {
     Interval interval() {
         final Class<?> intervalCls = CONFIG.getInterval().getComponent();
         final Interval interval = Ut.singleton(intervalCls);
-        Ut.contract(interval, Vertx.class, this.vertx);
+        Ut.contract(interval, Vertx.class, vertx);
         if (SELECTED.getAndSet(Boolean.FALSE)) {
             /* Be sure the log only provide once */
-            this.getLogger().info(Info.JOB_COMPONENT_SELECTED, "Interval", interval.getClass().getName());
+            getLogger().info(Info.JOB_COMPONENT_SELECTED, "Interval", interval.getClass().getName());
         }
         return interval;
     }
@@ -57,7 +57,7 @@ public abstract class AbstractAgha implements Agha {
          * Initializing phase reference here.
          */
         final Phase phase = Phase.start(mission.getName())
-                .bind(this.vertx)
+                .bind(vertx)
                 .bind(mission);
 
         return Ux.toFuture(mission)
@@ -96,12 +96,12 @@ public abstract class AbstractAgha implements Agha {
              * STARTING -> READY
              * */
             mission.setStatus(JobStatus.READY);
-            this.getLogger().info(Info.JOB_READY, mission.getName());
-            this.store().update(mission);
+            getLogger().info(Info.JOB_READY, mission.getName());
+            store().update(mission);
         }
     }
 
     protected Annal getLogger() {
-        return Annal.get(this.getClass());
+        return Annal.get(getClass());
     }
 }

@@ -8,12 +8,12 @@ import io.vertx.up.atom.agent.Event;
 import io.vertx.up.eon.Orders;
 import io.vertx.up.log.Annal;
 import io.vertx.up.web.filter.Filter;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 import io.vertx.zero.exception.FilterInitialException;
 import io.vertx.zero.exception.FilterOrderException;
 import io.vertx.zero.exception.FilterSpecificationException;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import javax.servlet.annotation.WebFilter;
 import java.lang.annotation.Annotation;

@@ -17,7 +17,7 @@ import io.vertx.up.secure.provider.JwtAuthProvider;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

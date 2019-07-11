@@ -10,7 +10,7 @@ import io.vertx.tp.jet.refine.Jt;
 import io.vertx.tp.optic.jet.JtConsumer;
 import io.vertx.up.atom.Envelop;
 import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.fn.Fn;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

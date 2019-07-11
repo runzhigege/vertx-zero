@@ -1,6 +1,15 @@
 package io.vertx.up.eon;
 
 public interface Info {
+
+    String SCANED_RULE = "[ ZERO ] ( {0} Rules ) Zero system scanned the folder /codex/ " +
+            "to pickup {0} rule definition files.";
+    String INFIX_NULL = "[ ZERO ] The system scanned null infix for key = {0} " +
+            "on the field \"{1}\" of {2}";
+
+    String INFIX_IMPL = "[ ZERO ] The hitted class {0} does not implement the interface" +
+            "of {1}";
+
     String VTC_END = "[ ZERO ] ( {3} ) The verticle {0} has been deployed " +
             "{1} instances successfully. id = {2}.";
     String VTC_FAIL = "[ ZERO ] ( {3} ) The verticle {0} has been deployed " +
@@ -8,6 +17,10 @@ public interface Info {
 
     String VTC_STOPPED = "[ ZERO ] ( {2} ) The verticle {0} has been undeployed " +
             " successfully, id = {1}.";
+
+    String INF_B_VERIFY = "[ ZERO ] The raw data ( node = {0}, type = {1} ) before validation is {2}.";
+
+    String INF_A_VERIFY = "[ ZERO ] ( node = {0}, type = {1} ) filtered configuration port set = {2}.";
 
     String AGENT_DEFINED = "[ ZERO ] User defined agent {0} of type = {1}, " +
             "the default will be overwritten.";
@@ -35,15 +48,7 @@ public interface Info {
 
     String JOB_IGNORE = "[ Job ] The class {0} annotated with @Job will be ignored because there is no @On method defined.";
 
-    String JOB_EMPTY = "[ Job ] Zero system detect no jobs, the scheduler will be stopped.";
-
-    String JOB_CONFIG_NULL = "[ Job ] ( Ignore ) Because there is no definition in `vertx-job.yml`, Job container is stop....";
-
-    String JOB_MONITOR = "[ Job ] Zero system detect {0} jobs, the scheduler will begin....";
-
     String JOB_CONFIG = "[ Job ] Job configuration read : {0}";
-
-    String JOB_AGHA_SELECTED = "[ Job: {1} ] Agha = {0} has been selected for job {1} of type {2}";
 
     String JOB_READY = "[ Job: {0} ] The status has been ready: STARTING -> READY";
 
