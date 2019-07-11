@@ -1,12 +1,15 @@
 package io.vertx.zero.marshal.node;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.FileSuffix;
 import io.vertx.zero.eon.Strings;
+import io.vertx.zero.exception.heart.EmptyStreamException;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 
 public class ZeroTool {
+    private static final Annal LOGGER = Annal.get(ZeroTool.class);
 
     public static String produce(final String key) {
         if (null == key) {
@@ -39,10 +42,21 @@ public class ZeroTool {
         if (Storage.CONFIG.containsKey(filename)) {
             return Storage.CONFIG.get(filename);
         } else {
-            final JsonObject data = Fn.getJvm(
-                    null,
-                    () -> Ut.ioYaml(filename), filename);
-            if (null != data && !data.isEmpty()) {
+            // Fix issue of deployment
+            /*
+             * For direct read configuration file, it must be successful or empty
+             * Maybe the file is missing here
+             */
+            final JsonObject data = new JsonObject();
+            try{
+                final JsonObject yamlData = Ut.ioYaml(filename);
+                if(Ut.notNil(yamlData)) {
+                    data.mergeIn(yamlData);
+                }
+            }catch (EmptyStreamException ex){
+                LOGGER.warn(ex.getMessage());
+            }
+            if (!data.isEmpty()) {
                 Storage.CONFIG.put(filename, data);
             }
             return data;
