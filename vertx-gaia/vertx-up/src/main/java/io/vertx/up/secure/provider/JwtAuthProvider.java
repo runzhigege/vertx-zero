@@ -16,7 +16,7 @@ import io.vertx.up.aiki.Ux;
 import io.vertx.up.exception.*;
 import io.vertx.up.log.Annal;
 import io.vertx.up.secure.Security;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.util.Collections;
 import java.util.function.Supplier;

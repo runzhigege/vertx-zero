@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.extension.PlugRegion;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 public abstract class AbstractRegion implements PlugRegion {
 

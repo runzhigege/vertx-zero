@@ -45,7 +45,7 @@ package up.god.micro.validation;
 
 import com.google.gson.JsonObject;
 import io.vertx.up.annotations.EndPoint;
-import io.zero.epic.Jackson;
+import io.vertx.zero.epic.Jackson;
 import up.god.micro.async.JavaJson;
 
 import javax.validation.Valid;

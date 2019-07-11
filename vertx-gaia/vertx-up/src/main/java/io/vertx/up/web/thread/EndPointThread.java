@@ -4,7 +4,7 @@ import io.vertx.up.atom.agent.Event;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
 import io.vertx.up.rs.config.EventExtractor;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 import java.util.HashSet;
 import java.util.Set;

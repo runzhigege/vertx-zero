@@ -3,7 +3,7 @@ package io.vertx.tp.optic;
 import io.vertx.tp.ke.init.KePin;
 import io.vertx.tp.optic.atom.Income;
 import io.vertx.tp.optic.atom.Lexeme;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 import java.util.Objects;
 

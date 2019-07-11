@@ -13,10 +13,10 @@ import io.vertx.up.web.anima.PointScatter;
 import io.vertx.up.web.anima.Scatter;
 import io.vertx.zero.exception.UpClassArgsException;
 import io.vertx.zero.exception.UpClassInvalidException;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
-import io.zero.runtime.Anno;
-import io.zero.runtime.Runner;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.runtime.Anno;
+import io.vertx.zero.runtime.Runner;
 
 import java.lang.annotation.Annotation;
 import java.util.concurrent.ConcurrentHashMap;

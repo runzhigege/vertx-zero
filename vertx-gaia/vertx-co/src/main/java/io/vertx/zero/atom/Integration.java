@@ -2,7 +2,7 @@ package io.vertx.zero.atom;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.commune.Json;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 import java.io.Serializable;
 import java.util.Objects;

@@ -2,7 +2,7 @@ package io.vertx.up.aiki;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.zero.atom.Mojo;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 import java.util.HashSet;
 import java.util.List;

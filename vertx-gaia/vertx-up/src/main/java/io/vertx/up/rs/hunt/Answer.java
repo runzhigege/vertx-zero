@@ -11,7 +11,7 @@ import io.vertx.up.atom.agent.Event;
 import io.vertx.up.eon.ID;
 import io.vertx.up.exception._500InternalServerException;
 import io.vertx.up.rs.pointer.PluginExtension;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 import javax.ws.rs.core.MediaType;
 import java.lang.annotation.Annotation;

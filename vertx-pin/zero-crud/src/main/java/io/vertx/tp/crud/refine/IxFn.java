@@ -6,7 +6,7 @@ import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.aiki.UxJooq;
 import io.vertx.up.log.Annal;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 import java.time.Instant;
 import java.util.Objects;

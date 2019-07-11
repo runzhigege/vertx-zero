@@ -10,7 +10,7 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Values;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 import java.util.HashSet;
 import java.util.Objects;

@@ -7,8 +7,8 @@ import io.vertx.up.eon.ZeroValue;
 import io.vertx.up.micro.ZeroHttpAgent;
 import io.vertx.up.rs.Extractor;
 import io.vertx.zero.exception.EventSourceException;
-import io.zero.epic.Ut;
-import io.zero.quiz.UpBase;
+import io.vertx.zero.epic.Ut;
+import io.vertx.quiz.UpBase;
 import org.junit.Test;
 
 public class ExtractorTc extends UpBase {

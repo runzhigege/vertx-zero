@@ -12,8 +12,8 @@ import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.atom.JtJob;
 import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.zero.atom.Database;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 import org.jooq.Configuration;
 
 import java.sql.Connection;

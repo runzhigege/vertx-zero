@@ -4,7 +4,7 @@ import io.vertx.core.Vertx;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.plugin.Infix;
 import io.vertx.up.plugin.session.SessionInfix;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

@@ -4,12 +4,12 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.Infix;
-import io.zero.runtime.ZeroAmbient;
+import io.vertx.zero.runtime.ZeroAmbient;
 import io.vertx.zero.exception.InjectionLimeKeyException;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

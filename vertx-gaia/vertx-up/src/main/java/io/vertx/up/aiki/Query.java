@@ -7,8 +7,8 @@ import io.vertx.up.log.Annal;
 import io.vertx.zero.atom.Mirror;
 import io.vertx.zero.atom.Mojo;
 import io.vertx.zero.eon.Strings;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.util.concurrent.ConcurrentMap;
 

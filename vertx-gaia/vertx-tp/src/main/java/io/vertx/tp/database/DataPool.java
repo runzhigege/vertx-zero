@@ -1,7 +1,7 @@
 package io.vertx.tp.database;
 
 import io.vertx.zero.atom.Database;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.fn.Fn;
 import org.jooq.DSLContext;
 
 import javax.sql.DataSource;

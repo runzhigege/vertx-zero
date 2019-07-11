@@ -1,7 +1,7 @@
 package io.vertx.up.web.serialization;
 
 import io.vertx.up.exception._400FilePathMissingException;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.io.File;
 

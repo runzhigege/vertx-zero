@@ -12,8 +12,8 @@ import io.vertx.zero.exception.demon.ClusterConflictException;
 import io.vertx.zero.marshal.Transformer;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroVertx;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

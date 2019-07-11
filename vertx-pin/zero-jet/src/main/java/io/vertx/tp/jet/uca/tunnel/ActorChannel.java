@@ -7,7 +7,7 @@ import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.ActIn;
 import io.vertx.zero.atom.Database;
 import io.vertx.zero.atom.Integration;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 public class ActorChannel extends AbstractChannel {
     /*

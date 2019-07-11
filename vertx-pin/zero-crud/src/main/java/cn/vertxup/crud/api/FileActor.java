@@ -21,8 +21,8 @@ import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
 import io.vertx.up.log.Annal;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.io.File;
 import java.io.FileInputStream;

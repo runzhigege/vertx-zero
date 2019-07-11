@@ -9,7 +9,7 @@ import io.vertx.up.rs.Extractor;
 import io.vertx.up.rs.config.AgentExtractor;
 import io.vertx.up.web.anima.Scatter;
 import io.vertx.up.web.limit.Factor;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 import java.util.concurrent.ConcurrentMap;
 

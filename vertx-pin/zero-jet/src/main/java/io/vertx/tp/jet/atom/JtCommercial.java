@@ -10,7 +10,7 @@ import io.vertx.up.eon.ID;
 import io.vertx.up.eon.em.ChannelType;
 import io.vertx.zero.atom.Database;
 import io.vertx.zero.atom.Integration;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 import java.util.Objects;
 

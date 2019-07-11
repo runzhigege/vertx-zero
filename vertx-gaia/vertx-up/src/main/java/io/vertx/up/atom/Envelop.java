@@ -15,7 +15,7 @@ import io.vertx.up.atom.envelop.Rib;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
 import io.vertx.zero.exception.IndexExceedException;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.io.Serializable;
 import java.util.Map;

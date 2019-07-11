@@ -23,8 +23,8 @@ package io.vertx.up.aiki;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.vertx.core.json.JsonArray;
-import io.zero.quiz.TestBase;
-import io.zero.epic.Jackson;
+import io.vertx.quiz.TestBase;
+import io.vertx.zero.epic.Jackson;
 import org.junit.Assert;
 import org.junit.Test;
 

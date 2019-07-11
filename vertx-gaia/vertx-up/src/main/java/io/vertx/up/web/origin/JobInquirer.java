@@ -11,7 +11,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.FileSuffix;
 import io.vertx.zero.eon.Strings;
 import io.vertx.zero.eon.Values;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 import java.lang.annotation.Annotation;
 import java.util.Objects;

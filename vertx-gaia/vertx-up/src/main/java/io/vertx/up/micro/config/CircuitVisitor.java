@@ -9,8 +9,8 @@ import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.marshal.Visitor;
 import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 
 public class CircuitVisitor implements Visitor<CircuitBreakerOptions> {
 

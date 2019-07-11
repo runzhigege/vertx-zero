@@ -4,8 +4,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.demon.ForbiddenFieldException;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 
 public class ForbiddenInsurer extends AbstractInsurer {
     /**

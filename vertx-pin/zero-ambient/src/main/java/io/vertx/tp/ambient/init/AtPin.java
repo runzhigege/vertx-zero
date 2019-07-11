@@ -8,8 +8,8 @@ import io.vertx.tp.error._500InitSpecificationException;
 import io.vertx.tp.error._500PrerequisiteSpecException;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.up.log.Annal;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.util.Objects;
 

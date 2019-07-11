@@ -13,8 +13,8 @@ import io.vertx.zero.atom.Mojo;
 import io.vertx.zero.eon.Values;
 import io.vertx.zero.exception.JooqFieldMissingException;
 import io.vertx.zero.exception.JooqMergeException;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 

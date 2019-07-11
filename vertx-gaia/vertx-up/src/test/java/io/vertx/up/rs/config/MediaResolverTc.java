@@ -1,7 +1,7 @@
 package io.vertx.up.rs.config;
 
 import io.vertx.ext.unit.TestContext;
-import io.zero.quiz.ZeroBase;
+import io.vertx.quiz.ZeroBase;
 import io.vertx.quiz.example.Media;
 import org.junit.Test;
 

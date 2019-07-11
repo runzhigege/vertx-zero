@@ -5,7 +5,7 @@ import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.commune.ActIn;
 import io.vertx.zero.atom.Database;
-import io.zero.epic.Ut;
+import io.vertx.zero.epic.Ut;
 
 /*
  * Default Adaptor channel for database accessing

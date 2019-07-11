@@ -3,8 +3,8 @@ package io.vertx.up.aiki;
 import io.vertx.core.json.JsonObject;
 import io.vertx.zero.atom.Mirror;
 import io.vertx.zero.atom.Mojo;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 
 class From {
 

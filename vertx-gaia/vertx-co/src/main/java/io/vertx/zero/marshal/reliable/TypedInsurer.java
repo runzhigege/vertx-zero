@@ -4,8 +4,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.zero.eon.em.DataType;
 import io.vertx.zero.exception.ZeroException;
 import io.vertx.zero.exception.demon.DataTypeWrongException;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

@@ -1,8 +1,8 @@
 package io.vertx.up.aiki;
 
 import io.vertx.core.json.JsonObject;
-import io.zero.epic.Ut;
-import io.zero.quiz.EpicBase;
+import io.vertx.zero.epic.Ut;
+import io.vertx.quiz.EpicBase;
 import net.sf.cglib.beans.BeanCopier;
 import org.junit.Assert;
 import org.junit.Test;

@@ -7,7 +7,7 @@ import io.vertx.up.atom.agent.Event;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Aim;
 import io.vertx.zero.exception.ChannelMultiException;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.lang.reflect.Method;
 

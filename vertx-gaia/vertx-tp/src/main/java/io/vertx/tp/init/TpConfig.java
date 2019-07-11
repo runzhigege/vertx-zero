@@ -6,7 +6,7 @@ import io.vertx.zero.atom.Ruler;
 import io.vertx.zero.exception.DynamicConfigTypeException;
 import io.vertx.zero.exception.DynamicKeyMissingException;
 import io.vertx.zero.marshal.node.Node;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;

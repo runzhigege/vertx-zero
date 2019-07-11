@@ -5,8 +5,8 @@ import io.vertx.core.Vertx;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.exception._500RpcMethodInvokeException;
 import io.vertx.up.log.Annal;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
 
 import java.lang.reflect.Method;
 

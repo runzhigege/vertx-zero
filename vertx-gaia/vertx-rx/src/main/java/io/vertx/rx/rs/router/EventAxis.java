@@ -14,9 +14,9 @@ import io.vertx.up.rs.Sentry;
 import io.vertx.up.rs.dispatch.ModeSplitter;
 import io.vertx.up.rs.router.Hub;
 import io.vertx.up.rs.router.Verifier;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
-import io.zero.runtime.ZeroAnno;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.runtime.ZeroAnno;
 
 import java.util.Set;
 

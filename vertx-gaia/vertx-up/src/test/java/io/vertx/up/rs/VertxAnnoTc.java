@@ -5,8 +5,8 @@ import io.vertx.quiz.example.AnnoAgent;
 import io.vertx.quiz.example.AnnoExceAgent;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.micro.ZeroHttpAgent;
-import io.zero.runtime.ZeroAnno;
-import io.zero.runtime.ZeroHelper;
+import io.vertx.zero.runtime.ZeroAnno;
+import io.vertx.zero.runtime.ZeroHelper;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;

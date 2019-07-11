@@ -10,8 +10,8 @@ import io.vertx.up.eon.ID;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._400ValidationException;
 import io.vertx.zero.eon.Strings;
-import io.zero.epic.Ut;
-import io.zero.runtime.ZeroCodex;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.runtime.ZeroCodex;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

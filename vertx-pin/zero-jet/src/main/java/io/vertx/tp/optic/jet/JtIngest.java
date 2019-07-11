@@ -4,7 +4,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.uca.param.DataIngest;
 import io.vertx.up.atom.Envelop;
-import io.zero.epic.fn.Fn;
+import io.vertx.zero.epic.fn.Fn;
 
 /*
  * 「Extension」

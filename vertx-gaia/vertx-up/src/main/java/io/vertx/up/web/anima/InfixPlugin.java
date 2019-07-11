@@ -4,9 +4,9 @@ import io.reactivex.Observable;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.Infix;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
-import io.zero.runtime.ZeroAmbient;
+import io.vertx.zero.epic.Ut;
+import io.vertx.zero.epic.fn.Fn;
+import io.vertx.zero.runtime.ZeroAmbient;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;
