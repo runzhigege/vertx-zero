@@ -42,13 +42,6 @@ public class PackHunter {
      */
     public static Set<String> getPackages() {
         final Set<String> packageDirs = new TreeSet<>();
-        Fn.safeJvm(() -> {
-            /*
-             * Get scanned packages.
-             */
-            final Set<String> original = scanPackages();
-
-        });
         final Package[] packages = Package.getPackages();
         for (final Package pkg : packages) {
             final String pending = pkg.getName();
@@ -59,16 +52,5 @@ public class PackHunter {
         }
         LOGGER.info(Info.PACKAGES, String.valueOf(packageDirs.size()), String.valueOf(packages.length));
         return packageDirs;
-    }
-
-    private static Set<String> scanPackages() {
-        /*
-         * ClassLoader resource here
-         */
-        final Set<String> resource = new HashSet<>();// Ut.ioResources();
-        resource.forEach(System.out::println);
-
-
-        return new HashSet<>();
     }
 }
