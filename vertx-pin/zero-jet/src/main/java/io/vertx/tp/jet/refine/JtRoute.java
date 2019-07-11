@@ -2,8 +2,8 @@ package io.vertx.tp.jet.refine;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.tp.jet.atom.JtConfig;
-import io.vertx.zero.eon.Strings;
-import io.zero.epic.Ut;
+import io.vertx.up.eon.Strings;
+import io.vertx.up.util.Ut;
 
 import javax.ws.rs.core.MediaType;
 import java.util.HashSet;

@@ -3,8 +3,8 @@ package io.vertx.tp.plugin.excel.atom;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error._404ConnectMissingException;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.up.util.Ut;
+import io.vertx.up.fn.Fn;
 
 import java.io.Serializable;
 import java.util.ArrayList;

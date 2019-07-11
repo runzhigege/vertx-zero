@@ -41,7 +41,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 @Queue
 public class FilterWorker {
@@ -67,7 +67,7 @@ package up.god.micro.filter;
 import io.vertx.core.VertxException;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
-import io.vertx.up.web.filter.HttpFilter;
+import io.vertx.up.uca.web.filter.HttpFilter;
 
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
@@ -94,7 +94,7 @@ import io.vertx.core.VertxException;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.up.annotations.Ordered;
-import io.vertx.up.web.filter.HttpFilter;
+import io.vertx.up.uca.web.filter.HttpFilter;
 
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;

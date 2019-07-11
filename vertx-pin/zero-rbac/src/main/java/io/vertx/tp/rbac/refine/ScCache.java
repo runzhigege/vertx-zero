@@ -3,7 +3,7 @@ package io.vertx.tp.rbac.refine;
 import io.vertx.core.Future;
 import io.vertx.tp.rbac.atom.ScConfig;
 import io.vertx.tp.rbac.init.ScPin;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 
 /*
  * Data Pool ( Pond ) for Cache

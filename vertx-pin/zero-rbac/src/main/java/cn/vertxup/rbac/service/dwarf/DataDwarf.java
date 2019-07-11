@@ -3,7 +3,7 @@ package cn.vertxup.rbac.service.dwarf;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error._500DwarfInstanceNullException;
 import io.vertx.tp.rbac.cv.em.RegionType;
-import io.zero.epic.fn.Fn;
+import io.vertx.up.fn.Fn;
 
 /*
  * Dwarf

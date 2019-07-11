@@ -2,7 +2,7 @@ package io.vertx.up.atom.agent;
 
 import io.vertx.core.http.HttpMethod;
 import io.vertx.up.eon.Orders;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.Strings;
 
 import javax.ws.rs.core.MediaType;
 import java.io.Serializable;

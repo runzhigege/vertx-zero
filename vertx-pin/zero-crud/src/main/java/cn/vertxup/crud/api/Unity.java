@@ -10,9 +10,9 @@ import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.optic.Apeak;
 import io.vertx.tp.optic.Pocket;
 import io.vertx.tp.optic.Seeker;
-import io.vertx.up.aiki.Ux;
-import io.vertx.up.aiki.UxJooq;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.unity.Ux;
+import io.vertx.up.unity.UxJooq;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.log.Annal;
 
 import java.text.MessageFormat;

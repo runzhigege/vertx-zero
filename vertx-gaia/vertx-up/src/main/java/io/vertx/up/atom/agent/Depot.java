@@ -1,8 +1,8 @@
 package io.vertx.up.atom.agent;
 
 import io.vertx.up.eon.ID;
-import io.vertx.up.rs.Filler;
-import io.zero.epic.Ut;
+import io.vertx.up.uca.rs.Filler;
+import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;

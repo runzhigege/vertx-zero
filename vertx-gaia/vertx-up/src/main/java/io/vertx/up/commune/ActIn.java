@@ -1,11 +1,10 @@
 package io.vertx.up.commune;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.query.Inquiry;
+import io.vertx.up.eon.Constants;
 import io.vertx.up.eon.ID;
-import io.vertx.up.eon.ZeroValue;
-import io.zero.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -41,10 +40,10 @@ public class ActIn implements Serializable {
         this.envelop = envelop;
 
         /* Data Init */
-        this.partData(envelop);
+        partData(envelop);
 
         /* Header Init */
-        this.partHeader(envelop);
+        partHeader(envelop);
     }
 
     private void partHeader(final Envelop envelop) {
@@ -61,14 +60,14 @@ public class ActIn implements Serializable {
         /*
          * Data Merge
          */
-        this.data.mergeIn(headerData, true);
+        data.mergeIn(headerData, true);
     }
 
     private void partData(final Envelop envelop) {
         final JsonObject rawJson = envelop.data();
         if (!Ut.isNil(rawJson)) {
             final long counter = rawJson.fieldNames().stream()
-                    .filter(ZeroValue.INDEXES::containsValue)
+                    .filter(Constants.INDEXES::containsValue)
                     .count();
             final JsonObject body;
             if (0 < counter) {
@@ -116,7 +115,7 @@ public class ActIn implements Serializable {
                             /*
                              * NON, $$__BODY__$$
                              */
-                            .forEach(field -> this.data.put(field, inputData.getValue(field)));
+                            .forEach(field -> data.put(field, inputData.getValue(field)));
 
                     cross = body.getJsonObject(ID.PARAM_BODY);
                 }
@@ -140,38 +139,38 @@ public class ActIn implements Serializable {
                  * Query part
                  */
                 Arrays.stream(Inquiry.KEY_QUERY).filter(field -> Objects.nonNull(body.getValue(field)))
-                        .forEach(field -> this.query.put(field, body.getValue(field)));
+                        .forEach(field -> query.put(field, body.getValue(field)));
             } else {
                 /*
                  * Common data
                  */
-                this.data.mergeIn(body.copy(), true);
+                data.mergeIn(body.copy(), true);
             }
         }
     }
 
     public Envelop getEnvelop() {
-        return this.envelop;
+        return envelop;
     }
 
     public JsonObject getQuery() {
-        return this.query;
+        return query;
     }
 
     public Record getRecord() {
-        return this.record;
+        return record;
     }
 
     /*
      * Set input data to Record object ( reference here )
      */
     public void connect(final Record record) {
-        if (!Ut.isNil(this.data)) {
+        if (!Ut.isNil(data)) {
             /*
              * Set current data to `Record`
              */
-            this.data.fieldNames()
-                    .forEach(field -> record.set(field, this.data.getValue(field)));
+            data.fieldNames()
+                    .forEach(field -> record.set(field, data.getValue(field)));
         }
         /*
          * Revert reference binding

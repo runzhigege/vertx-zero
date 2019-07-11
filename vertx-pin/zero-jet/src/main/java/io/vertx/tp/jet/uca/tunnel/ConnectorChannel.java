@@ -2,11 +2,11 @@ package io.vertx.tp.jet.uca.tunnel;
 
 import io.vertx.core.Future;
 import io.vertx.tp.optic.jet.JtComponent;
-import io.vertx.up.aiki.Ux;
 import io.vertx.up.commune.ActIn;
-import io.vertx.zero.atom.Database;
-import io.vertx.zero.atom.Integration;
-import io.zero.epic.Ut;
+import io.vertx.up.commune.config.Database;
+import io.vertx.up.commune.config.Integration;
+import io.vertx.up.unity.Ux;
+import io.vertx.up.util.Ut;
 
 public class ConnectorChannel extends AbstractChannel {
     /*
@@ -18,7 +18,7 @@ public class ConnectorChannel extends AbstractChannel {
      */
     @Override
     public Future<Boolean> initAsync(final JtComponent component, final ActIn request) {
-        return Ux.toFuture(this.getCommercial())
+        return Ux.toFuture(getCommercial())
                 /*
                  * Database initialized, Mount database to `JtComponent`
                  */
@@ -27,7 +27,7 @@ public class ConnectorChannel extends AbstractChannel {
                 /*
                  * Integration inited, mount to `JtComponent`
                  */
-                .compose(dbed -> Ux.toFuture(this.getCommercial().integration()))
+                .compose(dbed -> Ux.toFuture(getCommercial().integration()))
                 .compose(integration -> Ut.contractAsync(component, Integration.class, integration));
     }
 }

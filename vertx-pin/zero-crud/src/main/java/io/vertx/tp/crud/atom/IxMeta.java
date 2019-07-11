@@ -5,9 +5,9 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.tp.crud.init.IxPin;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.tp.error._404ModuleMissingException;
-import io.vertx.up.aiki.Ux;
-import io.vertx.up.aiki.UxJooq;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.unity.Ux;
+import io.vertx.up.unity.UxJooq;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.log.Annal;
 

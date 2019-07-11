@@ -8,7 +8,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.excel.atom.ExTable;
-import io.vertx.up.eon.TpClient;
+import io.vertx.up.plugin.TpClient;
 
 import java.io.InputStream;
 import java.util.Set;

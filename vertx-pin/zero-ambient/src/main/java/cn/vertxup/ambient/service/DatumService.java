@@ -6,7 +6,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ambient.refine.At;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 
 public class DatumService implements DatumStub {
 

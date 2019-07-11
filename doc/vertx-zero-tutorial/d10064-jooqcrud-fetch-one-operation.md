@@ -40,10 +40,10 @@ package up.god.micro.fetch;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 import javax.inject.Inject;
 
@@ -82,7 +82,7 @@ package up.god.micro.fetch;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import up.god.domain.tables.daos.SysTabularDao;
 import up.god.domain.tables.pojos.SysTabular;
 

@@ -5,8 +5,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxMeta;
 import io.vertx.tp.crud.atom.IxModule;
-import io.vertx.up.aiki.Ux;
-import io.vertx.up.aiki.UxJooq;
+import io.vertx.up.unity.Ux;
+import io.vertx.up.unity.UxJooq;
 import io.vertx.up.log.Annal;
 
 import java.util.List;

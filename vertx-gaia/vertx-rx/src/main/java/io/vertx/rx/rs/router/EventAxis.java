@@ -8,15 +8,15 @@ import io.vertx.rx.rs.dispatch.StandardVerifier;
 import io.vertx.up.atom.agent.Depot;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.log.Annal;
-import io.vertx.up.rs.Aim;
-import io.vertx.up.rs.Axis;
-import io.vertx.up.rs.Sentry;
-import io.vertx.up.rs.dispatch.ModeSplitter;
-import io.vertx.up.rs.router.Hub;
-import io.vertx.up.rs.router.Verifier;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
-import io.zero.runtime.ZeroAnno;
+import io.vertx.up.uca.rs.Aim;
+import io.vertx.up.uca.rs.Axis;
+import io.vertx.up.uca.rs.Sentry;
+import io.vertx.up.uca.rs.dispatch.ModeSplitter;
+import io.vertx.up.uca.rs.router.Hub;
+import io.vertx.up.uca.rs.router.Verifier;
+import io.vertx.up.util.Ut;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.runtime.ZeroAnno;
 
 import java.util.Set;
 

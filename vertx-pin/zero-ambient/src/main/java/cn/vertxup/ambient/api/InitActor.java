@@ -7,8 +7,8 @@ import io.vertx.tp.ambient.cv.Addr;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
-import io.vertx.zero.atom.Database;
-import io.zero.epic.Ut;
+import io.vertx.up.commune.config.Database;
+import io.vertx.up.util.Ut;
 
 import javax.inject.Inject;
 

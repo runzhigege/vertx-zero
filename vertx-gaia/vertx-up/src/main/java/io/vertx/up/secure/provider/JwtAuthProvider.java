@@ -12,11 +12,11 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.jwt.JWT;
 import io.vertx.ext.jwt.JWTOptions;
-import io.vertx.up.aiki.Ux;
-import io.vertx.up.exception.*;
+import io.vertx.up.exception.web.*;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.secure.Security;
-import io.zero.epic.fn.Fn;
+import io.vertx.up.unity.Ux;
 
 import java.util.Collections;
 import java.util.function.Supplier;
@@ -33,16 +33,16 @@ public class JwtAuthProvider implements JwtAuth {
     private transient AsyncMap<String, Boolean> sessionTokens;
 
     JwtAuthProvider(final Vertx vertx, final JWTAuthOptions config) {
-        this.permissionsClaimKey = config.getPermissionsClaimKey();
+        permissionsClaimKey = config.getPermissionsClaimKey();
         // Set this key to securer
-        this.securer.setPermissionsClaimKey(this.permissionsClaimKey);
-        this.jwtOptions = config.getJWTOptions();
+        securer.setPermissionsClaimKey(permissionsClaimKey);
+        jwtOptions = config.getJWTOptions();
         // File reading here.
-        this.jwt = Ux.Jwt.create(config, vertx.fileSystem()::readFileBlocking);
+        jwt = Ux.Jwt.create(config, vertx.fileSystem()::readFileBlocking);
         vertx.sharedData().<String, Boolean>getAsyncMap(AUTH_POOL, res -> {
             if (res.succeeded()) {
                 LOGGER.debug(Info.MAP_INITED, AUTH_POOL);
-                this.sessionTokens = res.result();
+                sessionTokens = res.result();
             }
         });
     }
@@ -53,8 +53,8 @@ public class JwtAuthProvider implements JwtAuth {
         /*
          * Zero Security Framework needed, could not break this rule.
          */
-        Fn.outWeb(null == security, _500SecurityNotImplementException.class, this.getClass());
-        this.securer.setSecurity(security);
+        Fn.outWeb(null == security, _500SecurityNotImplementException.class, getClass());
+        securer.setSecurity(security);
         return this;
     }
 
@@ -65,7 +65,7 @@ public class JwtAuthProvider implements JwtAuth {
         /*
          * Extract token from sessionTokens here
          */
-        if (null == this.sessionTokens) {
+        if (null == sessionTokens) {
             /*
              * Session tokens is null, it means zero system will disabled token cache future here.
              * It will go through common authenticate workflow here.
@@ -73,16 +73,16 @@ public class JwtAuthProvider implements JwtAuth {
              * 2) 403 Validation ( If So )
              */
             LOGGER.debug(Info.FLOW_NULL, token);
-            this.prerequisite(token)
+            prerequisite(token)
                     /* 401 */
-                    .compose(nil -> this.securer.authenticate(authInfo))
+                    .compose(nil -> securer.authenticate(authInfo))
                     /* Mount Handler */
-                    .setHandler(this.authorized(token, handler));
+                    .setHandler(authorized(token, handler));
         } else {
             /*
              * Get token from sessionTokens
              */
-            this.sessionTokens.get(token, res -> {
+            sessionTokens.get(token, res -> {
                 if (null != res && null != res.result() && res.result()) {
                     /* Token verified from cache */
                     LOGGER.info(Info.MAP_HIT, token, res.result());
@@ -93,9 +93,9 @@ public class JwtAuthProvider implements JwtAuth {
                      * 401 Validation Skip
                      * 403 Validation ( If So )
                      */
-                    this.securer.authorize(authInfo)
+                    securer.authorize(authInfo)
                             /* Mount Handler */
-                            .setHandler(this.authorized(token, handler));
+                            .setHandler(authorized(token, handler));
                 } else {
                     LOGGER.debug(Info.MAP_MISSING, token);
                     /*
@@ -103,11 +103,11 @@ public class JwtAuthProvider implements JwtAuth {
                      * 1) 401 Validation
                      * 2) 403 Validation ( If So )
                      */
-                    this.prerequisite(token)
+                    prerequisite(token)
                             /* 401 */
-                            .compose(nil -> this.securer.authenticate(authInfo))
+                            .compose(nil -> securer.authenticate(authInfo))
                             /* Mount Handler */
-                            .setHandler(this.authorized(token, handler));
+                            .setHandler(authorized(token, handler));
                 }
             });
         }
@@ -117,7 +117,7 @@ public class JwtAuthProvider implements JwtAuth {
         return user -> {
             if (user.succeeded()) {
                 /* Store token into async map to refresh cache and then return */
-                this.sessionTokens.put(token, Boolean.TRUE, result -> {
+                sessionTokens.put(token, Boolean.TRUE, result -> {
                     LOGGER.debug(Info.MAP_PUT, token, Boolean.TRUE);
                     handler.handle(Future.succeededFuture(user.result()));
                 });
@@ -166,9 +166,9 @@ public class JwtAuthProvider implements JwtAuth {
     @Override
     public String generateToken(final JsonObject claims, final JWTOptions options) {
         final JsonObject _claims = claims.copy();
-        if (options.getPermissions() != null && !_claims.containsKey(this.permissionsClaimKey)) {
-            _claims.put(this.permissionsClaimKey, new JsonArray(options.getPermissions()));
+        if (options.getPermissions() != null && !_claims.containsKey(permissionsClaimKey)) {
+            _claims.put(permissionsClaimKey, new JsonArray(options.getPermissions()));
         }
-        return this.jwt.sign(_claims, options);
+        return jwt.sign(_claims, options);
     }
 }

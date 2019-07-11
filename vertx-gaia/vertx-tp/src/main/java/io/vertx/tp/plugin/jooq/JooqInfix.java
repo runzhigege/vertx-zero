@@ -1,14 +1,14 @@
 package io.vertx.tp.plugin.jooq;
 
 import io.vertx.core.Vertx;
-import io.vertx.tp.database.DataPool;
+import io.vertx.tp.plugin.database.DataPool;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.Infix;
-import io.vertx.zero.exception.JooqVertxNullException;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.up.exception.zero.JooqVertxNullException;
+import io.vertx.up.util.Ut;
+import io.vertx.up.fn.Fn;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
 import org.jooq.DSLContext;

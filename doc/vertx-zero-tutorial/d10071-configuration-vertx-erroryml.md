@@ -24,7 +24,7 @@ All above error codes will be mapped to zero system internally, we'll introduce 
 In zero system, the most used abstract abstract exception are following:
 
 * `io.vertx.up.exception.WebException`
-* `io.vertx.zero.exception.UpException`
+* `io.vertx.up.exception.UpException`
 
 The `WebException` controlled the web request flow exceptions, and the `UpException` controlled the zero start up exceptions, they are all runtime, zero system does not throw out these exceptions except some critical issue happened, all the error response came from `WebException` and could provide normalized response to client.
 

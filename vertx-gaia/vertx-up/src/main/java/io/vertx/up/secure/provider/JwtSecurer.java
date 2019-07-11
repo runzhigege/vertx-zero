@@ -4,12 +4,12 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.jwt.impl.JWTUser;
-import io.vertx.up.aiki.Ux;
 import io.vertx.up.exception.WebException;
-import io.vertx.up.exception._401JwtExecutorException;
-import io.vertx.up.exception._403ForbiddenException;
+import io.vertx.up.exception.web._401JwtExecutorException;
+import io.vertx.up.exception.web._403ForbiddenException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.secure.Security;
+import io.vertx.up.unity.Ux;
 
 import java.util.function.Supplier;
 
@@ -47,18 +47,18 @@ class JwtSecurer {
          * User defined security interface and implement custom code logical
          * Call custom code logical here to do 401 validation.
          */
-        return this.security.verify(authInfo)
-                .compose(authenticated -> this.next(authenticated,
+        return security.verify(authInfo)
+                .compose(authenticated -> next(authenticated,
                         /*
                          * 401 Passed, continue to do 403 workflow
                          */
-                        () -> this.authorize(authInfo),
+                        () -> authorize(authInfo),
                         /*
                          * There is no error fired by Future.failedFuture method
                          * But the validated result is false, it means that there is common
                          * Authenticate workflow.
                          */
-                        () -> new _401JwtExecutorException(this.getClass(), token)
+                        () -> new _401JwtExecutorException(getClass(), token)
                 ));
     }
 
@@ -66,17 +66,17 @@ class JwtSecurer {
      * 403
      */
     Future<User> authorize(final JsonObject authInfo) {
-        return this.security.access(authInfo).compose(authorized -> this.next(authorized,
+        return security.access(authInfo).compose(authorized -> next(authorized,
                 /*
                  * 403 Passed, continue to do business workflow
                  */
-                () -> Ux.toFuture(new JWTUser(authInfo, this.permissionsClaimKey)),
+                () -> Ux.toFuture(new JWTUser(authInfo, permissionsClaimKey)),
                 /*
                  * There is no error fired by Future.failedFuture method
                  * But the validated result is false, it means that there is common
                  * Authorization workflow.
                  */
-                () -> new _403ForbiddenException(this.getClass())));
+                () -> new _403ForbiddenException(getClass())));
     }
 
     /*

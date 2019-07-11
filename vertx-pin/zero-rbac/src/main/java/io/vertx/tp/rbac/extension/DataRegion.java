@@ -6,9 +6,9 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.refine.Sc;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.query.Inquiry;
-import io.vertx.up.plugin.extension.region.AbstractRegion;
+import io.vertx.up.extension.region.AbstractRegion;
 
 import java.util.Objects;
 

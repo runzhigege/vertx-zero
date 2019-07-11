@@ -35,7 +35,7 @@ import io.vertx.ext.auth.mongo.MongoAuth;
 import io.vertx.ext.web.handler.AuthHandler;
 import io.vertx.up.annotations.Authenticate;
 import io.vertx.up.annotations.Wall;
-import io.vertx.up.plugin.mongo.MongoInfix;
+import io.vertx.tp.plugin.mongo.MongoInfix;
 import io.vertx.up.secure.handler.BasicOstium;
 
 @Wall(value = "mongox", path = "/exp4/*")

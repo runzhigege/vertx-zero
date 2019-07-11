@@ -20,8 +20,8 @@ import io.vertx.tp.rbac.authorization.inherit.GiOverlook;
 import io.vertx.tp.rbac.authorization.parent.GpCritical;
 import io.vertx.tp.rbac.authorization.parent.GpHorizon;
 import io.vertx.tp.rbac.authorization.parent.GpOverlook;
-import io.vertx.up.aiki.Ux;
-import io.zero.epic.fn.Fn;
+import io.vertx.up.unity.Ux;
+import io.vertx.up.fn.Fn;
 
 import java.util.List;
 

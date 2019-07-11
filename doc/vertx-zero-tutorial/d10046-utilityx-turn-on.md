@@ -1,10 +1,10 @@
 # D10046 - Utility X Turn-On
 
-From this chapter our tutorial will focus on the tool box that zero system provided, we call it **Utility X**, and in your code the class name is `io.vertx.up.aiki.Ux`. The package name word `aiki` is Hausa language and it means "Work", this class will help the developers to process some duplicated works those are not related to business workflow. Here are three core parts in Utility X:
+From this chapter our tutorial will focus on the tool box that zero system provided, we call it **Utility X**, and in your code the class name is `io.vertx.up.unity.Ux`. The package name word `aiki` is Hausa language and it means "Work", this class will help the developers to process some duplicated works those are not related to business workflow. Here are three core parts in Utility X:
 
-* `io.vertx.up.aiki.Ux`: The uniform tool class, it contains static method only. \( There is no object \)
-* `io.vertx.up.aiki.Uson`: **\( Data Structure \) **The json container to store JsonObject and process it in "Stream Mode", please refer `Rxjava` to know the "Stream Mode", it will process the JsonObject with multi Fluent methods.
-* `io.vertx.up.aiki.Uarr`: **\( Data Structure \) **Another json container to store JsonArray and process it in "Stream Mode". 
+* `io.vertx.up.unity.Ux`: The uniform tool class, it contains static method only. \( There is no object \)
+* `io.vertx.up.unity.Uson`: **\( Data Structure \) **The json container to store JsonObject and process it in "Stream Mode", please refer `Rxjava` to know the "Stream Mode", it will process the JsonObject with multi Fluent methods.
+* `io.vertx.up.unity.Uarr`: **\( Data Structure \) **Another json container to store JsonArray and process it in "Stream Mode".
 
 From this chapter we'll study Ux first because almost all the business codes will cover `Ux` style codes because it's more smartly and helpful. Now we'll move project to `vertx-up` and write some example codes in Unit Test Cases instead of major codes, but for some request flow codes we'll move to `up-thea`, it's under `vertx-zeus` project. You can know the rules for following tutorial:
 
@@ -15,7 +15,7 @@ From this chapter we'll study Ux first because almost all the business codes wil
 
 > Hello world and hello utility x, this is code segments for some usage and you can ignore it first, we'll introduce all the utility x tool apis to be sure every developer could do less works in zero system.
 
-First create the input source up.god.file `d10046.json` in your testing resource folder `src/test/resources/test/io.vertx.up.aiki`.
+First create the input source up.god.file `d10046.json` in your testing resource folder `src/test/resources/test/io.vertx.up.unity`.
 
 ```json
 {
@@ -28,10 +28,10 @@ First create the input source up.god.file `d10046.json` in your testing resource
 Then create test case `D10046FirstTc`in your junit folders, in zero system all the test cases must contain valid suffix. **Tc**: means test case, **Te**: means test exception, you can configure your own name for testing cases but we still recommend to use `Tc/Te` as testing case name suffix.
 
 ```java
-package io.vertx.up.aiki;
+package io.vertx.up.unity;
 
 import io.vertx.core.json.JsonObject;
-import io.zero.quiz.TestBase;
+import io.vertx.quiz.TestBase;
 import org.junit.Assert;
 import org.junit.Test;
 

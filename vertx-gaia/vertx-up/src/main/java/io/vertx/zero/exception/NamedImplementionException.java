@@ -1,6 +1,7 @@
 package io.vertx.zero.exception;
 
-import io.zero.epic.Ut;
+import io.vertx.up.util.Ut;
+import io.vertx.up.exception.UpException;
 
 import java.util.Set;
 

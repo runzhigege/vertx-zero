@@ -6,11 +6,11 @@ import io.vertx.tp.jet.cv.JtKey;
 import io.vertx.tp.jet.refine.Jt;
 import io.vertx.tp.optic.environment.Ambient;
 import io.vertx.up.commune.Commercial;
+import io.vertx.up.commune.config.Database;
+import io.vertx.up.commune.config.Integration;
 import io.vertx.up.eon.ID;
 import io.vertx.up.eon.em.ChannelType;
-import io.vertx.zero.atom.Database;
-import io.vertx.zero.atom.Integration;
-import io.zero.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.util.Objects;
 
@@ -46,7 +46,7 @@ public abstract class JtCommercial implements Commercial {
     }
 
     public <T extends JtCommercial> T bind(final String appId) {
-        this.app = Ambient.getApp(appId);
+        app = Ambient.getApp(appId);
         return (T) this;
     }
 
@@ -54,18 +54,18 @@ public abstract class JtCommercial implements Commercial {
      * Public interface to return `IService` reference
      */
     public IService service() {
-        return this.service;
+        return service;
     }
 
     /*
      * Sub class used method for some processing
      */
     protected JtApp getApp() {
-        return this.app;
+        return app;
     }
 
     protected JtConfig getConfig() {
-        return this.config;
+        return config;
     }
 
     /*
@@ -75,44 +75,44 @@ public abstract class JtCommercial implements Commercial {
 
     @Override
     public ChannelType channelType() {
-        return Ut.toEnum(this.service::getChannelType, ChannelType.class, ChannelType.ADAPTOR);
+        return Ut.toEnum(service::getChannelType, ChannelType.class, ChannelType.ADAPTOR);
     }
 
     @Override
     public Class<?> channelComponent() {
-        return Jt.toChannel(this.service::getChannelComponent, this.channelType());
+        return Jt.toChannel(service::getChannelComponent, channelType());
     }
 
     @Override
     public Class<?> businessComponent() {
-        return Ut.clazz(this.service.getServiceComponent());
+        return Ut.clazz(service.getServiceComponent());
     }
 
     @Override
     public Class<?> recordComponent() {
-        return Ut.clazz(this.service.getServiceRecord());
+        return Ut.clazz(service.getServiceRecord());
     }
 
     @Override
     public Database database() {
-        return Jt.toDatabase(this.service::getConfigDatabase, this.app.getSource());
+        return Jt.toDatabase(service::getConfigDatabase, app.getSource());
     }
 
     @Override
     public Integration integration() {
-        return Jt.toIntegration(this.service::getConfigIntegration);
+        return Jt.toIntegration(service::getConfigIntegration);
     }
 
     @Override
     public String app() {
-        return this.app.getAppId();
+        return app.getAppId();
     }
 
     /*
      * Non - Interface method here.
      */
     public String identifier() {
-        return this.service.getIdentifier();
+        return service.getIdentifier();
     }
 
     // ---------- Basic Json
@@ -125,28 +125,28 @@ public abstract class JtCommercial implements Commercial {
             return false;
         }
         final JtUri jtUri = (JtUri) o;
-        return this.key().equals(jtUri.key());
+        return key().equals(jtUri.key());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.key());
+        return Objects.hash(key());
     }
 
     @Override
     public JsonObject toJson() {
         final JsonObject data = new JsonObject();
         /* key data */
-        data.put(JtKey.Delivery.KEY, this.key());
+        data.put(JtKey.Delivery.KEY, key());
 
         /* service, config */
-        data.put(JtKey.Delivery.SERVICE, (JsonObject) Ut.serializeJson(this.service()));
-        data.put(JtKey.Delivery.CONFIG, (JsonObject) Ut.serializeJson(this.config));
+        data.put(JtKey.Delivery.SERVICE, (JsonObject) Ut.serializeJson(service()));
+        data.put(JtKey.Delivery.CONFIG, (JsonObject) Ut.serializeJson(config));
 
         /* appId */
-        data.put(JtKey.Delivery.APP_ID, this.app.getAppId());
+        data.put(JtKey.Delivery.APP_ID, app.getAppId());
         /* Reflection */
-        data.put(ID.CLASS, this.getClass().getName());
+        data.put(ID.CLASS, getClass().getName());
         return data;
     }
 
@@ -155,12 +155,12 @@ public abstract class JtCommercial implements Commercial {
         /*
          * service, config
          */
-        this.service = Ut.deserialize(data.getJsonObject(JtKey.Delivery.SERVICE), IService.class);
-        this.config = Ut.deserialize(data.getJsonObject(JtKey.Delivery.CONFIG), JtConfig.class);
+        service = Ut.deserialize(data.getJsonObject(JtKey.Delivery.SERVICE), IService.class);
+        config = Ut.deserialize(data.getJsonObject(JtKey.Delivery.CONFIG), JtConfig.class);
         /*
          * application id
          */
         final String appId = data.getString(JtKey.Delivery.APP_ID);
-        this.app = Ambient.getApp(appId);
+        app = Ambient.getApp(appId);
     }
 }

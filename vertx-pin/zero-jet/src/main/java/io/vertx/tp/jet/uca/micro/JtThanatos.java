@@ -2,11 +2,11 @@ package io.vertx.tp.jet.uca.micro;
 
 import io.vertx.core.Future;
 import io.vertx.tp.jet.monitor.JtMonitor;
-import io.vertx.up.job.AbstractMission;
 import io.vertx.up.annotations.On;
-import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.Commercial;
+import io.vertx.up.commune.Envelop;
+import io.vertx.up.uca.job.AbstractMission;
 
 /**
  * 「Job Instance」
@@ -20,7 +20,7 @@ import io.vertx.up.commune.Commercial;
  */
 // @Job(value = JobType.CONTAINER)
 public class JtThanatos extends AbstractMission {
-    private transient final JtMonitor monitor = JtMonitor.create(this.getClass());
+    private transient final JtMonitor monitor = JtMonitor.create(getClass());
 
     /*
      * Data example
@@ -43,7 +43,7 @@ public class JtThanatos extends AbstractMission {
      *     },
      *     "config" : null,
      *     "appId" : "86db806c-97a0-4173-9a6d-632cb1a82ac7",
-     *     "_class" : "io.vertx.tp.jet.atom.JtJob",
+     *     "_class" : "io.vertx.tp.jet.io.vertx.up.atom.JtJob",
      *     "job" : {
      *          "key" : "f723d571-39c8-4823-b0d6-82e15e463906",
      *          "namespace" : "cn.originx.vie.app.ex",
@@ -64,6 +64,6 @@ public class JtThanatos extends AbstractMission {
         /*
          * Here provide another reference for Mission injection
          */
-        return JtPandora.async(envelop, commercial, mission, this.monitor);
+        return JtPandora.async(envelop, commercial, mission, monitor);
     }
 }

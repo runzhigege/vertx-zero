@@ -2,7 +2,7 @@ package io.vertx.tp.plugin.rpc.client;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.atom.flux.IpcData;
+import io.vertx.up.atom.rpc.IpcData;
 
 public interface RpcStub {
     /**

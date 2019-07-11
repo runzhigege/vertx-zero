@@ -66,7 +66,7 @@ package up.god.ipc;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Ipc;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 public class SimpleInsider {
 

@@ -6,7 +6,7 @@ import io.vertx.redis.RedisOptions;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.plugin.Infix;
-import io.zero.epic.fn.Fn;
+import io.vertx.up.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

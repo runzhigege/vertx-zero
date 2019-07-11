@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxField;
 import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.crud.refine.Ix;
-import io.zero.epic.Ut;
+import io.vertx.up.util.Ut;
 
 /*
  * {

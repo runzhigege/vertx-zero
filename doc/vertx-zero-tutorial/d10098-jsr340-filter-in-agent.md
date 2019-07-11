@@ -49,7 +49,7 @@ package up.god.micro.filter;
 import io.vertx.core.VertxException;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
-import io.vertx.up.web.filter.HttpFilter;
+import io.vertx.up.uca.web.filter.HttpFilter;
 
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
@@ -70,7 +70,7 @@ public class FirstFilter extends HttpFilter {
 Here are some points that you should be careful:
 
 * In the filter, you should use annotation `javax.servlet.annotations.WebFilter` to mark filter component
-* Once point that to be careful is that the class must inherit from `io.vertx.up.web.filter.HttpFilter`.
+* Once point that to be careful is that the class must inherit from `io.vertx.up.uca.web.filter.HttpFilter`.
 * The parameters of `doFilter` is `HttpServerRequest/HttpServerResponse` in vert.x instead of JSR340.
 * When your code flow went to Actor, you should use `@ContextParam` to extract the data.
 

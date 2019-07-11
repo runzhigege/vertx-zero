@@ -4,10 +4,10 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 @Queue
 public class DeleteActor {

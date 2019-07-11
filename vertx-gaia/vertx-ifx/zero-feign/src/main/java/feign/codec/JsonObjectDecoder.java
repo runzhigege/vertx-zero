@@ -3,7 +3,7 @@ package feign.codec;
 import feign.FeignException;
 import feign.Response;
 import io.vertx.core.json.JsonObject;
-import io.zero.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

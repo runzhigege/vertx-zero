@@ -38,7 +38,7 @@ The following object is supported by current zero version
 
 ```java
 import io.vertx.ext.mongo.MongoClient;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 import javax.inject.infix.Mongo;
 

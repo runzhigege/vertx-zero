@@ -1,12 +1,12 @@
 package io.vertx.tp.optic.environment;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.database.DataPool;
+import io.vertx.tp.plugin.database.DataPool;
 import io.vertx.tp.error._500AmbientConnectException;
 import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.init.JtPin;
-import io.zero.epic.Ut;
-import io.zero.epic.fn.Fn;
+import io.vertx.up.util.Ut;
+import io.vertx.up.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
