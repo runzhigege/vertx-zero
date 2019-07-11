@@ -54,7 +54,7 @@ final class Outcome {
     static void out(final HttpServerResponse response, final Envelop envelop, final Set<MediaType> produces) {
         /*
          * Set response data for current request / event
-         * The media type has been set before this step ( media ( HttpServerResponse, Set<MediaType> )
+         * The mime type has been set before this step ( mime ( HttpServerResponse, Set<MediaType> )
          */
         if (!response.ended()) {
             final String headerStr = response.headers().get(HttpHeaders.CONTENT_TYPE);

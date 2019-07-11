@@ -6,7 +6,7 @@ import io.vertx.up.atom.agent.Event;
 /**
  * Hub for Uri basic
  * path, method, order
- * register to route to generate media support
+ * register to route to generate mime support
  */
 public class UriHub implements Hub<Route> {
 

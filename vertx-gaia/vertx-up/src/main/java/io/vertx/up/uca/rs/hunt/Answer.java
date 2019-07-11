@@ -10,7 +10,7 @@ import io.vertx.up.atom.agent.Event;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.eon.ID;
 import io.vertx.up.exception.web._500InternalServerException;
-import io.vertx.up.uca.rs.pointer.PluginExtension;
+import io.vertx.up.extension.pointer.PluginExtension;
 import io.vertx.up.util.Ut;
 
 import javax.ws.rs.core.MediaType;

@@ -15,8 +15,8 @@ import io.vertx.up.exception.web._500EntityCastException;
 import io.vertx.up.fn.Actuator;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.uca.rs.media.Analyzer;
-import io.vertx.up.uca.rs.media.MediaAnalyzer;
+import io.vertx.up.uca.rs.mime.Analyzer;
+import io.vertx.up.uca.rs.mime.MediaAnalyzer;
 import io.vertx.up.uca.rs.validation.Validator;
 import io.vertx.up.util.Ut;
 

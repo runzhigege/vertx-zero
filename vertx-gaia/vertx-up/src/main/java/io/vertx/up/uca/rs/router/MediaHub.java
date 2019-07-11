@@ -9,9 +9,9 @@ import javax.ws.rs.core.MediaType;
 import java.util.Set;
 
 /**
- * Hub for media type
+ * Hub for mime type
  * Producer/Consumer
- * register to route to generate media support
+ * register to route to generate mime support
  */
 public class MediaHub implements Hub<Route> {
 
