@@ -19,6 +19,7 @@ import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 import io.zero.runtime.Anno;
 import io.zero.runtime.Runner;
+import io.zero.runtime.ZeroHeart;
 
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
@@ -69,6 +70,11 @@ public class VertxApplication {
              * Class definition predicate
              */
             ensureEtcd(clazz);
+            /*
+             * To avoid getPackages issue here
+             */
+            ZeroHeart.init();
+
             /*
              * Before launcher, start package scanning for preparing metadata
              * This step is critical because it's environment core preparing steps.
@@ -168,10 +174,12 @@ public class VertxApplication {
             }, "codex-engine-runner");
 
             /* 5.Plugin init */
+            /*
             Runner.run(() -> {
                 final Scatter<Vertx> scatter = Ut.singleton(InitScatter.class);
                 scatter.connect(vertx);
             }, "initializer-runner");
+            */
         });
     }
 }

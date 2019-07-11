@@ -1,6 +1,5 @@
-package io.vertx.up.web.anima;
+package io.zero.runtime;
 
-import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.aiki.Ux;
@@ -8,16 +7,12 @@ import io.vertx.zero.marshal.node.Node;
 import io.vertx.zero.marshal.node.ZeroUniform;
 import io.zero.epic.Ut;
 
-/**
- * Data singleton: default with liquibase
- */
-public class InitScatter implements Scatter<Vertx> {
+public class ZeroHeart {
 
     private static final String INIT = "init";
     private static final Node<JsonObject> visitor = Ut.singleton(ZeroUniform.class);
 
-    @Override
-    public void connect(final Vertx vertx) {
+    public static void init() {
         // inject configuration
         final JsonObject config = visitor.read();
         /*

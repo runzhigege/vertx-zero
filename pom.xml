@@ -109,6 +109,8 @@
         <protobuf.version>3.8.0</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
         <grpc.version>1.22.1</grpc.version>
+        <!-- Yaml -->
+        <yaml.version>1.24</yaml.version>
         <!-- Vert.x Addition -->
         <rxjava2.version>2.2.10</rxjava2.version>
         <netty.tcnative.version>2.0.25.Final</netty.tcnative.version>
@@ -124,6 +126,7 @@
         <jcache.version>1.1.1</jcache.version>
         <jsr305.version>3.0.2</jsr305.version>
         <jsr340.version>4.0.1</jsr340.version>
+        <jsr338.version>2.2</jsr338.version>
         <!-- Testing -->
         <junit.version>4.12</junit.version>
         <!-- AspectJ -->
@@ -207,6 +210,16 @@
             <dependency>
                 <groupId>cn.vertxup</groupId>
                 <artifactId>zero-ali-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.vertxup</groupId>
+                <artifactId>zero-excel</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.vertxup</groupId>
+                <artifactId>zero-feign</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- vertx -->
@@ -300,6 +313,11 @@
                 <artifactId>vertx-rx-java2</artifactId>
                 <version>${vertx.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${yaml.version}</version>
+            </dependency>
             <!-- https://mvnrepository.com/artifact/commons-net/commons-net -->
             <dependency>
                 <groupId>commons-net</groupId>
@@ -323,6 +341,12 @@
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>${jsr340.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>javax.persistence-api</artifactId>
+                <version>${jsr338.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/io.netty/netty-tcnative -->
             <dependency>
