@@ -2,6 +2,8 @@ package io.zero.runtime;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
+import io.vertx.zero.exception.ZeroException;
+import io.vertx.zero.exception.heart.LimeFileException;
 import io.vertx.zero.log.internal.Log4JAnnal;
 import io.vertx.zero.marshal.options.Opts;
 import io.zero.epic.Ut;
@@ -29,18 +31,28 @@ public final class ZeroAmbient {
 
     static {
         INJECTIONS = new ConcurrentHashMap<>();
-        // 2. The injections must be configured in lime node.
-        Fn.outUp(() -> {
+        /*
+         * Apply default value for
+         * vertx-inject.yml
+         */
+        final JsonObject injectOpt = new JsonObject();
+        try {
             final JsonObject opt = OPTS.ingest(KEY);
-            Ut.itJObject(opt, (item, field) -> {
-                final String plugin = item.toString();
-                if (!plugin.equals(Log4JAnnal.class.getName())) {
-                    // Skip class "io.vertx.zero.log.internal.Log4JAnnal"
-                    LOGGER.info(Info.PLUGIN_LOAD, KEY, field, plugin);
-                }
-                INJECTIONS.put(field, Ut.clazz(plugin));
-            });
-        }, LOGGER);
+            injectOpt.mergeIn(opt);
+        }catch (ZeroException | LimeFileException ex){
+            LOGGER.warn(ex.getMessage());
+        }
+        /*
+         * Scanned for injectOpt here
+         */
+        Ut.itJObject(injectOpt, (item, field) -> {
+            final String plugin = item.toString();
+            if (!plugin.equals(Log4JAnnal.class.getName())) {
+                // Skip class "io.vertx.zero.log.internal.Log4JAnnal"
+                LOGGER.info(Info.PLUGIN_LOAD, KEY, field, plugin);
+            }
+            INJECTIONS.put(field, Ut.clazz(plugin));
+        });
     }
 
     private ZeroAmbient() {
