@@ -1,4 +1,4 @@
-package io.vertx.tp.etcd.unit;
+package io.vertx.tp.plugin.etcd.unit;
 
 interface Info {
 
