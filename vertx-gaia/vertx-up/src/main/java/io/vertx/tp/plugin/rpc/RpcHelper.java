@@ -9,8 +9,8 @@ import io.vertx.up.exception._424RpcServiceException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.discovery.IpcOrigin;
 import io.vertx.up.micro.discovery.Origin;
-import io.vertx.up.epic.Ut;
-import io.vertx.up.epic.container.Refer;
+import io.vertx.up.util.Ut;
+import io.vertx.up.util.container.Refer;
 import io.vertx.up.fn.Fn;
 
 import java.util.Objects;

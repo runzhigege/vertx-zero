@@ -7,7 +7,7 @@ import io.vertx.up.eon.em.CertType;
 import io.vertx.up.micro.ssl.server.JksCert;
 import io.vertx.up.micro.ssl.server.PemCert;
 import io.vertx.up.micro.ssl.server.PfxCert;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 /**
  * Different ssl pipe

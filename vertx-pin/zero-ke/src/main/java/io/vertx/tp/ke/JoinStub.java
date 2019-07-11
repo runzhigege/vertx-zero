@@ -2,7 +2,7 @@ package io.vertx.tp.ke;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.aiki.UxJooq;
+import io.vertx.up.unity.UxJooq;
 
 /*
  * Join stub implementation by some specific definition

@@ -14,7 +14,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ipc.DataEncap;
 import io.vertx.tp.plugin.rpc.client.RpcStub;
 import io.vertx.tp.plugin.rpc.client.UnityStub;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.text.MessageFormat;
 import java.util.Objects;

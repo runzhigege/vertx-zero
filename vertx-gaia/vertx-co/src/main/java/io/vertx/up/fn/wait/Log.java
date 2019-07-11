@@ -2,7 +2,7 @@ package io.vertx.up.fn.wait;
 
 import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Strings;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;

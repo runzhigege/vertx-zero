@@ -1,7 +1,7 @@
 package io.vertx.up.runtime;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.log.Annal;
 import io.vertx.up.log.internal.Log4JAnnal;
 import io.vertx.up.exception.ZeroException;

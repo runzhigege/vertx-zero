@@ -19,12 +19,12 @@ Here we won't introduce the details for each one, but pick up some core points.
 Here are the test cases for `Ux.toArray` method:
 
 ```java
-package io.vertx.up.aiki;
+package io.vertx.up.unity;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.vertx.core.json.JsonArray;
 import io.vertx.quiz.TestBase;
-import io.vertx.up.epic.Jackson;
+import io.vertx.up.util.Jackson;
 import org.junit.Assert;
 import org.junit.Test;
 

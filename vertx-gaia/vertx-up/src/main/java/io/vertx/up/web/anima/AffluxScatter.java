@@ -1,10 +1,10 @@
 package io.vertx.up.web.anima;
 
 import io.vertx.core.Vertx;
-import io.vertx.up.aiki.Uobj;
+import io.vertx.up.unity.Uobj;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.worker.Receipt;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.runtime.Runner;
 import io.vertx.up.runtime.ZeroAnno;
 

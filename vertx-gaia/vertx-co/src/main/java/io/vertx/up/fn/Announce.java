@@ -5,7 +5,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.exception.UpException;
 import io.vertx.up.exception.ZeroException;
 import io.vertx.up.exception.ZeroRunException;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.util.function.Supplier;
 

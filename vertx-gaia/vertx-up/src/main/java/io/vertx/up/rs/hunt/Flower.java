@@ -12,7 +12,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.rs.announce.Rigor;
 import io.vertx.up.rs.pointer.PluginExtension;
 import io.vertx.up.rs.validation.Validator;
-import io.vertx.up.epic.container.Kv;
+import io.vertx.up.util.container.Kv;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;

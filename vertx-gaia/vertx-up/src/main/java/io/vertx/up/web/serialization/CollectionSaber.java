@@ -1,7 +1,7 @@
 package io.vertx.up.web.serialization;
 
 import io.vertx.core.json.JsonArray;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 /**

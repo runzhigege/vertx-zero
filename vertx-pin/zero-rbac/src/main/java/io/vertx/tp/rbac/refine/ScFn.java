@@ -3,8 +3,8 @@ package io.vertx.tp.rbac.refine;
 import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.vertx.up.aiki.Uarr;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Uarr;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
 

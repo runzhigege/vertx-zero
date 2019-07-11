@@ -9,8 +9,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.atom.ProfileGroup;
 import io.vertx.tp.rbac.atom.ProfileRole;
 import io.vertx.tp.rbac.cv.AuthKey;
-import io.vertx.up.aiki.Ux;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.unity.Ux;
+import io.vertx.up.util.Ut;
 
 import java.util.Comparator;
 import java.util.List;

@@ -2,7 +2,7 @@ package io.vertx.up.rs.config;
 
 import io.reactivex.Observable;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 import javax.ws.rs.Consumes;

@@ -2,7 +2,7 @@ package io.vertx.domain;
 
 import cn.vertxup.rbac.domain.tables.pojos.SUser;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import org.junit.Test;
 
 enum TestValue {

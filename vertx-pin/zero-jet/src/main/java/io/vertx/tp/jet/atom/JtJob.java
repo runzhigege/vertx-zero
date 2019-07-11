@@ -8,7 +8,7 @@ import io.vertx.tp.jet.refine.Jt;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.em.JobType;
 import io.vertx.up.eon.Strings;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.util.Objects;
 

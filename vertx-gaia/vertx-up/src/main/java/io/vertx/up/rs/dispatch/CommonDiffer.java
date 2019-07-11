@@ -5,7 +5,7 @@ import io.vertx.up.atom.agent.Event;
 import io.vertx.up.rs.Aim;
 import io.vertx.up.rs.hunt.PingAim;
 import io.vertx.up.rs.hunt.SyncAim;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 import java.lang.reflect.Method;

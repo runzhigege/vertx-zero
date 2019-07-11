@@ -9,7 +9,7 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.eon.Info;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.zero.exception.VertxCallbackException;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.runtime.ZeroAnno;

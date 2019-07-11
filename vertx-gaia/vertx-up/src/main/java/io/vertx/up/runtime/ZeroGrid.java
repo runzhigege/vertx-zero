@@ -8,7 +8,7 @@ import io.vertx.tp.ipc.marshal.RpcServerVisitor;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.config.*;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;

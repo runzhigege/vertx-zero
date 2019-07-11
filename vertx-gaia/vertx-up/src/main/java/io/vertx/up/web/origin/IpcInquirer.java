@@ -6,7 +6,7 @@ import io.vertx.up.annotations.Ipc;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.*;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 import java.lang.annotation.Annotation;

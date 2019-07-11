@@ -9,8 +9,8 @@ import io.vertx.ext.web.Session;
 import io.vertx.tp.rbac.atom.ScConfig;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.init.ScPin;
-import io.vertx.up.aiki.Uson;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Uson;
+import io.vertx.up.unity.Ux;
 
 import javax.inject.Inject;
 import java.util.ArrayList;

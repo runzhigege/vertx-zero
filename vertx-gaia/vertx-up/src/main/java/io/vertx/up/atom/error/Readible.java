@@ -1,7 +1,7 @@
 package io.vertx.up.atom.error;
 
 import io.vertx.up.exception.WebException;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 /**
  * Fill the field "readible" for input exception

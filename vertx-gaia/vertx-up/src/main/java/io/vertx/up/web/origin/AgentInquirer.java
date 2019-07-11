@@ -2,7 +2,7 @@ package io.vertx.up.web.origin;
 
 import io.vertx.up.annotations.Agent;
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.runtime.ZeroHelper;
 
 import java.util.List;

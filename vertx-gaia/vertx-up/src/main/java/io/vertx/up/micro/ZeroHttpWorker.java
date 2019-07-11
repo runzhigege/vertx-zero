@@ -11,7 +11,7 @@ import io.vertx.up.micro.follow.Invoker;
 import io.vertx.up.micro.follow.InvokerUtil;
 import io.vertx.up.micro.follow.JetSelector;
 import io.vertx.up.eon.Values;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.runtime.ZeroAnno;
 

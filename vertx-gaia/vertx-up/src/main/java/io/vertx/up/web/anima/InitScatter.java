@@ -3,10 +3,10 @@ package io.vertx.up.web.anima;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.uca.marshal.node.Node;
 import io.vertx.up.uca.marshal.node.ZeroUniform;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 /**
  * Data initialize: default with liquibase

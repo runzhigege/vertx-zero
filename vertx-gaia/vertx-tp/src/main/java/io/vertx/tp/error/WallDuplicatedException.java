@@ -1,7 +1,7 @@
 package io.vertx.tp.error;
 
 import io.vertx.up.exception.UpException;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.util.Set;
 

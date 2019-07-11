@@ -1,7 +1,7 @@
 package io.vertx.up.uca.marshal.node;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.quiz.ZeroBase;
 import org.junit.Test;
 

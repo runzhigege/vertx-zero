@@ -6,7 +6,7 @@ import io.vertx.tp.jet.refine.Jt;
 import io.vertx.up.log.Annal;
 import io.vertx.up.uca.marshal.node.Node;
 import io.vertx.up.uca.marshal.node.ZeroUniform;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 /*
  * Configuration of zero here

@@ -7,7 +7,7 @@ import io.vertx.up.atom.Ruler;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.Values;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.exception.zero.EtcdConfigEmptyException;
 import io.vertx.up.exception.zero.EtcdNetworkException;
 import io.vertx.up.fn.Fn;

@@ -9,7 +9,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.refine.Sc;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.log.Annal;
 
 public class UserService implements UserStub {

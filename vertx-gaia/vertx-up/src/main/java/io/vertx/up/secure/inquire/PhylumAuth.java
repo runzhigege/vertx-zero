@@ -5,7 +5,7 @@ import io.vertx.up.annotations.Authenticate;
 import io.vertx.up.annotations.Authorize;
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 import java.lang.annotation.Annotation;

@@ -10,7 +10,7 @@ import io.vertx.up.job.store.JobConfig;
 import io.vertx.up.job.store.JobPin;
 import io.vertx.up.job.store.JobStore;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.util.Objects;
 import java.util.Set;

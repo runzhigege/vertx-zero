@@ -6,7 +6,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Values;
 import io.vertx.up.exception.ZeroException;
 import io.vertx.up.exception.demon.JObjectElementException;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 /**

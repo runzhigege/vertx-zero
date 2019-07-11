@@ -1,7 +1,7 @@
 package io.vertx.up.fn;
 
 import io.vertx.up.exception.ZeroRunException;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;

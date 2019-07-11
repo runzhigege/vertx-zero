@@ -13,7 +13,7 @@ import io.vertx.up.web.anima.PointScatter;
 import io.vertx.up.web.anima.Scatter;
 import io.vertx.zero.exception.UpClassArgsException;
 import io.vertx.zero.exception.UpClassInvalidException;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.runtime.Anno;
 import io.vertx.up.runtime.Runner;

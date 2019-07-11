@@ -14,7 +14,7 @@ import io.vertx.up.rs.router.PointAxis;
 import io.vertx.up.rs.router.RouterAxis;
 import io.vertx.up.rs.router.WallAxis;
 import io.vertx.up.eon.Values;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 import java.text.MessageFormat;

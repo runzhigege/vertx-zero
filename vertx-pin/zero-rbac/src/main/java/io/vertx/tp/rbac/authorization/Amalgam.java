@@ -4,7 +4,7 @@ import io.vertx.tp.rbac.atom.ProfileGroup;
 import io.vertx.tp.rbac.atom.ProfileRole;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.util.*;
 import java.util.stream.Collectors;

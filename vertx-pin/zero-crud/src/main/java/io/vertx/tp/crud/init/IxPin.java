@@ -3,7 +3,7 @@ package io.vertx.tp.crud.init;
 import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.tp.ke.refine.Ke;
-import io.vertx.up.aiki.UxJooq;
+import io.vertx.up.unity.UxJooq;
 import io.vertx.up.atom.Rule;
 import io.vertx.up.log.Annal;
 

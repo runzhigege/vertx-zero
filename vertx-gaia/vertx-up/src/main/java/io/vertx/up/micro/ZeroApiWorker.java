@@ -11,7 +11,7 @@ import io.vertx.up.eon.em.MessageModel;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.discovery.ApiOrigin;
 import io.vertx.up.micro.discovery.Origin;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.runtime.Runner;
 

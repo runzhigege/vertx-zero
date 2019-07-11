@@ -9,7 +9,7 @@ import io.vertx.tp.ambient.refine.At;
 import io.vertx.tp.database.DataPool;
 import io.vertx.up.atom.Database;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import org.jooq.Configuration;
 
 import java.util.List;

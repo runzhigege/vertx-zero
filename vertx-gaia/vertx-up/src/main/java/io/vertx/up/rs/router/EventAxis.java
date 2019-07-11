@@ -12,7 +12,7 @@ import io.vertx.up.rs.Sentry;
 import io.vertx.up.rs.dispatch.ModeSplitter;
 import io.vertx.up.rs.dispatch.StandardVerifier;
 import io.vertx.up.web.failure.CommonEndurer;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.runtime.ZeroAnno;
 

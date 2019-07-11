@@ -14,7 +14,7 @@ import io.vertx.up.atom.flux.IpcData;
 import io.vertx.up.atom.hold.VirtualUser;
 import io.vertx.up.eon.em.IpcType;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 /**

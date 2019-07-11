@@ -2,12 +2,12 @@ package io.vertx.tp.jet.uca.tunnel;
 
 import io.vertx.core.Future;
 import io.vertx.tp.optic.jet.JtComponent;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.atom.Database;
 import io.vertx.up.atom.Integration;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.ActIn;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 public class ActorChannel extends AbstractChannel {
     /*

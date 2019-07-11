@@ -12,7 +12,7 @@ import io.vertx.up.atom.hold.Virtual;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
 import io.vertx.zero.exception.EventSourceException;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.runtime.ZeroHelper;
 

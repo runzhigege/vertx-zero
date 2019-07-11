@@ -61,7 +61,7 @@ package up.god.micro.jwt;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.atom.Envelop;
@@ -103,7 +103,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.web.handler.AuthHandler;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Authenticate;
 import io.vertx.up.annotations.Wall;
 import io.vertx.up.secure.Security;
@@ -168,8 +168,8 @@ import com.tlk.infra.exception.PasswordWrongException;
 import com.tlk.infra.exception.UserNotFoundException;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.aiki.Uson;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Uson;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.secure.Security;
 

@@ -10,7 +10,7 @@ import io.vertx.core.shareddata.LocalMap;
 import io.vertx.core.shareddata.SharedData;
 import io.vertx.up.exception._501SharedDataModeException;
 import io.vertx.up.log.Annal;
-import io.vertx.up.epic.container.Kv;
+import io.vertx.up.util.container.Kv;
 import io.vertx.up.fn.Fn;
 
 import java.util.Objects;

@@ -4,7 +4,7 @@ import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.em.JobType;
 import io.vertx.up.job.plugin.JobIncome;
 import io.vertx.up.job.plugin.JobOutcome;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Actuator;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.runtime.Runner;

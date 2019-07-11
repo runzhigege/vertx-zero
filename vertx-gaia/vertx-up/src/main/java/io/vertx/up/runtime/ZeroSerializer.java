@@ -4,7 +4,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.web.serialization.*;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 import java.io.File;
 import java.math.BigDecimal;

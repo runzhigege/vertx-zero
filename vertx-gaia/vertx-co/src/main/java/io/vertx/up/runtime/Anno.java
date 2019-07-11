@@ -1,6 +1,6 @@
 package io.vertx.up.runtime;
 
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 import java.lang.annotation.Annotation;

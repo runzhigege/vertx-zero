@@ -3,9 +3,9 @@ package io.vertx.tp.crud.actor;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxField;
 import io.vertx.tp.crud.atom.IxModule;
-import io.vertx.up.aiki.Ux;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.atom.Envelop;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 
 /*
  * key for primary key generation here

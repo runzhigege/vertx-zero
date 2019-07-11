@@ -5,7 +5,7 @@ import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Values;
 import io.vertx.zero.exception.AgentDuplicatedException;
-import io.vertx.up.epic.Ut;
+import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
 
 import javax.ws.rs.Path;
