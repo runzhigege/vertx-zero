@@ -59,9 +59,10 @@
             <artifactId>aspectjrt</artifactId>
         </dependency>
         -->
+        <!-- Switch to Up -->
         <dependency>
             <groupId>cn.vertxup</groupId>
-            <artifactId>vertx-rx</artifactId>
+            <artifactId>vertx-up</artifactId>
         </dependency>
     </dependencies>
     <dependencyManagement>

@@ -1,4 +1,4 @@
-package io.vertx.tp.feign;
+package io.vertx.tp.plugin.feign;
 
 import feign.Feign;
 import feign.Request;
