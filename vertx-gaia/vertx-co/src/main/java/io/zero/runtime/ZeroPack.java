@@ -3,7 +3,6 @@ package io.zero.runtime;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.vertx.core.impl.ConcurrentHashSet;
-import io.vertx.core.json.JsonArray;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.eon.Strings;
 import io.zero.epic.Ut;
@@ -12,7 +11,6 @@ import io.zero.runtime.pkg.PackThread;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * ZeroPack the package to extract classes.
@@ -36,9 +34,10 @@ public final class ZeroPack {
             /*
              * Debug in file
              */
+            /*
             final JsonArray debugPkg = new JsonArray();
             packageDirs.forEach(debugPkg::add);
-            Ut.ioOut("/Users/lang/Out/out-package.json", debugPkg);
+            Ut.ioOut("/Users/lang/Out/out-package.json", debugPkg); */
             /*
              * Debug in package
              * Here I have tested package in total when development & production environment both.
@@ -53,11 +52,12 @@ public final class ZeroPack {
             /*
              * Debug in file
              */
+            /*
             final Set<String> classSet = new TreeSet<>();
             CLASSES.forEach(clazz -> classSet.add(clazz.getName()));
             final JsonArray debugCls = new JsonArray();
             classSet.forEach(debugCls::add);
-            Ut.ioOut("/Users/lang/Out/out.json", debugCls);
+            Ut.ioOut("/Users/lang/Out/out.json", debugCls);*/
             // System.exit(0);
         }
         return CLASSES;
