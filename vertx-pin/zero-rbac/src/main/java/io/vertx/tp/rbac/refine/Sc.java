@@ -1,7 +1,7 @@
 package io.vertx.tp.rbac.refine;
 
-import cn.vertxup.domain.tables.pojos.OAccessToken;
-import cn.vertxup.domain.tables.pojos.SResource;
+import cn.vertxup.rbac.domain.tables.pojos.OAccessToken;
+import cn.vertxup.rbac.domain.tables.pojos.SResource;
 import io.vertx.core.CompositeFuture;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;

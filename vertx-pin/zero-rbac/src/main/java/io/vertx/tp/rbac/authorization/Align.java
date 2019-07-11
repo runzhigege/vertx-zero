@@ -1,14 +1,14 @@
 package io.vertx.tp.rbac.authorization;
 
-import cn.vertxup.domain.tables.pojos.SGroup;
+import cn.vertxup.rbac.domain.tables.pojos.SGroup;
+import cn.vertxup.rbac.service.business.GroupService;
+import cn.vertxup.rbac.service.business.GroupStub;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.atom.ProfileGroup;
 import io.vertx.tp.rbac.atom.ProfileRole;
 import io.vertx.tp.rbac.cv.AuthKey;
-import io.vertx.tp.rbac.service.business.GroupService;
-import io.vertx.tp.rbac.service.business.GroupStub;
 import io.vertx.up.aiki.Ux;
 import io.zero.epic.Ut;
 

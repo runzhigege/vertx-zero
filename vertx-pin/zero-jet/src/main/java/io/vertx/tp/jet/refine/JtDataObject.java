@@ -1,8 +1,8 @@
 package io.vertx.tp.jet.refine;
 
-import cn.vertxup.jet.tables.pojos.IApi;
-import cn.vertxup.jet.tables.pojos.IJob;
-import cn.vertxup.jet.tables.pojos.IService;
+import cn.vertxup.jet.domain.tables.pojos.IApi;
+import cn.vertxup.jet.domain.tables.pojos.IJob;
+import cn.vertxup.jet.domain.tables.pojos.IService;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.cv.JtConstant;

@@ -1,7 +1,7 @@
 package io.vertx.tp.ambient.extension;
 
-import cn.vertxup.ambient.tables.daos.XSourceDao;
-import cn.vertxup.ambient.tables.pojos.XSource;
+import cn.vertxup.ambient.domain.tables.daos.XSourceDao;
+import cn.vertxup.ambient.domain.tables.pojos.XSource;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ambient.cv.AtMsg;
@@ -25,18 +25,18 @@ class SourceInit implements Init {
             At.infoApp(LOGGER, AtMsg.INIT_SOURCE, appJson.encode());
             /* X_SOURCE initialization */
             final JsonObject sourceJson = appJson.getJsonObject(KeField.SOURCE);
-            final XSource source = this.init(sourceJson, appJson);
+            final XSource source = init(sourceJson, appJson);
 
             return Ux.Jooq.on(XSourceDao.class)
                     /*
                      * Init second step: appId as condition, save X_APP
                      */
-                    .upsertAsync(this.whereUnique(appJson), source)
+                    .upsertAsync(whereUnique(appJson), source)
                     .compose(Ux::fnJObject)
                     /*
                      * Result Building
                      */
-                    .compose(updated -> Ux.toFuture(this.result(appJson, updated)));
+                    .compose(updated -> Ux.toFuture(result(appJson, updated)));
         };
     }
 

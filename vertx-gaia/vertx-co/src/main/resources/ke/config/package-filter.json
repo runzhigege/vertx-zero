@@ -18,6 +18,7 @@
         "io.vertx.lang",
         "io.vertx.codegen",
         "io.vertx.spi",
+        "io.vertx.config",
         "mousio.etcd4j",
         "org.apache",
         "org.reactivestreams",

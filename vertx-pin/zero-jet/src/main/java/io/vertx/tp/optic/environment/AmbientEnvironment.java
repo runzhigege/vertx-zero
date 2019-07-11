@@ -1,11 +1,11 @@
 package io.vertx.tp.optic.environment;
 
-import cn.vertxup.jet.tables.daos.IApiDao;
-import cn.vertxup.jet.tables.daos.IJobDao;
-import cn.vertxup.jet.tables.daos.IServiceDao;
-import cn.vertxup.jet.tables.pojos.IApi;
-import cn.vertxup.jet.tables.pojos.IJob;
-import cn.vertxup.jet.tables.pojos.IService;
+import cn.vertxup.jet.domain.tables.daos.IApiDao;
+import cn.vertxup.jet.domain.tables.daos.IJobDao;
+import cn.vertxup.jet.domain.tables.daos.IServiceDao;
+import cn.vertxup.jet.domain.tables.pojos.IApi;
+import cn.vertxup.jet.domain.tables.pojos.IJob;
+import cn.vertxup.jet.domain.tables.pojos.IService;
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.tp.database.DataPool;
 import io.vertx.tp.jet.atom.JtApp;

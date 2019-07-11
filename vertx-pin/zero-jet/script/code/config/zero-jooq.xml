@@ -51,7 +51,7 @@
             <fluentSetters>true</fluentSetters>
         </generate>
         <target>
-            <packageName>cn.vertxup.jet</packageName>
+            <packageName>cn.vertxup.jet.domain</packageName>
             <directory>../../src/main/java</directory>
         </target>
         <strategy>
