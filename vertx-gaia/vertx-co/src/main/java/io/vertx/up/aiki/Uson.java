@@ -4,8 +4,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;

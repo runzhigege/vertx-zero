@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 import io.vertx.quiz.ZeroBase;
 import org.junit.Test;
 

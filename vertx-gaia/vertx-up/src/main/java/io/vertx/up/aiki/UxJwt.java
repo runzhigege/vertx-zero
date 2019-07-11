@@ -14,10 +14,10 @@ import io.vertx.ext.jwt.JWTOptions;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.exception._500JwtRuntimeException;
 import io.vertx.up.secure.provider.JwtAuthProvider;
-import io.vertx.zero.marshal.node.Node;
-import io.vertx.zero.marshal.node.ZeroUniform;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.uca.marshal.node.Node;
+import io.vertx.up.uca.marshal.node.ZeroUniform;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

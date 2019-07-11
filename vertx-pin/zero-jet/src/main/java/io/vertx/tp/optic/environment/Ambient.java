@@ -5,8 +5,8 @@ import io.vertx.tp.database.DataPool;
 import io.vertx.tp.error._500AmbientConnectException;
 import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.init.JtPin;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

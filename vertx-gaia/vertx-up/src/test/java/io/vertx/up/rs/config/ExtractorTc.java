@@ -7,7 +7,7 @@ import io.vertx.up.eon.ZeroValue;
 import io.vertx.up.micro.ZeroHttpAgent;
 import io.vertx.up.rs.Extractor;
 import io.vertx.zero.exception.EventSourceException;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 import io.vertx.quiz.UpBase;
 import org.junit.Test;
 

@@ -5,8 +5,8 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.rs.Aim;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
 
 /**
  * BlockAim: Non-Event Bus: One-Way

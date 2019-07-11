@@ -5,7 +5,7 @@ import io.vertx.up.exception._500PoolInternalException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.shared.MapInfix;
 import io.vertx.up.plugin.shared.SharedClient;
-import io.vertx.zero.epic.container.Kv;
+import io.vertx.up.epic.container.Kv;
 
 /**
  * Shared Data for pool usage in utility X

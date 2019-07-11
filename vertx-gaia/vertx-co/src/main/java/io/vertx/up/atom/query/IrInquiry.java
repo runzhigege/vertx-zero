@@ -2,8 +2,8 @@ package io.vertx.up.atom.query;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
 
 import java.util.HashSet;
 import java.util.Set;

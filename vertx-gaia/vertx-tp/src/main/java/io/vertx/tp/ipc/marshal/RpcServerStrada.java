@@ -3,8 +3,8 @@ package io.vertx.tp.ipc.marshal;
 import io.vertx.core.ServidorOptions;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.marshal.Transformer;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.uca.marshal.Transformer;
+import io.vertx.up.fn.Fn;
 
 public class RpcServerStrada implements Transformer<ServidorOptions> {
 

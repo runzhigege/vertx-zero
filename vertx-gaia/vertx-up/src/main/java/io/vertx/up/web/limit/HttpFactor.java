@@ -8,7 +8,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ZeroHttpAgent;
 import io.vertx.up.micro.ZeroRpcAgent;
 import io.vertx.up.micro.ZeroSockAgent;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.fn.Fn;
 
 import java.util.HashSet;
 import java.util.Set;

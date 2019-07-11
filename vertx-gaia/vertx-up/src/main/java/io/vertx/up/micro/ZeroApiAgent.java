@@ -14,8 +14,8 @@ import io.vertx.up.rs.router.PointAxis;
 import io.vertx.up.rs.router.RouterAxis;
 import io.vertx.up.rs.router.WallAxis;
 import io.vertx.up.eon.Values;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
 
 import java.text.MessageFormat;
 import java.util.concurrent.ConcurrentHashMap;

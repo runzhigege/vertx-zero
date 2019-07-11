@@ -9,7 +9,7 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.hold.Virtual;
 import io.vertx.up.rs.Aim;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.fn.Fn;
 
 public class AsyncAim extends BaseAim implements Aim<RoutingContext> {
 

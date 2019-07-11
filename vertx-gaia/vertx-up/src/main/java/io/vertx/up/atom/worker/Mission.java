@@ -15,8 +15,8 @@ import io.vertx.up.eon.em.JobStatus;
 import io.vertx.up.eon.em.JobType;
 import io.vertx.up.exception._501JobOnMissingException;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;

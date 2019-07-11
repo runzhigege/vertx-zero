@@ -4,7 +4,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.handler.AuthHandler;
 import io.vertx.up.atom.secure.Cliff;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.fn.Fn;
 
 /**
  * Native AuthHandler extract from bolt,

@@ -8,11 +8,11 @@ import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.atom.JtConfig;
 import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.atom.JtWorker;
+import io.vertx.up.atom.Database;
+import io.vertx.up.atom.Integration;
+import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.em.ChannelType;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.atom.Database;
-import io.vertx.zero.atom.Integration;
-import io.vertx.up.eon.Strings;
 
 import javax.ws.rs.core.MediaType;
 import java.util.Set;

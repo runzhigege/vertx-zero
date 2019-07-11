@@ -3,7 +3,7 @@ package io.vertx.up.plugin.mongo;
 import io.vertx.ext.mongo.FindOptions;
 import io.vertx.up.atom.query.Pager;
 import io.vertx.up.atom.query.Sorter;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.fn.Fn;
 
 /**
  * Build FindOptions for mongo database.

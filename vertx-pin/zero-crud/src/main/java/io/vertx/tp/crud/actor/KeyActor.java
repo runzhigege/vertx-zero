@@ -5,7 +5,7 @@ import io.vertx.tp.crud.atom.IxField;
 import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.Envelop;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 /*
  * key for primary key generation here

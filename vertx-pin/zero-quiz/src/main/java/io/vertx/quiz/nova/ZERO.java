@@ -3,7 +3,7 @@ package io.vertx.quiz.nova;
 import cn.vertxup.crud.api.*;
 import io.vertx.core.Future;
 import io.vertx.up.atom.Envelop;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 import io.vertx.quiz.cv.QzApi;
 
 import java.util.concurrent.ConcurrentHashMap;

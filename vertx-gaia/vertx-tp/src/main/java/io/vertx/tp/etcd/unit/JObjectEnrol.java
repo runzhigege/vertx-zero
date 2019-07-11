@@ -4,7 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.etcd.Enrol;
 import io.vertx.tp.etcd.center.EtcdData;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.fn.Fn;
 
 public class JObjectEnrol implements Enrol<JsonObject> {
 

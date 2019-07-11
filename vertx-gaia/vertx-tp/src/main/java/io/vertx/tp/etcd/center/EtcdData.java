@@ -3,16 +3,16 @@ package io.vertx.tp.etcd.center;
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.log.Annal;
-import io.vertx.zero.atom.Ruler;
+import io.vertx.up.atom.Ruler;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.Values;
-import io.vertx.zero.exception.EtcdConfigEmptyException;
-import io.vertx.zero.exception.EtcdNetworkException;
-import io.vertx.zero.marshal.node.Node;
-import io.vertx.zero.marshal.node.ZeroUniform;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.log.Annal;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.exception.zero.EtcdConfigEmptyException;
+import io.vertx.up.exception.zero.EtcdNetworkException;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.uca.marshal.node.Node;
+import io.vertx.up.uca.marshal.node.ZeroUniform;
 import mousio.etcd4j.EtcdClient;
 import mousio.etcd4j.promises.EtcdResponsePromise;
 import mousio.etcd4j.requests.EtcdKeyDeleteRequest;
@@ -74,17 +74,17 @@ public class EtcdData {
             Fn.outUp(() -> Fn.shuntZero(() -> Ruler.verify(KEY, root), root),
                     LOGGER);
             if (root.containsKey(TIMEOUT)) {
-                this.timeout = root.getLong(TIMEOUT);
+                timeout = root.getLong(TIMEOUT);
             }
             if (root.containsKey(MICRO)) {
-                this.application = root.getString(MICRO);
+                application = root.getString(MICRO);
             }
             // Nodes
             if (root.containsKey(NODES)) {
                 this.config.addAll(root.getJsonArray(NODES));
             }
             LOGGER.info(Info.ETCD_TIMEOUT,
-                    this.application, this.timeout, this.config.size());
+                    application, timeout, this.config.size());
         }
         Fn.outUp(this.config.isEmpty(), logger,
                 EtcdConfigEmptyException.class, this.clazz);
@@ -108,9 +108,9 @@ public class EtcdData {
         // Network checking
         networks.forEach((port, host) ->
                 Fn.outUp(!Ut.netOk(host, port), LOGGER,
-                        EtcdNetworkException.class, this.getClass(), host, port));
+                        EtcdNetworkException.class, getClass(), host, port));
         LOGGER.info(Info.ETCD_NETWORK);
-        this.client = new EtcdClient(uris.toArray(new URI[]{}));
+        client = new EtcdClient(uris.toArray(new URI[]{}));
     }
 
     public static EtcdData create(final Class<?> clazz) {
@@ -132,15 +132,15 @@ public class EtcdData {
     }
 
     public EtcdClient getClient() {
-        return this.client;
+        return client;
     }
 
     public JsonArray getConfig() {
-        return this.config;
+        return config;
     }
 
     public String getApplication() {
-        return this.application;
+        return application;
     }
 
     public ConcurrentMap<String, String> readDir(
@@ -150,7 +150,7 @@ public class EtcdData {
          * Ensure Path created when read exception
          */
         return Fn.getJvm(new ConcurrentHashMap<>(), () -> {
-            final EtcdKeysResponse.EtcdNode node = this.readNode(path, this.client::getDir);
+            final EtcdKeysResponse.EtcdNode node = readNode(path, client::getDir);
             return Fn.getJvm(new ConcurrentHashMap<>(), () -> {
                 final ConcurrentMap<String, String> result = new ConcurrentHashMap<>();
                 /*
@@ -176,14 +176,14 @@ public class EtcdData {
             try {
                 // Trigger Key not found
                 final EtcdKeysResponse response =
-                        this.client.getDir(parent).send().get();
+                        client.getDir(parent).send().get();
                 if (null != response) {
-                    this.client.putDir(path).send();
-                    this.ensurePath(parent);
+                    client.putDir(path).send();
+                    ensurePath(parent);
                 }
             } catch (final EtcdException | EtcdAuthenticationException
                     | IOException | TimeoutException ex) {
-                this.ensurePath(parent);
+                ensurePath(parent);
             }
         }
     }
@@ -192,7 +192,7 @@ public class EtcdData {
             final String path
     ) {
         return Fn.getJvm(Strings.EMPTY,
-                () -> this.readNode(path, this.client::get).getValue(), path);
+                () -> readNode(path, client::get).getValue(), path);
     }
 
     private EtcdKeysResponse.EtcdNode readNode(
@@ -204,8 +204,8 @@ public class EtcdData {
             /*
              * Set timeout parameters
              */
-            if (-1 != this.timeout) {
-                request.timeout(this.timeout, TimeUnit.SECONDS);
+            if (-1 != timeout) {
+                request.timeout(timeout, TimeUnit.SECONDS);
             }
             final EtcdResponsePromise<EtcdKeysResponse> promise = request.send();
             final EtcdKeysResponse response = promise.get();
@@ -214,13 +214,13 @@ public class EtcdData {
     }
 
     public String read(final String path) {
-        final EtcdKeysResponse.EtcdNode node = this.readNode(path, this.client::get);
+        final EtcdKeysResponse.EtcdNode node = readNode(path, client::get);
         return null == node ? null : node.getValue();
     }
 
     public boolean delete(final String path) {
         return Fn.getJvm(Boolean.FALSE, () -> {
-            final EtcdKeyDeleteRequest request = this.client.delete(path);
+            final EtcdKeyDeleteRequest request = client.delete(path);
             final EtcdResponsePromise<EtcdKeysResponse> promise = request.send();
             final EtcdKeysResponse response = promise.get();
             return null != response.getNode();
@@ -229,7 +229,7 @@ public class EtcdData {
 
     public <T> JsonObject write(final String path, final T data, final int ttl) {
         return Fn.getJvm(null, () -> {
-            final EtcdKeyPutRequest request = this.client.put(path,
+            final EtcdKeyPutRequest request = client.put(path,
                     Fn.getSemi(data instanceof JsonObject || data instanceof JsonArray,
                             LOGGER,
                             () -> Ut.invoke(data, "encode"),
@@ -240,8 +240,8 @@ public class EtcdData {
             /*
              * Set timeout parameters
              */
-            if (-1 != this.timeout) {
-                request.timeout(this.timeout, TimeUnit.SECONDS);
+            if (-1 != timeout) {
+                request.timeout(timeout, TimeUnit.SECONDS);
             }
             final EtcdResponsePromise<EtcdKeysResponse> promise = request.send();
             final EtcdKeysResponse response = promise.get();

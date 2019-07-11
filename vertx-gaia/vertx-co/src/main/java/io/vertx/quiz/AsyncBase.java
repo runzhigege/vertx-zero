@@ -3,8 +3,8 @@ package io.vertx.quiz;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.TestContext;
-import io.vertx.zero.atom.Database;
-import io.vertx.zero.atom.Integration;
+import io.vertx.up.atom.Database;
+import io.vertx.up.atom.Integration;
 
 import java.util.function.Consumer;
 
@@ -17,14 +17,14 @@ public class AsyncBase extends ZeroBase {
     }
 
     protected Database database(final String filename) {
-        final JsonObject fileJson = this.ioJObject(filename);
+        final JsonObject fileJson = ioJObject(filename);
         final Database database = new Database();
         database.fromJson(fileJson);
         return database;
     }
 
     protected Integration integration(final String filename) {
-        final JsonObject fileJson = this.ioJObject(filename);
+        final JsonObject fileJson = ioJObject(filename);
         final Integration integration = new Integration();
         integration.fromJson(fileJson);
         return integration;

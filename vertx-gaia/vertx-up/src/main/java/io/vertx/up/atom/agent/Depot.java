@@ -2,7 +2,7 @@ package io.vertx.up.atom.agent;
 
 import io.vertx.up.eon.ID;
 import io.vertx.up.rs.Filler;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;

@@ -8,8 +8,8 @@ import io.vertx.up.exception.WebException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.media.parse.EpsilonIncome;
 import io.vertx.up.media.parse.Income;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
 
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;

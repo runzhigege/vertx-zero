@@ -14,7 +14,7 @@ import io.vertx.up.job.store.JobPin;
 import io.vertx.up.job.store.JobStore;
 import io.vertx.up.job.timer.Interval;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 

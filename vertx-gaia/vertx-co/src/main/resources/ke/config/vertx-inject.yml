@@ -1,1 +1,1 @@
-logger: io.vertx.zero.log.internal.Log4JAnnal
+logger: io.vertx.up.log.internal.Log4JAnnal

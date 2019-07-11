@@ -5,7 +5,7 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.eon.ID;
 import io.vertx.up.eon.ZeroValue;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.io.Serializable;
 import java.util.Arrays;

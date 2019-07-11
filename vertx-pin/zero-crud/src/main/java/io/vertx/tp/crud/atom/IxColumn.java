@@ -1,6 +1,6 @@
 package io.vertx.tp.crud.atom;
 
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.io.Serializable;
 

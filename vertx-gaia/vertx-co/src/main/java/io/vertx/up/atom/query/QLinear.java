@@ -4,8 +4,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.exception._400OpUnsupportException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Strings;
-import io.vertx.zero.epic.container.Kv;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.epic.container.Kv;
+import io.vertx.up.fn.Fn;
 
 import java.util.ArrayList;
 import java.util.List;

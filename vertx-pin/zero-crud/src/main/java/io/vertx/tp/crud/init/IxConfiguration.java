@@ -6,7 +6,7 @@ import io.vertx.tp.crud.atom.IxConfig;
 import io.vertx.tp.crud.cv.IxFolder;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.text.MessageFormat;
 import java.util.HashSet;

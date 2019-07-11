@@ -9,10 +9,10 @@ import io.vertx.tp.error.*;
 import io.vertx.tp.rbac.atom.ScRequest;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.refine.Sc;
+import io.vertx.up.atom.DataBound;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.atom.DataBound;
 
 import java.util.Objects;
 

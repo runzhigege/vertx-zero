@@ -1,9 +1,9 @@
 package io.vertx.up.rs.pointer;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.zero.marshal.node.Node;
-import io.vertx.zero.marshal.node.ZeroUniform;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.uca.marshal.node.Node;
+import io.vertx.up.uca.marshal.node.ZeroUniform;
+import io.vertx.up.epic.Ut;
 
 import java.util.Objects;
 import java.util.function.BiConsumer;

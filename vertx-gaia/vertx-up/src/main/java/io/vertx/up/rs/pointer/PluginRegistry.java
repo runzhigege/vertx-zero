@@ -1,7 +1,7 @@
 package io.vertx.up.rs.pointer;
 
 import io.vertx.up.plugin.extension.PlugRegistry;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.util.HashSet;
 import java.util.Set;

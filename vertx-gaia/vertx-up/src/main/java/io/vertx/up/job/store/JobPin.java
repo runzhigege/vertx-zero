@@ -5,9 +5,9 @@ import io.vertx.tp.plugin.job.JobPool;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.marshal.node.Node;
-import io.vertx.zero.marshal.node.ZeroUniform;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.uca.marshal.node.Node;
+import io.vertx.up.uca.marshal.node.ZeroUniform;
 
 public class JobPin {
 

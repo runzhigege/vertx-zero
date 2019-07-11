@@ -1,7 +1,7 @@
 package io.vertx.tp.database;
 
-import io.vertx.zero.atom.Database;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.atom.Database;
+import io.vertx.up.fn.Fn;
 import org.jooq.DSLContext;
 
 import javax.sql.DataSource;

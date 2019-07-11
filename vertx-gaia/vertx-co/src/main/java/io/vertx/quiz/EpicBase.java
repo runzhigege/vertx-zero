@@ -3,7 +3,7 @@ package io.vertx.quiz;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 public class EpicBase {
     /*

@@ -5,8 +5,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
+import io.vertx.up.atom.Database;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.atom.Database;
 import org.jooq.DSLContext;
 
 /*

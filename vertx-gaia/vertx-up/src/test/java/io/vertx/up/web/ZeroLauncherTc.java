@@ -3,7 +3,7 @@ package io.vertx.up.web;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.up.Launcher;
 import io.vertx.zero.exception.VertxCallbackException;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 import io.vertx.quiz.ZeroBase;
 import org.junit.Test;
 

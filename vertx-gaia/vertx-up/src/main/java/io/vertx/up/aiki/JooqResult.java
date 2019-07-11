@@ -1,8 +1,8 @@
 package io.vertx.up.aiki;
 
 import io.vertx.core.json.JsonArray;
-import io.vertx.zero.atom.Mojo;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.atom.Mojo;
+import io.vertx.up.epic.Ut;
 
 import java.util.HashSet;
 import java.util.List;

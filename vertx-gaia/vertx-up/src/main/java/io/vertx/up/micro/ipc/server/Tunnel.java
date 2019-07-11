@@ -2,7 +2,7 @@ package io.vertx.up.micro.ipc.server;
 
 import io.grpc.BindableService;
 import io.vertx.core.Vertx;
-import io.vertx.zero.runtime.ZeroAnno;
+import io.vertx.up.runtime.ZeroAnno;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.ConcurrentMap;

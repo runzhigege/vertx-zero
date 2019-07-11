@@ -5,9 +5,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.junit.RunTestOnContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
-import io.vertx.zero.exception.ZeroException;
-import io.vertx.zero.marshal.reliable.Insurer;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.exception.ZeroException;
+import io.vertx.up.uca.marshal.reliable.Insurer;
+import io.vertx.up.epic.Ut;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
 

@@ -8,7 +8,7 @@ import io.vertx.up.atom.Rule;
 import io.vertx.up.log.Annal;
 import io.vertx.up.eon.FileSuffix;
 import io.vertx.up.eon.Strings;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.util.ArrayList;
 import java.util.List;

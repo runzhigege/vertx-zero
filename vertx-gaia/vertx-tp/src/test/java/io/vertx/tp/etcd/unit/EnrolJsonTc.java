@@ -3,7 +3,7 @@ package io.vertx.tp.etcd.unit;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.etcd.Enrol;
 import io.vertx.tp.etcd.center.EtcdData;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 import io.vertx.quiz.EpicBase;
 
 public class EnrolJsonTc extends EpicBase {

@@ -11,8 +11,8 @@ import io.vertx.up.eon.em.EtcdPath;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.pointer.PluginExtension;
 import io.vertx.up.eon.Values;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
 
 import java.text.MessageFormat;
 import java.util.*;

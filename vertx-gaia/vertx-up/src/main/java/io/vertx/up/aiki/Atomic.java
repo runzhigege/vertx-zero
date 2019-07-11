@@ -2,8 +2,8 @@ package io.vertx.up.aiki;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
 
 import java.lang.reflect.Method;
 import java.util.function.Function;

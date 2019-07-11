@@ -8,7 +8,7 @@ import io.vertx.up.rs.Extractor;
 import io.vertx.up.rs.config.AgentExtractor;
 import io.vertx.up.web.limit.ApiFactor;
 import io.vertx.up.web.limit.Factor;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.util.concurrent.ConcurrentMap;
 

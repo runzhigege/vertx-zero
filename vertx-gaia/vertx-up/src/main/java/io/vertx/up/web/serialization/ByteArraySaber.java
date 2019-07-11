@@ -1,7 +1,7 @@
 package io.vertx.up.web.serialization;
 
 import io.vertx.up.eon.Values;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.fn.Fn;
 
 public class ByteArraySaber extends BaseSaber {
 

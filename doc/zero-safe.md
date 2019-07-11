@@ -94,7 +94,7 @@
         }, LOGGER);
 ```
 
-The `safeZero` code flow is also the same as `safeJvm`, but the exception type is different, this function body exception type is `io.vertx.zero.exception.ZeroException` ( Checked )
+The `safeZero` code flow is also the same as `safeJvm`, but the exception type is different, this function body exception type is `io.vertx.up.exception.ZeroException` ( Checked )
 
 ### 2.3. safeNull
 

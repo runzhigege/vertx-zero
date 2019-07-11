@@ -3,7 +3,7 @@ package io.vertx.up.atom.query;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Strings;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.util.HashSet;
 import java.util.Set;

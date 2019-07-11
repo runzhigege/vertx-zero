@@ -3,7 +3,7 @@ package io.vertx.up.atom.envelop;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.ZeroValue;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.util.Objects;
 

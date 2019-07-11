@@ -17,11 +17,11 @@ import io.vertx.up.atom.query.Criteria;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.eon.Strings;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.epic.container.Refer;
-import io.vertx.zero.fn.Actuator;
-import io.vertx.zero.fn.Fn;
-import io.vertx.zero.fn.wait.Log;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.epic.container.Refer;
+import io.vertx.up.fn.Actuator;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.fn.wait.Log;
 import org.jooq.Condition;
 
 import java.util.List;

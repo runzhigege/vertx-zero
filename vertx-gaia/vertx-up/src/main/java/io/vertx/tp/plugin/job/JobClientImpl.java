@@ -8,7 +8,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.job.center.Agha;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.util.Objects;
 

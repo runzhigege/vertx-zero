@@ -3,7 +3,7 @@ package io.vertx.tp.crud.actor;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxField;
 import io.vertx.tp.crud.atom.IxModule;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.util.UUID;
 
