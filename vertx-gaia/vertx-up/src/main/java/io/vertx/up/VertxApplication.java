@@ -19,7 +19,6 @@ import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 import io.zero.runtime.Anno;
 import io.zero.runtime.Runner;
-import io.zero.runtime.ZeroHeart;
 
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
@@ -45,7 +44,7 @@ public class VertxApplication {
          * Although the input `clazz` is not important, but zero container require the input
          * clazz mustn't be null, for future usage such as plugin extension for it.
          */
-        Fn.out(null == clazz, UpClassArgsException.class, this.getClass());
+        Fn.out(null == clazz, UpClassArgsException.class, getClass());
 
         /*
          * Stored clazz information
@@ -53,14 +52,14 @@ public class VertxApplication {
          * 2. annotation extraction from Annotation[] -> Annotation Map
          */
         this.clazz = clazz;
-        this.annotationMap = Anno.get(clazz);
+        annotationMap = Anno.get(clazz);
 
         /*
          * Zero specification definition for @Up here.
          * The input class must annotated with @Up instead of other description
          */
 
-        Fn.out(!this.annotationMap.containsKey(Up.class.getName()), UpClassInvalidException.class, this.getClass(),
+        Fn.out(!annotationMap.containsKey(Up.class.getName()), UpClassInvalidException.class, getClass(),
                 null == this.clazz ? null : this.clazz.getName());
     }
 
@@ -72,8 +71,9 @@ public class VertxApplication {
             ensureEtcd(clazz);
             /*
              * To avoid getPackages issue here
+             * Move to InitScatter here
              */
-            ZeroHeart.init();
+            // ZeroHeart.init();
 
             /*
              * Before launcher, start package scanning for preparing metadata
@@ -174,12 +174,11 @@ public class VertxApplication {
             }, "codex-engine-runner");
 
             /* 5.Plugin init */
-            /*
+
             Runner.run(() -> {
                 final Scatter<Vertx> scatter = Ut.singleton(InitScatter.class);
                 scatter.connect(vertx);
             }, "initializer-runner");
-            */
         });
     }
 }
