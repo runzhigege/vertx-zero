@@ -36,9 +36,9 @@ public final class ZeroPack {
             /*
              * Debug in file
              */
-            final JsonArray debugPkg = new JsonArray();
-            packageDirs.forEach(debugPkg::add);
-            Ut.ioOut("/Users/lang/Out/out-package.json", debugPkg);
+//            final JsonArray debugPkg = new JsonArray();
+//            packageDirs.forEach(debugPkg::add);
+//            Ut.ioOut("/Users/lang/Out/out-package.json", debugPkg);
             /*
              * Debug in package
              * Here I have tested package in total when development & production environment both.
@@ -53,11 +53,11 @@ public final class ZeroPack {
             /*
              * Debug in file
              */
-            final Set<String> classSet = new TreeSet<>();
-            CLASSES.forEach(clazz -> classSet.add(clazz.getName()));
-            final JsonArray debugCls = new JsonArray();
-            classSet.forEach(debugCls::add);
-            Ut.ioOut("/Users/lang/Out/out.json", debugCls);
+//            final Set<String> classSet = new TreeSet<>();
+//            CLASSES.forEach(clazz -> classSet.add(clazz.getName()));
+//            final JsonArray debugCls = new JsonArray();
+//            classSet.forEach(debugCls::add);
+//            Ut.ioOut("/Users/lang/Out/out.json", debugCls);
             // System.exit(0);
         }
         return CLASSES;
