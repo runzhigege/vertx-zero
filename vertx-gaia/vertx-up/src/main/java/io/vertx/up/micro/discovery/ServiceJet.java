@@ -19,12 +19,12 @@ import io.vertx.servicediscovery.ServiceDiscovery;
 import io.vertx.servicediscovery.ServiceReference;
 import io.vertx.servicediscovery.types.HttpEndpoint;
 import io.vertx.up.log.Annal;
+import io.vertx.up.micro.config.CircuitVisitor;
 import io.vertx.up.micro.discovery.multipart.Pipe;
 import io.vertx.up.micro.discovery.multipart.UploadPipe;
 import io.vertx.up.micro.matcher.Arithmetic;
 import io.vertx.up.micro.matcher.CommonArithmetic;
 import io.vertx.zero.marshal.Visitor;
-import io.vertx.zero.micro.config.CircuitVisitor;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 

@@ -7,7 +7,7 @@ import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.cv.JtConstant;
 import io.vertx.tp.optic.jet.JtIngest;
 import io.vertx.up.atom.Envelop;
-import io.vertx.up.web.ZeroAmbient;
+import io.zero.runtime.ZeroAmbient;
 import io.zero.epic.Ut;
 
 import java.util.Objects;

@@ -5,7 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.tp.rbac.atom.ScRequest;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.tp.rbac.service.view.ViewStub;
-import io.vertx.zero.matrix.DataBound;
+import io.vertx.zero.atom.DataBound;
 
 import javax.inject.Inject;
 import java.util.Objects;

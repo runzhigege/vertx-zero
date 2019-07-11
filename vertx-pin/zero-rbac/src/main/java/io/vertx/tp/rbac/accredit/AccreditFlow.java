@@ -12,7 +12,7 @@ import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception._500InternalServerException;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.matrix.DataBound;
+import io.vertx.zero.atom.DataBound;
 
 import java.util.Objects;
 

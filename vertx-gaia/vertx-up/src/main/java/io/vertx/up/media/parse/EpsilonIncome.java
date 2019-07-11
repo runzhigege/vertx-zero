@@ -7,10 +7,10 @@ import io.vertx.up.eon.ID;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Filler;
-import io.vertx.up.web.ZeroSerializer;
 import io.vertx.zero.eon.Values;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
+import io.zero.runtime.ZeroSerializer;
 
 import javax.ws.rs.DefaultValue;
 import java.lang.annotation.Annotation;
