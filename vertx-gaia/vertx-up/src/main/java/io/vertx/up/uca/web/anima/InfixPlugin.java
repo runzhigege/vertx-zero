@@ -3,11 +3,11 @@ package io.vertx.up.uca.web.anima;
 import io.reactivex.Observable;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.eon.Info;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.Infix;
-import io.vertx.up.util.Ut;
-import io.vertx.up.fn.Fn;
 import io.vertx.up.runtime.ZeroAmbient;
+import io.vertx.up.util.Ut;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;
@@ -49,7 +49,8 @@ class InfixPlugin {
                     } else {
                         logger.warn(Info.INFIX_NULL, "tp", field.getName(), type.getName());
                     }
-                });
+                })
+                .dispose();
     }
 
     private ConcurrentMap<Class<?>, Class<?>> getBind() {
@@ -62,7 +63,8 @@ class InfixPlugin {
                     final Method method = Fn.getJvm(() -> item.getDeclaredMethod("get"), item);
                     final Class<?> type = method.getReturnType();
                     binds.put(type, item);
-                });
+                })
+                .dispose();
         return binds;
     }
 }
