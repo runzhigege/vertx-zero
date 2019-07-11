@@ -1,7 +1,7 @@
 package io.vertx.tp.ambient.extension;
 
-import cn.vertxup.ambient.tables.daos.XAppDao;
-import cn.vertxup.ambient.tables.pojos.XApp;
+import cn.vertxup.ambient.domain.tables.daos.XAppDao;
+import cn.vertxup.ambient.domain.tables.pojos.XApp;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -25,17 +25,17 @@ class AppInit implements Init {
         return appJson -> {
             At.infoApp(LOGGER, AtMsg.INIT_APP, appJson.encode());
             /* Deserialization */
-            final XApp app = this.init(appJson);
+            final XApp app = init(appJson);
             return Ux.Jooq.on(XAppDao.class)
                     /*
                      * Init first step: UPSERT ( Insert / Update )
                      */
-                    .upsertAsync(this.whereUnique(appJson), app)
+                    .upsertAsync(whereUnique(appJson), app)
                     .compose(Ux::fnJObject)
                     /*
                      * Result Building
                      */
-                    .compose(input -> Ux.toFuture(this.result(input, appJson)));
+                    .compose(input -> Ux.toFuture(result(input, appJson)));
         };
     }
 

@@ -17,5 +17,7 @@
         <module>zero-ali-sms</module>
         <module>zero-qiniu</module>
         <module>zero-excel</module>
+        <module>zero-feign</module>
+        <module>zero-native</module>
     </modules>
 </project>

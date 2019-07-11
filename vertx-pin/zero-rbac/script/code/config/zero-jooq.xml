@@ -51,7 +51,7 @@
             <fluentSetters>true</fluentSetters>
         </generate>
         <target>
-            <packageName>cn.vertxup.domain</packageName>
+            <packageName>cn.vertxup.rbac.domain</packageName>
             <directory>../../src/main/java</directory>
         </target>
         <strategy>

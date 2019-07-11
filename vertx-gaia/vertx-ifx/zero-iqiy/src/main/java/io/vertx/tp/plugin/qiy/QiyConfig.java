@@ -1,7 +1,7 @@
 package io.vertx.tp.plugin.qiy;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.feign.FeignDepot;
+import io.vertx.tp.plugin.feign.FeignDepot;
 import io.vertx.up.log.Annal;
 import io.zero.epic.fn.Fn;
 

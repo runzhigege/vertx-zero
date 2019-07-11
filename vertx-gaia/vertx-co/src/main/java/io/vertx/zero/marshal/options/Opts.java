@@ -64,9 +64,7 @@ class YamlOpts implements Opts<JsonObject> {
 
     @Override
     public JsonObject ingest(final String key) {
-        final Node<JsonObject> node =
-                Fn.pool(EXTENSIONS, key,
-                        () -> Node.infix(key));
+        final Node<JsonObject> node = Fn.pool(EXTENSIONS, key, () -> Node.infix(key));
         final JsonObject data = new JsonObject();
         try {
             data.mergeIn(node.read());

@@ -11,10 +11,10 @@ import io.vertx.up.rs.Axis;
 import io.vertx.up.rs.Sentry;
 import io.vertx.up.rs.dispatch.ModeSplitter;
 import io.vertx.up.rs.dispatch.StandardVerifier;
-import io.vertx.up.web.ZeroAnno;
 import io.vertx.up.web.failure.CommonEndurer;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
+import io.zero.runtime.ZeroAnno;
 
 import java.util.Set;
 

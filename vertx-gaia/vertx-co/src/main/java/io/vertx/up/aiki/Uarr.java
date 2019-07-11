@@ -22,7 +22,7 @@ public class Uarr {
                 new JsonArray(jsonArray.stream().filter(Objects::nonNull)
                         .map(item -> (JsonObject) item)
                         .collect(Collectors.toList())), jsonArray);
-        LOGGER.debug(Info.STREAM_START, String.valueOf(this.hashCode()), jsonArray);
+        LOGGER.debug(StreamInfo.STREAM_START, String.valueOf(this.hashCode()), jsonArray);
     }
 
     public static Uarr create(final JsonArray item) {
@@ -105,7 +105,7 @@ public class Uarr {
     }
 
     public JsonArray to() {
-        LOGGER.debug(Info.STREAM_END, String.valueOf(this.hashCode()), this.arrayReference);
+        LOGGER.debug(StreamInfo.STREAM_END, String.valueOf(this.hashCode()), this.arrayReference);
         return this.arrayReference;
     }
 

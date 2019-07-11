@@ -11,10 +11,10 @@ import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.hold.Virtual;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
-import io.vertx.up.web.ZeroHelper;
 import io.vertx.zero.exception.EventSourceException;
 import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
+import io.zero.runtime.ZeroHelper;
 
 import javax.ws.rs.Path;
 import java.lang.annotation.Annotation;

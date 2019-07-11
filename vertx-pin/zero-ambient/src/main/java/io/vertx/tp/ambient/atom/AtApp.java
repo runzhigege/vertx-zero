@@ -1,7 +1,7 @@
 package io.vertx.tp.ambient.atom;
 
-import cn.vertxup.ambient.tables.daos.XAppDao;
-import cn.vertxup.ambient.tables.pojos.XApp;
+import cn.vertxup.ambient.domain.tables.daos.XAppDao;
+import cn.vertxup.ambient.domain.tables.pojos.XApp;
 import io.vertx.tp.error._500AmbientErrorException;
 import io.vertx.tp.error._500ApplicationInitException;
 import io.vertx.tp.ke.cv.KeField;

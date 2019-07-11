@@ -1,6 +1,6 @@
 package io.vertx.tp.jet.atom;
 
-import cn.vertxup.jet.tables.pojos.IService;
+import cn.vertxup.jet.domain.tables.pojos.IService;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.cv.JtKey;
 import io.vertx.tp.jet.refine.Jt;

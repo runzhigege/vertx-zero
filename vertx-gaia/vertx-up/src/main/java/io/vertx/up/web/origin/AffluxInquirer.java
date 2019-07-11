@@ -4,7 +4,7 @@ import io.vertx.up.eon.Info;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.log.Annal;
 import io.vertx.up.web.thread.AffluxThread;
-import io.vertx.zero.mirror.Anno;
+import io.zero.runtime.Anno;
 
 import java.util.ArrayList;
 import java.util.List;

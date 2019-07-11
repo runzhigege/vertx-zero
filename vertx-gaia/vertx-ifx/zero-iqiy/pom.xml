@@ -16,5 +16,10 @@
             <groupId>cn.vertxup</groupId>
             <artifactId>vertx-tp</artifactId>
         </dependency>
+        <!-- Feign Client -->
+        <dependency>
+            <groupId>cn.vertxup</groupId>
+            <artifactId>zero-feign</artifactId>
+        </dependency>
     </dependencies>
 </project>

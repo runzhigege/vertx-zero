@@ -3,6 +3,7 @@ package io.vertx.zero.mirror;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.up.example.AnnoOne;
 import io.zero.quiz.ZeroBase;
+import io.zero.runtime.Anno;
 import org.junit.Test;
 
 import java.lang.annotation.Annotation;

@@ -9,8 +9,8 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ZeroHttpWorker;
 import io.vertx.up.rs.Extractor;
 import io.vertx.up.rs.config.WorkerExtractor;
-import io.vertx.up.web.ZeroAnno;
 import io.zero.epic.Ut;
+import io.zero.runtime.ZeroAnno;
 
 import java.util.HashSet;
 import java.util.Set;
