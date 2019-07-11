@@ -7,7 +7,7 @@ import feign.codec.ErrorDecoder;
 import feign.codec.JsonObjectDecoder;
 import feign.codec.JsonObjectEncoder;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.init.TpConfig;
+import io.vertx.tp.plugin.init.TpConfig;
 import io.vertx.up.fn.Fn;
 
 import java.io.Serializable;

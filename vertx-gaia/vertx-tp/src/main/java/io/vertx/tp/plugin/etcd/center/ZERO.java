@@ -1,4 +1,4 @@
-package io.vertx.tp.etcd.center;
+package io.vertx.tp.plugin.etcd.center;
 
 interface Info {
 

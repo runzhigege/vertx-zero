@@ -1,4 +1,4 @@
-package io.vertx.tp.etcd;
+package io.vertx.tp.plugin.etcd;
 
 import io.vertx.core.json.JsonObject;
 

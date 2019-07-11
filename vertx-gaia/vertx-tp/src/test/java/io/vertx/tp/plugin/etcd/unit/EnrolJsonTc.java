@@ -1,8 +1,8 @@
-package io.vertx.tp.etcd.unit;
+package io.vertx.tp.plugin.etcd.unit;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.etcd.Enrol;
-import io.vertx.tp.etcd.center.EtcdData;
+import io.vertx.tp.plugin.etcd.Enrol;
+import io.vertx.tp.plugin.etcd.center.EtcdData;
 import io.vertx.up.util.Ut;
 import io.vertx.quiz.EpicBase;
 

@@ -2,7 +2,7 @@ package io.vertx.up;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServerOptions;
-import io.vertx.tp.etcd.center.EtcdData;
+import io.vertx.tp.plugin.etcd.center.EtcdData;
 import io.vertx.up.annotations.Up;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.exception.zero.EtcdNetworkException;

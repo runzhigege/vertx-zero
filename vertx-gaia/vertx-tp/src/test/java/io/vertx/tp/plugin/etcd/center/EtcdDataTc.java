@@ -1,4 +1,4 @@
-package io.vertx.tp.etcd.center;
+package io.vertx.tp.plugin.etcd.center;
 
 import io.vertx.quiz.EpicBase;
 
