@@ -19,6 +19,8 @@ import io.zero.epic.Ut;
 import io.zero.epic.fn.Fn;
 import io.zero.runtime.Anno;
 import io.zero.runtime.Runner;
+import io.zero.runtime.ZeroAnno;
+import io.zero.runtime.ZeroHeart;
 
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
@@ -73,7 +75,7 @@ public class VertxApplication {
              * To avoid getPackages issue here
              * Move to InitScatter here
              */
-            // ZeroHeart.init();
+            ZeroHeart.init();
 
             /*
              * Before launcher, start package scanning for preparing metadata
@@ -87,7 +89,7 @@ public class VertxApplication {
              * some preparing failure, here we replaced `static {}` with `prepare()` calling before any instance
              * of VertxApplication/DansApplication.
              */
-            // ZeroAnno.prepare();
+            ZeroAnno.prepare();
 
             /*
              * Then the container could start
@@ -174,11 +176,11 @@ public class VertxApplication {
             }, "codex-engine-runner");
 
             /* 5.Plugin init */
-
+            /*
             Runner.run(() -> {
                 final Scatter<Vertx> scatter = Ut.singleton(InitScatter.class);
                 scatter.connect(vertx);
-            }, "initializer-runner");
+            }, "initializer-runner");*/
         });
     }
 }

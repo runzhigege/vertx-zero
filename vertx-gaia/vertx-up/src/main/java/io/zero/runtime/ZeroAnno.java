@@ -48,7 +48,10 @@ public class ZeroAnno {
     private final static Set<Mission>
             JOBS = new HashSet<>();
 
-    static {
+    /*
+     * Move to main thread to do init instead of static block initialization
+     */
+    public static void prepare() {
         /* 1.Scan the packages **/
         final Set<Class<?>> clazzes = ZeroPack.getClasses();
         /* EndPoint **/
