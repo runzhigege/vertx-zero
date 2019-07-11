@@ -58,6 +58,7 @@ public final class ZeroPack {
             final JsonArray debugCls = new JsonArray();
             classSet.forEach(debugCls::add);
             Ut.ioOut("/Users/lang/Out/out.json", debugCls);
+            // System.exit(0);
         }
         return CLASSES;
     }
