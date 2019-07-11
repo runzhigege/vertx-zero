@@ -4,16 +4,16 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.up.annotations.Ipc;
 import io.vertx.up.annotations.Worker;
-import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.worker.Receipt;
-import io.vertx.up.log.Annal;
-import io.vertx.up.uca.micro.follow.Invoker;
-import io.vertx.up.uca.micro.follow.InvokerUtil;
-import io.vertx.up.uca.micro.follow.JetSelector;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.eon.Values;
-import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
 import io.vertx.up.runtime.ZeroAnno;
+import io.vertx.up.uca.micro.invoke.Invoker;
+import io.vertx.up.uca.micro.invoke.InvokerUtil;
+import io.vertx.up.uca.micro.invoke.JetSelector;
+import io.vertx.up.util.Ut;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;
@@ -41,7 +41,7 @@ public class ZeroHttpWorker extends AbstractVerticle {
     @Override
     public void start() {
         // 1. Get event bus
-        final EventBus bus = this.vertx.eventBus();
+        final EventBus bus = vertx.eventBus();
         // 2. Consume address
         for (final Receipt receipt : RECEIPTS) {
             // 3. Deploy for each type
@@ -56,7 +56,7 @@ public class ZeroHttpWorker extends AbstractVerticle {
              * will support multi arguments in Worker component
              * Parameter length must be > 0.
              */
-            InvokerUtil.verifyArgs(method, this.getClass());
+            InvokerUtil.verifyArgs(method, getClass());
 
             // length = 1
             final Class<?>[] params = method.getParameterTypes();
@@ -73,7 +73,7 @@ public class ZeroHttpWorker extends AbstractVerticle {
                     message -> {
                         if (method.isAnnotationPresent(Ipc.class)) {
                             // Rpc continue replying
-                            invoker.next(reference, method, message, this.vertx);
+                            invoker.next(reference, method, message, vertx);
                         } else {
                             // Direct replying
                             invoker.invoke(reference, method, message);

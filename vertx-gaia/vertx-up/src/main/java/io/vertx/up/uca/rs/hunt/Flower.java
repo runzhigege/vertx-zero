@@ -7,12 +7,12 @@ import io.vertx.up.atom.agent.Depot;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.exception.WebException;
+import io.vertx.up.extension.pointer.PluginExtension;
 import io.vertx.up.log.Annal;
-import io.vertx.up.uca.rs.announce.Rigor;
-import io.vertx.up.uca.rs.pointer.PluginExtension;
-import io.vertx.up.uca.rs.validation.Validator;
 import io.vertx.up.uca.container.Kv;
 import io.vertx.up.uca.container.Virtual;
+import io.vertx.up.uca.rs.announce.Rigor;
+import io.vertx.up.uca.rs.validation.Validator;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;

@@ -6,7 +6,7 @@
  * 2) Jvm unexpected exception
  * 3) Vertx unexpected exception
  * 4) Zero runtime exception / Zero exception
- * This package also defined checked exception code flow such as follow
+ * This package also defined checked exception code flow such as invoke
  * 1) io.vertx.zero.io.vertx.zero.io.vertx.up.fn.JvmActuator
  * 2) io.vertx.zero.io.vertx.zero.io.vertx.up.fn.JvmSupplier
  * 3) io.vertx.zero.io.vertx.zero.io.vertx.up.fn.ZeroActuator

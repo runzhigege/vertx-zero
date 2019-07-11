@@ -1,9 +1,9 @@
 package io.vertx.up.uca.rs.config;
 
 import io.reactivex.Observable;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
-import io.vertx.up.fn.Fn;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
@@ -25,12 +25,12 @@ class MediaResolver {
 
     private static final Set<MediaType> DEFAULTS = new HashSet<MediaType>() {
         {
-            this.add(MediaType.WILDCARD_TYPE);
+            add(MediaType.WILDCARD_TYPE);
         }
     };
 
     /**
-     * Capture the consume media types
+     * Capture the consume mime types
      *
      * @param method method reference
      * @return return MIME
@@ -40,7 +40,7 @@ class MediaResolver {
     }
 
     /**
-     * Capture the produces media types
+     * Capture the produces mime types
      *
      * @param method method reference
      * @return return MIME
