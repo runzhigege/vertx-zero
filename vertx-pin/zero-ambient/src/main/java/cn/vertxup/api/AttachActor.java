@@ -17,9 +17,9 @@ import io.zero.epic.Ut;
 import java.util.Objects;
 
 @Queue
-public class FileActor {
+public class AttachActor {
 
-    private static final Annal LOGGER = Annal.get(FileActor.class);
+    private static final Annal LOGGER = Annal.get(AttachActor.class);
 
     @Address(Addr.File.UPLOAD)
     public Future<JsonObject> upload(final JsonObject content) {

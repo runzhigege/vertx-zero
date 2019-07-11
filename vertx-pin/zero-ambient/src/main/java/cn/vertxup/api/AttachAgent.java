@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
  */
 @EndPoint
 @Path("/api")
-public class FileAgent {
+public class AttachAgent {
 
     @Path("/file/upload/{category}")
     @POST
