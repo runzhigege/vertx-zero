@@ -1,13 +1,13 @@
 package io.vertx.up.secure.jwt;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.atom.Ruler;
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.eon.em.WallType;
 import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.mongo.MongoWall;
-import io.vertx.zero.atom.Ruler;
-import io.vertx.zero.marshal.Transformer;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.uca.marshal.Transformer;
 
 public class JwtWall implements Transformer<Cliff> {
 

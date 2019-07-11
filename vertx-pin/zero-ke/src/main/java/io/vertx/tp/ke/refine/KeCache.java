@@ -12,7 +12,7 @@ import io.vertx.up.atom.Envelop;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.plugin.session.SessionClient;
 import io.vertx.up.plugin.session.SessionInfix;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.util.Objects;
 import java.util.function.BiFunction;

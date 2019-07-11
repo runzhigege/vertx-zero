@@ -7,7 +7,7 @@ import io.vertx.up.eon.em.CertType;
 import io.vertx.up.micro.ssl.client.JksTrust;
 import io.vertx.up.micro.ssl.client.PemTrust;
 import io.vertx.up.micro.ssl.client.PfxTrust;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 public interface TrustPipe<I> {
 

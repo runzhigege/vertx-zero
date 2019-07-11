@@ -6,7 +6,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.atom.ScRequest;
 import io.vertx.up.aiki.Ux;
-import io.vertx.zero.epic.container.Refer;
+import io.vertx.up.epic.container.Refer;
 
 import javax.inject.Inject;
 import java.util.function.Supplier;

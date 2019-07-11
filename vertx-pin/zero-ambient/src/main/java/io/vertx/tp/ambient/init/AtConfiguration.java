@@ -5,7 +5,7 @@ import io.vertx.tp.ambient.atom.AtConfig;
 import io.vertx.tp.ambient.cv.AtFolder;
 import io.vertx.tp.ambient.refine.At;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 /*
  * Configuration class initialization

@@ -2,7 +2,7 @@ package io.vertx.up.micro.config;
 
 import io.vertx.core.ClusterOptions;
 import io.vertx.core.VertxOptions;
-import io.vertx.zero.marshal.Visitor;
+import io.vertx.up.uca.marshal.Visitor;
 
 import java.util.concurrent.ConcurrentMap;
 

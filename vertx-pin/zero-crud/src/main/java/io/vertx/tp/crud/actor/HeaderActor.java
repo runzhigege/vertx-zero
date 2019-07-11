@@ -4,7 +4,7 @@ import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.up.atom.Envelop;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 /*
  * {

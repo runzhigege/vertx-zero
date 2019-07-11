@@ -3,8 +3,8 @@ package io.vertx.up.micro.config;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.marshal.Transformer;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.uca.marshal.Transformer;
+import io.vertx.up.fn.Fn;
 
 public class HttpServerStrada implements Transformer<HttpServerOptions> {
 

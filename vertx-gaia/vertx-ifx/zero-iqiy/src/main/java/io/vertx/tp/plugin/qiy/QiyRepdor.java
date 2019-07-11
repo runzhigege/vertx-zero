@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error._401QiyAuthorizedException;
 import io.vertx.tp.error._401QiyExecuteException;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.fn.Fn;
 
 class QiyRepdor {
     private static final String CODE = "code";

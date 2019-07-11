@@ -5,7 +5,7 @@ import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.up.web.filter.HttpFilter;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import javax.servlet.annotation.WebFilter;
 

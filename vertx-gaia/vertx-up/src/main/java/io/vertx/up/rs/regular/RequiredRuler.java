@@ -2,7 +2,7 @@ package io.vertx.up.rs.regular;
 
 import io.vertx.up.atom.Rule;
 import io.vertx.up.exception.WebException;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 /**
  * {

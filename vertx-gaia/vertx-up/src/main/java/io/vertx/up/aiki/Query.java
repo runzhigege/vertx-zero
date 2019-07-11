@@ -2,13 +2,13 @@ package io.vertx.up.aiki;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.atom.Mirror;
+import io.vertx.up.atom.Mojo;
 import io.vertx.up.atom.query.Inquiry;
-import io.vertx.up.log.Annal;
-import io.vertx.zero.atom.Mirror;
-import io.vertx.zero.atom.Mojo;
 import io.vertx.up.eon.Strings;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.log.Annal;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
 
 import java.util.concurrent.ConcurrentMap;
 

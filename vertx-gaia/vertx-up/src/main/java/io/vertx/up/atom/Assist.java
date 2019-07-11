@@ -7,7 +7,7 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.web.Session;
 import io.vertx.up.atom.envelop.Rib;
 import io.vertx.up.eon.Strings;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.fn.Fn;
 
 import java.io.Serializable;
 import java.util.HashMap;

@@ -3,7 +3,7 @@ package io.vertx.up.rs.argument;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.rs.Filler;
-import io.vertx.zero.runtime.ZeroSerializer;
+import io.vertx.up.runtime.ZeroSerializer;
 
 public class HeaderFiller implements Filler {
     @Override

@@ -13,7 +13,7 @@ import io.vertx.up.rs.Axis;
 import io.vertx.up.rs.secure.Bolt;
 import io.vertx.up.web.failure.AuthenticateEndurer;
 import io.vertx.up.eon.Values;
-import io.vertx.zero.runtime.ZeroAnno;
+import io.vertx.up.runtime.ZeroAnno;
 
 import java.util.Set;
 import java.util.TreeSet;

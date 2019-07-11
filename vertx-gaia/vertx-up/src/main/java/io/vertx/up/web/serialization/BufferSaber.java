@@ -2,7 +2,7 @@ package io.vertx.up.web.serialization;
 
 import io.vertx.core.buffer.Buffer;
 import io.vertx.up.eon.Values;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.fn.Fn;
 
 /**
  * Buffer

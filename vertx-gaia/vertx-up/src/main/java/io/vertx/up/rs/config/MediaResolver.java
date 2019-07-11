@@ -2,8 +2,8 @@ package io.vertx.up.rs.config;
 
 import io.reactivex.Observable;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;

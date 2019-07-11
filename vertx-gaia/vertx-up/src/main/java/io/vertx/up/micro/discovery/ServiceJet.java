@@ -24,9 +24,9 @@ import io.vertx.up.micro.discovery.multipart.Pipe;
 import io.vertx.up.micro.discovery.multipart.UploadPipe;
 import io.vertx.up.micro.matcher.Arithmetic;
 import io.vertx.up.micro.matcher.CommonArithmetic;
-import io.vertx.zero.marshal.Visitor;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.uca.marshal.Visitor;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
 
 import java.util.List;
 import java.util.function.Consumer;

@@ -6,7 +6,7 @@ import io.vertx.tp.rbac.atom.ProfileGroup;
 import io.vertx.tp.rbac.atom.ProfileRole;
 import io.vertx.tp.rbac.atom.ProfileType;
 import io.vertx.tp.rbac.cv.AuthKey;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.util.*;
 import java.util.function.BinaryOperator;

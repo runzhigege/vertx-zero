@@ -9,9 +9,9 @@ import io.vertx.tp.jet.cv.em.ParamMode;
 import io.vertx.tp.jet.refine.Jt;
 import io.vertx.tp.optic.jet.JtIngest;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
-import io.vertx.zero.runtime.Runner;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.runtime.Runner;
 
 /*
  * The monitor of workflow here.

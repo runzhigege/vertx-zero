@@ -1,7 +1,7 @@
 package io.vertx.up.commune;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 /**
  * Json data extract from object, there are three method for using

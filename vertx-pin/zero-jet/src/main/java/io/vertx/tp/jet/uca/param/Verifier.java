@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.JetThanatos;
 import io.vertx.up.atom.Envelop;
 import io.vertx.up.eon.ID;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.util.Iterator;
 import java.util.Objects;

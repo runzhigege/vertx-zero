@@ -1,8 +1,8 @@
 package io.vertx.up.aiki;
 
 import io.vertx.up.log.Annal;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Actuator;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Actuator;
 
 import java.util.function.Supplier;
 

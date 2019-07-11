@@ -1,12 +1,12 @@
 package io.vertx.tp.init;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.atom.Ruler;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.atom.Ruler;
-import io.vertx.zero.exception.DynamicConfigTypeException;
-import io.vertx.zero.exception.DynamicKeyMissingException;
-import io.vertx.zero.marshal.node.Node;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.exception.zero.DynamicConfigTypeException;
+import io.vertx.up.exception.zero.DynamicKeyMissingException;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.uca.marshal.node.Node;
 
 import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;
@@ -36,17 +36,17 @@ public class TpConfig implements Serializable {
         // Check up exception for key
         Fn.outUp(null == config || !config.containsKey(key),
                 LOGGER, DynamicKeyMissingException.class,
-                this.getClass(), key, config);
+                getClass(), key, config);
 
         // Check up exception for JsonObject
         final Class<?> type = config.getValue(key).getClass();
         Fn.outUp(JsonObject.class != type,
                 LOGGER, DynamicConfigTypeException.class,
-                this.getClass(), key, type);
+                getClass(), key, type);
 
         // Extract config information.
         final JsonObject raw = config.getJsonObject(key);
-        this.endpoint = Fn.getNull(null, () -> raw.getString(KEY_ENDPOINT), raw.getValue(KEY_ENDPOINT));
+        endpoint = Fn.getNull(null, () -> raw.getString(KEY_ENDPOINT), raw.getValue(KEY_ENDPOINT));
         this.config = Fn.getNull(new JsonObject(), () -> raw.getJsonObject(KEY_CONFIG), raw.getValue(KEY_CONFIG));
         // Verify the config data.
         if (null != rule) {
@@ -63,10 +63,10 @@ public class TpConfig implements Serializable {
     }
 
     public JsonObject getConfig() {
-        return this.config;
+        return config;
     }
 
     public String getEndPoint() {
-        return this.endpoint;
+        return endpoint;
     }
 }

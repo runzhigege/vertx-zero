@@ -1,6 +1,6 @@
 package io.vertx.up.rs;
 
-import io.vertx.zero.exception.UpException;
+import io.vertx.up.exception.UpException;
 
 import java.lang.annotation.Annotation;
 

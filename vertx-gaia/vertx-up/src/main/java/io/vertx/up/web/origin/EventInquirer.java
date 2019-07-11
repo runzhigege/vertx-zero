@@ -3,7 +3,7 @@ package io.vertx.up.web.origin;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.log.Annal;
 import io.vertx.up.web.thread.EndPointThread;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.fn.Fn;
 
 import java.util.ArrayList;
 import java.util.HashSet;

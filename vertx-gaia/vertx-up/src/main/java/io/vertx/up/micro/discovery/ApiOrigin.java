@@ -9,7 +9,7 @@ import io.vertx.up.eon.em.EtcdPath;
 import io.vertx.up.micro.center.ZeroRegistry;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.Values;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.util.HashSet;
 import java.util.Objects;

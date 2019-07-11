@@ -11,9 +11,9 @@ import io.vertx.up.micro.follow.Invoker;
 import io.vertx.up.micro.follow.InvokerUtil;
 import io.vertx.up.micro.follow.JetSelector;
 import io.vertx.up.eon.Values;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
-import io.vertx.zero.runtime.ZeroAnno;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.runtime.ZeroAnno;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;

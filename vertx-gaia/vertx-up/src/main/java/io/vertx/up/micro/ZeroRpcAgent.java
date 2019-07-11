@@ -15,7 +15,7 @@ import io.vertx.up.micro.center.ZeroRegistry;
 import io.vertx.up.micro.ipc.server.Tunnel;
 import io.vertx.up.micro.ipc.server.UnityTunnel;
 import io.vertx.up.eon.Values;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

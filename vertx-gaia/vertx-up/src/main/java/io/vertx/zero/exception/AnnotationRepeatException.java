@@ -1,5 +1,7 @@
 package io.vertx.zero.exception;
 
+import io.vertx.up.exception.UpException;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 

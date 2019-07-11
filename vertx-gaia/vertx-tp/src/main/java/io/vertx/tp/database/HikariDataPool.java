@@ -1,8 +1,8 @@
 package io.vertx.tp.database;
 
 import com.zaxxer.hikari.HikariDataSource;
+import io.vertx.up.atom.Database;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.atom.Database;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
 import org.jooq.DSLContext;
@@ -29,45 +29,45 @@ public class HikariDataPool implements DataPool {
         /*
          * Initializing data source
          */
-        this.initJdbc();
+        initJdbc();
         /*
          * Initializing data source pool
          */
-        this.initPool();
+        initPool();
         /*
          * Initializing data source of jooq
          */
-        this.initJooq();
+        initJooq();
     }
 
     @Override
     public DSLContext getExecutor() {
-        if (Objects.isNull(this.context)) {
-            this.initDelay();
+        if (Objects.isNull(context)) {
+            initDelay();
         }
-        return this.context;
+        return context;
     }
 
     @Override
     public HikariDataSource getDataSource() {
-        if (Objects.isNull(this.dataSource)) {
-            this.initDelay();
+        if (Objects.isNull(dataSource)) {
+            initDelay();
         }
-        return this.dataSource;
+        return dataSource;
     }
 
     private void initJooq() {
-        if (null == this.context) {
+        if (null == context) {
             try {
                 /* Init Jooq configuration */
                 final Configuration configuration = new DefaultConfiguration();
-                final ConnectionProvider provider = new DefaultConnectionProvider(this.dataSource.getConnection());
+                final ConnectionProvider provider = new DefaultConnectionProvider(dataSource.getConnection());
                 configuration.set(provider);
                 /* Dialect selected */
-                final SQLDialect dialect = Pool.DIALECT.get(this.database.getCategory());
-                LOGGER.debug("[ ZERO ] Jooq Database ：Dialect = {0}, Database = {1}, ", dialect, this.database.toJson().encodePrettily());
+                final SQLDialect dialect = Pool.DIALECT.get(database.getCategory());
+                LOGGER.debug("[ ZERO ] Jooq Database ：Dialect = {0}, Database = {1}, ", dialect, database.toJson().encodePrettily());
                 configuration.set(dialect);
-                this.context = DSL.using(configuration);
+                context = DSL.using(configuration);
             } catch (final SQLException ex) {
                 // LOGGER.jvm(ex);
             }
@@ -75,7 +75,7 @@ public class HikariDataPool implements DataPool {
     }
 
     private void initJdbc() {
-        if (null == this.dataSource) {
+        if (null == dataSource) {
             /*
              * Very important here, here are unique pool of old code with singleton
              * this.dataSource = Ut.singleton(HikariDataSource.class);
@@ -94,33 +94,33 @@ public class HikariDataPool implements DataPool {
              * `old == new` will be true, when you set jdbcUrl again, above issue will throw out.
              *
              */
-            this.dataSource = new HikariDataSource();
+            dataSource = new HikariDataSource();
             /*
              * Ignore driverClass after jdbc4
              */
-            this.dataSource.setJdbcUrl(this.database.getJdbcUrl());
-            this.dataSource.setUsername(this.database.getUsername());
-            this.dataSource.setPassword(this.database.getPassword());
+            dataSource.setJdbcUrl(database.getJdbcUrl());
+            dataSource.setUsername(database.getUsername());
+            dataSource.setPassword(database.getPassword());
         }
     }
 
     private void initPool() {
-        if (Objects.nonNull(this.database)) {
+        if (Objects.nonNull(database)) {
             // Default configuration
-            this.dataSource.setAutoCommit(true);
-            this.dataSource.setConnectionTimeout(30000L);
-            this.dataSource.setIdleTimeout(600000L);
-            this.dataSource.setMaxLifetime(25600000L);
-            this.dataSource.setMinimumIdle(256);
-            this.dataSource.setMaximumPoolSize(512);
+            dataSource.setAutoCommit(true);
+            dataSource.setConnectionTimeout(30000L);
+            dataSource.setIdleTimeout(600000L);
+            dataSource.setMaxLifetime(25600000L);
+            dataSource.setMinimumIdle(256);
+            dataSource.setMaximumPoolSize(512);
 
             // Default attributes
-            this.dataSource.addDataSourceProperty("cachePrepStmts", "true");
-            this.dataSource.addDataSourceProperty("prepStmtCacheSize", "1024");
-            this.dataSource.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+            dataSource.addDataSourceProperty("cachePrepStmts", "true");
+            dataSource.addDataSourceProperty("prepStmtCacheSize", "1024");
+            dataSource.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
 
             // Data pool name
-            this.dataSource.setPoolName("ZERO-POOL-DATA");
+            dataSource.setPoolName("ZERO-POOL-DATA");
         }
     }
 }

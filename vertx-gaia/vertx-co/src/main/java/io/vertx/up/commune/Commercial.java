@@ -1,9 +1,9 @@
 package io.vertx.up.commune;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.atom.Database;
+import io.vertx.up.atom.Integration;
 import io.vertx.up.eon.em.ChannelType;
-import io.vertx.zero.atom.Database;
-import io.vertx.zero.atom.Integration;
 
 /*
  * Underway communication channel between

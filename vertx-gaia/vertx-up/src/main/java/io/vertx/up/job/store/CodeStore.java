@@ -1,8 +1,8 @@
 package io.vertx.up.job.store;
 
 import io.vertx.up.atom.worker.Mission;
-import io.vertx.zero.fn.Fn;
-import io.vertx.zero.runtime.ZeroAnno;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.runtime.ZeroAnno;
 
 import java.util.Set;
 

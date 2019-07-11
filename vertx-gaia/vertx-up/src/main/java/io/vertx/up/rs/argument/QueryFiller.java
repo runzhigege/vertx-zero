@@ -3,7 +3,7 @@ package io.vertx.up.rs.argument;
 import io.vertx.core.MultiMap;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.rs.Filler;
-import io.vertx.zero.runtime.ZeroSerializer;
+import io.vertx.up.runtime.ZeroSerializer;
 
 /**
  * Parse Query Params

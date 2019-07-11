@@ -1,6 +1,6 @@
 package io.vertx.tp.error;
 
-import io.vertx.zero.exception.UpException;
+import io.vertx.up.exception.UpException;
 
 public class PluginUpException extends UpException {
 

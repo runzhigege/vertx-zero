@@ -2,15 +2,15 @@ package io.vertx.up.micro.config;
 
 import io.vertx.circuitbreaker.CircuitBreakerOptions;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.atom.Ruler;
 import io.vertx.up.eon.Info;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.atom.Ruler;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.exception.ZeroException;
-import io.vertx.zero.fn.Fn;
-import io.vertx.zero.marshal.Visitor;
-import io.vertx.zero.marshal.node.Node;
-import io.vertx.zero.marshal.node.ZeroUniform;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.exception.ZeroException;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.uca.marshal.Visitor;
+import io.vertx.up.uca.marshal.node.Node;
+import io.vertx.up.uca.marshal.node.ZeroUniform;
 
 public class CircuitVisitor implements Visitor<CircuitBreakerOptions> {
 

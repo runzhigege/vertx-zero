@@ -7,7 +7,7 @@ import io.vertx.up.annotations.Queue;
 import io.vertx.up.eon.Info;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.WorkerConflictException;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.fn.Fn;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;

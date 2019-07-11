@@ -2,8 +2,8 @@ package io.vertx.up.web.serialization;
 
 import io.vertx.up.exception._400ParameterFromStringException;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.fn.Fn;
-import io.vertx.zero.runtime.ZeroSerializer;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.runtime.ZeroSerializer;
 
 public abstract class BaseSaber implements Saber {
 

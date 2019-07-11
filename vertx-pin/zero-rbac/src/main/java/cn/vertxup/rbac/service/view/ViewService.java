@@ -13,7 +13,7 @@ import io.vertx.up.aiki.Ux;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Strings;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.util.List;
 import java.util.UUID;

@@ -6,10 +6,10 @@ import io.vertx.up.atom.worker.Receipt;
 import io.vertx.up.log.Annal;
 import io.vertx.up.rs.Extractor;
 import io.vertx.zero.exception.AddressWrongException;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
-import io.vertx.zero.runtime.Anno;
-import io.vertx.zero.runtime.ZeroAnno;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.runtime.Anno;
+import io.vertx.up.runtime.ZeroAnno;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

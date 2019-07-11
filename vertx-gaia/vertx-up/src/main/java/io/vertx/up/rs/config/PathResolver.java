@@ -4,8 +4,8 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.Values;
 import io.vertx.zero.exception.PathAnnoEmptyException;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
 
 import javax.ws.rs.Path;
 import java.util.regex.Matcher;

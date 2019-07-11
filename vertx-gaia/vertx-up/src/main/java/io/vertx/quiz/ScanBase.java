@@ -1,6 +1,6 @@
 package io.vertx.quiz;
 
-import io.vertx.zero.runtime.ZeroPack;
+import io.vertx.up.runtime.ZeroPack;
 
 import java.util.HashSet;
 import java.util.Set;

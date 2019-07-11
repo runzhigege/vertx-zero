@@ -21,8 +21,8 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.rs.hunt.Answer;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.Values;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
 import org.apache.http.Header;
 import org.apache.http.StatusLine;
 

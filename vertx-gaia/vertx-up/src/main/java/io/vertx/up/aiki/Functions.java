@@ -2,8 +2,8 @@ package io.vertx.up.aiki;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
-import io.vertx.zero.epic.container.Refer;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.epic.container.Refer;
+import io.vertx.up.fn.Fn;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;

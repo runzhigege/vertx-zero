@@ -1,7 +1,8 @@
 package io.vertx.zero.exception;
 
 import io.vertx.up.eon.em.ServerType;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.exception.UpException;
 
 import java.util.Set;
 

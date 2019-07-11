@@ -15,7 +15,7 @@ import io.vertx.up.commune.ActOut;
 import io.vertx.up.commune.Commercial;
 import io.vertx.up.commune.Record;
 import io.vertx.up.log.Annal;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import java.util.Objects;
 

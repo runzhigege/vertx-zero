@@ -170,7 +170,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.aiki.Uson;
 import io.vertx.up.aiki.Ux;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.secure.Security;
 
 import javax.inject.Inject;

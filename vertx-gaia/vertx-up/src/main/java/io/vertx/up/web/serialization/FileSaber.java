@@ -1,7 +1,7 @@
 package io.vertx.up.web.serialization;
 
 import io.vertx.up.exception._400FilePathMissingException;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.fn.Fn;
 
 import java.io.File;
 

@@ -9,7 +9,7 @@ import io.vertx.tp.jet.cv.em.ParamMode;
 import io.vertx.tp.jet.refine.Jt;
 import io.vertx.up.commune.Api;
 import io.vertx.up.eon.Orders;
-import io.vertx.zero.epic.Ut;
+import io.vertx.up.epic.Ut;
 
 import javax.ws.rs.core.MediaType;
 import java.util.Objects;

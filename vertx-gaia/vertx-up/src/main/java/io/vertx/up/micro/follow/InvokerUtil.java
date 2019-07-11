@@ -7,9 +7,9 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Values;
 import io.vertx.zero.exception.AsyncSignatureException;
 import io.vertx.zero.exception.WorkerArgumentException;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
-import io.vertx.zero.runtime.ZeroSerializer;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.runtime.ZeroSerializer;
 
 import java.lang.reflect.Method;
 import java.util.function.Supplier;

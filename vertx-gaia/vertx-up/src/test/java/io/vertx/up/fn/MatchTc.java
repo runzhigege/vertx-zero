@@ -1,7 +1,6 @@
 package io.vertx.up.fn;
 
 import io.vertx.core.Future;
-import io.vertx.zero.fn.Fn;
 import org.junit.Test;
 
 public class MatchTc {

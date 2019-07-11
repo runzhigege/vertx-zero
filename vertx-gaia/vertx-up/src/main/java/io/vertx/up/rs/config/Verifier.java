@@ -3,8 +3,8 @@ package io.vertx.up.rs.config;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.AccessProxyException;
 import io.vertx.zero.exception.NoArgConstructorException;
-import io.vertx.zero.epic.Ut;
-import io.vertx.zero.fn.Fn;
+import io.vertx.up.epic.Ut;
+import io.vertx.up.fn.Fn;
 
 import java.lang.reflect.Modifier;
 

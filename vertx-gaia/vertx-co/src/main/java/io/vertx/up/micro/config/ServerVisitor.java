@@ -1,6 +1,6 @@
 package io.vertx.up.micro.config;
 
-import io.vertx.zero.marshal.Visitor;
+import io.vertx.up.uca.marshal.Visitor;
 
 import java.util.concurrent.ConcurrentMap;
 
