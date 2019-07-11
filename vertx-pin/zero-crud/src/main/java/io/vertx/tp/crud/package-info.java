@@ -3,7 +3,7 @@
  * There defined some API ( Agent/Worker ) in this module as uniform CRUD Restful Api here such as
  * common usage.
  * For example, here are a module named role, you can define class name in the file
- * ke/module/, this plugin will analyze all the definition file and mount the api to your system.
+ * up/module/, this plugin will analyze all the definition file and mount the api to your system.
  * Here are some points:
  * 1) The event but name is different from "EVENT://", it's named with other prefix to distinguish from standard.
  * 2) Here this module has high priority to define RESTful API, but also it could help you to avoid some duplicated

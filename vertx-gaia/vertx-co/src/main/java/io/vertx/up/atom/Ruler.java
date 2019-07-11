@@ -3,6 +3,7 @@ package io.vertx.up.atom;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Strings;
+import io.vertx.up.eon.Values;
 import io.vertx.up.exception.ZeroException;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
@@ -22,8 +23,6 @@ import java.util.concurrent.ConcurrentMap;
 public class Ruler {
 
     private static final Annal LOGGER = Annal.get(Ruler.class);
-
-    private static final String RULE_PATH = "ke/rules/{0}.yml";
 
     private static final ConcurrentMap<String, JsonObject> RULE_MAP =
             new ConcurrentHashMap<>();
@@ -130,7 +129,7 @@ public class Ruler {
 
     private static JsonObject getRule(final String file) {
         // Cached rule into memory pool
-        final String filename = MessageFormat.format(RULE_PATH, file);
+        final String filename = MessageFormat.format(Values.CONFIG_INTERNAL_RULE, file);
         if (RULE_MAP.containsKey(filename)) {
             LOGGER.debug(Info.RULE_CACHED_FILE, filename);
         } else {
