@@ -8,7 +8,7 @@ import io.vertx.ext.web.Session;
 import io.vertx.tp.error._409SessionConflictException;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.up.unity.Ux;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.plugin.session.SessionClient;
 import io.vertx.up.plugin.session.SessionInfix;

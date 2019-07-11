@@ -2,7 +2,7 @@ package io.vertx.up.rs.hunt;
 
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerResponse;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.eon.Strings;
 
 import javax.ws.rs.core.MediaType;

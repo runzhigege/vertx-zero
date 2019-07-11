@@ -1,7 +1,7 @@
 package io.vertx.tp.jet.uca.valve;
 
 import io.vertx.tp.jet.atom.JtUri;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.fn.Fn;
 
 /*

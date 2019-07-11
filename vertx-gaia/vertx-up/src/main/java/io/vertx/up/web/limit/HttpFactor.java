@@ -2,13 +2,13 @@ package io.vertx.up.web.limit;
 
 import io.vertx.tp.error.RpcPreparingException;
 import io.vertx.tp.etcd.center.EtcdData;
-import io.vertx.up.boot.Motor;
 import io.vertx.up.eon.em.ServerType;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.micro.ZeroHttpAgent;
 import io.vertx.up.micro.ZeroRpcAgent;
 import io.vertx.up.micro.ZeroSockAgent;
-import io.vertx.up.fn.Fn;
+import io.vertx.up.runtime.ZeroMotor;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -31,9 +31,9 @@ public class HttpFactor implements Factor {
     private static final ConcurrentMap<ServerType, Class<?>> INTERNALS
             = new ConcurrentHashMap<ServerType, Class<?>>() {
         {
-            this.put(ServerType.HTTP, ZeroHttpAgent.class);
-            this.put(ServerType.IPC, ZeroRpcAgent.class);
-            this.put(ServerType.SOCK, ZeroSockAgent.class);
+            put(ServerType.HTTP, ZeroHttpAgent.class);
+            put(ServerType.IPC, ZeroRpcAgent.class);
+            put(ServerType.SOCK, ZeroSockAgent.class);
         }
     };
 
@@ -41,11 +41,11 @@ public class HttpFactor implements Factor {
     public ConcurrentMap<ServerType, Class<?>> agents() {
         /* 1.Find Agent for deploy **/
         final ConcurrentMap<ServerType, Class<?>> agents
-                = Motor.agents(ServerType.HTTP, DEFAULT_AGENTS, INTERNALS);
+                = ZeroMotor.agents(ServerType.HTTP, DEFAULT_AGENTS, INTERNALS);
         if (agents.containsKey(ServerType.IPC)) {
             // 2. Check etcd server status, IPC Only
             Fn.outUp(!EtcdData.enabled(),
-                    LOGGER, RpcPreparingException.class, this.getClass());
+                    LOGGER, RpcPreparingException.class, getClass());
         }
         // 3. Filter invalid agents
         final Set<ServerType> scanned = new HashSet<>(agents.keySet());

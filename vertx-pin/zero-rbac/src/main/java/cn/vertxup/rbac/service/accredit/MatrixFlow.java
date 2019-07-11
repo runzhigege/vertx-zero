@@ -2,7 +2,7 @@ package cn.vertxup.rbac.service.accredit;
 
 import cn.vertxup.rbac.domain.tables.pojos.SView;
 import io.vertx.core.Future;
-import io.vertx.up.atom.DataBound;
+import io.vertx.up.commune.config.DataBound;
 
 import java.util.ArrayList;
 import java.util.List;

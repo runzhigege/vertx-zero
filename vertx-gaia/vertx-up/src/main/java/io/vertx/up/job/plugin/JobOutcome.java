@@ -1,7 +1,7 @@
 package io.vertx.up.job.plugin;
 
 import io.vertx.core.Future;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 /*
  * Job outcome, this outcome interface should provide Future<JobOut> to execute

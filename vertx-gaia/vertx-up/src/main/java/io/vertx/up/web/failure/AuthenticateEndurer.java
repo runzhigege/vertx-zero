@@ -2,7 +2,7 @@ package io.vertx.up.web.failure;
 
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.rs.hunt.Answer;
 

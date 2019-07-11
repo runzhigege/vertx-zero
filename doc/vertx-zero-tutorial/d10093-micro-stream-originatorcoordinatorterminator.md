@@ -52,7 +52,7 @@ import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Ipc;
 import io.vertx.up.annotations.Queue;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 @Queue
 public class HuttWorker {
@@ -75,7 +75,7 @@ package up.god.ipc.mesh;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Ipc;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 public class HuttInsider {
     @Ipc(value = "RPC://IPC/NODE/HUTT",
@@ -95,7 +95,7 @@ package up.god.ipc.mesh;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Ipc;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 public class HuttInsider {
     @Ipc(value = "RPC://IPC/NODE/HUTT1",
@@ -116,7 +116,7 @@ package up.god.ipc.mesh;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Ipc;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 public class HuttInsider {
 

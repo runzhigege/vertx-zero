@@ -11,9 +11,9 @@ import io.vertx.tp.database.DataPool;
 import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.atom.JtJob;
 import io.vertx.tp.jet.atom.JtUri;
-import io.vertx.up.atom.Database;
-import io.vertx.up.util.Ut;
+import io.vertx.up.commune.config.Database;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.util.Ut;
 import org.jooq.Configuration;
 
 import java.sql.Connection;

@@ -10,7 +10,7 @@ import io.vertx.up.unity.Ux;
 import io.vertx.up.unity.UxJooq;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 /*
  * Query Engine for

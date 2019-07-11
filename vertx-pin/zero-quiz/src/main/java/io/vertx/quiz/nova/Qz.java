@@ -2,7 +2,7 @@ package io.vertx.quiz.nova;
 
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.ext.unit.TestContext;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.exception.zero.TestCaseNameException;
 import io.vertx.up.fn.Fn;
 import io.vertx.quiz.Async;

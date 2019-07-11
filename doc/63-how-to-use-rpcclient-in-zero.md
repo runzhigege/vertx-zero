@@ -47,7 +47,7 @@ Rpc code need at least two micro services in your environment.
 ```java
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Ipc;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 // service name = ipc-coeus
 public class SpeakWorker {
 

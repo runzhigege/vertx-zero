@@ -8,7 +8,7 @@ import io.vertx.tp.optic.jet.JtChannel;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Contract;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.ActIn;
 import io.vertx.up.commune.ActOut;

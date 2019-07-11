@@ -2,7 +2,7 @@ package io.vertx.up.micro.ipc.tower;
 
 import io.vertx.core.Future;
 import io.vertx.up.unity.Ux;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.exception._500RpcTransitInvokeException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.fn.JvmSupplier;

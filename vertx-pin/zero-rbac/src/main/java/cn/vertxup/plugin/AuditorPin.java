@@ -3,7 +3,7 @@ package cn.vertxup.plugin;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.plugin.extension.PlugAuditor;
 
 public class AuditorPin implements PlugAuditor {

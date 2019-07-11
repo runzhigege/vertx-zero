@@ -1,4 +1,4 @@
-package io.vertx.up.atom.envelop;
+package io.vertx.up.commune.envelop;
 
 interface Key {
     String DATA = "data";

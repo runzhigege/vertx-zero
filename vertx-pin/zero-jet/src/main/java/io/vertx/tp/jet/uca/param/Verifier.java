@@ -3,7 +3,7 @@ package io.vertx.tp.jet.uca.param;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.JetThanatos;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.eon.ID;
 import io.vertx.up.util.Ut;
 

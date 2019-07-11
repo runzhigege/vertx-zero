@@ -5,7 +5,7 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.cv.em.ParamMode;
 import io.vertx.tp.optic.jet.JtIngest;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 import java.util.function.Supplier;
 

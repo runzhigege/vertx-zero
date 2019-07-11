@@ -15,7 +15,7 @@ import io.vertx.tp.optic.Pocket;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.log.Annal;
 

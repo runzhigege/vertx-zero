@@ -98,7 +98,7 @@ import io.vertx.ext.mongo.MongoClient;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 import javax.inject.infix.Mongo;
 

@@ -1,6 +1,6 @@
 package io.vertx.tp.database;
 
-import io.vertx.up.atom.Database;
+import io.vertx.up.commune.config.Database;
 import io.vertx.up.fn.Fn;
 import org.jooq.DSLContext;
 

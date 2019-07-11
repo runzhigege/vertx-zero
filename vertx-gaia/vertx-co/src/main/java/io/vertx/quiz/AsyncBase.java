@@ -3,8 +3,8 @@ package io.vertx.quiz;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.TestContext;
-import io.vertx.up.atom.Database;
-import io.vertx.up.atom.Integration;
+import io.vertx.up.commune.config.Database;
+import io.vertx.up.commune.config.Integration;
 
 import java.util.function.Consumer;
 

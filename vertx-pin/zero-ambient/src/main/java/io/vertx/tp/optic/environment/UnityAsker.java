@@ -7,7 +7,7 @@ import cn.vertxup.ambient.domain.tables.pojos.XSource;
 import io.vertx.tp.ambient.cv.AtMsg;
 import io.vertx.tp.ambient.refine.At;
 import io.vertx.tp.database.DataPool;
-import io.vertx.up.atom.Database;
+import io.vertx.up.commune.config.Database;
 import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
 import org.jooq.Configuration;

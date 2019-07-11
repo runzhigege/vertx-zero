@@ -3,7 +3,7 @@ package io.vertx.up.web.origin;
 import io.reactivex.Observable;
 import io.vertx.up.annotations.EndPoint;
 import io.vertx.up.annotations.Ipc;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.log.Annal;
 import io.vertx.zero.exception.*;
 import io.vertx.up.util.Ut;
