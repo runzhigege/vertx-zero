@@ -1,6 +1,6 @@
 package io.zero.quiz.nova;
 
-import cn.vertxup.api.*;
+import cn.vertxup.crud.api.*;
 import io.vertx.core.Future;
 import io.vertx.up.atom.Envelop;
 import io.zero.epic.Ut;
@@ -25,17 +25,17 @@ interface Pool {
     ConcurrentMap<QzApi, Function<Envelop, Future<Envelop>>> METHOD_POOL =
             new ConcurrentHashMap<QzApi, Function<Envelop, Future<Envelop>>>() {
                 {
-                    this.put(QzApi.POST_ACTOR, Actors.POST::create);
-                    this.put(QzApi.GET_ACTOR_KEY, Actors.GET::getById);
-                    this.put(QzApi.PUT_ACTOR_KEY, Actors.PUT::update);
-                    this.put(QzApi.DELETE_ACTOR_KEY, Actors.DELETE::delete);
+                    put(QzApi.POST_ACTOR, Actors.POST::create);
+                    put(QzApi.GET_ACTOR_KEY, Actors.GET::getById);
+                    put(QzApi.PUT_ACTOR_KEY, Actors.PUT::update);
+                    put(QzApi.DELETE_ACTOR_KEY, Actors.DELETE::delete);
 
-                    this.put(QzApi.POST_ACTOR_SEARCH, Actors.QUERY::search);
-                    this.put(QzApi.POST_ACTOR_MISSING, Actors.QUERY::missing);
-                    this.put(QzApi.POST_ACTOR_EXISTING, Actors.QUERY::existing);
+                    put(QzApi.POST_ACTOR_SEARCH, Actors.QUERY::search);
+                    put(QzApi.POST_ACTOR_MISSING, Actors.QUERY::missing);
+                    put(QzApi.POST_ACTOR_EXISTING, Actors.QUERY::existing);
 
-                    this.put(QzApi.POST_BATCH_UPDATE, Actors.PUT::updateBatch);
-                    this.put(QzApi.POST_BATCH_DELETE, Actors.DELETE::deleteBatch);
+                    put(QzApi.POST_BATCH_UPDATE, Actors.PUT::updateBatch);
+                    put(QzApi.POST_BATCH_DELETE, Actors.DELETE::deleteBatch);
                 }
             };
 }

@@ -1,6 +1,6 @@
 package io.vertx.tp.jet.refine;
 
-import cn.vertxup.jet.tables.pojos.IApi;
+import cn.vertxup.jet.domain.tables.pojos.IApi;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.tp.error._500ConsumerSpecException;
 import io.vertx.tp.error._500WorkerSpecException;

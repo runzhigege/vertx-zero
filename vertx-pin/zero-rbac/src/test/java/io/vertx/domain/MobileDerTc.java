@@ -1,6 +1,6 @@
 package io.vertx.domain;
 
-import cn.vertxup.domain.tables.pojos.SUser;
+import cn.vertxup.rbac.domain.tables.pojos.SUser;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.aiki.Ux;
 import org.junit.Test;

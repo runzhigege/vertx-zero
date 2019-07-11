@@ -1,6 +1,6 @@
 package io.vertx.tp.rbac.refine;
 
-import cn.vertxup.domain.tables.pojos.OAccessToken;
+import cn.vertxup.rbac.domain.tables.pojos.OAccessToken;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error._401TokenCounterException;

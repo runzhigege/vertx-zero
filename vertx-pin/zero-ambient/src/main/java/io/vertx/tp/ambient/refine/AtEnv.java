@@ -1,7 +1,7 @@
 package io.vertx.tp.ambient.refine;
 
-import cn.vertxup.ambient.tables.daos.XSourceDao;
-import cn.vertxup.ambient.tables.pojos.XApp;
+import cn.vertxup.ambient.domain.tables.daos.XSourceDao;
+import cn.vertxup.ambient.domain.tables.pojos.XApp;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
