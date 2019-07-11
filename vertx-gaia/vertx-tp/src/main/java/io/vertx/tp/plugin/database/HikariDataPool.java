@@ -1,4 +1,4 @@
-package io.vertx.tp.database;
+package io.vertx.tp.plugin.database;
 
 import com.zaxxer.hikari.HikariDataSource;
 import io.vertx.up.commune.config.Database;

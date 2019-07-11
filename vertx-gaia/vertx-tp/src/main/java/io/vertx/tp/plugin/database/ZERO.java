@@ -1,4 +1,4 @@
-package io.vertx.tp.database;
+package io.vertx.tp.plugin.database;
 
 import io.vertx.up.eon.em.DatabaseType;
 import org.jooq.SQLDialect;

@@ -1,7 +1,7 @@
 package io.vertx.up.web.limit;
 
 import io.vertx.tp.error.RpcPreparingException;
-import io.vertx.tp.etcd.center.EtcdData;
+import io.vertx.tp.plugin.etcd.center.EtcdData;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;

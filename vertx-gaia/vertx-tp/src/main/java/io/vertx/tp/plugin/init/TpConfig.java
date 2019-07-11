@@ -1,4 +1,4 @@
-package io.vertx.tp.init;
+package io.vertx.tp.plugin.init;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.Ruler;

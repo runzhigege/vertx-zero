@@ -2,7 +2,7 @@ package io.vertx.up.web.anima;
 
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
-import io.vertx.tp.etcd.center.EtcdData;
+import io.vertx.tp.plugin.etcd.center.EtcdData;
 import io.vertx.up.annotations.Worker;
 import io.vertx.up.eon.em.MessageModel;
 import io.vertx.up.log.Annal;

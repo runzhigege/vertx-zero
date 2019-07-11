@@ -1,4 +1,4 @@
-package io.vertx.tp.database;
+package io.vertx.tp.plugin.database;
 
 import io.vertx.up.commune.config.Database;
 import io.vertx.up.fn.Fn;

@@ -7,7 +7,7 @@ import cn.vertxup.jet.domain.tables.pojos.IApi;
 import cn.vertxup.jet.domain.tables.pojos.IJob;
 import cn.vertxup.jet.domain.tables.pojos.IService;
 import io.vertx.codegen.annotations.Fluent;
-import io.vertx.tp.database.DataPool;
+import io.vertx.tp.plugin.database.DataPool;
 import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.atom.JtJob;
 import io.vertx.tp.jet.atom.JtUri;

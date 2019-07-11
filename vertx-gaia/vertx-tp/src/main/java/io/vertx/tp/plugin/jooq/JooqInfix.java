@@ -1,7 +1,7 @@
 package io.vertx.tp.plugin.jooq;
 
 import io.vertx.core.Vertx;
-import io.vertx.tp.database.DataPool;
+import io.vertx.tp.plugin.database.DataPool;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.log.Annal;
