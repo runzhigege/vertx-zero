@@ -21,6 +21,9 @@ Here are all modules of real project
 * `vertx-pin/zero-rbac`: 「Business」 RBAC Framework
 * `vertx-pin/zero-crud`: 「Business」 CRUD operation common module ( There are some limitation )
 * `vertx-pin/zero-ambient`: 「Business」 Environment Framework ( Multi App )
+* `vertx-pin/zero-jet`：「Business」 Dynamic Routing for API, Service, Job
+* `vertx-pin/zero-lbs`：「Business」 Location Based Service
+* `vertx-pin/zero-ui`：「Business」 User Interface for front end
 
 In latest version, examples have been moved to [https://github.com/silentbalanceyh/vertx-zero-example](https://github.com/silentbalanceyh/vertx-zero-example)
 
@@ -38,7 +41,7 @@ If you want to use Zero framework, you can add following dependency into you `po
     <parent>
         <artifactId>vertx-import</artifactId>
         <groupId>cn.vertxup</groupId>
-        <version>0.4.10</version>
+        <version>0.5</version>
     </parent>
 ```
 
