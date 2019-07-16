@@ -37,7 +37,16 @@ public class SessionClientImpl implements SessionClient {
             } else {
                 final String store = config.getString("store");
                 Fn.outWeb(Ut.isNil(store), _500SessionClientInitException.class, getClass());
-                STORE = null;
+                LOGGER.info(Info.SESSION_STORE, store);
+                /*
+                 * SessionStore -> Defined here
+                 */
+                final SessionStore defined = Ut.singleton(store);
+                JsonObject opts = config.getJsonObject("options");
+                if (Ut.isNil(opts)) {
+                    opts = new JsonObject();
+                }
+                STORE = defined.init(vertx, opts);
             }
         }
     }

@@ -10,9 +10,9 @@ import io.vertx.tp.plugin.session.SessionInfix;
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.eon.Orders;
 import io.vertx.up.eon.Values;
+import io.vertx.up.runtime.ZeroAnno;
 import io.vertx.up.uca.rs.Axis;
 import io.vertx.up.uca.rs.secure.Bolt;
-import io.vertx.up.runtime.ZeroAnno;
 import io.vertx.up.uca.web.failure.AuthenticateEndurer;
 
 import java.util.Set;

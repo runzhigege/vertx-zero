@@ -196,17 +196,13 @@
                 <artifactId>vertx-ifx</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!-- Third Part -->
+            <!-- Zero Extension -->
             <dependency>
                 <groupId>cn.vertxup</groupId>
                 <artifactId>zero-ke</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>cn.vertxup</groupId>
-                <artifactId>zero-iqiy</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+            <!-- Third Part -->
             <dependency>
                 <groupId>cn.vertxup</groupId>
                 <artifactId>zero-ali-sms</artifactId>
@@ -220,6 +216,16 @@
             <dependency>
                 <groupId>cn.vertxup</groupId>
                 <artifactId>zero-feign</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.vertxup</groupId>
+                <artifactId>zero-iqiy</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.vertxup</groupId>
+                <artifactId>zero-redis</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- vertx -->

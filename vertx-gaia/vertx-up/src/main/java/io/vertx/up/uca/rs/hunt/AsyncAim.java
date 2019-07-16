@@ -8,8 +8,8 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.fn.Fn;
-import io.vertx.up.uca.rs.Aim;
 import io.vertx.up.uca.container.Virtual;
+import io.vertx.up.uca.rs.Aim;
 
 public class AsyncAim extends BaseAim implements Aim<RoutingContext> {
 
@@ -18,6 +18,7 @@ public class AsyncAim extends BaseAim implements Aim<RoutingContext> {
         return Fn.getNull(() -> (context) -> exec(() -> {
             // 1. Build Envelop
             final Envelop request = invoke(context, event);
+            System.err.println(context.session().id());
             // 2. Build event bus
             final Vertx vertx = context.vertx();
             final EventBus bus = vertx.eventBus();
