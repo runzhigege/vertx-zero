@@ -10,22 +10,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zero-native</artifactId>
-    <name>( Vertx Infix ) zero-native: Native ( Redis,Jdbc )</name>
+    <name>( Vertx Infix ) zero-native: Native ( Jdbc )</name>
     <dependencies>
         <!-- Higher dependency -->
         <dependency>
             <groupId>cn.vertxup</groupId>
             <artifactId>vertx-up</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-redis-client</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.vertx</groupId>
-                    <artifactId>vertx-core</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>io.vertx</groupId>

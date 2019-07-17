@@ -2,7 +2,9 @@ package io.vertx.up.uca.rs.hunt;
 
 import io.vertx.core.AsyncResult;
 import io.vertx.core.eventbus.Message;
+import io.vertx.ext.web.Cookie;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.Session;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.atom.Rule;
 import io.vertx.up.atom.agent.Depot;
@@ -118,6 +120,7 @@ public abstract class BaseAim {
                                   final Map<String, List<Rule>> rulers,
                                   final Depot depot) {
         try {
+
             final Object[] args = buildArgs(context, depot.getEvent());
             // Execute web flow and uniform call.
             Flower.executeRequest(context, rulers, depot, args, verifier());
@@ -134,6 +137,12 @@ public abstract class BaseAim {
                         final RoutingContext context,
                         final Event event) {
         try {
+            // Monitor
+            {
+                final Session session = context.session();
+                final Cookie cookie = context.getCookie("vertx-web.session");
+                getLogger().info(Info.SESSION_ID, session.id(), cookie.getValue());
+            }
             consumer.execute();
         } catch (final WebException ex) {
             final Envelop envelop = Envelop.failure(ex);

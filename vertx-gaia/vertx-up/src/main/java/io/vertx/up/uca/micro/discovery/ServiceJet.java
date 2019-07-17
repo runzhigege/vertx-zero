@@ -14,17 +14,18 @@ import io.vertx.core.http.RequestOptions;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.client.HttpRequest;
 import io.vertx.ext.web.client.WebClient;
+import io.vertx.ext.web.client.WebClientSession;
 import io.vertx.servicediscovery.Record;
 import io.vertx.servicediscovery.ServiceDiscovery;
 import io.vertx.servicediscovery.ServiceReference;
 import io.vertx.servicediscovery.types.HttpEndpoint;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.uca.options.CircuitVisitor;
 import io.vertx.up.uca.micro.discovery.multipart.Pipe;
 import io.vertx.up.uca.micro.discovery.multipart.UploadPipe;
 import io.vertx.up.uca.micro.matcher.Arithmetic;
 import io.vertx.up.uca.micro.matcher.CommonArithmetic;
+import io.vertx.up.uca.options.CircuitVisitor;
 import io.vertx.up.uca.options.Visitor;
 import io.vertx.up.util.Ut;
 
@@ -81,7 +82,7 @@ public class ServiceJet {
                 final Record hitted = arithmetic.search(records, context);
                 // Complete actions.
                 if (null == hitted) {
-                    /**
+                    /*
                      * Service Not Found ( 404 )
                      * Situation 1:
                      * Zero engine could not find the uri that client provided.
@@ -97,7 +98,7 @@ public class ServiceJet {
                         reference.release();    // release service reference
                         future.complete();      // execute future complete operation
                     };
-                    /**
+                    /*
                      * Service Found
                      * Situation 1:
                      * Here matching successfully when gateway get request.
@@ -122,13 +123,18 @@ public class ServiceJet {
             final String uri = InOut.normalizeUri(context);
 
             final WebClient client = reference.getAs(WebClient.class);
+            /*
+             * Web Client session instead of client to manage session
+             */
+            final WebClientSession session = WebClientSession.create(client);
+
             final RequestOptions options = InOut.getOptions(record, uri);
             /*
              * Here client got from service reference, it means that it's not needed to use requestAbs
              * request instead.
              * requestAbs: it means used absolute URI instead of uri address
              */
-            final HttpRequest<Buffer> request = client.request(method, options);
+            final HttpRequest<Buffer> request = session.request(method, options);
             /*
              * Headers processing ( copy all the headers from request, perfect redirect );
              */

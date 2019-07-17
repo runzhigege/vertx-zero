@@ -47,7 +47,7 @@ class InfixPlugin {
                             logger.warn(Info.INFIX_IMPL, infixCls.getName(), Infix.class.getName());
                         }
                     } else {
-                        logger.warn(Info.INFIX_NULL, "tp", field.getName(), type.getName());
+                        logger.warn(Info.INFIX_NULL, field.getType().getName(), field.getName(), type.getName());
                     }
                 })
                 .dispose();

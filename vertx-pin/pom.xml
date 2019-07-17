@@ -21,6 +21,7 @@
         <module>zero-ui</module>
         <module>zero-quiz</module>
         <module>zero-jet</module>
+        <module>zero-router</module>
     </modules>
     <dependencies>
         <dependency>

@@ -5,14 +5,12 @@ import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.AuthHandler;
 import io.vertx.ext.web.handler.ChainAuthHandler;
-import io.vertx.tp.plugin.session.SessionClient;
-import io.vertx.tp.plugin.session.SessionInfix;
 import io.vertx.up.atom.secure.Cliff;
 import io.vertx.up.eon.Orders;
 import io.vertx.up.eon.Values;
+import io.vertx.up.runtime.ZeroAnno;
 import io.vertx.up.uca.rs.Axis;
 import io.vertx.up.uca.rs.secure.Bolt;
-import io.vertx.up.runtime.ZeroAnno;
 import io.vertx.up.uca.web.failure.AuthenticateEndurer;
 
 import java.util.Set;
@@ -51,13 +49,6 @@ public class WallAxis implements Axis<Router> {
 
     @Override
     public void mount(final Router router) {
-        /*
-         * Session Global for Authorization, replace old mode with
-         * SessionClient, this client will get SessionStore
-         * by configuration information instead of create it directly.
-         */
-        final SessionClient client = SessionInfix.getOrCreate(vertx);
-        router.route().order(Orders.SESSION).handler(client.getHandler());
         /*
          * Wall mount for authorization
          */
