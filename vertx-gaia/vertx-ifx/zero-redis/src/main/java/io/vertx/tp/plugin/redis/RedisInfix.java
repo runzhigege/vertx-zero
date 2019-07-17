@@ -1,12 +1,12 @@
-package io.vertx.up.plugin.redis;
+package io.vertx.tp.plugin.redis;
 
 import io.vertx.core.Vertx;
 import io.vertx.redis.RedisClient;
 import io.vertx.redis.RedisOptions;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.plugin.Infix;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.plugin.Infix;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

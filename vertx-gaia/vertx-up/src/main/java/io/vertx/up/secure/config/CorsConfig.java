@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.JsonArrayDeserializer;
 import com.fasterxml.jackson.databind.JsonArraySerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.vertx.core.http.HttpHeaders;
+import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.uca.yaml.Node;
@@ -57,7 +59,16 @@ public class CorsConfig implements Serializable {
     }
 
     public JsonArray getMethods() {
-        return methods;
+        if (methods.isEmpty()) {
+            return new JsonArray()
+                    .add(HttpMethod.GET.name())
+                    .add(HttpMethod.POST.name())
+                    .add(HttpMethod.PUT.name())
+                    .add(HttpMethod.DELETE.name())
+                    .add(HttpMethod.OPTIONS.name());
+        } else {
+            return methods;
+        }
     }
 
     public void setMethods(final JsonArray methods) {
@@ -65,7 +76,17 @@ public class CorsConfig implements Serializable {
     }
 
     public JsonArray getHeaders() {
-        return headers;
+        if (headers.isEmpty()) {
+            return new JsonArray()
+                    .add(HttpHeaders.AUTHORIZATION)
+                    .add(HttpHeaders.ACCEPT)
+                    .add(HttpHeaders.CONTENT_DISPOSITION)
+                    .add(HttpHeaders.CONTENT_ENCODING)
+                    .add(HttpHeaders.CONTENT_LENGTH)
+                    .add(HttpHeaders.CONTENT_TYPE);
+        } else {
+            return headers;
+        }
     }
 
     public void setHeaders(final JsonArray headers) {
