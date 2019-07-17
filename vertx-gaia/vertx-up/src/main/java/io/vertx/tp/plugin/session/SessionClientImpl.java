@@ -40,8 +40,10 @@ public class SessionClientImpl implements SessionClient {
                 LOGGER.info(Info.SESSION_STORE, store);
                 /*
                  * SessionStore -> Defined here
+                 * The session store could not be singleton because each session store must not
+                 * be shared and located by each thread here.
                  */
-                final SessionStore defined = Ut.singleton(store);
+                final SessionStore defined = Ut.instance(store);
                 JsonObject opts = config.getJsonObject("options");
                 if (Ut.isNil(opts)) {
                     opts = new JsonObject();

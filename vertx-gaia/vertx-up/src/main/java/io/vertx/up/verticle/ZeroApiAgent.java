@@ -9,12 +9,12 @@ import io.vertx.up.eon.Values;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
+import io.vertx.up.uca.options.DynamicVisitor;
+import io.vertx.up.uca.options.ServerVisitor;
 import io.vertx.up.uca.rs.Axis;
 import io.vertx.up.uca.rs.router.PointAxis;
 import io.vertx.up.uca.rs.router.RouterAxis;
 import io.vertx.up.uca.rs.router.WallAxis;
-import io.vertx.up.uca.options.DynamicVisitor;
-import io.vertx.up.uca.options.ServerVisitor;
 import io.vertx.up.util.Ut;
 
 import java.text.MessageFormat;
@@ -52,7 +52,7 @@ public class ZeroApiAgent extends AbstractVerticle {
     public void start() {
         /* 1.Call router hub to mount commont **/
         final Axis<Router> routerAxiser = Fn.poolThread(Pool.ROUTERS,
-                () -> Ut.instance(RouterAxis.class));
+                () -> new RouterAxis(vertx));
         /* 2.Call route hub to mount walls **/
         final Axis<Router> wallAxiser = Fn.poolThread(Pool.WALLS,
                 () -> Ut.instance(WallAxis.class, vertx));

@@ -1,5 +1,6 @@
 package io.vertx.up.uca.rs.router;
 
+import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonArray;
 import io.vertx.ext.web.Router;
@@ -7,6 +8,8 @@ import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.CookieHandler;
 import io.vertx.ext.web.handler.CorsHandler;
 import io.vertx.ext.web.handler.ResponseContentTypeHandler;
+import io.vertx.tp.plugin.session.SessionClient;
+import io.vertx.tp.plugin.session.SessionInfix;
 import io.vertx.up.eon.Orders;
 import io.vertx.up.secure.config.CorsConfig;
 import io.vertx.up.uca.rs.Axis;
@@ -20,6 +23,12 @@ public class RouterAxis implements Axis<Router> {
 
     private static final CorsConfig CONFIG = CorsConfig.get();
 
+    private transient final Vertx vertx;
+
+    public RouterAxis(final Vertx vertx) {
+        this.vertx = vertx;
+    }
+
     @Override
     public void mount(final Router router) {
         // 1. Cookie, Body
@@ -32,7 +41,15 @@ public class RouterAxis implements Axis<Router> {
         router.route()
                 .order(Orders.CONTENT)
                 .handler(ResponseContentTypeHandler.create());
-        // 2. Cors data here
+        // 2. Session
+        /*
+         * Session Global for Authorization, replace old mode with
+         * SessionClient, this client will get SessionStore
+         * by configuration information instead of create it directly.
+         */
+        final SessionClient client = SessionInfix.getOrCreate(vertx);
+        router.route().order(Orders.SESSION).handler(client.getHandler());
+        // 3. Cors data here
         mountCors(router);
     }
 
