@@ -76,7 +76,6 @@ public class ServiceJet {
     public Handler<RoutingContext> handle() {
         // Run with circuit breaker
         return context -> breaker.execute(future -> getEndPoints().setHandler(res -> {
-            System.err.println(context.session().id());
             if (res.succeeded()) {
                 final List<Record> records = res.result();
                 // Find the record hitted. ( Include Path variable such as /xx/yy/:zz/:xy )
