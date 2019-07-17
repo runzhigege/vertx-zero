@@ -1,4 +1,4 @@
-package io.vertx.up.plugin.redis;
+package io.vertx.tp.plugin.redis;
 
 import java.io.Serializable;
 
@@ -7,11 +7,10 @@ import java.io.Serializable;
  */
 public class RedisExtra implements Serializable {
 
-    static String DEFAULT_SESSION_MAP_NAME = "vertx-web.sessions";
-
     private int port = 6379;
     private String host = "localhost";
     private long retryTimeout = 2 * 1000;
+    private long timeout = 30 * 100;
     private String auth;
 
     public int getPort() {
@@ -46,12 +45,21 @@ public class RedisExtra implements Serializable {
         this.auth = auth;
     }
 
+    public long getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(final long timeout) {
+        this.timeout = timeout;
+    }
+
     @Override
     public String toString() {
         return "RedisExtra{" +
                 "port=" + port +
                 ", host='" + host + '\'' +
                 ", retryTimeout=" + retryTimeout +
+                ", timeout=" + timeout +
                 ", auth='" + auth + '\'' +
                 '}';
     }

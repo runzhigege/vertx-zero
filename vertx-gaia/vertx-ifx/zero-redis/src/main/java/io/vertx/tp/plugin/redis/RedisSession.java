@@ -1,4 +1,4 @@
-package io.vertx.up.plugin.redis;
+package io.vertx.tp.plugin.redis;
 
 import io.vertx.ext.auth.PRNG;
 import io.vertx.ext.web.sstore.impl.SharedDataSessionImpl;
