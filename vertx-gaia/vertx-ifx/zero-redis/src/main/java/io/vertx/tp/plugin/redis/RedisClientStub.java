@@ -23,6 +23,7 @@ import java.util.stream.Stream;
 
 import static io.vertx.redis.client.Command.*;
 
+@SuppressWarnings("all")
 public class RedisClientStub implements RedisClient {
 
     private final Vertx vertx;
@@ -228,8 +229,11 @@ public class RedisClientStub implements RedisClient {
                 handler.handle(Future.failedFuture(ar.cause()));
             } else {
                 final Response response = ar.result();
+                /*
+                 * Fixed: NullPointerException
+                 */
                 if (Objects.isNull(response)) {
-                    handler.handle(Future.succeededFuture(Buffer.buffer()));
+                    handler.handle(Future.succeededFuture(null));
                 } else {
                     handler.handle(Future.succeededFuture(ar.result().toBuffer()));
                 }

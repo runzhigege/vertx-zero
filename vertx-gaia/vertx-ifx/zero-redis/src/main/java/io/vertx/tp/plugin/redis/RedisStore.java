@@ -6,6 +6,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
+import io.vertx.core.shareddata.LocalMap;
 import io.vertx.ext.auth.PRNG;
 import io.vertx.ext.web.Session;
 import io.vertx.ext.web.sstore.SessionStore;
@@ -22,29 +23,31 @@ import java.util.*;
 public class RedisStore implements SessionStore {
 
     private static final Annal LOGGER = Annal.get(RedisStore.class);
-    /* List Session ids */
-    private final transient List<String> sessionIds = new ArrayList<>();
-    /* Configuration Reference */
-    // private transient Vertx vertx;
+    private static final String MAP_NAME = "vertx-web.sessions";
+    /* Local Map */
+    private final transient List<String> sessionIds = new Vector<>();
     /* Client reference */
     private transient RedisClient client;
     private transient PRNG random;
+    private transient LocalMap<String, Session> localMap;
+
     /* Configuration of additional */
     private transient RedisExtra extra;
 
     @Override
     public SessionStore init(final Vertx vertx, final JsonObject options) {
         /* RedisClient options here */
-        // this.vertx = vertx;
         random = new PRNG(vertx);
+        localMap = vertx.sharedData().getLocalMap(MAP_NAME);
+
         /* Redis options */
         final RedisOptions opts = new RedisOptions(options);
         LOGGER.info(RedisMsg.RD_OPTS,
                 /* Endpoint information for current */
-                opts.getHost() + ":" + String.valueOf(opts.getPort()),
+                opts.getHost() + ":" + opts.getPort(),
                 opts.toJson().encode());
+
         /* Client init, old version */
-        // client = RedisClient.create(vertx, options);
         client = new RedisClientStub(vertx, opts);
 
         /* Extra configuration options */
@@ -60,12 +63,16 @@ public class RedisStore implements SessionStore {
 
     @Override
     public Session createSession(final long timeout) {
-        return create(timeout, DEFAULT_SESSIONID_LENGTH);
+        return new RedisSession(random, timeout, DEFAULT_SESSIONID_LENGTH);
     }
 
     @Override
     public Session createSession(final long timeout, final int length) {
-        return create(timeout, length);
+        return new RedisSession(random, timeout, length);
+    }
+
+    private RedisSession createSession() {
+        return new RedisSession(random, extra.getTimeout(), DEFAULT_SESSIONID_LENGTH);
     }
 
     @Override
@@ -87,84 +94,68 @@ public class RedisStore implements SessionStore {
 
     @Override
     public void size(final Handler<AsyncResult<Integer>> handler) {
+        /*
+         * Session IDs
+         */
         handler.handle(Future.succeededFuture(sessionIds.size()));
     }
 
     @Override
     public void close() {
+        /*
+         * Close Handler
+         */
         client.close(handler -> {
             if (handler.succeeded()) {
-                /*
-                 * When you close this client, the sessionIds should be cleared
-                 */
-                sessionIds.clear();
-
+                // sessionIds.clear();
                 LOGGER.info(RedisMsg.RD_CLOSE);
             }
         });
     }
 
     @Override
-    public void get(final String id, final Handler<AsyncResult<Session>> handler) {
-        LOGGER.info(RedisMsg.RS_MESSAGE, getKey(id), "get");
-        readSession(id, res -> {
-            final Buffer buffer = res.result();
-            final Session session;
-            if (Objects.isNull(buffer)) {
+    public void delete(final String id, final Handler<AsyncResult<Void>> handler) {
+        LOGGER.info(RedisMsg.RS_MESSAGE, id, "delete(String)");
+        client.del(id, res -> {
+            if (res.succeeded()) {
                 /*
-                 * Null data get
-                 * Old Version: Create new session here, but be careful, in this method
-                 * System do not put session into Redis, it's created new
-                 * Session directly and returned to handler
+                 * Synced SessionIds
                  */
-                session = readBuffer();
+                sessionIds.remove(id);
+
+                LOGGER.info(RedisMsg.RD_CLEAR, id);
+                handler.handle(Future.succeededFuture());
             } else {
                 /*
-                 * Data get from buffer
+                 * ERROR throw out
                  */
-                session = readBuffer(buffer);
+                res.cause().printStackTrace();
+                handler.handle(Future.failedFuture(res.cause()));
             }
-            if (Objects.nonNull(session)) {
-                ((RedisSession) session).setPRNG(random);
-            }
-            handler.handle(Future.succeededFuture(session));
         });
     }
 
     @Override
-    public void put(final Session session, final Handler<AsyncResult<Void>> handler) {
-        LOGGER.info(RedisMsg.RS_MESSAGE, getKey(session.id()), "put");
-        /* Before put */
-        readSession(session.id(), res -> {
+    public void get(final String id, final Handler<AsyncResult<Session>> handler) {
+        LOGGER.info(RedisMsg.RS_MESSAGE, id, "get(String)");
+        client.getBinary(id, res -> {
+            /*
+             * Whether get buffer data after read data from redis.
+             * If successful continue to process buffer data
+             */
             if (res.succeeded()) {
-                /* Whether get old session or new */
                 final Buffer buffer = res.result();
                 if (Objects.nonNull(buffer)) {
-                    /* Build old session */
-                    final RedisSession oldSession = (RedisSession) readBuffer(buffer);
-                    final RedisSession newSession = (RedisSession) session;
-
-                    if (oldSession.version() == newSession.version()) {
-                        /*
-                         * Version match, common workflow
-                         */
-                        newSession.incrementVersion();
-                        writeSession(newSession, handler);
-                    } else {
-                        /*
-                         * Version mismatch
-                         */
-                        final WebException error = new _409SessionVersionException(getClass(),
-                                oldSession.version(), newSession.version());
-                        handler.handle(Future.failedFuture(error));
+                    final RedisSession session = createSession();
+                    if (0 < buffer.length()) {
+                        session.readFromBuffer(0, buffer);
                     }
+                    handler.handle(Future.succeededFuture(session));
                 } else {
                     /*
-                     * Data does not existing
+                     * LocalMap of vertx-web.sessions
                      */
-                    final RedisSession newSession = (RedisSession) session;
-                    newSession.incrementVersion();
-                    writeSession(newSession, handler);
+                    handler.handle(Future.succeededFuture(localMap.get(id)));
                 }
             } else {
                 /*
@@ -177,33 +168,60 @@ public class RedisStore implements SessionStore {
     }
 
     @Override
-    public void delete(final String id, final Handler<AsyncResult<Void>> handler) {
-        LOGGER.info(RedisMsg.RS_MESSAGE, getKey(id), "delete");
-        client.del(getKey(id), res -> {
-            if (res.succeeded()) {
-                /*
-                 * Synced sessionIds
-                 */
-                sessionIds.remove(id);
-                handler.handle(Future.succeededFuture());
-            } else {
-                /*
-                 * ERROR throw out
-                 */
-                res.cause().printStackTrace();
-                handler.handle(Future.failedFuture(res.cause()));
-            }
-        });
-    }
-
-    private void readSession(final String id, final Handler<AsyncResult<Buffer>> handler) {
-        /*
-         * Key -> Read session
-         */
-        client.getBinary(getKey(id), res -> {
+    @SuppressWarnings("all")
+    public void put(final Session session, final Handler<AsyncResult<Void>> handler) {
+        final String id = session.id();
+        LOGGER.info(RedisMsg.RS_MESSAGE, id, "put(Session)");
+        client.getBinary(id, res -> {
             if (res.succeeded()) {
                 final Buffer buffer = res.result();
-                handler.handle(Future.succeededFuture(buffer));
+                final RedisSession finalSession;
+                final RedisSession oldSession = createSession();
+                if (Objects.isNull(buffer)) {
+                    /*
+                     * Data null
+                     */
+                    RedisSession sessionImpl = (RedisSession) session;
+                    finalSession = sessionImpl;
+                } else {
+                    /*
+                     * Data Existing
+                     */
+                    final RedisSession newSession = (RedisSession) session;
+                    oldSession.readFromBuffer(0, buffer);
+                    /*
+                     * Version matching here for comparing
+                     */
+                    if (oldSession.version() != newSession.version()) {
+                        final WebException error = new _409SessionVersionException(getClass(),
+                                oldSession.version(), newSession.version());
+                        handler.handle(Future.failedFuture(error));
+                        return;
+                    }
+                    finalSession = newSession;
+                }
+                finalSession.incrementVersion();
+                /*
+                 * Write session data
+                 */
+                writeSession(session, res2 -> {
+                    if (res2.succeeded()) {
+                        if (Objects.nonNull(res2.result())) {
+                            final String added = res2.result();
+                            if (!sessionIds.contains(added)) {
+                                sessionIds.add(res2.result());
+                            }
+                        }
+                        LOGGER.info(RedisMsg.RS_AFTER, finalSession.id(),
+                                null == oldSession ? null : oldSession.id());
+                    } else {
+                        /*
+                         * ERROR throw out
+                         */
+                        res2.cause().printStackTrace();
+                        handler.handle(Future.failedFuture(res.cause()));
+                    }
+                });
             } else {
                 /*
                  * ERROR throw out
@@ -214,68 +232,29 @@ public class RedisStore implements SessionStore {
         });
     }
 
-    private void writeSession(final Session session, final Handler<AsyncResult<Void>> handler) {
+    private void writeSession(final Session session, final Handler<AsyncResult<String>> handler) {
         /* Write buffer */
-        final Buffer buffer = writeBuffer(session);
+        final Buffer buffer = Buffer.buffer();
+        final RedisSession sessionImpl = (RedisSession) session;
+        sessionImpl.writeToBuffer(buffer);
 
         /* Synced timeout here */
         final SetOptions options = new SetOptions().setPX(session.timeout());
-        /* Data writing here */
-        final String key = getKey(session.id());
+        final String key = sessionImpl.id();
         client.setBinaryWithOptions(key, buffer, options, res -> {
             if (res.succeeded()) {
                 LOGGER.info(RedisMsg.RD_KEYS, Ut.fromJoin(session.data().keySet()));
                 /*
-                 * Add data if this id does not exist.
+                 * Add data if this id does not exist
                  */
-                if (!sessionIds.contains(key)) {
-                    sessionIds.add(key);
-                }
-                handler.handle(Future.succeededFuture());
+                handler.handle(Future.succeededFuture(key));
             } else {
                 /*
                  * ERROR throw out
                  */
+                res.cause().printStackTrace();
                 handler.handle(Future.failedFuture(res.cause()));
             }
         });
-    }
-
-    private Session readBuffer() {
-        return readBuffer(Buffer.buffer());
-    }
-
-    private Session readBuffer(final Buffer buffer) {
-        final Session session = createSession(extra.getTimeout());
-        /* Read data from buffer */
-        if (0 < buffer.length()) {
-            ((RedisSession) session).readFromBuffer(0, buffer);
-        }
-        return session;
-    }
-
-    private Buffer writeBuffer(final Session session) {
-        /* Filling data with Buffer */
-        final Buffer buffer = Buffer.buffer();
-        final RedisSession sessionImpl = (RedisSession) session;
-        /* Session serialized into buffer */
-        sessionImpl.writeToBuffer(buffer);
-        return buffer;
-    }
-
-    private RedisSession create(final long timeout, final int length) {
-        return new RedisSession(random, timeout, length);
-    }
-
-    /*
-     * Normalized session key for zero framework and formatted to
-     *   vertx-web.zero.session.{uuid}
-     */
-    private String getKey(final String sessionId) {
-        if (sessionId.startsWith("vertx-web.zero.session.")) {
-            return sessionId;
-        } else {
-            return "vertx-web.zero.session." + sessionId;
-        }
     }
 }

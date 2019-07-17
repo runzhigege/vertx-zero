@@ -7,4 +7,5 @@ interface RedisMsg {
     String RD_KEYS = "[ ZERO ] ( Redis ) Set key: {0}";
     String RD_OPTS = "[ ZERO ] ( Redis ) Connect to Endpoint ( {0} ) Options read: {1}";
     String RS_MESSAGE = "[ ZERO ] ( Redis ) Call {1} method: id = {0}";
+    String RS_AFTER = "[ ZERO ] ( Redis ) Session New = {0} / Old = {1}";
 }

@@ -30,7 +30,8 @@ public class Assembler {
     }
 
     public static List<ProfileRole> connect(final List<ProfileRole> profiles, final ProfileGroup original) {
-        final Set<ProfileRole> originalSet = new HashSet<>(original.getRoles());
+        final List<ProfileRole> eagerRoles = Objects.isNull(original) ? new ArrayList<>() : original.getRoles();
+        final Set<ProfileRole> originalSet = new HashSet<>(eagerRoles);
         originalSet.addAll(profiles);
         return new ArrayList<>(originalSet);
     }

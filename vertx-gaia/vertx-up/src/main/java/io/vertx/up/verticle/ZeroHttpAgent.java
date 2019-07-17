@@ -10,15 +10,15 @@ import io.vertx.ext.web.Router;
 import io.vertx.tp.plugin.etcd.center.EtcdData;
 import io.vertx.up.annotations.Agent;
 import io.vertx.up.eon.ID;
+import io.vertx.up.eon.Values;
 import io.vertx.up.eon.em.Etat;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
+import io.vertx.up.runtime.ZeroGrid;
 import io.vertx.up.uca.micro.center.ZeroRegistry;
 import io.vertx.up.uca.rs.Axis;
 import io.vertx.up.uca.rs.router.*;
-import io.vertx.up.eon.Values;
 import io.vertx.up.util.Ut;
-import io.vertx.up.fn.Fn;
-import io.vertx.up.runtime.ZeroGrid;
 
 import java.text.MessageFormat;
 import java.util.*;
@@ -42,7 +42,7 @@ public class ZeroHttpAgent extends AbstractVerticle {
     public void start() {
         /* 1.Call router hub to mount commont **/
         final Axis<Router> routerAxiser = Fn.poolThread(Pool.ROUTERS,
-                RouterAxis::new);
+                () -> new RouterAxis(vertx));
 
         /* 2.Call route hub to mount defined **/
         final Axis<Router> axiser = Fn.poolThread(Pool.EVENTS,
@@ -52,7 +52,7 @@ public class ZeroHttpAgent extends AbstractVerticle {
 
         /* 3.Call route hub to mount walls **/
         final Axis<Router> wallAxiser = Fn.poolThread(Pool.WALLS,
-                () -> Ut.instance(WallAxis.class, this.vertx));
+                () -> Ut.instance(WallAxis.class, vertx));
 
         /* 4.Call route hub to mount filters **/
         final Axis<Router> filterAxiser = Fn.poolThread(Pool.FILTERS,
@@ -61,10 +61,10 @@ public class ZeroHttpAgent extends AbstractVerticle {
         /* 5.Get the default HttpServer Options **/
         ZeroAtomic.HTTP_OPTS.forEach((port, option) -> {
             /* 5.1.Single server processing **/
-            final HttpServer server = this.vertx.createHttpServer(option);
+            final HttpServer server = vertx.createHttpServer(option);
 
             /* 5.2. Build router with current option **/
-            final Router router = Router.router(this.vertx);
+            final Router router = Router.router(vertx);
 
             /* 5.3. Mount data to router **/
             // Router
@@ -80,7 +80,7 @@ public class ZeroHttpAgent extends AbstractVerticle {
                  * Call second method to inject vertx reference.
                  */
                 // This step is required for bind vertx instance
-                ((DynamicAxis) dynamic).bind(this.vertx).mount(router);
+                ((DynamicAxis) dynamic).bind(vertx).mount(router);
             }
             // Filter
             filterAxiser.mount(router);
@@ -89,7 +89,7 @@ public class ZeroHttpAgent extends AbstractVerticle {
             server.requestHandler(router).listen();
             {
                 // 5.5. Log output
-                this.registryServer(option, router);
+                registryServer(option, router);
             }
         });
     }
@@ -100,7 +100,7 @@ public class ZeroHttpAgent extends AbstractVerticle {
             // Enabled micro mode.
             if (EtcdData.enabled()) {
                 // Template call registry to modify the status of current service.
-                final ZeroRegistry registry = ZeroRegistry.create(this.getClass());
+                final ZeroRegistry registry = ZeroRegistry.create(getClass());
                 registry.registryHttp(SERVICES.get(port), config, Etat.STOPPED);
             }
         });
@@ -113,7 +113,7 @@ public class ZeroHttpAgent extends AbstractVerticle {
         if (Values.ZERO == out.getAndIncrement()) {
             // 1. Build logs for current server;
             final String portLiteral = String.valueOf(port);
-            LOGGER.info(Info.HTTP_SERVERS, this.getClass().getSimpleName(), this.deploymentID(),
+            LOGGER.info(Info.HTTP_SERVERS, getClass().getSimpleName(), deploymentID(),
                     portLiteral);
             final List<Route> routes = router.getRoutes();
             final Map<String, Set<Route>> routeMap = new TreeMap<>();
@@ -135,16 +135,16 @@ public class ZeroHttpAgent extends AbstractVerticle {
                 }
             }
             routeMap.forEach((path, routeSet) -> routeSet.forEach(route ->
-                    LOGGER.info(Info.MAPPED_ROUTE, this.getClass().getSimpleName(), path,
+                    LOGGER.info(Info.MAPPED_ROUTE, getClass().getSimpleName(), path,
                             route.toString())));
             // 3. Endpoint Publish
             final String address =
                     MessageFormat.format("http://{0}:{1}/",
                             Ut.netIPv4(), portLiteral);
-            LOGGER.info(Info.HTTP_LISTEN, this.getClass().getSimpleName(), address);
+            LOGGER.info(Info.HTTP_LISTEN, getClass().getSimpleName(), address);
             // 4. Send configuration to Event bus
             final String name = SERVICES.get(port);
-            this.startRegistry(name, options, tree);
+            startRegistry(name, options, tree);
         }
     }
 
@@ -153,11 +153,11 @@ public class ZeroHttpAgent extends AbstractVerticle {
                                final Set<String> tree) {
         // Enabled micro mode.
         if (EtcdData.enabled()) {
-            final JsonObject data = this.getMessage(name, options, tree);
+            final JsonObject data = getMessage(name, options, tree);
             // Send Data to Event Bus
-            final EventBus bus = this.vertx.eventBus();
+            final EventBus bus = vertx.eventBus();
             final String address = ID.Addr.REGISTRY_START;
-            LOGGER.info(Info.MICRO_REGISTRY_SEND, this.getClass().getSimpleName(), name, address);
+            LOGGER.info(Info.MICRO_REGISTRY_SEND, getClass().getSimpleName(), name, address);
             bus.publish(address, data);
         }
     }
