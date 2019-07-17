@@ -22,7 +22,7 @@ zero:
 ### 1.2. vertx-inject.yml
 
 ```yaml
-redis: io.vertx.up.plugin.redis.RedisInfix
+redis: io.vertx.tp.plugin.redis.RedisInfix
 ```
 
 ### 1.3. vertx-redis.yml

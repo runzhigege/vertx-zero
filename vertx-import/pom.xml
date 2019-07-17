@@ -133,6 +133,11 @@
                 <artifactId>zero-feign</artifactId>
                 <version>${zero.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.vertxup</groupId>
+                <artifactId>zero-redis</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>

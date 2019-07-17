@@ -5,6 +5,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.vertx.ext.web.handler.SessionHandler;
+import io.vertx.up.util.Ut;
 
 /*
  * Session Client in zero system, it could be enabled by zero
@@ -17,7 +18,7 @@ public interface SessionClient {
      * Create local session store bind data
      */
     static SessionClient createShared(final Vertx vertx, final JsonObject config) {
-        return SessionClientImpl.create(vertx, config);
+        return SessionClientImpl.create(vertx, Ut.isNil(config) ? new JsonObject() : config);
     }
 
     static SessionClient createShared(final Vertx vertx) {
