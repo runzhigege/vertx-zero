@@ -115,7 +115,7 @@ public class RedisStore implements SessionStore {
 
     @Override
     public void delete(final String id, final Handler<AsyncResult<Void>> handler) {
-        LOGGER.info(RedisMsg.RS_MESSAGE, id, "delete(String)");
+        LOGGER.debug(RedisMsg.RS_MESSAGE, id, "delete(String)");
         client.del(id, res -> {
             if (res.succeeded()) {
                 /*
@@ -137,7 +137,7 @@ public class RedisStore implements SessionStore {
 
     @Override
     public void get(final String id, final Handler<AsyncResult<Session>> handler) {
-        LOGGER.info(RedisMsg.RS_MESSAGE, id, "get(String)");
+        LOGGER.debug(RedisMsg.RS_MESSAGE, id, "get(String)");
         client.getBinary(id, res -> {
             /*
              * Whether get buffer data after read data from redis.
@@ -171,7 +171,7 @@ public class RedisStore implements SessionStore {
     @SuppressWarnings("all")
     public void put(final Session session, final Handler<AsyncResult<Void>> handler) {
         final String id = session.id();
-        LOGGER.info(RedisMsg.RS_MESSAGE, id, "put(Session)");
+        LOGGER.debug(RedisMsg.RS_MESSAGE, id, "put(Session)");
         client.getBinary(id, res -> {
             if (res.succeeded()) {
                 final Buffer buffer = res.result();
