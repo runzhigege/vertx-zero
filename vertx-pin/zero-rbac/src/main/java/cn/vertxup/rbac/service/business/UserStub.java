@@ -29,4 +29,9 @@ public interface UserStub {
      * userKey -> Relation to Group
      */
     Future<JsonArray> fetchGroupIds(String userKey);
+
+    /**
+     *
+     */
+    Future<JsonObject> fetchEmployee(String userId);
 }
