@@ -8,6 +8,8 @@ public interface AuthMsg {
     String RELATION_USER_ROLE = "Fetch relations ( User - Role ) by User key: {0}";
     String RELATION_GROUP = "Fetch relations ( User - Group ) by User key: {0}";
     String RELATION_GROUP_ROLE = "Fetch relation ( Group - Role ) by Group key: {0}, Mode: {1}";
+    String EMPLOYEE_BY_USER = "Fetch employee information by id = {0}";
+    String EMPLOYEE_EMPTY = "Employee empty workflow executing";
 
     String LOGIN_SUCCESS = "[ Ακριβώς ] User ( username = {0} ) login successfully.";
     String LOGIN_USER = "[ Ακριβώς ] username = {0} does not exist.";
@@ -31,8 +33,6 @@ public interface AuthMsg {
     String CREDIT_AUTHORIZED = "5. Accredit authorized ( permission = {0} ).";
     String CREDIT_BOUND = "6. Accredit bound ( bound = {0} and key = {1} )";
     String CREDIT_SUCCESS = "7. Accredit authorized cache ( key = {0} )";
-
-    String RENEWAL_SUCCESS = "Accredit renewal cache ( key = {0} )";
 
     String REGION_BEFORE = "--> DataRegion Before: {0}";
     String REGION_AFTER = "<-- DataRegion After: {0}";
