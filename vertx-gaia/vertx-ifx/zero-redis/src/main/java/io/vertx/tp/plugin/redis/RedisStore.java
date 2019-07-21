@@ -24,11 +24,11 @@ public class RedisStore implements SessionStore {
 
     private static final Annal LOGGER = Annal.get(RedisStore.class);
     private static final String MAP_NAME = "vertx-web.sessions";
+    private static transient PRNG random;
     /* Local Map */
     private final transient List<String> sessionIds = new Vector<>();
     /* Client reference */
     private transient RedisClient client;
-    private transient PRNG random;
     private transient LocalMap<String, Session> localMap;
 
     /* Configuration of additional */
@@ -211,6 +211,10 @@ public class RedisStore implements SessionStore {
                             if (!sessionIds.contains(added)) {
                                 sessionIds.add(res2.result());
                             }
+                            /*
+                             * Append data into localMap to cache
+                             */
+                            localMap.put(added, session);
                         }
                         LOGGER.info(RedisMsg.RS_AFTER, finalSession.id(),
                                 null == oldSession ? null : oldSession.id());

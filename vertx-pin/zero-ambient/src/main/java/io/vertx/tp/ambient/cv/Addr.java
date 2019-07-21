@@ -12,7 +12,9 @@ public interface Addr {
 
     interface App {
 
-        String BY_NAME = Prefix._EVENT + "X-APP";
+        String BY_NAME = Prefix._EVENT + "X-APP-BY-NAME";
+
+        String BY_ID = Prefix._EVENT + "X-APP-BY-ID";
     }
 
     interface Menu {

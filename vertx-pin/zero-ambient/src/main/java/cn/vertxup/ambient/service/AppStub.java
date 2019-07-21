@@ -11,6 +11,11 @@ public interface AppStub {
     Future<JsonObject> fetchByName(String name);
 
     /*
+     * Get application by: appId = {xxx}
+     */
+    Future<JsonObject> fetchById(String appId);
+
+    /*
      * Get menus by : appId = {xxx}
      */
     Future<JsonArray> fetchMenus(String appId);
