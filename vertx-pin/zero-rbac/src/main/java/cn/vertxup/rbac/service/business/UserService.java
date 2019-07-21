@@ -70,6 +70,8 @@ public class UserService implements UserStub {
                             .compose(employee -> Uson
                                     .create(Ux.toJson(user).copy())
                                     .append(employee)
+                                    /* Model Key -> Employee Id */
+                                    .convert("modelKey", "employeeId")
                                     .toFuture()
                             );
                 } else {
