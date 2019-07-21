@@ -24,12 +24,12 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class EEmployee implements IEEmployee {
 
-    private static final long serialVersionUID = -757411378;
+    private static final long serialVersionUID = 919581888;
 
     private String        key;
     private String        companyId;
     private String        deptId;
-    private String        identifyId;
+    private String        identityId;
     private String        workNumber;
     private String        workTitle;
     private String        workEmail;
@@ -51,7 +51,7 @@ public class EEmployee implements IEEmployee {
         this.key = value.key;
         this.companyId = value.companyId;
         this.deptId = value.deptId;
-        this.identifyId = value.identifyId;
+        this.identityId = value.identityId;
         this.workNumber = value.workNumber;
         this.workTitle = value.workTitle;
         this.workEmail = value.workEmail;
@@ -72,7 +72,7 @@ public class EEmployee implements IEEmployee {
         String        key,
         String        companyId,
         String        deptId,
-        String        identifyId,
+        String        identityId,
         String        workNumber,
         String        workTitle,
         String        workEmail,
@@ -91,7 +91,7 @@ public class EEmployee implements IEEmployee {
         this.key = key;
         this.companyId = companyId;
         this.deptId = deptId;
-        this.identifyId = identifyId;
+        this.identityId = identityId;
         this.workNumber = workNumber;
         this.workTitle = workTitle;
         this.workEmail = workEmail;
@@ -142,13 +142,13 @@ public class EEmployee implements IEEmployee {
     }
 
     @Override
-    public String getIdentifyId() {
-        return this.identifyId;
+    public String getIdentityId() {
+        return this.identityId;
     }
 
     @Override
-    public EEmployee setIdentifyId(String identifyId) {
-        this.identifyId = identifyId;
+    public EEmployee setIdentityId(String identityId) {
+        this.identityId = identityId;
         return this;
     }
 
@@ -313,7 +313,7 @@ public class EEmployee implements IEEmployee {
         sb.append(key);
         sb.append(", ").append(companyId);
         sb.append(", ").append(deptId);
-        sb.append(", ").append(identifyId);
+        sb.append(", ").append(identityId);
         sb.append(", ").append(workNumber);
         sb.append(", ").append(workTitle);
         sb.append(", ").append(workEmail);
@@ -345,7 +345,7 @@ public class EEmployee implements IEEmployee {
         setKey(from.getKey());
         setCompanyId(from.getCompanyId());
         setDeptId(from.getDeptId());
-        setIdentifyId(from.getIdentifyId());
+        setIdentityId(from.getIdentityId());
         setWorkNumber(from.getWorkNumber());
         setWorkTitle(from.getWorkTitle());
         setWorkEmail(from.getWorkEmail());
