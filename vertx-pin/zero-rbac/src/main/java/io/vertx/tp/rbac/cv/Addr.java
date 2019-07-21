@@ -18,4 +18,8 @@ public interface Addr {
 
         String TOKEN = Prefix._EVENT + "O-TOKEN";
     }
+
+    interface User {
+        String INFORMATION = Prefix._EVENT + "X-INFORMATION";
+    }
 }
