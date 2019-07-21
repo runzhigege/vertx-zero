@@ -15,6 +15,7 @@ import io.vertx.up.commune.envelop.Rib;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception.web._500InternalServerException;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.unity.Ux;
 import io.vertx.zero.exception.IndexExceedException;
 
 import java.io.Serializable;
@@ -223,6 +224,15 @@ public class Envelop implements Serializable {
     /* Get user data from User of Context */
     public String identifier(final String field) {
         return assist.principal(field);
+    }
+
+    /*
+     * Get jwt information here
+     */
+    public String jwt(final String field) {
+        final String jwt = assist.principal("jwt");
+        final JsonObject user = Ux.Jwt.extract(jwt);
+        return user.getString(field);
     }
 
     public User user() {

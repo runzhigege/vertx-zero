@@ -84,10 +84,10 @@ public class EEmployeeDao extends DAOImpl<EEmployeeRecord, cn.vertxup.erp.domain
     }
 
     /**
-     * Fetch records that have <code>IDENTIFY_ID IN (values)</code>
+     * Fetch records that have <code>IDENTITY_ID IN (values)</code>
      */
-    public List<cn.vertxup.erp.domain.tables.pojos.EEmployee> fetchByIdentifyId(String... values) {
-        return fetch(EEmployee.E_EMPLOYEE.IDENTIFY_ID, values);
+    public List<cn.vertxup.erp.domain.tables.pojos.EEmployee> fetchByIdentityId(String... values) {
+        return fetch(EEmployee.E_EMPLOYEE.IDENTITY_ID, values);
     }
 
     /**
@@ -217,10 +217,10 @@ public class EEmployeeDao extends DAOImpl<EEmployeeRecord, cn.vertxup.erp.domain
     }
 
     /**
-     * Fetch records that have <code>IDENTIFY_ID IN (values)</code> asynchronously
+     * Fetch records that have <code>IDENTITY_ID IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EEmployee>> fetchByIdentifyIdAsync(List<String> values) {
-        return fetchAsync(EEmployee.E_EMPLOYEE.IDENTIFY_ID,values);
+    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EEmployee>> fetchByIdentityIdAsync(List<String> values) {
+        return fetchAsync(EEmployee.E_EMPLOYEE.IDENTITY_ID,values);
     }
 
     /**

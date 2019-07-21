@@ -54,14 +54,14 @@ public interface IEEmployee extends Serializable {
     public String getDeptId();
 
     /**
-     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.IDENTIFY_ID</code>. 「identifyId」- 身份关联ID
+     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.IDENTITY_ID</code>. 「identityId」- 身份关联ID
      */
-    public IEEmployee setIdentifyId(String value);
+    public IEEmployee setIdentityId(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.IDENTIFY_ID</code>. 「identifyId」- 身份关联ID
+     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.IDENTITY_ID</code>. 「identityId」- 身份关联ID
      */
-    public String getIdentifyId();
+    public String getIdentityId();
 
     /**
      * Setter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_NUMBER</code>. 「workNumber」- 工号
@@ -221,7 +221,7 @@ public interface IEEmployee extends Serializable {
         setKey(json.getString("KEY"));
         setCompanyId(json.getString("COMPANY_ID"));
         setDeptId(json.getString("DEPT_ID"));
-        setIdentifyId(json.getString("IDENTIFY_ID"));
+        setIdentityId(json.getString("IDENTITY_ID"));
         setWorkNumber(json.getString("WORK_NUMBER"));
         setWorkTitle(json.getString("WORK_TITLE"));
         setWorkEmail(json.getString("WORK_EMAIL"));
@@ -245,7 +245,7 @@ public interface IEEmployee extends Serializable {
         json.put("KEY",getKey());
         json.put("COMPANY_ID",getCompanyId());
         json.put("DEPT_ID",getDeptId());
-        json.put("IDENTIFY_ID",getIdentifyId());
+        json.put("IDENTITY_ID",getIdentityId());
         json.put("WORK_NUMBER",getWorkNumber());
         json.put("WORK_TITLE",getWorkTitle());
         json.put("WORK_EMAIL",getWorkEmail());
