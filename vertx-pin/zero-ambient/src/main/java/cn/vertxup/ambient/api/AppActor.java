@@ -21,6 +21,11 @@ public class AppActor {
         return appStub.fetchByName(name);
     }
 
+    @Address(Addr.App.BY_ID)
+    public Future<JsonObject> byId(final String appId) {
+        return appStub.fetchById(appId);
+    }
+
     @Address(Addr.Menu.BY_APP_ID)
     public Future<JsonArray> fetchMenus(final String appId) {
         return appStub.fetchMenus(appId);
