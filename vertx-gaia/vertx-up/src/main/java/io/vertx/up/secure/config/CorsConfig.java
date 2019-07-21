@@ -8,6 +8,7 @@ import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.eon.ID;
 import io.vertx.up.uca.yaml.Node;
 import io.vertx.up.uca.yaml.ZeroUniform;
 import io.vertx.up.util.Ut;
@@ -83,7 +84,11 @@ public class CorsConfig implements Serializable {
                     .add(HttpHeaders.CONTENT_DISPOSITION)
                     .add(HttpHeaders.CONTENT_ENCODING)
                     .add(HttpHeaders.CONTENT_LENGTH)
-                    .add(HttpHeaders.CONTENT_TYPE);
+                    .add(HttpHeaders.CONTENT_TYPE)
+                    /* User defined header */
+                    .add(ID.Header.X_APP_ID)
+                    .add(ID.Header.X_APP_KEY)
+                    .add(ID.Header.X_SIGMA);
         } else {
             return headers;
         }
