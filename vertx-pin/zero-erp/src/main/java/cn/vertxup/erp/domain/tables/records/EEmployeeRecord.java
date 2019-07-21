@@ -31,7 +31,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implements Record18<String, String, String, String, String, String, String, String, String, String, String, Boolean, String, String, LocalDateTime, String, LocalDateTime, String>, IEEmployee {
 
-    private static final long serialVersionUID = -1530322147;
+    private static final long serialVersionUID = -426765019;
 
     /**
      * Setter for <code>DB_ETERNAL.E_EMPLOYEE.KEY</code>. 「key」- 员工主键
@@ -85,19 +85,19 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.IDENTIFY_ID</code>. 「identifyId」- 身份关联ID
+     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.IDENTITY_ID</code>. 「identityId」- 身份关联ID
      */
     @Override
-    public EEmployeeRecord setIdentifyId(String value) {
+    public EEmployeeRecord setIdentityId(String value) {
         set(3, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.IDENTIFY_ID</code>. 「identifyId」- 身份关联ID
+     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.IDENTITY_ID</code>. 「identityId」- 身份关联ID
      */
     @Override
-    public String getIdentifyId() {
+    public String getIdentityId() {
         return (String) get(3);
     }
 
@@ -400,7 +400,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      */
     @Override
     public Field<String> field4() {
-        return EEmployee.E_EMPLOYEE.IDENTIFY_ID;
+        return EEmployee.E_EMPLOYEE.IDENTITY_ID;
     }
 
     /**
@@ -544,7 +544,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      */
     @Override
     public String component4() {
-        return getIdentifyId();
+        return getIdentityId();
     }
 
     /**
@@ -688,7 +688,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      */
     @Override
     public String value4() {
-        return getIdentifyId();
+        return getIdentityId();
     }
 
     /**
@@ -835,7 +835,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
      */
     @Override
     public EEmployeeRecord value4(String value) {
-        setIdentifyId(value);
+        setIdentityId(value);
         return this;
     }
 
@@ -1003,7 +1003,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
         setKey(from.getKey());
         setCompanyId(from.getCompanyId());
         setDeptId(from.getDeptId());
-        setIdentifyId(from.getIdentifyId());
+        setIdentityId(from.getIdentityId());
         setWorkNumber(from.getWorkNumber());
         setWorkTitle(from.getWorkTitle());
         setWorkEmail(from.getWorkEmail());
@@ -1043,13 +1043,13 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
     /**
      * Create a detached, initialised EEmployeeRecord
      */
-    public EEmployeeRecord(String key, String companyId, String deptId, String identifyId, String workNumber, String workTitle, String workEmail, String workLocation, String workPhone, String type, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public EEmployeeRecord(String key, String companyId, String deptId, String identityId, String workNumber, String workTitle, String workEmail, String workLocation, String workPhone, String type, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(EEmployee.E_EMPLOYEE);
 
         set(0, key);
         set(1, companyId);
         set(2, deptId);
-        set(3, identifyId);
+        set(3, identityId);
         set(4, workNumber);
         set(5, workTitle);
         set(6, workEmail);
