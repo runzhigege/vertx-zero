@@ -29,6 +29,17 @@ public class AppService implements AppStub {
     }
 
     @Override
+    public Future<JsonObject> fetchById(final String appId) {
+        return Ux.Jooq.on(XAppDao.class)
+                /* Fetch By Id */
+                .<XApp>findByIdAsync(appId)
+                /* Convert to Json */
+                .compose(Ux::fnJObject)
+                /* Image field: logo */
+                .compose(Ke.image(KeField.LOGO));
+    }
+
+    @Override
     public Future<JsonArray> fetchMenus(final String appId) {
         return Ux.Jooq.on(XMenuDao.class)
                 /* Fetch by appId */

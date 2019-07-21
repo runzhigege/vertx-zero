@@ -25,4 +25,12 @@ public interface AppAgent {
     @GET
     @Address(Addr.Menu.BY_APP_ID)
     JsonObject fetchMenus(@HeaderParam(ID.Header.X_APP_ID) String appId);
+
+    /*
+     * Get Application Information by Id ( Logged required )
+     */
+    @Path("/api/app")
+    @GET
+    @Address(Addr.App.BY_ID)
+    JsonObject byId(@HeaderParam(ID.Header.X_APP_ID) String appId);
 }

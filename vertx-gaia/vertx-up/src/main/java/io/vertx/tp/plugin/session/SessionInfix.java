@@ -6,6 +6,7 @@ import io.vertx.up.eon.Plugins;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.plugin.Infix;
 
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -19,10 +20,7 @@ public class SessionInfix implements Infix {
 
     private static void initInternal(final Vertx vertx,
                                      final String name) {
-        Fn.pool(CLIENTS, name,
-                () -> Infix.initTp(Plugins.Infix.SESSION,
-                        (config) -> SessionClient.createShared(vertx, config),
-                        SessionInfix.class));
+        getOrCreate(vertx, name);
     }
 
     public static void init(final Vertx vertx) {
@@ -34,7 +32,25 @@ public class SessionInfix implements Infix {
     }
 
     public static SessionClient getOrCreate(final Vertx vertx) {
-        return Fn.pool(CLIENTS, NAME, () -> SessionClient.createShared(vertx));
+        return getOrCreate(vertx, NAME);
+    }
+
+    private static SessionClient getOrCreate(final Vertx vertx, final String name) {
+        final SessionClient client = CLIENTS.get(name);
+        if (Objects.isNull(client)) {
+            /*
+             * Null will create new
+             */
+            return Fn.pool(CLIENTS, name,
+                    () -> Infix.initTp(Plugins.Infix.SESSION,
+                            (config) -> SessionClient.createShared(vertx, config),
+                            SessionInfix.class));
+        } else {
+            /*
+             * Not null, it will get previous reference
+             */
+            return client;
+        }
     }
 
     @Override
