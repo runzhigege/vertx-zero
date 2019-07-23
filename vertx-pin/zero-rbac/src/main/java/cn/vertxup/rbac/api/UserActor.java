@@ -7,6 +7,7 @@ import io.vertx.tp.rbac.cv.Addr;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.commune.Envelop;
+import io.vertx.up.unity.Ux;
 
 import javax.inject.Inject;
 
@@ -26,5 +27,15 @@ public class UserActor {
          * Async for user information
          */
         return stub.fetchEmployee(userId);
+    }
+
+    @Address(Addr.User.PASSWORD)
+    public Future<JsonObject> password(final Envelop envelop) {
+        /*
+         * Async for user password / modification
+         */
+        final String userId = envelop.jwt("user");
+        final JsonObject params = Ux.getJson(envelop);
+        return stub.updateUser(userId, params);
     }
 }
