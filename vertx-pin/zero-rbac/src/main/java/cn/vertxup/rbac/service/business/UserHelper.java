@@ -19,16 +19,30 @@ class UserHelper {
     private static final Annal LOGGER = Annal.get(UserHelper.class);
 
     static Future<JsonObject> fetchEmployee(final SUser user) {
-        /* Apply user directly */
-        final Function<SUser, Future<JsonObject>> applyFn
-                = userInfo -> Ux.toFuture(userInfo).compose(Ux::fnJObject);
+        /* User model key */
+        return applyTunnel(user, executor ->
+                /* Read employee information */
+                executor.fetchAsync(user.getModelKey()));
+    }
 
+    static Future<JsonObject> updateEmployee(final SUser user, final JsonObject params) {
+        /* User model key */
+        return applyTunnel(user, executor ->
+                /* Update employee information */
+                executor.updateAsync(params.getString("employeeId"), params));
+    }
+
+    private static Future<JsonObject> applyUser(final SUser user) {
+        return Ux.toFuture(user).compose(Ux::fnJObject);
+    }
+
+    private static Future<JsonObject> applyTunnel(final SUser user, final Function<EcUser, Future<JsonObject>> fnTunnel) {
         if (Objects.nonNull(user)) {
             if (Objects.nonNull(user.getModelKey())) {
                 final EcUser executor = Pocket.lookup(EcUser.class);
                 if (Objects.nonNull(executor)) {
                     Sc.infoAuth(LOGGER, AuthMsg.EMPLOYEE_BY_USER, user.getModelKey());
-                    return executor.fetchAsync(user.getModelKey())
+                    return fnTunnel.apply(executor)
                             /* Employee information */
                             .compose(employee -> Objects.isNull(employee) ?
                                     Ux.toFuture(new JsonObject()) :
@@ -43,11 +57,11 @@ class UserHelper {
                             );
                 } else {
                     Sc.infoAuth(LOGGER, AuthMsg.EMPLOYEE_EMPTY + " Executor");
-                    return applyFn.apply(user);
+                    return applyUser(user);
                 }
             } else {
                 Sc.infoAuth(LOGGER, AuthMsg.EMPLOYEE_EMPTY + " Model Key");
-                return applyFn.apply(user);
+                return applyUser(user);
             }
         } else {
             Sc.infoAuth(LOGGER, AuthMsg.EMPLOYEE_EMPTY + " Null");
