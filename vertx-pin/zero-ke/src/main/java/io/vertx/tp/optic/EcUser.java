@@ -11,4 +11,9 @@ public interface EcUser {
      * Read data by `id`
      */
     Future<JsonObject> fetchAsync(String id);
+
+    /*
+     * Update data by `id`
+     */
+    Future<JsonObject> updateAsync(String id, JsonObject params);
 }

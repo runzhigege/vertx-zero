@@ -54,4 +54,13 @@ public class UserService implements UserStub {
                 .saveAsync(userId, user)
                 .compose(Ux::fnJObject);
     }
+
+    @Override
+    public Future<JsonObject> updateEmployee(final String userId, final JsonObject params) {
+        final SUser user = Ux.fromJson(params, SUser.class);
+        user.setKey(userId);
+        return Ux.Jooq.on(SUserDao.class)
+                .saveAsync(userId, user)
+                .compose(userInfo -> UserHelper.updateEmployee(userInfo, params));
+    }
 }

@@ -30,4 +30,13 @@ public interface UserAgent {
     @Path("user/password")
     @Address(Addr.User.PASSWORD)
     JsonObject password(@BodyParam JsonObject params);
+
+    /*
+     * /api/user/profile
+     * Request: Update user information
+     */
+    @POST
+    @Path("user/profile")
+    @Address(Addr.User.PROFILE)
+    JsonObject profile(@BodyParam JsonObject params);
 }
