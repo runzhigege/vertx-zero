@@ -38,4 +38,11 @@ public class UserActor {
         final JsonObject params = Ux.getJson(envelop);
         return stub.updateUser(userId, params);
     }
+
+    @Address(Addr.User.PROFILE)
+    public Future<JsonObject> profile(final Envelop envelop) {
+        final String userId = envelop.jwt("user");
+        final JsonObject params = Ux.getJson(envelop);
+        return stub.updateEmployee(userId, params);
+    }
 }

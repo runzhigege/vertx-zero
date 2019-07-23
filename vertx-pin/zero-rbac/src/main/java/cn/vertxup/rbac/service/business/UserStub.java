@@ -39,4 +39,9 @@ public interface UserStub {
      * Update user information
      */
     Future<JsonObject> updateUser(String userId, JsonObject params);
+
+    /**
+     * Update employee information
+     */
+    Future<JsonObject> updateEmployee(String userId, JsonObject params);
 }
