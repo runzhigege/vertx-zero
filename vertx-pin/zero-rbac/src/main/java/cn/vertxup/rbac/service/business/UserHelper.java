@@ -42,10 +42,7 @@ class UserHelper {
                 final EcUser executor = Pocket.lookup(EcUser.class);
                 if (Objects.nonNull(executor)) {
                     Sc.infoAuth(LOGGER, AuthMsg.EMPLOYEE_BY_USER, user.getModelKey());
-                    return fnTunnel.apply(executor);
-                } else {
-                    Sc.infoAuth(LOGGER, AuthMsg.EMPLOYEE_EMPTY + " Executor");
-                    return applyUser(user)
+                    return fnTunnel.apply(executor)
                             /* Employee information */
                             .compose(employee -> Objects.isNull(employee) ?
                                     Ux.toFuture(new JsonObject()) :
@@ -58,6 +55,9 @@ class UserHelper {
                                     .convert("modelKey", "employeeId")
                                     .toFuture()
                             );
+                } else {
+                    Sc.infoAuth(LOGGER, AuthMsg.EMPLOYEE_EMPTY + " Executor");
+                    return applyUser(user);
                 }
             } else {
                 Sc.infoAuth(LOGGER, AuthMsg.EMPLOYEE_EMPTY + " Model Key");
