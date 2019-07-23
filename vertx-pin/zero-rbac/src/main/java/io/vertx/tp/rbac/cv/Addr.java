@@ -23,5 +23,7 @@ public interface Addr {
         String INFORMATION = Prefix._EVENT + "X-INFORMATION";
 
         String PASSWORD = Prefix._EVENT + "X-PASSWORD";
+
+        String PROFILE = Prefix._EVENT + "X-PROFILE";
     }
 }
