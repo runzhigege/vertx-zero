@@ -5,6 +5,11 @@ package io.vertx.up.eon;
  */
 public interface Orders {
     /**
+     * Monitor Order
+     * 1,000,000
+     */
+    int MONITOR = 1_000_000;
+    /**
      * Cors Order
      * 1,100,000
      **/

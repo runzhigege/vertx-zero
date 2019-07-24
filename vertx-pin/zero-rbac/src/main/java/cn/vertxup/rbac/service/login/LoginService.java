@@ -1,5 +1,6 @@
 package cn.vertxup.rbac.service.login;
 
+import cn.vertxup.rbac.domain.tables.daos.OAccessTokenDao;
 import cn.vertxup.rbac.domain.tables.daos.SUserDao;
 import cn.vertxup.rbac.domain.tables.pojos.SUser;
 import cn.vertxup.rbac.service.business.UserStub;
@@ -9,9 +10,10 @@ import io.vertx.tp.error._401PasswordWrongException;
 import io.vertx.tp.error._449UserNotFoundException;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.cv.AuthMsg;
+import io.vertx.tp.rbac.permission.ScPrivilege;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.unity.Uson;
 import io.vertx.up.unity.Ux;
-import io.vertx.up.fn.Fn;
 
 import javax.inject.Inject;
 import java.util.Arrays;
@@ -57,5 +59,16 @@ public class LoginService implements LoginStub {
                         AuthKey.F_CLIENT_SECRET,    /* client_secret parameter */
                         AuthKey.F_GRANT_TYPE        /* grant_type parameter */
                 ).denull().toFuture());
+    }
+
+    @Override
+    public Future<Boolean> logout(final String user, final String habitus) {
+        /*
+         * Delete Token from `ACCESS_TOKEN`
+         */
+        return Ux.Jooq.on(OAccessTokenDao.class)
+                .deleteAsync(new JsonObject().put("clientId", user))
+                .compose(nil -> ScPrivilege.open(habitus))
+                .compose(ScPrivilege::clear);
     }
 }

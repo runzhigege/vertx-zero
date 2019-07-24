@@ -18,6 +18,7 @@ import io.vertx.up.runtime.ZeroGrid;
 import io.vertx.up.uca.micro.center.ZeroRegistry;
 import io.vertx.up.uca.rs.Axis;
 import io.vertx.up.uca.rs.router.*;
+import io.vertx.up.uca.rs.router.monitor.MeansureAxis;
 import io.vertx.up.util.Ut;
 
 import java.text.MessageFormat;
@@ -58,21 +59,26 @@ public class ZeroHttpAgent extends AbstractVerticle {
         final Axis<Router> filterAxiser = Fn.poolThread(Pool.FILTERS,
                 FilterAxis::new);
 
-        /* 5.Get the default HttpServer Options **/
+        /* 5.Call route to mount meansure **/
+        final Axis<Router> monitorAxiser = Fn.poolThread(Pool.MEANSURES,
+                () -> new MeansureAxis(vertx, false));
+        /* Get the default HttpServer Options **/
         ZeroAtomic.HTTP_OPTS.forEach((port, option) -> {
-            /* 5.1.Single server processing **/
+            /* Single server processing **/
             final HttpServer server = vertx.createHttpServer(option);
 
-            /* 5.2. Build router with current option **/
+            /* Build router with current option **/
             final Router router = Router.router(vertx);
 
-            /* 5.3. Mount data to router **/
+            /* Mount data to router **/
             // Router
             routerAxiser.mount(router);
             // Wall
             wallAxiser.mount(router);
             // Event
             axiser.mount(router);
+            // Meansure
+            monitorAxiser.mount(router);
             {
                 /*
                  * Dynamic Extension for some user-defined router to resolve some spec
@@ -84,10 +90,10 @@ public class ZeroHttpAgent extends AbstractVerticle {
             }
             // Filter
             filterAxiser.mount(router);
-            /* 5.4.Listen for router on the server **/
+            /* Listen for router on the server **/
             server.requestHandler(router).listen();
             {
-                // 5.5. Log output
+                // Log output
                 registryServer(option, router);
             }
         });
