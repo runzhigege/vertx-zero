@@ -1,5 +1,5 @@
 /*
- * Package for profile storage
+ * Package for fetchProfile storage
  * After user logged into the system, RBAC module should singleton Profile Pool
  * 1) Based on User - Role ( Calculated User Profile )
  * 2) Based on Group - Role ( Calculated Group Profile )
@@ -18,7 +18,7 @@
  *              roleId: "xxx"
  *          }]
  *     }],
- *     "profile":{
+ *     "fetchProfile":{
  *          "PROFILE1":["PERMISSION1","PERMISSION2"],
  *          "PROFILE2":["PERMISSION2","PERMISSION4"]
  *     }

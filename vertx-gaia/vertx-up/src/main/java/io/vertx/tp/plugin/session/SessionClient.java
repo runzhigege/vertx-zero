@@ -31,4 +31,9 @@ public interface SessionClient {
      * Get Session by id
      */
     Future<Session> get(String id);
+
+    /*
+     * Open new Session
+     */
+    Future<Session> open(String id);
 }

@@ -11,7 +11,7 @@ import io.vertx.up.commune.config.DataBound;
 public interface MatrixStub {
     /*
      * Fetch DataBound by:
-     * request - userId, session, profile
+     * request - userId, session, fetchProfile
      */
     Future<DataBound> fetchBound(ScRequest request, SResource resource);
 }
