@@ -58,6 +58,10 @@ public interface ID {
          * Communication address to write data/status to etcd.
          */
         String IPC_START = "ZERO://MICRO/IPC/START";
+        /*
+         * Monitor Path of Address
+         */
+        String MONITOR_PATH = "/zero/health*";
     }
 
     /*
@@ -79,9 +83,9 @@ public interface ID {
 
         ConcurrentMap<String, String> PARAM_MAP = new ConcurrentHashMap<String, String>() {
             {
-                this.put(X_APP_ID, "appId");
-                this.put(X_APP_KEY, "appKey");
-                this.put(X_SIGMA, "sigma");
+                put(X_APP_ID, "appId");
+                put(X_APP_KEY, "appKey");
+                put(X_SIGMA, "sigma");
             }
         };
     }

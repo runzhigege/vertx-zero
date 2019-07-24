@@ -67,6 +67,8 @@ interface Pool {
     ConcurrentMap<String, Axis<Router>> FILTERS = new ConcurrentHashMap<>();
 
     ConcurrentMap<String, Axis<Router>> DYNAMICS = new ConcurrentHashMap<>();
+
+    ConcurrentMap<String, Axis<Router>> MEANSURES = new ConcurrentHashMap<>();
 }
 
 interface Registry {

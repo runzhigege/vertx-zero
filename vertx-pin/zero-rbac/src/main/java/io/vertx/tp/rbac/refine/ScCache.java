@@ -14,7 +14,6 @@ import io.vertx.up.unity.Ux;
  *      1.2. The name `POOL_CODE` could be configured by `codePool`
  *      1.3. The authorization code length could be configured by `codeLength`
  *      1.4. Method: `getCode/putCode`
- * 2)
  */
 class ScCache {
 

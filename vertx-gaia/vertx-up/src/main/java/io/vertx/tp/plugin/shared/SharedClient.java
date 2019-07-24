@@ -56,4 +56,7 @@ public interface SharedClient<K, V> {
 
     @Fluent
     SharedClient<K, V> get(K key, boolean once, Handler<AsyncResult<V>> handler);
+
+    @Fluent
+    SharedClient<K, V> clear(Handler<AsyncResult<Boolean>> handler);
 }

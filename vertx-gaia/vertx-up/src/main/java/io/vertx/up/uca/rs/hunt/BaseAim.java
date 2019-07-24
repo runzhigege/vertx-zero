@@ -141,7 +141,8 @@ public abstract class BaseAim {
             {
                 final Session session = context.session();
                 final Cookie cookie = context.getCookie("vertx-web.session");
-                getLogger().info(Info.SESSION_ID, session.id(), cookie.getValue());
+                getLogger().info(Info.SESSION_ID, context.request().path(),
+                        session.id(), cookie.getValue());
             }
             consumer.execute();
         } catch (final WebException ex) {

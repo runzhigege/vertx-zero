@@ -7,6 +7,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.authorization.Align;
 import io.vertx.tp.rbac.authorization.ScDetent;
+import io.vertx.tp.rbac.permission.ScPrivilege;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.log.Annal;
 import io.vertx.up.uca.container.Refer;
@@ -20,7 +21,7 @@ import java.util.Objects;
 /*
  * Profile information to normalize all permission data
  * 1) After logged into the system , this class stored token information into AGHAS
- * 2) Get the json data and singleton profile information
+ * 2) Get the json data and singleton fetchProfile information
  * {
  *     "user": "user id",
  *     "role": [
@@ -52,7 +53,7 @@ import java.util.Objects;
  * 2) Group Multi Profile
  * 3) The final result should be role / permission
  *
- * Calculate different profile type
+ * Calculate different fetchProfile type
  */
 public class ScSession {
     private static final Annal LOGGER = Annal.get(ScSession.class);
@@ -62,35 +63,28 @@ public class ScSession {
      */
     public static Future<Boolean> initAuthorization(final JsonObject data) {
         /*
-         * 1. Create relation between session & user
+         * Create relation between session & user
          * - user
          * - group
          * - role
-         *
          **/
-        return ScPrivilege.init(data).compose(reference -> {
-            /*
-             * ScSession get Privilege
-             */
-            final JsonObject profile = reference.getProfile();
-
-            /* Initialize roles information */
-            return profile.isEmpty() ? initRoles(profile, data.getJsonArray("role"))
-                    /* Initialize group information */
-                    .compose(processed -> initGroups(processed, data.getJsonArray("group")))
-                    /* Refresh Cache */
-                    .compose(reference::storeProfile)
-                    /* Result Report */
-                    .compose(result -> Uson.create(data).append("profile", profile).toFuture())
-                    .compose(ScSession::onReport)
-                    .compose(nil -> Ux.toFuture(Boolean.TRUE)) :
-                    /* Cached before, session existing */
-                    Ux.toFuture(Boolean.TRUE);
-        });
+        return ScPrivilege.init(data).compose(reference ->
+                /*
+                 * ScPrivilege evaluation for current logged user
+                 */
+                reference.evaluate(profile -> initRoles(profile, data.getJsonArray("role"))
+                        /* Initialize group information */
+                        .compose(processed -> initGroups(processed, data.getJsonArray("group")))
+                        /* Refresh Cache */
+                        .compose(reference::storeProfile)
+                        /* Result Report */
+                        .compose(result -> Uson.create(data).append("profile", profile).toFuture())
+                        .compose(ScSession::onReport)
+                        .compose(nil -> Ux.toFuture(Boolean.TRUE))));
     }
 
     /*
-     * Initialization profile roles ( User )
+     * Initialization fetchProfile roles ( User )
      * 1) UNION
      * 2) EAGER
      * 3) LAZY
