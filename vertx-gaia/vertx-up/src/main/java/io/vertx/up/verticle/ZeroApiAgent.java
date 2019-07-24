@@ -15,6 +15,7 @@ import io.vertx.up.uca.rs.Axis;
 import io.vertx.up.uca.rs.router.PointAxis;
 import io.vertx.up.uca.rs.router.RouterAxis;
 import io.vertx.up.uca.rs.router.WallAxis;
+import io.vertx.up.uca.rs.router.monitor.MeansureAxis;
 import io.vertx.up.util.Ut;
 
 import java.text.MessageFormat;
@@ -56,6 +57,9 @@ public class ZeroApiAgent extends AbstractVerticle {
         /* 2.Call route hub to mount walls **/
         final Axis<Router> wallAxiser = Fn.poolThread(Pool.WALLS,
                 () -> Ut.instance(WallAxis.class, vertx));
+        /* 3.Health route */
+        final Axis<Router> montiorAxiser = Fn.poolThread(Pool.MEANSURES,
+                () -> new MeansureAxis(vertx, true));
         Fn.outUp(() -> {
 
             // Set breaker for each server
@@ -70,6 +74,8 @@ public class ZeroApiAgent extends AbstractVerticle {
                 routerAxiser.mount(router);
                 // Wall
                 wallAxiser.mount(router);
+                // Meansure
+                montiorAxiser.mount(router);
                 /* Api Logical **/
                 axiser.mount(router);
 

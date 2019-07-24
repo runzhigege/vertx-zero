@@ -14,6 +14,8 @@ public interface Addr {
 
         String LOGIN = Prefix._EVENT + "O-LOGIN";
 
+        String LOGOUT = Prefix._EVENT + "O-LOGOUT";
+
         String AUTHORIZE = Prefix._EVENT + "O-AUTHORIZE";
 
         String TOKEN = Prefix._EVENT + "O-TOKEN";

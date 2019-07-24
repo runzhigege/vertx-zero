@@ -10,6 +10,7 @@ import io.vertx.ext.web.handler.CorsHandler;
 import io.vertx.ext.web.handler.ResponseContentTypeHandler;
 import io.vertx.tp.plugin.session.SessionClient;
 import io.vertx.tp.plugin.session.SessionInfix;
+import io.vertx.up.eon.Orders;
 import io.vertx.up.secure.config.CorsConfig;
 import io.vertx.up.uca.rs.Axis;
 import io.vertx.up.util.Ut;
@@ -34,7 +35,7 @@ public class RouterAxis implements Axis<Router> {
     @Override
     public void mount(final Router router) {
         // 1. Cookie, Body
-        router.route().handler(CookieHandler.create());
+        router.route().order(Orders.COOKIE).handler(CookieHandler.create());
         // 2. Session
         /*
          * Session Global for Authorization, replace old mode with
@@ -42,7 +43,7 @@ public class RouterAxis implements Axis<Router> {
          * by configuration information instead of create it directly.
          */
         final SessionClient client = SessionInfix.getOrCreate(vertx);
-        router.route().handler(client.getHandler());
+        router.route().order(Orders.SESSION).handler(client.getHandler());
         /*
          * CSRF Handler Setting ( Disabled in default )
          */
@@ -50,14 +51,14 @@ public class RouterAxis implements Axis<Router> {
         /*
          * Body, Content
          */
-        router.route().handler(BodyHandler.create().setBodyLimit(32 * MB));
-        router.route().handler(ResponseContentTypeHandler.create());
+        router.route().order(Orders.BODY).handler(BodyHandler.create().setBodyLimit(32 * MB));
+        router.route().order(Orders.CONTENT).handler(ResponseContentTypeHandler.create());
         // 3. Cors data here
         mountCors(router);
     }
 
     private void mountCors(final Router router) {
-        router.route().handler(CorsHandler.create(CONFIG.getOrigin())
+        router.route().order(Orders.CORS).handler(CorsHandler.create(CONFIG.getOrigin())
                 .allowCredentials(CONFIG.getCredentials())
                 .allowedHeaders(getAllowedHeaders(CONFIG.getHeaders()))
                 .allowedMethods(getAllowedMethods(CONFIG.getMethods())));

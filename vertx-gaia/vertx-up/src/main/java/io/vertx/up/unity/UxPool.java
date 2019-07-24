@@ -53,14 +53,21 @@ public class UxPool {
     public <K, V> Future<V> get(final K key) {
         return Ux.<V>thenGeneric(future -> this.client.get(key, res -> {
             LOGGER.debug(Info.POOL_GET, key, this.name, false);
-            Ux.thenGeneric(res, future, To.toError(_500PoolInternalException.class, this.getClass(), this.name, "remove"));
+            Ux.thenGeneric(res, future, To.toError(_500PoolInternalException.class, this.getClass(), this.name, "get"));
         }));
     }
 
     public <K, V> Future<V> get(final K key, final boolean once) {
         return Ux.<V>thenGeneric(future -> this.client.get(key, once, res -> {
             LOGGER.debug(Info.POOL_GET, key, this.name, once);
-            Ux.thenGeneric(res, future, To.toError(_500PoolInternalException.class, this.getClass(), this.name, "remove"));
+            Ux.thenGeneric(res, future, To.toError(_500PoolInternalException.class, this.getClass(), this.name, "get"));
+        }));
+    }
+
+    public Future<Boolean> clear() {
+        return Ux.<Boolean>thenGeneric(future -> this.client.clear(res -> {
+            LOGGER.debug(Info.POOL_CLEAR, this.name);
+            Ux.thenGeneric(res, future, To.toError(_500PoolInternalException.class, this.getClass(), this.name, "clear"));
         }));
     }
 }

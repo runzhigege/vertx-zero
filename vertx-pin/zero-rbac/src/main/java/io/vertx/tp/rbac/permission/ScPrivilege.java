@@ -141,6 +141,10 @@ public class ScPrivilege implements Serializable {
         return habitus.set(key, result);
     }
 
+    public Future<Boolean> clear() {
+        return habitus.clear();
+    }
+
     private Function<JsonObject, Future<JsonArray>> extractAsync(
             final String profileKey, final String hitKey) {
         return profile -> {

@@ -207,6 +207,12 @@ public class SharedClientImpl<K, V> implements SharedClient<K, V> {
         return reference;
     }
 
+    @Override
+    public SharedClient<K, V> clear(Handler<AsyncResult<Boolean>> handler) {
+        this.asyncMap.clear(result -> handler.handle(Future.succeededFuture(Boolean.TRUE)));
+        return this;
+    }
+
     private void ensure(final boolean expected) {
         Fn.outWeb(this.isAsync != expected, LOGGER,
                 _501SharedDataModeException.class, this.getClass(), this.isAsync);

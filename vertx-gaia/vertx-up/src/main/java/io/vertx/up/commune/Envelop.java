@@ -16,6 +16,7 @@ import io.vertx.up.exception.WebException;
 import io.vertx.up.exception.web._500InternalServerException;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.unity.Ux;
+import io.vertx.up.util.Ut;
 import io.vertx.zero.exception.IndexExceedException;
 
 import java.io.Serializable;
@@ -32,7 +33,7 @@ public class Envelop implements Serializable {
 
     /* Additional Data for Envelop, Assist Data here. */
     private final Assist assist = new Assist();
-
+    private final JsonObject cachedJwt = new JsonObject();
     /* Communicate Key in Event Bus, to identify the Envelop */
     private String key;
     /*
@@ -230,9 +231,12 @@ public class Envelop implements Serializable {
      * Get jwt information here
      */
     public String jwt(final String field) {
-        final String jwt = assist.principal("jwt");
-        final JsonObject user = Ux.Jwt.extract(jwt);
-        return user.getString(field);
+        if (Ut.isNil(cachedJwt)) {
+            final String jwt = assist.principal("jwt");
+            final JsonObject user = Ux.Jwt.extract(jwt);
+            cachedJwt.mergeIn(user, true);
+        }
+        return cachedJwt.getString(field);
     }
 
     public User user() {
