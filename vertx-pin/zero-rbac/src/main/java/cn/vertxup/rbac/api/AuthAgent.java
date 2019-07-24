@@ -35,16 +35,6 @@ public interface AuthAgent {
     JsonObject login(@BodyParam @Codex JsonObject data);
 
     /*
-     * /oauth/logout
-     * 1. Remove token from System
-     * 2. Remove pool permission
-     */
-    @POST
-    @Path("logout")
-    @Address(Addr.Auth.LOGOUT)
-    JsonObject logout();
-
-    /*
      * /oauth/authorize
      *
      * Request:
