@@ -45,6 +45,8 @@ public interface KeField {
 
     String LOGO = "logo";
 
+    String HABITUS = "habitus";
+
     interface App {
 
         String COPY_RIGHT = "copyRight";

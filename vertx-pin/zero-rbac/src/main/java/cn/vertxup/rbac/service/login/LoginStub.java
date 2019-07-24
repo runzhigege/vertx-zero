@@ -12,4 +12,13 @@ public interface LoginStub {
      * }
      */
     Future<JsonObject> execute(final String username, final String password);
+
+    /*
+     * Logout workflow
+     * {
+     *      "user": "uid",
+     *      "habitus": "session key"
+     * }
+     */
+    Future<Boolean> logout(final String user, final String habitus);
 }

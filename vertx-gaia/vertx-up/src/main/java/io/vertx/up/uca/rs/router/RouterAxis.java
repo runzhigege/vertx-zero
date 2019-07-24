@@ -23,6 +23,9 @@ public class RouterAxis implements Axis<Router> {
 
     private static final CorsConfig CONFIG = CorsConfig.get();
 
+    private static final int KB = 1024;
+    private static final int MB = KB * 1024;
+
     private transient final Vertx vertx;
 
     public RouterAxis(final Vertx vertx) {
@@ -32,15 +35,7 @@ public class RouterAxis implements Axis<Router> {
     @Override
     public void mount(final Router router) {
         // 1. Cookie, Body
-        router.route()
-                .order(Orders.COOKIE)
-                .handler(CookieHandler.create());
-        router.route()
-                .order(Orders.BODY)
-                .handler(BodyHandler.create());
-        router.route()
-                .order(Orders.CONTENT)
-                .handler(ResponseContentTypeHandler.create());
+        router.route().order(Orders.COOKIE).handler(CookieHandler.create());
         // 2. Session
         /*
          * Session Global for Authorization, replace old mode with
@@ -49,16 +44,24 @@ public class RouterAxis implements Axis<Router> {
          */
         final SessionClient client = SessionInfix.getOrCreate(vertx);
         router.route().order(Orders.SESSION).handler(client.getHandler());
+        /*
+         * CSRF Handler Setting ( Disabled in default )
+         */
+        // router.route().handler(CSRFHandler.create("lang"));
+        /*
+         * Body, Content
+         */
+        router.route().order(Orders.BODY).handler(BodyHandler.create().setBodyLimit(32 * MB));
+        router.route().order(Orders.CONTENT).handler(ResponseContentTypeHandler.create());
         // 3. Cors data here
         mountCors(router);
     }
 
     private void mountCors(final Router router) {
-        router.route().order(Orders.CORS)
-                .handler(CorsHandler.create(CONFIG.getOrigin())
-                        .allowCredentials(CONFIG.getCredentials())
-                        .allowedHeaders(getAllowedHeaders(CONFIG.getHeaders()))
-                        .allowedMethods(getAllowedMethods(CONFIG.getMethods())));
+        router.route().order(Orders.CORS).handler(CorsHandler.create(CONFIG.getOrigin())
+                .allowCredentials(CONFIG.getCredentials())
+                .allowedHeaders(getAllowedHeaders(CONFIG.getHeaders()))
+                .allowedMethods(getAllowedMethods(CONFIG.getMethods())));
     }
 
     private Set<String> getAllowedHeaders(final JsonArray array) {

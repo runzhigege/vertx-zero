@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /*
- * Single middle profile for group
+ * Single middle fetchProfile for group
  */
 public class ProfileGroup implements Serializable {
 
@@ -26,50 +26,50 @@ public class ProfileGroup implements Serializable {
 
     public ProfileGroup(final JsonObject data) {
         /* Group Id */
-        this.groupId = data.getString(AuthKey.F_GROUP_ID);
+        groupId = data.getString(AuthKey.F_GROUP_ID);
         /* Priority */
-        this.priority = data.getInteger(AuthKey.PRIORITY);
+        priority = data.getInteger(AuthKey.PRIORITY);
         /* Role */
-        this.role = null == data.getJsonArray("role")
+        role = null == data.getJsonArray("role")
                 ? new JsonArray() : data.getJsonArray("role");
     }
 
     Future<ProfileGroup> initAsync() {
         /* No determine */
-        return this.fetchProfilesAsync().compose(profiles -> {
+        return fetchProfilesAsync().compose(profiles -> {
             /* Clear and add */
-            this.setRoles(profiles);
+            setRoles(profiles);
             return Future.succeededFuture(this);
         });
     }
 
     public ProfileGroup init() {
-        this.setRoles(this.fetchProfiles());
+        setRoles(fetchProfiles());
         return this;
     }
 
     public Integer getPriority() {
-        return this.priority;
+        return priority;
     }
 
     public String getKey() {
-        return this.groupId;
+        return groupId;
     }
 
     public List<ProfileRole> getRoles() {
-        return this.roles;
+        return roles;
     }
 
     private void setRoles(final List<ProfileRole> profiles) {
-        this.roles.clear();
-        this.roles.addAll(profiles);
+        roles.clear();
+        roles.addAll(profiles);
     }
 
     /*
-     * Parent Reference for current profile group
+     * Parent Reference for current fetchProfile group
      * */
     public String getReference() {
-        return this.reference;
+        return reference;
     }
 
     public ProfileGroup setReference(final String reference) {
@@ -78,7 +78,7 @@ public class ProfileGroup implements Serializable {
     }
 
     /*
-     * Extract the latest relations: initAsync role for each group profile
+     * Extract the latest relations: initAsync role for each group fetchProfile
      */
     @SuppressWarnings("all")
     private Future<List<ProfileRole>> fetchProfilesAsync() {
@@ -92,14 +92,14 @@ public class ProfileGroup implements Serializable {
                 /* Composite Result */
                 .compose(Sc::<ProfileRole>composite)
                 .compose(profiles -> {
-                    /* Bind each profile to group Id */
+                    /* Bind each fetchProfile to group Id */
                     profiles.forEach(profile -> profile.setGroup(this));
                     return Future.succeededFuture(profiles);
                 });
     }
 
     private List<ProfileRole> fetchProfiles() {
-        return this.role.stream().filter(Objects::nonNull)
+        return role.stream().filter(Objects::nonNull)
                 .map(item -> (JsonObject) item)
                 .map(ProfileRole::new)
                 .map(ProfileRole::init)
@@ -116,21 +116,21 @@ public class ProfileGroup implements Serializable {
             return false;
         }
         final ProfileGroup that = (ProfileGroup) o;
-        return this.groupId.equals(that.groupId);
+        return groupId.equals(that.groupId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.groupId);
+        return Objects.hash(groupId);
     }
 
     @Override
     public String toString() {
         return "ProfileGroup{" +
-                "groupId='" + this.groupId + '\'' +
-                ", priority=" + this.priority +
-                ", role=" + this.role +
-                ", reference='" + this.reference + '\'' +
+                "groupId='" + groupId + '\'' +
+                ", priority=" + priority +
+                ", role=" + role +
+                ", reference='" + reference + '\'' +
                 '}';
     }
 }

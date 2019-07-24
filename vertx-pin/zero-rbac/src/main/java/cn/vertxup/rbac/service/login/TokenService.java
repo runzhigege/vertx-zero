@@ -6,11 +6,13 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
+import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.rbac.atom.ScConfig;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.init.ScPin;
 import io.vertx.up.unity.Uson;
 import io.vertx.up.unity.Ux;
+import io.vertx.up.util.Ut;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -34,9 +36,19 @@ public class TokenService implements TokenStub {
                 /* Build Data in Token */
                 .compose(roles -> Uson.create()
                         .append("user", clientId)
-
-                        /* Session Pool will store user's critical permission data*/
-                        .append("session", session.id())
+                        /*
+                         * Permission Pool is configured in RBAC module, it's different from Session here.
+                         * The critical difference is that:
+                         * 1) When user passed 401/403, the session id will be generated and session id
+                         * will be changed.
+                         * 2) When user logged successfully, `habitus` field will be stored into token
+                         * instead of Http Session
+                         * 3) Http Session is for each request instead of logged, but `habitus` means
+                         * user's status after logged, and it will be tracked the session of `original`
+                         * when user logged into the system.
+                         * 4) Let's habitus length be 128 and it will be a key of logged user here.
+                         * */
+                        .append(KeField.HABITUS, Ut.randomString(128))
                         .append("role", roles).toFuture()
                 )
 

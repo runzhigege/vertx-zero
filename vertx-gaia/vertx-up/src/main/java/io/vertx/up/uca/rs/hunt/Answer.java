@@ -119,6 +119,11 @@ public final class Answer {
             Outcome.media(response, mediaTypes);
 
             /*
+             * Security for response
+             */
+            Outcome.security(response);
+
+            /*
              * SessionData Stored
              */
             storeSession(context, envelop.data(), sessionAction);

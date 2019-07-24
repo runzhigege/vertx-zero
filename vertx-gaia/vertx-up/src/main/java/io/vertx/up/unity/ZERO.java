@@ -23,6 +23,7 @@ interface Info {
     String POOL_PUT_TIMER = "[ ZERO ] ( Shared ) key = {0}, value = {1} has been put into {2} to keep {3} seconds";
     String POOL_REMOVE = "[ ZERO ] ( Shared ) key = {0} has been removed from pool name = {2}.";
     String POOL_GET = "[ ZERO ] ( Shared ) key = {0} has been picked from {1}, mode = {2}";
+    String POOL_CLEAR = "[ ZERO ] ( Shared ) pool = {0} has been cleared successfully.";
     String INFIX_NULL = "[ ZERO ] The system scanned null infix for key = {0} " +
             "on the field \"{1}\" of {2}";
 

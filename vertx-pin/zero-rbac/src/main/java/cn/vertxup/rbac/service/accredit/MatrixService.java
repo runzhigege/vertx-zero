@@ -32,7 +32,7 @@ public class MatrixService implements MatrixStub {
                          * */
                         request.openSession()
                                 /* Extract Roles from Privilege */
-                                .compose(privilege -> privilege.asyncRole(profileKey))
+                                .compose(privilege -> privilege.fetchRoles(profileKey))
                                 .compose(roles -> stub.fetchMatrix(roles, resourceId, request.getView()))
                         :
                         /*

@@ -6,9 +6,9 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.vertx.tp.rbac.cv.Addr;
 import io.vertx.tp.rbac.cv.AuthKey;
-import io.vertx.up.unity.Uson;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
+import io.vertx.up.unity.Uson;
 
 import javax.inject.Inject;
 
