@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.vertx.tp.ke.cv.KeField;
-import io.vertx.up.commune.Envelop;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 
@@ -47,16 +46,8 @@ public class Ke {
         return KeCache.keySession(method, uri);
     }
 
-    public static String keySession(final Envelop envelop) {
-        return KeCache.keyEnvelop(envelop, KeCache::keySession);
-    }
-
     public static String keyAuthorized(final String method, final String uri) {
         return KeCache.keyAuthorized(method, uri);
-    }
-
-    public static String keyAuthorized(final Envelop envelop) {
-        return KeCache.keyEnvelop(envelop, KeCache::keyAuthorized);
     }
 
     /*

@@ -6,5 +6,5 @@ interface Info {
 
     String RIGOR_NOT_FOUND = "[ ZERO ] Zero system could not find Rigor for type = {0}.";
 
-    String SESSION_ID = "[ ZERO ] ( Session ) session id = {0}, client cookies is {1}";
+    String SESSION_ID = "[ ZERO ] ( Session ) \n\t\tPath = {0}, Session Id = {1}, Client Cookie Value {2}";
 }

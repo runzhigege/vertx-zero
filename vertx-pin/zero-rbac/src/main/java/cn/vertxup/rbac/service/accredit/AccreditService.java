@@ -53,7 +53,7 @@ public class AccreditService implements AccreditStub {
         final String authorizedKey = request.getAuthorizedKey();
         return request.openSession()
                 /* Get data from cache */
-                .compose(privilege -> privilege.asyncAuthorized(authorizedKey))
+                .compose(privilege -> privilege.fetchAuthorized(authorizedKey))
                 /* */
                 .compose(result -> result ? Ux.toFuture(Boolean.TRUE) :
                         supplier.get());

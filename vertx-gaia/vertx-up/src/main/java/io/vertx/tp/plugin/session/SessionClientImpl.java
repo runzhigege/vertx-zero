@@ -31,7 +31,7 @@ public class SessionClientImpl implements SessionClient {
             }
             /* Whether existing store */
             if (StoreType.LOCAL == type) {
-                STORE = LocalSessionStore.create(this.vertx);
+                STORE = LocalSessionStore.create(vertx);
             } else if (StoreType.CLUSTER == type) {
                 STORE = ClusteredSessionStore.create(this.vertx);
             } else {
@@ -69,7 +69,12 @@ public class SessionClientImpl implements SessionClient {
 
     @Override
     public SessionHandler getHandler() {
-        return SessionHandler.create(STORE);
+        return SessionHandler.create(STORE)
+                /*
+                 * Refer: https://vertx.io/blog/writing-secure-vert-x-web-apps/
+                 * */
+                // .setCookieSecureFlag(true)
+                .setCookieHttpOnlyFlag(true);
     }
 
     @Override
@@ -83,5 +88,10 @@ public class SessionClientImpl implements SessionClient {
             }
         });
         return future;
+    }
+
+    @Override
+    public Future<Session> open(final String sessionId) {
+        return Future.succeededFuture(STORE.createSession(2000));
     }
 }

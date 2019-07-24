@@ -73,7 +73,7 @@ class AccreditFlow {
     }
 
     /*
-     * 4. Extract profile information from Cached
+     * 4. Extract fetchProfile information from Cached
      */
     static Future<JsonArray> inspectPermission(
             final Class<?> clazz, final SResource resource, final ScRequest request
@@ -81,7 +81,7 @@ class AccreditFlow {
         final String profileKey = Sc.generateProfileKey(resource);
         return request.openSession()
                 /* Get Permission from Privilege */
-                .compose(privilege -> privilege.asyncPermission(profileKey))
+                .compose(privilege -> privilege.fetchPermissions(profileKey))
                 .compose(permissions -> {
                     /* Profile Key */
                     if (Objects.isNull(permissions) || permissions.isEmpty()) {
@@ -133,8 +133,8 @@ class AccreditFlow {
     static Future<Boolean> inspectAuthorized(final ScRequest request) {
         /* Stored authorized */
         final String authorizedKey = request.getAuthorizedKey();
-        Sc.infoCredit(LOGGER, AuthMsg.CREDIT_SUCCESS, authorizedKey);
+        Sc.infoCredit(LOGGER, AuthMsg.CREDIT_SUCCESS, authorizedKey, request.getSessionId());
         return request.openSession()
-                .compose(privilege -> privilege.storedFinal(authorizedKey, Boolean.TRUE));
+                .compose(privilege -> privilege.storedAuthorized(authorizedKey, Boolean.TRUE));
     }
 }
