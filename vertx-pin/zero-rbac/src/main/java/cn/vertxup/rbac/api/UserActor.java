@@ -1,6 +1,7 @@
 package cn.vertxup.rbac.api;
 
 import cn.vertxup.rbac.service.business.UserStub;
+import cn.vertxup.rbac.service.login.LoginStub;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.cv.Addr;
@@ -16,6 +17,9 @@ public class UserActor {
 
     @Inject
     private transient UserStub stub;
+
+    @Inject
+    private transient LoginStub loginStub;
 
     /*
      * User information get from the system to extract data here.
@@ -44,5 +48,12 @@ public class UserActor {
         final String userId = envelop.jwt("user");
         final JsonObject params = Ux.getJson(envelop);
         return stub.updateEmployee(userId, params);
+    }
+
+    @Address(Addr.Auth.LOGOUT)
+    public Future<Boolean> logout(final Envelop envelop) {
+        final String token = envelop.jwt();
+        final String habitus = envelop.jwt("habitus");
+        return loginStub.logout(token, habitus);
     }
 }

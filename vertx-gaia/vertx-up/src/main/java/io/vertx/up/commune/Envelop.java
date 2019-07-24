@@ -227,6 +227,10 @@ public class Envelop implements Serializable {
         return assist.principal(field);
     }
 
+    public String jwt() {
+        return assist.principal("jwt");
+    }
+
     /*
      * Get jwt information here
      */

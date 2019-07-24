@@ -39,4 +39,14 @@ public interface UserAgent {
     @Path("user/profile")
     @Address(Addr.User.PROFILE)
     JsonObject profile(@BodyParam JsonObject params);
+
+    /*
+     * /user/logout
+     * 1. Remove token from System
+     * 2. Remove pool permission
+     */
+    @POST
+    @Path("user/logout")
+    @Address(Addr.Auth.LOGOUT)
+    JsonObject logout();
 }

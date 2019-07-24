@@ -62,12 +62,12 @@ public class LoginService implements LoginStub {
     }
 
     @Override
-    public Future<Boolean> logout(final String user, final String habitus) {
+    public Future<Boolean> logout(final String token, final String habitus) {
         /*
          * Delete Token from `ACCESS_TOKEN`
          */
         return Ux.Jooq.on(OAccessTokenDao.class)
-                .deleteAsync(new JsonObject().put("clientId", user))
+                .deleteAsync(new JsonObject().put("token", token))
                 .compose(nil -> ScPrivilege.open(habitus))
                 .compose(ScPrivilege::clear);
     }
