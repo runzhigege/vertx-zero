@@ -7,6 +7,7 @@ import io.vertx.ext.web.Session;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
+import io.vertx.up.util.Ut;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -76,6 +77,10 @@ public class Ke {
 
         static Future<Boolean> boolAsync(final JsonObject checkedJson) {
             return Ux.toFuture(KeResult.bool(checkedJson));
+        }
+
+        static Future<JsonObject> jsonAsync(final JsonObject result) {
+            return Ux.toFuture(Ut.isNil(result) ? new JsonObject() : result);
         }
 
         static JsonObject bool(final String key, final boolean checked) {

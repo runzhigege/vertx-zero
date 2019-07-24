@@ -1,6 +1,10 @@
 package io.vertx.tp.rbac.permission;
 
+import io.vertx.core.Future;
+import io.vertx.tp.rbac.cv.AuthMsg;
+import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.unity.UxPool;
 
@@ -14,7 +18,8 @@ import java.util.concurrent.ConcurrentMap;
  *      when upgraded, the pool should be clear
  * 2. token -> habitus
  */
-public class ScHabitus {
+class ScHabitus {
+    private static final Annal LOGGER = Annal.get(ScHabitus.class);
     /*
      * name = HABITUS_CACHE ( Logged User )
      *      2.1. Fixed name for `habitus` storage
@@ -29,10 +34,23 @@ public class ScHabitus {
 
     private ScHabitus(final String habitus) {
         final String pool = MessageFormat.format(POOL_PATTERN, habitus);
+        Sc.infoResource(LOGGER, AuthMsg.POOL_RESOURCE, pool, habitus);
         this.pool = Ux.Pool.on(pool);
     }
 
-    static ScHabitus get(final String habitus) {
+    static ScHabitus initialize(final String habitus) {
         return Fn.pool(POOLS, habitus, () -> new ScHabitus(habitus));
+    }
+
+    /*
+     * Pool should be initialized by pool name above
+     */
+    <T> Future<T> get(final String dataKey) {
+        return pool.get(dataKey);
+    }
+
+    <T> Future<T> set(final String dataKey, final T value) {
+        return pool.put(dataKey, value)
+                .compose(kv -> Ux.toFuture(kv.getValue()));
     }
 }
