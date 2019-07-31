@@ -30,7 +30,7 @@ public abstract class AbstractRegion implements PlugRegion {
             getLogger().info("[ ZERO ] Data Region require config `prefix` attribute value, but now is null. Disabled! ");
             return false;
         } else {
-            final String requestUri = context.request().uri();
+            final String requestUri = context.request().path();
             return requestUri.startsWith(prefix);
         }
     }

@@ -93,7 +93,7 @@
         <scala.version>2.13.0</scala.version>
         <feign.version>8.18.0</feign.version>
         <guava.version>28.0-jre</guava.version>
-        <codehaus.janino.version>3.0.14</codehaus.janino.version>
+        <codehaus.janino.version>3.0.15</codehaus.janino.version>
         <ignite.version>2.7.5</ignite.version>
         <mongodb.async.version>3.10.1</mongodb.async.version>
         <!-- Apache Common -->
@@ -115,7 +115,7 @@
         <!-- Vert.x Addition -->
         <rxjava2.version>2.2.10</rxjava2.version>
         <netty.tcnative.version>2.0.25.Final</netty.tcnative.version>
-        <netty.version>4.1.37.Final</netty.version>
+        <netty.version>4.1.38.Final</netty.version>
         <hazelcast.version>3.12.1</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
         <error.prone.version>2.3.3</error.prone.version>
