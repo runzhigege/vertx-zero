@@ -63,7 +63,7 @@ class ScHabitus {
                      * Store dataKey = value
                      */
                     stored.put(dataKey, value);
-                    return pool.put(habitus, stored)
+                    return pool.put(habitus, stored.copy())
                             .compose(nil -> Ux.toFuture(value));
                 });
     }
