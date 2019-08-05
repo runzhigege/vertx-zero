@@ -34,8 +34,13 @@ public class AuthReady {
          * Build metadata
          */
         final JsonObject metadata = new JsonObject();
-        metadata.put("uri", ZeroAnno.recoveryUri(request.uri(), request.method()));
-        metadata.put("requestUri", request.uri());
+        /*
+         * Old: request.uri()
+         * New: request.path()
+         * path() will remove all query string part
+         */
+        metadata.put("uri", ZeroAnno.recoveryUri(request.path(), request.method()));
+        metadata.put("requestUri", request.path());
         metadata.put("method", request.method().name());
         data.put("metadata", metadata);
         /*
