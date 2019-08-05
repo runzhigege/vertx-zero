@@ -62,8 +62,9 @@ class ScHabitus {
                     /*
                      * Store dataKey = value
                      */
-                    stored.put(dataKey, value);
-                    return pool.put(habitus, stored)
+                    final JsonObject updated = stored.copy();
+                    updated.put(dataKey, value);
+                    return pool.put(habitus, updated)
                             .compose(nil -> Ux.toFuture(value));
                 });
     }
