@@ -4,10 +4,10 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxField;
 import io.vertx.tp.crud.atom.IxModule;
+import io.vertx.up.eon.Values;
+import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Uarr;
 import io.vertx.up.unity.Ux;
-import io.vertx.up.log.Annal;
-import io.vertx.up.eon.Values;
 import io.vertx.up.util.Ut;
 
 import java.util.ArrayList;
@@ -34,8 +34,8 @@ class IxSerialize {
     static JsonArray zipper(final JsonArray from, final JsonArray to, final IxModule config) {
         final IxField field = config.getField();
         final String keyField = field.getKey();
-        return Uarr.create(from)
-                .zip(to, keyField, keyField)
+        return Uarr.create(to)
+                .zip(from, keyField, keyField)
                 .to();
     }
 
