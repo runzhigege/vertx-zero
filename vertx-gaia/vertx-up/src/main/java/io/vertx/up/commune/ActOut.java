@@ -27,6 +27,6 @@ public class ActOut implements Serializable {
     }
 
     public Future<Envelop> async() {
-        return envelop.toFuture();
+        return Ux.toFuture(envelop);
     }
 }

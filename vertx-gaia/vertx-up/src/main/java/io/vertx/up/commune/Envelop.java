@@ -1,6 +1,5 @@
 package io.vertx.up.commune;
 
-import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpMethod;
@@ -164,9 +163,10 @@ public class Envelop implements Serializable {
     }
 
     /* Future */
+    /*
     public Future<Envelop> toFuture() {
         return Future.succeededFuture(this);
-    }
+    }*/
 
     // ------------------ Below are Bean Get -------------------
     /* HttpStatusCode */

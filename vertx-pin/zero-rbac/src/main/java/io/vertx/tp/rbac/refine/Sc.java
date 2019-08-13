@@ -7,6 +7,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.log.Annal;
 
 import java.util.List;
@@ -42,10 +43,6 @@ public class Sc {
         return ScPhase.uri(context);
     }
 
-    public static JsonObject cacheData(final RoutingContext context) {
-        return ScPhase.cacheData(context);
-    }
-
     /*
      * cache information
      * 1. Code: Authorization Code Cache Pool
@@ -66,6 +63,10 @@ public class Sc {
 
     public static <V> Future<V> cachePermission(final String key, final V value) {
         return ScCache.permission(key, value);
+    }
+
+    public static Future<JsonObject> cacheBound(final Envelop envelop) {
+        return ScPhase.cacheBound(envelop);
     }
 
     /*
