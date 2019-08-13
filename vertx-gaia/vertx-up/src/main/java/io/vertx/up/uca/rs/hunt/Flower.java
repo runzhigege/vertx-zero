@@ -1,5 +1,6 @@
 package io.vertx.up.uca.rs.hunt;
 
+import io.vertx.core.Future;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.annotations.Codex;
 import io.vertx.up.atom.Rule;
@@ -23,11 +24,8 @@ class Flower {
 
     private static final Annal LOGGER = Annal.get(Flower.class);
 
-    /*
-     * Inject auditor for envelop workflow
-     */
-    static <T> Envelop continuous(final RoutingContext context,
-                                  final T entity) {
+    static <T> Future<Envelop> next(final RoutingContext context,
+                                    final T entity) {
         final Envelop envelop = Envelop
                 .success(entity)
                 .bind(context);     // Bind Data Here.
@@ -36,11 +34,8 @@ class Flower {
          * 1) PlugAuditor
          * 2) PlugRegion
          */
-        PluginExtension.Flower.continuous(context, envelop);
-
-        return envelop;
+        return PluginExtension.Flower.next(context, envelop);
     }
-
 
     static void executeRequest(final RoutingContext context,
                                final Map<String, List<Rule>> rulers,

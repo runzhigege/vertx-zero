@@ -13,6 +13,7 @@ import io.vertx.up.eon.ID;
 import io.vertx.up.eon.Info;
 import io.vertx.up.exception.web._417JobMethodException;
 import io.vertx.up.log.Annal;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
 import javax.ws.rs.BodyParam;
@@ -59,18 +60,18 @@ class RunOn {
             Element.onceLog(mission,
                     () -> LOGGER.info(Info.PHASE_ERROR, mission.getName(),
                             envelop.error().getClass().getName()));
-            return envelop.toFuture();
+            return Ux.toFuture(envelop);
         }
     }
 
     private <T> Future<Envelop> normalize(final T returnValue) {
         if (Objects.isNull(returnValue)) {
-            return Envelop.okJson().toFuture();
+            return Ux.toFuture(Envelop.okJson());
         } else {
             if (Envelop.class == returnValue.getClass()) {
                 return Future.succeededFuture((Envelop) returnValue);
             } else {
-                return Envelop.success(returnValue).toFuture();
+                return Ux.toFuture(Envelop.success(returnValue));
             }
         }
     }

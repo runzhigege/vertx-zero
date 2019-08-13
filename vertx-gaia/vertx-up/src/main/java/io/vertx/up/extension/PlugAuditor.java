@@ -1,5 +1,6 @@
 package io.vertx.up.extension;
 
+import io.vertx.core.Future;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.commune.Envelop;
 
@@ -16,5 +17,5 @@ public interface PlugAuditor {
      * The object envelop should be modified in current method,
      * There is no default implementation in zero system.
      */
-    void audit(RoutingContext context, Envelop envelop);
+    Future<Envelop> audit(RoutingContext context, Envelop envelop);
 }
