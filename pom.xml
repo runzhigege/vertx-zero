@@ -80,7 +80,7 @@
         <reflect.asm.version>1.11.9</reflect.asm.version>
         <lombok.version>1.18.8</lombok.version>
         <asm.version>7.1</asm.version>
-        <cglib.version>3.2.12</cglib.version>
+        <cglib.version>3.3.0</cglib.version>
         <reflection.version>0.9.11</reflection.version>
         <!-- Etcd -->
         <etcd.version>2.17.0</etcd.version>

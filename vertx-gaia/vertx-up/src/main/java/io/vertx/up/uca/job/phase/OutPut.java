@@ -8,6 +8,7 @@ import io.vertx.up.commune.Envelop;
 import io.vertx.up.eon.Info;
 import io.vertx.up.log.Annal;
 import io.vertx.up.uca.job.plugin.JobOutcome;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
 import java.util.Objects;
@@ -52,7 +53,7 @@ class OutPut {
                     () -> LOGGER.info(Info.PHASE_ERROR, mission.getName(),
                             envelop.error().getClass().getName()));
 
-            return envelop.toFuture();
+            return Ux.toFuture(envelop);
         }
     }
 
@@ -92,7 +93,7 @@ class OutPut {
                     () -> LOGGER.info(Info.PHASE_ERROR, mission.getName(),
                             envelop.error().getClass().getName()));
 
-            return envelop.toFuture();
+            return Ux.toFuture(envelop);
         }
     }
 }

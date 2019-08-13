@@ -1,5 +1,6 @@
 package io.vertx.up.extension.pointer;
 
+import io.vertx.core.Future;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.extension.PlugAuditor;
@@ -11,13 +12,13 @@ class PluginAuditor {
      */
     private static final String AUDITOR = "auditor";
 
-    static void audit(final RoutingContext context, final Envelop envelop) {
-        Plugin.mountPlugin(AUDITOR, (auditCls, config) -> {
+    static Future<Envelop> audit(final RoutingContext context, final Envelop envelop) {
+        return Plugin.mountPlugin(AUDITOR, envelop, (auditCls, config) -> {
             /*
              * Extend PlugAuditor for auditing system setting for some spec business.
              */
             final PlugAuditor auditor = Ut.singleton(auditCls);
-            auditor.audit(context, envelop);
+            return auditor.audit(context, envelop);
         });
     }
 }
