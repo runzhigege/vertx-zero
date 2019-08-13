@@ -23,53 +23,59 @@ public class DataRegion extends AbstractRegion {
     public Future<Envelop> before(final RoutingContext context, final Envelop envelop) {
         if (isEnabled(context)) {
             /* Get Critical parameters */
-            final JsonObject matrix = Sc.cacheData(context);
-            Sc.infoAuth(getLogger(), AuthMsg.REGION_BEFORE, matrix.encode());
-            /*
-             * Body modification is only available for POST/PUT
-             * 1) Because only POST/PUT support body parameter
-             * 2) Query engine parameters belong to body key such as
-             * {
-             *     criteria: {},
-             *     sorter: [],
-             *     projection: [],
-             *     pager:{
-             *         page: xx,
-             *         size: xx
-             *     }
-             * }
-             * 3) Get method will ignore this kind of situation and move the logical to
-             * After workflow
-             */
-            final HttpMethod method = envelop.getMethod();
-            if (HttpMethod.POST == method || HttpMethod.PUT == method) {
-                /* Projection Modification */
-                final JsonArray projection = matrix.getJsonArray(Inquiry.KEY_PROJECTION);
-                if (Objects.nonNull(projection) && !projection.isEmpty()) {
-                    envelop.onProjection(projection);
+            return Sc.cacheBound(envelop).compose(matrix -> {
+                Sc.infoAuth(getLogger(), AuthMsg.REGION_BEFORE, matrix.encode());
+                /*
+                 * Body modification is only available for POST/PUT
+                 * 1) Because only POST/PUT support body parameter
+                 * 2) Query engine parameters belong to body key such as
+                 * {
+                 *     criteria: {},
+                 *     sorter: [],
+                 *     projection: [],
+                 *     pager:{
+                 *         page: xx,
+                 *         size: xx
+                 *     }
+                 * }
+                 * 3) Get method will ignore this kind of situation and move the logical to
+                 * After workflow
+                 */
+                final HttpMethod method = envelop.getMethod();
+                if (HttpMethod.POST == method || HttpMethod.PUT == method) {
+                    /* Projection Modification */
+                    final JsonArray projection = matrix.getJsonArray(Inquiry.KEY_PROJECTION);
+                    if (Objects.nonNull(projection) && !projection.isEmpty()) {
+                        envelop.onProjection(projection);
+                    }
+                    /* Criteria Modification */
+                    final JsonObject criteria = matrix.getJsonObject(Inquiry.KEY_CRITERIA);
+                    if (Objects.nonNull(criteria) && !criteria.isEmpty()) {
+                        envelop.onCriteria(criteria);
+                    }
                 }
-                /* Criteria Modification */
-                final JsonObject criteria = matrix.getJsonObject(Inquiry.KEY_CRITERIA);
-                if (Objects.nonNull(criteria) && !criteria.isEmpty()) {
-                    envelop.onCriteria(criteria);
-                }
-            }
+                return Ux.toFuture(envelop);
+            });
+        } else {
+            return Ux.toFuture(envelop);
         }
-        return Ux.toFuture(envelop);
     }
 
     @Override
     public Future<Envelop> after(final RoutingContext context, final Envelop response) {
         if (isEnabled(context)) {
             /* Get Critical parameters */
-            final JsonObject matrix = Sc.cacheData(context);
-            Sc.infoAuth(getLogger(), AuthMsg.REGION_AFTER, matrix.encode());
-            /* Projection */
-            DataMin.dwarfRecord(response, matrix);
+            return Sc.cacheBound(response).compose(matrix -> {
+                Sc.infoAuth(getLogger(), AuthMsg.REGION_AFTER, matrix.encode());
+                /* Projection */
+                DataMin.dwarfRecord(response, matrix);
 
-            /* Rows / Projection */
-            DataMin.dwarfCollection(response, matrix);
+                /* Rows / Projection */
+                DataMin.dwarfCollection(response, matrix);
+                return Ux.toFuture(response);
+            });
+        } else {
+            return Ux.toFuture(response);
         }
-        return Ux.toFuture(response);
     }
 }

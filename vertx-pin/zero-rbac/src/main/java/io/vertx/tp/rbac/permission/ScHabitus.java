@@ -19,7 +19,7 @@ import java.util.concurrent.ConcurrentMap;
  *      when upgraded, the pool should be clear
  * 2. token -> habitus
  */
-class ScHabitus {
+public class ScHabitus {
     private static final Annal LOGGER = Annal.get(ScHabitus.class);
     /*
      * name = HABITUS_CACHE ( Logged User )
@@ -40,7 +40,7 @@ class ScHabitus {
         pool = Ux.Pool.on(POOL_HABITUS);
     }
 
-    static ScHabitus initialize(final String habitus) {
+    public static ScHabitus initialize(final String habitus) {
         return Fn.pool(POOLS, habitus, () -> new ScHabitus(habitus));
     }
 
@@ -48,12 +48,12 @@ class ScHabitus {
      * Pool should be initialized by pool name above
      */
     @SuppressWarnings("unchecked")
-    <T> Future<T> get(final String dataKey) {
+    public <T> Future<T> get(final String dataKey) {
         return pool.<String, JsonObject>get(habitus)
                 .compose(item -> Ux.toFuture((T) item.getValue(dataKey)));
     }
 
-    <T> Future<T> set(final String dataKey, final T value) {
+    public <T> Future<T> set(final String dataKey, final T value) {
         return pool.<String, JsonObject>get(habitus)
                 .compose(stored -> {
                     if (Ut.isNil(stored)) {
@@ -69,7 +69,7 @@ class ScHabitus {
                 });
     }
 
-    Future<Boolean> clear() {
+    public Future<Boolean> clear() {
         /*
          * Remove reference pool for `habitus`
          */
