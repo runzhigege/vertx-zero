@@ -6,6 +6,10 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.optic.fantom.Anchoret;
+import io.vertx.tp.rbac.cv.AuthMsg;
+import io.vertx.tp.rbac.permission.ScHabitus;
+import io.vertx.tp.rbac.refine.Sc;
+import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
@@ -34,10 +38,44 @@ public class ExColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
     public Future<JsonArray> saveMy(final JsonObject params, final JsonArray projection) {
         final String userId = params.getString(ARG1);
         final String view = params.getString(ARG2);
-        return uniform(params, (resourceId) ->
-                stub.saveMatrix(userId, resourceId, view, projection)
-                        /* New projection */
-                        .compose(updated -> Ux.toFuture(Ut.toJArray(updated.getProjection()))));
+        return uniform(params, (resourceId) -> stub.saveMatrix(userId, resourceId, view, projection)
+                /* New projection */
+                .compose(updated -> Ux.toFuture(Ut.toJArray(updated.getProjection()))))
+                /*
+                 * Flush cache of session on impacted uri
+                 * This method is for projection refresh here
+                 * /api/columns/{actor}/my -> save projection on
+                 * /api/{actor}/search
+                 * This impact will be in time when this method called.
+                 * The method is used in this class only and could not be shared.
+                 */
+                .compose(flushed -> flush(params, flushed));
+    }
+
+    private Future<JsonArray> flush(final JsonObject params, final JsonArray updated) {
+        /*
+         * ScHabitus instance
+         */
+        final String habitus = params.getString(ARG3);
+        final ScHabitus habit = ScHabitus.initialize(habitus);
+        /*
+         * Method / Uri
+         */
+        final String dataKey = params.getString(ARG4);
+        return habit.<JsonObject>get(dataKey).compose(stored -> {
+            if (Objects.isNull(stored)) {
+                return Ux.toFuture(updated);
+            } else {
+                final JsonObject updatedJson = stored.copy();
+                updatedJson.put(Inquiry.KEY_PROJECTION, updated);
+                return habit.set(dataKey, updatedJson)
+                        .compose(retured -> {
+                            Sc.infoAuth(getLogger(), AuthMsg.REGION_FLUSH, habitus, dataKey,
+                                    stored.encodePrettily(), retured.encodePrettily());
+                            return Ux.toFuture(updated);
+                        });
+            }
+        });
     }
 
     /*

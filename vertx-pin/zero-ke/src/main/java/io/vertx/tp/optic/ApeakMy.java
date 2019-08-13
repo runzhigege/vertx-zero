@@ -17,6 +17,9 @@ public interface ApeakMy {
     String ARG1 = "user";
     String ARG2 = KeField.VIEW;
 
+    String ARG3 = "habitus";
+    String ARG4 = KeField.DATA_KEY;
+
     ApeakMy on(UxJooq jooq);
 
     /*

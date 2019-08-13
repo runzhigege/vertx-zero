@@ -55,9 +55,7 @@ class ScPhase {
     }
 
     static Future<JsonObject> cacheBound(final RoutingContext context, final Envelop envelop) {
-        final String token = envelop.jwt();
-        final JsonObject tokenJson = Ux.Jwt.extract(token);
-        final String habit = tokenJson.getString("habitus");
+        final String habit = Ke.keyHabitus(envelop);
         if (Ut.isNil(habit)) {
             /*
              * Empty bound in current interface instead of other
