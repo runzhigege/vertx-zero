@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
 import io.vertx.tp.ke.cv.KeField;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
@@ -50,6 +51,11 @@ public class Ke {
     public static String keyAuthorized(final String method, final String uri) {
         return KeCache.keyAuthorized(method, uri);
     }
+
+    public static String keyHabitus(final Envelop envelop) {
+        return KeCache.keyHabitus(envelop);
+    }
+
 
     /*
      * Get keySession here for current logged user

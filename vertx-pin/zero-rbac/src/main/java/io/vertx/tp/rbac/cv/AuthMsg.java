@@ -39,6 +39,7 @@ public interface AuthMsg {
     String REGION_TYPE = "DataRegion Analyzed type: {0}, data = {1}";
     String REGION_ROWS = "DataRegion Rows -> {0}";
     String REGION_PROJECTION = "DataRegion Projection -> {0}";
+    String REGION_FLUSH = "DataRegion Flush -> habitus = {0}, dataKey = {1}, From \n{2} \nto \n{3}";
 
     String SEEKER_RESOURCE = "Seeking Resource with uri = {0}, method = {1}, sigma = {2}";
     String POOL_RESOURCE = "Pool = {0} has been initialized to `habitus` = {1}";
