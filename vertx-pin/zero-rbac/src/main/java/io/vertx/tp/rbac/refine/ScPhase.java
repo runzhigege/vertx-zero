@@ -1,19 +1,20 @@
 package io.vertx.tp.rbac.refine;
 
-import io.vertx.core.buffer.Buffer;
+import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.ext.web.Session;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.optic.Orbit;
 import io.vertx.tp.optic.Pocket;
 import io.vertx.tp.optic.atom.Income;
+import io.vertx.tp.rbac.permission.ScHabitus;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.log.Annal;
 import io.vertx.up.runtime.ZeroAnno;
-
-import java.util.Objects;
+import io.vertx.up.unity.Ux;
+import io.vertx.up.util.Ut;
 
 /*
  * Uri Processing to calculate resource key here.
@@ -40,28 +41,37 @@ class ScPhase {
         return uri(requestUri, request.uri());
     }
 
-    private static String cacheKey(final RoutingContext context) {
-        final HttpServerRequest request = context.request();
-        final String uri = uri(context);
-        /* Cache Data */
-        Sc.infoAuth(LOGGER, "Processed Uri: {0}", uri);
-        /* Cache Key */
-        final String cacheKey = Ke.keySession(request.method().name(), uri);
-        /* Cache Data */
-        Sc.infoAuth(LOGGER, "Try cacheKey: {0}", cacheKey);
-        return cacheKey;
-    }
-
-    static JsonObject cacheData(final RoutingContext context) {
-        /* Session Extract */
-        final Session session = context.session();
-        /* Cache Key */
-        final String cacheKey = cacheKey(context);
-        final Buffer buffer = session.get(cacheKey);
-        if (Objects.nonNull(buffer)) {
-            return buffer.toJsonObject();
+    static Future<JsonObject> cacheBound(final Envelop envelop) {
+        final String token = envelop.jwt();
+        final JsonObject tokenJson = Ux.Jwt.extract(token);
+        final String habit = tokenJson.getString("habitus");
+        if (Ut.isNil(habit)) {
+            /*
+             * Empty bound in current interface instead of other
+             */
+            return Ux.toFuture(new JsonObject());
         } else {
-            return new JsonObject();
+            /*
+             * ScHabitus instead of Session
+             */
+            final ScHabitus habitus = ScHabitus.initialize(habit);
+            /*
+             * Method name / uri
+             */
+            final HttpMethod method = envelop.getMethod();
+            final String uri = envelop.getUri();
+            String requestUri = ZeroAnno.recoveryUri(uri, method);
+            requestUri = uri(requestUri, uri);
+            /*
+             * Cache key here.
+             */
+            Sc.infoAuth(LOGGER, "Processed Uri: {0}", requestUri);
+            /*
+             * Cache key
+             */
+            final String cacheKey = Ke.keySession(method.name(), requestUri);
+            Sc.infoAuth(LOGGER, "Try cacheKey: {0}", cacheKey);
+            return habitus.get(cacheKey);
         }
     }
 }
