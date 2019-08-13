@@ -23,7 +23,7 @@ public class DataRegion extends AbstractRegion {
     public Future<Envelop> before(final RoutingContext context, final Envelop envelop) {
         if (isEnabled(context)) {
             /* Get Critical parameters */
-            return Sc.cacheBound(envelop).compose(matrix -> {
+            return Sc.cacheBound(context, envelop).compose(matrix -> {
                 Sc.infoAuth(getLogger(), AuthMsg.REGION_BEFORE, matrix.encode());
                 /*
                  * Body modification is only available for POST/PUT
@@ -65,7 +65,7 @@ public class DataRegion extends AbstractRegion {
     public Future<Envelop> after(final RoutingContext context, final Envelop response) {
         if (isEnabled(context)) {
             /* Get Critical parameters */
-            return Sc.cacheBound(response).compose(matrix -> {
+            return Sc.cacheBound(context, response).compose(matrix -> {
                 Sc.infoAuth(getLogger(), AuthMsg.REGION_AFTER, matrix.encode());
                 /* Projection */
                 DataMin.dwarfRecord(response, matrix);

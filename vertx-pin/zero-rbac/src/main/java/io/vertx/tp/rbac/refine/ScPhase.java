@@ -37,11 +37,24 @@ class ScPhase {
     static String uri(final RoutingContext context) {
         final HttpServerRequest request = context.request();
         final HttpMethod method = request.method();
-        final String requestUri = ZeroAnno.recoveryUri(request.uri(), method);
-        return uri(requestUri, request.uri());
+        final String requestUri = ZeroAnno.recoveryUri(request.path(), method);
+        return uri(requestUri, request.path());
     }
 
-    static Future<JsonObject> cacheBound(final Envelop envelop) {
+
+    private static String cacheKey(final RoutingContext context) {
+        final HttpServerRequest request = context.request();
+        final String uri = uri(context);
+        /* Cache Data */
+        Sc.infoAuth(LOGGER, "Processed Uri: {0}", uri);
+        /* Cache Key */
+        final String cacheKey = Ke.keySession(request.method().name(), uri);
+        /* Cache Data */
+        Sc.infoAuth(LOGGER, "Try cacheKey: {0}", cacheKey);
+        return cacheKey;
+    }
+
+    static Future<JsonObject> cacheBound(final RoutingContext context, final Envelop envelop) {
         final String token = envelop.jwt();
         final JsonObject tokenJson = Ux.Jwt.extract(token);
         final String habit = tokenJson.getString("habitus");
@@ -56,21 +69,9 @@ class ScPhase {
              */
             final ScHabitus habitus = ScHabitus.initialize(habit);
             /*
-             * Method name / uri
-             */
-            final HttpMethod method = envelop.getMethod();
-            final String uri = envelop.getUri();
-            String requestUri = ZeroAnno.recoveryUri(uri, method);
-            requestUri = uri(requestUri, uri);
-            /*
-             * Cache key here.
-             */
-            Sc.infoAuth(LOGGER, "Processed Uri: {0}", requestUri);
-            /*
              * Cache key
              */
-            final String cacheKey = Ke.keySession(method.name(), requestUri);
-            Sc.infoAuth(LOGGER, "Try cacheKey: {0}", cacheKey);
+            final String cacheKey = cacheKey(context);
             return habitus.get(cacheKey);
         }
     }
