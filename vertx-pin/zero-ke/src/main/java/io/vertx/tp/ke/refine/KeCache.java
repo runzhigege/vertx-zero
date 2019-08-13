@@ -3,19 +3,15 @@ package io.vertx.tp.ke.refine;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.auth.User;
 import io.vertx.ext.web.Session;
 import io.vertx.tp.error._409SessionConflictException;
-import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.plugin.session.SessionClient;
 import io.vertx.tp.plugin.session.SessionInfix;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.unity.Ux;
-import io.vertx.up.util.Ut;
 
 import java.util.Objects;
-import java.util.function.BiFunction;
 
 /*
  * Key generated for uniform platform
@@ -28,28 +24,14 @@ class KeCache {
         return "session-" + method + ":" + uri;
     }
 
-    static String keyEnvelop(final Envelop envelop, final BiFunction<String, String, String> executor) {
-        final User user = envelop.user();
-        if (Objects.nonNull(user)) {
-            final JsonObject principle = user.principal();
-            if (!Ut.isNil(principle)) {
-                /*
-                 * Process for metadata in principle here
-                 */
-                final JsonObject metadata = principle.getJsonObject(KeField.METADATA);
-                final String uri = metadata.getString(KeField.URI_REQUEST);
-                final String method = metadata.getString(KeField.URI);
-                return executor.apply(method, uri);
-            } else {
-                return null;
-            }
-        } else {
-            return null;
-        }
-    }
-
     static String keyAuthorized(final String method, final String uri) {
         return "authorized-" + method + ":" + uri;
+    }
+
+    static String keyHabitus(final Envelop envelop) {
+        final String token = envelop.jwt();
+        final JsonObject tokenJson = Ux.Jwt.extract(token);
+        return tokenJson.getString("habitus");
     }
 
     /*
