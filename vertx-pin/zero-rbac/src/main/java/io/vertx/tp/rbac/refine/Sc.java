@@ -65,8 +65,8 @@ public class Sc {
         return ScCache.permission(key, value);
     }
 
-    public static Future<JsonObject> cacheBound(final Envelop envelop) {
-        return ScPhase.cacheBound(envelop);
+    public static Future<JsonObject> cacheBound(final RoutingContext context, final Envelop envelop) {
+        return ScPhase.cacheBound(context, envelop);
     }
 
     /*
