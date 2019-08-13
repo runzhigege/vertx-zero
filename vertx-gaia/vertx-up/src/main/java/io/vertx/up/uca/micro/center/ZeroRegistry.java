@@ -176,6 +176,7 @@ public class ZeroRegistry {
                 .forEach(processed::add);
         /*
          * Scan configuration file and capture plug-in data
+         * （Sync） Plug-in in sync mode
          */
         PluginExtension.ZeroRegistry.registryRoute(processed);
 

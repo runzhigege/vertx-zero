@@ -136,7 +136,7 @@ public class FileActor {
                     final String actor = Ux.getString(request);
                     return exportTable(actor, data);
                 })
-                .compose(buffer -> Envelop.success(buffer).toFuture())
+                .compose(buffer -> Ux.toFuture(Envelop.success(buffer)))
         );
     }
 

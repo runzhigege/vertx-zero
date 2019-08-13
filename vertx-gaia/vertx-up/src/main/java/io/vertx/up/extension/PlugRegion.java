@@ -1,5 +1,6 @@
 package io.vertx.up.extension;
 
+import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.commune.Envelop;
@@ -22,10 +23,10 @@ public interface PlugRegion {
     /*
      * Request processing
      */
-    void before(RoutingContext context, Envelop request);
+    Future<Envelop> before(RoutingContext context, Envelop request);
 
     /*
      * Response processing
      */
-    void after(RoutingContext context, Envelop response);
+    Future<Envelop> after(RoutingContext context, Envelop response);
 }
