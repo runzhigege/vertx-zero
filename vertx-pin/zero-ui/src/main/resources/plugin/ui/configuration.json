@@ -1,6 +1,5 @@
 {
     "definition": "plugin/ui/column",
     "mapping": {
-        "ui.group": "group.json"
     }
 }
