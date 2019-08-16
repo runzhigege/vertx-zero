@@ -13,16 +13,27 @@
     <packaging>pom</packaging>
     <name>（ Zero Plugin ) Container Tier</name>
     <modules>
+        <!-- Crud -->
         <module>zero-crud</module>
+        <!-- RBCA -->
         <module>zero-rbac</module>
+        <!-- Zero Core Library -->
         <module>zero-ke</module>
-        <module>zero-ambient</module>
-        <module>zero-lbs</module>
+        <!-- Ui Configuration -->
         <module>zero-ui</module>
+        <!-- Test Framework -->
         <module>zero-quiz</module>
+        <!-- Api / Service / Job definition -->
         <module>zero-jet</module>
+        <!-- Micro Api Gateway-->
         <module>zero-router</module>
+        <!-- Business Module -->
+        <!-- Erp -->
         <module>zero-erp</module>
+        <!-- Ambient -->
+        <module>zero-ambient</module>
+        <!-- Location Service -->
+        <module>zero-lbs</module>
     </modules>
     <dependencies>
         <dependency>
