@@ -9,13 +9,13 @@ import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.web.handler.AuthHandler;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.refine.Sc;
-import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Authenticate;
 import io.vertx.up.annotations.Wall;
 import io.vertx.up.log.Annal;
 import io.vertx.up.secure.Security;
 import io.vertx.up.secure.handler.JwtOstium;
 import io.vertx.up.secure.provider.JwtAuth;
+import io.vertx.up.unity.Ux;
 
 import javax.inject.Inject;
 

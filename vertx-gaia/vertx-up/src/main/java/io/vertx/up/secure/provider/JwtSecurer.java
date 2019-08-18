@@ -7,7 +7,6 @@ import io.vertx.ext.auth.jwt.impl.JWTUser;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception.web._401JwtExecutorException;
 import io.vertx.up.exception.web._403ForbiddenException;
-import io.vertx.up.log.Annal;
 import io.vertx.up.secure.Security;
 import io.vertx.up.unity.Ux;
 
@@ -18,7 +17,6 @@ import java.util.function.Supplier;
  */
 class JwtSecurer {
 
-    private static final Annal LOGGER = Annal.get(JwtSecurer.class);
     private transient Security security;
     private transient String permissionsClaimKey;
 
