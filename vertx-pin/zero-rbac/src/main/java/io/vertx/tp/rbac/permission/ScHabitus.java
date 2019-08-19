@@ -10,6 +10,7 @@ import io.vertx.up.unity.Ux;
 import io.vertx.up.unity.UxPool;
 import io.vertx.up.util.Ut;
 
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -37,7 +38,7 @@ public class ScHabitus {
     private ScHabitus(final String habitus) {
         Sc.infoResource(LOGGER, AuthMsg.POOL_RESOURCE, POOL_HABITUS, habitus);
         this.habitus = habitus;
-        pool = Ux.Pool.on(POOL_HABITUS);
+        this.pool = Ux.Pool.on(POOL_HABITUS);
     }
 
     public static ScHabitus initialize(final String habitus) {
@@ -49,12 +50,19 @@ public class ScHabitus {
      */
     @SuppressWarnings("unchecked")
     public <T> Future<T> get(final String dataKey) {
-        return pool.<String, JsonObject>get(habitus)
-                .compose(item -> Ux.toFuture((T) item.getValue(dataKey)));
+        return this.pool.<String, JsonObject>get(this.habitus)
+                .compose(item -> {
+                    /* To avoid Null Pointer Issue */
+                    if (Objects.isNull(item)) {
+                        return Future.succeededFuture(null);
+                    } else {
+                        return Ux.toFuture((T) item.getValue(dataKey));
+                    }
+                });
     }
 
     public <T> Future<T> set(final String dataKey, final T value) {
-        return pool.<String, JsonObject>get(habitus)
+        return this.pool.<String, JsonObject>get(this.habitus)
                 .compose(stored -> {
                     if (Ut.isNil(stored)) {
                         stored = new JsonObject();
@@ -64,7 +72,7 @@ public class ScHabitus {
                      */
                     final JsonObject updated = stored.copy();
                     updated.put(dataKey, value);
-                    return pool.put(habitus, updated)
+                    return this.pool.put(this.habitus, updated)
                             .compose(nil -> Ux.toFuture(value));
                 });
     }
@@ -73,8 +81,8 @@ public class ScHabitus {
         /*
          * Remove reference pool for `habitus`
          */
-        POOLS.remove(habitus);
-        return pool.remove(habitus)
+        POOLS.remove(this.habitus);
+        return this.pool.remove(this.habitus)
                 /*
                  * Remove current habitus from pool ( Pool Structure )
                  */

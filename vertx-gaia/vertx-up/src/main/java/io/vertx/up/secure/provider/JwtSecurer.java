@@ -45,19 +45,18 @@ class JwtSecurer {
          * User defined security interface and implement custom code logical
          * Call custom code logical here to do 401 validation.
          */
-        return security.verify(authInfo)
-                .compose(authenticated -> next(authenticated,
-                        /*
-                         * 401 Passed, continue to do 403 workflow
-                         */
-                        () -> authorize(authInfo),
-                        /*
-                         * There is no error fired by Future.failedFuture method
-                         * But the validated result is false, it means that there is common
-                         * Authenticate workflow.
-                         */
-                        () -> new _401JwtExecutorException(getClass(), token)
-                ));
+        return security.verify(authInfo).compose(authenticated -> next(authenticated,
+                /*
+                 * 401 Passed, continue to do 403 workflow
+                 */
+                () -> authorize(authInfo),
+                /*
+                 * There is no error fired by Future.failedFuture method
+                 * But the validated result is false, it means that there is common
+                 * Authenticate workflow.
+                 */
+                () -> new _401JwtExecutorException(getClass(), token)
+        ));
     }
 
     /*
