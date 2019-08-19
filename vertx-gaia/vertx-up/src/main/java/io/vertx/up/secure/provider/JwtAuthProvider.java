@@ -124,6 +124,8 @@ public class JwtAuthProvider implements JwtAuth {
             } else {
                 /* Capture the result from internal calling */
                 final Throwable error = user.cause();
+                /* Debug for error stack here */
+                Ux.debug(error, () -> error);
                 handler.handle(Future.failedFuture(error));
             }
         };
