@@ -34,6 +34,7 @@ public class HttpServerVisitor implements ServerVisitor<HttpServerOptions> {
      * @throws ZeroException ServerConfigException
      */
     @Override
+    @SuppressWarnings("all")
     public ConcurrentMap<Integer, HttpServerOptions> visit(final String... key)
             throws ZeroException {
         // 1. Must be the first line, fixed position.
@@ -78,7 +79,7 @@ public class HttpServerVisitor implements ServerVisitor<HttpServerOptions> {
         return getType().match(item.getString(YKEY_TYPE));
     }
 
-    protected int extractPort(final JsonObject config) {
+    private int extractPort(final JsonObject config) {
         if (null != config) {
             return config.getInteger("port", HttpServerOptions.DEFAULT_PORT);
         }

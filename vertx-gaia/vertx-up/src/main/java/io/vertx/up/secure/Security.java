@@ -35,8 +35,8 @@ public interface Security {
      * 2) Expired ?
      * 3) Signature valid ?
      *
-     * @param data
-     * @return
+     * @param data The stored token data here
+     * @return Whether it's valid
      */
     Future<Boolean> verify(JsonObject data);
 
