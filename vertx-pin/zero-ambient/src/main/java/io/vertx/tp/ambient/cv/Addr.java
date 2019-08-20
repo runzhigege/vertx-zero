@@ -52,4 +52,8 @@ public interface Addr {
 
         String TABULAR_CODE = Prefix._EVENT + "X-TABULAR/CODE";
     }
+
+    interface Module {
+        String BY_NAME = Prefix._EVENT + "X-MODULE/NAME";
+    }
 }

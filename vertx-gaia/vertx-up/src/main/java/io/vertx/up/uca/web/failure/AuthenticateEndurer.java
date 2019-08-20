@@ -6,6 +6,7 @@ import io.vertx.up.commune.Envelop;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.uca.rs.hunt.Answer;
+import io.vertx.up.unity.Ux;
 
 /**
  * Common handler to handle failure
@@ -31,6 +32,7 @@ public class AuthenticateEndurer implements Handler<RoutingContext> {
                 /*
                  * Environment bind
                  */
+                Ux.debug(error, () -> error);
                 Answer.reply(event, Envelop.failure(error));
             } else {
                 // Other exception found

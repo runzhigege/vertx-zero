@@ -35,7 +35,7 @@ public class XModule extends TableImpl<XModuleRecord> {
      * The reference instance of <code>DB_ETERNAL.X_MODULE</code>
      */
     public static final XModule X_MODULE = new XModule();
-    private static final long serialVersionUID = -901939366;
+    private static final long serialVersionUID = 1906184388;
     /**
      * The column <code>DB_ETERNAL.X_MODULE.KEY</code>. 「key」- 模块唯一主键
      */
@@ -45,17 +45,13 @@ public class XModule extends TableImpl<XModuleRecord> {
      */
     public final TableField<XModuleRecord, String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「name」- 模块名称");
     /**
-     * The column <code>DB_ETERNAL.X_MODULE.CODE</code>. 「code」- 应用程序编码
+     * The column <code>DB_ETERNAL.X_MODULE.CODE</code>. 「code」- 模块编码
      */
-    public final TableField<XModuleRecord, String> CODE = createField("CODE", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「code」- 应用程序编码");
+    public final TableField<XModuleRecord, String> CODE = createField("CODE", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「code」- 模块编码");
     /**
-     * The column <code>DB_ETERNAL.X_MODULE.CAT</code>. 「cat」- 模块类型
+     * The column <code>DB_ETERNAL.X_MODULE.ENTRY</code>. 「entry」— 模块入口地址
      */
-    public final TableField<XModuleRecord, String> CAT = createField("CAT", org.jooq.impl.SQLDataType.VARCHAR(20), this, "「cat」- 模块类型");
-    /**
-     * The column <code>DB_ETERNAL.X_MODULE.URL_ENTRY</code>. 「urlEntry」— 模块入口地址
-     */
-    public final TableField<XModuleRecord, String> URL_ENTRY = createField("URL_ENTRY", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「urlEntry」— 模块入口地址");
+    public final TableField<XModuleRecord, String> ENTRY = createField("ENTRY", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「entry」— 模块入口地址");
     /**
      * The column <code>DB_ETERNAL.X_MODULE.APP_ID</code>. 「appId」- 关联的应用程序ID
      */
@@ -147,7 +143,7 @@ public class XModule extends TableImpl<XModuleRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.X_MODULE_PRIMARY, Indexes.X_MODULE_URL_ENTRY);
+        return Arrays.<Index>asList(Indexes.X_MODULE_ENTRY, Indexes.X_MODULE_PRIMARY);
     }
 
     /**
@@ -163,7 +159,7 @@ public class XModule extends TableImpl<XModuleRecord> {
      */
     @Override
     public List<UniqueKey<XModuleRecord>> getKeys() {
-        return Arrays.<UniqueKey<XModuleRecord>>asList(Keys.KEY_X_MODULE_PRIMARY, Keys.KEY_X_MODULE_URL_ENTRY);
+        return Arrays.<UniqueKey<XModuleRecord>>asList(Keys.KEY_X_MODULE_PRIMARY, Keys.KEY_X_MODULE_ENTRY);
     }
 
     /**
