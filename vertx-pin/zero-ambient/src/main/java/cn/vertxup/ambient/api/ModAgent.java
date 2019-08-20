@@ -9,14 +9,14 @@ import io.vertx.up.eon.ID;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 
 @EndPoint
 @Path("/api")
 public interface ModAgent {
-    @Path("/module/{entry}")
+    @Path("/module")
     @GET
     @Address(Addr.Module.BY_NAME)
     JsonObject moduleByName(@HeaderParam(ID.Header.X_APP_ID) String appId,
-                            @PathParam("entry") String entry);
+                            @QueryParam("entry") String entry);
 }
