@@ -1,8 +1,10 @@
 package io.vertx.up.extension.pointer;
 
 import io.vertx.core.Future;
+import io.vertx.core.http.HttpStatusCode;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.commune.Envelop;
+import io.vertx.up.unity.Ux;
 
 import java.util.Set;
 
@@ -46,7 +48,17 @@ public interface PluginExtension {
              * 3) `rows` should impact collection only
              *    -- Limitation: could not impact PageList interface.
              */
-            return PluginRegion.after(context, envelop);
+            final HttpStatusCode code = envelop.status();
+
+            return (HttpStatusCode.OK == code) ?
+                    /*
+                     * Ok response enabled plugin
+                     */
+                    PluginRegion.after(context, envelop) :
+                    /*
+                     * Otherwise failure throw out directly
+                     */
+                    Ux.toFuture(envelop);
         }
     }
 
