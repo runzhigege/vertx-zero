@@ -156,6 +156,7 @@ public abstract class AuthPhylum implements AuthHandler {
                     if (header != null) {
                         ctx.response().putHeader("WWW-Authenticate", header);
                     }
+                    // Zero extension for context error here
                     ctx.fail(null == authN.cause() ? this.UNAUTHORIZED : authN.cause());
                 }
             });

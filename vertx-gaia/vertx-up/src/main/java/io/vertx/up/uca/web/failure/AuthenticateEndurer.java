@@ -4,6 +4,7 @@ import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.exception.WebException;
+import io.vertx.up.log.Annal;
 import io.vertx.up.uca.rs.hunt.Answer;
 
 /**
@@ -11,11 +12,13 @@ import io.vertx.up.uca.rs.hunt.Answer;
  */
 public class AuthenticateEndurer implements Handler<RoutingContext> {
 
-    public static Handler<RoutingContext> create() {
-        return new AuthenticateEndurer();
-    }
+    private static final Annal LOGGER = Annal.get(AuthenticateEndurer.class);
 
     private AuthenticateEndurer() {
+    }
+
+    public static Handler<RoutingContext> create() {
+        return new AuthenticateEndurer();
     }
 
     @Override
@@ -23,10 +26,15 @@ public class AuthenticateEndurer implements Handler<RoutingContext> {
         if (event.failed()) {
             final Throwable ex = event.failure();
             if (ex instanceof WebException) {
+                LOGGER.info("[ ZERO ] Web Exception: {0} = {1}", ex.getClass().getName(), ex.getMessage());
                 final WebException error = (WebException) ex;
+                /*
+                 * Environment bind
+                 */
                 Answer.reply(event, Envelop.failure(error));
             } else {
                 // Other exception found
+                LOGGER.info("[ ZERO ] Exception: {0} = {1}", ex.getClass().getName(), ex.getMessage());
                 event.fail(ex);
             }
         } else {

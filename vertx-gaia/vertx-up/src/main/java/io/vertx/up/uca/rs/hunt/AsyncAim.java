@@ -17,18 +17,18 @@ public class AsyncAim extends BaseAim implements Aim<RoutingContext> {
 
     @Override
     public Handler<RoutingContext> attack(final Event event) {
-        return Fn.getNull(() -> (context) -> exec(() -> {
+        return Fn.getNull(() -> (context) -> this.exec(() -> {
             /*
              * Build future ( data handler )
              */
-            final Future<Envelop> future = invoke(context, event);
+            final Future<Envelop> future = this.invoke(context, event);
 
             /*
              * Event bus building / get from vertx instance.
              */
             final Vertx vertx = context.vertx();
             final EventBus bus = vertx.eventBus();
-            final String address = address(event);
+            final String address = this.address(event);
 
             /*
              * New method instead of old
@@ -38,9 +38,9 @@ public class AsyncAim extends BaseAim implements Aim<RoutingContext> {
                 final Envelop response;
                 if (handler.succeeded()) {
                     // Request - Response message
-                    response = success(address, handler);
+                    response = this.success(address, handler);
                 } else {
-                    response = failure(address, handler);
+                    response = this.failure(address, handler);
                 }
                 Answer.reply(context, response, event);
             }));
@@ -64,7 +64,7 @@ public class AsyncAim extends BaseAim implements Aim<RoutingContext> {
         /*
          * Method arguments building here.
          */
-        final Object[] arguments = buildArgs(context, event);
+        final Object[] arguments = this.buildArgs(context, event);
         /*
          * Whether it's interface mode or agent mode
          */
@@ -82,7 +82,7 @@ public class AsyncAim extends BaseAim implements Aim<RoutingContext> {
             /*
              * Agent mode
              */
-            final Object returnValue = invoke(event, arguments);
+            final Object returnValue = this.invoke(event, arguments);
             invoked = Flower.next(context, returnValue);
         }
 
