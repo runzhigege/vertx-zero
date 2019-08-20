@@ -14,7 +14,7 @@ public interface Security {
      * 3) Etcd
      * As you want.
      *
-     * @param data
+     * @param data Stored token information
      */
     default Future<JsonObject> store(final JsonObject data) {
         /*

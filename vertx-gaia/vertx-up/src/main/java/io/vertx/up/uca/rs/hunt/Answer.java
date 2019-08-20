@@ -127,12 +127,10 @@ public final class Answer {
              * SessionData Stored
              */
             storeSession(context, envelop.data(), sessionAction);
-
             /*
              * Plugin Extension for response replying here ( Plug-in )
              */
             PluginExtension.Answer.reply(context, envelop);
-
             /*
              * Output of current situation
              */
