@@ -64,7 +64,7 @@ public class Keys {
     public static final UniqueKey<XMenuRecord> KEY_X_MENU_PRIMARY = UniqueKeys0.KEY_X_MENU_PRIMARY;
     public static final UniqueKey<XMenuRecord> KEY_X_MENU_NAME = UniqueKeys0.KEY_X_MENU_NAME;
     public static final UniqueKey<XModuleRecord> KEY_X_MODULE_PRIMARY = UniqueKeys0.KEY_X_MODULE_PRIMARY;
-    public static final UniqueKey<XModuleRecord> KEY_X_MODULE_URL_ENTRY = UniqueKeys0.KEY_X_MODULE_URL_ENTRY;
+    public static final UniqueKey<XModuleRecord> KEY_X_MODULE_ENTRY = UniqueKeys0.KEY_X_MODULE_ENTRY;
     public static final UniqueKey<XNumberRecord> KEY_X_NUMBER_PRIMARY = UniqueKeys0.KEY_X_NUMBER_PRIMARY;
     public static final UniqueKey<XNumberRecord> KEY_X_NUMBER_APP_ID = UniqueKeys0.KEY_X_NUMBER_APP_ID;
     public static final UniqueKey<XSourceRecord> KEY_X_SOURCE_PRIMARY = UniqueKeys0.KEY_X_SOURCE_PRIMARY;
@@ -96,7 +96,7 @@ public class Keys {
         public static final UniqueKey<XMenuRecord> KEY_X_MENU_PRIMARY = Internal.createUniqueKey(XMenu.X_MENU, "KEY_X_MENU_PRIMARY", XMenu.X_MENU.KEY);
         public static final UniqueKey<XMenuRecord> KEY_X_MENU_NAME = Internal.createUniqueKey(XMenu.X_MENU, "KEY_X_MENU_NAME", XMenu.X_MENU.NAME, XMenu.X_MENU.APP_ID);
         public static final UniqueKey<XModuleRecord> KEY_X_MODULE_PRIMARY = Internal.createUniqueKey(XModule.X_MODULE, "KEY_X_MODULE_PRIMARY", XModule.X_MODULE.KEY);
-        public static final UniqueKey<XModuleRecord> KEY_X_MODULE_URL_ENTRY = Internal.createUniqueKey(XModule.X_MODULE, "KEY_X_MODULE_URL_ENTRY", XModule.X_MODULE.URL_ENTRY);
+        public static final UniqueKey<XModuleRecord> KEY_X_MODULE_ENTRY = Internal.createUniqueKey(XModule.X_MODULE, "KEY_X_MODULE_ENTRY", XModule.X_MODULE.ENTRY, XModule.X_MODULE.APP_ID);
         public static final UniqueKey<XNumberRecord> KEY_X_NUMBER_PRIMARY = Internal.createUniqueKey(XNumber.X_NUMBER, "KEY_X_NUMBER_PRIMARY", XNumber.X_NUMBER.KEY);
         public static final UniqueKey<XNumberRecord> KEY_X_NUMBER_APP_ID = Internal.createUniqueKey(XNumber.X_NUMBER, "KEY_X_NUMBER_APP_ID", XNumber.X_NUMBER.APP_ID, XNumber.X_NUMBER.IDENTIFIER, XNumber.X_NUMBER.CODE);
         public static final UniqueKey<XSourceRecord> KEY_X_SOURCE_PRIMARY = Internal.createUniqueKey(XSource.X_SOURCE, "KEY_X_SOURCE_PRIMARY", XSource.X_SOURCE.KEY);
