@@ -24,13 +24,12 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XModule implements IXModule {
 
-    private static final long serialVersionUID = -419884454;
+    private static final long serialVersionUID = -1590655205;
 
     private String        key;
     private String        name;
     private String        code;
-    private String        cat;
-    private String        urlEntry;
+    private String        entry;
     private String        appId;
     private String        modelId;
     private Boolean       active;
@@ -48,8 +47,7 @@ public class XModule implements IXModule {
         this.key = value.key;
         this.name = value.name;
         this.code = value.code;
-        this.cat = value.cat;
-        this.urlEntry = value.urlEntry;
+        this.entry = value.entry;
         this.appId = value.appId;
         this.modelId = value.modelId;
         this.active = value.active;
@@ -66,8 +64,7 @@ public class XModule implements IXModule {
         String        key,
         String        name,
         String        code,
-        String        cat,
-        String        urlEntry,
+        String        entry,
         String        appId,
         String        modelId,
         Boolean       active,
@@ -82,8 +79,7 @@ public class XModule implements IXModule {
         this.key = key;
         this.name = name;
         this.code = code;
-        this.cat = cat;
-        this.urlEntry = urlEntry;
+        this.entry = entry;
         this.appId = appId;
         this.modelId = modelId;
         this.active = active;
@@ -130,24 +126,13 @@ public class XModule implements IXModule {
     }
 
     @Override
-    public String getCat() {
-        return this.cat;
+    public String getEntry() {
+        return this.entry;
     }
 
     @Override
-    public XModule setCat(String cat) {
-        this.cat = cat;
-        return this;
-    }
-
-    @Override
-    public String getUrlEntry() {
-        return this.urlEntry;
-    }
-
-    @Override
-    public XModule setUrlEntry(String urlEntry) {
-        this.urlEntry = urlEntry;
+    public XModule setEntry(String entry) {
+        this.entry = entry;
         return this;
     }
 
@@ -268,8 +253,7 @@ public class XModule implements IXModule {
         sb.append(key);
         sb.append(", ").append(name);
         sb.append(", ").append(code);
-        sb.append(", ").append(cat);
-        sb.append(", ").append(urlEntry);
+        sb.append(", ").append(entry);
         sb.append(", ").append(appId);
         sb.append(", ").append(modelId);
         sb.append(", ").append(active);
@@ -297,8 +281,7 @@ public class XModule implements IXModule {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
-        setCat(from.getCat());
-        setUrlEntry(from.getUrlEntry());
+        setEntry(from.getEntry());
         setAppId(from.getAppId());
         setModelId(from.getModelId());
         setActive(from.getActive());

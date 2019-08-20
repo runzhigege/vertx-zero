@@ -7,9 +7,8 @@ CREATE TABLE IF NOT EXISTS X_MODULE
 (
     `KEY`        VARCHAR(36) COMMENT '「key」- 模块唯一主键',
     `NAME`       VARCHAR(255) COMMENT '「name」- 模块名称',
-    `CODE`       VARCHAR(36) COMMENT '「code」- 应用程序编码',
-    `CAT`        VARCHAR(20) COMMENT '「cat」- 模块类型',
-    `URL_ENTRY`  VARCHAR(255) COMMENT '「urlEntry」— 模块入口地址',
+    `CODE`       VARCHAR(36) COMMENT '「code」- 模块编码',
+    `ENTRY`      VARCHAR(255) COMMENT '「entry」— 模块入口地址',
     `APP_ID`     VARCHAR(255) COMMENT '「appId」- 关联的应用程序ID', -- 一对多，一个App下会包含多个Module
     `MODEL_ID`   VARCHAR(36) COMMENT '「modelId」- 当前模块关联的主模型ID',
 
@@ -29,4 +28,4 @@ CREATE TABLE IF NOT EXISTS X_MODULE
 
 -- changeset Lang:ox-module-2
 ALTER TABLE X_MODULE
-    ADD UNIQUE (`URL_ENTRY`); -- 页面入口地址
+    ADD UNIQUE (`ENTRY`, `APP_ID`); -- 页面入口地址
