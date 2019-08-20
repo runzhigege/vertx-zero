@@ -25,9 +25,7 @@ public class AppService implements AppStub {
                 /* Before App Initialized ( Public Api ) */
                 .compose(appData -> Uson.create(appData).remove(KeField.APP_KEY).toFuture())
                 /* Image field: logo */
-                .compose(Ke.image(KeField.LOGO))
-                /* Metadata field usage */
-                .compose(Ke.json(KeField.METADATA));
+                .compose(Ke.image(KeField.LOGO));
     }
 
     @Override

@@ -18,6 +18,6 @@ public class ModService implements ModStub {
                 .fetchOneAsync(filters)
                 .compose(Ux::fnJObject)
                 /* Metadata field usage */
-                .compose(Ke.json(KeField.METADATA));
+                .compose(Ke.metadata(KeField.METADATA));
     }
 }

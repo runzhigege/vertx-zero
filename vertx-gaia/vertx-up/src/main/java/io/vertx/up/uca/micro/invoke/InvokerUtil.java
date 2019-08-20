@@ -12,6 +12,7 @@ import io.vertx.zero.exception.AsyncSignatureException;
 import io.vertx.zero.exception.WorkerArgumentException;
 
 import java.lang.reflect.Method;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 /**
@@ -104,7 +105,7 @@ public class InvokerUtil {
                                final Envelop envelop) {
         final Class<?> argType = method.getParameterTypes()[Values.IDX];
         // One type dynamic here
-        final Object reference = envelop.data();
+        final Object reference = Objects.nonNull(envelop) ? envelop.data() : new JsonObject();
         // Non Direct
         Object parameters = reference;
         if (JsonObject.class == reference.getClass()) {
