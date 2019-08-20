@@ -44,34 +44,24 @@ public interface IXModule extends Serializable {
     public String getName();
 
     /**
-     * Setter for <code>DB_ETERNAL.X_MODULE.CODE</code>. 「code」- 应用程序编码
+     * Setter for <code>DB_ETERNAL.X_MODULE.CODE</code>. 「code」- 模块编码
      */
     public IXModule setCode(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.X_MODULE.CODE</code>. 「code」- 应用程序编码
+     * Getter for <code>DB_ETERNAL.X_MODULE.CODE</code>. 「code」- 模块编码
      */
     public String getCode();
 
     /**
-     * Setter for <code>DB_ETERNAL.X_MODULE.CAT</code>. 「cat」- 模块类型
+     * Setter for <code>DB_ETERNAL.X_MODULE.ENTRY</code>. 「entry」— 模块入口地址
      */
-    public IXModule setCat(String value);
+    public IXModule setEntry(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.X_MODULE.CAT</code>. 「cat」- 模块类型
+     * Getter for <code>DB_ETERNAL.X_MODULE.ENTRY</code>. 「entry」— 模块入口地址
      */
-    public String getCat();
-
-    /**
-     * Setter for <code>DB_ETERNAL.X_MODULE.URL_ENTRY</code>. 「urlEntry」— 模块入口地址
-     */
-    public IXModule setUrlEntry(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.X_MODULE.URL_ENTRY</code>. 「urlEntry」— 模块入口地址
-     */
-    public String getUrlEntry();
+    public String getEntry();
 
     /**
      * Setter for <code>DB_ETERNAL.X_MODULE.APP_ID</code>. 「appId」- 关联的应用程序ID
@@ -191,8 +181,7 @@ public interface IXModule extends Serializable {
         setKey(json.getString("KEY"));
         setName(json.getString("NAME"));
         setCode(json.getString("CODE"));
-        setCat(json.getString("CAT"));
-        setUrlEntry(json.getString("URL_ENTRY"));
+        setEntry(json.getString("ENTRY"));
         setAppId(json.getString("APP_ID"));
         setModelId(json.getString("MODEL_ID"));
         setActive(json.getBoolean("ACTIVE"));
@@ -212,8 +201,7 @@ public interface IXModule extends Serializable {
         json.put("KEY",getKey());
         json.put("NAME",getName());
         json.put("CODE",getCode());
-        json.put("CAT",getCat());
-        json.put("URL_ENTRY",getUrlEntry());
+        json.put("ENTRY",getEntry());
         json.put("APP_ID",getAppId());
         json.put("MODEL_ID",getModelId());
         json.put("ACTIVE",getActive());

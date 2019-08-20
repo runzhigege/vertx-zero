@@ -84,24 +84,10 @@ public class XModuleDao extends DAOImpl<XModuleRecord, cn.vertxup.ambient.domain
     }
 
     /**
-     * Fetch records that have <code>CAT IN (values)</code>
+     * Fetch records that have <code>ENTRY IN (values)</code>
      */
-    public List<cn.vertxup.ambient.domain.tables.pojos.XModule> fetchByCat(String... values) {
-        return fetch(XModule.X_MODULE.CAT, values);
-    }
-
-    /**
-     * Fetch records that have <code>URL_ENTRY IN (values)</code>
-     */
-    public List<cn.vertxup.ambient.domain.tables.pojos.XModule> fetchByUrlEntry(String... values) {
-        return fetch(XModule.X_MODULE.URL_ENTRY, values);
-    }
-
-    /**
-     * Fetch a unique record that has <code>URL_ENTRY = value</code>
-     */
-    public cn.vertxup.ambient.domain.tables.pojos.XModule fetchOneByUrlEntry(String value) {
-        return fetchOne(XModule.X_MODULE.URL_ENTRY, value);
+    public List<cn.vertxup.ambient.domain.tables.pojos.XModule> fetchByEntry(String... values) {
+        return fetch(XModule.X_MODULE.ENTRY, values);
     }
 
     /**
@@ -203,24 +189,10 @@ public class XModuleDao extends DAOImpl<XModuleRecord, cn.vertxup.ambient.domain
     }
 
     /**
-     * Fetch records that have <code>CAT IN (values)</code> asynchronously
+     * Fetch records that have <code>ENTRY IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XModule>> fetchByCatAsync(List<String> values) {
-        return fetchAsync(XModule.X_MODULE.CAT,values);
-    }
-
-    /**
-     * Fetch records that have <code>URL_ENTRY IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XModule>> fetchByUrlEntryAsync(List<String> values) {
-        return fetchAsync(XModule.X_MODULE.URL_ENTRY,values);
-    }
-
-    /**
-     * Fetch a unique record that has <code>URL_ENTRY = value</code> asynchronously
-     */
-    public CompletableFuture<cn.vertxup.ambient.domain.tables.pojos.XModule> fetchOneByUrlEntryAsync(String value) {
-        return FutureTool.executeBlocking(h->h.complete(fetchOneByUrlEntry(value)),vertx());
+    public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XModule>> fetchByEntryAsync(List<String> values) {
+        return fetchAsync(XModule.X_MODULE.ENTRY,values);
     }
 
     /**

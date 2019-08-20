@@ -50,8 +50,8 @@ public class Indexes {
     public static final Index X_CATEGORY_PRIMARY = Indexes0.X_CATEGORY_PRIMARY;
     public static final Index X_MENU_NAME = Indexes0.X_MENU_NAME;
     public static final Index X_MENU_PRIMARY = Indexes0.X_MENU_PRIMARY;
+    public static final Index X_MODULE_ENTRY = Indexes0.X_MODULE_ENTRY;
     public static final Index X_MODULE_PRIMARY = Indexes0.X_MODULE_PRIMARY;
-    public static final Index X_MODULE_URL_ENTRY = Indexes0.X_MODULE_URL_ENTRY;
     public static final Index X_NUMBER_APP_ID = Indexes0.X_NUMBER_APP_ID;
     public static final Index X_NUMBER_PRIMARY = Indexes0.X_NUMBER_PRIMARY;
     public static final Index X_SOURCE_APP_ID = Indexes0.X_SOURCE_APP_ID;
@@ -77,8 +77,8 @@ public class Indexes {
         public static Index X_CATEGORY_PRIMARY = Internal.createIndex("PRIMARY", XCategory.X_CATEGORY, new OrderField[] { XCategory.X_CATEGORY.KEY }, true);
         public static Index X_MENU_NAME = Internal.createIndex("NAME", XMenu.X_MENU, new OrderField[] { XMenu.X_MENU.NAME, XMenu.X_MENU.APP_ID }, true);
         public static Index X_MENU_PRIMARY = Internal.createIndex("PRIMARY", XMenu.X_MENU, new OrderField[] { XMenu.X_MENU.KEY }, true);
+        public static Index X_MODULE_ENTRY = Internal.createIndex("ENTRY", XModule.X_MODULE, new OrderField[] { XModule.X_MODULE.ENTRY, XModule.X_MODULE.APP_ID }, true);
         public static Index X_MODULE_PRIMARY = Internal.createIndex("PRIMARY", XModule.X_MODULE, new OrderField[] { XModule.X_MODULE.KEY }, true);
-        public static Index X_MODULE_URL_ENTRY = Internal.createIndex("URL_ENTRY", XModule.X_MODULE, new OrderField[] { XModule.X_MODULE.URL_ENTRY }, true);
         public static Index X_NUMBER_APP_ID = Internal.createIndex("APP_ID", XNumber.X_NUMBER, new OrderField[] { XNumber.X_NUMBER.APP_ID, XNumber.X_NUMBER.IDENTIFIER, XNumber.X_NUMBER.CODE }, true);
         public static Index X_NUMBER_PRIMARY = Internal.createIndex("PRIMARY", XNumber.X_NUMBER, new OrderField[] { XNumber.X_NUMBER.KEY }, true);
         public static Index X_SOURCE_APP_ID = Internal.createIndex("APP_ID", XSource.X_SOURCE, new OrderField[] { XSource.X_SOURCE.APP_ID }, true);
