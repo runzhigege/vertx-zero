@@ -29,8 +29,8 @@ public class Ke {
         return KeImage.image(field);
     }
 
-    public static Function<JsonObject, Future<JsonObject>> json(final String field) {
-        return KeElement.json(field);
+    public static Function<JsonObject, Future<JsonObject>> metadata(final String field) {
+        return KeElement.metadata(field);
     }
 
     public static <T> Future<T> poolAsync(final String name, final String key, final Supplier<Future<T>> supplier) {
