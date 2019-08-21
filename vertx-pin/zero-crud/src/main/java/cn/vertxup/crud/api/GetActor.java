@@ -6,10 +6,10 @@ import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.tp.optic.ApeakMy;
 import io.vertx.tp.optic.Pocket;
-import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.commune.Envelop;
+import io.vertx.up.unity.Ux;
 
 @Queue
 public class GetActor {
@@ -20,7 +20,7 @@ public class GetActor {
      */
     @Address(Addr.Get.BY_ID)
     public Future<Envelop> getById(final Envelop request) {
-        return Ix.create(getClass()).input(request).envelop((dao, config) -> {
+        return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Key */
             final String key = Ux.getString1(request);
             return dao.findByIdAsync(key)
@@ -36,7 +36,6 @@ public class GetActor {
      * GET: /api/columns/{actor}/full
      */
     @Address(Addr.Get.COLUMN_FULL)
-    @SuppressWarnings("all")
     public Future<Envelop> getFull(final Envelop request) {
         return Ix.create(this.getClass()).input(request).envelop(
                 /* Search full column and it will be used in another method */
