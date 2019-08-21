@@ -5,11 +5,11 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.tp.crud.init.IxPin;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.tp.error._404ModuleMissingException;
-import io.vertx.up.unity.Ux;
-import io.vertx.up.unity.UxJooq;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.log.Annal;
+import io.vertx.up.unity.Ux;
+import io.vertx.up.unity.UxJooq;
 
 import java.util.function.BiFunction;
 
@@ -35,6 +35,8 @@ public class IxMeta {
                 this.ex = new _404ModuleMissingException(this.target, actor);
             }
         } catch (final WebException error) {
+            // TODO: Exception here.
+            error.printStackTrace();
             this.ex = error;
         }
     }
