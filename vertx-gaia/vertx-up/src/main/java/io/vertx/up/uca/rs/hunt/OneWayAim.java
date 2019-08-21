@@ -17,17 +17,17 @@ public class OneWayAim extends BaseAim implements Aim<RoutingContext> {
 
     @Override
     public Handler<RoutingContext> attack(final Event event) {
-        return Fn.getNull(() -> (context) -> exec(() -> {
+        return Fn.getNull(() -> (context) -> this.exec(() -> {
             /*
              * Build Arguments by java reflection metadata definition here
              */
-            final Object[] arguments = buildArgs(context, event);
+            final Object[] arguments = this.buildArgs(context, event);
 
             /*
              * Method callxx
              * Java reflector to call developer's defined method
              */
-            final Object returnValue = invoke(event, arguments);
+            final Object returnValue = this.invoke(event, arguments);
 
             /*
              * Build event bus
@@ -36,7 +36,7 @@ public class OneWayAim extends BaseAim implements Aim<RoutingContext> {
              */
             final Vertx vertx = context.vertx();
             final EventBus bus = vertx.eventBus();
-            final String address = address(event);
+            final String address = this.address(event);
 
             /*
              * Call Flower next method to get future
@@ -49,19 +49,27 @@ public class OneWayAim extends BaseAim implements Aim<RoutingContext> {
              * Event bus send request out instead of other method
              * Please refer following old code to compare.
              */
-            future.setHandler(dataRes -> bus.<Envelop>request(address, dataRes.result(), handler -> {
-                final Envelop response;
-                if (handler.succeeded()) {
-                    /*
-                     * // One Way message
-                     * Only TRUE returned.
-                     */
-                    response = Envelop.success(Boolean.TRUE);
-                } else {
-                    response = failure(address, handler);
+            future.setHandler(dataRes -> {
+                /*
+                 * To avoid null pointer result when the handler triggered result here
+                 * SUCCESS
+                 */
+                if (dataRes.succeeded()) {
+                    bus.<Envelop>request(address, dataRes.result(), handler -> {
+                        final Envelop response;
+                        if (handler.succeeded()) {
+                            /*
+                             * // One Way message
+                             * Only TRUE returned.
+                             */
+                            response = Envelop.success(Boolean.TRUE);
+                        } else {
+                            response = this.failure(address, handler);
+                        }
+                        Answer.reply(context, response, event);
+                    });
                 }
-                Answer.reply(context, response, event);
-            }));
+            });
             /*
             bus.<Envelop>send(address, request, handler -> {
                 final Envelop response;

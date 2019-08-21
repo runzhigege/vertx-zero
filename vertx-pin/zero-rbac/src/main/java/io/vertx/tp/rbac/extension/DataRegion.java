@@ -21,37 +21,39 @@ public class DataRegion extends AbstractRegion {
 
     @Override
     public Future<Envelop> before(final RoutingContext context, final Envelop envelop) {
-        if (isEnabled(context)) {
+        if (this.isEnabled(context)) {
             /* Get Critical parameters */
             return Sc.cacheBound(context, envelop).compose(matrix -> {
-                Sc.infoAuth(getLogger(), AuthMsg.REGION_BEFORE, matrix.encode());
-                /*
-                 * Body modification is only available for POST/PUT
-                 * 1) Because only POST/PUT support body parameter
-                 * 2) Query engine parameters belong to body key such as
-                 * {
-                 *     criteria: {},
-                 *     sorter: [],
-                 *     projection: [],
-                 *     pager:{
-                 *         page: xx,
-                 *         size: xx
-                 *     }
-                 * }
-                 * 3) Get method will ignore this kind of situation and move the logical to
-                 * After workflow
-                 */
-                final HttpMethod method = envelop.getMethod();
-                if (HttpMethod.POST == method || HttpMethod.PUT == method) {
-                    /* Projection Modification */
-                    final JsonArray projection = matrix.getJsonArray(Inquiry.KEY_PROJECTION);
-                    if (Objects.nonNull(projection) && !projection.isEmpty()) {
-                        envelop.onProjection(projection);
-                    }
-                    /* Criteria Modification */
-                    final JsonObject criteria = matrix.getJsonObject(Inquiry.KEY_CRITERIA);
-                    if (Objects.nonNull(criteria) && !criteria.isEmpty()) {
-                        envelop.onCriteria(criteria);
+                if (Objects.nonNull(matrix)) {
+                    Sc.infoAuth(this.getLogger(), AuthMsg.REGION_BEFORE, matrix.encode());
+                    /*
+                     * Body modification is only available for POST/PUT
+                     * 1) Because only POST/PUT support body parameter
+                     * 2) Query engine parameters belong to body key such as
+                     * {
+                     *     criteria: {},
+                     *     sorter: [],
+                     *     projection: [],
+                     *     pager:{
+                     *         page: xx,
+                     *         size: xx
+                     *     }
+                     * }
+                     * 3) Get method will ignore this kind of situation and move the logical to
+                     * After workflow
+                     */
+                    final HttpMethod method = envelop.getMethod();
+                    if (HttpMethod.POST == method || HttpMethod.PUT == method) {
+                        /* Projection Modification */
+                        final JsonArray projection = matrix.getJsonArray(Inquiry.KEY_PROJECTION);
+                        if (Objects.nonNull(projection) && !projection.isEmpty()) {
+                            envelop.onProjection(projection);
+                        }
+                        /* Criteria Modification */
+                        final JsonObject criteria = matrix.getJsonObject(Inquiry.KEY_CRITERIA);
+                        if (Objects.nonNull(criteria) && !criteria.isEmpty()) {
+                            envelop.onCriteria(criteria);
+                        }
                     }
                 }
                 return Ux.toFuture(envelop);
@@ -63,10 +65,10 @@ public class DataRegion extends AbstractRegion {
 
     @Override
     public Future<Envelop> after(final RoutingContext context, final Envelop response) {
-        if (isEnabled(context)) {
+        if (this.isEnabled(context)) {
             /* Get Critical parameters */
             return Sc.cacheBound(context, response).compose(matrix -> {
-                Sc.infoAuth(getLogger(), AuthMsg.REGION_AFTER, matrix.encode());
+                Sc.infoAuth(this.getLogger(), AuthMsg.REGION_AFTER, matrix.encode());
                 /* Projection */
                 DataMin.dwarfRecord(response, matrix);
 

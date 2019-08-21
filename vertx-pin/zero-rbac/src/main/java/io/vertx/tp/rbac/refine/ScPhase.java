@@ -23,6 +23,9 @@ class ScPhase {
 
     private static final Annal LOGGER = Annal.get(ScPhase.class);
 
+    /*
+     * To avoid two request
+     */
     static String uri(final String uri, final String requestUri) {
         final Orbit orbit = Pocket.lookup(Orbit.class);
         if (null == orbit) {

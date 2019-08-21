@@ -13,6 +13,8 @@ import io.vertx.up.uca.container.Virtual;
 import io.vertx.up.uca.rs.Aim;
 import io.vertx.up.unity.Ux;
 
+import java.util.Objects;
+
 public class AsyncAim extends BaseAim implements Aim<RoutingContext> {
 
     @Override
@@ -34,16 +36,28 @@ public class AsyncAim extends BaseAim implements Aim<RoutingContext> {
              * New method instead of old
              * -- request(address, T, handler)
              */
-            future.setHandler(dataRes -> bus.<Envelop>request(address, dataRes.result(), handler -> {
-                final Envelop response;
-                if (handler.succeeded()) {
-                    // Request - Response message
-                    response = this.success(address, handler);
+            future.setHandler(dataRes -> {
+                /*
+                 * To avoid null pointer result when the handler triggered result here
+                 * SUCCESS
+                 */
+                if (dataRes.succeeded()) {
+                    bus.<Envelop>request(address, dataRes.result(), handler -> {
+                        final Envelop response;
+                        if (handler.succeeded()) {
+                            // Request - Response message
+                            response = this.success(address, handler);
+                        } else {
+                            response = this.failure(address, handler);
+                        }
+                        Answer.reply(context, response, event);
+                    });
                 } else {
-                    response = this.failure(address, handler);
+                    if (Objects.nonNull(dataRes.cause())) {
+                        dataRes.cause().printStackTrace();
+                    }
                 }
-                Answer.reply(context, response, event);
-            }));
+            });
             /*
             bus.<Envelop>send(address, request, handler -> {
                 final Envelop response;
