@@ -14,16 +14,16 @@ import io.vertx.up.uca.rs.Aim;
 public class SyncAim extends BaseAim implements Aim<RoutingContext> {
     @Override
     public Handler<RoutingContext> attack(final Event event) {
-        return Fn.getNull(() -> (context) -> exec(() -> {
+        return Fn.getNull(() -> (context) -> this.exec(() -> {
             /*
              * Build arguments
              */
-            final Object[] arguments = buildArgs(context, event);
+            final Object[] arguments = this.buildArgs(context, event);
             /*
              * Method callxx
              * Java reflector to call defined method.
              */
-            final Object result = invoke(event, arguments);
+            final Object result = this.invoke(event, arguments);
 
             // 3. Resource model building
             // final Envelop data = Flower.continuous(context, result);
@@ -31,11 +31,18 @@ public class SyncAim extends BaseAim implements Aim<RoutingContext> {
              * Data handler to process Flower next result here.
              */
             final Future<Envelop> future = Flower.next(context, result);
-            future.setHandler(dataRes ->
+            future.setHandler(dataRes -> {
+                /*
+                 * To avoid null pointer result when the handler triggered result here
+                 * SUCCESS
+                 */
+                if (dataRes.succeeded()) {
                     /*
                      * Reply future result directly here.
                      */
-                    Answer.reply(context, dataRes.result(), event));
+                    Answer.reply(context, dataRes.result(), event);
+                }
+            });
 
         }, context, event), event);
     }
