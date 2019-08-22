@@ -14,6 +14,7 @@ import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.lbs.cv.Addr;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
@@ -22,7 +23,7 @@ import java.util.function.Supplier;
 @Queue
 public class QueryActor {
     @Address(Addr.PickUp.COUNTRIES)
-    public Future<JsonArray> queryCountries() {
+    public Future<JsonArray> queryCountries(final Envelop request) {
         return Ux.Jooq.on(LCountryDao.class)
                 .findAllAsync()
                 .compose(Ux::fnJArray);
