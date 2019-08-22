@@ -10,7 +10,6 @@ import cn.vertxup.lbs.domain.tables.pojos.LState;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.lbs.cv.Addr;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
@@ -63,7 +62,7 @@ public class QueryActor {
                 .compose(regionId -> this.combine(response, "regionId",
                         () -> regionId))
                 .compose(regionId -> Ux.Jooq.on(LRegionDao.class)
-                        .<LRegion>fetchOneAsync(KeField.KEY, regionId)
+                        .<LRegion>findByIdAsync(regionId)
                 )
                 /*
                  * Region -> City
@@ -71,7 +70,7 @@ public class QueryActor {
                 .compose(region -> this.combine(response, "cityId",
                         region::getCityId))
                 .compose(cityId -> Ux.Jooq.on(LCityDao.class)
-                        .<LCity>fetchOneAsync(KeField.KEY, cityId)
+                        .<LCity>findByIdAsync(cityId)
                 )
                 /*
                  * City -> State
@@ -79,7 +78,7 @@ public class QueryActor {
                 .compose(city -> this.combine(response, "stateId",
                         city::getStateId))
                 .compose(stateId -> Ux.Jooq.on(LStateDao.class)
-                        .<LState>fetchOneAsync(KeField.KEY, stateId)
+                        .<LState>findByIdAsync(stateId)
                 )
                 /*
                  * State -> Country
