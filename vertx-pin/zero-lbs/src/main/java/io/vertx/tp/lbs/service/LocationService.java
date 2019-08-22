@@ -1,4 +1,4 @@
-package io.vertx.tp.lbs.location;
+package io.vertx.tp.lbs.service;
 
 import cn.vertxup.lbs.domain.tables.daos.LLocationDao;
 import io.vertx.core.Future;
