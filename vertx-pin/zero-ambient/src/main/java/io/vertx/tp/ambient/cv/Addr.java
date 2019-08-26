@@ -55,5 +55,7 @@ public interface Addr {
 
     interface Module {
         String BY_NAME = Prefix._EVENT + "X-MODULE/NAME";
+
+        String IDENTIFIERS = Prefix._EVENT + "X-IDENTIFIER/LIST";
     }
 }
