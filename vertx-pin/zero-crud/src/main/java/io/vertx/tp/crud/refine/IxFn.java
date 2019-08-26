@@ -3,9 +3,9 @@ package io.vertx.tp.crud.refine;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxModule;
+import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.unity.UxJooq;
-import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
 
 import java.time.Instant;
@@ -69,12 +69,16 @@ class IxFn {
             /* User By */
             final String by = config.getString("by");
             if (Ut.notNil(by)) {
+                /* Audit Process */
+                IxLog.infoDao(LOGGER, "( Audit ) By -> \"{0}\" = {1}", by, userId);
                 auditor.put(by, userId);
             }
             final String at = config.getString("at");
             if (Ut.notNil(at)) {
+                IxLog.infoDao(LOGGER, "( Audit ) At Field -> {0}", at);
                 auditor.put(at, Instant.now());
             }
+
         }
     }
 }
