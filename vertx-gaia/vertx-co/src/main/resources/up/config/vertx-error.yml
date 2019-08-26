@@ -153,6 +153,7 @@ E80213: "(403) - (RBAC) Sorry, you have no access to visit the resource that you
 E80215: "(500) - (RBAC) Dwarf instance is null when analyzed result type = {0}"
 # Kernel Module
 E80214: "(409) - (Ke) Zero system could not identify the session you provided `{0}`, maybe it''s expired or destroyed"
+E80216: "(501) - (Ke) Your channel is not implemented {0}, but you called this channel, please check your configuration"
 # Ambient Module
 E80300: "(500) - (Ambient) The application environment error, could not get app data"
 E80301: "(500) - (Ambient) The application ( name = `{0}` ) could not be initialized"
