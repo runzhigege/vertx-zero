@@ -2,10 +2,10 @@ package io.vertx.tp.optic.atom;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.refine.Ke;
-import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Strings;
-import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
+import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -70,7 +70,6 @@ public class Lexeme implements Serializable {
 
     private void parseParams() {
         /* Interface definition */
-
         final Field[] constants = this.interfaceCls.getDeclaredFields();
         final Set<String> fieldSet = new TreeSet<>();
         Arrays.stream(constants).map(Field::getName)

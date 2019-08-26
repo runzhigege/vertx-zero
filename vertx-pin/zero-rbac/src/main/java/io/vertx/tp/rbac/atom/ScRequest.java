@@ -46,64 +46,64 @@ public class ScRequest implements Serializable {
     public ScRequest(final JsonObject data) {
         final JsonObject metadata = data.getJsonObject(AuthKey.F_METADATA);
         final String uri = metadata.getString(AuthKey.F_URI);
-        requestUri = metadata.getString(AuthKey.F_URI_REQUEST);
-        method = HttpMethod.valueOf(metadata.getString(AuthKey.F_METHOD));
+        this.requestUri = metadata.getString(AuthKey.F_URI_REQUEST);
+        this.method = HttpMethod.valueOf(metadata.getString(AuthKey.F_METHOD));
         /*
          * Extension for orbit
          */
-        this.uri = Sc.uri(uri, requestUri);
+        this.uri = Sc.uri(uri, this.requestUri);
         /*
          * Support multi applications
          */
         if (CONFIG.getSupportMultiApp()) {
             final JsonObject headers = data.getJsonObject(AuthKey.F_HEADERS);
-            sigma = headers.getString(ID.Header.X_SIGMA);
+            this.sigma = headers.getString(ID.Header.X_SIGMA);
         } else {
-            sigma = null;
+            this.sigma = null;
         }
         /*
          * Token analyze
          */
         final String token = data.getString("jwt");
         final JsonObject userData = Ux.Jwt.extract(token);
-        user = userData.getString("user");
-        sessionId = userData.getString(KeField.HABITUS);
+        this.user = userData.getString("user");
+        this.sessionId = userData.getString(KeField.HABITUS);
     }
 
     public String getNormalizedUri() {
-        return uri;
+        return this.uri;
     }
 
     public HttpMethod getMethod() {
-        return method;
+        return this.method;
     }
 
     public String getSigma() {
-        return sigma;
+        return this.sigma;
     }
 
     public String getUser() {
-        return user;
+        return this.user;
     }
 
     public String getView() {
-        return view;
+        return this.view;
     }
 
     public String getCacheKey() {
-        return Ke.keySession(method.name(), uri);
+        return Ke.keySession(this.method.name(), this.uri);
     }
 
     public String getAuthorizedKey() {
-        return Ke.keyAuthorized(method.name(), uri);
+        return Ke.keyAuthorized(this.method.name(), this.uri);
     }
 
     public String getSessionId() {
-        return sessionId;
+        return this.sessionId;
     }
 
     public Future<ScPrivilege> openSession() {
-        LOGGER.info("Open session: {0}", sessionId);
-        return ScPrivilege.open(sessionId);
+        LOGGER.info("Open session: {0}", this.sessionId);
+        return ScPrivilege.open(this.sessionId);
     }
 }
