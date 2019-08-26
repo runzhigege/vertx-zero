@@ -8,8 +8,7 @@ import io.vertx.up.log.Annal;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.Vector;
 
 /*
  * Stack of fluent api here to store parameters
@@ -17,7 +16,7 @@ import java.util.Queue;
 @SuppressWarnings("all")
 public class Income implements Serializable {
     private static final Annal LOGGER = Annal.get(Income.class);
-    private final transient Queue<Object> queue = new PriorityQueue();
+    private final transient Vector<Object> queue = new Vector<>();
     private final transient Class<?> key;
     private final transient List<String> names = new ArrayList<>();
 
@@ -32,21 +31,38 @@ public class Income implements Serializable {
     }
 
     public <T> Income in(final T value) {
-        queue.offer(value);
+        // System.err.println(value);
+        queue.add(value);
         return this;
     }
 
     public JsonObject arguments() {
         final JsonObject arguments = new JsonObject();
+        /*
+         * Length here
+         */
+        final int size = this.names.size();
+        for (int idx = 0; idx < size; idx++) {
+            /*
+             * field name
+             */
+            final String field = this.names.get(idx);
+            if (!this.queue.isEmpty()) {
+                Object value = this.queue.get(idx);
+                Ke.infoKe(LOGGER, "[ Income ] field = {0}, value = {1}", field, value);
+                arguments.put(field, value);
+            }
+        }
+        /*
         this.names.forEach(item -> {
             final String field = item;
             Object value = null;
             if (!this.queue.isEmpty()) {
-                value = this.queue.poll();
+                value = queue.poll();
             }
             Ke.infoKe(LOGGER, "[ Income ] field = {0}, value = {1}", field, value);
             arguments.put(field, value);
-        });
+        }); */
         return arguments;
     }
 }
