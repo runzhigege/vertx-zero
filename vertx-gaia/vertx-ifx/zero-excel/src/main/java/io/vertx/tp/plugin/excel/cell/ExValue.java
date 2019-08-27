@@ -36,7 +36,12 @@ public interface ExValue {
             if (CellType.FORMULA == cell.getCellType()) {
                 final CellValue value = evaluator.evaluate(cell);
                 final String literal = value.getStringValue();
-                return ExKey.VALUE_NULL.endsWith(literal.trim()) ? null : literal;
+                if (Objects.isNull(literal)) {
+                    return null;
+                } else {
+                    /* Literal `NULL` value here */
+                    return ExKey.VALUE_NULL.endsWith(literal.trim()) ? null : literal;
+                }
             } else {
                 return null;
             }

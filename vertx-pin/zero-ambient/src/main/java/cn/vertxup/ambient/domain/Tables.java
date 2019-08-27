@@ -12,6 +12,7 @@ import cn.vertxup.ambient.domain.tables.XModule;
 import cn.vertxup.ambient.domain.tables.XNumber;
 import cn.vertxup.ambient.domain.tables.XSource;
 import cn.vertxup.ambient.domain.tables.XTabular;
+import cn.vertxup.ambient.domain.tables.XTodo;
 
 import javax.annotation.Generated;
 
@@ -68,4 +69,9 @@ public class Tables {
      * The table <code>DB_ETERNAL.X_TABULAR</code>.
      */
     public static final XTabular X_TABULAR = cn.vertxup.ambient.domain.tables.XTabular.X_TABULAR;
+
+    /**
+     * The table <code>DB_ETERNAL.X_TODO</code>.
+     */
+    public static final XTodo X_TODO = cn.vertxup.ambient.domain.tables.XTodo.X_TODO;
 }

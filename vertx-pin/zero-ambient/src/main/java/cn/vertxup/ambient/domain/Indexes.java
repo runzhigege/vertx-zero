@@ -12,6 +12,7 @@ import cn.vertxup.ambient.domain.tables.XModule;
 import cn.vertxup.ambient.domain.tables.XNumber;
 import cn.vertxup.ambient.domain.tables.XSource;
 import cn.vertxup.ambient.domain.tables.XTabular;
+import cn.vertxup.ambient.domain.tables.XTodo;
 
 import javax.annotation.Generated;
 
@@ -58,6 +59,9 @@ public class Indexes {
     public static final Index X_SOURCE_PRIMARY = Indexes0.X_SOURCE_PRIMARY;
     public static final Index X_TABULAR_APP_ID = Indexes0.X_TABULAR_APP_ID;
     public static final Index X_TABULAR_PRIMARY = Indexes0.X_TABULAR_PRIMARY;
+    public static final Index X_TODO_PRIMARY = Indexes0.X_TODO_PRIMARY;
+    public static final Index X_TODO_SIGMA = Indexes0.X_TODO_SIGMA;
+    public static final Index X_TODO_SIGMA_2 = Indexes0.X_TODO_SIGMA_2;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -85,5 +89,8 @@ public class Indexes {
         public static Index X_SOURCE_PRIMARY = Internal.createIndex("PRIMARY", XSource.X_SOURCE, new OrderField[] { XSource.X_SOURCE.KEY }, true);
         public static Index X_TABULAR_APP_ID = Internal.createIndex("APP_ID", XTabular.X_TABULAR, new OrderField[] { XTabular.X_TABULAR.APP_ID, XTabular.X_TABULAR.TYPE, XTabular.X_TABULAR.CODE }, true);
         public static Index X_TABULAR_PRIMARY = Internal.createIndex("PRIMARY", XTabular.X_TABULAR, new OrderField[] { XTabular.X_TABULAR.KEY }, true);
+        public static Index X_TODO_PRIMARY = Internal.createIndex("PRIMARY", XTodo.X_TODO, new OrderField[] { XTodo.X_TODO.KEY }, true);
+        public static Index X_TODO_SIGMA = Internal.createIndex("SIGMA", XTodo.X_TODO, new OrderField[] { XTodo.X_TODO.SIGMA, XTodo.X_TODO.CODE }, true);
+        public static Index X_TODO_SIGMA_2 = Internal.createIndex("SIGMA_2", XTodo.X_TODO, new OrderField[] { XTodo.X_TODO.SIGMA, XTodo.X_TODO.SERIAL }, true);
     }
 }

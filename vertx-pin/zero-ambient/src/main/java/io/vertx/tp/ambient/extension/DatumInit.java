@@ -1,6 +1,7 @@
 package io.vertx.tp.ambient.extension;
 
 import io.vertx.core.Future;
+import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ambient.atom.AtConfig;
 import io.vertx.tp.ambient.cv.AtMsg;
@@ -10,9 +11,9 @@ import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.plugin.excel.ExcelClient;
 import io.vertx.tp.plugin.excel.ExcelInfix;
+import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Uson;
 import io.vertx.up.unity.Ux;
-import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
 
 import java.util.List;
@@ -51,6 +52,8 @@ public class DatumInit implements Init {
         /* List<Future> */
         final List<Future<JsonObject>> futures = files.stream()
                 .filter(Ut::notNil)
+                /* Remove temp file of Excel */
+                .filter(file -> !file.startsWith("~$"))
                 .map(file -> dataFolder + file)
                 .map(this::doLoading)
                 .collect(Collectors.toList());
@@ -62,18 +65,18 @@ public class DatumInit implements Init {
     }
 
     private Future<JsonObject> doLoading(final String filename) {
-        final Future<JsonObject> future = Future.future();
+        final Promise<JsonObject> promise = Promise.promise();
         /* ExcelClient */
         final ExcelClient client = ExcelInfix.getClient();
         client.loading(filename, result -> {
             At.infoApp(LOGGER, AtMsg.INIT_DATUM_EACH, filename);
             if (result.succeeded()) {
-                future.complete(Ke.Result.bool(filename, Boolean.TRUE));
+                promise.complete(Ke.Result.bool(filename, Boolean.TRUE));
             } else {
-                future.fail(result.cause());
+                promise.fail(result.cause());
             }
         });
-        return future;
+        return promise.future();
     }
 
     @Override

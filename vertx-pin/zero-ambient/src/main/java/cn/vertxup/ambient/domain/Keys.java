@@ -12,6 +12,7 @@ import cn.vertxup.ambient.domain.tables.XModule;
 import cn.vertxup.ambient.domain.tables.XNumber;
 import cn.vertxup.ambient.domain.tables.XSource;
 import cn.vertxup.ambient.domain.tables.XTabular;
+import cn.vertxup.ambient.domain.tables.XTodo;
 import cn.vertxup.ambient.domain.tables.records.XAppRecord;
 import cn.vertxup.ambient.domain.tables.records.XAttachmentRecord;
 import cn.vertxup.ambient.domain.tables.records.XCategoryRecord;
@@ -20,6 +21,7 @@ import cn.vertxup.ambient.domain.tables.records.XModuleRecord;
 import cn.vertxup.ambient.domain.tables.records.XNumberRecord;
 import cn.vertxup.ambient.domain.tables.records.XSourceRecord;
 import cn.vertxup.ambient.domain.tables.records.XTabularRecord;
+import cn.vertxup.ambient.domain.tables.records.XTodoRecord;
 
 import javax.annotation.Generated;
 
@@ -71,6 +73,9 @@ public class Keys {
     public static final UniqueKey<XSourceRecord> KEY_X_SOURCE_APP_ID = UniqueKeys0.KEY_X_SOURCE_APP_ID;
     public static final UniqueKey<XTabularRecord> KEY_X_TABULAR_PRIMARY = UniqueKeys0.KEY_X_TABULAR_PRIMARY;
     public static final UniqueKey<XTabularRecord> KEY_X_TABULAR_APP_ID = UniqueKeys0.KEY_X_TABULAR_APP_ID;
+    public static final UniqueKey<XTodoRecord> KEY_X_TODO_PRIMARY = UniqueKeys0.KEY_X_TODO_PRIMARY;
+    public static final UniqueKey<XTodoRecord> KEY_X_TODO_SIGMA_2 = UniqueKeys0.KEY_X_TODO_SIGMA_2;
+    public static final UniqueKey<XTodoRecord> KEY_X_TODO_SIGMA = UniqueKeys0.KEY_X_TODO_SIGMA;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -103,5 +108,8 @@ public class Keys {
         public static final UniqueKey<XSourceRecord> KEY_X_SOURCE_APP_ID = Internal.createUniqueKey(XSource.X_SOURCE, "KEY_X_SOURCE_APP_ID", XSource.X_SOURCE.APP_ID);
         public static final UniqueKey<XTabularRecord> KEY_X_TABULAR_PRIMARY = Internal.createUniqueKey(XTabular.X_TABULAR, "KEY_X_TABULAR_PRIMARY", XTabular.X_TABULAR.KEY);
         public static final UniqueKey<XTabularRecord> KEY_X_TABULAR_APP_ID = Internal.createUniqueKey(XTabular.X_TABULAR, "KEY_X_TABULAR_APP_ID", XTabular.X_TABULAR.APP_ID, XTabular.X_TABULAR.TYPE, XTabular.X_TABULAR.CODE);
+        public static final UniqueKey<XTodoRecord> KEY_X_TODO_PRIMARY = Internal.createUniqueKey(XTodo.X_TODO, "KEY_X_TODO_PRIMARY", XTodo.X_TODO.KEY);
+        public static final UniqueKey<XTodoRecord> KEY_X_TODO_SIGMA_2 = Internal.createUniqueKey(XTodo.X_TODO, "KEY_X_TODO_SIGMA_2", XTodo.X_TODO.SIGMA, XTodo.X_TODO.SERIAL);
+        public static final UniqueKey<XTodoRecord> KEY_X_TODO_SIGMA = Internal.createUniqueKey(XTodo.X_TODO, "KEY_X_TODO_SIGMA", XTodo.X_TODO.SIGMA, XTodo.X_TODO.CODE);
     }
 }
