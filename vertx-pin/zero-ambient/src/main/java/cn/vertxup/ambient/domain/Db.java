@@ -33,7 +33,7 @@ public class Db extends SchemaImpl {
      * The reference instance of <code>DB_ETERNAL</code>
      */
     public static final Db DB_ETERNAL = new Db();
-    private static final long serialVersionUID = 819010070;
+    private static final long serialVersionUID = 1371895717;
     /**
      * The table <code>DB_ETERNAL.X_APP</code>.
      */
@@ -75,6 +75,11 @@ public class Db extends SchemaImpl {
     public final XTabular X_TABULAR = cn.vertxup.ambient.domain.tables.XTabular.X_TABULAR;
 
     /**
+     * The table <code>DB_ETERNAL.X_TODO</code>.
+     */
+    public final XTodo X_TODO = cn.vertxup.ambient.domain.tables.XTodo.X_TODO;
+
+    /**
      * No further instances allowed
      */
     private Db() {
@@ -106,6 +111,7 @@ public class Db extends SchemaImpl {
                 XModule.X_MODULE,
                 XNumber.X_NUMBER,
                 XSource.X_SOURCE,
-                XTabular.X_TABULAR);
+                XTabular.X_TABULAR,
+                XTodo.X_TODO);
     }
 }
