@@ -35,7 +35,7 @@ public class UiLayout extends TableImpl<UiLayoutRecord> {
      * The reference instance of <code>DB_ETERNAL.UI_LAYOUT</code>
      */
     public static final UiLayout UI_LAYOUT = new UiLayout();
-    private static final long serialVersionUID = -1935731226;
+    private static final long serialVersionUID = -466522281;
     /**
      * The column <code>DB_ETERNAL.UI_LAYOUT.KEY</code>. 「key」- Tpl模板唯一主键
      */
@@ -45,9 +45,9 @@ public class UiLayout extends TableImpl<UiLayoutRecord> {
      */
     public final TableField<UiLayoutRecord, String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「name」- Tpl模板名称");
     /**
-     * The column <code>DB_ETERNAL.UI_LAYOUT.PATH</code>. 「path」- Tpl模板路径，用于保存
+     * The column <code>DB_ETERNAL.UI_LAYOUT.CONFIG</code>. 「config」- 主配置
      */
-    public final TableField<UiLayoutRecord, String> PATH = createField("PATH", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「path」- Tpl模板路径，用于保存");
+    public final TableField<UiLayoutRecord, String> CONFIG = createField("CONFIG", org.jooq.impl.SQLDataType.CLOB, this, "「config」- 主配置");
     /**
      * The column <code>DB_ETERNAL.UI_LAYOUT.ACTIVE</code>. 「active」- 是否启用
      */
@@ -131,7 +131,7 @@ public class UiLayout extends TableImpl<UiLayoutRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.UI_LAYOUT_PATH, Indexes.UI_LAYOUT_PRIMARY);
+        return Arrays.<Index>asList(Indexes.UI_LAYOUT_NAME, Indexes.UI_LAYOUT_PRIMARY);
     }
 
     /**
@@ -147,7 +147,7 @@ public class UiLayout extends TableImpl<UiLayoutRecord> {
      */
     @Override
     public List<UniqueKey<UiLayoutRecord>> getKeys() {
-        return Arrays.<UniqueKey<UiLayoutRecord>>asList(Keys.KEY_UI_LAYOUT_PRIMARY, Keys.KEY_UI_LAYOUT_PATH);
+        return Arrays.<UniqueKey<UiLayoutRecord>>asList(Keys.KEY_UI_LAYOUT_PRIMARY, Keys.KEY_UI_LAYOUT_NAME);
     }
 
     /**

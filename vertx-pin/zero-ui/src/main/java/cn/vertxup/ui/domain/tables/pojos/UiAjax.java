@@ -24,20 +24,17 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiAjax implements IUiAjax {
 
-    private static final long serialVersionUID = -533580562;
+    private static final long serialVersionUID = 1557877661;
 
     private String        key;
     private String        name;
     private String        uri;
-    private Boolean       query;
-    private Boolean       lazy;
     private String        method;
+    private Boolean       query;
     private String        projection;
     private String        pager;
     private String        sorter;
     private String        criteria;
-    private String        relatedType;
-    private String        relatedId;
     private Boolean       active;
     private String        sigma;
     private String        metadata;
@@ -53,15 +50,12 @@ public class UiAjax implements IUiAjax {
         this.key = value.key;
         this.name = value.name;
         this.uri = value.uri;
-        this.query = value.query;
-        this.lazy = value.lazy;
         this.method = value.method;
+        this.query = value.query;
         this.projection = value.projection;
         this.pager = value.pager;
         this.sorter = value.sorter;
         this.criteria = value.criteria;
-        this.relatedType = value.relatedType;
-        this.relatedId = value.relatedId;
         this.active = value.active;
         this.sigma = value.sigma;
         this.metadata = value.metadata;
@@ -76,15 +70,12 @@ public class UiAjax implements IUiAjax {
         String        key,
         String        name,
         String        uri,
-        Boolean       query,
-        Boolean       lazy,
         String        method,
+        Boolean       query,
         String        projection,
         String        pager,
         String        sorter,
         String        criteria,
-        String        relatedType,
-        String        relatedId,
         Boolean       active,
         String        sigma,
         String        metadata,
@@ -97,15 +88,12 @@ public class UiAjax implements IUiAjax {
         this.key = key;
         this.name = name;
         this.uri = uri;
-        this.query = query;
-        this.lazy = lazy;
         this.method = method;
+        this.query = query;
         this.projection = projection;
         this.pager = pager;
         this.sorter = sorter;
         this.criteria = criteria;
-        this.relatedType = relatedType;
-        this.relatedId = relatedId;
         this.active = active;
         this.sigma = sigma;
         this.metadata = metadata;
@@ -150,28 +138,6 @@ public class UiAjax implements IUiAjax {
     }
 
     @Override
-    public Boolean getQuery() {
-        return this.query;
-    }
-
-    @Override
-    public UiAjax setQuery(Boolean query) {
-        this.query = query;
-        return this;
-    }
-
-    @Override
-    public Boolean getLazy() {
-        return this.lazy;
-    }
-
-    @Override
-    public UiAjax setLazy(Boolean lazy) {
-        this.lazy = lazy;
-        return this;
-    }
-
-    @Override
     public String getMethod() {
         return this.method;
     }
@@ -179,6 +145,17 @@ public class UiAjax implements IUiAjax {
     @Override
     public UiAjax setMethod(String method) {
         this.method = method;
+        return this;
+    }
+
+    @Override
+    public Boolean getQuery() {
+        return this.query;
+    }
+
+    @Override
+    public UiAjax setQuery(Boolean query) {
+        this.query = query;
         return this;
     }
 
@@ -223,28 +200,6 @@ public class UiAjax implements IUiAjax {
     @Override
     public UiAjax setCriteria(String criteria) {
         this.criteria = criteria;
-        return this;
-    }
-
-    @Override
-    public String getRelatedType() {
-        return this.relatedType;
-    }
-
-    @Override
-    public UiAjax setRelatedType(String relatedType) {
-        this.relatedType = relatedType;
-        return this;
-    }
-
-    @Override
-    public String getRelatedId() {
-        return this.relatedId;
-    }
-
-    @Override
-    public UiAjax setRelatedId(String relatedId) {
-        this.relatedId = relatedId;
         return this;
     }
 
@@ -343,15 +298,12 @@ public class UiAjax implements IUiAjax {
         sb.append(key);
         sb.append(", ").append(name);
         sb.append(", ").append(uri);
-        sb.append(", ").append(query);
-        sb.append(", ").append(lazy);
         sb.append(", ").append(method);
+        sb.append(", ").append(query);
         sb.append(", ").append(projection);
         sb.append(", ").append(pager);
         sb.append(", ").append(sorter);
         sb.append(", ").append(criteria);
-        sb.append(", ").append(relatedType);
-        sb.append(", ").append(relatedId);
         sb.append(", ").append(active);
         sb.append(", ").append(sigma);
         sb.append(", ").append(metadata);
@@ -377,15 +329,12 @@ public class UiAjax implements IUiAjax {
         setKey(from.getKey());
         setName(from.getName());
         setUri(from.getUri());
-        setQuery(from.getQuery());
-        setLazy(from.getLazy());
         setMethod(from.getMethod());
+        setQuery(from.getQuery());
         setProjection(from.getProjection());
         setPager(from.getPager());
         setSorter(from.getSorter());
         setCriteria(from.getCriteria());
-        setRelatedType(from.getRelatedType());
-        setRelatedId(from.getRelatedId());
         setActive(from.getActive());
         setSigma(from.getSigma());
         setMetadata(from.getMetadata());

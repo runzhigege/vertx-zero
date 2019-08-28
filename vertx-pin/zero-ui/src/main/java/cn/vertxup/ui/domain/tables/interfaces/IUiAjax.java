@@ -54,26 +54,6 @@ public interface IUiAjax extends Serializable {
     public String getUri();
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_AJAX.QUERY</code>. 「query」- 是否query类型的接口
-     */
-    public IUiAjax setQuery(Boolean value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_AJAX.QUERY</code>. 「query」- 是否query类型的接口
-     */
-    public Boolean getQuery();
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_AJAX.LAZY</code>. 「lazy」- 是否lazy模式
-     */
-    public IUiAjax setLazy(Boolean value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_AJAX.LAZY</code>. 「lazy」- 是否lazy模式
-     */
-    public Boolean getLazy();
-
-    /**
      * Setter for <code>DB_ETERNAL.UI_AJAX.METHOD</code>. 「method」- 当前Ajax的HTTP方法
      */
     public IUiAjax setMethod(String value);
@@ -82,6 +62,16 @@ public interface IUiAjax extends Serializable {
      * Getter for <code>DB_ETERNAL.UI_AJAX.METHOD</code>. 「method」- 当前Ajax的HTTP方法
      */
     public String getMethod();
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_AJAX.QUERY</code>. 「query」- 是否query类型的接口
+     */
+    public IUiAjax setQuery(Boolean value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_AJAX.QUERY</code>. 「query」- 是否query类型的接口
+     */
+    public Boolean getQuery();
 
     /**
      * Setter for <code>DB_ETERNAL.UI_AJAX.PROJECTION</code>. 「projection」- query = true 生效
@@ -122,26 +112,6 @@ public interface IUiAjax extends Serializable {
      * Getter for <code>DB_ETERNAL.UI_AJAX.CRITERIA</code>. 「criteria」- query = true则位于 query之下特殊节点，query = false则直接存储 query值
      */
     public String getCriteria();
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_AJAX.RELATED_TYPE</code>. 「relatedType」- 关联类型：Page, Form
-     */
-    public IUiAjax setRelatedType(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_AJAX.RELATED_TYPE</code>. 「relatedType」- 关联类型：Page, Form
-     */
-    public String getRelatedType();
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_AJAX.RELATED_ID</code>. 「relatedId」- 关联的ID，如果是Page则是PAGE_ID，如果是Form则是FORM_ID
-     */
-    public IUiAjax setRelatedId(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_AJAX.RELATED_ID</code>. 「relatedId」- 关联的ID，如果是Page则是PAGE_ID，如果是Form则是FORM_ID
-     */
-    public String getRelatedId();
 
     /**
      * Setter for <code>DB_ETERNAL.UI_AJAX.ACTIVE</code>. 「active」- 是否启用
@@ -241,15 +211,12 @@ public interface IUiAjax extends Serializable {
         setKey(json.getString("KEY"));
         setName(json.getString("NAME"));
         setUri(json.getString("URI"));
-        setQuery(json.getBoolean("QUERY"));
-        setLazy(json.getBoolean("LAZY"));
         setMethod(json.getString("METHOD"));
+        setQuery(json.getBoolean("QUERY"));
         setProjection(json.getString("PROJECTION"));
         setPager(json.getString("PAGER"));
         setSorter(json.getString("SORTER"));
         setCriteria(json.getString("CRITERIA"));
-        setRelatedType(json.getString("RELATED_TYPE"));
-        setRelatedId(json.getString("RELATED_ID"));
         setActive(json.getBoolean("ACTIVE"));
         setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
@@ -267,15 +234,12 @@ public interface IUiAjax extends Serializable {
         json.put("KEY",getKey());
         json.put("NAME",getName());
         json.put("URI",getUri());
-        json.put("QUERY",getQuery());
-        json.put("LAZY",getLazy());
         json.put("METHOD",getMethod());
+        json.put("QUERY",getQuery());
         json.put("PROJECTION",getProjection());
         json.put("PAGER",getPager());
         json.put("SORTER",getSorter());
         json.put("CRITERIA",getCriteria());
-        json.put("RELATED_TYPE",getRelatedType());
-        json.put("RELATED_ID",getRelatedId());
         json.put("ACTIVE",getActive());
         json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());

@@ -84,24 +84,17 @@ public class UiAjaxDao extends DAOImpl<UiAjaxRecord, cn.vertxup.ui.domain.tables
     }
 
     /**
-     * Fetch records that have <code>QUERY IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiAjax> fetchByQuery(Boolean... values) {
-        return fetch(UiAjax.UI_AJAX.QUERY, values);
-    }
-
-    /**
-     * Fetch records that have <code>LAZY IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiAjax> fetchByLazy(Boolean... values) {
-        return fetch(UiAjax.UI_AJAX.LAZY, values);
-    }
-
-    /**
      * Fetch records that have <code>METHOD IN (values)</code>
      */
     public List<cn.vertxup.ui.domain.tables.pojos.UiAjax> fetchByMethod(String... values) {
         return fetch(UiAjax.UI_AJAX.METHOD, values);
+    }
+
+    /**
+     * Fetch records that have <code>QUERY IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiAjax> fetchByQuery(Boolean... values) {
+        return fetch(UiAjax.UI_AJAX.QUERY, values);
     }
 
     /**
@@ -130,20 +123,6 @@ public class UiAjaxDao extends DAOImpl<UiAjaxRecord, cn.vertxup.ui.domain.tables
      */
     public List<cn.vertxup.ui.domain.tables.pojos.UiAjax> fetchByCriteria(String... values) {
         return fetch(UiAjax.UI_AJAX.CRITERIA, values);
-    }
-
-    /**
-     * Fetch records that have <code>RELATED_TYPE IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiAjax> fetchByRelatedType(String... values) {
-        return fetch(UiAjax.UI_AJAX.RELATED_TYPE, values);
-    }
-
-    /**
-     * Fetch records that have <code>RELATED_ID IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiAjax> fetchByRelatedId(String... values) {
-        return fetch(UiAjax.UI_AJAX.RELATED_ID, values);
     }
 
     /**
@@ -231,24 +210,17 @@ public class UiAjaxDao extends DAOImpl<UiAjaxRecord, cn.vertxup.ui.domain.tables
     }
 
     /**
-     * Fetch records that have <code>QUERY IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiAjax>> fetchByQueryAsync(List<Boolean> values) {
-        return fetchAsync(UiAjax.UI_AJAX.QUERY,values);
-    }
-
-    /**
-     * Fetch records that have <code>LAZY IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiAjax>> fetchByLazyAsync(List<Boolean> values) {
-        return fetchAsync(UiAjax.UI_AJAX.LAZY,values);
-    }
-
-    /**
      * Fetch records that have <code>METHOD IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiAjax>> fetchByMethodAsync(List<String> values) {
         return fetchAsync(UiAjax.UI_AJAX.METHOD,values);
+    }
+
+    /**
+     * Fetch records that have <code>QUERY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiAjax>> fetchByQueryAsync(List<Boolean> values) {
+        return fetchAsync(UiAjax.UI_AJAX.QUERY,values);
     }
 
     /**
@@ -277,20 +249,6 @@ public class UiAjaxDao extends DAOImpl<UiAjaxRecord, cn.vertxup.ui.domain.tables
      */
     public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiAjax>> fetchByCriteriaAsync(List<String> values) {
         return fetchAsync(UiAjax.UI_AJAX.CRITERIA,values);
-    }
-
-    /**
-     * Fetch records that have <code>RELATED_TYPE IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiAjax>> fetchByRelatedTypeAsync(List<String> values) {
-        return fetchAsync(UiAjax.UI_AJAX.RELATED_TYPE,values);
-    }
-
-    /**
-     * Fetch records that have <code>RELATED_ID IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiAjax>> fetchByRelatedIdAsync(List<String> values) {
-        return fetchAsync(UiAjax.UI_AJAX.RELATED_ID,values);
     }
 
     /**

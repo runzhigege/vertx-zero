@@ -24,20 +24,19 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiPage implements IUiPage {
 
-    private static final long serialVersionUID = 183324760;
+    private static final long serialVersionUID = 25002618;
 
     private String        key;
-    private String        url;
     private String        app;
     private String        module;
     private String        page;
+    private String        layoutId;
     private Boolean       secure;
     private String        paramMap;
-    private String        state;
     private String        containerName;
     private String        containerConfig;
     private String        grid;
-    private String        layoutId;
+    private String        state;
     private Boolean       active;
     private String        sigma;
     private String        metadata;
@@ -51,17 +50,16 @@ public class UiPage implements IUiPage {
 
     public UiPage(UiPage value) {
         this.key = value.key;
-        this.url = value.url;
         this.app = value.app;
         this.module = value.module;
         this.page = value.page;
+        this.layoutId = value.layoutId;
         this.secure = value.secure;
         this.paramMap = value.paramMap;
-        this.state = value.state;
         this.containerName = value.containerName;
         this.containerConfig = value.containerConfig;
         this.grid = value.grid;
-        this.layoutId = value.layoutId;
+        this.state = value.state;
         this.active = value.active;
         this.sigma = value.sigma;
         this.metadata = value.metadata;
@@ -74,17 +72,16 @@ public class UiPage implements IUiPage {
 
     public UiPage(
         String        key,
-        String        url,
         String        app,
         String        module,
         String        page,
+        String        layoutId,
         Boolean       secure,
         String        paramMap,
-        String        state,
         String        containerName,
         String        containerConfig,
         String        grid,
-        String        layoutId,
+        String        state,
         Boolean       active,
         String        sigma,
         String        metadata,
@@ -95,17 +92,16 @@ public class UiPage implements IUiPage {
         String        updatedBy
     ) {
         this.key = key;
-        this.url = url;
         this.app = app;
         this.module = module;
         this.page = page;
+        this.layoutId = layoutId;
         this.secure = secure;
         this.paramMap = paramMap;
-        this.state = state;
         this.containerName = containerName;
         this.containerConfig = containerConfig;
         this.grid = grid;
-        this.layoutId = layoutId;
+        this.state = state;
         this.active = active;
         this.sigma = sigma;
         this.metadata = metadata;
@@ -124,17 +120,6 @@ public class UiPage implements IUiPage {
     @Override
     public UiPage setKey(String key) {
         this.key = key;
-        return this;
-    }
-
-    @Override
-    public String getUrl() {
-        return this.url;
-    }
-
-    @Override
-    public UiPage setUrl(String url) {
-        this.url = url;
         return this;
     }
 
@@ -172,6 +157,17 @@ public class UiPage implements IUiPage {
     }
 
     @Override
+    public String getLayoutId() {
+        return this.layoutId;
+    }
+
+    @Override
+    public UiPage setLayoutId(String layoutId) {
+        this.layoutId = layoutId;
+        return this;
+    }
+
+    @Override
     public Boolean getSecure() {
         return this.secure;
     }
@@ -190,17 +186,6 @@ public class UiPage implements IUiPage {
     @Override
     public UiPage setParamMap(String paramMap) {
         this.paramMap = paramMap;
-        return this;
-    }
-
-    @Override
-    public String getState() {
-        return this.state;
-    }
-
-    @Override
-    public UiPage setState(String state) {
-        this.state = state;
         return this;
     }
 
@@ -238,13 +223,13 @@ public class UiPage implements IUiPage {
     }
 
     @Override
-    public String getLayoutId() {
-        return this.layoutId;
+    public String getState() {
+        return this.state;
     }
 
     @Override
-    public UiPage setLayoutId(String layoutId) {
-        this.layoutId = layoutId;
+    public UiPage setState(String state) {
+        this.state = state;
         return this;
     }
 
@@ -341,17 +326,16 @@ public class UiPage implements IUiPage {
         StringBuilder sb = new StringBuilder("UiPage (");
 
         sb.append(key);
-        sb.append(", ").append(url);
         sb.append(", ").append(app);
         sb.append(", ").append(module);
         sb.append(", ").append(page);
+        sb.append(", ").append(layoutId);
         sb.append(", ").append(secure);
         sb.append(", ").append(paramMap);
-        sb.append(", ").append(state);
         sb.append(", ").append(containerName);
         sb.append(", ").append(containerConfig);
         sb.append(", ").append(grid);
-        sb.append(", ").append(layoutId);
+        sb.append(", ").append(state);
         sb.append(", ").append(active);
         sb.append(", ").append(sigma);
         sb.append(", ").append(metadata);
@@ -375,17 +359,16 @@ public class UiPage implements IUiPage {
     @Override
     public void from(IUiPage from) {
         setKey(from.getKey());
-        setUrl(from.getUrl());
         setApp(from.getApp());
         setModule(from.getModule());
         setPage(from.getPage());
+        setLayoutId(from.getLayoutId());
         setSecure(from.getSecure());
         setParamMap(from.getParamMap());
-        setState(from.getState());
         setContainerName(from.getContainerName());
         setContainerConfig(from.getContainerConfig());
         setGrid(from.getGrid());
-        setLayoutId(from.getLayoutId());
+        setState(from.getState());
         setActive(from.getActive());
         setSigma(from.getSigma());
         setMetadata(from.getMetadata());
