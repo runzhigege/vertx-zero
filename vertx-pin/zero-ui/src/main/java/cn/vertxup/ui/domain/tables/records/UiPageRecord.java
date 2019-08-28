@@ -31,7 +31,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements Record20<String, String, String, String, String, Boolean, String, String, String, String, String, String, Boolean, String, String, String, LocalDateTime, String, LocalDateTime, String>, IUiPage {
 
-    private static final long serialVersionUID = -1772505305;
+    private static final long serialVersionUID = 1447733899;
 
     /**
      * Setter for <code>DB_ETERNAL.UI_PAGE.KEY</code>. 「key」- 页面唯一主键
@@ -204,19 +204,19 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_PAGE.LAYOUT</code>. 「layout」- 当前页面的布局信息
+     * Setter for <code>DB_ETERNAL.UI_PAGE.GRID</code>. 「grid」- 当前页面的布局信息，Grid布局格式
      */
     @Override
-    public UiPageRecord setLayout(String value) {
+    public UiPageRecord setGrid(String value) {
         set(10, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_PAGE.LAYOUT</code>. 「layout」- 当前页面的布局信息
+     * Getter for <code>DB_ETERNAL.UI_PAGE.GRID</code>. 「grid」- 当前页面的布局信息，Grid布局格式
      */
     @Override
-    public String getLayout() {
+    public String getGrid() {
         return (String) get(10);
     }
 
@@ -490,7 +490,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public Field<String> field11() {
-        return UiPage.UI_PAGE.LAYOUT;
+        return UiPage.UI_PAGE.GRID;
     }
 
     /**
@@ -650,7 +650,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public String component11() {
-        return getLayout();
+        return getGrid();
     }
 
     /**
@@ -810,7 +810,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public String value11() {
-        return getLayout();
+        return getGrid();
     }
 
     /**
@@ -980,7 +980,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public UiPageRecord value11(String value) {
-        setLayout(value);
+        setGrid(value);
         return this;
     }
 
@@ -1112,7 +1112,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
         setContainerName(from.getContainerName());
         setContainerConfig(from.getContainerConfig());
         setState(from.getState());
-        setLayout(from.getLayout());
+        setGrid(from.getGrid());
         setAssist(from.getAssist());
         setActive(from.getActive());
         setSigma(from.getSigma());
@@ -1147,7 +1147,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
     /**
      * Create a detached, initialised UiPageRecord
      */
-    public UiPageRecord(String key, String app, String module, String page, String layoutId, Boolean secure, String paramMap, String containerName, String containerConfig, String state, String layout, String assist, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public UiPageRecord(String key, String app, String module, String page, String layoutId, Boolean secure, String paramMap, String containerName, String containerConfig, String state, String grid, String assist, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(UiPage.UI_PAGE);
 
         set(0, key);
@@ -1160,7 +1160,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
         set(7, containerName);
         set(8, containerConfig);
         set(9, state);
-        set(10, layout);
+        set(10, grid);
         set(11, assist);
         set(12, active);
         set(13, sigma);

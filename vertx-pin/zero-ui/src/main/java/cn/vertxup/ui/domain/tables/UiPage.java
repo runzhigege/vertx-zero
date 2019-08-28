@@ -35,7 +35,7 @@ public class UiPage extends TableImpl<UiPageRecord> {
      * The reference instance of <code>DB_ETERNAL.UI_PAGE</code>
      */
     public static final UiPage UI_PAGE = new UiPage();
-    private static final long serialVersionUID = -163537270;
+    private static final long serialVersionUID = 99269888;
     /**
      * The column <code>DB_ETERNAL.UI_PAGE.KEY</code>. 「key」- 页面唯一主键
      */
@@ -77,9 +77,9 @@ public class UiPage extends TableImpl<UiPageRecord> {
      */
     public final TableField<UiPageRecord, String> STATE = createField("STATE", org.jooq.impl.SQLDataType.CLOB, this, "「state」- 当前页面的初始化状态信息");
     /**
-     * The column <code>DB_ETERNAL.UI_PAGE.LAYOUT</code>. 「layout」- 当前页面的布局信息
+     * The column <code>DB_ETERNAL.UI_PAGE.GRID</code>. 「grid」- 当前页面的布局信息，Grid布局格式
      */
-    public final TableField<UiPageRecord, String> LAYOUT = createField("LAYOUT", org.jooq.impl.SQLDataType.CLOB, this, "「layout」- 当前页面的布局信息");
+    public final TableField<UiPageRecord, String> GRID = createField("GRID", org.jooq.impl.SQLDataType.CLOB, this, "「grid」- 当前页面的布局信息，Grid布局格式");
     /**
      * The column <code>DB_ETERNAL.UI_PAGE.ASSIST</code>. 「assist」- 当前页面的辅助数据Ajax配置
      */

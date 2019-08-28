@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiPage implements IUiPage {
 
-    private static final long serialVersionUID = -50399094;
+    private static final long serialVersionUID = 1014627302;
 
     private String        key;
     private String        app;
@@ -36,7 +36,7 @@ public class UiPage implements IUiPage {
     private String        containerName;
     private String        containerConfig;
     private String        state;
-    private String        layout;
+    private String        grid;
     private String        assist;
     private Boolean       active;
     private String        sigma;
@@ -60,7 +60,7 @@ public class UiPage implements IUiPage {
         this.containerName = value.containerName;
         this.containerConfig = value.containerConfig;
         this.state = value.state;
-        this.layout = value.layout;
+        this.grid = value.grid;
         this.assist = value.assist;
         this.active = value.active;
         this.sigma = value.sigma;
@@ -83,7 +83,7 @@ public class UiPage implements IUiPage {
         String        containerName,
         String        containerConfig,
         String        state,
-        String        layout,
+        String        grid,
         String        assist,
         Boolean       active,
         String        sigma,
@@ -104,7 +104,7 @@ public class UiPage implements IUiPage {
         this.containerName = containerName;
         this.containerConfig = containerConfig;
         this.state = state;
-        this.layout = layout;
+        this.grid = grid;
         this.assist = assist;
         this.active = active;
         this.sigma = sigma;
@@ -227,13 +227,13 @@ public class UiPage implements IUiPage {
     }
 
     @Override
-    public String getLayout() {
-        return this.layout;
+    public String getGrid() {
+        return this.grid;
     }
 
     @Override
-    public UiPage setLayout(String layout) {
-        this.layout = layout;
+    public UiPage setGrid(String grid) {
+        this.grid = grid;
         return this;
     }
 
@@ -350,7 +350,7 @@ public class UiPage implements IUiPage {
         sb.append(", ").append(containerName);
         sb.append(", ").append(containerConfig);
         sb.append(", ").append(state);
-        sb.append(", ").append(layout);
+        sb.append(", ").append(grid);
         sb.append(", ").append(assist);
         sb.append(", ").append(active);
         sb.append(", ").append(sigma);
@@ -384,7 +384,7 @@ public class UiPage implements IUiPage {
         setContainerName(from.getContainerName());
         setContainerConfig(from.getContainerConfig());
         setState(from.getState());
-        setLayout(from.getLayout());
+        setGrid(from.getGrid());
         setAssist(from.getAssist());
         setActive(from.getActive());
         setSigma(from.getSigma());
