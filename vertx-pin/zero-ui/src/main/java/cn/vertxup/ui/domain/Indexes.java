@@ -4,7 +4,6 @@
 package cn.vertxup.ui.domain;
 
 
-import cn.vertxup.ui.domain.tables.UiAjax;
 import cn.vertxup.ui.domain.tables.UiColumn;
 import cn.vertxup.ui.domain.tables.UiControl;
 import cn.vertxup.ui.domain.tables.UiEvent;
@@ -37,8 +36,6 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
-    public static final Index UI_AJAX_PRIMARY = Indexes0.UI_AJAX_PRIMARY;
-    public static final Index UI_AJAX_URI = Indexes0.UI_AJAX_URI;
     public static final Index UI_COLUMN_CONTROL_ID = Indexes0.UI_COLUMN_CONTROL_ID;
     public static final Index UI_COLUMN_PRIMARY = Indexes0.UI_COLUMN_PRIMARY;
     public static final Index UI_CONTROL_PRIMARY = Indexes0.UI_CONTROL_PRIMARY;
@@ -58,8 +55,6 @@ public class Indexes {
     // -------------------------------------------------------------------------
 
     private static class Indexes0 {
-        public static Index UI_AJAX_PRIMARY = Internal.createIndex("PRIMARY", UiAjax.UI_AJAX, new OrderField[] { UiAjax.UI_AJAX.KEY }, true);
-        public static Index UI_AJAX_URI = Internal.createIndex("URI", UiAjax.UI_AJAX, new OrderField[] { UiAjax.UI_AJAX.URI, UiAjax.UI_AJAX.METHOD, UiAjax.UI_AJAX.SIGMA }, true);
         public static Index UI_COLUMN_CONTROL_ID = Internal.createIndex("CONTROL_ID", UiColumn.UI_COLUMN, new OrderField[] { UiColumn.UI_COLUMN.CONTROL_ID, UiColumn.UI_COLUMN.DATA_INDEX }, true);
         public static Index UI_COLUMN_PRIMARY = Internal.createIndex("PRIMARY", UiColumn.UI_COLUMN, new OrderField[] { UiColumn.UI_COLUMN.KEY }, true);
         public static Index UI_CONTROL_PRIMARY = Internal.createIndex("PRIMARY", UiControl.UI_CONTROL, new OrderField[] { UiControl.UI_CONTROL.KEY }, true);

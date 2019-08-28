@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiPage implements IUiPage {
 
-    private static final long serialVersionUID = 25002618;
+    private static final long serialVersionUID = -50399094;
 
     private String        key;
     private String        app;
@@ -35,8 +35,9 @@ public class UiPage implements IUiPage {
     private String        paramMap;
     private String        containerName;
     private String        containerConfig;
-    private String        grid;
     private String        state;
+    private String        layout;
+    private String        assist;
     private Boolean       active;
     private String        sigma;
     private String        metadata;
@@ -58,8 +59,9 @@ public class UiPage implements IUiPage {
         this.paramMap = value.paramMap;
         this.containerName = value.containerName;
         this.containerConfig = value.containerConfig;
-        this.grid = value.grid;
         this.state = value.state;
+        this.layout = value.layout;
+        this.assist = value.assist;
         this.active = value.active;
         this.sigma = value.sigma;
         this.metadata = value.metadata;
@@ -80,8 +82,9 @@ public class UiPage implements IUiPage {
         String        paramMap,
         String        containerName,
         String        containerConfig,
-        String        grid,
         String        state,
+        String        layout,
+        String        assist,
         Boolean       active,
         String        sigma,
         String        metadata,
@@ -100,8 +103,9 @@ public class UiPage implements IUiPage {
         this.paramMap = paramMap;
         this.containerName = containerName;
         this.containerConfig = containerConfig;
-        this.grid = grid;
         this.state = state;
+        this.layout = layout;
+        this.assist = assist;
         this.active = active;
         this.sigma = sigma;
         this.metadata = metadata;
@@ -212,17 +216,6 @@ public class UiPage implements IUiPage {
     }
 
     @Override
-    public String getGrid() {
-        return this.grid;
-    }
-
-    @Override
-    public UiPage setGrid(String grid) {
-        this.grid = grid;
-        return this;
-    }
-
-    @Override
     public String getState() {
         return this.state;
     }
@@ -230,6 +223,28 @@ public class UiPage implements IUiPage {
     @Override
     public UiPage setState(String state) {
         this.state = state;
+        return this;
+    }
+
+    @Override
+    public String getLayout() {
+        return this.layout;
+    }
+
+    @Override
+    public UiPage setLayout(String layout) {
+        this.layout = layout;
+        return this;
+    }
+
+    @Override
+    public String getAssist() {
+        return this.assist;
+    }
+
+    @Override
+    public UiPage setAssist(String assist) {
+        this.assist = assist;
         return this;
     }
 
@@ -334,8 +349,9 @@ public class UiPage implements IUiPage {
         sb.append(", ").append(paramMap);
         sb.append(", ").append(containerName);
         sb.append(", ").append(containerConfig);
-        sb.append(", ").append(grid);
         sb.append(", ").append(state);
+        sb.append(", ").append(layout);
+        sb.append(", ").append(assist);
         sb.append(", ").append(active);
         sb.append(", ").append(sigma);
         sb.append(", ").append(metadata);
@@ -367,8 +383,9 @@ public class UiPage implements IUiPage {
         setParamMap(from.getParamMap());
         setContainerName(from.getContainerName());
         setContainerConfig(from.getContainerConfig());
-        setGrid(from.getGrid());
         setState(from.getState());
+        setLayout(from.getLayout());
+        setAssist(from.getAssist());
         setActive(from.getActive());
         setSigma(from.getSigma());
         setMetadata(from.getMetadata());

@@ -4,7 +4,6 @@
 package cn.vertxup.ui.domain;
 
 
-import cn.vertxup.ui.domain.tables.UiAjax;
 import cn.vertxup.ui.domain.tables.UiColumn;
 import cn.vertxup.ui.domain.tables.UiControl;
 import cn.vertxup.ui.domain.tables.UiEvent;
@@ -28,11 +27,6 @@ import javax.annotation.Generated;
 )
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
-
-    /**
-     * The table <code>DB_ETERNAL.UI_AJAX</code>.
-     */
-    public static final UiAjax UI_AJAX = cn.vertxup.ui.domain.tables.UiAjax.UI_AJAX;
 
     /**
      * The table <code>DB_ETERNAL.UI_COLUMN</code>.
