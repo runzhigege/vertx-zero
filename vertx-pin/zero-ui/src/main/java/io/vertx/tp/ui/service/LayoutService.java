@@ -3,6 +3,7 @@ package io.vertx.tp.ui.service;
 import cn.vertxup.ui.domain.tables.daos.UiLayoutDao;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.up.unity.Ux;
 
@@ -18,6 +19,10 @@ public class LayoutService implements LayoutStub {
         return Ke.poolAsync(LAYOUT_POOL, layoutId,
                 () -> Ux.Jooq.on(UiLayoutDao.class)
                         .findByIdAsync(layoutId)
-                        .compose(Ux::fnJObject));
+                        .compose(Ux::fnJObject)
+                        /*
+                         * Configuration converted to Json
+                         */
+                        .compose(Ke.metadata(KeField.Ui.CONFIG)));
     }
 }
