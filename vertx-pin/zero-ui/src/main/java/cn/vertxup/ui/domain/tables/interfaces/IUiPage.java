@@ -124,14 +124,14 @@ public interface IUiPage extends Serializable {
     public String getState();
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_PAGE.LAYOUT</code>. 「layout」- 当前页面的布局信息
+     * Setter for <code>DB_ETERNAL.UI_PAGE.GRID</code>. 「grid」- 当前页面的布局信息，Grid布局格式
      */
-    public IUiPage setLayout(String value);
+    public IUiPage setGrid(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_PAGE.LAYOUT</code>. 「layout」- 当前页面的布局信息
+     * Getter for <code>DB_ETERNAL.UI_PAGE.GRID</code>. 「grid」- 当前页面的布局信息，Grid布局格式
      */
-    public String getLayout();
+    public String getGrid();
 
     /**
      * Setter for <code>DB_ETERNAL.UI_PAGE.ASSIST</code>. 「assist」- 当前页面的辅助数据Ajax配置
@@ -248,7 +248,7 @@ public interface IUiPage extends Serializable {
         setContainerName(json.getString("CONTAINER_NAME"));
         setContainerConfig(json.getString("CONTAINER_CONFIG"));
         setState(json.getString("STATE"));
-        setLayout(json.getString("LAYOUT"));
+        setGrid(json.getString("GRID"));
         setAssist(json.getString("ASSIST"));
         setActive(json.getBoolean("ACTIVE"));
         setSigma(json.getString("SIGMA"));
@@ -274,7 +274,7 @@ public interface IUiPage extends Serializable {
         json.put("CONTAINER_NAME",getContainerName());
         json.put("CONTAINER_CONFIG",getContainerConfig());
         json.put("STATE",getState());
-        json.put("LAYOUT",getLayout());
+        json.put("GRID",getGrid());
         json.put("ASSIST",getAssist());
         json.put("ACTIVE",getActive());
         json.put("SIGMA",getSigma());
