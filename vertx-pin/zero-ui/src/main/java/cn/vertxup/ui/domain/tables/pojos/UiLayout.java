@@ -24,11 +24,11 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiLayout implements IUiLayout {
 
-    private static final long serialVersionUID = -952774245;
+    private static final long serialVersionUID = 1934250366;
 
     private String        key;
     private String        name;
-    private String        path;
+    private String        config;
     private Boolean       active;
     private String        sigma;
     private String        metadata;
@@ -43,7 +43,7 @@ public class UiLayout implements IUiLayout {
     public UiLayout(UiLayout value) {
         this.key = value.key;
         this.name = value.name;
-        this.path = value.path;
+        this.config = value.config;
         this.active = value.active;
         this.sigma = value.sigma;
         this.metadata = value.metadata;
@@ -57,7 +57,7 @@ public class UiLayout implements IUiLayout {
     public UiLayout(
         String        key,
         String        name,
-        String        path,
+        String        config,
         Boolean       active,
         String        sigma,
         String        metadata,
@@ -69,7 +69,7 @@ public class UiLayout implements IUiLayout {
     ) {
         this.key = key;
         this.name = name;
-        this.path = path;
+        this.config = config;
         this.active = active;
         this.sigma = sigma;
         this.metadata = metadata;
@@ -103,13 +103,13 @@ public class UiLayout implements IUiLayout {
     }
 
     @Override
-    public String getPath() {
-        return this.path;
+    public String getConfig() {
+        return this.config;
     }
 
     @Override
-    public UiLayout setPath(String path) {
-        this.path = path;
+    public UiLayout setConfig(String config) {
+        this.config = config;
         return this;
     }
 
@@ -207,7 +207,7 @@ public class UiLayout implements IUiLayout {
 
         sb.append(key);
         sb.append(", ").append(name);
-        sb.append(", ").append(path);
+        sb.append(", ").append(config);
         sb.append(", ").append(active);
         sb.append(", ").append(sigma);
         sb.append(", ").append(metadata);
@@ -232,7 +232,7 @@ public class UiLayout implements IUiLayout {
     public void from(IUiLayout from) {
         setKey(from.getKey());
         setName(from.getName());
-        setPath(from.getPath());
+        setConfig(from.getConfig());
         setActive(from.getActive());
         setSigma(from.getSigma());
         setMetadata(from.getMetadata());

@@ -35,7 +35,7 @@ public class UiAjax extends TableImpl<UiAjaxRecord> {
      * The reference instance of <code>DB_ETERNAL.UI_AJAX</code>
      */
     public static final UiAjax UI_AJAX = new UiAjax();
-    private static final long serialVersionUID = 379641466;
+    private static final long serialVersionUID = -2134713112;
     /**
      * The column <code>DB_ETERNAL.UI_AJAX.KEY</code>. 「key」- 主键
      */
@@ -49,17 +49,13 @@ public class UiAjax extends TableImpl<UiAjaxRecord> {
      */
     public final TableField<UiAjaxRecord, String> URI = createField("URI", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「uri」- 后端接口的URI地址");
     /**
-     * The column <code>DB_ETERNAL.UI_AJAX.QUERY</code>. 「query」- 是否query类型的接口
-     */
-    public final TableField<UiAjaxRecord, Boolean> QUERY = createField("QUERY", org.jooq.impl.SQLDataType.BIT, this, "「query」- 是否query类型的接口");
-    /**
-     * The column <code>DB_ETERNAL.UI_AJAX.LAZY</code>. 「lazy」- 是否lazy模式
-     */
-    public final TableField<UiAjaxRecord, Boolean> LAZY = createField("LAZY", org.jooq.impl.SQLDataType.BIT, this, "「lazy」- 是否lazy模式");
-    /**
      * The column <code>DB_ETERNAL.UI_AJAX.METHOD</code>. 「method」- 当前Ajax的HTTP方法
      */
     public final TableField<UiAjaxRecord, String> METHOD = createField("METHOD", org.jooq.impl.SQLDataType.VARCHAR(20), this, "「method」- 当前Ajax的HTTP方法");
+    /**
+     * The column <code>DB_ETERNAL.UI_AJAX.QUERY</code>. 「query」- 是否query类型的接口
+     */
+    public final TableField<UiAjaxRecord, Boolean> QUERY = createField("QUERY", org.jooq.impl.SQLDataType.BIT, this, "「query」- 是否query类型的接口");
     /**
      * The column <code>DB_ETERNAL.UI_AJAX.PROJECTION</code>. 「projection」- query = true 生效
      */
@@ -76,14 +72,6 @@ public class UiAjax extends TableImpl<UiAjaxRecord> {
      * The column <code>DB_ETERNAL.UI_AJAX.CRITERIA</code>. 「criteria」- query = true则位于 query之下特殊节点，query = false则直接存储 query值
      */
     public final TableField<UiAjaxRecord, String> CRITERIA = createField("CRITERIA", org.jooq.impl.SQLDataType.CLOB, this, "「criteria」- query = true则位于 query之下特殊节点，query = false则直接存储 query值");
-    /**
-     * The column <code>DB_ETERNAL.UI_AJAX.RELATED_TYPE</code>. 「relatedType」- 关联类型：Page, Form
-     */
-    public final TableField<UiAjaxRecord, String> RELATED_TYPE = createField("RELATED_TYPE", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「relatedType」- 关联类型：Page, Form");
-    /**
-     * The column <code>DB_ETERNAL.UI_AJAX.RELATED_ID</code>. 「relatedId」- 关联的ID，如果是Page则是PAGE_ID，如果是Form则是FORM_ID
-     */
-    public final TableField<UiAjaxRecord, String> RELATED_ID = createField("RELATED_ID", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「relatedId」- 关联的ID，如果是Page则是PAGE_ID，如果是Form则是FORM_ID");
     /**
      * The column <code>DB_ETERNAL.UI_AJAX.ACTIVE</code>. 「active」- 是否启用
      */
@@ -167,7 +155,7 @@ public class UiAjax extends TableImpl<UiAjaxRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.UI_AJAX_NAME, Indexes.UI_AJAX_PRIMARY);
+        return Arrays.<Index>asList(Indexes.UI_AJAX_PRIMARY, Indexes.UI_AJAX_URI);
     }
 
     /**
@@ -183,7 +171,7 @@ public class UiAjax extends TableImpl<UiAjaxRecord> {
      */
     @Override
     public List<UniqueKey<UiAjaxRecord>> getKeys() {
-        return Arrays.<UniqueKey<UiAjaxRecord>>asList(Keys.KEY_UI_AJAX_PRIMARY, Keys.KEY_UI_AJAX_NAME);
+        return Arrays.<UniqueKey<UiAjaxRecord>>asList(Keys.KEY_UI_AJAX_PRIMARY, Keys.KEY_UI_AJAX_URI);
     }
 
     /**

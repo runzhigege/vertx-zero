@@ -70,13 +70,6 @@ public class UiPageDao extends DAOImpl<UiPageRecord, cn.vertxup.ui.domain.tables
     }
 
     /**
-     * Fetch records that have <code>URL IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiPage> fetchByUrl(String... values) {
-        return fetch(UiPage.UI_PAGE.URL, values);
-    }
-
-    /**
      * Fetch records that have <code>APP IN (values)</code>
      */
     public List<cn.vertxup.ui.domain.tables.pojos.UiPage> fetchByApp(String... values) {
@@ -98,6 +91,13 @@ public class UiPageDao extends DAOImpl<UiPageRecord, cn.vertxup.ui.domain.tables
     }
 
     /**
+     * Fetch records that have <code>LAYOUT_ID IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiPage> fetchByLayoutId(String... values) {
+        return fetch(UiPage.UI_PAGE.LAYOUT_ID, values);
+    }
+
+    /**
      * Fetch records that have <code>SECURE IN (values)</code>
      */
     public List<cn.vertxup.ui.domain.tables.pojos.UiPage> fetchBySecure(Boolean... values) {
@@ -109,13 +109,6 @@ public class UiPageDao extends DAOImpl<UiPageRecord, cn.vertxup.ui.domain.tables
      */
     public List<cn.vertxup.ui.domain.tables.pojos.UiPage> fetchByParamMap(String... values) {
         return fetch(UiPage.UI_PAGE.PARAM_MAP, values);
-    }
-
-    /**
-     * Fetch records that have <code>STATE IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiPage> fetchByState(String... values) {
-        return fetch(UiPage.UI_PAGE.STATE, values);
     }
 
     /**
@@ -140,10 +133,10 @@ public class UiPageDao extends DAOImpl<UiPageRecord, cn.vertxup.ui.domain.tables
     }
 
     /**
-     * Fetch records that have <code>LAYOUT_ID IN (values)</code>
+     * Fetch records that have <code>STATE IN (values)</code>
      */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiPage> fetchByLayoutId(String... values) {
-        return fetch(UiPage.UI_PAGE.LAYOUT_ID, values);
+    public List<cn.vertxup.ui.domain.tables.pojos.UiPage> fetchByState(String... values) {
+        return fetch(UiPage.UI_PAGE.STATE, values);
     }
 
     /**
@@ -217,13 +210,6 @@ public class UiPageDao extends DAOImpl<UiPageRecord, cn.vertxup.ui.domain.tables
     }
 
     /**
-     * Fetch records that have <code>URL IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiPage>> fetchByUrlAsync(List<String> values) {
-        return fetchAsync(UiPage.UI_PAGE.URL,values);
-    }
-
-    /**
      * Fetch records that have <code>APP IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiPage>> fetchByAppAsync(List<String> values) {
@@ -245,6 +231,13 @@ public class UiPageDao extends DAOImpl<UiPageRecord, cn.vertxup.ui.domain.tables
     }
 
     /**
+     * Fetch records that have <code>LAYOUT_ID IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiPage>> fetchByLayoutIdAsync(List<String> values) {
+        return fetchAsync(UiPage.UI_PAGE.LAYOUT_ID,values);
+    }
+
+    /**
      * Fetch records that have <code>SECURE IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiPage>> fetchBySecureAsync(List<Boolean> values) {
@@ -256,13 +249,6 @@ public class UiPageDao extends DAOImpl<UiPageRecord, cn.vertxup.ui.domain.tables
      */
     public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiPage>> fetchByParamMapAsync(List<String> values) {
         return fetchAsync(UiPage.UI_PAGE.PARAM_MAP,values);
-    }
-
-    /**
-     * Fetch records that have <code>STATE IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiPage>> fetchByStateAsync(List<String> values) {
-        return fetchAsync(UiPage.UI_PAGE.STATE,values);
     }
 
     /**
@@ -287,10 +273,10 @@ public class UiPageDao extends DAOImpl<UiPageRecord, cn.vertxup.ui.domain.tables
     }
 
     /**
-     * Fetch records that have <code>LAYOUT_ID IN (values)</code> asynchronously
+     * Fetch records that have <code>STATE IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiPage>> fetchByLayoutIdAsync(List<String> values) {
-        return fetchAsync(UiPage.UI_PAGE.LAYOUT_ID,values);
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiPage>> fetchByStateAsync(List<String> values) {
+        return fetchAsync(UiPage.UI_PAGE.STATE,values);
     }
 
     /**

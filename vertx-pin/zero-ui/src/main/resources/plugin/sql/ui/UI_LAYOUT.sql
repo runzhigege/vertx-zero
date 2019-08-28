@@ -7,7 +7,12 @@ CREATE TABLE IF NOT EXISTS UI_LAYOUT
 (
     `KEY`        VARCHAR(36) COMMENT '「key」- Tpl模板唯一主键',
     `NAME`       VARCHAR(255) COMMENT '「name」- Tpl模板名称',
-    `PATH`       VARCHAR(255) COMMENT '「path」- Tpl模板路径，用于保存',
+    /*
+     * 模板的配置信息只有一套
+     * 1）每个 sigma 下边的 NAME 模板是一致的
+     * 2）每个模板只有一个 config 的配置值
+     */
+    `CONFIG`     TEXT COMMENT '「config」- 主配置',
 
     -- 特殊字段
     `ACTIVE`     BIT         DEFAULT NULL COMMENT '「active」- 是否启用',
@@ -26,4 +31,4 @@ CREATE TABLE IF NOT EXISTS UI_LAYOUT
 -- uiData 负责渲染界面专用，metadata 负责配置程序
 -- changeset Lang:ox-layout-2
 ALTER TABLE UI_LAYOUT
-    ADD UNIQUE (`PATH`, `SIGMA`);
+    ADD UNIQUE (`NAME`, `SIGMA`);

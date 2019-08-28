@@ -37,8 +37,8 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
-    public static final Index UI_AJAX_NAME = Indexes0.UI_AJAX_NAME;
     public static final Index UI_AJAX_PRIMARY = Indexes0.UI_AJAX_PRIMARY;
+    public static final Index UI_AJAX_URI = Indexes0.UI_AJAX_URI;
     public static final Index UI_COLUMN_CONTROL_ID = Indexes0.UI_COLUMN_CONTROL_ID;
     public static final Index UI_COLUMN_PRIMARY = Indexes0.UI_COLUMN_PRIMARY;
     public static final Index UI_CONTROL_PRIMARY = Indexes0.UI_CONTROL_PRIMARY;
@@ -48,18 +48,18 @@ public class Indexes {
     public static final Index UI_FIELD_PRIMARY = Indexes0.UI_FIELD_PRIMARY;
     public static final Index UI_FORM_CODE = Indexes0.UI_FORM_CODE;
     public static final Index UI_FORM_PRIMARY = Indexes0.UI_FORM_PRIMARY;
-    public static final Index UI_LAYOUT_PATH = Indexes0.UI_LAYOUT_PATH;
+    public static final Index UI_LAYOUT_NAME = Indexes0.UI_LAYOUT_NAME;
     public static final Index UI_LAYOUT_PRIMARY = Indexes0.UI_LAYOUT_PRIMARY;
+    public static final Index UI_PAGE_APP = Indexes0.UI_PAGE_APP;
     public static final Index UI_PAGE_PRIMARY = Indexes0.UI_PAGE_PRIMARY;
-    public static final Index UI_PAGE_URL = Indexes0.UI_PAGE_URL;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
     // -------------------------------------------------------------------------
 
     private static class Indexes0 {
-        public static Index UI_AJAX_NAME = Internal.createIndex("NAME", UiAjax.UI_AJAX, new OrderField[] { UiAjax.UI_AJAX.NAME, UiAjax.UI_AJAX.RELATED_ID }, true);
         public static Index UI_AJAX_PRIMARY = Internal.createIndex("PRIMARY", UiAjax.UI_AJAX, new OrderField[] { UiAjax.UI_AJAX.KEY }, true);
+        public static Index UI_AJAX_URI = Internal.createIndex("URI", UiAjax.UI_AJAX, new OrderField[] { UiAjax.UI_AJAX.URI, UiAjax.UI_AJAX.METHOD, UiAjax.UI_AJAX.SIGMA }, true);
         public static Index UI_COLUMN_CONTROL_ID = Internal.createIndex("CONTROL_ID", UiColumn.UI_COLUMN, new OrderField[] { UiColumn.UI_COLUMN.CONTROL_ID, UiColumn.UI_COLUMN.DATA_INDEX }, true);
         public static Index UI_COLUMN_PRIMARY = Internal.createIndex("PRIMARY", UiColumn.UI_COLUMN, new OrderField[] { UiColumn.UI_COLUMN.KEY }, true);
         public static Index UI_CONTROL_PRIMARY = Internal.createIndex("PRIMARY", UiControl.UI_CONTROL, new OrderField[] { UiControl.UI_CONTROL.KEY }, true);
@@ -69,9 +69,9 @@ public class Indexes {
         public static Index UI_FIELD_PRIMARY = Internal.createIndex("PRIMARY", UiField.UI_FIELD, new OrderField[] { UiField.UI_FIELD.KEY }, true);
         public static Index UI_FORM_CODE = Internal.createIndex("CODE", UiForm.UI_FORM, new OrderField[] { UiForm.UI_FORM.CODE, UiForm.UI_FORM.SIGMA }, true);
         public static Index UI_FORM_PRIMARY = Internal.createIndex("PRIMARY", UiForm.UI_FORM, new OrderField[] { UiForm.UI_FORM.KEY }, true);
-        public static Index UI_LAYOUT_PATH = Internal.createIndex("PATH", UiLayout.UI_LAYOUT, new OrderField[] { UiLayout.UI_LAYOUT.PATH, UiLayout.UI_LAYOUT.SIGMA }, true);
+        public static Index UI_LAYOUT_NAME = Internal.createIndex("NAME", UiLayout.UI_LAYOUT, new OrderField[] { UiLayout.UI_LAYOUT.NAME, UiLayout.UI_LAYOUT.SIGMA }, true);
         public static Index UI_LAYOUT_PRIMARY = Internal.createIndex("PRIMARY", UiLayout.UI_LAYOUT, new OrderField[] { UiLayout.UI_LAYOUT.KEY }, true);
+        public static Index UI_PAGE_APP = Internal.createIndex("APP", UiPage.UI_PAGE, new OrderField[] { UiPage.UI_PAGE.APP, UiPage.UI_PAGE.MODULE, UiPage.UI_PAGE.PAGE, UiPage.UI_PAGE.SIGMA }, true);
         public static Index UI_PAGE_PRIMARY = Internal.createIndex("PRIMARY", UiPage.UI_PAGE, new OrderField[] { UiPage.UI_PAGE.KEY }, true);
-        public static Index UI_PAGE_URL = Internal.createIndex("URL", UiPage.UI_PAGE, new OrderField[] { UiPage.UI_PAGE.URL, UiPage.UI_PAGE.SIGMA }, true);
     }
 }

@@ -34,16 +34,6 @@ public interface IUiPage extends Serializable {
     public String getKey();
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_PAGE.URL</code>. 「url」- 模块入口地址，前端统一URL，后端统一URI（术语）
-     */
-    public IUiPage setUrl(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_PAGE.URL</code>. 「url」- 模块入口地址，前端统一URL，后端统一URI（术语）
-     */
-    public String getUrl();
-
-    /**
      * Setter for <code>DB_ETERNAL.UI_PAGE.APP</code>. 「app」- 入口APP名称，APP中的path
      */
     public IUiPage setApp(String value);
@@ -74,6 +64,16 @@ public interface IUiPage extends Serializable {
     public String getPage();
 
     /**
+     * Setter for <code>DB_ETERNAL.UI_PAGE.LAYOUT_ID</code>. 「layoutId」- 使用的模板ID，最终生成 layout 顶层节点数据
+     */
+    public IUiPage setLayoutId(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_PAGE.LAYOUT_ID</code>. 「layoutId」- 使用的模板ID，最终生成 layout 顶层节点数据
+     */
+    public String getLayoutId();
+
+    /**
      * Setter for <code>DB_ETERNAL.UI_PAGE.SECURE</code>. 「secure」- 是否执行安全检查（安全检查才会被权限系统捕捉）
      */
     public IUiPage setSecure(Boolean value);
@@ -94,54 +94,44 @@ public interface IUiPage extends Serializable {
     public String getParamMap();
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_PAGE.STATE</code>. 「state」- $env环境变量专用，设置默认的 initState
-     */
-    public IUiPage setState(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_PAGE.STATE</code>. 「state」- $env环境变量专用，设置默认的 initState
-     */
-    public String getState();
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_PAGE.CONTAINER_NAME</code>. 「containerName」如果包含了容器组件，设置容器组件名称
+     * Setter for <code>DB_ETERNAL.UI_PAGE.CONTAINER_NAME</code>. 「containerName」- 当前页面是否存在容器，如果有容器，那么设置容器名称
      */
     public IUiPage setContainerName(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_PAGE.CONTAINER_NAME</code>. 「containerName」如果包含了容器组件，设置容器组件名称
+     * Getter for <code>DB_ETERNAL.UI_PAGE.CONTAINER_NAME</code>. 「containerName」- 当前页面是否存在容器，如果有容器，那么设置容器名称
      */
     public String getContainerName();
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_PAGE.CONTAINER_CONFIG</code>. 「containerConfig」如果包含了容器组件，设置容器组件配置信息
+     * Setter for <code>DB_ETERNAL.UI_PAGE.CONTAINER_CONFIG</code>. 「containerConfig」- 当前页面容器相关配置
      */
     public IUiPage setContainerConfig(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_PAGE.CONTAINER_CONFIG</code>. 「containerConfig」如果包含了容器组件，设置容器组件配置信息
+     * Getter for <code>DB_ETERNAL.UI_PAGE.CONTAINER_CONFIG</code>. 「containerConfig」- 当前页面容器相关配置
      */
     public String getContainerConfig();
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_PAGE.GRID</code>. 「grid」- 布局专用数据，设置Ant Design的行列结构
+     * Setter for <code>DB_ETERNAL.UI_PAGE.GRID</code>. 「grid」- 当前页面的布局信息
      */
     public IUiPage setGrid(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_PAGE.GRID</code>. 「grid」- 布局专用数据，设置Ant Design的行列结构
+     * Getter for <code>DB_ETERNAL.UI_PAGE.GRID</code>. 「grid」- 当前页面的布局信息
      */
     public String getGrid();
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_PAGE.LAYOUT_ID</code>. 「layoutId」- 使用的模板ID，最终生成 layout 顶层节点数据
+     * Setter for <code>DB_ETERNAL.UI_PAGE.STATE</code>. 「state」- 当前页面的初始化状态信息
      */
-    public IUiPage setLayoutId(String value);
+    public IUiPage setState(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_PAGE.LAYOUT_ID</code>. 「layoutId」- 使用的模板ID，最终生成 layout 顶层节点数据
+     * Getter for <code>DB_ETERNAL.UI_PAGE.STATE</code>. 「state」- 当前页面的初始化状态信息
      */
-    public String getLayoutId();
+    public String getState();
 
     /**
      * Setter for <code>DB_ETERNAL.UI_PAGE.ACTIVE</code>. 「active」- 是否启用
@@ -239,17 +229,16 @@ public interface IUiPage extends Serializable {
 
     default IUiPage fromJson(io.vertx.core.json.JsonObject json) {
         setKey(json.getString("KEY"));
-        setUrl(json.getString("URL"));
         setApp(json.getString("APP"));
         setModule(json.getString("MODULE"));
         setPage(json.getString("PAGE"));
+        setLayoutId(json.getString("LAYOUT_ID"));
         setSecure(json.getBoolean("SECURE"));
         setParamMap(json.getString("PARAM_MAP"));
-        setState(json.getString("STATE"));
         setContainerName(json.getString("CONTAINER_NAME"));
         setContainerConfig(json.getString("CONTAINER_CONFIG"));
         setGrid(json.getString("GRID"));
-        setLayoutId(json.getString("LAYOUT_ID"));
+        setState(json.getString("STATE"));
         setActive(json.getBoolean("ACTIVE"));
         setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
@@ -265,17 +254,16 @@ public interface IUiPage extends Serializable {
     default io.vertx.core.json.JsonObject toJson() {
         io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
         json.put("KEY",getKey());
-        json.put("URL",getUrl());
         json.put("APP",getApp());
         json.put("MODULE",getModule());
         json.put("PAGE",getPage());
+        json.put("LAYOUT_ID",getLayoutId());
         json.put("SECURE",getSecure());
         json.put("PARAM_MAP",getParamMap());
-        json.put("STATE",getState());
         json.put("CONTAINER_NAME",getContainerName());
         json.put("CONTAINER_CONFIG",getContainerConfig());
         json.put("GRID",getGrid());
-        json.put("LAYOUT_ID",getLayoutId());
+        json.put("STATE",getState());
         json.put("ACTIVE",getActive());
         json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());
