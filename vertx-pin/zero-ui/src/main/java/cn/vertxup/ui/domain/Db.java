@@ -33,12 +33,7 @@ public class Db extends SchemaImpl {
      * The reference instance of <code>DB_ETERNAL</code>
      */
     public static final Db DB_ETERNAL = new Db();
-    private static final long serialVersionUID = -1079885136;
-    /**
-     * The table <code>DB_ETERNAL.UI_AJAX</code>.
-     */
-    public final UiAjax UI_AJAX = cn.vertxup.ui.domain.tables.UiAjax.UI_AJAX;
-
+    private static final long serialVersionUID = 2063536755;
     /**
      * The table <code>DB_ETERNAL.UI_COLUMN</code>.
      */
@@ -99,7 +94,6 @@ public class Db extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
-                UiAjax.UI_AJAX,
                 UiColumn.UI_COLUMN,
                 UiControl.UI_CONTROL,
                 UiEvent.UI_EVENT,

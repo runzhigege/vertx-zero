@@ -4,7 +4,6 @@
 package cn.vertxup.ui.domain;
 
 
-import cn.vertxup.ui.domain.tables.UiAjax;
 import cn.vertxup.ui.domain.tables.UiColumn;
 import cn.vertxup.ui.domain.tables.UiControl;
 import cn.vertxup.ui.domain.tables.UiEvent;
@@ -12,7 +11,6 @@ import cn.vertxup.ui.domain.tables.UiField;
 import cn.vertxup.ui.domain.tables.UiForm;
 import cn.vertxup.ui.domain.tables.UiLayout;
 import cn.vertxup.ui.domain.tables.UiPage;
-import cn.vertxup.ui.domain.tables.records.UiAjaxRecord;
 import cn.vertxup.ui.domain.tables.records.UiColumnRecord;
 import cn.vertxup.ui.domain.tables.records.UiControlRecord;
 import cn.vertxup.ui.domain.tables.records.UiEventRecord;
@@ -50,8 +48,6 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<UiAjaxRecord> KEY_UI_AJAX_PRIMARY = UniqueKeys0.KEY_UI_AJAX_PRIMARY;
-    public static final UniqueKey<UiAjaxRecord> KEY_UI_AJAX_URI = UniqueKeys0.KEY_UI_AJAX_URI;
     public static final UniqueKey<UiColumnRecord> KEY_UI_COLUMN_PRIMARY = UniqueKeys0.KEY_UI_COLUMN_PRIMARY;
     public static final UniqueKey<UiColumnRecord> KEY_UI_COLUMN_CONTROL_ID = UniqueKeys0.KEY_UI_COLUMN_CONTROL_ID;
     public static final UniqueKey<UiControlRecord> KEY_UI_CONTROL_PRIMARY = UniqueKeys0.KEY_UI_CONTROL_PRIMARY;
@@ -76,8 +72,6 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class UniqueKeys0 {
-        public static final UniqueKey<UiAjaxRecord> KEY_UI_AJAX_PRIMARY = Internal.createUniqueKey(UiAjax.UI_AJAX, "KEY_UI_AJAX_PRIMARY", UiAjax.UI_AJAX.KEY);
-        public static final UniqueKey<UiAjaxRecord> KEY_UI_AJAX_URI = Internal.createUniqueKey(UiAjax.UI_AJAX, "KEY_UI_AJAX_URI", UiAjax.UI_AJAX.URI, UiAjax.UI_AJAX.METHOD, UiAjax.UI_AJAX.SIGMA);
         public static final UniqueKey<UiColumnRecord> KEY_UI_COLUMN_PRIMARY = Internal.createUniqueKey(UiColumn.UI_COLUMN, "KEY_UI_COLUMN_PRIMARY", UiColumn.UI_COLUMN.KEY);
         public static final UniqueKey<UiColumnRecord> KEY_UI_COLUMN_CONTROL_ID = Internal.createUniqueKey(UiColumn.UI_COLUMN, "KEY_UI_COLUMN_CONTROL_ID", UiColumn.UI_COLUMN.CONTROL_ID, UiColumn.UI_COLUMN.DATA_INDEX);
         public static final UniqueKey<UiControlRecord> KEY_UI_CONTROL_PRIMARY = Internal.createUniqueKey(UiControl.UI_CONTROL, "KEY_UI_CONTROL_PRIMARY", UiControl.UI_CONTROL.KEY);

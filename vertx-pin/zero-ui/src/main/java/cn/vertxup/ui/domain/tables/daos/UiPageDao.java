@@ -126,17 +126,24 @@ public class UiPageDao extends DAOImpl<UiPageRecord, cn.vertxup.ui.domain.tables
     }
 
     /**
-     * Fetch records that have <code>GRID IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiPage> fetchByGrid(String... values) {
-        return fetch(UiPage.UI_PAGE.GRID, values);
-    }
-
-    /**
      * Fetch records that have <code>STATE IN (values)</code>
      */
     public List<cn.vertxup.ui.domain.tables.pojos.UiPage> fetchByState(String... values) {
         return fetch(UiPage.UI_PAGE.STATE, values);
+    }
+
+    /**
+     * Fetch records that have <code>LAYOUT IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiPage> fetchByLayout(String... values) {
+        return fetch(UiPage.UI_PAGE.LAYOUT, values);
+    }
+
+    /**
+     * Fetch records that have <code>ASSIST IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiPage> fetchByAssist(String... values) {
+        return fetch(UiPage.UI_PAGE.ASSIST, values);
     }
 
     /**
@@ -266,17 +273,24 @@ public class UiPageDao extends DAOImpl<UiPageRecord, cn.vertxup.ui.domain.tables
     }
 
     /**
-     * Fetch records that have <code>GRID IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiPage>> fetchByGridAsync(List<String> values) {
-        return fetchAsync(UiPage.UI_PAGE.GRID,values);
-    }
-
-    /**
      * Fetch records that have <code>STATE IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiPage>> fetchByStateAsync(List<String> values) {
         return fetchAsync(UiPage.UI_PAGE.STATE,values);
+    }
+
+    /**
+     * Fetch records that have <code>LAYOUT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiPage>> fetchByLayoutAsync(List<String> values) {
+        return fetchAsync(UiPage.UI_PAGE.LAYOUT,values);
+    }
+
+    /**
+     * Fetch records that have <code>ASSIST IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiPage>> fetchByAssistAsync(List<String> values) {
+        return fetchAsync(UiPage.UI_PAGE.ASSIST,values);
     }
 
     /**

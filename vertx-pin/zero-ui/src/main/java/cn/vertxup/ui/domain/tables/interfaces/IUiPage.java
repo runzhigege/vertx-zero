@@ -114,16 +114,6 @@ public interface IUiPage extends Serializable {
     public String getContainerConfig();
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_PAGE.GRID</code>. 「grid」- 当前页面的布局信息
-     */
-    public IUiPage setGrid(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_PAGE.GRID</code>. 「grid」- 当前页面的布局信息
-     */
-    public String getGrid();
-
-    /**
      * Setter for <code>DB_ETERNAL.UI_PAGE.STATE</code>. 「state」- 当前页面的初始化状态信息
      */
     public IUiPage setState(String value);
@@ -132,6 +122,26 @@ public interface IUiPage extends Serializable {
      * Getter for <code>DB_ETERNAL.UI_PAGE.STATE</code>. 「state」- 当前页面的初始化状态信息
      */
     public String getState();
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_PAGE.LAYOUT</code>. 「layout」- 当前页面的布局信息
+     */
+    public IUiPage setLayout(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_PAGE.LAYOUT</code>. 「layout」- 当前页面的布局信息
+     */
+    public String getLayout();
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_PAGE.ASSIST</code>. 「assist」- 当前页面的辅助数据Ajax配置
+     */
+    public IUiPage setAssist(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_PAGE.ASSIST</code>. 「assist」- 当前页面的辅助数据Ajax配置
+     */
+    public String getAssist();
 
     /**
      * Setter for <code>DB_ETERNAL.UI_PAGE.ACTIVE</code>. 「active」- 是否启用
@@ -237,8 +247,9 @@ public interface IUiPage extends Serializable {
         setParamMap(json.getString("PARAM_MAP"));
         setContainerName(json.getString("CONTAINER_NAME"));
         setContainerConfig(json.getString("CONTAINER_CONFIG"));
-        setGrid(json.getString("GRID"));
         setState(json.getString("STATE"));
+        setLayout(json.getString("LAYOUT"));
+        setAssist(json.getString("ASSIST"));
         setActive(json.getBoolean("ACTIVE"));
         setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
@@ -262,8 +273,9 @@ public interface IUiPage extends Serializable {
         json.put("PARAM_MAP",getParamMap());
         json.put("CONTAINER_NAME",getContainerName());
         json.put("CONTAINER_CONFIG",getContainerConfig());
-        json.put("GRID",getGrid());
         json.put("STATE",getState());
+        json.put("LAYOUT",getLayout());
+        json.put("ASSIST",getAssist());
         json.put("ACTIVE",getActive());
         json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());
