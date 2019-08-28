@@ -31,7 +31,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implements Record11<String, String, String, Boolean, String, String, String, LocalDateTime, String, LocalDateTime, String>, IUiLayout {
 
-    private static final long serialVersionUID = 1630265647;
+    private static final long serialVersionUID = 1147289007;
 
     /**
      * Setter for <code>DB_ETERNAL.UI_LAYOUT.KEY</code>. 「key」- Tpl模板唯一主键
@@ -68,19 +68,19 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_LAYOUT.PATH</code>. 「path」- Tpl模板路径，用于保存
+     * Setter for <code>DB_ETERNAL.UI_LAYOUT.CONFIG</code>. 「config」- 主配置
      */
     @Override
-    public UiLayoutRecord setPath(String value) {
+    public UiLayoutRecord setConfig(String value) {
         set(2, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_LAYOUT.PATH</code>. 「path」- Tpl模板路径，用于保存
+     * Getter for <code>DB_ETERNAL.UI_LAYOUT.CONFIG</code>. 「config」- 主配置
      */
     @Override
-    public String getPath() {
+    public String getConfig() {
         return (String) get(2);
     }
 
@@ -273,7 +273,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
      */
     @Override
     public Field<String> field3() {
-        return UiLayout.UI_LAYOUT.PATH;
+        return UiLayout.UI_LAYOUT.CONFIG;
     }
 
     /**
@@ -361,7 +361,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
      */
     @Override
     public String component3() {
-        return getPath();
+        return getConfig();
     }
 
     /**
@@ -449,7 +449,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
      */
     @Override
     public String value3() {
-        return getPath();
+        return getConfig();
     }
 
     /**
@@ -539,7 +539,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
      */
     @Override
     public UiLayoutRecord value3(String value) {
-        setPath(value);
+        setConfig(value);
         return this;
     }
 
@@ -645,7 +645,7 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
     public void from(IUiLayout from) {
         setKey(from.getKey());
         setName(from.getName());
-        setPath(from.getPath());
+        setConfig(from.getConfig());
         setActive(from.getActive());
         setSigma(from.getSigma());
         setMetadata(from.getMetadata());
@@ -679,12 +679,12 @@ public class UiLayoutRecord extends UpdatableRecordImpl<UiLayoutRecord> implemen
     /**
      * Create a detached, initialised UiLayoutRecord
      */
-    public UiLayoutRecord(String key, String name, String path, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public UiLayoutRecord(String key, String name, String config, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(UiLayout.UI_LAYOUT);
 
         set(0, key);
         set(1, name);
-        set(2, path);
+        set(2, config);
         set(3, active);
         set(4, sigma);
         set(5, metadata);

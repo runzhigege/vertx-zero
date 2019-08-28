@@ -4,7 +4,6 @@
 package cn.vertxup.ui.domain;
 
 
-import cn.vertxup.ui.domain.tables.UiAjax;
 import cn.vertxup.ui.domain.tables.UiColumn;
 import cn.vertxup.ui.domain.tables.UiControl;
 import cn.vertxup.ui.domain.tables.UiEvent;
@@ -12,7 +11,6 @@ import cn.vertxup.ui.domain.tables.UiField;
 import cn.vertxup.ui.domain.tables.UiForm;
 import cn.vertxup.ui.domain.tables.UiLayout;
 import cn.vertxup.ui.domain.tables.UiPage;
-import cn.vertxup.ui.domain.tables.records.UiAjaxRecord;
 import cn.vertxup.ui.domain.tables.records.UiColumnRecord;
 import cn.vertxup.ui.domain.tables.records.UiControlRecord;
 import cn.vertxup.ui.domain.tables.records.UiEventRecord;
@@ -50,8 +48,6 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<UiAjaxRecord> KEY_UI_AJAX_PRIMARY = UniqueKeys0.KEY_UI_AJAX_PRIMARY;
-    public static final UniqueKey<UiAjaxRecord> KEY_UI_AJAX_NAME = UniqueKeys0.KEY_UI_AJAX_NAME;
     public static final UniqueKey<UiColumnRecord> KEY_UI_COLUMN_PRIMARY = UniqueKeys0.KEY_UI_COLUMN_PRIMARY;
     public static final UniqueKey<UiColumnRecord> KEY_UI_COLUMN_CONTROL_ID = UniqueKeys0.KEY_UI_COLUMN_CONTROL_ID;
     public static final UniqueKey<UiControlRecord> KEY_UI_CONTROL_PRIMARY = UniqueKeys0.KEY_UI_CONTROL_PRIMARY;
@@ -62,9 +58,9 @@ public class Keys {
     public static final UniqueKey<UiFormRecord> KEY_UI_FORM_PRIMARY = UniqueKeys0.KEY_UI_FORM_PRIMARY;
     public static final UniqueKey<UiFormRecord> KEY_UI_FORM_CODE = UniqueKeys0.KEY_UI_FORM_CODE;
     public static final UniqueKey<UiLayoutRecord> KEY_UI_LAYOUT_PRIMARY = UniqueKeys0.KEY_UI_LAYOUT_PRIMARY;
-    public static final UniqueKey<UiLayoutRecord> KEY_UI_LAYOUT_PATH = UniqueKeys0.KEY_UI_LAYOUT_PATH;
+    public static final UniqueKey<UiLayoutRecord> KEY_UI_LAYOUT_NAME = UniqueKeys0.KEY_UI_LAYOUT_NAME;
     public static final UniqueKey<UiPageRecord> KEY_UI_PAGE_PRIMARY = UniqueKeys0.KEY_UI_PAGE_PRIMARY;
-    public static final UniqueKey<UiPageRecord> KEY_UI_PAGE_URL = UniqueKeys0.KEY_UI_PAGE_URL;
+    public static final UniqueKey<UiPageRecord> KEY_UI_PAGE_APP = UniqueKeys0.KEY_UI_PAGE_APP;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -76,8 +72,6 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class UniqueKeys0 {
-        public static final UniqueKey<UiAjaxRecord> KEY_UI_AJAX_PRIMARY = Internal.createUniqueKey(UiAjax.UI_AJAX, "KEY_UI_AJAX_PRIMARY", UiAjax.UI_AJAX.KEY);
-        public static final UniqueKey<UiAjaxRecord> KEY_UI_AJAX_NAME = Internal.createUniqueKey(UiAjax.UI_AJAX, "KEY_UI_AJAX_NAME", UiAjax.UI_AJAX.NAME, UiAjax.UI_AJAX.RELATED_ID);
         public static final UniqueKey<UiColumnRecord> KEY_UI_COLUMN_PRIMARY = Internal.createUniqueKey(UiColumn.UI_COLUMN, "KEY_UI_COLUMN_PRIMARY", UiColumn.UI_COLUMN.KEY);
         public static final UniqueKey<UiColumnRecord> KEY_UI_COLUMN_CONTROL_ID = Internal.createUniqueKey(UiColumn.UI_COLUMN, "KEY_UI_COLUMN_CONTROL_ID", UiColumn.UI_COLUMN.CONTROL_ID, UiColumn.UI_COLUMN.DATA_INDEX);
         public static final UniqueKey<UiControlRecord> KEY_UI_CONTROL_PRIMARY = Internal.createUniqueKey(UiControl.UI_CONTROL, "KEY_UI_CONTROL_PRIMARY", UiControl.UI_CONTROL.KEY);
@@ -88,8 +82,8 @@ public class Keys {
         public static final UniqueKey<UiFormRecord> KEY_UI_FORM_PRIMARY = Internal.createUniqueKey(UiForm.UI_FORM, "KEY_UI_FORM_PRIMARY", UiForm.UI_FORM.KEY);
         public static final UniqueKey<UiFormRecord> KEY_UI_FORM_CODE = Internal.createUniqueKey(UiForm.UI_FORM, "KEY_UI_FORM_CODE", UiForm.UI_FORM.CODE, UiForm.UI_FORM.SIGMA);
         public static final UniqueKey<UiLayoutRecord> KEY_UI_LAYOUT_PRIMARY = Internal.createUniqueKey(UiLayout.UI_LAYOUT, "KEY_UI_LAYOUT_PRIMARY", UiLayout.UI_LAYOUT.KEY);
-        public static final UniqueKey<UiLayoutRecord> KEY_UI_LAYOUT_PATH = Internal.createUniqueKey(UiLayout.UI_LAYOUT, "KEY_UI_LAYOUT_PATH", UiLayout.UI_LAYOUT.PATH, UiLayout.UI_LAYOUT.SIGMA);
+        public static final UniqueKey<UiLayoutRecord> KEY_UI_LAYOUT_NAME = Internal.createUniqueKey(UiLayout.UI_LAYOUT, "KEY_UI_LAYOUT_NAME", UiLayout.UI_LAYOUT.NAME, UiLayout.UI_LAYOUT.SIGMA);
         public static final UniqueKey<UiPageRecord> KEY_UI_PAGE_PRIMARY = Internal.createUniqueKey(UiPage.UI_PAGE, "KEY_UI_PAGE_PRIMARY", UiPage.UI_PAGE.KEY);
-        public static final UniqueKey<UiPageRecord> KEY_UI_PAGE_URL = Internal.createUniqueKey(UiPage.UI_PAGE, "KEY_UI_PAGE_URL", UiPage.UI_PAGE.URL, UiPage.UI_PAGE.SIGMA);
+        public static final UniqueKey<UiPageRecord> KEY_UI_PAGE_APP = Internal.createUniqueKey(UiPage.UI_PAGE, "KEY_UI_PAGE_APP", UiPage.UI_PAGE.APP, UiPage.UI_PAGE.MODULE, UiPage.UI_PAGE.PAGE, UiPage.UI_PAGE.SIGMA);
     }
 }
