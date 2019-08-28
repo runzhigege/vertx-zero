@@ -77,10 +77,10 @@ public class UiLayoutDao extends DAOImpl<UiLayoutRecord, cn.vertxup.ui.domain.ta
     }
 
     /**
-     * Fetch records that have <code>PATH IN (values)</code>
+     * Fetch records that have <code>CONFIG IN (values)</code>
      */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiLayout> fetchByPath(String... values) {
-        return fetch(UiLayout.UI_LAYOUT.PATH, values);
+    public List<cn.vertxup.ui.domain.tables.pojos.UiLayout> fetchByConfig(String... values) {
+        return fetch(UiLayout.UI_LAYOUT.CONFIG, values);
     }
 
     /**
@@ -161,10 +161,10 @@ public class UiLayoutDao extends DAOImpl<UiLayoutRecord, cn.vertxup.ui.domain.ta
     }
 
     /**
-     * Fetch records that have <code>PATH IN (values)</code> asynchronously
+     * Fetch records that have <code>CONFIG IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiLayout>> fetchByPathAsync(List<String> values) {
-        return fetchAsync(UiLayout.UI_LAYOUT.PATH,values);
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiLayout>> fetchByConfigAsync(List<String> values) {
+        return fetchAsync(UiLayout.UI_LAYOUT.CONFIG,values);
     }
 
     /**

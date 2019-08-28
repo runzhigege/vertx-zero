@@ -44,14 +44,14 @@ public interface IUiLayout extends Serializable {
     public String getName();
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_LAYOUT.PATH</code>. 「path」- Tpl模板路径，用于保存
+     * Setter for <code>DB_ETERNAL.UI_LAYOUT.CONFIG</code>. 「config」- 主配置
      */
-    public IUiLayout setPath(String value);
+    public IUiLayout setConfig(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_LAYOUT.PATH</code>. 「path」- Tpl模板路径，用于保存
+     * Getter for <code>DB_ETERNAL.UI_LAYOUT.CONFIG</code>. 「config」- 主配置
      */
-    public String getPath();
+    public String getConfig();
 
     /**
      * Setter for <code>DB_ETERNAL.UI_LAYOUT.ACTIVE</code>. 「active」- 是否启用
@@ -150,7 +150,7 @@ public interface IUiLayout extends Serializable {
     default IUiLayout fromJson(io.vertx.core.json.JsonObject json) {
         setKey(json.getString("KEY"));
         setName(json.getString("NAME"));
-        setPath(json.getString("PATH"));
+        setConfig(json.getString("CONFIG"));
         setActive(json.getBoolean("ACTIVE"));
         setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
@@ -167,7 +167,7 @@ public interface IUiLayout extends Serializable {
         io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
         json.put("KEY",getKey());
         json.put("NAME",getName());
-        json.put("PATH",getPath());
+        json.put("CONFIG",getConfig());
         json.put("ACTIVE",getActive());
         json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());

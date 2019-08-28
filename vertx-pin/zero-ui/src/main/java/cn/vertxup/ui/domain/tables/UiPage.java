@@ -35,27 +35,27 @@ public class UiPage extends TableImpl<UiPageRecord> {
      * The reference instance of <code>DB_ETERNAL.UI_PAGE</code>
      */
     public static final UiPage UI_PAGE = new UiPage();
-    private static final long serialVersionUID = 1674214945;
+    private static final long serialVersionUID = 99269888;
     /**
      * The column <code>DB_ETERNAL.UI_PAGE.KEY</code>. 「key」- 页面唯一主键
      */
     public final TableField<UiPageRecord, String> KEY = createField("KEY", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「key」- 页面唯一主键");
     /**
-     * The column <code>DB_ETERNAL.UI_PAGE.URL</code>. 「url」- 模块入口地址，前端统一URL，后端统一URI（术语）
-     */
-    public final TableField<UiPageRecord, String> URL = createField("URL", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「url」- 模块入口地址，前端统一URL，后端统一URI（术语）");
-    /**
      * The column <code>DB_ETERNAL.UI_PAGE.APP</code>. 「app」- 入口APP名称，APP中的path
      */
-    public final TableField<UiPageRecord, String> APP = createField("APP", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「app」- 入口APP名称，APP中的path");
+    public final TableField<UiPageRecord, String> APP = createField("APP", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「app」- 入口APP名称，APP中的path");
     /**
      * The column <code>DB_ETERNAL.UI_PAGE.MODULE</code>. 「module」- 模块相关信息
      */
-    public final TableField<UiPageRecord, String> MODULE = createField("MODULE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「module」- 模块相关信息");
+    public final TableField<UiPageRecord, String> MODULE = createField("MODULE", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「module」- 模块相关信息");
     /**
      * The column <code>DB_ETERNAL.UI_PAGE.PAGE</code>. 「page」- 页面路径信息
      */
-    public final TableField<UiPageRecord, String> PAGE = createField("PAGE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「page」- 页面路径信息");
+    public final TableField<UiPageRecord, String> PAGE = createField("PAGE", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「page」- 页面路径信息");
+    /**
+     * The column <code>DB_ETERNAL.UI_PAGE.LAYOUT_ID</code>. 「layoutId」- 使用的模板ID，最终生成 layout 顶层节点数据
+     */
+    public final TableField<UiPageRecord, String> LAYOUT_ID = createField("LAYOUT_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「layoutId」- 使用的模板ID，最终生成 layout 顶层节点数据");
     /**
      * The column <code>DB_ETERNAL.UI_PAGE.SECURE</code>. 「secure」- 是否执行安全检查（安全检查才会被权限系统捕捉）
      */
@@ -65,25 +65,25 @@ public class UiPage extends TableImpl<UiPageRecord> {
      */
     public final TableField<UiPageRecord, String> PARAM_MAP = createField("PARAM_MAP", org.jooq.impl.SQLDataType.CLOB, this, "「paramMap」- URL地址中的配置key=value");
     /**
-     * The column <code>DB_ETERNAL.UI_PAGE.STATE</code>. 「state」- $env环境变量专用，设置默认的 initState
+     * The column <code>DB_ETERNAL.UI_PAGE.CONTAINER_NAME</code>. 「containerName」- 当前页面是否存在容器，如果有容器，那么设置容器名称
      */
-    public final TableField<UiPageRecord, String> STATE = createField("STATE", org.jooq.impl.SQLDataType.CLOB, this, "「state」- $env环境变量专用，设置默认的 initState");
+    public final TableField<UiPageRecord, String> CONTAINER_NAME = createField("CONTAINER_NAME", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「containerName」- 当前页面是否存在容器，如果有容器，那么设置容器名称");
     /**
-     * The column <code>DB_ETERNAL.UI_PAGE.CONTAINER_NAME</code>. 「containerName」如果包含了容器组件，设置容器组件名称
+     * The column <code>DB_ETERNAL.UI_PAGE.CONTAINER_CONFIG</code>. 「containerConfig」- 当前页面容器相关配置
      */
-    public final TableField<UiPageRecord, String> CONTAINER_NAME = createField("CONTAINER_NAME", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「containerName」如果包含了容器组件，设置容器组件名称");
+    public final TableField<UiPageRecord, String> CONTAINER_CONFIG = createField("CONTAINER_CONFIG", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「containerConfig」- 当前页面容器相关配置");
     /**
-     * The column <code>DB_ETERNAL.UI_PAGE.CONTAINER_CONFIG</code>. 「containerConfig」如果包含了容器组件，设置容器组件配置信息
+     * The column <code>DB_ETERNAL.UI_PAGE.STATE</code>. 「state」- 当前页面的初始化状态信息
      */
-    public final TableField<UiPageRecord, String> CONTAINER_CONFIG = createField("CONTAINER_CONFIG", org.jooq.impl.SQLDataType.CLOB, this, "「containerConfig」如果包含了容器组件，设置容器组件配置信息");
+    public final TableField<UiPageRecord, String> STATE = createField("STATE", org.jooq.impl.SQLDataType.CLOB, this, "「state」- 当前页面的初始化状态信息");
     /**
-     * The column <code>DB_ETERNAL.UI_PAGE.GRID</code>. 「grid」- 布局专用数据，设置Ant Design的行列结构
+     * The column <code>DB_ETERNAL.UI_PAGE.GRID</code>. 「grid」- 当前页面的布局信息，Grid布局格式
      */
-    public final TableField<UiPageRecord, String> GRID = createField("GRID", org.jooq.impl.SQLDataType.CLOB, this, "「grid」- 布局专用数据，设置Ant Design的行列结构");
+    public final TableField<UiPageRecord, String> GRID = createField("GRID", org.jooq.impl.SQLDataType.CLOB, this, "「grid」- 当前页面的布局信息，Grid布局格式");
     /**
-     * The column <code>DB_ETERNAL.UI_PAGE.LAYOUT_ID</code>. 「layoutId」- 使用的模板ID，最终生成 layout 顶层节点数据
+     * The column <code>DB_ETERNAL.UI_PAGE.ASSIST</code>. 「assist」- 当前页面的辅助数据Ajax配置
      */
-    public final TableField<UiPageRecord, String> LAYOUT_ID = createField("LAYOUT_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「layoutId」- 使用的模板ID，最终生成 layout 顶层节点数据");
+    public final TableField<UiPageRecord, String> ASSIST = createField("ASSIST", org.jooq.impl.SQLDataType.CLOB, this, "「assist」- 当前页面的辅助数据Ajax配置");
     /**
      * The column <code>DB_ETERNAL.UI_PAGE.ACTIVE</code>. 「active」- 是否启用
      */
@@ -167,7 +167,7 @@ public class UiPage extends TableImpl<UiPageRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.UI_PAGE_PRIMARY, Indexes.UI_PAGE_URL);
+        return Arrays.<Index>asList(Indexes.UI_PAGE_APP, Indexes.UI_PAGE_PRIMARY);
     }
 
     /**
@@ -183,7 +183,7 @@ public class UiPage extends TableImpl<UiPageRecord> {
      */
     @Override
     public List<UniqueKey<UiPageRecord>> getKeys() {
-        return Arrays.<UniqueKey<UiPageRecord>>asList(Keys.KEY_UI_PAGE_PRIMARY, Keys.KEY_UI_PAGE_URL);
+        return Arrays.<UniqueKey<UiPageRecord>>asList(Keys.KEY_UI_PAGE_PRIMARY, Keys.KEY_UI_PAGE_APP);
     }
 
     /**

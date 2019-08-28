@@ -31,7 +31,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements Record20<String, String, String, String, String, Boolean, String, String, String, String, String, String, Boolean, String, String, String, LocalDateTime, String, LocalDateTime, String>, IUiPage {
 
-    private static final long serialVersionUID = -1366882311;
+    private static final long serialVersionUID = 1447733899;
 
     /**
      * Setter for <code>DB_ETERNAL.UI_PAGE.KEY</code>. 「key」- 页面唯一主键
@@ -51,28 +51,11 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_PAGE.URL</code>. 「url」- 模块入口地址，前端统一URL，后端统一URI（术语）
-     */
-    @Override
-    public UiPageRecord setUrl(String value) {
-        set(1, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_PAGE.URL</code>. 「url」- 模块入口地址，前端统一URL，后端统一URI（术语）
-     */
-    @Override
-    public String getUrl() {
-        return (String) get(1);
-    }
-
-    /**
      * Setter for <code>DB_ETERNAL.UI_PAGE.APP</code>. 「app」- 入口APP名称，APP中的path
      */
     @Override
     public UiPageRecord setApp(String value) {
-        set(2, value);
+        set(1, value);
         return this;
     }
 
@@ -81,7 +64,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public String getApp() {
-        return (String) get(2);
+        return (String) get(1);
     }
 
     /**
@@ -89,7 +72,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public UiPageRecord setModule(String value) {
-        set(3, value);
+        set(2, value);
         return this;
     }
 
@@ -98,7 +81,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public String getModule() {
-        return (String) get(3);
+        return (String) get(2);
     }
 
     /**
@@ -106,7 +89,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public UiPageRecord setPage(String value) {
-        set(4, value);
+        set(3, value);
         return this;
     }
 
@@ -115,6 +98,23 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public String getPage() {
+        return (String) get(3);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_PAGE.LAYOUT_ID</code>. 「layoutId」- 使用的模板ID，最终生成 layout 顶层节点数据
+     */
+    @Override
+    public UiPageRecord setLayoutId(String value) {
+        set(4, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_PAGE.LAYOUT_ID</code>. 「layoutId」- 使用的模板ID，最终生成 layout 顶层节点数据
+     */
+    @Override
+    public String getLayoutId() {
         return (String) get(4);
     }
 
@@ -153,58 +153,58 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_PAGE.STATE</code>. 「state」- $env环境变量专用，设置默认的 initState
+     * Setter for <code>DB_ETERNAL.UI_PAGE.CONTAINER_NAME</code>. 「containerName」- 当前页面是否存在容器，如果有容器，那么设置容器名称
      */
     @Override
-    public UiPageRecord setState(String value) {
+    public UiPageRecord setContainerName(String value) {
         set(7, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_PAGE.STATE</code>. 「state」- $env环境变量专用，设置默认的 initState
+     * Getter for <code>DB_ETERNAL.UI_PAGE.CONTAINER_NAME</code>. 「containerName」- 当前页面是否存在容器，如果有容器，那么设置容器名称
      */
     @Override
-    public String getState() {
+    public String getContainerName() {
         return (String) get(7);
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_PAGE.CONTAINER_NAME</code>. 「containerName」如果包含了容器组件，设置容器组件名称
+     * Setter for <code>DB_ETERNAL.UI_PAGE.CONTAINER_CONFIG</code>. 「containerConfig」- 当前页面容器相关配置
      */
     @Override
-    public UiPageRecord setContainerName(String value) {
+    public UiPageRecord setContainerConfig(String value) {
         set(8, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_PAGE.CONTAINER_NAME</code>. 「containerName」如果包含了容器组件，设置容器组件名称
+     * Getter for <code>DB_ETERNAL.UI_PAGE.CONTAINER_CONFIG</code>. 「containerConfig」- 当前页面容器相关配置
      */
     @Override
-    public String getContainerName() {
+    public String getContainerConfig() {
         return (String) get(8);
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_PAGE.CONTAINER_CONFIG</code>. 「containerConfig」如果包含了容器组件，设置容器组件配置信息
+     * Setter for <code>DB_ETERNAL.UI_PAGE.STATE</code>. 「state」- 当前页面的初始化状态信息
      */
     @Override
-    public UiPageRecord setContainerConfig(String value) {
+    public UiPageRecord setState(String value) {
         set(9, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_PAGE.CONTAINER_CONFIG</code>. 「containerConfig」如果包含了容器组件，设置容器组件配置信息
+     * Getter for <code>DB_ETERNAL.UI_PAGE.STATE</code>. 「state」- 当前页面的初始化状态信息
      */
     @Override
-    public String getContainerConfig() {
+    public String getState() {
         return (String) get(9);
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_PAGE.GRID</code>. 「grid」- 布局专用数据，设置Ant Design的行列结构
+     * Setter for <code>DB_ETERNAL.UI_PAGE.GRID</code>. 「grid」- 当前页面的布局信息，Grid布局格式
      */
     @Override
     public UiPageRecord setGrid(String value) {
@@ -213,7 +213,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_PAGE.GRID</code>. 「grid」- 布局专用数据，设置Ant Design的行列结构
+     * Getter for <code>DB_ETERNAL.UI_PAGE.GRID</code>. 「grid」- 当前页面的布局信息，Grid布局格式
      */
     @Override
     public String getGrid() {
@@ -221,19 +221,19 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_PAGE.LAYOUT_ID</code>. 「layoutId」- 使用的模板ID，最终生成 layout 顶层节点数据
+     * Setter for <code>DB_ETERNAL.UI_PAGE.ASSIST</code>. 「assist」- 当前页面的辅助数据Ajax配置
      */
     @Override
-    public UiPageRecord setLayoutId(String value) {
+    public UiPageRecord setAssist(String value) {
         set(11, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_PAGE.LAYOUT_ID</code>. 「layoutId」- 使用的模板ID，最终生成 layout 顶层节点数据
+     * Getter for <code>DB_ETERNAL.UI_PAGE.ASSIST</code>. 「assist」- 当前页面的辅助数据Ajax配置
      */
     @Override
-    public String getLayoutId() {
+    public String getAssist() {
         return (String) get(11);
     }
 
@@ -418,14 +418,6 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public Field<String> field2() {
-        return UiPage.UI_PAGE.URL;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Field<String> field3() {
         return UiPage.UI_PAGE.APP;
     }
 
@@ -433,7 +425,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      * {@inheritDoc}
      */
     @Override
-    public Field<String> field4() {
+    public Field<String> field3() {
         return UiPage.UI_PAGE.MODULE;
     }
 
@@ -441,8 +433,16 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      * {@inheritDoc}
      */
     @Override
-    public Field<String> field5() {
+    public Field<String> field4() {
         return UiPage.UI_PAGE.PAGE;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Field<String> field5() {
+        return UiPage.UI_PAGE.LAYOUT_ID;
     }
 
     /**
@@ -466,14 +466,6 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public Field<String> field8() {
-        return UiPage.UI_PAGE.STATE;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Field<String> field9() {
         return UiPage.UI_PAGE.CONTAINER_NAME;
     }
 
@@ -481,8 +473,16 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      * {@inheritDoc}
      */
     @Override
-    public Field<String> field10() {
+    public Field<String> field9() {
         return UiPage.UI_PAGE.CONTAINER_CONFIG;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Field<String> field10() {
+        return UiPage.UI_PAGE.STATE;
     }
 
     /**
@@ -498,7 +498,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public Field<String> field12() {
-        return UiPage.UI_PAGE.LAYOUT_ID;
+        return UiPage.UI_PAGE.ASSIST;
     }
 
     /**
@@ -578,14 +578,6 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public String component2() {
-        return getUrl();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String component3() {
         return getApp();
     }
 
@@ -593,7 +585,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      * {@inheritDoc}
      */
     @Override
-    public String component4() {
+    public String component3() {
         return getModule();
     }
 
@@ -601,8 +593,16 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      * {@inheritDoc}
      */
     @Override
-    public String component5() {
+    public String component4() {
         return getPage();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String component5() {
+        return getLayoutId();
     }
 
     /**
@@ -626,14 +626,6 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public String component8() {
-        return getState();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String component9() {
         return getContainerName();
     }
 
@@ -641,8 +633,16 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      * {@inheritDoc}
      */
     @Override
-    public String component10() {
+    public String component9() {
         return getContainerConfig();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String component10() {
+        return getState();
     }
 
     /**
@@ -658,7 +658,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public String component12() {
-        return getLayoutId();
+        return getAssist();
     }
 
     /**
@@ -738,14 +738,6 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public String value2() {
-        return getUrl();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String value3() {
         return getApp();
     }
 
@@ -753,7 +745,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      * {@inheritDoc}
      */
     @Override
-    public String value4() {
+    public String value3() {
         return getModule();
     }
 
@@ -761,8 +753,16 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      * {@inheritDoc}
      */
     @Override
-    public String value5() {
+    public String value4() {
         return getPage();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String value5() {
+        return getLayoutId();
     }
 
     /**
@@ -786,14 +786,6 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public String value8() {
-        return getState();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String value9() {
         return getContainerName();
     }
 
@@ -801,8 +793,16 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      * {@inheritDoc}
      */
     @Override
-    public String value10() {
+    public String value9() {
         return getContainerConfig();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String value10() {
+        return getState();
     }
 
     /**
@@ -818,7 +818,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public String value12() {
-        return getLayoutId();
+        return getAssist();
     }
 
     /**
@@ -899,15 +899,6 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public UiPageRecord value2(String value) {
-        setUrl(value);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public UiPageRecord value3(String value) {
         setApp(value);
         return this;
     }
@@ -916,7 +907,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      * {@inheritDoc}
      */
     @Override
-    public UiPageRecord value4(String value) {
+    public UiPageRecord value3(String value) {
         setModule(value);
         return this;
     }
@@ -925,8 +916,17 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      * {@inheritDoc}
      */
     @Override
-    public UiPageRecord value5(String value) {
+    public UiPageRecord value4(String value) {
         setPage(value);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiPageRecord value5(String value) {
+        setLayoutId(value);
         return this;
     }
 
@@ -953,15 +953,6 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public UiPageRecord value8(String value) {
-        setState(value);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public UiPageRecord value9(String value) {
         setContainerName(value);
         return this;
     }
@@ -970,8 +961,17 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      * {@inheritDoc}
      */
     @Override
-    public UiPageRecord value10(String value) {
+    public UiPageRecord value9(String value) {
         setContainerConfig(value);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiPageRecord value10(String value) {
+        setState(value);
         return this;
     }
 
@@ -989,7 +989,7 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
      */
     @Override
     public UiPageRecord value12(String value) {
-        setLayoutId(value);
+        setAssist(value);
         return this;
     }
 
@@ -1103,17 +1103,17 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
     @Override
     public void from(IUiPage from) {
         setKey(from.getKey());
-        setUrl(from.getUrl());
         setApp(from.getApp());
         setModule(from.getModule());
         setPage(from.getPage());
+        setLayoutId(from.getLayoutId());
         setSecure(from.getSecure());
         setParamMap(from.getParamMap());
-        setState(from.getState());
         setContainerName(from.getContainerName());
         setContainerConfig(from.getContainerConfig());
+        setState(from.getState());
         setGrid(from.getGrid());
-        setLayoutId(from.getLayoutId());
+        setAssist(from.getAssist());
         setActive(from.getActive());
         setSigma(from.getSigma());
         setMetadata(from.getMetadata());
@@ -1147,21 +1147,21 @@ public class UiPageRecord extends UpdatableRecordImpl<UiPageRecord> implements R
     /**
      * Create a detached, initialised UiPageRecord
      */
-    public UiPageRecord(String key, String url, String app, String module, String page, Boolean secure, String paramMap, String state, String containerName, String containerConfig, String grid, String layoutId, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public UiPageRecord(String key, String app, String module, String page, String layoutId, Boolean secure, String paramMap, String containerName, String containerConfig, String state, String grid, String assist, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(UiPage.UI_PAGE);
 
         set(0, key);
-        set(1, url);
-        set(2, app);
-        set(3, module);
-        set(4, page);
+        set(1, app);
+        set(2, module);
+        set(3, page);
+        set(4, layoutId);
         set(5, secure);
         set(6, paramMap);
-        set(7, state);
-        set(8, containerName);
-        set(9, containerConfig);
+        set(7, containerName);
+        set(8, containerConfig);
+        set(9, state);
         set(10, grid);
-        set(11, layoutId);
+        set(11, assist);
         set(12, active);
         set(13, sigma);
         set(14, metadata);
