@@ -63,4 +63,10 @@ public interface KeField {
         String URL_ENTRY = "urlEntry";
         String URL_MAIN = "urlMain";
     }
+
+    interface Ui {
+        String CONFIG = "config";
+
+        String CONTAINER_CONFIG = "containerConfig";
+    }
 }
