@@ -92,7 +92,7 @@
         <guice.version>4.1.0</guice.version>
         <scala.version>2.13.0</scala.version>
         <feign.version>8.18.0</feign.version>
-        <guava.version>28.0-jre</guava.version>
+        <guava.version>28.1-jre</guava.version>
         <codehaus.janino.version>3.1.0</codehaus.janino.version>
         <ignite.version>2.7.5</ignite.version>
         <mongodb.async.version>3.11.0</mongodb.async.version>
