@@ -41,7 +41,9 @@ public class PageService implements PageStub {
                                                 /*
                                                  * Configuration converted to Json
                                                  */
-                                                .compose(Ke.metadata(KeField.Ui.CONTAINER_CONFIG));
+                                                .compose(Ke.metadata(KeField.Ui.CONTAINER_CONFIG))
+                                                .compose(Ke.metadata(KeField.Ui.GRID))
+                                                .compose(Ke.metadata(KeField.Ui.ASSIST));
                                     });
                         } else {
                             return Ux.fnJObject(page);
