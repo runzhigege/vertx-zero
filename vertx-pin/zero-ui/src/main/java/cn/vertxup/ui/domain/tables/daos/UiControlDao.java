@@ -70,62 +70,6 @@ public class UiControlDao extends DAOImpl<UiControlRecord, cn.vertxup.ui.domain.
     }
 
     /**
-     * Fetch records that have <code>CONTAINER_NAME IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchByContainerName(String... values) {
-        return fetch(UiControl.UI_CONTROL.CONTAINER_NAME, values);
-    }
-
-    /**
-     * Fetch records that have <code>CONTAINER_CONFIG IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchByContainerConfig(String... values) {
-        return fetch(UiControl.UI_CONTROL.CONTAINER_CONFIG, values);
-    }
-
-    /**
-     * Fetch records that have <code>COMPONENT_NAME IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchByComponentName(String... values) {
-        return fetch(UiControl.UI_CONTROL.COMPONENT_NAME, values);
-    }
-
-    /**
-     * Fetch records that have <code>COMPONENT_DATA IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchByComponentData(String... values) {
-        return fetch(UiControl.UI_CONTROL.COMPONENT_DATA, values);
-    }
-
-    /**
-     * Fetch records that have <code>COMPONENT_CONFIG IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchByComponentConfig(String... values) {
-        return fetch(UiControl.UI_CONTROL.COMPONENT_CONFIG, values);
-    }
-
-    /**
-     * Fetch records that have <code>DATA_EVENT IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchByDataEvent(String... values) {
-        return fetch(UiControl.UI_CONTROL.DATA_EVENT, values);
-    }
-
-    /**
-     * Fetch records that have <code>DATA_MAPPING IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchByDataMapping(String... values) {
-        return fetch(UiControl.UI_CONTROL.DATA_MAPPING, values);
-    }
-
-    /**
-     * Fetch records that have <code>DATA_MAGIC IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchByDataMagic(String... values) {
-        return fetch(UiControl.UI_CONTROL.DATA_MAGIC, values);
-    }
-
-    /**
      * Fetch records that have <code>SIGN IN (values)</code>
      */
     public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchBySign(String... values) {
@@ -144,6 +88,62 @@ public class UiControlDao extends DAOImpl<UiControlRecord, cn.vertxup.ui.domain.
      */
     public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchByPageId(String... values) {
         return fetch(UiControl.UI_CONTROL.PAGE_ID, values);
+    }
+
+    /**
+     * Fetch records that have <code>TYPE IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchByType(String... values) {
+        return fetch(UiControl.UI_CONTROL.TYPE, values);
+    }
+
+    /**
+     * Fetch records that have <code>CONTAINER_NAME IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchByContainerName(String... values) {
+        return fetch(UiControl.UI_CONTROL.CONTAINER_NAME, values);
+    }
+
+    /**
+     * Fetch records that have <code>CONTAINER_CONFIG IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchByContainerConfig(String... values) {
+        return fetch(UiControl.UI_CONTROL.CONTAINER_CONFIG, values);
+    }
+
+    /**
+     * Fetch records that have <code>ASSIST IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchByAssist(String... values) {
+        return fetch(UiControl.UI_CONTROL.ASSIST, values);
+    }
+
+    /**
+     * Fetch records that have <code>GRID IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchByGrid(String... values) {
+        return fetch(UiControl.UI_CONTROL.GRID, values);
+    }
+
+    /**
+     * Fetch records that have <code>COMPONENT_NAME IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchByComponentName(String... values) {
+        return fetch(UiControl.UI_CONTROL.COMPONENT_NAME, values);
+    }
+
+    /**
+     * Fetch records that have <code>COMPONENT_CONFIG IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchByComponentConfig(String... values) {
+        return fetch(UiControl.UI_CONTROL.COMPONENT_CONFIG, values);
+    }
+
+    /**
+     * Fetch records that have <code>COMPONENT_DATA IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiControl> fetchByComponentData(String... values) {
+        return fetch(UiControl.UI_CONTROL.COMPONENT_DATA, values);
     }
 
     /**
@@ -217,62 +217,6 @@ public class UiControlDao extends DAOImpl<UiControlRecord, cn.vertxup.ui.domain.
     }
 
     /**
-     * Fetch records that have <code>CONTAINER_NAME IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchByContainerNameAsync(List<String> values) {
-        return fetchAsync(UiControl.UI_CONTROL.CONTAINER_NAME,values);
-    }
-
-    /**
-     * Fetch records that have <code>CONTAINER_CONFIG IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchByContainerConfigAsync(List<String> values) {
-        return fetchAsync(UiControl.UI_CONTROL.CONTAINER_CONFIG,values);
-    }
-
-    /**
-     * Fetch records that have <code>COMPONENT_NAME IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchByComponentNameAsync(List<String> values) {
-        return fetchAsync(UiControl.UI_CONTROL.COMPONENT_NAME,values);
-    }
-
-    /**
-     * Fetch records that have <code>COMPONENT_DATA IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchByComponentDataAsync(List<String> values) {
-        return fetchAsync(UiControl.UI_CONTROL.COMPONENT_DATA,values);
-    }
-
-    /**
-     * Fetch records that have <code>COMPONENT_CONFIG IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchByComponentConfigAsync(List<String> values) {
-        return fetchAsync(UiControl.UI_CONTROL.COMPONENT_CONFIG,values);
-    }
-
-    /**
-     * Fetch records that have <code>DATA_EVENT IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchByDataEventAsync(List<String> values) {
-        return fetchAsync(UiControl.UI_CONTROL.DATA_EVENT,values);
-    }
-
-    /**
-     * Fetch records that have <code>DATA_MAPPING IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchByDataMappingAsync(List<String> values) {
-        return fetchAsync(UiControl.UI_CONTROL.DATA_MAPPING,values);
-    }
-
-    /**
-     * Fetch records that have <code>DATA_MAGIC IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchByDataMagicAsync(List<String> values) {
-        return fetchAsync(UiControl.UI_CONTROL.DATA_MAGIC,values);
-    }
-
-    /**
      * Fetch records that have <code>SIGN IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchBySignAsync(List<String> values) {
@@ -291,6 +235,62 @@ public class UiControlDao extends DAOImpl<UiControlRecord, cn.vertxup.ui.domain.
      */
     public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchByPageIdAsync(List<String> values) {
         return fetchAsync(UiControl.UI_CONTROL.PAGE_ID,values);
+    }
+
+    /**
+     * Fetch records that have <code>TYPE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchByTypeAsync(List<String> values) {
+        return fetchAsync(UiControl.UI_CONTROL.TYPE,values);
+    }
+
+    /**
+     * Fetch records that have <code>CONTAINER_NAME IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchByContainerNameAsync(List<String> values) {
+        return fetchAsync(UiControl.UI_CONTROL.CONTAINER_NAME,values);
+    }
+
+    /**
+     * Fetch records that have <code>CONTAINER_CONFIG IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchByContainerConfigAsync(List<String> values) {
+        return fetchAsync(UiControl.UI_CONTROL.CONTAINER_CONFIG,values);
+    }
+
+    /**
+     * Fetch records that have <code>ASSIST IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchByAssistAsync(List<String> values) {
+        return fetchAsync(UiControl.UI_CONTROL.ASSIST,values);
+    }
+
+    /**
+     * Fetch records that have <code>GRID IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchByGridAsync(List<String> values) {
+        return fetchAsync(UiControl.UI_CONTROL.GRID,values);
+    }
+
+    /**
+     * Fetch records that have <code>COMPONENT_NAME IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchByComponentNameAsync(List<String> values) {
+        return fetchAsync(UiControl.UI_CONTROL.COMPONENT_NAME,values);
+    }
+
+    /**
+     * Fetch records that have <code>COMPONENT_CONFIG IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchByComponentConfigAsync(List<String> values) {
+        return fetchAsync(UiControl.UI_CONTROL.COMPONENT_CONFIG,values);
+    }
+
+    /**
+     * Fetch records that have <code>COMPONENT_DATA IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiControl>> fetchByComponentDataAsync(List<String> values) {
+        return fetchAsync(UiControl.UI_CONTROL.COMPONENT_DATA,values);
     }
 
     /**

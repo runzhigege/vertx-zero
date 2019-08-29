@@ -33,7 +33,7 @@ public class Db extends SchemaImpl {
      * The reference instance of <code>DB_ETERNAL</code>
      */
     public static final Db DB_ETERNAL = new Db();
-    private static final long serialVersionUID = 2063536755;
+    private static final long serialVersionUID = -1884205466;
     /**
      * The table <code>DB_ETERNAL.UI_COLUMN</code>.
      */
@@ -43,11 +43,6 @@ public class Db extends SchemaImpl {
      * The table <code>DB_ETERNAL.UI_CONTROL</code>.
      */
     public final UiControl UI_CONTROL = cn.vertxup.ui.domain.tables.UiControl.UI_CONTROL;
-
-    /**
-     * The table <code>DB_ETERNAL.UI_EVENT</code>.
-     */
-    public final UiEvent UI_EVENT = cn.vertxup.ui.domain.tables.UiEvent.UI_EVENT;
 
     /**
      * The table <code>DB_ETERNAL.UI_FIELD</code>.
@@ -96,7 +91,6 @@ public class Db extends SchemaImpl {
         return Arrays.<Table<?>>asList(
                 UiColumn.UI_COLUMN,
                 UiControl.UI_CONTROL,
-                UiEvent.UI_EVENT,
                 UiField.UI_FIELD,
                 UiForm.UI_FORM,
                 UiLayout.UI_LAYOUT,

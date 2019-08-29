@@ -14,23 +14,31 @@ import java.util.function.Function;
 class KeElement {
 
     static Function<JsonObject, Future<JsonObject>> metadataArray(final String field) {
-        return response -> Fn.getJvm(Future.succeededFuture(new JsonObject()), () -> {
+        return response -> Ux.toFuture(metadataArray(response, field));
+    }
+
+    static JsonObject metadataArray(final JsonObject response, final String field) {
+        return Fn.getJvm(new JsonObject(), () -> {
             final String data = response.getString(field);
             if (Objects.nonNull(data) && Ut.isJArray(data)) {
                 response.put(field, new JsonArray(data));
             }
-            return Ux.toFuture(response);
+            return response;
         }, response);
     }
 
-    static Function<JsonObject, Future<JsonObject>> metadata(final String field) {
-        return response -> Fn.getJvm(Future.succeededFuture(new JsonObject()), () -> {
+    static JsonObject metadata(final JsonObject response, final String field) {
+        return Fn.getJvm(new JsonObject(), () -> {
             final String data = response.getString(field);
             if (Objects.nonNull(data) && Ut.isJObject(data)) {
                 response.put(field, parseMetadata(new JsonObject(data)));
             }
-            return Ux.toFuture(response);
+            return response;
         }, response);
+    }
+
+    static Function<JsonObject, Future<JsonObject>> metadata(final String field) {
+        return response -> Ux.toFuture(metadata(response, field));
     }
 
     /*

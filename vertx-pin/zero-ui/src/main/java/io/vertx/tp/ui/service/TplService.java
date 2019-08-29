@@ -7,7 +7,7 @@ import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.up.unity.Ux;
 
-public class LayoutService implements LayoutStub {
+public class TplService implements TplStub {
 
     private static final String LAYOUT_POOL = "LAYOUT_POOL";
 

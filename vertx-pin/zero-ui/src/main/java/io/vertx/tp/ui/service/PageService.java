@@ -14,7 +14,9 @@ import java.util.Objects;
 
 public class PageService implements PageStub {
     @Inject
-    private transient LayoutStub layoutStub;
+    private transient TplStub tplStub;
+    @Inject
+    private transient ControlStub controlStub;
 
     @Override
     public Future<JsonObject> fetchAmp(final String sigma,
@@ -33,21 +35,7 @@ public class PageService implements PageStub {
                             /*
                              * Continue to extract layout Data here
                              */
-                            return this.layoutStub.fetchLayout(page.getLayoutId())
-                                    .compose(layout -> {
-                                        final JsonObject pageJson = Ux.toJson(page);
-                                        pageJson.put("layout", layout);
-                                        return Ux.toFuture(pageJson)
-                                                /*
-                                                 * Configuration converted to Json
-                                                 */
-                                                .compose(Ke.metadata(KeField.Ui.CONTAINER_CONFIG))
-                                                .compose(Ke.metadata(KeField.Ui.ASSIST))
-                                                /*
-                                                 * Another method to convert JsonArray
-                                                 */
-                                                .compose(Ke.metadataArray(KeField.Ui.GRID));
-                                    });
+                            return this.fetchLayout(page);
                         } else {
                             return Ux.fnJObject(page);
                         }
@@ -57,6 +45,42 @@ public class PageService implements PageStub {
                          */
                         return Ux.toFuture(new JsonObject());
                     }
+                })
+                .compose(pageJson -> {
+                    /*
+                     * Extract pageId
+                     */
+                    final String pageId = pageJson.getString(KeField.KEY);
+                    return this.controlStub.fetchControls(pageId)
+                            /*
+                             * Fetch Controls of current page
+                             * This will be filled into $control variable
+                             */
+                            .compose(controls -> {
+                                pageJson.put(KeField.Ui.CONTROLS, controls);
+                                return Ux.toFuture(pageJson);
+                            });
+                });
+    }
+
+    /*
+     * Fetch layout by page.
+     */
+    private Future<JsonObject> fetchLayout(final UiPage page) {
+        return this.tplStub.fetchLayout(page.getLayoutId())
+                .compose(layout -> {
+                    final JsonObject pageJson = Ux.toJson(page);
+                    pageJson.put("layout", layout);
+                    return Ux.toFuture(pageJson)
+                            /*
+                             * Configuration converted to Json
+                             */
+                            .compose(Ke.metadata(KeField.Ui.CONTAINER_CONFIG))
+                            .compose(Ke.metadata(KeField.Ui.ASSIST))
+                            /*
+                             * Another method to convert JsonArray
+                             */
+                            .compose(Ke.metadataArray(KeField.Ui.GRID));
                 });
     }
 }
