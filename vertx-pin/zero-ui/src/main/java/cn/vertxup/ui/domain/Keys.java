@@ -6,14 +6,12 @@ package cn.vertxup.ui.domain;
 
 import cn.vertxup.ui.domain.tables.UiColumn;
 import cn.vertxup.ui.domain.tables.UiControl;
-import cn.vertxup.ui.domain.tables.UiEvent;
 import cn.vertxup.ui.domain.tables.UiField;
 import cn.vertxup.ui.domain.tables.UiForm;
 import cn.vertxup.ui.domain.tables.UiLayout;
 import cn.vertxup.ui.domain.tables.UiPage;
 import cn.vertxup.ui.domain.tables.records.UiColumnRecord;
 import cn.vertxup.ui.domain.tables.records.UiControlRecord;
-import cn.vertxup.ui.domain.tables.records.UiEventRecord;
 import cn.vertxup.ui.domain.tables.records.UiFieldRecord;
 import cn.vertxup.ui.domain.tables.records.UiFormRecord;
 import cn.vertxup.ui.domain.tables.records.UiLayoutRecord;
@@ -52,7 +50,6 @@ public class Keys {
     public static final UniqueKey<UiColumnRecord> KEY_UI_COLUMN_CONTROL_ID = UniqueKeys0.KEY_UI_COLUMN_CONTROL_ID;
     public static final UniqueKey<UiControlRecord> KEY_UI_CONTROL_PRIMARY = UniqueKeys0.KEY_UI_CONTROL_PRIMARY;
     public static final UniqueKey<UiControlRecord> KEY_UI_CONTROL_SIGN = UniqueKeys0.KEY_UI_CONTROL_SIGN;
-    public static final UniqueKey<UiEventRecord> KEY_UI_EVENT_PRIMARY = UniqueKeys0.KEY_UI_EVENT_PRIMARY;
     public static final UniqueKey<UiFieldRecord> KEY_UI_FIELD_PRIMARY = UniqueKeys0.KEY_UI_FIELD_PRIMARY;
     public static final UniqueKey<UiFieldRecord> KEY_UI_FIELD_FORM_ID = UniqueKeys0.KEY_UI_FIELD_FORM_ID;
     public static final UniqueKey<UiFormRecord> KEY_UI_FORM_PRIMARY = UniqueKeys0.KEY_UI_FORM_PRIMARY;
@@ -76,7 +73,6 @@ public class Keys {
         public static final UniqueKey<UiColumnRecord> KEY_UI_COLUMN_CONTROL_ID = Internal.createUniqueKey(UiColumn.UI_COLUMN, "KEY_UI_COLUMN_CONTROL_ID", UiColumn.UI_COLUMN.CONTROL_ID, UiColumn.UI_COLUMN.DATA_INDEX);
         public static final UniqueKey<UiControlRecord> KEY_UI_CONTROL_PRIMARY = Internal.createUniqueKey(UiControl.UI_CONTROL, "KEY_UI_CONTROL_PRIMARY", UiControl.UI_CONTROL.KEY);
         public static final UniqueKey<UiControlRecord> KEY_UI_CONTROL_SIGN = Internal.createUniqueKey(UiControl.UI_CONTROL, "KEY_UI_CONTROL_SIGN", UiControl.UI_CONTROL.SIGN);
-        public static final UniqueKey<UiEventRecord> KEY_UI_EVENT_PRIMARY = Internal.createUniqueKey(UiEvent.UI_EVENT, "KEY_UI_EVENT_PRIMARY", UiEvent.UI_EVENT.KEY);
         public static final UniqueKey<UiFieldRecord> KEY_UI_FIELD_PRIMARY = Internal.createUniqueKey(UiField.UI_FIELD, "KEY_UI_FIELD_PRIMARY", UiField.UI_FIELD.KEY);
         public static final UniqueKey<UiFieldRecord> KEY_UI_FIELD_FORM_ID = Internal.createUniqueKey(UiField.UI_FIELD, "KEY_UI_FIELD_FORM_ID", UiField.UI_FIELD.FORM_ID, UiField.UI_FIELD.NAME);
         public static final UniqueKey<UiFormRecord> KEY_UI_FORM_PRIMARY = Internal.createUniqueKey(UiForm.UI_FORM, "KEY_UI_FORM_PRIMARY", UiForm.UI_FORM.KEY);

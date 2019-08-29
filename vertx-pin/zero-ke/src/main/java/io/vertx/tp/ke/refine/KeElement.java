@@ -1,6 +1,7 @@
 package io.vertx.tp.ke.refine;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.atom.KeMetadata;
 import io.vertx.up.fn.Fn;
@@ -12,14 +13,32 @@ import java.util.function.Function;
 
 class KeElement {
 
-    static Function<JsonObject, Future<JsonObject>> metadata(final String field) {
-        return response -> Fn.getJvm(Future.succeededFuture(new JsonObject()), () -> {
+    static Function<JsonObject, Future<JsonObject>> metadataArray(final String field) {
+        return response -> Ux.toFuture(metadataArray(response, field));
+    }
+
+    static JsonObject metadataArray(final JsonObject response, final String field) {
+        return Fn.getJvm(new JsonObject(), () -> {
+            final String data = response.getString(field);
+            if (Objects.nonNull(data) && Ut.isJArray(data)) {
+                response.put(field, new JsonArray(data));
+            }
+            return response;
+        }, response);
+    }
+
+    static JsonObject metadata(final JsonObject response, final String field) {
+        return Fn.getJvm(new JsonObject(), () -> {
             final String data = response.getString(field);
             if (Objects.nonNull(data) && Ut.isJObject(data)) {
                 response.put(field, parseMetadata(new JsonObject(data)));
             }
-            return Ux.toFuture(response);
+            return response;
         }, response);
+    }
+
+    static Function<JsonObject, Future<JsonObject>> metadata(final String field) {
+        return response -> Ux.toFuture(metadata(response, field));
     }
 
     /*

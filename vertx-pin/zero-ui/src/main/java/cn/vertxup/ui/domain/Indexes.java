@@ -6,7 +6,6 @@ package cn.vertxup.ui.domain;
 
 import cn.vertxup.ui.domain.tables.UiColumn;
 import cn.vertxup.ui.domain.tables.UiControl;
-import cn.vertxup.ui.domain.tables.UiEvent;
 import cn.vertxup.ui.domain.tables.UiField;
 import cn.vertxup.ui.domain.tables.UiForm;
 import cn.vertxup.ui.domain.tables.UiLayout;
@@ -40,7 +39,6 @@ public class Indexes {
     public static final Index UI_COLUMN_PRIMARY = Indexes0.UI_COLUMN_PRIMARY;
     public static final Index UI_CONTROL_PRIMARY = Indexes0.UI_CONTROL_PRIMARY;
     public static final Index UI_CONTROL_SIGN = Indexes0.UI_CONTROL_SIGN;
-    public static final Index UI_EVENT_PRIMARY = Indexes0.UI_EVENT_PRIMARY;
     public static final Index UI_FIELD_FORM_ID = Indexes0.UI_FIELD_FORM_ID;
     public static final Index UI_FIELD_PRIMARY = Indexes0.UI_FIELD_PRIMARY;
     public static final Index UI_FORM_CODE = Indexes0.UI_FORM_CODE;
@@ -59,7 +57,6 @@ public class Indexes {
         public static Index UI_COLUMN_PRIMARY = Internal.createIndex("PRIMARY", UiColumn.UI_COLUMN, new OrderField[] { UiColumn.UI_COLUMN.KEY }, true);
         public static Index UI_CONTROL_PRIMARY = Internal.createIndex("PRIMARY", UiControl.UI_CONTROL, new OrderField[] { UiControl.UI_CONTROL.KEY }, true);
         public static Index UI_CONTROL_SIGN = Internal.createIndex("SIGN", UiControl.UI_CONTROL, new OrderField[] { UiControl.UI_CONTROL.SIGN }, true);
-        public static Index UI_EVENT_PRIMARY = Internal.createIndex("PRIMARY", UiEvent.UI_EVENT, new OrderField[] { UiEvent.UI_EVENT.KEY }, true);
         public static Index UI_FIELD_FORM_ID = Internal.createIndex("FORM_ID", UiField.UI_FIELD, new OrderField[] { UiField.UI_FIELD.FORM_ID, UiField.UI_FIELD.NAME }, true);
         public static Index UI_FIELD_PRIMARY = Internal.createIndex("PRIMARY", UiField.UI_FIELD, new OrderField[] { UiField.UI_FIELD.KEY }, true);
         public static Index UI_FORM_CODE = Internal.createIndex("CODE", UiForm.UI_FORM, new OrderField[] { UiForm.UI_FORM.CODE, UiForm.UI_FORM.SIGMA }, true);

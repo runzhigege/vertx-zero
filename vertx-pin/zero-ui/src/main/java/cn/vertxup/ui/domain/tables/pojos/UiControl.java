@@ -24,19 +24,19 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiControl implements IUiControl {
 
-    private static final long serialVersionUID = 2087649400;
+    private static final long serialVersionUID = -1203403404;
 
     private String        key;
-    private String        containerName;
-    private String        containerConfig;
-    private String        componentName;
-    private String        componentData;
-    private String        componentConfig;
-    private String        dataEvent;
-    private String        dataMapping;
-    private String        dataMagic;
     private String        sign;
     private String        pageId;
+    private String        type;
+    private String        containerName;
+    private String        containerConfig;
+    private String        assist;
+    private String        grid;
+    private String        componentName;
+    private String        componentConfig;
+    private String        componentData;
     private Boolean       active;
     private String        sigma;
     private String        metadata;
@@ -50,16 +50,16 @@ public class UiControl implements IUiControl {
 
     public UiControl(UiControl value) {
         this.key = value.key;
-        this.containerName = value.containerName;
-        this.containerConfig = value.containerConfig;
-        this.componentName = value.componentName;
-        this.componentData = value.componentData;
-        this.componentConfig = value.componentConfig;
-        this.dataEvent = value.dataEvent;
-        this.dataMapping = value.dataMapping;
-        this.dataMagic = value.dataMagic;
         this.sign = value.sign;
         this.pageId = value.pageId;
+        this.type = value.type;
+        this.containerName = value.containerName;
+        this.containerConfig = value.containerConfig;
+        this.assist = value.assist;
+        this.grid = value.grid;
+        this.componentName = value.componentName;
+        this.componentConfig = value.componentConfig;
+        this.componentData = value.componentData;
         this.active = value.active;
         this.sigma = value.sigma;
         this.metadata = value.metadata;
@@ -72,16 +72,16 @@ public class UiControl implements IUiControl {
 
     public UiControl(
         String        key,
-        String        containerName,
-        String        containerConfig,
-        String        componentName,
-        String        componentData,
-        String        componentConfig,
-        String        dataEvent,
-        String        dataMapping,
-        String        dataMagic,
         String        sign,
         String        pageId,
+        String        type,
+        String        containerName,
+        String        containerConfig,
+        String        assist,
+        String        grid,
+        String        componentName,
+        String        componentConfig,
+        String        componentData,
         Boolean       active,
         String        sigma,
         String        metadata,
@@ -92,16 +92,16 @@ public class UiControl implements IUiControl {
         String        updatedBy
     ) {
         this.key = key;
-        this.containerName = containerName;
-        this.containerConfig = containerConfig;
-        this.componentName = componentName;
-        this.componentData = componentData;
-        this.componentConfig = componentConfig;
-        this.dataEvent = dataEvent;
-        this.dataMapping = dataMapping;
-        this.dataMagic = dataMagic;
         this.sign = sign;
         this.pageId = pageId;
+        this.type = type;
+        this.containerName = containerName;
+        this.containerConfig = containerConfig;
+        this.assist = assist;
+        this.grid = grid;
+        this.componentName = componentName;
+        this.componentConfig = componentConfig;
+        this.componentData = componentData;
         this.active = active;
         this.sigma = sigma;
         this.metadata = metadata;
@@ -120,6 +120,39 @@ public class UiControl implements IUiControl {
     @Override
     public UiControl setKey(String key) {
         this.key = key;
+        return this;
+    }
+
+    @Override
+    public String getSign() {
+        return this.sign;
+    }
+
+    @Override
+    public UiControl setSign(String sign) {
+        this.sign = sign;
+        return this;
+    }
+
+    @Override
+    public String getPageId() {
+        return this.pageId;
+    }
+
+    @Override
+    public UiControl setPageId(String pageId) {
+        this.pageId = pageId;
+        return this;
+    }
+
+    @Override
+    public String getType() {
+        return this.type;
+    }
+
+    @Override
+    public UiControl setType(String type) {
+        this.type = type;
         return this;
     }
 
@@ -146,6 +179,28 @@ public class UiControl implements IUiControl {
     }
 
     @Override
+    public String getAssist() {
+        return this.assist;
+    }
+
+    @Override
+    public UiControl setAssist(String assist) {
+        this.assist = assist;
+        return this;
+    }
+
+    @Override
+    public String getGrid() {
+        return this.grid;
+    }
+
+    @Override
+    public UiControl setGrid(String grid) {
+        this.grid = grid;
+        return this;
+    }
+
+    @Override
     public String getComponentName() {
         return this.componentName;
     }
@@ -153,17 +208,6 @@ public class UiControl implements IUiControl {
     @Override
     public UiControl setComponentName(String componentName) {
         this.componentName = componentName;
-        return this;
-    }
-
-    @Override
-    public String getComponentData() {
-        return this.componentData;
-    }
-
-    @Override
-    public UiControl setComponentData(String componentData) {
-        this.componentData = componentData;
         return this;
     }
 
@@ -179,57 +223,13 @@ public class UiControl implements IUiControl {
     }
 
     @Override
-    public String getDataEvent() {
-        return this.dataEvent;
+    public String getComponentData() {
+        return this.componentData;
     }
 
     @Override
-    public UiControl setDataEvent(String dataEvent) {
-        this.dataEvent = dataEvent;
-        return this;
-    }
-
-    @Override
-    public String getDataMapping() {
-        return this.dataMapping;
-    }
-
-    @Override
-    public UiControl setDataMapping(String dataMapping) {
-        this.dataMapping = dataMapping;
-        return this;
-    }
-
-    @Override
-    public String getDataMagic() {
-        return this.dataMagic;
-    }
-
-    @Override
-    public UiControl setDataMagic(String dataMagic) {
-        this.dataMagic = dataMagic;
-        return this;
-    }
-
-    @Override
-    public String getSign() {
-        return this.sign;
-    }
-
-    @Override
-    public UiControl setSign(String sign) {
-        this.sign = sign;
-        return this;
-    }
-
-    @Override
-    public String getPageId() {
-        return this.pageId;
-    }
-
-    @Override
-    public UiControl setPageId(String pageId) {
-        this.pageId = pageId;
+    public UiControl setComponentData(String componentData) {
+        this.componentData = componentData;
         return this;
     }
 
@@ -326,16 +326,16 @@ public class UiControl implements IUiControl {
         StringBuilder sb = new StringBuilder("UiControl (");
 
         sb.append(key);
-        sb.append(", ").append(containerName);
-        sb.append(", ").append(containerConfig);
-        sb.append(", ").append(componentName);
-        sb.append(", ").append(componentData);
-        sb.append(", ").append(componentConfig);
-        sb.append(", ").append(dataEvent);
-        sb.append(", ").append(dataMapping);
-        sb.append(", ").append(dataMagic);
         sb.append(", ").append(sign);
         sb.append(", ").append(pageId);
+        sb.append(", ").append(type);
+        sb.append(", ").append(containerName);
+        sb.append(", ").append(containerConfig);
+        sb.append(", ").append(assist);
+        sb.append(", ").append(grid);
+        sb.append(", ").append(componentName);
+        sb.append(", ").append(componentConfig);
+        sb.append(", ").append(componentData);
         sb.append(", ").append(active);
         sb.append(", ").append(sigma);
         sb.append(", ").append(metadata);
@@ -359,16 +359,16 @@ public class UiControl implements IUiControl {
     @Override
     public void from(IUiControl from) {
         setKey(from.getKey());
-        setContainerName(from.getContainerName());
-        setContainerConfig(from.getContainerConfig());
-        setComponentName(from.getComponentName());
-        setComponentData(from.getComponentData());
-        setComponentConfig(from.getComponentConfig());
-        setDataEvent(from.getDataEvent());
-        setDataMapping(from.getDataMapping());
-        setDataMagic(from.getDataMagic());
         setSign(from.getSign());
         setPageId(from.getPageId());
+        setType(from.getType());
+        setContainerName(from.getContainerName());
+        setContainerConfig(from.getContainerConfig());
+        setAssist(from.getAssist());
+        setGrid(from.getGrid());
+        setComponentName(from.getComponentName());
+        setComponentConfig(from.getComponentConfig());
+        setComponentData(from.getComponentData());
         setActive(from.getActive());
         setSigma(from.getSigma());
         setMetadata(from.getMetadata());

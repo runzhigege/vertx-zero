@@ -35,11 +35,23 @@ public class UiControl extends TableImpl<UiControlRecord> {
      * The reference instance of <code>DB_ETERNAL.UI_CONTROL</code>
      */
     public static final UiControl UI_CONTROL = new UiControl();
-    private static final long serialVersionUID = 1294495714;
+    private static final long serialVersionUID = 254724323;
     /**
      * The column <code>DB_ETERNAL.UI_CONTROL.KEY</code>. 「key」- 主键
      */
     public final TableField<UiControlRecord, String> KEY = createField("KEY", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「key」- 主键");
+    /**
+     * The column <code>DB_ETERNAL.UI_CONTROL.SIGN</code>. 「sign」- 控件使用的签名基本信息
+     */
+    public final TableField<UiControlRecord, String> SIGN = createField("SIGN", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「sign」- 控件使用的签名基本信息");
+    /**
+     * The column <code>DB_ETERNAL.UI_CONTROL.PAGE_ID</code>. 「pageId」- 当前控件所在的页面ID
+     */
+    public final TableField<UiControlRecord, String> PAGE_ID = createField("PAGE_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「pageId」- 当前控件所在的页面ID");
+    /**
+     * The column <code>DB_ETERNAL.UI_CONTROL.TYPE</code>. 「type」- 当前控件的类型：CONTAINER / COMPONENT / FORM / LIST，其中 FORM / LIST 需要访问子表
+     */
+    public final TableField<UiControlRecord, String> TYPE = createField("TYPE", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「type」- 当前控件的类型：CONTAINER / COMPONENT / FORM / LIST，其中 FORM / LIST 需要访问子表");
     /**
      * The column <code>DB_ETERNAL.UI_CONTROL.CONTAINER_NAME</code>. 「containerName」- 当前控件使用的容器名
      */
@@ -49,37 +61,25 @@ public class UiControl extends TableImpl<UiControlRecord> {
      */
     public final TableField<UiControlRecord, String> CONTAINER_CONFIG = createField("CONTAINER_CONFIG", org.jooq.impl.SQLDataType.CLOB, this, "「containerConfig」- 当前控件使用的容器配置");
     /**
+     * The column <code>DB_ETERNAL.UI_CONTROL.ASSIST</code>. 「assist」 - 辅助数据（容器专用）
+     */
+    public final TableField<UiControlRecord, String> ASSIST = createField("ASSIST", org.jooq.impl.SQLDataType.CLOB, this, "「assist」 - 辅助数据（容器专用）");
+    /**
+     * The column <code>DB_ETERNAL.UI_CONTROL.GRID</code>. 「grid」 - 容器专用
+     */
+    public final TableField<UiControlRecord, String> GRID = createField("GRID", org.jooq.impl.SQLDataType.CLOB, this, "「grid」 - 容器专用");
+    /**
      * The column <code>DB_ETERNAL.UI_CONTROL.COMPONENT_NAME</code>. 「componentName」- 当前控件使用的组件名
      */
     public final TableField<UiControlRecord, String> COMPONENT_NAME = createField("COMPONENT_NAME", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「componentName」- 当前控件使用的组件名");
-    /**
-     * The column <code>DB_ETERNAL.UI_CONTROL.COMPONENT_DATA</code>. 「componentData」- 当前控件绑定的ajax数据名
-     */
-    public final TableField<UiControlRecord, String> COMPONENT_DATA = createField("COMPONENT_DATA", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「componentData」- 当前控件绑定的ajax数据名");
     /**
      * The column <code>DB_ETERNAL.UI_CONTROL.COMPONENT_CONFIG</code>. 「componentConfig」- 当前控件使用的配置
      */
     public final TableField<UiControlRecord, String> COMPONENT_CONFIG = createField("COMPONENT_CONFIG", org.jooq.impl.SQLDataType.CLOB, this, "「componentConfig」- 当前控件使用的配置");
     /**
-     * The column <code>DB_ETERNAL.UI_CONTROL.DATA_EVENT</code>. 「dataEvent] - 当前控件绑定的事件类型：单事件、并行、串行
+     * The column <code>DB_ETERNAL.UI_CONTROL.COMPONENT_DATA</code>. 「componentData」- 当前控件使用的数据，使用表达式结构
      */
-    public final TableField<UiControlRecord, String> DATA_EVENT = createField("DATA_EVENT", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「dataEvent] - 当前控件绑定的事件类型：单事件、并行、串行");
-    /**
-     * The column <code>DB_ETERNAL.UI_CONTROL.DATA_MAPPING</code>. 「dataMapping」- 数据映射：config -&gt; mapping
-     */
-    public final TableField<UiControlRecord, String> DATA_MAPPING = createField("DATA_MAPPING", org.jooq.impl.SQLDataType.CLOB, this, "「dataMapping」- 数据映射：config -> mapping");
-    /**
-     * The column <code>DB_ETERNAL.UI_CONTROL.DATA_MAGIC</code>. 「dataMagic」- 数据加载：config -&gt; magic
-     */
-    public final TableField<UiControlRecord, String> DATA_MAGIC = createField("DATA_MAGIC", org.jooq.impl.SQLDataType.CLOB, this, "「dataMagic」- 数据加载：config -> magic");
-    /**
-     * The column <code>DB_ETERNAL.UI_CONTROL.SIGN</code>. 「sign」- 控件使用的签名基本信息
-     */
-    public final TableField<UiControlRecord, String> SIGN = createField("SIGN", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「sign」- 控件使用的签名基本信息");
-    /**
-     * The column <code>DB_ETERNAL.UI_CONTROL.PAGE_ID</code>. 「pageId」- 当前控件所在的页面ID
-     */
-    public final TableField<UiControlRecord, String> PAGE_ID = createField("PAGE_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「pageId」- 当前控件所在的页面ID");
+    public final TableField<UiControlRecord, String> COMPONENT_DATA = createField("COMPONENT_DATA", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「componentData」- 当前控件使用的数据，使用表达式结构");
     /**
      * The column <code>DB_ETERNAL.UI_CONTROL.ACTIVE</code>. 「active」- 是否启用
      */
