@@ -29,9 +29,22 @@ public class Ke {
         return KeImage.image(field);
     }
 
+    public static JsonObject metadata(final JsonObject response, final String field) {
+        return KeElement.metadata(response, field);
+    }
+
     public static Function<JsonObject, Future<JsonObject>> metadata(final String field) {
         return KeElement.metadata(field);
     }
+
+    public static JsonObject metadataArray(final JsonObject response, final String field) {
+        return KeElement.metadataArray(response, field);
+    }
+
+    public static Function<JsonObject, Future<JsonObject>> metadataArray(final String field) {
+        return KeElement.metadataArray(field);
+    }
+
 
     public static <T> Future<T> poolAsync(final String name, final String key, final Supplier<Future<T>> supplier) {
         return KeTool.poolAsync(name, key, supplier);

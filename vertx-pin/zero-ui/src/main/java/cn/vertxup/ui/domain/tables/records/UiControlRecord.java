@@ -31,7 +31,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implements Record19<String, String, String, String, String, String, String, String, String, String, String, Boolean, String, String, String, LocalDateTime, String, LocalDateTime, String>, IUiControl {
 
-    private static final long serialVersionUID = -1396746330;
+    private static final long serialVersionUID = 1855957931;
 
     /**
      * Setter for <code>DB_ETERNAL.UI_CONTROL.KEY</code>. 「key」- 主键
@@ -51,147 +51,11 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_CONTROL.CONTAINER_NAME</code>. 「containerName」- 当前控件使用的容器名
-     */
-    @Override
-    public UiControlRecord setContainerName(String value) {
-        set(1, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_CONTROL.CONTAINER_NAME</code>. 「containerName」- 当前控件使用的容器名
-     */
-    @Override
-    public String getContainerName() {
-        return (String) get(1);
-    }
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_CONTROL.CONTAINER_CONFIG</code>. 「containerConfig」- 当前控件使用的容器配置
-     */
-    @Override
-    public UiControlRecord setContainerConfig(String value) {
-        set(2, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_CONTROL.CONTAINER_CONFIG</code>. 「containerConfig」- 当前控件使用的容器配置
-     */
-    @Override
-    public String getContainerConfig() {
-        return (String) get(2);
-    }
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_NAME</code>. 「componentName」- 当前控件使用的组件名
-     */
-    @Override
-    public UiControlRecord setComponentName(String value) {
-        set(3, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_NAME</code>. 「componentName」- 当前控件使用的组件名
-     */
-    @Override
-    public String getComponentName() {
-        return (String) get(3);
-    }
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_DATA</code>. 「componentData」- 当前控件绑定的ajax数据名
-     */
-    @Override
-    public UiControlRecord setComponentData(String value) {
-        set(4, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_DATA</code>. 「componentData」- 当前控件绑定的ajax数据名
-     */
-    @Override
-    public String getComponentData() {
-        return (String) get(4);
-    }
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_CONFIG</code>. 「componentConfig」- 当前控件使用的配置
-     */
-    @Override
-    public UiControlRecord setComponentConfig(String value) {
-        set(5, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_CONFIG</code>. 「componentConfig」- 当前控件使用的配置
-     */
-    @Override
-    public String getComponentConfig() {
-        return (String) get(5);
-    }
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_CONTROL.DATA_EVENT</code>. 「dataEvent] - 当前控件绑定的事件类型：单事件、并行、串行
-     */
-    @Override
-    public UiControlRecord setDataEvent(String value) {
-        set(6, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_CONTROL.DATA_EVENT</code>. 「dataEvent] - 当前控件绑定的事件类型：单事件、并行、串行
-     */
-    @Override
-    public String getDataEvent() {
-        return (String) get(6);
-    }
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_CONTROL.DATA_MAPPING</code>. 「dataMapping」- 数据映射：config -&gt; mapping
-     */
-    @Override
-    public UiControlRecord setDataMapping(String value) {
-        set(7, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_CONTROL.DATA_MAPPING</code>. 「dataMapping」- 数据映射：config -&gt; mapping
-     */
-    @Override
-    public String getDataMapping() {
-        return (String) get(7);
-    }
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_CONTROL.DATA_MAGIC</code>. 「dataMagic」- 数据加载：config -&gt; magic
-     */
-    @Override
-    public UiControlRecord setDataMagic(String value) {
-        set(8, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_CONTROL.DATA_MAGIC</code>. 「dataMagic」- 数据加载：config -&gt; magic
-     */
-    @Override
-    public String getDataMagic() {
-        return (String) get(8);
-    }
-
-    /**
      * Setter for <code>DB_ETERNAL.UI_CONTROL.SIGN</code>. 「sign」- 控件使用的签名基本信息
      */
     @Override
     public UiControlRecord setSign(String value) {
-        set(9, value);
+        set(1, value);
         return this;
     }
 
@@ -200,7 +64,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      */
     @Override
     public String getSign() {
-        return (String) get(9);
+        return (String) get(1);
     }
 
     /**
@@ -208,7 +72,7 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      */
     @Override
     public UiControlRecord setPageId(String value) {
-        set(10, value);
+        set(2, value);
         return this;
     }
 
@@ -217,6 +81,142 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      */
     @Override
     public String getPageId() {
+        return (String) get(2);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_CONTROL.TYPE</code>. 「type」- 当前控件的类型：CONTAINER / COMPONENT / FORM / LIST，其中 FORM / LIST 需要访问子表
+     */
+    @Override
+    public UiControlRecord setType(String value) {
+        set(3, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_CONTROL.TYPE</code>. 「type」- 当前控件的类型：CONTAINER / COMPONENT / FORM / LIST，其中 FORM / LIST 需要访问子表
+     */
+    @Override
+    public String getType() {
+        return (String) get(3);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_CONTROL.CONTAINER_NAME</code>. 「containerName」- 当前控件使用的容器名
+     */
+    @Override
+    public UiControlRecord setContainerName(String value) {
+        set(4, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_CONTROL.CONTAINER_NAME</code>. 「containerName」- 当前控件使用的容器名
+     */
+    @Override
+    public String getContainerName() {
+        return (String) get(4);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_CONTROL.CONTAINER_CONFIG</code>. 「containerConfig」- 当前控件使用的容器配置
+     */
+    @Override
+    public UiControlRecord setContainerConfig(String value) {
+        set(5, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_CONTROL.CONTAINER_CONFIG</code>. 「containerConfig」- 当前控件使用的容器配置
+     */
+    @Override
+    public String getContainerConfig() {
+        return (String) get(5);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_CONTROL.ASSIST</code>. 「assist」 - 辅助数据（容器专用）
+     */
+    @Override
+    public UiControlRecord setAssist(String value) {
+        set(6, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_CONTROL.ASSIST</code>. 「assist」 - 辅助数据（容器专用）
+     */
+    @Override
+    public String getAssist() {
+        return (String) get(6);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_CONTROL.GRID</code>. 「grid」 - 容器专用
+     */
+    @Override
+    public UiControlRecord setGrid(String value) {
+        set(7, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_CONTROL.GRID</code>. 「grid」 - 容器专用
+     */
+    @Override
+    public String getGrid() {
+        return (String) get(7);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_NAME</code>. 「componentName」- 当前控件使用的组件名
+     */
+    @Override
+    public UiControlRecord setComponentName(String value) {
+        set(8, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_NAME</code>. 「componentName」- 当前控件使用的组件名
+     */
+    @Override
+    public String getComponentName() {
+        return (String) get(8);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_CONFIG</code>. 「componentConfig」- 当前控件使用的配置
+     */
+    @Override
+    public UiControlRecord setComponentConfig(String value) {
+        set(9, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_CONFIG</code>. 「componentConfig」- 当前控件使用的配置
+     */
+    @Override
+    public String getComponentConfig() {
+        return (String) get(9);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_DATA</code>. 「componentData」- 当前控件使用的数据，使用表达式结构
+     */
+    @Override
+    public UiControlRecord setComponentData(String value) {
+        set(10, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_DATA</code>. 「componentData」- 当前控件使用的数据，使用表达式结构
+     */
+    @Override
+    public String getComponentData() {
         return (String) get(10);
     }
 
@@ -401,70 +401,6 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      */
     @Override
     public Field<String> field2() {
-        return UiControl.UI_CONTROL.CONTAINER_NAME;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Field<String> field3() {
-        return UiControl.UI_CONTROL.CONTAINER_CONFIG;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Field<String> field4() {
-        return UiControl.UI_CONTROL.COMPONENT_NAME;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Field<String> field5() {
-        return UiControl.UI_CONTROL.COMPONENT_DATA;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Field<String> field6() {
-        return UiControl.UI_CONTROL.COMPONENT_CONFIG;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Field<String> field7() {
-        return UiControl.UI_CONTROL.DATA_EVENT;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Field<String> field8() {
-        return UiControl.UI_CONTROL.DATA_MAPPING;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Field<String> field9() {
-        return UiControl.UI_CONTROL.DATA_MAGIC;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Field<String> field10() {
         return UiControl.UI_CONTROL.SIGN;
     }
 
@@ -472,8 +408,72 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * {@inheritDoc}
      */
     @Override
-    public Field<String> field11() {
+    public Field<String> field3() {
         return UiControl.UI_CONTROL.PAGE_ID;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Field<String> field4() {
+        return UiControl.UI_CONTROL.TYPE;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Field<String> field5() {
+        return UiControl.UI_CONTROL.CONTAINER_NAME;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Field<String> field6() {
+        return UiControl.UI_CONTROL.CONTAINER_CONFIG;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Field<String> field7() {
+        return UiControl.UI_CONTROL.ASSIST;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Field<String> field8() {
+        return UiControl.UI_CONTROL.GRID;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Field<String> field9() {
+        return UiControl.UI_CONTROL.COMPONENT_NAME;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Field<String> field10() {
+        return UiControl.UI_CONTROL.COMPONENT_CONFIG;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Field<String> field11() {
+        return UiControl.UI_CONTROL.COMPONENT_DATA;
     }
 
     /**
@@ -553,70 +553,6 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      */
     @Override
     public String component2() {
-        return getContainerName();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String component3() {
-        return getContainerConfig();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String component4() {
-        return getComponentName();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String component5() {
-        return getComponentData();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String component6() {
-        return getComponentConfig();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String component7() {
-        return getDataEvent();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String component8() {
-        return getDataMapping();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String component9() {
-        return getDataMagic();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String component10() {
         return getSign();
     }
 
@@ -624,8 +560,72 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * {@inheritDoc}
      */
     @Override
-    public String component11() {
+    public String component3() {
         return getPageId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String component4() {
+        return getType();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String component5() {
+        return getContainerName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String component6() {
+        return getContainerConfig();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String component7() {
+        return getAssist();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String component8() {
+        return getGrid();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String component9() {
+        return getComponentName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String component10() {
+        return getComponentConfig();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String component11() {
+        return getComponentData();
     }
 
     /**
@@ -705,70 +705,6 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      */
     @Override
     public String value2() {
-        return getContainerName();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String value3() {
-        return getContainerConfig();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String value4() {
-        return getComponentName();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String value5() {
-        return getComponentData();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String value6() {
-        return getComponentConfig();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String value7() {
-        return getDataEvent();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String value8() {
-        return getDataMapping();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String value9() {
-        return getDataMagic();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String value10() {
         return getSign();
     }
 
@@ -776,8 +712,72 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * {@inheritDoc}
      */
     @Override
-    public String value11() {
+    public String value3() {
         return getPageId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String value4() {
+        return getType();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String value5() {
+        return getContainerName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String value6() {
+        return getContainerConfig();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String value7() {
+        return getAssist();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String value8() {
+        return getGrid();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String value9() {
+        return getComponentName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String value10() {
+        return getComponentConfig();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String value11() {
+        return getComponentData();
     }
 
     /**
@@ -858,78 +858,6 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      */
     @Override
     public UiControlRecord value2(String value) {
-        setContainerName(value);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public UiControlRecord value3(String value) {
-        setContainerConfig(value);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public UiControlRecord value4(String value) {
-        setComponentName(value);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public UiControlRecord value5(String value) {
-        setComponentData(value);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public UiControlRecord value6(String value) {
-        setComponentConfig(value);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public UiControlRecord value7(String value) {
-        setDataEvent(value);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public UiControlRecord value8(String value) {
-        setDataMapping(value);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public UiControlRecord value9(String value) {
-        setDataMagic(value);
-        return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public UiControlRecord value10(String value) {
         setSign(value);
         return this;
     }
@@ -938,8 +866,80 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
      * {@inheritDoc}
      */
     @Override
-    public UiControlRecord value11(String value) {
+    public UiControlRecord value3(String value) {
         setPageId(value);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiControlRecord value4(String value) {
+        setType(value);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiControlRecord value5(String value) {
+        setContainerName(value);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiControlRecord value6(String value) {
+        setContainerConfig(value);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiControlRecord value7(String value) {
+        setAssist(value);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiControlRecord value8(String value) {
+        setGrid(value);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiControlRecord value9(String value) {
+        setComponentName(value);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiControlRecord value10(String value) {
+        setComponentConfig(value);
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public UiControlRecord value11(String value) {
+        setComponentData(value);
         return this;
     }
 
@@ -1052,16 +1052,16 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
     @Override
     public void from(IUiControl from) {
         setKey(from.getKey());
-        setContainerName(from.getContainerName());
-        setContainerConfig(from.getContainerConfig());
-        setComponentName(from.getComponentName());
-        setComponentData(from.getComponentData());
-        setComponentConfig(from.getComponentConfig());
-        setDataEvent(from.getDataEvent());
-        setDataMapping(from.getDataMapping());
-        setDataMagic(from.getDataMagic());
         setSign(from.getSign());
         setPageId(from.getPageId());
+        setType(from.getType());
+        setContainerName(from.getContainerName());
+        setContainerConfig(from.getContainerConfig());
+        setAssist(from.getAssist());
+        setGrid(from.getGrid());
+        setComponentName(from.getComponentName());
+        setComponentConfig(from.getComponentConfig());
+        setComponentData(from.getComponentData());
         setActive(from.getActive());
         setSigma(from.getSigma());
         setMetadata(from.getMetadata());
@@ -1095,20 +1095,20 @@ public class UiControlRecord extends UpdatableRecordImpl<UiControlRecord> implem
     /**
      * Create a detached, initialised UiControlRecord
      */
-    public UiControlRecord(String key, String containerName, String containerConfig, String componentName, String componentData, String componentConfig, String dataEvent, String dataMapping, String dataMagic, String sign, String pageId, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public UiControlRecord(String key, String sign, String pageId, String type, String containerName, String containerConfig, String assist, String grid, String componentName, String componentConfig, String componentData, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(UiControl.UI_CONTROL);
 
         set(0, key);
-        set(1, containerName);
-        set(2, containerConfig);
-        set(3, componentName);
-        set(4, componentData);
-        set(5, componentConfig);
-        set(6, dataEvent);
-        set(7, dataMapping);
-        set(8, dataMagic);
-        set(9, sign);
-        set(10, pageId);
+        set(1, sign);
+        set(2, pageId);
+        set(3, type);
+        set(4, containerName);
+        set(5, containerConfig);
+        set(6, assist);
+        set(7, grid);
+        set(8, componentName);
+        set(9, componentConfig);
+        set(10, componentData);
         set(11, active);
         set(12, sigma);
         set(13, metadata);

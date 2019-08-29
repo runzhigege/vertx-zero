@@ -68,5 +68,13 @@ public interface KeField {
         String CONFIG = "config";
 
         String CONTAINER_CONFIG = "containerConfig";
+
+        String COMPONENT_CONFIG = "componentConfig";
+
+        String ASSIST = "assist";
+
+        String GRID = "grid";
+
+        String CONTROLS = "controls";
     }
 }

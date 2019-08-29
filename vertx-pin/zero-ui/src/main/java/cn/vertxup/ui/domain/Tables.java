@@ -6,7 +6,6 @@ package cn.vertxup.ui.domain;
 
 import cn.vertxup.ui.domain.tables.UiColumn;
 import cn.vertxup.ui.domain.tables.UiControl;
-import cn.vertxup.ui.domain.tables.UiEvent;
 import cn.vertxup.ui.domain.tables.UiField;
 import cn.vertxup.ui.domain.tables.UiForm;
 import cn.vertxup.ui.domain.tables.UiLayout;
@@ -37,11 +36,6 @@ public class Tables {
      * The table <code>DB_ETERNAL.UI_CONTROL</code>.
      */
     public static final UiControl UI_CONTROL = cn.vertxup.ui.domain.tables.UiControl.UI_CONTROL;
-
-    /**
-     * The table <code>DB_ETERNAL.UI_EVENT</code>.
-     */
-    public static final UiEvent UI_EVENT = cn.vertxup.ui.domain.tables.UiEvent.UI_EVENT;
 
     /**
      * The table <code>DB_ETERNAL.UI_FIELD</code>.
