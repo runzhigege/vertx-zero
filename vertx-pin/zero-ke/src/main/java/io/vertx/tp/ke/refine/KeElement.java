@@ -1,6 +1,7 @@
 package io.vertx.tp.ke.refine;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.atom.KeMetadata;
 import io.vertx.up.fn.Fn;
@@ -11,6 +12,16 @@ import java.util.Objects;
 import java.util.function.Function;
 
 class KeElement {
+
+    static Function<JsonObject, Future<JsonObject>> metadataArray(final String field) {
+        return response -> Fn.getJvm(Future.succeededFuture(new JsonObject()), () -> {
+            final String data = response.getString(field);
+            if (Objects.nonNull(data) && Ut.isJArray(data)) {
+                response.put(field, new JsonArray(data));
+            }
+            return Ux.toFuture(response);
+        }, response);
+    }
 
     static Function<JsonObject, Future<JsonObject>> metadata(final String field) {
         return response -> Fn.getJvm(Future.succeededFuture(new JsonObject()), () -> {
