@@ -35,7 +35,7 @@ public class UiPage extends TableImpl<UiPageRecord> {
      * The reference instance of <code>DB_ETERNAL.UI_PAGE</code>
      */
     public static final UiPage UI_PAGE = new UiPage();
-    private static final long serialVersionUID = 99269888;
+    private static final long serialVersionUID = 245737767;
     /**
      * The column <code>DB_ETERNAL.UI_PAGE.KEY</code>. 「key」- 页面唯一主键
      */
@@ -71,7 +71,7 @@ public class UiPage extends TableImpl<UiPageRecord> {
     /**
      * The column <code>DB_ETERNAL.UI_PAGE.CONTAINER_CONFIG</code>. 「containerConfig」- 当前页面容器相关配置
      */
-    public final TableField<UiPageRecord, String> CONTAINER_CONFIG = createField("CONTAINER_CONFIG", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「containerConfig」- 当前页面容器相关配置");
+    public final TableField<UiPageRecord, String> CONTAINER_CONFIG = createField("CONTAINER_CONFIG", org.jooq.impl.SQLDataType.CLOB, this, "「containerConfig」- 当前页面容器相关配置");
     /**
      * The column <code>DB_ETERNAL.UI_PAGE.STATE</code>. 「state」- 当前页面的初始化状态信息
      */

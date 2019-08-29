@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS UI_PAGE
      * 2) grid 布局用于解析当前页面的 grid 布局信息，并且和 control 连接
      */
     `CONTAINER_NAME`   VARCHAR(32) COMMENT '「containerName」- 当前页面是否存在容器，如果有容器，那么设置容器名称',
-    `CONTAINER_CONFIG` VARCHAR(32) COMMENT '「containerConfig」- 当前页面容器相关配置',
+    `CONTAINER_CONFIG` TEXT COMMENT '「containerConfig」- 当前页面容器相关配置',
     `STATE`            TEXT COMMENT '「state」- 当前页面的初始化状态信息',
     `GRID`             TEXT COMMENT '「grid」- 当前页面的布局信息，Grid布局格式',
     `ASSIST`           TEXT COMMENT '「assist」- 当前页面的辅助数据Ajax配置',
