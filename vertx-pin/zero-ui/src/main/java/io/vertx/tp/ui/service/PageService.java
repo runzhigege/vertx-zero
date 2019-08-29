@@ -57,7 +57,11 @@ public class PageService implements PageStub {
                              * This will be filled into $control variable
                              */
                             .compose(controls -> {
-                                pageJson.put(KeField.Ui.CONTROLS, controls);
+                                /*
+                                 * Grouped by key, this could be used in front tier directly
+                                 */
+                                final JsonObject grouped = Ux.toGroup(controls, KeField.KEY);
+                                pageJson.put(KeField.Ui.CONTROLS, grouped);
                                 return Ux.toFuture(pageJson);
                             });
                 });
