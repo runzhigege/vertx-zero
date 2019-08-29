@@ -33,6 +33,10 @@ public class Ke {
         return KeElement.metadata(field);
     }
 
+    public static Function<JsonObject, Future<JsonObject>> metadataArray(final String field) {
+        return KeElement.metadataArray(field);
+    }
+
     public static <T> Future<T> poolAsync(final String name, final String key, final Supplier<Future<T>> supplier) {
         return KeTool.poolAsync(name, key, supplier);
     }
