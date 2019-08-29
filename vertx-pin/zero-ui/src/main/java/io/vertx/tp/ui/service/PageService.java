@@ -60,8 +60,13 @@ public class PageService implements PageStub {
                                 /*
                                  * Grouped by key, this could be used in front tier directly
                                  */
-                                final JsonObject grouped = Ux.toGroup(controls, KeField.KEY);
-                                pageJson.put(KeField.Ui.CONTROLS, grouped);
+                                final JsonObject converted = new JsonObject();
+                                controls.stream()
+                                        .filter(Objects::nonNull)
+                                        .map(item -> (JsonObject) item)
+                                        .filter(item -> Objects.nonNull(item.getString(KeField.KEY)))
+                                        .forEach(item -> converted.put(item.getString(KeField.KEY), item.copy()));
+                                pageJson.put(KeField.Ui.CONTROLS, converted);
                                 return Ux.toFuture(pageJson);
                             });
                 });
