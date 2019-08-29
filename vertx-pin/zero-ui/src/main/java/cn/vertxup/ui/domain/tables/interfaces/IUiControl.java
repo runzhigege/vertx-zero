@@ -34,6 +34,36 @@ public interface IUiControl extends Serializable {
     public String getKey();
 
     /**
+     * Setter for <code>DB_ETERNAL.UI_CONTROL.SIGN</code>. 「sign」- 控件使用的签名基本信息
+     */
+    public IUiControl setSign(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_CONTROL.SIGN</code>. 「sign」- 控件使用的签名基本信息
+     */
+    public String getSign();
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_CONTROL.PAGE_ID</code>. 「pageId」- 当前控件所在的页面ID
+     */
+    public IUiControl setPageId(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_CONTROL.PAGE_ID</code>. 「pageId」- 当前控件所在的页面ID
+     */
+    public String getPageId();
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_CONTROL.TYPE</code>. 「type」- 当前控件的类型：CONTAINER / COMPONENT / FORM / LIST，其中 FORM / LIST 需要访问子表
+     */
+    public IUiControl setType(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_CONTROL.TYPE</code>. 「type」- 当前控件的类型：CONTAINER / COMPONENT / FORM / LIST，其中 FORM / LIST 需要访问子表
+     */
+    public String getType();
+
+    /**
      * Setter for <code>DB_ETERNAL.UI_CONTROL.CONTAINER_NAME</code>. 「containerName」- 当前控件使用的容器名
      */
     public IUiControl setContainerName(String value);
@@ -54,6 +84,26 @@ public interface IUiControl extends Serializable {
     public String getContainerConfig();
 
     /**
+     * Setter for <code>DB_ETERNAL.UI_CONTROL.ASSIST</code>. 「assist」 - 辅助数据（容器专用）
+     */
+    public IUiControl setAssist(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_CONTROL.ASSIST</code>. 「assist」 - 辅助数据（容器专用）
+     */
+    public String getAssist();
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_CONTROL.GRID</code>. 「grid」 - 容器专用
+     */
+    public IUiControl setGrid(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_CONTROL.GRID</code>. 「grid」 - 容器专用
+     */
+    public String getGrid();
+
+    /**
      * Setter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_NAME</code>. 「componentName」- 当前控件使用的组件名
      */
     public IUiControl setComponentName(String value);
@@ -62,16 +112,6 @@ public interface IUiControl extends Serializable {
      * Getter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_NAME</code>. 「componentName」- 当前控件使用的组件名
      */
     public String getComponentName();
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_DATA</code>. 「componentData」- 当前控件绑定的ajax数据名
-     */
-    public IUiControl setComponentData(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_DATA</code>. 「componentData」- 当前控件绑定的ajax数据名
-     */
-    public String getComponentData();
 
     /**
      * Setter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_CONFIG</code>. 「componentConfig」- 当前控件使用的配置
@@ -84,54 +124,14 @@ public interface IUiControl extends Serializable {
     public String getComponentConfig();
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_CONTROL.DATA_EVENT</code>. 「dataEvent] - 当前控件绑定的事件类型：单事件、并行、串行
+     * Setter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_DATA</code>. 「componentData」- 当前控件使用的数据，使用表达式结构
      */
-    public IUiControl setDataEvent(String value);
+    public IUiControl setComponentData(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_CONTROL.DATA_EVENT</code>. 「dataEvent] - 当前控件绑定的事件类型：单事件、并行、串行
+     * Getter for <code>DB_ETERNAL.UI_CONTROL.COMPONENT_DATA</code>. 「componentData」- 当前控件使用的数据，使用表达式结构
      */
-    public String getDataEvent();
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_CONTROL.DATA_MAPPING</code>. 「dataMapping」- 数据映射：config -&gt; mapping
-     */
-    public IUiControl setDataMapping(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_CONTROL.DATA_MAPPING</code>. 「dataMapping」- 数据映射：config -&gt; mapping
-     */
-    public String getDataMapping();
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_CONTROL.DATA_MAGIC</code>. 「dataMagic」- 数据加载：config -&gt; magic
-     */
-    public IUiControl setDataMagic(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_CONTROL.DATA_MAGIC</code>. 「dataMagic」- 数据加载：config -&gt; magic
-     */
-    public String getDataMagic();
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_CONTROL.SIGN</code>. 「sign」- 控件使用的签名基本信息
-     */
-    public IUiControl setSign(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_CONTROL.SIGN</code>. 「sign」- 控件使用的签名基本信息
-     */
-    public String getSign();
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_CONTROL.PAGE_ID</code>. 「pageId」- 当前控件所在的页面ID
-     */
-    public IUiControl setPageId(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_CONTROL.PAGE_ID</code>. 「pageId」- 当前控件所在的页面ID
-     */
-    public String getPageId();
+    public String getComponentData();
 
     /**
      * Setter for <code>DB_ETERNAL.UI_CONTROL.ACTIVE</code>. 「active」- 是否启用
@@ -229,16 +229,16 @@ public interface IUiControl extends Serializable {
 
     default IUiControl fromJson(io.vertx.core.json.JsonObject json) {
         setKey(json.getString("KEY"));
-        setContainerName(json.getString("CONTAINER_NAME"));
-        setContainerConfig(json.getString("CONTAINER_CONFIG"));
-        setComponentName(json.getString("COMPONENT_NAME"));
-        setComponentData(json.getString("COMPONENT_DATA"));
-        setComponentConfig(json.getString("COMPONENT_CONFIG"));
-        setDataEvent(json.getString("DATA_EVENT"));
-        setDataMapping(json.getString("DATA_MAPPING"));
-        setDataMagic(json.getString("DATA_MAGIC"));
         setSign(json.getString("SIGN"));
         setPageId(json.getString("PAGE_ID"));
+        setType(json.getString("TYPE"));
+        setContainerName(json.getString("CONTAINER_NAME"));
+        setContainerConfig(json.getString("CONTAINER_CONFIG"));
+        setAssist(json.getString("ASSIST"));
+        setGrid(json.getString("GRID"));
+        setComponentName(json.getString("COMPONENT_NAME"));
+        setComponentConfig(json.getString("COMPONENT_CONFIG"));
+        setComponentData(json.getString("COMPONENT_DATA"));
         setActive(json.getBoolean("ACTIVE"));
         setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
@@ -254,16 +254,16 @@ public interface IUiControl extends Serializable {
     default io.vertx.core.json.JsonObject toJson() {
         io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
         json.put("KEY",getKey());
-        json.put("CONTAINER_NAME",getContainerName());
-        json.put("CONTAINER_CONFIG",getContainerConfig());
-        json.put("COMPONENT_NAME",getComponentName());
-        json.put("COMPONENT_DATA",getComponentData());
-        json.put("COMPONENT_CONFIG",getComponentConfig());
-        json.put("DATA_EVENT",getDataEvent());
-        json.put("DATA_MAPPING",getDataMapping());
-        json.put("DATA_MAGIC",getDataMagic());
         json.put("SIGN",getSign());
         json.put("PAGE_ID",getPageId());
+        json.put("TYPE",getType());
+        json.put("CONTAINER_NAME",getContainerName());
+        json.put("CONTAINER_CONFIG",getContainerConfig());
+        json.put("ASSIST",getAssist());
+        json.put("GRID",getGrid());
+        json.put("COMPONENT_NAME",getComponentName());
+        json.put("COMPONENT_CONFIG",getComponentConfig());
+        json.put("COMPONENT_DATA",getComponentData());
         json.put("ACTIVE",getActive());
         json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());
