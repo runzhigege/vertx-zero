@@ -1,6 +1,7 @@
 package cn.vertxup.erp.api;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.erp.cv.Addr;
 import io.vertx.tp.erp.cv.ErpMsg;
@@ -24,5 +25,11 @@ public class CompanyActor {
     public Future<JsonObject> company(final String employeeId) {
         Er.infoWorker(LOGGER, ErpMsg.COMPANY_INFO, employeeId);
         return stub.fetchByEmployee(employeeId);
+    }
+
+    @Address(Addr.Company.COMPANY_KEY)
+    public Future<JsonArray> fetchCompanys(final String sigma) {
+        Er.infoWorker(LOGGER, ErpMsg.COMPANY_INFO, sigma);
+        return stub.fetchCompanys(sigma);
     }
 }
