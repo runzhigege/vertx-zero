@@ -103,7 +103,7 @@
         <common.net.version>3.6</common.net.version>
         <http.async.client.version>4.1.4</http.async.client.version>
         <http.client.version>4.5.9</http.client.version>
-        <http.core.version>4.4.11</http.core.version>
+        <http.core.version>4.4.12</http.core.version>
         <!-- Liquibase -->
         <liquibase.version>3.6.3</liquibase.version>
         <!-- Rpc -->
@@ -150,7 +150,7 @@
         <maven.plugin.resource>3.0.2</maven.plugin.resource>
         <maven.plugin.site>3.7</maven.plugin.site>
         <maven.plugin.enforcer>3.0.0-M1</maven.plugin.enforcer>
-        <maven.plugin.lombok>1.18.6.0</maven.plugin.lombok>
+        <maven.plugin.lombok>1.18.8.1</maven.plugin.lombok>
         <maven.plugin.processor>3.3.3</maven.plugin.processor>
         <maven.plugin.source>3.0.1</maven.plugin.source>
         <maven.plugin.javadoc>2.10.4</maven.plugin.javadoc>
