@@ -6,6 +6,7 @@ import cn.vertxup.rbac.domain.tables.pojos.RGroupRole;
 import cn.vertxup.rbac.domain.tables.pojos.SGroup;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
+import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.refine.Sc;
@@ -54,5 +55,14 @@ public class GroupService implements GroupStub {
             return new ArrayList<>();
         }
         return dao.fetch(AuthKey.F_PARENT_ID, groupKey);
+    }
+
+    @Override
+    public Future<JsonArray> fetchGroups(final String sigma) {
+        return Ux.Jooq.on(SGroupDao.class)
+                /* Fetch by sigma */
+                .<SGroup>fetchAsync(KeField.SIGMA, sigma)
+                /* Get Result */
+                .compose(Ux::fnJArray);
     }
 }

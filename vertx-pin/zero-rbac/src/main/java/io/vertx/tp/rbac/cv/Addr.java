@@ -28,4 +28,8 @@ public interface Addr {
 
         String PROFILE = Prefix._EVENT + "X-PROFILE";
     }
+
+    interface Group {
+        String GROUP_SIGMA = Prefix._EVENT + "S-GROUP/SIGMA";
+    }
 }
