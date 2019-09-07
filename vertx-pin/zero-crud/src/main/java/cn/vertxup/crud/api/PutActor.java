@@ -45,7 +45,7 @@ public class PutActor {
     @Address(Addr.Put.BY_ID)
     public <T> Future<Envelop> update(final Envelop request) {
         /* Module and Key Extract  */
-        return Ix.create(getClass()).input(request).envelop((dao, config) -> {
+        return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Data Get */
             final JsonObject body = Ux.getJson2(request);
             final String key = Ux.getString1(request);
@@ -61,7 +61,7 @@ public class PutActor {
                             /* Save */
                             .compose(entity -> dao.saveAsync(key, entity))
                             /* 200, Envelop */
-                            .compose(Http::success200)
+                            .compose(entity -> Http.success200(entity, config))
             );
         });
     }
@@ -69,7 +69,7 @@ public class PutActor {
     @Address(Addr.Put.BATCH)
     public <T> Future<Envelop> updateBatch(final Envelop request) {
         /* Batch Extract */
-        return Ix.create(getClass()).input(request).envelop((dao, config) -> {
+        return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Data Get */
             final JsonArray array = Ux.getArray1(request);
             return Ix.inKeys(array, config)
@@ -91,7 +91,7 @@ public class PutActor {
     @Address(Addr.Put.COLUMN_MY)
     public <T> Future<Envelop> updateColumn(final Envelop request) {
         /* Batch Extract */
-        return Ix.create(getClass()).input(request).envelop((dao, config) -> {
+        return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Data Get */
             final JsonArray projection = Ux.getArray1(request);
             /* Put Stub */
@@ -102,7 +102,7 @@ public class PutActor {
                     /* User filling */
                     .compose(input -> IxActor.user().bind(request).procAsync(input, config))
                     /* params `dataKey` calculation */
-                    .compose(params -> prepareDataKey(params, request))
+                    .compose(params -> this.prepareDataKey(params, request))
                     /* Fetch My Columns */
                     .compose(params -> stub.on(dao).saveMy(params, projection))
                     /* Flush Cache based on Ke */
