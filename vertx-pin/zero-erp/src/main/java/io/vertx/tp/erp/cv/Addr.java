@@ -12,6 +12,6 @@ public interface Addr {
         String COMPANY_KEY = Prefix._EVENT + "E-COMPANY/KEY";
     }
     interface Dept {
-        String DEPT_KEY = Prefix._EVENT + "E-DEPT/KEY";
+        String DEPT_SIGMA = Prefix._EVENT + "E-DEPT/SIGMA";
     }
 }

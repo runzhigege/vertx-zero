@@ -1,7 +1,7 @@
-package cn.vertxup.erp.api;
+package cn.vertxup.rbac.api;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.erp.cv.Addr;
+import io.vertx.tp.rbac.cv.Addr;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.EndPoint;
 import io.vertx.up.eon.ID;
@@ -11,11 +11,11 @@ import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 
 @EndPoint
-public interface DeptAgent {
+public interface GroupAgent {
 
-    @Path("/api/depts")
+    @Path("/api/groups")
     @GET
-    @Address(Addr.Dept.DEPT_SIGMA)
-    JsonObject fetchDepts(@HeaderParam(ID.Header.X_SIGMA) String sigma);
+    @Address(Addr.Group.GROUP_SIGMA)
+    JsonObject fetchGroups(@HeaderParam(ID.Header.X_SIGMA) String sigma);
 
 }
