@@ -5,10 +5,10 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.actor.IxActor;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.commune.Envelop;
+import io.vertx.up.unity.Ux;
 
 /*
  * Create new Record that defined in zero system.
@@ -28,7 +28,7 @@ public class PostActor {
     @Address(Addr.Post.ADD)
     public Future<Envelop> create(final Envelop request) {
         /* Actor Extraction */
-        return Ix.create(getClass()).input(request).envelop((dao, config) -> {
+        return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Data Get */
             final JsonObject body = Ux.getJson1(request);
             return Ux.toFuture(body)
@@ -47,7 +47,7 @@ public class PostActor {
                                     /* Deserialize */
                                     .compose(json -> Ix.entityAsync(json, config))
                                     /* 201, Envelop */
-                                    .compose(Http::success201) :
+                                    .compose(entity -> Http.success201(entity, config)) :
                             /* Primary Key Add */
                             IxActor.uuid().procAsync(body, config)
                                     /* Create */
@@ -59,7 +59,7 @@ public class PostActor {
                                     /* T */
                                     .compose(dao::insertAsync)
                                     /* 200, Envelop */
-                                    .compose(Http::success200)
+                                    .compose(entity -> Http.success200(entity, config))
                     );
         });
     }

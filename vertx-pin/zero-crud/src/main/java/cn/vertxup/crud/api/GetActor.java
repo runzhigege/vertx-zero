@@ -28,7 +28,7 @@ public class GetActor {
                             /* 204 */
                             Http.success204(queried) :
                             /* 200 */
-                            Http.success200(queried));
+                            Http.success200(queried, config));
         });
     }
 
