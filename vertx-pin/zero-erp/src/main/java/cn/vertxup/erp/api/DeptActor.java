@@ -20,7 +20,7 @@ public class DeptActor {
     @Inject
     private transient DeptStub deptStub;
 
-    @Address(Addr.Dept.DEPT_KEY)
+    @Address(Addr.Dept.DEPT_SIGMA)
     public Future<JsonArray> fetchDepts(final String sigma) {
         Er.infoWorker(LOGGER, ErpMsg.DEPT_INFO, sigma);
         return deptStub.fetchDepts(sigma);
