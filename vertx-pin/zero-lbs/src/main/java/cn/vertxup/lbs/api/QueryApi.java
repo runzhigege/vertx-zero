@@ -3,8 +3,10 @@ package cn.vertxup.lbs.api;
 import io.vertx.tp.lbs.cv.Addr;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.EndPoint;
+import io.vertx.up.eon.ID;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
@@ -50,4 +52,14 @@ public interface QueryApi {
     @GET
     @Address(Addr.PickUp.REGION_META)
     String initRegion(@PathParam("id") String id);
+
+    @Path("/tents")
+    @GET
+    @Address(Addr.PickUp.TENT_BY_SIGMA)
+    String getTents(@HeaderParam(ID.Header.X_SIGMA) String sigma);
+
+    @Path("/floors")
+    @GET
+    @Address(Addr.PickUp.FLOOR_BY_SIGMA)
+    String getFloors(@HeaderParam(ID.Header.X_SIGMA) String sigma);
 }

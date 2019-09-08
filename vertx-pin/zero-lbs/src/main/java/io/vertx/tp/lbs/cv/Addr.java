@@ -19,5 +19,9 @@ public interface Addr {
         String STATE_BY_COUNTRY = Prefix._EVENT + "L-STATE/BY-COUNTRY";
 
         String COUNTRIES = Prefix._EVENT + "L-COUNTRIES";
+
+        String TENT_BY_SIGMA = Prefix._EVENT + "L-TENT/BY-SIGMA";
+
+        String FLOOR_BY_SIGMA = Prefix._EVENT + "L-FLOOR/BY-SIGMA";
     }
 }
