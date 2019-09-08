@@ -1,9 +1,6 @@
 package cn.vertxup.lbs.api;
 
-import cn.vertxup.lbs.domain.tables.daos.LCityDao;
-import cn.vertxup.lbs.domain.tables.daos.LCountryDao;
-import cn.vertxup.lbs.domain.tables.daos.LRegionDao;
-import cn.vertxup.lbs.domain.tables.daos.LStateDao;
+import cn.vertxup.lbs.domain.tables.daos.*;
 import cn.vertxup.lbs.domain.tables.pojos.LCity;
 import cn.vertxup.lbs.domain.tables.pojos.LRegion;
 import cn.vertxup.lbs.domain.tables.pojos.LState;
@@ -46,6 +43,20 @@ public class QueryActor {
     public Future<JsonArray> queryRegions(final String cityId) {
         return Ux.Jooq.on(LRegionDao.class)
                 .fetchAsync("cityId", cityId)
+                .compose(Ux::fnJArray);
+    }
+
+    @Address(Addr.PickUp.TENT_BY_SIGMA)
+    public Future<JsonArray> getTents(final String sigma) {
+        return Ux.Jooq.on(LTentDao.class)
+                .fetchAsync("sigma", sigma)
+                .compose(Ux::fnJArray);
+    }
+
+    @Address(Addr.PickUp.FLOOR_BY_SIGMA)
+    public Future<JsonArray> getFloors(final String sigma) {
+        return Ux.Jooq.on(LFloorDao.class)
+                .fetchAsync("sigma", sigma)
                 .compose(Ux::fnJArray);
     }
 
