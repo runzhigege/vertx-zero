@@ -35,7 +35,7 @@ public class ECompany extends TableImpl<ECompanyRecord> {
      * The reference instance of <code>DB_ETERNAL.E_COMPANY</code>
      */
     public static final ECompany E_COMPANY = new ECompany();
-    private static final long serialVersionUID = -1108964208;
+    private static final long serialVersionUID = -753050275;
     /**
      * The column <code>DB_ETERNAL.E_COMPANY.KEY</code>. 「key」- 公司主键
      */
@@ -116,6 +116,10 @@ public class ECompany extends TableImpl<ECompanyRecord> {
      * The column <code>DB_ETERNAL.E_COMPANY.COMPANY_ID</code>. 「companyId」- 公司、子公司结构时需要
      */
     public final TableField<ECompanyRecord, String> COMPANY_ID = createField("COMPANY_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「companyId」- 公司、子公司结构时需要");
+    /**
+     * The column <code>DB_ETERNAL.E_COMPANY.CUSTOMER_ID</code>. 「customerId」- 公司作为客户时的客户信息
+     */
+    public final TableField<ECompanyRecord, String> CUSTOMER_ID = createField("CUSTOMER_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「customerId」- 公司作为客户时的客户信息");
     /**
      * The column <code>DB_ETERNAL.E_COMPANY.TYPE</code>. 「type」- 公司分类
      */
@@ -203,7 +207,7 @@ public class ECompany extends TableImpl<ECompanyRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.E_COMPANY_CODE, Indexes.E_COMPANY_NAME, Indexes.E_COMPANY_PRIMARY, Indexes.E_COMPANY_TAX_CODE);
+        return Arrays.<Index>asList(Indexes.E_COMPANY_CODE, Indexes.E_COMPANY_CUSTOMER_ID, Indexes.E_COMPANY_NAME, Indexes.E_COMPANY_PRIMARY, Indexes.E_COMPANY_TAX_CODE);
     }
 
     /**
@@ -219,7 +223,7 @@ public class ECompany extends TableImpl<ECompanyRecord> {
      */
     @Override
     public List<UniqueKey<ECompanyRecord>> getKeys() {
-        return Arrays.<UniqueKey<ECompanyRecord>>asList(Keys.KEY_E_COMPANY_PRIMARY, Keys.KEY_E_COMPANY_NAME, Keys.KEY_E_COMPANY_CODE, Keys.KEY_E_COMPANY_TAX_CODE);
+        return Arrays.<UniqueKey<ECompanyRecord>>asList(Keys.KEY_E_COMPANY_PRIMARY, Keys.KEY_E_COMPANY_NAME, Keys.KEY_E_COMPANY_CODE, Keys.KEY_E_COMPANY_TAX_CODE, Keys.KEY_E_COMPANY_CUSTOMER_ID);
     }
 
     /**

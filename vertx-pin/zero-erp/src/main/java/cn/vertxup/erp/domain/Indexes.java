@@ -10,6 +10,7 @@ import cn.vertxup.erp.domain.tables.ECustomer;
 import cn.vertxup.erp.domain.tables.EDept;
 import cn.vertxup.erp.domain.tables.EEmployee;
 import cn.vertxup.erp.domain.tables.EIdentity;
+import cn.vertxup.erp.domain.tables.RCompanyCustomer;
 
 import javax.annotation.Generated;
 
@@ -36,6 +37,7 @@ public class Indexes {
     // -------------------------------------------------------------------------
 
     public static final Index E_COMPANY_CODE = Indexes0.E_COMPANY_CODE;
+    public static final Index E_COMPANY_CUSTOMER_ID = Indexes0.E_COMPANY_CUSTOMER_ID;
     public static final Index E_COMPANY_NAME = Indexes0.E_COMPANY_NAME;
     public static final Index E_COMPANY_PRIMARY = Indexes0.E_COMPANY_PRIMARY;
     public static final Index E_COMPANY_TAX_CODE = Indexes0.E_COMPANY_TAX_CODE;
@@ -46,9 +48,11 @@ public class Indexes {
     public static final Index E_DEPT_CODE = Indexes0.E_DEPT_CODE;
     public static final Index E_DEPT_PRIMARY = Indexes0.E_DEPT_PRIMARY;
     public static final Index E_EMPLOYEE_PRIMARY = Indexes0.E_EMPLOYEE_PRIMARY;
+    public static final Index E_EMPLOYEE_SIGMA = Indexes0.E_EMPLOYEE_SIGMA;
     public static final Index E_EMPLOYEE_WORK_NUMBER = Indexes0.E_EMPLOYEE_WORK_NUMBER;
     public static final Index E_IDENTITY_IDC_TYPE = Indexes0.E_IDENTITY_IDC_TYPE;
     public static final Index E_IDENTITY_PRIMARY = Indexes0.E_IDENTITY_PRIMARY;
+    public static final Index R_COMPANY_CUSTOMER_PRIMARY = Indexes0.R_COMPANY_CUSTOMER_PRIMARY;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -56,6 +60,7 @@ public class Indexes {
 
     private static class Indexes0 {
         public static Index E_COMPANY_CODE = Internal.createIndex("CODE", ECompany.E_COMPANY, new OrderField[] { ECompany.E_COMPANY.CODE, ECompany.E_COMPANY.SIGMA }, true);
+        public static Index E_COMPANY_CUSTOMER_ID = Internal.createIndex("CUSTOMER_ID", ECompany.E_COMPANY, new OrderField[] { ECompany.E_COMPANY.CUSTOMER_ID, ECompany.E_COMPANY.SIGMA }, true);
         public static Index E_COMPANY_NAME = Internal.createIndex("NAME", ECompany.E_COMPANY, new OrderField[] { ECompany.E_COMPANY.NAME, ECompany.E_COMPANY.SIGMA }, true);
         public static Index E_COMPANY_PRIMARY = Internal.createIndex("PRIMARY", ECompany.E_COMPANY, new OrderField[] { ECompany.E_COMPANY.KEY }, true);
         public static Index E_COMPANY_TAX_CODE = Internal.createIndex("TAX_CODE", ECompany.E_COMPANY, new OrderField[] { ECompany.E_COMPANY.TAX_CODE, ECompany.E_COMPANY.SIGMA }, true);
@@ -66,8 +71,10 @@ public class Indexes {
         public static Index E_DEPT_CODE = Internal.createIndex("CODE", EDept.E_DEPT, new OrderField[] { EDept.E_DEPT.CODE, EDept.E_DEPT.COMPANY_ID }, true);
         public static Index E_DEPT_PRIMARY = Internal.createIndex("PRIMARY", EDept.E_DEPT, new OrderField[] { EDept.E_DEPT.KEY }, true);
         public static Index E_EMPLOYEE_PRIMARY = Internal.createIndex("PRIMARY", EEmployee.E_EMPLOYEE, new OrderField[] { EEmployee.E_EMPLOYEE.KEY }, true);
+        public static Index E_EMPLOYEE_SIGMA = Internal.createIndex("SIGMA", EEmployee.E_EMPLOYEE, new OrderField[] { EEmployee.E_EMPLOYEE.SIGMA, EEmployee.E_EMPLOYEE.IDENTITY_ID }, true);
         public static Index E_EMPLOYEE_WORK_NUMBER = Internal.createIndex("WORK_NUMBER", EEmployee.E_EMPLOYEE, new OrderField[] { EEmployee.E_EMPLOYEE.WORK_NUMBER, EEmployee.E_EMPLOYEE.COMPANY_ID }, true);
         public static Index E_IDENTITY_IDC_TYPE = Internal.createIndex("IDC_TYPE", EIdentity.E_IDENTITY, new OrderField[] { EIdentity.E_IDENTITY.IDC_TYPE, EIdentity.E_IDENTITY.IDC_NUMBER }, true);
         public static Index E_IDENTITY_PRIMARY = Internal.createIndex("PRIMARY", EIdentity.E_IDENTITY, new OrderField[] { EIdentity.E_IDENTITY.KEY }, true);
+        public static Index R_COMPANY_CUSTOMER_PRIMARY = Internal.createIndex("PRIMARY", RCompanyCustomer.R_COMPANY_CUSTOMER, new OrderField[] { RCompanyCustomer.R_COMPANY_CUSTOMER.COMPANY_ID, RCompanyCustomer.R_COMPANY_CUSTOMER.CUSTOMER_ID }, true);
     }
 }
