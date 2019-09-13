@@ -31,7 +31,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implements Record18<String, String, String, String, String, String, String, String, String, String, String, Boolean, String, String, LocalDateTime, String, LocalDateTime, String>, IEEmployee {
 
-    private static final long serialVersionUID = -426765019;
+    private static final long serialVersionUID = 2043278169;
 
     /**
      * Setter for <code>DB_ETERNAL.E_EMPLOYEE.KEY</code>. 「key」- 员工主键
@@ -68,7 +68,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.DEPT_ID</code>. 「deptId」- 父部门
+     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.DEPT_ID</code>. 「deptId」- 所属部门
      */
     @Override
     public EEmployeeRecord setDeptId(String value) {
@@ -77,7 +77,7 @@ public class EEmployeeRecord extends UpdatableRecordImpl<EEmployeeRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.DEPT_ID</code>. 「deptId」- 父部门
+     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.DEPT_ID</code>. 「deptId」- 所属部门
      */
     @Override
     public String getDeptId() {

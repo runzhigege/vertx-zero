@@ -126,6 +126,13 @@ public class ECustomerDao extends DAOImpl<ECustomerRecord, cn.vertxup.erp.domain
     }
 
     /**
+     * Fetch records that have <code>CONTACT_EMAIL IN (values)</code>
+     */
+    public List<cn.vertxup.erp.domain.tables.pojos.ECustomer> fetchByContactEmail(String... values) {
+        return fetch(ECustomer.E_CUSTOMER.CONTACT_EMAIL, values);
+    }
+
+    /**
      * Fetch records that have <code>CONTACT_ONLINE IN (values)</code>
      */
     public List<cn.vertxup.erp.domain.tables.pojos.ECustomer> fetchByContactOnline(String... values) {
@@ -172,13 +179,6 @@ public class ECustomerDao extends DAOImpl<ECustomerRecord, cn.vertxup.erp.domain
      */
     public List<cn.vertxup.erp.domain.tables.pojos.ECustomer> fetchByAddress(String... values) {
         return fetch(ECustomer.E_CUSTOMER.ADDRESS, values);
-    }
-
-    /**
-     * Fetch records that have <code>COMPANY_ID IN (values)</code>
-     */
-    public List<cn.vertxup.erp.domain.tables.pojos.ECustomer> fetchByCompanyId(String... values) {
-        return fetch(ECustomer.E_CUSTOMER.COMPANY_ID, values);
     }
 
     /**
@@ -315,6 +315,13 @@ public class ECustomerDao extends DAOImpl<ECustomerRecord, cn.vertxup.erp.domain
     }
 
     /**
+     * Fetch records that have <code>CONTACT_EMAIL IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.ECustomer>> fetchByContactEmailAsync(List<String> values) {
+        return fetchAsync(ECustomer.E_CUSTOMER.CONTACT_EMAIL,values);
+    }
+
+    /**
      * Fetch records that have <code>CONTACT_ONLINE IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.ECustomer>> fetchByContactOnlineAsync(List<String> values) {
@@ -361,13 +368,6 @@ public class ECustomerDao extends DAOImpl<ECustomerRecord, cn.vertxup.erp.domain
      */
     public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.ECustomer>> fetchByAddressAsync(List<String> values) {
         return fetchAsync(ECustomer.E_CUSTOMER.ADDRESS,values);
-    }
-
-    /**
-     * Fetch records that have <code>COMPANY_ID IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.ECustomer>> fetchByCompanyIdAsync(List<String> values) {
-        return fetchAsync(ECustomer.E_CUSTOMER.COMPANY_ID,values);
     }
 
     /**

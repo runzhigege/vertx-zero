@@ -10,12 +10,14 @@ import cn.vertxup.erp.domain.tables.ECustomer;
 import cn.vertxup.erp.domain.tables.EDept;
 import cn.vertxup.erp.domain.tables.EEmployee;
 import cn.vertxup.erp.domain.tables.EIdentity;
+import cn.vertxup.erp.domain.tables.RCompanyCustomer;
 import cn.vertxup.erp.domain.tables.records.ECompanyRecord;
 import cn.vertxup.erp.domain.tables.records.EContractRecord;
 import cn.vertxup.erp.domain.tables.records.ECustomerRecord;
 import cn.vertxup.erp.domain.tables.records.EDeptRecord;
 import cn.vertxup.erp.domain.tables.records.EEmployeeRecord;
 import cn.vertxup.erp.domain.tables.records.EIdentityRecord;
+import cn.vertxup.erp.domain.tables.records.RCompanyCustomerRecord;
 
 import javax.annotation.Generated;
 
@@ -50,6 +52,7 @@ public class Keys {
     public static final UniqueKey<ECompanyRecord> KEY_E_COMPANY_NAME = UniqueKeys0.KEY_E_COMPANY_NAME;
     public static final UniqueKey<ECompanyRecord> KEY_E_COMPANY_CODE = UniqueKeys0.KEY_E_COMPANY_CODE;
     public static final UniqueKey<ECompanyRecord> KEY_E_COMPANY_TAX_CODE = UniqueKeys0.KEY_E_COMPANY_TAX_CODE;
+    public static final UniqueKey<ECompanyRecord> KEY_E_COMPANY_CUSTOMER_ID = UniqueKeys0.KEY_E_COMPANY_CUSTOMER_ID;
     public static final UniqueKey<EContractRecord> KEY_E_CONTRACT_PRIMARY = UniqueKeys0.KEY_E_CONTRACT_PRIMARY;
     public static final UniqueKey<EContractRecord> KEY_E_CONTRACT_CODE = UniqueKeys0.KEY_E_CONTRACT_CODE;
     public static final UniqueKey<ECustomerRecord> KEY_E_CUSTOMER_PRIMARY = UniqueKeys0.KEY_E_CUSTOMER_PRIMARY;
@@ -58,8 +61,10 @@ public class Keys {
     public static final UniqueKey<EDeptRecord> KEY_E_DEPT_CODE = UniqueKeys0.KEY_E_DEPT_CODE;
     public static final UniqueKey<EEmployeeRecord> KEY_E_EMPLOYEE_PRIMARY = UniqueKeys0.KEY_E_EMPLOYEE_PRIMARY;
     public static final UniqueKey<EEmployeeRecord> KEY_E_EMPLOYEE_WORK_NUMBER = UniqueKeys0.KEY_E_EMPLOYEE_WORK_NUMBER;
+    public static final UniqueKey<EEmployeeRecord> KEY_E_EMPLOYEE_SIGMA = UniqueKeys0.KEY_E_EMPLOYEE_SIGMA;
     public static final UniqueKey<EIdentityRecord> KEY_E_IDENTITY_PRIMARY = UniqueKeys0.KEY_E_IDENTITY_PRIMARY;
     public static final UniqueKey<EIdentityRecord> KEY_E_IDENTITY_IDC_TYPE = UniqueKeys0.KEY_E_IDENTITY_IDC_TYPE;
+    public static final UniqueKey<RCompanyCustomerRecord> KEY_R_COMPANY_CUSTOMER_PRIMARY = UniqueKeys0.KEY_R_COMPANY_CUSTOMER_PRIMARY;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
@@ -75,6 +80,7 @@ public class Keys {
         public static final UniqueKey<ECompanyRecord> KEY_E_COMPANY_NAME = Internal.createUniqueKey(ECompany.E_COMPANY, "KEY_E_COMPANY_NAME", ECompany.E_COMPANY.NAME, ECompany.E_COMPANY.SIGMA);
         public static final UniqueKey<ECompanyRecord> KEY_E_COMPANY_CODE = Internal.createUniqueKey(ECompany.E_COMPANY, "KEY_E_COMPANY_CODE", ECompany.E_COMPANY.CODE, ECompany.E_COMPANY.SIGMA);
         public static final UniqueKey<ECompanyRecord> KEY_E_COMPANY_TAX_CODE = Internal.createUniqueKey(ECompany.E_COMPANY, "KEY_E_COMPANY_TAX_CODE", ECompany.E_COMPANY.TAX_CODE, ECompany.E_COMPANY.SIGMA);
+        public static final UniqueKey<ECompanyRecord> KEY_E_COMPANY_CUSTOMER_ID = Internal.createUniqueKey(ECompany.E_COMPANY, "KEY_E_COMPANY_CUSTOMER_ID", ECompany.E_COMPANY.CUSTOMER_ID, ECompany.E_COMPANY.SIGMA);
         public static final UniqueKey<EContractRecord> KEY_E_CONTRACT_PRIMARY = Internal.createUniqueKey(EContract.E_CONTRACT, "KEY_E_CONTRACT_PRIMARY", EContract.E_CONTRACT.KEY);
         public static final UniqueKey<EContractRecord> KEY_E_CONTRACT_CODE = Internal.createUniqueKey(EContract.E_CONTRACT, "KEY_E_CONTRACT_CODE", EContract.E_CONTRACT.CODE, EContract.E_CONTRACT.SIGMA);
         public static final UniqueKey<ECustomerRecord> KEY_E_CUSTOMER_PRIMARY = Internal.createUniqueKey(ECustomer.E_CUSTOMER, "KEY_E_CUSTOMER_PRIMARY", ECustomer.E_CUSTOMER.KEY);
@@ -83,7 +89,9 @@ public class Keys {
         public static final UniqueKey<EDeptRecord> KEY_E_DEPT_CODE = Internal.createUniqueKey(EDept.E_DEPT, "KEY_E_DEPT_CODE", EDept.E_DEPT.CODE, EDept.E_DEPT.COMPANY_ID);
         public static final UniqueKey<EEmployeeRecord> KEY_E_EMPLOYEE_PRIMARY = Internal.createUniqueKey(EEmployee.E_EMPLOYEE, "KEY_E_EMPLOYEE_PRIMARY", EEmployee.E_EMPLOYEE.KEY);
         public static final UniqueKey<EEmployeeRecord> KEY_E_EMPLOYEE_WORK_NUMBER = Internal.createUniqueKey(EEmployee.E_EMPLOYEE, "KEY_E_EMPLOYEE_WORK_NUMBER", EEmployee.E_EMPLOYEE.WORK_NUMBER, EEmployee.E_EMPLOYEE.COMPANY_ID);
+        public static final UniqueKey<EEmployeeRecord> KEY_E_EMPLOYEE_SIGMA = Internal.createUniqueKey(EEmployee.E_EMPLOYEE, "KEY_E_EMPLOYEE_SIGMA", EEmployee.E_EMPLOYEE.SIGMA, EEmployee.E_EMPLOYEE.IDENTITY_ID);
         public static final UniqueKey<EIdentityRecord> KEY_E_IDENTITY_PRIMARY = Internal.createUniqueKey(EIdentity.E_IDENTITY, "KEY_E_IDENTITY_PRIMARY", EIdentity.E_IDENTITY.KEY);
         public static final UniqueKey<EIdentityRecord> KEY_E_IDENTITY_IDC_TYPE = Internal.createUniqueKey(EIdentity.E_IDENTITY, "KEY_E_IDENTITY_IDC_TYPE", EIdentity.E_IDENTITY.IDC_TYPE, EIdentity.E_IDENTITY.IDC_NUMBER);
+        public static final UniqueKey<RCompanyCustomerRecord> KEY_R_COMPANY_CUSTOMER_PRIMARY = Internal.createUniqueKey(RCompanyCustomer.R_COMPANY_CUSTOMER, "KEY_R_COMPANY_CUSTOMER_PRIMARY", RCompanyCustomer.R_COMPANY_CUSTOMER.COMPANY_ID, RCompanyCustomer.R_COMPANY_CUSTOMER.CUSTOMER_ID);
     }
 }

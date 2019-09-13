@@ -38,6 +38,7 @@ CREATE TABLE `E_COMPANY`
     `CONTACT_ONLINE`    VARCHAR(255) COMMENT '「contactOnline」- 在线联系方式',
 
     `COMPANY_ID`        VARCHAR(36) COMMENT '「companyId」- 公司、子公司结构时需要',
+    `CUSTOMER_ID`       VARCHAR(36) COMMENT '「customerId」- 公司作为客户时的客户信息',
 
     -- 特殊字段
     `TYPE`              VARCHAR(36) COMMENT '「type」- 公司分类',
@@ -60,3 +61,5 @@ ALTER TABLE E_COMPANY
     ADD UNIQUE (`NAME`, `SIGMA`);
 ALTER TABLE E_COMPANY
     ADD UNIQUE (`TAX_CODE`, `SIGMA`);
+ALTER TABLE E_COMPANY
+    ADD UNIQUE (`CUSTOMER_ID`, `SIGMA`); -- 当一个公司作为客户时，它的客户信息是唯一的，1:1 的关系
