@@ -24,10 +24,11 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class EIdentity implements IEIdentity {
 
-    private static final long serialVersionUID = 177165267;
+    private static final long serialVersionUID = 1786108408;
 
     private String        key;
     private String        code;
+    private String        type;
     private String        country;
     private String        nativePlace;
     private String        nation;
@@ -70,6 +71,7 @@ public class EIdentity implements IEIdentity {
     public EIdentity(EIdentity value) {
         this.key = value.key;
         this.code = value.code;
+        this.type = value.type;
         this.country = value.country;
         this.nativePlace = value.nativePlace;
         this.nation = value.nation;
@@ -111,6 +113,7 @@ public class EIdentity implements IEIdentity {
     public EIdentity(
         String        key,
         String        code,
+        String        type,
         String        country,
         String        nativePlace,
         String        nation,
@@ -150,6 +153,7 @@ public class EIdentity implements IEIdentity {
     ) {
         this.key = key;
         this.code = code;
+        this.type = type;
         this.country = country;
         this.nativePlace = nativePlace;
         this.nation = nation;
@@ -207,6 +211,17 @@ public class EIdentity implements IEIdentity {
     @Override
     public EIdentity setCode(String code) {
         this.code = code;
+        return this;
+    }
+
+    @Override
+    public String getType() {
+        return this.type;
+    }
+
+    @Override
+    public EIdentity setType(String type) {
+        this.type = type;
         return this;
     }
 
@@ -612,6 +627,7 @@ public class EIdentity implements IEIdentity {
 
         sb.append(key);
         sb.append(", ").append(code);
+        sb.append(", ").append(type);
         sb.append(", ").append(country);
         sb.append(", ").append(nativePlace);
         sb.append(", ").append(nation);
@@ -664,6 +680,7 @@ public class EIdentity implements IEIdentity {
     public void from(IEIdentity from) {
         setKey(from.getKey());
         setCode(from.getCode());
+        setType(from.getType());
         setCountry(from.getCountry());
         setNativePlace(from.getNativePlace());
         setNation(from.getNation());
