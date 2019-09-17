@@ -38,7 +38,7 @@ import java.util.Objects;
  */
 public abstract class AbstractChannel implements JtChannel {
 
-    private final transient JtMonitor monitor = JtMonitor.create(getClass());
+    private final transient JtMonitor monitor = JtMonitor.create(this.getClass());
     /* This field will be injected by zero directly from backend */
     @Contract
     private transient Commercial commercial;
@@ -50,7 +50,7 @@ public abstract class AbstractChannel implements JtChannel {
         /*
          * Build record and init
          */
-        final Class<?> recordClass = commercial.recordComponent();
+        final Class<?> recordClass = this.commercial.recordComponent();
         /*
          * Data object, could not be singleton
          *  */
@@ -65,22 +65,22 @@ public abstract class AbstractChannel implements JtChannel {
         /*
          * Build component and init
          */
-        final Class<?> componentClass = commercial.businessComponent();
+        final Class<?> componentClass = this.commercial.businessComponent();
         if (Objects.isNull(componentClass)) {
             /*
              * null class of component
              */
-            return Future.failedFuture(new _501ChannelErrorException(getClass(), null));
+            return Future.failedFuture(new _501ChannelErrorException(this.getClass(), null));
         } else {
             /* Singleton because it's not data object */
             final JtComponent component = Ut.singleton(componentClass);
             if (Objects.nonNull(component)) {
-                monitor.componentHit(componentClass, recordClass);
+                this.monitor.componentHit(componentClass, recordClass);
                 /*
                  * Initialized first and then
                  */
                 Ux.debug();
-                return initAsync(component, request)
+                return this.initAsync(component, request)
                         /*
                          * Debug for trace errors
                          */
@@ -88,7 +88,7 @@ public abstract class AbstractChannel implements JtChannel {
                         /*
                          * options injection
                          */
-                        .compose(child -> Ut.contractAsync(component, JsonObject.class, commercial.options()))
+                        .compose(child -> Ut.contractAsync(component, JsonObject.class, this.commercial.options()))
                         /*
                          * Children initialized
                          */
@@ -101,7 +101,7 @@ public abstract class AbstractChannel implements JtChannel {
                 /*
                  * singleton singleton error
                  */
-                return Future.failedFuture(new _501ChannelErrorException(getClass(), componentClass.getName()));
+                return Future.failedFuture(new _501ChannelErrorException(this.getClass(), componentClass.getName()));
             }
         }
     }
@@ -112,14 +112,14 @@ public abstract class AbstractChannel implements JtChannel {
     public abstract Future<Boolean> initAsync(JtComponent component, ActIn request);
 
     protected Annal getLogger() {
-        return Annal.get(getClass());
+        return Annal.get(this.getClass());
     }
 
     protected Commercial getCommercial() {
-        return commercial;
+        return this.commercial;
     }
 
     protected Mission getMission() {
-        return mission;
+        return this.mission;
     }
 }

@@ -15,9 +15,10 @@ import io.vertx.tp.jet.uca.aim.SendAim;
 import io.vertx.tp.optic.environment.Ambient;
 import io.vertx.tp.optic.environment.AmbientEnvironment;
 import io.vertx.up.extension.PlugRouter;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.runtime.ZeroJet;
 import io.vertx.up.uca.web.failure.CommonEndurer;
 import io.vertx.up.util.Ut;
-import io.vertx.up.fn.Fn;
 
 import java.util.Objects;
 import java.util.Set;
@@ -65,9 +66,17 @@ public class JetPollux implements PlugRouter {
                      * Routing deployment
                      */
                     .map(uri -> {
-                        // 「Route」
+                        /*
+                         * 「ZeroJet」Mount the uri into Zero Uri
+                         */
+                        ZeroJet.resolve(uri.method(), uri.path());
+                        /*
+                         * 「Route」
+                         */
                         final Route route = router.route();
-                        // Single route registry
+                        /*
+                         * Single route registry
+                         */
                         this.registryUri(route, uri);
                         return uri;
                     }).collect(Collectors.toSet());
