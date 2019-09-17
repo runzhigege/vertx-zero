@@ -40,10 +40,14 @@ public class JtUri extends JtCommercial implements Api {
     public JtUri(final IApi api, final IService service) {
         super(service);
         this.api = api;
-        /* Api Key */
+        /*
+         * Api Key
+         *  */
         this.key = api.getKey();
 
-        /* Default Component Value */
+        /*
+         * Default Component Value
+         * */
         Jt.initApi(api);
         /*
          * JtWorker instance here for future use

@@ -26,8 +26,22 @@ class ZeroUri {
         }
     };
 
+    /*
+     * This method is for programming
+     */
     static void resolve(final Event event) {
-        add(event.getMethod(), event.getPath());
+        resolve(event.getMethod(), event.getPath());
+    }
+
+    /*
+     * This method is for dynamic API/SERVICE, zero extension used.
+     */
+    static void resolve(final HttpMethod method, final String uri) {
+        if (Objects.isNull(method)) {
+            URIS.keySet().forEach(each -> addSingle(each, uri));
+        } else {
+            addSingle(method, uri);
+        }
     }
 
     static void report() {
@@ -50,14 +64,6 @@ class ZeroUri {
     private static boolean isMatch(final String uri, final String path) {
         final Pattern pattern = RegexPath.createRegex(path);
         return pattern.matcher(uri).matches();
-    }
-
-    private static void add(final HttpMethod method, final String uri) {
-        if (Objects.isNull(method)) {
-            URIS.keySet().forEach(each -> addSingle(each, uri));
-        } else {
-            addSingle(method, uri);
-        }
     }
 
     private static void addSingle(final HttpMethod method, final String uri) {

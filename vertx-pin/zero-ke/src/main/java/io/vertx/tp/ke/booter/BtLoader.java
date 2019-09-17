@@ -30,6 +30,12 @@ class BtLoader {
         streamFile(folder).forEach(BtLoader::importSync);
     }
 
+    static void importSyncs(final String folder, final String prefix) {
+        streamFile(folder)
+                .filter(filename -> filename.startsWith(folder + prefix))
+                .forEach(BtLoader::importSync);
+    }
+
     static void importSyncs(final String folder, final Handler<AsyncResult<List<String>>> callback) {
         final List<Future> futures = streamFile(folder)
                 .map(BtLoader::importFuture)
@@ -37,7 +43,7 @@ class BtLoader {
         CompositeFuture.all(futures).compose(result -> {
             final List<String> async = result.list();
             callback.handle(Future.succeededFuture(async));
-            return Future.succeededFuture();
+            return Future.succeededFuture(Boolean.TRUE);
         });
     }
 

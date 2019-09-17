@@ -20,6 +20,10 @@ public class Bt {
         BtLoader.importSyncs(folder);
     }
 
+    public static void importSyncs(final String folder, final String prefix) {
+        BtLoader.importSyncs(folder, prefix);
+    }
+
     public static void importSync(final String filename) {
         BtLoader.importSync(filename, handler -> BtLoader.asyncOut(handler.result()));
     }
