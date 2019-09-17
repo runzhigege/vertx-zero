@@ -77,6 +77,13 @@ public class EIdentityDao extends DAOImpl<EIdentityRecord, cn.vertxup.erp.domain
     }
 
     /**
+     * Fetch records that have <code>TYPE IN (values)</code>
+     */
+    public List<cn.vertxup.erp.domain.tables.pojos.EIdentity> fetchByType(String... values) {
+        return fetch(EIdentity.E_IDENTITY.TYPE, values);
+    }
+
+    /**
      * Fetch records that have <code>COUNTRY IN (values)</code>
      */
     public List<cn.vertxup.erp.domain.tables.pojos.EIdentity> fetchByCountry(String... values) {
@@ -347,6 +354,13 @@ public class EIdentityDao extends DAOImpl<EIdentityRecord, cn.vertxup.erp.domain
      */
     public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EIdentity>> fetchByCodeAsync(List<String> values) {
         return fetchAsync(EIdentity.E_IDENTITY.CODE,values);
+    }
+
+    /**
+     * Fetch records that have <code>TYPE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EIdentity>> fetchByTypeAsync(List<String> values) {
+        return fetchAsync(EIdentity.E_IDENTITY.TYPE,values);
     }
 
     /**
