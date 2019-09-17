@@ -40,10 +40,10 @@ public class ActIn implements Serializable {
         this.envelop = envelop;
 
         /* Data Init */
-        partData(envelop);
+        this.partData(envelop);
 
         /* Header Init */
-        partHeader(envelop);
+        this.partHeader(envelop);
     }
 
     private void partHeader(final Envelop envelop) {
@@ -60,7 +60,7 @@ public class ActIn implements Serializable {
         /*
          * Data Merge
          */
-        data.mergeIn(headerData, true);
+        this.data.mergeIn(headerData, true);
     }
 
     private void partData(final Envelop envelop) {
@@ -115,7 +115,7 @@ public class ActIn implements Serializable {
                             /*
                              * NON, $$__BODY__$$
                              */
-                            .forEach(field -> data.put(field, inputData.getValue(field)));
+                            .forEach(field -> this.data.put(field, inputData.getValue(field)));
 
                     cross = body.getJsonObject(ID.PARAM_BODY);
                 }
@@ -139,42 +139,48 @@ public class ActIn implements Serializable {
                  * Query part
                  */
                 Arrays.stream(Inquiry.KEY_QUERY).filter(field -> Objects.nonNull(body.getValue(field)))
-                        .forEach(field -> query.put(field, body.getValue(field)));
+                        .forEach(field -> this.query.put(field, body.getValue(field)));
             } else {
                 /*
                  * Common data
                  */
-                data.mergeIn(body.copy(), true);
+                this.data.mergeIn(body.copy(), true);
             }
         }
     }
 
     public Envelop getEnvelop() {
-        return envelop;
+        return this.envelop;
     }
 
     public JsonObject getQuery() {
-        return query;
+        return this.query;
     }
 
     public Record getRecord() {
-        return record;
+        return this.record;
     }
 
     /*
-     * Set input data to Record object ( reference here )
+     * 1) Set input data to Record object ( reference here )
      */
     public void connect(final Record record) {
-        if (!Ut.isNil(data)) {
-            /*
-             * Set current data to `Record`
-             */
-            data.fieldNames()
-                    .forEach(field -> record.set(field, data.getValue(field)));
-        }
         /*
          * Revert reference binding
          */
         this.record = record;
+    }
+
+    /*
+     * 2) Secondary steps for connect Request / Record
+     */
+    public void initialize() {
+        if (!Ut.isNil(this.data)) {
+            /*
+             * Set current data to `Record`
+             */
+            this.data.fieldNames()
+                    .forEach(field -> this.record.set(field, this.data.getValue(field)));
+        }
     }
 }
