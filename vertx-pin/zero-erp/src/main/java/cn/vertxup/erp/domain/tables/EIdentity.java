@@ -35,7 +35,7 @@ public class EIdentity extends TableImpl<EIdentityRecord> {
      * The reference instance of <code>DB_ETERNAL.E_IDENTITY</code>
      */
     public static final EIdentity E_IDENTITY = new EIdentity();
-    private static final long serialVersionUID = 417472799;
+    private static final long serialVersionUID = 2113982004;
     /**
      * The column <code>DB_ETERNAL.E_IDENTITY.KEY</code>. 「key」- 身份主键
      */
@@ -44,6 +44,10 @@ public class EIdentity extends TableImpl<EIdentityRecord> {
      * The column <code>DB_ETERNAL.E_IDENTITY.CODE</code>. 「code」- 系统编号
      */
     public final TableField<EIdentityRecord, String> CODE = createField("CODE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「code」- 系统编号");
+    /**
+     * The column <code>DB_ETERNAL.E_IDENTITY.TYPE</code>. 「type」- 身份类型/档案类型
+     */
+    public final TableField<EIdentityRecord, String> TYPE = createField("TYPE", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「type」- 身份类型/档案类型");
     /**
      * The column <code>DB_ETERNAL.E_IDENTITY.COUNTRY</code>. 「country」- 国籍
      */

@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implements IEIdentity {
 
-    private static final long serialVersionUID = 1682541883;
+    private static final long serialVersionUID = 1227334979;
 
     /**
      * Setter for <code>DB_ETERNAL.E_IDENTITY.KEY</code>. 「key」- 身份主键
@@ -65,11 +65,28 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
     }
 
     /**
+     * Setter for <code>DB_ETERNAL.E_IDENTITY.TYPE</code>. 「type」- 身份类型/档案类型
+     */
+    @Override
+    public EIdentityRecord setType(String value) {
+        set(2, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.E_IDENTITY.TYPE</code>. 「type」- 身份类型/档案类型
+     */
+    @Override
+    public String getType() {
+        return (String) get(2);
+    }
+
+    /**
      * Setter for <code>DB_ETERNAL.E_IDENTITY.COUNTRY</code>. 「country」- 国籍
      */
     @Override
     public EIdentityRecord setCountry(String value) {
-        set(2, value);
+        set(3, value);
         return this;
     }
 
@@ -78,7 +95,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getCountry() {
-        return (String) get(2);
+        return (String) get(3);
     }
 
     /**
@@ -86,7 +103,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setNativePlace(String value) {
-        set(3, value);
+        set(4, value);
         return this;
     }
 
@@ -95,7 +112,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getNativePlace() {
-        return (String) get(3);
+        return (String) get(4);
     }
 
     /**
@@ -103,7 +120,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setNation(String value) {
-        set(4, value);
+        set(5, value);
         return this;
     }
 
@@ -112,7 +129,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getNation() {
-        return (String) get(4);
+        return (String) get(5);
     }
 
     /**
@@ -120,7 +137,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setAddress(String value) {
-        set(5, value);
+        set(6, value);
         return this;
     }
 
@@ -129,7 +146,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getAddress() {
-        return (String) get(5);
+        return (String) get(6);
     }
 
     /**
@@ -137,7 +154,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setRealname(String value) {
-        set(6, value);
+        set(7, value);
         return this;
     }
 
@@ -146,7 +163,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getRealname() {
-        return (String) get(6);
+        return (String) get(7);
     }
 
     /**
@@ -154,7 +171,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setBirthday(LocalDateTime value) {
-        set(7, value);
+        set(8, value);
         return this;
     }
 
@@ -163,7 +180,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public LocalDateTime getBirthday() {
-        return (LocalDateTime) get(7);
+        return (LocalDateTime) get(8);
     }
 
     /**
@@ -171,7 +188,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setDriverLicense(String value) {
-        set(8, value);
+        set(9, value);
         return this;
     }
 
@@ -180,7 +197,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getDriverLicense() {
-        return (String) get(8);
+        return (String) get(9);
     }
 
     /**
@@ -188,7 +205,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setPassport(String value) {
-        set(9, value);
+        set(10, value);
         return this;
     }
 
@@ -197,7 +214,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getPassport() {
-        return (String) get(9);
+        return (String) get(10);
     }
 
     /**
@@ -205,7 +222,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setGender(Boolean value) {
-        set(10, value);
+        set(11, value);
         return this;
     }
 
@@ -214,7 +231,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public Boolean getGender() {
-        return (Boolean) get(10);
+        return (Boolean) get(11);
     }
 
     /**
@@ -222,7 +239,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setMarital(String value) {
-        set(11, value);
+        set(12, value);
         return this;
     }
 
@@ -231,7 +248,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getMarital() {
-        return (String) get(11);
+        return (String) get(12);
     }
 
     /**
@@ -239,7 +256,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setContactMobile(String value) {
-        set(12, value);
+        set(13, value);
         return this;
     }
 
@@ -248,7 +265,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getContactMobile() {
-        return (String) get(12);
+        return (String) get(13);
     }
 
     /**
@@ -256,7 +273,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setContactPhone(String value) {
-        set(13, value);
+        set(14, value);
         return this;
     }
 
@@ -265,7 +282,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getContactPhone() {
-        return (String) get(13);
+        return (String) get(14);
     }
 
     /**
@@ -273,7 +290,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setContactAddress(String value) {
-        set(14, value);
+        set(15, value);
         return this;
     }
 
@@ -282,7 +299,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getContactAddress() {
-        return (String) get(14);
+        return (String) get(15);
     }
 
     /**
@@ -290,7 +307,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setContactEmail(String value) {
-        set(15, value);
+        set(16, value);
         return this;
     }
 
@@ -299,7 +316,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getContactEmail() {
-        return (String) get(15);
+        return (String) get(16);
     }
 
     /**
@@ -307,7 +324,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setUrgentName(String value) {
-        set(16, value);
+        set(17, value);
         return this;
     }
 
@@ -316,7 +333,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getUrgentName() {
-        return (String) get(16);
+        return (String) get(17);
     }
 
     /**
@@ -324,7 +341,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setUrgentPhone(String value) {
-        set(17, value);
+        set(18, value);
         return this;
     }
 
@@ -333,7 +350,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getUrgentPhone() {
-        return (String) get(17);
+        return (String) get(18);
     }
 
     /**
@@ -341,7 +358,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setEcQq(String value) {
-        set(18, value);
+        set(19, value);
         return this;
     }
 
@@ -350,7 +367,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getEcQq() {
-        return (String) get(18);
+        return (String) get(19);
     }
 
     /**
@@ -358,7 +375,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setEcAlipay(String value) {
-        set(19, value);
+        set(20, value);
         return this;
     }
 
@@ -367,7 +384,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getEcAlipay() {
-        return (String) get(19);
+        return (String) get(20);
     }
 
     /**
@@ -375,7 +392,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setEcWechat(String value) {
-        set(20, value);
+        set(21, value);
         return this;
     }
 
@@ -384,7 +401,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getEcWechat() {
-        return (String) get(20);
+        return (String) get(21);
     }
 
     /**
@@ -392,7 +409,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setIdcType(String value) {
-        set(21, value);
+        set(22, value);
         return this;
     }
 
@@ -401,7 +418,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getIdcType() {
-        return (String) get(21);
+        return (String) get(22);
     }
 
     /**
@@ -409,7 +426,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setIdcNumber(String value) {
-        set(22, value);
+        set(23, value);
         return this;
     }
 
@@ -418,7 +435,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getIdcNumber() {
-        return (String) get(22);
+        return (String) get(23);
     }
 
     /**
@@ -426,7 +443,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setIdcAddress(String value) {
-        set(23, value);
+        set(24, value);
         return this;
     }
 
@@ -435,7 +452,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getIdcAddress() {
-        return (String) get(23);
+        return (String) get(24);
     }
 
     /**
@@ -443,7 +460,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setIdcExpiredAt(LocalDateTime value) {
-        set(24, value);
+        set(25, value);
         return this;
     }
 
@@ -452,7 +469,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public LocalDateTime getIdcExpiredAt() {
-        return (LocalDateTime) get(24);
+        return (LocalDateTime) get(25);
     }
 
     /**
@@ -460,7 +477,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setIdcFront(String value) {
-        set(25, value);
+        set(26, value);
         return this;
     }
 
@@ -469,7 +486,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getIdcFront() {
-        return (String) get(25);
+        return (String) get(26);
     }
 
     /**
@@ -477,7 +494,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setIdcBack(String value) {
-        set(26, value);
+        set(27, value);
         return this;
     }
 
@@ -486,7 +503,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getIdcBack() {
-        return (String) get(26);
+        return (String) get(27);
     }
 
     /**
@@ -494,7 +511,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setIdcIssuer(String value) {
-        set(27, value);
+        set(28, value);
         return this;
     }
 
@@ -503,7 +520,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getIdcIssuer() {
-        return (String) get(27);
+        return (String) get(28);
     }
 
     /**
@@ -511,7 +528,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setIdcIssueAt(LocalDateTime value) {
-        set(28, value);
+        set(29, value);
         return this;
     }
 
@@ -520,7 +537,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public LocalDateTime getIdcIssueAt() {
-        return (LocalDateTime) get(28);
+        return (LocalDateTime) get(29);
     }
 
     /**
@@ -528,7 +545,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setVerified(Boolean value) {
-        set(29, value);
+        set(30, value);
         return this;
     }
 
@@ -537,7 +554,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public Boolean getVerified() {
-        return (Boolean) get(29);
+        return (Boolean) get(30);
     }
 
     /**
@@ -545,7 +562,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setMetadata(String value) {
-        set(30, value);
+        set(31, value);
         return this;
     }
 
@@ -554,7 +571,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getMetadata() {
-        return (String) get(30);
+        return (String) get(31);
     }
 
     /**
@@ -562,7 +579,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setActive(Boolean value) {
-        set(31, value);
+        set(32, value);
         return this;
     }
 
@@ -571,7 +588,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public Boolean getActive() {
-        return (Boolean) get(31);
+        return (Boolean) get(32);
     }
 
     /**
@@ -579,7 +596,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setSigma(String value) {
-        set(32, value);
+        set(33, value);
         return this;
     }
 
@@ -588,7 +605,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getSigma() {
-        return (String) get(32);
+        return (String) get(33);
     }
 
     /**
@@ -596,7 +613,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setLanguage(String value) {
-        set(33, value);
+        set(34, value);
         return this;
     }
 
@@ -605,7 +622,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getLanguage() {
-        return (String) get(33);
+        return (String) get(34);
     }
 
     /**
@@ -613,7 +630,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setCreatedAt(LocalDateTime value) {
-        set(34, value);
+        set(35, value);
         return this;
     }
 
@@ -622,7 +639,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(34);
+        return (LocalDateTime) get(35);
     }
 
     /**
@@ -630,7 +647,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setCreatedBy(String value) {
-        set(35, value);
+        set(36, value);
         return this;
     }
 
@@ -639,7 +656,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getCreatedBy() {
-        return (String) get(35);
+        return (String) get(36);
     }
 
     /**
@@ -647,7 +664,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setUpdatedAt(LocalDateTime value) {
-        set(36, value);
+        set(37, value);
         return this;
     }
 
@@ -656,7 +673,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public LocalDateTime getUpdatedAt() {
-        return (LocalDateTime) get(36);
+        return (LocalDateTime) get(37);
     }
 
     /**
@@ -664,7 +681,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public EIdentityRecord setUpdatedBy(String value) {
-        set(37, value);
+        set(38, value);
         return this;
     }
 
@@ -673,7 +690,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
      */
     @Override
     public String getUpdatedBy() {
-        return (String) get(37);
+        return (String) get(38);
     }
 
     // -------------------------------------------------------------------------
@@ -699,6 +716,7 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
     public void from(IEIdentity from) {
         setKey(from.getKey());
         setCode(from.getCode());
+        setType(from.getType());
         setCountry(from.getCountry());
         setNativePlace(from.getNativePlace());
         setNation(from.getNation());
@@ -760,46 +778,47 @@ public class EIdentityRecord extends UpdatableRecordImpl<EIdentityRecord> implem
     /**
      * Create a detached, initialised EIdentityRecord
      */
-    public EIdentityRecord(String key, String code, String country, String nativePlace, String nation, String address, String realname, LocalDateTime birthday, String driverLicense, String passport, Boolean gender, String marital, String contactMobile, String contactPhone, String contactAddress, String contactEmail, String urgentName, String urgentPhone, String ecQq, String ecAlipay, String ecWechat, String idcType, String idcNumber, String idcAddress, LocalDateTime idcExpiredAt, String idcFront, String idcBack, String idcIssuer, LocalDateTime idcIssueAt, Boolean verified, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public EIdentityRecord(String key, String code, String type, String country, String nativePlace, String nation, String address, String realname, LocalDateTime birthday, String driverLicense, String passport, Boolean gender, String marital, String contactMobile, String contactPhone, String contactAddress, String contactEmail, String urgentName, String urgentPhone, String ecQq, String ecAlipay, String ecWechat, String idcType, String idcNumber, String idcAddress, LocalDateTime idcExpiredAt, String idcFront, String idcBack, String idcIssuer, LocalDateTime idcIssueAt, Boolean verified, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(EIdentity.E_IDENTITY);
 
         set(0, key);
         set(1, code);
-        set(2, country);
-        set(3, nativePlace);
-        set(4, nation);
-        set(5, address);
-        set(6, realname);
-        set(7, birthday);
-        set(8, driverLicense);
-        set(9, passport);
-        set(10, gender);
-        set(11, marital);
-        set(12, contactMobile);
-        set(13, contactPhone);
-        set(14, contactAddress);
-        set(15, contactEmail);
-        set(16, urgentName);
-        set(17, urgentPhone);
-        set(18, ecQq);
-        set(19, ecAlipay);
-        set(20, ecWechat);
-        set(21, idcType);
-        set(22, idcNumber);
-        set(23, idcAddress);
-        set(24, idcExpiredAt);
-        set(25, idcFront);
-        set(26, idcBack);
-        set(27, idcIssuer);
-        set(28, idcIssueAt);
-        set(29, verified);
-        set(30, metadata);
-        set(31, active);
-        set(32, sigma);
-        set(33, language);
-        set(34, createdAt);
-        set(35, createdBy);
-        set(36, updatedAt);
-        set(37, updatedBy);
+        set(2, type);
+        set(3, country);
+        set(4, nativePlace);
+        set(5, nation);
+        set(6, address);
+        set(7, realname);
+        set(8, birthday);
+        set(9, driverLicense);
+        set(10, passport);
+        set(11, gender);
+        set(12, marital);
+        set(13, contactMobile);
+        set(14, contactPhone);
+        set(15, contactAddress);
+        set(16, contactEmail);
+        set(17, urgentName);
+        set(18, urgentPhone);
+        set(19, ecQq);
+        set(20, ecAlipay);
+        set(21, ecWechat);
+        set(22, idcType);
+        set(23, idcNumber);
+        set(24, idcAddress);
+        set(25, idcExpiredAt);
+        set(26, idcFront);
+        set(27, idcBack);
+        set(28, idcIssuer);
+        set(29, idcIssueAt);
+        set(30, verified);
+        set(31, metadata);
+        set(32, active);
+        set(33, sigma);
+        set(34, language);
+        set(35, createdAt);
+        set(36, createdBy);
+        set(37, updatedAt);
+        set(38, updatedBy);
     }
 }

@@ -13,6 +13,7 @@ CREATE TABLE `E_IDENTITY`
 (
     `KEY`             VARCHAR(36) NOT NULL COMMENT '「key」- 身份主键',
     `CODE`            VARCHAR(255) COMMENT '「code」- 系统编号',
+    `TYPE`            VARCHAR(36) COMMENT '「type」- 身份类型/档案类型',
 
     -- 人的基本信息
     `COUNTRY`         VARCHAR(20) COMMENT '「country」- 国籍',
