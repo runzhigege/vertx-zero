@@ -13,7 +13,7 @@ CREATE TABLE `E_EMPLOYEE`
 (
     `KEY`           VARCHAR(36) NOT NULL COMMENT '「key」- 员工主键',
     `COMPANY_ID`    VARCHAR(36) COMMENT '「companyId」- 所属公司',
-    `DEPT_ID`       VARCHAR(36) COMMENT '「deptId」- 父部门',
+    `DEPT_ID`       VARCHAR(36) COMMENT '「deptId」- 所属部门',
     `IDENTITY_ID`   VARCHAR(36) COMMENT '「identityId」- 身份关联ID',
 
     -- 办公信息
@@ -40,3 +40,5 @@ CREATE TABLE `E_EMPLOYEE`
 -- changeset Lang:h-employee-2
 ALTER TABLE E_EMPLOYEE
     ADD UNIQUE (`WORK_NUMBER`, `COMPANY_ID`);
+ALTER TABLE E_EMPLOYEE
+    ADD UNIQUE (`SIGMA`, `IDENTITY_ID`); -- 员工身份信息应该是 1:1 的关系

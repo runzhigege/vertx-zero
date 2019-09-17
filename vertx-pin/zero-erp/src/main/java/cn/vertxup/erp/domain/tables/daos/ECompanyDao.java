@@ -203,6 +203,13 @@ public class ECompanyDao extends DAOImpl<ECompanyRecord, cn.vertxup.erp.domain.t
     }
 
     /**
+     * Fetch records that have <code>CUSTOMER_ID IN (values)</code>
+     */
+    public List<cn.vertxup.erp.domain.tables.pojos.ECompany> fetchByCustomerId(String... values) {
+        return fetch(ECompany.E_COMPANY.CUSTOMER_ID, values);
+    }
+
+    /**
      * Fetch records that have <code>TYPE IN (values)</code>
      */
     public List<cn.vertxup.erp.domain.tables.pojos.ECompany> fetchByType(String... values) {
@@ -410,6 +417,13 @@ public class ECompanyDao extends DAOImpl<ECompanyRecord, cn.vertxup.erp.domain.t
      */
     public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.ECompany>> fetchByCompanyIdAsync(List<String> values) {
         return fetchAsync(ECompany.E_COMPANY.COMPANY_ID,values);
+    }
+
+    /**
+     * Fetch records that have <code>CUSTOMER_ID IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.ECompany>> fetchByCustomerIdAsync(List<String> values) {
+        return fetchAsync(ECompany.E_COMPANY.CUSTOMER_ID,values);
     }
 
     /**

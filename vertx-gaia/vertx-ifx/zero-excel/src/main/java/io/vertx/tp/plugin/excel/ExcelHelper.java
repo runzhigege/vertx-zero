@@ -2,14 +2,15 @@ package io.vertx.tp.plugin.excel;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error._404ExcelFileNullException;
 import io.vertx.tp.plugin.excel.atom.ExConnect;
 import io.vertx.tp.plugin.excel.atom.ExTable;
 import io.vertx.tp.plugin.excel.ranger.ExBound;
 import io.vertx.tp.plugin.excel.ranger.RowBound;
 import io.vertx.up.eon.FileSuffix;
-import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.util.Ut;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -25,6 +26,7 @@ import java.util.*;
 class ExcelHelper {
 
     private transient final Class<?> target;
+    private final transient Map<String, FormulaEvaluator> references = new HashMap<>();
 
     private ExcelHelper(final Class<?> target) {
         this.target = target;
@@ -76,7 +78,20 @@ class ExcelHelper {
         return Fn.getNull(new HashSet<>(), () -> {
             /* FormulaEvaluator reference */
             final FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
-
+            /* FormulaEvaluator reference for external files here */
+            if (!this.references.isEmpty()) {
+                /*
+                 * Here you must put self reference evaluator and all related here.
+                 * It should fix issue: Could not set environment etc.
+                 */
+                this.references.put(workbook.createName().getNameName(), evaluator);
+                /*
+                 * Above one line code resolved following issue:
+                 * org.apache.poi.ss.formula.CollaboratingWorkbooksEnvironment$WorkbookNotFoundException:
+                 * Could not resolve external workbook name 'environment.ambient.xlsx'. Workbook environment has not been set up.
+                 */
+                evaluator.setupReferencedWorkbooks(this.references);
+            }
             final Iterator<Sheet> it = workbook.sheetIterator();
             final Set<ExTable> sheets = new HashSet<>();
             while (it.hasNext()) {
@@ -102,5 +117,28 @@ class ExcelHelper {
                     .filter(connect -> Objects.nonNull(connect.getTable()))
                     .forEach(connect -> Pool.CONNECTS.put(connect.getTable(), connect));
         }
+    }
+
+    void initEnvironment(final JsonArray environments) {
+        environments.stream().filter(Objects::nonNull)
+                .map(item -> (JsonObject) item)
+                .forEach(each -> {
+                    /*
+                     * name for map key
+                     */
+                    final String key = each.getString("name");
+                    /*
+                     * Build reference
+                     */
+                    final String path = each.getString("path");
+                    final Workbook workbook = this.getWorkbook(path);
+                    /*
+                     * Reference Evaluator
+                     */
+                    final FormulaEvaluator evaluator = workbook.getCreationHelper().createFormulaEvaluator();
+                    if (Objects.nonNull(evaluator)) {
+                        this.references.put(key, evaluator);
+                    }
+                });
     }
 }

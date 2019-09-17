@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implements IECustomer {
 
-    private static final long serialVersionUID = 407852593;
+    private static final long serialVersionUID = 94167969;
 
     /**
      * Setter for <code>DB_ETERNAL.E_CUSTOMER.KEY</code>. 「key」- 客户ID
@@ -150,7 +150,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.E_CUSTOMER.CONTACT_NAME</code>. 「contactName」- 联系人电话
+     * Setter for <code>DB_ETERNAL.E_CUSTOMER.CONTACT_NAME</code>. 「contactName」- 联系人姓名
      */
     @Override
     public ECustomerRecord setContactName(String value) {
@@ -159,7 +159,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.E_CUSTOMER.CONTACT_NAME</code>. 「contactName」- 联系人电话
+     * Getter for <code>DB_ETERNAL.E_CUSTOMER.CONTACT_NAME</code>. 「contactName」- 联系人姓名
      */
     @Override
     public String getContactName() {
@@ -184,11 +184,28 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
     }
 
     /**
+     * Setter for <code>DB_ETERNAL.E_CUSTOMER.CONTACT_EMAIL</code>. 「contactEmail」- 联系人Email
+     */
+    @Override
+    public ECustomerRecord setContactEmail(String value) {
+        set(9, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.E_CUSTOMER.CONTACT_EMAIL</code>. 「contactEmail」- 联系人Email
+     */
+    @Override
+    public String getContactEmail() {
+        return (String) get(9);
+    }
+
+    /**
      * Setter for <code>DB_ETERNAL.E_CUSTOMER.CONTACT_ONLINE</code>. 「contactOnline」- 在线联系方式
      */
     @Override
     public ECustomerRecord setContactOnline(String value) {
-        set(9, value);
+        set(10, value);
         return this;
     }
 
@@ -197,7 +214,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public String getContactOnline() {
-        return (String) get(9);
+        return (String) get(10);
     }
 
     /**
@@ -205,7 +222,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public ECustomerRecord setEmail(String value) {
-        set(10, value);
+        set(11, value);
         return this;
     }
 
@@ -214,7 +231,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public String getEmail() {
-        return (String) get(10);
+        return (String) get(11);
     }
 
     /**
@@ -222,7 +239,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public ECustomerRecord setFax(String value) {
-        set(11, value);
+        set(12, value);
         return this;
     }
 
@@ -231,7 +248,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public String getFax() {
-        return (String) get(11);
+        return (String) get(12);
     }
 
     /**
@@ -239,7 +256,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public ECustomerRecord setHomepage(String value) {
-        set(12, value);
+        set(13, value);
         return this;
     }
 
@@ -248,7 +265,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public String getHomepage() {
-        return (String) get(12);
+        return (String) get(13);
     }
 
     /**
@@ -256,7 +273,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public ECustomerRecord setLogo(String value) {
-        set(13, value);
+        set(14, value);
         return this;
     }
 
@@ -265,7 +282,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public String getLogo() {
-        return (String) get(13);
+        return (String) get(14);
     }
 
     /**
@@ -273,7 +290,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public ECustomerRecord setPhone(String value) {
-        set(14, value);
+        set(15, value);
         return this;
     }
 
@@ -282,7 +299,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public String getPhone() {
-        return (String) get(14);
+        return (String) get(15);
     }
 
     /**
@@ -290,7 +307,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public ECustomerRecord setAddress(String value) {
-        set(15, value);
+        set(16, value);
         return this;
     }
 
@@ -299,28 +316,11 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public String getAddress() {
-        return (String) get(15);
-    }
-
-    /**
-     * Setter for <code>DB_ETERNAL.E_CUSTOMER.COMPANY_ID</code>. 「companyId」- 客户所属单位
-     */
-    @Override
-    public ECustomerRecord setCompanyId(String value) {
-        set(16, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.E_CUSTOMER.COMPANY_ID</code>. 「companyId」- 客户所属单位
-     */
-    @Override
-    public String getCompanyId() {
         return (String) get(16);
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.E_CUSTOMER.TYPE</code>. 「type」- 客户分类
+     * Setter for <code>DB_ETERNAL.E_CUSTOMER.TYPE</code>. 「type」- 客户分类（不同类型代表不同客户）
      */
     @Override
     public ECustomerRecord setType(String value) {
@@ -329,7 +329,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.E_CUSTOMER.TYPE</code>. 「type」- 客户分类
+     * Getter for <code>DB_ETERNAL.E_CUSTOMER.TYPE</code>. 「type」- 客户分类（不同类型代表不同客户）
      */
     @Override
     public String getType() {
@@ -502,6 +502,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
         setTaxTitle(from.getTaxTitle());
         setContactName(from.getContactName());
         setContactPhone(from.getContactPhone());
+        setContactEmail(from.getContactEmail());
         setContactOnline(from.getContactOnline());
         setEmail(from.getEmail());
         setFax(from.getFax());
@@ -509,7 +510,6 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
         setLogo(from.getLogo());
         setPhone(from.getPhone());
         setAddress(from.getAddress());
-        setCompanyId(from.getCompanyId());
         setType(from.getType());
         setMetadata(from.getMetadata());
         setActive(from.getActive());
@@ -544,7 +544,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
     /**
      * Create a detached, initialised ECustomerRecord
      */
-    public ECustomerRecord(String key, String comment, String name, String title, String code, String taxCode, String taxTitle, String contactName, String contactPhone, String contactOnline, String email, String fax, String homepage, String logo, String phone, String address, String companyId, String type, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public ECustomerRecord(String key, String comment, String name, String title, String code, String taxCode, String taxTitle, String contactName, String contactPhone, String contactEmail, String contactOnline, String email, String fax, String homepage, String logo, String phone, String address, String type, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(ECustomer.E_CUSTOMER);
 
         set(0, key);
@@ -556,14 +556,14 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
         set(6, taxTitle);
         set(7, contactName);
         set(8, contactPhone);
-        set(9, contactOnline);
-        set(10, email);
-        set(11, fax);
-        set(12, homepage);
-        set(13, logo);
-        set(14, phone);
-        set(15, address);
-        set(16, companyId);
+        set(9, contactEmail);
+        set(10, contactOnline);
+        set(11, email);
+        set(12, fax);
+        set(13, homepage);
+        set(14, logo);
+        set(15, phone);
+        set(16, address);
         set(17, type);
         set(18, metadata);
         set(19, active);

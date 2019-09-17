@@ -35,7 +35,7 @@ public class ECustomer extends TableImpl<ECustomerRecord> {
      * The reference instance of <code>DB_ETERNAL.E_CUSTOMER</code>
      */
     public static final ECustomer E_CUSTOMER = new ECustomer();
-    private static final long serialVersionUID = 1954897005;
+    private static final long serialVersionUID = -444697706;
     /**
      * The column <code>DB_ETERNAL.E_CUSTOMER.KEY</code>. 「key」- 客户ID
      */
@@ -65,13 +65,17 @@ public class ECustomer extends TableImpl<ECustomerRecord> {
      */
     public final TableField<ECustomerRecord, String> TAX_TITLE = createField("TAX_TITLE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「taxTitle」- 开票抬头");
     /**
-     * The column <code>DB_ETERNAL.E_CUSTOMER.CONTACT_NAME</code>. 「contactName」- 联系人电话
+     * The column <code>DB_ETERNAL.E_CUSTOMER.CONTACT_NAME</code>. 「contactName」- 联系人姓名
      */
-    public final TableField<ECustomerRecord, String> CONTACT_NAME = createField("CONTACT_NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「contactName」- 联系人电话");
+    public final TableField<ECustomerRecord, String> CONTACT_NAME = createField("CONTACT_NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「contactName」- 联系人姓名");
     /**
      * The column <code>DB_ETERNAL.E_CUSTOMER.CONTACT_PHONE</code>. 「contactPhone」- 联系人电话
      */
     public final TableField<ECustomerRecord, String> CONTACT_PHONE = createField("CONTACT_PHONE", org.jooq.impl.SQLDataType.VARCHAR(20), this, "「contactPhone」- 联系人电话");
+    /**
+     * The column <code>DB_ETERNAL.E_CUSTOMER.CONTACT_EMAIL</code>. 「contactEmail」- 联系人Email
+     */
+    public final TableField<ECustomerRecord, String> CONTACT_EMAIL = createField("CONTACT_EMAIL", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「contactEmail」- 联系人Email");
     /**
      * The column <code>DB_ETERNAL.E_CUSTOMER.CONTACT_ONLINE</code>. 「contactOnline」- 在线联系方式
      */
@@ -101,13 +105,9 @@ public class ECustomer extends TableImpl<ECustomerRecord> {
      */
     public final TableField<ECustomerRecord, String> ADDRESS = createField("ADDRESS", org.jooq.impl.SQLDataType.CLOB, this, "「address」- 客户地址");
     /**
-     * The column <code>DB_ETERNAL.E_CUSTOMER.COMPANY_ID</code>. 「companyId」- 客户所属单位
+     * The column <code>DB_ETERNAL.E_CUSTOMER.TYPE</code>. 「type」- 客户分类（不同类型代表不同客户）
      */
-    public final TableField<ECustomerRecord, String> COMPANY_ID = createField("COMPANY_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「companyId」- 客户所属单位");
-    /**
-     * The column <code>DB_ETERNAL.E_CUSTOMER.TYPE</code>. 「type」- 客户分类
-     */
-    public final TableField<ECustomerRecord, String> TYPE = createField("TYPE", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「type」- 客户分类");
+    public final TableField<ECustomerRecord, String> TYPE = createField("TYPE", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「type」- 客户分类（不同类型代表不同客户）");
     /**
      * The column <code>DB_ETERNAL.E_CUSTOMER.METADATA</code>. 「metadata」- 附加配置
      */

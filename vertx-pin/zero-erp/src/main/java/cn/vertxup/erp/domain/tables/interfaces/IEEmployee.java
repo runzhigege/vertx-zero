@@ -44,12 +44,12 @@ public interface IEEmployee extends Serializable {
     public String getCompanyId();
 
     /**
-     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.DEPT_ID</code>. 「deptId」- 父部门
+     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.DEPT_ID</code>. 「deptId」- 所属部门
      */
     public IEEmployee setDeptId(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.DEPT_ID</code>. 「deptId」- 父部门
+     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.DEPT_ID</code>. 「deptId」- 所属部门
      */
     public String getDeptId();
 

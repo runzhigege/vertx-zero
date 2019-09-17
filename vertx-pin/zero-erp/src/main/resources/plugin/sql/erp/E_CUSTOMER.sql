@@ -24,8 +24,9 @@ CREATE TABLE `E_CUSTOMER`
     `TAX_TITLE`      VARCHAR(255) COMMENT '「taxTitle」- 开票抬头',
 
     -- 联系人
-    `CONTACT_NAME`   VARCHAR(255) COMMENT '「contactName」- 联系人电话',
+    `CONTACT_NAME`   VARCHAR(255) COMMENT '「contactName」- 联系人姓名',
     `CONTACT_PHONE`  VARCHAR(20) COMMENT '「contactPhone」- 联系人电话',
+    `CONTACT_EMAIL`  VARCHAR(255) COMMENT '「contactEmail」- 联系人Email',
     `CONTACT_ONLINE` VARCHAR(255) COMMENT '「contactOnline」- 在线联系方式',
 
     -- 客户基本信息
@@ -35,10 +36,9 @@ CREATE TABLE `E_CUSTOMER`
     `LOGO`           VARCHAR(36) COMMENT '「logo」- 附件对应的 attachment Key',
     `PHONE`          VARCHAR(20) COMMENT '「phone」- 客户座机',
     `ADDRESS`        TEXT COMMENT '「address」- 客户地址',
-    `COMPANY_ID`     VARCHAR(36) COMMENT '「companyId」- 客户所属单位',
 
     -- 特殊字段
-    `TYPE`           VARCHAR(36) COMMENT '「type」- 客户分类',
+    `TYPE`           VARCHAR(36) COMMENT '「type」- 客户分类（不同类型代表不同客户）',
     `METADATA`       TEXT COMMENT '「metadata」- 附加配置',
     `ACTIVE`         BIT         DEFAULT NULL COMMENT '「active」- 是否启用',
     `SIGMA`          VARCHAR(32) DEFAULT NULL COMMENT '「sigma」- 统一标识（客户所属应用）',

@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implements IECompany {
 
-    private static final long serialVersionUID = 1093025905;
+    private static final long serialVersionUID = -824895560;
 
     /**
      * Setter for <code>DB_ETERNAL.E_COMPANY.KEY</code>. 「key」- 公司主键
@@ -371,11 +371,28 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
     }
 
     /**
+     * Setter for <code>DB_ETERNAL.E_COMPANY.CUSTOMER_ID</code>. 「customerId」- 公司作为客户时的客户信息
+     */
+    @Override
+    public ECompanyRecord setCustomerId(String value) {
+        set(20, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.E_COMPANY.CUSTOMER_ID</code>. 「customerId」- 公司作为客户时的客户信息
+     */
+    @Override
+    public String getCustomerId() {
+        return (String) get(20);
+    }
+
+    /**
      * Setter for <code>DB_ETERNAL.E_COMPANY.TYPE</code>. 「type」- 公司分类
      */
     @Override
     public ECompanyRecord setType(String value) {
-        set(20, value);
+        set(21, value);
         return this;
     }
 
@@ -384,7 +401,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getType() {
-        return (String) get(20);
+        return (String) get(21);
     }
 
     /**
@@ -392,7 +409,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setMetadata(String value) {
-        set(21, value);
+        set(22, value);
         return this;
     }
 
@@ -401,7 +418,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getMetadata() {
-        return (String) get(21);
+        return (String) get(22);
     }
 
     /**
@@ -409,7 +426,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setActive(Boolean value) {
-        set(22, value);
+        set(23, value);
         return this;
     }
 
@@ -418,7 +435,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public Boolean getActive() {
-        return (Boolean) get(22);
+        return (Boolean) get(23);
     }
 
     /**
@@ -426,7 +443,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setSigma(String value) {
-        set(23, value);
+        set(24, value);
         return this;
     }
 
@@ -435,7 +452,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getSigma() {
-        return (String) get(23);
+        return (String) get(24);
     }
 
     /**
@@ -443,7 +460,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setLanguage(String value) {
-        set(24, value);
+        set(25, value);
         return this;
     }
 
@@ -452,7 +469,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getLanguage() {
-        return (String) get(24);
+        return (String) get(25);
     }
 
     /**
@@ -460,7 +477,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setCreatedAt(LocalDateTime value) {
-        set(25, value);
+        set(26, value);
         return this;
     }
 
@@ -469,7 +486,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(25);
+        return (LocalDateTime) get(26);
     }
 
     /**
@@ -477,7 +494,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setCreatedBy(String value) {
-        set(26, value);
+        set(27, value);
         return this;
     }
 
@@ -486,7 +503,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getCreatedBy() {
-        return (String) get(26);
+        return (String) get(27);
     }
 
     /**
@@ -494,7 +511,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setUpdatedAt(LocalDateTime value) {
-        set(27, value);
+        set(28, value);
         return this;
     }
 
@@ -503,7 +520,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public LocalDateTime getUpdatedAt() {
-        return (LocalDateTime) get(27);
+        return (LocalDateTime) get(28);
     }
 
     /**
@@ -511,7 +528,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setUpdatedBy(String value) {
-        set(28, value);
+        set(29, value);
         return this;
     }
 
@@ -520,7 +537,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getUpdatedBy() {
-        return (String) get(28);
+        return (String) get(29);
     }
 
     // -------------------------------------------------------------------------
@@ -564,6 +581,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
         setContactPhone(from.getContactPhone());
         setContactOnline(from.getContactOnline());
         setCompanyId(from.getCompanyId());
+        setCustomerId(from.getCustomerId());
         setType(from.getType());
         setMetadata(from.getMetadata());
         setActive(from.getActive());
@@ -598,7 +616,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
     /**
      * Create a detached, initialised ECompanyRecord
      */
-    public ECompanyRecord(String key, String name, String title, String code, String comment, String taxCode, String taxTitle, String email, String fax, String homepage, String logo, String phone, String address, String locationId, String corporationName, String corporationPhone, String contactName, String contactPhone, String contactOnline, String companyId, String type, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public ECompanyRecord(String key, String name, String title, String code, String comment, String taxCode, String taxTitle, String email, String fax, String homepage, String logo, String phone, String address, String locationId, String corporationName, String corporationPhone, String contactName, String contactPhone, String contactOnline, String companyId, String customerId, String type, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(ECompany.E_COMPANY);
 
         set(0, key);
@@ -621,14 +639,15 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
         set(17, contactPhone);
         set(18, contactOnline);
         set(19, companyId);
-        set(20, type);
-        set(21, metadata);
-        set(22, active);
-        set(23, sigma);
-        set(24, language);
-        set(25, createdAt);
-        set(26, createdBy);
-        set(27, updatedAt);
-        set(28, updatedBy);
+        set(20, customerId);
+        set(21, type);
+        set(22, metadata);
+        set(23, active);
+        set(24, sigma);
+        set(25, language);
+        set(26, createdAt);
+        set(27, createdBy);
+        set(28, updatedAt);
+        set(29, updatedBy);
     }
 }
