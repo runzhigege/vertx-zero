@@ -11,11 +11,11 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.excel.atom.ExRecord;
 import io.vertx.tp.plugin.excel.atom.ExTable;
 import io.vertx.tp.plugin.excel.tool.ExFn;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.unity.UxJooq;
-import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
-import io.vertx.up.fn.Fn;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -46,6 +46,11 @@ public class ExcelClientImpl implements ExcelClient {
         final JsonArray mapping = config.getJsonArray(MAPPING);
         this.helper.initConnect(mapping);
         LOGGER.info("[ Excel ] Configuration finished: {0}", Pool.CONNECTS.size());
+        if (config.containsKey(ENVIRONMENT)) {
+            final JsonArray environments = config.getJsonArray(ENVIRONMENT);
+            this.helper.initEnvironment(environments);
+            LOGGER.info("[ Excel ] Configuration environments: {0}", environments.encode());
+        }
         return this;
     }
 

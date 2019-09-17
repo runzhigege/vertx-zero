@@ -20,6 +20,7 @@ import java.util.Set;
 public interface ExcelClient extends TpClient<ExcelClient> {
 
     String MAPPING = "mapping";
+    String ENVIRONMENT = "environment";
 
     static ExcelClient createShared(final Vertx vertx, final JsonObject config) {
         return new ExcelClientImpl(vertx, config);
