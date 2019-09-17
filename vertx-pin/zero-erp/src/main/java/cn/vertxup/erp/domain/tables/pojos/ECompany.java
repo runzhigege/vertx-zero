@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ECompany implements IECompany {
 
-    private static final long serialVersionUID = 756855160;
+    private static final long serialVersionUID = -1353052095;
 
     private String        key;
     private String        name;
@@ -46,6 +46,7 @@ public class ECompany implements IECompany {
     private String        contactPhone;
     private String        contactOnline;
     private String        companyId;
+    private String        customerId;
     private String        type;
     private String        metadata;
     private Boolean       active;
@@ -79,6 +80,7 @@ public class ECompany implements IECompany {
         this.contactPhone = value.contactPhone;
         this.contactOnline = value.contactOnline;
         this.companyId = value.companyId;
+        this.customerId = value.customerId;
         this.type = value.type;
         this.metadata = value.metadata;
         this.active = value.active;
@@ -111,6 +113,7 @@ public class ECompany implements IECompany {
         String        contactPhone,
         String        contactOnline,
         String        companyId,
+        String        customerId,
         String        type,
         String        metadata,
         Boolean       active,
@@ -141,6 +144,7 @@ public class ECompany implements IECompany {
         this.contactPhone = contactPhone;
         this.contactOnline = contactOnline;
         this.companyId = companyId;
+        this.customerId = customerId;
         this.type = type;
         this.metadata = metadata;
         this.active = active;
@@ -373,6 +377,17 @@ public class ECompany implements IECompany {
     }
 
     @Override
+    public String getCustomerId() {
+        return this.customerId;
+    }
+
+    @Override
+    public ECompany setCustomerId(String customerId) {
+        this.customerId = customerId;
+        return this;
+    }
+
+    @Override
     public String getType() {
         return this.type;
     }
@@ -495,6 +510,7 @@ public class ECompany implements IECompany {
         sb.append(", ").append(contactPhone);
         sb.append(", ").append(contactOnline);
         sb.append(", ").append(companyId);
+        sb.append(", ").append(customerId);
         sb.append(", ").append(type);
         sb.append(", ").append(metadata);
         sb.append(", ").append(active);
@@ -538,6 +554,7 @@ public class ECompany implements IECompany {
         setContactPhone(from.getContactPhone());
         setContactOnline(from.getContactOnline());
         setCompanyId(from.getCompanyId());
+        setCustomerId(from.getCustomerId());
         setType(from.getType());
         setMetadata(from.getMetadata());
         setActive(from.getActive());

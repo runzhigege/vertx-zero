@@ -224,6 +224,16 @@ public interface IECompany extends Serializable {
     public String getCompanyId();
 
     /**
+     * Setter for <code>DB_ETERNAL.E_COMPANY.CUSTOMER_ID</code>. 「customerId」- 公司作为客户时的客户信息
+     */
+    public IECompany setCustomerId(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.E_COMPANY.CUSTOMER_ID</code>. 「customerId」- 公司作为客户时的客户信息
+     */
+    public String getCustomerId();
+
+    /**
      * Setter for <code>DB_ETERNAL.E_COMPANY.TYPE</code>. 「type」- 公司分类
      */
     public IECompany setType(String value);
@@ -348,6 +358,7 @@ public interface IECompany extends Serializable {
         setContactPhone(json.getString("CONTACT_PHONE"));
         setContactOnline(json.getString("CONTACT_ONLINE"));
         setCompanyId(json.getString("COMPANY_ID"));
+        setCustomerId(json.getString("CUSTOMER_ID"));
         setType(json.getString("TYPE"));
         setMetadata(json.getString("METADATA"));
         setActive(json.getBoolean("ACTIVE"));
@@ -383,6 +394,7 @@ public interface IECompany extends Serializable {
         json.put("CONTACT_PHONE",getContactPhone());
         json.put("CONTACT_ONLINE",getContactOnline());
         json.put("COMPANY_ID",getCompanyId());
+        json.put("CUSTOMER_ID",getCustomerId());
         json.put("TYPE",getType());
         json.put("METADATA",getMetadata());
         json.put("ACTIVE",getActive());

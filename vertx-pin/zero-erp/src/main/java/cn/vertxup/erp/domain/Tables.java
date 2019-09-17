@@ -10,6 +10,7 @@ import cn.vertxup.erp.domain.tables.ECustomer;
 import cn.vertxup.erp.domain.tables.EDept;
 import cn.vertxup.erp.domain.tables.EEmployee;
 import cn.vertxup.erp.domain.tables.EIdentity;
+import cn.vertxup.erp.domain.tables.RCompanyCustomer;
 
 import javax.annotation.Generated;
 
@@ -56,4 +57,9 @@ public class Tables {
      * The table <code>DB_ETERNAL.E_IDENTITY</code>.
      */
     public static final EIdentity E_IDENTITY = cn.vertxup.erp.domain.tables.EIdentity.E_IDENTITY;
+
+    /**
+     * The table <code>DB_ETERNAL.R_COMPANY_CUSTOMER</code>.
+     */
+    public static final RCompanyCustomer R_COMPANY_CUSTOMER = cn.vertxup.erp.domain.tables.RCompanyCustomer.R_COMPANY_CUSTOMER;
 }

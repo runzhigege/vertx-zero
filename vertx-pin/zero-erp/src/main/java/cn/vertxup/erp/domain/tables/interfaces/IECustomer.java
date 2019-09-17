@@ -94,12 +94,12 @@ public interface IECustomer extends Serializable {
     public String getTaxTitle();
 
     /**
-     * Setter for <code>DB_ETERNAL.E_CUSTOMER.CONTACT_NAME</code>. 「contactName」- 联系人电话
+     * Setter for <code>DB_ETERNAL.E_CUSTOMER.CONTACT_NAME</code>. 「contactName」- 联系人姓名
      */
     public IECustomer setContactName(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.E_CUSTOMER.CONTACT_NAME</code>. 「contactName」- 联系人电话
+     * Getter for <code>DB_ETERNAL.E_CUSTOMER.CONTACT_NAME</code>. 「contactName」- 联系人姓名
      */
     public String getContactName();
 
@@ -112,6 +112,16 @@ public interface IECustomer extends Serializable {
      * Getter for <code>DB_ETERNAL.E_CUSTOMER.CONTACT_PHONE</code>. 「contactPhone」- 联系人电话
      */
     public String getContactPhone();
+
+    /**
+     * Setter for <code>DB_ETERNAL.E_CUSTOMER.CONTACT_EMAIL</code>. 「contactEmail」- 联系人Email
+     */
+    public IECustomer setContactEmail(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.E_CUSTOMER.CONTACT_EMAIL</code>. 「contactEmail」- 联系人Email
+     */
+    public String getContactEmail();
 
     /**
      * Setter for <code>DB_ETERNAL.E_CUSTOMER.CONTACT_ONLINE</code>. 「contactOnline」- 在线联系方式
@@ -184,22 +194,12 @@ public interface IECustomer extends Serializable {
     public String getAddress();
 
     /**
-     * Setter for <code>DB_ETERNAL.E_CUSTOMER.COMPANY_ID</code>. 「companyId」- 客户所属单位
-     */
-    public IECustomer setCompanyId(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.E_CUSTOMER.COMPANY_ID</code>. 「companyId」- 客户所属单位
-     */
-    public String getCompanyId();
-
-    /**
-     * Setter for <code>DB_ETERNAL.E_CUSTOMER.TYPE</code>. 「type」- 客户分类
+     * Setter for <code>DB_ETERNAL.E_CUSTOMER.TYPE</code>. 「type」- 客户分类（不同类型代表不同客户）
      */
     public IECustomer setType(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.E_CUSTOMER.TYPE</code>. 「type」- 客户分类
+     * Getter for <code>DB_ETERNAL.E_CUSTOMER.TYPE</code>. 「type」- 客户分类（不同类型代表不同客户）
      */
     public String getType();
 
@@ -307,6 +307,7 @@ public interface IECustomer extends Serializable {
         setTaxTitle(json.getString("TAX_TITLE"));
         setContactName(json.getString("CONTACT_NAME"));
         setContactPhone(json.getString("CONTACT_PHONE"));
+        setContactEmail(json.getString("CONTACT_EMAIL"));
         setContactOnline(json.getString("CONTACT_ONLINE"));
         setEmail(json.getString("EMAIL"));
         setFax(json.getString("FAX"));
@@ -314,7 +315,6 @@ public interface IECustomer extends Serializable {
         setLogo(json.getString("LOGO"));
         setPhone(json.getString("PHONE"));
         setAddress(json.getString("ADDRESS"));
-        setCompanyId(json.getString("COMPANY_ID"));
         setType(json.getString("TYPE"));
         setMetadata(json.getString("METADATA"));
         setActive(json.getBoolean("ACTIVE"));
@@ -339,6 +339,7 @@ public interface IECustomer extends Serializable {
         json.put("TAX_TITLE",getTaxTitle());
         json.put("CONTACT_NAME",getContactName());
         json.put("CONTACT_PHONE",getContactPhone());
+        json.put("CONTACT_EMAIL",getContactEmail());
         json.put("CONTACT_ONLINE",getContactOnline());
         json.put("EMAIL",getEmail());
         json.put("FAX",getFax());
@@ -346,7 +347,6 @@ public interface IECustomer extends Serializable {
         json.put("LOGO",getLogo());
         json.put("PHONE",getPhone());
         json.put("ADDRESS",getAddress());
-        json.put("COMPANY_ID",getCompanyId());
         json.put("TYPE",getType());
         json.put("METADATA",getMetadata());
         json.put("ACTIVE",getActive());

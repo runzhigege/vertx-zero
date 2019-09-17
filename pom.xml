@@ -65,20 +65,20 @@
         <jackson.version>2.9.9</jackson.version>
         <jackson.databind.version>2.9.9.1</jackson.databind.version>
         <jws.version>2.1.1</jws.version>
-        <jersey.version>2.29</jersey.version>
+        <jersey.version>2.29.1</jersey.version>
         <javax.el.version>3.0.1-b06</javax.el.version>
         <glassfish.el.version>3.0.1-b11</glassfish.el.version>
 
         <!-- Database Needed -->
-        <hikari.cp.version>3.3.1</hikari.cp.version>
+        <hikari.cp.version>3.4.0</hikari.cp.version>
         <jooq.version>3.10.8</jooq.version>
         <vertx.jooq.version>2.4.1</vertx.jooq.version>
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
-        <vertx.jooq.code.version>4.1.0</vertx.jooq.code.version>
+        <vertx.jooq.code.version>4.2.0</vertx.jooq.code.version>
         <mysql.version>8.0.17</mysql.version>
         <!-- Java Reflection -->
         <reflect.asm.version>1.11.9</reflect.asm.version>
-        <lombok.version>1.18.8</lombok.version>
+        <lombok.version>1.18.10</lombok.version>
         <asm.version>7.1</asm.version>
         <cglib.version>3.3.0</cglib.version>
         <reflection.version>0.9.11</reflection.version>
@@ -102,7 +102,7 @@
         <common.logging.version>1.2</common.logging.version>
         <common.net.version>3.6</common.net.version>
         <http.async.client.version>4.1.4</http.async.client.version>
-        <http.client.version>4.5.9</http.client.version>
+        <http.client.version>4.5.10</http.client.version>
         <http.core.version>4.4.12</http.core.version>
         <!-- Liquibase -->
         <liquibase.version>3.6.3</liquibase.version>
@@ -115,7 +115,7 @@
         <!-- Vert.x Addition -->
         <rxjava2.version>2.2.12</rxjava2.version>
         <netty.tcnative.version>2.0.25.Final</netty.tcnative.version>
-        <netty.version>4.1.39.Final</netty.version>
+        <netty.version>4.1.41.Final</netty.version>
         <hazelcast.version>3.12.2</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
         <error.prone.version>2.3.3</error.prone.version>
@@ -150,7 +150,7 @@
         <maven.plugin.resource>3.0.2</maven.plugin.resource>
         <maven.plugin.site>3.7</maven.plugin.site>
         <maven.plugin.enforcer>3.0.0-M1</maven.plugin.enforcer>
-        <maven.plugin.lombok>1.18.8.1</maven.plugin.lombok>
+        <maven.plugin.lombok>1.18.10.0</maven.plugin.lombok>
         <maven.plugin.processor>3.3.3</maven.plugin.processor>
         <maven.plugin.source>3.0.1</maven.plugin.source>
         <maven.plugin.javadoc>2.10.4</maven.plugin.javadoc>

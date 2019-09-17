@@ -18,3 +18,7 @@ databaseChangeLog:
   - include:
       file: plugin/sql/erp/E_CONTRACT.sql
       relativeToChangelogFile: false
+  # 关联关系
+  - include:
+      file: plugin/sql/erp/R_COMPANY_CUSTOMER.sql
+      relativeToChangelogFile: false

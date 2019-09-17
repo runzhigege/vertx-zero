@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ECustomer implements IECustomer {
 
-    private static final long serialVersionUID = -256238624;
+    private static final long serialVersionUID = 1239120086;
 
     private String        key;
     private String        comment;
@@ -35,6 +35,7 @@ public class ECustomer implements IECustomer {
     private String        taxTitle;
     private String        contactName;
     private String        contactPhone;
+    private String        contactEmail;
     private String        contactOnline;
     private String        email;
     private String        fax;
@@ -42,7 +43,6 @@ public class ECustomer implements IECustomer {
     private String        logo;
     private String        phone;
     private String        address;
-    private String        companyId;
     private String        type;
     private String        metadata;
     private Boolean       active;
@@ -65,6 +65,7 @@ public class ECustomer implements IECustomer {
         this.taxTitle = value.taxTitle;
         this.contactName = value.contactName;
         this.contactPhone = value.contactPhone;
+        this.contactEmail = value.contactEmail;
         this.contactOnline = value.contactOnline;
         this.email = value.email;
         this.fax = value.fax;
@@ -72,7 +73,6 @@ public class ECustomer implements IECustomer {
         this.logo = value.logo;
         this.phone = value.phone;
         this.address = value.address;
-        this.companyId = value.companyId;
         this.type = value.type;
         this.metadata = value.metadata;
         this.active = value.active;
@@ -94,6 +94,7 @@ public class ECustomer implements IECustomer {
         String        taxTitle,
         String        contactName,
         String        contactPhone,
+        String        contactEmail,
         String        contactOnline,
         String        email,
         String        fax,
@@ -101,7 +102,6 @@ public class ECustomer implements IECustomer {
         String        logo,
         String        phone,
         String        address,
-        String        companyId,
         String        type,
         String        metadata,
         Boolean       active,
@@ -121,6 +121,7 @@ public class ECustomer implements IECustomer {
         this.taxTitle = taxTitle;
         this.contactName = contactName;
         this.contactPhone = contactPhone;
+        this.contactEmail = contactEmail;
         this.contactOnline = contactOnline;
         this.email = email;
         this.fax = fax;
@@ -128,7 +129,6 @@ public class ECustomer implements IECustomer {
         this.logo = logo;
         this.phone = phone;
         this.address = address;
-        this.companyId = companyId;
         this.type = type;
         this.metadata = metadata;
         this.active = active;
@@ -240,6 +240,17 @@ public class ECustomer implements IECustomer {
     }
 
     @Override
+    public String getContactEmail() {
+        return this.contactEmail;
+    }
+
+    @Override
+    public ECustomer setContactEmail(String contactEmail) {
+        this.contactEmail = contactEmail;
+        return this;
+    }
+
+    @Override
     public String getContactOnline() {
         return this.contactOnline;
     }
@@ -313,17 +324,6 @@ public class ECustomer implements IECustomer {
     @Override
     public ECustomer setAddress(String address) {
         this.address = address;
-        return this;
-    }
-
-    @Override
-    public String getCompanyId() {
-        return this.companyId;
-    }
-
-    @Override
-    public ECustomer setCompanyId(String companyId) {
-        this.companyId = companyId;
         return this;
     }
 
@@ -439,6 +439,7 @@ public class ECustomer implements IECustomer {
         sb.append(", ").append(taxTitle);
         sb.append(", ").append(contactName);
         sb.append(", ").append(contactPhone);
+        sb.append(", ").append(contactEmail);
         sb.append(", ").append(contactOnline);
         sb.append(", ").append(email);
         sb.append(", ").append(fax);
@@ -446,7 +447,6 @@ public class ECustomer implements IECustomer {
         sb.append(", ").append(logo);
         sb.append(", ").append(phone);
         sb.append(", ").append(address);
-        sb.append(", ").append(companyId);
         sb.append(", ").append(type);
         sb.append(", ").append(metadata);
         sb.append(", ").append(active);
@@ -479,6 +479,7 @@ public class ECustomer implements IECustomer {
         setTaxTitle(from.getTaxTitle());
         setContactName(from.getContactName());
         setContactPhone(from.getContactPhone());
+        setContactEmail(from.getContactEmail());
         setContactOnline(from.getContactOnline());
         setEmail(from.getEmail());
         setFax(from.getFax());
@@ -486,7 +487,6 @@ public class ECustomer implements IECustomer {
         setLogo(from.getLogo());
         setPhone(from.getPhone());
         setAddress(from.getAddress());
-        setCompanyId(from.getCompanyId());
         setType(from.getType());
         setMetadata(from.getMetadata());
         setActive(from.getActive());
