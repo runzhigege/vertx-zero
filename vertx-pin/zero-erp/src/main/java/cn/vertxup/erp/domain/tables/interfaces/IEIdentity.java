@@ -44,6 +44,16 @@ public interface IEIdentity extends Serializable {
     public String getCode();
 
     /**
+     * Setter for <code>DB_ETERNAL.E_IDENTITY.TYPE</code>. 「type」- 身份类型/档案类型
+     */
+    public IEIdentity setType(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.E_IDENTITY.TYPE</code>. 「type」- 身份类型/档案类型
+     */
+    public String getType();
+
+    /**
      * Setter for <code>DB_ETERNAL.E_IDENTITY.COUNTRY</code>. 「country」- 国籍
      */
     public IEIdentity setCountry(String value);
@@ -420,6 +430,7 @@ public interface IEIdentity extends Serializable {
     default IEIdentity fromJson(io.vertx.core.json.JsonObject json) {
         setKey(json.getString("KEY"));
         setCode(json.getString("CODE"));
+        setType(json.getString("TYPE"));
         setCountry(json.getString("COUNTRY"));
         setNativePlace(json.getString("NATIVE_PLACE"));
         setNation(json.getString("NATION"));
@@ -464,6 +475,7 @@ public interface IEIdentity extends Serializable {
         io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
         json.put("KEY",getKey());
         json.put("CODE",getCode());
+        json.put("TYPE",getType());
         json.put("COUNTRY",getCountry());
         json.put("NATIVE_PLACE",getNativePlace());
         json.put("NATION",getNation());
