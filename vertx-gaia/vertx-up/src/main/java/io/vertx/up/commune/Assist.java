@@ -91,7 +91,8 @@ class Assist implements Serializable {
     @Override
     public String toString() {
         return "Assist{" +
-                "context=" + this.context +
+                // Stack Overflow here
+                // "context=" + this.context +
                 ", headers=" + this.headers +
                 ", user=" + this.user +
                 ", uri='" + this.uri + '\'' +
