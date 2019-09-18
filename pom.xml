@@ -94,7 +94,7 @@
         <feign.version>8.18.0</feign.version>
         <guava.version>28.1-jre</guava.version>
         <codehaus.janino.version>3.1.0</codehaus.janino.version>
-        <ignite.version>2.7.5</ignite.version>
+        <ignite.version>2.7.6</ignite.version>
         <mongodb.async.version>3.11.0</mongodb.async.version>
         <!-- Apache Common -->
         <common.jexl.version>3.1</common.jexl.version>
