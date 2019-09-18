@@ -26,8 +26,9 @@ public class EngineAim implements JtAim {
             this.monitor.aimEngine(uri.method(), uri.path(), data);
             /*
              * Next step
+             * Resolution for next step data stored into envelop
              */
-            context.next();
+            Answer.next(context, request);
         };
     }
 }

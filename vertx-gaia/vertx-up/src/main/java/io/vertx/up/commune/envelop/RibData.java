@@ -89,7 +89,18 @@ class RibData {
             /*
              * JsonObject = `key` = `data` part
              */
-            found.mergeIn((JsonObject) reference);
+            found = (JsonObject) reference;
+            /*
+             * Bug Resolution:
+             * Old code: found.mergeIn((JsonObject) reference);
+             *
+             * Keep the same reference
+             * Be careful about the code difference here.
+             * 1) If you used () to convert referent, the found will point to reference previous, in this
+             * situation, the modification will be merged into previous object instead of new here.
+             * 2) But if you use mergeIn here, the previous reference will be replaced, it means that any
+             * modification could not impace the reference that you passed.
+             */
         }
         /*
          * Setted data by index, it means we should capture following part in interface style
