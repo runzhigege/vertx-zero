@@ -2,6 +2,8 @@ package io.vertx.up.runtime;
 
 import io.vertx.core.http.HttpMethod;
 
+import java.util.Objects;
+
 /*
  * Zero jet for dynamic deployment here.
  * This class is for zero-jet project as dynamic deployment
@@ -14,6 +16,14 @@ public class ZeroJet {
 
     public static void resolve(final HttpMethod method,
                                final String uri) {
-        ZeroUri.resolve(method, uri);
+        /*
+         * Pattern uri resolution
+         * must be excluded the path that does not contains :
+         */
+        if (Objects.nonNull(uri)) {
+            if (0 < uri.indexOf(":")) {
+                ZeroUri.resolve(method, uri);
+            }
+        }
     }
 }
