@@ -175,6 +175,7 @@ public class ActIn implements Serializable {
      * 2) Secondary steps for connect Request / Record
      */
     public void initialize() {
+
         if (!Ut.isNil(this.data)) {
             /*
              * Set current data to `Record`
