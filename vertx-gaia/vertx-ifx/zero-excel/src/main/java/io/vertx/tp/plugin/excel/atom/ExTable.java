@@ -3,8 +3,8 @@ package io.vertx.tp.plugin.excel.atom;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error._404ConnectMissingException;
-import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -54,7 +54,9 @@ public class ExTable implements Serializable {
         return this.getConnect().getDao();
     }
 
-    public String getPojoFile() {return this.getConnect().getPojoFile();}
+    public String getPojoFile() {
+        return this.getConnect().getPojoFile();
+    }
 
     /*
      * Business Unique
