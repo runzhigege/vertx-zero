@@ -14,7 +14,7 @@ public class ActOut implements Serializable {
     private transient final Envelop envelop;
 
     /*
-     * 构造子用于构造成功与异常
+     * Success or Failure response building
      */
     private ActOut(final Object data, final HttpStatusCode statusCode) {
         this.envelop = Envelop.success(data, statusCode);
@@ -24,13 +24,27 @@ public class ActOut implements Serializable {
         this.envelop = Envelop.failure(ex);
     }
 
+    private static ActOut noContent() {
+        return new ActOut(new JsonObject(), HttpStatusCode.NO_CONTENT);
+    }
+
     /*
-     * 默认使用 204，没有内容
+     * The default response is 204 no content
      */
     public static Future<ActOut> future() {
         return Ux.toFuture(noContent());
     }
 
+    /*
+     * True / False result
+     */
+    public static Future<ActOut> future(final Boolean result) {
+        return Ux.toFuture(new ActOut(result, HttpStatusCode.OK));
+    }
+
+    /*
+     * JsonObject result
+     */
     public static Future<ActOut> future(final JsonObject data) {
         if (Objects.isNull(data)) {
             return Ux.toFuture(noContent());
@@ -39,6 +53,9 @@ public class ActOut implements Serializable {
         }
     }
 
+    /*
+     * JsonArray result
+     */
     public static Future<ActOut> future(final JsonArray dataArray) {
         if (Objects.isNull(dataArray)) {
             return Ux.toFuture(noContent());
@@ -47,6 +64,9 @@ public class ActOut implements Serializable {
         }
     }
 
+    /*
+     * Record result
+     */
     public static Future<ActOut> future(final Record record) {
         final ActOut response;
         if (Objects.isNull(record)) {
@@ -56,14 +76,6 @@ public class ActOut implements Serializable {
             response = new ActOut(data, HttpStatusCode.OK);
         }
         return Ux.toFuture(response);
-    }
-
-    private static ActOut noContent() {
-        return new ActOut(new JsonObject(), HttpStatusCode.NO_CONTENT);
-    }
-
-    public Envelop sync() {
-        return this.envelop;
     }
 
     public Future<Envelop> async() {
