@@ -47,7 +47,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final UniqueKey<UiColumnRecord> KEY_UI_COLUMN_PRIMARY = UniqueKeys0.KEY_UI_COLUMN_PRIMARY;
-    public static final UniqueKey<UiColumnRecord> KEY_UI_COLUMN_CONTROL_ID = UniqueKeys0.KEY_UI_COLUMN_CONTROL_ID;
+    public static final UniqueKey<UiColumnRecord> KEY_UI_COLUMN_SIGMA = UniqueKeys0.KEY_UI_COLUMN_SIGMA;
     public static final UniqueKey<UiControlRecord> KEY_UI_CONTROL_PRIMARY = UniqueKeys0.KEY_UI_CONTROL_PRIMARY;
     public static final UniqueKey<UiControlRecord> KEY_UI_CONTROL_SIGN = UniqueKeys0.KEY_UI_CONTROL_SIGN;
     public static final UniqueKey<UiFieldRecord> KEY_UI_FIELD_PRIMARY = UniqueKeys0.KEY_UI_FIELD_PRIMARY;
@@ -70,7 +70,7 @@ public class Keys {
 
     private static class UniqueKeys0 {
         public static final UniqueKey<UiColumnRecord> KEY_UI_COLUMN_PRIMARY = Internal.createUniqueKey(UiColumn.UI_COLUMN, "KEY_UI_COLUMN_PRIMARY", UiColumn.UI_COLUMN.KEY);
-        public static final UniqueKey<UiColumnRecord> KEY_UI_COLUMN_CONTROL_ID = Internal.createUniqueKey(UiColumn.UI_COLUMN, "KEY_UI_COLUMN_CONTROL_ID", UiColumn.UI_COLUMN.CONTROL_ID, UiColumn.UI_COLUMN.DATA_INDEX);
+        public static final UniqueKey<UiColumnRecord> KEY_UI_COLUMN_SIGMA = Internal.createUniqueKey(UiColumn.UI_COLUMN, "KEY_UI_COLUMN_SIGMA", UiColumn.UI_COLUMN.SIGMA, UiColumn.UI_COLUMN.CONTROL_ID, UiColumn.UI_COLUMN.DATA_INDEX);
         public static final UniqueKey<UiControlRecord> KEY_UI_CONTROL_PRIMARY = Internal.createUniqueKey(UiControl.UI_CONTROL, "KEY_UI_CONTROL_PRIMARY", UiControl.UI_CONTROL.KEY);
         public static final UniqueKey<UiControlRecord> KEY_UI_CONTROL_SIGN = Internal.createUniqueKey(UiControl.UI_CONTROL, "KEY_UI_CONTROL_SIGN", UiControl.UI_CONTROL.SIGN);
         public static final UniqueKey<UiFieldRecord> KEY_UI_FIELD_PRIMARY = Internal.createUniqueKey(UiField.UI_FIELD, "KEY_UI_FIELD_PRIMARY", UiField.UI_FIELD.KEY);

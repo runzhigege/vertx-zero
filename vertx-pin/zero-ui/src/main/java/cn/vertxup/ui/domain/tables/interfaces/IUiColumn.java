@@ -74,6 +74,16 @@ public interface IUiColumn extends Serializable {
     public Integer getWidth();
 
     /**
+     * Setter for <code>DB_ETERNAL.UI_COLUMN.FIXED</code>. 「fixed」- 当前列是否固定
+     */
+    public IUiColumn setFixed(Boolean value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_COLUMN.FIXED</code>. 「fixed」- 当前列是否固定
+     */
+    public Boolean getFixed();
+
+    /**
      * Setter for <code>DB_ETERNAL.UI_COLUMN.CLASS_NAME</code>. 「className」- 当前列的特殊CSS类
      */
     public IUiColumn setClassName(String value);
@@ -82,6 +92,76 @@ public interface IUiColumn extends Serializable {
      * Getter for <code>DB_ETERNAL.UI_COLUMN.CLASS_NAME</code>. 「className」- 当前列的特殊CSS类
      */
     public String getClassName();
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_COLUMN.SORTER</code>. 「sorter」- 当前列是否支持排序
+     */
+    public IUiColumn setSorter(Boolean value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_COLUMN.SORTER</code>. 「sorter」- 当前列是否支持排序
+     */
+    public Boolean getSorter();
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_COLUMN.FILTER_TYPE</code>. 「filterType」- $filter.type 支持列搜索时的搜索类型
+     */
+    public IUiColumn setFilterType(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_COLUMN.FILTER_TYPE</code>. 「filterType」- $filter.type 支持列搜索时的搜索类型
+     */
+    public String getFilterType();
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_COLUMN.FILTER_CONFIG</code>. 「filterConfig」- $filter.config 列搜索支持时的搜索配置
+     */
+    public IUiColumn setFilterConfig(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_COLUMN.FILTER_CONFIG</code>. 「filterConfig」- $filter.config 列搜索支持时的搜索配置
+     */
+    public String getFilterConfig();
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_COLUMN.EMPTY</code>. 「empty」- $empty 专用
+     */
+    public IUiColumn setEmpty(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_COLUMN.EMPTY</code>. 「empty」- $empty 专用
+     */
+    public String getEmpty();
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_COLUMN.MAPPING</code>. 「mapping」- $mapping专用
+     */
+    public IUiColumn setMapping(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_COLUMN.MAPPING</code>. 「mapping」- $mapping专用
+     */
+    public String getMapping();
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_COLUMN.CONFIG</code>. 「config」- $config专用
+     */
+    public IUiColumn setConfig(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_COLUMN.CONFIG</code>. 「config」- $config专用
+     */
+    public String getConfig();
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_COLUMN.FORMAT</code>. 「format」- $format时间格式专用
+     */
+    public IUiColumn setFormat(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_COLUMN.FORMAT</code>. 「format」- $format时间格式专用
+     */
+    public String getFormat();
 
     /**
      * Setter for <code>DB_ETERNAL.UI_COLUMN.CONTROL_ID</code>. 「controlId」- 关联的控件ID
@@ -193,7 +273,15 @@ public interface IUiColumn extends Serializable {
         setDataIndex(json.getString("DATA_INDEX"));
         setRender(json.getString("RENDER"));
         setWidth(json.getInteger("WIDTH"));
+        setFixed(json.getBoolean("FIXED"));
         setClassName(json.getString("CLASS_NAME"));
+        setSorter(json.getBoolean("SORTER"));
+        setFilterType(json.getString("FILTER_TYPE"));
+        setFilterConfig(json.getString("FILTER_CONFIG"));
+        setEmpty(json.getString("EMPTY"));
+        setMapping(json.getString("MAPPING"));
+        setConfig(json.getString("CONFIG"));
+        setFormat(json.getString("FORMAT"));
         setControlId(json.getString("CONTROL_ID"));
         setActive(json.getBoolean("ACTIVE"));
         setSigma(json.getString("SIGMA"));
@@ -214,7 +302,15 @@ public interface IUiColumn extends Serializable {
         json.put("DATA_INDEX",getDataIndex());
         json.put("RENDER",getRender());
         json.put("WIDTH",getWidth());
+        json.put("FIXED",getFixed());
         json.put("CLASS_NAME",getClassName());
+        json.put("SORTER",getSorter());
+        json.put("FILTER_TYPE",getFilterType());
+        json.put("FILTER_CONFIG",getFilterConfig());
+        json.put("EMPTY",getEmpty());
+        json.put("MAPPING",getMapping());
+        json.put("CONFIG",getConfig());
+        json.put("FORMAT",getFormat());
         json.put("CONTROL_ID",getControlId());
         json.put("ACTIVE",getActive());
         json.put("SIGMA",getSigma());

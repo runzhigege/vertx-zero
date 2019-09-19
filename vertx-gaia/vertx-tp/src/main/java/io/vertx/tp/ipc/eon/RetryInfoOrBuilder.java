@@ -13,6 +13,7 @@ public interface RetryInfoOrBuilder extends
    * </pre>
    *
    * <code>bool passed = 1;</code>
+   * @return The passed.
    */
   boolean getPassed();
 
@@ -22,6 +23,7 @@ public interface RetryInfoOrBuilder extends
    * </pre>
    *
    * <code>repeated int32 backoff_ms = 2;</code>
+   * @return A list containing the backoffMs.
    */
   java.util.List<java.lang.Integer> getBackoffMsList();
   /**
@@ -30,6 +32,7 @@ public interface RetryInfoOrBuilder extends
    * </pre>
    *
    * <code>repeated int32 backoff_ms = 2;</code>
+   * @return The count of backoffMs.
    */
   int getBackoffMsCount();
   /**
@@ -38,6 +41,8 @@ public interface RetryInfoOrBuilder extends
    * </pre>
    *
    * <code>repeated int32 backoff_ms = 2;</code>
+   * @param index The index of the element to return.
+   * @return The backoffMs at the given index.
    */
   int getBackoffMs(int index);
 }

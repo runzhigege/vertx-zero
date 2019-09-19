@@ -119,6 +119,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>bool passed = 1;</code>
+   * @return The passed.
    */
   public boolean getPassed() {
     return passed_;
@@ -132,6 +133,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>repeated int32 backoff_ms = 2;</code>
+   * @return A list containing the backoffMs.
    */
   public java.util.List<java.lang.Integer>
       getBackoffMsList() {
@@ -143,6 +145,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>repeated int32 backoff_ms = 2;</code>
+   * @return The count of backoffMs.
    */
   public int getBackoffMsCount() {
     return backoffMs_.size();
@@ -153,6 +156,8 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>repeated int32 backoff_ms = 2;</code>
+   * @param index The index of the element to return.
+   * @return The backoffMs at the given index.
    */
   public int getBackoffMs(int index) {
     return backoffMs_.getInt(index);
@@ -516,6 +521,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bool passed = 1;</code>
+     * @return The passed.
      */
     public boolean getPassed() {
       return passed_;
@@ -526,6 +532,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bool passed = 1;</code>
+     * @param value The passed to set.
+     * @return This builder for chaining.
      */
     public Builder setPassed(boolean value) {
       
@@ -539,6 +547,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bool passed = 1;</code>
+     * @return This builder for chaining.
      */
     public Builder clearPassed() {
       
@@ -560,6 +569,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>repeated int32 backoff_ms = 2;</code>
+     * @return A list containing the backoffMs.
      */
     public java.util.List<java.lang.Integer>
         getBackoffMsList() {
@@ -572,6 +582,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>repeated int32 backoff_ms = 2;</code>
+     * @return The count of backoffMs.
      */
     public int getBackoffMsCount() {
       return backoffMs_.size();
@@ -582,6 +593,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>repeated int32 backoff_ms = 2;</code>
+     * @param index The index of the element to return.
+     * @return The backoffMs at the given index.
      */
     public int getBackoffMs(int index) {
       return backoffMs_.getInt(index);
@@ -592,6 +605,9 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>repeated int32 backoff_ms = 2;</code>
+     * @param index The index to set the value at.
+     * @param value The backoffMs to set.
+     * @return This builder for chaining.
      */
     public Builder setBackoffMs(
         int index, int value) {
@@ -606,6 +622,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>repeated int32 backoff_ms = 2;</code>
+     * @param value The backoffMs to add.
+     * @return This builder for chaining.
      */
     public Builder addBackoffMs(int value) {
       ensureBackoffMsIsMutable();
@@ -619,6 +637,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>repeated int32 backoff_ms = 2;</code>
+     * @param values The backoffMs to add.
+     * @return This builder for chaining.
      */
     public Builder addAllBackoffMs(
         java.lang.Iterable<? extends java.lang.Integer> values) {
@@ -634,6 +654,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>repeated int32 backoff_ms = 2;</code>
+     * @return This builder for chaining.
      */
     public Builder clearBackoffMs() {
       backoffMs_ = emptyIntList();

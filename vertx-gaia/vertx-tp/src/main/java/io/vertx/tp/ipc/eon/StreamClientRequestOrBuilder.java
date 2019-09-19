@@ -9,10 +9,12 @@ public interface StreamClientRequestOrBuilder extends
 
   /**
    * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 1;</code>
+   * @return Whether the envelop field is set.
    */
   boolean hasEnvelop();
   /**
    * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 1;</code>
+   * @return The envelop.
    */
   io.vertx.tp.ipc.eon.IpcEnvelop getEnvelop();
   /**

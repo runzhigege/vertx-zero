@@ -89,6 +89,7 @@ private static final long serialVersionUID = 0L;
   private int aggregatedSize_;
   /**
    * <code>int32 aggregated_size = 1;</code>
+   * @return The aggregatedSize.
    */
   public int getAggregatedSize() {
     return aggregatedSize_;
@@ -399,12 +400,15 @@ private static final long serialVersionUID = 0L;
     private int aggregatedSize_ ;
     /**
      * <code>int32 aggregated_size = 1;</code>
+     * @return The aggregatedSize.
      */
     public int getAggregatedSize() {
       return aggregatedSize_;
     }
     /**
      * <code>int32 aggregated_size = 1;</code>
+     * @param value The aggregatedSize to set.
+     * @return This builder for chaining.
      */
     public Builder setAggregatedSize(int value) {
       
@@ -414,6 +418,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>int32 aggregated_size = 1;</code>
+     * @return This builder for chaining.
      */
     public Builder clearAggregatedSize() {
       
