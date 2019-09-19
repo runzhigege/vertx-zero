@@ -46,7 +46,7 @@ public abstract class JtCommercial implements Commercial {
     }
 
     public <T extends JtCommercial> T bind(final String appId) {
-        app = Ambient.getApp(appId);
+        this.app = Ambient.getApp(appId);
         return (T) this;
     }
 
@@ -54,18 +54,18 @@ public abstract class JtCommercial implements Commercial {
      * Public interface to return `IService` reference
      */
     public IService service() {
-        return service;
+        return this.service;
     }
 
     /*
      * Sub class used method for some processing
      */
     protected JtApp getApp() {
-        return app;
+        return this.app;
     }
 
     protected JtConfig getConfig() {
-        return config;
+        return this.config;
     }
 
     /*
@@ -75,44 +75,44 @@ public abstract class JtCommercial implements Commercial {
 
     @Override
     public ChannelType channelType() {
-        return Ut.toEnum(service::getChannelType, ChannelType.class, ChannelType.ADAPTOR);
+        return Ut.toEnum(this.service::getChannelType, ChannelType.class, ChannelType.ADAPTOR);
     }
 
     @Override
     public Class<?> channelComponent() {
-        return Jt.toChannel(service::getChannelComponent, channelType());
+        return Jt.toChannel(this.service::getChannelComponent, this.channelType());
     }
 
     @Override
     public Class<?> businessComponent() {
-        return Ut.clazz(service.getServiceComponent());
+        return Ut.clazz(this.service.getServiceComponent());
     }
 
     @Override
     public Class<?> recordComponent() {
-        return Ut.clazz(service.getServiceRecord());
+        return Ut.clazz(this.service.getServiceRecord());
     }
 
     @Override
     public Database database() {
-        return Jt.toDatabase(service::getConfigDatabase, app.getSource());
+        return Jt.toDatabase(this.service::getConfigDatabase, this.app.getSource());
     }
 
     @Override
     public Integration integration() {
-        return Jt.toIntegration(service::getConfigIntegration);
+        return Jt.toIntegration(this.service::getConfigIntegration);
     }
 
     @Override
     public String app() {
-        return app.getAppId();
+        return this.app.getAppId();
     }
 
     /*
      * Non - Interface method here.
      */
     public String identifier() {
-        return service.getIdentifier();
+        return this.service.getIdentifier();
     }
 
     // ---------- Basic Json
@@ -125,28 +125,28 @@ public abstract class JtCommercial implements Commercial {
             return false;
         }
         final JtUri jtUri = (JtUri) o;
-        return key().equals(jtUri.key());
+        return this.key().equals(jtUri.key());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(key());
+        return Objects.hash(this.key());
     }
 
     @Override
     public JsonObject toJson() {
         final JsonObject data = new JsonObject();
         /* key data */
-        data.put(JtKey.Delivery.KEY, key());
+        data.put(JtKey.Delivery.KEY, this.key());
 
         /* service, config */
-        data.put(JtKey.Delivery.SERVICE, (JsonObject) Ut.serializeJson(service()));
-        data.put(JtKey.Delivery.CONFIG, (JsonObject) Ut.serializeJson(config));
+        data.put(JtKey.Delivery.SERVICE, (JsonObject) Ut.serializeJson(this.service()));
+        data.put(JtKey.Delivery.CONFIG, (JsonObject) Ut.serializeJson(this.config));
 
         /* appId */
-        data.put(JtKey.Delivery.APP_ID, app.getAppId());
+        data.put(JtKey.Delivery.APP_ID, this.app.getAppId());
         /* Reflection */
-        data.put(ID.CLASS, getClass().getName());
+        data.put(ID.CLASS, this.getClass().getName());
         return data;
     }
 
@@ -155,12 +155,12 @@ public abstract class JtCommercial implements Commercial {
         /*
          * service, config
          */
-        service = Ut.deserialize(data.getJsonObject(JtKey.Delivery.SERVICE), IService.class);
-        config = Ut.deserialize(data.getJsonObject(JtKey.Delivery.CONFIG), JtConfig.class);
+        this.service = Ut.deserialize(data.getJsonObject(JtKey.Delivery.SERVICE), IService.class);
+        this.config = Ut.deserialize(data.getJsonObject(JtKey.Delivery.CONFIG), JtConfig.class);
         /*
          * application id
          */
         final String appId = data.getString(JtKey.Delivery.APP_ID);
-        app = Ambient.getApp(appId);
+        this.app = Ambient.getApp(appId);
     }
 }

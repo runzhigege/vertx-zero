@@ -86,6 +86,10 @@ public class Ke {
         return KeCache.keyHabitus(envelop);
     }
 
+    public static String keyUser(final Envelop envelop) {
+        return KeCache.keyUser(envelop);
+    }
+
 
     /*
      * Get keySession here for current logged user
