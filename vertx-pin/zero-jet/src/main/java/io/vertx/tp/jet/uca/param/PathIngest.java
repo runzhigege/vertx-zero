@@ -1,10 +1,13 @@
 package io.vertx.tp.jet.uca.param;
 
+import io.vertx.core.http.HttpMethod;
+import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.optic.jet.JtIngest;
 import io.vertx.up.commune.Envelop;
+import io.vertx.up.runtime.ZeroJet;
 
 import java.util.Map;
 
@@ -23,9 +26,20 @@ class PathIngest implements JtIngest {
         /*
          * Pattern extract only
          */
-        final Map<String, String> params = context.pathParams();
+        final HttpServerRequest request = context.request();
+        final String requestUri = request.path();
+        final HttpMethod method = request.method();
         final JsonObject data = new JsonObject();
-        params.forEach(data::put);
+        /*
+         * Zero Jet to double check whether current uri is match pattern
+         * definition uris in our uri pool to fix issue here.
+         *
+         * Additional `key` parameter will be passed `pathParams()` but it's invalid.
+         */
+        if (ZeroJet.isMatch(method, requestUri)) {
+            final Map<String, String> params = context.pathParams();
+            params.forEach(data::put);
+        }
         return Envelop.success(data);
     }
 }
