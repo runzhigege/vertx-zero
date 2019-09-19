@@ -10,6 +10,9 @@ class StoreValve implements UiValve {
         // 1. view
         // 2. identifier
         // 3. sigma
+        System.out.println(view);
+        System.out.println(identifier);
+        System.out.println(sigma);
         return null;
     }
 }
