@@ -6,7 +6,6 @@ import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.log.Annal;
-import io.vertx.up.unity.Ux;
 
 import java.util.Objects;
 
@@ -23,7 +22,7 @@ public abstract class AbstractActor implements IxActor {
         final User user = envelop.user();
         if (Objects.nonNull(user)) {
             /* User information here */
-            initLogged(user);
+            this.initLogged(user);
         }
         return this;
     }
@@ -32,34 +31,31 @@ public abstract class AbstractActor implements IxActor {
         final JsonObject principle = user.principal();
         /* Metadata processing */
         if (principle.containsKey(KeField.METADATA)) {
-            metadata.mergeIn(principle.getJsonObject(KeField.METADATA));
+            this.metadata.mergeIn(principle.getJsonObject(KeField.METADATA));
         }
-        /* User extract */
-        final String token = principle.getString("jwt");
-        final JsonObject credential = Ux.Jwt.extract(token);
         /* User id */
-        this.user = credential.getString("user");
+        this.user = Ke.keyUser(this.envelop);
         /* Session */
-        habitus = Ke.keyHabitus(envelop);
+        this.habitus = Ke.keyHabitus(this.envelop);
     }
 
     protected Envelop getRequest() {
-        return envelop;
+        return this.envelop;
     }
 
     protected String getUser() {
-        return user;
+        return this.user;
     }
 
     protected String getHabitus() {
-        return habitus;
+        return this.habitus;
     }
 
     protected JsonObject getMetadata() {
-        return metadata;
+        return this.metadata;
     }
 
     protected Annal getLogger() {
-        return Annal.get(getClass());
+        return Annal.get(this.getClass());
     }
 }
