@@ -54,13 +54,13 @@ public abstract class AbstractChannel implements JtChannel {
         /*
          * Data object, could not be singleton
          *  */
-        final Record record = Ut.instance(recordClass);
+        final Record definition = Ut.instance(recordClass);
         /*
          * First step for channel
          * Initialize the `ActIn` object and reference
          */
         final ActIn request = new ActIn(envelop);
-        request.connect(record);
+        request.connect(definition);
         /*
          * Build component and init
          */

@@ -1,14 +1,12 @@
 package io.vertx.up.commune;
 
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.atom.query.Inquiry;
-import io.vertx.up.eon.Constants;
 import io.vertx.up.eon.ID;
-import io.vertx.up.util.Ut;
+import io.vertx.up.fn.Fn;
+import io.vertx.zero.exception.ActSpecificationException;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Objects;
 
 /*
  * Business Request
@@ -31,121 +29,32 @@ public class ActIn implements Serializable {
 
     /* Raw data of `Envelop` object/reference */
     private final transient Envelop envelop;
-    private final transient JsonObject data = new JsonObject();
-    private final transient JsonObject query = new JsonObject();
-    private transient Record record;
+    private final boolean isBatch;
+    private transient ActJObject json;
+    private transient ActJArray jarray;
+    private transient Record definition;
 
     public ActIn(final Envelop envelop) {
         /* Envelop reference here */
         this.envelop = envelop;
-
-        /* Data Init */
-        this.partData(envelop);
-
-        /* Header Init */
-        this.partHeader(envelop);
-    }
-
-    private void partHeader(final Envelop envelop) {
-        final JsonObject headerData = new JsonObject();
-        envelop.headers().names().stream()
-                .filter(field -> field.startsWith(ID.Header.PREFIX))
-                /*
-                 * Data for header
-                 * X-App-Id -> appId
-                 * X-App-Key -> appKey
-                 * X-Sigma -> sigma
-                 */
-                .forEach(field -> headerData.put(ID.Header.PARAM_MAP.get(field), envelop.headers().get(field)));
         /*
-         * Data Merge
-         */
-        this.data.mergeIn(headerData, true);
-    }
-
-    private void partData(final Envelop envelop) {
-        final JsonObject rawJson = envelop.data();
-        if (!Ut.isNil(rawJson)) {
-            final long counter = rawJson.fieldNames().stream()
-                    .filter(Constants.INDEXES::containsValue)
-                    .count();
-            final JsonObject body;
-            if (0 < counter) {
-                /*
-                 * Interface style
-                 * {
-                 *      "0": "xxx",
-                 *      "1": {
-                 *          "name": "x",
-                 *          "name1": "y"
-                 *      }
-                 * }
-                 */
-                final JsonObject found = rawJson.fieldNames().stream()
-                        .filter(Objects::nonNull)
-                        .map(rawJson::getValue)
-                        /*
-                         * Predicate to test whether value is JsonObject
-                         * If JsonObject, then find the first JsonObject as body
-                         */
-                        .filter(value -> value instanceof JsonObject)
-                        .map(item -> (JsonObject) item)
-                        .findFirst().orElse(null);
-
-                /* Copy new data structure */
-                body = null == found ? new JsonObject() : found.copy();
+         * Whether
+         * 1) JsonObject
+         * 2) JsonArray
+         * */
+        final JsonObject data = envelop.data();
+        if (data.containsKey(ID.PARAM_BODY)) {
+            final Object value = data.getValue(ID.PARAM_BODY);
+            if (value instanceof JsonArray) {
+                this.jarray = new ActJArray(envelop);
+                this.isBatch = true;        // Batch
             } else {
-
-                body = rawJson.copy();
-                /*
-                 * Cross reference
-                 */
-                JsonObject cross = new JsonObject();
-                if (body.containsKey(ID.PARAM_BODY)) {
-                    /*
-                     * Common style
-                     * {
-                     *      "field": "value",
-                     *      "$$__BODY__$$": "body"
-                     * }
-                     */
-                    final JsonObject inputData = body.copy();
-                    body.fieldNames().stream()
-                            .filter(field -> !ID.PARAM_BODY.equals(field))
-                            /*
-                             * NON, $$__BODY__$$
-                             */
-                            .forEach(field -> this.data.put(field, inputData.getValue(field)));
-
-                    cross = body.getJsonObject(ID.PARAM_BODY);
-                }
-                /*
-                 * $$__BODY__$$ is null
-                 * */
-                if (!Ut.isNil(cross)) {
-                    body.clear();
-                    /*
-                     * Modify to latest body
-                     */
-                    body.mergeIn(cross, true);
-                }
+                this.json = new ActJObject(envelop);
+                this.isBatch = false;       // Single
             }
-            /*
-             * isQuery ? criteria
-             * Until now the system has calculated the body data here
-             */
-            if (body.containsKey(Inquiry.KEY_CRITERIA)) {
-                /*
-                 * Query part
-                 */
-                Arrays.stream(Inquiry.KEY_QUERY).filter(field -> Objects.nonNull(body.getValue(field)))
-                        .forEach(field -> this.query.put(field, body.getValue(field)));
-            } else {
-                /*
-                 * Common data
-                 */
-                this.data.mergeIn(body.copy(), true);
-            }
+        } else {
+            this.json = new ActJObject(envelop);
+            this.isBatch = false;           // Single
         }
     }
 
@@ -154,34 +63,28 @@ public class ActIn implements Serializable {
     }
 
     public JsonObject getQuery() {
-        return this.query;
+        Fn.outUp(this.isBatch, ActSpecificationException.class, this.getClass(), this.isBatch);
+        return this.json.getQuery();
     }
 
     public Record getRecord() {
-        return this.record;
+        Fn.outUp(this.isBatch, ActSpecificationException.class, this.getClass(), this.isBatch);
+        return this.json.getRecord(this.definition);
+    }
+
+    public Record[] getRecords() {
+        Fn.outUp(!this.isBatch, ActSpecificationException.class, this.getClass(), this.isBatch);
+        return this.jarray.getRecords(this.definition);
+    }
+
+    public Record getDefinition() {
+        return this.definition;
     }
 
     /*
      * 1) Set input data to Record object ( reference here )
      */
-    public void connect(final Record record) {
-        /*
-         * Revert reference binding
-         */
-        this.record = record;
-    }
-
-    /*
-     * 2) Secondary steps for connect Request / Record
-     */
-    public void initialize() {
-
-        if (!Ut.isNil(this.data)) {
-            /*
-             * Set current data to `Record`
-             */
-            this.data.fieldNames()
-                    .forEach(field -> this.record.set(field, this.data.getValue(field)));
-        }
+    public void connect(final Record definition) {
+        this.definition = definition;
     }
 }
