@@ -6,12 +6,14 @@ import io.vertx.ext.web.FileUpload;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.cv.IxMsg;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.up.unity.Uson;
-import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Address;
+import io.vertx.up.annotations.Adjust;
 import io.vertx.up.annotations.Codex;
 import io.vertx.up.annotations.EndPoint;
+import io.vertx.up.eon.Orders;
 import io.vertx.up.log.Annal;
+import io.vertx.up.unity.Uson;
+import io.vertx.up.unity.Ux;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -28,6 +30,7 @@ public class FileAgent {
     @Path("/{actor}/import")
     @POST
     @Address(Addr.File.IMPORT)
+    @Adjust(Orders.MODULE)
     public JsonObject importFile(@PathParam("actor") final String actor,
                                  @StreamParam @Codex final FileUpload fileUpload) {
         /* File stored */
@@ -39,6 +42,7 @@ public class FileAgent {
     @Path("/{actor}/export")
     @POST
     @Address(Addr.File.EXPORT)
+    @Adjust(Orders.MODULE)
     @Consumes(MediaType.APPLICATION_OCTET_STREAM)
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     public JsonObject exportFile(@PathParam("actor") final String actor,
