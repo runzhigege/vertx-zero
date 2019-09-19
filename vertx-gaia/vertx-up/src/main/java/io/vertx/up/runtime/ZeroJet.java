@@ -26,4 +26,9 @@ public class ZeroJet {
             }
         }
     }
+
+    public static boolean isMatch(final HttpMethod method,
+                                  final String uri) {
+        return ZeroUri.isMatch(method, uri);
+    }
 }

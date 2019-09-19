@@ -44,6 +44,11 @@ class ZeroUri {
         }
     }
 
+    static boolean isMatch(final HttpMethod method, final String requestUri) {
+        return URIS.get(method).stream()
+                .anyMatch(uri -> isMatch(requestUri, uri));
+    }
+
     static void report() {
         final long size = URIS.values().stream()
                 .mapToLong(Set::size).sum();
