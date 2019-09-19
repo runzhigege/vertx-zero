@@ -77,6 +77,7 @@ E40060: "(Jooq) Infix Jooq require vertx environment, but now vertx is null"
 E40061: "(Security) You are using Zero Security Framework, but the @Wall found Security reference is null"
 E40062: "(Quiz) Current test case name = `{0}` is invalid when you enable Quiz Framework of Zero, name must end with `Tc`"
 E40063: "Your reflect invoking does not satisfy the pre-condition, method = {0}"
+E40064: "(Act) Act specification is invalid, you could not call this api when isBatch = {0}"
 # RxJava
 E45001: (V) - The field "{1}" of json array "{0}" must be mapped to unique element, but current reduced is "{2}"
 # (Web) Exception for web

@@ -11,6 +11,7 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.vertx.up.commune.envelop.Rib;
+import io.vertx.up.eon.ID;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception.web._500InternalServerException;
 import io.vertx.up.fn.Fn;
@@ -254,6 +255,20 @@ public class Envelop implements Serializable {
     /* Get Headers */
     public MultiMap headers() {
         return this.assist.headers();
+    }
+
+    public JsonObject headersX() {
+        final JsonObject headerData = new JsonObject();
+        this.assist.headers().names().stream()
+                .filter(field -> field.startsWith(ID.Header.PREFIX))
+                /*
+                 * Data for header
+                 * X-App-Id -> appId
+                 * X-App-Key -> appKey
+                 * X-Sigma -> sigma
+                 */
+                .forEach(field -> headerData.put(ID.Header.PARAM_MAP.get(field), this.assist.headers().get(field)));
+        return headerData;
     }
 
     public void setHeaders(final MultiMap headers) {
