@@ -2,11 +2,13 @@ package io.vertx.tp.ke.refine;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.unity.Ux;
 import io.vertx.up.uca.yaml.Node;
 import io.vertx.up.uca.yaml.ZeroUniform;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
+import java.util.Objects;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 class KeTool {
@@ -30,6 +32,20 @@ class KeTool {
                 return Ux.toFuture(item);
             }
         });
+    }
+
+    static <T> void consume(final Supplier<T> supplier, final Consumer<T> consumer) {
+        final T input = supplier.get();
+        if (Objects.nonNull(input)) {
+            if (input instanceof String) {
+                if (Ut.notNil((String) input)) {
+                    consumer.accept(input);
+                }
+            } else {
+                consumer.accept(input);
+            }
+        }
+
     }
 
     static void banner(final String module) {
