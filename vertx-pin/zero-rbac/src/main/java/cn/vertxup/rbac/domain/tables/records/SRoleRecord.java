@@ -85,19 +85,19 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.S_ROLE.SUPER</code>. 「super」- 是否具有定制权限？
+     * Setter for <code>DB_ETERNAL.S_ROLE.Power</code>. 「Power」- 是否具有定制权限？
      */
     @Override
-    public SRoleRecord setSuper(Boolean value) {
+    public SRoleRecord setPower(Boolean value) {
         set(3, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.S_ROLE.SUPER</code>. 「super」- 是否具有定制权限？
+     * Getter for <code>DB_ETERNAL.S_ROLE.Power</code>. 「Power」- 是否具有定制权限？
      */
     @Override
-    public Boolean getSuper() {
+    public Boolean getPower() {
         return (Boolean) get(3);
     }
 
@@ -366,7 +366,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
      */
     @Override
     public Field<Boolean> field4() {
-        return SRole.S_ROLE.SUPER;
+        return SRole.S_ROLE.POWER;
     }
 
     /**
@@ -494,7 +494,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
      */
     @Override
     public Boolean component4() {
-        return getSuper();
+        return getPower();
     }
 
     /**
@@ -622,7 +622,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
      */
     @Override
     public Boolean value4() {
-        return getSuper();
+        return getPower();
     }
 
     /**
@@ -753,7 +753,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
      */
     @Override
     public SRoleRecord value4(Boolean value) {
-        setSuper(value);
+        setPower(value);
         return this;
     }
 
@@ -901,7 +901,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
-        setSuper(from.getSuper());
+        setPower(from.getPower());
         setComment(from.getComment());
         setModelId(from.getModelId());
         setModelKey(from.getModelKey());
@@ -939,13 +939,13 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     /**
      * Create a detached, initialised SRoleRecord
      */
-    public SRoleRecord(String key, String name, String code, Boolean super_, String comment, String modelId, String modelKey, String category, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public SRoleRecord(String key, String name, String code, Boolean power, String comment, String modelId, String modelKey, String category, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(SRole.S_ROLE);
 
         set(0, key);
         set(1, name);
         set(2, code);
-        set(3, super_);
+        set(3, power);
         set(4, comment);
         set(5, modelId);
         set(6, modelKey);

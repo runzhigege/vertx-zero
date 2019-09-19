@@ -84,10 +84,10 @@ public class SRoleDao extends DAOImpl<SRoleRecord, cn.vertxup.rbac.domain.tables
     }
 
     /**
-     * Fetch records that have <code>SUPER IN (values)</code>
+     * Fetch records that have <code>POWER IN (values)</code>
      */
-    public List<cn.vertxup.rbac.domain.tables.pojos.SRole> fetchBySuper(Boolean... values) {
-        return fetch(SRole.S_ROLE.SUPER, values);
+    public List<cn.vertxup.rbac.domain.tables.pojos.SRole> fetchByPower(Boolean... values) {
+        return fetch(SRole.S_ROLE.POWER, values);
     }
 
     /**
@@ -203,10 +203,10 @@ public class SRoleDao extends DAOImpl<SRoleRecord, cn.vertxup.rbac.domain.tables
     }
 
     /**
-     * Fetch records that have <code>SUPER IN (values)</code> asynchronously
+     * Fetch records that have <code>POWER IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.rbac.domain.tables.pojos.SRole>> fetchBySuperAsync(List<Boolean> values) {
-        return fetchAsync(SRole.S_ROLE.SUPER,values);
+    public CompletableFuture<List<cn.vertxup.rbac.domain.tables.pojos.SRole>> fetchByPowerAsync(List<Boolean> values) {
+        return fetchAsync(SRole.S_ROLE.POWER,values);
     }
 
     /**
