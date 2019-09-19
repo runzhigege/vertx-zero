@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS S_ROLE
     `KEY`        VARCHAR(36) COMMENT '「key」- 角色ID',
     `NAME`       VARCHAR(255) COMMENT '「name」- 角色名称',
     `CODE`       VARCHAR(255) COMMENT '「code」- 角色系统名',
-    `SUPER`      BIT COMMENT '「super」- 是否具有定制权限？',
+    `POWER`      BIT COMMENT '「power」- 是否具有定制权限？',
     `COMMENT`    TEXT COMMENT '「comment」- 角色备注信息',
 
     -- 模块相关 Join

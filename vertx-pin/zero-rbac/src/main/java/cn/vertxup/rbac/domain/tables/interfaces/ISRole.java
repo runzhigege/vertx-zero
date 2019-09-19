@@ -54,14 +54,14 @@ public interface ISRole extends Serializable {
     public String getCode();
 
     /**
-     * Setter for <code>DB_ETERNAL.S_ROLE.SUPER</code>. 「super」- 是否具有定制权限？
+     * Setter for <code>DB_ETERNAL.S_ROLE.POWER</code>. 「power」- 是否具有定制权限？
      */
-    public ISRole setSuper(Boolean value);
+    public ISRole setPower(Boolean value);
 
     /**
-     * Getter for <code>DB_ETERNAL.S_ROLE.SUPER</code>. 「super」- 是否具有定制权限？
+     * Getter for <code>DB_ETERNAL.S_ROLE.POWER</code>. 「power」- 是否具有定制权限？
      */
-    public Boolean getSuper();
+    public Boolean getPower();
 
     /**
      * Setter for <code>DB_ETERNAL.S_ROLE.COMMENT</code>. 「comment」- 角色备注信息
@@ -201,7 +201,7 @@ public interface ISRole extends Serializable {
         setKey(json.getString("KEY"));
         setName(json.getString("NAME"));
         setCode(json.getString("CODE"));
-        setSuper(json.getBoolean("SUPER"));
+        setPower(json.getBoolean("POWER"));
         setComment(json.getString("COMMENT"));
         setModelId(json.getString("MODEL_ID"));
         setModelKey(json.getString("MODEL_KEY"));
@@ -223,7 +223,7 @@ public interface ISRole extends Serializable {
         json.put("KEY",getKey());
         json.put("NAME",getName());
         json.put("CODE",getCode());
-        json.put("SUPER",getSuper());
+        json.put("POWER",getPower());
         json.put("COMMENT",getComment());
         json.put("MODEL_ID",getModelId());
         json.put("MODEL_KEY",getModelKey());
