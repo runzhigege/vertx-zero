@@ -1,13 +1,16 @@
 package io.vertx.tp.optic.environment;
 
+import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.plugin.database.DataPool;
 import io.vertx.tp.error._500AmbientConnectException;
 import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.init.JtPin;
-import io.vertx.up.util.Ut;
+import io.vertx.tp.plugin.database.DataPool;
+import io.vertx.up.eon.ID;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.util.Ut;
 
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -60,6 +63,36 @@ public class Ambient {
 
     public static ConcurrentMap<String, AmbientEnvironment> getEnvironments() {
         return ENVIRONMENTS;
+    }
+
+    public static JtApp getCurrent(final MultiMap headers) {
+        /*
+         * 1. First search X-App-Id
+         */
+        final String appId = headers.get(ID.Header.X_APP_ID);
+        if (Ut.notNil(appId)) {
+            return APPS.get(appId);
+        } else {
+            /*
+             * 2. Then lookup X-Sigma
+             */
+            final String sigma = headers.get(ID.Header.X_SIGMA);
+            JtApp app = null;
+            if (Ut.notNil(sigma)) {
+                app = APPS.values().stream()
+                        .filter(each -> sigma.equals(each.getSigma()))
+                        .findFirst().orElse(null);
+            }
+            if (Objects.isNull(app)) {
+                final String appKey = headers.get(ID.Header.X_APP_KEY);
+                if (Ut.notNil(appKey)) {
+                    app = APPS.values().stream()
+                            .filter(each -> appKey.equals(each.getAppKey()))
+                            .findFirst().orElse(null);
+                }
+            }
+            return app;
+        }
     }
 
     public static JtApp getApp(final String key) {

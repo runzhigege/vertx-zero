@@ -10,6 +10,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -58,6 +59,18 @@ public class Ke {
         KeLog.infoKe(logger, pattern, args);
     }
 
+    public static void runString(final Supplier<String> supplier, final Consumer<String> consumer) {
+        KeTool.consume(supplier, consumer);
+    }
+
+    public static void runBoolean(final Supplier<Boolean> supplier, final Consumer<Boolean> consumer) {
+        KeTool.consume(supplier, consumer);
+    }
+
+    public static void runInteger(final Supplier<Integer> supplier, final Consumer<Integer> consumer) {
+        KeTool.consume(supplier, consumer);
+    }
+
     /*
      * Session key generation
      */
@@ -71,6 +84,10 @@ public class Ke {
 
     public static String keyHabitus(final Envelop envelop) {
         return KeCache.keyHabitus(envelop);
+    }
+
+    public static String keyUser(final Envelop envelop) {
+        return KeCache.keyUser(envelop);
     }
 
 

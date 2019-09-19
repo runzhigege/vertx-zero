@@ -98,6 +98,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>int32 size = 1;</code>
+   * @return The size.
    */
   public int getSize() {
     return size_;
@@ -111,6 +112,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>int32 interval_us = 2;</code>
+   * @return The intervalUs.
    */
   public int getIntervalUs() {
     return intervalUs_;
@@ -442,6 +444,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>int32 size = 1;</code>
+     * @return The size.
      */
     public int getSize() {
       return size_;
@@ -452,6 +455,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>int32 size = 1;</code>
+     * @param value The size to set.
+     * @return This builder for chaining.
      */
     public Builder setSize(int value) {
       
@@ -465,6 +470,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>int32 size = 1;</code>
+     * @return This builder for chaining.
      */
     public Builder clearSize() {
       
@@ -480,6 +486,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>int32 interval_us = 2;</code>
+     * @return The intervalUs.
      */
     public int getIntervalUs() {
       return intervalUs_;
@@ -490,6 +497,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>int32 interval_us = 2;</code>
+     * @param value The intervalUs to set.
+     * @return This builder for chaining.
      */
     public Builder setIntervalUs(int value) {
       
@@ -503,6 +512,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>int32 interval_us = 2;</code>
+     * @return This builder for chaining.
      */
     public Builder clearIntervalUs() {
       

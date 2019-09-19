@@ -3,6 +3,7 @@ package io.vertx.tp.ke.refine;
 import io.vertx.core.Future;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.auth.User;
 import io.vertx.ext.web.Session;
 import io.vertx.tp.error._409SessionConflictException;
 import io.vertx.tp.plugin.session.SessionClient;
@@ -32,6 +33,16 @@ class KeCache {
         final String token = envelop.jwt();
         final JsonObject tokenJson = Ux.Jwt.extract(token);
         return tokenJson.getString("habitus");
+    }
+
+    static String keyUser(final Envelop envelop) {
+        final User user = envelop.user();
+        /* Principle */
+        final JsonObject principle = user.principal();
+        /* User extract */
+        final String token = principle.getString("jwt");
+        final JsonObject credential = Ux.Jwt.extract(token);
+        return credential.getString("user");
     }
 
     /*

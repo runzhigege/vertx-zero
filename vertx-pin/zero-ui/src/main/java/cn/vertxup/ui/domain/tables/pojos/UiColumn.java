@@ -24,14 +24,22 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiColumn implements IUiColumn {
 
-    private static final long serialVersionUID = -243785304;
+    private static final long serialVersionUID = -883439487;
 
     private String        key;
     private String        title;
     private String        dataIndex;
     private String        render;
     private Integer       width;
+    private Boolean       fixed;
     private String        className;
+    private Boolean       sorter;
+    private String        filterType;
+    private String        filterConfig;
+    private String        empty;
+    private String        mapping;
+    private String        config;
+    private String        format;
     private String        controlId;
     private Boolean       active;
     private String        sigma;
@@ -50,7 +58,15 @@ public class UiColumn implements IUiColumn {
         this.dataIndex = value.dataIndex;
         this.render = value.render;
         this.width = value.width;
+        this.fixed = value.fixed;
         this.className = value.className;
+        this.sorter = value.sorter;
+        this.filterType = value.filterType;
+        this.filterConfig = value.filterConfig;
+        this.empty = value.empty;
+        this.mapping = value.mapping;
+        this.config = value.config;
+        this.format = value.format;
         this.controlId = value.controlId;
         this.active = value.active;
         this.sigma = value.sigma;
@@ -68,7 +84,15 @@ public class UiColumn implements IUiColumn {
         String        dataIndex,
         String        render,
         Integer       width,
+        Boolean       fixed,
         String        className,
+        Boolean       sorter,
+        String        filterType,
+        String        filterConfig,
+        String        empty,
+        String        mapping,
+        String        config,
+        String        format,
         String        controlId,
         Boolean       active,
         String        sigma,
@@ -84,7 +108,15 @@ public class UiColumn implements IUiColumn {
         this.dataIndex = dataIndex;
         this.render = render;
         this.width = width;
+        this.fixed = fixed;
         this.className = className;
+        this.sorter = sorter;
+        this.filterType = filterType;
+        this.filterConfig = filterConfig;
+        this.empty = empty;
+        this.mapping = mapping;
+        this.config = config;
+        this.format = format;
         this.controlId = controlId;
         this.active = active;
         this.sigma = sigma;
@@ -152,6 +184,17 @@ public class UiColumn implements IUiColumn {
     }
 
     @Override
+    public Boolean getFixed() {
+        return this.fixed;
+    }
+
+    @Override
+    public UiColumn setFixed(Boolean fixed) {
+        this.fixed = fixed;
+        return this;
+    }
+
+    @Override
     public String getClassName() {
         return this.className;
     }
@@ -159,6 +202,83 @@ public class UiColumn implements IUiColumn {
     @Override
     public UiColumn setClassName(String className) {
         this.className = className;
+        return this;
+    }
+
+    @Override
+    public Boolean getSorter() {
+        return this.sorter;
+    }
+
+    @Override
+    public UiColumn setSorter(Boolean sorter) {
+        this.sorter = sorter;
+        return this;
+    }
+
+    @Override
+    public String getFilterType() {
+        return this.filterType;
+    }
+
+    @Override
+    public UiColumn setFilterType(String filterType) {
+        this.filterType = filterType;
+        return this;
+    }
+
+    @Override
+    public String getFilterConfig() {
+        return this.filterConfig;
+    }
+
+    @Override
+    public UiColumn setFilterConfig(String filterConfig) {
+        this.filterConfig = filterConfig;
+        return this;
+    }
+
+    @Override
+    public String getEmpty() {
+        return this.empty;
+    }
+
+    @Override
+    public UiColumn setEmpty(String empty) {
+        this.empty = empty;
+        return this;
+    }
+
+    @Override
+    public String getMapping() {
+        return this.mapping;
+    }
+
+    @Override
+    public UiColumn setMapping(String mapping) {
+        this.mapping = mapping;
+        return this;
+    }
+
+    @Override
+    public String getConfig() {
+        return this.config;
+    }
+
+    @Override
+    public UiColumn setConfig(String config) {
+        this.config = config;
+        return this;
+    }
+
+    @Override
+    public String getFormat() {
+        return this.format;
+    }
+
+    @Override
+    public UiColumn setFormat(String format) {
+        this.format = format;
         return this;
     }
 
@@ -270,7 +390,15 @@ public class UiColumn implements IUiColumn {
         sb.append(", ").append(dataIndex);
         sb.append(", ").append(render);
         sb.append(", ").append(width);
+        sb.append(", ").append(fixed);
         sb.append(", ").append(className);
+        sb.append(", ").append(sorter);
+        sb.append(", ").append(filterType);
+        sb.append(", ").append(filterConfig);
+        sb.append(", ").append(empty);
+        sb.append(", ").append(mapping);
+        sb.append(", ").append(config);
+        sb.append(", ").append(format);
         sb.append(", ").append(controlId);
         sb.append(", ").append(active);
         sb.append(", ").append(sigma);
@@ -299,7 +427,15 @@ public class UiColumn implements IUiColumn {
         setDataIndex(from.getDataIndex());
         setRender(from.getRender());
         setWidth(from.getWidth());
+        setFixed(from.getFixed());
         setClassName(from.getClassName());
+        setSorter(from.getSorter());
+        setFilterType(from.getFilterType());
+        setFilterConfig(from.getFilterConfig());
+        setEmpty(from.getEmpty());
+        setMapping(from.getMapping());
+        setConfig(from.getConfig());
+        setFormat(from.getFormat());
         setControlId(from.getControlId());
         setActive(from.getActive());
         setSigma(from.getSigma());

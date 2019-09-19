@@ -138,12 +138,14 @@ private static final long serialVersionUID = 0L;
   private int responseType_;
   /**
    * <code>.io.vertx.tp.ipc.eon.em.Format response_type = 1;</code>
+   * @return The enum numeric value on the wire for responseType.
    */
   public int getResponseTypeValue() {
     return responseType_;
   }
   /**
    * <code>.io.vertx.tp.ipc.eon.em.Format response_type = 1;</code>
+   * @return The responseType.
    */
   public io.vertx.tp.ipc.eon.em.Format getResponseType() {
     @SuppressWarnings("deprecation")
@@ -190,12 +192,14 @@ private static final long serialVersionUID = 0L;
   private io.vertx.tp.ipc.eon.IpcEnvelop envelop_;
   /**
    * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 3;</code>
+   * @return Whether the envelop field is set.
    */
   public boolean hasEnvelop() {
     return envelop_ != null;
   }
   /**
    * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 3;</code>
+   * @return The envelop.
    */
   public io.vertx.tp.ipc.eon.IpcEnvelop getEnvelop() {
     return envelop_ == null ? io.vertx.tp.ipc.eon.IpcEnvelop.getDefaultInstance() : envelop_;
@@ -211,12 +215,14 @@ private static final long serialVersionUID = 0L;
   private int algorithm_;
   /**
    * <code>.io.vertx.tp.ipc.eon.em.Compression algorithm = 4;</code>
+   * @return The enum numeric value on the wire for algorithm.
    */
   public int getAlgorithmValue() {
     return algorithm_;
   }
   /**
    * <code>.io.vertx.tp.ipc.eon.em.Compression algorithm = 4;</code>
+   * @return The algorithm.
    */
   public io.vertx.tp.ipc.eon.em.Compression getAlgorithm() {
     @SuppressWarnings("deprecation")
@@ -228,12 +234,14 @@ private static final long serialVersionUID = 0L;
   private io.vertx.tp.ipc.eon.IpcStatus responseStatus_;
   /**
    * <code>.io.vertx.tp.ipc.eon.IpcStatus response_status = 5;</code>
+   * @return Whether the responseStatus field is set.
    */
   public boolean hasResponseStatus() {
     return responseStatus_ != null;
   }
   /**
    * <code>.io.vertx.tp.ipc.eon.IpcStatus response_status = 5;</code>
+   * @return The responseStatus.
    */
   public io.vertx.tp.ipc.eon.IpcStatus getResponseStatus() {
     return responseStatus_ == null ? io.vertx.tp.ipc.eon.IpcStatus.getDefaultInstance() : responseStatus_;
@@ -682,12 +690,15 @@ private static final long serialVersionUID = 0L;
     private int responseType_ = 0;
     /**
      * <code>.io.vertx.tp.ipc.eon.em.Format response_type = 1;</code>
+     * @return The enum numeric value on the wire for responseType.
      */
     public int getResponseTypeValue() {
       return responseType_;
     }
     /**
      * <code>.io.vertx.tp.ipc.eon.em.Format response_type = 1;</code>
+     * @param value The enum numeric value on the wire for responseType to set.
+     * @return This builder for chaining.
      */
     public Builder setResponseTypeValue(int value) {
       responseType_ = value;
@@ -696,6 +707,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>.io.vertx.tp.ipc.eon.em.Format response_type = 1;</code>
+     * @return The responseType.
      */
     public io.vertx.tp.ipc.eon.em.Format getResponseType() {
       @SuppressWarnings("deprecation")
@@ -704,6 +716,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>.io.vertx.tp.ipc.eon.em.Format response_type = 1;</code>
+     * @param value The responseType to set.
+     * @return This builder for chaining.
      */
     public Builder setResponseType(io.vertx.tp.ipc.eon.em.Format value) {
       if (value == null) {
@@ -716,6 +730,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>.io.vertx.tp.ipc.eon.em.Format response_type = 1;</code>
+     * @return This builder for chaining.
      */
     public Builder clearResponseType() {
       
@@ -969,12 +984,14 @@ private static final long serialVersionUID = 0L;
         io.vertx.tp.ipc.eon.IpcEnvelop, io.vertx.tp.ipc.eon.IpcEnvelop.Builder, io.vertx.tp.ipc.eon.IpcEnvelopOrBuilder> envelopBuilder_;
     /**
      * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 3;</code>
+     * @return Whether the envelop field is set.
      */
     public boolean hasEnvelop() {
       return envelopBuilder_ != null || envelop_ != null;
     }
     /**
      * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 3;</code>
+     * @return The envelop.
      */
     public io.vertx.tp.ipc.eon.IpcEnvelop getEnvelop() {
       if (envelopBuilder_ == null) {
@@ -1084,12 +1101,15 @@ private static final long serialVersionUID = 0L;
     private int algorithm_ = 0;
     /**
      * <code>.io.vertx.tp.ipc.eon.em.Compression algorithm = 4;</code>
+     * @return The enum numeric value on the wire for algorithm.
      */
     public int getAlgorithmValue() {
       return algorithm_;
     }
     /**
      * <code>.io.vertx.tp.ipc.eon.em.Compression algorithm = 4;</code>
+     * @param value The enum numeric value on the wire for algorithm to set.
+     * @return This builder for chaining.
      */
     public Builder setAlgorithmValue(int value) {
       algorithm_ = value;
@@ -1098,6 +1118,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>.io.vertx.tp.ipc.eon.em.Compression algorithm = 4;</code>
+     * @return The algorithm.
      */
     public io.vertx.tp.ipc.eon.em.Compression getAlgorithm() {
       @SuppressWarnings("deprecation")
@@ -1106,6 +1127,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>.io.vertx.tp.ipc.eon.em.Compression algorithm = 4;</code>
+     * @param value The algorithm to set.
+     * @return This builder for chaining.
      */
     public Builder setAlgorithm(io.vertx.tp.ipc.eon.em.Compression value) {
       if (value == null) {
@@ -1118,6 +1141,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>.io.vertx.tp.ipc.eon.em.Compression algorithm = 4;</code>
+     * @return This builder for chaining.
      */
     public Builder clearAlgorithm() {
       
@@ -1131,12 +1155,14 @@ private static final long serialVersionUID = 0L;
         io.vertx.tp.ipc.eon.IpcStatus, io.vertx.tp.ipc.eon.IpcStatus.Builder, io.vertx.tp.ipc.eon.IpcStatusOrBuilder> responseStatusBuilder_;
     /**
      * <code>.io.vertx.tp.ipc.eon.IpcStatus response_status = 5;</code>
+     * @return Whether the responseStatus field is set.
      */
     public boolean hasResponseStatus() {
       return responseStatusBuilder_ != null || responseStatus_ != null;
     }
     /**
      * <code>.io.vertx.tp.ipc.eon.IpcStatus response_status = 5;</code>
+     * @return The responseStatus.
      */
     public io.vertx.tp.ipc.eon.IpcStatus getResponseStatus() {
       if (responseStatusBuilder_ == null) {
