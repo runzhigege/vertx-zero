@@ -70,7 +70,7 @@
         <glassfish.el.version>3.0.1-b11</glassfish.el.version>
 
         <!-- Database Needed -->
-        <hikari.cp.version>3.4.0</hikari.cp.version>
+        <hikari.cp.version>3.4.1</hikari.cp.version>
         <jooq.version>3.10.8</jooq.version>
         <vertx.jooq.version>2.4.1</vertx.jooq.version>
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
@@ -90,7 +90,7 @@
         <jwt.version>3.8.2</jwt.version>
         <jetbrains.version>17.0.0</jetbrains.version>
         <guice.version>4.1.0</guice.version>
-        <scala.version>2.13.0</scala.version>
+        <scala.version>2.13.1</scala.version>
         <feign.version>8.18.0</feign.version>
         <guava.version>28.1-jre</guava.version>
         <codehaus.janino.version>3.1.0</codehaus.janino.version>
@@ -107,7 +107,7 @@
         <!-- Liquibase -->
         <liquibase.version>3.6.3</liquibase.version>
         <!-- Rpc -->
-        <protobuf.version>3.9.1</protobuf.version>
+        <protobuf.version>3.10.0</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
         <grpc.version>1.23.0</grpc.version>
         <!-- Yaml -->

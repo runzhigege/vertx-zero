@@ -115,6 +115,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>.io.vertx.tp.ipc.eon.em.Format type = 1;</code>
+   * @return The enum numeric value on the wire for type.
    */
   public int getTypeValue() {
     return type_;
@@ -125,6 +126,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>.io.vertx.tp.ipc.eon.em.Format type = 1;</code>
+   * @return The type.
    */
   public io.vertx.tp.ipc.eon.em.Format getType() {
     @SuppressWarnings("deprecation")
@@ -140,6 +142,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>string body = 2;</code>
+   * @return The body.
    */
   public java.lang.String getBody() {
     java.lang.Object ref = body_;
@@ -159,6 +162,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>string body = 2;</code>
+   * @return The bytes for body.
    */
   public com.google.protobuf.ByteString
       getBodyBytes() {
@@ -182,6 +186,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>bytes stream = 3;</code>
+   * @return The stream.
    */
   public com.google.protobuf.ByteString getStream() {
     return stream_;
@@ -195,6 +200,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>string name = 4;</code>
+   * @return The name.
    */
   public java.lang.String getName() {
     java.lang.Object ref = name_;
@@ -214,6 +220,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>string name = 4;</code>
+   * @return The bytes for name.
    */
   public com.google.protobuf.ByteString
       getNameBytes() {
@@ -588,6 +595,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Format type = 1;</code>
+     * @return The enum numeric value on the wire for type.
      */
     public int getTypeValue() {
       return type_;
@@ -598,6 +606,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Format type = 1;</code>
+     * @param value The enum numeric value on the wire for type to set.
+     * @return This builder for chaining.
      */
     public Builder setTypeValue(int value) {
       type_ = value;
@@ -610,6 +620,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Format type = 1;</code>
+     * @return The type.
      */
     public io.vertx.tp.ipc.eon.em.Format getType() {
       @SuppressWarnings("deprecation")
@@ -622,6 +633,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Format type = 1;</code>
+     * @param value The type to set.
+     * @return This builder for chaining.
      */
     public Builder setType(io.vertx.tp.ipc.eon.em.Format value) {
       if (value == null) {
@@ -638,6 +651,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Format type = 1;</code>
+     * @return This builder for chaining.
      */
     public Builder clearType() {
       
@@ -653,6 +667,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string body = 2;</code>
+     * @return The body.
      */
     public java.lang.String getBody() {
       java.lang.Object ref = body_;
@@ -672,6 +687,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string body = 2;</code>
+     * @return The bytes for body.
      */
     public com.google.protobuf.ByteString
         getBodyBytes() {
@@ -692,6 +708,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string body = 2;</code>
+     * @param value The body to set.
+     * @return This builder for chaining.
      */
     public Builder setBody(
         java.lang.String value) {
@@ -709,6 +727,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string body = 2;</code>
+     * @return This builder for chaining.
      */
     public Builder clearBody() {
       
@@ -722,6 +741,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string body = 2;</code>
+     * @param value The bytes for body to set.
+     * @return This builder for chaining.
      */
     public Builder setBodyBytes(
         com.google.protobuf.ByteString value) {
@@ -742,6 +763,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bytes stream = 3;</code>
+     * @return The stream.
      */
     public com.google.protobuf.ByteString getStream() {
       return stream_;
@@ -752,6 +774,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bytes stream = 3;</code>
+     * @param value The stream to set.
+     * @return This builder for chaining.
      */
     public Builder setStream(com.google.protobuf.ByteString value) {
       if (value == null) {
@@ -768,6 +792,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bytes stream = 3;</code>
+     * @return This builder for chaining.
      */
     public Builder clearStream() {
       
@@ -783,6 +808,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string name = 4;</code>
+     * @return The name.
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -802,6 +828,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string name = 4;</code>
+     * @return The bytes for name.
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -822,6 +849,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string name = 4;</code>
+     * @param value The name to set.
+     * @return This builder for chaining.
      */
     public Builder setName(
         java.lang.String value) {
@@ -839,6 +868,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string name = 4;</code>
+     * @return This builder for chaining.
      */
     public Builder clearName() {
       
@@ -852,6 +882,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string name = 4;</code>
+     * @param value The bytes for name to set.
+     * @return This builder for chaining.
      */
     public Builder setNameBytes(
         com.google.protobuf.ByteString value) {
