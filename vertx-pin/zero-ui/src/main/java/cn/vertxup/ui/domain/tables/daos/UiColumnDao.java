@@ -98,10 +98,66 @@ public class UiColumnDao extends DAOImpl<UiColumnRecord, cn.vertxup.ui.domain.ta
     }
 
     /**
+     * Fetch records that have <code>FIXED IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiColumn> fetchByFixed(Boolean... values) {
+        return fetch(UiColumn.UI_COLUMN.FIXED, values);
+    }
+
+    /**
      * Fetch records that have <code>CLASS_NAME IN (values)</code>
      */
     public List<cn.vertxup.ui.domain.tables.pojos.UiColumn> fetchByClassName(String... values) {
         return fetch(UiColumn.UI_COLUMN.CLASS_NAME, values);
+    }
+
+    /**
+     * Fetch records that have <code>SORTER IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiColumn> fetchBySorter(Boolean... values) {
+        return fetch(UiColumn.UI_COLUMN.SORTER, values);
+    }
+
+    /**
+     * Fetch records that have <code>FILTER_TYPE IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiColumn> fetchByFilterType(String... values) {
+        return fetch(UiColumn.UI_COLUMN.FILTER_TYPE, values);
+    }
+
+    /**
+     * Fetch records that have <code>FILTER_CONFIG IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiColumn> fetchByFilterConfig(String... values) {
+        return fetch(UiColumn.UI_COLUMN.FILTER_CONFIG, values);
+    }
+
+    /**
+     * Fetch records that have <code>EMPTY IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiColumn> fetchByEmpty(String... values) {
+        return fetch(UiColumn.UI_COLUMN.EMPTY, values);
+    }
+
+    /**
+     * Fetch records that have <code>MAPPING IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiColumn> fetchByMapping(String... values) {
+        return fetch(UiColumn.UI_COLUMN.MAPPING, values);
+    }
+
+    /**
+     * Fetch records that have <code>CONFIG IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiColumn> fetchByConfig(String... values) {
+        return fetch(UiColumn.UI_COLUMN.CONFIG, values);
+    }
+
+    /**
+     * Fetch records that have <code>FORMAT IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiColumn> fetchByFormat(String... values) {
+        return fetch(UiColumn.UI_COLUMN.FORMAT, values);
     }
 
     /**
@@ -210,10 +266,66 @@ public class UiColumnDao extends DAOImpl<UiColumnRecord, cn.vertxup.ui.domain.ta
     }
 
     /**
+     * Fetch records that have <code>FIXED IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiColumn>> fetchByFixedAsync(List<Boolean> values) {
+        return fetchAsync(UiColumn.UI_COLUMN.FIXED,values);
+    }
+
+    /**
      * Fetch records that have <code>CLASS_NAME IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiColumn>> fetchByClassNameAsync(List<String> values) {
         return fetchAsync(UiColumn.UI_COLUMN.CLASS_NAME,values);
+    }
+
+    /**
+     * Fetch records that have <code>SORTER IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiColumn>> fetchBySorterAsync(List<Boolean> values) {
+        return fetchAsync(UiColumn.UI_COLUMN.SORTER,values);
+    }
+
+    /**
+     * Fetch records that have <code>FILTER_TYPE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiColumn>> fetchByFilterTypeAsync(List<String> values) {
+        return fetchAsync(UiColumn.UI_COLUMN.FILTER_TYPE,values);
+    }
+
+    /**
+     * Fetch records that have <code>FILTER_CONFIG IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiColumn>> fetchByFilterConfigAsync(List<String> values) {
+        return fetchAsync(UiColumn.UI_COLUMN.FILTER_CONFIG,values);
+    }
+
+    /**
+     * Fetch records that have <code>EMPTY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiColumn>> fetchByEmptyAsync(List<String> values) {
+        return fetchAsync(UiColumn.UI_COLUMN.EMPTY,values);
+    }
+
+    /**
+     * Fetch records that have <code>MAPPING IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiColumn>> fetchByMappingAsync(List<String> values) {
+        return fetchAsync(UiColumn.UI_COLUMN.MAPPING,values);
+    }
+
+    /**
+     * Fetch records that have <code>CONFIG IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiColumn>> fetchByConfigAsync(List<String> values) {
+        return fetchAsync(UiColumn.UI_COLUMN.CONFIG,values);
+    }
+
+    /**
+     * Fetch records that have <code>FORMAT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiColumn>> fetchByFormatAsync(List<String> values) {
+        return fetchAsync(UiColumn.UI_COLUMN.FORMAT,values);
     }
 
     /**

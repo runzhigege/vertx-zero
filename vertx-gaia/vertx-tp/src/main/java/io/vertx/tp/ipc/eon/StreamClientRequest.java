@@ -97,12 +97,14 @@ private static final long serialVersionUID = 0L;
   private io.vertx.tp.ipc.eon.IpcEnvelop envelop_;
   /**
    * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 1;</code>
+   * @return Whether the envelop field is set.
    */
   public boolean hasEnvelop() {
     return envelop_ != null;
   }
   /**
    * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 1;</code>
+   * @return The envelop.
    */
   public io.vertx.tp.ipc.eon.IpcEnvelop getEnvelop() {
     return envelop_ == null ? io.vertx.tp.ipc.eon.IpcEnvelop.getDefaultInstance() : envelop_;
@@ -434,12 +436,14 @@ private static final long serialVersionUID = 0L;
         io.vertx.tp.ipc.eon.IpcEnvelop, io.vertx.tp.ipc.eon.IpcEnvelop.Builder, io.vertx.tp.ipc.eon.IpcEnvelopOrBuilder> envelopBuilder_;
     /**
      * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 1;</code>
+     * @return Whether the envelop field is set.
      */
     public boolean hasEnvelop() {
       return envelopBuilder_ != null || envelop_ != null;
     }
     /**
      * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 1;</code>
+     * @return The envelop.
      */
     public io.vertx.tp.ipc.eon.IpcEnvelop getEnvelop() {
       if (envelopBuilder_ == null) {

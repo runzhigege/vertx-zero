@@ -10,18 +10,15 @@ import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.optic.Apeak;
 import io.vertx.tp.optic.Pocket;
 import io.vertx.tp.optic.Seeker;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.unity.UxJooq;
-import io.vertx.up.commune.Envelop;
-import io.vertx.up.log.Annal;
 
 import java.text.MessageFormat;
 import java.util.Objects;
 import java.util.function.Supplier;
 
 class Unity {
-
-    private static final Annal LOGGER = Annal.get(Unity.class);
 
     /*
      * Seeker for lookup target resource

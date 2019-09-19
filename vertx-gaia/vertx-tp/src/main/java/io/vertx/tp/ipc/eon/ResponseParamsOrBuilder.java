@@ -13,6 +13,7 @@ public interface ResponseParamsOrBuilder extends
    * </pre>
    *
    * <code>int32 size = 1;</code>
+   * @return The size.
    */
   int getSize();
 
@@ -22,6 +23,7 @@ public interface ResponseParamsOrBuilder extends
    * </pre>
    *
    * <code>int32 interval_us = 2;</code>
+   * @return The intervalUs.
    */
   int getIntervalUs();
 }

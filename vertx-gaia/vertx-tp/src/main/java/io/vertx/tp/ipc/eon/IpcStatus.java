@@ -100,6 +100,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>int32 code = 1;</code>
+   * @return The code.
    */
   public int getCode() {
     return code_;
@@ -113,6 +114,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>string message = 2;</code>
+   * @return The message.
    */
   public java.lang.String getMessage() {
     java.lang.Object ref = message_;
@@ -132,6 +134,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>string message = 2;</code>
+   * @return The bytes for message.
    */
   public com.google.protobuf.ByteString
       getMessageBytes() {
@@ -473,6 +476,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>int32 code = 1;</code>
+     * @return The code.
      */
     public int getCode() {
       return code_;
@@ -483,6 +487,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>int32 code = 1;</code>
+     * @param value The code to set.
+     * @return This builder for chaining.
      */
     public Builder setCode(int value) {
       
@@ -496,6 +502,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>int32 code = 1;</code>
+     * @return This builder for chaining.
      */
     public Builder clearCode() {
       
@@ -511,6 +518,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string message = 2;</code>
+     * @return The message.
      */
     public java.lang.String getMessage() {
       java.lang.Object ref = message_;
@@ -530,6 +538,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string message = 2;</code>
+     * @return The bytes for message.
      */
     public com.google.protobuf.ByteString
         getMessageBytes() {
@@ -550,6 +559,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string message = 2;</code>
+     * @param value The message to set.
+     * @return This builder for chaining.
      */
     public Builder setMessage(
         java.lang.String value) {
@@ -567,6 +578,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string message = 2;</code>
+     * @return This builder for chaining.
      */
     public Builder clearMessage() {
       
@@ -580,6 +592,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string message = 2;</code>
+     * @param value The bytes for message to set.
+     * @return This builder for chaining.
      */
     public Builder setMessageBytes(
         com.google.protobuf.ByteString value) {

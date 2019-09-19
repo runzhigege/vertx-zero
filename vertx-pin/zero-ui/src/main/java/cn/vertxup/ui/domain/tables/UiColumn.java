@@ -35,7 +35,7 @@ public class UiColumn extends TableImpl<UiColumnRecord> {
      * The reference instance of <code>DB_ETERNAL.UI_COLUMN</code>
      */
     public static final UiColumn UI_COLUMN = new UiColumn();
-    private static final long serialVersionUID = -1572186838;
+    private static final long serialVersionUID = 806070319;
     /**
      * The column <code>DB_ETERNAL.UI_COLUMN.KEY</code>. 「key」- 列主键
      */
@@ -57,9 +57,41 @@ public class UiColumn extends TableImpl<UiColumnRecord> {
      */
     public final TableField<UiColumnRecord, Integer> WIDTH = createField("WIDTH", org.jooq.impl.SQLDataType.INTEGER, this, "「width」- 当前列的宽度");
     /**
+     * The column <code>DB_ETERNAL.UI_COLUMN.FIXED</code>. 「fixed」- 当前列是否固定
+     */
+    public final TableField<UiColumnRecord, Boolean> FIXED = createField("FIXED", org.jooq.impl.SQLDataType.BIT.defaultValue(org.jooq.impl.DSL.inline("b'0'", org.jooq.impl.SQLDataType.BIT)), this, "「fixed」- 当前列是否固定");
+    /**
      * The column <code>DB_ETERNAL.UI_COLUMN.CLASS_NAME</code>. 「className」- 当前列的特殊CSS类
      */
-    public final TableField<UiColumnRecord, String> CLASS_NAME = createField("CLASS_NAME", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「className」- 当前列的特殊CSS类");
+    public final TableField<UiColumnRecord, String> CLASS_NAME = createField("CLASS_NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「className」- 当前列的特殊CSS类");
+    /**
+     * The column <code>DB_ETERNAL.UI_COLUMN.SORTER</code>. 「sorter」- 当前列是否支持排序
+     */
+    public final TableField<UiColumnRecord, Boolean> SORTER = createField("SORTER", org.jooq.impl.SQLDataType.BIT.defaultValue(org.jooq.impl.DSL.inline("b'0'", org.jooq.impl.SQLDataType.BIT)), this, "「sorter」- 当前列是否支持排序");
+    /**
+     * The column <code>DB_ETERNAL.UI_COLUMN.FILTER_TYPE</code>. 「filterType」- $filter.type 支持列搜索时的搜索类型
+     */
+    public final TableField<UiColumnRecord, String> FILTER_TYPE = createField("FILTER_TYPE", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「filterType」- $filter.type 支持列搜索时的搜索类型");
+    /**
+     * The column <code>DB_ETERNAL.UI_COLUMN.FILTER_CONFIG</code>. 「filterConfig」- $filter.config 列搜索支持时的搜索配置
+     */
+    public final TableField<UiColumnRecord, String> FILTER_CONFIG = createField("FILTER_CONFIG", org.jooq.impl.SQLDataType.CLOB, this, "「filterConfig」- $filter.config 列搜索支持时的搜索配置");
+    /**
+     * The column <code>DB_ETERNAL.UI_COLUMN.EMPTY</code>. 「empty」- $empty 专用
+     */
+    public final TableField<UiColumnRecord, String> EMPTY = createField("EMPTY", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「empty」- $empty 专用");
+    /**
+     * The column <code>DB_ETERNAL.UI_COLUMN.MAPPING</code>. 「mapping」- $mapping专用
+     */
+    public final TableField<UiColumnRecord, String> MAPPING = createField("MAPPING", org.jooq.impl.SQLDataType.CLOB, this, "「mapping」- $mapping专用");
+    /**
+     * The column <code>DB_ETERNAL.UI_COLUMN.CONFIG</code>. 「config」- $config专用
+     */
+    public final TableField<UiColumnRecord, String> CONFIG = createField("CONFIG", org.jooq.impl.SQLDataType.CLOB, this, "「config」- $config专用");
+    /**
+     * The column <code>DB_ETERNAL.UI_COLUMN.FORMAT</code>. 「format」- $format时间格式专用
+     */
+    public final TableField<UiColumnRecord, String> FORMAT = createField("FORMAT", org.jooq.impl.SQLDataType.VARCHAR(128), this, "「format」- $format时间格式专用");
     /**
      * The column <code>DB_ETERNAL.UI_COLUMN.CONTROL_ID</code>. 「controlId」- 关联的控件ID
      */
@@ -147,7 +179,7 @@ public class UiColumn extends TableImpl<UiColumnRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.UI_COLUMN_CONTROL_ID, Indexes.UI_COLUMN_PRIMARY);
+        return Arrays.<Index>asList(Indexes.UI_COLUMN_PRIMARY, Indexes.UI_COLUMN_SIGMA);
     }
 
     /**
@@ -163,7 +195,7 @@ public class UiColumn extends TableImpl<UiColumnRecord> {
      */
     @Override
     public List<UniqueKey<UiColumnRecord>> getKeys() {
-        return Arrays.<UniqueKey<UiColumnRecord>>asList(Keys.KEY_UI_COLUMN_PRIMARY, Keys.KEY_UI_COLUMN_CONTROL_ID);
+        return Arrays.<UniqueKey<UiColumnRecord>>asList(Keys.KEY_UI_COLUMN_PRIMARY, Keys.KEY_UI_COLUMN_SIGMA);
     }
 
     /**
