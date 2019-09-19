@@ -35,7 +35,7 @@ public class UiColumn extends TableImpl<UiColumnRecord> {
      * The reference instance of <code>DB_ETERNAL.UI_COLUMN</code>
      */
     public static final UiColumn UI_COLUMN = new UiColumn();
-    private static final long serialVersionUID = -701733383;
+    private static final long serialVersionUID = 806070319;
     /**
      * The column <code>DB_ETERNAL.UI_COLUMN.KEY</code>. 「key」- 列主键
      */
@@ -179,7 +179,7 @@ public class UiColumn extends TableImpl<UiColumnRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.UI_COLUMN_CONTROL_ID, Indexes.UI_COLUMN_PRIMARY);
+        return Arrays.<Index>asList(Indexes.UI_COLUMN_PRIMARY, Indexes.UI_COLUMN_SIGMA);
     }
 
     /**
@@ -195,7 +195,7 @@ public class UiColumn extends TableImpl<UiColumnRecord> {
      */
     @Override
     public List<UniqueKey<UiColumnRecord>> getKeys() {
-        return Arrays.<UniqueKey<UiColumnRecord>>asList(Keys.KEY_UI_COLUMN_PRIMARY, Keys.KEY_UI_COLUMN_CONTROL_ID);
+        return Arrays.<UniqueKey<UiColumnRecord>>asList(Keys.KEY_UI_COLUMN_PRIMARY, Keys.KEY_UI_COLUMN_SIGMA);
     }
 
     /**

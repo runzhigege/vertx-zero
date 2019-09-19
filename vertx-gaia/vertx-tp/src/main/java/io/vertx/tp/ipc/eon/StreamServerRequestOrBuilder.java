@@ -9,10 +9,12 @@ public interface StreamServerRequestOrBuilder extends
 
   /**
    * <code>.io.vertx.tp.ipc.eon.em.Format response_type = 1;</code>
+   * @return The enum numeric value on the wire for responseType.
    */
   int getResponseTypeValue();
   /**
    * <code>.io.vertx.tp.ipc.eon.em.Format response_type = 1;</code>
+   * @return The responseType.
    */
   io.vertx.tp.ipc.eon.em.Format getResponseType();
 
@@ -42,10 +44,12 @@ public interface StreamServerRequestOrBuilder extends
 
   /**
    * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 3;</code>
+   * @return Whether the envelop field is set.
    */
   boolean hasEnvelop();
   /**
    * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 3;</code>
+   * @return The envelop.
    */
   io.vertx.tp.ipc.eon.IpcEnvelop getEnvelop();
   /**
@@ -55,19 +59,23 @@ public interface StreamServerRequestOrBuilder extends
 
   /**
    * <code>.io.vertx.tp.ipc.eon.em.Compression algorithm = 4;</code>
+   * @return The enum numeric value on the wire for algorithm.
    */
   int getAlgorithmValue();
   /**
    * <code>.io.vertx.tp.ipc.eon.em.Compression algorithm = 4;</code>
+   * @return The algorithm.
    */
   io.vertx.tp.ipc.eon.em.Compression getAlgorithm();
 
   /**
    * <code>.io.vertx.tp.ipc.eon.IpcStatus response_status = 5;</code>
+   * @return Whether the responseStatus field is set.
    */
   boolean hasResponseStatus();
   /**
    * <code>.io.vertx.tp.ipc.eon.IpcStatus response_status = 5;</code>
+   * @return The responseStatus.
    */
   io.vertx.tp.ipc.eon.IpcStatus getResponseStatus();
   /**
