@@ -95,7 +95,14 @@ public abstract class AbstractChannel implements JtChannel {
                         /*
                          * Response here for future custom
                          */
-                        .compose(ActOut::async);
+                        .compose(ActOut::async)
+                        /*
+                         * Error throw out
+                         */
+                        .otherwise(error -> {
+                            error.printStackTrace();
+                            return Envelop.failure(error);
+                        });
             } else {
                 /*
                  * singleton singleton error
