@@ -35,8 +35,8 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
-    public static final Index UI_COLUMN_CONTROL_ID = Indexes0.UI_COLUMN_CONTROL_ID;
     public static final Index UI_COLUMN_PRIMARY = Indexes0.UI_COLUMN_PRIMARY;
+    public static final Index UI_COLUMN_SIGMA = Indexes0.UI_COLUMN_SIGMA;
     public static final Index UI_CONTROL_PRIMARY = Indexes0.UI_CONTROL_PRIMARY;
     public static final Index UI_CONTROL_SIGN = Indexes0.UI_CONTROL_SIGN;
     public static final Index UI_FIELD_FORM_ID = Indexes0.UI_FIELD_FORM_ID;
@@ -53,8 +53,8 @@ public class Indexes {
     // -------------------------------------------------------------------------
 
     private static class Indexes0 {
-        public static Index UI_COLUMN_CONTROL_ID = Internal.createIndex("CONTROL_ID", UiColumn.UI_COLUMN, new OrderField[] { UiColumn.UI_COLUMN.CONTROL_ID, UiColumn.UI_COLUMN.DATA_INDEX }, true);
         public static Index UI_COLUMN_PRIMARY = Internal.createIndex("PRIMARY", UiColumn.UI_COLUMN, new OrderField[] { UiColumn.UI_COLUMN.KEY }, true);
+        public static Index UI_COLUMN_SIGMA = Internal.createIndex("SIGMA", UiColumn.UI_COLUMN, new OrderField[] { UiColumn.UI_COLUMN.SIGMA, UiColumn.UI_COLUMN.CONTROL_ID, UiColumn.UI_COLUMN.DATA_INDEX }, true);
         public static Index UI_CONTROL_PRIMARY = Internal.createIndex("PRIMARY", UiControl.UI_CONTROL, new OrderField[] { UiControl.UI_CONTROL.KEY }, true);
         public static Index UI_CONTROL_SIGN = Internal.createIndex("SIGN", UiControl.UI_CONTROL, new OrderField[] { UiControl.UI_CONTROL.SIGN }, true);
         public static Index UI_FIELD_FORM_ID = Internal.createIndex("FORM_ID", UiField.UI_FIELD, new OrderField[] { UiField.UI_FIELD.FORM_ID, UiField.UI_FIELD.NAME }, true);

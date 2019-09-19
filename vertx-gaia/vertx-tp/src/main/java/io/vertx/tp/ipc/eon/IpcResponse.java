@@ -115,6 +115,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 1;</code>
+   * @return Whether the envelop field is set.
    */
   public boolean hasEnvelop() {
     return envelop_ != null;
@@ -125,6 +126,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 1;</code>
+   * @return The envelop.
    */
   public io.vertx.tp.ipc.eon.IpcEnvelop getEnvelop() {
     return envelop_ == null ? io.vertx.tp.ipc.eon.IpcEnvelop.getDefaultInstance() : envelop_;
@@ -148,6 +150,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>string client_id = 2;</code>
+   * @return The clientId.
    */
   public java.lang.String getClientId() {
     java.lang.Object ref = clientId_;
@@ -167,6 +170,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>string client_id = 2;</code>
+   * @return The bytes for clientId.
    */
   public com.google.protobuf.ByteString
       getClientIdBytes() {
@@ -190,6 +194,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>string oauth_scope = 3;</code>
+   * @return The oauthScope.
    */
   public java.lang.String getOauthScope() {
     java.lang.Object ref = oauthScope_;
@@ -209,6 +214,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>string oauth_scope = 3;</code>
+   * @return The bytes for oauthScope.
    */
   public com.google.protobuf.ByteString
       getOauthScopeBytes() {
@@ -582,6 +588,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 1;</code>
+     * @return Whether the envelop field is set.
      */
     public boolean hasEnvelop() {
       return envelopBuilder_ != null || envelop_ != null;
@@ -592,6 +599,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 1;</code>
+     * @return The envelop.
      */
     public io.vertx.tp.ipc.eon.IpcEnvelop getEnvelop() {
       if (envelopBuilder_ == null) {
@@ -733,6 +741,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string client_id = 2;</code>
+     * @return The clientId.
      */
     public java.lang.String getClientId() {
       java.lang.Object ref = clientId_;
@@ -752,6 +761,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string client_id = 2;</code>
+     * @return The bytes for clientId.
      */
     public com.google.protobuf.ByteString
         getClientIdBytes() {
@@ -772,6 +782,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string client_id = 2;</code>
+     * @param value The clientId to set.
+     * @return This builder for chaining.
      */
     public Builder setClientId(
         java.lang.String value) {
@@ -789,6 +801,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string client_id = 2;</code>
+     * @return This builder for chaining.
      */
     public Builder clearClientId() {
       
@@ -802,6 +815,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string client_id = 2;</code>
+     * @param value The bytes for clientId to set.
+     * @return This builder for chaining.
      */
     public Builder setClientIdBytes(
         com.google.protobuf.ByteString value) {
@@ -822,6 +837,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string oauth_scope = 3;</code>
+     * @return The oauthScope.
      */
     public java.lang.String getOauthScope() {
       java.lang.Object ref = oauthScope_;
@@ -841,6 +857,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string oauth_scope = 3;</code>
+     * @return The bytes for oauthScope.
      */
     public com.google.protobuf.ByteString
         getOauthScopeBytes() {
@@ -861,6 +878,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string oauth_scope = 3;</code>
+     * @param value The oauthScope to set.
+     * @return This builder for chaining.
      */
     public Builder setOauthScope(
         java.lang.String value) {
@@ -878,6 +897,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string oauth_scope = 3;</code>
+     * @return This builder for chaining.
      */
     public Builder clearOauthScope() {
       
@@ -891,6 +911,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string oauth_scope = 3;</code>
+     * @param value The bytes for oauthScope to set.
+     * @return This builder for chaining.
      */
     public Builder setOauthScopeBytes(
         com.google.protobuf.ByteString value) {

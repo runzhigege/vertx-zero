@@ -93,6 +93,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>int32 max_reconnect = 1;</code>
+   * @return The maxReconnect.
    */
   public int getMaxReconnect() {
     return maxReconnect_;
@@ -407,6 +408,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>int32 max_reconnect = 1;</code>
+     * @return The maxReconnect.
      */
     public int getMaxReconnect() {
       return maxReconnect_;
@@ -417,6 +419,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>int32 max_reconnect = 1;</code>
+     * @param value The maxReconnect to set.
+     * @return This builder for chaining.
      */
     public Builder setMaxReconnect(int value) {
       
@@ -430,6 +434,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>int32 max_reconnect = 1;</code>
+     * @return This builder for chaining.
      */
     public Builder clearMaxReconnect() {
       
