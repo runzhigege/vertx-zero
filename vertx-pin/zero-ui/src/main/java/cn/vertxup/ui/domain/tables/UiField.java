@@ -35,7 +35,7 @@ public class UiField extends TableImpl<UiFieldRecord> {
      * The reference instance of <code>DB_ETERNAL.UI_FIELD</code>
      */
     public static final UiField UI_FIELD = new UiField();
-    private static final long serialVersionUID = -25128674;
+    private static final long serialVersionUID = -1917810174;
     /**
      * The column <code>DB_ETERNAL.UI_FIELD.KEY</code>. 「key」- 字段主键
      */
@@ -61,6 +61,10 @@ public class UiField extends TableImpl<UiFieldRecord> {
      */
     public final TableField<UiFieldRecord, Integer> SPAN = createField("SPAN", org.jooq.impl.SQLDataType.INTEGER, this, "「span」- 字段宽度");
     /**
+     * The column <code>DB_ETERNAL.UI_FIELD.HIDDEN</code>. 「hidden」- button专用
+     */
+    public final TableField<UiFieldRecord, Boolean> HIDDEN = createField("HIDDEN", org.jooq.impl.SQLDataType.BIT, this, "「hidden」- button专用");
+    /**
      * The column <code>DB_ETERNAL.UI_FIELD.RENDER</code>. 「render」- 使用的Render函数
      */
     public final TableField<UiFieldRecord, String> RENDER = createField("RENDER", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「render」- 使用的Render函数");
@@ -77,17 +81,13 @@ public class UiField extends TableImpl<UiFieldRecord> {
      */
     public final TableField<UiFieldRecord, String> OPTION_ITEM = createField("OPTION_ITEM", org.jooq.impl.SQLDataType.CLOB, this, "「optionItem」- 字段专用配置");
     /**
-     * The column <code>DB_ETERNAL.UI_FIELD.RULES</code>. 「rules」- 专用的配置，描述规则
+     * The column <code>DB_ETERNAL.UI_FIELD.RULES</code>. 「rules」- optionConfig.rules 验证专用的配置，描述规则
      */
-    public final TableField<UiFieldRecord, String> RULES = createField("RULES", org.jooq.impl.SQLDataType.CLOB, this, "「rules」- 专用的配置，描述规则");
+    public final TableField<UiFieldRecord, String> RULES = createField("RULES", org.jooq.impl.SQLDataType.CLOB, this, "「rules」- optionConfig.rules 验证专用的配置，描述规则");
     /**
-     * The column <code>DB_ETERNAL.UI_FIELD.DATA_EVENT</code>. 「dataEvent」- 当前字段的事件配置，只有名称为 $button 时生效
+     * The column <code>DB_ETERNAL.UI_FIELD.CONTROL_ID</code>. 「controlId」- 关联的表单ID
      */
-    public final TableField<UiFieldRecord, String> DATA_EVENT = createField("DATA_EVENT", org.jooq.impl.SQLDataType.CLOB, this, "「dataEvent」- 当前字段的事件配置，只有名称为 $button 时生效");
-    /**
-     * The column <code>DB_ETERNAL.UI_FIELD.FORM_ID</code>. 「formId」- 关联的表单ID
-     */
-    public final TableField<UiFieldRecord, String> FORM_ID = createField("FORM_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「formId」- 关联的表单ID");
+    public final TableField<UiFieldRecord, String> CONTROL_ID = createField("CONTROL_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「controlId」- 关联的表单ID");
     /**
      * The column <code>DB_ETERNAL.UI_FIELD.ACTIVE</code>. 「active」- 是否启用
      */
@@ -171,7 +171,7 @@ public class UiField extends TableImpl<UiFieldRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.UI_FIELD_FORM_ID, Indexes.UI_FIELD_PRIMARY);
+        return Arrays.<Index>asList(Indexes.UI_FIELD_CONTROL_ID, Indexes.UI_FIELD_PRIMARY);
     }
 
     /**
@@ -187,7 +187,7 @@ public class UiField extends TableImpl<UiFieldRecord> {
      */
     @Override
     public List<UniqueKey<UiFieldRecord>> getKeys() {
-        return Arrays.<UniqueKey<UiFieldRecord>>asList(Keys.KEY_UI_FIELD_PRIMARY, Keys.KEY_UI_FIELD_FORM_ID);
+        return Arrays.<UniqueKey<UiFieldRecord>>asList(Keys.KEY_UI_FIELD_PRIMARY, Keys.KEY_UI_FIELD_CONTROL_ID);
     }
 
     /**

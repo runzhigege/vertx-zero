@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implements IUiColumn {
 
-    private static final long serialVersionUID = 145343959;
+    private static final long serialVersionUID = 1417499918;
 
     /**
      * Setter for <code>DB_ETERNAL.UI_COLUMN.KEY</code>. 「key」- 列主键
@@ -252,11 +252,28 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
     }
 
     /**
+     * Setter for <code>DB_ETERNAL.UI_COLUMN.OPTION</code>. 「option」- $option专用，executor时
+     */
+    @Override
+    public UiColumnRecord setOption(String value) {
+        set(13, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_COLUMN.OPTION</code>. 「option」- $option专用，executor时
+     */
+    @Override
+    public String getOption() {
+        return (String) get(13);
+    }
+
+    /**
      * Setter for <code>DB_ETERNAL.UI_COLUMN.FORMAT</code>. 「format」- $format时间格式专用
      */
     @Override
     public UiColumnRecord setFormat(String value) {
-        set(13, value);
+        set(14, value);
         return this;
     }
 
@@ -265,7 +282,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public String getFormat() {
-        return (String) get(13);
+        return (String) get(14);
     }
 
     /**
@@ -273,7 +290,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public UiColumnRecord setControlId(String value) {
-        set(14, value);
+        set(15, value);
         return this;
     }
 
@@ -282,7 +299,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public String getControlId() {
-        return (String) get(14);
+        return (String) get(15);
     }
 
     /**
@@ -290,7 +307,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public UiColumnRecord setActive(Boolean value) {
-        set(15, value);
+        set(16, value);
         return this;
     }
 
@@ -299,7 +316,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public Boolean getActive() {
-        return (Boolean) get(15);
+        return (Boolean) get(16);
     }
 
     /**
@@ -307,7 +324,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public UiColumnRecord setSigma(String value) {
-        set(16, value);
+        set(17, value);
         return this;
     }
 
@@ -316,7 +333,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public String getSigma() {
-        return (String) get(16);
+        return (String) get(17);
     }
 
     /**
@@ -324,7 +341,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public UiColumnRecord setMetadata(String value) {
-        set(17, value);
+        set(18, value);
         return this;
     }
 
@@ -333,7 +350,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public String getMetadata() {
-        return (String) get(17);
+        return (String) get(18);
     }
 
     /**
@@ -341,7 +358,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public UiColumnRecord setLanguage(String value) {
-        set(18, value);
+        set(19, value);
         return this;
     }
 
@@ -350,7 +367,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public String getLanguage() {
-        return (String) get(18);
+        return (String) get(19);
     }
 
     /**
@@ -358,7 +375,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public UiColumnRecord setCreatedAt(LocalDateTime value) {
-        set(19, value);
+        set(20, value);
         return this;
     }
 
@@ -367,7 +384,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(19);
+        return (LocalDateTime) get(20);
     }
 
     /**
@@ -375,7 +392,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public UiColumnRecord setCreatedBy(String value) {
-        set(20, value);
+        set(21, value);
         return this;
     }
 
@@ -384,7 +401,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public String getCreatedBy() {
-        return (String) get(20);
+        return (String) get(21);
     }
 
     /**
@@ -392,7 +409,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public UiColumnRecord setUpdatedAt(LocalDateTime value) {
-        set(21, value);
+        set(22, value);
         return this;
     }
 
@@ -401,7 +418,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public LocalDateTime getUpdatedAt() {
-        return (LocalDateTime) get(21);
+        return (LocalDateTime) get(22);
     }
 
     /**
@@ -409,7 +426,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public UiColumnRecord setUpdatedBy(String value) {
-        set(22, value);
+        set(23, value);
         return this;
     }
 
@@ -418,7 +435,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
      */
     @Override
     public String getUpdatedBy() {
-        return (String) get(22);
+        return (String) get(23);
     }
 
     // -------------------------------------------------------------------------
@@ -455,6 +472,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
         setEmpty(from.getEmpty());
         setMapping(from.getMapping());
         setConfig(from.getConfig());
+        setOption(from.getOption());
         setFormat(from.getFormat());
         setControlId(from.getControlId());
         setActive(from.getActive());
@@ -490,7 +508,7 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
     /**
      * Create a detached, initialised UiColumnRecord
      */
-    public UiColumnRecord(String key, String title, String dataIndex, String render, Integer width, Boolean fixed, String className, Boolean sorter, String filterType, String filterConfig, String empty, String mapping, String config, String format, String controlId, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public UiColumnRecord(String key, String title, String dataIndex, String render, Integer width, Boolean fixed, String className, Boolean sorter, String filterType, String filterConfig, String empty, String mapping, String config, String option, String format, String controlId, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(UiColumn.UI_COLUMN);
 
         set(0, key);
@@ -506,15 +524,16 @@ public class UiColumnRecord extends UpdatableRecordImpl<UiColumnRecord> implemen
         set(10, empty);
         set(11, mapping);
         set(12, config);
-        set(13, format);
-        set(14, controlId);
-        set(15, active);
-        set(16, sigma);
-        set(17, metadata);
-        set(18, language);
-        set(19, createdAt);
-        set(20, createdBy);
-        set(21, updatedAt);
-        set(22, updatedBy);
+        set(13, option);
+        set(14, format);
+        set(15, controlId);
+        set(16, active);
+        set(17, sigma);
+        set(18, metadata);
+        set(19, language);
+        set(20, createdAt);
+        set(21, createdBy);
+        set(22, updatedAt);
+        set(23, updatedBy);
     }
 }

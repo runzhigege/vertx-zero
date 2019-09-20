@@ -26,13 +26,16 @@ CREATE TABLE IF NOT EXISTS UI_COLUMN
     `EMPTY`         VARCHAR(64) COMMENT '「empty」- $empty 专用',
     `MAPPING`       TEXT COMMENT '「mapping」- $mapping专用',
     `CONFIG`        TEXT COMMENT '「config」- $config专用',
+    `OPTION`        TEXT COMMENT '「option」- $option专用，executor时',
     `FORMAT`        VARCHAR(128) COMMENT '「format」- $format时间格式专用',
+
     /*
      * CONTROL_ID 主要包含两种
      * 1）GLOBAL的，如果是 identifier 的值则表示当前模型的全列
      * 2）UUID格式，根据单个 control 配置的值来表示
      */
     `CONTROL_ID`    VARCHAR(36) COMMENT '「controlId」- 关联的控件ID',
+
     -- 特殊字段
     `ACTIVE`        BIT         DEFAULT NULL COMMENT '「active」- 是否启用',
     `SIGMA`         VARCHAR(32) DEFAULT NULL COMMENT '「sigma」- 统一标识',
