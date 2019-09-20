@@ -34,34 +34,44 @@ public interface IUiForm extends Serializable {
     public String getKey();
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_FORM.NAME</code>. 「name」- 应用程序名称
+     * Setter for <code>DB_ETERNAL.UI_FORM.NAME</code>. 「name」- 表单名称
      */
     public IUiForm setName(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_FORM.NAME</code>. 「name」- 应用程序名称
+     * Getter for <code>DB_ETERNAL.UI_FORM.NAME</code>. 「name」- 表单名称
      */
     public String getName();
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_FORM.CODE</code>. 「code」- 应用程序编码
+     * Setter for <code>DB_ETERNAL.UI_FORM.CODE</code>. 「code」- 表单系统编码
      */
     public IUiForm setCode(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_FORM.CODE</code>. 「code」- 应用程序编码
+     * Getter for <code>DB_ETERNAL.UI_FORM.CODE</code>. 「code」- 表单系统编码
      */
     public String getCode();
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_FORM.WINDOW</code>. 「window」- Form对应的窗口配置
+     * Setter for <code>DB_ETERNAL.UI_FORM.WINDOW</code>. 「window」- window, Form对应的窗口配置
      */
     public IUiForm setWindow(Integer value);
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_FORM.WINDOW</code>. 「window」- Form对应的窗口配置
+     * Getter for <code>DB_ETERNAL.UI_FORM.WINDOW</code>. 「window」- window, Form对应的窗口配置
      */
     public Integer getWindow();
+
+    /**
+     * Setter for <code>DB_ETERNAL.UI_FORM.COLUMNS</code>. 「columns」- columns, Form对应的配置
+     */
+    public IUiForm setColumns(Integer value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_FORM.COLUMNS</code>. 「columns」- columns, Form对应的配置
+     */
+    public Integer getColumns();
 
     /**
      * Setter for <code>DB_ETERNAL.UI_FORM.HIDDEN</code>. 「hidden」- 隐藏字段专用配置
@@ -82,26 +92,6 @@ public interface IUiForm extends Serializable {
      * Getter for <code>DB_ETERNAL.UI_FORM.ROW</code>. 「rowConfig/rowClass」- 行专用配置
      */
     public String getRow();
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_FORM.UI</code>. 「ui」根据UI_FIELD中的内容生成
-     */
-    public IUiForm setUi(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_FORM.UI</code>. 「ui」根据UI_FIELD中的内容生成
-     */
-    public String getUi();
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_FORM.TYPE</code>. 「type」- 表单类型，STANDARD / SUBFORM 
-     */
-    public IUiForm setType(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_FORM.TYPE</code>. 「type」- 表单类型，STANDARD / SUBFORM 
-     */
-    public String getType();
 
     /**
      * Setter for <code>DB_ETERNAL.UI_FORM.ACTIVE</code>. 「active」- 是否启用
@@ -202,10 +192,9 @@ public interface IUiForm extends Serializable {
         setName(json.getString("NAME"));
         setCode(json.getString("CODE"));
         setWindow(json.getInteger("WINDOW"));
+        setColumns(json.getInteger("COLUMNS"));
         setHidden(json.getString("HIDDEN"));
         setRow(json.getString("ROW"));
-        setUi(json.getString("UI"));
-        setType(json.getString("TYPE"));
         setActive(json.getBoolean("ACTIVE"));
         setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
@@ -224,10 +213,9 @@ public interface IUiForm extends Serializable {
         json.put("NAME",getName());
         json.put("CODE",getCode());
         json.put("WINDOW",getWindow());
+        json.put("COLUMNS",getColumns());
         json.put("HIDDEN",getHidden());
         json.put("ROW",getRow());
-        json.put("UI",getUi());
-        json.put("TYPE",getType());
         json.put("ACTIVE",getActive());
         json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());

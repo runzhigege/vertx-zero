@@ -9,7 +9,13 @@ import cn.vertxup.ui.domain.tables.UiControl;
 import cn.vertxup.ui.domain.tables.UiField;
 import cn.vertxup.ui.domain.tables.UiForm;
 import cn.vertxup.ui.domain.tables.UiLayout;
+import cn.vertxup.ui.domain.tables.UiList;
+import cn.vertxup.ui.domain.tables.UiOp;
 import cn.vertxup.ui.domain.tables.UiPage;
+import cn.vertxup.ui.domain.tables.VFragment;
+import cn.vertxup.ui.domain.tables.VQuery;
+import cn.vertxup.ui.domain.tables.VSearch;
+import cn.vertxup.ui.domain.tables.VTable;
 
 import javax.annotation.Generated;
 
@@ -53,7 +59,37 @@ public class Tables {
     public static final UiLayout UI_LAYOUT = cn.vertxup.ui.domain.tables.UiLayout.UI_LAYOUT;
 
     /**
+     * The table <code>DB_ETERNAL.UI_LIST</code>.
+     */
+    public static final UiList UI_LIST = cn.vertxup.ui.domain.tables.UiList.UI_LIST;
+
+    /**
+     * The table <code>DB_ETERNAL.UI_OP</code>.
+     */
+    public static final UiOp UI_OP = cn.vertxup.ui.domain.tables.UiOp.UI_OP;
+
+    /**
      * The table <code>DB_ETERNAL.UI_PAGE</code>.
      */
     public static final UiPage UI_PAGE = cn.vertxup.ui.domain.tables.UiPage.UI_PAGE;
+
+    /**
+     * The table <code>DB_ETERNAL.V_FRAGMENT</code>.
+     */
+    public static final VFragment V_FRAGMENT = cn.vertxup.ui.domain.tables.VFragment.V_FRAGMENT;
+
+    /**
+     * The table <code>DB_ETERNAL.V_QUERY</code>.
+     */
+    public static final VQuery V_QUERY = cn.vertxup.ui.domain.tables.VQuery.V_QUERY;
+
+    /**
+     * The table <code>DB_ETERNAL.V_SEARCH</code>.
+     */
+    public static final VSearch V_SEARCH = cn.vertxup.ui.domain.tables.VSearch.V_SEARCH;
+
+    /**
+     * The table <code>DB_ETERNAL.V_TABLE</code>.
+     */
+    public static final VTable V_TABLE = cn.vertxup.ui.domain.tables.VTable.V_TABLE;
 }
