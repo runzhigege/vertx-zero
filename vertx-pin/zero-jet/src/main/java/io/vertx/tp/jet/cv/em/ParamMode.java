@@ -6,4 +6,5 @@ public enum ParamMode {
     QUERY,          // QUERY
     BODY,           // BODY
     DEFINE,         // DEFINE
+    FILE,           // FILE for uploading
 }

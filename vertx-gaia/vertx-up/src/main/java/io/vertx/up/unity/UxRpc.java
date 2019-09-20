@@ -1,11 +1,12 @@
 package io.vertx.up.unity;
 
 import io.vertx.core.Future;
+import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.log.Annal;
 import io.vertx.tp.plugin.rpc.RpcClient;
 import io.vertx.tp.plugin.rpc.RpcInfix;
+import io.vertx.up.log.Annal;
 
 class UxRpc {
 
@@ -16,16 +17,16 @@ class UxRpc {
     public static Future<JsonObject> thenRpc(final String name,
                                              final String address,
                                              final JsonObject params) {
-        final Future<JsonObject> result = Future.future();
+        final Promise<JsonObject> promise = Promise.promise();
         CLIENT.connect(name, address, params, handler -> {
             if (handler.succeeded()) {
-                result.complete(handler.result());
+                promise.complete(handler.result());
                 LOGGER.info(Info.RPC_RESULT, name, address, params, handler.result(), String.valueOf(CLIENT.hashCode()));
             } else {
                 LOGGER.jvm(handler.cause());
             }
         });
-        return result;
+        return promise.future();
     }
 
     public static Future<JsonObject> fnRpc(
