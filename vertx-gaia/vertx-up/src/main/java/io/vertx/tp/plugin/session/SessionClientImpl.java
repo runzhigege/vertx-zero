@@ -1,6 +1,7 @@
 package io.vertx.tp.plugin.session;
 
 import io.vertx.core.Future;
+import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Session;
@@ -36,7 +37,7 @@ public class SessionClientImpl implements SessionClient {
                 STORE = ClusteredSessionStore.create(this.vertx);
             } else {
                 final String store = config.getString("store");
-                Fn.outWeb(Ut.isNil(store), _500SessionClientInitException.class, getClass());
+                Fn.outWeb(Ut.isNil(store), _500SessionClientInitException.class, this.getClass());
                 LOGGER.info(Info.SESSION_STORE, store);
                 /*
                  * SessionStore -> Defined here
@@ -79,15 +80,15 @@ public class SessionClientImpl implements SessionClient {
 
     @Override
     public Future<Session> get(final String id) {
-        final Future<Session> future = Future.future();
+        final Promise<Session> promise = Promise.promise();
         STORE.get(id, result -> {
             if (result.succeeded()) {
-                future.complete(result.result());
+                promise.complete(result.result());
             } else {
-                future.complete(null);
+                promise.complete(null);
             }
         });
-        return future;
+        return promise.future();
     }
 
     @Override

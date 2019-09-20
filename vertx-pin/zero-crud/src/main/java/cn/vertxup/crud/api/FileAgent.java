@@ -10,13 +10,15 @@ import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Adjust;
 import io.vertx.up.annotations.Codex;
 import io.vertx.up.annotations.EndPoint;
+import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.eon.Orders;
 import io.vertx.up.log.Annal;
-import io.vertx.up.unity.Uson;
 import io.vertx.up.unity.Ux;
+import io.vertx.up.util.Ut;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Objects;
 
 /*
  * Export / Import file here for processing
@@ -48,9 +50,18 @@ public class FileAgent {
     public JsonObject exportFile(@PathParam("actor") final String actor,
                                  @BodyParam final JsonObject condition) {
         /* Exported columns here for future calculation */
-        final JsonArray columns = condition.getJsonArray("columns");
-        /* Remove columns here and set criteria as condition */
-        final JsonObject query = Uson.create(condition).remove("columns").to();
+        JsonArray columns = condition.getJsonArray("columns");
+        if (Objects.isNull(columns)) {
+            columns = new JsonArray();
+        }
+        /* Remove columns here and set criteria as condition
+         * Here extract query by `criteria` node, it will be synced with
+         * dynamic exporting here.
+         **/
+        JsonObject query = condition.getJsonObject(Inquiry.KEY_CRITERIA);
+        if (Ut.isNil(query)) {
+            query = new JsonObject();
+        }
         /*
          * Toggle format here
          * {

@@ -4,8 +4,10 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.ID;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.util.Ut;
 import io.vertx.zero.exception.ActSpecificationException;
 
+import java.io.File;
 import java.io.Serializable;
 
 /*
@@ -30,6 +32,7 @@ public class ActIn implements Serializable {
     /* Raw data of `Envelop` object/reference */
     private final transient Envelop envelop;
     private final boolean isBatch;
+    private final transient ActFile file;
     private transient ActJObject json;
     private transient ActJArray jarray;
     private transient Record definition;
@@ -56,10 +59,33 @@ public class ActIn implements Serializable {
             this.json = new ActJObject(envelop);
             this.isBatch = false;           // Single
         }
+        /*
+         * Optional to stored file here
+         */
+        final JsonArray stream = data.getJsonArray(ID.PARAM_STREAM);
+        this.file = new ActFile(stream);
     }
 
     public Envelop getEnvelop() {
         return this.envelop;
+    }
+
+    public JsonObject getJObject() {
+        final JsonObject data = this.envelop.data();
+        if (Ut.notNil(data) && data.containsKey(ID.PARAM_BODY)) {
+            return data.getJsonObject(ID.PARAM_BODY);
+        } else {
+            return new JsonObject();
+        }
+    }
+
+    public JsonArray getJArray() {
+        final JsonObject data = this.envelop.data();
+        if (Ut.notNil(data) && data.containsKey(ID.PARAM_BODY)) {
+            return data.getJsonArray(ID.PARAM_BODY);
+        } else {
+            return new JsonArray();
+        }
     }
 
     public JsonObject getQuery() {
@@ -70,6 +96,10 @@ public class ActIn implements Serializable {
     public Record getRecord() {
         Fn.outUp(this.isBatch, ActSpecificationException.class, this.getClass(), this.isBatch);
         return this.json.getRecord(this.definition);
+    }
+
+    public File[] getFiles() {
+        return this.file.getFiles();
     }
 
     public Record[] getRecords() {

@@ -2,6 +2,7 @@ package io.vertx.tp.plugin.excel;
 
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.AsyncResult;
+import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
@@ -49,6 +50,8 @@ public interface ExcelClient extends TpClient<ExcelClient> {
 
     @Fluent
     ExcelClient exportTable(String identifier, JsonArray data, Handler<AsyncResult<Buffer>> handler);
+
+    Future<Buffer> exportTable(String identifier, JsonArray data);
 
     @Fluent
     <T> ExcelClient importTable(String tableOnly, final String filename, Handler<AsyncResult<Set<T>>> handler);
