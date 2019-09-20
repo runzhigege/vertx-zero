@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiField implements IUiField {
 
-    private static final long serialVersionUID = 1906995700;
+    private static final long serialVersionUID = 1595691141;
 
     private String        key;
     private Integer       xPoint;
@@ -32,13 +32,13 @@ public class UiField implements IUiField {
     private String        label;
     private String        name;
     private Integer       span;
+    private Boolean       hidden;
     private String        render;
     private String        optionJsx;
     private String        optionConfig;
     private String        optionItem;
     private String        rules;
-    private String        dataEvent;
-    private String        formId;
+    private String        controlId;
     private Boolean       active;
     private String        sigma;
     private String        metadata;
@@ -57,13 +57,13 @@ public class UiField implements IUiField {
         this.label = value.label;
         this.name = value.name;
         this.span = value.span;
+        this.hidden = value.hidden;
         this.render = value.render;
         this.optionJsx = value.optionJsx;
         this.optionConfig = value.optionConfig;
         this.optionItem = value.optionItem;
         this.rules = value.rules;
-        this.dataEvent = value.dataEvent;
-        this.formId = value.formId;
+        this.controlId = value.controlId;
         this.active = value.active;
         this.sigma = value.sigma;
         this.metadata = value.metadata;
@@ -81,13 +81,13 @@ public class UiField implements IUiField {
         String        label,
         String        name,
         Integer       span,
+        Boolean       hidden,
         String        render,
         String        optionJsx,
         String        optionConfig,
         String        optionItem,
         String        rules,
-        String        dataEvent,
-        String        formId,
+        String        controlId,
         Boolean       active,
         String        sigma,
         String        metadata,
@@ -103,13 +103,13 @@ public class UiField implements IUiField {
         this.label = label;
         this.name = name;
         this.span = span;
+        this.hidden = hidden;
         this.render = render;
         this.optionJsx = optionJsx;
         this.optionConfig = optionConfig;
         this.optionItem = optionItem;
         this.rules = rules;
-        this.dataEvent = dataEvent;
-        this.formId = formId;
+        this.controlId = controlId;
         this.active = active;
         this.sigma = sigma;
         this.metadata = metadata;
@@ -187,6 +187,17 @@ public class UiField implements IUiField {
     }
 
     @Override
+    public Boolean getHidden() {
+        return this.hidden;
+    }
+
+    @Override
+    public UiField setHidden(Boolean hidden) {
+        this.hidden = hidden;
+        return this;
+    }
+
+    @Override
     public String getRender() {
         return this.render;
     }
@@ -242,24 +253,13 @@ public class UiField implements IUiField {
     }
 
     @Override
-    public String getDataEvent() {
-        return this.dataEvent;
+    public String getControlId() {
+        return this.controlId;
     }
 
     @Override
-    public UiField setDataEvent(String dataEvent) {
-        this.dataEvent = dataEvent;
-        return this;
-    }
-
-    @Override
-    public String getFormId() {
-        return this.formId;
-    }
-
-    @Override
-    public UiField setFormId(String formId) {
-        this.formId = formId;
+    public UiField setControlId(String controlId) {
+        this.controlId = controlId;
         return this;
     }
 
@@ -361,13 +361,13 @@ public class UiField implements IUiField {
         sb.append(", ").append(label);
         sb.append(", ").append(name);
         sb.append(", ").append(span);
+        sb.append(", ").append(hidden);
         sb.append(", ").append(render);
         sb.append(", ").append(optionJsx);
         sb.append(", ").append(optionConfig);
         sb.append(", ").append(optionItem);
         sb.append(", ").append(rules);
-        sb.append(", ").append(dataEvent);
-        sb.append(", ").append(formId);
+        sb.append(", ").append(controlId);
         sb.append(", ").append(active);
         sb.append(", ").append(sigma);
         sb.append(", ").append(metadata);
@@ -396,13 +396,13 @@ public class UiField implements IUiField {
         setLabel(from.getLabel());
         setName(from.getName());
         setSpan(from.getSpan());
+        setHidden(from.getHidden());
         setRender(from.getRender());
         setOptionJsx(from.getOptionJsx());
         setOptionConfig(from.getOptionConfig());
         setOptionItem(from.getOptionItem());
         setRules(from.getRules());
-        setDataEvent(from.getDataEvent());
-        setFormId(from.getFormId());
+        setControlId(from.getControlId());
         setActive(from.getActive());
         setSigma(from.getSigma());
         setMetadata(from.getMetadata());
