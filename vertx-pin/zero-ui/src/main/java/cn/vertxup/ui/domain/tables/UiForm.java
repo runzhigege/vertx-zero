@@ -35,23 +35,27 @@ public class UiForm extends TableImpl<UiFormRecord> {
      * The reference instance of <code>DB_ETERNAL.UI_FORM</code>
      */
     public static final UiForm UI_FORM = new UiForm();
-    private static final long serialVersionUID = -579871050;
+    private static final long serialVersionUID = -236613415;
     /**
      * The column <code>DB_ETERNAL.UI_FORM.KEY</code>. 「key」- 主键
      */
     public final TableField<UiFormRecord, String> KEY = createField("KEY", org.jooq.impl.SQLDataType.VARCHAR(36).nullable(false), this, "「key」- 主键");
     /**
-     * The column <code>DB_ETERNAL.UI_FORM.NAME</code>. 「name」- 应用程序名称
+     * The column <code>DB_ETERNAL.UI_FORM.NAME</code>. 「name」- 表单名称
      */
-    public final TableField<UiFormRecord, String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「name」- 应用程序名称");
+    public final TableField<UiFormRecord, String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「name」- 表单名称");
     /**
-     * The column <code>DB_ETERNAL.UI_FORM.CODE</code>. 「code」- 应用程序编码
+     * The column <code>DB_ETERNAL.UI_FORM.CODE</code>. 「code」- 表单系统编码
      */
-    public final TableField<UiFormRecord, String> CODE = createField("CODE", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「code」- 应用程序编码");
+    public final TableField<UiFormRecord, String> CODE = createField("CODE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「code」- 表单系统编码");
     /**
-     * The column <code>DB_ETERNAL.UI_FORM.WINDOW</code>. 「window」- Form对应的窗口配置
+     * The column <code>DB_ETERNAL.UI_FORM.WINDOW</code>. 「window」- window, Form对应的窗口配置
      */
-    public final TableField<UiFormRecord, Integer> WINDOW = createField("WINDOW", org.jooq.impl.SQLDataType.INTEGER, this, "「window」- Form对应的窗口配置");
+    public final TableField<UiFormRecord, Integer> WINDOW = createField("WINDOW", org.jooq.impl.SQLDataType.INTEGER, this, "「window」- window, Form对应的窗口配置");
+    /**
+     * The column <code>DB_ETERNAL.UI_FORM.COLUMNS</code>. 「columns」- columns, Form对应的配置
+     */
+    public final TableField<UiFormRecord, Integer> COLUMNS = createField("COLUMNS", org.jooq.impl.SQLDataType.INTEGER, this, "「columns」- columns, Form对应的配置");
     /**
      * The column <code>DB_ETERNAL.UI_FORM.HIDDEN</code>. 「hidden」- 隐藏字段专用配置
      */
@@ -60,14 +64,6 @@ public class UiForm extends TableImpl<UiFormRecord> {
      * The column <code>DB_ETERNAL.UI_FORM.ROW</code>. 「rowConfig/rowClass」- 行专用配置
      */
     public final TableField<UiFormRecord, String> ROW = createField("ROW", org.jooq.impl.SQLDataType.CLOB, this, "「rowConfig/rowClass」- 行专用配置");
-    /**
-     * The column <code>DB_ETERNAL.UI_FORM.UI</code>. 「ui」根据UI_FIELD中的内容生成
-     */
-    public final TableField<UiFormRecord, String> UI = createField("UI", org.jooq.impl.SQLDataType.CLOB, this, "「ui」根据UI_FIELD中的内容生成");
-    /**
-     * The column <code>DB_ETERNAL.UI_FORM.TYPE</code>. 「type」- 表单类型，STANDARD / SUBFORM
-     */
-    public final TableField<UiFormRecord, String> TYPE = createField("TYPE", org.jooq.impl.SQLDataType.VARCHAR(20), this, "「type」- 表单类型，STANDARD / SUBFORM ");
     /**
      * The column <code>DB_ETERNAL.UI_FORM.ACTIVE</code>. 「active」- 是否启用
      */

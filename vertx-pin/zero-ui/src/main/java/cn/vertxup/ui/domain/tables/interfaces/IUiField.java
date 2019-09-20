@@ -84,6 +84,16 @@ public interface IUiField extends Serializable {
     public Integer getSpan();
 
     /**
+     * Setter for <code>DB_ETERNAL.UI_FIELD.HIDDEN</code>. 「hidden」- button专用
+     */
+    public IUiField setHidden(Boolean value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_FIELD.HIDDEN</code>. 「hidden」- button专用
+     */
+    public Boolean getHidden();
+
+    /**
      * Setter for <code>DB_ETERNAL.UI_FIELD.RENDER</code>. 「render」- 使用的Render函数
      */
     public IUiField setRender(String value);
@@ -124,34 +134,24 @@ public interface IUiField extends Serializable {
     public String getOptionItem();
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_FIELD.RULES</code>. 「rules」- 专用的配置，描述规则
+     * Setter for <code>DB_ETERNAL.UI_FIELD.RULES</code>. 「rules」- optionConfig.rules 验证专用的配置，描述规则
      */
     public IUiField setRules(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_FIELD.RULES</code>. 「rules」- 专用的配置，描述规则
+     * Getter for <code>DB_ETERNAL.UI_FIELD.RULES</code>. 「rules」- optionConfig.rules 验证专用的配置，描述规则
      */
     public String getRules();
 
     /**
-     * Setter for <code>DB_ETERNAL.UI_FIELD.DATA_EVENT</code>. 「dataEvent」- 当前字段的事件配置，只有名称为 $button 时生效
+     * Setter for <code>DB_ETERNAL.UI_FIELD.CONTROL_ID</code>. 「controlId」- 关联的表单ID
      */
-    public IUiField setDataEvent(String value);
+    public IUiField setControlId(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.UI_FIELD.DATA_EVENT</code>. 「dataEvent」- 当前字段的事件配置，只有名称为 $button 时生效
+     * Getter for <code>DB_ETERNAL.UI_FIELD.CONTROL_ID</code>. 「controlId」- 关联的表单ID
      */
-    public String getDataEvent();
-
-    /**
-     * Setter for <code>DB_ETERNAL.UI_FIELD.FORM_ID</code>. 「formId」- 关联的表单ID
-     */
-    public IUiField setFormId(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.UI_FIELD.FORM_ID</code>. 「formId」- 关联的表单ID
-     */
-    public String getFormId();
+    public String getControlId();
 
     /**
      * Setter for <code>DB_ETERNAL.UI_FIELD.ACTIVE</code>. 「active」- 是否启用
@@ -254,13 +254,13 @@ public interface IUiField extends Serializable {
         setLabel(json.getString("LABEL"));
         setName(json.getString("NAME"));
         setSpan(json.getInteger("SPAN"));
+        setHidden(json.getBoolean("HIDDEN"));
         setRender(json.getString("RENDER"));
         setOptionJsx(json.getString("OPTION_JSX"));
         setOptionConfig(json.getString("OPTION_CONFIG"));
         setOptionItem(json.getString("OPTION_ITEM"));
         setRules(json.getString("RULES"));
-        setDataEvent(json.getString("DATA_EVENT"));
-        setFormId(json.getString("FORM_ID"));
+        setControlId(json.getString("CONTROL_ID"));
         setActive(json.getBoolean("ACTIVE"));
         setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
@@ -281,13 +281,13 @@ public interface IUiField extends Serializable {
         json.put("LABEL",getLabel());
         json.put("NAME",getName());
         json.put("SPAN",getSpan());
+        json.put("HIDDEN",getHidden());
         json.put("RENDER",getRender());
         json.put("OPTION_JSX",getOptionJsx());
         json.put("OPTION_CONFIG",getOptionConfig());
         json.put("OPTION_ITEM",getOptionItem());
         json.put("RULES",getRules());
-        json.put("DATA_EVENT",getDataEvent());
-        json.put("FORM_ID",getFormId());
+        json.put("CONTROL_ID",getControlId());
         json.put("ACTIVE",getActive());
         json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());
