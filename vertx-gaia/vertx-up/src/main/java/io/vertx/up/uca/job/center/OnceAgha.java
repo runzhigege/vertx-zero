@@ -1,6 +1,7 @@
 package io.vertx.up.uca.job.center;
 
 import io.vertx.core.Future;
+import io.vertx.core.Promise;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.em.JobStatus;
 
@@ -19,28 +20,28 @@ class OnceAgha extends AbstractAgha {
          * 3. This kind fo task must be triggered, could not be in plan here. It's not needed to call
          *    Interval to process task.
          * */
-        final Future<Long> future = Future.future();
-        interval().startAt((timeId) -> {
+        final Promise<Long> promise = Promise.promise();
+        this.interval().startAt((timeId) -> {
             if (JobStatus.STARTING == mission.getStatus()) {
                 /*
                  * Preparing for job
                  **/
-                preparing(mission);
-                future.complete(timeId);
+                this.preparing(mission);
+                promise.complete(timeId);
             } else if (JobStatus.READY == mission.getStatus()) {
                 /*
                  * Running the job next time when current job get event
                  * from event bus trigger
                  */
-                working(mission).compose(envelop -> {
+                this.working(mission).compose(envelop -> {
                     /*
                      * Complete future and returned: Async
                      */
-                    future.complete(timeId);
+                    promise.complete(timeId);
                     return Future.succeededFuture(envelop);
                 });
             }
         });
-        return future;
+        return promise.future();
     }
 }

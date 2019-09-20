@@ -1,10 +1,7 @@
 package io.vertx.up.unity;
 
 import io.reactivex.Observable;
-import io.vertx.core.AsyncResult;
-import io.vertx.core.CompositeFuture;
-import io.vertx.core.Future;
-import io.vertx.core.Handler;
+import io.vertx.core.*;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.exception.WebException;
@@ -31,14 +28,14 @@ class Fluctuate {
                     .filter(Objects::nonNull)
                     .subscribe(secondFutures::add)
                     .dispose();
-            final Future<List<T>> result = Future.future();
+            final Promise<List<T>> result = Promise.promise();
             CompositeFuture.all(secondFutures).setHandler(res -> {
                 final List<S> secondary = res.result().list();
                 // Zipper Operation, the base list is first.
                 final List<T> completed = Ut.elementZip(first, secondary, mergeFun);
                 result.complete(completed);
             });
-            return result;
+            return result.future();
         });
     }
 
@@ -54,14 +51,14 @@ class Fluctuate {
                     .map(generateFun::apply)
                     .subscribe(secondFutures::add)
                     .dispose();
-            final Future<JsonArray> result = Future.future();
+            final Promise<JsonArray> result = Promise.promise();
             CompositeFuture.all(secondFutures).setHandler(res -> {
                 final List<JsonArray> secondary = res.result().list();
                 // Zipper Operation, the base list is first
                 final List<JsonObject> completed = Ut.elementZip(first.getList(), secondary, mergeFun);
                 result.complete(new JsonArray(completed));
             });
-            return result;
+            return result.future();
         });
     }
 
@@ -77,27 +74,27 @@ class Fluctuate {
                     .map(generateFun::apply)
                     .subscribe(secondFutures::add)
                     .dispose();
-            final Future<JsonArray> result = Future.future();
+            final Promise<JsonArray> result = Promise.promise();
             CompositeFuture.all(secondFutures).setHandler(res -> {
                 final List<JsonObject> secondary = res.result().list();
                 // Zipper Operation, the base list is first
                 final List<JsonObject> completed = Ut.elementZip(first.getList(), secondary, operatorFun);
                 result.complete(new JsonArray(completed));
             });
-            return result;
+            return result.future();
         });
     }
 
     static Future<JsonObject> thenParallelArray(
             final Future<JsonArray>... futures
     ) {
-        final Future<JsonObject> result = Future.future();
+        final Promise<JsonObject> result = Promise.promise();
         CompositeFuture.all(Arrays.asList(futures)).setHandler(res -> {
             final JsonObject resultMap = new JsonObject();
             Ut.itList(res.result().list(), (item, index) -> resultMap.put(index.toString(), item));
             result.complete(resultMap);
         });
-        return result;
+        return result.future();
     }
 
     static Future<JsonObject> thenParallelJson(

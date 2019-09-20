@@ -1,6 +1,7 @@
 package io.vertx.up.commune;
 
 import io.vertx.core.Future;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpStatusCode;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -41,6 +42,10 @@ public class ActOut implements Serializable {
      */
     public static Future<ActOut> future(final Boolean result) {
         return Ux.toFuture(new ActOut(result, HttpStatusCode.OK));
+    }
+
+    public static Future<ActOut> future(final Buffer buffer) {
+        return Ux.toFuture(new ActOut(buffer, HttpStatusCode.OK));
     }
 
     /*
