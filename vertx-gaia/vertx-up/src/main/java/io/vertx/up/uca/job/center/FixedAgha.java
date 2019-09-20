@@ -1,6 +1,7 @@
 package io.vertx.up.uca.job.center;
 
 import io.vertx.core.Future;
+import io.vertx.core.Promise;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
 import io.vertx.up.eon.em.JobStatus;
@@ -15,19 +16,19 @@ class FixedAgha extends AbstractAgha {
         /*
          * Calculate started for delay output
          */
-        final long delay = getDelay(mission);
-        final Future<Long> future = Future.future();
+        final long delay = this.getDelay(mission);
+        final Promise<Long> future = Promise.promise();
         /*
          * Preparing for job
          **/
-        preparing(mission);
+        this.preparing(mission);
 
-        interval().startAt(delay, mission.getDuration(), (timeId) -> {
+        this.interval().startAt(delay, mission.getDuration(), (timeId) -> {
             if (JobStatus.READY == mission.getStatus()) {
                 /*
                  * Running the job
                  */
-                working(mission).compose(envelop -> {
+                this.working(mission).compose(envelop -> {
                     /*
                      * Complete future and returned Async
                      */
@@ -36,14 +37,14 @@ class FixedAgha extends AbstractAgha {
                 });
             }
         });
-        return future;
+        return future.future();
     }
 
     private long getDelay(final Mission mission) {
         final Instant end = mission.getInstant();
         final Instant start = Instant.now();
         final long delay = ChronoUnit.MILLIS.between(start, end);
-        getLogger().info(Info.JOB_DELAY, mission.getName(), String.valueOf(delay));
+        this.getLogger().info(Info.JOB_DELAY, mission.getName(), String.valueOf(delay));
         return delay < 0 ? 0L : delay;
     }
 }

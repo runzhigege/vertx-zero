@@ -60,26 +60,26 @@ public class ServiceJet {
     }
 
     public ServiceJet connect(final Vertx vertx) {
-        discovery = ServiceDiscovery.create(vertx);
-        final String name = options.getHost() + options.getPort();
-        breaker = CircuitBreaker.create(name, vertx, OPTIONS);
+        this.discovery = ServiceDiscovery.create(vertx);
+        final String name = this.options.getHost() + this.options.getPort();
+        this.breaker = CircuitBreaker.create(name, vertx, OPTIONS);
         return this;
     }
 
     private Future<List<Record>> getEndPoints() {
         final Future<List<Record>> future = Future.future();
-        discovery.getRecords(record -> record.getType().equals(HttpEndpoint.TYPE),
+        this.discovery.getRecords(record -> record.getType().equals(HttpEndpoint.TYPE),
                 future.completer());
         return future;
     }
 
     public Handler<RoutingContext> handle() {
         // Run with circuit breaker
-        return context -> breaker.execute(future -> getEndPoints().setHandler(res -> {
+        return context -> this.breaker.execute(future -> this.getEndPoints().setHandler(res -> {
             if (res.succeeded()) {
                 final List<Record> records = res.result();
                 // Find the record hitted. ( Include Path variable such as /xx/yy/:zz/:xy )
-                final Record hitted = arithmetic.search(records, context);
+                final Record hitted = this.arithmetic.search(records, context);
                 // Complete actions.
                 if (null == hitted) {
                     /*
@@ -88,11 +88,11 @@ public class ServiceJet {
                      * Zero engine could not find the uri that client provided.
                      * After sync operations, you can call future.complete directly.
                      **/
-                    InOut.sync404Error(getClass(), context);
+                    InOut.sync404Error(this.getClass(), context);
                     future.complete();
                 } else {
                     // Get service reference
-                    final ServiceReference reference = discovery.getReference(hitted);
+                    final ServiceReference reference = this.discovery.getReference(hitted);
                     // Set callback completer
                     final Consumer<Void> consumer = (nil) -> {
                         reference.release();    // release service reference
@@ -103,7 +103,7 @@ public class ServiceJet {
                      * Situation 1:
                      * Here matching successfully when gateway get request.
                      **/
-                    doRequest(context, reference, hitted, consumer);
+                    this.doRequest(context, reference, hitted, consumer);
                 }
             } else {
                 // Future failed
@@ -160,7 +160,7 @@ public class ServiceJet {
                 /*
                  * Http Request instead of Web Request here
                  */
-                pump.doRequest(InOut.replyHttp(getClass(), context, consumer));
+                pump.doRequest(InOut.replyHttp(this.getClass(), context, consumer));
             } else {
                 /*
                  * Pure request with buffer directly
@@ -169,7 +169,7 @@ public class ServiceJet {
                 if (null == body) {
                     body = Buffer.buffer();
                 }
-                request.sendBuffer(body, InOut.replyWeb(getClass(), context, consumer));
+                request.sendBuffer(body, InOut.replyWeb(this.getClass(), context, consumer));
             }
 
         }

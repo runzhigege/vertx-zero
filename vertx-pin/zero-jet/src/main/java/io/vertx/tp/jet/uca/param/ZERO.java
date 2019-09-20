@@ -14,7 +14,7 @@ interface Pool {
     ConcurrentMap<String, JtIngest> POOL_INGEST_PATH = new ConcurrentHashMap<>();
     ConcurrentMap<String, JtIngest> POOL_INGEST_BODY = new ConcurrentHashMap<>();
     ConcurrentMap<String, JtIngest> POOL_INGEST_DEFINE = new ConcurrentHashMap<>();
-    ConcurrentMap<String, JtIngest> POOL_INGEST_HEADER = new ConcurrentHashMap<>();
+    ConcurrentMap<String, JtIngest> POOL_INGEST_FILE = new ConcurrentHashMap<>();
 
     ConcurrentMap<ParamMode, Supplier<JtIngest>> INNER_INGEST = new ConcurrentHashMap<ParamMode, Supplier<JtIngest>>() {
         {
@@ -22,7 +22,7 @@ interface Pool {
             this.put(ParamMode.BODY, () -> Fn.poolThread(POOL_INGEST_BODY, BodyIngest::new));
             this.put(ParamMode.DEFINE, () -> Fn.poolThread(POOL_INGEST_DEFINE, DefineIngest::new));
             this.put(ParamMode.PATH, () -> Fn.poolThread(POOL_INGEST_PATH, PathIngest::new));
-            this.put(ParamMode.HEADER, () -> Fn.poolThread(POOL_INGEST_HEADER, HeaderIngest::new));
+            this.put(ParamMode.FILE, () -> Fn.poolThread(POOL_INGEST_FILE, FileIngest::new));
         }
     };
 }
