@@ -105,6 +105,13 @@ public class UiFieldDao extends DAOImpl<UiFieldRecord, cn.vertxup.ui.domain.tabl
     }
 
     /**
+     * Fetch records that have <code>HIDDEN IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiField> fetchByHidden(Boolean... values) {
+        return fetch(UiField.UI_FIELD.HIDDEN, values);
+    }
+
+    /**
      * Fetch records that have <code>RENDER IN (values)</code>
      */
     public List<cn.vertxup.ui.domain.tables.pojos.UiField> fetchByRender(String... values) {
@@ -140,17 +147,10 @@ public class UiFieldDao extends DAOImpl<UiFieldRecord, cn.vertxup.ui.domain.tabl
     }
 
     /**
-     * Fetch records that have <code>DATA_EVENT IN (values)</code>
+     * Fetch records that have <code>CONTROL_ID IN (values)</code>
      */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiField> fetchByDataEvent(String... values) {
-        return fetch(UiField.UI_FIELD.DATA_EVENT, values);
-    }
-
-    /**
-     * Fetch records that have <code>FORM_ID IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiField> fetchByFormId(String... values) {
-        return fetch(UiField.UI_FIELD.FORM_ID, values);
+    public List<cn.vertxup.ui.domain.tables.pojos.UiField> fetchByControlId(String... values) {
+        return fetch(UiField.UI_FIELD.CONTROL_ID, values);
     }
 
     /**
@@ -259,6 +259,13 @@ public class UiFieldDao extends DAOImpl<UiFieldRecord, cn.vertxup.ui.domain.tabl
     }
 
     /**
+     * Fetch records that have <code>HIDDEN IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiField>> fetchByHiddenAsync(List<Boolean> values) {
+        return fetchAsync(UiField.UI_FIELD.HIDDEN,values);
+    }
+
+    /**
      * Fetch records that have <code>RENDER IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiField>> fetchByRenderAsync(List<String> values) {
@@ -294,17 +301,10 @@ public class UiFieldDao extends DAOImpl<UiFieldRecord, cn.vertxup.ui.domain.tabl
     }
 
     /**
-     * Fetch records that have <code>DATA_EVENT IN (values)</code> asynchronously
+     * Fetch records that have <code>CONTROL_ID IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiField>> fetchByDataEventAsync(List<String> values) {
-        return fetchAsync(UiField.UI_FIELD.DATA_EVENT,values);
-    }
-
-    /**
-     * Fetch records that have <code>FORM_ID IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiField>> fetchByFormIdAsync(List<String> values) {
-        return fetchAsync(UiField.UI_FIELD.FORM_ID,values);
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiField>> fetchByControlIdAsync(List<String> values) {
+        return fetchAsync(UiField.UI_FIELD.CONTROL_ID,values);
     }
 
     /**

@@ -6,13 +6,12 @@ DROP TABLE IF EXISTS UI_FORM;
 CREATE TABLE IF NOT EXISTS UI_FORM
 (
     `KEY`        VARCHAR(36) COMMENT '「key」- 主键',
-    `NAME`       VARCHAR(255) COMMENT '「name」- 应用程序名称',
-    `CODE`       VARCHAR(36) COMMENT '「code」- 应用程序编码',
-    `WINDOW`     INTEGER COMMENT '「window」- Form对应的窗口配置',
+    `NAME`       VARCHAR(255) COMMENT '「name」- 表单名称',
+    `CODE`       VARCHAR(255) COMMENT '「code」- 表单系统编码',
+    `WINDOW`     INTEGER COMMENT '「window」- window, Form对应的窗口配置',
+    `COLUMNS`    INTEGER COMMENT '「columns」- columns, Form对应的配置',
     `HIDDEN`     TEXT COMMENT '「hidden」- 隐藏字段专用配置',
     `ROW`        TEXT COMMENT '「rowConfig/rowClass」- 行专用配置',
-    `UI`         TEXT COMMENT '「ui」根据UI_FIELD中的内容生成',
-    `TYPE`       VARCHAR(20) COMMENT '「type」- 表单类型，STANDARD / SUBFORM ',
 
     -- 特殊字段
     `ACTIVE`     BIT         DEFAULT NULL COMMENT '「active」- 是否启用',

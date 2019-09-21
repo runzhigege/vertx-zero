@@ -6,21 +6,24 @@ DROP TABLE IF EXISTS UI_FIELD;
 CREATE TABLE IF NOT EXISTS UI_FIELD
 (
     `KEY`           VARCHAR(36) COMMENT '「key」- 字段主键',
+    -- 构造 Form 中的UI专用
     `X_POINT`       INTEGER COMMENT '「xPoint] - 字段的X坐标（列）',
     `Y_POINT`       INTEGER COMMENT '「yPoint」- 字段的Y坐标（行）',
+
+    -- Form 中的基本配置
     `LABEL`         VARCHAR(255) COMMENT '「label」- 字段标签',
     `NAME`          VARCHAR(255) COMMENT '「name」- 字段名称',
     `SPAN`          INTEGER COMMENT '「span」- 字段宽度',
+    `HIDDEN`        BIT COMMENT '「hidden」- button专用',
     `RENDER`        VARCHAR(64) COMMENT '「render」- 使用的Render函数',
+
     -- Option选项
     `OPTION_JSX`    TEXT COMMENT '「optionJsx」- 字段专用配置',
     `OPTION_CONFIG` TEXT COMMENT '「optionConfig」- 字段专用配置',
     `OPTION_ITEM`   TEXT COMMENT '「optionItem」- 字段专用配置',
-    `RULES`         TEXT COMMENT '「rules」- 专用的配置，描述规则',
-    -- 事件配置
-    `DATA_EVENT`    TEXT COMMENT '「dataEvent」- 当前字段的事件配置，只有名称为 $button 时生效',
+    `RULES`         TEXT COMMENT '「rules」- optionConfig.rules 验证专用的配置，描述规则',
     -- 系统数据
-    `FORM_ID`       VARCHAR(36) COMMENT '「formId」- 关联的表单ID',
+    `CONTROL_ID`    VARCHAR(36) COMMENT '「controlId」- 关联的表单ID',
 
     -- 特殊字段
     `ACTIVE`        BIT         DEFAULT NULL COMMENT '「active」- 是否启用',
@@ -37,4 +40,4 @@ CREATE TABLE IF NOT EXISTS UI_FIELD
 );
 -- changeset Lang:ox-field-2
 ALTER TABLE UI_FIELD
-    ADD UNIQUE (`FORM_ID`, `NAME`);
+    ADD UNIQUE (`CONTROL_ID`, `NAME`);

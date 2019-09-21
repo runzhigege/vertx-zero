@@ -1,6 +1,7 @@
 package io.vertx.up.uca.job.phase;
 
 import io.vertx.core.Future;
+import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.EventBus;
 import io.vertx.up.atom.worker.Mission;
@@ -41,8 +42,8 @@ class Input {
              * Event bus provide input and then it will pass to @On
              */
             LOGGER.info(Info.JOB_ADDRESS_EVENT_BUS, "Income", address);
-            final Future<Envelop> input = Future.future();
-            final EventBus eventBus = vertx.eventBus();
+            final Promise<Envelop> input = Promise.promise();
+            final EventBus eventBus = this.vertx.eventBus();
             eventBus.<Envelop>consumer(address, handler -> {
 
                 Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_1ST_JOB_ASYNC, mission.getName(), address));
@@ -60,7 +61,7 @@ class Input {
                     input.complete(envelop);
                 }
             });
-            return input;
+            return input.future();
         }
     }
 
@@ -89,7 +90,7 @@ class Input {
                  * - Vertx reference
                  * - Mission reference
                  */
-                Ut.contract(income, Vertx.class, vertx);
+                Ut.contract(income, Vertx.class, this.vertx);
                 Ut.contract(income, Mission.class, mission);
                 Element.onceLog(mission,
                         () -> LOGGER.info(Info.PHASE_2ND_JOB_ASYNC, mission.getName(), income.getClass().getName()));

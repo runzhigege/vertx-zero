@@ -1,7 +1,7 @@
 package cn.vertxup.crud.api;
 
 import io.vertx.core.Future;
-import io.vertx.core.buffer.Buffer;
+import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.actor.IxActor;
@@ -10,15 +10,13 @@ import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.cv.IxMsg;
 import io.vertx.tp.crud.init.IxPin;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.tp.error._500ExportingErrorException;
+import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.plugin.excel.ExcelClient;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Plugin;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.commune.Envelop;
-import io.vertx.up.exception.WebException;
-import io.vertx.up.exception.web._500InternalServerException;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
@@ -27,7 +25,9 @@ import io.vertx.up.util.Ut;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
@@ -47,20 +47,20 @@ public class FileActor {
         final String filename = Ux.getString1(request);
         /* IxConfig */
         final IxModule config = IxPin.getActor(actor);
-        final Future<Envelop> future = Future.future();
+        final Promise<Envelop> promise = Promise.promise();
         final File file = new File(filename);
         if (file.exists()) {
             Fn.safeJvm(() -> {
                 final InputStream inputStream = new FileInputStream(file);
-                client.importTable(config.getTable(), inputStream, handler -> {
+                this.client.importTable(config.getTable(), inputStream, handler -> {
                     Ix.infoDao(LOGGER, IxMsg.FILE_LOADED, filename);
-                    future.complete(Envelop.success(Boolean.TRUE));
+                    promise.complete(Envelop.success(Boolean.TRUE));
                 });
             });
         } else {
-            future.complete(Envelop.success(Boolean.FALSE));
+            promise.complete(Envelop.success(Boolean.FALSE));
         }
-        return future;
+        return promise.future();
     }
 
     @Address(Addr.File.EXPORT)
@@ -70,7 +70,7 @@ public class FileActor {
         /* Removed */
         final JsonArray removed = new JsonArray();
         /* Search full column and it will be used in another method */
-        return Ix.create(getClass()).input(request).envelop((dao, config) -> Unity.fetchFull(dao, request, config)
+        return Ix.create(this.getClass()).input(request).envelop((dao, config) -> Unity.fetchFull(dao, request, config)
 
                 /* Column initialization */
                 .compose(columns -> {
@@ -103,13 +103,15 @@ public class FileActor {
 
                 /* Projection calculation */
                 .compose(projection -> {
-                    /* Parameters Extraction */
-                    final JsonObject body = Ux.getJson1(request);
-                    body.put(Inquiry.KEY_PROJECTION, projection);
                     {
                         /* Removed will be used in future */
                         removed.addAll(projection);
                     }
+                    /* Parameters Extraction */
+                    final JsonObject body = new JsonObject();
+                    final JsonObject criteria = Ux.getJson1(request);
+                    body.put(Inquiry.KEY_CRITERIA, criteria);
+                    body.put(Inquiry.KEY_PROJECTION, projection);
                     /* Calculation for projection here */
                     return Ux.toFuture(body);
                 })
@@ -128,54 +130,15 @@ public class FileActor {
                     removed.stream().map(item -> (String) item).forEach(exportedHeaders::remove);
 
                     /* Combine and build data of excel */
-                    return combineData(dataArray, exportedHeaders);
+                    return Ke.combineAsync(dataArray, exportedHeaders);
                 })
 
                 /* Final exporting her for excel download */
                 .compose(data -> {
                     final String actor = Ux.getString(request);
-                    return exportTable(actor, data);
+                    return this.client.exportTable(actor, data);
                 })
                 .compose(buffer -> Ux.toFuture(Envelop.success(buffer)))
         );
-    }
-
-    private Future<JsonArray> combineData(final JsonArray data, final ConcurrentMap<String, String> headers) {
-        final JsonArray combined = new JsonArray();
-        /* Header sequence */
-        final List<String> columns = new ArrayList<>(headers.keySet());
-        /* Header */
-        final JsonArray header = new JsonArray();
-        columns.forEach(column -> header.add(headers.get(column)));
-        combined.add(header);
-
-        /* Data Part */
-        Ut.itJArray(data, (each, index) -> {
-            final JsonArray row = new JsonArray();
-            /* Data Part */
-            columns.stream().map(each::getValue).forEach(row::add);
-
-            combined.add(row);
-        });
-        return Ux.toFuture(combined);
-    }
-
-    private Future<Buffer> exportTable(final String identifier, final JsonArray data) {
-        /* Excel Client */
-        final Future<Buffer> future = Future.future();
-        client.exportTable(identifier, data, handler -> {
-            if (handler.succeeded()) {
-                future.complete(handler.result());
-            } else {
-                final Throwable error = handler.cause();
-                if (Objects.nonNull(error)) {
-                    final WebException failure = new _500ExportingErrorException(getClass(), error.getMessage());
-                    future.fail(failure);
-                } else {
-                    future.fail(new _500InternalServerException(getClass(), "Unexpected Error"));
-                }
-            }
-        });
-        return future;
     }
 }

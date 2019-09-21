@@ -24,16 +24,15 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiForm implements IUiForm {
 
-    private static final long serialVersionUID = 1815304971;
+    private static final long serialVersionUID = 859727828;
 
     private String        key;
     private String        name;
     private String        code;
     private Integer       window;
+    private Integer       columns;
     private String        hidden;
     private String        row;
-    private String        ui;
-    private String        type;
     private Boolean       active;
     private String        sigma;
     private String        metadata;
@@ -50,10 +49,9 @@ public class UiForm implements IUiForm {
         this.name = value.name;
         this.code = value.code;
         this.window = value.window;
+        this.columns = value.columns;
         this.hidden = value.hidden;
         this.row = value.row;
-        this.ui = value.ui;
-        this.type = value.type;
         this.active = value.active;
         this.sigma = value.sigma;
         this.metadata = value.metadata;
@@ -69,10 +67,9 @@ public class UiForm implements IUiForm {
         String        name,
         String        code,
         Integer       window,
+        Integer       columns,
         String        hidden,
         String        row,
-        String        ui,
-        String        type,
         Boolean       active,
         String        sigma,
         String        metadata,
@@ -86,10 +83,9 @@ public class UiForm implements IUiForm {
         this.name = name;
         this.code = code;
         this.window = window;
+        this.columns = columns;
         this.hidden = hidden;
         this.row = row;
-        this.ui = ui;
-        this.type = type;
         this.active = active;
         this.sigma = sigma;
         this.metadata = metadata;
@@ -145,6 +141,17 @@ public class UiForm implements IUiForm {
     }
 
     @Override
+    public Integer getColumns() {
+        return this.columns;
+    }
+
+    @Override
+    public UiForm setColumns(Integer columns) {
+        this.columns = columns;
+        return this;
+    }
+
+    @Override
     public String getHidden() {
         return this.hidden;
     }
@@ -163,28 +170,6 @@ public class UiForm implements IUiForm {
     @Override
     public UiForm setRow(String row) {
         this.row = row;
-        return this;
-    }
-
-    @Override
-    public String getUi() {
-        return this.ui;
-    }
-
-    @Override
-    public UiForm setUi(String ui) {
-        this.ui = ui;
-        return this;
-    }
-
-    @Override
-    public String getType() {
-        return this.type;
-    }
-
-    @Override
-    public UiForm setType(String type) {
-        this.type = type;
         return this;
     }
 
@@ -284,10 +269,9 @@ public class UiForm implements IUiForm {
         sb.append(", ").append(name);
         sb.append(", ").append(code);
         sb.append(", ").append(window);
+        sb.append(", ").append(columns);
         sb.append(", ").append(hidden);
         sb.append(", ").append(row);
-        sb.append(", ").append(ui);
-        sb.append(", ").append(type);
         sb.append(", ").append(active);
         sb.append(", ").append(sigma);
         sb.append(", ").append(metadata);
@@ -314,10 +298,9 @@ public class UiForm implements IUiForm {
         setName(from.getName());
         setCode(from.getCode());
         setWindow(from.getWindow());
+        setColumns(from.getColumns());
         setHidden(from.getHidden());
         setRow(from.getRow());
-        setUi(from.getUi());
-        setType(from.getType());
         setActive(from.getActive());
         setSigma(from.getSigma());
         setMetadata(from.getMetadata());

@@ -154,6 +154,16 @@ public interface IUiColumn extends Serializable {
     public String getConfig();
 
     /**
+     * Setter for <code>DB_ETERNAL.UI_COLUMN.OPTION</code>. 「option」- $option专用，executor时
+     */
+    public IUiColumn setOption(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_COLUMN.OPTION</code>. 「option」- $option专用，executor时
+     */
+    public String getOption();
+
+    /**
      * Setter for <code>DB_ETERNAL.UI_COLUMN.FORMAT</code>. 「format」- $format时间格式专用
      */
     public IUiColumn setFormat(String value);
@@ -281,6 +291,7 @@ public interface IUiColumn extends Serializable {
         setEmpty(json.getString("EMPTY"));
         setMapping(json.getString("MAPPING"));
         setConfig(json.getString("CONFIG"));
+        setOption(json.getString("OPTION"));
         setFormat(json.getString("FORMAT"));
         setControlId(json.getString("CONTROL_ID"));
         setActive(json.getBoolean("ACTIVE"));
@@ -310,6 +321,7 @@ public interface IUiColumn extends Serializable {
         json.put("EMPTY",getEmpty());
         json.put("MAPPING",getMapping());
         json.put("CONFIG",getConfig());
+        json.put("OPTION",getOption());
         json.put("FORMAT",getFormat());
         json.put("CONTROL_ID",getControlId());
         json.put("ACTIVE",getActive());

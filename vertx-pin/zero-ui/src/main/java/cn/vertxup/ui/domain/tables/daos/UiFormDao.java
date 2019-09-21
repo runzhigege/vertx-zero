@@ -91,6 +91,13 @@ public class UiFormDao extends DAOImpl<UiFormRecord, cn.vertxup.ui.domain.tables
     }
 
     /**
+     * Fetch records that have <code>COLUMNS IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiForm> fetchByColumns(Integer... values) {
+        return fetch(UiForm.UI_FORM.COLUMNS, values);
+    }
+
+    /**
      * Fetch records that have <code>HIDDEN IN (values)</code>
      */
     public List<cn.vertxup.ui.domain.tables.pojos.UiForm> fetchByHidden(String... values) {
@@ -102,20 +109,6 @@ public class UiFormDao extends DAOImpl<UiFormRecord, cn.vertxup.ui.domain.tables
      */
     public List<cn.vertxup.ui.domain.tables.pojos.UiForm> fetchByRow(String... values) {
         return fetch(UiForm.UI_FORM.ROW, values);
-    }
-
-    /**
-     * Fetch records that have <code>UI IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiForm> fetchByUi(String... values) {
-        return fetch(UiForm.UI_FORM.UI, values);
-    }
-
-    /**
-     * Fetch records that have <code>TYPE IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiForm> fetchByType(String... values) {
-        return fetch(UiForm.UI_FORM.TYPE, values);
     }
 
     /**
@@ -210,6 +203,13 @@ public class UiFormDao extends DAOImpl<UiFormRecord, cn.vertxup.ui.domain.tables
     }
 
     /**
+     * Fetch records that have <code>COLUMNS IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiForm>> fetchByColumnsAsync(List<Integer> values) {
+        return fetchAsync(UiForm.UI_FORM.COLUMNS,values);
+    }
+
+    /**
      * Fetch records that have <code>HIDDEN IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiForm>> fetchByHiddenAsync(List<String> values) {
@@ -221,20 +221,6 @@ public class UiFormDao extends DAOImpl<UiFormRecord, cn.vertxup.ui.domain.tables
      */
     public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiForm>> fetchByRowAsync(List<String> values) {
         return fetchAsync(UiForm.UI_FORM.ROW,values);
-    }
-
-    /**
-     * Fetch records that have <code>UI IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiForm>> fetchByUiAsync(List<String> values) {
-        return fetchAsync(UiForm.UI_FORM.UI,values);
-    }
-
-    /**
-     * Fetch records that have <code>TYPE IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiForm>> fetchByTypeAsync(List<String> values) {
-        return fetchAsync(UiForm.UI_FORM.TYPE,values);
     }
 
     /**
