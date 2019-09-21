@@ -66,10 +66,12 @@ public class Keys {
     public static final UniqueKey<UiFieldRecord> KEY_UI_FIELD_CONTROL_ID = UniqueKeys0.KEY_UI_FIELD_CONTROL_ID;
     public static final UniqueKey<UiFormRecord> KEY_UI_FORM_PRIMARY = UniqueKeys0.KEY_UI_FORM_PRIMARY;
     public static final UniqueKey<UiFormRecord> KEY_UI_FORM_CODE = UniqueKeys0.KEY_UI_FORM_CODE;
+    public static final UniqueKey<UiFormRecord> KEY_UI_FORM_CONTROL_ID = UniqueKeys0.KEY_UI_FORM_CONTROL_ID;
     public static final UniqueKey<UiLayoutRecord> KEY_UI_LAYOUT_PRIMARY = UniqueKeys0.KEY_UI_LAYOUT_PRIMARY;
     public static final UniqueKey<UiLayoutRecord> KEY_UI_LAYOUT_NAME = UniqueKeys0.KEY_UI_LAYOUT_NAME;
     public static final UniqueKey<UiListRecord> KEY_UI_LIST_PRIMARY = UniqueKeys0.KEY_UI_LIST_PRIMARY;
     public static final UniqueKey<UiListRecord> KEY_UI_LIST_CODE = UniqueKeys0.KEY_UI_LIST_CODE;
+    public static final UniqueKey<UiListRecord> KEY_UI_LIST_CONTROL_ID = UniqueKeys0.KEY_UI_LIST_CONTROL_ID;
     public static final UniqueKey<UiOpRecord> KEY_UI_OP_PRIMARY = UniqueKeys0.KEY_UI_OP_PRIMARY;
     public static final UniqueKey<UiOpRecord> KEY_UI_OP_CONTROL_ID_2 = UniqueKeys0.KEY_UI_OP_CONTROL_ID_2;
     public static final UniqueKey<UiOpRecord> KEY_UI_OP_CONTROL_ID = UniqueKeys0.KEY_UI_OP_CONTROL_ID;
@@ -98,10 +100,12 @@ public class Keys {
         public static final UniqueKey<UiFieldRecord> KEY_UI_FIELD_CONTROL_ID = Internal.createUniqueKey(UiField.UI_FIELD, "KEY_UI_FIELD_CONTROL_ID", UiField.UI_FIELD.CONTROL_ID, UiField.UI_FIELD.NAME);
         public static final UniqueKey<UiFormRecord> KEY_UI_FORM_PRIMARY = Internal.createUniqueKey(UiForm.UI_FORM, "KEY_UI_FORM_PRIMARY", UiForm.UI_FORM.KEY);
         public static final UniqueKey<UiFormRecord> KEY_UI_FORM_CODE = Internal.createUniqueKey(UiForm.UI_FORM, "KEY_UI_FORM_CODE", UiForm.UI_FORM.CODE, UiForm.UI_FORM.SIGMA);
+        public static final UniqueKey<UiFormRecord> KEY_UI_FORM_CONTROL_ID = Internal.createUniqueKey(UiForm.UI_FORM, "KEY_UI_FORM_CONTROL_ID", UiForm.UI_FORM.CONTROL_ID);
         public static final UniqueKey<UiLayoutRecord> KEY_UI_LAYOUT_PRIMARY = Internal.createUniqueKey(UiLayout.UI_LAYOUT, "KEY_UI_LAYOUT_PRIMARY", UiLayout.UI_LAYOUT.KEY);
         public static final UniqueKey<UiLayoutRecord> KEY_UI_LAYOUT_NAME = Internal.createUniqueKey(UiLayout.UI_LAYOUT, "KEY_UI_LAYOUT_NAME", UiLayout.UI_LAYOUT.NAME, UiLayout.UI_LAYOUT.SIGMA);
         public static final UniqueKey<UiListRecord> KEY_UI_LIST_PRIMARY = Internal.createUniqueKey(UiList.UI_LIST, "KEY_UI_LIST_PRIMARY", UiList.UI_LIST.KEY);
         public static final UniqueKey<UiListRecord> KEY_UI_LIST_CODE = Internal.createUniqueKey(UiList.UI_LIST, "KEY_UI_LIST_CODE", UiList.UI_LIST.CODE, UiList.UI_LIST.SIGMA);
+        public static final UniqueKey<UiListRecord> KEY_UI_LIST_CONTROL_ID = Internal.createUniqueKey(UiList.UI_LIST, "KEY_UI_LIST_CONTROL_ID", UiList.UI_LIST.CONTROL_ID);
         public static final UniqueKey<UiOpRecord> KEY_UI_OP_PRIMARY = Internal.createUniqueKey(UiOp.UI_OP, "KEY_UI_OP_PRIMARY", UiOp.UI_OP.KEY);
         public static final UniqueKey<UiOpRecord> KEY_UI_OP_CONTROL_ID_2 = Internal.createUniqueKey(UiOp.UI_OP, "KEY_UI_OP_CONTROL_ID_2", UiOp.UI_OP.CONTROL_ID, UiOp.UI_OP.SIGMA, UiOp.UI_OP.ACTION);
         public static final UniqueKey<UiOpRecord> KEY_UI_OP_CONTROL_ID = Internal.createUniqueKey(UiOp.UI_OP, "KEY_UI_OP_CONTROL_ID", UiOp.UI_OP.CONTROL_ID, UiOp.UI_OP.SIGMA, UiOp.UI_OP.CLIENT_KEY);
