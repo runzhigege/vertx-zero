@@ -14,6 +14,10 @@ public interface Addr {
 
     interface Page {
 
-        String FETCH_AMP = Prefix._EVENT + "X-FETCH/AMP";
+        String FETCH_AMP = Prefix._EVENT + "X-PAGE/AMP";
+    }
+
+    interface Control {
+        String FETCH_BY_ID = Prefix._EVENT + "X-CONTROL/BY-ID";
     }
 }
