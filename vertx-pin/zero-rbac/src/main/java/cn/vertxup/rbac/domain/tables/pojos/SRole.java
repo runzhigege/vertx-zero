@@ -29,7 +29,7 @@ public class SRole implements ISRole {
     private String        key;
     private String        name;
     private String        code;
-    private Boolean       super_;
+    private Boolean       power;
     private String        comment;
     private String        modelId;
     private String        modelKey;
@@ -49,7 +49,7 @@ public class SRole implements ISRole {
         this.key = value.key;
         this.name = value.name;
         this.code = value.code;
-        this.super_ = value.super_;
+        this.power = value.power;
         this.comment = value.comment;
         this.modelId = value.modelId;
         this.modelKey = value.modelKey;
@@ -68,7 +68,7 @@ public class SRole implements ISRole {
         String        key,
         String        name,
         String        code,
-        Boolean       super_,
+        Boolean       power,
         String        comment,
         String        modelId,
         String        modelKey,
@@ -85,7 +85,7 @@ public class SRole implements ISRole {
         this.key = key;
         this.name = name;
         this.code = code;
-        this.super_ = super_;
+        this.power = power;
         this.comment = comment;
         this.modelId = modelId;
         this.modelKey = modelKey;
@@ -134,13 +134,13 @@ public class SRole implements ISRole {
     }
 
     @Override
-    public Boolean getSuper() {
-        return this.super_;
+    public Boolean getPower() {
+        return this.power;
     }
 
     @Override
-    public SRole setSuper(Boolean super_) {
-        this.super_ = super_;
+    public SRole setPower(Boolean power) {
+        this.power = power;
         return this;
     }
 
@@ -283,7 +283,7 @@ public class SRole implements ISRole {
         sb.append(key);
         sb.append(", ").append(name);
         sb.append(", ").append(code);
-        sb.append(", ").append(super_);
+        sb.append(", ").append(power);
         sb.append(", ").append(comment);
         sb.append(", ").append(modelId);
         sb.append(", ").append(modelKey);
@@ -313,7 +313,7 @@ public class SRole implements ISRole {
         setKey(from.getKey());
         setName(from.getName());
         setCode(from.getCode());
-        setSuper(from.getSuper());
+        setPower(from.getPower());
         setComment(from.getComment());
         setModelId(from.getModelId());
         setModelKey(from.getModelKey());

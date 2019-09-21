@@ -49,9 +49,9 @@ public class SRole extends TableImpl<SRoleRecord> {
      */
     public final TableField<SRoleRecord, String> CODE = createField("CODE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「code」- 角色系统名");
     /**
-     * The column <code>DB_ETERNAL.S_ROLE.SUPER</code>. 「super」- 是否具有定制权限？
+     * The column <code>DB_ETERNAL.S_ROLE.POWER</code>. 「power」- 是否具有定制权限？
      */
-    public final TableField<SRoleRecord, Boolean> SUPER = createField("SUPER", org.jooq.impl.SQLDataType.BIT, this, "「super」- 是否具有定制权限？");
+    public final TableField<SRoleRecord, Boolean> POWER = createField("POWER", org.jooq.impl.SQLDataType.BIT, this, "「power」- 是否具有定制权限？");
     /**
      * The column <code>DB_ETERNAL.S_ROLE.COMMENT</code>. 「comment」- 角色备注信息
      */
