@@ -33,4 +33,15 @@ public class ControlService implements ControlStub {
                     return Ux.toFuture(result);
                 });
     }
+
+    @Override
+    public Future<JsonObject> fetchById(final String control) {
+        return Ux.Jooq.on(UiControlDao.class)
+                .<UiControl>findByIdAsync(control)
+                .compose(Ux::fnJObject)
+                .compose(Ke.metadata(KeField.Ui.CONTAINER_CONFIG))
+                .compose(Ke.metadata(KeField.Ui.COMPONENT_CONFIG))
+                .compose(Ke.metadata(KeField.Ui.ASSIST))
+                .compose(Ke.metadata(KeField.Ui.GRID));
+    }
 }
