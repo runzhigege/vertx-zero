@@ -154,6 +154,13 @@ public class UiColumnDao extends DAOImpl<UiColumnRecord, cn.vertxup.ui.domain.ta
     }
 
     /**
+     * Fetch records that have <code>OPTION IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiColumn> fetchByOption(String... values) {
+        return fetch(UiColumn.UI_COLUMN.OPTION, values);
+    }
+
+    /**
      * Fetch records that have <code>FORMAT IN (values)</code>
      */
     public List<cn.vertxup.ui.domain.tables.pojos.UiColumn> fetchByFormat(String... values) {
@@ -319,6 +326,13 @@ public class UiColumnDao extends DAOImpl<UiColumnRecord, cn.vertxup.ui.domain.ta
      */
     public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiColumn>> fetchByConfigAsync(List<String> values) {
         return fetchAsync(UiColumn.UI_COLUMN.CONFIG,values);
+    }
+
+    /**
+     * Fetch records that have <code>OPTION IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiColumn>> fetchByOptionAsync(List<String> values) {
+        return fetchAsync(UiColumn.UI_COLUMN.OPTION,values);
     }
 
     /**

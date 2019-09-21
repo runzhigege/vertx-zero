@@ -28,6 +28,7 @@ public interface ID {
     String REQUEST_BODY = "$$CONTEXT_REQUEST$$";
 
     String PARAM_BODY = "$$__BODY__$$";
+    String PARAM_STREAM = "$$_STREAM__$$";
     String PARAM_HEADER = "$$__HEADER__$$";
     /*
      * When criteria object merged,
@@ -83,9 +84,9 @@ public interface ID {
 
         ConcurrentMap<String, String> PARAM_MAP = new ConcurrentHashMap<String, String>() {
             {
-                put(X_APP_ID, "appId");
-                put(X_APP_KEY, "appKey");
-                put(X_SIGMA, "sigma");
+                this.put(X_APP_ID, "appId");
+                this.put(X_APP_KEY, "appKey");
+                this.put(X_SIGMA, "sigma");
             }
         };
     }

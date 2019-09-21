@@ -1,6 +1,7 @@
 package io.vertx.up.uca.job.center;
 
 import io.vertx.core.Future;
+import io.vertx.core.Promise;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.em.JobStatus;
 
@@ -8,18 +9,18 @@ class PlanAgha extends AbstractAgha {
 
     @Override
     public Future<Long> begin(final Mission mission) {
-        final Future<Long> future = Future.future();
+        final Promise<Long> future = Promise.promise();
         /*
          * Preparing for job
          **/
-        preparing(mission);
+        this.preparing(mission);
 
-        interval().startAt(mission.getDuration(), (timeId) -> {
+        this.interval().startAt(mission.getDuration(), (timeId) -> {
             if (JobStatus.READY == mission.getStatus()) {
                 /*
                  * Running the job
                  */
-                working(mission).compose(envelop -> {
+                this.working(mission).compose(envelop -> {
                     /*
                      * Complete future and returned Async
                      */
@@ -28,6 +29,6 @@ class PlanAgha extends AbstractAgha {
                 });
             }
         });
-        return future;
+        return future.future();
     }
 }

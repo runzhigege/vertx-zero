@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiColumn implements IUiColumn {
 
-    private static final long serialVersionUID = -883439487;
+    private static final long serialVersionUID = 62941796;
 
     private String        key;
     private String        title;
@@ -39,6 +39,7 @@ public class UiColumn implements IUiColumn {
     private String        empty;
     private String        mapping;
     private String        config;
+    private String        option;
     private String        format;
     private String        controlId;
     private Boolean       active;
@@ -66,6 +67,7 @@ public class UiColumn implements IUiColumn {
         this.empty = value.empty;
         this.mapping = value.mapping;
         this.config = value.config;
+        this.option = value.option;
         this.format = value.format;
         this.controlId = value.controlId;
         this.active = value.active;
@@ -92,6 +94,7 @@ public class UiColumn implements IUiColumn {
         String        empty,
         String        mapping,
         String        config,
+        String        option,
         String        format,
         String        controlId,
         Boolean       active,
@@ -116,6 +119,7 @@ public class UiColumn implements IUiColumn {
         this.empty = empty;
         this.mapping = mapping;
         this.config = config;
+        this.option = option;
         this.format = format;
         this.controlId = controlId;
         this.active = active;
@@ -272,6 +276,17 @@ public class UiColumn implements IUiColumn {
     }
 
     @Override
+    public String getOption() {
+        return this.option;
+    }
+
+    @Override
+    public UiColumn setOption(String option) {
+        this.option = option;
+        return this;
+    }
+
+    @Override
     public String getFormat() {
         return this.format;
     }
@@ -398,6 +413,7 @@ public class UiColumn implements IUiColumn {
         sb.append(", ").append(empty);
         sb.append(", ").append(mapping);
         sb.append(", ").append(config);
+        sb.append(", ").append(option);
         sb.append(", ").append(format);
         sb.append(", ").append(controlId);
         sb.append(", ").append(active);
@@ -435,6 +451,7 @@ public class UiColumn implements IUiColumn {
         setEmpty(from.getEmpty());
         setMapping(from.getMapping());
         setConfig(from.getConfig());
+        setOption(from.getOption());
         setFormat(from.getFormat());
         setControlId(from.getControlId());
         setActive(from.getActive());

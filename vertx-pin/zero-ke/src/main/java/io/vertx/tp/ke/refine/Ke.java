@@ -10,6 +10,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
+import java.util.concurrent.ConcurrentMap;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -49,6 +50,10 @@ public class Ke {
 
     public static <T> Future<T> poolAsync(final String name, final String key, final Supplier<Future<T>> supplier) {
         return KeTool.poolAsync(name, key, supplier);
+    }
+
+    public static Future<JsonArray> combineAsync(final JsonArray data, final ConcurrentMap<String, String> headers) {
+        return KeTool.combineAsync(data, headers);
     }
 
     public static void banner(final String module) {

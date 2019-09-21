@@ -29,8 +29,8 @@ CREATE TABLE IF NOT EXISTS UI_CONTROL
     `COMPONENT_DATA`   VARCHAR(255) COMMENT '「componentData」- 当前控件使用的数据，使用表达式结构',
     /*
      * type = LIST / FORM 的配置（无其他配置，直接使用 controlId 读取
-     * 1) type = LIST，读取：UI_LIST + UI_COLUMN
-     * 2) type = FORM, 读取：UI_FORM + UI_FIELD
+     * 1) type = LIST，读取：UI_LIST + UI_COLUMN + UI_OP
+     * 2) type = FORM, 读取：UI_FORM + UI_FIELD + UI_OP
      */
 
     -- 特殊字段

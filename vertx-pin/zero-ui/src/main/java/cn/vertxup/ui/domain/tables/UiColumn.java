@@ -35,7 +35,7 @@ public class UiColumn extends TableImpl<UiColumnRecord> {
      * The reference instance of <code>DB_ETERNAL.UI_COLUMN</code>
      */
     public static final UiColumn UI_COLUMN = new UiColumn();
-    private static final long serialVersionUID = 806070319;
+    private static final long serialVersionUID = -318113532;
     /**
      * The column <code>DB_ETERNAL.UI_COLUMN.KEY</code>. 「key」- 列主键
      */
@@ -88,6 +88,10 @@ public class UiColumn extends TableImpl<UiColumnRecord> {
      * The column <code>DB_ETERNAL.UI_COLUMN.CONFIG</code>. 「config」- $config专用
      */
     public final TableField<UiColumnRecord, String> CONFIG = createField("CONFIG", org.jooq.impl.SQLDataType.CLOB, this, "「config」- $config专用");
+    /**
+     * The column <code>DB_ETERNAL.UI_COLUMN.OPTION</code>. 「option」- $option专用，executor时
+     */
+    public final TableField<UiColumnRecord, String> OPTION = createField("OPTION", org.jooq.impl.SQLDataType.CLOB, this, "「option」- $option专用，executor时");
     /**
      * The column <code>DB_ETERNAL.UI_COLUMN.FORMAT</code>. 「format」- $format时间格式专用
      */

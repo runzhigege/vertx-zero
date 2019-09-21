@@ -19,7 +19,7 @@ public class AsyncInvoker extends AbstractInvoker {
         // Verify
         final boolean valid =
                 (void.class != returnType && Void.class != returnType);
-        InvokerUtil.verify(!valid, returnType, paramCls, getClass());
+        InvokerUtil.verify(!valid, returnType, paramCls, this.getClass());
     }
 
     @Override
@@ -30,7 +30,7 @@ public class AsyncInvoker extends AbstractInvoker {
         final Envelop envelop = message.body();
         // Deserialization from message bus.
         final Class<?> returnType = method.getReturnType();
-        getLogger().info(Info.MSG_FUTURE, getClass(), returnType, false);
+        this.getLogger().info(Info.MSG_FUTURE, this.getClass(), returnType, false);
         // Get T
         final Class<?> tCls = returnType.getComponentType();
         if (Envelop.class == tCls) {
@@ -38,7 +38,7 @@ public class AsyncInvoker extends AbstractInvoker {
             final Future<Envelop> result = Ut.invoke(proxy, method.getName(), envelop);
             result.setHandler(item -> message.reply(item.result()));
         } else {
-            final Object returnValue = invokeInternal(proxy, method, envelop);
+            final Object returnValue = this.invokeInternal(proxy, method, envelop);
             if (null == returnValue) {
                 final Future future = Future.future();
                 future.setHandler(Ux.handler(message));
@@ -64,7 +64,7 @@ public class AsyncInvoker extends AbstractInvoker {
         final Envelop envelop = message.body();
         // Deserialization from message bus.
         final Class<?> returnType = method.getReturnType();
-        getLogger().info(Info.MSG_FUTURE, getClass(), returnType, true);
+        this.getLogger().info(Info.MSG_FUTURE, this.getClass(), returnType, true);
         // Get T
         final Class<?> tCls = returnType.getComponentType();
         if (Envelop.class == tCls) {
@@ -76,10 +76,10 @@ public class AsyncInvoker extends AbstractInvoker {
                     .connect(method)
                     .send(item))
                     .setHandler(Ux.handler(message)); */
-            result.compose(nextEnvelop(vertx, method))
+            result.compose(this.nextEnvelop(vertx, method))
                     .setHandler(Ux.handler(message));
         } else {
-            final Future future = invokeJson(proxy, method, envelop);
+            final Future future = this.invokeJson(proxy, method, envelop);
             /* replaced old code
             future.compose(item -> TunnelClient.create(this.getClass())
                     .connect(vertx)
@@ -87,7 +87,7 @@ public class AsyncInvoker extends AbstractInvoker {
                     .send(Ux.to(item)))
                     .compose(item -> Future.succeededFuture(Ux.to(item)))
                     .setHandler(Ux.handler(message)); */
-            future.compose(nextEnvelop(vertx, method))
+            future.compose(this.nextEnvelop(vertx, method))
                     .setHandler(Ux.handler(message));
         }
     }

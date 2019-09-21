@@ -5,6 +5,7 @@ package cn.vertxup.ui.domain;
 
 
 import cn.vertxup.ui.domain.tables.*;
+import io.vertx.tp.ke.refine.Ke;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
@@ -32,7 +33,7 @@ public class Db extends SchemaImpl {
      * The reference instance of <code>DB_ETERNAL</code>
      */
     public static final Db DB_ETERNAL = new Db();
-    private static final long serialVersionUID = -1884205466;
+    private static final long serialVersionUID = 847436382;
     /**
      * The table <code>DB_ETERNAL.UI_COLUMN</code>.
      */
@@ -59,15 +60,45 @@ public class Db extends SchemaImpl {
     public final UiLayout UI_LAYOUT = cn.vertxup.ui.domain.tables.UiLayout.UI_LAYOUT;
 
     /**
+     * The table <code>DB_ETERNAL.UI_LIST</code>.
+     */
+    public final UiList UI_LIST = cn.vertxup.ui.domain.tables.UiList.UI_LIST;
+
+    /**
+     * The table <code>DB_ETERNAL.UI_OP</code>.
+     */
+    public final UiOp UI_OP = cn.vertxup.ui.domain.tables.UiOp.UI_OP;
+
+    /**
      * The table <code>DB_ETERNAL.UI_PAGE</code>.
      */
     public final UiPage UI_PAGE = cn.vertxup.ui.domain.tables.UiPage.UI_PAGE;
 
     /**
+     * The table <code>DB_ETERNAL.V_FRAGMENT</code>.
+     */
+    public final VFragment V_FRAGMENT = cn.vertxup.ui.domain.tables.VFragment.V_FRAGMENT;
+
+    /**
+     * The table <code>DB_ETERNAL.V_QUERY</code>.
+     */
+    public final VQuery V_QUERY = cn.vertxup.ui.domain.tables.VQuery.V_QUERY;
+
+    /**
+     * The table <code>DB_ETERNAL.V_SEARCH</code>.
+     */
+    public final VSearch V_SEARCH = cn.vertxup.ui.domain.tables.VSearch.V_SEARCH;
+
+    /**
+     * The table <code>DB_ETERNAL.V_TABLE</code>.
+     */
+    public final VTable V_TABLE = cn.vertxup.ui.domain.tables.VTable.V_TABLE;
+
+    /**
      * No further instances allowed
      */
     private Db() {
-        super("DB_ETERNAL", null);
+        super(Ke.getDatabase(), null);
     }
 
 
@@ -93,6 +124,12 @@ public class Db extends SchemaImpl {
                 UiField.UI_FIELD,
                 UiForm.UI_FORM,
                 UiLayout.UI_LAYOUT,
-                UiPage.UI_PAGE);
+                UiList.UI_LIST,
+                UiOp.UI_OP,
+                UiPage.UI_PAGE,
+                VFragment.V_FRAGMENT,
+                VQuery.V_QUERY,
+                VSearch.V_SEARCH,
+                VTable.V_TABLE);
     }
 }

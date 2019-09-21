@@ -1,16 +1,16 @@
 package io.vertx.tp.plugin.excel;
 
 import io.vertx.codegen.annotations.Fluent;
-import io.vertx.core.AsyncResult;
-import io.vertx.core.Future;
-import io.vertx.core.Handler;
-import io.vertx.core.Vertx;
+import io.vertx.core.*;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.error._500ExportingErrorException;
 import io.vertx.tp.plugin.excel.atom.ExRecord;
 import io.vertx.tp.plugin.excel.atom.ExTable;
 import io.vertx.tp.plugin.excel.tool.ExFn;
+import io.vertx.up.exception.WebException;
+import io.vertx.up.exception.web._500InternalServerException;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
@@ -226,6 +226,25 @@ public class ExcelClientImpl implements ExcelClient {
             handler.handle(Ux.toFuture(Ut.ioBuffer(filename)));
         });
         return this;
+    }
+
+    @Override
+    public Future<Buffer> exportTable(final String identifier, final JsonArray data) {
+        final Promise<Buffer> future = Promise.promise();
+        this.exportTable(identifier, data, handler -> {
+            if (handler.succeeded()) {
+                future.complete(handler.result());
+            } else {
+                final Throwable error = handler.cause();
+                if (Objects.nonNull(error)) {
+                    final WebException failure = new _500ExportingErrorException(this.getClass(), error.getMessage());
+                    future.fail(failure);
+                } else {
+                    future.fail(new _500InternalServerException(this.getClass(), "Unexpected Error"));
+                }
+            }
+        });
+        return future.future();
     }
 
     private Set<ExTable> getFiltered(final Set<ExTable> processed, final String tableOnly) {
