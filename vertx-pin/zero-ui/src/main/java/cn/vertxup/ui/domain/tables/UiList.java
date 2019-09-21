@@ -35,7 +35,7 @@ public class UiList extends TableImpl<UiListRecord> {
      * The reference instance of <code>DB_ETERNAL.UI_LIST</code>
      */
     public static final UiList UI_LIST = new UiList();
-    private static final long serialVersionUID = 1475438340;
+    private static final long serialVersionUID = 1754683834;
     /**
      * The column <code>DB_ETERNAL.UI_LIST.KEY</code>. 「key」- 主键
      */
@@ -88,6 +88,10 @@ public class UiList extends TableImpl<UiListRecord> {
      * The column <code>DB_ETERNAL.UI_LIST.CLASS_COMBINER</code>. 「classCombiner」- 组装器
      */
     public final TableField<UiListRecord, String> CLASS_COMBINER = createField("CLASS_COMBINER", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「classCombiner」- 组装器");
+    /**
+     * The column <code>DB_ETERNAL.UI_LIST.CONTROL_ID</code>. 「controlId」- 绑定的控件ID
+     */
+    public final TableField<UiListRecord, String> CONTROL_ID = createField("CONTROL_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「controlId」- 绑定的控件ID");
     /**
      * The column <code>DB_ETERNAL.UI_LIST.ACTIVE</code>. 「active」- 是否启用
      */
@@ -171,7 +175,7 @@ public class UiList extends TableImpl<UiListRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.UI_LIST_CODE, Indexes.UI_LIST_PRIMARY);
+        return Arrays.<Index>asList(Indexes.UI_LIST_CODE, Indexes.UI_LIST_CONTROL_ID, Indexes.UI_LIST_PRIMARY);
     }
 
     /**
@@ -187,7 +191,7 @@ public class UiList extends TableImpl<UiListRecord> {
      */
     @Override
     public List<UniqueKey<UiListRecord>> getKeys() {
-        return Arrays.<UniqueKey<UiListRecord>>asList(Keys.KEY_UI_LIST_PRIMARY, Keys.KEY_UI_LIST_CODE);
+        return Arrays.<UniqueKey<UiListRecord>>asList(Keys.KEY_UI_LIST_PRIMARY, Keys.KEY_UI_LIST_CODE, Keys.KEY_UI_LIST_CONTROL_ID);
     }
 
     /**
