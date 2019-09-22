@@ -56,6 +56,10 @@ public class Ke {
         return KeTool.combineAsync(data, headers);
     }
 
+    public static Function<JsonObject, Future<JsonObject>> fabricAsync(final String field) {
+        return KeFabric.combineAsync(field);
+    }
+
     public static void banner(final String module) {
         KeTool.banner(module);
     }

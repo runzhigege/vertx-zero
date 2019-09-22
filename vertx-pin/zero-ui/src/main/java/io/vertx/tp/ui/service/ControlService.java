@@ -1,7 +1,9 @@
 package io.vertx.tp.ui.service;
 
 import cn.vertxup.ui.domain.tables.daos.UiControlDao;
+import cn.vertxup.ui.domain.tables.daos.UiOpDao;
 import cn.vertxup.ui.domain.tables.pojos.UiControl;
+import cn.vertxup.ui.domain.tables.pojos.UiOp;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -43,5 +45,12 @@ public class ControlService implements ControlStub {
                 .compose(Ke.metadata(KeField.Ui.COMPONENT_CONFIG))
                 .compose(Ke.metadata(KeField.Ui.ASSIST))
                 .compose(Ke.metadata(KeField.Ui.GRID));
+    }
+
+    @Override
+    public Future<JsonArray> fetchOps(final String control) {
+        return Ux.Jooq.on(UiOpDao.class)
+                .<UiOp>fetchAsync("controlId", control)
+                .compose(Ux::fnJArray);
     }
 }

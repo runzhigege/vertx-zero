@@ -1,9 +1,11 @@
 package cn.vertxup.ui.api;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ui.cv.Addr;
 import io.vertx.tp.ui.cv.em.ControlType;
+import io.vertx.tp.ui.service.ControlStub;
 import io.vertx.tp.ui.service.ListStub;
 import io.vertx.tp.ui.service.PageStub;
 import io.vertx.up.annotations.Address;
@@ -21,6 +23,9 @@ public class UiActor {
 
     @Inject
     private transient ListStub listStub;
+
+    @Inject
+    private transient ControlStub controlStub;
 
     @Address(Addr.Page.FETCH_AMP)
     public Future<JsonObject> fetchAmp(final String sigma,
@@ -43,5 +48,11 @@ public class UiActor {
         } else {
             return Ux.fnJObject(new JsonObject());
         }
+    }
+
+    @Address(Addr.Control.FETCH_OP)
+    public Future<JsonArray> fetchOps(final JsonObject body) {
+        final String control = body.getString("control");
+        return this.controlStub.fetchOps(control);
     }
 }
