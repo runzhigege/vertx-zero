@@ -1,4 +1,4 @@
-package io.vertx.tp.erp.service;
+package cn.vertxup.erp.service;
 
 import cn.vertxup.erp.domain.tables.daos.ECompanyDao;
 import cn.vertxup.erp.domain.tables.daos.EEmployeeDao;
@@ -17,14 +17,14 @@ public class CompanyService implements CompanyStub {
     public Future<JsonObject> fetchByEmployee(final String employeeId) {
         return Ux.Jooq.on(EEmployeeDao.class)
                 .<EEmployee>findByIdAsync(employeeId)
-                .compose(employee -> fetchById(Objects.isNull(employee) ?
+                .compose(employee -> this.fetchById(Objects.isNull(employee) ?
                         null : employee.getCompanyId()))
                 .compose(Ux::fnJObject);
     }
 
     @Override
     public Future<JsonObject> fetch(final String companyId) {
-        return fetchById(companyId)
+        return this.fetchById(companyId)
                 .compose(Ux::fnJObject);
     }
 

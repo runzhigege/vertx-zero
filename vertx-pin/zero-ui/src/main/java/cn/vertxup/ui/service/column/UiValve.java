@@ -1,4 +1,4 @@
-package io.vertx.tp.ui.service.column;
+package cn.vertxup.ui.service.column;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
