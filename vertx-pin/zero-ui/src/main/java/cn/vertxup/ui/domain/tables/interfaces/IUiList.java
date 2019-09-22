@@ -154,6 +154,16 @@ public interface IUiList extends Serializable {
     public String getClassCombiner();
 
     /**
+     * Setter for <code>DB_ETERNAL.UI_LIST.CONTROL_ID</code>. 「controlId」- 绑定的控件ID
+     */
+    public IUiList setControlId(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_LIST.CONTROL_ID</code>. 「controlId」- 绑定的控件ID
+     */
+    public String getControlId();
+
+    /**
      * Setter for <code>DB_ETERNAL.UI_LIST.ACTIVE</code>. 「active」- 是否启用
      */
     public IUiList setActive(Boolean value);
@@ -261,6 +271,7 @@ public interface IUiList extends Serializable {
         setOptionsSubmit(json.getString("OPTIONS_SUBMIT"));
         setOptions(json.getString("OPTIONS"));
         setClassCombiner(json.getString("CLASS_COMBINER"));
+        setControlId(json.getString("CONTROL_ID"));
         setActive(json.getBoolean("ACTIVE"));
         setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
@@ -288,6 +299,7 @@ public interface IUiList extends Serializable {
         json.put("OPTIONS_SUBMIT",getOptionsSubmit());
         json.put("OPTIONS",getOptions());
         json.put("CLASS_COMBINER",getClassCombiner());
+        json.put("CONTROL_ID",getControlId());
         json.put("ACTIVE",getActive());
         json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());

@@ -35,7 +35,7 @@ public class UiForm extends TableImpl<UiFormRecord> {
      * The reference instance of <code>DB_ETERNAL.UI_FORM</code>
      */
     public static final UiForm UI_FORM = new UiForm();
-    private static final long serialVersionUID = -236613415;
+    private static final long serialVersionUID = -794879053;
     /**
      * The column <code>DB_ETERNAL.UI_FORM.KEY</code>. 「key」- 主键
      */
@@ -64,6 +64,10 @@ public class UiForm extends TableImpl<UiFormRecord> {
      * The column <code>DB_ETERNAL.UI_FORM.ROW</code>. 「rowConfig/rowClass」- 行专用配置
      */
     public final TableField<UiFormRecord, String> ROW = createField("ROW", org.jooq.impl.SQLDataType.CLOB, this, "「rowConfig/rowClass」- 行专用配置");
+    /**
+     * The column <code>DB_ETERNAL.UI_FORM.CONTROL_ID</code>. 「controlId」- 绑定的控件ID
+     */
+    public final TableField<UiFormRecord, String> CONTROL_ID = createField("CONTROL_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「controlId」- 绑定的控件ID");
     /**
      * The column <code>DB_ETERNAL.UI_FORM.ACTIVE</code>. 「active」- 是否启用
      */
@@ -147,7 +151,7 @@ public class UiForm extends TableImpl<UiFormRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.UI_FORM_CODE, Indexes.UI_FORM_PRIMARY);
+        return Arrays.<Index>asList(Indexes.UI_FORM_CODE, Indexes.UI_FORM_CONTROL_ID, Indexes.UI_FORM_PRIMARY);
     }
 
     /**
@@ -163,7 +167,7 @@ public class UiForm extends TableImpl<UiFormRecord> {
      */
     @Override
     public List<UniqueKey<UiFormRecord>> getKeys() {
-        return Arrays.<UniqueKey<UiFormRecord>>asList(Keys.KEY_UI_FORM_PRIMARY, Keys.KEY_UI_FORM_CODE);
+        return Arrays.<UniqueKey<UiFormRecord>>asList(Keys.KEY_UI_FORM_PRIMARY, Keys.KEY_UI_FORM_CODE, Keys.KEY_UI_FORM_CONTROL_ID);
     }
 
     /**
