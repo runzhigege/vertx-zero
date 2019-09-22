@@ -1,4 +1,4 @@
-package io.vertx.tp.erp.service;
+package cn.vertxup.erp.service;
 
 import cn.vertxup.erp.domain.tables.daos.EDeptDao;
 import cn.vertxup.erp.domain.tables.pojos.EDept;
