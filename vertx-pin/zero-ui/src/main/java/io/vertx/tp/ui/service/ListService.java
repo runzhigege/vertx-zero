@@ -52,6 +52,8 @@ public class ListService implements ListStub {
                 /* vTable */
                 .compose(Ux.toAttach(FIELD_V_TABLE, this.optionStub::fetchTable))
                 /* vSegment */
-                .compose(Ux.toAttachJson(FIELD_V_SEGMENT, this.optionStub::fetchFragment));
+                .compose(Ux.toAttachJson(FIELD_V_SEGMENT, this.optionStub::fetchFragment))
+                /* Combiner for final processing */
+                .compose(Ke.fabricAsync("classCombiner"));
     }
 }

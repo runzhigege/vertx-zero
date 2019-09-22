@@ -19,5 +19,7 @@ public interface Addr {
 
     interface Control {
         String FETCH_BY_ID = Prefix._EVENT + "X-CONTROL/BY-ID";
+
+        String FETCH_OP = Prefix._EVENT + "X-OP/BY-ID";
     }
 }
