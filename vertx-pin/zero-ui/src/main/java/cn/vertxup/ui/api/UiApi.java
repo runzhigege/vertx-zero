@@ -32,13 +32,24 @@ public interface UiApi {
 
     /*
      * Condition should be:
-     * sigma +
      * {
-     *     control
+     *     control, ( form Id, list Id )
+     *     type
      * }
      */
     @Path("/ui/control")
     @POST
     @Address(Addr.Control.FETCH_BY_ID)
     JsonObject fetchControl(@BodyParam JsonObject body);
+
+    /*
+     * Condition should be:
+     * {
+     *     control
+     * }
+     */
+    @Path("/ui/ops")
+    @POST
+    @Address(Addr.Control.FETCH_OP)
+    JsonObject fetchOp(@BodyParam JsonObject body);
 }
