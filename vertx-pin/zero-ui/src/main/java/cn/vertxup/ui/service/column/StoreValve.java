@@ -1,4 +1,4 @@
-package io.vertx.tp.ui.service.column;
+package cn.vertxup.ui.service.column;
 
 import cn.vertxup.ui.domain.tables.daos.UiColumnDao;
 import cn.vertxup.ui.domain.tables.pojos.UiColumn;
