@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS UI_LIST
 
     -- 特殊插件（用于执行一些特殊组装和转换，读取到UI配置过后，通过组装器组装成最终配置信息）
     `CLASS_COMBINER` VARCHAR(255) COMMENT '「classCombiner」- 组装器',
+    `CONTROL_ID`     VARCHAR(36) COMMENT '「controlId」- 绑定的控件ID',
 
     -- 特殊字段
     `ACTIVE`         BIT         DEFAULT NULL COMMENT '「active」- 是否启用',
@@ -40,3 +41,5 @@ CREATE TABLE IF NOT EXISTS UI_LIST
 -- changeset Lang:ox-list-2
 ALTER TABLE UI_LIST
     ADD UNIQUE (`CODE`, `SIGMA`);
+ALTER TABLE UI_LIST
+    ADD UNIQUE (`CONTROL_ID`);

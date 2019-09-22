@@ -260,6 +260,14 @@ public final class Ux {
         return Web.toHandler(message);
     }
 
+    public static <T> Function<JsonObject, Future<JsonObject>> toAttach(final String field, final Function<T, Future<JsonObject>> function) {
+        return Web.toAttach(field, function);
+    }
+
+    public static <T> Function<JsonObject, Future<JsonObject>> toAttachJson(final String field, final Function<T, Future<JsonObject>> function) {
+        return Web.toAttachJson(field, function);
+    }
+
     // ---------------------- Future --------------------------
     public static <T> Future<JsonObject> thenRpc(final String name, final String address, final JsonObject params) {
         return UxRpc.thenRpc(name, address, params);

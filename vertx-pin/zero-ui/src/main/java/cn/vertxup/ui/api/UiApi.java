@@ -13,7 +13,7 @@ import javax.ws.rs.Path;
 
 @EndPoint
 @Path("/api")
-public interface PageApi {
+public interface UiApi {
     /*
      * Condition should be:
      * sigma +
@@ -29,4 +29,16 @@ public interface PageApi {
     @Address(Addr.Page.FETCH_AMP)
     JsonObject fetchPage(@HeaderParam(ID.Header.X_SIGMA) String sigma,
                          @BodyParam JsonObject body);
+
+    /*
+     * Condition should be:
+     * sigma +
+     * {
+     *     control
+     * }
+     */
+    @Path("/ui/control")
+    @POST
+    @Address(Addr.Control.FETCH_BY_ID)
+    JsonObject fetchControl(@BodyParam JsonObject body);
 }

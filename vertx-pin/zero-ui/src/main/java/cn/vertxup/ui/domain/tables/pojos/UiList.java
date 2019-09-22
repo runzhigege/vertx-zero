@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiList implements IUiList {
 
-    private static final long serialVersionUID = -1565625483;
+    private static final long serialVersionUID = -2128730795;
 
     private String        key;
     private String        name;
@@ -39,6 +39,7 @@ public class UiList implements IUiList {
     private String        optionsSubmit;
     private String        options;
     private String        classCombiner;
+    private String        controlId;
     private Boolean       active;
     private String        sigma;
     private String        metadata;
@@ -64,6 +65,7 @@ public class UiList implements IUiList {
         this.optionsSubmit = value.optionsSubmit;
         this.options = value.options;
         this.classCombiner = value.classCombiner;
+        this.controlId = value.controlId;
         this.active = value.active;
         this.sigma = value.sigma;
         this.metadata = value.metadata;
@@ -88,6 +90,7 @@ public class UiList implements IUiList {
         String        optionsSubmit,
         String        options,
         String        classCombiner,
+        String        controlId,
         Boolean       active,
         String        sigma,
         String        metadata,
@@ -110,6 +113,7 @@ public class UiList implements IUiList {
         this.optionsSubmit = optionsSubmit;
         this.options = options;
         this.classCombiner = classCombiner;
+        this.controlId = controlId;
         this.active = active;
         this.sigma = sigma;
         this.metadata = metadata;
@@ -264,6 +268,17 @@ public class UiList implements IUiList {
     }
 
     @Override
+    public String getControlId() {
+        return this.controlId;
+    }
+
+    @Override
+    public UiList setControlId(String controlId) {
+        this.controlId = controlId;
+        return this;
+    }
+
+    @Override
     public Boolean getActive() {
         return this.active;
     }
@@ -368,6 +383,7 @@ public class UiList implements IUiList {
         sb.append(", ").append(optionsSubmit);
         sb.append(", ").append(options);
         sb.append(", ").append(classCombiner);
+        sb.append(", ").append(controlId);
         sb.append(", ").append(active);
         sb.append(", ").append(sigma);
         sb.append(", ").append(metadata);
@@ -403,6 +419,7 @@ public class UiList implements IUiList {
         setOptionsSubmit(from.getOptionsSubmit());
         setOptions(from.getOptions());
         setClassCombiner(from.getClassCombiner());
+        setControlId(from.getControlId());
         setActive(from.getActive());
         setSigma(from.getSigma());
         setMetadata(from.getMetadata());
