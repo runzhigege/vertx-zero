@@ -1,4 +1,4 @@
-package io.vertx.tp.ui.service;
+package cn.vertxup.ui.service;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;

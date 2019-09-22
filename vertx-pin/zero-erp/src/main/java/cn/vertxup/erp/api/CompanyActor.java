@@ -1,12 +1,12 @@
 package cn.vertxup.erp.api;
 
+import cn.vertxup.erp.service.CompanyStub;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.erp.cv.Addr;
 import io.vertx.tp.erp.cv.ErpMsg;
 import io.vertx.tp.erp.refine.Er;
-import io.vertx.tp.erp.service.CompanyStub;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.log.Annal;
@@ -24,12 +24,12 @@ public class CompanyActor {
     @Address(Addr.Company.INFORMATION)
     public Future<JsonObject> company(final String employeeId) {
         Er.infoWorker(LOGGER, ErpMsg.COMPANY_INFO, employeeId);
-        return stub.fetchByEmployee(employeeId);
+        return this.stub.fetchByEmployee(employeeId);
     }
 
     @Address(Addr.Company.COMPANY_KEY)
     public Future<JsonArray> fetchCompanys(final String sigma) {
         Er.infoWorker(LOGGER, ErpMsg.COMPANY_INFO, sigma);
-        return stub.fetchCompanys(sigma);
+        return this.stub.fetchCompanys(sigma);
     }
 }

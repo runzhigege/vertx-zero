@@ -1,4 +1,4 @@
-package io.vertx.tp.ui.service;
+package cn.vertxup.ui.service;
 
 import cn.vertxup.ui.domain.tables.daos.UiLayoutDao;
 import io.vertx.core.Future;

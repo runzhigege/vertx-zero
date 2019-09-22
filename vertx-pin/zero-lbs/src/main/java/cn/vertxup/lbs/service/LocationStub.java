@@ -1,4 +1,4 @@
-package io.vertx.tp.lbs.service;
+package cn.vertxup.lbs.service;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;

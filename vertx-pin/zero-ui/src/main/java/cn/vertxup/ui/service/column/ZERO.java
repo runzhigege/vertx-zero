@@ -1,4 +1,4 @@
-package io.vertx.tp.ui.service.column;
+package cn.vertxup.ui.service.column;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
