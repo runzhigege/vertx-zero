@@ -105,7 +105,7 @@
         <http.client.version>4.5.10</http.client.version>
         <http.core.version>4.4.12</http.core.version>
         <!-- Liquibase -->
-        <liquibase.version>3.6.3</liquibase.version>
+        <liquibase.version>3.8.0</liquibase.version>
         <!-- Rpc -->
         <protobuf.version>3.10.0</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
@@ -114,7 +114,7 @@
         <yaml.version>1.25</yaml.version>
         <!-- Vert.x Addition -->
         <rxjava2.version>2.2.12</rxjava2.version>
-        <netty.tcnative.version>2.0.25.Final</netty.tcnative.version>
+        <netty.tcnative.version>2.0.26.Final</netty.tcnative.version>
         <netty.version>4.1.41.Final</netty.version>
         <hazelcast.version>3.12.2</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
@@ -139,27 +139,27 @@
         <logback.cal10n.version>0.8.1</logback.cal10n.version>
         <slf4j.version>1.7.25</slf4j.version>
         <!-- Plugin -->
-        <maven.plugin.assembly>3.1.0</maven.plugin.assembly>
-        <maven.plugin.compiler>3.7.0</maven.plugin.compiler>
+        <maven.plugin.assembly>3.1.1</maven.plugin.assembly>
+        <maven.plugin.compiler>3.8.1</maven.plugin.compiler>
         <maven.plugin.surefire>2.21.0</maven.plugin.surefire>
         <maven.plugin.clean>3.1.0</maven.plugin.clean>
-        <maven.plugin.version>2.5</maven.plugin.version>
+        <maven.plugin.version>2.7</maven.plugin.version>
         <maven.plugin.install>2.5.2</maven.plugin.install>
         <maven.plugin.deploy>2.8.2</maven.plugin.deploy>
         <maven.plugin.jar>3.0.2</maven.plugin.jar>
-        <maven.plugin.resource>3.0.2</maven.plugin.resource>
-        <maven.plugin.site>3.7</maven.plugin.site>
+        <maven.plugin.resource>3.1.0</maven.plugin.resource>
+        <maven.plugin.site>3.8.2</maven.plugin.site>
         <maven.plugin.enforcer>3.0.0-M1</maven.plugin.enforcer>
         <maven.plugin.lombok>1.18.10.0</maven.plugin.lombok>
         <maven.plugin.processor>3.3.3</maven.plugin.processor>
-        <maven.plugin.source>3.0.1</maven.plugin.source>
+        <maven.plugin.source>3.1.0</maven.plugin.source>
         <maven.plugin.javadoc>2.10.4</maven.plugin.javadoc>
         <maven.plugin.staging>1.6.8</maven.plugin.staging>
         <maven.plugin.pgp>1.6</maven.plugin.pgp>
-        <maven.plugin.fabric8>3.5.38</maven.plugin.fabric8>
+        <maven.plugin.fabric8>4.2.0</maven.plugin.fabric8>
         <maven.plugin.coveralls>4.3.0</maven.plugin.coveralls>
         <maven.plugin.cobertura>2.7</maven.plugin.cobertura>
-        <maven.plugin.spotify>1.0.0</maven.plugin.spotify>
+        <maven.plugin.spotify>1.2.1</maven.plugin.spotify>
         <maven.plugin.protobuf>0.5.1</maven.plugin.protobuf>
         <maven.plugin.os>1.5.0.Final</maven.plugin.os>
         <maven.plugin.antrun>1.8</maven.plugin.antrun>
