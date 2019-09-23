@@ -13,8 +13,6 @@ CREATE TABLE IF NOT EXISTS UI_FORM
     `HIDDEN`     TEXT COMMENT '「hidden」- 隐藏字段专用配置',
     `ROW`        TEXT COMMENT '「rowConfig/rowClass」- 行专用配置',
 
-    `CONTROL_ID` VARCHAR(36) COMMENT '「controlId」- 绑定的控件ID',
-
     -- 特殊字段
     `ACTIVE`     BIT         DEFAULT NULL COMMENT '「active」- 是否启用',
     `SIGMA`      VARCHAR(32) DEFAULT NULL COMMENT '「sigma」- 统一标识',
@@ -32,5 +30,3 @@ CREATE TABLE IF NOT EXISTS UI_FORM
 -- changeset Lang:ox-form-2
 ALTER TABLE UI_FORM
     ADD UNIQUE (`CODE`, `SIGMA`);
-ALTER TABLE UI_FORM
-    ADD UNIQUE (`CONTROL_ID`);

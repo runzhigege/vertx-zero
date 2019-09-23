@@ -48,12 +48,10 @@ public class Indexes {
     public static final Index UI_FIELD_CONTROL_ID = Indexes0.UI_FIELD_CONTROL_ID;
     public static final Index UI_FIELD_PRIMARY = Indexes0.UI_FIELD_PRIMARY;
     public static final Index UI_FORM_CODE = Indexes0.UI_FORM_CODE;
-    public static final Index UI_FORM_CONTROL_ID = Indexes0.UI_FORM_CONTROL_ID;
     public static final Index UI_FORM_PRIMARY = Indexes0.UI_FORM_PRIMARY;
     public static final Index UI_LAYOUT_NAME = Indexes0.UI_LAYOUT_NAME;
     public static final Index UI_LAYOUT_PRIMARY = Indexes0.UI_LAYOUT_PRIMARY;
     public static final Index UI_LIST_CODE = Indexes0.UI_LIST_CODE;
-    public static final Index UI_LIST_CONTROL_ID = Indexes0.UI_LIST_CONTROL_ID;
     public static final Index UI_LIST_PRIMARY = Indexes0.UI_LIST_PRIMARY;
     public static final Index UI_OP_CONTROL_ID = Indexes0.UI_OP_CONTROL_ID;
     public static final Index UI_OP_CONTROL_ID_2 = Indexes0.UI_OP_CONTROL_ID_2;
@@ -77,12 +75,10 @@ public class Indexes {
         public static Index UI_FIELD_CONTROL_ID = Internal.createIndex("CONTROL_ID", UiField.UI_FIELD, new OrderField[] { UiField.UI_FIELD.CONTROL_ID, UiField.UI_FIELD.NAME }, true);
         public static Index UI_FIELD_PRIMARY = Internal.createIndex("PRIMARY", UiField.UI_FIELD, new OrderField[] { UiField.UI_FIELD.KEY }, true);
         public static Index UI_FORM_CODE = Internal.createIndex("CODE", UiForm.UI_FORM, new OrderField[] { UiForm.UI_FORM.CODE, UiForm.UI_FORM.SIGMA }, true);
-        public static Index UI_FORM_CONTROL_ID = Internal.createIndex("CONTROL_ID", UiForm.UI_FORM, new OrderField[] { UiForm.UI_FORM.CONTROL_ID }, true);
         public static Index UI_FORM_PRIMARY = Internal.createIndex("PRIMARY", UiForm.UI_FORM, new OrderField[] { UiForm.UI_FORM.KEY }, true);
         public static Index UI_LAYOUT_NAME = Internal.createIndex("NAME", UiLayout.UI_LAYOUT, new OrderField[] { UiLayout.UI_LAYOUT.NAME, UiLayout.UI_LAYOUT.SIGMA }, true);
         public static Index UI_LAYOUT_PRIMARY = Internal.createIndex("PRIMARY", UiLayout.UI_LAYOUT, new OrderField[] { UiLayout.UI_LAYOUT.KEY }, true);
         public static Index UI_LIST_CODE = Internal.createIndex("CODE", UiList.UI_LIST, new OrderField[] { UiList.UI_LIST.CODE, UiList.UI_LIST.SIGMA }, true);
-        public static Index UI_LIST_CONTROL_ID = Internal.createIndex("CONTROL_ID", UiList.UI_LIST, new OrderField[] { UiList.UI_LIST.CONTROL_ID }, true);
         public static Index UI_LIST_PRIMARY = Internal.createIndex("PRIMARY", UiList.UI_LIST, new OrderField[] { UiList.UI_LIST.KEY }, true);
         public static Index UI_OP_CONTROL_ID = Internal.createIndex("CONTROL_ID", UiOp.UI_OP, new OrderField[] { UiOp.UI_OP.CONTROL_ID, UiOp.UI_OP.SIGMA, UiOp.UI_OP.CLIENT_KEY }, true);
         public static Index UI_OP_CONTROL_ID_2 = Internal.createIndex("CONTROL_ID_2", UiOp.UI_OP, new OrderField[] { UiOp.UI_OP.CONTROL_ID, UiOp.UI_OP.SIGMA, UiOp.UI_OP.ACTION }, true);
