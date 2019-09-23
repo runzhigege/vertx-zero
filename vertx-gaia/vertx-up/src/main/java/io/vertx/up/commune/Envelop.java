@@ -20,8 +20,10 @@ import io.vertx.up.util.Ut;
 import io.vertx.zero.exception.IndexExceedException;
 
 import java.io.Serializable;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 public class Envelop implements Serializable {
@@ -260,14 +262,27 @@ public class Envelop implements Serializable {
     public JsonObject headersX() {
         final JsonObject headerData = new JsonObject();
         this.assist.headers().names().stream()
-                .filter(field -> field.startsWith(ID.Header.PREFIX))
+                /* Up case is OK */
+                .filter(field -> field.startsWith(ID.Header.PREFIX)
+                        /* Lower case is also Ok */
+                    || field.startsWith(ID.Header.PREFIX.toLowerCase(Locale.getDefault())))
                 /*
                  * Data for header
                  * X-App-Id -> appId
                  * X-App-Key -> appKey
                  * X-Sigma -> sigma
                  */
-                .forEach(field -> headerData.put(ID.Header.PARAM_MAP.get(field), this.assist.headers().get(field)));
+                .forEach(field -> {
+                    /*
+                     * Lower / Upper are both Ok
+                     */
+                    final String found = ID.Header.PARAM_MAP.keySet()
+                            .stream().filter(field::equalsIgnoreCase)
+                            .findFirst().map(ID.Header.PARAM_MAP::get).orElse(null);
+                    if(Ut.notNil(found)){
+                        headerData.put(found, this.assist.headers().get(field));
+                    }
+                });
         return headerData;
     }
 
