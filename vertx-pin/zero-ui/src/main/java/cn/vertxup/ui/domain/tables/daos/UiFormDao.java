@@ -112,20 +112,6 @@ public class UiFormDao extends DAOImpl<UiFormRecord, cn.vertxup.ui.domain.tables
     }
 
     /**
-     * Fetch records that have <code>CONTROL_ID IN (values)</code>
-     */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiForm> fetchByControlId(String... values) {
-        return fetch(UiForm.UI_FORM.CONTROL_ID, values);
-    }
-
-    /**
-     * Fetch a unique record that has <code>CONTROL_ID = value</code>
-     */
-    public cn.vertxup.ui.domain.tables.pojos.UiForm fetchOneByControlId(String value) {
-        return fetchOne(UiForm.UI_FORM.CONTROL_ID, value);
-    }
-
-    /**
      * Fetch records that have <code>ACTIVE IN (values)</code>
      */
     public List<cn.vertxup.ui.domain.tables.pojos.UiForm> fetchByActive(Boolean... values) {
@@ -235,20 +221,6 @@ public class UiFormDao extends DAOImpl<UiFormRecord, cn.vertxup.ui.domain.tables
      */
     public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiForm>> fetchByRowAsync(List<String> values) {
         return fetchAsync(UiForm.UI_FORM.ROW,values);
-    }
-
-    /**
-     * Fetch records that have <code>CONTROL_ID IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiForm>> fetchByControlIdAsync(List<String> values) {
-        return fetchAsync(UiForm.UI_FORM.CONTROL_ID,values);
-    }
-
-    /**
-     * Fetch a unique record that has <code>CONTROL_ID = value</code> asynchronously
-     */
-    public CompletableFuture<cn.vertxup.ui.domain.tables.pojos.UiForm> fetchOneByControlIdAsync(String value) {
-        return FutureTool.executeBlocking(h->h.complete(fetchOneByControlId(value)),vertx());
     }
 
     /**
