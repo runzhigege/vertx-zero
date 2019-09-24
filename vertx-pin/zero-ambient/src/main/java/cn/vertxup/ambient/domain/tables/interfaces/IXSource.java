@@ -84,14 +84,14 @@ public interface IXSource extends Serializable {
     public String getCategory();
 
     /**
-     * Setter for <code>DB_ETERNAL.X_SOURCE.DRIVER_CLASS</code>. 「driverClass」- 数据库驱动指定，JDBC4之前
+     * Setter for <code>DB_ETERNAL.X_SOURCE.DRIVER_CLASS_NAME</code>. 「driverClassName」- 数据库驱动指定，JDBC4之前
      */
-    public IXSource setDriverClass(String value);
+    public IXSource setDriverClassName(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.X_SOURCE.DRIVER_CLASS</code>. 「driverClass」- 数据库驱动指定，JDBC4之前
+     * Getter for <code>DB_ETERNAL.X_SOURCE.DRIVER_CLASS_NAME</code>. 「driverClassName」- 数据库驱动指定，JDBC4之前
      */
-    public String getDriverClass();
+    public String getDriverClassName();
 
     /**
      * Setter for <code>DB_ETERNAL.X_SOURCE.JDBC_URL</code>. 「jdbcUrl」- JDBC连接字符串
@@ -254,7 +254,7 @@ public interface IXSource extends Serializable {
         setHostname(json.getString("HOSTNAME"));
         setPort(json.getInteger("PORT"));
         setCategory(json.getString("CATEGORY"));
-        setDriverClass(json.getString("DRIVER_CLASS"));
+        setDriverClassName(json.getString("DRIVER_CLASS_NAME"));
         setJdbcUrl(json.getString("JDBC_URL"));
         setJdbcConfig(json.getString("JDBC_CONFIG"));
         setInstance(json.getString("INSTANCE"));
@@ -281,7 +281,7 @@ public interface IXSource extends Serializable {
         json.put("HOSTNAME",getHostname());
         json.put("PORT",getPort());
         json.put("CATEGORY",getCategory());
-        json.put("DRIVER_CLASS",getDriverClass());
+        json.put("DRIVER_CLASS_NAME",getDriverClassName());
         json.put("JDBC_URL",getJdbcUrl());
         json.put("JDBC_CONFIG",getJdbcConfig());
         json.put("INSTANCE",getInstance());

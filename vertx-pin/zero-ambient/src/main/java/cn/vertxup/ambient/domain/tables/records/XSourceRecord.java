@@ -31,7 +31,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XSourceRecord extends UpdatableRecordImpl<XSourceRecord> implements Record21<String, String, String, String, Integer, String, String, String, String, String, String, String, String, Boolean, String, String, String, LocalDateTime, String, LocalDateTime, String>, IXSource {
 
-    private static final long serialVersionUID = 1583771328;
+    private static final long serialVersionUID = 2079924743;
 
     /**
      * Setter for <code>DB_ETERNAL.X_SOURCE.KEY</code>. 「key」- 数据源主键
@@ -136,19 +136,19 @@ public class XSourceRecord extends UpdatableRecordImpl<XSourceRecord> implements
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.X_SOURCE.DRIVER_CLASS</code>. 「driverClass」- 数据库驱动指定，JDBC4之前
+     * Setter for <code>DB_ETERNAL.X_SOURCE.DRIVER_CLASS_NAME</code>. 「driverClassName」- 数据库驱动指定，JDBC4之前
      */
     @Override
-    public XSourceRecord setDriverClass(String value) {
+    public XSourceRecord setDriverClassName(String value) {
         set(6, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.X_SOURCE.DRIVER_CLASS</code>. 「driverClass」- 数据库驱动指定，JDBC4之前
+     * Getter for <code>DB_ETERNAL.X_SOURCE.DRIVER_CLASS_NAME</code>. 「driverClassName」- 数据库驱动指定，JDBC4之前
      */
     @Override
-    public String getDriverClass() {
+    public String getDriverClassName() {
         return (String) get(6);
     }
 
@@ -475,7 +475,7 @@ public class XSourceRecord extends UpdatableRecordImpl<XSourceRecord> implements
      */
     @Override
     public Field<String> field7() {
-        return XSource.X_SOURCE.DRIVER_CLASS;
+        return XSource.X_SOURCE.DRIVER_CLASS_NAME;
     }
 
     /**
@@ -643,7 +643,7 @@ public class XSourceRecord extends UpdatableRecordImpl<XSourceRecord> implements
      */
     @Override
     public String component7() {
-        return getDriverClass();
+        return getDriverClassName();
     }
 
     /**
@@ -811,7 +811,7 @@ public class XSourceRecord extends UpdatableRecordImpl<XSourceRecord> implements
      */
     @Override
     public String value7() {
-        return getDriverClass();
+        return getDriverClassName();
     }
 
     /**
@@ -985,7 +985,7 @@ public class XSourceRecord extends UpdatableRecordImpl<XSourceRecord> implements
      */
     @Override
     public XSourceRecord value7(String value) {
-        setDriverClass(value);
+        setDriverClassName(value);
         return this;
     }
 
@@ -1159,7 +1159,7 @@ public class XSourceRecord extends UpdatableRecordImpl<XSourceRecord> implements
         setHostname(from.getHostname());
         setPort(from.getPort());
         setCategory(from.getCategory());
-        setDriverClass(from.getDriverClass());
+        setDriverClassName(from.getDriverClassName());
         setJdbcUrl(from.getJdbcUrl());
         setJdbcConfig(from.getJdbcConfig());
         setInstance(from.getInstance());
@@ -1199,7 +1199,7 @@ public class XSourceRecord extends UpdatableRecordImpl<XSourceRecord> implements
     /**
      * Create a detached, initialised XSourceRecord
      */
-    public XSourceRecord(String key, String ipV4, String ipV6, String hostname, Integer port, String category, String driverClass, String jdbcUrl, String jdbcConfig, String instance, String username, String password, String appId, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XSourceRecord(String key, String ipV4, String ipV6, String hostname, Integer port, String category, String driverClassName, String jdbcUrl, String jdbcConfig, String instance, String username, String password, String appId, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XSource.X_SOURCE);
 
         set(0, key);
@@ -1208,7 +1208,7 @@ public class XSourceRecord extends UpdatableRecordImpl<XSourceRecord> implements
         set(3, hostname);
         set(4, port);
         set(5, category);
-        set(6, driverClass);
+        set(6, driverClassName);
         set(7, jdbcUrl);
         set(8, jdbcConfig);
         set(9, instance);
