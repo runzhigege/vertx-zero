@@ -34,7 +34,7 @@ public class RpcServerVisitor implements ServerVisitor<ServidorOptions> {
     public ConcurrentMap<Integer, ServidorOptions> visit(final String... key)
             throws ZeroException {
         // 1. Must be the first line, fixed position.
-        Ut.ensureEqualLength(getClass(), 0, (Object[]) key);
+        Ut.ensureEqualLength(getClass(), 0, key);
         // 2. Visit the node for server, http
         final JsonObject data = node.read();
 

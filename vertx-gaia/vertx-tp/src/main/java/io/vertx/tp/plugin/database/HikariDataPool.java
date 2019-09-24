@@ -42,32 +42,32 @@ public class HikariDataPool implements DataPool {
 
     @Override
     public DSLContext getExecutor() {
-        if (Objects.isNull(context)) {
+        if (Objects.isNull(this.context)) {
             initDelay();
         }
-        return context;
+        return this.context;
     }
 
     @Override
     public HikariDataSource getDataSource() {
-        if (Objects.isNull(dataSource)) {
+        if (Objects.isNull(this.dataSource)) {
             initDelay();
         }
-        return dataSource;
+        return this.dataSource;
     }
 
     private void initJooq() {
-        if (null == context) {
+        if (null == this.context) {
             try {
                 /* Init Jooq configuration */
                 final Configuration configuration = new DefaultConfiguration();
-                final ConnectionProvider provider = new DefaultConnectionProvider(dataSource.getConnection());
+                final ConnectionProvider provider = new DefaultConnectionProvider(this.dataSource.getConnection());
                 configuration.set(provider);
                 /* Dialect selected */
-                final SQLDialect dialect = Pool.DIALECT.get(database.getCategory());
-                LOGGER.debug("[ ZERO ] Jooq Database ：Dialect = {0}, Database = {1}, ", dialect, database.toJson().encodePrettily());
+                final SQLDialect dialect = Pool.DIALECT.get(this.database.getCategory());
+                HikariDataPool.LOGGER.debug("[ ZERO ] Jooq Database ：Dialect = {0}, Database = {1}, ", dialect, this.database.toJson().encodePrettily());
                 configuration.set(dialect);
-                context = DSL.using(configuration);
+                this.context = DSL.using(configuration);
             } catch (final SQLException ex) {
                 // LOGGER.jvm(ex);
             }
@@ -75,7 +75,7 @@ public class HikariDataPool implements DataPool {
     }
 
     private void initJdbc() {
-        if (null == dataSource) {
+        if (null == this.dataSource) {
             /*
              * Very important here, here are unique pool of old code with singleton
              * this.dataSource = Ut.singleton(HikariDataSource.class);
@@ -94,33 +94,39 @@ public class HikariDataPool implements DataPool {
              * `old == new` will be true, when you set jdbcUrl again, above issue will throw out.
              *
              */
-            dataSource = new HikariDataSource();
+            this.dataSource = new HikariDataSource();
             /*
              * Ignore driverClass after jdbc4
+             * But jdbc4 may caused issue of 'no suitable driver' when deployment.
              */
-            dataSource.setJdbcUrl(database.getJdbcUrl());
-            dataSource.setUsername(database.getUsername());
-            dataSource.setPassword(database.getPassword());
+            this.dataSource.setJdbcUrl(this.database.getJdbcUrl());
+            this.dataSource.setUsername(this.database.getUsername());
+            this.dataSource.setPassword(this.database.getPassword());
+            /*
+             * Fix bug for 'no suitable driver'
+             */
+            this.dataSource.setDriverClassName(this.database.getDriverClassName());
+            // dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         }
     }
 
     private void initPool() {
-        if (Objects.nonNull(database)) {
+        if (Objects.nonNull(this.database)) {
             // Default configuration
-            dataSource.setAutoCommit(true);
-            dataSource.setConnectionTimeout(30000L);
-            dataSource.setIdleTimeout(600000L);
-            dataSource.setMaxLifetime(25600000L);
-            dataSource.setMinimumIdle(256);
-            dataSource.setMaximumPoolSize(512);
+            this.dataSource.setAutoCommit(true);
+            this.dataSource.setConnectionTimeout(30000L);
+            this.dataSource.setIdleTimeout(600000L);
+            this.dataSource.setMaxLifetime(25600000L);
+            this.dataSource.setMinimumIdle(256);
+            this.dataSource.setMaximumPoolSize(512);
 
             // Default attributes
-            dataSource.addDataSourceProperty("cachePrepStmts", "true");
-            dataSource.addDataSourceProperty("prepStmtCacheSize", "1024");
-            dataSource.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+            this.dataSource.addDataSourceProperty("cachePrepStmts", "true");
+            this.dataSource.addDataSourceProperty("prepStmtCacheSize", "1024");
+            this.dataSource.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
 
             // Data pool name
-            dataSource.setPoolName("ZERO-POOL-DATA");
+            this.dataSource.setPoolName("ZERO-POOL-DATA");
         }
     }
 }

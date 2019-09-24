@@ -28,7 +28,7 @@ public class NamesVisitor implements ServerVisitor<String> {
     public ConcurrentMap<Integer, String> visit(final String... key)
             throws ZeroException {
         // 1. Must be the first line, fixed position.
-        Ut.ensureEqualLength(getClass(), 1, (Object[]) key);
+        Ut.ensureEqualLength(getClass(), 1, key);
         // 2. Visit the node for server, http
         final JsonObject data = NODE.read();
 

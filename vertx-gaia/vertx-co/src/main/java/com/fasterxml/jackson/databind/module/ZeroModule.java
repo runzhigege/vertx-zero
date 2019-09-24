@@ -128,7 +128,6 @@ public class ZeroModule extends SimpleModule {
         for (int i = 0; i < argCount; ++i) {
             final Class<?> argType = method.getParameter(i).getRawType();
             if (!argType.isAssignableFrom(argTypes[i])) {
-                ;
             }
         }
 

@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XSource implements IXSource {
 
-    private static final long serialVersionUID = 825437653;
+    private static final long serialVersionUID = 807141474;
 
     private String        key;
     private String        ipV4;
@@ -32,6 +32,7 @@ public class XSource implements IXSource {
     private String        hostname;
     private Integer       port;
     private String        category;
+    private String        driverClass;
     private String        jdbcUrl;
     private String        jdbcConfig;
     private String        instance;
@@ -56,6 +57,7 @@ public class XSource implements IXSource {
         this.hostname = value.hostname;
         this.port = value.port;
         this.category = value.category;
+        this.driverClass = value.driverClass;
         this.jdbcUrl = value.jdbcUrl;
         this.jdbcConfig = value.jdbcConfig;
         this.instance = value.instance;
@@ -79,6 +81,7 @@ public class XSource implements IXSource {
         String        hostname,
         Integer       port,
         String        category,
+        String        driverClass,
         String        jdbcUrl,
         String        jdbcConfig,
         String        instance,
@@ -100,6 +103,7 @@ public class XSource implements IXSource {
         this.hostname = hostname;
         this.port = port;
         this.category = category;
+        this.driverClass = driverClass;
         this.jdbcUrl = jdbcUrl;
         this.jdbcConfig = jdbcConfig;
         this.instance = instance;
@@ -179,6 +183,17 @@ public class XSource implements IXSource {
     @Override
     public XSource setCategory(String category) {
         this.category = category;
+        return this;
+    }
+
+    @Override
+    public String getDriverClass() {
+        return this.driverClass;
+    }
+
+    @Override
+    public XSource setDriverClass(String driverClass) {
+        this.driverClass = driverClass;
         return this;
     }
 
@@ -346,6 +361,7 @@ public class XSource implements IXSource {
         sb.append(", ").append(hostname);
         sb.append(", ").append(port);
         sb.append(", ").append(category);
+        sb.append(", ").append(driverClass);
         sb.append(", ").append(jdbcUrl);
         sb.append(", ").append(jdbcConfig);
         sb.append(", ").append(instance);
@@ -380,6 +396,7 @@ public class XSource implements IXSource {
         setHostname(from.getHostname());
         setPort(from.getPort());
         setCategory(from.getCategory());
+        setDriverClass(from.getDriverClass());
         setJdbcUrl(from.getJdbcUrl());
         setJdbcConfig(from.getJdbcConfig());
         setInstance(from.getInstance());
