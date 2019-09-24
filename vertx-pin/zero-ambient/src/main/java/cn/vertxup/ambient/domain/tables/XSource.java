@@ -35,7 +35,7 @@ public class XSource extends TableImpl<XSourceRecord> {
      * The reference instance of <code>DB_ETERNAL.X_SOURCE</code>
      */
     public static final XSource X_SOURCE = new XSource();
-    private static final long serialVersionUID = 1713243109;
+    private static final long serialVersionUID = 1657498522;
     /**
      * The column <code>DB_ETERNAL.X_SOURCE.KEY</code>. 「key」- 数据源主键
      */
@@ -60,6 +60,10 @@ public class XSource extends TableImpl<XSourceRecord> {
      * The column <code>DB_ETERNAL.X_SOURCE.CATEGORY</code>. 「category」- 数据库类型
      */
     public final TableField<XSourceRecord, String> CATEGORY = createField("CATEGORY", org.jooq.impl.SQLDataType.VARCHAR(32), this, "「category」- 数据库类型");
+    /**
+     * The column <code>DB_ETERNAL.X_SOURCE.DRIVER_CLASS</code>. 「driverClass」- 数据库驱动指定，JDBC4之前
+     */
+    public final TableField<XSourceRecord, String> DRIVER_CLASS = createField("DRIVER_CLASS", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「driverClass」- 数据库驱动指定，JDBC4之前");
     /**
      * The column <code>DB_ETERNAL.X_SOURCE.JDBC_URL</code>. 「jdbcUrl」- JDBC连接字符串
      */
