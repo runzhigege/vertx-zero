@@ -105,10 +105,10 @@ public class XSourceDao extends DAOImpl<XSourceRecord, cn.vertxup.ambient.domain
     }
 
     /**
-     * Fetch records that have <code>DRIVER_CLASS IN (values)</code>
+     * Fetch records that have <code>DRIVER_CLASS_NAME IN (values)</code>
      */
-    public List<cn.vertxup.ambient.domain.tables.pojos.XSource> fetchByDriverClass(String... values) {
-        return fetch(XSource.X_SOURCE.DRIVER_CLASS, values);
+    public List<cn.vertxup.ambient.domain.tables.pojos.XSource> fetchByDriverClassName(String... values) {
+        return fetch(XSource.X_SOURCE.DRIVER_CLASS_NAME, values);
     }
 
     /**
@@ -266,10 +266,10 @@ public class XSourceDao extends DAOImpl<XSourceRecord, cn.vertxup.ambient.domain
     }
 
     /**
-     * Fetch records that have <code>DRIVER_CLASS IN (values)</code> asynchronously
+     * Fetch records that have <code>DRIVER_CLASS_NAME IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XSource>> fetchByDriverClassAsync(List<String> values) {
-        return fetchAsync(XSource.X_SOURCE.DRIVER_CLASS,values);
+    public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XSource>> fetchByDriverClassNameAsync(List<String> values) {
+        return fetchAsync(XSource.X_SOURCE.DRIVER_CLASS_NAME,values);
     }
 
     /**
