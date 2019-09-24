@@ -85,7 +85,7 @@ public class AdjustDateTimeDeserializer extends LocalDateTimeDeserializer {
                     return result;
                 }
 
-                context.reportInputMismatch(this.handledType(), "Unexpected token (%s) within Array, expected VALUE_NUMBER_INT", new Object[]{t});
+                context.reportInputMismatch(this.handledType(), "Unexpected token (%s) within Array, expected VALUE_NUMBER_INT", t);
             }
 
             if (parser.hasToken(JsonToken.VALUE_EMBEDDED_OBJECT)) {

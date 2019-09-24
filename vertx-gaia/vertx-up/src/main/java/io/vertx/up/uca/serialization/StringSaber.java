@@ -13,7 +13,7 @@ public class StringSaber extends BaseSaber {
                        final String literal) {
         return Fn.getNull(() ->
                         Fn.getSemi(String.class == paramType, getLogger(),
-                                () -> literal.toString(), () -> Strings.EMPTY),
+                                () -> literal, () -> Strings.EMPTY),
                 paramType, literal);
     }
 }

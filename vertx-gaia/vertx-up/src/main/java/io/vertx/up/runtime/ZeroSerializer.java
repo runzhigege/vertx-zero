@@ -108,7 +108,7 @@ public class ZeroSerializer {
             } else if (JsonArray.class == cls) {
                 result = false;
             } else {
-                result = SABERS.keySet().contains(cls);
+                result = SABERS.containsKey(cls);
             }
         }
         return result;
