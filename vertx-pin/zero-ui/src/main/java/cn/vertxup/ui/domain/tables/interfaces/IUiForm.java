@@ -5,6 +5,7 @@ package cn.vertxup.ui.domain.tables.interfaces;
 
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.annotation.Generated;
@@ -56,12 +57,12 @@ public interface IUiForm extends Serializable {
     /**
      * Setter for <code>DB_ETERNAL.UI_FORM.WINDOW</code>. 「window」- window, Form对应的窗口配置
      */
-    public IUiForm setWindow(Integer value);
+    public IUiForm setWindow(BigDecimal value);
 
     /**
      * Getter for <code>DB_ETERNAL.UI_FORM.WINDOW</code>. 「window」- window, Form对应的窗口配置
      */
-    public Integer getWindow();
+    public BigDecimal getWindow();
 
     /**
      * Setter for <code>DB_ETERNAL.UI_FORM.COLUMNS</code>. 「columns」- columns, Form对应的配置
@@ -191,7 +192,7 @@ public interface IUiForm extends Serializable {
         setKey(json.getString("KEY"));
         setName(json.getString("NAME"));
         setCode(json.getString("CODE"));
-        setWindow(json.getInteger("WINDOW"));
+        // Omitting unrecognized type java.math.BigDecimal for column WINDOW!
         setColumns(json.getInteger("COLUMNS"));
         setHidden(json.getString("HIDDEN"));
         setRow(json.getString("ROW"));
@@ -212,7 +213,7 @@ public interface IUiForm extends Serializable {
         json.put("KEY",getKey());
         json.put("NAME",getName());
         json.put("CODE",getCode());
-        json.put("WINDOW",getWindow());
+        // Omitting unrecognized type java.math.BigDecimal for column WINDOW!
         json.put("COLUMNS",getColumns());
         json.put("HIDDEN",getHidden());
         json.put("ROW",getRow());

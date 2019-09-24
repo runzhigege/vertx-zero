@@ -9,6 +9,7 @@ import cn.vertxup.ui.domain.tables.records.UiFormRecord;
 
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -86,7 +87,7 @@ public class UiFormDao extends DAOImpl<UiFormRecord, cn.vertxup.ui.domain.tables
     /**
      * Fetch records that have <code>WINDOW IN (values)</code>
      */
-    public List<cn.vertxup.ui.domain.tables.pojos.UiForm> fetchByWindow(Integer... values) {
+    public List<cn.vertxup.ui.domain.tables.pojos.UiForm> fetchByWindow(BigDecimal... values) {
         return fetch(UiForm.UI_FORM.WINDOW, values);
     }
 
@@ -198,7 +199,7 @@ public class UiFormDao extends DAOImpl<UiFormRecord, cn.vertxup.ui.domain.tables
     /**
      * Fetch records that have <code>WINDOW IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiForm>> fetchByWindowAsync(List<Integer> values) {
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiForm>> fetchByWindowAsync(List<BigDecimal> values) {
         return fetchAsync(UiForm.UI_FORM.WINDOW,values);
     }
 
