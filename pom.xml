@@ -87,6 +87,7 @@
         <!-- Bean Validation -->
         <hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
 
+
         <jwt.version>3.8.2</jwt.version>
         <jetbrains.version>17.0.0</jetbrains.version>
         <guice.version>4.1.0</guice.version>
@@ -94,6 +95,7 @@
         <feign.version>8.18.0</feign.version>
         <guava.version>28.1-jre</guava.version>
         <codehaus.janino.version>3.1.0</codehaus.janino.version>
+        <codehaus.mojo.version>1.17</codehaus.mojo.version>
         <ignite.version>2.7.6</ignite.version>
         <mongodb.async.version>3.11.0</mongodb.async.version>
         <!-- Apache Common -->
@@ -101,6 +103,7 @@
         <common.lang3.version>3.9</common.lang3.version>
         <common.logging.version>1.2</common.logging.version>
         <common.net.version>3.6</common.net.version>
+        <common.codec.version>1.11</common.codec.version>
         <http.async.client.version>4.1.4</http.async.client.version>
         <http.client.version>4.5.10</http.client.version>
         <http.core.version>4.4.12</http.core.version>
@@ -331,6 +334,11 @@
                 <artifactId>commons-net</artifactId>
                 <version>${common.net.version}</version>
             </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${common.codec.version}</version>
+            </dependency>
             <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-jexl -->
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -530,6 +538,11 @@
                 <groupId>org.codehaus.janino</groupId>
                 <artifactId>janino</artifactId>
                 <version>${codehaus.janino.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>animal-sniffer-annotations</artifactId>
+                <version>${codehaus.mojo.version}</version>
             </dependency>
             <!-- http://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
             <dependency>

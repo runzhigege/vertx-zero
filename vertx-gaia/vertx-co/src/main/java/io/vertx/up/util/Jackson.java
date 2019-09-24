@@ -56,7 +56,7 @@ final class Jackson {
             final String... keys
     ) {
 
-        Ensurer.gtLength(Jackson.class, 0, (Object[]) keys);
+        Ensurer.gtLength(Jackson.class, 0, keys);
         return Jackson.searchData(item, JsonObject.class, keys);
     }
 
@@ -64,7 +64,7 @@ final class Jackson {
             final JsonObject item,
             final String... keys
     ) {
-        Ensurer.gtLength(Jackson.class, 0, (Object[]) keys);
+        Ensurer.gtLength(Jackson.class, 0, keys);
         return Jackson.searchData(item, JsonArray.class, keys);
     }
 
@@ -72,7 +72,7 @@ final class Jackson {
             final JsonObject item,
             final String... keys
     ) {
-        Ensurer.gtLength(Jackson.class, 0, (Object[]) keys);
+        Ensurer.gtLength(Jackson.class, 0, keys);
         return Jackson.searchData(item, Integer.class, keys);
     }
 
@@ -80,7 +80,7 @@ final class Jackson {
             final JsonObject item,
             final String... keys
     ) {
-        Ensurer.gtLength(Jackson.class, 0, (Object[]) keys);
+        Ensurer.gtLength(Jackson.class, 0, keys);
         return Jackson.searchData(item, String.class, keys);
     }
 

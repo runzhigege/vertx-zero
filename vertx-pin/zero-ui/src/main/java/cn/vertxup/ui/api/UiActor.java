@@ -1,6 +1,7 @@
 package cn.vertxup.ui.api;
 
 import cn.vertxup.ui.service.ControlStub;
+import cn.vertxup.ui.service.FormStub;
 import cn.vertxup.ui.service.ListStub;
 import cn.vertxup.ui.service.PageStub;
 import io.vertx.core.Future;
@@ -25,6 +26,9 @@ public class UiActor {
     private transient ListStub listStub;
 
     @Inject
+    private transient FormStub formStub;
+
+    @Inject
     private transient ControlStub controlStub;
 
     @Address(Addr.Page.FETCH_AMP)
@@ -42,8 +46,7 @@ public class UiActor {
             if (ControlType.LIST == type) {
                 return this.listStub.fetchById(control);
             } else {
-                // TODO: FORM
-                return null;
+                return this.formStub.fetchById(control);
             }
         } else {
             return Ux.fnJObject(new JsonObject());

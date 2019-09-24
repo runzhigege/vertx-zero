@@ -76,7 +76,7 @@ class JtPandora {
             /*
              * The channelClass must be in EXPECTED_MAP
              */
-            Fn.out(!EXPECTED_MAP.values().contains(channelClass),
+            Fn.out(!EXPECTED_MAP.containsValue(channelClass),
                     _424ChannelDefinitionException.class, JtPandora.class,
                     Ut.fromJoin(EXPECTED_MAP.values().stream().map(Class::getSimpleName).collect(Collectors.toSet())),
                     channelClass);

@@ -58,7 +58,7 @@ public class RpcSslTool {
 
     private static ManagedChannel getChannel(final String host, final Integer port,
                                              final Supplier<ManagedChannel> supplier) {
-        final String key = host + String.valueOf(port);
+        final String key = host + port;
         return Fn.pool(CHANNELS, key, supplier);
     }
 

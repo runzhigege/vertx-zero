@@ -18,7 +18,7 @@ public class MicroFilter extends HttpFilter {
             throws IOException, VertxException {
         final String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (Ut.notNil(token) && token.contains(" ")) {
-            final String tokenString = token.substring(token.lastIndexOf(' '), token.length());
+            final String tokenString = token.substring(token.lastIndexOf(' '));
             put("token", tokenString);
         }
     }
