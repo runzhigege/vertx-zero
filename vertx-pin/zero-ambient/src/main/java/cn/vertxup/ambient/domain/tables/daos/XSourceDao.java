@@ -105,6 +105,13 @@ public class XSourceDao extends DAOImpl<XSourceRecord, cn.vertxup.ambient.domain
     }
 
     /**
+     * Fetch records that have <code>DRIVER_CLASS IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.domain.tables.pojos.XSource> fetchByDriverClass(String... values) {
+        return fetch(XSource.X_SOURCE.DRIVER_CLASS, values);
+    }
+
+    /**
      * Fetch records that have <code>JDBC_URL IN (values)</code>
      */
     public List<cn.vertxup.ambient.domain.tables.pojos.XSource> fetchByJdbcUrl(String... values) {
@@ -256,6 +263,13 @@ public class XSourceDao extends DAOImpl<XSourceRecord, cn.vertxup.ambient.domain
      */
     public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XSource>> fetchByCategoryAsync(List<String> values) {
         return fetchAsync(XSource.X_SOURCE.CATEGORY,values);
+    }
+
+    /**
+     * Fetch records that have <code>DRIVER_CLASS IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XSource>> fetchByDriverClassAsync(List<String> values) {
+        return fetchAsync(XSource.X_SOURCE.DRIVER_CLASS,values);
     }
 
     /**

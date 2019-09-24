@@ -4,8 +4,8 @@ import cn.vertxup.ambient.domain.tables.pojos.XApp;
 import cn.vertxup.ambient.domain.tables.pojos.XSource;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
-import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.util.Ut;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,12 +35,12 @@ public class UnityAmbient implements UnityApp {
                 .filter(appId -> Objects.nonNull(sources.get(appId)))
                 /* JsonObject converted here for app & source data */
                 .map(appId -> connect(apps.get(appId), sources.get(appId)))
-                .forEach(item -> UNITY_POOL.put(item.getString(KeField.APP_ID), item));
+                .forEach(item -> UnityAmbient.UNITY_POOL.put(item.getString(KeField.APP_ID), item));
     }
 
     @Override
     public ConcurrentMap<String, JsonObject> connect() {
-        return UNITY_POOL;
+        return UnityAmbient.UNITY_POOL;
     }
 
     private JsonObject connect(final XApp app, final XSource source) {
@@ -143,6 +143,7 @@ public class UnityAmbient implements UnityApp {
              * jdbcUrl - JDBC connection string
              * username - JDBC username
              * password - JDBC password
+             * driverClassName
              */
             final JsonObject sourceJson = new JsonObject();
             sourceJson.put("hostname", source.getHostname());
@@ -152,6 +153,7 @@ public class UnityAmbient implements UnityApp {
             sourceJson.put("jdbcUrl", source.getJdbcUrl());
             sourceJson.put("username", source.getUsername());
             sourceJson.put("password", source.getPassword());
+            sourceJson.put("driverClassName", source.getDriverClass());
             normalized.put("source", sourceJson);
         }
         return normalized;

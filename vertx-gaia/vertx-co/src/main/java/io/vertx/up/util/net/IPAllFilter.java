@@ -9,8 +9,6 @@ public class IPAllFilter implements IPFilter {
     private IPAllFilter() {
     }
 
-    ;
-
     /**
      * Ignore multiple thread sync problem in extreme case
      */

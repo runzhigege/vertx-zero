@@ -34,6 +34,8 @@ public class Database implements Serializable, Json {
     private transient String username;
     /* Database password */
     private transient String password;
+    /* Database driver class */
+    private transient String driverClassName;
 
     /* Database Connection Testing */
     public static boolean test(final Database database) {
@@ -43,7 +45,7 @@ public class Database implements Serializable, Json {
         } catch (final SQLException ex) {
             // Debug for database connection
             ex.printStackTrace();
-            LOGGER.jvm(ex);
+            Database.LOGGER.jvm(ex);
             return false;
         }
     }
@@ -52,7 +54,7 @@ public class Database implements Serializable, Json {
      * Get current jooq configuration for Application / Source
      */
     public static Database getCurrent() {
-        final JsonObject raw = VISITOR.read();
+        final JsonObject raw = Database.VISITOR.read();
         final JsonObject jooq = Ut.visitJObject(raw, "jooq", "provider");
         final Database database = new Database();
         /*
@@ -69,16 +71,17 @@ public class Database implements Serializable, Json {
         database.setJdbcUrl(jooq.getString("jdbcUrl"));
         database.setUsername(jooq.getString("username"));
         database.setPassword(jooq.getString("password"));
+        database.setDriverClassName(jooq.getString("driverClassName"));
         return database;
     }
 
     /* Database Connection Testing */
     public boolean test() {
-        return test(this);
+        return Database.test(this);
     }
 
     public String getHostname() {
-        return hostname;
+        return this.hostname;
     }
 
     public void setHostname(final String hostname) {
@@ -86,7 +89,7 @@ public class Database implements Serializable, Json {
     }
 
     public String getInstance() {
-        return instance;
+        return this.instance;
     }
 
     public void setInstance(final String instance) {
@@ -94,7 +97,7 @@ public class Database implements Serializable, Json {
     }
 
     public Integer getPort() {
-        return port;
+        return this.port;
     }
 
     public void setPort(final Integer port) {
@@ -102,7 +105,7 @@ public class Database implements Serializable, Json {
     }
 
     public DatabaseType getCategory() {
-        return category;
+        return this.category;
     }
 
     public void setCategory(final DatabaseType category) {
@@ -110,7 +113,7 @@ public class Database implements Serializable, Json {
     }
 
     public String getJdbcUrl() {
-        return jdbcUrl;
+        return this.jdbcUrl;
     }
 
     public void setJdbcUrl(final String jdbcUrl) {
@@ -118,7 +121,7 @@ public class Database implements Serializable, Json {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public void setUsername(final String username) {
@@ -126,11 +129,19 @@ public class Database implements Serializable, Json {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(final String password) {
         this.password = password;
+    }
+
+    public String getDriverClassName() {
+        return this.driverClassName;
+    }
+
+    public void setDriverClassName(final String driverClassName) {
+        this.driverClassName = driverClassName;
     }
 
     @Override
@@ -140,13 +151,14 @@ public class Database implements Serializable, Json {
 
     @Override
     public void fromJson(final JsonObject data) {
-        category = Ut.toEnum(DatabaseType.class, data.getString("category"));
-        hostname = data.getString("hostname");
-        port = data.getInteger("port");
-        instance = data.getString("instance");
-        jdbcUrl = data.getString("jdbcUrl");
-        username = data.getString("username");
-        password = data.getString("password");
+        this.category = Ut.toEnum(DatabaseType.class, data.getString("category"));
+        this.hostname = data.getString("hostname");
+        this.port = data.getInteger("port");
+        this.instance = data.getString("instance");
+        this.jdbcUrl = data.getString("jdbcUrl");
+        this.username = data.getString("username");
+        this.password = data.getString("password");
+        this.driverClassName = data.getString("driverClassName");
     }
 
     @Override
@@ -158,11 +170,11 @@ public class Database implements Serializable, Json {
             return false;
         }
         final Database database = (Database) o;
-        return jdbcUrl.equals(database.jdbcUrl);
+        return this.jdbcUrl.equals(database.jdbcUrl);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(jdbcUrl);
+        return Objects.hash(this.jdbcUrl);
     }
 }

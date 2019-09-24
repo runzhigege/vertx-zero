@@ -18,7 +18,7 @@ public class AuthenticateFilter extends HttpFilter {
             throws VertxException {
         final String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (Ut.notNil(token) && token.contains(" ")) {
-            final String tokenString = token.substring(token.lastIndexOf(' '), token.length());
+            final String tokenString = token.substring(token.lastIndexOf(' '));
             /* Put Data into session instead of context */
             getLogger().info("[ ZERO ] Parse token string: {0}", tokenString);
             put("token", tokenString);

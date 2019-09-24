@@ -49,7 +49,7 @@ public class Rib {
     }
 
     public static boolean isIndex(final Integer argIndex) {
-        return Constants.INDEXES.keySet().contains(argIndex);
+        return Constants.INDEXES.containsKey(argIndex);
     }
 
     public static void projection(final JsonObject reference, final JsonArray projection, final boolean clear) {

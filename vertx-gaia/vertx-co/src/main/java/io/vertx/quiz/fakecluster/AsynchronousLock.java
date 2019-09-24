@@ -52,7 +52,7 @@ public class AsynchronousLock implements Lock {
     private LockWaiter pollWaiters() {
         LockWaiter waiter;
         do {
-            waiter = (LockWaiter) this.waiters.poll();
+            waiter = this.waiters.poll();
             if (waiter == null) {
                 return null;
             }
