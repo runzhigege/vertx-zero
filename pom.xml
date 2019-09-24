@@ -103,7 +103,7 @@
         <common.lang3.version>3.9</common.lang3.version>
         <common.logging.version>1.2</common.logging.version>
         <common.net.version>3.6</common.net.version>
-        <common.codec.version>1.11</common.codec.version>
+        <common.codec.version>1.13</common.codec.version>
         <http.async.client.version>4.1.4</http.async.client.version>
         <http.client.version>4.5.10</http.client.version>
         <http.core.version>4.4.12</http.core.version>

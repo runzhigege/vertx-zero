@@ -63,6 +63,7 @@
 [INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ vertx-co ---
 [INFO] cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT
 [INFO] +- commons-net:commons-net:jar:3.6:compile
+[INFO] +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO] |  +- io.vertx:vertx-web-common:jar:3.8.0:compile
 [INFO] |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
@@ -111,8 +112,7 @@
 [INFO] +- cglib:cglib:jar:3.3.0:compile
 [INFO] +- org.ow2.asm:asm:jar:7.1:compile
 [INFO] +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
-[INFO] |  +- commons-logging:commons-logging:jar:1.2:compile
-[INFO] |  \- commons-codec:commons-codec:jar:1.13:compile
+[INFO] |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO] +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
 [INFO] +- org.apache.httpcomponents:httpcore:jar:4.4.12:compile
 [INFO] +- org.apache.commons:commons-jexl3:jar:3.1:compile
@@ -136,6 +136,7 @@
 [INFO] cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT
 [INFO] +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  +- commons-net:commons-net:jar:3.6:compile
+[INFO] |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO] |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO] |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -183,8 +184,7 @@
 [INFO] |  +- cglib:cglib:jar:3.3.0:compile
 [INFO] |  +- org.ow2.asm:asm:jar:7.1:compile
 [INFO] |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
-[INFO] |  |  +- commons-logging:commons-logging:jar:1.2:compile
-[INFO] |  |  \- commons-codec:commons-codec:jar:1.13:compile
+[INFO] |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO] |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
 [INFO] |  +- org.apache.httpcomponents:httpcore:jar:4.4.12:compile
 [INFO] |  +- org.apache.commons:commons-jexl3:jar:3.1:compile
@@ -254,6 +254,7 @@
 [INFO] +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  |  +- commons-net:commons-net:jar:3.6:compile
+[INFO] |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] |  |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO] |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO] |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -287,8 +288,7 @@
 [INFO] |  |  +- cglib:cglib:jar:3.3.0:compile
 [INFO] |  |  +- org.ow2.asm:asm:jar:7.1:compile
 [INFO] |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
-[INFO] |  |  |  +- commons-logging:commons-logging:jar:1.2:compile
-[INFO] |  |  |  \- commons-codec:commons-codec:jar:1.13:compile
+[INFO] |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO] |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
 [INFO] |  |  +- org.apache.httpcomponents:httpcore:jar:4.4.12:compile
 [INFO] |  |  +- org.apache.commons:commons-jexl3:jar:3.1:compile
@@ -510,6 +510,7 @@
 [INFO] |  +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  |  +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  |  |  +- commons-net:commons-net:jar:3.6:compile
+[INFO] |  |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] |  |  |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO] |  |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO] |  |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -545,8 +546,7 @@
 [INFO] |  |  |  +- cglib:cglib:jar:3.3.0:compile
 [INFO] |  |  |  +- org.ow2.asm:asm:jar:7.1:compile
 [INFO] |  |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
-[INFO] |  |  |  |  +- commons-logging:commons-logging:jar:1.2:compile
-[INFO] |  |  |  |  \- commons-codec:commons-codec:jar:1.13:compile
+[INFO] |  |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO] |  |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
 [INFO] |  |  |  +- org.apache.httpcomponents:httpcore:jar:4.4.12:compile
 [INFO] |  |  |  +- org.apache.commons:commons-jexl3:jar:3.1:compile
@@ -647,6 +647,7 @@
 [INFO] \- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO]    +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  +- commons-net:commons-net:jar:3.6:compile
+[INFO]    |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO]    |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -694,8 +695,7 @@
 [INFO]    |  +- cglib:cglib:jar:3.3.0:compile
 [INFO]    |  +- org.ow2.asm:asm:jar:7.1:compile
 [INFO]    |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
-[INFO]    |  |  +- commons-logging:commons-logging:jar:1.2:compile
-[INFO]    |  |  \- commons-codec:commons-codec:jar:1.13:compile
+[INFO]    |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
 [INFO]    |  +- org.apache.httpcomponents:httpcore:jar:4.4.12:compile
 [INFO]    |  +- org.apache.commons:commons-jexl3:jar:3.1:compile
@@ -765,6 +765,7 @@
 [INFO] +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  |  +- commons-net:commons-net:jar:3.6:compile
+[INFO] |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] |  |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO] |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO] |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -812,8 +813,7 @@
 [INFO] |  |  +- cglib:cglib:jar:3.3.0:compile
 [INFO] |  |  +- org.ow2.asm:asm:jar:7.1:compile
 [INFO] |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
-[INFO] |  |  |  +- commons-logging:commons-logging:jar:1.2:compile
-[INFO] |  |  |  \- commons-codec:commons-codec:jar:1.13:compile
+[INFO] |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO] |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
 [INFO] |  |  +- org.apache.httpcomponents:httpcore:jar:4.4.12:compile
 [INFO] |  |  +- org.apache.commons:commons-jexl3:jar:3.1:compile
@@ -890,6 +890,7 @@
 [INFO] \- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO]    +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  +- commons-net:commons-net:jar:3.6:compile
+[INFO]    |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO]    |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -937,8 +938,7 @@
 [INFO]    |  +- cglib:cglib:jar:3.3.0:compile
 [INFO]    |  +- org.ow2.asm:asm:jar:7.1:compile
 [INFO]    |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
-[INFO]    |  |  +- commons-logging:commons-logging:jar:1.2:compile
-[INFO]    |  |  \- commons-codec:commons-codec:jar:1.13:compile
+[INFO]    |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
 [INFO]    |  +- org.apache.httpcomponents:httpcore:jar:4.4.12:compile
 [INFO]    |  +- org.apache.commons:commons-jexl3:jar:3.1:compile
@@ -1008,6 +1008,7 @@
 [INFO] \- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO]    +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  +- commons-net:commons-net:jar:3.6:compile
+[INFO]    |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO]    |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -1055,8 +1056,7 @@
 [INFO]    |  +- cglib:cglib:jar:3.3.0:compile
 [INFO]    |  +- org.ow2.asm:asm:jar:7.1:compile
 [INFO]    |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
-[INFO]    |  |  +- commons-logging:commons-logging:jar:1.2:compile
-[INFO]    |  |  \- commons-codec:commons-codec:jar:1.13:compile
+[INFO]    |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
 [INFO]    |  +- org.apache.httpcomponents:httpcore:jar:4.4.12:compile
 [INFO]    |  +- org.apache.commons:commons-jexl3:jar:3.1:compile
@@ -1124,7 +1124,6 @@
 [INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ zero-excel ---
 [INFO] cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT
 [INFO] +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] |  +- org.apache.commons:commons-collections4:jar:4.3:compile
 [INFO] |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
 [INFO] +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
@@ -1136,6 +1135,7 @@
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  |  +- commons-net:commons-net:jar:3.6:compile
+[INFO]    |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO]    |  |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -1263,6 +1263,7 @@
 [INFO] |  +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  |  +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  |  |  +- commons-net:commons-net:jar:3.6:compile
+[INFO] |  |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] |  |  |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO] |  |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO] |  |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -1296,8 +1297,7 @@
 [INFO] |  |  |  +- cglib:cglib:jar:3.3.0:compile
 [INFO] |  |  |  +- org.ow2.asm:asm:jar:7.1:compile
 [INFO] |  |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
-[INFO] |  |  |  |  +- commons-logging:commons-logging:jar:1.2:compile
-[INFO] |  |  |  |  \- commons-codec:commons-codec:jar:1.13:compile
+[INFO] |  |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO] |  |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
 [INFO] |  |  |  +- org.apache.httpcomponents:httpcore:jar:4.4.12:compile
 [INFO] |  |  |  +- org.apache.commons:commons-jexl3:jar:3.1:compile
@@ -1399,6 +1399,7 @@
 [INFO] |  +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  |  +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  |  |  +- commons-net:commons-net:jar:3.6:compile
+[INFO] |  |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] |  |  |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO] |  |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO] |  |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -1432,8 +1433,7 @@
 [INFO] |  |  |  +- cglib:cglib:jar:3.3.0:compile
 [INFO] |  |  |  +- org.ow2.asm:asm:jar:7.1:compile
 [INFO] |  |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
-[INFO] |  |  |  |  +- commons-logging:commons-logging:jar:1.2:compile
-[INFO] |  |  |  |  \- commons-codec:commons-codec:jar:1.13:compile
+[INFO] |  |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO] |  |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
 [INFO] |  |  |  +- org.apache.httpcomponents:httpcore:jar:4.4.12:compile
 [INFO] |  |  |  +- org.apache.commons:commons-jexl3:jar:3.1:compile
@@ -1528,6 +1528,7 @@
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  |  +- commons-net:commons-net:jar:3.6:compile
+[INFO]    |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO]    |  |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -1561,8 +1562,7 @@
 [INFO]    |  |  +- cglib:cglib:jar:3.3.0:compile
 [INFO]    |  |  +- org.ow2.asm:asm:jar:7.1:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
-[INFO]    |  |  |  +- commons-logging:commons-logging:jar:1.2:compile
-[INFO]    |  |  |  \- commons-codec:commons-codec:jar:1.13:compile
+[INFO]    |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpcore:jar:4.4.12:compile
 [INFO]    |  |  +- org.apache.commons:commons-jexl3:jar:3.1:compile
@@ -1654,7 +1654,6 @@
 [INFO] cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT
 [INFO] +- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] |  |  +- org.apache.commons:commons-collections4:jar:4.3:compile
 [INFO] |  |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
 [INFO] |  +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
@@ -1666,6 +1665,7 @@
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  |  +- commons-net:commons-net:jar:3.6:compile
+[INFO]    |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO]    |  |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -1792,7 +1792,6 @@
 [INFO] +- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  \- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
 [INFO] |     +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |     |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.3:compile
 [INFO] |     |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
 [INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
@@ -1804,6 +1803,7 @@
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  |  +- commons-net:commons-net:jar:3.6:compile
+[INFO]    |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO]    |  |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -1930,7 +1930,6 @@
 [INFO] +- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  \- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
 [INFO] |     +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |     |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.3:compile
 [INFO] |     |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
 [INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
@@ -1942,6 +1941,7 @@
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  |  +- commons-net:commons-net:jar:3.6:compile
+[INFO]    |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO]    |  |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -2068,7 +2068,6 @@
 [INFO] +- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  \- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
 [INFO] |     +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |     |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.3:compile
 [INFO] |     |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
 [INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
@@ -2080,6 +2079,7 @@
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  |  +- commons-net:commons-net:jar:3.6:compile
+[INFO]    |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO]    |  |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -2207,7 +2207,6 @@
 [INFO] |  \- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] |     \- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
 [INFO] |        +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |        |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] |        |  +- org.apache.commons:commons-collections4:jar:4.3:compile
 [INFO] |        |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
 [INFO] |        +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
@@ -2219,6 +2218,7 @@
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  |  +- commons-net:commons-net:jar:3.6:compile
+[INFO]    |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO]    |  |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -2345,7 +2345,6 @@
 [INFO] +- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  \- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
 [INFO] |     +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |     |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.3:compile
 [INFO] |     |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
 [INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
@@ -2357,6 +2356,7 @@
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  |  +- commons-net:commons-net:jar:3.6:compile
+[INFO]    |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO]    |  |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -2483,7 +2483,6 @@
 [INFO] +- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  \- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
 [INFO] |     +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |     |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.3:compile
 [INFO] |     |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
 [INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
@@ -2495,6 +2494,7 @@
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  |  +- commons-net:commons-net:jar:3.6:compile
+[INFO]    |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO]    |  |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -2621,7 +2621,6 @@
 [INFO] +- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  \- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
 [INFO] |     +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |     |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.3:compile
 [INFO] |     |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
 [INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
@@ -2633,6 +2632,7 @@
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  |  +- commons-net:commons-net:jar:3.6:compile
+[INFO]    |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO]    |  |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -2759,7 +2759,6 @@
 [INFO] +- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] +- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] |  |  +- org.apache.commons:commons-collections4:jar:4.3:compile
 [INFO] |  |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
 [INFO] |  +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
@@ -2771,6 +2770,7 @@
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  |  +- commons-net:commons-net:jar:3.6:compile
+[INFO]    |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO]    |  |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -2897,7 +2897,6 @@
 [INFO] +- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] +- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO] |  |  +- org.apache.commons:commons-collections4:jar:4.3:compile
 [INFO] |  |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
 [INFO] |  +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
@@ -2909,6 +2908,7 @@
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  |  +- commons-net:commons-net:jar:3.6:compile
+[INFO]    |  |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO]    |  |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
@@ -3028,35 +3028,35 @@
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary for vertx-zero: Vertx Up Zero Framework 0.5.1-SNAPSHOT:
 [INFO] 
-[INFO] vertx-zero: Vertx Up Zero Framework ................ SUCCESS [  0.532 s]
-[INFO] vertx-gaia: Zero Core Library Collection ........... SUCCESS [  0.020 s]
-[INFO] ( Vertx Core ) vertx-co: Zero Infrastructure ....... SUCCESS [  0.145 s]
-[INFO] ( Vertx Core ) vertx-tp: Zero Integration .......... SUCCESS [  0.396 s]
-[INFO] ( Vertx Core ) vertx-up: Zero Up Web Container ..... SUCCESS [  0.073 s]
-[INFO] vertx-import: Zero Framework Parent ................ SUCCESS [  0.061 s]
-[INFO] ( Vertx Core ) vertx-rx: Zero Up RxJava Container .. SUCCESS [  0.056 s]
+[INFO] vertx-zero: Vertx Up Zero Framework ................ SUCCESS [  0.549 s]
+[INFO] vertx-gaia: Zero Core Library Collection ........... SUCCESS [  0.018 s]
+[INFO] ( Vertx Core ) vertx-co: Zero Infrastructure ....... SUCCESS [  0.300 s]
+[INFO] ( Vertx Core ) vertx-tp: Zero Integration .......... SUCCESS [  0.492 s]
+[INFO] ( Vertx Core ) vertx-up: Zero Up Web Container ..... SUCCESS [  0.104 s]
+[INFO] vertx-import: Zero Framework Parent ................ SUCCESS [  0.069 s]
+[INFO] ( Vertx Core ) vertx-rx: Zero Up RxJava Container .. SUCCESS [  0.066 s]
 [INFO] ( Vertx Infix ) vertx-ifx: Zero Plugins ............ SUCCESS [  0.003 s]
-[INFO] ( Vertx Infix ) zero-feign: Feign Client ........... SUCCESS [  0.046 s]
-[INFO] ( Vertx Infix ) zero-iqiy: Iqi Video SDK ........... SUCCESS [  0.052 s]
-[INFO] ( Vertx Infix ) vertx-ali-sms: Ali Yun SMS ......... SUCCESS [  0.046 s]
-[INFO] ( Vertx Infix ) zero-qiniu: QiNiu Service .......... SUCCESS [  0.041 s]
-[INFO] ( Vertx Infix ) zero-excel: Excel Export/Import .... SUCCESS [  0.063 s]
-[INFO] ( Vertx Infix ) zero-native: Native ( Jdbc ) ....... SUCCESS [  0.058 s]
-[INFO] ( Vertx Infix ) zero-redis: Redis Information ...... SUCCESS [  0.060 s]
-[INFO] （ Zero Plugin ) Container Tier ..................... SUCCESS [  0.052 s]
-[INFO] Ke:（ Zero Pin Core ) -- Zero Kernel ................ SUCCESS [  0.060 s]
-[INFO] Ix:（ Zero Pin ) -- Crud Management ................. SUCCESS [  0.063 s]
-[INFO] Sc:（ Zero Pin ) -- Rbac Management ................. SUCCESS [  0.058 s]
-[INFO] Ui:（ Zero Pin ) -- User Interface .................. SUCCESS [  0.056 s]
-[INFO] Ts:（ Zero Pin ) -- Quiz Framework ( Testing ) ...... SUCCESS [  0.064 s]
-[INFO] Jt:（ Zero Pin ) -- Dynamic Api ( Routing ) ......... SUCCESS [  0.060 s]
-[INFO] Rt:（ Zero Pin ) -- Api Gateway of Zero Micro ....... SUCCESS [  0.057 s]
-[INFO] Er:（ Zero Pin ) -- Enterprise Resource Management .. SUCCESS [  0.055 s]
-[INFO] At:（ Zero Pin ) -- Ambient Environment ............. SUCCESS [  0.057 s]
-[INFO] Lb:（ Zero Pin ) -- Location Based Service .......... SUCCESS [  0.071 s]
+[INFO] ( Vertx Infix ) zero-feign: Feign Client ........... SUCCESS [  0.065 s]
+[INFO] ( Vertx Infix ) zero-iqiy: Iqi Video SDK ........... SUCCESS [  0.059 s]
+[INFO] ( Vertx Infix ) vertx-ali-sms: Ali Yun SMS ......... SUCCESS [  0.063 s]
+[INFO] ( Vertx Infix ) zero-qiniu: QiNiu Service .......... SUCCESS [  0.059 s]
+[INFO] ( Vertx Infix ) zero-excel: Excel Export/Import .... SUCCESS [  0.096 s]
+[INFO] ( Vertx Infix ) zero-native: Native ( Jdbc ) ....... SUCCESS [  0.087 s]
+[INFO] ( Vertx Infix ) zero-redis: Redis Information ...... SUCCESS [  0.096 s]
+[INFO] （ Zero Plugin ) Container Tier ..................... SUCCESS [  0.075 s]
+[INFO] Ke:（ Zero Pin Core ) -- Zero Kernel ................ SUCCESS [  0.081 s]
+[INFO] Ix:（ Zero Pin ) -- Crud Management ................. SUCCESS [  0.092 s]
+[INFO] Sc:（ Zero Pin ) -- Rbac Management ................. SUCCESS [  0.085 s]
+[INFO] Ui:（ Zero Pin ) -- User Interface .................. SUCCESS [  0.085 s]
+[INFO] Ts:（ Zero Pin ) -- Quiz Framework ( Testing ) ...... SUCCESS [  0.088 s]
+[INFO] Jt:（ Zero Pin ) -- Dynamic Api ( Routing ) ......... SUCCESS [  0.088 s]
+[INFO] Rt:（ Zero Pin ) -- Api Gateway of Zero Micro ....... SUCCESS [  0.089 s]
+[INFO] Er:（ Zero Pin ) -- Enterprise Resource Management .. SUCCESS [  0.086 s]
+[INFO] At:（ Zero Pin ) -- Ambient Environment ............. SUCCESS [  0.091 s]
+[INFO] Lb:（ Zero Pin ) -- Location Based Service .......... SUCCESS [  0.098 s]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.225 s
-[INFO] Finished at: 2019-09-24T10:32:42+08:00
+[INFO] Total time:  4.171 s
+[INFO] Finished at: 2019-09-24T11:02:52+08:00
 [INFO] ------------------------------------------------------------------------
