@@ -153,7 +153,7 @@ public class UnityAmbient implements UnityApp {
             sourceJson.put("jdbcUrl", source.getJdbcUrl());
             sourceJson.put("username", source.getUsername());
             sourceJson.put("password", source.getPassword());
-            sourceJson.put("driverClassName", source.getDriverClass());
+            sourceJson.put("driverClassName", source.getDriverClassName());
             normalized.put("source", sourceJson);
         }
         return normalized;
