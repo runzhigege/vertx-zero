@@ -48,6 +48,10 @@ public interface KeField {
 
     String HABITUS = "habitus";
 
+    String HIDDEN = "hidden";
+    String CLASS_NAME = "className";
+    String ROW = "row";
+
     interface App {
 
         String COPY_RIGHT = "copyRight";

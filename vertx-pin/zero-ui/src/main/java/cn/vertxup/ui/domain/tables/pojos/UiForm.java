@@ -6,6 +6,7 @@ package cn.vertxup.ui.domain.tables.pojos;
 
 import cn.vertxup.ui.domain.tables.interfaces.IUiForm;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.annotation.Generated;
@@ -24,12 +25,12 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiForm implements IUiForm {
 
-    private static final long serialVersionUID = 859727828;
+    private static final long serialVersionUID = 757671727;
 
     private String        key;
     private String        name;
     private String        code;
-    private Integer       window;
+    private BigDecimal    window;
     private Integer       columns;
     private String        hidden;
     private String        row;
@@ -66,7 +67,7 @@ public class UiForm implements IUiForm {
         String        key,
         String        name,
         String        code,
-        Integer       window,
+        BigDecimal    window,
         Integer       columns,
         String        hidden,
         String        row,
@@ -130,12 +131,12 @@ public class UiForm implements IUiForm {
     }
 
     @Override
-    public Integer getWindow() {
+    public BigDecimal getWindow() {
         return this.window;
     }
 
     @Override
-    public UiForm setWindow(Integer window) {
+    public UiForm setWindow(BigDecimal window) {
         this.window = window;
         return this;
     }
