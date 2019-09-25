@@ -53,8 +53,8 @@ class StoreValve implements UiValve {
          * If render
          */
         Ke.runString(column::getRender, (render) -> {
+            columnJson.put("$render", render);
             if ("DATE".equals(render)) {
-                columnJson.put("$render", render);
                 assert null != column.getFormat() : " $format should not be null when DATE";
                 columnJson.put("$format", column.getFormat());
             }
