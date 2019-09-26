@@ -14,6 +14,7 @@ CREATE TABLE `E_EMPLOYEE`
     `KEY`           VARCHAR(36) NOT NULL COMMENT '「key」- 员工主键',
     `COMPANY_ID`    VARCHAR(36) COMMENT '「companyId」- 所属公司',
     `DEPT_ID`       VARCHAR(36) COMMENT '「deptId」- 所属部门',
+    `TEAM_ID`       VARCHAR(36) COMMENT '「teamId」- 所属组',
     `IDENTITY_ID`   VARCHAR(36) COMMENT '「identityId」- 身份关联ID',
 
     -- 办公信息

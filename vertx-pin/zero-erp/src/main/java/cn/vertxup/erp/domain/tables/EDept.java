@@ -35,7 +35,7 @@ public class EDept extends TableImpl<EDeptRecord> {
      * The reference instance of <code>DB_ETERNAL.E_DEPT</code>
      */
     public static final EDept E_DEPT = new EDept();
-    private static final long serialVersionUID = 369621091;
+    private static final long serialVersionUID = -423474123;
     /**
      * The column <code>DB_ETERNAL.E_DEPT.KEY</code>. 「key」- 部门主键
      */
@@ -151,7 +151,7 @@ public class EDept extends TableImpl<EDeptRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.E_DEPT_CODE, Indexes.E_DEPT_PRIMARY);
+        return Arrays.<Index>asList(Indexes.E_DEPT_CODE, Indexes.E_DEPT_NAME, Indexes.E_DEPT_PRIMARY);
     }
 
     /**
@@ -167,7 +167,7 @@ public class EDept extends TableImpl<EDeptRecord> {
      */
     @Override
     public List<UniqueKey<EDeptRecord>> getKeys() {
-        return Arrays.<UniqueKey<EDeptRecord>>asList(Keys.KEY_E_DEPT_PRIMARY, Keys.KEY_E_DEPT_CODE);
+        return Arrays.<UniqueKey<EDeptRecord>>asList(Keys.KEY_E_DEPT_PRIMARY, Keys.KEY_E_DEPT_NAME, Keys.KEY_E_DEPT_CODE);
     }
 
     /**

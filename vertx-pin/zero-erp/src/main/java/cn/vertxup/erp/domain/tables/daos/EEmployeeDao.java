@@ -84,6 +84,13 @@ public class EEmployeeDao extends DAOImpl<EEmployeeRecord, cn.vertxup.erp.domain
     }
 
     /**
+     * Fetch records that have <code>TEAM_ID IN (values)</code>
+     */
+    public List<cn.vertxup.erp.domain.tables.pojos.EEmployee> fetchByTeamId(String... values) {
+        return fetch(EEmployee.E_EMPLOYEE.TEAM_ID, values);
+    }
+
+    /**
      * Fetch records that have <code>IDENTITY_ID IN (values)</code>
      */
     public List<cn.vertxup.erp.domain.tables.pojos.EEmployee> fetchByIdentityId(String... values) {
@@ -214,6 +221,13 @@ public class EEmployeeDao extends DAOImpl<EEmployeeRecord, cn.vertxup.erp.domain
      */
     public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EEmployee>> fetchByDeptIdAsync(List<String> values) {
         return fetchAsync(EEmployee.E_EMPLOYEE.DEPT_ID,values);
+    }
+
+    /**
+     * Fetch records that have <code>TEAM_ID IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EEmployee>> fetchByTeamIdAsync(List<String> values) {
+        return fetchAsync(EEmployee.E_EMPLOYEE.TEAM_ID,values);
     }
 
     /**

@@ -35,7 +35,7 @@ public class UiField extends TableImpl<UiFieldRecord> {
      * The reference instance of <code>DB_ETERNAL.UI_FIELD</code>
      */
     public static final UiField UI_FIELD = new UiField();
-    private static final long serialVersionUID = -1917810174;
+    private static final long serialVersionUID = -1570481169;
     /**
      * The column <code>DB_ETERNAL.UI_FIELD.KEY</code>. 「key」- 字段主键
      */
@@ -88,6 +88,10 @@ public class UiField extends TableImpl<UiFieldRecord> {
      * The column <code>DB_ETERNAL.UI_FIELD.CONTROL_ID</code>. 「controlId」- 关联的表单ID
      */
     public final TableField<UiFieldRecord, String> CONTROL_ID = createField("CONTROL_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「controlId」- 关联的表单ID");
+    /**
+     * The column <code>DB_ETERNAL.UI_FIELD.ROW_TYPE</code>. 「rowType」- 行类型
+     */
+    public final TableField<UiFieldRecord, String> ROW_TYPE = createField("ROW_TYPE", org.jooq.impl.SQLDataType.VARCHAR(20), this, "「rowType」- 行类型");
     /**
      * The column <code>DB_ETERNAL.UI_FIELD.ACTIVE</code>. 「active」- 是否启用
      */
