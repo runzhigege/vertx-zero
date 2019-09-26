@@ -16,6 +16,8 @@ public interface Addr {
 
         String BY_ID = Prefix._EVENT + "X-GET/ID";
 
+        String BY_SIGMA = Prefix._EVENT + "X-GET/ALL";
+
         String COLUMN_FULL = Prefix._EVENT + "X-COLUMN/FULL";
 
         String COLUMN_MY = Prefix._EVENT + "X-COLUMN/MY";
