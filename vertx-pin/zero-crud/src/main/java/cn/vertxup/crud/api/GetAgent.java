@@ -37,4 +37,10 @@ public interface GetAgent {
     @Address(Addr.Get.COLUMN_MY)
     @Adjust(Orders.MODULE)
     JsonArray getMy(@PathParam("actor") String actor);
+
+    @GET
+    @Path("/{actor}/by/sigma")
+    @Address(Addr.Get.BY_SIGMA)
+    @Adjust(Orders.MODULE)
+    JsonArray getAll(@PathParam("actor") String actor);
 }
