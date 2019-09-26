@@ -54,6 +54,16 @@ public interface IEEmployee extends Serializable {
     public String getDeptId();
 
     /**
+     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.TEAM_ID</code>. 「teamId」- 所属组
+     */
+    public IEEmployee setTeamId(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.TEAM_ID</code>. 「teamId」- 所属组
+     */
+    public String getTeamId();
+
+    /**
      * Setter for <code>DB_ETERNAL.E_EMPLOYEE.IDENTITY_ID</code>. 「identityId」- 身份关联ID
      */
     public IEEmployee setIdentityId(String value);
@@ -221,6 +231,7 @@ public interface IEEmployee extends Serializable {
         setKey(json.getString("KEY"));
         setCompanyId(json.getString("COMPANY_ID"));
         setDeptId(json.getString("DEPT_ID"));
+        setTeamId(json.getString("TEAM_ID"));
         setIdentityId(json.getString("IDENTITY_ID"));
         setWorkNumber(json.getString("WORK_NUMBER"));
         setWorkTitle(json.getString("WORK_TITLE"));
@@ -245,6 +256,7 @@ public interface IEEmployee extends Serializable {
         json.put("KEY",getKey());
         json.put("COMPANY_ID",getCompanyId());
         json.put("DEPT_ID",getDeptId());
+        json.put("TEAM_ID",getTeamId());
         json.put("IDENTITY_ID",getIdentityId());
         json.put("WORK_NUMBER",getWorkNumber());
         json.put("WORK_TITLE",getWorkTitle());
