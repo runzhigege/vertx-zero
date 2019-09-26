@@ -154,6 +154,16 @@ public interface IUiField extends Serializable {
     public String getControlId();
 
     /**
+     * Setter for <code>DB_ETERNAL.UI_FIELD.ROW_TYPE</code>. 「rowType」- 行类型
+     */
+    public IUiField setRowType(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_FIELD.ROW_TYPE</code>. 「rowType」- 行类型
+     */
+    public String getRowType();
+
+    /**
      * Setter for <code>DB_ETERNAL.UI_FIELD.ACTIVE</code>. 「active」- 是否启用
      */
     public IUiField setActive(Boolean value);
@@ -261,6 +271,7 @@ public interface IUiField extends Serializable {
         setOptionItem(json.getString("OPTION_ITEM"));
         setRules(json.getString("RULES"));
         setControlId(json.getString("CONTROL_ID"));
+        setRowType(json.getString("ROW_TYPE"));
         setActive(json.getBoolean("ACTIVE"));
         setSigma(json.getString("SIGMA"));
         setMetadata(json.getString("METADATA"));
@@ -288,6 +299,7 @@ public interface IUiField extends Serializable {
         json.put("OPTION_ITEM",getOptionItem());
         json.put("RULES",getRules());
         json.put("CONTROL_ID",getControlId());
+        json.put("ROW_TYPE",getRowType());
         json.put("ACTIVE",getActive());
         json.put("SIGMA",getSigma());
         json.put("METADATA",getMetadata());
