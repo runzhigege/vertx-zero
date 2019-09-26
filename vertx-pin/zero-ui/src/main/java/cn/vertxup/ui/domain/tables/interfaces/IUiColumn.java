@@ -174,6 +174,16 @@ public interface IUiColumn extends Serializable {
     public String getFormat();
 
     /**
+     * Setter for <code>DB_ETERNAL.UI_COLUMN.DATUM</code>. 「datum」- $datum专用
+     */
+    public IUiColumn setDatum(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_COLUMN.DATUM</code>. 「datum」- $datum专用
+     */
+    public String getDatum();
+
+    /**
      * Setter for <code>DB_ETERNAL.UI_COLUMN.CONTROL_ID</code>. 「controlId」- 关联的控件ID
      */
     public IUiColumn setControlId(String value);
@@ -293,6 +303,7 @@ public interface IUiColumn extends Serializable {
         setConfig(json.getString("CONFIG"));
         setOption(json.getString("OPTION"));
         setFormat(json.getString("FORMAT"));
+        setDatum(json.getString("DATUM"));
         setControlId(json.getString("CONTROL_ID"));
         setActive(json.getBoolean("ACTIVE"));
         setSigma(json.getString("SIGMA"));
@@ -323,6 +334,7 @@ public interface IUiColumn extends Serializable {
         json.put("CONFIG",getConfig());
         json.put("OPTION",getOption());
         json.put("FORMAT",getFormat());
+        json.put("DATUM",getDatum());
         json.put("CONTROL_ID",getControlId());
         json.put("ACTIVE",getActive());
         json.put("SIGMA",getSigma());
