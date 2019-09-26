@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiColumn implements IUiColumn {
 
-    private static final long serialVersionUID = 62941796;
+    private static final long serialVersionUID = -334647885;
 
     private String        key;
     private String        title;
@@ -41,6 +41,7 @@ public class UiColumn implements IUiColumn {
     private String        config;
     private String        option;
     private String        format;
+    private String        datum;
     private String        controlId;
     private Boolean       active;
     private String        sigma;
@@ -69,6 +70,7 @@ public class UiColumn implements IUiColumn {
         this.config = value.config;
         this.option = value.option;
         this.format = value.format;
+        this.datum = value.datum;
         this.controlId = value.controlId;
         this.active = value.active;
         this.sigma = value.sigma;
@@ -96,6 +98,7 @@ public class UiColumn implements IUiColumn {
         String        config,
         String        option,
         String        format,
+        String        datum,
         String        controlId,
         Boolean       active,
         String        sigma,
@@ -121,6 +124,7 @@ public class UiColumn implements IUiColumn {
         this.config = config;
         this.option = option;
         this.format = format;
+        this.datum = datum;
         this.controlId = controlId;
         this.active = active;
         this.sigma = sigma;
@@ -298,6 +302,17 @@ public class UiColumn implements IUiColumn {
     }
 
     @Override
+    public String getDatum() {
+        return this.datum;
+    }
+
+    @Override
+    public UiColumn setDatum(String datum) {
+        this.datum = datum;
+        return this;
+    }
+
+    @Override
     public String getControlId() {
         return this.controlId;
     }
@@ -415,6 +430,7 @@ public class UiColumn implements IUiColumn {
         sb.append(", ").append(config);
         sb.append(", ").append(option);
         sb.append(", ").append(format);
+        sb.append(", ").append(datum);
         sb.append(", ").append(controlId);
         sb.append(", ").append(active);
         sb.append(", ").append(sigma);
@@ -453,6 +469,7 @@ public class UiColumn implements IUiColumn {
         setConfig(from.getConfig());
         setOption(from.getOption());
         setFormat(from.getFormat());
+        setDatum(from.getDatum());
         setControlId(from.getControlId());
         setActive(from.getActive());
         setSigma(from.getSigma());

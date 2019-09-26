@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS UI_COLUMN
     `CONFIG`        TEXT COMMENT '「config」- $config专用',
     `OPTION`        TEXT COMMENT '「option」- $option专用，executor时',
     `FORMAT`        VARCHAR(128) COMMENT '「format」- $format时间格式专用',
+    `DATUM`         TEXT COMMENT '「datum」- $datum专用', -- 双格式
 
     /*
      * CONTROL_ID 主要包含两种

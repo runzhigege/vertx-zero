@@ -168,6 +168,13 @@ public class UiColumnDao extends DAOImpl<UiColumnRecord, cn.vertxup.ui.domain.ta
     }
 
     /**
+     * Fetch records that have <code>DATUM IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiColumn> fetchByDatum(String... values) {
+        return fetch(UiColumn.UI_COLUMN.DATUM, values);
+    }
+
+    /**
      * Fetch records that have <code>CONTROL_ID IN (values)</code>
      */
     public List<cn.vertxup.ui.domain.tables.pojos.UiColumn> fetchByControlId(String... values) {
@@ -340,6 +347,13 @@ public class UiColumnDao extends DAOImpl<UiColumnRecord, cn.vertxup.ui.domain.ta
      */
     public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiColumn>> fetchByFormatAsync(List<String> values) {
         return fetchAsync(UiColumn.UI_COLUMN.FORMAT,values);
+    }
+
+    /**
+     * Fetch records that have <code>DATUM IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiColumn>> fetchByDatumAsync(List<String> values) {
+        return fetchAsync(UiColumn.UI_COLUMN.DATUM,values);
     }
 
     /**
