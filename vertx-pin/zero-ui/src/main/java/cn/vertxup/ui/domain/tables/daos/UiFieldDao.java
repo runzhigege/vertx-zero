@@ -154,6 +154,13 @@ public class UiFieldDao extends DAOImpl<UiFieldRecord, cn.vertxup.ui.domain.tabl
     }
 
     /**
+     * Fetch records that have <code>ROW_TYPE IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiField> fetchByRowType(String... values) {
+        return fetch(UiField.UI_FIELD.ROW_TYPE, values);
+    }
+
+    /**
      * Fetch records that have <code>ACTIVE IN (values)</code>
      */
     public List<cn.vertxup.ui.domain.tables.pojos.UiField> fetchByActive(Boolean... values) {
@@ -305,6 +312,13 @@ public class UiFieldDao extends DAOImpl<UiFieldRecord, cn.vertxup.ui.domain.tabl
      */
     public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiField>> fetchByControlIdAsync(List<String> values) {
         return fetchAsync(UiField.UI_FIELD.CONTROL_ID,values);
+    }
+
+    /**
+     * Fetch records that have <code>ROW_TYPE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiField>> fetchByRowTypeAsync(List<String> values) {
+        return fetchAsync(UiField.UI_FIELD.ROW_TYPE,values);
     }
 
     /**

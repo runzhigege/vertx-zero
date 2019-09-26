@@ -6,6 +6,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.refine.Ke;
+import io.vertx.tp.ui.cv.em.RowType;
 import io.vertx.tp.ui.refine.Ui;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
@@ -57,45 +58,55 @@ public class FieldService implements FieldStub {
              */
             final JsonArray rowArr = new JsonArray();
             row.forEach(cell -> {
-                Ke.metadata(cell, FieldStub.OPTION_JSX);
-                Ke.metadata(cell, FieldStub.OPTION_CONFIG);
-                Ke.metadata(cell, FieldStub.OPTION_ITEM);
-                Ke.metadataArray(cell, "rules");
-                final String render = Objects.isNull(cell.getString("render")) ? "" :
-                        cell.getString("render");
-                final String label = Objects.isNull(cell.getString("label")) ? "" :
-                        cell.getString("label");
-                final String metadata = cell.getString("name")
-                        + "," + label + "," + cell.getInteger("span")
-                        + ",," + render;
-
+                /*
+                 * Title row is special here
+                 */
+                final RowType rowType = Ut.toEnum(() -> cell.getString("rowType"),
+                        RowType.class, RowType.FIELD);
                 final JsonObject dataCell = new JsonObject();
-                dataCell.put("metadata", metadata);
-                /*
-                 * hidden
-                 */
-                final Boolean hidden = cell.getBoolean("hidden");
-                if (hidden) {
-                    dataCell.put("hidden", Boolean.TRUE);
-                }
-                /*
-                 * Rules
-                 */
-                final JsonArray rules = cell.getJsonArray("rules");
-                if (Objects.nonNull(rules) && !rules.isEmpty()) {
-                    dataCell.put("optionConfig.rules", rules);
-                }
-                /*
-                 * Three core configuration
-                 */
-                if (Objects.nonNull(cell.getValue(FieldStub.OPTION_JSX))) {
-                    dataCell.put(FieldStub.OPTION_JSX, cell.getValue(FieldStub.OPTION_JSX));
-                }
-                if (Objects.nonNull(cell.getValue(FieldStub.OPTION_CONFIG))) {
-                    dataCell.put(FieldStub.OPTION_CONFIG, cell.getValue(FieldStub.OPTION_CONFIG));
-                }
-                if (Objects.nonNull(cell.getValue(FieldStub.OPTION_ITEM))) {
-                    dataCell.put(FieldStub.OPTION_ITEM, cell.getValue(FieldStub.OPTION_ITEM));
+                if (RowType.TITLE == rowType) {
+                    dataCell.put("title", cell.getValue("label"));
+                    dataCell.put("key", cell.getValue("key"));
+                } else {
+                    Ke.metadata(cell, FieldStub.OPTION_JSX);
+                    Ke.metadata(cell, FieldStub.OPTION_CONFIG);
+                    Ke.metadata(cell, FieldStub.OPTION_ITEM);
+                    Ke.metadataArray(cell, "rules");
+                    final String render = Objects.isNull(cell.getString("render")) ? "" :
+                            cell.getString("render");
+                    final String label = Objects.isNull(cell.getString("label")) ? "" :
+                            cell.getString("label");
+                    final String metadata = cell.getString("name")
+                            + "," + label + "," + cell.getInteger("span")
+                            + ",," + render;
+
+                    dataCell.put("metadata", metadata);
+                    /*
+                     * hidden
+                     */
+                    final Boolean hidden = cell.getBoolean("hidden");
+                    if (hidden) {
+                        dataCell.put("hidden", Boolean.TRUE);
+                    }
+                    /*
+                     * Rules
+                     */
+                    final JsonArray rules = cell.getJsonArray("rules");
+                    if (Objects.nonNull(rules) && !rules.isEmpty()) {
+                        dataCell.put("optionConfig.rules", rules);
+                    }
+                    /*
+                     * Three core configuration
+                     */
+                    if (Objects.nonNull(cell.getValue(FieldStub.OPTION_JSX))) {
+                        dataCell.put(FieldStub.OPTION_JSX, cell.getValue(FieldStub.OPTION_JSX));
+                    }
+                    if (Objects.nonNull(cell.getValue(FieldStub.OPTION_CONFIG))) {
+                        dataCell.put(FieldStub.OPTION_CONFIG, cell.getValue(FieldStub.OPTION_CONFIG));
+                    }
+                    if (Objects.nonNull(cell.getValue(FieldStub.OPTION_ITEM))) {
+                        dataCell.put(FieldStub.OPTION_ITEM, cell.getValue(FieldStub.OPTION_ITEM));
+                    }
                 }
                 rowArr.add(dataCell);
             });

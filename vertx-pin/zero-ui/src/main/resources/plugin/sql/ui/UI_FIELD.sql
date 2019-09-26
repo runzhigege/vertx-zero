@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS UI_FIELD
     `CONTROL_ID`    VARCHAR(36) COMMENT '「controlId」- 关联的表单ID',
 
     -- 特殊字段
+    `ROW_TYPE`      VARCHAR(20) DEFAULT NULL COMMENT '「rowType」- 行类型',
     `ACTIVE`        BIT         DEFAULT NULL COMMENT '「active」- 是否启用',
     `SIGMA`         VARCHAR(32) DEFAULT NULL COMMENT '「sigma」- 统一标识',
     `METADATA`      TEXT COMMENT '「metadata」- 附加配置',

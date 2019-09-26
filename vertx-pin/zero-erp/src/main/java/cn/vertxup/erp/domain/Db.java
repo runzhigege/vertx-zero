@@ -33,7 +33,7 @@ public class Db extends SchemaImpl {
      * The reference instance of <code>DB_ETERNAL</code>
      */
     public static final Db DB_ETERNAL = new Db();
-    private static final long serialVersionUID = 2074380786;
+    private static final long serialVersionUID = -699398690;
     /**
      * The table <code>DB_ETERNAL.E_COMPANY</code>.
      */
@@ -65,9 +65,19 @@ public class Db extends SchemaImpl {
     public final EIdentity E_IDENTITY = cn.vertxup.erp.domain.tables.EIdentity.E_IDENTITY;
 
     /**
+     * The table <code>DB_ETERNAL.E_TEAM</code>.
+     */
+    public final ETeam E_TEAM = cn.vertxup.erp.domain.tables.ETeam.E_TEAM;
+
+    /**
      * The table <code>DB_ETERNAL.R_COMPANY_CUSTOMER</code>.
      */
     public final RCompanyCustomer R_COMPANY_CUSTOMER = cn.vertxup.erp.domain.tables.RCompanyCustomer.R_COMPANY_CUSTOMER;
+
+    /**
+     * The table <code>DB_ETERNAL.R_TEAM_EMPLOYEE</code>.
+     */
+    public final RTeamEmployee R_TEAM_EMPLOYEE = cn.vertxup.erp.domain.tables.RTeamEmployee.R_TEAM_EMPLOYEE;
 
     /**
      * No further instances allowed
@@ -100,6 +110,8 @@ public class Db extends SchemaImpl {
                 EDept.E_DEPT,
                 EEmployee.E_EMPLOYEE,
                 EIdentity.E_IDENTITY,
-                RCompanyCustomer.R_COMPANY_CUSTOMER);
+                ETeam.E_TEAM,
+                RCompanyCustomer.R_COMPANY_CUSTOMER,
+                RTeamEmployee.R_TEAM_EMPLOYEE);
     }
 }

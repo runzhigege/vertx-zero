@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiField implements IUiField {
 
-    private static final long serialVersionUID = 1595691141;
+    private static final long serialVersionUID = -507353361;
 
     private String        key;
     private Integer       xPoint;
@@ -39,6 +39,7 @@ public class UiField implements IUiField {
     private String        optionItem;
     private String        rules;
     private String        controlId;
+    private String        rowType;
     private Boolean       active;
     private String        sigma;
     private String        metadata;
@@ -64,6 +65,7 @@ public class UiField implements IUiField {
         this.optionItem = value.optionItem;
         this.rules = value.rules;
         this.controlId = value.controlId;
+        this.rowType = value.rowType;
         this.active = value.active;
         this.sigma = value.sigma;
         this.metadata = value.metadata;
@@ -88,6 +90,7 @@ public class UiField implements IUiField {
         String        optionItem,
         String        rules,
         String        controlId,
+        String        rowType,
         Boolean       active,
         String        sigma,
         String        metadata,
@@ -110,6 +113,7 @@ public class UiField implements IUiField {
         this.optionItem = optionItem;
         this.rules = rules;
         this.controlId = controlId;
+        this.rowType = rowType;
         this.active = active;
         this.sigma = sigma;
         this.metadata = metadata;
@@ -264,6 +268,17 @@ public class UiField implements IUiField {
     }
 
     @Override
+    public String getRowType() {
+        return this.rowType;
+    }
+
+    @Override
+    public UiField setRowType(String rowType) {
+        this.rowType = rowType;
+        return this;
+    }
+
+    @Override
     public Boolean getActive() {
         return this.active;
     }
@@ -368,6 +383,7 @@ public class UiField implements IUiField {
         sb.append(", ").append(optionItem);
         sb.append(", ").append(rules);
         sb.append(", ").append(controlId);
+        sb.append(", ").append(rowType);
         sb.append(", ").append(active);
         sb.append(", ").append(sigma);
         sb.append(", ").append(metadata);
@@ -403,6 +419,7 @@ public class UiField implements IUiField {
         setOptionItem(from.getOptionItem());
         setRules(from.getRules());
         setControlId(from.getControlId());
+        setRowType(from.getRowType());
         setActive(from.getActive());
         setSigma(from.getSigma());
         setMetadata(from.getMetadata());
