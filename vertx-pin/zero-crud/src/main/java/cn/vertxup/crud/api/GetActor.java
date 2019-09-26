@@ -1,18 +1,25 @@
 package cn.vertxup.crud.api;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.actor.IxActor;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.refine.Ix;
+import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.optic.ApeakMy;
 import io.vertx.tp.optic.Pocket;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.commune.Envelop;
+import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
+import io.vertx.up.util.Ut;
 
 @Queue
 public class GetActor {
+    private static final Annal LOGGER = Annal.get(GetActor.class);
+
     /*
      * GET: /api/{actor}/{key}
      *     200: Query Data
@@ -29,6 +36,27 @@ public class GetActor {
                             Http.success204(queried) :
                             /* 200 */
                             Http.success200(queried, config));
+        });
+    }
+
+    /*
+     * GET: /api/{actor}/by/sigma
+     *      200: Query All
+     */
+    @Address(Addr.Get.BY_SIGMA)
+    public Future<Envelop> getAll(final Envelop request) {
+        return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
+            /* Headers */
+            final JsonObject headers = request.headersX();
+            final String sigma = headers.getString(KeField.SIGMA);
+            Ix.infoFilters(GetActor.LOGGER, "All data by sigma: {0}", sigma);
+            if (Ut.isNil(sigma)) {
+                return Ux.toFuture(Envelop.success(new JsonArray()));
+            } else {
+                return dao.fetchAsync(KeField.SIGMA, sigma)
+                        .compose(Ux::fnJArray)
+                        .compose(Http::success200);
+            }
         });
     }
 
