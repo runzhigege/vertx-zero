@@ -66,7 +66,7 @@ public class FieldService implements FieldStub {
                 final JsonObject dataCell = new JsonObject();
                 if (RowType.TITLE == rowType) {
                     dataCell.put("title", cell.getValue("label"));
-                    dataCell.put("key", cell.getValue("key"));
+                    dataCell.put("field", cell.getValue("key"));    // Specific field for title.
                 } else {
                     Ke.metadata(cell, FieldStub.OPTION_JSX);
                     Ke.metadata(cell, FieldStub.OPTION_CONFIG);
