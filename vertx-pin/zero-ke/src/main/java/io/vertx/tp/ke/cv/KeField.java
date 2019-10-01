@@ -51,6 +51,7 @@ public interface KeField {
     String HIDDEN = "hidden";
     String CLASS_NAME = "className";
     String ROW = "row";
+    String INITIAL = "initial";
 
     interface App {
 
