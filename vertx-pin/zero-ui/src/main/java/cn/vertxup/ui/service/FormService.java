@@ -33,6 +33,7 @@ public class FormService implements FormStub {
                          * form / fields combine here
                          */
                         final JsonObject formJson = Ut.serializeJson(form);
+                        Ke.metadata(formJson, KeField.METADATA);
                         return this.attachConfig(formJson);
                     }
                 });
@@ -63,6 +64,15 @@ public class FormService implements FormStub {
         if (formJson.containsKey(KeField.ROW)) {
             form.put(KeField.ROW, formJson.getValue(KeField.HIDDEN));
             Ke.metadata(form, KeField.ROW);
+        }
+        /*
+         * metadata: JsonObject
+         */
+        if (formJson.containsKey(KeField.METADATA)) {
+            final JsonObject metadata = formJson.getJsonObject(KeField.METADATA);
+            if (metadata.containsKey(KeField.INITIAL)) {
+                form.put(KeField.INITIAL, metadata.getJsonObject(KeField.INITIAL));
+            }
         }
         final String formId = formJson.getString(KeField.KEY);
         return this.fieldStub.fetchUi(formId)
