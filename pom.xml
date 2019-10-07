@@ -79,7 +79,7 @@
         <!-- Java Reflection -->
         <reflect.asm.version>1.11.9</reflect.asm.version>
         <lombok.version>1.18.10</lombok.version>
-        <asm.version>7.1</asm.version>
+        <asm.version>7.2</asm.version>
         <cglib.version>3.3.0</cglib.version>
         <reflection.version>0.9.11</reflection.version>
         <!-- Etcd -->
@@ -94,7 +94,7 @@
         <feign.version>8.18.0</feign.version>
         <guava.version>28.1-jre</guava.version>
         <codehaus.janino.version>3.1.0</codehaus.janino.version>
-        <codehaus.mojo.version>1.17</codehaus.mojo.version>
+        <codehaus.mojo.version>1.18</codehaus.mojo.version>
         <ignite.version>2.7.6</ignite.version>
         <mongodb.async.version>3.11.0</mongodb.async.version>
         <!-- Apache Common -->
@@ -115,10 +115,10 @@
         <!-- Yaml -->
         <yaml.version>1.25</yaml.version>
         <!-- Vert.x Addition -->
-        <rxjava2.version>2.2.12</rxjava2.version>
+        <rxjava2.version>2.2.13</rxjava2.version>
         <netty.tcnative.version>2.0.26.Final</netty.tcnative.version>
-        <netty.version>4.1.41.Final</netty.version>
-        <hazelcast.version>3.12.2</hazelcast.version>
+        <netty.version>4.1.42.Final</netty.version>
+        <hazelcast.version>3.12.3</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
         <error.prone.version>2.3.3</error.prone.version>
         <reactive.streams>1.0.3</reactive.streams>
