@@ -23,6 +23,7 @@ import io.vertx.up.util.Ut;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 /*
@@ -36,9 +37,9 @@ public class JetPollux implements PlugRouter {
      * Multi Application environment here
      */
     private static final ConcurrentMap<String, AmbientEnvironment> AMBIENT = Ambient.getEnvironments();
+    private static final AtomicBoolean UNREADY = new AtomicBoolean(Boolean.TRUE);
 
     private final transient JtMonitor monitor = JtMonitor.create(this.getClass());
-
     private transient JetCastor castor;
 
     @Override
@@ -87,8 +88,15 @@ public class JetPollux implements PlugRouter {
             if (Objects.nonNull(this.castor)) {
                 /*
                  * Worker deployment
+                 * Here caused `block thread issue`, if we deploy agent x 32 and set `instances` of worker to 64
+                 * It means that the code below will execute 32 times, and then the system will
+                 * deploy 32 x 64 worker instances, it may take long time to do deployment and casued `block thread`
+                 * issue. Instead we set UNREADY flag to mean execute worker deployment one time.
+                 * Each time the `vert.x` insteance will set worker threads here.
                  */
-                this.castor.startWorkers(uriSet);
+                if (UNREADY.getAndSet(Boolean.FALSE)) {
+                    this.castor.startWorkers(uriSet);
+                }
             }
         }
     }
