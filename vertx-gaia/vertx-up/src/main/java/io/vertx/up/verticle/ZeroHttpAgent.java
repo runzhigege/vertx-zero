@@ -106,7 +106,7 @@ public class ZeroHttpAgent extends AbstractVerticle {
             if (EtcdData.enabled()) {
                 // Template call registry to modify the status of current service.
                 final ZeroRegistry registry = ZeroRegistry.create(this.getClass());
-                registry.registryHttp(SERVICES.get(port), config, Etat.STOPPED);
+                registry.registryHttp(ZeroHttpAgent.SERVICES.get(port), config, Etat.STOPPED);
             }
         });
     }
@@ -118,7 +118,7 @@ public class ZeroHttpAgent extends AbstractVerticle {
         if (Values.ZERO == out.getAndIncrement()) {
             // 1. Build logs for current server;
             final String portLiteral = String.valueOf(port);
-            LOGGER.info(Info.HTTP_SERVERS, this.getClass().getSimpleName(), this.deploymentID(),
+            ZeroHttpAgent.LOGGER.info(Info.HTTP_SERVERS, this.getClass().getSimpleName(), this.deploymentID(),
                     portLiteral);
             final List<Route> routes = router.getRoutes();
             final Map<String, Set<Route>> routeMap = new TreeMap<>();
@@ -140,15 +140,15 @@ public class ZeroHttpAgent extends AbstractVerticle {
                 }
             }
             routeMap.forEach((path, routeSet) -> routeSet.forEach(route ->
-                    LOGGER.info(Info.MAPPED_ROUTE, this.getClass().getSimpleName(), path,
+                    ZeroHttpAgent.LOGGER.info(Info.MAPPED_ROUTE, this.getClass().getSimpleName(), path,
                             route.toString())));
             // 3. Endpoint Publish
             final String address =
                     MessageFormat.format("http://{0}:{1}/",
                             Ut.netIPv4(), portLiteral);
-            LOGGER.info(Info.HTTP_LISTEN, this.getClass().getSimpleName(), address);
+            ZeroHttpAgent.LOGGER.info(Info.HTTP_LISTEN, this.getClass().getSimpleName(), address);
             // 4. Send configuration to Event bus
-            final String name = SERVICES.get(port);
+            final String name = ZeroHttpAgent.SERVICES.get(port);
             this.startRegistry(name, options, tree);
         }
     }
@@ -162,7 +162,7 @@ public class ZeroHttpAgent extends AbstractVerticle {
             // Send Data to Event Bus
             final EventBus bus = this.vertx.eventBus();
             final String address = ID.Addr.REGISTRY_START;
-            LOGGER.info(Info.MICRO_REGISTRY_SEND, this.getClass().getSimpleName(), name, address);
+            ZeroHttpAgent.LOGGER.info(Info.MICRO_REGISTRY_SEND, this.getClass().getSimpleName(), name, address);
             bus.publish(address, data);
         }
     }
