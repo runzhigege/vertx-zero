@@ -53,8 +53,11 @@ public class GetActor {
             if (Ut.isNil(sigma)) {
                 return Ux.toFuture(Envelop.success(new JsonArray()));
             } else {
+                final String pojo = config.getPojo();
                 return dao.fetchAsync(KeField.SIGMA, sigma)
-                        .compose(Ux::fnJArray)
+                        .compose(item -> Ut.isNil(pojo) ?
+                                Ux.fnJArray(item) :
+                                Ux.fnJArray(pojo).apply(item))
                         .compose(Http::success200);
             }
         });
