@@ -733,6 +733,14 @@ public final class Ux {
         }
     }
 
+    // -> Jooq -> Multi
+    public static class Join {
+
+        public static UxJoin on(final String configFile) {
+            return new UxJoin(configFile);
+        }
+    }
+
     public static class Pool {
 
         public static UxPool on(final String name) {
