@@ -27,6 +27,8 @@ public interface Addr {
         String PASSWORD = Prefix._EVENT + "X-PASSWORD";
 
         String PROFILE = Prefix._EVENT + "X-PROFILE";
+
+        String SEARCH = Prefix._EVENT + "X-SEARCH";
     }
 
     interface Group {

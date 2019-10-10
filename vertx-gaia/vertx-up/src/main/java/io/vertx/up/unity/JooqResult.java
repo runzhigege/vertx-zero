@@ -1,13 +1,17 @@
 package io.vertx.up.unity;
 
 import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.Mojo;
 import io.vertx.up.util.Ut;
+import org.jooq.Field;
+import org.jooq.Record;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentMap;
 
 /*
  * Jooq Result for ( DataRegion Needed )
@@ -20,22 +24,48 @@ class JooqResult {
         /*
          * convert projection to field
          */
-        if (Objects.nonNull(projection) && !projection.isEmpty()) {
-            final Set<String> filters = new HashSet<>();
-            if (Objects.nonNull(mojo)) {
-                /* Pojo file bind */
-                projection.stream()
-                        .filter(Objects::nonNull)
-                        .map(field -> (String) field)
-                        .map(field -> mojo.getRevert().get(field))
-                        .forEach(filters::add);
-            } else {
-                /* No Pojo file */
-                filters.addAll(projection.getList());
-            }
-            /* Clear field */
-            filters.forEach(filtered -> list.forEach(entity -> Ut.field(entity, filtered, null)));
-        }
+        final Set<String> filters = getFilters(projection, mojo);
+        /* Clear field */
+        filters.forEach(filtered -> list.forEach(entity -> Ut.field(entity, filtered, null)));
         return list;
+    }
+
+    private static Set<String> getFilters(final JsonArray projection, final Mojo mojo) {
+        final Set<String> filters = new HashSet<>();
+        if (Objects.nonNull(mojo)) {
+            /* Pojo file bind */
+            projection.stream()
+                    .filter(Objects::nonNull)
+                    .map(field -> (String) field)
+                    .map(field -> mojo.getRevert().get(field))
+                    .forEach(filters::add);
+        } else {
+            /* No Pojo file */
+            filters.addAll(projection.getList());
+        }
+        return filters;
+    }
+
+    static JsonArray toJoin(final List<Record> records, final JsonArray projection,
+                            final ConcurrentMap<String, String> fields) {
+        final JsonArray joinResult = new JsonArray();
+        records.forEach(record -> {
+            final int size = record.size();
+            final JsonObject data = new JsonObject();
+            for (int idx = 0; idx < size; idx++) {
+                final Field field = record.field(idx);
+                final Object value = record.get(field);
+                if (Objects.nonNull(value)) {
+                    final String resultField = fields.get(field.getName());
+                    if (Ut.notNil(resultField)) {
+                        data.put(resultField, value);
+                    }
+                }
+            }
+            joinResult.add(data);
+        });
+        final Set<String> filters = getFilters(projection, null);
+        Ut.itJArray(joinResult).forEach(each -> filters.forEach(removed -> each.remove(removed)));
+        return joinResult;
     }
 }

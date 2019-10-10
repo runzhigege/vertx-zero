@@ -7,8 +7,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.eon.em.Format;
-import io.vertx.up.log.Annal;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
 import org.jooq.Condition;
 import org.jooq.Operator;
 
@@ -58,7 +58,7 @@ public class UxJooq {
      * Direct analyzing the result to condition
      */
     public static Condition transform(final JsonObject filters) {
-        return JooqCond.transform(filters, null, null);
+        return JooqCond.transform(filters, null, null, null);
     }
 
     // -------------------- Bind Config --------------------
