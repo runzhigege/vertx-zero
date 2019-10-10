@@ -3,15 +3,17 @@ package io.vertx.up.unity;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.query.Criteria;
 import io.vertx.up.atom.query.Inquiry;
-import io.vertx.up.log.Annal;
+import io.vertx.up.atom.query.Sorter;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.Values;
 import io.vertx.up.exception.zero.JooqArgumentException;
-import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
+import io.vertx.up.util.Ut;
 import org.jooq.Condition;
 import org.jooq.Field;
 import org.jooq.Operator;
+import org.jooq.OrderField;
 import org.jooq.impl.DSL;
 
 import java.time.Instant;
@@ -25,8 +27,7 @@ import java.util.function.Function;
 
 class JooqCond {
 
-    private static final Annal LOGGER = Annal.get(JooqCond.class);
-    private static final ConcurrentMap<String, BiFunction<String, Object, Condition>> OPS =
+    static final ConcurrentMap<String, BiFunction<String, Object, Condition>> OPS =
             new ConcurrentHashMap<String, BiFunction<String, Object, Condition>>() {
                 {
                     this.put(Inquiry.Op.LT, (field, value) -> DSL.field(field).lt(value));
@@ -52,7 +53,7 @@ class JooqCond {
                     this.put(Inquiry.Op.CONTAIN, (field, value) -> DSL.field(field).contains(value));
                 }
             };
-    private static final ConcurrentMap<String, BiFunction<String, Instant, Condition>> DOPS =
+    static final ConcurrentMap<String, BiFunction<String, Instant, Condition>> DOPS =
             new ConcurrentHashMap<String, BiFunction<String, Instant, Condition>>() {
                 {
                     this.put(Inquiry.Instant.DAY, (field, value) -> {
@@ -67,17 +68,51 @@ class JooqCond {
                     });
                 }
             };
+    private static final Annal LOGGER = Annal.get(JooqCond.class);
 
-    private static String applyField(final String field) {
+    private static String applyField(final String field,
+                                     final Function<String, String> fnTable) {
         final Set<String> keywords = new HashSet<String>() {
             {
                 this.add("KEY"); // MYSQL, KEY is keyword
             }
         };
-        return keywords.contains(field) ? "`" + field + "`" : field;
+        final StringBuilder normalized = new StringBuilder();
+        if (Objects.nonNull(fnTable)) {
+            normalized.append(fnTable.apply(field)).append(".");
+        }
+        normalized.append(keywords.contains(field) ? "`" + field + "`" : field);
+        return normalized.toString();
+    }
+
+    // OrderField
+    static List<OrderField> orderBy(final Sorter sorter,
+                                    final Function<String, Field> fnAnalyze,
+                                    final Function<String, String> fnTable) {
+        final JsonObject sorterJson = sorter.toJson();
+        final List<OrderField> orders = new ArrayList<>();
+        for (final String field : sorterJson.fieldNames()) {
+            final boolean asc = sorterJson.getBoolean(field);
+            if (Objects.isNull(fnTable)) {
+                final Field column = fnAnalyze.apply(field);
+                orders.add(asc ? column.asc() : column.desc());
+            } else {
+                final Field original = fnAnalyze.apply(field);
+                final String prefix = fnTable.apply(original.getName());
+                final Field normalized = DSL.field(prefix + "." + original.getName());
+                orders.add(asc ? normalized.asc() : normalized.desc());
+            }
+        }
+        return orders;
     }
 
     // Condition ---------------------------------------------------------
+    static Condition transform(final JsonObject filters,
+                               final Function<String, Field> fnAnalyze,
+                               final Function<String, String> fnTable) {
+        return transform(filters, null, fnAnalyze, fnTable);
+    }
+
     static Condition transform(final JsonObject filters,
                                final Function<String, Field> fnAnalyze) {
         return transform(filters, null, fnAnalyze);
@@ -85,7 +120,8 @@ class JooqCond {
 
     static Condition transform(final JsonObject filters,
                                Operator operator,
-                               final Function<String, Field> fnAnalyze) {
+                               final Function<String, Field> fnAnalyze,
+                               final Function<String, String> fnTable) {
         final Condition condition;
         final Criteria criteria = Criteria.create(filters);
         /*
@@ -105,7 +141,7 @@ class JooqCond {
                  * no value with JsonObject, remove all JsonObject value to switch
                  * LINEAR mode.
                  */
-                inputFilters = transformLinear(filters);
+                inputFilters = JooqCond.transformLinear(filters);
                 /*
                  * Re-calculate the operator AND / OR
                  * For complex normalize linear query tree.
@@ -126,7 +162,7 @@ class JooqCond {
                  */
                 inputFilters.remove(Strings.EMPTY);
             }
-            condition = transformLinear(inputFilters, operator, fnAnalyze);
+            condition = transformLinear(inputFilters, operator, fnAnalyze, fnTable);
         } else {
             /*
              * When the mode is Tree, you mustn't set operator, because the operator will
@@ -136,7 +172,7 @@ class JooqCond {
              */
             /*Fn.outUp(null != operator, LOGGER, JooqModeConflictException.class,
                     JooqCond.class, Inquiry.Mode.LINEAR, filters);*/
-            condition = transformTree(filters, fnAnalyze);
+            condition = transformTree(filters, fnAnalyze, fnTable);
         }
         if (null != condition) {
             LOGGER.info(Info.JOOQ_PARSE, condition);
@@ -144,18 +180,25 @@ class JooqCond {
         return condition;
     }
 
+    static Condition transform(final JsonObject filters,
+                               final Operator operator,
+                               final Function<String, Field> fnAnalyze) {
+        return transform(filters, operator, fnAnalyze, null);
+    }
+
     private static Condition transformTree(final JsonObject filters,
-                                           final Function<String, Field> fnAnalyze) {
+                                           final Function<String, Field> fnAnalyze,
+                                           final Function<String, String> fnTable) {
         Condition condition;
         // Calc operator in this level
-        final Operator operator = calcOperator(filters);
+        final Operator operator = JooqCond.calcOperator(filters);
         // Calc liner
         final JsonObject cloned = filters.copy();
         cloned.remove(Strings.EMPTY);
         // Operator has been calculated, remove "" to set linear of current tree.
-        final Condition linear = transformLinear(transformLinear(cloned), operator, fnAnalyze);
+        final Condition linear = JooqCond.transformLinear(transformLinear(cloned), operator, fnAnalyze, fnTable);
         // Calc All Tree
-        final List<Condition> tree = transformTreeSet(filters, fnAnalyze);
+        final List<Condition> tree = JooqCond.transformTreeSet(filters, fnAnalyze, fnTable);
         // Merge the same level
         if (null != linear) {
             tree.add(linear);
@@ -174,13 +217,14 @@ class JooqCond {
 
     private static List<Condition> transformTreeSet(
             final JsonObject filters,
-            final Function<String, Field> fnAnalyze) {
+            final Function<String, Field> fnAnalyze,
+            final Function<String, String> fnTable) {
         final List<Condition> conditions = new ArrayList<>();
         final JsonObject tree = filters.copy();
         if (!tree.isEmpty()) {
             for (final String field : filters.fieldNames()) {
                 if (Ut.isJObject(tree.getValue(field))) {
-                    conditions.add(transformTree(tree.getJsonObject(field), fnAnalyze));
+                    conditions.add(transformTree(tree.getJsonObject(field), fnAnalyze, fnTable));
                 }
             }
         }
@@ -211,10 +255,11 @@ class JooqCond {
     private static Condition transformLinear(
             final JsonObject filters,
             final Operator operator,
-            final Function<String, Field> fnAnalyze) {
+            final Function<String, Field> fnAnalyze,
+            final Function<String, String> fnTable) {
         Condition condition = null;
         for (final String field : filters.fieldNames()) {
-            final String key = getKey(field);
+            final String key = JooqCond.getKey(field);
             final String[] fields = field.split(",");
             String targetField = field.split(",")[Values.IDX];
             // TargetField re-do
@@ -225,25 +270,25 @@ class JooqCond {
             final Object value = filters.getValue(field);
             if (3 > fields.length) {
                 // Function
-                final BiFunction<String, Object, Condition> fun = OPS.get(key);
+                final BiFunction<String, Object, Condition> fun = JooqCond.OPS.get(key);
                 // JsonArray to List, fix vert.x and jooq connect issue.
                 /**if (Ut.isJArray(value)) {
                  value = ((JsonArray) value).getList().toArray();
                  }**/
-                final Condition item = fun.apply(applyField(targetField.trim()), value);
-                condition = opCond(condition, item, operator);
+                final Condition item = fun.apply(JooqCond.applyField(targetField.trim(), fnTable), value);
+                condition = JooqCond.opCond(condition, item, operator);
                 // Function condition inject
 
             } else if (3 == fields.length) {
-                Fn.outUp(null == value, LOGGER,
+                Fn.outUp(null == value, JooqCond.LOGGER,
                         JooqArgumentException.class, UxJooq.class, value);
                 final Instant instant = filters.getInstant(field);
-                Fn.outUp(Instant.class != instant.getClass(), LOGGER,
+                Fn.outUp(Instant.class != instant.getClass(), JooqCond.LOGGER,
                         JooqArgumentException.class, UxJooq.class, instant.getClass());
                 final String mode = fields[Values.TWO];
-                final BiFunction<String, Instant, Condition> fun = DOPS.get(mode);
-                final Condition item = fun.apply(applyField(targetField.trim()), instant);
-                condition = opCond(condition, item, operator);
+                final BiFunction<String, Instant, Condition> fun = JooqCond.DOPS.get(mode);
+                final Condition item = fun.apply(JooqCond.applyField(targetField.trim(), fnTable), instant);
+                condition = JooqCond.opCond(condition, item, operator);
             }
         }
         return condition;

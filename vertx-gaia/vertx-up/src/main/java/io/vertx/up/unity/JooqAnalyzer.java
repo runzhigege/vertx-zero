@@ -10,15 +10,14 @@ import io.vertx.up.atom.Mojo;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
 import io.vertx.up.eon.Values;
-import io.vertx.up.log.Annal;
-import io.vertx.up.util.Ut;
 import io.vertx.up.exception.zero.JooqFieldMissingException;
 import io.vertx.up.exception.zero.JooqMergeException;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
+import io.vertx.up.util.Ut;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -41,19 +40,31 @@ class JooqAnalyzer {
             new ConcurrentHashMap<>();
     private transient Mojo pojo;
     private transient String pojoFile;
+    private transient String tableName;
+    private transient ConcurrentMap<String, Field> tableFields = new ConcurrentHashMap<>();
 
     private JooqAnalyzer(final VertxDAO vertxDAO) {
         this.vertxDAO = Fn.pool(DAO_POOL, vertxDAO.hashCode(), () -> vertxDAO);
         // Mapping initializing
         final Table<?> tableField = Ut.field(this.vertxDAO, "table");
+
         final Class<?> typeCls = Ut.field(this.vertxDAO, "type");
         final java.lang.reflect.Field[] fields = Ut.fields(typeCls);
         // Analyze Type and definition sequence, columns hitted.
         final Field[] columns = tableField.fields();
+        /*
+         * Help for join
+         */
+        this.tableName = tableField.getName();
+
         // Mapping building
         for (int idx = Values.IDX; idx < columns.length; idx++) {
             final Field column = columns[idx];
             final java.lang.reflect.Field field = fields[idx];
+            /*
+             * Help for join
+             */
+            this.tableFields.put(field.getName(), column);
             this.mapping.put(field.getName(), column.getName());
             this.revert.put(column.getName(), field.getName());
         }
@@ -63,7 +74,11 @@ class JooqAnalyzer {
         return new JooqAnalyzer(vertxDAO);
     }
 
-    Field getColumn(final String field) {
+    String getTable() {
+        return this.tableName;
+    }
+
+    private String seekColumn(final String field) {
         String targetField;
         if (null == this.pojo) {
             if (this.mapping.values().contains(field)) {
@@ -89,11 +104,19 @@ class JooqAnalyzer {
                 targetField = this.mapping.get(targetField);
             }
         }
+        return targetField;
+    }
+
+    ConcurrentMap<String, Field> getColumns() {
+        return this.tableFields;
+    }
+
+    Field getColumn(final String field) {
+        String targetField = seekColumn(field);
         Fn.outUp(null == targetField, LOGGER,
                 JooqFieldMissingException.class, UxJooq.class, field, Ut.field(this.vertxDAO, "type"));
         LOGGER.debug(Info.JOOQ_FIELD, field, targetField);
-
-        return DSL.field(targetField);
+        return DSL.field(DSL.name(targetField));
     }
 
     void bind(final String pojo, final Class<?> clazz) {
@@ -231,13 +254,7 @@ class JooqAnalyzer {
         // Sorted Enabled
         SelectSeekStepN selectStep = null;
         if (null != inquiry.getSorter()) {
-            final JsonObject sorter = inquiry.getSorter().toJson();
-            final List<OrderField> orders = new ArrayList<>();
-            for (final String field : sorter.fieldNames()) {
-                final boolean asc = sorter.getBoolean(field);
-                final Field column = this.getColumn(field);
-                orders.add(asc ? column.asc() : column.desc());
-            }
+            final List<OrderField> orders = JooqCond.orderBy(inquiry.getSorter(), this::getColumn, null);
             if (null == conditionStep) {
                 selectStep = started.orderBy(orders);
             } else {
