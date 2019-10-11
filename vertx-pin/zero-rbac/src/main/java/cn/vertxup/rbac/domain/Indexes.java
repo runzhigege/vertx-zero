@@ -55,7 +55,6 @@ public class Indexes {
     public static final Index S_ACTION_RESOURCE_ID = Indexes0.S_ACTION_RESOURCE_ID;
     public static final Index S_ACTION_URI = Indexes0.S_ACTION_URI;
     public static final Index S_GROUP_CODE = Indexes0.S_GROUP_CODE;
-    public static final Index S_GROUP_MODEL_ID = Indexes0.S_GROUP_MODEL_ID;
     public static final Index S_GROUP_PRIMARY = Indexes0.S_GROUP_PRIMARY;
     public static final Index S_PERMISSION_CODE = Indexes0.S_PERMISSION_CODE;
     public static final Index S_PERMISSION_PRIMARY = Indexes0.S_PERMISSION_PRIMARY;
@@ -88,7 +87,6 @@ public class Indexes {
         public static Index S_ACTION_RESOURCE_ID = Internal.createIndex("RESOURCE_ID", SAction.S_ACTION, new OrderField[] { SAction.S_ACTION.RESOURCE_ID }, true);
         public static Index S_ACTION_URI = Internal.createIndex("URI", SAction.S_ACTION, new OrderField[] { SAction.S_ACTION.URI, SAction.S_ACTION.METHOD, SAction.S_ACTION.SIGMA }, true);
         public static Index S_GROUP_CODE = Internal.createIndex("CODE", SGroup.S_GROUP, new OrderField[] { SGroup.S_GROUP.CODE, SGroup.S_GROUP.SIGMA }, true);
-        public static Index S_GROUP_MODEL_ID = Internal.createIndex("MODEL_ID", SGroup.S_GROUP, new OrderField[] { SGroup.S_GROUP.MODEL_ID, SGroup.S_GROUP.MODEL_KEY }, true);
         public static Index S_GROUP_PRIMARY = Internal.createIndex("PRIMARY", SGroup.S_GROUP, new OrderField[] { SGroup.S_GROUP.KEY }, true);
         public static Index S_PERMISSION_CODE = Internal.createIndex("CODE", SPermission.S_PERMISSION, new OrderField[] { SPermission.S_PERMISSION.CODE, SPermission.S_PERMISSION.SIGMA }, true);
         public static Index S_PERMISSION_PRIMARY = Internal.createIndex("PRIMARY", SPermission.S_PERMISSION, new OrderField[] { SPermission.S_PERMISSION.KEY }, true);

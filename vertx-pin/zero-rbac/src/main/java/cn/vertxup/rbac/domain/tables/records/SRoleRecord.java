@@ -31,7 +31,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Record16<String, String, String, Boolean, String, String, String, String, String, String, Boolean, String, LocalDateTime, String, LocalDateTime, String>, ISRole {
 
-    private static final long serialVersionUID = 669949674;
+    private static final long serialVersionUID = -575264744;
 
     /**
      * Setter for <code>DB_ETERNAL.S_ROLE.KEY</code>. 「key」- 角色ID
@@ -85,7 +85,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.S_ROLE.Power</code>. 「Power」- 是否具有定制权限？
+     * Setter for <code>DB_ETERNAL.S_ROLE.POWER</code>. 「power」- 是否具有定制权限？
      */
     @Override
     public SRoleRecord setPower(Boolean value) {
@@ -94,7 +94,7 @@ public class SRoleRecord extends UpdatableRecordImpl<SRoleRecord> implements Rec
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.S_ROLE.Power</code>. 「Power」- 是否具有定制权限？
+     * Getter for <code>DB_ETERNAL.S_ROLE.POWER</code>. 「power」- 是否具有定制权限？
      */
     @Override
     public Boolean getPower() {

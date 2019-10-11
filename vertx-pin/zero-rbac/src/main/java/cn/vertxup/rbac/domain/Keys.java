@@ -74,7 +74,6 @@ public class Keys {
     public static final UniqueKey<SActionRecord> KEY_S_ACTION_URI = UniqueKeys0.KEY_S_ACTION_URI;
     public static final UniqueKey<SGroupRecord> KEY_S_GROUP_PRIMARY = UniqueKeys0.KEY_S_GROUP_PRIMARY;
     public static final UniqueKey<SGroupRecord> KEY_S_GROUP_CODE = UniqueKeys0.KEY_S_GROUP_CODE;
-    public static final UniqueKey<SGroupRecord> KEY_S_GROUP_MODEL_ID = UniqueKeys0.KEY_S_GROUP_MODEL_ID;
     public static final UniqueKey<SPermissionRecord> KEY_S_PERMISSION_PRIMARY = UniqueKeys0.KEY_S_PERMISSION_PRIMARY;
     public static final UniqueKey<SPermissionRecord> KEY_S_PERMISSION_CODE = UniqueKeys0.KEY_S_PERMISSION_CODE;
     public static final UniqueKey<SResourceRecord> KEY_S_RESOURCE_PRIMARY = UniqueKeys0.KEY_S_RESOURCE_PRIMARY;
@@ -112,7 +111,6 @@ public class Keys {
         public static final UniqueKey<SActionRecord> KEY_S_ACTION_URI = Internal.createUniqueKey(SAction.S_ACTION, "KEY_S_ACTION_URI", SAction.S_ACTION.URI, SAction.S_ACTION.METHOD, SAction.S_ACTION.SIGMA);
         public static final UniqueKey<SGroupRecord> KEY_S_GROUP_PRIMARY = Internal.createUniqueKey(SGroup.S_GROUP, "KEY_S_GROUP_PRIMARY", SGroup.S_GROUP.KEY);
         public static final UniqueKey<SGroupRecord> KEY_S_GROUP_CODE = Internal.createUniqueKey(SGroup.S_GROUP, "KEY_S_GROUP_CODE", SGroup.S_GROUP.CODE, SGroup.S_GROUP.SIGMA);
-        public static final UniqueKey<SGroupRecord> KEY_S_GROUP_MODEL_ID = Internal.createUniqueKey(SGroup.S_GROUP, "KEY_S_GROUP_MODEL_ID", SGroup.S_GROUP.MODEL_ID, SGroup.S_GROUP.MODEL_KEY);
         public static final UniqueKey<SPermissionRecord> KEY_S_PERMISSION_PRIMARY = Internal.createUniqueKey(SPermission.S_PERMISSION, "KEY_S_PERMISSION_PRIMARY", SPermission.S_PERMISSION.KEY);
         public static final UniqueKey<SPermissionRecord> KEY_S_PERMISSION_CODE = Internal.createUniqueKey(SPermission.S_PERMISSION, "KEY_S_PERMISSION_CODE", SPermission.S_PERMISSION.CODE, SPermission.S_PERMISSION.SIGMA);
         public static final UniqueKey<SResourceRecord> KEY_S_RESOURCE_PRIMARY = Internal.createUniqueKey(SResource.S_RESOURCE, "KEY_S_RESOURCE_PRIMARY", SResource.S_RESOURCE.KEY);

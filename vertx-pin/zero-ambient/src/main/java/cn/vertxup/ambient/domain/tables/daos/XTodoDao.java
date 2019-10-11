@@ -91,6 +91,13 @@ public class XTodoDao extends DAOImpl<XTodoRecord, cn.vertxup.ambient.domain.tab
     }
 
     /**
+     * Fetch records that have <code>ICON IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.domain.tables.pojos.XTodo> fetchByIcon(String... values) {
+        return fetch(XTodo.X_TODO.ICON, values);
+    }
+
+    /**
      * Fetch records that have <code>STATUS IN (values)</code>
      */
     public List<cn.vertxup.ambient.domain.tables.pojos.XTodo> fetchByStatus(String... values) {
@@ -109,6 +116,20 @@ public class XTodoDao extends DAOImpl<XTodoRecord, cn.vertxup.ambient.domain.tab
      */
     public List<cn.vertxup.ambient.domain.tables.pojos.XTodo> fetchByExpiredAt(LocalDateTime... values) {
         return fetch(XTodo.X_TODO.EXPIRED_AT, values);
+    }
+
+    /**
+     * Fetch records that have <code>MODEL_ID IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.domain.tables.pojos.XTodo> fetchByModelId(String... values) {
+        return fetch(XTodo.X_TODO.MODEL_ID, values);
+    }
+
+    /**
+     * Fetch records that have <code>MODEL_KEY IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.domain.tables.pojos.XTodo> fetchByModelKey(String... values) {
+        return fetch(XTodo.X_TODO.MODEL_KEY, values);
     }
 
     /**
@@ -245,6 +266,13 @@ public class XTodoDao extends DAOImpl<XTodoRecord, cn.vertxup.ambient.domain.tab
     }
 
     /**
+     * Fetch records that have <code>ICON IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XTodo>> fetchByIconAsync(List<String> values) {
+        return fetchAsync(XTodo.X_TODO.ICON,values);
+    }
+
+    /**
      * Fetch records that have <code>STATUS IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XTodo>> fetchByStatusAsync(List<String> values) {
@@ -263,6 +291,20 @@ public class XTodoDao extends DAOImpl<XTodoRecord, cn.vertxup.ambient.domain.tab
      */
     public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XTodo>> fetchByExpiredAtAsync(List<LocalDateTime> values) {
         return fetchAsync(XTodo.X_TODO.EXPIRED_AT,values);
+    }
+
+    /**
+     * Fetch records that have <code>MODEL_ID IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XTodo>> fetchByModelIdAsync(List<String> values) {
+        return fetchAsync(XTodo.X_TODO.MODEL_ID,values);
+    }
+
+    /**
+     * Fetch records that have <code>MODEL_KEY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XTodo>> fetchByModelKeyAsync(List<String> values) {
+        return fetchAsync(XTodo.X_TODO.MODEL_KEY,values);
     }
 
     /**
