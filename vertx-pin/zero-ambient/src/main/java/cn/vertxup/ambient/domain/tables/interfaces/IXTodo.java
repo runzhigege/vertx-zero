@@ -84,6 +84,16 @@ public interface IXTodo extends Serializable {
     public String getStatus();
 
     /**
+     * Setter for <code>DB_ETERNAL.X_TODO.TODO_URL</code>. 「todoUrl」- 待办路径
+     */
+    public IXTodo setTodoUrl(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_TODO.TODO_URL</code>. 「todoUrl」- 待办路径
+     */
+    public String getTodoUrl();
+
+    /**
      * Setter for <code>DB_ETERNAL.X_TODO.TYPE</code>. 「type」- 待办类型
      */
     public IXTodo setType(String value);
@@ -142,6 +152,16 @@ public interface IXTodo extends Serializable {
      * Getter for <code>DB_ETERNAL.X_TODO.TO_USER</code>. 「toUser」- 待办指定人
      */
     public String getToUser();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_TODO.TO_ROLE</code>. 「toRole」- 待办角色（集体）
+     */
+    public IXTodo setToRole(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_TODO.TO_ROLE</code>. 「toRole」- 待办角色（集体）
+     */
+    public String getToRole();
 
     /**
      * Setter for <code>DB_ETERNAL.X_TODO.ASSIGNED_BY</code>. 「assignedBy」- 待办指派人
@@ -284,12 +304,14 @@ public interface IXTodo extends Serializable {
         setCode(json.getString("CODE"));
         setIcon(json.getString("ICON"));
         setStatus(json.getString("STATUS"));
+        setTodoUrl(json.getString("TODO_URL"));
         setType(json.getString("TYPE"));
         // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED_AT!
         setModelId(json.getString("MODEL_ID"));
         setModelKey(json.getString("MODEL_KEY"));
         setToGroup(json.getString("TO_GROUP"));
         setToUser(json.getString("TO_USER"));
+        setToRole(json.getString("TO_ROLE"));
         setAssignedBy(json.getString("ASSIGNED_BY"));
         setAcceptedBy(json.getString("ACCEPTED_BY"));
         setFinishedBy(json.getString("FINISHED_BY"));
@@ -314,12 +336,14 @@ public interface IXTodo extends Serializable {
         json.put("CODE",getCode());
         json.put("ICON",getIcon());
         json.put("STATUS",getStatus());
+        json.put("TODO_URL",getTodoUrl());
         json.put("TYPE",getType());
         // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED_AT!
         json.put("MODEL_ID",getModelId());
         json.put("MODEL_KEY",getModelKey());
         json.put("TO_GROUP",getToGroup());
         json.put("TO_USER",getToUser());
+        json.put("TO_ROLE",getToRole());
         json.put("ASSIGNED_BY",getAssignedBy());
         json.put("ACCEPTED_BY",getAcceptedBy());
         json.put("FINISHED_BY",getFinishedBy());

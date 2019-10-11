@@ -105,6 +105,13 @@ public class XTodoDao extends DAOImpl<XTodoRecord, cn.vertxup.ambient.domain.tab
     }
 
     /**
+     * Fetch records that have <code>TODO_URL IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.domain.tables.pojos.XTodo> fetchByTodoUrl(String... values) {
+        return fetch(XTodo.X_TODO.TODO_URL, values);
+    }
+
+    /**
      * Fetch records that have <code>TYPE IN (values)</code>
      */
     public List<cn.vertxup.ambient.domain.tables.pojos.XTodo> fetchByType(String... values) {
@@ -144,6 +151,13 @@ public class XTodoDao extends DAOImpl<XTodoRecord, cn.vertxup.ambient.domain.tab
      */
     public List<cn.vertxup.ambient.domain.tables.pojos.XTodo> fetchByToUser(String... values) {
         return fetch(XTodo.X_TODO.TO_USER, values);
+    }
+
+    /**
+     * Fetch records that have <code>TO_ROLE IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.domain.tables.pojos.XTodo> fetchByToRole(String... values) {
+        return fetch(XTodo.X_TODO.TO_ROLE, values);
     }
 
     /**
@@ -280,6 +294,13 @@ public class XTodoDao extends DAOImpl<XTodoRecord, cn.vertxup.ambient.domain.tab
     }
 
     /**
+     * Fetch records that have <code>TODO_URL IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XTodo>> fetchByTodoUrlAsync(List<String> values) {
+        return fetchAsync(XTodo.X_TODO.TODO_URL,values);
+    }
+
+    /**
      * Fetch records that have <code>TYPE IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XTodo>> fetchByTypeAsync(List<String> values) {
@@ -319,6 +340,13 @@ public class XTodoDao extends DAOImpl<XTodoRecord, cn.vertxup.ambient.domain.tab
      */
     public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XTodo>> fetchByToUserAsync(List<String> values) {
         return fetchAsync(XTodo.X_TODO.TO_USER,values);
+    }
+
+    /**
+     * Fetch records that have <code>TO_ROLE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XTodo>> fetchByToRoleAsync(List<String> values) {
+        return fetchAsync(XTodo.X_TODO.TO_ROLE,values);
     }
 
     /**
