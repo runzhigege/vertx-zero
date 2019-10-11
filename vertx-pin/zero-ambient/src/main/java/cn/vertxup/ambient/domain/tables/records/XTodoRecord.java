@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXTodo {
 
-    private static final long serialVersionUID = -605432046;
+    private static final long serialVersionUID = -1909966301;
 
     /**
      * Setter for <code>DB_ETERNAL.X_TODO.KEY</code>. 「key」- 待办主键
@@ -133,11 +133,28 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
     }
 
     /**
+     * Setter for <code>DB_ETERNAL.X_TODO.TODO_URL</code>. 「todoUrl」- 待办路径
+     */
+    @Override
+    public XTodoRecord setTodoUrl(String value) {
+        set(6, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_TODO.TODO_URL</code>. 「todoUrl」- 待办路径
+     */
+    @Override
+    public String getTodoUrl() {
+        return (String) get(6);
+    }
+
+    /**
      * Setter for <code>DB_ETERNAL.X_TODO.TYPE</code>. 「type」- 待办类型
      */
     @Override
     public XTodoRecord setType(String value) {
-        set(6, value);
+        set(7, value);
         return this;
     }
 
@@ -146,7 +163,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public String getType() {
-        return (String) get(6);
+        return (String) get(7);
     }
 
     /**
@@ -154,7 +171,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public XTodoRecord setExpiredAt(LocalDateTime value) {
-        set(7, value);
+        set(8, value);
         return this;
     }
 
@@ -163,7 +180,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public LocalDateTime getExpiredAt() {
-        return (LocalDateTime) get(7);
+        return (LocalDateTime) get(8);
     }
 
     /**
@@ -171,7 +188,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public XTodoRecord setModelId(String value) {
-        set(8, value);
+        set(9, value);
         return this;
     }
 
@@ -180,7 +197,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public String getModelId() {
-        return (String) get(8);
+        return (String) get(9);
     }
 
     /**
@@ -188,7 +205,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public XTodoRecord setModelKey(String value) {
-        set(9, value);
+        set(10, value);
         return this;
     }
 
@@ -197,7 +214,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public String getModelKey() {
-        return (String) get(9);
+        return (String) get(10);
     }
 
     /**
@@ -205,7 +222,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public XTodoRecord setToGroup(String value) {
-        set(10, value);
+        set(11, value);
         return this;
     }
 
@@ -214,7 +231,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public String getToGroup() {
-        return (String) get(10);
+        return (String) get(11);
     }
 
     /**
@@ -222,7 +239,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public XTodoRecord setToUser(String value) {
-        set(11, value);
+        set(12, value);
         return this;
     }
 
@@ -231,7 +248,24 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public String getToUser() {
-        return (String) get(11);
+        return (String) get(12);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_TODO.TO_ROLE</code>. 「toRole」- 待办角色（集体）
+     */
+    @Override
+    public XTodoRecord setToRole(String value) {
+        set(13, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_TODO.TO_ROLE</code>. 「toRole」- 待办角色（集体）
+     */
+    @Override
+    public String getToRole() {
+        return (String) get(13);
     }
 
     /**
@@ -239,7 +273,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public XTodoRecord setAssignedBy(String value) {
-        set(12, value);
+        set(14, value);
         return this;
     }
 
@@ -248,7 +282,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public String getAssignedBy() {
-        return (String) get(12);
+        return (String) get(14);
     }
 
     /**
@@ -256,7 +290,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public XTodoRecord setAcceptedBy(String value) {
-        set(13, value);
+        set(15, value);
         return this;
     }
 
@@ -265,7 +299,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public String getAcceptedBy() {
-        return (String) get(13);
+        return (String) get(15);
     }
 
     /**
@@ -273,7 +307,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public XTodoRecord setFinishedBy(String value) {
-        set(14, value);
+        set(16, value);
         return this;
     }
 
@@ -282,7 +316,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public String getFinishedBy() {
-        return (String) get(14);
+        return (String) get(16);
     }
 
     /**
@@ -290,7 +324,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public XTodoRecord setTraceId(String value) {
-        set(15, value);
+        set(17, value);
         return this;
     }
 
@@ -299,7 +333,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public String getTraceId() {
-        return (String) get(15);
+        return (String) get(17);
     }
 
     /**
@@ -307,7 +341,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public XTodoRecord setActive(Boolean value) {
-        set(16, value);
+        set(18, value);
         return this;
     }
 
@@ -316,7 +350,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public Boolean getActive() {
-        return (Boolean) get(16);
+        return (Boolean) get(18);
     }
 
     /**
@@ -324,7 +358,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public XTodoRecord setSigma(String value) {
-        set(17, value);
+        set(19, value);
         return this;
     }
 
@@ -333,7 +367,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public String getSigma() {
-        return (String) get(17);
+        return (String) get(19);
     }
 
     /**
@@ -341,7 +375,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public XTodoRecord setMetadata(String value) {
-        set(18, value);
+        set(20, value);
         return this;
     }
 
@@ -350,7 +384,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public String getMetadata() {
-        return (String) get(18);
+        return (String) get(20);
     }
 
     /**
@@ -358,7 +392,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public XTodoRecord setLanguage(String value) {
-        set(19, value);
+        set(21, value);
         return this;
     }
 
@@ -367,7 +401,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public String getLanguage() {
-        return (String) get(19);
+        return (String) get(21);
     }
 
     /**
@@ -375,7 +409,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public XTodoRecord setCreatedAt(LocalDateTime value) {
-        set(20, value);
+        set(22, value);
         return this;
     }
 
@@ -384,7 +418,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(20);
+        return (LocalDateTime) get(22);
     }
 
     /**
@@ -392,7 +426,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public XTodoRecord setCreatedBy(String value) {
-        set(21, value);
+        set(23, value);
         return this;
     }
 
@@ -401,7 +435,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public String getCreatedBy() {
-        return (String) get(21);
+        return (String) get(23);
     }
 
     /**
@@ -409,7 +443,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public XTodoRecord setUpdatedAt(LocalDateTime value) {
-        set(22, value);
+        set(24, value);
         return this;
     }
 
@@ -418,7 +452,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public LocalDateTime getUpdatedAt() {
-        return (LocalDateTime) get(22);
+        return (LocalDateTime) get(24);
     }
 
     /**
@@ -426,7 +460,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public XTodoRecord setUpdatedBy(String value) {
-        set(23, value);
+        set(25, value);
         return this;
     }
 
@@ -435,7 +469,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
      */
     @Override
     public String getUpdatedBy() {
-        return (String) get(23);
+        return (String) get(25);
     }
 
     // -------------------------------------------------------------------------
@@ -465,12 +499,14 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
         setCode(from.getCode());
         setIcon(from.getIcon());
         setStatus(from.getStatus());
+        setTodoUrl(from.getTodoUrl());
         setType(from.getType());
         setExpiredAt(from.getExpiredAt());
         setModelId(from.getModelId());
         setModelKey(from.getModelKey());
         setToGroup(from.getToGroup());
         setToUser(from.getToUser());
+        setToRole(from.getToRole());
         setAssignedBy(from.getAssignedBy());
         setAcceptedBy(from.getAcceptedBy());
         setFinishedBy(from.getFinishedBy());
@@ -508,7 +544,7 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
     /**
      * Create a detached, initialised XTodoRecord
      */
-    public XTodoRecord(String key, String serial, String name, String code, String icon, String status, String type, LocalDateTime expiredAt, String modelId, String modelKey, String toGroup, String toUser, String assignedBy, String acceptedBy, String finishedBy, String traceId, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public XTodoRecord(String key, String serial, String name, String code, String icon, String status, String todoUrl, String type, LocalDateTime expiredAt, String modelId, String modelKey, String toGroup, String toUser, String toRole, String assignedBy, String acceptedBy, String finishedBy, String traceId, Boolean active, String sigma, String metadata, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(XTodo.X_TODO);
 
         set(0, key);
@@ -517,23 +553,25 @@ public class XTodoRecord extends UpdatableRecordImpl<XTodoRecord> implements IXT
         set(3, code);
         set(4, icon);
         set(5, status);
-        set(6, type);
-        set(7, expiredAt);
-        set(8, modelId);
-        set(9, modelKey);
-        set(10, toGroup);
-        set(11, toUser);
-        set(12, assignedBy);
-        set(13, acceptedBy);
-        set(14, finishedBy);
-        set(15, traceId);
-        set(16, active);
-        set(17, sigma);
-        set(18, metadata);
-        set(19, language);
-        set(20, createdAt);
-        set(21, createdBy);
-        set(22, updatedAt);
-        set(23, updatedBy);
+        set(6, todoUrl);
+        set(7, type);
+        set(8, expiredAt);
+        set(9, modelId);
+        set(10, modelKey);
+        set(11, toGroup);
+        set(12, toUser);
+        set(13, toRole);
+        set(14, assignedBy);
+        set(15, acceptedBy);
+        set(16, finishedBy);
+        set(17, traceId);
+        set(18, active);
+        set(19, sigma);
+        set(20, metadata);
+        set(21, language);
+        set(22, createdAt);
+        set(23, createdBy);
+        set(24, updatedAt);
+        set(25, updatedBy);
     }
 }
