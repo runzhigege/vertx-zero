@@ -24,15 +24,18 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XTodo implements IXTodo {
 
-    private static final long serialVersionUID = -401993799;
+    private static final long serialVersionUID = 1487503658;
 
     private String        key;
     private String        serial;
     private String        name;
     private String        code;
+    private String        icon;
     private String        status;
     private String        type;
     private LocalDateTime expiredAt;
+    private String        modelId;
+    private String        modelKey;
     private String        toGroup;
     private String        toUser;
     private String        assignedBy;
@@ -55,9 +58,12 @@ public class XTodo implements IXTodo {
         this.serial = value.serial;
         this.name = value.name;
         this.code = value.code;
+        this.icon = value.icon;
         this.status = value.status;
         this.type = value.type;
         this.expiredAt = value.expiredAt;
+        this.modelId = value.modelId;
+        this.modelKey = value.modelKey;
         this.toGroup = value.toGroup;
         this.toUser = value.toUser;
         this.assignedBy = value.assignedBy;
@@ -79,9 +85,12 @@ public class XTodo implements IXTodo {
         String        serial,
         String        name,
         String        code,
+        String        icon,
         String        status,
         String        type,
         LocalDateTime expiredAt,
+        String        modelId,
+        String        modelKey,
         String        toGroup,
         String        toUser,
         String        assignedBy,
@@ -101,9 +110,12 @@ public class XTodo implements IXTodo {
         this.serial = serial;
         this.name = name;
         this.code = code;
+        this.icon = icon;
         this.status = status;
         this.type = type;
         this.expiredAt = expiredAt;
+        this.modelId = modelId;
+        this.modelKey = modelKey;
         this.toGroup = toGroup;
         this.toUser = toUser;
         this.assignedBy = assignedBy;
@@ -165,6 +177,17 @@ public class XTodo implements IXTodo {
     }
 
     @Override
+    public String getIcon() {
+        return this.icon;
+    }
+
+    @Override
+    public XTodo setIcon(String icon) {
+        this.icon = icon;
+        return this;
+    }
+
+    @Override
     public String getStatus() {
         return this.status;
     }
@@ -194,6 +217,28 @@ public class XTodo implements IXTodo {
     @Override
     public XTodo setExpiredAt(LocalDateTime expiredAt) {
         this.expiredAt = expiredAt;
+        return this;
+    }
+
+    @Override
+    public String getModelId() {
+        return this.modelId;
+    }
+
+    @Override
+    public XTodo setModelId(String modelId) {
+        this.modelId = modelId;
+        return this;
+    }
+
+    @Override
+    public String getModelKey() {
+        return this.modelKey;
+    }
+
+    @Override
+    public XTodo setModelKey(String modelKey) {
+        this.modelKey = modelKey;
         return this;
     }
 
@@ -359,9 +404,12 @@ public class XTodo implements IXTodo {
         sb.append(", ").append(serial);
         sb.append(", ").append(name);
         sb.append(", ").append(code);
+        sb.append(", ").append(icon);
         sb.append(", ").append(status);
         sb.append(", ").append(type);
         sb.append(", ").append(expiredAt);
+        sb.append(", ").append(modelId);
+        sb.append(", ").append(modelKey);
         sb.append(", ").append(toGroup);
         sb.append(", ").append(toUser);
         sb.append(", ").append(assignedBy);
@@ -394,9 +442,12 @@ public class XTodo implements IXTodo {
         setSerial(from.getSerial());
         setName(from.getName());
         setCode(from.getCode());
+        setIcon(from.getIcon());
         setStatus(from.getStatus());
         setType(from.getType());
         setExpiredAt(from.getExpiredAt());
+        setModelId(from.getModelId());
+        setModelKey(from.getModelKey());
         setToGroup(from.getToGroup());
         setToUser(from.getToUser());
         setAssignedBy(from.getAssignedBy());

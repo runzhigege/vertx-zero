@@ -64,6 +64,16 @@ public interface IXTodo extends Serializable {
     public String getCode();
 
     /**
+     * Setter for <code>DB_ETERNAL.X_TODO.ICON</code>. 「icon」- 待办显示的图标
+     */
+    public IXTodo setIcon(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_TODO.ICON</code>. 「icon」- 待办显示的图标
+     */
+    public String getIcon();
+
+    /**
      * Setter for <code>DB_ETERNAL.X_TODO.STATUS</code>. 「status」- 待办状态
      */
     public IXTodo setStatus(String value);
@@ -92,6 +102,26 @@ public interface IXTodo extends Serializable {
      * Getter for <code>DB_ETERNAL.X_TODO.EXPIRED_AT</code>. 「expiredAt」- 超时时间
      */
     public LocalDateTime getExpiredAt();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_TODO.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
+     */
+    public IXTodo setModelId(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_TODO.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
+     */
+    public String getModelId();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_TODO.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
+     */
+    public IXTodo setModelKey(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_TODO.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
+     */
+    public String getModelKey();
 
     /**
      * Setter for <code>DB_ETERNAL.X_TODO.TO_GROUP</code>. 「toGroup」- 待办指定组
@@ -252,9 +282,12 @@ public interface IXTodo extends Serializable {
         setSerial(json.getString("SERIAL"));
         setName(json.getString("NAME"));
         setCode(json.getString("CODE"));
+        setIcon(json.getString("ICON"));
         setStatus(json.getString("STATUS"));
         setType(json.getString("TYPE"));
         // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED_AT!
+        setModelId(json.getString("MODEL_ID"));
+        setModelKey(json.getString("MODEL_KEY"));
         setToGroup(json.getString("TO_GROUP"));
         setToUser(json.getString("TO_USER"));
         setAssignedBy(json.getString("ASSIGNED_BY"));
@@ -279,9 +312,12 @@ public interface IXTodo extends Serializable {
         json.put("SERIAL",getSerial());
         json.put("NAME",getName());
         json.put("CODE",getCode());
+        json.put("ICON",getIcon());
         json.put("STATUS",getStatus());
         json.put("TYPE",getType());
         // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED_AT!
+        json.put("MODEL_ID",getModelId());
+        json.put("MODEL_KEY",getModelKey());
         json.put("TO_GROUP",getToGroup());
         json.put("TO_USER",getToUser());
         json.put("ASSIGNED_BY",getAssignedBy());

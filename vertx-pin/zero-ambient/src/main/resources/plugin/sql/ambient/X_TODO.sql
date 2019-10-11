@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS X_TODO
     `SERIAL`      VARCHAR(255) COMMENT '「serial」- 待办编号，使用 X_NUMBER 生成',
     `NAME`        VARCHAR(255) COMMENT '「name」- 待办名称（标题）',
     `CODE`        VARCHAR(36) COMMENT '「code」- 待办系统码',
+    `ICON`        VARCHAR(255) COMMENT '「icon」- 待办显示的图标',
     -- 待办相关内容
     /*
      * 待办状态清单：
@@ -25,6 +26,10 @@ CREATE TABLE IF NOT EXISTS X_TODO
      */
     `TYPE`        VARCHAR(36) COMMENT '「type」- 待办类型',
     `EXPIRED_AT`  DATETIME COMMENT '「expiredAt」- 超时时间',
+
+    -- 模块相关 Join
+    `MODEL_ID`    VARCHAR(255) COMMENT '「modelId」- 组所关联的模型identifier，用于描述',
+    `MODEL_KEY`   VARCHAR(36) COMMENT '「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录',
 
     /*
      * 完整流程：
