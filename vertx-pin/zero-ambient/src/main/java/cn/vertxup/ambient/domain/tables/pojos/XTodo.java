@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XTodo implements IXTodo {
 
-    private static final long serialVersionUID = 1487503658;
+    private static final long serialVersionUID = -1596175636;
 
     private String        key;
     private String        serial;
@@ -32,12 +32,14 @@ public class XTodo implements IXTodo {
     private String        code;
     private String        icon;
     private String        status;
+    private String        todoUrl;
     private String        type;
     private LocalDateTime expiredAt;
     private String        modelId;
     private String        modelKey;
     private String        toGroup;
     private String        toUser;
+    private String        toRole;
     private String        assignedBy;
     private String        acceptedBy;
     private String        finishedBy;
@@ -60,12 +62,14 @@ public class XTodo implements IXTodo {
         this.code = value.code;
         this.icon = value.icon;
         this.status = value.status;
+        this.todoUrl = value.todoUrl;
         this.type = value.type;
         this.expiredAt = value.expiredAt;
         this.modelId = value.modelId;
         this.modelKey = value.modelKey;
         this.toGroup = value.toGroup;
         this.toUser = value.toUser;
+        this.toRole = value.toRole;
         this.assignedBy = value.assignedBy;
         this.acceptedBy = value.acceptedBy;
         this.finishedBy = value.finishedBy;
@@ -87,12 +91,14 @@ public class XTodo implements IXTodo {
         String        code,
         String        icon,
         String        status,
+        String        todoUrl,
         String        type,
         LocalDateTime expiredAt,
         String        modelId,
         String        modelKey,
         String        toGroup,
         String        toUser,
+        String        toRole,
         String        assignedBy,
         String        acceptedBy,
         String        finishedBy,
@@ -112,12 +118,14 @@ public class XTodo implements IXTodo {
         this.code = code;
         this.icon = icon;
         this.status = status;
+        this.todoUrl = todoUrl;
         this.type = type;
         this.expiredAt = expiredAt;
         this.modelId = modelId;
         this.modelKey = modelKey;
         this.toGroup = toGroup;
         this.toUser = toUser;
+        this.toRole = toRole;
         this.assignedBy = assignedBy;
         this.acceptedBy = acceptedBy;
         this.finishedBy = finishedBy;
@@ -199,6 +207,17 @@ public class XTodo implements IXTodo {
     }
 
     @Override
+    public String getTodoUrl() {
+        return this.todoUrl;
+    }
+
+    @Override
+    public XTodo setTodoUrl(String todoUrl) {
+        this.todoUrl = todoUrl;
+        return this;
+    }
+
+    @Override
     public String getType() {
         return this.type;
     }
@@ -261,6 +280,17 @@ public class XTodo implements IXTodo {
     @Override
     public XTodo setToUser(String toUser) {
         this.toUser = toUser;
+        return this;
+    }
+
+    @Override
+    public String getToRole() {
+        return this.toRole;
+    }
+
+    @Override
+    public XTodo setToRole(String toRole) {
+        this.toRole = toRole;
         return this;
     }
 
@@ -406,12 +436,14 @@ public class XTodo implements IXTodo {
         sb.append(", ").append(code);
         sb.append(", ").append(icon);
         sb.append(", ").append(status);
+        sb.append(", ").append(todoUrl);
         sb.append(", ").append(type);
         sb.append(", ").append(expiredAt);
         sb.append(", ").append(modelId);
         sb.append(", ").append(modelKey);
         sb.append(", ").append(toGroup);
         sb.append(", ").append(toUser);
+        sb.append(", ").append(toRole);
         sb.append(", ").append(assignedBy);
         sb.append(", ").append(acceptedBy);
         sb.append(", ").append(finishedBy);
@@ -444,12 +476,14 @@ public class XTodo implements IXTodo {
         setCode(from.getCode());
         setIcon(from.getIcon());
         setStatus(from.getStatus());
+        setTodoUrl(from.getTodoUrl());
         setType(from.getType());
         setExpiredAt(from.getExpiredAt());
         setModelId(from.getModelId());
         setModelKey(from.getModelKey());
         setToGroup(from.getToGroup());
         setToUser(from.getToUser());
+        setToRole(from.getToRole());
         setAssignedBy(from.getAssignedBy());
         setAcceptedBy(from.getAcceptedBy());
         setFinishedBy(from.getFinishedBy());

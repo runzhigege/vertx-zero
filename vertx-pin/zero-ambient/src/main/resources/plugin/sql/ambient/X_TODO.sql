@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS X_TODO
      * CANCEL：待办被取消
      */
     `STATUS`      VARCHAR(36) COMMENT '「status」- 待办状态',
+    `TODO_URL`    VARCHAR(255) COMMENT '「todoUrl」- 待办路径',
     /*
      * EXPIRED：会超时的待办
      * STANDARD：标准的待办（不会超时）
@@ -41,6 +42,7 @@ CREATE TABLE IF NOT EXISTS X_TODO
      */
     `TO_GROUP`    VARCHAR(36) COMMENT '「toGroup」- 待办指定组',
     `TO_USER`     VARCHAR(36) COMMENT '「toUser」- 待办指定人',
+    `TO_ROLE`     VARCHAR(36) COMMENT '「toRole」- 待办角色（集体）',
     `ASSIGNED_BY` VARCHAR(36) COMMENT '「assignedBy」- 待办指派人',
     `ACCEPTED_BY` VARCHAR(36) COMMENT '「acceptedBy」- 待办接收人',
     `FINISHED_BY` VARCHAR(36) COMMENT '「finishedBy」- 待办完成人',
