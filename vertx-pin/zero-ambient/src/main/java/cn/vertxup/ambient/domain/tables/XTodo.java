@@ -35,7 +35,7 @@ public class XTodo extends TableImpl<XTodoRecord> {
      * The reference instance of <code>DB_ETERNAL.X_TODO</code>
      */
     public static final XTodo X_TODO = new XTodo();
-    private static final long serialVersionUID = -1042953603;
+    private static final long serialVersionUID = 1001460536;
     /**
      * The column <code>DB_ETERNAL.X_TODO.KEY</code>. 「key」- 待办主键
      */
@@ -61,6 +61,10 @@ public class XTodo extends TableImpl<XTodoRecord> {
      */
     public final TableField<XTodoRecord, String> STATUS = createField("STATUS", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「status」- 待办状态");
     /**
+     * The column <code>DB_ETERNAL.X_TODO.TODO_URL</code>. 「todoUrl」- 待办路径
+     */
+    public final TableField<XTodoRecord, String> TODO_URL = createField("TODO_URL", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「todoUrl」- 待办路径");
+    /**
      * The column <code>DB_ETERNAL.X_TODO.TYPE</code>. 「type」- 待办类型
      */
     public final TableField<XTodoRecord, String> TYPE = createField("TYPE", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「type」- 待办类型");
@@ -84,6 +88,10 @@ public class XTodo extends TableImpl<XTodoRecord> {
      * The column <code>DB_ETERNAL.X_TODO.TO_USER</code>. 「toUser」- 待办指定人
      */
     public final TableField<XTodoRecord, String> TO_USER = createField("TO_USER", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「toUser」- 待办指定人");
+    /**
+     * The column <code>DB_ETERNAL.X_TODO.TO_ROLE</code>. 「toRole」- 待办角色（集体）
+     */
+    public final TableField<XTodoRecord, String> TO_ROLE = createField("TO_ROLE", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「toRole」- 待办角色（集体）");
     /**
      * The column <code>DB_ETERNAL.X_TODO.ASSIGNED_BY</code>. 「assignedBy」- 待办指派人
      */
