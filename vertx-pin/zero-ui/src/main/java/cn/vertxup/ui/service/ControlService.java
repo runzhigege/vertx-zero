@@ -10,6 +10,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.up.unity.Ux;
+import io.vertx.up.util.Ut;
 
 import java.util.Objects;
 
@@ -51,6 +52,11 @@ public class ControlService implements ControlStub {
     public Future<JsonArray> fetchOps(final String control) {
         return Ux.Jooq.on(UiOpDao.class)
                 .<UiOp>fetchAsync("controlId", control)
-                .compose(Ux::fnJArray);
+                .compose(Ux::fnJArray)
+                .compose(array -> {
+                    Ut.itJArray(array).forEach(each ->
+                            Ke.metadata(each, KeField.Ui.CONFIG));
+                    return Ux.toFuture(array);
+                });
     }
 }
