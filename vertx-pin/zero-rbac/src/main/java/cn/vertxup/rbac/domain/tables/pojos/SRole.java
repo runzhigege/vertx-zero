@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SRole implements ISRole {
 
-    private static final long serialVersionUID = -849628649;
+    private static final long serialVersionUID = 2021132744;
 
     private String        key;
     private String        name;

@@ -35,7 +35,7 @@ public class SRole extends TableImpl<SRoleRecord> {
      * The reference instance of <code>DB_ETERNAL.S_ROLE</code>
      */
     public static final SRole S_ROLE = new SRole();
-    private static final long serialVersionUID = -602900369;
+    private static final long serialVersionUID = -1819820679;
     /**
      * The column <code>DB_ETERNAL.S_ROLE.KEY</code>. 「key」- 角色ID
      */
