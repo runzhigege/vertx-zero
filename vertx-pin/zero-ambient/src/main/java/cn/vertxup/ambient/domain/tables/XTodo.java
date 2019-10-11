@@ -35,7 +35,7 @@ public class XTodo extends TableImpl<XTodoRecord> {
      * The reference instance of <code>DB_ETERNAL.X_TODO</code>
      */
     public static final XTodo X_TODO = new XTodo();
-    private static final long serialVersionUID = 370101521;
+    private static final long serialVersionUID = -1042953603;
     /**
      * The column <code>DB_ETERNAL.X_TODO.KEY</code>. 「key」- 待办主键
      */
@@ -53,6 +53,10 @@ public class XTodo extends TableImpl<XTodoRecord> {
      */
     public final TableField<XTodoRecord, String> CODE = createField("CODE", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「code」- 待办系统码");
     /**
+     * The column <code>DB_ETERNAL.X_TODO.ICON</code>. 「icon」- 待办显示的图标
+     */
+    public final TableField<XTodoRecord, String> ICON = createField("ICON", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「icon」- 待办显示的图标");
+    /**
      * The column <code>DB_ETERNAL.X_TODO.STATUS</code>. 「status」- 待办状态
      */
     public final TableField<XTodoRecord, String> STATUS = createField("STATUS", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「status」- 待办状态");
@@ -64,6 +68,14 @@ public class XTodo extends TableImpl<XTodoRecord> {
      * The column <code>DB_ETERNAL.X_TODO.EXPIRED_AT</code>. 「expiredAt」- 超时时间
      */
     public final TableField<XTodoRecord, LocalDateTime> EXPIRED_AT = createField("EXPIRED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「expiredAt」- 超时时间");
+    /**
+     * The column <code>DB_ETERNAL.X_TODO.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
+     */
+    public final TableField<XTodoRecord, String> MODEL_ID = createField("MODEL_ID", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「modelId」- 组所关联的模型identifier，用于描述");
+    /**
+     * The column <code>DB_ETERNAL.X_TODO.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
+     */
+    public final TableField<XTodoRecord, String> MODEL_KEY = createField("MODEL_KEY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录");
     /**
      * The column <code>DB_ETERNAL.X_TODO.TO_GROUP</code>. 「toGroup」- 待办指定组
      */

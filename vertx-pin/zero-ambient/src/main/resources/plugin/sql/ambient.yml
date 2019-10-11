@@ -24,3 +24,6 @@ databaseChangeLog:
   - include:
       file: plugin/sql/ambient/X_NUMBER.sql
       relativeToChangelogFile: false
+  - include:
+      file: plugin/sql/ambient/X_TODO.sql
+      relativeToChangelogFile: false

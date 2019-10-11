@@ -35,7 +35,7 @@ public class SGroup extends TableImpl<SGroupRecord> {
      * The reference instance of <code>DB_ETERNAL.S_GROUP</code>
      */
     public static final SGroup S_GROUP = new SGroup();
-    private static final long serialVersionUID = -205539506;
+    private static final long serialVersionUID = -1859824782;
     /**
      * The column <code>DB_ETERNAL.S_GROUP.KEY</code>. 「key」- 组ID
      */
@@ -147,7 +147,7 @@ public class SGroup extends TableImpl<SGroupRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.S_GROUP_CODE, Indexes.S_GROUP_MODEL_ID, Indexes.S_GROUP_PRIMARY);
+        return Arrays.<Index>asList(Indexes.S_GROUP_CODE, Indexes.S_GROUP_PRIMARY);
     }
 
     /**
@@ -163,7 +163,7 @@ public class SGroup extends TableImpl<SGroupRecord> {
      */
     @Override
     public List<UniqueKey<SGroupRecord>> getKeys() {
-        return Arrays.<UniqueKey<SGroupRecord>>asList(Keys.KEY_S_GROUP_PRIMARY, Keys.KEY_S_GROUP_CODE, Keys.KEY_S_GROUP_MODEL_ID);
+        return Arrays.<UniqueKey<SGroupRecord>>asList(Keys.KEY_S_GROUP_PRIMARY, Keys.KEY_S_GROUP_CODE);
     }
 
     /**
