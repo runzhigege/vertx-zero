@@ -3,11 +3,14 @@ package io.vertx.up.util;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
+import io.vertx.up.eon.Protocols;
 import io.vertx.up.exception.heart.EmptyStreamException;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Log;
 
 import java.io.*;
+import java.net.JarURLConnection;
+import java.net.URL;
 import java.util.Objects;
 import java.util.function.Supplier;
 
@@ -97,10 +100,30 @@ final class Stream {
         if (null == in) {
             in = readSupplier(() -> ClassLoader.getSystemResourceAsStream(filename), filename);
         }
+        // Jar reading
+        if (null == in) {
+            in = readJar(filename);
+        }
         if (null == in) {
             throw new EmptyStreamException(filename);
         }
         return in;
+    }
+
+    private static InputStream readJar(final String filename) {
+        return readSupplier(() -> {
+            try {
+                final URL url = new URL(filename);
+                final String protocol = url.getProtocol();
+                if (Protocols.JAR.equals(protocol)) {
+                    final JarURLConnection jarCon = (JarURLConnection) url.openConnection();
+                    return jarCon.getInputStream();
+                } else return null; // Jar Error
+            } catch (final IOException e) {
+                Log.jvm(LOGGER, e);
+                return null;
+            }
+        }, filename);
     }
 
     private static InputStream readSupplier(final Supplier<InputStream> supplier,
