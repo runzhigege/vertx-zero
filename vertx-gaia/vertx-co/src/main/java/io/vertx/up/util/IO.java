@@ -11,10 +11,10 @@ import io.vertx.core.logging.LoggerFactory;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.Values;
 import io.vertx.up.eon.em.YamlType;
-import io.vertx.up.fn.Fn;
-import io.vertx.up.log.Log;
 import io.vertx.up.exception.heart.EmptyStreamException;
 import io.vertx.up.exception.heart.JsonFormatException;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
