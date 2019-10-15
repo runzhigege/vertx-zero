@@ -75,7 +75,7 @@
         <vertx.jooq.version>2.4.1</vertx.jooq.version>
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
         <vertx.jooq.code.version>4.2.0</vertx.jooq.code.version>
-        <mysql.version>8.0.17</mysql.version>
+        <mysql.version>8.0.18</mysql.version>
         <!-- Java Reflection -->
         <reflect.asm.version>1.11.9</reflect.asm.version>
         <lombok.version>1.18.10</lombok.version>
@@ -96,7 +96,7 @@
         <codehaus.janino.version>3.1.0</codehaus.janino.version>
         <codehaus.mojo.version>1.18</codehaus.mojo.version>
         <ignite.version>2.7.6</ignite.version>
-        <mongodb.async.version>3.11.0</mongodb.async.version>
+        <mongodb.async.version>3.11.1</mongodb.async.version>
         <!-- Apache Common -->
         <common.jexl.version>3.1</common.jexl.version>
         <common.lang3.version>3.9</common.lang3.version>

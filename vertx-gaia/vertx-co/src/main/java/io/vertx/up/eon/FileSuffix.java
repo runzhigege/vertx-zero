@@ -13,4 +13,6 @@ public interface FileSuffix {
     String EXCEL_2003 = "xls";
 
     String EXCEL_2007 = "xlsx";
+
+    String JAR_DIVIDER = "jar!/";
 }
