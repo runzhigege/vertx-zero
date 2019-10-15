@@ -1,5 +1,6 @@
 package io.vertx.up.util;
 
+import io.vertx.up.eon.FileSuffix;
 import io.vertx.up.eon.Protocols;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
@@ -51,7 +52,7 @@ final class Folder {
                 /*
                  * Fix jar path issue here.
                  */
-                if (0 < folder.indexOf("jar!/")) {
+                if (folder.contains(FileSuffix.JAR_DIVIDER)) {
                     url = Fn.getJvm(() -> new URL(folder), folder);
                 }
             }
