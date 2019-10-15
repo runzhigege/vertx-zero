@@ -167,6 +167,7 @@
         <maven.plugin.antrun>1.8</maven.plugin.antrun>
         <maven.plugin.aspectj>1.11</maven.plugin.aspectj>
         <maven.plugin.jcabi>0.14.1</maven.plugin.jcabi>
+        <maven.plugin.jar>3.1.2</maven.plugin.jar>
     </properties>
     <prerequisites>
         <maven>3.5.0</maven>
@@ -1011,6 +1012,11 @@
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>${maven.plugin.clean}</version>
+                </plugin>
+                <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven.plugin.jar}</version>
                 </plugin>
                 <!-- http://www.mvnrepository.com/artifact/org.codehaus.mojo/versions-maven-plugin -->
                 <plugin>
