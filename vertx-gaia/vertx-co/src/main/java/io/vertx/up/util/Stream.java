@@ -3,6 +3,7 @@ package io.vertx.up.util;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
+import io.vertx.up.eon.FileSuffix;
 import io.vertx.up.eon.Protocols;
 import io.vertx.up.exception.heart.EmptyStreamException;
 import io.vertx.up.fn.Fn;
@@ -100,8 +101,11 @@ final class Stream {
         if (null == in) {
             in = readSupplier(() -> ClassLoader.getSystemResourceAsStream(filename), filename);
         }
-        // Jar reading
-        if (null == in) {
+        /*
+         * Jar reading
+         * Firstly, check whether it contains jar flag
+         */
+        if (null == in && filename.contains(FileSuffix.JAR_DIVIDER)) {
             in = readJar(filename);
         }
         if (null == in) {
