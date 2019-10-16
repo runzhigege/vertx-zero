@@ -7,7 +7,6 @@ import io.vertx.tp.jet.cv.JtKey;
 import io.vertx.tp.jet.refine.Jt;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.em.JobType;
-import io.vertx.up.eon.Strings;
 import io.vertx.up.util.Ut;
 
 import java.util.Objects;
@@ -74,11 +73,9 @@ public class JtJob extends JtCommercial {
          * The job unique identifier: namespace + name
          * The splitted character is `$$`
          */
-        mission.setName(this.job.getNamespace() +
-                Strings.DOLLER + Strings.DOLLER + this.job.getName());
+        mission.setName(Jt.jobName(this.job));
         mission.setType(Ut.toEnum(this.job::getType, JobType.class, JobType.ONCE));
-        mission.setCode(this.job.getNamespace() +
-                Strings.DOLLER + Strings.DOLLER + this.job.getCode());
+        mission.setCode(Jt.jobCode(this.job));
         /*
          * Basic information
          */

@@ -140,7 +140,8 @@ public abstract class JtCommercial implements Commercial {
         data.put(JtKey.Delivery.KEY, this.key());
 
         /* service, config */
-        data.put(JtKey.Delivery.SERVICE, (JsonObject) Ut.serializeJson(this.service()));
+        final JsonObject serviceJson = Ut.serializeJson(this.service());
+        data.put(JtKey.Delivery.SERVICE, serviceJson);
         data.put(JtKey.Delivery.CONFIG, (JsonObject) Ut.serializeJson(this.config));
 
         /* appId */

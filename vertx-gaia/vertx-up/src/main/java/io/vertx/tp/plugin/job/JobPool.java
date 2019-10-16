@@ -5,6 +5,8 @@ import io.vertx.up.eon.em.JobStatus;
 import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -34,6 +36,10 @@ public class JobPool {
 
     public static Mission get(final String name) {
         return JOBS.get(name);
+    }
+
+    public static List<Mission> get() {
+        return new ArrayList<>(JOBS.values());
     }
 
     public static String name(final Long timeId) {
