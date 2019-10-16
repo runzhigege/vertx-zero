@@ -4,9 +4,12 @@
 package cn.vertxup.ambient.domain;
 
 
+import cn.vertxup.ambient.domain.tables.XActivity;
+import cn.vertxup.ambient.domain.tables.XActivityChange;
 import cn.vertxup.ambient.domain.tables.XApp;
 import cn.vertxup.ambient.domain.tables.XAttachment;
 import cn.vertxup.ambient.domain.tables.XCategory;
+import cn.vertxup.ambient.domain.tables.XLog;
 import cn.vertxup.ambient.domain.tables.XMenu;
 import cn.vertxup.ambient.domain.tables.XModule;
 import cn.vertxup.ambient.domain.tables.XNumber;
@@ -38,6 +41,8 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
+    public static final Index X_ACTIVITY_PRIMARY = Indexes0.X_ACTIVITY_PRIMARY;
+    public static final Index X_ACTIVITY_CHANGE_PRIMARY = Indexes0.X_ACTIVITY_CHANGE_PRIMARY;
     public static final Index X_APP_CODE = Indexes0.X_APP_CODE;
     public static final Index X_APP_NAME = Indexes0.X_APP_NAME;
     public static final Index X_APP_PATH = Indexes0.X_APP_PATH;
@@ -49,6 +54,7 @@ public class Indexes {
     public static final Index X_ATTACHMENT_PRIMARY = Indexes0.X_ATTACHMENT_PRIMARY;
     public static final Index X_CATEGORY_APP_ID = Indexes0.X_CATEGORY_APP_ID;
     public static final Index X_CATEGORY_PRIMARY = Indexes0.X_CATEGORY_PRIMARY;
+    public static final Index X_LOG_PRIMARY = Indexes0.X_LOG_PRIMARY;
     public static final Index X_MENU_NAME = Indexes0.X_MENU_NAME;
     public static final Index X_MENU_PRIMARY = Indexes0.X_MENU_PRIMARY;
     public static final Index X_MODULE_ENTRY = Indexes0.X_MODULE_ENTRY;
@@ -68,6 +74,8 @@ public class Indexes {
     // -------------------------------------------------------------------------
 
     private static class Indexes0 {
+        public static Index X_ACTIVITY_PRIMARY = Internal.createIndex("PRIMARY", XActivity.X_ACTIVITY, new OrderField[] { XActivity.X_ACTIVITY.KEY }, true);
+        public static Index X_ACTIVITY_CHANGE_PRIMARY = Internal.createIndex("PRIMARY", XActivityChange.X_ACTIVITY_CHANGE, new OrderField[] { XActivityChange.X_ACTIVITY_CHANGE.KEY }, true);
         public static Index X_APP_CODE = Internal.createIndex("CODE", XApp.X_APP, new OrderField[] { XApp.X_APP.CODE }, true);
         public static Index X_APP_NAME = Internal.createIndex("NAME", XApp.X_APP, new OrderField[] { XApp.X_APP.NAME }, true);
         public static Index X_APP_PATH = Internal.createIndex("PATH", XApp.X_APP, new OrderField[] { XApp.X_APP.PATH, XApp.X_APP.URL_ENTRY }, true);
@@ -79,6 +87,7 @@ public class Indexes {
         public static Index X_ATTACHMENT_PRIMARY = Internal.createIndex("PRIMARY", XAttachment.X_ATTACHMENT, new OrderField[] { XAttachment.X_ATTACHMENT.KEY }, true);
         public static Index X_CATEGORY_APP_ID = Internal.createIndex("APP_ID", XCategory.X_CATEGORY, new OrderField[] { XCategory.X_CATEGORY.APP_ID, XCategory.X_CATEGORY.TYPE, XCategory.X_CATEGORY.CODE }, true);
         public static Index X_CATEGORY_PRIMARY = Internal.createIndex("PRIMARY", XCategory.X_CATEGORY, new OrderField[] { XCategory.X_CATEGORY.KEY }, true);
+        public static Index X_LOG_PRIMARY = Internal.createIndex("PRIMARY", XLog.X_LOG, new OrderField[] { XLog.X_LOG.KEY }, true);
         public static Index X_MENU_NAME = Internal.createIndex("NAME", XMenu.X_MENU, new OrderField[] { XMenu.X_MENU.NAME, XMenu.X_MENU.APP_ID }, true);
         public static Index X_MENU_PRIMARY = Internal.createIndex("PRIMARY", XMenu.X_MENU, new OrderField[] { XMenu.X_MENU.KEY }, true);
         public static Index X_MODULE_ENTRY = Internal.createIndex("ENTRY", XModule.X_MODULE, new OrderField[] { XModule.X_MODULE.ENTRY, XModule.X_MODULE.APP_ID }, true);
