@@ -4,9 +4,12 @@
 package cn.vertxup.ambient.domain;
 
 
+import cn.vertxup.ambient.domain.tables.XActivity;
+import cn.vertxup.ambient.domain.tables.XActivityChange;
 import cn.vertxup.ambient.domain.tables.XApp;
 import cn.vertxup.ambient.domain.tables.XAttachment;
 import cn.vertxup.ambient.domain.tables.XCategory;
+import cn.vertxup.ambient.domain.tables.XLog;
 import cn.vertxup.ambient.domain.tables.XMenu;
 import cn.vertxup.ambient.domain.tables.XModule;
 import cn.vertxup.ambient.domain.tables.XNumber;
@@ -31,6 +34,16 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
+     * The table <code>DB_ETERNAL.X_ACTIVITY</code>.
+     */
+    public static final XActivity X_ACTIVITY = cn.vertxup.ambient.domain.tables.XActivity.X_ACTIVITY;
+
+    /**
+     * The table <code>DB_ETERNAL.X_ACTIVITY_CHANGE</code>.
+     */
+    public static final XActivityChange X_ACTIVITY_CHANGE = cn.vertxup.ambient.domain.tables.XActivityChange.X_ACTIVITY_CHANGE;
+
+    /**
      * The table <code>DB_ETERNAL.X_APP</code>.
      */
     public static final XApp X_APP = cn.vertxup.ambient.domain.tables.XApp.X_APP;
@@ -44,6 +57,11 @@ public class Tables {
      * The table <code>DB_ETERNAL.X_CATEGORY</code>.
      */
     public static final XCategory X_CATEGORY = cn.vertxup.ambient.domain.tables.XCategory.X_CATEGORY;
+
+    /**
+     * The table <code>DB_ETERNAL.X_LOG</code>.
+     */
+    public static final XLog X_LOG = cn.vertxup.ambient.domain.tables.XLog.X_LOG;
 
     /**
      * The table <code>DB_ETERNAL.X_MENU</code>.
