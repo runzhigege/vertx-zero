@@ -33,7 +33,17 @@ public class Db extends SchemaImpl {
      * The reference instance of <code>DB_ETERNAL</code>
      */
     public static final Db DB_ETERNAL = new Db();
-    private static final long serialVersionUID = 1371895717;
+    private static final long serialVersionUID = 2061042512;
+    /**
+     * The table <code>DB_ETERNAL.X_ACTIVITY</code>.
+     */
+    public final XActivity X_ACTIVITY = cn.vertxup.ambient.domain.tables.XActivity.X_ACTIVITY;
+
+    /**
+     * The table <code>DB_ETERNAL.X_ACTIVITY_CHANGE</code>.
+     */
+    public final XActivityChange X_ACTIVITY_CHANGE = cn.vertxup.ambient.domain.tables.XActivityChange.X_ACTIVITY_CHANGE;
+
     /**
      * The table <code>DB_ETERNAL.X_APP</code>.
      */
@@ -48,6 +58,11 @@ public class Db extends SchemaImpl {
      * The table <code>DB_ETERNAL.X_CATEGORY</code>.
      */
     public final XCategory X_CATEGORY = cn.vertxup.ambient.domain.tables.XCategory.X_CATEGORY;
+
+    /**
+     * The table <code>DB_ETERNAL.X_LOG</code>.
+     */
+    public final XLog X_LOG = cn.vertxup.ambient.domain.tables.XLog.X_LOG;
 
     /**
      * The table <code>DB_ETERNAL.X_MENU</code>.
@@ -104,9 +119,12 @@ public class Db extends SchemaImpl {
 
     private final List<Table<?>> getTables0() {
         return Arrays.<Table<?>>asList(
+                XActivity.X_ACTIVITY,
+                XActivityChange.X_ACTIVITY_CHANGE,
                 XApp.X_APP,
                 XAttachment.X_ATTACHMENT,
                 XCategory.X_CATEGORY,
+                XLog.X_LOG,
                 XMenu.X_MENU,
                 XModule.X_MODULE,
                 XNumber.X_NUMBER,
