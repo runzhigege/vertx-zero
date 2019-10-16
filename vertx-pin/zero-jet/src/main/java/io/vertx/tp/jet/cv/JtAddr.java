@@ -15,5 +15,7 @@ public interface JtAddr {
         String RESUME = Prefix._EVENT + "I-JOB/RESUME";
 
         String STATUS = Prefix._EVENT + "I-JOB/STATUS";
+
+        String BY_SIGMA = Prefix._EVENT + "I-JOB/BY/SIGMA";
     }
 }
