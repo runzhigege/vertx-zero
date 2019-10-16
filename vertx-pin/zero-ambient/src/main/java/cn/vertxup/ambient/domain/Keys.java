@@ -4,18 +4,24 @@
 package cn.vertxup.ambient.domain;
 
 
+import cn.vertxup.ambient.domain.tables.XActivity;
+import cn.vertxup.ambient.domain.tables.XActivityChange;
 import cn.vertxup.ambient.domain.tables.XApp;
 import cn.vertxup.ambient.domain.tables.XAttachment;
 import cn.vertxup.ambient.domain.tables.XCategory;
+import cn.vertxup.ambient.domain.tables.XLog;
 import cn.vertxup.ambient.domain.tables.XMenu;
 import cn.vertxup.ambient.domain.tables.XModule;
 import cn.vertxup.ambient.domain.tables.XNumber;
 import cn.vertxup.ambient.domain.tables.XSource;
 import cn.vertxup.ambient.domain.tables.XTabular;
 import cn.vertxup.ambient.domain.tables.XTodo;
+import cn.vertxup.ambient.domain.tables.records.XActivityChangeRecord;
+import cn.vertxup.ambient.domain.tables.records.XActivityRecord;
 import cn.vertxup.ambient.domain.tables.records.XAppRecord;
 import cn.vertxup.ambient.domain.tables.records.XAttachmentRecord;
 import cn.vertxup.ambient.domain.tables.records.XCategoryRecord;
+import cn.vertxup.ambient.domain.tables.records.XLogRecord;
 import cn.vertxup.ambient.domain.tables.records.XMenuRecord;
 import cn.vertxup.ambient.domain.tables.records.XModuleRecord;
 import cn.vertxup.ambient.domain.tables.records.XNumberRecord;
@@ -52,6 +58,8 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<XActivityRecord> KEY_X_ACTIVITY_PRIMARY = UniqueKeys0.KEY_X_ACTIVITY_PRIMARY;
+    public static final UniqueKey<XActivityChangeRecord> KEY_X_ACTIVITY_CHANGE_PRIMARY = UniqueKeys0.KEY_X_ACTIVITY_CHANGE_PRIMARY;
     public static final UniqueKey<XAppRecord> KEY_X_APP_PRIMARY = UniqueKeys0.KEY_X_APP_PRIMARY;
     public static final UniqueKey<XAppRecord> KEY_X_APP_NAME = UniqueKeys0.KEY_X_APP_NAME;
     public static final UniqueKey<XAppRecord> KEY_X_APP_CODE = UniqueKeys0.KEY_X_APP_CODE;
@@ -63,6 +71,7 @@ public class Keys {
     public static final UniqueKey<XAttachmentRecord> KEY_X_ATTACHMENT_FILE_PATH = UniqueKeys0.KEY_X_ATTACHMENT_FILE_PATH;
     public static final UniqueKey<XCategoryRecord> KEY_X_CATEGORY_PRIMARY = UniqueKeys0.KEY_X_CATEGORY_PRIMARY;
     public static final UniqueKey<XCategoryRecord> KEY_X_CATEGORY_APP_ID = UniqueKeys0.KEY_X_CATEGORY_APP_ID;
+    public static final UniqueKey<XLogRecord> KEY_X_LOG_PRIMARY = UniqueKeys0.KEY_X_LOG_PRIMARY;
     public static final UniqueKey<XMenuRecord> KEY_X_MENU_PRIMARY = UniqueKeys0.KEY_X_MENU_PRIMARY;
     public static final UniqueKey<XMenuRecord> KEY_X_MENU_NAME = UniqueKeys0.KEY_X_MENU_NAME;
     public static final UniqueKey<XModuleRecord> KEY_X_MODULE_PRIMARY = UniqueKeys0.KEY_X_MODULE_PRIMARY;
@@ -87,6 +96,8 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class UniqueKeys0 {
+        public static final UniqueKey<XActivityRecord> KEY_X_ACTIVITY_PRIMARY = Internal.createUniqueKey(XActivity.X_ACTIVITY, "KEY_X_ACTIVITY_PRIMARY", XActivity.X_ACTIVITY.KEY);
+        public static final UniqueKey<XActivityChangeRecord> KEY_X_ACTIVITY_CHANGE_PRIMARY = Internal.createUniqueKey(XActivityChange.X_ACTIVITY_CHANGE, "KEY_X_ACTIVITY_CHANGE_PRIMARY", XActivityChange.X_ACTIVITY_CHANGE.KEY);
         public static final UniqueKey<XAppRecord> KEY_X_APP_PRIMARY = Internal.createUniqueKey(XApp.X_APP, "KEY_X_APP_PRIMARY", XApp.X_APP.KEY);
         public static final UniqueKey<XAppRecord> KEY_X_APP_NAME = Internal.createUniqueKey(XApp.X_APP, "KEY_X_APP_NAME", XApp.X_APP.NAME);
         public static final UniqueKey<XAppRecord> KEY_X_APP_CODE = Internal.createUniqueKey(XApp.X_APP, "KEY_X_APP_CODE", XApp.X_APP.CODE);
@@ -98,6 +109,7 @@ public class Keys {
         public static final UniqueKey<XAttachmentRecord> KEY_X_ATTACHMENT_FILE_PATH = Internal.createUniqueKey(XAttachment.X_ATTACHMENT, "KEY_X_ATTACHMENT_FILE_PATH", XAttachment.X_ATTACHMENT.FILE_PATH);
         public static final UniqueKey<XCategoryRecord> KEY_X_CATEGORY_PRIMARY = Internal.createUniqueKey(XCategory.X_CATEGORY, "KEY_X_CATEGORY_PRIMARY", XCategory.X_CATEGORY.KEY);
         public static final UniqueKey<XCategoryRecord> KEY_X_CATEGORY_APP_ID = Internal.createUniqueKey(XCategory.X_CATEGORY, "KEY_X_CATEGORY_APP_ID", XCategory.X_CATEGORY.APP_ID, XCategory.X_CATEGORY.TYPE, XCategory.X_CATEGORY.CODE);
+        public static final UniqueKey<XLogRecord> KEY_X_LOG_PRIMARY = Internal.createUniqueKey(XLog.X_LOG, "KEY_X_LOG_PRIMARY", XLog.X_LOG.KEY);
         public static final UniqueKey<XMenuRecord> KEY_X_MENU_PRIMARY = Internal.createUniqueKey(XMenu.X_MENU, "KEY_X_MENU_PRIMARY", XMenu.X_MENU.KEY);
         public static final UniqueKey<XMenuRecord> KEY_X_MENU_NAME = Internal.createUniqueKey(XMenu.X_MENU, "KEY_X_MENU_NAME", XMenu.X_MENU.NAME, XMenu.X_MENU.APP_ID);
         public static final UniqueKey<XModuleRecord> KEY_X_MODULE_PRIMARY = Internal.createUniqueKey(XModule.X_MODULE, "KEY_X_MODULE_PRIMARY", XModule.X_MODULE.KEY);
