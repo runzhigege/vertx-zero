@@ -38,6 +38,14 @@ public class Jt {
         JtLog.infoWeb(logger, pattern, args);
     }
 
+    public static String jobName(final IJob job) {
+        return job.getNamespace() + Strings.DOLLER + Strings.DOLLER + job.getName();
+    }
+
+    public static String jobCode(final IJob job) {
+        return job.getNamespace() + Strings.DOLLER + Strings.DOLLER + job.getCode();
+    }
+
     /*
      * Extraction for some specification data
      */

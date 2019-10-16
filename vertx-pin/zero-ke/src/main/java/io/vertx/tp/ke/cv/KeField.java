@@ -33,7 +33,6 @@ public interface KeField {
 
 
     String SOURCE = "source";
-    String MODELS = "models";
 
     String METHOD = "method";
     String URI = "uri";
@@ -67,6 +66,16 @@ public interface KeField {
         String PATH = "path";
         String URL_ENTRY = "urlEntry";
         String URL_MAIN = "urlMain";
+    }
+
+    interface Api {
+        String CONFIG_SERVICE = "configService";
+
+        String CONFIG_DATABASE = "configDatabase";
+
+        String CONFIG_INTEGRATION = "configIntegration";
+
+        String CONFIG_CHANNEL = "configChannel";
     }
 
     interface Ui {
