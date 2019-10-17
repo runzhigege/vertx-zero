@@ -72,6 +72,7 @@ public class Keys {
     public static final UniqueKey<ETeamRecord> KEY_E_TEAM_PRIMARY = UniqueKeys0.KEY_E_TEAM_PRIMARY;
     public static final UniqueKey<ETeamRecord> KEY_E_TEAM_NAME = UniqueKeys0.KEY_E_TEAM_NAME;
     public static final UniqueKey<ETeamRecord> KEY_E_TEAM_CODE = UniqueKeys0.KEY_E_TEAM_CODE;
+    public static final UniqueKey<ETeamRecord> KEY_E_TEAM_CODE_2 = UniqueKeys0.KEY_E_TEAM_CODE_2;
     public static final UniqueKey<RCompanyCustomerRecord> KEY_R_COMPANY_CUSTOMER_PRIMARY = UniqueKeys0.KEY_R_COMPANY_CUSTOMER_PRIMARY;
     public static final UniqueKey<RTeamEmployeeRecord> KEY_R_TEAM_EMPLOYEE_PRIMARY = UniqueKeys0.KEY_R_TEAM_EMPLOYEE_PRIMARY;
 
@@ -95,7 +96,7 @@ public class Keys {
         public static final UniqueKey<ECustomerRecord> KEY_E_CUSTOMER_PRIMARY = Internal.createUniqueKey(ECustomer.E_CUSTOMER, "KEY_E_CUSTOMER_PRIMARY", ECustomer.E_CUSTOMER.KEY);
         public static final UniqueKey<ECustomerRecord> KEY_E_CUSTOMER_TAX_CODE = Internal.createUniqueKey(ECustomer.E_CUSTOMER, "KEY_E_CUSTOMER_TAX_CODE", ECustomer.E_CUSTOMER.TAX_CODE, ECustomer.E_CUSTOMER.SIGMA);
         public static final UniqueKey<EDeptRecord> KEY_E_DEPT_PRIMARY = Internal.createUniqueKey(EDept.E_DEPT, "KEY_E_DEPT_PRIMARY", EDept.E_DEPT.KEY);
-        public static final UniqueKey<EDeptRecord> KEY_E_DEPT_NAME = Internal.createUniqueKey(EDept.E_DEPT, "KEY_E_DEPT_NAME", EDept.E_DEPT.NAME, EDept.E_DEPT.COMPANY_ID);
+        public static final UniqueKey<EDeptRecord> KEY_E_DEPT_NAME = Internal.createUniqueKey(EDept.E_DEPT, "KEY_E_DEPT_NAME", EDept.E_DEPT.NAME, EDept.E_DEPT.COMPANY_ID, EDept.E_DEPT.DEPT_ID);
         public static final UniqueKey<EDeptRecord> KEY_E_DEPT_CODE = Internal.createUniqueKey(EDept.E_DEPT, "KEY_E_DEPT_CODE", EDept.E_DEPT.CODE, EDept.E_DEPT.COMPANY_ID);
         public static final UniqueKey<EEmployeeRecord> KEY_E_EMPLOYEE_PRIMARY = Internal.createUniqueKey(EEmployee.E_EMPLOYEE, "KEY_E_EMPLOYEE_PRIMARY", EEmployee.E_EMPLOYEE.KEY);
         public static final UniqueKey<EEmployeeRecord> KEY_E_EMPLOYEE_WORK_NUMBER = Internal.createUniqueKey(EEmployee.E_EMPLOYEE, "KEY_E_EMPLOYEE_WORK_NUMBER", EEmployee.E_EMPLOYEE.WORK_NUMBER, EEmployee.E_EMPLOYEE.COMPANY_ID);
@@ -103,8 +104,9 @@ public class Keys {
         public static final UniqueKey<EIdentityRecord> KEY_E_IDENTITY_PRIMARY = Internal.createUniqueKey(EIdentity.E_IDENTITY, "KEY_E_IDENTITY_PRIMARY", EIdentity.E_IDENTITY.KEY);
         public static final UniqueKey<EIdentityRecord> KEY_E_IDENTITY_IDC_TYPE = Internal.createUniqueKey(EIdentity.E_IDENTITY, "KEY_E_IDENTITY_IDC_TYPE", EIdentity.E_IDENTITY.IDC_TYPE, EIdentity.E_IDENTITY.IDC_NUMBER);
         public static final UniqueKey<ETeamRecord> KEY_E_TEAM_PRIMARY = Internal.createUniqueKey(ETeam.E_TEAM, "KEY_E_TEAM_PRIMARY", ETeam.E_TEAM.KEY);
-        public static final UniqueKey<ETeamRecord> KEY_E_TEAM_NAME = Internal.createUniqueKey(ETeam.E_TEAM, "KEY_E_TEAM_NAME", ETeam.E_TEAM.NAME, ETeam.E_TEAM.DEPT_ID);
+        public static final UniqueKey<ETeamRecord> KEY_E_TEAM_NAME = Internal.createUniqueKey(ETeam.E_TEAM, "KEY_E_TEAM_NAME", ETeam.E_TEAM.NAME, ETeam.E_TEAM.DEPT_ID, ETeam.E_TEAM.TEAM_ID);
         public static final UniqueKey<ETeamRecord> KEY_E_TEAM_CODE = Internal.createUniqueKey(ETeam.E_TEAM, "KEY_E_TEAM_CODE", ETeam.E_TEAM.CODE, ETeam.E_TEAM.DEPT_ID);
+        public static final UniqueKey<ETeamRecord> KEY_E_TEAM_CODE_2 = Internal.createUniqueKey(ETeam.E_TEAM, "KEY_E_TEAM_CODE_2", ETeam.E_TEAM.CODE, ETeam.E_TEAM.DEPT_ID);
         public static final UniqueKey<RCompanyCustomerRecord> KEY_R_COMPANY_CUSTOMER_PRIMARY = Internal.createUniqueKey(RCompanyCustomer.R_COMPANY_CUSTOMER, "KEY_R_COMPANY_CUSTOMER_PRIMARY", RCompanyCustomer.R_COMPANY_CUSTOMER.COMPANY_ID, RCompanyCustomer.R_COMPANY_CUSTOMER.CUSTOMER_ID);
         public static final UniqueKey<RTeamEmployeeRecord> KEY_R_TEAM_EMPLOYEE_PRIMARY = Internal.createUniqueKey(RTeamEmployee.R_TEAM_EMPLOYEE, "KEY_R_TEAM_EMPLOYEE_PRIMARY", RTeamEmployee.R_TEAM_EMPLOYEE.TEAM_ID, RTeamEmployee.R_TEAM_EMPLOYEE.EMPLOYEE_ID);
     }
