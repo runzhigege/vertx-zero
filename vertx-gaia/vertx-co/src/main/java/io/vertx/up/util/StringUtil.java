@@ -19,6 +19,8 @@ final class StringUtil {
             .cache(512).silent(false).create();
     private static final String SEED =
             "01234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+    private static final String CHAR =
+            "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
 
     private StringUtil() {
     }
@@ -80,14 +82,30 @@ final class StringUtil {
     }
 
     private static char randomChar() {
-        final Random random = new Random();
-        return SEED.charAt(random.nextInt(SEED.length()));
+        return randomChar(SEED);
     }
 
-    static String random(int length) {
+    private static char randomCharNoDigit() {
+        return randomChar(CHAR);
+    }
+
+    private static char randomChar(final String seed) {
+        final Random random = new Random();
+        return seed.charAt(random.nextInt(seed.length()));
+    }
+
+    static String random(final int length) {
+        return random(length, randomChar());
+    }
+
+    static String randomNoDigit(final int length) {
+        return random(length, randomCharNoDigit());
+    }
+
+    private static String random(int length, final char seed) {
         final StringBuilder builder = new StringBuilder();
         while (0 < length) {
-            builder.append(randomChar());
+            builder.append(seed);
             length--;
         }
         return builder.toString();
