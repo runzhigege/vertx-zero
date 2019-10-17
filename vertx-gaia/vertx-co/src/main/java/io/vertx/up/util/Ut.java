@@ -696,6 +696,10 @@ public final class Ut {
         return StringUtil.random(length);
     }
 
+    public static String randomLetter(final int length) {
+        return StringUtil.randomNoDigit(length);
+    }
+
     // --- Perse
     public static Date parse(final String literal) {
         return Period.parse(literal);
