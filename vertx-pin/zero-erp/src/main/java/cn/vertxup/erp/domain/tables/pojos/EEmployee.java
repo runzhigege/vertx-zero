@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class EEmployee implements IEEmployee {
 
-    private static final long serialVersionUID = 1658770705;
+    private static final long serialVersionUID = 651393844;
 
     private String        key;
     private String        companyId;
@@ -36,6 +36,8 @@ public class EEmployee implements IEEmployee {
     private String        workEmail;
     private String        workLocation;
     private String        workPhone;
+    private String        workExtension;
+    private String        workMobile;
     private String        type;
     private String        metadata;
     private Boolean       active;
@@ -59,6 +61,8 @@ public class EEmployee implements IEEmployee {
         this.workEmail = value.workEmail;
         this.workLocation = value.workLocation;
         this.workPhone = value.workPhone;
+        this.workExtension = value.workExtension;
+        this.workMobile = value.workMobile;
         this.type = value.type;
         this.metadata = value.metadata;
         this.active = value.active;
@@ -81,6 +85,8 @@ public class EEmployee implements IEEmployee {
         String        workEmail,
         String        workLocation,
         String        workPhone,
+        String        workExtension,
+        String        workMobile,
         String        type,
         String        metadata,
         Boolean       active,
@@ -101,6 +107,8 @@ public class EEmployee implements IEEmployee {
         this.workEmail = workEmail;
         this.workLocation = workLocation;
         this.workPhone = workPhone;
+        this.workExtension = workExtension;
+        this.workMobile = workMobile;
         this.type = type;
         this.metadata = metadata;
         this.active = active;
@@ -223,6 +231,28 @@ public class EEmployee implements IEEmployee {
     }
 
     @Override
+    public String getWorkExtension() {
+        return this.workExtension;
+    }
+
+    @Override
+    public EEmployee setWorkExtension(String workExtension) {
+        this.workExtension = workExtension;
+        return this;
+    }
+
+    @Override
+    public String getWorkMobile() {
+        return this.workMobile;
+    }
+
+    @Override
+    public EEmployee setWorkMobile(String workMobile) {
+        this.workMobile = workMobile;
+        return this;
+    }
+
+    @Override
     public String getType() {
         return this.type;
     }
@@ -335,6 +365,8 @@ public class EEmployee implements IEEmployee {
         sb.append(", ").append(workEmail);
         sb.append(", ").append(workLocation);
         sb.append(", ").append(workPhone);
+        sb.append(", ").append(workExtension);
+        sb.append(", ").append(workMobile);
         sb.append(", ").append(type);
         sb.append(", ").append(metadata);
         sb.append(", ").append(active);
@@ -368,6 +400,8 @@ public class EEmployee implements IEEmployee {
         setWorkEmail(from.getWorkEmail());
         setWorkLocation(from.getWorkLocation());
         setWorkPhone(from.getWorkPhone());
+        setWorkExtension(from.getWorkExtension());
+        setWorkMobile(from.getWorkMobile());
         setType(from.getType());
         setMetadata(from.getMetadata());
         setActive(from.getActive());

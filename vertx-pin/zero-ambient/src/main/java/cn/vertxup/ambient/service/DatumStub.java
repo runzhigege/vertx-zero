@@ -17,4 +17,6 @@ public interface DatumStub {
     Future<JsonArray> categories(String appId, String type);
 
     Future<JsonObject> category(String appId, String type, String code);
+
+    Future<JsonArray> generate(String appId, String code, Integer count);
 }
