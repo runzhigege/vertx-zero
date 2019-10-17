@@ -35,7 +35,7 @@ public class EEmployee extends TableImpl<EEmployeeRecord> {
      * The reference instance of <code>DB_ETERNAL.E_EMPLOYEE</code>
      */
     public static final EEmployee E_EMPLOYEE = new EEmployee();
-    private static final long serialVersionUID = 1417622255;
+    private static final long serialVersionUID = 455705202;
     /**
      * The column <code>DB_ETERNAL.E_EMPLOYEE.KEY</code>. 「key」- 员工主键
      */
@@ -76,6 +76,14 @@ public class EEmployee extends TableImpl<EEmployeeRecord> {
      * The column <code>DB_ETERNAL.E_EMPLOYEE.WORK_PHONE</code>. 「workPhone」- 办公电话
      */
     public final TableField<EEmployeeRecord, String> WORK_PHONE = createField("WORK_PHONE", org.jooq.impl.SQLDataType.VARCHAR(20), this, "「workPhone」- 办公电话");
+    /**
+     * The column <code>DB_ETERNAL.E_EMPLOYEE.WORK_EXTENSION</code>. 「workExtension」- 分机号
+     */
+    public final TableField<EEmployeeRecord, String> WORK_EXTENSION = createField("WORK_EXTENSION", org.jooq.impl.SQLDataType.VARCHAR(20), this, "「workExtension」- 分机号");
+    /**
+     * The column <code>DB_ETERNAL.E_EMPLOYEE.WORK_MOBILE</code>. 「workMobile」- 办公用手机
+     */
+    public final TableField<EEmployeeRecord, String> WORK_MOBILE = createField("WORK_MOBILE", org.jooq.impl.SQLDataType.VARCHAR(20), this, "「workMobile」- 办公用手机");
     /**
      * The column <code>DB_ETERNAL.E_EMPLOYEE.TYPE</code>. 「type」- 员工分类
      */
