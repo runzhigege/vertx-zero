@@ -1,7 +1,9 @@
 package cn.vertxup.ambient.service;
 
 import cn.vertxup.ambient.domain.tables.daos.XCategoryDao;
+import cn.vertxup.ambient.domain.tables.daos.XNumberDao;
 import cn.vertxup.ambient.domain.tables.daos.XTabularDao;
+import cn.vertxup.ambient.domain.tables.pojos.XNumber;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -12,12 +14,12 @@ public class DatumService implements DatumStub {
 
     @Override
     public Future<JsonArray> tabulars(final String appId, final String type) {
-        return fetchArray(XTabularDao.class, At.filters(appId, type, null));
+        return this.fetchArray(XTabularDao.class, At.filters(appId, type, null));
     }
 
     @Override
     public Future<JsonArray> categories(final String appId, final String type) {
-        return fetchArray(XCategoryDao.class, At.filters(appId, type, null));
+        return this.fetchArray(XCategoryDao.class, At.filters(appId, type, null));
     }
 
     @Override
@@ -36,12 +38,31 @@ public class DatumService implements DatumStub {
 
     @Override
     public Future<JsonArray> tabulars(final String appId, final JsonArray types) {
-        return fetchArray(XTabularDao.class, At.filters(appId, types, null));
+        return this.fetchArray(XTabularDao.class, At.filters(appId, types, null));
     }
 
     @Override
     public Future<JsonArray> categories(final String appId, final JsonArray types) {
-        return fetchArray(XCategoryDao.class, At.filters(appId, types, null));
+        return this.fetchArray(XCategoryDao.class, At.filters(appId, types, null));
+    }
+
+    @Override
+    public Future<JsonArray> generate(final String appId, final String code, final Integer count) {
+        final JsonObject filters = new JsonObject();
+        filters.put("appId", appId);
+        filters.put("code", code);
+        /*
+         * XNumber processing
+         */
+        return Ux.Jooq.on(XNumberDao.class)
+                .<XNumber>fetchOneAsync(filters)
+                .compose(number -> Ux.Jooq.on(XNumberDao.class)
+                        /*
+                         * Pre process for number generation here.
+                         */
+                        .updateAsync(number.setCurrent(number.getCurrent() + count)))
+                .compose(number -> At.serialsAsync(number, count))
+                .compose(Ux::fnJArray);
     }
 
     private Future<JsonArray> fetchArray(final Class<?> daoCls, final JsonObject filters) {

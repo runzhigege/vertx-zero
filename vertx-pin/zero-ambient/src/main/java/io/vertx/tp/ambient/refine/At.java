@@ -1,13 +1,17 @@
 package io.vertx.tp.ambient.refine;
 
 import cn.vertxup.ambient.domain.tables.pojos.XApp;
+import cn.vertxup.ambient.domain.tables.pojos.XNumber;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.FileUpload;
 import io.vertx.up.commune.config.Database;
 import io.vertx.up.log.Annal;
+import io.vertx.up.unity.Ux;
 import org.jooq.DSLContext;
+
+import java.util.List;
 
 /*
  * Tool class available in current service only
@@ -46,6 +50,14 @@ public class At {
 
     public static Future<Database> databaseAsync(final String appId) {
         return AtEnv.getDatabaseWithCache(appId);
+    }
+
+    public static List<String> serials(final XNumber number, final Integer count) {
+        return AtSerial.serials(number, count);
+    }
+
+    public static Future<List<String>> serialsAsync(final XNumber number, final Integer count) {
+        return Ux.toFuture(AtSerial.serials(number, count));
     }
 
     /*
