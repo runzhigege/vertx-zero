@@ -97,6 +97,7 @@
         <codehaus.mojo.version>1.18</codehaus.mojo.version>
         <ignite.version>2.7.6</ignite.version>
         <mongodb.async.version>3.11.1</mongodb.async.version>
+        <poi.version>4.1.1</poi.version>
         <!-- Apache Common -->
         <common.jexl.version>3.1</common.jexl.version>
         <common.lang3.version>3.9</common.lang3.version>

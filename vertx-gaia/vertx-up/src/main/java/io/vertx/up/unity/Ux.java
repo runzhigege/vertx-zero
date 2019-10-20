@@ -15,6 +15,7 @@ import io.vertx.ext.mongo.FindOptions;
 import io.vertx.up.atom.query.Criteria;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.commune.Envelop;
+import io.vertx.up.commune.Record;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.fn.Actuator;
@@ -124,6 +125,10 @@ public final class Ux {
     // -> List<T> -> JsonArray
     public static <T> JsonArray toArray(final List<T> list) {
         return To.toArray(list, "");
+    }
+
+    public static JsonArray toArray(final Record[] records) {
+        return To.toArray(records);
     }
 
     // -> List<T> -> JsonArray ( with Pojo )
