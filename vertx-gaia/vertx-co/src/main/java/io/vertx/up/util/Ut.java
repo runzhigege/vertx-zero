@@ -532,6 +532,10 @@ public final class Ut {
         return Types.isDate(value);
     }
 
+    public static boolean isSubset(final JsonObject cond, final JsonObject record) {
+        return Jackson.isSubset(cond, record);
+    }
+
     public static boolean isJArray(final String literal) {
         return Types.isJArray(literal);
     }

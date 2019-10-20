@@ -11,10 +11,6 @@
 
     <artifactId>zero-excel</artifactId>
     <name>( Vertx Infix ) zero-excel: Excel Export/Import</name>
-    <properties>
-        <!-- Excel/Office -->
-        <poi.version>4.1.0</poi.version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.apache.poi</groupId>
