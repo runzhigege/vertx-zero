@@ -29,9 +29,9 @@ public class TokenService implements TokenStub {
 
     @Override
     public Future<JsonObject> execute(final String clientId, final String code, final Session session) {
-        return codeStub.verify(clientId, code)
+        return this.codeStub.verify(clientId, code)
                 /* Fetch role keys */
-                .compose(item -> userStub.fetchRoleIds(item))
+                .compose(item -> this.userStub.fetchRoleIds(item))
 
                 /* Build Data in Token */
                 .compose(roles -> Uson.create()
@@ -67,7 +67,7 @@ public class TokenService implements TokenStub {
              * Extract clientId
              */
             final String userKey = response.getString("user");
-            return userStub.fetchGroupIds(userKey)
+            return this.userStub.fetchGroupIds(userKey)
                     .compose(this::fetchRoles)
                     .compose(groups -> Uson.create(response)
                             .append("group", groups).toFuture());
@@ -81,9 +81,9 @@ public class TokenService implements TokenStub {
         final List<Future<JsonObject>> futures = new ArrayList<>();
         groups.stream().filter(Objects::nonNull)
                 .map(item -> (JsonObject) item)
-                .forEach(item -> futures.add(groupStub.fetchRoleIdsAsync(item.getString(AuthKey.F_GROUP_ID))
+                .forEach(item -> futures.add(this.groupStub.fetchRoleIdsAsync(item.getString(AuthKey.F_GROUP_ID))
                         .compose(roles -> Uson.create(item).append("role", roles).toFuture())
                 ));
-        return Ux.thenComposite(futures);
+        return Ux.thenCombine(futures);
     }
 }

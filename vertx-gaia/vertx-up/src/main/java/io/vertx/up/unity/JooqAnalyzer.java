@@ -167,7 +167,7 @@ class JooqAnalyzer {
     Future<JsonObject> searchPaginationAsync(final Inquiry inquiry, final String pojo) {
         final JsonObject response = new JsonObject();
         return this.searchAsync(inquiry)
-                .compose(list -> Ux.thenJsonMore(list, pojo))
+                .compose(Ux.fnJArray(pojo))
                 .compose(array -> {
                     response.put("list", array);
                     return this.countAsync(inquiry);
@@ -181,7 +181,7 @@ class JooqAnalyzer {
     <T> JsonObject searchPagination(final Inquiry inquiry, final String pojo) {
         final JsonObject response = new JsonObject();
         final List<T> list = this.search(inquiry);
-        response.put("list", Ux.thenJsonMore(list, pojo));
+        response.put("list", Ux.<T>fnJArray(pojo).apply(list));
         final Integer counter = this.count(inquiry);
         response.put("count", counter);
         return response;
