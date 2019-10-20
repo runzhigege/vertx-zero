@@ -4,7 +4,6 @@ import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.commune.Envelop;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 
@@ -16,39 +15,6 @@ import java.util.function.Supplier;
 class Async {
 
     private static final Annal LOGGER = Annal.get(Async.class);
-
-    static <T> Future<Envelop> toSingle(
-            final String pojo,
-            final CompletableFuture<T> completableFuture
-    ) {
-        final Promise<Envelop> future = Promise.promise();
-        final Future<JsonObject> jsonFuture = Async.toJsonFuture(pojo, completableFuture);
-        // future.complete(To.toEnvelop(jsonFuture.result()));
-        jsonFuture.setHandler(item -> future.complete(To.toEnvelop(item.result())));
-        return future.future();
-    }
-
-    static <T> Future<Envelop> toUnique(
-            final String pojo,
-            final CompletableFuture<List<T>> completableFuture
-    ) {
-        final Promise<Envelop> future = Promise.promise();
-        final Future<JsonArray> arrayFuture = Async.toArrayFuture(pojo, completableFuture);
-        // future.complete(To.toEnvelop(To.toUnique(arrayFuture.result(), pojo)));
-        arrayFuture.setHandler(item -> future.complete(To.toEnvelop(To.toUnique(item.result(), pojo))));
-        return future.future();
-    }
-
-    static <T> Future<Envelop> toMulti(
-            final String pojo,
-            final CompletableFuture<List<T>> completableFuture
-    ) {
-        final Promise<Envelop> future = Promise.promise();
-        final Future<JsonArray> arrayFuture = Async.toArrayFuture(pojo, completableFuture);
-        // future.complete(To.toEnvelop(arrayFuture.result()));
-        arrayFuture.setHandler(item -> future.complete(To.toEnvelop(item.result())));
-        return future.future();
-    }
 
     static <T> Future<T> toFuture(
             final CompletableFuture<T> completableFuture
