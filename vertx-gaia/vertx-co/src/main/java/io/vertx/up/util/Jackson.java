@@ -12,10 +12,7 @@ import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.Values;
 import io.vertx.up.fn.Fn;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Lookup the json tree data
@@ -214,5 +211,18 @@ final class Jackson {
             final Object result = data.getValue(key);
             return Types.isInteger(result) ? To.toInteger(result) : value;
         }, data, key);
+    }
+
+    /*
+     * Whether record contains all the data in cond.
+     */
+    static boolean isSubset(final JsonObject cond, final JsonObject record) {
+        final Set<String> fields = cond.fieldNames();
+        final long counter = fields.stream()
+                /* record contains all cond */
+                .filter(record::containsKey)
+                .filter(field -> Compare.equal(record.getValue(field), cond.getValue(field)))
+                .count();
+        return fields.size() == counter;
     }
 }

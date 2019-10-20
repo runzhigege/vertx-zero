@@ -29,21 +29,21 @@ public class HikariDataPool implements DataPool {
         /*
          * Initializing data source
          */
-        initJdbc();
+        this.initJdbc();
         /*
          * Initializing data source pool
          */
-        initPool();
+        this.initPool();
         /*
          * Initializing data source of jooq
          */
-        initJooq();
+        this.initJooq();
     }
 
     @Override
     public DSLContext getExecutor() {
         if (Objects.isNull(this.context)) {
-            initDelay();
+            this.initDelay();
         }
         return this.context;
     }
@@ -51,7 +51,7 @@ public class HikariDataPool implements DataPool {
     @Override
     public HikariDataSource getDataSource() {
         if (Objects.isNull(this.dataSource)) {
-            initDelay();
+            this.initDelay();
         }
         return this.dataSource;
     }
@@ -112,9 +112,9 @@ public class HikariDataPool implements DataPool {
 
     private void initPool() {
         if (Objects.nonNull(this.database)) {
-            // Default configuration
+            // Default configuration, 300 s as connection timeout for long time working
             this.dataSource.setAutoCommit(true);
-            this.dataSource.setConnectionTimeout(30000L);
+            this.dataSource.setConnectionTimeout(300000L);
             this.dataSource.setIdleTimeout(600000L);
             this.dataSource.setMaxLifetime(25600000L);
             this.dataSource.setMinimumIdle(256);

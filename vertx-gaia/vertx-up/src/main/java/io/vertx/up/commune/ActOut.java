@@ -8,7 +8,6 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.unity.Ux;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class ActOut implements Serializable {
@@ -71,9 +70,10 @@ public class ActOut implements Serializable {
     }
 
     public static Future<ActOut> future(final Record[] records) {
-        final JsonArray result = new JsonArray();
-        Arrays.stream(records).map(Record::toJson)
-                .forEach(result::add);
+        /*
+         * Record[] to JsonArray
+         */
+        final JsonArray result = Ux.toArray(records);
         return Ux.toFuture(new ActOut(result, HttpStatusCode.OK));
     }
 
