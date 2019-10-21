@@ -18,16 +18,13 @@ import io.vertx.up.commune.Envelop;
 import io.vertx.up.commune.Record;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.exception.WebException;
-import io.vertx.up.fn.Actuator;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.fn.wait.Log;
-import io.vertx.up.uca.container.Refer;
 import io.vertx.up.util.Ut;
 import org.jooq.Condition;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.*;
 
 /**
@@ -58,14 +55,6 @@ public final class Ux {
             error.printStackTrace();
         }
         return supplier.get();
-    }
-
-    public static void timer(final Class<?> clazz, final Actuator actuator) {
-        Debug.timer(clazz, actuator);
-    }
-
-    public static <T> T timer(final Class<?> clazz, final Supplier<T> supplier) {
-        return Debug.timer(clazz, supplier);
     }
 
     // ---------------------- JsonObject Returned --------------------------
@@ -115,12 +104,6 @@ public final class Ux {
         Calculator.appendJson(target, source);
     }
 
-    // ---------------------- Web Error Returned --------------------------
-    // -> WebException direct
-    public static WebException toError(final Class<? extends WebException> clazz, final Object... args) {
-        return To.toError(clazz, args);
-    }
-
     // ---------------------- JsonArray Returned --------------------------
     // -> List<T> -> JsonArray
     public static <T> JsonArray toArray(final List<T> list) {
@@ -139,19 +122,6 @@ public final class Ux {
     // ---------------------- Envelop Returned --------------------------
     public static <T> Future<T> toFuture(final T entity) {
         return To.toFuture(entity);
-    }
-
-    public static <T, R> Future<R> toFuture(final T entity, final Supplier<R> defaultFun, final Function<T, R> actualFun) {
-        return null == entity ? Future.succeededFuture(defaultFun.get()) : Future.succeededFuture(actualFun.apply(entity));
-    }
-
-    // ---------------------- If/Else Future ----------------------------
-    public static <T> Future<T> toFuture(final Supplier<Future<T>> caseLine) {
-        return Fn.future(caseLine);
-    }
-
-    public static <T> Future<T> toFuture(final Actuator executor, final Supplier<Future<T>> caseLine) {
-        return Fn.future(executor, caseLine);
     }
 
     // ---------------------- Envelop Returned --------------------------
@@ -174,57 +144,7 @@ public final class Ux {
     public static <T> Envelop to(final T entity, final WebException error) {
         return To.toEnvelop(entity, error);
     }
-
-    // -> JsonArray -> Envelop ( To JsonObject, Result length must be 1 )
-    public static Envelop toOne(final JsonArray array) {
-        return Envelop.success(To.toUnique(array, ""));
-    }
-
-    // -> List<T> -> JsonObject ( Result length must be 1 )
-    public static <T> JsonObject toUnique(final List<T> list) {
-        return To.toUnique(Ux.toArray(list), "");
-    }
-
-    public static <T> JsonObject toUnique(final List<T> list, final String pojo) {
-        return To.toUnique(Ux.toArray(list), pojo);
-    }
-
-    // -> JsonArray -> JsonObject ( Result length must be 1 )
-    public static <T> JsonObject toUnique(final JsonArray array) {
-        return To.toUnique(array, "");
-    }
-
     // ---------------------- User Data -------------------------------------
-
-    // -> Message<Envelop> -> String ( Security )
-    @Deprecated
-    public static String getUserID(final Envelop envelop, final String field) {
-        return In.requestUser(envelop, field);
-    }
-    /*
-    public static String getUserID(final Message<Envelop> message, final String field) {
-        return In.requestUser(message, field);
-    }
-
-
-    // -> Message<Envelop> -> UUID ( Security )
-    public static UUID getUserUUID(final Message<Envelop> message, final String field) {
-        return UUID.fromString(getUserID(message, field));
-    }
-
-    public static UUID getUserUUID(final Envelop envelop, final String field) {
-        return UUID.fromString(getUserID(envelop, field));
-    }*/
-
-    // -> Message<Envelop> -> Session ( Key )
-    /*
-    public static Object getSession(final Message<Envelop> message, final String field) {
-        return In.requestSession(message, field);
-    }
-
-    public static Object getSession(final Envelop envelop, final String field) {
-        return In.requestSession(envelop, field);
-    }*/
 
     // -> JsonArray ( JsonObject ) + JsonArray ( String ) -> add 'serial'
     public static JsonArray serial(final JsonArray items, final JsonArray serials) {
@@ -233,31 +153,6 @@ public final class Ux {
 
     public static JsonArray field(final JsonArray items, final JsonArray targets, final String field) {
         return In.assignValue(items, targets, field, true);
-    }
-
-    // ---------------------- Function Generator --------------------------------------
-    public static Future<JsonObject> fnRpc(final JsonArray array) {
-        return UxRpc.fnRpc(array);
-    }
-
-    public static Future<JsonArray> fnRpc(final JsonObject data) {
-        return UxRpc.fnRpc(data);
-    }
-
-    public static <T> Future<JsonObject> fnJObject(final T item) {
-        return thenJsonOne(item, "");
-    }
-
-    public static <T> Future<JsonArray> fnJArray(final List<T> item) {
-        return thenJsonMore(item, "");
-    }
-
-    public static <T> Function<T, Future<JsonObject>> fnJObject(final String pojo) {
-        return item -> thenJsonOne(item, pojo);
-    }
-
-    public static <T> Function<List<T>, Future<JsonArray>> fnJArray(final String pojo) {
-        return list -> Ux.thenJsonMore(list, pojo);
     }
 
     // ---------------------- Web Flow --------------------------------------
@@ -273,6 +168,31 @@ public final class Ux {
         return Web.toAttachJson(field, function);
     }
 
+    // ---------------------- Function ------------------------
+    public static Future<JsonObject> fnRpc(final JsonArray array) {
+        return UxRpc.fnRpc(array);
+    }
+
+    public static Future<JsonArray> fnRpc(final JsonObject data) {
+        return UxRpc.fnRpc(data);
+    }
+
+    public static <T> Future<JsonObject> fnJObject(final T item) {
+        return Future.succeededFuture(To.toJson(item, ""));
+    }
+
+    public static <T> Future<JsonArray> fnJArray(final List<T> item) {
+        return Future.succeededFuture(To.toArray(item, ""));
+    }
+
+    public static <T> Function<T, Future<JsonObject>> fnJObject(final String pojo) {
+        return item -> Future.succeededFuture(To.toJson(item, pojo));
+    }
+
+    public static <T> Function<List<T>, Future<JsonArray>> fnJArray(final String pojo) {
+        return list -> Future.succeededFuture(To.toArray(list, pojo));
+    }
+
     // ---------------------- Future --------------------------
     public static <T> Future<JsonObject> thenRpc(final String name, final String address, final JsonObject params) {
         return UxRpc.thenRpc(name, address, params);
@@ -283,58 +203,8 @@ public final class Ux {
     }
 
     // ---------------------- New future ----------------------
-    public static <T> Future<Envelop> then(final T entity) {
-        return Future.succeededFuture(to(entity));
-    }
-
     public static Future<JsonObject> thenBool(final Boolean result) {
         return Future.succeededFuture(new JsonObject().put(Strings.J_RESULT, result));
-    }
-
-    public static <T> Future<JsonArray> thenJsonMore(final List<T> list) {
-        return Future.succeededFuture(To.toArray(list, ""));
-    }
-
-    public static <T> Future<JsonArray> thenJsonMore(final List<T> list, final String pojo) {
-        return Future.succeededFuture(To.toArray(list, pojo));
-    }
-
-    public static <T> Future<JsonObject> thenJsonOne(final List<T> list, final String pojo) {
-        return Future.succeededFuture(To.toUnique(new JsonArray(list), pojo));
-    }
-
-    public static <T> Future<JsonObject> thenJsonOne(final T entity, final String pojo) {
-        return Future.succeededFuture(To.toJson(entity, pojo));
-    }
-
-    public static <T> Future<JsonObject> thenUpsert(final T entity,
-                                                    final Supplier<Future<JsonObject>> supplier) {
-        return Async.toUpsertFuture(entity, "", supplier, null);
-    }
-
-    public static <T> Future<JsonObject> thenUpsert(final T entity,
-                                                    final Supplier<Future<JsonObject>> supplier,
-                                                    final Function<JsonObject, JsonObject> updateFun) {
-        return Async.toUpsertFuture(entity, "", supplier, updateFun);
-    }
-
-    public static <T> Future<JsonObject> thenUpsert(final T entity, final String pojo,
-                                                    final Supplier<Future<JsonObject>> supplier) {
-        return Async.toUpsertFuture(entity, pojo, supplier, null);
-    }
-
-    public static <T> Future<JsonObject> thenUpsert(final T entity, final String pojo,
-                                                    final Supplier<Future<JsonObject>> supplier,
-                                                    final Function<JsonObject, JsonObject> updateFun) {
-        return Async.toUpsertFuture(entity, pojo, supplier, updateFun);
-    }
-
-    public static <T> Future<Envelop> thenMore(final List<T> list, final String pojo) {
-        return Future.succeededFuture(Envelop.success(To.toArray(list, pojo)));
-    }
-
-    public static <T> Future<Envelop> thenOne(final T entity, final String pojo) {
-        return Future.succeededFuture(Envelop.success(To.toJson(entity, pojo)));
     }
 
     // -> Consumer<Future<T>> -> Future<T>
@@ -349,117 +219,65 @@ public final class Ux {
     // ---------------------- Future --------------------------
 
     /**
-     * Parallel generate
-     * Source ->
-     * source1 -> Future<1>
-     * source2 -> Future<2>
-     * For each element merge 1,2 -> 3
-     *
-     * @param source      List<F>
-     * @param generateFun F -> Future<S>
-     * @param mergeFun    Each element: (F,S) -> T
-     * @param <F>         first
-     * @param <S>         second
-     * @param <T>         third
-     * @return List<T>
+     * @param source      The first query result of list
+     * @param generateFun (json) -> future(out) ( each record )
+     * @param operatorFun (json, out) -> merged
+     * @return It often used in secondary select in database here
+     * The workflow
+     * --------> generateFun ( Supplier )     operatorFun ( BiConsumer )
+     * --------> json1 -> ? future<out1>  ->  operatorFun[0] -> (json1, out1) -> merged1
+     * jarray -> json2 -> ? future<out2>  ->  operatorFun[1] -> (json2, out2) -> merged2  -> merged
+     * --------> json3 -> ? future<out3>  ->  operatorFun[2] -> (json3, out3) -> merged3
      */
-    public static <F, S, T> Future<List<T>> thenParallel(final Future<List<F>> source, final Function<F, Future<S>> generateFun, final BiFunction<F, S, T> mergeFun) {
-        return Fluctuate.thenParallel(source, generateFun, mergeFun);
-    }
-
-    public static Future<JsonArray> thenParallelArray(final Future<JsonArray> source, final Function<JsonObject, Future<JsonObject>> generateFun, final BinaryOperator<JsonObject> operatorFun) {
-        return Fluctuate.thenParallelArray(source, generateFun, operatorFun);
-    }
-
-    public static Future<JsonObject> thenParallelArray(final Future<JsonArray>... sources) {
-        return Fluctuate.thenParallelArray(sources);
-    }
-
-    public static Future<JsonObject> thenParallelJson(final Future<JsonObject>... sources) {
-        return Fluctuate.thenParallelJson(sources);
-    }
-
-    public static Future<JsonObject> thenParallelJson(final Future<JsonObject> source, final Function<JsonObject, List<Future>> generateFun, final BiConsumer<JsonObject, JsonObject>... operatorFun) {
-        return Fluctuate.thenParallelJson(source, generateFun, operatorFun);
-    }
-
-    public static Future<JsonObject> thenParallelJson(final JsonObject source, final Function<JsonObject, List<Future>> generateFun, final BiConsumer<JsonObject, JsonObject>... operatorFun) {
-        return Fluctuate.thenParallelJson(Future.succeededFuture(source), generateFun, operatorFun);
+    public static Future<JsonArray> thenCombine(final Future<JsonArray> source, final Function<JsonObject, Future<JsonObject>> generateFun, final BinaryOperator<JsonObject> operatorFun) {
+        return Fluctuate.thenCombine(source, generateFun, operatorFun);
     }
 
     /**
-     * Scatter generate
-     * Source ->
-     * source1 -> Future<List<1>>
-     * source2 -> Future<List<2>>
-     * Fore each element mergage 1, List<2> -> 3
-     *
-     * @param source      JsonArray
-     * @param generateFun JsonObject -> Future<JsonArray>
-     * @param mergeFun    Each element: JsonObject + JsonArray -> JsonObject
-     * @return JsonArray
+     * @param source      The input json object
+     * @param generateFun The json object should generate list<future>, each future should be json object
+     * @param operatorFun merged the result to json object instead of other
+     * @return The final result of future
+     * The workflow
+     * ------>  generateFun ( Supplier )                operatorFun ( BiConsumer )
+     * ------>  future1 ( json -> ? future<out1> )  ->  operatorFun[0] -> (json, out1) -> merged1  ->
+     * json ->  future2 ( json -> ? future<out2> )  ->  operatorFun[1] -> (json, out2) -> merged2  -> merged
+     * ------>  future3 ( json -> ? future<out3> )  ->  operatorFun[2] -> (json, out3) -> merged3  ->
      */
-    public static Future<JsonArray> thenScatterJson(final Future<JsonArray> source, final Function<JsonObject, Future<JsonArray>> generateFun, final BiFunction<JsonObject, JsonArray, JsonObject> mergeFun) {
-        return Fluctuate.thenScatterJson(source, generateFun, mergeFun);
+    public static Future<JsonObject> thenCombine(final JsonObject source, final Function<JsonObject, List<Future>> generateFun, final BiConsumer<JsonObject, JsonObject>... operatorFun) {
+        return Fluctuate.thenCombine(Future.succeededFuture(source), generateFun, operatorFun);
     }
 
     /**
-     * Merge multi Future<> to single one, one for all module.
-     * source ->
-     * supplier1
-     * supplier2
-     * supplier3
-     * .....
-     * All suppliers will be executed after source, then return the final Future.
-     *
-     * @param mergeFun  How to merge source result and all supplier's results into final result:
-     * @param source    Single Future --> F
-     * @param suppliers Multi Futures --> List<S>
-     * @param <F>       Type of source element
-     * @param <S>       Type of supplier's list element
-     * @param <T>       Type of return
-     * @return Future<T> for final result.
+     * @param futures The list of futures
+     * @return The final result of futures
+     * input:
+     * - List: [future1, future2, future3]
+     * output:
+     * - Future: JsonArray ( future1 -> json, future2 -> json, future3 -> json )
+     * The workflow
+     * future1 -> (in1 -> out1)
+     * future2 -> (in2 -> out2) --> future ( [out1, out2, out3] )
+     * future3 -> (in3 -> out3)
      */
-    public static <F, S, T> Future<T> thenComposite(final Future<F> source, final BiFunction<F, List<S>, T> mergeFun, final Supplier<Future<S>>... suppliers) {
-        return Fluctuate.thenComposite(source, mergeFun, suppliers);
+    public static Future<JsonArray> thenCombine(final List<Future<JsonObject>> futures) {
+        return Fluctuate.thenCombine(futures);
     }
 
-    public static Future<JsonArray> thenComposite(final List<Future<JsonObject>> futures) {
-        return Fluctuate.thenComposite(futures);
+    public static Future<JsonArray> thenCombineArray(final List<Future<JsonArray>> futures) {
+        return Fluctuate.thenCombineArray(futures);
     }
 
-    public static <T, I> Future<Set<T>> thenSet(final List<I> data, final Function<I, Future<T>> fun) {
-        return Fluctuate.thenSet(data, fun);
-    }
-
-    // -> Merge multi Future<> to single one, one for all module.
-    public static <F, S, T> Future<T> thenComposite(final Future<F> source, final BiFunction<F, List<S>, T> mergeFun, final Function<F, Future<S>>... functions) {
-        return Fluctuate.thenComposite(source, mergeFun, functions);
-    }
-
-    // -> IfElse true -> Future<T>, false -> Future<F>
-    public static <T, F, R> Future<R> thenOtherwise(final Future<Boolean> condition, final Supplier<Future<T>> trueFuture, final Function<T, R> trueFun, final Supplier<Future<F>> falseFuture, final Function<F, R> falseFun) {
-        return Fluctuate.thenOtherwise(condition, trueFuture, trueFun, falseFuture, falseFun);
-    }
-
-    // -> IfOr true -> Future<T>, false -> Future<R>
-    public static <T, R> Future<R> thenError(final Future<Boolean> condition, final Supplier<Future<T>> trueFuture, final Function<T, R> trueFun, final Class<? extends WebException> clazz, final Object... args) {
-        return Fluctuate.thenOtherwise(condition, trueFuture, trueFun, clazz, args);
-    }
-
-    // -> IfOr true -> Future<JsonObject>, false -> Future<JsonObject>
-    public static Future<JsonObject> thenError(final Future<Boolean> condition, final Supplier<Future<JsonObject>> trueFuture, final Class<? extends WebException> clazz, final Object... args) {
-        return Fluctuate.thenOtherwise(condition, trueFuture, item -> item, clazz, args);
-    }
-
-    // -> To error directly
+    /**
+     * Common usage: To error directly
+     *
+     * @param clazz The type of WebException, class type, it will be created by reflection.
+     * @param args  The rule
+     *              - arg0: this.getClass(), Because all the first arg of WebException must be clazz here.
+     *              - argX: the arguments of WebException constructor here, instead of fixed arguments.
+     */
     public static <T> Future<T> thenError(final Class<? extends WebException> clazz, final Object... args) {
         return Fluctuate.thenError(clazz, args);
-    }
-
-    // -> If only true -> Future<T>
-    public static <T, R> Future<R> thenTrue(final Future<Boolean> condition, final Supplier<Future<T>> trueFuture, final Function<T, R> trueFun) {
-        return Fluctuate.thenOtherwise(condition, trueFuture, trueFun, null);
     }
 
     // ---------------------- Request Data Extract --------------------------
@@ -513,17 +331,10 @@ public final class Ux {
         return In.request(envelop, 2, String.class);
     }
 
-    // -> Message<Envelop> -> String ( Interface mode )
-    public static String getString3(final Envelop envelop) {
-        return In.request(envelop, 3, String.class);
-    }
-
     // -> Message<Envelop> -> JsonObject ( Interface mode )
-
     public static JsonObject getJson(final Envelop envelop, final int index) {
         return In.request(envelop, index, JsonObject.class);
     }
-
     // -> Message<Envelop> -> JsonObject ( Interface mode )
 
     public static <T> T fromEnvelop(final Envelop envelop, final Class<T> clazz, final String pojo) {
@@ -574,20 +385,6 @@ public final class Ux {
         return From.fromJson(getJson2(envelop), clazz, pojo);
     }
 
-    // -> Message<Envelop> -> JsonObject ( Interface mode )
-
-    public static JsonObject getJson3(final Envelop envelop) {
-        return In.request(envelop, 3, JsonObject.class);
-    }
-
-    public static JsonObject fromEnvelop3(final Envelop envelop, final String pojo) {
-        return From.fromJson(Ux.getJson3(envelop), pojo);
-    }
-
-    public static <T> T fromEnvelop3(final Envelop envelop, final Class<T> clazz, final String pojo) {
-        return From.fromJson(getJson3(envelop), clazz, pojo);
-    }
-
     // -> Message<Envelop> -> Integer ( Interface mode )
 
     public static Integer getInteger(final Envelop envelop, final int index) {
@@ -606,11 +403,6 @@ public final class Ux {
     // -> Message<Envelop> -> Integer ( Interface mode )
     public static Integer getInteger2(final Envelop envelop) {
         return In.request(envelop, 2, Integer.class);
-    }
-
-    // -> Message<Envelop> -> Integer ( Interface mode )
-    public static Integer getInteger3(final Envelop envelop) {
-        return In.request(envelop, 3, Integer.class);
     }
 
     // -> Message<Envelop> -> Long ( Interface mode )
@@ -632,11 +424,6 @@ public final class Ux {
     // -> Message<Envelop> -> Long ( Interface mode )
     public static Long getLong2(final Envelop envelop) {
         return In.request(envelop, 2, Long.class);
-    }
-
-    // -> Message<Envelop> -> Long ( Interface mode )
-    public static Long getLong3(final Envelop envelop) {
-        return In.request(envelop, 3, Long.class);
     }
 
     // -> Message<Envelop> -> T ( Interface mode )
@@ -663,12 +450,6 @@ public final class Ux {
         return In.request(envelop, 2, clazz);
     }
 
-    // -> Message<Envelop> -> T ( Interface mode )
-
-    public static <T> T getT3(final Envelop envelop, final Class<T> clazz) {
-        return In.request(envelop, 3, clazz);
-    }
-
     // ---------------------- Agent mode usage --------------------------
     // -> Message<Envelop> -> JsonObject ( Agent mode )
     // -> Envelop -> JsonObject ( Agent mode )
@@ -676,32 +457,9 @@ public final class Ux {
         return In.request(envelop, JsonObject.class);
     }
 
-    // -> Message<Envelop> -> T ( Agent mode )
-
     // -> Envelop -> T ( Agent mode )
     public static <T> T getBodyT(final Envelop envelop, final Class<T> clazz) {
         return In.request(envelop, clazz);
-    }
-
-    // ---------------------- Request Data Ending --------------------------
-    public static <E, T> Future<E> rxContainer(final Refer container, final E entity) {
-        return Functions.fnSupplier(container, entity, null);
-    }
-
-    public static <E, T> Future<E> rxContainer(final Refer container, final E entity, final Supplier<T> supplier) {
-        return Functions.fnSupplier(container, entity, supplier);
-    }
-
-    public static <E, T> Future<E> rxContainer(final Refer container, final E entity, final Consumer<T> consumer) {
-        return Functions.fnConsumer(container, entity, consumer);
-    }
-
-    public static <E, T> Future<E> rxContainer(final Refer container, final E entity, final Function<T, E> function) {
-        return Functions.fnConsumer(container, entity, item -> function.apply((T) item));
-    }
-
-    public static <E, T> Future<E> rxContainer(final Refer container, final E entity, final T target) {
-        return Functions.fnSupplier(container, entity, () -> target);
     }
 
     // -- Atom

@@ -35,7 +35,7 @@ public class XActivity extends TableImpl<XActivityRecord> {
      * The reference instance of <code>DB_ETERNAL.X_ACTIVITY</code>
      */
     public static final XActivity X_ACTIVITY = new XActivity();
-    private static final long serialVersionUID = 1877415916;
+    private static final long serialVersionUID = -1223681023;
     /**
      * The column <code>DB_ETERNAL.X_ACTIVITY.KEY</code>. 「key」- 操作行为主键
      */
@@ -44,10 +44,6 @@ public class XActivity extends TableImpl<XActivityRecord> {
      * The column <code>DB_ETERNAL.X_ACTIVITY.TYPE</code>. 「type」- 操作类型
      */
     public final TableField<XActivityRecord, String> TYPE = createField("TYPE", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「type」- 操作类型");
-    /**
-     * The column <code>DB_ETERNAL.X_ACTIVITY.STATUS</code>. 「status」- 操作状态
-     */
-    public final TableField<XActivityRecord, String> STATUS = createField("STATUS", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「status」- 操作状态");
     /**
      * The column <code>DB_ETERNAL.X_ACTIVITY.SERIAL</code>. 「serial」- 变更记录号
      */
@@ -64,10 +60,6 @@ public class XActivity extends TableImpl<XActivityRecord> {
      * The column <code>DB_ETERNAL.X_ACTIVITY.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
      */
     public final TableField<XActivityRecord, String> MODEL_KEY = createField("MODEL_KEY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录");
-    /**
-     * The column <code>DB_ETERNAL.X_ACTIVITY.IS_CHANGE</code>. 「isChange」- 如果是变更记录则需要生成变更日志
-     */
-    public final TableField<XActivityRecord, Boolean> IS_CHANGE = createField("IS_CHANGE", org.jooq.impl.SQLDataType.BIT, this, "「isChange」- 如果是变更记录则需要生成变更日志");
     /**
      * The column <code>DB_ETERNAL.X_ACTIVITY.RECORD_OLD</code>. 「recordOld」- 变更之前的数据（用于回滚）
      */

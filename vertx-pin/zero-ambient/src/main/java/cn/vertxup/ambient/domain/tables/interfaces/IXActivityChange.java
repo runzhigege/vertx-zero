@@ -54,6 +54,16 @@ public interface IXActivityChange extends Serializable {
     public String getType();
 
     /**
+     * Setter for <code>DB_ETERNAL.X_ACTIVITY_CHANGE.STATUS</code>. 「status」- 待确认变更状态：CONFIRMED | PENDING
+     */
+    public IXActivityChange setStatus(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_ACTIVITY_CHANGE.STATUS</code>. 「status」- 待确认变更状态：CONFIRMED | PENDING
+     */
+    public String getStatus();
+
+    /**
      * Setter for <code>DB_ETERNAL.X_ACTIVITY_CHANGE.FIELD_NAME</code>. 「fieldName」- 如果是变更记录则需要生成变更日志
      */
     public IXActivityChange setFieldName(String value);
@@ -62,6 +72,16 @@ public interface IXActivityChange extends Serializable {
      * Getter for <code>DB_ETERNAL.X_ACTIVITY_CHANGE.FIELD_NAME</code>. 「fieldName」- 如果是变更记录则需要生成变更日志
      */
     public String getFieldName();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_ACTIVITY_CHANGE.FIELD_ALIAS</code>. 「fieldAlias」- 字段对应的别名
+     */
+    public IXActivityChange setFieldAlias(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_ACTIVITY_CHANGE.FIELD_ALIAS</code>. 「fieldAlias」- 字段对应的别名
+     */
+    public String getFieldAlias();
 
     /**
      * Setter for <code>DB_ETERNAL.X_ACTIVITY_CHANGE.FIELD_TYPE</code>. 「fieldType」- 变更字段的数据类型，直接从模型定义中读取
@@ -191,7 +211,9 @@ public interface IXActivityChange extends Serializable {
         setKey(json.getString("KEY"));
         setActivityId(json.getString("ACTIVITY_ID"));
         setType(json.getString("TYPE"));
+        setStatus(json.getString("STATUS"));
         setFieldName(json.getString("FIELD_NAME"));
+        setFieldAlias(json.getString("FIELD_ALIAS"));
         setFieldType(json.getString("FIELD_TYPE"));
         setValueOld(json.getString("VALUE_OLD"));
         setValueNew(json.getString("VALUE_NEW"));
@@ -212,7 +234,9 @@ public interface IXActivityChange extends Serializable {
         json.put("KEY",getKey());
         json.put("ACTIVITY_ID",getActivityId());
         json.put("TYPE",getType());
+        json.put("STATUS",getStatus());
         json.put("FIELD_NAME",getFieldName());
+        json.put("FIELD_ALIAS",getFieldAlias());
         json.put("FIELD_TYPE",getFieldType());
         json.put("VALUE_OLD",getValueOld());
         json.put("VALUE_NEW",getValueNew());

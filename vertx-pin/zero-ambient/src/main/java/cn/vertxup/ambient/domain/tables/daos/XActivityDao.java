@@ -77,13 +77,6 @@ public class XActivityDao extends DAOImpl<XActivityRecord, cn.vertxup.ambient.do
     }
 
     /**
-     * Fetch records that have <code>STATUS IN (values)</code>
-     */
-    public List<cn.vertxup.ambient.domain.tables.pojos.XActivity> fetchByStatus(String... values) {
-        return fetch(XActivity.X_ACTIVITY.STATUS, values);
-    }
-
-    /**
      * Fetch records that have <code>SERIAL IN (values)</code>
      */
     public List<cn.vertxup.ambient.domain.tables.pojos.XActivity> fetchBySerial(String... values) {
@@ -109,13 +102,6 @@ public class XActivityDao extends DAOImpl<XActivityRecord, cn.vertxup.ambient.do
      */
     public List<cn.vertxup.ambient.domain.tables.pojos.XActivity> fetchByModelKey(String... values) {
         return fetch(XActivity.X_ACTIVITY.MODEL_KEY, values);
-    }
-
-    /**
-     * Fetch records that have <code>IS_CHANGE IN (values)</code>
-     */
-    public List<cn.vertxup.ambient.domain.tables.pojos.XActivity> fetchByIsChange(Boolean... values) {
-        return fetch(XActivity.X_ACTIVITY.IS_CHANGE, values);
     }
 
     /**
@@ -210,13 +196,6 @@ public class XActivityDao extends DAOImpl<XActivityRecord, cn.vertxup.ambient.do
     }
 
     /**
-     * Fetch records that have <code>STATUS IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XActivity>> fetchByStatusAsync(List<String> values) {
-        return fetchAsync(XActivity.X_ACTIVITY.STATUS,values);
-    }
-
-    /**
      * Fetch records that have <code>SERIAL IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XActivity>> fetchBySerialAsync(List<String> values) {
@@ -242,13 +221,6 @@ public class XActivityDao extends DAOImpl<XActivityRecord, cn.vertxup.ambient.do
      */
     public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XActivity>> fetchByModelKeyAsync(List<String> values) {
         return fetchAsync(XActivity.X_ACTIVITY.MODEL_KEY,values);
-    }
-
-    /**
-     * Fetch records that have <code>IS_CHANGE IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XActivity>> fetchByIsChangeAsync(List<Boolean> values) {
-        return fetchAsync(XActivity.X_ACTIVITY.IS_CHANGE,values);
     }
 
     /**

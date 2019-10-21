@@ -24,13 +24,15 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class EEmployee implements IEEmployee {
 
-    private static final long serialVersionUID = 651393844;
+    private static final long serialVersionUID = 185530158;
 
     private String        key;
     private String        companyId;
     private String        deptId;
     private String        teamId;
     private String        identityId;
+    private String        workCnName;
+    private String        workEnName;
     private String        workNumber;
     private String        workTitle;
     private String        workEmail;
@@ -56,6 +58,8 @@ public class EEmployee implements IEEmployee {
         this.deptId = value.deptId;
         this.teamId = value.teamId;
         this.identityId = value.identityId;
+        this.workCnName = value.workCnName;
+        this.workEnName = value.workEnName;
         this.workNumber = value.workNumber;
         this.workTitle = value.workTitle;
         this.workEmail = value.workEmail;
@@ -80,6 +84,8 @@ public class EEmployee implements IEEmployee {
         String        deptId,
         String        teamId,
         String        identityId,
+        String        workCnName,
+        String        workEnName,
         String        workNumber,
         String        workTitle,
         String        workEmail,
@@ -102,6 +108,8 @@ public class EEmployee implements IEEmployee {
         this.deptId = deptId;
         this.teamId = teamId;
         this.identityId = identityId;
+        this.workCnName = workCnName;
+        this.workEnName = workEnName;
         this.workNumber = workNumber;
         this.workTitle = workTitle;
         this.workEmail = workEmail;
@@ -172,6 +180,28 @@ public class EEmployee implements IEEmployee {
     @Override
     public EEmployee setIdentityId(String identityId) {
         this.identityId = identityId;
+        return this;
+    }
+
+    @Override
+    public String getWorkCnName() {
+        return this.workCnName;
+    }
+
+    @Override
+    public EEmployee setWorkCnName(String workCnName) {
+        this.workCnName = workCnName;
+        return this;
+    }
+
+    @Override
+    public String getWorkEnName() {
+        return this.workEnName;
+    }
+
+    @Override
+    public EEmployee setWorkEnName(String workEnName) {
+        this.workEnName = workEnName;
         return this;
     }
 
@@ -360,6 +390,8 @@ public class EEmployee implements IEEmployee {
         sb.append(", ").append(deptId);
         sb.append(", ").append(teamId);
         sb.append(", ").append(identityId);
+        sb.append(", ").append(workCnName);
+        sb.append(", ").append(workEnName);
         sb.append(", ").append(workNumber);
         sb.append(", ").append(workTitle);
         sb.append(", ").append(workEmail);
@@ -395,6 +427,8 @@ public class EEmployee implements IEEmployee {
         setDeptId(from.getDeptId());
         setTeamId(from.getTeamId());
         setIdentityId(from.getIdentityId());
+        setWorkCnName(from.getWorkCnName());
+        setWorkEnName(from.getWorkEnName());
         setWorkNumber(from.getWorkNumber());
         setWorkTitle(from.getWorkTitle());
         setWorkEmail(from.getWorkEmail());

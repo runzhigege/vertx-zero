@@ -57,7 +57,7 @@ public class DatumInit implements Init {
                 .map(file -> dataFolder + file)
                 .map(this::doLoading)
                 .collect(Collectors.toList());
-        return Ux.thenComposite(futures)
+        return Ux.thenCombine(futures)
                 /* Stored each result */
                 .compose(results -> Uson.create().append(KeField.RESULT, results)
                         .toFuture())

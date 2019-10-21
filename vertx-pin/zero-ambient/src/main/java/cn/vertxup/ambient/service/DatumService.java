@@ -47,10 +47,22 @@ public class DatumService implements DatumStub {
     }
 
     @Override
-    public Future<JsonArray> generate(final String appId, final String code, final Integer count) {
+    public Future<JsonArray> numbers(final String appId, final String code, final Integer count) {
         final JsonObject filters = new JsonObject();
         filters.put("appId", appId);
         filters.put("code", code);
+        return this.numbers(filters, count);
+    }
+
+    @Override
+    public Future<JsonArray> numbersBySigma(final String sigma, final String code, final Integer count) {
+        final JsonObject filters = new JsonObject();
+        filters.put("sigma", sigma);
+        filters.put("code", code);
+        return this.numbers(filters, count);
+    }
+
+    private Future<JsonArray> numbers(final JsonObject filters, final Integer count) {
         /*
          * XNumber processing
          */
