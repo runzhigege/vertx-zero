@@ -1,5 +1,6 @@
 package io.vertx.tp.ambient.init;
 
+import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ambient.atom.AtConfig;
 import io.vertx.tp.ambient.extension.Init;
 import io.vertx.tp.ambient.extension.Prerequisite;
@@ -7,9 +8,9 @@ import io.vertx.tp.ambient.refine.At;
 import io.vertx.tp.error._500InitSpecificationException;
 import io.vertx.tp.error._500PrerequisiteSpecException;
 import io.vertx.tp.ke.refine.Ke;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
-import io.vertx.up.fn.Fn;
 
 import java.util.Objects;
 
@@ -24,10 +25,16 @@ public class AtPin {
         Ke.banner("「περιβάλλων」- Ambient ( At )");
         At.infoInit(LOGGER, "AtConfiguration...");
         AtConfiguration.init();
+        At.infoInit(LOGGER, "AtTodo...");
+        AtTodo.init();
     }
 
     public static AtConfig getConfig() {
         return AtConfiguration.getConfig();
+    }
+
+    public static JsonObject getTodo(final String type) {
+        return AtTodo.getTodo(type);
     }
 
     public static Init getInit() {
