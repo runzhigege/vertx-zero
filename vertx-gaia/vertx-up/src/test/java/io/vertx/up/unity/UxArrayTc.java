@@ -38,7 +38,7 @@ public class UxArrayTc extends StoreBase {
         json.setEmail("lang.yu@hpe.com");
         json.setName("Lang.Yu");
         user.add(json);
-        Ux.thenJsonMore(user, "").setHandler(item -> {
+        Ux.fnJArray(user).setHandler(item -> {
             System.out.println(item.result());
         });
     }

@@ -9,7 +9,8 @@ class Calculator {
     static void appendJson(final JsonObject target, final JsonObject source) {
         Observable.fromIterable(source.fieldNames())
                 .filter(key -> !target.containsKey(key))
-                .subscribe(key -> target.put(key, source.getValue(key)));
+                .subscribe(key -> target.put(key, source.getValue(key)))
+                .dispose();
     }
 
     static JsonObject groupBy(final JsonArray array, final String field) {
@@ -19,9 +20,9 @@ class Calculator {
                 .groupBy(item -> item.getValue(field))
                 .subscribe(item -> {
                     final JsonArray values = new JsonArray();
-                    item.subscribe(values::add);
+                    item.subscribe(values::add).dispose();
                     result.put(item.getKey().toString(), values);
-                });
+                }).dispose();
         return result;
     }
 }

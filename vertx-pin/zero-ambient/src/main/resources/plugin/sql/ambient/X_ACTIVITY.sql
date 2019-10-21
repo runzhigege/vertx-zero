@@ -7,7 +7,6 @@ CREATE TABLE IF NOT EXISTS X_ACTIVITY
 (
     `KEY`         VARCHAR(36) COMMENT '「key」- 操作行为主键',
     `TYPE`        VARCHAR(64) COMMENT '「type」- 操作类型',
-    `STATUS`      VARCHAR(64) COMMENT '「status」- 操作状态',
 
     `SERIAL`      VARCHAR(255) COMMENT '「serial」- 变更记录号',
     `DESCRIPTION` TEXT COMMENT '「description」- 操作描述信息',
@@ -17,7 +16,6 @@ CREATE TABLE IF NOT EXISTS X_ACTIVITY
     `MODEL_KEY`   VARCHAR(36) COMMENT '「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录',
 
     -- 是否变更记录
-    `IS_CHANGE`   BIT COMMENT '「isChange」- 如果是变更记录则需要生成变更日志',
     `RECORD_OLD`  TEXT COMMENT '「recordOld」- 变更之前的数据（用于回滚）',
     `RECORD_NEW`  TEXT COMMENT '「recordNew」- 变更之后的数据（用于更新）',
 

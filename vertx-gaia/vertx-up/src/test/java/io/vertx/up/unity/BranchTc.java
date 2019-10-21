@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.fn.Fn;
 import org.junit.Test;
 
+@SuppressWarnings("unchecked")
 public class BranchTc {
     @Test
     public void testBranch() {

@@ -57,7 +57,7 @@ class Web {
                 index++;
             }
         }
-        return Fluctuate.thenParallelJson(futures.toArray(new Future[]{}))
+        return Fluctuate.thenCombine(futures.toArray(new Future[]{}))
                 .compose(response -> {
                     final JsonObject finalJson = new JsonObject();
                     final JsonObject reference = (JsonObject) response;
