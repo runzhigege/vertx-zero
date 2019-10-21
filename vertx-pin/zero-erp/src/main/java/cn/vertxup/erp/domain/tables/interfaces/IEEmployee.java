@@ -74,6 +74,26 @@ public interface IEEmployee extends Serializable {
     public String getIdentityId();
 
     /**
+     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_CN_NAME</code>. 「workCnName」- 中文名
+     */
+    public IEEmployee setWorkCnName(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_CN_NAME</code>. 「workCnName」- 中文名
+     */
+    public String getWorkCnName();
+
+    /**
+     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_EN_NAME</code>. 「workEnName」- 英文名
+     */
+    public IEEmployee setWorkEnName(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_EN_NAME</code>. 「workEnName」- 英文名
+     */
+    public String getWorkEnName();
+
+    /**
      * Setter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_NUMBER</code>. 「workNumber」- 工号
      */
     public IEEmployee setWorkNumber(String value);
@@ -253,6 +273,8 @@ public interface IEEmployee extends Serializable {
         setDeptId(json.getString("DEPT_ID"));
         setTeamId(json.getString("TEAM_ID"));
         setIdentityId(json.getString("IDENTITY_ID"));
+        setWorkCnName(json.getString("WORK_CN_NAME"));
+        setWorkEnName(json.getString("WORK_EN_NAME"));
         setWorkNumber(json.getString("WORK_NUMBER"));
         setWorkTitle(json.getString("WORK_TITLE"));
         setWorkEmail(json.getString("WORK_EMAIL"));
@@ -280,6 +302,8 @@ public interface IEEmployee extends Serializable {
         json.put("DEPT_ID",getDeptId());
         json.put("TEAM_ID",getTeamId());
         json.put("IDENTITY_ID",getIdentityId());
+        json.put("WORK_CN_NAME",getWorkCnName());
+        json.put("WORK_EN_NAME",getWorkEnName());
         json.put("WORK_NUMBER",getWorkNumber());
         json.put("WORK_TITLE",getWorkTitle());
         json.put("WORK_EMAIL",getWorkEmail());

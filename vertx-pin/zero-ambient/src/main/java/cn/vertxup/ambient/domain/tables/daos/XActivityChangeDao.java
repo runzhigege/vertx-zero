@@ -84,10 +84,24 @@ public class XActivityChangeDao extends DAOImpl<XActivityChangeRecord, cn.vertxu
     }
 
     /**
+     * Fetch records that have <code>STATUS IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.domain.tables.pojos.XActivityChange> fetchByStatus(String... values) {
+        return fetch(XActivityChange.X_ACTIVITY_CHANGE.STATUS, values);
+    }
+
+    /**
      * Fetch records that have <code>FIELD_NAME IN (values)</code>
      */
     public List<cn.vertxup.ambient.domain.tables.pojos.XActivityChange> fetchByFieldName(String... values) {
         return fetch(XActivityChange.X_ACTIVITY_CHANGE.FIELD_NAME, values);
+    }
+
+    /**
+     * Fetch records that have <code>FIELD_ALIAS IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.domain.tables.pojos.XActivityChange> fetchByFieldAlias(String... values) {
+        return fetch(XActivityChange.X_ACTIVITY_CHANGE.FIELD_ALIAS, values);
     }
 
     /**
@@ -196,10 +210,24 @@ public class XActivityChangeDao extends DAOImpl<XActivityChangeRecord, cn.vertxu
     }
 
     /**
+     * Fetch records that have <code>STATUS IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XActivityChange>> fetchByStatusAsync(List<String> values) {
+        return fetchAsync(XActivityChange.X_ACTIVITY_CHANGE.STATUS,values);
+    }
+
+    /**
      * Fetch records that have <code>FIELD_NAME IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XActivityChange>> fetchByFieldNameAsync(List<String> values) {
         return fetchAsync(XActivityChange.X_ACTIVITY_CHANGE.FIELD_NAME,values);
+    }
+
+    /**
+     * Fetch records that have <code>FIELD_ALIAS IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XActivityChange>> fetchByFieldAliasAsync(List<String> values) {
+        return fetchAsync(XActivityChange.X_ACTIVITY_CHANGE.FIELD_ALIAS,values);
     }
 
     /**

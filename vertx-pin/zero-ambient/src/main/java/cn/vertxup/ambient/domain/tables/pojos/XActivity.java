@@ -24,16 +24,14 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XActivity implements IXActivity {
 
-    private static final long serialVersionUID = 1404323027;
+    private static final long serialVersionUID = -1380578183;
 
     private String        key;
     private String        type;
-    private String        status;
     private String        serial;
     private String        description;
     private String        modelId;
     private String        modelKey;
-    private Boolean       isChange;
     private String        recordOld;
     private String        recordNew;
     private String        sigma;
@@ -50,12 +48,10 @@ public class XActivity implements IXActivity {
     public XActivity(XActivity value) {
         this.key = value.key;
         this.type = value.type;
-        this.status = value.status;
         this.serial = value.serial;
         this.description = value.description;
         this.modelId = value.modelId;
         this.modelKey = value.modelKey;
-        this.isChange = value.isChange;
         this.recordOld = value.recordOld;
         this.recordNew = value.recordNew;
         this.sigma = value.sigma;
@@ -71,12 +67,10 @@ public class XActivity implements IXActivity {
     public XActivity(
         String        key,
         String        type,
-        String        status,
         String        serial,
         String        description,
         String        modelId,
         String        modelKey,
-        Boolean       isChange,
         String        recordOld,
         String        recordNew,
         String        sigma,
@@ -90,12 +84,10 @@ public class XActivity implements IXActivity {
     ) {
         this.key = key;
         this.type = type;
-        this.status = status;
         this.serial = serial;
         this.description = description;
         this.modelId = modelId;
         this.modelKey = modelKey;
-        this.isChange = isChange;
         this.recordOld = recordOld;
         this.recordNew = recordNew;
         this.sigma = sigma;
@@ -127,17 +119,6 @@ public class XActivity implements IXActivity {
     @Override
     public XActivity setType(String type) {
         this.type = type;
-        return this;
-    }
-
-    @Override
-    public String getStatus() {
-        return this.status;
-    }
-
-    @Override
-    public XActivity setStatus(String status) {
-        this.status = status;
         return this;
     }
 
@@ -182,17 +163,6 @@ public class XActivity implements IXActivity {
     @Override
     public XActivity setModelKey(String modelKey) {
         this.modelKey = modelKey;
-        return this;
-    }
-
-    @Override
-    public Boolean getIsChange() {
-        return this.isChange;
-    }
-
-    @Override
-    public XActivity setIsChange(Boolean isChange) {
-        this.isChange = isChange;
         return this;
     }
 
@@ -312,12 +282,10 @@ public class XActivity implements IXActivity {
 
         sb.append(key);
         sb.append(", ").append(type);
-        sb.append(", ").append(status);
         sb.append(", ").append(serial);
         sb.append(", ").append(description);
         sb.append(", ").append(modelId);
         sb.append(", ").append(modelKey);
-        sb.append(", ").append(isChange);
         sb.append(", ").append(recordOld);
         sb.append(", ").append(recordNew);
         sb.append(", ").append(sigma);
@@ -344,12 +312,10 @@ public class XActivity implements IXActivity {
     public void from(IXActivity from) {
         setKey(from.getKey());
         setType(from.getType());
-        setStatus(from.getStatus());
         setSerial(from.getSerial());
         setDescription(from.getDescription());
         setModelId(from.getModelId());
         setModelKey(from.getModelKey());
-        setIsChange(from.getIsChange());
         setRecordOld(from.getRecordOld());
         setRecordNew(from.getRecordNew());
         setSigma(from.getSigma());

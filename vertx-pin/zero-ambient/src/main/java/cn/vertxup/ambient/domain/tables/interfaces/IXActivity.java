@@ -44,16 +44,6 @@ public interface IXActivity extends Serializable {
     public String getType();
 
     /**
-     * Setter for <code>DB_ETERNAL.X_ACTIVITY.STATUS</code>. 「status」- 操作状态
-     */
-    public IXActivity setStatus(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.X_ACTIVITY.STATUS</code>. 「status」- 操作状态
-     */
-    public String getStatus();
-
-    /**
      * Setter for <code>DB_ETERNAL.X_ACTIVITY.SERIAL</code>. 「serial」- 变更记录号
      */
     public IXActivity setSerial(String value);
@@ -92,16 +82,6 @@ public interface IXActivity extends Serializable {
      * Getter for <code>DB_ETERNAL.X_ACTIVITY.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
      */
     public String getModelKey();
-
-    /**
-     * Setter for <code>DB_ETERNAL.X_ACTIVITY.IS_CHANGE</code>. 「isChange」- 如果是变更记录则需要生成变更日志
-     */
-    public IXActivity setIsChange(Boolean value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.X_ACTIVITY.IS_CHANGE</code>. 「isChange」- 如果是变更记录则需要生成变更日志
-     */
-    public Boolean getIsChange();
 
     /**
      * Setter for <code>DB_ETERNAL.X_ACTIVITY.RECORD_OLD</code>. 「recordOld」- 变更之前的数据（用于回滚）
@@ -220,12 +200,10 @@ public interface IXActivity extends Serializable {
     default IXActivity fromJson(io.vertx.core.json.JsonObject json) {
         setKey(json.getString("KEY"));
         setType(json.getString("TYPE"));
-        setStatus(json.getString("STATUS"));
         setSerial(json.getString("SERIAL"));
         setDescription(json.getString("DESCRIPTION"));
         setModelId(json.getString("MODEL_ID"));
         setModelKey(json.getString("MODEL_KEY"));
-        setIsChange(json.getBoolean("IS_CHANGE"));
         setRecordOld(json.getString("RECORD_OLD"));
         setRecordNew(json.getString("RECORD_NEW"));
         setSigma(json.getString("SIGMA"));
@@ -244,12 +222,10 @@ public interface IXActivity extends Serializable {
         io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
         json.put("KEY",getKey());
         json.put("TYPE",getType());
-        json.put("STATUS",getStatus());
         json.put("SERIAL",getSerial());
         json.put("DESCRIPTION",getDescription());
         json.put("MODEL_ID",getModelId());
         json.put("MODEL_KEY",getModelKey());
-        json.put("IS_CHANGE",getIsChange());
         json.put("RECORD_OLD",getRecordOld());
         json.put("RECORD_NEW",getRecordNew());
         json.put("SIGMA",getSigma());

@@ -18,5 +18,7 @@ public interface DatumStub {
 
     Future<JsonObject> category(String appId, String type, String code);
 
-    Future<JsonArray> generate(String appId, String code, Integer count);
+    Future<JsonArray> numbers(String appId, String code, Integer count);
+
+    Future<JsonArray> numbersBySigma(String sigma, String code, Integer count);
 }

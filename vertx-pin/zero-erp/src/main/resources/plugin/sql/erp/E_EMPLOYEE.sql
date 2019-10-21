@@ -18,6 +18,9 @@ CREATE TABLE `E_EMPLOYEE`
     `IDENTITY_ID`    VARCHAR(36) COMMENT '「identityId」- 身份关联ID',
 
     -- 办公信息
+    `WORK_CN_NAME`   VARCHAR(255) COMMENT '「workCnName」- 中文名',
+    `WORK_EN_NAME`   VARCHAR(255) COMMENT '「workEnName」- 英文名',
+
     `WORK_NUMBER`    VARCHAR(255) COMMENT '「workNumber」- 工号',
     `WORK_TITLE`     VARCHAR(255) COMMENT '「workTitle」- 头衔',
     `WORK_EMAIL`     VARCHAR(255) COMMENT '「workEmail」- 办公邮箱',

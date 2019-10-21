@@ -24,12 +24,14 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XActivityChange implements IXActivityChange {
 
-    private static final long serialVersionUID = -543698603;
+    private static final long serialVersionUID = 999256963;
 
     private String        key;
     private String        activityId;
     private String        type;
+    private String        status;
     private String        fieldName;
+    private String        fieldAlias;
     private String        fieldType;
     private String        valueOld;
     private String        valueNew;
@@ -48,7 +50,9 @@ public class XActivityChange implements IXActivityChange {
         this.key = value.key;
         this.activityId = value.activityId;
         this.type = value.type;
+        this.status = value.status;
         this.fieldName = value.fieldName;
+        this.fieldAlias = value.fieldAlias;
         this.fieldType = value.fieldType;
         this.valueOld = value.valueOld;
         this.valueNew = value.valueNew;
@@ -66,7 +70,9 @@ public class XActivityChange implements IXActivityChange {
         String        key,
         String        activityId,
         String        type,
+        String        status,
         String        fieldName,
+        String        fieldAlias,
         String        fieldType,
         String        valueOld,
         String        valueNew,
@@ -82,7 +88,9 @@ public class XActivityChange implements IXActivityChange {
         this.key = key;
         this.activityId = activityId;
         this.type = type;
+        this.status = status;
         this.fieldName = fieldName;
+        this.fieldAlias = fieldAlias;
         this.fieldType = fieldType;
         this.valueOld = valueOld;
         this.valueNew = valueNew;
@@ -130,6 +138,17 @@ public class XActivityChange implements IXActivityChange {
     }
 
     @Override
+    public String getStatus() {
+        return this.status;
+    }
+
+    @Override
+    public XActivityChange setStatus(String status) {
+        this.status = status;
+        return this;
+    }
+
+    @Override
     public String getFieldName() {
         return this.fieldName;
     }
@@ -137,6 +156,17 @@ public class XActivityChange implements IXActivityChange {
     @Override
     public XActivityChange setFieldName(String fieldName) {
         this.fieldName = fieldName;
+        return this;
+    }
+
+    @Override
+    public String getFieldAlias() {
+        return this.fieldAlias;
+    }
+
+    @Override
+    public XActivityChange setFieldAlias(String fieldAlias) {
+        this.fieldAlias = fieldAlias;
         return this;
     }
 
@@ -268,7 +298,9 @@ public class XActivityChange implements IXActivityChange {
         sb.append(key);
         sb.append(", ").append(activityId);
         sb.append(", ").append(type);
+        sb.append(", ").append(status);
         sb.append(", ").append(fieldName);
+        sb.append(", ").append(fieldAlias);
         sb.append(", ").append(fieldType);
         sb.append(", ").append(valueOld);
         sb.append(", ").append(valueNew);
@@ -297,7 +329,9 @@ public class XActivityChange implements IXActivityChange {
         setKey(from.getKey());
         setActivityId(from.getActivityId());
         setType(from.getType());
+        setStatus(from.getStatus());
         setFieldName(from.getFieldName());
+        setFieldAlias(from.getFieldAlias());
         setFieldType(from.getFieldType());
         setValueOld(from.getValueOld());
         setValueNew(from.getValueNew());
