@@ -72,7 +72,6 @@ public class Keys {
     public static final UniqueKey<ETeamRecord> KEY_E_TEAM_PRIMARY = UniqueKeys0.KEY_E_TEAM_PRIMARY;
     public static final UniqueKey<ETeamRecord> KEY_E_TEAM_NAME = UniqueKeys0.KEY_E_TEAM_NAME;
     public static final UniqueKey<ETeamRecord> KEY_E_TEAM_CODE = UniqueKeys0.KEY_E_TEAM_CODE;
-    public static final UniqueKey<ETeamRecord> KEY_E_TEAM_CODE_2 = UniqueKeys0.KEY_E_TEAM_CODE_2;
     public static final UniqueKey<RCompanyCustomerRecord> KEY_R_COMPANY_CUSTOMER_PRIMARY = UniqueKeys0.KEY_R_COMPANY_CUSTOMER_PRIMARY;
     public static final UniqueKey<RTeamEmployeeRecord> KEY_R_TEAM_EMPLOYEE_PRIMARY = UniqueKeys0.KEY_R_TEAM_EMPLOYEE_PRIMARY;
 
@@ -106,7 +105,6 @@ public class Keys {
         public static final UniqueKey<ETeamRecord> KEY_E_TEAM_PRIMARY = Internal.createUniqueKey(ETeam.E_TEAM, "KEY_E_TEAM_PRIMARY", ETeam.E_TEAM.KEY);
         public static final UniqueKey<ETeamRecord> KEY_E_TEAM_NAME = Internal.createUniqueKey(ETeam.E_TEAM, "KEY_E_TEAM_NAME", ETeam.E_TEAM.NAME, ETeam.E_TEAM.DEPT_ID, ETeam.E_TEAM.TEAM_ID);
         public static final UniqueKey<ETeamRecord> KEY_E_TEAM_CODE = Internal.createUniqueKey(ETeam.E_TEAM, "KEY_E_TEAM_CODE", ETeam.E_TEAM.CODE, ETeam.E_TEAM.DEPT_ID);
-        public static final UniqueKey<ETeamRecord> KEY_E_TEAM_CODE_2 = Internal.createUniqueKey(ETeam.E_TEAM, "KEY_E_TEAM_CODE_2", ETeam.E_TEAM.CODE, ETeam.E_TEAM.DEPT_ID);
         public static final UniqueKey<RCompanyCustomerRecord> KEY_R_COMPANY_CUSTOMER_PRIMARY = Internal.createUniqueKey(RCompanyCustomer.R_COMPANY_CUSTOMER, "KEY_R_COMPANY_CUSTOMER_PRIMARY", RCompanyCustomer.R_COMPANY_CUSTOMER.COMPANY_ID, RCompanyCustomer.R_COMPANY_CUSTOMER.CUSTOMER_ID);
         public static final UniqueKey<RTeamEmployeeRecord> KEY_R_TEAM_EMPLOYEE_PRIMARY = Internal.createUniqueKey(RTeamEmployee.R_TEAM_EMPLOYEE, "KEY_R_TEAM_EMPLOYEE_PRIMARY", RTeamEmployee.R_TEAM_EMPLOYEE.TEAM_ID, RTeamEmployee.R_TEAM_EMPLOYEE.EMPLOYEE_ID);
     }

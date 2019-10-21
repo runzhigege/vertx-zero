@@ -98,6 +98,20 @@ public class EEmployeeDao extends DAOImpl<EEmployeeRecord, cn.vertxup.erp.domain
     }
 
     /**
+     * Fetch records that have <code>WORK_CN_NAME IN (values)</code>
+     */
+    public List<cn.vertxup.erp.domain.tables.pojos.EEmployee> fetchByWorkCnName(String... values) {
+        return fetch(EEmployee.E_EMPLOYEE.WORK_CN_NAME, values);
+    }
+
+    /**
+     * Fetch records that have <code>WORK_EN_NAME IN (values)</code>
+     */
+    public List<cn.vertxup.erp.domain.tables.pojos.EEmployee> fetchByWorkEnName(String... values) {
+        return fetch(EEmployee.E_EMPLOYEE.WORK_EN_NAME, values);
+    }
+
+    /**
      * Fetch records that have <code>WORK_NUMBER IN (values)</code>
      */
     public List<cn.vertxup.erp.domain.tables.pojos.EEmployee> fetchByWorkNumber(String... values) {
@@ -249,6 +263,20 @@ public class EEmployeeDao extends DAOImpl<EEmployeeRecord, cn.vertxup.erp.domain
      */
     public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EEmployee>> fetchByIdentityIdAsync(List<String> values) {
         return fetchAsync(EEmployee.E_EMPLOYEE.IDENTITY_ID,values);
+    }
+
+    /**
+     * Fetch records that have <code>WORK_CN_NAME IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EEmployee>> fetchByWorkCnNameAsync(List<String> values) {
+        return fetchAsync(EEmployee.E_EMPLOYEE.WORK_CN_NAME,values);
+    }
+
+    /**
+     * Fetch records that have <code>WORK_EN_NAME IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EEmployee>> fetchByWorkEnNameAsync(List<String> values) {
+        return fetchAsync(EEmployee.E_EMPLOYEE.WORK_EN_NAME,values);
     }
 
     /**

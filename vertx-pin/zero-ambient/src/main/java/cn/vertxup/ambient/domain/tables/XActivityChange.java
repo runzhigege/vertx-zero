@@ -35,7 +35,7 @@ public class XActivityChange extends TableImpl<XActivityChangeRecord> {
      * The reference instance of <code>DB_ETERNAL.X_ACTIVITY_CHANGE</code>
      */
     public static final XActivityChange X_ACTIVITY_CHANGE = new XActivityChange();
-    private static final long serialVersionUID = -2109093327;
+    private static final long serialVersionUID = -1280197306;
     /**
      * The column <code>DB_ETERNAL.X_ACTIVITY_CHANGE.KEY</code>. 「key」- 操作行为主键
      */
@@ -49,9 +49,17 @@ public class XActivityChange extends TableImpl<XActivityChangeRecord> {
      */
     public final TableField<XActivityChangeRecord, String> TYPE = createField("TYPE", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「type」- 字段变更类型：ADD | DELETE | UPDATE 三种");
     /**
+     * The column <code>DB_ETERNAL.X_ACTIVITY_CHANGE.STATUS</code>. 「status」- 待确认变更状态：CONFIRMED | PENDING
+     */
+    public final TableField<XActivityChangeRecord, String> STATUS = createField("STATUS", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「status」- 待确认变更状态：CONFIRMED | PENDING");
+    /**
      * The column <code>DB_ETERNAL.X_ACTIVITY_CHANGE.FIELD_NAME</code>. 「fieldName」- 如果是变更记录则需要生成变更日志
      */
     public final TableField<XActivityChangeRecord, String> FIELD_NAME = createField("FIELD_NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「fieldName」- 如果是变更记录则需要生成变更日志");
+    /**
+     * The column <code>DB_ETERNAL.X_ACTIVITY_CHANGE.FIELD_ALIAS</code>. 「fieldAlias」- 字段对应的别名
+     */
+    public final TableField<XActivityChangeRecord, String> FIELD_ALIAS = createField("FIELD_ALIAS", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「fieldAlias」- 字段对应的别名");
     /**
      * The column <code>DB_ETERNAL.X_ACTIVITY_CHANGE.FIELD_TYPE</code>. 「fieldType」- 变更字段的数据类型，直接从模型定义中读取
      */

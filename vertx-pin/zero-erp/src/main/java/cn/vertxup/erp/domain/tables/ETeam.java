@@ -35,7 +35,7 @@ public class ETeam extends TableImpl<ETeamRecord> {
      * The reference instance of <code>DB_ETERNAL.E_TEAM</code>
      */
     public static final ETeam E_TEAM = new ETeam();
-    private static final long serialVersionUID = -1693038566;
+    private static final long serialVersionUID = 131698250;
     /**
      * The column <code>DB_ETERNAL.E_TEAM.KEY</code>. 「key」- 组主键
      */
@@ -151,7 +151,7 @@ public class ETeam extends TableImpl<ETeamRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.E_TEAM_CODE, Indexes.E_TEAM_CODE_2, Indexes.E_TEAM_NAME, Indexes.E_TEAM_PRIMARY);
+        return Arrays.<Index>asList(Indexes.E_TEAM_CODE, Indexes.E_TEAM_NAME, Indexes.E_TEAM_PRIMARY);
     }
 
     /**
@@ -167,7 +167,7 @@ public class ETeam extends TableImpl<ETeamRecord> {
      */
     @Override
     public List<UniqueKey<ETeamRecord>> getKeys() {
-        return Arrays.<UniqueKey<ETeamRecord>>asList(Keys.KEY_E_TEAM_PRIMARY, Keys.KEY_E_TEAM_NAME, Keys.KEY_E_TEAM_CODE, Keys.KEY_E_TEAM_CODE_2);
+        return Arrays.<UniqueKey<ETeamRecord>>asList(Keys.KEY_E_TEAM_PRIMARY, Keys.KEY_E_TEAM_NAME, Keys.KEY_E_TEAM_CODE);
     }
 
     /**
