@@ -1,5 +1,9 @@
 package io.vertx.up.commune.config;
 
+import com.fasterxml.jackson.databind.JsonObjectDeserializer;
+import com.fasterxml.jackson.databind.JsonObjectSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.commune.Json;
 import io.vertx.up.util.Ut;
@@ -29,6 +33,9 @@ import java.util.concurrent.ConcurrentMap;
  *              "uri": "/uri/getinfo",
  *              "headers": {}
  *          }
+ *      },
+ *      "options":{
+ *
  *      }
  * }
  */
@@ -52,12 +59,16 @@ public class Integration implements Json, Serializable {
     private transient String hostname;
     private transient String publicKeyFile;
 
+    @JsonSerialize(using = JsonObjectSerializer.class)
+    @JsonDeserialize(using = JsonObjectDeserializer.class)
+    private transient JsonObject options;
+
     public ConcurrentMap<String, IntegrationRequest> getApis() {
-        return apis;
+        return this.apis;
     }
 
     public String getEndpoint() {
-        return endpoint;
+        return this.endpoint;
     }
 
     public void setEndpoint(final String endpoint) {
@@ -65,7 +76,7 @@ public class Integration implements Json, Serializable {
     }
 
     public Integer getPort() {
-        return port;
+        return this.port;
     }
 
     public void setPort(final Integer port) {
@@ -73,7 +84,7 @@ public class Integration implements Json, Serializable {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public void setUsername(final String username) {
@@ -81,7 +92,7 @@ public class Integration implements Json, Serializable {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(final String password) {
@@ -89,7 +100,7 @@ public class Integration implements Json, Serializable {
     }
 
     public String getHostname() {
-        return hostname;
+        return this.hostname;
     }
 
     public void setHostname(final String hostname) {
@@ -97,11 +108,31 @@ public class Integration implements Json, Serializable {
     }
 
     public String getPublicKeyFile() {
-        return publicKeyFile;
+        return this.publicKeyFile;
     }
 
     public void setPublicKeyFile(final String publicKeyFile) {
         this.publicKeyFile = publicKeyFile;
+    }
+
+    public JsonObject getOptions() {
+        return Objects.isNull(this.options) ? new JsonObject() : this.options;
+    }
+
+    public void setOptions(final JsonObject options) {
+        this.options = options;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T getOption(final String optionKey) {
+        final JsonObject options = this.getOptions();
+        final Object value = options.getValue(optionKey);
+        return (T) value;
+    }
+
+    public <T> T getOption(final String optionKey, final T defaultValue) {
+        final T result = this.getOption(optionKey);
+        return Objects.isNull(result) ? defaultValue : result;
     }
 
     @Override
@@ -111,12 +142,12 @@ public class Integration implements Json, Serializable {
 
     @Override
     public void fromJson(final JsonObject data) {
-        endpoint = data.getString("endpoint");
-        hostname = data.getString("hostname");
-        username = data.getString("username");
-        password = data.getString("password");
-        port = data.getInteger("port");
-        publicKeyFile = data.getString("publicKeyFile");
+        this.endpoint = data.getString("endpoint");
+        this.hostname = data.getString("hostname");
+        this.username = data.getString("username");
+        this.password = data.getString("password");
+        this.port = data.getInteger("port");
+        this.publicKeyFile = data.getString("publicKeyFile");
         /*
          * Integration Request
          */
@@ -127,44 +158,48 @@ public class Integration implements Json, Serializable {
                 this.apis.put(field, request);
             });
         }
+        final JsonObject options = data.getJsonObject("options");
+        if (Ut.notNil(options)) {
+            this.options = options.copy();
+        }
     }
 
     public IntegrationRequest createRequest(final String key) {
         final IntegrationRequest request = new IntegrationRequest();
-        final IntegrationRequest original = apis.get(key);
+        final IntegrationRequest original = this.apis.get(key);
         request.setHeaders(original.getHeaders().copy());
         request.setMethod(original.getMethod());
-        request.setPath(endpoint + original.getPath());
+        request.setPath(this.endpoint + original.getPath());
         return request;
     }
 
     @Override
     public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Integration)) {
-            return false;
-        }
+        if (this == o) return true;
+        if (!(o instanceof Integration)) return false;
         final Integration that = (Integration) o;
-        return endpoint.equals(that.endpoint);
+        return this.endpoint.equals(that.endpoint) &&
+                this.port.equals(that.port) &&
+                this.username.equals(that.username) &&
+                this.password.equals(that.password) &&
+                this.hostname.equals(that.hostname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(endpoint);
+        return Objects.hash(this.endpoint, this.port, this.username, this.password, this.hostname);
     }
 
     @Override
     public String toString() {
         return "Integration{" +
-                "apis=" + apis +
-                ", endpoint='" + endpoint + '\'' +
-                ", port=" + port +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", hostname='" + hostname + '\'' +
-                ", publicKeyFile='" + publicKeyFile + '\'' +
+                "apis=" + this.apis +
+                ", endpoint='" + this.endpoint + '\'' +
+                ", port=" + this.port +
+                ", username='" + this.username + '\'' +
+                ", password='" + this.password + '\'' +
+                ", hostname='" + this.hostname + '\'' +
+                ", publicKeyFile='" + this.publicKeyFile + '\'' +
                 '}';
     }
 }

@@ -1,5 +1,6 @@
 package io.vertx.quiz;
 
+import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -14,19 +15,21 @@ import org.junit.runner.RunWith;
 @RunWith(VertxUnitRunner.class)
 public abstract class ZeroBase extends EpicBase {
 
-    @Rule
-    public final RunTestOnContext rule = new RunTestOnContext(
-            /* Block issue of 2000ms for testing of long time works */
+    protected final static VertxOptions OPTIONS = /* Block issue of 2000ms for testing of long time works */
             new VertxOptions().setMaxEventLoopExecuteTime(30000000000L)
-    );
+                    .setMaxWorkerExecuteTime(30000000000L)
+                    .setBlockedThreadCheckInterval(10000);
+    protected final static Vertx VERTX = Vertx.vertx(OPTIONS);
+    @Rule
+    public final RunTestOnContext rule = new RunTestOnContext(OPTIONS);
 
     public void ensure(final Class<?> insurerCls,
                        final JsonObject data, final JsonObject rule)
             throws ZeroException {
         final Insurer insurer
                 = Ut.singleton(insurerCls);
-        getLogger().info("[ ZERO Test ] Input data ( Object ): {0}", data);
-        getLogger().info("[ ZERO Test ] Rule data: {0}", rule);
+        this.getLogger().info("[ ZERO Test ] Input data ( Object ): {0}", data);
+        this.getLogger().info("[ ZERO Test ] Rule data: {0}", rule);
         insurer.flumen(data, rule);
     }
 
@@ -35,8 +38,8 @@ public abstract class ZeroBase extends EpicBase {
             throws ZeroException {
         final Insurer insurer
                 = Ut.singleton(insurerCls);
-        getLogger().info("[ ZERO Test ] Input data ( Array ): {0}", array);
-        getLogger().info("[ ZERO Test ] Rule data: {0}", rule);
+        this.getLogger().info("[ ZERO Test ] Input data ( Array ): {0}", array);
+        this.getLogger().info("[ ZERO Test ] Rule data: {0}", rule);
         insurer.flumen(array, rule);
     }
 }
