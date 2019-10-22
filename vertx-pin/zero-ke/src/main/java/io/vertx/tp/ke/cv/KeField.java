@@ -53,6 +53,8 @@ public interface KeField {
     String CLASS_NAME = "className";
     String ROW = "row";
     String INITIAL = "initial";
+    String PROTOCOL = "protocol";
+    String CONTEXT = "context";
 
     interface App {
 
