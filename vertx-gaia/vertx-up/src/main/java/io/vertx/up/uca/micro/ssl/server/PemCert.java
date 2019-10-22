@@ -5,10 +5,10 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.net.OpenSSLEngineOptions;
 import io.vertx.core.net.PemKeyCertOptions;
 import io.vertx.core.net.TCPSSLOptions;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.uca.micro.ssl.CertPipe;
-import io.vertx.up.fn.Fn;
-import io.vertx.quiz.core.tls.Cert;
+import io.vertx.up.uca.micro.ssl.tls.Cert;
 
 /**
  * Pem key cert options

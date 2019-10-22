@@ -5,10 +5,10 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.net.ClientOptionsBase;
 import io.vertx.core.net.OpenSSLEngineOptions;
 import io.vertx.core.net.PemTrustOptions;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.uca.micro.ssl.TrustPipe;
-import io.vertx.up.fn.Fn;
-import io.vertx.quiz.core.tls.Trust;
+import io.vertx.up.uca.micro.ssl.tls.Trust;
 
 public class PemTrust implements TrustPipe<JsonObject> {
 
