@@ -1,4 +1,4 @@
-package io.vertx.quiz.core.tls;
+package io.vertx.up.uca.micro.ssl.tls;
 
 import io.vertx.core.net.JksOptions;
 import io.vertx.core.net.PemTrustOptions;
