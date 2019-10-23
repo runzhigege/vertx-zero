@@ -34,7 +34,8 @@ class AccreditFlow {
             final WebException error = new _403ActionMissingException(clazz, requestUri);
             return Future.failedFuture(error);
         } else {
-            Sc.infoCredit(LOGGER, AuthMsg.CREDIT_ACTION, request.getNormalizedUri(), request.getMethod());
+            Sc.infoCredit(LOGGER, AuthMsg.CREDIT_ACTION,
+                    request.getRequestUri(), request.getMethod(), request.getNormalizedUri());
             return Future.succeededFuture(action);
         }
     }
