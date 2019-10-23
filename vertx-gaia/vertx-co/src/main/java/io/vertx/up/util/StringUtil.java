@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Supplier;
 
 /**
  * @author lang
@@ -95,16 +96,17 @@ final class StringUtil {
     }
 
     static String random(final int length) {
-        return random(length, randomChar());
+        return random(length, StringUtil::randomChar);
     }
 
     static String randomNoDigit(final int length) {
-        return random(length, randomCharNoDigit());
+        return random(length, StringUtil::randomCharNoDigit);
     }
 
-    private static String random(int length, final char seed) {
+    private static String random(int length, final Supplier<Character> supplier) {
         final StringBuilder builder = new StringBuilder();
         while (0 < length) {
+            final char seed = supplier.get();
             builder.append(seed);
             length--;
         }
