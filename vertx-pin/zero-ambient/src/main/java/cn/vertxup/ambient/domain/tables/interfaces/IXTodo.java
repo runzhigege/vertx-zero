@@ -114,24 +114,34 @@ public interface IXTodo extends Serializable {
     public LocalDateTime getExpiredAt();
 
     /**
-     * Setter for <code>DB_ETERNAL.X_TODO.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
+     * Setter for <code>DB_ETERNAL.X_TODO.MODEL_ID</code>. 「modelId」- 关联的模型identifier，用于描述
      */
     public IXTodo setModelId(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.X_TODO.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
+     * Getter for <code>DB_ETERNAL.X_TODO.MODEL_ID</code>. 「modelId」- 关联的模型identifier，用于描述
      */
     public String getModelId();
 
     /**
-     * Setter for <code>DB_ETERNAL.X_TODO.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
+     * Setter for <code>DB_ETERNAL.X_TODO.MODEL_KEY</code>. 「modelKey」- 关联的模型记录ID，用于描述哪一个Model中的记录
      */
     public IXTodo setModelKey(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.X_TODO.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
+     * Getter for <code>DB_ETERNAL.X_TODO.MODEL_KEY</code>. 「modelKey」- 关联的模型记录ID，用于描述哪一个Model中的记录
      */
     public String getModelKey();
+
+    /**
+     * Setter for <code>DB_ETERNAL.X_TODO.MODEL_CATEGORY</code>. 「modelCategory」- 关联的category记录，只包含叶节点
+     */
+    public IXTodo setModelCategory(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.X_TODO.MODEL_CATEGORY</code>. 「modelCategory」- 关联的category记录，只包含叶节点
+     */
+    public String getModelCategory();
 
     /**
      * Setter for <code>DB_ETERNAL.X_TODO.TO_GROUP</code>. 「toGroup」- 待办指定组
@@ -309,6 +319,7 @@ public interface IXTodo extends Serializable {
         // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED_AT!
         setModelId(json.getString("MODEL_ID"));
         setModelKey(json.getString("MODEL_KEY"));
+        setModelCategory(json.getString("MODEL_CATEGORY"));
         setToGroup(json.getString("TO_GROUP"));
         setToUser(json.getString("TO_USER"));
         setToRole(json.getString("TO_ROLE"));
@@ -341,6 +352,7 @@ public interface IXTodo extends Serializable {
         // Omitting unrecognized type java.time.LocalDateTime for column EXPIRED_AT!
         json.put("MODEL_ID",getModelId());
         json.put("MODEL_KEY",getModelKey());
+        json.put("MODEL_CATEGORY",getModelCategory());
         json.put("TO_GROUP",getToGroup());
         json.put("TO_USER",getToUser());
         json.put("TO_ROLE",getToRole());

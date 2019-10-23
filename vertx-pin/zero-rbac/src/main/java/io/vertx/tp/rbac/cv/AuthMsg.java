@@ -26,7 +26,7 @@ public interface AuthMsg {
     String TOKEN_INVALID = "Token invalid {0}";
     String TOKEN_EXPIRED = "Token you provided {0} is expired at: {1}.";
 
-    String CREDIT_ACTION = "1. Accredit action ( uri = `{0}`, method = `{1}` ).";
+    String CREDIT_ACTION = "1. Accredit action ( uri = `{0}`, method = `{1}`, normalizedUri = `{2}` ).";
     String CREDIT_RESOURCE = "2. Accredit resource ( resource = `{0}` ).";
     String CREDIT_LEVEL = "3. Accredit level ( action = {0}, resource = {1} ).";
     String CREDIT_PERMISSION = "4. Accredit profile ( profileKey = {0} ).";

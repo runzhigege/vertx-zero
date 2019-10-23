@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class XTodo implements IXTodo {
 
-    private static final long serialVersionUID = -1596175636;
+    private static final long serialVersionUID = 790278665;
 
     private String        key;
     private String        serial;
@@ -37,6 +37,7 @@ public class XTodo implements IXTodo {
     private LocalDateTime expiredAt;
     private String        modelId;
     private String        modelKey;
+    private String        modelCategory;
     private String        toGroup;
     private String        toUser;
     private String        toRole;
@@ -67,6 +68,7 @@ public class XTodo implements IXTodo {
         this.expiredAt = value.expiredAt;
         this.modelId = value.modelId;
         this.modelKey = value.modelKey;
+        this.modelCategory = value.modelCategory;
         this.toGroup = value.toGroup;
         this.toUser = value.toUser;
         this.toRole = value.toRole;
@@ -96,6 +98,7 @@ public class XTodo implements IXTodo {
         LocalDateTime expiredAt,
         String        modelId,
         String        modelKey,
+        String        modelCategory,
         String        toGroup,
         String        toUser,
         String        toRole,
@@ -123,6 +126,7 @@ public class XTodo implements IXTodo {
         this.expiredAt = expiredAt;
         this.modelId = modelId;
         this.modelKey = modelKey;
+        this.modelCategory = modelCategory;
         this.toGroup = toGroup;
         this.toUser = toUser;
         this.toRole = toRole;
@@ -258,6 +262,17 @@ public class XTodo implements IXTodo {
     @Override
     public XTodo setModelKey(String modelKey) {
         this.modelKey = modelKey;
+        return this;
+    }
+
+    @Override
+    public String getModelCategory() {
+        return this.modelCategory;
+    }
+
+    @Override
+    public XTodo setModelCategory(String modelCategory) {
+        this.modelCategory = modelCategory;
         return this;
     }
 
@@ -441,6 +456,7 @@ public class XTodo implements IXTodo {
         sb.append(", ").append(expiredAt);
         sb.append(", ").append(modelId);
         sb.append(", ").append(modelKey);
+        sb.append(", ").append(modelCategory);
         sb.append(", ").append(toGroup);
         sb.append(", ").append(toUser);
         sb.append(", ").append(toRole);
@@ -481,6 +497,7 @@ public class XTodo implements IXTodo {
         setExpiredAt(from.getExpiredAt());
         setModelId(from.getModelId());
         setModelKey(from.getModelKey());
+        setModelCategory(from.getModelCategory());
         setToGroup(from.getToGroup());
         setToUser(from.getToUser());
         setToRole(from.getToRole());
