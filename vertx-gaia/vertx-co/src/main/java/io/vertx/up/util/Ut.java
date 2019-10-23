@@ -56,6 +56,14 @@ public final class Ut {
         return ArrayUtil.add(array, jsonObject, field);
     }
 
+    public static JsonArray elementClimb(final JsonArray children, final JsonArray tree) {
+        return ArrayUtil.climb(children, tree, null);
+    }
+
+    public static JsonArray elementClimb(final JsonObject child, final JsonArray tree) {
+        return ArrayUtil.climb(child, tree, null);
+    }
+
     public static <T> T elementFind(final List<T> list, final Predicate<T> fnFilter) {
         return Statute.find(list, fnFilter);
     }

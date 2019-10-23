@@ -1,6 +1,7 @@
 package cn.vertxup.ambient.service;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 /*
@@ -12,5 +13,10 @@ public interface TodoStub {
      * type + params: the default value came from type.json under
      * plugin/ambient/to do/folder
      */
-    Future<JsonObject> createTodo(final String type, final JsonObject data);
+    Future<JsonObject> createTodo(String type, JsonObject data);
+
+    /*
+     * fetch X_TODO by `sigma` & `type` & statues
+     */
+    Future<JsonArray> fetchTodos(String sigma, String type, JsonArray statues);
 }
