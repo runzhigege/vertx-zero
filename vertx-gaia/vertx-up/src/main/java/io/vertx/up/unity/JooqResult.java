@@ -7,10 +7,7 @@ import io.vertx.up.util.Ut;
 import org.jooq.Field;
 import org.jooq.Record;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 
 /*
@@ -57,8 +54,16 @@ class JooqResult {
                 final Object value = record.get(field);
                 if (Objects.nonNull(value)) {
                     final String resultField = fields.get(field.getName());
-                    if (Ut.notNil(resultField)) {
-                        data.put(resultField, value);
+                    if (Ut.notNil(resultField) && !data.containsKey(resultField)) {
+                        if (value instanceof java.sql.Timestamp) {
+                            /*
+                             * Resolve issue: java.lang.IllegalStateException: Illegal type in JsonObject: class java.sql.Timestamp
+                             */
+                            final Date dateTime = (Date) value;
+                            data.put(resultField, dateTime.toInstant());
+                        } else {
+                            data.put(resultField, value);
+                        }
                     }
                 }
             }

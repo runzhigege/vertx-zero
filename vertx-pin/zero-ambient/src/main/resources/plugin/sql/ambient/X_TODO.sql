@@ -5,11 +5,11 @@
 DROP TABLE IF EXISTS X_TODO;
 CREATE TABLE IF NOT EXISTS X_TODO
 (
-    `KEY`         VARCHAR(36) COMMENT '「key」- 待办主键',
-    `SERIAL`      VARCHAR(255) COMMENT '「serial」- 待办编号，使用 X_NUMBER 生成',
-    `NAME`        VARCHAR(255) COMMENT '「name」- 待办名称（标题）',
-    `CODE`        VARCHAR(36) COMMENT '「code」- 待办系统码',
-    `ICON`        VARCHAR(255) COMMENT '「icon」- 待办显示的图标',
+    `KEY`            VARCHAR(36) COMMENT '「key」- 待办主键',
+    `SERIAL`         VARCHAR(255) COMMENT '「serial」- 待办编号，使用 X_NUMBER 生成',
+    `NAME`           VARCHAR(255) COMMENT '「name」- 待办名称（标题）',
+    `CODE`           VARCHAR(36) COMMENT '「code」- 待办系统码',
+    `ICON`           VARCHAR(255) COMMENT '「icon」- 待办显示的图标',
     -- 待办相关内容
     /*
      * 待办状态清单：
@@ -19,18 +19,19 @@ CREATE TABLE IF NOT EXISTS X_TODO
      * REJECT：待办被退回
      * CANCEL：待办被取消
      */
-    `STATUS`      VARCHAR(36) COMMENT '「status」- 待办状态',
-    `TODO_URL`    VARCHAR(255) COMMENT '「todoUrl」- 待办路径',
+    `STATUS`         VARCHAR(36) COMMENT '「status」- 待办状态',
+    `TODO_URL`       VARCHAR(255) COMMENT '「todoUrl」- 待办路径',
     /*
      * EXPIRED：会超时的待办
      * STANDARD：标准的待办（不会超时）
      */
-    `TYPE`        VARCHAR(36) COMMENT '「type」- 待办类型',
-    `EXPIRED_AT`  DATETIME COMMENT '「expiredAt」- 超时时间',
+    `TYPE`           VARCHAR(36) COMMENT '「type」- 待办类型',
+    `EXPIRED_AT`     DATETIME COMMENT '「expiredAt」- 超时时间',
 
     -- 模块相关 Join
-    `MODEL_ID`    VARCHAR(255) COMMENT '「modelId」- 组所关联的模型identifier，用于描述',
-    `MODEL_KEY`   VARCHAR(36) COMMENT '「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录',
+    `MODEL_ID`       VARCHAR(255) COMMENT '「modelId」- 关联的模型identifier，用于描述',
+    `MODEL_KEY`      VARCHAR(36) COMMENT '「modelKey」- 关联的模型记录ID，用于描述哪一个Model中的记录',
+    `MODEL_CATEGORY` VARCHAR(36) COMMENT '「modelCategory」- 关联的category记录，只包含叶节点',
 
     /*
      * 完整流程：
@@ -40,25 +41,25 @@ CREATE TABLE IF NOT EXISTS X_TODO
      * 2）待办接收：填充 acceptedBy
      * 3) 待办完成：填充 finishedBy
      */
-    `TO_GROUP`    VARCHAR(36) COMMENT '「toGroup」- 待办指定组',
-    `TO_USER`     VARCHAR(36) COMMENT '「toUser」- 待办指定人',
-    `TO_ROLE`     VARCHAR(36) COMMENT '「toRole」- 待办角色（集体）',
-    `ASSIGNED_BY` VARCHAR(36) COMMENT '「assignedBy」- 待办指派人',
-    `ACCEPTED_BY` VARCHAR(36) COMMENT '「acceptedBy」- 待办接收人',
-    `FINISHED_BY` VARCHAR(36) COMMENT '「finishedBy」- 待办完成人',
-    `TRACE_ID`    VARCHAR(36) COMMENT '「traceId」- 同一个流程的待办执行分组',
+    `TO_GROUP`       VARCHAR(36) COMMENT '「toGroup」- 待办指定组',
+    `TO_USER`        VARCHAR(36) COMMENT '「toUser」- 待办指定人',
+    `TO_ROLE`        VARCHAR(36) COMMENT '「toRole」- 待办角色（集体）',
+    `ASSIGNED_BY`    VARCHAR(36) COMMENT '「assignedBy」- 待办指派人',
+    `ACCEPTED_BY`    VARCHAR(36) COMMENT '「acceptedBy」- 待办接收人',
+    `FINISHED_BY`    VARCHAR(36) COMMENT '「finishedBy」- 待办完成人',
+    `TRACE_ID`       VARCHAR(36) COMMENT '「traceId」- 同一个流程的待办执行分组',
 
     -- 特殊字段
-    `ACTIVE`      BIT         DEFAULT NULL COMMENT '「active」- 是否启用',
-    `SIGMA`       VARCHAR(32) DEFAULT NULL COMMENT '「sigma」- 统一标识',
-    `METADATA`    TEXT COMMENT '「metadata」- 附加配置',
-    `LANGUAGE`    VARCHAR(8)  DEFAULT NULL COMMENT '「language」- 使用的语言',
+    `ACTIVE`         BIT         DEFAULT NULL COMMENT '「active」- 是否启用',
+    `SIGMA`          VARCHAR(32) DEFAULT NULL COMMENT '「sigma」- 统一标识',
+    `METADATA`       TEXT COMMENT '「metadata」- 附加配置',
+    `LANGUAGE`       VARCHAR(8)  DEFAULT NULL COMMENT '「language」- 使用的语言',
 
     -- Auditor字段
-    `CREATED_AT`  DATETIME COMMENT '「createdAt」- 创建时间',
-    `CREATED_BY`  VARCHAR(36) COMMENT '「createdBy」- 创建人',
-    `UPDATED_AT`  DATETIME COMMENT '「updatedAt」- 更新时间',
-    `UPDATED_BY`  VARCHAR(36) COMMENT '「updatedBy」- 更新人',
+    `CREATED_AT`     DATETIME COMMENT '「createdAt」- 创建时间',
+    `CREATED_BY`     VARCHAR(36) COMMENT '「createdBy」- 创建人',
+    `UPDATED_AT`     DATETIME COMMENT '「updatedAt」- 更新时间',
+    `UPDATED_BY`     VARCHAR(36) COMMENT '「updatedBy」- 更新人',
     PRIMARY KEY (`KEY`)
 );
 

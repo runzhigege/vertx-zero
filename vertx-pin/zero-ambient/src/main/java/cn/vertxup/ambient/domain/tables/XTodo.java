@@ -35,7 +35,7 @@ public class XTodo extends TableImpl<XTodoRecord> {
      * The reference instance of <code>DB_ETERNAL.X_TODO</code>
      */
     public static final XTodo X_TODO = new XTodo();
-    private static final long serialVersionUID = 1001460536;
+    private static final long serialVersionUID = -90363195;
     /**
      * The column <code>DB_ETERNAL.X_TODO.KEY</code>. 「key」- 待办主键
      */
@@ -73,13 +73,17 @@ public class XTodo extends TableImpl<XTodoRecord> {
      */
     public final TableField<XTodoRecord, LocalDateTime> EXPIRED_AT = createField("EXPIRED_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「expiredAt」- 超时时间");
     /**
-     * The column <code>DB_ETERNAL.X_TODO.MODEL_ID</code>. 「modelId」- 组所关联的模型identifier，用于描述
+     * The column <code>DB_ETERNAL.X_TODO.MODEL_ID</code>. 「modelId」- 关联的模型identifier，用于描述
      */
-    public final TableField<XTodoRecord, String> MODEL_ID = createField("MODEL_ID", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「modelId」- 组所关联的模型identifier，用于描述");
+    public final TableField<XTodoRecord, String> MODEL_ID = createField("MODEL_ID", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「modelId」- 关联的模型identifier，用于描述");
     /**
-     * The column <code>DB_ETERNAL.X_TODO.MODEL_KEY</code>. 「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录
+     * The column <code>DB_ETERNAL.X_TODO.MODEL_KEY</code>. 「modelKey」- 关联的模型记录ID，用于描述哪一个Model中的记录
      */
-    public final TableField<XTodoRecord, String> MODEL_KEY = createField("MODEL_KEY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「modelKey」- 组所关联的模型记录ID，用于描述哪一个Model中的记录");
+    public final TableField<XTodoRecord, String> MODEL_KEY = createField("MODEL_KEY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「modelKey」- 关联的模型记录ID，用于描述哪一个Model中的记录");
+    /**
+     * The column <code>DB_ETERNAL.X_TODO.MODEL_CATEGORY</code>. 「modelCategory」- 关联的category记录，只包含叶节点
+     */
+    public final TableField<XTodoRecord, String> MODEL_CATEGORY = createField("MODEL_CATEGORY", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「modelCategory」- 关联的category记录，只包含叶节点");
     /**
      * The column <code>DB_ETERNAL.X_TODO.TO_GROUP</code>. 「toGroup」- 待办指定组
      */
