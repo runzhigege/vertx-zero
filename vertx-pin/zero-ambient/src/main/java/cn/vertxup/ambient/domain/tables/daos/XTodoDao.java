@@ -140,6 +140,13 @@ public class XTodoDao extends DAOImpl<XTodoRecord, cn.vertxup.ambient.domain.tab
     }
 
     /**
+     * Fetch records that have <code>MODEL_CATEGORY IN (values)</code>
+     */
+    public List<cn.vertxup.ambient.domain.tables.pojos.XTodo> fetchByModelCategory(String... values) {
+        return fetch(XTodo.X_TODO.MODEL_CATEGORY, values);
+    }
+
+    /**
      * Fetch records that have <code>TO_GROUP IN (values)</code>
      */
     public List<cn.vertxup.ambient.domain.tables.pojos.XTodo> fetchByToGroup(String... values) {
@@ -326,6 +333,13 @@ public class XTodoDao extends DAOImpl<XTodoRecord, cn.vertxup.ambient.domain.tab
      */
     public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XTodo>> fetchByModelKeyAsync(List<String> values) {
         return fetchAsync(XTodo.X_TODO.MODEL_KEY,values);
+    }
+
+    /**
+     * Fetch records that have <code>MODEL_CATEGORY IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ambient.domain.tables.pojos.XTodo>> fetchByModelCategoryAsync(List<String> values) {
+        return fetchAsync(XTodo.X_TODO.MODEL_CATEGORY,values);
     }
 
     /**

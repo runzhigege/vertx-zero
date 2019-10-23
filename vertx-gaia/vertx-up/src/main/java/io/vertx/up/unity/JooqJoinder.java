@@ -302,7 +302,10 @@ class JooqJoinder {
         final Field joined = toTable.getColumn(toField);
         final String toPrefix = PREFIX_MAP.get(edge.getToTable());
         final Field joinedField = DSL.field(toPrefix + "." + joined.getName());
-        return from.join(to).on(hittedField.eq(joinedField));
+        /*
+         * Left Join here
+         */
+        return from.leftJoin(to).on(hittedField.eq(joinedField));
     }
 
     private Table<Record> getTableRecord(final String table) {

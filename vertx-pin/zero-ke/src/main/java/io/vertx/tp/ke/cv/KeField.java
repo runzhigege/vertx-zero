@@ -9,6 +9,8 @@ public interface KeField {
 
     String ENTITY_ID = "entityId";
     String MODEL_ID = "modelId";
+    String MODEL_KEY = "modelKey";
+    String MODEL_CATEGORY = "modelCategory";
     String RESOURCE_ID = "resourceId";
 
     String NAME = "name";
