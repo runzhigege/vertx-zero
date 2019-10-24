@@ -2,9 +2,9 @@ package io.vertx.up.util;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Values;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -71,6 +71,16 @@ final class Statute {
             }
         });
         return result;
+    }
+
+    static JsonObject subset(final JsonObject input, final String... pickedKeys) {
+        if (Objects.isNull(input)) {
+            return new JsonObject();
+        } else {
+            final JsonObject normalized = input.copy();
+            Arrays.stream(pickedKeys).forEach(field -> normalized.put(field, input.getValue(field)));
+            return normalized;
+        }
     }
 
     static <K, V, E> ConcurrentMap<K, V> zipper(final Collection<E> object, final Function<E, K> keyFn, final Function<E, V> valueFn) {
