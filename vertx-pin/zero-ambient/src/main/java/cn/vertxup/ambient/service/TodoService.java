@@ -5,14 +5,21 @@ import cn.vertxup.ambient.domain.tables.pojos.XTodo;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.ambient.cv.AtMsg;
 import io.vertx.tp.ambient.init.AtPin;
+import io.vertx.tp.ambient.refine.At;
 import io.vertx.tp.ke.cv.KeField;
+import io.vertx.tp.optic.EcTodo;
+import io.vertx.tp.optic.Pocket;
+import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
 import java.util.Objects;
 
 public class TodoService implements TodoStub {
+    private static final Annal LOGGER = Annal.get(TodoService.class);
+
     @Override
     public Future<JsonObject> createTodo(final String type, final JsonObject data) {
         /*
@@ -50,5 +57,26 @@ public class TodoService implements TodoStub {
         return Ux.Jooq.on(XTodoDao.class)
                 .fetchAndAsync(filters)
                 .compose(Ux::fnJArray);
+    }
+
+    @Override
+    @SuppressWarnings("all")
+    public Future<JsonObject> fetchTodo(final String key) {
+        return Ux.Jooq.on(XTodoDao.class)
+                .<XTodo>findByIdAsync(key)
+                .compose(Ux::fnJObject)
+                .compose(Ux.applyNil(JsonObject::new, (todo) -> {
+                    final EcTodo todoChannel = Pocket.lookup(EcTodo.class);
+                    At.infoInit(LOGGER, AtMsg.CHANNEL_TODO, Objects.isNull(todoChannel) ? null : todoChannel.getClass().getName());
+                    return Ux.applyNil(() -> todo, () -> {
+                        /*
+                         * X_TODO channel and data merged.
+                         */
+                        final JsonObject params = Ut.elementSubset(todo,
+                                KeField.MODEL_ID, KeField.MODEL_CATEGORY, KeField.MODEL_KEY, KeField.SIGMA);
+                        return todoChannel.fetchAsync(key, params)
+                                .compose(Ux.applyField(todo, KeField.DATA));
+                    }).apply(todoChannel);
+                }));
     }
 }

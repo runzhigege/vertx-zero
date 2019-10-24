@@ -32,8 +32,7 @@ public class UiActor {
     private transient ControlStub controlStub;
 
     @Address(Addr.Page.FETCH_AMP)
-    public Future<JsonObject> fetchAmp(final String sigma,
-                                       final JsonObject body) {
+    public Future<JsonObject> fetchAmp(final String sigma, final JsonObject body) {
         return this.stub.fetchAmp(sigma, body);
     }
 
@@ -57,5 +56,10 @@ public class UiActor {
     public Future<JsonArray> fetchOps(final JsonObject body) {
         final String control = body.getString("control");
         return this.controlStub.fetchOps(control);
+    }
+
+    @Address(Addr.Control.FETCH_FORM_BY_CODE)
+    public Future<JsonObject> fetchForm(final String sigma, final String code) {
+        return this.formStub.fetchByCode(code, sigma);
     }
 }

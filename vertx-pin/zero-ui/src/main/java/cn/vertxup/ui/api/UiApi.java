@@ -1,15 +1,13 @@
 package cn.vertxup.ui.api;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ui.cv.Addr;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.EndPoint;
 import io.vertx.up.eon.ID;
 
-import javax.ws.rs.BodyParam;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 
 @EndPoint
 @Path("/api")
@@ -52,4 +50,14 @@ public interface UiApi {
     @POST
     @Address(Addr.Control.FETCH_OP)
     JsonObject fetchOp(@BodyParam JsonObject body);
+
+    /*
+     * Fetch form configuration by
+     * code, this method is for single form fetch
+     */
+    @Path("/ui/form/:code")
+    @GET
+    @Address(Addr.Control.FETCH_FORM_BY_CODE)
+    JsonObject fetchForm(@HeaderParam(ID.Header.X_SIGMA) String sigma,
+                         @PathParam(KeField.CODE) String name);
 }

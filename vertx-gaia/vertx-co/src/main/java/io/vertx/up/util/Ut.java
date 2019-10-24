@@ -73,6 +73,10 @@ public final class Ut {
         return Jackson.mergeZip(source, target, sourceKey, targetKey);
     }
 
+    public static JsonObject elementSubset(final JsonObject input, final String... fields) {
+        return Statute.subset(input, fields);
+    }
+
     public static <F, S, T> List<T> elementZip(final List<F> first, final List<S> second, final BiFunction<F, S, T> function) {
         return Statute.zipper(first, second, function);
     }

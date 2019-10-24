@@ -1,6 +1,7 @@
 package io.vertx.tp.ke.cv;
 
 public interface KeField {
+    String ITEMS = "items";
     String DATA_KEY = "dataKey";
     String APP_KEY = "appKey";
     String APP_ID = "appId";

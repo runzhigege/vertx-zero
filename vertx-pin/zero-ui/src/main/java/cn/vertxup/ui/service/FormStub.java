@@ -8,4 +8,9 @@ public interface FormStub {
      * By id
      */
     Future<JsonObject> fetchById(String formId);
+
+    /*
+     * By code & sigma
+     */
+    Future<JsonObject> fetchByCode(String code, String sigma);
 }
