@@ -14,6 +14,7 @@ public interface KeField {
     String MODEL_CATEGORY = "modelCategory";
     String RESOURCE_ID = "resourceId";
 
+    String DEBUG = "debug";
     String NAME = "name";
     String CODE = "code";
     String TYPE = "type";

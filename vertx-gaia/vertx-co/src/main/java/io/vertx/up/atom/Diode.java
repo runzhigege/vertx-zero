@@ -94,4 +94,12 @@ public class Diode implements Serializable {
     public Set<String> values() {
         return new HashSet<>(this.vector.values());
     }
+
+    @Override
+    public String toString() {
+        return "Diode{" +
+                "vector=" + this.vector +
+                ", revert=" + this.revert +
+                '}';
+    }
 }
