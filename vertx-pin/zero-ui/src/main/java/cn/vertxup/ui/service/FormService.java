@@ -55,7 +55,11 @@ public class FormService implements FormStub {
                          * form / fields combine here
                          */
                         final JsonObject formJson = Ut.serializeJson(form);
-                        return this.attachConfig(formJson);
+                        return this.attachConfig(formJson)
+                                /*
+                                 * Adapter for form configuration
+                                 */
+                                .compose(config -> Ux.toFuture(config.getJsonObject("form")));
                     }
                 });
     }

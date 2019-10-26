@@ -21,6 +21,9 @@ public interface KeField {
     String SERIAL = "serial";
     String NAMESPACE = "namespace";
 
+    String OUT = "out";
+    String IN = "in";
+
     String METADATA = "metadata";
     String SERVICE = "service";
     String DATA = "data";
@@ -36,7 +39,7 @@ public interface KeField {
     String ACTOR = "actor";
     String QUERY = "query";
 
-
+    String MAPPING = "mapping";
     String SOURCE = "source";
 
     String METHOD = "method";

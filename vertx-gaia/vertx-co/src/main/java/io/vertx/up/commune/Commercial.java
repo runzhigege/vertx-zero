@@ -1,6 +1,8 @@
 package io.vertx.up.commune;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.atom.Diode;
+import io.vertx.up.commune.config.Adminicle;
 import io.vertx.up.commune.config.Database;
 import io.vertx.up.commune.config.Integration;
 import io.vertx.up.eon.em.ChannelType;
@@ -47,9 +49,26 @@ public interface Commercial extends Application, Json {
     Integration integration();
 
     /*
+     * Get adminicle reference
+     */
+    Adminicle adminicle();
+
+    /*
      * Get business component config
      */
     JsonObject options();
+
+    /*
+     * Get in / out channel building based on
+     * `options`
+     * {
+     *     "mapping": {}
+     * }
+     * This option could build Diode object for prepare
+     * 1) From -> To
+     * 2) To -> From
+     */
+    Diode mapping();
 }
 
 interface Application {

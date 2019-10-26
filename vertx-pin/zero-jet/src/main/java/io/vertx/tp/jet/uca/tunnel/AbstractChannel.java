@@ -4,11 +4,14 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error._501ChannelErrorException;
 import io.vertx.tp.jet.monitor.JtMonitor;
+import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.optic.jet.JtChannel;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.annotations.Contract;
+import io.vertx.up.atom.Diode;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.*;
+import io.vertx.up.commune.config.Adminicle;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
@@ -79,15 +82,19 @@ public abstract class AbstractChannel implements JtChannel {
                  * Initialized first and then
                  */
                 Ux.debug();
+                /*
+                 * Options without `mapping` here
+                 */
                 return this.initAsync(component, request)
                         /*
                          * Debug for trace errors
                          */
                         .otherwise(error -> Ux.debug(error, () -> Boolean.FALSE))
                         /*
-                         * options injection
+                         * 1) JsonObject: options ( without `mapping` )
+                         * 2)
                          */
-                        .compose(child -> Ut.contractAsync(component, JsonObject.class, this.commercial.options()))
+                        .compose(child -> this.contractReference(component))
                         /*
                          * Children initialized
                          */
@@ -109,6 +116,29 @@ public abstract class AbstractChannel implements JtChannel {
                  */
                 return Future.failedFuture(new _501ChannelErrorException(this.getClass(), componentClass.getName()));
             }
+        }
+    }
+
+    private <V> Future<Boolean> contractReference(final JtComponent component) {
+        final Commercial commercial = this.commercial;
+        if (Objects.nonNull(commercial)) {
+            /*
+             * JsonObject options inject ( without `mapping` node for Diode )
+             */
+            final JsonObject options = commercial.options();
+            if (Ut.notNil(options)) {
+                final JsonObject injectOpt = options.copy();
+                injectOpt.remove(KeField.MAPPING);
+                Ut.contract(component, JsonObject.class, injectOpt);
+            }
+            /*
+             * Diode: mapping, Adminicle: reference
+             */
+            Ut.contract(component, Diode.class, commercial.mapping());
+            Ut.contract(component, Adminicle.class, commercial.adminicle());
+            return Future.succeededFuture(Boolean.TRUE);
+        } else {
+            return Future.succeededFuture(Boolean.TRUE);
         }
     }
 

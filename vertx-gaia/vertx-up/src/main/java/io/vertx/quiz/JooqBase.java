@@ -5,8 +5,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.RunTestOnContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
+import io.vertx.up.atom.Kv;
 import io.vertx.up.log.Annal;
-import io.vertx.up.uca.container.Kv;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.unity.UxJooq;
 import org.jooq.Condition;
@@ -34,7 +34,7 @@ public abstract class JooqBase extends AsyncBase {
     public <T> void asyncJooq(final TestContext context,
                               final Supplier<Future<T>> supplier,
                               final Consumer<T> function) {
-        asyncJooq(context, supplier, function, this::getDao);
+        this.asyncJooq(context, supplier, function, this::getDao);
     }
 
     private <T> void asyncJooq(final TestContext context,
@@ -53,13 +53,13 @@ public abstract class JooqBase extends AsyncBase {
     }
 
     public Condition condAnd(final String filename) {
-        final JsonObject filters = ioJObject(filename);
+        final JsonObject filters = this.ioJObject(filename);
         return UxJooq.transform(filters, Operator.AND);
     }
 
     public <T> void notNull(final T entity, final TestContext context) {
         context.assertNotNull(entity);
-        Annal.get(getClass()).debug("[ ZERO ] {0}", entity.getClass());
+        Annal.get(this.getClass()).debug("[ ZERO ] {0}", entity.getClass());
     }
 
     protected void fetchOneAsync(
@@ -80,7 +80,7 @@ public abstract class JooqBase extends AsyncBase {
             if (null != pojo) {
                 jooq = jooq.on(pojo);
             }
-            async(context,
+            this.async(context,
                     jooq.fetchOneAsync(kv.getKey(), kv.getValue()),
                     context::assertNotNull);
         });
@@ -92,13 +92,13 @@ public abstract class JooqBase extends AsyncBase {
             final String pojo,
             final String... files) {
         final List<JsonObject> filters = new ArrayList<>();
-        Arrays.stream(files).forEach(file -> filters.add(ioJObject(file)));
+        Arrays.stream(files).forEach(file -> filters.add(this.ioJObject(file)));
         filters.forEach(filter -> {
             UxJooq jooq = Ux.Jooq.on(clazz);
             if (null != pojo) {
                 jooq = jooq.on(pojo);
             }
-            async(context,
+            this.async(context,
                     jooq.fetchOneAsync(filter),
                     context::assertNotNull);
         });

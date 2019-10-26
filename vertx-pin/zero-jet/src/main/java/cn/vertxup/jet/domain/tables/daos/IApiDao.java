@@ -175,6 +175,13 @@ public class IApiDao extends DAOImpl<IApiRecord, cn.vertxup.jet.domain.tables.po
     }
 
     /**
+     * Fetch records that have <code>OUT_WRITER IN (values)</code>
+     */
+    public List<cn.vertxup.jet.domain.tables.pojos.IApi> fetchByOutWriter(String... values) {
+        return fetch(IApi.I_API.OUT_WRITER, values);
+    }
+
+    /**
      * Fetch records that have <code>WORKER_TYPE IN (values)</code>
      */
     public List<cn.vertxup.jet.domain.tables.pojos.IApi> fetchByWorkerType(String... values) {
@@ -207,13 +214,6 @@ public class IApiDao extends DAOImpl<IApiRecord, cn.vertxup.jet.domain.tables.po
      */
     public List<cn.vertxup.jet.domain.tables.pojos.IApi> fetchByWorkerJs(String... values) {
         return fetch(IApi.I_API.WORKER_JS, values);
-    }
-
-    /**
-     * Fetch records that have <code>OUT_WRITER IN (values)</code>
-     */
-    public List<cn.vertxup.jet.domain.tables.pojos.IApi> fetchByOutWriter(String... values) {
-        return fetch(IApi.I_API.OUT_WRITER, values);
     }
 
     /**
@@ -399,6 +399,13 @@ public class IApiDao extends DAOImpl<IApiRecord, cn.vertxup.jet.domain.tables.po
     }
 
     /**
+     * Fetch records that have <code>OUT_WRITER IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IApi>> fetchByOutWriterAsync(List<String> values) {
+        return fetchAsync(IApi.I_API.OUT_WRITER,values);
+    }
+
+    /**
      * Fetch records that have <code>WORKER_TYPE IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IApi>> fetchByWorkerTypeAsync(List<String> values) {
@@ -431,13 +438,6 @@ public class IApiDao extends DAOImpl<IApiRecord, cn.vertxup.jet.domain.tables.po
      */
     public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IApi>> fetchByWorkerJsAsync(List<String> values) {
         return fetchAsync(IApi.I_API.WORKER_JS,values);
-    }
-
-    /**
-     * Fetch records that have <code>OUT_WRITER IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IApi>> fetchByOutWriterAsync(List<String> values) {
-        return fetchAsync(IApi.I_API.OUT_WRITER,values);
     }
 
     /**

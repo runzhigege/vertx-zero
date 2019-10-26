@@ -46,19 +46,30 @@ CREATE TABLE IF NOT EXISTS I_SERVICE
      * 中间层专用信息
      * Channel：只可见 Envelop，生成 ActIn，并且传入
      * Component：只可见 Record，生成 ActOut
+     *
+     * 构造最终对象：io.vertx.up.commune.config.Integration
+     * 构造最终对象：io.vertx.up.commune.config.Database
+     * 构造最终对象：io.vertx.up.commune.config.Adminicle
      */
     `CONFIG_CHANNEL`     TEXT COMMENT '「configChannel」- 通道（自定义）配置信息，Channel专用',
     `CONFIG_INTEGRATION` TEXT COMMENT '「configIntegration」- 集成配置信息，第三方专用',
     `CONFIG_DATABASE`    TEXT COMMENT '「configDatabase」- 数据库配置，当前通道访问的Database',
-    `CONFIG_SERVICE`     TEXT COMMENT '「configService」- 业务组件配置，业务组件专用',
-
+    `CONFIG_ADMINICLE`   TEXT COMMENT '「configAdminicle」- 字典的数据配置',
     /*
      * 服务组件定义，消费 ActIn，并且生成 ActOut
      * 1）只消费 ActIn，不消费 Envelop（下层转换成 ZRecord 和 ActRequest执行，不再处理 Envelop）
      * 2）当前服务组件需要使用的 Record 类型（框架初始化，提交给内置使用），必须实现 Record 接口（ZRecord对Channel不可见）
+     *
+     * serviceConfig 用于构造 in / out 中的特殊结构 Diode
+     * 构造最终对象
+     * {
+     *     "mapping": {
+     *     }
+     * }
      */
     `SERVICE_RECORD`     VARCHAR(255) COMMENT '「serviceRecord」- 服务记录定义',
     `SERVICE_COMPONENT`  VARCHAR(255) COMMENT '「serviceComponent」- 服务组件定义',
+    `SERVICE_CONFIG`     TEXT COMMENT '「serviceConfig」- 业务组件配置，业务组件专用',
 
     -- 当前服务描述的模型identifier
     `IDENTIFIER`         VARCHAR(255) COMMENT '「identifier」- 当前类型描述的Model的标识',

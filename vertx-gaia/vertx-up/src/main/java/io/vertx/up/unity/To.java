@@ -4,7 +4,7 @@ import io.reactivex.Observable;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.atom.Mirror;
+import io.vertx.up.atom.pojo.Mirror;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.commune.Record;
 import io.vertx.up.exception.WebException;

@@ -154,10 +154,10 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.domain.t
     }
 
     /**
-     * Fetch records that have <code>CONFIG_SERVICE IN (values)</code>
+     * Fetch records that have <code>CONFIG_ADMINICLE IN (values)</code>
      */
-    public List<cn.vertxup.jet.domain.tables.pojos.IService> fetchByConfigService(String... values) {
-        return fetch(IService.I_SERVICE.CONFIG_SERVICE, values);
+    public List<cn.vertxup.jet.domain.tables.pojos.IService> fetchByConfigAdminicle(String... values) {
+        return fetch(IService.I_SERVICE.CONFIG_ADMINICLE, values);
     }
 
     /**
@@ -172,6 +172,13 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.domain.t
      */
     public List<cn.vertxup.jet.domain.tables.pojos.IService> fetchByServiceComponent(String... values) {
         return fetch(IService.I_SERVICE.SERVICE_COMPONENT, values);
+    }
+
+    /**
+     * Fetch records that have <code>SERVICE_CONFIG IN (values)</code>
+     */
+    public List<cn.vertxup.jet.domain.tables.pojos.IService> fetchByServiceConfig(String... values) {
+        return fetch(IService.I_SERVICE.SERVICE_CONFIG, values);
     }
 
     /**
@@ -336,10 +343,10 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.domain.t
     }
 
     /**
-     * Fetch records that have <code>CONFIG_SERVICE IN (values)</code> asynchronously
+     * Fetch records that have <code>CONFIG_ADMINICLE IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IService>> fetchByConfigServiceAsync(List<String> values) {
-        return fetchAsync(IService.I_SERVICE.CONFIG_SERVICE,values);
+    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IService>> fetchByConfigAdminicleAsync(List<String> values) {
+        return fetchAsync(IService.I_SERVICE.CONFIG_ADMINICLE,values);
     }
 
     /**
@@ -354,6 +361,13 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.domain.t
      */
     public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IService>> fetchByServiceComponentAsync(List<String> values) {
         return fetchAsync(IService.I_SERVICE.SERVICE_COMPONENT,values);
+    }
+
+    /**
+     * Fetch records that have <code>SERVICE_CONFIG IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IService>> fetchByServiceConfigAsync(List<String> values) {
+        return fetchAsync(IService.I_SERVICE.SERVICE_CONFIG,values);
     }
 
     /**

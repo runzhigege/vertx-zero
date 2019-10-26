@@ -8,10 +8,10 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.core.shareddata.AsyncMap;
 import io.vertx.core.shareddata.LocalMap;
 import io.vertx.core.shareddata.SharedData;
+import io.vertx.up.atom.Kv;
 import io.vertx.up.exception.web._501SharedDataModeException;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.uca.container.Kv;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

@@ -8,6 +8,7 @@ import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.atom.JtConfig;
 import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.atom.JtWorker;
+import io.vertx.up.commune.config.Adminicle;
 import io.vertx.up.commune.config.Database;
 import io.vertx.up.commune.config.Integration;
 import io.vertx.up.eon.Strings;
@@ -70,6 +71,10 @@ public class Jt {
 
     public static Integration toIntegration(final Supplier<String> supplier) {
         return JtDataObject.toIntegration(supplier);
+    }
+
+    public static Adminicle toAdmincle(final Supplier<String> supplier) {
+        return JtDataObject.toAdminicle(supplier);
     }
 
     public static Set<String> toSet(final Supplier<String> supplier) {
