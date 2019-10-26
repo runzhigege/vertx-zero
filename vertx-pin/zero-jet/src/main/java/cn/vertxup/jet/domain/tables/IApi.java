@@ -35,7 +35,7 @@ public class IApi extends TableImpl<IApiRecord> {
      * The reference instance of <code>DB_ETERNAL.I_API</code>
      */
     public static final IApi I_API = new IApi();
-    private static final long serialVersionUID = -1649445559;
+    private static final long serialVersionUID = -412045819;
     /**
      * The column <code>DB_ETERNAL.I_API.KEY</code>. 「key」- 接口ID
      */
@@ -101,6 +101,10 @@ public class IApi extends TableImpl<IApiRecord> {
      */
     public final TableField<IApiRecord, String> IN_SCRIPT = createField("IN_SCRIPT", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「inScript」- 【保留】参数请求流程中的脚本控制");
     /**
+     * The column <code>DB_ETERNAL.I_API.OUT_WRITER</code>. 「outWriter」- 响应格式处理器
+     */
+    public final TableField<IApiRecord, String> OUT_WRITER = createField("OUT_WRITER", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「outWriter」- 响应格式处理器");
+    /**
      * The column <code>DB_ETERNAL.I_API.WORKER_TYPE</code>. 「workerType」- Worker类型：JS / PLUG / STD
      */
     public final TableField<IApiRecord, String> WORKER_TYPE = createField("WORKER_TYPE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「workerType」- Worker类型：JS / PLUG / STD");
@@ -120,10 +124,6 @@ public class IApi extends TableImpl<IApiRecord> {
      * The column <code>DB_ETERNAL.I_API.WORKER_JS</code>. 「workerJs」- JS 专用，JavaScript路径：runtime/workers/&lt;app&gt;/下的执行器
      */
     public final TableField<IApiRecord, String> WORKER_JS = createField("WORKER_JS", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「workerJs」- JS 专用，JavaScript路径：runtime/workers/<app>/下的执行器");
-    /**
-     * The column <code>DB_ETERNAL.I_API.OUT_WRITER</code>. 「outWriter」- 响应格式处理器
-     */
-    public final TableField<IApiRecord, String> OUT_WRITER = createField("OUT_WRITER", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「outWriter」- 响应格式处理器");
     /**
      * The column <code>DB_ETERNAL.I_API.SERVICE_ID</code>. 「serviceId」- 关联的服务ID
      */

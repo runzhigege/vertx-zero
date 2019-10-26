@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IApi implements IIApi {
 
-    private static final long serialVersionUID = -1022872818;
+    private static final long serialVersionUID = -1038406780;
 
     private String        key;
     private String        name;
@@ -42,12 +42,12 @@ public class IApi implements IIApi {
     private String        inMapping;
     private String        inPlug;
     private String        inScript;
+    private String        outWriter;
     private String        workerType;
     private String        workerAddress;
     private String        workerConsumer;
     private String        workerClass;
     private String        workerJs;
-    private String        outWriter;
     private String        serviceId;
     private String        sigma;
     private String        language;
@@ -77,12 +77,12 @@ public class IApi implements IIApi {
         this.inMapping = value.inMapping;
         this.inPlug = value.inPlug;
         this.inScript = value.inScript;
+        this.outWriter = value.outWriter;
         this.workerType = value.workerType;
         this.workerAddress = value.workerAddress;
         this.workerConsumer = value.workerConsumer;
         this.workerClass = value.workerClass;
         this.workerJs = value.workerJs;
-        this.outWriter = value.outWriter;
         this.serviceId = value.serviceId;
         this.sigma = value.sigma;
         this.language = value.language;
@@ -111,12 +111,12 @@ public class IApi implements IIApi {
         String        inMapping,
         String        inPlug,
         String        inScript,
+        String        outWriter,
         String        workerType,
         String        workerAddress,
         String        workerConsumer,
         String        workerClass,
         String        workerJs,
-        String        outWriter,
         String        serviceId,
         String        sigma,
         String        language,
@@ -143,12 +143,12 @@ public class IApi implements IIApi {
         this.inMapping = inMapping;
         this.inPlug = inPlug;
         this.inScript = inScript;
+        this.outWriter = outWriter;
         this.workerType = workerType;
         this.workerAddress = workerAddress;
         this.workerConsumer = workerConsumer;
         this.workerClass = workerClass;
         this.workerJs = workerJs;
-        this.outWriter = outWriter;
         this.serviceId = serviceId;
         this.sigma = sigma;
         this.language = language;
@@ -337,6 +337,17 @@ public class IApi implements IIApi {
     }
 
     @Override
+    public String getOutWriter() {
+        return this.outWriter;
+    }
+
+    @Override
+    public IApi setOutWriter(String outWriter) {
+        this.outWriter = outWriter;
+        return this;
+    }
+
+    @Override
     public String getWorkerType() {
         return this.workerType;
     }
@@ -388,17 +399,6 @@ public class IApi implements IIApi {
     @Override
     public IApi setWorkerJs(String workerJs) {
         this.workerJs = workerJs;
-        return this;
-    }
-
-    @Override
-    public String getOutWriter() {
-        return this.outWriter;
-    }
-
-    @Override
-    public IApi setOutWriter(String outWriter) {
-        this.outWriter = outWriter;
         return this;
     }
 
@@ -521,12 +521,12 @@ public class IApi implements IIApi {
         sb.append(", ").append(inMapping);
         sb.append(", ").append(inPlug);
         sb.append(", ").append(inScript);
+        sb.append(", ").append(outWriter);
         sb.append(", ").append(workerType);
         sb.append(", ").append(workerAddress);
         sb.append(", ").append(workerConsumer);
         sb.append(", ").append(workerClass);
         sb.append(", ").append(workerJs);
-        sb.append(", ").append(outWriter);
         sb.append(", ").append(serviceId);
         sb.append(", ").append(sigma);
         sb.append(", ").append(language);
@@ -566,12 +566,12 @@ public class IApi implements IIApi {
         setInMapping(from.getInMapping());
         setInPlug(from.getInPlug());
         setInScript(from.getInScript());
+        setOutWriter(from.getOutWriter());
         setWorkerType(from.getWorkerType());
         setWorkerAddress(from.getWorkerAddress());
         setWorkerConsumer(from.getWorkerConsumer());
         setWorkerClass(from.getWorkerClass());
         setWorkerJs(from.getWorkerJs());
-        setOutWriter(from.getOutWriter());
         setServiceId(from.getServiceId());
         setSigma(from.getSigma());
         setLanguage(from.getLanguage());

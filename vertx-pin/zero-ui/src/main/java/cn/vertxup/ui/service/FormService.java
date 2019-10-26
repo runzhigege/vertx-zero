@@ -33,14 +33,40 @@ public class FormService implements FormStub {
                          * form / fields combine here
                          */
                         final JsonObject formJson = Ut.serializeJson(form);
-                        Ke.metadata(formJson, KeField.METADATA);
                         return this.attachConfig(formJson);
+                    }
+                });
+    }
+
+    @Override
+    public Future<JsonObject> fetchByCode(final String code, final String sigma) {
+        final JsonObject filters = new JsonObject();
+        filters.put(KeField.CODE, code);
+        filters.put(KeField.SIGMA, sigma);
+        filters.put("", Boolean.TRUE);
+        return Ux.Jooq.on(UiFormDao.class)
+                .<UiForm>fetchOneAsync(filters)
+                .compose(form -> {
+                    if (Objects.isNull(form)) {
+                        Ui.infoWarn(FormService.LOGGER, " Form not found, code = {0}, sigma = {1}", code, sigma);
+                        return Ux.toFuture(new JsonObject());
+                    } else {
+                        /*
+                         * form / fields combine here
+                         */
+                        final JsonObject formJson = Ut.serializeJson(form);
+                        return this.attachConfig(formJson)
+                                /*
+                                 * Adapter for form configuration
+                                 */
+                                .compose(config -> Ux.toFuture(config.getJsonObject("form")));
                     }
                 });
     }
 
     private Future<JsonObject> attachConfig(final JsonObject formJson) {
         final JsonObject config = new JsonObject();
+        Ke.metadata(formJson, KeField.METADATA);
         /*
          * Form configuration
          * window and columns are required

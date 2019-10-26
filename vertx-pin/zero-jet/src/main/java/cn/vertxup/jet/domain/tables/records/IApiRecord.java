@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements IIApi {
 
-    private static final long serialVersionUID = -1306046493;
+    private static final long serialVersionUID = 520198045;
 
     /**
      * Setter for <code>DB_ETERNAL.I_API.KEY</code>. 「key」- 接口ID
@@ -303,96 +303,11 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements IIApi
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.I_API.WORKER_TYPE</code>. 「workerType」- Worker类型：JS / PLUG / STD
-     */
-    @Override
-    public IApiRecord setWorkerType(String value) {
-        set(16, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.I_API.WORKER_TYPE</code>. 「workerType」- Worker类型：JS / PLUG / STD
-     */
-    @Override
-    public String getWorkerType() {
-        return (String) get(16);
-    }
-
-    /**
-     * Setter for <code>DB_ETERNAL.I_API.WORKER_ADDRESS</code>. 「workerAddress」- 请求发送地址
-     */
-    @Override
-    public IApiRecord setWorkerAddress(String value) {
-        set(17, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.I_API.WORKER_ADDRESS</code>. 「workerAddress」- 请求发送地址
-     */
-    @Override
-    public String getWorkerAddress() {
-        return (String) get(17);
-    }
-
-    /**
-     * Setter for <code>DB_ETERNAL.I_API.WORKER_CONSUMER</code>. 「workerConsumer」- 请求地址消费专用组件
-     */
-    @Override
-    public IApiRecord setWorkerConsumer(String value) {
-        set(18, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.I_API.WORKER_CONSUMER</code>. 「workerConsumer」- 请求地址消费专用组件
-     */
-    @Override
-    public String getWorkerConsumer() {
-        return (String) get(18);
-    }
-
-    /**
-     * Setter for <code>DB_ETERNAL.I_API.WORKER_CLASS</code>. 「workerClass」- OX | PLUG专用，请求执行器对应的JavaClass名称
-     */
-    @Override
-    public IApiRecord setWorkerClass(String value) {
-        set(19, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.I_API.WORKER_CLASS</code>. 「workerClass」- OX | PLUG专用，请求执行器对应的JavaClass名称
-     */
-    @Override
-    public String getWorkerClass() {
-        return (String) get(19);
-    }
-
-    /**
-     * Setter for <code>DB_ETERNAL.I_API.WORKER_JS</code>. 「workerJs」- JS 专用，JavaScript路径：runtime/workers/&lt;app&gt;/下的执行器
-     */
-    @Override
-    public IApiRecord setWorkerJs(String value) {
-        set(20, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.I_API.WORKER_JS</code>. 「workerJs」- JS 专用，JavaScript路径：runtime/workers/&lt;app&gt;/下的执行器
-     */
-    @Override
-    public String getWorkerJs() {
-        return (String) get(20);
-    }
-
-    /**
      * Setter for <code>DB_ETERNAL.I_API.OUT_WRITER</code>. 「outWriter」- 响应格式处理器
      */
     @Override
     public IApiRecord setOutWriter(String value) {
-        set(21, value);
+        set(16, value);
         return this;
     }
 
@@ -401,6 +316,91 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements IIApi
      */
     @Override
     public String getOutWriter() {
+        return (String) get(16);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_API.WORKER_TYPE</code>. 「workerType」- Worker类型：JS / PLUG / STD
+     */
+    @Override
+    public IApiRecord setWorkerType(String value) {
+        set(17, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_API.WORKER_TYPE</code>. 「workerType」- Worker类型：JS / PLUG / STD
+     */
+    @Override
+    public String getWorkerType() {
+        return (String) get(17);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_API.WORKER_ADDRESS</code>. 「workerAddress」- 请求发送地址
+     */
+    @Override
+    public IApiRecord setWorkerAddress(String value) {
+        set(18, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_API.WORKER_ADDRESS</code>. 「workerAddress」- 请求发送地址
+     */
+    @Override
+    public String getWorkerAddress() {
+        return (String) get(18);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_API.WORKER_CONSUMER</code>. 「workerConsumer」- 请求地址消费专用组件
+     */
+    @Override
+    public IApiRecord setWorkerConsumer(String value) {
+        set(19, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_API.WORKER_CONSUMER</code>. 「workerConsumer」- 请求地址消费专用组件
+     */
+    @Override
+    public String getWorkerConsumer() {
+        return (String) get(19);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_API.WORKER_CLASS</code>. 「workerClass」- OX | PLUG专用，请求执行器对应的JavaClass名称
+     */
+    @Override
+    public IApiRecord setWorkerClass(String value) {
+        set(20, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_API.WORKER_CLASS</code>. 「workerClass」- OX | PLUG专用，请求执行器对应的JavaClass名称
+     */
+    @Override
+    public String getWorkerClass() {
+        return (String) get(20);
+    }
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_API.WORKER_JS</code>. 「workerJs」- JS 专用，JavaScript路径：runtime/workers/&lt;app&gt;/下的执行器
+     */
+    @Override
+    public IApiRecord setWorkerJs(String value) {
+        set(21, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_API.WORKER_JS</code>. 「workerJs」- JS 专用，JavaScript路径：runtime/workers/&lt;app&gt;/下的执行器
+     */
+    @Override
+    public String getWorkerJs() {
         return (String) get(21);
     }
 
@@ -594,12 +594,12 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements IIApi
         setInMapping(from.getInMapping());
         setInPlug(from.getInPlug());
         setInScript(from.getInScript());
+        setOutWriter(from.getOutWriter());
         setWorkerType(from.getWorkerType());
         setWorkerAddress(from.getWorkerAddress());
         setWorkerConsumer(from.getWorkerConsumer());
         setWorkerClass(from.getWorkerClass());
         setWorkerJs(from.getWorkerJs());
-        setOutWriter(from.getOutWriter());
         setServiceId(from.getServiceId());
         setSigma(from.getSigma());
         setLanguage(from.getLanguage());
@@ -634,7 +634,7 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements IIApi
     /**
      * Create a detached, initialised IApiRecord
      */
-    public IApiRecord(String key, String name, String uri, String method, String consumes, String produces, Boolean secure, String comment, String type, String paramMode, String paramRequired, String paramContained, String inRule, String inMapping, String inPlug, String inScript, String workerType, String workerAddress, String workerConsumer, String workerClass, String workerJs, String outWriter, String serviceId, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public IApiRecord(String key, String name, String uri, String method, String consumes, String produces, Boolean secure, String comment, String type, String paramMode, String paramRequired, String paramContained, String inRule, String inMapping, String inPlug, String inScript, String outWriter, String workerType, String workerAddress, String workerConsumer, String workerClass, String workerJs, String serviceId, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(IApi.I_API);
 
         set(0, key);
@@ -653,12 +653,12 @@ public class IApiRecord extends UpdatableRecordImpl<IApiRecord> implements IIApi
         set(13, inMapping);
         set(14, inPlug);
         set(15, inScript);
-        set(16, workerType);
-        set(17, workerAddress);
-        set(18, workerConsumer);
-        set(19, workerClass);
-        set(20, workerJs);
-        set(21, outWriter);
+        set(16, outWriter);
+        set(17, workerType);
+        set(18, workerAddress);
+        set(19, workerConsumer);
+        set(20, workerClass);
+        set(21, workerJs);
         set(22, serviceId);
         set(23, sigma);
         set(24, language);

@@ -23,4 +23,6 @@ public interface AtMsg {
     String UNITY_APP = "{0} Application have been initialized successfully!";
 
     String UNITY_SOURCE = "{0} Data source have been initialized successfully!";
+
+    String CHANNEL_TODO = "Todo channel selected: {0}";
 }

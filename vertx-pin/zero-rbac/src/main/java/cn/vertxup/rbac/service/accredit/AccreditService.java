@@ -5,7 +5,7 @@ import cn.vertxup.rbac.domain.tables.pojos.SResource;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.atom.ScRequest;
-import io.vertx.up.uca.container.Refer;
+import io.vertx.up.atom.Refer;
 import io.vertx.up.unity.Ux;
 
 import javax.inject.Inject;
@@ -25,28 +25,28 @@ public class AccreditService implements AccreditStub {
         /* Refer for action / resource */
         final Refer actionHod = new Refer();
         final Refer resourceHod = new Refer();
-        return authorizedWithCache(request, () -> actionStub.fetchAction(request.getNormalizedUri(), request.getMethod(), request.getSigma())
+        return this.authorizedWithCache(request, () -> this.actionStub.fetchAction(request.getNormalizedUri(), request.getMethod(), request.getSigma())
 
                 /* SAction checking for ( Uri + Method ) */
-                .compose(action -> AccreditFlow.inspectAction(getClass(), action, request))
+                .compose(action -> AccreditFlow.inspectAction(this.getClass(), action, request))
                 .compose(actionHod::future)
-                .compose(action -> actionStub.fetchResource(action.getResourceId()))
+                .compose(action -> this.actionStub.fetchResource(action.getResourceId()))
 
                 /* SResource checking for ( ResourceId */
-                .compose(resource -> AccreditFlow.inspectResource(getClass(), resource, request, actionHod.get()))
+                .compose(resource -> AccreditFlow.inspectResource(this.getClass(), resource, request, actionHod.get()))
 
                 /* Action Level Comparing */
-                .compose(resource -> AccreditFlow.inspectLevel(getClass(), resource, actionHod.get()))
+                .compose(resource -> AccreditFlow.inspectLevel(this.getClass(), resource, actionHod.get()))
                 .compose(resourceHod::future)
 
                 /* Find Profile Permission and Check Profile */
-                .compose(resource -> AccreditFlow.inspectPermission(getClass(), resource, request))
+                .compose(resource -> AccreditFlow.inspectPermission(this.getClass(), resource, request))
 
                 /* Permission / Action Comparing */
-                .compose(permissions -> AccreditFlow.inspectAuthorized(getClass(), actionHod.get(), permissions))
+                .compose(permissions -> AccreditFlow.inspectAuthorized(this.getClass(), actionHod.get(), permissions))
 
                 /* The Final steps to execute matrix data here. */
-                .compose(result -> authorized(result, request, resourceHod.get(), actionHod.get())));
+                .compose(result -> this.authorized(result, request, resourceHod.get(), actionHod.get())));
     }
 
     private Future<Boolean> authorizedWithCache(final ScRequest request, final Supplier<Future<Boolean>> supplier) {
@@ -62,7 +62,7 @@ public class AccreditService implements AccreditStub {
     private Future<Boolean> authorized(final Boolean result, final ScRequest request,
                                        final SResource resource, final SAction action) {
         if (result) {
-            return matrixStub.fetchBound(request, resource)
+            return this.matrixStub.fetchBound(request, resource)
                     /* DataBound credit parsing from SAction */
                     .compose(bound -> Ux.toFuture(bound.addCredit(action.getRenewalCredit())))
                     /* DataBound stored */

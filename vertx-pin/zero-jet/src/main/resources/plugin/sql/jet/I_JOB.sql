@@ -21,7 +21,6 @@ CREATE TABLE IF NOT EXISTS I_JOB
     `RUN_AT`            DATETIME COMMENT '「runAt」- 定时任务中的JOB时间',
     `DURATION`          BIGINT COMMENT '「duration」- JOB的间隔时间',
     `PROXY`             VARCHAR(255) COMMENT '「proxy」- 代理类，带有@On/@Off',
-
     /*
      * JOB的出入配置，优先级：
      * 1. 配置优先（也就是存在这四个字段中的值优先）
