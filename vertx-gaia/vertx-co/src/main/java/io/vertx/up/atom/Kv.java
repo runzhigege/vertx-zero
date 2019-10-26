@@ -1,8 +1,13 @@
-package io.vertx.up.uca.container;
+package io.vertx.up.atom;
 
 import java.util.Map;
 import java.util.Objects;
 
+/*
+ * [Data Structure]
+ * Definition for `key = value` pair here
+ * It stored `key = value` and act as Pair here for some spec usage
+ */
 public final class Kv<K, V> {
     private K key;
     private V value;
@@ -22,11 +27,11 @@ public final class Kv<K, V> {
     }
 
     public final K getKey() {
-        return key;
+        return this.key;
     }
 
     public final V getValue() {
-        return value;
+        return this.value;
     }
 
     public void set(final K key, final V value) {
@@ -36,7 +41,7 @@ public final class Kv<K, V> {
 
     @Override
     public final int hashCode() {
-        return Objects.hashCode(key) ^ Objects.hashCode(value);
+        return Objects.hashCode(this.key) ^ Objects.hashCode(this.value);
     }
 
     @Override
@@ -46,8 +51,8 @@ public final class Kv<K, V> {
         }
         if (o instanceof Map.Entry) {
             final Map.Entry<?, ?> e = (Map.Entry<?, ?>) o;
-            return Objects.equals(key, e.getKey()) &&
-                    Objects.equals(value, e.getValue());
+            return Objects.equals(this.key, e.getKey()) &&
+                    Objects.equals(this.value, e.getValue());
         }
         return false;
     }
@@ -55,8 +60,8 @@ public final class Kv<K, V> {
     @Override
     public String toString() {
         return "Kv{" +
-                "key=" + key +
-                ", value=" + value +
+                "key=" + this.key +
+                ", value=" + this.value +
                 '}';
     }
 }

@@ -13,8 +13,19 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Objects;
 
-/**
+/*
  * Database linker for JDBC
+ * {
+ *      "hostname": "localhost",
+ *      "instance": "DB_ORIGIN_X",
+ *      "username": "lang",
+ *      "password": "xxxx",
+ *      "port": 3306,
+ *      "category": "MYSQL5",
+ *      "driverClassName": "Fix driver issue here",
+ *      "jdbcUrl": "jdbc:mysql://ox.engine.cn:3306/DB_ORIGIN_X?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&useSSL=false",
+ * }
+ * I_SERVICE -> configDatabase
  */
 public class Database implements Serializable, Json {
 

@@ -1,17 +1,21 @@
-package io.vertx.up.atom;
+package io.vertx.up.atom.pojo;
 
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
-import io.vertx.up.fn.Fn;
 
 import java.text.MessageFormat;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 
-/**
+/*
+ * [Data Structure]
  * Define mapping for custom serialization/deserialization
+ * This data structure is bind to `pojo/xxx.yml` file for model mapping
+ * field -> column here.
+ * It must be used with Mojo.
  */
 public class Mirror {
 
@@ -22,7 +26,7 @@ public class Mirror {
     private transient JsonObject data = new JsonObject();
 
     private Mirror(final Class<?> clazz) {
-        logger = Annal.get(clazz);
+        this.logger = Annal.get(clazz);
     }
 
     public static Mirror create(final Class<?> clazz) {
@@ -31,8 +35,8 @@ public class Mirror {
 
     public Mirror mount(final String filename) {
         // Build meta
-        logger.info("[ ZERO ] Mount pojo configuration file {0}", filename);
-        mojo = Fn.pool(Pool.MOJOS, filename, () -> {
+        this.logger.info("[ ZERO ] Mount pojo configuration file {0}", filename);
+        this.mojo = Fn.pool(Pool.MOJOS, filename, () -> {
             final JsonObject data = Ut.ioYaml(MessageFormat.format(POJO, filename));
             return Fn.getNull(() -> Ut.deserialize(data, Mojo.class), data);
         });
@@ -40,7 +44,7 @@ public class Mirror {
     }
 
     public Mirror type(final Class<?> entityCls) {
-        mojo.setType(entityCls);
+        this.mojo.setType(entityCls);
         return this;
     }
 
@@ -51,45 +55,45 @@ public class Mirror {
     }
 
     public Mirror to() {
-        convert(mojo.getMapper());
+        this.convert(this.mojo.getMapper());
         return this;
     }
 
     public Mojo mojo() {
-        return mojo;
+        return this.mojo;
     }
 
     private void convert(final ConcurrentMap<String, String> mapper) {
-        Observable.fromIterable(data.fieldNames())
+        Observable.fromIterable(this.data.fieldNames())
                 .groupBy(mapper::containsKey)
                 .map(contain -> contain.getKey() ?
                         contain.subscribe(from -> {
                             // Existing in mapper
                             final String to = mapper.get(from);
-                            converted.put(to, data.getValue(from));
+                            this.converted.put(to, this.data.getValue(from));
                         }) :
                         contain.subscribe(item ->
                                 // Not found in mapper
-                                converted.put(item, data.getValue(item)))
+                                this.converted.put(item, this.data.getValue(item)))
                 ).subscribe().dispose();
     }
 
     public Mirror from() {
-        convert(mojo.getRevert());
+        this.convert(this.mojo.getRevert());
         return this;
     }
 
     public Mirror apply(final Function<String, String> function) {
-        final JsonObject result = data.copy();
+        final JsonObject result = this.data.copy();
         result.forEach((entry) ->
-                converted.put(function.apply(entry.getKey()),
+                this.converted.put(function.apply(entry.getKey()),
                         entry.getValue()));
         return this;
     }
 
     public JsonObject json(final Object entity, final boolean overwrite) {
         final JsonObject data = Ut.serializeJson(entity);
-        final JsonObject merged = converted.copy();
+        final JsonObject merged = this.converted.copy();
         for (final String field : data.fieldNames()) {
             if (overwrite) {
                 // If overwrite
@@ -105,11 +109,11 @@ public class Mirror {
 
     @SuppressWarnings("unchecked")
     public <T> T get() {
-        final Object reference = Ut.deserialize(converted, mojo.getType());
+        final Object reference = Ut.deserialize(this.converted, this.mojo.getType());
         return Fn.getNull(null, () -> (T) reference, reference);
     }
 
     public JsonObject result() {
-        return converted;
+        return this.converted;
     }
 }

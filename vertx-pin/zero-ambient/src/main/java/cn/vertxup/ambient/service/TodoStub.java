@@ -19,4 +19,9 @@ public interface TodoStub {
      * fetch X_TODO by `sigma` & `type` & statues
      */
     Future<JsonArray> fetchTodos(String sigma, String type, JsonArray statues);
+
+    /*
+     * fetch X_TODO by `key`
+     */
+    Future<JsonObject> fetchTodo(String key);
 }

@@ -8,6 +8,7 @@ import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.cv.JtConstant;
 import io.vertx.tp.jet.cv.em.WorkerType;
 import io.vertx.tp.ke.cv.KeField;
+import io.vertx.up.commune.config.Adminicle;
 import io.vertx.up.commune.config.Database;
 import io.vertx.up.commune.config.Integration;
 import io.vertx.up.fn.Fn;
@@ -16,6 +17,17 @@ import io.vertx.up.util.Ut;
 import java.util.function.Supplier;
 
 class JtDataObject {
+
+    static Adminicle toAdminicle(final Supplier<String> supplier) {
+        final String literal = supplier.get();
+        final Adminicle reference;
+        if (Ut.notNil(literal)) {
+            reference = new Adminicle(literal);
+        } else {
+            reference = null;
+        }
+        return reference;
+    }
 
     static Integration toIntegration(final Supplier<String> supplier) {
         final JsonObject data = Ut.toJObject(supplier.get());
@@ -63,8 +75,17 @@ class JtDataObject {
         return options;
     }
 
-    private static JsonObject toOptions(final JtApp app, final IService service) {
-        final JsonObject options = Ut.toJObject(service.getConfigService());
+    static JsonObject toOptions(final JtApp app, final IService service) {
+        /*
+         * SERVICE_CONFIG / serviceComponent options
+         * here for configuration instead of others
+         * {
+         *    "name": appName,
+         *    "identifier": <id>,
+         *    "diode": "Channel"
+         * }
+         */
+        final JsonObject options = Ut.toJObject(service.getServiceConfig());
         {
             /* default options, you can add more */
             options.put(KeField.NAME, app.getName());

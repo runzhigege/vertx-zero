@@ -96,6 +96,29 @@ public class Ambient {
     }
 
     public static JtApp getApp(final String key) {
-        return APPS.get(key);
+        /*
+         * Search JtApp environment by
+         * 1) key ( Recommend performance )
+         * 2) sigma search ( Secondary priority )
+         */
+        if (Ut.isNil(key)) {
+            return null;
+        } else {
+            final JtApp app = APPS.get(key);
+            if (Objects.isNull(app)) {
+                /*
+                 * sigma instead of appKey here
+                 */
+                return APPS.values().stream()
+                        .filter(Objects::nonNull)
+                        .filter(appItem -> key.equals(appItem.getSigma()))
+                        .findFirst().orElse(null);
+            } else {
+                /*
+                 * search app by key
+                 */
+                return app;
+            }
+        }
     }
 }

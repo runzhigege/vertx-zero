@@ -154,14 +154,14 @@ public interface IIService extends Serializable {
     public String getConfigDatabase();
 
     /**
-     * Setter for <code>DB_ETERNAL.I_SERVICE.CONFIG_SERVICE</code>. 「configService」- 业务组件配置，业务组件专用
+     * Setter for <code>DB_ETERNAL.I_SERVICE.CONFIG_ADMINICLE</code>. 「configAdminicle」- 字典的数据配置
      */
-    public IIService setConfigService(String value);
+    public IIService setConfigAdminicle(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.I_SERVICE.CONFIG_SERVICE</code>. 「configService」- 业务组件配置，业务组件专用
+     * Getter for <code>DB_ETERNAL.I_SERVICE.CONFIG_ADMINICLE</code>. 「configAdminicle」- 字典的数据配置
      */
-    public String getConfigService();
+    public String getConfigAdminicle();
 
     /**
      * Setter for <code>DB_ETERNAL.I_SERVICE.SERVICE_RECORD</code>. 「serviceRecord」- 服务记录定义
@@ -182,6 +182,16 @@ public interface IIService extends Serializable {
      * Getter for <code>DB_ETERNAL.I_SERVICE.SERVICE_COMPONENT</code>. 「serviceComponent」- 服务组件定义
      */
     public String getServiceComponent();
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.SERVICE_CONFIG</code>. 「serviceConfig」- 业务组件配置，业务组件专用
+     */
+    public IIService setServiceConfig(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.SERVICE_CONFIG</code>. 「serviceConfig」- 业务组件配置，业务组件专用
+     */
+    public String getServiceConfig();
 
     /**
      * Setter for <code>DB_ETERNAL.I_SERVICE.IDENTIFIER</code>. 「identifier」- 当前类型描述的Model的标识
@@ -301,9 +311,10 @@ public interface IIService extends Serializable {
         setConfigChannel(json.getString("CONFIG_CHANNEL"));
         setConfigIntegration(json.getString("CONFIG_INTEGRATION"));
         setConfigDatabase(json.getString("CONFIG_DATABASE"));
-        setConfigService(json.getString("CONFIG_SERVICE"));
+        setConfigAdminicle(json.getString("CONFIG_ADMINICLE"));
         setServiceRecord(json.getString("SERVICE_RECORD"));
         setServiceComponent(json.getString("SERVICE_COMPONENT"));
+        setServiceConfig(json.getString("SERVICE_CONFIG"));
         setIdentifier(json.getString("IDENTIFIER"));
         setSigma(json.getString("SIGMA"));
         setLanguage(json.getString("LANGUAGE"));
@@ -332,9 +343,10 @@ public interface IIService extends Serializable {
         json.put("CONFIG_CHANNEL",getConfigChannel());
         json.put("CONFIG_INTEGRATION",getConfigIntegration());
         json.put("CONFIG_DATABASE",getConfigDatabase());
-        json.put("CONFIG_SERVICE",getConfigService());
+        json.put("CONFIG_ADMINICLE",getConfigAdminicle());
         json.put("SERVICE_RECORD",getServiceRecord());
         json.put("SERVICE_COMPONENT",getServiceComponent());
+        json.put("SERVICE_CONFIG",getServiceConfig());
         json.put("IDENTIFIER",getIdentifier());
         json.put("SIGMA",getSigma());
         json.put("LANGUAGE",getLanguage());

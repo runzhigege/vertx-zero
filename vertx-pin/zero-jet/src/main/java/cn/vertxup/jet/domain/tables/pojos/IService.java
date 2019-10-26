@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IService implements IIService {
 
-    private static final long serialVersionUID = 1468083491;
+    private static final long serialVersionUID = -898249001;
 
     private String        key;
     private String        namespace;
@@ -39,9 +39,10 @@ public class IService implements IIService {
     private String        configChannel;
     private String        configIntegration;
     private String        configDatabase;
-    private String        configService;
+    private String        configAdminicle;
     private String        serviceRecord;
     private String        serviceComponent;
+    private String        serviceConfig;
     private String        identifier;
     private String        sigma;
     private String        language;
@@ -68,9 +69,10 @@ public class IService implements IIService {
         this.configChannel = value.configChannel;
         this.configIntegration = value.configIntegration;
         this.configDatabase = value.configDatabase;
-        this.configService = value.configService;
+        this.configAdminicle = value.configAdminicle;
         this.serviceRecord = value.serviceRecord;
         this.serviceComponent = value.serviceComponent;
+        this.serviceConfig = value.serviceConfig;
         this.identifier = value.identifier;
         this.sigma = value.sigma;
         this.language = value.language;
@@ -96,9 +98,10 @@ public class IService implements IIService {
         String        configChannel,
         String        configIntegration,
         String        configDatabase,
-        String        configService,
+        String        configAdminicle,
         String        serviceRecord,
         String        serviceComponent,
+        String        serviceConfig,
         String        identifier,
         String        sigma,
         String        language,
@@ -122,9 +125,10 @@ public class IService implements IIService {
         this.configChannel = configChannel;
         this.configIntegration = configIntegration;
         this.configDatabase = configDatabase;
-        this.configService = configService;
+        this.configAdminicle = configAdminicle;
         this.serviceRecord = serviceRecord;
         this.serviceComponent = serviceComponent;
+        this.serviceConfig = serviceConfig;
         this.identifier = identifier;
         this.sigma = sigma;
         this.language = language;
@@ -280,13 +284,13 @@ public class IService implements IIService {
     }
 
     @Override
-    public String getConfigService() {
-        return this.configService;
+    public String getConfigAdminicle() {
+        return this.configAdminicle;
     }
 
     @Override
-    public IService setConfigService(String configService) {
-        this.configService = configService;
+    public IService setConfigAdminicle(String configAdminicle) {
+        this.configAdminicle = configAdminicle;
         return this;
     }
 
@@ -309,6 +313,17 @@ public class IService implements IIService {
     @Override
     public IService setServiceComponent(String serviceComponent) {
         this.serviceComponent = serviceComponent;
+        return this;
+    }
+
+    @Override
+    public String getServiceConfig() {
+        return this.serviceConfig;
+    }
+
+    @Override
+    public IService setServiceConfig(String serviceConfig) {
+        this.serviceConfig = serviceConfig;
         return this;
     }
 
@@ -428,9 +443,10 @@ public class IService implements IIService {
         sb.append(", ").append(configChannel);
         sb.append(", ").append(configIntegration);
         sb.append(", ").append(configDatabase);
-        sb.append(", ").append(configService);
+        sb.append(", ").append(configAdminicle);
         sb.append(", ").append(serviceRecord);
         sb.append(", ").append(serviceComponent);
+        sb.append(", ").append(serviceConfig);
         sb.append(", ").append(identifier);
         sb.append(", ").append(sigma);
         sb.append(", ").append(language);
@@ -467,9 +483,10 @@ public class IService implements IIService {
         setConfigChannel(from.getConfigChannel());
         setConfigIntegration(from.getConfigIntegration());
         setConfigDatabase(from.getConfigDatabase());
-        setConfigService(from.getConfigService());
+        setConfigAdminicle(from.getConfigAdminicle());
         setServiceRecord(from.getServiceRecord());
         setServiceComponent(from.getServiceComponent());
+        setServiceConfig(from.getServiceConfig());
         setIdentifier(from.getIdentifier());
         setSigma(from.getSigma());
         setLanguage(from.getLanguage());

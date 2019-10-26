@@ -34,10 +34,7 @@ public class Ruler {
      * @param data The data that will be verified.
      * @throws ZeroException Error when verified failure.
      */
-    public static void verify(
-            final String file,
-            final JsonObject data)
-            throws ZeroException {
+    public static void verify(final String file, final JsonObject data) throws ZeroException {
         Fn.shuntZero(() -> {
             // 1. Rule for json object
             final JsonObject rule = getRule(file);
@@ -64,14 +61,11 @@ public class Ruler {
     /**
      * Verify data for each up.god.file
      *
-     * @param file
-     * @param data
-     * @throws ZeroException
+     * @param file The file that current object bind
+     * @param data The data that will be verified
+     * @throws ZeroException Whether here throw validated exception
      */
-    public static void verify(
-            final String file,
-            final JsonArray data)
-            throws ZeroException {
+    public static void verify(final String file, final JsonArray data) throws ZeroException {
         Fn.shuntZero(() -> {
             // 1. Rule for json array
             final JsonObject rule = getRule(file);
@@ -91,15 +85,7 @@ public class Ruler {
         }, file, data);
     }
 
-    /**
-     * JsonObject
-     *
-     * @param input
-     * @param rule
-     * @throws ZeroException
-     */
-    private static <T> void verifyItem(final T input, final JsonObject rule)
-            throws ZeroException {
+    private static <T> void verifyItem(final T input, final JsonObject rule) throws ZeroException {
         Fn.shuntZero(() -> {
             if (Ut.isJArray(input)) {
                 final JsonArray data = (JsonArray) input;

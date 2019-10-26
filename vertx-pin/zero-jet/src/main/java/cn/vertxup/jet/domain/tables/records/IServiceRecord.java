@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implements IIService {
 
-    private static final long serialVersionUID = 974105571;
+    private static final long serialVersionUID = 2138119540;
 
     /**
      * Setter for <code>DB_ETERNAL.I_SERVICE.KEY</code>. 「key」- 服务ID
@@ -252,19 +252,19 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.I_SERVICE.CONFIG_SERVICE</code>. 「configService」- 业务组件配置，业务组件专用
+     * Setter for <code>DB_ETERNAL.I_SERVICE.CONFIG_ADMINICLE</code>. 「configAdminicle」- 字典的数据配置
      */
     @Override
-    public IServiceRecord setConfigService(String value) {
+    public IServiceRecord setConfigAdminicle(String value) {
         set(13, value);
         return this;
     }
 
     /**
-     * Getter for <code>DB_ETERNAL.I_SERVICE.CONFIG_SERVICE</code>. 「configService」- 业务组件配置，业务组件专用
+     * Getter for <code>DB_ETERNAL.I_SERVICE.CONFIG_ADMINICLE</code>. 「configAdminicle」- 字典的数据配置
      */
     @Override
-    public String getConfigService() {
+    public String getConfigAdminicle() {
         return (String) get(13);
     }
 
@@ -303,11 +303,28 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
     }
 
     /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.SERVICE_CONFIG</code>. 「serviceConfig」- 业务组件配置，业务组件专用
+     */
+    @Override
+    public IServiceRecord setServiceConfig(String value) {
+        set(16, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.SERVICE_CONFIG</code>. 「serviceConfig」- 业务组件配置，业务组件专用
+     */
+    @Override
+    public String getServiceConfig() {
+        return (String) get(16);
+    }
+
+    /**
      * Setter for <code>DB_ETERNAL.I_SERVICE.IDENTIFIER</code>. 「identifier」- 当前类型描述的Model的标识
      */
     @Override
     public IServiceRecord setIdentifier(String value) {
-        set(16, value);
+        set(17, value);
         return this;
     }
 
@@ -316,7 +333,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getIdentifier() {
-        return (String) get(16);
+        return (String) get(17);
     }
 
     /**
@@ -324,7 +341,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setSigma(String value) {
-        set(17, value);
+        set(18, value);
         return this;
     }
 
@@ -333,7 +350,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getSigma() {
-        return (String) get(17);
+        return (String) get(18);
     }
 
     /**
@@ -341,7 +358,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setLanguage(String value) {
-        set(18, value);
+        set(19, value);
         return this;
     }
 
@@ -350,7 +367,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getLanguage() {
-        return (String) get(18);
+        return (String) get(19);
     }
 
     /**
@@ -358,7 +375,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setActive(Boolean value) {
-        set(19, value);
+        set(20, value);
         return this;
     }
 
@@ -367,7 +384,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public Boolean getActive() {
-        return (Boolean) get(19);
+        return (Boolean) get(20);
     }
 
     /**
@@ -375,7 +392,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setMetadata(String value) {
-        set(20, value);
+        set(21, value);
         return this;
     }
 
@@ -384,7 +401,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getMetadata() {
-        return (String) get(20);
+        return (String) get(21);
     }
 
     /**
@@ -392,7 +409,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setCreatedAt(LocalDateTime value) {
-        set(21, value);
+        set(22, value);
         return this;
     }
 
@@ -401,7 +418,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(21);
+        return (LocalDateTime) get(22);
     }
 
     /**
@@ -409,7 +426,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setCreatedBy(String value) {
-        set(22, value);
+        set(23, value);
         return this;
     }
 
@@ -418,7 +435,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getCreatedBy() {
-        return (String) get(22);
+        return (String) get(23);
     }
 
     /**
@@ -426,7 +443,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setUpdatedAt(LocalDateTime value) {
-        set(23, value);
+        set(24, value);
         return this;
     }
 
@@ -435,7 +452,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public LocalDateTime getUpdatedAt() {
-        return (LocalDateTime) get(23);
+        return (LocalDateTime) get(24);
     }
 
     /**
@@ -443,7 +460,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setUpdatedBy(String value) {
-        set(24, value);
+        set(25, value);
         return this;
     }
 
@@ -452,7 +469,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getUpdatedBy() {
-        return (String) get(24);
+        return (String) get(25);
     }
 
     // -------------------------------------------------------------------------
@@ -489,9 +506,10 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
         setConfigChannel(from.getConfigChannel());
         setConfigIntegration(from.getConfigIntegration());
         setConfigDatabase(from.getConfigDatabase());
-        setConfigService(from.getConfigService());
+        setConfigAdminicle(from.getConfigAdminicle());
         setServiceRecord(from.getServiceRecord());
         setServiceComponent(from.getServiceComponent());
+        setServiceConfig(from.getServiceConfig());
         setIdentifier(from.getIdentifier());
         setSigma(from.getSigma());
         setLanguage(from.getLanguage());
@@ -526,7 +544,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
     /**
      * Create a detached, initialised IServiceRecord
      */
-    public IServiceRecord(String key, String namespace, String name, String comment, Boolean isWorkflow, Boolean isGraphic, String inScript, String outScript, String channelType, String channelComponent, String configChannel, String configIntegration, String configDatabase, String configService, String serviceRecord, String serviceComponent, String identifier, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public IServiceRecord(String key, String namespace, String name, String comment, Boolean isWorkflow, Boolean isGraphic, String inScript, String outScript, String channelType, String channelComponent, String configChannel, String configIntegration, String configDatabase, String configAdminicle, String serviceRecord, String serviceComponent, String serviceConfig, String identifier, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(IService.I_SERVICE);
 
         set(0, key);
@@ -542,17 +560,18 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
         set(10, configChannel);
         set(11, configIntegration);
         set(12, configDatabase);
-        set(13, configService);
+        set(13, configAdminicle);
         set(14, serviceRecord);
         set(15, serviceComponent);
-        set(16, identifier);
-        set(17, sigma);
-        set(18, language);
-        set(19, active);
-        set(20, metadata);
-        set(21, createdAt);
-        set(22, createdBy);
-        set(23, updatedAt);
-        set(24, updatedBy);
+        set(16, serviceConfig);
+        set(17, identifier);
+        set(18, sigma);
+        set(19, language);
+        set(20, active);
+        set(21, metadata);
+        set(22, createdAt);
+        set(23, createdBy);
+        set(24, updatedAt);
+        set(25, updatedBy);
     }
 }

@@ -59,6 +59,9 @@ public class Integration implements Json, Serializable {
     private transient String hostname;
     private transient String publicKeyFile;
 
+    /*
+     * options for configuration of JSON format
+     */
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private transient JsonObject options;

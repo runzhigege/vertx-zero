@@ -1,6 +1,7 @@
 package io.vertx.tp.ke.cv;
 
 public interface KeField {
+    String ITEMS = "items";
     String DATA_KEY = "dataKey";
     String APP_KEY = "appKey";
     String APP_ID = "appId";
@@ -13,12 +14,16 @@ public interface KeField {
     String MODEL_CATEGORY = "modelCategory";
     String RESOURCE_ID = "resourceId";
 
+    String DEBUG = "debug";
     String NAME = "name";
     String CODE = "code";
     String TYPE = "type";
     String STATUS = "status";
     String SERIAL = "serial";
     String NAMESPACE = "namespace";
+
+    String OUT = "out";
+    String IN = "in";
 
     String METADATA = "metadata";
     String SERVICE = "service";
@@ -35,7 +40,7 @@ public interface KeField {
     String ACTOR = "actor";
     String QUERY = "query";
 
-
+    String MAPPING = "mapping";
     String SOURCE = "source";
 
     String METHOD = "method";

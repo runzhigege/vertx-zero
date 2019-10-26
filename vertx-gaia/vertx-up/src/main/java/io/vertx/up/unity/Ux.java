@@ -124,6 +124,19 @@ public final class Ux {
         return To.toFuture(entity);
     }
 
+    // ---------------------- Function ------------------------
+    public static <I, T> Function<I, Future<T>> applyNil(final Supplier<T> supplier, final Function<I, Future<T>> executor) {
+        return Apply.applyNil(supplier, executor);
+    }
+
+    public static <I, T> Function<I, Future<T>> applyNil(final Supplier<T> supplier, final Supplier<Future<T>> executor) {
+        return Apply.applyNil(supplier, executor);
+    }
+
+    public static <T> Function<T, Future<JsonObject>> applyField(final JsonObject input, final String field) {
+        return Apply.applyField(input, field);
+    }
+
     // ---------------------- Envelop Returned --------------------------
     // -> List<T> -> Envelop
     public static <T> Envelop to(final List<T> list) {
