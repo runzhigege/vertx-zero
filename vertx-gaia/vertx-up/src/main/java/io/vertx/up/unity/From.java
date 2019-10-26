@@ -1,10 +1,10 @@
 package io.vertx.up.unity;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.atom.Mirror;
-import io.vertx.up.atom.Mojo;
-import io.vertx.up.util.Ut;
+import io.vertx.up.atom.pojo.Mirror;
+import io.vertx.up.atom.pojo.Mojo;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.util.Ut;
 
 class From {
 

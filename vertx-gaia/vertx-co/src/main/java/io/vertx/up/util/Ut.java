@@ -633,6 +633,10 @@ public final class Ut {
         return To.toJObject(map);
     }
 
+    public static Object toJValue(final Object input) {
+        return Jackson.toJValue(input);
+    }
+
     public static int toMonth(final String literal) {
         return Period.toMonth(literal);
     }

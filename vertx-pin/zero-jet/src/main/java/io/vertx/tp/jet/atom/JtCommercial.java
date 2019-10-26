@@ -4,8 +4,11 @@ import cn.vertxup.jet.domain.tables.pojos.IService;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.cv.JtKey;
 import io.vertx.tp.jet.refine.Jt;
+import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.optic.environment.Ambient;
+import io.vertx.up.atom.Diode;
 import io.vertx.up.commune.Commercial;
+import io.vertx.up.commune.config.Adminicle;
 import io.vertx.up.commune.config.Database;
 import io.vertx.up.commune.config.Integration;
 import io.vertx.up.eon.ID;
@@ -101,6 +104,16 @@ public abstract class JtCommercial implements Commercial {
     @Override
     public Integration integration() {
         return Jt.toIntegration(this.service::getConfigIntegration);
+    }
+
+    @Override
+    public Adminicle adminicle() {
+        return Jt.toAdmincle(this.service::getConfigAdminicle);
+    }
+
+    @Override
+    public Diode mapping() {
+        return new Diode(this.options().getJsonObject(KeField.MAPPING));
     }
 
     @Override

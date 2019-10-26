@@ -2,7 +2,7 @@ package io.vertx.up.unity;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.atom.Mojo;
+import io.vertx.up.atom.pojo.Mojo;
 import io.vertx.up.util.Ut;
 import org.jooq.Field;
 import org.jooq.Record;

@@ -184,6 +184,16 @@ public interface IIApi extends Serializable {
     public String getInScript();
 
     /**
+     * Setter for <code>DB_ETERNAL.I_API.OUT_WRITER</code>. 「outWriter」- 响应格式处理器
+     */
+    public IIApi setOutWriter(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_API.OUT_WRITER</code>. 「outWriter」- 响应格式处理器
+     */
+    public String getOutWriter();
+
+    /**
      * Setter for <code>DB_ETERNAL.I_API.WORKER_TYPE</code>. 「workerType」- Worker类型：JS / PLUG / STD
      */
     public IIApi setWorkerType(String value);
@@ -232,16 +242,6 @@ public interface IIApi extends Serializable {
      * Getter for <code>DB_ETERNAL.I_API.WORKER_JS</code>. 「workerJs」- JS 专用，JavaScript路径：runtime/workers/&lt;app&gt;/下的执行器
      */
     public String getWorkerJs();
-
-    /**
-     * Setter for <code>DB_ETERNAL.I_API.OUT_WRITER</code>. 「outWriter」- 响应格式处理器
-     */
-    public IIApi setOutWriter(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.I_API.OUT_WRITER</code>. 「outWriter」- 响应格式处理器
-     */
-    public String getOutWriter();
 
     /**
      * Setter for <code>DB_ETERNAL.I_API.SERVICE_ID</code>. 「serviceId」- 关联的服务ID
@@ -364,12 +364,12 @@ public interface IIApi extends Serializable {
         setInMapping(json.getString("IN_MAPPING"));
         setInPlug(json.getString("IN_PLUG"));
         setInScript(json.getString("IN_SCRIPT"));
+        setOutWriter(json.getString("OUT_WRITER"));
         setWorkerType(json.getString("WORKER_TYPE"));
         setWorkerAddress(json.getString("WORKER_ADDRESS"));
         setWorkerConsumer(json.getString("WORKER_CONSUMER"));
         setWorkerClass(json.getString("WORKER_CLASS"));
         setWorkerJs(json.getString("WORKER_JS"));
-        setOutWriter(json.getString("OUT_WRITER"));
         setServiceId(json.getString("SERVICE_ID"));
         setSigma(json.getString("SIGMA"));
         setLanguage(json.getString("LANGUAGE"));
@@ -401,12 +401,12 @@ public interface IIApi extends Serializable {
         json.put("IN_MAPPING",getInMapping());
         json.put("IN_PLUG",getInPlug());
         json.put("IN_SCRIPT",getInScript());
+        json.put("OUT_WRITER",getOutWriter());
         json.put("WORKER_TYPE",getWorkerType());
         json.put("WORKER_ADDRESS",getWorkerAddress());
         json.put("WORKER_CONSUMER",getWorkerConsumer());
         json.put("WORKER_CLASS",getWorkerClass());
         json.put("WORKER_JS",getWorkerJs());
-        json.put("OUT_WRITER",getOutWriter());
         json.put("SERVICE_ID",getServiceId());
         json.put("SIGMA",getSigma());
         json.put("LANGUAGE",getLanguage());

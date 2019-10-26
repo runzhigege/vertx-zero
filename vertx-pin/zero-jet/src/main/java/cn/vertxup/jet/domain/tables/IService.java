@@ -35,7 +35,7 @@ public class IService extends TableImpl<IServiceRecord> {
      * The reference instance of <code>DB_ETERNAL.I_SERVICE</code>
      */
     public static final IService I_SERVICE = new IService();
-    private static final long serialVersionUID = -1921882974;
+    private static final long serialVersionUID = -1969000631;
     /**
      * The column <code>DB_ETERNAL.I_SERVICE.KEY</code>. 「key」- 服务ID
      */
@@ -89,9 +89,9 @@ public class IService extends TableImpl<IServiceRecord> {
      */
     public final TableField<IServiceRecord, String> CONFIG_DATABASE = createField("CONFIG_DATABASE", org.jooq.impl.SQLDataType.CLOB, this, "「configDatabase」- 数据库配置，当前通道访问的Database");
     /**
-     * The column <code>DB_ETERNAL.I_SERVICE.CONFIG_SERVICE</code>. 「configService」- 业务组件配置，业务组件专用
+     * The column <code>DB_ETERNAL.I_SERVICE.CONFIG_ADMINICLE</code>. 「configAdminicle」- 字典的数据配置
      */
-    public final TableField<IServiceRecord, String> CONFIG_SERVICE = createField("CONFIG_SERVICE", org.jooq.impl.SQLDataType.CLOB, this, "「configService」- 业务组件配置，业务组件专用");
+    public final TableField<IServiceRecord, String> CONFIG_ADMINICLE = createField("CONFIG_ADMINICLE", org.jooq.impl.SQLDataType.CLOB, this, "「configAdminicle」- 字典的数据配置");
     /**
      * The column <code>DB_ETERNAL.I_SERVICE.SERVICE_RECORD</code>. 「serviceRecord」- 服务记录定义
      */
@@ -100,6 +100,10 @@ public class IService extends TableImpl<IServiceRecord> {
      * The column <code>DB_ETERNAL.I_SERVICE.SERVICE_COMPONENT</code>. 「serviceComponent」- 服务组件定义
      */
     public final TableField<IServiceRecord, String> SERVICE_COMPONENT = createField("SERVICE_COMPONENT", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「serviceComponent」- 服务组件定义");
+    /**
+     * The column <code>DB_ETERNAL.I_SERVICE.SERVICE_CONFIG</code>. 「serviceConfig」- 业务组件配置，业务组件专用
+     */
+    public final TableField<IServiceRecord, String> SERVICE_CONFIG = createField("SERVICE_CONFIG", org.jooq.impl.SQLDataType.CLOB, this, "「serviceConfig」- 业务组件配置，业务组件专用");
     /**
      * The column <code>DB_ETERNAL.I_SERVICE.IDENTIFIER</code>. 「identifier」- 当前类型描述的Model的标识
      */

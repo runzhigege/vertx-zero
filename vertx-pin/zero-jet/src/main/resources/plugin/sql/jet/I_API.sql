@@ -21,11 +21,20 @@ CREATE TABLE IF NOT EXISTS I_API
     `PARAM_REQUIRED`  TEXT COMMENT '「paramRequired」- 必须参数表，一个JsonArray用于返回 400基本验证（验证Query和Path）',
     `PARAM_CONTAINED` TEXT COMMENT '「paramContained」- 必须参数表，一个JsonArray用于返回 400基本验证（验证Body）',
 
-    -- 参数规则
+    /*
+     * IN_RULE：Api的输入基本规则
+     * IN_MAPPING：Api的映射规则
+     * IN_PLUG：Api的中使用的插件信息
+     * IN_SCRIPT：Api中的脚本引擎
+     */
     `IN_RULE`         TEXT COMMENT '「inRule」- 参数验证、转换基本规则',
     `IN_MAPPING`      TEXT COMMENT '「inMapping」- 参数映射规则',
     `IN_PLUG`         VARCHAR(255) COMMENT '「inPlug」- 参数请求流程中的插件',
     `IN_SCRIPT`       VARCHAR(255) COMMENT '「inScript」- 【保留】参数请求流程中的脚本控制',
+    /*
+     * OUT_WRITER：响应专用的 Writer 处理响应格式
+     */
+    `OUT_WRITER`      VARCHAR(255) COMMENT '「outWriter」- 响应格式处理器',
 
     -- 服务层连接器
     `WORKER_TYPE`     VARCHAR(255) COMMENT '「workerType」- Worker类型：JS / PLUG / STD',
@@ -35,7 +44,6 @@ CREATE TABLE IF NOT EXISTS I_API
     `WORKER_JS`       VARCHAR(255) COMMENT '「workerJs」- JS 专用，JavaScript路径：runtime/workers/<app>/下的执行器',
 
     -- 响应格式处理
-    `OUT_WRITER`      VARCHAR(255) COMMENT '「outWriter」- 响应格式处理器',
     `SERVICE_ID`      VARCHAR(36) COMMENT '「serviceId」- 关联的服务ID',
 
     -- 特殊字段
