@@ -1,4 +1,4 @@
-package io.vertx.tp.jet.uca;
+package io.vertx.tp.jet.uca.aim;
 
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;

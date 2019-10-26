@@ -4,6 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error._501ChannelErrorException;
 import io.vertx.tp.jet.monitor.JtMonitor;
+import io.vertx.tp.jet.refine.Jt;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.optic.jet.JtChannel;
 import io.vertx.tp.optic.jet.JtComponent;
@@ -138,6 +139,10 @@ public abstract class AbstractChannel implements JtChannel {
             Ut.contract(component, Adminicle.class, commercial.adminicle());
             return Future.succeededFuture(Boolean.TRUE);
         } else {
+            /*
+             *
+             */
+            Jt.infoWeb(this.getLogger(), "Commercial reference is null");
             return Future.succeededFuture(Boolean.TRUE);
         }
     }
