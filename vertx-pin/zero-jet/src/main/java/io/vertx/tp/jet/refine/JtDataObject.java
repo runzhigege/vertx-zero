@@ -75,7 +75,7 @@ class JtDataObject {
         return options;
     }
 
-    private static JsonObject toOptions(final JtApp app, final IService service) {
+    static JsonObject toOptions(final JtApp app, final IService service) {
         /*
          * SERVICE_CONFIG / serviceComponent options
          * here for configuration instead of others
