@@ -104,6 +104,10 @@ public class Jt {
         return JtDataObject.toOptions(app, job, service);
     }
 
+    public static JsonObject toOptions(final JtApp app, final IService service) {
+        return JtDataObject.toOptions(app, service);
+    }
+
     /*
      * Ask configuration, before deployVerticle here
      * 1. JtUri -> JsonObject
