@@ -25,6 +25,50 @@ interface Pool {
 
 interface OxSwitcher {
 
+    static JsonObject getData(final JsonObject original, final IxModule module) {
+        /*
+         * Safe call because of MoveOn
+         */
+        final IxJoin connect = module.getConnect();
+        /*
+         * Remove primary key, it will generate new.
+         */
+        final JsonObject inputData = original.copy();
+        final String mapped = connect.getJoined(original);
+        if (Ut.notNil(mapped)) {
+            /*
+             * data is response data, here the code will generate final response
+             */
+            final String joinedValue = original.getString(connect.getMappedBy());
+            inputData.put(mapped, joinedValue);
+        }
+        return inputData;
+    }
+
+    static JsonObject getCondition(final JsonObject original, final IxModule module) {
+        /*
+         * Safe call because of MoveOn
+         */
+        final JsonObject filters = new JsonObject();
+        final IxJoin connect = module.getConnect();
+        final String mapped = connect.getJoined(original);
+        if (Ut.notNil(mapped)) {
+            /*
+             * joinedValue
+             */
+            final String joinedValue = original.getString(connect.getMappedBy());
+            filters.put(mapped, joinedValue);
+        }
+        /*
+         * Append `Sigma` Here
+         */
+        if (original.containsKey(KeField.SIGMA)) {
+            filters.put("", Boolean.TRUE);
+            filters.put(KeField.SIGMA, original.getString(KeField.SIGMA));
+        }
+        return filters;
+    }
+
     static Future<Envelop> moveOn(final JsonObject data,
                                   final IxModule module,
                                   final BiFunction<UxJooq, IxModule, Future<Envelop>> function) {

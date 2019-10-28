@@ -37,7 +37,7 @@ public class GetActor {
                             IxHttp.success204(queried) :
                             /* 200 */
                             IxHttp.success200(queried, config))
-                    .compose(response -> IxLinker.byId().procAsync(request,
+                    .compose(response -> IxLinker.get().procAsync(request,
                             response.data(), config));
         });
     }
