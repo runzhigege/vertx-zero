@@ -108,7 +108,7 @@ interface OxSwitcher {
 
     static Future<Envelop> moveEnd(final JsonObject original, final Envelop response,
                                    final IxModule config) {
-        final JsonObject createdJoined = response.data();
+        JsonObject createdJoined = response.data();
         /*
          * Merged two data here,
          * Be careful is that we must overwrite createdJoined
@@ -116,8 +116,12 @@ interface OxSwitcher {
          * Here are some modification of `key` here.
          * Here provide `joinedKey` field for target object.
          */
-        final String joinedField = config.getField().getKey();
-        createdJoined.put(KeField.JOINED_KEY, createdJoined.getString(joinedField));
+        if (Objects.isNull(createdJoined)) {
+            createdJoined = new JsonObject();
+        } else {
+            final String joinedField = config.getField().getKey();
+            createdJoined.put(KeField.JOINED_KEY, createdJoined.getString(joinedField));
+        }
         createdJoined.mergeIn(original, true);
         return Ux.toFuture(Envelop.success(createdJoined));
     }

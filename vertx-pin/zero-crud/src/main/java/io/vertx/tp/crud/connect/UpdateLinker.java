@@ -30,8 +30,8 @@ class UpdateLinker implements IxLinker {
             final JsonObject filters = OxSwitcher.getCondition(original, module);
 
             return dao.fetchOneAsync(filters).compose(queried -> null == queried ?
-                    /* 204, No Content*/
-                    IxHttp.success200(null) :
+                    /* Create New Record */
+                    IxLinker.create().procAsync(request, inputData, module) :
                     /* Save */
                     IxActor.key().bind(request).procAsync(
                             /*
