@@ -15,5 +15,10 @@ public interface IxLinker {
                 CreateLinker::new);
     }
 
+    static IxLinker byId() {
+        return Fn.pool(Pool.LINKER_MAP, ByIdLinker.class.getName(),
+                ByIdLinker::new);
+    }
+
     Future<Envelop> procAsync(Envelop data, JsonObject original, IxModule module);
 }

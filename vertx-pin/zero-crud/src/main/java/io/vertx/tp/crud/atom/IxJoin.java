@@ -91,7 +91,13 @@ public class IxJoin implements Serializable {
         }
     }
 
-    public String getMapped(final String identifier) {
+    public String getJoined(final JsonObject data) {
+        final String moduleName = this.getJoinedBy();
+        final String identifier = data.getString(moduleName);
+        return this.getMapped(identifier);
+    }
+
+    private String getMapped(final String identifier) {
         if (Objects.isNull(this.mapped)) {
             /*
              * The default key is key

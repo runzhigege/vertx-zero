@@ -51,7 +51,7 @@ public class PutActor {
             final String key = Ux.getString1(request);
             return dao.findByIdAsync(key).compose(queried -> null == queried ?
                     /* 204, No Content */
-                    Http.success204(null) :
+                    IxHttp.success204(null) :
                     /* Save */
                     IxActor.key().bind(request).procAsync(body, config)
                             /* Verify */
@@ -61,7 +61,7 @@ public class PutActor {
                             /* Save */
                             .compose(entity -> dao.saveAsync(key, entity))
                             /* 200, Envelop */
-                            .compose(entity -> Http.success200(entity, config))
+                            .compose(entity -> IxHttp.success200(entity, config))
             );
         });
     }
@@ -84,7 +84,7 @@ public class PutActor {
                     /* List<T> */
                     .compose(dao::updateAsync)
                     /* JsonArray */
-                    .compose(Http::success200);
+                    .compose(IxHttp::success200);
         });
     }
 
@@ -108,7 +108,7 @@ public class PutActor {
                     /* Flush Cache based on Ke */
                     // .compose(updated -> flush(request, updated))
                     /* Return Result */
-                    .compose(Http::success200));
+                    .compose(IxHttp::success200));
         });
     }
 
