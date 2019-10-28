@@ -15,10 +15,20 @@ public interface IxLinker {
                 CreateLinker::new);
     }
 
-    static IxLinker byId() {
-        return Fn.pool(Pool.LINKER_MAP, ByIdLinker.class.getName(),
-                ByIdLinker::new);
+    static IxLinker get() {
+        return Fn.pool(Pool.LINKER_MAP, GetLinker.class.getName(),
+                GetLinker::new);
     }
 
-    Future<Envelop> procAsync(Envelop data, JsonObject original, IxModule module);
+    static IxLinker delete() {
+        return Fn.pool(Pool.LINKER_MAP, DeleteLinker.class.getName(),
+                DeleteLinker::new);
+    }
+
+    static IxLinker update() {
+        return Fn.pool(Pool.LINKER_MAP, UpdateLinker.class.getName(),
+                UpdateLinker::new);
+    }
+
+    Future<Envelop> procAsync(Envelop request, JsonObject original, IxModule module);
 }
