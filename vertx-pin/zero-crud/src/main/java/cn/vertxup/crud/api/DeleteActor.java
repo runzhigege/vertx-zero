@@ -4,10 +4,10 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.up.unity.Ux;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.commune.Envelop;
+import io.vertx.up.unity.Ux;
 
 @Queue
 public class DeleteActor {
@@ -18,14 +18,14 @@ public class DeleteActor {
      */
     @Address(Addr.Delete.BY_ID)
     public Future<Envelop> delete(final Envelop request) {
-        return Ix.create(getClass()).input(request).envelop((dao, config) -> {
+        return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Key */
             final String key = Ux.getString1(request);
             return dao.findByIdAsync(key).compose(result -> null == result ?
                     /* 204 */
-                    Http.success204(Boolean.TRUE) :
+                    IxHttp.success204(Boolean.TRUE) :
                     /* 200 */
-                    dao.deleteByIdAsync(key).compose(Http::success200));
+                    dao.deleteByIdAsync(key).compose(IxHttp::success200));
         });
     }
 
@@ -36,7 +36,7 @@ public class DeleteActor {
      */
     @Address(Addr.Delete.BATCH)
     public Future<Envelop> deleteBatch(final Envelop request) {
-        return Ix.create(getClass()).input(request).envelop((dao, config) -> {
+        return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Keys */
             final JsonArray keys = Ux.getArray1(request);
             /* ID */
@@ -44,7 +44,7 @@ public class DeleteActor {
                     /* List */
                     .compose(dao::deleteAsync)
                     /* Boolean */
-                    .compose(Http::success200);
+                    .compose(IxHttp::success200);
         });
     }
 }

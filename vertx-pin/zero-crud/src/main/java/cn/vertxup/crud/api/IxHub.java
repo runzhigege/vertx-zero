@@ -39,7 +39,7 @@ public class IxHub {
                                 /* Deserialize */
                                 .compose(json -> Ix.entityAsync(json, config))
                                 /* 201, Envelop */
-                                .compose(entity -> Http.success201(entity, config)) :
+                                .compose(entity -> IxHttp.success201(entity, config)) :
                         /* Primary Key Add */
                         IxActor.uuid().procAsync(body, config)
                                 /* Create */
@@ -51,7 +51,7 @@ public class IxHub {
                                 /* T */
                                 .compose(dao::insertAsync)
                                 /* 200, Envelop */
-                                .compose(entity -> Http.success200(entity, config))
+                                .compose(entity -> IxHttp.success200(entity, config))
                 );
     }
 }
