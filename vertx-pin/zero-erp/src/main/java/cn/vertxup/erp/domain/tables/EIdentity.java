@@ -35,7 +35,7 @@ public class EIdentity extends TableImpl<EIdentityRecord> {
      * The reference instance of <code>DB_ETERNAL.E_IDENTITY</code>
      */
     public static final EIdentity E_IDENTITY = new EIdentity();
-    private static final long serialVersionUID = 2113982004;
+    private static final long serialVersionUID = -1274077255;
     /**
      * The column <code>DB_ETERNAL.E_IDENTITY.KEY</code>. 「key」- 身份主键
      */
@@ -48,6 +48,10 @@ public class EIdentity extends TableImpl<EIdentityRecord> {
      * The column <code>DB_ETERNAL.E_IDENTITY.TYPE</code>. 「type」- 身份类型/档案类型
      */
     public final TableField<EIdentityRecord, String> TYPE = createField("TYPE", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「type」- 身份类型/档案类型");
+    /**
+     * The column <code>DB_ETERNAL.E_IDENTITY.STATUS</code>. 「status」- 档案状态
+     */
+    public final TableField<EIdentityRecord, String> STATUS = createField("STATUS", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「status」- 档案状态");
     /**
      * The column <code>DB_ETERNAL.E_IDENTITY.COUNTRY</code>. 「country」- 国籍
      */
@@ -65,9 +69,9 @@ public class EIdentity extends TableImpl<EIdentityRecord> {
      */
     public final TableField<EIdentityRecord, String> ADDRESS = createField("ADDRESS", org.jooq.impl.SQLDataType.CLOB, this, "「address」- 居住地址");
     /**
-     * The column <code>DB_ETERNAL.E_IDENTITY.REALNAME</code>. 「readName」- 真实姓名
+     * The column <code>DB_ETERNAL.E_IDENTITY.REALNAME</code>. 「realname」- 真实姓名
      */
-    public final TableField<EIdentityRecord, String> REALNAME = createField("REALNAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「readName」- 真实姓名");
+    public final TableField<EIdentityRecord, String> REALNAME = createField("REALNAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「realname」- 真实姓名");
     /**
      * The column <code>DB_ETERNAL.E_IDENTITY.BIRTHDAY</code>. 「birthday」- 生日
      */
@@ -76,6 +80,10 @@ public class EIdentity extends TableImpl<EIdentityRecord> {
      * The column <code>DB_ETERNAL.E_IDENTITY.DRIVER_LICENSE</code>. 「driverLicense」- 驾驶证
      */
     public final TableField<EIdentityRecord, String> DRIVER_LICENSE = createField("DRIVER_LICENSE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「driverLicense」- 驾驶证");
+    /**
+     * The column <code>DB_ETERNAL.E_IDENTITY.CAR_PLATE</code>. 「carPlate」- 常用车牌
+     */
+    public final TableField<EIdentityRecord, String> CAR_PLATE = createField("CAR_PLATE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「carPlate」- 常用车牌");
     /**
      * The column <code>DB_ETERNAL.E_IDENTITY.PASSPORT</code>. 「passport」- 护照
      */

@@ -35,7 +35,7 @@ public class EEmployee extends TableImpl<EEmployeeRecord> {
      * The reference instance of <code>DB_ETERNAL.E_EMPLOYEE</code>
      */
     public static final EEmployee E_EMPLOYEE = new EEmployee();
-    private static final long serialVersionUID = 1775940525;
+    private static final long serialVersionUID = -1801268349;
     /**
      * The column <code>DB_ETERNAL.E_EMPLOYEE.KEY</code>. 「key」- 员工主键
      */
@@ -175,7 +175,7 @@ public class EEmployee extends TableImpl<EEmployeeRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.E_EMPLOYEE_PRIMARY, Indexes.E_EMPLOYEE_SIGMA, Indexes.E_EMPLOYEE_WORK_NUMBER);
+        return Arrays.<Index>asList(Indexes.E_EMPLOYEE_PRIMARY, Indexes.E_EMPLOYEE_WORK_NUMBER);
     }
 
     /**
@@ -191,7 +191,7 @@ public class EEmployee extends TableImpl<EEmployeeRecord> {
      */
     @Override
     public List<UniqueKey<EEmployeeRecord>> getKeys() {
-        return Arrays.<UniqueKey<EEmployeeRecord>>asList(Keys.KEY_E_EMPLOYEE_PRIMARY, Keys.KEY_E_EMPLOYEE_WORK_NUMBER, Keys.KEY_E_EMPLOYEE_SIGMA);
+        return Arrays.<UniqueKey<EEmployeeRecord>>asList(Keys.KEY_E_EMPLOYEE_PRIMARY, Keys.KEY_E_EMPLOYEE_WORK_NUMBER);
     }
 
     /**

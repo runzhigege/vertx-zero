@@ -24,11 +24,12 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class EIdentity implements IEIdentity {
 
-    private static final long serialVersionUID = 1786108408;
+    private static final long serialVersionUID = -1456995710;
 
     private String        key;
     private String        code;
     private String        type;
+    private String        status;
     private String        country;
     private String        nativePlace;
     private String        nation;
@@ -36,6 +37,7 @@ public class EIdentity implements IEIdentity {
     private String        realname;
     private LocalDateTime birthday;
     private String        driverLicense;
+    private String        carPlate;
     private String        passport;
     private Boolean       gender;
     private String        marital;
@@ -72,6 +74,7 @@ public class EIdentity implements IEIdentity {
         this.key = value.key;
         this.code = value.code;
         this.type = value.type;
+        this.status = value.status;
         this.country = value.country;
         this.nativePlace = value.nativePlace;
         this.nation = value.nation;
@@ -79,6 +82,7 @@ public class EIdentity implements IEIdentity {
         this.realname = value.realname;
         this.birthday = value.birthday;
         this.driverLicense = value.driverLicense;
+        this.carPlate = value.carPlate;
         this.passport = value.passport;
         this.gender = value.gender;
         this.marital = value.marital;
@@ -114,6 +118,7 @@ public class EIdentity implements IEIdentity {
         String        key,
         String        code,
         String        type,
+        String        status,
         String        country,
         String        nativePlace,
         String        nation,
@@ -121,6 +126,7 @@ public class EIdentity implements IEIdentity {
         String        realname,
         LocalDateTime birthday,
         String        driverLicense,
+        String        carPlate,
         String        passport,
         Boolean       gender,
         String        marital,
@@ -154,6 +160,7 @@ public class EIdentity implements IEIdentity {
         this.key = key;
         this.code = code;
         this.type = type;
+        this.status = status;
         this.country = country;
         this.nativePlace = nativePlace;
         this.nation = nation;
@@ -161,6 +168,7 @@ public class EIdentity implements IEIdentity {
         this.realname = realname;
         this.birthday = birthday;
         this.driverLicense = driverLicense;
+        this.carPlate = carPlate;
         this.passport = passport;
         this.gender = gender;
         this.marital = marital;
@@ -222,6 +230,17 @@ public class EIdentity implements IEIdentity {
     @Override
     public EIdentity setType(String type) {
         this.type = type;
+        return this;
+    }
+
+    @Override
+    public String getStatus() {
+        return this.status;
+    }
+
+    @Override
+    public EIdentity setStatus(String status) {
+        this.status = status;
         return this;
     }
 
@@ -299,6 +318,17 @@ public class EIdentity implements IEIdentity {
     @Override
     public EIdentity setDriverLicense(String driverLicense) {
         this.driverLicense = driverLicense;
+        return this;
+    }
+
+    @Override
+    public String getCarPlate() {
+        return this.carPlate;
+    }
+
+    @Override
+    public EIdentity setCarPlate(String carPlate) {
+        this.carPlate = carPlate;
         return this;
     }
 
@@ -628,6 +658,7 @@ public class EIdentity implements IEIdentity {
         sb.append(key);
         sb.append(", ").append(code);
         sb.append(", ").append(type);
+        sb.append(", ").append(status);
         sb.append(", ").append(country);
         sb.append(", ").append(nativePlace);
         sb.append(", ").append(nation);
@@ -635,6 +666,7 @@ public class EIdentity implements IEIdentity {
         sb.append(", ").append(realname);
         sb.append(", ").append(birthday);
         sb.append(", ").append(driverLicense);
+        sb.append(", ").append(carPlate);
         sb.append(", ").append(passport);
         sb.append(", ").append(gender);
         sb.append(", ").append(marital);
@@ -681,6 +713,7 @@ public class EIdentity implements IEIdentity {
         setKey(from.getKey());
         setCode(from.getCode());
         setType(from.getType());
+        setStatus(from.getStatus());
         setCountry(from.getCountry());
         setNativePlace(from.getNativePlace());
         setNation(from.getNation());
@@ -688,6 +721,7 @@ public class EIdentity implements IEIdentity {
         setRealname(from.getRealname());
         setBirthday(from.getBirthday());
         setDriverLicense(from.getDriverLicense());
+        setCarPlate(from.getCarPlate());
         setPassport(from.getPassport());
         setGender(from.getGender());
         setMarital(from.getMarital());
