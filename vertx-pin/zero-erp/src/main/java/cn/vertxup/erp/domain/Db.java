@@ -5,7 +5,6 @@ package cn.vertxup.erp.domain;
 
 
 import cn.vertxup.erp.domain.tables.*;
-import io.vertx.tp.ke.refine.Ke;
 import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
@@ -83,7 +82,7 @@ public class Db extends SchemaImpl {
      * No further instances allowed
      */
     private Db() {
-        super(Ke.getDatabase(), null);
+        super("DB_ETERNAL", null);
     }
 
 

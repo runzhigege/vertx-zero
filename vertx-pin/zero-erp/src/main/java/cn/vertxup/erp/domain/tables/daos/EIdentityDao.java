@@ -84,6 +84,13 @@ public class EIdentityDao extends DAOImpl<EIdentityRecord, cn.vertxup.erp.domain
     }
 
     /**
+     * Fetch records that have <code>STATUS IN (values)</code>
+     */
+    public List<cn.vertxup.erp.domain.tables.pojos.EIdentity> fetchByStatus(String... values) {
+        return fetch(EIdentity.E_IDENTITY.STATUS, values);
+    }
+
+    /**
      * Fetch records that have <code>COUNTRY IN (values)</code>
      */
     public List<cn.vertxup.erp.domain.tables.pojos.EIdentity> fetchByCountry(String... values) {
@@ -130,6 +137,13 @@ public class EIdentityDao extends DAOImpl<EIdentityRecord, cn.vertxup.erp.domain
      */
     public List<cn.vertxup.erp.domain.tables.pojos.EIdentity> fetchByDriverLicense(String... values) {
         return fetch(EIdentity.E_IDENTITY.DRIVER_LICENSE, values);
+    }
+
+    /**
+     * Fetch records that have <code>CAR_PLATE IN (values)</code>
+     */
+    public List<cn.vertxup.erp.domain.tables.pojos.EIdentity> fetchByCarPlate(String... values) {
+        return fetch(EIdentity.E_IDENTITY.CAR_PLATE, values);
     }
 
     /**
@@ -364,6 +378,13 @@ public class EIdentityDao extends DAOImpl<EIdentityRecord, cn.vertxup.erp.domain
     }
 
     /**
+     * Fetch records that have <code>STATUS IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EIdentity>> fetchByStatusAsync(List<String> values) {
+        return fetchAsync(EIdentity.E_IDENTITY.STATUS,values);
+    }
+
+    /**
      * Fetch records that have <code>COUNTRY IN (values)</code> asynchronously
      */
     public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EIdentity>> fetchByCountryAsync(List<String> values) {
@@ -410,6 +431,13 @@ public class EIdentityDao extends DAOImpl<EIdentityRecord, cn.vertxup.erp.domain
      */
     public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EIdentity>> fetchByDriverLicenseAsync(List<String> values) {
         return fetchAsync(EIdentity.E_IDENTITY.DRIVER_LICENSE,values);
+    }
+
+    /**
+     * Fetch records that have <code>CAR_PLATE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EIdentity>> fetchByCarPlateAsync(List<String> values) {
+        return fetchAsync(EIdentity.E_IDENTITY.CAR_PLATE,values);
     }
 
     /**
