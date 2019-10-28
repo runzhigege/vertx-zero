@@ -64,34 +64,44 @@ public interface IEEmployee extends Serializable {
     public String getTeamId();
 
     /**
-     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.IDENTITY_ID</code>. 「identityId」- 身份关联ID
+     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.IDENTITY_ID</code>. 「identityId」- 关联档案
      */
     public IEEmployee setIdentityId(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.IDENTITY_ID</code>. 「identityId」- 身份关联ID
+     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.IDENTITY_ID</code>. 「identityId」- 关联档案
      */
     public String getIdentityId();
 
     /**
-     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_CN_NAME</code>. 「workCnName」- 中文名
+     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.VICE_NAME</code>. 「viceName」- 员工姓名
      */
-    public IEEmployee setWorkCnName(String value);
+    public IEEmployee setViceName(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_CN_NAME</code>. 「workCnName」- 中文名
+     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.VICE_NAME</code>. 「viceName」- 员工姓名
      */
-    public String getWorkCnName();
+    public String getViceName();
 
     /**
-     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_EN_NAME</code>. 「workEnName」- 英文名
+     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.VICE_EMAIL</code>. 「viceEmail」- 员工邮箱
      */
-    public IEEmployee setWorkEnName(String value);
+    public IEEmployee setViceEmail(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_EN_NAME</code>. 「workEnName」- 英文名
+     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.VICE_EMAIL</code>. 「viceEmail」- 员工邮箱
      */
-    public String getWorkEnName();
+    public String getViceEmail();
+
+    /**
+     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.VICE_MOBILE</code>. 「viceMobile」- 员工手机
+     */
+    public IEEmployee setViceMobile(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.VICE_MOBILE</code>. 「viceMobile」- 员工手机
+     */
+    public String getViceMobile();
 
     /**
      * Setter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_NUMBER</code>. 「workNumber」- 工号
@@ -112,16 +122,6 @@ public interface IEEmployee extends Serializable {
      * Getter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_TITLE</code>. 「workTitle」- 头衔
      */
     public String getWorkTitle();
-
-    /**
-     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_EMAIL</code>. 「workEmail」- 办公邮箱
-     */
-    public IEEmployee setWorkEmail(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_EMAIL</code>. 「workEmail」- 办公邮箱
-     */
-    public String getWorkEmail();
 
     /**
      * Setter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_LOCATION</code>. 「workLocation」- 办公地点
@@ -152,16 +152,6 @@ public interface IEEmployee extends Serializable {
      * Getter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_EXTENSION</code>. 「workExtension」- 分机号
      */
     public String getWorkExtension();
-
-    /**
-     * Setter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_MOBILE</code>. 「workMobile」- 办公用手机
-     */
-    public IEEmployee setWorkMobile(String value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.E_EMPLOYEE.WORK_MOBILE</code>. 「workMobile」- 办公用手机
-     */
-    public String getWorkMobile();
 
     /**
      * Setter for <code>DB_ETERNAL.E_EMPLOYEE.TYPE</code>. 「type」- 员工分类
@@ -273,15 +263,14 @@ public interface IEEmployee extends Serializable {
         setDeptId(json.getString("DEPT_ID"));
         setTeamId(json.getString("TEAM_ID"));
         setIdentityId(json.getString("IDENTITY_ID"));
-        setWorkCnName(json.getString("WORK_CN_NAME"));
-        setWorkEnName(json.getString("WORK_EN_NAME"));
+        setViceName(json.getString("VICE_NAME"));
+        setViceEmail(json.getString("VICE_EMAIL"));
+        setViceMobile(json.getString("VICE_MOBILE"));
         setWorkNumber(json.getString("WORK_NUMBER"));
         setWorkTitle(json.getString("WORK_TITLE"));
-        setWorkEmail(json.getString("WORK_EMAIL"));
         setWorkLocation(json.getString("WORK_LOCATION"));
         setWorkPhone(json.getString("WORK_PHONE"));
         setWorkExtension(json.getString("WORK_EXTENSION"));
-        setWorkMobile(json.getString("WORK_MOBILE"));
         setType(json.getString("TYPE"));
         setMetadata(json.getString("METADATA"));
         setActive(json.getBoolean("ACTIVE"));
@@ -302,15 +291,14 @@ public interface IEEmployee extends Serializable {
         json.put("DEPT_ID",getDeptId());
         json.put("TEAM_ID",getTeamId());
         json.put("IDENTITY_ID",getIdentityId());
-        json.put("WORK_CN_NAME",getWorkCnName());
-        json.put("WORK_EN_NAME",getWorkEnName());
+        json.put("VICE_NAME",getViceName());
+        json.put("VICE_EMAIL",getViceEmail());
+        json.put("VICE_MOBILE",getViceMobile());
         json.put("WORK_NUMBER",getWorkNumber());
         json.put("WORK_TITLE",getWorkTitle());
-        json.put("WORK_EMAIL",getWorkEmail());
         json.put("WORK_LOCATION",getWorkLocation());
         json.put("WORK_PHONE",getWorkPhone());
         json.put("WORK_EXTENSION",getWorkExtension());
-        json.put("WORK_MOBILE",getWorkMobile());
         json.put("TYPE",getType());
         json.put("METADATA",getMetadata());
         json.put("ACTIVE",getActive());
