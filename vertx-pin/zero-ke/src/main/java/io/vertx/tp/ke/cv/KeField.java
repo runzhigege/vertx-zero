@@ -7,6 +7,7 @@ public interface KeField {
     String APP_ID = "appId";
     String APP = "application";
     String SIGMA = "sigma";
+    String JOINED_KEY = "joinedKey";
 
     String ENTITY_ID = "entityId";
     String MODEL_ID = "modelId";
