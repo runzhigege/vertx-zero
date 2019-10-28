@@ -46,6 +46,8 @@ public class IxHub {
                                 .compose(input -> IxActor.create().bind(request).procAsync(input, config))
                                 /* Update */
                                 .compose(input -> IxActor.update().bind(request).procAsync(input, config))
+                                /* Serial */
+                                .compose(input -> IxActor.serial().bind(request).procAsync(input, config))
                                 /* Build Data */
                                 .compose(input -> Ix.entityAsync(input, config))
                                 /* T */

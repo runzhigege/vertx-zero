@@ -25,6 +25,7 @@ import org.jooq.Condition;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentMap;
 import java.util.function.*;
 
 /**
@@ -275,6 +276,10 @@ public final class Ux {
      */
     public static Future<JsonArray> thenCombine(final List<Future<JsonObject>> futures) {
         return Fluctuate.thenCombine(futures);
+    }
+
+    public static <T> Future<ConcurrentMap<String, T>> thenCombine(final ConcurrentMap<String, Future<T>> futureMap) {
+        return Fluctuate.thenCombine(futureMap);
     }
 
     public static Future<JsonArray> thenCombineArray(final List<Future<JsonArray>> futures) {
