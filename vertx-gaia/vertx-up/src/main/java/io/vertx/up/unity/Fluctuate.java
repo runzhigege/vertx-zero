@@ -4,6 +4,7 @@ import io.reactivex.Observable;
 import io.vertx.core.*;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.eon.Values;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception.web._500InternalServerException;
 import io.vertx.up.util.Ut;
@@ -11,6 +12,8 @@ import io.vertx.up.util.Ut;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
@@ -50,6 +53,35 @@ class Fluctuate {
             final JsonObject resultMap = new JsonObject();
             if (null != finished) {
                 Ut.itList(finished.list(), (item, index) -> resultMap.put(index.toString(), item));
+            }
+            return resultMap;
+        }));
+        return promise.future();
+    }
+
+    static <T> Future<ConcurrentMap<String, T>> thenCombine(
+            final ConcurrentMap<String, Future<T>> futureMap
+    ) {
+        final Promise<ConcurrentMap<String, T>> promise = Promise.promise();
+        final List<String> keys = new ArrayList<>();
+        final List<Future> futures = new ArrayList<>();
+        futureMap.forEach((key, future) -> {
+            keys.add(key);
+            futures.add(future);
+        });
+        CompositeFuture.all(futures).setHandler(thenResponse(promise, (finished) -> {
+            final List<T> list = finished.list();
+            /*
+             * Index mapping
+             */
+            final int size = list.size();
+            final ConcurrentMap<String, T> resultMap = new ConcurrentHashMap<>();
+            for (int idx = Values.IDX; idx < size; idx++) {
+                final String key = keys.get(idx);
+                final T result = list.get(idx);
+                if (Ut.notNil(key)) {
+                    resultMap.put(key, result);
+                }
             }
             return resultMap;
         }));

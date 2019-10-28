@@ -3,10 +3,10 @@ package io.vertx.tp.crud.actor;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxModule;
-import io.vertx.up.unity.Ux;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.unity.Ux;
 
 /*
  * Actor workflow for each Envelop
@@ -71,6 +71,11 @@ public interface IxActor {
     static IxActor update() {
         return Fn.pool(Pool.ACTOR_MAP, UpdateActor.class.getName(),
                 UpdateActor::new);
+    }
+
+    static IxActor serial() {
+        return Fn.pool(Pool.ACTOR_MAP, SerialActor.class.getName(),
+                SerialActor::new);
     }
 
     static Future<JsonObject> start() {
