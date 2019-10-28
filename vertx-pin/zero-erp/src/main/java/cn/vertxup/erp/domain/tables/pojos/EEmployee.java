@@ -24,22 +24,21 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class EEmployee implements IEEmployee {
 
-    private static final long serialVersionUID = 185530158;
+    private static final long serialVersionUID = -506728739;
 
     private String        key;
     private String        companyId;
     private String        deptId;
     private String        teamId;
     private String        identityId;
-    private String        workCnName;
-    private String        workEnName;
+    private String        viceName;
+    private String        viceEmail;
+    private String        viceMobile;
     private String        workNumber;
     private String        workTitle;
-    private String        workEmail;
     private String        workLocation;
     private String        workPhone;
     private String        workExtension;
-    private String        workMobile;
     private String        type;
     private String        metadata;
     private Boolean       active;
@@ -58,15 +57,14 @@ public class EEmployee implements IEEmployee {
         this.deptId = value.deptId;
         this.teamId = value.teamId;
         this.identityId = value.identityId;
-        this.workCnName = value.workCnName;
-        this.workEnName = value.workEnName;
+        this.viceName = value.viceName;
+        this.viceEmail = value.viceEmail;
+        this.viceMobile = value.viceMobile;
         this.workNumber = value.workNumber;
         this.workTitle = value.workTitle;
-        this.workEmail = value.workEmail;
         this.workLocation = value.workLocation;
         this.workPhone = value.workPhone;
         this.workExtension = value.workExtension;
-        this.workMobile = value.workMobile;
         this.type = value.type;
         this.metadata = value.metadata;
         this.active = value.active;
@@ -84,15 +82,14 @@ public class EEmployee implements IEEmployee {
         String        deptId,
         String        teamId,
         String        identityId,
-        String        workCnName,
-        String        workEnName,
+        String        viceName,
+        String        viceEmail,
+        String        viceMobile,
         String        workNumber,
         String        workTitle,
-        String        workEmail,
         String        workLocation,
         String        workPhone,
         String        workExtension,
-        String        workMobile,
         String        type,
         String        metadata,
         Boolean       active,
@@ -108,15 +105,14 @@ public class EEmployee implements IEEmployee {
         this.deptId = deptId;
         this.teamId = teamId;
         this.identityId = identityId;
-        this.workCnName = workCnName;
-        this.workEnName = workEnName;
+        this.viceName = viceName;
+        this.viceEmail = viceEmail;
+        this.viceMobile = viceMobile;
         this.workNumber = workNumber;
         this.workTitle = workTitle;
-        this.workEmail = workEmail;
         this.workLocation = workLocation;
         this.workPhone = workPhone;
         this.workExtension = workExtension;
-        this.workMobile = workMobile;
         this.type = type;
         this.metadata = metadata;
         this.active = active;
@@ -184,24 +180,35 @@ public class EEmployee implements IEEmployee {
     }
 
     @Override
-    public String getWorkCnName() {
-        return this.workCnName;
+    public String getViceName() {
+        return this.viceName;
     }
 
     @Override
-    public EEmployee setWorkCnName(String workCnName) {
-        this.workCnName = workCnName;
+    public EEmployee setViceName(String viceName) {
+        this.viceName = viceName;
         return this;
     }
 
     @Override
-    public String getWorkEnName() {
-        return this.workEnName;
+    public String getViceEmail() {
+        return this.viceEmail;
     }
 
     @Override
-    public EEmployee setWorkEnName(String workEnName) {
-        this.workEnName = workEnName;
+    public EEmployee setViceEmail(String viceEmail) {
+        this.viceEmail = viceEmail;
+        return this;
+    }
+
+    @Override
+    public String getViceMobile() {
+        return this.viceMobile;
+    }
+
+    @Override
+    public EEmployee setViceMobile(String viceMobile) {
+        this.viceMobile = viceMobile;
         return this;
     }
 
@@ -224,17 +231,6 @@ public class EEmployee implements IEEmployee {
     @Override
     public EEmployee setWorkTitle(String workTitle) {
         this.workTitle = workTitle;
-        return this;
-    }
-
-    @Override
-    public String getWorkEmail() {
-        return this.workEmail;
-    }
-
-    @Override
-    public EEmployee setWorkEmail(String workEmail) {
-        this.workEmail = workEmail;
         return this;
     }
 
@@ -268,17 +264,6 @@ public class EEmployee implements IEEmployee {
     @Override
     public EEmployee setWorkExtension(String workExtension) {
         this.workExtension = workExtension;
-        return this;
-    }
-
-    @Override
-    public String getWorkMobile() {
-        return this.workMobile;
-    }
-
-    @Override
-    public EEmployee setWorkMobile(String workMobile) {
-        this.workMobile = workMobile;
         return this;
     }
 
@@ -390,15 +375,14 @@ public class EEmployee implements IEEmployee {
         sb.append(", ").append(deptId);
         sb.append(", ").append(teamId);
         sb.append(", ").append(identityId);
-        sb.append(", ").append(workCnName);
-        sb.append(", ").append(workEnName);
+        sb.append(", ").append(viceName);
+        sb.append(", ").append(viceEmail);
+        sb.append(", ").append(viceMobile);
         sb.append(", ").append(workNumber);
         sb.append(", ").append(workTitle);
-        sb.append(", ").append(workEmail);
         sb.append(", ").append(workLocation);
         sb.append(", ").append(workPhone);
         sb.append(", ").append(workExtension);
-        sb.append(", ").append(workMobile);
         sb.append(", ").append(type);
         sb.append(", ").append(metadata);
         sb.append(", ").append(active);
@@ -427,15 +411,14 @@ public class EEmployee implements IEEmployee {
         setDeptId(from.getDeptId());
         setTeamId(from.getTeamId());
         setIdentityId(from.getIdentityId());
-        setWorkCnName(from.getWorkCnName());
-        setWorkEnName(from.getWorkEnName());
+        setViceName(from.getViceName());
+        setViceEmail(from.getViceEmail());
+        setViceMobile(from.getViceMobile());
         setWorkNumber(from.getWorkNumber());
         setWorkTitle(from.getWorkTitle());
-        setWorkEmail(from.getWorkEmail());
         setWorkLocation(from.getWorkLocation());
         setWorkPhone(from.getWorkPhone());
         setWorkExtension(from.getWorkExtension());
-        setWorkMobile(from.getWorkMobile());
         setType(from.getType());
         setMetadata(from.getMetadata());
         setActive(from.getActive());

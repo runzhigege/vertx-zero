@@ -35,7 +35,7 @@ public class EEmployee extends TableImpl<EEmployeeRecord> {
      * The reference instance of <code>DB_ETERNAL.E_EMPLOYEE</code>
      */
     public static final EEmployee E_EMPLOYEE = new EEmployee();
-    private static final long serialVersionUID = 1651720810;
+    private static final long serialVersionUID = 1775940525;
     /**
      * The column <code>DB_ETERNAL.E_EMPLOYEE.KEY</code>. 「key」- 员工主键
      */
@@ -53,17 +53,21 @@ public class EEmployee extends TableImpl<EEmployeeRecord> {
      */
     public final TableField<EEmployeeRecord, String> TEAM_ID = createField("TEAM_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「teamId」- 所属组");
     /**
-     * The column <code>DB_ETERNAL.E_EMPLOYEE.IDENTITY_ID</code>. 「identityId」- 身份关联ID
+     * The column <code>DB_ETERNAL.E_EMPLOYEE.IDENTITY_ID</code>. 「identityId」- 关联档案
      */
-    public final TableField<EEmployeeRecord, String> IDENTITY_ID = createField("IDENTITY_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「identityId」- 身份关联ID");
+    public final TableField<EEmployeeRecord, String> IDENTITY_ID = createField("IDENTITY_ID", org.jooq.impl.SQLDataType.VARCHAR(36), this, "「identityId」- 关联档案");
     /**
-     * The column <code>DB_ETERNAL.E_EMPLOYEE.WORK_CN_NAME</code>. 「workCnName」- 中文名
+     * The column <code>DB_ETERNAL.E_EMPLOYEE.VICE_NAME</code>. 「viceName」- 员工姓名
      */
-    public final TableField<EEmployeeRecord, String> WORK_CN_NAME = createField("WORK_CN_NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「workCnName」- 中文名");
+    public final TableField<EEmployeeRecord, String> VICE_NAME = createField("VICE_NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「viceName」- 员工姓名");
     /**
-     * The column <code>DB_ETERNAL.E_EMPLOYEE.WORK_EN_NAME</code>. 「workEnName」- 英文名
+     * The column <code>DB_ETERNAL.E_EMPLOYEE.VICE_EMAIL</code>. 「viceEmail」- 员工邮箱
      */
-    public final TableField<EEmployeeRecord, String> WORK_EN_NAME = createField("WORK_EN_NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「workEnName」- 英文名");
+    public final TableField<EEmployeeRecord, String> VICE_EMAIL = createField("VICE_EMAIL", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「viceEmail」- 员工邮箱");
+    /**
+     * The column <code>DB_ETERNAL.E_EMPLOYEE.VICE_MOBILE</code>. 「viceMobile」- 员工手机
+     */
+    public final TableField<EEmployeeRecord, String> VICE_MOBILE = createField("VICE_MOBILE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「viceMobile」- 员工手机");
     /**
      * The column <code>DB_ETERNAL.E_EMPLOYEE.WORK_NUMBER</code>. 「workNumber」- 工号
      */
@@ -72,10 +76,6 @@ public class EEmployee extends TableImpl<EEmployeeRecord> {
      * The column <code>DB_ETERNAL.E_EMPLOYEE.WORK_TITLE</code>. 「workTitle」- 头衔
      */
     public final TableField<EEmployeeRecord, String> WORK_TITLE = createField("WORK_TITLE", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「workTitle」- 头衔");
-    /**
-     * The column <code>DB_ETERNAL.E_EMPLOYEE.WORK_EMAIL</code>. 「workEmail」- 办公邮箱
-     */
-    public final TableField<EEmployeeRecord, String> WORK_EMAIL = createField("WORK_EMAIL", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「workEmail」- 办公邮箱");
     /**
      * The column <code>DB_ETERNAL.E_EMPLOYEE.WORK_LOCATION</code>. 「workLocation」- 办公地点
      */
@@ -88,10 +88,6 @@ public class EEmployee extends TableImpl<EEmployeeRecord> {
      * The column <code>DB_ETERNAL.E_EMPLOYEE.WORK_EXTENSION</code>. 「workExtension」- 分机号
      */
     public final TableField<EEmployeeRecord, String> WORK_EXTENSION = createField("WORK_EXTENSION", org.jooq.impl.SQLDataType.VARCHAR(20), this, "「workExtension」- 分机号");
-    /**
-     * The column <code>DB_ETERNAL.E_EMPLOYEE.WORK_MOBILE</code>. 「workMobile」- 办公用手机
-     */
-    public final TableField<EEmployeeRecord, String> WORK_MOBILE = createField("WORK_MOBILE", org.jooq.impl.SQLDataType.VARCHAR(20), this, "「workMobile」- 办公用手机");
     /**
      * The column <code>DB_ETERNAL.E_EMPLOYEE.TYPE</code>. 「type」- 员工分类
      */
