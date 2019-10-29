@@ -17,6 +17,7 @@ public class IxModule implements Serializable {
     private String pojo;
     private IxField field;
     private IxColumn column;
+    private IxJoin connect;
 
     @JsonSerialize(using = ClassSerializer.class)
     @JsonDeserialize(using = ClassDeserializer.class)
@@ -94,6 +95,15 @@ public class IxModule implements Serializable {
         this.table = table;
     }
 
+    public IxJoin getConnect() {
+        return this.connect;
+    }
+
+    public void setConnect(final IxJoin connect) {
+        this.connect = connect;
+    }
+
+
     @Override
     public String toString() {
         return "IxModule{" +
@@ -105,6 +115,7 @@ public class IxModule implements Serializable {
                 ", pojoCls=" + this.pojoCls +
                 ", daoCls=" + this.daoCls +
                 ", header=" + this.header +
+                ", connect=" + this.connect +
                 '}';
     }
 }

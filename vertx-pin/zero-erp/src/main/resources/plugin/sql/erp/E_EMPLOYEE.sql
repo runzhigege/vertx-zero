@@ -15,19 +15,20 @@ CREATE TABLE `E_EMPLOYEE`
     `COMPANY_ID`     VARCHAR(36) COMMENT '「companyId」- 所属公司',
     `DEPT_ID`        VARCHAR(36) COMMENT '「deptId」- 所属部门',
     `TEAM_ID`        VARCHAR(36) COMMENT '「teamId」- 所属组',
-    `IDENTITY_ID`    VARCHAR(36) COMMENT '「identityId」- 身份关联ID',
+    `IDENTITY_ID`    VARCHAR(36) COMMENT '「identityId」- 关联档案',
+    -- 二级姓名/手机/邮箱
+    -- 和账号关联时，则直接使用账号中的三个值
+    -- 和账号不关联时，则使用当前员工表中的该值
+    `VICE_NAME`      VARCHAR(255) COMMENT '「viceName」- 员工姓名',
+    `VICE_EMAIL`     VARCHAR(255) COMMENT '「viceEmail」- 员工邮箱',
+    `VICE_MOBILE`    VARCHAR(255) COMMENT '「viceMobile」- 员工手机',
 
     -- 办公信息
-    `WORK_CN_NAME`   VARCHAR(255) COMMENT '「workCnName」- 中文名',
-    `WORK_EN_NAME`   VARCHAR(255) COMMENT '「workEnName」- 英文名',
-
     `WORK_NUMBER`    VARCHAR(255) COMMENT '「workNumber」- 工号',
     `WORK_TITLE`     VARCHAR(255) COMMENT '「workTitle」- 头衔',
-    `WORK_EMAIL`     VARCHAR(255) COMMENT '「workEmail」- 办公邮箱',
     `WORK_LOCATION`  TEXT COMMENT '「workLocation」- 办公地点',
     `WORK_PHONE`     VARCHAR(20) COMMENT '「workPhone」- 办公电话',
     `WORK_EXTENSION` VARCHAR(20) COMMENT '「workExtension」- 分机号',
-    `WORK_MOBILE`    VARCHAR(20) COMMENT '「workMobile」- 办公用手机',
 
     -- 特殊字段
     `TYPE`           VARCHAR(36) COMMENT '「type」- 员工分类',
@@ -46,5 +47,3 @@ CREATE TABLE `E_EMPLOYEE`
 -- changeset Lang:h-employee-2
 ALTER TABLE E_EMPLOYEE
     ADD UNIQUE (`WORK_NUMBER`, `COMPANY_ID`);
-ALTER TABLE E_EMPLOYEE
-    ADD UNIQUE (`SIGMA`, `IDENTITY_ID`); -- 员工身份信息应该是 1:1 的关系

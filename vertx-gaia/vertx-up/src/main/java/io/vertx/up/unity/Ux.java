@@ -25,6 +25,7 @@ import org.jooq.Condition;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentMap;
 import java.util.function.*;
 
 /**
@@ -135,6 +136,14 @@ public final class Ux {
 
     public static <T> Function<T, Future<JsonObject>> applyField(final JsonObject input, final String field) {
         return Apply.applyField(input, field);
+    }
+
+    public static <T> Function<T, Future<T>> applyNil(final Function<T, Future<T>> executor) {
+        return Apply.applyNil(executor);
+    }
+
+    public static Function<JsonObject, Future<JsonObject>> applyJNil(final Function<JsonObject, Future<JsonObject>> executor) {
+        return Apply.applyNil(executor);
     }
 
     // ---------------------- Envelop Returned --------------------------
@@ -275,6 +284,10 @@ public final class Ux {
      */
     public static Future<JsonArray> thenCombine(final List<Future<JsonObject>> futures) {
         return Fluctuate.thenCombine(futures);
+    }
+
+    public static <T> Future<ConcurrentMap<String, T>> thenCombine(final ConcurrentMap<String, Future<T>> futureMap) {
+        return Fluctuate.thenCombine(futureMap);
     }
 
     public static Future<JsonArray> thenCombineArray(final List<Future<JsonArray>> futures) {

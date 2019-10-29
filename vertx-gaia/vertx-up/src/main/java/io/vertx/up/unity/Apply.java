@@ -35,4 +35,14 @@ class Apply {
             }
         };
     }
+
+    static <T> Function<T, Future<T>> applyNil(final Function<T, Future<T>> executor) {
+        return input -> {
+            if (Objects.isNull(input)) {
+                return To.toFuture(input);
+            } else {
+                return executor.apply(input);
+            }
+        };
+    }
 }

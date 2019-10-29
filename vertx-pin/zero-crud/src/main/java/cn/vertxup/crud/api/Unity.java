@@ -66,7 +66,7 @@ class Unity {
         /* If null */
         if (Objects.isNull(stub)) {
             /* No thing return from this interface */
-            return Ux.toFuture(new JsonArray()).compose(Http::success200);
+            return Ux.toFuture(new JsonArray()).compose(IxHttp::success200);
         } else {
             return executor.get();
         }

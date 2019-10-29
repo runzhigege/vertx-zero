@@ -54,6 +54,16 @@ public interface IEIdentity extends Serializable {
     public String getType();
 
     /**
+     * Setter for <code>DB_ETERNAL.E_IDENTITY.STATUS</code>. 「status」- 档案状态
+     */
+    public IEIdentity setStatus(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.E_IDENTITY.STATUS</code>. 「status」- 档案状态
+     */
+    public String getStatus();
+
+    /**
      * Setter for <code>DB_ETERNAL.E_IDENTITY.COUNTRY</code>. 「country」- 国籍
      */
     public IEIdentity setCountry(String value);
@@ -94,12 +104,12 @@ public interface IEIdentity extends Serializable {
     public String getAddress();
 
     /**
-     * Setter for <code>DB_ETERNAL.E_IDENTITY.REALNAME</code>. 「readName」- 真实姓名
+     * Setter for <code>DB_ETERNAL.E_IDENTITY.REALNAME</code>. 「realname」- 真实姓名
      */
     public IEIdentity setRealname(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.E_IDENTITY.REALNAME</code>. 「readName」- 真实姓名
+     * Getter for <code>DB_ETERNAL.E_IDENTITY.REALNAME</code>. 「realname」- 真实姓名
      */
     public String getRealname();
 
@@ -122,6 +132,16 @@ public interface IEIdentity extends Serializable {
      * Getter for <code>DB_ETERNAL.E_IDENTITY.DRIVER_LICENSE</code>. 「driverLicense」- 驾驶证
      */
     public String getDriverLicense();
+
+    /**
+     * Setter for <code>DB_ETERNAL.E_IDENTITY.CAR_PLATE</code>. 「carPlate」- 常用车牌
+     */
+    public IEIdentity setCarPlate(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.E_IDENTITY.CAR_PLATE</code>. 「carPlate」- 常用车牌
+     */
+    public String getCarPlate();
 
     /**
      * Setter for <code>DB_ETERNAL.E_IDENTITY.PASSPORT</code>. 「passport」- 护照
@@ -431,6 +451,7 @@ public interface IEIdentity extends Serializable {
         setKey(json.getString("KEY"));
         setCode(json.getString("CODE"));
         setType(json.getString("TYPE"));
+        setStatus(json.getString("STATUS"));
         setCountry(json.getString("COUNTRY"));
         setNativePlace(json.getString("NATIVE_PLACE"));
         setNation(json.getString("NATION"));
@@ -438,6 +459,7 @@ public interface IEIdentity extends Serializable {
         setRealname(json.getString("REALNAME"));
         // Omitting unrecognized type java.time.LocalDateTime for column BIRTHDAY!
         setDriverLicense(json.getString("DRIVER_LICENSE"));
+        setCarPlate(json.getString("CAR_PLATE"));
         setPassport(json.getString("PASSPORT"));
         setGender(json.getBoolean("GENDER"));
         setMarital(json.getString("MARITAL"));
@@ -476,6 +498,7 @@ public interface IEIdentity extends Serializable {
         json.put("KEY",getKey());
         json.put("CODE",getCode());
         json.put("TYPE",getType());
+        json.put("STATUS",getStatus());
         json.put("COUNTRY",getCountry());
         json.put("NATIVE_PLACE",getNativePlace());
         json.put("NATION",getNation());
@@ -483,6 +506,7 @@ public interface IEIdentity extends Serializable {
         json.put("REALNAME",getRealname());
         // Omitting unrecognized type java.time.LocalDateTime for column BIRTHDAY!
         json.put("DRIVER_LICENSE",getDriverLicense());
+        json.put("CAR_PLATE",getCarPlate());
         json.put("PASSPORT",getPassport());
         json.put("GENDER",getGender());
         json.put("MARITAL",getMarital());

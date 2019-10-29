@@ -6,8 +6,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
-import io.vertx.tp.optic.EcModel;
 import io.vertx.tp.optic.Pocket;
+import io.vertx.tp.optic.business.ExModel;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.unity.Ux;
 
@@ -28,7 +28,7 @@ public class ModService implements ModStub {
     @Override
     public Future<JsonArray> fetchModels(final String sigma) {
         try {
-            final EcModel model = Pocket.lookup(EcModel.class, this.getClass());
+            final ExModel model = Pocket.lookup(ExModel.class, this.getClass());
             return model.fetchAsync(sigma);
         } catch (final WebException ex) {
             return Ux.toFuture(new JsonArray());

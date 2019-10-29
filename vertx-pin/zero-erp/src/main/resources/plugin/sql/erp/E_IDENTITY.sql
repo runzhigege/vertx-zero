@@ -14,15 +14,17 @@ CREATE TABLE `E_IDENTITY`
     `KEY`             VARCHAR(36) NOT NULL COMMENT '「key」- 身份主键',
     `CODE`            VARCHAR(255) COMMENT '「code」- 系统编号',
     `TYPE`            VARCHAR(36) COMMENT '「type」- 身份类型/档案类型',
+    `STATUS`          VARCHAR(255) COMMENT '「status」- 档案状态',
 
     -- 人的基本信息
     `COUNTRY`         VARCHAR(20) COMMENT '「country」- 国籍',
     `NATIVE_PLACE`    VARCHAR(255) COMMENT '「nativePlace」- 籍贯',
     `NATION`          VARCHAR(32) COMMENT '「nation」- 民族',
     `ADDRESS`         TEXT COMMENT '「address」- 居住地址',
-    `REALNAME`        VARCHAR(255) COMMENT '「readName」- 真实姓名',
+    `REALNAME`        VARCHAR(255) COMMENT '「realname」- 真实姓名',
     `BIRTHDAY`        DATETIME COMMENT '「birthday」- 生日',
     `DRIVER_LICENSE`  VARCHAR(255) COMMENT '「driverLicense」- 驾驶证',
+    `CAR_PLATE`       VARCHAR(255) COMMENT '「carPlate」- 常用车牌',
     `PASSPORT`        VARCHAR(255) COMMENT '「passport」- 护照',
     `GENDER`          BIT COMMENT '「gender」- 性别',
     `MARITAL`         VARCHAR(32) COMMENT '「marital」- 婚姻状况',

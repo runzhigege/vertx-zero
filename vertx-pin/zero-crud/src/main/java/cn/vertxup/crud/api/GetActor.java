@@ -4,6 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.actor.IxActor;
+import io.vertx.tp.crud.connect.IxLinker;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.tp.ke.cv.KeField;
@@ -33,9 +34,11 @@ public class GetActor {
             return dao.findByIdAsync(key)
                     .compose(queried -> null == queried ?
                             /* 204 */
-                            Http.success204(queried) :
+                            IxHttp.success204(queried) :
                             /* 200 */
-                            Http.success200(queried, config));
+                            IxHttp.success200(queried, config))
+                    .compose(response -> IxLinker.get().procAsync(request,
+                            response.data(), config));
         });
     }
 
@@ -58,7 +61,7 @@ public class GetActor {
                         .compose(item -> Ut.isNil(pojo) ?
                                 Ux.fnJArray(item) :
                                 Ux.fnJArray(pojo).apply(item))
-                        .compose(Http::success200);
+                        .compose(IxHttp::success200);
             }
         });
     }
@@ -72,7 +75,7 @@ public class GetActor {
                 /* Search full column and it will be used in another method */
                 (dao, config) -> Unity.fetchFull(dao, request, config)
                         /* Result Wrapper to Envelop */
-                        .compose(Http::success200));
+                        .compose(IxHttp::success200));
     }
 
     /*
@@ -94,7 +97,7 @@ public class GetActor {
                     /* Fetch My Columns */
                     .compose(stub.on(dao)::fetchMy)
                     /* Return Result */
-                    .compose(Http::success200)
+                    .compose(IxHttp::success200)
             );
         });
     }

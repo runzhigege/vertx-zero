@@ -26,6 +26,10 @@ public class IxField implements Serializable {
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private JsonObject updated;
 
+    @JsonSerialize(using = JsonObjectSerializer.class)
+    @JsonDeserialize(using = JsonObjectDeserializer.class)
+    private JsonObject numbers;
+
     public String getKey() {
         return this.key;
     }
@@ -58,6 +62,14 @@ public class IxField implements Serializable {
         this.updated = updated;
     }
 
+    public JsonObject getNumbers() {
+        return this.numbers;
+    }
+
+    public void setNumbers(final JsonObject numbers) {
+        this.numbers = numbers;
+    }
+
     @Override
     public String toString() {
         return "IxField{" +
@@ -65,6 +77,7 @@ public class IxField implements Serializable {
                 ", unique=" + this.unique +
                 ", created=" + this.created +
                 ", updated=" + this.updated +
+                ", numbers=" + this.numbers +
                 '}';
     }
 }

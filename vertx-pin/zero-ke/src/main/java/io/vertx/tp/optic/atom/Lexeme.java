@@ -18,6 +18,7 @@ public class Lexeme implements Serializable {
     private static final Annal LOGGER = Annal.get(Lexeme.class);
     /* Default package for channel class here */
     private static final String DEFAULT_PACKAGE = "io.vertx.tp.optic";
+    private static final String BUSINESS_PACKAGE = "io.vertx.tp.optic.business";
     /*
      * Parameters
      */
@@ -35,7 +36,10 @@ public class Lexeme implements Serializable {
         /* Interface class */
         this.parseInterface(input.getString("key"));
         /* Impl class */
-        this.parseImpl(input.getString("value"));
+        if (Objects.nonNull(this.interfaceCls)) {
+            this.parseImpl(input.getString("value"),
+                    this.interfaceCls.getPackage().getName());
+        }
         /* Parameter names */
         this.parseParams();
         /* Valid channel building */
@@ -44,24 +48,46 @@ public class Lexeme implements Serializable {
 
     }
 
-    private String parseClass(final String clsName) {
+    private String parseClass(final String clsName, final String packageName) {
         if (clsName.contains(Strings.DOT)) {
             return clsName;
         } else {
-            return DEFAULT_PACKAGE + Strings.DOT + clsName;
+            /*
+             * Business package of fixed channel
+             * When the class name start with `Ex` ( Extension )
+             * It means that the class must use package name
+             * `io.vertx.tp.optic.business` instead of widely
+             * `io.vertx.tp.optic` here.
+             * The interface must be in the same package
+             */
+            if (Ut.isNil(packageName)) {
+                /*
+                 * Interface workflow here
+                 */
+                if (clsName.startsWith("Ex")) {
+                    return BUSINESS_PACKAGE + Strings.DOT + clsName;
+                } else {
+                    return DEFAULT_PACKAGE + Strings.DOT + clsName;
+                }
+            } else {
+                /*
+                 * Implementation class here
+                 */
+                return packageName + Strings.DOT + clsName;
+            }
         }
     }
 
     private void parseInterface(final String name) {
-        final String interfaceName = this.parseClass(name);
+        final String interfaceName = this.parseClass(name, null);
         final Class<?> interfaceCls = Ut.clazz(interfaceName);
         if (Objects.nonNull(interfaceCls)) {
             this.interfaceCls = interfaceCls;
         }
     }
 
-    private void parseImpl(final String name) {
-        final String implName = this.parseClass(name);
+    private void parseImpl(final String name, final String packageName) {
+        final String implName = this.parseClass(name, packageName);
         final Class<?> implCls = Ut.clazz(implName);
         if (Objects.nonNull(implCls)) {
             this.implCls = implCls;
