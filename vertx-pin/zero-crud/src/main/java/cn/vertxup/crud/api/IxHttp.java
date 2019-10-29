@@ -8,7 +8,7 @@ import io.vertx.up.commune.Envelop;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
-interface Http {
+public interface IxHttp {
 
     /* 201 */
     static <T> Future<Envelop> success201(final T entity) {

@@ -98,17 +98,24 @@ public class EEmployeeDao extends DAOImpl<EEmployeeRecord, cn.vertxup.erp.domain
     }
 
     /**
-     * Fetch records that have <code>WORK_CN_NAME IN (values)</code>
+     * Fetch records that have <code>VICE_NAME IN (values)</code>
      */
-    public List<cn.vertxup.erp.domain.tables.pojos.EEmployee> fetchByWorkCnName(String... values) {
-        return fetch(EEmployee.E_EMPLOYEE.WORK_CN_NAME, values);
+    public List<cn.vertxup.erp.domain.tables.pojos.EEmployee> fetchByViceName(String... values) {
+        return fetch(EEmployee.E_EMPLOYEE.VICE_NAME, values);
     }
 
     /**
-     * Fetch records that have <code>WORK_EN_NAME IN (values)</code>
+     * Fetch records that have <code>VICE_EMAIL IN (values)</code>
      */
-    public List<cn.vertxup.erp.domain.tables.pojos.EEmployee> fetchByWorkEnName(String... values) {
-        return fetch(EEmployee.E_EMPLOYEE.WORK_EN_NAME, values);
+    public List<cn.vertxup.erp.domain.tables.pojos.EEmployee> fetchByViceEmail(String... values) {
+        return fetch(EEmployee.E_EMPLOYEE.VICE_EMAIL, values);
+    }
+
+    /**
+     * Fetch records that have <code>VICE_MOBILE IN (values)</code>
+     */
+    public List<cn.vertxup.erp.domain.tables.pojos.EEmployee> fetchByViceMobile(String... values) {
+        return fetch(EEmployee.E_EMPLOYEE.VICE_MOBILE, values);
     }
 
     /**
@@ -123,13 +130,6 @@ public class EEmployeeDao extends DAOImpl<EEmployeeRecord, cn.vertxup.erp.domain
      */
     public List<cn.vertxup.erp.domain.tables.pojos.EEmployee> fetchByWorkTitle(String... values) {
         return fetch(EEmployee.E_EMPLOYEE.WORK_TITLE, values);
-    }
-
-    /**
-     * Fetch records that have <code>WORK_EMAIL IN (values)</code>
-     */
-    public List<cn.vertxup.erp.domain.tables.pojos.EEmployee> fetchByWorkEmail(String... values) {
-        return fetch(EEmployee.E_EMPLOYEE.WORK_EMAIL, values);
     }
 
     /**
@@ -151,13 +151,6 @@ public class EEmployeeDao extends DAOImpl<EEmployeeRecord, cn.vertxup.erp.domain
      */
     public List<cn.vertxup.erp.domain.tables.pojos.EEmployee> fetchByWorkExtension(String... values) {
         return fetch(EEmployee.E_EMPLOYEE.WORK_EXTENSION, values);
-    }
-
-    /**
-     * Fetch records that have <code>WORK_MOBILE IN (values)</code>
-     */
-    public List<cn.vertxup.erp.domain.tables.pojos.EEmployee> fetchByWorkMobile(String... values) {
-        return fetch(EEmployee.E_EMPLOYEE.WORK_MOBILE, values);
     }
 
     /**
@@ -266,17 +259,24 @@ public class EEmployeeDao extends DAOImpl<EEmployeeRecord, cn.vertxup.erp.domain
     }
 
     /**
-     * Fetch records that have <code>WORK_CN_NAME IN (values)</code> asynchronously
+     * Fetch records that have <code>VICE_NAME IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EEmployee>> fetchByWorkCnNameAsync(List<String> values) {
-        return fetchAsync(EEmployee.E_EMPLOYEE.WORK_CN_NAME,values);
+    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EEmployee>> fetchByViceNameAsync(List<String> values) {
+        return fetchAsync(EEmployee.E_EMPLOYEE.VICE_NAME,values);
     }
 
     /**
-     * Fetch records that have <code>WORK_EN_NAME IN (values)</code> asynchronously
+     * Fetch records that have <code>VICE_EMAIL IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EEmployee>> fetchByWorkEnNameAsync(List<String> values) {
-        return fetchAsync(EEmployee.E_EMPLOYEE.WORK_EN_NAME,values);
+    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EEmployee>> fetchByViceEmailAsync(List<String> values) {
+        return fetchAsync(EEmployee.E_EMPLOYEE.VICE_EMAIL,values);
+    }
+
+    /**
+     * Fetch records that have <code>VICE_MOBILE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EEmployee>> fetchByViceMobileAsync(List<String> values) {
+        return fetchAsync(EEmployee.E_EMPLOYEE.VICE_MOBILE,values);
     }
 
     /**
@@ -291,13 +291,6 @@ public class EEmployeeDao extends DAOImpl<EEmployeeRecord, cn.vertxup.erp.domain
      */
     public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EEmployee>> fetchByWorkTitleAsync(List<String> values) {
         return fetchAsync(EEmployee.E_EMPLOYEE.WORK_TITLE,values);
-    }
-
-    /**
-     * Fetch records that have <code>WORK_EMAIL IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EEmployee>> fetchByWorkEmailAsync(List<String> values) {
-        return fetchAsync(EEmployee.E_EMPLOYEE.WORK_EMAIL,values);
     }
 
     /**
@@ -319,13 +312,6 @@ public class EEmployeeDao extends DAOImpl<EEmployeeRecord, cn.vertxup.erp.domain
      */
     public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EEmployee>> fetchByWorkExtensionAsync(List<String> values) {
         return fetchAsync(EEmployee.E_EMPLOYEE.WORK_EXTENSION,values);
-    }
-
-    /**
-     * Fetch records that have <code>WORK_MOBILE IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EEmployee>> fetchByWorkMobileAsync(List<String> values) {
-        return fetchAsync(EEmployee.E_EMPLOYEE.WORK_MOBILE,values);
     }
 
     /**

@@ -9,8 +9,8 @@ import io.vertx.tp.ambient.cv.AtMsg;
 import io.vertx.tp.ambient.init.AtPin;
 import io.vertx.tp.ambient.refine.At;
 import io.vertx.tp.ke.cv.KeField;
-import io.vertx.tp.optic.EcTodo;
 import io.vertx.tp.optic.Pocket;
+import io.vertx.tp.optic.business.ExTodo;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
@@ -66,7 +66,7 @@ public class TodoService implements TodoStub {
                 .<XTodo>findByIdAsync(key)
                 .compose(Ux::fnJObject)
                 .compose(Ux.applyNil(JsonObject::new, (todo) -> {
-                    final EcTodo todoChannel = Pocket.lookup(EcTodo.class);
+                    final ExTodo todoChannel = Pocket.lookup(ExTodo.class);
                     At.infoInit(LOGGER, AtMsg.CHANNEL_TODO, Objects.isNull(todoChannel) ? null : todoChannel.getClass().getName());
                     return Ux.applyNil(() -> todo, () -> {
                         /*

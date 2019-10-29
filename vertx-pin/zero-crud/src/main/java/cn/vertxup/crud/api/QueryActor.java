@@ -6,11 +6,11 @@ import io.vertx.tp.crud.actor.IxActor;
 import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.up.unity.Ux;
-import io.vertx.up.unity.UxJooq;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.commune.Envelop;
+import io.vertx.up.unity.Ux;
+import io.vertx.up.unity.UxJooq;
 
 /*
  * Query Engine for
@@ -38,7 +38,7 @@ public class QueryActor {
      */
     @Address(Addr.Post.SEARCH)
     public Future<Envelop> search(final Envelop request) {
-        return Ix.create(getClass()).input(request).envelop((dao, config) -> {
+        return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Parameters Extraction */
             final JsonObject body = Ux.getJson1(request);
             return Ux.toFuture(body)
@@ -47,27 +47,27 @@ public class QueryActor {
                     /* Execution */
                     .compose(params -> Ix.query(params, config).apply(dao))
                     /* Completed */
-                    .compose(Http::success200);
+                    .compose(IxHttp::success200);
         });
     }
 
     @Address(Addr.Post.EXISTING)
     public Future<Envelop> existing(final Envelop request) {
-        return Ix.create(getClass()).input(request).envelop((dao, config) -> {
+        return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Pojo Extract */
-            return isExisting(dao, config, request)
+            return this.isExisting(dao, config, request)
                     /* Completed */
-                    .compose(Http::success200);
+                    .compose(IxHttp::success200);
         });
     }
 
     @Address(Addr.Post.MISSING)
     public Future<Envelop> missing(final Envelop request) {
-        return Ix.create(getClass()).input(request).envelop((dao, config) -> {
+        return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Pojo Extract */
-            return isExisting(dao, config, request)
+            return this.isExisting(dao, config, request)
                     /* Completed */
-                    .compose(result -> Http.success200(!result));
+                    .compose(result -> IxHttp.success200(!result));
         });
     }
 

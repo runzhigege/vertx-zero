@@ -1,6 +1,7 @@
 package io.vertx.up.extension;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.up.commune.Envelop;
 
@@ -13,6 +14,13 @@ import io.vertx.up.commune.Envelop;
  * any worker method invoking.
  */
 public interface PlugAuditor {
+    /*
+     * DataRegion bind for plug
+     */
+    default PlugAuditor bind(final JsonObject config) {
+        return this;
+    }
+
     /*
      * The object envelop should be modified in current method,
      * There is no default implementation in zero system.

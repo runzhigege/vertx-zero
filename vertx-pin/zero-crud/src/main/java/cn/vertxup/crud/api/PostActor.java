@@ -2,7 +2,7 @@ package cn.vertxup.crud.api;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.crud.actor.IxActor;
+import io.vertx.tp.crud.connect.IxLinker;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.up.annotations.Address;
@@ -31,36 +31,11 @@ public class PostActor {
         return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Data Get */
             final JsonObject body = Ux.getJson1(request);
-            return Ux.toFuture(body)
-                    /* Header */
-                    .compose(input -> IxActor.header().bind(request).procAsync(input, config))
-                    /* Verify */
-                    .compose(input -> IxActor.verify().bind(request).procAsync(input, config))
-                    /* Unique Filters */
-                    .compose(input -> IxActor.unique().procAsync(input, config))
-                    /* Filters */
-                    .compose(filters -> Ix.search(filters, config).apply(dao))
-                    /* Unique Extract from { list, count } */
-                    .compose(result -> Ix.isExist(result) ?
-                            /* Unique */
-                            Ix.unique(result)
-                                    /* Deserialize */
-                                    .compose(json -> Ix.entityAsync(json, config))
-                                    /* 201, Envelop */
-                                    .compose(entity -> Http.success201(entity, config)) :
-                            /* Primary Key Add */
-                            IxActor.uuid().procAsync(body, config)
-                                    /* Create */
-                                    .compose(input -> IxActor.create().bind(request).procAsync(input, config))
-                                    /* Update */
-                                    .compose(input -> IxActor.update().bind(request).procAsync(input, config))
-                                    /* Build Data */
-                                    .compose(input -> Ix.entityAsync(input, config))
-                                    /* T */
-                                    .compose(dao::insertAsync)
-                                    /* 200, Envelop */
-                                    .compose(entity -> Http.success200(entity, config))
-                    );
+            return IxHub.createAsync(request, body, dao, config)
+                    /* Extension by connect here for creation */
+                    .compose(response -> IxLinker.create().procAsync(request,
+                            /* Must merged */
+                            body.mergeIn(response.data()), config));
         });
     }
 }

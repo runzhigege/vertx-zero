@@ -1,4 +1,4 @@
-package io.vertx.tp.optic;
+package io.vertx.tp.optic.business;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonArray;
 /*
  * Model information for some connected points usage.
  */
-public interface EcModel {
+public interface ExModel {
     /*
      * Read all model information to fill
      * 1) Tabular -> identifier

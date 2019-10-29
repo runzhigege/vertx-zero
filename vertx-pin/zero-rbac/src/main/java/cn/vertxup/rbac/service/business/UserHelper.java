@@ -3,8 +3,8 @@ package cn.vertxup.rbac.service.business;
 import cn.vertxup.rbac.domain.tables.pojos.SUser;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.optic.EcUser;
 import io.vertx.tp.optic.Pocket;
+import io.vertx.tp.optic.business.ExEmployee;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.log.Annal;
@@ -36,11 +36,18 @@ class UserHelper {
         return Ux.toFuture(user).compose(Ux::fnJObject);
     }
 
-    private static Future<JsonObject> applyTunnel(final SUser user, final Function<EcUser, Future<JsonObject>> fnTunnel) {
+    private static Future<JsonObject> applyTunnel(final SUser user, final Function<ExEmployee, Future<JsonObject>> fnTunnel) {
         if (Objects.nonNull(user)) {
             if (Objects.nonNull(user.getModelKey())) {
-                final EcUser executor = Pocket.lookup(EcUser.class);
+                final ExEmployee executor = Pocket.lookup(ExEmployee.class);
                 if (Objects.nonNull(executor)) {
+                    /*
+                     * Simple situation for user information get
+                     * 1) EcEmployee `only` in standard situation
+                     * 2) Zero extension provide employee information get only
+                     * 3) You can write another complex `EcEmployee` implementation class
+                     *    to extend related information read.
+                     */
                     Sc.infoAuth(LOGGER, AuthMsg.EMPLOYEE_BY_USER, user.getModelKey());
                     return fnTunnel.apply(executor)
                             /* Employee information */
@@ -56,14 +63,27 @@ class UserHelper {
                                     .toFuture()
                             );
                 } else {
+                    /*
+                     * Here branch means that actual definition is conflict with your expected.
+                     * You forget to define executor of `EcEmployee`.
+                     */
                     Sc.infoAuth(LOGGER, AuthMsg.EMPLOYEE_EMPTY + " Executor");
                     return applyUser(user);
                 }
             } else {
+                /*
+                -* There are two fields in S_USER table: MODEL_ID & MODEL_KEY
+                 * This branch means that MODEL_KEY is null, you could not call `EcEmployee`
+                 * for continue information extract
+                 */
                 Sc.infoAuth(LOGGER, AuthMsg.EMPLOYEE_EMPTY + " Model Key");
                 return applyUser(user);
             }
         } else {
+            /*
+             * Input SUser object is null, could not find X_USER record
+             * in your database
+             */
             Sc.infoAuth(LOGGER, AuthMsg.EMPLOYEE_EMPTY + " Null");
             return Ux.toFuture(new JsonObject());
         }
