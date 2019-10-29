@@ -10,6 +10,8 @@ import io.vertx.core.json.JsonObject;
  */
 public interface EmployeeStub {
 
+    String USER_ID = "userId";
+
     Future<JsonObject> createAsync(JsonObject data);
 
     Future<JsonObject> fetchAsync(String key);

@@ -4,7 +4,7 @@ import cn.vertxup.rbac.domain.tables.daos.SUserDao;
 import cn.vertxup.rbac.domain.tables.pojos.SUser;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.tunnel.Nexus;
+import io.vertx.tp.ke.tunnel.Nexus;
 import io.vertx.up.unity.Ux;
 
 public class ExUserEpic implements ExUser {
