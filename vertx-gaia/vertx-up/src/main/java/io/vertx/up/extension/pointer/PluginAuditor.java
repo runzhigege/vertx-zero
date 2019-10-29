@@ -18,7 +18,7 @@ class PluginAuditor {
              * Extend PlugAuditor for auditing system setting for some spec business.
              */
             final PlugAuditor auditor = Ut.singleton(auditCls);
-            return auditor.audit(context, envelop);
+            return auditor.bind(config).audit(context, envelop);
         });
     }
 }
