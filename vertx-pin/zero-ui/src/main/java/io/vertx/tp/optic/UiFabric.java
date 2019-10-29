@@ -1,6 +1,7 @@
 package io.vertx.tp.optic;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.optic.fantom.Fabric;
 
 /*
  * Combiner for processing

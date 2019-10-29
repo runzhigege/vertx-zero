@@ -2,7 +2,7 @@ package io.vertx.tp.ke.refine;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.optic.Fabric;
+import io.vertx.tp.optic.fantom.Fabric;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 

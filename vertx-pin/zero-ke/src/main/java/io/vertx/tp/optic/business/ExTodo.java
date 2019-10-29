@@ -1,4 +1,4 @@
-package io.vertx.tp.optic;
+package io.vertx.tp.optic.business;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
@@ -6,7 +6,7 @@ import io.vertx.core.json.JsonObject;
 /*
  * XTodo Record fetching workflow
  */
-public interface EcTodo {
+public interface ExTodo {
     /*
      * Read data by options
      * 1）tid - XTodo id ( tid )
