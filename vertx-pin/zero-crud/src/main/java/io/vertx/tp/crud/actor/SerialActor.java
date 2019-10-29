@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxField;
 import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.ke.cv.KeField;
-import io.vertx.tp.optic.EcSerial;
+import io.vertx.tp.optic.business.ExSerial;
 import io.vertx.tp.optic.Pocket;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
@@ -34,7 +34,7 @@ class SerialActor extends AbstractActor {
             /*
              * Generate numbers here
              */
-            final EcSerial serial = Pocket.lookup(EcSerial.class);
+            final ExSerial serial = Pocket.lookup(ExSerial.class);
             final String sigma = data.getString(KeField.SIGMA);
             if (Objects.nonNull(serial) && Ut.notNil(sigma)) {
                 final ConcurrentMap<String, Future<String>> numberMap =

@@ -1,4 +1,4 @@
-package io.vertx.tp.optic;
+package io.vertx.tp.optic.business;
 
 import io.vertx.core.Future;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * 1) it will impact crud module
  * 2) Also it could be used in different part
  */
-public interface EcSerial {
+public interface ExSerial {
     /*
      * Generate single serial
      */

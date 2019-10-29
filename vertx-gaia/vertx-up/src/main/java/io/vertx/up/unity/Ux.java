@@ -138,6 +138,14 @@ public final class Ux {
         return Apply.applyField(input, field);
     }
 
+    public static <T> Function<T, Future<T>> applyNil(final Function<T, Future<T>> executor) {
+        return Apply.applyNil(executor);
+    }
+
+    public static Function<JsonObject, Future<JsonObject>> applyJNil(final Function<JsonObject, Future<JsonObject>> executor) {
+        return Apply.applyNil(executor);
+    }
+
     // ---------------------- Envelop Returned --------------------------
     // -> List<T> -> Envelop
     public static <T> Envelop to(final List<T> list) {

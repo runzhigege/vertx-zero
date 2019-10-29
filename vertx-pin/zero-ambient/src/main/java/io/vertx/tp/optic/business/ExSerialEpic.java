@@ -1,4 +1,4 @@
-package io.vertx.tp.optic;
+package io.vertx.tp.optic.business;
 
 import cn.vertxup.ambient.service.DatumService;
 import cn.vertxup.ambient.service.DatumStub;
@@ -9,7 +9,7 @@ import io.vertx.up.util.Ut;
 
 import java.util.List;
 
-public class ExSerialEpic implements EcSerial {
+public class ExSerialEpic implements ExSerial {
 
     private final transient DatumStub stub = Ut.singleton(DatumService.class);
 

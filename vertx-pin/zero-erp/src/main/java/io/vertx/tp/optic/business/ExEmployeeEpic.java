@@ -1,4 +1,4 @@
-package io.vertx.tp.optic;
+package io.vertx.tp.optic.business;
 
 import cn.vertxup.erp.domain.tables.daos.EEmployeeDao;
 import cn.vertxup.erp.domain.tables.pojos.EEmployee;
@@ -10,7 +10,7 @@ import io.vertx.up.unity.Ux;
  * Get user information from database
  * Account + Employee
  */
-public class ExUserEpic implements EcUser {
+public class ExEmployeeEpic implements ExEmployee {
     @Override
     public Future<JsonObject> fetchAsync(final String id) {
         return Ux.Jooq.on(EEmployeeDao.class)
