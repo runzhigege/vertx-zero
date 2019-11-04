@@ -7,9 +7,9 @@
 [INFO] ------------------------------------------------------------------------
 [INFO] os.detected.name: osx
 [INFO] os.detected.arch: x86_64
-[INFO] os.detected.version: 10.14
+[INFO] os.detected.version: 10.15
 [INFO] os.detected.version.major: 10
-[INFO] os.detected.version.minor: 14
+[INFO] os.detected.version.minor: 15
 [INFO] os.detected.classifier: osx-x86_64
 [WARNING] The project cn.vertxup:vertx-zero:pom:0.5.1-SNAPSHOT uses prerequisites which is only intended for maven-plugin projects but not for non maven-plugin projects. For such purposes you should use the maven-enforcer-plugin. See https://maven.apache.org/enforcer/enforcer-rules/requireMavenVersion.html
 [INFO] ------------------------------------------------------------------------
@@ -70,27 +70,27 @@
 [INFO] +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO] |  \- io.vertx:vertx-config:jar:3.8.0:compile
 [INFO] +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO] |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO] |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO] |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO] |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO] |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO] |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO] |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO] |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO] |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO] |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
-[INFO] +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO] +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO] |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO] |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO] |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO] |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO] |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO] |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO] |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO] |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO] |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO] |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
+[INFO] +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO] +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO] +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO] |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO] |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO] +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO] +- junit:junit:jar:4.12:compile
 [INFO] |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO] +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO] +- javax.inject:javax.inject:jar:1:compile
-[INFO] +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO] |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO] +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO] |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO] |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO] |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO] +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -106,11 +106,11 @@
 [INFO] +- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:jar:2.9.9:compile
 [INFO] +- com.fasterxml.jackson.core:jackson-core:jar:2.9.9:compile
 [INFO] +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
-[INFO] +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO] +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO] |  \- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO] +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO] +- cglib:cglib:jar:3.3.0:compile
-[INFO] +- org.ow2.asm:asm:jar:7.1:compile
+[INFO] +- org.ow2.asm:asm:jar:7.2:compile
 [INFO] +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO] |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO] +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -125,7 +125,7 @@
 [INFO]    |  +- org.checkerframework:checker-qual:jar:2.8.1:compile
 [INFO]    |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO]    |  +- com.google.j2objc:j2objc-annotations:jar:1.3:compile
-[INFO]    |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO]    |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO]    \- org.javassist:javassist:jar:3.21.0-GA:compile
 [INFO] 
 [INFO] ------------------------< cn.vertxup:vertx-tp >-------------------------
@@ -142,27 +142,27 @@
 [INFO] |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO] |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
 [INFO] |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO] |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO] |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO] |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO] |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO] |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO] |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO] |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO] |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO] |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO] |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
-[INFO] |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO] |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO] |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO] |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO] |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO] |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO] |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO] |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO] |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO] |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO] |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO] |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
+[INFO] |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO] |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO] |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO] |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO] |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO] |  +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO] |  +- junit:junit:jar:4.12:compile
 [INFO] |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO] |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO] |  +- javax.inject:javax.inject:jar:1:compile
-[INFO] |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO] |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO] |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO] |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO] |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO] |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO] |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -178,11 +178,11 @@
 [INFO] |  +- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:jar:2.9.9:compile
 [INFO] |  +- com.fasterxml.jackson.core:jackson-core:jar:2.9.9:compile
 [INFO] |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
-[INFO] |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO] |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO] |  |  \- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO] |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO] |  +- cglib:cglib:jar:3.3.0:compile
-[INFO] |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO] |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO] |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO] |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO] |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -199,7 +199,7 @@
 [INFO] +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO] |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO] +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO] +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO] +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO] |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO] +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO] |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -217,27 +217,27 @@
 [INFO] +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO] |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO] |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO] |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO] |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO] |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO] |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO] |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO] |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO] +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO] |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO] +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO] |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO] |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO] +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO] |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO] |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO] |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO] |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO] |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO] |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO] |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO] |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO] |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO] |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO] +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO] |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO] |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO] |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO] |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO] |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO] |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO] |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO] |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO] |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO] +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO] |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO] |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -259,16 +259,16 @@
 [INFO] |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO] |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO] |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
-[INFO] |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO] |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO] |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO] |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO] |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO] |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO] |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO] |  |  +- junit:junit:jar:4.12:compile
 [INFO] |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO] |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO] |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO] |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO] |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO] |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO] |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO] |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO] |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO] |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -286,7 +286,7 @@
 [INFO] |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
 [INFO] |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO] |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO] |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO] |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO] |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO] |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO] |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -303,7 +303,7 @@
 [INFO] |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO] |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO] |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO] |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO] |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO] |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO] |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO] |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -321,27 +321,27 @@
 [INFO] |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO] |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO] |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO] |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO] |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO] |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO] |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO] |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO] |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO] |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO] |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO] |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO] |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO] |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO] |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO] |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO] |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO] |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO] |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO] |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO] |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO] |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO] |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO] |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO] |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO] |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO] |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO] |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO] |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO] |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO] |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO] |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO] |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO] |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO] |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO] |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO] |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO] |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -349,19 +349,19 @@
 [INFO] |  |        \- org.apache.commons:commons-lang3:jar:3.9:compile
 [INFO] |  \- io.netty:netty-tcnative-boringssl-static:jar:2.0.26.Final:compile
 [INFO] +- io.vertx:vertx-rx-java2:jar:3.8.0:compile
-[INFO] |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO] |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO] |  +- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO] |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO] |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO] |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO] |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO] |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO] |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO] |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO] |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO] |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO] |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO] |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
+[INFO] |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO] |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO] |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO] |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO] |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO] |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO] |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO] |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO] |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO] |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
 [INFO] |  \- io.vertx:vertx-rx-gen:jar:3.8.0:compile
 [INFO] +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO] +- javax.el:javax.el-api:jar:3.0.1-b06:compile
@@ -397,16 +397,16 @@
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO]    |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO]    |  |  +- junit:junit:jar:4.12:compile
 [INFO]    |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO]    |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO]    |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO]    |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO]    |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO]    |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO]    |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO]    |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -418,7 +418,7 @@
 [INFO]    |  |  +- com.fasterxml.jackson.module:jackson-module-afterburner:jar:2.9.9:compile
 [INFO]    |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO]    |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO]    |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO]    |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO]    |  |  +- org.apache.commons:commons-jexl3:jar:3.1:compile
 [INFO]    |  |  +- org.jetbrains:annotations:jar:17.0.0:compile
 [INFO]    |  |  \- org.reflections:reflections:jar:0.9.11:compile
@@ -431,7 +431,7 @@
 [INFO]    |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO]    |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO]    |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO]    |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO]    |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO]    |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -449,27 +449,27 @@
 [INFO]    |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO]    |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO]    |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO]    |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO]    |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO]    |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO]    |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO]    |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO]    |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO]    |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO]    |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO]    |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO]    |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO]    |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO]    |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -477,19 +477,19 @@
 [INFO]    |  |        \- org.apache.commons:commons-lang3:jar:3.9:compile
 [INFO]    |  \- io.netty:netty-tcnative-boringssl-static:jar:2.0.26.Final:compile
 [INFO]    +- io.vertx:vertx-rx-java2:jar:3.8.0:compile
-[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO]    |  +- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO]    |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
 [INFO]    |  \- io.vertx:vertx-rx-gen:jar:3.8.0:compile
 [INFO]    +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO]    +- javax.el:javax.el-api:jar:3.0.1-b06:compile
@@ -515,16 +515,16 @@
 [INFO] |  |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO] |  |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO] |  |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
-[INFO] |  |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO] |  |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO] |  |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO] |  |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO] |  |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO] |  |  |  +- junit:junit:jar:4.12:compile
 [INFO] |  |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO] |  |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO] |  |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO] |  |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO] |  |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO] |  |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO] |  |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO] |  |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO] |  |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO] |  |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -540,11 +540,11 @@
 [INFO] |  |  |  +- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:jar:2.9.9:compile
 [INFO] |  |  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.9.9:compile
 [INFO] |  |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
-[INFO] |  |  |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO] |  |  |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO] |  |  |  |  \- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO] |  |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO] |  |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO] |  |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO] |  |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO] |  |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO] |  |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO] |  |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -561,7 +561,7 @@
 [INFO] |  |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO] |  |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO] |  |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO] |  |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO] |  |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO] |  |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO] |  |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO] |  |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -579,27 +579,27 @@
 [INFO] |  |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO] |  |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO] |  |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO] |  |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO] |  |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO] |  |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO] |  |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO] |  |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO] |  |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO] |  |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO] |  |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO] |  |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO] |  |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO] |  |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO] |  |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO] |  |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO] |  |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO] |  |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO] |  |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO] |  |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO] |  |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO] |  |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO] |  |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO] |  |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO] |  |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO] |  |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO] |  |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO] |  |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO] |  |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO] |  |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO] |  |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO] |  |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO] |  |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO] |  |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO] |  |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO] |  |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO] |  |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO] |  |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -608,16 +608,16 @@
 [INFO] |  |  \- io.netty:netty-tcnative-boringssl-static:jar:2.0.26.Final:compile
 [INFO] |  +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO] |  |  \- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO] |  |     +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO] |  |     +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO] |  |     +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO] |  |     +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO] |  |     |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO] |  |     +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO] |  |     +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO] |  |     +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO] |  |     \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO] |  |        \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
+[INFO] |  |     +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO] |  |     +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO] |  |     +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO] |  |     +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO] |  |     |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO] |  |     +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO] |  |     +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO] |  |     +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO] |  |     \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO] |  |        \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
 [INFO] |  +- javax.el:javax.el-api:jar:3.0.1-b06:compile
 [INFO] |  +- org.glassfish:javax.el:jar:3.0.1-b11:compile
 [INFO] |  \- org.glassfish.jersey.core:jersey-common:jar:2.29.1:compile
@@ -653,27 +653,27 @@
 [INFO]    |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
 [INFO]    |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
-[INFO]    |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO]    |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
+[INFO]    |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO]    |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO]    |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO]    |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO]    |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO]    |  +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO]    |  +- junit:junit:jar:4.12:compile
 [INFO]    |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO]    |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO]    |  +- javax.inject:javax.inject:jar:1:compile
-[INFO]    |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO]    |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO]    |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO]    |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO]    |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO]    |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO]    |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -689,11 +689,11 @@
 [INFO]    |  +- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:jar:2.9.9:compile
 [INFO]    |  +- com.fasterxml.jackson.core:jackson-core:jar:2.9.9:compile
 [INFO]    |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
-[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO]    |  |  \- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO]    |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO]    |  +- cglib:cglib:jar:3.3.0:compile
-[INFO]    |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO]    |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO]    |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO]    |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -710,7 +710,7 @@
 [INFO]    +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO]    |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO]    +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO]    +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO]    +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO]    |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO]    +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO]    |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -728,27 +728,27 @@
 [INFO]    +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO]    |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO]    |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO]    |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO]    |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO]    |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO]    |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO]    |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO]    |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO]    +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO]    |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO]    +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO]    |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO]    |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO]    +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO]    |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO]    |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO]    |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO]    |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO]    |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO]    |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO]    |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO]    |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO]    |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO]    |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO]    +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO]    |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO]    |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO]    |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO]    |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO]    |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO]    |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO]    |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO]    |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO]    |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO]    +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO]    |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO]    |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -771,27 +771,27 @@
 [INFO] |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO] |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
 [INFO] |  |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO] |  |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO] |  |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO] |  |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO] |  |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
-[INFO] |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO] |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO] |  |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO] |  |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO] |  |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO] |  |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
+[INFO] |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO] |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO] |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO] |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO] |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO] |  |  +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO] |  |  +- junit:junit:jar:4.12:compile
 [INFO] |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO] |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO] |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO] |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO] |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO] |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO] |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO] |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO] |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO] |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -807,11 +807,11 @@
 [INFO] |  |  +- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:jar:2.9.9:compile
 [INFO] |  |  +- com.fasterxml.jackson.core:jackson-core:jar:2.9.9:compile
 [INFO] |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
-[INFO] |  |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO] |  |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO] |  |  |  \- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO] |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO] |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO] |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO] |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO] |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO] |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO] |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -828,7 +828,7 @@
 [INFO] |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO] |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO] |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO] |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO] |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO] |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO] |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO] |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -846,27 +846,27 @@
 [INFO] |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO] |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO] |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO] |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO] |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO] |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO] |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO] |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO] |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO] |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO] |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO] |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO] |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO] |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO] |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO] |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO] |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO] |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO] |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO] |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO] |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO] |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO] |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO] |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO] |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO] |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO] |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO] |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO] |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO] |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO] |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO] |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO] |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO] |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO] |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO] |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO] |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO] |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -884,43 +884,50 @@
 [INFO] 
 [INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ zero-ali-sms ---
 [INFO] cn.vertxup:zero-ali-sms:jar:0.5.1-SNAPSHOT
-[INFO] +- com.aliyun:aliyun-java-sdk-core:jar:3.5.1:compile
-[INFO] |  \- org.json:json:jar:20170516:compile
+[INFO] +- com.aliyun:aliyun-java-sdk-core:jar:4.4.6:compile
+[INFO] |  +- com.google.code.gson:gson:jar:2.8.5:compile
+[INFO] |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
+[INFO] |  |  \- commons-codec:commons-codec:jar:1.13:compile
+[INFO] |  +- org.apache.httpcomponents:httpcore:jar:4.4.12:compile
+[INFO] |  +- commons-logging:commons-logging:jar:1.2:compile
+[INFO] |  +- javax.xml.bind:jaxb-api:jar:2.3.1:compile
+[INFO] |  |  \- javax.activation:javax.activation-api:jar:1.2.0:compile
+[INFO] |  +- org.jacoco:org.jacoco.agent:jar:runtime:0.8.3:compile
+[INFO] |  +- org.ini4j:ini4j:jar:0.5.4:compile
+[INFO] |  \- org.slf4j:slf4j-api:jar:1.7.25:compile
 [INFO] +- com.aliyun:aliyun-java-sdk-dysmsapi:jar:1.1.0:compile
 [INFO] \- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
 [INFO]    +- cn.vertxup:vertx-co:jar:0.5.1-SNAPSHOT:compile
 [INFO]    |  +- commons-net:commons-net:jar:3.6:compile
-[INFO]    |  +- commons-codec:commons-codec:jar:1.13:compile
 [INFO]    |  +- io.vertx:vertx-web:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
 [INFO]    |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
-[INFO]    |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO]    |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
+[INFO]    |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO]    |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO]    |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO]    |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO]    |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO]    |  +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO]    |  +- junit:junit:jar:4.12:compile
 [INFO]    |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO]    |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO]    |  +- javax.inject:javax.inject:jar:1:compile
-[INFO]    |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO]    |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO]    |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO]    |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO]    |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO]    |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO]    |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
-[INFO]    |  |  \- org.slf4j:slf4j-api:jar:1.7.25:compile
 [INFO]    |  +- ch.qos.logback:logback-classic:jar:1.2.3:compile
 [INFO]    |  |  \- ch.qos.logback:logback-core:jar:1.2.3:compile
 [INFO]    |  +- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:jar:2.9.9:compile
@@ -932,15 +939,12 @@
 [INFO]    |  +- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:jar:2.9.9:compile
 [INFO]    |  +- com.fasterxml.jackson.core:jackson-core:jar:2.9.9:compile
 [INFO]    |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
-[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO]    |  |  \- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO]    |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO]    |  +- cglib:cglib:jar:3.3.0:compile
-[INFO]    |  +- org.ow2.asm:asm:jar:7.1:compile
-[INFO]    |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
-[INFO]    |  |  \- commons-logging:commons-logging:jar:1.2:compile
+[INFO]    |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO]    |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
-[INFO]    |  +- org.apache.httpcomponents:httpcore:jar:4.4.12:compile
 [INFO]    |  +- org.apache.commons:commons-jexl3:jar:3.1:compile
 [INFO]    |  +- org.jetbrains:annotations:jar:17.0.0:compile
 [INFO]    |  \- org.reflections:reflections:jar:0.9.11:compile
@@ -953,7 +957,7 @@
 [INFO]    +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO]    |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO]    +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO]    +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO]    +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO]    |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO]    +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO]    |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -971,27 +975,27 @@
 [INFO]    +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO]    |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO]    |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO]    |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO]    |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO]    |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO]    |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO]    |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO]    |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO]    +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO]    |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO]    +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO]    |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO]    |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO]    +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO]    |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO]    |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO]    |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO]    |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO]    |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO]    |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO]    |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO]    |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO]    |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO]    |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO]    +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO]    |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO]    |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO]    |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO]    |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO]    |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO]    |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO]    |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO]    |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO]    |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO]    +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO]    |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO]    |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -1014,27 +1018,27 @@
 [INFO]    |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
 [INFO]    |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
-[INFO]    |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO]    |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
+[INFO]    |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO]    |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO]    |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO]    |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO]    |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO]    |  +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO]    |  +- junit:junit:jar:4.12:compile
 [INFO]    |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO]    |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO]    |  +- javax.inject:javax.inject:jar:1:compile
-[INFO]    |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO]    |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO]    |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO]    |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO]    |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO]    |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO]    |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -1050,11 +1054,11 @@
 [INFO]    |  +- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:jar:2.9.9:compile
 [INFO]    |  +- com.fasterxml.jackson.core:jackson-core:jar:2.9.9:compile
 [INFO]    |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
-[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO]    |  |  \- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO]    |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO]    |  +- cglib:cglib:jar:3.3.0:compile
-[INFO]    |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO]    |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO]    |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO]    |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -1071,7 +1075,7 @@
 [INFO]    +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO]    |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO]    +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO]    +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO]    +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO]    |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO]    +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO]    |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -1089,27 +1093,27 @@
 [INFO]    +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO]    |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO]    |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO]    |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO]    |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO]    |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO]    |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO]    |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO]    |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO]    +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO]    |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO]    +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO]    |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO]    |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO]    +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO]    |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO]    |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO]    |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO]    |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO]    |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO]    |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO]    |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO]    |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO]    |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO]    |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO]    +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO]    |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO]    |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO]    |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO]    |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO]    |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO]    |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO]    |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO]    |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO]    |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO]    +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO]    |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO]    |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -1123,13 +1127,13 @@
 [INFO] 
 [INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ zero-excel ---
 [INFO] cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT
-[INFO] +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |  +- org.apache.commons:commons-collections4:jar:4.3:compile
+[INFO] +- org.apache.poi:poi:jar:4.1.1:compile
+[INFO] |  +- org.apache.commons:commons-collections4:jar:4.4:compile
 [INFO] |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
-[INFO] +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
-[INFO] |  +- org.apache.commons:commons-compress:jar:1.18:compile
+[INFO] +- org.apache.poi:poi-ooxml:jar:4.1.1:compile
+[INFO] |  +- org.apache.commons:commons-compress:jar:1.19:compile
 [INFO] |  \- com.github.virtuald:curvesapi:jar:1.06:compile
-[INFO] +- org.apache.poi:poi-ooxml-schemas:jar:4.1.0:compile
+[INFO] +- org.apache.poi:poi-ooxml-schemas:jar:4.1.1:compile
 [INFO] |  \- org.apache.xmlbeans:xmlbeans:jar:3.1.0:compile
 [INFO] \- cn.vertxup:vertx-up:jar:0.5.1-SNAPSHOT:compile
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
@@ -1140,16 +1144,16 @@
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO]    |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO]    |  |  +- junit:junit:jar:4.12:compile
 [INFO]    |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO]    |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO]    |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO]    |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO]    |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO]    |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO]    |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO]    |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -1167,7 +1171,7 @@
 [INFO]    |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
 [INFO]    |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO]    |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO]    |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO]    |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO]    |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -1184,7 +1188,7 @@
 [INFO]    |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO]    |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO]    |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO]    |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO]    |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO]    |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -1202,27 +1206,27 @@
 [INFO]    |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO]    |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO]    |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO]    |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO]    |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO]    |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO]    |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO]    |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO]    |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO]    |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO]    |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO]    |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO]    |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO]    |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO]    |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -1230,19 +1234,19 @@
 [INFO]    |  |        \- org.apache.commons:commons-lang3:jar:3.9:compile
 [INFO]    |  \- io.netty:netty-tcnative-boringssl-static:jar:2.0.26.Final:compile
 [INFO]    +- io.vertx:vertx-rx-java2:jar:3.8.0:compile
-[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO]    |  +- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO]    |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
 [INFO]    |  \- io.vertx:vertx-rx-gen:jar:3.8.0:compile
 [INFO]    +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO]    +- javax.el:javax.el-api:jar:3.0.1-b06:compile
@@ -1268,16 +1272,16 @@
 [INFO] |  |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO] |  |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO] |  |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
-[INFO] |  |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO] |  |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO] |  |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO] |  |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO] |  |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO] |  |  |  +- junit:junit:jar:4.12:compile
 [INFO] |  |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO] |  |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO] |  |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO] |  |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO] |  |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO] |  |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO] |  |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO] |  |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO] |  |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO] |  |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -1295,7 +1299,7 @@
 [INFO] |  |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
 [INFO] |  |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO] |  |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO] |  |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO] |  |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO] |  |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO] |  |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO] |  |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -1311,7 +1315,7 @@
 [INFO] |  |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO] |  |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO] |  |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO] |  |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO] |  |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO] |  |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO] |  |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO] |  |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -1329,27 +1333,27 @@
 [INFO] |  |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO] |  |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO] |  |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO] |  |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO] |  |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO] |  |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO] |  |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO] |  |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO] |  |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO] |  |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO] |  |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO] |  |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO] |  |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO] |  |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO] |  |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO] |  |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO] |  |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO] |  |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO] |  |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO] |  |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO] |  |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO] |  |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO] |  |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO] |  |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO] |  |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO] |  |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO] |  |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO] |  |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO] |  |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO] |  |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO] |  |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO] |  |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO] |  |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO] |  |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO] |  |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO] |  |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO] |  |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO] |  |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -1357,19 +1361,19 @@
 [INFO] |  |  |        \- org.apache.commons:commons-lang3:jar:3.9:compile
 [INFO] |  |  \- io.netty:netty-tcnative-boringssl-static:jar:2.0.26.Final:compile
 [INFO] |  +- io.vertx:vertx-rx-java2:jar:3.8.0:compile
-[INFO] |  |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO] |  |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO] |  |  +- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO] |  |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO] |  |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO] |  |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO] |  |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO] |  |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
+[INFO] |  |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO] |  |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO] |  |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO] |  |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
 [INFO] |  |  \- io.vertx:vertx-rx-gen:jar:3.8.0:compile
 [INFO] |  +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO] |  +- javax.el:javax.el-api:jar:3.0.1-b06:compile
@@ -1404,16 +1408,16 @@
 [INFO] |  |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO] |  |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO] |  |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
-[INFO] |  |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO] |  |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO] |  |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO] |  |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO] |  |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO] |  |  |  +- junit:junit:jar:4.12:compile
 [INFO] |  |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO] |  |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO] |  |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO] |  |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO] |  |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO] |  |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO] |  |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO] |  |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO] |  |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO] |  |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -1431,7 +1435,7 @@
 [INFO] |  |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
 [INFO] |  |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO] |  |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO] |  |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO] |  |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO] |  |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO] |  |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO] |  |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -1448,7 +1452,7 @@
 [INFO] |  |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO] |  |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO] |  |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO] |  |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO] |  |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO] |  |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO] |  |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO] |  |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -1466,27 +1470,27 @@
 [INFO] |  |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO] |  |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO] |  |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO] |  |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO] |  |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO] |  |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO] |  |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO] |  |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO] |  |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO] |  |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO] |  |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO] |  |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO] |  |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO] |  |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO] |  |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO] |  |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO] |  |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO] |  |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO] |  |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO] |  |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO] |  |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO] |  |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO] |  |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO] |  |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO] |  |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO] |  |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO] |  |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO] |  |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO] |  |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO] |  |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO] |  |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO] |  |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO] |  |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO] |  |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO] |  |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO] |  |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO] |  |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO] |  |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -1494,19 +1498,19 @@
 [INFO] |  |  |        \- org.apache.commons:commons-lang3:jar:3.9:compile
 [INFO] |  |  \- io.netty:netty-tcnative-boringssl-static:jar:2.0.26.Final:compile
 [INFO] |  +- io.vertx:vertx-rx-java2:jar:3.8.0:compile
-[INFO] |  |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO] |  |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO] |  |  +- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO] |  |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO] |  |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO] |  |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO] |  |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO] |  |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO] |  |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
+[INFO] |  |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO] |  |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO] |  |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO] |  |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO] |  |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
 [INFO] |  |  \- io.vertx:vertx-rx-gen:jar:3.8.0:compile
 [INFO] |  +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO] |  +- javax.el:javax.el-api:jar:3.0.1-b06:compile
@@ -1533,16 +1537,16 @@
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO]    |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO]    |  |  +- junit:junit:jar:4.12:compile
 [INFO]    |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO]    |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO]    |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO]    |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO]    |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO]    |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO]    |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO]    |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -1560,7 +1564,7 @@
 [INFO]    |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
 [INFO]    |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO]    |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO]    |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO]    |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO]    |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -1577,7 +1581,7 @@
 [INFO]    |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO]    |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO]    |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO]    |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO]    |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO]    |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -1595,27 +1599,27 @@
 [INFO]    |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO]    |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO]    |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO]    |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO]    |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO]    |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO]    |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO]    |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO]    |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO]    |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO]    |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO]    |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO]    |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO]    |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO]    |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -1623,19 +1627,19 @@
 [INFO]    |  |        \- org.apache.commons:commons-lang3:jar:3.9:compile
 [INFO]    |  \- io.netty:netty-tcnative-boringssl-static:jar:2.0.26.Final:compile
 [INFO]    +- io.vertx:vertx-rx-java2:jar:3.8.0:compile
-[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO]    |  +- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO]    |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
 [INFO]    |  \- io.vertx:vertx-rx-gen:jar:3.8.0:compile
 [INFO]    +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO]    +- javax.el:javax.el-api:jar:3.0.1-b06:compile
@@ -1653,13 +1657,13 @@
 [INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ zero-ke ---
 [INFO] cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT
 [INFO] +- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
-[INFO] |  +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |  |  +- org.apache.commons:commons-collections4:jar:4.3:compile
+[INFO] |  +- org.apache.poi:poi:jar:4.1.1:compile
+[INFO] |  |  +- org.apache.commons:commons-collections4:jar:4.4:compile
 [INFO] |  |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
-[INFO] |  +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
-[INFO] |  |  +- org.apache.commons:commons-compress:jar:1.18:compile
+[INFO] |  +- org.apache.poi:poi-ooxml:jar:4.1.1:compile
+[INFO] |  |  +- org.apache.commons:commons-compress:jar:1.19:compile
 [INFO] |  |  \- com.github.virtuald:curvesapi:jar:1.06:compile
-[INFO] |  \- org.apache.poi:poi-ooxml-schemas:jar:4.1.0:compile
+[INFO] |  \- org.apache.poi:poi-ooxml-schemas:jar:4.1.1:compile
 [INFO] |     \- org.apache.xmlbeans:xmlbeans:jar:3.1.0:compile
 [INFO] \- cn.vertxup:vertx-up:jar:0.5.1-SNAPSHOT:compile
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
@@ -1670,16 +1674,16 @@
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO]    |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO]    |  |  +- junit:junit:jar:4.12:compile
 [INFO]    |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO]    |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO]    |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO]    |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO]    |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO]    |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO]    |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO]    |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -1697,7 +1701,7 @@
 [INFO]    |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
 [INFO]    |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO]    |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO]    |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO]    |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO]    |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -1714,7 +1718,7 @@
 [INFO]    |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO]    |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO]    |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO]    |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO]    |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO]    |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -1732,27 +1736,27 @@
 [INFO]    |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO]    |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO]    |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO]    |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO]    |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO]    |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO]    |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO]    |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO]    |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO]    |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO]    |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO]    |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO]    |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO]    |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO]    |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -1760,19 +1764,19 @@
 [INFO]    |  |        \- org.apache.commons:commons-lang3:jar:3.9:compile
 [INFO]    |  \- io.netty:netty-tcnative-boringssl-static:jar:2.0.26.Final:compile
 [INFO]    +- io.vertx:vertx-rx-java2:jar:3.8.0:compile
-[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO]    |  +- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO]    |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
 [INFO]    |  \- io.vertx:vertx-rx-gen:jar:3.8.0:compile
 [INFO]    +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO]    +- javax.el:javax.el-api:jar:3.0.1-b06:compile
@@ -1791,13 +1795,13 @@
 [INFO] cn.vertxup:zero-crud:jar:0.5.1-SNAPSHOT
 [INFO] +- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  \- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
-[INFO] |     +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.3:compile
+[INFO] |     +- org.apache.poi:poi:jar:4.1.1:compile
+[INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.4:compile
 [INFO] |     |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
-[INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
-[INFO] |     |  +- org.apache.commons:commons-compress:jar:1.18:compile
+[INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.1:compile
+[INFO] |     |  +- org.apache.commons:commons-compress:jar:1.19:compile
 [INFO] |     |  \- com.github.virtuald:curvesapi:jar:1.06:compile
-[INFO] |     \- org.apache.poi:poi-ooxml-schemas:jar:4.1.0:compile
+[INFO] |     \- org.apache.poi:poi-ooxml-schemas:jar:4.1.1:compile
 [INFO] |        \- org.apache.xmlbeans:xmlbeans:jar:3.1.0:compile
 [INFO] \- cn.vertxup:vertx-up:jar:0.5.1-SNAPSHOT:compile
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
@@ -1808,16 +1812,16 @@
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO]    |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO]    |  |  +- junit:junit:jar:4.12:compile
 [INFO]    |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO]    |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO]    |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO]    |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO]    |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO]    |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO]    |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO]    |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -1835,7 +1839,7 @@
 [INFO]    |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
 [INFO]    |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO]    |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO]    |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO]    |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO]    |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -1852,7 +1856,7 @@
 [INFO]    |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO]    |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO]    |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO]    |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO]    |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO]    |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -1870,27 +1874,27 @@
 [INFO]    |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO]    |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO]    |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO]    |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO]    |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO]    |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO]    |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO]    |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO]    |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO]    |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO]    |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO]    |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO]    |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO]    |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO]    |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -1898,19 +1902,19 @@
 [INFO]    |  |        \- org.apache.commons:commons-lang3:jar:3.9:compile
 [INFO]    |  \- io.netty:netty-tcnative-boringssl-static:jar:2.0.26.Final:compile
 [INFO]    +- io.vertx:vertx-rx-java2:jar:3.8.0:compile
-[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO]    |  +- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO]    |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
 [INFO]    |  \- io.vertx:vertx-rx-gen:jar:3.8.0:compile
 [INFO]    +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO]    +- javax.el:javax.el-api:jar:3.0.1-b06:compile
@@ -1929,13 +1933,13 @@
 [INFO] cn.vertxup:zero-rbac:jar:0.5.1-SNAPSHOT
 [INFO] +- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  \- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
-[INFO] |     +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.3:compile
+[INFO] |     +- org.apache.poi:poi:jar:4.1.1:compile
+[INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.4:compile
 [INFO] |     |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
-[INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
-[INFO] |     |  +- org.apache.commons:commons-compress:jar:1.18:compile
+[INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.1:compile
+[INFO] |     |  +- org.apache.commons:commons-compress:jar:1.19:compile
 [INFO] |     |  \- com.github.virtuald:curvesapi:jar:1.06:compile
-[INFO] |     \- org.apache.poi:poi-ooxml-schemas:jar:4.1.0:compile
+[INFO] |     \- org.apache.poi:poi-ooxml-schemas:jar:4.1.1:compile
 [INFO] |        \- org.apache.xmlbeans:xmlbeans:jar:3.1.0:compile
 [INFO] \- cn.vertxup:vertx-up:jar:0.5.1-SNAPSHOT:compile
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
@@ -1946,16 +1950,16 @@
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO]    |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO]    |  |  +- junit:junit:jar:4.12:compile
 [INFO]    |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO]    |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO]    |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO]    |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO]    |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO]    |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO]    |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO]    |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -1973,7 +1977,7 @@
 [INFO]    |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
 [INFO]    |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO]    |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO]    |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO]    |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO]    |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -1990,7 +1994,7 @@
 [INFO]    |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO]    |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO]    |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO]    |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO]    |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO]    |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -2008,27 +2012,27 @@
 [INFO]    |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO]    |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO]    |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO]    |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO]    |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO]    |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO]    |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO]    |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO]    |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO]    |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO]    |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO]    |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO]    |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO]    |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO]    |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -2036,19 +2040,19 @@
 [INFO]    |  |        \- org.apache.commons:commons-lang3:jar:3.9:compile
 [INFO]    |  \- io.netty:netty-tcnative-boringssl-static:jar:2.0.26.Final:compile
 [INFO]    +- io.vertx:vertx-rx-java2:jar:3.8.0:compile
-[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO]    |  +- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO]    |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
 [INFO]    |  \- io.vertx:vertx-rx-gen:jar:3.8.0:compile
 [INFO]    +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO]    +- javax.el:javax.el-api:jar:3.0.1-b06:compile
@@ -2067,13 +2071,13 @@
 [INFO] cn.vertxup:zero-ui:jar:0.5.1-SNAPSHOT
 [INFO] +- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  \- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
-[INFO] |     +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.3:compile
+[INFO] |     +- org.apache.poi:poi:jar:4.1.1:compile
+[INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.4:compile
 [INFO] |     |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
-[INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
-[INFO] |     |  +- org.apache.commons:commons-compress:jar:1.18:compile
+[INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.1:compile
+[INFO] |     |  +- org.apache.commons:commons-compress:jar:1.19:compile
 [INFO] |     |  \- com.github.virtuald:curvesapi:jar:1.06:compile
-[INFO] |     \- org.apache.poi:poi-ooxml-schemas:jar:4.1.0:compile
+[INFO] |     \- org.apache.poi:poi-ooxml-schemas:jar:4.1.1:compile
 [INFO] |        \- org.apache.xmlbeans:xmlbeans:jar:3.1.0:compile
 [INFO] \- cn.vertxup:vertx-up:jar:0.5.1-SNAPSHOT:compile
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
@@ -2084,16 +2088,16 @@
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO]    |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO]    |  |  +- junit:junit:jar:4.12:compile
 [INFO]    |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO]    |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO]    |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO]    |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO]    |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO]    |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO]    |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO]    |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -2111,7 +2115,7 @@
 [INFO]    |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
 [INFO]    |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO]    |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO]    |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO]    |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO]    |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -2128,7 +2132,7 @@
 [INFO]    |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO]    |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO]    |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO]    |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO]    |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO]    |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -2146,27 +2150,27 @@
 [INFO]    |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO]    |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO]    |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO]    |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO]    |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO]    |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO]    |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO]    |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO]    |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO]    |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO]    |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO]    |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO]    |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO]    |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO]    |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -2174,19 +2178,19 @@
 [INFO]    |  |        \- org.apache.commons:commons-lang3:jar:3.9:compile
 [INFO]    |  \- io.netty:netty-tcnative-boringssl-static:jar:2.0.26.Final:compile
 [INFO]    +- io.vertx:vertx-rx-java2:jar:3.8.0:compile
-[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO]    |  +- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO]    |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
 [INFO]    |  \- io.vertx:vertx-rx-gen:jar:3.8.0:compile
 [INFO]    +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO]    +- javax.el:javax.el-api:jar:3.0.1-b06:compile
@@ -2206,13 +2210,13 @@
 [INFO] +- cn.vertxup:zero-crud:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  \- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] |     \- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
-[INFO] |        +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |        |  +- org.apache.commons:commons-collections4:jar:4.3:compile
+[INFO] |        +- org.apache.poi:poi:jar:4.1.1:compile
+[INFO] |        |  +- org.apache.commons:commons-collections4:jar:4.4:compile
 [INFO] |        |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
-[INFO] |        +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
-[INFO] |        |  +- org.apache.commons:commons-compress:jar:1.18:compile
+[INFO] |        +- org.apache.poi:poi-ooxml:jar:4.1.1:compile
+[INFO] |        |  +- org.apache.commons:commons-compress:jar:1.19:compile
 [INFO] |        |  \- com.github.virtuald:curvesapi:jar:1.06:compile
-[INFO] |        \- org.apache.poi:poi-ooxml-schemas:jar:4.1.0:compile
+[INFO] |        \- org.apache.poi:poi-ooxml-schemas:jar:4.1.1:compile
 [INFO] |           \- org.apache.xmlbeans:xmlbeans:jar:3.1.0:compile
 [INFO] \- cn.vertxup:vertx-up:jar:0.5.1-SNAPSHOT:compile
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
@@ -2223,16 +2227,16 @@
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO]    |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO]    |  |  +- junit:junit:jar:4.12:compile
 [INFO]    |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO]    |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO]    |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO]    |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO]    |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO]    |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO]    |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO]    |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -2250,7 +2254,7 @@
 [INFO]    |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
 [INFO]    |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO]    |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO]    |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO]    |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO]    |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -2267,7 +2271,7 @@
 [INFO]    |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO]    |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO]    |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO]    |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO]    |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO]    |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -2285,27 +2289,27 @@
 [INFO]    |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO]    |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO]    |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO]    |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO]    |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO]    |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO]    |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO]    |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO]    |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO]    |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO]    |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO]    |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO]    |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO]    |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO]    |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -2313,19 +2317,19 @@
 [INFO]    |  |        \- org.apache.commons:commons-lang3:jar:3.9:compile
 [INFO]    |  \- io.netty:netty-tcnative-boringssl-static:jar:2.0.26.Final:compile
 [INFO]    +- io.vertx:vertx-rx-java2:jar:3.8.0:compile
-[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO]    |  +- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO]    |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
 [INFO]    |  \- io.vertx:vertx-rx-gen:jar:3.8.0:compile
 [INFO]    +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO]    +- javax.el:javax.el-api:jar:3.0.1-b06:compile
@@ -2344,13 +2348,13 @@
 [INFO] cn.vertxup:zero-jet:jar:0.5.1-SNAPSHOT
 [INFO] +- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  \- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
-[INFO] |     +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.3:compile
+[INFO] |     +- org.apache.poi:poi:jar:4.1.1:compile
+[INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.4:compile
 [INFO] |     |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
-[INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
-[INFO] |     |  +- org.apache.commons:commons-compress:jar:1.18:compile
+[INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.1:compile
+[INFO] |     |  +- org.apache.commons:commons-compress:jar:1.19:compile
 [INFO] |     |  \- com.github.virtuald:curvesapi:jar:1.06:compile
-[INFO] |     \- org.apache.poi:poi-ooxml-schemas:jar:4.1.0:compile
+[INFO] |     \- org.apache.poi:poi-ooxml-schemas:jar:4.1.1:compile
 [INFO] |        \- org.apache.xmlbeans:xmlbeans:jar:3.1.0:compile
 [INFO] \- cn.vertxup:vertx-up:jar:0.5.1-SNAPSHOT:compile
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
@@ -2361,16 +2365,16 @@
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO]    |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO]    |  |  +- junit:junit:jar:4.12:compile
 [INFO]    |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO]    |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO]    |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO]    |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO]    |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO]    |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO]    |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO]    |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -2388,7 +2392,7 @@
 [INFO]    |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
 [INFO]    |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO]    |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO]    |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO]    |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO]    |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -2405,7 +2409,7 @@
 [INFO]    |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO]    |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO]    |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO]    |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO]    |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO]    |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -2423,27 +2427,27 @@
 [INFO]    |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO]    |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO]    |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO]    |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO]    |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO]    |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO]    |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO]    |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO]    |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO]    |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO]    |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO]    |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO]    |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO]    |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO]    |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -2451,19 +2455,19 @@
 [INFO]    |  |        \- org.apache.commons:commons-lang3:jar:3.9:compile
 [INFO]    |  \- io.netty:netty-tcnative-boringssl-static:jar:2.0.26.Final:compile
 [INFO]    +- io.vertx:vertx-rx-java2:jar:3.8.0:compile
-[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO]    |  +- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO]    |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
 [INFO]    |  \- io.vertx:vertx-rx-gen:jar:3.8.0:compile
 [INFO]    +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO]    +- javax.el:javax.el-api:jar:3.0.1-b06:compile
@@ -2482,13 +2486,13 @@
 [INFO] cn.vertxup:zero-router:jar:0.5.1-SNAPSHOT
 [INFO] +- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  \- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
-[INFO] |     +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.3:compile
+[INFO] |     +- org.apache.poi:poi:jar:4.1.1:compile
+[INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.4:compile
 [INFO] |     |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
-[INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
-[INFO] |     |  +- org.apache.commons:commons-compress:jar:1.18:compile
+[INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.1:compile
+[INFO] |     |  +- org.apache.commons:commons-compress:jar:1.19:compile
 [INFO] |     |  \- com.github.virtuald:curvesapi:jar:1.06:compile
-[INFO] |     \- org.apache.poi:poi-ooxml-schemas:jar:4.1.0:compile
+[INFO] |     \- org.apache.poi:poi-ooxml-schemas:jar:4.1.1:compile
 [INFO] |        \- org.apache.xmlbeans:xmlbeans:jar:3.1.0:compile
 [INFO] \- cn.vertxup:vertx-up:jar:0.5.1-SNAPSHOT:compile
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
@@ -2499,16 +2503,16 @@
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO]    |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO]    |  |  +- junit:junit:jar:4.12:compile
 [INFO]    |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO]    |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO]    |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO]    |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO]    |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO]    |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO]    |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO]    |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -2526,7 +2530,7 @@
 [INFO]    |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
 [INFO]    |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO]    |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO]    |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO]    |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO]    |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -2543,7 +2547,7 @@
 [INFO]    |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO]    |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO]    |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO]    |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO]    |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO]    |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -2561,27 +2565,27 @@
 [INFO]    |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO]    |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO]    |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO]    |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO]    |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO]    |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO]    |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO]    |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO]    |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO]    |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO]    |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO]    |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO]    |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO]    |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO]    |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -2589,19 +2593,19 @@
 [INFO]    |  |        \- org.apache.commons:commons-lang3:jar:3.9:compile
 [INFO]    |  \- io.netty:netty-tcnative-boringssl-static:jar:2.0.26.Final:compile
 [INFO]    +- io.vertx:vertx-rx-java2:jar:3.8.0:compile
-[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO]    |  +- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO]    |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
 [INFO]    |  \- io.vertx:vertx-rx-gen:jar:3.8.0:compile
 [INFO]    +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO]    +- javax.el:javax.el-api:jar:3.0.1-b06:compile
@@ -2620,13 +2624,13 @@
 [INFO] cn.vertxup:zero-erp:jar:0.5.1-SNAPSHOT
 [INFO] +- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] |  \- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
-[INFO] |     +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.3:compile
+[INFO] |     +- org.apache.poi:poi:jar:4.1.1:compile
+[INFO] |     |  +- org.apache.commons:commons-collections4:jar:4.4:compile
 [INFO] |     |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
-[INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
-[INFO] |     |  +- org.apache.commons:commons-compress:jar:1.18:compile
+[INFO] |     +- org.apache.poi:poi-ooxml:jar:4.1.1:compile
+[INFO] |     |  +- org.apache.commons:commons-compress:jar:1.19:compile
 [INFO] |     |  \- com.github.virtuald:curvesapi:jar:1.06:compile
-[INFO] |     \- org.apache.poi:poi-ooxml-schemas:jar:4.1.0:compile
+[INFO] |     \- org.apache.poi:poi-ooxml-schemas:jar:4.1.1:compile
 [INFO] |        \- org.apache.xmlbeans:xmlbeans:jar:3.1.0:compile
 [INFO] \- cn.vertxup:vertx-up:jar:0.5.1-SNAPSHOT:compile
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
@@ -2637,16 +2641,16 @@
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO]    |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO]    |  |  +- junit:junit:jar:4.12:compile
 [INFO]    |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO]    |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO]    |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO]    |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO]    |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO]    |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO]    |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO]    |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -2664,7 +2668,7 @@
 [INFO]    |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
 [INFO]    |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO]    |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO]    |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO]    |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO]    |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -2681,7 +2685,7 @@
 [INFO]    |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO]    |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO]    |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO]    |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO]    |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO]    |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -2699,27 +2703,27 @@
 [INFO]    |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO]    |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO]    |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO]    |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO]    |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO]    |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO]    |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO]    |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO]    |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO]    |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO]    |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO]    |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO]    |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO]    |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO]    |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -2727,19 +2731,19 @@
 [INFO]    |  |        \- org.apache.commons:commons-lang3:jar:3.9:compile
 [INFO]    |  \- io.netty:netty-tcnative-boringssl-static:jar:2.0.26.Final:compile
 [INFO]    +- io.vertx:vertx-rx-java2:jar:3.8.0:compile
-[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO]    |  +- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO]    |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
 [INFO]    |  \- io.vertx:vertx-rx-gen:jar:3.8.0:compile
 [INFO]    +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO]    +- javax.el:javax.el-api:jar:3.0.1-b06:compile
@@ -2758,13 +2762,13 @@
 [INFO] cn.vertxup:zero-ambient:jar:0.5.1-SNAPSHOT
 [INFO] +- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] +- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
-[INFO] |  +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |  |  +- org.apache.commons:commons-collections4:jar:4.3:compile
+[INFO] |  +- org.apache.poi:poi:jar:4.1.1:compile
+[INFO] |  |  +- org.apache.commons:commons-collections4:jar:4.4:compile
 [INFO] |  |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
-[INFO] |  +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
-[INFO] |  |  +- org.apache.commons:commons-compress:jar:1.18:compile
+[INFO] |  +- org.apache.poi:poi-ooxml:jar:4.1.1:compile
+[INFO] |  |  +- org.apache.commons:commons-compress:jar:1.19:compile
 [INFO] |  |  \- com.github.virtuald:curvesapi:jar:1.06:compile
-[INFO] |  \- org.apache.poi:poi-ooxml-schemas:jar:4.1.0:compile
+[INFO] |  \- org.apache.poi:poi-ooxml-schemas:jar:4.1.1:compile
 [INFO] |     \- org.apache.xmlbeans:xmlbeans:jar:3.1.0:compile
 [INFO] \- cn.vertxup:vertx-up:jar:0.5.1-SNAPSHOT:compile
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
@@ -2775,16 +2779,16 @@
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO]    |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO]    |  |  +- junit:junit:jar:4.12:compile
 [INFO]    |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO]    |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO]    |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO]    |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO]    |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO]    |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO]    |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO]    |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -2802,7 +2806,7 @@
 [INFO]    |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
 [INFO]    |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO]    |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO]    |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO]    |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO]    |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -2819,7 +2823,7 @@
 [INFO]    |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO]    |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO]    |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO]    |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO]    |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO]    |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -2837,27 +2841,27 @@
 [INFO]    |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO]    |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO]    |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO]    |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO]    |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO]    |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO]    |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO]    |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO]    |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO]    |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO]    |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO]    |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO]    |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO]    |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO]    |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -2865,19 +2869,19 @@
 [INFO]    |  |        \- org.apache.commons:commons-lang3:jar:3.9:compile
 [INFO]    |  \- io.netty:netty-tcnative-boringssl-static:jar:2.0.26.Final:compile
 [INFO]    +- io.vertx:vertx-rx-java2:jar:3.8.0:compile
-[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO]    |  +- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO]    |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
 [INFO]    |  \- io.vertx:vertx-rx-gen:jar:3.8.0:compile
 [INFO]    +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO]    +- javax.el:javax.el-api:jar:3.0.1-b06:compile
@@ -2896,13 +2900,13 @@
 [INFO] cn.vertxup:zero-lbs:jar:0.5.1-SNAPSHOT
 [INFO] +- cn.vertxup:zero-ke:jar:0.5.1-SNAPSHOT:compile
 [INFO] +- cn.vertxup:zero-excel:jar:0.5.1-SNAPSHOT:compile
-[INFO] |  +- org.apache.poi:poi:jar:4.1.0:compile
-[INFO] |  |  +- org.apache.commons:commons-collections4:jar:4.3:compile
+[INFO] |  +- org.apache.poi:poi:jar:4.1.1:compile
+[INFO] |  |  +- org.apache.commons:commons-collections4:jar:4.4:compile
 [INFO] |  |  \- org.apache.commons:commons-math3:jar:3.6.1:compile
-[INFO] |  +- org.apache.poi:poi-ooxml:jar:4.1.0:compile
-[INFO] |  |  +- org.apache.commons:commons-compress:jar:1.18:compile
+[INFO] |  +- org.apache.poi:poi-ooxml:jar:4.1.1:compile
+[INFO] |  |  +- org.apache.commons:commons-compress:jar:1.19:compile
 [INFO] |  |  \- com.github.virtuald:curvesapi:jar:1.06:compile
-[INFO] |  \- org.apache.poi:poi-ooxml-schemas:jar:4.1.0:compile
+[INFO] |  \- org.apache.poi:poi-ooxml-schemas:jar:4.1.1:compile
 [INFO] |     \- org.apache.xmlbeans:xmlbeans:jar:3.1.0:compile
 [INFO] \- cn.vertxup:vertx-up:jar:0.5.1-SNAPSHOT:compile
 [INFO]    +- cn.vertxup:vertx-tp:jar:0.5.1-SNAPSHOT:compile
@@ -2913,16 +2917,16 @@
 [INFO]    |  |  |  \- io.vertx:vertx-bridge-common:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-config-yaml:jar:3.8.0:compile
 [INFO]    |  |  |  \- io.vertx:vertx-config:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-transport:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec:jar:4.1.43.Final:compile
 [INFO]    |  |  +- io.vertx:vertx-hazelcast:jar:3.8.0:compile
-[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.2:compile
+[INFO]    |  |  |  \- com.hazelcast:hazelcast:jar:3.12.3:compile
 [INFO]    |  |  +- junit:junit:jar:4.12:compile
 [INFO]    |  |  |  \- org.hamcrest:hamcrest-core:jar:1.3:compile
 [INFO]    |  |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
 [INFO]    |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.0.13.Final:compile
-[INFO]    |  |  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+[INFO]    |  |  +- org.hibernate.validator:hibernate-validator:jar:6.1.0.Final:compile
+[INFO]    |  |  |  +- jakarta.validation:jakarta.validation-api:jar:2.0.2:compile
 [INFO]    |  |  |  +- org.jboss.logging:jboss-logging:jar:3.3.2.Final:compile
 [INFO]    |  |  |  \- com.fasterxml:classmate:jar:1.3.4:compile
 [INFO]    |  |  +- org.slf4j:jul-to-slf4j:jar:1.7.25:compile
@@ -2940,7 +2944,7 @@
 [INFO]    |  |  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.9.9:compile
 [INFO]    |  |  +- javax.servlet:javax.servlet-api:jar:4.0.1:compile
 [INFO]    |  |  +- cglib:cglib:jar:3.3.0:compile
-[INFO]    |  |  +- org.ow2.asm:asm:jar:7.1:compile
+[INFO]    |  |  +- org.ow2.asm:asm:jar:7.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpclient:jar:4.5.10:compile
 [INFO]    |  |  |  \- commons-logging:commons-logging:jar:1.2:compile
 [INFO]    |  |  +- org.apache.httpcomponents:httpmime:jar:4.5.10:compile
@@ -2957,7 +2961,7 @@
 [INFO]    |  +- io.vertx:vertx-codegen:jar:3.8.0:compile
 [INFO]    |  |  \- org.mvel:mvel2:jar:2.3.1.Final:compile
 [INFO]    |  +- com.zaxxer:HikariCP:jar:3.4.1:compile
-[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.17:compile
+[INFO]    |  +- mysql:mysql-connector-java:jar:8.0.18:compile
 [INFO]    |  |  \- com.google.protobuf:protobuf-java:jar:3.10.0:compile
 [INFO]    |  +- io.github.jklingsporn:vertx-jooq-future:jar:2.4.1:compile
 [INFO]    |  |  +- me.escoffier.vertx:vertx-completable-future:jar:0.1.1:compile
@@ -2975,27 +2979,27 @@
 [INFO]    |  +- io.vertx:vertx-auth-mongo:jar:3.8.0:compile
 [INFO]    |  |  +- io.vertx:vertx-auth-common:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-mongo-client:jar:3.8.0:compile
-[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.0:compile
-[INFO]    |  |        +- org.mongodb:bson:jar:3.11.0:compile
-[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.0:compile
+[INFO]    |  |     \- org.mongodb:mongodb-driver-async:jar:3.11.1:compile
+[INFO]    |  |        +- org.mongodb:bson:jar:3.11.1:compile
+[INFO]    |  |        \- org.mongodb:mongodb-driver-core:jar:3.11.1:compile
 [INFO]    |  +- io.vertx:vertx-auth-jwt:jar:3.8.0:compile
 [INFO]    |  |  \- io.vertx:vertx-jwt:jar:3.8.0:compile
-[INFO]    |  +- io.grpc:grpc-core:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-api:jar:1.23.0:compile (version selected from constraint [1.23.0,1.23.0])
-[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.23.0:compile
+[INFO]    |  +- io.grpc:grpc-core:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-api:jar:1.24.1:compile (version selected from constraint [1.24.1,1.24.1])
+[INFO]    |  |  |  +- io.grpc:grpc-context:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.errorprone:error_prone_annotations:jar:2.3.3:compile
 [INFO]    |  |  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
-[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.17:compile
+[INFO]    |  |  |  \- org.codehaus.mojo:animal-sniffer-annotations:jar:1.18:compile
 [INFO]    |  |  +- com.google.android:annotations:jar:4.1.1.4:compile
 [INFO]    |  |  +- io.perfmark:perfmark-api:jar:0.17.0:compile
 [INFO]    |  |  +- io.opencensus:opencensus-api:jar:0.21.0:compile
 [INFO]    |  |  \- io.opencensus:opencensus-contrib-grpc-metrics:jar:0.21.0:compile
 [INFO]    |  +- io.vertx:vertx-grpc:jar:3.8.0:compile
-[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.23.0:compile
-[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.23.0:compile
+[INFO]    |  |  +- io.grpc:grpc-netty:jar:1.24.1:compile
+[INFO]    |  |  +- io.grpc:grpc-protobuf:jar:1.24.1:compile
 [INFO]    |  |  |  +- com.google.api.grpc:proto-google-common-protos:jar:1.12.0:compile
-[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.23.0:compile
-[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.23.0:compile
+[INFO]    |  |  |  \- io.grpc:grpc-protobuf-lite:jar:1.24.1:compile
+[INFO]    |  |  \- io.grpc:grpc-stub:jar:1.24.1:compile
 [INFO]    |  +- org.mousio:etcd4j:jar:2.17.0:compile
 [INFO]    |  |  \- com.github.wnameless:json-flattener:jar:0.6.0:compile
 [INFO]    |  |     +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:compile
@@ -3003,19 +3007,19 @@
 [INFO]    |  |        \- org.apache.commons:commons-lang3:jar:3.9:compile
 [INFO]    |  \- io.netty:netty-tcnative-boringssl-static:jar:2.0.26.Final:compile
 [INFO]    +- io.vertx:vertx-rx-java2:jar:3.8.0:compile
-[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.12:compile
+[INFO]    |  +- io.reactivex.rxjava2:rxjava:jar:2.2.13:compile
 [INFO]    |  +- org.reactivestreams:reactive-streams:jar:1.0.3:compile
 [INFO]    |  +- io.vertx:vertx-core:jar:3.8.0:compile
-[INFO]    |  |  +- io.netty:netty-common:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.41.Final:compile
-[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.41.Final:compile
-[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.41.Final:compile
-[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.41.Final:compile
-[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.41.Final:compile
+[INFO]    |  |  +- io.netty:netty-common:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-buffer:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-handler-proxy:jar:4.1.43.Final:compile
+[INFO]    |  |  |  \- io.netty:netty-codec-socks:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-codec-http2:jar:4.1.43.Final:compile
+[INFO]    |  |  +- io.netty:netty-resolver:jar:4.1.43.Final:compile
+[INFO]    |  |  \- io.netty:netty-resolver-dns:jar:4.1.43.Final:compile
+[INFO]    |  |     \- io.netty:netty-codec-dns:jar:4.1.43.Final:compile
 [INFO]    |  \- io.vertx:vertx-rx-gen:jar:3.8.0:compile
 [INFO]    +- io.vertx:vertx-unit:jar:3.8.0:compile
 [INFO]    +- javax.el:javax.el-api:jar:3.0.1-b06:compile
@@ -3028,35 +3032,35 @@
 [INFO] ------------------------------------------------------------------------
 [INFO] Reactor Summary for vertx-zero: Vertx Up Zero Framework 0.5.1-SNAPSHOT:
 [INFO] 
-[INFO] vertx-zero: Vertx Up Zero Framework ................ SUCCESS [  0.549 s]
-[INFO] vertx-gaia: Zero Core Library Collection ........... SUCCESS [  0.018 s]
-[INFO] ( Vertx Core ) vertx-co: Zero Infrastructure ....... SUCCESS [  0.300 s]
-[INFO] ( Vertx Core ) vertx-tp: Zero Integration .......... SUCCESS [  0.492 s]
-[INFO] ( Vertx Core ) vertx-up: Zero Up Web Container ..... SUCCESS [  0.104 s]
-[INFO] vertx-import: Zero Framework Parent ................ SUCCESS [  0.069 s]
-[INFO] ( Vertx Core ) vertx-rx: Zero Up RxJava Container .. SUCCESS [  0.066 s]
-[INFO] ( Vertx Infix ) vertx-ifx: Zero Plugins ............ SUCCESS [  0.003 s]
-[INFO] ( Vertx Infix ) zero-feign: Feign Client ........... SUCCESS [  0.065 s]
-[INFO] ( Vertx Infix ) zero-iqiy: Iqi Video SDK ........... SUCCESS [  0.059 s]
-[INFO] ( Vertx Infix ) vertx-ali-sms: Ali Yun SMS ......... SUCCESS [  0.063 s]
-[INFO] ( Vertx Infix ) zero-qiniu: QiNiu Service .......... SUCCESS [  0.059 s]
-[INFO] ( Vertx Infix ) zero-excel: Excel Export/Import .... SUCCESS [  0.096 s]
-[INFO] ( Vertx Infix ) zero-native: Native ( Jdbc ) ....... SUCCESS [  0.087 s]
-[INFO] ( Vertx Infix ) zero-redis: Redis Information ...... SUCCESS [  0.096 s]
-[INFO] （ Zero Plugin ) Container Tier ..................... SUCCESS [  0.075 s]
-[INFO] Ke:（ Zero Pin Core ) -- Zero Kernel ................ SUCCESS [  0.081 s]
-[INFO] Ix:（ Zero Pin ) -- Crud Management ................. SUCCESS [  0.092 s]
-[INFO] Sc:（ Zero Pin ) -- Rbac Management ................. SUCCESS [  0.085 s]
-[INFO] Ui:（ Zero Pin ) -- User Interface .................. SUCCESS [  0.085 s]
-[INFO] Ts:（ Zero Pin ) -- Quiz Framework ( Testing ) ...... SUCCESS [  0.088 s]
-[INFO] Jt:（ Zero Pin ) -- Dynamic Api ( Routing ) ......... SUCCESS [  0.088 s]
-[INFO] Rt:（ Zero Pin ) -- Api Gateway of Zero Micro ....... SUCCESS [  0.089 s]
-[INFO] Er:（ Zero Pin ) -- Enterprise Resource Management .. SUCCESS [  0.086 s]
-[INFO] At:（ Zero Pin ) -- Ambient Environment ............. SUCCESS [  0.091 s]
-[INFO] Lb:（ Zero Pin ) -- Location Based Service .......... SUCCESS [  0.098 s]
+[INFO] vertx-zero: Vertx Up Zero Framework ................ SUCCESS [  0.748 s]
+[INFO] vertx-gaia: Zero Core Library Collection ........... SUCCESS [  0.017 s]
+[INFO] ( Vertx Core ) vertx-co: Zero Infrastructure ....... SUCCESS [  0.293 s]
+[INFO] ( Vertx Core ) vertx-tp: Zero Integration .......... SUCCESS [  0.560 s]
+[INFO] ( Vertx Core ) vertx-up: Zero Up Web Container ..... SUCCESS [  0.131 s]
+[INFO] vertx-import: Zero Framework Parent ................ SUCCESS [  0.102 s]
+[INFO] ( Vertx Core ) vertx-rx: Zero Up RxJava Container .. SUCCESS [  0.087 s]
+[INFO] ( Vertx Infix ) vertx-ifx: Zero Plugins ............ SUCCESS [  0.004 s]
+[INFO] ( Vertx Infix ) zero-feign: Feign Client ........... SUCCESS [  0.091 s]
+[INFO] ( Vertx Infix ) zero-iqiy: Iqi Video SDK ........... SUCCESS [  0.081 s]
+[INFO] ( Vertx Infix ) vertx-ali-sms: Ali Yun SMS ......... SUCCESS [  0.106 s]
+[INFO] ( Vertx Infix ) zero-qiniu: QiNiu Service .......... SUCCESS [  0.063 s]
+[INFO] ( Vertx Infix ) zero-excel: Excel Export/Import .... SUCCESS [  0.091 s]
+[INFO] ( Vertx Infix ) zero-native: Native ( Jdbc ) ....... SUCCESS [  0.081 s]
+[INFO] ( Vertx Infix ) zero-redis: Redis Information ...... SUCCESS [  0.100 s]
+[INFO] （ Zero Plugin ) Container Tier ..................... SUCCESS [  0.095 s]
+[INFO] Ke:（ Zero Pin Core ) -- Zero Kernel ................ SUCCESS [  0.106 s]
+[INFO] Ix:（ Zero Pin ) -- Crud Management ................. SUCCESS [  0.115 s]
+[INFO] Sc:（ Zero Pin ) -- Rbac Management ................. SUCCESS [  0.091 s]
+[INFO] Ui:（ Zero Pin ) -- User Interface .................. SUCCESS [  0.082 s]
+[INFO] Ts:（ Zero Pin ) -- Quiz Framework ( Testing ) ...... SUCCESS [  0.093 s]
+[INFO] Jt:（ Zero Pin ) -- Dynamic Api ( Routing ) ......... SUCCESS [  0.103 s]
+[INFO] Rt:（ Zero Pin ) -- Api Gateway of Zero Micro ....... SUCCESS [  0.099 s]
+[INFO] Er:（ Zero Pin ) -- Enterprise Resource Management .. SUCCESS [  0.090 s]
+[INFO] At:（ Zero Pin ) -- Ambient Environment ............. SUCCESS [  0.081 s]
+[INFO] Lb:（ Zero Pin ) -- Location Based Service .......... SUCCESS [  0.073 s]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  4.171 s
-[INFO] Finished at: 2019-09-24T11:02:52+08:00
+[INFO] Total time:  4.978 s
+[INFO] Finished at: 2019-10-31T08:48:52+08:00
 [INFO] ------------------------------------------------------------------------

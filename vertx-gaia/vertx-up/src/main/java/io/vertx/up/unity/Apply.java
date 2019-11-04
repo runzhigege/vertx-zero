@@ -2,6 +2,7 @@ package io.vertx.up.unity;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.util.Ut;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -11,7 +12,14 @@ class Apply {
 
     static <T> Function<T, Future<JsonObject>> applyField(final JsonObject input, final String field) {
         return data -> {
-            input.put(field, data);
+            if (Ut.isNil(field)) {
+                if (data instanceof JsonObject) {
+                    final JsonObject dataR = (JsonObject) data;
+                    input.mergeIn(dataR);
+                }
+            } else {
+                input.put(field, data);
+            }
             return To.toFuture(input);
         };
     }
