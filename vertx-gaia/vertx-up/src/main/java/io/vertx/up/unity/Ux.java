@@ -211,6 +211,26 @@ public final class Ux {
         return Future.succeededFuture(To.toArray(item, ""));
     }
 
+    public static <T> Future<ConcurrentMap<String, JsonArray>> fnJMap(final List<T> item, final String field) {
+        return fnJMap(To.toArray(item, ""), field);
+    }
+
+    public static Future<ConcurrentMap<String, JsonArray>> fnJMap(final JsonArray item, final String field) {
+        return Future.succeededFuture(Ut.elementGroup(item, field));
+    }
+
+    /*
+     * Map by type here
+     */
+    public static <T> Future<ConcurrentMap<String, JsonArray>> fnJMapType(final List<T> item) {
+        return fnJMap(To.toArray(item, ""), "type");
+    }
+
+    public static Future<ConcurrentMap<String, JsonArray>> fnJMapType(final JsonArray item) {
+        return fnJMap(item, "type");
+    }
+
+
     public static <T> Function<T, Future<JsonObject>> fnJObject(final String pojo) {
         return item -> Future.succeededFuture(To.toJson(item, pojo));
     }
@@ -296,6 +316,10 @@ public final class Ux {
 
     public static Future<JsonArray> thenCombineArray(final List<Future<JsonArray>> futures) {
         return Fluctuate.thenCombineArray(futures);
+    }
+
+    public static Future<ConcurrentMap<String, JsonArray>> thenCompress(final List<Future<ConcurrentMap<String, JsonArray>>> futures) {
+        return Fluctuate.thenCompress(futures, (original, latest) -> original.addAll(latest));
     }
 
     /**

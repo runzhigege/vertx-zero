@@ -12,6 +12,7 @@ import io.vertx.up.util.Ut;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiConsumer;
@@ -143,6 +144,66 @@ class Fluctuate {
     ) {
         final WebException error = To.toError(clazz, args);
         return Future.failedFuture(error);
+    }
+
+    /*
+     * List<Future<Map<String,T>>> futures ->
+     *      Future<Map<String,T>>
+     * Exchange data by key here.
+     *      The binary operator should ( T, T ) -> T
+     */
+    static <T> Future<ConcurrentMap<String, T>> thenCompress(
+            final List<Future<ConcurrentMap<String, T>>> futures,
+            final BinaryOperator<T> binaryOperator
+    ) {
+        /* thenResponse */
+        final Promise<ConcurrentMap<String, T>> promise = Promise.promise();
+        final List<Future> converted = new ArrayList<>(futures);
+        CompositeFuture.all(converted).setHandler(thenResponse(promise, (finished) -> {
+            final ConcurrentMap<String, T> resultMap = new ConcurrentHashMap<>();
+            if (Objects.nonNull(finished)) {
+                final List<ConcurrentMap<String, T>> result = finished.list();
+
+                final BinaryOperator<T> mergeOperator = Objects.isNull(binaryOperator) ?
+                        /*
+                         * Default set merged function to
+                         * latest replace original T in result map
+                         * For other situation, the system should call binaryOperator
+                         * to merge (T, T) -> T
+                         * 1) JsonArray
+                         * 2) List<T>
+                         * 3) Others
+                         *
+                         * */
+                        (original, latest) -> latest : binaryOperator;
+                /*
+                 * List<ConcurrentMap<String,T>> result ->
+                 *      ConcurrentMap<String,T>
+                 */
+                result.stream().filter(Objects::nonNull).forEach(each -> each.keySet()
+                        .stream().filter(key -> Objects.nonNull(each.get(key))).forEach(key -> {
+                            final T combined;
+                            if (resultMap.containsKey(key)) {
+                                /*
+                                 * Merged key -> value to result
+                                 */
+                                final T original = resultMap.get(key);
+                                final T latest = each.get(key);
+                                combined = mergeOperator.apply(original, latest);
+                            } else {
+                                /*
+                                 * Extract combined
+                                 */
+                                combined = each.get(key);
+                            }
+                            resultMap.put(key, combined);
+                        }));
+            } else {
+                promise.complete(resultMap);
+            }
+            return resultMap;
+        }));
+        return promise.future();
     }
 
 

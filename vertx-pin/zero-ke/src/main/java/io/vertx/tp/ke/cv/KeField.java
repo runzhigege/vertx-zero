@@ -28,6 +28,7 @@ public interface KeField {
 
     String OUT = "out";
     String IN = "in";
+    String VALUE = "value";
 
     String METADATA = "metadata";
     String SERVICE = "service";

@@ -33,6 +33,7 @@ public class Adminicle implements Serializable {
      * Source definition here for directory configuration
      */
     private final transient List<AdminicleSource> source = new ArrayList<>();
+    private transient String sigma;
 
     /*
      * Build object of Adminicle
@@ -57,5 +58,18 @@ public class Adminicle implements Serializable {
         Ut.itJArray(input)
                 .map(AdminicleSource::new)
                 .forEach(this.source::add);
+    }
+
+    public Adminicle bind(final String sigma) {
+        this.sigma = sigma;
+        return this;
+    }
+
+    public List<AdminicleSource> getSource() {
+        return this.source;
+    }
+
+    public String getSigma() {
+        return this.sigma;
     }
 }

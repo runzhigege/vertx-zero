@@ -25,8 +25,13 @@ public class AdminicleSource implements Serializable {
      */
     private final transient SourceType source;
     private final transient Set<String> types = new HashSet<>();
+    /*
+     * Another source of ASSIST here
+     */
+    private transient String key;
+    private transient Class<?> component;
 
-    public AdminicleSource(final JsonObject definition) {
+    AdminicleSource(final JsonObject definition) {
         /*
          * Source normalize for `source type`
          */
@@ -44,7 +49,27 @@ public class AdminicleSource implements Serializable {
                         .forEach(this.types::add);
             }
         } else if (SourceType.ASSIST == this.source) {
-
+            this.key = definition.getString("key");
+            final String className = definition.getString("component");
+            if (Ut.notNil(className)) {
+                this.component = Ut.clazz(className);
+            }
         }
+    }
+
+    public SourceType getSourceType() {
+        return this.source;
+    }
+
+    public Set<String> getTypes() {
+        return this.types;
+    }
+
+    public String getKey() {
+        return this.key;
+    }
+
+    public <T> T getPlugin() {
+        return Ut.singleton(this.component);
     }
 }
