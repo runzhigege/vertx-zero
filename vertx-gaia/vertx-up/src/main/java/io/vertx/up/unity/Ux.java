@@ -134,16 +134,20 @@ public final class Ux {
         return Apply.applyNil(supplier, executor);
     }
 
-    public static <T> Function<T, Future<JsonObject>> applyField(final JsonObject input, final String field) {
-        return Apply.applyField(input, field);
-    }
-
     public static <T> Function<T, Future<T>> applyNil(final Function<T, Future<T>> executor) {
         return Apply.applyNil(executor);
     }
 
     public static Function<JsonObject, Future<JsonObject>> applyJNil(final Function<JsonObject, Future<JsonObject>> executor) {
         return Apply.applyNil(executor);
+    }
+
+    public static <T> Function<T, Future<JsonObject>> applyField(final JsonObject input, final String field) {
+        return Apply.applyField(input, field);
+    }
+
+    public static <T> Function<T, Future<JsonObject>> applyMerge(final JsonObject input) {
+        return Apply.applyField(input, null);
     }
 
     // ---------------------- Envelop Returned --------------------------

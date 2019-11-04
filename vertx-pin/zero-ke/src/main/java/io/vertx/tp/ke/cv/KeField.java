@@ -2,6 +2,7 @@ package io.vertx.tp.ke.cv;
 
 public interface KeField {
     String ITEMS = "items";
+    String CHANGES = "changes";
     String DATA_KEY = "dataKey";
     String APP_KEY = "appKey";
     String APP_ID = "appId";
@@ -63,8 +64,8 @@ public interface KeField {
     String CLASS_NAME = "className";
     String ROW = "row";
     String INITIAL = "initial";
-    String PROTOCOL = "protocol";
-    String CONTEXT = "context";
+
+    String RECORD = "record";
 
     interface App {
 
