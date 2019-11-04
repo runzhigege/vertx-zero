@@ -25,7 +25,7 @@ public class ActivityService implements ActivityStub {
                              */
                             Ke.metadata(activityJson, "recordNew");
                             Ke.metadata(activityJson, "recordOld");
-                            activityJson.put(KeField.ITEMS, changes);
+                            activityJson.put(KeField.CHANGES, changes);
                             return Ux.toFuture(activityJson);
                         })));
     }

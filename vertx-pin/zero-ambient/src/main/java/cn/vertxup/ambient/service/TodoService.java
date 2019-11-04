@@ -75,7 +75,7 @@ public class TodoService implements TodoStub {
                         final JsonObject params = Ut.elementSubset(todo,
                                 KeField.MODEL_ID, KeField.MODEL_CATEGORY, KeField.MODEL_KEY, KeField.SIGMA);
                         return todoChannel.fetchAsync(key, params)
-                                .compose(Ux.applyField(todo, KeField.DATA));
+                                .compose(Ux.applyMerge(todo));
                     }).apply(todoChannel);
                 }));
     }
