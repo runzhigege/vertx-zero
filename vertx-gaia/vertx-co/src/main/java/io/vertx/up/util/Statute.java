@@ -147,10 +147,14 @@ final class Statute {
                         /*
                          * JsonArray get
                          */
-                        JsonArray reference = ret.get(field);
+                        final String key = item.getString(field);
+                        /*
+                         * `key` calculated here for map final `key`
+                         */
+                        JsonArray reference = ret.get(key);
                         if (Objects.isNull(reference)) {
                             reference = new JsonArray();
-                            ret.put(field, reference);
+                            ret.put(key, reference);
                         }
                         /*
                          * Add new Object

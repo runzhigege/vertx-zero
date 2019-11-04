@@ -18,7 +18,9 @@ public interface KeField {
 
     String USER_ID = "userId";
 
+    String EPSILON = "epsilon";
     String DEBUG = "debug";
+
     String NAME = "name";
     String CODE = "code";
     String TYPE = "type";

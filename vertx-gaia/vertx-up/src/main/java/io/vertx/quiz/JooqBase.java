@@ -25,7 +25,7 @@ import java.util.function.Supplier;
 public abstract class JooqBase extends AsyncBase {
 
     @Rule
-    public final RunTestOnContext rule = new RunTestOnContext();
+    public final RunTestOnContext rule = new RunTestOnContext(OPTIONS);
 
     public UxJooq getDao() {
         return null;

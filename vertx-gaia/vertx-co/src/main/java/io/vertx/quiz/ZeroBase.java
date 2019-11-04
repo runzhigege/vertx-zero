@@ -16,8 +16,8 @@ import org.junit.runner.RunWith;
 public abstract class ZeroBase extends EpicBase {
 
     protected final static VertxOptions OPTIONS = /* Block issue of 2000ms for testing of long time works */
-            new VertxOptions().setMaxEventLoopExecuteTime(30000000000L)
-                    .setMaxWorkerExecuteTime(30000000000L)
+            new VertxOptions().setMaxEventLoopExecuteTime(300_000_000_000L)
+                    .setMaxWorkerExecuteTime(300_000_000_000L)
                     .setBlockedThreadCheckInterval(10000);
     protected final static Vertx VERTX = Vertx.vertx(OPTIONS);
     @Rule
