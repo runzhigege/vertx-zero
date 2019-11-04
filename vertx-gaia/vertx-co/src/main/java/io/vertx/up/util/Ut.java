@@ -101,6 +101,10 @@ public final class Ut {
         return Statute.group(object, keyFn, valueFn);
     }
 
+    public static ConcurrentMap<String, JsonArray> elementGroup(final JsonArray source, final String field) {
+        return Statute.group(source, field);
+    }
+
     // --- Encrypt
     public static String encryptMD5(final String input) {
         return Codec.md5(input);
