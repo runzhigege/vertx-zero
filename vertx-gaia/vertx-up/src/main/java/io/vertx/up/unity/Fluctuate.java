@@ -1,12 +1,12 @@
 package io.vertx.up.unity;
 
 import io.reactivex.Observable;
-import io.vertx.core.*;
+import io.vertx.core.CompositeFuture;
+import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Values;
 import io.vertx.up.exception.WebException;
-import io.vertx.up.exception.web._500InternalServerException;
 import io.vertx.up.util.Ut;
 
 import java.util.ArrayList;
@@ -34,43 +34,37 @@ class Fluctuate {
                     .map(generateFun::apply)
                     .subscribe(secondFutures::add)
                     .dispose();
-            final Promise<JsonArray> result = Promise.promise();
-            CompositeFuture.all(secondFutures).setHandler(res -> {
-                final List<JsonObject> secondary = res.result().list();
+            return CompositeFuture.join(secondFutures).compose(finished -> {
+                final List<JsonObject> secondary = finished.list();
                 // Zipper Operation, the base list is first
                 final List<JsonObject> completed = Ut.elementZip(first.getList(), secondary, operatorFun);
-                result.complete(new JsonArray(completed));
+                return Ux.toFuture(new JsonArray(completed));
             });
-            return result.future();
         });
     }
 
     static Future<JsonObject> thenCombine(
             final Future<JsonObject>... futures
     ) {
-        final Promise<JsonObject> promise = Promise.promise();
-        // thenResponse
-        CompositeFuture.all(Arrays.asList(futures)).setHandler(thenResponse(promise, (finished) -> {
+        return CompositeFuture.join(Arrays.asList(futures)).compose(finished -> {
             final JsonObject resultMap = new JsonObject();
             if (null != finished) {
                 Ut.itList(finished.list(), (item, index) -> resultMap.put(index.toString(), item));
             }
-            return resultMap;
-        }));
-        return promise.future();
+            return Future.succeededFuture(resultMap);
+        });
     }
 
     static <T> Future<ConcurrentMap<String, T>> thenCombine(
             final ConcurrentMap<String, Future<T>> futureMap
     ) {
-        final Promise<ConcurrentMap<String, T>> promise = Promise.promise();
         final List<String> keys = new ArrayList<>();
         final List<Future> futures = new ArrayList<>();
         futureMap.forEach((key, future) -> {
             keys.add(key);
             futures.add(future);
         });
-        CompositeFuture.all(futures).setHandler(thenResponse(promise, (finished) -> {
+        return CompositeFuture.join(futures).compose(finished -> {
             final List<T> list = finished.list();
             /*
              * Index mapping
@@ -84,25 +78,21 @@ class Fluctuate {
                     resultMap.put(key, result);
                 }
             }
-            return resultMap;
-        }));
-        return promise.future();
+            return Future.succeededFuture(resultMap);
+        });
     }
 
     static Future<JsonArray> thenCombineArray(
             final List<Future<JsonArray>> futures
     ) {
-        final Promise<JsonArray> promise = Promise.promise();
-        // thenResponse
         final List<Future> futureList = new ArrayList<>(futures);
-        CompositeFuture.all(futureList).setHandler(thenResponse(promise, (finished) -> {
+        return CompositeFuture.join(futureList).compose(finished -> {
             final JsonArray resultMap = new JsonArray();
             if (null != finished) {
                 Ut.itList(finished.list(), (item, index) -> resultMap.add(item));
             }
-            return resultMap;
-        }));
-        return promise.future();
+            return Future.succeededFuture(resultMap);
+        });
     }
 
     static Future<JsonObject> thenCombine(
@@ -110,32 +100,23 @@ class Fluctuate {
             final Function<JsonObject, List<Future>> generateFun,
             final BiConsumer<JsonObject, JsonObject>... operatorFun
     ) {
-        return source.compose(first -> {
-            final List<Future> secondFutures = generateFun.apply(first);
-            final Promise<JsonObject> promise = Promise.promise();
-            // thenResponse
-            CompositeFuture.all(secondFutures).setHandler(thenResponse(promise, (finished) -> {
-                if (null != finished) {
-                    final List<JsonObject> secondary = finished.list();
-                    // Zipper Operation, the base list is first
-                    Ut.itList(secondary, (item, index) -> operatorFun[index].accept(first, item));
-                }
-                return first;
-            }));
-            return promise.future();
-        });
+        return source.compose(first -> CompositeFuture.join(generateFun.apply(first)).compose(finished -> {
+            if (null != finished) {
+                final List<JsonObject> secondary = finished.list();
+                // Zipper Operation, the base list is first
+                Ut.itList(secondary, (item, index) -> operatorFun[index].accept(first, item));
+            }
+            return Future.succeededFuture(first);
+        }));
     }
 
     static Future<JsonArray> thenCombine(
             final List<Future<JsonObject>> futures
     ) {
-        final Promise<JsonArray> promise = Promise.promise();
-        final List<Future> converted = new ArrayList<>(futures);
-        // thenResponse
-        CompositeFuture.all(converted).setHandler(thenResponse(promise, (finished) ->
-                null == finished ? new JsonArray() : new JsonArray(finished.list())
-        ));
-        return promise.future();
+        return CompositeFuture.join(new ArrayList<>(futures)).compose(finished -> {
+            final JsonArray result = null == finished ? new JsonArray() : new JsonArray(finished.list());
+            return Future.succeededFuture(result);
+        });
     }
 
     static <T> Future<T> thenError(
@@ -157,9 +138,7 @@ class Fluctuate {
             final BinaryOperator<T> binaryOperator
     ) {
         /* thenResponse */
-        final Promise<ConcurrentMap<String, T>> promise = Promise.promise();
-        final List<Future> converted = new ArrayList<>(futures);
-        CompositeFuture.all(converted).setHandler(thenResponse(promise, (finished) -> {
+        return CompositeFuture.join(new ArrayList<>(futures)).compose(finished -> {
             final ConcurrentMap<String, T> resultMap = new ConcurrentHashMap<>();
             if (Objects.nonNull(finished)) {
                 final List<ConcurrentMap<String, T>> result = finished.list();
@@ -198,15 +177,12 @@ class Fluctuate {
                             }
                             resultMap.put(key, combined);
                         }));
-            } else {
-                promise.complete(resultMap);
             }
-            return resultMap;
-        }));
-        return promise.future();
+            return Future.succeededFuture(resultMap);
+        });
     }
-
-
+    /*
+    Old code for future scheduled
     private static <T> Handler<AsyncResult<CompositeFuture>> thenResponse(
             final Promise<T> promise,
             final Function<CompositeFuture, T> fun) {
@@ -223,5 +199,5 @@ class Fluctuate {
                 }
             }
         };
-    }
+    } */
 }

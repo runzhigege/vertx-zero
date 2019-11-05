@@ -4,6 +4,7 @@ import com.esotericsoftware.reflectasm.MethodAccess;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
+import io.vertx.core.Promise;
 import io.vertx.up.exception.zero.InvokingSpecException;
 import io.vertx.up.fn.Actuator;
 import io.vertx.up.fn.Fn;
@@ -56,7 +57,7 @@ final class Invoker {
          * Analyzing method returnType first
          */
         final Class<?> returnType = method.getReturnType();
-        final Future<T> future = Future.future();
+        final Promise<T> promise = Promise.promise();
         try {
             /*
              * Void return for continue calling
@@ -74,7 +75,7 @@ final class Invoker {
                  */
                 Fn.out(method.getParameters().length != args.length + 1,
                         InvokingSpecException.class, Invoker.class, method);
-                final Object[] arguments = Ut.elementAdd(args, future);
+                final Object[] arguments = Ut.elementAdd(args, promise.future());
                 method.invoke(instance, arguments);
             } else {
                 final Object returnValue = method.invoke(instance, args);
@@ -82,7 +83,7 @@ final class Invoker {
                     /*
                      * Future also null
                      */
-                    future.complete(null);
+                    promise.complete(null);
                 } else {
                     if (Instance.isMatch(returnType, Future.class)) {
                         /*
@@ -91,9 +92,9 @@ final class Invoker {
                          */
                         ((Future<T>) returnValue).setHandler(handler -> {
                             if (handler.succeeded()) {
-                                future.complete(handler.result());
+                                promise.complete(handler.result());
                             } else {
-                                future.fail(handler.cause());
+                                promise.fail(handler.cause());
                             }
                         });
                     } else if (Instance.isMatch(returnType, AsyncResult.class)) {
@@ -102,31 +103,31 @@ final class Invoker {
                          */
                         final AsyncResult<T> async = (AsyncResult<T>) returnValue;
                         if (async.succeeded()) {
-                            future.complete(async.result());
+                            promise.complete(async.result());
                         } else {
-                            future.fail(async.cause());
+                            promise.fail(async.cause());
                         }
                     } else if (Instance.isMatch(returnType, Handler.class)) {
                         /*
                          * Handler, not testing here.
                          * Connect future to handler
                          */
-                        future.setHandler(((Handler<AsyncResult<T>>) returnValue));
+                        promise.future().setHandler(((Handler<AsyncResult<T>>) returnValue));
                     } else {
                         /*
                          * Sync calling
                          */
                         final T returnT = (T) returnValue;
-                        future.complete(returnT);
+                        promise.complete(returnT);
                     }
                 }
             }
         } catch (final Throwable ex) {
             // TODO: DEBUG for JVM
             ex.printStackTrace();
-            future.fail(ex);
+            promise.fail(ex);
         }
-        return future;
+        return promise.future();
     }
 
     private static <T> void invokeAsync(final Future<T> future, final Actuator actuator) {

@@ -88,10 +88,6 @@ public abstract class AbstractChannel implements JtChannel {
                  */
                 return this.initAsync(component, request)
                         /*
-                         * Debug for trace errors
-                         */
-                        .otherwise(error -> Ux.debug(error, () -> Boolean.FALSE))
-                        /*
                          * 1) JsonObject: options ( without `mapping` )
                          * 2)
                          */
@@ -103,14 +99,7 @@ public abstract class AbstractChannel implements JtChannel {
                         /*
                          * Response here for future custom
                          */
-                        .compose(ActOut::async)
-                        /*
-                         * Error throw out
-                         */
-                        .otherwise(error -> {
-                            error.printStackTrace();
-                            return Envelop.failure(error);
-                        });
+                        .compose(ActOut::async);
             } else {
                 /*
                  * singleton singleton error

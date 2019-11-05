@@ -20,7 +20,7 @@ import io.vertx.up.uca.job.AbstractMission;
  */
 // @Job(value = JobType.CONTAINER)
 public class JtThanatos extends AbstractMission {
-    private transient final JtMonitor monitor = JtMonitor.create(getClass());
+    private transient final JtMonitor monitor = JtMonitor.create(this.getClass());
 
     /*
      * Data example
@@ -64,6 +64,6 @@ public class JtThanatos extends AbstractMission {
         /*
          * Here provide another reference for Mission injection
          */
-        return JtPandora.async(envelop, commercial, mission, monitor);
+        return JtPandora.async(envelop, commercial, mission, this.monitor);
     }
 }
