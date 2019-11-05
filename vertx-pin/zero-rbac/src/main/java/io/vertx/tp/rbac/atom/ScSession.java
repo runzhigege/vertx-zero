@@ -99,7 +99,7 @@ public class ScSession {
                 .map(ProfileRole::new)
                 .map(ProfileRole::initAsync)
                 .forEach(futures::add);
-        return CompositeFuture.all(futures)
+        return CompositeFuture.join(futures)
                 /* Composite Result */
                 .compose(Sc::<ProfileRole>composite)
                 /* User Process */
@@ -117,7 +117,7 @@ public class ScSession {
                 .forEach(futures::add);
         final Refer parentHod = new Refer();
         final Refer childHod = new Refer();
-        return CompositeFuture.all(futures).compose(Sc::<ProfileGroup>composite).compose(profiles -> Ux.toFuture(profiles)
+        return CompositeFuture.join(futures).compose(Sc::<ProfileGroup>composite).compose(profiles -> Ux.toFuture(profiles)
                 /* Group Direct Mode */
                 .compose(Align::flat)
                 .compose(ScDetent.group(profile)::procAsync)

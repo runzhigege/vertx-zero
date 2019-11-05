@@ -1,11 +1,11 @@
 package io.vertx.up.util;
 
 import com.esotericsoftware.reflectasm.ConstructorAccess;
-import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Values;
 import io.vertx.up.exception.zero.DuplicatedImplException;
-import io.vertx.up.runtime.ZeroPack;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
+import io.vertx.up.runtime.ZeroPack;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;

@@ -29,10 +29,10 @@ public abstract class AbstractAgha implements Agha {
     Interval interval() {
         final Class<?> intervalCls = CONFIG.getInterval().getComponent();
         final Interval interval = Ut.singleton(intervalCls);
-        Ut.contract(interval, Vertx.class, vertx);
+        Ut.contract(interval, Vertx.class, this.vertx);
         if (SELECTED.getAndSet(Boolean.FALSE)) {
             /* Be sure the log only provide once */
-            getLogger().info(Info.JOB_COMPONENT_SELECTED, "Interval", interval.getClass().getName());
+            this.getLogger().info(Info.JOB_COMPONENT_SELECTED, "Interval", interval.getClass().getName());
         }
         return interval;
     }
@@ -57,7 +57,7 @@ public abstract class AbstractAgha implements Agha {
          * Initializing phase reference here.
          */
         final Phase phase = Phase.start(mission.getName())
-                .bind(vertx)
+                .bind(this.vertx)
                 .bind(mission);
 
         return Ux.toFuture(mission)
@@ -84,7 +84,9 @@ public abstract class AbstractAgha implements Agha {
                 /*
                  * 6. Final steps here
                  */
-                .compose(phase::callbackAsync);
+                .compose(phase::callbackAsync)
+                /* Otherwise exception */
+                .otherwise(Ux.otherwise());
     }
 
     protected void preparing(final Mission mission) {
@@ -96,12 +98,12 @@ public abstract class AbstractAgha implements Agha {
              * STARTING -> READY
              * */
             mission.setStatus(JobStatus.READY);
-            getLogger().info(Info.JOB_READY, mission.getName());
-            store().update(mission);
+            this.getLogger().info(Info.JOB_READY, mission.getName());
+            this.store().update(mission);
         }
     }
 
     protected Annal getLogger() {
-        return Annal.get(getClass());
+        return Annal.get(this.getClass());
     }
 }

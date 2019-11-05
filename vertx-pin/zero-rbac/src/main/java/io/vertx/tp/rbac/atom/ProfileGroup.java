@@ -26,50 +26,50 @@ public class ProfileGroup implements Serializable {
 
     public ProfileGroup(final JsonObject data) {
         /* Group Id */
-        groupId = data.getString(AuthKey.F_GROUP_ID);
+        this.groupId = data.getString(AuthKey.F_GROUP_ID);
         /* Priority */
-        priority = data.getInteger(AuthKey.PRIORITY);
+        this.priority = data.getInteger(AuthKey.PRIORITY);
         /* Role */
-        role = null == data.getJsonArray("role")
+        this.role = null == data.getJsonArray("role")
                 ? new JsonArray() : data.getJsonArray("role");
     }
 
     Future<ProfileGroup> initAsync() {
         /* No determine */
-        return fetchProfilesAsync().compose(profiles -> {
+        return this.fetchProfilesAsync().compose(profiles -> {
             /* Clear and add */
-            setRoles(profiles);
+            this.setRoles(profiles);
             return Future.succeededFuture(this);
         });
     }
 
     public ProfileGroup init() {
-        setRoles(fetchProfiles());
+        this.setRoles(this.fetchProfiles());
         return this;
     }
 
     public Integer getPriority() {
-        return priority;
+        return this.priority;
     }
 
     public String getKey() {
-        return groupId;
+        return this.groupId;
     }
 
     public List<ProfileRole> getRoles() {
-        return roles;
+        return this.roles;
     }
 
     private void setRoles(final List<ProfileRole> profiles) {
-        roles.clear();
-        roles.addAll(profiles);
+        this.roles.clear();
+        this.roles.addAll(profiles);
     }
 
     /*
      * Parent Reference for current fetchProfile group
      * */
     public String getReference() {
-        return reference;
+        return this.reference;
     }
 
     public ProfileGroup setReference(final String reference) {
@@ -88,7 +88,7 @@ public class ProfileGroup implements Serializable {
                 .map(ProfileRole::new)
                 .map(ProfileRole::initAsync)
                 .forEach(futures::add);
-        return CompositeFuture.all(futures)
+        return CompositeFuture.join(futures)
                 /* Composite Result */
                 .compose(Sc::<ProfileRole>composite)
                 .compose(profiles -> {
@@ -99,7 +99,7 @@ public class ProfileGroup implements Serializable {
     }
 
     private List<ProfileRole> fetchProfiles() {
-        return role.stream().filter(Objects::nonNull)
+        return this.role.stream().filter(Objects::nonNull)
                 .map(item -> (JsonObject) item)
                 .map(ProfileRole::new)
                 .map(ProfileRole::init)
@@ -116,21 +116,21 @@ public class ProfileGroup implements Serializable {
             return false;
         }
         final ProfileGroup that = (ProfileGroup) o;
-        return groupId.equals(that.groupId);
+        return this.groupId.equals(that.groupId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(groupId);
+        return Objects.hash(this.groupId);
     }
 
     @Override
     public String toString() {
         return "ProfileGroup{" +
-                "groupId='" + groupId + '\'' +
-                ", priority=" + priority +
-                ", role=" + role +
-                ", reference='" + reference + '\'' +
+                "groupId='" + this.groupId + '\'' +
+                ", priority=" + this.priority +
+                ", role=" + this.role +
+                ", reference='" + this.reference + '\'' +
                 '}';
     }
 }

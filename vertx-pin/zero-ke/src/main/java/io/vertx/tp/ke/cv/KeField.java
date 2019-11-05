@@ -18,7 +18,9 @@ public interface KeField {
 
     String USER_ID = "userId";
 
+    String EPSILON = "epsilon";
     String DEBUG = "debug";
+
     String NAME = "name";
     String CODE = "code";
     String TYPE = "type";
@@ -28,6 +30,7 @@ public interface KeField {
 
     String OUT = "out";
     String IN = "in";
+    String VALUE = "value";
 
     String METADATA = "metadata";
     String SERVICE = "service";
@@ -66,6 +69,8 @@ public interface KeField {
     String INITIAL = "initial";
 
     String RECORD = "record";
+
+    String NUMBERS = "numbers";
 
     interface App {
 
