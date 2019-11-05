@@ -74,7 +74,8 @@ public class DatumService implements DatumStub {
                          */
                         .updateAsync(number.setCurrent(number.getCurrent() + count)))
                 .compose(number -> At.serialsAsync(number, count))
-                .compose(generation -> Ux.toFuture(new JsonArray(generation)));
+                .compose(generation -> Ux.toFuture(new JsonArray(generation)))
+                .otherwise(Ux.otherwise(JsonArray::new));
     }
 
     private Future<JsonArray> fetchArray(final Class<?> daoCls, final JsonObject filters) {

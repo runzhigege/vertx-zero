@@ -16,11 +16,24 @@ import org.junit.Rule;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+/*
+ * io.vertx.quiz.EpicBase ( Pure ) :
+ * Support IO method for JsonObject / JsonArray
+ *
+ * |- io.vertx.quiz.ZeroBase ( Vert.x ) :
+ *    Provide vert.x instance with options
+ *
+ *    |- io.vertx.quiz.AsyncBase ( Async ) :
+ *       Support `Database` & `Integration`, also include `async` method.
+ *
+ *       |- io.vertx.quiz.JooqBase ( Jooq ) :
+ *          Support `Jooq` database testing unit
+ *
+ */
 @RunWith(VertxUnitRunner.class)
 public abstract class JooqBase extends AsyncBase {
 
@@ -59,7 +72,7 @@ public abstract class JooqBase extends AsyncBase {
 
     public <T> void notNull(final T entity, final TestContext context) {
         context.assertNotNull(entity);
-        Annal.get(this.getClass()).debug("[ ZERO ] {0}", entity.getClass());
+        Annal.get(this.getClass()).debug("[ Sim ] {0}", entity.getClass());
     }
 
     protected void fetchOneAsync(
@@ -85,7 +98,7 @@ public abstract class JooqBase extends AsyncBase {
                     context::assertNotNull);
         });
     }
-
+/*
     protected void fetchOneAndAsync(
             final TestContext context,
             final Class<?> clazz,
@@ -102,5 +115,5 @@ public abstract class JooqBase extends AsyncBase {
                     jooq.fetchOneAsync(filter),
                     context::assertNotNull);
         });
-    }
+    }*/
 }
