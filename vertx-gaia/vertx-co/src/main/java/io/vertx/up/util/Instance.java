@@ -97,14 +97,6 @@ final class Instance {
      */
     @SuppressWarnings("all")
     static boolean isMatch(final Class<?> clazz, final Class<?> interfaceCls) {
-        /*
-         * If clazz is interface, we should check interface class firstly here
-         * It means that when clazz == interfaceCls, we also consider it's ok to match
-         * To avoid sub-class matched parent class first.
-         */
-        if (clazz == interfaceCls) {
-            return true;
-        }
         final Class<?>[] interfaces = clazz.getInterfaces();
         boolean match = Arrays.stream(interfaces)
                 .anyMatch(item -> item.equals(interfaceCls));
