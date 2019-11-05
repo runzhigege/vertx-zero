@@ -56,6 +56,8 @@ public class DatumService implements DatumStub {
 
     @Override
     public Future<JsonArray> numbersBySigma(final String sigma, final String code, final Integer count) {
+        At.infoFlow(this.getClass(), "Number parameters: sigma = {0}, code = {1}, count = {2}",
+                sigma, code, count);
         final JsonObject filters = new JsonObject();
         filters.put("sigma", sigma);
         filters.put("code", code);

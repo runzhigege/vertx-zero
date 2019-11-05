@@ -36,6 +36,10 @@ public class At {
         AtLog.infoApp(logger, pattern, args);
     }
 
+    public static void infoFlow(final Class<?> clazz, final String pattern, final Object... args) {
+        AtLog.infoExec(clazz, pattern, args);
+    }
+
     /*
      * App Info, Bind to new datasource or current get.
      */

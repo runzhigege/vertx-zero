@@ -70,6 +70,8 @@ public interface KeField {
 
     String RECORD = "record";
 
+    String NUMBERS = "numbers";
+
     interface App {
 
         String COPY_RIGHT = "copyRight";
