@@ -57,7 +57,6 @@ final class Invoker {
          * Analyzing method returnType first
          */
         final Class<?> returnType = method.getReturnType();
-        final Promise<T> promise = Promise.promise();
         try {
             /*
              * Void return for continue calling
@@ -75,59 +74,69 @@ final class Invoker {
                  */
                 Fn.out(method.getParameters().length != args.length + 1,
                         InvokingSpecException.class, Invoker.class, method);
+                /*
+                 * void.class, the system should provide secondary parameters
+                 */
+                final Promise<T> promise = Promise.promise();
                 final Object[] arguments = Ut.elementAdd(args, promise.future());
                 method.invoke(instance, arguments);
+                return promise.future();
             } else {
                 final Object returnValue = method.invoke(instance, args);
                 if (Objects.isNull(returnValue)) {
                     /*
                      * Future also null
+                     * Return to Future.succeededFuture with null reference
+                     * instead of use promise here.
                      */
-                    promise.complete(null);
+                    return Future.succeededFuture(null);
                 } else {
+                    /*
+                     * Workflow async invoking issue here for
+                     * Code programming, it's very critical issue of Future compose
+                     */
                     if (Instance.isMatch(returnType, Future.class)) {
                         /*
                          * Future<T> returned directly,
                          * Connect future -> future
+                         * Return to Future directly, because future is method
+                         * return value, here, we could return internal future directly
+                         * Replaced with method returnValue
                          */
-                        ((Future<T>) returnValue).setHandler(handler -> {
-                            if (handler.succeeded()) {
-                                promise.complete(handler.result());
-                            } else {
-                                promise.fail(handler.cause());
-                            }
-                        });
+                        return ((Future<T>) returnValue);
                     } else if (Instance.isMatch(returnType, AsyncResult.class)) {
                         /*
                          * AsyncResult
                          */
                         final AsyncResult<T> async = (AsyncResult<T>) returnValue;
-                        if (async.succeeded()) {
-                            promise.complete(async.result());
-                        } else {
-                            promise.fail(async.cause());
-                        }
+                        final Promise<T> promise = Promise.promise();
+                        promise.handle(async);
+                        return promise.future();
                     } else if (Instance.isMatch(returnType, Handler.class)) {
                         /*
                          * Handler, not testing here.
                          * Connect future to handler
+                         * Old code
+                         * promise.future().setHandler(((Handler<AsyncResult<T>>) returnValue));
                          */
-                        promise.future().setHandler(((Handler<AsyncResult<T>>) returnValue));
+                        return ((Future<T>) returnValue);
                     } else {
                         /*
                          * Sync calling
+                         * Wrapper future with T instance directly
                          */
                         final T returnT = (T) returnValue;
-                        promise.complete(returnT);
+                        return Future.succeededFuture(returnT);
                     }
                 }
             }
         } catch (final Throwable ex) {
             // TODO: DEBUG for JVM
             ex.printStackTrace();
-            promise.fail(ex);
+            return Future.failedFuture(ex);
         }
-        return promise.future();
+        // Old code set to un-reach code here
+        // return promise.future();
     }
 
     private static <T> void invokeAsync(final Future<T> future, final Actuator actuator) {
