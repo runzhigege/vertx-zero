@@ -34,16 +34,17 @@ class RunOn {
         final Method method = mission.getOn();
         if (Objects.nonNull(method)) {
             Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_3RD_JOB_RUN, mission.getName(), method.getName()));
-        }
-        return this.execute(envelop, method, mission);
+            return this.execute(envelop, method, mission);
+        } else return Ux.toFuture(envelop);
     }
 
     Future<Envelop> callback(final Envelop envelop, final Mission mission) {
         final Method method = mission.getOff();
         if (Objects.nonNull(method)) {
             Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_6TH_JOB_CALLBACK, mission.getName(), method.getName()));
-        }
-        return this.execute(envelop, method, mission);
+            return this.execute(envelop, method, mission);
+        } else return Ux.toFuture(envelop);
+
     }
 
     private Future<Envelop> execute(final Envelop envelop, final Method method, final Mission mission) {
@@ -53,17 +54,13 @@ class RunOn {
                 final Object[] arguments = this.buildArgs(envelop, method, mission);
                 return Ut.invokeAsync(proxy, method, arguments)
                         /* Normalizing data */
-                        .compose(this::normalize)
-                        /* Otherwise exception */
-                        .otherwise(Ux.otherwise());
+                        .compose(this::normalize);
             } catch (final Throwable ex) {
                 ex.printStackTrace();
                 return Future.failedFuture(ex);
             }
         } else {
-            Element.onceLog(mission,
-                    () -> LOGGER.info(Info.PHASE_ERROR, mission.getName(),
-                            envelop.error().getClass().getName()));
+            Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_ERROR, mission.getName(), envelop.error().getClass().getName()));
             return Ux.toFuture(envelop);
         }
     }

@@ -119,9 +119,9 @@ final class StringUtil {
             // Parameter
             final JexlContext context = new MapContext();
             Ut.itJObject(params, (value, key) -> context.set(key, value));
-
             return expression.evaluate(context).toString();
         } catch (final JexlException ex) {
+            ex.printStackTrace();   // For Debug
             throw new JexlExpressionException(StringUtil.class, expr, ex);
         }
     }

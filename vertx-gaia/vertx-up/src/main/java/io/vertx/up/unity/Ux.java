@@ -69,6 +69,15 @@ public final class Ux {
         };
     }
 
+    public static <T> Function<Throwable, T> otherwise(Supplier<T> supplier) {
+        return error -> {
+            if (Objects.nonNull(error)) {
+                error.printStackTrace();
+            }
+            return supplier.get();
+        };
+    }
+
     // ---------------------- JsonObject Returned --------------------------
     // T -> JsonObject
     public static <T> JsonObject toJson(final T entity) {
