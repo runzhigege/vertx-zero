@@ -7,6 +7,7 @@ import io.vertx.core.eventbus.EventBus;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.eon.Info;
+import io.vertx.up.exception.WebException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.uca.job.plugin.JobOutcome;
 import io.vertx.up.unity.Ux;
@@ -32,8 +33,7 @@ class OutPut {
                 /*
                  * Directly
                  */
-                Element.onceLog(mission,
-                        () -> LOGGER.info(Info.PHASE_4TH_JOB, mission.getName()));
+                Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_4TH_JOB, mission.getName()));
 
                 return Future.succeededFuture(envelop);
             } else {
@@ -45,15 +45,16 @@ class OutPut {
                 Ut.contract(outcome, Vertx.class, this.vertx);
                 Ut.contract(outcome, Mission.class, mission);
 
-                Element.onceLog(mission,
-                        () -> LOGGER.info(Info.PHASE_4TH_JOB_ASYNC, mission.getName(), outcome.getClass().getName()));
+                Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_4TH_JOB_ASYNC, mission.getName(), outcome.getClass().getName()));
                 return outcome.afterAsync(envelop);
             }
         } else {
-            Element.onceLog(mission,
-                    () -> LOGGER.info(Info.PHASE_ERROR, mission.getName(),
-                            envelop.error().getClass().getName()));
-
+            Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_ERROR, mission.getName(), envelop.error().getClass().getName()));
+            final WebException error = envelop.error();
+            /*
+             * For spec debug here, this code is very important
+             */
+            error.printStackTrace();
             return Ux.toFuture(envelop);
         }
     }

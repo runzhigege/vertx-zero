@@ -58,6 +58,17 @@ public final class Ux {
         return supplier.get();
     }
 
+    public static Function<Throwable, Envelop> otherwise() {
+        return error -> {
+            if (Objects.nonNull(error)) {
+                error.printStackTrace();
+                return Envelop.failure(error);
+            } else {
+                return Envelop.ok();
+            }
+        };
+    }
+
     // ---------------------- JsonObject Returned --------------------------
     // T -> JsonObject
     public static <T> JsonObject toJson(final T entity) {
