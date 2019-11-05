@@ -27,9 +27,9 @@ public class Phase {
 
     public Phase bind(final Vertx vertx) {
         this.vertx = vertx;
-        input = new Input(this.vertx);
-        runOn = new RunOn(this.vertx);
-        output = new OutPut(this.vertx);
+        this.input = new Input(this.vertx);
+        this.runOn = new RunOn(this.vertx);
+        this.output = new OutPut(this.vertx);
         return this;
     }
 
@@ -42,28 +42,28 @@ public class Phase {
      * 1. Event Bus with Input
      */
     public Future<Envelop> inputAsync(final Mission mission) {
-        return input.inputAsync(mission);
+        return this.input.inputAsync(mission);
     }
 
     /*
      * 2. JobIncome here
      */
     public Future<Envelop> incomeAsync(final Envelop envelop) {
-        return input.incomeAsync(envelop, mission);
+        return this.input.incomeAsync(envelop, this.mission);
     }
 
     /*
      * 3. Major code logical
      */
     public Future<Envelop> invokeAsync(final Envelop envelop) {
-        return runOn.invoke(envelop, mission);
+        return this.runOn.invoke(envelop, this.mission);
     }
 
     /*
      * 4. JobOutcome here
      */
     public Future<Envelop> outcomeAsync(final Envelop envelop) {
-        return output.outcomeAsync(envelop, mission);
+        return this.output.outcomeAsync(envelop, this.mission);
     }
 
     /*
@@ -72,7 +72,7 @@ public class Phase {
      * Output Address will be defined !
      */
     public Future<Envelop> outputAsync(final Envelop envelop) {
-        return output.outputAsync(envelop, mission);
+        return this.output.outputAsync(envelop, this.mission);
     }
 
     /*
@@ -82,6 +82,6 @@ public class Phase {
      * 3) - Do some checking or job status changing.
      */
     public Future<Envelop> callbackAsync(final Envelop envelop) {
-        return runOn.callback(envelop, mission);
+        return this.runOn.callback(envelop, this.mission);
     }
 }

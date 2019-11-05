@@ -25,18 +25,27 @@ public class AdminicleSource implements Serializable {
      */
     private final transient SourceType source;
     private final transient Set<String> types = new HashSet<>();
+    /*
+     * JsonObject
+     */
+    private final transient JsonObject componentConfig = new JsonObject();
+    /*
+     * Another source of ASSIST here
+     */
+    private transient String key;
+    private transient Class<?> component;
 
-    public AdminicleSource(final JsonObject definition) {
+    AdminicleSource(final JsonObject definition) {
         /*
          * Source normalize for `source type`
          */
         final String source = definition.getString("source");
         this.source = Ut.toEnum(() -> source, SourceType.class, SourceType.NONE);
-        /*
-         * Different definition for
-         * 1) CATEGORY / TABULAR
-         */
         if (SourceType.CATEGORY == this.source || SourceType.TABULAR == this.source) {
+            /*
+             * Different definition for
+             * 1) CATEGORY / TABULAR
+             */
             final JsonArray typeJson = definition.getJsonArray("types");
             if (Objects.nonNull(typeJson)) {
                 typeJson.stream().filter(Objects::nonNull)
@@ -44,7 +53,39 @@ public class AdminicleSource implements Serializable {
                         .forEach(this.types::add);
             }
         } else if (SourceType.ASSIST == this.source) {
-
+            /*
+             * Different definition for
+             * ASSIST
+             */
+            this.key = definition.getString("key");
+            final String className = definition.getString("component");
+            if (Ut.notNil(className)) {
+                this.component = Ut.clazz(className);
+            }
+            final JsonObject componentConfig = definition.getJsonObject("componentConfig");
+            if (Ut.notNil(componentConfig)) {
+                this.componentConfig.mergeIn(componentConfig);
+            }
         }
+    }
+
+    public SourceType getSourceType() {
+        return this.source;
+    }
+
+    public Set<String> getTypes() {
+        return this.types;
+    }
+
+    public String getKey() {
+        return this.key;
+    }
+
+    public <T> T getPlugin() {
+        return Ut.singleton(this.component);
+    }
+
+    public JsonObject getPluginConfig() {
+        return this.componentConfig;
     }
 }

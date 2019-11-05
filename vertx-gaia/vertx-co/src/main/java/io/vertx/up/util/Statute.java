@@ -110,7 +110,7 @@ final class Statute {
 
     static <K, V, E> ConcurrentMap<K, List<V>> group(final Collection<E> object, final Function<E, K> keyFn, final Function<E, V> valueFn) {
         final ConcurrentMap<K, List<V>> ret = new ConcurrentHashMap<>();
-        if (0 < object.size()) {
+        if (Objects.nonNull(object) && !object.isEmpty()) {
             for (final E item : object) {
                 if (null != item) {
                     final K key = keyFn.apply(item);
@@ -133,6 +133,34 @@ final class Statute {
                     }
                 }
             }
+        }
+        return ret;
+    }
+
+    static ConcurrentMap<String, JsonArray> group(final JsonArray source, final String field) {
+        final ConcurrentMap<String, JsonArray> ret = new ConcurrentHashMap<>();
+        if (Objects.nonNull(source) && !source.isEmpty()) {
+            source.stream().filter(Objects::nonNull)
+                    .map(item -> (JsonObject) item)
+                    .filter(item -> Objects.nonNull(item.getString(field)))
+                    .forEach(item -> {
+                        /*
+                         * JsonArray get
+                         */
+                        final String key = item.getString(field);
+                        /*
+                         * `key` calculated here for map final `key`
+                         */
+                        JsonArray reference = ret.get(key);
+                        if (Objects.isNull(reference)) {
+                            reference = new JsonArray();
+                            ret.put(key, reference);
+                        }
+                        /*
+                         * Add new Object
+                         */
+                        reference.add(item.copy());
+                    });
         }
         return ret;
     }

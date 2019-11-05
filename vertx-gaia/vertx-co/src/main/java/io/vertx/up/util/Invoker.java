@@ -4,8 +4,8 @@ import com.esotericsoftware.reflectasm.MethodAccess;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
+import io.vertx.core.Promise;
 import io.vertx.up.exception.zero.InvokingSpecException;
-import io.vertx.up.fn.Actuator;
 import io.vertx.up.fn.Fn;
 
 import java.lang.reflect.Method;
@@ -56,7 +56,6 @@ final class Invoker {
          * Analyzing method returnType first
          */
         final Class<?> returnType = method.getReturnType();
-        final Future<T> future = Future.future();
         try {
             /*
              * Void return for continue calling
@@ -74,67 +73,73 @@ final class Invoker {
                  */
                 Fn.out(method.getParameters().length != args.length + 1,
                         InvokingSpecException.class, Invoker.class, method);
-                final Object[] arguments = Ut.elementAdd(args, future);
+                /*
+                 * void.class, the system should provide secondary parameters
+                 */
+                final Promise<T> promise = Promise.promise();
+                final Object[] arguments = Ut.elementAdd(args, promise.future());
                 method.invoke(instance, arguments);
+                return promise.future();
             } else {
                 final Object returnValue = method.invoke(instance, args);
                 if (Objects.isNull(returnValue)) {
                     /*
                      * Future also null
+                     * Return to Future.succeededFuture with null reference
+                     * instead of use promise here.
                      */
-                    future.complete(null);
+                    return Future.succeededFuture(null);
                 } else {
-                    if (Instance.isMatch(returnType, Future.class)) {
+                    /*
+                     * Workflow async invoking issue here for
+                     * Code programming, it's very critical issue of Future compose
+                     */
+                    if (isEqualAnd(returnType, Future.class)) {
                         /*
                          * Future<T> returned directly,
                          * Connect future -> future
+                         * Return to Future directly, because future is method
+                         * return value, here, we could return internal future directly
+                         * Replaced with method returnValue
                          */
-                        ((Future<T>) returnValue).setHandler(handler -> {
-                            if (handler.succeeded()) {
-                                future.complete(handler.result());
-                            } else {
-                                future.fail(handler.cause());
-                            }
-                        });
-                    } else if (Instance.isMatch(returnType, AsyncResult.class)) {
+                        return ((Future<T>) returnValue);
+                    } else if (isEqualAnd(returnType, AsyncResult.class)) {
                         /*
                          * AsyncResult
                          */
                         final AsyncResult<T> async = (AsyncResult<T>) returnValue;
-                        if (async.succeeded()) {
-                            future.complete(async.result());
-                        } else {
-                            future.fail(async.cause());
-                        }
-                    } else if (Instance.isMatch(returnType, Handler.class)) {
+                        final Promise<T> promise = Promise.promise();
+                        promise.handle(async);
+                        return promise.future();
+                    } else if (isEqualAnd(returnType, Handler.class)) {
                         /*
                          * Handler, not testing here.
                          * Connect future to handler
+                         * Old code
+                         * promise.future().setHandler(((Handler<AsyncResult<T>>) returnValue));
                          */
-                        future.setHandler(((Handler<AsyncResult<T>>) returnValue));
+                        return ((Future<T>) returnValue);
                     } else {
                         /*
                          * Sync calling
+                         * Wrapper future with T instance directly
                          */
                         final T returnT = (T) returnValue;
-                        future.complete(returnT);
+                        return Future.succeededFuture(returnT);
                     }
                 }
             }
         } catch (final Throwable ex) {
             // TODO: DEBUG for JVM
             ex.printStackTrace();
-            future.fail(ex);
+            return Future.failedFuture(ex);
         }
-        return future;
+        // Old code set to un-reach code here
+        // return promise.future();
     }
 
-    private static <T> void invokeAsync(final Future<T> future, final Actuator actuator) {
-        try {
-            actuator.execute();
-        } catch (final Throwable ex) {
-            future.fail(ex);
-        }
+    private static boolean isEqualAnd(final Class<?> clazz, final Class<?> interfaceCls) {
+        return clazz == interfaceCls || Instance.isMatch(clazz, interfaceCls);
     }
 
     static <T> T invokeInterface(

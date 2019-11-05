@@ -101,6 +101,10 @@ public final class Ut {
         return Statute.group(object, keyFn, valueFn);
     }
 
+    public static ConcurrentMap<String, JsonArray> elementGroup(final JsonArray source, final String field) {
+        return Statute.group(source, field);
+    }
+
     // --- Encrypt
     public static String encryptMD5(final String input) {
         return Codec.md5(input);
@@ -837,7 +841,12 @@ public final class Ut {
     }
 
     public static String fromJoin(final Object[] input) {
-        return StringUtil.from(input);
+        return fromJoin(input, ",");
+    }
+
+    public static String fromJoin(final Object[] input, final String separator) {
+        final String[] inputStr = (String[]) input;
+        return StringUtil.join(Arrays.asList(inputStr), separator);
     }
 
     public static Set<String> splitToSet(final String input, final String separator) {

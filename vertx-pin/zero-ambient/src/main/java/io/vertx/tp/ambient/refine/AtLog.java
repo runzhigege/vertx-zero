@@ -29,4 +29,9 @@ class AtLog {
     static void infoFile(final Annal logger, final String pattern, final Object... args) {
         info(logger, "File", pattern, args);
     }
+
+    static void infoExec(final Class<?> clazz, final String pattern, final Object... args) {
+        final Annal logger = Annal.get(clazz);
+        info(logger, "Execution", pattern, args);
+    }
 }

@@ -40,7 +40,7 @@ class BtLoader {
         final List<Future> futures = streamFile(folder)
                 .map(BtLoader::importFuture)
                 .collect(Collectors.toList());
-        CompositeFuture.all(futures).compose(result -> {
+        CompositeFuture.join(futures).compose(result -> {
             final List<String> async = result.list();
             callback.handle(Future.succeededFuture(async));
             return Future.succeededFuture(Boolean.TRUE);
@@ -51,7 +51,7 @@ class BtLoader {
         final List<Future> futures = streamFile(folder)
                 .map(BtLoader::ingestFuture)
                 .collect(Collectors.toList());
-        CompositeFuture.all(futures).compose(result -> {
+        CompositeFuture.join(futures).compose(result -> {
             final List<Set<ExTable>> async = result.list();
             final Set<ExTable> tables = new HashSet<>();
             async.forEach(tables::addAll);

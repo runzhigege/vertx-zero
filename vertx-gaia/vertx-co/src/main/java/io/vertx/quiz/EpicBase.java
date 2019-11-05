@@ -12,7 +12,7 @@ public class EpicBase {
     protected String ioFile(final String filename) {
         final Class<?> clazz = this.getClass();
         final String file = "test/" + clazz.getPackage().getName() + "/" + filename;
-        this.getLogger().info("[ ZERO Test ] Test input up.god.file: {0}", file);
+        this.getLogger().info("[ Sim ] Test input file reading from: {0}", file);
         return file;
     }
 
