@@ -6,7 +6,6 @@ import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.Promise;
 import io.vertx.up.exception.zero.InvokingSpecException;
-import io.vertx.up.fn.Actuator;
 import io.vertx.up.fn.Fn;
 
 import java.lang.reflect.Method;
@@ -95,7 +94,7 @@ final class Invoker {
                      * Workflow async invoking issue here for
                      * Code programming, it's very critical issue of Future compose
                      */
-                    if (Instance.isMatch(returnType, Future.class)) {
+                    if (isEqualAnd(returnType, Future.class)) {
                         /*
                          * Future<T> returned directly,
                          * Connect future -> future
@@ -104,7 +103,7 @@ final class Invoker {
                          * Replaced with method returnValue
                          */
                         return ((Future<T>) returnValue);
-                    } else if (Instance.isMatch(returnType, AsyncResult.class)) {
+                    } else if (isEqualAnd(returnType, AsyncResult.class)) {
                         /*
                          * AsyncResult
                          */
@@ -112,7 +111,7 @@ final class Invoker {
                         final Promise<T> promise = Promise.promise();
                         promise.handle(async);
                         return promise.future();
-                    } else if (Instance.isMatch(returnType, Handler.class)) {
+                    } else if (isEqualAnd(returnType, Handler.class)) {
                         /*
                          * Handler, not testing here.
                          * Connect future to handler
@@ -139,12 +138,8 @@ final class Invoker {
         // return promise.future();
     }
 
-    private static <T> void invokeAsync(final Future<T> future, final Actuator actuator) {
-        try {
-            actuator.execute();
-        } catch (final Throwable ex) {
-            future.fail(ex);
-        }
+    private static boolean isEqualAnd(final Class<?> clazz, final Class<?> interfaceCls) {
+        return clazz == interfaceCls || Instance.isMatch(clazz, interfaceCls);
     }
 
     static <T> T invokeInterface(
