@@ -84,7 +84,9 @@ public abstract class AbstractAgha implements Agha {
                 /*
                  * 6. Final steps here
                  */
-                .compose(phase::callbackAsync);
+                .compose(phase::callbackAsync)
+                /* Otherwise exception */
+                .otherwise(Ux.otherwise());
     }
 
     protected void preparing(final Mission mission) {

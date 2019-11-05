@@ -1,11 +1,11 @@
 package io.vertx.up.util;
 
 import com.esotericsoftware.reflectasm.ConstructorAccess;
-import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Values;
 import io.vertx.up.exception.zero.DuplicatedImplException;
-import io.vertx.up.runtime.ZeroPack;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
+import io.vertx.up.runtime.ZeroPack;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -97,6 +97,14 @@ final class Instance {
      */
     @SuppressWarnings("all")
     static boolean isMatch(final Class<?> clazz, final Class<?> interfaceCls) {
+        /*
+         * If clazz is interface, we should check interface class firstly here
+         * It means that when clazz == interfaceCls, we also consider it's ok to match
+         * To avoid sub-class matched parent class first.
+         */
+        if (clazz == interfaceCls) {
+            return true;
+        }
         final Class<?>[] interfaces = clazz.getInterfaces();
         boolean match = Arrays.stream(interfaces)
                 .anyMatch(item -> item.equals(interfaceCls));

@@ -53,7 +53,9 @@ class RunOn {
                 final Object[] arguments = this.buildArgs(envelop, method, mission);
                 return Ut.invokeAsync(proxy, method, arguments)
                         /* Normalizing data */
-                        .compose(this::normalize);
+                        .compose(this::normalize)
+                        /* Otherwise exception */
+                        .otherwise(Ux.otherwise());
             } catch (final Throwable ex) {
                 ex.printStackTrace();
                 return Future.failedFuture(ex);
