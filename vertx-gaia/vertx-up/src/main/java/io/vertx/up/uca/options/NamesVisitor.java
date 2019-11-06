@@ -28,25 +28,25 @@ public class NamesVisitor implements ServerVisitor<String> {
     public ConcurrentMap<Integer, String> visit(final String... key)
             throws ZeroException {
         // 1. Must be the first line, fixed position.
-        Ut.ensureEqualLength(getClass(), 1, key);
+        Ut.koLenEqual(this.getClass(), 1, key);
         // 2. Visit the node for server, http
-        final JsonObject data = NODE.read();
+        final JsonObject data = this.NODE.read();
 
-        Fn.outZero(null == data || !data.containsKey(KEY), getLogger(),
+        Fn.outZero(null == data || !data.containsKey(KEY), this.getLogger(),
                 ServerConfigException.class,
-                getClass(), null == data ? null : data.encode());
+                this.getClass(), null == data ? null : data.encode());
         // 3. Extract names.
         final JsonArray raw = data.getJsonArray(KEY);
-        type = ServerType.valueOf(key[Values.IDX]);
-        return extract(raw);
+        this.type = ServerType.valueOf(key[Values.IDX]);
+        return this.extract(raw);
     }
 
     private ConcurrentMap<Integer, String> extract(final JsonArray serverData) {
         final ConcurrentMap<Integer, String> map = new ConcurrentHashMap<>();
         Ut.itJArray(serverData, JsonObject.class, (item, index) -> {
-            if (isServer(item)) {
+            if (this.isServer(item)) {
                 // 1. Extract port
-                final int port = extractPort(item.getJsonObject(YKEY_CONFIG));
+                final int port = this.extractPort(item.getJsonObject(YKEY_CONFIG));
                 Fn.safeNull(() -> {
                     // 3. Add to map;
                     map.put(port, item.getString(YKEY_NAME));
@@ -57,8 +57,8 @@ public class NamesVisitor implements ServerVisitor<String> {
     }
 
     private boolean isServer(final JsonObject item) {
-        return null != type &&
-                type.match(item.getString(YKEY_TYPE));
+        return null != this.type &&
+                this.type.match(item.getString(YKEY_TYPE));
     }
 
     private int extractPort(final JsonObject config) {
@@ -69,6 +69,6 @@ public class NamesVisitor implements ServerVisitor<String> {
     }
 
     protected Annal getLogger() {
-        return Annal.get(getClass());
+        return Annal.get(this.getClass());
     }
 }

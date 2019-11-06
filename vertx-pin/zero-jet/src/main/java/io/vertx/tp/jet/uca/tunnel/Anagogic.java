@@ -26,12 +26,12 @@ class Anagogic {
                         /*
                          * New database here
                          */
-                        Ux.toFuture(commercial.database()) :
+                        Ux.future(commercial.database()) :
                         /*
                          * Cached database
                          */
-                        Ux.toFuture(cached))
+                        Ux.future(cached))
                 .compose(database -> pool.put(commercial.app(), database))
-                .compose(kv -> Ux.toFuture(kv.getValue()));
+                .compose(kv -> Ux.future(kv.getValue()));
     }
 }

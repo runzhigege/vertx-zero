@@ -1,7 +1,6 @@
 package io.vertx.up.unity;
 
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonObject;
 import io.vertx.up.fn.Fn;
 import org.junit.Test;
 
@@ -18,17 +17,6 @@ public class BranchTc {
                         () -> Future.succeededFuture("Branch"))
         );
         result.setHandler(System.out::println);
-    }
-
-    @Test
-    public void testToFilters() {
-        final TestFilter filter = new TestFilter();
-        filter.setEmail("lang.yu@hpe.com");
-        filter.setName("lang.yu");
-        final JsonObject data = Ux.toFilters(new String[]{
-                "S_EMAIL", "S_NAME"
-        }, filter::getEmail, filter::getName);
-        System.out.println(data);
     }
 }
 

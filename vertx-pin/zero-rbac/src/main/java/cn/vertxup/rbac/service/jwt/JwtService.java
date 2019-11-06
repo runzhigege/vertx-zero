@@ -28,7 +28,7 @@ public class JwtService implements JwtStub {
         return Ux.Jooq.on(OAccessTokenDao.class)
                 .insertAsync(accessToken)
                 .compose(item -> ScSession.initAuthorization(data))
-                .compose(initialized -> Ux.toFuture(response));
+                .compose(initialized -> Ux.future(response));
     }
 
     @Override

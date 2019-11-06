@@ -36,7 +36,7 @@ class Plugin {
     static void mountPlugin(final String key, final BiConsumer<Class<?>, JsonObject> consumer) {
         mountPlugin(key, null, (pluginCls, config) -> {
             consumer.accept(pluginCls, config);
-            return Ux.toFuture(Envelop.ok());
+            return Ux.future(Envelop.ok());
         });
     }
 
@@ -54,6 +54,6 @@ class Plugin {
                 return function.apply(pluginCls, config);
             }
         }
-        return Ux.toFuture(envelop);
+        return Ux.future(envelop);
     }
 }

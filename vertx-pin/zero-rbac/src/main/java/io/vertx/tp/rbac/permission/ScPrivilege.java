@@ -48,7 +48,7 @@ public class ScPrivilege implements Serializable {
                     /*
                      * Return self reference here
                      */
-                    .compose(nil -> Ux.toFuture(self));
+                    .compose(nil -> Ux.future(self));
         });
     }
 
@@ -156,7 +156,7 @@ public class ScPrivilege implements Serializable {
             if (Objects.isNull(value)) {
                 value = new JsonArray();
             }
-            return Ux.toFuture(value);
+            return Ux.future(value);
         };
     }
 }

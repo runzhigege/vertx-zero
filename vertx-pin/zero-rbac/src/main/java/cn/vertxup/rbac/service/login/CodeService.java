@@ -32,7 +32,7 @@ public class CodeService implements CodeStub {
         // Shared
         return Sc.cacheCode(clientId).compose(item -> Fn.match(
                 // Successfully
-                () -> Fn.fork(() -> Ux.toFuture(clientId)),
+                () -> Fn.fork(() -> Ux.future(clientId)),
                 // Authorization Code Expired
                 Fn.branch(null == item, () -> Ux.thenError(_401CodeExpiredException.class, this.getClass(), clientId, code)),
                 // Wrong

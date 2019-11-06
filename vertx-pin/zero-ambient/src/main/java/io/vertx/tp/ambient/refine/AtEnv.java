@@ -83,7 +83,7 @@ class AtEnv {
     private static Future<Database> fromJsonAsync(final JsonObject source) {
         final Database database = new Database();
         database.fromJson(source);
-        return Ux.toFuture(database);
+        return Ux.future(database);
     }
 
     private static Future<Database> getDatabase(final String appId) {

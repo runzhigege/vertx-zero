@@ -86,7 +86,7 @@ public class FileActor {
                             columnSet.add(columnKey);
                         }
                     });
-                    return Ux.toFuture(columnSet);
+                    return Ux.future(columnSet);
                 })
 
                 /* Column calculation */
@@ -98,7 +98,7 @@ public class FileActor {
                             .map(column -> (String) column)
                             .collect(Collectors.toSet()));
                     /* projection calculation */
-                    return Ux.toFuture(Ut.toJArray(columnSet));
+                    return Ux.future(Ut.toJArray(columnSet));
                 })
 
                 /* Projection calculation */
@@ -113,7 +113,7 @@ public class FileActor {
                     body.put(Inquiry.KEY_CRITERIA, criteria);
                     body.put(Inquiry.KEY_PROJECTION, projection);
                     /* Calculation for projection here */
-                    return Ux.toFuture(body);
+                    return Ux.future(body);
                 })
 
                 /* Verify */
@@ -138,7 +138,7 @@ public class FileActor {
                     final String actor = Ux.getString(request);
                     return this.client.exportTable(actor, data);
                 })
-                .compose(buffer -> Ux.toFuture(Envelop.success(buffer)))
+                .compose(buffer -> Ux.future(Envelop.success(buffer)))
         );
     }
 }

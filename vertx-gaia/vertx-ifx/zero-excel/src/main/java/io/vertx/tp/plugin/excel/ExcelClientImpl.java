@@ -94,7 +94,7 @@ public class ExcelClientImpl implements ExcelClient {
             if (processed.succeeded()) {
                 /* Filtered valid table here */
                 final Set<ExTable> execution = this.getFiltered(processed.result(), tableOnly);
-                handler.handle(this.handleIngested(Ux.toFuture(execution)));
+                handler.handle(this.handleIngested(Ux.future(execution)));
             }
         });
     }
@@ -106,7 +106,7 @@ public class ExcelClientImpl implements ExcelClient {
             if (processed.succeeded()) {
                 /* Filtered valid table here */
                 final Set<ExTable> execution = this.getFiltered(processed.result(), tableOnly);
-                handler.handle(this.handleIngested(Ux.toFuture(execution)));
+                handler.handle(this.handleIngested(Ux.future(execution)));
             }
         });
     }
@@ -223,7 +223,7 @@ public class ExcelClientImpl implements ExcelClient {
             final OutputStream out = new FileOutputStream(filename);
             workbook.write(out);
             // InputStream converted
-            handler.handle(Ux.toFuture(Ut.ioBuffer(filename)));
+            handler.handle(Ux.future(Ut.ioBuffer(filename)));
         });
         return this;
     }

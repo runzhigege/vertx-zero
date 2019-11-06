@@ -2,8 +2,8 @@ package io.vertx.up.util;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.log.Annal;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
 
 import java.math.BigDecimal;
 import java.util.Random;
@@ -88,8 +88,8 @@ final class Numeric {
         return minValue + random.nextInt(maxValue - minValue);
     }
 
-    static boolean inRange(final Integer value, final Integer min, final Integer max) {
-        // min和max都为null
+    static boolean isRange(final Integer value, final Integer min, final Integer max) {
+        // min / max = null
         if (null == min && null == max) {
             return true;
         } else if (null != min && null != max) {

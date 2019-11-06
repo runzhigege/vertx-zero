@@ -33,7 +33,7 @@ public class ControlService implements ControlStub {
                             .map(item -> Ke.metadata(item, KeField.Ui.ASSIST))
                             .map(item -> Ke.metadata(item, KeField.Ui.GRID))
                             .forEach(result::add);
-                    return Ux.toFuture(result);
+                    return Ux.future(result);
                 });
     }
 
@@ -56,7 +56,7 @@ public class ControlService implements ControlStub {
                 .compose(array -> {
                     Ut.itJArray(array).forEach(each ->
                             Ke.metadata(each, KeField.Ui.CONFIG));
-                    return Ux.toFuture(array);
+                    return Ux.future(array);
                 });
     }
 }

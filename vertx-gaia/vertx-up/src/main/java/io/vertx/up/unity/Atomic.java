@@ -1,32 +1,12 @@
 package io.vertx.up.unity;
 
-import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.util.Ut;
 
 import java.lang.reflect.Method;
-import java.util.function.Function;
 
 class Atomic {
-
-    static Function<JsonObject, Future<JsonObject>> joinTo(final JsonObject to, final String field) {
-        return Fn.getNull(Future::succeededFuture, () -> source -> {
-            if (source.containsKey(field)) {
-                to.put(field, source.getValue(field));
-            }
-            return Future.succeededFuture(source);
-        }, to);
-    }
-
-    static Function<JsonObject, Future<JsonObject>> joinFrom(final JsonObject from, final String field) {
-        return Fn.getNull(Future::succeededFuture, () -> source -> {
-            if (from.containsKey(field)) {
-                source.put(field, from.getValue(field));
-            }
-            return Future.succeededFuture(source);
-        }, from);
-    }
 
     static void initComponent(final JsonObject init) {
         /* Extract Component Class */

@@ -14,7 +14,7 @@ import java.util.function.Function;
 class KeElement {
 
     static Function<JsonObject, Future<JsonObject>> metadataArray(final String field) {
-        return response -> Ux.toFuture(metadataArray(response, field));
+        return response -> Ux.future(metadataArray(response, field));
     }
 
     static JsonObject metadataArray(final JsonObject response, final String field) {
@@ -38,7 +38,7 @@ class KeElement {
     }
 
     static Function<JsonObject, Future<JsonObject>> metadata(final String field) {
-        return response -> Ux.toFuture(metadata(response, field));
+        return response -> Ux.future(metadata(response, field));
     }
 
     /*

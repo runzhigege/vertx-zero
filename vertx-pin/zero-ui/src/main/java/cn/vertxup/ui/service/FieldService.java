@@ -27,7 +27,7 @@ public class FieldService implements FieldStub {
                 .compose(ui -> {
                     if (Objects.isNull(ui) || ui.isEmpty()) {
                         Ui.infoWarn(FieldService.LOGGER, " Field not configured.");
-                        return Ux.toFuture(new JsonArray());
+                        return Ux.future(new JsonArray());
                     } else {
                         final JsonArray uiJson = Ut.serializeJson(ui);
                         return this.attachConfig(uiJson);
@@ -112,6 +112,6 @@ public class FieldService implements FieldStub {
             });
             ui.add(rowArr);
         }
-        return Ux.toFuture(ui);
+        return Ux.future(ui);
     }
 }

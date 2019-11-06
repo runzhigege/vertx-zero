@@ -102,7 +102,7 @@ class Input {
                     () -> LOGGER.info(Info.PHASE_ERROR, mission.getName(),
                             envelop.error().getClass().getName()));
 
-            return Ux.toFuture(envelop);
+            return Ux.future(envelop);
         }
     }
 }

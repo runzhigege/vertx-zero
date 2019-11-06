@@ -22,7 +22,7 @@ public class ZeroVertx implements Node<JsonObject> {
         final JsonObject zero = Fn.getJvm(new JsonObject(),
                 () -> config.getJsonObject(Key.ZERO), config);
         if (null != zero && zero.containsKey(Key.LIME)) {
-            prodcessLime(zero);
+            this.prodcessLime(zero);
         }
         // Return to zero configuration part
         return zero;
@@ -32,7 +32,7 @@ public class ZeroVertx implements Node<JsonObject> {
         return Fn.getNull(() -> {
             // 1. Append lime
             if (data.containsKey(Key.LIME)) {
-                prodcessLime(data);
+                this.prodcessLime(data);
             }
             return data;
         }, data);
@@ -41,7 +41,7 @@ public class ZeroVertx implements Node<JsonObject> {
     private void prodcessLime(final JsonObject data) {
         Fn.safeNull(() -> {
             final String limeStr = data.getString(Key.LIME);
-            final Set<String> sets = Ut.splitToSet(limeStr, Strings.COMMA);
+            final Set<String> sets = Ut.toSet(limeStr, Strings.COMMA);
             /*
              * server, inject, error, resolver
              * RxJava2

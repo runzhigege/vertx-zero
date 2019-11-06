@@ -33,18 +33,18 @@ public class ActOut implements Serializable {
      * The default response is 204 no content
      */
     public static Future<ActOut> future() {
-        return Ux.toFuture(noContent());
+        return Ux.future(noContent());
     }
 
     /*
      * True / False result
      */
     public static Future<ActOut> future(final Boolean result) {
-        return Ux.toFuture(new ActOut(result, HttpStatusCode.OK));
+        return Ux.future(new ActOut(result, HttpStatusCode.OK));
     }
 
     public static Future<ActOut> future(final Buffer buffer) {
-        return Ux.toFuture(new ActOut(buffer, HttpStatusCode.OK));
+        return Ux.future(new ActOut(buffer, HttpStatusCode.OK));
     }
 
     /*
@@ -52,9 +52,9 @@ public class ActOut implements Serializable {
      */
     public static Future<ActOut> future(final JsonObject data) {
         if (Objects.isNull(data)) {
-            return Ux.toFuture(noContent());
+            return Ux.future(noContent());
         } else {
-            return Ux.toFuture(new ActOut(data, HttpStatusCode.OK));
+            return Ux.future(new ActOut(data, HttpStatusCode.OK));
         }
     }
 
@@ -63,9 +63,9 @@ public class ActOut implements Serializable {
      */
     public static Future<ActOut> future(final JsonArray dataArray) {
         if (Objects.isNull(dataArray)) {
-            return Ux.toFuture(noContent());
+            return Ux.future(noContent());
         } else {
-            return Ux.toFuture(new ActOut(dataArray, HttpStatusCode.OK));
+            return Ux.future(new ActOut(dataArray, HttpStatusCode.OK));
         }
     }
 
@@ -74,7 +74,7 @@ public class ActOut implements Serializable {
          * Record[] to JsonArray
          */
         final JsonArray result = Ux.toArray(records);
-        return Ux.toFuture(new ActOut(result, HttpStatusCode.OK));
+        return Ux.future(new ActOut(result, HttpStatusCode.OK));
     }
 
     /*
@@ -88,10 +88,10 @@ public class ActOut implements Serializable {
             final JsonObject data = record.toJson();
             response = new ActOut(data, HttpStatusCode.OK);
         }
-        return Ux.toFuture(response);
+        return Ux.future(response);
     }
 
     public Future<Envelop> async() {
-        return Ux.toFuture(this.envelop);
+        return Ux.future(this.envelop);
     }
 }

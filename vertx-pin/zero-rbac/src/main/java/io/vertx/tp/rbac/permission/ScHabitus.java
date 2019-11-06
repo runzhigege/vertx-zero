@@ -56,7 +56,7 @@ public class ScHabitus {
                     if (Objects.isNull(item)) {
                         return Future.succeededFuture(null);
                     } else {
-                        return Ux.toFuture((T) item.getValue(dataKey));
+                        return Ux.future((T) item.getValue(dataKey));
                     }
                 });
     }
@@ -73,7 +73,7 @@ public class ScHabitus {
                     final JsonObject updated = stored.copy();
                     updated.put(dataKey, value);
                     return this.pool.put(this.habitus, updated)
-                            .compose(nil -> Ux.toFuture(value));
+                            .compose(nil -> Ux.future(value));
                 });
     }
 

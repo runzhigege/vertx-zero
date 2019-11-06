@@ -1,8 +1,7 @@
-package io.vertx.up.unity;
+package io.vertx.up.util;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.util.Ut;
 
 import java.util.Objects;
 import java.util.function.Function;
@@ -20,14 +19,14 @@ class Apply {
             } else {
                 input.put(field, data);
             }
-            return To.toFuture(input);
+            return Future.succeededFuture(input);
         };
     }
 
     static <I, T> Function<I, Future<T>> applyNil(final Supplier<T> supplier, final Supplier<Future<T>> executor) {
         return input -> {
             if (Objects.isNull(input)) {
-                return To.toFuture(supplier.get());
+                return Future.succeededFuture(supplier.get());
             } else {
                 return executor.get();
             }
@@ -37,7 +36,7 @@ class Apply {
     static <I, T> Function<I, Future<T>> applyNil(final Supplier<T> supplier, final Function<I, Future<T>> executor) {
         return input -> {
             if (Objects.isNull(input)) {
-                return To.toFuture(supplier.get());
+                return Future.succeededFuture(supplier.get());
             } else {
                 return executor.apply(input);
             }
@@ -47,7 +46,7 @@ class Apply {
     static <T> Function<T, Future<T>> applyNil(final Function<T, Future<T>> executor) {
         return input -> {
             if (Objects.isNull(input)) {
-                return To.toFuture(input);
+                return Future.succeededFuture(input);
             } else {
                 return executor.apply(input);
             }

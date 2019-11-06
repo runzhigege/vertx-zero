@@ -14,6 +14,7 @@ import io.vertx.tp.rbac.permission.ScPrivilege;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.unity.Uson;
 import io.vertx.up.unity.Ux;
+import io.vertx.up.util.Ut;
 
 import javax.inject.Inject;
 import java.util.Arrays;
@@ -32,7 +33,7 @@ public class LoginService implements LoginStub {
                 .compose(pojo -> Fn.match(() -> Fn.fork(
                         // Login successfully
                         () -> Ux.log(this.getClass()).on(AuthMsg.LOGIN_SUCCESS).info(username),
-                        () -> Ux.toFuture(pojo)),
+                        () -> Ux.future(pojo)),
                         // User Not Found
                         Fn.branch(null == pojo,
                                 () -> Ux.log(this.getClass()).on(AuthMsg.LOGIN_USER).info(username),
@@ -50,7 +51,7 @@ public class LoginService implements LoginStub {
                                 // Fetch Oauth user
                                 this.userStub.fetchOUser(user.getString("key"))
                         ),
-                        Ux::appendJson // SUser / OUser - Avoid duplicated merging
+                        Ut::applyMerge // SUser / OUser - Avoid duplicated merging
                 ))
                 .compose(item -> Uson.create(item).pickup(
                         "key",                      /* client_id parameter */

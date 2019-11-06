@@ -19,10 +19,10 @@ public class ZeroLime implements Node<ConcurrentMap<String, String>> {
     private static final ConcurrentMap<String, String> INTERNALS
             = new ConcurrentHashMap<String, String>() {
         {
-            put("error", ZeroTool.produce("error"));
-            put("inject", ZeroTool.produce("inject"));
-            put("server", ZeroTool.produce("server"));
-            put("resolver", ZeroTool.produce("resolver"));
+            this.put("error", ZeroTool.produce("error"));
+            this.put("inject", ZeroTool.produce("inject"));
+            this.put("server", ZeroTool.produce("server"));
+            this.put("resolver", ZeroTool.produce("resolver"));
         }
     };
     private transient final Node<JsonObject> node
@@ -31,13 +31,13 @@ public class ZeroLime implements Node<ConcurrentMap<String, String>> {
     @Override
     public ConcurrentMap<String, String> read() {
         // 1. Read all zero configuration: zero
-        final JsonObject data = node.read();
+        final JsonObject data = this.node.read();
         // 2. Read the string node "lime" for extensions
-        return build(data.getString(Key.LIME));
+        return this.build(data.getString(Key.LIME));
     }
 
     private ConcurrentMap<String, String> build(final String literal) {
-        final Set<String> sets = Ut.splitToSet(literal, Strings.COMMA);
+        final Set<String> sets = Ut.toSet(literal, Strings.COMMA);
         Fn.safeNull(() -> Observable.fromIterable(sets)
                 .filter(Objects::nonNull)
                 .subscribe(item -> Fn.pool(INTERNALS, item,

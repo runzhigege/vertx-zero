@@ -35,7 +35,7 @@ class AppInit implements Init {
                     /*
                      * Result Building
                      */
-                    .compose(input -> Ux.toFuture(result(input, appJson)));
+                    .compose(input -> Ux.future(result(input, appJson)));
         };
     }
 

@@ -31,9 +31,9 @@ class KeTool {
             if (null == item) {
                 return value.get().compose(updated ->
                         Ux.Pool.on(name).put(key, updated)
-                                .compose(kv -> Ux.toFuture(kv.getValue())));
+                                .compose(kv -> Ux.future(kv.getValue())));
             } else {
-                return Ux.toFuture(item);
+                return Ux.future(item);
             }
         });
     }
@@ -55,7 +55,7 @@ class KeTool {
 
             combined.add(row);
         });
-        return Ux.toFuture(combined);
+        return Ux.future(combined);
     }
 
     static <T> void consume(final Supplier<T> supplier, final Consumer<T> consumer) {

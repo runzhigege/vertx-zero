@@ -79,7 +79,7 @@ public interface IxActor {
     }
 
     static Future<JsonObject> start() {
-        return Ux.toFuture(new JsonObject());
+        return Ux.future(new JsonObject());
     }
 
     /*
@@ -88,7 +88,7 @@ public interface IxActor {
     default Future<JsonObject> procAsync(final JsonObject data,
                                          final IxModule config) {
         try {
-            return Ux.toFuture(this.proc(data, config));
+            return Ux.future(this.proc(data, config));
         } catch (final WebException error) {
             return Future.failedFuture(error);
         }

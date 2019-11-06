@@ -17,7 +17,7 @@ import java.util.*;
 /**
  * Lookup the json tree data
  */
-@SuppressWarnings({"unchecked"})
+@SuppressWarnings({"all"})
 final class Jackson {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
@@ -192,27 +192,6 @@ final class Jackson {
                 () -> Fn.getJvm(() -> Jackson.MAPPER.readValue(value, type)), value);
     }
 
-    static <T> List<T> convert(final List<JsonObject> result, final Class<T> clazz) {
-        final List<T> entities = new ArrayList<>();
-        result.forEach(item -> entities.add(Jackson.deserialize(item.encode(), clazz)));
-        return entities;
-    }
-
-
-    static Object readJson(final Object value, final JsonObject data, final String key) {
-        return Fn.getNull(value, () -> {
-            final Object result = data.getValue(key);
-            return Fn.getNull(value, () -> result, result);
-        }, data, key);
-    }
-
-    static Integer readInt(final Integer value, final JsonObject data, final String key) {
-        return Fn.getNull(value, () -> {
-            final Object result = data.getValue(key);
-            return Types.isInteger(result) ? To.toInteger(result) : value;
-        }, data, key);
-    }
-
     /*
      * Whether record contains all the data in cond.
      */
@@ -243,5 +222,13 @@ final class Jackson {
                 }
             }
         }
+    }
+
+    static JsonObject flatMerge(final JsonObject target, final JsonObject source) {
+        Observable.fromIterable(source.fieldNames())
+                .filter(key -> !target.containsKey(key))
+                .subscribe(key -> target.put(key, source.getValue(key)))
+                .dispose();
+        return target;
     }
 }

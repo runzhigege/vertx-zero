@@ -35,7 +35,7 @@ class RunOn {
         if (Objects.nonNull(method)) {
             Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_3RD_JOB_RUN, mission.getName(), method.getName()));
             return this.execute(envelop, method, mission);
-        } else return Ux.toFuture(envelop);
+        } else return Ux.future(envelop);
     }
 
     Future<Envelop> callback(final Envelop envelop, final Mission mission) {
@@ -43,7 +43,7 @@ class RunOn {
         if (Objects.nonNull(method)) {
             Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_6TH_JOB_CALLBACK, mission.getName(), method.getName()));
             return this.execute(envelop, method, mission);
-        } else return Ux.toFuture(envelop);
+        } else return Ux.future(envelop);
 
     }
 
@@ -61,18 +61,18 @@ class RunOn {
             }
         } else {
             Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_ERROR, mission.getName(), envelop.error().getClass().getName()));
-            return Ux.toFuture(envelop);
+            return Ux.future(envelop);
         }
     }
 
     private <T> Future<Envelop> normalize(final T returnValue) {
         if (Objects.isNull(returnValue)) {
-            return Ux.toFuture(Envelop.okJson());
+            return Ux.future(Envelop.okJson());
         } else {
             if (Envelop.class == returnValue.getClass()) {
                 return Future.succeededFuture((Envelop) returnValue);
             } else {
-                return Ux.toFuture(Envelop.success(returnValue));
+                return Ux.future(Envelop.success(returnValue));
             }
         }
     }
