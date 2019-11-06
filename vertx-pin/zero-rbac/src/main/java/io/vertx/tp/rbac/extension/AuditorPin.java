@@ -56,7 +56,7 @@ public class AuditorPin implements PlugAuditor {
                 envelop.setValue(1, "updatedAt", instant);
             }
         }
-        return Ux.toFuture(envelop);
+        return Ux.future(envelop);
     }
 
     private boolean isValid(final RoutingContext context) {

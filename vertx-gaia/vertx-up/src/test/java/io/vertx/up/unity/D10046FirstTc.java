@@ -2,8 +2,8 @@ package io.vertx.up.unity;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.commune.Envelop;
 import io.vertx.quiz.EpicBase;
+import io.vertx.up.commune.Envelop;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -32,7 +32,7 @@ public class D10046FirstTc extends EpicBase {
     @Test
     public void testUx() {
         final JsonObject input = this.ioJObject("d10046.json");
-        final Envelop envelop = Ux.to(input);
+        final Envelop envelop = Ux.envelop(input);
         Assert.assertNotNull(envelop.data());
         System.err.println(envelop.data(JsonObject.class));
     }

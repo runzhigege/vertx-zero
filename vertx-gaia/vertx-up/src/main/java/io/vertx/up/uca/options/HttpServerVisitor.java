@@ -38,7 +38,7 @@ public class HttpServerVisitor implements ServerVisitor<HttpServerOptions> {
     public ConcurrentMap<Integer, HttpServerOptions> visit(final String... key)
             throws ZeroException {
         // 1. Must be the first line, fixed position.
-        Ut.ensureEqualLength(getClass(), 0, (Object[]) key);
+        Ut.koLenEqual(getClass(), 0, (Object[]) key);
         // 2. Visit the node for server, http
         final JsonObject data = NODE.read();
 
@@ -51,22 +51,22 @@ public class HttpServerVisitor implements ServerVisitor<HttpServerOptions> {
 
     private ConcurrentMap<Integer, HttpServerOptions> visit(final JsonArray serverData)
             throws ZeroException {
-        getLogger().info(Info.INF_B_VERIFY, KEY, getType(), serverData.encode());
+        this.getLogger().info(Info.INF_B_VERIFY, KEY, this.getType(), serverData.encode());
         Ruler.verify(KEY, serverData);
         final ConcurrentMap<Integer, HttpServerOptions> map =
                 new ConcurrentHashMap<>();
-        extract(serverData, map);
-        getLogger().info(Info.INF_A_VERIFY, KEY, getType(), map.keySet());
+        this.extract(serverData, map);
+        this.getLogger().info(Info.INF_A_VERIFY, KEY, this.getType(), map.keySet());
         return map;
     }
 
     protected void extract(final JsonArray serverData, final ConcurrentMap<Integer, HttpServerOptions> map) {
         Ut.itJArray(serverData, JsonObject.class, (item, index) -> {
-            if (isServer(item)) {
+            if (this.isServer(item)) {
                 // 1. Extract port
-                final int port = extractPort(item.getJsonObject(YKEY_CONFIG));
+                final int port = this.extractPort(item.getJsonObject(YKEY_CONFIG));
                 // 2. Convert JsonObject to HttpServerOptions
-                final HttpServerOptions options = transformer.transform(item);
+                final HttpServerOptions options = this.transformer.transform(item);
                 Fn.safeNull(() -> {
                     // 3. Add to map;
                     map.put(port, options);
@@ -76,7 +76,7 @@ public class HttpServerVisitor implements ServerVisitor<HttpServerOptions> {
     }
 
     protected boolean isServer(final JsonObject item) {
-        return getType().match(item.getString(YKEY_TYPE));
+        return this.getType().match(item.getString(YKEY_TYPE));
     }
 
     private int extractPort(final JsonObject config) {
@@ -91,6 +91,6 @@ public class HttpServerVisitor implements ServerVisitor<HttpServerOptions> {
     }
 
     protected Annal getLogger() {
-        return Annal.get(getClass());
+        return Annal.get(this.getClass());
     }
 }

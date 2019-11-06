@@ -72,7 +72,7 @@ public interface ScDetent {
     JsonObject proc(List<ProfileRole> profiles);
 
     default Future<JsonObject> procAsync(final List<ProfileRole> profiles) {
-        return Ux.toFuture(this.proc(profiles));
+        return Ux.future(this.proc(profiles));
     }
 
     /*

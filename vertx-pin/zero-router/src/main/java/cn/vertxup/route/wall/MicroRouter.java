@@ -29,13 +29,13 @@ public class MicroRouter implements Security {
 
     @Override
     public Future<Boolean> verify(final JsonObject data) {
-        return Ux.thenRpc(NAME, WebIpc.Sc.IPC_TOKEN_VERIFY, data)
+        return Ux.applyRpc(NAME, WebIpc.Sc.IPC_TOKEN_VERIFY, data)
                 .compose(Ke.Result::boolAsync);
     }
 
     @Override
     public Future<Boolean> access(final JsonObject data) {
-        return Ux.thenRpc(NAME, WebIpc.Sc.IPC_TOKEN_ACCESS, data)
+        return Ux.applyRpc(NAME, WebIpc.Sc.IPC_TOKEN_ACCESS, data)
                 .compose(Ke.Result::boolAsync);
     }
 }

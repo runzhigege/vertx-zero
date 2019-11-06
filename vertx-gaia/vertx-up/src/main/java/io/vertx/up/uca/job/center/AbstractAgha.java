@@ -60,7 +60,7 @@ public abstract class AbstractAgha implements Agha {
                 .bind(this.vertx)
                 .bind(mission);
 
-        return Ux.toFuture(mission)
+        return Ux.future(mission)
                 /*
                  * 1. Step 1:  EventBus ( Input )
                  */

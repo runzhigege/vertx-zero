@@ -40,7 +40,7 @@ public class AttachActor {
                     if (Objects.nonNull(entity)) {
                         buffer = Ut.ioBuffer(entity.getFilePath());
                     }
-                    return Ux.toFuture(buffer);
+                    return Ux.future(buffer);
                 });
     }
 }

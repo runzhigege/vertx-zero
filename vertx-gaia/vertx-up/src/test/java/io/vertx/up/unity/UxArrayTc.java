@@ -24,13 +24,6 @@ public class UxArrayTc extends StoreBase {
     }
 
     @Test
-    public void testGrouped() {
-        final JsonArray source = this.ioJArray("source.json");
-        final JsonObject data = Ux.toGroup(source, "floorId");
-        System.out.println(data);
-    }
-
-    @Test
     public void testPojo() {
         final List<UserJson> user = new ArrayList<>();
         final UserJson json = new UserJson();

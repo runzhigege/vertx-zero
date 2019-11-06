@@ -36,7 +36,7 @@ class SourceInit implements Init {
                     /*
                      * Result Building
                      */
-                    .compose(updated -> Ux.toFuture(result(appJson, updated)));
+                    .compose(updated -> Ux.future(result(appJson, updated)));
         };
     }
 

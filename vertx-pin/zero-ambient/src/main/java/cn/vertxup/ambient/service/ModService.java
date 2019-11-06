@@ -31,7 +31,7 @@ public class ModService implements ModStub {
             final ExModel model = Pocket.lookup(ExModel.class, this.getClass());
             return model.fetchAsync(sigma);
         } catch (final WebException ex) {
-            return Ux.toFuture(new JsonArray());
+            return Ux.future(new JsonArray());
         }
     }
 }

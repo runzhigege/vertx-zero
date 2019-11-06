@@ -22,7 +22,7 @@ public class InitService implements InitStub {
     public Future<JsonObject> initApp(final String appId,
                                       final JsonObject data) {
         /* Default Future */
-        return Ux.toFuture(data.put(KeField.KEY, appId))
+        return Ux.future(data.put(KeField.KEY, appId))
                 /* X_APP initialization */
                 .compose(Init.app().apply())
                 /* X_SOURCE initialization */
@@ -60,7 +60,7 @@ public class InitService implements InitStub {
         /* Prerequisite Extension */
         final Prerequisite prerequisite = AtPin.getPrerequisite();
         if (Objects.isNull(prerequisite)) {
-            return Ux.toFuture(new JsonObject());
+            return Ux.future(new JsonObject());
         } else {
             /*
              * Prerequisite for initialization
@@ -72,7 +72,7 @@ public class InitService implements InitStub {
     private Future<JsonObject> initDefined(final JsonObject input) {
         final Init initializer = AtPin.getInit();
         if (Objects.isNull(initializer)) {
-            return Ux.toFuture(input);
+            return Ux.future(input);
         } else {
             /*
              * Extension for initialization

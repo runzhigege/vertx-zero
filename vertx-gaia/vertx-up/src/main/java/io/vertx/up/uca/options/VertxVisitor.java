@@ -38,22 +38,22 @@ public class VertxVisitor implements NodeVisitor {
     public ConcurrentMap<String, VertxOptions> visit(final String... keys)
             throws ZeroException {
         // 1. Must be the first line, fixed position.
-        Ut.ensureEqualLength(getClass(), 0, keys);
+        Ut.koLenEqual(this.getClass(), 0, keys);
         // 2. Visit the node for vertx
-        final JsonObject data = NODE.read();
+        final JsonObject data = this.NODE.read();
         // 3. Vertx node validation.
         final JsonObject vertxData = data.getJsonObject(KEY);
-        LOGGER.info(Info.INF_B_VERIFY, KEY, getClass().getSimpleName(), vertxData);
+        LOGGER.info(Info.INF_B_VERIFY, KEY, this.getClass().getSimpleName(), vertxData);
         Fn.shuntZero(() -> Ruler.verify(KEY, vertxData), vertxData);
         // 4. Set cluster options
-        clusterOptions = clusterTransformer.transform(data.getJsonObject(YKEY_CLUSTERED));
+        this.clusterOptions = this.clusterTransformer.transform(data.getJsonObject(YKEY_CLUSTERED));
         // 5. Transfer Data
-        return visit(vertxData.getJsonArray(YKEY_INSTANCE));
+        return this.visit(vertxData.getJsonArray(YKEY_INSTANCE));
     }
 
     @Override
     public ClusterOptions getCluster() {
-        return clusterOptions;
+        return this.clusterOptions;
     }
 
     private ConcurrentMap<String, VertxOptions> visit(
@@ -61,16 +61,16 @@ public class VertxVisitor implements NodeVisitor {
             throws ZeroException {
         final ConcurrentMap<String, VertxOptions> map =
                 new ConcurrentHashMap<>();
-        final boolean clustered = clusterOptions.isEnabled();
+        final boolean clustered = this.clusterOptions.isEnabled();
         Ut.etJArray(vertxData, JsonObject.class, (item, index) -> {
             // 1. Extract single
             final String name = item.getString(YKEY_NAME);
             // 2. Extract VertxOptions
-            final VertxOptions options = transformer.transform(item);
+            final VertxOptions options = this.transformer.transform(item);
             // 3. Check the configuration for cluster sync
             Fn.outZero(clustered != options.isClustered(), LOGGER,
                     ClusterConflictException.class,
-                    getClass(), name, options.toString());
+                    this.getClass(), name, options.toString());
             // 4. Put the options into map
             map.put(name, options);
         });

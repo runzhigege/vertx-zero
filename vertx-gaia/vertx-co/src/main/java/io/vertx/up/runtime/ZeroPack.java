@@ -3,11 +3,11 @@ package io.vertx.up.runtime;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.vertx.core.impl.ConcurrentHashSet;
-import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Strings;
-import io.vertx.up.util.Ut;
+import io.vertx.up.log.Annal;
 import io.vertx.up.runtime.pkg.PackHunter;
 import io.vertx.up.runtime.pkg.PackThread;
+import io.vertx.up.util.Ut;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -76,7 +76,7 @@ public final class ZeroPack {
         final Set<PackThread> references = new HashSet<>();
         final Disposable disposable = Observable.fromArray(packageDir)
                 .map(PackThread::new)
-                .map(item -> Ut.addThen(references, item))
+                .map(item -> Ut.applyAdd(references, item))
                 .subscribe(Thread::start);
 
         /*

@@ -41,7 +41,7 @@ public class Align {
      * 1 Level Only ( Find Parent Only )
      */
     public static Future<List<ProfileRole>> flat(final List<ProfileGroup> profiles) {
-        return Ux.toFuture(profiles.stream()
+        return Ux.future(profiles.stream()
                 .flatMap(group -> group.getRoles().stream())
                 .collect(Collectors.toList()));
     }

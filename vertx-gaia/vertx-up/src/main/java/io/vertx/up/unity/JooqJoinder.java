@@ -167,7 +167,7 @@ class JooqJoinder {
         response.put("list", data);
         final Integer counter = this.searchCount(inquiry);
         response.put("count", counter);
-        return Ux.toFuture(response);
+        return Ux.future(response);
     }
 
 

@@ -22,9 +22,9 @@ public class CircuitVisitor implements Visitor<CircuitBreakerOptions> {
     public CircuitBreakerOptions visit(final String... key)
             throws ZeroException {
         // 1. Must be the first line, fixed position.
-        Ut.ensureEqualLength(getClass(), 0, key);
+        Ut.koLenEqual(this.getClass(), 0, key);
         // 2. Read data
-        final JsonObject data = node.read();
+        final JsonObject data = this.node.read();
         // 3. CircuitBreakerOptions building.
         final JsonObject config =
                 Fn.getSemi(data.containsKey(CIRCUIT) &&
@@ -32,7 +32,7 @@ public class CircuitVisitor implements Visitor<CircuitBreakerOptions> {
                         () -> data.getJsonObject(CIRCUIT),
                         JsonObject::new);
         // 4. Verify the configuration data
-        return visit(config);
+        return this.visit(config);
     }
 
     private CircuitBreakerOptions visit(final JsonObject data)

@@ -34,32 +34,32 @@ public class DynamicVisitor extends HttpServerVisitor {
     public ConcurrentMap<Integer, HttpServerOptions> visit(final String... key)
             throws ZeroException {
         // 1. Must be the first line, fixed position.
-        Ut.ensureEqualLength(getClass(), 1, key);
+        Ut.koLenEqual(this.getClass(), 1, key);
         // 2. Visit the node for server
-        final JsonObject data = NODE.read();
+        final JsonObject data = this.NODE.read();
 
         Fn.outZero(null == data || !data.containsKey(KEY), LOGGER,
                 ServerConfigException.class,
-                getClass(), null == data ? null : data.encode());
+                this.getClass(), null == data ? null : data.encode());
         // 3. Convert input parameters.
-        type = ServerType.valueOf(key[Values.IDX]);
-        return visit(data.getJsonArray(KEY));
+        this.type = ServerType.valueOf(key[Values.IDX]);
+        return this.visit(data.getJsonArray(KEY));
     }
 
     private ConcurrentMap<Integer, HttpServerOptions> visit(final JsonArray serverData)
             throws ZeroException {
-        getLogger().info(Info.INF_B_VERIFY, KEY, type, serverData.encode());
+        this.getLogger().info(Info.INF_B_VERIFY, KEY, this.type, serverData.encode());
         Ruler.verify(KEY, serverData);
         final ConcurrentMap<Integer, HttpServerOptions> map =
                 new ConcurrentHashMap<>();
-        extract(serverData, map);
-        getLogger().info(Info.INF_A_VERIFY, KEY, type, map.keySet());
+        this.extract(serverData, map);
+        this.getLogger().info(Info.INF_A_VERIFY, KEY, this.type, map.keySet());
         return map;
     }
 
     @Override
     protected boolean isServer(final JsonObject item) {
-        return null != type &&
-                type.match(item.getString(YKEY_TYPE));
+        return null != this.type &&
+                this.type.match(item.getString(YKEY_TYPE));
     }
 }

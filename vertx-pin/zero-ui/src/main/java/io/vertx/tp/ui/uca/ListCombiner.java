@@ -85,6 +85,6 @@ public class ListCombiner implements UiFabric {
         if (Ut.notNil(table)) {
             normalized.put("table", Ui.optTable(table));
         }
-        return Ux.toFuture(normalized);
+        return Ux.future(normalized);
     }
 }
