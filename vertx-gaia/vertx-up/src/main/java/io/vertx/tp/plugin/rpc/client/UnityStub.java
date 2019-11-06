@@ -2,12 +2,13 @@ package io.vertx.tp.plugin.rpc.client;
 
 import io.grpc.ManagedChannel;
 import io.vertx.core.Future;
+import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ipc.eon.IpcRequest;
 import io.vertx.tp.ipc.service.UnityServiceGrpc;
+import io.vertx.tp.plugin.rpc.RpcRepdor;
 import io.vertx.up.atom.rpc.IpcData;
 import io.vertx.up.uca.micro.ipc.DataEncap;
-import io.vertx.tp.plugin.rpc.RpcRepdor;
 
 /**
  * Used by rpc client.
@@ -28,10 +29,10 @@ public class UnityStub implements RpcStub {
         // Request
         final IpcRequest request = DataEncap.in(data);
         // Call and return to future
-        final Future<JsonObject> handler = Future.future();
+        final Promise<JsonObject> handler = Promise.promise();
         stub.unityCall(request, response ->
                 // Reply
                 RpcRepdor.create(this.getClass()).replyJson(handler, response));
-        return handler;
+        return handler.future();
     }
 }
