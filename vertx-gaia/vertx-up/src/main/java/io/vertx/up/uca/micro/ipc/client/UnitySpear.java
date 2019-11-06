@@ -2,14 +2,15 @@ package io.vertx.up.uca.micro.ipc.client;
 
 import io.grpc.ManagedChannel;
 import io.vertx.core.Future;
+import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.tp.ipc.eon.IpcRequest;
 import io.vertx.tp.ipc.service.UnityServiceGrpc;
-import io.vertx.up.commune.Envelop;
-import io.vertx.up.atom.rpc.IpcData;
-import io.vertx.up.uca.micro.ipc.DataEncap;
 import io.vertx.tp.plugin.rpc.RpcRepdor;
 import io.vertx.tp.plugin.rpc.RpcSslTool;
+import io.vertx.up.atom.rpc.IpcData;
+import io.vertx.up.commune.Envelop;
+import io.vertx.up.uca.micro.ipc.DataEncap;
 
 public class UnitySpear implements Spear {
 
@@ -24,10 +25,10 @@ public class UnitySpear implements Spear {
         // Request
         final IpcRequest request = DataEncap.in(data);
         // Call and return to future
-        final Future<Envelop> handler = Future.future();
+        final Promise<Envelop> handler = Promise.promise();
         stub.unityCall(request, response ->
                 // Reply
-                RpcRepdor.create(getClass()).reply(handler, response));
-        return handler;
+                RpcRepdor.create(this.getClass()).reply(handler, response));
+        return handler.future();
     }
 }

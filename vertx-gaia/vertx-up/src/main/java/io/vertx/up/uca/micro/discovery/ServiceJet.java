@@ -2,10 +2,7 @@ package io.vertx.up.uca.micro.discovery;
 
 import io.vertx.circuitbreaker.CircuitBreaker;
 import io.vertx.circuitbreaker.CircuitBreakerOptions;
-import io.vertx.core.Future;
-import io.vertx.core.Handler;
-import io.vertx.core.MultiMap;
-import io.vertx.core.Vertx;
+import io.vertx.core.*;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerOptions;
@@ -67,10 +64,10 @@ public class ServiceJet {
     }
 
     private Future<List<Record>> getEndPoints() {
-        final Future<List<Record>> future = Future.future();
+        final Promise<List<Record>> promise = Promise.promise();
         this.discovery.getRecords(record -> record.getType().equals(HttpEndpoint.TYPE),
-                future.completer());
-        return future;
+                handler -> promise.complete(handler.result()));
+        return promise.future();
     }
 
     public Handler<RoutingContext> handle() {
