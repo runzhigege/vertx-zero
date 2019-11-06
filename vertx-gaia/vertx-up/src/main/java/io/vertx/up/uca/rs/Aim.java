@@ -8,8 +8,8 @@ import io.vertx.up.atom.agent.Event;
  */
 public interface Aim<Context> {
     /**
-     * @param event
-     * @return
+     * @param event Scanned Event definition here
+     * @return Handler for `RoutingContext`
      */
     Handler<Context> attack(final Event event);
 }

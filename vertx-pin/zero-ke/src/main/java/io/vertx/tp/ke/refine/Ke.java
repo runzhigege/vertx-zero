@@ -3,6 +3,7 @@ package io.vertx.tp.ke.refine;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.auth.User;
 import io.vertx.ext.web.Session;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.up.commune.Envelop;
@@ -99,6 +100,9 @@ public class Ke {
         return KeCache.keyUser(envelop);
     }
 
+    public static String keyUser(final User user) {
+        return KeCache.keyUser(user);
+    }
 
     /*
      * Get keySession here for current logged user
