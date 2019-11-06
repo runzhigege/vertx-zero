@@ -28,7 +28,7 @@ public class ListService implements ListStub {
                 .compose(list -> {
                     if (Objects.isNull(list)) {
                         Ui.infoWarn(ListService.LOGGER, " Form not found, id = {0}", listId);
-                        return Ux.toFuture(new JsonObject());
+                        return Ux.future(new JsonObject());
                     } else {
                         /*
                          * It means here are some additional configuration that should be
@@ -48,15 +48,15 @@ public class ListService implements ListStub {
         Ke.metadata(listJson, ListStub.FIELD_OPTIONS_AJAX);
         Ke.metadata(listJson, ListStub.FIELD_OPTIONS_SUBMIT);
         Ke.metadata(listJson, ListStub.FIELD_V_SEGMENT);
-        return Ux.toFuture(listJson)
+        return Ux.future(listJson)
                 /* vQuery */
-                .compose(Ux.toAttach(ListStub.FIELD_V_QUERY, this.optionStub::fetchQuery))
+                .compose(Ux.applyMount(ListStub.FIELD_V_QUERY, this.optionStub::fetchQuery))
                 /* vSearch */
-                .compose(Ux.toAttach(ListStub.FIELD_V_SEARCH, this.optionStub::fetchSearch))
+                .compose(Ux.applyMount(ListStub.FIELD_V_SEARCH, this.optionStub::fetchSearch))
                 /* vTable */
-                .compose(Ux.toAttach(ListStub.FIELD_V_TABLE, this.optionStub::fetchTable))
+                .compose(Ux.applyMount(ListStub.FIELD_V_TABLE, this.optionStub::fetchTable))
                 /* vSegment */
-                .compose(Ux.toAttachJson(ListStub.FIELD_V_SEGMENT, this.optionStub::fetchFragment))
+                .compose(Ux.applyMountJson(ListStub.FIELD_V_SEGMENT, this.optionStub::fetchFragment))
                 /* Combiner for final processing */
                 .compose(Ke.fabricAsync("classCombiner"));
     }

@@ -64,7 +64,7 @@ class ScToken {
             }
         }
         if (null == error) {
-            return Ux.toFuture(Boolean.TRUE);
+            return Ux.future(Boolean.TRUE);
         } else {
             return Future.failedFuture(error);
         }

@@ -33,7 +33,7 @@ class UserHelper {
     }
 
     private static Future<JsonObject> applyUser(final SUser user) {
-        return Ux.toFuture(user).compose(Ux::fnJObject);
+        return Ux.future(user).compose(Ux::fnJObject);
     }
 
     private static Future<JsonObject> applyTunnel(final SUser user, final Function<ExEmployee, Future<JsonObject>> fnTunnel) {
@@ -52,8 +52,8 @@ class UserHelper {
                     return fnTunnel.apply(executor)
                             /* Employee information */
                             .compose(employee -> Objects.isNull(employee) ?
-                                    Ux.toFuture(new JsonObject()) :
-                                    Ux.toFuture(employee))
+                                    Ux.future(new JsonObject()) :
+                                    Ux.future(employee))
                             /* Merged */
                             .compose(employee -> Uson
                                     .create(Ux.toJson(user).copy())
@@ -85,7 +85,7 @@ class UserHelper {
              * in your database
              */
             Sc.infoAuth(LOGGER, AuthMsg.EMPLOYEE_EMPTY + " Null");
-            return Ux.toFuture(new JsonObject());
+            return Ux.future(new JsonObject());
         }
     }
 }

@@ -54,7 +54,7 @@ public class GetActor {
             final String sigma = headers.getString(KeField.SIGMA);
             Ix.infoFilters(GetActor.LOGGER, "All data by sigma: {0}", sigma);
             if (Ut.isNil(sigma)) {
-                return Ux.toFuture(Envelop.success(new JsonArray()));
+                return Ux.future(Envelop.success(new JsonArray()));
             } else {
                 final String pojo = config.getPojo();
                 return dao.fetchAsync(KeField.SIGMA, sigma)

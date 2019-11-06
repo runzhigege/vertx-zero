@@ -67,7 +67,7 @@ class JwtSecurer {
                 /*
                  * 403 Passed, continue to do business workflow
                  */
-                () -> Ux.toFuture(new JWTUser(authInfo, permissionsClaimKey)),
+                () -> Ux.future(new JWTUser(authInfo, permissionsClaimKey)),
                 /*
                  * There is no error fired by Future.failedFuture method
                  * But the validated result is false, it means that there is common

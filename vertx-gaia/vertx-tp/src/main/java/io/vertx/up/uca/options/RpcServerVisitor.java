@@ -34,15 +34,15 @@ public class RpcServerVisitor implements ServerVisitor<ServidorOptions> {
     public ConcurrentMap<Integer, ServidorOptions> visit(final String... key)
             throws ZeroException {
         // 1. Must be the first line, fixed position.
-        Ut.ensureEqualLength(getClass(), 0, key);
+        Ut.koLenEqual(this.getClass(), 0, key);
         // 2. Visit the node for server, http
-        final JsonObject data = node.read();
+        final JsonObject data = this.node.read();
 
         Fn.outZero(null == data || !data.containsKey(KEY), LOGGER,
                 ServerConfigException.class,
-                getClass(), null == data ? null : data.encode());
+                this.getClass(), null == data ? null : data.encode());
 
-        return visit(data.getJsonArray(KEY));
+        return this.visit(data.getJsonArray(KEY));
     }
 
     private ConcurrentMap<Integer, ServidorOptions> visit(final JsonArray serverData)
@@ -52,11 +52,11 @@ public class RpcServerVisitor implements ServerVisitor<ServidorOptions> {
         final ConcurrentMap<Integer, ServidorOptions> map =
                 new ConcurrentHashMap<>();
         Ut.itJArray(serverData, JsonObject.class, (item, index) -> {
-            if (isServer(item)) {
+            if (this.isServer(item)) {
                 // 1. Extract port
-                final int port = extractPort(item.getJsonObject(YKEY_CONFIG));
+                final int port = this.extractPort(item.getJsonObject(YKEY_CONFIG));
                 // 2. Convert JsonObject to HttpServerOptions
-                final ServidorOptions options = transformer.transform(item);
+                final ServidorOptions options = this.transformer.transform(item);
                 Fn.safeNull(() -> {
                     // 3. Add to map;
                     map.put(port, options);

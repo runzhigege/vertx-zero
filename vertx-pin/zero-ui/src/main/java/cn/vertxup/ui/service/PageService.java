@@ -43,7 +43,7 @@ public class PageService implements PageStub {
                         /*
                          * No configuration related to current page
                          */
-                        return Ux.toFuture(new JsonObject());
+                        return Ux.future(new JsonObject());
                     }
                 })
                 .compose(pageJson -> {
@@ -67,7 +67,7 @@ public class PageService implements PageStub {
                                         .filter(item -> Objects.nonNull(item.getString(KeField.KEY)))
                                         .forEach(item -> converted.put(item.getString(KeField.KEY), item.copy()));
                                 pageJson.put(KeField.Ui.CONTROLS, converted);
-                                return Ux.toFuture(pageJson);
+                                return Ux.future(pageJson);
                             });
                 });
     }
@@ -80,7 +80,7 @@ public class PageService implements PageStub {
                 .compose(layout -> {
                     final JsonObject pageJson = Ux.toJson(page);
                     pageJson.put("layout", layout);
-                    return Ux.toFuture(pageJson)
+                    return Ux.future(pageJson)
                             /*
                              * Configuration converted to Json
                              */

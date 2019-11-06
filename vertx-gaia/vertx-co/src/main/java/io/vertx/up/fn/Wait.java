@@ -3,6 +3,7 @@ package io.vertx.up.fn;
 
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
+import io.vertx.core.Promise;
 import io.vertx.up.fn.wait.Case;
 
 import java.util.function.Consumer;
@@ -13,20 +14,20 @@ final class Wait {
     }
 
     @SuppressWarnings("all")
-    static <T> Future<T> then(final Object asyncResult, final Future<T> future, final Throwable error) {
+    static <T> Future<T> then(final Object asyncResult, final Promise<T> promise, final Throwable error) {
         final AsyncResult<T> result = (AsyncResult<T>) asyncResult;
         if (result.succeeded()) {
-            future.complete(result.result());
+            promise.complete(result.result());
         } else {
-            future.fail(error);
+            promise.fail(error);
         }
-        return future;
+        return promise.future();
     }
 
-    static <T> Future<T> then(final Consumer<Future<T>> consumer) {
-        final Future<T> future = Future.future();
-        consumer.accept(future);
-        return future;
+    static <T> Future<T> then(final Consumer<Promise<T>> consumer) {
+        final Promise<T> promise = Promise.promise();
+        consumer.accept(promise);
+        return promise.future();
     }
 
     static <T> Case<T> branch(final Supplier<Future<T>> caseLine) {

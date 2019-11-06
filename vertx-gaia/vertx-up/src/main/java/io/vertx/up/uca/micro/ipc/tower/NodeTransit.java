@@ -38,7 +38,7 @@ public class NodeTransit implements Transit {
         return returnValue.compose(item -> TunnelClient.create(this.getClass())
                 .connect(this.vertx)
                 .connect(this.method)
-                .send(Ux.to(item)));
+                .send(Ux.envelop(item)));
     }
 
     @Override

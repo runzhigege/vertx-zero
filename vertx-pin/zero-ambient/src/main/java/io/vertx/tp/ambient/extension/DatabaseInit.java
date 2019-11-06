@@ -28,9 +28,9 @@ class DatabaseInit implements Init {
              * Init third step: X_SOURCE stored into pool
              */
             return Ux.Pool.on(AtConstant.POOL_DATABASE).put(appJson.getString(KeField.KEY), database)
-                    .compose(item -> Ux.toFuture(item.getValue()))
-                    .compose(item -> Ux.toFuture(item.toJson()))
-                    .compose(item -> Ux.toFuture(result(appJson, item)));
+                    .compose(item -> Ux.future(item.getValue()))
+                    .compose(item -> Ux.future(item.toJson()))
+                    .compose(item -> Ux.future(result(appJson, item)));
         };
     }
 

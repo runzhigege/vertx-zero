@@ -55,7 +55,7 @@ public class AccreditService implements AccreditStub {
                 /* Get data from cache */
                 .compose(privilege -> privilege.fetchAuthorized(authorizedKey))
                 /* */
-                .compose(result -> result ? Ux.toFuture(Boolean.TRUE) :
+                .compose(result -> result ? Ux.future(Boolean.TRUE) :
                         supplier.get());
     }
 
@@ -64,7 +64,7 @@ public class AccreditService implements AccreditStub {
         if (result) {
             return this.matrixStub.fetchBound(request, resource)
                     /* DataBound credit parsing from SAction */
-                    .compose(bound -> Ux.toFuture(bound.addCredit(action.getRenewalCredit())))
+                    .compose(bound -> Ux.future(bound.addCredit(action.getRenewalCredit())))
                     /* DataBound stored */
                     .compose(bound -> AccreditFlow.inspectBound(bound, request))
                     /* Authorized cached and get result */

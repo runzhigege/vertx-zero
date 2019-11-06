@@ -32,7 +32,7 @@ class Unity {
         final Seeker seeker = Pocket.lookup(Seeker.class);
         /* init parameters */
         final JsonObject params = Unity.initMy(request);
-        return Ux.toFuture(params)
+        return Ux.future(params)
                 /* Header */
                 .compose(input -> IxActor.header().bind(request).procAsync(input, config))
                 /* Fetch Impact */
@@ -43,7 +43,7 @@ class Unity {
         /* Get Stub */
         final Apeak stub = Pocket.lookup(Apeak.class);
         if (Objects.isNull(stub)) {
-            return Ux.toFuture(new JsonArray());
+            return Ux.future(new JsonArray());
         } else {
             return IxActor.start()
                     /* Apeak column definition here */
@@ -66,7 +66,7 @@ class Unity {
         /* If null */
         if (Objects.isNull(stub)) {
             /* No thing return from this interface */
-            return Ux.toFuture(new JsonArray()).compose(IxHttp::success200);
+            return Ux.future(new JsonArray()).compose(IxHttp::success200);
         } else {
             return executor.get();
         }

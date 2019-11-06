@@ -22,7 +22,7 @@ class DeleteLinker implements IxLinker {
              */
             final JsonObject filters = OxSwitcher.getCondition(original, module);
             return dao.deleteAsync(filters, config.getPojo())
-                    .compose(deleted -> Ux.toFuture(Envelop.success(deleted)));
+                    .compose(deleted -> Ux.future(Envelop.success(deleted)));
         });
     }
 }

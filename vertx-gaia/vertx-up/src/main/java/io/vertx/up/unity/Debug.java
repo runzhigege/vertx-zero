@@ -1,29 +1,15 @@
 package io.vertx.up.unity;
 
-import io.vertx.up.log.Annal;
+import io.vertx.core.Future;
+import io.vertx.up.commune.Envelop;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.util.Ut;
-import io.vertx.up.fn.Actuator;
 
+import java.util.Objects;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 class Debug {
-
-    static <T> T timer(final Class<?> clazz, final Supplier<T> supplier) {
-        final long start = System.nanoTime();
-        final T ret = supplier.get();
-        final long end = System.nanoTime();
-        final Annal LOGGER = Annal.get(clazz);
-        LOGGER.info("[ ZERO ] Time spend and Get: {0}ns", String.valueOf(end - start));
-        return ret;
-    }
-
-    static void timer(final Class<?> clazz, final Actuator actuator) {
-        final long start = System.nanoTime();
-        actuator.execute();
-        final long end = System.nanoTime();
-        final Annal LOGGER = Annal.get(clazz);
-        LOGGER.info("[ ZERO ] Time spend: {0}ns", String.valueOf(end - start));
-    }
 
     static void monitor(final Object... objects) {
         for (final Object reference : objects) {
@@ -43,5 +29,38 @@ class Debug {
         }
         builder.append("\t\t[ ZERO Debug ] <--- End \n");
         System.err.println(builder.toString());
+    }
+
+    static <T> Future<T> debug(final T item) {
+        Fn.safeNull(() -> Debug.monitor(item), item);
+        return Future.succeededFuture(item);
+    }
+
+    static <T> T debug(final Throwable error, final Supplier<T> supplier) {
+        if (Objects.nonNull(error)) {
+            // TODO: Debug for JVM;
+            error.printStackTrace();
+        }
+        return supplier.get();
+    }
+
+    static Function<Throwable, Envelop> otherwise() {
+        return error -> {
+            if (Objects.nonNull(error)) {
+                error.printStackTrace();
+                return Envelop.failure(error);
+            } else {
+                return Envelop.ok();
+            }
+        };
+    }
+
+    static <T> Function<Throwable, T> otherwise(final Supplier<T> supplier) {
+        return error -> {
+            if (Objects.nonNull(error)) {
+                error.printStackTrace();
+            }
+            return supplier.get();
+        };
     }
 }

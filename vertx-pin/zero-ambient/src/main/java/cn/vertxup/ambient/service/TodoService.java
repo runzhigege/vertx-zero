@@ -65,17 +65,17 @@ public class TodoService implements TodoStub {
         return Ux.Jooq.on(XTodoDao.class)
                 .<XTodo>findByIdAsync(key)
                 .compose(Ux::fnJObject)
-                .compose(Ux.applyNil(JsonObject::new, (todo) -> {
+                .compose(Ut.applyNil(JsonObject::new, (todo) -> {
                     final ExTodo todoChannel = Pocket.lookup(ExTodo.class);
                     At.infoInit(LOGGER, AtMsg.CHANNEL_TODO, Objects.isNull(todoChannel) ? null : todoChannel.getClass().getName());
-                    return Ux.applyNil(() -> todo, () -> {
+                    return Ut.applyNil(() -> todo, () -> {
                         /*
                          * X_TODO channel and data merged.
                          */
                         final JsonObject params = Ut.elementSubset(todo,
                                 KeField.MODEL_ID, KeField.MODEL_CATEGORY, KeField.MODEL_KEY, KeField.SIGMA);
                         return todoChannel.fetchAsync(key, params)
-                                .compose(Ux.applyMerge(todo));
+                                .compose(Ut.applyMerge(todo));
                     }).apply(todoChannel);
                 }));
     }

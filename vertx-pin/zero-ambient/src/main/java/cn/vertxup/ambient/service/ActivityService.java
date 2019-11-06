@@ -9,13 +9,14 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.up.unity.Ux;
+import io.vertx.up.util.Ut;
 
 public class ActivityService implements ActivityStub {
     @Override
     public Future<JsonObject> fetchActivity(final String id) {
         return Ux.Jooq.on(XActivityDao.class)
                 .<XActivity>findByIdAsync(id)
-                .compose(Ux.applyNil(JsonObject::new, (activity) -> Ux.Jooq.on(XActivityChangeDao.class)
+                .compose(Ut.applyNil(JsonObject::new, (activity) -> Ux.Jooq.on(XActivityChangeDao.class)
                         .<XActivityChange>fetchAsync("activityId", activity.getKey())
                         .compose(Ux::fnJArray)
                         .compose(changes -> {
@@ -26,7 +27,7 @@ public class ActivityService implements ActivityStub {
                             Ke.metadata(activityJson, "recordNew");
                             Ke.metadata(activityJson, "recordOld");
                             activityJson.put(KeField.CHANGES, changes);
-                            return Ux.toFuture(activityJson);
+                            return Ux.future(activityJson);
                         })));
     }
 }

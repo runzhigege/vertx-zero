@@ -39,7 +39,7 @@ public class DatumInit implements Init {
     public Future<JsonObject> doExtension(final JsonObject appJson) {
         final Init loader = AtPin.getLoader();
         if (Objects.isNull(loader)) {
-            return Ux.toFuture(appJson);
+            return Ux.future(appJson);
         } else {
             return loader.apply().apply(appJson);
         }
@@ -61,7 +61,7 @@ public class DatumInit implements Init {
                 /* Stored each result */
                 .compose(results -> Uson.create().append(KeField.RESULT, results)
                         .toFuture())
-                .compose(results -> Ux.toFuture(this.result(results, appJson)));
+                .compose(results -> Ux.future(this.result(results, appJson)));
     }
 
     private Future<JsonObject> doLoading(final String filename) {

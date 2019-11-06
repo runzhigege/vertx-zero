@@ -57,7 +57,7 @@ class Web {
                 index++;
             }
         }
-        return Fluctuate.thenCombine(futures.toArray(new Future[]{}))
+        return Combine.thenCombine(futures.toArray(new Future[]{}))
                 .compose(response -> {
                     final JsonObject finalJson = new JsonObject();
                     final JsonObject reference = (JsonObject) response;

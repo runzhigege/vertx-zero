@@ -29,7 +29,7 @@ class SerialActor extends AbstractActor {
             /*
              * Do not generate numbers
              */
-            return Ux.toFuture(data);
+            return Ux.future(data);
         } else {
             /*
              * Generate numbers here
@@ -57,13 +57,13 @@ class SerialActor extends AbstractActor {
                         .compose(generated -> {
                             final Set<String> generatedFields = generated.keySet();
                             generatedFields.forEach(generatedField -> data.put(generatedField, generated.get(generatedField)));
-                            return Ux.toFuture(data);
+                            return Ux.future(data);
                         });
             } else {
                 /*
                  * EcSerial is null, could not generate
                  */
-                return Ux.toFuture(data);
+                return Ux.future(data);
             }
         }
     }

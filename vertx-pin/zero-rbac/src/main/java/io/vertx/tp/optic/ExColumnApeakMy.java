@@ -27,9 +27,9 @@ public class ExColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
         return uniform(params, (resourceId) -> stub.fetchMatrix(userId, resourceId, view)
                 .compose(queried -> Objects.isNull(queried) ?
                         /* No view found */
-                        Ux.toFuture(new JsonArray()) :
+                        Ux.future(new JsonArray()) :
                         /* View found and get projection */
-                        Ux.toFuture(Ut.toJArray(queried.getProjection()))
+                        Ux.future(Ut.toJArray(queried.getProjection()))
                 )
         );
     }
@@ -40,7 +40,7 @@ public class ExColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
         final String view = params.getString(ARG2);
         return uniform(params, (resourceId) -> stub.saveMatrix(userId, resourceId, view, projection)
                 /* New projection */
-                .compose(updated -> Ux.toFuture(Ut.toJArray(updated.getProjection()))))
+                .compose(updated -> Ux.future(Ut.toJArray(updated.getProjection()))))
                 /*
                  * Flush cache of session on impacted uri
                  * This method is for projection refresh here
@@ -64,7 +64,7 @@ public class ExColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
         final String dataKey = params.getString(ARG4);
         return habit.<JsonObject>get(dataKey).compose(stored -> {
             if (Objects.isNull(stored)) {
-                return Ux.toFuture(updated);
+                return Ux.future(updated);
             } else {
                 final JsonObject updatedJson = stored.copy();
                 updatedJson.put(Inquiry.KEY_PROJECTION, updated);
@@ -72,7 +72,7 @@ public class ExColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
                         .compose(retured -> {
                             Sc.infoAuth(getLogger(), AuthMsg.REGION_FLUSH, habitus, dataKey,
                                     stored.encodePrettily(), retured.encodePrettily());
-                            return Ux.toFuture(updated);
+                            return Ux.future(updated);
                         });
             }
         });
@@ -84,7 +84,7 @@ public class ExColumnApeakMy extends Anchoret<ApeakMy> implements ApeakMy {
     private Future<JsonArray> uniform(final JsonObject params, final Function<String, Future<JsonArray>> function) {
         final String resourceId = params.getString(ARG0);
         if (Ut.isNil(resourceId)) {
-            return Ux.toFuture(new JsonArray());
+            return Ux.future(new JsonArray());
         } else {
             return function.apply(resourceId);
         }

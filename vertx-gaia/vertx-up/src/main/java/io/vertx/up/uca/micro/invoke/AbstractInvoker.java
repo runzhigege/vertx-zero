@@ -82,6 +82,6 @@ public abstract class AbstractInvoker implements Invoker {
         return TunnelClient.create(this.getClass())
                 .connect(vertx)
                 .connect(method)
-                .send(Ux.to(result));
+                .send(Ux.envelop(result));
     }
 }

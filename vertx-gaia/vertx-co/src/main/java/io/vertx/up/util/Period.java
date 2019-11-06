@@ -244,8 +244,8 @@ final class Period {
         }, literal);
     }
 
-    static List<String> valueDurationDays(final String from, final String to) {
-        final List<String> result = new ArrayList();
+    static List<String> inRange(final String from, final String to) {
+        final List<String> result = new ArrayList<>();
         LocalDate begin = LocalDate.parse(from);
         result.add(begin.format(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US)));
         final LocalDate end = LocalDate.parse(to);

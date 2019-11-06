@@ -63,7 +63,7 @@ class ScPhase {
             /*
              * Empty bound in current interface instead of other
              */
-            return Ux.toFuture(new JsonObject());
+            return Ux.future(new JsonObject());
         } else {
             /*
              * ScHabitus instead of Session
