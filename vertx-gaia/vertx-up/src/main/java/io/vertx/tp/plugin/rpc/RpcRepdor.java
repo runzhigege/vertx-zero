@@ -1,7 +1,7 @@
 package io.vertx.tp.plugin.rpc;
 
 import io.vertx.core.AsyncResult;
-import io.vertx.core.Future;
+import io.vertx.core.Promise;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ipc.eon.IpcResponse;
 import io.vertx.up.commune.Envelop;
@@ -24,7 +24,7 @@ public class RpcRepdor {
     }
 
     public void replyJson(
-            final Future<JsonObject> handler,
+            final Promise<JsonObject> handler,
             final AsyncResult<IpcResponse> response) {
         if (response.succeeded()) {
             final Envelop json = DataEncap.out(response.result());
@@ -35,7 +35,7 @@ public class RpcRepdor {
             final Throwable ex = response.cause();
             if (null != ex) {
                 final Envelop envelop =
-                        Envelop.failure(new _500UnexpectedRpcException(clazz, ex));
+                        Envelop.failure(new _500UnexpectedRpcException(this.clazz, ex));
                 handler.complete(envelop.outJson());
                 // TODO: Debug Now, Remove In Future
                 ex.printStackTrace();
@@ -44,7 +44,7 @@ public class RpcRepdor {
     }
 
     public void reply(
-            final Future<Envelop> handler,
+            final Promise<Envelop> handler,
             final AsyncResult<IpcResponse> response
     ) {
         if (response.succeeded()) {
@@ -53,7 +53,7 @@ public class RpcRepdor {
             final Throwable ex = response.cause();
             if (null != ex) {
                 final Envelop envelop =
-                        Envelop.failure(new _500UnexpectedRpcException(clazz, ex));
+                        Envelop.failure(new _500UnexpectedRpcException(this.clazz, ex));
                 handler.complete(envelop);
                 // TODO: Debug Now, Remove In Future
                 ex.printStackTrace();

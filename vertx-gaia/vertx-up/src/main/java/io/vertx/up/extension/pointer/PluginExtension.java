@@ -58,7 +58,7 @@ public interface PluginExtension {
                     /*
                      * Otherwise failure throw out directly
                      */
-                    Ux.toFuture(envelop);
+                    Ux.future(envelop);
         }
     }
 

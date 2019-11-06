@@ -89,7 +89,7 @@ public class JobActor {
                             }
                         }
                     });
-                    return Ux.toFuture(response);
+                    return Ux.future(response);
                 });
     }
 }

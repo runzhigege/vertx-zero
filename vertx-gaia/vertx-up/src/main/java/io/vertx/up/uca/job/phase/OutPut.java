@@ -55,7 +55,7 @@ class OutPut {
              * For spec debug here, this code is very important
              */
             error.printStackTrace();
-            return Ux.toFuture(envelop);
+            return Ux.future(envelop);
         }
     }
 
@@ -95,7 +95,7 @@ class OutPut {
                     () -> LOGGER.info(Info.PHASE_ERROR, mission.getName(),
                             envelop.error().getClass().getName()));
 
-            return Ux.toFuture(envelop);
+            return Ux.future(envelop);
         }
     }
 }

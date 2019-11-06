@@ -23,7 +23,7 @@ public class IxHub {
      */
     public static Future<Envelop> createAsync(final Envelop request, final JsonObject body,
                                               final UxJooq dao, final IxModule config) {
-        return Ux.toFuture(body)
+        return Ux.future(body)
                 /* Header */
                 .compose(input -> IxActor.header().bind(request).procAsync(input, config))
                 /* Verify */

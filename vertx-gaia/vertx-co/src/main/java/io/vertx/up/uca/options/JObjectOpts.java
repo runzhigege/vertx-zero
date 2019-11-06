@@ -14,7 +14,7 @@ public class JObjectOpts implements Visitor<JsonObject> {
     @Override
     public JsonObject visit(final String... nodes)
             throws ZeroException {
-        Ut.ensureMinLength(getClass(), 0, nodes);
+        Ut.koLenMin(getClass(), 0, nodes);
         // Tree Data
         final JsonObject tree = NODE.read();
         return Ut.visitJObject(tree, nodes);

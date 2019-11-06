@@ -66,7 +66,7 @@ public class QueryActor {
          * Region -> City -> State -> Country
          */
         final JsonObject response = new JsonObject();
-        return Ux.toFuture(id)
+        return Ux.future(id)
                 /*
                  * Region Instance
                  */
@@ -96,7 +96,7 @@ public class QueryActor {
                  */
                 .compose(state -> this.combine(response, "countryId",
                         state::getCountryId))
-                .compose(countryId -> Ux.toFuture(response));
+                .compose(countryId -> Ux.future(response));
     }
 
     private Future<String> combine(
@@ -107,6 +107,6 @@ public class QueryActor {
         if (Ut.notNil(value)) {
             data.put(field, value);
         }
-        return Ux.toFuture(value);
+        return Ux.future(value);
     }
 }

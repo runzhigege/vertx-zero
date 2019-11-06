@@ -7,6 +7,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.mongo.FindOptions;
 import io.vertx.ext.mongo.MongoClient;
 import io.vertx.tp.plugin.mongo.MongoInfix;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 
 import java.util.Objects;
@@ -19,14 +20,14 @@ class UxMongo {
     private static final Annal LOGGER = Annal.get(UxMongo.class);
 
     static Future<Boolean> missing(final String collection, final JsonObject filter) {
-        return Ux.thenGeneric(future -> CLIENT.findOne(collection, filter, null, res -> {
+        return Fn.thenGeneric(future -> CLIENT.findOne(collection, filter, null, res -> {
             LOGGER.debug(Info.MONGO_FILTER, collection, filter, res.result());
             future.complete(null == res.result());
         }));
     }
 
     static Future<Boolean> existing(final String collection, final JsonObject filter) {
-        return Ux.thenGeneric(future -> CLIENT.findOne(collection, filter, null, res -> {
+        return Fn.thenGeneric(future -> CLIENT.findOne(collection, filter, null, res -> {
             LOGGER.debug(Info.MONGO_FILTER, collection, filter, res.result());
             future.complete(null != res.result());
         }));
@@ -49,7 +50,7 @@ class UxMongo {
     }
 
     static Future<JsonObject> insert(final String collection, final JsonObject data) {
-        return Ux.thenGeneric(future -> CLIENT.insert(collection, data, res -> {
+        return Fn.thenGeneric(future -> CLIENT.insert(collection, data, res -> {
             if (res.succeeded()) {
                 LOGGER.debug(Info.MONGO_INSERT, collection, data);
                 future.complete(data);
@@ -61,7 +62,7 @@ class UxMongo {
     }
 
     static Future<JsonObject> findOne(final String collection, final JsonObject filter) {
-        return Ux.thenGeneric(future -> CLIENT.findOne(collection, filter, null, res -> {
+        return Fn.thenGeneric(future -> CLIENT.findOne(collection, filter, null, res -> {
             LOGGER.debug(Info.MONGO_FILTER, collection, filter, res.result());
             future.complete(res.result());
         }));
@@ -85,7 +86,7 @@ class UxMongo {
     static Future<JsonObject> findOneAndReplace(final String collection, final JsonObject filter,
                                                 final JsonObject updated) {
         // Find first for field update
-        return Ux.thenGeneric(future -> CLIENT.findOne(collection, filter, null, handler -> {
+        return Fn.thenGeneric(future -> CLIENT.findOne(collection, filter, null, handler -> {
             if (handler.succeeded()) {
                 final JsonObject data = handler.result().mergeIn(updated);
                 CLIENT.findOneAndReplace(collection, filter, data, result -> {
@@ -99,7 +100,7 @@ class UxMongo {
     }
 
     static Future<Long> removeDocument(final String collection, final JsonObject filter) {
-        return Ux.thenGeneric(future -> CLIENT.removeDocument(collection, filter, res -> {
+        return Fn.thenGeneric(future -> CLIENT.removeDocument(collection, filter, res -> {
             final Long removed = res.result().getRemovedCount();
             LOGGER.debug(Info.MONGO_DELETE, collection, filter, removed);
             future.complete(removed);
@@ -108,7 +109,7 @@ class UxMongo {
 
     static Future<JsonArray> findWithOptions(final String collection, final JsonObject filter,
                                              final FindOptions options) {
-        return Ux.thenGeneric(future -> CLIENT.findWithOptions(collection, filter, options, res -> {
+        return Fn.thenGeneric(future -> CLIENT.findWithOptions(collection, filter, options, res -> {
             final JsonArray result = new JsonArray();
             Observable.fromIterable(res.result())
                     .filter(Objects::nonNull)

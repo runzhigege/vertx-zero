@@ -57,11 +57,11 @@ public class Ix {
      * analyze unique record
      */
     public static Future<JsonObject> unique(final JsonObject result) {
-        return Ux.toFuture(IxSerialize.unique(result));
+        return Ux.future(IxSerialize.unique(result));
     }
 
     public static Future<JsonArray> list(final JsonObject result) {
-        return Ux.toFuture(IxSerialize.list(result));
+        return Ux.future(IxSerialize.list(result));
     }
 
     /*
@@ -69,21 +69,21 @@ public class Ix {
      */
     public static <T> Future<T> entityAsync(final JsonObject data, final IxModule config) {
         final T reference = IxSerialize.entity(data, config);
-        return Ux.toFuture(reference);
+        return Ux.future(reference);
     }
 
     @SuppressWarnings("all")
     public static <T> Future<List<T>> entityAsync(final JsonArray data, final IxModule config) {
-        return Ux.toFuture(IxSerialize.entity(data, config));
+        return Ux.future(IxSerialize.entity(data, config));
     }
 
     public static Future<JsonArray> zipperAsync(final JsonArray from, final JsonArray to, final IxModule config) {
-        return Ux.toFuture(IxSerialize.zipper(from, to, config));
+        return Ux.future(IxSerialize.zipper(from, to, config));
     }
 
     // Query
     public static Future<JsonObject> inKeys(final JsonArray array, final IxModule config) {
-        return Ux.toFuture(IxQuery.inKeys(array, config));
+        return Ux.future(IxQuery.inKeys(array, config));
     }
 
     /*

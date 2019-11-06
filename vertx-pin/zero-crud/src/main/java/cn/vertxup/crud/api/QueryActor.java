@@ -41,7 +41,7 @@ public class QueryActor {
         return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
             /* Parameters Extraction */
             final JsonObject body = Ux.getJson1(request);
-            return Ux.toFuture(body)
+            return Ux.future(body)
                     /* Verify */
                     .compose(input -> IxActor.verify().bind(request).procAsync(input, config))
                     /* Execution */
@@ -75,7 +75,7 @@ public class QueryActor {
         /* Parameters Extraction */
         final JsonObject body = Ux.getJson1(request);
         /* Pojo Extract */
-        return Ux.toFuture(body)
+        return Ux.future(body)
                 /* Verify */
                 .compose(input -> IxActor.verify().bind(request).procAsync(input, config))
                 /* Execution */

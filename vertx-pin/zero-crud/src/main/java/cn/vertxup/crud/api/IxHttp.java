@@ -12,7 +12,7 @@ public interface IxHttp {
 
     /* 201 */
     static <T> Future<Envelop> success201(final T entity) {
-        return Ux.toFuture(Envelop.success(entity, HttpStatusCode.CREATED));
+        return Ux.future(Envelop.success(entity, HttpStatusCode.CREATED));
     }
 
     static <T> Future<Envelop> success201(final T entity, final IxModule config) {
@@ -21,13 +21,13 @@ public interface IxHttp {
             return success201(entity);
         } else {
             final JsonObject serializedJson = Ux.toJson(entity, pojo);
-            return Ux.toFuture(Envelop.success(serializedJson, HttpStatusCode.CREATED));
+            return Ux.future(Envelop.success(serializedJson, HttpStatusCode.CREATED));
         }
     }
 
     /* 200 */
     static <T> Future<Envelop> success200(final T entity) {
-        return Ux.toFuture(Envelop.success(entity));
+        return Ux.future(Envelop.success(entity));
     }
 
     static <T> Future<Envelop> success200(final T entity, final IxModule config) {
@@ -36,12 +36,12 @@ public interface IxHttp {
             return success200(entity);
         } else {
             final JsonObject serializedJson = Ux.toJson(entity, pojo);
-            return Ux.toFuture(Envelop.success(serializedJson));
+            return Ux.future(Envelop.success(serializedJson));
         }
     }
 
     /* 204 */
     static <T> Future<Envelop> success204(final T entity) {
-        return Ux.toFuture(Envelop.success(entity, HttpStatusCode.NO_CONTENT));
+        return Ux.future(Envelop.success(entity, HttpStatusCode.NO_CONTENT));
     }
 }

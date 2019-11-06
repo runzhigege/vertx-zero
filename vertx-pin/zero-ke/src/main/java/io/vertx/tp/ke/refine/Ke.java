@@ -121,15 +121,15 @@ public class Ke {
         }
 
         static Future<JsonObject> boolAsync(final boolean checked) {
-            return Ux.toFuture(bool(checked));
+            return Ux.future(bool(checked));
         }
 
         static Future<Boolean> boolAsync(final JsonObject checkedJson) {
-            return Ux.toFuture(KeResult.bool(checkedJson));
+            return Ux.future(KeResult.bool(checkedJson));
         }
 
         static Future<JsonObject> jsonAsync(final JsonObject result) {
-            return Ux.toFuture(Ut.isNil(result) ? new JsonObject() : result);
+            return Ux.future(Ut.isNil(result) ? new JsonObject() : result);
         }
 
         static JsonObject bool(final String key, final boolean checked) {

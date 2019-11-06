@@ -1,6 +1,7 @@
 package io.vertx.up.uca.micro.invoke;
 
 import io.vertx.core.Future;
+import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.Message;
 import io.vertx.up.commune.Envelop;
@@ -40,18 +41,17 @@ public class AsyncInvoker extends AbstractInvoker {
         } else {
             final Object returnValue = this.invokeInternal(proxy, method, envelop);
             if (null == returnValue) {
-                final Future future = Future.future();
-                future.setHandler(Ux.handler(message));
+                /*
+                    final Future future = Future.future();
+                    future.setHandler(Ux.handler(message));
+                    Not frequent usage of this branch
+                */
+                final Promise promise = Promise.promise();
+                promise.future().setHandler(Ux.handler(message));
             } else {
                 final Future future = (Future) returnValue;
                 future.setHandler(Ux.handler(message));
             }
-            /*
-            final Object reference = envelop.data();
-            final Object arguments = Ut.deserialize(Ut.toString(reference), argType);
-            final Future tResult = Ut.invoke(proxy, method.name(), arguments);
-            tResult.setHandler(Ux.handler(message));
-            */
         }
     }
 

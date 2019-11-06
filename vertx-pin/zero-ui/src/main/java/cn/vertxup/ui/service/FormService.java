@@ -27,7 +27,7 @@ public class FormService implements FormStub {
                 .compose(form -> {
                     if (Objects.isNull(form)) {
                         Ui.infoWarn(FormService.LOGGER, " Form not found, id = {0}", formId);
-                        return Ux.toFuture(new JsonObject());
+                        return Ux.future(new JsonObject());
                     } else {
                         /*
                          * form / fields combine here
@@ -49,7 +49,7 @@ public class FormService implements FormStub {
                 .compose(form -> {
                     if (Objects.isNull(form)) {
                         Ui.infoWarn(FormService.LOGGER, " Form not found, code = {0}, sigma = {1}", code, sigma);
-                        return Ux.toFuture(new JsonObject());
+                        return Ux.future(new JsonObject());
                     } else {
                         /*
                          * form / fields combine here
@@ -59,7 +59,7 @@ public class FormService implements FormStub {
                                 /*
                                  * Adapter for form configuration
                                  */
-                                .compose(config -> Ux.toFuture(config.getJsonObject("form")));
+                                .compose(config -> Ux.future(config.getJsonObject("form")));
                     }
                 });
     }
@@ -103,6 +103,6 @@ public class FormService implements FormStub {
         final String formId = formJson.getString(KeField.KEY);
         return this.fieldStub.fetchUi(formId)
                 /* Put `ui` to form configuration */
-                .compose(ui -> Ux.toFuture(config.put("form", form.put("ui", ui))));
+                .compose(ui -> Ux.future(config.put("form", form.put("ui", ui))));
     }
 }

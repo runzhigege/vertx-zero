@@ -99,6 +99,6 @@ public class PutActor {
         final String sessionKey = Ke.keySession(params.getString(KeField.METHOD), params.getString(KeField.URI));
         Ix.infoDao(LOGGER, IxMsg.CACHE_KEY_PROJECTION, sessionKey);
         original.put(KeField.DATA_KEY, sessionKey);
-        return Ux.toFuture(original);
+        return Ux.future(original);
     }
 }

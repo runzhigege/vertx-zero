@@ -18,7 +18,7 @@ public class AdaptorChannel extends AbstractChannel {
      */
     @Override
     public Future<Boolean> initAsync(final JtComponent component, final ActIn request) {
-        return Ux.toFuture(getCommercial())
+        return Ux.future(getCommercial())
                 /*
                  * Database initialized
                  */

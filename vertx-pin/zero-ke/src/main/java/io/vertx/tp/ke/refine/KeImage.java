@@ -16,7 +16,7 @@ class KeImage {
             if (!Ut.isNil(image)) {
                 response.put(field, new JsonArray(image));
             }
-            return Ux.toFuture(response);
+            return Ux.future(response);
         }, response);
     }
 }

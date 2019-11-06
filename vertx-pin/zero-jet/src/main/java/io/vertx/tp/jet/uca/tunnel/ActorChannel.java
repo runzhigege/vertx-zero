@@ -21,7 +21,7 @@ public class ActorChannel extends AbstractChannel {
      */
     @Override
     public Future<Boolean> initAsync(final JtComponent component, final ActIn request) {
-        return Ux.toFuture(getCommercial())
+        return Ux.future(getCommercial())
                 /*
                  * Database initialized, Mount database to `JtComponent`
                  */
@@ -30,12 +30,12 @@ public class ActorChannel extends AbstractChannel {
                 /*
                  * Integration inited, mount to `JtComponent`
                  */
-                .compose(dbed -> Ux.toFuture(getCommercial().integration()))
+                .compose(dbed -> Ux.future(getCommercial().integration()))
                 .compose(integration -> Ut.contractAsync(component, Integration.class, integration))
                 /*
                  * Mission inited, mount to `JtComponent`
                  */
-                .compose(dbed -> Ux.toFuture(getMission()))
+                .compose(dbed -> Ux.future(getMission()))
                 .compose(mission -> Ut.contractAsync(component, Mission.class, mission));
     }
 }

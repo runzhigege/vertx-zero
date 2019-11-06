@@ -80,7 +80,7 @@ public class ScSession {
                         /* Result Report */
                         .compose(result -> Uson.create(data).append("profile", profile).toFuture())
                         .compose(ScSession::onReport)
-                        .compose(nil -> Ux.toFuture(Boolean.TRUE))));
+                        .compose(nil -> Ux.future(Boolean.TRUE))));
     }
 
     /*
@@ -117,11 +117,11 @@ public class ScSession {
                 .forEach(futures::add);
         final Refer parentHod = new Refer();
         final Refer childHod = new Refer();
-        return CompositeFuture.join(futures).compose(Sc::<ProfileGroup>composite).compose(profiles -> Ux.toFuture(profiles)
+        return CompositeFuture.join(futures).compose(Sc::<ProfileGroup>composite).compose(profiles -> Ux.future(profiles)
                 /* Group Direct Mode */
                 .compose(Align::flat)
                 .compose(ScDetent.group(profile)::procAsync)
-                .compose(nil -> Ux.toFuture(profiles))
+                .compose(nil -> Ux.future(profiles))
 
                 /* Group Parent Mode */
                 .compose(Align::parent)
@@ -130,7 +130,7 @@ public class ScSession {
                 .compose(parents -> ScDetent.parent(profile, profiles).procAsync(parents))
                 /** Parent and Current */
                 .compose(nil -> ScDetent.inherit(profile, profiles).procAsync(parentHod.get()))
-                .compose(nil -> Ux.toFuture(profiles))
+                .compose(nil -> Ux.future(profiles))
 
                 /* Group Child Mode */
                 .compose(Align::children)
@@ -139,8 +139,8 @@ public class ScSession {
                 .compose(children -> ScDetent.children(profile, profiles).procAsync(children))
                 /** Child and Current */
                 .compose(nil -> ScDetent.extend(profile, profiles).procAsync(childHod.get()))
-                .compose(nil -> Ux.toFuture(profiles))
-        ).compose(nil -> Ux.toFuture(profile));
+                .compose(nil -> Ux.future(profiles))
+        ).compose(nil -> Ux.future(profile));
     }
 
     private static Future<JsonObject> onReport(final JsonObject result) {

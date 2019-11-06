@@ -56,10 +56,10 @@ public class DataRegion extends AbstractRegion {
                         }
                     }
                 }
-                return Ux.toFuture(envelop);
+                return Ux.future(envelop);
             });
         } else {
-            return Ux.toFuture(envelop);
+            return Ux.future(envelop);
         }
     }
 
@@ -74,10 +74,10 @@ public class DataRegion extends AbstractRegion {
 
                 /* Rows / Projection */
                 DataMin.dwarfCollection(response, matrix);
-                return Ux.toFuture(response);
+                return Ux.future(response);
             });
         } else {
-            return Ux.toFuture(response);
+            return Ux.future(response);
         }
     }
 }

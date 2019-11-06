@@ -61,7 +61,7 @@ public class At {
     }
 
     public static Future<List<String>> serialsAsync(final XNumber number, final Integer count) {
-        return Ux.toFuture(AtSerial.serials(number, count));
+        return Ux.future(AtSerial.serials(number, count));
     }
 
     /*

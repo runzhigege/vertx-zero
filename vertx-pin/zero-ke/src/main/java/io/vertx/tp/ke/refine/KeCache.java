@@ -68,6 +68,6 @@ class KeCache {
             storedData.put(dataKey, value);
             session.put(sessionKey, storedData.toBuffer());
         }
-        return Ux.toFuture(value);
+        return Ux.future(value);
     }
 }

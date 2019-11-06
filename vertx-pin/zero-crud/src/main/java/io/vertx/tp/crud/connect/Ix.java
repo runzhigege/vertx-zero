@@ -82,12 +82,12 @@ interface OxSwitcher {
              * IxJoin null, could not identify connect
              */
             Ix.infoDao(LOGGER, "IxJoin is null");
-            return Ux.toFuture(Envelop.success(data));
+            return Ux.future(Envelop.success(data));
         } else {
             final String moduleName = connect.getJoinedBy();
             if (Ut.isNil(moduleName)) {
                 Ix.infoDao(LOGGER, "The `joinedBy` field is null");
-                return Ux.toFuture(Envelop.success(data));
+                return Ux.future(Envelop.success(data));
             } else {
                 final String identifier = data.getString(moduleName);
                 /*
@@ -97,7 +97,7 @@ interface OxSwitcher {
                 if (Objects.isNull(config)) {
                     Ix.infoDao(LOGGER, "System could not find configuration for `{0}`, data = {1}",
                             identifier, connect.getJoined());
-                    return Ux.toFuture(Envelop.success(data));
+                    return Ux.future(Envelop.success(data));
                 } else {
                     final UxJooq dao = IxPin.getDao(config);
                     return function.apply(dao, config);
@@ -123,6 +123,6 @@ interface OxSwitcher {
             createdJoined.put(KeField.JOINED_KEY, createdJoined.getString(joinedField));
         }
         createdJoined.mergeIn(original, true);
-        return Ux.toFuture(Envelop.success(createdJoined));
+        return Ux.future(Envelop.success(createdJoined));
     }
 }

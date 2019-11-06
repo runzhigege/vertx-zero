@@ -50,7 +50,7 @@ public class EmployeeService implements EmployeeStub {
                         final String key = data.getString(USER_ID);
                         return this.updateRef(key, inserted);
                     } else {
-                        return Ux.toFuture(data);
+                        return Ux.future(data);
                     }
                 });
     }
@@ -65,7 +65,7 @@ public class EmployeeService implements EmployeeStub {
     @Override
     public Future<JsonObject> updateAsync(final String key, final JsonObject data) {
         return this.fetchAsync(key)
-                .compose(Ux.applyNil(JsonObject::new, original -> {
+                .compose(Ut.applyNil(JsonObject::new, original -> {
                     final String userId = original.getString(USER_ID);
                     final String current = data.getString(USER_ID);
                     if (Ut.isNil(userId) && Ut.isNil(current)) {
@@ -88,7 +88,7 @@ public class EmployeeService implements EmployeeStub {
                          */
                         return this.updateEmployee(key, data)
                                 .compose(response -> this.updateRef(userId, new JsonObject())
-                                        .compose(nil -> Ux.toFuture(response))
+                                        .compose(nil -> Ux.future(response))
                                 );
                     } else {
                         /*
@@ -127,7 +127,7 @@ public class EmployeeService implements EmployeeStub {
     @Override
     public Future<Boolean> deleteAsync(final String key) {
         return this.fetchAsync(key)
-                .compose(Ux.applyNil(() -> Boolean.TRUE, item -> {
+                .compose(Ut.applyNil(() -> Boolean.TRUE, item -> {
                     final String userId = item.getString(USER_ID);
                     return this.updateRef(userId, new JsonObject())
                             .compose(nil -> Ux.Jooq.on(EEmployeeDao.class)
@@ -137,18 +137,18 @@ public class EmployeeService implements EmployeeStub {
 
     private Future<JsonObject> updateRef(final String key, final JsonObject data) {
         return this.switchRef(data, (user, filters) -> user.updateRef(key, filters)
-                .compose(Ux.applyJNil(response ->
-                        Ux.toFuture(data.put(KeField.USER_ID, response.getString(KeField.KEY))))));
+                .compose(Ut.applyJNil(response ->
+                        Ux.future(data.put(KeField.USER_ID, response.getString(KeField.KEY))))));
     }
 
     private Future<JsonObject> fetchRef(final JsonObject input) {
         return this.switchRef(input, (user, filters) -> user.fetchRef(filters)
-                .compose(Ux.applyJNil(response -> {
+                .compose(Ut.applyJNil(response -> {
                     final String userId = response.getString(KeField.KEY);
                     if (Ut.notNil(userId)) {
-                        return Ux.toFuture(input.put(KeField.USER_ID, userId));
+                        return Ux.future(input.put(KeField.USER_ID, userId));
                     } else {
-                        return Ux.toFuture(input);
+                        return Ux.future(input);
                     }
                 })));
     }
@@ -157,7 +157,7 @@ public class EmployeeService implements EmployeeStub {
                                          final BiFunction<ExUser, JsonObject, Future<JsonObject>> executor) {
         final ExUser user = Pocket.lookup(ExUser.class);
         if (Objects.isNull(user) || Ut.isNil(input)) {
-            return Ux.toFuture(input);
+            return Ux.future(input);
         } else {
             final JsonObject filters = new JsonObject();
             filters.put(KeField.IDENTIFIER, "employee");

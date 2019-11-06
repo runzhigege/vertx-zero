@@ -27,7 +27,7 @@ class ScCache {
     static <V> Future<V> code(final String key) {
         final String codePool = CONFIG.getCodePool();
         return Ux.Pool.on(codePool).remove(key)
-                .compose(value -> Ux.toFuture((V) value.getValue()));
+                .compose(value -> Ux.future((V) value.getValue()));
     }
 
     /*
@@ -39,7 +39,7 @@ class ScCache {
         final String codePool = CONFIG.getCodePool();
         final Integer codeExpired = CONFIG.getCodeExpired();
         return Ux.Pool.on(codePool).put(key, value, codeExpired)
-                .compose(item -> Ux.toFuture(item.getValue()));
+                .compose(item -> Ux.future(item.getValue()));
     }
 
     /*
@@ -58,6 +58,6 @@ class ScCache {
     static <V> Future<V> permission(final String key, final V value) {
         final String permissionPool = CONFIG.getPermissionPool();
         return Ux.Pool.on(permissionPool).put(key, value)
-                .compose(item -> Ux.toFuture(item.getValue()));
+                .compose(item -> Ux.future(item.getValue()));
     }
 }

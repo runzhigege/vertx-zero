@@ -113,7 +113,7 @@ public class AsyncAim extends BaseAim implements Aim<RoutingContext> {
             response.setUser(context.user());
             response.setSession(context.session());
             response.setContext(context.data());
-            return Ux.toFuture(response);
+            return Ux.future(response);
         });
     }
 }

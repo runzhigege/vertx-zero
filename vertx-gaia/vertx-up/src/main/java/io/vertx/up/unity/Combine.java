@@ -20,7 +20,7 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
 @SuppressWarnings("unchecked")
-class Fluctuate {
+class Combine {
 
     static Future<JsonArray> thenCombine(
             final Future<JsonArray> source,
@@ -38,7 +38,7 @@ class Fluctuate {
                 final List<JsonObject> secondary = finished.list();
                 // Zipper Operation, the base list is first
                 final List<JsonObject> completed = Ut.elementZip(first.getList(), secondary, operatorFun);
-                return Ux.toFuture(new JsonArray(completed));
+                return Ux.future(new JsonArray(completed));
             });
         });
     }

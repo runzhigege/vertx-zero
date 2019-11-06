@@ -1,12 +1,13 @@
 package io.vertx.up.fn;
 
 import io.vertx.core.Future;
-import io.vertx.up.exception.WebException;
-import io.vertx.up.log.Annal;
+import io.vertx.core.Promise;
 import io.vertx.up.exception.UpException;
+import io.vertx.up.exception.WebException;
 import io.vertx.up.exception.ZeroException;
 import io.vertx.up.exception.ZeroRunException;
 import io.vertx.up.fn.wait.Case;
+import io.vertx.up.log.Annal;
 
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Consumer;
@@ -63,11 +64,11 @@ public final class Fn {
         return Wait.branch(executor, caseLine).second.get();
     }
 
-    public static <T> Future<T> thenGeneric(final Consumer<Future<T>> consumer) {
+    public static <T> Future<T> thenGeneric(final Consumer<Promise<T>> consumer) {
         return Wait.then(consumer);
     }
 
-    public static <T> Future<T> thenGeneric(final Object result, final Future<T> future, final Throwable ex) {
+    public static <T> Future<T> thenGeneric(final Object result, final Promise<T> future, final Throwable ex) {
         return Wait.then(result, future, ex);
     }
 
