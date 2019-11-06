@@ -68,6 +68,16 @@ public final class Ut {
         return ArrayUtil.add(array, jsonObject, field);
     }
 
+    public static JsonObject elementAdd(final JsonObject target, final JsonObject source, final String field) {
+        Jackson.append(target, source, field);
+        return target;
+    }
+
+    public static JsonObject elementAdd(final JsonObject target, final JsonObject source, final String... fields) {
+        Arrays.stream(fields).forEach(field -> Jackson.append(target, source, field));
+        return target;
+    }
+
     public static JsonArray elementClimb(final JsonArray children, final JsonArray tree) {
         return ArrayUtil.climb(children, tree, null);
     }
@@ -106,6 +116,10 @@ public final class Ut {
 
     public static JsonObject elementSubset(final JsonObject input, final String... fields) {
         return Statute.subset(input, fields);
+    }
+
+    public static JsonArray elementSubset(final JsonArray input, final Function<JsonObject, Boolean> fnFilter) {
+        return Statute.subset(input, fnFilter);
     }
 
     public static <K, V, E> ConcurrentMap<K, List<V>> elementGroup(final Collection<E> object, final Function<E, K> keyFn, final Function<E, V> valueFn) {
@@ -230,7 +244,7 @@ public final class Ut {
     }
 
     public static java.util.stream.Stream<JsonObject> itJArray(final JsonArray array) {
-        return array.stream().filter(Objects::nonNull).map(item -> (JsonObject) item);
+        return It.itJArray(array);
     }
 
     public static <T> void etJObject(final JsonObject data, final ZeroBiConsumer<T, String> fnIt) throws ZeroException {
@@ -1007,5 +1021,12 @@ public final class Ut {
      */
     public static List<String> inRange(final String from, final String to) {
         return Period.inRange(from, to);
+    }
+
+    /*
+     * Mapping operation
+     */
+    public static Set<String> mapString(final JsonArray array, final String field) {
+        return Epsilon.mapString(array, field);
     }
 }

@@ -6,6 +6,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ambient.cv.AtMsg;
+import io.vertx.tp.ambient.cv.em.TodoStatus;
 import io.vertx.tp.ambient.init.AtPin;
 import io.vertx.tp.ambient.refine.At;
 import io.vertx.tp.ke.cv.KeField;
@@ -15,6 +16,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class TodoService implements TodoStub {
@@ -54,9 +56,56 @@ public class TodoService implements TodoStub {
             filters.put("type", type);
         }
         filters.put("status,i", statues);
+        return Ux.Jooq.on(XTodoDao.class).fetchAndAsync(filters).compose(Ux::fnJArray);
+    }
+
+    @Override
+    public Future<JsonArray> fetchTodos(final String sigma, final JsonArray types, final JsonArray statues) {
+        final JsonObject filters = new JsonObject();
+        filters.put("sigma", sigma);
+        if (Objects.nonNull(types)) {
+            filters.put("type,i", types);
+        }
+        filters.put("status,i", statues);
+        return Ux.Jooq.on(XTodoDao.class).fetchAndAsync(filters).compose(Ux::fnJArray);
+    }
+
+    @Override
+    public Future<JsonObject> updateStatus(final String key, final JsonObject params) {
         return Ux.Jooq.on(XTodoDao.class)
-                .fetchAndAsync(filters)
-                .compose(Ux::fnJArray);
+                .<XTodo>findByIdAsync(key)
+                .compose(Ux::fnJObject)
+                .compose(Ut.applyJNil((todoJson) -> {
+                    /*
+                     * Update status of XTodo
+                     */
+                    final XTodo todo = Ut.deserialize(todoJson, XTodo.class);
+                    {
+                        /*
+                         * XTodo Auditor setting
+                         */
+                        if (params.containsKey(KeField.USER_ID)) {
+                            todo.setUpdatedBy(params.getString(KeField.USER_ID));
+                            todo.setUpdatedAt(LocalDateTime.now());
+                        }
+                        /*
+                         * Status
+                         */
+                        if (params.containsKey(KeField.STATUS)) {
+                            final String status = params.getString(KeField.STATUS);
+                            todo.setStatus(status);
+                            if (TodoStatus.FINISHED.name().equals(status)) {
+                                /*
+                                 * It means that XTodo has been updated by user
+                                 */
+                                todo.setFinishedBy(todo.getUpdatedBy());
+                            }
+                        }
+                    }
+                    return Ux.Jooq.on(XTodoDao.class)
+                            .<XTodo>updateAsync(todo)
+                            .compose(Ux::fnJObject);
+                }));
     }
 
     @Override
