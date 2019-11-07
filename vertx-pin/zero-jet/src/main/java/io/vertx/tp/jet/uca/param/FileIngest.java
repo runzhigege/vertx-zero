@@ -22,7 +22,7 @@ import java.util.function.Supplier;
  * 1) New key for ID.PARAM_STREAM to store file here
  * 2) Here we stored Buffer of this file into stream body
  */
-public class FileIngest implements JtIngest {
+class FileIngest implements JtIngest {
     private transient final Supplier<JtIngest> supplier = Pool.INNER_INGEST.get(ParamMode.QUERY);
 
     @Override

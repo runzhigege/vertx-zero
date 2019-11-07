@@ -6,6 +6,7 @@ import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,6 +54,17 @@ final class Numeric {
 
     static boolean isPositive(final String original) {
         return isMatch("^\\+{0,1}[0-9]\\d*", original);
+    }
+
+    static boolean isPositive(final int number) {
+        return 0 < number;
+    }
+
+    static boolean isPositive(final int[] numbers) {
+        final long counter = Arrays.stream(numbers)
+                .filter(Numeric::isPositive)
+                .count();
+        return counter == numbers.length;
     }
 
     static boolean isNegative(final String original) {
