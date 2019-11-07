@@ -639,6 +639,14 @@ public final class Ut {
         return Numeric.isPositive(original);
     }
 
+    public static boolean isPositive(final int number) {
+        return Numeric.isPositive(number);
+    }
+
+    public static boolean isPositive(final int[] numbers) {
+        return Numeric.isPositive(numbers);
+    }
+
     public static boolean isNegative(final String original) {
         return Numeric.isNegative(original);
     }
