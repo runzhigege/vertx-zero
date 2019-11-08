@@ -3,8 +3,10 @@ package io.vertx.tp.jet.uca.business;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.annotations.Contract;
-import io.vertx.up.atom.Diode;
-import io.vertx.up.commune.config.Adminicle;
+import io.vertx.up.commune.Service;
+import io.vertx.up.commune.config.Dict;
+import io.vertx.up.commune.config.DualMapping;
+import io.vertx.up.commune.config.Identity;
 import io.vertx.up.log.Annal;
 
 /**
@@ -19,15 +21,18 @@ import io.vertx.up.log.Annal;
  * 「Not Recommend」
  * Here we do not recommend use this component directly.
  */
-public abstract class AbstractComponent implements JtComponent, JtService {
+public abstract class AbstractComponent implements JtComponent, Service {
     @Contract
     private transient JsonObject options;
 
     @Contract
-    private transient Diode mapping;
+    private transient DualMapping mapping;
 
     @Contract
-    private transient Adminicle adminicle;
+    private transient Dict dict;
+
+    @Contract
+    private transient Identity identity;
 
     /*
      * The logger of Annal here
@@ -43,12 +48,17 @@ public abstract class AbstractComponent implements JtComponent, JtService {
     }
 
     @Override
-    public Adminicle adminicle() {
-        return this.adminicle;
+    public Dict dict() {
+        return this.dict;
     }
 
     @Override
-    public Diode mapping() {
+    public DualMapping mapping() {
         return this.mapping;
+    }
+
+    @Override
+    public Identity identity() {
+        return this.identity;
     }
 }

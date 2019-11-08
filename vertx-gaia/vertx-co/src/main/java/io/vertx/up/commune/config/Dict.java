@@ -27,18 +27,19 @@ import java.util.Objects;
  *     }
  * ]
  */
-public class Adminicle implements Serializable {
+public class Dict implements Serializable {
 
     /*
      * Source definition here for directory configuration
      */
-    private final transient List<AdminicleSource> source = new ArrayList<>();
+    private final transient List<DictSource> source = new ArrayList<>();
+    private transient Class<?> component;
     private transient String sigma;
 
     /*
-     * Build object of Adminicle
+     * Build object of Dict
      */
-    public Adminicle(final String literal) {
+    public Dict(final String literal) {
         if (Ut.isJArray(literal)) {
             final JsonArray parameters = new JsonArray(literal);
             /* Initialize */
@@ -46,7 +47,7 @@ public class Adminicle implements Serializable {
         }
     }
 
-    public Adminicle(final JsonArray input) {
+    public Dict(final JsonArray input) {
         if (Objects.nonNull(input)) {
             /* Initialize */
             this.init(input);
@@ -54,18 +55,43 @@ public class Adminicle implements Serializable {
     }
 
     private void init(final JsonArray input) {
-        /* Normalize `AdminicleSource` List */
+        /* Normalize `DictSource` List */
         Ut.itJArray(input)
-                .map(AdminicleSource::new)
+                .map(DictSource::new)
                 .forEach(this.source::add);
     }
 
-    public Adminicle bind(final String sigma) {
+    public Dict bind(final String sigma) {
         this.sigma = sigma;
         return this;
     }
 
-    public List<AdminicleSource> getSource() {
+    public Dict bind(final Class<?> component) {
+        if (Objects.isNull(component)) {
+            /*
+             * When component not found,
+             * clear source data cache to empty list.
+             */
+            this.source.clear();
+        } else {
+            this.component = component;
+        }
+        return this;
+    }
+
+    public Class<?> getComponent() {
+        return this.component;
+    }
+
+    public boolean valid() {
+        /*
+         * When current source is not empty,
+         * The `dictComponent` is required here.
+         */
+        return !this.source.isEmpty();
+    }
+
+    public List<DictSource> getSource() {
         return this.source;
     }
 

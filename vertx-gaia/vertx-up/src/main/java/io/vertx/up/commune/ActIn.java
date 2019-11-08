@@ -9,6 +9,8 @@ import io.vertx.zero.exception.ActSpecificationException;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /*
  * Business Request
@@ -33,6 +35,11 @@ public class ActIn implements Serializable {
     private final transient Envelop envelop;
     private final boolean isBatch;
     private final transient ActFile file;
+    /*
+     * Dict of `Dict`, it means that the ActIn could wrapper dict
+     * data mapping here for configuration and future usage.
+     */
+    private final ConcurrentMap<String, JsonArray> dict = new ConcurrentHashMap<>();
     private transient ActJObject json;
     private transient ActJArray jarray;
     private transient Record definition;
