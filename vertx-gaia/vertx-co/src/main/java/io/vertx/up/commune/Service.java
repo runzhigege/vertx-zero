@@ -26,6 +26,18 @@ public interface Service {
     JsonObject options();
 
     /*
+     * `identifier`
+     * `identifierComponent`
+     * It's for Job / Component here
+     * 1) Get identifier directly
+     * 2) Check whether there exist `identifierComponent` to determine the final
+     * used `identifier` instead of static
+     */
+    Identity identity();
+}
+
+interface Business {
+    /*
      * `dictConfig`
      * `dictComponent` of I_SERVICE
      * Here `dictComponent` is required if configured.
@@ -40,14 +52,4 @@ public interface Service {
      * It's also for Job / Component here
      */
     DualMapping mapping();
-
-    /*
-     * `identifier`
-     * `identifierComponent`
-     * It's for Job / Component here
-     * 1) Get identifier directly
-     * 2) Check whether there exist `identifierComponent` to determine the final
-     * used `identifier` instead of static
-     */
-    Identity identity();
 }

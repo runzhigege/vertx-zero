@@ -24,7 +24,7 @@ class JtBusiness {
             /*
              * When valid, inject component here
              */
-            if (dict.valid()) {
+            if (!dict.getSource().isEmpty()) {
                 final Class<?> component =
                         Ut.clazz(service.getDictComponent(), null);
                 dict.bind(component);

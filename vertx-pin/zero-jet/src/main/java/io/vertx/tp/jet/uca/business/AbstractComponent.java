@@ -4,8 +4,6 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.annotations.Contract;
 import io.vertx.up.commune.Service;
-import io.vertx.up.commune.config.Dict;
-import io.vertx.up.commune.config.DualMapping;
 import io.vertx.up.commune.config.Identity;
 import io.vertx.up.log.Annal;
 
@@ -26,12 +24,6 @@ public abstract class AbstractComponent implements JtComponent, Service {
     private transient JsonObject options;
 
     @Contract
-    private transient DualMapping mapping;
-
-    @Contract
-    private transient Dict dict;
-
-    @Contract
     private transient Identity identity;
 
     /*
@@ -45,16 +37,6 @@ public abstract class AbstractComponent implements JtComponent, Service {
     @Override
     public JsonObject options() {
         return this.options;
-    }
-
-    @Override
-    public Dict dict() {
-        return this.dict;
-    }
-
-    @Override
-    public DualMapping mapping() {
-        return this.mapping;
     }
 
     @Override

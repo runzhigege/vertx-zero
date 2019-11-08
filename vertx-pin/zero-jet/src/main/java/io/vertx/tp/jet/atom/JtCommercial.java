@@ -127,6 +127,7 @@ public abstract class JtCommercial implements Commercial {
     /*
      * Non - Interface method here.
      */
+    @Override
     public String identifier() {
         return this.service.getIdentifier();
     }
