@@ -9,10 +9,10 @@ import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.optic.jet.JtChannel;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.annotations.Contract;
-import io.vertx.up.atom.Diode;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.*;
-import io.vertx.up.commune.config.Adminicle;
+import io.vertx.up.commune.config.Dict;
+import io.vertx.up.commune.config.DualMapping;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
@@ -89,7 +89,6 @@ public abstract class AbstractChannel implements JtChannel {
                 return this.initAsync(component, request)
                         /*
                          * 1) JsonObject: options ( without `mapping` )
-                         * 2)
                          */
                         .compose(child -> this.contractReference(component))
                         /*
@@ -122,10 +121,10 @@ public abstract class AbstractChannel implements JtChannel {
                 Ut.contract(component, JsonObject.class, injectOpt);
             }
             /*
-             * Diode: mapping, Adminicle: reference
+             * Diode: mapping, Dict: reference
              */
-            Ut.contract(component, Diode.class, commercial.mapping());
-            Ut.contract(component, Adminicle.class, commercial.adminicle());
+            Ut.contract(component, DualMapping.class, commercial.mapping());
+            Ut.contract(component, Dict.class, commercial.dict());
             return Future.succeededFuture(Boolean.TRUE);
         } else {
             /*

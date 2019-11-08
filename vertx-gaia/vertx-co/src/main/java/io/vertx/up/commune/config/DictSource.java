@@ -19,7 +19,7 @@ import java.util.Set;
  * 3) Assist ->
  * A little complex
  */
-public class AdminicleSource implements Serializable {
+public class DictSource implements Serializable {
     /*
      * SourceType of current source definition
      */
@@ -35,7 +35,7 @@ public class AdminicleSource implements Serializable {
     private transient String key;
     private transient Class<?> component;
 
-    AdminicleSource(final JsonObject definition) {
+    DictSource(final JsonObject definition) {
         /*
          * Source normalize for `source type`
          */

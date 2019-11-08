@@ -11,6 +11,15 @@ import java.util.Objects;
 
 /*
  * Tool for different injection
+ * 1）Database injection method
+ * 2) Dict processing for `Dict` processing here.
+ * 3) Diode processing for
+ * - BEFORE -->
+ * - AFTER  <--
+ * - AROUND <->
+ * 4) Enable plug-in for processing
+ * - Dict plug-in for key = JsonArray processing
+ * -- Dict ( Assist ) plugin here
  */
 class Anagogic {
     /*
@@ -34,4 +43,9 @@ class Anagogic {
                 .compose(database -> pool.put(commercial.app(), database))
                 .compose(kv -> Ux.future(kv.getValue()));
     }
+    /*
+     * Dict processing
+     * 1) Check whether `adminicle` configured here
+     * 2) If configured, the system should call `adminicle` plugin for
+     */
 }

@@ -4,13 +4,9 @@ import cn.vertxup.jet.domain.tables.pojos.IService;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.cv.JtKey;
 import io.vertx.tp.jet.refine.Jt;
-import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.optic.environment.Ambient;
-import io.vertx.up.atom.Diode;
 import io.vertx.up.commune.Commercial;
-import io.vertx.up.commune.config.Adminicle;
-import io.vertx.up.commune.config.Database;
-import io.vertx.up.commune.config.Integration;
+import io.vertx.up.commune.config.*;
 import io.vertx.up.eon.ID;
 import io.vertx.up.eon.em.ChannelType;
 import io.vertx.up.util.Ut;
@@ -106,18 +102,22 @@ public abstract class JtCommercial implements Commercial {
         return Jt.toIntegration(this.service::getConfigIntegration);
     }
 
+
     @Override
-    public Adminicle adminicle() {
-        final Adminicle adminicle = Jt.toAdmincle(this.service::getConfigAdminicle);
-        if (Objects.nonNull(adminicle)) {
-            return adminicle.bind(this.service.getSigma());
-        } else return null;
+    public Dict dict() {
+        return Jt.toDict(this.service);
     }
 
     @Override
-    public Diode mapping() {
-        return new Diode(this.options().getJsonObject(KeField.MAPPING));
+    public DualMapping mapping() {
+        return Jt.toMapping(this.service);
     }
+
+    @Override
+    public Identity identity() {
+        return Jt.toIdentity(this.service);
+    }
+
 
     @Override
     public String app() {

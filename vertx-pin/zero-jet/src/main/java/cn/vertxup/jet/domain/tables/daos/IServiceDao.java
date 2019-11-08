@@ -133,10 +133,10 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.domain.t
     }
 
     /**
-     * Fetch records that have <code>CONFIG_CHANNEL IN (values)</code>
+     * Fetch records that have <code>CHANNEL_CONFIG IN (values)</code>
      */
-    public List<cn.vertxup.jet.domain.tables.pojos.IService> fetchByConfigChannel(String... values) {
-        return fetch(IService.I_SERVICE.CONFIG_CHANNEL, values);
+    public List<cn.vertxup.jet.domain.tables.pojos.IService> fetchByChannelConfig(String... values) {
+        return fetch(IService.I_SERVICE.CHANNEL_CONFIG, values);
     }
 
     /**
@@ -154,10 +154,38 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.domain.t
     }
 
     /**
-     * Fetch records that have <code>CONFIG_ADMINICLE IN (values)</code>
+     * Fetch records that have <code>DICT_CONFIG IN (values)</code>
      */
-    public List<cn.vertxup.jet.domain.tables.pojos.IService> fetchByConfigAdminicle(String... values) {
-        return fetch(IService.I_SERVICE.CONFIG_ADMINICLE, values);
+    public List<cn.vertxup.jet.domain.tables.pojos.IService> fetchByDictConfig(String... values) {
+        return fetch(IService.I_SERVICE.DICT_CONFIG, values);
+    }
+
+    /**
+     * Fetch records that have <code>DICT_COMPONENT IN (values)</code>
+     */
+    public List<cn.vertxup.jet.domain.tables.pojos.IService> fetchByDictComponent(String... values) {
+        return fetch(IService.I_SERVICE.DICT_COMPONENT, values);
+    }
+
+    /**
+     * Fetch records that have <code>MAPPING_CONFIG IN (values)</code>
+     */
+    public List<cn.vertxup.jet.domain.tables.pojos.IService> fetchByMappingConfig(String... values) {
+        return fetch(IService.I_SERVICE.MAPPING_CONFIG, values);
+    }
+
+    /**
+     * Fetch records that have <code>MAPPING_MODE IN (values)</code>
+     */
+    public List<cn.vertxup.jet.domain.tables.pojos.IService> fetchByMappingMode(String... values) {
+        return fetch(IService.I_SERVICE.MAPPING_MODE, values);
+    }
+
+    /**
+     * Fetch records that have <code>MAPPING_COMPONENT IN (values)</code>
+     */
+    public List<cn.vertxup.jet.domain.tables.pojos.IService> fetchByMappingComponent(String... values) {
+        return fetch(IService.I_SERVICE.MAPPING_COMPONENT, values);
     }
 
     /**
@@ -186,6 +214,13 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.domain.t
      */
     public List<cn.vertxup.jet.domain.tables.pojos.IService> fetchByIdentifier(String... values) {
         return fetch(IService.I_SERVICE.IDENTIFIER, values);
+    }
+
+    /**
+     * Fetch records that have <code>IDENTIFIER_COMPONENT IN (values)</code>
+     */
+    public List<cn.vertxup.jet.domain.tables.pojos.IService> fetchByIdentifierComponent(String... values) {
+        return fetch(IService.I_SERVICE.IDENTIFIER_COMPONENT, values);
     }
 
     /**
@@ -322,10 +357,10 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.domain.t
     }
 
     /**
-     * Fetch records that have <code>CONFIG_CHANNEL IN (values)</code> asynchronously
+     * Fetch records that have <code>CHANNEL_CONFIG IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IService>> fetchByConfigChannelAsync(List<String> values) {
-        return fetchAsync(IService.I_SERVICE.CONFIG_CHANNEL,values);
+    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IService>> fetchByChannelConfigAsync(List<String> values) {
+        return fetchAsync(IService.I_SERVICE.CHANNEL_CONFIG,values);
     }
 
     /**
@@ -343,10 +378,38 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.domain.t
     }
 
     /**
-     * Fetch records that have <code>CONFIG_ADMINICLE IN (values)</code> asynchronously
+     * Fetch records that have <code>DICT_CONFIG IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IService>> fetchByConfigAdminicleAsync(List<String> values) {
-        return fetchAsync(IService.I_SERVICE.CONFIG_ADMINICLE,values);
+    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IService>> fetchByDictConfigAsync(List<String> values) {
+        return fetchAsync(IService.I_SERVICE.DICT_CONFIG,values);
+    }
+
+    /**
+     * Fetch records that have <code>DICT_COMPONENT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IService>> fetchByDictComponentAsync(List<String> values) {
+        return fetchAsync(IService.I_SERVICE.DICT_COMPONENT,values);
+    }
+
+    /**
+     * Fetch records that have <code>MAPPING_CONFIG IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IService>> fetchByMappingConfigAsync(List<String> values) {
+        return fetchAsync(IService.I_SERVICE.MAPPING_CONFIG,values);
+    }
+
+    /**
+     * Fetch records that have <code>MAPPING_MODE IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IService>> fetchByMappingModeAsync(List<String> values) {
+        return fetchAsync(IService.I_SERVICE.MAPPING_MODE,values);
+    }
+
+    /**
+     * Fetch records that have <code>MAPPING_COMPONENT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IService>> fetchByMappingComponentAsync(List<String> values) {
+        return fetchAsync(IService.I_SERVICE.MAPPING_COMPONENT,values);
     }
 
     /**
@@ -375,6 +438,13 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.domain.t
      */
     public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IService>> fetchByIdentifierAsync(List<String> values) {
         return fetchAsync(IService.I_SERVICE.IDENTIFIER,values);
+    }
+
+    /**
+     * Fetch records that have <code>IDENTIFIER_COMPONENT IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IService>> fetchByIdentifierComponentAsync(List<String> values) {
+        return fetchAsync(IService.I_SERVICE.IDENTIFIER_COMPONENT,values);
     }
 
     /**

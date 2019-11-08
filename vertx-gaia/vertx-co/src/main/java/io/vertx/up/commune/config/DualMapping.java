@@ -1,7 +1,8 @@
-package io.vertx.up.atom;
+package io.vertx.up.commune.config;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.eon.em.MappingMode;
 import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
@@ -18,21 +19,23 @@ import java.util.stream.Collectors;
  * This data structure will store two mappings between configuration file here.
  * It could be used in some places to process ( ----> / <---- )
  */
-public class Diode implements Serializable {
+public class DualMapping implements Serializable {
 
     private final transient ConcurrentMap<String, String> vector =
             new ConcurrentHashMap<>();
     private final transient ConcurrentMap<String, String> revert =
             new ConcurrentHashMap<>();
+    private transient MappingMode mode = MappingMode.NONE;
+    private transient Class<?> component;
 
-    public Diode() {
+    public DualMapping() {
     }
 
-    public Diode(final JsonObject input) {
+    public DualMapping(final JsonObject input) {
         this.init(input);
     }
 
-    public Diode init(final JsonObject input) {
+    public DualMapping init(final JsonObject input) {
         if (Ut.notNil(input)) {
             input.fieldNames().stream()
                     /* Only stored string value here */
@@ -46,6 +49,28 @@ public class Diode implements Serializable {
                     });
         }
         return this;
+    }
+
+    public MappingMode getMode() {
+        return this.mode;
+    }
+
+    public Class<?> getComponent() {
+        return this.component;
+    }
+
+    public DualMapping bind(final MappingMode mode) {
+        this.mode = mode;
+        return this;
+    }
+
+    public DualMapping bind(final Class<?> component) {
+        this.component = component;
+        return this;
+    }
+
+    public boolean valid() {
+        return this.mode == MappingMode.NONE;
     }
 
     /*
