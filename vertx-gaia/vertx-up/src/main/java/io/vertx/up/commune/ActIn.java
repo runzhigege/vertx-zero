@@ -2,6 +2,7 @@ package io.vertx.up.commune;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.commune.config.DualMapping;
 import io.vertx.up.eon.ID;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.util.Ut;
@@ -9,6 +10,7 @@ import io.vertx.zero.exception.ActSpecificationException;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -43,6 +45,7 @@ public class ActIn implements Serializable {
     private transient ActJObject json;
     private transient ActJArray jarray;
     private transient Record definition;
+    private transient DualMapping mapping;
 
     public ActIn(final Envelop envelop) {
         /* Envelop reference here */
@@ -71,6 +74,22 @@ public class ActIn implements Serializable {
          */
         final JsonArray stream = data.getJsonArray(ID.PARAM_STREAM);
         this.file = new ActFile(stream);
+    }
+
+    public ActIn bind(final DualMapping mapping) {
+        this.mapping = mapping;
+        return this;
+    }
+
+    public ActIn bind(final ConcurrentMap<String, JsonArray> dict) {
+        if (Objects.nonNull(dict) && !dict.isEmpty()) {
+            this.dict.putAll(dict);
+        }
+        return this;
+    }
+
+    public ConcurrentMap<String, JsonArray> getDict() {
+        return this.dict;
     }
 
     public Envelop getEnvelop() {
@@ -102,7 +121,7 @@ public class ActIn implements Serializable {
 
     public Record getRecord() {
         Fn.outUp(this.isBatch, ActSpecificationException.class, this.getClass(), this.isBatch);
-        return this.json.getRecord(this.definition);
+        return this.json.getRecord(this.definition, this.mapping);
     }
 
     public File[] getFiles() {
@@ -111,7 +130,7 @@ public class ActIn implements Serializable {
 
     public Record[] getRecords() {
         Fn.outUp(!this.isBatch, ActSpecificationException.class, this.getClass(), this.isBatch);
-        return this.jarray.getRecords(this.definition);
+        return this.jarray.getRecords(this.definition, this.mapping);
     }
 
     public Record getDefinition() {

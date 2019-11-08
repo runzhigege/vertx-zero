@@ -34,7 +34,6 @@ public class Dict implements Serializable {
      */
     private final transient List<DictSource> source = new ArrayList<>();
     private transient Class<?> component;
-    private transient String sigma;
 
     /*
      * Build object of Dict
@@ -61,11 +60,6 @@ public class Dict implements Serializable {
                 .forEach(this.source::add);
     }
 
-    public Dict bind(final String sigma) {
-        this.sigma = sigma;
-        return this;
-    }
-
     public Dict bind(final Class<?> component) {
         if (Objects.isNull(component)) {
             /*
@@ -88,14 +82,10 @@ public class Dict implements Serializable {
          * When current source is not empty,
          * The `dictComponent` is required here.
          */
-        return !this.source.isEmpty();
+        return !this.source.isEmpty() && Objects.nonNull(this.component);
     }
 
     public List<DictSource> getSource() {
         return this.source;
-    }
-
-    public String getSigma() {
-        return this.sigma;
     }
 }

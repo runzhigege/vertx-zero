@@ -2,6 +2,7 @@ package io.vertx.up.commune;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.commune.config.DualMapping;
 import io.vertx.up.eon.Constants;
 import io.vertx.up.eon.ID;
 import io.vertx.up.util.Ut;
@@ -13,6 +14,8 @@ class ActJArray implements Serializable {
 
     private final transient JsonArray data = new JsonArray();
     private final transient JsonObject header;
+    /* DualMapping */
+    private transient DualMapping mapping;
 
     ActJArray(final Envelop envelop) {
         /* Header Init */
@@ -85,7 +88,7 @@ class ActJArray implements Serializable {
         }
     }
 
-    Record[] getRecords(final Record definition) {
+    Record[] getRecords(final Record definition, final DualMapping mapping) {
         /* Record Init */
         final int size = this.data.size();
         final Record[] records = new Record[size];
@@ -96,26 +99,8 @@ class ActJArray implements Serializable {
              * 2）JsonArray：有数据
              */
             final Object input = this.data.getValue(idx);
-            records[idx] = this.getRecord(input, definition);
+            records[idx] = ActMapper.getRecord(input, definition, mapping);
         }
         return records;
-    }
-
-    private Record getRecord(final Object input, final Record definition) {
-        final Record record = definition.createNew();
-        if (input instanceof JsonObject) {
-            final JsonObject each = (JsonObject) input;
-            if (!Ut.isNil(each)) {
-                /*
-                 * Set current data to `Record`
-                 */
-                each.fieldNames()
-                        .forEach(field -> record.set(field, each.getValue(field)));
-            }
-        } else if (input instanceof String) {
-            final String key = (String) input;
-            record.key(key);
-        }
-        return record;
     }
 }

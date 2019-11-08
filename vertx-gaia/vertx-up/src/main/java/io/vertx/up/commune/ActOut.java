@@ -5,6 +5,7 @@ import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpStatusCode;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.commune.config.DualMapping;
 import io.vertx.up.unity.Ux;
 
 import java.io.Serializable;
@@ -91,7 +92,11 @@ public class ActOut implements Serializable {
         return Ux.future(response);
     }
 
-    public Future<Envelop> async() {
-        return Ux.future(this.envelop);
+    public Envelop envelop() {
+        return this.envelop;
+    }
+
+    public Envelop envelop(final DualMapping mapping) {
+        return ActMapper.getOut(this.envelop, mapping);
     }
 }

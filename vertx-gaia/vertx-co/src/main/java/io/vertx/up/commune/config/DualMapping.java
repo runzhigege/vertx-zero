@@ -70,7 +70,7 @@ public class DualMapping implements Serializable {
     }
 
     public boolean valid() {
-        return this.mode == MappingMode.NONE;
+        return MappingMode.NONE != this.mode;
     }
 
     /*
