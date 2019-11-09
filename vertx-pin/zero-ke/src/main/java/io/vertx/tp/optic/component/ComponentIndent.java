@@ -20,5 +20,5 @@ public interface ComponentIndent {
     /*
      * Get identifier directly by params
      */
-    Future<String> resolve(JsonObject options);
+    Future<String> resolve(JsonObject data);
 }
