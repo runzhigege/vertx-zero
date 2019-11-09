@@ -1,7 +1,7 @@
 package io.vertx.tp.optic.component;
 
 import io.vertx.core.Future;
-import io.vertx.core.MultiMap;
+import io.vertx.core.json.JsonObject;
 
 /*
  * Identifier selector for some specific situation
@@ -20,5 +20,5 @@ public interface ComponentIndent {
     /*
      * Get identifier directly by params
      */
-    Future<String> resolve(MultiMap paramMap);
+    Future<String> resolve(JsonObject options);
 }

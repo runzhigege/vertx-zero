@@ -149,6 +149,6 @@ class Anagogic {
         response.setUser(request.user());
         response.setSession(request.getSession());
         response.setHeaders(request.headers());
-        return null;
+        return Ux.future(response);
     }
 }
