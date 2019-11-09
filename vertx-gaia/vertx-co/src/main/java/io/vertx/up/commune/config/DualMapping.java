@@ -105,8 +105,16 @@ public class DualMapping implements Serializable {
         return this.vector.get(from);
     }
 
+    public boolean fromKey(final String key) {
+        return this.vector.containsKey(key);
+    }
+
     public String from(final String to) {
         return this.revert.get(to);
+    }
+
+    public boolean toKey(final String key) {
+        return this.revert.containsKey(key);
     }
 
     /*

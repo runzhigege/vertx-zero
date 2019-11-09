@@ -20,6 +20,7 @@ import io.vertx.up.commune.config.Identity;
  * ---- | - AbstractOutcome
  */
 public interface Service {
+
     /*
      * `serviceConfig` ( SERVICE_CONFIG ) of I_SERVICE
      */

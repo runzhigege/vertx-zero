@@ -4,6 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.annotations.Contract;
 import io.vertx.up.commune.Service;
+import io.vertx.up.commune.config.DualMapping;
 import io.vertx.up.commune.config.Identity;
 import io.vertx.up.log.Annal;
 
@@ -26,6 +27,9 @@ public abstract class AbstractComponent implements JtComponent, Service {
     @Contract
     private transient Identity identity;
 
+    @Contract
+    private transient DualMapping mapping;
+
     /*
      * The logger of Annal here
      */
@@ -42,5 +46,10 @@ public abstract class AbstractComponent implements JtComponent, Service {
     @Override
     public Identity identity() {
         return this.identity;
+    }
+
+    /* Limitation Usage */
+    protected DualMapping mapping() {
+        return this.mapping;
     }
 }

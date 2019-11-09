@@ -119,11 +119,14 @@ class Anagogic {
             /*
              * Identity reference for id selector here
              */
-            final Identity identity = commercial.identity();
-            Ut.contract(component, Identity.class, identity);
+            Ut.contract(component, Identity.class, commercial.identity());
+            Ut.contract(component, DualMapping.class, commercial.mapping());
             /*
              * Because `DualMapping` has been configured here
              * And `Dict` has been configured in another way here
+             * Old code:
+             * Ut.contract(component, DualMapping.class, commercial.mapping());
+             * Ut.contract(component, Dict.class, commercial.dict());
              */
             // Ut.contract(component, DualMapping.class, commercial.mapping());
             // Ut.contract(component, Dict.class, commercial.dict());
