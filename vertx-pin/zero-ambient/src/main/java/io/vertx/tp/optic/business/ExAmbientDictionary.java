@@ -105,6 +105,13 @@ public class ExAmbientDictionary implements Dictionary {
         if (Objects.isNull(plugin) || Ut.isNil(source.getKey())) {
             return Ux.future(uniqueMap);
         } else {
+            /*
+             * Bind configuration from source here
+             */
+            plugin.configuration(source.getPluginConfig());
+            /*
+             * Then execute and get the data.
+             */
             return plugin.fetchAsync(source, paramMap).compose(result -> {
                 uniqueMap.put(source.getKey(), result);
                 return Ux.future(uniqueMap);
