@@ -107,7 +107,11 @@ public abstract class AbstractChannel implements JtChannel {
                         /*
                          * Response here for future custom
                          */
-                        .compose(actOut -> Anagogic.complete(actOut, this.commercial.mapping(), envelop));
+                        .compose(actOut -> Anagogic.complete(actOut, this.commercial.mapping(), envelop))
+                        /*
+                         * Otherwise;
+                         */
+                        .otherwise(Ux.otherwise());
             } else {
                 /*
                  * singleton singleton error
