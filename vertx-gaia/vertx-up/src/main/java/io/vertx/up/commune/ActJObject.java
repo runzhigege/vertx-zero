@@ -2,6 +2,7 @@ package io.vertx.up.commune;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.query.Inquiry;
+import io.vertx.up.commune.config.DualMapping;
 import io.vertx.up.eon.Constants;
 import io.vertx.up.eon.ID;
 import io.vertx.up.util.Ut;
@@ -119,15 +120,7 @@ class ActJObject implements Serializable {
         return this.query;
     }
 
-    Record getRecord(final Record definition) {
-        final Record record = definition.createNew();
-        if (!Ut.isNil(this.data)) {
-            /*
-             * Set current data to `Record`
-             */
-            this.data.fieldNames()
-                    .forEach(field -> record.set(field, this.data.getValue(field)));
-        }
-        return record;
+    Record getRecord(final Record definition, final DualMapping mapping) {
+        return ActMapper.getRecord(this.data, definition, mapping);
     }
 }

@@ -1,8 +1,5 @@
 package io.vertx.up.commune;
 
-import io.vertx.core.json.JsonObject;
-import io.vertx.up.atom.Diode;
-import io.vertx.up.commune.config.Adminicle;
 import io.vertx.up.commune.config.Database;
 import io.vertx.up.commune.config.Integration;
 import io.vertx.up.eon.em.ChannelType;
@@ -16,7 +13,7 @@ import io.vertx.up.eon.em.ChannelType;
  * 1) Request-Response, from Api to Service
  * 2) Publish-Subscribe, from Task to Service
  */
-public interface Commercial extends Application, Json {
+public interface Commercial extends Application, Service, Business, Json {
     /*
      * Get channel type of definition ( 1 of 4 )
      * The channel class is fixed in current version, mapped to channel type.
@@ -49,26 +46,9 @@ public interface Commercial extends Application, Json {
     Integration integration();
 
     /*
-     * Get adminicle reference
+     * Static identifier here for usage.
      */
-    Adminicle adminicle();
-
-    /*
-     * Get business component config
-     */
-    JsonObject options();
-
-    /*
-     * Get in / out channel building based on
-     * `options`
-     * {
-     *     "mapping": {}
-     * }
-     * This option could build Diode object for prepare
-     * 1) From -> To
-     * 2) To -> From
-     */
-    Diode mapping();
+    String identifier();
 }
 
 interface Application {

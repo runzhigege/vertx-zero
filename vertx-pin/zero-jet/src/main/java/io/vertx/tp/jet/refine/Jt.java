@@ -8,9 +8,7 @@ import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.atom.JtConfig;
 import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.atom.JtWorker;
-import io.vertx.up.commune.config.Adminicle;
-import io.vertx.up.commune.config.Database;
-import io.vertx.up.commune.config.Integration;
+import io.vertx.up.commune.config.*;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.em.ChannelType;
 import io.vertx.up.log.Annal;
@@ -73,8 +71,25 @@ public class Jt {
         return JtDataObject.toIntegration(supplier);
     }
 
-    public static Adminicle toAdmincle(final Supplier<String> supplier) {
-        return JtDataObject.toAdminicle(supplier);
+    /*
+     * IService -> Dict
+     */
+    public static Dict toDict(final IService service) {
+        return JtBusiness.toDict(service);
+    }
+
+    /*
+     * IService -> DualMapping
+     */
+    public static DualMapping toMapping(final IService service) {
+        return JtBusiness.toMapping(service);
+    }
+
+    /*
+     * IService -> Identify
+     */
+    public static Identity toIdentity(final IService service) {
+        return JtBusiness.toIdentify(service);
     }
 
     public static Set<String> toSet(final Supplier<String> supplier) {

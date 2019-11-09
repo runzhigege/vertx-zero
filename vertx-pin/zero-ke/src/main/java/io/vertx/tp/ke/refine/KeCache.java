@@ -36,7 +36,10 @@ class KeCache {
     }
 
     static String keyUser(final Envelop envelop) {
-        final User user = envelop.user();
+        return keyUser(envelop.user());
+    }
+
+    static String keyUser(final User user) {
         /* Principle */
         final JsonObject principle = user.principal();
         /* User extract */

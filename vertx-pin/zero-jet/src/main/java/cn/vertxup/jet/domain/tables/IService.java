@@ -35,7 +35,7 @@ public class IService extends TableImpl<IServiceRecord> {
      * The reference instance of <code>DB_ETERNAL.I_SERVICE</code>
      */
     public static final IService I_SERVICE = new IService();
-    private static final long serialVersionUID = -1969000631;
+    private static final long serialVersionUID = 710918533;
     /**
      * The column <code>DB_ETERNAL.I_SERVICE.KEY</code>. 「key」- 服务ID
      */
@@ -77,9 +77,9 @@ public class IService extends TableImpl<IServiceRecord> {
      */
     public final TableField<IServiceRecord, String> CHANNEL_COMPONENT = createField("CHANNEL_COMPONENT", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「channelComponent」- 自定义通道专用组件");
     /**
-     * The column <code>DB_ETERNAL.I_SERVICE.CONFIG_CHANNEL</code>. 「configChannel」- 通道（自定义）配置信息，Channel专用
+     * The column <code>DB_ETERNAL.I_SERVICE.CHANNEL_CONFIG</code>. 「channelConfig」- 通道（自定义）配置信息，Channel专用
      */
-    public final TableField<IServiceRecord, String> CONFIG_CHANNEL = createField("CONFIG_CHANNEL", org.jooq.impl.SQLDataType.CLOB, this, "「configChannel」- 通道（自定义）配置信息，Channel专用");
+    public final TableField<IServiceRecord, String> CHANNEL_CONFIG = createField("CHANNEL_CONFIG", org.jooq.impl.SQLDataType.CLOB, this, "「channelConfig」- 通道（自定义）配置信息，Channel专用");
     /**
      * The column <code>DB_ETERNAL.I_SERVICE.CONFIG_INTEGRATION</code>. 「configIntegration」- 集成配置信息，第三方专用
      */
@@ -89,9 +89,25 @@ public class IService extends TableImpl<IServiceRecord> {
      */
     public final TableField<IServiceRecord, String> CONFIG_DATABASE = createField("CONFIG_DATABASE", org.jooq.impl.SQLDataType.CLOB, this, "「configDatabase」- 数据库配置，当前通道访问的Database");
     /**
-     * The column <code>DB_ETERNAL.I_SERVICE.CONFIG_ADMINICLE</code>. 「configAdminicle」- 字典的数据配置
+     * The column <code>DB_ETERNAL.I_SERVICE.DICT_CONFIG</code>. 「dictConfig」- 字典的配置信息
      */
-    public final TableField<IServiceRecord, String> CONFIG_ADMINICLE = createField("CONFIG_ADMINICLE", org.jooq.impl.SQLDataType.CLOB, this, "「configAdminicle」- 字典的数据配置");
+    public final TableField<IServiceRecord, String> DICT_CONFIG = createField("DICT_CONFIG", org.jooq.impl.SQLDataType.CLOB, this, "「dictConfig」- 字典的配置信息");
+    /**
+     * The column <code>DB_ETERNAL.I_SERVICE.DICT_COMPONENT</code>. 「dictComponent」- 字典配置中的插件
+     */
+    public final TableField<IServiceRecord, String> DICT_COMPONENT = createField("DICT_COMPONENT", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「dictComponent」- 字典配置中的插件");
+    /**
+     * The column <code>DB_ETERNAL.I_SERVICE.MAPPING_CONFIG</code>. 「mappingConfig」- 映射专用配置
+     */
+    public final TableField<IServiceRecord, String> MAPPING_CONFIG = createField("MAPPING_CONFIG", org.jooq.impl.SQLDataType.CLOB, this, "「mappingConfig」- 映射专用配置");
+    /**
+     * The column <code>DB_ETERNAL.I_SERVICE.MAPPING_MODE</code>. 「mappingMode」- 映射的模式
+     */
+    public final TableField<IServiceRecord, String> MAPPING_MODE = createField("MAPPING_MODE", org.jooq.impl.SQLDataType.VARCHAR(20), this, "「mappingMode」- 映射的模式");
+    /**
+     * The column <code>DB_ETERNAL.I_SERVICE.MAPPING_COMPONENT</code>. 「mappingComponent」- 映射组件类型
+     */
+    public final TableField<IServiceRecord, String> MAPPING_COMPONENT = createField("MAPPING_COMPONENT", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「mappingComponent」- 映射组件类型");
     /**
      * The column <code>DB_ETERNAL.I_SERVICE.SERVICE_RECORD</code>. 「serviceRecord」- 服务记录定义
      */
@@ -108,6 +124,10 @@ public class IService extends TableImpl<IServiceRecord> {
      * The column <code>DB_ETERNAL.I_SERVICE.IDENTIFIER</code>. 「identifier」- 当前类型描述的Model的标识
      */
     public final TableField<IServiceRecord, String> IDENTIFIER = createField("IDENTIFIER", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「identifier」- 当前类型描述的Model的标识");
+    /**
+     * The column <code>DB_ETERNAL.I_SERVICE.IDENTIFIER_COMPONENT</code>. 「identifierComponent」- 当前业务接口使用的标识选择器
+     */
+    public final TableField<IServiceRecord, String> IDENTIFIER_COMPONENT = createField("IDENTIFIER_COMPONENT", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「identifierComponent」- 当前业务接口使用的标识选择器");
     /**
      * The column <code>DB_ETERNAL.I_SERVICE.SIGMA</code>. 「sigma」- 统一标识
      */

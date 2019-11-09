@@ -1,18 +1,16 @@
 package io.vertx.tp.jet.uca.tunnel;
 
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error._501ChannelErrorException;
 import io.vertx.tp.jet.monitor.JtMonitor;
-import io.vertx.tp.jet.refine.Jt;
-import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.optic.jet.JtChannel;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.annotations.Contract;
-import io.vertx.up.atom.Diode;
 import io.vertx.up.atom.worker.Mission;
-import io.vertx.up.commune.*;
-import io.vertx.up.commune.config.Adminicle;
+import io.vertx.up.commune.ActIn;
+import io.vertx.up.commune.Commercial;
+import io.vertx.up.commune.Envelop;
+import io.vertx.up.commune.Record;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
@@ -64,6 +62,9 @@ public abstract class AbstractChannel implements JtChannel {
          * Initialize the `ActIn` object and reference
          */
         final ActIn request = new ActIn(envelop);
+        if (Objects.nonNull(this.commercial.mapping())) {
+            request.bind(this.commercial.mapping());
+        }
         request.connect(definition);
         /*
          * Build component and init
@@ -88,10 +89,17 @@ public abstract class AbstractChannel implements JtChannel {
                  */
                 return this.initAsync(component, request)
                         /*
-                         * 1) JsonObject: options ( without `mapping` )
-                         * 2)
+                         * 1. `Dict` calculation for current channel
+                         * Children initialized here, for `dict` calculation
+                         * 1) Fetch dict that configured in current channel
+                         * 2) Put dict to `ActIn` object for future usage
                          */
-                        .compose(child -> this.contractReference(component))
+                        .compose(nil -> Anagogic.dictAsync(this.commercial))
+                        .compose(dict -> Ux.future(request.bind(dict)))
+                        /*
+                         * 1) JsonObject: options ( without `mapping` )
+                         */
+                        .compose(nil -> Anagogic.componentAsync(component, this.commercial))
                         /*
                          * Children initialized
                          */
@@ -99,40 +107,17 @@ public abstract class AbstractChannel implements JtChannel {
                         /*
                          * Response here for future custom
                          */
-                        .compose(ActOut::async);
+                        .compose(actOut -> Anagogic.complete(actOut, this.commercial.mapping(), envelop))
+                        /*
+                         * Otherwise;
+                         */
+                        .otherwise(Ux.otherwise());
             } else {
                 /*
                  * singleton singleton error
                  */
                 return Future.failedFuture(new _501ChannelErrorException(this.getClass(), componentClass.getName()));
             }
-        }
-    }
-
-    private <V> Future<Boolean> contractReference(final JtComponent component) {
-        final Commercial commercial = this.commercial;
-        if (Objects.nonNull(commercial)) {
-            /*
-             * JsonObject options inject ( without `mapping` node for Diode )
-             */
-            final JsonObject options = commercial.options();
-            if (Ut.notNil(options)) {
-                final JsonObject injectOpt = options.copy();
-                injectOpt.remove(KeField.MAPPING);
-                Ut.contract(component, JsonObject.class, injectOpt);
-            }
-            /*
-             * Diode: mapping, Adminicle: reference
-             */
-            Ut.contract(component, Diode.class, commercial.mapping());
-            Ut.contract(component, Adminicle.class, commercial.adminicle());
-            return Future.succeededFuture(Boolean.TRUE);
-        } else {
-            /*
-             *
-             */
-            Jt.infoWeb(this.getLogger(), "Commercial reference is null");
-            return Future.succeededFuture(Boolean.TRUE);
         }
     }
 

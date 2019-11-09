@@ -1,6 +1,7 @@
 package io.vertx.up.uca.micro.invoke;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.auth.User;
 import io.vertx.ext.web.Session;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.eon.Values;
@@ -85,17 +86,49 @@ public class InvokerUtil {
     static Object invokeMulti(final Object proxy,
                               final Method method,
                               final Envelop envelop) {
-        // One type dynamic here
+        /*
+         * One type dynamic here
+         */
         final Object reference = envelop.data();
-        // Non Direct
+        /*
+         * Non Direct
+         */
         final Object[] arguments = new Object[method.getParameterCount()];
         final JsonObject json = (JsonObject) reference;
         final Class<?>[] types = method.getParameterTypes();
+        /*
+         * Adjust argument index
+         */
+        int adjust = 0;
         for (int idx = 0; idx < types.length; idx++) {
-            // Multi calling for Session type
+            /*
+             * Multi calling for Session type
+             */
             final Class<?> type = types[idx];
-            final int current = idx;
-            arguments[idx] = getValue(type, envelop, () -> json.getValue(String.valueOf(current)));
+            if (type == User.class) {
+                /*
+                 * Found `User` type
+                 * Adjust idx  - 1 to move argument index to
+                 * left.
+                 * {
+                 *    "0": "key",
+                 *    "1": "type",
+                 * }
+                 * (String,User,String) -> (idx, current), (0, 0), (1, ?), (2, 1)
+                 *                                               adjust = 1
+                 *
+                 * (User, String, String) -> (idx, current), (0, ?), (1, 0), (2, 1)
+                 *                                          adjust = 1
+                 *
+                 * (String, String,User) -> (idx, current), (0, 0), (1, 1), (2, ?)
+                 *                                                          adjust = 1
+                 */
+                arguments[idx] = envelop.user();
+                adjust += 1;
+            } else {
+                final int current = idx - adjust;
+                arguments[idx] = getValue(type, envelop, () -> json.getValue(String.valueOf(current)));
+            }
         }
         return Ut.invoke(proxy, method.getName(), arguments);
     }
