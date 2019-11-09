@@ -83,6 +83,14 @@ final class Statute {
         }
     }
 
+    static JsonArray subset(final JsonArray array, final Function<JsonObject, Boolean> fnFilter) {
+        return Fn.getNull(new JsonArray(), () -> {
+            final JsonArray subset = new JsonArray();
+            It.itJArray(array).filter(fnFilter::apply).forEach(subset::add);
+            return subset;
+        }, array, fnFilter);
+    }
+
     static <K, V, E> ConcurrentMap<K, V> zipper(final Collection<E> object, final Function<E, K> keyFn, final Function<E, V> valueFn) {
         final ConcurrentMap<K, V> ret = new ConcurrentHashMap<>();
         if (0 < object.size()) {

@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IService implements IIService {
 
-    private static final long serialVersionUID = -898249001;
+    private static final long serialVersionUID = 248709756;
 
     private String        key;
     private String        namespace;
@@ -36,14 +36,19 @@ public class IService implements IIService {
     private String        outScript;
     private String        channelType;
     private String        channelComponent;
-    private String        configChannel;
+    private String        channelConfig;
     private String        configIntegration;
     private String        configDatabase;
-    private String        configAdminicle;
+    private String        dictConfig;
+    private String        dictComponent;
+    private String        mappingConfig;
+    private String        mappingMode;
+    private String        mappingComponent;
     private String        serviceRecord;
     private String        serviceComponent;
     private String        serviceConfig;
     private String        identifier;
+    private String        identifierComponent;
     private String        sigma;
     private String        language;
     private Boolean       active;
@@ -66,14 +71,19 @@ public class IService implements IIService {
         this.outScript = value.outScript;
         this.channelType = value.channelType;
         this.channelComponent = value.channelComponent;
-        this.configChannel = value.configChannel;
+        this.channelConfig = value.channelConfig;
         this.configIntegration = value.configIntegration;
         this.configDatabase = value.configDatabase;
-        this.configAdminicle = value.configAdminicle;
+        this.dictConfig = value.dictConfig;
+        this.dictComponent = value.dictComponent;
+        this.mappingConfig = value.mappingConfig;
+        this.mappingMode = value.mappingMode;
+        this.mappingComponent = value.mappingComponent;
         this.serviceRecord = value.serviceRecord;
         this.serviceComponent = value.serviceComponent;
         this.serviceConfig = value.serviceConfig;
         this.identifier = value.identifier;
+        this.identifierComponent = value.identifierComponent;
         this.sigma = value.sigma;
         this.language = value.language;
         this.active = value.active;
@@ -95,14 +105,19 @@ public class IService implements IIService {
         String        outScript,
         String        channelType,
         String        channelComponent,
-        String        configChannel,
+        String        channelConfig,
         String        configIntegration,
         String        configDatabase,
-        String        configAdminicle,
+        String        dictConfig,
+        String        dictComponent,
+        String        mappingConfig,
+        String        mappingMode,
+        String        mappingComponent,
         String        serviceRecord,
         String        serviceComponent,
         String        serviceConfig,
         String        identifier,
+        String        identifierComponent,
         String        sigma,
         String        language,
         Boolean       active,
@@ -122,14 +137,19 @@ public class IService implements IIService {
         this.outScript = outScript;
         this.channelType = channelType;
         this.channelComponent = channelComponent;
-        this.configChannel = configChannel;
+        this.channelConfig = channelConfig;
         this.configIntegration = configIntegration;
         this.configDatabase = configDatabase;
-        this.configAdminicle = configAdminicle;
+        this.dictConfig = dictConfig;
+        this.dictComponent = dictComponent;
+        this.mappingConfig = mappingConfig;
+        this.mappingMode = mappingMode;
+        this.mappingComponent = mappingComponent;
         this.serviceRecord = serviceRecord;
         this.serviceComponent = serviceComponent;
         this.serviceConfig = serviceConfig;
         this.identifier = identifier;
+        this.identifierComponent = identifierComponent;
         this.sigma = sigma;
         this.language = language;
         this.active = active;
@@ -251,13 +271,13 @@ public class IService implements IIService {
     }
 
     @Override
-    public String getConfigChannel() {
-        return this.configChannel;
+    public String getChannelConfig() {
+        return this.channelConfig;
     }
 
     @Override
-    public IService setConfigChannel(String configChannel) {
-        this.configChannel = configChannel;
+    public IService setChannelConfig(String channelConfig) {
+        this.channelConfig = channelConfig;
         return this;
     }
 
@@ -284,13 +304,57 @@ public class IService implements IIService {
     }
 
     @Override
-    public String getConfigAdminicle() {
-        return this.configAdminicle;
+    public String getDictConfig() {
+        return this.dictConfig;
     }
 
     @Override
-    public IService setConfigAdminicle(String configAdminicle) {
-        this.configAdminicle = configAdminicle;
+    public IService setDictConfig(String dictConfig) {
+        this.dictConfig = dictConfig;
+        return this;
+    }
+
+    @Override
+    public String getDictComponent() {
+        return this.dictComponent;
+    }
+
+    @Override
+    public IService setDictComponent(String dictComponent) {
+        this.dictComponent = dictComponent;
+        return this;
+    }
+
+    @Override
+    public String getMappingConfig() {
+        return this.mappingConfig;
+    }
+
+    @Override
+    public IService setMappingConfig(String mappingConfig) {
+        this.mappingConfig = mappingConfig;
+        return this;
+    }
+
+    @Override
+    public String getMappingMode() {
+        return this.mappingMode;
+    }
+
+    @Override
+    public IService setMappingMode(String mappingMode) {
+        this.mappingMode = mappingMode;
+        return this;
+    }
+
+    @Override
+    public String getMappingComponent() {
+        return this.mappingComponent;
+    }
+
+    @Override
+    public IService setMappingComponent(String mappingComponent) {
+        this.mappingComponent = mappingComponent;
         return this;
     }
 
@@ -335,6 +399,17 @@ public class IService implements IIService {
     @Override
     public IService setIdentifier(String identifier) {
         this.identifier = identifier;
+        return this;
+    }
+
+    @Override
+    public String getIdentifierComponent() {
+        return this.identifierComponent;
+    }
+
+    @Override
+    public IService setIdentifierComponent(String identifierComponent) {
+        this.identifierComponent = identifierComponent;
         return this;
     }
 
@@ -440,14 +515,19 @@ public class IService implements IIService {
         sb.append(", ").append(outScript);
         sb.append(", ").append(channelType);
         sb.append(", ").append(channelComponent);
-        sb.append(", ").append(configChannel);
+        sb.append(", ").append(channelConfig);
         sb.append(", ").append(configIntegration);
         sb.append(", ").append(configDatabase);
-        sb.append(", ").append(configAdminicle);
+        sb.append(", ").append(dictConfig);
+        sb.append(", ").append(dictComponent);
+        sb.append(", ").append(mappingConfig);
+        sb.append(", ").append(mappingMode);
+        sb.append(", ").append(mappingComponent);
         sb.append(", ").append(serviceRecord);
         sb.append(", ").append(serviceComponent);
         sb.append(", ").append(serviceConfig);
         sb.append(", ").append(identifier);
+        sb.append(", ").append(identifierComponent);
         sb.append(", ").append(sigma);
         sb.append(", ").append(language);
         sb.append(", ").append(active);
@@ -480,14 +560,19 @@ public class IService implements IIService {
         setOutScript(from.getOutScript());
         setChannelType(from.getChannelType());
         setChannelComponent(from.getChannelComponent());
-        setConfigChannel(from.getConfigChannel());
+        setChannelConfig(from.getChannelConfig());
         setConfigIntegration(from.getConfigIntegration());
         setConfigDatabase(from.getConfigDatabase());
-        setConfigAdminicle(from.getConfigAdminicle());
+        setDictConfig(from.getDictConfig());
+        setDictComponent(from.getDictComponent());
+        setMappingConfig(from.getMappingConfig());
+        setMappingMode(from.getMappingMode());
+        setMappingComponent(from.getMappingComponent());
         setServiceRecord(from.getServiceRecord());
         setServiceComponent(from.getServiceComponent());
         setServiceConfig(from.getServiceConfig());
         setIdentifier(from.getIdentifier());
+        setIdentifierComponent(from.getIdentifierComponent());
         setSigma(from.getSigma());
         setLanguage(from.getLanguage());
         setActive(from.getActive());

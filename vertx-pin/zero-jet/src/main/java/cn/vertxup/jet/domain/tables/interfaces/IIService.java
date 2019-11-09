@@ -124,14 +124,14 @@ public interface IIService extends Serializable {
     public String getChannelComponent();
 
     /**
-     * Setter for <code>DB_ETERNAL.I_SERVICE.CONFIG_CHANNEL</code>. 「configChannel」- 通道（自定义）配置信息，Channel专用
+     * Setter for <code>DB_ETERNAL.I_SERVICE.CHANNEL_CONFIG</code>. 「channelConfig」- 通道（自定义）配置信息，Channel专用
      */
-    public IIService setConfigChannel(String value);
+    public IIService setChannelConfig(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.I_SERVICE.CONFIG_CHANNEL</code>. 「configChannel」- 通道（自定义）配置信息，Channel专用
+     * Getter for <code>DB_ETERNAL.I_SERVICE.CHANNEL_CONFIG</code>. 「channelConfig」- 通道（自定义）配置信息，Channel专用
      */
-    public String getConfigChannel();
+    public String getChannelConfig();
 
     /**
      * Setter for <code>DB_ETERNAL.I_SERVICE.CONFIG_INTEGRATION</code>. 「configIntegration」- 集成配置信息，第三方专用
@@ -154,14 +154,54 @@ public interface IIService extends Serializable {
     public String getConfigDatabase();
 
     /**
-     * Setter for <code>DB_ETERNAL.I_SERVICE.CONFIG_ADMINICLE</code>. 「configAdminicle」- 字典的数据配置
+     * Setter for <code>DB_ETERNAL.I_SERVICE.DICT_CONFIG</code>. 「dictConfig」- 字典的配置信息
      */
-    public IIService setConfigAdminicle(String value);
+    public IIService setDictConfig(String value);
 
     /**
-     * Getter for <code>DB_ETERNAL.I_SERVICE.CONFIG_ADMINICLE</code>. 「configAdminicle」- 字典的数据配置
+     * Getter for <code>DB_ETERNAL.I_SERVICE.DICT_CONFIG</code>. 「dictConfig」- 字典的配置信息
      */
-    public String getConfigAdminicle();
+    public String getDictConfig();
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.DICT_COMPONENT</code>. 「dictComponent」- 字典配置中的插件
+     */
+    public IIService setDictComponent(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.DICT_COMPONENT</code>. 「dictComponent」- 字典配置中的插件
+     */
+    public String getDictComponent();
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.MAPPING_CONFIG</code>. 「mappingConfig」- 映射专用配置
+     */
+    public IIService setMappingConfig(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.MAPPING_CONFIG</code>. 「mappingConfig」- 映射专用配置
+     */
+    public String getMappingConfig();
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.MAPPING_MODE</code>. 「mappingMode」- 映射的模式
+     */
+    public IIService setMappingMode(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.MAPPING_MODE</code>. 「mappingMode」- 映射的模式
+     */
+    public String getMappingMode();
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.MAPPING_COMPONENT</code>. 「mappingComponent」- 映射组件类型
+     */
+    public IIService setMappingComponent(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.MAPPING_COMPONENT</code>. 「mappingComponent」- 映射组件类型
+     */
+    public String getMappingComponent();
 
     /**
      * Setter for <code>DB_ETERNAL.I_SERVICE.SERVICE_RECORD</code>. 「serviceRecord」- 服务记录定义
@@ -202,6 +242,16 @@ public interface IIService extends Serializable {
      * Getter for <code>DB_ETERNAL.I_SERVICE.IDENTIFIER</code>. 「identifier」- 当前类型描述的Model的标识
      */
     public String getIdentifier();
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.IDENTIFIER_COMPONENT</code>. 「identifierComponent」- 当前业务接口使用的标识选择器
+     */
+    public IIService setIdentifierComponent(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.IDENTIFIER_COMPONENT</code>. 「identifierComponent」- 当前业务接口使用的标识选择器
+     */
+    public String getIdentifierComponent();
 
     /**
      * Setter for <code>DB_ETERNAL.I_SERVICE.SIGMA</code>. 「sigma」- 统一标识
@@ -308,14 +358,19 @@ public interface IIService extends Serializable {
         setOutScript(json.getString("OUT_SCRIPT"));
         setChannelType(json.getString("CHANNEL_TYPE"));
         setChannelComponent(json.getString("CHANNEL_COMPONENT"));
-        setConfigChannel(json.getString("CONFIG_CHANNEL"));
+        setChannelConfig(json.getString("CHANNEL_CONFIG"));
         setConfigIntegration(json.getString("CONFIG_INTEGRATION"));
         setConfigDatabase(json.getString("CONFIG_DATABASE"));
-        setConfigAdminicle(json.getString("CONFIG_ADMINICLE"));
+        setDictConfig(json.getString("DICT_CONFIG"));
+        setDictComponent(json.getString("DICT_COMPONENT"));
+        setMappingConfig(json.getString("MAPPING_CONFIG"));
+        setMappingMode(json.getString("MAPPING_MODE"));
+        setMappingComponent(json.getString("MAPPING_COMPONENT"));
         setServiceRecord(json.getString("SERVICE_RECORD"));
         setServiceComponent(json.getString("SERVICE_COMPONENT"));
         setServiceConfig(json.getString("SERVICE_CONFIG"));
         setIdentifier(json.getString("IDENTIFIER"));
+        setIdentifierComponent(json.getString("IDENTIFIER_COMPONENT"));
         setSigma(json.getString("SIGMA"));
         setLanguage(json.getString("LANGUAGE"));
         setActive(json.getBoolean("ACTIVE"));
@@ -340,14 +395,19 @@ public interface IIService extends Serializable {
         json.put("OUT_SCRIPT",getOutScript());
         json.put("CHANNEL_TYPE",getChannelType());
         json.put("CHANNEL_COMPONENT",getChannelComponent());
-        json.put("CONFIG_CHANNEL",getConfigChannel());
+        json.put("CHANNEL_CONFIG",getChannelConfig());
         json.put("CONFIG_INTEGRATION",getConfigIntegration());
         json.put("CONFIG_DATABASE",getConfigDatabase());
-        json.put("CONFIG_ADMINICLE",getConfigAdminicle());
+        json.put("DICT_CONFIG",getDictConfig());
+        json.put("DICT_COMPONENT",getDictComponent());
+        json.put("MAPPING_CONFIG",getMappingConfig());
+        json.put("MAPPING_MODE",getMappingMode());
+        json.put("MAPPING_COMPONENT",getMappingComponent());
         json.put("SERVICE_RECORD",getServiceRecord());
         json.put("SERVICE_COMPONENT",getServiceComponent());
         json.put("SERVICE_CONFIG",getServiceConfig());
         json.put("IDENTIFIER",getIdentifier());
+        json.put("IDENTIFIER_COMPONENT",getIdentifierComponent());
         json.put("SIGMA",getSigma());
         json.put("LANGUAGE",getLanguage());
         json.put("ACTIVE",getActive());

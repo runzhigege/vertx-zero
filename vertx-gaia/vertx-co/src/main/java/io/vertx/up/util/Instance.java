@@ -79,11 +79,20 @@ final class Instance {
         if (Ut.isNil(name)) {
             return defaultCls;
         } else {
-            final Class<?> clazz = clazz(name);
-            if (Objects.isNull(clazz)) {
+            try {
+                /*
+                 * Here must capture 'ClassNotFound` issue instead of
+                 * Throw exception out for null reference returned.
+                 * Specific situation usage.
+                 */
+                final Class<?> clazz = clazz(name);
+                if (Objects.isNull(clazz)) {
+                    return defaultCls;
+                } else {
+                    return clazz;
+                }
+            } catch (final Throwable ex) {
                 return defaultCls;
-            } else {
-                return clazz;
             }
         }
     }

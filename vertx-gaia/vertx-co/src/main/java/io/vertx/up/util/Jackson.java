@@ -231,4 +231,13 @@ final class Jackson {
                 .dispose();
         return target;
     }
+
+    static void append(final JsonObject target, final JsonObject source, final String field) {
+        Fn.safeNull(() -> {
+            final Object value = source.getValue(field);
+            if (Objects.nonNull(value)) {
+                target.put(field, value);
+            }
+        }, target, source, field);
+    }
 }
