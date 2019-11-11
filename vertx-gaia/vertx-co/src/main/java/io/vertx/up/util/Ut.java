@@ -1037,4 +1037,8 @@ public final class Ut {
     public static Set<String> mapString(final JsonArray array, final String field) {
         return Epsilon.mapString(array, field);
     }
+
+    public static Set<JsonArray> mapArray(final JsonArray array, final String field) {
+        return Epsilon.mapArray(array, field);
+    }
 }
