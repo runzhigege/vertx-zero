@@ -117,7 +117,7 @@
         <yaml.version>1.25</yaml.version>
         <!-- Vert.x Addition -->
         <rxjava2.version>2.2.14</rxjava2.version>
-        <netty.tcnative.version>2.0.26.Final</netty.tcnative.version>
+        <netty.tcnative.version>2.0.27.Final</netty.tcnative.version>
         <netty.version>4.1.43.Final</netty.version>
         <hazelcast.version>3.12.4</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
