@@ -65,8 +65,10 @@ class To {
 
     static JsonArray toArray(final Record[] records) {
         final JsonArray result = new JsonArray();
-        Arrays.stream(records).map(Record::toJson)
-                .forEach(result::add);
+        if (Objects.nonNull(records)) {
+            Arrays.stream(records).map(Record::toJson)
+                    .forEach(result::add);
+        }
         return result;
     }
 
