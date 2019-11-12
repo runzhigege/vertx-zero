@@ -1,6 +1,7 @@
 package io.vertx.up.commune;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.eon.Values;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -114,6 +115,13 @@ interface Meta {
      * attributes count.
      */
     int size();
+
+    /*
+     * Model identifier
+     */
+    default String identifier() {
+        return Values.EMPTY_IDENTIFIER;
+    }
 
     /*
      * Get primary key value

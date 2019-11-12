@@ -83,7 +83,8 @@ public abstract class ActiveRecord implements Record {
         if (this.declaredFields().contains(field)) {
             this.data.put(field, value);
         } else {
-            this.getLogger().warn("[ ZERO ] The field {0} has not been declared.", field);
+            this.getLogger().warn("[ ZERO ] The field `{0}` has not been defined in model: `{1}`",
+                    field, this.identifier());
         }
         return this;
     }

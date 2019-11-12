@@ -35,6 +35,8 @@ public interface Values {
 
     String FALSE = "false";
 
+    String EMPTY_IDENTIFIER = "(`identifier` null)";
+
     String CONFIG_INTERNAL = "up";
 
     String CONFIG_INTERNAL_RULE = CONFIG_INTERNAL + "/rules/{0}.yml";
