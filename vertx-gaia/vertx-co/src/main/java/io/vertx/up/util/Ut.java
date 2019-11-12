@@ -528,6 +528,14 @@ public final class Ut {
         return Apply.applyNil(executor);
     }
 
+    public static Function<JsonArray, Future<JsonArray>> applyJEmpty(final Function<JsonArray, Future<JsonArray>> executor) {
+        return Apply.applyJEmpty(executor);
+    }
+
+    public static <T> Function<T[], Future<T[]>> applyEmpty(final Function<T[], Future<T[]>> executor) {
+        return Apply.applyEmpty(executor);
+    }
+
     public static <T> Function<T, Future<JsonObject>> applyField(final JsonObject input, final String field) {
         return Apply.applyField(input, field);
     }
@@ -1036,5 +1044,9 @@ public final class Ut {
      */
     public static Set<String> mapString(final JsonArray array, final String field) {
         return Epsilon.mapString(array, field);
+    }
+
+    public static Set<JsonArray> mapArray(final JsonArray array, final String field) {
+        return Epsilon.mapArray(array, field);
     }
 }
