@@ -28,4 +28,18 @@ class Epsilon {
         }
         return set;
     }
+
+    static Set<JsonArray> mapArray(final JsonArray array, final String field) {
+        Set<JsonArray> set = new HashSet<>();
+        if (Objects.nonNull(array)) {
+            set = array.stream()
+                    .filter(item -> item instanceof JsonObject)
+                    .map(item -> (JsonObject) item)
+                    .filter(item -> item.getValue(field) instanceof JsonArray)
+                    .map(item -> item.getJsonArray(field))
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toSet());
+        }
+        return set;
+    }
 }

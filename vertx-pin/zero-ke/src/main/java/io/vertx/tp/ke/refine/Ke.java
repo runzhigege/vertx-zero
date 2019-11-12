@@ -120,10 +120,6 @@ public class Ke {
      */
     public interface Result {
 
-        static JsonObject bool(final boolean checked) {
-            return KeResult.bool(KeField.RESULT, checked);
-        }
-
         static Future<JsonObject> boolAsync(final boolean checked) {
             return Ux.future(bool(checked));
         }
@@ -134,6 +130,10 @@ public class Ke {
 
         static Future<JsonObject> jsonAsync(final JsonObject result) {
             return Ux.future(Ut.isNil(result) ? new JsonObject() : result);
+        }
+
+        static JsonObject bool(final boolean checked) {
+            return KeResult.bool(KeField.RESULT, checked);
         }
 
         static JsonObject bool(final String key, final boolean checked) {
