@@ -54,6 +54,16 @@ public interface IUiColumn extends Serializable {
     public String getDataIndex();
 
     /**
+     * Setter for <code>DB_ETERNAL.UI_COLUMN.POSITION</code>. 「position」- 当前列的位置
+     */
+    public IUiColumn setPosition(Integer value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.UI_COLUMN.POSITION</code>. 「position」- 当前列的位置
+     */
+    public Integer getPosition();
+
+    /**
      * Setter for <code>DB_ETERNAL.UI_COLUMN.RENDER</code>. 「render」- 使用的Render函数
      */
     public IUiColumn setRender(String value);
@@ -291,6 +301,7 @@ public interface IUiColumn extends Serializable {
         setKey(json.getString("KEY"));
         setTitle(json.getString("TITLE"));
         setDataIndex(json.getString("DATA_INDEX"));
+        setPosition(json.getInteger("POSITION"));
         setRender(json.getString("RENDER"));
         setWidth(json.getInteger("WIDTH"));
         setFixed(json.getBoolean("FIXED"));
@@ -322,6 +333,7 @@ public interface IUiColumn extends Serializable {
         json.put("KEY",getKey());
         json.put("TITLE",getTitle());
         json.put("DATA_INDEX",getDataIndex());
+        json.put("POSITION",getPosition());
         json.put("RENDER",getRender());
         json.put("WIDTH",getWidth());
         json.put("FIXED",getFixed());
