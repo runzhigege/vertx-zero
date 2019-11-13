@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS S_VIEW
      * -- 「后置行过滤」
      */
     `ROWS`        TEXT COMMENT '「rows」- 该资源针对保存的行进行过滤',
-
+    `POSITION`    TEXT COMMENT '「position」- 当前列的顺序信息',
     -- 特殊字段
     `SIGMA`       VARCHAR(128) COMMENT '「sigma」- 用户组绑定的统一标识',
     `LANGUAGE`    VARCHAR(10) COMMENT '「language」- 使用的语言',

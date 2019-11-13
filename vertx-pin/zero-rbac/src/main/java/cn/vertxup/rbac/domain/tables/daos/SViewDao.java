@@ -119,6 +119,13 @@ public class SViewDao extends DAOImpl<SViewRecord, cn.vertxup.rbac.domain.tables
     }
 
     /**
+     * Fetch records that have <code>POSITION IN (values)</code>
+     */
+    public List<cn.vertxup.rbac.domain.tables.pojos.SView> fetchByPosition(String... values) {
+        return fetch(SView.S_VIEW.POSITION, values);
+    }
+
+    /**
      * Fetch records that have <code>SIGMA IN (values)</code>
      */
     public List<cn.vertxup.rbac.domain.tables.pojos.SView> fetchBySigma(String... values) {
@@ -235,6 +242,13 @@ public class SViewDao extends DAOImpl<SViewRecord, cn.vertxup.rbac.domain.tables
      */
     public CompletableFuture<List<cn.vertxup.rbac.domain.tables.pojos.SView>> fetchByRowsAsync(List<String> values) {
         return fetchAsync(SView.S_VIEW.ROWS,values);
+    }
+
+    /**
+     * Fetch records that have <code>POSITION IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.rbac.domain.tables.pojos.SView>> fetchByPositionAsync(List<String> values) {
+        return fetchAsync(SView.S_VIEW.POSITION,values);
     }
 
     /**

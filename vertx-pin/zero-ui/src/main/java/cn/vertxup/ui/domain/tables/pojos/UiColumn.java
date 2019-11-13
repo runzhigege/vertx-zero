@@ -24,11 +24,12 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UiColumn implements IUiColumn {
 
-    private static final long serialVersionUID = -334647885;
+    private static final long serialVersionUID = 959200518;
 
     private String        key;
     private String        title;
     private String        dataIndex;
+    private Integer       position;
     private String        render;
     private Integer       width;
     private Boolean       fixed;
@@ -58,6 +59,7 @@ public class UiColumn implements IUiColumn {
         this.key = value.key;
         this.title = value.title;
         this.dataIndex = value.dataIndex;
+        this.position = value.position;
         this.render = value.render;
         this.width = value.width;
         this.fixed = value.fixed;
@@ -86,6 +88,7 @@ public class UiColumn implements IUiColumn {
         String        key,
         String        title,
         String        dataIndex,
+        Integer       position,
         String        render,
         Integer       width,
         Boolean       fixed,
@@ -112,6 +115,7 @@ public class UiColumn implements IUiColumn {
         this.key = key;
         this.title = title;
         this.dataIndex = dataIndex;
+        this.position = position;
         this.render = render;
         this.width = width;
         this.fixed = fixed;
@@ -166,6 +170,17 @@ public class UiColumn implements IUiColumn {
     @Override
     public UiColumn setDataIndex(String dataIndex) {
         this.dataIndex = dataIndex;
+        return this;
+    }
+
+    @Override
+    public Integer getPosition() {
+        return this.position;
+    }
+
+    @Override
+    public UiColumn setPosition(Integer position) {
+        this.position = position;
         return this;
     }
 
@@ -418,6 +433,7 @@ public class UiColumn implements IUiColumn {
         sb.append(key);
         sb.append(", ").append(title);
         sb.append(", ").append(dataIndex);
+        sb.append(", ").append(position);
         sb.append(", ").append(render);
         sb.append(", ").append(width);
         sb.append(", ").append(fixed);
@@ -457,6 +473,7 @@ public class UiColumn implements IUiColumn {
         setKey(from.getKey());
         setTitle(from.getTitle());
         setDataIndex(from.getDataIndex());
+        setPosition(from.getPosition());
         setRender(from.getRender());
         setWidth(from.getWidth());
         setFixed(from.getFixed());
