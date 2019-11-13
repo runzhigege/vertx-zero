@@ -84,6 +84,13 @@ public class UiColumnDao extends DAOImpl<UiColumnRecord, cn.vertxup.ui.domain.ta
     }
 
     /**
+     * Fetch records that have <code>POSITION IN (values)</code>
+     */
+    public List<cn.vertxup.ui.domain.tables.pojos.UiColumn> fetchByPosition(Integer... values) {
+        return fetch(UiColumn.UI_COLUMN.POSITION, values);
+    }
+
+    /**
      * Fetch records that have <code>RENDER IN (values)</code>
      */
     public List<cn.vertxup.ui.domain.tables.pojos.UiColumn> fetchByRender(String... values) {
@@ -263,6 +270,13 @@ public class UiColumnDao extends DAOImpl<UiColumnRecord, cn.vertxup.ui.domain.ta
      */
     public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiColumn>> fetchByDataIndexAsync(List<String> values) {
         return fetchAsync(UiColumn.UI_COLUMN.DATA_INDEX,values);
+    }
+
+    /**
+     * Fetch records that have <code>POSITION IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.ui.domain.tables.pojos.UiColumn>> fetchByPositionAsync(List<Integer> values) {
+        return fetchAsync(UiColumn.UI_COLUMN.POSITION,values);
     }
 
     /**

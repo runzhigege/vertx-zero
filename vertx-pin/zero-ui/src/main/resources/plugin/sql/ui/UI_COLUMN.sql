@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS UI_COLUMN
     `KEY`           VARCHAR(36) COMMENT '「key」- 列主键',
     `TITLE`         VARCHAR(255) COMMENT '「title」- 列标题',
     `DATA_INDEX`    VARCHAR(255) COMMENT '「dataIndex」- 列名',
+    `POSITION`      INT COMMENT '「position」- 当前列的位置',
     `RENDER`        VARCHAR(64) COMMENT '「render」- 使用的Render函数',
     /*
      * 每一列的详细配置信息
