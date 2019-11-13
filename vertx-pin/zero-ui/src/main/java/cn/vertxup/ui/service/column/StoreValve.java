@@ -8,6 +8,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.up.unity.Ux;
 
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 class StoreValve implements UiValve {
@@ -25,6 +26,12 @@ class StoreValve implements UiValve {
         filters.put("sigma", sigma);
         return Ux.Jooq.on(UiColumnDao.class)
                 .<UiColumn>findAsync(filters)
+                .compose(list -> Ux.future(list.stream()
+                        /*
+                         * Position Sorting
+                         */
+                        .sorted(Comparator.comparing(UiColumn::getPosition))
+                        .collect(Collectors.toList())))
                 .compose(list -> Ux.future(list.stream().map(this::procColumn).collect(Collectors.toList())))
                 .compose(jsonList -> Ux.future(new JsonArray(jsonList)));
     }
