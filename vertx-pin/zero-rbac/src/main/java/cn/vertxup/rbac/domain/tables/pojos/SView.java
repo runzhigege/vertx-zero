@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class SView implements ISView {
 
-    private static final long serialVersionUID = -1868031570;
+    private static final long serialVersionUID = -1750626519;
 
     private String        key;
     private String        name;
@@ -34,6 +34,7 @@ public class SView implements ISView {
     private String        projection;
     private String        criteria;
     private String        rows;
+    private String        position;
     private String        sigma;
     private String        language;
     private Boolean       active;
@@ -54,6 +55,7 @@ public class SView implements ISView {
         this.projection = value.projection;
         this.criteria = value.criteria;
         this.rows = value.rows;
+        this.position = value.position;
         this.sigma = value.sigma;
         this.language = value.language;
         this.active = value.active;
@@ -73,6 +75,7 @@ public class SView implements ISView {
         String        projection,
         String        criteria,
         String        rows,
+        String        position,
         String        sigma,
         String        language,
         Boolean       active,
@@ -90,6 +93,7 @@ public class SView implements ISView {
         this.projection = projection;
         this.criteria = criteria;
         this.rows = rows;
+        this.position = position;
         this.sigma = sigma;
         this.language = language;
         this.active = active;
@@ -185,6 +189,17 @@ public class SView implements ISView {
     @Override
     public SView setRows(String rows) {
         this.rows = rows;
+        return this;
+    }
+
+    @Override
+    public String getPosition() {
+        return this.position;
+    }
+
+    @Override
+    public SView setPosition(String position) {
+        this.position = position;
         return this;
     }
 
@@ -288,6 +303,7 @@ public class SView implements ISView {
         sb.append(", ").append(projection);
         sb.append(", ").append(criteria);
         sb.append(", ").append(rows);
+        sb.append(", ").append(position);
         sb.append(", ").append(sigma);
         sb.append(", ").append(language);
         sb.append(", ").append(active);
@@ -318,6 +334,7 @@ public class SView implements ISView {
         setProjection(from.getProjection());
         setCriteria(from.getCriteria());
         setRows(from.getRows());
+        setPosition(from.getPosition());
         setSigma(from.getSigma());
         setLanguage(from.getLanguage());
         setActive(from.getActive());

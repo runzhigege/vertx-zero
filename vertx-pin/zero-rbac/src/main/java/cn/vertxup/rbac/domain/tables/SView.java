@@ -35,7 +35,7 @@ public class SView extends TableImpl<SViewRecord> {
      * The reference instance of <code>DB_ETERNAL.S_VIEW</code>
      */
     public static final SView S_VIEW = new SView();
-    private static final long serialVersionUID = -311702469;
+    private static final long serialVersionUID = -1635803448;
     /**
      * The column <code>DB_ETERNAL.S_VIEW.KEY</code>. 「key」- 限定记录ID
      */
@@ -68,6 +68,10 @@ public class SView extends TableImpl<SViewRecord> {
      * The column <code>DB_ETERNAL.S_VIEW.ROWS</code>. 「rows」- 该资源针对保存的行进行过滤
      */
     public final TableField<SViewRecord, String> ROWS = createField("ROWS", org.jooq.impl.SQLDataType.CLOB, this, "「rows」- 该资源针对保存的行进行过滤");
+    /**
+     * The column <code>DB_ETERNAL.S_VIEW.POSITION</code>. 「position」- 当前列的顺序信息
+     */
+    public final TableField<SViewRecord, String> POSITION = createField("POSITION", org.jooq.impl.SQLDataType.CLOB, this, "「position」- 当前列的顺序信息");
     /**
      * The column <code>DB_ETERNAL.S_VIEW.SIGMA</code>. 「sigma」- 用户组绑定的统一标识
      */
