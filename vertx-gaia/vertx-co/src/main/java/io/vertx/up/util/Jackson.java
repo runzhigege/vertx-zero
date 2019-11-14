@@ -205,25 +205,6 @@ final class Jackson {
         return fields.size() == counter;
     }
 
-    /*
-     * Json valid value here
-     */
-    static Object toJValue(final Object input) {
-        if (Objects.isNull(input)) {
-            return null;
-        } else {
-            if (input instanceof Date) {
-                return ((Date) input).toInstant();
-            } else {
-                if ("null".equals(input)) {
-                    return null;
-                } else {
-                    return input;
-                }
-            }
-        }
-    }
-
     static JsonObject flatMerge(final JsonObject target, final JsonObject source) {
         Observable.fromIterable(source.fieldNames())
                 .filter(key -> !target.containsKey(key))

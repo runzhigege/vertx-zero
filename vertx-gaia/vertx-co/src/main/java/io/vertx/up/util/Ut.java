@@ -801,7 +801,11 @@ public final class Ut {
     }
 
     public static Object toJValue(final Object input) {
-        return Jackson.toJValue(input);
+        return Value.toJValue(input);
+    }
+
+    public static Object toValue(final Object input, final Class<?> type) {
+        return Value.toValue(input, type);
     }
 
     public static int toMonth(final String literal) {
