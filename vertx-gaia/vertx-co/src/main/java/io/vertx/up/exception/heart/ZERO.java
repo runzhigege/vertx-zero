@@ -6,25 +6,17 @@
 package io.vertx.up.exception.heart;
 
 interface Info {
-    /**
-     *
-     **/
+
     String NIL_MSG =
             "[ ZERO ] Empty stream exception found when {0}, caused = {1}.";
-    /**
-     *
-     **/
+
     String JSON_MSG =
             "[ ZERO ] The system met decoding/encoding up.god.file {0} exception, caused = {1}.";
-    /**
-     *
-     **/
+
     String ECODE_MSG =
             "[ ZERO ] The code = {0} of error is missing in your up.god.file: " +
                     "vertx-error.yml, callee = {1}.";
-    /**
-     *
-     **/
+
     String ARG_MSG =
             "[ ZERO ] The method \"{0}\" of class \"{1}\" accept " +
                     "({3} {2}) arguments only, the length is conflict";
@@ -36,4 +28,7 @@ interface Info {
 
     String JEXL_MSG =
             "[ ZERO ] The expression \"{0}\" could not be parsed, details = {1}";
+
+    String DATE_MSG =
+            "[ ZERO ] The input `{0}` could not be parsed to valid date";
 }
