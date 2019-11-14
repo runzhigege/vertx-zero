@@ -344,6 +344,7 @@ final class Period {
         return parse(datetime, ZoneId.systemDefault());
     }
 
+
     private static Date parse(final LocalDate datetime, final ZoneId zoneId) {
         return Date.from(datetime.atStartOfDay(zoneId).toInstant());
     }
