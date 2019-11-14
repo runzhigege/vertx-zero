@@ -50,6 +50,7 @@ class Value {
                 } else if (LocalDateTime.class == type) {
                     normalized = Ut.toDateTime(value.toString());
                 }
+                System.out.println(value + "," + normalized);
                 return normalized;
             }
         }
