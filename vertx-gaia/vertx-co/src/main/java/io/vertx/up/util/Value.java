@@ -44,13 +44,15 @@ class Value {
             } else {
                 Object normalized = null;
                 if (LocalTime.class == type) {
-                    normalized = Ut.toTime(value.toString());
+                    final Date date = Ut.parseFull(value.toString());
+                    normalized = Ut.toTime(date);
                 } else if (LocalDate.class == type) {
-                    normalized = Ut.toDate(value.toString());
+                    final Date date = Ut.parseFull(value.toString());
+                    normalized = Ut.toDate(date);
                 } else if (LocalDateTime.class == type) {
-                    normalized = Ut.toDateTime(value.toString());
+                    final Date date = Ut.parseFull(value.toString());
+                    normalized = Ut.toDateTime(date);
                 }
-                System.out.println(value + "," + normalized);
                 return normalized;
             }
         }
