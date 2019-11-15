@@ -5,6 +5,7 @@ import io.vertx.up.fn.Fn;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
 /**
@@ -42,18 +43,25 @@ final class Period {
      * @param literal the literal that will be
      * @return null or valid DateTime
      */
-    @SuppressWarnings("all")
     static LocalDateTime toDateTime(final String literal) {
-        final Optional<DateTimeFormatter> hit =
-                Fn.getNull(Optional.empty(),
-                        () -> DATETIMES.stream()
-                                .filter(formatter ->
-                                        null != Fn.getJvm(
-                                                null,
-                                                () -> LocalDateTime.parse(literal, formatter),
-                                                literal))
-                                .findAny(), literal);
-        return Optional.of(LocalDateTime.parse(literal, hit.get())).orElse(null);
+        return DATETIMES.stream()
+                .map(formatter -> parseEach(literal, formatter, LocalDateTime::parse))
+                .filter(Objects::nonNull)
+                .findAny()
+                .orElse(null);
+    }
+
+    private static <T> T parseEach(final String literal, final DateTimeFormatter formatter,
+                                   final BiFunction<String, DateTimeFormatter, T> executor) {
+        if (Ut.isNil(literal)) {
+            return null;
+        } else {
+            try {
+                return executor.apply(literal, formatter);
+            } catch (final Throwable ex) {
+                return null;
+            }
+        }
     }
 
     /**
@@ -79,8 +87,13 @@ final class Period {
      * @param literal literal that will be parsed
      * @return parsed LocalDate
      */
-    @SuppressWarnings("all")
     static LocalDate toDate(final String literal) {
+        return DATES.stream()
+                .map(formatter -> parseEach(literal, formatter, LocalDate::parse))
+                .filter(Objects::nonNull)
+                .findAny()
+                .orElse(null);
+        /*
         final Optional<DateTimeFormatter> hit =
                 Fn.getNull(Optional.empty(),
                         () -> DATES.stream()
@@ -90,7 +103,8 @@ final class Period {
                                                 () -> LocalDate.parse(literal, formatter),
                                                 literal))
                                 .findFirst(), literal);
-        return hit.isPresent() ? LocalDate.parse(literal, hit.get()) : null;
+        return hit.isPresent() ? LocalDate.parse(literal, hit.get()) : null
+         */
     }
 
     /**
@@ -115,8 +129,13 @@ final class Period {
      * @param literal input literal
      * @return LocalTime parsed
      */
-    @SuppressWarnings("all")
     static LocalTime toTime(final String literal) {
+        return TIMES.stream()
+                .map(formatter -> parseEach(literal, formatter, LocalTime::parse))
+                .filter(Objects::nonNull)
+                .findAny()
+                .orElse(null);
+        /*
         final Optional<DateTimeFormatter> hit =
                 Fn.getNull(Optional.empty(),
                         () -> TIMES.stream()
@@ -127,6 +146,7 @@ final class Period {
                                                 literal))
                                 .findFirst(), literal);
         return hit.isPresent() ? LocalTime.parse(literal, hit.get()) : null;
+         */
     }
 
     /**
@@ -172,7 +192,6 @@ final class Period {
     }
 
     static Date parse(final String literal) {
-
         return Fn.getNull(null, () -> {
             String target = literal;
             if (target.contains("T")) {
@@ -184,17 +203,30 @@ final class Period {
                 final DateTimeFormatter formatter = analyzeFormatter(pattern, literal);
                 final Date converted;
                 if (10 == pattern.length()) {
-                    final LocalDate date = LocalDate.parse(target, formatter);
-                    final ZoneId zoneId = getAdjust(literal);
-                    converted = parse(date, zoneId);
+                    final LocalDate date = parseEach(target, formatter, LocalDate::parse); // LocalDate.parse(target, formatter);
+                    if (Objects.isNull(date)) {
+                        converted = null;
+                    } else {
+                        final ZoneId zoneId = getAdjust(literal);
+                        converted = parse(date, zoneId);
+                    }
                 } else if (15 > pattern.length()) {
-                    final LocalTime time = LocalTime.parse(target, formatter);
-                    final ZoneId zoneId = getAdjust(literal);
-                    converted = parse(time, zoneId);
+                    final LocalTime time = parseEach(target, formatter, LocalTime::parse);
+                    if (Objects.isNull(time)) {
+                        converted = null;
+                    } else {
+                        final ZoneId zoneId = getAdjust(literal);
+                        converted = parse(time, zoneId);
+                    }
                 } else {
-                    final LocalDateTime datetime = LocalDateTime.parse(target, formatter);
-                    final ZoneId zoneId = getAdjust(literal);
-                    converted = parse(datetime, zoneId);
+                    final LocalDateTime datetime = parseEach(target, formatter, LocalDateTime::parse);
+                    // final LocalDateTime datetime = LocalDateTime.parse(target, formatter);
+                    if (Objects.isNull(datetime)) {
+                        converted = null;
+                    } else {
+                        final ZoneId zoneId = getAdjust(literal);
+                        converted = parse(datetime, zoneId);
+                    }
                 }
                 return converted;
             } else {
@@ -343,6 +375,7 @@ final class Period {
     static Date parse(final LocalDate datetime) {
         return parse(datetime, ZoneId.systemDefault());
     }
+
 
     private static Date parse(final LocalDate datetime, final ZoneId zoneId) {
         return Date.from(datetime.atStartOfDay(zoneId).toInstant());

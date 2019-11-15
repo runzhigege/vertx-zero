@@ -3,13 +3,14 @@ package io.vertx.up.util;
 import io.vertx.core.json.DecodeException;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Values;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
 
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -29,6 +30,7 @@ final class Types {
                 }
             };
     private static final Annal LOGGER = Annal.get(Types.class);
+
     private Types() {
     }
 
@@ -134,9 +136,11 @@ final class Types {
     }
 
     static boolean isDate(final Object value) {
-        return Fn.getSemi(null == value, LOGGER,
-                () -> false,
-                () -> Period.isValid(value.toString()));
+        if (Objects.isNull(value)) {
+            return false;
+        } else {
+            return Period.isValid(value.toString());
+        }
     }
 
     static boolean isArray(final Object value) {
