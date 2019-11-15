@@ -107,6 +107,23 @@ public class FieldService implements FieldStub {
                     if (Objects.nonNull(cell.getValue(FieldStub.OPTION_ITEM))) {
                         dataCell.put(FieldStub.OPTION_ITEM, cell.getValue(FieldStub.OPTION_ITEM));
                     }
+
+                    /*
+                     * moment
+                     * 1) When `Edit/Add` status
+                     * 2) When `View` status
+                     * In this kind of situation, the config `optionJsx` must contains `config.format` here.
+                     */
+                    final JsonObject optionJsx = cell.getJsonObject(FieldStub.OPTION_JSX);
+                    if (Ut.notNil(optionJsx)) {
+                        final JsonObject config = optionJsx.getJsonObject("config");
+                        if (Ut.notNil(config) && config.containsKey("format")) {
+                            /*
+                             * Date here for moment = true
+                             */
+                            dataCell.put("moment", true);
+                        }
+                    }
                 }
                 rowArr.add(dataCell);
             });

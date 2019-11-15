@@ -32,9 +32,9 @@ public class Java8DataTimeSaber extends BaseSaber {
     public Object from(final Class<?> paramType, final String literal) {
         return Fn.getNull(() ->
                         Fn.getSemi(Date.class == paramType ||
-                                        Calendar.class == paramType, getLogger(),
+                                        Calendar.class == paramType, this.getLogger(),
                                 () -> {
-                                    verifyInput(!Ut.isDate(literal), paramType, literal);
+                                    this.verifyInput(!Ut.isDate(literal), paramType, literal);
                                     final Date reference = Ut.parse(literal);
                                     if (LocalTime.class == paramType) {
                                         return Ut.toTime(literal);

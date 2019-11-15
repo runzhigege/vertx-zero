@@ -21,6 +21,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.TemporalUnit;
 import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.*;
@@ -700,7 +701,21 @@ public final class Ut {
     }
 
     public static boolean isSubset(final JsonObject cond, final JsonObject record) {
-        return Jackson.isSubset(cond, record);
+        return Is.isSubset(cond, record);
+    }
+
+    public static boolean isChanged(final JsonObject oldRecord, final JsonObject newRecord,
+                                    final Set<String> ignores, final TemporalUnit unit) {
+        return Is.isChanged(oldRecord, newRecord, ignores, unit);
+    }
+
+    public static boolean isChanged(final JsonObject oldRecord, final JsonObject newRecord,
+                                    final Set<String> ignores) {
+        return Is.isChanged(oldRecord, newRecord, ignores, null);
+    }
+
+    public static boolean isChanged(final JsonObject oldRecord, final JsonObject newRecord) {
+        return Is.isChanged(oldRecord, newRecord, null, null);
     }
 
     public static boolean isJArray(final String literal) {
@@ -801,7 +816,11 @@ public final class Ut {
     }
 
     public static Object toJValue(final Object input) {
-        return Jackson.toJValue(input);
+        return Value.toJValue(input);
+    }
+
+    public static Object toValue(final Object input, final Class<?> type) {
+        return Value.toValue(input, type);
     }
 
     public static int toMonth(final String literal) {

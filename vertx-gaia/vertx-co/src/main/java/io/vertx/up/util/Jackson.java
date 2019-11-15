@@ -12,7 +12,10 @@ import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.Values;
 import io.vertx.up.fn.Fn;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Lookup the json tree data
@@ -190,38 +193,6 @@ final class Jackson {
     static <T> T deserialize(final String value, final TypeReference<T> type) {
         return Fn.getNull(null,
                 () -> Fn.getJvm(() -> Jackson.MAPPER.readValue(value, type)), value);
-    }
-
-    /*
-     * Whether record contains all the data in cond.
-     */
-    static boolean isSubset(final JsonObject cond, final JsonObject record) {
-        final Set<String> fields = cond.fieldNames();
-        final long counter = fields.stream()
-                /* record contains all cond */
-                .filter(record::containsKey)
-                .filter(field -> Compare.equal(record.getValue(field), cond.getValue(field)))
-                .count();
-        return fields.size() == counter;
-    }
-
-    /*
-     * Json valid value here
-     */
-    static Object toJValue(final Object input) {
-        if (Objects.isNull(input)) {
-            return null;
-        } else {
-            if (input instanceof Date) {
-                return ((Date) input).toInstant();
-            } else {
-                if ("null".equals(input)) {
-                    return null;
-                } else {
-                    return input;
-                }
-            }
-        }
     }
 
     static JsonObject flatMerge(final JsonObject target, final JsonObject source) {
