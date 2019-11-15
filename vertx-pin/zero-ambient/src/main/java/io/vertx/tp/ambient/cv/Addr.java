@@ -64,4 +64,11 @@ public interface Addr {
 
         String IDENTIFIERS = Prefix._EVENT + "X-IDENTIFIER/LIST";
     }
+
+    interface History {
+
+        String HISTORIES = Prefix._EVENT + "X-ACTIVITY/HISTORIES";
+
+        String HISTORY_ITEMS = Prefix._EVENT + "X-ACTIVITY/HISTORY-ITEMS";
+    }
 }
