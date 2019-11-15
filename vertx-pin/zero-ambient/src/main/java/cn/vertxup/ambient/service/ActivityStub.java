@@ -15,10 +15,23 @@ public interface ActivityStub {
     Future<JsonObject> fetchActivity(String id);
 
     /*
+     * Activities fetching from the system by
+     * 1) model identifier
+     * 2) model key: primary key for record
+     */
+    Future<JsonArray> fetchActivities(String identifier, String key);
+
+    /*
      * Activity Update ( Confirm / Reject )
      * Here are some points that
      * 1) For `ActivityChange` record, update `PENDING` to `CONFIRMED`
      * 2) For `ActivityChange` record, keep `SYSTEM` status
      */
     Future<JsonArray> saveChanges(String id, ActivityStatus status);
+
+    /*
+     * Fetch activity changes by activity id here
+     * Returned changes of each
+     */
+    Future<JsonArray> fetchChanges(String activityId);
 }

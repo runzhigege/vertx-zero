@@ -17,13 +17,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActivityService implements ActivityStub {
+    /*
+     * Fetch activities from system here
+     * 1. modelId = identifier
+     * 2. modelKey = key
+     * The condition should be uniform here.
+     */
+    @Override
+    public Future<JsonArray> fetchActivities(final String identifier, final String key) {
+        final JsonObject filters = new JsonObject();
+        filters.put("modelId", identifier);
+        filters.put("modelKey", key);
+        return Ux.Jooq.on(XActivityDao.class)
+                .fetchAndAsync(filters)
+                .compose(Ux::fnJArray);
+    }
+
+    @Override
+    public Future<JsonArray> fetchChanges(final String activityId) {
+        return this.fetchChangeList(activityId)
+                .compose(Ux::fnJArray);
+    }
+
     @Override
     public Future<JsonObject> fetchActivity(final String id) {
         return Ux.Jooq.on(XActivityDao.class)
                 .<XActivity>findByIdAsync(id)
-                .compose(Ut.applyNil(JsonObject::new, (activity) -> Ux.Jooq.on(XActivityChangeDao.class)
-                        .<XActivityChange>fetchAsync(ACTIVITY_ID, activity.getKey())
-                        .compose(Ux::fnJArray)
+                .compose(Ut.applyNil(JsonObject::new, (activity) -> this.fetchChanges(activity.getKey())
                         .compose(changes -> {
                             final JsonObject activityJson = Ux.toJson(activity);
                             /*
@@ -36,10 +56,13 @@ public class ActivityService implements ActivityStub {
                         })));
     }
 
+    private Future<List<XActivityChange>> fetchChangeList(final String activityId) {
+        return Ux.Jooq.on(XActivityChangeDao.class).<XActivityChange>fetchAsync(ACTIVITY_ID, activityId);
+    }
+
     @Override
     public Future<JsonArray> saveChanges(final String id, final ActivityStatus status) {
-        return Ux.Jooq.on(XActivityChangeDao.class)
-                .<XActivityChange>fetchAsync(ACTIVITY_ID, id)
+        return this.fetchChangeList(id)
                 .compose(changes -> {
                     /*
                      * Iterate `ActivityChanges`
