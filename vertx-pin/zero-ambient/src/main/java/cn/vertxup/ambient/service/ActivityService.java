@@ -30,7 +30,14 @@ public class ActivityService implements ActivityStub {
         filters.put("modelKey", key);
         return Ux.Jooq.on(XActivityDao.class)
                 .fetchAndAsync(filters)
-                .compose(Ux::fnJArray);
+                .compose(Ux::fnJArray)
+                .compose(response -> {
+                    Ut.itJArray(response).forEach(each -> {
+                        Ke.metadata(each, "recordNew");
+                        Ke.metadata(each, "recordOld");
+                    });
+                    return Ux.future(response);
+                });
     }
 
     @Override
