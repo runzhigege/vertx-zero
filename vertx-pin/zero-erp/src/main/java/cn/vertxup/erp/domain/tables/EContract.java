@@ -36,7 +36,7 @@ public class EContract extends TableImpl<EContractRecord> {
      * The reference instance of <code>DB_ETERNAL.E_CONTRACT</code>
      */
     public static final EContract E_CONTRACT = new EContract();
-    private static final long serialVersionUID = 379101181;
+    private static final long serialVersionUID = 820483464;
     /**
      * The column <code>DB_ETERNAL.E_CONTRACT.KEY</code>. 「key」- 合同主键
      */
@@ -85,10 +85,6 @@ public class EContract extends TableImpl<EContractRecord> {
      * The column <code>DB_ETERNAL.E_CONTRACT.RUN_UP_AT</code>. 「runUpAt」- 挂账到期时间
      */
     public final TableField<EContractRecord, LocalDateTime> RUN_UP_AT = createField("RUN_UP_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「runUpAt」- 挂账到期时间");
-    /**
-     * The column <code>DB_ETERNAL.E_CONTRACT.RUN_UP</code>. 「runUp」- 允许挂账
-     */
-    public final TableField<EContractRecord, Boolean> RUN_UP = createField("RUN_UP", org.jooq.impl.SQLDataType.BIT, this, "「runUp」- 允许挂账");
     /**
      * The column <code>DB_ETERNAL.E_CONTRACT.A_NAME</code>. 「aName」- 甲方签订人
      */

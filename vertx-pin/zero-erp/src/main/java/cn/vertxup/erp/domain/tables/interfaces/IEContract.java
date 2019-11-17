@@ -145,16 +145,6 @@ public interface IEContract extends Serializable {
     public LocalDateTime getRunUpAt();
 
     /**
-     * Setter for <code>DB_ETERNAL.E_CONTRACT.RUN_UP</code>. 「runUp」- 允许挂账
-     */
-    public IEContract setRunUp(Boolean value);
-
-    /**
-     * Getter for <code>DB_ETERNAL.E_CONTRACT.RUN_UP</code>. 「runUp」- 允许挂账
-     */
-    public Boolean getRunUp();
-
-    /**
      * Setter for <code>DB_ETERNAL.E_CONTRACT.A_NAME</code>. 「aName」- 甲方签订人
      */
     public IEContract setAName(String value);
@@ -331,7 +321,6 @@ public interface IEContract extends Serializable {
         // Omitting unrecognized type java.time.LocalDateTime for column SIGNED_AT!
         // Omitting unrecognized type java.time.LocalDateTime for column RUN_AT!
         // Omitting unrecognized type java.time.LocalDateTime for column RUN_UP_AT!
-        setRunUp(json.getBoolean("RUN_UP"));
         setAName(json.getString("A_NAME"));
         setAPhone(json.getString("A_PHONE"));
         setAAddress(json.getString("A_ADDRESS"));
@@ -365,7 +354,6 @@ public interface IEContract extends Serializable {
         // Omitting unrecognized type java.time.LocalDateTime for column SIGNED_AT!
         // Omitting unrecognized type java.time.LocalDateTime for column RUN_AT!
         // Omitting unrecognized type java.time.LocalDateTime for column RUN_UP_AT!
-        json.put("RUN_UP",getRunUp());
         json.put("A_NAME",getAName());
         json.put("A_PHONE",getAPhone());
         json.put("A_ADDRESS",getAAddress());

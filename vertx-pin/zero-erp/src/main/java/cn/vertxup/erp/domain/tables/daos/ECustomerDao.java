@@ -182,6 +182,13 @@ public class ECustomerDao extends DAOImpl<ECustomerRecord, cn.vertxup.erp.domain
     }
 
     /**
+     * Fetch records that have <code>RUN_UP IN (values)</code>
+     */
+    public List<cn.vertxup.erp.domain.tables.pojos.ECustomer> fetchByRunUp(Boolean... values) {
+        return fetch(ECustomer.E_CUSTOMER.RUN_UP, values);
+    }
+
+    /**
      * Fetch records that have <code>TYPE IN (values)</code>
      */
     public List<cn.vertxup.erp.domain.tables.pojos.ECustomer> fetchByType(String... values) {
@@ -368,6 +375,13 @@ public class ECustomerDao extends DAOImpl<ECustomerRecord, cn.vertxup.erp.domain
      */
     public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.ECustomer>> fetchByAddressAsync(List<String> values) {
         return fetchAsync(ECustomer.E_CUSTOMER.ADDRESS,values);
+    }
+
+    /**
+     * Fetch records that have <code>RUN_UP IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.ECustomer>> fetchByRunUpAsync(List<Boolean> values) {
+        return fetchAsync(ECustomer.E_CUSTOMER.RUN_UP,values);
     }
 
     /**

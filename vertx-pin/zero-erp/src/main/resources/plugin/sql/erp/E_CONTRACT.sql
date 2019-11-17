@@ -27,8 +27,10 @@ CREATE TABLE `E_CONTRACT`
     `SIGNED_AT`   DATETIME COMMENT '「signedAt」- 签订时间',
     `RUN_AT`      DATETIME COMMENT '「runAt」- 生效时间',
 
+    /*
+     * 合同中的特殊属性
+     */
     `RUN_UP_AT`   DATETIME COMMENT '「runUpAt」- 挂账到期时间',
-    `RUN_UP`      BIT         DEFAULT NULL COMMENT '「runUp」- 允许挂账',
 
     -- 甲乙方信息
     `A_NAME`      VARCHAR(255) COMMENT '「aName」- 甲方签订人',

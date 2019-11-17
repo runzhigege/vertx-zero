@@ -37,6 +37,11 @@ CREATE TABLE `E_CUSTOMER`
     `PHONE`          VARCHAR(20) COMMENT '「phone」- 客户座机',
     `ADDRESS`        TEXT COMMENT '「address」- 客户地址',
 
+    /*
+     * 属性处理
+     */
+    `RUN_UP`         BIT         DEFAULT NULL COMMENT '「runUp」- 挂账属性',
+
     -- 特殊字段
     `TYPE`           VARCHAR(36) COMMENT '「type」- 客户分类（不同类型代表不同客户）',
     `METADATA`       TEXT COMMENT '「metadata」- 附加配置',
