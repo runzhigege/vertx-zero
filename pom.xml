@@ -62,8 +62,8 @@
         <vertx.version>3.8.0</vertx.version>
         <stack.version>3.8.0</stack.version>
 
-        <jackson.version>2.9.9</jackson.version>
-        <jackson.databind.version>2.9.9.1</jackson.databind.version>
+        <jackson.version>2.9.10</jackson.version>
+        <jackson.databind.version>2.9.10.1</jackson.databind.version>
         <jws.version>2.1.1</jws.version>
         <jersey.version>2.29.1</jersey.version>
         <javax.el.version>3.0.1-b06</javax.el.version>
