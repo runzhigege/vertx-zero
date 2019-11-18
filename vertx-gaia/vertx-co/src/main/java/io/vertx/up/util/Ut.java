@@ -714,8 +714,13 @@ public final class Ut {
         return Is.isChanged(oldRecord, newRecord, ignores, null);
     }
 
-    public static boolean isChanged(final JsonObject oldRecord, final JsonObject newRecord) {
-        return Is.isChanged(oldRecord, newRecord, null, null);
+    public static boolean isSame(final Object oldValue, final Object newValue,
+                                 final TemporalUnit unit) {
+        return Is.isSame(oldValue, newValue, unit);
+    }
+
+    public static boolean isSame(final Object oldValue, final Object newValue) {
+        return Is.isSame(oldValue, newValue, null);
     }
 
     public static boolean isJArray(final String literal) {
