@@ -47,54 +47,60 @@ class Is {
              */
             final Object oldValue = oldCopy.getValue(field);
             final Object newValue = newCopy.getValue(field);
-            if (Objects.isNull(oldValue) && Objects.isNull(newValue)) {
+            return isSame(oldValue, newValue, unit);
+        });
+        return !unchanged;
+    }
+
+    static boolean isSame(final Object oldValue, final Object newValue,
+                          final TemporalUnit unit) {
+
+        if (Objects.isNull(oldValue) && Objects.isNull(newValue)) {
+            /*
+             * ( Unchanged ) When `new` and `old` are both null
+             */
+            return true;
+        } else if (Objects.nonNull(oldValue) && Objects.nonNull(newValue)) {
+            if (Types.isDate(oldValue)) {
                 /*
-                 * ( Unchanged ) When `new` and `old` are both null
+                 * For `Date` type of `Instant`, there provide comparing method
+                 * for different unit kind fo comparing.
+                 * 1) Convert to instant first
+                 * 2) When `unit` is null, do not comparing other kind of here.
                  */
-                return true;
-            } else if (Objects.nonNull(oldValue) && Objects.nonNull(newValue)) {
-                if (Types.isDate(oldValue)) {
+                Instant oldDate = Period.parseFull(oldValue.toString())
+                        .toInstant();
+                Instant newDate = Period.parseFull(newValue.toString())
+                        .toInstant();
+                if (Objects.nonNull(oldDate) && Objects.nonNull(newDate)) {
                     /*
-                     * For `Date` type of `Instant`, there provide comparing method
-                     * for different unit kind fo comparing.
-                     * 1) Convert to instant first
-                     * 2) When `unit` is null, do not comparing other kind of here.
+                     * Unit convert here when input `unit` here
                      */
-                    Instant oldDate = Period.parseFull(oldValue.toString())
-                            .toInstant();
-                    Instant newDate = Period.parseFull(newValue.toString())
-                            .toInstant();
-                    if (Objects.nonNull(oldDate) && Objects.nonNull(newDate)) {
-                        /*
-                         * Unit convert here when input `unit` here
-                         */
-                        if (Objects.nonNull(unit)) {
-                            newDate = newDate.truncatedTo(unit);
-                            oldDate = oldDate.truncatedTo(unit);
-                        }
-                        return oldDate.equals(newDate);
-                    } else {
-                        /*
-                         * When the value could not be converted to `Instant`
-                         * They are compared with `equals` instead.
-                         */
-                        return oldValue.equals(newValue);
+                    if (Objects.nonNull(unit)) {
+                        newDate = newDate.truncatedTo(unit);
+                        oldDate = oldDate.truncatedTo(unit);
                     }
+                    return oldDate.equals(newDate);
                 } else {
                     /*
-                     * Non date type value here
-                     * Compare with `equals`
+                     * When the value could not be converted to `Instant`
+                     * They are compared with `equals` instead.
                      */
                     return oldValue.equals(newValue);
                 }
             } else {
                 /*
-                 * ( Changed ) One is null, another one is not null
-                 * They are false
+                 * Non date type value here
+                 * Compare with `equals`
                  */
-                return false;
+                return oldValue.equals(newValue);
             }
-        });
-        return !unchanged;
+        } else {
+            /*
+             * ( Changed ) One is null, another one is not null
+             * They are false
+             */
+            return false;
+        }
     }
 }
