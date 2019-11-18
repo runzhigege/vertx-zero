@@ -148,13 +148,6 @@ public class EContractDao extends DAOImpl<EContractRecord, cn.vertxup.erp.domain
     }
 
     /**
-     * Fetch records that have <code>RUN_UP IN (values)</code>
-     */
-    public List<cn.vertxup.erp.domain.tables.pojos.EContract> fetchByRunUp(Boolean... values) {
-        return fetch(EContract.E_CONTRACT.RUN_UP, values);
-    }
-
-    /**
      * Fetch records that have <code>A_NAME IN (values)</code>
      */
     public List<cn.vertxup.erp.domain.tables.pojos.EContract> fetchByAName(String... values) {
@@ -348,13 +341,6 @@ public class EContractDao extends DAOImpl<EContractRecord, cn.vertxup.erp.domain
      */
     public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EContract>> fetchByRunUpAtAsync(List<LocalDateTime> values) {
         return fetchAsync(EContract.E_CONTRACT.RUN_UP_AT,values);
-    }
-
-    /**
-     * Fetch records that have <code>RUN_UP IN (values)</code> asynchronously
-     */
-    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.EContract>> fetchByRunUpAsync(List<Boolean> values) {
-        return fetchAsync(EContract.E_CONTRACT.RUN_UP,values);
     }
 
     /**

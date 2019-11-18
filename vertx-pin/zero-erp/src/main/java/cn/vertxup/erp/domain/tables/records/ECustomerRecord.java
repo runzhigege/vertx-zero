@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implements IECustomer {
 
-    private static final long serialVersionUID = 94167969;
+    private static final long serialVersionUID = 1059819432;
 
     /**
      * Setter for <code>DB_ETERNAL.E_CUSTOMER.KEY</code>. 「key」- 客户ID
@@ -320,11 +320,28 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
     }
 
     /**
+     * Setter for <code>DB_ETERNAL.E_CUSTOMER.RUN_UP</code>. 「runUp」- 挂账属性
+     */
+    @Override
+    public ECustomerRecord setRunUp(Boolean value) {
+        set(17, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.E_CUSTOMER.RUN_UP</code>. 「runUp」- 挂账属性
+     */
+    @Override
+    public Boolean getRunUp() {
+        return (Boolean) get(17);
+    }
+
+    /**
      * Setter for <code>DB_ETERNAL.E_CUSTOMER.TYPE</code>. 「type」- 客户分类（不同类型代表不同客户）
      */
     @Override
     public ECustomerRecord setType(String value) {
-        set(17, value);
+        set(18, value);
         return this;
     }
 
@@ -333,7 +350,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public String getType() {
-        return (String) get(17);
+        return (String) get(18);
     }
 
     /**
@@ -341,7 +358,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public ECustomerRecord setMetadata(String value) {
-        set(18, value);
+        set(19, value);
         return this;
     }
 
@@ -350,7 +367,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public String getMetadata() {
-        return (String) get(18);
+        return (String) get(19);
     }
 
     /**
@@ -358,7 +375,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public ECustomerRecord setActive(Boolean value) {
-        set(19, value);
+        set(20, value);
         return this;
     }
 
@@ -367,7 +384,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public Boolean getActive() {
-        return (Boolean) get(19);
+        return (Boolean) get(20);
     }
 
     /**
@@ -375,7 +392,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public ECustomerRecord setSigma(String value) {
-        set(20, value);
+        set(21, value);
         return this;
     }
 
@@ -384,7 +401,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public String getSigma() {
-        return (String) get(20);
+        return (String) get(21);
     }
 
     /**
@@ -392,7 +409,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public ECustomerRecord setLanguage(String value) {
-        set(21, value);
+        set(22, value);
         return this;
     }
 
@@ -401,7 +418,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public String getLanguage() {
-        return (String) get(21);
+        return (String) get(22);
     }
 
     /**
@@ -409,7 +426,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public ECustomerRecord setCreatedAt(LocalDateTime value) {
-        set(22, value);
+        set(23, value);
         return this;
     }
 
@@ -418,7 +435,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(22);
+        return (LocalDateTime) get(23);
     }
 
     /**
@@ -426,7 +443,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public ECustomerRecord setCreatedBy(String value) {
-        set(23, value);
+        set(24, value);
         return this;
     }
 
@@ -435,7 +452,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public String getCreatedBy() {
-        return (String) get(23);
+        return (String) get(24);
     }
 
     /**
@@ -443,7 +460,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public ECustomerRecord setUpdatedAt(LocalDateTime value) {
-        set(24, value);
+        set(25, value);
         return this;
     }
 
@@ -452,7 +469,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public LocalDateTime getUpdatedAt() {
-        return (LocalDateTime) get(24);
+        return (LocalDateTime) get(25);
     }
 
     /**
@@ -460,7 +477,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public ECustomerRecord setUpdatedBy(String value) {
-        set(25, value);
+        set(26, value);
         return this;
     }
 
@@ -469,7 +486,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
      */
     @Override
     public String getUpdatedBy() {
-        return (String) get(25);
+        return (String) get(26);
     }
 
     // -------------------------------------------------------------------------
@@ -510,6 +527,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
         setLogo(from.getLogo());
         setPhone(from.getPhone());
         setAddress(from.getAddress());
+        setRunUp(from.getRunUp());
         setType(from.getType());
         setMetadata(from.getMetadata());
         setActive(from.getActive());
@@ -544,7 +562,7 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
     /**
      * Create a detached, initialised ECustomerRecord
      */
-    public ECustomerRecord(String key, String comment, String name, String title, String code, String taxCode, String taxTitle, String contactName, String contactPhone, String contactEmail, String contactOnline, String email, String fax, String homepage, String logo, String phone, String address, String type, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public ECustomerRecord(String key, String comment, String name, String title, String code, String taxCode, String taxTitle, String contactName, String contactPhone, String contactEmail, String contactOnline, String email, String fax, String homepage, String logo, String phone, String address, Boolean runUp, String type, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(ECustomer.E_CUSTOMER);
 
         set(0, key);
@@ -564,14 +582,15 @@ public class ECustomerRecord extends UpdatableRecordImpl<ECustomerRecord> implem
         set(14, logo);
         set(15, phone);
         set(16, address);
-        set(17, type);
-        set(18, metadata);
-        set(19, active);
-        set(20, sigma);
-        set(21, language);
-        set(22, createdAt);
-        set(23, createdBy);
-        set(24, updatedAt);
-        set(25, updatedBy);
+        set(17, runUp);
+        set(18, type);
+        set(19, metadata);
+        set(20, active);
+        set(21, sigma);
+        set(22, language);
+        set(23, createdAt);
+        set(24, createdBy);
+        set(25, updatedAt);
+        set(26, updatedBy);
     }
 }

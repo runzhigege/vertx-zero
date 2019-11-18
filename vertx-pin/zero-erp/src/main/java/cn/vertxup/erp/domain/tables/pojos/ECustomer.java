@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ECustomer implements IECustomer {
 
-    private static final long serialVersionUID = 1239120086;
+    private static final long serialVersionUID = 1703338377;
 
     private String        key;
     private String        comment;
@@ -43,6 +43,7 @@ public class ECustomer implements IECustomer {
     private String        logo;
     private String        phone;
     private String        address;
+    private Boolean       runUp;
     private String        type;
     private String        metadata;
     private Boolean       active;
@@ -73,6 +74,7 @@ public class ECustomer implements IECustomer {
         this.logo = value.logo;
         this.phone = value.phone;
         this.address = value.address;
+        this.runUp = value.runUp;
         this.type = value.type;
         this.metadata = value.metadata;
         this.active = value.active;
@@ -102,6 +104,7 @@ public class ECustomer implements IECustomer {
         String        logo,
         String        phone,
         String        address,
+        Boolean       runUp,
         String        type,
         String        metadata,
         Boolean       active,
@@ -129,6 +132,7 @@ public class ECustomer implements IECustomer {
         this.logo = logo;
         this.phone = phone;
         this.address = address;
+        this.runUp = runUp;
         this.type = type;
         this.metadata = metadata;
         this.active = active;
@@ -328,6 +332,17 @@ public class ECustomer implements IECustomer {
     }
 
     @Override
+    public Boolean getRunUp() {
+        return this.runUp;
+    }
+
+    @Override
+    public ECustomer setRunUp(Boolean runUp) {
+        this.runUp = runUp;
+        return this;
+    }
+
+    @Override
     public String getType() {
         return this.type;
     }
@@ -447,6 +462,7 @@ public class ECustomer implements IECustomer {
         sb.append(", ").append(logo);
         sb.append(", ").append(phone);
         sb.append(", ").append(address);
+        sb.append(", ").append(runUp);
         sb.append(", ").append(type);
         sb.append(", ").append(metadata);
         sb.append(", ").append(active);
@@ -487,6 +503,7 @@ public class ECustomer implements IECustomer {
         setLogo(from.getLogo());
         setPhone(from.getPhone());
         setAddress(from.getAddress());
+        setRunUp(from.getRunUp());
         setType(from.getType());
         setMetadata(from.getMetadata());
         setActive(from.getActive());

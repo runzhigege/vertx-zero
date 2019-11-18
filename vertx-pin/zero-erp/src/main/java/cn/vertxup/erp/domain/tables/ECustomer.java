@@ -35,7 +35,7 @@ public class ECustomer extends TableImpl<ECustomerRecord> {
      * The reference instance of <code>DB_ETERNAL.E_CUSTOMER</code>
      */
     public static final ECustomer E_CUSTOMER = new ECustomer();
-    private static final long serialVersionUID = -444697706;
+    private static final long serialVersionUID = -1220817013;
     /**
      * The column <code>DB_ETERNAL.E_CUSTOMER.KEY</code>. 「key」- 客户ID
      */
@@ -104,6 +104,10 @@ public class ECustomer extends TableImpl<ECustomerRecord> {
      * The column <code>DB_ETERNAL.E_CUSTOMER.ADDRESS</code>. 「address」- 客户地址
      */
     public final TableField<ECustomerRecord, String> ADDRESS = createField("ADDRESS", org.jooq.impl.SQLDataType.CLOB, this, "「address」- 客户地址");
+    /**
+     * The column <code>DB_ETERNAL.E_CUSTOMER.RUN_UP</code>. 「runUp」- 挂账属性
+     */
+    public final TableField<ECustomerRecord, Boolean> RUN_UP = createField("RUN_UP", org.jooq.impl.SQLDataType.BIT, this, "「runUp」- 挂账属性");
     /**
      * The column <code>DB_ETERNAL.E_CUSTOMER.TYPE</code>. 「type」- 客户分类（不同类型代表不同客户）
      */

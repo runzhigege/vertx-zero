@@ -29,7 +29,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implements IEContract {
 
-    private static final long serialVersionUID = -820209867;
+    private static final long serialVersionUID = 642112447;
 
     /**
      * Setter for <code>DB_ETERNAL.E_CONTRACT.KEY</code>. 「key」- 合同主键
@@ -236,28 +236,11 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
     }
 
     /**
-     * Setter for <code>DB_ETERNAL.E_CONTRACT.RUN_UP</code>. 「runUp」- 允许挂账
-     */
-    @Override
-    public EContractRecord setRunUp(Boolean value) {
-        set(12, value);
-        return this;
-    }
-
-    /**
-     * Getter for <code>DB_ETERNAL.E_CONTRACT.RUN_UP</code>. 「runUp」- 允许挂账
-     */
-    @Override
-    public Boolean getRunUp() {
-        return (Boolean) get(12);
-    }
-
-    /**
      * Setter for <code>DB_ETERNAL.E_CONTRACT.A_NAME</code>. 「aName」- 甲方签订人
      */
     @Override
     public EContractRecord setAName(String value) {
-        set(13, value);
+        set(12, value);
         return this;
     }
 
@@ -266,7 +249,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public String getAName() {
-        return (String) get(13);
+        return (String) get(12);
     }
 
     /**
@@ -274,7 +257,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public EContractRecord setAPhone(String value) {
-        set(14, value);
+        set(13, value);
         return this;
     }
 
@@ -283,7 +266,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public String getAPhone() {
-        return (String) get(14);
+        return (String) get(13);
     }
 
     /**
@@ -291,7 +274,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public EContractRecord setAAddress(String value) {
-        set(15, value);
+        set(14, value);
         return this;
     }
 
@@ -300,7 +283,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public String getAAddress() {
-        return (String) get(15);
+        return (String) get(14);
     }
 
     /**
@@ -308,7 +291,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public EContractRecord setBName(String value) {
-        set(16, value);
+        set(15, value);
         return this;
     }
 
@@ -317,7 +300,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public String getBName() {
-        return (String) get(16);
+        return (String) get(15);
     }
 
     /**
@@ -325,7 +308,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public EContractRecord setBPhone(String value) {
-        set(17, value);
+        set(16, value);
         return this;
     }
 
@@ -334,7 +317,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public String getBPhone() {
-        return (String) get(17);
+        return (String) get(16);
     }
 
     /**
@@ -342,7 +325,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public EContractRecord setBAddress(String value) {
-        set(18, value);
+        set(17, value);
         return this;
     }
 
@@ -351,7 +334,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public String getBAddress() {
-        return (String) get(18);
+        return (String) get(17);
     }
 
     /**
@@ -359,7 +342,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public EContractRecord setType(String value) {
-        set(19, value);
+        set(18, value);
         return this;
     }
 
@@ -368,7 +351,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public String getType() {
-        return (String) get(19);
+        return (String) get(18);
     }
 
     /**
@@ -376,7 +359,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public EContractRecord setMetadata(String value) {
-        set(20, value);
+        set(19, value);
         return this;
     }
 
@@ -385,7 +368,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public String getMetadata() {
-        return (String) get(20);
+        return (String) get(19);
     }
 
     /**
@@ -393,7 +376,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public EContractRecord setActive(Boolean value) {
-        set(21, value);
+        set(20, value);
         return this;
     }
 
@@ -402,7 +385,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public Boolean getActive() {
-        return (Boolean) get(21);
+        return (Boolean) get(20);
     }
 
     /**
@@ -410,7 +393,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public EContractRecord setSigma(String value) {
-        set(22, value);
+        set(21, value);
         return this;
     }
 
@@ -419,7 +402,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public String getSigma() {
-        return (String) get(22);
+        return (String) get(21);
     }
 
     /**
@@ -427,7 +410,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public EContractRecord setLanguage(String value) {
-        set(23, value);
+        set(22, value);
         return this;
     }
 
@@ -436,7 +419,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public String getLanguage() {
-        return (String) get(23);
+        return (String) get(22);
     }
 
     /**
@@ -444,7 +427,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public EContractRecord setCreatedAt(LocalDateTime value) {
-        set(24, value);
+        set(23, value);
         return this;
     }
 
@@ -453,7 +436,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(24);
+        return (LocalDateTime) get(23);
     }
 
     /**
@@ -461,7 +444,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public EContractRecord setCreatedBy(String value) {
-        set(25, value);
+        set(24, value);
         return this;
     }
 
@@ -470,7 +453,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public String getCreatedBy() {
-        return (String) get(25);
+        return (String) get(24);
     }
 
     /**
@@ -478,7 +461,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public EContractRecord setUpdatedAt(LocalDateTime value) {
-        set(26, value);
+        set(25, value);
         return this;
     }
 
@@ -487,7 +470,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public LocalDateTime getUpdatedAt() {
-        return (LocalDateTime) get(26);
+        return (LocalDateTime) get(25);
     }
 
     /**
@@ -495,7 +478,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public EContractRecord setUpdatedBy(String value) {
-        set(27, value);
+        set(26, value);
         return this;
     }
 
@@ -504,7 +487,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
      */
     @Override
     public String getUpdatedBy() {
-        return (String) get(27);
+        return (String) get(26);
     }
 
     // -------------------------------------------------------------------------
@@ -540,7 +523,6 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
         setSignedAt(from.getSignedAt());
         setRunAt(from.getRunAt());
         setRunUpAt(from.getRunUpAt());
-        setRunUp(from.getRunUp());
         setAName(from.getAName());
         setAPhone(from.getAPhone());
         setAAddress(from.getAAddress());
@@ -581,7 +563,7 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
     /**
      * Create a detached, initialised EContractRecord
      */
-    public EContractRecord(String key, String name, String code, String title, String fileKey, BigDecimal amount, String companyId, String customerId, LocalDateTime expiredAt, LocalDateTime signedAt, LocalDateTime runAt, LocalDateTime runUpAt, Boolean runUp, String aName, String aPhone, String aAddress, String bName, String bPhone, String bAddress, String type, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public EContractRecord(String key, String name, String code, String title, String fileKey, BigDecimal amount, String companyId, String customerId, LocalDateTime expiredAt, LocalDateTime signedAt, LocalDateTime runAt, LocalDateTime runUpAt, String aName, String aPhone, String aAddress, String bName, String bPhone, String bAddress, String type, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(EContract.E_CONTRACT);
 
         set(0, key);
@@ -596,21 +578,20 @@ public class EContractRecord extends UpdatableRecordImpl<EContractRecord> implem
         set(9, signedAt);
         set(10, runAt);
         set(11, runUpAt);
-        set(12, runUp);
-        set(13, aName);
-        set(14, aPhone);
-        set(15, aAddress);
-        set(16, bName);
-        set(17, bPhone);
-        set(18, bAddress);
-        set(19, type);
-        set(20, metadata);
-        set(21, active);
-        set(22, sigma);
-        set(23, language);
-        set(24, createdAt);
-        set(25, createdBy);
-        set(26, updatedAt);
-        set(27, updatedBy);
+        set(12, aName);
+        set(13, aPhone);
+        set(14, aAddress);
+        set(15, bName);
+        set(16, bPhone);
+        set(17, bAddress);
+        set(18, type);
+        set(19, metadata);
+        set(20, active);
+        set(21, sigma);
+        set(22, language);
+        set(23, createdAt);
+        set(24, createdBy);
+        set(25, updatedAt);
+        set(26, updatedBy);
     }
 }
