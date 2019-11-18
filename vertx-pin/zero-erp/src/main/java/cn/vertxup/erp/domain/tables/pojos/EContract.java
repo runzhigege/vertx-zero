@@ -25,7 +25,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class EContract implements IEContract {
 
-    private static final long serialVersionUID = 517454956;
+    private static final long serialVersionUID = 2111786849;
 
     private String        key;
     private String        name;
@@ -39,7 +39,6 @@ public class EContract implements IEContract {
     private LocalDateTime signedAt;
     private LocalDateTime runAt;
     private LocalDateTime runUpAt;
-    private Boolean       runUp;
     private String        aName;
     private String        aPhone;
     private String        aAddress;
@@ -71,7 +70,6 @@ public class EContract implements IEContract {
         this.signedAt = value.signedAt;
         this.runAt = value.runAt;
         this.runUpAt = value.runUpAt;
-        this.runUp = value.runUp;
         this.aName = value.aName;
         this.aPhone = value.aPhone;
         this.aAddress = value.aAddress;
@@ -102,7 +100,6 @@ public class EContract implements IEContract {
         LocalDateTime signedAt,
         LocalDateTime runAt,
         LocalDateTime runUpAt,
-        Boolean       runUp,
         String        aName,
         String        aPhone,
         String        aAddress,
@@ -131,7 +128,6 @@ public class EContract implements IEContract {
         this.signedAt = signedAt;
         this.runAt = runAt;
         this.runUpAt = runUpAt;
-        this.runUp = runUp;
         this.aName = aName;
         this.aPhone = aPhone;
         this.aAddress = aAddress;
@@ -278,17 +274,6 @@ public class EContract implements IEContract {
     @Override
     public EContract setRunUpAt(LocalDateTime runUpAt) {
         this.runUpAt = runUpAt;
-        return this;
-    }
-
-    @Override
-    public Boolean getRunUp() {
-        return this.runUp;
-    }
-
-    @Override
-    public EContract setRunUp(Boolean runUp) {
-        this.runUp = runUp;
         return this;
     }
 
@@ -473,7 +458,6 @@ public class EContract implements IEContract {
         sb.append(", ").append(signedAt);
         sb.append(", ").append(runAt);
         sb.append(", ").append(runUpAt);
-        sb.append(", ").append(runUp);
         sb.append(", ").append(aName);
         sb.append(", ").append(aPhone);
         sb.append(", ").append(aAddress);
@@ -515,7 +499,6 @@ public class EContract implements IEContract {
         setSignedAt(from.getSignedAt());
         setRunAt(from.getRunAt());
         setRunUpAt(from.getRunUpAt());
-        setRunUp(from.getRunUp());
         setAName(from.getAName());
         setAPhone(from.getAPhone());
         setAAddress(from.getAAddress());

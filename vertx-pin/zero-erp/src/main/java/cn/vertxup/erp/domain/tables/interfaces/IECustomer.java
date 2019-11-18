@@ -194,6 +194,16 @@ public interface IECustomer extends Serializable {
     public String getAddress();
 
     /**
+     * Setter for <code>DB_ETERNAL.E_CUSTOMER.RUN_UP</code>. 「runUp」- 挂账属性
+     */
+    public IECustomer setRunUp(Boolean value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.E_CUSTOMER.RUN_UP</code>. 「runUp」- 挂账属性
+     */
+    public Boolean getRunUp();
+
+    /**
      * Setter for <code>DB_ETERNAL.E_CUSTOMER.TYPE</code>. 「type」- 客户分类（不同类型代表不同客户）
      */
     public IECustomer setType(String value);
@@ -315,6 +325,7 @@ public interface IECustomer extends Serializable {
         setLogo(json.getString("LOGO"));
         setPhone(json.getString("PHONE"));
         setAddress(json.getString("ADDRESS"));
+        setRunUp(json.getBoolean("RUN_UP"));
         setType(json.getString("TYPE"));
         setMetadata(json.getString("METADATA"));
         setActive(json.getBoolean("ACTIVE"));
@@ -347,6 +358,7 @@ public interface IECustomer extends Serializable {
         json.put("LOGO",getLogo());
         json.put("PHONE",getPhone());
         json.put("ADDRESS",getAddress());
+        json.put("RUN_UP",getRunUp());
         json.put("TYPE",getType());
         json.put("METADATA",getMetadata());
         json.put("ACTIVE",getActive());
