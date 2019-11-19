@@ -6,10 +6,7 @@ import io.vertx.up.exception.heart.JexlExpressionException;
 import io.vertx.up.fn.Fn;
 import org.apache.commons.jexl3.*;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Supplier;
 
 /**
@@ -43,6 +40,17 @@ final class StringUtil {
             }
             return result;
         }, input, separator);
+    }
+
+    /*
+     * Object[] could not be cast to String[] directly
+     * It means here must contain below method to process it.
+     */
+    static String join(final Object[] input, final String separator) {
+        final Set<String> hashSet = new HashSet<>();
+        Arrays.stream(input).filter(Objects::nonNull)
+                .map(Object::toString).forEach(hashSet::add);
+        return join(hashSet, separator);
     }
 
     static String join(final Collection<String> input, final String separator) {

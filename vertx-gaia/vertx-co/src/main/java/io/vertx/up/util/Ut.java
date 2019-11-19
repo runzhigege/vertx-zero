@@ -1016,8 +1016,7 @@ public final class Ut {
     }
 
     public static String fromJoin(final Object[] input, final String separator) {
-        final String[] inputStr = (String[]) input;
-        return StringUtil.join(Arrays.asList(inputStr), separator);
+        return StringUtil.join(input, separator);
     }
 
     public static String fromAequilatus(final Integer seed, final Integer width, final char fill) {
