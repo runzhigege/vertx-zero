@@ -1,5 +1,6 @@
 package io.vertx.up.unity;
 
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.query.Criteria;
 import io.vertx.up.atom.query.Inquiry;
@@ -259,20 +260,28 @@ class JooqCond {
             final Function<String, String> fnTable) {
         Condition condition = null;
         for (final String field : filters.fieldNames()) {
-            final String key = JooqCond.getKey(field);
-            final String[] fields = field.split(",");
-            String targetField = field.split(",")[Values.IDX];
+            final Object value = filters.getValue(field);
+            final String key = JooqCond.getKey(field, value);
+            final String normalizedField;
+            if (!field.contains(",") && value instanceof JsonArray) {
+                /*
+                 * Fix issue of `field`: [] ( this kind of issue )
+                 */
+                normalizedField = field + ",i";
+            } else {
+                normalizedField = field;
+            }
+            final String[] fields = normalizedField.split(",");
+            String targetField = fields[Values.IDX];
             // TargetField re-do
             if (null != fnAnalyze) {
                 targetField = fnAnalyze.apply(targetField).getName();
             }
-            // Date, DateTime, Time
-            final Object value = filters.getValue(field);
             if (3 > fields.length) {
                 // Function
                 final BiFunction<String, Object, Condition> fun = JooqCond.OPS.get(key);
                 // JsonArray to List, fix vert.x and jooq connect issue.
-                /**if (Ut.isJArray(value)) {
+                /*if (Ut.isJArray(value)) {
                  value = ((JsonArray) value).getList().toArray();
                  }**/
                 final Condition item = fun.apply(JooqCond.applyField(targetField.trim(), fnTable), value);
@@ -294,8 +303,10 @@ class JooqCond {
         return condition;
     }
 
-    private static String getKey(final String field) {
-        if (!field.contains(",")) {
+    private static String getKey(final String field, final Object value) {
+        if (value instanceof JsonArray) {
+            return Inquiry.Op.IN;
+        } else if (!field.contains(",")) {
             return Inquiry.Op.EQ;
         } else {
             final String opStr = field.split(",")[Values.ONE];
