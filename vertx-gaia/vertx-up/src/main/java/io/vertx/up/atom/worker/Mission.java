@@ -34,8 +34,8 @@ import java.util.function.Supplier;
  */
 public class Mission implements Serializable {
     private static final Annal LOGGER = Annal.get(Mission.class);
-    /* Job status, default job is 'ready' */
-    private JobStatus status = JobStatus.READY;
+    /* Job status, default job is 'starting' */
+    private JobStatus status = JobStatus.STARTING;
     /* Job name */
     private String name;
     /* Job type */

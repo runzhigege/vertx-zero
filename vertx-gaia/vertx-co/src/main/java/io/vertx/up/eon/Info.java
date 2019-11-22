@@ -50,7 +50,9 @@ public interface Info {
 
     String JOB_CONFIG = "[ Job ] Job configuration read : {0}";
 
-    String JOB_READY = "[ Job: {0} ] The status has been ready: STARTING -> READY";
+    String JOB_MOVED = "[ Job ] {0} The status has been moved: {1} -> {2}";
+
+    String JOB_TERMINAL = "[ Job ] {0} The job will be terminal, status -> ERROR";
 
     String JOB_COMPONENT_SELECTED = "[ Job ] {0} selected: {1}";
 

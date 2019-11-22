@@ -38,11 +38,11 @@ public class Jt {
     }
 
     public static String jobName(final IJob job) {
-        return job.getNamespace() + Strings.DOLLER + Strings.DOLLER + job.getName();
+        return job.getNamespace() + Strings.DASH + job.getName();
     }
 
     public static String jobCode(final IJob job) {
-        return job.getNamespace() + Strings.DOLLER + Strings.DOLLER + job.getCode();
+        return job.getNamespace() + Strings.DASH + job.getCode();
     }
 
     /*
