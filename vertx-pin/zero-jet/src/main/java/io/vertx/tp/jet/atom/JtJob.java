@@ -75,7 +75,7 @@ public class JtJob extends JtCommercial {
          * The job unique identifier: namespace + name
          * The splitted character is `$$`
          */
-        mission.setName(this.job.getName());
+        mission.setName(Jt.jobName(this.job));
         mission.setType(Ut.toEnum(this.job::getType, JobType.class, JobType.ONCE));
         mission.setCode(Jt.jobCode(this.job));
         /*

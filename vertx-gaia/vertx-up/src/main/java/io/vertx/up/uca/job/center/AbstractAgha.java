@@ -19,6 +19,8 @@ import io.vertx.up.uca.job.timer.Interval;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -26,7 +28,44 @@ public abstract class AbstractAgha implements Agha {
 
     private static final JobConfig CONFIG = JobPin.getConfig();
     private static final AtomicBoolean SELECTED = new AtomicBoolean(Boolean.TRUE);
+    /*
+     * STARTING ------|
+     *                v
+     *     |------> READY <-------------------|
+     *     |          |                       |
+     *     |          |                    <resume>
+     *     |          |                       |
+     *     |        <start>                   |
+     *     |          |                       |
+     *     |          V                       |
+     *     |        RUNNING --- <stop> ---> STOPPED
+     *     |          |
+     *     |          |
+     *  <resume>   ( error )
+     *     |          |
+     *     |          |
+     *     |          v
+     *     |------- ERROR
+     *
+     */
+    private static final ConcurrentMap<JobStatus, JobStatus> MOVING = new ConcurrentHashMap<JobStatus, JobStatus>() {
+        {
+            /* STARTING -> READY */
+            this.put(JobStatus.STARTING, JobStatus.READY);
 
+            /* READY -> RUNNING ( Automatically ) */
+            this.put(JobStatus.READY, JobStatus.RUNNING);
+
+            /* RUNNING -> STOPPED ( Automatically ) */
+            this.put(JobStatus.RUNNING, JobStatus.STOPPED);
+
+            /* STOPPED -> READY */
+            this.put(JobStatus.STOPPED, JobStatus.READY);
+
+            /* ERROR -> READY */
+            this.put(JobStatus.ERROR, JobStatus.READY);
+        }
+    };
     @Contract
     private transient Vertx vertx;
 
@@ -34,6 +73,7 @@ public abstract class AbstractAgha implements Agha {
         final Class<?> intervalCls = CONFIG.getInterval().getComponent();
         final Interval interval = Ut.singleton(intervalCls);
         Ut.contract(interval, Vertx.class, this.vertx);
+
         if (SELECTED.getAndSet(Boolean.FALSE)) {
             /* Be sure the log only provide once */
             this.getLogger().info(Info.JOB_COMPONENT_SELECTED, "Interval", interval.getClass().getName());
@@ -54,6 +94,7 @@ public abstract class AbstractAgha implements Agha {
              */
             threshold = TimeUnit.MINUTES.toNanos(5);
         }
+
         /*
          * Worker Executor of New created
          * 1) Create new worker pool for next execution here
@@ -64,6 +105,7 @@ public abstract class AbstractAgha implements Agha {
         final WorkerExecutor executor =
                 this.vertx.createSharedWorkerExecutor(name, 1, threshold);
         this.getLogger().info(Info.JOB_POOL_START, name, String.valueOf(TimeUnit.NANOSECONDS.toSeconds(threshold)));
+
         final Promise<Envelop> finalize = Promise.promise();
         /*
          * The executor start to process the workers here.
@@ -124,17 +166,33 @@ public abstract class AbstractAgha implements Agha {
                 .otherwise(Ux.otherwise());
     }
 
-    protected void preparing(final Mission mission) {
-        /*
-         * Preparing for job
-         **/
-        if (JobStatus.STARTING == mission.getStatus()) {
+    void moveOn(final Mission mission, final boolean noError) {
+        if (noError) {
             /*
-             * STARTING -> READY
-             * */
-            mission.setStatus(JobStatus.READY);
-            this.getLogger().info(Info.JOB_READY, mission.getName());
-            this.store().update(mission);
+             * Preparing for job
+             **/
+            if (MOVING.containsKey(mission.getStatus())) {
+                /*
+                 * Next Status
+                 */
+                final JobStatus moved = MOVING.get(mission.getStatus());
+                final JobStatus original = mission.getStatus();
+                mission.setStatus(moved);
+                /*
+                 * Log and update cache
+                 */
+                this.getLogger().info(Info.JOB_MOVED, mission.getName(), original, moved);
+                this.store().update(mission);
+            }
+        } else {
+            /*
+             * Terminal job here
+             */
+            if (JobStatus.RUNNING == mission.getStatus()) {
+                mission.setStatus(JobStatus.ERROR);
+                this.getLogger().info(Info.JOB_TERMINAL, mission.getName());
+                this.store().update(mission);
+            }
         }
     }
 
