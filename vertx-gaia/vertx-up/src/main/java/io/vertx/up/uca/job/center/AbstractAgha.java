@@ -1,11 +1,14 @@
 package io.vertx.up.uca.job.center;
 
 import io.vertx.core.Future;
+import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
+import io.vertx.core.WorkerExecutor;
 import io.vertx.up.annotations.Contract;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.eon.Info;
+import io.vertx.up.eon.Values;
 import io.vertx.up.eon.em.JobStatus;
 import io.vertx.up.log.Annal;
 import io.vertx.up.uca.job.phase.Phase;
@@ -16,6 +19,7 @@ import io.vertx.up.uca.job.timer.Interval;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class AbstractAgha implements Agha {
@@ -37,8 +41,41 @@ public abstract class AbstractAgha implements Agha {
         return interval;
     }
 
+    @SuppressWarnings("all")
     JobStore store() {
         return JobPin.getStore();
+    }
+
+    Future<Envelop> working(final Mission mission) {
+        long threshold = mission.getThreshold();
+        if (Values.RANGE == threshold) {
+            /*
+             * Zero here
+             */
+            threshold = TimeUnit.MINUTES.toNanos(5);
+        }
+        /*
+         * Worker Executor of New created
+         * 1) Create new worker pool for next execution here
+         * 2) Do not break the major thread for terminal current job
+         * 3）Executing log here for long block issue
+         */
+        final String name = mission.getName();
+        final WorkerExecutor executor =
+                this.vertx.createSharedWorkerExecutor(name, 1, threshold);
+        this.getLogger().info(Info.JOB_POOL_START, name, String.valueOf(TimeUnit.NANOSECONDS.toSeconds(threshold)));
+        final Promise<Envelop> finalize = Promise.promise();
+        /*
+         * The executor start to process the workers here.
+         */
+        executor.<Envelop>executeBlocking(
+                promise -> promise.handle(this.workingAsync(mission)),
+                handler -> {
+                    executor.close();
+                    this.getLogger().info(Info.JOB_POOL_END, name);
+                    finalize.handle(handler);
+                });
+        return finalize.future();
     }
 
     /*
@@ -52,19 +89,17 @@ public abstract class AbstractAgha implements Agha {
      * 5. Whether defined address of output
      * 6. If 5, provide callback function of this job here.
      */
-    Future<Envelop> working(final Mission mission) {
+    private Future<Envelop> workingAsync(final Mission mission) {
         /*
          * Initializing phase reference here.
          */
         final Phase phase = Phase.start(mission.getName())
                 .bind(this.vertx)
                 .bind(mission);
-
-        return Ux.future(mission)
-                /*
-                 * 1. Step 1:  EventBus ( Input )
-                 */
-                .compose(phase::inputAsync)
+        /*
+         * 1. Step 1:  EventBus ( Input )
+         */
+        return phase.inputAsync(mission)
                 /*
                  * 2. Step 2:  JobIncome ( Process )
                  */

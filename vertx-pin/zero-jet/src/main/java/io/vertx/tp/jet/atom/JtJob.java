@@ -6,10 +6,12 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.cv.JtKey;
 import io.vertx.tp.jet.refine.Jt;
 import io.vertx.up.atom.worker.Mission;
+import io.vertx.up.eon.Values;
 import io.vertx.up.eon.em.JobType;
 import io.vertx.up.util.Ut;
 
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /*
  * Job ( JOB + SERVICE )
@@ -94,7 +96,18 @@ public class JtJob extends JtCommercial {
         /*
          * Proxy & @On @Off without @Job method
          */
-        mission.setDuration(this.job.getDuration());
+        if (Objects.isNull(this.job.getDuration())) {
+            mission.setDuration(Values.RANGE);
+        } else {
+            final long duration = TimeUnit.SECONDS.toMillis(this.job.getDuration());
+            mission.setDuration(duration);
+        }
+        if (Objects.isNull(this.job.getThreshold())) {
+            mission.setThreshold(Values.RANGE);
+        } else {
+            final long threshold = TimeUnit.SECONDS.toNanos(this.job.getThreshold());
+            mission.setThreshold(threshold);
+        }
         /*
          * Income / incomeAddress
          */

@@ -44,7 +44,9 @@ class FixedAgha extends AbstractAgha {
         final Instant end = mission.getInstant();
         final Instant start = Instant.now();
         final long delay = ChronoUnit.MILLIS.between(start, end);
-        this.getLogger().info(Info.JOB_DELAY, mission.getName(), String.valueOf(delay));
+        if (0 < delay) {
+            this.getLogger().info(Info.JOB_DELAY, mission.getName(), String.valueOf(delay));
+        }
         return delay < 0 ? 0L : delay;
     }
 }

@@ -35,7 +35,7 @@ public class IJob extends TableImpl<IJobRecord> {
      * The reference instance of <code>DB_ETERNAL.I_JOB</code>
      */
     public static final IJob I_JOB = new IJob();
-    private static final long serialVersionUID = 1133948965;
+    private static final long serialVersionUID = 523078497;
     /**
      * The column <code>DB_ETERNAL.I_JOB.KEY</code>. 「key」- 任务ID
      */
@@ -69,13 +69,17 @@ public class IJob extends TableImpl<IJobRecord> {
      */
     public final TableField<IJobRecord, LocalDateTime> RUN_AT = createField("RUN_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「runAt」- 定时任务中的JOB时间");
     /**
-     * The column <code>DB_ETERNAL.I_JOB.DURATION</code>. 「duration」- JOB的间隔时间
+     * The column <code>DB_ETERNAL.I_JOB.DURATION</code>. 「duration」- JOB的间隔时间，（秒为单位）
      */
-    public final TableField<IJobRecord, Long> DURATION = createField("DURATION", org.jooq.impl.SQLDataType.BIGINT, this, "「duration」- JOB的间隔时间");
+    public final TableField<IJobRecord, Long> DURATION = createField("DURATION", org.jooq.impl.SQLDataType.BIGINT, this, "「duration」- JOB的间隔时间，（秒为单位）");
     /**
      * The column <code>DB_ETERNAL.I_JOB.PROXY</code>. 「proxy」- 代理类，带有@On/@Off
      */
     public final TableField<IJobRecord, String> PROXY = createField("PROXY", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「proxy」- 代理类，带有@On/@Off");
+    /**
+     * The column <code>DB_ETERNAL.I_JOB.THRESHOLD</code>. 「threshold」- 默认值 300 s，（秒为单位）
+     */
+    public final TableField<IJobRecord, Integer> THRESHOLD = createField("THRESHOLD", org.jooq.impl.SQLDataType.INTEGER, this, "「threshold」- 默认值 300 s，（秒为单位）");
     /**
      * The column <code>DB_ETERNAL.I_JOB.INCOME_COMPONENT</code>. 「incomeComponent」对应income，必须是JobIncome，@On -&gt; income
      */
