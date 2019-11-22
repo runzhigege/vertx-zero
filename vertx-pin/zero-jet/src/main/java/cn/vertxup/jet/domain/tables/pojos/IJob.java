@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IJob implements IIJob {
 
-    private static final long serialVersionUID = 59519256;
+    private static final long serialVersionUID = 1381959657;
 
     private String        key;
     private String        namespace;
@@ -36,6 +36,7 @@ public class IJob implements IIJob {
     private LocalDateTime runAt;
     private Long          duration;
     private String        proxy;
+    private Integer       threshold;
     private String        incomeComponent;
     private String        incomeAddress;
     private String        outcomeComponent;
@@ -63,6 +64,7 @@ public class IJob implements IIJob {
         this.runAt = value.runAt;
         this.duration = value.duration;
         this.proxy = value.proxy;
+        this.threshold = value.threshold;
         this.incomeComponent = value.incomeComponent;
         this.incomeAddress = value.incomeAddress;
         this.outcomeComponent = value.outcomeComponent;
@@ -89,6 +91,7 @@ public class IJob implements IIJob {
         LocalDateTime runAt,
         Long          duration,
         String        proxy,
+        Integer       threshold,
         String        incomeComponent,
         String        incomeAddress,
         String        outcomeComponent,
@@ -113,6 +116,7 @@ public class IJob implements IIJob {
         this.runAt = runAt;
         this.duration = duration;
         this.proxy = proxy;
+        this.threshold = threshold;
         this.incomeComponent = incomeComponent;
         this.incomeAddress = incomeAddress;
         this.outcomeComponent = outcomeComponent;
@@ -235,6 +239,17 @@ public class IJob implements IIJob {
     @Override
     public IJob setProxy(String proxy) {
         this.proxy = proxy;
+        return this;
+    }
+
+    @Override
+    public Integer getThreshold() {
+        return this.threshold;
+    }
+
+    @Override
+    public IJob setThreshold(Integer threshold) {
+        this.threshold = threshold;
         return this;
     }
 
@@ -395,6 +410,7 @@ public class IJob implements IIJob {
         sb.append(", ").append(runAt);
         sb.append(", ").append(duration);
         sb.append(", ").append(proxy);
+        sb.append(", ").append(threshold);
         sb.append(", ").append(incomeComponent);
         sb.append(", ").append(incomeAddress);
         sb.append(", ").append(outcomeComponent);
@@ -432,6 +448,7 @@ public class IJob implements IIJob {
         setRunAt(from.getRunAt());
         setDuration(from.getDuration());
         setProxy(from.getProxy());
+        setThreshold(from.getThreshold());
         setIncomeComponent(from.getIncomeComponent());
         setIncomeAddress(from.getIncomeAddress());
         setOutcomeComponent(from.getOutcomeComponent());

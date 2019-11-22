@@ -17,12 +17,12 @@ public class VertxInterval implements Interval {
          * -- Cannot schedule a timer with delay < 1 ms
          */
         return this.vertx.setTimer(delay + START_UP_MS, ignored ->
-                this.vertx.setPeriodic(duration, actuator));
+                this.vertx.setPeriodic(START_UP_MS + duration, actuator));
     }
 
     @Override
     public long startAt(final long duration, final Handler<Long> actuator) {
-        return this.vertx.setPeriodic(duration, actuator);
+        return this.vertx.setPeriodic(START_UP_MS + duration, actuator);
     }
 
     @Override

@@ -56,6 +56,10 @@ public interface Info {
 
     String JOB_ADDRESS_EVENT_BUS = "[ Job ] {0} event bus enabled: {1}";
 
+    String JOB_POOL_START = "[ Job ] `{0}` worker executor will be created. The max executing time is {1} s";
+
+    String JOB_POOL_END = "[ Job ] `{0}` worker executor has been closed! ";
+
     // ------------- Job monitor for ONCE
     String PHASE_1ST_JOB = "[ Job: {0} ] 1. Input new data of JsonObject";
 

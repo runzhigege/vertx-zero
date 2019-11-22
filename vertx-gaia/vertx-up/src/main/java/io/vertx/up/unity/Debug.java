@@ -17,7 +17,7 @@ class Debug {
         }
     }
 
-    static void monitor(final Object object) {
+    private static void monitor(final Object object) {
         final StringBuilder builder = new StringBuilder();
         builder.append("\t\t[ ZERO Debug ] ---> Start \n");
         builder.append("\t\t[ ZERO Debug ] object = ").append(object).append("\n");
