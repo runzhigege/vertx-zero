@@ -50,7 +50,7 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
         name = Ut.isNil(name) ? clazz.getName() : name;
 
         /* Initialization */
-        final Mission mission = config(annotation);
+        final Mission mission = this.config(annotation);
 
         /* Basic data object initialized */
         mission.setName(name);
@@ -65,9 +65,13 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
 
         /* The first status of each Job */
         mission.setStatus(JobStatus.STARTING);
-        /* Time Unit */
+        /* Time of duration */
         if (Values.RANGE == mission.getDuration()) {
-            mission.setDuration(duration(annotation));
+            mission.setDuration(this.time(annotation, "duration", "durationUnit"));
+        }
+        /* Time of threshold */
+        if (Values.RANGE == mission.getThreshold()) {
+            mission.setThreshold(this.time(annotation, "threshold", "thresholdUnit"));
         }
         /* code sync */
         if (Ut.isNil(mission.getCode())) {
@@ -87,7 +91,7 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
         final String config = Ut.invoke(annotation, "config");
         final Mission mission;
         if (Ut.notNil(config)) {
-            final JsonObject json = Ut.ioJObject(resolve(config));
+            final JsonObject json = Ut.ioJObject(this.resolve(config));
             /*
              * Removed
              * - status
@@ -110,9 +114,9 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
         return mission;
     }
 
-    private long duration(final Annotation annotation) {
-        final long duration = Ut.invoke(annotation, "duration");
-        final TimeUnit timeUnit = Ut.invoke(annotation, "timeUnit");
+    private long time(final Annotation annotation, final String field, final String fieldUnit) {
+        final long duration = Ut.invoke(annotation, field);
+        final TimeUnit timeUnit = Ut.invoke(annotation, fieldUnit);
         return timeUnit.toMillis(duration);
     }
 

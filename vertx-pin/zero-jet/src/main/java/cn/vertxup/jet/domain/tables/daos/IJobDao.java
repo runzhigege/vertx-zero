@@ -133,6 +133,13 @@ public class IJobDao extends DAOImpl<IJobRecord, cn.vertxup.jet.domain.tables.po
     }
 
     /**
+     * Fetch records that have <code>THRESHOLD IN (values)</code>
+     */
+    public List<cn.vertxup.jet.domain.tables.pojos.IJob> fetchByThreshold(Integer... values) {
+        return fetch(IJob.I_JOB.THRESHOLD, values);
+    }
+
+    /**
      * Fetch records that have <code>INCOME_COMPONENT IN (values)</code>
      */
     public List<cn.vertxup.jet.domain.tables.pojos.IJob> fetchByIncomeComponent(String... values) {
@@ -298,6 +305,13 @@ public class IJobDao extends DAOImpl<IJobRecord, cn.vertxup.jet.domain.tables.po
      */
     public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IJob>> fetchByProxyAsync(List<String> values) {
         return fetchAsync(IJob.I_JOB.PROXY,values);
+    }
+
+    /**
+     * Fetch records that have <code>THRESHOLD IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IJob>> fetchByThresholdAsync(List<Integer> values) {
+        return fetchAsync(IJob.I_JOB.THRESHOLD,values);
     }
 
     /**

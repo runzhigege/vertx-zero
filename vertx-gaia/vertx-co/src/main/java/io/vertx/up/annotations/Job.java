@@ -1,7 +1,7 @@
 package io.vertx.up.annotations;
 
-import io.vertx.up.eon.em.JobType;
 import io.vertx.up.eon.Strings;
+import io.vertx.up.eon.em.JobType;
 
 import java.lang.annotation.*;
 import java.util.concurrent.TimeUnit;
@@ -36,11 +36,23 @@ public @interface Job {
 
     /**
      * Duration value of current job
+     * 30 s
      */
-    long duration() default 5;
+    long duration() default 300;
+
+    /**
+     * Threshold value of current job
+     * 300 s
+     */
+    long threshold() default 900;
 
     /**
      * Duration unit ( time unit ) for current job
      */
-    TimeUnit timeUnit() default TimeUnit.MINUTES;
+    TimeUnit durationUnit() default TimeUnit.SECONDS;
+
+    /**
+     * Threshold unit ( time unit ) for current job
+     */
+    TimeUnit thresholdUnit() default TimeUnit.SECONDS;
 }

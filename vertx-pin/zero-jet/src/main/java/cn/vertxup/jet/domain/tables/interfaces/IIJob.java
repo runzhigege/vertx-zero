@@ -104,12 +104,12 @@ public interface IIJob extends Serializable {
     public LocalDateTime getRunAt();
 
     /**
-     * Setter for <code>DB_ETERNAL.I_JOB.DURATION</code>. 「duration」- JOB的间隔时间
+     * Setter for <code>DB_ETERNAL.I_JOB.DURATION</code>. 「duration」- JOB的间隔时间，（秒为单位）
      */
     public IIJob setDuration(Long value);
 
     /**
-     * Getter for <code>DB_ETERNAL.I_JOB.DURATION</code>. 「duration」- JOB的间隔时间
+     * Getter for <code>DB_ETERNAL.I_JOB.DURATION</code>. 「duration」- JOB的间隔时间，（秒为单位）
      */
     public Long getDuration();
 
@@ -122,6 +122,16 @@ public interface IIJob extends Serializable {
      * Getter for <code>DB_ETERNAL.I_JOB.PROXY</code>. 「proxy」- 代理类，带有@On/@Off
      */
     public String getProxy();
+
+    /**
+     * Setter for <code>DB_ETERNAL.I_JOB.THRESHOLD</code>. 「threshold」- 默认值 300 s，（秒为单位）
+     */
+    public IIJob setThreshold(Integer value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_JOB.THRESHOLD</code>. 「threshold」- 默认值 300 s，（秒为单位）
+     */
+    public Integer getThreshold();
 
     /**
      * Setter for <code>DB_ETERNAL.I_JOB.INCOME_COMPONENT</code>. 「incomeComponent」对应income，必须是JobIncome，@On -&gt; income
@@ -278,6 +288,7 @@ public interface IIJob extends Serializable {
         // Omitting unrecognized type java.time.LocalDateTime for column RUN_AT!
         setDuration(json.getLong("DURATION"));
         setProxy(json.getString("PROXY"));
+        setThreshold(json.getInteger("THRESHOLD"));
         setIncomeComponent(json.getString("INCOME_COMPONENT"));
         setIncomeAddress(json.getString("INCOME_ADDRESS"));
         setOutcomeComponent(json.getString("OUTCOME_COMPONENT"));
@@ -307,6 +318,7 @@ public interface IIJob extends Serializable {
         // Omitting unrecognized type java.time.LocalDateTime for column RUN_AT!
         json.put("DURATION",getDuration());
         json.put("PROXY",getProxy());
+        json.put("THRESHOLD",getThreshold());
         json.put("INCOME_COMPONENT",getIncomeComponent());
         json.put("INCOME_ADDRESS",getIncomeAddress());
         json.put("OUTCOME_COMPONENT",getOutcomeComponent());

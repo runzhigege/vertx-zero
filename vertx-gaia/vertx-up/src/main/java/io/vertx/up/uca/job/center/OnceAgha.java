@@ -3,7 +3,7 @@ package io.vertx.up.uca.job.center;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.up.atom.worker.Mission;
-import io.vertx.up.eon.em.JobStatus;
+import io.vertx.up.eon.Info;
 
 /**
  * Start one time
@@ -20,28 +20,24 @@ class OnceAgha extends AbstractAgha {
          * 3. This kind fo task must be triggered, could not be in plan here. It's not needed to call
          *    Interval to process task.
          * */
+        /*
+         * STARTING -> READY
+         */
+        this.moveOn(mission, true);
+
         final Promise<Long> promise = Promise.promise();
-        this.interval().startAt((timeId) -> {
-            if (JobStatus.STARTING == mission.getStatus()) {
-                /*
-                 * Preparing for job
-                 **/
-                this.preparing(mission);
-                promise.complete(timeId);
-            } else if (JobStatus.READY == mission.getStatus()) {
-                /*
-                 * Running the job next time when current job get event
-                 * from event bus trigger
-                 */
-                this.working(mission).compose(envelop -> {
-                    /*
-                     * Complete future and returned: Async
-                     */
-                    promise.complete(timeId);
-                    return Future.succeededFuture(envelop);
-                });
-            }
-        });
+        final long jobId = this.interval().startAt((timeId) -> this.working(mission, () -> {
+            /*
+             * Complete future and returned Async
+             */
+            promise.tryComplete(timeId);
+            /*
+             * RUNNING -> STOPPED
+             */
+            this.moveOn(mission, true);
+        }));
+        this.getLogger().info(Info.JOB_INTERVAL, mission.getName(),
+                String.valueOf(0), String.valueOf(-1), String.valueOf(jobId));
         return promise.future();
     }
 }

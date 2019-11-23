@@ -11,6 +11,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Off;
 import io.vertx.up.annotations.On;
 import io.vertx.up.eon.Info;
+import io.vertx.up.eon.Values;
 import io.vertx.up.eon.em.JobStatus;
 import io.vertx.up.eon.em.JobType;
 import io.vertx.up.exception.web._501JobOnMissingException;
@@ -33,8 +34,8 @@ import java.util.function.Supplier;
  */
 public class Mission implements Serializable {
     private static final Annal LOGGER = Annal.get(Mission.class);
-    /* Job status, default job is 'ready' */
-    private JobStatus status = JobStatus.READY;
+    /* Job status, default job is 'starting' */
+    private JobStatus status = JobStatus.STARTING;
     /* Job name */
     private String name;
     /* Job type */
@@ -54,8 +55,10 @@ public class Mission implements Serializable {
     /* Time: started time */
     @JsonIgnore
     private Instant instant = Instant.now();
-    /* Time: duration, default is 5 seconds */
-    private long duration = 5_000L;
+    /* Time: duration, default is 5 min */
+    private long duration = Values.RANGE;
+    /* Time: threshold, default is 15 min */
+    private long threshold = Values.RANGE;
 
     @JsonSerialize(using = ClassSerializer.class)
     @JsonDeserialize(using = ClassDeserializer.class)
@@ -79,7 +82,7 @@ public class Mission implements Serializable {
     private Method off;
 
     public JobStatus getStatus() {
-        return status;
+        return this.status;
     }
 
     public void setStatus(final JobStatus status) {
@@ -87,7 +90,7 @@ public class Mission implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(final String name) {
@@ -95,7 +98,7 @@ public class Mission implements Serializable {
     }
 
     public JobType getType() {
-        return type;
+        return this.type;
     }
 
     public void setType(final JobType type) {
@@ -103,7 +106,7 @@ public class Mission implements Serializable {
     }
 
     public String getCode() {
-        return code;
+        return this.code;
     }
 
     public void setCode(final String code) {
@@ -111,7 +114,7 @@ public class Mission implements Serializable {
     }
 
     public String getComment() {
-        return comment;
+        return this.comment;
     }
 
     public void setComment(final String comment) {
@@ -119,7 +122,7 @@ public class Mission implements Serializable {
     }
 
     public JsonObject getMetadata() {
-        return metadata;
+        return this.metadata;
     }
 
     public void setMetadata(final JsonObject metadata) {
@@ -127,7 +130,7 @@ public class Mission implements Serializable {
     }
 
     public JsonObject getAdditional() {
-        return additional;
+        return this.additional;
     }
 
     public void setAdditional(final JsonObject additional) {
@@ -135,7 +138,7 @@ public class Mission implements Serializable {
     }
 
     public Instant getInstant() {
-        return instant;
+        return this.instant;
     }
 
     public void setInstant(final Instant instant) {
@@ -143,15 +146,23 @@ public class Mission implements Serializable {
     }
 
     public long getDuration() {
-        return duration;
+        return this.duration;
     }
 
     public void setDuration(final long duration) {
         this.duration = duration;
     }
 
+    public long getThreshold() {
+        return this.threshold;
+    }
+
+    public void setThreshold(final long threshold) {
+        this.threshold = threshold;
+    }
+
     public Object getProxy() {
-        return proxy;
+        return this.proxy;
     }
 
     public void setProxy(final Object proxy) {
@@ -159,7 +170,7 @@ public class Mission implements Serializable {
     }
 
     public Method getOn() {
-        return on;
+        return this.on;
     }
 
     public void setOn(final Method on) {
@@ -167,7 +178,7 @@ public class Mission implements Serializable {
     }
 
     public Method getOff() {
-        return off;
+        return this.off;
     }
 
     public void setOff(final Method off) {
@@ -175,7 +186,7 @@ public class Mission implements Serializable {
     }
 
     public Class<?> getIncome() {
-        return income;
+        return this.income;
     }
 
     public void setIncome(final Class<?> income) {
@@ -183,7 +194,7 @@ public class Mission implements Serializable {
     }
 
     public String getIncomeAddress() {
-        return incomeAddress;
+        return this.incomeAddress;
     }
 
     public void setIncomeAddress(final String incomeAddress) {
@@ -191,7 +202,7 @@ public class Mission implements Serializable {
     }
 
     public Class<?> getOutcome() {
-        return outcome;
+        return this.outcome;
     }
 
     public void setOutcome(final Class<?> outcome) {
@@ -199,7 +210,7 @@ public class Mission implements Serializable {
     }
 
     public String getOutcomeAddress() {
-        return outcomeAddress;
+        return this.outcomeAddress;
     }
 
     public void setOutcomeAddress(final String outcomeAddress) {
@@ -229,40 +240,40 @@ public class Mission implements Serializable {
              * 2. @On
              *  It's required in clazz definition or here should throw exception or errors
              */
-            on = Arrays.stream(clazz.getDeclaredMethods())
+            this.on = Arrays.stream(clazz.getDeclaredMethods())
                     .filter(method -> method.isAnnotationPresent(On.class))
                     .findFirst().orElse(null);
-            Fn.out(null == on, _501JobOnMissingException.class,
-                    getClass(), clazz.getName());
+            Fn.out(null == this.on, _501JobOnMissingException.class,
+                    this.getClass(), clazz.getName());
             /*
              * Income / IncomeAddress
              */
             final Annotation on = this.on.getAnnotation(On.class);
-            incomeAddress = invoke(on, "address", this::getIncomeAddress);
-            income = invoke(on, "income", this::getIncome);
-            if (Ut.isNil(incomeAddress)) {
-                incomeAddress = null;
+            this.incomeAddress = this.invoke(on, "address", this::getIncomeAddress);
+            this.income = this.invoke(on, "income", this::getIncome);
+            if (Ut.isNil(this.incomeAddress)) {
+                this.incomeAddress = null;
             }
 
             /*
              * 3. @Off
              * It's optional in clazz definition
              */
-            off = Arrays.stream(clazz.getDeclaredMethods())
+            this.off = Arrays.stream(clazz.getDeclaredMethods())
                     .filter(method -> method.isAnnotationPresent(Off.class))
                     .findFirst().orElse(null);
-            if (Objects.nonNull(off)) {
+            if (Objects.nonNull(this.off)) {
                 /*
                  * Outcome / OutcomeAddress
                  */
-                final Annotation out = off.getAnnotation(Off.class);
-                outcomeAddress = invoke(out, "address", this::getOutcomeAddress);
-                outcome = invoke(out, "outcome", this::getOutcome);
-                if (Ut.isNil(outcomeAddress)) {
-                    outcomeAddress = null;
+                final Annotation out = this.off.getAnnotation(Off.class);
+                this.outcomeAddress = this.invoke(out, "address", this::getOutcomeAddress);
+                this.outcome = this.invoke(out, "outcome", this::getOutcome);
+                if (Ut.isNil(this.outcomeAddress)) {
+                    this.outcomeAddress = null;
                 }
             } else {
-                LOGGER.info(Info.JOB_NO_OFF, getName());
+                LOGGER.info(Info.JOB_NO_OFF, this.getName());
             }
         }
         return this;
@@ -286,22 +297,23 @@ public class Mission implements Serializable {
     @Override
     public String toString() {
         return "Mission{" +
-                "status=" + status +
-                ", name='" + name + '\'' +
-                ", type=" + type +
-                ", code='" + code + '\'' +
-                ", comment='" + comment + '\'' +
-                ", metadata=" + metadata +
-                ", additional=" + additional +
-                ", instant=" + instant +
-                ", duration=" + duration +
-                ", income=" + income +
-                ", incomeAddress='" + incomeAddress + '\'' +
-                ", outcome=" + outcome +
-                ", outcomeAddress='" + outcomeAddress + '\'' +
-                ", proxy=" + proxy +
-                ", on=" + on +
-                ", off=" + off +
+                "status=" + this.status +
+                ", name='" + this.name + '\'' +
+                ", type=" + this.type +
+                ", code='" + this.code + '\'' +
+                ", comment='" + this.comment + '\'' +
+                ", metadata=" + this.metadata +
+                ", additional=" + this.additional +
+                ", instant=" + this.instant +
+                ", duration=" + this.duration +
+                ", threshold=" + this.threshold +
+                ", income=" + this.income +
+                ", incomeAddress='" + this.incomeAddress + '\'' +
+                ", outcome=" + this.outcome +
+                ", outcomeAddress='" + this.outcomeAddress + '\'' +
+                ", proxy=" + this.proxy +
+                ", on=" + this.on +
+                ", off=" + this.off +
                 '}';
     }
 }
