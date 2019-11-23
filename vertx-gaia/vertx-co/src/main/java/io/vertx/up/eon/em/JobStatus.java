@@ -2,14 +2,16 @@ package io.vertx.up.eon.em;
 
 /*
  * State machine moving:
- * STARTING --> READY
- *                |
- *                | <----------------- <start>
- *                |                       |
- *              <start>                   |
- *                |                       |
- *                V                       |
- *     |------> RUNNING --- <stop> ---> STOPPED
+ * STARTING ------|
+ *                v
+ *     |------> READY <-------------------|
+ *     |          |                       |
+ *     |          |                     <start>
+ *     |          |                       |
+ *     |        <start>                   |
+ *     |          |                       |
+ *     |          V                       |
+ *     |        RUNNING --- <stop> ---> STOPPED
  *     |          |
  *     |          |
  * <resume>   ( error )

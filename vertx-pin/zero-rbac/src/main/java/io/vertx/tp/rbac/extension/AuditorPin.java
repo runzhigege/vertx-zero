@@ -35,6 +35,7 @@ public class AuditorPin implements PlugAuditor {
             final Instant instant = Instant.now();
             /*
              * counter is not 0, it means match
+             * Find the first JsonObject instead of provide index value here
              */
             if (HttpMethod.POST == method) {
                 /*
@@ -42,18 +43,18 @@ public class AuditorPin implements PlugAuditor {
                  * The method definition
                  * method(JsonObject data)
                  */
-                envelop.setValue(0, "createdBy", userId);
-                envelop.setValue(0, "createdAt", instant);
-                envelop.setValue(0, "updatedBy", userId);
-                envelop.setValue(0, "updatedAt", instant);
+                envelop.setValue("createdBy", userId);
+                envelop.setValue("createdAt", instant);
+                envelop.setValue("updatedBy", userId);
+                envelop.setValue("updatedAt", instant);
             } else {
                 /*
                  * /api/xxx
                  * The method definition
                  * method(String, JsonObject)
                  */
-                envelop.setValue(1, "updatedBy", userId);
-                envelop.setValue(1, "updatedAt", instant);
+                envelop.setValue("updatedBy", userId);
+                envelop.setValue("updatedAt", instant);
             }
         }
         return Ux.future(envelop);

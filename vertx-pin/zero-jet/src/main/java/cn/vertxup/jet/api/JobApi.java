@@ -13,22 +13,22 @@ public interface JobApi {
     @Path("/job/start/{name}")
     @PUT
     @Address(JtAddr.Job.START)
-    String startJob(@PathParam("name") String name);
+    String startJob(@HeaderParam(ID.Header.X_SIGMA) String sigma, @PathParam("name") String name);
 
     @Path("/job/stop/{name}")
     @PUT
     @Address(JtAddr.Job.STOP)
-    String stopJob(@PathParam("name") String name);
+    String stopJob(@HeaderParam(ID.Header.X_SIGMA) String sigma, @PathParam("name") String name);
 
     @Path("/job/resume/{name}")
     @PUT
     @Address(JtAddr.Job.RESUME)
-    String resumeJob(@PathParam("name") String name);
+    String resumeJob(@HeaderParam(ID.Header.X_SIGMA) String sigma, @PathParam("name") String name);
 
     @Path("/job/info/name/{name}")
     @GET
     @Address(JtAddr.Job.STATUS)
-    String statusJob(@PathParam("name") String name);
+    String statusJob(@HeaderParam(ID.Header.X_SIGMA) String sigma, @PathParam("name") String name);
 
     @Path("/job/info/by/sigma")
     @GET

@@ -19,8 +19,9 @@ CREATE TABLE IF NOT EXISTS I_JOB
 
     -- JOB基本配置（包括调用基本信息）
     `RUN_AT`            DATETIME COMMENT '「runAt」- 定时任务中的JOB时间',
-    `DURATION`          BIGINT COMMENT '「duration」- JOB的间隔时间',
+    `DURATION`          BIGINT COMMENT '「duration」- JOB的间隔时间，（秒为单位）',
     `PROXY`             VARCHAR(255) COMMENT '「proxy」- 代理类，带有@On/@Off',
+    `THRESHOLD`         INT COMMENT '「threshold」- 默认值 300 s，（秒为单位）',
     /*
      * JOB的出入配置，优先级：
      * 1. 配置优先（也就是存在这四个字段中的值优先）
