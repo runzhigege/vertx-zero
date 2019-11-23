@@ -4,11 +4,11 @@ import io.vertx.core.VertxException;
 import io.vertx.core.impl.ConcurrentHashSet;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
-import io.vertx.up.util.Ut;
 import io.vertx.up.exception.ZeroException;
 import io.vertx.up.fn.Actuator;
 import io.vertx.up.log.internal.Log4JAnnal;
 import io.vertx.up.runtime.ZeroAmbient;
+import io.vertx.up.util.Ut;
 
 import java.util.Set;
 
@@ -48,8 +48,7 @@ public interface Annal {
 
 class CommonAnnal implements Annal {
 
-    private static final Logger RECORD =
-            LoggerFactory.getLogger(CommonAnnal.class);
+    private static final Logger RECORD = LoggerFactory.getLogger(CommonAnnal.class);
     private static final Set<Class<?>> OUTED = new ConcurrentHashSet<>();
 
     private transient final Annal logger;
@@ -64,41 +63,41 @@ class CommonAnnal implements Annal {
             Log.debug(RECORD, Info.INF_ANNAL, inject, clazz);
             OUTED.add(inject);
         }
-        logger = Ut.instance(inject, clazz);
+        this.logger = Ut.instance(inject, clazz);
     }
 
     @Override
     public void warn(final String key, final Object... args) {
-        logger.warn(key, args);
+        this.logger.warn(key, args);
     }
 
     @Override
     public void error(final String key, final Object... args) {
-        logger.error(key, args);
+        this.logger.error(key, args);
     }
 
     @Override
     public void vertx(final VertxException ex) {
-        logger.vertx(ex);
+        this.logger.vertx(ex);
     }
 
     @Override
     public void zero(final ZeroException ex) {
-        logger.zero(ex);
+        this.logger.zero(ex);
     }
 
     @Override
     public void jvm(final Throwable ex) {
-        logger.jvm(ex);
+        this.logger.jvm(ex);
     }
 
     @Override
     public void info(final String key, final Object... args) {
-        logger.info(key, args);
+        this.logger.info(key, args);
     }
 
     @Override
     public void debug(final String key, final Object... args) {
-        logger.debug(key, args);
+        this.logger.debug(key, args);
     }
 }

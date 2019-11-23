@@ -3,8 +3,7 @@ package io.vertx.up.uca.job.center;
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.up.atom.worker.Mission;
-import io.vertx.up.commune.Envelop;
-import io.vertx.up.eon.em.JobStatus;
+import io.vertx.up.eon.Info;
 import io.vertx.up.util.Ut;
 
 class PlanAgha extends AbstractAgha {
@@ -16,36 +15,18 @@ class PlanAgha extends AbstractAgha {
          * STARTING -> READY
          **/
         this.moveOn(mission, true);
-
-        this.interval().startAt(mission.getDuration(), (timeId) -> {
-            if (JobStatus.READY == mission.getStatus()) {
-                /*
-                 * READY -> RUNNING
-                 */
-                this.moveOn(mission, true);
-                /*
-                 * Running the job
-                 */
-                this.working(mission).compose(envelop -> {
-                    /*
-                     * Complete future and returned Async
-                     */
-                    future.tryComplete(timeId);
-                    /*
-                     * RUNNING -> STOPPED -> READY
-                     */
-                    Ut.itRepeat(2, () -> this.moveOn(mission, true));
-                    return Future.succeededFuture(envelop);
-                }).otherwise(error -> {
-                    /*
-                     * RUNNING -> ERROR
-                     */
-                    this.moveOn(mission, false);
-                    error.printStackTrace();
-                    return Envelop.failure(error);
-                });
-            }
-        });
+        final long jobId = this.interval().startAt(mission.getDuration(), (timeId) -> this.working(mission, () -> {
+            /*fd
+             * Complete future and returned Async
+             */
+            future.tryComplete(timeId);
+            /*d
+             * RUNNING -> STOPPED -> READY
+             */
+            Ut.itRepeat(2, () -> this.moveOn(mission, true));
+        }));
+        this.getLogger().info(Info.JOB_INTERVAL, mission.getName(),
+                String.valueOf(0), String.valueOf(mission.getDuration()), String.valueOf(jobId));
         return future.future();
     }
 }

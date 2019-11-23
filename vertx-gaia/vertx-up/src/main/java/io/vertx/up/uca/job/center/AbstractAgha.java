@@ -10,6 +10,7 @@ import io.vertx.up.commune.Envelop;
 import io.vertx.up.eon.Info;
 import io.vertx.up.eon.Values;
 import io.vertx.up.eon.em.JobStatus;
+import io.vertx.up.fn.Actuator;
 import io.vertx.up.log.Annal;
 import io.vertx.up.uca.job.phase.Phase;
 import io.vertx.up.uca.job.store.JobConfig;
@@ -86,7 +87,7 @@ public abstract class AbstractAgha implements Agha {
         return JobPin.getStore();
     }
 
-    Future<Envelop> working(final Mission mission) {
+    private Future<Envelop> working(final Mission mission) {
         long threshold = mission.getThreshold();
         if (Values.RANGE == threshold) {
             /*
@@ -166,6 +167,33 @@ public abstract class AbstractAgha implements Agha {
                 .otherwise(Ux.otherwise());
     }
 
+    void working(final Mission mission, final Actuator actuator) {
+        if (JobStatus.READY == mission.getStatus()) {
+            /*
+             * READY -> RUNNING
+             */
+            this.moveOn(mission, true);
+            /*
+             * Running the job next time when current job get event
+             * from event bus trigger
+             */
+            this.working(mission).compose(envelop -> {
+                /*
+                 * Complete future and returned: Async
+                 */
+                actuator.execute();
+                return Future.succeededFuture(envelop);
+            }).otherwise(error -> {
+                /*
+                 * RUNNING -> ERROR
+                 */
+                this.moveOn(mission, false);
+                error.printStackTrace();
+                return Envelop.failure(error);
+            });
+        }
+    }
+
     void moveOn(final Mission mission, final boolean noError) {
         if (noError) {
             /*
@@ -181,7 +209,7 @@ public abstract class AbstractAgha implements Agha {
                 /*
                  * Log and update cache
                  */
-                this.getLogger().info(Info.JOB_MOVED, mission.getName(), original, moved);
+                this.getLogger().info(Info.JOB_MOVED, mission.getType(), mission.getName(), original, moved);
                 this.store().update(mission);
             }
         } else {
