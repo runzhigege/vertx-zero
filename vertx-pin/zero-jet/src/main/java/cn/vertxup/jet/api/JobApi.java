@@ -1,5 +1,6 @@
 package cn.vertxup.jet.api;
 
+import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.cv.JtAddr;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.EndPoint;
@@ -34,4 +35,16 @@ public interface JobApi {
     @GET
     @Address(JtAddr.Job.BY_SIGMA)
     String fetchJobs(@HeaderParam(ID.Header.X_SIGMA) String sigma);
+
+    @Path("/job/info/fetch/:key")
+    @GET
+    @Address(JtAddr.Job.GET_BY_KEY)
+    String fetchJob(@PathParam("key") String key);
+
+    @Path("/job/info/update/:key")
+    @PUT
+    @Address(JtAddr.Job.UPDATE_BY_KEY)
+    String updateJob(@PathParam("key") String key,
+                     @BodyParam JsonObject data);
+
 }

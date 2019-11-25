@@ -34,7 +34,7 @@ class Input {
              * Event bus did not provide any input here
              */
             Element.onceLog(mission,
-                    () -> LOGGER.info(Info.PHASE_1ST_JOB, mission.getName()));
+                    () -> LOGGER.info(Info.PHASE_1ST_JOB, mission.getCode()));
 
             return Future.succeededFuture(Envelop.okJson());
         } else {
@@ -46,7 +46,7 @@ class Input {
             final EventBus eventBus = this.vertx.eventBus();
             eventBus.<Envelop>consumer(address, handler -> {
 
-                Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_1ST_JOB_ASYNC, mission.getName(), address));
+                Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_1ST_JOB_ASYNC, mission.getCode(), address));
 
                 final Envelop envelop = handler.body();
                 if (Objects.isNull(envelop)) {
@@ -76,7 +76,7 @@ class Input {
                  * Directly
                  */
                 Element.onceLog(mission,
-                        () -> LOGGER.info(Info.PHASE_2ND_JOB, mission.getName()));
+                        () -> LOGGER.info(Info.PHASE_2ND_JOB, mission.getCode()));
 
                 return Future.succeededFuture(envelop);
             } else {
@@ -93,13 +93,13 @@ class Input {
                 Ut.contract(income, Vertx.class, this.vertx);
                 Ut.contract(income, Mission.class, mission);
                 Element.onceLog(mission,
-                        () -> LOGGER.info(Info.PHASE_2ND_JOB_ASYNC, mission.getName(), income.getClass().getName()));
+                        () -> LOGGER.info(Info.PHASE_2ND_JOB_ASYNC, mission.getCode(), income.getClass().getName()));
 
                 return income.beforeAsync(envelop);
             }
         } else {
             Element.onceLog(mission,
-                    () -> LOGGER.info(Info.PHASE_ERROR, mission.getName(),
+                    () -> LOGGER.info(Info.PHASE_ERROR, mission.getCode(),
                             envelop.error().getClass().getName()));
 
             return Ux.future(envelop);

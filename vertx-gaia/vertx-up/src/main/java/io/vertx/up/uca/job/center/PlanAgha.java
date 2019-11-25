@@ -25,7 +25,7 @@ class PlanAgha extends AbstractAgha {
              */
             Ut.itRepeat(2, () -> this.moveOn(mission, true));
         }));
-        this.getLogger().info(Info.JOB_INTERVAL, mission.getName(),
+        this.getLogger().info(Info.JOB_INTERVAL, mission.getCode(),
                 String.valueOf(0), String.valueOf(mission.getDuration()), String.valueOf(jobId));
         return future.future();
     }

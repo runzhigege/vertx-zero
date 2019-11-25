@@ -17,5 +17,9 @@ public interface JtAddr {
         String STATUS = Prefix._EVENT + "I-JOB/STATUS";
 
         String BY_SIGMA = Prefix._EVENT + "I-JOB/BY/SIGMA";
+
+        String GET_BY_KEY = Prefix._EVENT + "I-JOB/GET/BY/KEY";
+
+        String UPDATE_BY_KEY = Prefix._EVENT + "I-JOB/UPDATE/BY/KEY";
     }
 }

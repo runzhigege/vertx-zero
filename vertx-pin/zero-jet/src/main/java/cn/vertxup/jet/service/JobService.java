@@ -35,7 +35,7 @@ public class JobService implements JobStub {
                             /*
                              * Job name calculation for appending namespace
                              */
-                            .map(Jt::jobName)
+                            .map(Jt::jobCode)
                             .collect(Collectors.toSet());
                     Jt.infoWeb(LOGGER, "Job fetched from database: {0}", names.size());
                     /*
@@ -48,7 +48,7 @@ public class JobService implements JobStub {
                      */
                     final JsonArray response = Ux.toArray(missions.stream()
                             .filter(Objects::nonNull)
-                            .filter(mission -> names.contains(mission.getName()))
+                            .filter(mission -> names.contains(mission.getCode()))
                             .collect(Collectors.toList()));
                     Ut.itJArray(response).forEach(item -> {
                         final JsonObject metadata = item.getJsonObject(KeField.METADATA);
@@ -65,5 +65,15 @@ public class JobService implements JobStub {
                     });
                     return Ux.future(response);
                 });
+    }
+
+    @Override
+    public Future<JsonObject> fetchByKey(final String key) {
+        return Future.succeededFuture(new JsonObject());
+    }
+
+    @Override
+    public Future<JsonObject> update(final String key, final JsonObject data) {
+        return Future.succeededFuture(new JsonObject());
     }
 }

@@ -102,10 +102,10 @@ public abstract class AbstractAgha implements Agha {
          * 2) Do not break the major thread for terminal current job
          * 3）Executing log here for long block issue
          */
-        final String name = mission.getName();
+        final String code = mission.getCode();
         final WorkerExecutor executor =
-                this.vertx.createSharedWorkerExecutor(name, 1, threshold);
-        this.getLogger().info(Info.JOB_POOL_START, name, String.valueOf(TimeUnit.NANOSECONDS.toSeconds(threshold)));
+                this.vertx.createSharedWorkerExecutor(code, 1, threshold);
+        this.getLogger().info(Info.JOB_POOL_START, code, String.valueOf(TimeUnit.NANOSECONDS.toSeconds(threshold)));
 
         final Promise<Envelop> finalize = Promise.promise();
         /*
@@ -115,7 +115,7 @@ public abstract class AbstractAgha implements Agha {
                 promise -> promise.handle(this.workingAsync(mission)),
                 handler -> {
                     executor.close();
-                    this.getLogger().info(Info.JOB_POOL_END, name);
+                    this.getLogger().info(Info.JOB_POOL_END, code);
                     finalize.handle(handler);
                 });
         return finalize.future();
@@ -136,7 +136,7 @@ public abstract class AbstractAgha implements Agha {
         /*
          * Initializing phase reference here.
          */
-        final Phase phase = Phase.start(mission.getName())
+        final Phase phase = Phase.start(mission.getCode())
                 .bind(this.vertx)
                 .bind(mission);
         /*
@@ -209,7 +209,7 @@ public abstract class AbstractAgha implements Agha {
                 /*
                  * Log and update cache
                  */
-                this.getLogger().info(Info.JOB_MOVED, mission.getType(), mission.getName(), original, moved);
+                this.getLogger().info(Info.JOB_MOVED, mission.getType(), mission.getCode(), original, moved);
                 this.store().update(mission);
             }
         } else {
@@ -218,7 +218,7 @@ public abstract class AbstractAgha implements Agha {
              */
             if (JobStatus.RUNNING == mission.getStatus()) {
                 mission.setStatus(JobStatus.ERROR);
-                this.getLogger().info(Info.JOB_TERMINAL, mission.getName());
+                this.getLogger().info(Info.JOB_TERMINAL, mission.getCode());
                 this.store().update(mission);
             }
         }
