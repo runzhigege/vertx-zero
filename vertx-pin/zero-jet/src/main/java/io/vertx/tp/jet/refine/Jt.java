@@ -37,10 +37,6 @@ public class Jt {
         JtLog.infoWeb(logger, pattern, args);
     }
 
-    public static String jobName(final IJob job) {
-        return job.getNamespace() + Strings.DASH + job.getName();
-    }
-
     public static String jobCode(final IJob job) {
         return job.getNamespace() + Strings.DASH + job.getCode();
     }

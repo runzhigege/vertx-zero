@@ -27,60 +27,60 @@ public class JobPool {
     private static final ConcurrentMap<Long, String> RUNNING = new ConcurrentHashMap<>();
 
     public static void put(final Set<Mission> missions) {
-        missions.forEach(mission -> JOBS.put(mission.getName(), mission));
+        missions.forEach(mission -> JOBS.put(mission.getCode(), mission));
     }
 
-    public static Mission get(final String name, final Supplier<Mission> supplier) {
-        return JOBS.getOrDefault(name, supplier.get());
+    public static Mission get(final String code, final Supplier<Mission> supplier) {
+        return JOBS.getOrDefault(code, supplier.get());
     }
 
-    public static Mission get(final String name) {
-        return JOBS.get(name);
+    public static Mission get(final String code) {
+        return JOBS.get(code);
     }
 
     public static List<Mission> get() {
         return new ArrayList<>(JOBS.values());
     }
 
-    public static String name(final Long timeId) {
+    public static String code(final Long timeId) {
         return RUNNING.get(timeId);
     }
 
-    public static Long timeId(final String name) {
+    public static Long timeId(final String code) {
         return RUNNING.keySet().stream()
-                .filter(key -> name.equals(RUNNING.get(key)))
+                .filter(key -> code.equals(RUNNING.get(key)))
                 .findFirst().orElse(null);
     }
 
-    public static void remove(final String name) {
-        JOBS.remove(name);
+    public static void remove(final String code) {
+        JOBS.remove(code);
     }
 
     public static void save(final Mission mission) {
-        JOBS.put(mission.getName(), mission);
+        JOBS.put(mission.getCode(), mission);
     }
 
     public static boolean valid(final Mission mission) {
-        return JOBS.containsKey(mission.getName());
+        return JOBS.containsKey(mission.getCode());
     }
 
     /*
      * Started job
      * --> RUNNING
      */
-    public static void start(final Long timeId, final String name) {
-        uniform(name, mission -> {
+    public static void start(final Long timeId, final String code) {
+        uniform(code, mission -> {
             /*
              * READY, STOPPED -> RUNNING
              */
             final JobStatus status = mission.getStatus();
             if (JobStatus.RUNNING == status) {
-                LOGGER.info(Info.IS_RUNNING, name);
+                LOGGER.info(Info.IS_RUNNING, code);
             } else if (JobStatus.ERROR == status) {
-                LOGGER.warn(Info.IS_ERROR, name);
+                LOGGER.warn(Info.IS_ERROR, code);
             } else {
-                RUNNING.put(timeId, name);
-                JOBS.get(name).setStatus(JobStatus.RUNNING);
+                RUNNING.put(timeId, code);
+                JOBS.get(code).setStatus(JobStatus.RUNNING);
             }
         });
     }
@@ -99,7 +99,7 @@ public class JobPool {
                 RUNNING.remove(timeId);
                 mission.setStatus(JobStatus.STOPPED);
             } else {
-                LOGGER.info(Info.NOT_RUNNING, mission.getName(), status);
+                LOGGER.info(Info.NOT_RUNNING, mission.getCode(), status);
             }
         });
     }
@@ -111,23 +111,23 @@ public class JobPool {
              */
             final JobStatus status = mission.getStatus();
             if (JobStatus.ERROR == status) {
-                RUNNING.put(timeId, mission.getName());
+                RUNNING.put(timeId, mission.getCode());
                 mission.setStatus(JobStatus.READY);
             }
         });
     }
 
     private static void uniform(final Long timeId, final Consumer<Mission> consumer) {
-        final String name = RUNNING.get(timeId);
-        if (Ut.isNil(name)) {
+        final String code = RUNNING.get(timeId);
+        if (Ut.isNil(code)) {
             LOGGER.info(Info.IS_STOPPED, timeId);
         } else {
-            uniform(name, consumer);
+            uniform(code, consumer);
         }
     }
 
-    private static void uniform(final String name, final Consumer<Mission> consumer) {
-        final Mission mission = JOBS.get(name);
+    private static void uniform(final String code, final Consumer<Mission> consumer) {
+        final Mission mission = JOBS.get(code);
         if (Objects.nonNull(mission)) {
             consumer.accept(mission);
         }

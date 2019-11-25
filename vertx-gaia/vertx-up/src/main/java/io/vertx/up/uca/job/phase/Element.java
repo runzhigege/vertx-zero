@@ -20,7 +20,7 @@ class Element {
         final Class<?> incomeCls = mission.getIncome();
         JobIncome income = null;
         if (Objects.nonNull(incomeCls) && Ut.isImplement(incomeCls, JobIncome.class)) {
-            income = Fn.pool(Pool.INCOMES, mission.getName(), () -> Ut.instance(incomeCls));
+            income = Fn.pool(Pool.INCOMES, mission.getCode(), () -> Ut.instance(incomeCls));
         }
         return income;
     }
@@ -29,7 +29,7 @@ class Element {
         final Class<?> outcomeCls = mission.getOutcome();
         JobOutcome outcome = null;
         if (Objects.nonNull(outcomeCls) && Ut.isImplement(outcomeCls, JobOutcome.class)) {
-            outcome = Fn.pool(Pool.OUTCOMES, mission.getName(), () -> Ut.instance(outcomeCls));
+            outcome = Fn.pool(Pool.OUTCOMES, mission.getCode(), () -> Ut.instance(outcomeCls));
         }
         return outcome;
     }

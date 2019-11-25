@@ -8,6 +8,7 @@ import io.vertx.up.log.Annal;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Bridge for different JobStore
@@ -26,10 +27,24 @@ class UnityStore implements JobStore {
 
     @Override
     public Set<Mission> fetch() {
-        final Set<Mission> missions = reader.fetch();
+        /*
+         * Split all the job from here
+         * 1) All programming jobs are readonly ( Fixed value )
+         * 2) All stored jobs are editable ( Fixed value )
+         * 3) Double check jobs `readOnly` here ( Be sure readOnly set correctly )
+         */
+        final Set<Mission> missions = this.reader.fetch()
+                .stream()
+                .filter(Mission::isReadOnly)
+                .collect(Collectors.toSet());
         LOGGER.info(Info.JOB_SCANNED, missions.size(), "Programming");
-        final Set<Mission> storage = store.fetch();
+
+        final Set<Mission> storage = this.store.fetch()
+                .stream()
+                .filter(mission -> !mission.isReadOnly())
+                .collect(Collectors.toSet());
         LOGGER.info(Info.JOB_SCANNED, storage.size(), "Dynamic/Stored");
+
         /* Merged */
         final Set<Mission> result = new HashSet<>();
         result.addAll(missions);
@@ -43,15 +58,15 @@ class UnityStore implements JobStore {
     @Override
     public JobStore add(final Mission mission) {
         JobPool.save(mission);
-        return store.add(mission);
+        return this.store.add(mission);
     }
 
     @Override
     public Mission fetch(final String name) {
         return JobPool.get(name, () -> {
-            Mission mission = reader.fetch(name);
+            Mission mission = this.reader.fetch(name);
             if (Objects.isNull(mission)) {
-                mission = store.fetch(name);
+                mission = this.store.fetch(name);
             }
             return mission;
         });
@@ -59,13 +74,13 @@ class UnityStore implements JobStore {
 
     @Override
     public JobStore remove(final Mission mission) {
-        JobPool.remove(mission.getName());
-        return store.remove(mission);
+        JobPool.remove(mission.getCode());
+        return this.store.remove(mission);
     }
 
     @Override
     public JobStore update(final Mission mission) {
         JobPool.save(mission);
-        return store.update(mission);
+        return this.store.update(mission);
     }
 }

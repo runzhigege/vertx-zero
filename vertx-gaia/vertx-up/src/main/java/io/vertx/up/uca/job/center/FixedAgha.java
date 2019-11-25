@@ -33,7 +33,7 @@ class FixedAgha extends AbstractAgha {
              */
             Ut.itRepeat(2, () -> this.moveOn(mission, true));
         }));
-        this.getLogger().info(Info.JOB_INTERVAL, mission.getName(),
+        this.getLogger().info(Info.JOB_INTERVAL, mission.getCode(),
                 String.valueOf(delay), String.valueOf(mission.getDuration()), String.valueOf(jobId));
         return future.future();
     }
@@ -43,7 +43,7 @@ class FixedAgha extends AbstractAgha {
         final Instant start = Instant.now();
         final long delay = ChronoUnit.MILLIS.between(start, end);
         if (0 < delay) {
-            this.getLogger().info(Info.JOB_DELAY, mission.getName(), String.valueOf(delay));
+            this.getLogger().info(Info.JOB_DELAY, mission.getCode(), String.valueOf(delay));
         }
         return delay < 0 ? 0L : delay;
     }
