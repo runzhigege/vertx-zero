@@ -19,14 +19,18 @@ import java.util.Set;
  *  Job kit here for configuration
  */
 public class JobKit {
-    private static final List<Mission> MISSION_LIST = JobPool.get();
-
+    /*
+     * Could not use old code here
+     *
+     * private static final List<Mission> MISSION_LIST = JobPool.get();
+     */
     static Future<JsonArray> fetchMission(final Set<String> codes) {
+        final List<Mission> missionList = JobPool.get();
         if (Objects.isNull(codes) || codes.isEmpty()) {
             return Ux.future(new JsonArray());
         } else {
             final JsonArray response = new JsonArray();
-            MISSION_LIST.stream()
+            missionList.stream()
                     .filter(mission -> codes.contains(mission.getCode()))
                     .map(JobKit::toJson)
                     .forEach(response::add);
@@ -35,7 +39,8 @@ public class JobKit {
     }
 
     static Future<JsonObject> fetchMission(final String code) {
-        final Mission found = MISSION_LIST.stream()
+        final List<Mission> missionList = JobPool.get();
+        final Mission found = missionList.stream()
                 .filter(mission -> code.equals(mission.getCode()))
                 .findFirst().orElse(null);
         if (Objects.isNull(found)) {
