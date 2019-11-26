@@ -17,11 +17,10 @@ public class UxJob {
 
     // Start job
     public Future<Boolean> start(final String name) {
-        return Fn.thenGeneric(future -> this.client.start(name,
-                res -> {
-                    LOGGER.info(Info.JOB_START, name, res.result());
-                    future.complete(Boolean.TRUE);
-                }));
+        return Fn.thenGeneric(future -> this.client.start(name, res -> {
+            LOGGER.info(Info.JOB_START, name, res.result());
+            future.complete(Boolean.TRUE);
+        }));
     }
 
     // Stop job

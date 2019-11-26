@@ -11,25 +11,25 @@ import javax.ws.rs.*;
 @Path("/api")
 @EndPoint
 public interface JobApi {
-    @Path("/job/start/{name}")
+    @Path("/job/start/{code}")
     @PUT
     @Address(JtAddr.Job.START)
-    String startJob(@HeaderParam(ID.Header.X_SIGMA) String sigma, @PathParam("name") String name);
+    String startJob(@PathParam("code") String code);
 
-    @Path("/job/stop/{name}")
+    @Path("/job/stop/{code}")
     @PUT
     @Address(JtAddr.Job.STOP)
-    String stopJob(@HeaderParam(ID.Header.X_SIGMA) String sigma, @PathParam("name") String name);
+    String stopJob(@PathParam("code") String code);
 
-    @Path("/job/resume/{name}")
+    @Path("/job/resume/{code}")
     @PUT
     @Address(JtAddr.Job.RESUME)
-    String resumeJob(@HeaderParam(ID.Header.X_SIGMA) String sigma, @PathParam("name") String name);
+    String resumeJob(@PathParam("code") String code);
 
-    @Path("/job/info/name/{name}")
+    @Path("/job/info/code/{code}")
     @GET
     @Address(JtAddr.Job.STATUS)
-    String statusJob(@HeaderParam(ID.Header.X_SIGMA) String sigma, @PathParam("name") String name);
+    String statusJob(@PathParam("code") String code);
 
     @Path("/job/info/by/sigma")
     @GET
