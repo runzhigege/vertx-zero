@@ -36,12 +36,12 @@ public interface JobApi {
     @Address(JtAddr.Job.BY_SIGMA)
     String fetchJobs(@HeaderParam(ID.Header.X_SIGMA) String sigma);
 
-    @Path("/job/info/fetch/:key")
+    @Path("/job/info/mission/:key")
     @GET
     @Address(JtAddr.Job.GET_BY_KEY)
     String fetchJob(@PathParam("key") String key);
 
-    @Path("/job/info/update/:key")
+    @Path("/job/info/mission/:key")
     @PUT
     @Address(JtAddr.Job.UPDATE_BY_KEY)
     String updateJob(@PathParam("key") String key,
