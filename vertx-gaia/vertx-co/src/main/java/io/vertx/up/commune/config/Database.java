@@ -188,4 +188,18 @@ public class Database implements Serializable, Json {
     public int hashCode() {
         return Objects.hash(this.jdbcUrl);
     }
+
+    @Override
+    public String toString() {
+        return "Database{" +
+                "hostname='" + this.hostname + '\'' +
+                ", instance='" + this.instance + '\'' +
+                ", port=" + this.port +
+                ", category=" + this.category +
+                ", jdbcUrl='" + this.jdbcUrl + '\'' +
+                ", username='" + this.username + '\'' +
+                ", password='" + this.password + '\'' +
+                ", driverClassName='" + this.driverClassName + '\'' +
+                '}';
+    }
 }

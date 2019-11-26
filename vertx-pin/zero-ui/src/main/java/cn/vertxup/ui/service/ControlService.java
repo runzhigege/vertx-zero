@@ -28,10 +28,10 @@ public class ControlService implements ControlStub {
                     final JsonArray result = new JsonArray();
                     list.stream().filter(Objects::nonNull)
                             .map(item -> (JsonObject) item)
-                            .map(item -> Ke.metadata(item, KeField.Ui.CONTAINER_CONFIG))
-                            .map(item -> Ke.metadata(item, KeField.Ui.COMPONENT_CONFIG))
-                            .map(item -> Ke.metadata(item, KeField.Ui.ASSIST))
-                            .map(item -> Ke.metadata(item, KeField.Ui.GRID))
+                            .map(item -> Ke.mount(item, KeField.Ui.CONTAINER_CONFIG))
+                            .map(item -> Ke.mount(item, KeField.Ui.COMPONENT_CONFIG))
+                            .map(item -> Ke.mount(item, KeField.Ui.ASSIST))
+                            .map(item -> Ke.mount(item, KeField.Ui.GRID))
                             .forEach(result::add);
                     return Ux.future(result);
                 });
@@ -42,10 +42,10 @@ public class ControlService implements ControlStub {
         return Ux.Jooq.on(UiControlDao.class)
                 .<UiControl>findByIdAsync(control)
                 .compose(Ux::fnJObject)
-                .compose(Ke.metadata(KeField.Ui.CONTAINER_CONFIG))
-                .compose(Ke.metadata(KeField.Ui.COMPONENT_CONFIG))
-                .compose(Ke.metadata(KeField.Ui.ASSIST))
-                .compose(Ke.metadata(KeField.Ui.GRID));
+                .compose(Ke.mount(KeField.Ui.CONTAINER_CONFIG))
+                .compose(Ke.mount(KeField.Ui.COMPONENT_CONFIG))
+                .compose(Ke.mount(KeField.Ui.ASSIST))
+                .compose(Ke.mount(KeField.Ui.GRID));
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ControlService implements ControlStub {
                 .compose(Ux::fnJArray)
                 .compose(array -> {
                     Ut.itJArray(array).forEach(each ->
-                            Ke.metadata(each, KeField.Ui.CONFIG));
+                            Ke.mount(each, KeField.Ui.CONFIG));
                     return Ux.future(array);
                 });
     }

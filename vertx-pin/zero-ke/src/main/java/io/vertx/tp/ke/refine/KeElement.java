@@ -13,11 +13,11 @@ import java.util.function.Function;
 
 class KeElement {
 
-    static Function<JsonObject, Future<JsonObject>> metadataArray(final String field) {
-        return response -> Ux.future(metadataArray(response, field));
+    static Function<JsonObject, Future<JsonObject>> mountArray(final String field) {
+        return response -> Ux.future(mountArray(response, field));
     }
 
-    static JsonObject metadataArray(final JsonObject response, final String field) {
+    static JsonObject mountArray(final JsonObject response, final String field) {
         return Fn.getJvm(new JsonObject(), () -> {
             final String data = response.getString(field);
             if (Objects.nonNull(data) && Ut.isJArray(data)) {
@@ -27,7 +27,7 @@ class KeElement {
         }, response);
     }
 
-    static JsonObject metadata(final JsonObject response, final String field) {
+    static JsonObject mount(final JsonObject response, final String field) {
         return Fn.getJvm(new JsonObject(), () -> {
             final String data = response.getString(field);
             if (Objects.nonNull(data) && Ut.isJObject(data)) {
@@ -37,8 +37,22 @@ class KeElement {
         }, response);
     }
 
-    static Function<JsonObject, Future<JsonObject>> metadata(final String field) {
-        return response -> Ux.future(metadata(response, field));
+    static JsonObject mountString(final JsonObject response, final String field) {
+        return Fn.getJvm(new JsonObject(), () -> {
+            final Object value = response.getValue(field);
+            if (Objects.nonNull(value)) {
+                if (value instanceof JsonObject) {
+                    response.put(field, ((JsonObject) value).encode());
+                } else if (value instanceof JsonArray) {
+                    response.put(field, ((JsonArray) value).encode());
+                }
+            }
+            return response;
+        }, response);
+    }
+
+    static Function<JsonObject, Future<JsonObject>> mount(final String field) {
+        return response -> Ux.future(mount(response, field));
     }
 
     /*

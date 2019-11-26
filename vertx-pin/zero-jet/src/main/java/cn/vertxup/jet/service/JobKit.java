@@ -1,5 +1,6 @@
 package cn.vertxup.jet.service;
 
+import cn.vertxup.jet.domain.tables.pojos.IService;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -17,7 +18,7 @@ import java.util.Set;
 /*
  *  Job kit here for configuration
  */
-class JobKit {
+public class JobKit {
     private static final List<Mission> MISSION_LIST = JobPool.get();
 
     static Future<JsonArray> fetchMission(final Set<String> codes) {
@@ -27,7 +28,7 @@ class JobKit {
             final JsonArray response = new JsonArray();
             MISSION_LIST.stream()
                     .filter(mission -> codes.contains(mission.getCode()))
-                    .map(JobKit::normalize)
+                    .map(JobKit::toJson)
                     .forEach(response::add);
             return Ux.future(response);
         }
@@ -40,17 +41,28 @@ class JobKit {
         if (Objects.isNull(found)) {
             return Ux.future(new JsonObject());
         } else {
-            return Ux.future(normalize(found));
+            return Ux.future(toJson(found));
         }
     }
 
-    private static JsonObject normalize(final Mission mission) {
+    public static IService fromJson(final JsonObject serviceJson) {
+        Ke.mountString(serviceJson, KeField.Api.CONFIG_INTEGRATION);
+        Ke.mountString(serviceJson, KeField.Api.CONFIG_DATABASE);
+
+        Ke.mountString(serviceJson, KeField.Api.CHANNEL_CONFIG);
+        Ke.mountString(serviceJson, KeField.Api.SERVICE_CONFIG);
+        Ke.mountString(serviceJson, KeField.Api.DICT_CONFIG);
+        Ke.mountString(serviceJson, KeField.Api.MAPPING_CONFIG);
+        return Ux.fromJson(serviceJson, IService.class);
+    }
+
+    public static JsonObject toJson(final Mission mission) {
         final JsonObject serialized = Ut.serializeJson(mission);
         final JsonObject metadata = serialized.getJsonObject(KeField.METADATA);
         if (Ut.notNil(metadata)) {
             final JsonObject service = metadata.getJsonObject(KeField.SERVICE);
             if (Ut.notNil(service)) {
-                Ke.metadata(service, KeField.METADATA);
+                Ke.mount(service, KeField.METADATA);
 
                 /*
                  * Zero standard configuration
@@ -58,8 +70,8 @@ class JobKit {
                  * 2) Database
                  * Here should be configuration for `Database` & `Integration`
                  */
-                Ke.metadata(service, KeField.Api.CONFIG_INTEGRATION);
-                Ke.metadata(service, KeField.Api.CONFIG_DATABASE);
+                Ke.mount(service, KeField.Api.CONFIG_INTEGRATION);
+                Ke.mount(service, KeField.Api.CONFIG_DATABASE);
 
                 /*
                  * 1) channelConfig - Channel Component configuration
@@ -67,10 +79,10 @@ class JobKit {
                  * 3) dictConfig = Dict Component configuration
                  * 4) mappingConfig = Mapping Component configuration
                  */
-                Ke.metadata(service, KeField.Api.CHANNEL_CONFIG);
-                Ke.metadata(service, KeField.Api.SERVICE_CONFIG);
-                Ke.metadata(service, KeField.Api.DICT_CONFIG);
-                Ke.metadata(service, KeField.Api.MAPPING_CONFIG);
+                Ke.mount(service, KeField.Api.CHANNEL_CONFIG);
+                Ke.mount(service, KeField.Api.SERVICE_CONFIG);
+                Ke.mount(service, KeField.Api.DICT_CONFIG);
+                Ke.mount(service, KeField.Api.MAPPING_CONFIG);
             }
         }
         return serialized;

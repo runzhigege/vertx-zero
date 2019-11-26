@@ -19,8 +19,8 @@ public class OptionService implements OptionStub {
         return Ux.Jooq.on(VQueryDao.class)
                 .<VQuery>findByIdAsync(id)
                 .compose(Ux::fnJObject)
-                .compose(Ke.metadata(FIELD_QUERY_CRITERIA))
-                .compose(Ke.metadataArray(FIELD_QUERY_PROJECTION));
+                .compose(Ke.mount(FIELD_QUERY_CRITERIA))
+                .compose(Ke.mountArray(FIELD_QUERY_PROJECTION));
     }
 
     @Override
@@ -28,8 +28,8 @@ public class OptionService implements OptionStub {
         return Ux.Jooq.on(VSearchDao.class)
                 .<VSearch>findByIdAsync(id)
                 .compose(Ux::fnJObject)
-                .compose(Ke.metadata(FIELD_SEARCH_NOTICE))
-                .compose(Ke.metadataArray(FIELD_SEARCH_COND));
+                .compose(Ke.mount(FIELD_SEARCH_NOTICE))
+                .compose(Ke.mountArray(FIELD_SEARCH_COND));
     }
 
     @Override
@@ -37,10 +37,10 @@ public class OptionService implements OptionStub {
         return Ux.Jooq.on(VFragmentDao.class)
                 .<VFragment>findByIdAsync(id)
                 .compose(Ux::fnJObject)
-                .compose(Ke.metadata(FIELD_FRAGMENT_MODEL))
-                .compose(Ke.metadata(FIELD_FRAGMENT_NOTICE))
-                .compose(Ke.metadata(FIELD_FRAGMENT_CONFIG))
-                .compose(Ke.metadataArray(FIELD_FRAGMENT_BUTTON_GROUP));
+                .compose(Ke.mount(FIELD_FRAGMENT_MODEL))
+                .compose(Ke.mount(FIELD_FRAGMENT_NOTICE))
+                .compose(Ke.mount(FIELD_FRAGMENT_CONFIG))
+                .compose(Ke.mountArray(FIELD_FRAGMENT_BUTTON_GROUP));
     }
 
     @Override
@@ -48,6 +48,6 @@ public class OptionService implements OptionStub {
         return Ux.Jooq.on(VTableDao.class)
                 .<VTable>findByIdAsync(id)
                 .compose(Ux::fnJObject)
-                .compose(Ke.metadataArray(FIELD_TABLE_OP_CONFIG));
+                .compose(Ke.mountArray(FIELD_TABLE_OP_CONFIG));
     }
 }

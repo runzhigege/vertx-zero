@@ -173,3 +173,4 @@ E80407: "(501) - (Jet) The channel component met error and coult not be initiali
 E80408: "(424) - (Jet) The component `{0}` does not match channel type `{1}` "
 E80409: "(424) - (Jet) The channel must be one of `{0}`, but now your class `{1}` does not match ( current = {2} )"
 E80410: "(424) - (Jet) The component `{0}` with `DEFINE` type must implements `JtChannel` interface"
+E80411: "(500) - (Jet) The application environment could not be get by sigma `{0}`"

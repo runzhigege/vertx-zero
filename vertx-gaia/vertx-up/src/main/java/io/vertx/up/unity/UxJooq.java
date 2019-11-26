@@ -376,7 +376,24 @@ public class UxJooq {
 
     // -------------------- Upsert ---------
     public <T> Future<T> upsertAsync(final JsonObject filters, final T updated) {
-        return this.<T>fetchOneAsync(filters).compose(item -> Fn.match(
+        return combineAsync(this.<T>fetchOneAsync(filters), updated);
+    }
+
+    public <T> Future<T> upsertAsync(final String key, final T updated) {
+        return combineAsync(this.<T>findByIdAsync(key), updated);
+    }
+
+    public <T> T upsert(final JsonObject filters, final T updated) {
+        return this.combine(this.fetchOne(filters), updated);
+    }
+
+    public <T> T upsert(final String key, final T updated) {
+        return this.combine(this.findById(key), updated);
+    }
+
+    // -------------------- Upsert Json ---------
+    private <T> Future<T> combineAsync(final Future<T> queried, final T updated) {
+        return queried.compose(item -> Fn.match(
                 // null != item, updated to existing item.
                 Fn.fork(() -> this.<T>updateAsync(this.analyzer.copyEntity(item, updated))),
                 // null == item, insert data
@@ -384,12 +401,12 @@ public class UxJooq {
         ));
     }
 
-    public <T> T upsert(final JsonObject filters, final T updated) {
-        final T entity = this.fetchOne(filters);
-        if (null == entity) {
+    private <T> T combine(final T queried, final T updated) {
+        if (null == queried) {
             return this.insert(updated);
         } else {
-            return this.update(this.analyzer.copyEntity(entity, updated));
+            return this.update(this.analyzer.copyEntity(queried, updated));
         }
     }
+
 }

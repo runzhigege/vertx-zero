@@ -33,8 +33,8 @@ public class ActivityService implements ActivityStub {
                 .compose(Ux::fnJArray)
                 .compose(response -> {
                     Ut.itJArray(response).forEach(each -> {
-                        Ke.metadata(each, "recordNew");
-                        Ke.metadata(each, "recordOld");
+                        Ke.mount(each, "recordNew");
+                        Ke.mount(each, "recordOld");
                     });
                     return Ux.future(response);
                 });
@@ -56,8 +56,8 @@ public class ActivityService implements ActivityStub {
                             /*
                              * Json Serialization for recordNew / recordOld
                              */
-                            Ke.metadata(activityJson, "recordNew");
-                            Ke.metadata(activityJson, "recordOld");
+                            Ke.mount(activityJson, "recordNew");
+                            Ke.mount(activityJson, "recordOld");
                             activityJson.put(KeField.CHANGES, changes);
                             return Ux.future(activityJson);
                         })));
