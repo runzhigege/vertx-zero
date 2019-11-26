@@ -18,9 +18,9 @@ class CodeStore implements JobReader {
     }
 
     @Override
-    public Mission fetch(final String name) {
+    public Mission fetch(final String code) {
         return Fn.getNull(null, () -> MISSIONS.stream()
-                .filter(mission -> name.equals(mission.getName()))
-                .findFirst().orElse(null), name);
+                .filter(mission -> code.equals(mission.getCode()))
+                .findFirst().orElse(null), code);
     }
 }

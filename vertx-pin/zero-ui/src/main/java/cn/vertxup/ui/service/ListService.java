@@ -44,10 +44,10 @@ public class ListService implements ListStub {
         /*
          * Capture important configuration here
          */
-        Ke.metadata(listJson, ListStub.FIELD_OPTIONS);
-        Ke.metadata(listJson, ListStub.FIELD_OPTIONS_AJAX);
-        Ke.metadata(listJson, ListStub.FIELD_OPTIONS_SUBMIT);
-        Ke.metadata(listJson, ListStub.FIELD_V_SEGMENT);
+        Ke.mount(listJson, ListStub.FIELD_OPTIONS);
+        Ke.mount(listJson, ListStub.FIELD_OPTIONS_AJAX);
+        Ke.mount(listJson, ListStub.FIELD_OPTIONS_SUBMIT);
+        Ke.mount(listJson, ListStub.FIELD_V_SEGMENT);
         return Ux.future(listJson)
                 /* vQuery */
                 .compose(Ux.applyMount(ListStub.FIELD_V_QUERY, this.optionStub::fetchQuery))

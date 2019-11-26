@@ -84,12 +84,12 @@ public class PageService implements PageStub {
                             /*
                              * Configuration converted to Json
                              */
-                            .compose(Ke.metadata(KeField.Ui.CONTAINER_CONFIG))
-                            .compose(Ke.metadata(KeField.Ui.ASSIST))
+                            .compose(Ke.mount(KeField.Ui.CONTAINER_CONFIG))
+                            .compose(Ke.mount(KeField.Ui.ASSIST))
                             /*
                              * Another method to convert JsonArray
                              */
-                            .compose(Ke.metadataArray(KeField.Ui.GRID));
+                            .compose(Ke.mountArray(KeField.Ui.GRID));
                 });
     }
 }

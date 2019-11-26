@@ -16,6 +16,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+@SuppressWarnings("all")
 public class Ke {
 
     /*
@@ -32,20 +33,24 @@ public class Ke {
         return KeImage.image(field);
     }
 
-    public static JsonObject metadata(final JsonObject response, final String field) {
-        return KeElement.metadata(response, field);
+    public static JsonObject mount(final JsonObject response, final String field) {
+        return KeElement.mount(response, field);
     }
 
-    public static Function<JsonObject, Future<JsonObject>> metadata(final String field) {
-        return KeElement.metadata(field);
+    public static Function<JsonObject, Future<JsonObject>> mount(final String field) {
+        return KeElement.mount(field);
     }
 
-    public static JsonObject metadataArray(final JsonObject response, final String field) {
-        return KeElement.metadataArray(response, field);
+    public static JsonObject mountArray(final JsonObject response, final String field) {
+        return KeElement.mountArray(response, field);
     }
 
-    public static Function<JsonObject, Future<JsonObject>> metadataArray(final String field) {
-        return KeElement.metadataArray(field);
+    public static JsonObject mountString(final JsonObject response, final String field) {
+        return KeElement.mountString(response, field);
+    }
+
+    public static Function<JsonObject, Future<JsonObject>> mountArray(final String field) {
+        return KeElement.mountArray(field);
     }
 
 

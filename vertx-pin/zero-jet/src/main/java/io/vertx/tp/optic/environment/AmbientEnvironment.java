@@ -145,4 +145,19 @@ public class AmbientEnvironment {
     public Set<JtJob> jobs() {
         return new HashSet<>(this.jobs.values());
     }
+
+    /*
+     * Cache flush for Job
+     */
+    public void flushJob(final JtJob job) {
+        /*
+         * serviceKey -> service (Cached)
+         */
+        final IService service = job.service();
+        this.serviceMap.put(service.getKey(), service);
+        /*
+         * serviceKey -> job (JtJob)
+         */
+        this.jobs.put(service.getKey(), job);
+    }
 }

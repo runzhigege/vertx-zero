@@ -24,14 +24,14 @@ public class JobClientImpl implements JobClient {
     }
 
     @Override
-    public JobClient start(final String name, final Handler<AsyncResult<Long>> handler) {
-        /* Find Mission by name */
-        final Mission mission = JobPool.get(name);
+    public JobClient start(final String code, final Handler<AsyncResult<Long>> handler) {
+        /* Find Mission by code */
+        final Mission mission = JobPool.get(code);
         if (Objects.nonNull(mission)) {
             /* Start new job here */
             final Agha agha = Agha.get(mission.getType());
             /* Bind vertx */
-            Ut.contract(agha, Vertx.class, vertx);
+            Ut.contract(agha, Vertx.class, this.vertx);
             /*
              * begin method return Future<Long>, it's async result
              * that's why here it's not needed to use:
@@ -39,9 +39,9 @@ public class JobClientImpl implements JobClient {
              * returned directly.
              * */
             final Future<Long> future = agha.begin(mission);
-            future.setHandler(handler);
+            handler.handle(future);
         } else {
-            LOGGER.info("[ ZERO ] ( JobClient ) The pool could not find job of name = `{0}`", name);
+            LOGGER.info("[ ZERO ] ( JobClient ) The pool could not find job of code = `{0}`", code);
         }
         return this;
     }
@@ -52,15 +52,15 @@ public class JobClientImpl implements JobClient {
         JobPool.stop(timerId);
         handler.handle(Future.succeededFuture(Boolean.TRUE));
         /* Cancel job */
-        vertx.cancelTimer(timerId);
+        this.vertx.cancelTimer(timerId);
         return this;
     }
 
     @Override
     public JobClient resume(final Long timeId, final Handler<AsyncResult<Long>> handler) {
         JobPool.resume(timeId);
-        /* String name get and then start */
-        final String name = JobPool.name(timeId);
-        return start(name, handler);
+        /* String code get and then start */
+        final String code = JobPool.code(timeId);
+        return this.start(code, handler);
     }
 }

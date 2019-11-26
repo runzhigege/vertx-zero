@@ -33,7 +33,7 @@ class OutPut {
                 /*
                  * Directly
                  */
-                Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_4TH_JOB, mission.getName()));
+                Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_4TH_JOB, mission.getCode()));
 
                 return Future.succeededFuture(envelop);
             } else {
@@ -45,11 +45,11 @@ class OutPut {
                 Ut.contract(outcome, Vertx.class, this.vertx);
                 Ut.contract(outcome, Mission.class, mission);
 
-                Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_4TH_JOB_ASYNC, mission.getName(), outcome.getClass().getName()));
+                Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_4TH_JOB_ASYNC, mission.getCode(), outcome.getClass().getName()));
                 return outcome.afterAsync(envelop);
             }
         } else {
-            Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_ERROR, mission.getName(), envelop.error().getClass().getName()));
+            Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_ERROR, mission.getCode(), envelop.error().getClass().getName()));
             final WebException error = envelop.error();
             /*
              * For spec debug here, this code is very important
@@ -70,7 +70,7 @@ class OutPut {
                  * Directly
                  */
                 Element.onceLog(mission,
-                        () -> LOGGER.info(Info.PHASE_5TH_JOB, mission.getName()));
+                        () -> LOGGER.info(Info.PHASE_5TH_JOB, mission.getCode()));
                 return Future.succeededFuture(envelop);
             } else {
                 /*
@@ -80,7 +80,7 @@ class OutPut {
                 final Promise<Envelop> output = Promise.promise();
                 final EventBus eventBus = this.vertx.eventBus();
                 Element.onceLog(mission,
-                        () -> LOGGER.info(Info.PHASE_5TH_JOB_ASYNC, mission.getName(), address));
+                        () -> LOGGER.info(Info.PHASE_5TH_JOB_ASYNC, mission.getCode(), address));
                 eventBus.<Envelop>request(address, envelop, handler -> {
                     if (handler.succeeded()) {
                         output.complete(handler.result().body());
@@ -92,7 +92,7 @@ class OutPut {
             }
         } else {
             Element.onceLog(mission,
-                    () -> LOGGER.info(Info.PHASE_ERROR, mission.getName(),
+                    () -> LOGGER.info(Info.PHASE_ERROR, mission.getCode(),
                             envelop.error().getClass().getName()));
 
             return Ux.future(envelop);

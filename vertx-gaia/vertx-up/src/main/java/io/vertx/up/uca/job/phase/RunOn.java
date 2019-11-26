@@ -33,7 +33,7 @@ class RunOn {
     Future<Envelop> invoke(final Envelop envelop, final Mission mission) {
         final Method method = mission.getOn();
         if (Objects.nonNull(method)) {
-            Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_3RD_JOB_RUN, mission.getName(), method.getName()));
+            Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_3RD_JOB_RUN, mission.getCode(), method.getName()));
             return this.execute(envelop, method, mission);
         } else return Ux.future(envelop);
     }
@@ -41,7 +41,7 @@ class RunOn {
     Future<Envelop> callback(final Envelop envelop, final Mission mission) {
         final Method method = mission.getOff();
         if (Objects.nonNull(method)) {
-            Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_6TH_JOB_CALLBACK, mission.getName(), method.getName()));
+            Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_6TH_JOB_CALLBACK, mission.getCode(), method.getName()));
             return this.execute(envelop, method, mission);
         } else return Ux.future(envelop);
 
@@ -60,7 +60,7 @@ class RunOn {
                 return Future.failedFuture(ex);
             }
         } else {
-            Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_ERROR, mission.getName(), envelop.error().getClass().getName()));
+            Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_ERROR, mission.getCode(), envelop.error().getClass().getName()));
             return Ux.future(envelop);
         }
     }
@@ -91,7 +91,7 @@ class RunOn {
                 argsList.add(this.buildArgs(parameterType, envelop, mission));
             }
         } else {
-            throw new _417JobMethodException(this.getClass(), mission.getName());
+            throw new _417JobMethodException(this.getClass(), mission.getCode());
         }
         return argsList.toArray();
     }
@@ -151,7 +151,7 @@ class RunOn {
             return mission;
         } else {
 
-            throw new _417JobMethodException(this.getClass(), mission.getName());
+            throw new _417JobMethodException(this.getClass(), mission.getCode());
         }
     }
 }

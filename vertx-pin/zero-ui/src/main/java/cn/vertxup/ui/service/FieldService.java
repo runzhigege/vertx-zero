@@ -68,10 +68,10 @@ public class FieldService implements FieldStub {
                     dataCell.put("title", cell.getValue("label"));
                     dataCell.put("field", cell.getValue("key"));    // Specific field for title.
                 } else {
-                    Ke.metadata(cell, FieldStub.OPTION_JSX);
-                    Ke.metadata(cell, FieldStub.OPTION_CONFIG);
-                    Ke.metadata(cell, FieldStub.OPTION_ITEM);
-                    Ke.metadataArray(cell, "rules");
+                    Ke.mount(cell, FieldStub.OPTION_JSX);
+                    Ke.mount(cell, FieldStub.OPTION_CONFIG);
+                    Ke.mount(cell, FieldStub.OPTION_ITEM);
+                    Ke.mountArray(cell, "rules");
                     final String render = Objects.isNull(cell.getString("render")) ? "" :
                             cell.getString("render");
                     final String label = Objects.isNull(cell.getString("label")) ? "" :
