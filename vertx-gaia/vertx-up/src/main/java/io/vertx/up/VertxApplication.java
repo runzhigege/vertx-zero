@@ -3,6 +3,7 @@ package io.vertx.up;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.tp.plugin.etcd.center.EtcdData;
+import io.vertx.tp.plugin.shared.MapInfix;
 import io.vertx.up.annotations.Up;
 import io.vertx.up.eon.em.ServerType;
 import io.vertx.up.exception.zero.EtcdNetworkException;
@@ -14,9 +15,9 @@ import io.vertx.up.runtime.ZeroAnno;
 import io.vertx.up.runtime.ZeroHeart;
 import io.vertx.up.uca.options.DynamicVisitor;
 import io.vertx.up.uca.options.ServerVisitor;
-import io.vertx.up.util.Ut;
 import io.vertx.up.uca.web.ZeroLauncher;
 import io.vertx.up.uca.web.anima.*;
+import io.vertx.up.util.Ut;
 import io.vertx.zero.exception.MicroModeUpException;
 import io.vertx.zero.exception.UpClassArgsException;
 import io.vertx.zero.exception.UpClassInvalidException;
@@ -45,7 +46,7 @@ public class VertxApplication {
          * Although the input `clazz` is not important, but zero container require the input
          * clazz mustn't be null, for future usage such as plugin extension for it.
          */
-        Fn.out(null == clazz, UpClassArgsException.class, getClass());
+        Fn.out(null == clazz, UpClassArgsException.class, this.getClass());
 
         /*
          * Stored clazz information
@@ -53,14 +54,14 @@ public class VertxApplication {
          * 2. annotation extraction from Annotation[] -> Annotation Map
          */
         this.clazz = clazz;
-        annotationMap = Anno.get(clazz);
+        this.annotationMap = Anno.get(clazz);
 
         /*
          * Zero specification definition for @Up here.
          * The input class must annotated with @Up instead of other description
          */
 
-        Fn.out(!annotationMap.containsKey(Up.class.getName()), UpClassInvalidException.class, getClass(),
+        Fn.out(!this.annotationMap.containsKey(Up.class.getName()), UpClassInvalidException.class, this.getClass(),
                 null == this.clazz ? null : this.clazz.getName());
     }
 
@@ -146,6 +147,18 @@ public class VertxApplication {
 
         final Launcher<Vertx> launcher = Ut.singleton(ZeroLauncher.class);
         launcher.start(vertx -> {
+            /*
+             * Map infix initialized first to fix
+             * Boot issue here to enable map infix ( SharedMap will be used widely )
+             * It means that the MapInfix should started twice for safe usage in future
+             *
+             * In our production environment, only MapInfix plugin booting will cost some time
+             * to be ready, it may take long time to be ready after container started
+             * In this kind of situation, Zero container start up MapInfix internally first
+             * to leave more time to be prepared.
+             */
+            MapInfix.init(vertx);
+
             /* 1.Find Agent for deploy **/
             Runner.run(() -> {
                 final Scatter<Vertx> scatter = Ut.singleton(AgentScatter.class);

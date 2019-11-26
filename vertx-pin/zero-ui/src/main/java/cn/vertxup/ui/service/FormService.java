@@ -66,7 +66,7 @@ public class FormService implements FormStub {
 
     private Future<JsonObject> attachConfig(final JsonObject formJson) {
         final JsonObject config = new JsonObject();
-        Ke.metadata(formJson, KeField.METADATA);
+        Ke.mount(formJson, KeField.METADATA);
         /*
          * Form configuration
          * window and columns are required
@@ -82,14 +82,14 @@ public class FormService implements FormStub {
          */
         if (formJson.containsKey(KeField.HIDDEN)) {
             form.put(KeField.HIDDEN, formJson.getValue(KeField.HIDDEN));
-            Ke.metadataArray(form, KeField.HIDDEN);
+            Ke.mountArray(form, KeField.HIDDEN);
         }
         /*
          * row: JsonObject
          */
         if (formJson.containsKey(KeField.ROW)) {
             form.put(KeField.ROW, formJson.getValue(KeField.HIDDEN));
-            Ke.metadata(form, KeField.ROW);
+            Ke.mount(form, KeField.ROW);
         }
         /*
          * metadata: JsonObject

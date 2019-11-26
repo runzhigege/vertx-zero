@@ -60,7 +60,7 @@ public class ZeroScheduler extends AbstractVerticle {
             /*
              * Bind vertx
              */
-            Ut.contract(reference, Vertx.class, vertx);
+            Ut.contract(reference, Vertx.class, this.vertx);
         }
         /*
          * Agha calling
@@ -70,11 +70,11 @@ public class ZeroScheduler extends AbstractVerticle {
             /*
              * Bind vertx
              */
-            Ut.contract(agha, Vertx.class, vertx);
+            Ut.contract(agha, Vertx.class, this.vertx);
             /*
              * Invoke here to provide input
              */
-            LOGGER.info(Info.JOB_AGHA_SELECTED, agha.getClass(), mission.getName(), mission.getType());
+            LOGGER.info(Info.JOB_AGHA_SELECTED, agha.getClass(), mission.getCode(), mission.getType());
             agha.begin(mission);
         }
     }

@@ -44,6 +44,8 @@ public class Mission implements Serializable {
     private String code;
     /* Job description */
     private String comment;
+    /* Whether this job is read only */
+    private boolean readOnly;
     /* Job configuration */
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
@@ -87,6 +89,14 @@ public class Mission implements Serializable {
 
     public void setStatus(final JobStatus status) {
         this.status = status;
+    }
+
+    public boolean isReadOnly() {
+        return this.readOnly;
+    }
+
+    public void setReadOnly(final boolean readOnly) {
+        this.readOnly = readOnly;
     }
 
     public String getName() {
@@ -273,7 +283,7 @@ public class Mission implements Serializable {
                     this.outcomeAddress = null;
                 }
             } else {
-                LOGGER.info(Info.JOB_NO_OFF, this.getName());
+                LOGGER.info(Info.JOB_NO_OFF, this.getCode());
             }
         }
         return this;
@@ -299,6 +309,7 @@ public class Mission implements Serializable {
         return "Mission{" +
                 "status=" + this.status +
                 ", name='" + this.name + '\'' +
+                ", readOnly='" + this.readOnly + '\'' +
                 ", type=" + this.type +
                 ", code='" + this.code + '\'' +
                 ", comment='" + this.comment + '\'' +

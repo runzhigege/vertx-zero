@@ -71,13 +71,18 @@ public class JtJob extends JtCommercial {
     public Mission toJob() {
         final Mission mission = new Mission();
         /*
-         * IJob -> Mission：name
-         * The job unique identifier: namespace + name
-         * The splitted character is `$$`
+         * IJob -> Mission：code
+         * 1) Job alias is job name for standalone here
+         * 2) Job code/name must be `namespace + code` to build unique identifier of current job
+         * 3) Default job type is ONCE
+         * 4) For job configuration, it's different for
+         * - 4.1) All the programming job should be `READONLY` ( hard coding )
+         * - 4.2) All the extension job ( stored into database ) should be `EDITABLE` ( dynamic )
          */
-        mission.setName(Jt.jobName(this.job));
+        mission.setName(this.job.getName());
         mission.setType(Ut.toEnum(this.job::getType, JobType.class, JobType.ONCE));
         mission.setCode(Jt.jobCode(this.job));
+        mission.setReadOnly(Boolean.FALSE);
         /*
          * Basic information
          */

@@ -51,9 +51,13 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
 
         /* Initialization */
         final Mission mission = this.config(annotation);
-
-        /* Basic data object initialized */
+        /*
+         * Basic data object initialized
+         * For this kind of situation, the job name should be equal to alias
+         * */
         mission.setName(name);
+        mission.setReadOnly(Boolean.TRUE);
+
         /*
          * Let type could be configured,
          * 1) Annotation type priority should be low
@@ -75,7 +79,7 @@ public class JobInquirer implements Inquirer<Set<Mission>> {
         }
         /* code sync */
         if (Ut.isNil(mission.getCode())) {
-            mission.setCode(mission.getName());
+            mission.setCode(Constants.DEFAULT_JOB_NAMESPACE + Strings.DASH + mission.getName());
         }
         mission.connect(clazz);
         /* on method must existing */

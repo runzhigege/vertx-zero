@@ -15,7 +15,7 @@ interface JobReader {
     Set<Mission> fetch();
 
     /*
-     * Find job by name.
+     * Find job by code.
      */
-    Mission fetch(String name);
+    Mission fetch(String code);
 }

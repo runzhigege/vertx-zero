@@ -13,6 +13,8 @@ public interface Constants {
 
     String DEFAULT_JOB = "jobs";
 
+    String DEFAULT_JOB_NAMESPACE = "zero.vertx.jobs";
+
     /**
      * Scanned data to distinguish mode
      * 1) Only Interface Style could have the indexes key such as 0,1,2 consider as data key.
@@ -20,14 +22,14 @@ public interface Constants {
      */
     ConcurrentMap<Integer, String> INDEXES = new ConcurrentHashMap<Integer, String>() {
         {
-            put(0, "0");
-            put(1, "1");
-            put(2, "2");
-            put(3, "3");
-            put(4, "4");
-            put(5, "5");
-            put(6, "6");
-            put(7, "7");
+            this.put(0, "0");
+            this.put(1, "1");
+            this.put(2, "2");
+            this.put(3, "3");
+            this.put(4, "4");
+            this.put(5, "5");
+            this.put(6, "6");
+            this.put(7, "7");
         }
     };
 }
