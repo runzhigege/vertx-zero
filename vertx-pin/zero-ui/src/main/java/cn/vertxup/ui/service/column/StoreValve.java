@@ -73,7 +73,7 @@ class StoreValve implements UiValve {
         Ke.runString(column::getFilterType, (filterType) -> {
             columnJson.put("$filter.type", filterType);
             columnJson.put("$filter.config", column.getFilterConfig());
-            Ke.metadata(columnJson, "$filter.config");
+            Ke.mount(columnJson, "$filter.config");
         });
         /*
          * Zero Config
@@ -81,11 +81,11 @@ class StoreValve implements UiValve {
         Ke.runString(column::getEmpty, (empty) -> columnJson.put("$empty", empty));
         Ke.runString(column::getMapping, (mapping) -> {
             columnJson.put("$mapping", mapping);
-            Ke.metadata(columnJson, "$mapping");
+            Ke.mount(columnJson, "$mapping");
         });
         Ke.runString(column::getConfig, (config) -> {
             columnJson.put("$config", config);
-            Ke.metadata(columnJson, "$config");
+            Ke.mount(columnJson, "$config");
         });
         return columnJson;
     }

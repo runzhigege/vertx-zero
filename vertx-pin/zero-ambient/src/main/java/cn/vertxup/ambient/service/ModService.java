@@ -22,7 +22,7 @@ public class ModService implements ModStub {
                 .fetchOneAsync(filters)
                 .compose(Ux::fnJObject)
                 /* Metadata field usage */
-                .compose(Ke.metadata(KeField.METADATA));
+                .compose(Ke.mount(KeField.METADATA));
     }
 
     @Override

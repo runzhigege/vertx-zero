@@ -23,6 +23,6 @@ public class TplService implements TplStub {
                         /*
                          * Configuration converted to Json
                          */
-                        .compose(Ke.metadata(KeField.Ui.CONFIG)));
+                        .compose(Ke.mount(KeField.Ui.CONFIG)));
     }
 }
