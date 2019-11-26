@@ -50,7 +50,7 @@ public class AmbientService implements AmbientStub {
             /*
              * Reset `JobStatus`
              */
-            mission.setStatus(JobStatus.READY);
+            mission.setStatus(JobStatus.STOPPED);
             JobPool.save(mission);
             /*
              * Response build
