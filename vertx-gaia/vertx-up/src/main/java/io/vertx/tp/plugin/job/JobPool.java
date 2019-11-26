@@ -26,6 +26,14 @@ public class JobPool {
     /* RUNNING Reference */
     private static final ConcurrentMap<Long, String> RUNNING = new ConcurrentHashMap<>();
 
+    public static ConcurrentMap<String, Mission> mapJobs() {
+        return JOBS;
+    }
+
+    public static ConcurrentMap<Long, String> mapRuns() {
+        return RUNNING;
+    }
+
     public static void put(final Set<Mission> missions) {
         missions.forEach(mission -> JOBS.put(mission.getCode(), mission));
     }
@@ -66,23 +74,44 @@ public class JobPool {
         return JOBS.containsKey(mission.getCode());
     }
 
+    public static void mount(final Long timeId, final String code) {
+        RUNNING.put(timeId, code);
+    }
+
     /*
      * Started job
      * --> RUNNING
      */
     public static void start(final Long timeId, final String code) {
         uniform(code, mission -> {
-            /*
-             * READY, STOPPED -> RUNNING
-             */
             final JobStatus status = mission.getStatus();
             if (JobStatus.RUNNING == status) {
+                /*
+                 * If `RUNNING`
+                 * Do not started here because it's running now
+                 */
                 LOGGER.info(Info.IS_RUNNING, code);
             } else if (JobStatus.ERROR == status) {
+                /*
+                 * If `ERROR`
+                 * Could not started here
+                 */
                 LOGGER.warn(Info.IS_ERROR, code);
+            } else if (JobStatus.STARTING == status) {
+                /*
+                 * If `STARTING`
+                 * Could not started here
+                 */
+                LOGGER.warn(Info.IS_STARTING, code);
             } else {
+                if (JobStatus.STOPPED == status) {
+                    /*
+                     * STOPPED -> READY
+                     */
+                    JOBS.get(code).setStatus(JobStatus.READY);
+                }
                 RUNNING.put(timeId, code);
-                JOBS.get(code).setStatus(JobStatus.RUNNING);
+
             }
         });
     }
@@ -93,14 +122,19 @@ public class JobPool {
      */
     public static void stop(final Long timeId) {
         uniform(timeId, mission -> {
-            /*
-             * RUNNING -> STOPPED
-             */
             final JobStatus status = mission.getStatus();
-            if (JobStatus.RUNNING == status) {
+            if (JobStatus.RUNNING == status || JobStatus.READY == status) {
+                /*
+                 * If `RUNNING`
+                 * stop will trigger from
+                 * RUNNING -> STOPPED
+                 */
                 RUNNING.remove(timeId);
                 mission.setStatus(JobStatus.STOPPED);
             } else {
+                /*
+                 * Other status is invalid
+                 */
                 LOGGER.info(Info.NOT_RUNNING, mission.getCode(), status);
             }
         });
@@ -108,11 +142,13 @@ public class JobPool {
 
     public static void resume(final Long timeId) {
         uniform(timeId, mission -> {
-            /*
-             * ERROR -> RUNNING
-             */
             final JobStatus status = mission.getStatus();
             if (JobStatus.ERROR == status) {
+                /*
+                 * If `ERROR`
+                 * resume will be triggered
+                 * ERROR -> READY
+                 */
                 RUNNING.put(timeId, mission.getCode());
                 mission.setStatus(JobStatus.READY);
             }

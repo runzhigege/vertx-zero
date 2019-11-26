@@ -5,6 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.cv.JtAddr;
+import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.plugin.job.JobPool;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
@@ -12,6 +13,8 @@ import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.unity.Ux;
 
 import javax.inject.Inject;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 @Queue
 public class JobActor {
@@ -35,9 +38,33 @@ public class JobActor {
     }
 
     @Address(JtAddr.Job.STATUS)
-    public JsonObject status(final String code) {
-        final Mission mission = JobPool.get(code);
-        return Ux.toJson(mission);
+    public JsonObject status(final String namespace) {
+        /*
+         * JtApp ( namespace processing )
+         */
+        final ConcurrentMap<String, Mission> jobs = JobPool.mapJobs();
+        final ConcurrentMap<Long, String> runs = JobPool.mapRuns();
+        /*
+         * Revert
+         */
+        final ConcurrentMap<String, Long> runsRevert =
+                new ConcurrentHashMap<>();
+        runs.forEach((timer, code) -> runsRevert.put(code, timer));
+        final JsonObject response = new JsonObject();
+        jobs.forEach((code, mission) -> {
+            /*
+             * Processing
+             */
+            final JsonObject instance = new JsonObject();
+            instance.put(KeField.NAME, mission.getName());
+            instance.put(KeField.STATUS, mission.getStatus().name());
+            /*
+             * Timer
+             */
+            instance.put("timer", runsRevert.get(mission.getCode()));
+            response.put(mission.getCode(), instance);
+        });
+        return response;
     }
 
     /*

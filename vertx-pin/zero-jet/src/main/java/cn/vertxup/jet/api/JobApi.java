@@ -26,10 +26,10 @@ public interface JobApi {
     @Address(JtAddr.Job.RESUME)
     String resumeJob(@PathParam("code") String code);
 
-    @Path("/job/info/code/{code}")
+    @Path("/job/info/status/{namespace}")
     @GET
     @Address(JtAddr.Job.STATUS)
-    String statusJob(@PathParam("code") String code);
+    String statusJob(@PathParam("namespace") String namespace);
 
     @Path("/job/info/by/sigma")
     @GET

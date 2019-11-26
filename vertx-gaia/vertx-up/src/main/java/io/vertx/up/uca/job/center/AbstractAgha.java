@@ -34,7 +34,7 @@ public abstract class AbstractAgha implements Agha {
      *                v
      *     |------> READY <-------------------|
      *     |          |                       |
-     *     |          |                    <resume>
+     *     |          |                    <start>
      *     |          |                       |
      *     |        <start>                   |
      *     |          |                       |
