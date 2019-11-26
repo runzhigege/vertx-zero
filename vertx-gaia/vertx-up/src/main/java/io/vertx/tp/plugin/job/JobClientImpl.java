@@ -39,7 +39,7 @@ public class JobClientImpl implements JobClient {
              * returned directly.
              * */
             final Future<Long> future = agha.begin(mission);
-            future.setHandler(handler);
+            handler.handle(future);
         } else {
             LOGGER.info("[ ZERO ] ( JobClient ) The pool could not find job of code = `{0}`", code);
         }
