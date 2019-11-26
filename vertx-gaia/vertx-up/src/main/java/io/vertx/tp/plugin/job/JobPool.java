@@ -5,7 +5,6 @@ import io.vertx.up.eon.em.JobStatus;
 import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -13,6 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * Job Pool in memory or storage
@@ -39,7 +39,9 @@ public class JobPool {
     }
 
     public static List<Mission> get() {
-        return new ArrayList<>(JOBS.values());
+        return JOBS.values().stream()
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
     }
 
     public static String code(final Long timeId) {

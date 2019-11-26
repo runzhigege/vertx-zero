@@ -89,13 +89,14 @@ public interface KeField {
     }
 
     interface Api {
-        String CONFIG_SERVICE = "configService";
-
         String CONFIG_DATABASE = "configDatabase";
 
         String CONFIG_INTEGRATION = "configIntegration";
 
-        String CONFIG_CHANNEL = "configChannel";
+        String CHANNEL_CONFIG = "channelConfig";
+        String SERVICE_CONFIG = "serviceConfig";
+        String DICT_CONFIG = "dictConfig";
+        String MAPPING_CONFIG = "mappingConfig";
     }
 
     interface Ui {
