@@ -30,4 +30,9 @@ public interface DataPool {
      * Data Source here
      */
     DataSource getDataSource();
+
+    /*
+     * Database reference
+     */
+    Database getDatabase();
 }

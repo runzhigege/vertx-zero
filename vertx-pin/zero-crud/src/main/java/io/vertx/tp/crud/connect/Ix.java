@@ -1,6 +1,7 @@
 package io.vertx.tp.crud.connect;
 
 import io.vertx.core.Future;
+import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxJoin;
 import io.vertx.tp.crud.atom.IxModule;
@@ -70,6 +71,7 @@ interface OxSwitcher {
     }
 
     static Future<Envelop> moveOn(final JsonObject data,
+                                  final MultiMap headers,
                                   final IxModule module,
                                   final BiFunction<UxJooq, IxModule, Future<Envelop>> function) {
         /*
@@ -99,7 +101,7 @@ interface OxSwitcher {
                             identifier, connect.getJoined());
                     return Ux.future(Envelop.success(data));
                 } else {
-                    final UxJooq dao = IxPin.getDao(config);
+                    final UxJooq dao = IxPin.getDao(config, headers);
                     return function.apply(dao, config);
                 }
             }

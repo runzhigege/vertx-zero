@@ -1,11 +1,12 @@
 package io.vertx.tp.crud.init;
 
+import io.vertx.core.MultiMap;
 import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.tp.ke.refine.Ke;
-import io.vertx.up.unity.UxJooq;
 import io.vertx.up.atom.Rule;
 import io.vertx.up.log.Annal;
+import io.vertx.up.unity.UxJooq;
 
 import java.util.List;
 import java.util.Set;
@@ -38,8 +39,8 @@ public class IxPin {
         return IxDao.get(actor);
     }
 
-    public static UxJooq getDao(final IxModule config) {
-        return IxDao.get(config);
+    public static UxJooq getDao(final IxModule config, final MultiMap headers) {
+        return IxDao.get(config, headers);
     }
 
     public static Set<String> getUris() {

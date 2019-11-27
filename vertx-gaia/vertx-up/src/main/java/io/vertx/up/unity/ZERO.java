@@ -37,7 +37,9 @@ interface Info {
 
 interface Pool {
 
-    ConcurrentMap<Class<?>, UxJooq> JOOQ = new ConcurrentHashMap<>();
+    ConcurrentMap<Class<?>, UxJooq> JOOQ_POOL = new ConcurrentHashMap<>();
+
+    ConcurrentMap<Class<?>, UxJooq> JOOQ_POOL_HIS = new ConcurrentHashMap<>();
 
     ConcurrentMap<String, UxPool> POOL = new ConcurrentHashMap<>();
 
