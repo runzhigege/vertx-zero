@@ -45,11 +45,11 @@ public class ExcelClientImpl implements ExcelClient {
     public ExcelClient init(final JsonObject config) {
         final JsonArray mapping = config.getJsonArray(MAPPING);
         this.helper.initConnect(mapping);
-        LOGGER.info("[ Excel ] Configuration finished: {0}", Pool.CONNECTS.size());
+        LOGGER.debug("[ Excel ] Configuration finished: {0}", Pool.CONNECTS.size());
         if (config.containsKey(ENVIRONMENT)) {
             final JsonArray environments = config.getJsonArray(ENVIRONMENT);
             this.helper.initEnvironment(environments);
-            LOGGER.info("[ Excel ] Configuration environments: {0}", environments.encode());
+            LOGGER.debug("[ Excel ] Configuration environments: {0}", environments.encode());
         }
         return this;
     }
