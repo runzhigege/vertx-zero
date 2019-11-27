@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.error._500AmbientConnectException;
 import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.init.JtPin;
-import io.vertx.tp.plugin.database.DataPool;
 import io.vertx.up.eon.ID;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.util.Ut;
@@ -22,10 +21,6 @@ import java.util.concurrent.ConcurrentMap;
 public class Ambient {
     /* Each application has one environment */
     private static final ConcurrentMap<String, JtApp> APPS =
-            new ConcurrentHashMap<>();
-
-    /* Database Pool of each application */
-    private static final ConcurrentMap<String, DataPool> POOL =
             new ConcurrentHashMap<>();
 
     /* Environment information of Ambient */

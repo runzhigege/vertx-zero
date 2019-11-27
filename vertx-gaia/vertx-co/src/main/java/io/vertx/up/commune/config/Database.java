@@ -71,7 +71,7 @@ public class Database implements Serializable, Json {
         /*
          * type of database
          */
-        final String type = jooq.getString("type");
+        final String type = jooq.getString("category");
         if (Ut.isNil(type)) {
             database.setCategory(DatabaseType.MYSQL5);
         } else {
@@ -162,7 +162,8 @@ public class Database implements Serializable, Json {
 
     @Override
     public void fromJson(final JsonObject data) {
-        this.category = Ut.toEnum(DatabaseType.class, data.getString("category"));
+        this.category = Ut.toEnum(() -> data.getString("category"),
+                DatabaseType.class, DatabaseType.MYSQL5);
         this.hostname = data.getString("hostname");
         this.port = data.getInteger("port");
         this.instance = data.getString("instance");

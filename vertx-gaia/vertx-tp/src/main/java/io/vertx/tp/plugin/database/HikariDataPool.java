@@ -56,6 +56,11 @@ public class HikariDataPool implements DataPool {
         return this.dataSource;
     }
 
+    @Override
+    public Database getDatabase() {
+        return this.database;
+    }
+
     private void initJooq() {
         if (null == this.context) {
             try {

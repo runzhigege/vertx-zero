@@ -15,6 +15,10 @@ public interface Constants {
 
     String DEFAULT_JOB_NAMESPACE = "zero.vertx.jobs";
 
+    String DEFAULT_JOOQ_HISTORY = "orbit";
+
+    String DEFAULT_JOOQ = "provider";
+
     /**
      * Scanned data to distinguish mode
      * 1) Only Interface Style could have the indexes key such as 0,1,2 consider as data key.

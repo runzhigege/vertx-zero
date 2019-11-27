@@ -78,6 +78,7 @@ E40061: "(Security) You are using Zero Security Framework, but the @Wall found S
 E40062: "(Quiz) Current test case name = `{0}` is invalid when you enable Quiz Framework of Zero, name must end with `Tc`"
 E40063: "Your reflect invoking does not satisfy the pre-condition, method = {0}"
 E40064: "(Act) Act specification is invalid, you could not call this api when isBatch = {0}"
+E40065: "(Jooq) Jooq database configuration pool key = `provider` missing, it's required when you enable Jooq."
 # RxJava
 E45001: (V) - The field "{1}" of json array "{0}" must be mapped to unique element, but current reduced is "{2}"
 # (Web) Exception for web
@@ -174,3 +175,4 @@ E80408: "(424) - (Jet) The component `{0}` does not match channel type `{1}` "
 E80409: "(424) - (Jet) The channel must be one of `{0}`, but now your class `{1}` does not match ( current = {2} )"
 E80410: "(424) - (Jet) The component `{0}` with `DEFINE` type must implements `JtChannel` interface"
 E80411: "(500) - (Jet) The application environment could not be get by sigma `{0}`"
+E80412: "(501) - (Jet) The data source switching met issue, headers are {0}`"

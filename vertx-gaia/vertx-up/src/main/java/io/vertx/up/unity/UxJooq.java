@@ -4,7 +4,6 @@ import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.eon.em.Format;
 import io.vertx.up.fn.Fn;
@@ -42,10 +41,6 @@ public class UxJooq {
         /* Writer connect Reader */
         this.writer = JooqWriter.create(vertxDAO)
                 .on(this.analyzer).on(this.reader);
-    }
-
-    <T> UxJooq(final Class<T> clazz) {
-        this(clazz, (VertxDAO) JooqInfix.getDao(clazz));
     }
 
     // -------------------- Condition Transform --------------------

@@ -27,20 +27,6 @@ public class IxMeta {
         return new IxMeta(clazz);
     }
 
-    private void initDao(final String actor) {
-        try {
-            this.config = IxPin.getActor(actor);
-            this.jooq = IxPin.getDao(this.config);
-            if (null == this.jooq) {
-                this.ex = new _404ModuleMissingException(this.target, actor);
-            }
-        } catch (final WebException error) {
-            // TODO: Exception here.
-            error.printStackTrace();
-            this.ex = error;
-        }
-    }
-
     private void logRequest(final Envelop envelop) {
         final HttpMethod method = envelop.getMethod();
         final String uri = envelop.getUri();
@@ -50,10 +36,27 @@ public class IxMeta {
     }
 
     public IxMeta input(final Envelop envelop) {
+        /*
+         * Actor value here for extracted from `Envelop`
+         */
         final String actor = Ux.getString(envelop);
-        /* */
-        this.initDao(actor);
-
+        try {
+            /*
+             * IxModule extracting by `actor`
+             */
+            this.config = IxPin.getActor(actor);
+            /*
+             *
+             */
+            this.jooq = IxPin.getDao(this.config, envelop.headers());
+            if (null == this.jooq) {
+                this.ex = new _404ModuleMissingException(this.target, actor);
+            }
+        } catch (final WebException error) {
+            // TODO: Exception here.
+            error.printStackTrace();
+            this.ex = error;
+        }
         this.logRequest(envelop);
         return this;
     }

@@ -12,10 +12,13 @@ import io.vertx.ext.auth.jwt.JWTAuthOptions;
 import io.vertx.ext.jwt.JWT;
 import io.vertx.ext.jwt.JWTOptions;
 import io.vertx.ext.mongo.FindOptions;
+import io.vertx.tp.plugin.database.DataPool;
+import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.atom.query.Criteria;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.commune.Record;
+import io.vertx.up.eon.Constants;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.fn.Fn;
@@ -487,13 +490,26 @@ public final class Ux {
 
     // -> Jooq
     public static class Jooq {
-
-        public static UxJooq on(final Class<?> clazz) {
-            return Fn.pool(io.vertx.up.unity.Pool.JOOQ, clazz, () -> new UxJooq(clazz));
+        // Only history database will use new POOL to store data
+        public static UxJooq ons(final Class<?> clazz) {
+            final VertxDAO vertxDAO = (VertxDAO) JooqInfix.getDao(clazz, Constants.DEFAULT_JOOQ_HISTORY);
+            return Fn.pool(io.vertx.up.unity.Pool.JOOQ_POOL_HIS, clazz, () -> new UxJooq(clazz, vertxDAO));
         }
 
-        public static UxJooq on(final Class<?> clazz, final VertxDAO vertxDAO) {
-            return Fn.pool(io.vertx.up.unity.Pool.JOOQ, clazz, () -> new UxJooq(clazz, vertxDAO));
+        // Three method for overwrite
+        public static UxJooq on(final Class<?> clazz, final DataPool pool) {
+            final VertxDAO vertxDAO = (VertxDAO) JooqInfix.getDao(clazz, pool);
+            return Fn.pool(io.vertx.up.unity.Pool.JOOQ_POOL, clazz, () -> new UxJooq(clazz, vertxDAO));
+        }
+
+        public static UxJooq on(final Class<?> clazz, final String key) {
+            final VertxDAO vertxDAO = (VertxDAO) JooqInfix.getDao(clazz, key);
+            return Fn.pool(io.vertx.up.unity.Pool.JOOQ_POOL, clazz, () -> new UxJooq(clazz, vertxDAO));
+        }
+
+        public static UxJooq on(final Class<?> clazz) {
+            final VertxDAO vertxDAO = (VertxDAO) JooqInfix.getDao(clazz);
+            return Fn.pool(io.vertx.up.unity.Pool.JOOQ_POOL, clazz, () -> new UxJooq(clazz, vertxDAO));
         }
     }
 
