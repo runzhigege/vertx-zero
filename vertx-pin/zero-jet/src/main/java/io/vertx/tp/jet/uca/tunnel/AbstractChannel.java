@@ -76,8 +76,13 @@ public abstract class AbstractChannel implements JtChannel {
              */
             return Future.failedFuture(new _501ChannelErrorException(this.getClass(), null));
         } else {
-            /* Singleton because it's not data object */
-            final JtComponent component = Ut.singleton(componentClass);
+            /*
+             * Create new component here
+             * It means that Channel/Component must contains new object
+             * Container will create new Channel - Component to process request
+             * Instead of singleton here.
+             *  */
+            final JtComponent component = Ut.instance(componentClass);
             if (Objects.nonNull(component)) {
                 this.monitor.componentHit(componentClass, recordClass);
                 /*
