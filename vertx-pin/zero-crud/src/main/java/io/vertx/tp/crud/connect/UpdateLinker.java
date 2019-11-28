@@ -19,7 +19,7 @@ class UpdateLinker implements IxLinker {
     @Override
     public Future<Envelop> procAsync(final Envelop request, final JsonObject original,
                                      final IxModule module) {
-        return OxSwitcher.moveOn(original, module, (dao, config) -> {
+        return OxSwitcher.moveOn(original, request.headers(), module, (dao, config) -> {
             /*
              * In updated, not needed to get key
              */
