@@ -2,11 +2,13 @@ package io.vertx.tp.ambient.extension;
 
 import io.vertx.core.Future;
 import io.vertx.core.Promise;
+import io.vertx.core.WorkerExecutor;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ambient.atom.AtConfig;
 import io.vertx.tp.ambient.cv.AtMsg;
 import io.vertx.tp.ambient.init.AtPin;
 import io.vertx.tp.ambient.refine.At;
+import io.vertx.tp.ke.booter.Bt;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.plugin.excel.ExcelClient;
@@ -66,16 +68,22 @@ public class DatumInit implements Init {
 
     private Future<JsonObject> doLoading(final String filename) {
         final Promise<JsonObject> promise = Promise.promise();
-        /* ExcelClient */
-        final ExcelClient client = ExcelInfix.getClient();
-        client.loading(filename, result -> {
-            At.infoApp(LOGGER, AtMsg.INIT_DATUM_EACH, filename);
-            if (result.succeeded()) {
-                promise.complete(Ke.Result.bool(filename, Boolean.TRUE));
-            } else {
-                promise.fail(result.cause());
-            }
-        });
+        final WorkerExecutor executor = Bt.getWorker(filename);
+        executor.<JsonObject>executeBlocking(
+                pre -> {
+                    /* ExcelClient */
+                    final ExcelClient client = ExcelInfix.createClient(Bt.getVertx());
+                    client.loading(filename, result -> {
+                        At.infoApp(LOGGER, AtMsg.INIT_DATUM_EACH, filename);
+                        if (result.succeeded()) {
+                            pre.complete(Ke.Result.bool(filename, Boolean.TRUE));
+                        } else {
+                            pre.fail(result.cause());
+                        }
+                    });
+                },
+                post -> promise.complete(post.result())
+        );
         return promise.future();
     }
 

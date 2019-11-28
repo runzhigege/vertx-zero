@@ -53,31 +53,32 @@ public class JtApp implements Serializable {
      * database
      * - hostname, instance, port, category
      * - jdbcUrl, username, password
+     * - jdbcConfig
      * */
     private transient Database source;
 
     @Override
     public String toString() {
         return "JtEnv{" +
-                "appId='" + appId + '\'' +
-                ", appKey='" + appKey + '\'' +
-                ", sigma='" + sigma + '\'' +
-                ", name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", language='" + language + '\'' +
-                ", active=" + active +
-                ", logo='" + logo + '\'' +
-                ", title='" + title + '\'' +
-                ", business=" + business +
-                ", backend=" + backend +
-                ", frontend=" + frontend +
-                ", auditor=" + auditor +
-                ", source=" + source +
+                "appId='" + this.appId + '\'' +
+                ", appKey='" + this.appKey + '\'' +
+                ", sigma='" + this.sigma + '\'' +
+                ", name='" + this.name + '\'' +
+                ", code='" + this.code + '\'' +
+                ", language='" + this.language + '\'' +
+                ", active=" + this.active +
+                ", logo='" + this.logo + '\'' +
+                ", title='" + this.title + '\'' +
+                ", business=" + this.business +
+                ", backend=" + this.backend +
+                ", frontend=" + this.frontend +
+                ", auditor=" + this.auditor +
+                ", source=" + this.source +
                 '}';
     }
 
     public String getAppId() {
-        return appId;
+        return this.appId;
     }
 
     public void setAppId(final String appId) {
@@ -85,7 +86,7 @@ public class JtApp implements Serializable {
     }
 
     public String getAppKey() {
-        return appKey;
+        return this.appKey;
     }
 
     public void setAppKey(final String appKey) {
@@ -93,7 +94,7 @@ public class JtApp implements Serializable {
     }
 
     public String getSigma() {
-        return sigma;
+        return this.sigma;
     }
 
     public void setSigma(final String sigma) {
@@ -101,7 +102,7 @@ public class JtApp implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(final String name) {
@@ -109,7 +110,7 @@ public class JtApp implements Serializable {
     }
 
     public String getCode() {
-        return code;
+        return this.code;
     }
 
     public void setCode(final String code) {
@@ -117,7 +118,7 @@ public class JtApp implements Serializable {
     }
 
     public String getLanguage() {
-        return language;
+        return this.language;
     }
 
     public void setLanguage(final String language) {
@@ -125,7 +126,7 @@ public class JtApp implements Serializable {
     }
 
     public Boolean getActive() {
-        return active;
+        return this.active;
     }
 
     public void setActive(final Boolean active) {
@@ -133,7 +134,7 @@ public class JtApp implements Serializable {
     }
 
     public String getLogo() {
-        return logo;
+        return this.logo;
     }
 
     public void setLogo(final String logo) {
@@ -141,7 +142,7 @@ public class JtApp implements Serializable {
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(final String title) {
@@ -168,11 +169,11 @@ public class JtApp implements Serializable {
      * Defined Method
      */
     public String getRoute() {
-        return backend.getString(KeField.App.ROUTE);
+        return this.backend.getString(KeField.App.ROUTE);
     }
 
     public Database getSource() {
-        return source;
+        return this.source;
     }
 
     public void setSource(final Database source) {
