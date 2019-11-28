@@ -13,4 +13,6 @@ public interface DS {
      * Sync method to get `Data Source`
      */
     DataPool switchDs(MultiMap headers);
+
+    DataPool switchDs(String sigma);
 }

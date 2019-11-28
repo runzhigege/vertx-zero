@@ -13,6 +13,7 @@ import java.util.Objects;
 /*
  * Dynamic Data Source
  */
+@SuppressWarnings("all")
 public class DynamicDs implements DS {
     @Override
     public DataPool switchDs(final MultiMap headers) {
@@ -24,6 +25,19 @@ public class DynamicDs implements DS {
          * If app is not null
          */
         Fn.out(Objects.isNull(app), _501DataSourceException.class, this.getClass(), headers.toString());
+        return this.getDs(app);
+    }
+
+    public DataPool switchDs(final String sigma) {
+        final JtApp app = Ambient.getApp(sigma);
+        /*
+         * If app is not null
+         */
+        Fn.out(Objects.isNull(app), _501DataSourceException.class, this.getClass(), sigma);
+        return this.getDs(app);
+    }
+
+    private DataPool getDs(final JtApp app) {
         /*
          * DataPool get here
          */
