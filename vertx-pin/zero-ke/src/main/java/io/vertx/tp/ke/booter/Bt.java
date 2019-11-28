@@ -1,8 +1,6 @@
 package io.vertx.tp.ke.booter;
 
-import io.vertx.core.AsyncResult;
-import io.vertx.core.Future;
-import io.vertx.core.Handler;
+import io.vertx.core.*;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.excel.atom.ExTable;
 
@@ -14,6 +12,15 @@ import java.util.Set;
  * 1) Loader
  */
 public class Bt {
+
+    public static WorkerExecutor getWorker(final String name) {
+        return BtHelper.getWorker(name);
+    }
+
+    public static Vertx getVertx() {
+        return BtHelper.getVertx();
+    }
+
     /*
      * doImport
      * doImport: with prefix to do filter
