@@ -34,7 +34,7 @@ public class UnityAmbient implements UnityApp {
                 .filter(appId -> Objects.nonNull(apps.get(appId)))
                 .filter(appId -> Objects.nonNull(sources.get(appId)))
                 /* JsonObject converted here for app & source data */
-                .map(appId -> connect(apps.get(appId), sources.get(appId)))
+                .map(appId -> this.connect(apps.get(appId), sources.get(appId)))
                 .forEach(item -> UnityAmbient.UNITY_POOL.put(item.getString(KeField.APP_ID), item));
     }
 
@@ -154,6 +154,10 @@ public class UnityAmbient implements UnityApp {
             sourceJson.put("username", source.getUsername());
             sourceJson.put("password", source.getPassword());
             sourceJson.put("driverClassName", source.getDriverClassName());
+            final String jdbcConfig = source.getJdbcConfig();
+            if (Ut.notNil(jdbcConfig)) {
+                sourceJson.put("options", Ut.toJObject(jdbcConfig));
+            }
             normalized.put("source", sourceJson);
         }
         return normalized;

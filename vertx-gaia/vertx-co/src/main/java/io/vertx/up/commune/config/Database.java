@@ -1,5 +1,9 @@
 package io.vertx.up.commune.config;
 
+import com.fasterxml.jackson.databind.JsonObjectDeserializer;
+import com.fasterxml.jackson.databind.JsonObjectSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.commune.Json;
 import io.vertx.up.eon.em.DatabaseType;
@@ -31,6 +35,10 @@ public class Database implements Serializable, Json {
 
     private static final Annal LOGGER = Annal.get(Database.class);
     private static final Node<JsonObject> VISITOR = Ut.singleton(ZeroUniform.class);
+    /* Database options for different pool */
+    @JsonSerialize(using = JsonObjectSerializer.class)
+    @JsonDeserialize(using = JsonObjectDeserializer.class)
+    private transient JsonObject options = new JsonObject();
     /* Database host name */
     private transient String hostname;
     /* Database instance name */
@@ -68,21 +76,7 @@ public class Database implements Serializable, Json {
         final JsonObject raw = Database.VISITOR.read();
         final JsonObject jooq = Ut.visitJObject(raw, "jooq", "provider");
         final Database database = new Database();
-        /*
-         * type of database
-         */
-        final String type = jooq.getString("category");
-        if (Ut.isNil(type)) {
-            database.setCategory(DatabaseType.MYSQL5);
-        } else {
-            final DatabaseType databaseType = Ut.toEnum(DatabaseType.class, type);
-            database.setCategory(null == databaseType ? DatabaseType.MYSQL5 : databaseType);
-        }
-        database.setInstance(jooq.getString("catalog"));
-        database.setJdbcUrl(jooq.getString("jdbcUrl"));
-        database.setUsername(jooq.getString("username"));
-        database.setPassword(jooq.getString("password"));
-        database.setDriverClassName(jooq.getString("driverClassName"));
+        database.fromJson(jooq);
         return database;
     }
 
@@ -155,6 +149,26 @@ public class Database implements Serializable, Json {
         this.driverClassName = driverClassName;
     }
 
+    @SuppressWarnings("unchecked")
+    public <T> T getOption(final String optionKey) {
+        final JsonObject options = this.options;
+        final Object value = options.getValue(optionKey);
+        return Objects.isNull(value) ? null : (T) value;
+    }
+
+    public <T> T getOption(final String optionKey, final T defaultValue) {
+        final T result = this.getOption(optionKey);
+        return Objects.isNull(result) ? defaultValue : result;
+    }
+
+    public JsonObject getOptions() {
+        return this.options;
+    }
+
+    public void setOptions(final JsonObject options) {
+        this.options = options;
+    }
+
     @Override
     public JsonObject toJson() {
         return Ut.serializeJson(this);
@@ -162,15 +176,25 @@ public class Database implements Serializable, Json {
 
     @Override
     public void fromJson(final JsonObject data) {
-        this.category = Ut.toEnum(() -> data.getString("category"),
-                DatabaseType.class, DatabaseType.MYSQL5);
-        this.hostname = data.getString("hostname");
-        this.port = data.getInteger("port");
-        this.instance = data.getString("instance");
-        this.jdbcUrl = data.getString("jdbcUrl");
-        this.username = data.getString("username");
-        this.password = data.getString("password");
-        this.driverClassName = data.getString("driverClassName");
+        if (Ut.notNil(data)) {
+            this.category = Ut.toEnum(() -> data.getString("category"),
+                    DatabaseType.class, DatabaseType.MYSQL5);
+            this.hostname = data.getString("hostname");
+            this.port = data.getInteger("port");
+            this.instance = data.getString("instance");
+            this.jdbcUrl = data.getString("jdbcUrl");
+            this.username = data.getString("username");
+            this.password = data.getString("password");
+            this.driverClassName = data.getString("driverClassName");
+            /*
+             * options
+             */
+            final Object value = data.getValue("options");
+            if (Objects.nonNull(value) && value instanceof JsonObject) {
+                this.options.mergeIn((JsonObject) value);
+                LOGGER.info("[ ZERO ] Database Options: {0}", this.options.encode());
+            }
+        }
     }
 
     @Override
@@ -201,6 +225,7 @@ public class Database implements Serializable, Json {
                 ", username='" + this.username + '\'' +
                 ", password='" + this.password + '\'' +
                 ", driverClassName='" + this.driverClassName + '\'' +
+                ", options=" + (Objects.isNull(this.options) ? "{}" : this.options.encodePrettily()) +
                 '}';
     }
 }

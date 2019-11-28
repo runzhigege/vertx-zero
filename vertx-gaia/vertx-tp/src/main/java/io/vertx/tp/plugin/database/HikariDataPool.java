@@ -16,6 +16,16 @@ import java.util.Objects;
 
 public class HikariDataPool implements DataPool {
     private static final Annal LOGGER = Annal.get(HikariDataPool.class);
+    private static final String OPT_AUTO_COMMIT = "hikari.auto.commit";
+    private static final String OPT_CONNECTION_TIMEOUT = "hikari.connection.timeout";
+    private static final String OPT_IDLE_TIMEOUT = "hikari.idle.timeout";
+    private static final String OPT_MAX_LIFETIME = "hikari.max.lifetime";
+    private static final String OPT_MINIMUM_IDLE = "hikari.minimum.idle";
+    private static final String OPT_MAXIMUM_POOL_SIZE = "hikari.maximum.pool.size";
+    private static final String OPT_POOL_NAME = "hikari.name";
+    private static final String OPT_STATEMENT_CACHED = "hikari.statement.cached";
+    private static final String OPT_STATEMENT_CACHE_SIZE = "hikari.statement.cache.size";
+    private static final String OPT_STATEMENT_CACHE_SQL_LIMIT = "hikari.statement.cache.sqllimit";
     private final transient Database database;
     /* Each jdbc url has one Pool here **/
     private transient DSLContext context;
@@ -118,20 +128,25 @@ public class HikariDataPool implements DataPool {
     private void initPool() {
         if (Objects.nonNull(this.database)) {
             // Default configuration, 300 s as connection timeout for long time working
-            this.dataSource.setAutoCommit(true);
-            this.dataSource.setConnectionTimeout(300000L);
-            this.dataSource.setIdleTimeout(600000L);
-            this.dataSource.setMaxLifetime(25600000L);
-            this.dataSource.setMinimumIdle(256);
-            this.dataSource.setMaximumPoolSize(512);
+            final Boolean autoCommit = this.database.getOption(OPT_AUTO_COMMIT, Boolean.TRUE);
+
+            this.dataSource.setAutoCommit(autoCommit);
+            this.dataSource.setConnectionTimeout(this.database.getOption(OPT_CONNECTION_TIMEOUT, 300000L));
+            this.dataSource.setIdleTimeout(this.database.getOption(OPT_IDLE_TIMEOUT, 600000L));
+            this.dataSource.setMaxLifetime(this.database.getOption(OPT_MAX_LIFETIME, 25600000L));
+            this.dataSource.setMinimumIdle(this.database.getOption(OPT_MINIMUM_IDLE, 256));
+            this.dataSource.setMaximumPoolSize(this.database.getOption(OPT_MAXIMUM_POOL_SIZE, 512));
 
             // Default attributes
-            this.dataSource.addDataSourceProperty("cachePrepStmts", "true");
-            this.dataSource.addDataSourceProperty("prepStmtCacheSize", "1024");
-            this.dataSource.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+            this.dataSource.addDataSourceProperty("cachePrepStmts",
+                    this.database.getOption(OPT_STATEMENT_CACHED, "true"));
+            this.dataSource.addDataSourceProperty("prepStmtCacheSize",
+                    this.database.getOption(OPT_STATEMENT_CACHE_SIZE, "1024"));
+            this.dataSource.addDataSourceProperty("prepStmtCacheSqlLimit",
+                    this.database.getOption(OPT_STATEMENT_CACHE_SQL_LIMIT, "2048"));
 
             // Data pool name
-            this.dataSource.setPoolName("ZERO-POOL-DATA");
+            this.dataSource.setPoolName(this.database.getOption(OPT_POOL_NAME, "ZERO-POOL-DATA"));
         }
     }
 }
