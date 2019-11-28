@@ -1,19 +1,25 @@
 package io.vertx.tp.crud.init;
 
+import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.crud.cv.IxFolder;
 import io.vertx.tp.crud.cv.IxMsg;
+import io.vertx.tp.crud.cv.em.DsMode;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.up.unity.Ux;
-import io.vertx.up.unity.UxJooq;
-import io.vertx.up.log.Annal;
+import io.vertx.tp.optic.DS;
+import io.vertx.tp.optic.Pocket;
+import io.vertx.tp.plugin.database.DataPool;
 import io.vertx.up.eon.FileSuffix;
 import io.vertx.up.eon.Strings;
-import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
+import io.vertx.up.unity.Ux;
+import io.vertx.up.unity.UxJooq;
+import io.vertx.up.util.Ut;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -72,12 +78,13 @@ class IxDao {
         return Fn.getNull(null, () -> config, config);
     }
 
-    static UxJooq get(final IxModule config) {
+    static UxJooq get(final IxModule config, final MultiMap headers) {
         return Fn.getNull(null, () -> {
             final Class<?> daoCls = config.getDaoCls();
             assert null != daoCls : " Should not be null, check configuration";
+
             /* 1. Build UxJooq Object */
-            final UxJooq dao = Ux.Jooq.on(daoCls);
+            final UxJooq dao = get(config, daoCls, headers);
             final String pojo = config.getPojo();
 
             /* 2. Where existing pojo.yml ( Zero support yml file to define mapping ) */
@@ -86,5 +93,54 @@ class IxDao {
             }
             return dao;
         }, config);
+    }
+
+    private static UxJooq get(final IxModule module, final Class<?> clazz, final MultiMap headers) {
+        final UxJooq dao;
+        /*
+         * 1. Extract Mode from `IxModule` for data source switching
+         */
+        final DsMode mode = module.getMode();
+        if (DsMode.DYNAMIC == mode) {
+            final DS ds = Pocket.lookup(DS.class);
+            if (Objects.isNull(ds)) {
+                /*
+                 * `provider` configured
+                 */
+                dao = Ux.Jooq.on(clazz);
+            } else {
+                /*
+                 * Dynamic Data Source here
+                 */
+                final DataPool pool = ds.switchDs(headers);
+                dao = Ux.Jooq.on(clazz, pool);
+            }
+        } else {
+            if (DsMode.HISTORY == mode) {
+                /*
+                 * `orbit` configured
+                 */
+                dao = Ux.Jooq.ons(clazz);
+            } else if (DsMode.EXTENSION == mode) {
+                final String modeKey = module.getModeKey();
+                if (Ut.isNil(modeKey)) {
+                    /*
+                     * `provider` configured
+                     */
+                    dao = Ux.Jooq.on(clazz);
+                } else {
+                    /*
+                     * `<key>` configured
+                     */
+                    dao = Ux.Jooq.on(clazz, modeKey);
+                }
+            } else {
+                /*
+                 * `provider` configured
+                 */
+                dao = Ux.Jooq.on(clazz);
+            }
+        }
+        return dao;
     }
 }

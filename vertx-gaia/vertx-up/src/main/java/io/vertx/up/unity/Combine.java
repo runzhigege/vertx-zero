@@ -89,7 +89,11 @@ class Combine {
         return CompositeFuture.join(futureList).compose(finished -> {
             final JsonArray resultMap = new JsonArray();
             if (null != finished) {
-                Ut.itList(finished.list(), (item, index) -> resultMap.add(item));
+                Ut.itList(finished.list(), (item, index) -> {
+                    if (item instanceof JsonArray) {
+                        resultMap.addAll((JsonArray) item);
+                    }
+                });
             }
             return Future.succeededFuture(resultMap);
         });

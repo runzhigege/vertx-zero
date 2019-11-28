@@ -1,101 +1,97 @@
 package io.vertx.tp.ke.booter;
 
 import io.vertx.core.*;
+import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.plugin.excel.ExcelClient;
 import io.vertx.tp.plugin.excel.ExcelInfix;
-import io.vertx.tp.plugin.excel.atom.ExTable;
 import io.vertx.tp.plugin.jooq.JooqInfix;
+import io.vertx.up.eon.Strings;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.util.Ut;
+import io.vertx.up.unity.Ux;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 class BtLoader {
+
+    private static final Annal LOGGER = Annal.get(BtLoader.class);
+
     /*
      * Environment Init for Split Booter
      */
     static {
         /* Excel Init */
-        ExcelInfix.init(BtVertx.getVertx());
+        ExcelInfix.init(BtHelper.getVertx());
         /* Jooq Init */
-        JooqInfix.init(BtVertx.getVertx());
+        JooqInfix.init(BtHelper.getVertx());
     }
 
-    static void importSyncs(final String folder) {
-        streamFile(folder).forEach(BtLoader::importSync);
+    static void doImport(final String folder) {
+        doImport(folder, Strings.EMPTY);
     }
 
-    static void importSyncs(final String folder, final String prefix) {
-        streamFile(folder)
-                .filter(filename -> filename.startsWith(folder + prefix))
-                .forEach(BtLoader::importSync);
-    }
-
-    static void importSyncs(final String folder, final Handler<AsyncResult<List<String>>> callback) {
-        final List<Future> futures = streamFile(folder)
-                .map(BtLoader::importFuture)
-                .collect(Collectors.toList());
-        CompositeFuture.join(futures).compose(result -> {
-            final List<String> async = result.list();
-            callback.handle(Future.succeededFuture(async));
-            return Future.succeededFuture(Boolean.TRUE);
+    static void doImport(final String folder, final String prefix) {
+        doImport(folder, prefix, handler -> {
+            if (handler.succeeded()) {
+                System.exit(0);
+            } else {
+                if (Objects.nonNull(handler.cause())) {
+                    handler.cause().printStackTrace();
+                }
+            }
         });
     }
 
-    static void ingestExcels(final String folder, final Handler<AsyncResult<Set<ExTable>>> callback) {
-        final List<Future> futures = streamFile(folder)
-                .map(BtLoader::ingestFuture)
-                .collect(Collectors.toList());
-        CompositeFuture.join(futures).compose(result -> {
-            final List<Set<ExTable>> async = result.list();
-            final Set<ExTable> tables = new HashSet<>();
-            async.forEach(tables::addAll);
-            callback.handle(Future.succeededFuture(tables));
-            return Future.succeededFuture(Boolean.TRUE);
+    static void doImport(final String folder, final String prefix, final Handler<AsyncResult<List<String>>> callback) {
+        final long start = System.currentTimeMillis();
+        final Set<String> files = BtHelper.ioFiles(folder, prefix);
+        /*
+         * Create worker executor for each files
+         */
+        final CountDownLatch counter = new CountDownLatch(files.size());
+        files.forEach(file -> {
+            final WorkerExecutor executor = BtHelper.getWorker(file);
+            executor.<String>executeBlocking(
+                    pre -> pre.handle(doLoading(file).future()),
+                    post -> counter.countDown());
+            executor.close();
+        });
+        Fn.safeJvm(() -> {
+            counter.await();
+            final long end = System.currentTimeMillis();
+            LOGGER.info("[ BT ] Imported successfully! files = {0}, time = {1}s",
+                    String.valueOf(files.size()), TimeUnit.MILLISECONDS.toSeconds(end - start));
+            callback.handle(Ux.future(new ArrayList<>(files)));
         });
     }
 
-    private static void importSync(final String filename) {
-        importSync(filename, handler -> asyncOut(handler.result()));
-    }
-
-    private static Stream<String> streamFile(final String folder) {
-        return Ut.ioFiles(folder).stream()
-                .filter(file -> !file.startsWith("~"))
-                .map(file -> folder + file);
-    }
-
-    static void importSync(final String filename, final Handler<AsyncResult<String>> callback) {
-        /* ExcelClient */
-        final ExcelClient client = ExcelInfix.getClient();
-        /* Single file */
-        client.loading(filename, handler -> callback.handle(Future.succeededFuture(filename)));
-    }
-
-    static void asyncOut(final String filename) {
-        final Annal logger = Annal.get(BtLoader.class);
-        Ke.infoKe(logger, "Successfully to finish loading ! data file = {0}", filename);
-    }
-
-    static void ingestExcel(final String filename, final Handler<AsyncResult<Set<ExTable>>> callback) {
-        final ExcelClient client = ExcelInfix.getClient();
-        client.ingest(filename, handler -> callback.handle(Future.succeededFuture(handler.result())));
-    }
-
-    private static Future<Set<ExTable>> ingestFuture(final String filename) {
-        final Promise<Set<ExTable>> promise = Promise.promise();
-        ingestExcel(filename, handler -> promise.complete(handler.result()));
-        return promise.future();
-    }
-
-    private static Future<String> importFuture(final String filename) {
+    private static Promise<String> doLoading(final String filename) {
         final Promise<String> promise = Promise.promise();
-        importSync(filename, handler -> promise.complete(handler.result()));
+        /* ExcelClient of New */
+        final ExcelClient client = ExcelInfix.createClient(BtHelper.getVertx());
+        client.loading(filename, handler -> promise.complete(filename));
+        return promise;
+    }
+
+    static Future<JsonObject> asyncImport(final String filename) {
+        final Promise<JsonObject> promise = Promise.promise();
+        final WorkerExecutor executor = BtHelper.getWorker(filename);
+        executor.<String>executeBlocking(
+                pre -> pre.handle(doLoading(filename).future()),
+                post -> {
+                    if (post.succeeded()) {
+                        promise.complete(Ke.Result.bool(filename, Boolean.TRUE));
+                    } else {
+                        promise.fail(post.cause());
+                    }
+                });
+        executor.close();
         return promise.future();
     }
 }

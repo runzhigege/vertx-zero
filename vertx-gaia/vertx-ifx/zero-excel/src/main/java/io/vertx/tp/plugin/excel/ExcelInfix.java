@@ -2,8 +2,8 @@ package io.vertx.tp.plugin.excel;
 
 import io.vertx.core.Vertx;
 import io.vertx.up.annotations.Plugin;
-import io.vertx.up.plugin.Infix;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.plugin.Infix;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -31,6 +31,12 @@ public class ExcelInfix implements Infix {
 
     public static ExcelClient getClient() {
         return CLIENTS.get(NAME);
+    }
+
+    public static ExcelClient createClient(final Vertx vertx) {
+        return Infix.initTp("excel",
+                (config) -> ExcelClient.createShared(vertx, config),
+                ExcelInfix.class);
     }
 
     @Override

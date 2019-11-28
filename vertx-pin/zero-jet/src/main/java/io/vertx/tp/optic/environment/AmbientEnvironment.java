@@ -138,6 +138,10 @@ public class AmbientEnvironment {
         return Fn.getJvm(() -> this.pool.getDataSource().getConnection(), this.pool);
     }
 
+    public DataPool getPool() {
+        return this.pool;
+    }
+
     public Set<JtUri> routes() {
         return new HashSet<>(this.uris.values());
     }

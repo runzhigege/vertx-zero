@@ -7,14 +7,19 @@ import com.fasterxml.jackson.databind.JsonObjectSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.crud.cv.em.DsMode;
+import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class IxModule implements Serializable {
 
     private String name;
     private String table;
     private String pojo;
+    private String mode;
+    private String modeKey;     // mode = EXTENSION
     private IxField field;
     private IxColumn column;
     private IxJoin connect;
@@ -103,6 +108,29 @@ public class IxModule implements Serializable {
         this.connect = connect;
     }
 
+    public DsMode getMode() {
+        if (Objects.isNull(this.mode)) {
+            return DsMode.PRIMARY;
+        } else {
+            return Ut.toEnum(() -> this.mode, DsMode.class, DsMode.PRIMARY);
+        }
+    }
+
+    public void setMode(final DsMode mode) {
+        if (Objects.isNull(mode)) {
+            this.mode = DsMode.PRIMARY.name();
+        } else {
+            this.mode = mode.name();
+        }
+    }
+
+    public String getModeKey() {
+        return this.modeKey;
+    }
+
+    public void setModeKey(final String modeKey) {
+        this.modeKey = modeKey;
+    }
 
     @Override
     public String toString() {
@@ -116,6 +144,8 @@ public class IxModule implements Serializable {
                 ", daoCls=" + this.daoCls +
                 ", header=" + this.header +
                 ", connect=" + this.connect +
+                ", mode=" + this.mode +
+                ", modeKey=" + this.modeKey +
                 '}';
     }
 }
