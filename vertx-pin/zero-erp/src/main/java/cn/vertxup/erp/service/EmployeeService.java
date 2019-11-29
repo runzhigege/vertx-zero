@@ -19,7 +19,7 @@ public class EmployeeService implements EmployeeStub {
     public Future<JsonObject> createAsync(final JsonObject data) {
         final EEmployee employee = Ut.deserialize(data, EEmployee.class);
         if (Ut.isNil(employee.getWorkNumber())) {
-            return Ke.onTunnelAsync(ExSerial.class,
+            return Ke.channelAsync(ExSerial.class,
                     () -> this.insertAsync(employee, data),
                     serial -> serial.serial(data.getString(KeField.SIGMA), "NUM.EMPLOYEE").compose(workNum -> {
                         employee.setWorkNumber(workNum);
@@ -150,7 +150,7 @@ public class EmployeeService implements EmployeeStub {
 
     private Future<JsonObject> switchRef(final JsonObject input,
                                          final BiFunction<ExUser, JsonObject, Future<JsonObject>> executor) {
-        return Ke.onTunnel(ExUser.class, JsonObject::new, user -> {
+        return Ke.channel(ExUser.class, JsonObject::new, user -> {
             if (Ut.isNil(input)) {
                 return Ux.future(new JsonObject());
             } else {

@@ -40,7 +40,7 @@ class UserHelper {
     private static Future<JsonObject> applyTunnel(final SUser user, final Function<ExEmployee, Future<JsonObject>> fnTunnel) {
         if (Objects.nonNull(user)) {
             if (Objects.nonNull(user.getModelKey())) {
-                return Ke.onTunnelAsync(ExEmployee.class, () -> {
+                return Ke.channelAsync(ExEmployee.class, () -> {
                     /*
                      * Here branch means that actual definition is conflict with your expected.
                      * You forget to define executor of `EcEmployee`.

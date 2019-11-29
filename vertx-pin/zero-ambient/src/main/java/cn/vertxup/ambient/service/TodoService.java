@@ -114,7 +114,7 @@ public class TodoService implements TodoStub {
                 .<XTodo>findByIdAsync(key)
                 .compose(Ux::fnJObject)
                 .compose(Ut.applyNil(JsonObject::new, (todo) ->
-                        Ke.onTunnel(ExTodo.class, () -> todo, channel -> {
+                        Ke.channel(ExTodo.class, () -> todo, channel -> {
                             At.infoInit(LOGGER, AtMsg.CHANNEL_TODO, channel.getClass().getName());
                             /*
                              * X_TODO channel and data merged.

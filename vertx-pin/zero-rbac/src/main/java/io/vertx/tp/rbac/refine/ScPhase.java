@@ -27,7 +27,7 @@ class ScPhase {
      * To avoid two request
      */
     static String uri(final String uri, final String requestUri) {
-        return Ke.onTunnelSync(Orbit.class, () -> uri, orbit -> {
+        return Ke.channelSync(Orbit.class, () -> uri, orbit -> {
             /* Pocket processing */
             final Income income = Pocket.income(Orbit.class, uri, requestUri);
             return orbit.analyze(income.arguments());
