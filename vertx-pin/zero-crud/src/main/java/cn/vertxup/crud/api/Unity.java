@@ -27,7 +27,7 @@ class Unity {
     static Future<JsonObject> fetchView(final UxJooq dao, final Envelop request, final IxModule config) {
         /* init parameters */
         final JsonObject params = Unity.initMy(request);
-        return Ke.onTunnel(Seeker.class, JsonObject::new, seeker -> Ux.future(params)
+        return Ke.channel(Seeker.class, JsonObject::new, seeker -> Ux.future(params)
                 /* Header */
                 .compose(input -> IxActor.header().bind(request).procAsync(input, config))
                 /* Fetch Impact */
@@ -36,7 +36,7 @@ class Unity {
 
     static Future<JsonArray> fetchFull(final UxJooq dao, final Envelop request, final IxModule config) {
         /* Get Stub */
-        return Ke.onTunnel(Apeak.class, JsonArray::new, stub -> IxActor.start()
+        return Ke.channel(Apeak.class, JsonArray::new, stub -> IxActor.start()
                 /* Apeak column definition here */
                 .compose(input -> IxActor.apeak().bind(request).procAsync(input, config))
                 /* Header */

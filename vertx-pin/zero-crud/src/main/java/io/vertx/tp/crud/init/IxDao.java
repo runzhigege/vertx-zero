@@ -100,7 +100,7 @@ class IxDao {
          */
         final DsMode mode = module.getMode();
         if (DsMode.DYNAMIC == mode) {
-            dao = Ke.onTunnelSync(DS.class,
+            dao = Ke.channelSync(DS.class,
                     /*
                      * `provider` configured
                      */

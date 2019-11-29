@@ -86,22 +86,22 @@ public class Ke {
         KeTool.consume(supplier, consumer);
     }
 
-    public static <T, O> Future<O> onTunnel(final Class<T> clazz, final Supplier<O> supplier,
-                                            final Function<T, Future<O>> executor) {
+    public static <T, O> Future<O> channel(final Class<T> clazz, final Supplier<O> supplier,
+                                           final Function<T, Future<O>> executor) {
         final O defaultValue = supplier.get();
-        return KeRun.onTunnel(clazz, defaultValue, executor);
+        return KeRun.channel(clazz, defaultValue, executor);
     }
 
-    public static <T, O> O onTunnelSync(final Class<T> clazz, final Supplier<O> supplier,
-                                        final Function<T, O> executor) {
+    public static <T, O> O channelSync(final Class<T> clazz, final Supplier<O> supplier,
+                                       final Function<T, O> executor) {
         final O defaultValue = supplier.get();
-        return KeRun.onTunnelSync(clazz, defaultValue, executor);
+        return KeRun.channelSync(clazz, defaultValue, executor);
     }
 
-    public static <T, O> Future<O> onTunnelAsync(final Class<T> clazz, final Supplier<Future<O>> supplier,
-                                                 final Function<T, Future<O>> executor) {
+    public static <T, O> Future<O> channelAsync(final Class<T> clazz, final Supplier<Future<O>> supplier,
+                                                final Function<T, Future<O>> executor) {
         final Future<O> future = supplier.get();
-        return KeRun.onTunnelAsync(clazz, future, executor);
+        return KeRun.channelAsync(clazz, future, executor);
     }
 
     /*

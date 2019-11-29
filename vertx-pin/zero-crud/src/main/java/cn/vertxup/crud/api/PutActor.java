@@ -76,7 +76,7 @@ public class PutActor {
             /* Data Get */
             final JsonArray projection = Ux.getArray1(request);
             /* Put Stub */
-            return Ke.onTunnelAsync(ApeakMy.class, () -> Ux.future(new JsonArray()).compose(IxHttp::success200),
+            return Ke.channelAsync(ApeakMy.class, () -> Ux.future(new JsonArray()).compose(IxHttp::success200),
                     stub -> Unity.fetchView(dao, request, config)
                             /* View parameters filling */
                             .compose(input -> IxActor.view().procAsync(input, config))

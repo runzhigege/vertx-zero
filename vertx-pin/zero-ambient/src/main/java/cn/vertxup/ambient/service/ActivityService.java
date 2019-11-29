@@ -26,15 +26,15 @@ public class ActivityService implements ActivityStub {
     @Override
     public Future<JsonArray> fetchActivities(final String identifier, final String key) {
         final JsonObject filters = new JsonObject();
-        filters.put("modelId", identifier);
-        filters.put("modelKey", key);
+        filters.put(KeField.MODEL_ID, identifier);
+        filters.put(KeField.MODEL_KEY, key);
         return Ux.Jooq.on(XActivityDao.class)
                 .fetchAndAsync(filters)
                 .compose(Ux::fnJArray)
                 .compose(response -> {
                     Ut.itJArray(response).forEach(each -> {
-                        Ke.mount(each, "recordNew");
-                        Ke.mount(each, "recordOld");
+                        Ke.mount(each, KeField.RECORD_NEW);
+                        Ke.mount(each, KeField.RECORD_OLD);
                     });
                     return Ux.future(response);
                 });
@@ -56,8 +56,8 @@ public class ActivityService implements ActivityStub {
                             /*
                              * Json Serialization for recordNew / recordOld
                              */
-                            Ke.mount(activityJson, "recordNew");
-                            Ke.mount(activityJson, "recordOld");
+                            Ke.mount(activityJson, KeField.RECORD_NEW);
+                            Ke.mount(activityJson, KeField.RECORD_OLD);
                             activityJson.put(KeField.CHANGES, changes);
                             return Ux.future(activityJson);
                         })));

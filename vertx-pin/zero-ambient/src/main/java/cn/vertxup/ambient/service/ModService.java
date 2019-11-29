@@ -25,6 +25,6 @@ public class ModService implements ModStub {
 
     @Override
     public Future<JsonArray> fetchModels(final String sigma) {
-        return Ke.onTunnel(ExModel.class, JsonArray::new, model -> model.fetchAsync(sigma));
+        return Ke.channel(ExModel.class, JsonArray::new, model -> model.fetchAsync(sigma));
     }
 }

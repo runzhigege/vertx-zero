@@ -86,7 +86,7 @@ public class GetActor {
     public Future<Envelop> getMy(final Envelop request) {
         return Ix.create(this.getClass()).input(request).envelop((dao, config) ->
                 /* Get Stub */
-                Ke.onTunnelAsync(ApeakMy.class, () -> Ux.future(new JsonArray()).compose(IxHttp::success200),
+                Ke.channelAsync(ApeakMy.class, () -> Ux.future(new JsonArray()).compose(IxHttp::success200),
                         stub -> Unity.fetchView(dao, request, config)
                                 /* View parameters filling */
                                 .compose(input -> IxActor.view().procAsync(input, config))

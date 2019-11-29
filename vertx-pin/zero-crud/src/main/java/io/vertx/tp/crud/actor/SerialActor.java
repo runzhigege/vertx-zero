@@ -34,7 +34,7 @@ class SerialActor extends AbstractActor {
             /*
              * Generate numbers here
              */
-            return Ke.onTunnelAsync(ExSerial.class,
+            return Ke.channelAsync(ExSerial.class,
                     () -> Ux.future(data),
                     serial -> {
                         final String sigma = data.getString(KeField.SIGMA);
