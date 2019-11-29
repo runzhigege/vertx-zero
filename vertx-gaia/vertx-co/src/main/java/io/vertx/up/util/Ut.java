@@ -767,12 +767,20 @@ public final class Ut {
         return Types.isEmpty(json);
     }
 
+    public static boolean isNil(final JsonArray jsonArray) {
+        return Types.isEmpty(jsonArray);
+    }
+
     public static boolean notNil(final String input) {
         return StringUtil.notNil(input);
     }
 
     public static boolean notNil(final JsonObject json) {
         return !isNil(json);
+    }
+
+    public static boolean notNil(final JsonArray jsonArray) {
+        return !isNil(jsonArray);
     }
 
     /*
@@ -1062,6 +1070,7 @@ public final class Ut {
         return Period.inRange(from, to);
     }
 
+
     /*
      * Mapping operation
      */
@@ -1071,5 +1080,9 @@ public final class Ut {
 
     public static Set<JsonArray> mapArray(final JsonArray array, final String field) {
         return Epsilon.mapArray(array, field);
+    }
+
+    public static <T> T mapValue(final JsonObject item, final String field, final Class<T> clazz) {
+        return Epsilon.mapValue(item, field, clazz);
     }
 }
