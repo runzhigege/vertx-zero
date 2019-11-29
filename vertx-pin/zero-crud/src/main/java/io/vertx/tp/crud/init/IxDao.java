@@ -7,9 +7,8 @@ import io.vertx.tp.crud.cv.IxFolder;
 import io.vertx.tp.crud.cv.IxMsg;
 import io.vertx.tp.crud.cv.em.DsMode;
 import io.vertx.tp.crud.refine.Ix;
+import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.optic.DS;
-import io.vertx.tp.optic.Pocket;
-import io.vertx.tp.plugin.database.DataPool;
 import io.vertx.up.eon.FileSuffix;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.fn.Fn;
@@ -19,7 +18,6 @@ import io.vertx.up.unity.UxJooq;
 import io.vertx.up.util.Ut;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -102,19 +100,16 @@ class IxDao {
          */
         final DsMode mode = module.getMode();
         if (DsMode.DYNAMIC == mode) {
-            final DS ds = Pocket.lookup(DS.class);
-            if (Objects.isNull(ds)) {
-                /*
-                 * `provider` configured
-                 */
-                dao = Ux.Jooq.on(clazz);
-            } else {
-                /*
-                 * Dynamic Data Source here
-                 */
-                final DataPool pool = ds.switchDs(headers);
-                dao = Ux.Jooq.on(clazz, pool);
-            }
+            dao = Ke.onTunnelSync(DS.class,
+                    /*
+                     * `provider` configured
+                     */
+                    () -> Ux.Jooq.on(clazz),
+                    /*
+                     * Dynamic Data Source here
+                     */
+                    ds -> Ux.Jooq.on(clazz, ds.switchDs(headers))
+            );
         } else {
             if (DsMode.HISTORY == mode) {
                 /*

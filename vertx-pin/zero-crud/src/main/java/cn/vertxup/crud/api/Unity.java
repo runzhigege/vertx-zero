@@ -7,16 +7,14 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.actor.IxActor;
 import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.ke.cv.KeField;
+import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.optic.Apeak;
-import io.vertx.tp.optic.Pocket;
 import io.vertx.tp.optic.Seeker;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.unity.UxJooq;
 
 import java.text.MessageFormat;
-import java.util.Objects;
-import java.util.function.Supplier;
 
 class Unity {
 
@@ -26,33 +24,25 @@ class Unity {
      * 2. Sigma from header
      * 3. Find impact resourcedId that will be related to view.
      */
-    @SuppressWarnings("all")
     static Future<JsonObject> fetchView(final UxJooq dao, final Envelop request, final IxModule config) {
-        /* Get Seeker */
-        final Seeker seeker = Pocket.lookup(Seeker.class);
         /* init parameters */
         final JsonObject params = Unity.initMy(request);
-        return Ux.future(params)
+        return Ke.onTunnel(Seeker.class, JsonObject::new, seeker -> Ux.future(params)
                 /* Header */
                 .compose(input -> IxActor.header().bind(request).procAsync(input, config))
                 /* Fetch Impact */
-                .compose(seeker.on(dao)::fetchImpact);
+                .compose(seeker.on(dao)::fetchImpact));
     }
 
     static Future<JsonArray> fetchFull(final UxJooq dao, final Envelop request, final IxModule config) {
         /* Get Stub */
-        final Apeak stub = Pocket.lookup(Apeak.class);
-        if (Objects.isNull(stub)) {
-            return Ux.future(new JsonArray());
-        } else {
-            return IxActor.start()
-                    /* Apeak column definition here */
-                    .compose(input -> IxActor.apeak().bind(request).procAsync(input, config))
-                    /* Header */
-                    .compose(input -> IxActor.header().bind(request).procAsync(input, config))
-                    /* Fetch Full Columns */
-                    .compose(stub.on(dao)::fetchFull);
-        }
+        return Ke.onTunnel(Apeak.class, JsonArray::new, stub -> IxActor.start()
+                /* Apeak column definition here */
+                .compose(input -> IxActor.apeak().bind(request).procAsync(input, config))
+                /* Header */
+                .compose(input -> IxActor.header().bind(request).procAsync(input, config))
+                /* Fetch Full Columns */
+                .compose(stub.on(dao)::fetchFull));
     }
 
     /*
@@ -62,15 +52,13 @@ class Unity {
      * /api/columns/{actor}/my
      * Because all of above api returned JsonArray of columns on model
      */
-    static <T> Future<Envelop> safeCall(final T stub, final Supplier<Future<Envelop>> executor) {
-        /* If null */
+/*    static <T> Future<Envelop> safeCall(final T stub, final Supplier<Future<Envelop>> executor) {
         if (Objects.isNull(stub)) {
-            /* No thing return from this interface */
             return Ux.future(new JsonArray()).compose(IxHttp::success200);
         } else {
             return executor.get();
         }
-    }
+    }*/
 
     /*
      * Uri, Method instead

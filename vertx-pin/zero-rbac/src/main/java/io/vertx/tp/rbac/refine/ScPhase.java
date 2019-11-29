@@ -27,14 +27,11 @@ class ScPhase {
      * To avoid two request
      */
     static String uri(final String uri, final String requestUri) {
-        final Orbit orbit = Pocket.lookup(Orbit.class);
-        if (null == orbit) {
-            return uri;
-        } else {
+        return Ke.onTunnelSync(Orbit.class, () -> uri, orbit -> {
             /* Pocket processing */
             final Income income = Pocket.income(Orbit.class, uri, requestUri);
             return orbit.analyze(income.arguments());
-        }
+        });
     }
 
     static String uri(final RoutingContext context) {
