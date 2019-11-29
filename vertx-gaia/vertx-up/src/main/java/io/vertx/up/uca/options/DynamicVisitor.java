@@ -22,6 +22,7 @@ import java.util.concurrent.ConcurrentMap;
  * @author lang
  * Http options for dynamic extension.
  */
+@SuppressWarnings("all")
 public class DynamicVisitor extends HttpServerVisitor {
 
     private static final Annal LOGGER = Annal.get(DynamicVisitor.class);
