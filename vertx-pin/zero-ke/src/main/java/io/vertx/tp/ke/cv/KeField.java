@@ -11,6 +11,7 @@ public interface KeField {
     String JOINED_KEY = "joinedKey";
 
     String ENTITY_ID = "entityId";
+
     String MODEL_ID = "modelId";
     String MODEL_KEY = "modelKey";
     String MODEL_CATEGORY = "modelCategory";
@@ -27,6 +28,7 @@ public interface KeField {
     String STATUS = "status";
     String SERIAL = "serial";
     String NAMESPACE = "namespace";
+    String GLOBAL_ID = "globalId";
 
     String OUT = "out";
     String IN = "in";
@@ -69,8 +71,15 @@ public interface KeField {
     String INITIAL = "initial";
 
     String RECORD = "record";
+    String RECORD_NEW = "recordNew";
+    String RECORD_OLD = "recordOld";
 
     String NUMBERS = "numbers";
+
+    String CREATED_AT = "createdAt";
+    String UPDATED_AT = "updatedAt";
+    String CREATED_BY = "createdBy";
+    String UPDATED_BY = "updatedBy";
 
     interface App {
 
