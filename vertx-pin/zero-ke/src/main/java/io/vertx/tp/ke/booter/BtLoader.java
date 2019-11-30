@@ -26,18 +26,25 @@ class BtLoader {
         JooqInfix.init(BtHelper.getVertx());
     }
 
-    static void importSyncs(final String folder) {
-        streamFile(folder).forEach(BtLoader::importSync);
+    /*
+     * Import batch operation here
+     * 1) Import all excel data under `folder`
+     * 2) Import all excel files with `prefix` named under `folder`
+     * 3) Import all excel data with `Handler` callback
+     */
+    static void doImports(final String folder) {
+        stream(folder).forEach(BtLoader::doImport);
     }
 
-    static void importSyncs(final String folder, final String prefix) {
-        streamFile(folder)
+    static void doImports(final String folder, final String prefix) {
+        stream(folder)
                 .filter(filename -> filename.startsWith(folder + prefix))
-                .forEach(BtLoader::importSync);
+                .forEach(BtLoader::doImport);
     }
 
-    static void importSyncs(final String folder, final Handler<AsyncResult<List<String>>> callback) {
-        final List<Future> futures = streamFile(folder)
+    @SuppressWarnings("all")
+    static void doImports(final String folder, final Handler<AsyncResult<List<String>>> callback) {
+        final List<Future> futures = stream(folder)
                 .map(BtLoader::importFuture)
                 .collect(Collectors.toList());
         CompositeFuture.join(futures).compose(result -> {
@@ -47,8 +54,26 @@ class BtLoader {
         });
     }
 
-    static void ingestExcels(final String folder, final Handler<AsyncResult<Set<ExTable>>> callback) {
-        final List<Future> futures = streamFile(folder)
+    /*
+     * Import single file data here
+     */
+    private static void doImport(final String filename) {
+        doImport(filename, handler -> out(handler.result()));
+    }
+
+    static void doImport(final String filename, final Handler<AsyncResult<String>> callback) {
+        /* ExcelClient */
+        final ExcelClient client = ExcelInfix.getClient();
+        /* Single file */
+        client.loading(filename, handler -> callback.handle(Future.succeededFuture(filename)));
+    }
+
+    /*
+     * Ingest data under `folder` here
+     */
+    @SuppressWarnings("all")
+    static void doIngests(final String folder, final Handler<AsyncResult<Set<ExTable>>> callback) {
+        final List<Future> futures = stream(folder)
                 .map(BtLoader::ingestFuture)
                 .collect(Collectors.toList());
         CompositeFuture.join(futures).compose(result -> {
@@ -60,42 +85,34 @@ class BtLoader {
         });
     }
 
-    private static void importSync(final String filename) {
-        importSync(filename, handler -> asyncOut(handler.result()));
+    static void doIngest(final String filename, final Handler<AsyncResult<Set<ExTable>>> callback) {
+        final ExcelClient client = ExcelInfix.getClient();
+        client.ingest(filename, handler -> callback.handle(Future.succeededFuture(handler.result())));
     }
 
-    private static Stream<String> streamFile(final String folder) {
+    /*
+     * Private methods
+     */
+    private static Stream<String> stream(final String folder) {
         return Ut.ioFiles(folder).stream()
                 .filter(file -> !file.startsWith("~"))
                 .map(file -> folder + file);
     }
 
-    static void importSync(final String filename, final Handler<AsyncResult<String>> callback) {
-        /* ExcelClient */
-        final ExcelClient client = ExcelInfix.getClient();
-        /* Single file */
-        client.loading(filename, handler -> callback.handle(Future.succeededFuture(filename)));
-    }
-
-    static void asyncOut(final String filename) {
+    private static void out(final String filename) {
         final Annal logger = Annal.get(BtLoader.class);
         Ke.infoKe(logger, "Successfully to finish loading ! data file = {0}", filename);
     }
 
-    static void ingestExcel(final String filename, final Handler<AsyncResult<Set<ExTable>>> callback) {
-        final ExcelClient client = ExcelInfix.getClient();
-        client.ingest(filename, handler -> callback.handle(Future.succeededFuture(handler.result())));
-    }
-
     private static Future<Set<ExTable>> ingestFuture(final String filename) {
         final Promise<Set<ExTable>> promise = Promise.promise();
-        ingestExcel(filename, handler -> promise.complete(handler.result()));
+        doIngest(filename, handler -> promise.complete(handler.result()));
         return promise.future();
     }
 
     private static Future<String> importFuture(final String filename) {
         final Promise<String> promise = Promise.promise();
-        importSync(filename, handler -> promise.complete(handler.result()));
+        doImport(filename, handler -> promise.complete(handler.result()));
         return promise.future();
     }
 }

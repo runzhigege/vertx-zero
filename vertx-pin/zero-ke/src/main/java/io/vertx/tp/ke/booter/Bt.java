@@ -27,19 +27,19 @@ public class Bt {
      * doImport
      * doImport: with prefix to do filter
      */
-    public static void doImport(final String folder) {
-        BtLoader.importSyncs(folder);
+    public static void doImports(final String folder) {
+        BtLoader.doImports(folder);
     }
 
-    public static void doImport(final String folder, final String prefix) {
-        BtLoader.importSyncs(folder, prefix);
+    public static void doImports(final String folder, final String prefix) {
+        BtLoader.doImports(folder, prefix);
     }
 
-    public static void doImport(final String folder, final Handler<AsyncResult<List<String>>> callback) {
-        BtLoader.importSyncs(folder, callback);
+    public static void doImports(final String folder, final Handler<AsyncResult<List<String>>> callback) {
+        BtLoader.doImports(folder, callback);
     }
 
     public static void ingestExcels(final String folder, final Handler<AsyncResult<Set<ExTable>>> callback) {
-        BtLoader.ingestExcels(folder, callback);
+        BtLoader.doIngests(folder, callback);
     }
 }
