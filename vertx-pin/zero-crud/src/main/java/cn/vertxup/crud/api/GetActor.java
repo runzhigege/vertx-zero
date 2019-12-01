@@ -8,8 +8,8 @@ import io.vertx.tp.crud.connect.IxLinker;
 import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.tp.ke.cv.KeField;
+import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.optic.ApeakMy;
-import io.vertx.tp.optic.Pocket;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.commune.Envelop;
@@ -84,21 +84,19 @@ public class GetActor {
     @Address(Addr.Get.COLUMN_MY)
     @SuppressWarnings("all")
     public Future<Envelop> getMy(final Envelop request) {
-        return Ix.create(this.getClass()).input(request).envelop((dao, config) -> {
-            /* Get Stub */
-            final ApeakMy stub = Pocket.lookup(ApeakMy.class);
-            return Unity.safeCall(stub, () -> Unity.fetchView(dao, request, config)
-                    /* View parameters filling */
-                    .compose(input -> IxActor.view().procAsync(input, config))
-                    /* Uri filling, replace inited information: uri , method */
-                    .compose(input -> IxActor.uri().bind(request).procAsync(input, config))
-                    /* User filling */
-                    .compose(input -> IxActor.user().bind(request).procAsync(input, config))
-                    /* Fetch My Columns */
-                    .compose(stub.on(dao)::fetchMy)
-                    /* Return Result */
-                    .compose(IxHttp::success200)
-            );
-        });
+        return Ix.create(this.getClass()).input(request).envelop((dao, config) ->
+                /* Get Stub */
+                Ke.channelAsync(ApeakMy.class, () -> Ux.future(new JsonArray()).compose(IxHttp::success200),
+                        stub -> Unity.fetchView(dao, request, config)
+                                /* View parameters filling */
+                                .compose(input -> IxActor.view().procAsync(input, config))
+                                /* Uri filling, replace inited information: uri , method */
+                                .compose(input -> IxActor.uri().bind(request).procAsync(input, config))
+                                /* User filling */
+                                .compose(input -> IxActor.user().bind(request).procAsync(input, config))
+                                /* Fetch My Columns */
+                                .compose(stub.on(dao)::fetchMy)
+                                /* Return Result */
+                                .compose(IxHttp::success200)));
     }
 }

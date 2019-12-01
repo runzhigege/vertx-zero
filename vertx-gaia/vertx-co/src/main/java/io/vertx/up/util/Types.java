@@ -80,6 +80,14 @@ final class Types {
         return Fn.getNull(Boolean.TRUE, () -> 0 == json.fieldNames().size(), json);
     }
 
+    static boolean isEmpty(final JsonArray jsonArray) {
+        if (Objects.isNull(jsonArray) || jsonArray.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     static boolean isJObject(final Object value) {
         return Fn.getSemi(null == value, LOGGER,
                 () -> false,
