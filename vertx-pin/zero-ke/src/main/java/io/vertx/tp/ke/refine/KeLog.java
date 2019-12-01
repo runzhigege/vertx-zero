@@ -8,7 +8,22 @@ class KeLog {
         logger.info("[ Εισόδημα ] ( " + flag + " ) " + pattern, args);
     }
 
+    private static void warn(final Annal logger,
+                             final String flag, final String pattern, final Object... args) {
+        logger.warn("[ Εισόδημα ] ( " + flag + " ) " + pattern, args);
+    }
+
     static void infoKe(final Annal logger, final String pattern, final Object... args) {
         info(logger, "Ke", pattern, args);
+    }
+
+    static void infoChannel(final Class<?> clazz, final String pattern, final Object... args) {
+        final Annal logger = Annal.get(clazz);
+        info(logger, "Channel", pattern, args);
+    }
+
+    static void warnChannel(final Class<?> clazz, final String pattern, final Object... args) {
+        final Annal logger = Annal.get(clazz);
+        warn(logger, "Channel", pattern, args);
     }
 }

@@ -10,7 +10,7 @@ import io.vertx.tp.ambient.cv.em.TodoStatus;
 import io.vertx.tp.ambient.init.AtPin;
 import io.vertx.tp.ambient.refine.At;
 import io.vertx.tp.ke.cv.KeField;
-import io.vertx.tp.optic.Pocket;
+import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.optic.business.ExTodo;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
@@ -109,23 +109,21 @@ public class TodoService implements TodoStub {
     }
 
     @Override
-    @SuppressWarnings("all")
     public Future<JsonObject> fetchTodo(final String key) {
         return Ux.Jooq.on(XTodoDao.class)
                 .<XTodo>findByIdAsync(key)
                 .compose(Ux::fnJObject)
-                .compose(Ut.applyNil(JsonObject::new, (todo) -> {
-                    final ExTodo todoChannel = Pocket.lookup(ExTodo.class);
-                    At.infoInit(LOGGER, AtMsg.CHANNEL_TODO, Objects.isNull(todoChannel) ? null : todoChannel.getClass().getName());
-                    return Ut.applyNil(() -> todo, () -> {
-                        /*
-                         * X_TODO channel and data merged.
-                         */
-                        final JsonObject params = Ut.elementSubset(todo,
-                                KeField.MODEL_ID, KeField.MODEL_CATEGORY, KeField.MODEL_KEY, KeField.SIGMA);
-                        return todoChannel.fetchAsync(key, params)
-                                .compose(Ut.applyMerge(todo));
-                    }).apply(todoChannel);
-                }));
+                .compose(Ut.applyNil(JsonObject::new, (todo) ->
+                        Ke.channel(ExTodo.class, () -> todo, channel -> {
+                            At.infoInit(LOGGER, AtMsg.CHANNEL_TODO, channel.getClass().getName());
+                            /*
+                             * X_TODO channel and data merged.
+                             */
+                            final JsonObject params = Ut.elementSubset(todo,
+                                    KeField.MODEL_ID, KeField.MODEL_CATEGORY, KeField.MODEL_KEY, KeField.SIGMA);
+                            return channel.fetchAsync(key, params)
+                                    .compose(Ut.applyMerge(todo));
+                        })
+                ));
     }
 }

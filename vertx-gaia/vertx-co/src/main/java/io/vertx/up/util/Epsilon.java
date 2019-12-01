@@ -42,4 +42,22 @@ class Epsilon {
         }
         return set;
     }
+
+    @SuppressWarnings("unchecked")
+    static <T> T mapValue(final JsonObject item, final String field, final Class<T> clazz) {
+        if (Ut.isNil(item)) {
+            return null;
+        } else {
+            final Object value = item.getValue(field);
+            if (Objects.isNull(value)) {
+                return null;
+            } else {
+                if (clazz == value.getClass()) {
+                    return (T) value;
+                } else {
+                    return null;
+                }
+            }
+        }
+    }
 }

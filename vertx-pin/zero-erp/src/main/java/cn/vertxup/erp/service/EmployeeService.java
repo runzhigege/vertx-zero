@@ -5,13 +5,12 @@ import cn.vertxup.erp.domain.tables.pojos.EEmployee;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
-import io.vertx.tp.optic.Pocket;
+import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.optic.business.ExSerial;
 import io.vertx.tp.optic.business.ExUser;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
-import java.util.Objects;
 import java.util.function.BiFunction;
 
 public class EmployeeService implements EmployeeStub {
@@ -20,16 +19,12 @@ public class EmployeeService implements EmployeeStub {
     public Future<JsonObject> createAsync(final JsonObject data) {
         final EEmployee employee = Ut.deserialize(data, EEmployee.class);
         if (Ut.isNil(employee.getWorkNumber())) {
-            final ExSerial serial = Pocket.lookup(ExSerial.class);
-            if (Objects.isNull(serial)) {
-                return this.insertAsync(employee, data);
-            } else {
-                return serial.serial(data.getString(KeField.SIGMA), "NUM.EMPLOYEE")
-                        .compose(workNum -> {
-                            employee.setWorkNumber(workNum);
-                            return this.insertAsync(employee, data);
-                        });
-            }
+            return Ke.channelAsync(ExSerial.class,
+                    () -> this.insertAsync(employee, data),
+                    serial -> serial.serial(data.getString(KeField.SIGMA), "NUM.EMPLOYEE").compose(workNum -> {
+                        employee.setWorkNumber(workNum);
+                        return this.insertAsync(employee, data);
+                    }));
         } else {
             return this.insertAsync(employee, data);
         }
@@ -155,15 +150,16 @@ public class EmployeeService implements EmployeeStub {
 
     private Future<JsonObject> switchRef(final JsonObject input,
                                          final BiFunction<ExUser, JsonObject, Future<JsonObject>> executor) {
-        final ExUser user = Pocket.lookup(ExUser.class);
-        if (Objects.isNull(user) || Ut.isNil(input)) {
-            return Ux.future(input);
-        } else {
-            final JsonObject filters = new JsonObject();
-            filters.put(KeField.IDENTIFIER, "employee");
-            filters.put(KeField.SIGMA, input.getString(KeField.SIGMA));
-            filters.put(KeField.KEY, input.getString(KeField.KEY));
-            return executor.apply(user, filters);
-        }
+        return Ke.channel(ExUser.class, JsonObject::new, user -> {
+            if (Ut.isNil(input)) {
+                return Ux.future(new JsonObject());
+            } else {
+                final JsonObject filters = new JsonObject();
+                filters.put(KeField.IDENTIFIER, "employee");
+                filters.put(KeField.SIGMA, input.getString(KeField.SIGMA));
+                filters.put(KeField.KEY, input.getString(KeField.KEY));
+                return executor.apply(user, filters);
+            }
+        });
     }
 }

@@ -3,7 +3,8 @@ package cn.vertxup.rbac.service.business;
 import cn.vertxup.rbac.domain.tables.pojos.SUser;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.optic.Pocket;
+import io.vertx.tp.ke.cv.KeField;
+import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.optic.business.ExEmployee;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.refine.Sc;
@@ -39,8 +40,14 @@ class UserHelper {
     private static Future<JsonObject> applyTunnel(final SUser user, final Function<ExEmployee, Future<JsonObject>> fnTunnel) {
         if (Objects.nonNull(user)) {
             if (Objects.nonNull(user.getModelKey())) {
-                final ExEmployee executor = Pocket.lookup(ExEmployee.class);
-                if (Objects.nonNull(executor)) {
+                return Ke.channelAsync(ExEmployee.class, () -> {
+                    /*
+                     * Here branch means that actual definition is conflict with your expected.
+                     * You forget to define executor of `EcEmployee`.
+                     */
+                    Sc.infoAuth(LOGGER, AuthMsg.EMPLOYEE_EMPTY + " Executor");
+                    return applyUser(user);
+                }, executor -> {
                     /*
                      * Simple situation for user information get
                      * 1) EcEmployee `only` in standard situation
@@ -59,17 +66,10 @@ class UserHelper {
                                     .create(Ux.toJson(user).copy())
                                     .append(employee)
                                     /* Model Key -> Employee Id */
-                                    .convert("modelKey", "employeeId")
+                                    .convert(KeField.MODEL_KEY, "employeeId")
                                     .toFuture()
                             );
-                } else {
-                    /*
-                     * Here branch means that actual definition is conflict with your expected.
-                     * You forget to define executor of `EcEmployee`.
-                     */
-                    Sc.infoAuth(LOGGER, AuthMsg.EMPLOYEE_EMPTY + " Executor");
-                    return applyUser(user);
-                }
+                });
             } else {
                 /*
                 -* There are two fields in S_USER table: MODEL_ID & MODEL_KEY
