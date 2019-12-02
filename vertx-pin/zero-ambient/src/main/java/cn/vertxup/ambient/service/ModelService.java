@@ -9,7 +9,7 @@ import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.optic.business.ExModel;
 import io.vertx.up.unity.Ux;
 
-public class ModService implements ModStub {
+public class ModelService implements ModelStub {
     @Override
     public Future<JsonObject> fetchModule(final String appId, final String entry) {
         final JsonObject filters = new JsonObject()
