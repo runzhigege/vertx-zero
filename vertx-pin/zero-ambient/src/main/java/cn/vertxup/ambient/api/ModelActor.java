@@ -1,6 +1,6 @@
 package cn.vertxup.ambient.api;
 
-import cn.vertxup.ambient.service.ModStub;
+import cn.vertxup.ambient.service.ModelStub;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -11,10 +11,10 @@ import io.vertx.up.annotations.Queue;
 import javax.inject.Inject;
 
 @Queue
-public class ModActor {
+public class ModelActor {
 
     @Inject
-    private transient ModStub stub;
+    private transient ModelStub stub;
 
     @Address(Addr.Module.BY_NAME)
     public Future<JsonObject> fetchModule(
