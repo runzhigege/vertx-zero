@@ -63,8 +63,6 @@ public interface Addr {
         String BY_NAME = Prefix._EVENT + "X-MODULE/NAME";
 
         String IDENTIFIERS = Prefix._EVENT + "X-IDENTIFIER/LIST";
-
-        String RELATION = Prefix._EVENT + "X-RELATION/ID-ALL";
     }
 
     interface History {
