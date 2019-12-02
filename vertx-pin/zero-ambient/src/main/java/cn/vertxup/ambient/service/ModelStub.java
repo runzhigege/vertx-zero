@@ -4,7 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
-public interface ModStub {
+public interface ModelStub {
     /*
      * Get module by
      * 1) appId: application key of primary key

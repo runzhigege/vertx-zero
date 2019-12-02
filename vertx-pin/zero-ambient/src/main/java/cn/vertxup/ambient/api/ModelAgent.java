@@ -14,7 +14,7 @@ import javax.ws.rs.QueryParam;
 
 @EndPoint
 @Path("/api")
-public interface ModAgent {
+public interface ModelAgent {
     @Path("/module")
     @GET
     @Address(Addr.Module.BY_NAME)
