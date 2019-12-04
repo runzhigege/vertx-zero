@@ -35,7 +35,7 @@ public class XNumber extends TableImpl<XNumberRecord> {
      * The reference instance of <code>DB_ETERNAL.X_NUMBER</code>
      */
     public static final XNumber X_NUMBER = new XNumber();
-    private static final long serialVersionUID = 346452315;
+    private static final long serialVersionUID = 97878651;
     /**
      * The column <code>DB_ETERNAL.X_NUMBER.KEY</code>. 「key」- 主键
      */
@@ -63,11 +63,11 @@ public class XNumber extends TableImpl<XNumberRecord> {
     /**
      * The column <code>DB_ETERNAL.X_NUMBER.PREFIX</code>. 「prefix」编号前缀,prefix,S_PREFIX
      */
-    public final TableField<XNumberRecord, String> PREFIX = createField("PREFIX", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「prefix」编号前缀,prefix,S_PREFIX");
+    public final TableField<XNumberRecord, String> PREFIX = createField("PREFIX", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「prefix」编号前缀,prefix,S_PREFIX");
     /**
      * The column <code>DB_ETERNAL.X_NUMBER.SUFFIX</code>. 「suffix」编号后缀,suffix,S_SUFFIX
      */
-    public final TableField<XNumberRecord, String> SUFFIX = createField("SUFFIX", org.jooq.impl.SQLDataType.VARCHAR(10), this, "「suffix」编号后缀,suffix,S_SUFFIX");
+    public final TableField<XNumberRecord, String> SUFFIX = createField("SUFFIX", org.jooq.impl.SQLDataType.VARCHAR(64), this, "「suffix」编号后缀,suffix,S_SUFFIX");
     /**
      * The column <code>DB_ETERNAL.X_NUMBER.TIME</code>. 「time」时间对应Pattern，对应${time}：YYYY-MM-DD HH:mm:ss用于描述时间格式生成序号时间部分,time,S_TIME
      */
