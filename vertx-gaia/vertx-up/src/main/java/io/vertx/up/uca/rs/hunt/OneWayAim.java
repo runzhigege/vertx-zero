@@ -9,6 +9,7 @@ import io.vertx.up.atom.agent.Event;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.uca.rs.Aim;
+import io.vertx.up.unity.Ux;
 
 /**
  * OneWayAim: Event Bus: One-Way
@@ -55,7 +56,7 @@ public class OneWayAim extends BaseAim implements Aim<RoutingContext> {
                  * SUCCESS
                  */
                 if (dataRes.succeeded()) {
-                    bus.<Envelop>request(address, dataRes.result(), handler -> {
+                    bus.<Envelop>request(address, dataRes.result(), Ux.Opt.on().delivery(), handler -> {
                         final Envelop response;
                         if (handler.succeeded()) {
                             /*
@@ -70,17 +71,6 @@ public class OneWayAim extends BaseAim implements Aim<RoutingContext> {
                     });
                 }
             });
-            /*
-            bus.<Envelop>send(address, request, handler -> {
-                final Envelop response;
-                if (handler.succeeded()) {
-                    // One Way message
-                    response = Envelop.success(Boolean.TRUE);
-                } else {
-                    response = failure(address, handler);
-                }
-                Answer.reply(context, response, event);
-            });*/
         }, context, event), event);
     }
 }

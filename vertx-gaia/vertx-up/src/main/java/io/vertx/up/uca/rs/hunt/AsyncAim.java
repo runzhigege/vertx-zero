@@ -42,7 +42,7 @@ public class AsyncAim extends BaseAim implements Aim<RoutingContext> {
                  * SUCCESS
                  */
                 if (dataRes.succeeded()) {
-                    bus.<Envelop>request(address, dataRes.result(), handler -> {
+                    bus.<Envelop>request(address, dataRes.result(), Ux.Opt.on().delivery(), handler -> {
                         final Envelop response;
                         if (handler.succeeded()) {
                             // Request - Response message
@@ -58,17 +58,6 @@ public class AsyncAim extends BaseAim implements Aim<RoutingContext> {
                     }
                 }
             });
-            /*
-            bus.<Envelop>send(address, request, handler -> {
-                final Envelop response;
-                if (handler.succeeded()) {
-                    // Request - Response message
-                    response = success(address, handler);
-                } else {
-                    response = failure(address, handler);
-                }
-                Answer.reply(context, response, event);
-            });*/
         }, context, event), event);
     }
 

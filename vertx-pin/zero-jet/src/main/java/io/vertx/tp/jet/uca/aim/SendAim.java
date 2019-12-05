@@ -10,6 +10,7 @@ import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.monitor.JtMonitor;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.uca.rs.hunt.Answer;
+import io.vertx.up.unity.Ux;
 
 public class SendAim implements JtAim {
 
@@ -41,7 +42,7 @@ public class SendAim implements JtAim {
             final Vertx vertx = context.vertx();
             final EventBus event = vertx.eventBus();
 
-            event.<Envelop>send(address, request, handler -> {
+            event.<Envelop>request(address, request, Ux.Opt.on().delivery(), handler -> {
                 if (handler.succeeded()) {
                     /*
                      * 「Success」
