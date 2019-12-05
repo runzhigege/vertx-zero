@@ -110,18 +110,18 @@
         <!-- Liquibase -->
         <liquibase.version>3.8.1</liquibase.version>
         <!-- Rpc -->
-        <protobuf.version>3.11.0</protobuf.version>
+        <protobuf.version>3.11.1</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
         <grpc.version>1.25.0</grpc.version>
         <!-- Yaml -->
         <yaml.version>1.25</yaml.version>
         <!-- Vert.x Addition -->
         <rxjava2.version>2.2.15</rxjava2.version>
-        <netty.tcnative.version>2.0.27.Final</netty.tcnative.version>
+        <netty.tcnative.version>2.0.28.Final</netty.tcnative.version>
         <netty.version>4.1.43.Final</netty.version>
         <hazelcast.version>3.12.4</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
-        <error.prone.version>2.3.3</error.prone.version>
+        <error.prone.version>2.3.4</error.prone.version>
         <reactive.streams>1.0.3</reactive.streams>
         <!-- JSR -->
         <jsr311.version>1.1.1</jsr311.version>
