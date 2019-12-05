@@ -2,12 +2,15 @@ package io.vertx.tp.rbac.extension;
 
 import io.vertx.core.Future;
 import io.vertx.core.http.HttpMethod;
+import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.tp.ke.refine.Ke;
+import io.vertx.tp.rbac.refine.Sc;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.extension.PlugAuditor;
+import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
@@ -15,6 +18,7 @@ import java.time.Instant;
 import java.util.Objects;
 
 public class AuditorPin implements PlugAuditor {
+    private final static Annal LOGGER = Annal.get(AuditorPin.class);
     private final transient JsonObject config = new JsonObject();
 
     @Override
@@ -28,8 +32,9 @@ public class AuditorPin implements PlugAuditor {
     @Override
     public Future<Envelop> audit(final RoutingContext context,
                                  final Envelop envelop) {
-        if (this.isValid(context)) {
-            final HttpMethod method = context.request().method();
+        final HttpServerRequest request = context.request();
+        if (this.isValid(request)) {
+            final HttpMethod method = request.method();
             /* Get user id */
             final String userId = Ke.keyUser(envelop);
             final Instant instant = Instant.now();
@@ -47,6 +52,7 @@ public class AuditorPin implements PlugAuditor {
                 envelop.setValue("createdAt", instant);
                 envelop.setValue("updatedBy", userId);
                 envelop.setValue("updatedAt", instant);
+                Sc.infoAudit(LOGGER, "Full auditing: userId = `{0}`, at = `{1}`", userId, instant.toString());
             } else {
                 /*
                  * /api/xxx
@@ -55,12 +61,15 @@ public class AuditorPin implements PlugAuditor {
                  */
                 envelop.setValue("updatedBy", userId);
                 envelop.setValue("updatedAt", instant);
+                Sc.infoAudit(LOGGER, "Update auditing: userId = `{0}`, at = `{1}`", userId, instant.toString());
             }
+        } else {
+            Sc.infoAudit(LOGGER, "Do not match: {0}", request.path());
         }
         return Ux.future(envelop);
     }
 
-    private boolean isValid(final RoutingContext context) {
+    private boolean isValid(final HttpServerRequest request) {
         final JsonArray include = this.config.getJsonArray("include");
         if (Objects.isNull(include) || include.isEmpty()) {
             /*
@@ -68,14 +77,14 @@ public class AuditorPin implements PlugAuditor {
              */
             return false;
         }
-        final HttpMethod method = context.request().method();
+        final HttpMethod method = request.method();
         if (HttpMethod.PUT != method && HttpMethod.POST != method) {
             /*
              * Must be impact on `PUT` or `POST`
              */
             return false;
         }
-        final String path = context.request().path();
+        final String path = request.path();
         final long counter = include.stream().filter(Objects::nonNull)
                 .map(item -> (String) item)
                 .filter(path::startsWith)
