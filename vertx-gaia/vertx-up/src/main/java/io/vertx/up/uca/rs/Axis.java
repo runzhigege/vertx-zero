@@ -10,7 +10,7 @@ public interface Axis<Router> {
     /**
      * Router management entry
      *
-     * @param router
+     * @param router The router reference that will be stored
      */
     void mount(Router router);
 }

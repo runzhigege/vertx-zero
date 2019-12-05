@@ -6,11 +6,9 @@ import io.vertx.up.eon.em.MappingMode;
 import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.stream.Collectors;
 
 /*
  * [Data Structure]
@@ -18,13 +16,25 @@ import java.util.stream.Collectors;
  * 2) revert stored `to -> from`
  * This data structure will store two mappings between configuration file here.
  * It could be used in some places to process ( ----> / <---- )
+ *
+ * Two mapping categories:
+ * A) Single Mapping: String = String
+ * B) Multi Mapping: String = JsonObject
  */
 public class DualMapping implements Serializable {
 
-    private final transient ConcurrentMap<String, String> vector =
+    /*
+     * Root ( Single )
+     * String = String
+     * Map ( Multi )
+     * String = JsonObject
+     */
+    private final transient DualItem root = new DualItem();
+    private final transient ConcurrentMap<String, DualItem> mapping =
             new ConcurrentHashMap<>();
-    private final transient ConcurrentMap<String, String> revert =
-            new ConcurrentHashMap<>();
+    /*
+     * Configured `MappingMode` and `Class<?>`
+     */
     private transient MappingMode mode = MappingMode.NONE;
     private transient Class<?> component;
 
@@ -37,20 +47,40 @@ public class DualMapping implements Serializable {
 
     public DualMapping init(final JsonObject input) {
         if (Ut.notNil(input)) {
+            /*
+             * Mix data structure for
+             * {
+             *     "String": {},
+             *     "String": "String",
+             *     "String": {}
+             * }
+             */
+            this.root.init(input);
+            /*
+             * Content mapping `Map` here
+             */
             input.fieldNames().stream()
-                    /* Only stored string value here */
-                    .filter(field -> input.getValue(field) instanceof String)
+                    /* Only stored JsonObject value here */
+                    .filter(field -> input.getValue(field) instanceof JsonObject)
                     .forEach(field -> {
-                        final String to = input.getString(field);
-                        /* mapping */
-                        this.vector.put(field, to);
-                        /* revert */
-                        this.revert.put(to, field);
+                        final JsonObject fieldValue = input.getJsonObject(field);
+                        /* Init here */
+                        if (Ut.notNil(fieldValue)) {
+                            /* Json mapping here */
+                            final DualItem item = new DualItem(fieldValue);
+                            this.mapping.put(field, item);
+                        }
                     });
         }
         return this;
     }
 
+    /*
+     * 1) MappingMode
+     * 2) Class<?>
+     * 3) DualMapping ( Bind Life Cycle )
+     * 4) valid() -> boolean Check whether the mapping is enabled.
+     */
     public MappingMode getMode() {
         return this.mode;
     }
@@ -73,66 +103,75 @@ public class DualMapping implements Serializable {
         return MappingMode.NONE != this.mode;
     }
 
+    // -------------  Get by identifier ----------------------------
+    /*
+     * Child get here
+     */
+    public DualItem child(final String key) {
+        return this.mapping.get(key);
+    }
+
+    public DualItem child() {
+        return this.root;
+    }
+
+    // -------------  Root Method here for split instead -----------
     /*
      * from -> to, to values to String[]
      */
     public String[] to() {
-        return this.vector.values().toArray(new String[]{});
+        return this.root.to();
     }
 
     public String[] from() {
-        return this.revert.values().toArray(new String[]{});
+        return this.root.from();
     }
 
     public Set<String> to(final JsonArray keys) {
-        return keys.stream().filter(item -> item instanceof String)
-                .map(item -> (String) item)
-                .map(this.vector::get)
-                .collect(Collectors.toSet());
+        return this.root.to(keys);
     }
 
     public Set<String> from(final JsonArray keys) {
-        return keys.stream().filter(item -> item instanceof String)
-                .map(item -> (String) item)
-                .map(this.revert::get)
-                .collect(Collectors.toSet());
+        return this.root.from(keys);
     }
 
     /*
      * Get value by from key, get to value
      */
     public String to(final String from) {
-        return this.vector.get(from);
+        return this.root.to(from);
     }
 
     public boolean fromKey(final String key) {
-        return this.vector.containsKey(key);
+        return this.root.fromKey(key);
     }
 
     public String from(final String to) {
-        return this.revert.get(to);
+        return this.root.from(to);
     }
 
     public boolean toKey(final String key) {
-        return this.revert.containsKey(key);
+        return this.root.toKey(key);
     }
 
     /*
      * from -> to, from keys
      */
     public Set<String> keys() {
-        return this.vector.keySet();
+        return this.root.keys();
     }
 
     public Set<String> values() {
-        return new HashSet<>(this.vector.values());
+        return this.root.values();
     }
 
     @Override
     public String toString() {
-        return "Diode{" +
-                "vector=" + this.vector +
-                ", revert=" + this.revert +
+        return "DualMapping{" +
+                "root=" + this.root +
+                ", mapping=" + this.mapping +
+                ", mode=" + this.mode +
+                ", component=" + this.component +
                 '}';
     }
 }

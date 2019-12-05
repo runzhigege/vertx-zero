@@ -81,7 +81,7 @@ class OutPut {
                 final EventBus eventBus = this.vertx.eventBus();
                 Element.onceLog(mission,
                         () -> LOGGER.info(Info.PHASE_5TH_JOB_ASYNC, mission.getCode(), address));
-                eventBus.<Envelop>request(address, envelop, handler -> {
+                eventBus.<Envelop>request(address, envelop, Ux.Opt.on().delivery(), handler -> {
                     if (handler.succeeded()) {
                         output.complete(handler.result().body());
                     } else {

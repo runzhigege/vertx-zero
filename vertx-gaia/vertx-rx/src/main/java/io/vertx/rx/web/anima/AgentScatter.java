@@ -21,7 +21,7 @@ public class AgentScatter implements Scatter<Vertx> {
 
     @Override
     public void connect(final Vertx vertx) {
-        /** 1.Find Agent for deploy **/
+        /* 1.Find Agent for deploy **/
         final ConcurrentMap<ServerType, Class<?>> agents = this.factor.agents();
 
         final Extractor<DeploymentOptions> extractor =
