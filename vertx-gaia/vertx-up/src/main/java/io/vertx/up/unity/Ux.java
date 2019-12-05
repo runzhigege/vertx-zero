@@ -538,6 +538,15 @@ public final class Ux {
         }
     }
 
+    /*
+     * The only one uniform configuration of tp here
+     */
+    public static class Opt {
+        public static UxOpt on() {
+            return new UxOpt();
+        }
+    }
+
     // -> Jwt
     public static class Jwt {
 
