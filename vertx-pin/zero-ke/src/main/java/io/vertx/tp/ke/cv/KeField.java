@@ -1,6 +1,9 @@
 package io.vertx.tp.ke.cv;
 
 public interface KeField {
+
+    String FIELD = "field";
+
     String ITEMS = "items";
     String CHANGES = "changes";
     String DATA_KEY = "dataKey";
