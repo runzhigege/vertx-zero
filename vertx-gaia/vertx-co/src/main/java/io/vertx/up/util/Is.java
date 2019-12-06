@@ -4,6 +4,7 @@ import io.vertx.core.json.JsonObject;
 
 import java.time.Instant;
 import java.time.temporal.TemporalUnit;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -40,6 +41,7 @@ class Is {
         }
         /*
          * Get the final result of calculation.
+         * 1) From old calculation
          */
         final boolean unchanged = oldCopy.fieldNames().stream().allMatch(field -> {
             /*
@@ -49,7 +51,20 @@ class Is {
             final Object newValue = newCopy.getValue(field);
             return isSame(oldValue, newValue, unit);
         });
-        return !unchanged;
+        /*
+         * 2) From new calculation
+         */
+        final Set<String> newLefts = new HashSet<>(newCopy.fieldNames());
+        newLefts.removeAll(oldCopy.fieldNames());
+        final boolean additional = newLefts.stream().allMatch(field -> {
+            /*
+             * Extract value from each record
+             */
+            final Object oldValue = oldCopy.getValue(field);
+            final Object newValue = newCopy.getValue(field);
+            return isSame(oldValue, newValue, unit);
+        });
+        return !(unchanged && additional);
     }
 
     static boolean isSame(final Object oldValue, final Object newValue,
