@@ -26,6 +26,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+@SuppressWarnings("rawtypes")
 class JooqCond {
 
     static final ConcurrentMap<String, BiFunction<String, Object, Condition>> OPS =
@@ -291,12 +292,12 @@ class JooqCond {
             } else if (3 == fields.length) {
                 Fn.outUp(null == value, JooqCond.LOGGER,
                         JooqArgumentException.class, UxJooq.class, value);
-                final Instant instant = filters.getInstant(field);
+                final Object instant = filters.getValue(field);
                 Fn.outUp(Instant.class != instant.getClass(), JooqCond.LOGGER,
                         JooqArgumentException.class, UxJooq.class, instant.getClass());
                 final String mode = fields[Values.TWO];
                 final BiFunction<String, Instant, Condition> fun = JooqCond.DOPS.get(mode);
-                final Condition item = fun.apply(JooqCond.applyField(targetField.trim(), fnTable), instant);
+                final Condition item = fun.apply(JooqCond.applyField(targetField.trim(), fnTable), filters.getInstant(field));
                 condition = JooqCond.opCond(condition, item, operator);
             }
         }
