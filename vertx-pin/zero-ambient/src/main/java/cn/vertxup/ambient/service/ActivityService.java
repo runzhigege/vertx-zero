@@ -36,6 +36,9 @@ public class ActivityService implements ActivityStub {
                         Ke.mount(each, KeField.RECORD_NEW);
                         Ke.mount(each, KeField.RECORD_OLD);
                     });
+                    /*
+                     * Order by created By
+                     */
                     return Ux.future(response);
                 });
     }
