@@ -17,8 +17,8 @@ CREATE TABLE IF NOT EXISTS I_SERVICE
     `IS_GRAPHIC`           BIT COMMENT '「isGraphic」- 是否驱动图引擎',
 
     -- 前置脚本和后置脚本
-    `IN_SCRIPT`            TEXT COMMENT '「inScript」- 本次不使用，加载脚本引擎ScriptEngine前置脚本',
-    `OUT_SCRIPT`           TEXT COMMENT '「outScript」- 本次不使用，加载脚本引擎ScriptEngine后置脚本',
+    `IN_SCRIPT`            MEDIUMTEXT COMMENT '「inScript」- 本次不使用，加载脚本引擎ScriptEngine前置脚本',
+    `OUT_SCRIPT`           MEDIUMTEXT COMMENT '「outScript」- 本次不使用，加载脚本引擎ScriptEngine后置脚本',
 
     /*
      * 通道定义，主要目的是创建：ActIn 并且传给 Service 层，通道的输入为：Envelop（数据） 和 ZApi（配置）
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS I_SERVICE
      */
     `CHANNEL_TYPE`         VARCHAR(20) COMMENT '「channelType」- 通道类型：ADAPTOR / CONNECTOR / ACTOR / DIRECTOR / DEFINE',
     `CHANNEL_COMPONENT`    VARCHAR(255) COMMENT '「channelComponent」- 自定义通道专用组件',
-    `CHANNEL_CONFIG`       TEXT COMMENT '「channelConfig」- 通道（自定义）配置信息，Channel专用',
+    `CHANNEL_CONFIG`       MEDIUMTEXT COMMENT '「channelConfig」- 通道（自定义）配置信息，Channel专用',
 
     /*
      * 中间层专用信息
@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS I_SERVICE
      * 构造最终对象：io.vertx.up.commune.config.Integration
      * 构造最终对象：io.vertx.up.commune.config.Database
      */
-    `CONFIG_INTEGRATION`   TEXT COMMENT '「configIntegration」- 集成配置信息，第三方专用',
-    `CONFIG_DATABASE`      TEXT COMMENT '「configDatabase」- 数据库配置，当前通道访问的Database',
+    `CONFIG_INTEGRATION`   MEDIUMTEXT COMMENT '「configIntegration」- 集成配置信息，第三方专用',
+    `CONFIG_DATABASE`      MEDIUMTEXT COMMENT '「configDatabase」- 数据库配置，当前通道访问的Database',
     /*
      * 字典专用配置信息
      * 构造最终对象：io.vertx.up.commune.config.Dict
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS I_SERVICE
      *
      * ！！！：dictComponent 在启用字典的时候必须配置
      */
-    `DICT_CONFIG`          TEXT COMMENT '「dictConfig」- 字典的配置信息',
+    `DICT_CONFIG`          MEDIUMTEXT COMMENT '「dictConfig」- 字典的配置信息',
     `DICT_COMPONENT`       VARCHAR(255) COMMENT '「dictComponent」- 字典配置中的插件',
     /*
      * 映射专用配置信息
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS I_SERVICE
      * 2）映射组件可配置，可不用配置
      * 3）如果不配置的时候，则直接使用系统默认的转换方式
      */
-    `MAPPING_CONFIG`       TEXT COMMENT '「mappingConfig」- 映射专用配置',
+    `MAPPING_CONFIG`       MEDIUMTEXT COMMENT '「mappingConfig」- 映射专用配置',
     `MAPPING_MODE`         VARCHAR(20) COMMENT '「mappingMode」- 映射的模式',
     `MAPPING_COMPONENT`    VARCHAR(255) COMMENT '「mappingComponent」- 映射组件类型',
     /*
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS I_SERVICE
      */
     `SERVICE_RECORD`       VARCHAR(255) COMMENT '「serviceRecord」- 服务记录定义',
     `SERVICE_COMPONENT`    VARCHAR(255) COMMENT '「serviceComponent」- 服务组件定义',
-    `SERVICE_CONFIG`       TEXT COMMENT '「serviceConfig」- 业务组件配置，业务组件专用',
+    `SERVICE_CONFIG`       MEDIUMTEXT COMMENT '「serviceConfig」- 业务组件配置，业务组件专用',
 
     -- 当前服务描述的模型identifier
     `IDENTIFIER`           VARCHAR(255) COMMENT '「identifier」- 当前类型描述的Model的标识',

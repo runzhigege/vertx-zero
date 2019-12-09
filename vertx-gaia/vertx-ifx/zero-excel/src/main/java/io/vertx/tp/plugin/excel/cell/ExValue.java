@@ -1,6 +1,7 @@
 package io.vertx.tp.plugin.excel.cell;
 
 import io.vertx.tp.plugin.excel.atom.ExKey;
+import io.vertx.up.util.Ut;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.CellValue;
@@ -20,11 +21,28 @@ public interface ExValue {
     @SuppressWarnings("all")
     static ExValue get(final Object value) {
         if (Objects.isNull(value)) {
-            return PureValue.create();
+            return Ut.singleton(PureValue.class);
         }
-        final ExValue reference = Pool.VALUE_MAP.get(value);
+        /*
+         * Match completely:
+         * {UUID}
+         */
+        ExValue reference = Pool.VALUE_MAP.get(value);
         if (Objects.isNull(reference)) {
-            return PureValue.create();
+            /*
+             * Prefix match
+             */
+            if (value.toString().startsWith("JSON")) {
+                reference = Pool.PREFIX_MAP.get("JSON");
+            }
+            if (Objects.isNull(reference)) {
+                /*
+                 * Null to default
+                 */
+                return Ut.singleton(PureValue.class);
+            } else {
+                return reference;
+            }
         } else {
             return reference;
         }
