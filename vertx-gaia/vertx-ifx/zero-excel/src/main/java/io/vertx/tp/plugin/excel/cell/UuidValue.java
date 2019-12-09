@@ -5,7 +5,7 @@ import java.util.UUID;
 /**
  * {UUID} Processing
  */
-class UuidValue implements ExValue {
+public class UuidValue implements ExValue {
 
     @Override
     @SuppressWarnings("all")
