@@ -56,4 +56,24 @@ public class UserActor {
         final String habitus = envelop.jwt("habitus");
         return loginStub.logout(token, habitus);
     }
+
+    @Address(Addr.User.GET)
+    public Future<JsonObject> getById(final String key) {
+        return stub.fetchUser(key);
+    }
+
+    @Address(Addr.User.ADD)
+    public Future<JsonObject> create(final JsonObject data) {
+        return stub.createUser(data);
+    }
+
+    @Address(Addr.User.UPDATE)
+    public Future<JsonObject> update(final String key, final JsonObject data) {
+        return stub.updateUser(key, data);
+    }
+
+    @Address(Addr.User.DELETE)
+    public Future<Boolean> delete(final String key) {
+        return stub.deleteUser(key);
+    }
 }
