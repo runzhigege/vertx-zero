@@ -29,9 +29,25 @@ public interface Addr {
         String PROFILE = Prefix._EVENT + "X-PROFILE";
 
         String SEARCH = Prefix._EVENT + "X-SEARCH";
+
+        /**
+         * modified by Hongwei at 2019/12/06
+         * add get, create, update and delete methods for user domain.
+         */
+        String GET = Prefix._EVENT + "X-GET/ID";
+
+        String ADD = Prefix._EVENT + "X-ADD";
+
+        String DELETE = Prefix._EVENT + "X-DELETE/ID";
+
+        String UPDATE = Prefix._EVENT + "X-PUT/ID";
     }
 
     interface Group {
         String GROUP_SIGMA = Prefix._EVENT + "S-GROUP/SIGMA";
+    }
+
+    interface Role {
+        String ROLE_SIGMA = Prefix._EVENT + "S-ROLE/SIGMA";
     }
 }
