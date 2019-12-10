@@ -44,4 +44,27 @@ public interface UserStub {
      * Update employee information
      */
     Future<JsonObject> updateEmployee(String userId, JsonObject params);
+
+    /**
+     * modified by Hongwei at 2019/12/06
+     * add fetchUser method to get user information: user information and related roles and groups
+     * add createUser method to create user entity: create user record in SUser and OUser tables
+     * modify updateUser method: save user information and related roles and groups
+     * add deleteUser method to delete user information: delete user information and related roles and groups
+     */
+
+    /**
+     * fetch user with related roles and groups
+     */
+    Future<JsonObject> fetchUser(String userKey);
+
+    /**
+     * create user: SUser and OUser
+     */
+    Future<JsonObject> createUser(JsonObject params);
+
+    /**
+     * delete user including related roles and groups
+     */
+    Future<Boolean> deleteUser(String userKey);
 }
