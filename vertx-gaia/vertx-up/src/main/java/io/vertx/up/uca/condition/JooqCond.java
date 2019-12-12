@@ -286,10 +286,7 @@ public class JooqCond {
             /*
              * Clause extraction
              */
-            Clause clause = Pool.CLAUSE_MAP.get(type);
-            if (Objects.isNull(clause)) {
-                clause = Pool.CLAUSE_MAP.get(Object.class);
-            }
+            final Clause clause = Clause.get(type);
             Fn.outUp(Objects.isNull(clause), LOGGER, JooqArgumentException.class, JooqCond.class, clause);
 
             /*
