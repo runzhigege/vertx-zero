@@ -51,4 +51,11 @@ interface Pool {
             this.put(Inquiry.Op.CONTAIN, Ut.instance(TermContain.class));
         }
     };
+
+    ConcurrentMap<String, Term> TERM_DATE_MAP = new ConcurrentHashMap<String, Term>() {
+        {
+            this.put(Inquiry.Op.LT, Ut.instance(TermDLt.class));
+            this.put(Inquiry.Op.GT, Ut.instance(TermDGt.class));
+        }
+    };
 }
