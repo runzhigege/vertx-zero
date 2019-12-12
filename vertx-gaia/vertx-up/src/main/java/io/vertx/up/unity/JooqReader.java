@@ -4,6 +4,7 @@ import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.jooq.JooqInfix;
+import io.vertx.up.uca.condition.JooqCond;
 import org.jooq.Condition;
 import org.jooq.DSLContext;
 import org.jooq.Operator;

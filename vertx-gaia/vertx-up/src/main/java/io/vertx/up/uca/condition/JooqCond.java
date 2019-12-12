@@ -1,4 +1,4 @@
-package io.vertx.up.unity;
+package io.vertx.up.uca.condition;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -17,59 +17,12 @@ import org.jooq.Operator;
 import org.jooq.OrderField;
 import org.jooq.impl.DSL;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 @SuppressWarnings("rawtypes")
-class JooqCond {
+public class JooqCond {
 
-    static final ConcurrentMap<String, BiFunction<String, Object, Condition>> OPS =
-            new ConcurrentHashMap<String, BiFunction<String, Object, Condition>>() {
-                {
-                    this.put(Inquiry.Op.LT, (field, value) -> DSL.field(field).lt(value));
-                    this.put(Inquiry.Op.GT, (field, value) -> DSL.field(field).gt(value));
-                    this.put(Inquiry.Op.LE, (field, value) -> DSL.field(field).le(value));
-                    this.put(Inquiry.Op.GE, (field, value) -> DSL.field(field).ge(value));
-                    this.put(Inquiry.Op.EQ, (field, value) -> DSL.field(field).eq(value));
-                    this.put(Inquiry.Op.NEQ, (field, value) -> DSL.field(field).ne(value));
-                    this.put(Inquiry.Op.NOT_NULL, (field, value) -> DSL.field(field).isNotNull());
-                    this.put(Inquiry.Op.NULL, (field, value) -> DSL.field(field).isNull());
-                    this.put(Inquiry.Op.TRUE, (field, value) -> DSL.field(field).isTrue());
-                    this.put(Inquiry.Op.FALSE, (field, value) -> DSL.field(field).isFalse());
-                    this.put(Inquiry.Op.IN, (field, value) -> {
-                        final Collection<?> values = Ut.toCollection(value);
-                        return DSL.field(field).in(values);
-                    });
-                    this.put(Inquiry.Op.NOT_IN, (field, value) -> {
-                        final Collection<?> values = Ut.toCollection(value);
-                        return DSL.field(field).notIn(values);
-                    });
-                    this.put(Inquiry.Op.START, (field, value) -> DSL.field(field).startsWith(value));
-                    this.put(Inquiry.Op.END, (field, value) -> DSL.field(field).endsWith(value));
-                    this.put(Inquiry.Op.CONTAIN, (field, value) -> DSL.field(field).contains(value));
-                }
-            };
-    static final ConcurrentMap<String, BiFunction<String, Instant, Condition>> DOPS =
-            new ConcurrentHashMap<String, BiFunction<String, Instant, Condition>>() {
-                {
-                    this.put(Inquiry.Instant.DAY, (field, value) -> {
-                        // Time for locale
-                        final LocalDate date = Ut.toDate(value);
-                        return DSL.field(field).between(date.atStartOfDay(), date.plusDays(1).atStartOfDay());
-                    });
-                    this.put(Inquiry.Instant.DATE, (field, value) -> {
-                        final LocalDate date = Ut.toDate(value);
-                        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                        return DSL.field(field).eq(date.format(formatter));
-                    });
-                }
-            };
     private static final Annal LOGGER = Annal.get(JooqCond.class);
 
     private static String applyField(final String field,
@@ -88,9 +41,9 @@ class JooqCond {
     }
 
     // OrderField
-    static List<OrderField> orderBy(final Sorter sorter,
-                                    final Function<String, Field> fnAnalyze,
-                                    final Function<String, String> fnTable) {
+    public static List<OrderField> orderBy(final Sorter sorter,
+                                           final Function<String, Field> fnAnalyze,
+                                           final Function<String, String> fnTable) {
         final JsonObject sorterJson = sorter.toJson();
         final List<OrderField> orders = new ArrayList<>();
         for (final String field : sorterJson.fieldNames()) {
@@ -109,21 +62,21 @@ class JooqCond {
     }
 
     // Condition ---------------------------------------------------------
-    static Condition transform(final JsonObject filters,
-                               final Function<String, Field> fnAnalyze,
-                               final Function<String, String> fnTable) {
+    public static Condition transform(final JsonObject filters,
+                                      final Function<String, Field> fnAnalyze,
+                                      final Function<String, String> fnTable) {
         return transform(filters, null, fnAnalyze, fnTable);
     }
 
-    static Condition transform(final JsonObject filters,
-                               final Function<String, Field> fnAnalyze) {
+    public static Condition transform(final JsonObject filters,
+                                      final Function<String, Field> fnAnalyze) {
         return transform(filters, null, fnAnalyze);
     }
 
-    static Condition transform(final JsonObject filters,
-                               Operator operator,
-                               final Function<String, Field> fnAnalyze,
-                               final Function<String, String> fnTable) {
+    public static Condition transform(final JsonObject filters,
+                                      Operator operator,
+                                      final Function<String, Field> fnAnalyze,
+                                      final Function<String, String> fnTable) {
         final Condition condition;
         final Criteria criteria = Criteria.create(filters);
         /*
@@ -143,7 +96,7 @@ class JooqCond {
                  * no value with JsonObject, remove all JsonObject value to switch
                  * LINEAR mode.
                  */
-                inputFilters = JooqCond.transformLinear(filters);
+                inputFilters = transformLinear(filters);
                 /*
                  * Re-calculate the operator AND / OR
                  * For complex normalize linear query tree.
@@ -173,7 +126,7 @@ class JooqCond {
              * Ignore operator information here, because the next analyzing will ignore automatically.
              */
             /*Fn.outUp(null != operator, LOGGER, JooqModeConflictException.class,
-                    JooqCond.class, Inquiry.Mode.LINEAR, filters);*/
+                    class, Inquiry.Mode.LINEAR, filters);*/
             condition = transformTree(filters, fnAnalyze, fnTable);
         }
         if (null != condition) {
@@ -182,9 +135,9 @@ class JooqCond {
         return condition;
     }
 
-    static Condition transform(final JsonObject filters,
-                               final Operator operator,
-                               final Function<String, Field> fnAnalyze) {
+    public static Condition transform(final JsonObject filters,
+                                      final Operator operator,
+                                      final Function<String, Field> fnAnalyze) {
         return transform(filters, operator, fnAnalyze, null);
     }
 
@@ -193,14 +146,14 @@ class JooqCond {
                                            final Function<String, String> fnTable) {
         Condition condition;
         // Calc operator in this level
-        final Operator operator = JooqCond.calcOperator(filters);
+        final Operator operator = calcOperator(filters);
         // Calc liner
         final JsonObject cloned = filters.copy();
         cloned.remove(Strings.EMPTY);
         // Operator has been calculated, remove "" to set linear of current tree.
-        final Condition linear = JooqCond.transformLinear(transformLinear(cloned), operator, fnAnalyze, fnTable);
+        final Condition linear = transformLinear(transformLinear(cloned), operator, fnAnalyze, fnTable);
         // Calc All Tree
-        final List<Condition> tree = JooqCond.transformTreeSet(filters, fnAnalyze, fnTable);
+        final List<Condition> tree = transformTreeSet(filters, fnAnalyze, fnTable);
         // Merge the same level
         if (null != linear) {
             tree.add(linear);
@@ -243,6 +196,7 @@ class JooqCond {
         return linear;
     }
 
+    @SuppressWarnings("all")
     private static Operator calcOperator(final JsonObject data) {
         final Operator operator;
         if (!data.containsKey(Strings.EMPTY)) {
@@ -261,58 +215,92 @@ class JooqCond {
             final Function<String, String> fnTable) {
         Condition condition = null;
         for (final String field : filters.fieldNames()) {
+            /*
+             * field analyzing first
+             */
             final Object value = filters.getValue(field);
-            final String key = JooqCond.getKey(field, value);
-            final String normalizedField;
-            if (!field.contains(",") && value instanceof JsonArray) {
-                /*
-                 * Fix issue of `field`: [] ( this kind of issue )
-                 */
-                normalizedField = field + ",i";
+            Fn.outUp(Objects.isNull(value), LOGGER, JooqArgumentException.class, JooqCond.class, value);
+            /*
+             * Code flow 1
+             * - When `field` value is [] ( JsonArray ), the system must convert the result to
+             *   field,i: []
+             * - The statement is fixed structure for different query
+             */
+            final String[] fields;
+            if (value instanceof JsonArray) {
+                if (field.contains(",")) {
+                    /*
+                     * field,? = []
+                     */
+                    fields = field.split(",");
+                } else {
+                    /*
+                     * field = []
+                     */
+                    fields = new String[2];
+                    fields[Values.IDX] = field;
+                }
+                fields[Values.ONE] = Inquiry.Op.IN;
             } else {
-                normalizedField = field;
+                /*
+                 * Common situation
+                 * field,op = value
+                 */
+                fields = field.split(",");
             }
-            final String[] fields = normalizedField.split(",");
-            String targetField = fields[Values.IDX];
-            // TargetField re-do
-            if (null != fnAnalyze) {
-                targetField = fnAnalyze.apply(targetField).getName();
-            }
-            if (3 > fields.length) {
-                // Function
-                final BiFunction<String, Object, Condition> fun = JooqCond.OPS.get(key);
-                // JsonArray to List, fix vert.x and jooq connect issue.
-                /*if (Ut.isJArray(value)) {
-                 value = ((JsonArray) value).getList().toArray();
-                 }**/
-                final Condition item = fun.apply(JooqCond.applyField(targetField.trim(), fnTable), value);
-                condition = JooqCond.opCond(condition, item, operator);
-                // Function condition inject
 
-            } else if (3 == fields.length) {
-                Fn.outUp(null == value, JooqCond.LOGGER,
-                        JooqArgumentException.class, UxJooq.class, value);
-                final Object instant = filters.getValue(field);
-                Fn.outUp(Instant.class != instant.getClass(), JooqCond.LOGGER,
-                        JooqArgumentException.class, UxJooq.class, instant.getClass());
-                final String mode = fields[Values.TWO];
-                final BiFunction<String, Instant, Condition> fun = JooqCond.DOPS.get(mode);
-                final Condition item = fun.apply(JooqCond.applyField(targetField.trim(), fnTable), filters.getInstant(field));
-                condition = JooqCond.opCond(condition, item, operator);
+            /*
+             * Code flow 2
+             * - Get op string here to match future usage
+             */
+            final String op;
+            if (value instanceof JsonArray) {
+                op = Inquiry.Op.IN;
+            } else if (!field.contains(",")) {
+                op = Inquiry.Op.EQ;
+            } else {
+                final String extract = fields[Values.ONE];
+                if (Objects.isNull(extract)) {
+                    op = Inquiry.Op.EQ;
+                } else {
+                    op = extract.trim().toLowerCase();
+                }
+            }
+
+            /*
+             * Code flow 3
+             * - Get `Field` definition for current field
+             */
+            final String targetField = fields[Values.IDX];
+            final Field metaField = fnAnalyze.apply(targetField);
+            Fn.outUp(Objects.isNull(metaField), LOGGER, JooqArgumentException.class, JooqCond.class, metaField);
+
+            /*
+             * 1) fields = ( field,op )
+             * 2) op
+             * 3) Field object reference
+             */
+            final Class<?> type = metaField.getType();
+            final String switchedField = applyField(metaField.getName().trim(), fnTable);
+
+            /*
+             * Clause extraction
+             */
+            Clause clause = Pool.CLAUSE_MAP.get(type);
+            if (Objects.isNull(clause)) {
+                clause = Pool.CLAUSE_MAP.get(Object.class);
+            }
+            Fn.outUp(Objects.isNull(clause), LOGGER, JooqArgumentException.class, JooqCond.class, clause);
+
+            /*
+             * Get condition of this term
+             */
+            final Condition item = clause.where(metaField, switchedField, op, value);
+            if (Objects.nonNull(item)) {
+                condition = opCond(condition, item, operator);
             }
         }
         return condition;
-    }
-
-    private static String getKey(final String field, final Object value) {
-        if (value instanceof JsonArray) {
-            return Inquiry.Op.IN;
-        } else if (!field.contains(",")) {
-            return Inquiry.Op.EQ;
-        } else {
-            final String opStr = field.split(",")[Values.ONE];
-            return Ut.isNil(opStr) ? Inquiry.Op.EQ : opStr.trim().toLowerCase();
-        }
     }
 
     private static Condition opCond(final Condition left,
