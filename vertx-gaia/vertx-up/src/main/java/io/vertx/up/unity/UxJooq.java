@@ -8,6 +8,7 @@ import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.eon.em.Format;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
+import io.vertx.up.uca.condition.JooqCond;
 import org.jooq.Condition;
 import org.jooq.Operator;
 
