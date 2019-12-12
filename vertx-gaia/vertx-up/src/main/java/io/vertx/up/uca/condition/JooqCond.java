@@ -272,30 +272,42 @@ public class JooqCond {
              * - Get `Field` definition for current field
              */
             final String targetField = fields[Values.IDX];
-            final Field metaField = fnAnalyze.apply(targetField);
-            Fn.outUp(Objects.isNull(metaField), LOGGER, JooqArgumentException.class, JooqCond.class, metaField);
-
             /*
-             * 1) fields = ( field,op )
-             * 2) op
-             * 3) Field object reference
+             * Split code logical here
              */
-            final Class<?> type = metaField.getType();
-            final String switchedField = applyField(metaField.getName().trim(), fnTable);
+            final String switchedField;
+            final Condition item;
+            if (Objects.nonNull(fnAnalyze)) {
+                final Field metaField = fnAnalyze.apply(targetField);
+                Fn.outUp(Objects.isNull(metaField), LOGGER, JooqArgumentException.class, JooqCond.class, metaField);
 
-            /*
-             * Clause extraction
-             */
-            final Clause clause = Clause.get(type);
-            Fn.outUp(Objects.isNull(clause), LOGGER, JooqArgumentException.class, JooqCond.class, clause);
+                /*
+                 * 1) fields = ( field,op )
+                 * 2) op
+                 * 3) Field object reference
+                 */
+                final Class<?> type = metaField.getType();
+                switchedField = applyField(metaField.getName().trim(), fnTable);
 
-            /*
-             * Get condition of this term
-             */
-            final Condition item = clause.where(metaField, switchedField, op, value);
-            if (Objects.nonNull(item)) {
-                condition = opCond(condition, item, operator);
+                /*
+                 * Clause extraction
+                 */
+                final Clause clause = Clause.get(type);
+                Fn.outUp(Objects.isNull(clause), LOGGER, JooqArgumentException.class, JooqCond.class, clause);
+
+                /*
+                 * Get condition of this term
+                 */
+                item = clause.where(metaField, switchedField, op, value);
+            } else {
+                /*
+                 * Old method without `org.jooq.Field`, it means that pure analyzing with old code here
+                 */
+                final Clause clause = Clause.get(Object.class);
+                switchedField = applyField(targetField, fnTable);
+                item = clause.where(null, switchedField, op, value);
             }
+            condition = opCond(condition, item, operator);
         }
         return condition;
     }
