@@ -7,6 +7,8 @@ import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Sorter;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.Values;
+import io.vertx.up.exception.zero.JooqArgumentException;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
 import org.jooq.Condition;
@@ -16,40 +18,11 @@ import org.jooq.OrderField;
 import org.jooq.impl.DSL;
 
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 @SuppressWarnings("rawtypes")
 public class JooqCond {
 
-    private static final ConcurrentMap<String, BiFunction<String, Object, Condition>> OPS =
-            new ConcurrentHashMap<String, BiFunction<String, Object, Condition>>() {
-                {
-                    this.put(Inquiry.Op.LT, (field, value) -> DSL.field(field).lt(value));
-                    this.put(Inquiry.Op.GT, (field, value) -> DSL.field(field).gt(value));
-                    this.put(Inquiry.Op.LE, (field, value) -> DSL.field(field).le(value));
-                    this.put(Inquiry.Op.GE, (field, value) -> DSL.field(field).ge(value));
-                    this.put(Inquiry.Op.EQ, (field, value) -> DSL.field(field).eq(value));
-                    this.put(Inquiry.Op.NEQ, (field, value) -> DSL.field(field).ne(value));
-                    this.put(Inquiry.Op.NOT_NULL, (field, value) -> DSL.field(field).isNotNull());
-                    this.put(Inquiry.Op.NULL, (field, value) -> DSL.field(field).isNull());
-                    this.put(Inquiry.Op.TRUE, (field, value) -> DSL.field(field).isTrue());
-                    this.put(Inquiry.Op.FALSE, (field, value) -> DSL.field(field).isFalse());
-                    this.put(Inquiry.Op.IN, (field, value) -> {
-                        final Collection<?> values = Ut.toCollection(value);
-                        return DSL.field(field).in(values);
-                    });
-                    this.put(Inquiry.Op.NOT_IN, (field, value) -> {
-                        final Collection<?> values = Ut.toCollection(value);
-                        return DSL.field(field).notIn(values);
-                    });
-                    this.put(Inquiry.Op.START, (field, value) -> DSL.field(field).startsWith(value));
-                    this.put(Inquiry.Op.END, (field, value) -> DSL.field(field).endsWith(value));
-                    this.put(Inquiry.Op.CONTAIN, (field, value) -> DSL.field(field).contains(value));
-                }
-            };
     private static final Annal LOGGER = Annal.get(JooqCond.class);
 
     private static String applyField(final String field,
@@ -240,13 +213,13 @@ public class JooqCond {
             final Operator operator,
             final Function<String, Field> fnAnalyze,
             final Function<String, String> fnTable) {
-        final Condition condition = null;
+        Condition condition = null;
         for (final String field : filters.fieldNames()) {
             /*
              * field analyzing first
              */
             final Object value = filters.getValue(field);
-
+            Fn.outUp(Objects.isNull(value), LOGGER, JooqArgumentException.class, JooqCond.class, value);
             /*
              * Code flow 1
              * - When `field` value is [] ( JsonArray ), the system must convert the result to
@@ -300,6 +273,7 @@ public class JooqCond {
              */
             final String targetField = fields[Values.IDX];
             final Field metaField = fnAnalyze.apply(targetField);
+            Fn.outUp(Objects.isNull(metaField), LOGGER, JooqArgumentException.class, JooqCond.class, metaField);
 
             /*
              * 1) fields = ( field,op )
@@ -307,8 +281,24 @@ public class JooqCond {
              * 3) Field object reference
              */
             final Class<?> type = metaField.getType();
-            System.out.println(metaField.getType());
-            System.out.println(metaField.getDataType());
+            final String switchedField = applyField(metaField.getName().trim(), fnTable);
+
+            /*
+             * Clause extraction
+             */
+            Clause clause = Pool.CLAUSE_MAP.get(type);
+            if (Objects.isNull(clause)) {
+                clause = Pool.CLAUSE_MAP.get(Object.class);
+            }
+            Fn.outUp(Objects.isNull(clause), LOGGER, JooqArgumentException.class, JooqCond.class, clause);
+
+            /*
+             * Get condition of this term
+             */
+            final Condition item = clause.where(metaField, switchedField, op, value);
+            if (Objects.nonNull(item)) {
+                condition = opCond(condition, item, operator);
+            }
         }
         return condition;
     }
