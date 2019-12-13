@@ -74,6 +74,10 @@ public class Ke {
         KeLog.infoKe(logger, pattern, args);
     }
 
+    public static void debugKe(final Annal logger, final String pattern, final Object... args) {
+        KeLog.debugKe(logger, pattern, args);
+    }
+
     public static void runString(final Supplier<String> supplier, final Consumer<String> consumer) {
         KeTool.consume(supplier, consumer);
     }

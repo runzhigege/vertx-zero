@@ -20,6 +20,10 @@ public class Sc {
         ScLog.infoAuth(logger, pattern, args);
     }
 
+    public static void debugAuth(final Annal logger, final String pattern, final Object... args) {
+        ScLog.debugAuth(logger, pattern, args);
+    }
+
     public static void infoAudit(final Annal logger, final String pattern, final Object... args) {
         ScLog.infoAudit(logger, pattern, args);
     }
@@ -32,8 +36,8 @@ public class Sc {
         ScLog.infoResource(logger, pattern, args);
     }
 
-    public static void infoCredit(final Annal logger, final String pattern, final Object... args) {
-        ScLog.infoCredit(logger, pattern, args);
+    public static void debugCredit(final Annal logger, final String pattern, final Object... args) {
+        ScLog.debugCredit(logger, pattern, args);
     }
 
     /*
