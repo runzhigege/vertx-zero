@@ -44,7 +44,7 @@ public class ClauseString implements Clause {
         if (Objects.isNull(term)) {
             logger().warn(Info.JOOQ_TERM_ERR, op);
         } else {
-            logger().info(Info.JOOQ_TERM, term, op);
+            logger().debug(Info.JOOQ_TERM, term, op);
         }
         return term;
     }

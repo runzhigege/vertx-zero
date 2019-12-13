@@ -18,6 +18,10 @@ class ScLog {
         info(logger, "Auth", pattern, args);
     }
 
+    static void debugAuth(final Annal logger, final String pattern, final Object... args) {
+        debug(logger, "Auth", pattern, args);
+    }
+
     static void infoAudit(final Annal logger, final String pattern, final Object... args) {
         info(logger, "Auditor", pattern, args);
     }
@@ -31,7 +35,7 @@ class ScLog {
         info(logger, "Resource", pattern, args);
     }
 
-    static void infoCredit(final Annal logger, final String pattern, final Object... args) {
-        info(logger, "Credit", pattern, args);
+    static void debugCredit(final Annal logger, final String pattern, final Object... args) {
+        debug(logger, "Credit", pattern, args);
     }
 }

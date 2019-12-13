@@ -18,7 +18,7 @@ public class Amalgam {
     public static void logGroup(final Class<?> clazz,
                                 final List<ProfileRole> roles) {
         final Annal LOGGER = Annal.get(clazz);
-        Sc.infoAuth(LOGGER, "Group Selected: {0}, Size: {1}",
+        Sc.debugAuth(LOGGER, "Group Selected: {0}, Size: {1}",
                 Ut.fromJoin(getGroups(roles)), String.valueOf(roles.size()));
     }
 
