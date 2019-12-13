@@ -8,6 +8,7 @@ import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.atom.Kv;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
+import io.vertx.up.uca.condition.JooqCond;
 import io.vertx.up.util.Ut;
 import org.jooq.*;
 import org.jooq.impl.DSL;
