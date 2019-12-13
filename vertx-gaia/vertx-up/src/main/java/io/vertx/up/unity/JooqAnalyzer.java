@@ -14,6 +14,7 @@ import io.vertx.up.exception.zero.JooqFieldMissingException;
 import io.vertx.up.exception.zero.JooqMergeException;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
+import io.vertx.up.uca.condition.JooqCond;
 import io.vertx.up.util.Ut;
 import org.jooq.*;
 import org.jooq.impl.DSL;
@@ -116,7 +117,17 @@ class JooqAnalyzer {
         Fn.outUp(null == targetField, LOGGER,
                 JooqFieldMissingException.class, UxJooq.class, field, Ut.field(this.vertxDAO, "type"));
         LOGGER.debug(Info.JOOQ_FIELD, field, targetField);
-        return DSL.field(DSL.name(targetField));
+        /*
+         * Old code for field construct, following code will caurse Type/DataType missing
+         * DSL.field(DSL.name(targetField));
+         * 1) Extract from tableFields first
+         * 2) Extract by construct ( Type / DataType ) will missing
+         */
+        Field original = this.tableFields.get(field);
+        if (Objects.isNull(original)) {
+            original = DSL.field(DSL.name(targetField));
+        }
+        return original;
     }
 
     void bind(final String pojo, final Class<?> clazz) {
