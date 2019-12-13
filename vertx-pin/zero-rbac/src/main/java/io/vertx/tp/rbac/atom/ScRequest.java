@@ -107,7 +107,7 @@ public class ScRequest implements Serializable {
     }
 
     public Future<ScPrivilege> openSession() {
-        LOGGER.info("Open session: {0}", this.sessionId);
+        LOGGER.debug("Open session: {0}", this.sessionId);
         return ScPrivilege.open(this.sessionId);
     }
 }

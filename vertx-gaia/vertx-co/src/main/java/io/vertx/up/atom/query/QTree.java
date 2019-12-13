@@ -1,8 +1,8 @@
 package io.vertx.up.atom.query;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.log.Annal;
 import io.vertx.up.eon.Strings;
+import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
 
 import java.util.HashSet;
@@ -50,7 +50,7 @@ public class QTree {
                 treeKeys.add(field);
             }
         }
-        LOGGER.info(Info.Q_ALL, this.linearKeys, treeKeys);
+        LOGGER.debug(Info.Q_ALL, this.linearKeys, treeKeys);
     }
 
     private void initConnector(final JsonObject data) {
@@ -60,7 +60,7 @@ public class QTree {
             final Boolean isAnd = Boolean.valueOf(data.getValue(Strings.EMPTY).toString());
             this.op = isAnd ? Inquiry.Connector.AND : Inquiry.Connector.OR;
         }
-        LOGGER.info(Info.Q_STR, this.op);
+        LOGGER.debug(Info.Q_STR, this.op);
     }
 
     public boolean isValid() {

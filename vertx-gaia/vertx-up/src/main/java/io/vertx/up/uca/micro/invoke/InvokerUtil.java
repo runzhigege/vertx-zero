@@ -160,7 +160,7 @@ public class InvokerUtil {
         final long count = json.fieldNames().stream().filter(Ut::isInteger)
                 .count();
         // All json keys are numbers
-        LOGGER.info("[ ZERO ] ( isInterface Mode ) Parameter count: {0}, json: {1}", count, json.encode());
+        LOGGER.debug("[ ZERO ] ( isInterface Mode ) Parameter count: {0}, json: {1}", count, json.encode());
         return count == json.fieldNames().size();
     }
 }
