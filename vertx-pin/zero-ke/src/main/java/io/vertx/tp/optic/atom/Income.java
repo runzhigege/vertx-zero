@@ -13,7 +13,6 @@ import java.util.Vector;
 /*
  * Stack of fluent api here to store parameters
  */
-@SuppressWarnings("all")
 public class Income implements Serializable {
     private static final Annal LOGGER = Annal.get(Income.class);
     private final transient Vector<Object> queue = new Vector<>();
@@ -32,7 +31,7 @@ public class Income implements Serializable {
 
     public <T> Income in(final T value) {
         // System.err.println(value);
-        queue.add(value);
+        this.queue.add(value);
         return this;
     }
 
@@ -48,8 +47,8 @@ public class Income implements Serializable {
              */
             final String field = this.names.get(idx);
             if (!this.queue.isEmpty()) {
-                Object value = this.queue.get(idx);
-                Ke.infoKe(LOGGER, "[ Income ] field = {0}, value = {1}", field, value);
+                final Object value = this.queue.get(idx);
+                Ke.debugKe(LOGGER, "[ Income ] field = {0}, value = {1}", field, value);
                 arguments.put(field, value);
             }
         }

@@ -108,7 +108,7 @@ public class ScSession {
 
     @SuppressWarnings("all")
     private static Future<JsonObject> initGroups(final JsonObject profile, final JsonArray groups) {
-        Sc.infoAuth(LOGGER, "Groups: {0}", groups.encode());
+        Sc.debugAuth(LOGGER, "Groups: {0}", groups.encode());
         final List futures = new ArrayList();
         groups.stream().filter(Objects::nonNull)
                 .map(item -> (JsonObject) item)
@@ -144,7 +144,10 @@ public class ScSession {
     }
 
     private static Future<JsonObject> onReport(final JsonObject result) {
-        Sc.infoAuth(LOGGER, "Permissions: \n{0}", result.encodePrettily());
+        /*
+         * To avoid log more, here must use `encode` instead of `encodePrettily`
+         */
+        Sc.infoAuth(LOGGER, "Permissions: {0}", result.encode());
         return Future.succeededFuture(result);
     }
 }
