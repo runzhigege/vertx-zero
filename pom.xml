@@ -59,8 +59,8 @@
         <encoding>UTF-8</encoding>
         <jcabi.version>0.22.6</jcabi.version>
         <!-- Vertx 3.8.0, For testing -->
-        <vertx.version>3.8.0</vertx.version>
-        <stack.version>3.8.0</stack.version>
+        <vertx.version>3.8.4</vertx.version>
+        <stack.version>3.8.4</stack.version>
 
         <jackson.version>2.9.10</jackson.version>
         <jackson.databind.version>2.9.10.1</jackson.databind.version>
