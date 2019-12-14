@@ -7,6 +7,7 @@ import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.optic.business.ExSerial;
+import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
@@ -16,6 +17,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 class SerialActor extends AbstractActor {
+    private static final Annal LOGGER = Annal.get(SerialActor.class);
+
     @Override
     public JsonObject proc(final JsonObject data, final IxModule config) {
         throw new RuntimeException("Do not support this method here.");
@@ -34,6 +37,7 @@ class SerialActor extends AbstractActor {
             /*
              * Generate numbers here
              */
+            Ke.infoKe(LOGGER, "Table here {0}, Serial numbers {0}", config.getTable(), numbers.encodePrettily());
             return Ke.channelAsync(ExSerial.class,
                     () -> Ux.future(data),
                     serial -> {
