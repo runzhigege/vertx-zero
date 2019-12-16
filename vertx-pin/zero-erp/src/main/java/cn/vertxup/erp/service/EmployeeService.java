@@ -14,7 +14,6 @@ import io.vertx.up.util.Ut;
 import java.util.function.BiFunction;
 
 public class EmployeeService implements EmployeeStub {
-
     @Override
     public Future<JsonObject> createAsync(final JsonObject data) {
         final EEmployee employee = Ut.deserialize(data, EEmployee.class);
