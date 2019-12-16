@@ -35,7 +35,7 @@ public class JobClientImpl implements JobClient {
             /*
              * begin method return Future<Long>, it's async result
              * that's why here it's not needed to use:
-             * Future.successedFuture() to wrappe result, instead
+             * Future.successedFuture() to wrapper result, instead
              * returned directly.
              * */
             final Future<Long> future = agha.begin(mission);
