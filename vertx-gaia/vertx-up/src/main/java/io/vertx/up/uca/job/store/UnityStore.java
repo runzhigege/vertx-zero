@@ -3,6 +3,8 @@ package io.vertx.up.uca.job.store;
 import io.vertx.tp.plugin.job.JobPool;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
+import io.vertx.up.eon.em.JobStatus;
+import io.vertx.up.eon.em.JobType;
 import io.vertx.up.log.Annal;
 
 import java.util.HashSet;
@@ -49,6 +51,19 @@ class UnityStore implements JobStore {
         final Set<Mission> result = new HashSet<>();
         result.addAll(missions);
         result.addAll(storage);
+
+        /*
+         * Status Modification for ONCE
+         * */
+        result.stream()
+                .filter(mission -> JobType.ONCE == mission.getType())
+                /*
+                 * Once work is in `STARTING`, because it won't start
+                 * We must convert `STARTING` to `STOPPED` to stop the job
+                 * at that time here.
+                 */
+                .filter(mission -> JobStatus.STARTING == mission.getStatus())
+                .forEach(mission -> mission.setStatus(JobStatus.STOPPED));
 
         /* Job Pool Sync */
         JobPool.put(result);
