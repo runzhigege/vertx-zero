@@ -180,10 +180,19 @@ public abstract class AbstractAgha implements Agha {
                                 return Envelop.failure(error);
                             })),
                     handler -> {
+                        /*
+                         * Async result here to check whether it's ended
+                         */
                         if (handler.succeeded()) {
+                            /*
+                             * Successful, close worker executor
+                             */
                             executor.close();
                         } else {
                             if (Objects.nonNull(handler.cause())) {
+                                /*
+                                 * Failure, print stack instead of other exception here.
+                                 */
                                 handler.cause().printStackTrace();
                             }
                         }
