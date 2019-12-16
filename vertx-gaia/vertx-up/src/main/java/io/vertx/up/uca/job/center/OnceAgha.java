@@ -5,7 +5,6 @@ import io.vertx.core.Promise;
 import io.vertx.tp.plugin.job.JobPool;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.eon.Info;
-import io.vertx.up.eon.em.JobStatus;
 
 /**
  * Start one time
@@ -22,14 +21,7 @@ class OnceAgha extends AbstractAgha {
          * 3. This kind fo task must be triggered, could not be in plan here. It's not needed to call
          *    Interval to process task.
          * */
-        /*
-         * STARTING -> READY
-         * Add additional code logical to set Mission status to `STOPPED`
-         * instead of other status for future usage, this kind of job must be triggered by manual
-         * It means that all the job of `ONCE` won't run when container started
-         */
         this.moveOn(mission, true);
-        mission.setStatus(JobStatus.STOPPED);
 
         final Promise<Long> promise = Promise.promise();
         final long jobId = this.interval().startAt((timeId) -> this.working(mission, () -> {
