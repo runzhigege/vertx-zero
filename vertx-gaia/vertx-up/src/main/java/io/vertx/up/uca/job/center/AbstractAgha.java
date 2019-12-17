@@ -1,9 +1,9 @@
 package io.vertx.up.uca.job.center;
 
 import io.vertx.core.Future;
-import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.WorkerExecutor;
+import io.vertx.core.impl.NoStackTraceThrowable;
 import io.vertx.up.annotations.Contract;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.Envelop;
@@ -17,9 +17,9 @@ import io.vertx.up.uca.job.store.JobConfig;
 import io.vertx.up.uca.job.store.JobPin;
 import io.vertx.up.uca.job.store.JobStore;
 import io.vertx.up.uca.job.timer.Interval;
-import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
@@ -82,43 +82,8 @@ public abstract class AbstractAgha implements Agha {
         return interval;
     }
 
-    @SuppressWarnings("all")
     JobStore store() {
         return JobPin.getStore();
-    }
-
-    private Future<Envelop> working(final Mission mission) {
-        long threshold = mission.getThreshold();
-        if (Values.RANGE == threshold) {
-            /*
-             * Zero here
-             */
-            threshold = TimeUnit.MINUTES.toNanos(5);
-        }
-
-        /*
-         * Worker Executor of New created
-         * 1) Create new worker pool for next execution here
-         * 2) Do not break the major thread for terminal current job
-         * 3）Executing log here for long block issue
-         */
-        final String code = mission.getCode();
-        final WorkerExecutor executor =
-                this.vertx.createSharedWorkerExecutor(code, 1, threshold);
-        this.getLogger().info(Info.JOB_POOL_START, code, String.valueOf(TimeUnit.NANOSECONDS.toSeconds(threshold)));
-
-        final Promise<Envelop> finalize = Promise.promise();
-        /*
-         * The executor start to process the workers here.
-         */
-        executor.<Envelop>executeBlocking(
-                promise -> promise.handle(this.workingAsync(mission)),
-                handler -> {
-                    executor.close();
-                    this.getLogger().info(Info.JOB_POOL_END, code);
-                    finalize.handle(handler);
-                });
-        return finalize.future();
     }
 
     /*
@@ -162,9 +127,7 @@ public abstract class AbstractAgha implements Agha {
                 /*
                  * 6. Final steps here
                  */
-                .compose(phase::callbackAsync)
-                /* Otherwise exception */
-                .otherwise(Ux.otherwise());
+                .compose(phase::callbackAsync);
     }
 
     void working(final Mission mission, final Actuator actuator) {
@@ -174,23 +137,66 @@ public abstract class AbstractAgha implements Agha {
              */
             this.moveOn(mission, true);
             /*
-             * Running the job next time when current job get event
-             * from event bus trigger
+             * Read threshold
              */
-            this.working(mission).compose(envelop -> {
+            long threshold = mission.getThreshold();
+            if (Values.RANGE == threshold) {
                 /*
-                 * Complete future and returned: Async
+                 * Zero here
                  */
-                actuator.execute();
-                return Future.succeededFuture(envelop);
-            }).otherwise(error -> {
-                /*
-                 * RUNNING -> ERROR
-                 */
-                this.moveOn(mission, false);
-                error.printStackTrace();
-                return Envelop.failure(error);
-            });
+                threshold = TimeUnit.MINUTES.toNanos(5);
+            }
+            /*
+             * Worker Executor of New created
+             * 1) Create new worker pool for next execution here
+             * 2) Do not break the major thread for terminal current job
+             * 3）Executing log here for long block issue
+             */
+            final String code = mission.getCode();
+            final WorkerExecutor executor =
+                    this.vertx.createSharedWorkerExecutor(code, 1, threshold);
+            this.getLogger().info(Info.JOB_POOL_START, code, String.valueOf(TimeUnit.NANOSECONDS.toSeconds(threshold)));
+            /*
+             * The executor start to process the workers here.
+             */
+            executor.<Envelop>executeBlocking(
+                    promise -> promise.handle(this.workingAsync(mission)
+                            .compose(result -> {
+                                /*
+                                 * The job is executing successfully and then stopped
+                                 */
+                                actuator.execute();
+                                this.getLogger().info(Info.JOB_POOL_END, code);
+                                return Future.succeededFuture(result);
+                            })
+                            .otherwise(error -> {
+                                /*
+                                 * The job exception
+                                 */
+                                if (!(error instanceof NoStackTraceThrowable)) {
+                                    error.printStackTrace();
+                                    this.moveOn(mission, false);
+                                }
+                                return Envelop.failure(error);
+                            })),
+                    handler -> {
+                        /*
+                         * Async result here to check whether it's ended
+                         */
+                        if (handler.succeeded()) {
+                            /*
+                             * Successful, close worker executor
+                             */
+                            executor.close();
+                        } else {
+                            if (Objects.nonNull(handler.cause())) {
+                                /*
+                                 * Failure, print stack instead of other exception here.
+                                 */
+                                handler.cause().printStackTrace();
+                            }
+                        }
+                    });
         }
     }
 

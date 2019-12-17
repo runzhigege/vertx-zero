@@ -41,6 +41,10 @@ public class Ke {
         return KeElement.mount(field);
     }
 
+    public static Function<JsonObject, Future<JsonObject>> mount(final String... field) {
+        return KeElement.mount(field);
+    }
+
     public static JsonObject mountArray(final JsonObject response, final String field) {
         return KeElement.mountArray(response, field);
     }
