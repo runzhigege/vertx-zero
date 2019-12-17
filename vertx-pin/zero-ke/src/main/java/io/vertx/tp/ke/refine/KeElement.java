@@ -8,6 +8,7 @@ import io.vertx.up.fn.Fn;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -53,6 +54,13 @@ class KeElement {
 
     static Function<JsonObject, Future<JsonObject>> mount(final String field) {
         return response -> Ux.future(mount(response, field));
+    }
+
+    static Function<JsonObject, Future<JsonObject>> mount(final String... field) {
+        return response -> {
+            Arrays.stream(field).forEach(each -> mount(response, each));
+            return Ux.future(response);
+        };
     }
 
     /*
