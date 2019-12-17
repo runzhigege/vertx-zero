@@ -828,8 +828,12 @@ public final class Ut {
         return To.toJObject(map);
     }
 
+    public static Object toJValue(final Object input, final Class<?> type) {
+        return Value.toJValue(input, type);
+    }
+
     public static Object toJValue(final Object input) {
-        return Value.toJValue(input);
+        return toJValue(input, Objects.nonNull(input) ? input.getClass() : null);
     }
 
     public static Object toValue(final Object input, final Class<?> type) {
