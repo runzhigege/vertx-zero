@@ -78,4 +78,12 @@ public class At {
     public static JsonObject filters(final String appId, final JsonArray types, final String code) {
         return AtQuery.filters(appId, types, code);
     }
+
+    public static JsonObject filtersSigma(final String sigma, final String type, final String code) {
+        return AtQuery.filtersSigma(sigma, new JsonArray().add(type), code);
+    }
+
+    public static JsonObject filtersSigma(final String sigma, final JsonArray types, final String code) {
+        return AtQuery.filtersSigma(sigma, types, code);
+    }
 }
