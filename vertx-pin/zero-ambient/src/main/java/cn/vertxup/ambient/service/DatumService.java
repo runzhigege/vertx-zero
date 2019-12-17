@@ -26,6 +26,21 @@ public class DatumService implements DatumStub {
     }
 
     @Override
+    public Future<JsonArray> categories(final String appId, final JsonArray types) {
+        return this.fetchArray(XCategoryDao.class, At.filters(appId, types, null));
+    }
+
+    @Override
+    public Future<JsonArray> categoriesBySigma(final String sigma, final String type) {
+        return this.fetchArray(XCategoryDao.class, At.filtersSigma(sigma, type, null));
+    }
+
+    @Override
+    public Future<JsonArray> categoriesBySigma(final String sigma, final JsonArray types) {
+        return this.fetchArray(XCategoryDao.class, At.filtersSigma(sigma, types, null));
+    }
+
+    @Override
     public Future<JsonObject> tabular(final String appId, final String type, final String code) {
         return Ux.Jooq.on(XTabularDao.class)
                 .fetchOneAsync(At.filters(appId, type, code))
@@ -44,10 +59,6 @@ public class DatumService implements DatumStub {
         return this.fetchArray(XTabularDao.class, At.filters(appId, types, null));
     }
 
-    @Override
-    public Future<JsonArray> categories(final String appId, final JsonArray types) {
-        return this.fetchArray(XCategoryDao.class, At.filters(appId, types, null));
-    }
 
     @Override
     public Future<JsonArray> numbers(final String appId, final String code, final Integer count) {
