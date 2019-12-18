@@ -12,6 +12,10 @@ import java.util.Base64;
 
 public class BasicPhylum extends AuthorizationAuthPhylum {
 
+    public BasicPhylum(final AuthProvider authProvider, final String realm) {
+        super(verifyProvider(authProvider), realm, Type.BASIC);
+    }
+
     /**
      * This is a verification step, it can abort the instantiation by
      * throwing a RuntimeException
@@ -23,14 +27,10 @@ public class BasicPhylum extends AuthorizationAuthPhylum {
         return provider;
     }
 
-    public BasicPhylum(final AuthProvider authProvider, final String realm) {
-        super(verifyProvider(authProvider), realm, Type.BASIC);
-    }
-
     @Override
     public void parseCredentials(final RoutingContext context, final Handler<AsyncResult<JsonObject>> handler) {
 
-        parseAuthorization(context, false, parseAuthorization -> {
+        this.parseAuthorization(context, false, parseAuthorization -> {
             if (parseAuthorization.failed()) {
                 handler.handle(Future.failedFuture(parseAuthorization.cause()));
                 return;
@@ -56,8 +56,15 @@ public class BasicPhylum extends AuthorizationAuthPhylum {
                 context.fail(e);
                 return;
             }
-
-            handler.handle(Future.succeededFuture(new JsonObject().put("username", suser).put("password", spass)));
+            /*
+             * {
+             *     "username":"Basic user name",
+             *     "password":"Basic password"
+             * }
+             */
+            handler.handle(Future.succeededFuture(new JsonObject()
+                    .put("username", suser)
+                    .put("password", spass)));
         });
     }
 

@@ -45,7 +45,7 @@ Then you can write the code as following:
 
 ```java
 import io.vertx.up.annotations.Ipc;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 
 public class SpeakWorker {
 

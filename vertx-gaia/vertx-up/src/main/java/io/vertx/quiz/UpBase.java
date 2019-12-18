@@ -4,9 +4,9 @@ import io.vertx.ext.unit.junit.RunTestOnContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.log.Annal;
-import io.vertx.up.rs.Extractor;
-import io.vertx.up.rs.config.EventExtractor;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.uca.rs.Extractor;
+import io.vertx.up.uca.rs.config.EventExtractor;
+import io.vertx.up.util.Ut;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
 
@@ -19,10 +19,10 @@ public abstract class UpBase {
     public final RunTestOnContext rule = new RunTestOnContext();
 
     protected Extractor<Set<Event>> extractor() {
-        return Instance.singleton(EventExtractor.class);
+        return Ut.singleton(EventExtractor.class);
     }
 
     protected Annal getLogger() {
-        return Annal.get(getClass());
+        return Annal.get(this.getClass());
     }
 }

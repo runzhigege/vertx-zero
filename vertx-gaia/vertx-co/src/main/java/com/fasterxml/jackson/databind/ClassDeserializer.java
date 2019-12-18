@@ -1,7 +1,7 @@
 package com.fasterxml.jackson.databind;
 
 import com.fasterxml.jackson.core.JsonParser;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.util.Ut;
 
 import java.io.IOException;
 
@@ -17,6 +17,6 @@ public class ClassDeserializer extends JsonDeserializer<Class<?>> { // NOPMD
                                 final DeserializationContext context)
             throws IOException {
         final JsonNode node = parser.getCodec().readTree(parser);
-        return Instance.clazz(node.asText().trim());
+        return Ut.clazz(node.asText().trim());
     }
 }

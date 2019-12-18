@@ -2,7 +2,7 @@ package io.vertx.up.atom.agent;
 
 import io.vertx.core.http.HttpMethod;
 import io.vertx.up.eon.Orders;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.Strings;
 
 import javax.ws.rs.core.MediaType;
 import java.io.Serializable;
@@ -20,9 +20,9 @@ public class Event implements Serializable {
     private String path;
     /**
      * order for current Event
-     * ( Could not be modified in current version )
+     * It could be modified in latest version by @Adjust
      */
-    private final int order = Orders.EVENT;
+    private int order = Orders.EVENT;
     /**
      * consume mime
      */
@@ -63,6 +63,10 @@ public class Event implements Serializable {
 
     public int getOrder() {
         return this.order;
+    }
+
+    public void setOrder(final int order) {
+        this.order = order;
     }
 
     public Set<MediaType> getConsumes() {
@@ -133,6 +137,7 @@ public class Event implements Serializable {
                 ", produces=" + this.produces +
                 ", method=" + this.method +
                 ", action=" + this.action +
+                ", proxy=" + this.proxy +
                 '}';
     }
 }

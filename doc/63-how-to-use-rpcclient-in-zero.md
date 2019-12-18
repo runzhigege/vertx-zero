@@ -34,8 +34,8 @@ rpc:
 **vertx-inject.yml**
 
 ```yaml
-mongo: io.vertx.up.plugin.mongo.MongoInfix
-rpc: io.vertx.up.plugin.rpc.RpcInfix
+mongo: io.vertx.tp.plugin.mongo.MongoInfix
+rpc: io.vertx.tp.plugin.rpc.RpcInfix
 ```
 
 ## 2. Code for Rpc
@@ -47,7 +47,7 @@ Rpc code need at least two micro services in your environment.
 ```java
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.Ipc;
-import io.vertx.up.atom.Envelop;
+import io.vertx.up.commune.Envelop;
 // service name = ipc-coeus
 public class SpeakWorker {
 
@@ -77,7 +77,7 @@ Start up console
 ```java
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.EndPoint;
-import io.vertx.up.plugin.rpc.RpcClient;
+import io.vertx.tp.plugin.rpc.RpcClient;
 
 import javax.inject.infix.Rpc;
 import javax.ws.rs.BodyParam;

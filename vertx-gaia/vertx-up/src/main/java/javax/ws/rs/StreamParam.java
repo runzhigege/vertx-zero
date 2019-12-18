@@ -1,6 +1,6 @@
 package javax.ws.rs;
 
-import io.vertx.up.media.resolver.UnsetResolver;
+import io.vertx.up.uca.rs.mime.resolver.UnsetResolver;
 
 import java.lang.annotation.*;
 
@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface StreamParam {
     /**
-     * Default resolver to process the stream body
+     * Default resolver to process the stream regionInput
      */
     Class<?> resolver() default UnsetResolver.class;
 }

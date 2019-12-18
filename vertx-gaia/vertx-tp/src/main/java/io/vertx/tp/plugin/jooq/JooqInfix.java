@@ -1,19 +1,21 @@
 package io.vertx.tp.plugin.jooq;
 
 import io.vertx.core.Vertx;
-import io.vertx.tp.hikari.HikariCpPool;
+import io.vertx.tp.plugin.database.DataPool;
 import io.vertx.up.annotations.Plugin;
+import io.vertx.up.commune.config.Database;
+import io.vertx.up.eon.Constants;
 import io.vertx.up.eon.Plugins;
-import io.vertx.up.func.Fn;
+import io.vertx.up.exception.zero.JooqConfigurationException;
+import io.vertx.up.exception.zero.JooqVertxNullException;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
 import io.vertx.up.plugin.Infix;
-import io.vertx.up.tool.mirror.Instance;
+import io.vertx.up.util.Ut;
 import org.jooq.Configuration;
-import org.jooq.ConnectionProvider;
 import org.jooq.DSLContext;
-import org.jooq.SQLDialect;
-import org.jooq.impl.DefaultConfiguration;
-import org.jooq.impl.DefaultConnectionProvider;
 
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -21,49 +23,66 @@ import java.util.concurrent.ConcurrentMap;
 @SuppressWarnings("unchecked")
 public class JooqInfix implements Infix {
 
-    private static final String NAME = "ZERO_JOOQ_POOL";
-
-    private static final ConcurrentMap<String, Configuration> CONFIGS
+    private static final Annal LOGGER = Annal.get(JooqInfix.class);
+    private static final ConcurrentMap<String, Configuration> CONFIGURATION
             = new ConcurrentHashMap<>();
-
     private static Vertx vertxRef;
 
-    private static void initInternal(final Vertx vertx,
-                                     final String name) {
+    public static void init(final Vertx vertx) {
         vertxRef = vertx;
-        Fn.pool(CONFIGS, name,
-                () -> Infix.init(Plugins.Infix.JOOQ,
-                        (config) -> {
-                            // Initialized client
-                            final Configuration configuration = new DefaultConfiguration();
-                            configuration.set(SQLDialect.MYSQL_8_0);
-                            final ConnectionProvider provider =
-                                    new DefaultConnectionProvider(HikariCpPool.getConnection(
-                                            config.getJsonObject("provider")
-                                    ));
-                            // Initialized default configuration
-                            configuration.set(provider);
-                            return configuration;
-                        }, JooqInfix.class));
+        final ConcurrentMap<String, Configuration> inited =
+                Infix.init(Plugins.Infix.JOOQ, JooqPin::initConfiguration, JooqInfix.class);
+        CONFIGURATION.putAll(inited);
     }
 
-    public static void init(final Vertx vertx) {
-        initInternal(vertx, NAME);
+    public static <T> T getDao(final Class<T> clazz) {
+        return getDao(clazz, Constants.DEFAULT_JOOQ);
+    }
+
+    public static <T> T getDao(final Class<T> clazz, final String key) {
+        return getDao(clazz, CONFIGURATION.get(key));
+    }
+
+    public static <T> T getDao(final Class<T> clazz, final DataPool pool) {
+        final Database database = pool.getDatabase();
+        final Configuration configuration;
+        if (CONFIGURATION.containsKey(database.getJdbcUrl())) {
+            configuration = CONFIGURATION.get(database.getJdbcUrl());
+        } else {
+            configuration = JooqPin.initConfig(pool);
+            CONFIGURATION.put(database.getJdbcUrl(), configuration);
+        }
+        return getDao(clazz, configuration);
+    }
+
+    private static <T> T getDao(final Class<T> clazz, final Configuration configuration) {
+        Fn.outUp(null == vertxRef, LOGGER, JooqVertxNullException.class, clazz);
+        final T dao = Ut.instance(clazz, configuration);
+        Ut.invoke(dao, "setVertx", vertxRef);
+        return dao;
+    }
+
+    /*
+     * DSLContext of three method:
+     * 1. Static: vertx-jooq.yml -> provider
+     * 2. Static/Configured: vertx-jooq.yml -> ( by Key )
+     */
+    public static DSLContext getDSL(final String key) {
+        final Configuration configuration = CONFIGURATION.get(key);
+        Fn.outUp(null == configuration, LOGGER, JooqConfigurationException.class, JooqInfix.class);
+        return Objects.isNull(configuration) ? null : configuration.dsl();
+    }
+
+    public static DSLContext getDSL() {
+        return getDSL(Constants.DEFAULT_JOOQ);
     }
 
     @Override
     public Configuration get() {
-        return CONFIGS.get(NAME);
+        return this.get(Constants.DEFAULT_JOOQ);
     }
 
-    public static <T> T getDao(final Class<T> clazz) {
-        final T dao = Instance.instance(clazz, CONFIGS.get(NAME));
-        Instance.invoke(dao, "setVertx", vertxRef);
-        return dao;
-    }
-
-    public static DSLContext getDSL() {
-        final Configuration configuration = CONFIGS.get(NAME);
-        return configuration.dsl();
+    public Configuration get(final String key) {
+        return CONFIGURATION.get(key);
     }
 }

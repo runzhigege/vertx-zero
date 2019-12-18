@@ -13,7 +13,7 @@ package up.god.micro.media;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.annotations.EndPoint;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.eon.Values;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -58,7 +58,7 @@ public class ContentActor {
 
 ### 3.1. Error Request
 
-**URL **: [http://localhost:6083/api/media/json](http://localhost:6083/api/media/json)
+**URL**: [http://localhost:6083/api/media/json](http://localhost:6083/api/media/json)
 
 **Method** : POST
 
@@ -79,7 +79,7 @@ Content-Type: application/xml
 
 ### 3.2. Json Request
 
-**URL **: [http://localhost:6083/api/media/json](http://localhost:6083/api/media/json)
+**URL**: [http://localhost:6083/api/media/json](http://localhost:6083/api/media/json)
 
 **Method** : POST
 

@@ -1,6 +1,6 @@
 package javax.ws.rs;
 
-import io.vertx.up.media.resolver.JsonResolver;
+import io.vertx.up.uca.rs.mime.resolver.JsonResolver;
 
 import java.lang.annotation.*;
 
@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface BodyParam {
     /**
-     * Default resolver to process the body
+     * Default resolver to process the regionInput
      */
     Class<?> resolver() default JsonResolver.class;
 }

@@ -1,5 +1,7 @@
 package io.vertx.zero.exception;
 
+import io.vertx.up.exception.UpException;
+
 public class WorkerMissingException extends UpException {
 
     public WorkerMissingException(final Class<?> clazz,

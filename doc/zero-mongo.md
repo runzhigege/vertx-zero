@@ -31,12 +31,12 @@ mongo: # The key must be mongo, could not be replaced.
     lime: mongo-db
 ```
 
-You must set the file name in resource path is as `vertx-mongo-db.yml`, then you could set mongo db configuration in this file.
+You must set the up.god.file name in resource path is as `vertx-mongo-db.yml`, then you could set mongo db configuration in this up.god.file.
 
 **vertx-inject.yml**
 
 ```yaml
-mongo: io.vertx.up.plugin.mongo.MongoInfix
+mongo: io.vertx.tp.plugin.mongo.MongoInfix
 ```
 
 ## 2. Consumer Code
@@ -48,8 +48,8 @@ import io.vertx.ext.mongo.MongoClient;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import javax.inject.infix.Mongo;
-import io.vertx.up.atom.Envelop;
-import io.vertx.up.tool.Jackson;
+import io.vertx.up.commune.Envelop;
+import io.vertx.up.util.Jackson;
 
 @Queue
 public class UserWorker {

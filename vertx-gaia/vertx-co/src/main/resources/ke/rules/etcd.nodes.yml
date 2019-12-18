@@ -1,5 +1,0 @@
-required:
-- host
-- port
-typed:
-  port: INTEGER

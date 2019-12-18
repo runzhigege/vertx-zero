@@ -7,16 +7,16 @@ import io.vertx.rx.micro.ZeroRxEndurer;
 import io.vertx.rx.rs.dispatch.StandardVerifier;
 import io.vertx.up.atom.agent.Depot;
 import io.vertx.up.atom.agent.Event;
-import io.vertx.up.func.Fn;
 import io.vertx.up.log.Annal;
-import io.vertx.up.rs.Aim;
-import io.vertx.up.rs.Axis;
-import io.vertx.up.rs.Sentry;
-import io.vertx.up.rs.dispatch.ModeSplitter;
-import io.vertx.up.rs.router.Hub;
-import io.vertx.up.rs.router.Verifier;
-import io.vertx.up.tool.mirror.Instance;
-import io.vertx.up.web.ZeroAnno;
+import io.vertx.up.uca.rs.Aim;
+import io.vertx.up.uca.rs.Axis;
+import io.vertx.up.uca.rs.Sentry;
+import io.vertx.up.uca.rs.dispatch.ModeSplitter;
+import io.vertx.up.uca.rs.router.Hub;
+import io.vertx.up.uca.rs.router.Verifier;
+import io.vertx.up.util.Ut;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.runtime.ZeroAnno;
 
 import java.util.Set;
 
@@ -32,13 +32,13 @@ public class EventAxis implements Axis<Router> {
      */
     private transient final ModeSplitter splitter =
             Fn.poolThread(Pool.THREADS,
-                    () -> Instance.instance(ModeSplitter.class));
+                    () -> Ut.instance(ModeSplitter.class));
     /**
      * Sentry
      */
     private transient final Sentry<RoutingContext> verifier =
             Fn.poolThread(Pool.VERIFIERS,
-                    () -> Instance.instance(StandardVerifier.class));
+                    () -> Ut.instance(StandardVerifier.class));
 
     @Override
     public void mount(final Router router) {
@@ -46,7 +46,7 @@ public class EventAxis implements Axis<Router> {
         EVENTS.forEach(event -> {
             // Build Route and connect to each Action
             Fn.safeSemi(null == event, LOGGER,
-                    () -> LOGGER.warn(Info.NULL_EVENT, getClass().getName()),
+                    () -> LOGGER.warn(Info.NULL_EVENT, this.getClass().getName()),
                     () -> {
                         // 1. Verify
                         Verifier.verify(event);
@@ -54,11 +54,11 @@ public class EventAxis implements Axis<Router> {
                         final Route route = router.route();
                         // 2. Path, Method, Order
                         Hub<Route> hub = Fn.poolThread(Pool.URIHUBS,
-                                () -> Instance.instance(UriHub.class));
+                                () -> Ut.instance(UriHub.class));
                         hub.mount(route, event);
                         // 3. Consumes/Produces
                         hub = Fn.poolThread(Pool.MEDIAHUBS,
-                                () -> Instance.instance(MediaHub.class));
+                                () -> Ut.instance(MediaHub.class));
                         hub.mount(route, event);
 
                         // 4. Request validation

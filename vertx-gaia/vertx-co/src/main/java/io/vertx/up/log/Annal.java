@@ -1,18 +1,35 @@
 package io.vertx.up.log;
 
 import io.vertx.core.VertxException;
+import io.vertx.core.impl.ConcurrentHashSet;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
-import io.vertx.up.tool.mirror.Instance;
-import io.vertx.up.web.ZeroAmbient;
-import io.vertx.zero.exception.ZeroException;
-import io.vertx.zero.log.Log;
-import io.vertx.zero.log.internal.Log4JAnnal;
+import io.vertx.up.exception.ZeroException;
+import io.vertx.up.fn.Actuator;
+import io.vertx.up.log.internal.Log4JAnnal;
+import io.vertx.up.runtime.ZeroAmbient;
+import io.vertx.up.util.Ut;
+
+import java.util.Set;
 
 /**
- * Unite Logging system connect to vert.x, tool kit of Vertx-Zero
+ * Unite Logging system connect to vert.x, io.vertx.zero.io.vertx.zero.io.vertx.up.io.vertx.up.io.vertx.up.util kit of Vertx-Zero
  */
 public interface Annal {
+
+    static Annal get(final Class<?> clazz) {
+        return new CommonAnnal(clazz);
+    }
+
+    /*
+     * Re-invoked logging for executing, here are logger sure to
+     * Avoid Null Pointer exception
+     */
+    static <T> void sure(final Annal logger, final Actuator actuator) {
+        if (null != logger) {
+            actuator.execute();
+        }
+    }
 
     void vertx(VertxException ex);
 
@@ -27,27 +44,26 @@ public interface Annal {
     void info(String key, Object... args);
 
     void debug(String key, Object... args);
-
-    static Annal get(final Class<?> clazz) {
-        return new CommonAnnal(clazz);
-    }
 }
 
 class CommonAnnal implements Annal {
 
-    private static final Logger RECORD =
-            LoggerFactory.getLogger(CommonAnnal.class);
+    private static final Logger RECORD = LoggerFactory.getLogger(CommonAnnal.class);
+    private static final Set<Class<?>> OUTED = new ConcurrentHashSet<>();
 
     private transient final Annal logger;
 
-    public CommonAnnal(final Class<?> clazz) {
+    CommonAnnal(final Class<?> clazz) {
         Class<?> inject = ZeroAmbient.getPlugin("logger");
         if (null == inject) {
             Log.debug(RECORD, Info.INF_INJECT, clazz);
             inject = Log4JAnnal.class;
         }
-        Log.debug(RECORD, Info.INF_ANNAL, inject, clazz);
-        this.logger = Instance.instance(inject, clazz);
+        if (!OUTED.contains(inject)) {
+            Log.debug(RECORD, Info.INF_ANNAL, inject, clazz);
+            OUTED.add(inject);
+        }
+        this.logger = Ut.instance(inject, clazz);
     }
 
     @Override

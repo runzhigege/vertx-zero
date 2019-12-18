@@ -29,13 +29,13 @@ public class BasicTypeApi {
 
 ## 2. Configuration
 
-In this kind of situation, you need to use `@Codex` annotation only, but you must provide the configuration file in your class path as following:
+In this kind of situation, you need to use `@Codex` annotation only, but you must provide the configuration up.god.file in your class path as following:
 
 ```
 src/main/resources/codex/zero.type.json.post.yml
 ```
 
-The configuration file name should be `path + method`, once you met the path variable such as `:name`, you can replace `:` with `_` instead to set the filename.
+The configuration up.god.file name should be `path + method`, once you met the path variable such as `:name`, you can replace `:` with `_` instead to set the filename.
 
 ## 3. Yml content
 

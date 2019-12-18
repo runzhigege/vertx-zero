@@ -28,14 +28,14 @@ You can add new node of `type=ipc` IPC \( Internal Process Calling \) instead of
 
 Rpc client configuration must be configured standalone. Here are the comments:
 
-In your `vertx.yml` configuration file, you must extend another `lime` node as following:
+In your `vertx.yml` configuration up.god.file, you must extend another `lime` node as following:
 
 ```yaml
 zero:
   lime: etcd3, rpc
 ```
 
-Then you must create new file `vertx-rpc.yml` with following content:
+Then you must create new up.god.file `vertx-rpc.yml` with following content:
 
 ```yaml
 rpc:
@@ -52,7 +52,7 @@ Please be careful about the attributes `uniform` and `extension`it's the same ex
 * The system will scan all client configuration under extension by name setted first. For example the target name is `up-ceous`, you must set {name} to `up-ceous`, then when current service communicate with** up-ceous **service, the client configuration will use it under **extension** instead of **uniform**.
 * If there is no configuration under extension, the uniform configuration will be used. uniform just like default client configuration.
 
-This configuration file is only used in **SSL** mode.
+This configuration up.god.file is only used in **SSL** mode.
 
 ## 3. SSL Configuraiton \( Examples \)
 

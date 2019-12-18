@@ -2,52 +2,56 @@ package io.vertx.up.exception;
 
 import io.vertx.core.http.HttpStatusCode;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.tool.StringUtil;
-import io.vertx.zero.eon.Strings;
-import io.vertx.zero.exception.ZeroRunException;
-import io.vertx.zero.log.Errors;
+import io.vertx.up.eon.Strings;
+import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Errors;
+import io.vertx.up.util.Ut;
+
+import java.text.MessageFormat;
 
 /**
  *
  */
 public abstract class WebException extends ZeroRunException {
 
-    protected static final String MESSAGE = "message";
     protected static final String INFO = "info";
     protected static final String CODE = "code";
-
+    private static final String MESSAGE = "message";
     private final String message;
-
+    private final Class<?> target;
     protected HttpStatusCode status;
-
+    private transient Object[] params;
     private String readible;
 
     public WebException(final String message) {
         super(message);
         this.message = message;
-        this.status = HttpStatusCode.BAD_REQUEST;
+        status = HttpStatusCode.BAD_REQUEST;
+        target = null;      // Target;
     }
 
     public WebException(final Class<?> clazz, final Object... args) {
         super(Strings.EMPTY);
-        this.message = Errors.normalizeWeb(clazz, this.getCode(), args);
-        this.status = HttpStatusCode.BAD_REQUEST;
+        message = Errors.normalizeWeb(clazz, getCode(), args);
+        params = args;
+        status = HttpStatusCode.BAD_REQUEST;
+        target = clazz;     // Target;
     }
 
     public abstract int getCode();
 
     @Override
     public String getMessage() {
-        return this.message;
+        return message;
+    }
+
+    public Class<?> getTarget() {
+        return target;
     }
 
     public HttpStatusCode getStatus() {
         // Default exception for 400
-        return this.status;
-    }
-
-    public void setReadible(final String readible) {
-        this.readible = readible;
+        return status;
     }
 
     public void setStatus(final HttpStatusCode status) {
@@ -55,15 +59,25 @@ public abstract class WebException extends ZeroRunException {
     }
 
     public String getReadible() {
-        return this.readible;
+        return readible;
+    }
+
+    public void setReadible(final String readible) {
+        Fn.safeNull(() -> {
+            if (null == params) {
+                this.readible = readible;
+            } else {
+                this.readible = MessageFormat.format(readible, params);
+            }
+        }, readible);
     }
 
     public JsonObject toJson() {
         final JsonObject data = new JsonObject();
-        data.put(CODE, this.getCode());
-        data.put(MESSAGE, this.getMessage());
-        if (StringUtil.notNil(this.readible)) {
-            data.put(INFO, this.readible);
+        data.put(CODE, getCode());
+        data.put(MESSAGE, getMessage());
+        if (Ut.notNil(readible)) {
+            data.put(INFO, readible);
         }
         return data;
     }
