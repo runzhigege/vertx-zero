@@ -1,6 +1,6 @@
 package io.vertx.up.annotations;
 
-import io.vertx.up.eon.ZeroValue;
+import io.vertx.up.eon.Constants;
 import io.vertx.up.eon.em.MessageModel;
 
 import java.lang.annotation.*;
@@ -19,7 +19,7 @@ public @interface Worker {
     /**
      * Event but interaction mode definition
      *
-     * @return
+     * @return One of three supported message model that belong to vertx.
      */
     MessageModel value() default MessageModel.REQUEST_RESPONSE;
 
@@ -27,20 +27,20 @@ public @interface Worker {
      * Worker Instance Number
      * Default: 32
      *
-     * @return
+     * @return default instance number
      */
-    int instances() default ZeroValue.DEFAULT_INSTANCES;
+    int instances() default Constants.DEFAULT_INSTANCES;
 
     /**
      * Isolation Group
      * Default: __VERTX_ZERO__
      *
-     * @return
+     * @return default vert.x group
      */
-    String group() default ZeroValue.DEFAULT_GROUP;
+    String group() default Constants.DEFAULT_GROUP;
 
     /**
-     * @return
+     * @return whether support HA feature for current worker.
      */
-    boolean ha() default ZeroValue.DEFAULT_HA;
+    boolean ha() default Constants.DEFAULT_HA;
 }

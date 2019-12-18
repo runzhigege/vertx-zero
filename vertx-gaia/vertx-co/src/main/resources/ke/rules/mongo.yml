@@ -1,7 +1,0 @@
-required:
-- db_name
-- port
-- host
-- connection_string
-typed:
-  port: INTEGER

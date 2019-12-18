@@ -1,6 +1,7 @@
 package io.vertx.zero.exception;
 
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.util.Ut;
+import io.vertx.up.exception.UpException;
 
 import java.util.Set;
 
@@ -9,7 +10,7 @@ public class NamedImplementionException extends UpException {
     public NamedImplementionException(final Class<?> clazz,
                                       final Set<String> sets,
                                       final String interfaceStr) {
-        super(clazz, StringUtil.join(sets), interfaceStr);
+        super(clazz, Ut.fromJoin(sets), interfaceStr);
     }
 
     @Override

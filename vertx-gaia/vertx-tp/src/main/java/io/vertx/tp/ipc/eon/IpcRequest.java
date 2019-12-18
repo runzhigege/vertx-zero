@@ -18,10 +18,14 @@ private static final long serialVersionUID = 0L;
   private IpcRequest() {
     responseFormat_ = 0;
     responseCategory_ = 0;
-    responseSize_ = 0;
-    isClientId_ = false;
-    isOauthScope_ = false;
     algorithm_ = 0;
+  }
+
+  @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(
+      UnusedPrivateParameter unused) {
+    return new IpcRequest();
   }
 
   @java.lang.Override
@@ -37,7 +41,6 @@ private static final long serialVersionUID = 0L;
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
-    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -48,13 +51,6 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          default: {
-            if (!parseUnknownFieldProto3(
-                input, unknownFields, extensionRegistry, tag)) {
-              done = true;
-            }
-            break;
-          }
           case 8: {
             int rawValue = input.readEnum();
 
@@ -114,6 +110,13 @@ private static final long serialVersionUID = 0L;
 
             break;
           }
+          default: {
+            if (!parseUnknownField(
+                input, unknownFields, extensionRegistry, tag)) {
+              done = true;
+            }
+            break;
+          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -131,6 +134,7 @@ private static final long serialVersionUID = 0L;
     return io.vertx.tp.ipc.eon.UpEnvelop.internal_static_io_vertx_tp_ipc_eon_IpcRequest_descriptor;
   }
 
+  @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
     return io.vertx.tp.ipc.eon.UpEnvelop.internal_static_io_vertx_tp_ipc_eon_IpcRequest_fieldAccessorTable
@@ -146,6 +150,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>.io.vertx.tp.ipc.eon.em.Format response_format = 1;</code>
+   * @return The enum numeric value on the wire for responseFormat.
    */
   public int getResponseFormatValue() {
     return responseFormat_;
@@ -156,8 +161,10 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>.io.vertx.tp.ipc.eon.em.Format response_format = 1;</code>
+   * @return The responseFormat.
    */
   public io.vertx.tp.ipc.eon.em.Format getResponseFormat() {
+    @SuppressWarnings("deprecation")
     io.vertx.tp.ipc.eon.em.Format result = io.vertx.tp.ipc.eon.em.Format.valueOf(responseFormat_);
     return result == null ? io.vertx.tp.ipc.eon.em.Format.UNRECOGNIZED : result;
   }
@@ -170,6 +177,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>.io.vertx.tp.ipc.eon.em.Category response_category = 2;</code>
+   * @return The enum numeric value on the wire for responseCategory.
    */
   public int getResponseCategoryValue() {
     return responseCategory_;
@@ -180,8 +188,10 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>.io.vertx.tp.ipc.eon.em.Category response_category = 2;</code>
+   * @return The responseCategory.
    */
   public io.vertx.tp.ipc.eon.em.Category getResponseCategory() {
+    @SuppressWarnings("deprecation")
     io.vertx.tp.ipc.eon.em.Category result = io.vertx.tp.ipc.eon.em.Category.valueOf(responseCategory_);
     return result == null ? io.vertx.tp.ipc.eon.em.Category.UNRECOGNIZED : result;
   }
@@ -194,6 +204,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>int32 response_size = 3;</code>
+   * @return The responseSize.
    */
   public int getResponseSize() {
     return responseSize_;
@@ -207,6 +218,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 4;</code>
+   * @return Whether the envelop field is set.
    */
   public boolean hasEnvelop() {
     return envelop_ != null;
@@ -217,6 +229,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 4;</code>
+   * @return The envelop.
    */
   public io.vertx.tp.ipc.eon.IpcEnvelop getEnvelop() {
     return envelop_ == null ? io.vertx.tp.ipc.eon.IpcEnvelop.getDefaultInstance() : envelop_;
@@ -240,6 +253,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>bool is_client_id = 5;</code>
+   * @return The isClientId.
    */
   public boolean getIsClientId() {
     return isClientId_;
@@ -253,6 +267,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>bool is_oauth_scope = 6;</code>
+   * @return The isOauthScope.
    */
   public boolean getIsOauthScope() {
     return isOauthScope_;
@@ -266,6 +281,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>.io.vertx.tp.ipc.eon.em.Compression algorithm = 7;</code>
+   * @return The enum numeric value on the wire for algorithm.
    */
   public int getAlgorithmValue() {
     return algorithm_;
@@ -276,8 +292,10 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>.io.vertx.tp.ipc.eon.em.Compression algorithm = 7;</code>
+   * @return The algorithm.
    */
   public io.vertx.tp.ipc.eon.em.Compression getAlgorithm() {
+    @SuppressWarnings("deprecation")
     io.vertx.tp.ipc.eon.em.Compression result = io.vertx.tp.ipc.eon.em.Compression.valueOf(algorithm_);
     return result == null ? io.vertx.tp.ipc.eon.em.Compression.UNRECOGNIZED : result;
   }
@@ -290,6 +308,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>.io.vertx.tp.ipc.eon.IpcStatus response_status = 8;</code>
+   * @return Whether the responseStatus field is set.
    */
   public boolean hasResponseStatus() {
     return responseStatus_ != null;
@@ -300,6 +319,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>.io.vertx.tp.ipc.eon.IpcStatus response_status = 8;</code>
+   * @return The responseStatus.
    */
   public io.vertx.tp.ipc.eon.IpcStatus getResponseStatus() {
     return responseStatus_ == null ? io.vertx.tp.ipc.eon.IpcStatus.getDefaultInstance() : responseStatus_;
@@ -316,6 +336,7 @@ private static final long serialVersionUID = 0L;
   }
 
   private byte memoizedIsInitialized = -1;
+  @java.lang.Override
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
     if (isInitialized == 1) return true;
@@ -325,6 +346,7 @@ private static final long serialVersionUID = 0L;
     return true;
   }
 
+  @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     if (responseFormat_ != io.vertx.tp.ipc.eon.em.Format.BINARY.getNumber()) {
@@ -354,6 +376,7 @@ private static final long serialVersionUID = 0L;
     unknownFields.writeTo(output);
   }
 
+  @java.lang.Override
   public int getSerializedSize() {
     int size = memoizedSize;
     if (size != -1) return size;
@@ -406,28 +429,27 @@ private static final long serialVersionUID = 0L;
     }
     io.vertx.tp.ipc.eon.IpcRequest other = (io.vertx.tp.ipc.eon.IpcRequest) obj;
 
-    boolean result = true;
-    result = result && responseFormat_ == other.responseFormat_;
-    result = result && responseCategory_ == other.responseCategory_;
-    result = result && (getResponseSize()
-        == other.getResponseSize());
-    result = result && (hasEnvelop() == other.hasEnvelop());
+    if (responseFormat_ != other.responseFormat_) return false;
+    if (responseCategory_ != other.responseCategory_) return false;
+    if (getResponseSize()
+        != other.getResponseSize()) return false;
+    if (hasEnvelop() != other.hasEnvelop()) return false;
     if (hasEnvelop()) {
-      result = result && getEnvelop()
-          .equals(other.getEnvelop());
+      if (!getEnvelop()
+          .equals(other.getEnvelop())) return false;
     }
-    result = result && (getIsClientId()
-        == other.getIsClientId());
-    result = result && (getIsOauthScope()
-        == other.getIsOauthScope());
-    result = result && algorithm_ == other.algorithm_;
-    result = result && (hasResponseStatus() == other.hasResponseStatus());
+    if (getIsClientId()
+        != other.getIsClientId()) return false;
+    if (getIsOauthScope()
+        != other.getIsOauthScope()) return false;
+    if (algorithm_ != other.algorithm_) return false;
+    if (hasResponseStatus() != other.hasResponseStatus()) return false;
     if (hasResponseStatus()) {
-      result = result && getResponseStatus()
-          .equals(other.getResponseStatus());
+      if (!getResponseStatus()
+          .equals(other.getResponseStatus())) return false;
     }
-    result = result && unknownFields.equals(other.unknownFields);
-    return result;
+    if (!unknownFields.equals(other.unknownFields)) return false;
+    return true;
   }
 
   @java.lang.Override
@@ -534,6 +556,7 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
+  @java.lang.Override
   public Builder newBuilderForType() { return newBuilder(); }
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
@@ -541,6 +564,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder(io.vertx.tp.ipc.eon.IpcRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
+  @java.lang.Override
   public Builder toBuilder() {
     return this == DEFAULT_INSTANCE
         ? new Builder() : new Builder().mergeFrom(this);
@@ -564,6 +588,7 @@ private static final long serialVersionUID = 0L;
       return io.vertx.tp.ipc.eon.UpEnvelop.internal_static_io_vertx_tp_ipc_eon_IpcRequest_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return io.vertx.tp.ipc.eon.UpEnvelop.internal_static_io_vertx_tp_ipc_eon_IpcRequest_fieldAccessorTable
@@ -586,6 +611,7 @@ private static final long serialVersionUID = 0L;
               .alwaysUseFieldBuilders) {
       }
     }
+    @java.lang.Override
     public Builder clear() {
       super.clear();
       responseFormat_ = 0;
@@ -615,15 +641,18 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
       return io.vertx.tp.ipc.eon.UpEnvelop.internal_static_io_vertx_tp_ipc_eon_IpcRequest_descriptor;
     }
 
+    @java.lang.Override
     public io.vertx.tp.ipc.eon.IpcRequest getDefaultInstanceForType() {
       return io.vertx.tp.ipc.eon.IpcRequest.getDefaultInstance();
     }
 
+    @java.lang.Override
     public io.vertx.tp.ipc.eon.IpcRequest build() {
       io.vertx.tp.ipc.eon.IpcRequest result = buildPartial();
       if (!result.isInitialized()) {
@@ -632,6 +661,7 @@ private static final long serialVersionUID = 0L;
       return result;
     }
 
+    @java.lang.Override
     public io.vertx.tp.ipc.eon.IpcRequest buildPartial() {
       io.vertx.tp.ipc.eon.IpcRequest result = new io.vertx.tp.ipc.eon.IpcRequest(this);
       result.responseFormat_ = responseFormat_;
@@ -654,32 +684,39 @@ private static final long serialVersionUID = 0L;
       return result;
     }
 
+    @java.lang.Override
     public Builder clone() {
-      return (Builder) super.clone();
+      return super.clone();
     }
+    @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
-      return (Builder) super.setField(field, value);
+      return super.setField(field, value);
     }
+    @java.lang.Override
     public Builder clearField(
         com.google.protobuf.Descriptors.FieldDescriptor field) {
-      return (Builder) super.clearField(field);
+      return super.clearField(field);
     }
+    @java.lang.Override
     public Builder clearOneof(
         com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-      return (Builder) super.clearOneof(oneof);
+      return super.clearOneof(oneof);
     }
+    @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         int index, java.lang.Object value) {
-      return (Builder) super.setRepeatedField(field, index, value);
+      return super.setRepeatedField(field, index, value);
     }
+    @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
-      return (Builder) super.addRepeatedField(field, value);
+      return super.addRepeatedField(field, value);
     }
+    @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
       if (other instanceof io.vertx.tp.ipc.eon.IpcRequest) {
         return mergeFrom((io.vertx.tp.ipc.eon.IpcRequest)other);
@@ -720,10 +757,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    @java.lang.Override
     public final boolean isInitialized() {
       return true;
     }
 
+    @java.lang.Override
     public Builder mergeFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -749,6 +788,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Format response_format = 1;</code>
+     * @return The enum numeric value on the wire for responseFormat.
      */
     public int getResponseFormatValue() {
       return responseFormat_;
@@ -759,6 +799,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Format response_format = 1;</code>
+     * @param value The enum numeric value on the wire for responseFormat to set.
+     * @return This builder for chaining.
      */
     public Builder setResponseFormatValue(int value) {
       responseFormat_ = value;
@@ -771,8 +813,10 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Format response_format = 1;</code>
+     * @return The responseFormat.
      */
     public io.vertx.tp.ipc.eon.em.Format getResponseFormat() {
+      @SuppressWarnings("deprecation")
       io.vertx.tp.ipc.eon.em.Format result = io.vertx.tp.ipc.eon.em.Format.valueOf(responseFormat_);
       return result == null ? io.vertx.tp.ipc.eon.em.Format.UNRECOGNIZED : result;
     }
@@ -782,6 +826,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Format response_format = 1;</code>
+     * @param value The responseFormat to set.
+     * @return This builder for chaining.
      */
     public Builder setResponseFormat(io.vertx.tp.ipc.eon.em.Format value) {
       if (value == null) {
@@ -798,6 +844,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Format response_format = 1;</code>
+     * @return This builder for chaining.
      */
     public Builder clearResponseFormat() {
       
@@ -813,6 +860,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Category response_category = 2;</code>
+     * @return The enum numeric value on the wire for responseCategory.
      */
     public int getResponseCategoryValue() {
       return responseCategory_;
@@ -823,6 +871,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Category response_category = 2;</code>
+     * @param value The enum numeric value on the wire for responseCategory to set.
+     * @return This builder for chaining.
      */
     public Builder setResponseCategoryValue(int value) {
       responseCategory_ = value;
@@ -835,8 +885,10 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Category response_category = 2;</code>
+     * @return The responseCategory.
      */
     public io.vertx.tp.ipc.eon.em.Category getResponseCategory() {
+      @SuppressWarnings("deprecation")
       io.vertx.tp.ipc.eon.em.Category result = io.vertx.tp.ipc.eon.em.Category.valueOf(responseCategory_);
       return result == null ? io.vertx.tp.ipc.eon.em.Category.UNRECOGNIZED : result;
     }
@@ -846,6 +898,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Category response_category = 2;</code>
+     * @param value The responseCategory to set.
+     * @return This builder for chaining.
      */
     public Builder setResponseCategory(io.vertx.tp.ipc.eon.em.Category value) {
       if (value == null) {
@@ -862,6 +916,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Category response_category = 2;</code>
+     * @return This builder for chaining.
      */
     public Builder clearResponseCategory() {
       
@@ -877,6 +932,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>int32 response_size = 3;</code>
+     * @return The responseSize.
      */
     public int getResponseSize() {
       return responseSize_;
@@ -887,6 +943,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>int32 response_size = 3;</code>
+     * @param value The responseSize to set.
+     * @return This builder for chaining.
      */
     public Builder setResponseSize(int value) {
       
@@ -900,6 +958,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>int32 response_size = 3;</code>
+     * @return This builder for chaining.
      */
     public Builder clearResponseSize() {
       
@@ -908,7 +967,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private io.vertx.tp.ipc.eon.IpcEnvelop envelop_ = null;
+    private io.vertx.tp.ipc.eon.IpcEnvelop envelop_;
     private com.google.protobuf.SingleFieldBuilderV3<
         io.vertx.tp.ipc.eon.IpcEnvelop, io.vertx.tp.ipc.eon.IpcEnvelop.Builder, io.vertx.tp.ipc.eon.IpcEnvelopOrBuilder> envelopBuilder_;
     /**
@@ -917,6 +976,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 4;</code>
+     * @return Whether the envelop field is set.
      */
     public boolean hasEnvelop() {
       return envelopBuilder_ != null || envelop_ != null;
@@ -927,6 +987,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.IpcEnvelop envelop = 4;</code>
+     * @return The envelop.
      */
     public io.vertx.tp.ipc.eon.IpcEnvelop getEnvelop() {
       if (envelopBuilder_ == null) {
@@ -1068,6 +1129,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bool is_client_id = 5;</code>
+     * @return The isClientId.
      */
     public boolean getIsClientId() {
       return isClientId_;
@@ -1078,6 +1140,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bool is_client_id = 5;</code>
+     * @param value The isClientId to set.
+     * @return This builder for chaining.
      */
     public Builder setIsClientId(boolean value) {
       
@@ -1091,6 +1155,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bool is_client_id = 5;</code>
+     * @return This builder for chaining.
      */
     public Builder clearIsClientId() {
       
@@ -1106,6 +1171,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bool is_oauth_scope = 6;</code>
+     * @return The isOauthScope.
      */
     public boolean getIsOauthScope() {
       return isOauthScope_;
@@ -1116,6 +1182,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bool is_oauth_scope = 6;</code>
+     * @param value The isOauthScope to set.
+     * @return This builder for chaining.
      */
     public Builder setIsOauthScope(boolean value) {
       
@@ -1129,6 +1197,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bool is_oauth_scope = 6;</code>
+     * @return This builder for chaining.
      */
     public Builder clearIsOauthScope() {
       
@@ -1144,6 +1213,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Compression algorithm = 7;</code>
+     * @return The enum numeric value on the wire for algorithm.
      */
     public int getAlgorithmValue() {
       return algorithm_;
@@ -1154,6 +1224,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Compression algorithm = 7;</code>
+     * @param value The enum numeric value on the wire for algorithm to set.
+     * @return This builder for chaining.
      */
     public Builder setAlgorithmValue(int value) {
       algorithm_ = value;
@@ -1166,8 +1238,10 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Compression algorithm = 7;</code>
+     * @return The algorithm.
      */
     public io.vertx.tp.ipc.eon.em.Compression getAlgorithm() {
+      @SuppressWarnings("deprecation")
       io.vertx.tp.ipc.eon.em.Compression result = io.vertx.tp.ipc.eon.em.Compression.valueOf(algorithm_);
       return result == null ? io.vertx.tp.ipc.eon.em.Compression.UNRECOGNIZED : result;
     }
@@ -1177,6 +1251,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Compression algorithm = 7;</code>
+     * @param value The algorithm to set.
+     * @return This builder for chaining.
      */
     public Builder setAlgorithm(io.vertx.tp.ipc.eon.em.Compression value) {
       if (value == null) {
@@ -1193,6 +1269,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Compression algorithm = 7;</code>
+     * @return This builder for chaining.
      */
     public Builder clearAlgorithm() {
       
@@ -1201,7 +1278,7 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private io.vertx.tp.ipc.eon.IpcStatus responseStatus_ = null;
+    private io.vertx.tp.ipc.eon.IpcStatus responseStatus_;
     private com.google.protobuf.SingleFieldBuilderV3<
         io.vertx.tp.ipc.eon.IpcStatus, io.vertx.tp.ipc.eon.IpcStatus.Builder, io.vertx.tp.ipc.eon.IpcStatusOrBuilder> responseStatusBuilder_;
     /**
@@ -1210,6 +1287,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.IpcStatus response_status = 8;</code>
+     * @return Whether the responseStatus field is set.
      */
     public boolean hasResponseStatus() {
       return responseStatusBuilder_ != null || responseStatus_ != null;
@@ -1220,6 +1298,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.IpcStatus response_status = 8;</code>
+     * @return The responseStatus.
      */
     public io.vertx.tp.ipc.eon.IpcStatus getResponseStatus() {
       if (responseStatusBuilder_ == null) {
@@ -1353,11 +1432,13 @@ private static final long serialVersionUID = 0L;
       }
       return responseStatusBuilder_;
     }
+    @java.lang.Override
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
-      return super.setUnknownFieldsProto3(unknownFields);
+      return super.setUnknownFields(unknownFields);
     }
 
+    @java.lang.Override
     public final Builder mergeUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.mergeUnknownFields(unknownFields);
@@ -1379,6 +1460,7 @@ private static final long serialVersionUID = 0L;
 
   private static final com.google.protobuf.Parser<IpcRequest>
       PARSER = new com.google.protobuf.AbstractParser<IpcRequest>() {
+    @java.lang.Override
     public IpcRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1396,6 +1478,7 @@ private static final long serialVersionUID = 0L;
     return PARSER;
   }
 
+  @java.lang.Override
   public io.vertx.tp.ipc.eon.IpcRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }

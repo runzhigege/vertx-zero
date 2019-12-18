@@ -105,7 +105,7 @@ Once zero is up, you can test the same uri with different Http Method.
 
 **URL**: [http://localhost:6083/api/method](http://localhost:6083/api/method)
 
-**Method: **GET
+**Method**: GET
 
 **Response**:
 
@@ -119,7 +119,7 @@ Once zero is up, you can test the same uri with different Http Method.
 
 **URL**: [http://localhost:6083/api/method](http://localhost:6083/api/method)
 
-**Method: **POST
+**Method**: POST
 
 **Response**:
 
@@ -133,7 +133,7 @@ Once zero is up, you can test the same uri with different Http Method.
 
 **URL**: [http://localhost:6083/api/method](http://localhost:6083/api/method)
 
-**Method: **PUT
+**Method**: PUT
 
 **Response**:
 
@@ -147,7 +147,7 @@ Once zero is up, you can test the same uri with different Http Method.
 
 **URL**: [http://localhost:6083/api/method](http://localhost:6083/api/method)
 
-**Method: **DELETE
+**Method**: DELETE
 
 **Response**:
 
@@ -161,7 +161,7 @@ Once zero is up, you can test the same uri with different Http Method.
 
 **URL**: [http://localhost:6083/api/method](http://localhost:6083/api/method)
 
-**Method: **OPTIONS
+**Method**: OPTIONS
 
 **Response**:
 
@@ -175,7 +175,7 @@ Once zero is up, you can test the same uri with different Http Method.
 
 **URL**: [http://localhost:6083/api/method](http://localhost:6083/api/method)
 
-**Method:** PATCH
+**Method**: PATCH
 
 **Response**:
 

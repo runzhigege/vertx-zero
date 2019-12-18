@@ -1,6 +1,7 @@
 package io.vertx.zero.exception;
 
-import io.vertx.up.tool.StringUtil;
+import io.vertx.up.util.Ut;
+import io.vertx.up.exception.UpException;
 
 import java.util.Set;
 
@@ -10,7 +11,7 @@ public class MultiAnnotatedException extends UpException {
                                    final String className,
                                    final String name,
                                    final Set<String> set) {
-        super(clazz, className, name, StringUtil.join(set));
+        super(clazz, className, name, Ut.fromJoin(set));
     }
 
     @Override

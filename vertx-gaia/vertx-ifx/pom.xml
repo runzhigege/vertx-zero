@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>vertx-gaia</artifactId>
+        <groupId>cn.vertxup</groupId>
+        <version>0.5.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>vertx-ifx</artifactId>
+    <packaging>pom</packaging>
+    <name>( Vertx Infix ) vertx-ifx: Zero Plugins</name>
+    <modules>
+        <module>zero-iqiy</module>
+        <module>zero-ali-sms</module>
+        <module>zero-qiniu</module>
+        <module>zero-excel</module>
+        <module>zero-feign</module>
+        <module>zero-native</module>
+        <module>zero-redis</module>
+    </modules>
+</project>

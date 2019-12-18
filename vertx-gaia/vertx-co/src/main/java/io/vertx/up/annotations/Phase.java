@@ -18,7 +18,7 @@ public @interface Phase {
     /**
      * Phase value
      *
-     * @return
+     * @return Authentication phase for custom workflow
      */
     AuthPhase value();
 }

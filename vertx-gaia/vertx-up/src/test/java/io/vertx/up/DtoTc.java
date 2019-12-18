@@ -1,13 +1,13 @@
 package io.vertx.up;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.tool.io.IO;
+import io.vertx.up.util.Ut;
 import org.junit.Test;
 
 public class DtoTc {
     @Test
     public void testDto() {
-        final JsonObject dto = IO.getJObject("test/dto.json");
+        final JsonObject dto = Ut.ioJObject("test/dto.json");
         for (final String o : dto.fieldNames()) {
             System.out.println("private String " + o + ";\n");
             if (o.endsWith("MingXi")) {

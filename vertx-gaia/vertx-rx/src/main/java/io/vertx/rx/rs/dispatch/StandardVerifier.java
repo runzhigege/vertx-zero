@@ -4,8 +4,8 @@ import io.vertx.core.Handler;
 import io.vertx.reactivex.ext.web.RoutingContext;
 import io.vertx.up.atom.Rule;
 import io.vertx.up.atom.agent.Depot;
-import io.vertx.up.rs.Sentry;
-import io.vertx.up.rs.hunt.BaseAim;
+import io.vertx.up.uca.rs.Sentry;
+import io.vertx.up.uca.rs.hunt.BaseAim;
 
 import java.util.List;
 import java.util.Map;
@@ -14,9 +14,13 @@ public class StandardVerifier extends BaseAim implements Sentry<RoutingContext> 
 
     @Override
     public Handler<RoutingContext> signal(final Depot depot) {
-        // continue to verify JsonObject/JsonArray type
+        /*
+         * continue to verify JsonObject/JsonArray type
+         * @Codex static validation for developed rules
+         */
         final Map<String, List<Rule>> rulers
-                = verifier().buildRulers(depot);
-        return (context) -> executeRequest(context.getDelegate(), rulers, depot);
+                = this.verifier().buildRulers(depot);
+        return (context) ->
+                this.executeRequest(context.getDelegate(), rulers, depot);
     }
 }

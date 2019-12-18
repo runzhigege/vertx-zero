@@ -1,6 +1,0 @@
-required:
-- nodes
-- micro
-typed:
-  nodes: JARRAY
-  micro: STRING

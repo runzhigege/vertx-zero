@@ -23,6 +23,13 @@ private static final long serialVersionUID = 0L;
   }
 
   @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(
+      UnusedPrivateParameter unused) {
+    return new IpcEnvelop();
+  }
+
+  @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet
   getUnknownFields() {
     return this.unknownFields;
@@ -35,7 +42,6 @@ private static final long serialVersionUID = 0L;
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
-    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -46,13 +52,6 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          default: {
-            if (!parseUnknownFieldProto3(
-                input, unknownFields, extensionRegistry, tag)) {
-              done = true;
-            }
-            break;
-          }
           case 8: {
             int rawValue = input.readEnum();
 
@@ -76,6 +75,13 @@ private static final long serialVersionUID = 0L;
             name_ = s;
             break;
           }
+          default: {
+            if (!parseUnknownField(
+                input, unknownFields, extensionRegistry, tag)) {
+              done = true;
+            }
+            break;
+          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -93,6 +99,7 @@ private static final long serialVersionUID = 0L;
     return io.vertx.tp.ipc.eon.UpEnvelop.internal_static_io_vertx_tp_ipc_eon_IpcEnvelop_descriptor;
   }
 
+  @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
     return io.vertx.tp.ipc.eon.UpEnvelop.internal_static_io_vertx_tp_ipc_eon_IpcEnvelop_fieldAccessorTable
@@ -108,6 +115,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>.io.vertx.tp.ipc.eon.em.Format type = 1;</code>
+   * @return The enum numeric value on the wire for type.
    */
   public int getTypeValue() {
     return type_;
@@ -118,8 +126,10 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>.io.vertx.tp.ipc.eon.em.Format type = 1;</code>
+   * @return The type.
    */
   public io.vertx.tp.ipc.eon.em.Format getType() {
+    @SuppressWarnings("deprecation")
     io.vertx.tp.ipc.eon.em.Format result = io.vertx.tp.ipc.eon.em.Format.valueOf(type_);
     return result == null ? io.vertx.tp.ipc.eon.em.Format.UNRECOGNIZED : result;
   }
@@ -132,6 +142,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>string body = 2;</code>
+   * @return The body.
    */
   public java.lang.String getBody() {
     java.lang.Object ref = body_;
@@ -151,6 +162,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>string body = 2;</code>
+   * @return The bytes for body.
    */
   public com.google.protobuf.ByteString
       getBodyBytes() {
@@ -174,6 +186,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>bytes stream = 3;</code>
+   * @return The stream.
    */
   public com.google.protobuf.ByteString getStream() {
     return stream_;
@@ -187,6 +200,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>string name = 4;</code>
+   * @return The name.
    */
   public java.lang.String getName() {
     java.lang.Object ref = name_;
@@ -206,6 +220,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>string name = 4;</code>
+   * @return The bytes for name.
    */
   public com.google.protobuf.ByteString
       getNameBytes() {
@@ -222,6 +237,7 @@ private static final long serialVersionUID = 0L;
   }
 
   private byte memoizedIsInitialized = -1;
+  @java.lang.Override
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
     if (isInitialized == 1) return true;
@@ -231,6 +247,7 @@ private static final long serialVersionUID = 0L;
     return true;
   }
 
+  @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     if (type_ != io.vertx.tp.ipc.eon.em.Format.BINARY.getNumber()) {
@@ -248,6 +265,7 @@ private static final long serialVersionUID = 0L;
     unknownFields.writeTo(output);
   }
 
+  @java.lang.Override
   public int getSerializedSize() {
     int size = memoizedSize;
     if (size != -1) return size;
@@ -282,16 +300,15 @@ private static final long serialVersionUID = 0L;
     }
     io.vertx.tp.ipc.eon.IpcEnvelop other = (io.vertx.tp.ipc.eon.IpcEnvelop) obj;
 
-    boolean result = true;
-    result = result && type_ == other.type_;
-    result = result && getBody()
-        .equals(other.getBody());
-    result = result && getStream()
-        .equals(other.getStream());
-    result = result && getName()
-        .equals(other.getName());
-    result = result && unknownFields.equals(other.unknownFields);
-    return result;
+    if (type_ != other.type_) return false;
+    if (!getBody()
+        .equals(other.getBody())) return false;
+    if (!getStream()
+        .equals(other.getStream())) return false;
+    if (!getName()
+        .equals(other.getName())) return false;
+    if (!unknownFields.equals(other.unknownFields)) return false;
+    return true;
   }
 
   @java.lang.Override
@@ -384,6 +401,7 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
+  @java.lang.Override
   public Builder newBuilderForType() { return newBuilder(); }
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
@@ -391,6 +409,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder(io.vertx.tp.ipc.eon.IpcEnvelop prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
+  @java.lang.Override
   public Builder toBuilder() {
     return this == DEFAULT_INSTANCE
         ? new Builder() : new Builder().mergeFrom(this);
@@ -414,6 +433,7 @@ private static final long serialVersionUID = 0L;
       return io.vertx.tp.ipc.eon.UpEnvelop.internal_static_io_vertx_tp_ipc_eon_IpcEnvelop_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return io.vertx.tp.ipc.eon.UpEnvelop.internal_static_io_vertx_tp_ipc_eon_IpcEnvelop_fieldAccessorTable
@@ -436,6 +456,7 @@ private static final long serialVersionUID = 0L;
               .alwaysUseFieldBuilders) {
       }
     }
+    @java.lang.Override
     public Builder clear() {
       super.clear();
       type_ = 0;
@@ -449,15 +470,18 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
       return io.vertx.tp.ipc.eon.UpEnvelop.internal_static_io_vertx_tp_ipc_eon_IpcEnvelop_descriptor;
     }
 
+    @java.lang.Override
     public io.vertx.tp.ipc.eon.IpcEnvelop getDefaultInstanceForType() {
       return io.vertx.tp.ipc.eon.IpcEnvelop.getDefaultInstance();
     }
 
+    @java.lang.Override
     public io.vertx.tp.ipc.eon.IpcEnvelop build() {
       io.vertx.tp.ipc.eon.IpcEnvelop result = buildPartial();
       if (!result.isInitialized()) {
@@ -466,6 +490,7 @@ private static final long serialVersionUID = 0L;
       return result;
     }
 
+    @java.lang.Override
     public io.vertx.tp.ipc.eon.IpcEnvelop buildPartial() {
       io.vertx.tp.ipc.eon.IpcEnvelop result = new io.vertx.tp.ipc.eon.IpcEnvelop(this);
       result.type_ = type_;
@@ -476,32 +501,39 @@ private static final long serialVersionUID = 0L;
       return result;
     }
 
+    @java.lang.Override
     public Builder clone() {
-      return (Builder) super.clone();
+      return super.clone();
     }
+    @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
-      return (Builder) super.setField(field, value);
+      return super.setField(field, value);
     }
+    @java.lang.Override
     public Builder clearField(
         com.google.protobuf.Descriptors.FieldDescriptor field) {
-      return (Builder) super.clearField(field);
+      return super.clearField(field);
     }
+    @java.lang.Override
     public Builder clearOneof(
         com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-      return (Builder) super.clearOneof(oneof);
+      return super.clearOneof(oneof);
     }
+    @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         int index, java.lang.Object value) {
-      return (Builder) super.setRepeatedField(field, index, value);
+      return super.setRepeatedField(field, index, value);
     }
+    @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
-      return (Builder) super.addRepeatedField(field, value);
+      return super.addRepeatedField(field, value);
     }
+    @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
       if (other instanceof io.vertx.tp.ipc.eon.IpcEnvelop) {
         return mergeFrom((io.vertx.tp.ipc.eon.IpcEnvelop)other);
@@ -532,10 +564,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    @java.lang.Override
     public final boolean isInitialized() {
       return true;
     }
 
+    @java.lang.Override
     public Builder mergeFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -561,6 +595,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Format type = 1;</code>
+     * @return The enum numeric value on the wire for type.
      */
     public int getTypeValue() {
       return type_;
@@ -571,6 +606,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Format type = 1;</code>
+     * @param value The enum numeric value on the wire for type to set.
+     * @return This builder for chaining.
      */
     public Builder setTypeValue(int value) {
       type_ = value;
@@ -583,8 +620,10 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Format type = 1;</code>
+     * @return The type.
      */
     public io.vertx.tp.ipc.eon.em.Format getType() {
+      @SuppressWarnings("deprecation")
       io.vertx.tp.ipc.eon.em.Format result = io.vertx.tp.ipc.eon.em.Format.valueOf(type_);
       return result == null ? io.vertx.tp.ipc.eon.em.Format.UNRECOGNIZED : result;
     }
@@ -594,6 +633,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Format type = 1;</code>
+     * @param value The type to set.
+     * @return This builder for chaining.
      */
     public Builder setType(io.vertx.tp.ipc.eon.em.Format value) {
       if (value == null) {
@@ -610,6 +651,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>.io.vertx.tp.ipc.eon.em.Format type = 1;</code>
+     * @return This builder for chaining.
      */
     public Builder clearType() {
       
@@ -625,6 +667,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string body = 2;</code>
+     * @return The body.
      */
     public java.lang.String getBody() {
       java.lang.Object ref = body_;
@@ -644,6 +687,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string body = 2;</code>
+     * @return The bytes for body.
      */
     public com.google.protobuf.ByteString
         getBodyBytes() {
@@ -664,6 +708,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string body = 2;</code>
+     * @param value The body to set.
+     * @return This builder for chaining.
      */
     public Builder setBody(
         java.lang.String value) {
@@ -681,6 +727,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string body = 2;</code>
+     * @return This builder for chaining.
      */
     public Builder clearBody() {
       
@@ -694,6 +741,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string body = 2;</code>
+     * @param value The bytes for body to set.
+     * @return This builder for chaining.
      */
     public Builder setBodyBytes(
         com.google.protobuf.ByteString value) {
@@ -714,6 +763,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bytes stream = 3;</code>
+     * @return The stream.
      */
     public com.google.protobuf.ByteString getStream() {
       return stream_;
@@ -724,6 +774,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bytes stream = 3;</code>
+     * @param value The stream to set.
+     * @return This builder for chaining.
      */
     public Builder setStream(com.google.protobuf.ByteString value) {
       if (value == null) {
@@ -740,6 +792,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bytes stream = 3;</code>
+     * @return This builder for chaining.
      */
     public Builder clearStream() {
       
@@ -755,6 +808,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string name = 4;</code>
+     * @return The name.
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -774,6 +828,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string name = 4;</code>
+     * @return The bytes for name.
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -794,6 +849,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string name = 4;</code>
+     * @param value The name to set.
+     * @return This builder for chaining.
      */
     public Builder setName(
         java.lang.String value) {
@@ -811,6 +868,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string name = 4;</code>
+     * @return This builder for chaining.
      */
     public Builder clearName() {
       
@@ -824,6 +882,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>string name = 4;</code>
+     * @param value The bytes for name to set.
+     * @return This builder for chaining.
      */
     public Builder setNameBytes(
         com.google.protobuf.ByteString value) {
@@ -836,11 +896,13 @@ private static final long serialVersionUID = 0L;
       onChanged();
       return this;
     }
+    @java.lang.Override
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
-      return super.setUnknownFieldsProto3(unknownFields);
+      return super.setUnknownFields(unknownFields);
     }
 
+    @java.lang.Override
     public final Builder mergeUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.mergeUnknownFields(unknownFields);
@@ -862,6 +924,7 @@ private static final long serialVersionUID = 0L;
 
   private static final com.google.protobuf.Parser<IpcEnvelop>
       PARSER = new com.google.protobuf.AbstractParser<IpcEnvelop>() {
+    @java.lang.Override
     public IpcEnvelop parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -879,6 +942,7 @@ private static final long serialVersionUID = 0L;
     return PARSER;
   }
 
+  @java.lang.Override
   public io.vertx.tp.ipc.eon.IpcEnvelop getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }

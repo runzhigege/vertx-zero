@@ -1,4 +1,4 @@
-This file describes the sequence of commands to create the various files necessary for TLS tests.
+This up.god.file describes the sequence of commands to create the various files necessary for TLS tests.
 
 - when prompted for a password use "wibble"
 - to generate the test-host5 entry in the sni-keystore.jks you need to use the KeyStore Explorer GUI application and create the entry manually
@@ -13,11 +13,11 @@ keytool -genkey -alias test-store -keyalg RSA -keystore server-keystore.jks -key
 
 2) Export the cert from the store
 
-keytool -export -alias test-store -file localhost.crt -keystore server-keystore.jks -keypass wibble -storepass wibble
+keytool -export -alias test-store -up.god.file localhost.crt -keystore server-keystore.jks -keypass wibble -storepass wibble
 
 3) Import the cert into a new trust-store for the client
 
-keytool -import -trustcacerts -alias test-store -file localhost.crt -keystore client-truststore.jks -keypass wibble -storepass wibble
+keytool -import -trustcacerts -alias test-store -up.god.file localhost.crt -keystore client-truststore.jks -keypass wibble -storepass wibble
 
 4) Create a private key + man-in-middle certificate for the server in a new key store:
 
@@ -58,7 +58,7 @@ openssl pkcs12 -in server-keystore.p12 -nokeys -out server-cert.pem
 
 1) Generate a Certificate Signing Request for the server cert
 
-keytool -certreq -alias test-store -file server-csr.pem -keystore server-keystore.jks -keypass wibble -storepass wibble
+keytool -certreq -alias test-store -up.god.file server-csr.pem -keystore server-keystore.jks -keypass wibble -storepass wibble
 
 2) Create a root CA database
 
@@ -93,7 +93,7 @@ keytool -importkeystore -destkeystore server-keystore-root-ca.jks -srckeystore s
 
 1) Create a JKS trust-store containing the root CA
 
-keytool -import -trustcacerts -alias test-store -file root-ca/ca-cert.pem -keystore client-truststore-root-ca.jks -keypass wibble -storepass wibble
+keytool -import -trustcacerts -alias test-store -up.god.file root-ca/ca-cert.pem -keystore client-truststore-root-ca.jks -keypass wibble -storepass wibble
 
 
 # PKCS#12 trust store containing the  root CA
@@ -144,11 +144,11 @@ keytool -genkey -alias test-store -keyalg RSA -keystore client-keystore.jks -key
 
 2) Export the cert from the store
 
-keytool -export -alias test-store -file localhost.crt -keystore client-keystore.jks -keypass wibble -storepass wibble
+keytool -export -alias test-store -up.god.file localhost.crt -keystore client-keystore.jks -keypass wibble -storepass wibble
 
 3) Import the cert into a new trust-store for the server
 
-keytool -import -trustcacerts -alias test-store -file localhost.crt -keystore server-truststore.jks -keypass wibble -storepass wibble
+keytool -import -trustcacerts -alias test-store -up.god.file localhost.crt -keystore server-truststore.jks -keypass wibble -storepass wibble
 
 
 ## Self signed client-server PKCS12
@@ -198,7 +198,7 @@ openssl ca -config openssl.cnf -name CA_other -keyfile other-ca/ca-key.pem -cert
 
 1) Generate a Certificate Signing Request for the client cert
 
-keytool -certreq -alias test-store -file client-csr.pem -keystore client-keystore.jks -keypass wibble -storepass wibble
+keytool -certreq -alias test-store -up.god.file client-csr.pem -keystore client-keystore.jks -keypass wibble -storepass wibble
 
 2) Sign the client cert with the root CA and convert it to the X.509 format
 
@@ -241,19 +241,19 @@ keytool -genkey -alias test-host5 -keyalg RSA -keystore sni-keystore.jks -keysiz
 
 3) Extract the cerfificate for the host1-host5 domains
 
-keytool -export -alias test-host1 -file host1.crt -keystore sni-keystore.jks -keypass wibble -storepass wibble
-keytool -export -alias test-host2 -file host2.crt -keystore sni-keystore.jks -keypass wibble -storepass wibble
-keytool -export -alias test-host3 -file host3.crt -keystore sni-keystore.jks -keypass wibble -storepass wibble
-keytool -export -alias test-host4 -file host4.crt -keystore sni-keystore.jks -keypass wibble -storepass wibble
-keytool -export -alias test-host5 -file host5.crt -keystore sni-keystore.jks -keypass wibble -storepass wibble
+keytool -export -alias test-host1 -up.god.file host1.crt -keystore sni-keystore.jks -keypass wibble -storepass wibble
+keytool -export -alias test-host2 -up.god.file host2.crt -keystore sni-keystore.jks -keypass wibble -storepass wibble
+keytool -export -alias test-host3 -up.god.file host3.crt -keystore sni-keystore.jks -keypass wibble -storepass wibble
+keytool -export -alias test-host4 -up.god.file host4.crt -keystore sni-keystore.jks -keypass wibble -storepass wibble
+keytool -export -alias test-host5 -up.god.file host5.crt -keystore sni-keystore.jks -keypass wibble -storepass wibble
 
 4) Create trust stores for the host1-host5 domains
 
-keytool -import -trustcacerts -alias test-host1 -file host1.crt -keystore sni-truststore-host1.jks -keypass wibble -storepass wibble
-keytool -import -trustcacerts -alias test-host2 -file host2.crt -keystore sni-truststore-host2.jks -keypass wibble -storepass wibble
-keytool -import -trustcacerts -alias test-host3 -file host3.crt -keystore sni-truststore-host3.jks -keypass wibble -storepass wibble
-keytool -import -trustcacerts -alias test-host4 -file host4.crt -keystore sni-truststore-host4.jks -keypass wibble -storepass wibble
-keytool -import -trustcacerts -alias test-host5 -file host5.crt -keystore sni-truststore-host5.jks -keypass wibble -storepass wibble
+keytool -import -trustcacerts -alias test-host1 -up.god.file host1.crt -keystore sni-truststore-host1.jks -keypass wibble -storepass wibble
+keytool -import -trustcacerts -alias test-host2 -up.god.file host2.crt -keystore sni-truststore-host2.jks -keypass wibble -storepass wibble
+keytool -import -trustcacerts -alias test-host3 -up.god.file host3.crt -keystore sni-truststore-host3.jks -keypass wibble -storepass wibble
+keytool -import -trustcacerts -alias test-host4 -up.god.file host4.crt -keystore sni-truststore-host4.jks -keypass wibble -storepass wibble
+keytool -import -trustcacerts -alias test-host5 -up.god.file host5.crt -keystore sni-truststore-host5.jks -keypass wibble -storepass wibble
 
 
 ## Self signed PKCS12

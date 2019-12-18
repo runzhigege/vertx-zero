@@ -16,8 +16,14 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private RetryInfo() {
-    passed_ = false;
-    backoffMs_ = java.util.Collections.emptyList();
+    backoffMs_ = emptyIntList();
+  }
+
+  @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(
+      UnusedPrivateParameter unused) {
+    return new RetryInfo();
   }
 
   @java.lang.Override
@@ -44,37 +50,37 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          default: {
-            if (!parseUnknownFieldProto3(
-                input, unknownFields, extensionRegistry, tag)) {
-              done = true;
-            }
-            break;
-          }
           case 8: {
 
             passed_ = input.readBool();
             break;
           }
           case 16: {
-            if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-              backoffMs_ = new java.util.ArrayList<java.lang.Integer>();
-              mutable_bitField0_ |= 0x00000002;
+            if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+              backoffMs_ = newIntList();
+              mutable_bitField0_ |= 0x00000001;
             }
-            backoffMs_.add(input.readInt32());
+            backoffMs_.addInt(input.readInt32());
             break;
           }
           case 18: {
             int length = input.readRawVarint32();
             int limit = input.pushLimit(length);
-            if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
-              backoffMs_ = new java.util.ArrayList<java.lang.Integer>();
-              mutable_bitField0_ |= 0x00000002;
+            if (!((mutable_bitField0_ & 0x00000001) != 0) && input.getBytesUntilLimit() > 0) {
+              backoffMs_ = newIntList();
+              mutable_bitField0_ |= 0x00000001;
             }
             while (input.getBytesUntilLimit() > 0) {
-              backoffMs_.add(input.readInt32());
+              backoffMs_.addInt(input.readInt32());
             }
             input.popLimit(limit);
+            break;
+          }
+          default: {
+            if (!parseUnknownField(
+                input, unknownFields, extensionRegistry, tag)) {
+              done = true;
+            }
             break;
           }
         }
@@ -85,8 +91,8 @@ private static final long serialVersionUID = 0L;
       throw new com.google.protobuf.InvalidProtocolBufferException(
           e).setUnfinishedMessage(this);
     } finally {
-      if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-        backoffMs_ = java.util.Collections.unmodifiableList(backoffMs_);
+      if (((mutable_bitField0_ & 0x00000001) != 0)) {
+        backoffMs_.makeImmutable(); // C
       }
       this.unknownFields = unknownFields.build();
       makeExtensionsImmutable();
@@ -97,6 +103,7 @@ private static final long serialVersionUID = 0L;
     return io.vertx.tp.ipc.eon.UpStatus.internal_static_io_vertx_tp_ipc_eon_RetryInfo_descriptor;
   }
 
+  @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
     return io.vertx.tp.ipc.eon.UpStatus.internal_static_io_vertx_tp_ipc_eon_RetryInfo_fieldAccessorTable
@@ -104,7 +111,6 @@ private static final long serialVersionUID = 0L;
             io.vertx.tp.ipc.eon.RetryInfo.class, io.vertx.tp.ipc.eon.RetryInfo.Builder.class);
   }
 
-  private int bitField0_;
   public static final int PASSED_FIELD_NUMBER = 1;
   private boolean passed_;
   /**
@@ -113,19 +119,21 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>bool passed = 1;</code>
+   * @return The passed.
    */
   public boolean getPassed() {
     return passed_;
   }
 
   public static final int BACKOFF_MS_FIELD_NUMBER = 2;
-  private java.util.List<java.lang.Integer> backoffMs_;
+  private com.google.protobuf.Internal.IntList backoffMs_;
   /**
    * <pre>
    * Backoff
    * </pre>
    *
    * <code>repeated int32 backoff_ms = 2;</code>
+   * @return A list containing the backoffMs.
    */
   public java.util.List<java.lang.Integer>
       getBackoffMsList() {
@@ -137,6 +145,7 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>repeated int32 backoff_ms = 2;</code>
+   * @return The count of backoffMs.
    */
   public int getBackoffMsCount() {
     return backoffMs_.size();
@@ -147,13 +156,16 @@ private static final long serialVersionUID = 0L;
    * </pre>
    *
    * <code>repeated int32 backoff_ms = 2;</code>
+   * @param index The index of the element to return.
+   * @return The backoffMs at the given index.
    */
   public int getBackoffMs(int index) {
-    return backoffMs_.get(index);
+    return backoffMs_.getInt(index);
   }
   private int backoffMsMemoizedSerializedSize = -1;
 
   private byte memoizedIsInitialized = -1;
+  @java.lang.Override
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
     if (isInitialized == 1) return true;
@@ -163,6 +175,7 @@ private static final long serialVersionUID = 0L;
     return true;
   }
 
+  @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     getSerializedSize();
@@ -174,11 +187,12 @@ private static final long serialVersionUID = 0L;
       output.writeUInt32NoTag(backoffMsMemoizedSerializedSize);
     }
     for (int i = 0; i < backoffMs_.size(); i++) {
-      output.writeInt32NoTag(backoffMs_.get(i));
+      output.writeInt32NoTag(backoffMs_.getInt(i));
     }
     unknownFields.writeTo(output);
   }
 
+  @java.lang.Override
   public int getSerializedSize() {
     int size = memoizedSize;
     if (size != -1) return size;
@@ -192,7 +206,7 @@ private static final long serialVersionUID = 0L;
       int dataSize = 0;
       for (int i = 0; i < backoffMs_.size(); i++) {
         dataSize += com.google.protobuf.CodedOutputStream
-          .computeInt32SizeNoTag(backoffMs_.get(i));
+          .computeInt32SizeNoTag(backoffMs_.getInt(i));
       }
       size += dataSize;
       if (!getBackoffMsList().isEmpty()) {
@@ -217,13 +231,12 @@ private static final long serialVersionUID = 0L;
     }
     io.vertx.tp.ipc.eon.RetryInfo other = (io.vertx.tp.ipc.eon.RetryInfo) obj;
 
-    boolean result = true;
-    result = result && (getPassed()
-        == other.getPassed());
-    result = result && getBackoffMsList()
-        .equals(other.getBackoffMsList());
-    result = result && unknownFields.equals(other.unknownFields);
-    return result;
+    if (getPassed()
+        != other.getPassed()) return false;
+    if (!getBackoffMsList()
+        .equals(other.getBackoffMsList())) return false;
+    if (!unknownFields.equals(other.unknownFields)) return false;
+    return true;
   }
 
   @java.lang.Override
@@ -315,6 +328,7 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
+  @java.lang.Override
   public Builder newBuilderForType() { return newBuilder(); }
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
@@ -322,6 +336,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder(io.vertx.tp.ipc.eon.RetryInfo prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
+  @java.lang.Override
   public Builder toBuilder() {
     return this == DEFAULT_INSTANCE
         ? new Builder() : new Builder().mergeFrom(this);
@@ -345,6 +360,7 @@ private static final long serialVersionUID = 0L;
       return io.vertx.tp.ipc.eon.UpStatus.internal_static_io_vertx_tp_ipc_eon_RetryInfo_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return io.vertx.tp.ipc.eon.UpStatus.internal_static_io_vertx_tp_ipc_eon_RetryInfo_fieldAccessorTable
@@ -367,24 +383,28 @@ private static final long serialVersionUID = 0L;
               .alwaysUseFieldBuilders) {
       }
     }
+    @java.lang.Override
     public Builder clear() {
       super.clear();
       passed_ = false;
 
-      backoffMs_ = java.util.Collections.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000002);
+      backoffMs_ = emptyIntList();
+      bitField0_ = (bitField0_ & ~0x00000001);
       return this;
     }
 
+    @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
       return io.vertx.tp.ipc.eon.UpStatus.internal_static_io_vertx_tp_ipc_eon_RetryInfo_descriptor;
     }
 
+    @java.lang.Override
     public io.vertx.tp.ipc.eon.RetryInfo getDefaultInstanceForType() {
       return io.vertx.tp.ipc.eon.RetryInfo.getDefaultInstance();
     }
 
+    @java.lang.Override
     public io.vertx.tp.ipc.eon.RetryInfo build() {
       io.vertx.tp.ipc.eon.RetryInfo result = buildPartial();
       if (!result.isInitialized()) {
@@ -393,47 +413,53 @@ private static final long serialVersionUID = 0L;
       return result;
     }
 
+    @java.lang.Override
     public io.vertx.tp.ipc.eon.RetryInfo buildPartial() {
       io.vertx.tp.ipc.eon.RetryInfo result = new io.vertx.tp.ipc.eon.RetryInfo(this);
       int from_bitField0_ = bitField0_;
-      int to_bitField0_ = 0;
       result.passed_ = passed_;
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        backoffMs_ = java.util.Collections.unmodifiableList(backoffMs_);
-        bitField0_ = (bitField0_ & ~0x00000002);
+      if (((bitField0_ & 0x00000001) != 0)) {
+        backoffMs_.makeImmutable();
+        bitField0_ = (bitField0_ & ~0x00000001);
       }
       result.backoffMs_ = backoffMs_;
-      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
 
+    @java.lang.Override
     public Builder clone() {
-      return (Builder) super.clone();
+      return super.clone();
     }
+    @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
-      return (Builder) super.setField(field, value);
+      return super.setField(field, value);
     }
+    @java.lang.Override
     public Builder clearField(
         com.google.protobuf.Descriptors.FieldDescriptor field) {
-      return (Builder) super.clearField(field);
+      return super.clearField(field);
     }
+    @java.lang.Override
     public Builder clearOneof(
         com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-      return (Builder) super.clearOneof(oneof);
+      return super.clearOneof(oneof);
     }
+    @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         int index, java.lang.Object value) {
-      return (Builder) super.setRepeatedField(field, index, value);
+      return super.setRepeatedField(field, index, value);
     }
+    @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
-      return (Builder) super.addRepeatedField(field, value);
+      return super.addRepeatedField(field, value);
     }
+    @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
       if (other instanceof io.vertx.tp.ipc.eon.RetryInfo) {
         return mergeFrom((io.vertx.tp.ipc.eon.RetryInfo)other);
@@ -451,7 +477,7 @@ private static final long serialVersionUID = 0L;
       if (!other.backoffMs_.isEmpty()) {
         if (backoffMs_.isEmpty()) {
           backoffMs_ = other.backoffMs_;
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           ensureBackoffMsIsMutable();
           backoffMs_.addAll(other.backoffMs_);
@@ -463,10 +489,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    @java.lang.Override
     public final boolean isInitialized() {
       return true;
     }
 
+    @java.lang.Override
     public Builder mergeFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -493,6 +521,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bool passed = 1;</code>
+     * @return The passed.
      */
     public boolean getPassed() {
       return passed_;
@@ -503,6 +532,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bool passed = 1;</code>
+     * @param value The passed to set.
+     * @return This builder for chaining.
      */
     public Builder setPassed(boolean value) {
       
@@ -516,6 +547,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>bool passed = 1;</code>
+     * @return This builder for chaining.
      */
     public Builder clearPassed() {
       
@@ -524,11 +556,11 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.util.List<java.lang.Integer> backoffMs_ = java.util.Collections.emptyList();
+    private com.google.protobuf.Internal.IntList backoffMs_ = emptyIntList();
     private void ensureBackoffMsIsMutable() {
-      if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-        backoffMs_ = new java.util.ArrayList<java.lang.Integer>(backoffMs_);
-        bitField0_ |= 0x00000002;
+      if (!((bitField0_ & 0x00000001) != 0)) {
+        backoffMs_ = mutableCopy(backoffMs_);
+        bitField0_ |= 0x00000001;
        }
     }
     /**
@@ -537,10 +569,12 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>repeated int32 backoff_ms = 2;</code>
+     * @return A list containing the backoffMs.
      */
     public java.util.List<java.lang.Integer>
         getBackoffMsList() {
-      return java.util.Collections.unmodifiableList(backoffMs_);
+      return ((bitField0_ & 0x00000001) != 0) ?
+               java.util.Collections.unmodifiableList(backoffMs_) : backoffMs_;
     }
     /**
      * <pre>
@@ -548,6 +582,7 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>repeated int32 backoff_ms = 2;</code>
+     * @return The count of backoffMs.
      */
     public int getBackoffMsCount() {
       return backoffMs_.size();
@@ -558,9 +593,11 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>repeated int32 backoff_ms = 2;</code>
+     * @param index The index of the element to return.
+     * @return The backoffMs at the given index.
      */
     public int getBackoffMs(int index) {
-      return backoffMs_.get(index);
+      return backoffMs_.getInt(index);
     }
     /**
      * <pre>
@@ -568,11 +605,14 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>repeated int32 backoff_ms = 2;</code>
+     * @param index The index to set the value at.
+     * @param value The backoffMs to set.
+     * @return This builder for chaining.
      */
     public Builder setBackoffMs(
         int index, int value) {
       ensureBackoffMsIsMutable();
-      backoffMs_.set(index, value);
+      backoffMs_.setInt(index, value);
       onChanged();
       return this;
     }
@@ -582,10 +622,12 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>repeated int32 backoff_ms = 2;</code>
+     * @param value The backoffMs to add.
+     * @return This builder for chaining.
      */
     public Builder addBackoffMs(int value) {
       ensureBackoffMsIsMutable();
-      backoffMs_.add(value);
+      backoffMs_.addInt(value);
       onChanged();
       return this;
     }
@@ -595,6 +637,8 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>repeated int32 backoff_ms = 2;</code>
+     * @param values The backoffMs to add.
+     * @return This builder for chaining.
      */
     public Builder addAllBackoffMs(
         java.lang.Iterable<? extends java.lang.Integer> values) {
@@ -610,18 +654,21 @@ private static final long serialVersionUID = 0L;
      * </pre>
      *
      * <code>repeated int32 backoff_ms = 2;</code>
+     * @return This builder for chaining.
      */
     public Builder clearBackoffMs() {
-      backoffMs_ = java.util.Collections.emptyList();
-      bitField0_ = (bitField0_ & ~0x00000002);
+      backoffMs_ = emptyIntList();
+      bitField0_ = (bitField0_ & ~0x00000001);
       onChanged();
       return this;
     }
+    @java.lang.Override
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
-      return super.setUnknownFieldsProto3(unknownFields);
+      return super.setUnknownFields(unknownFields);
     }
 
+    @java.lang.Override
     public final Builder mergeUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.mergeUnknownFields(unknownFields);
@@ -643,6 +690,7 @@ private static final long serialVersionUID = 0L;
 
   private static final com.google.protobuf.Parser<RetryInfo>
       PARSER = new com.google.protobuf.AbstractParser<RetryInfo>() {
+    @java.lang.Override
     public RetryInfo parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -660,6 +708,7 @@ private static final long serialVersionUID = 0L;
     return PARSER;
   }
 
+  @java.lang.Override
   public io.vertx.tp.ipc.eon.RetryInfo getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }

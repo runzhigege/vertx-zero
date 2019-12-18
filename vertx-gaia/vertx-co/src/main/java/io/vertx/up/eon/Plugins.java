@@ -1,10 +1,7 @@
 package io.vertx.up.eon;
 
 import javax.inject.Inject;
-import javax.inject.infix.Jooq;
-import javax.inject.infix.Mongo;
-import javax.inject.infix.MySql;
-import javax.inject.infix.Rpc;
+import javax.inject.infix.*;
 import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,23 +25,6 @@ public interface Plugins {
             INJECT, ERROR, SERVER,
             RESOLVER
     };
-
-    // Default infix
-    interface Infix {
-
-        String MONGO = "mongo";
-
-        String MYSQL = "mysql";
-
-        String JOOQ = "jooq";
-
-        String RPC = "rpc";
-
-        String[] DATA = new String[]{
-                MONGO, MYSQL, JOOQ, RPC
-        };
-    }
-
     ConcurrentMap<Class<? extends Annotation>, String> INFIX_MAP =
             new ConcurrentHashMap<Class<? extends Annotation>, String>() {
                 {
@@ -52,13 +32,58 @@ public interface Plugins {
                     put(MySql.class, Infix.MYSQL);
                     put(Jooq.class, Infix.JOOQ);
                     put(Rpc.class, Infix.RPC);
+                    put(Redis.class, Infix.REDIS);
                 }
             };
-
     Set<Class<? extends Annotation>> INJECT_ANNOTATIONS = new HashSet<Class<? extends Annotation>>() {
         {
             addAll(INFIX_MAP.keySet());
             add(Inject.class);
         }
     };
+
+    /*
+     * Default supported in different file here.
+     * vertx-mongo.yml: MongoClient ( Native )
+     * vertx-mysql.yml: MySQLClient ( Native )
+     * vertx-jooq.yml: Jooq ( Zero Provided )
+     * vertx-rpc.yml: RpcClient ( Zero Provided )
+     * vertx-redis.yml: RedisClient ( Native )
+     */
+    interface Infix {
+
+        String MONGO = "mongo";
+
+        String MYSQL = "mysql";
+
+        String REDIS = "redis";
+
+        String SESSION = "session";
+
+        String SHARED = "shared";
+
+
+        String JOOQ = "jooq";
+        String RPC = "rpc";
+        String SECURE = "secure";
+
+        String LOGGER = "logger";
+        /*
+         *
+         */
+        Set<String> STANDAND = new HashSet<String>() {
+            {
+                add(MONGO);
+                add(MYSQL);
+                add(REDIS);
+                // Could not put session  / shared in to standard
+                // this.add(SESSION);
+                // this.add(SHARED);
+
+                add(RPC);
+                add(JOOQ);
+                add(LOGGER);
+            }
+        };
+    }
 }

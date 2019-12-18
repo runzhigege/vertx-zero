@@ -17,7 +17,7 @@ public class ClassSerializer extends JsonSerializer<Class<?>> { // NOPMD
     @Override
     public void serialize(final Class<?> clazz, final JsonGenerator generator,
                           final SerializerProvider provider)
-            throws IOException, JsonProcessingException {
+            throws IOException {
         generator.writeString(clazz.getName());
     }
 

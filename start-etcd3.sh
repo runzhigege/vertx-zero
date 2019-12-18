@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-cd vertx-env/e3w
+cd tool/e3w
 docker-compose up

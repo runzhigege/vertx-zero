@@ -17,9 +17,9 @@ import io.vertx.up.VertxApplication;
 import io.vertx.up.annotations.Up;
 
 @Up
-public class Anchor {
+public class io.god.Anchor {
     public static void main(final String[] args) {
-        VertxApplication.run(Anchor.class);
+        VertxApplication.run(io.god.Anchor.class);
     }
 }
 ```
@@ -39,7 +39,7 @@ The default http server port is **6083**.
 
 Except about standalone mode, zero also support another mode \( Micro \) to deploy all nodes in micro service environment, please be careful about micro environment, there need some additional configuration for zero to support micro services environment, please refer following tutorial to do the preparing works first. The demo projects are following in `vertx-zeus`,
 
-* **Api Gateway - 6000** : `vertx-athena`
+* **Api Gateway - 6100** : `vertx-athena`
 * **Service - 6002**: `vertx-uranus`
 
 ### 2.1. Api Gateway Configuration
@@ -54,7 +54,7 @@ src/main/resources/vertx-server.yml
 
 #### vertx.yml
 
-`vertx.yml`file must contains extend lime node as following:
+`vertx.yml`up.god.file must contains extend lime node as following:
 
 ```yaml
 zero:
@@ -69,7 +69,7 @@ zero:
 
 #### vertx-server.yml
 
-`vertx-server.yml` file must define another server type for Api Gateway
+`vertx-server.yml` up.god.file must define another server type for Api Gateway
 
 ```yaml
 server:
@@ -82,7 +82,7 @@ server:
 
 #### vertx-etcd3.yml
 
-`vertx-etcd3.yml` file contains etcd3 registry center configuration information:
+`vertx-etcd3.yml` up.god.file contains etcd3 registry center configuration information:
 
 ```yaml
 etcd:
@@ -101,21 +101,19 @@ In zero framework, the etcd3 used e3w, please refer the link to check how to pre
 
 ### 2.2. Api Gateway
 
-Api Gateway source code is similar with standalone service as following:
+Api Gateway source code is the same as standalone service as following:
 
 ```java
 package up.god;
 
 import io.vertx.up.VertxApplication;
-import io.vertx.up.annotations.ApiGateway;
 import io.vertx.up.annotations.Up;
 
 @Up
-@ApiGateway
-public class Anchor {
+public class io.god.Anchor {
 
     public static void main(final String[] args) {
-        VertxApplication.run(Anchor.class);
+        VertxApplication.run(io.god.Anchor.class);
     }
 }
 ```
@@ -132,7 +130,7 @@ src/main/resources/vertx-server.yml
 
 #### vertx.yml
 
-`vertx.yml` file is the same as api gateway, be sure instance name are the same as api gateway.
+`vertx.yml` up.god.file is the same as api gateway, be sure instance name are the same as api gateway.
 
 ```yaml
 zero:
@@ -147,7 +145,7 @@ zero:
 
 #### vertx-server.yml
 
-`vertx-server.yml` file should be default configuration, you can set port for this micro service node.
+`vertx-server.yml` up.god.file should be default configuration, you can set port for this micro service node.
 
 ```yaml
 server:
@@ -158,7 +156,7 @@ server:
     host: 0.0.0.0
 ```
 
-Here ignore `vertx-etcd3.yml` file content because they are the same. If you put all service node in one environment, all the service nodes configuration of etcd3 must be the same.
+Here ignore `vertx-etcd3.yml` up.god.file content because they are the same. If you put all service node in one environment, all the service nodes configuration of etcd3 must be the same.
 
 ### 2.4. Service
 
@@ -171,10 +169,10 @@ import io.vertx.up.VertxApplication;
 import io.vertx.up.annotations.Up;
 
 @Up
-public class Anchor {
+public class io.god.Anchor {
 
     public static void main(final String[] args) {
-        VertxApplication.run(Anchor.class);
+        VertxApplication.run(io.god.Anchor.class);
     }
 }
 ```

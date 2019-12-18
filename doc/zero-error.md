@@ -4,7 +4,7 @@ Zero system provide simple error define for user.
 
 ## 1. Configuration
 
-In your class path, create a new file named `vertx-error.yml`，the format is as following:
+In your class path, create a new up.god.file named `vertx-error.yml`，the format is as following:
 
 ```yaml
 E100001: User defined Error {0}, details = {1}

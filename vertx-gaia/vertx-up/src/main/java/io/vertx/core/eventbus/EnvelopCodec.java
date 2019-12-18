@@ -1,9 +1,9 @@
 package io.vertx.core.eventbus;
 
 import io.vertx.core.buffer.Buffer;
-import io.vertx.up.atom.Envelop;
-import io.vertx.up.tool.io.Stream;
-import io.vertx.zero.eon.Values;
+import io.vertx.up.commune.Envelop;
+import io.vertx.up.eon.Values;
+import io.vertx.up.util.Ut;
 
 /**
  * Codec to transfer envelop
@@ -13,21 +13,15 @@ public final class EnvelopCodec implements MessageCodec<Envelop, Envelop> {
     @Override
     public void encodeToWire(final Buffer buffer,
                              final Envelop message) {
-        buffer.appendBytes(Stream.to(message));
+        buffer.appendBytes(Ut.toBytes(message));
     }
 
     @Override
     public Envelop decodeFromWire(final int i,
                                   final Buffer buffer) {
-        return Stream.from(i, buffer);
+        return Ut.fromBuffer(i, buffer);
     }
 
-    /**
-     * Local usage
-     *
-     * @param message
-     * @return
-     */
     @Override
     public Envelop transform(final Envelop message) {
         return message;
@@ -35,7 +29,7 @@ public final class EnvelopCodec implements MessageCodec<Envelop, Envelop> {
 
     @Override
     public String name() {
-        return getClass().getName();
+        return this.getClass().getName();
     }
 
     @Override

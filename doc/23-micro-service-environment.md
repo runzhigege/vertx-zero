@@ -52,14 +52,14 @@ Once you have prepared the environment of Etcd3,  You can configure service node
 
 ### 2.1. Service Node
 
-In your file **vertx.yml**, you can extend node as following:
+In your up.god.file **vertx.yml**, you can extend node as following:
 
 ```yaml
 zero:
   lime: mongo, etcd3
 ```
 
-Here etcd3 is only the file suffix, not fixed, you can set any name for files. Because above lime is `etcd3`, then create new file `vertx-etcd3.yml` in your resources as following:
+Here etcd3 is only the up.god.file suffix, not fixed, you can set any name for files. Because above lime is `etcd3`, then create new up.god.file `vertx-etcd3.yml` in your resources as following:
 
 ```yaml
 etcd:
@@ -100,10 +100,10 @@ import io.vertx.up.VertxApplication;
 import io.vertx.up.annotations.Up;
 
 @Up
-public class Anchor {
+public class io.god.Anchor {
 
     public static void main(final String[] args) {
-        VertxApplication.run(Anchor.class);
+        VertxApplication.run(io.god.Anchor.class);
     }
 }
 ```
@@ -117,10 +117,10 @@ import io.vertx.up.annotations.Up;
 
 @Up
 @ApiGateway
-public class Anchor {
+public class io.god.Anchor {
 
     public static void main(final String[] args) {
-        VertxApplication.run(Anchor.class);
+        VertxApplication.run(io.god.Anchor.class);
     }
 }
 ```

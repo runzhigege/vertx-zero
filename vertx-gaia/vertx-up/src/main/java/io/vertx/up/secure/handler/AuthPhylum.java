@@ -9,25 +9,30 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.vertx.ext.web.handler.AuthHandler;
-import io.vertx.up.exception.*;
-import io.vertx.zero.eon.Strings;
+import io.vertx.up.eon.Strings;
+import io.vertx.up.exception.WebException;
+import io.vertx.up.exception.web._400BadRequestException;
+import io.vertx.up.exception.web._401UnauthorizedException;
+import io.vertx.up.exception.web._403ForbiddenException;
+import io.vertx.up.exception.web._500InternalServerException;
+import io.vertx.up.log.Annal;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@SuppressWarnings("all")
 public abstract class AuthPhylum implements AuthHandler {
 
     static final String AUTH_PROVIDER_CONTEXT_KEY = "io.vertx.ext.web.handler.AuthHandler.provider";
-
+    protected final String realm;
+    protected final Set<String> authorities = new HashSet<>();
     final WebException FORBIDDEN = new _403ForbiddenException(this.getClass());
     final WebException UNAUTHORIZED = new _401UnauthorizedException(this.getClass());
     final WebException BAD_REQUEST = new _400BadRequestException(this.getClass());
-
-    protected final String realm;
-    protected final AuthProvider authProvider;
-    protected final Set<String> authorities = new HashSet<>();
+    // Provider binding
+    protected transient AuthProvider authProvider;
 
     public AuthPhylum(final AuthProvider authProvider) {
         this(authProvider, "");
@@ -95,7 +100,12 @@ public abstract class AuthPhylum implements AuthHandler {
 
     @Override
     public void handle(final RoutingContext ctx) {
-
+        /*
+         * Because AuthPhylum component is Handler of vert.x, here it the first step
+         * Call handlePreflight to verify http specification
+         * Please refer: https://www.w3.org/TR/cors/#cross-origin-request-with-preflight-0
+         * Cross domain
+         */
         if (this.handlePreflight(ctx)) {
             return;
         }
@@ -126,9 +136,8 @@ public abstract class AuthPhylum implements AuthHandler {
                 this.authorizeUser(ctx, updatedUser);
                 return;
             }
-
             // proceed to authN
-            this.getAuthProvider(ctx).authenticate(res.result(), authN -> {
+            this.getAuthProvider(ctx).authenticate(AuthReady.prepare(res.result(), ctx), authN -> {
                 if (authN.succeeded()) {
                     final User authenticated = authN.result();
                     ctx.setUser(authenticated);
@@ -142,12 +151,13 @@ public abstract class AuthPhylum implements AuthHandler {
                     // proceed to AuthZ
                     this.authorizeUser(ctx, authenticated);
                 } else {
+                    // The first time to get
                     final String header = this.authenticateHeader(ctx);
                     if (header != null) {
-                        ctx.response()
-                                .putHeader("WWW-Authenticate", header);
+                        ctx.response().putHeader("WWW-Authenticate", header);
                     }
-                    ctx.fail(this.UNAUTHORIZED);
+                    // Zero extension for context error here
+                    ctx.fail(null == authN.cause() ? this.UNAUTHORIZED : authN.cause());
                 }
             });
         });
@@ -225,12 +235,17 @@ public abstract class AuthPhylum implements AuthHandler {
             final AuthProvider provider = ctx.get(AUTH_PROVIDER_CONTEXT_KEY);
             if (provider != null) {
                 // we're overruling the configured one for this request
+                this.authProvider = provider;
                 return provider;
             }
         } catch (final RuntimeException e) {
             // bad type, ignore and return default
+            e.printStackTrace();
         }
-
         return this.authProvider;
+    }
+
+    protected Annal getLogger() {
+        return Annal.get(this.getClass());
     }
 }

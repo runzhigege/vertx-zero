@@ -295,8 +295,8 @@ public enum HttpStatusCode {
     /**
      * int to HttpStatusCode
      *
-     * @param statusCode
-     * @return
+     * @param statusCode Input int value of http status code
+     * @return HttpStatusCode object
      */
     public static HttpStatusCode fromCode(final int statusCode) {
         final HttpStatusCode[] values = HttpStatusCode.values();
@@ -313,8 +313,8 @@ public enum HttpStatusCode {
     /**
      * String to HttpStatusCode
      *
-     * @param message
-     * @return
+     * @param message String literal value of http status code
+     * @return HttpStatusCode object
      */
     public static HttpStatusCode fromString(final String message) {
         final HttpStatusCode[] values = HttpStatusCode.values();
@@ -328,8 +328,12 @@ public enum HttpStatusCode {
         return code;
     }
 
-
-    /** **/
+    /**
+     * Default scope ( package ), The constructor of Http Status Code
+     *
+     * @param statusCode int status value
+     * @param message    string status description
+     */
     HttpStatusCode(final int statusCode, final String message) {
         this.statusCode = statusCode;
         this.message = message;
@@ -337,14 +341,18 @@ public enum HttpStatusCode {
 
 
     /**
-     * Return code
-     **/
+     * Return int value of http status code
+     *
+     * @return int value
+     */
     public int code() {
         return this.statusCode;
     }
 
     /**
-     * Return message
+     * Return message of http status code
+     *
+     * @return string description
      **/
     public String message() {
         return this.message;

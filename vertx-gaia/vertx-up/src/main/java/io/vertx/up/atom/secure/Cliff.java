@@ -2,7 +2,7 @@ package io.vertx.up.atom.secure;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.em.WallType;
-import io.vertx.up.tool.Compare;
+import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,6 +12,16 @@ import java.util.Objects;
  * Scanned ( Metadata ) for each @Wall.
  */
 public class Cliff implements Serializable, Comparable<Cliff> {
+    /**
+     * defined = false
+     * Standard Authorization
+     */
+    private final Phylum authorizer = new Phylum();
+    /**
+     * defined = true
+     * Custom Authorization
+     */
+    private final Ostium authorizor = new Ostium();
     /**
      * The wall path to be security limitation
      */
@@ -32,16 +42,6 @@ public class Cliff implements Serializable, Comparable<Cliff> {
      * Proxy instance
      */
     private Object proxy;
-    /**
-     * defined = false
-     * Standard Authorization
-     */
-    private final Phylum authorizer = new Phylum();
-    /**
-     * defined = true
-     * Custom Authorization
-     */
-    private final Ostium authorizor = new Ostium();
     /**
      * User-Defined authorization
      */
@@ -120,12 +120,12 @@ public class Cliff implements Serializable, Comparable<Cliff> {
 
     @Override
     public int compareTo(final Cliff target) {
-        return Compare.compareTo(this, target, (left, right) -> {
+        return Ut.compareTo(this, target, (left, right) -> {
             // 1. Compare Path
-            int result = Compare.compareTo(left.getPath(), right.getPath());
+            int result = Ut.compareTo(left.getPath(), right.getPath());
             if (0 == result) {
                 // 2. Compare Order
-                result = Compare.compareTo(left.getOrder(), right.getOrder());
+                result = Ut.compareTo(left.getOrder(), right.getOrder());
             }
             return result;
         });

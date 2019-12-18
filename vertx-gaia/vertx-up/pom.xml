@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>vertx-gaia</artifactId>
         <groupId>cn.vertxup</groupId>
-        <version>0.4.6-SNAPSHOT</version>
+        <version>0.5.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>vertx-up</artifactId>
-    <name>( Vertx Core ) Zero Up Web Container</name>
+    <name>( Vertx Core ) vertx-up: Zero Up Web Container</name>
     <dependencies>
         <!-- Service Discovery -->
         <dependency>
             <groupId>cn.vertxup</groupId>
             <artifactId>vertx-tp</artifactId>
+        </dependency>
+        <!-- Rxjava2 -->
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-rx-java2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-unit</artifactId>
         </dependency>
         <!-- EL -->
         <dependency>
