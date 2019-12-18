@@ -7,10 +7,9 @@ import java.util.Date;
 import java.util.Objects;
 
 class Value {
-    /*
-     * Json valid value here
-     */
-    static Object toJValue(final Object input) {
+
+
+    static Object toJValue(final Object input, final Class<?> type) {
         if (Objects.isNull(input)) {
             return null;
         } else {
@@ -20,7 +19,6 @@ class Value {
                 if ("null".equals(input)) {
                     return null;
                 } else {
-                    final Class<?> type = input.getClass();
                     if (LocalDateTime.class == type) {
                         return Ut.parse((LocalDateTime) input).toInstant();
                     } else if (LocalDate.class == type) {
