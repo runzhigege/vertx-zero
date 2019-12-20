@@ -11,6 +11,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -64,6 +65,11 @@ public class Ke {
 
     public static Future<JsonArray> combineAsync(final JsonArray data, final ConcurrentMap<String, String> headers) {
         return KeTool.combineAsync(data, headers);
+    }
+
+    public static Future<JsonArray> combineAsync(final JsonArray data, final ConcurrentMap<String, String> headers,
+                                                 final List<String> columns) {
+        return KeTool.combineAsync(data, headers, columns);
     }
 
     public static Function<JsonObject, Future<JsonObject>> fabricAsync(final String field) {

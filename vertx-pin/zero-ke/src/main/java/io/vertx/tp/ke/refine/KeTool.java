@@ -38,10 +38,8 @@ class KeTool {
         });
     }
 
-    static Future<JsonArray> combineAsync(final JsonArray data, final ConcurrentMap<String, String> headers) {
+    static Future<JsonArray> combineAsync(final JsonArray data, final ConcurrentMap<String, String> headers, final List<String> columns) {
         final JsonArray combined = new JsonArray();
-        /* Header sequence */
-        final List<String> columns = new ArrayList<>(headers.keySet());
         /* Header */
         final JsonArray header = new JsonArray();
         columns.forEach(column -> header.add(headers.get(column)));
@@ -56,6 +54,12 @@ class KeTool {
             combined.add(row);
         });
         return Ux.future(combined);
+    }
+
+    static Future<JsonArray> combineAsync(final JsonArray data, final ConcurrentMap<String, String> headers) {
+        /* Header sequence */
+        final List<String> columns = new ArrayList<>(headers.keySet());
+        return combineAsync(data, headers, columns);
     }
 
     static <T> void consume(final Supplier<T> supplier, final Consumer<T> consumer) {
