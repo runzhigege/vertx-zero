@@ -214,9 +214,18 @@ public class ExcelClientImpl implements ExcelClient {
         /* 2. Sheet created */
         final XSSFSheet sheet = workbook.createSheet(identifier);
         /* 3. Row created */
-        Ut.itJArray(data, JsonArray.class, (rowData, index) ->
-                ExFn.generateData(sheet, index, rowData));
-        /* 4. OutputStream */
+        final List<Integer> sizeList = new ArrayList<>();
+        Ut.itJArray(data, JsonArray.class, (rowData, index) -> {
+            ExFn.generateData(sheet, index, rowData);
+            sizeList.add(rowData.size());
+        });
+        /* 4. Adjust column width */
+        final IntSummaryStatistics statistics = sizeList.stream().mapToInt(Integer::intValue).summaryStatistics();
+        final int max = statistics.getMax();
+        for (int idx = 0; idx < max; idx++) {
+            sheet.autoSizeColumn(idx);
+        }
+        /* 5. OutputStream */
         Fn.safeJvm(() -> {
             // TODO: Modified in future
             final String filename = identifier + "." + UUID.randomUUID() + ".xlsx";
