@@ -33,6 +33,7 @@ public class DictSource implements Serializable {
      * Another source of ASSIST here
      */
     private transient String key;
+
     private transient Class<?> component;
 
     DictSource(final JsonObject definition) {
