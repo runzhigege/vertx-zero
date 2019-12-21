@@ -18,6 +18,8 @@ import io.vertx.up.atom.query.Criteria;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.commune.Record;
+import io.vertx.up.commune.config.DictEpsilon;
+import io.vertx.up.commune.config.DualItem;
 import io.vertx.up.eon.Constants;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.exception.WebException;
@@ -486,6 +488,36 @@ public final class Ux {
 
     public static void initComponent(final JsonObject init) {
         Atomic.initComponent(init);
+    }
+
+    // -> Dict for caculation
+
+    public static DualItem dictDual(final JsonArray dataArray, final DictEpsilon epsilon) {
+        return Dict.toDual(dataArray, epsilon);
+    }
+
+    public static ConcurrentMap<String, DualItem> dictDual(final ConcurrentMap<String, DictEpsilon> source, final ConcurrentMap<String, JsonArray> dictMap) {
+        return Dict.mapDual(source, dictMap);
+    }
+
+    public static ConcurrentMap<String, DictEpsilon> dictEpsilon(final JsonObject epsilon) {
+        return Dict.mapEpsilon(epsilon);
+    }
+
+    public static Future<JsonArray> dictTo(final JsonArray data, final ConcurrentMap<String, DualItem> mapping) {
+        return Dict.runTo(data, mapping);
+    }
+
+    public static Future<JsonArray> dictTo(final JsonArray data, final ConcurrentMap<String, DictEpsilon> source, final ConcurrentMap<String, JsonArray> dictMap) {
+        return Dict.runTo(data, Dict.mapDual(source, dictMap));
+    }
+
+    public static Future<JsonArray> dictFrom(final JsonArray data, final ConcurrentMap<String, DualItem> mapping) {
+        return Dict.runFrom(data, mapping);
+    }
+
+    public static Future<JsonArray> dictFrom(final JsonArray data, final ConcurrentMap<String, DictEpsilon> source, final ConcurrentMap<String, JsonArray> dictMap) {
+        return Dict.runFrom(data, Dict.mapDual(source, dictMap));
     }
 
     // -> Jooq

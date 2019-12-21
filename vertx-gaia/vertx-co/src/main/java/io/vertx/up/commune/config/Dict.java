@@ -77,12 +77,16 @@ public class Dict implements Serializable {
         return this.component;
     }
 
+    public boolean validSource() {
+        return !this.source.isEmpty();
+    }
+
     public boolean valid() {
         /*
          * When current source is not empty,
          * The `dictComponent` is required here.
          */
-        return !this.source.isEmpty() && Objects.nonNull(this.component);
+        return this.validSource() && Objects.nonNull(this.component);
     }
 
     public List<DictSource> getSource() {
