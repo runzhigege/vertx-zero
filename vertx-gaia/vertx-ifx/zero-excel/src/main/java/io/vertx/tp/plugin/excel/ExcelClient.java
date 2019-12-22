@@ -18,6 +18,7 @@ import java.util.Set;
  * ExcelClient for office excel data loading
  * Apache Poi
  */
+@SuppressWarnings("all")
 public interface ExcelClient extends TpClient<ExcelClient> {
 
     String MAPPING = "mapping";
@@ -54,10 +55,10 @@ public interface ExcelClient extends TpClient<ExcelClient> {
     Future<Buffer> exportTable(String identifier, JsonArray data);
 
     @Fluent
-    <T> ExcelClient importTable(String tableOnly, final String filename, Handler<AsyncResult<Set<T>>> handler);
+    <T> ExcelClient importTable(String tableOnly, String filename, Handler<AsyncResult<Set<T>>> handler);
 
     @Fluent
-    <T> ExcelClient importTable(String tableOnly, final InputStream in, Handler<AsyncResult<Set<T>>> handler);
+    <T> ExcelClient importTable(String tableOnly, InputStream in, Handler<AsyncResult<Set<T>>> handler);
 
     /**
      * Two format supported here: 2013 / 2017
@@ -69,4 +70,9 @@ public interface ExcelClient extends TpClient<ExcelClient> {
     ExcelClient ingest(InputStream in, boolean isXlsx, Handler<AsyncResult<Set<ExTable>>> handler);
 
     Set<ExTable> ingest(InputStream in, boolean isXlsx);
+
+    /**
+     * Save entity ( table -> data )
+     */
+    <T> T saveEntity(final JsonObject data, final ExTable table);
 }

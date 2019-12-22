@@ -135,7 +135,8 @@ public class ExcelClientImpl implements ExcelClient {
         }
     }
 
-    private <T> T saveEntity(final JsonObject data, final ExTable table) {
+    @Override
+    public <T> T saveEntity(final JsonObject data, final ExTable table) {
         T reference = null;
         if (Objects.nonNull(table.getPojo()) && Objects.nonNull(table.getDao())) {
             /*
