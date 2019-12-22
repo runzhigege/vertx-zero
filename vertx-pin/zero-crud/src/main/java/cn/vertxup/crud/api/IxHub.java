@@ -38,6 +38,8 @@ public class IxHub {
                 .compose(result -> Ix.isExist(result) ?
                         /* Unique */
                         Ix.unique(result)
+                                /* Update */
+                                .compose(input -> IxActor.update().bind(request).procAsync(input, config))
                                 /* Deserialize */
                                 .compose(json -> Ix.entityAsync(json, config))
                                 /* 201, Envelop */

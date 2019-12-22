@@ -100,8 +100,8 @@ class Dict {
         return Ux.future(normalized);
     }
 
-    private static JsonObject translateTo(final JsonObject data,
-                                          final ConcurrentMap<String, DualItem> mapping) {
+    static JsonObject translateTo(final JsonObject data,
+                                  final ConcurrentMap<String, DualItem> mapping) {
         if (Ut.isNil(data)) {
             return new JsonObject();
         } else {
@@ -123,8 +123,8 @@ class Dict {
         }
     }
 
-    private static JsonObject translateFrom(final JsonObject data,
-                                            final ConcurrentMap<String, DualItem> mapping) {
+    static JsonObject translateFrom(final JsonObject data,
+                                    final ConcurrentMap<String, DualItem> mapping) {
         if (Ut.isNil(data)) {
             return new JsonObject();
         } else {
