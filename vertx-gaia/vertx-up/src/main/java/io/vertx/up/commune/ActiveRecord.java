@@ -81,7 +81,7 @@ public abstract class ActiveRecord implements Record {
     @Override
     public <V> Record set(final String field, final V value) {
         if (this.declaredFields().contains(field)) {
-            this.data.put(field, value);
+            this.data.put(field, Ut.toJValue(value));
         } else {
             this.getLogger().warn("[ ZERO ] The field `{0}` has not been defined in model: `{1}`",
                     field, this.identifier());

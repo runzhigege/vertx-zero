@@ -1,17 +1,19 @@
 package io.vertx.tp.crud.atom;
 
-import com.fasterxml.jackson.databind.ClassDeserializer;
-import com.fasterxml.jackson.databind.ClassSerializer;
-import com.fasterxml.jackson.databind.JsonObjectDeserializer;
-import com.fasterxml.jackson.databind.JsonObjectSerializer;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.cv.em.DsMode;
+import io.vertx.up.commune.config.Dict;
+import io.vertx.up.commune.config.DictEpsilon;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentMap;
 
 public class IxModule implements Serializable {
 
@@ -22,7 +24,16 @@ public class IxModule implements Serializable {
     private String modeKey;     // mode = EXTENSION
     private IxField field;
     private IxColumn column;
-    private IxJoin connect;
+
+    private IxJoin connect;     // connect for 1 join 1
+
+    @JsonSerialize(using = JsonObjectSerializer.class)
+    @JsonDeserialize(using = JsonObjectDeserializer.class)
+    private JsonObject epsilon; // dict / consume
+
+    @JsonSerialize(using = JsonArraySerializer.class)
+    @JsonDeserialize(using = JsonArrayDeserializer.class)
+    private JsonArray source;   // dict / source
 
     @JsonSerialize(using = ClassSerializer.class)
     @JsonDeserialize(using = ClassDeserializer.class)
@@ -108,6 +119,23 @@ public class IxModule implements Serializable {
         this.connect = connect;
     }
 
+    public ConcurrentMap<String, DictEpsilon> getEpsilon() {
+        return Ux.dictEpsilon(Objects.isNull(this.epsilon) ? new JsonObject() : this.epsilon);
+    }
+
+    public void setEpsilon(final JsonObject epsilon) {
+        this.epsilon = epsilon;
+    }
+
+    public Dict getSource() {
+        final JsonArray source = Objects.isNull(this.source) ? new JsonArray() : this.source;
+        return new Dict(source);
+    }
+
+    public void setSource(final JsonArray source) {
+        this.source = source;
+    }
+
     public DsMode getMode() {
         if (Objects.isNull(this.mode)) {
             return DsMode.PRIMARY;
@@ -138,14 +166,16 @@ public class IxModule implements Serializable {
                 "name='" + this.name + '\'' +
                 ", table='" + this.table + '\'' +
                 ", pojo='" + this.pojo + '\'' +
+                ", mode='" + this.mode + '\'' +
+                ", modeKey='" + this.modeKey + '\'' +
                 ", field=" + this.field +
                 ", column=" + this.column +
+                ", connect=" + this.connect +
+                ", epsilon=" + this.epsilon +
+                ", source=" + this.source +
                 ", pojoCls=" + this.pojoCls +
                 ", daoCls=" + this.daoCls +
                 ", header=" + this.header +
-                ", connect=" + this.connect +
-                ", mode=" + this.mode +
-                ", modeKey=" + this.modeKey +
                 '}';
     }
 }
