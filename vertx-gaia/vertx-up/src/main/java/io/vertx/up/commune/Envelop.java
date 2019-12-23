@@ -23,7 +23,6 @@ import java.io.Serializable;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.function.Consumer;
 
 public class Envelop implements Serializable {
@@ -101,7 +100,12 @@ public class Envelop implements Serializable {
 
     // default error 500 ( JVM Error )
     public static Envelop failure(final Throwable ex) {
-        return new Envelop(new _500InternalServerException(Envelop.class, ex.getMessage()));
+        if (ex instanceof WebException) {
+            // Throwable converted to WebException
+            return failure((WebException) ex);
+        } else {
+            return new Envelop(new _500InternalServerException(Envelop.class, ex.getMessage()));
+        }
     }
 
     // other error with WebException
@@ -265,7 +269,7 @@ public class Envelop implements Serializable {
                 /* Up case is OK */
                 .filter(field -> field.startsWith(ID.Header.PREFIX)
                         /* Lower case is also Ok */
-                    || field.startsWith(ID.Header.PREFIX.toLowerCase(Locale.getDefault())))
+                        || field.startsWith(ID.Header.PREFIX.toLowerCase(Locale.getDefault())))
                 /*
                  * Data for header
                  * X-App-Id -> appId
@@ -279,7 +283,7 @@ public class Envelop implements Serializable {
                     final String found = ID.Header.PARAM_MAP.keySet()
                             .stream().filter(field::equalsIgnoreCase)
                             .findFirst().map(ID.Header.PARAM_MAP::get).orElse(null);
-                    if(Ut.notNil(found)){
+                    if (Ut.notNil(found)) {
                         headerData.put(found, this.assist.headers().get(field));
                     }
                 });

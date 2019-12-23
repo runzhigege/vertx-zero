@@ -9,8 +9,8 @@ import io.vertx.tp.jet.monitor.JtMonitor;
 import io.vertx.tp.jet.refine.Jt;
 import io.vertx.tp.optic.jet.JtConsumer;
 import io.vertx.up.commune.Envelop;
-import io.vertx.up.util.Ut;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.util.Ut;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -68,7 +68,11 @@ public class JtMinos extends AbstractVerticle {
                          * Replying message from service
                          *
                          */
-                        handler.reply(replyHandler.result());
+                        final Envelop replied = replyHandler.result();
+                        if (Objects.nonNull(replied.error())) {
+                            replied.error().printStackTrace();
+                        }
+                        handler.reply(replied);
                     } else {
                         /*
                          * 「Callback Exception」
