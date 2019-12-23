@@ -7,6 +7,7 @@ package cn.vertxup.jet.domain.tables.pojos;
 import cn.vertxup.jet.domain.tables.interfaces.IIJob;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.annotation.Generated;
 
@@ -24,7 +25,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IJob implements IIJob {
 
-    private static final long serialVersionUID = 1381959657;
+    private static final long serialVersionUID = 1478777892;
 
     private String        key;
     private String        namespace;
@@ -33,7 +34,7 @@ public class IJob implements IIJob {
     private String        type;
     private String        comment;
     private String        additional;
-    private LocalDateTime runAt;
+    private LocalTime     runAt;
     private Long          duration;
     private String        proxy;
     private Integer       threshold;
@@ -88,7 +89,7 @@ public class IJob implements IIJob {
         String        type,
         String        comment,
         String        additional,
-        LocalDateTime runAt,
+        LocalTime     runAt,
         Long          duration,
         String        proxy,
         Integer       threshold,
@@ -210,12 +211,12 @@ public class IJob implements IIJob {
     }
 
     @Override
-    public LocalDateTime getRunAt() {
+    public LocalTime getRunAt() {
         return this.runAt;
     }
 
     @Override
-    public IJob setRunAt(LocalDateTime runAt) {
+    public IJob setRunAt(LocalTime runAt) {
         this.runAt = runAt;
         return this;
     }
