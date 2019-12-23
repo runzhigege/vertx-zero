@@ -48,6 +48,10 @@ public class ActOut implements Serializable {
         return Ux.future(new ActOut(buffer, HttpStatusCode.OK));
     }
 
+    public static Future<ActOut> future(final Throwable ex) {
+        return Ux.future(new ActOut(ex));
+    }
+
     /*
      * JsonObject result
      */
