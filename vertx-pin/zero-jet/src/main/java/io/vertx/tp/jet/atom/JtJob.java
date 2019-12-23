@@ -10,6 +10,9 @@ import io.vertx.up.eon.Values;
 import io.vertx.up.eon.em.JobType;
 import io.vertx.up.util.Ut;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -96,7 +99,20 @@ public class JtJob extends JtCommercial {
          * Instant / duration
          */
         if (Objects.nonNull(this.job.getRunAt())) {
-            mission.setInstant(Ut.parse(this.job.getRunAt()).toInstant());
+            final LocalTime runAt = this.job.getRunAt();
+            final LocalTime runNow = LocalTime.now();
+            /*
+             * Whether adjust 1 day plus
+             */
+            LocalDate today = LocalDate.now();
+            if (runAt.isBefore(runNow)) {
+                today = today.plusDays(1);
+            }
+            /*
+             * Final LocalTime calculation
+             */
+            final LocalDateTime result = LocalDateTime.of(today, runAt);
+            mission.setInstant(Ut.parse(result).toInstant());
         }
         /*
          * Proxy & @On @Off without @Job method

@@ -8,6 +8,7 @@ import cn.vertxup.jet.domain.tables.IJob;
 import cn.vertxup.jet.domain.tables.interfaces.IIJob;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.annotation.Generated;
 
@@ -28,7 +29,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements IIJob {
 
-    private static final long serialVersionUID = 1409473251;
+    private static final long serialVersionUID = -1224048724;
 
     /**
      * Setter for <code>DB_ETERNAL.I_JOB.KEY</code>. 「key」- 任务ID
@@ -153,7 +154,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements IIJob
      * Setter for <code>DB_ETERNAL.I_JOB.RUN_AT</code>. 「runAt」- 定时任务中的JOB时间
      */
     @Override
-    public IJobRecord setRunAt(LocalDateTime value) {
+    public IJobRecord setRunAt(LocalTime value) {
         set(7, value);
         return this;
     }
@@ -162,8 +163,8 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements IIJob
      * Getter for <code>DB_ETERNAL.I_JOB.RUN_AT</code>. 「runAt」- 定时任务中的JOB时间
      */
     @Override
-    public LocalDateTime getRunAt() {
-        return (LocalDateTime) get(7);
+    public LocalTime getRunAt() {
+        return (LocalTime) get(7);
     }
 
     /**
@@ -508,7 +509,7 @@ public class IJobRecord extends UpdatableRecordImpl<IJobRecord> implements IIJob
     /**
      * Create a detached, initialised IJobRecord
      */
-    public IJobRecord(String key, String namespace, String name, String code, String type, String comment, String additional, LocalDateTime runAt, Long duration, String proxy, Integer threshold, String incomeComponent, String incomeAddress, String outcomeComponent, String outcomeAddress, String serviceId, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public IJobRecord(String key, String namespace, String name, String code, String type, String comment, String additional, LocalTime runAt, Long duration, String proxy, Integer threshold, String incomeComponent, String incomeAddress, String outcomeComponent, String outcomeAddress, String serviceId, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(IJob.I_JOB);
 
         set(0, key);

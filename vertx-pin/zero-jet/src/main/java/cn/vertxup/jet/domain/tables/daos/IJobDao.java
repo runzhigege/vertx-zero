@@ -10,6 +10,7 @@ import cn.vertxup.jet.domain.tables.records.IJobRecord;
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.annotation.Generated;
@@ -114,7 +115,7 @@ public class IJobDao extends DAOImpl<IJobRecord, cn.vertxup.jet.domain.tables.po
     /**
      * Fetch records that have <code>RUN_AT IN (values)</code>
      */
-    public List<cn.vertxup.jet.domain.tables.pojos.IJob> fetchByRunAt(LocalDateTime... values) {
+    public List<cn.vertxup.jet.domain.tables.pojos.IJob> fetchByRunAt(LocalTime... values) {
         return fetch(IJob.I_JOB.RUN_AT, values);
     }
 
@@ -289,7 +290,7 @@ public class IJobDao extends DAOImpl<IJobRecord, cn.vertxup.jet.domain.tables.po
     /**
      * Fetch records that have <code>RUN_AT IN (values)</code> asynchronously
      */
-    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IJob>> fetchByRunAtAsync(List<LocalDateTime> values) {
+    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IJob>> fetchByRunAtAsync(List<LocalTime> values) {
         return fetchAsync(IJob.I_JOB.RUN_AT,values);
     }
 
