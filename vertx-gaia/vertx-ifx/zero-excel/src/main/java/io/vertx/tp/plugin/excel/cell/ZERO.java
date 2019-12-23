@@ -27,7 +27,7 @@ interface Pool {
         {
             this.put(CellType.STRING, Cell::getStringCellValue);
             this.put(CellType.BOOLEAN, Cell::getBooleanCellValue);
-            this.put(CellType.NUMERIC, Cell::getNumericCellValue);
+            this.put(CellType.NUMERIC, DateValue::toNumeric);
         }
     };
 }
