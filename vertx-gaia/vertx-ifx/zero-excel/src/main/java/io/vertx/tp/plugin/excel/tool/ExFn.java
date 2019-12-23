@@ -57,7 +57,8 @@ public class ExFn {
                 if (null == predicate) {
                     consumer.accept(cell, idx);
                 } else {
-                    if (predicate.test(cell)) {
+                    final boolean tested = predicate.test(cell);
+                    if (tested) {
                         // Predicate existing
                         consumer.accept(cell, idx);
                     }

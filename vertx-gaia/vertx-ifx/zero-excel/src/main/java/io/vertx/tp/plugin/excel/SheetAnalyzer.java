@@ -12,6 +12,7 @@ import io.vertx.tp.plugin.excel.tool.ExFn;
 import io.vertx.up.atom.Refer;
 import io.vertx.up.eon.Values;
 import io.vertx.up.log.Annal;
+import io.vertx.up.util.Ut;
 import org.apache.poi.ss.usermodel.*;
 
 import java.io.Serializable;
@@ -48,18 +49,20 @@ public class SheetAnalyzer implements Serializable {
         /* Row scanning for {TABLE} */
         final List<Cell> tableCell = new ArrayList<>();
         ExFn.itSheet(this.sheet, bound, (row, index) -> {
-
             final ExBound colBound = new ColBound(row);
             ExFn.itRow(row, colBound,
                     /* {Table} Cell */
                     (cell, colIndex) -> tableCell.add(cell),
                     /* Predicate Here */
                     cell -> CellType.STRING == cell.getCellType()
-                            && ExKey.EXPR_TABLE.endsWith(cell.getStringCellValue()));
+                            /* Do not check blank / empty cell here */
+                            && Ut.notNil(cell.getStringCellValue())
+                            /* Fix issue of {TABLE} here for BLANK CELL */
+                            && cell.getStringCellValue().equals(ExKey.EXPR_TABLE));
         });
         /* analyzedBounds */
         if (!tableCell.isEmpty()) {
-            LOGGER.info("[ Excel ] Scanned sheet: {0}, tables = {1}",
+            LOGGER.info("[ Excel ] Scanned sheet: {0}, tableCell = {1}",
                     this.sheet.getSheetName(), String.valueOf(tableCell.size()));
             /* Range scaned */
             final ConcurrentMap<Integer, Integer> range = this.getRange(tableCell);
@@ -149,9 +152,12 @@ public class SheetAnalyzer implements Serializable {
         ExFn.onCell(row, cell.getColumnIndex() + 2,
                 found -> table.setDescription(found.getStringCellValue()));
         /* Calculation */
-        final ExConnect connect = Pool.CONNECTS.get(table.getName());
-        if (Objects.nonNull(connect)) {
-            table.setConnect(connect);
+        if (Objects.nonNull(table.getName()) &&
+                Pool.CONNECTS.containsKey(table.getName())) {
+            final ExConnect connect = Pool.CONNECTS.get(table.getName());
+            if (Objects.nonNull(connect)) {
+                table.setConnect(connect);
+            }
         }
         return table;
     }

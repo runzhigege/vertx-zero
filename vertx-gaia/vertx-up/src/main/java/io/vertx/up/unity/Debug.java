@@ -2,6 +2,7 @@ package io.vertx.up.unity;
 
 import io.vertx.core.Future;
 import io.vertx.up.commune.Envelop;
+import io.vertx.up.exception.WebException;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.util.Ut;
 
@@ -48,7 +49,11 @@ class Debug {
         return error -> {
             if (Objects.nonNull(error)) {
                 error.printStackTrace();
-                return Envelop.failure(error);
+                if (error instanceof WebException) {
+                    return Envelop.failure(((WebException) error));
+                } else {
+                    return Envelop.failure(error);
+                }
             } else {
                 return Envelop.ok();
             }

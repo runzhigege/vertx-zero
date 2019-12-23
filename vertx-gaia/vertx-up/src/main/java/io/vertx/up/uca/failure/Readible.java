@@ -6,6 +6,7 @@ import io.vertx.up.util.Ut;
 /**
  * Fill the field "readible" for input exception
  */
+@SuppressWarnings("all")
 public interface Readible {
     /**
      * Get code readible
