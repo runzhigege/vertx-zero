@@ -6,6 +6,7 @@ package cn.vertxup.jet.domain.tables.interfaces;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.annotation.Generated;
 
@@ -96,12 +97,12 @@ public interface IIJob extends Serializable {
     /**
      * Setter for <code>DB_ETERNAL.I_JOB.RUN_AT</code>. 「runAt」- 定时任务中的JOB时间
      */
-    public IIJob setRunAt(LocalDateTime value);
+    public IIJob setRunAt(LocalTime value);
 
     /**
      * Getter for <code>DB_ETERNAL.I_JOB.RUN_AT</code>. 「runAt」- 定时任务中的JOB时间
      */
-    public LocalDateTime getRunAt();
+    public LocalTime getRunAt();
 
     /**
      * Setter for <code>DB_ETERNAL.I_JOB.DURATION</code>. 「duration」- JOB的间隔时间，（秒为单位）
@@ -285,7 +286,7 @@ public interface IIJob extends Serializable {
         setType(json.getString("TYPE"));
         setComment(json.getString("COMMENT"));
         setAdditional(json.getString("ADDITIONAL"));
-        // Omitting unrecognized type java.time.LocalDateTime for column RUN_AT!
+        // Omitting unrecognized type java.time.LocalTime for column RUN_AT!
         setDuration(json.getLong("DURATION"));
         setProxy(json.getString("PROXY"));
         setThreshold(json.getInteger("THRESHOLD"));
@@ -315,7 +316,7 @@ public interface IIJob extends Serializable {
         json.put("TYPE",getType());
         json.put("COMMENT",getComment());
         json.put("ADDITIONAL",getAdditional());
-        // Omitting unrecognized type java.time.LocalDateTime for column RUN_AT!
+        // Omitting unrecognized type java.time.LocalTime for column RUN_AT!
         json.put("DURATION",getDuration());
         json.put("PROXY",getProxy());
         json.put("THRESHOLD",getThreshold());

@@ -14,6 +14,7 @@ import org.jooq.impl.TableImpl;
 
 import javax.annotation.Generated;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class IJob extends TableImpl<IJobRecord> {
      * The reference instance of <code>DB_ETERNAL.I_JOB</code>
      */
     public static final IJob I_JOB = new IJob();
-    private static final long serialVersionUID = 523078497;
+    private static final long serialVersionUID = 1435080500;
     /**
      * The column <code>DB_ETERNAL.I_JOB.KEY</code>. 「key」- 任务ID
      */
@@ -67,7 +68,7 @@ public class IJob extends TableImpl<IJobRecord> {
     /**
      * The column <code>DB_ETERNAL.I_JOB.RUN_AT</code>. 「runAt」- 定时任务中的JOB时间
      */
-    public final TableField<IJobRecord, LocalDateTime> RUN_AT = createField("RUN_AT", org.jooq.impl.SQLDataType.LOCALDATETIME, this, "「runAt」- 定时任务中的JOB时间");
+    public final TableField<IJobRecord, LocalTime> RUN_AT = createField("RUN_AT", org.jooq.impl.SQLDataType.LOCALTIME, this, "「runAt」- 定时任务中的JOB时间");
     /**
      * The column <code>DB_ETERNAL.I_JOB.DURATION</code>. 「duration」- JOB的间隔时间，（秒为单位）
      */
