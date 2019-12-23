@@ -1,5 +1,6 @@
 package io.vertx.up.util;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -25,6 +26,8 @@ class Value {
                         return Ut.parse((LocalDate) input).toInstant();
                     } else if (LocalTime.class == type) {
                         return Ut.parse((LocalTime) input).toInstant();
+                    } else if (BigDecimal.class == type) {
+                        return ((BigDecimal) input).doubleValue();
                     } else {
                         return input;
                     }
@@ -40,7 +43,11 @@ class Value {
             if (Objects.isNull(type)) {
                 return value.toString();
             } else {
-                Object normalized = null;
+                /*
+                 * Default value should be value here
+                 * Fix BigDecimal issue
+                 */
+                Object normalized = value;
                 if (LocalTime.class == type) {
                     final Date date = Ut.parseFull(value.toString());
                     normalized = Ut.toTime(date);
