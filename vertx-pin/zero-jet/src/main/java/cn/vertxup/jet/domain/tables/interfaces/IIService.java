@@ -174,6 +174,16 @@ public interface IIService extends Serializable {
     public String getDictComponent();
 
     /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.DICT_EPSILON</code>. 「dictEpsilon」- 字典的消费配置
+     */
+    public IIService setDictEpsilon(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.DICT_EPSILON</code>. 「dictEpsilon」- 字典的消费配置
+     */
+    public String getDictEpsilon();
+
+    /**
      * Setter for <code>DB_ETERNAL.I_SERVICE.MAPPING_CONFIG</code>. 「mappingConfig」- 映射专用配置
      */
     public IIService setMappingConfig(String value);
@@ -363,6 +373,7 @@ public interface IIService extends Serializable {
         setConfigDatabase(json.getString("CONFIG_DATABASE"));
         setDictConfig(json.getString("DICT_CONFIG"));
         setDictComponent(json.getString("DICT_COMPONENT"));
+        setDictEpsilon(json.getString("DICT_EPSILON"));
         setMappingConfig(json.getString("MAPPING_CONFIG"));
         setMappingMode(json.getString("MAPPING_MODE"));
         setMappingComponent(json.getString("MAPPING_COMPONENT"));
@@ -400,6 +411,7 @@ public interface IIService extends Serializable {
         json.put("CONFIG_DATABASE",getConfigDatabase());
         json.put("DICT_CONFIG",getDictConfig());
         json.put("DICT_COMPONENT",getDictComponent());
+        json.put("DICT_EPSILON",getDictEpsilon());
         json.put("MAPPING_CONFIG",getMappingConfig());
         json.put("MAPPING_MODE",getMappingMode());
         json.put("MAPPING_COMPONENT",getMappingComponent());

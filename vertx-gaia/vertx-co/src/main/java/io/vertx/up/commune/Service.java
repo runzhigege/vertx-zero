@@ -27,6 +27,15 @@ public interface Service {
     JsonObject options();
 
     /*
+     * `dictConfig`
+     * `dictComponent` of I_SERVICE
+     * `dictEpsilon` of I_SERVICE
+     * Here `dictComponent` is required if configured.
+     * Dictionary configuration for current Job / Component
+     */
+    Dict dict();
+
+    /*
      * `identifier`
      * `identifierComponent`
      * It's for Job / Component here
@@ -35,16 +44,6 @@ public interface Service {
      * used `identifier` instead of static
      */
     Identity identity();
-}
-
-interface Business {
-    /*
-     * `dictConfig`
-     * `dictComponent` of I_SERVICE
-     * Here `dictComponent` is required if configured.
-     * Dictionary configuration for current Job / Component
-     */
-    Dict dict();
 
     /*
      * `mappingConfig`

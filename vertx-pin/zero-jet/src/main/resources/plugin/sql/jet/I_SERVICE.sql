@@ -63,6 +63,7 @@ CREATE TABLE IF NOT EXISTS I_SERVICE
      */
     `DICT_CONFIG`          MEDIUMTEXT COMMENT '「dictConfig」- 字典的配置信息',
     `DICT_COMPONENT`       VARCHAR(255) COMMENT '「dictComponent」- 字典配置中的插件',
+    `DICT_EPSILON`         MEDIUMTEXT COMMENT '「dictEpsilon」- 字典的消费配置',
     /*
      * 映射专用配置信息
      * 映射模式有三种：

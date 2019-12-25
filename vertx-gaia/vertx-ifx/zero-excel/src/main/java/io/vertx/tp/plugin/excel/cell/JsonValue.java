@@ -1,5 +1,6 @@
 package io.vertx.tp.plugin.excel.cell;
 
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.util.Ut;
@@ -16,9 +17,15 @@ public class JsonValue implements ExValue {
         if (2 == pathArr.length) {
             final String path = pathArr[1];
             if (Ut.notNil(path)) {
-                final JsonObject content = Ut.ioJObject(path.trim());
+                final String content = Ut.ioString(path.trim());
                 if (Ut.notNil(content)) {
-                    literal = content.encodePrettily();
+                    if (Ut.isJArray(content)) {
+                        final JsonArray normalized = Ut.toJArray(content);
+                        literal = normalized.encodePrettily();
+                    } else if (Ut.isJObject(content)) {
+                        final JsonObject normalized = Ut.toJObject(content);
+                        literal = normalized.encodePrettily();
+                    }
                 }
             }
         }
