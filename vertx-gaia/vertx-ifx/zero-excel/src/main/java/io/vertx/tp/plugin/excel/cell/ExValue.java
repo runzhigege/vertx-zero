@@ -32,7 +32,8 @@ public interface ExValue {
             /*
              * Prefix match
              */
-            if (value.toString().startsWith("JSON")) {
+            final String literal = value.toString();
+            if (literal.startsWith("JSON")) {
                 reference = Pool.PREFIX_MAP.get("JSON");
             }
             if (Objects.isNull(reference)) {
