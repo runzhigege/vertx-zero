@@ -1,5 +1,6 @@
 package io.vertx.up.commune.config;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonObjectDeserializer;
 import com.fasterxml.jackson.databind.JsonObjectSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -65,6 +66,16 @@ public class Integration implements Json, Serializable {
     @JsonSerialize(using = JsonObjectSerializer.class)
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private transient JsonObject options;
+    @JsonIgnore
+    private transient ConcurrentMap<String, DictEpsilon> epsilon = new ConcurrentHashMap<>();
+
+    public ConcurrentMap<String, DictEpsilon> getEpsilon() {
+        return this.epsilon;
+    }
+
+    public void setEpsilon(final ConcurrentMap<String, DictEpsilon> epsilon) {
+        this.epsilon = epsilon;
+    }
 
     public ConcurrentMap<String, IntegrationRequest> getApis() {
         return this.apis;
