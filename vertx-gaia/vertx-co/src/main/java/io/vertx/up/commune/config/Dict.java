@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /*
  * 1) Tabular related data
@@ -33,6 +35,7 @@ public class Dict implements Serializable {
      * Source definition here for directory configuration
      */
     private final transient List<DictSource> source = new ArrayList<>();
+    private final transient ConcurrentMap<String, DictEpsilon> epsilon = new ConcurrentHashMap<>();
     private transient Class<?> component;
 
     /*
@@ -65,16 +68,32 @@ public class Dict implements Serializable {
             /*
              * When component not found,
              * clear source data cache to empty list.
+             * It's force action here to clear source instead of others
+             * 1) If you don't bind Class<?> component, the source will be cleared
+             * 2) If you want to bind Class<?> component, it means that all the inited dict
+             * will be impact
              */
             this.source.clear();
+            this.epsilon.clear();
         } else {
             this.component = component;
         }
         return this;
     }
 
+    public Dict bind(final ConcurrentMap<String, DictEpsilon> epsilon) {
+        if (Objects.nonNull(epsilon)) {
+            this.epsilon.putAll(epsilon);
+        }
+        return this;
+    }
+
     public Class<?> getComponent() {
         return this.component;
+    }
+
+    public ConcurrentMap<String, DictEpsilon> getEpsilon() {
+        return this.epsilon;
     }
 
     public boolean validSource() {

@@ -42,9 +42,11 @@ public class ActIn implements Serializable {
      * data mapping here for configuration and future usage.
      */
     private final ConcurrentMap<String, JsonArray> dict = new ConcurrentHashMap<>();
+
     private transient ActJObject json;
     private transient ActJArray jarray;
     private transient Record definition;
+
     private transient DualMapping mapping;
 
     public ActIn(final Envelop envelop) {

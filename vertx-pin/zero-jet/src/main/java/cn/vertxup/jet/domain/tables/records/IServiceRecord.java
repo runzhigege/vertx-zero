@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implements IIService {
 
-    private static final long serialVersionUID = -2146059441;
+    private static final long serialVersionUID = 306715641;
 
     /**
      * Setter for <code>DB_ETERNAL.I_SERVICE.KEY</code>. 「key」- 服务ID
@@ -286,11 +286,28 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
     }
 
     /**
+     * Setter for <code>DB_ETERNAL.I_SERVICE.DICT_EPSILON</code>. 「dictEpsilon」- 字典的消费配置
+     */
+    @Override
+    public IServiceRecord setDictEpsilon(String value) {
+        set(15, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.I_SERVICE.DICT_EPSILON</code>. 「dictEpsilon」- 字典的消费配置
+     */
+    @Override
+    public String getDictEpsilon() {
+        return (String) get(15);
+    }
+
+    /**
      * Setter for <code>DB_ETERNAL.I_SERVICE.MAPPING_CONFIG</code>. 「mappingConfig」- 映射专用配置
      */
     @Override
     public IServiceRecord setMappingConfig(String value) {
-        set(15, value);
+        set(16, value);
         return this;
     }
 
@@ -299,7 +316,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getMappingConfig() {
-        return (String) get(15);
+        return (String) get(16);
     }
 
     /**
@@ -307,7 +324,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setMappingMode(String value) {
-        set(16, value);
+        set(17, value);
         return this;
     }
 
@@ -316,7 +333,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getMappingMode() {
-        return (String) get(16);
+        return (String) get(17);
     }
 
     /**
@@ -324,7 +341,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setMappingComponent(String value) {
-        set(17, value);
+        set(18, value);
         return this;
     }
 
@@ -333,7 +350,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getMappingComponent() {
-        return (String) get(17);
+        return (String) get(18);
     }
 
     /**
@@ -341,7 +358,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setServiceRecord(String value) {
-        set(18, value);
+        set(19, value);
         return this;
     }
 
@@ -350,7 +367,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getServiceRecord() {
-        return (String) get(18);
+        return (String) get(19);
     }
 
     /**
@@ -358,7 +375,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setServiceComponent(String value) {
-        set(19, value);
+        set(20, value);
         return this;
     }
 
@@ -367,7 +384,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getServiceComponent() {
-        return (String) get(19);
+        return (String) get(20);
     }
 
     /**
@@ -375,7 +392,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setServiceConfig(String value) {
-        set(20, value);
+        set(21, value);
         return this;
     }
 
@@ -384,7 +401,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getServiceConfig() {
-        return (String) get(20);
+        return (String) get(21);
     }
 
     /**
@@ -392,7 +409,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setIdentifier(String value) {
-        set(21, value);
+        set(22, value);
         return this;
     }
 
@@ -401,7 +418,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getIdentifier() {
-        return (String) get(21);
+        return (String) get(22);
     }
 
     /**
@@ -409,7 +426,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setIdentifierComponent(String value) {
-        set(22, value);
+        set(23, value);
         return this;
     }
 
@@ -418,7 +435,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getIdentifierComponent() {
-        return (String) get(22);
+        return (String) get(23);
     }
 
     /**
@@ -426,7 +443,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setSigma(String value) {
-        set(23, value);
+        set(24, value);
         return this;
     }
 
@@ -435,7 +452,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getSigma() {
-        return (String) get(23);
+        return (String) get(24);
     }
 
     /**
@@ -443,7 +460,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setLanguage(String value) {
-        set(24, value);
+        set(25, value);
         return this;
     }
 
@@ -452,7 +469,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getLanguage() {
-        return (String) get(24);
+        return (String) get(25);
     }
 
     /**
@@ -460,7 +477,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setActive(Boolean value) {
-        set(25, value);
+        set(26, value);
         return this;
     }
 
@@ -469,7 +486,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public Boolean getActive() {
-        return (Boolean) get(25);
+        return (Boolean) get(26);
     }
 
     /**
@@ -477,7 +494,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setMetadata(String value) {
-        set(26, value);
+        set(27, value);
         return this;
     }
 
@@ -486,7 +503,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getMetadata() {
-        return (String) get(26);
+        return (String) get(27);
     }
 
     /**
@@ -494,7 +511,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setCreatedAt(LocalDateTime value) {
-        set(27, value);
+        set(28, value);
         return this;
     }
 
@@ -503,7 +520,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(27);
+        return (LocalDateTime) get(28);
     }
 
     /**
@@ -511,7 +528,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setCreatedBy(String value) {
-        set(28, value);
+        set(29, value);
         return this;
     }
 
@@ -520,7 +537,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getCreatedBy() {
-        return (String) get(28);
+        return (String) get(29);
     }
 
     /**
@@ -528,7 +545,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setUpdatedAt(LocalDateTime value) {
-        set(29, value);
+        set(30, value);
         return this;
     }
 
@@ -537,7 +554,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public LocalDateTime getUpdatedAt() {
-        return (LocalDateTime) get(29);
+        return (LocalDateTime) get(30);
     }
 
     /**
@@ -545,7 +562,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public IServiceRecord setUpdatedBy(String value) {
-        set(30, value);
+        set(31, value);
         return this;
     }
 
@@ -554,7 +571,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
      */
     @Override
     public String getUpdatedBy() {
-        return (String) get(30);
+        return (String) get(31);
     }
 
     // -------------------------------------------------------------------------
@@ -593,6 +610,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
         setConfigDatabase(from.getConfigDatabase());
         setDictConfig(from.getDictConfig());
         setDictComponent(from.getDictComponent());
+        setDictEpsilon(from.getDictEpsilon());
         setMappingConfig(from.getMappingConfig());
         setMappingMode(from.getMappingMode());
         setMappingComponent(from.getMappingComponent());
@@ -634,7 +652,7 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
     /**
      * Create a detached, initialised IServiceRecord
      */
-    public IServiceRecord(String key, String namespace, String name, String comment, Boolean isWorkflow, Boolean isGraphic, String inScript, String outScript, String channelType, String channelComponent, String channelConfig, String configIntegration, String configDatabase, String dictConfig, String dictComponent, String mappingConfig, String mappingMode, String mappingComponent, String serviceRecord, String serviceComponent, String serviceConfig, String identifier, String identifierComponent, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public IServiceRecord(String key, String namespace, String name, String comment, Boolean isWorkflow, Boolean isGraphic, String inScript, String outScript, String channelType, String channelComponent, String channelConfig, String configIntegration, String configDatabase, String dictConfig, String dictComponent, String dictEpsilon, String mappingConfig, String mappingMode, String mappingComponent, String serviceRecord, String serviceComponent, String serviceConfig, String identifier, String identifierComponent, String sigma, String language, Boolean active, String metadata, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(IService.I_SERVICE);
 
         set(0, key);
@@ -652,21 +670,22 @@ public class IServiceRecord extends UpdatableRecordImpl<IServiceRecord> implemen
         set(12, configDatabase);
         set(13, dictConfig);
         set(14, dictComponent);
-        set(15, mappingConfig);
-        set(16, mappingMode);
-        set(17, mappingComponent);
-        set(18, serviceRecord);
-        set(19, serviceComponent);
-        set(20, serviceConfig);
-        set(21, identifier);
-        set(22, identifierComponent);
-        set(23, sigma);
-        set(24, language);
-        set(25, active);
-        set(26, metadata);
-        set(27, createdAt);
-        set(28, createdBy);
-        set(29, updatedAt);
-        set(30, updatedBy);
+        set(15, dictEpsilon);
+        set(16, mappingConfig);
+        set(17, mappingMode);
+        set(18, mappingComponent);
+        set(19, serviceRecord);
+        set(20, serviceComponent);
+        set(21, serviceConfig);
+        set(22, identifier);
+        set(23, identifierComponent);
+        set(24, sigma);
+        set(25, language);
+        set(26, active);
+        set(27, metadata);
+        set(28, createdAt);
+        set(29, createdBy);
+        set(30, updatedAt);
+        set(31, updatedBy);
     }
 }

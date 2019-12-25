@@ -122,6 +122,10 @@ class Anagogic {
             Ut.contract(component, Identity.class, commercial.identity());
             Ut.contract(component, DualMapping.class, commercial.mapping());
             /*
+             * Recovery component here
+             */
+            Ut.contract(component, Dict.class, commercial.dict());
+            /*
              * Because `DualMapping` has been configured here
              * And `Dict` has been configured in another way here
              * Old code:
@@ -129,7 +133,6 @@ class Anagogic {
              * Ut.contract(component, Dict.class, commercial.dict());
              */
             // Ut.contract(component, DualMapping.class, commercial.mapping());
-            // Ut.contract(component, Dict.class, commercial.dict());
             return Future.succeededFuture(Boolean.TRUE);
         } else {
             return Future.succeededFuture(Boolean.TRUE);

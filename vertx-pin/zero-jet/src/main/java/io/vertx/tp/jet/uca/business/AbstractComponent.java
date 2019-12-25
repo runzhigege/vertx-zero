@@ -4,6 +4,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.annotations.Contract;
 import io.vertx.up.commune.Service;
+import io.vertx.up.commune.config.Dict;
 import io.vertx.up.commune.config.DualMapping;
 import io.vertx.up.commune.config.Identity;
 import io.vertx.up.log.Annal;
@@ -30,6 +31,9 @@ public abstract class AbstractComponent implements JtComponent, Service {
     @Contract
     private transient DualMapping mapping;
 
+    @Contract
+    private transient Dict dict;
+
     /*
      * The logger of Annal here
      */
@@ -37,10 +41,35 @@ public abstract class AbstractComponent implements JtComponent, Service {
         return Annal.get(this.getClass());
     }
 
-    // -------------- 元数据配置部分 ------------------
+    // -------------- Metadata configuration ------------------
+
+    /*
+     * The four reference source came from `@Contract` injection here
+     * dict
+     * - dictConfig
+     * - dictComponent
+     * - dictEpsilon
+     *
+     * identity
+     * - identityComponent
+     * - identity
+     *
+     * options
+     * - serviceConfig
+     *
+     * mapping
+     * - mappingConfig
+     * - mappingMode
+     * - mappingComponent
+     */
     @Override
     public JsonObject options() {
         return this.options;
+    }
+
+    @Override
+    public Dict dict() {
+        return this.dict;
     }
 
     @Override
@@ -49,7 +78,8 @@ public abstract class AbstractComponent implements JtComponent, Service {
     }
 
     /* Limitation Usage */
-    protected DualMapping mapping() {
+    @Override
+    public DualMapping mapping() {
         return this.mapping;
     }
 }

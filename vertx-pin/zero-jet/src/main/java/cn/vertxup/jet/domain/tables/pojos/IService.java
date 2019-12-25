@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class IService implements IIService {
 
-    private static final long serialVersionUID = 248709756;
+    private static final long serialVersionUID = 711020080;
 
     private String        key;
     private String        namespace;
@@ -41,6 +41,7 @@ public class IService implements IIService {
     private String        configDatabase;
     private String        dictConfig;
     private String        dictComponent;
+    private String        dictEpsilon;
     private String        mappingConfig;
     private String        mappingMode;
     private String        mappingComponent;
@@ -76,6 +77,7 @@ public class IService implements IIService {
         this.configDatabase = value.configDatabase;
         this.dictConfig = value.dictConfig;
         this.dictComponent = value.dictComponent;
+        this.dictEpsilon = value.dictEpsilon;
         this.mappingConfig = value.mappingConfig;
         this.mappingMode = value.mappingMode;
         this.mappingComponent = value.mappingComponent;
@@ -110,6 +112,7 @@ public class IService implements IIService {
         String        configDatabase,
         String        dictConfig,
         String        dictComponent,
+        String        dictEpsilon,
         String        mappingConfig,
         String        mappingMode,
         String        mappingComponent,
@@ -142,6 +145,7 @@ public class IService implements IIService {
         this.configDatabase = configDatabase;
         this.dictConfig = dictConfig;
         this.dictComponent = dictComponent;
+        this.dictEpsilon = dictEpsilon;
         this.mappingConfig = mappingConfig;
         this.mappingMode = mappingMode;
         this.mappingComponent = mappingComponent;
@@ -322,6 +326,17 @@ public class IService implements IIService {
     @Override
     public IService setDictComponent(String dictComponent) {
         this.dictComponent = dictComponent;
+        return this;
+    }
+
+    @Override
+    public String getDictEpsilon() {
+        return this.dictEpsilon;
+    }
+
+    @Override
+    public IService setDictEpsilon(String dictEpsilon) {
+        this.dictEpsilon = dictEpsilon;
         return this;
     }
 
@@ -520,6 +535,7 @@ public class IService implements IIService {
         sb.append(", ").append(configDatabase);
         sb.append(", ").append(dictConfig);
         sb.append(", ").append(dictComponent);
+        sb.append(", ").append(dictEpsilon);
         sb.append(", ").append(mappingConfig);
         sb.append(", ").append(mappingMode);
         sb.append(", ").append(mappingComponent);
@@ -565,6 +581,7 @@ public class IService implements IIService {
         setConfigDatabase(from.getConfigDatabase());
         setDictConfig(from.getDictConfig());
         setDictComponent(from.getDictComponent());
+        setDictEpsilon(from.getDictEpsilon());
         setMappingConfig(from.getMappingConfig());
         setMappingMode(from.getMappingMode());
         setMappingComponent(from.getMappingComponent());
