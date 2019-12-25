@@ -7,6 +7,7 @@ import io.vertx.up.commune.config.DualMapping;
 import io.vertx.up.commune.config.Identity;
 import io.vertx.up.eon.em.MappingMode;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
 /*
@@ -28,6 +29,11 @@ class JtBusiness {
                 final Class<?> component =
                         Ut.clazz(service.getDictComponent(), null);
                 dict.bind(component);
+                /*
+                 * dictEpsilon configuration
+                 */
+                final JsonObject epsilonJson = Ut.toJObject(service.getDictEpsilon());
+                dict.bind(Ux.dictEpsilon(epsilonJson));
             }
             /*
              * If Dict is not required, means

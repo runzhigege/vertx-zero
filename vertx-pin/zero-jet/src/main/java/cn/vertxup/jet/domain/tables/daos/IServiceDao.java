@@ -168,6 +168,13 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.domain.t
     }
 
     /**
+     * Fetch records that have <code>DICT_EPSILON IN (values)</code>
+     */
+    public List<cn.vertxup.jet.domain.tables.pojos.IService> fetchByDictEpsilon(String... values) {
+        return fetch(IService.I_SERVICE.DICT_EPSILON, values);
+    }
+
+    /**
      * Fetch records that have <code>MAPPING_CONFIG IN (values)</code>
      */
     public List<cn.vertxup.jet.domain.tables.pojos.IService> fetchByMappingConfig(String... values) {
@@ -389,6 +396,13 @@ public class IServiceDao extends DAOImpl<IServiceRecord, cn.vertxup.jet.domain.t
      */
     public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IService>> fetchByDictComponentAsync(List<String> values) {
         return fetchAsync(IService.I_SERVICE.DICT_COMPONENT,values);
+    }
+
+    /**
+     * Fetch records that have <code>DICT_EPSILON IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.jet.domain.tables.pojos.IService>> fetchByDictEpsilonAsync(List<String> values) {
+        return fetchAsync(IService.I_SERVICE.DICT_EPSILON,values);
     }
 
     /**
