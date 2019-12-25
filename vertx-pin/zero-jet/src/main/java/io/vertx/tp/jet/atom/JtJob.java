@@ -148,7 +148,7 @@ public class JtJob extends JtCommercial {
 
     private Mission mount(final Mission mission) {
         final String proxyStr = this.job.getProxy();
-        final Class clazz = Ut.clazz(proxyStr);
+        final Class<?> clazz = Ut.clazz(proxyStr);
         if (Objects.nonNull(clazz)) {
             /*
              * Object initialized

@@ -35,7 +35,7 @@ public class IService extends TableImpl<IServiceRecord> {
      * The reference instance of <code>DB_ETERNAL.I_SERVICE</code>
      */
     public static final IService I_SERVICE = new IService();
-    private static final long serialVersionUID = 710918533;
+    private static final long serialVersionUID = -475074108;
     /**
      * The column <code>DB_ETERNAL.I_SERVICE.KEY</code>. 「key」- 服务ID
      */
@@ -96,6 +96,10 @@ public class IService extends TableImpl<IServiceRecord> {
      * The column <code>DB_ETERNAL.I_SERVICE.DICT_COMPONENT</code>. 「dictComponent」- 字典配置中的插件
      */
     public final TableField<IServiceRecord, String> DICT_COMPONENT = createField("DICT_COMPONENT", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「dictComponent」- 字典配置中的插件");
+    /**
+     * The column <code>DB_ETERNAL.I_SERVICE.DICT_EPSILON</code>. 「dictEpsilon」- 字典的消费配置
+     */
+    public final TableField<IServiceRecord, String> DICT_EPSILON = createField("DICT_EPSILON", org.jooq.impl.SQLDataType.CLOB, this, "「dictEpsilon」- 字典的消费配置");
     /**
      * The column <code>DB_ETERNAL.I_SERVICE.MAPPING_CONFIG</code>. 「mappingConfig」- 映射专用配置
      */
