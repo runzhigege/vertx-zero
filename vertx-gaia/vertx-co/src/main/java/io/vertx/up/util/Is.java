@@ -28,7 +28,7 @@ class Is {
     }
 
     static boolean isChanged(final JsonObject oldRecord, final JsonObject newRecord,
-                             final Set<String> ignores, final TemporalUnit unit) {
+                             final Set<String> ignores, final Set<String> dateFields, final TemporalUnit unit) {
         /*
          * copy each compared json object and remove
          * all fields that will not be compared here.
@@ -39,6 +39,7 @@ class Is {
             ignores.forEach(oldCopy::remove);
             ignores.forEach(newCopy::remove);
         }
+        final Set<String> dateFieldSet = Objects.isNull(dateFields) ? new HashSet<>() : dateFields;
         /*
          * Get the final result of calculation.
          * 1) From old calculation
@@ -49,7 +50,7 @@ class Is {
              */
             final Object oldValue = oldCopy.getValue(field);
             final Object newValue = newCopy.getValue(field);
-            return isSame(oldValue, newValue, unit);
+            return isSame(oldValue, newValue, dateFieldSet.contains(field), unit);
         });
         /*
          * 2) From new calculation
@@ -62,12 +63,13 @@ class Is {
              */
             final Object oldValue = oldCopy.getValue(field);
             final Object newValue = newCopy.getValue(field);
-            return isSame(oldValue, newValue, unit);
+            return isSame(oldValue, newValue, dateFieldSet.contains(field), unit);
         });
         return !(unchanged && additional);
     }
 
     static boolean isSame(final Object oldValue, final Object newValue,
+                          final boolean isDate,
                           final TemporalUnit unit) {
 
         if (Objects.isNull(oldValue) && Objects.isNull(newValue)) {
@@ -76,7 +78,7 @@ class Is {
              */
             return true;
         } else if (Objects.nonNull(oldValue) && Objects.nonNull(newValue)) {
-            if (Types.isDate(oldValue)) {
+            if (Types.isDate(oldValue) && isDate) {
                 /*
                  * For `Date` type of `Instant`, there provide comparing method
                  * for different unit kind fo comparing.

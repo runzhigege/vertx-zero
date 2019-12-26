@@ -705,22 +705,22 @@ public final class Ut {
     }
 
     public static boolean isChanged(final JsonObject oldRecord, final JsonObject newRecord,
-                                    final Set<String> ignores, final TemporalUnit unit) {
-        return Is.isChanged(oldRecord, newRecord, ignores, unit);
+                                    final Set<String> ignores, final Set<String> dateFields, final TemporalUnit unit) {
+        return Is.isChanged(oldRecord, newRecord, ignores, dateFields, unit);
     }
 
     public static boolean isChanged(final JsonObject oldRecord, final JsonObject newRecord,
-                                    final Set<String> ignores) {
-        return Is.isChanged(oldRecord, newRecord, ignores, null);
+                                    final Set<String> ignores, final Set<String> dateFields) {
+        return Is.isChanged(oldRecord, newRecord, ignores, dateFields, null);
     }
 
-    public static boolean isSame(final Object oldValue, final Object newValue,
+    public static boolean isSame(final Object oldValue, final Object newValue, final boolean isDate,
                                  final TemporalUnit unit) {
-        return Is.isSame(oldValue, newValue, unit);
+        return Is.isSame(oldValue, newValue, isDate, unit);
     }
 
-    public static boolean isSame(final Object oldValue, final Object newValue) {
-        return Is.isSame(oldValue, newValue, null);
+    public static boolean isSame(final Object oldValue, final Object newValue, final boolean isDate) {
+        return Is.isSame(oldValue, newValue, isDate, null);
     }
 
     public static boolean isJArray(final String literal) {
@@ -784,6 +784,26 @@ public final class Ut {
     }
 
     /*
+     * Ai analyzing for type based on
+     * some different business requirement
+     */
+    public static Object aiJValue(final Object input, final Class<?> type) {
+        return Value.aiJValue(input, type);
+    }
+
+    public static Object aiJValue(final Object input) {
+        return Value.aiJValue(input, null);
+    }
+
+    public static Object aiValue(final Object input, final Class<?> type) {
+        return Value.aiValue(input, type);
+    }
+
+    public static Object aiValue(final Object input) {
+        return Value.aiValue(input, null);
+    }
+
+    /*
      * To conversation here
      * 1) toJArray
      * 2) toJObject
@@ -826,18 +846,6 @@ public final class Ut {
 
     public static JsonObject toJObject(final Map<String, Object> map) {
         return To.toJObject(map);
-    }
-
-    public static Object toJValue(final Object input, final Class<?> type) {
-        return Value.toJValue(input, type);
-    }
-
-    public static Object toJValue(final Object input) {
-        return toJValue(input, Objects.nonNull(input) ? input.getClass() : null);
-    }
-
-    public static Object toValue(final Object input, final Class<?> type) {
-        return Value.toValue(input, type);
     }
 
     public static int toMonth(final String literal) {
