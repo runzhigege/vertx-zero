@@ -784,6 +784,26 @@ public final class Ut {
     }
 
     /*
+     * Ai analyzing for type based on
+     * some different business requirement
+     */
+    public static Object aiJValue(final Object input, final Class<?> type) {
+        return Value.aiJValue(input, type);
+    }
+
+    public static Object aiJValue(final Object input) {
+        return Value.aiJValue(input, null);
+    }
+
+    public static Object aiValue(final Object input, final Class<?> type) {
+        return Value.aiValue(input, type);
+    }
+
+    public static Object aiValue(final Object input) {
+        return Value.aiValue(input, null);
+    }
+
+    /*
      * To conversation here
      * 1) toJArray
      * 2) toJObject
@@ -826,18 +846,6 @@ public final class Ut {
 
     public static JsonObject toJObject(final Map<String, Object> map) {
         return To.toJObject(map);
-    }
-
-    public static Object toJValue(final Object input, final Class<?> type) {
-        return Value.toJValue(input, type);
-    }
-
-    public static Object toJValue(final Object input) {
-        return toJValue(input, Objects.nonNull(input) ? input.getClass() : null);
-    }
-
-    public static Object toValue(final Object input, final Class<?> type) {
-        return Value.toValue(input, type);
     }
 
     public static int toMonth(final String literal) {
