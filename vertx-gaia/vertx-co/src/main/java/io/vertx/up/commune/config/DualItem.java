@@ -72,6 +72,15 @@ public class DualItem implements Serializable {
         }
     }
 
+    public DualItem bind(final ConcurrentMap<String, Class<?>> typeMap) {
+        this.vector.keySet().forEach((field) -> {
+            this.vectorType.put(field, typeMap.get(field));
+            final String revertField = this.vector.get(field);
+            this.revertType.put(revertField, typeMap.get(field));
+        });
+        return this;
+    }
+
     /*
      * from -> to, to values to String[]
      */

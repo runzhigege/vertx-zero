@@ -705,22 +705,22 @@ public final class Ut {
     }
 
     public static boolean isChanged(final JsonObject oldRecord, final JsonObject newRecord,
-                                    final Set<String> ignores, final TemporalUnit unit) {
-        return Is.isChanged(oldRecord, newRecord, ignores, unit);
+                                    final Set<String> ignores, final Set<String> dateFields, final TemporalUnit unit) {
+        return Is.isChanged(oldRecord, newRecord, ignores, dateFields, unit);
     }
 
     public static boolean isChanged(final JsonObject oldRecord, final JsonObject newRecord,
-                                    final Set<String> ignores) {
-        return Is.isChanged(oldRecord, newRecord, ignores, null);
+                                    final Set<String> ignores, final Set<String> dateFields) {
+        return Is.isChanged(oldRecord, newRecord, ignores, dateFields, null);
     }
 
-    public static boolean isSame(final Object oldValue, final Object newValue,
+    public static boolean isSame(final Object oldValue, final Object newValue, final boolean isDate,
                                  final TemporalUnit unit) {
-        return Is.isSame(oldValue, newValue, unit);
+        return Is.isSame(oldValue, newValue, isDate, unit);
     }
 
-    public static boolean isSame(final Object oldValue, final Object newValue) {
-        return Is.isSame(oldValue, newValue, null);
+    public static boolean isSame(final Object oldValue, final Object newValue, final boolean isDate) {
+        return Is.isSame(oldValue, newValue, isDate, null);
     }
 
     public static boolean isJArray(final String literal) {

@@ -5,6 +5,7 @@ import io.vertx.up.eon.Values;
 
 import java.io.Serializable;
 import java.util.Set;
+import java.util.concurrent.ConcurrentMap;
 
 /*
  * Record interface for some data record using
@@ -110,6 +111,11 @@ interface Meta {
      * Get MJoin entityKey set
      */
     Set<String> joins();
+
+    /*
+     * Type
+     */
+    ConcurrentMap<String, Class<?>> types();
 
     /*
      * attributes count.
