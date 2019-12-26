@@ -6,6 +6,7 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
+import io.vertx.tp.optic.Trash;
 import io.vertx.tp.optic.business.ExSerial;
 import io.vertx.tp.optic.business.ExUser;
 import io.vertx.up.unity.Ux;
@@ -121,12 +122,17 @@ public class EmployeeService implements EmployeeStub {
     @Override
     public Future<Boolean> deleteAsync(final String key) {
         return this.fetchAsync(key)
-                .compose(Ut.applyNil(() -> Boolean.TRUE, item -> {
-                    final String userId = item.getString(USER_ID);
-                    return this.updateRef(userId, new JsonObject())
-                            .compose(nil -> Ux.Jooq.on(EEmployeeDao.class)
-                                    .deleteByIdAsync(key));
-                }));
+                .compose(Ut.applyNil(() -> Boolean.TRUE, item -> Ke.channelAsync(Trash.class,
+                        () -> this.deleteAsync(key, item),
+                        tunnel -> tunnel.backupAsync("res.employee", item)
+                                .compose(backup -> this.deleteAsync(key, item)))));
+    }
+
+    private Future<Boolean> deleteAsync(final String key, final JsonObject item) {
+        final String userId = item.getString(USER_ID);
+        return this.updateRef(userId, new JsonObject())
+                .compose(nil -> Ux.Jooq.on(EEmployeeDao.class)
+                        .deleteByIdAsync(key));
     }
 
     private Future<JsonObject> updateRef(final String key, final JsonObject data) {
