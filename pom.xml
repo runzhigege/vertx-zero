@@ -220,6 +220,11 @@
             </dependency>
             <dependency>
                 <groupId>cn.vertxup</groupId>
+                <artifactId>zero-history</artifactId>
+                <version>${zero.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.vertxup</groupId>
                 <artifactId>zero-feign</artifactId>
                 <version>${project.version}</version>
             </dependency>

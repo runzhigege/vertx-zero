@@ -63,6 +63,12 @@ public class IxModule implements Serializable {
         this.name = name;
     }
 
+    public String getIdentifier() {
+        if (Objects.nonNull(this.column)) {
+            return this.column.getIdentifier();
+        } else return null;
+    }
+
     public String getPojo() {
         return this.pojo;
     }

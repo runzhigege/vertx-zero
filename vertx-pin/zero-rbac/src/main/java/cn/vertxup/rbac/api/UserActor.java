@@ -4,6 +4,8 @@ import cn.vertxup.rbac.service.business.UserStub;
 import cn.vertxup.rbac.service.login.LoginStub;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.ke.refine.Ke;
+import io.vertx.tp.optic.Trash;
 import io.vertx.tp.rbac.cv.Addr;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
@@ -30,7 +32,7 @@ public class UserActor {
         /*
          * Async for user information
          */
-        return stub.fetchEmployee(userId);
+        return this.stub.fetchEmployee(userId);
     }
 
     @Address(Addr.User.PASSWORD)
@@ -40,40 +42,43 @@ public class UserActor {
          */
         final String userId = envelop.jwt("user");
         final JsonObject params = Ux.getJson(envelop);
-        return stub.updateUser(userId, params);
+        return this.stub.updateUser(userId, params);
     }
 
     @Address(Addr.User.PROFILE)
     public Future<JsonObject> profile(final Envelop envelop) {
         final String userId = envelop.jwt("user");
         final JsonObject params = Ux.getJson(envelop);
-        return stub.updateEmployee(userId, params);
+        return this.stub.updateEmployee(userId, params);
     }
 
     @Address(Addr.Auth.LOGOUT)
     public Future<Boolean> logout(final Envelop envelop) {
         final String token = envelop.jwt();
         final String habitus = envelop.jwt("habitus");
-        return loginStub.logout(token, habitus);
+        return this.loginStub.logout(token, habitus);
     }
 
     @Address(Addr.User.GET)
     public Future<JsonObject> getById(final String key) {
-        return stub.fetchUser(key);
+        return this.stub.fetchUser(key);
     }
 
     @Address(Addr.User.ADD)
     public Future<JsonObject> create(final JsonObject data) {
-        return stub.createUser(data);
+        return this.stub.createUser(data);
     }
 
     @Address(Addr.User.UPDATE)
     public Future<JsonObject> update(final String key, final JsonObject data) {
-        return stub.updateUser(key, data);
+        return this.stub.updateUser(key, data);
     }
 
     @Address(Addr.User.DELETE)
     public Future<Boolean> delete(final String key) {
-        return stub.deleteUser(key);
+        return Ke.channelAsync(Trash.class, () -> this.stub.deleteUser(key),
+                tunnel -> this.stub.fetchUser(key)
+                        .compose(user -> tunnel.backupAsync("sec.user", user))
+                        .compose(backup -> this.stub.deleteUser(key)));
     }
 }
