@@ -76,7 +76,7 @@ class Value {
                     /*
                      * If String, check whether it's date
                      */
-                    if (Ut.isDate(source.toString())) {
+                    if (String.class != type && Ut.isDate(source.toString())) {
                         /*
                          * String to
                          */
@@ -97,7 +97,7 @@ class Value {
                     /*
                      * If String, check whether it's date
                      */
-                    if (Ut.isDate(source.toString())) {
+                    if (String.class != type && Ut.isDate(source.toString())) {
                         /*
                          * String to
                          */

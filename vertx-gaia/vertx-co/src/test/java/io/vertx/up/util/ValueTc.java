@@ -217,6 +217,10 @@ public class ValueTc {
      */
     @Test
     public void testValue() {
+        final Object data = Ut.aiValue("2019-12-27T09:50:37.702Z", String.class);
+        System.out.println(data);
 
+        final Object value = Ut.aiJValue("2011-12-12", String.class);
+        System.out.println(value);
     }
 }

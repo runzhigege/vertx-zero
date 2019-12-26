@@ -18,6 +18,11 @@ public class DateVto implements Vto<Date> {
         } else {
             if (Date.class == type) {
                 return (Date) value;
+            } else if (String.class == type) {
+                /*
+                 * Default Parsed
+                 */
+                return Ut.parseFull(value.toString());
             } else if (LocalTime.class == type) {
                 return Ut.parseFull(value.toString());
             } else if (LocalDate.class == type) {
