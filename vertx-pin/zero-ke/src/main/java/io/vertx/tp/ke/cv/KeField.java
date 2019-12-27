@@ -60,6 +60,8 @@ public interface KeField {
     String URI_REQUEST = "requestUri";
 
     String USERNAME = "username";
+    String EMAIL = "email";
+    String MOBILE = "mobile";
     String CLIENT_ID = "clientId";
 
     String RESULT = "result";

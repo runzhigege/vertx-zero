@@ -14,6 +14,11 @@ class ScLog {
         logger.debug("[ Ακριβώς ] ( " + flag + " ) " + pattern, args);
     }
 
+    private static void warn(final Annal logger,
+                             final String flag, final String pattern, final Object... args) {
+        logger.warn("[ Ακριβώς ] ( " + flag + " ) " + pattern, args);
+    }
+
     static void infoAuth(final Annal logger, final String pattern, final Object... args) {
         info(logger, "Auth", pattern, args);
     }
@@ -30,6 +35,13 @@ class ScLog {
         info(logger, "Init", pattern, args);
     }
 
+    static void infoWeb(final Annal logger, final String pattern, final Object... args) {
+        info(logger, "Web", pattern, args);
+    }
+
+    static void warnWeb(final Annal logger, final String pattern, final Object... args) {
+        warn(logger, "Web", pattern, args);
+    }
 
     static void infoResource(final Annal logger, final String pattern, final Object... args) {
         info(logger, "Resource", pattern, args);
