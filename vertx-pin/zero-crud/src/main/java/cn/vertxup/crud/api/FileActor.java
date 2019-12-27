@@ -39,7 +39,6 @@ import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Queue
@@ -81,6 +80,7 @@ public class FileActor {
                         .filter(item -> Objects.nonNull(item.getName()))
                         .filter(item -> item.getName().equals(config.getTable()))
                         .collect(Collectors.toSet());
+
                 /*
                  * Record extracting and calculated
                  */
@@ -93,89 +93,73 @@ public class FileActor {
                     Ix.infoRest(LOGGER, "Table: {0}, Records: {1}", table.getName(), String.valueOf(records.size()));
                     prepared.addAll(records);
                 });
+
                 /*
-                 * Dictionary injection for created and updated
+                 * Record Grouped by EpsilonMap
+                 * 1) in = name
+                 * 2) out = key
+                 * Build map
+                 * field = { in = out }
                  */
-                final Function<JsonObject, Future<JsonObject>> fnMount =
-                        (input) -> this.fetchDict(config, request).compose(dictMap -> {
-                            if (Objects.isNull(dictMap)) {
-                                return Ux.future(input);
-                            } else {
-                                /*
-                                 * Additional Steps
-                                 */
-                                final ConcurrentMap<String, DictEpsilon> epsilonMap = config.getEpsilon();
-                                final ConcurrentMap<String, DualItem> dual = Ux.dictDual(epsilonMap, dictMap);
-                                /*
-                                 * Max calculation here for
-                                 * 1) Excel self reference of group
-                                 * 2) Database reference of current group
-                                 */
-                                dual.forEach((field, dualItem) -> {
-                                    /*
-                                     * Based calculation for dict configuration
-                                     */
-                                    final String value = input.getString(field);
-                                    if (Ut.notNil(value)) {
-                                        /*
-                                         * Extracted
-                                         */
-                                        final String converted = dualItem.to(value);
-                                        if (Ut.isNil(converted)) {
-                                            /*
-                                             * Excel, Self reference
-                                             */
-                                            final String found = this.fetchTo(value, prepared, epsilonMap.get(field));
-                                            input.put(field, found);
-                                        } else {
-                                            /*
-                                             * Existing, Hit database reference
-                                             */
-                                            input.put(field, converted);
-                                        }
-                                    }
-                                });
-                                return Ux.future(input);
-                            }
-                        });
-                /*
-                 * Apply default value
-                 */
-                final List<Future<JsonObject>> futures = new ArrayList<>();
-                prepared.forEach(record -> {
-                    /* Header, sigma, appId, appKey */
-                    IxActor.header().bind(request).proc(record, config);
-                    /* Serial */
-                    futures.add(IxActor.serial().bind(request).procAsync(record, config)
-                            /* Unique Filters */
-                            .compose(normalized -> IxActor.unique().procAsync(normalized, config))
-                            /* Search result */
-                            .compose(filters -> Ix.search(filters, config).apply(jooq))
-                            /* Result confirmed */
-                            .compose(queried -> Ix.isExist(queried) ?
-                                    /* Update Flow */
-                                    Ix.unique(queried)
-                                            /* Audit: Update */
-                                            .compose(item -> IxActor.update().bind(request).procAsync(item, config))
-                                            .compose(fnMount)
-                                            /* Final Update */
-                                            .compose(json -> Ix.entityAsync(json, config))
-                                            .compose(jooq::updateAsync)
-                                            .compose(Ux::fnJObject) :
-                                    /* Insert UUID */
-                                    IxActor.uuid().procAsync(record, config)
-                                            /* Audit: Create / Update */
-                                            .compose(item -> IxActor.create().bind(request).procAsync(item, config))
-                                            .compose(item -> IxActor.update().bind(request).procAsync(item, config))
-                                            .compose(fnMount)
-                                            /* Final Insert */
-                                            .compose(json -> Ix.entityAsync(json, config))
-                                            .compose(jooq::insertAsync)
-                                            .compose(Ux::fnJObject)
-                            )
-                    );
+                final ConcurrentMap<String, ConcurrentMap<String, String>> preparedMap = new ConcurrentHashMap<>();
+                final ConcurrentMap<String, DictEpsilon> epsilonMap = config.getEpsilon();
+                epsilonMap.forEach((field, epsilon) -> {
+                    final ConcurrentMap<String, String> epsilonData = new ConcurrentHashMap<>();
+                    prepared.forEach(item -> {
+                        final String inValue = item.getString(epsilon.getIn());
+                        final String outValue = item.getString(epsilon.getOut());
+                        if (Objects.nonNull(inValue)) {
+                            epsilonData.put(inValue, outValue);
+                        }
+                    });
+                    if (!epsilonData.isEmpty()) {
+                        preparedMap.put(field, epsilonData);
+                    }
                 });
-                final Future<JsonArray> result = Ux.thenCombine(futures);
+
+                /*
+                 * Read dict only once
+                 */
+                final Future<JsonArray> result = this.fetchDict(config, request).compose(dictMap -> {
+                    /*
+                     * Apply default value
+                     */
+                    final List<Future<JsonObject>> futures = new ArrayList<>();
+                    prepared.forEach(record -> {
+                        /* Header, sigma, appId, appKey */
+                        IxActor.header().bind(request).proc(record, config);
+                        /* Serial */
+                        futures.add(IxActor.serial().bind(request).procAsync(record, config)
+                                /* Unique Filters */
+                                .compose(normalized -> IxActor.unique().procAsync(normalized, config))
+                                /* Search result */
+                                .compose(filters -> Ix.search(filters, config).apply(jooq))
+                                /* Result confirmed */
+                                .compose(queried -> Ix.isExist(queried) ?
+                                        /* Update Flow */
+                                        Ix.unique(queried)
+                                                /* Audit: Update */
+                                                .compose(item -> IxActor.update().bind(request).procAsync(item, config))
+                                                .compose(item -> this.importDict(item, dictMap, preparedMap, config))
+                                                /* Final Update */
+                                                .compose(json -> Ix.entityAsync(json, config))
+                                                .compose(jooq::updateAsync)
+                                                .compose(Ux::fnJObject) :
+                                        /* Insert UUID */
+                                        IxActor.uuid().procAsync(record, config)
+                                                /* Audit: Create / Update */
+                                                .compose(item -> IxActor.create().bind(request).procAsync(item, config))
+                                                .compose(item -> IxActor.update().bind(request).procAsync(item, config))
+                                                .compose(item -> this.importDict(item, dictMap, preparedMap, config))
+                                                /* Final Insert */
+                                                .compose(json -> Ix.entityAsync(json, config))
+                                                .compose(jooq::insertAsync)
+                                                .compose(Ux::fnJObject)
+                                )
+                        );
+                    });
+                    return Ux.thenCombine(futures);
+                });
                 result.setHandler(imported -> {
                     Ix.infoDao(LOGGER, IxMsg.FILE_LOADED, filename);
                     promise.complete(Envelop.success(Boolean.TRUE));
@@ -185,6 +169,54 @@ public class FileActor {
             promise.complete(Envelop.success(Boolean.FALSE));
         }
         return promise.future();
+    }
+
+    private Future<JsonObject> importDict(final JsonObject input,
+                                          final ConcurrentMap<String, JsonArray> dictMap,
+                                          final ConcurrentMap<String, ConcurrentMap<String, String>> preparedMap,
+                                          final IxModule config) {
+        if (Objects.isNull(dictMap)) {
+            return Ux.future(input);
+        } else {
+            /*
+             * Additional Steps
+             */
+            final ConcurrentMap<String, DictEpsilon> epsilonMap = config.getEpsilon();
+            final ConcurrentMap<String, DualItem> dual = Ux.dictDual(epsilonMap, dictMap);
+            /*
+             * Max calculation here for
+             * 1) Excel self reference of group
+             * 2) Database reference of current group
+             */
+            dual.forEach((field, dualItem) -> {
+                /*
+                 * Based calculation for dict configuration
+                 */
+                final String value = input.getString(field);
+                if (Ut.notNil(value)) {
+                    /*
+                     * Extracted
+                     */
+                    final String converted = dualItem.to(value);
+                    if (Ut.isNil(converted)) {
+                        /*
+                         * Excel, Self reference
+                         */
+                        final ConcurrentMap<String, String> prepared = preparedMap.get(field);
+                        if (Objects.nonNull(prepared) && !prepared.isEmpty()) {
+                            final String found = prepared.get(value);
+                            input.put(field, found);
+                        }
+                    } else {
+                        /*
+                         * Existing, Hit database reference
+                         */
+                        input.put(field, converted);
+                    }
+                }
+            });
+            return Ux.future(input);
+        }
     }
 
     @Address(Addr.File.EXPORT)
