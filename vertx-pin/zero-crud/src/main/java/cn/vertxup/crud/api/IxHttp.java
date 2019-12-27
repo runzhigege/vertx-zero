@@ -8,14 +8,14 @@ import io.vertx.up.commune.Envelop;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
-public interface IxHttp {
+public class IxHttp {
 
     /* 201 */
-    static <T> Future<Envelop> success201(final T entity) {
+    public static <T> Future<Envelop> success201(final T entity) {
         return Ux.future(Envelop.success(entity, HttpStatusCode.CREATED));
     }
 
-    static <T> Future<Envelop> success201(final T entity, final IxModule config) {
+    public static <T> Future<Envelop> success201(final T entity, final IxModule config) {
         final String pojo = config.getPojo();
         if (Ut.isNil(pojo)) {
             return success201(entity);
@@ -26,11 +26,11 @@ public interface IxHttp {
     }
 
     /* 200 */
-    static <T> Future<Envelop> success200(final T entity) {
+    public static <T> Future<Envelop> success200(final T entity) {
         return Ux.future(Envelop.success(entity));
     }
 
-    static <T> Future<Envelop> success200(final T entity, final IxModule config) {
+    public static <T> Future<Envelop> success200(final T entity, final IxModule config) {
         final String pojo = config.getPojo();
         if (Ut.isNil(pojo)) {
             return success200(entity);
@@ -41,7 +41,7 @@ public interface IxHttp {
     }
 
     /* 204 */
-    static <T> Future<Envelop> success204(final T entity) {
+    public static <T> Future<Envelop> success204(final T entity) {
         return Ux.future(Envelop.success(entity, HttpStatusCode.NO_CONTENT));
     }
 }

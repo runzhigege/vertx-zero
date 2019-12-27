@@ -1,7 +1,6 @@
 package cn.vertxup.crud.api;
 
 import io.vertx.core.Future;
-import io.vertx.core.MultiMap;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -13,8 +12,6 @@ import io.vertx.tp.crud.init.IxPin;
 import io.vertx.tp.crud.refine.Ix;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
-import io.vertx.tp.optic.Pocket;
-import io.vertx.tp.optic.component.Dictionary;
 import io.vertx.tp.plugin.excel.ExcelClient;
 import io.vertx.tp.plugin.excel.atom.ExRecord;
 import io.vertx.tp.plugin.excel.atom.ExTable;
@@ -23,10 +20,7 @@ import io.vertx.up.annotations.Plugin;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.commune.Envelop;
-import io.vertx.up.commune.config.Dict;
 import io.vertx.up.commune.config.DictEpsilon;
-import io.vertx.up.commune.config.DictSource;
-import io.vertx.up.commune.config.DualItem;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
@@ -39,7 +33,6 @@ import java.io.InputStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Queue
@@ -81,6 +74,7 @@ public class FileActor {
                         .filter(item -> Objects.nonNull(item.getName()))
                         .filter(item -> item.getName().equals(config.getTable()))
                         .collect(Collectors.toSet());
+
                 /*
                  * Record extracting and calculated
                  */
@@ -93,89 +87,76 @@ public class FileActor {
                     Ix.infoRest(LOGGER, "Table: {0}, Records: {1}", table.getName(), String.valueOf(records.size()));
                     prepared.addAll(records);
                 });
+
                 /*
-                 * Dictionary injection for created and updated
+                 * Record Grouped by EpsilonMap
+                 * 1) in = name
+                 * 2) out = key
+                 * Build map
+                 * field = { in = out }
                  */
-                final Function<JsonObject, Future<JsonObject>> fnMount =
-                        (input) -> this.fetchDict(config, request).compose(dictMap -> {
-                            if (Objects.isNull(dictMap)) {
-                                return Ux.future(input);
-                            } else {
-                                /*
-                                 * Additional Steps
-                                 */
-                                final ConcurrentMap<String, DictEpsilon> epsilonMap = config.getEpsilon();
-                                final ConcurrentMap<String, DualItem> dual = Ux.dictDual(epsilonMap, dictMap);
-                                /*
-                                 * Max calculation here for
-                                 * 1) Excel self reference of group
-                                 * 2) Database reference of current group
-                                 */
-                                dual.forEach((field, dualItem) -> {
-                                    /*
-                                     * Based calculation for dict configuration
-                                     */
-                                    final String value = input.getString(field);
-                                    if (Ut.notNil(value)) {
-                                        /*
-                                         * Extracted
-                                         */
-                                        final String converted = dualItem.to(value);
-                                        if (Ut.isNil(converted)) {
-                                            /*
-                                             * Excel, Self reference
-                                             */
-                                            final String found = this.fetchTo(value, prepared, epsilonMap.get(field));
-                                            input.put(field, found);
-                                        } else {
-                                            /*
-                                             * Existing, Hit database reference
-                                             */
-                                            input.put(field, converted);
-                                        }
-                                    }
-                                });
-                                return Ux.future(input);
-                            }
-                        });
-                /*
-                 * Apply default value
-                 */
-                final List<Future<JsonObject>> futures = new ArrayList<>();
-                prepared.forEach(record -> {
-                    /* Header, sigma, appId, appKey */
-                    IxActor.header().bind(request).proc(record, config);
-                    /* Serial */
-                    futures.add(IxActor.serial().bind(request).procAsync(record, config)
-                            /* Unique Filters */
-                            .compose(normalized -> IxActor.unique().procAsync(normalized, config))
-                            /* Search result */
-                            .compose(filters -> Ix.search(filters, config).apply(jooq))
-                            /* Result confirmed */
-                            .compose(queried -> Ix.isExist(queried) ?
-                                    /* Update Flow */
-                                    Ix.unique(queried)
-                                            /* Audit: Update */
-                                            .compose(item -> IxActor.update().bind(request).procAsync(item, config))
-                                            .compose(fnMount)
-                                            /* Final Update */
-                                            .compose(json -> Ix.entityAsync(json, config))
-                                            .compose(jooq::updateAsync)
-                                            .compose(Ux::fnJObject) :
-                                    /* Insert UUID */
-                                    IxActor.uuid().procAsync(record, config)
-                                            /* Audit: Create / Update */
-                                            .compose(item -> IxActor.create().bind(request).procAsync(item, config))
-                                            .compose(item -> IxActor.update().bind(request).procAsync(item, config))
-                                            .compose(fnMount)
-                                            /* Final Insert */
-                                            .compose(json -> Ix.entityAsync(json, config))
-                                            .compose(jooq::insertAsync)
-                                            .compose(Ux::fnJObject)
-                            )
-                    );
+                final ConcurrentMap<String, ConcurrentMap<String, String>> preparedMap = new ConcurrentHashMap<>();
+                final ConcurrentMap<String, DictEpsilon> epsilonMap = config.getEpsilon();
+                epsilonMap.forEach((field, epsilon) -> {
+                    final ConcurrentMap<String, String> epsilonData = new ConcurrentHashMap<>();
+                    prepared.forEach(item -> {
+                        final String inValue = item.getString(epsilon.getIn());
+                        final String outValue = item.getString(epsilon.getOut());
+                        if (Objects.nonNull(inValue)) {
+                            epsilonData.put(inValue, outValue);
+                        }
+                    });
+                    if (!epsilonData.isEmpty()) {
+                        preparedMap.put(field, epsilonData);
+                    }
                 });
-                final Future<JsonArray> result = Ux.thenCombine(futures);
+
+                /*
+                 * Read dict only once
+                 */
+                final Future<JsonArray> result = Unity.fetchDict(request, config).compose(dictMap -> {
+                    /*
+                     * Apply default value
+                     */
+                    final List<Future<JsonObject>> futures = new ArrayList<>();
+                    prepared.forEach(record -> {
+                        /* Header, sigma, appId, appKey */
+                        IxActor.header().bind(request).proc(record, config);
+                        /* Active = true */
+                        record.put(KeField.ACTIVE, Boolean.TRUE);
+                        /* Serial */
+                        futures.add(IxActor.serial().bind(request).procAsync(record, config)
+                                /* Unique Filters */
+                                .compose(normalized -> IxActor.unique().procAsync(normalized, config))
+                                /* Search result */
+                                .compose(filters -> Ix.search(filters, config).apply(jooq))
+                                /* Result confirmed */
+                                .compose(queried -> Ix.isExist(queried) ?
+                                        /* Update Flow */
+                                        Ix.unique(queried)
+                                                /* Audit: Update */
+                                                .compose(item -> IxActor.update().bind(request).procAsync(item, config))
+                                                .compose(item -> Unity.importDict(item, dictMap, preparedMap, config))
+                                                /* Final Update */
+                                                .compose(item -> Ux.future(item.mergeIn(record)))
+                                                .compose(json -> Ix.entityAsync(json, config))
+                                                .compose(jooq::updateAsync)
+                                                .compose(Ux::fnJObject) :
+                                        /* Insert UUID */
+                                        IxActor.uuid().procAsync(record, config)
+                                                /* Audit: Create / Update */
+                                                .compose(item -> IxActor.create().bind(request).procAsync(item, config))
+                                                .compose(item -> IxActor.update().bind(request).procAsync(item, config))
+                                                .compose(item -> Unity.importDict(item, dictMap, preparedMap, config))
+                                                /* Final Insert */
+                                                .compose(json -> Ix.entityAsync(json, config))
+                                                .compose(jooq::insertAsync)
+                                                .compose(Ux::fnJObject)
+                                )
+                        );
+                    });
+                    return Ux.thenCombine(futures);
+                });
                 result.setHandler(imported -> {
                     Ix.infoDao(LOGGER, IxMsg.FILE_LOADED, filename);
                     promise.complete(Envelop.success(Boolean.TRUE));
@@ -264,7 +245,7 @@ public class FileActor {
                      * To avoid final in lambda expression
                      */
                     final JsonArray inputData = data.copy();
-                    return this.fetchDict(config, request).compose(dictMap -> {
+                    return Unity.fetchDict(request, config).compose(dictMap -> {
                         /*
                          * Dictionary fetching for exporting
                          */
@@ -293,40 +274,4 @@ public class FileActor {
         );
     }
 
-    private String fetchTo(final String value, final List<JsonObject> source, final DictEpsilon epsilon) {
-        /*
-         * in = name
-         * out = key
-         */
-        return source.stream()
-                .filter(item -> value.equals(item.getString(epsilon.getIn())))
-                .map(item -> item.getString(epsilon.getOut()))
-                .findAny().orElse(null);
-    }
-
-    private Future<ConcurrentMap<String, JsonArray>> fetchDict(final IxModule config, final Envelop request) {
-        /* Epsilon */
-        final ConcurrentMap<String, DictEpsilon> epsilonMap = config.getEpsilon();
-        /* Channel Plugin */
-        final Dictionary plugin = Pocket.lookup(Dictionary.class);
-        /* Dict */
-        final Dict dict = config.getSource();
-        if (epsilonMap.isEmpty() || Objects.isNull(plugin) || !dict.validSource()) {
-            /*
-             * Direct returned
-             */
-            Ix.infoRest(LOGGER, "Plugin condition failure, {0}, {1}, {2}",
-                    epsilonMap.isEmpty(), Objects.isNull(plugin), !dict.validSource());
-            return Ux.future(new ConcurrentHashMap<>());
-        } else {
-            final List<DictSource> sources = dict.getSource();
-            final MultiMap paramMap = MultiMap.caseInsensitiveMultiMap();
-            final JsonObject headers = request.headersX();
-            paramMap.add(KeField.SIGMA, headers.getString(KeField.SIGMA));
-            /*
-             * To avoid final in lambda expression
-             */
-            return plugin.fetchAsync(paramMap, sources);
-        }
-    }
 }

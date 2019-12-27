@@ -1,22 +1,38 @@
 package cn.vertxup.crud.api;
 
 import io.vertx.core.Future;
+import io.vertx.core.MultiMap;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.actor.IxActor;
 import io.vertx.tp.crud.atom.IxModule;
+import io.vertx.tp.crud.refine.Ix;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.optic.Apeak;
+import io.vertx.tp.optic.Pocket;
 import io.vertx.tp.optic.Seeker;
+import io.vertx.tp.optic.component.Dictionary;
 import io.vertx.up.commune.Envelop;
+import io.vertx.up.commune.config.Dict;
+import io.vertx.up.commune.config.DictEpsilon;
+import io.vertx.up.commune.config.DictSource;
+import io.vertx.up.commune.config.DualItem;
+import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.unity.UxJooq;
+import io.vertx.up.util.Ut;
 
 import java.text.MessageFormat;
+import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 class Unity {
+
+    private static final Annal LOGGER = Annal.get(Unity.class);
 
     /*
      * Seeker for lookup target resource
@@ -43,6 +59,80 @@ class Unity {
                 .compose(input -> IxActor.header().bind(request).procAsync(input, config))
                 /* Fetch Full Columns */
                 .compose(stub.on(dao)::fetchFull));
+    }
+
+    static Future<ConcurrentMap<String, JsonArray>> fetchDict(final Envelop request, final IxModule config) {
+        /* Epsilon */
+        final ConcurrentMap<String, DictEpsilon> epsilonMap = config.getEpsilon();
+        /* Channel Plugin */
+        final Dictionary plugin = Pocket.lookup(Dictionary.class);
+        /* Dict */
+        final Dict dict = config.getSource();
+        if (epsilonMap.isEmpty() || Objects.isNull(plugin) || !dict.validSource()) {
+            /*
+             * Direct returned
+             */
+            Ix.infoRest(LOGGER, "Plugin condition failure, {0}, {1}, {2}",
+                    epsilonMap.isEmpty(), Objects.isNull(plugin), !dict.validSource());
+            return Ux.future(new ConcurrentHashMap<>());
+        } else {
+            final List<DictSource> sources = dict.getSource();
+            final MultiMap paramMap = MultiMap.caseInsensitiveMultiMap();
+            final JsonObject headers = request.headersX();
+            paramMap.add(KeField.SIGMA, headers.getString(KeField.SIGMA));
+            /*
+             * To avoid final in lambda expression
+             */
+            return plugin.fetchAsync(paramMap, sources);
+        }
+    }
+
+    static Future<JsonObject> importDict(final JsonObject input,
+                                         final ConcurrentMap<String, JsonArray> dictMap,
+                                         final ConcurrentMap<String, ConcurrentMap<String, String>> preparedMap,
+                                         final IxModule config) {
+        if (Objects.isNull(dictMap)) {
+            return Ux.future(input);
+        } else {
+            /*
+             * Additional Steps
+             */
+            final ConcurrentMap<String, DictEpsilon> epsilonMap = config.getEpsilon();
+            final ConcurrentMap<String, DualItem> dual = Ux.dictDual(epsilonMap, dictMap);
+            /*
+             * Max calculation here for
+             * 1) Excel self reference of group
+             * 2) Database reference of current group
+             */
+            dual.forEach((field, dualItem) -> {
+                /*
+                 * Based calculation for dict configuration
+                 */
+                final String value = input.getString(field);
+                if (Ut.notNil(value)) {
+                    /*
+                     * Extracted
+                     */
+                    final String converted = dualItem.to(value);
+                    if (Ut.isNil(converted)) {
+                        /*
+                         * Excel, Self reference
+                         */
+                        final ConcurrentMap<String, String> prepared = preparedMap.get(field);
+                        if (Objects.nonNull(prepared) && !prepared.isEmpty()) {
+                            final String found = prepared.get(value);
+                            input.put(field, found);
+                        }
+                    } else {
+                        /*
+                         * Existing, Hit database reference
+                         */
+                        input.put(field, converted);
+                    }
+                }
+            });
+            return Ux.future(input);
+        }
     }
 
     /*
