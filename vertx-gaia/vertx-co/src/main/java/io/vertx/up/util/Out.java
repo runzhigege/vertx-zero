@@ -3,6 +3,7 @@ package io.vertx.up.util;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,6 +12,8 @@ import java.io.FileWriter;
  *
  */
 final class Out {
+    private static final Annal LOGGER = Annal.get(Out.class);
+
     private Out() {
     }
 

@@ -52,10 +52,6 @@ public interface UserStub {
      * modify updateUser method: save user information and related roles and groups
      * add deleteUser method to delete user information: delete user information and related roles and groups
      */
-
-    /**
-     * fetch user with related roles and groups
-     */
     Future<JsonObject> fetchUser(String userKey);
 
     /**

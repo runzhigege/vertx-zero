@@ -34,13 +34,15 @@ public interface Addr {
          * modified by Hongwei at 2019/12/06
          * add get, create, update and delete methods for user domain.
          */
-        String GET = Prefix._EVENT + "X-GET/ID";
+        String GET = Prefix._EVENT + "X-USER/GET/ID";
 
-        String ADD = Prefix._EVENT + "X-ADD";
+        String ADD = Prefix._EVENT + "X-USER/ADD";
 
-        String DELETE = Prefix._EVENT + "X-DELETE/ID";
+        String DELETE = Prefix._EVENT + "X-DELETE/USER/ID";
 
-        String UPDATE = Prefix._EVENT + "X-PUT/ID";
+        String UPDATE = Prefix._EVENT + "X-PUT/USER/ID";
+
+        String IMPORT = Prefix._EVENT + "X-IMPORT/USER";
     }
 
     interface Group {

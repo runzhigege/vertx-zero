@@ -1,7 +1,6 @@
 package cn.vertxup.crud.api;
 
 import io.vertx.core.Future;
-import io.vertx.core.MultiMap;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -11,10 +10,7 @@ import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.cv.IxMsg;
 import io.vertx.tp.crud.init.IxPin;
 import io.vertx.tp.crud.refine.Ix;
-import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
-import io.vertx.tp.optic.Pocket;
-import io.vertx.tp.optic.component.Dictionary;
 import io.vertx.tp.plugin.excel.ExcelClient;
 import io.vertx.tp.plugin.excel.atom.ExRecord;
 import io.vertx.tp.plugin.excel.atom.ExTable;
@@ -23,10 +19,7 @@ import io.vertx.up.annotations.Plugin;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.commune.Envelop;
-import io.vertx.up.commune.config.Dict;
 import io.vertx.up.commune.config.DictEpsilon;
-import io.vertx.up.commune.config.DictSource;
-import io.vertx.up.commune.config.DualItem;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
@@ -120,7 +113,7 @@ public class FileActor {
                 /*
                  * Read dict only once
                  */
-                final Future<JsonArray> result = this.fetchDict(config, request).compose(dictMap -> {
+                final Future<JsonArray> result = Unity.fetchDict(request, config).compose(dictMap -> {
                     /*
                      * Apply default value
                      */
@@ -140,7 +133,7 @@ public class FileActor {
                                         Ix.unique(queried)
                                                 /* Audit: Update */
                                                 .compose(item -> IxActor.update().bind(request).procAsync(item, config))
-                                                .compose(item -> this.importDict(item, dictMap, preparedMap, config))
+                                                .compose(item -> Unity.importDict(item, dictMap, preparedMap, config))
                                                 /* Final Update */
                                                 .compose(json -> Ix.entityAsync(json, config))
                                                 .compose(jooq::updateAsync)
@@ -150,7 +143,7 @@ public class FileActor {
                                                 /* Audit: Create / Update */
                                                 .compose(item -> IxActor.create().bind(request).procAsync(item, config))
                                                 .compose(item -> IxActor.update().bind(request).procAsync(item, config))
-                                                .compose(item -> this.importDict(item, dictMap, preparedMap, config))
+                                                .compose(item -> Unity.importDict(item, dictMap, preparedMap, config))
                                                 /* Final Insert */
                                                 .compose(json -> Ix.entityAsync(json, config))
                                                 .compose(jooq::insertAsync)
@@ -169,54 +162,6 @@ public class FileActor {
             promise.complete(Envelop.success(Boolean.FALSE));
         }
         return promise.future();
-    }
-
-    private Future<JsonObject> importDict(final JsonObject input,
-                                          final ConcurrentMap<String, JsonArray> dictMap,
-                                          final ConcurrentMap<String, ConcurrentMap<String, String>> preparedMap,
-                                          final IxModule config) {
-        if (Objects.isNull(dictMap)) {
-            return Ux.future(input);
-        } else {
-            /*
-             * Additional Steps
-             */
-            final ConcurrentMap<String, DictEpsilon> epsilonMap = config.getEpsilon();
-            final ConcurrentMap<String, DualItem> dual = Ux.dictDual(epsilonMap, dictMap);
-            /*
-             * Max calculation here for
-             * 1) Excel self reference of group
-             * 2) Database reference of current group
-             */
-            dual.forEach((field, dualItem) -> {
-                /*
-                 * Based calculation for dict configuration
-                 */
-                final String value = input.getString(field);
-                if (Ut.notNil(value)) {
-                    /*
-                     * Extracted
-                     */
-                    final String converted = dualItem.to(value);
-                    if (Ut.isNil(converted)) {
-                        /*
-                         * Excel, Self reference
-                         */
-                        final ConcurrentMap<String, String> prepared = preparedMap.get(field);
-                        if (Objects.nonNull(prepared) && !prepared.isEmpty()) {
-                            final String found = prepared.get(value);
-                            input.put(field, found);
-                        }
-                    } else {
-                        /*
-                         * Existing, Hit database reference
-                         */
-                        input.put(field, converted);
-                    }
-                }
-            });
-            return Ux.future(input);
-        }
     }
 
     @Address(Addr.File.EXPORT)
@@ -296,7 +241,7 @@ public class FileActor {
                      * To avoid final in lambda expression
                      */
                     final JsonArray inputData = data.copy();
-                    return this.fetchDict(config, request).compose(dictMap -> {
+                    return Unity.fetchDict(request, config).compose(dictMap -> {
                         /*
                          * Dictionary fetching for exporting
                          */
@@ -325,40 +270,4 @@ public class FileActor {
         );
     }
 
-    private String fetchTo(final String value, final List<JsonObject> source, final DictEpsilon epsilon) {
-        /*
-         * in = name
-         * out = key
-         */
-        return source.stream()
-                .filter(item -> value.equals(item.getString(epsilon.getIn())))
-                .map(item -> item.getString(epsilon.getOut()))
-                .findAny().orElse(null);
-    }
-
-    private Future<ConcurrentMap<String, JsonArray>> fetchDict(final IxModule config, final Envelop request) {
-        /* Epsilon */
-        final ConcurrentMap<String, DictEpsilon> epsilonMap = config.getEpsilon();
-        /* Channel Plugin */
-        final Dictionary plugin = Pocket.lookup(Dictionary.class);
-        /* Dict */
-        final Dict dict = config.getSource();
-        if (epsilonMap.isEmpty() || Objects.isNull(plugin) || !dict.validSource()) {
-            /*
-             * Direct returned
-             */
-            Ix.infoRest(LOGGER, "Plugin condition failure, {0}, {1}, {2}",
-                    epsilonMap.isEmpty(), Objects.isNull(plugin), !dict.validSource());
-            return Ux.future(new ConcurrentHashMap<>());
-        } else {
-            final List<DictSource> sources = dict.getSource();
-            final MultiMap paramMap = MultiMap.caseInsensitiveMultiMap();
-            final JsonObject headers = request.headersX();
-            paramMap.add(KeField.SIGMA, headers.getString(KeField.SIGMA));
-            /*
-             * To avoid final in lambda expression
-             */
-            return plugin.fetchAsync(paramMap, sources);
-        }
-    }
 }

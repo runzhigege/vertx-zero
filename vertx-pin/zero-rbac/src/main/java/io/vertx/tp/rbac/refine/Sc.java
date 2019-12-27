@@ -40,6 +40,16 @@ public class Sc {
         ScLog.debugCredit(logger, pattern, args);
     }
 
+    public static void infoWeb(final Class<?> clazz, final String pattern, final Object... args) {
+        final Annal LOGGER = Annal.get(clazz);
+        ScLog.infoWeb(LOGGER, pattern, args);
+    }
+
+    public static void warnWeb(final Class<?> clazz, final String pattern, final Object... args) {
+        final Annal LOGGER = Annal.get(clazz);
+        ScLog.warnWeb(LOGGER, pattern, args);
+    }
+
     /*
      * Uri normalize and extraction of tool
      */
