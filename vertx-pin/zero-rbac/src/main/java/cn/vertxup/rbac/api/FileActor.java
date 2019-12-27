@@ -201,6 +201,7 @@ public class FileActor {
                                         inserted.put(KeField.CREATED_BY, userId);
                                         inserted.put(KeField.CREATED_AT, Instant.now());
                                         final SUser user = Ux.fromJson(inserted, SUser.class);
+                                        user.setActive(Boolean.TRUE);
                                         return Ux.Jooq.on(SUserDao.class).insertAsync(user)
                                                 .compose(insertUser -> this.saveRel(insertUser, record, roles));
                                     } else {
@@ -215,6 +216,7 @@ public class FileActor {
                                             updated.put(KeField.UPDATED_AT, Instant.now());
                                         }
                                         final SUser user = Ux.fromJson(updated, SUser.class);
+                                        user.setActive(Boolean.TRUE);
                                         return Ux.Jooq.on(SUserDao.class).updateAsync(user)
                                                 .compose(insertUser -> this.saveRel(insertUser, record, roles));
                                     }
