@@ -109,8 +109,10 @@ class Is {
                 /*
                  * Non date type value here
                  * Compare with `equals`
+                 * Except `Date` type, we must set String literal to be compared
+                 * instead of data type conversation
                  */
-                return oldValue.equals(newValue);
+                return oldValue.toString().equals(newValue.toString());
             }
         } else {
             /*
