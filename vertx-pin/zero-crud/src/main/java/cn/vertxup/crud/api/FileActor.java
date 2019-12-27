@@ -10,6 +10,7 @@ import io.vertx.tp.crud.cv.Addr;
 import io.vertx.tp.crud.cv.IxMsg;
 import io.vertx.tp.crud.init.IxPin;
 import io.vertx.tp.crud.refine.Ix;
+import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.plugin.excel.ExcelClient;
 import io.vertx.tp.plugin.excel.atom.ExRecord;
@@ -121,6 +122,8 @@ public class FileActor {
                     prepared.forEach(record -> {
                         /* Header, sigma, appId, appKey */
                         IxActor.header().bind(request).proc(record, config);
+                        /* Active = true */
+                        record.put(KeField.ACTIVE, Boolean.TRUE);
                         /* Serial */
                         futures.add(IxActor.serial().bind(request).procAsync(record, config)
                                 /* Unique Filters */
@@ -135,6 +138,7 @@ public class FileActor {
                                                 .compose(item -> IxActor.update().bind(request).procAsync(item, config))
                                                 .compose(item -> Unity.importDict(item, dictMap, preparedMap, config))
                                                 /* Final Update */
+                                                .compose(item -> Ux.future(item.mergeIn(record)))
                                                 .compose(json -> Ix.entityAsync(json, config))
                                                 .compose(jooq::updateAsync)
                                                 .compose(Ux::fnJObject) :
