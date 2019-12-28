@@ -705,13 +705,12 @@ public final class Ut {
     }
 
     public static boolean isChanged(final JsonObject oldRecord, final JsonObject newRecord,
-                                    final Set<String> ignores, final Set<String> dateFields, final TemporalUnit unit) {
-        return Is.isChanged(oldRecord, newRecord, ignores, dateFields, unit);
+                                    final Set<String> ignores, final ConcurrentMap<String, Class<?>> dateFields) {
+        return Is.isChanged(oldRecord, newRecord, ignores, dateFields);
     }
 
-    public static boolean isChanged(final JsonObject oldRecord, final JsonObject newRecord,
-                                    final Set<String> ignores, final Set<String> dateFields) {
-        return Is.isChanged(oldRecord, newRecord, ignores, dateFields, null);
+    public static TemporalUnit toUnit(final Class<?> clazz) {
+        return Is.getUnit(clazz);
     }
 
     public static boolean isSame(final Object oldValue, final Object newValue, final boolean isDate,
