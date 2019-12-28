@@ -3,10 +3,14 @@ package io.vertx.up.util;
 import io.vertx.core.json.JsonObject;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentMap;
 
 /*
  * Specific checking
@@ -28,7 +32,7 @@ class Is {
     }
 
     static boolean isChanged(final JsonObject oldRecord, final JsonObject newRecord,
-                             final Set<String> ignores, final Set<String> dateFields, final TemporalUnit unit) {
+                             final Set<String> ignores, final ConcurrentMap<String, Class<?>> dateFields) {
         /*
          * copy each compared json object and remove
          * all fields that will not be compared here.
@@ -39,7 +43,7 @@ class Is {
             ignores.forEach(oldCopy::remove);
             ignores.forEach(newCopy::remove);
         }
-        final Set<String> dateFieldSet = Objects.isNull(dateFields) ? new HashSet<>() : dateFields;
+        final Set<String> dateFieldSet = Objects.isNull(dateFields) ? new HashSet<>() : dateFields.keySet();
         /*
          * Get the final result of calculation.
          * 1) From old calculation
@@ -50,6 +54,7 @@ class Is {
              */
             final Object oldValue = oldCopy.getValue(field);
             final Object newValue = newCopy.getValue(field);
+            final TemporalUnit unit = getUnit(dateFields.get(field));
             return isSame(oldValue, newValue, dateFieldSet.contains(field), unit);
         });
         /*
@@ -63,9 +68,26 @@ class Is {
              */
             final Object oldValue = oldCopy.getValue(field);
             final Object newValue = newCopy.getValue(field);
+            final TemporalUnit unit = getUnit(dateFields.get(field));
             return isSame(oldValue, newValue, dateFieldSet.contains(field), unit);
         });
         return !(unchanged && additional);
+    }
+
+    static TemporalUnit getUnit(final Class<?> clazz) {
+        final TemporalUnit unit;
+        if (LocalDateTime.class == clazz || LocalTime.class == clazz) {
+            /*
+             * 按分钟
+             */
+            unit = ChronoUnit.MINUTES;
+        } else {
+            /*
+             * 某天
+             */
+            unit = ChronoUnit.DAYS;
+        }
+        return unit;
     }
 
     static boolean isSame(final Object oldValue, final Object newValue,
