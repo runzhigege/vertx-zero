@@ -1,8 +1,10 @@
 package cn.vertxup.rbac.api;
 
+import cn.vertxup.rbac.domain.tables.daos.OUserDao;
 import cn.vertxup.rbac.domain.tables.daos.RUserRoleDao;
 import cn.vertxup.rbac.domain.tables.daos.SRoleDao;
 import cn.vertxup.rbac.domain.tables.daos.SUserDao;
+import cn.vertxup.rbac.domain.tables.pojos.OUser;
 import cn.vertxup.rbac.domain.tables.pojos.RUserRole;
 import cn.vertxup.rbac.domain.tables.pojos.SRole;
 import cn.vertxup.rbac.domain.tables.pojos.SUser;
@@ -12,6 +14,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
+import io.vertx.tp.optic.Credential;
 import io.vertx.tp.plugin.excel.ExcelClient;
 import io.vertx.tp.plugin.excel.atom.ExRecord;
 import io.vertx.tp.plugin.excel.atom.ExTable;
@@ -142,6 +145,23 @@ public class FileActor {
         return promise.future();
     }
 
+    private Future<SUser> createToken(final SUser user) {
+        return Ke.channelAsync(Credential.class,
+                () -> Ux.future(user),
+                stub -> stub.fetchAsync(user.getSigma())
+                        .compose(credential -> Ux.future(new OUser()
+                                .setActive(Boolean.TRUE)
+                                .setKey(UUID.randomUUID().toString())
+                                .setClientId(user.getKey())
+                                .setClientSecret(Ut.randomString(64))
+                                .setScope(credential.getString(KeField.REALM))
+                                .setLanguage(user.getLanguage())
+                                .setGrantType(credential.getString(KeField.GRANT_TYPE))))
+                        .compose(ouser -> Ux.Jooq.on(OUserDao.class).insertAsync(ouser))
+                        .compose(tokend -> Ux.future(user))
+        );
+    }
+
     private Future<JsonObject> saveRel(final SUser user, final JsonObject record, final List<SRole> roles) {
         final String roleNames = record.getString("roles");
         if (Objects.isNull(user) || Ut.isNil(roleNames)) {
@@ -204,7 +224,15 @@ public class FileActor {
                                         inserted.put(KeField.UPDATED_AT, Instant.now());
                                         final SUser user = Ux.fromJson(inserted, SUser.class);
                                         user.setActive(Boolean.TRUE);
+                                        /*
+                                         * Default password hard coding: 12345678
+                                         */
+                                        user.setPassword("25D55AD283AA400AF464C76D713C07AD");
                                         return Ux.Jooq.on(SUserDao.class).insertAsync(user)
+                                                /*
+                                                 * Only new user need to create oauth token
+                                                 */
+                                                .compose(this::createToken)
                                                 .compose(insertUser -> this.saveRel(insertUser, record, roles));
                                     } else {
                                         /*

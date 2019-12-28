@@ -6,8 +6,9 @@ import io.vertx.up.exception.WebException;
 public class _403PermissionLimitException extends WebException {
 
     public _403PermissionLimitException(final Class<?> clazz,
-                                        final String actionCode) {
-        super(clazz, actionCode);
+                                        final String actionCode,
+                                        final String permissionId) {
+        super(clazz, actionCode, permissionId);
     }
 
     @Override
