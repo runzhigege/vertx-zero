@@ -107,7 +107,7 @@ class AccreditFlow {
                 Sc.debugCredit(LOGGER, AuthMsg.CREDIT_AUTHORIZED, permissionId);
                 return Future.succeededFuture(Boolean.TRUE);
             } else {
-                final WebException error = new _403PermissionLimitException(clazz, action.getCode());
+                final WebException error = new _403PermissionLimitException(clazz, action.getCode(), permissionId);
                 return Future.failedFuture(error);
             }
         } else {

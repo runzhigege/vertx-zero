@@ -4,6 +4,10 @@ public interface KeField {
 
     String FIELD = "field";
 
+    String SCOPE = "scope";
+    String REALM = "realm";
+    String GRANT_TYPE = "grantType";
+
     String ITEMS = "items";
     String CHANGES = "changes";
     String DATA_KEY = "dataKey";
