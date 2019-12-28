@@ -200,6 +200,8 @@ public class FileActor {
                                         inserted.put(KeField.KEY, UUID.randomUUID().toString());
                                         inserted.put(KeField.CREATED_BY, userId);
                                         inserted.put(KeField.CREATED_AT, Instant.now());
+                                        inserted.put(KeField.UPDATED_BY, userId);
+                                        inserted.put(KeField.UPDATED_AT, Instant.now());
                                         final SUser user = Ux.fromJson(inserted, SUser.class);
                                         user.setActive(Boolean.TRUE);
                                         return Ux.Jooq.on(SUserDao.class).insertAsync(user)
