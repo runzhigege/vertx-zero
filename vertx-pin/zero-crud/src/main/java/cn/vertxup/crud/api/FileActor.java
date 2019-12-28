@@ -37,6 +37,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 @Queue
+@SuppressWarnings("all")
 public class FileActor {
 
     private static final Annal LOGGER = Annal.get(FileActor.class);
@@ -104,8 +105,14 @@ public class FileActor {
                                     .map(ExRecord::toJson)
                                     .map(record -> IxActor.uuid().proc(record, config))
                                     .collect(Collectors.toList());
-                            Ix.infoRest(LOGGER, "Table: {0}, Records: {1}", table.getName(), String.valueOf(records.size()));
-                            prepared.addAll(records);
+                            /*
+                             * Unique fields must contain values
+                             */
+                            records.forEach(record -> {
+                                if (Unity.isMatch(record, config)) {
+                                    prepared.add(record);
+                                }
+                            });
                         });
                         /*
                          * Read dict only once
