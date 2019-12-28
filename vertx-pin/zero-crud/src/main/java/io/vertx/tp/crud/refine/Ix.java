@@ -5,9 +5,9 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxMeta;
 import io.vertx.tp.crud.atom.IxModule;
+import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.unity.UxJooq;
-import io.vertx.up.log.Annal;
 
 import java.util.List;
 import java.util.function.Function;
@@ -72,7 +72,6 @@ public class Ix {
         return Ux.future(reference);
     }
 
-    @SuppressWarnings("all")
     public static <T> Future<List<T>> entityAsync(final JsonArray data, final IxModule config) {
         return Ux.future(IxSerialize.entity(data, config));
     }
@@ -95,6 +94,10 @@ public class Ix {
 
     public static void infoRest(final Annal logger, final String pattern, final Object... args) {
         IxLog.infoRest(logger, pattern, args);
+    }
+
+    public static void warnRest(final Annal logger, final String pattern, final Object... args) {
+        IxLog.warnRest(logger, pattern, args);
     }
 
     public static void infoFilters(final Annal logger, final String pattern, final Object... args) {
