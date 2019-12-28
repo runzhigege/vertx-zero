@@ -11,6 +11,7 @@ public class DictEpsilon implements Serializable, Json {
     private transient String source;
     private transient String in;
     private transient String out;
+    private transient boolean parent;
 
     public String getSource() {
         return this.source;
@@ -36,6 +37,14 @@ public class DictEpsilon implements Serializable, Json {
         this.out = out;
     }
 
+    public boolean getParent() {
+        return this.parent;
+    }
+
+    public void setParent(final boolean parent) {
+        this.parent = parent;
+    }
+
     @Override
     public JsonObject toJson() {
         return Ut.serializeJson(this);
@@ -47,6 +56,14 @@ public class DictEpsilon implements Serializable, Json {
             this.source = json.getString("source");
             this.in = json.getString("in");
             this.out = json.getString("out");
+            if (json.containsKey("parent")) {
+                this.parent = json.getBoolean("parent");
+            } else {
+                /*
+                 * Not configured, it means current dict should be not Self reference
+                 */
+                this.parent = false;
+            }
         }
     }
 
