@@ -15,6 +15,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.optic.Credential;
+import io.vertx.tp.optic.business.ExModel;
 import io.vertx.tp.plugin.excel.ExcelClient;
 import io.vertx.tp.plugin.excel.atom.ExRecord;
 import io.vertx.tp.plugin.excel.atom.ExTable;
@@ -37,6 +38,7 @@ import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Queue
@@ -91,6 +93,8 @@ public class FileActor {
                      * Required: username, mobile, email
                      */
                     if (Ke.isIn(record, KeField.USERNAME)) {
+                        // TODO:
+                        record.put(KeField.LANGUAGE, "cn");
                         prepared.add(record);
                     } else {
                         Sc.warnWeb(this.getClass(), "Ignored record: {0}", record.encode());
@@ -233,12 +237,23 @@ public class FileActor {
                                          * Default password hard coding: 12345678
                                          */
                                         user.setPassword("25D55AD283AA400AF464C76D713C07AD");
-                                        return Ux.Jooq.on(SUserDao.class).insertAsync(user)
-                                                /*
-                                                 * Only new user need to create oauth token
-                                                 */
-                                                .compose(this::createToken)
-                                                .compose(insertUser -> this.saveRel(insertUser, record, roles));
+                                        /*
+                                         * Supplier
+                                         */
+                                        final Function<SUser, Future<JsonObject>> applyFn = (validUser) ->
+                                                Ux.Jooq.on(SUserDao.class).insertAsync(validUser)
+                                                        /*
+                                                         * Only new user need to create oauth token
+                                                         */
+                                                        .compose(this::createToken)
+                                                        .compose(insertUser -> this.saveRel(insertUser, record, roles));
+
+                                        return Ke.channelAsync(ExModel.class,
+                                                () -> applyFn.apply(user),
+                                                stub -> stub.keyAsync(inserted).compose(modelKey -> {
+                                                    user.setModelKey(modelKey);
+                                                    return applyFn.apply(user);
+                                                }));
                                     } else {
                                         /*
                                          * Update User

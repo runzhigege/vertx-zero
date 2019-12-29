@@ -94,7 +94,7 @@ public abstract class ActiveRecord implements Record {
             final Class<?> type = this.types().get(field);
             this.data.put(field, Ut.aiJValue(value, type));
         } else {
-            this.getLogger().warn("[ ZERO ] The field `{0}` has not been defined in model: `{1}`",
+            this.getLogger().debug("[ ZERO ] The field `{0}` has not been defined in model: `{1}`",
                     field, this.identifier());
         }
         return this;
