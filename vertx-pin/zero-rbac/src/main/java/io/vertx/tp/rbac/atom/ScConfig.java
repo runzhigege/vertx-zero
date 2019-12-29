@@ -6,7 +6,6 @@ import java.io.Serializable;
  * Security configuration data
  *
  */
-@SuppressWarnings("all")
 public class ScConfig implements Serializable {
     /*
      * Unique condition for Security Entity
