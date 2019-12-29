@@ -90,7 +90,7 @@ public class FileActor {
                     /*
                      * Required: username, mobile, email
                      */
-                    if (Ke.isIn(record, KeField.USERNAME, KeField.MOBILE, KeField.EMAIL)) {
+                    if (Ke.isIn(record, KeField.USERNAME)) {
                         prepared.add(record);
                     } else {
                         Sc.warnWeb(this.getClass(), "Ignored record: {0}", record.encode());
@@ -113,6 +113,10 @@ public class FileActor {
                      * or
                      * ( mobile + sigma )
                      */
+                    complex.put(KeField.USERNAME, record.getString(KeField.USERNAME))
+                            .put(KeField.SIGMA, record.getString(KeField.SIGMA))
+                            .put(Strings.EMPTY, Boolean.TRUE);
+                    /*
                     complex.put(Strings.EMPTY, Boolean.FALSE)
                             .put("$0", new JsonObject()
                                     .put(KeField.USERNAME, record.getString(KeField.USERNAME))
@@ -129,6 +133,7 @@ public class FileActor {
                                     .put(KeField.SIGMA, record.getString(KeField.SIGMA))
                                     .put(Strings.EMPTY, Boolean.TRUE)
                             );
+                     */
                     Sc.infoWeb(this.getClass(), "Unique filters: {0}", complex.encode());
                     futures.add(this.saveAsync(complex, record, request));
                 });

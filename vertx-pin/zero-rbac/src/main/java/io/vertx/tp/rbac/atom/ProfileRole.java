@@ -87,7 +87,6 @@ public class ProfileRole implements Serializable {
      * 2.2) If not null: Return authorities directly ( pick up from cache )
      */
     private Future<JsonArray> fetchAuthoritiesAsyncWithCache() {
-        System.err.println(this.roleId);
         return Sc.<JsonArray>cachePermission(this.roleId).compose(array -> {
             if (Objects.isNull(array)) {
                 return this.fetchAuthoritiesAsync()

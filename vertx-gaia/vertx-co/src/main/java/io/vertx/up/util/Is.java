@@ -3,6 +3,7 @@ package io.vertx.up.util;
 import io.vertx.core.json.JsonObject;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -107,25 +108,41 @@ class Is {
                  * 1) Convert to instant first
                  * 2) When `unit` is null, do not comparing other kind of here.
                  */
-                Instant oldDate = Period.parseFull(oldValue.toString())
+                final Instant oldInstant = Period.parseFull(oldValue.toString())
                         .toInstant();
-                Instant newDate = Period.parseFull(newValue.toString())
+                final Instant newInstant = Period.parseFull(newValue.toString())
                         .toInstant();
-                if (Objects.nonNull(oldDate) && Objects.nonNull(newDate)) {
+                /*
+                 * Compared by unit
+                 */
+                final LocalDateTime oldDateTime = Period.toDateTime(oldInstant);
+                final LocalDateTime newDateTime = Period.toDateTime(newInstant);
+                /*
+                 * Only compared Date
+                 */
+                final LocalDate oldDate = oldDateTime.toLocalDate();
+                final LocalDate newDate = newDateTime.toLocalDate();
+
+                final LocalTime oldTime = oldDateTime.toLocalTime();
+                final LocalTime newTime = newDateTime.toLocalTime();
+                if (ChronoUnit.DAYS == unit) {
                     /*
-                     * Unit convert here when input `unit` here
+                     * Date Only
                      */
-                    if (Objects.nonNull(unit)) {
-                        newDate = newDate.truncatedTo(unit);
-                        oldDate = oldDate.truncatedTo(unit);
-                    }
-                    return oldDate.equals(newDate);
+                    return oldDate.isEqual(newDate);
+                } else if (ChronoUnit.MINUTES == unit) {
+                    /*
+                     * Time to HH:mm
+                     */
+                    return oldDate.isEqual(newDate) &&
+                            (oldTime.getHour() == newTime.getHour())
+                            && (oldTime.getMinute() == newTime.getMinute());
                 } else {
                     /*
-                     * When the value could not be converted to `Instant`
-                     * They are compared with `equals` instead.
+                     * DateTime completed
                      */
-                    return oldValue.equals(newValue);
+                    return oldDate.isEqual(newDate) &&
+                            oldTime.equals(newTime);
                 }
             } else {
                 /*
