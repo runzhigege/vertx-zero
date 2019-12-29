@@ -109,6 +109,9 @@ public class FileActor {
                              * Unique fields must contain values
                              */
                             records.forEach(record -> {
+                                /* Header, sigma, appId, appKey */
+                                IxActor.header().bind(request).proc(record, config);
+
                                 if (Unity.isMatch(record, config)) {
                                     prepared.add(record);
                                 }
@@ -125,8 +128,6 @@ public class FileActor {
                              */
                             final List<Future<JsonObject>> futures = new ArrayList<>();
                             prepared.forEach(record -> {
-                                /* Header, sigma, appId, appKey */
-                                IxActor.header().bind(request).proc(record, config);
                                 /* Active = true */
                                 record.put(KeField.ACTIVE, Boolean.TRUE);
                                 /* Serial */

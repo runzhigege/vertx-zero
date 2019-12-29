@@ -76,9 +76,7 @@ final class Period {
 
 
     static LocalDateTime toDateTime(final Instant instant) {
-        final ZoneId zone = ZoneId.systemDefault();
-        final ZoneOffset offset = zone.getRules().getOffset(Instant.now());
-        return LocalDateTime.ofInstant(instant, offset);
+        return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
     }
 
     /**
