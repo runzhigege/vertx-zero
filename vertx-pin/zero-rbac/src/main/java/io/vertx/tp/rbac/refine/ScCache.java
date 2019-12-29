@@ -60,4 +60,13 @@ class ScCache {
         return Ux.Pool.on(permissionPool).put(key, value)
                 .compose(item -> Ux.future(item.getValue()));
     }
+
+    /*
+     * Pool configured for clean
+     */
+    static <V> Future<V> permissionClear(final String key) {
+        final String permissionPool = CONFIG.getPermissionPool();
+        return Ux.Pool.on(permissionPool).<String, V>remove(key)
+                .compose(item -> Ux.future(item.getValue()));
+    }
 }

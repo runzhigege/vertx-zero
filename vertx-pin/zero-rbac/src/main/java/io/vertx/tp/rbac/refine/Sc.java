@@ -83,6 +83,10 @@ public class Sc {
         return ScCache.permission(key, value);
     }
 
+    public static <V> Future<V> clearPermission(final String key) {
+        return ScCache.permissionClear(key);
+    }
+
     public static Future<JsonObject> cacheBound(final RoutingContext context, final Envelop envelop) {
         return ScPhase.cacheBound(context, envelop);
     }
