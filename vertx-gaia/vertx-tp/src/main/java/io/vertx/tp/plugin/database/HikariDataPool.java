@@ -141,9 +141,9 @@ public class HikariDataPool implements DataPool {
             this.dataSource.addDataSourceProperty("cachePrepStmts",
                     this.database.getOption(OPT_STATEMENT_CACHED, "true"));
             this.dataSource.addDataSourceProperty("prepStmtCacheSize",
-                    this.database.getOption(OPT_STATEMENT_CACHE_SIZE, "1024"));
+                    this.database.getOption(OPT_STATEMENT_CACHE_SIZE, "2048"));
             this.dataSource.addDataSourceProperty("prepStmtCacheSqlLimit",
-                    this.database.getOption(OPT_STATEMENT_CACHE_SQL_LIMIT, "2048"));
+                    this.database.getOption(OPT_STATEMENT_CACHE_SQL_LIMIT, "4096"));
 
             // Data pool name
             this.dataSource.setPoolName(this.database.getOption(OPT_POOL_NAME, "ZERO-POOL-DATA"));
