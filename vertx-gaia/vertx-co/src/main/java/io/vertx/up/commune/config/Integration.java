@@ -51,6 +51,7 @@ public class Integration implements Json, Serializable {
     private transient String endpoint;
     private transient Integer port;
     private transient String username;
+    private transient String protocol;
     /*
      * SSL enabled, these two fields stored
      * 1) publicKeyFile
@@ -95,6 +96,14 @@ public class Integration implements Json, Serializable {
 
     public void setPort(final Integer port) {
         this.port = port;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
     }
 
     public String getUsername() {
@@ -160,6 +169,7 @@ public class Integration implements Json, Serializable {
         this.hostname = data.getString("hostname");
         this.username = data.getString("username");
         this.password = data.getString("password");
+        this.protocol = data.getString("protocol");
         this.port = data.getInteger("port");
         this.publicKeyFile = data.getString("publicKeyFile");
         /*
@@ -194,6 +204,7 @@ public class Integration implements Json, Serializable {
         final Integration that = (Integration) o;
         return this.endpoint.equals(that.endpoint) &&
                 this.port.equals(that.port) &&
+                this.protocol.equals(that.protocol) &&
                 this.username.equals(that.username) &&
                 this.password.equals(that.password) &&
                 this.hostname.equals(that.hostname);
@@ -201,7 +212,7 @@ public class Integration implements Json, Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.endpoint, this.port, this.username, this.password, this.hostname);
+        return Objects.hash(this.endpoint, this.port, this.protocol, this.username, this.password, this.hostname);
     }
 
     @Override
@@ -210,6 +221,7 @@ public class Integration implements Json, Serializable {
                 "apis=" + this.apis +
                 ", endpoint='" + this.endpoint + '\'' +
                 ", port=" + this.port +
+                ", protocol='" + this.protocol + '\'' +
                 ", username='" + this.username + '\'' +
                 ", password='" + this.password + '\'' +
                 ", hostname='" + this.hostname + '\'' +
