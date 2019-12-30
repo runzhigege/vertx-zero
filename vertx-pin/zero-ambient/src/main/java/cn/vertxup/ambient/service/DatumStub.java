@@ -25,4 +25,6 @@ public interface DatumStub {
     Future<JsonArray> numbers(String appId, String code, Integer count);
 
     Future<JsonArray> numbersBySigma(String sigma, String code, Integer count);
+
+    Future<JsonArray> codesBySigma(String sigma, String identifier, Integer count);
 }
