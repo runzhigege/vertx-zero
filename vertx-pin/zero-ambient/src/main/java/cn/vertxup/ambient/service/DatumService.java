@@ -77,8 +77,18 @@ public class DatumService implements DatumStub {
         At.infoFlow(this.getClass(), "Number parameters: sigma = {0}, code = {1}, count = {2}",
                 sigma, code, count);
         final JsonObject filters = new JsonObject();
-        filters.put("sigma", sigma);
-        filters.put("code", code);
+        filters.put(KeField.SIGMA, sigma);
+        filters.put(KeField.CODE, code);
+        return this.numbers(filters, count);
+    }
+
+    @Override
+    public Future<JsonArray> codesBySigma(final String sigma, final String identifier, final Integer count) {
+        At.infoFlow(this.getClass(), "Number parameters: sigma = {0}, identifier = {1}, count = {2}",
+                sigma, identifier, count);
+        final JsonObject filters = new JsonObject();
+        filters.put(KeField.SIGMA, sigma);
+        filters.put(KeField.IDENTIFIER, identifier);
         return this.numbers(filters, count);
     }
 
