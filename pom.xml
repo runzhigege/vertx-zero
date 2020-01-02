@@ -169,6 +169,9 @@
         <maven.plugin.aspectj>1.11</maven.plugin.aspectj>
         <maven.plugin.jcabi>0.14.1</maven.plugin.jcabi>
         <maven.plugin.jar>3.1.2</maven.plugin.jar>
+
+        <!-- elasticsearch version -->
+        <elasticsearch.version>7.5.1</elasticsearch.version>
     </properties>
     <prerequisites>
         <maven>3.5.0</maven>
