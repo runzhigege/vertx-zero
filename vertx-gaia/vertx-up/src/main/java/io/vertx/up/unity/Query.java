@@ -24,24 +24,28 @@ class Query {
             } else {
                 // Projection Process
                 final Mojo mojo = Mirror.create(Query.class).mount(pojo).mojo();
-                if (data.containsKey("projection")) {
-                    data.put("projection", projection(data.getJsonArray("projection"), mojo));
-                }
-                if (data.containsKey("sorter")) {
-                    data.put("sorter", sorter(data.getJsonArray("sorter"), mojo));
-                }
-                if (data.containsKey("criteria")) {
-                    data.put("criteria", criteria(data.getJsonObject("criteria"), mojo));
-                }
-                LOGGER.info(Info.INQUIRY_MESSAGE, data.encode());
-                return Inquiry.create(data);
+                return getInquiry(data, mojo);
             }
         }, envelop);
     }
 
+    static Inquiry getInquiry(final JsonObject data, final Mojo mojo) {
+        if (data.containsKey("projection")) {
+            data.put("projection", projection(data.getJsonArray("projection"), mojo));
+        }
+        if (data.containsKey("sorter")) {
+            data.put("sorter", sorter(data.getJsonArray("sorter"), mojo));
+        }
+        if (data.containsKey("criteria")) {
+            data.put("criteria", criteria(data.getJsonObject("criteria"), mojo));
+        }
+        LOGGER.info(Info.INQUIRY_MESSAGE, data.encode());
+        return Inquiry.create(data);
+    }
+
     private static JsonArray sorter(final JsonArray sorter, final Mojo mojo) {
         final JsonArray sorters = new JsonArray();
-        final ConcurrentMap<String, String> mapping = mojo.getColumns();
+        final ConcurrentMap<String, String> mapping = mojo.getInAll();
         Ut.itJArray(sorter, String.class, (item, index) -> {
             final String key = item.contains(Strings.COMMA) ? item.split(Strings.COMMA)[0] : item;
             if (mapping.containsKey(key)) {
@@ -60,7 +64,7 @@ class Query {
 
     static JsonObject criteria(final JsonObject criteria, final Mojo mojo) {
         final JsonObject criterias = new JsonObject();
-        final ConcurrentMap<String, String> mapping = mojo.getColumns();
+        final ConcurrentMap<String, String> mapping = mojo.getInAll();
         for (final String field : criteria.fieldNames()) {
             // Filter processed
             final String key = field.contains(Strings.COMMA) ? field.split(Strings.COMMA)[0] : field;
@@ -93,7 +97,7 @@ class Query {
 
     private static JsonArray projection(final JsonArray projections, final Mojo mojo) {
         final JsonArray result = new JsonArray();
-        final ConcurrentMap<String, String> mapping = mojo.getRevert();
+        final ConcurrentMap<String, String> mapping = mojo.getIn();
         Ut.itJArray(projections, String.class, (item, index) ->
                 result.add(null == mapping.get(item) ? item : mapping.get(item)));
         return result;

@@ -6,6 +6,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.atom.Kv;
+import io.vertx.up.atom.pojo.Mojo;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
 import io.vertx.up.uca.condition.JooqCond;
@@ -162,9 +163,10 @@ class JooqJoinder {
     /*
      * Pagination Searching
      */
-    Future<JsonObject> searchPaginationAsync(final Inquiry inquiry) {
+    Future<JsonObject> searchPaginationAsync(final Inquiry inquiry, final Mojo mojo) {
         final JsonObject response = new JsonObject();
-        final JsonArray data = this.searchArray(inquiry);
+        final JsonArray data = this.searchArray(inquiry, mojo);
+
         response.put("list", data);
         final Integer counter = this.searchCount(inquiry);
         response.put("count", counter);
@@ -198,7 +200,7 @@ class JooqJoinder {
         return started.fetchCount();
     }
 
-    private JsonArray searchArray(final Inquiry inquiry) {
+    private JsonArray searchArray(final Inquiry inquiry, final Mojo mojo) {
         /*
          * DSLContext
          */
@@ -239,7 +241,7 @@ class JooqJoinder {
          */
         final Set<String> projectionSet = inquiry.getProjection();
         final JsonArray projection = Objects.isNull(projectionSet) ? new JsonArray() : Ut.toJArray(projectionSet);
-        return JooqResult.toJoin(records, projection, this.COLUMN_MAP);
+        return JooqResult.toJoin(records, projection, this.COLUMN_MAP, mojo);
     }
 
     private Field getColumn(final String field) {

@@ -35,8 +35,8 @@ public class Mirror {
 
     public Mirror mount(final String filename) {
         // Build meta
-        this.logger.info("[ ZERO ] Mount pojo configuration file {0}", filename);
         this.mojo = Fn.pool(Pool.MOJOS, filename, () -> {
+            this.logger.info("[ ZERO ] Mount pojo configuration file {0}", filename);
             final JsonObject data = Ut.ioYaml(MessageFormat.format(POJO, filename));
             return Fn.getNull(() -> Ut.deserialize(data, Mojo.class), data);
         });
@@ -55,7 +55,7 @@ public class Mirror {
     }
 
     public Mirror to() {
-        this.convert(this.mojo.getMapper());
+        this.convert(this.mojo.getOut());
         return this;
     }
 
@@ -79,7 +79,7 @@ public class Mirror {
     }
 
     public Mirror from() {
-        this.convert(this.mojo.getRevert());
+        this.convert(this.mojo.getIn());
         return this;
     }
 
