@@ -23,6 +23,10 @@ class ScLog {
         info(logger, "Auth", pattern, args);
     }
 
+    static void warnAuth(final Annal logger, final String pattern, final Object... args) {
+        warn(logger, "Auth", pattern, args);
+    }
+
     static void debugAuth(final Annal logger, final String pattern, final Object... args) {
         debug(logger, "Auth", pattern, args);
     }

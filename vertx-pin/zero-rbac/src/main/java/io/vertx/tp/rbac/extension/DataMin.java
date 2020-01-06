@@ -6,10 +6,10 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.cv.em.RegionType;
 import io.vertx.tp.rbac.refine.Sc;
-import io.vertx.up.commune.Envelop;
 import io.vertx.up.atom.query.Inquiry;
-import io.vertx.up.log.Annal;
+import io.vertx.up.commune.Envelop;
 import io.vertx.up.eon.Values;
+import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
 
 import java.util.HashSet;
@@ -42,9 +42,20 @@ class DataMin {
      * RegionType.ARRAY
      */
     @SuppressWarnings("all")
-    static void dwarfCollection(final Envelop envelop, final JsonObject matrix) {
+    static void dwarfRows(final Envelop envelop, final JsonObject matrix) {
         final JsonObject rows = matrix.getJsonObject("rows");
         dwarfUniform(envelop, rows, new HashSet<RegionType>() {
+            {
+                this.add(RegionType.ARRAY);
+                this.add(RegionType.PAGINATION);
+            }
+        }, (responseJson, type) -> DataDwarf.create(type).minimize(responseJson, matrix));
+    }
+
+    @SuppressWarnings("all")
+    static void dwarfCollection(final Envelop envelop, final JsonObject matrix) {
+        final JsonArray prjection = matrix.getJsonArray(Inquiry.KEY_PROJECTION);
+        dwarfUniform(envelop, prjection, new HashSet<RegionType>() {
             {
                 this.add(RegionType.ARRAY);
                 this.add(RegionType.PAGINATION);
