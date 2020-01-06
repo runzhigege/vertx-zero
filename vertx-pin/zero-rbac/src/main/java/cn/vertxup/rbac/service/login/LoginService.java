@@ -18,6 +18,7 @@ import io.vertx.up.util.Ut;
 
 import javax.inject.Inject;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class LoginService implements LoginStub {
 
@@ -40,7 +41,8 @@ public class LoginService implements LoginStub {
                                 () -> Ux.thenError(_449UserNotFoundException.class, this.getClass(), username)
                         ),
                         // Password Wrong
-                        Fn.branch(null != pojo && !password.equals(pojo.getPassword()),
+                        Fn.branch(null != pojo && (Objects.isNull(password) ||
+                                        !password.equals(pojo.getPassword())),
                                 () -> Ux.log(this.getClass()).on(AuthMsg.LOGIN_PWD).info(username, password),
                                 () -> Ux.thenError(_401PasswordWrongException.class, this.getClass(), username))
                 ))

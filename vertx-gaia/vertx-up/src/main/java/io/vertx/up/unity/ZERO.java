@@ -15,7 +15,7 @@ interface Info {
     String JOOQ_PARSE = "[ ZERO ] ( Jooq -> Condition ) Parsed result is \ncondition = \n{0}.";
     String JOOQ_BIND = "[ ZERO ] ( Pojo Bind ) Pojo up.god.file = {0} has been bind to dao {1}, Field mode enabled.";
     String JOOQ_FIELD = "[ ZERO ] ( Pojo ) The field \"{0}\" has been hitted ( converted ) to \"{1}\"";
-    String JOOQ_MOJO = "[ ZERO ] ( Pojo ) The analyzed result should be : Revert {0}, Columns = {1}";
+    String JOOQ_MOJO = "[ ZERO ] ( Pojo ) The analyzed result should be : Revert {0}";
 
     String INQUIRY_MESSAGE = "[ ZERO ] ( Inquiry ) Processed metadata = {0}.";
 

@@ -91,12 +91,12 @@ class JooqAnalyzer {
                 targetField = this.mapping.get(field);
             }
         } else {
-            if (this.pojo.getColumns().containsValue(field)) {
+            if (this.pojo.getInAll().containsValue(field)) {
                 // 2.1. Mojo bind, find column first
                 targetField = field;
             } else {
                 // 2.2. Mojo bind, consider field as param field first
-                targetField = this.pojo.getRevert().get(field);
+                targetField = this.pojo.getIn().get(field);
                 if (null == targetField) {
                     // 2.2.1. If target field is null, consider field as pojo field
                     targetField = field;
@@ -140,7 +140,7 @@ class JooqAnalyzer {
             this.pojo = Mirror.create(UxJooq.class).mount(pojo)
                     .mojo().put(this.mapping);
             // When bind pojo, the system will analyze columns
-            LOGGER.debug(Info.JOOQ_MOJO, this.pojo.getRevert(), this.pojo.getColumns());
+            LOGGER.debug(Info.JOOQ_MOJO, this.pojo.getIn(), this.pojo.getInAll());
         }
     }
 
