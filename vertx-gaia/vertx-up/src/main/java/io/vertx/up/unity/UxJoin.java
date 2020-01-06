@@ -66,15 +66,19 @@ public class UxJoin {
 
     private String translate(final Class<?> daoCls, final String field) {
         final String pojoFile = this.POJO_MAP.get(daoCls);
-        final Mojo mojo = Mirror.create(UxJoin.class).mount(pojoFile).mojo();
-        if (Objects.isNull(mojo)) {
+        if (Ut.isNil(pojoFile)) {
             return field;
         } else {
-            final String translated = mojo.getIn().get(field);
-            if (Ut.isNil(translated)) {
+            final Mojo mojo = Mirror.create(UxJoin.class).mount(pojoFile).mojo();
+            if (Objects.isNull(mojo)) {
                 return field;
             } else {
-                return translated;
+                final String translated = mojo.getIn().get(field);
+                if (Ut.isNil(translated)) {
+                    return field;
+                } else {
+                    return translated;
+                }
             }
         }
     }
@@ -83,7 +87,7 @@ public class UxJoin {
     /* (Async / Sync) Sort, Projection, Criteria, Pager Search Operations */
 
     public Future<JsonObject> searchAsync(final JsonObject params) {
-        final Inquiry inquiry = Query.getInquiry(params, this.merged);
+        final Inquiry inquiry = Objects.isNull(this.merged) ? Inquiry.create(params) : Query.getInquiry(params, this.merged);
         return searchAsync(inquiry);
     }
 
