@@ -71,8 +71,9 @@ public class DataRegion extends AbstractRegion {
                 Sc.infoAuth(this.getLogger(), AuthMsg.REGION_AFTER, matrix.encode());
                 /* Projection */
                 DataMin.dwarfRecord(response, matrix);
-
-                /* Rows / Projection */
+                /* Rows */
+                DataMin.dwarfRows(response, matrix);
+                /* Projection For Array */
                 DataMin.dwarfCollection(response, matrix);
                 return Ux.future(response);
             });

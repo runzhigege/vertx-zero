@@ -7,6 +7,7 @@ import io.vertx.up.util.Ut;
 import org.jooq.Field;
 import org.jooq.Record;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 
@@ -34,7 +35,7 @@ class JooqResult {
             projection.stream()
                     .filter(Objects::nonNull)
                     .map(field -> (String) field)
-                    .map(field -> mojo.getRevert().get(field))
+                    .map(field -> mojo.getIn().get(field))
                     .forEach(filters::add);
         } else {
             /* No Pojo file */
@@ -44,7 +45,7 @@ class JooqResult {
     }
 
     static JsonArray toJoin(final List<Record> records, final JsonArray projection,
-                            final ConcurrentMap<String, String> fields) {
+                            final ConcurrentMap<String, String> fields, final Mojo mojo) {
         final JsonArray joinResult = new JsonArray();
         records.forEach(record -> {
             final int size = record.size();
@@ -53,14 +54,29 @@ class JooqResult {
                 final Field field = record.field(idx);
                 final Object value = record.get(field);
                 if (Objects.nonNull(value)) {
-                    final String resultField = fields.get(field.getName());
+                    /*
+                     * Un translated
+                     */
+                    String resultField = fields.get(field.getName());
                     if (Ut.notNil(resultField) && !data.containsKey(resultField)) {
+                        if (Objects.nonNull(mojo)) {
+                            final String hitField = mojo.getOutAll().get(resultField);
+                            if (Ut.notNil(hitField)) {
+                                resultField = hitField;
+                            }
+                        }
                         if (value instanceof java.sql.Timestamp) {
                             /*
                              * Resolve issue: java.lang.IllegalStateException: Illegal type in JsonObject: class java.sql.Timestamp
                              */
                             final Date dateTime = (Date) value;
                             data.put(resultField, dateTime.toInstant());
+                        } else if (value instanceof BigDecimal) {
+                            /*
+                             * java.lang.IllegalStateException: Illegal type in JsonObject: class java.math.BigDecimal
+                             */
+                            final BigDecimal decimal = (BigDecimal) value;
+                            data.put(resultField, decimal.doubleValue());
                         } else {
                             data.put(resultField, value);
                         }
@@ -69,7 +85,7 @@ class JooqResult {
             }
             joinResult.add(data);
         });
-        final Set<String> filters = getFilters(projection, null);
+        final Set<String> filters = getFilters(projection, mojo);
         Ut.itJArray(joinResult).forEach(each -> filters.forEach(removed -> each.remove(removed)));
         return joinResult;
     }
