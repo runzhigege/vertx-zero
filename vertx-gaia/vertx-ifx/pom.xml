@@ -20,6 +20,7 @@
         <module>zero-feign</module>
         <module>zero-native</module>
         <module>zero-redis</module>
+        <module>zero-history</module>
         <module>zero-elasticsearch</module>
     </modules>
 </project>

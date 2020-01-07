@@ -21,7 +21,7 @@ public class FileResolver<T> implements Resolver<T> {
     @Override
     public Epsilon<T> resolve(final RoutingContext context,
                               final Epsilon<T> income) {
-        context.request().headers().forEach((item) -> LOGGER.info("[ ZERO ] Headers: {0} = {1}",
+        context.request().headers().forEach((item) -> LOGGER.debug("[ ZERO ] Headers: {0} = {1}",
                 item.getKey(), item.getValue()));
         final Set<FileUpload> fileUploads = context.fileUploads();
         LOGGER.info("[ ZERO ] Upload files: size = {0}", fileUploads.size());

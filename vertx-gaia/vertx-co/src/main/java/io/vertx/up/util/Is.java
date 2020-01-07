@@ -3,10 +3,15 @@ package io.vertx.up.util;
 import io.vertx.core.json.JsonObject;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentMap;
 
 /*
  * Specific checking
@@ -28,7 +33,7 @@ class Is {
     }
 
     static boolean isChanged(final JsonObject oldRecord, final JsonObject newRecord,
-                             final Set<String> ignores, final TemporalUnit unit) {
+                             final Set<String> ignores, final ConcurrentMap<String, Class<?>> dateFields) {
         /*
          * copy each compared json object and remove
          * all fields that will not be compared here.
@@ -39,6 +44,7 @@ class Is {
             ignores.forEach(oldCopy::remove);
             ignores.forEach(newCopy::remove);
         }
+        final Set<String> dateFieldSet = Objects.isNull(dateFields) ? new HashSet<>() : dateFields.keySet();
         /*
          * Get the final result of calculation.
          * 1) From old calculation
@@ -49,7 +55,8 @@ class Is {
              */
             final Object oldValue = oldCopy.getValue(field);
             final Object newValue = newCopy.getValue(field);
-            return isSame(oldValue, newValue, unit);
+            final TemporalUnit unit = getUnit(dateFields.get(field));
+            return isSame(oldValue, newValue, dateFieldSet.contains(field), unit);
         });
         /*
          * 2) From new calculation
@@ -62,12 +69,30 @@ class Is {
              */
             final Object oldValue = oldCopy.getValue(field);
             final Object newValue = newCopy.getValue(field);
-            return isSame(oldValue, newValue, unit);
+            final TemporalUnit unit = getUnit(dateFields.get(field));
+            return isSame(oldValue, newValue, dateFieldSet.contains(field), unit);
         });
         return !(unchanged && additional);
     }
 
+    static TemporalUnit getUnit(final Class<?> clazz) {
+        final TemporalUnit unit;
+        if (LocalDateTime.class == clazz || LocalTime.class == clazz) {
+            /*
+             * 按分钟
+             */
+            unit = ChronoUnit.MINUTES;
+        } else {
+            /*
+             * 某天
+             */
+            unit = ChronoUnit.DAYS;
+        }
+        return unit;
+    }
+
     static boolean isSame(final Object oldValue, final Object newValue,
+                          final boolean isDate,
                           final TemporalUnit unit) {
 
         if (Objects.isNull(oldValue) && Objects.isNull(newValue)) {
@@ -76,39 +101,57 @@ class Is {
              */
             return true;
         } else if (Objects.nonNull(oldValue) && Objects.nonNull(newValue)) {
-            if (Types.isDate(oldValue)) {
+            if (Types.isDate(oldValue) && isDate) {
                 /*
                  * For `Date` type of `Instant`, there provide comparing method
                  * for different unit kind fo comparing.
                  * 1) Convert to instant first
                  * 2) When `unit` is null, do not comparing other kind of here.
                  */
-                Instant oldDate = Period.parseFull(oldValue.toString())
+                final Instant oldInstant = Period.parseFull(oldValue.toString())
                         .toInstant();
-                Instant newDate = Period.parseFull(newValue.toString())
+                final Instant newInstant = Period.parseFull(newValue.toString())
                         .toInstant();
-                if (Objects.nonNull(oldDate) && Objects.nonNull(newDate)) {
+                /*
+                 * Compared by unit
+                 */
+                final LocalDateTime oldDateTime = Period.toDateTime(oldInstant);
+                final LocalDateTime newDateTime = Period.toDateTime(newInstant);
+                /*
+                 * Only compared Date
+                 */
+                final LocalDate oldDate = oldDateTime.toLocalDate();
+                final LocalDate newDate = newDateTime.toLocalDate();
+
+                final LocalTime oldTime = oldDateTime.toLocalTime();
+                final LocalTime newTime = newDateTime.toLocalTime();
+                if (ChronoUnit.DAYS == unit) {
                     /*
-                     * Unit convert here when input `unit` here
+                     * Date Only
                      */
-                    if (Objects.nonNull(unit)) {
-                        newDate = newDate.truncatedTo(unit);
-                        oldDate = oldDate.truncatedTo(unit);
-                    }
-                    return oldDate.equals(newDate);
+                    return oldDate.isEqual(newDate);
+                } else if (ChronoUnit.MINUTES == unit) {
+                    /*
+                     * Time to HH:mm
+                     */
+                    return oldDate.isEqual(newDate) &&
+                            (oldTime.getHour() == newTime.getHour())
+                            && (oldTime.getMinute() == newTime.getMinute());
                 } else {
                     /*
-                     * When the value could not be converted to `Instant`
-                     * They are compared with `equals` instead.
+                     * DateTime completed
                      */
-                    return oldValue.equals(newValue);
+                    return oldDate.isEqual(newDate) &&
+                            oldTime.equals(newTime);
                 }
             } else {
                 /*
                  * Non date type value here
                  * Compare with `equals`
+                 * Except `Date` type, we must set String literal to be compared
+                 * instead of data type conversation
                  */
-                return oldValue.equals(newValue);
+                return oldValue.toString().equals(newValue.toString());
             }
         } else {
             /*

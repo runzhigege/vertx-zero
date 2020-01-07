@@ -6,6 +6,7 @@ import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -19,6 +20,14 @@ public class DualItem implements Serializable {
     private final transient ConcurrentMap<String, String> vector =
             new ConcurrentHashMap<>();
     private final transient ConcurrentMap<String, String> revert =
+            new ConcurrentHashMap<>();
+    /*
+     * Involve expression for type parsing here
+     * It means that we need type attribute to do conversation
+     */
+    private final transient ConcurrentMap<String, Class<?>> vectorType =
+            new ConcurrentHashMap<>();
+    private final transient ConcurrentMap<String, Class<?>> revertType =
             new ConcurrentHashMap<>();
 
     DualItem() {
@@ -35,12 +44,41 @@ public class DualItem implements Serializable {
                     .filter(field -> input.getValue(field) instanceof String)
                     .forEach(field -> {
                         final String to = input.getString(field);
-                        /* mapping */
-                        this.vector.put(field, to);
-                        /* revert */
-                        this.revert.put(to, field);
+                        if (0 < to.indexOf(',')) {
+                            /* To expression */
+                            final String[] toArray = to.split(",");
+                            final String toField = Objects.isNull(toArray[0]) ? null : toArray[0].trim();
+                            final String typeFlag = Objects.isNull(toArray[1]) ? "" : toArray[1].trim();
+                            if (Objects.nonNull(toField)) {
+                                /*
+                                 * Type here
+                                 */
+                                final Class<?> type = DualType.type(typeFlag);
+                                /* mapping type */
+                                this.vectorType.put(field, type);
+                                this.revertType.put(toField, type);
+                                /* mapping */
+                                this.vector.put(field, toField);
+                                /* revert */
+                                this.revert.put(toField, field);
+                            }
+                        } else {
+                            /* mapping */
+                            this.vector.put(field, to);
+                            /* revert */
+                            this.revert.put(to, field);
+                        }
                     });
         }
+    }
+
+    public DualItem bind(final ConcurrentMap<String, Class<?>> typeMap) {
+        this.vector.keySet().forEach((field) -> {
+            this.vectorType.put(field, typeMap.get(field));
+            final String revertField = this.vector.get(field);
+            this.revertType.put(revertField, typeMap.get(field));
+        });
+        return this;
     }
 
     /*
@@ -75,12 +113,20 @@ public class DualItem implements Serializable {
         return this.vector.get(from);
     }
 
+    public Class<?> toType(final String from) {
+        return this.vectorType.get(from);
+    }
+
     public boolean fromKey(final String key) {
         return this.vector.containsKey(key);
     }
 
     public String from(final String to) {
         return this.revert.get(to);
+    }
+
+    public Class<?> fromType(final String to) {
+        return this.revertType.get(to);
     }
 
     public boolean toKey(final String key) {

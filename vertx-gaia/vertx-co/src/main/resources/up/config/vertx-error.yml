@@ -14,6 +14,8 @@ E20002: (401) - Qiy token record does not contain "access_token", client_id = {0
 E20003: (424) - Ali Acs Client profile met error when it''s initializing, details = {0}
 E20004: (424) - Ali Acs Client send request met error, details = {0}
 E20005: "(500) - You selected mode = `DEFINED`, but there missed `store` key in config"
+#ElasticSearch
+E20006: (404) - the Configuration of ElasticSearch is missinng, please check vertx-es.yml.
 # (Runtime) Vertx start up error
 E40001: Vert.x zero boot class should not be null, please provide the entry of this application
 E40002: Vert.x zero boot class must be marked with annotation "Up", but ( name= {0} ) it''s missing
@@ -137,6 +139,8 @@ E60044: "(500) - Your pointer plugin component specification met error, config =
 # CRUD Module
 E80100: "(404) - (CRUD) You missed `module` = `{0}` definition in file \"plugin/crud/module/\" folder"
 E80101: "(404) - (CRUD) You missed `column` configuration and instance is null. access module = {0}"
+E80102: "(409) - (CRUD) Your file table size must be only one, but not found `{0}`"
+E80103: "(409) - (CRUD) Your file table name is conflict with the request, table name = `{0}` and request = `{1}`"
 # RBAC Module
 E80200: "(401) - (RBAC) The authorization code `{0}` you provided is wrong"
 E80201: "(401) - (RBAC) The authorization code `{1}` for your client {0} has been expired"
@@ -151,7 +155,7 @@ E80209: "(403) - (RBAC) The action for request ( {0} ) is missing"
 E80210: "(404) - (RBAC) The resource of id = `{0}` for request = {1} could not be identified"
 E80211: "(403) - (RBAC) The resource level is {0}, action level is {0} and lower than resource required"
 E80212: "(403) - (RBAC) The user = `{0}` of profile = `{1}` has no permission for access any resource"
-E80213: "(403) - (RBAC) Sorry, you have no access to visit the resource that you required, action = `{0}`"
+E80213: "(403) - (RBAC) Sorry, you have no access to visit the resource that you required, action = `{0}`, permissionId = `{1}`"
 E80215: "(500) - (RBAC) Dwarf instance is null when analyzed result type = {0}"
 # Kernel Module
 E80214: "(409) - (Ke) Zero system could not identify the session you provided `{0}`, maybe it''s expired or destroyed"

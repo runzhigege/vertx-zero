@@ -27,6 +27,10 @@ public class Ke {
         return KeTool.getCatalog();
     }
 
+    public static boolean isIn(final JsonObject json, final String... fields) {
+        return KeIs.isIn(json, fields);
+    }
+
     /*
      * Process image field.
      */

@@ -19,12 +19,21 @@ class IxLog {
         logger.error("[ Εκδήλωση ] ( " + flag + " ) " + pattern, args);
     }
 
+    private static void warn(final Annal logger,
+                             final String flag, final String pattern, final Object... args) {
+        logger.warn("[ Εκδήλωση ] ( " + flag + " ) " + pattern, args);
+    }
+
     static void infoInit(final Annal logger, final String pattern, final Object... args) {
         info(logger, "Init", pattern, args);
     }
 
     static void errorInit(final Annal logger, final String pattern, final Object... args) {
         error(logger, "Init", pattern, args);
+    }
+
+    static void warnRest(final Annal logger, final String pattern, final Object... args) {
+        warn(logger, "Rest", pattern, args);
     }
 
     static void infoRest(final Annal logger, final String pattern, final Object... args) {
