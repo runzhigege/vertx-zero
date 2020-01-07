@@ -154,7 +154,45 @@ final class Period {
      * @return LocalTime parsed
      */
     static LocalTime toTime(final Date date) {
-        final LocalDateTime datetime = toDateTime(date);
+        /*
+         * Default time should be 1899 of year
+         * In java, when there is only time part, the Date should be:
+         * Sun Dec 31 18:00:00 CST 1899
+         *
+         * In this situation, we should do some adjustment for variable date.
+         * The dateTime here value is such as
+         * 1899-12-31T18:05:43
+         *
+         * The time part is '18:05:43'
+         *
+         * There are 5 min 43 seconds adjust info ( Wrong )
+         * Why ?
+         *
+         * I think the datetime is over the range in Java here
+         */
+        final Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        final Date normalized;
+        if (1899 == cal.get(Calendar.YEAR)) {
+            /*
+             * One year could plus to 1901
+             * All the valid date should be after "1899-12-30" instead of
+             * 1) For '1900-01-01', this issue also will happen
+             * 2) For '1901', it's more safer to extract time part ( To LocalTime )
+             */
+
+            cal.add(Calendar.YEAR, 2);
+            normalized = cal.getTime();
+            /*
+             * Re-calculate local time here to be sure the result is as following
+             * 1901-12-31T18:00
+             *
+             * The time part is '18:00:00'
+             */
+        } else {
+            normalized = date;
+        }
+        final LocalDateTime datetime = toDateTime(normalized);
         return datetime.toLocalTime();
     }
 
