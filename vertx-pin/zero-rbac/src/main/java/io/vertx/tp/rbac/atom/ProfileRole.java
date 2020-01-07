@@ -33,9 +33,9 @@ public class ProfileRole implements Serializable {
 
     public ProfileRole(final JsonObject data) {
         /* Role Id */
-        roleId = data.getString(AuthKey.F_ROLE_ID);
+        this.roleId = data.getString(AuthKey.F_ROLE_ID);
         /* Priority */
-        priority = data.getInteger(AuthKey.PRIORITY);
+        this.priority = data.getInteger(AuthKey.PRIORITY);
     }
 
     Future<ProfileRole> initAsync() {
@@ -43,36 +43,36 @@ public class ProfileRole implements Serializable {
         final boolean isSecondary = CONFIG.getSupportSecondary();
         return isSecondary ?
                 /* Enabled secondary permission */
-                fetchAuthoritiesAsyncWithCache().compose(ids -> Future.succeededFuture(this)) :
+                this.fetchAuthoritiesAsyncWithCache().compose(ids -> Future.succeededFuture(this)) :
                 /* No secondary */
-                fetchAuthoritiesAsync().compose(ids -> Future.succeededFuture(this));
+                this.fetchAuthoritiesAsync().compose(ids -> Future.succeededFuture(this));
     }
 
     public ProfileRole init() {
         /* Fetch permission ( Without Cache in Sync mode ) */
-        refreshAuthorities(Ux.Jooq.on(RRolePermDao.class)
-                .fetch(AuthKey.F_ROLE_ID, roleId));
+        this.refreshAuthorities(Ux.Jooq.on(RRolePermDao.class)
+                .fetch(AuthKey.F_ROLE_ID, this.roleId));
         // Sc.infoAuth(LOGGER, "Extract Permissions: {0}", permissions.encode());
         return this;
     }
 
     public Integer getPriority() {
-        return priority;
+        return this.priority;
     }
 
     public String getKey() {
-        return roleId;
+        return this.roleId;
     }
 
     public Set<String> getAuthorities() {
-        return authorities;
+        return this.authorities;
     }
 
     /*
      * For uniform processing
      */
     public ProfileGroup getGroup() {
-        return reference;
+        return this.reference;
     }
 
     public ProfileRole setGroup(final ProfileGroup reference) {
@@ -87,14 +87,14 @@ public class ProfileRole implements Serializable {
      * 2.2) If not null: Return authorities directly ( pick up from cache )
      */
     private Future<JsonArray> fetchAuthoritiesAsyncWithCache() {
-        return Sc.<JsonArray>cachePermission(roleId).compose(array -> {
+        return Sc.<JsonArray>cachePermission(this.roleId).compose(array -> {
             if (Objects.isNull(array)) {
-                return fetchAuthoritiesAsync()
-                        .compose(data -> Sc.cachePermission(roleId, data));
+                return this.fetchAuthoritiesAsync()
+                        .compose(data -> Sc.cachePermission(this.roleId, data));
             } else {
                 /* Authorities fill from cache ( Sync the authorities ) */
                 array.stream().map(item -> (String) item)
-                        .forEach(authorities::add);
+                        .forEach(this.authorities::add);
                 return Future.succeededFuture(array);
             }
         });
@@ -108,7 +108,7 @@ public class ProfileRole implements Serializable {
     private Future<JsonArray> fetchAuthoritiesAsync() {
         return Ux.Jooq.on(RRolePermDao.class)
                 /* Fetch permission ids based on roleId */
-                .<RRolePerm>fetchAsync(AuthKey.F_ROLE_ID, roleId)
+                .<RRolePerm>fetchAsync(AuthKey.F_ROLE_ID, this.roleId)
                 /* Refresh authorities in current profile */
                 .compose(this::refreshAuthoritiesAsync);
     }
@@ -120,7 +120,7 @@ public class ProfileRole implements Serializable {
      * 3) Returned ( JsonArray )
      */
     private Future<JsonArray> refreshAuthoritiesAsync(final List<RRolePerm> permissions) {
-        return Future.succeededFuture(refreshAuthorities(permissions));
+        return Future.succeededFuture(this.refreshAuthorities(permissions));
     }
 
     private JsonArray refreshAuthorities(final List<RRolePerm> permissions) {
@@ -128,18 +128,18 @@ public class ProfileRole implements Serializable {
                 .filter(Objects::nonNull)
                 .map(RRolePerm::getPermId)
                 .collect(Collectors.toList());
-        authorities.clear();
-        authorities.addAll(permissionIds);
+        this.authorities.clear();
+        this.authorities.addAll(permissionIds);
         return new JsonArray(permissionIds);
     }
 
     @Override
     public String toString() {
         return "ProfileRole{" +
-                "roleId='" + roleId + '\'' +
-                ", priority=" + priority +
-                ", authorities=" + authorities +
-                ", reference=" + reference +
+                "roleId='" + this.roleId + '\'' +
+                ", priority=" + this.priority +
+                ", authorities=" + this.authorities +
+                ", reference=" + this.reference +
                 '}';
     }
 
@@ -152,11 +152,11 @@ public class ProfileRole implements Serializable {
             return false;
         }
         final ProfileRole that = (ProfileRole) o;
-        return roleId.equals(that.roleId);
+        return this.roleId.equals(that.roleId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(roleId);
+        return Objects.hash(this.roleId);
     }
 }

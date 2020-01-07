@@ -13,6 +13,7 @@ import io.vertx.tp.optic.ApeakMy;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.commune.Envelop;
+import io.vertx.up.eon.Strings;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
@@ -57,7 +58,18 @@ public class GetActor {
                 return Ux.future(Envelop.success(new JsonArray()));
             } else {
                 final String pojo = config.getPojo();
-                return dao.fetchAsync(KeField.SIGMA, sigma)
+                final JsonObject filters = new JsonObject();
+                /*
+                 * For `/api/{actor}/by/sigma`
+                 * Only support extract the data that active = true
+                 */
+                filters.put(KeField.SIGMA, sigma);
+                filters.put(Strings.EMPTY, Boolean.TRUE);
+                filters.put(KeField.ACTIVE, Boolean.TRUE);
+                /*
+                 * Get List<T> from database that `active = true`
+                 */
+                return dao.findAsync(filters)
                         .compose(item -> Ut.isNil(pojo) ?
                                 Ux.fnJArray(item) :
                                 Ux.fnJArray(pojo).apply(item))

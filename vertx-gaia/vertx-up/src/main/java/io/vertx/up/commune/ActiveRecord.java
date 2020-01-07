@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /*
  * Provide abstract record to avoid more writing method of record
@@ -67,6 +69,14 @@ public abstract class ActiveRecord implements Record {
         return json;
     }
 
+    @Override
+    public ConcurrentMap<String, Class<?>> types() {
+        /*
+         * Wait for sub class overwrite
+         */
+        return new ConcurrentHashMap<>();
+    }
+
     /*
      * The same as `toJson()`, return to all data of current record
      */
@@ -81,9 +91,10 @@ public abstract class ActiveRecord implements Record {
     @Override
     public <V> Record set(final String field, final V value) {
         if (this.declaredFields().contains(field)) {
-            this.data.put(field, Ut.toJValue(value));
+            final Class<?> type = this.types().get(field);
+            this.data.put(field, Ut.aiJValue(value, type));
         } else {
-            this.getLogger().warn("[ ZERO ] The field `{0}` has not been defined in model: `{1}`",
+            this.getLogger().debug("[ ZERO ] The field `{0}` has not been defined in model: `{1}`",
                     field, this.identifier());
         }
         return this;

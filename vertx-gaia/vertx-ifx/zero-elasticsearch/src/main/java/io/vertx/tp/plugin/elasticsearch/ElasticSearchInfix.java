@@ -24,7 +24,7 @@ public class ElasticSearchInfix implements Infix {
 	                                 final String name) {
 		Fn.pool(CLIENTS, name,
 			() -> Infix.initTp("elasticsearch",
-				(config) -> ElasticSearchClient.createShared(vertx),
+				(config) -> ElasticSearchClient.createShared(vertx, config),
 				ElasticSearchInfix.class));
 	}
 
@@ -36,13 +36,8 @@ public class ElasticSearchInfix implements Infix {
 		return CLIENTS.get(NAME);
 	}
 
-	public static ElasticSearchClient createClient(final Vertx vertx) {
-		return Infix.initTp("elasticsearch",
-			(config) -> ElasticSearchClient.createShared(vertx),
-			ElasticSearchInfix.class);
-	}
-
 	@Override
+	@SuppressWarnings("all")
 	public ElasticSearchClient get() {
 		return getClient();
 	}

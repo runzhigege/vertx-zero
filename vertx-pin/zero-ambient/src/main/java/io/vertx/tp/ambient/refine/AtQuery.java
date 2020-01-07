@@ -24,6 +24,7 @@ class AtQuery {
     }
 
     private static void filters(final JsonObject filters, final JsonArray types, final String code) {
+        filters.put(KeField.ACTIVE, Boolean.TRUE);
         if (Values.ONE == types.size()) {
             final String firstArg = types.getString(Values.IDX);
             filters.put(KeField.TYPE, firstArg);

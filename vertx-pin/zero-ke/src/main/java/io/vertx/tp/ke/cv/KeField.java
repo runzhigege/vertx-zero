@@ -4,6 +4,10 @@ public interface KeField {
 
     String FIELD = "field";
 
+    String SCOPE = "scope";
+    String REALM = "realm";
+    String GRANT_TYPE = "grantType";
+
     String ITEMS = "items";
     String CHANGES = "changes";
     String DATA_KEY = "dataKey";
@@ -60,6 +64,8 @@ public interface KeField {
     String URI_REQUEST = "requestUri";
 
     String USERNAME = "username";
+    String EMAIL = "email";
+    String MOBILE = "mobile";
     String CLIENT_ID = "clientId";
 
     String RESULT = "result";

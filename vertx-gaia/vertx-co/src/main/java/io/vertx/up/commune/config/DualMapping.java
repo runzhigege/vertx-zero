@@ -142,12 +142,20 @@ public class DualMapping implements Serializable {
         return this.root.to(from);
     }
 
+    public Class<?> toType(final String from) {
+        return this.root.toType(from);
+    }
+
     public boolean fromKey(final String key) {
         return this.root.fromKey(key);
     }
 
     public String from(final String to) {
         return this.root.from(to);
+    }
+
+    public Class<?> fromType(final String to) {
+        return this.root.fromType(to);
     }
 
     public boolean toKey(final String key) {
