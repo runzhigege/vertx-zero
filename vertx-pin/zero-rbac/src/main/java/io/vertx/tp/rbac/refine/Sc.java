@@ -20,6 +20,10 @@ public class Sc {
         ScLog.infoAuth(logger, pattern, args);
     }
 
+    public static void warnAuth(final Annal logger, final String pattern, final Object... args) {
+        ScLog.warnAuth(logger, pattern, args);
+    }
+
     public static void debugAuth(final Annal logger, final String pattern, final Object... args) {
         ScLog.debugAuth(logger, pattern, args);
     }

@@ -82,7 +82,7 @@ class ActMapper {
     private static JsonObject getOut(final JsonObject data, final DualMapping mapping) {
         final JsonObject normalized = new JsonObject();
         data.fieldNames().forEach(field -> {
-            final String hitField = mapping.from(field);
+            final String hitField = mapping.to(field);
             if (Ut.isNil(hitField)) {
                 normalized.put(field, data.getValue(field));
             } else {
