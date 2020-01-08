@@ -34,6 +34,10 @@ public final class Ut {
     private Ut() {
     }
 
+    public static JsonArray sureJArray(final JsonArray array) {
+        return Define.sureJArray(array);
+    }
+
     /*
      * Set Calculating
      * 1) intersect:    Set1 And Set2
