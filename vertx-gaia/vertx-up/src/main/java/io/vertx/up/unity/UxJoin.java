@@ -1,6 +1,7 @@
 package io.vertx.up.unity;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.pojo.Mirror;
 import io.vertx.up.atom.pojo.Mojo;
@@ -87,12 +88,24 @@ public class UxJoin {
     /* (Async / Sync) Sort, Projection, Criteria, Pager Search Operations */
 
     public Future<JsonObject> searchAsync(final JsonObject params) {
-        final Inquiry inquiry = Objects.isNull(this.merged) ? Inquiry.create(params) : Query.getInquiry(params, this.merged);
-        return searchAsync(inquiry);
+        return searchAsync(toInquiry(params));
+    }
+
+    private Inquiry toInquiry(final JsonObject params) {
+        return Objects.isNull(this.merged) ? Inquiry.create(params) : Query.getInquiry(params, this.merged);
     }
 
     public Future<JsonObject> searchAsync(final Inquiry inquiry) {
         this.POJO_MAP.forEach(this.joinder::pojo);
         return this.joinder.searchPaginationAsync(inquiry, this.merged);
+    }
+
+    public Future<JsonArray> findAsync(final Inquiry inquiry) {
+        this.POJO_MAP.forEach(this.joinder::pojo);
+        return Ux.future(this.joinder.searchArray(inquiry, this.merged));
+    }
+
+    public Future<JsonArray> findAsync(final JsonObject params) {
+        return findAsync(toInquiry(params));
     }
 }
