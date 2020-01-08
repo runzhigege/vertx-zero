@@ -63,7 +63,10 @@ public class HikariDataPool implements DataPool {
              * Tun-Off auto commit to switch auto
              */
             database.getOptions().remove(OPT_AUTO_COMMIT);
-            return new HikariDataPool(database);
+            final DataPool ds = new HikariDataPool(database);
+            final Annal logger = Annal.get(this.getClass());
+            logger.info("[ DP ] Data Pool Hash : {0}", ds.hashCode());
+            return ds;
         });
     }
 
