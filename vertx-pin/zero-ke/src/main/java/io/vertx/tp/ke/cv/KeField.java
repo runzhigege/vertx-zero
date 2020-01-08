@@ -35,6 +35,7 @@ public interface KeField {
     String STATUS = "status";
     String SERIAL = "serial";
     String NAMESPACE = "namespace";
+    String PASSWORD = "password";
     String GLOBAL_ID = "globalId";
 
     String OUT = "out";

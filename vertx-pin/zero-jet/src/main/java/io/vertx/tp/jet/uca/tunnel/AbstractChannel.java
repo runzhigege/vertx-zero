@@ -94,10 +94,9 @@ public abstract class AbstractChannel implements JtChannel {
                  */
                 return this.initAsync(component, request)
                         /*
-                         * 1. `Dict` calculation for current channel
-                         * Children initialized here, for `dict` calculation
-                         * 1) Fetch dict that configured in current channel
-                         * 2) Put dict to `ActIn` object for future usage
+                         * 1. `Dict` calculation for current channel Children initialized here, for `dict` calculation
+                         *      1) Fetch dict that configured in current channel
+                         *      2) Put dict to `ActIn` object for future usage
                          */
                         .compose(nil -> Anagogic.dictAsync(this.commercial))
                         .compose(dict -> Ux.future(request.bind(dict)))
@@ -112,7 +111,8 @@ public abstract class AbstractChannel implements JtChannel {
                         /*
                          * Response here for future custom
                          */
-                        .compose(actOut -> Anagogic.complete(actOut, this.commercial.mapping(), envelop))
+                        .compose(actOut -> Anagogic.complete(actOut.bind(this.commercial.channelType()),
+                                this.commercial.mapping(), envelop))
                         /*
                          * Otherwise;
                          */

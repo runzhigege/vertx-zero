@@ -6,6 +6,7 @@ import io.vertx.core.http.HttpStatusCode;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.commune.config.DualMapping;
+import io.vertx.up.eon.em.ChannelType;
 import io.vertx.up.unity.Ux;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.util.Objects;
 public class ActOut implements Serializable {
 
     private transient final Envelop envelop;
+    private transient ChannelType channelType = ChannelType.ADAPTOR;
 
     /*
      * Success or Failure response building
@@ -101,6 +103,11 @@ public class ActOut implements Serializable {
     }
 
     public Envelop envelop(final DualMapping mapping) {
-        return ActMapper.getOut(this.envelop, mapping);
+        return ActMapper.getOut(this.envelop, mapping, this.channelType);
+    }
+
+    public ActOut bind(final ChannelType channelType) {
+        this.channelType = channelType;
+        return this;
     }
 }

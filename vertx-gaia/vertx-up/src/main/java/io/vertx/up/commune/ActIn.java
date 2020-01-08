@@ -1,5 +1,6 @@
 package io.vertx.up.commune;
 
+import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.commune.config.DualMapping;
@@ -137,6 +138,19 @@ public class ActIn implements Serializable {
 
     public Record getDefinition() {
         return this.definition;
+    }
+
+    /*
+     * Header value extracted
+     */
+    public String appId() {
+        final MultiMap paramMap = this.envelop.headers();
+        return paramMap.get(ID.Header.X_APP_ID);
+    }
+
+    public String sigma() {
+        final MultiMap paramMap = this.envelop.headers();
+        return paramMap.get(ID.Header.X_SIGMA);
     }
 
     /*
