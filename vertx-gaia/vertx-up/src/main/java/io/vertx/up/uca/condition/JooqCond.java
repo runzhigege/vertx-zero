@@ -239,8 +239,8 @@ public class JooqCond {
                      */
                     fields = new String[2];
                     fields[Values.IDX] = field;
+                    fields[Values.ONE] = Inquiry.Op.IN;
                 }
-                fields[Values.ONE] = Inquiry.Op.IN;
             } else {
                 /*
                  * Common situation
@@ -248,16 +248,21 @@ public class JooqCond {
                  */
                 fields = field.split(",");
             }
-
             /*
              * Code flow 2
              * - Get op string here to match future usage
              */
             final String op;
-            if (value instanceof JsonArray) {
-                op = Inquiry.Op.IN;
-            } else if (!field.contains(",")) {
-                op = Inquiry.Op.EQ;
+            if (!field.contains(",")) {
+                /*
+                 * When field does not contains ','
+                 * set default operator
+                 */
+                if (value instanceof JsonArray) {
+                    op = Inquiry.Op.IN;
+                } else {
+                    op = Inquiry.Op.EQ;
+                }
             } else {
                 final String extract = fields[Values.ONE];
                 if (Objects.isNull(extract)) {
@@ -266,7 +271,6 @@ public class JooqCond {
                     op = extract.trim().toLowerCase();
                 }
             }
-
             /*
              * Code flow 3
              * - Get `Field` definition for current field
