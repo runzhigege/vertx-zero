@@ -27,6 +27,11 @@ class KeLog {
         debug(logger, "Ke", pattern, args);
     }
 
+    static void debugChannel(final Class<?> clazz, final String pattern, final Object... args) {
+        final Annal logger = Annal.get(clazz);
+        debug(logger, "Channel", pattern, args);
+    }
+
     static void infoChannel(final Class<?> clazz, final String pattern, final Object... args) {
         final Annal logger = Annal.get(clazz);
         info(logger, "Channel", pattern, args);
