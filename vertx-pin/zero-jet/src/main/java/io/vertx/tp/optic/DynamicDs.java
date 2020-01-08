@@ -4,8 +4,8 @@ import io.vertx.core.MultiMap;
 import io.vertx.tp.error._501DataSourceException;
 import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.optic.environment.Ambient;
-import io.vertx.tp.optic.environment.AmbientEnvironment;
 import io.vertx.tp.plugin.database.DataPool;
+import io.vertx.up.commune.config.Database;
 import io.vertx.up.fn.Fn;
 
 import java.util.Objects;
@@ -41,7 +41,7 @@ public class DynamicDs implements DS {
         /*
          * DataPool get here
          */
-        final AmbientEnvironment env = Ambient.getEnvironments().get(app.getAppId());
-        return env.getPool();
+        final Database database = app.getSource();
+        return DataPool.createAuto(database);
     }
 }
