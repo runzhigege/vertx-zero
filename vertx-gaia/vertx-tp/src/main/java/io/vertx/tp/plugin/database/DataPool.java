@@ -18,8 +18,15 @@ public interface DataPool {
     }
 
     static DataPool create(final Database database) {
-        return Fn.pool(Pool.POOL, database.getJdbcUrl(), () -> new HikariDataPool(database));
+        return Fn.pool(Pool.POOL_DYNAMIC, database.getJdbcUrl(), () -> new HikariDataPool(database));
     }
+
+    static DataPool createAuto(final Database database) {
+        final DataPool ds = create(database);
+        return ds.switchTo();
+    }
+
+    DataPool switchTo();
 
     /*
      * Executor of Jooq ( Context )
