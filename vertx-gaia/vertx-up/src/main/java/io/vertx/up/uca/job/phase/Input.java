@@ -4,6 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.EventBus;
+import io.vertx.up.atom.Refer;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.eon.Info;
@@ -19,9 +20,14 @@ class Input {
     private static final Annal LOGGER = Annal.get(Input.class);
 
     private transient final Vertx vertx;
+    private transient final Refer assist = new Refer();
 
     Input(final Vertx vertx) {
         this.vertx = vertx;
+    }
+
+    Refer assist() {
+        return this.assist;
     }
 
     Future<Envelop> inputAsync(final Mission mission) {
@@ -95,10 +101,19 @@ class Input {
                  */
                 Ut.contract(income, Vertx.class, this.vertx);
                 Ut.contract(income, Mission.class, mission);
+                /*
+                 * Here we could calculate directory
+                 */
                 Element.onceLog(mission,
                         () -> LOGGER.info(Info.PHASE_2ND_JOB_ASYNC, mission.getCode(), income.getClass().getName()));
 
-                return income.beforeAsync(envelop);
+                return income.assist().compose(refer -> {
+                    /*
+                     * Assist processing here.
+                     */
+                    this.assist.add(refer.get());
+                    return income.beforeAsync(envelop);
+                });
             }
         } else {
             Element.onceLog(mission,
