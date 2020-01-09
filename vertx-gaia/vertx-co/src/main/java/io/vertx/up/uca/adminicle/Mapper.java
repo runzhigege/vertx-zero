@@ -1,4 +1,4 @@
-package io.vertx.up.uca.dual;
+package io.vertx.up.uca.adminicle;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.commune.config.DualMapping;
