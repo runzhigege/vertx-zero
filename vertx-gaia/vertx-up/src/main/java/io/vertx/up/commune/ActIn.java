@@ -6,7 +6,6 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.commune.config.DualMapping;
 import io.vertx.up.eon.ID;
 import io.vertx.up.fn.Fn;
-import io.vertx.up.util.Ut;
 import io.vertx.zero.exception.ActSpecificationException;
 
 import java.io.File;
@@ -32,7 +31,7 @@ import java.util.concurrent.ConcurrentMap;
  *                             Consumer ->
  *                                    SendAim ( Callback )
  */
-public class ActIn implements Serializable {
+public class ActIn extends ActMapping implements Serializable {
 
     /* Raw data of `Envelop` object/reference */
     private final transient Envelop envelop;
@@ -100,18 +99,16 @@ public class ActIn implements Serializable {
     }
 
     public JsonObject getJObject() {
-        final JsonObject data = this.envelop.data();
-        if (Ut.notNil(data) && data.containsKey(ID.PARAM_BODY)) {
-            return data.getJsonObject(ID.PARAM_BODY);
-        } else {
+        if (this.isBatch) {
             return new JsonObject();
+        } else {
+            return this.json.getJson(this.mapping);
         }
     }
 
     public JsonArray getJArray() {
-        final JsonObject data = this.envelop.data();
-        if (Ut.notNil(data) && data.containsKey(ID.PARAM_BODY)) {
-            return data.getJsonArray(ID.PARAM_BODY);
+        if (this.isBatch) {
+            return this.jarray.getJson(this.mapping);
         } else {
             return new JsonArray();
         }

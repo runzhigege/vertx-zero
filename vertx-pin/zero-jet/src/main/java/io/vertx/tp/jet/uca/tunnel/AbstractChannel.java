@@ -60,7 +60,9 @@ public abstract class AbstractChannel implements JtChannel {
          * Build record and init
          */
         final Class<?> recordClass = this.commercial.recordComponent();
-
+        /*
+         *
+         */
         return this.createRequest(envelop, recordClass).compose(request -> {
             /*
              * Build component and init
@@ -116,9 +118,7 @@ public abstract class AbstractChannel implements JtChannel {
     }
 
     private Future<Envelop> createResponse(final ActOut actOut, final Envelop envelop) {
-        return Ux.future(actOut.bind(this.commercial.channelType())
-                .envelop(this.commercial.mapping())
-                .from(envelop));
+        return Ux.future(actOut.envelop(this.commercial.mapping()).from(envelop));
     }
 
     /*
@@ -138,9 +138,7 @@ public abstract class AbstractChannel implements JtChannel {
              * Initialize the `ActIn` object and reference
              */
             final ActIn request = new ActIn(envelop);
-            if (Objects.nonNull(this.commercial.mapping())) {
-                request.bind(this.commercial.mapping());
-            }
+            request.bind(this.commercial.mapping());
             request.bind(dict).connect(definition);
             return Ux.future(request);
         });

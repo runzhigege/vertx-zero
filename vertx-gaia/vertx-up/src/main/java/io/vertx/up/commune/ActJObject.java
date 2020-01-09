@@ -15,7 +15,7 @@ import java.util.Objects;
  * Business Request
  * JsonObject
  */
-class ActJObject implements Serializable {
+class ActJObject extends ActMapping implements Serializable {
 
     /* Raw data of `Envelop` object/reference */
     private final transient JsonObject data = new JsonObject();
@@ -120,7 +120,16 @@ class ActJObject implements Serializable {
         return this.query;
     }
 
+    /*
+     * JsonObject -> Record
+     */
     Record getRecord(final Record definition, final DualMapping mapping) {
-        return ActMapper.getRecord(this.data, definition, mapping);
+        return this.getRecord(this.data, definition, mapping);
+    }
+
+    JsonObject getJson(final DualMapping mapping) {
+        if (this.isBefore(mapping)) {
+            return this.mapper().in(this.data, mapping);
+        } else return this.data;
     }
 }
