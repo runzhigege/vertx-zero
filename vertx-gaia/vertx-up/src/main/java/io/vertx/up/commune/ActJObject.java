@@ -129,7 +129,7 @@ class ActJObject extends ActMapping implements Serializable {
 
     JsonObject getJson(final DualMapping mapping) {
         if (this.isBefore(mapping)) {
-            return this.mapper().in(this.data, mapping);
+            return this.mapper().in(this.data, mapping.child());
         } else return this.data;
     }
 }

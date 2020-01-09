@@ -21,7 +21,6 @@ import io.vertx.up.commune.Envelop;
 import io.vertx.up.commune.Record;
 import io.vertx.up.commune.config.Dict;
 import io.vertx.up.commune.config.DictEpsilon;
-import io.vertx.up.commune.config.DualItem;
 import io.vertx.up.eon.Constants;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.exception.WebException;
@@ -493,33 +492,11 @@ public final class Ux {
     }
 
     // -> Dict for caculation
-
-    public static DualItem dictDual(final JsonArray dataArray, final DictEpsilon epsilon) {
-        return DictTool.toDual(dataArray, epsilon);
-    }
-
-    public static ConcurrentMap<String, DualItem> dictDual(final ConcurrentMap<String, DictEpsilon> source, final ConcurrentMap<String, JsonArray> dictMap) {
-        return DictTool.mapDual(source, dictMap);
-    }
-
+    /*
+     * Keep following dict method
+     */
     public static ConcurrentMap<String, DictEpsilon> dictEpsilon(final JsonObject epsilon) {
         return DictTool.mapEpsilon(epsilon);
-    }
-
-    public static Future<JsonArray> dictTo(final JsonArray data, final ConcurrentMap<String, DualItem> mapping) {
-        return DictTool.runTo(data, mapping);
-    }
-
-    public static Future<JsonArray> dictTo(final JsonArray data, final ConcurrentMap<String, DictEpsilon> source, final ConcurrentMap<String, JsonArray> dictMap) {
-        return DictTool.runTo(data, DictTool.mapDual(source, dictMap));
-    }
-
-    public static Future<JsonArray> dictFrom(final JsonArray data, final ConcurrentMap<String, DualItem> mapping) {
-        return DictTool.runFrom(data, mapping);
-    }
-
-    public static Future<JsonArray> dictFrom(final JsonArray data, final ConcurrentMap<String, DictEpsilon> source, final ConcurrentMap<String, JsonArray> dictMap) {
-        return DictTool.runFrom(data, DictTool.mapDual(source, dictMap));
     }
 
     public static Future<ConcurrentMap<String, JsonArray>> dictCalc(final Dict dict, final MultiMap paramsMap) {

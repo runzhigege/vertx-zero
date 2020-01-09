@@ -3,7 +3,7 @@ package io.vertx.up.commune;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.commune.config.DualMapping;
 import io.vertx.up.eon.em.MappingMode;
-import io.vertx.up.uca.adminicle.DualMapper;
+import io.vertx.up.uca.adminicle.FieldMapper;
 import io.vertx.up.uca.adminicle.Mapper;
 import io.vertx.up.util.Ut;
 
@@ -12,7 +12,7 @@ import java.util.Objects;
 
 public abstract class ActMapping implements Serializable {
 
-    private final transient Mapper mapper = new DualMapper();
+    private final transient Mapper mapper = new FieldMapper();
 
     /*
      * ActIn
@@ -32,7 +32,7 @@ public abstract class ActMapping implements Serializable {
                  * Passive Only
                  */
                 if (this.isBefore(mapping)) {
-                    final JsonObject normalized = this.mapper.in(dataRef, mapping);
+                    final JsonObject normalized = this.mapper.in(dataRef, mapping.child());
                     record.set(normalized);
                 } else {
                     record.set(dataRef.copy());

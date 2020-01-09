@@ -22,6 +22,7 @@ import io.vertx.up.annotations.Plugin;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.commune.Envelop;
+import io.vertx.up.commune.config.DictFabric;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
@@ -265,7 +266,10 @@ public class FileActor {
                         if (Objects.isNull(dictMap)) {
                             return Ux.future(inputData);
                         } else {
-                            return Ux.dictTo(inputData, config.getEpsilon(), dictMap);
+                            final DictFabric fabric = DictFabric.create()
+                                    .dict(dictMap)
+                                    .epsilon(config.getEpsilon());
+                            return Ux.future(fabric.inTo(inputData));
                         }
                     });
                 })

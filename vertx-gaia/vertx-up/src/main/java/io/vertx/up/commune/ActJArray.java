@@ -106,7 +106,7 @@ class ActJArray extends ActMapping implements Serializable {
         if (this.isBefore(mapping)) {
             final JsonArray normalized = new JsonArray();
             Ut.itJArray(this.data)
-                    .map(item -> this.mapper().in(item, mapping))
+                    .map(item -> this.mapper().in(item, mapping.child()))
                     .forEach(normalized::add);
             return normalized;
         } else return this.data;
