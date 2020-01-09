@@ -173,7 +173,6 @@ class JooqJoinder {
         return Ux.future(response);
     }
 
-
     private Integer searchCount(final Inquiry inquiry) {
         /*
          * DSLContext
@@ -200,7 +199,7 @@ class JooqJoinder {
         return started.fetchCount();
     }
 
-    private JsonArray searchArray(final Inquiry inquiry, final Mojo mojo) {
+    JsonArray searchArray(final Inquiry inquiry, final Mojo mojo) {
         /*
          * DSLContext
          */

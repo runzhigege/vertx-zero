@@ -2,6 +2,7 @@ package io.vertx.tp.plugin.database;
 
 import com.zaxxer.hikari.HikariDataSource;
 import io.vertx.up.commune.config.Database;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
@@ -13,6 +14,8 @@ import org.jooq.impl.DefaultConnectionProvider;
 
 import java.sql.SQLException;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class HikariDataPool implements DataPool {
     private static final Annal LOGGER = Annal.get(HikariDataPool.class);
@@ -26,6 +29,7 @@ public class HikariDataPool implements DataPool {
     private static final String OPT_STATEMENT_CACHED = "hikari.statement.cached";
     private static final String OPT_STATEMENT_CACHE_SIZE = "hikari.statement.cache.size";
     private static final String OPT_STATEMENT_CACHE_SQL_LIMIT = "hikari.statement.cache.sqllimit";
+    private static final ConcurrentMap<String, DataPool> POOL_SWITCH = new ConcurrentHashMap<>();
     private final transient Database database;
     /* Each jdbc url has one Pool here **/
     private transient DSLContext context;
@@ -48,6 +52,22 @@ public class HikariDataPool implements DataPool {
          * Initializing data source of jooq
          */
         this.initJooq();
+    }
+
+    @Override
+    public DataPool switchTo() {
+        return Fn.pool(POOL_SWITCH, this.database.getJdbcUrl(), () -> {
+            final Database database = new Database();
+            database.fromJson(this.database.toJson());
+            /*
+             * Tun-Off auto commit to switch auto
+             */
+            database.getOptions().remove(OPT_AUTO_COMMIT);
+            final DataPool ds = new HikariDataPool(database);
+            final Annal logger = Annal.get(this.getClass());
+            logger.info("[ DP ] Data Pool Hash : {0}", ds.hashCode());
+            return ds;
+        });
     }
 
     @Override

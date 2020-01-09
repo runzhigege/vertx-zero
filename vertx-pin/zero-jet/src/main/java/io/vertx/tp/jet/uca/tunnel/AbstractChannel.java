@@ -1,21 +1,25 @@
 package io.vertx.tp.jet.uca.tunnel;
 
 import io.vertx.core.Future;
+import io.vertx.core.MultiMap;
+import io.vertx.core.json.JsonArray;
 import io.vertx.tp.error._501ChannelErrorException;
+import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.monitor.JtMonitor;
+import io.vertx.tp.ke.cv.KeField;
+import io.vertx.tp.optic.environment.Ambient;
 import io.vertx.tp.optic.jet.JtChannel;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.annotations.Contract;
 import io.vertx.up.atom.worker.Mission;
-import io.vertx.up.commune.ActIn;
-import io.vertx.up.commune.Commercial;
-import io.vertx.up.commune.Envelop;
-import io.vertx.up.commune.Record;
+import io.vertx.up.commune.*;
+import io.vertx.up.commune.config.Dict;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
 import java.util.Objects;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * Abstract channel
@@ -47,6 +51,9 @@ public abstract class AbstractChannel implements JtChannel {
     @Contract
     private transient Mission mission;
 
+    @Contract
+    private transient ConcurrentMap<String, JsonArray> dictionary;
+
     @Override
     public Future<Envelop> transferAsync(final Envelop envelop) {
         /*
@@ -54,75 +61,108 @@ public abstract class AbstractChannel implements JtChannel {
          */
         final Class<?> recordClass = this.commercial.recordComponent();
         /*
-         * Data object, could not be singleton
-         *  */
-        final Record definition = Ut.instance(recordClass);
-        /*
-         * First step for channel
-         * Initialize the `ActIn` object and reference
+         *
          */
-        final ActIn request = new ActIn(envelop);
-        if (Objects.nonNull(this.commercial.mapping())) {
-            request.bind(this.commercial.mapping());
-        }
-        request.connect(definition);
-        /*
-         * Build component and init
-         */
-        final Class<?> componentClass = this.commercial.businessComponent();
-        if (Objects.isNull(componentClass)) {
+        return this.createRequest(envelop, recordClass).compose(request -> {
             /*
-             * null class of component
+             * Build component and init
              */
-            return Future.failedFuture(new _501ChannelErrorException(this.getClass(), null));
-        } else {
-            /*
-             * Create new component here
-             * It means that Channel/Component must contains new object
-             * Container will create new Channel - Component to process request
-             * Instead of singleton here.
-             *  */
-            final JtComponent component = Ut.instance(componentClass);
-            if (Objects.nonNull(component)) {
-                this.monitor.componentHit(componentClass, recordClass);
+            final Class<?> componentClass = this.commercial.businessComponent();
+            if (Objects.isNull(componentClass)) {
                 /*
-                 * Initialized first and then
+                 * null class of component
                  */
-                Ux.debug();
-                /*
-                 * Options without `mapping` here
-                 */
-                return this.initAsync(component, request)
-                        /*
-                         * 1. `Dict` calculation for current channel
-                         * Children initialized here, for `dict` calculation
-                         * 1) Fetch dict that configured in current channel
-                         * 2) Put dict to `ActIn` object for future usage
-                         */
-                        .compose(nil -> Anagogic.dictAsync(this.commercial))
-                        .compose(dict -> Ux.future(request.bind(dict)))
-                        /*
-                         * 1) JsonObject: options ( without `mapping` )
-                         */
-                        .compose(nil -> Anagogic.componentAsync(component, this.commercial))
-                        /*
-                         * Children initialized
-                         */
-                        .compose(initialized -> component.transferAsync(request))
-                        /*
-                         * Response here for future custom
-                         */
-                        .compose(actOut -> Anagogic.complete(actOut, this.commercial.mapping(), envelop))
-                        /*
-                         * Otherwise;
-                         */
-                        .otherwise(Ux.otherwise());
+                return Future.failedFuture(new _501ChannelErrorException(this.getClass(), null));
             } else {
                 /*
-                 * singleton singleton error
-                 */
-                return Future.failedFuture(new _501ChannelErrorException(this.getClass(), componentClass.getName()));
+                 * Create new component here
+                 * It means that Channel/Component must contains new object
+                 * Container will create new Channel - Component to process request
+                 * Instead of singleton here.
+                 *  */
+                final JtComponent component = Ut.instance(componentClass);
+                if (Objects.nonNull(component)) {
+                    this.monitor.componentHit(componentClass, recordClass);
+                    /*
+                     * Initialized first and then
+                     */
+                    Ux.debug();
+                    /*
+                     * Options without `mapping` here
+                     */
+                    return this.initAsync(component, request)
+                            /*
+                             * 1) JsonObject: options ( without `mapping` )
+                             */
+                            .compose(nil -> Anagogic.componentAsync(component, this.commercial))
+                            /*
+                             * Children initialized
+                             */
+                            .compose(initialized -> component.transferAsync(request))
+                            /*
+                             * Response here for future custom
+                             */
+                            .compose(actOut -> this.createResponse(actOut, envelop))
+                            /*
+                             * Otherwise;
+                             */
+                            .otherwise(Ux.otherwise());
+                } else {
+                    /*
+                     * singleton singleton error
+                     */
+                    return Future.failedFuture(new _501ChannelErrorException(this.getClass(), componentClass.getName()));
+                }
             }
+        });
+    }
+
+    private Future<Envelop> createResponse(final ActOut actOut, final Envelop envelop) {
+        return Ux.future(actOut.envelop(this.commercial.mapping()).from(envelop));
+    }
+
+    /*
+     * Switcher `dictionary` here for usage
+     * 1) When `Job`, assist data may be initialized before.
+     * 2) When `Api`, here will initialize assist data.
+     * 3) Finally the data will bind to request
+     */
+    private Future<ActIn> createRequest(final Envelop envelop, final Class<?> recordClass) {
+        return this.createDict().compose(dict -> {
+            /*
+             * Data object, could not be singleton
+             *  */
+            final Record definition = Ut.instance(recordClass);
+            /*
+             * First step for channel
+             * Initialize the `ActIn` object and reference
+             */
+            final ActIn request = new ActIn(envelop);
+            request.bind(this.commercial.mapping());
+            request.bind(dict).connect(definition);
+            return Ux.future(request);
+        });
+    }
+
+    private Future<ConcurrentMap<String, JsonArray>> createDict() {
+        if (Objects.isNull(this.dictionary)) {
+            /*
+             * Params here for different situations
+             */
+            final MultiMap paramMap = MultiMap.caseInsensitiveMultiMap();
+            paramMap.add(KeField.IDENTIFIER, this.commercial.identifier());
+            final JtApp app = Ambient.getApp(this.commercial.app());
+            if (Objects.nonNull(app)) {
+                paramMap.add(KeField.SIGMA, app.getSigma());
+                paramMap.add(KeField.APP_ID, app.getAppId());
+            }
+            /*
+             * Dict configuration
+             */
+            final Dict dict = this.commercial.dict();
+            return Ux.dictCalc(dict, paramMap);
+        } else {
+            return Ux.future(this.dictionary);
         }
     }
 

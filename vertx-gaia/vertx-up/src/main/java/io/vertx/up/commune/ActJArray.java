@@ -10,12 +10,10 @@ import io.vertx.up.util.Ut;
 import java.io.Serializable;
 import java.util.Objects;
 
-class ActJArray implements Serializable {
+class ActJArray extends ActMapping implements Serializable {
 
     private final transient JsonArray data = new JsonArray();
     private final transient JsonObject header;
-    /* DualMapping */
-    private transient DualMapping mapping;
 
     ActJArray(final Envelop envelop) {
         /* Header Init */
@@ -99,8 +97,18 @@ class ActJArray implements Serializable {
              * 2）JsonArray：有数据
              */
             final Object input = this.data.getValue(idx);
-            records[idx] = ActMapper.getRecord(input, definition, mapping);
+            records[idx] = this.getRecord(input, definition, mapping);
         }
         return records;
+    }
+
+    JsonArray getJson(final DualMapping mapping) {
+        if (this.isBefore(mapping)) {
+            final JsonArray normalized = new JsonArray();
+            Ut.itJArray(this.data)
+                    .map(item -> this.mapper().in(item, mapping.child()))
+                    .forEach(normalized::add);
+            return normalized;
+        } else return this.data;
     }
 }

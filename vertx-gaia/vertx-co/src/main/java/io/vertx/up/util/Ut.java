@@ -710,7 +710,13 @@ public final class Ut {
 
     public static boolean isChanged(final JsonObject oldRecord, final JsonObject newRecord,
                                     final Set<String> ignores, final ConcurrentMap<String, Class<?>> dateFields) {
-        return Is.isChanged(oldRecord, newRecord, ignores, dateFields);
+        return Is.isChanged(oldRecord, newRecord, ignores, dateFields, null);
+    }
+
+    public static boolean isChanged(final JsonObject oldRecord, final JsonObject newRecord,
+                                    final Set<String> ignores, final ConcurrentMap<String, Class<?>> dateFields,
+                                    final BiFunction<String, Class<?>, BiPredicate<Object, Object>> fnPredicate) {
+        return Is.isChanged(oldRecord, newRecord, ignores, dateFields, fnPredicate);
     }
 
     public static TemporalUnit toUnit(final Class<?> clazz) {
