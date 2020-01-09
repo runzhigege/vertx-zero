@@ -1,6 +1,7 @@
 package io.vertx.up.uca.job.plugin;
 
 import io.vertx.core.Future;
+import io.vertx.up.atom.Refer;
 import io.vertx.up.commune.Envelop;
 
 /*
@@ -11,4 +12,9 @@ public interface JobIncome {
      * Async process income here
      */
     Future<Envelop> beforeAsync(final Envelop envelop);
+
+    /*
+     * Hidden channel to pass assist data
+     */
+    Future<Refer> assist();
 }
