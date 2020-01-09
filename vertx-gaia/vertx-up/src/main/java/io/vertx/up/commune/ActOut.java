@@ -110,14 +110,14 @@ public class ActOut extends ActMapping implements Serializable {
                     /*
                      * JsonObject here for mapping
                      */
-                    final JsonObject normalized = this.mapper().out(((JsonObject) response), mapping);
+                    final JsonObject normalized = this.mapper().out(((JsonObject) response), mapping.child());
                     return Envelop.success(normalized, status).from(this.envelop);
                 } else {
                     /*
                      * JsonArray here for mapping
                      */
                     final JsonArray normalized = new JsonArray();
-                    Ut.itJArray((JsonArray) response).map(item -> this.mapper().out(item, mapping))
+                    Ut.itJArray((JsonArray) response).map(item -> this.mapper().out(item, mapping.child()))
                             .forEach(normalized::add);
                     return Envelop.success(normalized, status).from(this.envelop);
                 }

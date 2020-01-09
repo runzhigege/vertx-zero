@@ -1,15 +1,25 @@
 package io.vertx.up.uca.adminicle;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.commune.config.DualMapping;
+import io.vertx.up.commune.config.DualItem;
 import io.vertx.up.util.Ut;
 
 import java.util.Objects;
 
-public class DualMapper implements Mapper {
+public class FieldMapper implements Mapper {
+
+    private final transient boolean keepNil;
+
+    public FieldMapper() {
+        this(true);
+    }
+
+    public FieldMapper(final boolean keepNil) {
+        this.keepNil = keepNil;
+    }
 
     @Override
-    public JsonObject in(final JsonObject in, final DualMapping mapping) {
+    public JsonObject in(final JsonObject in, final DualItem mapping) {
         if (Objects.isNull(mapping)) {
             /*
              * No mapping
@@ -27,7 +37,9 @@ public class DualMapper implements Mapper {
                  */
                 final String fromField = mapping.from(field);
                 if (Ut.isNil(fromField)) {
-                    normalized.put(field, in.getValue(field));
+                    if (this.keepNil) {
+                        normalized.put(field, in.getValue(field));
+                    }
                 } else {
                     normalized.put(fromField, in.getValue(field));
                 }
@@ -37,7 +49,7 @@ public class DualMapper implements Mapper {
     }
 
     @Override
-    public JsonObject out(final JsonObject out, final DualMapping mapping) {
+    public JsonObject out(final JsonObject out, final DualItem mapping) {
         if (Objects.isNull(mapping)) {
             /*
              * No mapping
@@ -51,7 +63,9 @@ public class DualMapper implements Mapper {
                  */
                 final String fromField = mapping.to(field);
                 if (Ut.isNil(fromField)) {
-                    normalized.put(field, out.getValue(field));
+                    if (this.keepNil) {
+                        normalized.put(field, out.getValue(field));
+                    }
                 } else {
                     normalized.put(fromField, out.getValue(field));
                 }
