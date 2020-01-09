@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentMap;
 
 interface Pool {
 
-    ConcurrentMap<String, DataPool> POOL = new ConcurrentHashMap<>();
+    ConcurrentMap<String, DataPool> POOL_DYNAMIC = new ConcurrentHashMap<>();
 
     ConcurrentMap<DatabaseType, SQLDialect> DIALECT
             = new ConcurrentHashMap<DatabaseType, SQLDialect>() {

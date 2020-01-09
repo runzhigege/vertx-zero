@@ -162,7 +162,7 @@ public class Database implements Serializable, Json {
     }
 
     public JsonObject getOptions() {
-        return this.options;
+        return Objects.isNull(this.options) ? new JsonObject() : this.options;
     }
 
     public void setOptions(final JsonObject options) {

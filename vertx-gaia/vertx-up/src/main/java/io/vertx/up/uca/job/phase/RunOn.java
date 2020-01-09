@@ -6,6 +6,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.User;
 import io.vertx.ext.web.Session;
+import io.vertx.up.atom.Refer;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.Commercial;
 import io.vertx.up.commune.Envelop;
@@ -25,9 +26,17 @@ import java.util.Objects;
 class RunOn {
     private static final Annal LOGGER = Annal.get(RunOn.class);
     private transient final Vertx vertx;
+    private transient final Refer assist = new Refer();
 
     RunOn(final Vertx vertx) {
         this.vertx = vertx;
+    }
+
+    RunOn bind(final Refer assist) {
+        if (Objects.nonNull(assist)) {
+            this.assist.add(assist.get());
+        }
+        return this;
     }
 
     Future<Envelop> invoke(final Envelop envelop, final Mission mission) {
@@ -149,8 +158,12 @@ class RunOn {
              * Actor/Director must
              */
             return mission;
+        } else if (Refer.class == clazz) {
+            /*
+             * Bind Assist call here
+             */
+            return this.assist;
         } else {
-
             throw new _417JobMethodException(this.getClass(), mission.getCode());
         }
     }

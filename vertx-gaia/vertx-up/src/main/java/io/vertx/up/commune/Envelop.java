@@ -344,6 +344,38 @@ public class Envelop implements Serializable {
         return this;
     }
 
+    /*
+     * Copy information to `to`
+     * return to
+     */
+    public Envelop to(final Envelop to) {
+        if (Objects.isNull(to)) {
+            return to;
+        } else {
+            to.setMethod(this.getMethod());
+            to.setUri(this.getUri());
+            to.setUser(this.user());
+            to.setSession(this.getSession());
+            to.setHeaders(this.headers());
+        }
+        return to;
+    }
+
+    /*
+     * Copy information from `from`
+     * return this;
+     */
+    public Envelop from(final Envelop from) {
+        if (Objects.nonNull(from)) {
+            this.setMethod(from.getMethod());
+            this.setUri(from.getUri());
+            this.setUser(from.user());
+            this.setSession(from.getSession());
+            this.setHeaders(from.headers());
+        }
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Envelop{" +

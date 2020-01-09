@@ -11,7 +11,11 @@ import java.time.temporal.TemporalUnit;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
 
 /*
  * Specific checking
@@ -33,7 +37,8 @@ class Is {
     }
 
     static boolean isChanged(final JsonObject oldRecord, final JsonObject newRecord,
-                             final Set<String> ignores, final ConcurrentMap<String, Class<?>> dateFields) {
+                             final Set<String> ignores, final ConcurrentMap<String, Class<?>> types,
+                             final BiFunction<String, Class<?>, BiPredicate<Object, Object>> fnPredicate) {
         /*
          * copy each compared json object and remove
          * all fields that will not be compared here.
@@ -44,34 +49,48 @@ class Is {
             ignores.forEach(oldCopy::remove);
             ignores.forEach(newCopy::remove);
         }
-        final Set<String> dateFieldSet = Objects.isNull(dateFields) ? new HashSet<>() : dateFields.keySet();
         /*
-         * Get the final result of calculation.
-         * 1) From old calculation
+         * Date Time conversation
          */
-        final boolean unchanged = oldCopy.fieldNames().stream().allMatch(field -> {
+        final ConcurrentMap<String, Class<?>> dateFields = new ConcurrentHashMap<>();
+        types.forEach((field, type) -> {
+            if (Types.isDate(type)) {
+                dateFields.put(field, type);
+            }
+        });
+        final Set<String> dateFieldSet = dateFields.keySet();
+
+        final Function<String, Boolean> isSame = (field) -> {
             /*
              * Extract value from each record
              */
             final Object oldValue = oldCopy.getValue(field);
             final Object newValue = newCopy.getValue(field);
             final TemporalUnit unit = getUnit(dateFields.get(field));
-            return isSame(oldValue, newValue, dateFieldSet.contains(field), unit);
-        });
+            final boolean basic = isSame(oldValue, newValue, dateFieldSet.contains(field), unit);
+            if (basic) {
+                return Boolean.TRUE;
+            } else {
+                if (Objects.isNull(fnPredicate)) {
+                    return Boolean.FALSE;
+                } else {
+                    final Class<?> type = dateFields.get(field);
+                    final BiPredicate<Object, Object> predicate = fnPredicate.apply(field, type);
+                    return predicate.test(oldValue, newValue);
+                }
+            }
+        };
+        /*
+         * Get the final result of calculation.
+         * 1) From old calculation
+         */
+        final boolean unchanged = oldCopy.fieldNames().stream().allMatch(isSame::apply);
         /*
          * 2) From new calculation
          */
         final Set<String> newLefts = new HashSet<>(newCopy.fieldNames());
         newLefts.removeAll(oldCopy.fieldNames());
-        final boolean additional = newLefts.stream().allMatch(field -> {
-            /*
-             * Extract value from each record
-             */
-            final Object oldValue = oldCopy.getValue(field);
-            final Object newValue = newCopy.getValue(field);
-            final TemporalUnit unit = getUnit(dateFields.get(field));
-            return isSame(oldValue, newValue, dateFieldSet.contains(field), unit);
-        });
+        final boolean additional = newLefts.stream().allMatch(isSame::apply);
         return !(unchanged && additional);
     }
 

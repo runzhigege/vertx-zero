@@ -4,6 +4,7 @@ import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
+import io.vertx.core.MultiMap;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
@@ -18,8 +19,8 @@ import io.vertx.up.atom.query.Criteria;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.commune.Record;
+import io.vertx.up.commune.config.Dict;
 import io.vertx.up.commune.config.DictEpsilon;
-import io.vertx.up.commune.config.DualItem;
 import io.vertx.up.eon.Constants;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.exception.WebException;
@@ -491,33 +492,15 @@ public final class Ux {
     }
 
     // -> Dict for caculation
-
-    public static DualItem dictDual(final JsonArray dataArray, final DictEpsilon epsilon) {
-        return Dict.toDual(dataArray, epsilon);
-    }
-
-    public static ConcurrentMap<String, DualItem> dictDual(final ConcurrentMap<String, DictEpsilon> source, final ConcurrentMap<String, JsonArray> dictMap) {
-        return Dict.mapDual(source, dictMap);
-    }
-
+    /*
+     * Keep following dict method
+     */
     public static ConcurrentMap<String, DictEpsilon> dictEpsilon(final JsonObject epsilon) {
-        return Dict.mapEpsilon(epsilon);
+        return DictTool.mapEpsilon(epsilon);
     }
 
-    public static Future<JsonArray> dictTo(final JsonArray data, final ConcurrentMap<String, DualItem> mapping) {
-        return Dict.runTo(data, mapping);
-    }
-
-    public static Future<JsonArray> dictTo(final JsonArray data, final ConcurrentMap<String, DictEpsilon> source, final ConcurrentMap<String, JsonArray> dictMap) {
-        return Dict.runTo(data, Dict.mapDual(source, dictMap));
-    }
-
-    public static Future<JsonArray> dictFrom(final JsonArray data, final ConcurrentMap<String, DualItem> mapping) {
-        return Dict.runFrom(data, mapping);
-    }
-
-    public static Future<JsonArray> dictFrom(final JsonArray data, final ConcurrentMap<String, DictEpsilon> source, final ConcurrentMap<String, JsonArray> dictMap) {
-        return Dict.runFrom(data, Dict.mapDual(source, dictMap));
+    public static Future<ConcurrentMap<String, JsonArray>> dictCalc(final Dict dict, final MultiMap paramsMap) {
+        return DictTool.dictCalc(dict, paramsMap);
     }
 
     // -> Jooq
