@@ -55,9 +55,11 @@ class JtPandora {
         Ut.contract(channel, Mission.class, mission);
 
         /* Dictionary */
-        final ConcurrentMap<String, JsonArray> dict = refer.get();
-        if (Objects.nonNull(dict)) {
-            Ut.contract(channel, ConcurrentMap.class, dict);
+        if (Objects.nonNull(refer)) {
+            final ConcurrentMap<String, JsonArray> dict = refer.get();
+            if (Objects.nonNull(dict)) {
+                Ut.contract(channel, ConcurrentMap.class, dict);
+            }
         }
 
         monitor.channelHit(channelClass);

@@ -38,6 +38,25 @@ public class DualMapper implements Mapper {
 
     @Override
     public JsonObject out(final JsonObject out, final DualMapping mapping) {
-        return null;
+        if (Objects.isNull(mapping)) {
+            /*
+             * No mapping
+             */
+            return out.copy();
+        } else {
+            final JsonObject normalized = new JsonObject();
+            out.fieldNames().forEach(field -> {
+                /*
+                 * field is (From) field
+                 */
+                final String fromField = mapping.to(field);
+                if (Ut.isNil(fromField)) {
+                    normalized.put(field, out.getValue(field));
+                } else {
+                    normalized.put(fromField, out.getValue(field));
+                }
+            });
+            return normalized;
+        }
     }
 }
