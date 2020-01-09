@@ -27,6 +27,9 @@ class Input {
     Future<Envelop> inputAsync(final Mission mission) {
         /*
          * Get income address
+         * 1) If there configured income address, it means that there are some inputs came from
+         *     'incomeAddress' ( For feature usage )
+         * 2) No incomeAddress configured is often used for the job.
          * */
         final String address = mission.getIncomeAddress();
         if (Ut.isNil(address)) {

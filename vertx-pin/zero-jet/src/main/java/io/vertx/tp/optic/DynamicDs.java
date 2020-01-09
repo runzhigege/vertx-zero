@@ -39,7 +39,10 @@ public class DynamicDs implements DS {
 
     private DataPool getDs(final JtApp app) {
         /*
-         * DataPool get here
+         * DataPool get here，For each database, it's two
+         * 1) Default database with or without auto commit;
+         * 2) Remove auto commit to switch to auto commit = true, a new database
+         * 3) Auto commit database will be managed by DataPool, it could switch by DataPool itself
          */
         final Database database = app.getSource();
         return DataPool.createAuto(database);
