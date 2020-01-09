@@ -3,8 +3,8 @@ package io.vertx.up.commune;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.commune.config.DualMapping;
 import io.vertx.up.eon.em.MappingMode;
-import io.vertx.up.uca.dual.DualMapper;
-import io.vertx.up.uca.dual.Mapper;
+import io.vertx.up.uca.adminicle.DualMapper;
+import io.vertx.up.uca.adminicle.Mapper;
 import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
