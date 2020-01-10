@@ -1,13 +1,23 @@
 package io.vertx.tp.jet.uca.business;
 
+import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.annotations.Contract;
+import io.vertx.up.commune.ActIn;
+import io.vertx.up.commune.ActOut;
 import io.vertx.up.commune.Service;
 import io.vertx.up.commune.config.Dict;
 import io.vertx.up.commune.config.DualMapping;
 import io.vertx.up.commune.config.Identity;
+import io.vertx.up.commune.config.XHeader;
+import io.vertx.up.exception.WebException;
+import io.vertx.up.exception.web._400SigmaMissingException;
 import io.vertx.up.log.Annal;
+import io.vertx.up.util.Ut;
+
+import java.util.Objects;
+import java.util.function.Function;
 
 /**
  * Four type components here, it is base class of
@@ -33,6 +43,9 @@ public abstract class AbstractComponent implements JtComponent, Service {
 
     @Contract
     private transient Dict dict;
+
+    @Contract
+    private transient XHeader header;  // Came from request
 
     /*
      * The logger of Annal here
@@ -64,7 +77,7 @@ public abstract class AbstractComponent implements JtComponent, Service {
      */
     @Override
     public JsonObject options() {
-        return this.options;
+        return Objects.isNull(this.options) ? new JsonObject() : this.options.copy();
     }
 
     @Override
@@ -81,5 +94,20 @@ public abstract class AbstractComponent implements JtComponent, Service {
     @Override
     public DualMapping mapping() {
         return this.mapping;
+    }
+
+    protected XHeader header() {
+        return this.header;
+    }
+
+    /* Uniform tunnel */
+    protected Future<ActOut> transferAsync(final ActIn request, final Function<String, Future<ActOut>> executor) {
+        final String sigma = request.sigma();
+        if (Ut.isNil(sigma)) {
+            final WebException error = new _400SigmaMissingException(this.getClass());
+            return ActOut.future(error);
+        } else {
+            return executor.apply(sigma);
+        }
     }
 }

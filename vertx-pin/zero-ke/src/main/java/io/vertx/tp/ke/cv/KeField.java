@@ -91,6 +91,9 @@ public interface KeField {
     String CREATED_BY = "createdBy";
     String UPDATED_BY = "updatedBy";
 
+    String HEADER = "header";
+    String OPTIONS = "options";
+
     interface App {
 
         String COPY_RIGHT = "copyRight";
