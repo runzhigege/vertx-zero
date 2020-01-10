@@ -8,7 +8,12 @@ import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 
 import java.math.BigDecimal;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Collection;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -147,7 +152,14 @@ final class Types {
         if (Objects.isNull(value)) {
             return false;
         } else {
-            return Period.isValid(value.toString());
+            if (value instanceof Class) {
+                final Class<?> type = (Class<?>) value;
+                return LocalDateTime.class == type || LocalDate.class == type ||
+                        LocalTime.class == type || Date.class == type ||
+                        Instant.class == type;
+            } else {
+                return Period.isValid(value.toString());
+            }
         }
     }
 

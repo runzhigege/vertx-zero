@@ -16,7 +16,7 @@ class KeRun {
             KeLog.warnChannel(KeRun.class, "Channel {0} null", clazz.getName());
             return Ux.future(supplier.get());
         } else {
-            KeLog.infoChannel(KeRun.class, "Channel Async selected {0}, {1}",
+            KeLog.debugChannel(KeRun.class, "Channel Async selected {0}, {1}",
                     channel.getClass().getName(), String.valueOf(channel.hashCode()));
             return executor.apply(channel);
         }
@@ -29,7 +29,7 @@ class KeRun {
             KeLog.warnChannel(KeRun.class, "Channel Sync {0} null", clazz.getName());
             return supplier.get();
         } else {
-            KeLog.infoChannel(KeRun.class, "Channel Sync selected {0}, {1}",
+            KeLog.debugChannel(KeRun.class, "Channel Sync selected {0}, {1}",
                     channel.getClass().getName(), String.valueOf(channel.hashCode()));
             return executor.apply(channel);
         }
@@ -42,7 +42,7 @@ class KeRun {
             KeLog.warnChannel(KeRun.class, "Channel Async {0} null", clazz.getName());
             return supplier.get();
         } else {
-            KeLog.infoChannel(KeRun.class, "Channel Async selected {0}, {1}",
+            KeLog.debugChannel(KeRun.class, "Channel Async selected {0}, {1}",
                     channel.getClass().getName(), String.valueOf(channel.hashCode()));
             return executor.apply(channel);
         }

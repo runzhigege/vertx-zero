@@ -138,6 +138,7 @@ E60042: "(501) - The class `{0}` does not define any method annotated with @On"
 
 E60043: "(409) - Your session version mismatch between old = {0} and new = {1}"
 E60044: "(500) - Your pointer plugin component specification met error, config = {0}"
+E60045: "(400) - Your request missed `sigma` field, it means that your request header `X-Sigma` missing, but it's required"
 # CRUD Module
 E80100: "(404) - (CRUD) You missed `module` = `{0}` definition in file \"plugin/crud/module/\" folder"
 E80101: "(404) - (CRUD) You missed `column` configuration and instance is null. access module = {0}"

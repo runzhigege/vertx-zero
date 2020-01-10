@@ -1,6 +1,7 @@
 package io.vertx.tp.jet.uca.micro;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.tp.error._424ChannelConflictException;
 import io.vertx.tp.error._424ChannelDefineException;
 import io.vertx.tp.error._424ChannelDefinitionException;
@@ -10,6 +11,7 @@ import io.vertx.tp.jet.uca.tunnel.AdaptorChannel;
 import io.vertx.tp.jet.uca.tunnel.ConnectorChannel;
 import io.vertx.tp.jet.uca.tunnel.DirectorChannel;
 import io.vertx.tp.optic.jet.JtChannel;
+import io.vertx.up.atom.Refer;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.Commercial;
 import io.vertx.up.commune.Envelop;
@@ -17,6 +19,7 @@ import io.vertx.up.eon.em.ChannelType;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.util.Ut;
 
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
@@ -39,6 +42,7 @@ class JtPandora {
     static Future<Envelop> async(final Envelop envelop,
                                  final Commercial commercial,
                                  final Mission mission,
+                                 final Refer refer,
                                  final JtMonitor monitor) {
         /* Channel class for current consumer thread */
         final Class<?> channelClass = getChannel(commercial);
@@ -49,6 +53,15 @@ class JtPandora {
         /* Find the target Field */
         Ut.contract(channel, Commercial.class, commercial);
         Ut.contract(channel, Mission.class, mission);
+
+        /* Dictionary */
+        if (Objects.nonNull(refer)) {
+            final ConcurrentMap<String, JsonArray> dict = refer.get();
+            if (Objects.nonNull(dict)) {
+                Ut.contract(channel, ConcurrentMap.class, dict);
+            }
+        }
+
         monitor.channelHit(channelClass);
         /* Transfer the `Envelop` request data into channel and let channel do next works */
         return channel.transferAsync(envelop);
@@ -56,7 +69,12 @@ class JtPandora {
 
     static Future<Envelop> async(final Envelop envelop, final Commercial commercial,
                                  final JtMonitor monitor) {
-        return async(envelop, commercial, null, monitor);
+        /*
+         * Refer is only OK when Job
+         * 1) Income / Component / Outcome Shared Refer
+         * 2) In Api mode, it's not needed
+         */
+        return async(envelop, commercial, null, null, monitor);
     }
 
     private static Class<?> getChannel(final Commercial commercial) {

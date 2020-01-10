@@ -4,6 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.EventBus;
+import io.vertx.up.atom.Refer;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.eon.Info;
@@ -18,9 +19,17 @@ import java.util.Objects;
 class OutPut {
     private static final Annal LOGGER = Annal.get(OutPut.class);
     private transient final Vertx vertx;
+    private transient final Refer assist = new Refer();
 
     OutPut(final Vertx vertx) {
         this.vertx = vertx;
+    }
+
+    OutPut bind(final Refer assist) {
+        if (Objects.nonNull(assist)) {
+            this.assist.add(assist.get());
+        }
+        return this;
     }
 
     Future<Envelop> outcomeAsync(final Envelop envelop, final Mission mission) {
