@@ -23,7 +23,7 @@ public class Ambient {
     private static final ConcurrentMap<String, JtApp> APPS =
             new ConcurrentHashMap<>();
 
-    /* Environment information of Ambient */
+    /* XHeader information of Ambient */
     private static final ConcurrentMap<String, AmbientEnvironment> ENVIRONMENTS =
             new ConcurrentHashMap<>();
 

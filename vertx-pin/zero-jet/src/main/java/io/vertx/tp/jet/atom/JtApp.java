@@ -11,7 +11,7 @@ import io.vertx.up.commune.config.Database;
 import java.io.Serializable;
 
 /*
- * Environment for current jet here.
+ * XHeader for current jet here.
  */
 public class JtApp implements Serializable {
     /* appId, appKey, sigma */

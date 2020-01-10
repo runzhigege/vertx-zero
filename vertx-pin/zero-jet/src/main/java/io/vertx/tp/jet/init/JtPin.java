@@ -17,7 +17,7 @@ public class JtPin {
         Jt.infoInit(LOGGER, "JtConfiguration...");
         JtConfiguration.init();
 
-        Jt.infoInit(LOGGER, "Ambient Environment Start...");
+        Jt.infoInit(LOGGER, "Ambient XHeader Start...");
     }
 
     public static JtConfig getConfig() {

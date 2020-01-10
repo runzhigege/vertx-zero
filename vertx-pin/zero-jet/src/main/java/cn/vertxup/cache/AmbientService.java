@@ -29,7 +29,7 @@ public class AmbientService implements AmbientStub {
         final JtApp app = Ambient.getApp(sigma);
         if (Objects.isNull(app)) {
             /*
-             * 500 Environment Exception, could not be found
+             * 500 XHeader Exception, could not be found
              */
             return Ux.thenError(_500EnvironmentException.class, this.getClass(), sigma);
         } else {
@@ -38,7 +38,7 @@ public class AmbientService implements AmbientStub {
              */
             final JtJob instance = new JtJob(job, service).bind(app.getAppId());
             /*
-             * Environment Flush Cache
+             * XHeader Flush Cache
              */
             final AmbientEnvironment environment =
                     Ambient.getEnvironments().get(app.getAppId());

@@ -124,6 +124,7 @@ public abstract class JtCommercial implements Commercial {
         return this.app.getAppId();
     }
 
+
     /*
      * Non - Interface method here.
      */
