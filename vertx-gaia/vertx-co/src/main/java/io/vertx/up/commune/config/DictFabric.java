@@ -221,19 +221,23 @@ public class DictFabric {
         return normalized;
     }
 
-    public void report(final StringBuilder builder) {
+    public String report() {
+        final StringBuilder builder = new StringBuilder();
         builder.append("\n\t[ Epsilon ]: ");
         this.epsilonMap.forEach((key, epsilon) -> builder.append("\n\t\t").
                 append(key).append(" = ").append(epsilon));
         builder.append("\n\t[ Dict Data ]: ");
         this.dictData.forEach((key, dictData) -> builder.append("\n\t\t").
                 append(key).append(" = ").append(dictData.encode()));
-        builder.append("\n\t[ Mapping ]: ").append(this.mapping.toString());
+        if (Objects.nonNull(this.mapping)) {
+            builder.append("\n\t[ Mapping ]: ").append(this.mapping.toString());
+        }
         builder.append("\n\t[ From Data ]: ");
         this.fromData.forEach((field, json) -> builder.append("\n\t\t")
                 .append(field).append(" = ").append(json.toString()));
         builder.append("\n\t[ To Data ]: ");
         this.toData.forEach((field, json) -> builder.append("\n\t\t")
                 .append(field).append(" = ").append(json.toString()));
+        return builder.toString();
     }
 }
