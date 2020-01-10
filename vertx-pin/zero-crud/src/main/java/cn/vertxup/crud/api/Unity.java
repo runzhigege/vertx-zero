@@ -31,7 +31,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.stream.Stream;
 
 class Unity {
 
@@ -117,109 +116,6 @@ class Unity {
             }
         }
         return true;
-    }
-
-    static ConcurrentMap<String, ConcurrentMap<String, String>> dictCalc(
-            final ConcurrentMap<String, JsonArray> dictMap,
-            final List<JsonObject> prepared,
-            final IxModule config) {
-        final ConcurrentMap<String, ConcurrentMap<String, String>> resultMap
-                = new ConcurrentHashMap<>();
-        /*
-         * 1. dictMap is the dictionary data here - EpsilonMap
-         *    1) in = name
-         *    2) out = key
-         * Build map field = { in = out }
-         *
-         * Self Reference for tree importing here
-         * 1) Here DictEpsilon must be `parent = true`
-         * 2) When parent is true, it means that we should be capture
-         * 3) Single Field: parent = true, it could be used
-         *    Multi Fields: parent = true, it also could be used
-         */
-        final ConcurrentMap<String, DictEpsilon> epsilonMap = config.getEpsilon();
-        epsilonMap.forEach((field, epsilon) -> {
-            final ConcurrentMap<String, String> dictData = new ConcurrentHashMap<>();
-            /*
-             * Basic checking
-             */
-            final String source = epsilon.getSource();
-            final String inField = epsilon.getIn();
-            final String outField = epsilon.getOut();
-            if (Ut.notNil(inField) && Ut.notNil(outField) && Ut.notNil(source)) {
-                /*
-                 * 1) Self Parent first
-                 */
-                if (epsilon.getParent()) {
-                    dictData.putAll(dictCalc(prepared.stream(), inField, outField));
-                }
-                /*
-                 * 2) Converted database source then
-                 *
-                 * Here are a situation, if the dict stored into database
-                 * The `key` will be override in this step, it such as
-                 *
-                 * 2.1) Here stored
-                 * Key     Name
-                 * key1    Name1
-                 * 2.2) When the template also contains
-                 * Name
-                 * Name1
-                 * 2.3) Before current step, here should be
-                 * Key     Name
-                 * key2    Name1
-                 * But now the recalculated will be
-                 * Name1 = Key2 first, and then Name1 = key1 second, it means that
-                 * The new generated key will be overwrite by `key1` that stored in database
-                 */
-                if (dictMap.containsKey(source)) {
-                    final JsonArray dataArray = dictMap.get(source);
-                    dictData.putAll(dictCalc(Ut.itJArray(dataArray), inField, outField));
-                }
-            }
-            resultMap.put(field, dictData);
-        });
-        return resultMap;
-    }
-
-    private static ConcurrentMap<String, String> dictCalc(final Stream<JsonObject> stream,
-                                                          final String in, final String out) {
-        final ConcurrentMap<String, String> dictData = new ConcurrentHashMap<>();
-        stream.filter(Objects::nonNull)
-                .filter(json -> Objects.nonNull(json.getValue(in)))
-                .filter(json -> Objects.nonNull(json.getValue(out)))
-                .forEach(json -> dictData.put(
-                        json.getValue(in).toString(),
-                        json.getValue(out).toString()
-                ));
-        return dictData;
-    }
-
-    static Future<JsonObject> dictImport(final JsonObject input,
-                                         final ConcurrentMap<String, ConcurrentMap<String, String>> preparedMap,
-                                         final IxModule config) {
-        if (Objects.isNull(preparedMap) || preparedMap.isEmpty()) {
-            return Ux.future(input);
-        } else {
-            /*
-             * Additional Steps
-             */
-            final ConcurrentMap<String, DictEpsilon> epsilonMap = config.getEpsilon();
-            epsilonMap.keySet().forEach(field -> {
-                /*
-                 * Excel, Self reference
-                 */
-                final ConcurrentMap<String, String> prepared = preparedMap.get(field);
-                final String value = input.getString(field);
-                if (Objects.nonNull(prepared) && Ut.notNil(value) && !prepared.isEmpty()) {
-                    final String found = prepared.get(value);
-                    if (Ut.notNil(found)) {
-                        input.put(field, found);
-                    }
-                }
-            });
-            return Ux.future(input);
-        }
     }
 
     /*

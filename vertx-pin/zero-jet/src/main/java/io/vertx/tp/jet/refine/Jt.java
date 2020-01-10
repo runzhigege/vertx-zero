@@ -63,8 +63,8 @@ public class Jt {
         return JtDataObject.toDatabase(supplier, defaultDatabase);
     }
 
-    public static Integration toIntegration(final Supplier<String> supplier) {
-        return JtDataObject.toIntegration(supplier);
+    public static Integration toIntegration(final IService service) {
+        return JtDataObject.toIntegration(service);
     }
 
     /*
