@@ -7,7 +7,13 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.unit.TimeValue;
@@ -18,7 +24,10 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -41,11 +50,23 @@ public class ElasticSearchHelper {
 
 	RestHighLevelClient getClient(final JsonObject options) {
 		Fn.outWeb(Ut.isNil(options), _404ConfigurationMissingExceptionn.class, this.getClass());
-		logger.debug("ElasticSearch Config: ", options.getString("hostname"), options.getInteger("port"), options.getString("scheme"));
+
+		final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+		credentialsProvider.setCredentials(AuthScope.ANY,
+			new UsernamePasswordCredentials(options.getString("username"), options.getString("password"))
+		);
+
 		return new RestHighLevelClient(
 			RestClient.builder(
 				new HttpHost(options.getString("hostname"), options.getInteger("port"), options.getString("scheme"))
 			)
+			.setHttpClientConfigCallback(new RestClientBuilder.HttpClientConfigCallback() {
+				@Override
+				public HttpAsyncClientBuilder customizeHttpClient(HttpAsyncClientBuilder httpAsyncClientBuilder) {
+					httpAsyncClientBuilder.disableAuthCaching();
+					return httpAsyncClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
+				}
+			})
 		);
 	}
 
@@ -73,83 +94,54 @@ public class ElasticSearchHelper {
 	 * }
 	 * @return translated map object
 	 */
-	Map<String, Object> mappingsBuilder(final JsonObject mappings) {
-		JsonObject result = new JsonObject();
+	Map<String, Object> mappingsBuilder(final ConcurrentMap<String, Class<?>> mappings) {
+		Map<String, Object> properties = new HashMap<>();
 
 		// process field: key
 		if (mappings.containsKey("key")) {
-			result.put("key", new JsonObject()
-				.put("type", "keyword")
-				.put("index", true)
-			);
+			Map<String, Object> keyProp = new HashMap<>();
+			keyProp.put("type", "keyword");
+			keyProp.put("index", true);
+			properties.put("key", keyProp);
 			mappings.remove("key");
 		}
 
 		// process rest fields
-		mappings.forEach(item -> {
-			final String key = item.getKey();
-			final String value = item.getValue().toString();
-			if (StringUtils.equalsIgnoreCase(value, "STRING1") ||
-					StringUtils.equalsIgnoreCase(value, "STRING2") ||
-					StringUtils.equalsIgnoreCase(value, "JSON") ||
-					StringUtils.equalsIgnoreCase(value, "XML") ||
-					StringUtils.equalsIgnoreCase(value, "SCRIPT")) {
-				if (StringUtils.containsIgnoreCase(key, "ip")) {
-					JsonObject props = new JsonObject()
-						.put("type", "ip")
-						.put("index", "true");
-					result.put(key, props);
-				} else {
-					JsonObject props = new JsonObject()
-						.put("type", "text")
-						.put("index", "true")
-						.put("analyzer", "ik_max_word");
-					result.put(key, props);
-				}
-			} else if (StringUtils.equalsIgnoreCase(value, "DATE1") ||
-						StringUtils.equalsIgnoreCase(value, "DATE2") ||
-						StringUtils.equalsIgnoreCase(value, "DATE3") ||
-						StringUtils.equalsIgnoreCase(value, "DATE4")) {
-				JsonObject props = new JsonObject()
-					.put("type", "date")
-					.put("index", "true")
-					.put("format", "yyyy-MM-dd||yyyy-MM-dd HH:mm:ss||epoch_millis");
-				result.put(key, props);
-			} else if (StringUtils.equalsIgnoreCase(value, "INT")) {
-				JsonObject props = new JsonObject()
-					.put("type", "integer")
-					.put("index", "true");
-				result.put(key, props);
-			} else if (StringUtils.equalsIgnoreCase(value, "LONG")) {
-				JsonObject props = new JsonObject()
-					.put("type", "long")
-					.put("index", "true");
-				result.put(key, props);
-			} else if (StringUtils.equalsIgnoreCase(value, "DECIMAL")) {
-				JsonObject props = new JsonObject()
-					.put("type", "double")
-					.put("index", "true");
-				result.put(key, props);
-			} else if (StringUtils.equalsIgnoreCase(value, "BOOLEAN")) {
-				JsonObject props = new JsonObject()
-					.put("type", "boolean")
-					.put("index", "true");
-				result.put(key, props);
-			} else if (StringUtils.equalsIgnoreCase(value, "BINARY")) {
-				JsonObject props = new JsonObject()
-					.put("type", "binary")
-					.put("index", "true");
-				result.put(key, props);
+		mappings.forEach((key, val) -> {
+			Map<String, Object> props = new HashMap<>();
+			if (val == String.class) {
+				props.put("type", "text");
+				props.put("index", "true");
+				props.put("analyzer", "ik_max_word");
+			} else if (val == java.time.LocalTime.class || val == java.time.LocalDateTime.class ||
+							val == java.time.LocalDate.class || val == java.time.Instant.class) {
+				props.put("type", "date");
+				props.put("index", "true");
+				props.put("format", "yyyy-MM-dd||yyyy-MM-dd HH:mm:ss||yyyy-MM-dd'T'HH:mm:ss'Z'||epoch_millis");
+			} else if (val == java.lang.Integer.class) {
+				props.put("type", "integer");
+				props.put("index", "true");
+			} else if (val == java.lang.Long.class) {
+				props.put("type", "long");
+				props.put("index", "true");
+			} else if (val == java.lang.Double.class || val == java.lang.Float.class || val == java.math.BigDecimal.class) {
+				props.put("type", "double");
+				props.put("index", "true");;
+			} else if (val == java.lang.Boolean.class) {
+				props.put("type", "boolean");
+				props.put("index", "true");;
 			} else {
-				JsonObject props = new JsonObject()
-					.put("type", "text")
-					.put("index", "true")
-					.put("analyzer", "ik_max_word");
-				result.put(key, props);
+				props.put("type", "text");
+				props.put("index", "true");
+				props.put("analyzer", "ik_max_word");
 			}
+
+			properties.put(key, props);
 		});
 
-		return result.getMap();
+		Map<String, Object> result = new HashMap<>();
+		result.put("properties", properties);
+		return result;
 	}
 
 	SearchSourceBuilder searchSourceBuilder(final String searchText, int from, int size) {

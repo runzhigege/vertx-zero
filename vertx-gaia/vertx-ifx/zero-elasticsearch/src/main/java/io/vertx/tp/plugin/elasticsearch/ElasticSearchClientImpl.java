@@ -2,6 +2,10 @@ package io.vertx.tp.plugin.elasticsearch;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.error._404ConfigurationMissingExceptionn;
+import io.vertx.tp.error._404IndexNameMissingExceptionn;
+import io.vertx.tp.error._404SearchTextMissingExceptionn;
+import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
 import org.elasticsearch.action.DocWriteResponse;
@@ -26,10 +30,14 @@ import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.client.indices.GetIndexResponse;
+import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.Aggregations;
 
 import java.io.IOException;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Hongwei
@@ -77,13 +85,13 @@ public class ElasticSearchClientImpl implements ElasticSearchClient {
 	}
 
 	@Override
-	public JsonObject createIndex(String alias, String index, int numberOfShards, int numberOfReplicas, JsonObject mappings) {
+	public JsonObject createIndex(String index, int numberOfShards, int numberOfReplicas, ConcurrentMap<String, Class<?>> mappings) {
 		JsonObject result = new JsonObject();
 		RestHighLevelClient client = helper.getClient(options);
 
 		try {
 			CreateIndexRequest request = new CreateIndexRequest(index);
-			request.alias(new Alias(alias));
+			request.alias(new Alias(options.getString("index")));
 			request.settings(helper.settingsBuilder(numberOfShards, numberOfReplicas));
 			request.mapping(helper.mappingsBuilder(mappings));
 
@@ -182,7 +190,7 @@ public class ElasticSearchClientImpl implements ElasticSearchClient {
 				.put("id", response.getId())
 				.put("result", response.getResult() == DocWriteResponse.Result.CREATED);
 		} catch (IOException ioe) {
-			logger.error("failed to create document, document id is {}", documentId);
+			logger.error("failed to create document, document id is {0}", documentId);
 			logger.error(ioe.getMessage());
 		}
 
@@ -242,11 +250,19 @@ public class ElasticSearchClientImpl implements ElasticSearchClient {
 	}
 
 	@Override
-	public JsonObject search(String index, String searchText, int from, int size) {
+	public JsonObject search(JsonObject params) {
 		JsonObject result = new JsonObject();
 		RestHighLevelClient client = helper.getClient(options);
 
 		try {
+			Fn.outWeb(!params.containsKey("index"), _404IndexNameMissingExceptionn.class, this.getClass());
+			Fn.outWeb(!params.containsKey("searchText"), _404SearchTextMissingExceptionn.class, this.getClass());
+
+			final String index = params.getString("inndex");
+			final String searchText = params.getString("searchText");
+			final int from = params.containsKey("from") ? params.getInteger("from") : 0;
+			final int size = params.containsKey("size") ? params.getInteger("size") : 10;
+
 			SearchRequest request = new SearchRequest(index)
 				.source(helper.searchSourceBuilder(searchText, from, size));
 
@@ -264,7 +280,7 @@ public class ElasticSearchClientImpl implements ElasticSearchClient {
 				.put("total", response.getHits().getTotalHits())
 				.put("hits", response.getHits().getHits());
 		} catch (IOException ioe) {
-			logger.error("failed to delete document, search text is {}", searchText);
+			logger.error("failed to get search result from elasticsearch");
 			logger.error(ioe.getMessage());
 		}
 
