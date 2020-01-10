@@ -5,6 +5,7 @@ import io.vertx.core.json.JsonObject;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author Hongwei
@@ -25,7 +26,6 @@ public interface ElasticSearchClient {
 
 	/**
 	 * create index with settings and mappings
-	 * @param alias alias name of index, it's used to fulltext search
 	 * @param index name of index. this is real index name
 	 * @param numberOfShards number of shards, default is 5
 	 * @param numberOfReplicas number of replicas, default is 3
@@ -35,7 +35,7 @@ public interface ElasticSearchClient {
 	 *  "isAcknowledged": true
 	 * }
 	 */
-	public JsonObject createIndex(final String alias, final String index, int numberOfShards, int numberOfReplicas, final JsonObject mappings);
+	public JsonObject createIndex(final String index, int numberOfShards, int numberOfReplicas, final ConcurrentMap<String, Class<?>> mappings);
 
 	/**
 	 * delete index
@@ -119,10 +119,14 @@ public interface ElasticSearchClient {
 	/* full test search API */
 	/**
 	 * get search result from ElasticSearch by search text
-	 * @param index name of index
-	 * @param searchText search text entered by users
-	 * @param from start searching from, default is 0
-	 * @param size the number of search hits to return, default is 10
+	 * @param params params will be used to search, format likes below
+	 * {
+	 *  "index": "", --- required
+	 *  "searchText": "", --- required
+	 *  "from": 0, --- default is 0
+	 *  "size": 10 --- default is 10
+	 * }
+	 *
 	 * @return JsonObject like below
 	 * {
 	 *     "status": "OK",
@@ -148,5 +152,5 @@ public interface ElasticSearchClient {
 	 *     ]
 	 * }
 	 */
-	public JsonObject search(final String index, final String searchText, int from, int size);
+	public JsonObject search(JsonObject params);
 }

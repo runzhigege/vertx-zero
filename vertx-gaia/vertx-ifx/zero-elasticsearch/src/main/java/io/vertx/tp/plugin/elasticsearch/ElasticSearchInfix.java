@@ -17,8 +17,7 @@ import java.util.concurrent.ConcurrentMap;
 public class ElasticSearchInfix implements Infix {
 	private static final String NAME = "ZERO_ELASTIC_SEARCH_POOL";
 
-	private static final ConcurrentMap<String, ElasticSearchClient> CLIENTS
-		= new ConcurrentHashMap<>();
+	private static final ConcurrentMap<String, ElasticSearchClient> CLIENTS = new ConcurrentHashMap<>();
 
 	private static void initInternal(final Vertx vertx,
 	                                 final String name) {
