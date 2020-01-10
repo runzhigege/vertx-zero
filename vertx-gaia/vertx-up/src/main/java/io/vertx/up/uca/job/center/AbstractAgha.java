@@ -25,6 +25,18 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/*
+ * The chain should be
+ *
+ * 1) Input data came from 'incomeAddress' ( There are some preparing or other info )
+ * 2) `incomeComponent` will be triggered if it's existing.
+ * 3) `component` is required and contain major code logical.
+ * 4) `outcomeComponent` will be triggered if it's existing.
+ * 5) The result message will be sent to `outcomeAddress`.
+ * 6) There could be a callbackAsync method for callback execution ( After Out )
+ *    - If `outcomeAddress`, the data came from Event Bus
+ *    - Otherwise, the data came from `outcomeComponent`.
+ */
 public abstract class AbstractAgha implements Agha {
 
     private static final JobConfig CONFIG = JobPin.getConfig();
@@ -193,7 +205,10 @@ public abstract class AbstractAgha implements Agha {
                                 /*
                                  * Failure, print stack instead of other exception here.
                                  */
-                                handler.cause().printStackTrace();
+                                final Throwable error = handler.cause();
+                                if (!(error instanceof NoStackTraceThrowable)) {
+                                    error.printStackTrace();
+                                }
                             }
                         }
                     });

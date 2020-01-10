@@ -4,8 +4,8 @@ import io.vertx.core.MultiMap;
 import io.vertx.tp.error._501DataSourceException;
 import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.optic.environment.Ambient;
-import io.vertx.tp.optic.environment.AmbientEnvironment;
 import io.vertx.tp.plugin.database.DataPool;
+import io.vertx.up.commune.config.Database;
 import io.vertx.up.fn.Fn;
 
 import java.util.Objects;
@@ -39,9 +39,12 @@ public class DynamicDs implements DS {
 
     private DataPool getDs(final JtApp app) {
         /*
-         * DataPool get here
+         * DataPool get here，For each database, it's two
+         * 1) Default database with or without auto commit;
+         * 2) Remove auto commit to switch to auto commit = true, a new database
+         * 3) Auto commit database will be managed by DataPool, it could switch by DataPool itself
          */
-        final AmbientEnvironment env = Ambient.getEnvironments().get(app.getAppId());
-        return env.getPool();
+        final Database database = app.getSource();
+        return DataPool.createAuto(database);
     }
 }

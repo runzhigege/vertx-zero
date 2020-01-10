@@ -2,6 +2,7 @@ package io.vertx.up.uca.job.phase;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
+import io.vertx.up.atom.Refer;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.fn.Fn;
@@ -11,6 +12,8 @@ import io.vertx.up.fn.Fn;
  */
 public class Phase {
 
+    /* Dict */
+    private final transient Refer dictionary = new Refer();
     private transient Vertx vertx;
     private transient Mission mission;
     /* Phase */
@@ -56,7 +59,11 @@ public class Phase {
      * 3. Major code logical
      */
     public Future<Envelop> invokeAsync(final Envelop envelop) {
-        return this.runOn.invoke(envelop, this.mission);
+        /*
+         * Bind assist to call
+         */
+        return this.runOn.bind(this.input.assist())
+                .invoke(envelop, this.mission);
     }
 
     /*
@@ -72,7 +79,11 @@ public class Phase {
      * Output Address will be defined !
      */
     public Future<Envelop> outputAsync(final Envelop envelop) {
-        return this.output.outputAsync(envelop, this.mission);
+        /*
+         * Bind assist to call
+         */
+        return this.output.bind(this.input.assist())
+                .outputAsync(envelop, this.mission);
     }
 
     /*

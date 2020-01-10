@@ -7,11 +7,12 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.commune.config.DualMapping;
 import io.vertx.up.unity.Ux;
+import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-public class ActOut implements Serializable {
+public class ActOut extends ActMapping implements Serializable {
 
     private transient final Envelop envelop;
 
@@ -101,6 +102,26 @@ public class ActOut implements Serializable {
     }
 
     public Envelop envelop(final DualMapping mapping) {
-        return ActMapper.getOut(this.envelop, mapping);
+        final Object response = this.envelop.data();
+        if (response instanceof JsonObject || response instanceof JsonArray) {
+            if (this.isAfter(mapping)) {
+                final HttpStatusCode status = this.envelop.status();
+                if (response instanceof JsonObject) {
+                    /*
+                     * JsonObject here for mapping
+                     */
+                    final JsonObject normalized = this.mapper().out(((JsonObject) response), mapping.child());
+                    return Envelop.success(normalized, status).from(this.envelop);
+                } else {
+                    /*
+                     * JsonArray here for mapping
+                     */
+                    final JsonArray normalized = new JsonArray();
+                    Ut.itJArray((JsonArray) response).map(item -> this.mapper().out(item, mapping.child()))
+                            .forEach(normalized::add);
+                    return Envelop.success(normalized, status).from(this.envelop);
+                }
+            } else return this.envelop;
+        } else return this.envelop;
     }
 }
