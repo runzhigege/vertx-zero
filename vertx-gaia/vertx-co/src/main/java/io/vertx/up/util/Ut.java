@@ -64,6 +64,7 @@ public final class Ut {
      * 4) elementZip
      * 5) elementGroup
      * 6) elementSubset
+     * 7) elementChild
      */
     public static <T> T[] elementAdd(final T[] array, final T element) {
         return ArrayUtil.add(array, element);
@@ -89,6 +90,14 @@ public final class Ut {
 
     public static JsonArray elementClimb(final JsonObject child, final JsonArray tree) {
         return ArrayUtil.climb(child, tree, null);
+    }
+
+    public static JsonArray elementChild(final JsonArray children, final JsonArray tree) {
+        return ArrayUtil.child(children, tree, null);
+    }
+
+    public static JsonArray elementChild(final JsonObject child, final JsonArray tree) {
+        return ArrayUtil.child(child, tree, null);
     }
 
     public static <T> T elementFind(final List<T> list, final Predicate<T> fnFilter) {
