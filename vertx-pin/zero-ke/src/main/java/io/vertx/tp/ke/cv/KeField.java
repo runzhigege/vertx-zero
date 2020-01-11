@@ -3,6 +3,7 @@ package io.vertx.tp.ke.cv;
 public interface KeField {
 
     String FIELD = "field";
+    String ID = "id";
 
     String SCOPE = "scope";
     String REALM = "realm";
