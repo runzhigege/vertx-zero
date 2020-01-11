@@ -70,7 +70,7 @@
         <glassfish.el.version>3.0.1-b11</glassfish.el.version>
 
         <!-- Database Needed -->
-        <hikari.cp.version>3.4.1</hikari.cp.version>
+        <hikari.cp.version>3.4.2</hikari.cp.version>
         <jooq.version>3.10.8</jooq.version>
         <vertx.jooq.version>2.4.1</vertx.jooq.version>
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
@@ -81,7 +81,7 @@
         <lombok.version>1.18.10</lombok.version>
         <asm.version>7.2</asm.version>
         <cglib.version>3.3.0</cglib.version>
-        <reflection.version>0.9.11</reflection.version>
+        <reflection.version>0.9.12</reflection.version>
         <!-- Etcd -->
         <etcd.version>2.17.0</etcd.version>
         <!-- Bean Validation -->
@@ -108,7 +108,7 @@
         <http.client.version>4.5.10</http.client.version>
         <http.core.version>4.4.12</http.core.version>
         <!-- Liquibase -->
-        <liquibase.version>3.8.3</liquibase.version>
+        <liquibase.version>3.8.5</liquibase.version>
         <!-- Rpc -->
         <protobuf.version>3.11.1</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>

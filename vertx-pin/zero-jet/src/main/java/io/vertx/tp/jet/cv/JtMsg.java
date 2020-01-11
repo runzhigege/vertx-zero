@@ -10,7 +10,7 @@ public interface JtMsg {
     String WEB_SEND = "Send data `{0}` to address = `{1}`";
 
     String WORKER_DEPLOY = "Workers will be deployed in background async ......";
-    String WORKER_FAILURE = "Ambient Environment booting error, initialized failure";
+    String WORKER_FAILURE = "Ambient XHeader booting error, initialized failure";
     String WORKER_DEPLOYING = "Worker instance = {0}, class = {1}";
     String WORKER_DEPLOYED = "Worker `{0}` has been deployed successfully!!!";
 

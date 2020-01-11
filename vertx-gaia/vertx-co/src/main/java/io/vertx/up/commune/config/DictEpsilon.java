@@ -51,6 +51,16 @@ public class DictEpsilon implements Serializable, Json {
     }
 
     @Override
+    public String toString() {
+        return "DictEpsilon{" +
+                "source='" + this.source + '\'' +
+                ", in='" + this.in + '\'' +
+                ", out='" + this.out + '\'' +
+                ", parent=" + this.parent +
+                '}';
+    }
+
+    @Override
     public void fromJson(final JsonObject json) {
         if (Ut.notNil(json)) {
             this.source = json.getString("source");
