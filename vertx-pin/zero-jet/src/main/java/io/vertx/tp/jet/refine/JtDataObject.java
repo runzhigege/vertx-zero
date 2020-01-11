@@ -42,6 +42,30 @@ class JtDataObject {
         }
     }
 
+    static Database toDatabase(final IService service) {
+        /*
+         * 第一数据源
+         */
+        final String database = service.getConfigDatabase();
+        if (Ut.isNil(database)) {
+            final JtApp app = Jt.toApp(service.getSigma());
+            if (Objects.nonNull(app)) {
+                /*
+                 * name, database
+                 * 数据库专用
+                 */
+                return app.getSource();
+            } else {
+                return null;
+            }
+        } else {
+            /*
+             * 异构数据源专用
+             */
+            return null;
+        }
+    }
+
     static Database toDatabase(final Supplier<String> supplier, final Database defaultDatabase) {
 
         final JsonObject databaseJson = Ut.toJObject(supplier.get());

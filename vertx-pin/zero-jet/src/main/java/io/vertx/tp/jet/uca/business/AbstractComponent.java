@@ -32,6 +32,28 @@ import java.util.function.Function;
  * Here we do not recommend use this component directly.
  */
 public abstract class AbstractComponent implements JtComponent, Service {
+
+    // -------------- Metadata configuration ------------------
+
+    /*
+     * The four reference source came from `@Contract` injection here
+     * dict
+     * - dictConfig
+     * - dictComponent
+     * - dictEpsilon
+     *
+     * identity
+     * - identityComponent
+     * - identity
+     *
+     * options
+     * - serviceConfig
+     *
+     * mapping
+     * - mappingConfig
+     * - mappingMode
+     * - mappingComponent
+     */
     @Contract
     private transient JsonObject options;
 
@@ -54,26 +76,12 @@ public abstract class AbstractComponent implements JtComponent, Service {
         return Annal.get(this.getClass());
     }
 
-    // -------------- Metadata configuration ------------------
-
     /*
-     * The four reference source came from `@Contract` injection here
-     * dict
-     * - dictConfig
-     * - dictComponent
-     * - dictEpsilon
-     *
-     * identity
-     * - identityComponent
-     * - identity
-     *
-     * options
-     * - serviceConfig
-     *
-     * mapping
-     * - mappingConfig
-     * - mappingMode
-     * - mappingComponent
+     * There are required attribute
+     * {
+     *     "name": "app name",
+     *     "identifier": "current identifier"
+     * }
      */
     @Override
     public JsonObject options() {
