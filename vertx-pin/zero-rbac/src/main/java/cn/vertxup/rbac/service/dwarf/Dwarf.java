@@ -16,6 +16,7 @@ class Dwarf {
     /*
      * projection -> JsonObject
      */
+    @SuppressWarnings("all")
     static JsonObject onProjection(final JsonObject input, final JsonArray projection) {
         final Set<String> fields = new HashSet<>(input.fieldNames());
         /*
@@ -27,7 +28,8 @@ class Dwarf {
              * The method is the same as backend of Jooq
              * Projection means filter
              */
-            fields.stream().filter(projection::contains)
+            final Set<String> projectionSet = new HashSet<>(projection.getList());
+            fields.stream().filter(projectionSet::contains)
                     .forEach(input::remove);
         }
         return input;

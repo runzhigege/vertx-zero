@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 
 class BtLoader {
     /*
-     * Environment Init for Split Booter
+     * XHeader Init for Split Booter
      */
     static {
         /* Excel Init */

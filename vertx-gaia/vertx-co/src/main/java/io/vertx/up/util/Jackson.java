@@ -57,7 +57,12 @@ final class Jackson {
     ) {
 
         Ensurer.gtLength(Jackson.class, 0, keys);
-        return Jackson.searchData(item, JsonObject.class, keys);
+        final JsonObject visited = Jackson.searchData(item, JsonObject.class, keys);
+        if (Objects.isNull(visited)) {
+            return new JsonObject();
+        } else {
+            return visited;
+        }
     }
 
     static JsonArray visitJArray(
@@ -65,7 +70,12 @@ final class Jackson {
             final String... keys
     ) {
         Ensurer.gtLength(Jackson.class, 0, keys);
-        return Jackson.searchData(item, JsonArray.class, keys);
+        final JsonArray visited = Jackson.searchData(item, JsonArray.class, keys);
+        if (Objects.isNull(visited)) {
+            return new JsonArray();
+        } else {
+            return visited;
+        }
     }
 
     static Integer visitInt(

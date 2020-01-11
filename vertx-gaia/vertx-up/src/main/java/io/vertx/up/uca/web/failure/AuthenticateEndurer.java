@@ -30,7 +30,7 @@ public class AuthenticateEndurer implements Handler<RoutingContext> {
                 LOGGER.info("[ ZERO ] Web Exception: {0} = {1}", ex.getClass().getName(), ex.getMessage());
                 final WebException error = (WebException) ex;
                 /*
-                 * Environment bind
+                 * XHeader bind
                  */
                 Ux.debug(error, () -> error);
                 Answer.reply(event, Envelop.failure(error));

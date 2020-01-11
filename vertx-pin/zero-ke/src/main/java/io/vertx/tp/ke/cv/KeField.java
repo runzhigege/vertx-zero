@@ -3,6 +3,7 @@ package io.vertx.tp.ke.cv;
 public interface KeField {
 
     String FIELD = "field";
+    String ID = "id";
 
     String SCOPE = "scope";
     String REALM = "realm";
@@ -90,6 +91,9 @@ public interface KeField {
     String UPDATED_AT = "updatedAt";
     String CREATED_BY = "createdBy";
     String UPDATED_BY = "updatedBy";
+
+    String HEADER = "header";
+    String OPTIONS = "options";
 
     interface App {
 
