@@ -99,15 +99,7 @@ public abstract class JtCommercial implements Commercial {
 
     @Override
     public Integration integration() {
-        final Dict dict = Jt.toDict(this.service);
-        final Integration integration = Jt.toIntegration(this.service::getConfigIntegration);
-        if (Objects.nonNull(dict) && !dict.getEpsilon().isEmpty()) {
-            /*
-             * Internal binding for Epsilon
-             */
-            integration.setEpsilon(dict.getEpsilon());
-        }
-        return integration;
+        return Jt.toIntegration(this.service);
     }
 
 
@@ -131,6 +123,7 @@ public abstract class JtCommercial implements Commercial {
     public String app() {
         return this.app.getAppId();
     }
+
 
     /*
      * Non - Interface method here.

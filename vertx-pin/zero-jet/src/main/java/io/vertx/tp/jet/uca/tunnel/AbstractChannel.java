@@ -92,9 +92,12 @@ public abstract class AbstractChannel implements JtChannel {
                      */
                     return this.initAsync(component, request)
                             /*
-                             * 1) JsonObject: options ( without `mapping` )
+                             * Contract here
+                             * 1) Definition in current channel
+                             * 2) Data came from request ( XHeader )
                              */
                             .compose(nil -> Anagogic.componentAsync(component, this.commercial))
+                            .compose(initialized -> Anagogic.componentAsync(component, envelop))
                             /*
                              * Children initialized
                              */

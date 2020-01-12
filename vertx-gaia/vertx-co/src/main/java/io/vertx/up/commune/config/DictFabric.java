@@ -2,6 +2,7 @@ package io.vertx.up.commune.config;
 
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
 
 import java.util.Objects;
@@ -20,6 +21,8 @@ import java.util.function.Function;
  * -- Stored mapping ( from -> to )
  */
 public class DictFabric {
+
+    private static final Annal LOGGER = Annal.get(DictFabric.class);
     /*
      * From field = DictEpsilon
      */
@@ -49,7 +52,7 @@ public class DictFabric {
     }
 
     public DictFabric epsilon(final ConcurrentMap<String, DictEpsilon> epsilonMap) {
-        if (Objects.nonNull(epsilonMap)) {
+        if (Objects.nonNull(epsilonMap) && !epsilonMap.isEmpty()) {
             epsilonMap.forEach((key, epsilon) -> {
                 /*
                  * Only pick up valid configured `epsilon`
@@ -59,22 +62,25 @@ public class DictFabric {
                     this.epsilonMap.put(key, epsilon);
                 }
             });
-
+        } else {
+            LOGGER.warn("[ ZERO ] DictFabric got empty epsilonMap ( ConcurrentMap<String, DictEpsilon> ) !");
         }
         this.init();
         return this;
     }
 
     public DictFabric dict(final ConcurrentMap<String, JsonArray> dictData) {
-        if (Objects.nonNull(dictData)) {
+        if (Objects.nonNull(dictData) && !dictData.isEmpty()) {
             this.dictData.putAll(dictData);
+        } else {
+            LOGGER.warn("[ ZERO ] DictFabric got empty dictData ( ConcurrentMap<String, JsonArray> ) !");
         }
         this.init();
         return this;
     }
 
     private void init() {
-        if (this.initialized()) {
+        if (this.ready()) {
             /*
              * Iterate the epsilonMap
              */
@@ -126,36 +132,64 @@ public class DictFabric {
         }
     }
 
-    public boolean initialized() {
+    private boolean ready() {
         return !this.epsilonMap.isEmpty() && !this.dictData.isEmpty();
     }
 
+    /*
+     * DualItem ->
+     *     in    ->   out
+     *  ( name ) -> ( key )
+     *
+     * Api: to ( in -> out )
+     * Api: from ( out -> in )
+     */
+    /*
+     * inTo
+     * 1) The field is Ox field
+     * 2) uuid -> ( out -> in )
+     */
     public JsonObject inTo(final JsonObject input) {
-        return this.process(this.fromData, input, DualItem::to);
+        return this.process(this.fromData, input, DualItem::from);
     }
 
     public JsonArray inTo(final JsonArray input) {
         return this.process(input, this::inTo);
     }
 
+    /*
+     * inFrom
+     * 1) The field is Ox field
+     * 2) display -> ( in -> out )
+     */
     public JsonObject inFrom(final JsonObject input) {
-        return this.process(this.fromData, input, DualItem::from);
+        return this.process(this.fromData, input, DualItem::to);
     }
 
     public JsonArray inFrom(final JsonArray input) {
         return this.process(input, this::inFrom);
     }
 
+    /*
+     * outTo
+     * 1) The field is Tp field
+     * 2) uuid -> ( out -> in )
+     */
     public JsonObject outTo(final JsonObject output) {
-        return this.process(this.toData, output, DualItem::to);
+        return this.process(this.toData, output, DualItem::from);
     }
 
     public JsonArray outTo(final JsonArray output) {
         return this.process(output, this::outTo);
     }
 
+    /*
+     * outFrom
+     * 1) The field is Tp field
+     * 2) display -> ( in -> out )
+     */
     public JsonObject outFrom(final JsonObject output) {
-        return this.process(this.toData, output, DualItem::from);
+        return this.process(this.toData, output, DualItem::to);
     }
 
     public JsonArray outFrom(final JsonArray output) {
@@ -185,5 +219,25 @@ public class DictFabric {
             }
         });
         return normalized;
+    }
+
+    public String report() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("\n\t[ Epsilon ]: ");
+        this.epsilonMap.forEach((key, epsilon) -> builder.append("\n\t\t").
+                append(key).append(" = ").append(epsilon));
+        builder.append("\n\t[ Dict Data ]: ");
+        this.dictData.forEach((key, dictData) -> builder.append("\n\t\t").
+                append(key).append(" = ").append(dictData.encode()));
+        if (Objects.nonNull(this.mapping)) {
+            builder.append("\n\t[ Mapping ]: ").append(this.mapping.toString());
+        }
+        builder.append("\n\t[ From Data ]: ");
+        this.fromData.forEach((field, json) -> builder.append("\n\t\t")
+                .append(field).append(" = ").append(json.toString()));
+        builder.append("\n\t[ To Data ]: ");
+        this.toData.forEach((field, json) -> builder.append("\n\t\t")
+                .append(field).append(" = ").append(json.toString()));
+        return builder.toString();
     }
 }

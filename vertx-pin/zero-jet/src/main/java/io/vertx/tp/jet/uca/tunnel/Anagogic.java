@@ -3,13 +3,10 @@ package io.vertx.tp.jet.uca.tunnel;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.cv.JtConstant;
-import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.commune.Commercial;
-import io.vertx.up.commune.config.Database;
-import io.vertx.up.commune.config.Dict;
-import io.vertx.up.commune.config.DualMapping;
-import io.vertx.up.commune.config.Identity;
+import io.vertx.up.commune.Envelop;
+import io.vertx.up.commune.config.*;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.unity.UxPool;
 import io.vertx.up.util.Ut;
@@ -51,6 +48,14 @@ class Anagogic {
                 .compose(kv -> Ux.future(kv.getValue()));
     }
 
+    static Future<Boolean> componentAsync(final JtComponent component, final Envelop envelop) {
+        final JsonObject headers = envelop.headersX();
+        final XHeader header = new XHeader();
+        header.fromJson(headers);
+        Ut.contract(component, XHeader.class, header);
+        return Ux.future(Boolean.TRUE);
+    }
+
     static Future<Boolean> componentAsync(final JtComponent component, final Commercial commercial) {
         if (Objects.nonNull(commercial)) {
             /*
@@ -59,7 +64,6 @@ class Anagogic {
             final JsonObject options = commercial.options();
             if (Ut.notNil(options)) {
                 final JsonObject injectOpt = options.copy();
-                injectOpt.remove(KeField.MAPPING);
                 Ut.contract(component, JsonObject.class, injectOpt);
             }
             /*
@@ -67,18 +71,7 @@ class Anagogic {
              */
             Ut.contract(component, Identity.class, commercial.identity());
             Ut.contract(component, DualMapping.class, commercial.mapping());
-            /*
-             * Recovery component here
-             */
             Ut.contract(component, Dict.class, commercial.dict());
-            /*
-             * Because `DualMapping` has been configured here
-             * And `Dict` has been configured in another way here
-             * Old code:
-             * Ut.contract(component, DualMapping.class, commercial.mapping());
-             * Ut.contract(component, Dict.class, commercial.dict());
-             */
-            // Ut.contract(component, DualMapping.class, commercial.mapping());
             return Future.succeededFuture(Boolean.TRUE);
         } else {
             return Future.succeededFuture(Boolean.TRUE);
