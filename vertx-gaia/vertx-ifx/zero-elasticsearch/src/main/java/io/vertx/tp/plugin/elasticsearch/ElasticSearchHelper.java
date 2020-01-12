@@ -120,7 +120,7 @@ public class ElasticSearchHelper {
 							val == java.time.LocalDate.class || val == java.time.Instant.class) {
 				props.put("type", "date");
 				props.put("index", "true");
-				props.put("format", "yyyy-MM-dd||yyyy-MM-dd HH:mm:ss||yyyy-MM-dd'T'HH:mm:ss'Z'||epoch_millis");
+				props.put("format", "yyyy-MM-dd||yyyy-MM-dd HH:mm:ss||yyyy-MM-dd HH:mm:ss.SSS||yyyy-MM-dd'T'HH:mm:ss'Z'||yyyy-MM-dd'T'HH:mm:ss.SSS'Z'||epoch_millis");
 			} else if (val == java.lang.Integer.class) {
 				props.put("type", "integer");
 				props.put("index", "true");
