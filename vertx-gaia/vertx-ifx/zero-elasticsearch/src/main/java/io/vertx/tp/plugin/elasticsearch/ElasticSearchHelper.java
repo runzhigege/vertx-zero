@@ -10,6 +10,7 @@ import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.client.RestClient;
@@ -36,7 +37,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class ElasticSearchHelper {
-	private static final Annal logger = Annal.get(ElasticSearchHelper.class);
+	private static final Annal LOGGER = Annal.get(ElasticSearchHelper.class);
 
 	private transient final Class<?> target;
 
@@ -64,7 +65,9 @@ public class ElasticSearchHelper {
 				@Override
 				public HttpAsyncClientBuilder customizeHttpClient(HttpAsyncClientBuilder httpAsyncClientBuilder) {
 					httpAsyncClientBuilder.disableAuthCaching();
-					return httpAsyncClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
+					return httpAsyncClientBuilder.setDefaultCredentialsProvider(credentialsProvider)
+						.setMaxConnTotal(100)
+						.setMaxConnPerRoute(100);
 				}
 			})
 		);
@@ -74,14 +77,14 @@ public class ElasticSearchHelper {
 		try {
 			client.close();
 		} catch (IOException ioe) {
-			logger.error("error occurred when close elasticsearch connection", ioe.getMessage());
+			LOGGER.error("error occurred when close elasticsearch connection", ioe.getMessage());
 		}
 	}
 
 	Settings settingsBuilder(final int numberOfShards, final int numberOfReplicas) {
 		return Settings.builder()
-			.put("index.number_of_shards", numberOfShards > 0 ? numberOfShards : 5)
-			.put("index.number_of_replicas", numberOfReplicas > 0 ? numberOfReplicas: 3)
+			.put("index.number_of_shards", numberOfShards > 0 ? numberOfShards : 1)
+			.put("index.number_of_replicas", numberOfReplicas > 0 ? numberOfReplicas: 1)
 			.build();
 	}
 
