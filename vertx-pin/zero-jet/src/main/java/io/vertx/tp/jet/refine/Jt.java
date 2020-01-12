@@ -8,6 +8,7 @@ import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.atom.JtConfig;
 import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.atom.JtWorker;
+import io.vertx.tp.optic.environment.Ambient;
 import io.vertx.up.commune.config.*;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.em.ChannelType;
@@ -57,14 +58,6 @@ public class Jt {
         return toMime(supplier).stream()
                 .map(type -> type.getType() + Strings.SLASH + type.getSubtype())
                 .collect(Collectors.toSet());
-    }
-
-    public static Database toDatabase(final Supplier<String> supplier, final Database defaultDatabase) {
-        return JtDataObject.toDatabase(supplier, defaultDatabase);
-    }
-
-    public static Integration toIntegration(final Supplier<String> supplier) {
-        return JtDataObject.toIntegration(supplier);
     }
 
     /*
@@ -138,4 +131,24 @@ public class Jt {
     public static ConcurrentMap<String, JtUri> answer(final JsonObject config) {
         return JtDelivery.answer(config);
     }
+
+    /*
+     * App, Database, Integration
+     */
+    public static Database toDatabase(final Supplier<String> supplier, final Database defaultDatabase) {
+        return JtDataObject.toDatabase(supplier, defaultDatabase);
+    }
+
+    public static Database toDatabase(final IService service) {
+        return JtDataObject.toDatabase(service);
+    }
+
+    public static Integration toIntegration(final IService service) {
+        return JtDataObject.toIntegration(service);
+    }
+
+    public static JtApp toApp(final String key) {
+        return Ambient.getApp(key);
+    }
+
 }

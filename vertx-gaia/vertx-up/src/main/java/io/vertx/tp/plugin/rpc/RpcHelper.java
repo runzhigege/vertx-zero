@@ -85,19 +85,15 @@ class RpcHelper {
         return Fn.getNull(new JsonObject(), () -> {
             final JsonObject sslConfig = new JsonObject();
             if (rpcConfig.containsKey(Key.SSL) &&
-                    Boolean.valueOf(rpcConfig.getValue(Key.SSL).toString())) {
+                    Boolean.parseBoolean(rpcConfig.getValue(Key.SSL).toString())) {
                 if (rpcConfig.containsKey("extension")) {
                     // Non Uniform, Search by name
-                    final JsonObject visited =
-                            Ut.visitJObject(rpcConfig, "extension", name);
-                    if (null != visited) {
-                        sslConfig.mergeIn(visited);
-                    }
+                    final JsonObject visited = Ut.visitJObject(rpcConfig, "extension", name);
+                    sslConfig.mergeIn(visited);
                 }
                 if (sslConfig.isEmpty()) {
                     // Uniform mode default.
-                    sslConfig.mergeIn(
-                            Ut.visitJObject(rpcConfig, "uniform"));
+                    sslConfig.mergeIn(Ut.visitJObject(rpcConfig, "uniform"));
                 }
             }
             return sslConfig;

@@ -122,8 +122,9 @@ public class FileActor {
                          * Read dict only once
                          */
                         final Future<JsonArray> result = Unity.fetchDict(request, config).compose(dictMap -> {
-                            final ConcurrentMap<String, ConcurrentMap<String, String>> preparedMap =
-                                    Unity.dictCalc(dictMap, prepared, config);
+                            final DictFabric fabric = DictFabric.create()
+                                    .dict(dictMap)
+                                    .epsilon(config.getEpsilon());
                             /*
                              * Apply default value
                              */
@@ -133,7 +134,7 @@ public class FileActor {
                                 record.put(KeField.ACTIVE, Boolean.TRUE);
                                 /* Serial */
                                 futures.add(IxActor.serial().bind(request).procAsync(record, config)
-                                        .compose(normalized -> Unity.dictImport(normalized, preparedMap, config))
+                                        .compose(normalized -> Ux.future(fabric.inFrom(normalized)))
                                         /* Unique Filters */
                                         .compose(normalized -> IxActor.unique().procAsync(normalized, config))
                                         /* Search result */

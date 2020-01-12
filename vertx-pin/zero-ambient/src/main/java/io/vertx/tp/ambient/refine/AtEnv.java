@@ -22,7 +22,7 @@ import java.text.MessageFormat;
 import java.util.UUID;
 
 /*
- * Application Environment
+ * Application XHeader
  */
 class AtEnv {
 

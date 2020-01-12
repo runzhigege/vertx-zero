@@ -5,9 +5,11 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Values;
 
 import java.lang.reflect.Array;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
 
 final class ArrayUtil {
 
@@ -94,6 +96,43 @@ final class ArrayUtil {
         return result;
     }
 
+    static JsonArray child(final JsonArray current, final JsonArray tree, final JsonObject options) {
+        final JsonArray result = new JsonArray();
+        /*
+         * Array to Map
+         */
+        final JsonObject opts = treeOption(options);
+        final ConcurrentMap<String, JsonObject> maps = new ConcurrentHashMap<>();
+        current.stream().filter(Objects::nonNull).map(each -> (JsonObject) each).forEach(child -> {
+            final JsonArray children = child(child, tree, options);
+            final String idField = opts.getString("key");
+            children.stream().filter(Objects::nonNull).map(found -> (JsonObject) found)
+                    .filter(found -> Objects.nonNull(found.getString(idField)))
+                    .forEach(found -> maps.put(found.getString(idField), found));
+        });
+        maps.values().forEach(result::add);
+        return result;
+    }
+
+    static JsonArray child(final JsonObject current, final JsonArray tree, final JsonObject options) {
+        final JsonArray result = new JsonArray();
+        /*
+         * Wether it contains current node
+         */
+        final Boolean include = Objects.nonNull(options) ? options.getBoolean("include") : Boolean.TRUE;
+        if (include) {
+            result.add(current);
+        }
+        /*
+         * Children find
+         */
+        final JsonArray children = elementChild(current, tree, options);
+        if (!children.isEmpty()) {
+            result.addAll(child(children, tree, options));
+        }
+        return result;
+    }
+
     static JsonArray climb(final JsonObject child, final JsonArray tree, final JsonObject options) {
         final JsonArray result = new JsonArray();
         /*
@@ -111,6 +150,17 @@ final class ArrayUtil {
             result.addAll(climb(parent, tree, options));
         }
         return result;
+    }
+
+    private static JsonArray elementChild(final JsonObject item, final JsonArray tree, final JsonObject options) {
+        final JsonObject opts = treeOption(options);
+        final String parentField = opts.getString("parent");
+        final String idField = opts.getString("key");
+        final List<JsonObject> children = tree.stream().filter(Objects::nonNull).map(each -> (JsonObject) each)
+                .filter(each -> Objects.nonNull(each.getString(parentField)))
+                .filter(each -> each.getString(parentField).equals(item.getString(idField)))
+                .collect(Collectors.toList());
+        return new JsonArray(children);
     }
 
     private static JsonObject elementParent(final JsonObject item, final JsonArray tree, final JsonObject options) {

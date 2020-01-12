@@ -82,11 +82,15 @@ public interface ID {
         /* sigma */
         String X_SIGMA = "X-Sigma";
 
+        /* language */
+        String X_LANG = "X-Lang";
+
         ConcurrentMap<String, String> PARAM_MAP = new ConcurrentHashMap<String, String>() {
             {
                 this.put(X_APP_ID, "appId");
                 this.put(X_APP_KEY, "appKey");
                 this.put(X_SIGMA, "sigma");
+                this.put(X_LANG, "language");
             }
         };
     }

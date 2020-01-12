@@ -9,26 +9,61 @@ import io.vertx.tp.jet.cv.JtConstant;
 import io.vertx.tp.jet.cv.em.WorkerType;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.up.commune.config.Database;
+import io.vertx.up.commune.config.Dict;
 import io.vertx.up.commune.config.Integration;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.util.Ut;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 class JtDataObject {
 
-    static Integration toIntegration(final Supplier<String> supplier) {
-        final JsonObject data = Ut.toJObject(supplier.get());
+    static Integration toIntegration(final IService service) {
+        if (Objects.isNull(service)) {
+            return new Integration();
+        } else {
+            final JsonObject data = Ut.toJObject(service.getConfigIntegration());
+            final Integration integration = new Integration();
+            integration.fromJson(data);
+            // Dict
+            final Dict dict = JtBusiness.toDict(service);
+            if (Objects.nonNull(dict) && !dict.getEpsilon().isEmpty()) {
+                /*
+                 * Internal binding
+                 */
+                integration.setEpsilon(dict.getEpsilon());
+            }
+            /*
+             * SSL Options
+             */
+            // TODO: SSL Options
+            return integration;
+        }
+    }
+
+    static Database toDatabase(final IService service) {
         /*
-         * Integration data here.
+         * 第一数据源
          */
-        final Integration integration = new Integration();
-        integration.fromJson(data);
-        /*
-         * SSL Options
-         */
-        // TODO: SSL Options
-        return integration;
+        final String database = service.getConfigDatabase();
+        if (Ut.isNil(database)) {
+            final JtApp app = Jt.toApp(service.getSigma());
+            if (Objects.nonNull(app)) {
+                /*
+                 * name, database
+                 * 数据库专用
+                 */
+                return app.getSource();
+            } else {
+                return null;
+            }
+        } else {
+            /*
+             * 异构数据源专用
+             */
+            return null;
+        }
     }
 
     static Database toDatabase(final Supplier<String> supplier, final Database defaultDatabase) {
