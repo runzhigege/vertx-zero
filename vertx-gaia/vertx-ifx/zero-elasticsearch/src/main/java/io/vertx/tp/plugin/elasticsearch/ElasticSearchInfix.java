@@ -19,16 +19,15 @@ public class ElasticSearchInfix implements Infix {
 
 	private static final ConcurrentMap<String, ElasticSearchClient> CLIENTS = new ConcurrentHashMap<>();
 
-	private static void initInternal(final Vertx vertx,
-	                                 final String name) {
-		Fn.pool(CLIENTS, name,
+	private static void initInternal(final Vertx vertx) {
+		Fn.pool(CLIENTS, NAME,
 			() -> Infix.initTp("elasticsearch",
 				(config) -> ElasticSearchClient.createShared(vertx, config),
 				ElasticSearchInfix.class));
 	}
 
 	public static void init(final Vertx vertx) {
-		initInternal(vertx, NAME);
+		initInternal(vertx);
 	}
 
 	public static ElasticSearchClient getClient() {

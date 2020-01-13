@@ -5,7 +5,6 @@ import io.vertx.tp.error._404ConfigurationMissingExceptionn;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -26,7 +25,6 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
@@ -68,6 +66,14 @@ public class ElasticSearchHelper {
 					return httpAsyncClientBuilder.setDefaultCredentialsProvider(credentialsProvider)
 						.setMaxConnTotal(100)
 						.setMaxConnPerRoute(100);
+				}
+			})
+			.setRequestConfigCallback(new RestClientBuilder.RequestConfigCallback() {
+				@Override
+				public RequestConfig.Builder customizeRequestConfig(RequestConfig.Builder builder) {
+					return builder.setConnectionRequestTimeout(60)
+						.setSocketTimeout(60)
+						.setConnectTimeout(60);
 				}
 			})
 		);
