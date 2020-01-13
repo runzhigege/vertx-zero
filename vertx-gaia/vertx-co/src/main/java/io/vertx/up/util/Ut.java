@@ -104,6 +104,10 @@ public final class Ut {
         return ArrayUtil.child(child, tree, null);
     }
 
+    public static JsonObject elementFind(final JsonArray input, final String field, final Object value) {
+        return ArrayUtil.find(input, field, value);
+    }
+
     public static <T> T elementFind(final List<T> list, final Predicate<T> fnFilter) {
         return Statute.find(list, fnFilter);
     }
