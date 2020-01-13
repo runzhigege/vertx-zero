@@ -29,6 +29,7 @@ import io.vertx.up.fn.wait.Log;
 import io.vertx.up.util.Ut;
 import org.jooq.Condition;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiConsumer;
@@ -269,6 +270,12 @@ public final class Ux {
      * future3 -> (in3 -> out3)
      */
     public static Future<JsonArray> thenCombine(final List<Future<JsonObject>> futures) {
+        return Combine.thenCombine(futures);
+    }
+
+    public static Future<JsonArray> thenCombine(final JsonArray input, final Function<JsonObject, Future<JsonObject>> function) {
+        final List<Future<JsonObject>> futures = new ArrayList<>();
+        Ut.itJArray(input).map(function).forEach(futures::add);
         return Combine.thenCombine(futures);
     }
 

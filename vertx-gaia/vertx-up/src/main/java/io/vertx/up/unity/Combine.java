@@ -19,7 +19,7 @@ import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings("all")
 class Combine {
 
     static Future<JsonArray> thenCombine(

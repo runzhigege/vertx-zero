@@ -1,6 +1,7 @@
 package io.vertx.up.util;
 
 import com.esotericsoftware.reflectasm.ConstructorAccess;
+import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Values;
 import io.vertx.up.exception.zero.DuplicatedImplException;
 import io.vertx.up.fn.Fn;
@@ -47,7 +48,7 @@ final class Instance {
     static Class<?> genericT(final Class<?> target) {
         return Fn.getJvm(() -> {
             final Type type = target.getGenericSuperclass();
-            return (Class) (((ParameterizedType) type).getActualTypeArguments()[0]);
+            return (Class<?>) (((ParameterizedType) type).getActualTypeArguments()[0]);
         }, target);
     }
 
@@ -93,6 +94,45 @@ final class Instance {
                 }
             } catch (final Throwable ex) {
                 return defaultCls;
+            }
+        }
+    }
+
+    /*
+     * Enhancement for interface plugin initialized
+     * 1) Get the string from `options[key]`
+     * 2) Initialize the `key` string ( class name ) with interfaceCls
+     */
+    static <T> T plugin(final JsonObject options, final String key, final Class<?> interfaceCls) {
+        if (Types.isEmpty(options) || StringUtil.isNil(key)) {
+            /*
+             * options or key are either invalid
+             */
+            return null;
+        } else {
+            final String pluginClsName = options.getString(key);
+            if (StringUtil.isNil(pluginClsName)) {
+                /*
+                 * class name is "" or null
+                 */
+                return null;
+            } else {
+                final Class<?> pluginCls = clazz(pluginClsName, null);
+                if (Objects.isNull(pluginCls)) {
+                    /*
+                     * class could not be found.
+                     */
+                    return null;
+                } else {
+                    if (isMatch(pluginCls, interfaceCls)) {
+                        return instance(pluginCls);
+                    } else {
+                        /*
+                         * The class does not implement interface Cls
+                         */
+                        return null;
+                    }
+                }
             }
         }
     }
