@@ -3,7 +3,6 @@ package io.vertx.tp.plugin.elasticsearch;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.tp.error._404ConfigurationMissingExceptionn;
 import io.vertx.tp.error._404IndexNameMissingExceptionn;
 import io.vertx.tp.error._404SearchTextMissingExceptionn;
 import io.vertx.up.fn.Fn;
@@ -12,7 +11,6 @@ import io.vertx.up.util.Ut;
 import org.elasticsearch.action.DocWriteResponse;
 import org.elasticsearch.action.admin.indices.alias.Alias;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
-import org.elasticsearch.action.admin.indices.open.OpenIndexRequest;
 import org.elasticsearch.action.admin.indices.settings.put.UpdateSettingsRequest;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
@@ -28,17 +26,16 @@ import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.client.indices.*;
-import org.elasticsearch.common.unit.TimeValue;
-import org.elasticsearch.common.xcontent.XContentType;
-import org.elasticsearch.search.aggregations.Aggregation;
+import org.elasticsearch.client.indices.CreateIndexRequest;
+import org.elasticsearch.client.indices.CreateIndexResponse;
+import org.elasticsearch.client.indices.GetIndexRequest;
+import org.elasticsearch.client.indices.GetIndexResponse;
 import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Hongwei
@@ -270,6 +267,7 @@ public class ElasticSearchClientImpl implements ElasticSearchClient {
 			SearchResponse response = client.search(request, RequestOptions.DEFAULT);
 
 			result
+				.put("index", options.getString("index"))
 				.put("status", response.status().name())
 				.put("took", response.getTook().seconds())
 				.put("total", response.getHits().getTotalHits().value);
