@@ -38,6 +38,10 @@ public final class Ut {
         return Define.sureJArray(array);
     }
 
+    public static JsonObject sureJObject(final JsonObject object) {
+        return Define.sureJObject(object);
+    }
+
     /*
      * Set Calculating
      * 1) intersect:    Set1 And Set2
@@ -98,6 +102,10 @@ public final class Ut {
 
     public static JsonArray elementChild(final JsonObject child, final JsonArray tree) {
         return ArrayUtil.child(child, tree, null);
+    }
+
+    public static JsonObject elementFind(final JsonArray input, final String field, final Object value) {
+        return ArrayUtil.find(input, field, value);
     }
 
     public static <T> T elementFind(final List<T> list, final Predicate<T> fnFilter) {
@@ -301,7 +309,12 @@ public final class Ut {
      * 6) childUnique
      * 7) field / fields
      * 8) contract / contractAsync ( @Contract )
+     * 9) plugin
      */
+    public static <T> T plugin(final JsonObject options, final String pluginKey, final Class<T> interfaceCls) {
+        return Instance.plugin(options, pluginKey, interfaceCls);
+    }
+
     public static <T> T instance(final String name, final Object... params) {
         return Instance.instance(clazz(name), params);
     }
