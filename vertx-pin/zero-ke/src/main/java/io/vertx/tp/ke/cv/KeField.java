@@ -84,6 +84,7 @@ public interface KeField {
     String RECORD = "record";
     String RECORD_NEW = "recordNew";
     String RECORD_OLD = "recordOld";
+    String RECORD_PREVIOUS = "__PREVIOUS__";
 
     String NUMBERS = "numbers";
 
