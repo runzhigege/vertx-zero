@@ -2,18 +2,20 @@ package io.vertx.tp.plugin.history;
 
 import io.vertx.codegen.annotations.Fluent;
 import io.vertx.core.MultiMap;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.eon.Constants;
 import io.vertx.up.log.Annal;
-import org.jooq.DSLContext;
-import org.jooq.Field;
-import org.jooq.InsertSetMoreStep;
+import io.vertx.up.util.Ut;
+import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -75,6 +77,12 @@ class TrashBuilder {
         /*
          * Insert History
          */
+        final InsertSetMoreStep steps = stepInsert(content);
+        steps.execute();
+        return true;
+    }
+
+    private InsertSetMoreStep stepInsert(final JsonObject content) {
         final InsertSetMoreStep steps = (InsertSetMoreStep) this.context.insertInto(DSL.table(this.tableName));
         steps.set(FIELD_MAP.get("key"), UUID.randomUUID().toString());
         steps.set(FIELD_MAP.get("identifier"), this.identifier);
@@ -90,7 +98,14 @@ class TrashBuilder {
         final Date date = new Date();
         final Timestamp timestamp = new Timestamp(date.getTime());
         steps.set(FIELD_MAP.get("createdAt"), timestamp);
-        steps.execute();
+        return steps;
+    }
+
+    public boolean createHistory(final JsonArray content, final MultiMap params) {
+        final List<Query> batchOps = new ArrayList<>();
+        Ut.itJArray(content).map(this::stepInsert).forEach(batchOps::add);
+        final Batch batch = this.context.batch(batchOps);
+        batch.execute();
         return true;
     }
 }
