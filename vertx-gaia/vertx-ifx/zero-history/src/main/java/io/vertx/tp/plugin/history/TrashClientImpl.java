@@ -3,6 +3,7 @@ package io.vertx.tp.plugin.history;
 import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.util.Ut;
 
@@ -17,7 +18,7 @@ public class TrashClientImpl implements TrashClient {
 
     @Override
     public Future<JsonObject> backupAsync(final JsonObject record, final MultiMap params) {
-        final JsonObject content = Ut.notNil(record) ? record.copy() : new JsonObject();
+        final JsonObject content = Ut.sureJObject(record);
         if (Ut.notNil(content)) {
             this.builder.createHistory(record, params);
         }
@@ -25,8 +26,22 @@ public class TrashClientImpl implements TrashClient {
     }
 
     @Override
+    public Future<JsonArray> backupAsync(final JsonArray records, final MultiMap params) {
+        final JsonArray content = Ut.sureJArray(records);
+        if (!content.isEmpty()) {
+            this.builder.createHistory(content, params);
+        }
+        return Future.succeededFuture(records);
+    }
+
+    @Override
     public Future<JsonObject> backupAsync(final JsonObject record) {
         return this.backupAsync(record, null);
+    }
+
+    @Override
+    public Future<JsonArray> backupAsync(final JsonArray records) {
+        return this.backupAsync(records, null);
     }
 
     @Override
