@@ -114,6 +114,18 @@ final class ArrayUtil {
         return result;
     }
 
+    static JsonObject find(final JsonArray array, final String field, final Object value) {
+        return Ut.itJArray(array)
+                .filter(item -> {
+                    if (Objects.isNull(value)) {
+                        return Objects.isNull(item.getValue(field));
+                    } else {
+                        return value.equals(item.getValue(field));
+                    }
+                })
+                .findAny().orElse(null);
+    }
+
     static JsonArray child(final JsonObject current, final JsonArray tree, final JsonObject options) {
         final JsonArray result = new JsonArray();
         /*
