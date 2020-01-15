@@ -14,6 +14,10 @@ E20002: (401) - Qiy token record does not contain "access_token", client_id = {0
 E20003: (424) - Ali Acs Client profile met error when it''s initializing, details = {0}
 E20004: (424) - Ali Acs Client send request met error, details = {0}
 E20005: "(500) - You selected mode = `DEFINED`, but there missed `store` key in config"
+#ElasticSearch
+E20006: (404) - the Configuration of ElasticSearch is missinng, please check vertx-es.yml.
+E20007: (404) - parameter (index) is required, you must provide it when using full text search.
+E20008: (404) - parameter (searchText) is required, you must provide it when using full text search.
 # (Runtime) Vertx start up error
 E40001: Vert.x zero boot class should not be null, please provide the entry of this application
 E40002: Vert.x zero boot class must be marked with annotation "Up", but ( name= {0} ) it''s missing
