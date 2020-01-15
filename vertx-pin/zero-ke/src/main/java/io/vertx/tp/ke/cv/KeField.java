@@ -4,6 +4,7 @@ public interface KeField {
 
     String FIELD = "field";
     String ID = "id";
+    String ENABLED = "enabled";
 
     String SCOPE = "scope";
     String REALM = "realm";
