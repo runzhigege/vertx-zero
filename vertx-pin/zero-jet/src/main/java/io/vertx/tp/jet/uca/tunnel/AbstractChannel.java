@@ -61,19 +61,16 @@ public abstract class AbstractChannel implements JtChannel {
          */
         final Class<?> recordClass = this.commercial.recordComponent();
         /*
-         *
+         * Build component and init
          */
-        return this.createRequest(envelop, recordClass).compose(request -> {
+        final Class<?> componentClass = this.commercial.businessComponent();
+        if (Objects.isNull(componentClass)) {
             /*
-             * Build component and init
+             * null class of component
              */
-            final Class<?> componentClass = this.commercial.businessComponent();
-            if (Objects.isNull(componentClass)) {
-                /*
-                 * null class of component
-                 */
-                return Future.failedFuture(new _501ChannelErrorException(this.getClass(), null));
-            } else {
+            return Future.failedFuture(new _501ChannelErrorException(this.getClass(), null));
+        } else {
+            return this.createRequest(envelop, recordClass).compose(request -> {
                 /*
                  * Create new component here
                  * It means that Channel/Component must contains new object
@@ -116,8 +113,8 @@ public abstract class AbstractChannel implements JtChannel {
                      */
                     return Future.failedFuture(new _501ChannelErrorException(this.getClass(), componentClass.getName()));
                 }
-            }
-        });
+            });
+        }
     }
 
     private Future<Envelop> createResponse(final ActOut actOut, final Envelop envelop) {
@@ -163,7 +160,13 @@ public abstract class AbstractChannel implements JtChannel {
              * Dict configuration
              */
             final Dict dict = this.commercial.dict();
-            return Ux.dictCalc(dict, paramMap);
+            return Ux.dictCalc(dict, paramMap).compose(dictionary -> {
+                /*
+                 * Bind dictionary to current dictionary reference
+                 */
+                this.dictionary = dictionary;
+                return Ux.future(this.dictionary);
+            });
         } else {
             return Ux.future(this.dictionary);
         }

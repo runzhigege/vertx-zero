@@ -3,7 +3,6 @@ package io.vertx.up.uca.job.timer;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.up.annotations.Contract;
-import io.vertx.up.log.Annal;
 
 public class VertxInterval implements Interval {
     /*
@@ -11,7 +10,6 @@ public class VertxInterval implements Interval {
      * Cannot schedule a timer with delay < 1 ms
      */
     private static final int START_UP_MS = 1;
-    private static final Annal LOGGER = Annal.get(VertxInterval.class);
 
     @Contract
     private transient Vertx vertx;
