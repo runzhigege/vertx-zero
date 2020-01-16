@@ -29,6 +29,18 @@ class Epsilon {
         return set;
     }
 
+    static String mapStringOne(final JsonArray array, final String field) {
+        final Set<String> set = new HashSet<>();
+        Ut.itJArray(array).map(json -> json.getString(field))
+                .filter(Objects::nonNull)
+                .forEach(set::add);
+        if (1 == set.size()) {
+            return set.iterator().next();
+        } else {
+            return null;
+        }
+    }
+
     static Set<JsonArray> mapArray(final JsonArray array, final String field) {
         Set<JsonArray> set = new HashSet<>();
         if (Objects.nonNull(array)) {

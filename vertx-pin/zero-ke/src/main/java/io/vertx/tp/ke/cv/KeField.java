@@ -50,6 +50,7 @@ public interface KeField {
     String ACTIVE = "active";
     String LANGUAGE = "language";
     String KEY = "key";
+    String KEYS = "keys";
 
     String FILE_KEY = "fileKey";
 

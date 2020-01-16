@@ -2,6 +2,7 @@ package cn.vertxup.ambient.service;
 
 import cn.vertxup.ambient.domain.tables.daos.XTodoDao;
 import cn.vertxup.ambient.domain.tables.pojos.XTodo;
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -17,7 +18,10 @@ import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class TodoService implements TodoStub {
     private static final Annal LOGGER = Annal.get(TodoService.class);
@@ -71,6 +75,30 @@ public class TodoService implements TodoStub {
     }
 
     @Override
+    public Future<JsonArray> updateStatus(final Set<String> keys, final JsonObject params) {
+        return Ux.Jooq.on(XTodoDao.class)
+                .<XTodo>fetchInAsync(KeField.KEY, Ut.toJArray(keys))
+                .compose(Ux::fnJArray)
+                .compose(Ut.applyNil(JsonArray::new, (todoArray) -> {
+                    /*
+                     * Update status of XTodo
+                     */
+                    List<XTodo> todoList = Ut.deserialize(todoArray, new TypeReference<List<XTodo>>() {
+                    });
+                    {
+                        /*
+                         * XTodo Auditor setting
+                         */
+                        todoList = todoList.stream().map(todo -> this.combineTodo(todo, params))
+                                .collect(Collectors.toList());
+                    }
+                    return Ux.Jooq.on(XTodoDao.class)
+                            .updateAsync(todoList)
+                            .compose(Ux::fnJArray);
+                }));
+    }
+
+    @Override
     public Future<JsonObject> updateStatus(final String key, final JsonObject params) {
         return Ux.Jooq.on(XTodoDao.class)
                 .<XTodo>findByIdAsync(key)
@@ -79,33 +107,42 @@ public class TodoService implements TodoStub {
                     /*
                      * Update status of XTodo
                      */
-                    final XTodo todo = Ut.deserialize(todoJson, XTodo.class);
+                    XTodo todo = Ut.deserialize(todoJson, XTodo.class);
                     {
-                        /*
-                         * XTodo Auditor setting
-                         */
-                        if (params.containsKey(KeField.USER_ID)) {
-                            todo.setUpdatedBy(params.getString(KeField.USER_ID));
-                            todo.setUpdatedAt(LocalDateTime.now());
-                        }
-                        /*
-                         * Status
-                         */
-                        if (params.containsKey(KeField.STATUS)) {
-                            final String status = params.getString(KeField.STATUS);
-                            todo.setStatus(status);
-                            if (TodoStatus.FINISHED.name().equals(status)) {
-                                /*
-                                 * It means that XTodo has been updated by user
-                                 */
-                                todo.setFinishedBy(todo.getUpdatedBy());
-                            }
-                        }
+                        todo = this.combineTodo(todo, params);
                     }
                     return Ux.Jooq.on(XTodoDao.class)
-                            .<XTodo>updateAsync(todo)
+                            .updateAsync(todo)
                             .compose(Ux::fnJObject);
                 }));
+    }
+
+    private XTodo combineTodo(final XTodo todo, final JsonObject params) {
+        if (Objects.isNull(todo)) {
+            return null;
+        } else {
+            /*
+             * XTodo Auditor setting
+             */
+            if (params.containsKey(KeField.USER_ID)) {
+                todo.setUpdatedBy(params.getString(KeField.USER_ID));
+                todo.setUpdatedAt(LocalDateTime.now());
+            }
+            /*
+             * Status
+             */
+            if (params.containsKey(KeField.STATUS)) {
+                final String status = params.getString(KeField.STATUS);
+                todo.setStatus(status);
+                if (TodoStatus.FINISHED.name().equals(status)) {
+                    /*
+                     * It means that XTodo has been updated by user
+                     */
+                    todo.setFinishedBy(todo.getUpdatedBy());
+                }
+            }
+            return todo;
+        }
     }
 
     @Override
