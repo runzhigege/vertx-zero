@@ -124,9 +124,16 @@ public class TodoService implements TodoStub {
             /*
              * XTodo Auditor setting
              */
-            if (params.containsKey(KeField.USER_ID)) {
-                todo.setUpdatedBy(params.getString(KeField.USER_ID));
+            final String userId = params.getString(KeField.USER_ID);
+            if (Ut.notNil(userId)) {
+                todo.setUpdatedBy(userId);
                 todo.setUpdatedAt(LocalDateTime.now());
+                /*
+                 * XTodo once for `createdBy`
+                 */
+                if (Objects.isNull(todo.getCreatedBy())) {
+                    todo.setCreatedBy(userId);
+                }
             }
             /*
              * Status
