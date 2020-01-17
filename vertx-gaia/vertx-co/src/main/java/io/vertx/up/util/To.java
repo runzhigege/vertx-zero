@@ -32,6 +32,13 @@ final class To {
         return Fn.getNull(null, () -> Integer.parseInt(value.toString()), value);
     }
 
+    static Set<String> toSet(final JsonArray keys) {
+        final JsonArray keysData = Define.sureJArray(keys);
+        final Set<String> keySet = new HashSet<>();
+        It.itJString(keysData).forEach(keySet::add);
+        return keySet;
+    }
+
     static String toString(final Object reference) {
         return Fn.getNull("null", () -> {
             final String literal;
@@ -94,11 +101,11 @@ final class To {
         return array;
     }
 
-    static Collection toCollection(final Object value) {
+    static Collection<?> toCollection(final Object value) {
         return Fn.getNull(() -> {
             // Collection
             if (value instanceof Collection) {
-                return ((Collection) value);
+                return ((Collection<?>) value);
             }
             // JsonArray
             if (Types.isJArray(value)) {

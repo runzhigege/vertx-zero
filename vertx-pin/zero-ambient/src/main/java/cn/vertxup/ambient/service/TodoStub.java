@@ -4,6 +4,8 @@ import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
+import java.util.Set;
+
 /*
  * XTodo created by type / params
  */
@@ -31,4 +33,6 @@ public interface TodoStub {
      * Update X_TODO by `key`
      */
     Future<JsonObject> updateStatus(String key, JsonObject params);
+
+    Future<JsonArray> updateStatus(Set<String> keys, JsonObject params);
 }
