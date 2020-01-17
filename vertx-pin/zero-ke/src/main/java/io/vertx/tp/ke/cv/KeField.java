@@ -97,6 +97,7 @@ public interface KeField {
 
     String HEADER = "header";
     String OPTIONS = "options";
+    String COMPONENT = "components";
 
     interface App {
 
