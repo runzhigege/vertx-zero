@@ -4,6 +4,7 @@ public interface KeField {
 
     String FIELD = "field";
     String ID = "id";
+    String ENABLED = "enabled";
 
     String SCOPE = "scope";
     String REALM = "realm";
@@ -49,6 +50,7 @@ public interface KeField {
     String ACTIVE = "active";
     String LANGUAGE = "language";
     String KEY = "key";
+    String KEYS = "keys";
 
     String FILE_KEY = "fileKey";
 
@@ -95,6 +97,7 @@ public interface KeField {
 
     String HEADER = "header";
     String OPTIONS = "options";
+    String COMPONENT = "components";
 
     interface App {
 

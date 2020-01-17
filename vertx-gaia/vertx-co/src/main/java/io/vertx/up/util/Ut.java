@@ -851,6 +851,10 @@ public final class Ut {
         return StringUtil.split(input, separator);
     }
 
+    public static Set<String> toSet(final JsonArray keys) {
+        return To.toSet(keys);
+    }
+
     public static JsonArray toJArray(final Object value) {
         return Jackson.toJArray(value);
     }
@@ -1119,6 +1123,10 @@ public final class Ut {
      */
     public static Set<String> mapString(final JsonArray array, final String field) {
         return Epsilon.mapString(array, field);
+    }
+
+    public static String mapStringOne(final JsonArray array, final String field) {
+        return Epsilon.mapStringOne(array, field);
     }
 
     public static Set<JsonArray> mapArray(final JsonArray array, final String field) {

@@ -1,5 +1,6 @@
 package io.vertx.up.uca.rs.mime.parse;
 
+import io.vertx.core.MultiMap;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.eventbus.EventBus;
@@ -12,6 +13,7 @@ import io.vertx.ext.web.FileUpload;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.Session;
 import io.vertx.up.atom.Epsilon;
+import io.vertx.up.commune.config.XHeader;
 import io.vertx.up.exception.WebException;
 
 import java.util.Set;
@@ -24,37 +26,44 @@ public class TypedAtomic<T> implements Atomic<T> {
             throws WebException {
         Object returnValue = null;
         final Class<?> paramType = income.getArgType();
-        if (is(Session.class, paramType)) {
+        if (XHeader.class == paramType) {
+            // XHeader ( New Type )
+            final HttpServerRequest request = context.request();
+            final MultiMap headers = request.headers();
+            final XHeader header = new XHeader();
+            header.fromHeader(headers);
+            returnValue = header;
+        } else if (this.is(Session.class, paramType)) {
             // Session Object
             returnValue = context.session();
-        } else if (is(HttpServerRequest.class, paramType)) {
+        } else if (this.is(HttpServerRequest.class, paramType)) {
             // Request Object
             returnValue = context.request();
-        } else if (is(HttpServerResponse.class, paramType)) {
+        } else if (this.is(HttpServerResponse.class, paramType)) {
             // Response Object
             returnValue = context.response();
-        } else if (is(Vertx.class, paramType)) {
+        } else if (this.is(Vertx.class, paramType)) {
             // Vertx Object
             returnValue = context.vertx();
-        } else if (is(EventBus.class, paramType)) {
+        } else if (this.is(EventBus.class, paramType)) {
             // Eventbus Object
             returnValue = context.vertx().eventBus();
-        } else if (is(User.class, paramType)) {
+        } else if (this.is(User.class, paramType)) {
             // User Objbect
             returnValue = context.user();
-        } else if (is(Set.class, paramType)) {
+        } else if (this.is(Set.class, paramType)) {
             // FileUpload
             final Class<?> type = paramType.getComponentType();
-            if (is(FileUpload.class, type)) {
+            if (this.is(FileUpload.class, type)) {
                 returnValue = context.fileUploads();
             }
-        } else if (is(JsonArray.class, paramType)) {
+        } else if (this.is(JsonArray.class, paramType)) {
             // JsonArray
             returnValue = context.getBodyAsJsonArray();
-        } else if (is(JsonObject.class, paramType)) {
+        } else if (this.is(JsonObject.class, paramType)) {
             // JsonObject
             returnValue = context.getBodyAsJson();
-        } else if (is(Buffer.class, paramType)) {
+        } else if (this.is(Buffer.class, paramType)) {
             // Buffer
             returnValue = context.getBody();
         }

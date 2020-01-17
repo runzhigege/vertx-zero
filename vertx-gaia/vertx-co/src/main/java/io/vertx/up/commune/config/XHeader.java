@@ -1,7 +1,9 @@
 package io.vertx.up.commune.config;
 
+import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.commune.Json;
+import io.vertx.up.eon.ID;
 import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
@@ -54,6 +56,15 @@ public class XHeader implements Serializable, Json {
             this.appKey = header.appKey;
             this.sigma = header.sigma;
             this.language = header.language;
+        }
+    }
+
+    public void fromHeader(final MultiMap headers) {
+        if (Objects.nonNull(headers)) {
+            this.appId = headers.get(ID.Header.X_APP_ID);
+            this.appKey = headers.get(ID.Header.X_APP_KEY);
+            this.sigma = headers.get(ID.Header.X_SIGMA);
+            this.language = headers.get(ID.Header.X_LANG);
         }
     }
 
