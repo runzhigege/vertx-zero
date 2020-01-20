@@ -34,7 +34,7 @@ public class InitService implements InitStub {
                 /* Data Loading */
                 .compose(Init.data().apply())
                 /* Image */
-                .compose(Ke.image(KeField.LOGO));
+                .compose(Ke.image(KeField.App.LOGO));
     }
 
     @Override
@@ -45,14 +45,14 @@ public class InitService implements InitStub {
                 .fetchOneAsync(KeField.NAME, appName)
                 .compose(Ux::fnJObject)
                 /* X_SOURCE fetching, Fetching skip Database initialization */
-                .compose(appJson -> stub.fetchSource(appJson.getString(KeField.KEY))
+                .compose(appJson -> this.stub.fetchSource(appJson.getString(KeField.KEY))
                         .compose(source -> Uson.create(appJson).append(KeField.SOURCE, source).toFuture())
                 )
                 .compose(this::initDefined)
                 /* Data Loading */
                 .compose(Init.data().apply())
                 /* Image */
-                .compose(Ke.image(KeField.LOGO));
+                .compose(Ke.image(KeField.App.LOGO));
     }
 
     @Override

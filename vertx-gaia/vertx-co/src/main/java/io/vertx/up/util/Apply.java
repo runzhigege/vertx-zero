@@ -73,4 +73,12 @@ class Apply {
             }
         };
     }
+
+    static JsonObject applyJValue(final JsonObject record, final String field, final Object value) {
+        final JsonObject recordJson = Define.sureJObject(record);
+        if (!recordJson.containsKey(field)) {
+            recordJson.put(field, value);
+        }
+        return recordJson;
+    }
 }

@@ -25,7 +25,7 @@ public class AppService implements AppStub {
                 /* Before App Initialized ( Public Api ) */
                 .compose(appData -> Uson.create(appData).remove(KeField.APP_KEY).toFuture())
                 /* Image field: logo */
-                .compose(Ke.image(KeField.LOGO));
+                .compose(Ke.image(KeField.App.LOGO));
     }
 
     @Override
@@ -36,7 +36,7 @@ public class AppService implements AppStub {
                 /* Convert to Json */
                 .compose(Ux::fnJObject)
                 /* Image field: logo */
-                .compose(Ke.image(KeField.LOGO));
+                .compose(Ke.image(KeField.App.LOGO));
     }
 
     @Override

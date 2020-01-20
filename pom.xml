@@ -105,7 +105,7 @@
         <common.net.version>3.6</common.net.version>
         <common.codec.version>1.14</common.codec.version>
         <http.async.client.version>4.1.4</http.async.client.version>
-        <http.client.version>4.5.10</http.client.version>
+        <http.client.version>4.5.11</http.client.version>
         <http.core.version>4.4.13</http.core.version>
         <!-- Liquibase -->
         <liquibase.version>3.8.5</liquibase.version>
