@@ -72,32 +72,32 @@ public class FormService implements FormStub {
          * window and columns are required
          */
         final JsonObject form = new JsonObject();
-        form.put("window", formJson.getValue("window"));
-        form.put("columns", formJson.getValue("columns"));
-        if (formJson.containsKey(KeField.CLASS_NAME)) {
-            form.put(KeField.CLASS_NAME, formJson.getValue(KeField.CLASS_NAME));
+        form.put(KeField.Ui.WINDOW, formJson.getValue(KeField.Ui.WINDOW));
+        form.put(KeField.Ui.COLUMNS, formJson.getValue(KeField.Ui.COLUMNS));
+        if (formJson.containsKey(KeField.Ui.CLASS_NAME)) {
+            form.put(KeField.Ui.CLASS_NAME, formJson.getValue(KeField.Ui.CLASS_NAME));
         }
         /*
          * hidden: JsonArray
          */
-        if (formJson.containsKey(KeField.HIDDEN)) {
-            form.put(KeField.HIDDEN, formJson.getValue(KeField.HIDDEN));
-            Ke.mountArray(form, KeField.HIDDEN);
+        if (formJson.containsKey(KeField.Ui.HIDDEN)) {
+            form.put(KeField.Ui.HIDDEN, formJson.getValue(KeField.Ui.HIDDEN));
+            Ke.mountArray(form, KeField.Ui.HIDDEN);
         }
         /*
          * row: JsonObject
          */
-        if (formJson.containsKey(KeField.ROW)) {
-            form.put(KeField.ROW, formJson.getValue(KeField.HIDDEN));
-            Ke.mount(form, KeField.ROW);
+        if (formJson.containsKey(KeField.Ui.ROW)) {
+            form.put(KeField.Ui.ROW, formJson.getValue(KeField.Ui.HIDDEN));
+            Ke.mount(form, KeField.Ui.ROW);
         }
         /*
          * metadata: JsonObject
          */
         if (formJson.containsKey(KeField.METADATA)) {
             final JsonObject metadata = formJson.getJsonObject(KeField.METADATA);
-            if (metadata.containsKey(KeField.INITIAL)) {
-                form.put(KeField.INITIAL, metadata.getJsonObject(KeField.INITIAL));
+            if (metadata.containsKey(KeField.Ui.INITIAL)) {
+                form.put(KeField.Ui.INITIAL, metadata.getJsonObject(KeField.Ui.INITIAL));
             }
         }
         final String formId = formJson.getString(KeField.KEY);
