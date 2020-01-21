@@ -33,6 +33,7 @@ public interface KeField {
 
     String ITEMS = "items";                     /* Batch operation, items -> JsonArray ( element = JsonObject ) */
     String KEYS = "keys";                       /* Batch operation, keys -> JsonArray ( element = String ) */
+    String CODES = "codes";                     /* Batch operation, codes -> JsonArray ( element = String ) */
 
     String FILE_KEY = "fileKey";                /* XAttachment belong-to field */
     String DATA_KEY = "dataKey";                /* Security belong-to field: Authorization data stored key for session storage */
