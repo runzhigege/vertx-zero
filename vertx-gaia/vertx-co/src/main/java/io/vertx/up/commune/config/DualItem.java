@@ -37,6 +37,10 @@ public class DualItem implements Serializable {
         this.init(input);
     }
 
+    public boolean isEmpty() {
+        return this.vector.isEmpty();
+    }
+
     void init(final JsonObject input) {
         if (Ut.notNil(input)) {
             input.fieldNames().stream()

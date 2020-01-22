@@ -13,8 +13,8 @@ public class UxOpt {
      */
     public DeliveryOptions delivery() {
         final DeliveryOptions options = new DeliveryOptions();
-        /* 2 min for timeout to avoid sync long works */
-        options.setSendTimeout(120000);
+        /* 10 min for timeout to avoid sync long works ( extend for 10 min ) */
+        options.setSendTimeout(600000);
         return options;
     }
 }

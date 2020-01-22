@@ -6,6 +6,7 @@ import io.vertx.up.eon.em.MappingMode;
 import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -108,7 +109,12 @@ public class DualMapping implements Serializable {
      * Child get here
      */
     public DualItem child(final String key) {
-        return this.mapping.get(key);
+        final DualItem selected = this.mapping.get(key);
+        if (Objects.isNull(selected) || selected.isEmpty()) {
+            return this.root;
+        } else {
+            return selected;
+        }
     }
 
     public DualItem child() {

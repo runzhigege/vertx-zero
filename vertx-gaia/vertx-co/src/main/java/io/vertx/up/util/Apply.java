@@ -73,4 +73,21 @@ class Apply {
             }
         };
     }
+
+    static JsonObject applyJValue(final JsonObject record, final String field, final Object value) {
+        if (Objects.isNull(record)) {
+            return null;
+        } else {
+            final Object originalValue = record.getValue(field);
+            /*
+             * Modification for
+             * 1) Not null
+             * 2) Include `key` not existing
+             */
+            if (Objects.isNull(originalValue)) {
+                record.put(field, value);
+            }
+            return record;
+        }
+    }
 }

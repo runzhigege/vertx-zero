@@ -8,8 +8,8 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ambient.cv.AtMsg;
 import io.vertx.tp.ambient.refine.At;
 import io.vertx.tp.ke.cv.KeField;
-import io.vertx.up.unity.Ux;
 import io.vertx.up.log.Annal;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
 import java.util.function.Function;
@@ -25,17 +25,17 @@ class AppInit implements Init {
         return appJson -> {
             At.infoApp(LOGGER, AtMsg.INIT_APP, appJson.encode());
             /* Deserialization */
-            final XApp app = init(appJson);
+            final XApp app = this.init(appJson);
             return Ux.Jooq.on(XAppDao.class)
                     /*
                      * Init first step: UPSERT ( Insert / Update )
                      */
-                    .upsertAsync(whereUnique(appJson), app)
+                    .upsertAsync(this.whereUnique(appJson), app)
                     .compose(Ux::fnJObject)
                     /*
                      * Result Building
                      */
-                    .compose(input -> Ux.future(result(input, appJson)));
+                    .compose(input -> Ux.future(this.result(input, appJson)));
         };
     }
 
@@ -66,9 +66,9 @@ class AppInit implements Init {
             input.put(KeField.APP_KEY, Ut.randomString(64));
         }
         /* logo */
-        final JsonArray files = input.getJsonArray(KeField.LOGO);
+        final JsonArray files = input.getJsonArray(KeField.App.LOGO);
         if (null != files) {
-            input.put(KeField.LOGO, files.encode());
+            input.put(KeField.App.LOGO, files.encode());
         }
         final XApp app = Ut.deserialize(input.copy(), XApp.class);
         /* active = true */
