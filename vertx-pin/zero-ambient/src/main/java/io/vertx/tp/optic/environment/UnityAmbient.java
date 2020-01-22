@@ -75,7 +75,7 @@ public class UnityAmbient implements UnityApp {
         /* Business information */
         {
             /* Major: Logo and Title */
-            normalized.put(KeField.LOGO, app.getLogo());
+            normalized.put(KeField.App.LOGO, app.getLogo());
             normalized.put(KeField.App.TITLE, app.getTitle());
             /*
              * Business information
@@ -126,10 +126,10 @@ public class UnityAmbient implements UnityApp {
              * updatedAt, updatedBy
              */
             final JsonObject auditor = new JsonObject();
-            auditor.put("createdBy", app.getCreatedBy());
-            Fn.safeNull(() -> auditor.put("createdAt", Ut.parse(app.getCreatedAt()).toInstant()), app.getCreatedAt());
-            auditor.put("updatedBy", app.getUpdatedBy());
-            Fn.safeNull(() -> auditor.put("updatedAt", Ut.parse(app.getUpdatedAt()).toInstant()), app.getUpdatedAt());
+            auditor.put(KeField.CREATED_BY, app.getCreatedBy());
+            Fn.safeNull(() -> auditor.put(KeField.CREATED_AT, Ut.parse(app.getCreatedAt()).toInstant()), app.getCreatedAt());
+            auditor.put(KeField.UPDATED_BY, app.getUpdatedBy());
+            Fn.safeNull(() -> auditor.put(KeField.UPDATED_AT, Ut.parse(app.getUpdatedAt()).toInstant()), app.getUpdatedAt());
             normalized.put("auditor", auditor);
         }
         /* Database information */
@@ -151,14 +151,14 @@ public class UnityAmbient implements UnityApp {
             sourceJson.put("port", source.getPort());
             sourceJson.put("category", source.getCategory());
             sourceJson.put("jdbcUrl", source.getJdbcUrl());
-            sourceJson.put("username", source.getUsername());
-            sourceJson.put("password", source.getPassword());
+            sourceJson.put(KeField.USERNAME, source.getUsername());
+            sourceJson.put(KeField.PASSWORD, source.getPassword());
             sourceJson.put("driverClassName", source.getDriverClassName());
             final String jdbcConfig = source.getJdbcConfig();
             if (Ut.notNil(jdbcConfig)) {
-                sourceJson.put("options", Ut.toJObject(jdbcConfig));
+                sourceJson.put(KeField.OPTIONS, Ut.toJObject(jdbcConfig));
             }
-            normalized.put("source", sourceJson);
+            normalized.put(KeField.SOURCE, sourceJson);
         }
         return normalized;
     }

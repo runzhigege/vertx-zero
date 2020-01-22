@@ -524,7 +524,8 @@ public final class Ut {
      * 1) item -> Ut.applyAdd(set, item)
      * 2) item -> Ut.applyAdd(refer, item)
      * 3) applyMerge
-     * 3) applyNil / applyJNil
+     * 4) applyNil / applyJNil
+     * 5) applyJValue -> JsonObject field filling of value
      */
     public static <T> T applyAdd(final Set<T> sets, final T entity) {
         sets.add(entity);
@@ -569,6 +570,14 @@ public final class Ut {
 
     public static <T> Function<T, Future<JsonObject>> applyMerge(final JsonObject input) {
         return Apply.applyField(input, null);
+    }
+
+    public static JsonObject applyJValue(final JsonObject record, final String field, final Object value) {
+        return Apply.applyJValue(record, field, value);
+    }
+
+    public static JsonObject applyJValue(final String field, final Object value) {
+        return Apply.applyJValue(null, field, value);
     }
 
     /*
