@@ -3,6 +3,7 @@ package io.vertx.up.commune.config;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.em.SourceType;
+import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
@@ -20,6 +21,7 @@ import java.util.Set;
  * A little complex
  */
 public class DictSource implements Serializable {
+    private static final Annal LOGGER = Annal.get(DictSource.class);
     /*
      * SourceType of current source definition
      */
@@ -62,6 +64,9 @@ public class DictSource implements Serializable {
             final String className = definition.getString("component");
             if (Ut.notNil(className)) {
                 this.component = Ut.clazz(className);
+                if (Objects.isNull(this.component)) {
+                    LOGGER.warn("[ ZERO ] The component `{0}` could not be initialized", className);
+                }
             }
             final JsonObject componentConfig = definition.getJsonObject("componentConfig");
             if (Ut.notNil(componentConfig)) {
@@ -83,7 +88,11 @@ public class DictSource implements Serializable {
     }
 
     public <T> T getPlugin() {
-        return Ut.singleton(this.component);
+        if (Objects.isNull(this.component)) {
+            return null;
+        } else {
+            return Ut.singleton(this.component);
+        }
     }
 
     public JsonObject getPluginConfig() {
