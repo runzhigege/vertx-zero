@@ -136,4 +136,9 @@ public interface KeField {
 
         String CONTROLS = "controls";
     }
+
+    interface Modeling {
+        String KEYS = "keys";
+        String FIELDS = "fields";
+    }
 }
