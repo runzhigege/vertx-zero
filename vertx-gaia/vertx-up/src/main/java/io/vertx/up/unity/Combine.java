@@ -43,9 +43,7 @@ class Combine {
         });
     }
 
-    static Future<JsonObject> thenCombine(
-            final Future<JsonObject>... futures
-    ) {
+    static Future<JsonObject> thenCombine(final Future<JsonObject>... futures) {
         return CompositeFuture.join(Arrays.asList(futures)).compose(finished -> {
             final JsonObject resultMap = new JsonObject();
             if (null != finished) {
@@ -55,9 +53,7 @@ class Combine {
         });
     }
 
-    static <T> Future<ConcurrentMap<String, T>> thenCombine(
-            final ConcurrentMap<String, Future<T>> futureMap
-    ) {
+    static <T> Future<ConcurrentMap<String, T>> thenCombine(final ConcurrentMap<String, Future<T>> futureMap) {
         final List<String> keys = new ArrayList<>();
         final List<Future> futures = new ArrayList<>();
         futureMap.forEach((key, future) -> {
@@ -82,26 +78,7 @@ class Combine {
         });
     }
 
-    static <T> Future<List<T>> thenCombineList(
-            final List<Future<T>> futures
-    ) {
-        final List<Future> futureList = new ArrayList<>(futures);
-        return CompositeFuture.join(futureList).compose(finished -> {
-            final List<T> result = new ArrayList<>();
-            if (null != finished) {
-                Ut.itList(finished.list(), (item, index) -> {
-                    if (Objects.nonNull(item)) {
-                        result.add((T) item);
-                    }
-                });
-            }
-            return Future.succeededFuture(result);
-        });
-    }
-
-    static Future<JsonArray> thenCombineArray(
-            final List<Future<JsonArray>> futures
-    ) {
+    static Future<JsonArray> thenCombineArray(final List<Future<JsonArray>> futures) {
         final List<Future> futureList = new ArrayList<>(futures);
         return CompositeFuture.join(futureList).compose(finished -> {
             final JsonArray resultMap = new JsonArray();
@@ -131,19 +108,14 @@ class Combine {
         }));
     }
 
-    static Future<JsonArray> thenCombine(
-            final List<Future<JsonObject>> futures
-    ) {
+    static Future<JsonArray> thenCombine(final List<Future<JsonObject>> futures) {
         return CompositeFuture.join(new ArrayList<>(futures)).compose(finished -> {
             final JsonArray result = null == finished ? new JsonArray() : new JsonArray(finished.list());
             return Future.succeededFuture(result);
         });
     }
 
-    static <T> Future<T> thenError(
-            final Class<? extends WebException> clazz,
-            final Object... args
-    ) {
+    static <T> Future<T> thenError(final Class<? extends WebException> clazz, final Object... args) {
         final WebException error = To.toError(clazz, args);
         return Future.failedFuture(error);
     }
@@ -202,23 +174,4 @@ class Combine {
             return Future.succeededFuture(resultMap);
         });
     }
-    /*
-    Old code for future scheduled
-    private static <T> Handler<AsyncResult<CompositeFuture>> thenResponse(
-            final Promise<T> promise,
-            final Function<CompositeFuture, T> fun) {
-        return res -> {
-            if (res.succeeded()) {
-                final T callback = fun.apply(res.result());
-                promise.complete(callback);
-            } else {
-                if (null != res.cause()) {
-                    res.cause().printStackTrace();
-                    promise.fail(res.cause());
-                } else {
-                    promise.fail(new _500InternalServerException(Fluctuate.class, null));
-                }
-            }
-        };
-    } */
 }
