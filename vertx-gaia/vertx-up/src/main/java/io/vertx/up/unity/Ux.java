@@ -287,6 +287,10 @@ public final class Ux {
         return Combine.thenCombineArray(futures);
     }
 
+    public static <T> Future<List<T>> thenCombineList(final List<Future<T>> futures) {
+        return Combine.thenCombineList(futures);
+    }
+
     public static Future<ConcurrentMap<String, JsonArray>> thenCompress(final List<Future<ConcurrentMap<String, JsonArray>>> futures) {
         return Combine.thenCompress(futures, (original, latest) -> original.addAll(latest));
     }
