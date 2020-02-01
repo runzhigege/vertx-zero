@@ -82,6 +82,23 @@ class Combine {
         });
     }
 
+    static <T> Future<List<T>> thenCombineList(
+            final List<Future<T>> futures
+    ) {
+        final List<Future> futureList = new ArrayList<>(futures);
+        return CompositeFuture.join(futureList).compose(finished -> {
+            final List<T> result = new ArrayList<>();
+            if (null != finished) {
+                Ut.itList(finished.list(), (item, index) -> {
+                    if (Objects.nonNull(item)) {
+                        result.add((T) item);
+                    }
+                });
+            }
+            return Future.succeededFuture(result);
+        });
+    }
+
     static Future<JsonArray> thenCombineArray(
             final List<Future<JsonArray>> futures
     ) {
