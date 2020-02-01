@@ -273,6 +273,10 @@ public final class Ux {
         return Combine.thenCombine(futures);
     }
 
+    public static <T> Future<List<T>> thenCombineT(final List<Future<T>> futures) {
+        return CombineT.thenCombine(futures);
+    }
+
     public static Future<JsonArray> thenCombine(final JsonArray input, final Function<JsonObject, Future<JsonObject>> function) {
         final List<Future<JsonObject>> futures = new ArrayList<>();
         Ut.itJArray(input).map(function).forEach(futures::add);
@@ -283,12 +287,15 @@ public final class Ux {
         return Combine.thenCombine(futureMap);
     }
 
+    /*
+     * Specific combine method here.
+     */
     public static Future<JsonArray> thenCombineArray(final List<Future<JsonArray>> futures) {
         return Combine.thenCombineArray(futures);
     }
 
-    public static <T> Future<List<T>> thenCombineList(final List<Future<T>> futures) {
-        return Combine.thenCombineList(futures);
+    public static <T> Future<List<T>> thenCombineArrayT(final List<Future<List<T>>> futures) {
+        return CombineT.thenCombineArray(futures);
     }
 
     public static Future<ConcurrentMap<String, JsonArray>> thenCompress(final List<Future<ConcurrentMap<String, JsonArray>>> futures) {
