@@ -143,6 +143,10 @@ public final class Ux {
         return To.toFuture(entity);
     }
 
+    public static <T> Future<T> future() {
+        return To.toFuture(null);
+    }
+
     public static <T> Handler<AsyncResult<T>> handler(final Message<Envelop> message) {
         return Web.toHandler(message);
     }
