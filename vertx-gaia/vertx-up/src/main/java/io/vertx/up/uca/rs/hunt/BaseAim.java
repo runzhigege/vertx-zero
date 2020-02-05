@@ -43,7 +43,7 @@ public abstract class BaseAim {
      *
      * @param context RoutingContext reference
      * @param event   Event object of definition
-     * @return Arguments ( Object[] )
+     * @return TypedArgument ( Object[] )
      */
     @SuppressWarnings("all")
     protected Object[] buildArgs(final RoutingContext context,
@@ -72,7 +72,7 @@ public abstract class BaseAim {
 
     /**
      * @param event Event object of definition
-     * @param args  Arguments ( Object[] )
+     * @param args  TypedArgument ( Object[] )
      * @return Return invoked result
      */
     protected Object invoke(final Event event, final Object[] args) {
