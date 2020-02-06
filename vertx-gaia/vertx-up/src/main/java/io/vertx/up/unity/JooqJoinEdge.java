@@ -39,4 +39,14 @@ class JooqJoinEdge {
     String getToField() {
         return this.toField;
     }
+
+    @Override
+    public String toString() {
+        return "JooqJoinEdge{" +
+                "fromTable='" + this.fromTable + '\'' +
+                ", fromField='" + this.fromField + '\'' +
+                ", toTable='" + this.toTable + '\'' +
+                ", toField='" + this.toField + '\'' +
+                '}';
+    }
 }

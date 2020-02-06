@@ -190,7 +190,7 @@ class JooqAnalyzer {
          * 2) Extract by construct ( Type / DataType ) will missing
          */
         Field found;
-        if (Objects.isNull(columnField)) {
+        if (field.equals(columnField)) {
             found = this.fieldMap.get(field);
         } else {
             final String actualField = this.revert.get(columnField);
@@ -210,7 +210,7 @@ class JooqAnalyzer {
             LOGGER.debug(Info.JOOQ_BIND, pojo, clazz);
             this.pojoFile = pojo;
             this.pojo = Mirror.create(UxJooq.class).mount(pojo)
-                    .mojo().put(this.mapping);
+                    .mojo().bindColumn(this.mapping);
             // When bind pojo, the system will analyze columns
             LOGGER.debug(Info.JOOQ_MOJO, this.pojo.getIn(), this.pojo.getInColumn());
         }

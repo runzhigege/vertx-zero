@@ -108,10 +108,16 @@ public class Mojo implements Serializable {
      * or
      * this.columns are invalid
      */
-    public Mojo put(final ConcurrentMap<String, String> columns) {
+    public Mojo bindColumn(final ConcurrentMap<String, String> columns) {
         if (null != columns && !columns.isEmpty()) {
             this.columns.putAll(columns);
         }
+        return this;
+    }
+
+    public Mojo bind(final Mojo mojo) {
+        this.type = mojo.type;
+        this.config.putAll(mojo.config);
         return this;
     }
 
