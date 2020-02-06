@@ -50,7 +50,7 @@ class JooqJoinder {
             = new ConcurrentHashMap<>();
     private transient final ConcurrentMap<String, String> COLUMN_MAP
             = new ConcurrentHashMap<>();
-    private transient final ConcurrentMap<String, Field> FIELD_OBJECT_MAP
+    private transient final ConcurrentMap<String, Field> FIELD_MAP
             = new ConcurrentHashMap<>();
     /*
      * Next table ( exclude the first added table here )
@@ -133,7 +133,7 @@ class JooqJoinder {
         final ConcurrentMap<String, Field> fields = analyzer.getColumns();
         for (String fieldName : fields.keySet()) {
             final Field field = fields.get(fieldName);
-            this.FIELD_OBJECT_MAP.put(fieldName, field);
+            this.FIELD_MAP.put(fieldName, field);
             /*
              * Column Field here
              */
@@ -185,7 +185,7 @@ class JooqJoinder {
         /*
          * Started step
          */
-        final Field original = FIELD_OBJECT_MAP.get(this.first.getValue());
+        final Field original = FIELD_MAP.get(this.first.getValue());
         final Field field = DSL.field(this.PREFIX_MAP.get(this.first.getKey()) + "." + original.getName());
         final SelectWhereStep started = context.select(field).from(table);
         /*
@@ -244,7 +244,12 @@ class JooqJoinder {
     }
 
     private Field getColumn(final String field) {
-        return this.FIELD_OBJECT_MAP.get(field);
+        final Field found = this.FIELD_MAP.get(field);
+        if (Objects.isNull(found)) {
+            return null;
+        } else {
+            return found;
+        }
     }
 
     private String getTable(final String field) {
