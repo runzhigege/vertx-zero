@@ -281,6 +281,7 @@ public class JooqCond {
              */
             final String switchedField;
             final Condition item;
+
             if (Objects.nonNull(fnAnalyze)) {
                 final Field metaField = fnAnalyze.apply(targetField);
                 Fn.outUp(Objects.isNull(metaField), LOGGER, JooqArgumentException.class, JooqCond.class, metaField);

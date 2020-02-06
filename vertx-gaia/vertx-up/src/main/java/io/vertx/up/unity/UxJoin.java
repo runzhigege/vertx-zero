@@ -51,7 +51,7 @@ public class UxJoin {
         if (Objects.isNull(this.merged)) {
             this.merged = new Mojo();
         }
-        this.merged.put(created.getInAll());
+        this.merged.put(created.getInColumn());
         return this;
     }
 
