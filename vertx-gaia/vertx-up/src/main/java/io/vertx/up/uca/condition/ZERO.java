@@ -56,6 +56,7 @@ interface Pool {
         {
             this.put(Inquiry.Op.LT, Ut.instance(TermDLt.class));
             this.put(Inquiry.Op.GT, Ut.instance(TermDGt.class));
+            this.put(Inquiry.Op.EQ, Ut.instance(TermDEq.class));
         }
     };
 }
