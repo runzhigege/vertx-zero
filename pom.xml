@@ -74,11 +74,11 @@
         <jooq.version>3.10.8</jooq.version>
         <vertx.jooq.version>2.4.1</vertx.jooq.version>
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
-        <vertx.jooq.code.version>5.0.0</vertx.jooq.code.version>
+        <vertx.jooq.code.version>5.0.1</vertx.jooq.code.version>
         <mysql.version>8.0.19</mysql.version>
         <!-- Java Reflection -->
         <reflect.asm.version>1.11.9</reflect.asm.version>
-        <lombok.version>1.18.10</lombok.version>
+        <lombok.version>1.18.12</lombok.version>
         <asm.version>7.3.1</asm.version>
         <cglib.version>3.3.0</cglib.version>
         <reflection.version>0.9.12</reflection.version>
