@@ -42,7 +42,7 @@ class JooqAnalyzer {
     private transient Mojo pojo;
     private transient String pojoFile;
     private transient String tableName;
-    private transient ConcurrentMap<String, Field> tableFields = new ConcurrentHashMap<>();
+    private transient ConcurrentMap<String, Field> fieldMap = new ConcurrentHashMap<>();
 
     private JooqAnalyzer(final VertxDAO vertxDAO) {
         this.vertxDAO = Fn.pool(DAO_POOL, vertxDAO.hashCode(), () -> vertxDAO);
@@ -63,9 +63,18 @@ class JooqAnalyzer {
             final Field column = columns[idx];
             final java.lang.reflect.Field field = fields[idx];
             /*
-             * Help for join
+             * Help for join & jooq
+             * 1) tableFields:
+             *    pojo field = column ( Field )
+             *
+             * 2) mapping:
+             *    pojo field = column name
+             *
+             * 3) revert:
+             *    column name = pojo field
+             *
              */
-            this.tableFields.put(field.getName(), column);
+            this.fieldMap.put(field.getName(), column);
             this.mapping.put(field.getName(), column.getName());
             this.revert.put(column.getName(), field.getName());
         }
@@ -82,52 +91,115 @@ class JooqAnalyzer {
     private String seekColumn(final String field) {
         String targetField;
         if (null == this.pojo) {
+            /*
+             * The mapping is
+             * field = column here
+             */
             if (this.mapping.values().contains(field)) {
-                // 1.1 No Mojo bind, find column first
+                /*
+                 * it means that you could get `Column` information here
+                 *
+                 * Situation 1:
+                 * Input `field` is column field name directly, it means that the
+                 * mapping contains `field` in value. hit target column directly here, in this kind of
+                 * situation, the `field` is COLUMN
+                 *
+                 * COLUMN is `Jooq` needed
+                 */
                 targetField = field;
             } else {
-                // 1.2 field does not exist in table columns
-                // consider field as field
+                /*
+                 * The field is not in `COLUMN` value set
+                 *
+                 * it means that `field` is field, not column here,
+                 * Situation 2:
+                 * Input `field` is not column field, and we must convert field to column
+                 * instead of `field` here.
+                 */
                 targetField = this.mapping.get(field);
             }
         } else {
-            if (this.pojo.getInAll().containsValue(field)) {
-                // 2.1. Mojo bind, find column first
-                targetField = field;
+            /*
+             * The argument `field` is input field.
+             *
+             * key = input field
+             * This key is before `pojo file` here, it could let you convert field
+             *
+             * value = pojo actual field here
+             * This value is after `pojo file` here, it could let you get actula pojo field
+             */
+            final ConcurrentMap<String, String> inColumnMapping = this.pojo.getInColumn();
+            final ConcurrentMap<String, String> inMapping = this.pojo.getIn();
+            if (inMapping.containsKey(field)) {
+                /*
+                 * field = actualField = column
+                 */
+                final String actualField = inMapping.get(field);
+                /*
+                 * The system must get column by outMapping here
+                 */
+                final String columnName = inColumnMapping.get(actualField);
+                if (Objects.isNull(columnName)) {
+                    /*
+                     * Not column
+                     */
+                    targetField = field;
+                } else {
+                    /*
+                     * Found correct column here.
+                     */
+                    targetField = columnName;
+                }
             } else {
-                // 2.2. Mojo bind, consider field as param field first
-                targetField = this.pojo.getIn().get(field);
-                if (null == targetField) {
-                    // 2.2.1. If target field is null, consider field as pojo field
+                /*
+                 * field ( actualField ) = column
+                 */
+                /*
+                 * The system must get column by outMapping here
+                 */
+                final String columnName = inColumnMapping.get(field);
+                if (Objects.isNull(columnName)) {
+                    /*
+                     * Found correct column here.
+                     */
+                    targetField = columnName;
+                } else {
+                    /*
+                     * Lookup continue here.
+                     */
                     targetField = field;
                 }
-                // 2.3. Find column
-                targetField = this.mapping.get(targetField);
             }
         }
         return targetField;
     }
 
     ConcurrentMap<String, Field> getColumns() {
-        return this.tableFields;
+        return this.fieldMap;
     }
 
     Field getColumn(final String field) {
-        String targetField = seekColumn(field);
-        Fn.outUp(null == targetField, LOGGER,
+        String columnField = seekColumn(field);
+        Fn.outUp(null == columnField, LOGGER,
                 JooqFieldMissingException.class, UxJooq.class, field, Ut.field(this.vertxDAO, "type"));
-        LOGGER.debug(Info.JOOQ_FIELD, field, targetField);
+        LOGGER.debug(Info.JOOQ_FIELD, field, columnField);
         /*
          * Old code for field construct, following code will caurse Type/DataType missing
          * DSL.field(DSL.name(targetField));
          * 1) Extract from tableFields first
          * 2) Extract by construct ( Type / DataType ) will missing
          */
-        Field original = this.tableFields.get(field);
-        if (Objects.isNull(original)) {
-            original = DSL.field(DSL.name(targetField));
+        Field found;
+        if (field.equals(columnField)) {
+            found = this.fieldMap.get(field);
+        } else {
+            final String actualField = this.revert.get(columnField);
+            found = this.fieldMap.get(actualField);
         }
-        return original;
+        if (Objects.isNull(found)) {
+            found = DSL.field(DSL.name(columnField));
+        }
+        return found;
     }
 
     void bind(final String pojo, final Class<?> clazz) {
@@ -138,9 +210,9 @@ class JooqAnalyzer {
             LOGGER.debug(Info.JOOQ_BIND, pojo, clazz);
             this.pojoFile = pojo;
             this.pojo = Mirror.create(UxJooq.class).mount(pojo)
-                    .mojo().put(this.mapping);
+                    .mojo().bindColumn(this.mapping);
             // When bind pojo, the system will analyze columns
-            LOGGER.debug(Info.JOOQ_MOJO, this.pojo.getIn(), this.pojo.getInAll());
+            LOGGER.debug(Info.JOOQ_MOJO, this.pojo.getIn(), this.pojo.getInColumn());
         }
     }
 

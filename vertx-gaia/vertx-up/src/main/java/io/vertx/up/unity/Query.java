@@ -45,7 +45,7 @@ class Query {
 
     private static JsonArray sorter(final JsonArray sorter, final Mojo mojo) {
         final JsonArray sorters = new JsonArray();
-        final ConcurrentMap<String, String> mapping = mojo.getInAll();
+        final ConcurrentMap<String, String> mapping = mojo.getIn();
         Ut.itJArray(sorter, String.class, (item, index) -> {
             final String key = item.contains(Strings.COMMA) ? item.split(Strings.COMMA)[0] : item;
             if (mapping.containsKey(key)) {
@@ -64,7 +64,7 @@ class Query {
 
     static JsonObject criteria(final JsonObject criteria, final Mojo mojo) {
         final JsonObject criterias = new JsonObject();
-        final ConcurrentMap<String, String> mapping = mojo.getInAll();
+        final ConcurrentMap<String, String> mapping = mojo.getIn();
         for (final String field : criteria.fieldNames()) {
             // Filter processed
             final String key = field.contains(Strings.COMMA) ? field.split(Strings.COMMA)[0] : field;

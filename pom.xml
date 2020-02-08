@@ -59,8 +59,8 @@
         <encoding>UTF-8</encoding>
         <jcabi.version>0.22.6</jcabi.version>
         <!-- Vertx 3.8.0, For testing -->
-        <vertx.version>3.8.4</vertx.version>
-        <stack.version>3.8.4</stack.version>
+        <vertx.version>3.8.5</vertx.version>
+        <stack.version>3.8.5</stack.version>
 
         <jackson.version>2.9.10</jackson.version>
         <jackson.databind.version>2.9.10.1</jackson.databind.version>
@@ -74,18 +74,18 @@
         <jooq.version>3.10.8</jooq.version>
         <vertx.jooq.version>2.4.1</vertx.jooq.version>
         <vertx.jooq.async.version>0.4</vertx.jooq.async.version>
-        <vertx.jooq.code.version>4.2.0</vertx.jooq.code.version>
+        <vertx.jooq.code.version>5.0.1</vertx.jooq.code.version>
         <mysql.version>8.0.19</mysql.version>
         <!-- Java Reflection -->
         <reflect.asm.version>1.11.9</reflect.asm.version>
-        <lombok.version>1.18.10</lombok.version>
+        <lombok.version>1.18.12</lombok.version>
         <asm.version>7.3.1</asm.version>
         <cglib.version>3.3.0</cglib.version>
         <reflection.version>0.9.12</reflection.version>
         <!-- Etcd -->
         <etcd.version>2.17.0</etcd.version>
         <!-- Bean Validation -->
-        <hibernate.validator.version>6.1.1.Final</hibernate.validator.version>
+        <hibernate.validator.version>6.1.2.Final</hibernate.validator.version>
 
         <jwt.version>3.9.0</jwt.version>
         <jetbrains.version>18.0.0</jetbrains.version>
@@ -110,9 +110,9 @@
         <!-- Liquibase -->
         <liquibase.version>3.8.5</liquibase.version>
         <!-- Rpc -->
-        <protobuf.version>3.11.1</protobuf.version>
+        <protobuf.version>3.11.3</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
-        <grpc.version>1.26.0</grpc.version>
+        <grpc.version>1.27.0</grpc.version>
         <!-- Yaml -->
         <yaml.version>1.25</yaml.version>
         <!-- Vert.x Addition -->

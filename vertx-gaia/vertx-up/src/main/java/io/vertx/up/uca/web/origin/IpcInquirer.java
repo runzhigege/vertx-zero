@@ -64,7 +64,7 @@ public class IpcInquirer implements Inquirer<ConcurrentMap<String, Method>> {
         final Annotation annotation = method.getAnnotation(Ipc.class);
         final String value = Ut.invoke(annotation, "value");
         if (!Ut.isNil(value)) {
-            // Arguments specification: Non Start Node
+            // TypedArgument specification: Non Start Node
             // This specification is only for continue node
             final Class<?>[] argTypes = method.getParameterTypes();
             Fn.outUp(1 != argTypes.length || Envelop.class != argTypes[0], LOGGER,

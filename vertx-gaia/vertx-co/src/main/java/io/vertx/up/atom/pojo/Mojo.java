@@ -40,12 +40,29 @@ public class Mojo implements Serializable {
         this.type = type;
     }
 
+    /*
+     * field -> outField
+     * 1) field is declared in `Pojo` class
+     * 2) outField is not declared but often is provided in input `Json`
+     *
+     * Example:
+     *
+     * zSigma -> sigma
+     */
     public ConcurrentMap<String, String> getOut() {
         // Fix no mapping issue for empty mapping conversion.
         Fn.safeSemi(null == this.config, LOGGER, () -> this.config = new ConcurrentHashMap<>());
         return this.config;
     }
 
+    /*
+     * outField -> field
+     * Reverted into `getOut`, it does not store
+     *
+     * Example:
+     *
+     * sigma -> zSigma
+     */
     @SuppressWarnings("all")
     public ConcurrentMap<String, String> getIn() {
         Fn.safeSemi(config.keySet().size() != config.values().size(), LOGGER,
@@ -57,28 +74,50 @@ public class Mojo implements Serializable {
         return mapper;
     }
 
-    public ConcurrentMap<String, String> getInAll() {
-        if (this.columns.isEmpty()) {
-            this.columns.putAll(this.getIn());
-        }
+    /*
+     * It's for input
+     * Column -> zSigma
+     */
+    public ConcurrentMap<String, String> getInColumn() {
         return this.columns;
     }
 
-    public ConcurrentMap<String, String> getOutAll() {
+    /*
+     * It's for output
+     * Column -> sigma
+     */
+    public ConcurrentMap<String, String> getOutColumn() {
         final ConcurrentMap<String, String> revert = new ConcurrentHashMap<>();
         if (!this.columns.isEmpty()) {
-            this.columns.forEach((key, value) -> revert.put(value, key));
+            final ConcurrentMap<String, String> fieldMap = this.getIn();
+            /*
+             * Actual Field -> Column
+             */
+            this.columns.forEach((key, value) -> {
+                final String outField = fieldMap.get(key);
+                if (Objects.nonNull(outField)) {
+                    revert.put(value, outField);
+                }
+            });
         }
         return revert;
     }
 
-    public Mojo put(final ConcurrentMap<String, String> columns) {
-        if (this.columns.isEmpty()) {
-            this.columns.putAll(this.getIn());
-        }
+    /*
+     * Replace column mapping here, this method must be called
+     * or
+     * this.columns are invalid
+     */
+    public Mojo bindColumn(final ConcurrentMap<String, String> columns) {
         if (null != columns && !columns.isEmpty()) {
             this.columns.putAll(columns);
         }
+        return this;
+    }
+
+    public Mojo bind(final Mojo mojo) {
+        this.type = mojo.type;
+        this.config.putAll(mojo.config);
         return this;
     }
 
@@ -96,7 +135,24 @@ public class Mojo implements Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(this.type);
+    }
+
+    @Override
+    public String toString() {
+        /*
+         *
+         */
+        final StringBuilder report = new StringBuilder();
+        report.append("==> Column: \n");
+        this.columns.forEach((column, field) -> report
+                .append(column).append('=').append(field).append('\n'));
+        /*
+         *
+         */
+        report.append("==> Pojo: \n");
+        this.config.forEach((actual, input) -> report
+                .append(actual).append('=').append(input).append('\n'));
+        return report.toString();
     }
 }

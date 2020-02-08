@@ -1,13 +1,13 @@
 package io.vertx.up.uca.micro.invoke;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.auth.User;
 import io.vertx.ext.web.Session;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.eon.Values;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.runtime.ZeroSerializer;
+import io.vertx.up.uca.serialization.TypedArgument;
 import io.vertx.up.util.Ut;
 import io.vertx.zero.exception.AsyncSignatureException;
 import io.vertx.zero.exception.WorkerArgumentException;
@@ -35,7 +35,7 @@ public class InvokerUtil {
     }
 
     /**
-     * Arguments verification
+     * TypedArgument verification
      * Public for replacing duplicated code
      *
      * @param method checked method.
@@ -105,29 +105,44 @@ public class InvokerUtil {
              * Multi calling for Session type
              */
             final Class<?> type = types[idx];
-            if (type == User.class) {
-                /*
-                 * Found `User` type
-                 * Adjust idx  - 1 to move argument index to
-                 * left.
-                 * {
-                 *    "0": "key",
-                 *    "1": "type",
-                 * }
-                 * (String,User,String) -> (idx, current), (0, 0), (1, ?), (2, 1)
-                 *                                               adjust = 1
-                 *
-                 * (User, String, String) -> (idx, current), (0, ?), (1, 0), (2, 1)
-                 *                                          adjust = 1
-                 *
-                 * (String, String,User) -> (idx, current), (0, 0), (1, 1), (2, ?)
-                 *                                                          adjust = 1
-                 */
-                arguments[idx] = envelop.user();
-                adjust += 1;
-            } else {
+            /*
+             * Found typed here
+             * Adjust idx  - 1 to move argument index to
+             * left.
+             * {
+             *    "0": "key",
+             *    "1": "type",
+             * }
+             * (String,<T>,String) -> (idx, current), (0, 0), (1, ?), (2, 1)
+             *                                               adjust = 1
+             *
+             * (<T>, String, String) -> (idx, current), (0, ?), (1, 0), (2, 1)
+             *                                          adjust = 1
+             *
+             * (String, String,<T>) -> (idx, current), (0, 0), (1, 1), (2, ?)
+             *                                                          adjust = 1
+             */
+            final Object analyzed = TypedArgument.analyze(envelop, type);
+            if (Objects.isNull(analyzed)) {
                 final int current = idx - adjust;
-                arguments[idx] = getValue(type, envelop, () -> json.getValue(String.valueOf(current)));
+                final Object value = json.getValue(String.valueOf(current));
+                if (Objects.isNull(value)) {
+                    /*
+                     * Input is null
+                     */
+                    arguments[idx] = null;
+                } else {
+                    /*
+                     * Serialization
+                     */
+                    arguments[idx] = ZeroSerializer.getValue(type, value.toString());
+                }
+            } else {
+                /*
+                 * Typed successfully
+                 */
+                arguments[idx] = analyzed;
+                adjust += 1;
             }
         }
         return Ut.invoke(proxy, method.getName(), arguments);

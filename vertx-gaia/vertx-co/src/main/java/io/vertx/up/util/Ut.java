@@ -568,6 +568,10 @@ public final class Ut {
         return Apply.applyField(input, field);
     }
 
+    public static <T, V> Consumer<JsonObject> applyField(final String field, final Function<V, T> function) {
+        return Apply.applyField(field, function);
+    }
+
     public static <T> Function<T, Future<JsonObject>> applyMerge(final JsonObject input) {
         return Apply.applyField(input, null);
     }
@@ -1125,7 +1129,6 @@ public final class Ut {
     public static List<String> inRange(final String from, final String to) {
         return Period.inRange(from, to);
     }
-
 
     /*
      * Mapping operation
