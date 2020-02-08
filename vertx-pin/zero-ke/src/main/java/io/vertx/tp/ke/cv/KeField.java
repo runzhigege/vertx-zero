@@ -152,4 +152,9 @@ public interface KeField {
         String COLUMNS = "columns";
         String WINDOW = "window";
     }
+
+    interface Modeling {
+        String KEYS = "keys";
+        String FIELDS = "fields";
+    }
 }
