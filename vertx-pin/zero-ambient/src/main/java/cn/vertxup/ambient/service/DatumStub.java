@@ -8,6 +8,8 @@ public interface DatumStub {
 
     Future<JsonArray> tabulars(String appId, JsonArray types);
 
+    Future<JsonArray> tabularsBySigma(String sigma, JsonArray types);
+
     Future<JsonArray> tabulars(String appId, String type);
 
     Future<JsonObject> tabular(String appId, String type, String code);

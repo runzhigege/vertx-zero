@@ -23,6 +23,11 @@ public class DatumService implements DatumStub {
     }
 
     @Override
+    public Future<JsonArray> tabularsBySigma(final String sigma, final JsonArray types) {
+        return this.fetchArray(XTabularDao.class, At.filtersSigma(sigma, types, null));
+    }
+
+    @Override
     public Future<JsonArray> categories(final String appId, final String type) {
         return this.fetchArray(XCategoryDao.class, At.filters(appId, type, null));
     }

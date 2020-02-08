@@ -15,7 +15,7 @@ public class IpcAim extends BaseAim implements Aim<RoutingContext> {
     public Handler<RoutingContext> attack(final Event event) {
         return Fn.getNull(() -> (context) -> this.exec(() -> {
             /*
-             * Build Arguments by java reflection metadata definition
+             * Build TypedArgument by java reflection metadata definition
              */
             final Object[] arguments = this.buildArgs(context, event);
             /*

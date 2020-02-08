@@ -24,7 +24,7 @@ public class AsyncInvoker extends AbstractInvoker {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("all")
     public void invoke(final Object proxy,
                        final Method method,
                        final Message<Envelop> message) {
@@ -56,7 +56,7 @@ public class AsyncInvoker extends AbstractInvoker {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("all")
     public void next(final Object proxy,
                      final Method method,
                      final Message<Envelop> message,

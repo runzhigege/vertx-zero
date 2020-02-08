@@ -5,10 +5,24 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 import java.util.Objects;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 class Apply {
+
+    @SuppressWarnings("all")
+    static <T, V> Consumer<JsonObject> applyField(final String field, final Function<V, T> function) {
+        return (json) -> {
+            json = Define.sureJObject(json);
+            if (json.containsKey(field)) {
+                final Object value = json.getValue(field);
+                if (Objects.nonNull(value)) {
+                    function.apply((V) value);
+                }
+            }
+        };
+    }
 
     static <T> Function<T, Future<JsonObject>> applyField(final JsonObject input, final String field) {
         return data -> {

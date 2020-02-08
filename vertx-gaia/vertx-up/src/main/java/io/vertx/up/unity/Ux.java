@@ -23,6 +23,7 @@ import io.vertx.up.commune.config.Dict;
 import io.vertx.up.commune.config.DictEpsilon;
 import io.vertx.up.eon.Constants;
 import io.vertx.up.eon.Strings;
+import io.vertx.up.eon.em.ChangeFlag;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.fn.wait.Log;
@@ -124,6 +125,7 @@ public final class Ux {
      * 1) envelop: ( Get different Envelop )
      * 2) future: ( Wrapper Future.successedFuture / Future.failureFuture ) at same time
      * 3) handler: ( Handler<AsyncResult<T>> )
+     * 4) compare: ( Compare two object )
      */
     public static Envelop envelop(final Class<? extends WebException> clazz, final Object... args) {
         return To.toEnvelop(clazz, args);
@@ -141,8 +143,20 @@ public final class Ux {
         return To.toFuture(entity);
     }
 
+    public static <T> Future<T> future() {
+        return To.toFuture(null);
+    }
+
     public static <T> Handler<AsyncResult<T>> handler(final Message<Envelop> message) {
         return Web.toHandler(message);
+    }
+
+    public static <T, R> ConcurrentMap<ChangeFlag, List<T>> compare(final List<T> original, final List<T> current, final Function<T, R> fnValue, final String mergedPojo) {
+        return Comparer.compare(original, current, fnValue, mergedPojo);
+    }
+
+    public static <T, R> ConcurrentMap<ChangeFlag, List<T>> compare(final List<T> original, final List<T> current, final Function<T, R> fnValue) {
+        return Comparer.compare(original, current, fnValue, Strings.EMPTY);
     }
 
     /*
@@ -225,6 +239,10 @@ public final class Ux {
      * 2) thenCombineArray
      * 3) thenCompress
      * 4) thenError
+     *
+     * Additional methods for generic T here
+     * 1) thenCombineT
+     * 2) thenCombineArrayT
      */
 
     /**
@@ -273,6 +291,10 @@ public final class Ux {
         return Combine.thenCombine(futures);
     }
 
+    public static <T> Future<List<T>> thenCombineT(final List<Future<T>> futures) {
+        return CombineT.thenCombine(futures);
+    }
+
     public static Future<JsonArray> thenCombine(final JsonArray input, final Function<JsonObject, Future<JsonObject>> function) {
         final List<Future<JsonObject>> futures = new ArrayList<>();
         Ut.itJArray(input).map(function).forEach(futures::add);
@@ -283,8 +305,15 @@ public final class Ux {
         return Combine.thenCombine(futureMap);
     }
 
+    /*
+     * Specific combine method here.
+     */
     public static Future<JsonArray> thenCombineArray(final List<Future<JsonArray>> futures) {
         return Combine.thenCombineArray(futures);
+    }
+
+    public static <T> Future<List<T>> thenCombineArrayT(final List<Future<List<T>>> futures) {
+        return CombineT.thenCombineArray(futures);
     }
 
     public static Future<ConcurrentMap<String, JsonArray>> thenCompress(final List<Future<ConcurrentMap<String, JsonArray>>> futures) {

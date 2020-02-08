@@ -60,7 +60,7 @@ class JooqResult {
                     String resultField = fields.get(field.getName());
                     if (Ut.notNil(resultField) && !data.containsKey(resultField)) {
                         if (Objects.nonNull(mojo)) {
-                            final String hitField = mojo.getOutAll().get(resultField);
+                            final String hitField = mojo.getOut().get(resultField);
                             if (Ut.notNil(hitField)) {
                                 resultField = hitField;
                             }
