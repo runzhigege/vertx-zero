@@ -137,7 +137,6 @@
         <aspectj.version>1.9.5</aspectj.version>
         <!-- Logging -->
         <log4j2.version>2.13.0</log4j2.version>
-        <log4j.version>1.2.17</log4j.version>
         <logback.version>1.2.3</logback.version>
         <logback.cal10n.version>0.8.1</logback.cal10n.version>
         <slf4j.version>1.7.25</slf4j.version>
@@ -528,12 +527,6 @@
                 <groupId>io.netty</groupId>
                 <artifactId>netty-tcnative-boringssl-static</artifactId>
                 <version>${netty.tcnative.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/log4j/log4j -->
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>${log4j.version}</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
             <dependency>
