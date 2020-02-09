@@ -5,7 +5,6 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.RunTestOnContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
-import io.vertx.tp.plugin.jooq.JooqInfix;
 import io.vertx.up.atom.Kv;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
@@ -37,10 +36,6 @@ import java.util.function.Supplier;
  */
 @RunWith(VertxUnitRunner.class)
 public abstract class JooqBase extends AsyncBase {
-
-    static {
-        JooqInfix.init(VERTX);
-    }
 
     @Rule
     public final RunTestOnContext rule = new RunTestOnContext(OPTIONS);
