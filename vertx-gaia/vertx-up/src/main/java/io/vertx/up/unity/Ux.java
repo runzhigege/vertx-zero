@@ -99,8 +99,16 @@ public final class Ux {
         return From.fromJson(data, clazz, "");
     }
 
+    public static <T> List<T> fromJson(final JsonArray array, final Class<T> clazz) {
+        return From.fromJson(array, clazz, "");
+    }
+
     public static <T> T fromJson(final JsonObject data, final Class<T> clazz, final String pojo) {
         return From.fromJson(data, clazz, pojo);
+    }
+
+    public static <T> List<T> fromJson(final JsonArray array, final Class<T> clazz, final String pojo) {
+        return From.fromJson(array, clazz, pojo);
     }
 
     public static JsonObject fromJson(final JsonObject data, final String pojo) {
