@@ -84,6 +84,15 @@ class To {
         return array;
     }
 
+    static <T> List<JsonObject> toJList(
+            final List<T> list,
+            final String pojo
+    ) {
+        final List<JsonObject> jlist = new ArrayList<>();
+        Ut.itJArray(toArray(list, pojo)).forEach(jlist::add);
+        return jlist;
+    }
+
     @SuppressWarnings("all")
     static <T> Envelop toEnvelop(
             final T entity
