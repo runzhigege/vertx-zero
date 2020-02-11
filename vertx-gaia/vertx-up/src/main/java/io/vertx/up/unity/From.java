@@ -1,10 +1,15 @@
 package io.vertx.up.unity;
 
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.pojo.Mirror;
 import io.vertx.up.atom.pojo.Mojo;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.util.Ut;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 class From {
 
@@ -17,6 +22,16 @@ class From {
                         .type(clazz)
                         .from()
                         .get());
+    }
+
+    @SuppressWarnings("all")
+    static <T> List<T> fromJson(final JsonArray data, final Class<?> clazz, final String pojo) {
+        final List<T> result = new ArrayList<>();
+        Ut.itJArray(data).map(each -> fromJson(each, clazz, pojo))
+                .filter(Objects::nonNull)
+                .map(item -> (T) item)
+                .forEach(result::add);
+        return result;
     }
 
     static JsonObject fromJson(final JsonObject criteria, final String pojo) {
