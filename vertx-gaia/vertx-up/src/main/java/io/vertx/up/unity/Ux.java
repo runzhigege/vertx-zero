@@ -99,8 +99,16 @@ public final class Ux {
         return From.fromJson(data, clazz, "");
     }
 
+    public static <T> List<T> fromJson(final JsonArray array, final Class<T> clazz) {
+        return From.fromJson(array, clazz, "");
+    }
+
     public static <T> T fromJson(final JsonObject data, final Class<T> clazz, final String pojo) {
         return From.fromJson(data, clazz, pojo);
+    }
+
+    public static <T> List<T> fromJson(final JsonArray array, final Class<T> clazz, final String pojo) {
+        return From.fromJson(array, clazz, pojo);
     }
 
     public static JsonObject fromJson(final JsonObject data, final String pojo) {
@@ -182,12 +190,20 @@ public final class Ux {
         return Future.succeededFuture(To.toArray(item, ""));
     }
 
+    public static <T> Future<List<JsonObject>> fnJList(final List<T> item) {
+        return Future.succeededFuture(To.toJList(item, ""));
+    }
+
     public static <T> Function<T, Future<JsonObject>> fnJObject(final String pojo) {
         return item -> Future.succeededFuture(To.toJson(item, pojo));
     }
 
     public static <T> Function<List<T>, Future<JsonArray>> fnJArray(final String pojo) {
         return list -> Future.succeededFuture(To.toArray(list, pojo));
+    }
+
+    public static <T> Function<List<T>, Future<List<JsonObject>>> fnJList(final String pojo) {
+        return list -> Future.succeededFuture(To.toJList(list, pojo));
     }
 
     public static <T> Future<ConcurrentMap<String, JsonArray>> fnJMap(final List<T> item, final String field) {
