@@ -255,6 +255,7 @@ public final class Ux {
      * 2) thenCombineArray
      * 3) thenCompress
      * 4) thenError
+     * 5) thenErrorSigma
      *
      * Additional methods for generic T here
      * 1) thenCombineT
@@ -346,6 +347,10 @@ public final class Ux {
      */
     public static <T> Future<T> thenError(final Class<? extends WebException> clazz, final Object... args) {
         return Combine.thenError(clazz, args);
+    }
+
+    public static <T> Future<T> thenErrorSigma(final Class<?> clazz, final String sigma, final Supplier<Future<T>> supplier) {
+        return Combine.thenErrorSigma(clazz, sigma, supplier);
     }
 
     // ---------------------- Request Data Extract --------------------------
