@@ -30,6 +30,8 @@ import io.vertx.up.fn.wait.Log;
 import io.vertx.up.util.Ut;
 import org.jooq.Condition;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
@@ -171,8 +173,9 @@ public final class Ux {
      * Flatting method for `Function Reference`
      * 1) fnRpc
      * 2) fnJObject / fnJArray
-     * 3) fnJMap
-     * 4) fnJMapType
+     * 3) fnJList
+     * 4) fnJMap
+     * 5) fnJMapType
      */
     public static Future<JsonObject> fnRpc(final JsonArray array) {
         return UxRpc.fnRpc(array);
@@ -255,6 +258,7 @@ public final class Ux {
      * 2) thenCombineArray
      * 3) thenCompress
      * 4) thenError
+     * 5) thenErrorSigma
      *
      * Additional methods for generic T here
      * 1) thenCombineT
@@ -346,6 +350,22 @@ public final class Ux {
      */
     public static <T> Future<T> thenError(final Class<? extends WebException> clazz, final Object... args) {
         return Combine.thenError(clazz, args);
+    }
+
+    public static <T> Future<T> thenErrorSigma(final Class<?> clazz, final String sigma, final Supplier<Future<T>> supplier) {
+        return Combine.thenErrorSigma(clazz, sigma, supplier);
+    }
+
+    /*
+     * Query Engine method
+     * 1) whereDay
+     */
+    public static JsonObject whereDay(final JsonObject filters, final String field, final Instant instant) {
+        return Where.whereDay(filters, field, instant);
+    }
+
+    public static JsonObject whereDay(final JsonObject filters, final String field, final LocalDateTime instant) {
+        return Where.whereDay(filters, field, Ut.parse(instant).toInstant());
     }
 
     // ---------------------- Request Data Extract --------------------------

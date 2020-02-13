@@ -35,7 +35,7 @@ public class EIdentity extends TableImpl<EIdentityRecord> {
      * The reference instance of <code>DB_ETERNAL.E_IDENTITY</code>
      */
     public static final EIdentity E_IDENTITY = new EIdentity();
-    private static final long serialVersionUID = -1274077255;
+    private static final long serialVersionUID = -532965889;
     /**
      * The column <code>DB_ETERNAL.E_IDENTITY.KEY</code>. 「key」- 身份主键
      */
@@ -251,7 +251,7 @@ public class EIdentity extends TableImpl<EIdentityRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.E_IDENTITY_IDC_TYPE, Indexes.E_IDENTITY_PRIMARY);
+        return Arrays.<Index>asList(Indexes.E_IDENTITY_PRIMARY, Indexes.E_IDENTITY_TYPE);
     }
 
     /**
@@ -267,7 +267,7 @@ public class EIdentity extends TableImpl<EIdentityRecord> {
      */
     @Override
     public List<UniqueKey<EIdentityRecord>> getKeys() {
-        return Arrays.<UniqueKey<EIdentityRecord>>asList(Keys.KEY_E_IDENTITY_PRIMARY, Keys.KEY_E_IDENTITY_IDC_TYPE);
+        return Arrays.<UniqueKey<EIdentityRecord>>asList(Keys.KEY_E_IDENTITY_PRIMARY, Keys.KEY_E_IDENTITY_TYPE);
     }
 
     /**

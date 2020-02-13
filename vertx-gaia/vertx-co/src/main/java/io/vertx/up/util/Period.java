@@ -312,27 +312,21 @@ final class Period {
         }, literal);
     }
 
-    static List<String> inRange(final String from, final String to) {
-        final List<String> result = new ArrayList<>();
-        LocalDate begin = LocalDate.parse(from);
-        result.add(begin.format(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US)));
-        final LocalDate end = LocalDate.parse(to);
-        while (end.isAfter(begin)) {
-            begin = begin.plusDays(1);
-            result.add(begin.format(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US)));
-        }
-        return result;
-    }
-
-
     static void itDay(final String from, final String to,
                       final Consumer<Date> consumer) {
-        LocalDateTime begin = toDateTime(parseFull(from));
+        final LocalDateTime begin = toDateTime(parseFull(from));
         final LocalDateTime end = toDateTime(parseFull(to));
+        itDay(begin, end, consumer);
+    }
+
+    static void itDay(final LocalDateTime from, final LocalDateTime end,
+                      final Consumer<Date> consumer) {
+        LocalDate beginDay = from.toLocalDate();
+        final LocalDate endDay = end.toLocalDate();
         do {
-            consumer.accept(parse(begin));
-            begin = begin.plusDays(1);
-        } while (end.isAfter(begin));
+            consumer.accept(parse(beginDay));
+            beginDay = beginDay.plusDays(1);
+        } while (endDay.isAfter(beginDay));
     }
 
     static void itWeek(final String from, final String to,

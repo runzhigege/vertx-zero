@@ -7,6 +7,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Values;
 import io.vertx.up.exception.WebException;
+import io.vertx.up.exception.web._400SigmaMissingException;
 import io.vertx.up.util.Ut;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 @SuppressWarnings("all")
 class Combine {
@@ -118,6 +120,15 @@ class Combine {
     static <T> Future<T> thenError(final Class<? extends WebException> clazz, final Object... args) {
         final WebException error = To.toError(clazz, args);
         return Future.failedFuture(error);
+    }
+
+    static <T> Future<T> thenErrorSigma(final Class<?> clazz, final String sigma, final Supplier<Future<T>> supplier) {
+        if (Ut.isNil(sigma)) {
+            final WebException error = new _400SigmaMissingException(clazz);
+            return Future.failedFuture(error);
+        } else {
+            return supplier.get();
+        }
     }
 
     /*

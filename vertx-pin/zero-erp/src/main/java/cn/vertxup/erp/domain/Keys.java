@@ -67,7 +67,7 @@ public class Keys {
     public static final UniqueKey<EEmployeeRecord> KEY_E_EMPLOYEE_PRIMARY = UniqueKeys0.KEY_E_EMPLOYEE_PRIMARY;
     public static final UniqueKey<EEmployeeRecord> KEY_E_EMPLOYEE_WORK_NUMBER = UniqueKeys0.KEY_E_EMPLOYEE_WORK_NUMBER;
     public static final UniqueKey<EIdentityRecord> KEY_E_IDENTITY_PRIMARY = UniqueKeys0.KEY_E_IDENTITY_PRIMARY;
-    public static final UniqueKey<EIdentityRecord> KEY_E_IDENTITY_IDC_TYPE = UniqueKeys0.KEY_E_IDENTITY_IDC_TYPE;
+    public static final UniqueKey<EIdentityRecord> KEY_E_IDENTITY_TYPE = UniqueKeys0.KEY_E_IDENTITY_TYPE;
     public static final UniqueKey<ETeamRecord> KEY_E_TEAM_PRIMARY = UniqueKeys0.KEY_E_TEAM_PRIMARY;
     public static final UniqueKey<ETeamRecord> KEY_E_TEAM_NAME = UniqueKeys0.KEY_E_TEAM_NAME;
     public static final UniqueKey<ETeamRecord> KEY_E_TEAM_CODE = UniqueKeys0.KEY_E_TEAM_CODE;
@@ -99,7 +99,7 @@ public class Keys {
         public static final UniqueKey<EEmployeeRecord> KEY_E_EMPLOYEE_PRIMARY = Internal.createUniqueKey(EEmployee.E_EMPLOYEE, "KEY_E_EMPLOYEE_PRIMARY", EEmployee.E_EMPLOYEE.KEY);
         public static final UniqueKey<EEmployeeRecord> KEY_E_EMPLOYEE_WORK_NUMBER = Internal.createUniqueKey(EEmployee.E_EMPLOYEE, "KEY_E_EMPLOYEE_WORK_NUMBER", EEmployee.E_EMPLOYEE.WORK_NUMBER, EEmployee.E_EMPLOYEE.COMPANY_ID);
         public static final UniqueKey<EIdentityRecord> KEY_E_IDENTITY_PRIMARY = Internal.createUniqueKey(EIdentity.E_IDENTITY, "KEY_E_IDENTITY_PRIMARY", EIdentity.E_IDENTITY.KEY);
-        public static final UniqueKey<EIdentityRecord> KEY_E_IDENTITY_IDC_TYPE = Internal.createUniqueKey(EIdentity.E_IDENTITY, "KEY_E_IDENTITY_IDC_TYPE", EIdentity.E_IDENTITY.IDC_TYPE, EIdentity.E_IDENTITY.IDC_NUMBER);
+        public static final UniqueKey<EIdentityRecord> KEY_E_IDENTITY_TYPE = Internal.createUniqueKey(EIdentity.E_IDENTITY, "KEY_E_IDENTITY_TYPE", EIdentity.E_IDENTITY.TYPE, EIdentity.E_IDENTITY.IDC_TYPE, EIdentity.E_IDENTITY.IDC_NUMBER);
         public static final UniqueKey<ETeamRecord> KEY_E_TEAM_PRIMARY = Internal.createUniqueKey(ETeam.E_TEAM, "KEY_E_TEAM_PRIMARY", ETeam.E_TEAM.KEY);
         public static final UniqueKey<ETeamRecord> KEY_E_TEAM_NAME = Internal.createUniqueKey(ETeam.E_TEAM, "KEY_E_TEAM_NAME", ETeam.E_TEAM.NAME, ETeam.E_TEAM.DEPT_ID, ETeam.E_TEAM.TEAM_ID);
         public static final UniqueKey<ETeamRecord> KEY_E_TEAM_CODE = Internal.createUniqueKey(ETeam.E_TEAM, "KEY_E_TEAM_CODE", ETeam.E_TEAM.CODE, ETeam.E_TEAM.DEPT_ID);
