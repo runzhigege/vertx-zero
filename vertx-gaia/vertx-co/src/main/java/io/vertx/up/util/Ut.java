@@ -233,6 +233,10 @@ public final class Ut {
         Period.itDay(from, to, consumer);
     }
 
+    public static void itDay(final LocalDateTime from, final LocalDateTime to, final Consumer<Date> consumer) {
+        Period.itDay(from, to, consumer);
+    }
+
     public static void itWeek(final String from, final String to, final Consumer<Date> consumer) {
         Period.itWeek(from, to, consumer);
     }

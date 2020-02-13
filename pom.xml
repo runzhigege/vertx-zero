@@ -83,7 +83,7 @@
         <cglib.version>3.3.0</cglib.version>
         <reflection.version>0.9.12</reflection.version>
         <!-- Etcd -->
-        <etcd.version>2.17.0</etcd.version>
+        <etcd.version>2.18.0</etcd.version>
         <!-- Bean Validation -->
         <hibernate.validator.version>6.1.2.Final</hibernate.validator.version>
 

@@ -317,7 +317,7 @@ final class Period {
         LocalDate begin = LocalDate.parse(from);
         result.add(begin.format(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US)));
         final LocalDate end = LocalDate.parse(to);
-        while (end.isAfter(begin)) {
+        while (end.isEqual(begin)) {
             begin = begin.plusDays(1);
             result.add(begin.format(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.US)));
         }
@@ -327,12 +327,19 @@ final class Period {
 
     static void itDay(final String from, final String to,
                       final Consumer<Date> consumer) {
-        LocalDateTime begin = toDateTime(parseFull(from));
+        final LocalDateTime begin = toDateTime(parseFull(from));
         final LocalDateTime end = toDateTime(parseFull(to));
+        itDay(begin, end, consumer);
+    }
+
+    static void itDay(final LocalDateTime from, final LocalDateTime end,
+                      final Consumer<Date> consumer) {
+        LocalDate beginDay = from.toLocalDate();
+        final LocalDate endDay = end.toLocalDate();
         do {
-            consumer.accept(parse(begin));
-            begin = begin.plusDays(1);
-        } while (end.isAfter(begin));
+            consumer.accept(parse(beginDay));
+            beginDay = beginDay.plusDays(1);
+        } while (endDay.isEqual(beginDay));
     }
 
     static void itWeek(final String from, final String to,
@@ -342,7 +349,7 @@ final class Period {
         do {
             consumer.accept(parse(begin));
             begin = begin.plusWeeks(1);
-        } while (end.isAfter(begin));
+        } while (end.isEqual(begin));
     }
 
     static boolean equalDate(final Date left, final Date right) {
