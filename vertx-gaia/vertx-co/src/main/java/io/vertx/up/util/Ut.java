@@ -1135,14 +1135,6 @@ public final class Ut {
     }
 
     /*
-     * Range getting
-     * 1) inRange:  range data extraction
-     */
-    public static List<String> inRange(final String from, final String to) {
-        return Period.inRange(from, to);
-    }
-
-    /*
      * Mapping operation
      */
     public static Set<String> mapString(final JsonArray array, final String field) {
