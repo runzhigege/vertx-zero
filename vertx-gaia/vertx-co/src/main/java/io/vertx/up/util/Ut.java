@@ -132,6 +132,10 @@ public final class Ut {
         return Statute.zipper(Arrays.asList(object), keyFn, valueFn);
     }
 
+    public static <K, T, V> ConcurrentMap<K, V> elementZip(final ConcurrentMap<K, T> source, final ConcurrentMap<T, V> target) {
+        return Statute.zipper(source, target);
+    }
+
     public static JsonObject elementZip(final JsonArray array, final String field) {
         return Statute.zipper(array, field);
     }
@@ -146,6 +150,10 @@ public final class Ut {
 
     public static <K, V, E> ConcurrentMap<K, List<V>> elementGroup(final Collection<E> object, final Function<E, K> keyFn, final Function<E, V> valueFn) {
         return Statute.group(object, keyFn, valueFn);
+    }
+
+    public static <K, V> ConcurrentMap<K, V> elementGroup(final List<V> dataList, final Function<V, K> keyFunction) {
+        return Statute.group(dataList, keyFunction);
     }
 
     public static ConcurrentMap<String, JsonArray> elementGroup(final JsonArray source, final String field) {

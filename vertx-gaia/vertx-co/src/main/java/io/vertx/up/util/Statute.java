@@ -145,6 +145,14 @@ final class Statute {
         return ret;
     }
 
+    static <K, V> ConcurrentMap<K, V> group(final List<V> list, final Function<V, K> fnGroup) {
+        final ConcurrentMap<K, V> grouped = new ConcurrentHashMap<>();
+        if (Objects.nonNull(list)) {
+            list.forEach(each -> grouped.put(fnGroup.apply(each), each));
+        }
+        return grouped;
+    }
+
     static ConcurrentMap<String, JsonArray> group(final JsonArray source, final String field) {
         final ConcurrentMap<String, JsonArray> ret = new ConcurrentHashMap<>();
         if (Objects.nonNull(source) && !source.isEmpty()) {
@@ -171,6 +179,19 @@ final class Statute {
                     });
         }
         return ret;
+    }
+
+    static <K, T, V> ConcurrentMap<K, V> zipper(final ConcurrentMap<K, T> source, final ConcurrentMap<T, V> target) {
+        final ConcurrentMap<K, V> resultMap = new ConcurrentHashMap<>();
+        if (Objects.nonNull(source) && Objects.nonNull(target)) {
+            source.forEach((k, t) -> {
+                final V value = target.get(t);
+                if (Objects.nonNull(value)) {
+                    resultMap.put(k, value);
+                }
+            });
+        }
+        return resultMap;
     }
 
     static <F, S, T> List<T> zipper(final List<F> first, final List<S> second, final BiFunction<F, S, T> function) {
