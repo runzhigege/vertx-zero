@@ -8,6 +8,7 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /*
  * IntegrationRequest for api description
@@ -29,7 +30,7 @@ public class IntegrationRequest implements Serializable {
     private transient JsonObject headers = new JsonObject();
 
     public String getPath() {
-        return path;
+        return this.path;
     }
 
     public void setPath(final String path) {
@@ -37,7 +38,7 @@ public class IntegrationRequest implements Serializable {
     }
 
     public HttpMethod getMethod() {
-        return method;
+        return this.method;
     }
 
     public void setMethod(final HttpMethod method) {
@@ -45,10 +46,33 @@ public class IntegrationRequest implements Serializable {
     }
 
     public JsonObject getHeaders() {
-        return headers;
+        return this.headers;
     }
 
     public void setHeaders(final JsonObject headers) {
         this.headers = headers;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof IntegrationRequest)) return false;
+        final IntegrationRequest request = (IntegrationRequest) o;
+        return this.path.equals(request.path) &&
+                this.method == request.method;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.path, this.method);
+    }
+
+    @Override
+    public String toString() {
+        return "IntegrationRequest{" +
+                "path='" + this.path + '\'' +
+                ", method=" + this.method +
+                ", headers=" + this.headers +
+                '}';
     }
 }

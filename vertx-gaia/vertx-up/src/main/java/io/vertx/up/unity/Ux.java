@@ -197,6 +197,14 @@ public final class Ux {
         return Future.succeededFuture(To.toJList(item, ""));
     }
 
+    public static Future<JsonArray> fnJArray(final Record[] records) {
+        return Fn.getNull(Future.succeededFuture(new JsonArray()), () -> To.toFuture(To.toArray(records)), records);
+    }
+
+    public static Future<JsonObject> fnJObject(final Record record) {
+        return Fn.getNull(Future.succeededFuture(new JsonObject()), () -> To.toFuture(record.toJson()), record);
+    }
+
     public static <T> Function<T, Future<JsonObject>> fnJObject(final String pojo) {
         return item -> Future.succeededFuture(To.toJson(item, pojo));
     }

@@ -99,10 +99,10 @@ public class Integration implements Json, Serializable {
     }
 
     public String getProtocol() {
-        return protocol;
+        return this.protocol;
     }
 
-    public void setProtocol(String protocol) {
+    public void setProtocol(final String protocol) {
         this.protocol = protocol;
     }
 
