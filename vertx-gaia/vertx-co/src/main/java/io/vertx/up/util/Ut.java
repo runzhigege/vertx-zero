@@ -3,6 +3,7 @@ package io.vertx.up.util;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.vertx.config.ConfigStoreOptions;
 import io.vertx.core.Future;
+import io.vertx.core.MultiMap;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -905,6 +906,10 @@ public final class Ut {
     }
 
     public static JsonObject toJObject(final Map<String, Object> map) {
+        return To.toJObject(map);
+    }
+
+    public static JsonObject toJObject(final MultiMap map) {
         return To.toJObject(map);
     }
 

@@ -1,6 +1,7 @@
 package io.vertx.up.util;
 
 import io.reactivex.Observable;
+import io.vertx.core.MultiMap;
 import io.vertx.core.json.DecodeException;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -124,6 +125,14 @@ final class To {
     static JsonObject toJObject(final Map<String, Object> map) {
         final JsonObject params = new JsonObject();
         Fn.safeNull(() -> map.forEach(params::put), map);
+        return params;
+    }
+
+    static JsonObject toJObject(final MultiMap multiMap) {
+        final JsonObject params = new JsonObject();
+        Fn.safeNull(() -> multiMap.forEach(
+                item -> params.put(item.getKey(), item.getValue())
+        ), multiMap);
         return params;
     }
 
