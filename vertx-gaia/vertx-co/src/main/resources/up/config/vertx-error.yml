@@ -183,3 +183,4 @@ E80409: "(424) - (Jet) The channel must be one of `{0}`, but now your class `{1}
 E80410: "(424) - (Jet) The component `{0}` with `DEFINE` type must implements `JtChannel` interface"
 E80411: "(500) - (Jet) The application environment could not be get by sigma `{0}`"
 E80412: "(501) - (Jet) The data source switching met issue, headers are {0}`"
+E80413: "(501) - (Jet) This api does not implement here, please provide in programming"
