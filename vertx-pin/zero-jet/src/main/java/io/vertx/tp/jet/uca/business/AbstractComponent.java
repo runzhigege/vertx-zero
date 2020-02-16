@@ -2,6 +2,7 @@ package io.vertx.tp.jet.uca.business;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.error._501NotImplementException;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.annotations.Contract;
 import io.vertx.up.commune.ActIn;
@@ -116,6 +117,30 @@ public abstract class AbstractComponent implements JtComponent, Service {
             return ActOut.future(error);
         } else {
             return executor.apply(sigma);
+        }
+    }
+
+    /*
+     * Provide default implementation
+     * 1) For standard usage, it should provide sub-class inherit structure.
+     * 2) For standalone usage, it could be parent class as @Contract parent
+     */
+    @Override
+    public Future<ActOut> transferAsync(final ActIn actIn) {
+        final WebException error = new _501NotImplementException(this.getClass());
+        return Future.failedFuture(error);
+    }
+
+    /*
+     * Contract for uniform reference
+     */
+    public <T> void contract(final T instance) {
+        if (Objects.nonNull(instance)) {
+            Ut.contract(instance, JsonObject.class, this.options());
+            Ut.contract(instance, Identity.class, this.identity());
+            Ut.contract(instance, Dict.class, this.dict());
+            Ut.contract(instance, DualMapping.class, this.mapping());
+            Ut.contract(instance, XHeader.class, this.header());
         }
     }
 }
