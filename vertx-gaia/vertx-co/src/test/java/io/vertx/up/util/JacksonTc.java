@@ -60,8 +60,17 @@ public class JacksonTc extends StoreBase {
 
     @Test
     public void testJsonObject(final TestContext context) {
-        final JsonObject data = IO.getJObject(this.ioFile("jackson-json.json"));
+        final JsonObject data = this.ioJObject("jackson-json.json");
         final JsonObject content = Jackson.deserialize(data.toString(), JsonObject.class);
-        System.out.println(content);
+        System.out.println(content.encodePrettily());
+    }
+
+    @Test
+    public void testSubset(final TestContext context) {
+        final JsonObject source = this.ioJObject("subset-source.json");
+        final JsonObject expected = this.ioJObject("subset-target.json");
+        final JsonObject subset = Ut.elementSubset(source, "username", "age");
+        System.out.println(subset);
+        context.assertEquals(expected, subset);
     }
 }

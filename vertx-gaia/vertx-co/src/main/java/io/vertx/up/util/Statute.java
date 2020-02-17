@@ -77,7 +77,7 @@ final class Statute {
         if (Objects.isNull(input)) {
             return new JsonObject();
         } else {
-            final JsonObject normalized = input.copy();
+            final JsonObject normalized = new JsonObject(); // input.copy();
             Arrays.stream(pickedKeys).forEach(field -> normalized.put(field, input.getValue(field)));
             return normalized;
         }
