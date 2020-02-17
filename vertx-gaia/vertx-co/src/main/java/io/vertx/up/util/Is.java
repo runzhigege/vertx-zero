@@ -22,6 +22,32 @@ import java.util.function.Function;
  */
 class Is {
 
+    @SuppressWarnings("unchecked")
+    static <T> boolean isEqual(final JsonObject record, final String field, final T expected) {
+        if (Types.isEmpty(record)) {
+            /*
+             * If record is null or empty, return `false`
+             */
+            return false;
+        } else {
+            /*
+             * Object reference
+             */
+            final Object value = record.getValue(field);
+            if (Objects.isNull(value)) {
+                /*
+                 * Also `null`
+                 */
+                return false;
+            } else {
+                /*
+                 * Compared
+                 */
+                return ((T) value).equals(expected);
+            }
+        }
+    }
+
     /*
      * Whether record contains all the data in cond.
      * JsonObject subset here for checking

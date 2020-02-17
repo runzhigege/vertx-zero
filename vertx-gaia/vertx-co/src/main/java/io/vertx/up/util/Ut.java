@@ -828,6 +828,10 @@ public final class Ut {
         return Types.isEmpty(jsonArray);
     }
 
+    public static <T> boolean isEqual(final JsonObject record, final String field, final T expected) {
+        return Is.isEqual(record, field, expected);
+    }
+
     public static boolean notNil(final String input) {
         return StringUtil.notNil(input);
     }
