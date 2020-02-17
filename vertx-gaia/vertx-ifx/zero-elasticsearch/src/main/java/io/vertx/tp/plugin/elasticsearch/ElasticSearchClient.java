@@ -27,8 +27,8 @@ public interface ElasticSearchClient {
 	/**
 	 * create index with settings and mappings
 	 * @param index name of index. this is real index name
-	 * @param numberOfShards number of shards, default is 1
-	 * @param numberOfReplicas number of replicas, default is 1
+	 * @param numberOfShards number of shards, default is 3
+	 * @param numberOfReplicas number of replicas, default is 2
 	 * @param mappings fields were used to create index mapping
 	 * @return JsonObject like below
 	 * {

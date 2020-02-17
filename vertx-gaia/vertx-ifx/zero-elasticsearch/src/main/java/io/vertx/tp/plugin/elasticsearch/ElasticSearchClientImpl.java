@@ -48,15 +48,12 @@ public class ElasticSearchClientImpl implements ElasticSearchClient {
 	private final transient Vertx vertx;
 	private final transient JsonObject options = new JsonObject();
 	private final transient ElasticSearchHelper helper = ElasticSearchHelper.helper(this.getClass());
-	private final transient RestHighLevelClient client;
 
 	ElasticSearchClientImpl(final Vertx vertx, final JsonObject options) {
 		this.vertx = vertx;
 		if (Ut.notNil(options)) {
 			this.options.mergeIn(options);
 		}
-
-		client = helper.getClient(options);
 	}
 
 	@Override
