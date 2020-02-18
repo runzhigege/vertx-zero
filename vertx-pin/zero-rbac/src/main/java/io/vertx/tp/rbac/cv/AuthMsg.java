@@ -34,7 +34,7 @@ public interface AuthMsg {
     String CREDIT_BOUND = "6. Accredit bound ( bound = {0} and key = {1} )";
     String CREDIT_SUCCESS = "7. Accredit authorized cache ( key = {0} ) stored into ( session = {1} )";
 
-    String REGION_BEFORE = "--> DataRegion Before: {0}";
+    String REGION_BEFORE = "--> DataRegion Before: uri = {0}, region = {1}git";
     String REGION_AFTER = "<-- DataRegion After: {0}";
     String REGION_TYPE = "DataRegion Analyzed type: {0}, data = {1}";
     String REGION_ROWS = "DataRegion Rows -> {0}";

@@ -20,7 +20,7 @@ class IxFn {
             final JsonObject filters, final IxModule config) {
         final String pojo = config.getPojo();
         return dao -> {
-            IxLog.infoDao(LOGGER, "( Search ) Dao -> {0}, pojo = {1}", dao.getClass(), pojo);
+            IxLog.debugDao(LOGGER, "( Search ) Dao -> {0}, pojo = {1}", dao.getClass(), pojo);
 
             final JsonObject criteria = new JsonObject();
             criteria.put("criteria", filters);
