@@ -12,6 +12,7 @@ public interface KeField {
     String NAMESPACE = "namespace";             /* Model definition of Multi-App environment, each application contains only one namespace */
     String IDENTIFIER = "identifier";           /* Model definition, identifier field ( Uniform identifier ) */
     String RULE_UNIQUE = "ruleUnique";          /* Model definition, ruleUnique field */
+    String TABLE_NAME = "tableName";            /* Model definition, tableName field */
 
     String MODEL_ID = "modelId";                /* Model Consumer ( identifier ) field */
     String MODEL_KEY = "modelKey";              /* Model Consumer ( key ) field */
