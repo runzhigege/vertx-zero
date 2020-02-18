@@ -71,7 +71,7 @@ class IxDao {
     }
 
     static IxModule get(final String actor) {
-        Ix.infoRest(LOGGER, "Actor = {0}", actor);
+        Ix.debugRest(LOGGER, "Actor = {0}", actor);
         final IxModule config = CONFIG_MAP.get(actor);
         return Fn.getNull(null, () -> config, config);
     }

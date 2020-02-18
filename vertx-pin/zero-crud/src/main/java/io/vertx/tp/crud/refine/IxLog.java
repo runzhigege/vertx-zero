@@ -36,6 +36,10 @@ class IxLog {
         warn(logger, "Rest", pattern, args);
     }
 
+    static void debugRest(final Annal logger, final String pattern, final Object... args) {
+        debug(logger, "Rest", pattern, args);
+    }
+
     static void infoRest(final Annal logger, final String pattern, final Object... args) {
         info(logger, "Rest", pattern, args);
     }
@@ -50,5 +54,9 @@ class IxLog {
 
     static void infoDao(final Annal logger, final String pattern, final Object... args) {
         info(logger, "Dao", pattern, args);
+    }
+
+    static void debugDao(final Annal logger, final String pattern, final Object... args) {
+        debug(logger, "Dao", pattern, args);
     }
 }

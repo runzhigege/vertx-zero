@@ -25,7 +25,8 @@ public class DataRegion extends AbstractRegion {
             /* Get Critical parameters */
             return Sc.cacheBound(context, envelop).compose(matrix -> {
                 if (Objects.nonNull(matrix)) {
-                    Sc.infoAuth(this.getLogger(), AuthMsg.REGION_BEFORE, matrix.encode());
+                    Sc.infoAuth(this.getLogger(), context.request().path(),
+                            AuthMsg.REGION_BEFORE, matrix.encode());
                     /*
                      * Body modification is only available for POST/PUT
                      * 1) Because only POST/PUT support body parameter

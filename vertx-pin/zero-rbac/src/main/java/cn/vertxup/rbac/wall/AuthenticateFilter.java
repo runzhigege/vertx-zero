@@ -20,8 +20,8 @@ public class AuthenticateFilter extends HttpFilter {
         if (Ut.notNil(token) && token.contains(" ")) {
             final String tokenString = token.substring(token.lastIndexOf(' '));
             /* Put Data into session instead of context */
-            getLogger().info("[ ZERO ] Parse token string: {0}", tokenString);
-            put("token", tokenString);
+            this.getLogger().debug("[ ZERO ] Parse token string: {0}", tokenString);
+            this.put("token", tokenString);
         }
     }
 }

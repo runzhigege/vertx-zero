@@ -46,11 +46,11 @@ class ScPhase {
         final HttpServerRequest request = context.request();
         final String uri = uri(context);
         /* Cache Data */
-        Sc.infoAuth(LOGGER, "Processed Uri: {0}", uri);
+        Sc.debugAuth(LOGGER, "Processed Uri: {0}", uri);
         /* Cache Key */
         final String cacheKey = Ke.keySession(request.method().name(), uri);
         /* Cache Data */
-        Sc.infoAuth(LOGGER, "Try cacheKey: {0}", cacheKey);
+        Sc.debugAuth(LOGGER, "Try cacheKey: {0}", cacheKey);
         return cacheKey;
     }
 
