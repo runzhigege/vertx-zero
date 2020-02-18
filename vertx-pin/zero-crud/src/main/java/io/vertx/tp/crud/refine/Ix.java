@@ -96,6 +96,10 @@ public class Ix {
         IxLog.infoRest(logger, pattern, args);
     }
 
+    public static void debugRest(final Annal logger, final String pattern, final Object... args) {
+        IxLog.debugRest(logger, pattern, args);
+    }
+
     public static void warnRest(final Annal logger, final String pattern, final Object... args) {
         IxLog.warnRest(logger, pattern, args);
     }

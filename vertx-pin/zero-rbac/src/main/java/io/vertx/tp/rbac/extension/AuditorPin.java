@@ -65,7 +65,7 @@ public class AuditorPin implements PlugAuditor {
                 Sc.infoAudit(LOGGER, "Update auditing: userId = `{0}`, at = `{1}`", userId, instant.toString());
             }
         } else {
-            Sc.infoAudit(LOGGER, "Do not match: {0}", request.path());
+            Sc.debugAuth(LOGGER, "Do not match: {0}", request.path());
         }
         return Ux.future(envelop);
     }
