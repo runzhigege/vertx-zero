@@ -18,6 +18,7 @@ import io.vertx.tp.optic.component.Dictionary;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.commune.config.Dict;
 import io.vertx.up.commune.config.DictEpsilon;
+import io.vertx.up.commune.config.DictFabric;
 import io.vertx.up.commune.config.DictSource;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
@@ -35,6 +36,10 @@ import java.util.concurrent.ConcurrentMap;
 class Unity {
 
     private static final Annal LOGGER = Annal.get(Unity.class);
+
+    static DictFabric fetchFabric(final ConcurrentMap<String, JsonArray> dictData, final IxModule config) {
+        return DictFabric.create().dict(dictData).epsilon(config.getEpsilon());
+    }
 
     /*
      * Seeker for lookup target resource
