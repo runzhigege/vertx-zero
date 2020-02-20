@@ -122,9 +122,7 @@ public class FileActor {
                          * Read dict only once
                          */
                         final Future<JsonArray> result = Unity.fetchDict(request, config).compose(dictMap -> {
-                            final DictFabric fabric = DictFabric.create()
-                                    .dict(dictMap)
-                                    .epsilon(config.getEpsilon());
+                            final DictFabric fabric = Unity.fetchFabric(dictMap, config);
                             /*
                              * Apply default value
                              */
@@ -134,7 +132,7 @@ public class FileActor {
                                 record.put(KeField.ACTIVE, Boolean.TRUE);
                                 /* Serial */
                                 futures.add(IxActor.serial().bind(request).procAsync(record, config)
-                                        .compose(normalized -> Ux.future(fabric.inFrom(normalized)))
+                                        .compose(fabric::inFrom)
                                         /* Unique Filters */
                                         .compose(normalized -> IxActor.unique().procAsync(normalized, config))
                                         /* Search result */
@@ -260,19 +258,10 @@ public class FileActor {
                      * To avoid final in lambda expression
                      */
                     final JsonArray inputData = data.copy();
-                    return Unity.fetchDict(request, config).compose(dictMap -> {
-                        /*
-                         * Dictionary fetching for exporting
-                         */
-                        if (Objects.isNull(dictMap)) {
-                            return Ux.future(inputData);
-                        } else {
-                            final DictFabric fabric = DictFabric.create()
-                                    .dict(dictMap)
-                                    .epsilon(config.getEpsilon());
-                            return Ux.future(fabric.inTo(inputData));
-                        }
-                    });
+                    return Unity.fetchDict(request, config).compose(Ut.applyNil(
+                            () -> inputData,
+                            dictMap -> Unity.fetchFabric(dictMap, config).inTo(inputData))
+                    );
                 })
                 /* Data Exporting */
                 .compose(data -> {

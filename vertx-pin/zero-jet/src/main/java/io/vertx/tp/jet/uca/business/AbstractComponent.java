@@ -8,16 +8,15 @@ import io.vertx.up.annotations.Contract;
 import io.vertx.up.commune.ActIn;
 import io.vertx.up.commune.ActOut;
 import io.vertx.up.commune.Service;
-import io.vertx.up.commune.config.Dict;
-import io.vertx.up.commune.config.DualMapping;
-import io.vertx.up.commune.config.Identity;
-import io.vertx.up.commune.config.XHeader;
+import io.vertx.up.commune.config.*;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.exception.web._400SigmaMissingException;
 import io.vertx.up.log.Annal;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
 import java.util.Objects;
+import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 
 /**
@@ -70,6 +69,9 @@ public abstract class AbstractComponent implements JtComponent, Service {
     @Contract
     private transient XHeader header;  // Came from request
 
+    private transient DictFabric fabric;
+
+    // ------------ Get reference of specific object ------------
     /*
      * The logger of Annal here
      */
@@ -90,6 +92,7 @@ public abstract class AbstractComponent implements JtComponent, Service {
     }
 
     @Override
+    @Deprecated
     public Dict dict() {
         return this.dict;
     }
@@ -109,17 +112,6 @@ public abstract class AbstractComponent implements JtComponent, Service {
         return this.header;
     }
 
-    /* Uniform tunnel */
-    protected Future<ActOut> transferAsync(final ActIn request, final Function<String, Future<ActOut>> executor) {
-        final String sigma = request.sigma();
-        if (Ut.isNil(sigma)) {
-            final WebException error = new _400SigmaMissingException(this.getClass());
-            return ActOut.future(error);
-        } else {
-            return executor.apply(sigma);
-        }
-    }
-
     /*
      * Provide default implementation
      * 1) For standard usage, it should provide sub-class inherit structure.
@@ -131,16 +123,79 @@ public abstract class AbstractComponent implements JtComponent, Service {
         return Future.failedFuture(error);
     }
 
+    // ------------ Specific Method that will be used in sub-class ------------
     /*
      * Contract for uniform reference
+     * For most usage positions, it could bind current @Contract references to
+     * target entity for future use.
+     * Only remove `dict` in @Contract after JtComponent
+     *
+     * Here provide the boundary for this kind of component usage.
+     * 1 - Before channel, the channel could bind dict to `Component`.
+     * 2 - After component, the `Dict` should be converted to `DictFabric` instead.
      */
-    public <T> void contract(final T instance) {
+    protected <T> void contract(final T instance) {
         if (Objects.nonNull(instance)) {
             Ut.contract(instance, JsonObject.class, this.options());
             Ut.contract(instance, Identity.class, this.identity());
-            Ut.contract(instance, Dict.class, this.dict());
+            // Ut.contract(instance, Dict.class, this.dict());
             Ut.contract(instance, DualMapping.class, this.mapping());
             Ut.contract(instance, XHeader.class, this.header());
         }
+    }
+
+    /*
+     * Uniform tunnel
+     * 1 - sigma in XHeader is required for calling this method here
+     * 2 - it means that current framework should support multi-application structure
+     * */
+    protected Future<ActOut> transferAsync(final ActIn request, final Function<String, Future<ActOut>> executor) {
+        final String sigma = request.sigma();
+        if (Ut.isNil(sigma)) {
+            final WebException error = new _400SigmaMissingException(this.getClass());
+            return ActOut.future(error);
+        } else {
+            return executor.apply(sigma);
+        }
+    }
+
+    /*
+     * Get dict fabric
+     * 1 - For each component reference, the DictFabric is unique.
+     * 2 - The `Epsilon` could be bind once, in this situation, it could be put into instance
+     *     to avoid created duplicated here.
+     * 3 - The DictFabric must clear dictData when call `dict()` method,
+     *     in most situations, it should call once instead of multi.
+     */
+    protected DictFabric fabric(final ActIn request) {
+        return this.fabricInternal(null).dict(request.getDict());
+    }
+
+    protected DictFabric fabric(final ActIn request, final ConcurrentMap<String, DictEpsilon> compiled) {
+        return this.fabricInternal(compiled).dict(request.getDict());
+    }
+
+    protected DictFabric fabric(final ActIn request, final JsonObject configured) {
+        final ConcurrentMap<String, DictEpsilon> compiled = Ux.dictEpsilon(configured);
+        return this.fabricInternal(compiled).dict(request.getDict());
+    }
+
+    private DictFabric fabricInternal(final ConcurrentMap<String, DictEpsilon> epsilon) {
+        if (Objects.isNull(this.fabric)) {
+            if (Objects.isNull(epsilon)) {
+                /*
+                 * If input `epsilon` is null,
+                 * The default epsilon is `this.dict().getEpsilon`
+                 */
+                this.fabric = DictFabric.create().epsilon(this.dict.getEpsilon());
+            } else {
+                /*
+                 * If input `epsilon` is not null
+                 * The default epsilon is input value
+                 */
+                this.fabric = DictFabric.create().epsilon(epsilon);
+            }
+        }
+        return this.fabric;
     }
 }
