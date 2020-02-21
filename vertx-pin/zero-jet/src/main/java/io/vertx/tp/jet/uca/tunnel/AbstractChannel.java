@@ -1,13 +1,10 @@
 package io.vertx.tp.jet.uca.tunnel;
 
 import io.vertx.core.Future;
-import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.tp.error._501ChannelErrorException;
-import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.monitor.JtMonitor;
-import io.vertx.tp.ke.cv.KeField;
-import io.vertx.tp.optic.environment.Ambient;
+import io.vertx.tp.jet.refine.Jt;
 import io.vertx.tp.optic.jet.JtChannel;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.annotations.Contract;
@@ -153,17 +150,9 @@ public abstract class AbstractChannel implements JtChannel {
          */
         final Dict dict = this.commercial.dict();
         if (Objects.isNull(this.dictionary)) {
-            /*
-             * Params here for different situations
-             */
-            final MultiMap paramMap = MultiMap.caseInsensitiveMultiMap();
-            paramMap.add(KeField.IDENTIFIER, this.commercial.identifier());
-            final JtApp app = Ambient.getApp(this.commercial.app());
-            if (Objects.nonNull(app)) {
-                paramMap.add(KeField.SIGMA, app.getSigma());
-                paramMap.add(KeField.APP_ID, app.getAppId());
-            }
-            return Ux.dictCalc(dict, paramMap).compose(dictionary -> {
+            final String appKey = this.commercial.app();
+            final String identifier = this.commercial.identifier();
+            return Jt.toDictionary(appKey, identifier, dict).compose(dictionary -> {
                 /*
                  * Bind dictionary to current dictionary reference
                  */

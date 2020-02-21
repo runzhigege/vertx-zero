@@ -3,12 +3,13 @@ package io.vertx.tp.jet.refine;
 import cn.vertxup.jet.domain.tables.pojos.IApi;
 import cn.vertxup.jet.domain.tables.pojos.IJob;
 import cn.vertxup.jet.domain.tables.pojos.IService;
+import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.atom.JtConfig;
 import io.vertx.tp.jet.atom.JtUri;
 import io.vertx.tp.jet.atom.JtWorker;
-import io.vertx.tp.optic.environment.Ambient;
 import io.vertx.up.commune.config.*;
 import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.em.ChannelType;
@@ -81,6 +82,10 @@ public class Jt {
         return JtBusiness.toIdentify(service);
     }
 
+    public static Future<ConcurrentMap<String, JsonArray>> toDictionary(final String key, final String identifier, final Dict dict) {
+        return JtBusiness.toDictionary(key, identifier, dict);
+    }
+
     public static Set<String> toSet(final Supplier<String> supplier) {
         return JtRoute.toSet(supplier);
     }
@@ -146,9 +151,4 @@ public class Jt {
     public static Integration toIntegration(final IService service) {
         return JtDataObject.toIntegration(service);
     }
-
-    public static JtApp toApp(final String key) {
-        return Ambient.getApp(key);
-    }
-
 }
