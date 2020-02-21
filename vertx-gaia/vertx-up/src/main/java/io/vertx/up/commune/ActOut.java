@@ -114,7 +114,7 @@ public class ActOut extends ActMapping implements Serializable {
                 final DualItem dualItem;
                 if (Objects.isNull(this.identifier)) {
                     dualItem = mapping.child();
-                    LOGGER.info("[ ZERO ] identifier is null, root mapping will be used. {0}", dualItem.toString());
+                    // LOGGER.info("[ ZERO ] identifier is null, root mapping will be used. {0}", dualItem.toString());
                 } else {
                     dualItem = mapping.child(this.identifier);
                     LOGGER.info("[ ZERO ] identifier `{0}`, extract child mapping. {1}", this.identifier, dualItem.toString());

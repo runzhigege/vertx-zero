@@ -50,7 +50,10 @@ public abstract class AbstractChannel implements JtChannel {
     private transient Commercial commercial;
     @Contract
     private transient Mission mission;
-
+    /*
+     * In `Job` mode, the dictionary may came from `JobIncome`.
+     * In `Api` mode, the dictionary is null reference here.
+     */
     @Contract
     private transient ConcurrentMap<String, JsonArray> dictionary;
 
@@ -93,7 +96,7 @@ public abstract class AbstractChannel implements JtChannel {
                              * 1) Definition in current channel
                              * 2) Data came from request ( XHeader )
                              */
-                            .compose(nil -> Anagogic.componentAsync(component, this.commercial))
+                            .compose(initialized -> Anagogic.componentAsync(component, this.commercial))
                             .compose(initialized -> Anagogic.componentAsync(component, envelop))
                             /*
                              * Children initialized
@@ -140,6 +143,7 @@ public abstract class AbstractChannel implements JtChannel {
             final ActIn request = new ActIn(envelop);
             request.bind(this.commercial.mapping());
             request.bind(dict).connect(definition);
+
             return Ux.future(request);
         });
     }
@@ -181,11 +185,18 @@ public abstract class AbstractChannel implements JtChannel {
         return Annal.get(this.getClass());
     }
 
-    protected Commercial getCommercial() {
+    // ------------- Rename configuration object -------------
+    /*
+     * Get service definition from `Commercial`
+     */
+    protected Commercial commercial() {
         return this.commercial;
     }
 
-    protected Mission getMission() {
+    /*
+     * Get job definition from `Mission`
+     */
+    protected Mission mission() {
         return this.mission;
     }
 }

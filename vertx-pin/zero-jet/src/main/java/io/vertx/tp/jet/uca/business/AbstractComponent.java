@@ -34,20 +34,24 @@ import java.util.function.Function;
 public abstract class AbstractComponent implements JtComponent, Service {
 
     // -------------- Metadata configuration ------------------
+    /*
+     * Could be used by sub-class directly ( XHeader contains )
+     * X-Sigma      -> sigma
+     * X-Lang       -> language
+     * X-App-Id     -> appId
+     * X-App-Key    -> appKey
+     */
+    @Contract
+    protected transient XHeader header;  // Came from request
 
     /*
      * The four reference source came from `@Contract` injection here
-     * dict
-     * - dictConfig
-     * - dictComponent
-     * - dictEpsilon
+     * options
+     * - serviceConfig
      *
      * identity
      * - identityComponent
      * - identity
-     *
-     * options
-     * - serviceConfig
      *
      * mapping
      * - mappingConfig
@@ -56,28 +60,32 @@ public abstract class AbstractComponent implements JtComponent, Service {
      */
     @Contract
     private transient JsonObject options;
-
     @Contract
     private transient Identity identity;
-
     @Contract
     private transient DualMapping mapping;
 
+    /*
+     *
+     * Here are dict configuration
+     * dict
+     * - dictConfig
+     * - dictComponent
+     * - dictEpsilon
+     *
+     * The situation for dict is complex because all the sub-classes could not use
+     * `Dict` directly, instead they all used `fabric` api to get `DictFabric` based on
+     * dictData and dictEpsilon here.
+     *
+     * `DictFabric` is new structure but it could support
+     * 1) One Side
+     * inTo / inFrom
+     * 2) Two Sides ( with mapping binding )
+     * outTo / outFrom
+     */
     @Contract
     private transient Dict dict;
-
-    @Contract
-    private transient XHeader header;  // Came from request
-
     private transient DictFabric fabric;
-
-    // ------------ Get reference of specific object ------------
-    /*
-     * The logger of Annal here
-     */
-    protected Annal logger() {
-        return Annal.get(this.getClass());
-    }
 
     /*
      * There are required attribute
@@ -92,24 +100,34 @@ public abstract class AbstractComponent implements JtComponent, Service {
     }
 
     @Override
-    @Deprecated
-    public Dict dict() {
-        return this.dict;
-    }
-
-    @Override
     public Identity identity() {
         return this.identity;
     }
 
-    /* Limitation Usage */
     @Override
     public DualMapping mapping() {
         return this.mapping;
     }
 
-    protected XHeader header() {
-        return this.header;
+    @Override
+    public Dict dict() {
+        return this.dict;
+    }
+
+    // ------------ Uniform default major transfer method ------------
+    /*
+     * Uniform tunnel
+     * 1 - sigma in XHeader is required for calling this method here
+     * 2 - it means that current framework should support multi-application structure
+     * */
+    protected Future<ActOut> transferAsync(final ActIn request, final Function<String, Future<ActOut>> executor) {
+        final String sigma = request.sigma();
+        if (Ut.isNil(sigma)) {
+            final WebException error = new _400SigmaMissingException(this.getClass());
+            return ActOut.future(error);
+        } else {
+            return executor.apply(sigma);
+        }
     }
 
     /*
@@ -136,29 +154,17 @@ public abstract class AbstractComponent implements JtComponent, Service {
      */
     protected <T> void contract(final T instance) {
         if (Objects.nonNull(instance)) {
+            /*
+             * Here contract `Dict` will not be support under JtComponent here
+             */
             Ut.contract(instance, JsonObject.class, this.options());
             Ut.contract(instance, Identity.class, this.identity());
-            // Ut.contract(instance, Dict.class, this.dict());
             Ut.contract(instance, DualMapping.class, this.mapping());
-            Ut.contract(instance, XHeader.class, this.header());
+            Ut.contract(instance, XHeader.class, this.header);
         }
     }
 
-    /*
-     * Uniform tunnel
-     * 1 - sigma in XHeader is required for calling this method here
-     * 2 - it means that current framework should support multi-application structure
-     * */
-    protected Future<ActOut> transferAsync(final ActIn request, final Function<String, Future<ActOut>> executor) {
-        final String sigma = request.sigma();
-        if (Ut.isNil(sigma)) {
-            final WebException error = new _400SigmaMissingException(this.getClass());
-            return ActOut.future(error);
-        } else {
-            return executor.apply(sigma);
-        }
-    }
-
+    // ------------ Dictionary Structure for sub-class to call translating ------------
     /*
      * Get dict fabric
      * 1 - For each component reference, the DictFabric is unique.
@@ -197,5 +203,13 @@ public abstract class AbstractComponent implements JtComponent, Service {
             }
         }
         return this.fabric;
+    }
+
+    // ------------ Get reference of Logger ------------
+    /*
+     * The logger of Annal here
+     */
+    protected Annal logger() {
+        return Annal.get(this.getClass());
     }
 }
