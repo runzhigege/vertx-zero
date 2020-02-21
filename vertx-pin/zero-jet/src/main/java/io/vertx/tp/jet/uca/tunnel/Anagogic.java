@@ -12,6 +12,7 @@ import io.vertx.up.unity.UxPool;
 import io.vertx.up.util.Ut;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
 /*
  * Tool for different injection
@@ -56,23 +57,21 @@ class Anagogic {
         return Ux.future(Boolean.TRUE);
     }
 
-    static Future<Boolean> componentAsync(final JtComponent component, final Commercial commercial) {
+    static Future<Boolean> componentAsync(final JtComponent component, final Commercial commercial, final Supplier<Future<DictFabric>> supplier) {
         if (Objects.nonNull(commercial)) {
-            /*
-             * JsonObject options inject ( without `mapping` node for Diode )
-             */
-            final JsonObject options = commercial.options();
-            if (Ut.notNil(options)) {
-                final JsonObject injectOpt = options.copy();
-                Ut.contract(component, JsonObject.class, injectOpt);
-            }
-            /*
-             * Identity reference for id selector here
-             */
-            Ut.contract(component, Identity.class, commercial.identity());
-            Ut.contract(component, DualMapping.class, commercial.mapping());
-            Ut.contract(component, Dict.class, commercial.dict());
-            return Future.succeededFuture(Boolean.TRUE);
+            return supplier.get().compose(fabric -> {
+                /*
+                 * JsonObject options inject ( without `mapping` node for Diode )
+                 */
+                final JsonObject options = Ut.sureJObject(commercial.options());
+
+                Ut.contract(component, JsonObject.class, options);                  /* serviceConfig */
+                Ut.contract(component, Identity.class, commercial.identity());      /* identifierComponent -> converted to identity */
+                Ut.contract(component, DualMapping.class, commercial.mapping());    /* mappingConfig */
+                Ut.contract(component, DictFabric.class, fabric);                   /* dictConfig -> converted to fabric */
+
+                return Future.succeededFuture(Boolean.TRUE);
+            });
         } else {
             return Future.succeededFuture(Boolean.TRUE);
         }

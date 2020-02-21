@@ -1,7 +1,6 @@
 package io.vertx.up.commune;
 
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.commune.config.Dict;
 import io.vertx.up.commune.config.DualMapping;
 import io.vertx.up.commune.config.Identity;
 
@@ -25,15 +24,6 @@ public interface Service {
      * `serviceConfig` ( SERVICE_CONFIG ) of I_SERVICE
      */
     JsonObject options();
-
-    /*
-     * `dictConfig`
-     * `dictComponent` of I_SERVICE
-     * `dictEpsilon` of I_SERVICE
-     * Here `dictComponent` is required if configured.
-     * Dictionary configuration for current Job / Component
-     */
-    Dict dict();
 
     /*
      * `identifier`

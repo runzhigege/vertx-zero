@@ -52,6 +52,13 @@ public class DictFabric {
         return new DictFabric(null);
     }
 
+    public DictFabric createCopy(final ConcurrentMap<String, DictEpsilon> epsilon) {
+        final DictFabric created = create();
+        created.dict(this.dictData);
+        created.epsilon(epsilon);
+        return created;
+    }
+
     public DictFabric epsilon(final ConcurrentMap<String, DictEpsilon> epsilonMap) {
         if (Objects.nonNull(epsilonMap) && !epsilonMap.isEmpty()) {
             epsilonMap.forEach((key, epsilon) -> {
@@ -232,6 +239,10 @@ public class DictFabric {
 
     public DualItem mapping() {
         return this.mapping;
+    }
+
+    public ConcurrentMap<String, JsonArray> dictionary() {
+        return this.dictData;
     }
 
     private JsonArray process(final JsonArray process,

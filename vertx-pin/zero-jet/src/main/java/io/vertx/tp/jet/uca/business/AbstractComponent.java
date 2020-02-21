@@ -43,6 +43,26 @@ public abstract class AbstractComponent implements JtComponent, Service {
      */
     @Contract
     protected transient XHeader header;  // Came from request
+    /*
+     *
+     * Here are dict configuration
+     * dict
+     * - dictConfig
+     * - dictComponent
+     * - dictEpsilon
+     *
+     * The situation for dict is complex because all the sub-classes could not use
+     * `Dict` directly, instead they all used `fabric` api to get `DictFabric` based on
+     * dictData and dictEpsilon here.
+     *
+     * `DictFabric` is new structure but it could support
+     * 1) One Side
+     * inTo / inFrom
+     * 2) Two Sides ( with mapping binding )
+     * outTo / outFrom
+     */
+    @Contract
+    protected transient DictFabric fabric;
 
     /*
      * The four reference source came from `@Contract` injection here
@@ -66,28 +86,6 @@ public abstract class AbstractComponent implements JtComponent, Service {
     private transient DualMapping mapping;
 
     /*
-     *
-     * Here are dict configuration
-     * dict
-     * - dictConfig
-     * - dictComponent
-     * - dictEpsilon
-     *
-     * The situation for dict is complex because all the sub-classes could not use
-     * `Dict` directly, instead they all used `fabric` api to get `DictFabric` based on
-     * dictData and dictEpsilon here.
-     *
-     * `DictFabric` is new structure but it could support
-     * 1) One Side
-     * inTo / inFrom
-     * 2) Two Sides ( with mapping binding )
-     * outTo / outFrom
-     */
-    @Contract
-    private transient Dict dict;
-    private transient DictFabric fabric;
-
-    /*
      * There are required attribute
      * {
      *     "name": "app name",
@@ -107,11 +105,6 @@ public abstract class AbstractComponent implements JtComponent, Service {
     @Override
     public DualMapping mapping() {
         return this.mapping;
-    }
-
-    @Override
-    public Dict dict() {
-        return this.dict;
     }
 
     // ------------ Uniform default major transfer method ------------
@@ -172,37 +165,14 @@ public abstract class AbstractComponent implements JtComponent, Service {
      *     to avoid created duplicated here.
      * 3 - The DictFabric must clear dictData when call `dict()` method,
      *     in most situations, it should call once instead of multi.
+     *
+     * For `DictFabric` usage
+     * - If the component use standard fabric, it could reference `protected` member directly.
+     * - If the component use new fabric, it could created based on `fabric` with new `DictEpsilon` here.
      */
-    protected DictFabric fabric(final ActIn request) {
-        return this.fabricInternal(null).dict(request.getDict());
-    }
-
-    protected DictFabric fabric(final ActIn request, final ConcurrentMap<String, DictEpsilon> compiled) {
-        return this.fabricInternal(compiled).dict(request.getDict());
-    }
-
-    protected DictFabric fabric(final ActIn request, final JsonObject configured) {
+    protected DictFabric fabric(final JsonObject configured) {
         final ConcurrentMap<String, DictEpsilon> compiled = Ux.dictEpsilon(configured);
-        return this.fabricInternal(compiled).dict(request.getDict());
-    }
-
-    private DictFabric fabricInternal(final ConcurrentMap<String, DictEpsilon> epsilon) {
-        if (Objects.isNull(this.fabric)) {
-            if (Objects.isNull(epsilon)) {
-                /*
-                 * If input `epsilon` is null,
-                 * The default epsilon is `this.dict().getEpsilon`
-                 */
-                this.fabric = DictFabric.create().epsilon(this.dict.getEpsilon());
-            } else {
-                /*
-                 * If input `epsilon` is not null
-                 * The default epsilon is input value
-                 */
-                this.fabric = DictFabric.create().epsilon(epsilon);
-            }
-        }
-        return this.fabric;
+        return this.fabric.createCopy(compiled);
     }
 
     // ------------ Get reference of Logger ------------

@@ -46,8 +46,7 @@ public abstract class AbstractJob implements Service {
      * - mappingMode
      * - mappingComponent
      */
-    @Override
-    public Dict dict() {
+    protected Dict dict() {
         return Jt.toDict(this.getService());
     }
 

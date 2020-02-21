@@ -14,6 +14,7 @@ import io.vertx.up.annotations.Contract;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.*;
 import io.vertx.up.commune.config.Dict;
+import io.vertx.up.commune.config.DictFabric;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
@@ -96,7 +97,7 @@ public abstract class AbstractChannel implements JtChannel {
                              * 1) Definition in current channel
                              * 2) Data came from request ( XHeader )
                              */
-                            .compose(initialized -> Anagogic.componentAsync(component, this.commercial))
+                            .compose(initialized -> Anagogic.componentAsync(component, this.commercial, this::createFabric))
                             .compose(initialized -> Anagogic.componentAsync(component, envelop))
                             /*
                              * Children initialized
@@ -131,24 +132,26 @@ public abstract class AbstractChannel implements JtChannel {
      * 3) Finally the data will bind to request
      */
     private Future<ActIn> createRequest(final Envelop envelop, final Class<?> recordClass) {
-        return this.createDict().compose(dict -> {
-            /*
-             * Data object, could not be singleton
-             *  */
-            final Record definition = Ut.instance(recordClass);
-            /*
-             * First step for channel
-             * Initialize the `ActIn` object and reference
-             */
-            final ActIn request = new ActIn(envelop);
-            request.bind(this.commercial.mapping());
-            request.bind(dict).connect(definition);
+        /*
+         * Data object, could not be singleton
+         *  */
+        final Record definition = Ut.instance(recordClass);
+        /*
+         * First step for channel
+         * Initialize the `ActIn` object and reference
+         */
+        final ActIn request = new ActIn(envelop);
+        request.bind(this.commercial.mapping());
+        request.connect(definition);
 
-            return Ux.future(request);
-        });
+        return Ux.future(request);
     }
 
-    private Future<ConcurrentMap<String, JsonArray>> createDict() {
+    private Future<DictFabric> createFabric() {
+        /*
+         * Dict configuration
+         */
+        final Dict dict = this.commercial.dict();
         if (Objects.isNull(this.dictionary)) {
             /*
              * Params here for different situations
@@ -160,19 +163,15 @@ public abstract class AbstractChannel implements JtChannel {
                 paramMap.add(KeField.SIGMA, app.getSigma());
                 paramMap.add(KeField.APP_ID, app.getAppId());
             }
-            /*
-             * Dict configuration
-             */
-            final Dict dict = this.commercial.dict();
             return Ux.dictCalc(dict, paramMap).compose(dictionary -> {
                 /*
                  * Bind dictionary to current dictionary reference
                  */
                 this.dictionary = dictionary;
-                return Ux.future(this.dictionary);
+                return Ux.future(DictFabric.create().dict(dictionary).epsilon(dict.getEpsilon()));
             });
         } else {
-            return Ux.future(this.dictionary);
+            return Ux.future(DictFabric.create().dict(this.dictionary).epsilon(dict.getEpsilon()));
         }
     }
 
