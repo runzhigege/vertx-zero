@@ -1,31 +1,34 @@
 package io.vertx.tp.jet.uca.business;
 
 import cn.vertxup.jet.domain.tables.pojos.IService;
-import io.vertx.core.json.JsonArray;
+import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.refine.Jt;
 import io.vertx.tp.ke.cv.KeField;
+import io.vertx.tp.optic.environment.Ambient;
+import io.vertx.up.atom.Refer;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.Service;
-import io.vertx.up.commune.config.Dict;
-import io.vertx.up.commune.config.DualMapping;
-import io.vertx.up.commune.config.Identity;
+import io.vertx.up.commune.config.*;
 import io.vertx.up.log.Annal;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.Objects;
 
 /*
  * Abstract Service
  */
 public abstract class AbstractJob implements Service {
+
     /*
-     * The hash map to store dictionary data to connect
-     * Income -> Job -> Outcome
+     * dict
+     * - dictConfig
+     * - dictComponent
+     * - dictEpsilon
      */
-    private transient final ConcurrentMap<String, JsonArray> dictData
-            = new ConcurrentHashMap<>();
+    protected transient DictFabric fabric;
 
     /*
      * The four reference source came from Service instance here
@@ -47,23 +50,34 @@ public abstract class AbstractJob implements Service {
      * - mappingComponent
      */
     protected Dict dict() {
-        return Jt.toDict(this.getService());
+        final Dict dict = Jt.toDict(this.service());
+        if (Objects.isNull(this.fabric)) {
+            this.fabric = DictFabric.create().epsilon(dict.getEpsilon());
+        }
+        return dict;
     }
 
     @Override
     public DualMapping mapping() {
-        return Jt.toMapping(this.getService());
+        return Jt.toMapping(this.service());
     }
 
     @Override
     public Identity identity() {
-        return Jt.toIdentity(this.getService());
+        return Jt.toIdentity(this.service());
+    }
+
+    @Override
+    public JsonObject options() {
+        final IService service = this.service();
+        final JtApp app = Ambient.getApp(service.getSigma());
+        return Jt.toOptions(app, service);
     }
 
     /*
      * Get `IService` reference here.
      */
-    private IService getService() {
+    protected IService service() {
         final JsonObject metadata = this.mission().getMetadata();
         return Ut.deserialize(metadata.getJsonObject(KeField.SERVICE), IService.class);
     }
@@ -73,7 +87,41 @@ public abstract class AbstractJob implements Service {
      * This component configuration are all created by `Mission` instead of
      * channel @Contract.
      */
-    abstract Mission mission();
+    protected abstract Mission mission();
+
+    // ----------- Database / Integration --------
+
+    /*
+     * 1. Get database reference ( Database )
+     * 2. Get dao reference ( OxDao )
+     * 3. Get data atom reference ( DataAtom )
+     */
+    protected Database database() {
+        return Jt.toDatabase(this.service());
+    }
+
+    protected Integration integration() {
+        return Jt.toIntegration(this.service());
+    }
+
+    /*
+     * Under way processing based on `identifier`
+     */
+    protected Future<Refer> underway(final String identifier) {
+        /*
+         * Parameters
+         */
+        final String key = this.service().getSigma();
+        return Jt.toDictionary(key, identifier, this.dict()).compose(dictionary -> {
+            this.fabric.dict(dictionary);
+            /*
+             * Chain 引用
+             */
+            final Refer refer = new Refer();
+            refer.add(dictionary);
+            return Ux.future(refer);
+        });
+    }
 
     // ----------- Logger component --------------
     protected Annal logger() {
