@@ -1,7 +1,10 @@
 package io.vertx.tp.optic.component;
 
 import io.vertx.core.Future;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+
+import java.util.concurrent.ConcurrentMap;
 
 /*
  * Identifier selector for some specific situation
@@ -21,4 +24,9 @@ public interface ComponentIndent {
      * Get identifier directly by params
      */
     Future<String> resolve(JsonObject data);
+
+    /*
+     * Get identifier and divided into grouped.
+     */
+    Future<ConcurrentMap<String, JsonArray>> resolve(JsonObject data, String identifier);
 }

@@ -153,17 +153,17 @@ final class Statute {
         return grouped;
     }
 
-    static ConcurrentMap<String, JsonArray> group(final JsonArray source, final String field) {
+    static ConcurrentMap<String, JsonArray> group(final JsonArray source, final Function<JsonObject, String> executor) {
         final ConcurrentMap<String, JsonArray> ret = new ConcurrentHashMap<>();
         if (Objects.nonNull(source) && !source.isEmpty()) {
             source.stream().filter(Objects::nonNull)
                     .map(item -> (JsonObject) item)
-                    .filter(item -> Objects.nonNull(item.getString(field)))
+                    .filter(item -> Objects.nonNull(executor.apply(item)))
                     .forEach(item -> {
                         /*
                          * JsonArray get
                          */
-                        final String key = item.getString(field);
+                        final String key = executor.apply(item);
                         /*
                          * `key` calculated here for map final `key`
                          */
@@ -179,6 +179,10 @@ final class Statute {
                     });
         }
         return ret;
+    }
+
+    static ConcurrentMap<String, JsonArray> group(final JsonArray source, final String field) {
+        return group(source, item -> item.getString(field));
     }
 
     static <K, T, V> ConcurrentMap<K, V> zipper(final ConcurrentMap<K, T> source, final ConcurrentMap<T, V> target) {

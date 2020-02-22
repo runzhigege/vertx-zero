@@ -84,9 +84,12 @@ class JtBusiness {
              */
             final Identity identity = new Identity();
             identity.setIdentifier(service.getIdentifier());
-            final Class<?> component =
-                    Ut.clazz(service.getIdentifierComponent(), null);
+            final Class<?> component = Ut.clazz(service.getIdentifierComponent(), null);
             identity.setIdentifierComponent(component);
+            /*
+             * Bind sigma to identity for future usage.
+             */
+            identity.setSigma(service.getSigma());
             return identity;
         }), service);
     }

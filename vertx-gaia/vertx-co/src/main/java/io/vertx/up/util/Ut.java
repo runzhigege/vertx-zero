@@ -161,6 +161,10 @@ public final class Ut {
         return Statute.group(source, field);
     }
 
+    public static ConcurrentMap<String, JsonArray> elementGroup(final JsonArray source, final Function<JsonObject, String> executor) {
+        return Statute.group(source, executor);
+    }
+
     /*
      * Encryption method for string
      * 1) encryptMD5
@@ -217,6 +221,7 @@ public final class Ut {
      *  9) itRepeat
      * 10) itJObject / etJObject
      * 11) itJArray / etJArray
+     * 12) itJson ( For <T> extract by JsonObject/JsonArray )
      *
      * `it` means iterator method here
      * `et` means `Error Iterator` to be sure comsumer should throw some checked exception
@@ -280,6 +285,10 @@ public final class Ut {
 
     public static java.util.stream.Stream<JsonObject> itJArray(final JsonArray array) {
         return It.itJArray(array);
+    }
+
+    public static <T> T itJson(final T data, final Function<JsonObject, T> executor) {
+        return It.itJson(data, executor);
     }
 
     public static <T> void etJObject(final JsonObject data, final ZeroBiConsumer<T, String> fnIt) throws ZeroException {
