@@ -19,10 +19,17 @@ interface AtomyOp<T> {
      */
     T current();
 
+    T current(T dataArray);
+
     /*
      * Current data ( Maybe update )
      */
     T data();
+
+    /*
+     * Return current type of Change
+     */
+    ChangeFlag type();
 
     /*
      * Update data based on `current`.

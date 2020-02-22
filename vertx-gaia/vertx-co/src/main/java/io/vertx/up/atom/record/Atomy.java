@@ -16,6 +16,7 @@ import java.util.concurrent.ConcurrentMap;
 /*
  * This data structure is for different compare
  */
+@SuppressWarnings("unchecked")
 public class Atomy {
     private final static Annal LOGGER = Annal.get(Atomy.class);
 
@@ -43,6 +44,9 @@ public class Atomy {
     }
 
     public static Atomy create(final JsonArray original, final JsonArray current) {
+        if (Ut.isNil(original) && Ut.isNil(current)) {
+            throw new AtomyParameterException();
+        }
         return new Atomy(original, current);
     }
 
@@ -66,9 +70,19 @@ public class Atomy {
     }
 
     /*
+     * ChangeFlag here
+     */
+    public ChangeFlag type() {
+        if (this.isBatch) {
+            return this.batch.type();
+        } else {
+            return this.single.type();
+        }
+    }
+
+    /*
      * Read current data
      */
-    @SuppressWarnings("unchecked")
     public <T> T current() {
         final T reference;
         if (this.isBatch) {
@@ -87,7 +101,6 @@ public class Atomy {
     /*
      * Single operation here, select value
      */
-    @SuppressWarnings("unchecked")
     public <T> T data() {
         if (this.isBatch) {
             return (T) this.batch.data();
@@ -97,7 +110,7 @@ public class Atomy {
     }
 
     @Fluent
-    public Atomy update(final JsonObject updated) {
+    public Atomy io(final JsonObject updated) {
         if (this.isBatch) {
             this.batch.update(updated);
         } else {
@@ -106,8 +119,18 @@ public class Atomy {
         return this;
     }
 
-    public Future<Atomy> updateAsync(final JsonObject updated) {
-        return Future.succeededFuture(this.update(updated));
+    public Future<Atomy> ioAsync(final JsonObject updated) {
+        return Future.succeededFuture(this.io(updated));
+    }
+
+    public <T> Future<T> ioAsync(final T updated) {
+        final T reference;
+        if (this.isBatch) {
+            reference = (T) this.batch.current((JsonArray) updated);
+        } else {
+            reference = (T) this.single.current((JsonObject) updated);
+        }
+        return Future.succeededFuture(reference);
     }
 
     /*

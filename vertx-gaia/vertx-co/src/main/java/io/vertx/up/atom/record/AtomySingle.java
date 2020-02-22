@@ -68,8 +68,20 @@ class AtomySingle implements AtomyOp<JsonObject> {
     }
 
     @Override
+    public JsonObject current(final JsonObject current) {
+        this.current.clear();
+        this.current.mergeIn(current, true);
+        return this.current;
+    }
+
+    @Override
     public JsonObject data() {
         return this.combine.get(this.flag);
+    }
+
+    @Override
+    public ChangeFlag type() {
+        return this.flag;
     }
 
     @Override
