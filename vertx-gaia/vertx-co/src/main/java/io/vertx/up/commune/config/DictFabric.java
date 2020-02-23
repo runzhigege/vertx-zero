@@ -79,7 +79,7 @@ public class DictFabric {
                 }
             });
         } else {
-            LOGGER.warn("[ ZERO ] DictFabric got empty epsilonMap ( ConcurrentMap<String, DictEpsilon> ) !");
+            LOGGER.debug("[ ZERO ] DictFabric got empty epsilonMap ( ConcurrentMap<String, DictEpsilon> ) !");
         }
         this.init();
         return this;
@@ -90,7 +90,7 @@ public class DictFabric {
             this.dictData.clear();                          /* Clear Queue */
             this.dictData.putAll(dictData);
         } else {
-            LOGGER.warn("[ ZERO ] DictFabric got empty dictData ( ConcurrentMap<String, JsonArray> ) !");
+            LOGGER.debug("[ ZERO ] DictFabric got empty dictData ( ConcurrentMap<String, JsonArray> ) !");
         }
         this.init();
         return this;
