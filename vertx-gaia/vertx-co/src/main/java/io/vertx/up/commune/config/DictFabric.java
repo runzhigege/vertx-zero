@@ -1,5 +1,6 @@
 package io.vertx.up.commune.config;
 
+import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.log.Annal;
@@ -71,6 +72,7 @@ public class DictFabric {
 
     public DictFabric dict(final ConcurrentMap<String, JsonArray> dictData) {
         if (Objects.nonNull(dictData) && !dictData.isEmpty()) {
+            this.dictData.clear();
             this.dictData.putAll(dictData);
         } else {
             LOGGER.warn("[ ZERO ] DictFabric got empty dictData ( ConcurrentMap<String, JsonArray> ) !");
@@ -149,12 +151,20 @@ public class DictFabric {
      * 1) The field is Ox field
      * 2) uuid -> ( out -> in )
      */
-    public JsonObject inTo(final JsonObject input) {
+    public JsonObject inToS(final JsonObject input) {
         return this.process(this.fromData, input, DualItem::from);
     }
 
-    public JsonArray inTo(final JsonArray input) {
-        return this.process(input, this::inTo);
+    public JsonArray inToS(final JsonArray input) {
+        return this.process(input, this::inToS);
+    }
+
+    public Future<JsonObject> inTo(final JsonObject input) {
+        return Future.succeededFuture(this.inToS(input));
+    }
+
+    public Future<JsonArray> inTo(final JsonArray input) {
+        return Future.succeededFuture(this.inToS(input));
     }
 
     /*
@@ -162,12 +172,20 @@ public class DictFabric {
      * 1) The field is Ox field
      * 2) display -> ( in -> out )
      */
-    public JsonObject inFrom(final JsonObject input) {
+    public JsonObject inFromS(final JsonObject input) {
         return this.process(this.fromData, input, DualItem::to);
     }
 
-    public JsonArray inFrom(final JsonArray input) {
-        return this.process(input, this::inFrom);
+    public JsonArray inFromS(final JsonArray input) {
+        return this.process(input, this::inFromS);
+    }
+
+    public Future<JsonObject> inFrom(final JsonObject input) {
+        return Future.succeededFuture(this.inFromS(input));
+    }
+
+    public Future<JsonArray> inFrom(final JsonArray input) {
+        return Future.succeededFuture(this.inFromS(input));
     }
 
     /*
@@ -175,12 +193,20 @@ public class DictFabric {
      * 1) The field is Tp field
      * 2) uuid -> ( out -> in )
      */
-    public JsonObject outTo(final JsonObject output) {
+    public JsonObject outToS(final JsonObject output) {
         return this.process(this.toData, output, DualItem::from);
     }
 
-    public JsonArray outTo(final JsonArray output) {
-        return this.process(output, this::outTo);
+    public JsonArray outToS(final JsonArray output) {
+        return this.process(output, this::outToS);
+    }
+
+    public Future<JsonObject> outTo(final JsonObject input) {
+        return Future.succeededFuture(this.outToS(input));
+    }
+
+    public Future<JsonArray> outTo(final JsonArray input) {
+        return Future.succeededFuture(this.outToS(input));
     }
 
     /*
@@ -188,12 +214,20 @@ public class DictFabric {
      * 1) The field is Tp field
      * 2) display -> ( in -> out )
      */
-    public JsonObject outFrom(final JsonObject output) {
+    public JsonObject outFromS(final JsonObject output) {
         return this.process(this.toData, output, DualItem::to);
     }
 
-    public JsonArray outFrom(final JsonArray output) {
-        return this.process(output, this::outFrom);
+    public JsonArray outFromS(final JsonArray output) {
+        return this.process(output, this::outFromS);
+    }
+
+    public Future<JsonObject> outFrom(final JsonObject input) {
+        return Future.succeededFuture(this.outFromS(input));
+    }
+
+    public Future<JsonArray> outFrom(final JsonArray input) {
+        return Future.succeededFuture(this.outFromS(input));
     }
 
     public DualItem mapping() {

@@ -87,7 +87,7 @@
         <!-- Bean Validation -->
         <hibernate.validator.version>6.1.2.Final</hibernate.validator.version>
 
-        <jwt.version>3.9.0</jwt.version>
+        <jwt.version>3.10.0</jwt.version>
         <jetbrains.version>18.0.0</jetbrains.version>
         <guice.version>4.1.0</guice.version>
         <scala.version>2.13.1</scala.version>
@@ -117,7 +117,7 @@
         <yaml.version>1.25</yaml.version>
         <!-- Vert.x Addition -->
         <rxjava2.version>2.2.17</rxjava2.version>
-        <netty.tcnative.version>2.0.28.Final</netty.tcnative.version>
+        <netty.tcnative.version>2.0.29.Final</netty.tcnative.version>
         <netty.version>4.1.45.Final</netty.version>
         <hazelcast.version>3.12.4</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>

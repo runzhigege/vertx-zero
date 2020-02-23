@@ -65,13 +65,25 @@ public class TodoService implements TodoStub {
 
     @Override
     public Future<JsonArray> fetchTodos(final String sigma, final JsonArray types, final JsonArray statues) {
+        final JsonObject filters = this.toFilters(sigma, types, statues);
+        return Ux.Jooq.on(XTodoDao.class).fetchAndAsync(filters).compose(Ux::fnJArray);
+    }
+
+    @Override
+    public Future<JsonArray> fetchTodos(final String sigma, final JsonArray types, final JsonArray statues, final JsonArray codes) {
+        final JsonObject filters = this.toFilters(sigma, types, statues);
+        filters.put("code,i", codes);
+        return Ux.Jooq.on(XTodoDao.class).fetchAndAsync(filters).compose(Ux::fnJArray);
+    }
+
+    private JsonObject toFilters(final String sigma, final JsonArray types, final JsonArray statues) {
         final JsonObject filters = new JsonObject();
         filters.put("sigma", sigma);
         if (Objects.nonNull(types)) {
             filters.put("type,i", types);
         }
         filters.put("status,i", statues);
-        return Ux.Jooq.on(XTodoDao.class).fetchAndAsync(filters).compose(Ux::fnJArray);
+        return filters;
     }
 
     @Override

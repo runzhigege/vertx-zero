@@ -24,6 +24,8 @@ public interface TodoStub {
 
     Future<JsonArray> fetchTodos(String sigma, JsonArray types, JsonArray statues);
 
+    Future<JsonArray> fetchTodos(String sigma, JsonArray types, JsonArray statues, JsonArray codes);
+
     /*
      * fetch X_TODO by `key`
      */
