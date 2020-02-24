@@ -10,6 +10,7 @@ import java.util.Objects;
  */
 public class Identity implements Serializable {
     private transient String identifier;
+    private transient String sigma;
     private transient Class<?> identifierComponent;
 
     public String getIdentifier() {
@@ -28,24 +29,34 @@ public class Identity implements Serializable {
         this.identifierComponent = identifierComponent;
     }
 
+    public String getSigma() {
+        return this.sigma;
+    }
+
+    public void setSigma(final String sigma) {
+        this.sigma = sigma;
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof Identity)) return false;
         final Identity identity = (Identity) o;
         return this.identifier.equals(identity.identifier) &&
-                Objects.equals(this.identifierComponent, identity.identifierComponent);
+                this.sigma.equals(identity.sigma) &&
+                this.identifierComponent.equals(identity.identifierComponent);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.identifier, this.identifierComponent);
+        return Objects.hash(this.identifier, this.sigma, this.identifierComponent);
     }
 
     @Override
     public String toString() {
-        return "Identifier{" +
+        return "Identity{" +
                 "identifier='" + this.identifier + '\'' +
+                ", sigma='" + this.sigma + '\'' +
                 ", identifierComponent=" + this.identifierComponent +
                 '}';
     }

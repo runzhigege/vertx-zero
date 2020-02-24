@@ -106,8 +106,21 @@ class ActJObject extends ActMapping implements Serializable {
                  * Query part
                  */
                 Arrays.stream(Inquiry.KEY_QUERY).filter(field -> Objects.nonNull(body.getValue(field)))
-                        .forEach(field -> this.query.put(field, body.getValue(field)));
-            } else {
+                        .forEach(field -> {
+                            this.query.put(field, body.getValue(field));
+                            /*
+                             * The criteria parameters does't occurs in future body here.
+                             * {
+                             *     pager,
+                             *     sorter,
+                             *     projection,
+                             *     criteria
+                             * }
+                             */
+                            body.remove(field);
+                        });
+            }
+            if (Ut.notNil(body)) {
                 /*
                  * Common data
                  */

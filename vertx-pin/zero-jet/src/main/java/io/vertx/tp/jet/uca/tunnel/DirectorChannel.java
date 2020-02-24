@@ -18,7 +18,7 @@ public class DirectorChannel extends AbstractChannel {
      */
     @Override
     public Future<Boolean> initAsync(final JtComponent component, final ActIn request) {
-        return Ux.future(getCommercial())
+        return Ux.future(this.commercial())
                 /*
                  * Database initialized
                  */
@@ -27,7 +27,7 @@ public class DirectorChannel extends AbstractChannel {
                 /*
                  * Mission inited, mount to `JtComponent`
                  */
-                .compose(dbed -> Ux.future(getMission()))
+                .compose(dbed -> Ux.future(this.mission()))
                 .compose(mission -> Ut.contractAsync(component, Mission.class, mission));
     }
 }

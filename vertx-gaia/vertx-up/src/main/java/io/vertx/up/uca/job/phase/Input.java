@@ -20,14 +20,14 @@ class Input {
     private static final Annal LOGGER = Annal.get(Input.class);
 
     private transient final Vertx vertx;
-    private transient final Refer assist = new Refer();
+    private transient final Refer underway = new Refer();
 
     Input(final Vertx vertx) {
         this.vertx = vertx;
     }
 
-    Refer assist() {
-        return this.assist;
+    Refer underway() {
+        return this.underway;
     }
 
     Future<Envelop> inputAsync(final Mission mission) {
@@ -42,8 +42,7 @@ class Input {
             /*
              * Event bus did not provide any input here
              */
-            Element.onceLog(mission,
-                    () -> LOGGER.info(Info.PHASE_1ST_JOB, mission.getCode()));
+            Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_1ST_JOB, mission.getCode()));
 
             return Future.succeededFuture(Envelop.okJson());
         } else {
@@ -84,9 +83,7 @@ class Input {
                 /*
                  * Directly
                  */
-                Element.onceLog(mission,
-                        () -> LOGGER.info(Info.PHASE_2ND_JOB, mission.getCode()));
-
+                Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_2ND_JOB, mission.getCode()));
                 return Future.succeededFuture(envelop);
             } else {
                 /*
@@ -104,22 +101,27 @@ class Input {
                 /*
                  * Here we could calculate directory
                  */
-                Element.onceLog(mission,
-                        () -> LOGGER.info(Info.PHASE_2ND_JOB_ASYNC, mission.getCode(), income.getClass().getName()));
+                Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_2ND_JOB_ASYNC, mission.getCode(), income.getClass().getName()));
 
-                return income.assist().compose(refer -> {
+                return income.underway().compose(refer -> {
                     /*
-                     * Assist processing here.
+                     * Here provide extension for JobIncome
+                     * 1 - You can do some operations in JobIncome to calculate underway data such as
+                     *     dictionary data here.
+                     * 2 - Also you can put some assist data into `Refer`, this `Refer` will be used
+                     *     by major code logical instead of `re-calculate` the data again.
+                     * 3 - For performance design, this structure could be chain passed in:
+                     *     Income -> Job ( Channel ) -> Outcome
+                     *
+                     * Critical:  It's only supported by `Actor/Job` structure instead of `Api` passive
+                     *     mode in Http Request / Response. it means that Api could not support this feature.
                      */
-                    this.assist.add(refer.get());
+                    this.underway.add(refer.get());
                     return income.beforeAsync(envelop);
                 });
             }
         } else {
-            Element.onceLog(mission,
-                    () -> LOGGER.info(Info.PHASE_ERROR, mission.getCode(),
-                            envelop.error().getClass().getName()));
-
+            Element.onceLog(mission, () -> LOGGER.info(Info.PHASE_ERROR, mission.getCode(), envelop.error().getClass().getName()));
             return Ux.future(envelop);
         }
     }

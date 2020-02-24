@@ -1,7 +1,13 @@
 package io.vertx.tp.jet.refine;
 
 import cn.vertxup.jet.domain.tables.pojos.IService;
+import io.vertx.core.Future;
+import io.vertx.core.MultiMap;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.tp.jet.atom.JtApp;
+import io.vertx.tp.ke.cv.KeField;
+import io.vertx.tp.optic.environment.Ambient;
 import io.vertx.up.commune.config.Dict;
 import io.vertx.up.commune.config.DualMapping;
 import io.vertx.up.commune.config.Identity;
@@ -9,6 +15,9 @@ import io.vertx.up.eon.em.MappingMode;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
+
+import java.util.Objects;
+import java.util.concurrent.ConcurrentMap;
 
 /*
  * All dict / identity / dualMapping
@@ -75,10 +84,28 @@ class JtBusiness {
              */
             final Identity identity = new Identity();
             identity.setIdentifier(service.getIdentifier());
-            final Class<?> component =
-                    Ut.clazz(service.getIdentifierComponent(), null);
+            final Class<?> component = Ut.clazz(service.getIdentifierComponent(), null);
             identity.setIdentifierComponent(component);
+            /*
+             * Bind sigma to identity for future usage.
+             */
+            identity.setSigma(service.getSigma());
             return identity;
         }), service);
+    }
+
+    static Future<ConcurrentMap<String, JsonArray>> toDictionary(final String key, final String identifier, final Dict dict) {
+        /*
+         * Params here for different situations
+         */
+        final MultiMap paramMap = MultiMap.caseInsensitiveMultiMap();
+        paramMap.add(KeField.IDENTIFIER, identifier);
+        final JtApp app = Ambient.getApp(key);
+        if (Objects.nonNull(app)) {
+            paramMap.add(KeField.SIGMA, app.getSigma());
+            paramMap.add(KeField.APP_ID, app.getAppId());
+        }
+        return Ux.dictCalc(dict, paramMap);
+
     }
 }

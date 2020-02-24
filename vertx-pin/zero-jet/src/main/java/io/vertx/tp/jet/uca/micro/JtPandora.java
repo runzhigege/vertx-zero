@@ -67,6 +67,11 @@ class JtPandora {
         return channel.transferAsync(envelop);
     }
 
+    /*
+     * Http Web request entrance
+     * 1 - Envelop: default zero data request that has been wrapper
+     * 2 - Commercial: The default metadata that defined Api here.
+     */
     static Future<Envelop> async(final Envelop envelop, final Commercial commercial,
                                  final JtMonitor monitor) {
         /*
