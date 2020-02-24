@@ -13,7 +13,7 @@ import io.vertx.up.eon.em.ChannelType;
  * 1) Request-Response, from Api to Service
  * 2) Publish-Subscribe, from Task to Service
  */
-public interface Commercial extends Application, Service, Json {
+public interface Commercial extends Application, ServiceDefinition, Json {
     /*
      * Get channel type of definition ( 1 of 4 )
      * The channel class is fixed in current version, mapped to channel type.

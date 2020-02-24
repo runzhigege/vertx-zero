@@ -52,8 +52,23 @@ public class DictFabric {
         return new DictFabric(null);
     }
 
+    public DictFabric createCopy() {
+        return this.createCopy(null);
+    }
+
+    public DictFabric createCopy(final DualItem mapping) {
+        final DictFabric created = create(mapping);
+        created.dict(this.dictData);
+        created.epsilon(this.epsilonMap);
+        return created;
+    }
+
     public DictFabric epsilon(final ConcurrentMap<String, DictEpsilon> epsilonMap) {
         if (Objects.nonNull(epsilonMap) && !epsilonMap.isEmpty()) {
+            /*
+             * Re-bind
+             */
+            this.epsilonMap.clear();                        /* Clear Queue */
             epsilonMap.forEach((key, epsilon) -> {
                 /*
                  * Only pick up valid configured `epsilon`
@@ -64,7 +79,7 @@ public class DictFabric {
                 }
             });
         } else {
-            LOGGER.warn("[ ZERO ] DictFabric got empty epsilonMap ( ConcurrentMap<String, DictEpsilon> ) !");
+            LOGGER.debug("[ ZERO ] DictFabric got empty epsilonMap ( ConcurrentMap<String, DictEpsilon> ) !");
         }
         this.init();
         return this;
@@ -72,10 +87,10 @@ public class DictFabric {
 
     public DictFabric dict(final ConcurrentMap<String, JsonArray> dictData) {
         if (Objects.nonNull(dictData) && !dictData.isEmpty()) {
-            this.dictData.clear();
+            this.dictData.clear();                          /* Clear Queue */
             this.dictData.putAll(dictData);
         } else {
-            LOGGER.warn("[ ZERO ] DictFabric got empty dictData ( ConcurrentMap<String, JsonArray> ) !");
+            LOGGER.debug("[ ZERO ] DictFabric got empty dictData ( ConcurrentMap<String, JsonArray> ) !");
         }
         this.init();
         return this;
@@ -232,6 +247,10 @@ public class DictFabric {
 
     public DualItem mapping() {
         return this.mapping;
+    }
+
+    public ConcurrentMap<String, JsonArray> dictionary() {
+        return this.dictData;
     }
 
     private JsonArray process(final JsonArray process,

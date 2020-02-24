@@ -26,15 +26,15 @@ import java.util.Objects;
 class RunOn {
     private static final Annal LOGGER = Annal.get(RunOn.class);
     private transient final Vertx vertx;
-    private transient final Refer assist = new Refer();
+    private transient final Refer underway = new Refer();
 
     RunOn(final Vertx vertx) {
         this.vertx = vertx;
     }
 
-    RunOn bind(final Refer assist) {
-        if (Objects.nonNull(assist)) {
-            this.assist.add(assist.get());
+    RunOn bind(final Refer underway) {
+        if (Objects.nonNull(underway)) {
+            this.underway.add(underway.get());
         }
         return this;
     }
@@ -162,7 +162,7 @@ class RunOn {
             /*
              * Bind Assist call here
              */
-            return this.assist;
+            return this.underway;
         } else {
             throw new _417JobMethodException(this.getClass(), mission.getCode());
         }

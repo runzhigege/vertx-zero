@@ -24,7 +24,6 @@ class DictTool {
     private static final ConcurrentMap<Integer, Dictionary> POOL_DICT =
             new ConcurrentHashMap<>();
 
-
     static ConcurrentMap<String, DictEpsilon> mapEpsilon(final JsonObject epsilonJson) {
         final ConcurrentMap<String, DictEpsilon> epsilonMap = new ConcurrentHashMap<>();
         if (Ut.notNil(epsilonJson)) {

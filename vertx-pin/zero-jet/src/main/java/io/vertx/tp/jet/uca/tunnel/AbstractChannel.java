@@ -1,19 +1,17 @@
 package io.vertx.tp.jet.uca.tunnel;
 
 import io.vertx.core.Future;
-import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.tp.error._501ChannelErrorException;
-import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.monitor.JtMonitor;
-import io.vertx.tp.ke.cv.KeField;
-import io.vertx.tp.optic.environment.Ambient;
+import io.vertx.tp.jet.refine.Jt;
 import io.vertx.tp.optic.jet.JtChannel;
 import io.vertx.tp.optic.jet.JtComponent;
 import io.vertx.up.annotations.Contract;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.*;
 import io.vertx.up.commune.config.Dict;
+import io.vertx.up.commune.config.DictFabric;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
@@ -50,7 +48,10 @@ public abstract class AbstractChannel implements JtChannel {
     private transient Commercial commercial;
     @Contract
     private transient Mission mission;
-
+    /*
+     * In `Job` mode, the dictionary may came from `JobIncome`.
+     * In `Api` mode, the dictionary is null reference here.
+     */
     @Contract
     private transient ConcurrentMap<String, JsonArray> dictionary;
 
@@ -93,7 +94,7 @@ public abstract class AbstractChannel implements JtChannel {
                              * 1) Definition in current channel
                              * 2) Data came from request ( XHeader )
                              */
-                            .compose(nil -> Anagogic.componentAsync(component, this.commercial))
+                            .compose(initialized -> Anagogic.componentAsync(component, this.commercial, this::createFabric))
                             .compose(initialized -> Anagogic.componentAsync(component, envelop))
                             /*
                              * Children initialized
@@ -128,47 +129,38 @@ public abstract class AbstractChannel implements JtChannel {
      * 3) Finally the data will bind to request
      */
     private Future<ActIn> createRequest(final Envelop envelop, final Class<?> recordClass) {
-        return this.createDict().compose(dict -> {
-            /*
-             * Data object, could not be singleton
-             *  */
-            final Record definition = Ut.instance(recordClass);
-            /*
-             * First step for channel
-             * Initialize the `ActIn` object and reference
-             */
-            final ActIn request = new ActIn(envelop);
-            request.bind(this.commercial.mapping());
-            request.bind(dict).connect(definition);
-            return Ux.future(request);
-        });
+        /*
+         * Data object, could not be singleton
+         *  */
+        final Record definition = Ut.instance(recordClass);
+        /*
+         * First step for channel
+         * Initialize the `ActIn` object and reference
+         */
+        final ActIn request = new ActIn(envelop);
+        request.bind(this.commercial.mapping());
+        request.connect(definition);
+
+        return Ux.future(request);
     }
 
-    private Future<ConcurrentMap<String, JsonArray>> createDict() {
+    private Future<DictFabric> createFabric() {
+        /*
+         * Dict configuration
+         */
+        final Dict dict = this.commercial.dict();
         if (Objects.isNull(this.dictionary)) {
-            /*
-             * Params here for different situations
-             */
-            final MultiMap paramMap = MultiMap.caseInsensitiveMultiMap();
-            paramMap.add(KeField.IDENTIFIER, this.commercial.identifier());
-            final JtApp app = Ambient.getApp(this.commercial.app());
-            if (Objects.nonNull(app)) {
-                paramMap.add(KeField.SIGMA, app.getSigma());
-                paramMap.add(KeField.APP_ID, app.getAppId());
-            }
-            /*
-             * Dict configuration
-             */
-            final Dict dict = this.commercial.dict();
-            return Ux.dictCalc(dict, paramMap).compose(dictionary -> {
+            final String appKey = this.commercial.app();
+            final String identifier = this.commercial.identifier();
+            return Jt.toDictionary(appKey, identifier, dict).compose(dictionary -> {
                 /*
                  * Bind dictionary to current dictionary reference
                  */
                 this.dictionary = dictionary;
-                return Ux.future(this.dictionary);
+                return Ux.future(DictFabric.create().dict(dictionary).epsilon(dict.getEpsilon()));
             });
         } else {
-            return Ux.future(this.dictionary);
+            return Ux.future(DictFabric.create().dict(this.dictionary).epsilon(dict.getEpsilon()));
         }
     }
 
@@ -181,11 +173,18 @@ public abstract class AbstractChannel implements JtChannel {
         return Annal.get(this.getClass());
     }
 
-    protected Commercial getCommercial() {
+    // ------------- Rename configuration object -------------
+    /*
+     * Get service definition from `Commercial`
+     */
+    protected Commercial commercial() {
         return this.commercial;
     }
 
-    protected Mission getMission() {
+    /*
+     * Get job definition from `Mission`
+     */
+    protected Mission mission() {
         return this.mission;
     }
 }

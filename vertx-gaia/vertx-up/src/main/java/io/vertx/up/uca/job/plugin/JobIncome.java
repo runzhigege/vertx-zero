@@ -14,7 +14,9 @@ public interface JobIncome {
     Future<Envelop> beforeAsync(final Envelop envelop);
 
     /*
-     * Hidden channel to pass assist data
+     * Hidden channel to pass dict data,
+     * It's underway data passing from
+     * Income -> Job -> Outcome
      */
-    Future<Refer> assist();
+    Future<Refer> underway();
 }

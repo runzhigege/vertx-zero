@@ -2,7 +2,6 @@ package io.vertx.up.uca.job.phase;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
-import io.vertx.up.atom.Refer;
 import io.vertx.up.atom.worker.Mission;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.fn.Fn;
@@ -13,7 +12,6 @@ import io.vertx.up.fn.Fn;
 public class Phase {
 
     /* Dict */
-    private final transient Refer dictionary = new Refer();
     private transient Vertx vertx;
     private transient Mission mission;
     /* Phase */
@@ -62,7 +60,7 @@ public class Phase {
         /*
          * Bind assist to call
          */
-        return this.runOn.bind(this.input.assist())
+        return this.runOn.bind(this.input.underway())
                 .invoke(envelop, this.mission);
     }
 
@@ -82,7 +80,7 @@ public class Phase {
         /*
          * Bind assist to call
          */
-        return this.output.bind(this.input.assist())
+        return this.output.bind(this.input.underway())
                 .outputAsync(envelop, this.mission);
     }
 

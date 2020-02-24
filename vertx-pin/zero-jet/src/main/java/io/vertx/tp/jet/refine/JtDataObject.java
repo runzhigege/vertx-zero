@@ -8,6 +8,7 @@ import io.vertx.tp.jet.atom.JtApp;
 import io.vertx.tp.jet.cv.JtConstant;
 import io.vertx.tp.jet.cv.em.WorkerType;
 import io.vertx.tp.ke.cv.KeField;
+import io.vertx.tp.optic.environment.Ambient;
 import io.vertx.up.commune.config.Database;
 import io.vertx.up.commune.config.Dict;
 import io.vertx.up.commune.config.Integration;
@@ -48,7 +49,7 @@ class JtDataObject {
          */
         final String database = service.getConfigDatabase();
         if (Ut.isNil(database)) {
-            final JtApp app = Jt.toApp(service.getSigma());
+            final JtApp app = Ambient.getApp(service.getSigma());
             if (Objects.nonNull(app)) {
                 /*
                  * name, database
