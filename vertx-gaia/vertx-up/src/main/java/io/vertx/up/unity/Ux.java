@@ -153,7 +153,7 @@ public final class Ux {
         return To.future(entity);
     }
 
-    public static <T> Future<JsonObject> future(final JsonObject input, final Function<JsonObject, Future<JsonObject>>... functions) {
+    public static <T> Future<T> future(final T input, final List<Function<T, Future<T>>> functions) {
         return Async.future(input, functions);
     }
 

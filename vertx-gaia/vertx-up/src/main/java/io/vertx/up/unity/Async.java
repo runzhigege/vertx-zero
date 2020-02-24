@@ -18,15 +18,15 @@ class Async {
     private static final Annal LOGGER = Annal.get(Async.class);
 
     @SuppressWarnings("all")
-    static Future<JsonObject> future(final JsonObject input, final Function<JsonObject, Future<JsonObject>>... queues) {
-        if (0 == queues.length) {
+    static <T> Future<T> future(final T input, final List<Function<T, Future<T>>> queues) {
+        if (0 == queues.size()) {
             /*
              * None queue here
              */
             return To.future(input);
         } else {
-            Future<JsonObject> first = queues[Values.IDX].apply(input);
-            if (1 == queues.length) {
+            Future<T> first = queues.get(Values.IDX).apply(input);
+            if (1 == queues.size()) {
                 /*
                  * Get first future
                  */
@@ -38,8 +38,8 @@ class Async {
                  *    .compose(future[2])
                  *    .compose(...)
                  */
-                for (int idx = 1; idx < queues.length; idx++) {
-                    first = first.compose(queues[idx]);
+                for (int idx = 1; idx < queues.size(); idx++) {
+                    first = first.compose(queues.get(idx));
                 }
                 return first;
             }
