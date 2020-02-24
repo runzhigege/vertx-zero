@@ -50,8 +50,10 @@ public class Atomy {
         return new Atomy(original, current);
     }
 
+    // -------------  Common Api for data getting --------------
     /*
-     * Read original data
+     * JsonObject / JsonArray
+     * Return to original data T
      */
     @SuppressWarnings("unchecked")
     public <T> T original() {
@@ -70,7 +72,9 @@ public class Atomy {
     }
 
     /*
-     * ChangeFlag here
+     * ChangeFlag
+     * Return to change flag here
+     * ADD / UPDATE / DELETE
      */
     public ChangeFlag type() {
         if (this.isBatch) {
@@ -81,7 +85,8 @@ public class Atomy {
     }
 
     /*
-     * Read current data
+     * JsonObject / JsonArray
+     * Read current data T
      */
     public <T> T current() {
         final T reference;
@@ -100,6 +105,30 @@ public class Atomy {
 
     /*
      * Single operation here, select value
+     * This method is for most usage
+     *
+     * 1. JsonObject:
+     * --- ADD,
+     *     original = null, current = value,
+     *     return to `current` Json
+     * --- DELETE,
+     *     original = value, current = null,
+     *     return to `original` Json
+     * --- UPDATE,
+     *     original = value, current = value,
+     *     return to combined json, `original` + `current` both.
+     *
+     * 2. JsonArray:
+     * --- ADD,
+     *     original = null / Empty, current = value
+     *     return to `current` Json Array
+     * --- DELETE,
+     *     original = value, current = null / Empty
+     *     return to `original` Json Array
+     * --- UPDATE,
+     *     original = value, current = value
+     *     This situation is specific, the system could not combine two array because there
+     *     missed rule, in this kind of situation, the reference should be `original` array instead
      */
     public <T> T data() {
         if (this.isBatch) {
@@ -109,28 +138,34 @@ public class Atomy {
         }
     }
 
-    @Fluent
-    public Atomy io(final JsonObject updated) {
-        if (this.isBatch) {
-            this.batch.update(updated);
-        } else {
-            this.single.update(updated);
-        }
-        return this;
-    }
-
-    public Future<Atomy> ioAsync(final JsonObject updated) {
-        return Future.succeededFuture(this.io(updated));
-    }
-
-    public <T> Future<T> ioAsync(final T updated) {
+    /*
+     * `io` method is for current data updating, it will replace the
+     *  latest data ( JsonObject / JsonArray )
+     */
+    public <T> T current(final T updated) {
         final T reference;
         if (this.isBatch) {
             reference = (T) this.batch.current((JsonArray) updated);
         } else {
             reference = (T) this.single.current((JsonObject) updated);
         }
-        return Future.succeededFuture(reference);
+        return reference;
+    }
+
+    public <T> Future<T> currentAsync(final T updated) {
+        return Future.succeededFuture(this.current(updated));
+    }
+
+    @Fluent
+    public <T> Atomy next(final T updated) {
+        this.current(updated);
+        return this;
+    }
+
+    @Fluent
+    public <T> Future<Atomy> nextAsync(final T updated) {
+        this.current(updated);
+        return Future.succeededFuture(this);
     }
 
     /*
@@ -141,6 +176,8 @@ public class Atomy {
      * - add(JsonArray)             - Replace flag = ADD queue
      * - update(JsonArray)          - Replace flag = UPDATE queue
      * - update(JsonObject)         - Update data based on `JsonObject`
+     *
+     * @return
      */
     public ConcurrentMap<ChangeFlag, JsonArray> compared() {
         if (this.isBatch) {
@@ -174,6 +211,10 @@ public class Atomy {
         return this;
     }
 
+    public JsonArray add() {
+        return this.batch.compared(ChangeFlag.ADD);
+    }
+
     @Fluent
     public Atomy update(final JsonArray updated) {
         if (this.isBatch) {
@@ -183,8 +224,17 @@ public class Atomy {
         return this;
     }
 
-    public JsonArray add() {
-        return this.batch.compared(ChangeFlag.ADD);
+    public Atomy update(final JsonObject updated) {
+        if (this.isBatch) {
+            this.batch.update(updated);
+        } else {
+            this.single.update(updated);
+        }
+        return this;
+    }
+
+    public Future<Atomy> updateAsync(final JsonObject updated) {
+        return Future.succeededFuture(this.update(updated));
     }
 
     public JsonArray update() {
