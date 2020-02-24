@@ -157,10 +157,10 @@ public abstract class AbstractChannel implements JtChannel {
                  * Bind dictionary to current dictionary reference
                  */
                 this.dictionary = dictionary;
-                return Ux.future(DictFabric.create().dict(dictionary).epsilon(dict.getEpsilon()));
+                return Ux.future(DictFabric.create().dictionary(dictionary).epsilon(dict.getEpsilon()));
             });
         } else {
-            return Ux.future(DictFabric.create().dict(this.dictionary).epsilon(dict.getEpsilon()));
+            return Ux.future(DictFabric.create().dictionary(this.dictionary).epsilon(dict.getEpsilon()));
         }
     }
 
