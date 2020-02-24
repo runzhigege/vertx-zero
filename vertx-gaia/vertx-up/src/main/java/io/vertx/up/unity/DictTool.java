@@ -44,7 +44,7 @@ class DictTool {
             /*
              * Not `Dict` configured
              */
-            return To.toFuture(new ConcurrentHashMap<>());
+            return To.future(new ConcurrentHashMap<>());
         } else {
             /*
              * Dict extract here
@@ -65,9 +65,9 @@ class DictTool {
                      * Param Map / List<Source>
                      */
                     return dictStub.fetchAsync(paramMap, dict.getSource());
-                } else return To.toFuture(dictData);
+                } else return To.future(dictData);
             }
-            return To.toFuture(dictData);
+            return To.future(dictData);
         }
     }
 }

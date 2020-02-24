@@ -150,11 +150,15 @@ public final class Ux {
     }
 
     public static <T> Future<T> future(final T entity) {
-        return To.toFuture(entity);
+        return To.future(entity);
+    }
+
+    public static <T> Future<JsonObject> future(final JsonObject input, final Function<JsonObject, Future<JsonObject>>... functions) {
+        return Async.future(input, functions);
     }
 
     public static <T> Future<T> future() {
-        return To.toFuture(null);
+        return To.future(null);
     }
 
     public static <T> Handler<AsyncResult<T>> handler(final Message<Envelop> message) {
@@ -198,11 +202,11 @@ public final class Ux {
     }
 
     public static Future<JsonArray> fnJArray(final Record[] records) {
-        return Fn.getNull(Future.succeededFuture(new JsonArray()), () -> To.toFuture(To.toArray(records)), records);
+        return Fn.getNull(Future.succeededFuture(new JsonArray()), () -> To.future(To.toArray(records)), records);
     }
 
     public static Future<JsonObject> fnJObject(final Record record) {
-        return Fn.getNull(Future.succeededFuture(new JsonObject()), () -> To.toFuture(record.toJson()), record);
+        return Fn.getNull(Future.succeededFuture(new JsonObject()), () -> To.future(record.toJson()), record);
     }
 
     public static <T> Function<T, Future<JsonObject>> fnJObject(final String pojo) {

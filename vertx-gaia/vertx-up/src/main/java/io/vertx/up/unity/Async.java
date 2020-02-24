@@ -4,6 +4,7 @@ import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.eon.Values;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 
@@ -16,7 +17,36 @@ class Async {
 
     private static final Annal LOGGER = Annal.get(Async.class);
 
-    static <T> Future<T> toFuture(
+    @SuppressWarnings("all")
+    static Future<JsonObject> future(final JsonObject input, final Function<JsonObject, Future<JsonObject>>... queues) {
+        if (0 == queues.length) {
+            /*
+             * None queue here
+             */
+            return To.future(input);
+        } else {
+            Future<JsonObject> first = queues[Values.IDX].apply(input);
+            if (1 == queues.length) {
+                /*
+                 * Get first future
+                 */
+                return first;
+            } else {
+                /*
+                 * future[0]
+                 *    .compose(future[1])
+                 *    .compose(future[2])
+                 *    .compose(...)
+                 */
+                for (int idx = 1; idx < queues.length; idx++) {
+                    first = first.compose(queues[idx]);
+                }
+                return first;
+            }
+        }
+    }
+
+    static <T> Future<T> future(
             final CompletableFuture<T> completableFuture
     ) {
         final Promise<T> future = Promise.promise();
