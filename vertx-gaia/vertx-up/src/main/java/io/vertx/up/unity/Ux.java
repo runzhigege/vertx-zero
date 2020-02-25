@@ -35,10 +35,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
-import java.util.function.BiConsumer;
-import java.util.function.BinaryOperator;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 /**
  * Here Ux is a util interface of uniform to call different tools.
@@ -136,6 +133,9 @@ public final class Ux {
      * 2) future: ( Wrapper Future.successedFuture / Future.failureFuture ) at same time
      * 3) handler: ( Handler<AsyncResult<T>> )
      * 4) compare: ( Compare two object )
+     * 5) complex:
+     *    - JsonObject -> condition -> executor
+     *    - JsonArray -> condition -> grouper -> executor
      */
     public static Envelop envelop(final Class<? extends WebException> clazz, final Object... args) {
         return To.toEnvelop(clazz, args);
@@ -159,6 +159,10 @@ public final class Ux {
 
     public static <T> Future<T> future() {
         return To.future(null);
+    }
+
+    public static Future<JsonObject> complex(final JsonObject input, final Predicate<JsonObject> predicate, final Supplier<Future<JsonObject>> executor) {
+        return Complex.complex(input, predicate, executor);
     }
 
     public static <T> Handler<AsyncResult<T>> handler(final Message<Envelop> message) {

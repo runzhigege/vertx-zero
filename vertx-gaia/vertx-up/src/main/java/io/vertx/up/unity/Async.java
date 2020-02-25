@@ -9,6 +9,7 @@ import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -26,22 +27,38 @@ class Async {
             return To.future(input);
         } else {
             Future<T> first = queues.get(Values.IDX).apply(input);
-            if (1 == queues.size()) {
-                /*
-                 * Get first future
-                 */
-                return first;
+            if (Objects.isNull(first)) {
+                LOGGER.error("The index = 0 future<T> returned null, plugins will be terminal");
+                return To.future(input);
             } else {
-                /*
-                 * future[0]
-                 *    .compose(future[1])
-                 *    .compose(future[2])
-                 *    .compose(...)
-                 */
-                for (int idx = 1; idx < queues.size(); idx++) {
-                    first = first.compose(queues.get(idx));
+                if (1 == queues.size()) {
+                    /*
+                     * Get first future
+                     */
+                    return first;
+                } else {
+                    /*
+                     * future[0]
+                     *    .compose(future[1])
+                     *    .compose(future[2])
+                     *    .compose(...)
+                     */
+                    for (int idx = 1; idx < queues.size(); idx++) {
+                        final int current = idx;
+                        first = first.compose(json -> {
+                            final Future<T> future = queues.get(current).apply(json);
+                            if (Objects.isNull(future)) {
+                                /*
+                                 * When null found, skip current
+                                 */
+                                return To.future(json);
+                            } else {
+                                return future;
+                            }
+                        });
+                    }
+                    return first;
                 }
-                return first;
             }
         }
     }

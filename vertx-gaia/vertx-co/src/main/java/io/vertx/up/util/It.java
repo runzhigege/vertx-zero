@@ -5,14 +5,23 @@ import io.vertx.core.json.JsonObject;
 
 import java.util.Objects;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 class It {
     static java.util.stream.Stream<JsonObject> itJArray(final JsonArray array) {
         return array.stream().filter(item -> item instanceof JsonObject).map(item -> (JsonObject) item);
     }
 
+    static java.util.stream.Stream<JsonObject> itJArray(final JsonArray array, final Predicate<JsonObject> predicate) {
+        return itJArray(array).filter(predicate);
+    }
+
     static java.util.stream.Stream<String> itJString(final JsonArray array) {
         return array.stream().filter(item -> item instanceof String).map(item -> (String) item);
+    }
+
+    static java.util.stream.Stream<String> itJString(final JsonArray array, final Predicate<String> predicate) {
+        return itJString(array, predicate);
     }
 
     @SuppressWarnings("all")
