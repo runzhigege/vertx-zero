@@ -143,7 +143,7 @@ public class ExcelClientImpl implements ExcelClient {
              * First, find the record by unique filters that defined in business here.
              */
             final JsonObject filters = table.whereUnique(data);
-            LOGGER.info("[ Excel ] Filters: {0}, Table: {1}", filters.encode(), table.getName());
+            LOGGER.debug("[ Excel ] Filters: {0}, Table: {1}", filters.encode(), table.getName());
             final T entity = Ux.fromJson(data, table.getPojo(), table.getPojoFile());
             final UxJooq jooq = Ux.Jooq.on(table.getDao());
             if (null != jooq) {
