@@ -113,7 +113,7 @@ public abstract class AbstractJob implements Service {
          */
         final String key = this.service().getSigma();
         return Jt.toDictionary(key, identifier, this.dict()).compose(dictionary -> {
-            this.fabric.dict(dictionary);
+            this.fabric.dictionary(dictionary);
             /*
              * Chain 引用
              */

@@ -145,12 +145,23 @@ final class Statute {
         return ret;
     }
 
-    static <K, V> ConcurrentMap<K, V> group(final List<V> list, final Function<V, K> fnGroup) {
+    static <K, V> ConcurrentMap<K, V> map(final List<V> list, final Function<V, K> fnGroup) {
         final ConcurrentMap<K, V> grouped = new ConcurrentHashMap<>();
         if (Objects.nonNull(list)) {
             list.forEach(each -> grouped.put(fnGroup.apply(each), each));
         }
         return grouped;
+    }
+
+    static ConcurrentMap<String, JsonObject> map(final JsonArray data, final String field) {
+        final ConcurrentMap<String, JsonObject> mapped = new ConcurrentHashMap<>();
+        It.itJArray(data).forEach(json -> {
+            final String key = json.getString(field);
+            if (Ut.notNil(key)) {
+                mapped.put(key, json);
+            }
+        });
+        return mapped;
     }
 
     static ConcurrentMap<String, JsonArray> group(final JsonArray source, final Function<JsonObject, String> executor) {

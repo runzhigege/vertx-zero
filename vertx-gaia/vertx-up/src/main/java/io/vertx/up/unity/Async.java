@@ -4,10 +4,12 @@ import io.vertx.core.Future;
 import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.eon.Values;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -16,7 +18,52 @@ class Async {
 
     private static final Annal LOGGER = Annal.get(Async.class);
 
-    static <T> Future<T> toFuture(
+    @SuppressWarnings("all")
+    static <T> Future<T> future(final T input, final List<Function<T, Future<T>>> queues) {
+        if (0 == queues.size()) {
+            /*
+             * None queue here
+             */
+            return To.future(input);
+        } else {
+            Future<T> first = queues.get(Values.IDX).apply(input);
+            if (Objects.isNull(first)) {
+                LOGGER.error("The index = 0 future<T> returned null, plugins will be terminal");
+                return To.future(input);
+            } else {
+                if (1 == queues.size()) {
+                    /*
+                     * Get first future
+                     */
+                    return first;
+                } else {
+                    /*
+                     * future[0]
+                     *    .compose(future[1])
+                     *    .compose(future[2])
+                     *    .compose(...)
+                     */
+                    for (int idx = 1; idx < queues.size(); idx++) {
+                        final int current = idx;
+                        first = first.compose(json -> {
+                            final Future<T> future = queues.get(current).apply(json);
+                            if (Objects.isNull(future)) {
+                                /*
+                                 * When null found, skip current
+                                 */
+                                return To.future(json);
+                            } else {
+                                return future;
+                            }
+                        });
+                    }
+                    return first;
+                }
+            }
+        }
+    }
+
+    static <T> Future<T> future(
             final CompletableFuture<T> completableFuture
     ) {
         final Promise<T> future = Promise.promise();

@@ -108,7 +108,7 @@
         <http.client.version>4.5.11</http.client.version>
         <http.core.version>4.4.13</http.core.version>
         <!-- Liquibase -->
-        <liquibase.version>3.8.6</liquibase.version>
+        <liquibase.version>3.8.7</liquibase.version>
         <!-- Rpc -->
         <protobuf.version>3.11.4</protobuf.version>
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
@@ -936,6 +936,12 @@
                 <groupId>org.apache.httpcomponents</groupId>
                 <artifactId>httpcore</artifactId>
                 <version>${http.core.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-core -->
+            <dependency>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-core</artifactId>
+                <version>${liquibase.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

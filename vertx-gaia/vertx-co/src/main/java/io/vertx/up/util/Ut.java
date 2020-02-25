@@ -153,8 +153,12 @@ public final class Ut {
         return Statute.group(object, keyFn, valueFn);
     }
 
-    public static <K, V> ConcurrentMap<K, V> elementGroup(final List<V> dataList, final Function<V, K> keyFunction) {
-        return Statute.group(dataList, keyFunction);
+    public static <K, V> ConcurrentMap<K, V> elementMap(final List<V> dataList, final Function<V, K> keyFunction) {
+        return Statute.map(dataList, keyFunction);
+    }
+
+    public static ConcurrentMap<String, JsonObject> elementMap(final JsonArray dataArray, final String field) {
+        return Statute.map(dataArray, field);
     }
 
     public static ConcurrentMap<String, JsonArray> elementGroup(final JsonArray source, final String field) {
@@ -222,6 +226,7 @@ public final class Ut {
      * 10) itJObject / etJObject
      * 11) itJArray / etJArray
      * 12) itJson ( For <T> extract by JsonObject/JsonArray )
+     * 13) itJString
      *
      * `it` means iterator method here
      * `et` means `Error Iterator` to be sure comsumer should throw some checked exception
@@ -285,6 +290,18 @@ public final class Ut {
 
     public static java.util.stream.Stream<JsonObject> itJArray(final JsonArray array) {
         return It.itJArray(array);
+    }
+
+    public static java.util.stream.Stream<JsonObject> itJArray(final JsonArray array, final Predicate<JsonObject> predicate) {
+        return It.itJArray(array, predicate);
+    }
+
+    public static java.util.stream.Stream<String> itJString(final JsonArray array) {
+        return It.itJString(array);
+    }
+
+    public static java.util.stream.Stream<String> itJString(final JsonArray array, final Predicate<String> predicate) {
+        return It.itJString(array, predicate);
     }
 
     public static <T> T itJson(final T data, final Function<JsonObject, T> executor) {

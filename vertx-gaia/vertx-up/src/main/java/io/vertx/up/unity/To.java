@@ -21,7 +21,7 @@ import java.util.function.Function;
 @SuppressWarnings("all")
 class To {
 
-    static <T> Future<T> toFuture(final T entity) {
+    static <T> Future<T> future(final T entity) {
         return Fn.getNull(Future.succeededFuture(),
                 () -> Fn.getSemi(entity instanceof Throwable, null,
                         () -> Future.failedFuture((Throwable) entity),

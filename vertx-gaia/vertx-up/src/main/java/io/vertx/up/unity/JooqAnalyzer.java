@@ -281,17 +281,17 @@ class JooqAnalyzer {
         final Function<DSLContext, Integer> function
                 = dslContext -> null == filters ? dslContext.fetchCount(this.vertxDAO.getTable()) :
                 dslContext.fetchCount(this.vertxDAO.getTable(), JooqCond.transform(filters, this::getColumn));
-        return Async.toFuture(this.vertxDAO.executeAsync(function));
+        return Async.future(this.vertxDAO.executeAsync(function));
     }
 
     <T> Future<List<T>> searchAsync(final Inquiry inquiry) {
         final Function<DSLContext, List<T>> function = context -> this.searchInternal(context, inquiry);
-        return Async.toFuture(this.vertxDAO.executeAsync(function));
+        return Async.future(this.vertxDAO.executeAsync(function));
     }
 
     <T> Future<List<T>> searchAsync(final JsonObject criteria) {
         final Function<DSLContext, List<T>> function = context -> this.searchInternal(context, criteria);
-        return Async.toFuture(this.vertxDAO.executeAsync(function));
+        return Async.future(this.vertxDAO.executeAsync(function));
     }
 
     <T> List<T> search(final Inquiry inquiry) {
