@@ -130,7 +130,7 @@ public class JooqCond {
             condition = transformTree(filters, fnAnalyze, fnTable);
         }
         if (null != condition) {
-            LOGGER.info(Info.JOOQ_PARSE, condition);
+            LOGGER.debug(Info.JOOQ_PARSE, condition);
         }
         return condition;
     }

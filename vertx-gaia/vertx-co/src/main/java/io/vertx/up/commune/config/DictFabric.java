@@ -58,7 +58,7 @@ public class DictFabric {
 
     public DictFabric createCopy(final DualItem mapping) {
         final DictFabric created = create(mapping);
-        created.dict(this.dictData);
+        created.dictionary(this.dictData);
         created.epsilon(this.epsilonMap);
         return created;
     }
@@ -85,7 +85,7 @@ public class DictFabric {
         return this;
     }
 
-    public DictFabric dict(final ConcurrentMap<String, JsonArray> dictData) {
+    public DictFabric dictionary(final ConcurrentMap<String, JsonArray> dictData) {
         if (Objects.nonNull(dictData) && !dictData.isEmpty()) {
             this.dictData.clear();                          /* Clear Queue */
             this.dictData.putAll(dictData);
@@ -94,6 +94,19 @@ public class DictFabric {
         }
         this.init();
         return this;
+    }
+
+    // -------- Get data
+    public DualItem mapping() {
+        return this.mapping;
+    }
+
+    public ConcurrentMap<String, DictEpsilon> epsilon() {
+        return this.epsilonMap;
+    }
+
+    public ConcurrentMap<String, JsonArray> dictionary() {
+        return this.dictData;
     }
 
     private void init() {
@@ -243,14 +256,6 @@ public class DictFabric {
 
     public Future<JsonArray> outFrom(final JsonArray input) {
         return Future.succeededFuture(this.outFromS(input));
-    }
-
-    public DualItem mapping() {
-        return this.mapping;
-    }
-
-    public ConcurrentMap<String, JsonArray> dictionary() {
-        return this.dictData;
     }
 
     private JsonArray process(final JsonArray process,

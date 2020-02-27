@@ -38,7 +38,7 @@ class Unity {
     private static final Annal LOGGER = Annal.get(Unity.class);
 
     static DictFabric fetchFabric(final ConcurrentMap<String, JsonArray> dictData, final IxModule config) {
-        return DictFabric.create().dict(dictData).epsilon(config.getEpsilon());
+        return DictFabric.create().dictionary(dictData).epsilon(config.getEpsilon());
     }
 
     /*

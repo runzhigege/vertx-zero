@@ -50,7 +50,7 @@ class JooqWriter {
     <T> Future<T> insertReturningPrimaryAsync(final T entity,
                                               final Consumer<Long> consumer) {
         final CompletableFuture<Long> future = this.vertxDAO.insertReturningPrimaryAsync(entity);
-        return Async.toFuture(future).compose(id -> {
+        return Async.future(future).compose(id -> {
             if (null != consumer) consumer.accept(id);
             return Future.succeededFuture(entity);
         });
@@ -59,12 +59,12 @@ class JooqWriter {
     /* Async insert operation: INSERT */
     <T> Future<T> insertAsync(final T entity) {
         final CompletableFuture<Void> future = this.vertxDAO.insertAsync(entity);
-        return Async.toFuture(future).compose(nil -> Future.succeededFuture(entity));
+        return Async.future(future).compose(nil -> Future.succeededFuture(entity));
     }
 
     <T> Future<List<T>> insertAsync(final List<T> entities) {
         final CompletableFuture<Void> future = this.vertxDAO.insertAsync(entities);
-        return Async.toFuture(future).compose(nil -> Future.succeededFuture(entities));
+        return Async.future(future).compose(nil -> Future.succeededFuture(entities));
     }
 
     /* Sync insert operation: INSERT */
@@ -83,12 +83,12 @@ class JooqWriter {
     /* Async insert operation: UPDATE */
     <T> Future<T> updateAsync(final T entity) {
         final CompletableFuture<Void> future = this.vertxDAO.updateAsync(entity);
-        return Async.toFuture(future).compose(nil -> Future.succeededFuture(entity));
+        return Async.future(future).compose(nil -> Future.succeededFuture(entity));
     }
 
     <T> Future<List<T>> updateAsync(final List<T> entities) {
         final CompletableFuture<Void> future = this.vertxDAO.updateAsync(entities);
-        return Async.toFuture(future).compose(nil -> Future.succeededFuture(entities));
+        return Async.future(future).compose(nil -> Future.succeededFuture(entities));
     }
 
     /* Sync insert operation: UPDATE */
@@ -107,23 +107,23 @@ class JooqWriter {
     /* Async delete operation: DELETE */
     <T> Future<T> deleteAsync(final T entity) {
         final CompletableFuture<Void> future = this.vertxDAO.deleteAsync(Arrays.asList(entity));
-        return Async.toFuture(future).compose(nil -> Future.succeededFuture(entity));
+        return Async.future(future).compose(nil -> Future.succeededFuture(entity));
     }
 
     <ID> Future<Boolean> deleteByIdAsync(final ID id) {
         final CompletableFuture<Void> future = this.vertxDAO.deleteByIdAsync(id);
-        return Async.toFuture(future).compose(nil -> Future.succeededFuture(Boolean.TRUE));
+        return Async.future(future).compose(nil -> Future.succeededFuture(Boolean.TRUE));
     }
 
     <ID> Future<Boolean> deleteByIdAsync(final Collection<ID> ids) {
         final CompletableFuture<Void> future = this.vertxDAO.deleteByIdAsync(ids);
-        return Async.toFuture(future).compose(nil -> Future.succeededFuture(Boolean.TRUE));
+        return Async.future(future).compose(nil -> Future.succeededFuture(Boolean.TRUE));
     }
 
     <T, ID> Future<Boolean> deleteAsync(final JsonObject filters, final String pojo) {
         final Condition condition = JooqCond.transform(filters, null, this.analyzer::getColumn);
         final CompletableFuture<Integer> deleted = this.vertxDAO.deleteExecAsync(condition);
-        return Async.toFuture(deleted).compose(nil -> Future.succeededFuture(Boolean.TRUE));
+        return Async.future(deleted).compose(nil -> Future.succeededFuture(Boolean.TRUE));
     }
 
     /* Sync delete operation: DELETE */

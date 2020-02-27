@@ -1,6 +1,7 @@
 package io.vertx.tp.plugin.database;
 
 import com.zaxxer.hikari.HikariDataSource;
+import io.vertx.tp.error.DataSourceException;
 import io.vertx.up.commune.config.Database;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
@@ -105,6 +106,7 @@ public class HikariDataPool implements DataPool {
                 this.context = DSL.using(configuration);
             } catch (final SQLException ex) {
                 // LOGGER.jvm(ex);
+                throw new DataSourceException(this.getClass(), ex, this.database.getJdbcUrl());
             }
         }
     }

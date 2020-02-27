@@ -67,7 +67,7 @@ class Web {
                             finalJson.put(field, data.copy());
                         }
                     });
-                    return To.toFuture(finalJson);
+                    return To.future(finalJson);
                 });
     }
 
@@ -77,17 +77,17 @@ class Web {
     ) {
         return json -> {
             if (Ut.isNil(json) || !json.containsKey(field)) {
-                return To.toFuture(json);
+                return To.future(json);
             } else {
                 final JsonObject combine = json.getJsonObject(field);
                 if (Ut.isNil(combine)) {
-                    return To.toFuture(json);
+                    return To.future(json);
                 } else {
                     return toAttach(combine, function).compose(response -> {
                         if (Ut.notNil(response)) {
                             json.put(field, response);
                         }
-                        return To.toFuture(json);
+                        return To.future(json);
                     });
                 }
             }
@@ -100,17 +100,17 @@ class Web {
             final Function<T, Future<JsonObject>> function) {
         return json -> {
             if (Ut.isNil(json) || !json.containsKey(field)) {
-                return To.toFuture(json);
+                return To.future(json);
             } else {
                 final T value = (T) json.getValue(field);
                 if (Objects.isNull(value)) {
-                    return To.toFuture(json);
+                    return To.future(json);
                 } else {
                     return function.apply(value).compose(data -> {
                         if (Ut.notNil(data)) {
                             json.put(field, data);
                         }
-                        return To.toFuture(json);
+                        return To.future(json);
                     });
                 }
             }
