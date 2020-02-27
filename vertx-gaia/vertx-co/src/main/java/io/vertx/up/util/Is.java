@@ -1,6 +1,7 @@
 package io.vertx.up.util;
 
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.eon.Strings;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -201,9 +202,21 @@ class Is {
         } else {
             /*
              * ( Changed ) One is null, another one is not null
+             * 1. Exclude situation
+             * - 1) String Type,  null and "" are equal;
+             *
              * They are false
              */
-            return false;
+            return isSpecific(oldValue, newValue);
         }
+    }
+
+    private static boolean isSpecific(final Object oldValue, final Object newValue) {
+        final Object select = Objects.isNull(oldValue) ? newValue : oldValue;
+        if (select instanceof String) {
+            final String oldStr = Objects.isNull(oldValue) ? Strings.EMPTY : oldValue.toString().trim();
+            final String newStr = Objects.isNull(newValue) ? Strings.EMPTY : newValue.toString().trim();
+            return oldStr.equals(newStr);
+        } else return false;
     }
 }
