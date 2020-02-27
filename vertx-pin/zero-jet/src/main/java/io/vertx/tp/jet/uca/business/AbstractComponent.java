@@ -153,6 +153,7 @@ public abstract class AbstractComponent implements JtComponent, Service {
             Ut.contract(instance, JsonObject.class, this.options());
             Ut.contract(instance, Identity.class, this.identity());
             Ut.contract(instance, DualMapping.class, this.mapping());
+            Ut.contract(instance, DictFabric.class, this.fabric);
             Ut.contract(instance, XHeader.class, this.header);
         }
     }
