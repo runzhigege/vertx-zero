@@ -58,21 +58,17 @@ class JtBusiness {
             /*
              * DualMapping
              */
-            final MappingMode mode =
-                    Ut.toEnum(service::getMappingMode, MappingMode.class, MappingMode.NONE);
+            final MappingMode mode = Ut.toEnum(service::getMappingMode, MappingMode.class, MappingMode.NONE);
             final DualMapping mapping = new DualMapping();
-            if (MappingMode.NONE != mode) {
-                /*
-                 * The mode != NONE means that there must contain configuration
-                 */
-                final JsonObject config = Ut.toJObject(service.getMappingConfig());
-                /*
-                 * 「Optional」The component inject
-                 */
-                final Class<?> component =
-                        Ut.clazz(service.getMappingComponent(), null);
-                mapping.init(config).bind(mode).bind(component);
-            }
+            /*
+             * The mode != NONE means that there must contain configuration
+             */
+            final JsonObject config = Ut.toJObject(service.getMappingConfig());
+            /*
+             * 「Optional」The component inject
+             */
+            final Class<?> component = Ut.clazz(service.getMappingComponent(), null);
+            mapping.init(config).bind(mode).bind(component);
             return mapping;
         }), service);
     }
