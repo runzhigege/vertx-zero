@@ -117,6 +117,14 @@ public final class Ut {
         return Jackson.mergeZip(source, target, sourceKey, targetKey);
     }
 
+    public static JsonArray elementZip(final JsonArray source, final JsonArray target, final String bothKey) {
+        return Jackson.mergeZip(source, target, bothKey, bothKey);
+    }
+
+    public static JsonArray elementZip(final JsonArray source, final JsonArray target) {
+        return Jackson.mergeZip(source, target, "key", "key");
+    }
+
     public static <F, S, T> List<T> elementZip(final List<F> first, final List<S> second, final BiFunction<F, S, T> function) {
         return Statute.zipper(first, second, function);
     }
