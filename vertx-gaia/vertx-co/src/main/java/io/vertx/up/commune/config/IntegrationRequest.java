@@ -1,14 +1,17 @@
 package io.vertx.up.commune.config;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonObjectDeserializer;
 import com.fasterxml.jackson.databind.JsonObjectSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.json.JsonObject;
+import io.vertx.up.util.Ut;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.function.Function;
 
 /*
  * IntegrationRequest for api description
@@ -29,12 +32,35 @@ public class IntegrationRequest implements Serializable {
     @JsonDeserialize(using = JsonObjectDeserializer.class)
     private transient JsonObject headers = new JsonObject();
 
+    @JsonIgnore
+    private transient Function<JsonObject, String> executor;
+
     public String getPath() {
         return this.path;
     }
 
     public void setPath(final String path) {
         this.path = path;
+    }
+
+    public String getPath(final JsonObject params) {
+        if (Objects.nonNull(this.executor)) {
+            return this.executor.apply(params);
+        } else {
+            return null;
+        }
+    }
+
+    public void setExecutor(final String endpoint, final String expr) {
+        this.executor = params -> {
+            final JsonObject normalized = Ut.sureJObject(params);
+            final String result = Ut.fromExpression(expr, normalized);
+            return endpoint + result;
+        };
+    }
+
+    public boolean isExpr() {
+        return Objects.nonNull(this.executor);
     }
 
     public HttpMethod getMethod() {

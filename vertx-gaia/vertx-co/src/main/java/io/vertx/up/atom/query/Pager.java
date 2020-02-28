@@ -32,12 +32,12 @@ public class Pager implements Serializable {
     private transient int end;
 
     private Pager(final Integer page, final Integer size) {
-        init(page, size);
+        this.init(page, size);
     }
 
     private Pager(final JsonObject pageJson) {
-        ensure(pageJson);
-        init(pageJson.getInteger(PAGE), pageJson.getInteger(SIZE));
+        this.ensure(pageJson);
+        this.init(pageJson.getInteger(PAGE), pageJson.getInteger(SIZE));
     }
 
     /**
@@ -81,37 +81,47 @@ public class Pager implements Serializable {
     private void init(final Integer page, final Integer size) {
         // Page/Size
         Fn.outWeb(1 > page, LOGGER,
-                _400PagerInvalidException.class, getClass(), page);
+                _400PagerInvalidException.class, this.getClass(), page);
         this.page = page;
         // Default Size is 10
         this.size = 0 < size ? size : 10;
         Fn.safeNull(() -> {
             // Caculate
-            start = (this.page - 1) * this.size;
-            end = this.page * this.size;
+            this.start = (this.page - 1) * this.size;
+            this.end = this.page * this.size;
         }, this.page, this.size);
     }
 
     public JsonObject toJson() {
         final JsonObject data = new JsonObject();
-        data.put(PAGE, page);
-        data.put(SIZE, size);
+        data.put(PAGE, this.page);
+        data.put(SIZE, this.size);
         return data;
     }
 
     public int getPage() {
-        return page;
+        return this.page;
     }
 
     public int getSize() {
-        return size;
+        return this.size;
     }
 
     public int getStart() {
-        return start;
+        return this.start;
     }
 
     public int getEnd() {
-        return end;
+        return this.end;
+    }
+
+    @Override
+    public String toString() {
+        return "Pager{" +
+                "page=" + this.page +
+                ", size=" + this.size +
+                ", start=" + this.start +
+                ", end=" + this.end +
+                '}';
     }
 }

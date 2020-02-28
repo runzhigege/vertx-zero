@@ -61,23 +61,23 @@ public abstract class AbstractRotator implements Rotator {
 
     protected String configPath(final IntegrationRequest request, final JsonObject params) {
         final String exprPath = request.getPath();
-        if (Ut.isNil(exprPath)) {
-            throw new _500RequestConfigException(this.getClass(), request, params);
+        if (request.isExpr()) {
+            /*
+             * The path contains `expression` such as
+             *
+             * `/path/${name}/user/${id}` mode
+             *
+             * In this situation, zero will parse this string
+             */
+            try {
+                return request.getPath(params);
+            } catch (final JexlExpressionException ex) {
+                ex.printStackTrace();
+                throw new _500RequestConfigException(this.getClass(), request, params);
+            }
         } else {
-            if (0 <= exprPath.indexOf('`')) {
-                /*
-                 * The path contains `expression` such as
-                 *
-                 * `/path/${name}/user/${id}` mode
-                 *
-                 * In this situation, zero will parse this string
-                 */
-                try {
-                    return Ut.fromExpression(exprPath, params);
-                } catch (final JexlExpressionException ex) {
-                    ex.printStackTrace();
-                    throw new _500RequestConfigException(this.getClass(), request, params);
-                }
+            if (Ut.isNil(exprPath)) {
+                throw new _500RequestConfigException(this.getClass(), request, params);
             } else {
                 /*
                  * No paring
