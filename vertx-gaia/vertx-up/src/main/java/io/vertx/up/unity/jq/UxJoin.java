@@ -1,4 +1,4 @@
-package io.vertx.up.unity;
+package io.vertx.up.unity.jq;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
@@ -6,6 +6,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.pojo.Mirror;
 import io.vertx.up.atom.pojo.Mojo;
 import io.vertx.up.atom.query.Inquiry;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
 import java.util.Objects;
@@ -22,7 +23,7 @@ public class UxJoin {
             = new ConcurrentHashMap<>();
     private transient Mojo merged = null;
 
-    UxJoin(final String file) {
+    public UxJoin(final String file) {
         if (Ut.notNil(file)) {
             final JsonObject config = Ut.ioJObject(file);
             if (Ut.notNil(config)) {
@@ -92,7 +93,7 @@ public class UxJoin {
     }
 
     private Inquiry toInquiry(final JsonObject params) {
-        return Objects.isNull(this.merged) ? Inquiry.create(params) : Query.getInquiry(params, this.merged);
+        return Objects.isNull(this.merged) ? Inquiry.create(params) : QTool.getInquiry(params, this.merged);
     }
 
     public Future<JsonObject> searchAsync(final Inquiry inquiry) {

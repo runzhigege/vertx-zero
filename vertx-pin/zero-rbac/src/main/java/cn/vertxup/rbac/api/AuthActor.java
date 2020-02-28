@@ -8,7 +8,7 @@ import io.vertx.tp.rbac.cv.Addr;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
-import io.vertx.up.unity.Uson;
+import io.vertx.up.atom.unity.Uson;
 
 import javax.inject.Inject;
 
@@ -23,12 +23,12 @@ public class AuthActor {
 
     @Address(Addr.Auth.LOGIN)
     public Future<JsonObject> login(final JsonObject user) {
-        return stub.login(user);
+        return this.stub.login(user);
     }
 
     @Address(Addr.Auth.AUTHORIZE)
     public Future<JsonObject> authorize(final JsonObject data) {
-        return stub.authorize(Uson.create(data).denull()
+        return this.stub.authorize(Uson.create(data).denull()
                 .remove(AuthKey.RESPONSE_TYPE)
                 .convert(AuthKey.CLIENT_ID, AuthKey.F_CLIENT_ID)
                 .convert(AuthKey.CLIENT_SECRET, AuthKey.F_CLIENT_SECRET)
@@ -37,6 +37,6 @@ public class AuthActor {
 
     @Address(Addr.Auth.TOKEN)
     public Future<JsonObject> token(final JsonObject data, final Session session) {
-        return stub.token(data.copy(), session);
+        return this.stub.token(data.copy(), session);
     }
 }

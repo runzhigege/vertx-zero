@@ -72,7 +72,7 @@ package up.god.ipc;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.unity.Uson;
+import io.vertx.up.atom.unity.Uson;
 import io.vertx.up.annotations.Ipc;
 import io.vertx.up.commune.Envelop;
 

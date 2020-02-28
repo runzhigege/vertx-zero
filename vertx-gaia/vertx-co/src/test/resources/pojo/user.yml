@@ -1,4 +1,4 @@
-type: "io.vertx.zero.io.vertx.up.atom.User"
+type: "io.vertx.up.atom.User"
 mapping:
   username: "zUsername"
   password: "zPassword"

@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
-import io.vertx.up.unity.UxJooq;
+import io.vertx.up.unity.jq.UxJooq;
 import io.vertx.up.util.Ut;
 
 import java.time.Instant;
@@ -37,7 +37,7 @@ class IxFn {
             final JsonObject criteria, final IxModule config) {
         final String pojo = config.getPojo();
         return dao -> {
-            IxLog.infoDao(LOGGER, "( Query ) Dao -> {0}, pojo = {1}", dao.getClass(), pojo);
+            IxLog.infoDao(LOGGER, "( QTool ) Dao -> {0}, pojo = {1}", dao.getClass(), pojo);
             // Here must put condition here.
             if (Ut.notNil(pojo)) {
                 return dao.searchAsync(criteria, pojo);
@@ -58,7 +58,7 @@ class IxFn {
             parameters.mergeIn(criteria);
         }
         return dao -> {
-            IxLog.infoDao(LOGGER, "( Query ) Dao -> {0}, pojo = {1}", dao.getClass(), pojo);
+            IxLog.infoDao(LOGGER, "( QTool ) Dao -> {0}, pojo = {1}", dao.getClass(), pojo);
             // Here must put condition here.
             return dao.existsOneAsync(parameters);
         };

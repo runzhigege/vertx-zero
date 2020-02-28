@@ -24,6 +24,39 @@ import java.util.function.Supplier;
 @SuppressWarnings("all")
 class Combine {
 
+    static <T> Future<List<T>> thenCombineT(final List<Future<T>> futures) {
+        final List<Future> futureList = new ArrayList<>(futures);
+        return CompositeFuture.join(futureList).compose(finished -> {
+            final List<T> result = new ArrayList<>();
+            if (null != finished) {
+                Ut.itList(finished.list(), (item, index) -> {
+                    if (Objects.nonNull(item)) {
+                        result.add((T) item);
+                    }
+                });
+            }
+            return Future.succeededFuture(result);
+        });
+    }
+
+    static <T> Future<List<T>> thenCombineArrayT(final List<Future<List<T>>> futures) {
+        final List<Future> futureList = new ArrayList<>(futures);
+        return CompositeFuture.join(futureList).compose(finished -> {
+            final List<T> result = new ArrayList<>();
+            if (null != finished) {
+                Ut.itList(finished.list(), (item, index) -> {
+                    if (item instanceof List) {
+                        final List<T> grouped = (List<T>) item;
+                        if (!grouped.isEmpty()) {
+                            result.addAll(grouped);
+                        }
+                    }
+                });
+            }
+            return Future.succeededFuture(result);
+        });
+    }
+
     static Future<JsonArray> thenCombine(
             final Future<JsonArray> source,
             final Function<JsonObject, Future<JsonObject>> generateFun,

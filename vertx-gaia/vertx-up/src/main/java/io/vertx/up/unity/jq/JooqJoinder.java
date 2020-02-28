@@ -1,4 +1,4 @@
-package io.vertx.up.unity;
+package io.vertx.up.unity.jq;
 
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 import io.vertx.core.Future;
@@ -10,6 +10,7 @@ import io.vertx.up.atom.pojo.Mojo;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.atom.query.Pager;
 import io.vertx.up.uca.condition.JooqCond;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 import org.jooq.*;
 import org.jooq.impl.DSL;
@@ -22,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /*
- * Join Operation Complex Query Component
+ * Join Operation Complex QTool Component
  */
 @SuppressWarnings("all")
 class JooqJoinder {

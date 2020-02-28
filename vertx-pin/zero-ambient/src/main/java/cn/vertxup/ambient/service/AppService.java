@@ -11,7 +11,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
 import io.vertx.tp.optic.business.ExApp;
-import io.vertx.up.unity.Uson;
+import io.vertx.up.atom.unity.Uson;
 import io.vertx.up.unity.Ux;
 
 public class AppService implements AppStub {

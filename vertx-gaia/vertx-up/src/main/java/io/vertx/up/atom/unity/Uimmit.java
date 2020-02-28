@@ -1,4 +1,4 @@
-package io.vertx.up.unity;
+package io.vertx.up.atom.unity;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Plugins;
@@ -22,7 +22,7 @@ public class Uimmit {
 
     private Uimmit(final Class<?> clazz) {
         this.clazz = clazz;
-        logger = Annal.get(clazz);
+        this.logger = Annal.get(clazz);
     }
 
     public static Uimmit create(final Class<?> clazz) {
@@ -45,7 +45,7 @@ public class Uimmit {
     }
 
     public Object initialize(final Field field) {
-        final Class<? extends Annotation> key = search(field);
+        final Class<? extends Annotation> key = this.search(field);
         final String pluginKey = Plugins.INFIX_MAP.get(key);
         final Class<?> infixCls = ZeroAmbient.getPlugin(pluginKey);
         Object ret = null;
@@ -55,18 +55,18 @@ public class Uimmit {
                 final Node<JsonObject> node = Ut.instance(ZeroUniform.class);
                 final JsonObject options = node.read();
 
-                Fn.outUp(!options.containsKey(pluginKey), logger,
+                Fn.outUp(!options.containsKey(pluginKey), this.logger,
                         InjectionLimeKeyException.class,
-                        clazz, infixCls, pluginKey);
+                        this.clazz, infixCls, pluginKey);
 
                 final Infix reference = Ut.singleton(infixCls);
 
                 ret = Ut.invoke(reference, "get");
             } else {
-                logger.warn(Info.INFIX_IMPL, infixCls.getName(), Infix.class.getName());
+                this.logger.warn(Info.INFIX_IMPL, infixCls.getName(), Infix.class.getName());
             }
         } else {
-            logger.warn(Info.INFIX_NULL, pluginKey, field.getName(), field.getDeclaringClass().getName());
+            this.logger.warn(Info.INFIX_NULL, pluginKey, field.getName(), field.getDeclaringClass().getName());
         }
         return ret;
     }

@@ -1,4 +1,4 @@
-package io.vertx.up.unity;
+package io.vertx.up.unity.jq;
 
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 import io.vertx.core.Future;
@@ -40,12 +40,12 @@ public class JooqReader {
     // ============ Fetch One Operation =============
     /* Async fetch one operation: SELECT */
     <T> Future<T> fetchOneAsync(final String field, final Object value) {
-        return Async.future(this.vertxDAO.fetchOneAsync(this.analyzer.getColumn(field), value));
+        return QTool.future(this.vertxDAO.fetchOneAsync(this.analyzer.getColumn(field), value));
     }
 
     <T> Future<T> fetchOneAndAsync(final JsonObject filters) {
         final Condition condition = JooqCond.transform(filters, Operator.AND, this.analyzer::getColumn);
-        return Async.future(this.vertxDAO.fetchOneAsync(condition));
+        return QTool.future(this.vertxDAO.fetchOneAsync(condition));
     }
 
     <T> T fetchOneAnd(final JsonObject filters) {
@@ -55,11 +55,11 @@ public class JooqReader {
     }
 
     <T> Future<T> findByIdAsync(final Object id) {
-        return Async.future(this.vertxDAO.findByIdAsync(id));
+        return QTool.future(this.vertxDAO.findByIdAsync(id));
     }
 
     <T> Future<List<T>> findAllAsync() {
-        return Async.future(this.vertxDAO.findAllAsync());
+        return QTool.future(this.vertxDAO.findAllAsync());
     }
 
     /* Sync fetch one operation: SELECT */
@@ -77,7 +77,7 @@ public class JooqReader {
 
     // ============ Exist Operation =============
     Future<Boolean> existsByIdAsync(final Object id) {
-        return Async.future(this.vertxDAO.existsByIdAsync(id));
+        return QTool.future(this.vertxDAO.existsByIdAsync(id));
     }
 
     Boolean existsById(final Object id) {
@@ -86,15 +86,15 @@ public class JooqReader {
 
     // ============ Fetch List with Condition ===========
     <T> Future<List<T>> fetchAsync(final String field, final Object value) {
-        return Async.future(this.vertxDAO.fetchAsync(this.analyzer.getColumn(field), Arrays.asList(value)));
+        return QTool.future(this.vertxDAO.fetchAsync(this.analyzer.getColumn(field), Arrays.asList(value)));
     }
 
     <T> Future<List<T>> fetchAsync(final Condition condition) {
-        return Async.future(this.vertxDAO.fetchAsync(condition));
+        return QTool.future(this.vertxDAO.fetchAsync(condition));
     }
 
     <T> Future<List<T>> fetchInAsync(final String field, final List<Object> values) {
-        return Async.future(this.vertxDAO.fetchAsync(this.analyzer.getColumn(field), values));
+        return QTool.future(this.vertxDAO.fetchAsync(this.analyzer.getColumn(field), values));
     }
 
     <T> List<T> fetch(final String field, final Object value) {

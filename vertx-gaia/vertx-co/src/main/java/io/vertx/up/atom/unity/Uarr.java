@@ -1,10 +1,10 @@
-package io.vertx.up.unity;
+package io.vertx.up.atom.unity;
 
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.log.Annal;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.log.Annal;
 
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;

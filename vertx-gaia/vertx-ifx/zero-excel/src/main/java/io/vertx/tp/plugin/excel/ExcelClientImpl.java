@@ -14,7 +14,7 @@ import io.vertx.up.exception.web._500InternalServerException;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
-import io.vertx.up.unity.UxJooq;
+import io.vertx.up.unity.jq.UxJooq;
 import io.vertx.up.util.Ut;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;

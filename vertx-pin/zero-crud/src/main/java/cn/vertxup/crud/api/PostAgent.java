@@ -29,7 +29,7 @@ public interface PostAgent {
                       @BodyParam JsonObject data);
 
     /*
-     * Search Interface for Query Engine
+     * Search Interface for QTool Engine
      */
     @POST
     @Path("/{actor}/search")

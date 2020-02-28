@@ -1,4 +1,4 @@
-package io.vertx.up.unity;
+package io.vertx.up.atom.unity;
 
 interface StreamInfo {
     String STREAM_START = "[ ZERO ] ( JsonStream ) Uson/Uarr of {0} initialized data: {1}";

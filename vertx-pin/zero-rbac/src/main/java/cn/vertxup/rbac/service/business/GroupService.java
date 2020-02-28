@@ -10,10 +10,10 @@ import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.refine.Sc;
-import io.vertx.up.unity.Uarr;
-import io.vertx.up.unity.Ux;
-import io.vertx.up.unity.UxJooq;
+import io.vertx.up.atom.unity.Uarr;
 import io.vertx.up.log.Annal;
+import io.vertx.up.unity.Ux;
+import io.vertx.up.unity.jq.UxJooq;
 
 import java.util.ArrayList;
 import java.util.List;

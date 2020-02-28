@@ -1,5 +1,7 @@
-package io.vertx.up.unity;
+package io.vertx.up.unity.jq;
 
+import io.vertx.core.Future;
+import io.vertx.core.Promise;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.pojo.Mirror;
@@ -10,26 +12,27 @@ import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentMap;
 
-class Query {
+public class QTool {
 
-    private static final Annal LOGGER = Annal.get(Query.class);
+    private static final Annal LOGGER = Annal.get(QTool.class);
 
-    static Inquiry getInquiry(final JsonObject envelop, final String pojo) {
+    public static Inquiry getInquiry(final JsonObject envelop, final String pojo) {
         return Fn.getNull(Inquiry.create(new JsonObject()), () -> {
             final JsonObject data = envelop.copy();
             if (Ut.isNil(pojo)) {
                 return Inquiry.create(data);
             } else {
                 // Projection Process
-                final Mojo mojo = Mirror.create(Query.class).mount(pojo).mojo();
+                final Mojo mojo = Mirror.create(QTool.class).mount(pojo).mojo();
                 return getInquiry(data, mojo);
             }
         }, envelop);
     }
 
-    static Inquiry getInquiry(final JsonObject data, final Mojo mojo) {
+    public static Inquiry getInquiry(final JsonObject data, final Mojo mojo) {
         if (data.containsKey("projection")) {
             data.put("projection", projection(data.getJsonArray("projection"), mojo));
         }
@@ -62,7 +65,7 @@ class Query {
         return sorters;
     }
 
-    static JsonObject criteria(final JsonObject criteria, final Mojo mojo) {
+    public static JsonObject criteria(final JsonObject criteria, final Mojo mojo) {
         final JsonObject criterias = new JsonObject();
         final ConcurrentMap<String, String> mapping = mojo.getIn();
         for (final String field : criteria.fieldNames()) {
@@ -78,7 +81,7 @@ class Query {
                 // Ignore non-existing field in mapping here to avoid SQL errors.
                 criterias.put(targetField, criteria.getValue(field));
             } else {
-                // Query Engine Needed, Support Tree
+                // QTool Engine Needed, Support Tree
                 if (Ut.isJObject(criteria.getValue(field)) || field.equals(Strings.EMPTY)) {
                     if (Ut.isJObject(criteria.getValue(field))) {
                         final JsonObject valueJson = criteria.getJsonObject(field);
@@ -101,5 +104,18 @@ class Query {
         Ut.itJArray(projections, String.class, (item, index) ->
                 result.add(null == mapping.get(item) ? item : mapping.get(item)));
         return result;
+    }
+
+    static <T> Future<T> future(
+            final CompletableFuture<T> completableFuture
+    ) {
+        final Promise<T> future = Promise.promise();
+        completableFuture.thenAcceptAsync(future::complete)
+                .exceptionally((ex) -> {
+                    LOGGER.jvm(ex);
+                    future.fail(ex);
+                    return null;
+                });
+        return future.future();
     }
 }

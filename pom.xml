@@ -114,11 +114,11 @@
         <vertx.grpc.version>1.6.1</vertx.grpc.version>
         <grpc.version>1.27.2</grpc.version>
         <!-- Yaml -->
-        <yaml.version>1.25</yaml.version>
+        <yaml.version>1.26</yaml.version>
         <!-- Vert.x Addition -->
         <rxjava2.version>2.2.18</rxjava2.version>
         <netty.tcnative.version>2.0.29.Final</netty.tcnative.version>
-        <netty.version>4.1.45.Final</netty.version>
+        <netty.version>4.1.46.Final</netty.version>
         <hazelcast.version>3.12.4</hazelcast.version>
         <swagger.version>1.6.0</swagger.version>
         <error.prone.version>2.3.4</error.prone.version>

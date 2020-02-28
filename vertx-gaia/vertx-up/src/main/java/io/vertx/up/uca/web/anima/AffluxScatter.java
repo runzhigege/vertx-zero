@@ -1,7 +1,7 @@
 package io.vertx.up.uca.web.anima;
 
 import io.vertx.core.Vertx;
-import io.vertx.up.unity.Uobj;
+import io.vertx.up.atom.unity.Uobj;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.worker.Receipt;
 import io.vertx.up.util.Ut;
