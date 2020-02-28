@@ -5,6 +5,8 @@ import io.vertx.up.commune.config.Integration;
 import io.vertx.up.uca.cosmic.security.WebToken;
 import org.apache.http.HttpHeaders;
 
+import java.util.Objects;
+
 public abstract class AbstractWebClient {
     protected final transient Emitter emitter;
     protected final transient Integration integration;
@@ -20,9 +22,14 @@ public abstract class AbstractWebClient {
 
     protected MultiMap headers() {
         final MultiMap headers = MultiMap.caseInsensitiveMultiMap();
-        headers.add(HttpHeaders.AUTHORIZATION, this.token().authorization());
+        final WebToken token = this.token();
+        if (Objects.nonNull(token)) {
+            headers.add(HttpHeaders.AUTHORIZATION, this.token().authorization());
+        }
         return headers;
     }
 
-    public abstract WebToken token();
+    public WebToken token() {
+        return null;
+    }
 }
