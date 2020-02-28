@@ -13,7 +13,7 @@ public interface Values {
 
     String ENCODING_ISO_8859_1 = "ISO-8859-1";
 
-    Charset CHARSET = Charset.forName(ENCODING);
+    Charset DEFAULT_CHARSET = Charset.forName(ENCODING);
 
     int UNSET = -1;
 
@@ -36,6 +36,8 @@ public interface Values {
     String FALSE = "false";
 
     String EMPTY_IDENTIFIER = "(`identifier` null)";
+
+    String CONTENT_TYPE = "application/json;charset=UTF-8";
 
     String CONFIG_INTERNAL = "up";
 

@@ -57,7 +57,7 @@ public class QTree {
         if (!data.containsKey(Strings.EMPTY)) {
             this.op = Inquiry.Connector.OR;
         } else {
-            final Boolean isAnd = Boolean.valueOf(data.getValue(Strings.EMPTY).toString());
+            final boolean isAnd = Boolean.parseBoolean(data.getValue(Strings.EMPTY).toString());
             this.op = isAnd ? Inquiry.Connector.AND : Inquiry.Connector.OR;
         }
         LOGGER.debug(Info.Q_STR, this.op);

@@ -10,7 +10,7 @@ public class ByteArraySaber extends BaseSaber {
                        final String literal) {
         return Fn.getNull(() -> Fn.getSemi(Byte[].class == paramType ||
                         byte[].class == paramType, getLogger(),
-                () -> literal.getBytes(Values.CHARSET), () -> new byte[0]),
+                () -> literal.getBytes(Values.DEFAULT_CHARSET), () -> new byte[0]),
                 paramType, literal);
     }
 }

@@ -6,5 +6,7 @@ public interface Protocols {
 
     String HTTP = "http";
 
+    String HTTPS = "https";
+
     String JAR = "jar";
 }
