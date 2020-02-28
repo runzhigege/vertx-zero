@@ -121,13 +121,14 @@ public abstract class AbstractRotator implements Rotator {
             this.logger().info("Empty Http Response");
             return Strings.EMPTY;
         } else {
-            if (HttpStatus.SC_OK == response.getStatusLine().getStatusCode()) {
+            final int statusLine = response.getStatusLine().getStatusCode();
+            if (HttpStatus.SC_OK == statusLine) {
                 final String result = EntityUtils.toString(response.getEntity());
                 this.logger().info("Success response: {0}", result);
                 return result;
             } else {
                 final String result = EntityUtils.toString(response.getEntity());
-                this.logger().info("Failure response: {0}", result);
+                this.logger().info("Failure response: {0}, code: {1}", result, statusLine);
                 return result;
             }
         }
