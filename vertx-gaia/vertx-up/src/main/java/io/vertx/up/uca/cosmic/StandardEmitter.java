@@ -64,7 +64,6 @@ class StandardEmitter extends AbstractEmitter {
         /*
          * Build Rotator instances
          */
-        this.logger().info(Message.HTTP_REQUEST, request.getPath(), request.getMethod(), params);
         final Function<Integration, Rotator> executor = Pool.POOL_ROTATOR_FN.get(request.getMethod());
         if (Objects.isNull(executor)) {
             return Strings.EMPTY;

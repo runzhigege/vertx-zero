@@ -45,7 +45,9 @@ public class IntegrationRequest implements Serializable {
 
     public String getPath(final JsonObject params) {
         if (Objects.nonNull(this.executor)) {
-            return this.executor.apply(params);
+            final String delayPath = this.executor.apply(params);
+            this.path = delayPath;
+            return delayPath;
         } else {
             return null;
         }
