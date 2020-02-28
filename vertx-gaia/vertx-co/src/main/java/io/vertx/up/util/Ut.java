@@ -183,6 +183,10 @@ public final class Ut {
      * 2) encryptRSA
      * 3) encryptSHA256
      * 4) encryptSHA512
+     * 5) encryptBase64
+     * 6) decryptBase64
+     * 7) encryptUrl
+     * 8) decryptUrl
      */
     public static String encryptMD5(final String input) {
         return Codec.md5(input);
@@ -202,6 +206,32 @@ public final class Ut {
 
     public static String encryptSHA512(final String input) {
         return Codec.sha512(input);
+    }
+
+    public static String encryptBase64(final String input) {
+        return Codec.base64(input, true);
+    }
+
+    public static String encryptBase64(final String username, final String password) {
+        final String input = username + ":" + password;
+        return Codec.base64(input, true);
+    }
+
+    public static String decryptBase64(final String input) {
+        return Codec.base64(input, false);
+    }
+
+    public static String encryptUrl(final String input) {
+        return Codec.url(input, true);
+    }
+
+    public static String encryptUrl(final JsonObject input) {
+        final JsonObject sure = Define.sureJObject(input);
+        return Codec.url(input.encode(), true);
+    }
+
+    public static String decryptUrl(final String input) {
+        return Codec.url(input, false);
     }
 
     /*
