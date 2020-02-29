@@ -158,14 +158,4 @@ class JooqWriter {
         final T old = this.reader.<T>findById(id);
         return copyFun.apply(old);
     }
-    /*
-     * Old Code
-    private <ID> List<ID> extractIds(final JsonArray array) {
-        return array.stream()
-                .map(item -> (JsonObject) item)
-                .map(item -> item.getValue("key"))
-                .filter(Objects::nonNull)
-                .map(item -> (ID) item)
-                .collect(Collectors.toList());
-    } */
 }

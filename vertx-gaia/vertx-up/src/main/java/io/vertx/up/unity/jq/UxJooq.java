@@ -14,6 +14,7 @@ import org.jooq.Operator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -29,19 +30,28 @@ public class UxJooq {
     private transient final JooqWriter writer;
     /* Reader */
     private transient final JooqReader reader;
+    /* Queue for batch */
+    private transient final JooqQueue queue;
 
     private transient Format format = Format.JSON;
 
     public <T> UxJooq(final Class<T> clazz, final VertxDAO vertxDAO) {
         this.clazz = clazz;
+
         /* Analyzing column for Jooq */
         this.analyzer = JooqAnalyzer.create(vertxDAO);
+
         /* Reader connect Analayzer */
         this.reader = JooqReader.create(vertxDAO)
                 .on(this.analyzer);
+
         /* Writer connect Reader */
         this.writer = JooqWriter.create(vertxDAO)
                 .on(this.analyzer).on(this.reader);
+
+        /* Batch operations */
+        this.queue = JooqQueue.create(vertxDAO)
+                .on(this.analyzer).on(this.reader).on(this.writer);
     }
 
     // -------------------- Condition Transform --------------------
@@ -371,12 +381,21 @@ public class UxJooq {
     }
 
     // -------------------- Upsert ---------
+
+    public <T> Future<List<T>> upsertAsync(final JsonObject filters, final List<T> list, final BiPredicate<T, T> fnCombine) {
+        return this.queue.upsertAsync(filters, list, fnCombine);
+    }
+
     public <T> Future<T> upsertAsync(final JsonObject filters, final T updated) {
         return combineAsync(this.<T>fetchOneAsync(filters), updated);
     }
 
     public <T> Future<T> upsertAsync(final String key, final T updated) {
         return combineAsync(this.<T>findByIdAsync(key), updated);
+    }
+
+    public <T> List<T> upsert(final JsonObject filters, final List<T> list, final BiPredicate<T, T> fnCombine) {
+        return this.queue.upsert(filters, list, fnCombine);
     }
 
     public <T> T upsert(final JsonObject filters, final T updated) {
