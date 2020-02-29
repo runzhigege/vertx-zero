@@ -10,10 +10,10 @@ import io.vertx.up.annotations.Address;
 import io.vertx.up.annotations.Queue;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.unity.Ux;
-import io.vertx.up.unity.UxJooq;
+import io.vertx.up.unity.jq.UxJooq;
 
 /*
- * Query Engine for
+ * QTool Engine for
  * 1) Pagination
  * 2) Projection
  * 3) Sorter

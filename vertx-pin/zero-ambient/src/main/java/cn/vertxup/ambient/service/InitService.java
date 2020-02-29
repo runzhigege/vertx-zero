@@ -8,7 +8,7 @@ import io.vertx.tp.ambient.extension.Prerequisite;
 import io.vertx.tp.ambient.init.AtPin;
 import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.ke.refine.Ke;
-import io.vertx.up.unity.Uson;
+import io.vertx.up.atom.unity.Uson;
 import io.vertx.up.unity.Ux;
 
 import javax.inject.Inject;

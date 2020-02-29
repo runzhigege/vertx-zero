@@ -168,7 +168,7 @@ import com.tlk.infra.exception.PasswordWrongException;
 import com.tlk.infra.exception.UserNotFoundException;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
-import io.vertx.up.unity.Uson;
+import io.vertx.up.atom.unity.Uson;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.secure.Security;

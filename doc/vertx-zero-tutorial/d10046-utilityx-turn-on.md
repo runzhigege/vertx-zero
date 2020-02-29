@@ -3,8 +3,8 @@
 From this chapter our tutorial will focus on the tool box that zero system provided, we call it **Utility X**, and in your code the class name is `io.vertx.up.unity.Ux`. The package name word `aiki` is Hausa language and it means "Work", this class will help the developers to process some duplicated works those are not related to business workflow. Here are three core parts in Utility X:
 
 * `io.vertx.up.unity.Ux`: The uniform tool class, it contains static method only. \( There is no object \)
-* `io.vertx.up.unity.Uson`: **\( Data Structure \) **The json container to store JsonObject and process it in "Stream Mode", please refer `Rxjava` to know the "Stream Mode", it will process the JsonObject with multi Fluent methods.
-* `io.vertx.up.unity.Uarr`: **\( Data Structure \) **Another json container to store JsonArray and process it in "Stream Mode".
+* `io.vertx.up.atom.unity.Uson`: **\( Data Structure \) **The json container to store JsonObject and process it in "Stream Mode", please refer `Rxjava` to know the "Stream Mode", it will process the JsonObject with multi Fluent methods.
+* `io.vertx.up.atom.unity.Uarr`: **\( Data Structure \) **Another json container to store JsonArray and process it in "Stream Mode".
 
 From this chapter we'll study Ux first because almost all the business codes will cover `Ux` style codes because it's more smartly and helpful. Now we'll move project to `vertx-up` and write some example codes in Unit Test Cases instead of major codes, but for some request flow codes we'll move to `up-thea`, it's under `vertx-zeus` project. You can know the rules for following tutorial:
 

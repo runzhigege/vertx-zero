@@ -34,7 +34,7 @@ public class JwtService implements JwtStub {
     @Override
     public Future<Boolean> verify(final String userKey, final String token) {
         return Ux.Jooq.on(OAccessTokenDao.class)
-                .<OAccessToken>fetchAsync("token", token.getBytes(Values.CHARSET))
+                .<OAccessToken>fetchAsync("token", token.getBytes(Values.DEFAULT_CHARSET))
                 .compose(tokens -> Sc.jwtToken(tokens, userKey));
     }
 }

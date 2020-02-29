@@ -24,8 +24,8 @@ public class GetActor {
 
     /*
      * GET: /api/{actor}/{key}
-     *     200: Query Data
-     *     204: Query No Data
+     *     200: QTool Data
+     *     204: QTool No Data
      */
     @Address(Addr.Get.BY_ID)
     public Future<Envelop> getById(final Envelop request) {
@@ -45,7 +45,7 @@ public class GetActor {
 
     /*
      * GET: /api/{actor}/by/sigma
-     *      200: Query All
+     *      200: QTool All
      */
     @Address(Addr.Get.BY_SIGMA)
     public Future<Envelop> getAll(final Envelop request) {

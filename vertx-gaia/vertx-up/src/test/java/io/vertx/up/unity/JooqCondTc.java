@@ -2,6 +2,7 @@ package io.vertx.up.unity;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.quiz.JooqBase;
+import io.vertx.up.unity.jq.UxJooq;
 import org.jooq.Condition;
 import org.junit.Assert;
 import org.junit.Test;

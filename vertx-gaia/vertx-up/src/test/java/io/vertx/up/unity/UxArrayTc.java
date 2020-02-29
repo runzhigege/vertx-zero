@@ -3,6 +3,7 @@ package io.vertx.up.unity;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.quiz.StoreBase;
+import io.vertx.up.atom.unity.Uarr;
 import org.junit.Assert;
 import org.junit.Test;
 

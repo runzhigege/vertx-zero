@@ -63,19 +63,6 @@ class Async {
         }
     }
 
-    static <T> Future<T> future(
-            final CompletableFuture<T> completableFuture
-    ) {
-        final Promise<T> future = Promise.promise();
-        completableFuture.thenAcceptAsync(future::complete)
-                .exceptionally((ex) -> {
-                    LOGGER.jvm(ex);
-                    future.fail(ex);
-                    return null;
-                });
-        return future.future();
-    }
-
     @SuppressWarnings("all")
     static <T> Future<JsonObject> toJsonFuture(
             final String pojo,

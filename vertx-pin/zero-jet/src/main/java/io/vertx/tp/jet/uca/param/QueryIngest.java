@@ -26,7 +26,7 @@ class QueryIngest implements JtIngest {
         final JtIngest ingest = this.supplier.get();
         final Envelop envelop = ingest.in(context, uri);
         /*
-         * Query extracting
+         * QTool extracting
          */
         final MultiMap queryParams = context.queryParams();
         queryParams.forEach(item -> envelop.setValue(item.getKey(), item.getValue()));

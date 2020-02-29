@@ -6,7 +6,7 @@ import io.vertx.up.uca.rs.Filler;
 import io.vertx.up.runtime.ZeroSerializer;
 
 /**
- * Parse Query Params
+ * Parse QTool Params
  *
  * @QueryParam
  */

@@ -7,7 +7,7 @@ import io.vertx.tp.crud.atom.IxMeta;
 import io.vertx.tp.crud.atom.IxModule;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
-import io.vertx.up.unity.UxJooq;
+import io.vertx.up.unity.jq.UxJooq;
 
 import java.util.List;
 import java.util.function.Function;
@@ -80,7 +80,7 @@ public class Ix {
         return Ux.future(IxSerialize.zipper(from, to, config));
     }
 
-    // Query
+    // QTool
     public static Future<JsonObject> inKeys(final JsonArray array, final IxModule config) {
         return Ux.future(IxQuery.inKeys(array, config));
     }

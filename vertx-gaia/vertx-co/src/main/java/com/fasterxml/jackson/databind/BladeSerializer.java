@@ -1,7 +1,7 @@
 package com.fasterxml.jackson.databind;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import io.vertx.up.unity.Uson;
+import io.vertx.up.atom.unity.Uson;
 
 import java.io.IOException;
 

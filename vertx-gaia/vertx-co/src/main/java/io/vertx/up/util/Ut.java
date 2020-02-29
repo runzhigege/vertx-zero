@@ -49,6 +49,18 @@ public final class Ut {
      * 2) union:        Set1 Or  Set2
      * 3) diff:         Set1 -   Set2
      */
+
+    /**
+     * Collection intersect ( HashSet / TreeSet )
+     * A = {1, 2}
+     * B = {1, 3}
+     * The result should be {1}
+     *
+     * @param left  First Set
+     * @param right Second Set
+     * @param <T>   The element type in Set
+     * @return The result set
+     */
     public static <T> Set<T> intersect(final Set<T> left, final Set<T> right) {
         return Arithmetic.intersect(left, right);
     }
@@ -183,6 +195,10 @@ public final class Ut {
      * 2) encryptRSA
      * 3) encryptSHA256
      * 4) encryptSHA512
+     * 5) encryptBase64
+     * 6) decryptBase64
+     * 7) encryptUrl
+     * 8) decryptUrl
      */
     public static String encryptMD5(final String input) {
         return Codec.md5(input);
@@ -202,6 +218,32 @@ public final class Ut {
 
     public static String encryptSHA512(final String input) {
         return Codec.sha512(input);
+    }
+
+    public static String encryptBase64(final String input) {
+        return Codec.base64(input, true);
+    }
+
+    public static String encryptBase64(final String username, final String password) {
+        final String input = username + ":" + password;
+        return Codec.base64(input, true);
+    }
+
+    public static String decryptBase64(final String input) {
+        return Codec.base64(input, false);
+    }
+
+    public static String encryptUrl(final String input) {
+        return Codec.url(input, true);
+    }
+
+    public static String encryptUrl(final JsonObject input) {
+        final JsonObject sure = Define.sureJObject(input);
+        return Codec.url(input.encode(), true);
+    }
+
+    public static String decryptUrl(final String input) {
+        return Codec.url(input, false);
     }
 
     /*

@@ -10,7 +10,7 @@ import io.vertx.tp.ke.cv.KeField;
 import io.vertx.tp.optic.fantom.Anchoret;
 import io.vertx.tp.rbac.cv.AuthMsg;
 import io.vertx.tp.rbac.refine.Sc;
-import io.vertx.up.unity.Uson;
+import io.vertx.up.atom.unity.Uson;
 import io.vertx.up.util.Ut;
 
 import java.util.Objects;
@@ -30,9 +30,9 @@ public class ExIntimitySeeker extends Anchoret<Seeker> implements Seeker {
         final String uri = params.getString(ARG0);
         final HttpMethod method = HttpMethod.valueOf(params.getString(ARG1));
         final String sigma = params.getString(ARG2);
-        Sc.infoResource(getLogger(), AuthMsg.SEEKER_RESOURCE, uri, method, sigma);
-        return stub.fetchAction(uri, method, sigma).compose(action -> Objects.isNull(action) ?
-                Future.failedFuture(new _403ActionMissingException(getClass(), method + " " + uri)) :
+        Sc.infoResource(this.getLogger(), AuthMsg.SEEKER_RESOURCE, uri, method, sigma);
+        return this.stub.fetchAction(uri, method, sigma).compose(action -> Objects.isNull(action) ?
+                Future.failedFuture(new _403ActionMissingException(this.getClass(), method + " " + uri)) :
                 Uson.create(params).append(KeField.RESOURCE_ID, action.getResourceId())
                         .toFuture());
     }
