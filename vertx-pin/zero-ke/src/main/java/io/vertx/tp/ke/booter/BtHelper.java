@@ -17,8 +17,8 @@ class BtHelper {
     static {
         /* Prepare another vert.x instance */
         final VertxOptions options = new VertxOptions();
-        options.setMaxEventLoopExecuteTime(300000000000L);
-        options.setMaxWorkerExecuteTime(300000000000L);
+        options.setMaxEventLoopExecuteTime(3000000000000L);
+        options.setMaxWorkerExecuteTime(3000000000000L);
         VERTX = Vertx.vertx(options);
     }
 

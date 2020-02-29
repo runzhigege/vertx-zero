@@ -71,9 +71,9 @@ public class ElasticSearchHelper {
 			.setRequestConfigCallback(new RestClientBuilder.RequestConfigCallback() {
 				@Override
 				public RequestConfig.Builder customizeRequestConfig(RequestConfig.Builder builder) {
-					return builder.setConnectionRequestTimeout(60)
-						.setSocketTimeout(60)
-						.setConnectTimeout(60);
+					return builder.setConnectionRequestTimeout(60000)
+						.setConnectTimeout(60000)
+						.setSocketTimeout(60000);
 				}
 			})
 		);
@@ -89,8 +89,8 @@ public class ElasticSearchHelper {
 
 	Settings settingsBuilder(final int numberOfShards, final int numberOfReplicas) {
 		return Settings.builder()
-			.put("index.number_of_shards", numberOfShards > 0 ? numberOfShards : 1)
-			.put("index.number_of_replicas", numberOfReplicas > 0 ? numberOfReplicas: 1)
+			.put("index.number_of_shards", numberOfShards > 0 ? numberOfShards : 3)
+			.put("index.number_of_replicas", numberOfReplicas > 0 ? numberOfReplicas: 2)
 			.build();
 	}
 
@@ -160,6 +160,6 @@ public class ElasticSearchHelper {
 			.highlighter(new HighlightBuilder().field("*").preTags("<strong>").postTags("</strong>").highlighterType("unified"))
 			.from(Math.max(0, from))
 			.size(Math.max(10, size))
-			.timeout(new TimeValue(60, TimeUnit.SECONDS));
+			.timeout(new TimeValue(10, TimeUnit.SECONDS));
 	}
 }
