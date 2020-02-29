@@ -1,4 +1,4 @@
-package io.vertx.up.unity;
+package io.vertx.up.unity.jq;
 
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 import io.vertx.core.Future;
@@ -32,7 +32,7 @@ public class UxJooq {
 
     private transient Format format = Format.JSON;
 
-    <T> UxJooq(final Class<T> clazz, final VertxDAO vertxDAO) {
+    public <T> UxJooq(final Class<T> clazz, final VertxDAO vertxDAO) {
         this.clazz = clazz;
         /* Analyzing column for Jooq */
         this.analyzer = JooqAnalyzer.create(vertxDAO);
@@ -308,7 +308,7 @@ public class UxJooq {
     // -------------------- Count Operation ------------
     /* (Async / Sync) Count Operation */
     public Future<Integer> countAsync(final JsonObject params, final String pojo) {
-        final Inquiry inquiry = Query.getInquiry(params, pojo);
+        final Inquiry inquiry = QTool.getInquiry(params, pojo);
         return this.analyzer.countAsync(inquiry);
     }
 
@@ -317,7 +317,7 @@ public class UxJooq {
     }
 
     public Integer count(final JsonObject params, final String pojo) {
-        final Inquiry inquiry = Query.getInquiry(params, pojo);
+        final Inquiry inquiry = QTool.getInquiry(params, pojo);
         return this.analyzer.count(inquiry);
     }
 
@@ -328,7 +328,7 @@ public class UxJooq {
     // -------------------- Search Operation -----------
     /* (Async / Sync) Sort, Projection, Criteria, Pager Search Operations */
     public Future<JsonObject> searchAsync(final JsonObject params, final String pojo) {
-        final Inquiry inquiry = Query.getInquiry(params, pojo);
+        final Inquiry inquiry = QTool.getInquiry(params, pojo);
         return searchAsync(inquiry, pojo);
     }
 
@@ -341,7 +341,7 @@ public class UxJooq {
     }
 
     public JsonObject search(final JsonObject params, final String pojo) {
-        final Inquiry inquiry = Query.getInquiry(params, pojo);
+        final Inquiry inquiry = QTool.getInquiry(params, pojo);
         return search(inquiry, pojo);
     }
 

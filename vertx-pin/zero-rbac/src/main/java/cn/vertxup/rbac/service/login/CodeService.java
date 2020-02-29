@@ -6,9 +6,9 @@ import io.vertx.tp.error._401CodeExpiredException;
 import io.vertx.tp.error._401CodeWrongException;
 import io.vertx.tp.rbac.cv.AuthKey;
 import io.vertx.tp.rbac.refine.Sc;
-import io.vertx.up.unity.Uson;
-import io.vertx.up.unity.Ux;
+import io.vertx.up.atom.unity.Uson;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.unity.Ux;
 
 public class CodeService implements CodeStub {
 

@@ -67,12 +67,12 @@ public abstract class AbstractEmitter implements Emitter {
     @Override
     public JsonObject requestJ(final String apiKey, final JsonObject params, final MultiMap headers) {
         final String content = this.request(apiKey, params, headers);
-        return Ut.isJObject(content) ? new JsonObject() : Ut.toJObject(content);
+        return Ut.isJObject(content) ? Ut.toJObject(content) : new JsonObject();
     }
 
     @Override
     public JsonArray requestA(final String apiKey, final JsonObject params, final MultiMap headers) {
         final String content = this.request(apiKey, params, headers);
-        return Ut.isJArray(content) ? new JsonArray() : Ut.toJArray(content);
+        return Ut.isJArray(content) ? Ut.toJArray(content) : new JsonArray();
     }
 }

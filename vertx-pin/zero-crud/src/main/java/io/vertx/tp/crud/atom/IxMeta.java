@@ -9,7 +9,7 @@ import io.vertx.up.commune.Envelop;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
-import io.vertx.up.unity.UxJooq;
+import io.vertx.up.unity.jq.UxJooq;
 
 import java.util.function.BiFunction;
 

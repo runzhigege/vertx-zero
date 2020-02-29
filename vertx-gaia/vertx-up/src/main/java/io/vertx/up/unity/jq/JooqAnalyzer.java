@@ -1,4 +1,4 @@
-package io.vertx.up.unity;
+package io.vertx.up.unity.jq;
 
 import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 import io.vertx.core.Future;
@@ -15,6 +15,7 @@ import io.vertx.up.exception.zero.JooqMergeException;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.uca.condition.JooqCond;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 import org.jooq.*;
 import org.jooq.impl.DSL;
@@ -281,17 +282,17 @@ class JooqAnalyzer {
         final Function<DSLContext, Integer> function
                 = dslContext -> null == filters ? dslContext.fetchCount(this.vertxDAO.getTable()) :
                 dslContext.fetchCount(this.vertxDAO.getTable(), JooqCond.transform(filters, this::getColumn));
-        return Async.future(this.vertxDAO.executeAsync(function));
+        return QTool.future(this.vertxDAO.executeAsync(function));
     }
 
     <T> Future<List<T>> searchAsync(final Inquiry inquiry) {
         final Function<DSLContext, List<T>> function = context -> this.searchInternal(context, inquiry);
-        return Async.future(this.vertxDAO.executeAsync(function));
+        return QTool.future(this.vertxDAO.executeAsync(function));
     }
 
     <T> Future<List<T>> searchAsync(final JsonObject criteria) {
         final Function<DSLContext, List<T>> function = context -> this.searchInternal(context, criteria);
-        return Async.future(this.vertxDAO.executeAsync(function));
+        return QTool.future(this.vertxDAO.executeAsync(function));
     }
 
     <T> List<T> search(final Inquiry inquiry) {

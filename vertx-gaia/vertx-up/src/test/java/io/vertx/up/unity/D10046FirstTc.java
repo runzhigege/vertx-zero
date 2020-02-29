@@ -3,6 +3,8 @@ package io.vertx.up.unity;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.quiz.EpicBase;
+import io.vertx.up.atom.unity.Uarr;
+import io.vertx.up.atom.unity.Uson;
 import io.vertx.up.commune.Envelop;
 import org.junit.Assert;
 import org.junit.Test;

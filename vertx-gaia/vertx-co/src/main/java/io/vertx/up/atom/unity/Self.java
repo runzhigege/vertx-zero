@@ -1,4 +1,4 @@
-package io.vertx.up.unity;
+package io.vertx.up.atom.unity;
 
 import io.reactivex.Observable;
 import io.vertx.core.json.JsonArray;
@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 /**
  * Two object calculation
  */
+@SuppressWarnings("all")
 class Self {
 
     static JsonObject deNull(

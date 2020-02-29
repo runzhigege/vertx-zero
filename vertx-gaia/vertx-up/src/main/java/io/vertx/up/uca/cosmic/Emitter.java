@@ -1,10 +1,12 @@
 package io.vertx.up.uca.cosmic;
 
+import io.vertx.core.Future;
 import io.vertx.core.MultiMap;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.commune.config.Integration;
 import io.vertx.up.fn.Fn;
+import io.vertx.up.unity.Ux;
 import io.vertx.up.util.Ut;
 
 import java.util.Objects;
@@ -50,21 +52,54 @@ public interface Emitter {
         }
     }
 
+    /*
+     * String Request
+     */
     String request(String apiKey, JsonObject params, MultiMap headers);
 
     default String request(final String apiKey, final JsonObject params) {
         return this.request(apiKey, params, MultiMap.caseInsensitiveMultiMap());
     }
 
+    default Future<String> requestAsync(final String apiKey, final JsonObject params, final MultiMap headers) {
+        return Ux.future(this.request(apiKey, params, headers));
+    }
+
+    default Future<String> requestAsync(final String apiKey, final JsonObject params) {
+        return Ux.future(this.request(apiKey, params));
+    }
+
+    /*
+     * JsonArray request
+     */
     JsonArray requestA(String apiKey, JsonObject params, MultiMap headers);
+
+    default Future<JsonArray> requestAsyncA(final String apiKey, final JsonObject params, final MultiMap headers) {
+        return Ux.future(this.requestA(apiKey, params, headers));
+    }
 
     default JsonArray requestA(final String apiKey, final JsonObject params) {
         return this.requestA(apiKey, params, MultiMap.caseInsensitiveMultiMap());
     }
 
+    default Future<JsonArray> requestAsyncA(final String apiKey, final JsonObject params) {
+        return Ux.future(this.requestA(apiKey, params));
+    }
+
+    /*
+     * JsonObject Request
+     */
     JsonObject requestJ(String apiKey, JsonObject params, MultiMap headers);
+
+    default Future<JsonObject> requestAsyncJ(final String apiKey, final JsonObject params, final MultiMap headers) {
+        return Ux.future(this.requestJ(apiKey, params, headers));
+    }
 
     default JsonObject requestJ(final String apiKey, final JsonObject params) {
         return this.requestJ(apiKey, params, MultiMap.caseInsensitiveMultiMap());
+    }
+
+    default Future<JsonObject> requestAsyncJ(final String apiKey, final JsonObject params) {
+        return Ux.future(this.requestJ(apiKey, params));
     }
 }

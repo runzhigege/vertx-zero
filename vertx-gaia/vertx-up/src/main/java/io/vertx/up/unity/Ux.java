@@ -27,6 +27,9 @@ import io.vertx.up.eon.em.ChangeFlag;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.fn.wait.Log;
+import io.vertx.up.unity.jq.QTool;
+import io.vertx.up.unity.jq.UxJoin;
+import io.vertx.up.unity.jq.UxJooq;
 import io.vertx.up.util.Ut;
 import org.jooq.Condition;
 
@@ -328,7 +331,7 @@ public final class Ux {
     }
 
     public static <T> Future<List<T>> thenCombineT(final List<Future<T>> futures) {
-        return CombineT.thenCombine(futures);
+        return Combine.thenCombineT(futures);
     }
 
     public static Future<JsonArray> thenCombine(final JsonArray input, final Function<JsonObject, Future<JsonObject>> function) {
@@ -349,7 +352,7 @@ public final class Ux {
     }
 
     public static <T> Future<List<T>> thenCombineArrayT(final List<Future<List<T>>> futures) {
-        return CombineT.thenCombineArray(futures);
+        return Combine.thenCombineArrayT(futures);
     }
 
     public static Future<ConcurrentMap<String, JsonArray>> thenCompress(final List<Future<ConcurrentMap<String, JsonArray>>> futures) {
@@ -373,7 +376,7 @@ public final class Ux {
     }
 
     /*
-     * Query Engine method
+     * QTool Engine method
      * 1) whereDay
      */
     public static JsonObject whereDay(final JsonObject filters, final String field, final Instant instant) {
@@ -454,11 +457,11 @@ public final class Ux {
     }
 
     public static Inquiry getInquiry(final JsonObject envelop) {
-        return Query.getInquiry(envelop, "");
+        return QTool.getInquiry(envelop, "");
     }
 
     public static Inquiry getInquiry(final JsonObject envelop, final String pojo) {
-        return Query.getInquiry(envelop, pojo);
+        return QTool.getInquiry(envelop, pojo);
     }
 
     // -> Message<Envelop> -> JsonObject ( Interface mode )
@@ -743,7 +746,7 @@ public final class Ux {
         }
 
         public static Future<JsonArray> findWithOptions(final String collection, final JsonObject filter, final FindOptions options,
-                                                        // Secondary Query
+                                                        // Secondary QTool
                                                         final String joinedCollection, final String joinedKey, final JsonObject additional,
                                                         final BinaryOperator<JsonObject> operatorFun) {
             return UxMongo.findWithOptions(collection, filter, options,

@@ -193,7 +193,17 @@ public class Integration implements Json, Serializable {
         final IntegrationRequest original = this.apis.get(key);
         request.setHeaders(original.getHeaders().copy());
         request.setMethod(original.getMethod());
-        request.setPath(this.endpoint + original.getPath());
+        if (0 <= original.getPath().indexOf('`')) {
+            /*
+             * Expression Path
+             */
+            request.setExecutor(this.endpoint, original.getPath());
+        } else {
+            /*
+             * Standard Path
+             */
+            request.setPath(this.endpoint + original.getPath());
+        }
         return request;
     }
 

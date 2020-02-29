@@ -49,6 +49,18 @@ public final class Ut {
      * 2) union:        Set1 Or  Set2
      * 3) diff:         Set1 -   Set2
      */
+
+    /**
+     * Collection intersect ( HashSet / TreeSet )
+     * A = {1, 2}
+     * B = {1, 3}
+     * The result should be {1}
+     *
+     * @param left  First Set
+     * @param right Second Set
+     * @param <T>   The element type in Set
+     * @return The result set
+     */
     public static <T> Set<T> intersect(final Set<T> left, final Set<T> right) {
         return Arithmetic.intersect(left, right);
     }

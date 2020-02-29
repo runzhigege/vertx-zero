@@ -121,7 +121,7 @@ class UxMongo {
     }
 
     static Future<JsonArray> findWithOptions(final String collection, final JsonObject filter, final FindOptions options,
-                                             // Secondary Query
+                                             // Secondary QTool
                                              final String joinedCollection, final String joinedKey, final JsonObject additional,
                                              final BinaryOperator<JsonObject> operatorFun) {
         return Ux.thenCombine(findWithOptions(collection, filter, options),

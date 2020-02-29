@@ -8,7 +8,7 @@ import io.vertx.ext.unit.junit.VertxUnitRunner;
 import io.vertx.up.atom.Kv;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
-import io.vertx.up.unity.UxJooq;
+import io.vertx.up.unity.jq.UxJooq;
 import org.jooq.Condition;
 import org.jooq.Operator;
 import org.jooq.impl.DSL;

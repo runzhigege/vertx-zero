@@ -61,23 +61,23 @@ public abstract class AbstractRotator implements Rotator {
 
     protected String configPath(final IntegrationRequest request, final JsonObject params) {
         final String exprPath = request.getPath();
-        if (Ut.isNil(exprPath)) {
-            throw new _500RequestConfigException(this.getClass(), request, params);
+        if (request.isExpr()) {
+            /*
+             * The path contains `expression` such as
+             *
+             * `/path/${name}/user/${id}` mode
+             *
+             * In this situation, zero will parse this string
+             */
+            try {
+                return request.getPath(params);
+            } catch (final JexlExpressionException ex) {
+                ex.printStackTrace();
+                throw new _500RequestConfigException(this.getClass(), request, params);
+            }
         } else {
-            if (0 <= exprPath.indexOf('`')) {
-                /*
-                 * The path contains `expression` such as
-                 *
-                 * `/path/${name}/user/${id}` mode
-                 *
-                 * In this situation, zero will parse this string
-                 */
-                try {
-                    return Ut.fromExpression(exprPath, params);
-                } catch (final JexlExpressionException ex) {
-                    ex.printStackTrace();
-                    throw new _500RequestConfigException(this.getClass(), request, params);
-                }
+            if (Ut.isNil(exprPath)) {
+                throw new _500RequestConfigException(this.getClass(), request, params);
             } else {
                 /*
                  * No paring
@@ -121,13 +121,14 @@ public abstract class AbstractRotator implements Rotator {
             this.logger().info("Empty Http Response");
             return Strings.EMPTY;
         } else {
-            if (HttpStatus.SC_OK == response.getStatusLine().getStatusCode()) {
+            final int statusLine = response.getStatusLine().getStatusCode();
+            if (HttpStatus.SC_OK == statusLine) {
                 final String result = EntityUtils.toString(response.getEntity());
                 this.logger().info("Success response: {0}", result);
                 return result;
             } else {
                 final String result = EntityUtils.toString(response.getEntity());
-                this.logger().info("Failure response: {0}", result);
+                this.logger().info("Failure response: {0}, code: {1}", result, statusLine);
                 return result;
             }
         }
