@@ -30,3 +30,5 @@ archive
 !vertx-zeus/up-thea/tool/jooq/*.jar
 file-uploads
 !vertx-zero-example
+.Archive
+.markeditor

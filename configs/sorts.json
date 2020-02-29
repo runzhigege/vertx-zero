@@ -1,0 +1,47 @@
+{
+    "": [
+        "features.md", 
+        "document.md", 
+        "zero-tree.txt", 
+        "readme.md", 
+        "summary.md", 
+        "code_of_conduct.md", 
+        "doc", 
+        "tls", 
+        "tool", 
+        "vertx-env", 
+        "vertx-gaia", 
+        "vertx-import", 
+        "vertx-pin"
+    ], 
+    "__positions": {
+        "tls": 8, 
+        "summary.md": 5, 
+        "vertx-gaia": 11, 
+        "vertx-pin": 13, 
+        "doc": 7, 
+        "tool": 9, 
+        "features.md": 1, 
+        "vertx-env": 10, 
+        "code_of_conduct.md": 6, 
+        "zero-tree.txt": 3, 
+        "document.md": 2, 
+        "readme.md": 4, 
+        "vertx-import": 12
+    }, 
+    "__raw_positions": {
+        "tls": 8, 
+        "summary.md": 5, 
+        "vertx-pin": 13, 
+        "vertx-env": 10, 
+        "doc": 7, 
+        "tool": 9, 
+        "features.md": 1, 
+        "vertx-gaia": 11, 
+        "code_of_conduct.md": 6, 
+        "zero-tree.txt": 3, 
+        "document.md": 2, 
+        "readme.md": 4, 
+        "vertx-import": 12
+    }
+}
