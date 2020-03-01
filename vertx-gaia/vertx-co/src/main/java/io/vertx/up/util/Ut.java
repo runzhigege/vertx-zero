@@ -526,11 +526,11 @@ public final class Ut {
     }
 
     public static JsonArray ioJArray(final String filename) {
-        return IO.getJArray(filename);
+        return Define.sureJArray(IO.getJArray(filename));
     }
 
     public static JsonObject ioJObject(final String filename) {
-        return IO.getJObject(filename);
+        return Define.sureJObject(IO.getJObject(filename));
     }
 
     public static String ioString(final InputStream in) {
