@@ -77,6 +77,13 @@ public class ECompanyDao extends DAOImpl<ECompanyRecord, cn.vertxup.erp.domain.t
     }
 
     /**
+     * Fetch records that have <code>ALIAS IN (values)</code>
+     */
+    public List<cn.vertxup.erp.domain.tables.pojos.ECompany> fetchByAlias(String... values) {
+        return fetch(ECompany.E_COMPANY.ALIAS, values);
+    }
+
+    /**
      * Fetch records that have <code>TITLE IN (values)</code>
      */
     public List<cn.vertxup.erp.domain.tables.pojos.ECompany> fetchByTitle(String... values) {
@@ -291,6 +298,13 @@ public class ECompanyDao extends DAOImpl<ECompanyRecord, cn.vertxup.erp.domain.t
      */
     public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.ECompany>> fetchByNameAsync(List<String> values) {
         return fetchAsync(ECompany.E_COMPANY.NAME,values);
+    }
+
+    /**
+     * Fetch records that have <code>ALIAS IN (values)</code> asynchronously
+     */
+    public CompletableFuture<List<cn.vertxup.erp.domain.tables.pojos.ECompany>> fetchByAliasAsync(List<String> values) {
+        return fetchAsync(ECompany.E_COMPANY.ALIAS,values);
     }
 
     /**

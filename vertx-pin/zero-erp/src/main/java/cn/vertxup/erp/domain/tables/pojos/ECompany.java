@@ -24,10 +24,11 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ECompany implements IECompany {
 
-    private static final long serialVersionUID = -1353052095;
+    private static final long serialVersionUID = -1606702667;
 
     private String        key;
     private String        name;
+    private String        alias;
     private String        title;
     private String        code;
     private String        comment;
@@ -62,6 +63,7 @@ public class ECompany implements IECompany {
     public ECompany(ECompany value) {
         this.key = value.key;
         this.name = value.name;
+        this.alias = value.alias;
         this.title = value.title;
         this.code = value.code;
         this.comment = value.comment;
@@ -95,6 +97,7 @@ public class ECompany implements IECompany {
     public ECompany(
         String        key,
         String        name,
+        String        alias,
         String        title,
         String        code,
         String        comment,
@@ -126,6 +129,7 @@ public class ECompany implements IECompany {
     ) {
         this.key = key;
         this.name = name;
+        this.alias = alias;
         this.title = title;
         this.code = code;
         this.comment = comment;
@@ -175,6 +179,17 @@ public class ECompany implements IECompany {
     @Override
     public ECompany setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    @Override
+    public String getAlias() {
+        return this.alias;
+    }
+
+    @Override
+    public ECompany setAlias(String alias) {
+        this.alias = alias;
         return this;
     }
 
@@ -492,6 +507,7 @@ public class ECompany implements IECompany {
 
         sb.append(key);
         sb.append(", ").append(name);
+        sb.append(", ").append(alias);
         sb.append(", ").append(title);
         sb.append(", ").append(code);
         sb.append(", ").append(comment);
@@ -536,6 +552,7 @@ public class ECompany implements IECompany {
     public void from(IECompany from) {
         setKey(from.getKey());
         setName(from.getName());
+        setAlias(from.getAlias());
         setTitle(from.getTitle());
         setCode(from.getCode());
         setComment(from.getComment());

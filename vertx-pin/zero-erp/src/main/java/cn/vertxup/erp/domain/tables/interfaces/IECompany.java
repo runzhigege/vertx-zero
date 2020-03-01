@@ -44,6 +44,16 @@ public interface IECompany extends Serializable {
     public String getName();
 
     /**
+     * Setter for <code>DB_ETERNAL.E_COMPANY.ALIAS</code>. 「alias」- 公司别称
+     */
+    public IECompany setAlias(String value);
+
+    /**
+     * Getter for <code>DB_ETERNAL.E_COMPANY.ALIAS</code>. 「alias」- 公司别称
+     */
+    public String getAlias();
+
+    /**
      * Setter for <code>DB_ETERNAL.E_COMPANY.TITLE</code>. 「title」- 公司显示标题
      */
     public IECompany setTitle(String value);
@@ -340,6 +350,7 @@ public interface IECompany extends Serializable {
     default IECompany fromJson(io.vertx.core.json.JsonObject json) {
         setKey(json.getString("KEY"));
         setName(json.getString("NAME"));
+        setAlias(json.getString("ALIAS"));
         setTitle(json.getString("TITLE"));
         setCode(json.getString("CODE"));
         setComment(json.getString("COMMENT"));
@@ -376,6 +387,7 @@ public interface IECompany extends Serializable {
         io.vertx.core.json.JsonObject json = new io.vertx.core.json.JsonObject();
         json.put("KEY",getKey());
         json.put("NAME",getName());
+        json.put("ALIAS",getAlias());
         json.put("TITLE",getTitle());
         json.put("CODE",getCode());
         json.put("COMMENT",getComment());

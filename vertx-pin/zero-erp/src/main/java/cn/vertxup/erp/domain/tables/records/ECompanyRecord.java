@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implements IECompany {
 
-    private static final long serialVersionUID = -824895560;
+    private static final long serialVersionUID = -1657540699;
 
     /**
      * Setter for <code>DB_ETERNAL.E_COMPANY.KEY</code>. 「key」- 公司主键
@@ -65,11 +65,28 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
     }
 
     /**
+     * Setter for <code>DB_ETERNAL.E_COMPANY.ALIAS</code>. 「alias」- 公司别称
+     */
+    @Override
+    public ECompanyRecord setAlias(String value) {
+        set(2, value);
+        return this;
+    }
+
+    /**
+     * Getter for <code>DB_ETERNAL.E_COMPANY.ALIAS</code>. 「alias」- 公司别称
+     */
+    @Override
+    public String getAlias() {
+        return (String) get(2);
+    }
+
+    /**
      * Setter for <code>DB_ETERNAL.E_COMPANY.TITLE</code>. 「title」- 公司显示标题
      */
     @Override
     public ECompanyRecord setTitle(String value) {
-        set(2, value);
+        set(3, value);
         return this;
     }
 
@@ -78,7 +95,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getTitle() {
-        return (String) get(2);
+        return (String) get(3);
     }
 
     /**
@@ -86,7 +103,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setCode(String value) {
-        set(3, value);
+        set(4, value);
         return this;
     }
 
@@ -95,7 +112,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getCode() {
-        return (String) get(3);
+        return (String) get(4);
     }
 
     /**
@@ -103,7 +120,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setComment(String value) {
-        set(4, value);
+        set(5, value);
         return this;
     }
 
@@ -112,7 +129,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getComment() {
-        return (String) get(4);
+        return (String) get(5);
     }
 
     /**
@@ -120,7 +137,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setTaxCode(String value) {
-        set(5, value);
+        set(6, value);
         return this;
     }
 
@@ -129,7 +146,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getTaxCode() {
-        return (String) get(5);
+        return (String) get(6);
     }
 
     /**
@@ -137,7 +154,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setTaxTitle(String value) {
-        set(6, value);
+        set(7, value);
         return this;
     }
 
@@ -146,7 +163,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getTaxTitle() {
-        return (String) get(6);
+        return (String) get(7);
     }
 
     /**
@@ -154,7 +171,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setEmail(String value) {
-        set(7, value);
+        set(8, value);
         return this;
     }
 
@@ -163,7 +180,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getEmail() {
-        return (String) get(7);
+        return (String) get(8);
     }
 
     /**
@@ -171,7 +188,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setFax(String value) {
-        set(8, value);
+        set(9, value);
         return this;
     }
 
@@ -180,7 +197,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getFax() {
-        return (String) get(8);
+        return (String) get(9);
     }
 
     /**
@@ -188,7 +205,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setHomepage(String value) {
-        set(9, value);
+        set(10, value);
         return this;
     }
 
@@ -197,7 +214,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getHomepage() {
-        return (String) get(9);
+        return (String) get(10);
     }
 
     /**
@@ -205,7 +222,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setLogo(String value) {
-        set(10, value);
+        set(11, value);
         return this;
     }
 
@@ -214,7 +231,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getLogo() {
-        return (String) get(10);
+        return (String) get(11);
     }
 
     /**
@@ -222,7 +239,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setPhone(String value) {
-        set(11, value);
+        set(12, value);
         return this;
     }
 
@@ -231,7 +248,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getPhone() {
-        return (String) get(11);
+        return (String) get(12);
     }
 
     /**
@@ -239,7 +256,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setAddress(String value) {
-        set(12, value);
+        set(13, value);
         return this;
     }
 
@@ -248,7 +265,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getAddress() {
-        return (String) get(12);
+        return (String) get(13);
     }
 
     /**
@@ -256,7 +273,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setLocationId(String value) {
-        set(13, value);
+        set(14, value);
         return this;
     }
 
@@ -265,7 +282,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getLocationId() {
-        return (String) get(13);
+        return (String) get(14);
     }
 
     /**
@@ -273,7 +290,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setCorporationName(String value) {
-        set(14, value);
+        set(15, value);
         return this;
     }
 
@@ -282,7 +299,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getCorporationName() {
-        return (String) get(14);
+        return (String) get(15);
     }
 
     /**
@@ -290,7 +307,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setCorporationPhone(String value) {
-        set(15, value);
+        set(16, value);
         return this;
     }
 
@@ -299,7 +316,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getCorporationPhone() {
-        return (String) get(15);
+        return (String) get(16);
     }
 
     /**
@@ -307,7 +324,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setContactName(String value) {
-        set(16, value);
+        set(17, value);
         return this;
     }
 
@@ -316,7 +333,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getContactName() {
-        return (String) get(16);
+        return (String) get(17);
     }
 
     /**
@@ -324,7 +341,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setContactPhone(String value) {
-        set(17, value);
+        set(18, value);
         return this;
     }
 
@@ -333,7 +350,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getContactPhone() {
-        return (String) get(17);
+        return (String) get(18);
     }
 
     /**
@@ -341,7 +358,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setContactOnline(String value) {
-        set(18, value);
+        set(19, value);
         return this;
     }
 
@@ -350,7 +367,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getContactOnline() {
-        return (String) get(18);
+        return (String) get(19);
     }
 
     /**
@@ -358,7 +375,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setCompanyId(String value) {
-        set(19, value);
+        set(20, value);
         return this;
     }
 
@@ -367,7 +384,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getCompanyId() {
-        return (String) get(19);
+        return (String) get(20);
     }
 
     /**
@@ -375,7 +392,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setCustomerId(String value) {
-        set(20, value);
+        set(21, value);
         return this;
     }
 
@@ -384,7 +401,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getCustomerId() {
-        return (String) get(20);
+        return (String) get(21);
     }
 
     /**
@@ -392,7 +409,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setType(String value) {
-        set(21, value);
+        set(22, value);
         return this;
     }
 
@@ -401,7 +418,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getType() {
-        return (String) get(21);
+        return (String) get(22);
     }
 
     /**
@@ -409,7 +426,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setMetadata(String value) {
-        set(22, value);
+        set(23, value);
         return this;
     }
 
@@ -418,7 +435,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getMetadata() {
-        return (String) get(22);
+        return (String) get(23);
     }
 
     /**
@@ -426,7 +443,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setActive(Boolean value) {
-        set(23, value);
+        set(24, value);
         return this;
     }
 
@@ -435,7 +452,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public Boolean getActive() {
-        return (Boolean) get(23);
+        return (Boolean) get(24);
     }
 
     /**
@@ -443,7 +460,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setSigma(String value) {
-        set(24, value);
+        set(25, value);
         return this;
     }
 
@@ -452,7 +469,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getSigma() {
-        return (String) get(24);
+        return (String) get(25);
     }
 
     /**
@@ -460,7 +477,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setLanguage(String value) {
-        set(25, value);
+        set(26, value);
         return this;
     }
 
@@ -469,7 +486,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getLanguage() {
-        return (String) get(25);
+        return (String) get(26);
     }
 
     /**
@@ -477,7 +494,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setCreatedAt(LocalDateTime value) {
-        set(26, value);
+        set(27, value);
         return this;
     }
 
@@ -486,7 +503,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(26);
+        return (LocalDateTime) get(27);
     }
 
     /**
@@ -494,7 +511,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setCreatedBy(String value) {
-        set(27, value);
+        set(28, value);
         return this;
     }
 
@@ -503,7 +520,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getCreatedBy() {
-        return (String) get(27);
+        return (String) get(28);
     }
 
     /**
@@ -511,7 +528,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setUpdatedAt(LocalDateTime value) {
-        set(28, value);
+        set(29, value);
         return this;
     }
 
@@ -520,7 +537,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public LocalDateTime getUpdatedAt() {
-        return (LocalDateTime) get(28);
+        return (LocalDateTime) get(29);
     }
 
     /**
@@ -528,7 +545,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public ECompanyRecord setUpdatedBy(String value) {
-        set(29, value);
+        set(30, value);
         return this;
     }
 
@@ -537,7 +554,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
      */
     @Override
     public String getUpdatedBy() {
-        return (String) get(29);
+        return (String) get(30);
     }
 
     // -------------------------------------------------------------------------
@@ -563,6 +580,7 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
     public void from(IECompany from) {
         setKey(from.getKey());
         setName(from.getName());
+        setAlias(from.getAlias());
         setTitle(from.getTitle());
         setCode(from.getCode());
         setComment(from.getComment());
@@ -616,38 +634,39 @@ public class ECompanyRecord extends UpdatableRecordImpl<ECompanyRecord> implemen
     /**
      * Create a detached, initialised ECompanyRecord
      */
-    public ECompanyRecord(String key, String name, String title, String code, String comment, String taxCode, String taxTitle, String email, String fax, String homepage, String logo, String phone, String address, String locationId, String corporationName, String corporationPhone, String contactName, String contactPhone, String contactOnline, String companyId, String customerId, String type, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
+    public ECompanyRecord(String key, String name, String alias, String title, String code, String comment, String taxCode, String taxTitle, String email, String fax, String homepage, String logo, String phone, String address, String locationId, String corporationName, String corporationPhone, String contactName, String contactPhone, String contactOnline, String companyId, String customerId, String type, String metadata, Boolean active, String sigma, String language, LocalDateTime createdAt, String createdBy, LocalDateTime updatedAt, String updatedBy) {
         super(ECompany.E_COMPANY);
 
         set(0, key);
         set(1, name);
-        set(2, title);
-        set(3, code);
-        set(4, comment);
-        set(5, taxCode);
-        set(6, taxTitle);
-        set(7, email);
-        set(8, fax);
-        set(9, homepage);
-        set(10, logo);
-        set(11, phone);
-        set(12, address);
-        set(13, locationId);
-        set(14, corporationName);
-        set(15, corporationPhone);
-        set(16, contactName);
-        set(17, contactPhone);
-        set(18, contactOnline);
-        set(19, companyId);
-        set(20, customerId);
-        set(21, type);
-        set(22, metadata);
-        set(23, active);
-        set(24, sigma);
-        set(25, language);
-        set(26, createdAt);
-        set(27, createdBy);
-        set(28, updatedAt);
-        set(29, updatedBy);
+        set(2, alias);
+        set(3, title);
+        set(4, code);
+        set(5, comment);
+        set(6, taxCode);
+        set(7, taxTitle);
+        set(8, email);
+        set(9, fax);
+        set(10, homepage);
+        set(11, logo);
+        set(12, phone);
+        set(13, address);
+        set(14, locationId);
+        set(15, corporationName);
+        set(16, corporationPhone);
+        set(17, contactName);
+        set(18, contactPhone);
+        set(19, contactOnline);
+        set(20, companyId);
+        set(21, customerId);
+        set(22, type);
+        set(23, metadata);
+        set(24, active);
+        set(25, sigma);
+        set(26, language);
+        set(27, createdAt);
+        set(28, createdBy);
+        set(29, updatedAt);
+        set(30, updatedBy);
     }
 }

@@ -12,6 +12,7 @@ CREATE TABLE `E_COMPANY`
 (
     `KEY`               VARCHAR(36) NOT NULL COMMENT '「key」- 公司主键',
     `NAME`              VARCHAR(255) COMMENT '「name」- 公司名称',
+    `ALIAS`             VARCHAR(255) COMMENT '「alias」- 公司别称',
     `TITLE`             VARCHAR(255) COMMENT '「title」- 公司显示标题',
     `CODE`              VARCHAR(255) COMMENT '「code」- 公司编号',
     `COMMENT`           TEXT COMMENT '「comment」- 公司简介',
