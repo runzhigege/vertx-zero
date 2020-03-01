@@ -12,6 +12,10 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+/**
+ * @author lang
+ * Stream tool for JsonArray
+ */
 public class Uarr {
     private static final Annal LOGGER = Annal.get(Uarr.class);
 

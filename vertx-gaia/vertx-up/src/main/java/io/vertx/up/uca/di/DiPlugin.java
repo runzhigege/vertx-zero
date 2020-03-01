@@ -1,4 +1,4 @@
-package io.vertx.up.uca.web.anima;
+package io.vertx.up.uca.di;
 
 import io.reactivex.Observable;
 import io.vertx.up.annotations.Plugin;
@@ -15,21 +15,22 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-class InfixPlugin {
+@SuppressWarnings("all")
+public class DiPlugin {
 
     private transient final Class<?> clazz;
     private transient final Annal logger;
 
-    private InfixPlugin(final Class<?> clazz) {
+    private DiPlugin(final Class<?> clazz) {
         this.clazz = clazz;
         logger = Annal.get(clazz);
     }
 
-    static InfixPlugin create(final Class<?> clazz) {
-        return Fn.pool(Pool.PLUGINS, clazz, () -> new InfixPlugin(clazz));
+    public static DiPlugin create(final Class<?> clazz) {
+        return Fn.pool(Pool.PLUGINS, clazz, () -> new DiPlugin(clazz));
     }
 
-    void inject(final Object proxy) {
+    public void inject(final Object proxy) {
         final ConcurrentMap<Class<?>, Class<?>> binds = getBind();
         final Class<?> type = proxy.getClass();
         Observable.fromArray(type.getDeclaredFields())

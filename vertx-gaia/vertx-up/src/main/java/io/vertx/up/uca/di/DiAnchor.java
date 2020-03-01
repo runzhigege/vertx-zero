@@ -1,4 +1,4 @@
-package io.vertx.up.atom.unity;
+package io.vertx.up.uca.di;
 
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Plugins;
@@ -15,18 +15,14 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Set;
 
-public class Uimmit {
+class DiAnchor {
 
     private transient final Class<?> clazz;
     private transient final Annal logger;
 
-    private Uimmit(final Class<?> clazz) {
+    DiAnchor(final Class<?> clazz) {
         this.clazz = clazz;
         this.logger = Annal.get(clazz);
-    }
-
-    public static Uimmit create(final Class<?> clazz) {
-        return Fn.pool(Pool.INFIXES, clazz, () -> new Uimmit(clazz));
     }
 
     private Class<? extends Annotation> search(
@@ -44,7 +40,7 @@ public class Uimmit {
         return hitted;
     }
 
-    public Object initialize(final Field field) {
+    Object initialize(final Field field) {
         final Class<? extends Annotation> key = this.search(field);
         final String pluginKey = Plugins.INFIX_MAP.get(key);
         final Class<?> infixCls = ZeroAmbient.getPlugin(pluginKey);

@@ -1,12 +1,12 @@
 package io.vertx.up.uca.web.anima;
 
 import io.vertx.core.Vertx;
-import io.vertx.up.atom.unity.Uobj;
 import io.vertx.up.atom.agent.Event;
 import io.vertx.up.atom.worker.Receipt;
-import io.vertx.up.util.Ut;
 import io.vertx.up.runtime.Runner;
 import io.vertx.up.runtime.ZeroAnno;
+import io.vertx.up.uca.di.DiScanner;
+import io.vertx.up.util.Ut;
 
 import java.util.Set;
 
@@ -16,7 +16,7 @@ import java.util.Set;
 public class AffluxScatter implements Scatter<Vertx> {
     @Override
     public void connect(final Vertx vertx) {
-        final Uobj injector = Uobj.create(this.getClass());
+        final DiScanner injector = DiScanner.create(this.getClass());
         // Extract all events.
         final Set<Event> events = ZeroAnno.getEvents();
         Ut.itSet(events, (item, index) ->

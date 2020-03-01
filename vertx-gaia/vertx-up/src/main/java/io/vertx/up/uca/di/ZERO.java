@@ -1,4 +1,4 @@
-package io.vertx.up.atom.unity;
+package io.vertx.up.uca.di;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -13,7 +13,8 @@ interface Info {
 
 interface Pool {
 
-    ConcurrentMap<Class<?>, Uobj> INJECTION = new ConcurrentHashMap<>();
+    ConcurrentMap<Class<?>, DiPlugin> PLUGINS = new ConcurrentHashMap<>();
+    ConcurrentMap<Class<?>, DiScanner> INJECTION = new ConcurrentHashMap<>();
 
-    ConcurrentMap<Class<?>, Uimmit> INFIXES = new ConcurrentHashMap<>();
+    ConcurrentMap<Class<?>, DiAnchor> INFIXES = new ConcurrentHashMap<>();
 }

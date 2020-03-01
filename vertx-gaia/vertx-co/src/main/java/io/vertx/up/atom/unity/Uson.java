@@ -11,7 +11,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 /**
- * Stream for JsonObject
+ * @author lang
+ * Stream tool for JsonObject
  */
 public class Uson {
 

@@ -1,4 +1,4 @@
-package io.vertx.up.atom.unity;
+package io.vertx.up.uca.di;
 
 import io.vertx.up.eon.Plugins;
 import io.vertx.up.fn.Fn;
@@ -17,21 +17,21 @@ import java.util.concurrent.ConcurrentMap;
  * - Now: Set terminal
  * - Future: Scc calculation extension
  */
-public class Uobj {
+public class DiScanner {
 
     private static final ConcurrentMap<Class<?>, ConcurrentMap<String, Class<?>>>
             PENDINGS = ZeroAnno.getPlugins();
 
-    private static final Uimmit INJECTOR = Uimmit.create(Uobj.class);
+    private static final DiAnchor INJECTOR = new DiAnchor(DiScanner.class);
 
     private final transient Annal logger;
 
-    private Uobj(final Class<?> callee) {
+    private DiScanner(final Class<?> callee) {
         this.logger = Annal.get(callee);
     }
 
-    public static Uobj create(final Class<?> callee) {
-        return Fn.pool(Pool.INJECTION, callee, () -> new Uobj(callee));
+    public static DiScanner create(final Class<?> callee) {
+        return Fn.pool(Pool.INJECTION, callee, () -> new DiScanner(callee));
     }
 
     @SuppressWarnings("all")
