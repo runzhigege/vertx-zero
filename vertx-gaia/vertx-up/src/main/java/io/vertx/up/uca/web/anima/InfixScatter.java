@@ -11,6 +11,7 @@ import io.vertx.up.log.Annal;
 import io.vertx.up.runtime.Runner;
 import io.vertx.up.runtime.ZeroAmbient;
 import io.vertx.up.runtime.ZeroAnno;
+import io.vertx.up.uca.di.DiPlugin;
 import io.vertx.up.uca.yaml.Node;
 import io.vertx.up.uca.yaml.ZeroLime;
 import io.vertx.up.util.Ut;
@@ -37,7 +38,7 @@ public class InfixScatter implements Scatter<Vertx> {
 
     private static final Set<Class<?>> PLUGINS = ZeroAnno.getTps();
 
-    private static final InfixPlugin PLUGIN = InfixPlugin.create(InfixScatter.class);
+    private static final DiPlugin PLUGIN = DiPlugin.create(InfixScatter.class);
 
     @Override
     @SuppressWarnings("all")
@@ -89,7 +90,7 @@ public class InfixScatter implements Scatter<Vertx> {
         return Fn.getNull(() -> {
             final Method[] methods = clazz.getDeclaredMethods();
             final List<Method> found = Arrays.stream(methods)
-                    .filter(item -> "init".equals(item.getName()) && validMethod(item))
+                    .filter(item -> "init".equals(item.getName()) && this.validMethod(item))
                     .collect(Collectors.toList());
             return Values.ONE == found.size() ? found.get(Values.IDX) : null;
         }, clazz);

@@ -8,31 +8,84 @@ import io.vertx.up.atom.pojo.Mirror;
 import io.vertx.up.atom.pojo.Mojo;
 import io.vertx.up.atom.query.Inquiry;
 import io.vertx.up.eon.Strings;
+import io.vertx.up.eon.em.ChangeFlag;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.log.Annal;
 import io.vertx.up.util.Ut;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.function.BiPredicate;
+import java.util.function.BinaryOperator;
 
-public class QTool {
+public class JqTool {
 
-    private static final Annal LOGGER = Annal.get(QTool.class);
+    private static final Annal LOGGER = Annal.get(JqTool.class);
 
-    public static Inquiry getInquiry(final JsonObject envelop, final String pojo) {
+    static <T> Future<T> future(
+            final CompletableFuture<T> completableFuture
+    ) {
+        final Promise<T> future = Promise.promise();
+        completableFuture.thenAcceptAsync(future::complete)
+                .exceptionally((ex) -> {
+                    LOGGER.jvm(ex);
+                    future.fail(ex);
+                    return null;
+                });
+        return future.future();
+    }
+
+    static <T> ConcurrentMap<ChangeFlag, List<T>> compared(final List<T> current, final List<T> original,
+                                                           final BiPredicate<T, T> finder, final BinaryOperator<T> combiner) {
+        /*
+         * Combine original / and last list
+         */
+        final List<T> addQueue = new ArrayList<>();
+        final List<T> updateQueue = new ArrayList<>();
+        /*
+         * Only get `ADD` & `UPDATE`
+         * Iterate original list
+         * 1) If the entity is missing in original, ADD
+         * 2) If the entity is existing in original, UPDATE
+         */
+        current.forEach(newRecord -> {
+            /*
+             * New record found in `original`
+             */
+            final T found = Ut.elementFind(original, oldRecord -> finder.test(oldRecord, newRecord));
+            if (Objects.isNull(found)) {
+                addQueue.add(newRecord);
+            } else {
+                final T combine = combiner.apply(found, newRecord);
+                updateQueue.add(combine);
+            }
+        });
+        return new ConcurrentHashMap<ChangeFlag, List<T>>() {
+            {
+                this.put(ChangeFlag.ADD, addQueue);
+                this.put(ChangeFlag.UPDATE, updateQueue);
+            }
+        };
+    }
+
+    static Inquiry getInquiry(final JsonObject envelop, final String pojo) {
         return Fn.getNull(Inquiry.create(new JsonObject()), () -> {
             final JsonObject data = envelop.copy();
             if (Ut.isNil(pojo)) {
                 return Inquiry.create(data);
             } else {
                 // Projection Process
-                final Mojo mojo = Mirror.create(QTool.class).mount(pojo).mojo();
+                final Mojo mojo = Mirror.create(JqTool.class).mount(pojo).mojo();
                 return getInquiry(data, mojo);
             }
         }, envelop);
     }
 
-    public static Inquiry getInquiry(final JsonObject data, final Mojo mojo) {
+    static Inquiry getInquiry(final JsonObject data, final Mojo mojo) {
         if (data.containsKey("projection")) {
             data.put("projection", projection(data.getJsonArray("projection"), mojo));
         }
@@ -44,25 +97,6 @@ public class QTool {
         }
         LOGGER.info(Info.INQUIRY_MESSAGE, data.encode());
         return Inquiry.create(data);
-    }
-
-    private static JsonArray sorter(final JsonArray sorter, final Mojo mojo) {
-        final JsonArray sorters = new JsonArray();
-        final ConcurrentMap<String, String> mapping = mojo.getIn();
-        Ut.itJArray(sorter, String.class, (item, index) -> {
-            final String key = item.contains(Strings.COMMA) ? item.split(Strings.COMMA)[0] : item;
-            if (mapping.containsKey(key)) {
-                final String targetField = mapping.get(key);
-                if (item.contains(Strings.COMMA)) {
-                    sorters.add(targetField + Strings.COMMA + item.split(Strings.COMMA)[1]);
-                } else {
-                    sorters.add(targetField + Strings.COMMA + "ASC");
-                }
-            } else {
-                sorters.add(item);
-            }
-        });
-        return sorters;
     }
 
     public static JsonObject criteria(final JsonObject criteria, final Mojo mojo) {
@@ -81,7 +115,7 @@ public class QTool {
                 // Ignore non-existing field in mapping here to avoid SQL errors.
                 criterias.put(targetField, criteria.getValue(field));
             } else {
-                // QTool Engine Needed, Support Tree
+                // JqTool Engine Needed, Support Tree
                 if (Ut.isJObject(criteria.getValue(field)) || field.equals(Strings.EMPTY)) {
                     if (Ut.isJObject(criteria.getValue(field))) {
                         final JsonObject valueJson = criteria.getJsonObject(field);
@@ -106,16 +140,23 @@ public class QTool {
         return result;
     }
 
-    static <T> Future<T> future(
-            final CompletableFuture<T> completableFuture
-    ) {
-        final Promise<T> future = Promise.promise();
-        completableFuture.thenAcceptAsync(future::complete)
-                .exceptionally((ex) -> {
-                    LOGGER.jvm(ex);
-                    future.fail(ex);
-                    return null;
-                });
-        return future.future();
+
+    private static JsonArray sorter(final JsonArray sorter, final Mojo mojo) {
+        final JsonArray sorters = new JsonArray();
+        final ConcurrentMap<String, String> mapping = mojo.getIn();
+        Ut.itJArray(sorter, String.class, (item, index) -> {
+            final String key = item.contains(Strings.COMMA) ? item.split(Strings.COMMA)[0] : item;
+            if (mapping.containsKey(key)) {
+                final String targetField = mapping.get(key);
+                if (item.contains(Strings.COMMA)) {
+                    sorters.add(targetField + Strings.COMMA + item.split(Strings.COMMA)[1]);
+                } else {
+                    sorters.add(targetField + Strings.COMMA + "ASC");
+                }
+            } else {
+                sorters.add(item);
+            }
+        });
+        return sorters;
     }
 }

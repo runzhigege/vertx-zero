@@ -80,7 +80,7 @@ public class Ix {
         return Ux.future(IxSerialize.zipper(from, to, config));
     }
 
-    // QTool
+    // JqTool
     public static Future<JsonObject> inKeys(final JsonArray array, final IxModule config) {
         return Ux.future(IxQuery.inKeys(array, config));
     }

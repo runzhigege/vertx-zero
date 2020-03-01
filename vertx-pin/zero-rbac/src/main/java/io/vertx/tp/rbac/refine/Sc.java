@@ -134,11 +134,11 @@ public class Sc {
 
     /*
      * Relation query based on input parameters
-     * QTool `R_X_Y` Where `field = key` ( field belong to X )
+     * JqTool `R_X_Y` Where `field = key` ( field belong to X )
      *
-     * 1) R_USER_ROLE: QTool roles based on user's key
-     * 2) R_GROUP_ROLE: QTool roles based on group's key
-     * 3) R_USER_GROUP: QTool groups based on user's key
+     * 1) R_USER_ROLE: JqTool roles based on user's key
+     * 2) R_GROUP_ROLE: JqTool roles based on group's key
+     * 3) R_USER_GROUP: JqTool groups based on user's key
      */
     public static <T> Future<JsonArray> relation(final String field, final String key, final Class<?> daoCls) {
         return ScFn.<T>relation(field, key, daoCls);

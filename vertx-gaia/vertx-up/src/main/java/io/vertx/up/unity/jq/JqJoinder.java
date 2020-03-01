@@ -23,14 +23,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /*
- * Join Operation Complex QTool Component
+ * Join Operation Complex JqTool Component
  */
 @SuppressWarnings("all")
-class JooqJoinder {
+class JqJoinder {
     /*
      * Class -> Analyzer
      */
-    private transient final ConcurrentMap<Class<?>, JooqAnalyzer> ANALYZERS
+    private transient final ConcurrentMap<Class<?>, JqAnalyzer> ANALYZERS
             = new ConcurrentHashMap<>();
     /*
      * Table prefix: Name -> Alias
@@ -58,15 +58,15 @@ class JooqJoinder {
      */
     private transient final List<String> TABLES = new ArrayList<>();
 
-    private transient final List<JooqJoinEdge> EDGES = new ArrayList<>();
+    private transient final List<JqEdge> EDGES = new ArrayList<>();
 
     private transient Kv<String, String> first;
-    private JooqJoinder talbe;
+    private JqJoinder talbe;
 
-    JooqJoinder() {
+    JqJoinder() {
     }
 
-    <T> JooqJoinder add(final Class<T> daoCls, final String field) {
+    <T> JqJoinder add(final Class<T> daoCls, final String field) {
         /*
          * Stored analyzer by daoCls
          */
@@ -79,7 +79,7 @@ class JooqJoinder {
         return this;
     }
 
-    <T> JooqJoinder join(final Class<?> daoCls, final String field) {
+    <T> JqJoinder join(final Class<?> daoCls, final String field) {
         /*
          * Support three tables only as max table here
          * It means that if there exist more than 3 tables, we recommend
@@ -99,10 +99,10 @@ class JooqJoinder {
         final String toTable = this.CLASS_MAP.get(daoCls);
         this.TABLES.add(toTable);
         /*
-         * JooqEdge
+         * JqEdge
          */
         {
-            final JooqJoinEdge edge = new JooqJoinEdge();
+            final JqEdge edge = new JqEdge();
             edge.setFrom(this.first.getKey(), this.first.getValue());
             edge.setTo(toTable, field);
             this.EDGES.add(edge);
@@ -115,8 +115,8 @@ class JooqJoinder {
          * Analyzer building
          */
         final VertxDAO vertxDAO = (VertxDAO) JooqInfix.getDao(daoCls);
-        final JooqAnalyzer analyzer = JooqAnalyzer.create(vertxDAO);
-        final String tableName = analyzer.getTable();
+        final JqAnalyzer analyzer = JqAnalyzer.create(vertxDAO);
+        final String tableName = analyzer.table();
         this.ANALYZERS.put(daoCls, analyzer);
         {
             this.CLASS_MAP.put(daoCls, tableName);
@@ -131,7 +131,7 @@ class JooqJoinder {
         /*
          * Field -> Table
          */
-        final ConcurrentMap<String, Field> fields = analyzer.getColumns();
+        final ConcurrentMap<String, Field> fields = analyzer.columns();
         for (String fieldName : fields.keySet()) {
             final Field field = fields.get(fieldName);
             this.FIELD_MAP.put(fieldName, field);
@@ -153,10 +153,10 @@ class JooqJoinder {
      * This step could be done one by one here, this operation could not
      * be done in banch.
      */
-    <T> JooqJoinder pojo(final Class<?> daoCls, final String pojo) {
-        final JooqAnalyzer analyzer = this.ANALYZERS.get(daoCls);
+    <T> JqJoinder pojo(final Class<?> daoCls, final String pojo) {
+        final JqAnalyzer analyzer = this.ANALYZERS.get(daoCls);
         if (Objects.nonNull(analyzer)) {
-            analyzer.bind(pojo, daoCls);
+            analyzer.on(pojo, daoCls);
         }
         return this;
     }
@@ -241,7 +241,7 @@ class JooqJoinder {
          */
         final Set<String> projectionSet = inquiry.getProjection();
         final JsonArray projection = Objects.isNull(projectionSet) ? new JsonArray() : Ut.toJArray(projectionSet);
-        return JooqResult.toJoin(records, projection, this.COLUMN_MAP, mojo);
+        return JqResult.toJoin(records, projection, this.COLUMN_MAP, mojo);
     }
 
     private Field getColumn(final String field) {
@@ -290,7 +290,7 @@ class JooqJoinder {
     private TableOnConditionStep<Record> buildCondition(
             final Table<Record> from,
             final Table<Record> to,
-            final JooqJoinEdge edge) {
+            final JqEdge edge) {
         /*
          * T1 join T2 on T1.Field1 = T2.Field2
          */
@@ -298,16 +298,16 @@ class JooqJoinder {
          * T1
          */
         final String majorField = edge.getFromField();
-        final JooqAnalyzer major = findByName(edge.getFromTable());
-        final Field hitted = major.getColumn(majorField);
+        final JqAnalyzer major = findByName(edge.getFromTable());
+        final Field hitted = major.column(majorField);
         final String fromPrefix = PREFIX_MAP.get(edge.getFromTable());
         final Field hittedField = DSL.field(fromPrefix + "." + hitted.getName());
         /*
          * T2
          */
         final String toField = edge.getToField();
-        final JooqAnalyzer toTable = findByName(edge.getToTable());
-        final Field joined = toTable.getColumn(toField);
+        final JqAnalyzer toTable = findByName(edge.getToTable());
+        final Field joined = toTable.column(toField);
         final String toPrefix = PREFIX_MAP.get(edge.getToTable());
         final Field joinedField = DSL.field(toPrefix + "." + joined.getName());
         /*
@@ -321,7 +321,7 @@ class JooqJoinder {
         return DSL.table(DSL.name(table)).as(DSL.name(alias));
     }
 
-    private JooqAnalyzer findByName(final String name) {
+    private JqAnalyzer findByName(final String name) {
         final Class<?> daoCls = this.NAME_MAP.get(name);
         return this.ANALYZERS.get(daoCls);
     }

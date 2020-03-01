@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentMap;
 public class UxJoin {
 
     private transient final JsonObject configuration = new JsonObject();
-    private transient final JooqJoinder joinder = new JooqJoinder();
+    private transient final JqJoinder joinder = new JqJoinder();
 
     private transient final ConcurrentMap<Class<?>, String> POJO_MAP
             = new ConcurrentHashMap<>();
@@ -93,7 +93,7 @@ public class UxJoin {
     }
 
     private Inquiry toInquiry(final JsonObject params) {
-        return Objects.isNull(this.merged) ? Inquiry.create(params) : QTool.getInquiry(params, this.merged);
+        return Objects.isNull(this.merged) ? Inquiry.create(params) : JqTool.getInquiry(params, this.merged);
     }
 
     public Future<JsonObject> searchAsync(final Inquiry inquiry) {

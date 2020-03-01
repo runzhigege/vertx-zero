@@ -5,7 +5,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.pojo.Mirror;
 import io.vertx.up.atom.pojo.Mojo;
 import io.vertx.up.fn.Fn;
-import io.vertx.up.unity.jq.QTool;
+import io.vertx.up.unity.jq.JqTool;
 import io.vertx.up.util.Ut;
 
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ class From {
 
     static JsonObject fromJson(final JsonObject criteria, final String pojo) {
         final Mojo mojo = Mirror.create(From.class).mount(pojo).mojo();
-        return QTool.criteria(criteria, mojo);
+        return JqTool.criteria(criteria, mojo);
     }
 }
 

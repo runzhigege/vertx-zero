@@ -38,7 +38,9 @@ public class Mirror {
         this.mojo = Fn.pool(Pool.MOJOS, filename, () -> {
             this.logger.info("[ ZERO ] Mount pojo configuration file {0}", filename);
             final JsonObject data = Ut.ioYaml(MessageFormat.format(POJO, filename));
-            return Fn.getNull(() -> Ut.deserialize(data, Mojo.class), data);
+
+            /* Only one point to refer `pojoFile` */
+            return Fn.getNull(() -> Ut.deserialize(data, Mojo.class), data).on(filename);
         });
         return this;
     }

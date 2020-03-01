@@ -191,7 +191,7 @@ public class Envelop implements Serializable {
         return this.key;
     }
 
-    // ------------------ Below are QTool part ----------------
+    // ------------------ Below are JqTool part ----------------
     private void reference(final Consumer<JsonObject> consumer) {
         final JsonObject reference = Rib.getBody(this.data);
         if (Objects.nonNull(reference)) {
@@ -199,7 +199,7 @@ public class Envelop implements Serializable {
         }
     }
 
-    /* QTool Part for projection */
+    /* JqTool Part for projection */
     public void onProjection(final JsonArray projection) {
         this.reference(reference -> Rib.projection(reference, projection, false));
     }
@@ -208,7 +208,7 @@ public class Envelop implements Serializable {
         this.reference(reference -> Rib.projection(reference, projection, true));
     }
 
-    /* QTool Part for criteria */
+    /* JqTool Part for criteria */
     public void onCriteria(final JsonObject criteria) {
         this.reference(reference -> Rib.criteria(reference, criteria, false));
     }

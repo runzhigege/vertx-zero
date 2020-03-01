@@ -6,6 +6,10 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * @author lang
+ * Batch operation by `pager` instead of fetch all data here.
+ */
 public class Pagination {
     private final transient Pager pager;
     private transient Integer total;
