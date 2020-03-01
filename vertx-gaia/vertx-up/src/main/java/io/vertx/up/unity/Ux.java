@@ -15,8 +15,7 @@ import io.vertx.ext.jwt.JWTOptions;
 import io.vertx.ext.mongo.FindOptions;
 import io.vertx.tp.plugin.database.DataPool;
 import io.vertx.tp.plugin.jooq.JooqInfix;
-import io.vertx.up.atom.query.Criteria;
-import io.vertx.up.atom.query.Inquiry;
+import io.vertx.up.atom.query.Pagination;
 import io.vertx.up.commune.Envelop;
 import io.vertx.up.commune.Record;
 import io.vertx.up.commune.config.Dict;
@@ -27,11 +26,9 @@ import io.vertx.up.eon.em.ChangeFlag;
 import io.vertx.up.exception.WebException;
 import io.vertx.up.fn.Fn;
 import io.vertx.up.fn.wait.Log;
-import io.vertx.up.unity.jq.QTool;
 import io.vertx.up.unity.jq.UxJoin;
 import io.vertx.up.unity.jq.UxJooq;
 import io.vertx.up.util.Ut;
-import org.jooq.Condition;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -166,6 +163,14 @@ public final class Ux {
 
     public static Future<JsonObject> complex(final JsonObject input, final Predicate<JsonObject> predicate, final Supplier<Future<JsonObject>> executor) {
         return Complex.complex(input, predicate, executor);
+    }
+
+    public static Future<JsonArray> complex(final Pagination first, final Function<JsonObject, Future<Integer>> total, final Function<Pagination, Future<JsonObject>> page, final Function<JsonObject, Future<JsonArray>> result) {
+        return Complex.complex(first, total, page, result, JsonArray::addAll);
+    }
+
+    public static Function<Pagination, Future<JsonArray>> complex(final Function<JsonObject, Future<Integer>> total, final Function<Pagination, Future<JsonObject>> page, final Function<JsonObject, Future<JsonArray>> result) {
+        return first -> Complex.complex(first, total, page, result, JsonArray::addAll);
     }
 
     public static <T> Handler<AsyncResult<T>> handler(final Message<Envelop> message) {
@@ -376,7 +381,7 @@ public final class Ux {
     }
 
     /*
-     * QTool Engine method
+     * JqTool Engine method
      * 1) whereDay
      */
     public static JsonObject whereDay(final JsonObject filters, final String field, final Instant instant) {
@@ -454,14 +459,6 @@ public final class Ux {
 
     public static JsonObject getJson(final Envelop envelop) {
         return In.request(envelop, 0, JsonObject.class);
-    }
-
-    public static Inquiry getInquiry(final JsonObject envelop) {
-        return QTool.getInquiry(envelop, "");
-    }
-
-    public static Inquiry getInquiry(final JsonObject envelop, final String pojo) {
-        return QTool.getInquiry(envelop, pojo);
     }
 
     // -> Message<Envelop> -> JsonObject ( Interface mode )
@@ -567,15 +564,6 @@ public final class Ux {
     // -> Envelop -> T ( Agent mode )
     public static <T> T getBodyT(final Envelop envelop, final Class<T> clazz) {
         return In.request(envelop, clazz);
-    }
-
-    // -> Jooq Condition
-    public static Condition condition(final JsonObject filters) {
-        return UxJooq.transform(filters);
-    }
-
-    public static Condition condition(final Criteria criteria) {
-        return UxJooq.transform(criteria.toJson());
     }
 
     public static void initComponent(final JsonObject init) {
@@ -808,7 +796,7 @@ public final class Ux {
         }
 
         public static Future<JsonArray> findWithOptions(final String collection, final JsonObject filter, final FindOptions options,
-                                                        // Secondary QTool
+                                                        // Secondary JqTool
                                                         final String joinedCollection, final String joinedKey, final JsonObject additional,
                                                         final BinaryOperator<JsonObject> operatorFun) {
             return UxMongo.findWithOptions(collection, filter, options,

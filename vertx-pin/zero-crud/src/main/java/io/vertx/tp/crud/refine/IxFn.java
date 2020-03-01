@@ -37,7 +37,7 @@ class IxFn {
             final JsonObject criteria, final IxModule config) {
         final String pojo = config.getPojo();
         return dao -> {
-            IxLog.infoDao(LOGGER, "( QTool ) Dao -> {0}, pojo = {1}", dao.getClass(), pojo);
+            IxLog.infoDao(LOGGER, "( JqTool ) Dao -> {0}, pojo = {1}", dao.getClass(), pojo);
             // Here must put condition here.
             if (Ut.notNil(pojo)) {
                 return dao.searchAsync(criteria, pojo);
@@ -58,7 +58,7 @@ class IxFn {
             parameters.mergeIn(criteria);
         }
         return dao -> {
-            IxLog.infoDao(LOGGER, "( QTool ) Dao -> {0}, pojo = {1}", dao.getClass(), pojo);
+            IxLog.infoDao(LOGGER, "( JqTool ) Dao -> {0}, pojo = {1}", dao.getClass(), pojo);
             // Here must put condition here.
             return dao.existsOneAsync(parameters);
         };

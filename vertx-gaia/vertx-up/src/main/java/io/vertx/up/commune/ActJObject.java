@@ -103,7 +103,7 @@ class ActJObject extends ActMapping implements Serializable {
              */
             if (body.containsKey(Inquiry.KEY_CRITERIA)) {
                 /*
-                 * QTool part
+                 * JqTool part
                  */
                 Arrays.stream(Inquiry.KEY_QUERY).filter(field -> Objects.nonNull(body.getValue(field)))
                         .forEach(field -> {

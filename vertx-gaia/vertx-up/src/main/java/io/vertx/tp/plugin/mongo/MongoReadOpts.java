@@ -10,7 +10,7 @@ import io.vertx.up.fn.Fn;
  */
 public class MongoReadOpts {
     /**
-     * QTool top n records by field DESC
+     * JqTool top n records by field DESC
      *
      * @param sortField
      * @param limit
@@ -24,7 +24,7 @@ public class MongoReadOpts {
     }
 
     /**
-     * QTool top n records by field ASC
+     * JqTool top n records by field ASC
      *
      * @param sortField
      * @param limit
@@ -38,7 +38,7 @@ public class MongoReadOpts {
     }
 
     /**
-     * QTool all records by field Desc
+     * JqTool all records by field Desc
      *
      * @param sortField
      * @return
@@ -50,7 +50,7 @@ public class MongoReadOpts {
     }
 
     /**
-     * QTool all records by field Asc
+     * JqTool all records by field Asc
      *
      * @param sortField
      * @return
@@ -62,7 +62,7 @@ public class MongoReadOpts {
     }
 
     /**
-     * QTool all records by pager/sorter both
+     * JqTool all records by pager/sorter both
      *
      * @param pager
      * @param sorter

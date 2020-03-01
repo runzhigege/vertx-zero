@@ -30,7 +30,7 @@ public class DataRegion extends AbstractRegion {
                     /*
                      * Body modification is only available for POST/PUT
                      * 1) Because only POST/PUT support body parameter
-                     * 2) QTool engine parameters belong to body key such as
+                     * 2) JqTool engine parameters belong to body key such as
                      * {
                      *     criteria: {},
                      *     sorter: [],

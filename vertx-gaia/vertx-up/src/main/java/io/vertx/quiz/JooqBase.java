@@ -1,7 +1,6 @@
 package io.vertx.quiz;
 
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonObject;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.RunTestOnContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
@@ -9,9 +8,6 @@ import io.vertx.up.atom.Kv;
 import io.vertx.up.log.Annal;
 import io.vertx.up.unity.Ux;
 import io.vertx.up.unity.jq.UxJooq;
-import org.jooq.Condition;
-import org.jooq.Operator;
-import org.jooq.impl.DSL;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
 
@@ -59,15 +55,6 @@ public abstract class JooqBase extends AsyncBase {
             final Future<T> future = supplier.get();
             Async.async(context, future, consumer);
         }
-    }
-
-    public Condition eq(final String name, final Object value) {
-        return DSL.field(name).eq(value);
-    }
-
-    public Condition condAnd(final String filename) {
-        final JsonObject filters = this.ioJObject(filename);
-        return UxJooq.transform(filters, Operator.AND);
     }
 
     public <T> void notNull(final T entity, final TestContext context) {

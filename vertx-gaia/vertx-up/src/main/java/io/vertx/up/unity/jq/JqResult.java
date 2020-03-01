@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentMap;
  * 1) `projection` to do filter and remove un-used columns
  */
 @SuppressWarnings("all")
-class JooqResult {
+class JqResult {
 
     static <T> List<T> toResult(final List<T> list, final JsonArray projection, final Mojo mojo) {
         /*

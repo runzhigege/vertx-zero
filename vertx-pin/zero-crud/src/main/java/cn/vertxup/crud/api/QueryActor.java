@@ -13,7 +13,7 @@ import io.vertx.up.unity.Ux;
 import io.vertx.up.unity.jq.UxJooq;
 
 /*
- * QTool Engine for
+ * JqTool Engine for
  * 1) Pagination
  * 2) Projection
  * 3) Sorter

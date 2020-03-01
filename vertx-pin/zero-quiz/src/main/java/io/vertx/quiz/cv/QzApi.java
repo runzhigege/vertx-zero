@@ -7,7 +7,7 @@ public enum QzApi {
     GET_ACTOR_KEY,      // GET      /api/:actor/:key
     PUT_ACTOR_KEY,      // PUT      /api/:actor/:key
     DELETE_ACTOR_KEY,   // DELETE   /api/:actor/:key
-    /* QTool */
+    /* JqTool */
     POST_ACTOR_SEARCH,  // POST     /api/:actor/search
     POST_ACTOR_MISSING, // POST     /api/:actor/missing
     POST_ACTOR_EXISTING,// POST     /api/:actor/existing

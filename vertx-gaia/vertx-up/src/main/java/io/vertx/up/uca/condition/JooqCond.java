@@ -85,7 +85,7 @@ public class JooqCond {
          * Otherwise it's LINEAR.
          */
         if (!Ut.isNil(filters)) {
-            LOGGER.debug("[ ZERO ] ( QTool ) Mode selected {0}, filters raw = {1}",
+            LOGGER.debug("[ ZERO ] ( JqTool ) Mode selected {0}, filters raw = {1}",
                     criteria.getMode(), filters);
         }
         if (Inquiry.Mode.LINEAR == criteria.getMode()) {

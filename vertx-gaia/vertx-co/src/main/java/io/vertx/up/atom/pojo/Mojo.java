@@ -25,6 +25,8 @@ public class Mojo implements Serializable {
     private static final String MAPPING = "mapping";
     @JsonIgnore
     private final ConcurrentMap<String, String> columns = new ConcurrentHashMap<>();
+    @JsonIgnore
+    private transient String pojoFile;
     @JsonProperty(TYPE)
     @JsonSerialize(using = ClassSerializer.class)
     @JsonDeserialize(using = ClassDeserializer.class)
@@ -38,6 +40,15 @@ public class Mojo implements Serializable {
 
     public void setType(final Class<?> type) {
         this.type = type;
+    }
+
+    public Mojo on(final String pojoFile) {
+        this.pojoFile = pojoFile;
+        return this;
+    }
+
+    public String getPojoFile() {
+        return this.pojoFile;
     }
 
     /*
