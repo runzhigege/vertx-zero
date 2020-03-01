@@ -78,7 +78,7 @@ class Complex {
                  */
                 .compose(response -> responseBuilder.apply(response)
                         .compose(firstResult::future)
-                        .compose(nil -> totalConsumer.apply(firstResult.get()))
+                        .compose(nil -> totalConsumer.apply(response))
                         .compose(total -> {
                             first.setTotal(total);
                             return Ux.future(first);
