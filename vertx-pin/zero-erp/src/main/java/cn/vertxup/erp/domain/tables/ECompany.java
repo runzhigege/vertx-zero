@@ -35,7 +35,7 @@ public class ECompany extends TableImpl<ECompanyRecord> {
      * The reference instance of <code>DB_ETERNAL.E_COMPANY</code>
      */
     public static final ECompany E_COMPANY = new ECompany();
-    private static final long serialVersionUID = -753050275;
+    private static final long serialVersionUID = -450171611;
     /**
      * The column <code>DB_ETERNAL.E_COMPANY.KEY</code>. 「key」- 公司主键
      */
@@ -44,6 +44,10 @@ public class ECompany extends TableImpl<ECompanyRecord> {
      * The column <code>DB_ETERNAL.E_COMPANY.NAME</code>. 「name」- 公司名称
      */
     public final TableField<ECompanyRecord, String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「name」- 公司名称");
+    /**
+     * The column <code>DB_ETERNAL.E_COMPANY.ALIAS</code>. 「alias」- 公司别称
+     */
+    public final TableField<ECompanyRecord, String> ALIAS = createField("ALIAS", org.jooq.impl.SQLDataType.VARCHAR(255), this, "「alias」- 公司别称");
     /**
      * The column <code>DB_ETERNAL.E_COMPANY.TITLE</code>. 「title」- 公司显示标题
      */
