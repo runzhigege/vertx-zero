@@ -4,6 +4,7 @@ import io.github.jklingsporn.vertx.jooq.future.VertxDAO;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.atom.pojo.Mirror;
 import io.vertx.up.atom.pojo.Mojo;
+import io.vertx.up.eon.Strings;
 import io.vertx.up.eon.Values;
 import io.vertx.up.exception.zero.JooqFieldMissingException;
 import io.vertx.up.exception.zero.JooqMergeException;
@@ -235,7 +236,11 @@ class JqAnalyzer {
     }
 
     String pojoFile() {
-        return this.pojo.getPojoFile();
+        if (Objects.isNull(this.pojo)) {
+            return Strings.EMPTY;
+        } else {
+            return this.pojo.getPojoFile();
+        }
     }
 
     Mojo pojo() {
