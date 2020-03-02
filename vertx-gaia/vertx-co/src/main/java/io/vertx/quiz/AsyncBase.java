@@ -17,14 +17,14 @@ public class AsyncBase extends ZeroBase {
     }
 
     protected Database database(final String filename) {
-        final JsonObject fileJson = ioJObject(filename);
+        final JsonObject fileJson = this.ioJObject(filename);
         final Database database = new Database();
         database.fromJson(fileJson);
         return database;
     }
 
     protected Integration integration(final String filename) {
-        final JsonObject fileJson = ioJObject(filename);
+        final JsonObject fileJson = this.ioJObject(filename);
         final Integration integration = new Integration();
         integration.fromJson(fileJson);
         return integration;
