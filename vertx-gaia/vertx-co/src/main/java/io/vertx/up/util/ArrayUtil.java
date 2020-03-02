@@ -3,12 +3,14 @@ package io.vertx.up.util;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.up.eon.Values;
+import io.vertx.up.fn.Fn;
 
 import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 final class ArrayUtil {
@@ -115,7 +117,7 @@ final class ArrayUtil {
     }
 
     static JsonObject find(final JsonArray array, final String field, final Object value) {
-        return Ut.itJArray(array)
+        return It.itJArray(array)
                 .filter(item -> {
                     if (Objects.isNull(value)) {
                         return Objects.isNull(item.getValue(field));
@@ -124,6 +126,31 @@ final class ArrayUtil {
                     }
                 })
                 .findAny().orElse(null);
+    }
+
+    static JsonArray save(final JsonArray array, final JsonArray input, final String field) {
+        Ut.itJArray(input).forEach(json -> save(array, json, field));
+        return array;
+    }
+
+    static JsonArray save(final JsonArray array, final JsonObject json, final String field) {
+        return Fn.getNull(new JsonArray(), () -> {
+            final AtomicBoolean isFound = new AtomicBoolean(Boolean.FALSE);
+            It.itJArray(array).forEach(each -> {
+                final boolean isSame = Is.isSame(each, json, field);
+                if (isSame) {
+                    each.mergeIn(json, true);
+                    isFound.set(Boolean.TRUE);
+                }
+            });
+            if (!isFound.get()) {
+                /*
+                 * Not found, add
+                 */
+                array.add(json.copy());
+            }
+            return array;
+        }, array, json, field);
     }
 
     static JsonArray child(final JsonObject current, final JsonArray tree, final JsonObject options) {

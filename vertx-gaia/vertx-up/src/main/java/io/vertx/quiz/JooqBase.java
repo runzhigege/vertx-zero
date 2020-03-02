@@ -53,7 +53,7 @@ public abstract class JooqBase extends AsyncBase {
         final UxJooq jooq = daoSupplier.get();
         if (null != jooq) {
             final Future<T> future = supplier.get();
-            Async.async(context, future, consumer);
+            AsyncFlow.async(context, future, consumer);
         }
     }
 

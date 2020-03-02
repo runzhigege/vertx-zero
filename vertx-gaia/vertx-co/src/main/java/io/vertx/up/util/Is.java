@@ -23,6 +23,28 @@ import java.util.function.Function;
  */
 class Is {
 
+    static boolean isSame(final Object left, final Object right, final String field) {
+        if (Objects.isNull(left) && Objects.isNull(right)) {
+            return true;
+        } else {
+            if (Objects.isNull(left) || Objects.isNull(right)) {
+                return false;
+            } else {
+                if (left.getClass() != right.getClass()) {
+                    return false;
+                } else {
+                    if (left instanceof JsonObject && right instanceof JsonObject) {
+                        final Object leftValue = ((JsonObject) left).getValue(field);
+                        final Object rightValue = ((JsonObject) right).getValue(field);
+                        return isSame(leftValue, rightValue, field);
+                    } else {
+                        return left.equals(right);
+                    }
+                }
+            }
+        }
+    }
+
     @SuppressWarnings("unchecked")
     static <T> boolean isEqual(final JsonObject record, final String field, final T expected) {
         if (Types.isEmpty(record)) {

@@ -76,12 +76,13 @@ public final class Ut {
     /*
      * Array or List calculation
      * 1) elementAdd
-     * 2) elementClimb
-     * 3) elementFind
-     * 4) elementZip
-     * 5) elementGroup
-     * 6) elementSubset
-     * 7) elementChild
+     * 2) elementSave
+     * 3) elementClimb
+     * 4) elementFind
+     * 5) elementZip
+     * 6) elementGroup
+     * 7) elementSubset
+     * 8) elementChild
      */
     public static <T> T[] elementAdd(final T[] array, final T element) {
         return ArrayUtil.add(array, element);
@@ -99,6 +100,14 @@ public final class Ut {
     public static JsonObject elementAdd(final JsonObject target, final JsonObject source, final String... fields) {
         Arrays.stream(fields).forEach(field -> Jackson.append(target, source, field));
         return target;
+    }
+
+    public static JsonArray elementSave(final JsonArray array, final JsonArray json, final String field) {
+        return ArrayUtil.save(array, json, field);
+    }
+
+    public static JsonArray elementSave(final JsonArray array, final JsonObject json, final String field) {
+        return ArrayUtil.save(array, json, field);
     }
 
     public static JsonArray elementClimb(final JsonArray children, final JsonArray tree) {
